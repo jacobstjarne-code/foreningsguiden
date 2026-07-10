@@ -1,0 +1,23 @@
+---
+// Minimal startsida för steg 1 — endast Gislaved är byggd hittills.
+// Full startsida (värdeproposition, kommunväljare, deadlineöversikt, Fable-copy)
+// är §5 punkt 1, del av leveransordning steg 3.
+import Base from '../layouts/Base.astro';
+import { loadKommuner } from '../lib/kommuner';
+
+const kommuner = loadKommuner();
+---
+<Base
+  title="Startsida"
+  description="{{FABLE: värdeproposition för Bidragskollen — se §5 punkt 1 UPPDRAG_POC.md}}"
+>
+  <h1>Bidragskollen</h1>
+  <p class="placeholder-slot">{'{{FABLE: värdeproposition, kommunväljare, deadlineöversikt — §5 punkt 1}}'}</p>
+
+  <h2>Kommuner (PoC, steg 1)</h2>
+  <ul>
+    {kommuner.map((k) => (
+      <li><a href={`/kommun/${k.kommun_slug}/`}>{k.kommun}</a></li>
+    ))}
+  </ul>
+</Base>

@@ -1,0 +1,186 @@
+/* Bidragskollen — global styles. Myndighetsnära seriositet, inte startup-flash.
+   Ingen visuell audit i PoC (§7 UPPDRAG_POC.md) — strukturerad för att
+   Design-instansen ska kunna ta över senare, inte pixel-finslipad nu. */
+
+:root {
+  --color-bg: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-border: #dcdad2;
+  --color-text: #1c1c1a;
+  --color-muted: #5c5a52;
+  --color-accent: #0f4c81;
+  --color-accent-hover: #0b3a63;
+  --color-warning-bg: #fdf3e2;
+  --color-warning-border: #e0b355;
+  --color-warning-text: #6b4a10;
+
+  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --measure: 68ch;
+  --spacing-xs: 0.25rem;
+  --spacing-s: 0.5rem;
+  --spacing-m: 1rem;
+  --spacing-l: 2rem;
+  --spacing-xl: 4rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ---- Layout ---- */
+
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 0 var(--spacing-l);
+}
+
+.site-header__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-m);
+  padding: var(--spacing-m) 0;
+}
+
+.site-header__logo {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--spacing-l);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-l);
+  margin-top: var(--spacing-xl);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* ---- Kommunsida ---- */
+
+.kommun-header h1 {
+  margin-bottom: var(--spacing-xs);
+}
+
+.kommun-header__meta {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.stale-warning {
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  color: var(--color-warning-text);
+  border-radius: 4px;
+  padding: var(--spacing-s) var(--spacing-m);
+  margin: var(--spacing-m) 0;
+  font-size: 0.9rem;
+}
+
+.placeholder-slot {
+  display: block;
+  border: 1px dashed var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+  color: var(--color-accent);
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  padding: var(--spacing-s) var(--spacing-m);
+  margin: var(--spacing-m) 0;
+  border-radius: 4px;
+}
+
+.kategori-tags {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  margin: var(--spacing-xs) 0;
+}
+
+.kategori-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+  color: var(--color-accent-hover);
+}
+
+.bidrag-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  margin: var(--spacing-l) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bidrag-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--spacing-m);
+}
+
+.bidrag-card h3 {
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.bidrag-card dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem var(--spacing-m);
+  margin: var(--spacing-m) 0 0 0;
+  font-size: 0.92rem;
+}
+
+.bidrag-card dt {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.bidrag-card dd {
+  margin: 0;
+}
+
+.bidrag-card__kalla {
+  margin-top: var(--spacing-s);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}

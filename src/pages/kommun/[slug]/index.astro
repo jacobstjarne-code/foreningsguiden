@@ -1,0 +1,60 @@
+---
+// Kommunsida — §5 punkt 2 UPPDRAG_POC.md: alla bidrag i kommunen, grupperade
+// per kategori, med deadlines, krav, ansökningslänk och källhänvisning.
+// Primär SEO-yta för "föreningsbidrag [kommun]".
+import Base from '../../../layouts/Base.astro';
+import BidragCard from '../../../components/BidragCard.astro';
+import StaleWarning from '../../../components/StaleWarning.astro';
+import { loadKommuner, isStale, formatDate, KATEGORI_LABELS, KATEGORIER } from '../../../lib/kommuner';
+import type { Kategori } from '../../../lib/kommuner';
+
+export function getStaticPaths() {
+  return loadKommuner().map((kommun) => ({
+    params: { slug: kommun.kommun_slug },
+    props: { kommun },
+  }));
+}
+
+const { kommun } = Astro.props;
+
+const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) =>
+  kommun.bidrag.some((b) => b.kategori.includes(k))
+);
+---
+<Base
+  title={kommun.kommun}
+  description={`{{FABLE: metabeskrivning för ${kommun.kommun} — föreningsbidrag, deadlines, ansökningsvägar}}`}
+>
+  <div class="kommun-header">
+    <h1>Föreningsbidrag i {kommun.kommun}</h1>
+    <p class="kommun-header__meta">
+      {kommun.lan} · {kommun.forvaltning} · Senast verifierad {formatDate(kommun.verifierad)}
+    </p>
+  </div>
+
+  {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
+
+  <p class="placeholder-slot">{`{{FABLE: introduktionstext till ${kommun.kommun}s bidragssida}}`}</p>
+
+  {kategorierMedBidrag.map((kategori) => (
+    <section>
+      <h2>{KATEGORI_LABELS[kategori]}</h2>
+      <ul class="bidrag-list">
+        {kommun.bidrag
+          .filter((b) => b.kategori.includes(kategori))
+          .map((bidrag) => <BidragCard bidrag={bidrag} />)}
+      </ul>
+    </section>
+  ))}
+
+  <section>
+    <h2>Ansökningssystem</h2>
+    <p>
+      {kommun.kommun} tar emot ansökningar via {kommun.ansokningssystem.namn}:{' '}
+      <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
+    </p>
+    <p class="bidrag-card__kalla">
+      Kommunens källdokument: <a href={kommun.kalla_url}>{kommun.kalla_url}</a>
+    </p>
+  </section>
+</Base>

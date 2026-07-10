@@ -1,0 +1,16 @@
+---
+// Renderas när kommunens `verifierad`-datum är äldre än STALE_THRESHOLD_DAYS
+// (§4 UPPDRAG_POC.md: "renderar en synlig uppgifterna-kan-vara-inaktuella-flagga").
+// Själva varningstexten är Fable-copy — UI-copy, inte en datamodell-etikett.
+import { daysSinceVerified, formatDate } from '../lib/kommuner';
+
+export interface Props {
+  verifierad: string;
+}
+
+const { verifierad } = Astro.props;
+const days = daysSinceVerified(verifierad);
+---
+<p class="stale-warning">
+  {`{{FABLE: varningstext — uppgifterna senast verifierade ${formatDate(verifierad)} (${days} dagar sedan), kan vara inaktuella}}`}
+</p>
