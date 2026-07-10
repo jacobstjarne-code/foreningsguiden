@@ -1,8 +1,15 @@
 ---
-// Generisk datakort-komponent — källa+verifiering. Byggd för återbruk i
-// vertikal 2 (stipendier, §7 UPPDRAG_POC.md): den vet bara om fälten i
-// Bidrag-typen, inte om "kommun" som koncept. `verifierad` kommer från
-// kommunen (bidrag saknar eget verifieringsdatum i schemat).
+// DataCard — riktning "1c" (designsystem/screenshots/top.png, explicit
+// "vald riktning" i designsystem/Bidragskollen riktningar.dc.html Runda 2).
+// Byggd för återbruk i vertikal 2 (§7 UPPDRAG_POC.md): känner bara till
+// Bidrag-fälten, inte "kommun" som koncept. `verifierad`/`ansokningsUrl`
+// kommer från kommunen (bidrag saknar egna fält för det i schemat).
+//
+// Avsiktligt UTELÄMNAT mot mockupen: beskrivningsstycke (schemat har inget
+// fritextfält för det — malgrupp är målgrupp, inte programbeskrivning, och
+// Code hittar inte på text), DNR (finns inget diarienummer i datat), status-
+// pill "öppen för ansökan" (inget öppningsdatum i schemat att räkna mot),
+// Bevaka-knapp (bevakningsflödet är på is, se statusrapport).
 import type { Bidrag } from '../lib/kommuner';
 import { KATEGORI_LABELS, formatRecurringDate } from '../lib/kommuner';
 import VerificationStamp from './VerificationStamp.astro';
@@ -10,9 +17,10 @@ import VerificationStamp from './VerificationStamp.astro';
 export interface Props {
   bidrag: Bidrag;
   verifierad: string;
+  ansokningsUrl: string;
 }
 
-const { bidrag, verifierad } = Astro.props;
+const { bidrag, verifierad, ansokningsUrl } = Astro.props;
 
 function formatDeadlines(b: Bidrag): string {
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
@@ -20,10 +28,19 @@ function formatDeadlines(b: Bidrag): string {
 }
 ---
 <li class="bidrag-card fg-card">
-  <h3>{bidrag.namn}</h3>
   <div class="kategori-tags">
-    {bidrag.kategori.map((k) => <span class="kategori-tag fg-tag">{KATEGORI_LABELS[k]}</span>)}
+    {bidrag.kategori.map((k) => (
+      <span class="kategori-tag fg-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        {KATEGORI_LABELS[k]}
+      </span>
+    ))}
   </div>
+
+  <h3>{bidrag.namn}</h3>
+
   <dl>
     <dt>Målgrupp</dt>
     <dd>{bidrag.malgrupp}</dd>
@@ -48,6 +65,9 @@ function formatDeadlines(b: Bidrag): string {
     <dt>Sen ansökan</dt>
     <dd>{bidrag.sen_ansokan}</dd>
   </dl>
+
+  <div class="bidrag-card__divider"></div>
+
   <div class="bidrag-card__footer">
     <p class="bidrag-card__kalla">
       Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
@@ -55,4 +75,6 @@ function formatDeadlines(b: Bidrag): string {
     <VerificationStamp verifierad={verifierad} />
   </div>
   {bidrag.anteckning && <p class="bidrag-card__kalla">{bidrag.anteckning}</p>}
+
+  <a href={ansokningsUrl} class="btn-primary bidrag-card__cta">Till ansökan</a>
 </li>

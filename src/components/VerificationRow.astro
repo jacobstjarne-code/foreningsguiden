@@ -1,0 +1,29 @@
+---
+// VerificationRow — mörk statusrad (designsystem/screenshots/stamp.png).
+// Mockupen visar en narrativ mening ("Vi läste av Gislaveds sida 3 juli
+// 2026") — den texten finns inte i content.ts och Code hittar inte på
+// prosa (SVENSK TEXT-regeln). Denna version håller sig till data: etikett
+// + kommun + datum + källänk. Be Fable om en formulerad mening om den
+// narrativa versionen ska in.
+import { formatDate } from '../lib/kommuner';
+
+export interface Props {
+  kommun: string;
+  verifierad: string;
+  kallaUrl: string;
+}
+
+const { kommun, verifierad, kallaUrl } = Astro.props;
+---
+<div class="fg-verification-row">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="8 12 11 15 16 9" />
+  </svg>
+  <div>
+    <div class="fg-verification-row__label">Verifierad källa</div>
+    <div class="fg-verification-row__detail">
+      {kommun} · {formatDate(verifierad)} · <a href={kallaUrl}>{kallaUrl}</a>
+    </div>
+  </div>
+</div>

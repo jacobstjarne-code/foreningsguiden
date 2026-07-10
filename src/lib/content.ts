@@ -196,10 +196,18 @@ export const BEVAKNING = {
   // Samtyckestext vid kryssruta — uttryckligt ändamål, GDPR-minimum.
   samtycke:
     'Jag vill att Föreningsguiden sparar min e-postadress för att skicka påminnelser om de deadlines jag valt. Jag kan avsluta när som helst.',
-  // Visas efter inskickat, före bekräftelse (dubbel opt-in).
-  kvittoRubrik: 'Kolla din inkorg',
+
+  // --- PoC-kvitto (inget bekräftelsemejl byggt ännu) ---------------------
+  // ÄRLIGHETSREGEL: gränssnittet får inte lova ett mejl som inte skickas.
+  // Denna text står kvar tills utskicksmotorn finns. När bekräftelsemejlet
+  // byggs, växla till dubbel-opt-in-varianten i kommentaren nedan.
+  kvittoRubrik: 'Din adress är sparad',
   kvittoText:
-    'Vi har skickat ett bekräftelsemejl. Klicka på länken där så börjar bevakningen. Utan bekräftelse sparar vi ingenting.',
+    'Tack — vi har sparat din adress. Själva påminnelserna är under uppbyggnad, och vi hör av oss så fort bevakningen är igång. Du kan avregistrera dig när som helst.',
+  // DUBBEL OPT-IN (aktiveras när Resend-utskicket byggs):
+  //   kvittoRubrik: 'Kolla din inkorg',
+  //   kvittoText: 'Vi har skickat ett bekräftelsemejl. Klicka på länken där så
+  //     börjar bevakningen. Utan bekräftelse sparar vi ingenting.',
   // Integritetsrad under formuläret, länkar till om-/metodsidan.
   integritetsrad:
     'Vi använder adressen bara till de påminnelser du valt, delar den inte, och du kan avregistrera dig när som helst via länk i varje utskick.',

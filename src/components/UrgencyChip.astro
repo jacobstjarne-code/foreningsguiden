@@ -1,0 +1,22 @@
+---
+// UrgencyChip — tokens.css §04 Urgens-modell. Färg ENSAM är aldrig
+// tillräckligt (WCAG) — ikon + textetikett följer alltid med, per kontraktet.
+import type { Urgency } from '../lib/kommuner';
+
+export interface Props {
+  urgency: Urgency;
+}
+
+const { urgency } = Astro.props;
+
+const LABEL: Record<Urgency, string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
+const ICON: Record<Urgency, string> = {
+  urgent: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
+  attention: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
+  positive: '<polyline points="20 6 9 17 4 12"/>',
+};
+---
+<span class={`fg-chip fg-chip--${urgency}`}>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICON[urgency]} />
+  {LABEL[urgency]}
+</span>

@@ -1,22 +1,29 @@
 ---
-// Deadlinebevakning — §6 UPPDRAG_POC.md. Backend klar (Upstash Redis via
-// Vercel Marketplace, /api/prenumerera + /api/avprenumerera). BEVAKNING-copy
-// finns nu i content.ts, men den beskriver dubbel opt-in (kvittoRubrik/
-// kvittoText: "vi har skickat ett bekräftelsemejl") — INGEN utskicksmotor är
-// byggd (§6 UPPDRAG_POC.md: "behöver INTE byggas i PoC"), så det löftet går
-// inte att hålla än. Formuläret hålls därför bakom "kommer snart" tills det
-// beslutet är taget — se statusrapport för de två vägarna (bygg minimal
-// bekräftelsemejl via Resend, eller förenkla till ett steg för PoC:n).
+// Deadlinebevakning — §6 UPPDRAG_POC.md. LIVE (Handoff 2026-07-10): Fable
+// bytte kvittoRubrik/kvittoText till en ärlig PoC-variant som inte lovar ett
+// bekräftelsemejl som aldrig skickas — se content.ts BEVAKNING-kommentaren.
+// Byt till dubbel-opt-in-varianten (kommenterad i content.ts) när Resend-
+// utskicket byggs.
 //
-// Sätt FORMULAR_LIVE = true när flödet är beslutat.
-const FORMULAR_LIVE = false;
-
+// Avregistrering utan mejllänk (Codes beslut, rapporterat till Fable):
+// egen sida /avregistrera/ där man skriver in sin adress, samma princip
+// som anmälan. Länkad härifrån tills integritetsraden är omskriven mot det.
 import { loadKommuner } from '../lib/kommuner';
 import { BEVAKNING } from '../lib/content';
 
+export interface Props {
+  submitted?: boolean;
+}
+
+const { submitted = false } = Astro.props;
 const kommuner = loadKommuner();
 ---
-{FORMULAR_LIVE ? (
+{submitted ? (
+  <div class="email-signup fg-card">
+    <h2>{BEVAKNING.kvittoRubrik}</h2>
+    <p>{BEVAKNING.kvittoText}</p>
+  </div>
+) : (
   <form class="email-signup fg-card" method="POST" action="/api/prenumerera">
     <h2>{BEVAKNING.rubrik}</h2>
     <p>{BEVAKNING.ingress}</p>
@@ -40,11 +47,8 @@ const kommuner = loadKommuner();
     </label>
 
     <button type="submit" class="btn-primary">{BEVAKNING.knapp}</button>
-    <p class="email-signup__integritet">{BEVAKNING.integritetsrad}</p>
+    <p class="email-signup__integritet">
+      {BEVAKNING.integritetsrad} <a href="/avregistrera/">Avregistrera dig</a>.
+    </p>
   </form>
-) : (
-  <div class="email-signup email-signup--soon fg-card">
-    <h2>{BEVAKNING.rubrik}</h2>
-    <p>Kommer snart.</p>
-  </div>
 )}

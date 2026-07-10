@@ -5,6 +5,8 @@
 // `title` förväntas vara den FULLSTÄNDIGA <title>-strängen (Fable avgör per
 // sida om varumärkessuffixet "— Föreningsguiden" är värt teckenbudgeten —
 // se content.ts). Base lägger INTE på ett eget suffix.
+import { Image } from 'astro:assets';
+import brandMark from '../assets/brand-mark.png';
 import { DESCRIPTOR, SIDFOT, AVSANDARE, SITE_NAMN, START } from '../lib/content';
 
 export interface Props {
@@ -57,8 +59,11 @@ const organizationJsonLd = {
     <header class="site-header">
       <div class="site-header__inner">
         <a href="/" class="site-header__logo">
-          Föreningsguiden
-          <span class="site-header__descriptor">{DESCRIPTOR}</span>
+          <Image src={brandMark} alt="" width={40} height={40} class="site-header__mark" />
+          <span class="site-header__wordmark-group">
+            <span class="site-header__wordmark">Förenings<em>guiden</em></span>
+            <span class="site-header__descriptor">{DESCRIPTOR}</span>
+          </span>
         </a>
         <nav class="site-header__nav">
           <a href="/deadlines/" aria-current={Astro.url.pathname === '/deadlines/' ? 'page' : undefined}>Deadlinekalender</a>

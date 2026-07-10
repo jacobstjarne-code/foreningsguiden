@@ -3,11 +3,13 @@
 // deadlineöversikt. Kommunväljaren och deadlineöversikten är datadrivna
 // (Code); all löptext kommer från content.ts (Fable).
 import Base from '../layouts/Base.astro';
-import { loadKommuner, getDeadlineEntries, formatDate, KATEGORI_LABELS } from '../lib/kommuner';
+import UrgencyChip from '../components/UrgencyChip.astro';
+import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
 import { START } from '../lib/content';
 
 const kommuner = loadKommuner();
-const kommandeDeadlines = getDeadlineEntries().filter((e) => !e.isLopande).slice(0, 5);
+const today = todayISO();
+const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).slice(0, 5);
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
   <h1>{START.h1}</h1>
@@ -27,11 +29,12 @@ const kommandeDeadlines = getDeadlineEntries().filter((e) => !e.isLopande).slice
     <p>{START.kalenderPuff}</p>
     <table class="deadline-table">
       <thead>
-        <tr><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+        <tr><th>Läge</th><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
       </thead>
       <tbody>
         {kommandeDeadlines.map((e) => (
           <tr>
+            <td><UrgencyChip urgency={getUrgency(daysUntil(e.dateISO!, today))} /></td>
             <td>{formatDate(e.dateISO!)}</td>
             <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
             <td>{e.kommun}</td>

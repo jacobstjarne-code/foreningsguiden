@@ -3,14 +3,22 @@
 // deadlines kronologiskt, filtrerbar på kommun/kategori. E-postregistreringen
 // sitter här. Enda sidan som behöver klient-JS (§7: "inga klientberoenden
 // utöver vad kalenderfiltret kräver").
+// prerender=false — sidan behöver läsa ?bevakning=klar vid request-tid för
+// att växla EmailSignup till kvitto-läge (en statiskt byggd sida kan aldrig
+// se en query-sträng som bara finns i den faktiska förfrågan).
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
 import EmailSignup from '../../components/EmailSignup.astro';
-import { loadKommuner, getDeadlineEntries, formatDate, KATEGORI_LABELS, KATEGORIER } from '../../lib/kommuner';
+import UrgencyChip from '../../components/UrgencyChip.astro';
+import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS, KATEGORIER } from '../../lib/kommuner';
 import { KALENDER } from '../../lib/content';
 
+const submitted = Astro.url.searchParams.get('bevakning') === 'klar';
 const kommuner = loadKommuner();
-const entries = getDeadlineEntries();
+const today = todayISO();
+const entries = getDeadlineEntries(today);
 const lopande = entries.filter((e) => e.isLopande);
 const kommande = entries.filter((e) => !e.isLopande);
 ---
@@ -42,11 +50,12 @@ const kommande = entries.filter((e) => !e.isLopande);
 
   <table class="deadline-table" id="deadline-table">
     <thead>
-      <tr><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+      <tr><th>Läge</th><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
     </thead>
     <tbody>
       {kommande.map((e) => (
         <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
+          <td><UrgencyChip urgency={getUrgency(daysUntil(e.dateISO!, today))} /></td>
           <td>{formatDate(e.dateISO!)}</td>
           <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
           <td>{e.kommun}</td>
@@ -79,7 +88,7 @@ const kommande = entries.filter((e) => !e.isLopande);
 
   <p class="deadline-table__empty" id="deadline-empty" hidden>Inga deadlines matchar filtret.</p>
 
-  <EmailSignup />
+  <EmailSignup submitted={submitted} />
 </Base>
 
 <script>

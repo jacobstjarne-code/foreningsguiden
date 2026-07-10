@@ -7,6 +7,7 @@ import Base from '../../../layouts/Base.astro';
 import BidragCard from '../../../components/BidragCard.astro';
 import StaleWarning from '../../../components/StaleWarning.astro';
 import BreadcrumbList from '../../../components/BreadcrumbList.astro';
+import VerificationRow from '../../../components/VerificationRow.astro';
 import {
   loadKommuner, isStale, formatDate, formatRecurringDate, svenskLista,
   KATEGORI_LABELS, KATEGORIER,
@@ -115,6 +116,8 @@ const webPageJsonLd = {
 
   {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
 
+  <VerificationRow kommun={kommun.kommun} verifierad={kommun.verifierad} kallaUrl={kommun.kalla_url} />
+
   {svarForst && <p class="svar-forst">{svarForst}</p>}
 
   <p>{intro}</p>
@@ -128,7 +131,7 @@ const webPageJsonLd = {
         <ul class="bidrag-list">
           {kommun.bidrag
             .filter((b) => b.kategori.includes(kategori))
-            .map((bidrag) => <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} />)}
+            .map((bidrag) => <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} />)}
         </ul>
       </section>
     ))
@@ -139,9 +142,6 @@ const webPageJsonLd = {
     <p>
       {ansokningstext}{' '}
       <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
-    </p>
-    <p class="bidrag-card__kalla">
-      Kommunens källdokument: <a href={kommun.kalla_url}>{kommun.kalla_url}</a>
     </p>
   </section>
 

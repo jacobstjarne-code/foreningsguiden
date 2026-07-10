@@ -250,6 +250,24 @@ export function nextOccurrenceISO(mmdd: string, today: string): string {
   return `${year}-${mmdd}`;
 }
 
+/** Antal dagar från `today` till `dateISO` (kan bli 0 om det är idag). */
+export function daysUntil(dateISO: string, today: string): number {
+  const toUTC = (iso: string) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return Date.UTC(y, m - 1, d);
+  };
+  return Math.round((toUTC(dateISO) - toUTC(today)) / (1000 * 60 * 60 * 24));
+}
+
+export type Urgency = 'urgent' | 'attention' | 'positive';
+
+/** Urgens-modellen (tokens.css §04): ≤3 dagar bråttom, 4–14 snart, annars god tid. */
+export function getUrgency(days: number): Urgency {
+  if (days <= 3) return 'urgent';
+  if (days <= 14) return 'attention';
+  return 'positive';
+}
+
 export interface DeadlineEntry {
   kommun: string;
   kommunSlug: string;

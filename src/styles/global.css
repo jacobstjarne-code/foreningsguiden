@@ -68,18 +68,38 @@ a:hover {
 
 .site-header__logo {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--fg-space-3);
-  font-family: var(--fg-font-display);
-  font-weight: var(--fg-weight-display);
-  font-size: 1.4rem;
-  letter-spacing: -0.02em;
   color: var(--fg-ink);
   text-decoration: none;
 }
 
 .site-header__logo:hover {
   text-decoration: none;
+}
+
+.site-header__mark {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.site-header__wordmark-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.site-header__wordmark {
+  font-family: var(--fg-font-display);
+  font-weight: var(--fg-weight-display);
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.site-header__wordmark em {
+  font-style: normal;
+  color: var(--fg-accent);
 }
 
 .site-header__descriptor {
@@ -175,6 +195,38 @@ main {
   font-weight: var(--fg-weight-bold);
 }
 
+.fg-verification-row {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-4);
+  background: var(--fg-ink);
+  color: var(--fg-surface);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4) var(--fg-space-5);
+  margin: var(--fg-space-5) 0;
+}
+
+.fg-verification-row svg {
+  flex-shrink: 0;
+  color: var(--fg-positive);
+}
+
+.fg-verification-row__label {
+  font-weight: var(--fg-weight-bold);
+  font-size: var(--fg-text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--fg-tracking-label);
+}
+
+.fg-verification-row__detail {
+  font-size: var(--fg-text-label);
+  color: var(--fg-canvas);
+}
+
+.fg-verification-row__detail a {
+  color: var(--fg-surface);
+}
+
 .placeholder-slot {
   display: block;
   border: 1px dashed var(--fg-accent);
@@ -194,8 +246,11 @@ main {
   margin: var(--fg-space-1) 0;
 }
 
-/* .fg-tag (tokens.css) bär färgen; denna lägger på storlek/casing. */
+/* .fg-tag (tokens.css) bär färgen; denna lägger på storlek/casing/ikon. */
 .kategori-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: var(--fg-text-label);
   font-weight: var(--fg-weight-bold);
   text-transform: uppercase;
@@ -239,6 +294,11 @@ main {
   margin: 0;
 }
 
+.bidrag-card__divider {
+  border-top: var(--fg-border-inner) dashed var(--fg-border);
+  margin-top: var(--fg-space-5);
+}
+
 .bidrag-card__footer {
   display: flex;
   align-items: center;
@@ -252,6 +312,13 @@ main {
   margin: 0;
   font-size: var(--fg-text-label);
   color: var(--fg-ink-muted);
+}
+
+.bidrag-card__cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: var(--fg-space-5);
 }
 
 /* VerificationStamp — oxblod, RESERVERAD för förtroendemekaniken. */
