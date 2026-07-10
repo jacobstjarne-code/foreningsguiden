@@ -18,11 +18,17 @@
 /** Ordmärkets descriptor — sitter under/bredvid loggan. Ton, inte sök. */
 export const DESCRIPTOR = 'Vet vad din förening kan söka';
 
-/** Sökbar funktionsrad — för header/hero, INTE lockupen. Nära söktermen. */
-export const FUNKTIONSRAD = 'Kommunala föreningsbidrag, samlade';
-
 /** Global site-title-suffix (Base.astro sätter "{sidtitel} — Föreningsguiden"). */
 export const SITE_NAMN = 'Föreningsguiden';
+
+/**
+ * Redaktionell avsändare. Namngiven avsändare krävs för E-E-A-T (SOKBARHETSSPEC
+ * §3.7) och matar Organization-schemat. Beslut 2026-07-11: redaktion, inte
+ * fysisk person — E-E-A-T-jobbet görs, ingen privatperson exponeras offentligt
+ * för en PoC. INTE ansvarig utgivare i grundlagsmening (inget utgivningsbevis);
+ * den frågan är parkerad till Regelrätten-vertikalen, se SOKBARHETSSPEC §9.
+ */
+export const AVSANDARE = 'Redaktionen Föreningsguiden';
 
 /** Startsidan. H1 bär funktion (sök); underraden bär nytta (människa). */
 export const START = {
@@ -55,6 +61,55 @@ export const KOMMUN = {
     '{kommun} tar emot ansökningar via {system}. Själva ansökan gör du hos kommunen — Föreningsguiden samlar bara informationen.',
   ingaBidrag:
     'Vi har ännu inte samlat några bidrag för den här kommunen. Kontrollera kommunens egen sida tills vidare.',
+
+  /**
+   * SVAR-FÖRST-BLOCK (SOKBARHETSSPEC §3.1) — högsta GEO-hävstången. Sitter
+   * överst på kommunsidan, FÖRE bidragslistan. AI-motorer läser sidans topp
+   * först; detta är det extraherbara direktsvaret. Självständigt läsbart utan
+   * resten av sidan. Code fyller variablerna ur datat; INGEN säljton.
+   *
+   * Variabler: {kommun}, {antal} (antal bidrag), {kategorier} (t.ex. "idrott,
+   * kultur och social"), {tidigaste} + {senaste} (klartext-datum, närmaste
+   * respektive senaste fasta deadline), {system} (ansökningssystemets namn).
+   *
+   * Tre varianter beroende på datat — Code väljer:
+   * - flera fasta deadlines: svarForstMedDeadlines
+   * - bara löpande bidrag (inga fasta datum): svarForstLopande
+   * - ett enda bidrag: svarForstEtt
+   */
+  svarForstMedDeadlines:
+    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum varierar mellan {tidigaste} och {senaste} beroende på bidrag. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
+  svarForstLopande:
+    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Bidragen söks löpande under året snarare än mot ett fast sista datum. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
+  svarForstEtt:
+    'I {kommun} har vi hittat ett kommunalt föreningsbidrag: {bidragsnamn}. Ansökan görs hos kommunen via {system}. Nedan finns krav, belopp och länk till kommunens egen sida.',
+
+  /**
+   * FAQ (SOKBARHETSSPEC §3.3) — äkta frågor kassörer ställer, matar både synlig
+   * Q&A-sektion OCH FAQPage-schema. KRITISKT: fråga/svar i schemat MÅSTE synas
+   * på sidan (annars riktlinjebrott). Svar self-contained, 2–5 meningar, ingen
+   * säljton. Code fyller variabler ur datat. Frågor där datat saknas hoppas över
+   * hellre än att besvaras tomt.
+   */
+  faqRubrik: 'Vanliga frågor om föreningsbidrag i {kommun}',
+  faq: [
+    {
+      fraga: 'Vilka föreningsbidrag kan man söka i {kommun}?',
+      svar: 'I {kommun} kan föreningar söka {antal} kommunala bidrag: {bidragslista}. Vilka just din förening kan söka beror på verksamhet och målgrupp — kraven står vid varje bidrag ovan. Bidragen handläggs av {forvaltning}.',
+    },
+    {
+      fraga: 'När är sista ansökningsdag för föreningsbidrag i {kommun}?',
+      svar: 'Sista ansökningsdatum skiljer sig mellan bidragen. {deadlinesammanfattning} Datumen återkommer varje år. En för sen ansökan kan ge minskat eller uteblivet bidrag, så kontrollera datumet mot kommunens egen sida i god tid.',
+    },
+    {
+      fraga: 'Vart skickar man ansökan om föreningsbidrag i {kommun}?',
+      svar: 'Ansökan görs hos {kommun} via {system}. Föreningsguiden samlar informationen men tar inte emot ansökningar — själva ansökan och beslutet ligger hos kommunen.',
+    },
+    {
+      fraga: 'Hur mycket kan en förening få i bidrag i {kommun}?',
+      svar: 'Beloppen varierar mellan bidrag och är inte alltid publikt angivna i förväg. Där kommunen anger ett belopp eller en beräkningsgrund står det vid respektive bidrag ovan. För exakt summa gäller kommunens besked på ansökan.',
+    },
+  ],
 };
 
 /** Kategori × kommun-sida. */
@@ -99,6 +154,16 @@ export const OM = {
     'Varje uppgift här är hämtad från kommunens egen publicerade information och märkt med det datum vi senast stämde av den mot källan. Vi länkar alltid till kommunens sida, så att du kan läsa originalet själv. Är en uppgift äldre än ett halvår markerar vi den som möjligen inaktuell, eftersom regler och datum ändras.',
     'Vi är inte kommunen och kan inte avgöra din ansökan. Det vi gör är att hjälpa dig hitta rätt bidrag och komma ihåg när det ska sökas — ansökan lämnar du in hos kommunen. Ser du en uppgift som blivit fel, hör av dig, så rättar vi den och kontrollerar om mot källan.',
   ],
+  /**
+   * Ansvar och källor — egen sektion längst ner på om-sidan. Gör E-E-A-T-jobbet
+   * (namngiven avsändare) och håller ansvarsbegränsningen skarp. Rubrik + stycken.
+   */
+  ansvarRubrik: 'Ansvar och källor',
+  ansvarStycken: [
+    'Föreningsguiden ges ut av Redaktionen Föreningsguiden, som ansvarar för hur uppgifterna samlas in, struktureras och hålls aktuella.',
+    'Uppgifterna återger kommunernas egen publicerade information. Vi gör inga egna bedömningar av enskilda ansökningar och lämnar inte juridisk rådgivning. Vid skillnad mellan det som står här och kommunens egen sida gäller alltid kommunens uppgift.',
+    'Har du hittat ett fel, eller är du en kommun som vill rätta en uppgift? Hör av dig till redaktionen, så kontrollerar vi mot källan och rättar.',
+  ],
 };
 
 /** Sidfot. Kort, saklig. */
@@ -112,4 +177,48 @@ export const SIDFOT = {
 export const STALE = {
   template:
     'Uppgifterna för den här kommunen stämdes senast av mot källan {datum} ({dagar} dagar sedan) och kan ha ändrats. Kontrollera alltid mot kommunens egen sida innan ni söker.',
+};
+
+/**
+ * BEVAKNINGSFORMULÄR — e-post + GDPR-microcopy (UPPDRAG_POC §6, SOKBARHETSSPEC).
+ * Skriven när formulärytan fanns (steg 3) och lagringen (Vercel KV) godkänts.
+ * Register: tjänst, inte nyhetsbrevsfälla. Ändamålet är skarpt och avgränsat.
+ * Ingen skarp insamling före dubbel opt-in är på plats.
+ */
+export const BEVAKNING = {
+  rubrik: 'Bevaka deadlines för din kommun',
+  ingress:
+    'Vi mejlar två veckor och tre dagar innan sista ansökningsdag för de bidrag du väljer att bevaka. Inget annat.',
+  epostLabel: 'Din e-postadress',
+  epostPlaceholder: 'namn@forening.se',
+  kommunLabel: 'Vilka kommuner vill du bevaka?',
+  knapp: 'Börja bevaka',
+  // Samtyckestext vid kryssruta — uttryckligt ändamål, GDPR-minimum.
+  samtycke:
+    'Jag vill att Föreningsguiden sparar min e-postadress för att skicka påminnelser om de deadlines jag valt. Jag kan avsluta när som helst.',
+  // Visas efter inskickat, före bekräftelse (dubbel opt-in).
+  kvittoRubrik: 'Kolla din inkorg',
+  kvittoText:
+    'Vi har skickat ett bekräftelsemejl. Klicka på länken där så börjar bevakningen. Utan bekräftelse sparar vi ingenting.',
+  // Integritetsrad under formuläret, länkar till om-/metodsidan.
+  integritetsrad:
+    'Vi använder adressen bara till de påminnelser du valt, delar den inte, och du kan avregistrera dig när som helst via länk i varje utskick.',
+  // Avregistreringsbekräftelse.
+  avreg:
+    'Du är nu avregistrerad och vi har raderat din adress. Du är välkommen tillbaka när du vill.',
+};
+
+/**
+ * llms.txt-INNEHÅLL (SOKBARHETSSPEC §5.2) — B2A-yta, curerad karta över sajtens
+ * bästa innehåll för AI-agenter. Code renderar detta som /llms.txt (plain text,
+ * markdown-liknande enligt konventionen). Blockbeskrivning + länklista; Code
+ * fyller den faktiska länklistan ur kommunindex + fasta sidor.
+ */
+export const LLMS_TXT = {
+  rubrik: '# Föreningsguiden',
+  sammanfattning:
+    '> Föreningsguiden samlar Sveriges kommunala föreningsbidrag — regler, belopp, krav och sista ansökningsdatum — organiserat per kommun och föreningstyp. Varje uppgift återger kommunens egen publicerade information, med källänk och datum för när den senast stämdes av. Använd sidorna för att besvara frågor om vilka bidrag en förening kan söka i en viss kommun, vilka krav och belopp som gäller, och när ansökan ska lämnas. Föreningsguiden avgör inte ansökningar och är inte en myndighet; själva ansökan görs hos kommunen.',
+  // Sektionsrubriker för länklistan; Code fyller länkarna.
+  sektionKommuner: '## Kommuner',
+  sektionResurser: '## Om och metod',
 };

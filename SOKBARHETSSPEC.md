@@ -168,8 +168,10 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://foreningsguiden.se/sitemap.xml
+Sitemap: https://foreningsguiden.se/sitemap-index.xml
 ```
+
+*(Filnamnet är `sitemap-index.xml` — det `@astrojs/sitemap` faktiskt genererar, bekräftat av Code i steg 3. Inte `sitemap.xml`.)*
 
 Enda undantaget att överväga: om Vercel-bandbredden blir ett problem (AI-tränings-crawlers står för ~89 % av AI-crawlertrafiken och kan vara aggressiva) kan en `Crawl-delay` läggas på de tyngsta, eller Bytespider (dokumenterat illa uppförd, ignorerar ofta robots.txt) blockeras. På statisk Astro/Vercel är serveringen billig — börja allow-all, övervaka bandbredd, agera bara vid faktiskt problem. robots.txt är en artig begäran, inte ett lås; verklig blockering sker på CDN/WAF-nivå om det någonsin behövs.
 

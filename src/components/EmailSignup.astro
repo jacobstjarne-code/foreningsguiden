@@ -1,35 +1,50 @@
 ---
-// Deadlinebevakning — §6 UPPDRAG_POC.md. UI byggd, men INGET lagringsbackend
-// kopplat än: "Lagring: enklast robusta (Vercel KV, alternativt extern lista
-// — Code föreslår, Fable/Jacob godkänner innan något tredjepartsberoende
-// införs)". Formuläret postar till /api/prenumerera som ännu inte finns —
-// se statusrapport. Integritets-/ändamålstexten är Fable-copy (GDPR-krav
-// på tydlig ändamålsbeskrivning gäller texten, inte formulärets fält).
+// Deadlinebevakning — §6 UPPDRAG_POC.md. Backend klar (Upstash Redis via
+// Vercel Marketplace, /api/prenumerera + /api/avprenumerera). BEVAKNING-copy
+// finns nu i content.ts, men den beskriver dubbel opt-in (kvittoRubrik/
+// kvittoText: "vi har skickat ett bekräftelsemejl") — INGEN utskicksmotor är
+// byggd (§6 UPPDRAG_POC.md: "behöver INTE byggas i PoC"), så det löftet går
+// inte att hålla än. Formuläret hålls därför bakom "kommer snart" tills det
+// beslutet är taget — se statusrapport för de två vägarna (bygg minimal
+// bekräftelsemejl via Resend, eller förenkla till ett steg för PoC:n).
+//
+// Sätt FORMULAR_LIVE = true när flödet är beslutat.
+const FORMULAR_LIVE = false;
+
 import { loadKommuner } from '../lib/kommuner';
+import { BEVAKNING } from '../lib/content';
 
 const kommuner = loadKommuner();
 ---
-<form class="email-signup" method="POST" action="/api/prenumerera">
-  <h2>Bevaka deadlines</h2>
-  <p class="placeholder-slot">{'{{FABLE: ändamålstext — vad vi mejlar, hur ofta, GDPR-grund}}'}</p>
+{FORMULAR_LIVE ? (
+  <form class="email-signup fg-card" method="POST" action="/api/prenumerera">
+    <h2>{BEVAKNING.rubrik}</h2>
+    <p>{BEVAKNING.ingress}</p>
 
-  <label for="email-signup-email">E-post</label>
-  <input type="email" id="email-signup-email" name="email" required autocomplete="email" />
+    <label for="email-signup-email">{BEVAKNING.epostLabel}</label>
+    <input type="email" id="email-signup-email" name="email" placeholder={BEVAKNING.epostPlaceholder} required autocomplete="email" />
 
-  <fieldset>
-    <legend>Vilka kommuner vill du bevaka?</legend>
-    {kommuner.map((k) => (
-      <label class="email-signup__kommun">
-        <input type="checkbox" name="kommuner" value={k.kommun_slug} />
-        {k.kommun}
-      </label>
-    ))}
-  </fieldset>
+    <fieldset>
+      <legend>{BEVAKNING.kommunLabel}</legend>
+      {kommuner.map((k) => (
+        <label class="email-signup__kommun">
+          <input type="checkbox" name="kommuner" value={k.kommun_slug} />
+          {k.kommun}
+        </label>
+      ))}
+    </fieldset>
 
-  <label class="email-signup__consent">
-    <input type="checkbox" name="samtycke" required />
-    {'{{FABLE: samtyckestext — dubbel opt-in eller tydlig integritetstext}}'}
-  </label>
+    <label class="email-signup__consent">
+      <input type="checkbox" name="samtycke" required />
+      {BEVAKNING.samtycke}
+    </label>
 
-  <button type="submit" class="btn-primary">Bevaka deadlines</button>
-</form>
+    <button type="submit" class="btn-primary">{BEVAKNING.knapp}</button>
+    <p class="email-signup__integritet">{BEVAKNING.integritetsrad}</p>
+  </form>
+) : (
+  <div class="email-signup email-signup--soon fg-card">
+    <h2>{BEVAKNING.rubrik}</h2>
+    <p>Kommer snart.</p>
+  </div>
+)}

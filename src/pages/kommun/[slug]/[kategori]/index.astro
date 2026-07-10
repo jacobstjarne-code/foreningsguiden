@@ -40,8 +40,17 @@ const metaTitle = KATEGORI_SIDA.metaTitleTemplate
 const h1 = KATEGORI_SIDA.h1Template
   .replace(/{kategori}/g, kategoriLabel)
   .replace(/{kommun}/g, kommun.kommun);
+
+// dateModified ur verifierad (SOKBARHETSSPEC §4.5).
+const webPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: h1,
+  dateModified: kommun.verifierad,
+};
 ---
 <Base title={metaTitle} description={intro}>
+  <script type="application/ld+json" set:html={JSON.stringify(webPageJsonLd)} />
   <BreadcrumbList items={[
     { name: 'Startsida', url: '/' },
     { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
@@ -55,6 +64,6 @@ const h1 = KATEGORI_SIDA.h1Template
   <p>{intro}</p>
 
   <ul class="bidrag-list">
-    {bidrag.map((b) => <BidragCard bidrag={b} />)}
+    {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} />)}
   </ul>
 </Base>

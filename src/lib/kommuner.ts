@@ -216,6 +216,21 @@ export function formatRecurringDate(mmdd: string): string {
   return `${d} ${MANADSNAMN[m - 1]}`;
 }
 
+const MANADSFORKORTNING = ['JAN', 'FEB', 'MAR', 'APR', 'MAJ', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEC'];
+
+/** Formaterar ett ISO-datum som VerificationStamp-format: "03 JUL". */
+export function formatStampDate(iso: string): string {
+  const [, m, d] = iso.split('-').map(Number);
+  return `${String(d).padStart(2, '0')} ${MANADSFORKORTNING[m - 1]}`;
+}
+
+/** "a" / "a och b" / "a, b och c" — svensk uppräkning för mall-variabler. */
+export function svenskLista(items: string[]): string {
+  if (items.length === 0) return '';
+  if (items.length === 1) return items[0];
+  return `${items.slice(0, -1).join(', ')} och ${items[items.length - 1]}`;
+}
+
 /** Dagens datum som YYYY-MM-DD (lokal tid). */
 export function todayISO(): string {
   const d = new Date();
