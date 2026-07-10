@@ -1,0 +1,35 @@
+---
+// Deadlinebevakning — §6 UPPDRAG_POC.md. UI byggd, men INGET lagringsbackend
+// kopplat än: "Lagring: enklast robusta (Vercel KV, alternativt extern lista
+// — Code föreslår, Fable/Jacob godkänner innan något tredjepartsberoende
+// införs)". Formuläret postar till /api/prenumerera som ännu inte finns —
+// se statusrapport. Integritets-/ändamålstexten är Fable-copy (GDPR-krav
+// på tydlig ändamålsbeskrivning gäller texten, inte formulärets fält).
+import { loadKommuner } from '../lib/kommuner';
+
+const kommuner = loadKommuner();
+---
+<form class="email-signup" method="POST" action="/api/prenumerera">
+  <h2>Bevaka deadlines</h2>
+  <p class="placeholder-slot">{'{{FABLE: ändamålstext — vad vi mejlar, hur ofta, GDPR-grund}}'}</p>
+
+  <label for="email-signup-email">E-post</label>
+  <input type="email" id="email-signup-email" name="email" required autocomplete="email" />
+
+  <fieldset>
+    <legend>Vilka kommuner vill du bevaka?</legend>
+    {kommuner.map((k) => (
+      <label class="email-signup__kommun">
+        <input type="checkbox" name="kommuner" value={k.kommun_slug} />
+        {k.kommun}
+      </label>
+    ))}
+  </fieldset>
+
+  <label class="email-signup__consent">
+    <input type="checkbox" name="samtycke" required />
+    {'{{FABLE: samtyckestext — dubbel opt-in eller tydlig integritetstext}}'}
+  </label>
+
+  <button type="submit" class="btn-primary">Bevaka deadlines</button>
+</form>

@@ -1,6 +1,8 @@
-# UPPDRAG: Bidragskollen — Proof of Concept (10 kommuner)
+# UPPDRAG: Föreningsguiden — Proof of Concept (10 kommuner)
 
 *Skriven av Opus/Fable 2026-07-10. Detta dokument är Codes uppdragsbeskrivning. Frågor som kräver redaktionellt eller strategiskt beslut går tillbaka till Fable/Jacob — gissa inte.*
+
+*Namnbeslut 2026-07-10: arbetsnamnet Bidragskollen ströks (bidragskollen.se upptagen; "bidrag" ensamt drar mot socialbidrag och är för brett för föreningsnischen). Valt namn: **Föreningsguiden** (foreningsguiden.se ledig). Förenings-prefixet nischar och bygger förtroende; "guide" är sant för produkten och lämnar dörren öppen för brand-extension (föreningsjuridik, arbetsgivarregler) längre fram — medvetet val, inte en läcka. Repo-namn: `foreningsguiden`.*
 
 ---
 
@@ -111,7 +113,7 @@ Ingen betalning, ingen inloggning i PoC. En e-postregistrering: "Bevaka deadline
 ## 7. Stack och struktur
 
 - **Astro + Vercel**, samma upplägg som Bandy Brain. Statisk generering, inga klientberoenden utöver vad kalenderfiltret kräver.
-- Repo: `bidragskollen` (denna mapp). Egen Vercel-deploy, eget GitHub-repo — vertikaler delar mönster, inte infrastruktur (en död vertikal ska kunna begravas isolerat).
+- Repo: `foreningsguiden` (mappen döps om från `bidragskollen` — Code hanterar i samband med första push). Egen Vercel-deploy, eget GitHub-repo — vertikaler delar mönster, inte infrastruktur (en död vertikal ska kunna begravas isolerat).
 - Komponenter som ska designas för återbruk i vertikal 2 (stipendier): datakort med källa+verifiering, deadlinelista, kategorinavigation, e-postregistrering. Håll dem generiska över datamodellen, inte hårdkodade mot "kommun".
 - Design: enkel, myndighetsnära seriositet snarare än startup-flash. Ingen visuell audit i PoC — men strukturera CSS så Design-instansen kan ta det senare.
 
@@ -123,7 +125,7 @@ Ingen betalning, ingen inloggning i PoC. En e-postregistrering: "Bevaka deadline
 
 ## 9. Öppna beslut (Jacob)
 
-1. **Domän.** Arbetsnamnet är Bidragskollen; kontrollera att bidragskollen.se är ledig innan repo-namnet cementeras i publika URL:er. Alternativ tas fram av Fable om upptagen. Exakt-match-nischdomän per fabrikens maxim 8 — inget paraplyvarumärke.
+1. **Domän.** ~~Beslutat 2026-07-10:~~ **Föreningsguiden**, foreningsguiden.se (ledig — registreras av Jacob hos svensk registrator; Vercel stödjer inte .se-köp). Bidragskollen/förenings-varianter var upptagna; se namnbesluts-noten överst. `site`-fält i astro.config sätts till https://foreningsguiden.se i steg 3.
 2. **Keyword Planner-batteriet.** Körs parallellt; påverkar inte PoC-bygget men avgör vecka 12-tolkningen.
 3. **Go för publik deploy** efter Fables innehållsgranskning.
 

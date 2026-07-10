@@ -146,8 +146,8 @@ function validateKommun(raw: any, file: string): Kommun {
     problems.push(`verifierad måste vara ett datum i formatet YYYY-MM-DD, fick "${raw?.verifierad}"`);
   }
 
-  if (!Array.isArray(raw?.bidrag) || raw.bidrag.length === 0) {
-    problems.push('bidrag måste vara en icke-tom lista');
+  if (!Array.isArray(raw?.bidrag)) {
+    problems.push('bidrag måste vara en lista (kan vara tom om inga bidrag hittats än)');
   } else {
     raw.bidrag = raw.bidrag.map((b: any, i: number) => validateBidrag(b, raw.kommun_slug ?? file, i, problems));
   }
@@ -214,6 +214,71 @@ export function formatDate(iso: string): string {
 export function formatRecurringDate(mmdd: string): string {
   const [m, d] = mmdd.split('-').map(Number);
   return `${d} ${MANADSNAMN[m - 1]}`;
+}
+
+/** Dagens datum som YYYY-MM-DD (lokal tid). */
+export function todayISO(): string {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/**
+ * Räknar ut nästa förekomst av ett återkommande MM-DD-datum relativt `todayISO`,
+ * som ett fullt ISO-datum (YYYY-MM-DD). Ren sträng/heltalsjämförelse — inga
+ * Date-objekt inblandade, så tidszon kan aldrig ge en off-by-one.
+ */
+export function nextOccurrenceISO(mmdd: string, today: string): string {
+  const [ty] = today.split('-').map(Number);
+  const todayKey = today.slice(5); // "MM-DD"
+  const year = mmdd >= todayKey ? ty : ty + 1;
+  return `${year}-${mmdd}`;
+}
+
+export interface DeadlineEntry {
+  kommun: string;
+  kommunSlug: string;
+  bidragId: string;
+  bidragNamn: string;
+  kategori: Kategori[];
+  isLopande: boolean;
+  dateISO: string | null; // null för löpande — kan inte placeras kronologiskt
+}
+
+/**
+ * Platt, kronologiskt sorterad lista över alla deadlines i alla kommuner —
+ * underlag för deadlinekalendern (§5 punkt 4 UPPDRAG_POC.md). Löpande
+ * bidrag saknar datum och sorteras sist, som en egen sektion.
+ */
+export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] {
+  const entries: DeadlineEntry[] = [];
+
+  for (const kommun of loadKommuner()) {
+    for (const bidrag of kommun.bidrag) {
+      const base = {
+        kommun: kommun.kommun,
+        kommunSlug: kommun.kommun_slug,
+        bidragId: bidrag.id,
+        bidragNamn: bidrag.namn,
+        kategori: bidrag.kategori,
+      };
+      if (bidrag.deadlines.typ === 'lopande') {
+        entries.push({ ...base, isLopande: true, dateISO: null });
+        continue;
+      }
+      for (const mmdd of bidrag.deadlines.datum) {
+        entries.push({ ...base, isLopande: false, dateISO: nextOccurrenceISO(mmdd, today) });
+      }
+    }
+  }
+
+  entries.sort((a, b) => {
+    if (a.isLopande !== b.isLopande) return a.isLopande ? 1 : -1;
+    if (a.dateISO && b.dateISO) return a.dateISO.localeCompare(b.dateISO);
+    return 0;
+  });
+
+  return entries;
 }
 
 export const KATEGORI_LABELS: Record<Kategori, string> = {

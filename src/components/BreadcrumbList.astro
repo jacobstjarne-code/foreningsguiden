@@ -1,0 +1,39 @@
+---
+// Synlig brödsmula + schema.org BreadcrumbList (§5 UPPDRAG_POC.md: "genomgående").
+// Generisk (namn+url-par) — inget domänvetande, återbrukbar för vertikal 2.
+export interface Crumb {
+  name: string;
+  url: string;
+}
+
+export interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: new URL(item.url, Astro.site ?? Astro.url).toString(),
+  })),
+};
+---
+<nav aria-label="Brödsmula" class="breadcrumb">
+  <ol>
+    {items.map((item, i) => (
+      <li>
+        {i === items.length - 1 ? (
+          <span aria-current="page">{item.name}</span>
+        ) : (
+          <a href={item.url}>{item.name}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

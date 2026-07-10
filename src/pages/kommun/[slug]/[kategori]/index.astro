@@ -1,0 +1,60 @@
+---
+// Kategori × kommun — §5 punkt 3 UPPDRAG_POC.md. Fångar "bidrag [kategori]
+// [kommun]"-sökningar. Genereras BARA för kombinationer som faktiskt har
+// bidrag (inga tomma sidor — tunna sidor skadar hela sajten).
+import Base from '../../../../layouts/Base.astro';
+import BidragCard from '../../../../components/BidragCard.astro';
+import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
+import { loadKommuner, KATEGORI_LABELS, KATEGORIER } from '../../../../lib/kommuner';
+import type { Kategori } from '../../../../lib/kommuner';
+import { KATEGORI_SIDA } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  const paths: { params: { slug: string; kategori: Kategori }; props: { kommun: ReturnType<typeof loadKommuner>[number]; kategori: Kategori } }[] = [];
+
+  for (const kommun of loadKommuner()) {
+    const kategorierMedBidrag = KATEGORIER.filter((k) => kommun.bidrag.some((b) => b.kategori.includes(k)));
+    for (const kategori of kategorierMedBidrag) {
+      paths.push({
+        params: { slug: kommun.kommun_slug, kategori },
+        props: { kommun, kategori },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { kommun, kategori } = Astro.props;
+const bidrag = kommun.bidrag.filter((b) => b.kategori.includes(kategori));
+const kategoriLabel = KATEGORI_LABELS[kategori];
+
+// introTemplate saknar en dedikerad metaDescriptionTemplate i content.ts —
+// återanvänder samma Fable-mening som synlig intro och som metabeskrivning.
+const intro = KATEGORI_SIDA.introTemplate
+  .replace(/{kommun}/g, kommun.kommun)
+  .replace(/{kategoriGemener}/g, kategoriLabel.toLowerCase());
+const metaTitle = KATEGORI_SIDA.metaTitleTemplate
+  .replace(/{kategori}/g, kategoriLabel)
+  .replace(/{kommun}/g, kommun.kommun);
+const h1 = KATEGORI_SIDA.h1Template
+  .replace(/{kategori}/g, kategoriLabel)
+  .replace(/{kommun}/g, kommun.kommun);
+---
+<Base title={metaTitle} description={intro}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
+    { name: kategoriLabel, url: `/kommun/${kommun.kommun_slug}/${kategori}/` },
+  ]} />
+
+  <div class="kommun-header">
+    <h1>{h1}</h1>
+  </div>
+
+  <p>{intro}</p>
+
+  <ul class="bidrag-list">
+    {bidrag.map((b) => <BidragCard bidrag={b} />)}
+  </ul>
+</Base>

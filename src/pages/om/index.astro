@@ -1,0 +1,19 @@
+---
+// Om/metod — §5 punkt 5 UPPDRAG_POC.md. Förtroendesidan: vilka vi är, hur
+// datat verifieras, källpolicy. Motsvarar Bandy Brains metodredovisning.
+// OM.stycken (content.ts) är skriven som löpande stycken under H1, inte
+// under egna h2-rubriker — Code följer den strukturen Fable faktiskt levererade.
+import Base from '../../layouts/Base.astro';
+import BreadcrumbList from '../../components/BreadcrumbList.astro';
+import { OM } from '../../lib/content';
+---
+<Base title={OM.metaTitle} description={OM.metaDescription}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: 'Om', url: '/om/' },
+  ]} />
+
+  <h1>{OM.h1}</h1>
+
+  {OM.stycken.map((stycke) => <p>{stycke}</p>)}
+</Base>

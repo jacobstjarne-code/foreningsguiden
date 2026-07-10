@@ -1,9 +1,15 @@
 ---
 // Föreningsguiden ska indexeras från dag ett (§5 UPPDRAG_POC.md) — noindex
 // default är false, till skillnad från Bandy-Brains förlaga.
+//
+// `title` förväntas vara den FULLSTÄNDIGA <title>-strängen (Fable avgör per
+// sida om varumärkessuffixet "— Föreningsguiden" är värt teckenbudgeten —
+// se content.ts). Base lägger INTE på ett eget suffix.
+import { DESCRIPTOR, SIDFOT } from '../lib/content';
+
 export interface Props {
   title: string;
-  description: string; // Fable-copy, se placeholder-konvention i respektive sida.
+  description: string;
   noindex?: boolean;
 }
 
@@ -15,16 +21,31 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : unde
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — Föreningsguiden</title>
+    <title>{title}</title>
     <meta name="description" content={description} />
     {canonicalURL && <link rel="canonical" href={canonicalURL} />}
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Föreningsguiden" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="sv_SE" />
+    {canonicalURL && <meta property="og:url" content={canonicalURL.toString()} />}
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
-        <a href="/" class="site-header__logo">Föreningsguiden</a>
+        <a href="/" class="site-header__logo">
+          Föreningsguiden
+          <span class="site-header__descriptor">{DESCRIPTOR}</span>
+        </a>
+        <nav class="site-header__nav">
+          <a href="/deadlines/" aria-current={Astro.url.pathname === '/deadlines/' ? 'page' : undefined}>Deadlinekalender</a>
+          <a href="/om/" aria-current={Astro.url.pathname === '/om/' ? 'page' : undefined}>Om</a>
+        </nav>
       </div>
     </header>
 
@@ -33,7 +54,8 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : unde
     </main>
 
     <footer class="site-footer">
-      {'{{FABLE: förtroende-/metodtext för sidfoten, se §5 punkt 5 (Om/metod) i UPPDRAG_POC.md}}'}
+      <p>{SIDFOT.kortText}</p>
+      <p><a href="/om/">{SIDFOT.kallpolicyLank}</a></p>
     </footer>
   </body>
 </html>

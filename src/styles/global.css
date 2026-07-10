@@ -65,11 +65,15 @@ a:hover {
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-m);
   padding: var(--spacing-m) 0;
 }
 
 .site-header__logo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-s);
   font-weight: 700;
   font-size: 1.15rem;
   color: var(--color-text);
@@ -77,10 +81,60 @@ a:hover {
   letter-spacing: -0.01em;
 }
 
+.site-header__descriptor {
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  letter-spacing: 0;
+}
+
+.site-header__nav {
+  display: flex;
+  gap: var(--spacing-m);
+  font-size: 0.9rem;
+}
+
+.site-header__nav a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.site-header__nav a[aria-current="page"] {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
 main {
   max-width: 1100px;
   margin: 0 auto;
   padding: var(--spacing-l);
+}
+
+/* ---- Brödsmula ---- */
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0 0 var(--spacing-m) 0;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: '/';
+  margin-left: 0.35rem;
+  color: var(--color-border);
+}
+
+.breadcrumb a {
+  color: var(--color-muted);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--color-text);
 }
 
 .site-footer {
@@ -183,4 +237,155 @@ main {
   margin-top: var(--spacing-s);
   font-size: 0.8rem;
   color: var(--color-muted);
+}
+
+/* ---- Knappar ---- */
+
+.btn-primary {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+}
+
+/* ---- E-postformulär ---- */
+
+.email-signup {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--spacing-l);
+  margin: var(--spacing-l) 0;
+  max-width: var(--measure);
+}
+
+.email-signup label,
+.email-signup legend {
+  display: block;
+  font-weight: 600;
+  margin-top: var(--spacing-m);
+  margin-bottom: var(--spacing-xs);
+}
+
+.email-signup input[type="email"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.email-signup fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: var(--spacing-s) var(--spacing-m);
+  margin-top: var(--spacing-m);
+}
+
+.email-signup__kommun {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: normal;
+  margin-top: var(--spacing-xs);
+}
+
+.email-signup__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  font-weight: normal;
+  font-size: 0.85rem;
+}
+
+.email-signup button {
+  margin-top: var(--spacing-m);
+}
+
+/* ---- Deadlinekalender ---- */
+
+.deadline-filters {
+  display: flex;
+  gap: var(--spacing-m);
+  flex-wrap: wrap;
+  margin: var(--spacing-m) 0 var(--spacing-l) 0;
+}
+
+.deadline-filters label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  font-weight: 600;
+  gap: 0.25rem;
+}
+
+.deadline-filters select {
+  padding: 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.deadline-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-l);
+}
+
+.deadline-table th,
+.deadline-table td {
+  text-align: left;
+  padding: 0.5rem var(--spacing-s);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.92rem;
+}
+
+.deadline-table th {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.deadline-table__empty {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* ---- Kommunväljare (startsida) ---- */
+
+.kommun-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--spacing-s);
+  list-style: none;
+  margin: var(--spacing-m) 0 var(--spacing-l) 0;
+  padding: 0;
+}
+
+.kommun-grid li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.kommun-grid a {
+  display: block;
+  padding: var(--spacing-s) var(--spacing-m);
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.kommun-grid a:hover {
+  color: var(--color-accent);
 }

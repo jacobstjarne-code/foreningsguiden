@@ -1,12 +1,14 @@
-# DESIGN-UPPDRAG: Bidragskollen — PoC
+# DESIGN-UPPDRAG: Föreningsguiden — PoC
 
 *Skriven av Opus/Fable 2026-07-10. Uppdragsbeskrivning för Design-instansen. Läses tillsammans med UPPDRAG_POC.md i samma mapp, som beskriver produkt, sidstruktur och datamodell. Redaktionella/strategiska frågor går till Fable/Jacob — gissa inte.*
+
+*Namn beslutat 2026-07-10: **Föreningsguiden** (foreningsguiden.se). Se namnbesluts-noten i UPPDRAG_POC.md för skäl.*
 
 ---
 
 ## 1. Vad designen ska åstadkomma
 
-Bidragskollen samlar kommunala föreningsbidrag — regler, deadlines, ansökningsvägar — för föreningskassörer och ideella eldsjälar. Sajtens hela värde vilar på **förtroende**: en kassör ska våga lita på ett deadline-datum från oss i stället för att dubbelkolla mot kommunens sida. Designens jobb är att signalera det förtroendet omedelbart.
+Föreningsguiden samlar kommunala föreningsbidrag — regler, deadlines, ansökningsvägar — för föreningskassörer och ideella eldsjälar. Sajtens hela värde vilar på **förtroende**: en kassör ska våga lita på ett deadline-datum från oss i stället för att dubbelkolla mot kommunens sida. Designens jobb är att signalera det förtroendet omedelbart.
 
 **Designposition: civil klarhet.** Tydligare än en kommunsida, seriösare än en startup, varmare än en myndighet. Referenspunkter i känsla (inte i stil att kopiera): 1177:s lugn, Skatteverkets nya klarspråkighet, brittiska gov.uk:s radikala enkelhet. INTE: SaaS-landningssida, gradienter, illustrerade blobbar, "AI-estetik".
 
@@ -39,7 +41,7 @@ Detta är vertikal 1 av flera på samma motor (vertikal 2: stipendier för stude
 
 ## 5. Identitet
 
-- Arbetsnamn **Bidragskollen** (domän ej bekräftad — designa ordmärket så att namnbyte är billigt: typografiskt märke, ingen symbolintegration i PoC).
+- Namn **Föreningsguiden** (foreningsguiden.se, beslutat). Designa ändå ordmärket rent typografiskt utan symbolintegration i PoC — håller framtida namn-/brand-extension (föreningsjuridik m.m.) billig. Notera tonen: "guide" ska läsas som kompetent vägledning, inte som lifestyle/kupong — formgivningens seriositet bär den skillnaden, inte namnet.
 - Färgriktning: förslagsvis en mörk, stabil bas (djupblå/grafit-familjen läses "institution") med EN varm accent för deadlines/CTA. Design-instansen tar fram 2–3 riktningar som statiska mockups av datakortet + kalendern innan något systematiseras. Jacob väljer.
 - Typografi: systemnära eller en (1) välbeprövad läsvänlig sans via variabel font. Ingen display-typografi. Prestanda är en SEO-faktor.
 - Uttryckligen INTE Bandy Managers parchment/koppar — annan produkt, annan känsla, och vertikalerna ska inte se besläktade ut utåt.
@@ -60,4 +62,4 @@ Code har byggt skelett + en kommun (Gislaved) med minimal, tokenbaserad CSS (all
 ## 8. Öppna frågor (Jacob)
 
 1. Riktningsval efter leverans 1.
-2. Domänbeslutet påverkar ordmärket — koppla ihop med domänkollen i UPPDRAG_POC.md §9.
+2. Namnet är beslutat (Föreningsguiden) — påverkar ordmärket. Domänregistrering är Jacobs åtgärd, se UPPDRAG_POC.md §9.1.

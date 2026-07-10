@@ -1,23 +1,45 @@
 ---
-// Minimal startsida för steg 1 — endast Gislaved är byggd hittills.
-// Full startsida (värdeproposition, kommunväljare, deadlineöversikt, Fable-copy)
-// är §5 punkt 1, del av leveransordning steg 3.
+// Startsida — §5 punkt 1 UPPDRAG_POC.md: värdeproposition, kommunväljare,
+// deadlineöversikt. Kommunväljaren och deadlineöversikten är datadrivna
+// (Code); all löptext kommer från content.ts (Fable).
 import Base from '../layouts/Base.astro';
-import { loadKommuner } from '../lib/kommuner';
+import { loadKommuner, getDeadlineEntries, formatDate, KATEGORI_LABELS } from '../lib/kommuner';
+import { START } from '../lib/content';
 
 const kommuner = loadKommuner();
+const kommandeDeadlines = getDeadlineEntries().filter((e) => !e.isLopande).slice(0, 5);
 ---
-<Base
-  title="Startsida"
-  description="{{FABLE: värdeproposition för Föreningsguiden — se §5 punkt 1 UPPDRAG_POC.md}}"
->
-  <h1>Föreningsguiden</h1>
-  <p class="placeholder-slot">{'{{FABLE: värdeproposition, kommunväljare, deadlineöversikt — §5 punkt 1}}'}</p>
+<Base title={START.metaTitle} description={START.metaDescription}>
+  <h1>{START.h1}</h1>
+  <p>{START.hero}</p>
 
-  <h2>Kommuner (PoC, steg 1)</h2>
-  <ul>
-    {kommuner.map((k) => (
-      <li><a href={`/kommun/${k.kommun_slug}/`}>{k.kommun}</a></li>
-    ))}
-  </ul>
+  <section>
+    <h2>{START.kommunvaljareRubrik}</h2>
+    <ul class="kommun-grid">
+      {kommuner.map((k) => (
+        <li><a href={`/kommun/${k.kommun_slug}/`}>{k.kommun}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Närmast i tid</h2>
+    <p>{START.kalenderPuff}</p>
+    <table class="deadline-table">
+      <thead>
+        <tr><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+      </thead>
+      <tbody>
+        {kommandeDeadlines.map((e) => (
+          <tr>
+            <td>{formatDate(e.dateISO!)}</td>
+            <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+            <td>{e.kommun}</td>
+            <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p><a href="/deadlines/">Se hela deadlinekalendern →</a></p>
+  </section>
 </Base>

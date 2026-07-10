@@ -5,8 +5,10 @@
 import Base from '../../../layouts/Base.astro';
 import BidragCard from '../../../components/BidragCard.astro';
 import StaleWarning from '../../../components/StaleWarning.astro';
+import BreadcrumbList from '../../../components/BreadcrumbList.astro';
 import { loadKommuner, isStale, formatDate, KATEGORI_LABELS, KATEGORIER } from '../../../lib/kommuner';
 import type { Kategori } from '../../../lib/kommuner';
+import { KOMMUN } from '../../../lib/content';
 
 export function getStaticPaths() {
   return loadKommuner().map((kommun) => ({
@@ -20,13 +22,23 @@ const { kommun } = Astro.props;
 const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) =>
   kommun.bidrag.some((b) => b.kategori.includes(k))
 );
+
+const metaTitle = KOMMUN.metaTitleTemplate.replace(/{kommun}/g, kommun.kommun);
+const metaDescription = KOMMUN.metaDescriptionTemplate.replace(/{kommun}/g, kommun.kommun);
+const h1 = KOMMUN.h1Template.replace(/{kommun}/g, kommun.kommun);
+const intro = KOMMUN.introTemplate.replace(/{kommun}/g, kommun.kommun);
+const ansokningstext = KOMMUN.ansokningssystemTemplate
+  .replace(/{kommun}/g, kommun.kommun)
+  .replace(/{system}/g, kommun.ansokningssystem.namn);
 ---
-<Base
-  title={kommun.kommun}
-  description={`{{FABLE: metabeskrivning för ${kommun.kommun} — föreningsbidrag, deadlines, ansökningsvägar}}`}
->
+<Base title={metaTitle} description={metaDescription}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
+  ]} />
+
   <div class="kommun-header">
-    <h1>Föreningsbidrag i {kommun.kommun}</h1>
+    <h1>{h1}</h1>
     <p class="kommun-header__meta">
       {kommun.lan} · {kommun.forvaltning} · Senast verifierad {formatDate(kommun.verifierad)}
     </p>
@@ -34,23 +46,27 @@ const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) =>
 
   {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
 
-  <p class="placeholder-slot">{`{{FABLE: introduktionstext till ${kommun.kommun}s bidragssida}}`}</p>
+  <p>{intro}</p>
 
-  {kategorierMedBidrag.map((kategori) => (
-    <section>
-      <h2>{KATEGORI_LABELS[kategori]}</h2>
-      <ul class="bidrag-list">
-        {kommun.bidrag
-          .filter((b) => b.kategori.includes(kategori))
-          .map((bidrag) => <BidragCard bidrag={bidrag} />)}
-      </ul>
-    </section>
-  ))}
+  {kommun.bidrag.length === 0 ? (
+    <p>{KOMMUN.ingaBidrag}</p>
+  ) : (
+    kategorierMedBidrag.map((kategori) => (
+      <section>
+        <h2><a href={`/kommun/${kommun.kommun_slug}/${kategori}/`}>{KATEGORI_LABELS[kategori]}</a></h2>
+        <ul class="bidrag-list">
+          {kommun.bidrag
+            .filter((b) => b.kategori.includes(kategori))
+            .map((bidrag) => <BidragCard bidrag={bidrag} />)}
+        </ul>
+      </section>
+    ))
+  )}
 
   <section>
-    <h2>Ansökningssystem</h2>
+    <h2>{KOMMUN.ansokningssystemRubrik}</h2>
     <p>
-      {kommun.kommun} tar emot ansökningar via {kommun.ansokningssystem.namn}:{' '}
+      {ansokningstext}{' '}
       <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
     </p>
     <p class="bidrag-card__kalla">

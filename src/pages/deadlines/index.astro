@@ -1,0 +1,111 @@
+---
+// Deadlinekalender — §5 punkt 4 UPPDRAG_POC.md: sajtens unika yta, samtliga
+// deadlines kronologiskt, filtrerbar på kommun/kategori. E-postregistreringen
+// sitter här. Enda sidan som behöver klient-JS (§7: "inga klientberoenden
+// utöver vad kalenderfiltret kräver").
+import Base from '../../layouts/Base.astro';
+import BreadcrumbList from '../../components/BreadcrumbList.astro';
+import EmailSignup from '../../components/EmailSignup.astro';
+import { loadKommuner, getDeadlineEntries, formatDate, KATEGORI_LABELS, KATEGORIER } from '../../lib/kommuner';
+import { KALENDER } from '../../lib/content';
+
+const kommuner = loadKommuner();
+const entries = getDeadlineEntries();
+const lopande = entries.filter((e) => e.isLopande);
+const kommande = entries.filter((e) => !e.isLopande);
+---
+<Base title={KALENDER.metaTitle} description={KALENDER.metaDescription}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: 'Deadlinekalender', url: '/deadlines/' },
+  ]} />
+
+  <h1>{KALENDER.h1}</h1>
+  <p>{KALENDER.intro}</p>
+
+  <div class="deadline-filters">
+    <label for="filter-kommun">
+      Kommun
+      <select id="filter-kommun">
+        <option value="alla">Alla kommuner</option>
+        {kommuner.map((k) => <option value={k.kommun_slug}>{k.kommun}</option>)}
+      </select>
+    </label>
+    <label for="filter-kategori">
+      Kategori
+      <select id="filter-kategori">
+        <option value="alla">Alla kategorier</option>
+        {KATEGORIER.map((k) => <option value={k}>{KATEGORI_LABELS[k]}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <table class="deadline-table" id="deadline-table">
+    <thead>
+      <tr><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+    </thead>
+    <tbody>
+      {kommande.map((e) => (
+        <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
+          <td>{formatDate(e.dateISO!)}</td>
+          <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+          <td>{e.kommun}</td>
+          <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  {lopande.length > 0 && (
+    <>
+      <h2>{KALENDER.lopandeRubrik}</h2>
+      <p>{KALENDER.lopandeText}</p>
+      <table class="deadline-table" id="deadline-table-lopande">
+        <thead>
+          <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+        </thead>
+        <tbody>
+          {lopande.map((e) => (
+            <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
+              <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+              <td>{e.kommun}</td>
+              <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )}
+
+  <p class="deadline-table__empty" id="deadline-empty" hidden>Inga deadlines matchar filtret.</p>
+
+  <EmailSignup />
+</Base>
+
+<script>
+  const kommunSelect = document.getElementById('filter-kommun');
+  const kategoriSelect = document.getElementById('filter-kategori');
+  const emptyMsg = document.getElementById('deadline-empty');
+  const rows = document.querySelectorAll('#deadline-table tbody tr, #deadline-table-lopande tbody tr');
+
+  function applyFilter() {
+    if (!(kommunSelect instanceof HTMLSelectElement) || !(kategoriSelect instanceof HTMLSelectElement)) return;
+    const kommun = kommunSelect.value;
+    const kategori = kategoriSelect.value;
+    let visibleCount = 0;
+
+    rows.forEach((row) => {
+      if (!(row instanceof HTMLElement)) return;
+      const matchKommun = kommun === 'alla' || row.dataset.kommun === kommun;
+      const matchKategori = kategori === 'alla' || (row.dataset.kategori ?? '').split(' ').includes(kategori);
+      const visible = matchKommun && matchKategori;
+      row.hidden = !visible;
+      if (visible) visibleCount++;
+    });
+
+    if (emptyMsg instanceof HTMLElement) emptyMsg.hidden = visibleCount > 0;
+  }
+
+  kommunSelect?.addEventListener('change', applyFilter);
+  kategoriSelect?.addEventListener('change', applyFilter);
+</script>
