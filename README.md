@@ -1,9 +1,11 @@
-# Bidragskollen
+# Föreningsguiden
 
 PoC för en publik, sökmotorindexerad sajt som samlar svenska kommuners
-föreningsbidrag. Se [`UPPDRAG_POC.md`](./UPPDRAG_POC.md) för uppdrag,
-affärshypotes, arbetsdelning och leveransordning — det dokumentet är
-sanningskällan, inte denna README.
+föreningsbidrag. Arbetsnamnet var Bidragskollen — namnet beslutades till
+Föreningsguiden 2026-07-10 (se namnbesluts-noten i UPPDRAG_POC.md §9.1).
+Se [`UPPDRAG_POC.md`](./UPPDRAG_POC.md) för uppdrag, affärshypotes,
+arbetsdelning och leveransordning — det dokumentet är sanningskällan,
+inte denna README.
 
 ## Status
 
