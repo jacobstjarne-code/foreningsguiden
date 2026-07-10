@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Archivo:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E7E8EA; -webkit-font-smoothing: antialiased; }
+  a { color: #256B3B; }
+  a:hover { color: #256B3B; }
+</style>
+</helmet>
+
+<div style="--fg-ink:#17140F; --fg-ink-muted:#4A463F; --fg-surface:#FFFFFF; --fg-surface-sunken:#F4F2EC; --fg-canvas:#E7E8EA; --fg-border:#17140F; --fg-accent:#256B3B; --fg-accent-soft:#E6EFE7; --fg-positive:#256B3B; --fg-positive-soft:#E6EFE7; --fg-attention:#8A5300; --fg-urgent:#A62A22; --fg-verify:#9A3B2F; --fg-font-sans:'Atkinson Hyperlegible',system-ui,sans-serif; --fg-font-display:'Archivo',system-ui,sans-serif; --fg-font-mono:'Space Mono',monospace; font-family: var(--fg-font-sans); color: var(--fg-ink); background: var(--fg-canvas); min-height: 100vh; padding: 48px 40px 96px;">
+
+  <div style="max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px;">
+
+    <!-- Header -->
+    <div style="display: flex; align-items: center; gap: 18px; padding-bottom: 6px;">
+      <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 68px; height: 68px; display: block; object-fit: contain;">
+      <div style="flex: 1;">
+        <div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-ink-muted);">Föreningsguiden · designtokens</div>
+        <h1 style="margin: 4px 0 0; font-family: var(--fg-font-display); font-size: 40px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; color: var(--fg-ink);">Kontraktet mellan Design &amp; Code</h1>
+      </div>
+    </div>
+    <p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.55; color: var(--fg-ink-muted);">Grinden före Codes steg 3. Fabrikstänk: allt är CSS-variabler, komponentnamnen är <strong>domänneutrala</strong>, och per-vertikal theming sker genom att <strong>enbart skriva om accentfärgen</strong>. Riktning: civil klarhet med skav — inte SaaS, inte parchment/koppar. Golv: 16px brödtext, WCAG AA, synligt fokus, inga hover-gömda funktioner, datum i klartext. Filen <code style="font-family: var(--fg-font-mono); font-size: 15px; background: var(--fg-surface-sunken); padding: 1px 6px; border-radius: 4px;">foreningsguiden-tokens.css</code> är den maskinläsbara motsvarigheten.</p>
+
+    <!-- ============ FÄRG ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 4px;">01 · Färg</div>
+      <p style="margin: 0 0 20px; font-size: 16px; color: var(--fg-ink-muted);">Neutraler + semantik delas av alla vertikaler. <strong>Accenten är den enda per-vertikal-variabeln.</strong> Oxblod är reserverad för verifiering.</p>
+
+      <div style="font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--fg-ink-muted); margin: 4px 0 10px;">Neutraler</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px;">
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #17140F;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-ink</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#17140F</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Text + strukturkant</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #4A463F;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-ink-muted</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#4A463F</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Sekundär text</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #FFFFFF;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-surface</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#FFFFFF</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Kort</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #F4F2EC;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-surface-sunken</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#F4F2EC</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Statusremsor</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #E7E8EA;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-canvas</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#E7E8EA</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Appbakgrund</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #17140F;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-border</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#17140F</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Kant (= ink)</div></div></div>
+      </div>
+
+      <div style="font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--fg-ink-muted); margin: 4px 0 10px;">Accent · themable</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px;">
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #256B3B;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-accent</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#256B3B</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Föreningsgrönt</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #E6EFE7;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-accent-soft</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#E6EFE7</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Tint / chips</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #256B3B; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-weight: 700; font-size: 16px;">Aa</span></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-on-accent</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#FFFFFF</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Text på accent</div></div></div>
+      </div>
+
+      <div style="font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--fg-ink-muted); margin: 4px 0 10px;">Semantik + verifiering <span style="font-weight: 400; text-transform: none; letter-spacing: 0;">— alltid med textetikett, aldrig färg ensam</span></div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #256B3B;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-positive</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#256B3B</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">God tid / öppen</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #8A5300;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-attention</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#8A5300</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Snart</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #A62A22;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-urgent</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#A62A22</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Bråttom (ej alarm)</div></div></div>
+        <div style="border: 2px solid var(--fg-border); border-radius: 8px; overflow: hidden;"><div style="height: 66px; background: #9A3B2F;"></div><div style="padding: 9px 12px;"><div style="font-family: var(--fg-font-mono); font-size: 13px; font-weight: 700;">--fg-verify</div><div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">#9A3B2F</div><div style="font-size: 14px; color: var(--fg-ink-muted); margin-top: 2px;">Oxblod · reserverad</div></div></div>
+      </div>
+    </section>
+
+    <!-- ============ TYPOGRAFI ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 4px;">02 · Typografi</div>
+      <p style="margin: 0 0 20px; font-size: 16px; color: var(--fg-ink-muted);">Tre familjer. <strong>Atkinson Hyperlegible</strong> för UI/brödtext (vald för läsbarhet), <strong>Archivo</strong> för ordmärke/rubriker, <strong>Space Mono</strong> för koder, datum-som-data och statusremsor — skavet. Brödtext aldrig under 16px.</p>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: baseline; gap: 20px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 14px;"><span style="font-family: var(--fg-font-display); font-weight: 800; font-size: 40px; letter-spacing: -.02em; line-height: 1; flex: 1;">Föreningsguiden</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-display · 40 · Archivo 800</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 14px;"><span style="font-weight: 700; font-size: 27px; line-height: 1.18; flex: 1;">Driftbidrag för föreningar</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-h1 · 27 · Atkinson 700</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 14px;"><span style="font-weight: 700; font-size: 22px; line-height: 1.2; flex: 1;">Kommande deadlines</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-h2 · 22 · Atkinson 700</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 14px;"><span style="font-size: 18px; line-height: 1.55; flex: 1;">Årligt driftstöd till ideella föreningar med barn- och ungdomsverksamhet.</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-body-lg · 18 · Atkinson 400</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 14px;"><span style="font-size: 16px; line-height: 1.55; flex: 1;">Sekundär brödtext och metadata i lugnare ton.</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-body · 16 · Atkinson 400</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 14px;"><span style="font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; flex: 1;">Gislaved kommun</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-label · 14 · Atkinson 700 versal</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 13px; flex: 1;">DNR KS 2026/00412 · 03·07·2026</span><span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); white-space: nowrap;">--fg-text-mono · 13 · Space Mono 700</span></div>
+      </div>
+    </section>
+
+    <!-- ============ SPACING / FORM ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 18px;">03 · Spacing, radier &amp; kanter</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div>
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--fg-ink-muted); margin-bottom: 12px;">Spacing-skala</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 4px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-1 · 4</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 6px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-2 · 6</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 8px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-3 · 8</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 12px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-4 · 12</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 16px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-5 · 16</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 18px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-6 · 18</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 22px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-7 · 22</span></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="height: 16px; width: 28px; background: var(--fg-accent);"></span><span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-space-8 · 28</span></div>
+          </div>
+          <p style="margin: 14px 0 0; font-size: 15px; color: var(--fg-ink-muted);">Kortpadding <span style="font-family: var(--fg-font-mono); font-size: 13px;">18 × 22</span> · griddar-gap <span style="font-family: var(--fg-font-mono); font-size: 13px;">14–16</span>.</p>
+        </div>
+        <div>
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--fg-ink-muted); margin-bottom: 12px;">Radier &amp; kanter</div>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <div style="text-align: center;"><div style="width: 76px; height: 56px; border: 2.5px solid var(--fg-border); border-radius: 8px;"></div><div style="font-family: var(--fg-font-mono); font-size: 12px; margin-top: 6px;">card · 8</div></div>
+            <div style="text-align: center;"><div style="width: 76px; height: 56px; border: 2px solid var(--fg-border); border-radius: 999px;"></div><div style="font-family: var(--fg-font-mono); font-size: 12px; margin-top: 6px;">pill · 999</div></div>
+            <div style="text-align: center;"><div style="width: 76px; height: 56px; border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px;"></div><div style="font-family: var(--fg-font-mono); font-size: 12px; margin-top: 6px;">accent-bar · 7</div></div>
+          </div>
+          <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 6px; font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">
+            <div>--fg-border-structural · 2.5px</div>
+            <div>--fg-border-inner · 2px (heldragen + streckad ledger)</div>
+            <div>--fg-shadow · none — kanter, inte skuggor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ URGENS ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 4px;">04 · Urgens-modell</div>
+      <p style="margin: 0 0 20px; font-size: 16px; color: var(--fg-ink-muted);">Deadlinelistans logik. Dagar kvar → nivå. Rendera alltid <strong>färg + textetikett + ikon + datum i klartext</strong>. Brådska utan alarmism.</p>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: #A62A22; color: #fff; font-size: 14px; font-weight: 700; border-radius: 999px; padding: 5px 11px 5px 9px; text-transform: uppercase;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>Bråttom</span>
+          <span style="font-size: 16px; color: var(--fg-ink-muted);">≤ 3 dagar kvar</span>
+          <span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); margin-left: auto;">--fg-urgent</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: #fff; color: #8A5300; font-size: 14px; font-weight: 700; border: 2px solid #8A5300; border-radius: 999px; padding: 3px 10px 3px 8px; text-transform: uppercase;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>Snart</span>
+          <span style="font-size: 16px; color: var(--fg-ink-muted);">4–14 dagar kvar</span>
+          <span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); margin-left: auto;">--fg-attention</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: #E6EFE7; color: #256B3B; font-size: 14px; font-weight: 700; border-radius: 999px; padding: 5px 11px 5px 9px; text-transform: uppercase;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>God tid</span>
+          <span style="font-size: 16px; color: var(--fg-ink-muted);">&gt; 14 dagar kvar</span>
+          <span style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); margin-left: auto;">--fg-positive</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TILLSTÅND ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 4px;">05 · Komponent-tillstånd</div>
+      <p style="margin: 0 0 20px; font-size: 16px; color: var(--fg-ink-muted);">Fokus är <strong>alltid synligt</strong> (tangentbord — kritiskt för målgruppen). Hover är subtilt och avslöjar aldrig gömt innehåll. Disabled behåller AA-kontrast — ingen urblekt opacity.</p>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-start;">
+        <div style="text-align: center;"><span style="display: inline-flex; background: #256B3B; color: #fff; font-size: 18px; font-weight: 700; padding: 14px 20px; border-radius: 8px;">Till ansökan</span><div style="font-family: var(--fg-font-mono); font-size: 12px; color: var(--fg-ink-muted); margin-top: 8px;">default</div></div>
+        <div style="text-align: center;"><span style="display: inline-flex; background: #216034; color: #fff; font-size: 18px; font-weight: 700; padding: 14px 20px; border-radius: 8px;">Till ansökan</span><div style="font-family: var(--fg-font-mono); font-size: 12px; color: var(--fg-ink-muted); margin-top: 8px;">hover</div></div>
+        <div style="text-align: center;"><span style="display: inline-flex; background: #256B3B; color: #fff; font-size: 18px; font-weight: 700; padding: 14px 20px; border-radius: 8px; outline: 3px solid #256B3B; outline-offset: 2px;">Till ansökan</span><div style="font-family: var(--fg-font-mono); font-size: 12px; color: var(--fg-ink-muted); margin-top: 8px;">focus-visible</div></div>
+        <div style="text-align: center;"><span style="display: inline-flex; background: #F4F2EC; color: #4A463F; font-size: 18px; font-weight: 700; padding: 14px 20px; border-radius: 8px; border: 2px solid #4A463F;">Till ansökan</span><div style="font-family: var(--fg-font-mono); font-size: 12px; color: var(--fg-ink-muted); margin-top: 8px;">disabled</div></div>
+      </div>
+    </section>
+
+    <!-- ============ KOMPONENTNAMN ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 4px;">06 · Domänneutrala komponentnamn</div>
+      <p style="margin: 0 0 20px; font-size: 16px; color: var(--fg-ink-muted);">Namnen säger aldrig "bidrag" eller "förening" — så stipendievertikalen återanvänder dem oförändrat.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px;">
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">DataCard</span><span style="font-size: 15px; color: var(--fg-ink-muted);">postkort (datakortet)</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">DeadlineRow</span><span style="font-size: 15px; color: var(--fg-ink-muted);">rad i kalendern</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">StatusPill</span><span style="font-size: 15px; color: var(--fg-ink-muted);">öppen / stängd</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">UrgencyChip</span><span style="font-size: 15px; color: var(--fg-ink-muted);">bråttom/snart/god tid</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">CategoryTag</span><span style="font-size: 15px; color: var(--fg-ink-muted);">idrott &amp; ungdom …</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">WatchButton</span><span style="font-size: 15px; color: var(--fg-ink-muted);">bevaka</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">VerificationRow</span><span style="font-size: 15px; color: var(--fg-ink-muted);">digital verifieringsrad</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">VerificationStamp</span><span style="font-size: 15px; color: var(--fg-ink-muted);">granskad-stämpeln</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">AppHeader</span><span style="font-size: 15px; color: var(--fg-ink-muted);">sidhuvud</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">SourceStrip</span><span style="font-size: 15px; color: var(--fg-ink-muted);">mono statusremsa</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">BrandMark</span><span style="font-size: 15px; color: var(--fg-ink-muted);">kompass-märket</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px dashed var(--fg-border); padding-bottom: 8px;"><span style="font-family: var(--fg-font-mono); font-weight: 700; font-size: 15px;">Wordmark</span><span style="font-size: 15px; color: var(--fg-ink-muted);">tvåtonat ordmärke</span></div>
+      </div>
+    </section>
+
+    <!-- ============ THEMING-BEVIS ============ -->
+    <section style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 24px 26px 28px;">
+      <div style="font-family: var(--fg-font-mono); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-ink); margin-bottom: 4px;">07 · Per-vertikal theming</div>
+      <p style="margin: 0 0 20px; font-size: 16px; color: var(--fg-ink-muted);">Samma <span style="font-family: var(--fg-font-mono); font-size: 13px;">DataCard</span>, enda skillnaden är <span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-accent</span> + <span style="font-family: var(--fg-font-mono); font-size: 13px;">--fg-accent-soft</span>. Stipendievertikalen ärver resten gratis.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div style="--fg-accent:#256B3B; --fg-accent-soft:#E6EFE7;">
+          <div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); margin-bottom: 8px;">Föreningsguiden · #256B3B</div>
+          <div style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 16px 18px;">
+            <span style="display: inline-flex; background: var(--fg-accent-soft); color: var(--fg-accent); font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px;">Idrott &amp; ungdom</span>
+            <h3 style="margin: 10px 0 4px; font-size: 21px; font-weight: 700;">Driftbidrag för föreningar</h3>
+            <div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">DNR KS 2026/00412</div>
+            <span style="display: inline-flex; margin-top: 12px; background: var(--fg-accent); color: #fff; font-size: 16px; font-weight: 700; padding: 10px 16px; border-radius: 8px;">Till ansökan</span>
+          </div>
+        </div>
+        <div style="--fg-accent:#1F5C8C; --fg-accent-soft:#E4EDF4;">
+          <div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted); margin-bottom: 8px;">Stipendieguiden (exempel) · #1F5C8C</div>
+          <div style="background: var(--fg-surface); border: 2.5px solid var(--fg-border); border-top: 7px solid var(--fg-accent); border-radius: 8px; padding: 16px 18px;">
+            <span style="display: inline-flex; background: var(--fg-accent-soft); color: var(--fg-accent); font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px;">Studier &amp; forskning</span>
+            <h3 style="margin: 10px 0 4px; font-size: 21px; font-weight: 700;">Resestipendium för studenter</h3>
+            <div style="font-family: var(--fg-font-mono); font-size: 13px; color: var(--fg-ink-muted);">DNR US 2026/01180</div>
+            <span style="display: inline-flex; margin-top: 12px; background: var(--fg-accent); color: #fff; font-size: 16px; font-weight: 700; padding: 10px 16px; border-radius: 8px;">Till ansökan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

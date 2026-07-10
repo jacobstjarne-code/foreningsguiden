@@ -1,25 +1,28 @@
 ---
 // Generisk datakort-komponent — källa+verifiering. Byggd för återbruk i
 // vertikal 2 (stipendier, §7 UPPDRAG_POC.md): den vet bara om fälten i
-// Bidrag-typen, inte om "kommun" som koncept.
+// Bidrag-typen, inte om "kommun" som koncept. `verifierad` kommer från
+// kommunen (bidrag saknar eget verifieringsdatum i schemat).
 import type { Bidrag } from '../lib/kommuner';
 import { KATEGORI_LABELS, formatRecurringDate } from '../lib/kommuner';
+import VerificationStamp from './VerificationStamp.astro';
 
 export interface Props {
   bidrag: Bidrag;
+  verifierad: string;
 }
 
-const { bidrag } = Astro.props;
+const { bidrag, verifierad } = Astro.props;
 
 function formatDeadlines(b: Bidrag): string {
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
 ---
-<li class="bidrag-card">
+<li class="bidrag-card fg-card">
   <h3>{bidrag.namn}</h3>
   <div class="kategori-tags">
-    {bidrag.kategori.map((k) => <span class="kategori-tag">{KATEGORI_LABELS[k]}</span>)}
+    {bidrag.kategori.map((k) => <span class="kategori-tag fg-tag">{KATEGORI_LABELS[k]}</span>)}
   </div>
   <dl>
     <dt>Målgrupp</dt>
@@ -45,8 +48,11 @@ function formatDeadlines(b: Bidrag): string {
     <dt>Sen ansökan</dt>
     <dd>{bidrag.sen_ansokan}</dd>
   </dl>
-  <p class="bidrag-card__kalla">
-    Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
-  </p>
+  <div class="bidrag-card__footer">
+    <p class="bidrag-card__kalla">
+      Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
+    </p>
+    <VerificationStamp verifierad={verifierad} />
+  </div>
   {bidrag.anteckning && <p class="bidrag-card__kalla">{bidrag.anteckning}</p>}
 </li>

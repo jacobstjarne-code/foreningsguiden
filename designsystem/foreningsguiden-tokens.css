@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Föreningsguiden — Designtokens
+   --------------------------------------------------------------------------
+   Kontraktet mellan Design och Code. Grinden före Codes steg 3.
+   Fabrikstänk: allt är CSS-variabler, komponentnamnen är DOMÄNNEUTRALA, och
+   per-vertikal theming sker genom att ENDAST skriva om accentfärgen.
+   En ny vertikal (t.ex. stipendier) ärver hela systemet genom att sätta
+   --fg-accent + --fg-accent-soft på :root — inget annat behöver ändras.
+
+   Riktning: "civil klarhet" med skav (ref: 1177 / Skatteverket / gov.uk).
+   INTE SaaS-estetik. INTE Bandy Managers parchment/koppar.
+   Målgrupp: kassörer 45–75. Golv: 16px brödtext, WCAG AA, synligt fokus,
+   inga hover-gömda funktioner, datum alltid i klartext.
+   ========================================================================== */
+
+:root {
+  /* --- Neutraler (delas av alla vertikaler) --------------------------- */
+  --fg-ink:            #17140F; /* primär text + strukturella kanter        */
+  --fg-ink-muted:      #4A463F; /* sekundär text, metadata                  */
+  --fg-surface:        #FFFFFF; /* kort                                     */
+  --fg-surface-sunken: #F4F2EC; /* statusremsor, sub-band (varm neutral)    */
+  --fg-canvas:         #E7E8EA; /* appbakgrund                              */
+  --fg-border:         #17140F; /* strukturell kant (samma som ink)         */
+
+  /* --- Accent (DEN ENDA per-vertikal-variabeln) ----------------------- */
+  --fg-accent:         #256B3B; /* Föreningsguiden = föreningsgrönt         */
+  --fg-accent-soft:    #E6EFE7; /* tint: chips, ytor, positiv-bakgrund      */
+  --fg-on-accent:      #FFFFFF; /* text/ikon på accentyta                   */
+
+  /* --- Semantiska / status (oberoende av accent) ---------------------- *
+   * REGEL: semantisk färg får ALDRIG stå ensam — alltid text + ikon med.  */
+  --fg-positive:       #256B3B; /* god tid, öppen                           */
+  --fg-positive-soft:  #E6EFE7;
+  --fg-attention:      #8A5300; /* snart (ockra/amber)                      */
+  --fg-urgent:         #A62A22; /* bråttom (tegelröd, ej alarmröd)          */
+
+  /* --- Verifiering (RESERVERAD — bara förtroendemekaniken) ------------ *
+   * Oxblod = granskad-stämpelns bläck. Sprid inte till annan UI.          */
+  --fg-verify:         #9A3B2F;
+
+  /* --- Typografi ------------------------------------------------------ */
+  --fg-font-sans:    'Atkinson Hyperlegible', system-ui, sans-serif; /* UI/brödtext, vald för läsbarhet */
+  --fg-font-display: 'Archivo', system-ui, sans-serif;               /* ordmärke + stora rubriker       */
+  --fg-font-mono:    'Space Mono', monospace;                        /* koder, datum-som-data, statusremsor (skavet) */
+
+  /* Skala (root = 16px). Brödtext får ALDRIG understiga 16px. */
+  --fg-text-display: 2.5rem;    /* 40 — ordmärke / hero              */
+  --fg-text-h1:      1.6875rem; /* 27 — kortrubrik                   */
+  --fg-text-h2:      1.375rem;  /* 22                                */
+  --fg-text-body-lg: 1.125rem;  /* 18 — primär brödtext              */
+  --fg-text-body:    1rem;      /* 16 — sekundär brödtext (golv)     */
+  --fg-text-label:   0.875rem;  /* 14 — sektionsetikett/metadata     */
+  --fg-text-mono:    0.8125rem; /* 13 — koder & datum i mono         */
+
+  --fg-weight-regular: 400;
+  --fg-weight-bold:    700;
+  --fg-weight-display: 800;
+
+  --fg-lh-tight: 1.18; /* rubriker            */
+  --fg-lh-body:  1.55; /* löptext             */
+  --fg-tracking-label: 0.03em; /* versaletiketter */
+
+  /* --- Spacing -------------------------------------------------------- */
+  --fg-space-1: 4px;
+  --fg-space-2: 6px;
+  --fg-space-3: 8px;
+  --fg-space-4: 12px;
+  --fg-space-5: 16px;
+  --fg-space-6: 18px;
+  --fg-space-7: 22px;
+  --fg-space-8: 28px;
+  --fg-card-padding: var(--fg-space-6) var(--fg-space-7); /* 18 × 22 */
+
+  /* --- Form / kanter -------------------------------------------------- */
+  --fg-radius-card:    8px;
+  --fg-radius-control: 8px;
+  --fg-radius-pill:    999px;
+  --fg-border-structural: 2.5px; /* kortkant                          */
+  --fg-border-inner:      2px;   /* avdelare, chip-outline            */
+  --fg-accent-bar:        7px;   /* accent-topplist på kort           */
+
+  /* --- Elevation ------------------------------------------------------ *
+   * Plant. Kanter gör jobbet — inga SaaS-skuggor.                        */
+  --fg-shadow: none;
+
+  /* --- Fokus (obligatoriskt synligt — tangentbord) -------------------- */
+  --fg-focus-width:  3px;
+  --fg-focus-offset: 2px;
+  --fg-focus-color:  var(--fg-accent);
+}
+
+/* ==========================================================================
+   PER-VERTIKAL THEMING
+   Ny vertikal = skriv bara om accenten. Exempel (stipendier, civil blå):
+
+   [data-vertikal="stipendier"] {
+     --fg-accent:      #1F5C8C;
+     --fg-accent-soft: #E4EDF4;
+   }
+
+   Allt annat (neutraler, semantik, typ, spacing, komponenter) ärvs oförändrat.
+   ========================================================================== */
+
+/* ==========================================================================
+   URGENS-MODELL (deadlinelistans logik)
+   Dagar kvar → nivå. Rendera ALLTID nivåns färg + textetikett + ikon +
+   datum i klartext. Färg ensam är aldrig tillräckligt (WCAG).
+     bråttom  (urgent)    : ≤ 3 dagar
+     snart    (attention) : 4–14 dagar
+     god tid  (positive)  : > 14 dagar
+   ========================================================================== */
+
+/* ==========================================================================
+   KOMPONENT-PRIMITIVER (domänneutrala namn + tillståndskontrakt)
+   Ett golv, inte ett ramverk. Namnen är avsiktligt neutrala så andra
+   vertikaler återanvänder dem: DataCard, DeadlineRow, StatusPill,
+   UrgencyChip, CategoryTag, WatchButton, VerificationRow, VerificationStamp,
+   AppHeader, Wordmark, BrandMark, SourceStrip.
+   ========================================================================== */
+
+.fg-card {                       /* DataCard-skalet */
+  background: var(--fg-surface);
+  border: var(--fg-border-structural) solid var(--fg-border);
+  border-top: var(--fg-accent-bar) solid var(--fg-accent);
+  border-radius: var(--fg-radius-card);
+  color: var(--fg-ink);
+  font-family: var(--fg-font-sans);
+}
+
+.fg-btn {                        /* primär knapp */
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-body-lg);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-on-accent);
+  background: var(--fg-accent);
+  border: none;
+  border-radius: var(--fg-radius-control);
+  padding: 14px 20px;
+  cursor: pointer;
+}
+.fg-btn--ghost {                 /* sekundär knapp / väljare */
+  color: var(--fg-ink);
+  background: var(--fg-surface);
+  border: var(--fg-border-inner) solid var(--fg-border);
+}
+
+/* Tillstånd — gäller alla interaktiva element ------------------------- */
+.fg-btn:hover,
+.fg-btn--ghost:hover { filter: brightness(0.96); }         /* subtilt; avslöjar aldrig gömt innehåll */
+.fg-btn:active,
+.fg-btn--ghost:active { transform: translateY(1px); }
+:where(.fg-btn, .fg-btn--ghost, a, button, [tabindex]):focus-visible {
+  outline: var(--fg-focus-width) solid var(--fg-focus-color);
+  outline-offset: var(--fg-focus-offset);                  /* ALLTID synligt fokus */
+}
+.fg-btn:disabled,
+.fg-btn--ghost:disabled {
+  color: var(--fg-ink-muted);
+  background: var(--fg-surface-sunken);
+  border-color: var(--fg-ink-muted);
+  cursor: not-allowed;                                     /* behåller AA-kontrast, ej urblekt opacity */
+}
+
+/* Chips / taggar ------------------------------------------------------ */
+.fg-chip { font-family: var(--fg-font-sans); font-weight: var(--fg-weight-bold);
+  font-size: var(--fg-text-label); border-radius: var(--fg-radius-pill);
+  padding: 5px 11px; display: inline-flex; align-items: center; gap: 6px; }
+.fg-chip--urgent    { background: var(--fg-urgent);       color: #fff; }
+.fg-chip--attention { background: #fff; color: var(--fg-attention); border: var(--fg-border-inner) solid var(--fg-attention); }
+.fg-chip--positive  { background: var(--fg-positive-soft); color: var(--fg-positive); }
+.fg-tag             { background: var(--fg-accent-soft);   color: var(--fg-accent); }
+
+/* Links --------------------------------------------------------------- */
+a { color: var(--fg-accent); }
+a:hover { color: var(--fg-accent); text-decoration: underline; }
+
+/* SourceStrip — mono statusremsa (färskhet = förtroende) -------------- */
+.fg-source-strip {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-mono);
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  color: var(--fg-ink-muted);
+  background: var(--fg-surface-sunken);
+  border-top: var(--fg-border-inner) dashed var(--fg-border);
+  padding: 9px var(--fg-space-7);
+}
