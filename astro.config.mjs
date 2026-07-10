@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 import { loadKommuner } from './src/lib/kommuner.ts';
 
 // lastmod per kommunsida/kategorisida ur `verifierad`-fältet (§5 UPPDRAG_POC.md).
@@ -16,6 +17,7 @@ function lastmodForPath(pathname) {
 export default defineConfig({
   site: 'https://foreningsguiden.se',
   output: 'static',
+  adapter: vercel(),
   integrations: [
     sitemap({
       serialize(item) {
