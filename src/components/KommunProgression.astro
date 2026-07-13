@@ -15,6 +15,16 @@ import {
 import { VAGLEDNING } from '../lib/content';
 import UrgencyChip from './UrgencyChip.astro';
 
+// ⚠️ TILLFÄLLIG DEFAULT — AFFÄRSMODELLENS INGÅNG PEKAR FEL HÅLL ⚠️
+// Station 5:s knapp är sajtens enda betalpunkt-ingång (AFFARSMODELL.md §3,
+// DESIGN_UPPDRAG_2_KOMMERSIELL.md §2.1) men UTKASTGENERATOR_BYGGD är false
+// tills utkastvyn/betalflödet faktiskt finns — så länge den är false
+// länkar knappen till kommunens ansökningssystem (skickar bort exakt de
+// användare vägen ska konvertera). Det är rätt NU (bättre än en död länk),
+// men får inte bli en glömd default: sätt UTKASTGENERATOR_BYGGD = true och
+// byt href till utkastvyn i samma commit som den byggs.
+const UTKASTGENERATOR_BYGGD = false;
+
 export interface Props {
   kommun: Kommun;
   today: string;
@@ -38,6 +48,17 @@ const sortedBidrag = [...bidragMedDeadline].sort((a, b) => {
 
 // Filtervärden: 'alla' + varje kategori som finns representerad.
 const filterValues: string[] = ['alla', ...kategorierMedBidrag];
+
+// Enda stället href för "Skapa ansökan"-knappen bestäms — se
+// UTKASTGENERATOR_BYGGD-varningen ovan. TODO när utkastvyn byggs: byt
+// ut kommun.ansokningssystem.url mot länken till utkastvyn för bidraget.
+function station5Href(bidragId: string): string {
+  if (UTKASTGENERATOR_BYGGD) {
+    // TODO: peka på utkastvyn, t.ex. `/kommun/${kommun.kommun_slug}/utkast/${bidragId}/`
+    return kommun.ansokningssystem.url;
+  }
+  return kommun.ansokningssystem.url;
+}
 
 function bidragForFilter(filter: string) {
   return filter === 'alla' ? sortedBidrag : sortedBidrag.filter((e) => e.bidrag.kategori.includes(filter as Kategori));
@@ -182,7 +203,7 @@ const extra = forutsattningar.slice(1);
         return (
           <div data-filter-value={filter} hidden={filter !== 'alla'}>
             {kandidat && (
-              <a href={kommun.ansokningssystem.url} class="btn-primary progression__goal-cta">
+              <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={UTKASTGENERATOR_BYGGD}>
                 {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
               </a>
             )}
