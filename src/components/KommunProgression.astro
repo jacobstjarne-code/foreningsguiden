@@ -203,9 +203,14 @@ const extra = forutsattningar.slice(1);
         return (
           <div data-filter-value={filter} hidden={filter !== 'alla'}>
             {kandidat && (
-              <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={UTKASTGENERATOR_BYGGD}>
-                {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
-              </a>
+              <>
+                <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={UTKASTGENERATOR_BYGGD}>
+                  {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
+                </a>
+                <a href={`/exempel/${kommun.kommun_slug}/${kandidat.bidrag.id}/`} class="progression__goal-exempel-lank">
+                  Se ett exempel på ett färdigt utkast
+                </a>
+              </>
             )}
           </div>
         );

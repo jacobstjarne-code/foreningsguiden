@@ -52,6 +52,25 @@ Abonnemanget säljer **att slippa hålla reda på det**:
 - **Föreningsminnet** — vi kommer ihåg verksamhetsbeskrivning, medlemsantal, tidigare ansökningar, tonläge, så att utkast nummer två inte kräver att man skriver om allt
 - Utkasten ingår
 
+### 2.3 Giltighetsfällan — abonnemangets konkreta krok
+
+*Tillagd 2026-07-13, efter researchen till station 3 (se FORUTSATTNINGAR.md §3.2). Upptäcktes efter att detta dokument först skrevs — och den gör 495-kronorserbjudandet konkret i stället för abstrakt.*
+
+Godkännandet som bidragsberättigad förening **löper ut**, och kommunerna säger det inte högt:
+
+- **Helsingborg:** giltigt ett år från beslutsdagen, måste sökas om varje år
+- **Enköping:** ett år — **dock som längst en månad efter genomfört årsmöte**
+- **Lund:** görs om var 13:e månad
+- **Umeå och Berg:** uppgifterna måste uppdateras årligen för att statusen ska bestå
+
+En förening som fick bidrag förra året **kan ha förlorat sin behörighet utan att veta om det.** Statusen dog i tysthet efter årsmötet. Och när kassören upptäcker det — två veckor före deadline — gör handläggningstiden att det redan är för sent.
+
+Detta är abonnemangets starkaste enskilda säljargument, och det ska sägas rakt ut: **vi säger till innan er status går ut.** Konkret, ekonomiskt (en förlorad behörighet = ett förlorat bidragsår), och omöjligt att hålla reda på själv. Det är dessutom sant för hela abonnemangets löfte: värdet ligger i att slippa hålla reda på det — inte i volym utkast.
+
+**Konsekvens för paywall-copy (DESIGN_UPPDRAG_2 §3):** giltighetsfällan hör hemma i jämförelsen 149 vs 495, som skälet att välja abonnemanget. Inte som skrämsel — som fakta.
+
+---
+
 Föreningsminnet är inte en bonusfunktion, det är **den starkaste differentiatorn i hela marknaden**. Grantable vinner jämförelser på exakt detta ("organizational memory"): varje grant writer känner igen att man börjar varje ansökan med att klistra in mission, program, historik — igen och igen. Den som slipper det stannar. Och notera vad det betyder strategiskt: det är en vallgrav som **växer med användningen**, och det är samma pipeline-tänk som redan är vår kärnkompetens.
 
 Kassören som byts ut nästa år ärver en föreningsprofil i stället för ett tomt ark. Det är vad som bär 495 kr och det är vad som får dem att förnya.
