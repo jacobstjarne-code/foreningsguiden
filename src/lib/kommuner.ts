@@ -46,7 +46,7 @@ export interface Forutsattning {
   id: string;
   vad: string;
   beskrivning: string;
-  system: string;
+  system: string | null; // null när steget inte sker i ett digitalt system (t.ex. beslut på årsmötet)
   ledtid: number | null; // dagar
   ledtid_text: string | null;
   giltighet: string | null;
@@ -145,7 +145,9 @@ function validateForutsattning(raw: any, kommunSlug: string, index: number, prob
   if (!isNonEmptyString(raw.id)) problems.push(`${where}.id saknas eller är tom`);
   if (!isNonEmptyString(raw.vad)) problems.push(`${where}.vad saknas eller är tom`);
   if (!isNonEmptyString(raw.beskrivning)) problems.push(`${where}.beskrivning saknas eller är tom`);
-  if (!isNonEmptyString(raw.system)) problems.push(`${where}.system saknas eller är tom`);
+  if (raw.system !== null && raw.system !== undefined && !isNonEmptyString(raw.system)) {
+    problems.push(`${where}.system måste vara text eller null (null om steget inte sker i ett digitalt system)`);
+  }
 
   if (raw.ledtid !== null && raw.ledtid !== undefined && typeof raw.ledtid !== 'number') {
     problems.push(`${where}.ledtid måste vara ett heltal (dagar) eller null`);
@@ -159,6 +161,7 @@ function validateForutsattning(raw: any, kommunSlug: string, index: number, prob
   if (typeof raw.ordning !== 'number') problems.push(`${where}.ordning måste vara ett heltal`);
   if (!isNonEmptyString(raw.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
 
+  raw.system = raw.system ?? null;
   raw.ledtid = raw.ledtid ?? null;
   raw.ledtid_text = raw.ledtid_text ?? null;
   raw.giltighet = raw.giltighet ?? null;
