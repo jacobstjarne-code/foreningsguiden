@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Archivo:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E7E8EA; -webkit-font-smoothing: antialiased; }
+  a { color: #256B3B; }
+  a:hover { color: #1f5730; }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#256B3B"/>
+    <circle cx="100" cy="100" r="52" fill="none" stroke="#fff" stroke-width="7"/>
+    <path d="M100 66 L112 100 L100 134 L88 100 Z" fill="#fff"/>
+    <circle cx="100" cy="100" r="6" fill="#256B3B"/>
+  </svg>
+</template>
+
+<section id="turn-5" style="padding: 56px 48px 40px; display: flex; flex-direction: column; gap: 26px; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;">
+
+  <header style="max-width: 880px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7A8085;">Designuppdrag 3 · progressionen · §6 · prioritet ett</div>
+    <h1 style="margin: 8px 0 12px; font-family: 'Archivo', sans-serif; font-size: 32px; line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: #1B1E20;">Kommunsidan som väg, inte katalog</h1>
+    <p style="margin: 0 0 10px; font-size: 17px; line-height: 1.55; color: #4A5054; max-width: 70ch;">Samma data som de tjugo korten — omordnad efter kassörens beslutsföljd i stället för kommunens kategoriindelning. En kontinuerlig ryggrad med fem stationer; den bara linjen mellan dem är vilan. <strong>Rörelsen kommer ur informationens ordning, inte ur CSS.</strong> Station 1 är samma sak som formulärets första fält — vägen och det ungated-flödet är samma tratt. Brödtexten är avsiktligt kort: Fable skriver texten som <em>är</em> strukturen.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #7A8085; max-width: 70ch;"><strong style="color:#4A5054;">Not (eget förslag, ej PL-beslut):</strong> station 3 "Vad måste göras först?" ger jag egen tyngd — förutsättningarna (bli bidragsberättigad, InterbookGo/Rbok) syns inte alls idag och är ofta viktigare än deadlinen.</p>
+  </header>
+
+  <div id="5a" style="--surface:#ffffff; --sunken:#f4f2ec; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --accent-soft:#e6efe7; --attention:#8a5300; --attention-soft:#f5ecd9; --urgent:#a62a22; --mono:'Space Mono',monospace; --sans:'Atkinson Hyperlegible',system-ui,sans-serif; --display:'Archivo',sans-serif; width: 760px; max-width: 100%; display: flex; flex-direction: column; gap: 14px; font-family: var(--sans);">
+
+    <div style="display: flex; align-items: baseline; gap: 12px;">
+      <span style="font-family: var(--mono); font-size: 13px; font-weight: 700; color: #fff; background: var(--accent); padding: 3px 9px;">5a</span>
+      <div style="font-size: 18px; font-weight: 700; color: var(--ink);">Kommunsida · Gislaved · vägen</div>
+    </div>
+
+    <div style="background: var(--surface); border: 2.5px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.10);">
+
+      <!-- page header -->
+      <div style="display: flex; align-items: center; gap: 11px; padding: 13px 26px; border-bottom: 2.5px solid var(--line);">
+        <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 32px; height: 32px; object-fit: contain; flex: none;">
+        <span style="font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+        <span style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--ink);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Gislaved</span>
+      </div>
+
+      <!-- svar-först (GEO §3.1) -->
+      <div style="padding: 22px 26px 6px;">
+        <h2 style="margin: 0 0 10px; font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.16; color: var(--ink);">Föreningsbidrag i Gislaved</h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6; color: var(--ink); max-width: 60ch;">I Gislaved kan föreningar söka fem kommunala bidrag. Sista ansökningsdag varierar mellan 12 juli och 31 augusti 2026. Ansökan görs via kommunens e-tjänst — men för flera bidrag måste föreningen först vara registrerad som bidragsberättigad.</p>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 12px; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .03em; color: var(--muted);"><span style="width: 9px; height: 9px; border-radius: 50%; background: var(--accent);"></span>UPPDATERAD 3 JULI 2026 · KÄLLA: GISLAVEDS KOMMUN</div>
+      </div>
+
+      <!-- ============ THE PATH — continuous rail, 5 stations ============ -->
+      <div style="position: relative; margin: 8px 0 0; padding: 12px 26px 8px;">
+        <div style="position: relative; border-left: 3px solid var(--line); margin-left: 21px; padding-left: 34px; display: flex; flex-direction: column;">
+
+          <!-- STATION 1 — big: the fork -->
+          <div style="position: relative; padding: 20px 0 44px;">
+            <span style="position: absolute; left: -55px; top: 16px; width: 42px; height: 42px; border-radius: 50%; background: var(--accent); border: 3px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 19px; color: #fff;">1</span>
+            <div style="font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent);">Steg 1 · börjar er ansökan</div>
+            <h3 style="margin: 4px 0 4px; font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.14; color: var(--ink);">Vad gäller er?</h3>
+            <p style="margin: 0 0 16px; font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 54ch;">Välj er föreningstyp. Vi visar bara det som gäller er — och börjar samtidigt fylla i ert ansökningsunderlag.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 700; border: 2.5px solid var(--line); border-radius: 10px; padding: 10px 16px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18M3 12h18"/></svg>Idrott</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--muted); font-size: 16px; font-weight: 700; border: 2px solid var(--line); border-radius: 10px; padding: 10px 16px;">Kultur</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--muted); font-size: 16px; font-weight: 700; border: 2px solid var(--line); border-radius: 10px; padding: 10px 16px;">Ungdom</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--muted); font-size: 16px; font-weight: 700; border: 2px solid var(--line); border-radius: 10px; padding: 10px 16px;">Studieförbund</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--muted); font-size: 16px; font-weight: 700; border: 2px solid var(--line); border-radius: 10px; padding: 10px 16px;">Övrig</span>
+            </div>
+            <div style="display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sparat till ert utkast: föreningstyp — idrott</div>
+          </div>
+
+          <!-- STATION 2 — small & sharp: urgent -->
+          <div style="position: relative; padding: 20px 0 44px;">
+            <span style="position: absolute; left: -55px; top: 16px; width: 42px; height: 42px; border-radius: 50%; background: var(--surface); border: 3px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 19px; color: var(--ink);">2</span>
+            <div style="font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);">Steg 2</div>
+            <h3 style="margin: 4px 0 12px; font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1.18; color: var(--ink);">Vad är brådskande?</h3>
+            <div style="display: flex; align-items: center; gap: 14px; background: var(--surface); border: 2.5px solid var(--line); border-left: 7px solid var(--urgent); border-radius: 10px; padding: 14px 18px;">
+              <span style="flex: none; display: inline-flex; align-items: center; gap: 6px; background: var(--urgent); color: #fff; font-size: 14px; font-weight: 700; border-radius: 999px; padding: 5px 11px 5px 9px; text-transform: uppercase;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>Bråttom</span>
+              <div style="flex: 1;"><div style="font-size: 17px; font-weight: 700; color: var(--ink);">Ledarutbildningsbidrag</div><div style="font-family: var(--mono); font-size: 13px; color: var(--muted);">söndag 12 juli · om 2 dagar</div></div>
+              <a href="#5a" style="flex: none; font-size: 15px; font-weight: 700; color: var(--accent);">Öppna →</a>
+            </div>
+          </div>
+
+          <!-- STATION 3 — medium, distinct tone: prerequisites (the revelation) -->
+          <div style="position: relative; padding: 20px 0 44px;">
+            <span style="position: absolute; left: -55px; top: 16px; width: 42px; height: 42px; border-radius: 50%; background: var(--attention); border: 3px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 19px; color: #fff;">3</span>
+            <div style="font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--attention);">Steg 3 · gör detta först</div>
+            <h3 style="margin: 4px 0 4px; font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1.18; color: var(--ink);">Vad måste göras först?</h3>
+            <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 54ch;">Två saker avgör om ni ens kan söka — oavsett deadline. Den ena måste vara på plats i förväg, den andra kan tyst ha gått ut. Börja här.</p>
+            <div style="background: var(--attention-soft); border: 2px solid var(--line); border-radius: 10px; overflow: hidden;">
+              <!-- Stycke 1: förkravet -->
+              <div style="display: flex; align-items: flex-start; gap: 13px; padding: 16px 18px; border-bottom: 2px solid var(--line);">
+                <span style="flex: none; width: 34px; height: 34px; border-radius: 8px; background: var(--surface); border: 2px solid var(--line); display: inline-flex; align-items: center; justify-content: center; color: var(--attention);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+                <div style="flex: 1;">
+                  <div style="font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--attention); margin-bottom: 2px;">Förkrav</div>
+                  <div style="font-size: 17px; font-weight: 700; color: var(--ink);">Föreningen måste vara registrerad som bidragsberättigad</div>
+                  <div style="font-size: 15px; line-height: 1.55; color: var(--muted); margin-top: 3px;">Krävs för flera av bidragen. Utan registreringen avslås ansökan oavsett innehåll. Kommunen publicerar ingen handläggningstid — så ansök i god tid, inte nära deadline.</div>
+                </div>
+              </div>
+              <!-- Stycke 2: giltighetsfällan -->
+              <div style="display: flex; align-items: flex-start; gap: 13px; padding: 16px 18px;">
+                <span style="flex: none; width: 34px; height: 34px; border-radius: 8px; background: var(--surface); border: 2px solid var(--line); display: inline-flex; align-items: center; justify-content: center; color: var(--attention);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></span>
+                <div style="flex: 1;">
+                  <div style="font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--attention); margin-bottom: 2px;">Giltighetsfälla</div>
+                  <div style="font-size: 17px; font-weight: 700; color: var(--ink);">Registreringen kan ha gått ut utan att ni märkt det</div>
+                  <div style="font-size: 15px; line-height: 1.55; color: var(--muted); margin-top: 3px;">Behörigheten är inte för evigt — den kan behöva förnyas eller falla bort vid ändrade uppgifter. Många upptäcker det först vid avslag. Kontrollera att er registrering fortfarande gäller innan ni räknar med den.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STATION 4 — the navigable list (tallest content) -->
+          <div style="position: relative; padding: 20px 0 44px;">
+            <span style="position: absolute; left: -55px; top: 16px; width: 42px; height: 42px; border-radius: 50%; background: var(--surface); border: 3px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 19px; color: var(--ink);">4</span>
+            <div style="font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);">Steg 4</div>
+            <h3 style="margin: 4px 0 4px; font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1.18; color: var(--ink);">Vad kan ni söka nu?</h3>
+            <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 54ch;">Fyra bidrag passar en idrottsförening i Gislaved. Ordnade efter vad som är mest angeläget för er — inte alfabetiskt.</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <a href="#5a" style="display: flex; align-items: center; gap: 14px; background: var(--surface); border: 2px solid var(--line); border-radius: 10px; padding: 14px 18px; text-decoration: none;">
+                <div style="flex: 1;"><div style="font-size: 17px; font-weight: 700; color: var(--ink);">Driftbidrag</div><div style="font-family: var(--mono); font-size: 13px; color: var(--muted);">upp till 40 000 kr · sista dag 31 augusti</div></div>
+                <span style="flex: none; display: inline-flex; align-items: center; gap: 6px; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 700; border-radius: 999px; padding: 4px 11px; text-transform: uppercase;">God tid</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+              <a href="#5a" style="display: flex; align-items: center; gap: 14px; background: var(--surface); border: 2px solid var(--line); border-radius: 10px; padding: 14px 18px; text-decoration: none;">
+                <div style="flex: 1;"><div style="font-size: 17px; font-weight: 700; color: var(--ink);">Anläggningsbidrag</div><div style="font-family: var(--mono); font-size: 13px; color: var(--muted);">upp till 75 000 kr · sista dag 15 juli</div></div>
+                <span style="flex: none; display: inline-flex; align-items: center; gap: 6px; background: #fff; color: var(--attention); font-size: 13px; font-weight: 700; border: 2px solid var(--attention); border-radius: 999px; padding: 3px 10px; text-transform: uppercase;">Snart</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+              <a href="#5a" style="display: flex; align-items: center; gap: 14px; background: var(--surface); border: 2px solid var(--line); border-radius: 10px; padding: 14px 18px; text-decoration: none;">
+                <div style="flex: 1;"><div style="font-size: 17px; font-weight: 700; color: var(--ink);">Lokalt aktivitetsstöd (LOK)</div><div style="font-family: var(--mono); font-size: 13px; color: var(--muted);">per aktivitetstillfälle · sista dag 25 augusti</div></div>
+                <span style="flex: none; display: inline-flex; align-items: center; gap: 6px; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 700; border-radius: 999px; padding: 4px 11px; text-transform: uppercase;">God tid</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+              <div style="display: flex; align-items: center; gap: 10px; padding: 4px 4px 0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
+                <span style="font-size: 15px; color: var(--muted);">Ett bidrag gäller inte er föreningstyp och har dolts. <a href="#5a" style="font-weight: 700; color: var(--accent);">Visa ändå</a></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STATION 5 — destination: accent-filled goal -->
+          <div style="position: relative; padding: 20px 0 20px;">
+            <span style="position: absolute; left: -57px; top: 16px; width: 46px; height: 46px; border-radius: 50%; background: var(--ink); border: 3px solid var(--line); display: inline-flex; align-items: center; justify-content: center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+            <div style="background: var(--accent); border: 2.5px solid var(--line); border-radius: 12px; padding: 22px 24px; color: #fff;">
+              <div style="font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.85);">Steg 5 · vägens slut</div>
+              <h3 style="margin: 4px 0 6px; font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.16;">Vad ska ni skriva?</h3>
+              <p style="margin: 0 0 16px; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,.92); max-width: 52ch;">Underlaget är redan påbörjat — föreningstyp, kommun och valt bidrag är ifyllda från vägen hit. Vi skriver utkastet mot Gislaveds kriterier. Ni läser igenom och skickar in.</p>
+              <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 14px;">
+                <a href="#3a" style="display: inline-flex; align-items: center; gap: 9px; background: #fff; color: var(--accent); font-size: 17px; font-weight: 700; padding: 13px 20px; border-radius: 8px; text-decoration: none;">Skapa ansökan för Driftbidrag<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+                <span style="font-family: var(--mono); font-size: 13px; font-weight: 700; color: rgba(255,255,255,.85);">3 av 5 fält redan ifyllda</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 14px; line-height: 1.55; color: #17140f; background: #efefec; border-radius: 8px; padding: 13px 15px;"><strong>Läsordningen är strukturen.</strong> Gaffel (stor) → brådskande (liten, skarp) → förutsättningar (egen ton, uppenbarelsen) → sökbara bidrag (navigerbar lista, ej likvärdiga kort) → utkastet (målet). Ryggraden är kontinuerlig; mellanrummen är vilan. Station 1 = formulärets första fält, så vägen och ungated-flödet är samma tratt — "Skapa ansökan" bor i slutet (§8-fråga 2 besvarad). Ingen scroll-animation: rörelsen ligger i ordningen.</div>
+  </div>
+</section>
+
+<section id="turn-4" style="padding: 56px 48px 40px; display: flex; flex-direction: column; gap: 26px; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;">
+
+  <header style="max-width: 880px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7A8085;">Designuppdrag 2 · exempelutkast · "vad får jag för 149 kr?"</div>
+    <h1 style="margin: 8px 0 12px; font-family: 'Archivo', sans-serif; font-size: 32px; line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: #1B1E20;">Ett färdigt exempel att läsa före köp</h1>
+    <p style="margin: 0 0 10px; font-size: 17px; line-height: 1.55; color: #4A5054;">Väggen visar en tonad version av <em>hennes egen</em> text — men den svarar inte på <em>"är det bra nog?"</em>. Det gör detta: ett <strong>komplett, läsbart utkast från en annan förening</strong> i samma kategori, tydligt märkt som exempel. Hon ser format, längd, ton och att varje krav besvaras — innan hon betalar. Ärligt (det ger inte bort hennes gratisarbete) och helt inom §5. Nås via länken <em>"Se ett exempel på ett färdigt utkast"</em> på väggen (<a href="#3a">3a</a>).</p>
+  </header>
+
+  <div id="4a" style="--surface:#ffffff; --sunken:#f4f2ec; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --mono:'Space Mono',monospace; width: 640px; max-width: 100%; display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px;">
+      <span style="font-family: var(--mono); font-size: 13px; font-weight: 700; color: #fff; background: var(--accent); padding: 3px 9px;">4a</span>
+      <div style="font-size: 18px; font-weight: 700; color: var(--ink);">Exempelutkast · Driftbidrag (idrott)</div>
+    </div>
+
+    <div style="background: var(--surface); border: 2.5px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.10);">
+      <!-- header -->
+      <div style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-bottom: 2px solid var(--line);">
+        <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 30px; height: 30px; object-fit: contain; flex: none;">
+        <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+        <span style="margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted);">EXEMPEL</span>
+      </div>
+      <!-- exempel-banner (neutral ink, INTE oxblod — får ej förväxlas med granskad-stämpeln) -->
+      <div style="display: flex; align-items: center; gap: 9px; padding: 10px 20px; background: var(--ink); color: #fff;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+        <span style="font-size: 14px; line-height: 1.4;"><strong>Exempel.</strong> En annan förenings färdiga utkast — visas i sin helhet så ni ser vad ni får. Ert skrivs mot er egen förening.</span>
+      </div>
+
+      <!-- document -->
+      <div style="padding: 22px 26px 8px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--muted);">Gislaved kommun · Driftbidrag · exempelförening</div>
+        <h2 style="margin: 6px 0 2px; font-family: 'Archivo', sans-serif; font-size: 27px; line-height: 1.14; font-weight: 800; color: var(--ink);">Utkast till ansökan om driftbidrag 2026</h2>
+        <div style="font-size: 15px; color: var(--muted);">Smålandsstenars GoIF</div>
+      </div>
+
+      <div style="padding: 8px 26px 4px;">
+        <h3 style="margin: 16px 0 6px; font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 800; color: var(--ink);">1. Om föreningen</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.62; color: var(--ink);">Smålandsstenars GoIF bildades 1932 och bedriver idag fotboll och friidrott för 186 medlemmar, varav 121 är under 20 år. Föreningen har sitt säte i Gislaveds kommun och är sedan lång tid godkänd som bidragsberättigad förening. Verksamheten bärs av ideella ledare och drivs på föreningens egen anläggning vid Nissastigen.</p>
+
+        <h3 style="margin: 18px 0 6px; font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 800; color: var(--ink);">2. Verksamheten under året</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.62; color: var(--ink);">Under 2026 driver föreningen tolv aktiva lag samt en öppen friidrottsskola på sommarlovet. Två nya lag startas i åldersgruppen 8–10 år för att möta ökad efterfrågan, och verksamheten hålls avgiftsfri under introduktionsterminen för att sänka trösklarna för nya familjer.</p>
+
+        <h3 style="margin: 18px 0 6px; font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 800; color: var(--ink);">3. Vad bidraget söks för</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.62; color: var(--ink);">Driftbidraget söks för att täcka löpande kostnader för anläggningen: el, uppvärmning, planunderhåll, belysning och försäkringar. Dessa kostnader är en förutsättning för att kunna hålla verksamheten igång året runt och för att anläggningen ska kunna nyttjas även av skolan och andra föreningar i orten.</p>
+
+        <h3 style="margin: 18px 0 6px; font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 800; color: var(--ink);">4. Hur föreningen uppfyller kommunens krav</h3>
+        <ul style="margin: 0; padding-left: 20px; font-size: 17px; line-height: 1.6; color: var(--ink);">
+          <li>Vald styrelse och av årsmötet antagna stadgar finns och bifogas.</li>
+          <li>Föreningen är ansluten till Svenska Fotbollförbundet och Svenska Friidrottsförbundet.</li>
+          <li>Organisationsnummer och bankgiro i föreningens namn redovisas nedan.</li>
+          <li>Barn- och ungdomsverksamheten utgör merparten av föreningens aktiviteter.</li>
+        </ul>
+
+        <h3 style="margin: 18px 0 6px; font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 800; color: var(--ink);">5. Budget och sökt belopp</h3>
+        <div style="border: 2px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 16px;">
+          <div style="display: flex; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--line);"><span style="color: var(--muted);">El &amp; uppvärmning</span><span style="font-family: var(--mono); font-weight: 700;">21 000 kr</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--line);"><span style="color: var(--muted);">Planunderhåll &amp; belysning</span><span style="font-family: var(--mono); font-weight: 700;">12 500 kr</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 9px 14px; border-bottom: 2px solid var(--line);"><span style="color: var(--muted);">Försäkringar</span><span style="font-family: var(--mono); font-weight: 700;">6 500 kr</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 14px; background: var(--sunken);"><span style="font-weight: 700; color: var(--ink);">Sökt belopp</span><span style="font-family: var(--mono); font-weight: 700; color: var(--ink);">40 000 kr</span></div>
+        </div>
+        <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.62; color: var(--ink);">Föreningen ansöker om driftbidrag med 40 000 kronor för verksamhetsåret 2026 och intygar att uppgifterna i ansökan är korrekta.</p>
+      </div>
+
+      <!-- footer note -->
+      <div style="margin: 18px 26px 0; border-top: 2px dashed var(--line);"></div>
+      <div style="padding: 16px 26px 22px; display: flex; flex-direction: column; gap: 12px;">
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted);"><strong style="color: var(--ink);">Så här ser ett färdigt utkast ut.</strong> Ert skrivs mot er egen förenings uppgifter och Gislaveds kriterier — inte den här exempelföreningens. Vi skriver utkastet; ni skickar in det själva, och beslutet fattar kommunen.</p>
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+          <a href="#3a" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 17px; font-weight: 700; padding: 13px 20px; border-radius: 8px; text-decoration: none;">Skapa ert eget utkast — 149 kr</a>
+          <a href="#3a" style="font-size: 15px; font-weight: 700; color: var(--accent);">← Tillbaka till bidraget</a>
+        </div>
+      </div>
+    </div>
+    <div style="font-size: 14px; line-height: 1.5; color: #17140f; background: #efefec; border-radius: 8px; padding: 12px 14px;"><strong>Not:</strong> exemplet märks neutralt (mörk banner, ordet EXEMPEL) — aldrig med oxblod eller granskad-stämpeln, som är reserverade för verifieringsmekaniken. Det får inte kunna förväxlas med en verifierad källa.</div>
+  </div>
+</section>
+
+<section id="turn-3" style="padding: 56px 48px 40px; display: flex; flex-direction: column; gap: 26px; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;">
+
+  <header style="max-width: 880px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7A8085;">Designuppdrag 2 · tre intensiteter · hela skärmen</div>
+    <h1 style="margin: 8px 0 12px; font-family: 'Archivo', sans-serif; font-size: 32px; line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: #1B1E20;">Enligt brief — och två grader av acceleration</h1>
+    <p style="margin: 0 0 12px; font-size: 17px; line-height: 1.55; color: #4A5054;">Samma utkastvy tre gånger. Först <strong>enligt brief</strong> (golvet), sedan säljtrycket uppskruvat ett steg och två steg. <strong>Enda variabeln är väggens kommersiella intensitet</strong> — dokumentet, det skarpa första stycket och den tonade fortsättningen hålls identiska, så att jämförelsen isolerar exakt det vi kalibrerar. Referera med <a href="#3a">3a</a> / <a href="#3b">3b</a> / <a href="#3c">3c</a>.</p>
+    <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; line-height: 1.5; color: #4A5054;">
+      <div style="flex: 1; min-width: 210px; border-left: 4px solid #17140f; padding-left: 12px;"><strong style="color:#17140f;">3a · Enligt brief.</strong> Priset står, vad man får står, vad man inte får står. Ingen intensifierare.</div>
+      <div style="flex: 1; min-width: 210px; border-left: 4px solid #256b3b; padding-left: 12px;"><strong style="color:#256b3b;">3b · Måttlig (inom §5).</strong> Ärliga intensifierare — kostnadsram, månadsankring, lokal social proof.</div>
+      <div style="flex: 1; min-width: 210px; border-left: 4px solid #a62a22; padding-left: 12px;"><strong style="color:#a62a22;">3c · Kraftig (bryter §5).</strong> Nedräkning, falsk knapphet, förvald uppsäljning. Medvetet över linjen.</div>
+    </div>
+    <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.5; color: #7A8085;">Rekommendation: <strong>golvet (3a) med de ärliga bitarna ur 3b</strong>. Säljton sänker AI-citering ~26 % (§5) och dark patterns bränner förtroendet — tonen ÄR strategin.</p>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+
+    <!-- ============================ 3a — ENLIGT BRIEF ============================ -->
+    <div id="3a" style="width: 430px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #fff; background: #17140f; padding: 3px 9px;">3a</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #17140f;">Enligt brief · golvet</div>
+          <div style="font-size: 14px; color: #4a463f;">Nyktert. Ingen intensifierare.</div>
+        </div>
+      </div>
+
+      <div style="--surface:#ffffff; --sunken:#f4f2ec; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --mono:'Space Mono',monospace; width: 430px; background: var(--surface); border: 2.5px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.10);">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 2px solid var(--line);">
+          <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 30px; height: 30px; object-fit: contain; flex: none;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+          <span style="margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted);">UTKAST</span>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--muted);">Gislaved kommun · Driftbidrag</div>
+          <h2 style="margin: 6px 0 2px; font-family: 'Archivo', sans-serif; font-size: 25px; line-height: 1.15; font-weight: 800; color: var(--ink);">Utkast till ansökan</h2>
+          <div style="font-size: 15px; color: var(--muted);">för Reftele IF</div>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Reftele IF ansöker härmed om driftbidrag för verksamhetsåret 2026. Föreningen bedriver barn- och ungdomsverksamhet inom fotboll och innebandy med 214 medlemmar, varav 138 är under 20 år. Verksamheten vilar på ideellt engagemang och en anläggning som föreningen sköter på uppdrag av kommunen.</p>
+          <div style="position: relative; height: 118px; overflow: hidden;">
+            <div style="filter: blur(3px); opacity: .5; user-select: none; pointer-events: none;">
+              <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Under verksamhetsåret planerar föreningen att utöka ungdomsverksamheten med två nya lag i åldersgruppen 8–10 år samt att arrangera en sommarcup öppen för hela bygden. Driftbidraget söks för att täcka löpande kostnader för anläggningen: el, uppvärmning, planunderhåll och försäkringar.</p>
+            </div>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 78%, #fff 100%);"></div>
+          </div>
+        </div>
+        <div style="padding: 0 20px 22px;">
+          <div style="background: var(--sunken); border: 2px solid var(--line); border-radius: 10px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Resten av utkastet · 6 stycken kvar
+            </div>
+            <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 21px; line-height: 1.2; font-weight: 800; color: var(--ink);">Er ansökan är färdig att skickas in</h3>
+            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.5; color: var(--muted);">Hela utkastet är skrivet mot Gislaveds kriterier, med Reftele IF:s uppgifter. Lås upp, läs igenom och skicka in.</p>
+            <a href="#3a" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none;">Lås upp hela utkastet — 149 kr</a>
+            <div style="text-align: center; margin-top: 10px;"><a href="#3a" style="font-size: 15px; font-weight: 700; color: var(--muted); text-decoration: underline;">Ingår i abonnemang · 495 kr/år</a></div>
+            <div style="text-align: center; margin-top: 12px; padding-top: 12px; border-top: 2px dashed var(--line);"><a href="#4a" style="display: inline-flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 700; color: var(--accent);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Se ett exempel på ett färdigt utkast →</a></div>
+          </div>
+          <p style="margin: 14px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Vi skriver utkastet. Ni skickar in det själva, och beslutet fattar kommunen.</p>
+          <div style="margin-top: 12px; text-align: center;"><a href="#3a" style="font-size: 15px; font-weight: 700; color: var(--accent);">← Tillbaka till bidraget (gratis)</a></div>
+        </div>
+      </div>
+      <div style="font-size: 14px; line-height: 1.5; color: #17140f; background: #efefec; border-radius: 8px; padding: 12px 14px;"><strong>Golvet.</strong> Priset står, vad man får står, vad man inte får står. Escape hatch tillbaka till det gratis. Ingen social proof, ingen kostnadsram, inget ankarpris — allt det tillförs medvetet först i 3b.</div>
+    </div>
+
+    <!-- ============================ 3b — MÅTTLIG (inom §5) ============================ -->
+    <div id="3b" style="width: 430px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #fff; background: #256b3b; padding: 3px 9px;">3b</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #17140f;">Accelererad · måttlig</div>
+          <div style="font-size: 14px; color: #256b3b; font-weight: 700;">Ärliga intensifierare · inom §5</div>
+        </div>
+      </div>
+
+      <div style="--surface:#ffffff; --sunken:#f4f2ec; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --soon:#8a5300; --mono:'Space Mono',monospace; width: 430px; background: var(--surface); border: 2.5px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.10);">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 2px solid var(--line);">
+          <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 30px; height: 30px; object-fit: contain; flex: none;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+          <span style="margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted);">UTKAST</span>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--muted);">Gislaved kommun · Driftbidrag</div>
+          <h2 style="margin: 6px 0 2px; font-family: 'Archivo', sans-serif; font-size: 25px; line-height: 1.15; font-weight: 800; color: var(--ink);">Utkast till ansökan</h2>
+          <div style="font-size: 15px; color: var(--muted);">för Reftele IF</div>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Reftele IF ansöker härmed om driftbidrag för verksamhetsåret 2026. Föreningen bedriver barn- och ungdomsverksamhet inom fotboll och innebandy med 214 medlemmar, varav 138 är under 20 år. Verksamheten vilar på ideellt engagemang och en anläggning som föreningen sköter på uppdrag av kommunen.</p>
+          <div style="position: relative; height: 118px; overflow: hidden;">
+            <div style="filter: blur(3px); opacity: .5; user-select: none; pointer-events: none;">
+              <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Under verksamhetsåret planerar föreningen att utöka ungdomsverksamheten med två nya lag i åldersgruppen 8–10 år samt att arrangera en sommarcup öppen för hela bygden. Driftbidraget söks för att täcka löpande kostnader för anläggningen: el, uppvärmning, planunderhåll och försäkringar.</p>
+            </div>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 78%, #fff 100%);"></div>
+          </div>
+        </div>
+        <div style="padding: 0 20px 22px;">
+          <div style="background: var(--sunken); border: 2px solid var(--line); border-radius: 10px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Resten av utkastet · 6 stycken kvar
+            </div>
+            <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 21px; line-height: 1.2; font-weight: 800; color: var(--ink);">Er ansökan är färdig att skickas in</h3>
+            <p style="margin: 0 0 14px; font-size: 16px; line-height: 1.5; color: var(--muted);">Hela utkastet är skrivet mot Gislaveds kriterier, med Reftele IF:s uppgifter.</p>
+            <div style="display: flex; align-items: flex-start; gap: 8px; background: #fff; border: 1.5px solid var(--line); border-radius: 8px; padding: 11px 13px; margin-bottom: 14px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--soon)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+              <span style="font-size: 15px; line-height: 1.45; color: var(--ink);">En missad deadline kostar hela driftbidraget — upp till <strong>40 000 kr</strong>.</span>
+            </div>
+            <a href="#3b" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none;">Lås upp hela utkastet — 149 kr</a>
+            <div style="text-align: center; margin-top: 10px;"><a href="#3b" style="font-size: 15px; font-weight: 700; color: var(--muted); text-decoration: underline;">Ingår i abonnemang · 41 kr/mån (495 kr/år)</a></div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 2px dashed var(--line); font-size: 14px; font-weight: 700; color: var(--muted);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              34 föreningar i Gislaved bevakar det här bidraget
+            </div>
+          </div>
+          <p style="margin: 14px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Vi skriver utkastet. Ni skickar in det själva, och beslutet fattar kommunen.</p>
+          <div style="margin-top: 12px; text-align: center;"><a href="#3b" style="font-size: 15px; font-weight: 700; color: var(--accent);">← Tillbaka till bidraget (gratis)</a></div>
+        </div>
+      </div>
+      <div style="font-size: 14px; line-height: 1.5; color: #256b3b; background: #e6efe7; border-radius: 8px; padding: 12px 14px;"><strong>Taket vi bör hålla.</strong> Kostnadsram (40 000 kr), månadsankring (41 kr/mån bredvid 495/år — +30 % årsval enl. belägg), lokal social proof. Allt sant och verifierbart. Ingen nedräkning, inget förvalt, ingen falsk rabatt.</div>
+    </div>
+
+    <!-- ============================ 3c — KRAFTIG (bryter §5) ============================ -->
+    <div id="3c" style="width: 430px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #fff; background: #a62a22; padding: 3px 9px;">3c</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #17140f;">Accelererad · kraftig</div>
+          <div style="font-size: 14px; color: #a62a22; font-weight: 700;">Bryter §5 · det vi INTE gör</div>
+        </div>
+      </div>
+
+      <div style="--surface:#ffffff; --sunken:#fbecea; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --warn:#a62a22; --mono:'Space Mono',monospace; width: 430px; background: var(--surface); border: 2.5px solid var(--warn); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(166,42,34,.20);">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 2px solid var(--line);">
+          <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 30px; height: 30px; object-fit: contain; flex: none;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+          <span style="margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--warn);">UTKAST</span>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--muted);">Gislaved kommun · Driftbidrag</div>
+          <h2 style="margin: 6px 0 2px; font-family: 'Archivo', sans-serif; font-size: 25px; line-height: 1.15; font-weight: 800; color: var(--ink);">Utkast till ansökan</h2>
+          <div style="font-size: 15px; color: var(--muted);">för Reftele IF</div>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Reftele IF ansöker härmed om driftbidrag för verksamhetsåret 2026. Föreningen bedriver barn- och ungdomsverksamhet inom fotboll och innebandy med 214 medlemmar, varav 138 är under 20 år. Verksamheten vilar på ideellt engagemang och en anläggning som föreningen sköter på uppdrag av kommunen.</p>
+          <div style="position: relative; height: 118px; overflow: hidden;">
+            <div style="filter: blur(3px); opacity: .5; user-select: none; pointer-events: none;">
+              <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Under verksamhetsåret planerar föreningen att utöka ungdomsverksamheten med två nya lag i åldersgruppen 8–10 år samt att arrangera en sommarcup öppen för hela bygden. Driftbidraget söks för att täcka löpande kostnader för anläggningen: el, uppvärmning, planunderhåll och försäkringar.</p>
+            </div>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 78%, #fff 100%);"></div>
+          </div>
+        </div>
+        <div style="padding: 0 20px 22px;">
+          <div style="background: var(--sunken); border: 2px solid var(--warn); border-radius: 10px; padding: 20px; position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--warn); color: #fff; margin: -20px -20px 14px; padding: 9px 16px; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .03em;">
+              <span>⏳ ANSÖKAN STÄNGER OM</span><span style="font-variant-numeric: tabular-nums;">09 : 04 : 12 : 33</span>
+            </div>
+            <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 22px; line-height: 1.15; font-weight: 800; color: var(--warn);">Missa inte 40 000 kr!</h3>
+            <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.45; color: var(--ink);">Din ansökan är klar — men tiden rinner ut. <strong>3 av 5 granskningstider kvar idag.</strong></p>
+            <label style="display: flex; align-items: center; gap: 9px; background: #fff; border: 2px solid var(--warn); border-radius: 8px; padding: 11px 13px; margin-bottom: 12px; cursor: pointer;">
+              <span style="flex: none; width: 20px; height: 20px; border-radius: 4px; background: var(--warn); display: inline-flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span style="font-size: 14px; line-height: 1.4; color: var(--ink);"><strong>Lägg till årsabonnemang (495 kr)</strong> — förvalt, spara mest!</span>
+            </label>
+            <a href="#3c" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--warn); color: #fff; font-size: 17px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none; text-transform: uppercase; letter-spacing: .02em;">Skicka in innan deadline — 644 kr</a>
+            <div style="display: flex; align-items: center; gap: 7px; margin-top: 13px; font-size: 13px; font-weight: 700; color: var(--warn);">
+              <span style="width: 9px; height: 9px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 4px rgba(166,42,34,.18);"></span>
+              🔥 9 andra tittar på det här bidraget just nu
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 14px; line-height: 1.5; color: #a62a22; background: #fbecea; border-radius: 8px; padding: 12px 14px;"><strong>⚠ Bryter §5 — vi gör inte detta.</strong> Nedräkningsklocka, falsk knapphet ("3 tider kvar"), förvald uppsäljning (644 ≠ valt pris), versal-CTA, "9 tittar nu". Exakt det "säljtrams" en 60-årig kassör flyr från — och det sänker AI-citering ~26 %. Ritad för att visa var linjen går.</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="turn-2" style="padding: 56px 48px 40px; display: flex; flex-direction: column; gap: 30px; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;">
+
+  <header style="max-width: 860px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7A8085;">Designuppdrag 2 · eskaleringsstege · kalibrering av säljtryck</div>
+    <h1 style="margin: 8px 0 12px; font-family: 'Archivo', sans-serif; font-size: 32px; line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: #1B1E20;">Hur hårt får det sälja?</h1>
+    <p style="margin: 0 0 10px; font-size: 17px; line-height: 1.55; color: #4A5054;">Två utvalda ytor — <strong>utkast-väggen</strong> och <strong>pris-jämförelsen</strong> — i två eskaleringssteg var. Golvet är leverans <a href="#1a">1a</a>/<a href="#1b">1b</a> nedan (nyktert, precis som briefen). Härifrån skruvar vi upp trycket ett steg i taget så du ser var linjen går.</p>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 15px; line-height: 1.5; color: #4A5054; margin-top: 6px;">
+      <div style="flex: 1; min-width: 240px; border-left: 4px solid #256b3b; padding-left: 12px;"><strong style="color:#256b3b;">Steg 1 — måttlig, inom §5.</strong> Ärliga intensifierare: verklig kostnad för missad deadline, månadsankring, lokal social proof lyft. Inga trick.</div>
+      <div style="flex: 1; min-width: 240px; border-left: 4px solid #a62a22; padding-left: 12px;"><strong style="color:#a62a22;">Steg 2 — kraftig, bryter §5.</strong> Nedräkning, falsk knapphet, förvald uppsäljning, "9 tittar nu". Medvetet över linjen — så du ser vad vi <em>inte</em> gör och varför.</div>
+    </div>
+    <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.5; color: #7A8085;">Min rekommendation står redan: <strong>stanna på golvet, plocka de ärliga bitarna ur Steg 1</strong>. Säljton sänker AI-citering ~26 % (§5) och dark patterns bränner förtroendet — tonen ÄR strategin. Stegen finns för att välja medvetet, inte av okunskap.</p>
+  </header>
+
+  <!-- ===================== VIEW A — UTKAST-VÄGGEN ===================== -->
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #17140f; border-bottom: 2px solid #17140f; padding-bottom: 6px;">Vy A · utkast-väggen</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+
+      <!-- 2a — utkast · steg 1 -->
+      <div id="2a" style="--surface:#ffffff; --sunken:#f4f2ec; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --mono:'Space Mono',monospace; width: 380px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-family: var(--mono); font-size: 12px; font-weight: 700; color: #fff; background: var(--accent); padding: 3px 8px;">2a</span>
+          <span style="font-size: 14px; font-weight: 700; color: var(--accent);">Steg 1 · måttlig · inom §5</span>
+        </div>
+        <div style="background: var(--sunken); border: 2px solid var(--line); border-radius: 10px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Resten av utkastet · 6 stycken kvar
+          </div>
+          <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 21px; line-height: 1.2; font-weight: 800; color: var(--ink);">Er ansökan är färdig att skickas in</h3>
+          <p style="margin: 0 0 14px; font-size: 16px; line-height: 1.5; color: var(--muted);">Hela utkastet är skrivet mot Gislaveds kriterier, med Reftele IF:s uppgifter.</p>
+          <div style="display: flex; align-items: flex-start; gap: 8px; background: #fff; border: 1.5px solid var(--line); border-radius: 8px; padding: 11px 13px; margin-bottom: 14px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--soon,#8a5300)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+            <span style="font-size: 15px; line-height: 1.45; color: var(--ink);">En missad deadline kostar hela driftbidraget — upp till <strong>40 000 kr</strong>.</span>
+          </div>
+          <a href="#2a" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none;">Lås upp hela utkastet — 149 kr</a>
+          <div style="text-align: center; margin-top: 10px;"><a href="#2a" style="font-size: 15px; font-weight: 700; color: var(--muted); text-decoration: underline;">Ingår i abonnemang · 41 kr/mån (495 kr/år)</a></div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 2px dashed var(--line); font-size: 14px; font-weight: 700; color: var(--muted);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            34 föreningar i Gislaved bevakar det här bidraget
+          </div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.5; color: #256b3b;"><strong>Lägger till:</strong> ärlig kostnadsram (40 000 kr), månadsankring (41 kr/mån). Fortfarande sakligt. Detta är taket vi bör hålla.</div>
+      </div>
+
+      <!-- 2b — utkast · steg 2 -->
+      <div id="2b" style="--surface:#ffffff; --sunken:#fbecea; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --warn:#a62a22; --mono:'Space Mono',monospace; width: 380px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-family: var(--mono); font-size: 12px; font-weight: 700; color: #fff; background: var(--warn); padding: 3px 8px;">2b</span>
+          <span style="font-size: 14px; font-weight: 700; color: var(--warn);">Steg 2 · kraftig · bryter §5</span>
+        </div>
+        <div style="background: var(--sunken); border: 2px solid var(--warn); border-radius: 10px; padding: 20px; position: relative;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--warn); color: #fff; margin: -20px -20px 14px; padding: 9px 16px; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .03em;">
+            <span>⏳ ANSÖKAN STÄNGER OM</span><span style="font-variant-numeric: tabular-nums;">09 : 04 : 12 : 33</span>
+          </div>
+          <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 22px; line-height: 1.15; font-weight: 800; color: var(--warn);">Missa inte 40 000 kr!</h3>
+          <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.45; color: var(--ink);">Din ansökan är klar — men tiden rinner ut. <strong>3 av 5 granskningstider kvar idag.</strong></p>
+          <label style="display: flex; align-items: center; gap: 9px; background: #fff; border: 2px solid var(--warn); border-radius: 8px; padding: 11px 13px; margin-bottom: 12px; cursor: pointer;">
+            <span style="flex: none; width: 20px; height: 20px; border-radius: 4px; background: var(--warn); display: inline-flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span style="font-size: 14px; line-height: 1.4; color: var(--ink);"><strong>Lägg till årsabonnemang (495 kr)</strong> — förvalt, spara mest!</span>
+          </label>
+          <a href="#2b" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--warn); color: #fff; font-size: 17px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none; text-transform: uppercase; letter-spacing: .02em;">Skicka in innan deadline — 644 kr</a>
+          <div style="display: flex; align-items: center; gap: 7px; margin-top: 13px; font-size: 13px; font-weight: 700; color: var(--warn);">
+            <span style="width: 9px; height: 9px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 4px rgba(166,42,34,.18);"></span>
+            🔥 9 andra tittar på det här bidraget just nu
+          </div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.5; color: var(--warn);"><strong>⚠ Bryter §5:</strong> nedräkningsklocka, falsk knapphet ("3 tider kvar"), förvald uppsäljning (644 ≠ valt pris), versal-CTA, "9 tittar nu". Exakt "säljtramset" en 60-årig kassör flyr från — och det sänker AI-citering. <strong>Vi gör inte detta.</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== VIEW B — PRIS-JÄMFÖRELSEN ===================== -->
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #17140f; border-bottom: 2px solid #17140f; padding-bottom: 6px;">Vy B · pris-jämförelsen (149 vs 495)</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+
+      <!-- 2c — pris · steg 1 -->
+      <div id="2c" style="--surface:#ffffff; --sunken:#f4f2ec; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --accent-soft:#e6efe7; --mono:'Space Mono',monospace; width: 380px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-family: var(--mono); font-size: 12px; font-weight: 700; color: #fff; background: var(--accent); padding: 3px 8px;">2c</span>
+          <span style="font-size: 14px; font-weight: 700; color: var(--accent);">Steg 1 · måttlig · inom §5</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: var(--surface); border: 2.5px solid var(--line); border-radius: 10px; padding: 16px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: 17px; font-weight: 700; color: var(--ink);">Ett utkast</span>
+              <span style="font-family: 'Archivo', sans-serif; font-size: 22px; font-weight: 800; color: var(--ink);">149 kr</span>
+            </div>
+            <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.45; color: var(--muted);">För det här bidraget. Betala när du behöver det.</p>
+          </div>
+          <div style="background: var(--surface); border: 2.5px solid var(--accent); border-top: 7px solid var(--accent); border-radius: 10px; padding: 16px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: 17px; font-weight: 700; color: var(--ink);">Abonnemang</span>
+              <span style="text-align: right;"><span style="font-family: 'Archivo', sans-serif; font-size: 22px; font-weight: 800; color: var(--ink);">41 kr/mån</span><br><span style="font-family: var(--mono); font-size: 12px; color: var(--muted);">495 kr/år</span></span>
+            </div>
+            <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.45; color: var(--muted);">Deadlinebevakning + föreningsminnet + utkasten ingår.</p>
+          </div>
+          <p style="margin: 2px 2px 0; font-size: 14px; line-height: 1.5; color: var(--muted);">En enda missad deadline kostar mer än ett helt år.</p>
+        </div>
+        <div style="font-size: 14px; line-height: 1.5; color: #256b3b;"><strong>Lägger till:</strong> månadsankring (41 kr/mån bredvid 495 kr/år, +30 % årsval enl. belägg), ärlig ram. Ingen förvald, ingen falsk rabatt. Båda vägarna lika synliga.</div>
+      </div>
+
+      <!-- 2d — pris · steg 2 -->
+      <div id="2d" style="--surface:#ffffff; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --warn:#a62a22; --mono:'Space Mono',monospace; width: 380px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-family: var(--mono); font-size: 12px; font-weight: 700; color: #fff; background: var(--warn); padding: 3px 8px;">2d</span>
+          <span style="font-size: 14px; font-weight: 700; color: var(--warn);">Steg 2 · kraftig · bryter §5</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: #faf6f5; border: 2px solid #d8c9c7; border-radius: 10px; padding: 14px 18px; opacity: .7;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: 16px; font-weight: 700; color: var(--muted);">Ett utkast</span>
+              <span style="font-family: 'Archivo', sans-serif; font-size: 19px; font-weight: 800; color: var(--muted);">149 kr</span>
+            </div>
+            <p style="margin: 5px 0 0; font-size: 14px; color: var(--muted);">Dyrt i längden. De flesta väljer abonnemang →</p>
+          </div>
+          <div style="background: var(--warn); border-radius: 10px; padding: 18px; position: relative; box-shadow: 0 8px 22px rgba(166,42,34,.3);">
+            <span style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #ffd54a; color: #5a3d00; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 4px 12px; border-radius: 999px; white-space: nowrap;">⭐ MEST POPULÄR · BÄST VÄRDE</span>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px;">
+              <span style="font-size: 18px; font-weight: 700; color: #fff;">Abonnemang</span>
+              <span style="text-align: right;"><span style="font-family: var(--mono); font-size: 14px; color: #ffd0cb; text-decoration: line-through;">1 788 kr</span><br><span style="font-family: 'Archivo', sans-serif; font-size: 26px; font-weight: 800; color: #fff;">495 kr</span></span>
+            </div>
+            <div style="display: inline-block; background: #ffd54a; color: #5a3d00; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-top: 8px;">SPARA 72 % — bara idag!</div>
+            <a href="#2d" style="display: flex; align-items: center; justify-content: center; margin-top: 14px; background: #fff; color: var(--warn); font-size: 17px; font-weight: 700; padding: 13px; border-radius: 8px; text-decoration: none; text-transform: uppercase;">Ja, jag vill spara!</a>
+          </div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.5; color: var(--warn);"><strong>⚠ Bryter §5:</strong> falsk ankringsrabatt (1 788 kr fanns aldrig), "bara idag", "72 %", nedtonat engångsköp för att styra valet, versal-CTA. Manipulativ prisframing "får förtroendet att försvinna snabbt". <strong>Vi gör inte detta.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="turn-1" style="padding: 16px 48px 96px; display: flex; flex-direction: column; gap: 32px; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;">
+
+  <header style="max-width: 820px;">
+    <div style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7A8085;">Designuppdrag 2 · den kommersiella ytan · leverans 2</div>
+    <h1 style="margin: 8px 0 12px; font-family: 'Archivo', sans-serif; font-size: 32px; line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: #1B1E20;">Utkastvyn med väggen</h1>
+    <p style="margin: 0 0 10px; font-size: 17px; line-height: 1.55; color: #4A5054;">Produktens viktigaste skärm. Kassören har fyllt i föreningens uppgifter (ungated, inget konto) och ser utkastet skrivas fram mot Gislaveds faktiska kriterier, med sin förening i texten. <strong>Väggen sitter inne i dokumentet</strong> — det första stycket är skarpt och komplett, fortsättningen syns men är tonad. Earned curiosity: hon ser att texten finns, är lång nog, och är bra — innan hon möter priset.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #7A8085;">Två riktningar för <em>var</em> och <em>hur</em> väggen sitter. All copy är platshållare i Fables register (saklig, ingen säljton); jag ritar ytan och flaggar vad den behöver. Referera med <a href="#1a">1a</a> / <a href="#1b">1b</a>.</p>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start;">
+
+    <!-- ============================ 1a — TONAD FORTSÄTTNING ============================ -->
+    <div id="1a" style="width: 430px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #fff; background: #256B3B; padding: 3px 9px;">1a</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #17140f;">Tonad fortsättning</div>
+          <div style="font-size: 14px; color: #4a463f;">Texten fortsätter synligt men suddas ut · väggen vid tonpunkten</div>
+        </div>
+      </div>
+
+      <div style="--surface:#ffffff; --sunken:#f4f2ec; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --accent-soft:#e6efe7; --mono:'Space Mono',monospace; width: 430px; background: var(--surface); border: 2.5px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.10);">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 2px solid var(--line);">
+          <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 30px; height: 30px; object-fit: contain; flex: none;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+          <span style="margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted);">UTKAST</span>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--muted);">Gislaved kommun · Driftbidrag</div>
+          <h2 style="margin: 6px 0 2px; font-family: 'Archivo', sans-serif; font-size: 25px; line-height: 1.15; font-weight: 800; color: var(--ink);">Utkast till ansökan</h2>
+          <div style="font-size: 15px; color: var(--muted);">för Reftele IF</div>
+        </div>
+        <div style="padding: 16px 20px 0; position: relative;">
+          <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Reftele IF ansöker härmed om driftbidrag för verksamhetsåret 2026. Föreningen bedriver barn- och ungdomsverksamhet inom fotboll och innebandy med 214 medlemmar, varav 138 är under 20 år. Verksamheten vilar på ideellt engagemang och en anläggning som föreningen sköter på uppdrag av kommunen.</p>
+          <div style="position: relative; height: 132px; overflow: hidden;">
+            <div style="filter: blur(3px); opacity: .5; user-select: none; pointer-events: none;">
+              <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.62; color: var(--ink);">Under verksamhetsåret planerar föreningen att utöka ungdomsverksamheten med två nya lag i åldersgruppen 8–10 år samt att arrangera en sommarcup öppen för hela bygden. Driftbidraget söks för att täcka löpande kostnader för anläggningen: el, uppvärmning, planunderhåll och försäkringar.</p>
+              <p style="margin: 0; font-size: 17px; line-height: 1.62; color: var(--ink);">Föreningen uppfyller kommunens krav på bidragsberättigad ungdomsverksamhet.</p>
+            </div>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 78%, #fff 100%);"></div>
+          </div>
+        </div>
+        <div style="padding: 0 20px 22px;">
+          <div style="background: var(--sunken); border: 2px solid var(--line); border-radius: 10px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Resten av utkastet · 6 stycken kvar
+            </div>
+            <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 21px; line-height: 1.2; font-weight: 800; color: var(--ink);">Er ansökan är färdig att skickas in</h3>
+            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.5; color: var(--muted);">Hela utkastet är skrivet mot Gislaveds kriterier, med Reftele IF:s uppgifter. Lås upp, läs igenom och skicka in.</p>
+            <a href="#1a" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none;">Lås upp hela utkastet — 149 kr</a>
+            <div style="text-align: center; margin-top: 10px;"><a href="#1a" style="font-size: 15px; font-weight: 700; color: var(--muted); text-decoration: underline;">Ingår i abonnemang · 495 kr/år</a></div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 2px dashed var(--line); font-size: 14px; font-weight: 700; color: var(--muted);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              34 föreningar i Gislaved bevakar det här bidraget
+            </div>
+          </div>
+          <p style="margin: 14px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Vi skriver utkastet. Ni skickar in det själva, och beslutet fattar kommunen.</p>
+          <div style="margin-top: 12px; text-align: center;"><a href="#1a" style="font-size: 15px; font-weight: 700; color: var(--accent);">← Tillbaka till bidraget (gratis)</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ 1b — RIV-AV ============================ -->
+    <div id="1b" style="width: 430px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #fff; background: #256B3B; padding: 3px 9px;">1b</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #17140f;">Riv-av</div>
+          <div style="font-size: 14px; color: #4a463f;">Väggen ÄR perforeringen ur skav-systemet · resten sitter fast tills du river</div>
+        </div>
+      </div>
+
+      <div style="--surface:#ffffff; --sunken:#f4f2ec; --page:#E7E8EA; --ink:#17140f; --muted:#4a463f; --line:#17140f; --accent:#256b3b; --stamp:#9a3b2f; --mono:'Space Mono',monospace; width: 430px; background: var(--surface); border: 2.5px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,.10);">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 2px solid var(--line);">
+          <img src="assets/fg-mark.png" alt="Föreningsguiden" style="width: 30px; height: 30px; object-fit: contain; flex: none;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.01em; color: var(--ink);">Förenings<span style="color: var(--accent);">guiden</span></span>
+          <span style="margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--muted);">UTKAST</span>
+        </div>
+        <div style="padding: 16px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+          <div>
+            <div style="font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--muted);">Gislaved kommun · Driftbidrag</div>
+            <h2 style="margin: 6px 0 2px; font-family: 'Archivo', sans-serif; font-size: 25px; line-height: 1.15; font-weight: 800; color: var(--ink);">Utkast till ansökan</h2>
+            <div style="font-size: 15px; color: var(--muted);">för Reftele IF</div>
+          </div>
+          <span style="flex: none; transform: rotate(-5deg); border: 2.5px double var(--stamp); color: var(--stamp); border-radius: 5px; padding: 4px 8px; font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .06em; opacity: .9; margin-top: 20px;">UTKAST</span>
+        </div>
+        <div style="padding: 16px 20px 0;">
+          <p style="margin: 0 0 8px; font-size: 17px; line-height: 1.62; color: var(--ink);">Reftele IF ansöker härmed om driftbidrag för verksamhetsåret 2026. Föreningen bedriver barn- och ungdomsverksamhet inom fotboll och innebandy med 214 medlemmar, varav 138 är under 20 år. Verksamheten vilar på ideellt engagemang och en anläggning som föreningen sköter på uppdrag av kommunen.</p>
+        </div>
+        <!-- perforation -->
+        <div style="position: relative; height: 0; border-top: 2.5px dashed var(--line); margin: 14px 0;">
+          <span style="position: absolute; top: -11px; left: -12px; width: 20px; height: 20px; border-radius: 50%; background: var(--page);"></span>
+          <span style="position: absolute; top: -11px; right: -12px; width: 20px; height: 20px; border-radius: 50%; background: var(--page);"></span>
+          <span style="position: absolute; top: -9px; left: 50%; transform: translateX(-50%); background: var(--surface); padding: 0 10px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);">riv här</span>
+        </div>
+        <!-- below the tear: blurred + wall -->
+        <div style="padding: 4px 20px 22px; position: relative;">
+          <div style="position: relative; height: 74px; overflow: hidden; margin-bottom: 4px;">
+            <div style="filter: blur(3px); opacity: .45; user-select: none; pointer-events: none;">
+              <p style="margin: 0; font-size: 17px; line-height: 1.62; color: var(--ink);">Under verksamhetsåret planerar föreningen att utöka ungdomsverksamheten med två nya lag samt arrangera en sommarcup öppen för hela bygden.</p>
+            </div>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.9) 85%, #fff 100%);"></div>
+          </div>
+          <div style="background: var(--sunken); border: 2px solid var(--line); border-radius: 10px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Nedanför perforeringen · 6 stycken
+            </div>
+            <h3 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-size: 21px; line-height: 1.2; font-weight: 800; color: var(--ink);">Er ansökan är färdig att skickas in</h3>
+            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.5; color: var(--muted);">Riv loss hela utkastet — skrivet mot Gislaveds kriterier, med Reftele IF:s uppgifter.</p>
+            <a href="#1b" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none;">Lås upp hela utkastet — 149 kr</a>
+            <div style="text-align: center; margin-top: 10px;"><a href="#1b" style="font-size: 15px; font-weight: 700; color: var(--muted); text-decoration: underline;">Ingår i abonnemang · 495 kr/år</a></div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 2px dashed var(--line); font-size: 14px; font-weight: 700; color: var(--muted);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              34 föreningar i Gislaved bevakar det här bidraget
+            </div>
+          </div>
+          <p style="margin: 14px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Vi skriver utkastet. Ni skickar in det själva, och beslutet fattar kommunen.</p>
+          <div style="margin-top: 12px; text-align: center;"><a href="#1b" style="font-size: 15px; font-weight: 700; color: var(--accent);">← Tillbaka till bidraget (gratis)</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

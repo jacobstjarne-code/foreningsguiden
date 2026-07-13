@@ -230,3 +230,53 @@ export const LLMS_TXT = {
   sektionKommuner: '## Kommuner',
   sektionResurser: '## Om och metod',
 };
+
+/**
+ * VÄGLEDNINGSTEXT — de fem stationerna i progressionen (FORUTSATTNINGAR.md
+ * §4, design-leverans 3). Mallvariabler i {}; Code fyller ur datat.
+ * Register: understatement, kassören i centrum, ingen säljton.
+ */
+export const VAGLEDNING = {
+  // Station 1 — Vad gäller er?
+  station1: {
+    rubrik: 'Vad gäller er?',
+    intro: 'Vilken sorts förening ni är avgör vilka bidrag som är möjliga. Välj här, så visar vi bara det som gäller er.',
+    sparatText: 'Sparat till ert utkast: föreningstyp — {typ}',
+  },
+
+  // Station 2 — Vad är brådskande?
+  station2: {
+    rubrik: 'Vad är brådskande?',
+    introMedDeadline: 'Närmast i tiden: {bidragsnamn}, sista ansökningsdag {datum}. {dagarKvar} dagar kvar.',
+    introUtanDeadline: 'Inget av bidragen som gäller er har ett fast sista datum just nu — de söks löpande. Villkoren gäller ändå.',
+    sentText: 'En för sen ansökan kostar pengar: {sen_ansokan_text}',
+  },
+
+  // Station 3 — Vad måste göras först? (den osynliga fällan)
+  station3: {
+    rubrik: 'Vad måste göras först?',
+    intro: 'Innan ni kan söka något bidrag i {kommun} måste föreningen vara godkänd som bidragsberättigad. Det är ett eget ärende, med egen handläggningstid — och det är här föreningar oftast fastnar.',
+    ledtidOkand: '{kommun} anger inte hur lång tid godkännandet tar, men uppmanar föreningar att söka i god tid. Hinner ansökan inte handläggas före bidragets sista datum blir den inte behandlad.',
+    ledtidKand: 'Räkna med {ledtid} dagars handläggning innan ni får besked.',
+    giltighetVarning: 'Tänk på att godkännandet inte gäller för alltid: {giltighet}. Fick ni bidrag förra året betyder det inte att ni är godkända i år — statusen kan ha gått ut utan besked.',
+    extraSteg: 'Ett steg till, som är lätt att missa: {beskrivning}',
+    inget: 'Vi har inte hittat några särskilda förkrav för {kommun}. Kontrollera ändå hos kommunen innan ni söker.',
+  },
+
+  // Station 4 — Vad kan ni söka nu?
+  station4: {
+    rubrik: 'Vad kan ni söka nu?',
+    intro: '{antal} bidrag i {kommun} passar en {typ}. De ligger ordnade efter vad som är mest angeläget att göra något åt.',
+    doldaText: '{antalDolda} bidrag gäller andra sorters föreningar och är dolda.',
+    visaAndaLank: 'Visa ändå',
+  },
+
+  // Station 5 — Vad ska ni skriva?
+  station5: {
+    rubrik: 'Vad ska ni skriva?',
+    intro: 'Ansökan bedöms mot kommunens egna kriterier. Vi kan skriva ett utkast som utgår från dem och från det ni redan fyllt i här.',
+    faltStatus: '{ifyllda} av {totalt} fält är redan ifyllda',
+    knapp: 'Skapa ansökan',
+    ansvar: 'Vi skriver utkastet. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
+  },
+};

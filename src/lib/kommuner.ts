@@ -37,6 +37,23 @@ export interface Ansokningssystem {
   url: string;
 }
 
+/**
+ * Förutsättning — steg som krävs innan något bidrag i kommunen kan sökas
+ * (FORUTSATTNINGAR.md §2). `ledtid` är null om kommunen inte publicerar en
+ * faktisk siffra — gissa aldrig en handläggningstid.
+ */
+export interface Forutsattning {
+  id: string;
+  vad: string;
+  beskrivning: string;
+  system: string;
+  ledtid: number | null; // dagar
+  ledtid_text: string | null;
+  giltighet: string | null;
+  ordning: number;
+  kalla_url: string;
+}
+
 export interface Kommun {
   kommun: string;
   kommun_slug: string;
@@ -47,6 +64,7 @@ export interface Kommun {
   kalla_url: string;
   verifierad: string; // YYYY-MM-DD
   bidrag: Bidrag[];
+  forutsattningar: Forutsattning[];
 }
 
 const DATA_DIR = resolve(process.cwd(), 'data', 'kommuner');
@@ -118,6 +136,36 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   return raw as Bidrag;
 }
 
+function validateForutsattning(raw: any, kommunSlug: string, index: number, problems: string[]): Forutsattning | null {
+  const where = `forutsattningar[${index}] (${kommunSlug})`;
+  if (!raw || typeof raw !== 'object') {
+    problems.push(`${where}: saknar innehåll`);
+    return null;
+  }
+  if (!isNonEmptyString(raw.id)) problems.push(`${where}.id saknas eller är tom`);
+  if (!isNonEmptyString(raw.vad)) problems.push(`${where}.vad saknas eller är tom`);
+  if (!isNonEmptyString(raw.beskrivning)) problems.push(`${where}.beskrivning saknas eller är tom`);
+  if (!isNonEmptyString(raw.system)) problems.push(`${where}.system saknas eller är tom`);
+
+  if (raw.ledtid !== null && raw.ledtid !== undefined && typeof raw.ledtid !== 'number') {
+    problems.push(`${where}.ledtid måste vara ett heltal (dagar) eller null`);
+  }
+  if (raw.ledtid_text !== null && raw.ledtid_text !== undefined && typeof raw.ledtid_text !== 'string') {
+    problems.push(`${where}.ledtid_text måste vara text eller null`);
+  }
+  if (raw.giltighet !== null && raw.giltighet !== undefined && typeof raw.giltighet !== 'string') {
+    problems.push(`${where}.giltighet måste vara text eller null`);
+  }
+  if (typeof raw.ordning !== 'number') problems.push(`${where}.ordning måste vara ett heltal`);
+  if (!isNonEmptyString(raw.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
+
+  raw.ledtid = raw.ledtid ?? null;
+  raw.ledtid_text = raw.ledtid_text ?? null;
+  raw.giltighet = raw.giltighet ?? null;
+
+  return raw as Forutsattning;
+}
+
 function validateKommun(raw: any, file: string): Kommun {
   const problems: string[] = [];
 
@@ -150,6 +198,18 @@ function validateKommun(raw: any, file: string): Kommun {
     problems.push('bidrag måste vara en lista (kan vara tom om inga bidrag hittats än)');
   } else {
     raw.bidrag = raw.bidrag.map((b: any, i: number) => validateBidrag(b, raw.kommun_slug ?? file, i, problems));
+  }
+
+  // forutsattningar är nytt (FORUTSATTNINGAR.md §2) — saknas i äldre YAML,
+  // default till tom lista snarare än att faila befintliga filer.
+  if (raw.forutsattningar === undefined) {
+    raw.forutsattningar = [];
+  } else if (!Array.isArray(raw.forutsattningar)) {
+    problems.push('forutsattningar måste vara en lista (kan vara tom om inget verifierat än)');
+  } else {
+    raw.forutsattningar = raw.forutsattningar
+      .map((f: any, i: number) => validateForutsattning(f, raw.kommun_slug ?? file, i, problems))
+      .sort((a: Forutsattning, b: Forutsattning) => a.ordning - b.ordning);
   }
 
   if (problems.length > 0) {
@@ -229,6 +289,17 @@ export function svenskLista(items: string[]): string {
   if (items.length === 0) return '';
   if (items.length === 1) return items[0];
   return `${items.slice(0, -1).join(', ')} och ${items[items.length - 1]}`;
+}
+
+/**
+ * Tidigaste kommande deadline för ett bidrag, som ISO-datum — null om bidraget
+ * söks löpande (inget datum att jämföra mot). Underlag för progressionens
+ * station 2/4-sortering (FORUTSATTNINGAR.md §4).
+ */
+export function earliestDeadlineISO(bidrag: Bidrag, today: string): string | null {
+  if (bidrag.deadlines.typ === 'lopande') return null;
+  const occurrences = bidrag.deadlines.datum.map((mmdd) => nextOccurrenceISO(mmdd, today));
+  return occurrences.sort()[0] ?? null;
 }
 
 /** Dagens datum som YYYY-MM-DD (lokal tid). */

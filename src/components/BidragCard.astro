@@ -27,7 +27,7 @@ function formatDeadlines(b: Bidrag): string {
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
 ---
-<li class="bidrag-card fg-card">
+<li class="bidrag-card fg-card" id={`bidrag-${bidrag.id}`}>
   <div class="kategori-tags">
     {bidrag.kategori.map((k) => (
       <span class="kategori-tag fg-tag">

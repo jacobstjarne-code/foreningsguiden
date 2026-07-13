@@ -9,6 +9,15 @@
   box-sizing: border-box;
 }
 
+/* Rotorsak (2026-07-13): [hidden] tappar sin display:none så fort ett
+   element också får display:flex/grid via en klass — författarregler slår
+   alltid UA-stilarkets [hidden], oavsett specificitet. Utan denna rad
+   visades alla fem varianter av progressionens "sparat till ert utkast"-
+   rad samtidigt istället för bara den aktiva. */
+[hidden] {
+  display: none !important;
+}
+
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
@@ -513,4 +522,278 @@ main {
 
 .kommun-grid a:hover {
   color: var(--fg-accent);
+}
+
+/* ---- Progressionen ("vägen") — designsystem leverans 3 ---- */
+
+.progression {
+  position: relative;
+  margin: var(--fg-space-7) 0;
+  border-left: 3px solid var(--fg-border);
+  margin-left: 21px;
+  padding-left: 34px;
+  display: flex;
+  flex-direction: column;
+}
+
+.progression__station {
+  position: relative;
+  padding: var(--fg-space-5) 0 44px;
+}
+
+.progression__station--5 {
+  padding-bottom: var(--fg-space-5);
+}
+
+.progression__marker {
+  position: absolute;
+  left: -55px;
+  top: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--fg-surface);
+  border: 3px solid var(--fg-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fg-font-display);
+  font-weight: var(--fg-weight-display);
+  font-size: 1.2rem;
+  color: var(--fg-ink);
+}
+
+.progression__marker--accent {
+  background: var(--fg-accent);
+  color: var(--fg-on-accent);
+}
+
+.progression__marker--attention {
+  background: var(--fg-attention);
+  color: var(--fg-on-accent);
+}
+
+.progression__marker--goal {
+  left: -57px;
+  width: 46px;
+  height: 46px;
+  background: var(--fg-ink);
+  color: var(--fg-on-accent);
+}
+
+.progression__eyebrow {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-ink-muted);
+}
+
+.progression__eyebrow--accent { color: var(--fg-accent); }
+.progression__eyebrow--attention { color: var(--fg-attention); }
+
+.progression__station h2,
+.progression__station h3 {
+  margin: 4px 0 8px;
+}
+
+.progression__lede {
+  margin: 0 0 var(--fg-space-5);
+  color: var(--fg-ink-muted);
+  max-width: 54ch;
+}
+
+.progression__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fg-space-3);
+}
+
+.progression__pill {
+  display: inline-block;
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-body-lg);
+  font-weight: var(--fg-weight-bold);
+  background: var(--fg-surface);
+  color: var(--fg-ink-muted);
+  border: 2px solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  padding: 10px 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.progression__pill:hover {
+  text-decoration: none;
+}
+
+.progression__pill.is-active {
+  background: var(--fg-accent);
+  color: var(--fg-on-accent);
+  border-color: var(--fg-border);
+}
+
+.progression__saved {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: var(--fg-space-4);
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-ink-muted);
+}
+
+.progression__saved svg {
+  color: var(--fg-accent);
+}
+
+.progression__urgent-row {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-4);
+  background: var(--fg-surface);
+  border: 2.5px solid var(--fg-border);
+  border-left: 7px solid var(--fg-urgent);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4) var(--fg-space-5);
+}
+
+.progression__urgent-row__text {
+  flex: 1;
+}
+
+.progression__urgent-row__namn {
+  font-weight: var(--fg-weight-bold);
+}
+
+.progression__urgent-row__datum {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+}
+
+.progression__forutsattningar {
+  background: color-mix(in srgb, var(--fg-attention) 12%, var(--fg-surface));
+  border: 2px solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  overflow: hidden;
+}
+
+.progression__forutsattning {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: var(--fg-space-5);
+}
+
+.progression__forutsattning + .progression__forutsattning {
+  border-top: 2px solid var(--fg-border);
+}
+
+.progression__forutsattning-icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--fg-radius-control);
+  background: var(--fg-surface);
+  border: 2px solid var(--fg-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg-attention);
+}
+
+.progression__forutsattning-label {
+  font-family: var(--fg-font-mono);
+  font-size: 0.7rem;
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-attention);
+  margin-bottom: 2px;
+}
+
+.progression__forutsattning-titel {
+  font-weight: var(--fg-weight-bold);
+}
+
+.progression__forutsattning-text {
+  font-size: var(--fg-text-body);
+  color: var(--fg-ink-muted);
+  margin-top: 3px;
+}
+
+.progression__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-3);
+}
+
+.progression__list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-4);
+  background: var(--fg-surface);
+  border: 2px solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4) var(--fg-space-5);
+  text-decoration: none;
+  color: var(--fg-ink);
+}
+
+.progression__list-row__text {
+  flex: 1;
+}
+
+.progression__list-row__namn {
+  font-weight: var(--fg-weight-bold);
+}
+
+.progression__list-row__meta {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+}
+
+.progression__hidden-note {
+  margin-top: var(--fg-space-3);
+  font-size: var(--fg-text-body);
+  color: var(--fg-ink-muted);
+}
+
+.progression__link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-accent);
+  cursor: pointer;
+}
+
+.progression__goal {
+  background: var(--fg-accent);
+  border: 2.5px solid var(--fg-border);
+  border-radius: var(--fg-radius-card);
+  padding: var(--fg-space-7) var(--fg-space-6);
+  color: var(--fg-on-accent);
+}
+
+.progression__goal h3 {
+  color: var(--fg-on-accent);
+}
+
+.progression__goal-cta {
+  display: inline-flex;
+}
+
+.progression__goal-ansvar {
+  margin: var(--fg-space-4) 0 0;
+  font-size: var(--fg-text-label);
+  color: rgba(255, 255, 255, 0.85);
 }

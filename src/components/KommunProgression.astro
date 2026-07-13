@@ -1,0 +1,249 @@
+---
+// KommunProgression — "vägen", fem stationer (HANDOVER_progressionen.md,
+// FORUTSATTNINGAR.md §4). Ersätter den platta kategorikatalogen. Station 1
+// filtrerar 2/4/5 klientsidan (samma data-attribut-mönster som deadlines/).
+//
+// Föreningstyp = kommunens KATEGORIER (idrott/kultur/social/pensionar/
+// funktionsratt/ovrig). Mockens exempel-pills (Idrott/Kultur/Ungdom/
+// Studieförbund/Övrig) var illustrativa — vi filtrerar mot den taxonomi
+// som faktiskt finns i datat, inte mot påhittade nya kategorier.
+import type { Kommun, Kategori } from '../lib/kommuner';
+import {
+  KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
+  earliestDeadlineISO, daysUntil, getUrgency,
+} from '../lib/kommuner';
+import { VAGLEDNING } from '../lib/content';
+import UrgencyChip from './UrgencyChip.astro';
+
+export interface Props {
+  kommun: Kommun;
+  today: string;
+}
+
+const { kommun, today } = Astro.props;
+
+const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) => kommun.bidrag.some((b) => b.kategori.includes(k)));
+
+const bidragMedDeadline = kommun.bidrag.map((b) => ({
+  bidrag: b,
+  dateISO: earliestDeadlineISO(b, today),
+}));
+
+const sortedBidrag = [...bidragMedDeadline].sort((a, b) => {
+  if (a.dateISO && b.dateISO) return a.dateISO.localeCompare(b.dateISO);
+  if (a.dateISO) return -1;
+  if (b.dateISO) return 1;
+  return 0;
+});
+
+// Filtervärden: 'alla' + varje kategori som finns representerad.
+const filterValues: string[] = ['alla', ...kategorierMedBidrag];
+
+function bidragForFilter(filter: string) {
+  return filter === 'alla' ? sortedBidrag : sortedBidrag.filter((e) => e.bidrag.kategori.includes(filter as Kategori));
+}
+
+const forutsattningar = kommun.forutsattningar;
+const forsta = forutsattningar[0];
+const extra = forutsattningar.slice(1);
+---
+<div class="progression">
+
+  <!-- STATION 1 — stor: gaffeln -->
+  <div class="progression__station progression__station--1">
+    <span class="progression__marker progression__marker--accent">1</span>
+    <div class="progression__eyebrow progression__eyebrow--accent">Steg 1 · börjar er ansökan</div>
+    <h2>{VAGLEDNING.station1.rubrik}</h2>
+    <p class="progression__lede">{VAGLEDNING.station1.intro}</p>
+    <div class="progression__pills" role="group" aria-label={VAGLEDNING.station1.rubrik}>
+      <button type="button" class="progression__pill is-active" data-filter-pill="alla">Alla</button>
+      {kategorierMedBidrag.map((k) => (
+        <a href={`/kommun/${kommun.kommun_slug}/${k}/`} class="progression__pill" data-filter-pill={k}>{KATEGORI_LABELS[k]}</a>
+      ))}
+    </div>
+    {kategorierMedBidrag.map((k) => (
+      <div class="progression__saved" data-filter-value={k} hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+        {VAGLEDNING.station1.sparatText.replace('{typ}', KATEGORI_LABELS[k].toLowerCase())}
+      </div>
+    ))}
+  </div>
+
+  <!-- STATION 2 — liten, skarp: brådska -->
+  <div class="progression__station">
+    <span class="progression__marker">2</span>
+    <div class="progression__eyebrow">Steg 2</div>
+    <h3>{VAGLEDNING.station2.rubrik}</h3>
+    {filterValues.map((filter) => {
+      const kandidater = bidragForFilter(filter).filter((e) => e.dateISO);
+      const forsta = kandidater[0];
+      return (
+        <div data-filter-value={filter} hidden={filter !== 'alla'}>
+          {forsta && forsta.dateISO ? (
+            <div class="progression__urgent-row">
+              <UrgencyChip urgency={getUrgency(daysUntil(forsta.dateISO, today))} />
+              <div class="progression__urgent-row__text">
+                <div class="progression__urgent-row__namn">{forsta.bidrag.namn}</div>
+                <div class="progression__urgent-row__datum">{formatDate(forsta.dateISO)} · om {daysUntil(forsta.dateISO, today)} dagar</div>
+              </div>
+              <a href={`#bidrag-${forsta.bidrag.id}`}>Öppna →</a>
+            </div>
+          ) : (
+            <p class="progression__lede">{VAGLEDNING.station2.introUtanDeadline}</p>
+          )}
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- STATION 3 — attention-ton: förutsättningar -->
+  <div class="progression__station">
+    <span class="progression__marker progression__marker--attention">3</span>
+    <div class="progression__eyebrow progression__eyebrow--attention">Steg 3 · gör detta först</div>
+    <h3>{VAGLEDNING.station3.rubrik}</h3>
+    {forutsattningar.length === 0 ? (
+      <p class="progression__lede">{VAGLEDNING.station3.inget.replace('{kommun}', kommun.kommun)}</p>
+    ) : (
+      <>
+        <p class="progression__lede">{VAGLEDNING.station3.intro.replace('{kommun}', kommun.kommun)}</p>
+        <div class="progression__forutsattningar">
+          <div class="progression__forutsattning">
+            <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg></span>
+            <div>
+              <div class="progression__forutsattning-label">Förkrav</div>
+              <div class="progression__forutsattning-titel">{forsta.vad}</div>
+              <div class="progression__forutsattning-text">
+                {forsta.beskrivning}{' '}
+                {forsta.ledtid !== null
+                  ? VAGLEDNING.station3.ledtidKand.replace('{ledtid}', String(forsta.ledtid))
+                  : VAGLEDNING.station3.ledtidOkand.replace(/{kommun}/g, kommun.kommun)}
+              </div>
+            </div>
+          </div>
+          {forsta.giltighet && (
+            <div class="progression__forutsattning">
+              <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4" /><path d="M12 17h.01" /><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg></span>
+              <div>
+                <div class="progression__forutsattning-label">Giltighetsfälla</div>
+                <div class="progression__forutsattning-text">{VAGLEDNING.station3.giltighetVarning.replace('{giltighet}', forsta.giltighet)}</div>
+              </div>
+            </div>
+          )}
+          {extra.map((f) => (
+            <div class="progression__forutsattning">
+              <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4" /><path d="M12 16h.01" /></svg></span>
+              <div>
+                <div class="progression__forutsattning-label">Ytterligare steg</div>
+                <div class="progression__forutsattning-titel">{f.vad}</div>
+                <div class="progression__forutsattning-text">{VAGLEDNING.station3.extraSteg.replace('{beskrivning}', f.beskrivning)}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+
+  <!-- STATION 4 — navigerbar lista -->
+  <div class="progression__station">
+    <span class="progression__marker">4</span>
+    <div class="progression__eyebrow">Steg 4</div>
+    <h3>{VAGLEDNING.station4.rubrik}</h3>
+    <ul class="progression__list">
+      {sortedBidrag.map(({ bidrag, dateISO }) => (
+        <li data-kategori={bidrag.kategori.join(' ')}>
+          <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
+            <div class="progression__list-row__text">
+              <div class="progression__list-row__namn">{bidrag.namn}</div>
+              <div class="progression__list-row__meta">
+                {bidrag.belopp ?? 'Belopp ej publikt'} · {dateISO ? `sista dag ${formatDate(dateISO)}` : 'löpande ansökan'}
+              </div>
+            </div>
+            {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="progression__hidden-note" data-hidden-note hidden></p>
+  </div>
+
+  <!-- STATION 5 — mål -->
+  <div class="progression__station progression__station--5">
+    <span class="progression__marker progression__marker--goal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+    </span>
+    <div class="progression__goal">
+      <div class="progression__eyebrow" style="color: rgba(255,255,255,.85);">Steg 5 · vägens slut</div>
+      <h3>{VAGLEDNING.station5.rubrik}</h3>
+      <p class="progression__lede" style="color: rgba(255,255,255,.92);">{VAGLEDNING.station5.intro}</p>
+      {filterValues.map((filter) => {
+        const kandidat = bidragForFilter(filter)[0];
+        return (
+          <div data-filter-value={filter} hidden={filter !== 'alla'}>
+            {kandidat && (
+              <a href={kommun.ansokningssystem.url} class="btn-primary progression__goal-cta">
+                {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
+              </a>
+            )}
+          </div>
+        );
+      })}
+      <p class="progression__goal-ansvar">{VAGLEDNING.station5.ansvar}</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Kategori-pillren är riktiga <a href="/kommun/slug/kategori/">-länkar
+  // (crawlbarhet, SOKBARHETSSPEC §2.2 — inga föräldralösa sidor). Vanligt
+  // klick filtrerar på plats istället för att navigera; ctrl/cmd/mittklick
+  // fungerar som vanligt (öppnar kategorisidan i ny flik).
+  const pills = document.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>('[data-filter-pill]');
+  const filterTargets = document.querySelectorAll<HTMLElement>('[data-filter-value]');
+  const listRows = document.querySelectorAll<HTMLLIElement>('.progression__list [data-kategori]');
+  const savedRows = document.querySelectorAll<HTMLElement>('.progression__saved[data-filter-value]');
+  const hiddenNote = document.querySelector<HTMLElement>('[data-hidden-note]');
+
+  function applyFilter(value: string) {
+    pills.forEach((p) => p.classList.toggle('is-active', p.dataset.filterPill === value));
+
+    filterTargets.forEach((el) => {
+      el.hidden = el.dataset.filterValue !== value;
+    });
+    savedRows.forEach((el) => {
+      el.hidden = value === 'alla' || el.dataset.filterValue !== value;
+    });
+
+    let hiddenCount = 0;
+    listRows.forEach((row) => {
+      const matches = value === 'alla' || (row.dataset.kategori ?? '').split(' ').includes(value);
+      row.hidden = !matches;
+      if (!matches) hiddenCount++;
+    });
+
+    if (hiddenNote) {
+      hiddenNote.hidden = hiddenCount === 0;
+      if (hiddenCount > 0) {
+        hiddenNote.textContent = `${hiddenCount} bidrag gäller andra sorters föreningar och är dolda. `;
+        const visaAnda = document.createElement('button');
+        visaAnda.type = 'button';
+        visaAnda.className = 'progression__link-button';
+        visaAnda.textContent = 'Visa ändå';
+        visaAnda.addEventListener('click', () => applyFilter('alla'));
+        hiddenNote.appendChild(visaAnda);
+      }
+    }
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', (event) => {
+      const isModifiedClick = event instanceof MouseEvent && (event.metaKey || event.ctrlKey || event.button === 1);
+      if (pill.tagName === 'A' && !isModifiedClick) event.preventDefault();
+      applyFilter(pill.dataset.filterPill ?? 'alla');
+    });
+  });
+
+  applyFilter('alla');
+</script>

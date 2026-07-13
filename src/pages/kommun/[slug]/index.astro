@@ -8,8 +8,10 @@ import BidragCard from '../../../components/BidragCard.astro';
 import StaleWarning from '../../../components/StaleWarning.astro';
 import BreadcrumbList from '../../../components/BreadcrumbList.astro';
 import VerificationRow from '../../../components/VerificationRow.astro';
+import KommunProgression from '../../../components/KommunProgression.astro';
 import {
   loadKommuner, isStale, formatDate, formatRecurringDate, svenskLista,
+  earliestDeadlineISO, todayISO,
   KATEGORI_LABELS, KATEGORIER,
 } from '../../../lib/kommuner';
 import type { Kategori } from '../../../lib/kommuner';
@@ -23,10 +25,22 @@ export function getStaticPaths() {
 }
 
 const { kommun } = Astro.props;
+const today = todayISO();
 
 const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) =>
   kommun.bidrag.some((b) => b.kategori.includes(k))
 );
+
+// Samma sortering (tidigast deadline först, löpande sist) som
+// KommunProgression station 4, så ankarlänkarna dit landar i rätt ordning.
+const sortedBidrag = [...kommun.bidrag].sort((a, b) => {
+  const da = earliestDeadlineISO(a, today);
+  const db = earliestDeadlineISO(b, today);
+  if (da && db) return da.localeCompare(db);
+  if (da) return -1;
+  if (db) return 1;
+  return 0;
+});
 
 const metaTitle = KOMMUN.metaTitleTemplate.replace(/{kommun}/g, kommun.kommun);
 const metaDescription = KOMMUN.metaDescriptionTemplate.replace(/{kommun}/g, kommun.kommun);
@@ -125,16 +139,7 @@ const webPageJsonLd = {
   {kommun.bidrag.length === 0 ? (
     <p>{KOMMUN.ingaBidrag}</p>
   ) : (
-    kategorierMedBidrag.map((kategori) => (
-      <section>
-        <h2><a href={`/kommun/${kommun.kommun_slug}/${kategori}/`}>{KATEGORI_LABELS[kategori]}</a></h2>
-        <ul class="bidrag-list">
-          {kommun.bidrag
-            .filter((b) => b.kategori.includes(kategori))
-            .map((bidrag) => <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} />)}
-        </ul>
-      </section>
-    ))
+    <KommunProgression kommun={kommun} today={today} />
   )}
 
   <section>
@@ -144,6 +149,17 @@ const webPageJsonLd = {
       <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
     </p>
   </section>
+
+  {kommun.bidrag.length > 0 && (
+    <section>
+      <h2>Alla bidrag i {kommun.kommun}, i detalj</h2>
+      <ul class="bidrag-list">
+        {sortedBidrag.map((bidrag) => (
+          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} />
+        ))}
+      </ul>
+    </section>
+  )}
 
   {faqEntries.length > 0 && (
     <section>
