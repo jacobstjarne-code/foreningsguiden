@@ -200,6 +200,11 @@ const extra = forutsattningar.slice(1);
       <p class="progression__lede" style="color: rgba(255,255,255,.92);">{VAGLEDNING.station5.intro}</p>
       {filterValues.map((filter) => {
         const kandidat = bidragForFilter(filter)[0];
+        // Exempelsidan är skuren på kommun × kategori, inte per bidrag
+        // (SOKBARHETSSPEC §2.1 — 80 sidor med samma exempelförening var
+        // tunt duplicatinnehåll). Vid en specifik filter-pill är kategorin
+        // given; vid "alla" används kandidatens första kategori.
+        const exempelKategori = filter !== 'alla' ? filter : kandidat?.bidrag.kategori[0];
         return (
           <div data-filter-value={filter} hidden={filter !== 'alla'}>
             {kandidat && (
@@ -207,9 +212,11 @@ const extra = forutsattningar.slice(1);
                 <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={UTKASTGENERATOR_BYGGD}>
                   {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
                 </a>
-                <a href={`/exempel/${kommun.kommun_slug}/${kandidat.bidrag.id}/`} class="progression__goal-exempel-lank">
-                  Se ett exempel på ett färdigt utkast
-                </a>
+                {exempelKategori && (
+                  <a href={`/exempel/${kommun.kommun_slug}/${exempelKategori}/`} class="progression__goal-exempel-lank">
+                    Se ett exempel på ett färdigt utkast
+                  </a>
+                )}
               </>
             )}
           </div>

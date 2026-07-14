@@ -1,0 +1,106 @@
+---
+// Exempelutkastet — CODE_UPPDRAG_KOMMERSIELL.md §A, Designs 4a
+// (incoming/Föreningsguiden kommersiell.dc.html, turn-4).
+//
+// Skärning: kommun × kategori, INTE per bidrag (ändrat 2026-07-14).
+// Skäl: 80 sidor med samma exempelförening var tunt duplicatinnehåll
+// (SOKBARHETSSPEC §2.1) — kategoriskärningen ger genuint olika sidor,
+// var och en med egen exempelförening, och matchar redan-existerande
+// /kommun/[slug]/[kategori]/-sidornas princip (generera bara där det
+// finns bidrag). Fristående: ingen betalning, inloggning eller generator.
+//
+// EXEMPEL-bannern är AVSIKTLIGT mörk/ink, ALDRIG oxblod — den färgen är
+// reserverad för verifieringsstämpeln (DESIGN_UPPDRAG.md).
+//
+// All berättande text (exempelföreningens historia, medlemssiffror,
+// budgetrader) är fabricerat exempelinnehåll — Fables jobb, inte Codes.
+// Kravavsnittet listar de RIKTIGA kraven ur datat, per bidrag i kategorin;
+// bara "hur exempelföreningen uppfyller kravet" är placeholder.
+import Base from '../../../../layouts/Base.astro';
+import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
+import { loadKommuner, KATEGORI_LABELS, KATEGORIER } from '../../../../lib/kommuner';
+import type { Kommun, Kategori } from '../../../../lib/kommuner';
+
+export function getStaticPaths() {
+  const paths: { params: { kommun: string; kategori: Kategori }; props: { kommun: Kommun; kategori: Kategori } }[] = [];
+  for (const kommun of loadKommuner()) {
+    const kategorierMedBidrag = KATEGORIER.filter((k) => kommun.bidrag.some((b) => b.kategori.includes(k)));
+    for (const kategori of kategorierMedBidrag) {
+      paths.push({ params: { kommun: kommun.kommun_slug, kategori }, props: { kommun, kategori } });
+    }
+  }
+  return paths;
+}
+
+const { kommun, kategori } = Astro.props;
+const kategoriLabel = KATEGORI_LABELS[kategori];
+const bidragICategorin = kommun.bidrag.filter((b) => b.kategori.includes(kategori));
+---
+<Base
+  title={`Exempelutkast — ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun} — Föreningsguiden`}
+  description={`{{FABLE: metabeskrivning — exempelutkast för ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun}}}`}
+>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
+    { name: kategoriLabel, url: `/kommun/${kommun.kommun_slug}/${kategori}/` },
+    { name: 'Exempelutkast', url: `/exempel/${kommun.kommun_slug}/${kategori}/` },
+  ]} />
+
+  <div class="exempel-card fg-card">
+    <div class="exempel-banner">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 8h.01" /><path d="M11 12h1v4h1" /></svg>
+      <span><strong>Exempel.</strong> En annan förenings färdiga utkast — visas i sin helhet så ni ser vad ni får. Ert skrivs mot er egen förening.</span>
+    </div>
+
+    <div class="exempel-doc">
+      <p class="exempel-doc__eyebrow">{kommun.kommun} kommun · {kategoriLabel} · exempelförening</p>
+      <h1>Utkast till ansökan om {kategoriLabel.toLowerCase()}bidrag</h1>
+      <p class="exempel-doc__forening">{'{{FABLE: exempelföreningens namn}}'}</p>
+
+      <h2>1. Om föreningen</h2>
+      <p class="placeholder-slot">{'{{FABLE: exempelföreningens historia, medlemsantal, säte, verksamhetsform — fabricerat men realistiskt}}'}</p>
+
+      <h2>2. Verksamheten under året</h2>
+      <p class="placeholder-slot">{'{{FABLE: vad exempelföreningen gör under verksamhetsåret}}'}</p>
+
+      <h2>3. Vad bidraget söks för</h2>
+      <p class="placeholder-slot">{`{{FABLE: varför exempelföreningen söker ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun}}}`}</p>
+
+      <h2>4. Hur föreningen uppfyller kommunens krav</h2>
+      {bidragICategorin.map((bidrag) => (
+        <div class="exempel-doc__bidragskrav">
+          <p class="exempel-doc__bidragsnamn">{bidrag.namn}</p>
+          {bidrag.krav.length > 0 ? (
+            <ul class="exempel-doc__krav">
+              {bidrag.krav.map((k) => (
+                <li>
+                  <span class="exempel-doc__krav-text">{k}</span>
+                  <span class="placeholder-slot exempel-doc__krav-svar">{'{{FABLE: hur exempelföreningen uppfyller kravet}}'}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="placeholder-slot">{'{{FABLE: hur exempelföreningen uppfyller kommunens krav}}'}</p>
+          )}
+        </div>
+      ))}
+
+      <h2>5. Budget och sökt belopp</h2>
+      <p class="placeholder-slot">{'{{FABLE: budgetrader + sökt belopp för exempelföreningen — fabricerat men realistiskt, se designmockens 4a för format (radposter + summa)}}'}</p>
+    </div>
+
+    <div class="exempel-doc__divider"></div>
+
+    <div class="exempel-footer">
+      <p><strong>Så här ser ett färdigt utkast ut.</strong> Ert skrivs mot er egen förenings uppgifter och {kommun.kommun}s kriterier — inte den här exempelföreningens. Vi skriver utkastet; ni skickar in det själva, och beslutet fattar kommunen.</p>
+      <div class="exempel-footer__actions">
+        <button type="button" class="btn-primary" disabled title="Betalflödet är inte byggt än">
+          Skapa ert eget utkast — 149 kr
+        </button>
+        <a href={`/kommun/${kommun.kommun_slug}/${kategori}/`}>← Tillbaka till {kategoriLabel.toLowerCase()}bidrag i {kommun.kommun}</a>
+      </div>
+      <p class="exempel-footer__snart">Betalflödet byggs — kommer snart.</p>
+    </div>
+  </div>
+</Base>
