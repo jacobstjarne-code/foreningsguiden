@@ -294,6 +294,11 @@ export function svenskLista(items: string[]): string {
   return `${items.slice(0, -1).join(', ')} och ${items[items.length - 1]}`;
 }
 
+/** Svensk genitivform: "Gislaved" → "Gislaveds", men "Borås" → "Borås'" (namn på -s tar bara apostrof). */
+export function possessiv(kommun: string): string {
+  return /s$/i.test(kommun) ? `${kommun}'` : `${kommun}s`;
+}
+
 /**
  * Tidigaste kommande deadline för ett bidrag, som ISO-datum — null om bidraget
  * söks löpande (inget datum att jämföra mot). Underlag för progressionens

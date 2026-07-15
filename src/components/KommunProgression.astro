@@ -25,6 +25,14 @@ import UrgencyChip from './UrgencyChip.astro';
 // byt href till utkastvyn i samma commit som den byggs.
 const UTKASTGENERATOR_BYGGD = false;
 
+// /exempel/-sidorna är avstängda i produktion tills utkastgeneratorn
+// godkänts mot golden set (KVALITETSSPEC.md §4/§7 — samma flagg-konvention
+// som EXEMPELSIDOR_LIVE i src/pages/exempel/[kommun]/[kategori]/index.astro,
+// hålls i synk manuellt eftersom Astro-komponenter inte kan importera
+// konstanter från varandras frontmatter). Länken byggs inte förrän båda
+// flaggorna slås på samtidigt — annars pekar den på en 404.
+const EXEMPEL_LANK_LIVE = false;
+
 export interface Props {
   kommun: Kommun;
   today: string;
@@ -212,7 +220,7 @@ const extra = forutsattningar.slice(1);
                 <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={UTKASTGENERATOR_BYGGD}>
                   {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
                 </a>
-                {exempelKategori && (
+                {EXEMPEL_LANK_LIVE && exempelKategori && (
                   <a href={`/exempel/${kommun.kommun_slug}/${exempelKategori}/`} class="progression__goal-exempel-lank">
                     Se ett exempel på ett färdigt utkast
                   </a>
