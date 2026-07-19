@@ -279,6 +279,14 @@ export function formatRecurringDate(mmdd: string): string {
   return `${d} ${MANADSNAMN[m - 1]}`;
 }
 
+const VECKODAGAR = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
+
+/** Veckodag för ett ISO-datum, gemener: "onsdag". UTC — samma dygnsgräns som daysUntil. */
+export function formatWeekday(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  return VECKODAGAR[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
+}
+
 const MANADSFORKORTNING = ['JAN', 'FEB', 'MAR', 'APR', 'MAJ', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEC'];
 
 /** Formaterar ett ISO-datum som VerificationStamp-format: "03 JUL". */

@@ -197,17 +197,12 @@ export const BEVAKNING = {
   samtycke:
     'Jag vill att Föreningsguiden sparar min e-postadress för att skicka påminnelser om de deadlines jag valt. Jag kan avsluta när som helst.',
 
-  // --- PoC-kvitto (inget bekräftelsemejl byggt ännu) ---------------------
+  // --- DUBBEL OPT-IN (aktiverad 2026-07-18 — Resend-utskicket byggt) -----
   // ÄRLIGHETSREGEL: gränssnittet får inte lova ett mejl som inte skickas.
-  // Denna text står kvar tills utskicksmotorn finns. När bekräftelsemejlet
-  // byggs, växla till dubbel-opt-in-varianten i kommentaren nedan.
-  kvittoRubrik: 'Din adress är sparad',
+  // Nu skickas det (src/lib/mejl.ts, MEJL.bekraftelse) — så detta är sant.
+  kvittoRubrik: 'Kolla din inkorg',
   kvittoText:
-    'Tack — vi har sparat din adress. Själva påminnelserna är under uppbyggnad, och vi hör av oss så fort bevakningen är igång. Du kan avregistrera dig när som helst.',
-  // DUBBEL OPT-IN (aktiveras när Resend-utskicket byggs):
-  //   kvittoRubrik: 'Kolla din inkorg',
-  //   kvittoText: 'Vi har skickat ett bekräftelsemejl. Klicka på länken där så
-  //     börjar bevakningen. Utan bekräftelse sparar vi ingenting.',
+    'Vi har skickat ett bekräftelsemejl. Klicka på länken där så börjar bevakningen. Utan bekräftelse sparar vi ingenting.',
   // Integritetsrad under formuläret, länkar till om-/metodsidan.
   integritetsrad:
     'Vi använder adressen bara till de påminnelser du valt, delar den inte, och du kan avregistrera dig när som helst via länk i varje utskick.',
@@ -278,5 +273,66 @@ export const VAGLEDNING = {
     faltStatus: '{ifyllda} av {totalt} fält är redan ifyllda',
     knapp: 'Skapa ansökan',
     ansvar: 'Vi skriver utkastet. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
+  },
+};
+
+/**
+ * MEJLMALLAR — utskicksmotorn (SPRINT_COPY.ts, Fable 2026-07-13/18).
+ * Avsändarnamn "Föreningsguiden", ingen no-reply. Varje mejl slutar med
+ * MEJL.sidfot (avregistreringsrad, obligatorisk). Sändning/mallfyllning:
+ * src/lib/mejl.ts.
+ */
+export const MEJL = {
+  sidfot:
+    'Du får det här mejlet för att den här adressen bevakar bidrag på Föreningsguiden. Vill du sluta bevaka? Avregistrera dig direkt: {avregLank} — då raderar vi adressen.',
+
+  bekraftelse: {
+    amne: 'Bekräfta er bevakning hos Föreningsguiden',
+    body: [
+      'Hej,',
+      'Någon — förhoppningsvis du — har anmält den här adressen för att bevaka bidragsdeadlines i {kommunLista} hos Föreningsguiden.',
+      'Klicka på länken för att bekräfta, så börjar bevakningen: {bekraftaLank}',
+      'Var det inte du? Då kan du bortse från det här mejlet — utan bekräftelse sparar vi ingenting.',
+    ],
+  },
+
+  valkomst: {
+    amne: 'Bevakningen är igång',
+    body: [
+      'Hej,',
+      'Nu bevakar vi {kommunLista} åt er. Så här fungerar det: vi mejlar två veckor före sista ansökningsdag för bidragen i era kommuner, och en gång till tre dagar före. Inget annat — inga nyhetsbrev, ingen reklam.',
+      'Ett tips redan nu: kontrollera att föreningen är godkänd som bidragsberättigad i er kommun. I flera kommuner förfaller godkännandet tyst efter en tid, och utan det spelar deadlines ingen roll. Ni ser vad som gäller er kommun här: {kommunLank}',
+      'Föreningsguiden är gratis under betan.',
+    ],
+  },
+
+  paminnelse14: {
+    amne: 'Två veckor kvar: {bidragsnamn} i {kommun}',
+    body: [
+      'Hej,',
+      'Den {datum} är sista ansökningsdag för {bidragsnamn} i {kommun}.',
+      'Två saker att kontrollera i god tid: att föreningen är godkänd som bidragsberättigad (det är ett eget ärende med egen handläggningstid), och att ni har underlagen som krävs. Kraven, beloppen och länken till kommunens ansökan finns här: {bidragLank}',
+      'Vi påminner en gång till tre dagar före.',
+    ],
+  },
+
+  paminnelse3: {
+    amne: 'Tre dagar kvar: {bidragsnamn} i {kommun}',
+    body: [
+      'Hej,',
+      'På {veckodag} den {datum} stänger ansökan för {bidragsnamn} i {kommun}.',
+      'Är ansökan inte inskickad än: allt ni behöver finns här — krav, belopp och länk till kommunens system: {bidragLank}',
+      'En för sent inlämnad ansökan behandlas i många kommuner inte alls, så tre dagar är marginal, inte utrymme.',
+    ],
+  },
+
+  giltighetsvarning: {
+    amne: 'Kontrollera er bidragsstatus i {kommun}',
+    body: [
+      'Hej,',
+      'Ni angav att föreningen hade årsmöte {arsmotesdatum}. I {kommun} gäller: {giltighetsregel}. Det betyder att er status som bidragsberättigad förening kan behöva förnyas ungefär nu.',
+      'Vårt råd: kontrollera i {system} att föreningens uppgifter är uppdaterade och statusen aktiv — innan ni räknar med pengar från nästa ansökningsomgång. Ett förfallet godkännande upptäcks oftast först när det är för sent att hinna åtgärda.',
+      'Vad som gäller i er kommun, med källa: {kommunLank}',
+    ],
   },
 };

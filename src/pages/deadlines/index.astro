@@ -15,7 +15,10 @@ import UrgencyChip from '../../components/UrgencyChip.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS, KATEGORIER } from '../../lib/kommuner';
 import { KALENDER } from '../../lib/content';
 
-const submitted = Astro.url.searchParams.get('bevakning') === 'klar';
+const bevakningStatus = Astro.url.searchParams.get('bevakning');
+const submitted = bevakningStatus === 'klar';
+const bekraftad = bevakningStatus === 'bekraftad';
+const ogiltigtToken = bevakningStatus === 'ogiltig';
 const kommuner = loadKommuner();
 const today = todayISO();
 const entries = getDeadlineEntries(today);
@@ -88,7 +91,19 @@ const kommande = entries.filter((e) => !e.isLopande);
 
   <p class="deadline-table__empty" id="deadline-empty" hidden>Inga deadlines matchar filtret.</p>
 
-  <EmailSignup submitted={submitted} />
+  {bekraftad ? (
+    <div class="email-signup fg-card">
+      <h2>Bekräftad</h2>
+    </div>
+  ) : ogiltigtToken ? (
+    <div class="email-signup fg-card">
+      <h2>Länken fungerar inte</h2>
+      <p>Den kan ha gått ut eller redan använts. Fyll i formuläret igen nedan.</p>
+      <EmailSignup submitted={false} />
+    </div>
+  ) : (
+    <EmailSignup submitted={submitted} />
+  )}
 </Base>
 
 <script>

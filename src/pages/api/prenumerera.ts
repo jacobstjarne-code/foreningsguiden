@@ -1,11 +1,13 @@
-// POST /api/prenumerera — §6 UPPDRAG_POC.md. Formuläret i produktion är
-// bakom "kommer snart" tills Fables GDPR-/ändamålscopy är inkopplad (se
-// EmailSignup.astro) — den här routen är infrastruktur, inte skarp insamling.
+// POST /api/prenumerera — §6 UPPDRAG_POC.md. Dubbel opt-in aktiverad
+// (SPRINT §Spår A, 2026-07-18): skapar en OBEKRÄFTAD prenumerant och
+// skickar MEJL.bekraftelse. Bevakningen börjar först vid klick på länken
+// (GET /api/bekrafta) — se subscribers.ts.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { loadKommuner } from '../../lib/kommuner';
-import { addSubscriber } from '../../lib/subscribers';
+import { loadKommuner, svenskLista } from '../../lib/kommuner';
+import { addPendingSubscriber } from '../../lib/subscribers';
+import { sendBekraftelse } from '../../lib/mejl';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -13,14 +15,20 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const form = await request.formData();
   const email = String(form.get('email') ?? '').trim();
   const samtycke = form.get('samtycke');
-  const giltigaSlugs = new Set(loadKommuner().map((k) => k.kommun_slug));
-  const kommuner = form.getAll('kommuner').map(String).filter((slug) => giltigaSlugs.has(slug));
+  const alla = loadKommuner();
+  const giltigaSlugs = new Set(alla.map((k) => k.kommun_slug));
+  const kommunSlugs = form.getAll('kommuner').map(String).filter((slug) => giltigaSlugs.has(slug));
 
-  if (!EMAIL_RE.test(email) || !samtycke || kommuner.length === 0) {
+  if (!EMAIL_RE.test(email) || !samtycke || kommunSlugs.length === 0) {
     return new Response('Ogiltig anmälan — e-post, samtycke och minst en kommun krävs.', { status: 400 });
   }
 
-  await addSubscriber(email, kommuner);
+  const token = await addPendingSubscriber(email, kommunSlugs);
+  const kommunNamn = kommunSlugs
+    .map((slug) => alla.find((k) => k.kommun_slug === slug)?.kommun)
+    .filter((namn): namn is string => !!namn);
+
+  await sendBekraftelse(email, svenskLista(kommunNamn), token);
 
   return redirect('/deadlines/?bevakning=klar', 303);
 };
