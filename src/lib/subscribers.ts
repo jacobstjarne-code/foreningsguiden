@@ -42,20 +42,39 @@ export interface Subscriber {
   giltighetArsmoten?: Record<string, string>;
 }
 
-/** Skapar en obekräftad prenumerant + ett bekräftelsetoken (giltigt 7 dagar). */
-export async function addPendingSubscriber(email: string, kommuner: string[]): Promise<string> {
+/**
+ * Skapar/utökar en prenumerant. Läser alltid befintlig post FÖRST och
+ * mergar — en blind overwrite här regressar en redan BEKRÄFTAD adress
+ * till confirmed:false (stänger av pågående påminnelser tills ett nytt
+ * klick) och tappar giltighetArsmoten, upptäckt vid egen verifiering
+ * 2026-07-19 (samma klass av bugg som addGiltighetBevakning redan
+ * skyddar mot). Redan bekräftade adresser läggs till direkt, utan nytt
+ * token — se addGiltighetBevakning för samma mönster.
+ */
+export async function addPendingSubscriber(
+  email: string,
+  kommuner: string[]
+): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
+  const normalized = email.toLowerCase();
+  const existing = await getSubscriber(normalized);
+
   const record: Subscriber = {
-    email: email.toLowerCase(),
-    kommuner,
-    registrerad: new Date().toISOString(),
-    confirmed: false,
+    email: normalized,
+    kommuner: existing ? Array.from(new Set([...existing.kommuner, ...kommuner])) : kommuner,
+    registrerad: existing?.registrerad ?? new Date().toISOString(),
+    confirmed: existing?.confirmed ?? false,
+    giltighetArsmoten: existing?.giltighetArsmoten,
   };
-  await redis.set(recordKey(record.email), record);
-  await redis.sadd(INDEX_KEY, record.email);
+  await redis.set(recordKey(normalized), record);
+  await redis.sadd(INDEX_KEY, normalized);
+
+  if (record.confirmed) {
+    return { token: null, alreadyConfirmed: true };
+  }
 
   const token = crypto.randomUUID();
-  await redis.set(tokenKey(token), record.email, { ex: TOKEN_TTL_SEKUNDER });
-  return token;
+  await redis.set(tokenKey(token), normalized, { ex: TOKEN_TTL_SEKUNDER });
+  return { token, alreadyConfirmed: false };
 }
 
 /** Bekräftar via token. Returnerar subscriber-posten, eller null om token är ogiltigt/utgånget. */

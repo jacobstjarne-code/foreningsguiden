@@ -19,6 +19,7 @@ const bevakningStatus = Astro.url.searchParams.get('bevakning');
 const submitted = bevakningStatus === 'klar';
 const bekraftad = bevakningStatus === 'bekraftad';
 const ogiltigtToken = bevakningStatus === 'ogiltig';
+const uppdaterad = bevakningStatus === 'uppdaterad';
 const kommuner = loadKommuner();
 const today = todayISO();
 const entries = getDeadlineEntries(today);
@@ -100,6 +101,10 @@ const kommande = entries.filter((e) => !e.isLopande);
       <h2>Länken fungerar inte</h2>
       <p>Den kan ha gått ut eller redan använts. Fyll i formuläret igen nedan.</p>
       <EmailSignup submitted={false} />
+    </div>
+  ) : uppdaterad ? (
+    <div class="email-signup fg-card">
+      <h2>Uppdaterat</h2>
     </div>
   ) : (
     <EmailSignup submitted={submitted} />

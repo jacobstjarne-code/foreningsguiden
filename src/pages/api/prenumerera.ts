@@ -23,12 +23,29 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     return new Response('Ogiltig anmälan — e-post, samtycke och minst en kommun krävs.', { status: 400 });
   }
 
-  const token = await addPendingSubscriber(email, kommunSlugs);
+  const { token, alreadyConfirmed } = await addPendingSubscriber(email, kommunSlugs);
+
+  // Redan bekräftad adress — kommunerna är tillagda direkt (subscribers.ts),
+  // inget nytt mejl att skicka. Egen redirect-status så EmailSignup inte
+  // påstår "vi har skickat ett bekräftelsemejl" om inget skickades.
+  if (alreadyConfirmed || !token) {
+    return redirect('/deadlines/?bevakning=uppdaterad', 303);
+  }
+
   const kommunNamn = kommunSlugs
     .map((slug) => alla.find((k) => k.kommun_slug === slug)?.kommun)
     .filter((namn): namn is string => !!namn);
 
-  await sendBekraftelse(email, svenskLista(kommunNamn), token);
+  try {
+    await sendBekraftelse(email, svenskLista(kommunNamn), token);
+  } catch (e) {
+    // Prenumeranten är redan sparad (addPendingSubscriber ovan) — bara
+    // mejlet failade. Samma 502-mönster som /api/giltighetsbevakning:
+    // svara kontrollerat i stället för att krascha på Astros generiska
+    // felsida på produktens enda aktiva löfte.
+    console.error('prenumerera: bekräftelsemejl misslyckades', e);
+    return new Response(JSON.stringify({ ok: false }), { status: 502, headers: { 'content-type': 'application/json' } });
+  }
 
   return redirect('/deadlines/?bevakning=klar', 303);
 };
