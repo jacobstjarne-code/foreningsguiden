@@ -1,0 +1,185 @@
+---
+// GiltighetsKontroll — GILTIGHETSKOLLEN-widgeten (SPRINT §Spår B,
+// SPRINT_COPY.ts §GILTIGHETSKOLL). Ett årsmötesdatum in, ett besked ut.
+//
+// Beräkningen: giltighet (Forutsattning) är fritext, inte en strukturerad
+// varaktighet — vi gissar aldrig ett exakt förfallodatum ur den. De fyra
+// kommuner som idag har en känd regel (Berg, Helsingborg, Lund, Umeå) är
+// alla ungefär årliga ("årligen", "ett år", "var 13:e månad"), så tröskeln
+// nedan (RISK_TROSKEL_DAGAR) approximerar "nära ett år sedan årsmötet" —
+// matchar den medvetet vaga copyn (svarRisk säger "kan ha förfallit ELLER
+// vara nära att förfalla", inte ett exakt datum). Om en kommun senare läggs
+// till med en genuint annan cadence (t.ex. vartannat år) måste den här
+// tröskeln motiveras om — inte antas fortsatt rätt.
+//
+// giltighet === null → ALLTID svarOkand, aldrig en gissad beräkning
+// (samma regel som stationens egen giltighetVarning i KommunProgression).
+import type { Kommun } from '../lib/kommuner';
+import { GILTIGHETSKOLL, BEVAKNING } from '../lib/content';
+
+export interface Props {
+  kommun: Kommun;
+  today: string;
+}
+
+const { kommun, today } = Astro.props;
+const giltighetsregel = kommun.forutsattningar[0]?.giltighet ?? null;
+const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
+---
+<div
+  class="giltighetskoll fg-card"
+  data-giltighetskoll
+  data-kommun-slug={kommun.kommun_slug}
+  data-kommun-namn={kommun.kommun}
+  data-system={kommun.ansokningssystem.namn}
+  data-giltighetsregel={giltighetsregel ?? ''}
+  data-today={today}
+>
+  <h3>{GILTIGHETSKOLL.rubrik}</h3>
+  <p>{intro}</p>
+
+  <form data-giltighetskoll-form>
+    <label for="giltighetskoll-datum">{GILTIGHETSKOLL.datumLabel}</label>
+    <input type="date" id="giltighetskoll-datum" name="arsmotesdatum" max={today} required />
+    <button type="submit" class="fg-btn--ghost">{GILTIGHETSKOLL.knapp}</button>
+  </form>
+
+  <div data-giltighetskoll-svar hidden>
+    <p data-giltighetskoll-svar-risk hidden>
+      {GILTIGHETSKOLL.svarRisk
+        .replace(/{kommun}/g, kommun.kommun)
+        .replace(/{system}/g, kommun.ansokningssystem.namn)
+        .replace(/{giltighetsregel}/g, giltighetsregel ?? '')}
+    </p>
+    <p data-giltighetskoll-svar-ok hidden>
+      {GILTIGHETSKOLL.svarOk
+        .replace(/{kommun}/g, kommun.kommun)
+        .replace(/{giltighetsregel}/g, giltighetsregel ?? '')}
+    </p>
+    <p data-giltighetskoll-svar-okand hidden>
+      {GILTIGHETSKOLL.svarOkand.replace(/{kommun}/g, kommun.kommun)}
+    </p>
+    <span data-giltighetskoll-arsmotesdatum hidden></span>
+
+    <div data-giltighetskoll-erbjudande hidden>
+      <p>{GILTIGHETSKOLL.erbjudande}</p>
+      <button type="button" class="fg-btn--ghost" data-giltighetskoll-erbjudande-knapp>{GILTIGHETSKOLL.erbjudandeKnapp}</button>
+    </div>
+
+    <form data-giltighetskoll-epostform hidden>
+      <label for="giltighetskoll-epost">{BEVAKNING.epostLabel}</label>
+      <input type="email" id="giltighetskoll-epost" name="email" placeholder={BEVAKNING.epostPlaceholder} required autocomplete="email" />
+      <label class="email-signup__consent">
+        <input type="checkbox" name="samtycke" required />
+        {BEVAKNING.samtycke}
+      </label>
+      <button type="submit" class="btn-primary">{GILTIGHETSKOLL.erbjudandeKnapp}</button>
+    </form>
+
+    <div data-giltighetskoll-kvitto-bekraftelse hidden>
+      <h4>{BEVAKNING.kvittoRubrik}</h4>
+      <p>{BEVAKNING.kvittoText}</p>
+    </div>
+    <div data-giltighetskoll-kvitto-sparat hidden>
+      <h4>Sparat</h4>
+    </div>
+    <p data-giltighetskoll-fel hidden>Något gick fel. Försök igen.</p>
+  </div>
+</div>
+
+<script>
+  const MANADSNAMN = [
+    'januari', 'februari', 'mars', 'april', 'maj', 'juni',
+    'juli', 'augusti', 'september', 'oktober', 'november', 'december',
+  ];
+  function formatDateSv(iso: string): string {
+    const [y, m, d] = iso.split('-').map(Number);
+    return `${d} ${MANADSNAMN[m - 1]} ${y}`;
+  }
+  function daysBetween(fromISO: string, toISO: string): number {
+    const toUTC = (iso: string) => {
+      const [y, m, d] = iso.split('-').map(Number);
+      return Date.UTC(y, m - 1, d);
+    };
+    return Math.round((toUTC(toISO) - toUTC(fromISO)) / (1000 * 60 * 60 * 24));
+  }
+
+  const RISK_TROSKEL_DAGAR = 300; // se motivering i frontmatter-kommentaren ovan
+
+  document.querySelectorAll<HTMLElement>('[data-giltighetskoll]').forEach((widget) => {
+    const kommunSlug = widget.dataset.kommunSlug ?? '';
+    const kommunNamn = widget.dataset.kommunNamn ?? '';
+    const today = widget.dataset.today ?? '';
+    const giltighetsregel = widget.dataset.giltighetsregel ?? '';
+
+    const form = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-form]');
+    const svarBlock = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar]');
+    const svarRisk = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-risk]');
+    const svarOk = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-ok]');
+    const svarOkand = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-okand]');
+    const erbjudande = widget.querySelector<HTMLElement>('[data-giltighetskoll-erbjudande]');
+    const erbjudandeKnapp = widget.querySelector<HTMLButtonElement>('[data-giltighetskoll-erbjudande-knapp]');
+    const epostForm = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-epostform]');
+    const kvittoBekraftelse = widget.querySelector<HTMLElement>('[data-giltighetskoll-kvitto-bekraftelse]');
+    const kvittoSparat = widget.querySelector<HTMLElement>('[data-giltighetskoll-kvitto-sparat]');
+    const felText = widget.querySelector<HTMLElement>('[data-giltighetskoll-fel]');
+
+    let arsmotesdatum = '';
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = form.querySelector<HTMLInputElement>('input[name="arsmotesdatum"]');
+      if (!input?.value) return;
+      arsmotesdatum = input.value;
+
+      form.hidden = true;
+      svarBlock?.removeAttribute('hidden');
+      svarRisk?.setAttribute('hidden', '');
+      svarOk?.setAttribute('hidden', '');
+      svarOkand?.setAttribute('hidden', '');
+
+      const arsmotesdatumSv = formatDateSv(arsmotesdatum);
+
+      if (!giltighetsregel) {
+        svarOkand?.removeAttribute('hidden');
+        return;
+      }
+
+      const dagarSedan = daysBetween(arsmotesdatum, today);
+      const target = dagarSedan >= RISK_TROSKEL_DAGAR ? svarRisk : svarOk;
+      if (target) {
+        target.textContent = (target.textContent ?? '').replace('{arsmotesdatum}', arsmotesdatumSv);
+        target.removeAttribute('hidden');
+      }
+      erbjudande?.removeAttribute('hidden');
+    });
+
+    erbjudandeKnapp?.addEventListener('click', () => {
+      erbjudande?.setAttribute('hidden', '');
+      epostForm?.removeAttribute('hidden');
+    });
+
+    epostForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      felText?.setAttribute('hidden', '');
+      const data = new FormData(epostForm);
+      data.set('kommun', kommunSlug);
+      data.set('arsmotesdatum', arsmotesdatum);
+
+      try {
+        const res = await fetch('/api/giltighetsbevakning', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error('svar ej ok');
+
+        epostForm.hidden = true;
+        if (json.alreadyConfirmed) {
+          kvittoSparat?.removeAttribute('hidden');
+        } else {
+          kvittoBekraftelse?.removeAttribute('hidden');
+        }
+      } catch {
+        felText?.removeAttribute('hidden');
+      }
+    });
+  });
+</script>

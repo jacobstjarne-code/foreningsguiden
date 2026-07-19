@@ -7,7 +7,7 @@
 // se content.ts). Base lägger INTE på ett eget suffix.
 import { Image } from 'astro:assets';
 import brandMark from '../assets/brand-mark.png';
-import { DESCRIPTOR, SIDFOT, AVSANDARE, SITE_NAMN, START } from '../lib/content';
+import { DESCRIPTOR, SIDFOT, AVSANDARE, SITE_NAMN, START, BETA } from '../lib/content';
 
 export interface Props {
   title: string;
@@ -61,7 +61,10 @@ const organizationJsonLd = {
         <a href="/" class="site-header__logo">
           <Image src={brandMark} alt="" width={40} height={40} class="site-header__mark" />
           <span class="site-header__wordmark-group">
-            <span class="site-header__wordmark">Förenings<em>guiden</em></span>
+            <span class="site-header__wordmark-row">
+              <span class="site-header__wordmark">Förenings<em>guiden</em></span>
+              <span class="fg-beta-badge">{BETA.badge}</span>
+            </span>
             <span class="site-header__descriptor">{DESCRIPTOR}</span>
           </span>
         </a>
@@ -79,6 +82,7 @@ const organizationJsonLd = {
     <footer class="site-footer">
       <p>{SIDFOT.kortText}</p>
       <p><a href="/om/">{SIDFOT.kallpolicyLank}</a></p>
+      <p class="site-footer__beta">{BETA.rad}</p>
     </footer>
   </body>
 </html>

@@ -5,7 +5,7 @@
 // under egna h2-rubriker — Code följer den strukturen Fable faktiskt levererade.
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
-import { OM } from '../../lib/content';
+import { OM, BETA } from '../../lib/content';
 ---
 <Base title={OM.metaTitle} description={OM.metaDescription}>
   <BreadcrumbList items={[
@@ -16,4 +16,9 @@ import { OM } from '../../lib/content';
   <h1>{OM.h1}</h1>
 
   {OM.stycken.map((stycke) => <p>{stycke}</p>)}
+
+  <section>
+    <h2>{BETA.omRubrik}</h2>
+    {BETA.omStycken.map((stycke) => <p>{stycke}</p>)}
+  </section>
 </Base>

@@ -54,6 +54,18 @@ export interface Forutsattning {
   kalla_url: string;
 }
 
+/**
+ * Kommunsiffran — aha-rad på kommunsidan (KOMMUNSIFFRA, content.ts). Bara
+ * kommuner som lämnat ut en egen sammanställning har den; null annars.
+ * Gissa aldrig fram värden — bara det kommunen faktiskt publicerat.
+ */
+export interface Kommunsiffra {
+  antal_foreningar: number;
+  summa_kr: string; // förformaterat, t.ex. "781 117" — se KOMMUNSIFFRA.template
+  bidragstyp: string;
+  utlamnad_datum: string;
+}
+
 export interface Kommun {
   kommun: string;
   kommun_slug: string;
@@ -65,6 +77,7 @@ export interface Kommun {
   verifierad: string; // YYYY-MM-DD
   bidrag: Bidrag[];
   forutsattningar: Forutsattning[];
+  kommunsiffra: Kommunsiffra | null;
 }
 
 const DATA_DIR = resolve(process.cwd(), 'data', 'kommuner');
@@ -213,6 +226,23 @@ function validateKommun(raw: any, file: string): Kommun {
     raw.forutsattningar = raw.forutsattningar
       .map((f: any, i: number) => validateForutsattning(f, raw.kommun_slug ?? file, i, problems))
       .sort((a: Forutsattning, b: Forutsattning) => a.ordning - b.ordning);
+  }
+
+  if (raw.kommunsiffra === undefined || raw.kommunsiffra === null) {
+    raw.kommunsiffra = null;
+  } else {
+    const ks = raw.kommunsiffra;
+    const where = `kommunsiffra (${raw.kommun_slug ?? file})`;
+    if (typeof ks !== 'object') {
+      problems.push(`${where} måste vara ett objekt eller null`);
+    } else {
+      if (typeof ks.antal_foreningar !== 'number' || ks.antal_foreningar <= 0) {
+        problems.push(`${where}.antal_foreningar måste vara ett positivt tal`);
+      }
+      if (!isNonEmptyString(ks.summa_kr)) problems.push(`${where}.summa_kr saknas eller är tom`);
+      if (!isNonEmptyString(ks.bidragstyp)) problems.push(`${where}.bidragstyp saknas eller är tom`);
+      if (!isNonEmptyString(ks.utlamnad_datum)) problems.push(`${where}.utlamnad_datum saknas eller är tom`);
+    }
   }
 
   if (problems.length > 0) {

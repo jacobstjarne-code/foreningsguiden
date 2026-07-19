@@ -14,15 +14,17 @@ import {
 } from '../lib/kommuner';
 import { VAGLEDNING } from '../lib/content';
 import UrgencyChip from './UrgencyChip.astro';
+import VantelistaFlode from './VantelistaFlode.astro';
 
 // ⚠️ TILLFÄLLIG DEFAULT — AFFÄRSMODELLENS INGÅNG PEKAR FEL HÅLL ⚠️
 // Station 5:s knapp är sajtens enda betalpunkt-ingång (AFFARSMODELL.md §3,
 // DESIGN_UPPDRAG_2_KOMMERSIELL.md §2.1) men UTKASTGENERATOR_BYGGD är false
-// tills utkastvyn/betalflödet faktiskt finns — så länge den är false
-// länkar knappen till kommunens ansökningssystem (skickar bort exakt de
-// användare vägen ska konvertera). Det är rätt NU (bättre än en död länk),
-// men får inte bli en glömd default: sätt UTKASTGENERATOR_BYGGD = true och
-// byt href till utkastvyn i samma commit som den byggs.
+// tills utkastvyn/betalflödet faktiskt finns. SPRINT §Spår B (2026-07-19):
+// så länge den är false visas VÄNTELISTAN (VantelistaFlode.astro) istället
+// för en direktlänk till kommunens ansökningssystem — mäter intresse och
+// samlar adresser i stället för att skicka bort exakt de användare vägen
+// ska konvertera. Får inte bli en glömd default: sätt UTKASTGENERATOR_BYGGD
+// = true och byt till den riktiga utkastvyn i samma commit som den byggs.
 const UTKASTGENERATOR_BYGGD = false;
 
 // /exempel/-sidorna är avstängda i produktion tills utkastgeneratorn
@@ -217,9 +219,13 @@ const extra = forutsattningar.slice(1);
           <div data-filter-value={filter} hidden={filter !== 'alla'}>
             {kandidat && (
               <>
-                <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={UTKASTGENERATOR_BYGGD}>
-                  {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
-                </a>
+                {UTKASTGENERATOR_BYGGD ? (
+                  <a href={station5Href(kandidat.bidrag.id)} class="btn-primary progression__goal-cta" data-utkastgenerator-byggd={true}>
+                    {VAGLEDNING.station5.knapp} för {kandidat.bidrag.namn}
+                  </a>
+                ) : (
+                  <VantelistaFlode kommun={kommun} bidrag={kandidat.bidrag} />
+                )}
                 {EXEMPEL_LANK_LIVE && exempelKategori && (
                   <a href={`/exempel/${kommun.kommun_slug}/${exempelKategori}/`} class="progression__goal-exempel-lank">
                     Se ett exempel på ett färdigt utkast

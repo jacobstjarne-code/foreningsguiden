@@ -1,0 +1,92 @@
+---
+// VantelistaFlode — VÄNTELISTAN på station 5 (SPRINT §Spår B,
+// SPRINT_COPY.ts §VÄNTELISTA). Ersätter länken till kommunens
+// ansökningssystem så länge UTKASTGENERATOR_BYGGD är false
+// (KommunProgression.astro) — "bättre än en död länk" är nu "bättre än att
+// skicka bort exakt de användare vägen ska konvertera".
+//
+// Ingen dubbel opt-in här (till skillnad från subscribers.ts/BEVAKNING):
+// kvittot lovar inget bekräftelsemejl, bara "vi hör av oss när tjänsten
+// öppnar" — se vantelista.ts.
+import type { Kommun, Bidrag } from '../lib/kommuner';
+import { VAGLEDNING, VANTELISTA } from '../lib/content';
+
+export interface Props {
+  kommun: Kommun;
+  bidrag: Bidrag;
+}
+
+const { kommun, bidrag } = Astro.props;
+const besked = VANTELISTA.besked.replace(/{kommun}/g, kommun.kommun);
+---
+<div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-bidrag-id={bidrag.id}>
+  <button type="button" class="btn-primary progression__goal-cta" data-vantelista-knapp data-utkastgenerator-byggd="false">
+    {VAGLEDNING.station5.knapp} för {bidrag.namn}
+  </button>
+
+  <div class="vantelista__panel" data-vantelista-panel hidden>
+    <p class="vantelista__pris">{VANTELISTA.prisRad}</p>
+    <h4>{VANTELISTA.rubrik}</h4>
+    <p>{besked}</p>
+    <p>{VANTELISTA.cta}</p>
+
+    <form data-vantelista-form>
+      <label for={`vantelista-epost-${bidrag.id}`}>{VANTELISTA.epostLabel}</label>
+      <input type="email" id={`vantelista-epost-${bidrag.id}`} name="email" required autocomplete="email" />
+      <button type="submit" class="btn-primary">{VANTELISTA.knappVantelista}</button>
+    </form>
+
+    <p data-vantelista-kvitto hidden>{VANTELISTA.kvitto}</p>
+    <p data-vantelista-fel hidden>Något gick fel. Försök igen.</p>
+
+    <p class="vantelista__ansvar">{VANTELISTA.ansvar}</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-vantelista]').forEach((widget) => {
+    const kommunSlug = widget.dataset.kommunSlug ?? '';
+    const bidragId = widget.dataset.bidragId ?? '';
+    const knapp = widget.querySelector<HTMLButtonElement>('[data-vantelista-knapp]');
+    const panel = widget.querySelector<HTMLElement>('[data-vantelista-panel]');
+    const form = widget.querySelector<HTMLFormElement>('[data-vantelista-form]');
+    const kvitto = widget.querySelector<HTMLElement>('[data-vantelista-kvitto]');
+    const felText = widget.querySelector<HTMLElement>('[data-vantelista-fel]');
+
+    let klickLoggat = false;
+
+    knapp?.addEventListener('click', () => {
+      panel?.removeAttribute('hidden');
+      knapp.hidden = true;
+
+      // Klicket är intentmätningen — loggas oavsett om formuläret sen fylls
+      // i. keepalive: true så requesten inte tappas om något navigerar bort.
+      if (!klickLoggat) {
+        klickLoggat = true;
+        const data = new FormData();
+        data.set('kommun', kommunSlug);
+        data.set('bidrag', bidragId);
+        fetch('/api/vantelista-klick', { method: 'POST', body: data, keepalive: true }).catch(() => {});
+      }
+    });
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      felText?.setAttribute('hidden', '');
+      const data = new FormData(form);
+      data.set('kommun', kommunSlug);
+      data.set('bidrag', bidragId);
+
+      try {
+        const res = await fetch('/api/vantelista', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error('svar ej ok');
+
+        form.hidden = true;
+        kvitto?.removeAttribute('hidden');
+      } catch {
+        felText?.removeAttribute('hidden');
+      }
+    });
+  });
+</script>

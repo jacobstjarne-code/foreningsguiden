@@ -36,6 +36,10 @@ export interface Subscriber {
   kommuner: string[];
   registrerad: string; // ISO-datum
   confirmed: boolean;
+  // Giltighetskollen (SPRINT_COPY.ts §GILTIGHETSKOLL) — kommunSlug → senaste
+  // årsmötesdatum, sparat när prenumeranten ber om en giltighetspåminnelse.
+  // Bara de kommuner som faktiskt frågats om finns med som nycklar.
+  giltighetArsmoten?: Record<string, string>;
 }
 
 /** Skapar en obekräftad prenumerant + ett bekräftelsetoken (giltigt 7 dagar). */
@@ -66,6 +70,42 @@ export async function confirmSubscriberByToken(token: string): Promise<Subscribe
   await redis.set(recordKey(email), record);
   await redis.del(tokenKey(token));
   return record;
+}
+
+/**
+ * Giltighetsbevakning (SPRINT_COPY.ts §GILTIGHETSKOLL, "erbjudandet" efter
+ * beskedet) — sparar årsmötesdatum för kommunen mot adressen. Om adressen
+ * redan är en BEKRÄFTAD prenumerant läggs kommunen/datumet till direkt (ingen
+ * ny bekräftelse behövs — adressen är redan betrodd); annars går den genom
+ * samma dubbla opt-in som vanlig deadlinebevakning. Returnerar null som token
+ * när ingen bekräftelse krävs, så anroparen vet om ett bekräftelsemejl ska
+ * skickas eller inte.
+ */
+export async function addGiltighetBevakning(
+  email: string,
+  kommunSlug: string,
+  arsmotesdatum: string
+): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
+  const normalized = email.toLowerCase();
+  const existing = await getSubscriber(normalized);
+
+  const record: Subscriber = {
+    email: normalized,
+    kommuner: existing ? Array.from(new Set([...existing.kommuner, kommunSlug])) : [kommunSlug],
+    registrerad: existing?.registrerad ?? new Date().toISOString(),
+    confirmed: existing?.confirmed ?? false,
+    giltighetArsmoten: { ...(existing?.giltighetArsmoten ?? {}), [kommunSlug]: arsmotesdatum },
+  };
+  await redis.set(recordKey(normalized), record);
+  await redis.sadd(INDEX_KEY, normalized);
+
+  if (record.confirmed) {
+    return { token: null, alreadyConfirmed: true };
+  }
+
+  const token = crypto.randomUUID();
+  await redis.set(tokenKey(token), normalized, { ex: TOKEN_TTL_SEKUNDER });
+  return { token, alreadyConfirmed: false };
 }
 
 export async function removeSubscriber(email: string): Promise<void> {

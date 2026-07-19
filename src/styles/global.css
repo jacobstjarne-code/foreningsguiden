@@ -99,11 +99,35 @@ a:hover {
   line-height: 1.15;
 }
 
+.site-header__wordmark-row {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-2);
+}
+
 .site-header__wordmark {
   font-family: var(--fg-font-display);
   font-weight: var(--fg-weight-display);
   font-size: 1.4rem;
   letter-spacing: -0.02em;
+}
+
+/* BETA-badgen — mono-chip, samma skav som fg-source-strip/fg-stamp men
+   neutral (ingen semantisk färg att spendera på ett tillfälligt tillstånd). */
+.fg-beta-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--fg-font-mono);
+  font-size: 0.7rem;
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-ink-muted);
+  background: var(--fg-surface-sunken);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-pill);
+  padding: 2px 8px;
+  line-height: 1.4;
 }
 
 .site-header__wordmark em {
@@ -175,6 +199,11 @@ main {
   color: var(--fg-ink-muted);
 }
 
+.site-footer__beta {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-mono);
+}
+
 /* ---- Kommunsida ---- */
 
 .kommun-header h1 {
@@ -190,6 +219,27 @@ main {
   font-size: var(--fg-text-body-lg);
   font-weight: var(--fg-weight-bold);
   line-height: var(--fg-lh-body);
+}
+
+/* Kommunsiffran — aha-raden. Tint-bakgrund (accent-soft) räcker; ingen kant
+   som konkurrerar med VerificationRow/StaleWarning om uppmärksamheten. */
+.kommunsiffra {
+  background: var(--fg-accent-soft);
+  color: var(--fg-ink);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4) var(--fg-space-5);
+  font-size: var(--fg-text-body-lg);
+  font-weight: var(--fg-weight-bold);
+  line-height: var(--fg-lh-body);
+}
+
+.kommunsiffra__kalla {
+  display: block;
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-mono);
+  font-weight: var(--fg-weight-regular);
+  color: var(--fg-ink-muted);
+  margin-top: 3px;
 }
 
 /* Semantisk färg (attention) alltid med text + kant, aldrig färg ensam. */
@@ -927,4 +977,132 @@ main {
   margin: var(--fg-space-4) 0 0;
   font-size: var(--fg-text-label);
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Väntelistan (station 5) — SPRINT §Spår B ---- */
+
+.vantelista__panel {
+  background: var(--fg-surface);
+  color: var(--fg-ink);
+  border: var(--fg-border-structural) solid var(--fg-border);
+  border-radius: var(--fg-radius-card);
+  padding: var(--fg-space-6) var(--fg-space-6);
+  margin-top: var(--fg-space-5);
+  max-width: 46ch;
+}
+
+.vantelista__pris {
+  display: inline-block;
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  color: var(--fg-accent);
+  background: var(--fg-accent-soft);
+  border-radius: var(--fg-radius-pill);
+  padding: 4px 11px;
+  margin: 0 0 var(--fg-space-4);
+}
+
+.vantelista__panel h4 {
+  margin: 0 0 var(--fg-space-2);
+  font-size: var(--fg-text-body-lg);
+}
+
+.vantelista__panel form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fg-space-3);
+  align-items: flex-end;
+  margin-top: var(--fg-space-5);
+}
+
+.vantelista__panel label {
+  display: block;
+  font-weight: var(--fg-weight-bold);
+  font-size: var(--fg-text-label);
+  margin-bottom: 4px;
+}
+
+.vantelista__panel input[type="email"] {
+  padding: var(--fg-space-3);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-body-lg);
+  min-width: 22ch;
+}
+
+.vantelista__ansvar {
+  margin: var(--fg-space-5) 0 0;
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+}
+
+/* ---- Giltighetskollen — SPRINT §Spår B ---- */
+
+.giltighetskoll {
+  padding: var(--fg-card-padding);
+  margin: var(--fg-space-7) 0;
+  max-width: 68ch;
+}
+
+.giltighetskoll h3 {
+  margin-top: 0;
+}
+
+.giltighetskoll [data-giltighetskoll-form] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fg-space-3);
+  align-items: flex-end;
+  margin-top: var(--fg-space-5);
+}
+
+.giltighetskoll label {
+  display: block;
+  font-weight: var(--fg-weight-bold);
+  font-size: var(--fg-text-label);
+  margin-bottom: 4px;
+}
+
+.giltighetskoll input[type="date"],
+.giltighetskoll input[type="email"] {
+  padding: var(--fg-space-3);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-body-lg);
+}
+
+.giltighetskoll [data-giltighetskoll-svar] {
+  margin-top: var(--fg-space-5);
+  padding-top: var(--fg-space-5);
+  border-top: var(--fg-border-inner) dashed var(--fg-border);
+}
+
+.giltighetskoll [data-giltighetskoll-erbjudande] {
+  margin-top: var(--fg-space-5);
+}
+
+.giltighetskoll [data-giltighetskoll-epostform] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fg-space-3);
+  align-items: flex-start;
+  margin-top: var(--fg-space-5);
+}
+
+.giltighetskoll [data-giltighetskoll-epostform] .email-signup__consent {
+  flex-basis: 100%;
+}
+
+.giltighetskoll [data-giltighetskoll-kvitto-bekraftelse] h4,
+.giltighetskoll [data-giltighetskoll-kvitto-sparat] h4 {
+  margin: 0 0 4px;
+}
+
+.giltighetskoll [data-giltighetskoll-fel] {
+  color: var(--fg-urgent);
+  font-weight: var(--fg-weight-bold);
 }

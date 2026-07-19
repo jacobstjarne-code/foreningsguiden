@@ -336,3 +336,64 @@ export const MEJL = {
     ],
   },
 };
+
+/**
+ * BETA — etiketten och vad den betyder (SPRINT_COPY.ts, Fable 2026-07-18).
+ * Header-badgen (Base.astro) + egen deklarationssektion på /om/.
+ */
+export const BETA = {
+  badge: 'Beta',
+  rad: 'Föreningsguiden är i öppen beta. Allt är gratis medan vi bygger.',
+  omRubrik: 'Om betan',
+  omStycken: [
+    'Föreningsguiden är i öppen beta. Det betyder att allt du ser är gratis att använda, att vi bygger vidare i högt tempo, och att enstaka saker kan vara ofärdiga eller ändras.',
+    'Det som fungerar i dag: bidragsguider för 20 kommuner med verifierade uppgifter och källänkar, deadlinekalendern, och e-postbevakning som påminner innan sista ansökningsdag.',
+    'Det som kommer: en tjänst som skriver utkast till er ansökan utifrån kommunens egna krav. Den öppnar senare i betan — du kan ställa dig på väntelistan redan nu.',
+    'Hittar du fel, eller saknar du din kommun? Hör av dig till redaktionen. Betan blir bättre av varje påpekande.',
+  ],
+};
+
+/**
+ * GILTIGHETSKOLLEN — widget på kommunsidan, station 3-området
+ * (SPRINT_COPY.ts, Fable 2026-07-18). Ett datum in, ett besked ut.
+ * svarRisk/svarOk kräver en känd giltighetsregel (forutsattningar[0].giltighet);
+ * svarOkand används ALLTID när regeln saknas — ingen beräkning gissas fram.
+ */
+export const GILTIGHETSKOLL = {
+  rubrik: 'Är er bidragsstatus fortfarande giltig?',
+  intro: 'I {kommun} förfaller godkännandet som bidragsberättigad förening om det inte förnyas. Ange när föreningen senast hade årsmöte, så räknar vi ut var ni står.',
+  datumLabel: 'Föreningens senaste årsmöte',
+  knapp: 'Kontrollera',
+  svarRisk: 'Med årsmöte {arsmotesdatum} och regeln i {kommun} ({giltighetsregel}) kan er status ha förfallit eller vara nära att förfalla. Kontrollera i {system} att uppgifterna är uppdaterade — och gör det före nästa deadline, inte vid den.',
+  svarOk: 'Med årsmöte {arsmotesdatum} bör er status vara giltig ännu en tid. Men den förfaller om den inte förnyas — {giltighetsregel}.',
+  svarOkand: '{kommun} anger ingen tidsgräns för godkännandet i sina publicerade regler. Flera kommuner kräver ändå årlig uppdatering av föreningens uppgifter — kontrollera med kommunen. Vi har inte hittat en regel att räkna mot, så vi gissar inte.',
+  erbjudande: 'Vill ni att vi säger till i god tid innan statusen behöver förnyas?',
+  erbjudandeKnapp: 'Ja, påminn oss',
+};
+
+/**
+ * KOMMUNSIFFRAN — aha-rad överst på kommunsidan (SPRINT_COPY.ts, Fable
+ * 2026-07-18). Renderas ENDAST där Kommun.kommunsiffra finns i datat
+ * (nu: Berg, se data/kommuner/berg.yaml) — aldrig en uppskattning.
+ */
+export const KOMMUNSIFFRA = {
+  template: 'Förra året delade {antalForeningar} föreningar i {kommun} på {summa} kronor i {bidragstyp}.',
+  kalla: 'Källa: kommunens egen sammanställning, utlämnad {utlamnadDatum}.',
+};
+
+/**
+ * VÄNTELISTAN — station 5-knappen under betan (SPRINT_COPY.ts, Fable
+ * 2026-07-18). Ersätter länken till kommunens ansökningssystem tills
+ * utkastgeneratorn är byggd (UTKASTGENERATOR_BYGGD, KommunProgression.astro).
+ */
+export const VANTELISTA = {
+  knapp: 'Skapa utkast till ansökan',
+  prisRad: '149 kr när tjänsten öppnar — gratis att ställa sig i kön',
+  rubrik: 'Utkasttjänsten öppnar senare i betan',
+  besked: 'Vi bygger just nu tjänsten som skriver ett utkast till er ansökan utifrån {kommun}s egna krav. Den är inte öppen än — vi kalibrerar den mot verkliga ansökningar först, för att den ska hålla måttet.',
+  cta: 'Lämna er e-postadress så säger vi till när den öppnar. Föreningar på väntelistan får prova först.',
+  epostLabel: 'E-postadress',
+  knappVantelista: 'Ställ oss i kön',
+  kvitto: 'Ni står i kön. Vi hör av oss när utkasttjänsten öppnar — och inte om något annat.',
+  ansvar: 'Vi skriver utkastet. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
+};

@@ -9,13 +9,14 @@ import StaleWarning from '../../../components/StaleWarning.astro';
 import BreadcrumbList from '../../../components/BreadcrumbList.astro';
 import VerificationRow from '../../../components/VerificationRow.astro';
 import KommunProgression from '../../../components/KommunProgression.astro';
+import GiltighetsKontroll from '../../../components/GiltighetsKontroll.astro';
 import {
   loadKommuner, isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO,
   KATEGORI_LABELS, KATEGORIER,
 } from '../../../lib/kommuner';
 import type { Kategori } from '../../../lib/kommuner';
-import { KOMMUN } from '../../../lib/content';
+import { KOMMUN, KOMMUNSIFFRA } from '../../../lib/content';
 
 export function getStaticPaths() {
   return loadKommuner().map((kommun) => ({
@@ -106,6 +107,18 @@ const faqJsonLd = faqEntries.length > 0 ? {
   })),
 } : null;
 
+// --- Kommunsiffran (SPRINT_COPY.ts §KOMMUNSIFFRA) — bara där datat finns ---
+const kommunsiffraText = kommun.kommunsiffra
+  ? KOMMUNSIFFRA.template
+      .replace(/{antalForeningar}/g, String(kommun.kommunsiffra.antal_foreningar))
+      .replace(/{kommun}/g, kommun.kommun)
+      .replace(/{summa}/g, kommun.kommunsiffra.summa_kr)
+      .replace(/{bidragstyp}/g, kommun.kommunsiffra.bidragstyp)
+  : null;
+const kommunsiffraKalla = kommun.kommunsiffra
+  ? KOMMUNSIFFRA.kalla.replace(/{utlamnadDatum}/g, kommun.kommunsiffra.utlamnad_datum)
+  : null;
+
 // dateModified ur verifierad (SOKBARHETSSPEC §4.5) — färskhetssignal.
 const webPageJsonLd = {
   '@context': 'https://schema.org',
@@ -132,6 +145,12 @@ const webPageJsonLd = {
 
   <VerificationRow kommun={kommun.kommun} verifierad={kommun.verifierad} kallaUrl={kommun.kalla_url} />
 
+  {kommunsiffraText && (
+    <p class="kommunsiffra">
+      {kommunsiffraText} <span class="kommunsiffra__kalla">{kommunsiffraKalla}</span>
+    </p>
+  )}
+
   {svarForst && <p class="svar-forst">{svarForst}</p>}
 
   <p>{intro}</p>
@@ -139,7 +158,10 @@ const webPageJsonLd = {
   {kommun.bidrag.length === 0 ? (
     <p>{KOMMUN.ingaBidrag}</p>
   ) : (
-    <KommunProgression kommun={kommun} today={today} />
+    <>
+      <KommunProgression kommun={kommun} today={today} />
+      <GiltighetsKontroll kommun={kommun} today={today} />
+    </>
   )}
 
   <section>
