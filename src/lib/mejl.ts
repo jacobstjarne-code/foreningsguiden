@@ -20,12 +20,14 @@ const env = import.meta.env as unknown as Record<string, string>;
 const resend = new Resend(env.RESEND_API_KEY?.trim());
 
 // Ingen no-reply (SPRINT §MEJL) — mottagare ska kunna svara direkt.
-const FROM = 'Föreningsguiden <foreningsguiden@resend.dev>';
+// Egen verifierad domän (SPRINT §Steg 2, 2026-07-20) — resend.dev var bara
+// provisoriskt tills SPF/DKIM/DMARC fanns på plats för foreningsguiden.se.
+const FROM = 'Föreningsguiden <bevakning@foreningsguiden.se>';
 
 /**
- * Bas-URL för länkar i mejl. Vercel-URL:en tills domänen är kopplad
- * (måndag, SPRINT §MÅNDAG) — sätt SITE_URL i Vercel-miljön den dagen
- * istället för att ändra kod.
+ * Bas-URL för länkar i mejl. SITE_URL = https://foreningsguiden.se sedan
+ * domänkopplingen (2026-07-20). vercel.app kvar som fallback bara om
+ * env-värdet någon gång saknas.
  */
 export function siteUrl(): string {
   return (env.SITE_URL || 'https://foreningsguiden.vercel.app').trim();
