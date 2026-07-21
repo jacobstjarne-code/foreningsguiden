@@ -668,33 +668,148 @@ main {
   font-style: italic;
 }
 
-/* ---- Kommunväljare (startsida) ---- */
+/* ---- Kommunväljaren (startsida) — Design-uppdrag 5, turn-7 ---------- *
+ * Sök + länsvis <details>-disclosure. Ersätter den platta kommun-grid-
+ * knappväggen (funkar vid 20, blir en vägg vid 50, omöjlig vid 290).
+ * <details> håller alla kommunlänkar i DOM oavsett öppet/kollapsat —
+ * det är hela poängen, rör inte det när du styr utseendet härifrån. */
 
-.kommun-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--fg-space-3);
-  list-style: none;
+.kommunvaljare {
   margin: var(--fg-space-5) 0 var(--fg-space-7) 0;
-  padding: 0;
+  max-width: 68ch;
 }
 
-.kommun-grid li {
-  background: var(--fg-surface);
+.kommunvaljare__sok {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-4);
+  background: var(--fg-surface-sunken);
+  border: var(--fg-border-structural) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4) var(--fg-space-5);
+  color: var(--fg-ink-muted);
+}
+
+.kommunvaljare__sok input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-body-lg);
+  color: var(--fg-ink);
+  outline: none;
+}
+
+.kommunvaljare__antal {
+  margin-top: var(--fg-space-3);
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-ink-muted);
+}
+
+.kommunvaljare__bladdra-label {
+  margin-top: var(--fg-space-6);
+  margin-bottom: var(--fg-space-3);
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-ink-muted);
+}
+
+.kommunvaljare__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-3);
+}
+
+.kommunvaljare__lan {
   border: var(--fg-border-inner) solid var(--fg-border);
   border-radius: var(--fg-radius-control);
+  overflow: hidden;
 }
 
-.kommun-grid a {
-  display: block;
-  padding: var(--fg-space-3) var(--fg-space-5);
-  text-decoration: none;
-  color: var(--fg-ink);
-  font-weight: var(--fg-weight-bold);
+.kommunvaljare__lan-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-4);
+  padding: var(--fg-space-4) var(--fg-space-5);
+  background: var(--fg-surface-sunken);
+  cursor: pointer;
+  list-style: none;
 }
 
-.kommun-grid a:hover {
+.kommunvaljare__lan-summary::-webkit-details-marker {
+  display: none;
+}
+
+.kommunvaljare__chevron {
+  flex: none;
   color: var(--fg-accent);
+  transition: transform 0.15s ease;
+}
+
+.kommunvaljare__lan[open] .kommunvaljare__chevron {
+  transform: rotate(90deg);
+}
+
+.kommunvaljare__lan-namn {
+  flex: 1;
+  font-size: var(--fg-text-body-lg);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-ink);
+}
+
+.kommunvaljare__lan-antal {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-ink-muted);
+}
+
+.kommunvaljare__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--fg-border);
+  border-top: var(--fg-border-inner) solid var(--fg-border);
+}
+
+.kommunvaljare__kommun-lank {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fg-space-3);
+  padding: var(--fg-space-4) var(--fg-space-5);
+  background: var(--fg-surface);
+  font-size: var(--fg-text-body);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-ink);
+  text-decoration: none;
+}
+
+.kommunvaljare__kommun-lank:hover {
+  color: var(--fg-accent);
+  text-decoration: none;
+}
+
+.kommunvaljare__kommun-lank svg {
+  flex: none;
+  color: var(--fg-ink-muted);
+}
+
+.kommunvaljare__tom {
+  margin-top: var(--fg-space-5);
+  color: var(--fg-ink-muted);
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .kommunvaljare__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---- Progressionen ("vägen") — designsystem leverans 3 ---- */

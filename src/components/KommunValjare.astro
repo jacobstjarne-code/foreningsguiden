@@ -1,0 +1,118 @@
+---
+// KommunValjare — hubben i hub-och-eker-strukturen, ombyggd för skala
+// (SLUTSPEC_LANSERING DEL 3, Design-uppdrag 5 · turn-7 i
+// incoming/Föreningsguiden kommersiell_ny.dc.html). Ersätter den platta
+// <ul>-knappväggen (funkar vid 20, blir en vägg vid 50, omöjlig vid 290).
+//
+// Två krav i samma komponent: sökfält överst för den som vet sin kommun,
+// och under det en fullt crawlbar lista grupperad per län med
+// disclosure-mönstret (<details>/<summary>) — län som kollapsade
+// sektioner. KRITISKT: <details> renderar sina barn i DOM oavsett
+// öppet/kollapsat, så alla kommunlänkar finns kvar för crawlern även
+// när länet är stängt. Sökfiltret (skriptet nedan) döljer via `hidden`,
+// tar ALDRIG bort ur DOM — exakt samma mönster som progression- och
+// deadlines-filtren i den här kodbasen. Fungerar även utan JS eftersom
+// listan redan ligger där.
+import type { Kommun } from '../lib/kommuner';
+
+export interface Props {
+  kommuner: Kommun[];
+}
+
+const { kommuner } = Astro.props;
+
+const lanMap = new Map<string, Kommun[]>();
+for (const k of kommuner) {
+  const lista = lanMap.get(k.lan) ?? [];
+  lista.push(k);
+  lanMap.set(k.lan, lista);
+}
+
+const lanGrupper = [...lanMap.entries()]
+  .map(([lan, kommunerILan]) => ({
+    lan,
+    kommuner: [...kommunerILan].sort((a, b) => a.kommun.localeCompare(b.kommun, 'sv')),
+  }))
+  .sort((a, b) => a.lan.localeCompare(b.lan, 'sv'));
+
+const antalLan = lanGrupper.length;
+---
+<div class="kommunvaljare" data-kommunvaljare>
+  <label class="kommunvaljare__sok">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+    <input type="text" placeholder="Sök din kommun — t.ex. Gislaved" data-kommunvaljare-input autocomplete="off" />
+  </label>
+  <div class="kommunvaljare__antal" data-kommunvaljare-antal>{kommuner.length} KOMMUNER TILLGÄNGLIGA · {antalLan} LÄN</div>
+
+  <div class="kommunvaljare__bladdra-label">Eller bläddra per län</div>
+
+  <div class="kommunvaljare__lista">
+    {lanGrupper.map(({ lan, kommuner: kommunerILan }) => (
+      <details class="kommunvaljare__lan" data-kommunvaljare-lan>
+        <summary class="kommunvaljare__lan-summary">
+          <svg class="kommunvaljare__chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+          <span class="kommunvaljare__lan-namn">{lan}</span>
+          <span class="kommunvaljare__lan-antal">{kommunerILan.length}</span>
+        </summary>
+        <div class="kommunvaljare__grid">
+          {kommunerILan.map((k) => (
+            <a href={`/kommun/${k.kommun_slug}/`} class="kommunvaljare__kommun-lank" data-kommunvaljare-kommun data-namn={k.kommun.toLowerCase()}>
+              {k.kommun}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+            </a>
+          ))}
+        </div>
+      </details>
+    ))}
+  </div>
+
+  <p class="kommunvaljare__tom" data-kommunvaljare-tom hidden>Ingen kommun matchar sökningen.</p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-kommunvaljare]').forEach((widget) => {
+    const input = widget.querySelector<HTMLInputElement>('[data-kommunvaljare-input]');
+    const lanSections = widget.querySelectorAll<HTMLDetailsElement>('[data-kommunvaljare-lan]');
+    const tomMsg = widget.querySelector<HTMLElement>('[data-kommunvaljare-tom]');
+    const antalEl = widget.querySelector<HTMLElement>('[data-kommunvaljare-antal]');
+    const antalTotalt = widget.querySelectorAll('[data-kommunvaljare-kommun]').length;
+    const antalLanTotalt = lanSections.length;
+
+    function applyFilter() {
+      const query = (input?.value ?? '').trim().toLowerCase();
+      let synligaKommuner = 0;
+      let synligaLan = 0;
+
+      lanSections.forEach((lanEl) => {
+        const lankar = lanEl.querySelectorAll<HTMLAnchorElement>('[data-kommunvaljare-kommun]');
+        let lanHarTraff = false;
+
+        lankar.forEach((lank) => {
+          const matchar = query === '' || (lank.dataset.namn ?? '').includes(query);
+          lank.hidden = !matchar;
+          if (matchar) {
+            lanHarTraff = true;
+            synligaKommuner++;
+          }
+        });
+
+        lanEl.hidden = !lanHarTraff;
+        if (lanHarTraff) synligaLan++;
+
+        // Fäller ut automatiskt vid sökträff, så resultatet syns utan
+        // extra klick. Fäller aldrig ihop programmatiskt — rör inte vad
+        // användaren själv klickat upp.
+        if (query !== '' && lanHarTraff) lanEl.open = true;
+      });
+
+      if (antalEl) {
+        antalEl.textContent = query === ''
+          ? `${antalTotalt} KOMMUNER TILLGÄNGLIGA · ${antalLanTotalt} LÄN`
+          : `${synligaKommuner} TRÄFFAR · ${synligaLan} LÄN`;
+      }
+      if (tomMsg) tomMsg.hidden = !(query !== '' && synligaKommuner === 0);
+    }
+
+    input?.addEventListener('input', applyFilter);
+  });
+</script>

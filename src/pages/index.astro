@@ -4,6 +4,7 @@
 // (Code); all löptext kommer från content.ts (Fable).
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
+import KommunValjare from '../components/KommunValjare.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
 import { START } from '../lib/content';
 
@@ -17,11 +18,7 @@ const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).
 
   <section>
     <h2>{START.kommunvaljareRubrik}</h2>
-    <ul class="kommun-grid">
-      {kommuner.map((k) => (
-        <li><a href={`/kommun/${k.kommun_slug}/`}>{k.kommun}</a></li>
-      ))}
-    </ul>
+    <KommunValjare kommuner={kommuner} />
   </section>
 
   <section>
