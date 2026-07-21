@@ -351,6 +351,8 @@ main {
 
 .bidrag-card dd {
   margin: 0;
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 
 .bidrag-card__divider {
@@ -371,6 +373,10 @@ main {
   margin: 0;
   font-size: var(--fg-text-label);
   color: var(--fg-ink-muted);
+}
+
+.bidrag-card__kalla a {
+  overflow-wrap: anywhere;
 }
 
 .bidrag-card__cta {
@@ -788,6 +794,15 @@ main {
   font-weight: var(--fg-weight-bold);
   color: var(--fg-ink);
   text-decoration: none;
+}
+
+/* En ensam kvarbliven länk på en 2-kolumnsrad (udda antal totalt i länet,
+   t.ex. Bergs 1 eller Skånes 3) tar hela bredden i stället för att lämna
+   en tom cell där gap-bakgrunden (--fg-border) annars lyser igenom. Rör
+   inte jämnt fördelade län — :nth-child(odd) triggar bara när sista
+   länken också råkar stå ensam i en ny rad. */
+.kommunvaljare__kommun-lank:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .kommunvaljare__kommun-lank:hover {
