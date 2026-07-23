@@ -1,0 +1,308 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2, v2.1 — källkonvergens
+# ersätter portal-först). Föregående version (verifierad 2026-07-19) rapporterades
+# komplett men saknade fem bidrag som aldrig fångades av att bara följa kommunens
+# redaktionella sidträd: Investeringsbidrag, Driftbidrag till organisationer,
+# Vägföreningsbidrag, Bidrag för brukardriven fritidsgårdsverksamhet, samt
+# kommunens stiftelser/fonder (8 st, skrivna som ETT samlat bidrag per §2.7).
+#
+# Metod: (1) Regelverket "Riktlinjer/beräkningsgrunder för föreningsbidrag" hämtades
+# i två antagna versioner — 2015-01-19 (Kfn 2014/88-641, Kommunfullmäktige) och den
+# gällande, nyare 2017-02-06 §1 (Kfn 2016/00450, Kommunfullmäktige) — och
+# extraherades med pdftotext. Föregående körning rapporterade dessa PDF:er som
+# "binärt/bildbaserat format" och otextextraherbara; det visade sig vara en
+# verktygsbegränsning i föregående körnings hämtningsmetod, inte en egenskap hos
+# PDF:erna själva — de är vanliga textbaserade PDF:er. Detta löste upp föregående
+# körnings antagande att beräkningsgrunderna var otillgängliga. (2) Förvaltningens
+# huvudöversikt samt tre källor utanför kultur- och fritidsförvaltningens ordinarie
+# spår genomsöktes specifikt: Samhällsbyggnadsnämndens sida om enskilda vägar,
+# Ekonomikontorets stiftelse-/fondsida, samt Trollhättan Stadshus AB:s
+# elitsponsringssida. (3) Specialkategorier enligt §2.1.5 genomsöktes riktat: väg/
+# samfälligheter (träff — Vägföreningsbidrag), bygdegårdar (redan i filen),
+# stiftelser/fonder (träff — 8 stiftelser), samhälls-/byalagsföreningar (sökt
+# aktivt, ingen distinkt bidragsform funnen utöver de befintliga bidragen till
+# hållbar utveckling och driftbidrag till organisationer), studieförbund (redan i
+# filen). Samtliga minasidor.trollhattan.se-undersidor som konsulterades visade sig
+# vara textextraherbara som statisk text (till skillnad från Växjös Rbok och
+# Halmstads FRI, som är JS-renderade) — ingen EJ_EXTRAHERBAR-flagga behövdes för
+# minasidor denna gång.
+#
+# Uteslutna (kategoriskt skäl, §2.4):
+# - "Ungdomspengen" — kommunens egna sidor (trollhattan.se/n3/ungdomspengen samt
+#   minasidor/473) beskriver stödet som riktat "endast [till] privatpersoner"
+#   12–25 år. 2015 års regelverk nämnde det som sökbart även för föreningar, men
+#   det är borttaget ur både 2017 års gällande regelverk och den nuvarande
+#   redaktionella bidragssidan. Individuellt stöd till privatperson, inte ett
+#   föreningsbidrag. https://www.trollhattan.se/n3/ungdomspengen/
+# - "Elitsponsring" — administreras och beslutas av Trollhättan Stadshus AB (TSAB),
+#   ett kommunägt bolag med egen styrelse — annan huvudman än kommunen.
+#   https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/elitsponsring/
+#
+# Källkonflikt (§2.5, ej nollställningsbar eftersom fältet är fritext): det gällande
+# regelverket (2017-02-06 §1) anger lägst 10 medlemmar för föreningar för personer
+# med funktionsnedsättning. Den tidigare verifierade e-tjänsten (minasidor/140) gav
+# vid direkt läsning 25 och saknar synligt publiceringsdatum på sidan, så ingen
+# källa kan avgöras som nyare. Det senast direkt verifierade webbvärdet (25)
+# behålls i malgrupp-fältet och avvikelsen dokumenteras i bidragets anteckning
+# istället för att nollställas — se trollhattan-funktionsnedsattning-bidrag.
+#
+# Kultur- och fritidsförvaltningen hanterar merparten av bidragen. Bidraget till
+# hållbar utveckling beslutas av Kommunstyrelsens Agenda 2030-utskott och
+# Trygghetsutskott. Vägföreningsbidraget administreras av Samhällsbyggnadsnämnden.
+# Stiftelser/fonder administreras huvudsakligen av Ekonomikontoret (Nydqvistska
+# stiftelsen för idrottens främjande av Kultur- och fritidsförvaltningen).
+# Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Trollhättan"
+kommun_slug: "trollhattan"
+lan: "Västra Götalands län"
+befolkning: 59162
+forvaltning: "Kultur- och fritidsförvaltningen (huvuddelen av bidragen), Kommunstyrelsens Agenda 2030-utskott och Trygghetsutskott (hållbar utveckling), Samhällsbyggnadsnämnden (vägföreningsbidrag) samt Ekonomikontoret (stiftelser och fonder)"
+ansokningssystem:
+  namn: "Trollhättans stads e-tjänst (Mina sidor)"
+  url: "https://minasidor.trollhattan.se/"
+kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+verifierad: 2026-07-20
+bidrag:
+  - id: "trollhattan-barn-ungdomsbidrag"
+    namn: "Bidrag för barn- och ungdomsverksamhet"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Ideella föreningar som bedriver verksamhet för och med barn och unga 6–25 år, minst 10 medlemmar (ingen övre åldersgräns för verksamhet riktad till personer med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-31"]
+    krav:
+      - "Ideell förening med verksamhet för och med barn och unga 6–25 år"
+      - "Minst 10 medlemmar i åldern 6–25 år (undantag kan prövas)"
+      - "Bifoga årsmötesprotokoll, verksamhetsberättelse, ekonomisk berättelse och undertecknad revisionsberättelse"
+    belopp: null
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/139"
+    anteckning: "Tre delbidrag: verksamhetsbidrag (ledarledd verksamhet, max 3 tillfällen/vecka, 120/år per medlem), lokalbidrag (lokal som nyttjas minst 3 ggr/vecka) och driftbidrag (idrotts-/friluftsanläggning). Inga kronbelopp anges i den textextraherbara källan; kommunens regelverk (2017-02-06 §1) bekräftar att beloppen 'är beroende av det belopp som årligen anvisas i budget' snarare än fasta kronbelopp. Utbetalning i mars och augusti. Investeringsbidrag till samma anläggningar är ett separat bidrag, se trollhattan-investeringsbidrag."
+  - id: "trollhattan-kulturbidrag"
+    namn: "Kulturbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Lokal kulturarvs- och hembygdsförening samt kulturförening med publik verksamhet i Trollhättan"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-31"]
+    krav:
+      - "Kontinuerlig verksamhet under året inriktad mot kulturell verksamhet (t.ex. kulturminnesvård, historia, bildkonst, film, teater, sång, musik, dans, litteratur, cirkus, spel)"
+      - "Publika arrangemang öppna och tillgängliga för allmänheten, genomförda inom Trollhättans kommun"
+      - "Bör vara ansluten till distrikts- och/eller riksförbund om sådant finns"
+      - "Bifoga verksamhetsplan och budget för kommande år samt föregående års verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse"
+    belopp: null
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/138"
+    anteckning: "Handläggning juni–december inför kommande kalenderår. Utbetalning i mars och augusti. Källa uppdaterad denna omkörning till den direkta e-tjänsten (overview/138), som bekräftar samma 31 maj-deadline som huvudöversikten."
+  - id: "trollhattan-pensionarsbidrag"
+    namn: "Bidrag för pensionärsorganisation"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsorganisationer verksamma i Trollhättan med minst 25 registrerade medlemmar"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Föreningen ska ha sitt säte i Trollhättan och minst 25 registrerade medlemmar"
+      - "Ansökan ska godkännas och signeras av föreningens firmatecknare"
+      - "Bifoga årsmötesprotokoll, verksamhetsplan, verksamhetsberättelse, ekonomisk berättelse och undertecknad revisionsberättelse"
+    belopp: "Lokalbidraget uppgår till högst 400 kronor per medlem. Grundbidrag och medlemsbidrag har inget angivet takbelopp i kronor i den textextraherbara källan."
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/141"
+    anteckning: "Tre delbidrag: grundbidrag (administration, evenemang, omkostnader), medlemsbidrag (baserat på antal betalande medlemmar folkbokförda i Trollhättan) och lokalbidrag (högst 400 kr/medlem). Utbetalning i maj och oktober. Föreningar med brutet verksamhetsår ombeds kontakta kultur- och fritidsförvaltningen. Medlemstalet 25 bekräftat i kommunens regelverk (2017-02-06 §1) — ingen konflikt för detta bidrag."
+  - id: "trollhattan-funktionsnedsattning-bidrag"
+    namn: "Bidrag till föreningar för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Föreningar för personer med funktionsnedsättning verksamma i Trollhättan med minst 25 registrerade medlemmar"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Föreningen ska ha sitt säte i Trollhättan och minst 25 registrerade medlemmar"
+      - "Ansökan ska godkännas och signeras av föreningens firmatecknare"
+      - "Bifoga årsmötesprotokoll, verksamhetsplan, verksamhetsberättelse, ekonomisk berättelse och undertecknad revisionsberättelse"
+    belopp: "Lokalbidraget uppgår till högst 400 kronor per medlem. Grundbidrag och medlemsbidrag har inget angivet takbelopp i kronor i den textextraherbara källan."
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/140"
+    anteckning: "Samma struktur som bidraget till pensionärsorganisationer: grundbidrag, medlemsbidrag och lokalbidrag (högst 400 kr/medlem). Utbetalning i maj och oktober. KÄLLKONFLIKT (§2.5): kommunens gällande regelverk (Riktlinjer/beräkningsgrunder för föreningsbidrag, Kommunfullmäktige 2017-02-06 §1, Kfn 2016/00450) anger lägst 10 medlemmar för föreningar för personer med funktionsnedsättning — inte 25 som malgrupp-fältet ovan anger och som senast verifierades direkt mot e-tjänsten. Webbkällan saknar synligt publiceringsdatum, så ingen av källorna kan avgöras som nyare enligt §2.5; medlemstalet 25 behålls här eftersom det är det senast direkt verifierade värdet på den faktiska ansökningssidan, men avvikelsen mot regelverket kvarstår olöst och loggas i konflikter.log."
+  - id: "trollhattan-lovbidrag"
+    namn: "Lovbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar i Trollhättan som anordnar aktiviteter för barn och unga 6–19 år under skollov"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Endast föreningens ordförande eller kassör får ansöka"
+      - "Deltagare behöver inte vara medlem i föreningen"
+      - "Aktiviteten ska redovisas senast en månad efter avslutad aktivitet"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/142"
+    anteckning: "Ansökan ska vara insänd senast sex veckor innan det aktuella lovet (sportlov, sommarlov eller höstlov) — därför lopande snarare än fasta årliga datum. Bekräftat i kommunens regelverk (2017-02-06 §1): 'Ansökan inlämnas sex veckor innan respektive lov'."
+  - id: "trollhattan-startbidrag"
+    namn: "Startbidrag för föreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Nybildade föreningar (högst sex månader gamla) med barn- och ungdomsverksamhet i Trollhättan, minst 10 medlemmar 6–25 år, gärna anslutna till en riksorganisation"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha bildats inom de senaste sex månaderna"
+      - "Ansökan ska godkännas och undertecknas av föreningens firmatecknare"
+      - "Bifoga föreningens stadgar, protokoll från konstituerande möte, intyg om plus-/bankgiro och intyg om organisationsnummer"
+    belopp: "Max 4 000 kronor"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "Ansökningssidan (minasidor.trollhattan.se) beskriver bidraget endast som \"ett mindre ekonomiskt bidrag\" utan belopp; beloppet 4 000 kronor anges på kommunens översiktssida för föreningsbidrag och bekräftades i två oberoende hämtningar av den sidan. Medlemstalet 10 bekräftat i det gällande regelverket (2017-02-06 §1) — 2015 års äldre regelverk angav 15, vilket visar att kravet sänkts mellan de två antagna versionerna."
+  - id: "trollhattan-hallbar-utveckling"
+    namn: "Föreningsbidrag hållbar utveckling"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella och ekonomiska föreningar samt studieförbund verksamma i Trollhättan"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Självständig ideell förening (egen juridisk person), demokratiskt uppbyggd"
+      - "Dokumenterad verksamhet med fastställda verksamhets- och ekonomiska berättelser, registrerad i stadens föreningsregister"
+      - "Minst 25 % medfinansiering av total projektbudget"
+    belopp: "30 000–150 000 kronor (kräver minst 25 % medfinansiering av projektbudgeten)"
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/756"
+    anteckning: "Inriktning beslutas per ansökningsomgång av Agenda 2030-utskottet (t.ex. jämställdhet och/eller hållbara resor/transporter) och Trygghetsutskottet (t.ex. barn och unga i risk för kriminalitet); inriktningen för hösten 2025 var senast publicerade uppgift vid verifieringstillfället. E-tjänsten var stängd vid föregående verifiering (2026-07-19), angivet öppningsdatum 2026-08-01."
+  - id: "trollhattan-offentlig-kulturverksamhet"
+    namn: "Bidrag till offentlig kulturverksamhet eller arrangemang"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar som anordnar enstaka offentliga kulturarrangemang öppna för allmänheten inom Trollhättans kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arrangemanget ska vara öppet och tillgängligt för allmänheten"
+      - "Genomförs inom Trollhättans kommun"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "Bör lämnas in senast tre månader före planerat genomförande. Utbetalning görs efter fattat beslut, inte vid fasta datum. Kan ges som garantibelopp eller bidrag enligt regelverket (2017-02-06 §1)."
+  - id: "trollhattan-sarskilda-insatser"
+    namn: "Bidrag för särskilda insatser"
+    kategori: ["social", "funktionsratt", "ovrig"]
+    malgrupp: "Föreningar (enskilt eller i samverkan) som genomför särskilt angelägna insatser: t.ex. för barn/unga utanför föreningslivet, personer med funktionsnedsättning, förebyggande arbete, miljö, trygghet eller integration"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Tydlig beskrivning av planerad aktivitet och specificerad budget"
+      - "Kan sökas av en enskild förening eller flera föreningar i samverkan"
+      - "Redovisning senast två månader efter genomförd aktivitet, med ekonomisk sammanställning"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "Ansökan ska vara inne minst två månader innan planerad aktivitet. Inriktning styrs av kultur- och fritidsnämndens fastslagna mål för mandatperioden. Regelverket (2017-02-06 §1) ger exempel: folkhälsoarbete, miljövård, kampanjer mot drogmissbruk/doping/våld, ungdomars medinflytande, samt enstaka offentliga arrangemang för barn och unga."
+  - id: "trollhattan-studieforbund"
+    namn: "Bidrag till studieförbundens lokala organisationer"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Lokal avdelning ansluten till ett av Folkbildningsrådet godkänt studieförbund, verksam i Trollhättan"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-30"]
+    krav:
+      - "Avdelningen ska vara ansluten till ett av Folkbildningsrådet godkänt studieförbund"
+    belopp: null
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "Bidragets storlek bestäms av tilldelad budget, inget publicerat takbelopp per avdelning. Utbetalning senast i september. Trollhättans stad följer Västra Götalands Bildningsförbunds fördelningsrekommendation (regelverk 2017-02-06 §1)."
+  - id: "trollhattan-driftbidrag-bygdegard"
+    namn: "Driftbidrag till bygdegårds- och Folkets husföreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Bygdegårds- och Folkets husföreningar med allmänna möteslokaler inom Trollhättans kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Besittningsrätt till lokal/anläggning genom köpekontrakt eller hyresavtal"
+      - "Kan sökas av en enskild förening eller flera föreningar i samverkan"
+    belopp: null
+    sen_ansokan: "Ansökan som inkommer efter ansökningsdatum kan reduceras eller avslås."
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "Ansökningsperiod 1–31 oktober för kommande kalenderår. Utbetalning i februari. Skilt bidrag från trollhattan-driftbidrag-organisationer (bredare 'restbidrag' för organisationer utanför bygdegård/Folkets hus-kategorin, se nedan)."
+  - id: "trollhattan-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med drifts- och underhållsansvar (som ägare eller genom avtal med Trollhättans Stad) för idrotts- och friluftsanläggning som regelbundet nyttjas för barn- och ungdomsverksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Avser nybyggnads-, förbättrings- och reparationsarbeten av idrotts- och friluftsanläggning samt reinvestering/nyanskaffning av utrustning"
+      - "Kan inte sökas retroaktivt — ansökan ska lämnas innan kostnaden uppstått"
+      - "Utbetalning sker när redovisning med bestyrkta verifikationer inlämnats till förvaltningen"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Beskrivs som en egen bidragsform, skild från de tre delbidragen (verksamhets-, lokal- och driftbidrag) under trollhattan-barn-ungdomsbidrag — bekräftat i både kommunens regelverk (2017-02-06 §1, egen rubrik 'INVESTERINGSBIDRAG') och den redaktionella bidragssidan ('Övriga möjligheter inom denna kategori: Investeringsbidrag'). Efter särskild prövning kan även föreningar utan eget driftansvar för anläggningen beviljas bidraget, enligt regelverket. Inget kronbelopp eller takbelopp publicerat."
+  - id: "trollhattan-driftbidrag-organisationer"
+    namn: "Driftbidrag till organisationer"
+    kategori: ["ovrig"]
+    malgrupp: "Organisationer med förvaltad fastighet och/eller anläggning i Trollhättan, vars verksamhet inte faller inom kommunens ordinarie bidragssystem"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Avser drift och underhåll av förvaltad fastighet och/eller anläggning"
+      - "Bidragets storlek beslutas av Kultur- och fritidsnämnden"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Skilt bidrag från trollhattan-driftbidrag-bygdegard (som är specifikt för bygdegårds-/Folkets husföreningars allmänna samlingslokaler) — detta är det bredare bidraget för organisationer som inte faller inom någon annan kategori, bekräftat i både regelverket ('ÖVRIGT FÖRENINGSSTÖD — DRIFTBIDRAG TILL ORGANISATIONER', 2017-02-06 §1) och den redaktionella bidragssidan ordagrant: 'Driftbidrag till underhåll för förvaltad fastighet och/eller anläggning till organisation som inte bedöms falla inom det ordinarie bidragssystemet'. Ansökningsperiod 1–31 oktober för kommande kalenderår, utbetalning i mars."
+  - id: "trollhattan-brukardriven-fritidsgard"
+    namn: "Bidrag för brukardriven fritidsgårdsverksamhet"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar i Trollhättan som vill bedriva fritidsgårdsverksamhet för barn och unga"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Ansökan ska åtföljas av verksamhetsbeskrivning och budget"
+      - "Redovisning sker halvårsvis, i januari och juni"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trollhattan.se/globalassets/dokument/uppleva-och-gora/ovrigt/riktlinjer---berakningsgrunder-for-foreningsbidrag-2017-02-06.pdf/"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Finns som egen rubrik i kommunens gällande regelverk (Kommunfullmäktige 2017-02-06 §1, Kfn 2016/00450) men listas INTE på den redaktionella bidragssidan — ett konkret exempel på precis den täckningslucka RESEARCH_SPEC v2 §2 är skriven för att fånga (regelverket, inte webbredaktörens sidträd, avgör täckning). Enligt offentliga uppgifter om kultur- och fritidsnämndens budget drivs verksamheten i dagsläget av två kända föreningar (Velanda och Upphärad), som får driftbidrag för brukardriven fritidsgårdsverksamhet — bidraget ser alltså ut att vara aktivt även om det inte marknadsförs brett. Inget kronbelopp publicerat; 'beroende av det belopp som årligen anvisas för ändamålet' enligt regelverket."
+  - id: "trollhattan-vagforeningsbidrag"
+    namn: "Vägföreningsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Vägföreningar och vägsamfälligheter i Trollhättans kommun som ansvarar för enskild väg"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska vara öppen för allmän fordonstrafik året om"
+      - "Vägen ska vara minst 200 meter lång"
+      - "Vägen får inte redan erhålla statligt driftbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/330"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori §2.1.5). Administreras av Samhällsbyggnadsnämnden, till skillnad från kultur- och fritidsförvaltningens övriga bidrag i denna fil. Omfattar dels ordinarie driftbidrag (barmarksunderhåll, vinterväghållning, dikesrensning m.m.), dels särskilt driftbidrag för åtgärder utanför ordinarie underhåll (förstärkning av bärlager, byte av skyltar, ombyggnad/renovering av vägtrumma eller räcke, dikningsarbeten). Ingen ansökningsdeadline eller belopp/kr-per-meter-nivå publicerad i den textextraherbara källan, till skillnad från t.ex. Halmstads motsvarande bidrag — därför satt till löpande. E-legitimation krävs för ansökan."
+  - id: "trollhattan-stiftelser-fonder"
+    namn: "Stiftelser och fonder"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar och privatpersoner med anknytning till Trollhättans kommun, enligt respektive stiftelses ändamål — bland annat idrottsföreningar (Nydqvistska stiftelsen för idrottens främjande) och organisationer/enskilda till stöd för personer med funktionsnedsättning (Prims stiftelse för handikappade barn)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30", "10-31"]
+    krav:
+      - "Sökande (eller den ansökan avser) ska ha anknytning till Trollhättans kommun enligt respektive stiftelses villkor"
+      - "Ändamål, målgrupp och behörighet varierar per stiftelse — se respektive stiftelses villkor på kommunens sida"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trollhattan.se/startsida/omsorg-och-hjalp/ekonomi-socialbidrag/stiftelser-och-fonder/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori §2.1.5). Kommunen förvaltar åtta stiftelser/fonder; enligt §2.7 skrivet som ETT samlat bidrag i stället för en post per stiftelse. Minst fyra är uttryckligen öppna för föreningar/organisationer, inte bara enskilda: Nydqvistska stiftelsen ('utdelning kan ske till såväl organisationer som enskilda', deadline 30 april), Nydqvistska stiftelsen för idrottens främjande (idrottsföreningar, administreras av Kultur- och fritidsförvaltningen), Prims stiftelse för handikappade barn ('utdelning kan ske till såväl organisationer som enskilda', deadline 30 april OCH 31 oktober), samt Ulla och Hilding Johanssons forskningsfond (föreningar kan få bidrag, deadline 31 oktober). Övriga stiftelser på samma sida (Forsbergs stiftelse, Gudmundsson & Holmgrens stiftelse, Social samstiftelse 1, Birger Johansson & Berta Fredrikssons stiftelse) riktar sig enligt sidan i huvudsak till privatpersoner. Ansökan görs per stiftelse till ekonomikontoret@trollhattan.se (märkt 'Stiftelser') eller kulturfritid@trollhattan.se (Nydqvistska för idrott). Sidan senast granskad 2025-09-17."
+forutsattningar:
+  - id: "trollhattan-foreningsregister"
+    vad: "Registrera föreningen i Trollhättans stads föreningsregister"
+    beskrivning: "Föreningen ska vara allmännyttig, ideell och registrerad hos Skatteverket med organisationsnummer, ha stadgar, vald styrelse och oberoende revisor, genomföra årsmöte där verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse godkänns, föra kassabok, ha sitt säte i Trollhättan och vara registrerad i Trollhättans stads föreningsregister. Minst två protokollförda styrelsemöten per år."
+    system: "Trollhättans stads föreningsregister (Interbook)"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://minasidor.trollhattan.se/oversikt/overview/439"

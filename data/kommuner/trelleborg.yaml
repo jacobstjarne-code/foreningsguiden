@@ -1,0 +1,315 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte en enda förvaltnings redaktionella sida i isolering).
+# Föregående version (verifierad 2026-07-19) fångade 7 bidrag (6 skrivna + 1
+# medvetet uteslutet) genom att bara läsa kultur- och fritidsförvaltningens
+# riktlinje-PDF och dess egen bidragssida — ingen annan förvaltning söktes
+# aktivt. Denna omgång läser om regelverket i sin helhet (oförändrad version,
+# se nedan) och söker riktat efter bidrag hos andra förvaltningar samt i
+# specialkategorierna enligt §2.1.5.
+#
+# Metod: (1) Regelverket "Riktlinje för bidrag till föreningar inom
+# Trelleborgs kommun" (antaget av Kultur- och fritidsnämnden 2023-10-11 §83,
+# gäller tillsvidare fr.o.m. 2024-01-01) hämtades och lästes sida för sida
+# via pdftotext-motsvarighet (17 sidor, samtliga sex bidragskapitel plus
+# allmänna bestämmelser, ansökningsregler och registreringskrav). SAMMA
+# version som föregående körning ("2025-version" i filnamnet, publicerad
+# 2020-06-06, senast uppdaterad 2025-05-06) — ingen nyare antagen version
+# hittades vid sökning. Innehållet i de sex bidragskapitlen verifierat
+# oförändrat mot föregående YAML (belopp, procentsatser och deadlines
+# matchar exakt). (2) Förvaltningarnas egna sidor genomsöktes brett utöver
+# kultur- och fritid: Socialförvaltningens översiktssida gav INGET
+# föreningsbidrag (endast individuella insatser: försörjningsstöd, LSS).
+# Samhällsbyggnads-/Trafik-och-gator-sidan gav ETT bidrag som saknades helt
+# i föregående version (bidrag till enskilda vägar med statsbidrag, se
+# nedan). Omsorg-och-hjälp-sidan gav stiftelserna (uteslutna, se nedan).
+# Kommun-och-politik-sidan (Kommunledningsförvaltningen) gav TVÅ bidrag som
+# saknades helt: föreningsbidraget inom medborgarbudgeten "En miljon idéer"
+# samt IOP (idéburet offentligt partnerskap). (3) Självservice/e-tjänster
+# genomsöktes: eservice.trelleborg.se:s samtliga åtta ämnesgrupper
+# kontrollerades. Grupp 8 ("Uppleva och göra") gav endast en generisk
+# "Ansökan om föreningsbidrag" som leder in i Rbok — ingen ytterligare
+# bidragsform funnen där. Grupp 6 ("Omsorg och hjälp") bekräftade
+# stiftelserna. Grupp 7 ("Trafik och infrastruktur") listade inga
+# vägbidrags-e-tjänster explicit — vägbidraget hittades i stället via
+# förvaltningssidan, inte e-tjänsteportalen. (4) Ansökningsportalen
+# trelleborg.rbok.se är, liksom övriga Rbok-kommuners motsvarigheter,
+# JS-renderad utan enumererbart innehåll vid fetch — EJ_EXTRAHERBAR,
+# täckning byggd genom sidkonvergens, inte portalräkning. (5)
+# Specialkategorier (§2.1.5) genomsöktes riktat: vägföreningar/
+# vägsamfälligheter (HITTAT, se ovan — och regelverkets egen text
+# bekräftar att samfällighetsföreningar UTTRYCKLIGEN är uteslutna från de
+# sex kultur-/fritidsbidragen, vilket gör vägbidraget administrativt
+# distinkt snarare än en dubblett), bygdegårdar/samlingslokaler (INGEN
+# separat kommunal bidragsform hittad utöver det generella Lokalbidraget
+# och En miljon idéer-investeringsdelen — till skillnad från Skellefteå
+# har Trelleborg inget eget "Bidrag till allmänna samlingslokaler"),
+# stiftelser/fonder (Selma och A E Anderssons fond samt Idas minnesfond,
+# båda uteslutande för privatpersoner — se nedan), byalag/samhälls-
+# föreningar (HITTAT via En miljon idéer, som enligt kommunens egen sida
+# ersatte en tidigare landsbygdsmiljön-fond 2020), studieförbund (SÖKT,
+# EJ AKTIVT — kommunens stöd till studieförbund minskades stegvis från
+# 3,5 mkr (2019) och var enligt lokalpress helt avskaffat 2021; ingen
+# aktiv, sökbar bidragssida hittades, därför inte skrivet till filen).
+#
+# NYA BIDRAG (saknades helt i föregående version):
+# - Bidrag till enskilda vägar med statsbidrag — administreras av Trafik
+#   och gator, inte kultur- och fritidsnämnden. Mottagare är vägsamfällig-
+#   heter/väghållare, en annan typ av organisation än de ideella föreningar
+#   regelverket ovan avser (regelverket utesluter uttryckligen samfällig-
+#   hetsföreningar från sina sex bidrag) — men kvalificerar som förenings-
+#   bidrag enligt §2.1.5 specialkategori.
+#   https://www.trelleborg.se/trafik-infrastruktur/trafik-och-gator-2/gator-och-vagar-2/bidrag-till-enskilda-vagar-med-statsbidrag/
+# - Föreningsbidrag inom En miljon idéer (medborgarbudget) — administreras
+#   av Kommunledningsförvaltningen. Endast föreningar (inte privatpersoner)
+#   kan söka denna specifika delpott, för sociala arrangemang/aktiviteter
+#   samt fysiska investeringar. Roterar mellan kommunens landsbygdsområden
+#   (2026: norra landsbygdsområdet) — se anteckning på bidraget för detaljer
+#   om källkonflikt kring exakt ansökningsfönster.
+#   https://www.trelleborg.se/kommun-politik/en-miljon-ideer/foreningsbidrag-inom-en-miljon-ideer/
+# - Idéburet offentligt partnerskap (IOP) — förhandlat samverkansavtal,
+#   inte en traditionell konkurrensutsatt ansökan. Inkluderad i linje med
+#   hur Växjö kommuns motsvarande IOP-post hanteras i denna filserie
+#   (RESEARCH_SPEC_v2 §2.4: form som avviker från standardansökan är inte
+#   ett giltigt uteslutningsskäl i sig).
+#   https://www.trelleborg.se/uppleva-gora/foreningar/ideburet-offentligt-partnerskap-iop/
+#
+# MEDVETET UTESLUTNA (kategoriskt skäl, §2.4):
+# - Kulturstipendium (bidrag F i regelverket) — individuellt stipendium,
+#   10 000 kr, sökande/nominerad ska vara en person 15–30 år. Bekräftat vid
+#   denna omläsning av PDF:en (kapitel F, "Stipendiaten skall vara mellan
+#   15-30 år"). Ingen förening kan vara mottagare.
+#   https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf
+# - Selma och A E Anderssons fond för obemedlade sjuka i Trelleborg samt
+#   Idas minnesfond — uteslutande riktade till privatpersoner (ekonomiskt
+#   behövande barn/ungdomar, äldre, personer med funktionsnedsättning/
+#   långvarig sjukdom). Ingen förening kan söka.
+#   https://www.trelleborg.se/omsorg-och-hjalp/ekonomiskt-stod/sok-ekonomiska-medel-fran-stiftelser/
+#
+# EJ SKRIVET (osäker/obefintlig status):
+# - Studieförbund. Kommunens stöd minskades från 3,5 mkr (2019) till 1,7 mkr
+#   samma år, och var enligt lokal nyhetsrapportering (Newsworthy, SVT)
+#   helt borta från 2021. Ingen aktiv, sökbar bidragssida hittad på
+#   trelleborg.se vid denna körning. Inte skrivet — ingen verifierbar
+#   käll-URL för en aktiv ansökan finns.
+#
+# EJ_EXTRAHERBAR:
+# - trelleborg.rbok.se — JS-renderad ansökningsportal, inget enumererbart
+#   innehåll vid fetch.
+#
+# Varningssignal (§2.6) undersökt: Fyra av sju kultur-/fritidsbidrag delar
+# deadline 25 februari (verksamhetsbidrag, båda lokalbidragen, städbidrag).
+# Verifierat direkt i regelverkets egen text för respektive kapitel (inte
+# ett ärvt värde) — samtliga fyra avser kostnader för föreningens senast
+# avslutade verksamhetsår och delar en gemensam administrativ cykel hos
+# kultur- och fritidsförvaltningen. Bedöms som en genuin delad regel, inte
+# en extraktionsbugg. Pensionärsbidrag och socialt bidrag delar separat
+# deadline 30 april, också verifierat individuellt i respektive kapitel.
+#
+# Källkonflikt (§2.5) — En miljon idéers ansökningsfönster: en nyhetsartikel
+# från 2025-02-14 anger "15 februari till 15 mars" som inlämningsperiod för
+# norra landsbygdsområdets omgång det året. Kommunens nuvarande allmänna
+# sida för En miljon idéer anger för 2026 "förslagsinlämning startar 15
+# februari" och "röstningsperiod 15 april–15 maj" utan att ange ett eget
+# slutdatum för inlämningen. Ingen av sidorna har ett synligt revisionsdatum
+# som avgör vilket som är senast uppdaterat för just denna detalj. Endast
+# startdatumet (15 februari), som är identiskt i båda källorna, är skrivet
+# som fast deadline i denna fil. Se anteckning på bidraget.
+#
+# Dubbelhämtat i två oberoende pass (§3): de sju bidrag som fanns i
+# föregående version verifierades oförändrade mot en fräsch läsning av
+# regelverks-PDF:en. De tre nyfunna bidragen hämtades och strukturerades
+# i två separata anrop var — inga fältkonflikter identifierade.
+#
+# Täckningsavstämning: 6 bidragskapitel i regelverket (A–F), varav kapitel B
+# (Lokalbidrag) i praktiken innehåller tre separata bidragsformer (egenägd
+# lokal, förhyrd lokal, städbidrag) — totalt 7 skrivna bidrag från
+# regelverket (verksamhetsbidrag, tre lokal-/städbidrag, arrangörsbidrag,
+# pensionärsorganisationer, frivillig social verksamhet) + 1 medvetet
+# uteslutet (kulturstipendium, kapitel F). Därutöver 3 bidrag
+# SKRIVET_EJ_I_REGELVERK (vägbidrag, En miljon idéer-föreningsbidrag, IOP —
+# samtliga administreras av andra förvaltningar än kultur- och
+# fritidsnämnden och ligger därför naturligt utanför kultur- och
+# fritidsnämndens eget regelverk). Totalt 10 bidrag skrivna till filen.
+# Befolkning/län dubbelkällat (sökresultat + sv.
+# wikipedia.org, båda 47 440 / 31 mars 2026 — ingen konflikt, oförändrat
+# mot föregående version). Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Trelleborg"
+kommun_slug: "trelleborg"
+lan: "Skåne län"
+befolkning: 47440
+forvaltning: "Kultur- och fritidsförvaltningen (sex föreningsbidrag), Trafik och gator (vägbidrag) samt Kommunledningsförvaltningen (En miljon idéer och idéburet offentligt partnerskap)"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://trelleborg.rbok.se/#/"
+kalla_url: "https://www.trelleborg.se/uppleva-gora/foreningar/foreningsbidrag-stod-och-stipendier/"
+verifierad: 2026-07-21
+bidrag:
+  - id: "trelleborg-verksamhetsbidrag-barn-ungdom"
+    namn: "Verksamhetsbidrag barn- och ungdomsverksamhet"
+    kategori: ["idrott", "kultur", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar med minst tre deltagare i åldern 4–20 år (ingen övre åldersgräns för personer med funktionsnedsättning) och minst tio bidragsberättigade aktiviteter per halvår"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Minst tre deltagare i bidragsberättigad ålder (4–20 år, ingen övre åldersgräns för personer med funktionsnedsättning)"
+      - "Minst tio bidragsberättigade aktiviteter per halvår"
+      - "Aktivitet ska vara planerad av styrelse, sektion eller motsvarande och vara minst 45 minuter"
+      - "Verksamheten ska bedrivas inom Trelleborgs kommun för samtliga deltagare under större delen av året"
+      - "Deltagare ska vara medlem i föreningen och ha erlagt medlemsavgift"
+    belopp: null
+    sen_ansokan: "Ansökan som inkommer efter ansökningstidens utgång behandlas restriktivt och prövas i varje enskilt fall. En upprepad sen ansökan kommer att avslås."
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Ansökan görs senast 25/8 för perioden 1/1-30/6 samt senast 25/2 för perioden 1/7-31/12. Beloppet per deltagare/aktivitet fastställs av förvaltningen vid varje bidragsfördelning och kan ändras beroende på totalt antal ansökningar. Representant för föreningen ska närvara vid föreningsträff som förvaltningen kallar till — uteblivande reducerar bidraget med 10 procent för nästkommande termin. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-lokalbidrag-egenagd"
+    namn: "Lokalbidrag ungdomsverksamhet — egenägd lokal"
+    kategori: ["idrott", "kultur", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som äger egen lokal eller anläggning för ungdomsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Avtal om inköp av lokal ska i förväg godkännas av kultur- och fritidsnämnden för att kostnaderna ska vara bidragsberättigade"
+      - "Hyresintäkter ska redovisas i ansökan"
+      - "Utebliven redovisning av aktiviteter enligt villkor för verksamhetsbidrag medför att lokalbidrag inte kan beviljas"
+      - "Bidrag utgår inte för hyra eller skötsel av lokal när kommunen hyr ut lokalen"
+    belopp: "75 procent av kultur- och fritidsnämndens godkända lokalkostnader (lokalhyra, konsumtionsavgifter, räntekostnad, försäkring, städkostnader högst 1 200 kronor inklusive förbrukningsartiklar), max 8 000 kronor, dock högst 150 kronor per bidragsberättigad medlem (4–20 år, ingen åldersgräns vid funktionsnedsättning) som erlagt medlemsavgift"
+    sen_ansokan: "Ansökan som inkommer efter ansökningstidens utgång behandlas restriktivt och prövas i varje särskilt fall. En upprepad sen ansökan föranleder avslag."
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Ansökan avser lokalkostnader under föreningens senast avslutade verksamhetsår. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-lokalbidrag-forhyrd"
+    namn: "Lokalbidrag ungdomsverksamhet — förhyrd lokal"
+    kategori: ["idrott", "kultur", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som förhyr lokal eller anläggning för ungdomsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Avtal om förhyrning av lokal ska i förväg godkännas av kultur- och fritidsnämnden för att kostnaderna ska vara bidragsberättigade"
+      - "Bidrag för tillfälligt förhyrda lokaler utgår ej"
+      - "Hyresintäkter ska redovisas i ansökan"
+      - "Bidrag utgår inte för hyra eller skötsel av lokal när kommunen hyr ut lokalen"
+    belopp: "75 procent av kultur- och fritidsnämndens godkända lokalkostnader (lokalhyra, konsumtionsavgifter, räntekostnad, försäkring, städkostnader högst 1 200 kronor inklusive förbrukningsartiklar), max 8 000 kronor, dock högst 150 kronor per bidragsberättigad medlem (4–20 år, ingen åldersgräns vid funktionsnedsättning) som erlagt medlemsavgift"
+    sen_ansokan: "Ansökan som inkommer efter ansökningstidens utgång behandlas restriktivt och prövas i varje särskilt fall. En upprepad sen ansökan föranleder avslag."
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Ansökan avser lokalkostnader under föreningens senast avslutade verksamhetsår. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-stadbidrag"
+    namn: "Städbidrag"
+    kategori: ["idrott", "kultur", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar med ansvar för omklädningsrum som inte städas eller bekostas av kultur- och fritidsförvaltningen"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Gäller omklädningsrum som inte städas eller bekostas av kultur- och fritidsförvaltningen"
+    belopp: "40 kronor per kvadratmeter"
+    sen_ansokan: "Ansökan som inkommer efter ansökningstidens utgång behandlas restriktivt och prövas i varje särskilt fall. En upprepad sen ansökan föranleder avslag."
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Ansökan avser städkostnader under föreningens senast avslutade verksamhetsår. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-arrangorsbidrag-kultur"
+    namn: "Arrangörsbidrag kulturverksamhet"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar med kultur som kärnverksamhet (musik, dans, konst, teater, film, kulturarv eller litteratur) som arrangerar publika kulturarrangemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha kultur som kärnverksamhet (musik, dans, konst, teater, film, kulturarv eller litteratur)"
+      - "Arrangemanget ska vara publikt, präglas av kvalitet och bidra till ett brett utbud som intresserar allmänheten i Trelleborg"
+      - "En tydlig plan för arrangemanget ska bifogas ansökan"
+      - "Beviljas inte till investeringar i lokaler/utrustning som efteråt berikar föreningen, arrangemang med övervägande religiös eller politisk inriktning, stödgalor där överskott går till välgörenhetsorganisationer, arrangemang med kommersiellt vinstsyfte, arrangemang inom utbildning/forskning, eller renodlade pedagogiska arrangemang (t.ex. studiecirkelform)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Ansökan görs löpande under året, dock senast 30 september för arrangemang under innevarande år. Medel beviljas i mån av kvarvarande årsbudget. Beviljat bidrag ska redovisas till kultur- och fritidsförvaltningen senast 31 januari nästföljande år. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-pensionarsorganisationer"
+    namn: "Bidrag pensionärsorganisationer"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsorganisationer anslutna till sin riksorganisation"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Föreningen ska vara ansluten till sin riksorganisation"
+      - "Föreningen ska bedriva socialt värdefull ideell verksamhet"
+      - "Föreningen ska vara demokratiskt uppbyggd och inte bedriva partipolitik eller enbart religiös verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Bidraget baseras på en fast bidragsspott som fördelas proportionellt mellan ansökande organisationer utifrån antalet medlemmar. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-frivillig-social-verksamhet"
+    namn: "Bidrag frivillig social verksamhet"
+    kategori: ["social"]
+    malgrupp: "Föreningar med frivillig social verksamhet riktad till boende i Trelleborgs kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Föreningen ska bedriva socialt värdefull ideell verksamhet"
+      - "Föreningen ska vara demokratiskt uppbyggd och inte bedriva partipolitik eller enbart religiös verksamhet"
+      - "Verksamheten ska rikta sig till boende i Trelleborgs kommun och vara ett viktigt alternativ eller komplement till kommunens egna insatser för människor i utsatta situationer"
+      - "Tredje parts nytta ska vara tydlig"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"
+    anteckning: "Bidragen beviljas av kultur- och fritidsnämnden efter särskilt beslut. Redovisning sker via föreningens verksamhetsberättelse, som ska skickas in senast 30 dagar efter att årsmöte har hållits. Verifierat oförändrat vid omkörning 2026-07-21."
+  - id: "trelleborg-vagbidrag-enskilda-vagar"
+    namn: "Bidrag till enskilda vägar med statsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Vägsamfälligheter/väghållare för enskild väg som är godkänd av Trafikverket och berättigad till statsbidrag"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska vara godkänd av Trafikverket som statsbidragsberättigad enskild väg"
+      - "Vid särskilt driftbidrag för större arbeten krävs att åtgärden är godkänd av Trafikverket med ett godkänt besiktningsprotokoll, och att Trafikverket redan betalat ut sin del innan kommunalt bidrag kan sökas"
+    belopp: "Årligt driftbidrag: 40 procent av det bidragsgrundande belopp Trafikverket har beslutat. Särskilt driftbidrag för större arbeten: 20 procent av den bidragsgrundande summan inklusive moms som Trafikverket fastställt. Total budget 400 000 kronor per år."
+    sen_ansokan: "Ej angivet i källan. Bidraget betalas ut så länge det finns pengar kvar i årets budget — ansökningar kan komma att prövas nästa år om budgeten är förbrukad."
+    kalla_url: "https://www.trelleborg.se/trafik-infrastruktur/trafik-och-gator-2/gator-och-vagar-2/bidrag-till-enskilda-vagar-med-statsbidrag/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — administreras av Trafik och gator, separat spår från kultur- och fritidsnämndens bidrag och lätt att missa om bara föreningsbidragssidorna genomsöks. Kultur- och fritidsnämndens regelverk utesluter uttryckligen samfällighetsföreningar från sina sex bidrag ovan — detta bidrag är administrativt skilt och riktar sig specifikt till väghållare/vägsamfälligheter, en annan mottagarkategori. Vägsamfälligheten kan även söka statligt driftbidrag direkt från Trafikverket, utöver detta kommunala bidrag. Inget tydligt digitalt ansökningssystem identifierat i källan (troligen pappersblankett/kontakt med förvaltningen, som hos jämförbara kommuner i denna filserie)."
+  - id: "trelleborg-en-miljon-ideer-foreningsbidrag"
+    namn: "Föreningsbidrag inom En miljon idéer (medborgarbudget)"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar i det landsbygdsområde som är aktuellt för årets omgång av medborgarbudgeten En miljon idéer (2026: norra landsbygdsområdet, som sträcker sig från Skåre i väster, över Skegrie och Anderslöv, till Gärdslöv i nordost) — kan söka bidrag för sociala arrangemang/aktiviteter samt föreslå fysiska investeringar"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Föreningen ska ha antagit skriftliga stadgar"
+      - "Föreningen ska ha haft årsmöte där verksamhets- och revisionsberättelser samt resultat- och balansräkning har godkänts"
+      - "Föreningen ska ha minst tio matrikelförda medlemmar"
+      - "Föreningen ska ha verksamhet som bedrivs under större delen av året"
+      - "Förslaget måste få minst 50 röster i den efterföljande demokratiska omröstningen för att genomföras"
+    belopp: "Max 20 000 kronor per år för socialt arrangemang eller aktivitet. Delar en gemensam årlig pott på 250 000 kronor med fysiska investeringsförslag från föreningar (ingen separat delpott för investeringar angiven i källan)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.trelleborg.se/kommun-politik/en-miljon-ideer/foreningsbidrag-inom-en-miljon-ideer/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — hittades under 'Kommun och politik' (Kommunledningsförvaltningen), inte under kultur- och fritidsförvaltningens ordinarie bidragsspår, vilket sannolikt är varför det missades tidigare. Medborgarbudgeten ersatte 2020 en tidigare landsbygdsmiljön-fond och roterar mellan kommunens landsbygdsområden — endast föreningar i det aktuella området kan söka en given omgång; 2026 gäller norra landsbygdsområdet, tidigare år bl.a. södra landsbygdsområdet. KÄLLKONFLIKT (§2.5), delvis löst: förslagsinlämningens startdatum (15 februari) är identiskt i en nyhetsartikel om 2025 års omgång och i kommunens nuvarande sida för 2026 — skrivet som fast deadline här. Slutdatum för inlämning skiljer sig mellan källorna (2025-artikeln anger 15 mars; 2026-sidan anger ingen egen slutdag för inlämning, bara röstningsperiod 15 april–15 maj) och ingen källa har ett synligt revisionsdatum — inte skrivet som fast datum, verifiera aktuellt slutdatum direkt mot kommunens sida inför varje omgång. Administreras via enmiljonideer@trelleborg.se, inte Rbok."
+  - id: "trelleborg-iop"
+    namn: "Idéburet offentligt partnerskap (IOP)"
+    kategori: ["social", "ovrig"]
+    malgrupp: "Etablerade ideella organisationer med lokal förankring i Trelleborg som kan bidra till att lösa en definierad samhällsutmaning tillsammans med kommunen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Både föreningen och kommunen ska bidra med resurser, till exempel finansiering, lokaler eller ideellt arbete"
+      - "Insatsen ska syfta till allmännytta och adressera en samhällsutmaning där en färdig lösning saknas"
+      - "Passar inte när kommunen enbart köper en tjänst av föreningen — då gäller upphandling, inte IOP"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande dialog, inget fast ansökningsdatum)"
+    kalla_url: "https://www.trelleborg.se/uppleva-gora/foreningar/ideburet-offentligt-partnerskap-iop/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION. Inte ett traditionellt sökbart bidrag med fast belopp/deadline, utan ett förhandlat samverkansavtal som initieras via dialog med kommunen — inkluderad som bidragsform i linje med hur Växjö kommuns motsvarande IOP-post hanteras i denna filserie (RESEARCH_SPEC_v2 §2.4: att formen avviker från en traditionell ansökan är inte ett giltigt uteslutningsskäl). Fyra aktiva partnerskap vid denna körning: Brottsofferjouren Söderslätt, Föräldraföreningen mot narkotika, Kvinnojouren Söderslätt, Trelleborgs FF."
+forutsattningar:
+  - id: "trelleborg-bidragsberattigad-forening"
+    vad: "Bli registrerad som bidragsberättigad förening"
+    beskrivning: "Föreningen fyller i en föreningsregistrering på hemsidan och skickar in undertecknat protokoll från konstituerande årsmöte, föreningens antagna stadgar, bekräftelse från Skatteverket på tilldelat organisationsnummer, bekräftelse från föreningens bank på tilldelat bankgiro/bankkonto, i förekommande fall bekräftelse på medlemskap i riksorganisation, samt föreningens adress, e-post och uppgifter till utsedd kontaktperson. Grundkrav enligt riktlinjen: säte i Trelleborgs kommun, stadgar godkända av årsmötet, icke vinstdriven, uppdaterad medlemsmatrikel, minst tio medlemmar, årlig medlemsavgift lägst 50 kronor per medlem, registrerad hos Skatteverket med organisationsnummer, bankkonto/bankgiro/plusgiro i föreningens namn, stadgeenligt vald styrelse och valda revisorer, ordnad ekonomi med årlig redovisning, inte i konkurs eller likvidation. Nystartad förening ska genomgå grundutbildning i styrelsearbete samt en introduktion av bidragsbestämmelser från kultur- och fritidsförvaltningen; utbildningsbevis eller motsvarande ska uppvisas. Denna registrering krävs för de sex kultur- och fritidsbidragen ovan — vägbidraget, En miljon idéer och IOP har egna, separata processer (se respektive bidrags anteckning)."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: null
+    giltighet: "Uppgifterna i föreningsregistret måste aktivt godkännas varje tolvmånadersperiod för att ansökan om bidrag ska vara möjlig."
+    ordning: 1
+    kalla_url: "https://www.trelleborg.se/app/uploads/2023/08/riktlinje-for-bidrag-till-foreningar-inom-trelleborgs-kommun-2025-version.pdf"

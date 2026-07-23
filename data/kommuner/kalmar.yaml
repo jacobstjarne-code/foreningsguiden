@@ -1,0 +1,490 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19) fångade 13 bidrag men triagerade uttryckligen bort "Folkets
+# hus/bygdegårdar, Övrig kulturaktör, Bygdepeng, donationsstiftelser" med
+# motiveringen "för att hålla filen hanterbar" — exakt det skäl §2.4 inte
+# tillåter. Denna omgång läste varje förvaltningssidas undersidor i sin
+# helhet i stället för bara ingressen (Karlstad-mönstret: en kategorisida
+# rymmer ofta fler distinkta bidrag än ingressen visar).
+#
+# Metod: (1) Sökte Kalmars antagna bidragsregelverk-PDF — hittade inget
+# sådant, bara en icke-bindande "Kultur- och fritidspolitisk vision
+# 2024-2027" samt en webbsida "Allmänna bestämmelser" (senast uppdaterad
+# 2025-10-13, inget nämnd-/KF-beslutsdatum angivet). Regelverket är alltså
+# EJ_EXTRAHERBAR/ej funnet, likt Karlstad — täckning fastställd via
+# konvergens mellan förvaltningssidor. (2) Läste huvudsidan
+# "Föreningsstöd" och kartlade samtliga 12 kategorisidor (barn- och
+# ungdomsföreningar, elitidrottstöd, externa bidragsgivare, Folkets hus
+# och bygdegårdar, föreningar för funktionsnedsatta, hembygdsföreningar,
+# kulturföreningar, projekstöd flick- och damidrott, seniorföreningar,
+# studieförbund, TKT, övrig kulturaktör) och läste varje undersida i sin
+# helhet — barn- och ungdomsföreningar visade sig rymma 9 distinkta bidrag
+# (mot 2 fångade förra körningen: aktivitets-ledarstöd, driftstöd).
+# (3) Sökte riktat efter specialkategorier (§2.1.5): väg-/samfällighets-
+# föreningar (HITTAT: driftbidrag + förbättringsbidrag för enskilda vägar,
+# administreras av teknik- och fastighetsnämnden/servicenämnden, inte
+# kultur- och fritidsnämnden), bygdegårdar (HITTAT: "Stöd till bygdegårdar,
+# Folkets hus och parkföreningar"), byalag/samhällsföreningar (HITTAT:
+# Bygdepeng, administreras av landsbygdsnämnden), stiftelser/fonder
+# (HITTAT sex donationsstiftelser samt elev-/studentstiftelser — samtliga
+# uteslutna enligt §2.4, riktar sig uteslutande till privatpersoner med
+# dokumenterat ekonomiskt bistånd, inte föreningar). Utöver dessa hittades
+# två ytterligare landsbygdsbidrag som inte efterfrågats i sökmönstret men
+# som kräver organisationsnummer (miljöpeng, hjärtsäkrare landsbygd — båda
+# administrerade av landsbygdsutveckling/vatten- och miljönämnden).
+# Ansökningsportalen kalmar.rbok.se är, liksom Växjös/Halmstads/Karlstads
+# motsvarigheter, inte enumererbar för fetch (JS-renderad) — täckning
+# byggd genom sidkonvergens, inte portalräkning.
+#
+# Uteslutna (kategoriskt skäl, §2.4):
+# - Externa bidragsgivare (Boverket, Jämställdhetsmyndigheten, Allmänna
+#   arvsfonden, Sparbanksstiftelsen, Stiftelsen Dingåva, Svenska
+#   Postkodlotteriets Stiftelse, Region Kalmar län, MUCF, RF-SISU Småland,
+#   Sydostleader, Lions Club Kalmar) — administreras av annan huvudman,
+#   kommunen är endast informationsnav.
+#   https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/externa-bidragsgivare.html
+# - SydostLeader (även länkad från landsbygdssidan) — administreras av
+#   Leaderkontoret i Emmaboda, en egen ideell LAG-förening, inte Kalmar
+#   kommun. https://kalmar.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/sydostleader.html
+# - Samtliga donationsstiftelser (Samfond II, Frimanska fonden, Petter A
+#   Jonssons fond, Karl Jonssons understödsfond, Syskonen Karlbergs
+#   donationsfond, Dahmska stiftelsen) samt donationsstiftelser för elever
+#   och studenter — uteslutna enligt §2.4, riktar sig uteslutande till
+#   privatpersoner med behovsprövning (inkomst-/förmögenhetsgräns), ingen
+#   förening kan söka. https://kalmar.se/kommun-och-politik/kommunfakta/ekonomi/stiftelser-donationsfonder/ovriga-donationsstiftelser.html
+# - Hemsändning — leveransservice till enskilda hushåll på landsbygden,
+#   inte ett bidrag en förening kan söka.
+#   https://kalmar.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/hemsandning.html
+# - Medborgarbudget — medborgarförslag och omröstning i två pilotorter
+#   (Halltorp, Trekanten), inte ett sökbart ekonomiskt bidrag med
+#   ansökningsförfarande. https://kalmar.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/medborgarbudget.html
+#
+# Varningssignal (§2.6) undersökt: tre kluster av delade deadlines — 1
+# september ×3 (driftstöd, investeringsstöd, stöd till bygdegårdar/Folkets
+# hus — samtliga anläggningsrelaterade stöd inom kultur- och
+# fritidsnämnden), 15 oktober ×3 (verksamhetsstöd kultur, lokalstöd
+# kultur, verksamhetsstöd hembygd) och 15 mars ×2 (funktionsnedsättning,
+# senior). Varje datum är individuellt verifierat mot sin egen sidas
+# löptext (inte ett ärvt värde) — bedöms som genuina, gemensamma
+# förvaltningscykler inom kultur- och fritidsnämndens budgetår, inte en
+# extraktionsbugg.
+#
+# Dubbelhämtat i två oberoende pass (§3): de 13 bidrag som fanns i
+# föregående version verifierades med en fräsch hämtning denna omgång
+# (ingen avvikelse mot 2026-07-19-versionen). De 10 nyfunna bidragen
+# hämtades och strukturerades i två helt separata, oberoende anrop var —
+# inga fältkonflikter identifierade i något fall. Inga fältkonflikter
+# denna omgång totalt.
+#
+# Täckningsavstämning: 23 bidrag skrivna. Inget antaget regelverk hittat
+# (EJ_EXTRAHERBAR) — samtliga 23 är därför SKRIVET_EJ_I_REGELVERK i strikt
+# mening, eftersom inget regelverk fanns att stämma av mot; källan är i
+# stället förvaltningssidornas konvergens. Portalen kalmar.rbok.se
+# EJ_EXTRAHERBAR (JS-renderad). Inga I_KALLA_EJ_SKRIVET identifierade.
+# Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Kalmar"
+kommun_slug: "kalmar"
+lan: "Kalmar län"
+befolkning: 72980
+forvaltning: "Kultur- och fritidsförvaltningen (huvuddelen av föreningsstödet) samt Samhällsbyggnadskontoret/landsbygdsutveckling (Landsbygdsnämnden: bygdepeng; Vatten- och miljönämnden: miljöpeng; landsbygdsutvecklare: hjärtsäkrare landsbygd) och Teknik- och fastighetsförvaltningen/Servicenämnden (bidrag till enskilda vägar)"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://kalmar.rbok.se/ansok"
+kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod.html"
+verifierad: 2026-07-20
+bidrag:
+  # --- KULTUR- OCH FRITIDSFÖRVALTNINGEN: barn- och ungdomsföreningar ---
+  - id: "kalmar-aktivitets-ledarstod"
+    namn: "Aktivitets- och ledarstöd"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Lokala barn- och ungdomsföreningar i Kalmar kommun, för medlemmar 7–20 år (ingen övre åldersgräns för deltagare med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Föreningen ska vara registrerad i Kalmar kommuns föreningsregister"
+      - "Ansluten till en riksorganisation"
+      - "Gruppaktivitet ska pågå minst 45 minuter, ledas av minst en av föreningen utsedd ledare (minst 13 år, medlem i föreningen) och bestå av minst tre deltagare"
+      - "Deltagare ska vara medlem i föreningen"
+    belopp: null
+    sen_ansokan: "För sent inkommen ansökan ger inte rätt till stöd"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/barn--och-ungdomsforeningar/aktivitets--och-ledarstod.html"
+    anteckning: "Två ansökningsperioder per år: 1/1–30/6 (ansökan senast 25 augusti) och 1/7–31/12 (ansökan senast 25 februari). Utbetalas september respektive mars. Ersättning per deltagartillfälle anges inte i kronor på sidan."
+  - id: "kalmar-driftstod"
+    namn: "Driftstöd"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Lokala föreningar i Kalmar kommun som äger idrotts- eller fritidsanläggning och bedriver barn- och ungdomsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Föreningen ska äga en godkänd idrotts- eller fritidsanläggning belägen i Kalmar kommun"
+      - "Föreningen ska ha beviljats aktivitetsstöd för barn- och ungdomsverksamhet, eller bedriva verksamhet som kultur- och fritidsnämnden bedömer särskilt viktig"
+      - "Ansluten till en riksorganisation"
+      - "Registrerad i Kalmar kommuns föreningsregister"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/barn--och-ungdomsforeningar/driftstod.html"
+    anteckning: "Stödet är utformat som schabloner för lokalytor; beloppens storlek kan omprövas årligen av kultur- och fritidsnämnden. Utbetalas i januari."
+  - id: "kalmar-lokalstod-barn-ungdom"
+    namn: "Lokalstöd (barn- och ungdomsföreningar)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Lokala barn- och ungdomsföreningar i Kalmar kommun, registrerade i föreningsregistret, anslutna till en riksorganisation och mottagare av aktivitetsstöd"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Lokalen ska vara godkänd av kultur- och fritidsförvaltningen"
+      - "Om föreningen väljer ett dyrare alternativ än en erbjuden kommunal lokal begränsas stödet till den kommunala lokalens kostnad"
+      - "Uppfylla kultur- och fritidsnämndens allmänna bestämmelser"
+    belopp: "Aktivitetslokal: max 70 procent av kostnaderna för hyra, uppvärmning, vatten och el, högst 45 000 kronor per år. Kontorslokal: max 50 procent av kostnaden, högst 25 000 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/barn--och-ungdomsforeningar/lokalstod.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Distinkt från kulturföreningarnas lokalstöd (kalmar-lokalstod-kultur): annan målgrupp, annan deadline (15 februari mot 15 oktober) och en extra kontorslokal-nivå som kultursidan saknar. Utbetalas i mars."
+  - id: "kalmar-investeringsstod"
+    namn: "Investeringsstöd (anläggningsägande föreningar)"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Lokala föreningar i Kalmar kommun som äger idrotts- eller fritidsanläggning, bedriver ideell verksamhet, tillhör en riksorganisation och är registrerade i föreningsregistret"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Föreningen ska ha beviljats aktivitetsstöd för barn- och ungdomsverksamhet, eller bedriva verksamhet som kultur- och fritidsnämnden bedömer särskilt viktig"
+      - "Investeringen ska avse större åtgärder — inte redan påbörjade eller färdigställda projekt"
+      - "Kostnaden ska redovisas i efterhand med fakturor och kontoutdrag; ideellt arbete och sponsrat material räknas inte in"
+      - "Investeringar över 500 000 kronor kräver kommunfullmäktiges godkännande"
+    belopp: "Högst 75 procent av investeringskostnaden, 100 procent för tvingande kommunala åtgärder. Besiktning: 50 procent av kostnaden, högst 10 000 kronor per fyraårsperiod"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/barn--och-ungdomsforeningar/investeringsstod.html"
+    anteckning: "HELA BIDRAGET SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Samma bidrag (identiskt belopp, gränser och deadline) länkas från barn- och ungdomsföreningars, hembygdsföreningars och Folkets hus/bygdegårdars respektive sidor — skrivet en gång enligt källkonvergens. Delar deadline (1 september) med driftstöd och stöd till bygdegårdar/Folkets hus — undersökt (§2.6), bedöms som en genuin gemensam anläggningscykel."
+  - id: "kalmar-nystartad-forening"
+    namn: "Stöd till nystartad förening"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Nystartade lokala föreningar med säte i Kalmar kommun som bedriver ideell verksamhet och tillhör en riksorganisation"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Protokoll från föreningens första möte"
+      - "Föreningens stadgar"
+      - "Ifylld föreningsregisterblankett"
+      - "Intyg om eget plusgiro- eller bankgirokonto"
+      - "Stadgarna ska garantera medlemskap för alla som stödjer föreningens ändamål"
+    belopp: "Inget fast belopp publicerat — ansökningsformuläret från föreningens första möte utgör underlag för hur stort startstödet blir"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/barn--och-ungdomsforeningar/stod-till-nystartad-forening.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Utbetalas till föreningens plus- eller bankgiro inom en månad efter första mötet."
+  - id: "kalmar-saker-trygg-forening"
+    namn: "Stöd till säker och trygg förening"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Lokala föreningar med säte i Kalmar kommun som bedriver ideell barn- och ungdomsverksamhet och är certifierade som 'Säker & trygg förening'"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-31"]
+    krav:
+      - "Delta i två obligatoriska årliga möten: erfarenhetsutbyte på våren och certifieringsmöte på hösten"
+      - "Ansöka årligen om certifiering med identifierade insatser och tidsplan"
+      - "Redovisa och reflektera över genomförda insatser årligen"
+      - "Uppdatera policydokument vid behov och publicera dem på föreningens webbplats"
+    belopp: "Förstagångscertifiering: 10 000 kronor. Omcertifiering: 5 000–10 000 kronor årligen, beroende på antal medlemmar 7–20 år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/barn--och-ungdomsforeningar/stod-till-saker-och-trygg-forening.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20."
+  - id: "kalmar-elitidrottsstod"
+    namn: "Elitidrottsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar och idrottare i Kalmar kommun på elitnivå: lag i högsta/näst högsta serien, individuella idrottare på internationell elitnivå, mindre lagidrotter på högsta nationella nivå, samt ungdomar 16+ på väg mot seniorelit"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Föreningen ska ha sitt säte i Kalmar kommun"
+      - "Idrotten ska vara ansluten till Riksidrottsförbundet"
+      - "Idrottare ska tävla på seniornivå (del 1–2)"
+      - "Föreningen ska inom ett år arrangera minst en kostnadsfri provaktivitet för barn och ungdomar"
+      - "Redogöra för hur stödet har kommit laget/idrottaren till nytta"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/elitidrottstod.html"
+    anteckning: "Stödet är uppdelat i tre delar med årliga budgetramar (ej belopp per förening): del 1 (stora lagidrotter/internationell elit) 800 000–1 200 000 kronor, del 2 (mindre lagidrotter/nationell elit) 500 000–800 000 kronor, del 3 (elitförberedande, projektbaserat) 300 000–500 000 kronor."
+  - id: "kalmar-projektstod-flick-damidrott"
+    namn: "Projektstöd flick- och damidrott"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar i Kalmar kommun som vill få fler flickor/kvinnor att stanna kvar längre i föreningslivet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla kultur- och fritidsnämndens allmänna bestämmelser"
+      - "Verksamheten ska bedrivas i Kalmar kommun"
+      - "Stöd ges inte till vinstdrivande verksamhet, välgörenhetsgalor eller politisk/religiös verksamhet"
+    belopp: "Max 100 000 kronor per ansökan. Ideellt arbete ersätts med 225 kronor per timme och person."
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/projekstod-flick--och-damidrott.html"
+    anteckning: "Beslut fattas löpande under året."
+
+  # --- KULTUR- OCH FRITIDSFÖRVALTNINGEN: kulturföreningar ---
+  - id: "kalmar-verksamhetsstod-kultur"
+    namn: "Verksamhetsstöd till kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Lokala kulturföreningar med säte i Kalmar kommun, anslutna till en riksorganisation"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Registrerad i Kalmar kommuns föreningsregister"
+      - "Långsiktig och utåtriktad verksamhet inom kulturområdet"
+      - "Demokratisk uppbyggnad enligt stadgar, öppen för alla"
+      - "Stöd ges inte till välgörenhetsgalor, fester eller vinstdrivande verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturforeningar/stod-till-kulturforeningar---verksamhetsstod.html"
+    anteckning: "Grundstöd för godkända föreningar plus tilläggsstöd baserat på redovisad verksamhet. Utbetalas i januari."
+  - id: "kalmar-lokalstod-kultur"
+    namn: "Lokalstöd till kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Lokala kulturföreningar med säte i Kalmar kommun och fast lokal godkänd av kultur- och fritidsförvaltningen"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Ansluten till en riksorganisation"
+      - "Registrerad i Kalmar kommuns föreningsregister"
+      - "Fast lokal godkänd av kultur- och fritidsförvaltningen"
+      - "Demokratisk uppbyggnad enligt stadgar"
+    belopp: "Max 70 procent av lokalkostnaderna per förening, högst 45 000 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturforeningar/stod-till-kulturforeningar---lokalstod.html"
+    anteckning: "Utbetalas i januari."
+  - id: "kalmar-arrangemangsstod"
+    namn: "Arrangemangsstöd till ideella föreningar"
+    kategori: ["kultur", "idrott", "ovrig", "funktionsratt", "pensionar"]
+    malgrupp: "Ideella föreningar med säte i Kalmar kommun som vill arrangera publika evenemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Registrerad i Kalmar kommuns föreningsregister"
+      - "Verksamhet i Kalmar kommun"
+      - "Uppfylla kultur- och fritidsförvaltningens allmänna bestämmelser"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturforeningar/arrangemangsstod.html"
+    anteckning: "Total budget för stödkategorin fastställs årligen av kultur- och fritidsnämnden. Redovisning av arrangemanget ska ske digitalt via Rbok senast två månader efter genomförandet. Länkas identiskt från barn- och ungdomsföreningars, hembygdsföreningars, seniorföreningars och funktionsnedsatta-föreningars respektive sidor (upptäckt vid denna omkörning) — kategori utökad med funktionsratt/pensionar."
+  - id: "kalmar-projektstod"
+    namn: "Projektstöd till ideella föreningar"
+    kategori: ["kultur", "idrott", "ovrig", "funktionsratt", "pensionar"]
+    malgrupp: "Ideella föreningar med verksamhet i Kalmar kommun som vill arbeta med utvecklingsprojekt eller tidsbegränsade satsningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Registrerad i Kalmar kommuns föreningsregister"
+      - "Uppfylla kultur- och fritidsförvaltningens allmänna bestämmelser"
+      - "Projektet får inte avse löpande verksamhet som redan får årligt stöd"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturforeningar/projektstod.html"
+    anteckning: "Stöd kan ges för max tre år, ett år i taget för samma projekt. Total budget fastställs årligen av kultur- och fritidsnämnden. Länkas identiskt från barn- och ungdomsföreningars, hembygdsföreningars, seniorföreningars och funktionsnedsatta-föreningars respektive sidor (upptäckt vid denna omkörning) — kategori utökad med funktionsratt/pensionar."
+  - id: "kalmar-projektstod-ovriga-kulturaktorer"
+    namn: "Projektstöd — kulturprojekt för övriga kulturaktörer"
+    kategori: ["kultur"]
+    malgrupp: "Organisationer och andra aktörer inom kultursektorn som bedriver kulturverksamhet i Kalmar kommun (bredare krets än föreningar registrerade i kommunens föreningsregister)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska spegla demokratiska värderingar och vara öppen för alla"
+      - "Barn- och ungdomsverksamhet ska vara alkohol- och drogfri"
+      - "Stöd ges för max tre år, ett år i taget"
+      - "Bank- eller plusgirokonto krävs"
+      - "Kultur- och fritidsnämnden ska ges insyn i verksamheten"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/ovrig-kulturaktor/stod-till-projekt---kulturprojekt-for-ovriga-kulturaktorer.html"
+    anteckning: "HELA KATEGORIN 'ÖVRIG KULTURAKTÖR' SAKNADES I FÖREGÅENDE VERSION, dokumenterad som medvetet bortvald — tillagd vid korrigerande omkörning 2026-07-20. Skiljer sig från det generella kalmar-projektstod genom att målgruppen är bredare ('organisationer och andra aktörer inom kultursektorn') och inte uttryckligen kräver registrering i Kalmar kommuns föreningsregister. Redovisning senast två månader efter avslutat projekt. Ger inte stöd till verksamhet utanför kommunen, välgörenhetsgalor, vinstdrivande verksamhet eller övervägande politisk/religiös verksamhet."
+
+  # --- KULTUR- OCH FRITIDSFÖRVALTNINGEN: hembygdsföreningar ---
+  - id: "kalmar-verksamhetsstod-hembygd"
+    namn: "Verksamhetsstöd till hembygdsföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Hembygdsföreningar verksamma i Kalmar kommun, anslutna till Sveriges Hembygdsförbund"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Medlemskap i Sveriges Hembygdsförbund"
+      - "Demokratisk uppbyggnad och styrning"
+      - "Uppfylla kultur- och fritidsförvaltningens allmänna bestämmelser"
+      - "Stadgar ska visa öppet medlemskap för den som stödjer föreningens ändamål"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/hembygdsforeningar/stod-till-hembygdsforeningar---verksamhetsstod.html"
+    anteckning: "Fast summa lika för alla hembygdsföreningar, storlek beroende av kultur- och fritidsnämndens budget. Utbetalas i januari."
+
+  # --- KULTUR- OCH FRITIDSFÖRVALTNINGEN: Folkets hus och bygdegårdar (specialkategori §2.1.5) ---
+  - id: "kalmar-bygdegardar-folkets-hus"
+    namn: "Stöd till bygdegårdar, Folkets hus och parkföreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar och äldre ekonomiska föreningar som driver bygdegård, Folkets hus eller parkanläggning i Kalmar kommun, anslutna till Bygdegårdarnas Riksförbund, Folkets Hus och Parker eller Våra Gårdar"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Medlemskap ska vara öppet för alla som stödjer föreningens ändamål"
+      - "Föreningen ska vara uppbyggd och fungera enligt demokratiska principer"
+      - "Uppfylla kultur- och fritidsförvaltningens allmänna bestämmelser"
+      - "Föreningar som inte är anslutna till någon av de tre riksorganisationerna kan inte söka"
+    belopp: "Grundstöd plus ett schablonbelopp per kvadratmeter godkänd yta; för lokaler över 500 kvm varierar stödet även med antal aktiviteter. Storlek fastställs årligen av kultur- och fritidsnämnden"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/folkets-hus-och-bygdegardar/stod-till-bygdegardar-folkets-hus-och-parkforeningar.html"
+    anteckning: "HELA SPECIALKATEGORIN (bygdegårdar/Folkets hus, §2.1.5) SAKNADES I FÖREGÅENDE VERSION, dokumenterad som medvetet bortvald utan kategoriskt skäl — vilket §2.4 inte tillåter. Tillagd vid korrigerande omkörning 2026-07-20. Utbetalas i januari efter redovisning."
+
+  # --- FUNKTIONSRÄTT ---
+  - id: "kalmar-funktionsnedsattning"
+    namn: "Stöd till föreningar för funktionsnedsatta"
+    kategori: ["funktionsratt"]
+    malgrupp: "Lokala föreningar för personer med funktionsnedsättning med säte i Kalmar kommun, anslutna till en riksorganisation"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15"]
+    krav:
+      - "Registrerad i Kalmar kommuns föreningsregister"
+      - "Demokratisk uppbyggnad, öppen för alla enligt föreningens ändamål"
+      - "Uppfylla kultur- och fritidsförvaltningens allmänna bestämmelser"
+    belopp: "Lokalstöd max 90 procent av kostnaderna, högst 35 000 kronor per år. Medlems- och verksamhetsstöd: belopp fastställs årligen, ej angivet i kronor på sidan."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/foreningar-for-funktionsnedsatta/stod-till-foreningar-for-funktionsnedsatta.html"
+    anteckning: "Består av tre delar: medlemsstöd, verksamhetsstöd och lokalstöd. Utbetalas i april."
+
+  # --- PENSIONÄR ---
+  - id: "kalmar-senior"
+    namn: "Stöd till föreningar för seniorer"
+    kategori: ["pensionar"]
+    malgrupp: "Lokala seniorföreningar i Kalmar kommun, anslutna till PRO, SPF, RPG, Aktiva Seniorer eller SKPF"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15"]
+    krav:
+      - "Ansluten till en av riksorganisationerna PRO, SPF, RPG, Aktiva Seniorer eller SKPF"
+      - "Registrerad i Kalmar kommuns föreningsregister"
+      - "Demokratisk uppbyggnad och funktion"
+      - "Uppfylla kultur- och fritidsförvaltningens allmänna bestämmelser"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/seniorforeningar/stod-till-foreningar-for-seniorer.html"
+    anteckning: "Grundstöd (lika belopp för alla) och medlemsstöd (per medlem) fastställs årligen av kultur- och fritidsnämnden. Utbetalas i april."
+
+  # --- STUDIEFÖRBUND ---
+  - id: "kalmar-studieforbund"
+    namn: "Stöd till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund godkända av Folkbildningsrådet, verksamma i Kalmar kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Godkänt av Folkbildningsrådet för statligt stöd"
+      - "Verksamheten ska bredda kulturintresset och nå olika grupper"
+      - "Får inte avse uppdragsutbildning eller kommersiell verksamhet"
+      - "Årlig redovisning med mötesprotokoll, revisionsberättelse, ekonomisk redovisning och studietimmar senast 30 april"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (automatiskt stöd, ingen separat årlig ansökan för redan godkända studieförbund)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/studieforbund/stod-till-studieforbund.html"
+    anteckning: "Fördelningsmodell: 70 procent efter relativ andel av föregående års kommunala bidrag, 30 procent efter föregående års redovisade studietimmar i kommunen."
+
+  # --- SOCIAL ---
+  - id: "kalmar-tkt"
+    namn: "TKT – Trygga Kalmar Tillsammans"
+    kategori: ["social"]
+    malgrupp: "Föreningar och studieförbund som vill bedriva trygghetsskapande och inkluderande verksamhet för barn och unga i Oxhagen, Norrliden eller Berga, eller i områden med lågt föreningsdeltagande"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska rikta sig mot mötesplatser i Oxhagen, Norrliden eller Berga, eller områden med dokumenterade trygghetsutmaningar/lågt föreningsdeltagande bland unga"
+      - "Föreningen/studieförbundet ska vara godkänt enligt kultur- och fritidsnämndens bestämmelser"
+    belopp: "Max 50 000 kronor per ansökan"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/tkt---trygga-kalmar-tillsammans.html"
+    anteckning: null
+
+  # --- SAMHÄLLSBYGGNADSKONTORET / LANDSBYGDSUTVECKLING (specialkategori §2.1.5) ---
+  - id: "kalmar-bygdepeng"
+    namn: "Bygdepeng"
+    kategori: ["ovrig"]
+    malgrupp: "Bidragsberättigade föreningar registrerade i Rbok som verkar inom en by eller tätort på landsbygden i Kalmar kommun (ej centralorten)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-22", "04-19", "08-23", "11-29"]
+    krav:
+      - "Projektet ska vara förankrat i bygden och spegla ett brett samarbete om vad orten vill utveckla"
+      - "Om flera föreningar finns i området krävs samverkan mellan dem"
+      - "Får inte användas till driftskostnader, löner, vägarbete eller återkommande årliga evenemang"
+      - "Projektet får inte påbörjas innan beslut fattats"
+    belopp: "Max 150 000 kronor per projekt (inkl. moms) av totalt 1 miljon kronor som fördelas årligen. Konsultkostnader max 25 procent av taket (37 500 kronor). Renoveringsstöd: 100 procent för tidigare finansierade projekt, annars 50 procent (max 75 000 kronor)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/bygdepeng.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION, dokumenterad som medvetet bortvald — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori §2.1.5, byalag/samhällsföreningar). Administreras av landsbygdsnämnden, inte kultur- och fritidsnämnden — annan förvaltning men samma huvudman (Kalmar kommun), alltså inte uteslutet enligt §2.4. De fyra 2026-datumen (22/2, 19/4, 23/8, 29/11) är årets fyra ansökningsomgångar; exakta datum kan variera nästa år men den kvartalsvisa cykeln är återkommande. Söks via Rbok."
+  - id: "kalmar-miljopeng"
+    namn: "Miljöpeng"
+    kategori: ["ovrig"]
+    malgrupp: "Alla föreningar med organisationsnummer som har eller planerar verksamhet i Kalmar kommun (företag och privatpersoner kan inte söka)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01", "08-01", "11-01"]
+    krav:
+      - "Insatsen ska stärka lokalt miljöengagemang och koppla till nationella miljömål eller Agenda 2030"
+      - "Får inte användas till löpande kostnader (hyra, löner, avgifter), solceller eller vassklippning"
+      - "Ej vinstsyftande verksamhet"
+      - "Synlig redovisning/erkännande av kommunens stöd vid genomförande"
+      - "Kostnader ska styrkas med kvitton"
+    belopp: "Max 75 000 kronor. Vid belopp över 25 000 kronor krävs 25 procents medfinansiering (undantag möjliga)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/miljopeng---bidragsstod-till-foreningar.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Administreras av vatten- och miljönämnden (annan nämnd, samma huvudman). Söks via eget ansökningsformulär, inte Rbok. Besked inom två månader efter respektive ansökningsdatum."
+  - id: "kalmar-hjartsakrare-landsbygd"
+    namn: "Hjärtsäkrare landsbygd"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar, organisationer och samfälligheter med giltigt organisationsnummer verksamma på landsbygden i Kalmar kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Platsen ska ligga inom det område som räknas som landsbygd enligt översiktsplanen, med prioritet där hjärtstartare saknas"
+      - "Allmänt tillgängliga placeringar (t.ex. i uppvärmt skåp) prioriteras framför låsta utrymmen"
+      - "Nya hjärtstartare ska registreras i hjärtstartarregistret"
+      - "Minst hälften av budgeterade medel ska gå till nya hjärtstartare"
+    belopp: null
+    sen_ansokan: "Ansökningar kan skjutas till nästa år om årets budget är förbrukad"
+    kalla_url: "https://kalmar.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/hjartsakrare-landsbygd.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Omfattar nya hjärtstartare med värmeskåp, uppgradering av befintlig utrustning samt HLR-utbildning. Avslag ges för ansökningar inom Kalmar tätort eller vid begränsad nytta för bygden. Beslutas av landsbygdsutvecklare, söks via Rbok."
+
+  # --- TEKNIK- OCH FASTIGHETSFÖRVALTNINGEN / SERVICENÄMNDEN (specialkategori §2.1.5) ---
+  - id: "kalmar-enskilda-vagar"
+    namn: "Bidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare för enskild väg i Kalmar kommun: enskilda markägare eller vägsamfälligheter/vägföreningar som ansvarar för flera fastigheters väg"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Driftbidrag: årligt bidrag fastställt i kronor per meter för drift som snöröjning, grusning, hyvling, dammbindning och kantskärning"
+      - "Förbättringsbidrag: avser standardhöjande åtgärder som ny asfaltering eller nya väg-/brofundament"
+      - "Offert från entreprenör ska bifogas förbättringsbidragsansökan"
+      - "Faktura krävs innan utbetalning"
+      - "Aktuella kontakt- och kontouppgifter ska finnas via e-tjänsten Mina sidor"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kalmar.se/trafik-och-resor/gator-och-vagar/bidrag-enskilda-vagar.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION, ingen dokumenterad uteslutning — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori §2.1.5, väg-/samfällighetsföreningar). Driftbidrag beslutas årligen av teknik- och fastighetsnämnden utan publicerad ansökningsdeadline (deadline ovan avser enbart förbättringsbidrag); förbättringsbidrag (nybeläggning m.m.) beslutas av servicenämnden och kräver ansökan senast 28 februari samt bekräftelse av nyttjande senast 31 maj. Riktar sig både till enskilda markägare och vägsamfälligheter/vägföreningar — skrivet här eftersom organisationer uttryckligen omfattas, jämför Halmstads motsvarande administrationsbidrag till vägföreningar. Söks via e-tjänsten Mina sidor, inte Rbok."
+forutsattningar:
+  - id: "kalmar-godkand-forening"
+    vad: "Bli registrerad/godkänd förening i Kalmar kommuns föreningsregister"
+    beskrivning: "Föreningen ansöker om att registreras i kommunens föreningsregister via Rbok. Kräver minst 10 medlemmar, årlig medlemsavgift om minst 50 kronor per medlem, skriftliga stadgar antagna på årsmöte, vald styrelse, medlemsförteckning, organisationsnummer från Skatteverket, bank- eller plusgirokonto, säte och huvudsaklig verksamhet i Kalmar kommun, demokratisk uppbyggnad öppen för alla samt anslutning till en riksorganisation inom sitt område. Barn- och ungdomsverksamhet ska vara alkohol- och drogfri. Detta steg krävs för bidrag administrerade av kultur- och fritidsnämnden (samtliga bidrag i denna fil utom landsbygds-/vägbidragen kalmar-bygdepeng, kalmar-miljopeng, kalmar-hjartsakrare-landsbygd och kalmar-enskilda-vagar, som i stället kräver enbart giltigt organisationsnummer respektive väghållarstatus — se respektive bidrags krav)."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://kalmar.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturforeningar/allmanna-bestammelser.html"

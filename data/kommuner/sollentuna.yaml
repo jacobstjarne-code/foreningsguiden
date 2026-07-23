@@ -1,0 +1,411 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte redaktionella sidor först). Föregående version
+# (verifierad 2026-07-19) rapporterades med 12 bidrag och hade redan
+# identifierat de tre förvaltningarna (Kultur- och fritidskontoret,
+# Socialkontoret, Vård- och omsorgskontoret) korrekt — v1-passet var för
+# Sollentunas del ovanligt bra, men missade ändå fyra bidrag som bara fanns
+# i regelverket eller nedgrävda som underklausul i en PDF som redan lästs.
+#
+# Metod: (1) Regelverket. Hela Sollentunas författningssamlingskategori
+# "Bidrag, stiftelser och stipendier" hämtades och samtliga elva PDF:er i
+# den listades och lästes i sin helhet (curl + pdftotext -layout), inte
+# bara de sex som redan var kända. Detta gav tre helt nya fynd:
+#   - "Bidrag till föreningsdrift av kommunägda fritidsanläggningar"
+#     (antagen av fullmäktige 2000-04-10 § 38) — finns ENDAST i regelverket,
+#     ingen nuvarande redaktionell sida länkar till den. Exakt det mönster
+#     v2.1 varnar för (§0/§2.1): kommunens sidträd speglar inte vad som är
+#     beslutat.
+#   - "Bidrag till fristående enheters drift av fritidsverksamhet för barn-
+#     och ungdomar" (antagen 1999, reviderad senast 2012) — samma mönster,
+#     endast i regelverket.
+#   - Ett helt nytt bidrag DOLT SOM UNDERKLAUSUL i en redan använd källa:
+#     § 3.4 "Stöd till fysisk aktivitet på recept (FaR)" i
+#     "Bidrag till ungdomsorganisationer.pdf" — samma PDF som redan
+#     användes för aktivitetsstöd/lokalstöd/utbildningsstöd i föregående
+#     körning, men bara §§ 1–3.3 lästes då. §3.4 (sista stödformen i
+#     dokumentet, sida 3 av 4) beskriver ett separat, kompletterande stöd
+#     på 50 kr/individ och aktivitetstillfälle för föreningar med utbildade
+#     FaR-ledare. Detta är precis den typ av miss v2.1 §0 beskriver
+#     ("flera distinkta bidrag under samma URL missas") — löst genom att
+#     läsa hela dokumentet rad för rad i stället för att stanna vid första
+#     träffen.
+# (2) Förvaltningarnas egna sidor lästes i sin helhet (samtliga sex
+# undersidor under Föreningsbidrag, plus Bilda förening, FaR-sidan,
+# Trygghet i föreningslivet, samt sidorna för stipendier/priser/
+# utmärkelser) — inga fler ekonomiska föreningsbidrag utöver det som redan
+# fanns i regelverket eller webbtexten.
+# (3) Självservice/e-tjänst (§2.1.3): sjalvservice.sollentuna.se
+# genomsöktes — bekräftar en generisk "Föreningsbidrag - gör en ansökan"
+# e-tjänst, ingen ny bidragsform. En tredje, tidigare okänd ansökningsväg
+# hittades dock: boka.sollentuna.se/bidrag/ kör "FRI Webb-Bidrag" (Idavall
+# Data AB — ett annat system än Interbook FRI trots liknande namn). Denna
+# gick, ovanligt nog, att läsa direkt (ej JS-blockerad för de två poster
+# som visas offentligt): Lokalbidrag och Utbildningsstöd, båda för
+# "Bidragsår 2024". Innehållet (regeltext, belopp, datum) matchade exakt
+# regelverket och stärker alltså befintliga poster snarare än att lägga
+# till nya — men systemet verkar vara en äldre/parallell ingång som inte
+# längre är den som länkas från de aktuella bidragssidorna (dessa pekar på
+# Interbook/ApN). Loggat som kompletterande källa, inte primär.
+# (4) Ansökningsportalen sollentuna.interbookfri.se (Interbook FRI) samt
+# boka.sollentuna.se/forening/ (föreningsregister/sökkatalog, körs också
+# på Interbook FRI-motorn under huven) är båda JS-renderade och gick inte
+# att räkna upp — EJ_EXTRAHERBAR, se nedan.
+# (5) Specialkategorier (§2.1.5): vägföreningar/vägsamfälligheter och
+# bygdegårdar/byalag genomsöktes riktat — INGET hittades. Sollentuna är en
+# tätortsdominerad Stockholms-förortskommun utan den typ av landsbygds-/
+# skärgårdsbidrag som fanns i t.ex. Karlskrona; ingen indikation på att
+# kommunen administrerar enskilda vägar eller har en landsbygdsmiljon.
+# Stiftelser: Sollentuna Skolsamfond och Brit af Klerckers ungdomsfond
+# identifierade och uteslutna (se MEDVETET_UTESLUTET) — båda riktar sig
+# till enskilda elever/behövande, ingen stiftelse öppen för föreningar som
+# sökande hittades (till skillnad från Växjö/Karlstad). En tredje fond,
+# "Sollentuna sociala samfond", nämns i ett historiskt sökträffsutdrag
+# (bildad genom sammanslagning av åtta äldre fonder, medel delas ut på
+# socialnämndens initiativ utan fast ansökningsprocess) men sidan
+# https://www.sollentuna.se/uppleva--gora/stipendier-priser-och--utmarkelser/Sollentuna-sociala-samfond
+# gav 404 vid denna körning — ingen levande, citerbar källa (§4 kräver
+# 200-svar). Inte skrivet, inte heller kategoriserat som säkert uteslutet;
+# flaggat för framtida uppföljning om kommunen publicerar en ny sida.
+#
+# Konflikter: inga fältkonflikter mellan de två oberoende omgångarna denna
+# körning. Befolkningssiffran kontrollerades mot en extern aggregator
+# (Newsworthy, SCB-baserad kvartalssiffra 78 157 per 2026-03-31) men
+# eftersom källan inte är kommunens egen domän (§4: "Endast kommunens egen
+# domän är källa") behölls kommunens egen publicerade siffra (78 033,
+# 2025-12-31) oförändrad.
+#
+# Ansökningssystem: namnet normaliserat till "Interbook FRI" (matchar
+# domänen sollentuna.interbookfri.se och konventionen i övriga kommunfiler
+# i denna batch, t.ex. Karlskrona). Tidigare version skrev bara "Interbook".
+#
+# Uteslutna (kategoriskt skäl, §2.3–§2.4):
+# - Sollentuna kommuns kulturpris, Årets initiativtagare, Årets
+#   föreningsledare, Stipendiet ung kultur, Stipendiet ung idrottsutövare,
+#   Boris Kunos fotostipendium, Släkten Rudbecks stipendium — samtliga
+#   individpriser/stipendier till enskild person, nominering/urval av
+#   nämnden, inte konkurrensutsatt ansökan om verksamhets-/projektbidrag.
+#   https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/stiftelser-och-stipendier/regler-for-kultur--och-fritidsnamndens-utmarkelser-och-stipendier-2025.pdf
+#   GRÄNSFALL: Sofia Magdalenas sköld och Byggnadsvårdsdiplomet kan enligt
+#   samma regelverk gå till "person, organisation eller företag" — men är
+#   hedersutmärkelser (en sköldkopia respektive ett diplom) genom
+#   nominering, inte sökbara ekonomiska bidrag. Samma bedömning som
+#   Karlskronas uteslutning av sitt Kulturpris. Flaggat för Fables
+#   granskning, inte en okontroversiell uteslutning.
+# - Sollentuna lärarpris/skolledarpris, Sollentuna Trygghetspris —
+#   individuella pris till lärare/rektor respektive för en trygghetsinsats,
+#   nominering av enskild person, ingen föreningskoppling.
+#   https://www.sollentuna.se/uppleva--gora/stipendier-priser-och--utmarkelser/
+# - Sollentuna Skolsamfond — stadgeenligt riktad till enskilda ELEVER
+#   (premier/stipendier för goda kunskaper, kamratanda eller flit), beslut
+#   av gymnasienämnden. Individuellt, ingen föreningsansökan.
+#   https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/stadgar-for-sollentuna-skolsamfond.pdf
+# - Brit af Klerckers ungdomsfond — stiftelse med eget styrelseskick
+#   (ledamöter utses av Sollentuna församlings kyrkoråd samt två kommunala
+#   nämnder), ändamål är stipendier till enskilda ungdomar samt understöd
+#   till enskilda tbc-sjuka. Individuellt riktad OCH annan huvudman
+#   (samförvaltas med Svenska kyrkans lokala församling).
+#   https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/stiftelser-och-stipendier/stadgar-for-berit-af-klerckers-ungdomsfond-reviderad-2015-11-05.pdf
+# - Regler för bidrag för åtgärder mot buller från kommunens gator och
+#   vägar ("bullerbidrag") — riktas till enskild FASTIGHETSÄGARE för en-
+#   och tvåbostadshus, inte till föreningar.
+#   https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/regler-for-bidrag-for-atgarder-mot-buller-fran-kommunens-gator.pdf
+# - Regler för kommunalt bostadsbidrag för personer med funktionsnedsättning
+#   (KBF) samt det allmänna Bostadsanpassningsbidraget — individuellt
+#   riktade bidrag till enskild person med funktionsnedsättning, söks av
+#   privatperson, ingen föreningskoppling.
+#   https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/regler-for-kommunalt-bostadsbidrag-for-personer-med-funktionsnedsattning.pdf
+# - Ansökan om specialtid i idrottshallar (för föreningar med verksamhet
+#   för personer med funktionsnedsättning) — bokning av anläggningstid,
+#   inget ekonomiskt bidrag.
+#   https://www.sollentuna.se/uppleva--gora/foreningar-och-foreningsliv/Foreningsbidrag/aktiviteter-for-personer-med-funktionsnedsattning/
+# - Bilda förening, Föreningsregister, Lotteritillstånd, FaR-informations-
+#   sidan (själva sidan; §3.4-stödet i regelverket ÄR skrivet, se
+#   sollentuna-idrott-far), Trygghet i föreningslivet — informations-/
+#   registreringssidor utan ekonomiskt bidrag kopplat.
+#
+# EJ_EXTRAHERBAR:
+# - sollentuna.interbookfri.se (Interbook FRI) — JS-renderad, kräver
+#   inloggning, gick inte att räkna upp via fetch/curl.
+# - boka.sollentuna.se/forening/ — JS-renderad föreningskatalog/sökportal
+#   (körs på Interbook FRI-motorn), ingen bidragslistning i sig.
+# - boka.sollentuna.se/bidrag/ (Idavall FRI Webb-Bidrag) — DELVIS
+#   extraherbar (två offentliga poster för Bidragsår 2024 kunde läsas),
+#   men listan är begränsad till kategorin "Stöd till ungdomsorganisationer"
+#   och tycks vara en äldre parallell ingång som inte länkas från
+#   nuvarande bidragssidor. Innehållet bekräftade befintliga poster,
+#   gav inga nya.
+#
+# Sollentuna har tre administrativa hem för föreningsbidrag: Kultur- och
+# fritidskontoret (störst — idrott, fritid, kultur, funktionsrätt,
+# studieförbund samt de nyfunna fritidsanläggnings-/fritidsverksamhets-
+# bidragen och FaR-stödet), Socialkontoret (social verksamhet) och Vård-
+# och omsorgskontoret (seniorer 65+). Idéburet offentligt partnerskap
+# (IOP) kan tecknas av VILKEN nämnd som helst och är därför upptaget som
+# tvärgående. Ansökan sker primärt via Interbook FRI (idrott/fritid) samt
+# ApN (aktivitetsstödets höstansökan), medan social/seniorer-bidrag söks
+# via e-tjänst/pappersblankett till Socialkontoret/Vård- och omsorgskontoret,
+# och kultur-/studieförbundsbidrag via blankett/e-post. Spot-checkas av
+# Jacob/Fable före publik deploy.
+kommun: "Sollentuna"
+kommun_slug: "sollentuna"
+lan: "Stockholms län"
+befolkning: 78033
+forvaltning: "Kultur- och fritidskontoret, Socialkontoret samt Vård- och omsorgskontoret"
+ansokningssystem:
+  namn: "Interbook FRI"
+  url: "https://sollentuna.interbookfri.se/#/"
+kalla_url: "https://www.sollentuna.se/uppleva--gora/foreningar-och-foreningsliv/Foreningsbidrag/"
+verifierad: 2026-07-21
+bidrag:
+  # --- KULTUR- OCH FRITIDSKONTORET: idrott/ungdom ---
+  - id: "sollentuna-idrott-aktivitetsstod"
+    namn: "Aktivitetsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade föreningar med aktiviteter för barn och ungdom 7–20 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15", "08-15"]
+    krav:
+      - "Föreningen ska ha sin huvudsakliga verksamhet och hemvist i Sollentuna kommun och vara ansluten till riksorganisation som erhåller statligt organisationsstöd"
+      - "Minst 20 medlemmar i åldern 7–20 år som var och en deltagit i minst 10 bidragsberättigade aktiviteter under redovisningsperioden"
+      - "Minst 51 % av medlemmarna ska vara bosatta i Sollentuna"
+      - "Organisationsnummer samt plusgiro eller bankgiro i föreningens namn"
+    belopp: "5,50 kronor per deltagartillfälle (7–12 år), 7,50 kronor per deltagartillfälle (13–20 år)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-ungdomsorganisationer.pdf"
+    anteckning: "Ansökan 15 februari avser höstterminens aktiviteter (ansöks via ApN/aktivitetskort.se), ansökan 15 augusti avser vårterminens aktiviteter (ansöks via Interbook)."
+  - id: "sollentuna-idrott-lokalstod"
+    namn: "Lokalstöd"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade idrotts- och ungdomsföreningar vars verksamhet inte kan bedrivas i kommunens lokaler"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening enligt reglerna för bidrag till ungdomsorganisationer"
+      - "Lokalen ska vara helårshyrd eller egen, och godkännas av kultur- och fritidsnämnden"
+    belopp: "80 % av årskostnaden, dock högst 50 kronor per medlem och maximalt 4 000 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-ungdomsorganisationer.pdf"
+    anteckning: "Ansökan avser föregående års lokalkostnad (kostnadsåret), lämnas in 15 februari året efter. Bekräftat oförändrat i FRI Webb-Bidrag-portalens post för Lokalbidrag (boka.sollentuna.se/bidrag/, Bidragsår 2024)."
+  - id: "sollentuna-idrott-utbildningsstod"
+    namn: "Utbildningsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Ungdomar 13–20 år i bidragsberättigad förening som går ledarutbildning, till exempel tränar- eller domarutbildning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Utbildningen ska vara godkänd av föreningens riksorganisation"
+      - "Föreningen kan maximalt få 20 % av föregående redovisningsperiods aktivitetsstöd i utbildningsstöd"
+    belopp: "1 000 kronor per person"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/uppleva--gora/foreningar-och-foreningsliv/Foreningsbidrag/idrotts--och-ungdomsforeningar/"
+    anteckning: "Regeldokumentet (senast reviderat 2015) anger utöver 15 februari även 15 augusti för utbildningar genomförda 1/1–30/6; nuvarande webbsida (uppdaterad april 2026) anger endast 15 februari."
+  - id: "sollentuna-idrott-far"
+    namn: "Stöd till fysisk aktivitet på recept (FaR)"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med utbildade FaR-ledare som erbjuder fysisk aktivitet till personer som har rätt till FaR (Fysisk aktivitet på recept, Region Stockholm)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha utbildade FaR-ledare"
+      - "Föreningen ska erbjuda en subventionerad medlemsavgift på minst 300 kronor per aktiv och termin"
+    belopp: "50 kronor per individ och aktivitetstillfälle"
+    sen_ansokan: "Ej tillämpligt (löpande, kopplat till FaR-status)"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-ungdomsorganisationer.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — dolt som § 3.4 (sista stödformen) i samma PDF som redan användes för aktivitetsstöd/lokalstöd/utbildningsstöd, men inte läst till slutet i förra körningen. Beskrivs i regelverket som 'det ökade aktivitetsstödet' och ges under den tid utövaren har rätt till FaR — inget separat ansökningsdatum angivet utöver detta. Se även https://www.sollentuna.se/uppleva--gora/foreningar-och-foreningsliv/FaR---Fysisk-aktivitet-pa-recept/ för föreningens process att bli godkänd FaR-aktör (hanteras av Region Stockholm, inte kommunen)."
+  - id: "sollentuna-idrott-fritidsanlaggningar-drift"
+    namn: "Bidrag till föreningsdrift av kommunägda fritidsanläggningar"
+    kategori: ["idrott"]
+    malgrupp: "En ideell förening, eller flera i samverkan, som huvudsakligen bedriver idrottsverksamhet för barn och ungdomar (till och med 20 år) bosatta i Sollentuna, och som är huvudsaklig nyttjare av en kommunägd fritidsanläggning (simhall, bollplan eller annan sommar-/vinteridrottsanläggning)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vid ansökningstillfället vara den huvudsakliga nyttjaren av anläggningen"
+      - "Verksamheten ska vara religiöst och politiskt obunden"
+      - "Föreningen ska teckna och vidmakthålla ansvarsförsäkring för anläggningen under bidragsperioden"
+      - "Handling som styrker organisationens ekonomiska ställning ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-foreningsdrift-av-fritidsanlaggningar.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — hittades bara i regelverket (antaget av fullmäktige 2000-04-10, § 38), ingen nuvarande redaktionell sida länkar hit. Fritidsnämndens ansvar övertogs av Kultur- och fritidsnämnden 2001-07-01. Bidraget betalas ut kvartalsvis i förskott efter beslut i nämnden, som fastställer de närmare villkoren (inget schablonbelopp publicerat). Ansökan ska lämnas årligen; inget specifikt datum publicerat."
+  - id: "sollentuna-ovrig-fristaende-fritidsverksamhet"
+    namn: "Bidrag till fristående enheters drift av fritidsverksamhet för barn och ungdomar"
+    kategori: ["ovrig"]
+    malgrupp: "Ideell förening eller annan juridisk person som bedriver frivillig fritidsverksamhet för barn och ungdomar, huvudsakligen 13–20 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska vara öppen för alla ungdomar i åldersgruppen, religiöst och politiskt obunden, drogfri och socialt förebyggande"
+      - "Personalen ska ha lämplig utbildning och erfarenhet samt följa anmälningsplikten enligt 14 kap. 1 § socialtjänstlagen"
+      - "Särskild överenskommelse ska tecknas med barn- och ungdomsnämnden respektive kultur- och fritidsnämnden"
+      - "Anordnaren har inte rätt att själv ta ut avgift av deltagarna (undantag för cafeteriaförsäljning o.dyl.)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-fristaende-enheters-drift-av-fritidsverksamhet.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — hittades bara i regelverket (antaget 1999-09-20, senast reviderat 2012-12-12), ingen nuvarande redaktionell sida länkar hit. Nämnden (barn- och ungdomsnämnden för 13–15 år, kultur- och fritidsnämnden för ungdomar över 15 år) fastställer bidragets storlek individuellt per anordnare — inget schablonbelopp publicerat."
+  # --- KULTUR- OCH FRITIDSKONTORET: kultur ---
+  - id: "sollentuna-kultur-arsbidrag"
+    namn: "Verksamhetsbidrag (årsbidrag) till kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Ideella kulturföreningar med kontinuerlig verksamhet inom kulturområdet, till exempel konst, musik, teater, dans, film, foto, kulturmiljö- och hembygdsvård"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-15"]
+    krav:
+      - "Föreningen ska ha varit verksam i minst ett år och ha minst 14 medlemmar (undantag för ungdomsföreningar och föreningar av synnerligen stor betydelse för kommunens kultur)"
+      - "Föreningen ska ha sitt säte och sin verksamhet i Sollentuna, och minst hälften av medlemmarna ska vara bosatta i Sollentuna"
+      - "Föreningen ska ha egen styrelse, stadgar och kassaförvaltning samt ta ut årlig medlemsavgift"
+      - "Medlemskap ska vara öppet för alla intresserade"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-ideella-kulturforeningar.pdf"
+    anteckning: "Beslut fattas av kultur- och fritidsnämnden i februari. Bidrag utgår inte till föreningar som redan får kommunalt kulturstöd från annan instans eller vars huvudsakliga uppgift är att tillvarata medlemmars yrkesmässiga, fackliga eller ekonomiska intressen."
+  - id: "sollentuna-kultur-startbidrag"
+    namn: "Startbidrag till nystartade kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Nystartade ideella kulturföreningar i Sollentuna"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-15"]
+    krav:
+      - "Föreningen ska ha fastställda stadgar och stadgeenligt vald styrelse"
+      - "Föreningen ska i övrigt uppfylla villkoren för årsbidrag, utom kravet på minst ett års verksamhet"
+    belopp: "1 000 kronor per förening"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/bidrag-till-ideella-kulturforeningar.pdf"
+    anteckning: null
+  - id: "sollentuna-kultur-arrangemangsbidrag"
+    namn: "Bidrag till kulturarrangemang"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som ordnar större kulturarrangemang eller projekt utöver ordinarie verksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska innehålla en beskrivning av arrangemanget och en budget"
+    belopp: "Högst 25 procent av projektets kostnader"
+    sen_ansokan: "Ej tillämpligt (löpande ansökan)"
+    kalla_url: "https://www.sollentuna.se/uppleva--gora/foreningar-och-foreningsliv/Foreningsbidrag/bidrag-till-kulturforeningar/"
+    anteckning: "Ansökan skickas till kfn@sollentuna.se och kan lämnas när som helst under året."
+  # --- SOCIALKONTORET ---
+  - id: "sollentuna-social-foreningsbidrag"
+    namn: "Föreningsbidrag (socialnämnden)"
+    kategori: ["social"]
+    malgrupp: "Frivilliga organisationer (föreningar, stiftelser, enstaka organiserade projekt) vars verksamhet sammanfaller med socialnämndens ansvarsområde och som har kommuninvånare i Sollentuna som medlemmar/deltagare"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Organisationen ska vara öppen för alla kommuninvånare som faller inom ramen för verksamheten"
+      - "Organisationen ska ha organisationsnummer och plus-/bankgiro eller bankkonto i föreningens namn"
+      - "Verksamheten ska vara ett komplement till socialnämndens egna verksamheter, och inte sammanfalla med kommunens konkurrensupphandlade verksamheter"
+      - "Ansökan ska åtföljas av föregående års bokslut, verksamhetsberättelse och revisionsberättelse samt budget och verksamhetsplan för bidragsåret (nya föreningar bifogar istället stadgar och beslut om föreningens bildande)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/regler-for-foreningsbidrag-socialnamnden.pdf"
+    anteckning: "Bidrag beviljas per kalenderår, beslut senast vid nämndens sammanträde i december. Bilagor skickas per post till Socialkontoret, 191 86 Sollentuna. Regelverket senast reviderat 2020-04-21."
+  # --- VÅRD- OCH OMSORGSKONTORET ---
+  - id: "sollentuna-seniorer-foreningsstod"
+    namn: "Föreningsstöd för verksamhet för seniorer 65+"
+    kategori: ["pensionar"]
+    malgrupp: "Frivilliga organisationer (föreningar, stiftelser, enstaka organiserade projekt) som riktar sig i huvudsak till personer över 65 år bosatta i Sollentuna"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Organisationen ska ha kommuninvånare över 65 år i Sollentuna som störst andel av medlemmar/deltagare, eller rikta sig i huvudsak till personer över 65 år i Sollentuna"
+      - "Organisationen ska ha bedrivit verksamhet i minst ett år innan ansökningstillfället (karenstid för nya föreningar)"
+      - "Organisationen ska ha organisationsnummer och plusgiro, bankgiro eller bankkonto i föreningens namn"
+      - "Verksamheten ska vara ett komplement till vård- och omsorgsnämndens egna verksamheter, och inte sammanfalla med kommunens konkurrensupphandlade verksamheter"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/riktlinjer-for-foreningsbidrag-vard--och-omsorgsnamnden.pdf"
+    anteckning: "Beslut fattas av vård- och omsorgsnämnden senast vid decembersammanträdet; bidrag behandlas inte efter det. Beviljat bidrag ska redovisas senast 15 maj året efter bidragsåret. Regelverket omantaget av vård- och omsorgsnämnden 2026-06-16 (§ 64), i kraft från 2026-07-01 — sakligt oförändrat mot tidigare version vid jämförelse punkt för punkt."
+  # --- KULTUR- OCH FRITIDSKONTORET: funktionsrätt ---
+  - id: "sollentuna-funktionsratt-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["funktionsratt"]
+    malgrupp: "Föreningar med kontinuerlig verksamhet för personer med funktionsnedsättning, anslutna till riksförbund som erhåller statsbidrag"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15", "08-15"]
+    krav:
+      - "Sammankomsten ska ha pågått minst en timme med minst tre medlemmar närvarande"
+      - "Minst halva antalet deltagare vid sammankomsten ska ha en funktionsvariation"
+      - "Föreningen ska ha organisationsnummer, plusgiro eller bankgiro i föreningens namn, samt antagen alkohol- och drogpolicy via distrikts- eller riksförbund"
+    belopp: "45 kronor per deltagartillfälle"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/uppleva-och-gora/foreningsliv/bidragsblanketter/blanketter-fritid/bidrag-till-foreningar-som-bedriver-verksamhet-for-personer-med-funktionsnedsattning.pdf"
+    anteckning: "Ansökan 15 februari avser redovisningsperioden 1/7–31/12, ansökan 15 augusti avser 1/1–30/6."
+  - id: "sollentuna-funktionsratt-lokalbidrag"
+    namn: "Lokalbidrag"
+    kategori: ["funktionsratt"]
+    malgrupp: "Föreningar för personer med funktionsnedsättning vars verksamhet inte kan bedrivas i av kommunen anvisad lokal"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Lokalen (helårshyrd eller egen) ska godkännas av kultur- och fritidsnämnden"
+    belopp: "80 % av årskostnaden, dock högst 20 000 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/uppleva-och-gora/foreningsliv/bidragsblanketter/blanketter-fritid/bidrag-till-foreningar-som-bedriver-verksamhet-for-personer-med-funktionsnedsattning.pdf"
+    anteckning: "Ansökan avser kostnadsåret, lämnas in året efter."
+  - id: "sollentuna-funktionsratt-utbildningsbidrag"
+    namn: "Utbildningsbidrag"
+    kategori: ["funktionsratt"]
+    malgrupp: "Medlem i förening för personer med funktionsnedsättning som går tillfällig utbildning eller kurs"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Utbildningen ska godkännas av kultur- och fritidsnämnden"
+    belopp: "1 000 kronor per medlem"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sollentuna.se/globalassets/uppleva-och-gora/foreningsliv/bidragsblanketter/blanketter-fritid/bidrag-till-foreningar-som-bedriver-verksamhet-for-personer-med-funktionsnedsattning.pdf"
+    anteckning: null
+  # --- KULTUR- OCH FRITIDSKONTORET: studieförbund ---
+  - id: "sollentuna-studieforbund-bidrag"
+    namn: "Kommunalt bidrag till studieförbund"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Studieförbund verksamma i Sollentuna kommun som erhåller statsbidrag"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Studieförbundet ska erhålla statsbidrag och ha verksamhet i Sollentuna"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande, formelbaserad fördelning)"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/regler-for-kommunalt-bidrag-till-studieforbund.pdf"
+    anteckning: "75 % av bidraget (ungdomsbidrag) fördelas efter respektive studieförbunds andel av föregående års statsbidragsberättigade studiecirklar för 13–24-åringar; 25 % (kulturbidrag) efter andel deltagartimmar i kulturprogram enligt Folkbildningsrådets definition. Ansvaret för tillämpningsanvisningar övergick från kultur- och fritidsnämnden till utbildnings- och arbetsmarknadsnämnden (2011) och sedan kompetens- och arbetsmarknadsnämnden (2018), men ansökan sker enligt nuvarande webbsida fortsatt via blankett hos näringslivschef Fredrik Lind (08-579 229 87, fredrik.lind@sollentuna.se)."
+  # --- TVÄRGÅENDE (valfri nämnd) ---
+  - id: "sollentuna-tvargaende-iop"
+    namn: "Idéburet offentligt partnerskap (IOP)"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Idéburna organisationer (ideella föreningar, ekonomiska föreningar, stiftelser, trossamfund m.fl.) som vill lösa en samhällsutmaning tillsammans med en kommunal nämnd"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Initiativet till samarbetet ska komma från den idéburna organisationen, inte från kommunen"
+      - "Partnerskapet får inte avse verksamhet som ska upphandlas enligt LOU, ska vara förenligt med kommunallagen och EU:s statsstödsregler, och får inte vara en del av det normerade föreningsbidraget"
+      - "Organisationen ska fungera enligt allmänt vedertagna demokratiska principer och alla människors lika rätt som värdegrund"
+      - "Både organisationen och kommunen ska finansiera verksamheten (pengar eller andra insatser)"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (initieras via dialog med berörd nämnd, ingen fast ansökningsprocess eller deadline)"
+    kalla_url: "https://www.sollentuna.se/globalassets/kommun-och-politik/sa-styrs-sollentuna/sollentuna-forfattningssamling-sfs/bidrag-stiftelser-och-stipendier/riktlinjer-for-ideburet-offentligt-partnerskap-iop-i-sollentuna-kommun.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION. Antagna av fullmäktige 2019-10-24, § 112. Respektive nämnd ansvarar för IOP inom sitt verksamhetsområde (två eller fler nämnder kan ha ett gemensamt IOP). Ett avtal tecknas per partnerskap, ingen schabloniserad ansökan eller fast belopp — jämför motsvarande post i Växjös kommunfil ('Stöd till samhällsuppdrag')."
+forutsattningar:
+  - id: "sollentuna-foreningsregistrering"
+    vad: "Registrera föreningen i Sollentuna kommuns föreningsregister"
+    beskrivning: "Föreningen registrerar sig i kommunens föreningsregister för att kunna söka föreningsbidrag. Registrering sker genom att först lägga till sig som ny privatkund i föreningsregistret, logga in och därefter välja föreningsansökan under Mitt konto."
+    system: "Interbook FRI"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.sollentuna.se/uppleva--gora/foreningar-och-foreningsliv/Bilda-forening/"

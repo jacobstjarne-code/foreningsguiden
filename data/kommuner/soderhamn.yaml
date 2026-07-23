@@ -1,0 +1,373 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md, §2 reviderat till
+# v2.1 — källkonvergens). Föregående version (verifierad 2026-07-19) hade
+# redan ett gediget regelverks-baserat researcharbete för huvuddelen av
+# bidragen (SKFS 08:2021:04 "Bestämmelser för kommunala bidrag till
+# föreningar och organisationer", Elitbidrag SKFS 08:2025:01, Föreningsmil-
+# jonen SKFS 08:2023:03, lästa direkt ur PDF). Den här omkörningen bekräftade
+# att det arbetet står sig och utökade täckningen genom att systematiskt gå
+# igenom källkategorierna v1 inte sökte metodiskt: förvaltningarnas egna
+# sidor utanför kultur/fritid, självservice-/e-tjänstsidor, portalen, samt
+# specialkategorierna väg/samfälligheter, bygdegårdar, stiftelser/fonder,
+# byalag och studieförbund (RESEARCH_SPEC_v2.md §2.1 punkt 2–5).
+#
+# Metod: (1) Regelverket verifierat fortsatt aktuellt via kommunens författ-
+# ningssamling — SKFS 08:2021:04 har ingen nyare ersättare (soderhamn.se/
+# sidor/kommun-och-politik/styrdokument/forfattningssamling.html). (2) Kom-
+# munens huvudöversikt för föreningsbidrag hämtad, alla undersidor och
+# e-tjänstlänkar kartlagda. (3) Självservice: e-tjanster.soderhamn.se-
+# översikterna för varje bidrag identifierade. (4) Portalen soderhamn.rbok.se
+# hämtad — bekräftat JS-renderat applikationsskal utan statisk bidragsupp-
+# räkning (endast navigationsmeny: Boka/Ansök/Föreningsregister/Logga in),
+# loggat EJ_EXTRAHERBAR. (5) Specialkategorier genomsökta en och en: enskild
+# väg/vägföreningar/vägsamfälligheter (NY), bygdegårdar (redan täckt av
+# "Bidrag till allmän samlingslokal"), stiftelser/fonder (NY), byalag/sam-
+# hällsföreningar (landsbygdsbidraget täcker föreningar generellt; "kommun-
+# delspengen" som kommunbygderådet ALLiS administrerar kunde INTE källbe-
+# läggas på kommunens egen domän, se nedan), studieförbund (redan täckt).
+#
+# NYTT VID DENNA OMKÖRNING (2 bidrag tillagda, se respektive post för detalj):
+# - "Bidrag till enskild väg" — vägföreningar/vägsamfälligheter, special-
+#   kategori §2.1 punkt 5. Saknades helt i föregående version.
+# - "Stiftelser och fonder" — samlat bidrag per §2.7. Kommunen förvaltar
+#   minst 22 stiftelser, varav minst 13 är sökbara; minst fyra av dessa
+#   (verifierat) tillåter uttryckligen både privatpersoner OCH föreningar.
+#   Saknades helt i föregående version.
+#
+# KONFLIKT LÖST VIA §2.5 (NYARE VINNER) — INGEN ÄNDRING AV FÄLTVÄRDE:
+# "Föreningsbidrag för utveckling av landsbygden": det bakomliggande
+# regelverket (SKFS 08:2024:02, antaget i samhällsservicenämnden 2024-02-28)
+# anger explicit fasta ansökningsdatum 31 mars och 30 september. Kommunens
+# webbsida (senast uppdaterad 2026-06-30 — nyare än regelverket) anger
+# uttryckligen "Bidraget kan sökas löpande". Webbsidan vinner enligt §2.5
+# eftersom den är nyast — deadlines.typ förblir "lopande", oförändrat från
+# föregående version. Båda källorna och daten är loggade, se anteckning på
+# bidraget och körningsrapportens konflikter.log.
+#
+# UTESLUTNA MED KATEGORISKT SKÄL (§2.4):
+# - "Riktlinjer för lån till föreningar" (SKFS 08:2021:01) — är ett lån
+#   (kräver amortering, säkerhet/pantbrev, ränteriskbedömning av kommunen),
+#   inte ett bidrag. Kategoriskt en annan stödform än de bidrag schemat avser.
+#   https://www.soderhamn.se/download/18.77d000c1180b44e21a821f9/1655281566881/Riktlinjer%20f%C3%B6r%20l%C3%A5n%20till%20f%C3%B6reningar%20SKFS%2008:2021:01.pdf
+# - "Kulturstipendiet för unga" (30 000 kr) — individuellt stipendium till
+#   konstnärligt verksam privatperson under 25 år, inte ett föreningsbidrag.
+#   https://www.soderhamn.se/sidor/uppleva-och-gora/kultur/kulturutmarkelser-och-stipendier.html
+# - "Kulturpriset"/"Hedersomnämnande" — nomineringsbaserad utmärkelse
+#   (vartannat år), inte ett sökbart bidrag med ansökningsformulär/villkor.
+#   https://www.soderhamn.se/sidor/uppleva-och-gora/kultur/kulturutmarkelser-och-stipendier.html
+# - "Årets föreningsledarutmärkelse" (30 000 kr) — en förening kan NOMINERA
+#   en enskild ledare, men utmärkelsen (och pengarna) tillfaller privatper-
+#   sonen, inte föreningen. Samma kategori som Kulturstipendiet.
+#   https://www.soderhamn.se/sidor/omsorg-och-stod/ekonomi-och-forsorjning/stipendier-och-fonder/arets-foreningsledarutmarkelse.html
+# - 8 av kommunens stiftelser är märkta "Kan ej sökas" på kommunens sida
+#   (intern tilldelning av sektorschef/rektor/enhetschef, i huvudsak elev-
+#   fonder för enskilda studenter) — ingår inte i det samlade "Stiftelser
+#   och fonder"-bidraget, som bara omfattar de faktiskt sökbara stiftelserna.
+# - "Stiftelsen Per Ahlquists donationsfond" — administreras via extern
+#   huvudman (Hälsinglands Utbildningsförbund/Staffangymnasiet, hufb.se),
+#   inte kommunens egen domän eller nämnd (§2.4 + §4).
+#
+# EJ_EXTRAHERBAR / EJ KÄLLBELAGT:
+# - soderhamn.rbok.se — JS-renderad applikation, ingen statisk bidragslista.
+# - "Kommundelspengen" (enligt sekundärkällor 600 000 kr/år 2026–2028 till
+#   byarna, administreras av kommunbygderådet ALLiS via ett IOP-avtal med
+#   kommunen sedan 2018) — identifierad via ALLiS egen sajt (soderhamns-
+#   bygder.se, EJ kommunens domän) och lokalpress. Ingen sida på
+#   soderhamn.se med egen URL, beloppsdetaljer eller ansökningsprocess
+#   kunde lokaliseras vid denna körning och kan därför inte källbeläggas
+#   enligt §4 (endast kommunens egen domän duger som källa). Flaggas för
+#   uppföljning nästa körning — trolig kandidat om/när kommunen publicerar
+#   en egen sida.
+#
+# Dubbelhämtat i två oberoende pass (§3). Elitbidrags- och samlingslokal-
+# konflikterna från föregående version kvarstår oförändrade (se anteckning
+# på respektive bidrag nedan). Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Söderhamn"
+kommun_slug: "soderhamn"
+lan: "Gävleborgs län"
+befolkning: 24545
+forvaltning: "Samhällsservicenämnden samt Välfärdsnämnden"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://soderhamn.rbok.se/"
+kalla_url: "https://www.soderhamn.se/sidor/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag-till-foreningar/foreningsbidrag.html"
+verifierad: 2026-07-20
+bidrag:
+  - id: "soderhamn-aktivitetsstod"
+    namn: "Aktivitetsstöd"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade fritidsföreningar med minst 10 medlemmar i åldrarna 7–25 år (ingen övre åldersgräns för medlem med konstaterad funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Minst 10 medlemmar i åldrarna 7–25 år (ingen övre åldersgräns för medlem med konstaterad funktionsnedsättning)"
+      - "Uppgifter om medlemsantal och valda styrelsefunktionärer ska lämnas senast 15 augusti varje år"
+      - "Verifieras med giltig närvarorapport samt aktuellt medlemsregister med notering om betald medlemsavgift"
+    belopp: null
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Utgår enligt samma principer som Riksidrottsförbundets aktivitetsstöd. Idrottsföreningar som rapporterar till RF behöver ingen separat rapportering till kommunen. Övriga föreningar (kallas även 'lokalt aktivitetsstöd' i kommunens e-tjänst) rapporterar via kommunens e-tjänst eller fastställd blankett. Ansökan avser perioden 1 januari–31 december föregående år."
+  - id: "soderhamn-anlaggningsbidrag"
+    namn: "Anläggningsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigad förening som erhåller aktivitetsstöd och som äger och driver anläggning som ansvarig nämnd bedömer angelägen för kommunen eller föreningen"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska äga och driva anläggningen"
+      - "Anläggningen ska vara tillgänglig för allmänheten, skolor, ideella föreningar och andra organisationer till självkostnadspris"
+      - "Anläggningen ska hållas i gott skick och uppfylla tillämpliga lagar och föreskrifter"
+      - "Ekonomisk redovisning ska vara ordnad så intäkter och kostnader för anläggningen kan särredovisas från föreningens övriga verksamhet"
+    belopp: "Högst 50 procent av kostnaderna för anläggningen"
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Kan även utgå till nyanskaffning och revidering av orienteringskartor med upp till 50 procent av totala kostnaden för kartmaterialet. Ansökan avser föregående kalenderår."
+  - id: "soderhamn-hyresbidrag"
+    namn: "Hyresbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigad förening som erhåller aktivitetsstöd och som hyr anläggning eller lokal som ansvarig nämnd bedömer angelägen för kommunen eller föreningen"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Gäller anläggningar eller lokaler som ligger till grund för aktivitetsstöd"
+      - "Hyreskostnader för lokaler som hyrs av kommunen (t.ex. simhallar, gymnastik- och sporthallar samt samlingslokaler) får inte räknas in i underlaget"
+    belopp: "80 procent av redovisade årskostnader, dock högst sammanlagt 15 000 kronor"
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: null
+  - id: "soderhamn-verksamhetsbidrag-kultur"
+    namn: "Verksamhetsbidrag till kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Förening som bedriver verksamhet av regelbunden karaktär inom den kulturella sektorn, till nytta för hela kommunen"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-15"]
+    krav:
+      - "Verksamheten ska vara av regelbunden karaktär"
+      - "Förening som får bidrag till egna lokaler är skyldig att hålla dessa öppna och tillgängliga för allmänheten i skälig omfattning"
+      - "Ansökan ska åtföljas av verksamhetsberättelse, ekonomisk redovisning med balans- och resultaträkning samt revisionsberättelse för senast förflutna verksamhetsår samt verksamhetsplan för kommande verksamhetsår"
+    belopp: null
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Det totala budgeterade beloppet fördelas med 80 procent som grundbidrag och 20 procent mellan de föreningar som kan visa dokumenterad verksamhet för åldersgruppen 0–25 år. Ansökan lämnas året innan verksamhetsåret."
+  - id: "soderhamn-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Förening (ej studieförbund) som erhåller bidrag enligt bidragsreglementet, för investeringar i anläggning föreningen själv äger"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-15"]
+    krav:
+      - "Investeringen ska avse anläggning föreningen äger och som finns upptagen i föreningens balansräkning"
+      - "Offerter från minst tre leverantörer ska bifogas ansökan"
+      - "Uppgifter om andra beviljade offentliga bidrag för investeringen ska bifogas"
+      - "Investeringen ska vara genomförd senast tre år efter beslut om bidrag"
+    belopp: "Högst 50 procent av den del av bruttoinvesteringen som inte täcks av andra offentliga bidrag"
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Kan sökas för energibesparingsåtgärder, handikapp- och tillgänglighetsåtgärder, brandskyddsåtgärder samt bevarande av kulturhistoriska värden. Ansökan lämnas året före investeringsåret."
+  - id: "soderhamn-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Förening, för arrangemang som inte ingår i den verksamhet föreningen redan får annat bidrag för (t.ex. aktivitetsstöd eller verksamhetsbidrag)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Budget och en grundlig beskrivning av arrangemanget ska bifogas ansökan"
+      - "Redovisning av arrangemanget inklusive ekonomiskt utfall ska lämnas innan utbetalning av beslutat bidrag"
+    belopp: "Högst 75 procent av arrangemangets bruttokostnader, dock aldrig mer än nettokostnaderna"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Studieförbund som söker arrangemangsbidrag kan få bidrag med högst motsvarande egna kostnader för arrangemanget."
+  - id: "soderhamn-aktivitetsbidrag-folkhalsa"
+    namn: "Aktivitetsbidrag för ökad folkhälsa"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Föreningar och studieförbund som i egen regi bedriver verksamhet för äldre personer och/eller personer med funktionsnedsättning, samt aktiviteter för övriga underrepresenterade målgrupper i föreningslivet (deltagare 26 år och uppåt)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Aktiviteten ska pågå i minst 30 minuter vid minst 15 tillfällen per halvår"
+      - "Deltagarna ska vara från 26 år och uppåt"
+      - "Aktiviteten ska vara planerad samt ledarledd och förutom ledaren bestå av minst 3 personer"
+      - "Aktiviteten ska vara pulshöjande och innebära fysisk aktivitet i någon form"
+      - "Aktiviteten ska innebära ett nytänkande och inte tidigare ha varit en del av den ordinarie verksamheten"
+      - "Aktiviteten ska nå en ny målgrupp som inte tidigare varit en del av den ordinarie verksamheten"
+    belopp: null
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Bidraget betalas inte ut till aktiviteter som genomförs i studiecirkelform eller där annat bidrag finansierar aktiviteten. Ansökan avser föregående kalenderår."
+  - id: "soderhamn-studieforbund"
+    namn: "Bidrag till studieförbundens lokala organisationer"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund verksamma i kommunen vars centrala organisation är godkänd för statsbidrag av Folkbildningsrådet"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-15"]
+    krav:
+      - "Central organisation godkänd för erhållande av statsbidrag av Folkbildningsrådet"
+      - "Verksamhetsberättelse och ekonomisk redovisning samt Folkbildningsrådets kommunsammandrag ska lämnas årligen"
+      - "Verksamhetsplan för innevarande verksamhetsår ska bifogas"
+    belopp: null
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Fördelas med 80 procent efter respektive studieförbunds relativa andel av statsbidraget föregående år, och 20 procent mellan de studieförbund som redovisar verksamhet för åldersgruppen 13–24 år. Beslut och utbetalning sker i januari året efter det år ansökan lämnades."
+  - id: "soderhamn-samlingslokal"
+    namn: "Bidrag till allmän samlingslokal"
+    kategori: ["ovrig"]
+    malgrupp: "Lokal tillgänglig för föreningslivets möten, studieverksamhet, kulturell verksamhet, förströelse, fritidssysselsättning eller annan liknande verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Det ska finnas ett behov av lokalen på orten"
+      - "Lokalen ska uppfylla skäliga krav på god standard och säkerhet"
+      - "Lokalen ska minst vara tillgänglighetsanpassad med rullstolsramp, RWC och teleslinga"
+      - "Lokalen ska hållas tillgänglig för varje organisation eller grupp med organiserad verksamhet på orten, opartiskt och på skäliga villkor"
+      - "Det ska finnas goda ekonomiska förutsättningar att driva och förvalta lokalen"
+      - "Ingen verksamhet som strider mot lag eller annan författning får förekomma i lokalen"
+    belopp: null
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "KONFLIKT VID DUBBELHÄMTNING (föregående version): en automatisk sammanfattning av kommunens webbsida angav felaktigt ansökningsfönstret 15 feb–15 mar. Det officiella bidragsreglementet §11.2 anger uttryckligen 'senast den 15:e oktober året före verksamhetsåret' — denna text är direkt läst ur den officiella PDF:en och används här. Kontrollerad på nytt vid omkörning 2026-07-20, ingen ny avvikelse hittad."
+  - id: "soderhamn-fritidsgard"
+    namn: "Bidrag till föreningsdriven fritidsgård"
+    kategori: ["ovrig"]
+    malgrupp: "Bidragsberättigad förening som i ändamålsenlig lokal på orten bedriver fritidsgårdsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-15", "08-15"]
+    krav:
+      - "Verksamheten ska bedrivas av en förening som är berättigad till bidrag enligt bidragsreglementet"
+      - "Fritidsgården ska vara öppen minst två kvällar i veckan"
+      - "Fritidsgården ska drivas under minst 15 veckor per termin"
+      - "Två vuxna ska ha övergripande ansvar för verksamheten"
+      - "Verksamhetsplan och verksamhetsberättelse avseende fritidsgårdsverksamheten ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ofullständiga ansökningar och ansökningar som inte lämnats in i tid behandlas inte såvida inte särskilda skäl föreligger"
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"
+    anteckning: "Bidrag utbetalas två gånger per år och består av grundbidrag (fast summa, lika för alla föreningsdrivna fritidsgårdar), lokalbidrag (fast summa, lika för alla) samt projektbidrag efter särskild ansökan med ekonomisk kalkyl."
+  - id: "soderhamn-valfardsnamndens-foreningsbidrag"
+    namn: "Bidrag till föreningar för äldre personer och/eller personer med funktionsnedsättning"
+    kategori: ["pensionar", "funktionsratt", "social"]
+    malgrupp: "Förening som bedriver sociala aktiviteter riktade till äldre personer och/eller personer med funktionsnedsättning i Söderhamns kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15", "08-15"]
+    krav:
+      - "Aktiviteterna som föreningen planerar ska vara öppna för alla äldre och/eller personer med funktionsnedsättning"
+      - "Bidraget kan sökas av enskild förening eller flera föreningar tillsammans i samordnad väntjänst"
+      - "Kopia av senaste verksamhetsberättelse och ekonomisk redovisning ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.soderhamn.se/sidor/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag-till-foreningar/foreningsbidrag/valfardsnamndens-foreningsbidrag.html"
+    anteckning: "Beslutas av Välfärdsnämnden i mars respektive september och avser aktiviteter för kommande halvår eller år. Motsvarar §13 i det generella bidragsreglementet (SKFS 08:2021:04), men handläggs av Välfärdsnämnden, inte Samhällsservicenämnden."
+  - id: "soderhamn-elitbidrag"
+    namn: "Elitbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar i Söderhamns kommun med representation på seniornivå inom högsta nationella serie eller motsvarande, anslutna till något av Riksidrottsförbundets 72 specialidrottsförbund"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Bidraget omfattar endast verksamhet med representation på seniornivå"
+      - "Bidrag kan endast ges till föreningar, inte individuella idrottare"
+      - "Föreningen ska tillhöra något av Riksidrottsförbundets 72 specialidrottsförbund"
+      - "Idrott ska utövas på högsta nationella nivå (lagidrott: representation i högsta nationella serie eller motsvarande; individuell idrottare: lägst nationell seniormästerskapsnivå och topp 5 i Sverige föregående år)"
+      - "Föreningen eller idrottaren ska exponeras i regional och nationell media"
+      - "Föreningen ska bifoga dokumentation på föreningens ekonomiska status"
+      - "Föreningen medger motprestationer, t.ex. exponering av kommunens platsstärkande budskap på arena eller matchdräkt"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.soderhamn.se/download/18.7fcd969d198e5faf46d1c02a/1756813757946/Regelverk%20f%C3%B6r%20elitbidrag%20SKFS%2008:2025:01.pdf"
+    anteckning: "KONFLIKT VID DUBBELHÄMTNING (föregående version): en automatisk sammanfattning av kommunens webbsida angav 'sista ansökningsdag 20 november 2025'. Det officiella regelverket (antaget av kommunstyrelsen 2025-08-05) anger endast att elitbidrag 'kan sökas och beviljas en gång per år' via kommunens e-tjänst, utan fast kalenderdag — kommunstyrelsen beslutar årligen om bidragets storlek i samband med budgetbeslutet. Ingen fast deadline kunde verifieras i primärkällan, satt till löpande. Kontrollerad på nytt vid omkörning 2026-07-20, ingen ny avvikelse hittad. Fördelningsmodell: 10 procent av anslaget (pott 1) delas lika mellan alla mottagare, 65 procent (pott 2) mellan mindre och större lagidrotter, resterande (pott 3) mellan större lagidrotter."
+  - id: "soderhamn-foreningsmiljonen-medlem"
+    namn: "Föreningsmiljonen: medlemsrekrytering"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Alla bidragsberättigade föreningar i Söderhamns kommun, för aktiviteter i syfte att öka medlemsantalet, riktade till barn och unga (prioriterad grupp 6–25 år samt fysiskt inaktiva och underrepresenterade grupper)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30", "10-31"]
+    krav:
+      - "Aktiviteterna ska vara öppna för alla barn och unga i Söderhamns kommun"
+      - "Aktiviteterna ska vara kostnadsfria för deltagarna"
+      - "Aktiviteterna ska registreras i appen SHMN.NU"
+      - "Utgifterna ska vara direkt kopplade till aktiviteten, inte föreningens löpande eller ordinarie verksamhet"
+      - "Obligatorisk återrapportering med antal deltagare fördelat på flickor och pojkar, ekonomisk redovisning och beskrivning av genomförandet"
+    belopp: "Högst ett halvt prisbasbelopp per ansökan"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.soderhamn.se/download/18.4af5bc35187dc6eea892d7/1683203713379/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsmilj%C3%B6nen%20SKFS%2008:2023:03.pdf"
+    anteckning: "Ansökan görs i Rbok och beviljat bidrag utbetalas i förskott. Bidrag som inte nyttjats för avsett ändamål ska återbetalas. Två ansökningsomgångar per år: 1 mars–30 april och 1 september–31 oktober (deadline satt till respektive periods sista dag)."
+  - id: "soderhamn-foreningsmiljonen-ledare"
+    namn: "Föreningsmiljonen: ledarrekrytering"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar i Söderhamns kommun, för ledarrekrytering riktad till alla i kommunen som är intresserade av att bli ledare"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30", "10-31"]
+    krav:
+      - "Ledarrekrytering kan genomföras i samband med andra aktiviteter"
+      - "Obligatorisk återrapportering med ekonomisk redovisning och beskrivning av genomförandet"
+    belopp: "Högst ett fjärdedels prisbasbelopp per ansökan"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.soderhamn.se/download/18.4af5bc35187dc6eea892d7/1683203713379/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsmilj%C3%B6nen%20SKFS%2008:2023:03.pdf"
+    anteckning: "Ansökan görs i Rbok. Bidrag som inte nyttjats för avsett ändamål ska återbetalas. Två ansökningsomgångar per år: 1 mars–30 april och 1 september–31 oktober (deadline satt till respektive periods sista dag)."
+  - id: "soderhamn-landsbygdsbidrag"
+    namn: "Föreningsbidrag för utveckling av landsbygden"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som vill ta ansvar för och bidra till utveckling av landsbygden i Söderhamns kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektbeskrivning som visar hur projektet bidrar till lokal utveckling"
+      - "Projektbudget"
+      - "Uppgifter om andra finansieringskällor, bekräftade eller planerade"
+      - "Uppgift om föreningens egen insats, ekonomisk och i form av ideellt arbete"
+      - "Utdrag ur senaste årsmötesprotokoll som visar vem som är ordförande"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.soderhamn.se/sidor/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag-till-foreningar/foreningsbidrag/foreningsbidrag-for-utveckling-av-landsbygden.html"
+    anteckning: "Ansökan skickas till samhallsservicenamnden@soderhamn.se eller per post till Söderhamns kommun, Samhällsservicenämnden, 826 80 Söderhamn. KONTROLLERAT VID OMKÖRNING 2026-07-20 (§2.5): det bakomliggande antagna regelverket (SKFS 08:2024:02, antaget i samhällsservicenämnden 2024-02-28) anger explicit fasta ansökningsdatum 31 mars och 30 september. Kommunens webbsida (senast uppdaterad 2026-06-30, nyare källa) anger dock uttryckligen 'Bidraget kan sökas löpande'. Webbsidan vinner enligt §2.5 eftersom den är nyast — deadlines.typ förblir 'lopande'. Regelverket bekräftar i övrigt samma krav och syfte (stöd utöver ordinarie bidragsformer, minst 10 medlemmar, ANDT-policy för barn-/ungdomsverksamhet, genomförande inom två år)."
+  - id: "soderhamn-enskild-vag"
+    namn: "Bidrag till enskild väg"
+    kategori: ["ovrig"]
+    malgrupp: "Vägföreningar och vägsamfälligheter (eller väghållare med skriftlig överenskommelse om kostnadsdelning och utsedd företrädare) som ansvarar för enskild väg i Söderhamns kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Vägen ska betjäna minst tre permanentbebodda fastigheter (drift, ej statsbidragsberättigad väg)"
+      - "Väghållningen ska vara organiserad genom vägförening/vägsamfällighet, eller genom skriftlig överenskommelse mellan väghållarna med en utsedd företrädare som tar emot bidraget"
+      - "Utfartsväg (tillfartsväg utan permanentboende) ska vara minst 200 meter lång"
+    belopp: "Drift, ej statsbidragsberättigad väg: högst 5,30 kr/meter. Drift, utfartsväg: 1,70 kr/meter. Anläggning, statsbidragsberättigad väg: 20 procent av Vägverkets/Trafikverkets godkända kostnad. Anläggning, ej statsbidragsberättigad väg: efter prövning, högst 45 procent av kommunens godkända anläggningskostnad"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.soderhamn.se/sidor/trafik-och-gator/gator/enskild-vag.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori, RESEARCH_SPEC_v2.md §2.1 punkt 5). Kommunen kan hjälpa till att bilda vägsamfälligheter för skötsel av enskild väg. Ansöks via e-tjänst (e-tjanster.soderhamn.se/oversikt/overview/477 för ej statsbidragsberättigad väg, /478 för utfartsväg), skickas till Söderhamns kommun, Sektor Samhällsservice. Administreras separat från bidragsreglementet SKFS 08:2021:04 och dess ansökningssystem Rbok."
+  - id: "soderhamn-stiftelser-fonder"
+    namn: "Stiftelser och fonder"
+    kategori: ["ovrig", "social"]
+    malgrupp: "Privatpersoner och föreningar/organisationer, enligt respektive stiftelses ändamål och geografiska villkor (ofta bosättning/verksamhet inom en specifik församling, i något fall hela kommunen)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Uppfylla respektive stiftelses specifika ändamål och eventuella geografiska villkor (t.ex. bosatt/verksam inom viss församling)"
+      - "En ansökan per stiftelse, görs via kommunens e-tjänst"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.soderhamn.se/sidor/omsorg-och-stod/ekonomi-och-forsorjning/stipendier-och-fonder.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (RESEARCH_SPEC_v2.md §2.7, samlat bidrag). Kommunen förvaltar minst 22 stiftelser/fonder, varav minst 13 är sökbara med gemensamt ansökningsdatum 31 mars (övriga 8 är märkta 'Kan ej sökas' — tilldelas internt av sektorschef/rektor/enhetschef, i huvudsak elevfonder för enskilda studenter, och ingår inte här; ytterligare en, Per Ahlquists donationsfond, administreras via extern huvudman och är utelämnad enligt §2.4/§4). Av de sökbara stiftelserna tillåter flera uttryckligen både privatpersoner och föreningar att söka (verifierat vid denna körning: Stiftelsen Söderhamns sociala fond — föreningar som arbetar socialt bland barn/vuxna med särskilt stödbehov, 10 256 kr 2025; Stiftelsen Wennströmska minnesfonden — Söderhamn-Sandarne församling, 232 157 kr 2026; Stiftelsen Edlingska fonden — Söderhamn-Sandarne församling, 35 011 kr 2026; Stiftelsen Frida Bodells fond — Skogs församling, 12 952 kr 2025). Belopp och exakt målgrupp varierar per stiftelse — se respektive stiftelses undersida under kalla_url. Beslut fattas i juni, i huvudsak av Barn- och lärandenämndens presidium."
+forutsattningar:
+  - id: "soderhamn-bidragsberattigad-forening"
+    vad: "Bli bidragsberättigad förening"
+    beskrivning: "Föreningen ska uppfylla Skatteverkets krav för en allmännyttig ideell förening: syftet ska vara till nytta för allmänheten, minst 90 procent av verksamheten ska bidra till att uppfylla föreningens syfte, minst 80 procent av inkomsterna ska användas till detta syfte, och föreningen ska vara öppen för alla som vill bli medlemmar. Därutöver krävs minst 10 medlemmar som betalar medlemsavgift, säte och stämma i Söderhamns kommun, samt styrelse och revisorer valda på årsmöte. Föreningar som bedriver barn- och ungdomsverksamhet ska ha en nedtecknad policy mot alkohol, narkotika, doping och tobak (ANDT-policy)."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.soderhamn.se/download/18.77d000c1180b44e21a8177f/1654782747740/Best%C3%A4mmelser%20f%C3%B6r%20kommunala%20bidrag%20till%20f%C3%B6reningar%20och%20organisationer%20i%20S%C3%B6derhamns%20kommun%20SKFS%2008:2021:04.pdf"

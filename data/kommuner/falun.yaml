@@ -1,0 +1,496 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19, v1) hade redan 17 bidrag och fyra förvaltningar identifierade —
+# ett av de mer grundliga v1-resultaten. Denna omkörning bekräftar samtliga
+# 17 som korrekta (en konflikt uppstod, se nedan) och lägger till 6 nya
+# bidrag som låg utanför kultur- och fritidsnämndens sidträd: två
+# vägbidrag (Miljö- och samhällsbyggnadsförvaltningen) och två aggregerade
+# stiftelseposter (Kommunstyrelsen respektive Arbetslivs- och
+# socialnämnden). Dessutom delades en tidigare sammanslagen lokalbidragspost
+# upp i tre distinkta bidrag eftersom regelverket definierar dem som tre
+# separata paragrafer (§2.2.3–2.2.5) med olika belopp.
+#
+# Metod: (1) Regelverket. "Bidragsbestämmelser" för Kultur- och
+# fritidsförvaltningen (daterat 2020-11-09, publicerat som "KFN
+# bidragsregler 2021-01-01.pdf") hämtades och lästes i sin helhet via
+# pdftotext -layout — bekräftar samtliga tio kultur-/fritidsbidrag samt det
+# uteslutna kartstödet. Utöver detta hittades ett HELT SEPARAT regelverk
+# utanför kultur- och fritidsnämndens spår: "Bestämmelser om driftbidrag
+# till enskilda vägar" (Miljö- och samhällsbyggnadsnämnden 2025-02-11,
+# godkänt av Kommunfullmäktige 2025-05-15 § 86, i kraft 2025-07-01, ersätter
+# bestämmelser antagna 2016-03-10) samt "Upprustningsbidragsmodell"
+# (framtagen 2021-01-05) — båda lästa i fulltext via pdftotext.
+# (2) Förvaltningarnas egna sidor lästa i sin helhet: bidrag-stod-och-
+# stipendier (huvudöversikt), kulturverksamhet, fritids-och-
+# idrottsverksamhet, pensionarsverksamhet, funktionshinderorganisationer,
+# evenemangsstod, stiftelsen-for-fritidens-framjande, marknadsforingsavtal,
+# kommunalt-lonebidrag, ekonomiskt-stod-vid-feriearbete,
+# kommundelsutveckling — samtliga omhämtade oberoende av v1-körningen.
+# (3) Självservice/specialkategorier (§2.1.5) genomsöktes riktat:
+# vägföreningar/vägsamfälligheter (TRÄFF — Miljö- och
+# samhällsbyggnadsförvaltningens spår, se ovan, låg helt utanför kultur-
+# och fritidsnämndens sidträd/regelverk, samma systematiska blinda fläck
+# som i Mölndal/Sundsvall/Karlskrona), bygdegårdar/samlingslokaler (täcks
+# av de tre uppdelade lokalbidragen, inget separat funnet), stiftelser/
+# fonder (TRÄFF — "Stiftelser och fonder att söka medel ur"-sidan på
+# kommun--demokrati-nivå ledde till tre distinkta stiftelsegrupper:
+# Kommunstyrelsens fem stiftelser, Omsorgsnämndens nio fonder och
+# Arbetslivs- och socialnämndens stiftelser — rå-HTML-extraherad via curl
+# + regex, inte AI-sammanfattad, för att säkerställa exakt målgruppstext
+# per stiftelse), byalag/samhällsförening (täcks av kommundelsutveckling,
+# inget ytterligare funnet), studieförbund (redan täckt av
+# studieförbundsbidraget). (4) Ansökningsportalen falun.actorsmartbook.se
+# bekräftat EJ_EXTRAHERBAR — AngularJS-mallar, inget bidragsinnehåll
+# synligt utan JavaScript-körning.
+#
+# Befolkning: kommunens egen "Kommunfakta"-sida (uppdaterad 2026-02-23)
+# anger fortfarande "cirka 59 750" — oförändrat från v1, ingen konflikt.
+#
+# KONFLIKT (§2.5, ej löst — se konflikter.log): pensionärsbidragets belopp
+# gav TRE olika värden i tre källor med olika datum: redaktionella sidan
+# pensionarsverksamhet.html (20 kr/medlem, sidan uppdaterad 2025-06-05),
+# "Stöd för företag och föreningar på landsbygden 2026"-foldern (50
+# kr/medlem, PDF publicerad 2026-02-24 enligt nedladdningslänkens
+# tidsstämpel) och Kommunala pensionärsrådets sammanträdesprotokoll
+# 2026-02-11 (anger att "pensionärernas bidrag från Falu kommun 2025 om 30
+# kronor/medlem utbetalats i slutet av januari 2026"). En strikt
+# datumjämförelse skulle ge landsbygdsfoldern (2026-02-24) företräde, men
+# foldern är en allmän hänvisningsskrift från näringslivsavdelningen (inte
+# den administrerande enhetens egen bidragssida) och protokollet beskriver
+# en faktisk redan genomförd utbetalning (30 kr) på ett datum nästan lika
+# nytt. Med tre inbördes motstridiga värden och en administrerande sida
+# (Omsorgsförvaltningen) som inte bekräftar någon ändring: belopp satt till
+# null, samtliga tre värden/källor/datum redovisade i bidragets anteckning
+# och i konflikter.log. FLAGGAD för manuell kontroll direkt med
+# Omsorgsförvaltningen före publik deploy.
+#
+# Uteslutna (kategoriskt skäl, §2.3–§2.4):
+# - "Riktade verksamhetsbidrag: kartstöd" (bidragsbestämmelser §2.1.2,
+#   "Riktade verksamhetsbidrag") — kartbidraget på 300 000 kr utbetalas i
+#   sin helhet till EN namngiven mottagare (Falukretsens orienteringsklubb)
+#   som sedan fördelar internt "utifrån klubbarnas interna dialog". Enskilda
+#   orienteringsklubbar kan inte ansöka direkt hos kommunen om denna post —
+#   samma struktur som Karlskronas uteslutning av Kvinnojouren Frideborgs
+#   riktade anslag (en på förhand namngiven mottagare med fast formel, inte
+#   ett allmänt sökbart bidrag). Bekräftat oförändrat sedan v1.
+#   https://www.falun.se/download/18.7d272b3b181babd3d7365820/1657096546992/KFN%20bidragsregler%202021-01-01.pdf
+# - Marknadsföringsavtal — GRÄNSFALL, flaggat explicit för Fables §6-grind.
+#   Har två årliga ansökningsperioder (november/maj) vilket är
+#   bidragslikt, men är strukturellt ett ömsesidigt sponsrings-/
+#   marknadsföringskontrakt: motparten förbinder sig till exponering av
+#   kommunens logotyp, banners och ambassadörskap i utbyte mot pengar, och
+#   "Falu kommun kan även själv ta kontakt med aktörer" utan ansökan.
+#   Strukturellt närmare betalning för motprestation än ansökan om stöd
+#   till egen verksamhet — jämför Karlskronas uteslutning av
+#   "Föreningsuppdrag". Bekräftat oförändrat sedan v1, men flaggat som
+#   gränsfall (v1 hade inte denna nyansering).
+#   https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/marknadsforingsavtal.html
+# - Idéburet offentligt partnerskap (IOP) — uttryckligen självdeklarerad
+#   som ICKE ett bidrag: "IOP är inte detsamma som ett bidrag från Falu
+#   Kommun till en verksamhet."
+#   https://www.falun.se/kommun--demokrati/politik-och-demokrati/ideburet-offentligt-partnerskap.html
+# - Hemsändningsbidrag — riktar sig till dagligvarubutiker (näringsidkare),
+#   inte föreningar; 200 kr/hemsändning till lanthandlare för att sörja för
+#   landsbygdshushållens varuförsörjning. Stöd som endast riktas till
+#   företag (§2.4b).
+#   https://www.falun.se/bygga-bo--miljo/landsbygd/service/hemsandning-av-mat.html
+# - Bidrag till Region Dalarnas kulturinstitutioner (Stöd till
+#   kulturinstitutioner) — administreras av Falu kommun/KFN men uttryckligen
+#   förbehållet en fast, namngiven lista av sju-åtta regionala institutioner
+#   (Dalarnas museum, Dalateatern, Bild och Form Dalarna, Länsbibliotek
+#   Dalarna, Musik i Dalarna, Folkmusikens hus, Folkteatern i Dalarna,
+#   Emaljverkstaden) — inte en allmänt sökbar post öppen för lokala
+#   föreningar. Samma struktur som kartstödets uteslutning: fast mottagarlista,
+#   inte konkurrensutsatt ansökan.
+#   https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/kulturverksamhet/stod-till-kulturinstitutioner.html
+# - Falu kommun-priserna (Miljöpriset, Tillgänglighetspriset, Kulturpriset,
+#   Mångfaldspriset — samtliga formellt öppna för "individer, föreningar,
+#   företag eller organisationer") samt Kulturstipendiet och Barn- och
+#   ungdomskulturpriset (endast individer/grupper) — samtliga är
+#   NOMINERINGSBASERADE hederspriser (10 000–20 000 kr, nominering senast
+#   1 oktober, beslut av kommunfullmäktige i december), inte en ansökan om
+#   projekt-/verksamhetsfinansiering. Jämför Karlskronas uteslutning av
+#   Kulturpriset: kan formellt gå till förening men är ändå ett
+#   erkännande-pris, inte ett sökbart bidrag.
+#   https://www.falun.se/kommun--demokrati/stipendier-bidrag-och-priser/falu-kommun-priserna.html
+# - Omsorgsnämndens fonder (nio namngivna stiftelser: Sammils Anna
+#   Erikssons fond, Mats Proselins fond, Djeken Maria Eriksson, Social
+#   Samfond S4, Samfond S5, Pontus och Emelie Ljungdahls donation, Johanna
+#   Erika Olssons patientfond, Hilda Dillströms patientfond, Samfond S3) —
+#   samtliga uttryckligen riktade till enskilda pensionärer/boende på
+#   ålderdomshem/servicehus, ingen förenings-ingång. Stöd som endast riktas
+#   till privatpersoner (§2.4b).
+#   https://www.falun.se/stod--omsorg/omsorgsnamndens-fonder.html
+# - Stiftelsen A Carlssons testamentsfond (en av Kommunstyrelsens fem
+#   stiftelser, se falun-ks-stiftelser nedan) — uteslutet ur den aggregerade
+#   posten, målgrupp "fastighetsägare och hyresgäster efter samråd med
+#   fastighetsägaren" för underhåll specifikt av Stadshotellets in- och
+#   utsida, ingen förenings-ingång.
+# - Föreningsregister och boknings-/bidragsportalens generella
+#   informationssidor — ingen egen ekonomisk post, bara administrativa
+#   funktioner (registrering, bokning).
+#
+# Falun har sex administrativa hem för föreningsbidrag: Kultur- och
+# fritidsförvaltningen (störst, tio bidrag inom barn-/ungdom och publik
+# verksamhet samt studieförbundsbidrag), Omsorgsförvaltningen
+# (pensionärsbidrag), Arbetslivs- och socialförvaltningen
+# (lönebidrag/feriearbetsstöd), Näringslivskontoret (evenemangsstöd,
+# Stiftelsen för fritidens främjande), Miljö- och samhällsbyggnads-
+# förvaltningen (NYTT vid denna omkörning — driftbidrag och
+# upprustningsbidrag till enskilda vägar) samt Kommunstyrelsens förvaltning
+# (NYTT vid denna omkörning — kommunstyrelsens fem stiftelser, varav fyra
+# öppna för föreningar). Ansökan sker för kultur-/idrotts-/fritidsstöd samt
+# funktionshinder-/evenemangsstöd via Föreningsportalen (ActorSmartbook,
+# JS-renderad, EJ_EXTRAHERBAR); pensionärs-, löne- och feriearbetsstöd samt
+# vägbidrag och stiftelser via pappersblankett/e-tjänst eller e-post — se
+# anteckning per bidrag. Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Falun"
+kommun_slug: "falun"
+lan: "Dalarnas län"
+befolkning: 59750
+forvaltning: "Kultur- och fritidsförvaltningen, Omsorgsförvaltningen, Arbetslivs- och socialförvaltningen, Näringslivskontoret, Miljö- och samhällsbyggnadsförvaltningen samt Kommunstyrelsens förvaltning"
+ansokningssystem:
+  namn: "Föreningsportalen (ActorSmartbook)"
+  url: "https://falun.actorsmartbook.se/"
+kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "falun-lok-stod"
+    namn: "Lokalt aktivitetsstöd (LOK-stöd)"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Bidragsberättigade idrotts- och kulturföreningar med barn- och ungdomsverksamhet, medlemmar 7-25 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Föreningen ska ha minst tio medlemmar 7-25 år som betalt av årsmötet beslutad medlemsavgift"
+      - "Minst tio bidragsgrundande sammankomster under året (minst 60 minuter, ledare utsedd av föreningen, minst tre aktiva deltagare)"
+      - "Stöd ges för högst 30 deltagare per aktivitet, ledaren ska ha fyllt 13 år"
+    belopp: "32 kr per sammankomst. Tillägg: 1 kr/sammankomst vid jämställd styrelse (60/40), 1 kr/sammankomst vid etablerad verksamhet för båda könen (70/30), 5 kr/sammankomst + 1 000 kr/år för godkänd 'utmärkt förening'"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: "Ansökan avser föregående periods aktiviteter: vårperiod (1 jan-30 jun) senast 25 augusti, höstperiod (1 jul-31 dec) senast 25 februari. Medlemmar i Riksidrottsförbundet räcker det att registrera aktiviteten hos förbundet. Bekräftat oförändrat vid omkörning 2026-07-21 mot regelverkets §2.1.2, läst i fulltext."
+  - id: "falun-stod-lokaler-barn-ungdom"
+    namn: "Stöd till lokaler (barn- och ungdomsverksamhet)"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Bidragsberättigade barn- och ungdomsföreningar med föreningsägda eller hyrda kontraktsbundna lokaler"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Lokalen ska primärt nyttjas för föreningens egen verksamhet"
+    belopp: "40 % av driftskostnaden för föreningsägda lokaler, max 40 000 kr. 40 % av hyreskostnaden för hyrda kontraktsbundna lokaler, max 15 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: null
+  - id: "falun-investeringsbidrag-lokaler"
+    namn: "Investerings- och renoveringsbidrag till föreningsägda lokaler och anläggningar"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Föreningar med föreningsägda lokaler och anläggningar, för barn-/ungdomsverksamhet eller publik verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-30", "09-30"]
+    krav:
+      - "Reparation och underhåll av fastighet"
+      - "Reparation eller anskaffning av maskiner för drift och skötsel av föreningsägd anläggning"
+      - "Tillgänglighetsanpassning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: "Beslutas av kultur- och fritidsnämnden i varje enskilt fall enligt nämndens beslut, inget fast bidragstak publicerat i källan. Denna post är gemensam för barn-/ungdomslokaler (§2.1.3) och publika lokaler (§2.2.3) i regelverket — samma villkor och deadline anges identiskt på båda ställena i den fulltextlästa PDF:en, bedömd som EN bidragsform, inte två."
+  - id: "falun-ung-leder-ung"
+    namn: "Ung leder ung"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Ny verksamhet eller enskilda projekt som leds av personer 13-25 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ledaren får max vara 25 år, presentation av ledaren bifogas ansökan"
+      - "Gäller ny verksamhet eller enskilda projekt — återkommande årlig verksamhet (t ex sommarskola) räknas ej som ny verksamhet"
+      - "Utvärdering sker efter genomfört projekt"
+    belopp: "Max 10 000 kr"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: null
+  - id: "falun-projektbidrag-sarskilda-projekt"
+    namn: "Projektbidrag för särskilda projekt och publika arrangemang"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Bidragsberättigade föreningar med enskilda projekt eller publika arrangemang, barn-/ungdomsverksamhet eller publik verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30", "09-30", "12-31"]
+    krav:
+      - "Gäller ej seriespel, matcher, cuper och tävlingar"
+      - "Utvärdering sker efter genomfört projekt, återbetalningsskyldighet vid ej genomfört projekt eller ej inlämnad utvärdering"
+    belopp: "Max 10 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: null
+  - id: "falun-verksamhetsbidrag-entre"
+    namn: "Verksamhetsbidrag för entrébelagd arrangemangsverksamhet"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Föreningar med stadigvarande entrébelagd arrangemangsverksamhet som huvudsaklig verksamhet i Falu kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Bidraget baseras på föregående verksamhetsårs kostnader"
+    belopp: "25 % av total kostnad, max 85 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: null
+  - id: "falun-verksamhetsbidrag-avgiftsfri"
+    namn: "Verksamhetsbidrag för avgiftsfri arrangemangsverksamhet"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Föreningar med stadigvarande avgiftsfri arrangemangsverksamhet som huvudsaklig verksamhet i Falu kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Bidraget baseras på föregående verksamhetsårs kostnader"
+    belopp: "50 % av kostnaden, max 5 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: null
+  - id: "falun-lokalbidrag-vavstugor-bygdegardar"
+    namn: "Lokalbidrag till föreningsägda vävstugor, folkets hus och bygdegårdar"
+    kategori: ["kultur"]
+    malgrupp: "Föreningsägda vävstugor öppna för allmänheten, samt folkets hus/bygdegårdar som primärt nyttjas som samlingslokal för andra verksamheter"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Lokalen ska primärt nyttjas som samlingslokal öppen för allmänheten"
+    belopp: "30 % av driftskostnaden, max 25 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: "UPPDELAD vid denna omkörning: föregående version (v1) slog samman denna post med hembygdsgårdar och hyrda vävstugor till en gemensam 'falun-lokalbidrag-publika-lokaler'-post. Regelverket (§2.2.3-2.2.5) definierar dem som tre separata bidragsformer med olika belopp (hyrda vävstugor har lägre takbelopp, se falun-lokalbidrag-hyrda-vavstugor) — uppdelad för att matcha regelverkets struktur."
+  - id: "falun-lokalbidrag-hembygdsgardar"
+    namn: "Lokalbidrag till föreningsägda hembygdsgårdar"
+    kategori: ["kultur"]
+    malgrupp: "Föreningsägda hembygdsgårdar som är tillgängliga för allmänheten och tillfälligtvis nyttjas som samlingslokal för andra verksamheter"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Lokalen ska vara tillgänglig för allmänheten"
+    belopp: "30 % av driftskostnaden, max 25 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: "UPPDELAD vid denna omkörning, se anteckning på falun-lokalbidrag-vavstugor-bygdegardar (§2.2.4 i regelverket)."
+  - id: "falun-lokalbidrag-hyrda-vavstugor"
+    namn: "Lokalbidrag till hyrda kontraktsbundna vävstugor"
+    kategori: ["kultur"]
+    malgrupp: "Hyrda, kontraktsbundna vävstugor som är öppna för allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Kontraktsbunden hyra"
+      - "Vävstugan ska vara öppen för allmänheten"
+    belopp: "30 % av hyreskostnaden, max 10 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: "UPPDELAD vid denna omkörning, se anteckning på falun-lokalbidrag-vavstugor-bygdegardar (§2.2.5 i regelverket). Lägre takbelopp (10 000 kr) än de föreningsägda lokalerna (25 000 kr) — skälet till uppdelningen."
+  - id: "falun-start-av-forening"
+    namn: "Start av förening"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Nystartade allmännyttiga kultur- eller idrottsföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha sökt och fått organisationsnummer samt bank- eller plusgiro"
+      - "Sökt belopp ska motiveras med syfte och ekonomisk redogörelse"
+    belopp: "50 % av startkostnader under första verksamhetsåret, max 5 000 kr"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: null
+  - id: "falun-studieforbundsbidrag"
+    namn: "Kommunbidrag till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund godkända av Folkbildningsrådet"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Godkänd av Folkbildningsrådet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"
+    anteckning: "Fördelas efter formel (70 % studiecirklar, 10 % annan folkbildningsverksamhet, 20 % kulturarrangemang), inget fast maxbelopp. Beräknas på genomsnittlig verksamhet under två år med ett års eftersläpning."
+  - id: "falun-pensionar-grundbidrag"
+    namn: "Grundbidrag för pensionärsorganisationer"
+    kategori: ["pensionar"]
+    malgrupp: "Registrerade pensionärsorganisationer i Falu kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-31"]
+    krav:
+      - "Medlem räknas den som betalat medlemsavgift i pensionärsorganisationen senast 1 juli"
+      - "Ansökan ska vara underskriven av ordförande eller kassör"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/pensionarsverksamhet.html"
+    anteckning: "KONFLIKT (§2.5, ej löst) vid omkörning 2026-07-21 — tre källor gav tre olika belopp: 20 kr/medlem (pensionarsverksamhet.html, uppdaterad 2025-06-05 — den administrerande sidan), 50 kr/medlem ('Stöd för företag och föreningar på landsbygden 2026', publicerad 2026-02-24), 30 kr/medlem (Kommunala pensionärsrådets protokoll 2026-02-11, som beskriver en faktisk utbetalning för 2025 om 30 kr/medlem i januari 2026). Belopp satt till null tills Falu kommun bekräftar aktuell nivå — se konflikter.log. Bidrag till lokaler betalas inte ut. Bidraget betalas ut under april/maj. Ansökan skickas till Omsorgsförvaltningen, Sara Knutes, 791 83 Falun."
+  - id: "falun-funktionshinder-grundbidrag"
+    namn: "Grundbidrag för funktionshinderorganisationer"
+    kategori: ["funktionsratt"]
+    malgrupp: "Lokala funktionshinderorganisationer i Falu kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Medlem räknas den som betalat medlemsavgift i den lokala organisationen senast 1 juli aktuellt år"
+    belopp: "20 kronor per medlem och år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/funktionshinderorganisationer.html"
+    anteckning: "Ansökningsperiod 1 oktober-30 november (30 november satt som deadline). Bidraget betalas ut under mars. Ansökan sker via föreningsportalen. Bekräftat oförändrat vid omkörning 2026-07-21 (sidan uppdaterad 2026-03-11) — ingen konflikt, till skillnad från pensionärsbidraget ovan."
+  - id: "falun-evenemangsstod"
+    namn: "Evenemangsstöd"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella bidragsberättigade föreningar registrerade i Falu kommuns Bidragsportal som arrangerar evenemang som stärker Falun som besöks-, bo-, studie- och arbetsort"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara registrerad i Falu kommuns Bidragsportal"
+      - "Evenemanget ska genomföras professionellt och vara etiskt, miljömässigt och socialt godtagbart"
+      - "Omfattar ej kamratmåltider, middagar och dylikt"
+      - "Utvärdering av genomfört evenemang ska skickas in efteråt"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/evenemangsstod.html"
+    anteckning: "Sex ansökningstillfällen 2026 (kommunen tillhanda senast): 14 januari, 26 februari, 20 april, 21 juli, 1 september, 26 oktober. Datumen fastställs årligen och kan ändras — kontrollera aktuella datum inför ansökan. Vid inställt evenemang betalas inget stöd ut. Bekräftat oförändrat vid omkörning 2026-07-21."
+  - id: "falun-stiftelsen-fritidens-framjande"
+    namn: "Stiftelsen för fritidens främjande i Falu kommun"
+    kategori: ["kultur", "idrott"]
+    malgrupp: "Föreningar, organisationer, studieförbund eller trossamfund som bedriver kultur- och fritidsaktiviteter för barn och unga (upp till 24 år) med tyngdpunkt på Falu landsbygd (området utanför Falu tätort)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Politiskt parti kan inte söka medel"
+      - "Prioriterar verksamhet som barn och unga själva organiserar och som är öppen för alla"
+      - "Medel utgår ej för insats som redan fått kommunal finansiering genom projekt- eller arrangemangsbidrag, eller redan är finansierad av annan offentlig/privat finansiär"
+    belopp: "Stiftelsen kan utbetala max 3 000 000 kr per år totalt"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/stiftelsen-for-fritidens-framjande.html"
+    anteckning: "Två beslutsomgångar 2026: sista ansökningsdag 31 mars (beslut 2 juni) och 2 oktober (beslut 1 december) — datum gäller 2026 och kan skifta mellan år. Ansökningar under 20 000 kr behandlas löpande, handläggningstid 2-4 månader. Ingen handläggning i juli. Stiftelsens kapital (10 mkr, påfyllt 2024 från Falu Energi och Vattens vinst) förväntas räcka till och med 2027 vid maximal årlig utdelning — se landsbygdsfolder 2026 för bakgrund."
+  - id: "falun-lonebidrag"
+    namn: "Kommunalt lönebidrag för föreningar"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar och ekonomiska föreningar utan vinstsyfte (sociala företag) verksamma i Falu kommun som anställer person med lönebidrags- eller trygghetsanställning via Arbetsförmedlingen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Registrering krävs i föreningsregistret"
+      - "Den anställda ska bo och vara mantalsskriven i Falu kommun (undantag för distriktsorganisationer om den anställda uppfyller kravet)"
+      - "Föreningens stadgar samt kopia på beslut från Arbetsförmedlingen ska bifogas årsansökan"
+    belopp: "15 % av faktisk lönekostnad inklusive arbetsgivaravgifter, max 4 260 kr/månad"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.falun.se/jobb--foretagande/jobb-och-praktik/arbetsmarknadsinsatser/for-foreningar---kommunalt-lonebidrag.html"
+    anteckning: "Bidraget söks och beviljas för ett kalenderår i taget. Ansökan om utbetalning skickas månadsvis, under efterföljande månad. Ansökan skickas till Arbetslivs- och socialförvaltningen. Bekräftat oförändrat vid omkörning 2026-07-21 (sidan uppdaterad 2026-02-16)."
+  - id: "falun-feriearbete-stod"
+    namn: "Ekonomiskt stöd till föreningar vid feriearbete"
+    kategori: ["social"]
+    malgrupp: "Allmännyttiga föreningar registrerade hos Kultur- och fritidsnämnden som anställer ungdomar (16-18 år) under sommarlovet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen tar på sig arbetsmiljöansvaret för ungdomen och betalar arbetsgivaravgiften"
+      - "Föreningen ska inneha giltig ansvars- och olycksfallsförsäkring"
+      - "Utdrag ur polisens belastningsregister krävs för de som erbjuder ungdomen arbete, enligt lag (2000:873)"
+    belopp: "Upp till 3 000 kr per ungdom, utbetalas i efterskott"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/jobb--foretagande/jobb-och-praktik/jobb-och-praktik-for-ungdomar/for-foreningar---ekonomiskt-stod-vid-feriearbete.html"
+    anteckning: "Datum anges i veckonummer, inte kalenderdatum: ansökan senast vecka 15, besked senast vecka 20, redovisning senast vecka 40 (2026 års datum). Ansökan skickas till Arbetslivs- och socialförvaltningen. Åldersspannet anges som 16-18 år på den administrerande sidan (uppdaterad 2026-02-25); en övergripande kommunsida anger 16-19 år — den dedikerade bidragssidan bedöms mer auktoritativ, ingen fältkonflikt kodad."
+  - id: "falun-kommundelsutveckling"
+    namn: "Kommundelsutveckling"
+    kategori: ["ovrig"]
+    malgrupp: "Intresseföreningar/utvecklingsgrupper representerade inom Falu kommunbygderåd (kommundelarnas sju sockenråd/byaråd: Aspeboda, Bjursås, Enviken, Grycksbo, Sundborn, Svärdsjö, Vika), i samverkan med övriga föreningar inom kommundelen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara representerad inom Falu kommunbygderåd och samverka med övriga föreningar inom kommundelen"
+      - "En utvecklingsplan (nulägesbeskrivning, målsättning, åtgärder) ska presenteras, framtagen i samverkan på lokal nivå"
+      - "Projektmedel ska satsas för allmän nytta på allmän plats/mark tillgänglig för allmänheten, ej för egen privat vinning eller ordinarie underhåll"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/bygga-bo--miljo/landsbygd/stod-och-finansieringsmojligheter/kommundelsutveckling.html"
+    anteckning: "Falu kommun satsar totalt 2 500 000 kr/år (2024-2026) i kommundelsutvecklingsmedel, inget angivet takbelopp per enskild ansökan (dock 10 000-500 000 kr per projekt enligt landsbygdsfoldern, med möjlighet till högre belopp vid medfinansiärer). Ansökningsomgångar 2026/2027: sista ansökningsdag 27 mars 2026 och 30 september 2026 — datum gäller dessa omgångar och kan skifta mellan år. Separat bidrag på 10 000 kr (vart femte år) finns för att ta fram en ny utvecklingsplan. Bekräftat oförändrat vid omkörning 2026-07-21 (sidan uppdaterad 2026-02-27)."
+  - id: "falun-vagbidrag-drift"
+    namn: "Driftbidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Samfällighetsföreningar (väghållare för enskild väg) som uppfyller kommunens definition av bidragsberättigad förening, för väg som försörjer minst två separata fastigheter med permanentbostäder"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01"]
+    krav:
+      - "Vägen ska normalt vara minst 200 m och högst 1 000 m lång, finnas i nationella vägdatabasen (NVDB) och vara klassad som enskild väg"
+      - "Väghållaren måste kunna visa upp årsmötesprotokoll och vara organiserad som samfällighetsförening"
+      - "Vägen ska hållas öppen och framkomlig för allmän trafik året runt och uppfylla kommunens standardkrav (körbanebredd, vändmöjlighet, dränering m.m.)"
+      - "Vägar som får statligt driftbidrag är normalt inte berättigade till kommunalt bidrag, utom inom tättbebyggda områden"
+    belopp: "Basnivå 58,30 kr/m för vägar och 47,24 kr/m för gång- och cykelvägar, samt 195 kr/st för dagvattenbrunnar (endast vid särskilda skäl). Bidraget beräknas som basnivån x bidragsprocent — normalt 25 %, men 80 % för samfällighetsföreningar med särskilda skäl (t.ex. förvaltar allmän plats inom sitt båtnadsområde enligt kommunfullmäktigebeslut 2000-06-21). Indexjusteras årligen mot senast kända Trafikverkets index. Basår för bidragsnivåerna är 2024."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/download/18.271bc952197582675f959406/1750063096354/Nya%20bidragsbest%C3%A4mmelsser%20f%C3%B6r%20driftbidrag.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION (v1) — administreras av Miljö- och samhällsbyggnadsförvaltningen (Trafik och mark), helt separat spår från kultur- och fritidsnämndens bidrag och lätt att missa om bara föreningsbidrags-sidorna genomsöks. Nytt regelverk godkänt av Kommunfullmäktige 2025-05-15 § 86, i kraft från 2025-07-01, ersätter bestämmelser antagna 2016-03-10. Deadline 1 mars gäller den enklare årliga förnyade ansökan för föreningar med redan godkänd väg (2026: undantagsfönster 9 februari-9 mars enligt kommunens webbsida); NYANSÖKAN för väg som inte tidigare fått bidrag ska istället lämnas senast 1 april ÅRET FÖRE bidragsår. Bidraget betalas normalt ut i mars det år det avser. Utbetalningar över 10 000 kr görs inte till privata bankkonton."
+  - id: "falun-vagbidrag-upprustning"
+    namn: "Upprustningsbidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Samfällighetsföreningar som redan får kommunalt driftbidrag till sin enskilda väg (se falun-vagbidrag-drift), för större återställande åtgärder"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01"]
+    krav:
+      - "Kan endast beviljas för vägar som redan erhåller kommunalt driftbidrag"
+      - "Åtgärden ska vara en upprustningsåtgärd (avvattning, förstärkning, förnyelse av slitlager, byggnadsverk, trafiksäkerhet) — driftåtgärder och standardhöjande åtgärder ersätts inte"
+      - "Kostnadskalkyl och årsmötes-/styrelseprotokoll där föreningens beslut att ansöka framgår ska bifogas"
+      - "Vägen ska vara öppen för allmän trafik i minst 5 år efter utbetalning av bidraget"
+    belopp: "Max 60 % av upprustningskostnaden inklusive moms. Om föreningen samtidigt får särskilt driftbidrag från Trafikverket: statligt och kommunalt bidrag tillsammans max 80 % av kostnaden"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/download/18.760ea7cb1775059b30c216de/1612166165558/Upprustningsbidragsmodell.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION (v1), se anteckning på falun-vagbidrag-drift för bakgrund. Bidragsmodell framtagen 2021-01-05 efter politiskt styrgruppsarbete. Om kommunens budgeterade medel inte räcker för samtliga ansökningar görs en angelägenhetsprioritering; ansökningar som kommer in senare än 1 mars kan handläggas om medel finns kvar. Falu kommun agerar inte besiktningsman gentemot anlitad entreprenör."
+  - id: "falun-ks-stiftelser"
+    namn: "Kommunstyrelsens stiftelser och fonder"
+    kategori: ["ovrig", "kultur"]
+    malgrupp: "Föreningar, organisationer och bolag (samt privatpersoner) — fyra av kommunstyrelsens fem förvaltade stiftelser är uttryckligen öppna för föreningar: Stiftelsen Falu Stads besparingsfond (nyttiga/välgörande ändamål, f.d. Falu stads område), Stiftelsen Hj Grönblads fond för Falu stads förskönande (parker/gräsmattor/planteringar i centrala Falun, mottagare uttryckligen inkl. 'föreningar, organisationer, samfälligheter, bolag'), Stiftelsen samfond K1 (vård av kulturellt värdefulla byggnader samt kultur-/miljövård/parkvård, mottagare uttryckligen inkl. 'organisationer och föreningar') och Stiftelsen M Kronbergs donation till lekplats (lekplatser för barn i centrala Falun)"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-30"]
+    krav:
+      - "Ansökan ska innehålla beskrivning av verksamheten/aktiviteten, sökt belopp, årsredovisning/verksamhetsberättelse (om sådan finns) samt organisationsnummer och utbetalningsuppgifter"
+      - "Medlen ska användas till det specifika ändamål respektive stiftelse anger (t.ex. besparingsfondens fokus på f.d. Falu stads område, samfond K1:s fokus på kulturhistoriskt värdefulla byggnader)"
+      - "Ingen garanti för utdelning till alla sökande — beror på stiftelsernas årliga avkastning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/kommun--demokrati/kommunens-organisation/kommunstyrelsen/kommunstyrelsens-stiftelser-och-fonder.html"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION (v1). Aggregerad post per §2.7 — en femte stiftelse i samma familj, Stiftelsen A Carlssons testamentsfond, är UTESLUTEN ur denna post eftersom den uttryckligen bara kan sökas av 'fastighetsägare och hyresgäster efter samråd med fastighetsägaren' för Stadshotellets underhåll, ingen förenings-ingång (se filhuvud). Det är styrelsen för respektive stiftelse/kommunstyrelsen/kommunfullmäktige (varierar per stiftelse) som beslutar om fördelning, med avsikt att fatta beslut i juni; pengar ska som huvudregel nå beviljade sökande senast 30 november. Sidan uppdaterad 2026-02-13."
+  - id: "falun-socialnamnd-stiftelser"
+    namn: "Arbetslivs- och socialnämndens stiftelser (sociala ändamål)"
+    kategori: ["social"]
+    malgrupp: "Privatpersoner och föreningar, för sociala ändamål inom Arbetslivs- och socialnämndens verksamhetsområde"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "En ansökan görs per stiftelse; det går att söka ur flera stiftelser samtidigt"
+      - "Vem som kan få medel avgörs av respektive stiftelses eget ändamål — utdelning är inte en rättighet och beror på stiftelsernas avkastning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.falun.se/stod--omsorg/arbetslivs--och-socialnamndens-stiftelser.html"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION (v1). Den administrerande sidan listar INTE de enskilda stiftelsernas namn eller ändamål (dessa visas först i själva ansökningsformuläret) — men den övergripande kommunsidan 'Stiftelser och fonder att söka medel ur' bekräftar uttryckligen att 'Både privatpersoner och föreningar kan söka' för denna grupp, till skillnad från den strukturellt likartade men uteslutande individriktade Omsorgsnämndens fonder (se filhuvud, MEDVETET_UTESLUTET). Deadline 15 februari avser 2026 års ansökningsomgång (redan stängd vid denna körning) — bedömd som återkommande årlig deadline i brist på annan uppgift, FLAGGAD för bekräftelse nästa år. Sidan uppdaterad 2026-03-11."
+forutsattningar:
+  - id: "falun-bidragsberattigad-forening"
+    vad: "Bli godkänd som bidragsberättigad förening (kultur/idrott)"
+    beskrivning: "Föreningen registrerar sig med aktuella uppgifter i Falu kommuns föreningsportal och godkänns som bidragsberättigad. Vid registrering ska följande bilagor laddas upp: intyg från Skatteverket med organisationsnummer, aktuella stadgar, årsmötesprotokoll eller konstituerande mötesprotokoll, samt (i förekommande fall) intyg på medlemskap i riksorganisation. Föreningen måste inneha plus- eller bankgiro. Föreningsuppgifter ska hållas aktuella och revideras minst en gång om året."
+    system: "Föreningsportalen (ActorSmartbook)"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.falun.se/gora--uppleva/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-kultur--idrotts--och-fritidsforeningar/bidragsregler-for-kultur--och-fritidsforvaltningen.html"

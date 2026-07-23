@@ -1,0 +1,383 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2 — Halmstad var
+# fallstudien som motiverade v2). Föregående version (verifierad 2026-07-19)
+# rapporterades komplett men saknade fem bidrag som aldrig fångades av att
+# bara följa kommunens redaktionella sidträd: Stöd till konstnärlig
+# utveckling, Administrationsbidrag till vägföreningar, Generellt bidrag till
+# vägsamfälligheter, Särskilt bidrag till vägsamfälligheter, samt kommunens
+# stiftelser/fonder (52 st, skrivna som ETT samlat bidrag per §2.4).
+#
+# Metod denna omgång: (1) fri.halmstad.se/bidrag/ hämtades som facit för
+# täckning — portalen är JS-renderad och gick inte att extrahera direkt via
+# fetch (§5 "JS-renderade portaler"), så täckning fastställdes i stället via
+# indexerade fri.halmstad.se/ansokaninfo.aspx?type=-sidor (typ 55, 63, 69, 75,
+# 80 hittade) kombinerat med kommunens egna icke-JS-renderade sammanställningar
+# (självservice "alla ansökningar", "ansök i föreningsregistret",
+# "bidragochstodtillforeningar", "bidragochstodinomkulturochfolkbildning").
+# (2) Självservice-/e-tjänstsidor genomsöktes separat från den redaktionella
+# bidragssidan. (3) Förvaltningarnas egna sidor utanför kultur/fritid
+# genomsöktes specifikt: trafik och infrastruktur (vägföreningar/
+# vägsamfälligheter) samt omsorg och stöd (stiftelser/fonder).
+#
+# Täckningsavstämning: 23 kandidatbidrag identifierade via portal + special-
+# sidor, 21 skrivna till denna fil. Två uteslutna med kategoriskt skäl (se
+# nedan) — ingen olöst avvikelse.
+#
+# Uteslutna (kategoriskt skäl, RESEARCH_SPEC_v2.md §2.3):
+# - "Kulturstipendium" (60 000 kr, kulturutövare max 25 år) — individuellt
+#   pris/stipendium till privatperson, inte ett föreningsbidrag.
+#   https://www.halmstad.se/upplevaochgora/kultur/kulturstipendierochpriser/kulturstipendium.n1963.html
+# - "Stöd till unga arrangörer" — sidan beskriver konkreta uppträdande-/
+#   arrangörsmöjligheter för unga (Kulturkrock, PLAY kortfilmsfestival,
+#   Dansens dag, UKM) utan belopp, ansökningsformulär eller villkor. Är ett
+#   kontaktnav via kulturhuset Nolltrefem, inte ett sökbart bidrag.
+#   https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/stodtillungaarrangorer.n3701.html
+#
+# Halmstad har fyra förvaltningar med egna föreningsbidragsspår: Teknik- och
+# fastighetsförvaltningen (idrott/fritid/anläggning OCH vägföreningar/
+# vägsamfälligheter — samma förvaltning ansvarar för båda), Kulturförvaltningen
+# (kultur/studieförbund/konstnärlig utveckling), Socialförvaltningen (sociala
+# hjälp- och funktionsrättsorganisationer samt stiftelser/fonder under omsorg
+# och stöd) samt Hemvårdsförvaltningen (seniorföreningar). Ansökan sker
+# huvudsakligen via FRI (föreningsregistret, fri.halmstad.se) men vägbidragen
+# söks via en separat e-tjänst (tjanster.halmstad.se/BVAG) och
+# stiftelser/fonder via en tredje e-tjänst med BankID-inloggning — se
+# anteckning per bidrag. Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Halmstad"
+kommun_slug: "halmstad"
+lan: "Hallands län"
+befolkning: 106315
+forvaltning: "Teknik- och fastighetsförvaltningen, Kulturförvaltningen, Socialförvaltningen samt Hemvårdsförvaltningen"
+ansokningssystem:
+  namn: "FRI (föreningsregistret)"
+  url: "https://fri.halmstad.se/bidrag/"
+kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar.n1898.html"
+verifierad: 2026-07-20
+bidrag:
+  - id: "halmstad-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med verksamhet för barn och ungdomar 5–20 år, samt parasport utan övre åldersgräns"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Minst 10 aktiva medlemmar i åldern 5–20 år (parasport undantagen från åldersgräns)"
+      - "Minst 20 organiserade sammankomster under senaste verksamhetsåret"
+      - "Sammankomst ska ha minst tre deltagare plus ledare och vara minst 60 minuter"
+      - "Årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse, verksamhetsplan och ledarguide ska finnas"
+    belopp: "34 kronor per bidragsberättigad sammankomst"
+    sen_ansokan: "Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget bidrag."
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/aktivitetsbidrag.n1350.html"
+    anteckning: "Två ansökningsperioder per år: sammankomster 1 januari–30 juni ansöks senast 25 augusti, sammankomster 1 juli–31 december ansöks senast 25 februari."
+  - id: "halmstad-anlaggningsbidrag"
+    namn: "Anläggningsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som äger eller hyr och driver en egen anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Anläggningen ska vara bidragsprövad och prioriterad av teknik- och fastighetsnämnden"
+      - "Nya sökande föreningar måste kontakta kommunen för dialog innan ansökan"
+      - "Årlig återansökan krävs"
+    belopp: "Max 220 000 kronor per anläggning. Beloppet varierar efter anläggningstyp (t.ex. fotbollsplan 3–6 kr/m², tennis 3 500–7 000 kr/bana, golf 10 000–60 000 kr beroende på ungdomsandel)"
+    sen_ansokan: "Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget bidrag."
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/anlaggningsbidrag.n1902.html"
+    anteckning: null
+  - id: "halmstad-driftbidrag-lokalhallande"
+    namn: "Driftbidrag till lokalhållande föreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar och stiftelser som äger eller förvaltar en egen lokal, tillgänglig för andra samhällsaktiviteter"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen måste först ansöka om och godkännas som lokalhållande förening"
+      - "Förbinder sig att hyra ut lokalerna till t.ex. myndigheter, företag, privatpersoner och andra föreningar"
+      - "Ska erbjuda kökstillgång och porslin till hyresgäster"
+      - "Ska fastställa och årligen redovisa en fast hyrestaxa till kommunen"
+    belopp: "Beräknas utifrån en fördelningsmodell: 50 procent av bidraget baseras på lokalyta, 25 procent på uthyrningsintäkter, 25 procent på antal uthyrningstillfällen. Utöver detta avsätts 10 procent årligen till en renoverings- och underhållsfond"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/driftbidragtilllokalhallandeforeningar.n2364.html"
+    anteckning: "Inget ansökningsdatum publicerat i källan för själva driftbidraget (till skillnad från övriga bidrag med 25 februari-deadline)."
+  - id: "halmstad-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- eller fritidsföreningar med långsiktig tillgång till egen eller hyrd anläggning/lokal"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska ha långsiktig tillgång till egen eller hyrd lokal/anläggning"
+      - "Kan inte sökas i efterhand för något som redan är påbörjat eller klart"
+    belopp: null
+    sen_ansokan: "Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget bidrag."
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/investeringsbidrag.n1904.html"
+    anteckning: "Täcker nybyggnation, förbättringsarbeten, reparationer samt orienteringskartor. Täcker inte lös egendom som båtar eller datorer."
+  - id: "halmstad-ledarutbildningsbidrag"
+    namn: "Ledarutbildningsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet 5–20 år, för utbildning av föreningens ledare"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Utbildningen ska vara godkänd eller anordnad av föreningens distrikts- eller riksorganisation"
+      - "Deltagarna ska vara ledare i föreningens barn- och ungdomsverksamhet"
+      - "Kursintyg ska kunna visas upp vid kontroll"
+      - "Ledarguide ska finnas"
+    belopp: "Lägst 3 000 kronor garanterat om utbildningskostnaderna når det beloppet. Utöver det varierar beloppet utifrån antal sökande föreningar och antal rapporterade barn- och ungdomssammankomster"
+    sen_ansokan: "Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget bidrag."
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/ledarutbildningsbidrag.n1906.html"
+    anteckning: "Ansökan avser de senaste tolv månadernas utbildningskostnader. Kost och logi täcks inte."
+  - id: "halmstad-lokalbidrag"
+    namn: "Lokalbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet, för lokalkostnader"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Lokalen ska användas kontinuerligt för barn- och ungdomsverksamhet"
+      - "Ledarguide ska finnas"
+      - "Årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse, verksamhetsplan, hyreskontrakt och fakturor ska redovisas"
+    belopp: "Cirka 40 procent av lokalkostnaden vid 40–200 sammankomster/år, cirka 60 procent vid 201–500, cirka 80 procent vid fler än 500. Max 75 000 kronor per år"
+    sen_ansokan: "Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget bidrag."
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/lokalbidrag.n1908.html"
+    anteckning: null
+  - id: "halmstad-nolltaxa"
+    namn: "Nolltaxa – fri hyra för föreningar"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet 0–20 år, samt grupper där majoriteten av deltagarna har en funktionsnedsättning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska bedriva barn- och ungdomsverksamhet för 0–20-åringar (eller majoritet med funktionsnedsättning)"
+      - "Vara registrerad i kommunens föreningsregister med årligen uppdaterade uppgifter"
+      - "Ha antagit en ledarguide framtagen med RF-SISU"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande bokning av lokaltid, inte ett ansökningsbidrag med deadline)"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/nolltaxafrihyraforforeningar.n2328.html"
+    anteckning: "Kostnadsfri hyra gäller endast aktivitetsytan under verksamhetstid, inte tilläggstjänster eller ställtid. Registrerade föreningar får prioriterad bokning inför säsong."
+  - id: "halmstad-spontanaktivitetsbidrag"
+    namn: "Spontanaktivitetsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Barn och unga 5–20 år, för kostnadsfria ledarledda aktiviteter utan medlemskrav"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska vara ledarledd och äga rum utanför skoltid"
+      - "Kostnadsfri för deltagarna, inget medlemskrav eller krav på regelbundet deltagande"
+      - "Förhandsanmälan krävs minst tre veckor innan aktiviteten"
+    belopp: "300 kronor per timme"
+    sen_ansokan: "Ansökningar som kommer in senare än 30 dagar efter sista aktivitetstillfället beviljas inte"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/spontanaktivitetsbidrag.n1910.html"
+    anteckning: "Prioriteringskriterier: geografisk spridning, jämställdhet, underprioriterade områden, brottsförebyggande samverkan."
+  - id: "halmstad-motesplatser-barn-unga"
+    namn: "Stöd till föreningsdrivna mötesplatser för barn och unga"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningsdrivna, drogfria mötesplatser öppna för alla unga utan medlemskrav, prioriterad åldersgrupp 12–19 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst 15 tillfällen jämnt fördelade per termin (vårtermin 1 januari–31 maj, hösttermin 1 september–15 december)"
+      - "Minst två vuxna (18+) närvarande, max fem timmar per tillfälle"
+      - "Föreningen står för verksamhetens kostnader"
+    belopp: "125 kronor per öppettimme vardagskvällar, 175 kronor per öppettimme fredag–lördag kväll. Max 20 000 kronor per termin"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillforeningsdrivnamotesplatserforbarnochunga.n2476.html"
+    anteckning: "Kan sökas under hela året, för ett år i taget."
+  - id: "halmstad-samhallsforeningar"
+    namn: "Stöd till samhällsföreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar som verkar för lokal utveckling och ökad trivsel inom ett tydligt avgränsat geografiskt område"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-01"]
+    krav:
+      - "Ska vara en av kommunen godkänd samhällsförening"
+      - "Ska fungera som länk mellan invånare och myndigheter"
+      - "Ska främja lokal demokrati och gemenskap"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillsamhallsforeningar.6521.html"
+    anteckning: "Ansökan avser kommande verksamhetsår, beslut meddelas i februari. Redovisning ska lämnas senast 30 april året efter verksamhetsåret. I FRI-portalens egen sammanfattning beskrivs bidraget bredare: föreningar som verkar med demokrati- och rättighetsfrågor, inklusive integrations-, jämställdhets- eller hbtq-perspektiv."
+  - id: "halmstad-seniorforeningar"
+    namn: "Stöd till seniorföreningar"
+    kategori: ["pensionar"]
+    malgrupp: "Föreningar och organisationer som bedriver verksamhet för hemvårdsnämndens nuvarande och blivande kunder samt deras anhöriga och närstående"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Ska uppfylla kommunens generella krav för föreningsbidrag"
+      - "Ska bedriva ideell, allmännyttig verksamhet för kommunens invånare"
+      - "Ska dokumentera antal betalande medlemmar föregående verksamhetsår"
+    belopp: null
+    sen_ansokan: "Sena eller ofullständiga ansökningar behandlas inte. Dispens kan ges vid särskilda skäl."
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillseniorforeningar.n2484.html"
+    anteckning: "Bidragets storlek beror på antalet betalande medlemmar föregående verksamhetsår och varierar utifrån hemvårdsnämndens budget. Beviljade bidrag betalas ut efter nämndens majmöte."
+  - id: "halmstad-sociala-hjalp-funktionsratt"
+    namn: "Stöd till sociala hjälp- och funktionsrättsorganisationer"
+    kategori: ["social", "funktionsratt"]
+    malgrupp: "Lokala sociala hjälp- och funktionsrättsorganisationer som kompletterar socialnämndens verksamhetsområde"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Ska verka inom socialnämndens verksamhetsområde med Halmstad som huvudsakligt verksamhetsområde"
+      - "Ska ha bedrivit verksamhet i minst ett år"
+      - "Ska ha antagna stadgar och vald styrelse"
+      - "Minst 25 registrerade och avgiftsbetalande medlemmar senaste verksamhetsåret"
+      - "Lokaler ska vara tillgängliga och tillgänglighetsanpassade"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillsocialahjalpochfunktionsrattsorganisationer.n2482.html"
+    anteckning: "Bidragets storlek bestäms utifrån en bedömning av nyttan verksamheten tillför socialnämndens område. Beslut meddelas senast i slutet av januari, utbetalning senast 28 februari."
+  - id: "halmstad-arrangemangs-projektstod-kultur"
+    namn: "Arrangemangs- och projektstöd inom kultur"
+    kategori: ["kultur"]
+    malgrupp: "Juridiska personer (föreningar, stiftelser, bolag, enskilda näringsidkare med F-skattsedel) som genomför offentliga kulturarrangemang eller kulturprojekt i Halmstad"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01", "10-01"]
+    krav:
+      - "Arrangemanget ska vara öppet för allmänheten och äga rum i Halmstads kommun"
+      - "Avser engångsarrangemang/projekt, inte löpande verksamhet"
+      - "Ansökan ska lämnas in senast sex veckor före arrangemangets genomförande"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan utöver kravet att ansöka senast sex veckor före arrangemanget"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/arrangemangsochprojektstod.n2406.html"
+    anteckning: "Inget maxbelopp publicerat, men ansökningar som överstiger ett prisbasbelopp beslutas av kulturnämnden."
+  - id: "halmstad-verksamhetsstod-kultur"
+    namn: "Verksamhetsstöd inom kultur"
+    kategori: ["kultur"]
+    malgrupp: "Juridiska personer med huvudsaklig, kontinuerlig kulturverksamhet i Halmstads kommun av kulturpolitisk betydelse"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-01"]
+    krav:
+      - "Ordinarie, kontinuerlig kulturverksamhet riktad till allmänheten"
+      - "Verksamheten ska bedrivas i Halmstads kommun"
+      - "Ska komplettera eller utveckla kommunens kulturutbud"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/verksamhetsstodinomkultur.n2442.html"
+    anteckning: "Stöd beviljas för tre år åt gången. Redovisning ska lämnas senast 30 april varje år."
+  - id: "halmstad-kulturstod-unga"
+    namn: "Kulturstöd för unga"
+    kategori: ["kultur"]
+    malgrupp: "Personer eller grupper 12–25 år verksamma i Halmstads kommun, samt organisationer där majoriteten av medlemmarna är 12–25 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektet ska ha kulturellt innehåll (t.ex. festival, föreställning, utställning, workshop)"
+      - "Arrangemanget ska vara kostnadsfritt för besökare"
+      - "Ska genomföras i drog- och alkoholfria miljöer"
+      - "Max två beviljade ansökningar per person/grupp/organisation och år"
+    belopp: "Max 40 000 kronor"
+    sen_ansokan: "Ansökan som kommer in senare än fyra veckor före projektet/arrangemanget beviljas inte"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/kulturstodforunga.n2391.html"
+    anteckning: "Ansökan ska lämnas in senast fyra veckor innan projektet genomförs. Bidraget täcker inte privat lön eller icke-nödvändig utrustning."
+  - id: "halmstad-stod-studieforbund"
+    namn: "Stöd till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Statsbidragsberättigade studieförbund verksamma i Halmstads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska vara statsbidragsberättigat enligt Folkbildningsrådets definition"
+      - "Ska bedriva publik eller utåtriktad kulturverksamhet i Halmstads kommun"
+      - "Ska ha lämnat verksamhetsplan för kommande år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan (framgår av ansökningsformuläret)"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/stodtillstudieforbund.n2452.html"
+    anteckning: "Sista ansökningsdatum anges i ansökningsformuläret, inte publicerat på denna sida. Stödet fördelas: 10 procent organisationsbidrag, 8 procent tillgänglighetsbidrag, 82 procent verksamhetsbidrag (varav 62 procent studiecirklar, 5 procent övrig folkbildning, 15 procent kulturprogram). Redovisning senast 30 april."
+  - id: "halmstad-konstnarlig-utveckling"
+    namn: "Stöd till konstnärlig utveckling"
+    kategori: ["kultur"]
+    malgrupp: "Enskilda näringsidkare (enskild firma) med F-skattsedel, konstnärligt inriktad person verksam i Halmstads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Sökande ska ha F-skattsedel som enskild näringsidkare och vara verksam i Halmstads kommun"
+      - "Avser konstnärliga projekt som stimulerar kompetensutveckling (t.ex. idéer, koncept, förstudier)"
+      - "Kan sökas en gång per verksamhetsår, endast en gång per projekt"
+      - "Utlandsresor är inte stödberättigade"
+    belopp: "Max 10 000 kronor"
+    sen_ansokan: "Ej tillämpligt (löpande ansökan utan fast deadline — ansökan kan lämnas när som helst under året, men i god tid)"
+    kalla_url: "https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/stodtillkonstnarligutveckling.n2460.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Riktar sig till en enskild kulturutövare (enskild näringsidkare), inte till en förening som juridisk form, men söks i samma system (FRI) och listas i föreningsregistrets egen bidragsöversikt tillsammans med kommunens föreningsbidrag — därför inte kategoriskt uteslutet enligt §2.3 (jämför med Kulturstipendium, som är ett konkurrensutsatt pris/stipendium och därför är uteslutet). Redovisning av beviljade medel ska lämnas inom två månader efter avslutat projekt."
+  - id: "halmstad-administrationsbidrag-vagforeningar"
+    namn: "Administrationsbidrag till vägföreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Vägföreningar som ansvarar för enskild väg i Halmstads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Sökande ska vara en registrerad vägförening"
+      - "Bidraget avser föregående verksamhetsår"
+    belopp: "1 461 kronor som fast belopp plus 0,72 kronor per meter väg. Max 9 129 kronor"
+    sen_ansokan: "Ansökningar som kommer in efter 30 november behandlas inte"
+    kalla_url: "https://www.halmstad.se/trafikochinfrastruktur/vagarochgator/vagforeningarochvagsamfalligheter.n640.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Listas i ansökningssystemet FRI (fri.halmstad.se/bidrag/ansokaninfo.aspx?type=80) men ansöks i praktiken via e-tjänsten för enskild väg (tjanster.halmstad.se/BVAG). Administreras av Teknik- och fastighetsförvaltningen, utbetalas för föregående verksamhetsår."
+  - id: "halmstad-generellt-bidrag-vagsamfalligheter"
+    namn: "Generellt bidrag till vägsamfälligheter"
+    kategori: ["ovrig"]
+    malgrupp: "Vägsamfälligheter i Halmstads kommun, med eller utan statsbidrag"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Väg med minst 200 meters väglängd (för vägsamfälligheter utan statsbidrag)"
+      - "Vägen ska vara öppen för allmän trafik och utgöra utfartsväg för helårsboende"
+    belopp: "Med statsbidrag: mellanskillnaden mellan 90 procent av statligt bidragsunderlag och mottaget statsbidrag. Utan statsbidrag: 2,50 kronor per meter och år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/trafikochinfrastruktur/vagarochgator/vagforeningarochvagsamfalligheter.n640.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Kallas 'Driftbidrag' i ansökningssystemet FRI (fri.halmstad.se/bidrag/ansokaninfo.aspx?type=63) — inte att förväxla med 'Driftbidrag till lokalhållande föreningar' (helt annat bidrag, se ovan). Ansöks via e-tjänsten för enskild väg (tjanster.halmstad.se/BVAG), administreras av Teknik- och fastighetsförvaltningen. Ingen publicerad fast ansökningsdeadline hittad, till skillnad från administrationsbidraget (30 november)."
+  - id: "halmstad-sarskilt-bidrag-vagsamfalligheter"
+    namn: "Särskilt bidrag till vägsamfälligheter"
+    kategori: ["ovrig"]
+    malgrupp: "Vägsamfälligheter i Halmstads kommun som vill genomföra ombyggnad för trafiksäkerhet eller framkomlighet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Avser ombyggnader för att öka trafiksäkerheten, i andra hand åtgärder för ökad tillgänglighet (t.ex. mötesplatser, förbättrad väggeometri)"
+      - "Ger inte bidrag till standardförbättringar som förstärkning av överbyggnad, ny beläggning eller dikning"
+      - "Lägsta bidragsbelopp som kan sökas är 10 000 kronor, motsvarande en projektkostnad på 20 000 kronor"
+    belopp: "50 procent av total projektkostnad, max 50 000 kronor per vägsamfällighet"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/trafikochinfrastruktur/vagarochgator/vagforeningarochvagsamfalligheter.n640.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Kallas 'Särskilt bidrag' i ansökningssystemet FRI (fri.halmstad.se/bidrag/ansokaninfo.aspx?type=75). Betalas ut i efterskott efter projektkontroll. Ansöks via e-tjänsten för enskild väg (tjanster.halmstad.se/BVAG), administreras av Teknik- och fastighetsförvaltningen."
+  - id: "halmstad-stiftelser-fonder"
+    namn: "Stiftelser och fonder"
+    kategori: ["ovrig"]
+    malgrupp: "Privatpersoner, föreningar och verksamheter folkbokförda respektive med säte i Halmstads kommun, enligt respektive stiftelses ändamål"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-31"]
+    krav:
+      - "Sökande (eller den ansökan avser) ska vara folkbokförd i Halmstads kommun; för föreningar/verksamheter krävs säte i kommunen"
+      - "Ändamål, målgrupp och behörighet varierar per stiftelse — se respektive stiftelses villkor i kommunens sökfunktion"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.halmstad.se/omsorgochstod/ekonomiochforsorjningsstod/sokapengarfranstiftelserochfonder.7474.html"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning — tillagd vid korrigerande omkörning 2026-07-20. Kommunen förvaltar 52 stiftelser med skilda ändamål, varav flera riktar sig till fritidsföreningar och kulturorganisationer. Skrivet som ETT samlat bidrag per RESEARCH_SPEC_v2.md §2.4 i stället för en post per stiftelse. Ansökningsperiod 1 maj–31 augusti, utdelning sker i mitten av december. Ansökan görs med BankID via separat e-tjänst (ej FRI)."
+forutsattningar:
+  - id: "halmstad-bidragsberattigad-forening"
+    vad: "Registrera förening och bli bidragsberättigad i Halmstads kommun"
+    beskrivning: "Föreningen ska vara ideell och icke vinstdrivande, öppen för alla (sakliga undantag tillåts), följa kommunens värdegrund och gällande lagstiftning, säkerställa lämpliga ledare för barn- och ungdomsverksamhet, bedriva verksamhet utan religiöst inslag, ha varit verksam i minst sex månader, ha antagna stadgar, vald styrelse och revisor, inneha organisationsnummer från Skatteverket och bankkonto, samt vara registrerad i kommunens föreningsregister. Ansökan om bidrag görs i det digitala systemet FRI."
+    system: "FRI (föreningsregistret)"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/reglerforattkunnafaforeningsbidrag/riktlinjerochvillkorforforeningsbidrag.n1940.html"

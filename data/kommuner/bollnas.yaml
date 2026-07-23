@@ -1,0 +1,364 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md + v2.1 §2 —
+# källkonvergens ersätter "kommunens redaktionella bidragssida = facit").
+# Föregående version (verifierad 2026-07-19) rapporterades komplett med 9
+# bidrag men saknade sex bidragsformer och uteslöt två felaktigt:
+#
+# 1. "Integrationsprojekt (§10-medel)" fanns redan på huvudsidans föreningsbidrag,
+#    men uteslöts förra körningen med hänvisning till att källunderlaget var en
+#    daterad PDF från 2022 och bara syntes i ett av två pass. Vid denna omkörning
+#    bekräftat i två oberoende, fristående hämtningar av den nuvarande live-sidan,
+#    med namngiven kontaktperson (Katarina Ahlström) — återinfört.
+# 2. "Avtalsföreningar - kultur" uteslöts förra körningen med motiveringen "inte
+#    en löpande sökbar post" (ansökningsfönstret för 2024–2027 stängde redan
+#    2023-08-31). Detta är INTE ett godkänt uteslutningsskäl enligt §2.4 — det är
+#    en genuin återkommande fyraårig bidragsform administrerad av kulturnämnden
+#    (jämför Halmstads treåriga verksamhetsstöd inom kultur) — återinfört.
+# 3. Tre bidrag under Arbråfonderna hittades via §2.1 punkt 5 (specialkategori
+#    stiftelser/fonder), geografiskt avgränsade till f.d. Arbrå kommun/församling,
+#    öppna för föreningar: Årligt verksamhetsbidrag, Bidrag till särskilda
+#    projekt och utvecklingsarbete, samt Bidrag och stöd till äldre, sjuka och
+#    funktionshindrade. Administreras via pappersblankett till Arbrå
+#    Donationsråd — inte via Actor Smartbook. Saknades helt förra körningen.
+# 4. "Bidrag för enskild väghållning" — kommunalt regelverk antaget av
+#    Kommunfullmäktige 1994-12-12 § 171 samt Tekniska nämnden 1996/2000, hittat
+#    via §2.1 punkt 5 (specialkategori väg/samfällighet). Länkas från kommunens
+#    sida om gator och vägar, förekom inte på föreningsbidragssidan eller i
+#    Actor Smartbook. PDF:en lästes i fulltext (ej sammanfattad av tredje part).
+#    Saknades helt förra körningen.
+# 5. "Årets förening" (hederspris, 15 000 kr) — se GRÄNSFALL-anteckning på
+#    bidraget. Inkluderad efter avvägning mot §2.4:s tre uteslutningsskäl, av
+#    vilka inget täcker "nomineringsbaserat pris utan egenansökan".
+#
+# Uteslutna med kategoriskt skäl (§2.4 — inte bara i kommentar, se även
+# tackning.log):
+# - Elitidrottspriset (privatperson/lag), Föreningsledarpriset (privatperson),
+#   Kulturpriset (privatperson), Kulturstipendium (privatperson, 22 000 kr),
+#   Hasselgårdstipendium (privatperson, jazzmusiker), Stipendium för körkort
+#   (privatperson) — samtliga individuella pris/stipendier till privatperson.
+#   https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/priser-och-stipendier
+# - Arbrå-Undersvik Vindkraftfond — administreras av fristående stiftelse med
+#   egen styrelse (ordförande Katarina Wådell, sekr/kassör John-Erik Eriksson),
+#   ansökan sker via egen extern domän (vindkraftfonden.se), inte bollnas.se.
+#   https://bollnas.se/kommun-och-politik/stipendier-fonder-och-priser/fonder-och-stiftelser/arbra---undersvik-vindkraftfond
+# - Sociala fonderna (Bollnäs Kommuns Sociala Stiftelse + Sven Hjelm
+#   Donationsstiftelse) — ingen öppen ansökan för föreningar; medel fördelas av
+#   kommunal kommitté/socialtjänst till behövande privatpersoner respektive
+#   vårdinstitutioner efter internt underlag, inte efter förenings-ansökan.
+#   https://bollnas.se/kommun-och-politik/stipendier-fonder-och-priser/fonder-och-stiftelser/sociala-fonderna
+# - Anna Norlander-Palmérs donationsstiftelse, Ester och Ernst Linells
+#   stipendiestiftelse, Stiftelsen Arbrå Jordägarefond, Syskonen Norlanders
+#   donationsstiftelse, Arbråfondernas "Årets Arbråstipendium" och "Stipendier
+#   för studerande" — samtliga uttryckligen riktade till privatpersoner
+#   (bosättning/studier), ingen förenings-ingång hittad på respektive sida.
+#   https://bollnas.se/kommun-och-politik/stipendier-fonder-och-priser/fonder-och-stiftelser
+#
+# EJ_EXTRAHERBAR: Actor Smartbook-portalen (bollnas.actorsmartbook.se/Grants/)
+# är JS-renderad (template-platshållare {{grant.Name}} synliga i statisk HTML)
+# — kunde inte räknas upp direkt, vilket bekräftar v2.1:s antagande att
+# källkonvergens (regelverk + förvaltningssidor + självservice + special-
+# kategorier) är den metod som faktiskt fungerar, inte portal-uppräkning.
+#
+# Täckning byggd genom: (1) regelverks-PDF för enskild väghållning (Kommun-
+# fullmäktige/Tekniska nämnden), (2) huvudsidan för föreningsbidrag (Teknik-,
+# service- och fritidsförvaltningen), (3) kulturenhetens avtalsföreningssida,
+# (4) kommunens fonder-och-stiftelser-sida med samtliga sju under-stiftelser
+# genomgångna individuellt, (5) prissidan, (6) självservice-sidan för
+# föreningsadministratör (forutsattning), (7) riktad sökning väg/samfällighet
+# och byalag/bygdegård (inget utöver anläggningsbidraget och vägbidraget
+# hittades — "nolltaxa" diskuterad i lokaltidning som förslag, inte antaget,
+# därför inte skriven som bidrag).
+#
+# Se tackning.log och konflikter.log för fullständig avstämning.
+kommun: "Bollnäs"
+kommun_slug: "bollnas"
+lan: "Gävleborgs län"
+befolkning: 25997
+forvaltning: "Teknik-, service- och fritidsförvaltningen, Kommunstyrelseförvaltningen (kulturenheten) samt Socialförvaltningen"
+ansokningssystem:
+  namn: "Actor Smartbook (Bollnäs kommuns Självservice/Föreningsadministratör)"
+  url: "https://minasidor.bollnas.se/foreningsadmin"
+kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+verifierad: 2026-07-20
+bidrag:
+  # --- HUVUDSIDA FÖRENINGSBIDRAG (Teknik-, service- och fritidsförvaltningen) ---
+  - id: "bollnas-studieforbundsbidrag"
+    namn: "Studieförbundsbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund verksamma i Bollnäs kommun, för studiecirklar, kulturprogram och övrig folkbildningsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-01"]
+    krav:
+      - "Ansökan via Självservice senast 1 maj, med ekonomisk redovisning, verksamhets- och revisionsberättelse för senast avslutade verksamhetsår"
+      - "Studiecirklar: minst 3 sammankomster, minst 3 och max 15 deltagare, deltagare från och med det år man fyller 13 år"
+      - "Kulturprogram räknas om till 66,3 deltagartimmar vid bidragsfördelning"
+      - "Övrig folkbildningsverksamhet: max 15 deltagare, ingen åldersgräns, färre än 3 möten tillåtet"
+      - "Vid flerkommunal verksamhet krävs klart åtskild redovisning för Bollnäs kommun"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Bidraget beräknas utifrån studieförbundsavdelningarnas deltagartimmar, inget fast belopp publicerat."
+  - id: "bollnas-anlaggningsbidrag"
+    namn: "Anläggningsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar som äger eller förvaltar idrotts- och friluftsanläggningar, hembygdsgårdar eller andra föreningsanläggningar/samlingslokaler"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-01"]
+    krav:
+      - "Samråd med kommunen ska ske innan föreningen tecknar bindande kontrakt om byggnation, köp eller förvaltning"
+      - "Anläggningen ska vara allmännyttig, det vill säga kunna hyras av andra föreningar, skolor med flera, och verksamhet ska bedrivas i lokalen"
+      - "En ansökan per anläggning"
+      - "Bidragsgrundande kostnader: underhåll, ränta, försäkringar, skatt, värme, vatten, el, sotning, sophämtning, snöröjning, personal"
+      - "Styrks med fakturor/verifikationer eller revisorsgranskat underlag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Maximalt bidrag motsvarar föreningens nettodriftkostnad (bruttokostnader minus hyresintäkter) — inget publicerat kronbelopp. Vid oförutsedd hög investeringskostnad (t.ex. haveri) kan förskott på upp till 50 % av nästa års bidrag beviljas."
+  - id: "bollnas-projektbidrag"
+    namn: "Projektbidrag"
+    kategori: ["idrott", "kultur", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Föreningar i Bollnäs kommun som planerar investeringar, arrangemang eller utvecklingsprojekt"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15", "04-15", "08-15", "10-15"]
+    krav:
+      - "Verksamheten ska vara ideell och allmännyttig, inte kommersiell"
+      - "Alternativa finansieringsmöjligheter ska ha undersökts"
+      - "Projektet ska genomföras enligt ansökan, annars kan återbetalning krävas"
+      - "Styrks med fakturor/verifikationer eller revisorsgranskat underlag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Fyra ansökningsperioder per år. Bidragsstorlek prövas från fall till fall, inget publicerat tak."
+  - id: "bollnas-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet för medlemmar 7–25 år (ingen övre åldersgräns för deltagare med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Sammankomst minst 60 minuter med minst 3 deltagare plus ledare"
+      - "Max 30 deltagare per sammankomst räknas bidragsgrundande"
+      - "Endast en utbetalning per person och dag oavsett aktivitetens längd"
+      - "Närvarokort ska föras och gruppledaren ska närvara och intyga uppgifterna"
+      - "Ges inte för entrébelagda tävlingar, danser, bingo eller basarer, och inte för studiecirkelsammankomster"
+    belopp: "30 kr/sammankomst samt 6 kr/deltagartillfälle"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Två ansökningsperioder: perioden 1 januari–30 juni redovisas senast 25 augusti, perioden 1 juli–31 december redovisas senast 25 februari."
+  - id: "bollnas-ledarutbildningsbidrag"
+    namn: "Ledarutbildningsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningsledare som genomgår ledarutbildning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Heldagskurs: minst 6 timmar á 60 minuter. Halvdagskurs: minst 3 timmar á 60 minuter"
+      - "Lokala kurser kräver kompetent kursledare, distrikts-/rikskurser ska vara sanktionerade"
+      - "Kursintyg och deltagarförteckning krävs"
+      - "Ges inte för studiecirkelkurser"
+    belopp: "300 kr/halvdag och 600 kr/heldag"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Söks tillsammans med aktivitetsbidraget, samma ansökningsdatum (25 februari/25 augusti). Beloppet bekräftat oförändrat sedan 2018 i två oberoende hämtningar."
+  - id: "bollnas-integrationsprojekt"
+    namn: "Integrationsprojekt (§10-medel)"
+    kategori: ["social", "ovrig"]
+    malgrupp: "Föreningar, ideella organisationer och andra aktörer (inte privatpersoner) som genomför projekt för att utveckla och stärka integrationen i Bollnäs kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektet ska bidra till mångfald och inkludering, eller till nyanländas delaktighet och engagemang för etablering"
+      - "Beslut om ansökningar upp till 250 000 kronor ska meddelas inom tre veckor"
+      - "Projekt/insatser kan beviljas så länge det finns medel kvar — beror på hur stort flyktingmottagandet blir under året"
+      - "Ansökan sker via kommunens självserviceportal"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Regleras enligt Förordning (2010:1122) om statlig ersättning för insatser för vissa utlänningar, § 10. FELAKTIGT UTESLUTEN i föregående körning (verifierad 2026-07-19) med hänvisningen att källunderlaget var en daterad PDF från 2022 och bara syntes i ett av två pass. Vid denna omkörning bekräftat i två oberoende, fristående hämtningar av den nuvarande live-sidan (2026-07-20), inklusive namngiven kontaktperson (Katarina Ahlström, 0278-268 86). Inget publicerat maxbelopp, men 250 000 kr nämns som gräns för snabbare handläggning (3 veckor)."
+  - id: "bollnas-snabbslanten"
+    namn: "Snabbslanten"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Enskilda personer, grupper och föreningar i alla åldrar, med eller utan föreningsanknytning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska genomföras i Bollnäs kommun och vara offentlig/utåtriktad"
+      - "Sökande under 18 år måste ha en myndig person eller organisation som ekonomiskt ansvarig"
+      - "Enklare redovisning av kostnader och intäkter samt en kortfattad skriftlig rapport krävs efteråt"
+      - "Återbetalning krävs om projektet inte genomförs"
+      - "Ansökan sker med BankID"
+    belopp: "Max 10 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Snabb handläggning: allt från någon dag upp till max tre veckor enligt källan."
+  - id: "bollnas-uppdragsersattning"
+    namn: "Uppdragsersättning/Avtal"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar som enligt avtal driver kommunala anläggningar eller genomför uppdragsverksamhet åt kommunen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ömsesidigt tecknat avtal med kommunen krävs"
+      - "Årlig redovisning av samtliga kostnader och intäkter, styrkt med fakturor/verifikationer eller revisorsgranskat underlag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Avtalet tecknas för ett år i taget och förlängs automatiskt om ingen säger upp det senast 6 månader före utgång. Omprövas vart tredje år. Ersättningsnivå regleras i det enskilda avtalet, inget publicerat standardbelopp."
+  - id: "bollnas-internationellt-bidrag"
+    namn: "Internationellt bidrag"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Skolungdomar, ungdomsgrupper och ideella föreningar i Bollnäs kommun; ungdomsutbyten prioriteras"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska vara ideell och allmännyttig, inte kommersiell"
+      - "Ansökan ska planeras i god tid före projektets start, med program och redovisning av egna insatser"
+      - "Kostnadskalkyl, finansieringsplan och eventuella anbud/offerter ska bifogas"
+      - "Rapport med samtliga inkomster och utgifter, styrkt med fakturor/verifikationer eller revisorsgranskat underlag, ska lämnas senast 2 månader efter projektets slut"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Syftar till kontaktskapande verksamhet och utbyten; ungdomsutbyten prioriteras. Inget publicerat maxbelopp."
+  - id: "bollnas-socialt-verksamhetsbidrag"
+    namn: "Socialt verksamhetsbidrag"
+    kategori: ["social"]
+    malgrupp: "Föreningar vars verksamhet ger stöd och råd, är utbildande, arbetar förebyggande eller med hjälpverksamhet, öppen för alla i Bollnäs kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska vara öppen för alla invånare i Bollnäs kommun, inte enbart föreningens egna medlemmar"
+      - "Ges inte för löner, inventarier, fasta hyror eller interna medlemsaktiviteter"
+      - "Stadgar, årsmötesprotokoll, verksamhetsberättelse och ekonomisk redovisning ska bifogas ansökan"
+      - "Kan sökas av en enskild förening eller av flera föreningar tillsammans"
+      - "Föreningar som beviljas bidrag ska återredovisa genomförda aktiviteter och antal deltagare"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/foreningsbidrag"
+    anteckning: "Beslutas av socialnämnden/Socialförvaltningen. Sista ansökningsdag för verksamhetsår 2026 var 11 april 2026 (källan knyter datumet till årtalet snarare än att ange det som ett fast årligt datum) — kontrollera aktuellt ansökningsdatum inför kommande år. Återredovisning för 2026 ska lämnas senast 31 mars 2027."
+
+  # --- KULTURENHETEN (Kommunstyrelseförvaltningen) ---
+  - id: "bollnas-avtalsforeningar-kultur"
+    namn: "Avtalsföreningar - kultur"
+    kategori: ["kultur"]
+    malgrupp: "Etablerade kulturföreningar i Bollnäs kommun som kan erbjuda kontinuerlig kulturverksamhet (t.ex. hemslöjd, orkester, film, teater) under en fyraårig avtalsperiod med kulturnämnden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen tecknar samarbetsavtal med kulturnämnden för en fyraårsperiod och åtar sig att leverera överenskommet kulturutbud under hela perioden"
+      - "Bidragets storlek relateras till det kulturutbud föreningen åtar sig"
+      - "Avtal omprövas/nyutlyses inför varje ny fyraårsperiod"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/avtalsforeningar---kultur"
+    anteckning: "Nuvarande avtalsperiod löper 2024–2027; ansökningsomgången för denna period stängde 31 augusti 2023, nya ansökningsperioder annonseras separat av kulturnämnden inför nästa fyraårsperiod. Skrivet trots att fönstret för närvarande är stängt, eftersom det är en genuin återkommande bidragsform (jämför Halmstads treåriga verksamhetsstöd inom kultur) — 'ansökan är stängd just nu' är inte ett godkänt uteslutningsskäl enligt RESEARCH_SPEC_v2.md §2.4. Föregående körning uteslöt bidraget felaktigt med motiveringen 'inte en löpande sökbar post'."
+  - id: "bollnas-arets-forening"
+    namn: "Årets förening"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar i Bollnäs kommun som genom sin verksamhet tillfört samhället och invånarna nyttigheter, socialt, kulturellt och/eller idrottsligt"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15"]
+    krav:
+      - "Nomineringsbaserat hederspris — förslag skickas in av privatpersoner eller grupper, ingen direkt egenansökan från föreningen"
+      - "Mottagaren ska vara född/bosatt eller genom sin verksamhet ha nära anknytning till Bollnäs kommun"
+      - "Anställda vid Bollnäs kommun kan inte tilldelas priset baserat på tjänsteutförande"
+    belopp: "15 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/uppleva-och-gora/foreningar-foreningsliv/stod-bidrag-och-stipendier/priser-och-stipendier"
+    anteckning: "GRÄNSFALL, flaggat för Fables §2.4-granskning: nomineringsbaserat hederspris, inte en bidragsansökan föreningen själv lämnar in för egen verksamhetsfinansiering — kommunen strukturerar 'Priser och stipendier' som en egen sida, skild från 'Föreningsbidrag'. Inkluderat ändå eftersom mottagaren är en förening (inte en privatperson) och RESEARCH_SPEC_v2.md §2.4 bara ger tre godkända uteslutningsskäl (individuellt pris till privatperson, stöd enbart till företag/privatpersoner, annan huvudman), och inget av dem täcker 'nomineringsbaserat hederspris utan egenansökan'. Jämför Elitidrottspriset (samma sida, samma 15 mars-deadline, 22 000 kr enligt en källa), som uteslöts eftersom mottagaren där är privatperson/lag, inte föreningen som juridisk mottagare."
+
+  # --- ARBRÅFONDERNA (Kommunstyrelseförvaltningen/Arbrå Donationsråd —
+  # geografiskt avgränsat till f.d. Arbrå kommun/församling, pappersansökan,
+  # INTE via Actor Smartbook) ---
+  - id: "bollnas-arbrafonderna-arligt-verksamhetsbidrag"
+    namn: "Arbråfonderna — Årligt verksamhetsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Ideella föreningar och organisationer med barn- och ungdomsverksamhet (0–20 år, ingen övre åldersgräns för deltagare med funktionsnedsättning) för medlemmar bosatta inom f.d. Arbrå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-30"]
+    krav:
+      - "Sammankomst minst 60 minuter med minst 3 deltagare plus 1 ledare, max 30 deltagare räknas bidragsgrundande"
+      - "Ges inte för entrébelagda tävlingar, danser, bingo, basarer eller studiecirklar"
+      - "Ansökan ska innehålla medlemsstatistik, verksamhetsuppgifter samt verksamhets-/årsmötesprotokoll, ekonomisk redovisning och revisionsberättelse för föregående verksamhetsår"
+      - "Endast en utbetalning per person och dag oavsett antal aktiviteter"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/kommun-och-politik/stipendier-fonder-och-priser/fonder-och-stiftelser/arbrafonderna/arligt-verksamhetsbidrag"
+    anteckning: "Ansökan skickas till Arbrå Donationsråd, Bollnäs kommun, 821 80 Bollnäs — pappersblankett, inte via Actor Smartbook. Saknades helt i föregående körning (hittades via §2.1 punkt 5, specialkategori stiftelser/fonder)."
+  - id: "bollnas-arbrafonderna-projektbidrag"
+    namn: "Arbråfonderna — Bidrag till särskilda projekt och utvecklingsarbete"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Ideella föreningar och organisationer, skolklasser, förskolor, fritidsgårdar samt enskilda med barn- och ungdomsverksamhet inom f.d. Arbrå kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska avse verksamhet utöver det traditionella, t.ex. uppsökande verksamhet mot barn/unga utanför föreningslivet, våld-/mobbning-/rasismprojekt, helg- och ferieverksamhet, studieresor med pedagogisk inriktning, lokalrenovering, utrustningsinköp eller internationellt ungdomsutbyte"
+      - "Ansökan får inte användas för ekonomisk vinst för förening eller enskild person"
+      - "Ansökan ska innehålla projektbeskrivning, kostnadsberäkning, finansieringsplan och uppgift om andra bidragskällor/egna insatser"
+      - "Ansökan görs i god tid innan projektet/verksamheten startas"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/kommun-och-politik/stipendier-fonder-och-priser/fonder-och-stiftelser/arbrafonderna/bidrag-till-sarskilda-projekt-och-utvecklingsarbete"
+    anteckning: "Donationsrådet bereder ansökan och lämnar förslag till fondens styrelse för beslut. Ansökan sker via pappersblankett, inte Actor Smartbook. Saknades helt i föregående körning."
+  - id: "bollnas-arbrafonderna-aldre-sjuka-funktionshindrade"
+    namn: "Arbråfonderna — Bidrag och stöd till äldre, sjuka och funktionshindrade"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Ideella föreningar, organisationer och institutioner samt enskilda, verksamma och/eller folkbokförda inom f.d. Arbrå församling, till stöd för äldre, sjuka och personer med funktionsnedsättning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Bidrag ges inte för sådant som kommunen, regionen eller staten redan enligt lag ansvarar för"
+      - "Ansökan ska innehålla tydlig redogörelse för behovet, kostnadsberäkning, finansieringsplan samt uppgift om andra bidragskällor/egna insatser"
+      - "Redovisning av resultat och ekonomisk rapport krävs efter genomförd insats"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/kommun-och-politik/stipendier-fonder-och-priser/fonder-och-stiftelser/arbrafonderna/bidrag-och-stod-till-aldre-sjuka-och-funktionshindrade"
+    anteckning: "Ansökan skickas till Arbrå församlingsexpedition eller Arbrå Donationsråd, Bollnäs kommun. Geografiskt avgränsat till f.d. Arbrå församling. Öppen för både föreningar/institutioner och enskilda — till skillnad från övriga Arbråfonder-poster är målgruppen bredare än bara barn/unga. Saknades helt i föregående körning."
+
+  # --- SPECIALKATEGORI: ENSKILD VÄGHÅLLNING (Teknik-, service- och
+  # fritidsförvaltningen / Tekniska nämnden) — hittad via §2.1 punkt 5,
+  # förekom varken på föreningsbidragssidan eller i Actor Smartbook ---
+  - id: "bollnas-bidrag-enskild-vaghallning"
+    namn: "Bidrag för enskild väghållning"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare för enskilda vägar i Bollnäs kommun: fastighetsägare (via utsett ombud), vägföreningar och vägsamfälligheter, samt väghållare av skogsbilvägar med allmänt intresse för friluftslivet"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Statsbidragsberättigad väg, vägkategori A/B (fast boende): kommunalt bidrag med högst 20 % av statsbidragsgodkänd underhållskostnad"
+      - "Statsbidragsberättigad väg, vägkategori C/D (genomfart/friluftsliv): kommunalt bidrag med högst 10 % av statsbidragsgodkänd underhållskostnad"
+      - "Statsbidragsberättigad väg, vägkategori E/F (fritidsbebyggelse/näringsliv): inget kommunalt bidrag"
+      - "Ej statsbidragsberättigad väg, minst 100 meter till permanent bebodd fastighet: 3,50 kr/meter väg, kräver skriftlig överenskommelse om fördelning och utsett ombud som mottagare"
+      - "Vägbelysningsanläggning i enskild ägo: 160 kr/ljuspunkt och år i årligt drift- och underhållsbidrag"
+      - "Byggande/upprustning av väg eller belysning: kommunalt bidrag 5–20 % av godkänd kostnad beroende på statsbidragsnivå, endast utfartsväg längre än 100 meter"
+      - "Regn- och vindskydd vid busshållplats: 5 000 kr per vindskydd, kräver beviljat bygglov och tillstånd från väghållare"
+      - "Skogsbilväg öppen för allmänheten, ej statsbidragsberättigad: 0,60 kr/meter, kräver fritidskontorets yttrande och skriftlig försäkran om att vägen hållits öppen för allmänheten"
+      - "Väg med kommunalt bidrag får inte avstängas för trafik annat än under tjällossningsperiod"
+    belopp: "Underhåll: högst 20 % (vägkategori A/B) eller 10 % (vägkategori C/D) av statsbidragsgodkänd kostnad; 3,50 kr/meter för ej statsbidragsberättigade vägar; 160 kr/ljuspunkt/år för vägbelysning. Byggande/upprustning: 5–20 % av godkänd kostnad beroende på statsbidragsnivå. Skogsbilväg: 0,60 kr/meter. Vindskydd vid busshållplats: 5 000 kr/st."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://bollnas.se/download/18.5b9d7e311872c3a813f104b3/1680589413938/Bidrag%20f%C3%B6r%20enskild%20v%C3%A4gh%C3%A5llning%20.pdf"
+    anteckning: "Regelverk antaget av Kommunfullmäktige 1994-12-12 § 171, Tekniska nämnden 1996-11-18 § 106 och Tekniska nämnden 2000-09-11 § 6, gäller bidrag utbetalda fr.o.m. 1997 (vindskydd fr.o.m. 2000) — ingen nyare version hittad, men detta är den PDF som länkas från kommunens aktuella sida om gator och vägar (2026). Kombinerar flera delregler (statsbidragsberättigade vägar, ej statsbidragsberättigade vägar, vägbelysning, byggande/upprustning, skogsbilvägar) i EN bidragsform snarare än separata, eftersom regelverket presenteras som ett enda dokument utan egna namngivna delbidrag på kommunens sida — jämför Halmstad där motsvarande vägbidrag var tre separat namngivna poster i ansökningsportalen. 31 mars-deadline gäller specifikt punkt A2 (ej statsbidragsberättigade vägar) och C (skogsbilvägar) — punkt A1 (statsbidragsberättigade vägar) betalas ut automatiskt efter redovisat beslut från Trafikverket/Vägverket, punkt B (byggande/upprustning) har ingen fast deadline utan ska sökas i god tid innan arbetet påbörjas. Bidragsbeloppens storlek fastställs årligen av tekniska nämnden inom ramen för anvisade medel. PDF:en lästes i fulltext, inte sammanfattad av tredje part."
+forutsattningar:
+  - id: "bollnas-bidragsberattigad-forening"
+    vad: "Registrera föreningsadministratör i Bollnäs kommuns Självservice"
+    beskrivning: "Föreningen ska registrera en föreningsadministratör i Bollnäs kommuns Självservice (e-legitimation/BankID krävs) innan bidrag kan sökas digitalt. Registreringen sker i fyra steg: kontaktuppgifter, behörigheter, förhandsgranskning, bekräftelse. Vid själva bidragsansökan krävs därutöver antagna stadgar och protokoll (bildandeprotokoll eller senaste årsmötesprotokoll) som visar att stadgarna antagits samt styrelsens sammansättning och firmatecknare."
+    system: "Actor Smartbook (Bollnäs kommuns Självservice/Föreningsadministratör)"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://minasidor.bollnas.se/foreningsadmin"

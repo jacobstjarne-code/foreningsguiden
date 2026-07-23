@@ -1,0 +1,824 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 — källkonvergens,
+# inte redaktionell sida i isolering). Föregående version (verifierad 2026-07-19)
+# fångade bara 9 bidrag genom att läsa Fritidsnämndens, Kulturnämndens och
+# Socialnämndens bidragssidor ytligt (i praktiken bara ingress/exempel) och genom
+# att MEDVETET välja bort cirka 30 nischade anläggnings-/underhållsbidrag
+# (ishockeyplaner, skoterleder m.m.) som "utanför scope" i en YAML-kommentar —
+# vilket RESEARCH_SPEC_v2.md §2.4 uttryckligen underkänner ("nischat" är inte ett
+# giltigt uteslutningsskäl). Denna omgång läser samtliga fyra nämnders
+# bidragsnormer-sidor i sin helhet, samt Bidragskalendern (den kommunövergripande
+# sammanställningen) som facit för täckning.
+#
+# Metod: (1) Sökte regelverk-PDF — hittade ingen enda antagen "Regler för
+# föreningsbidrag"-PDF som täcker alla nämnder; varje nämnd har i stället en egen
+# bidragsnormer-sida (se nedan), vilka fungerar som regelverk-motsvarighet.
+# EJ_EXTRAHERBAR för ett samlat regelverksdokument. (2) Läste Bidragskalendern
+# (skelleftea.se/foreningsportalen/.../sok-bidrag/bidragskalendern) i sin helhet —
+# denna listar 37 namngivna bidrag med exakta ansökningsperioder och fungerade som
+# den avgörande täckningskällan; den saknades helt i föregående körning. (3) Läste
+# samtliga fyra nämnders bidragsnormer-sidor i sin helhet (Fritidsnämnden 33
+# numrerade bidragsformer, Kulturnämnden 6 bidrag + 3 stipendier, Socialnämnden 2
+# bidrag, Samhällsbyggnadsnämnden 3 bidrag — den sistnämnda nämnden saknades HELT
+# i föregående version). (4) Läste de sex kategorisidorna under "Sök bidrag"
+# (aktiviteter-och-verksamhet, drift-och-skotsel, investeringar-och-renoveringar,
+# utbildningsbidrag, utveckling-och-inkludering, arrangemang-och-produktion) samt
+# den fristående stipendiesidan, som gav kompletterande detaljer och avslöjade
+# källkonflikter (se konflikter.log-sektionen nedan). (5) Sökte riktat efter
+# specialkategorier (§2.1.5): vägföreningar/vägsamfälligheter (kommunalt
+# underhållsbidrag till enskild väg HITTADES och saknades helt tidigare),
+# bygdegårdar/samlingslokaler (fem distinkta bidrag under Fritidsnämnden,
+# saknades tidigare), stiftelser/fonder (sökt brett — Skellefteå kommun förvaltar
+# stiftelser som Lövångers kyrkstad-stiftelse och Skellefteå Träfestival-stiftelse,
+# men dessa är OPERATIVA stiftelser kommunen själv driver verksamhet genom, inte
+# bidragsgivande fonder föreningar kan söka ur; den enda hittade utdelande fonden,
+# Viktor och Celina Nyströms testamente, är uteslutande för privatpersoner inför
+# jul — ingen förenings-sökbar stiftelse hittad, till skillnad från Karlstad/
+# Halmstad), byalag/samhällsföreningar (Lokala utvecklingsinsatser för landsbygd
+# HITTADES, saknades tidigare), studieförbund (Riktat arrangemangsstöd till
+# studieförbund HITTADES, saknades tidigare). Ansökningsportalen Interbook Go
+# (ibgo.skelleftea.se) är, liksom Växjös/Halmstads/Karlstads motsvarigheter,
+# JS-renderad utan synligt innehåll vid fetch — EJ_EXTRAHERBAR, täckning byggd
+# genom sidkonvergens (Bidragskalendern + fyra nämndsidor + sex kategorisidor),
+# inte portalräkning.
+#
+# Uteslutna (kategoriskt/metodiskt skäl, §2.3-§2.4):
+# - "Bygdemedel" (bygdeavgiftsmedel) — administreras och beslutas av Länsstyrelsen
+#   Västerbotten (statlig myndighet), inte av Skellefteå kommun. Bidragskalendern
+#   anger uttryckligen "Ansvarig: Länsstyrelsen" och ansökan sker via
+#   Länsstyrelsens/Tillväxtverkets e-tjänst "Min ansökan", inte Interbook Go.
+#   Kommunens egna sidor som tidigare beskrev bidraget (två olika URL:er
+#   kontrollerade) gav båda 404 vid denna körning. Uteslutet enligt §2.4:
+#   "administreras av annan huvudman än kommunen."
+#   https://www.lansstyrelsen.se/vasterbotten/natur-och-landsbygd/stod-till-jordbruk-och-landsbygd/bygdemedel.html
+# - "Arbetsstipendium" (Kulturnämnden, 50 000 kr/år, två tillfällen) — individuellt
+#   pris till "lovande förmågor (oavsett ålder)" inom en konstform; målgruppen
+#   nämner uteslutande enskild person, ingen förening/organisation som möjlig
+#   mottagare (jämför Kulturstipendium/Ungdomskulturstipendium nedan, som
+#   uttryckligen listar förening/organisation som sökandekategori och därför
+#   INKLUDERADE). Samma uteslutningslogik som Halmstads Kulturstipendium.
+#   https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/stipendier
+# - "Externa bidrag" (ca 20 externa stiftelser/fonder: Allmänna Arvsfonden,
+#   Konung Gustaf V:s 90-årsfond, MUCF m.fl.) — en informationslista över
+#   bidragsgivare som INTE är Skellefteå kommun; kommunen administrerar och
+#   beslutar inte om dessa. Utanför scope enligt §4 ("endast kommunens egen
+#   domän är källa"), inte en MEDVETET_UTESLUTET-post i egentlig mening eftersom
+#   det aldrig var kommunens bidrag.
+#   https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/relaterade-sidor/externa-bidrag
+# - "Viktor och Celina Nyströms testamente" — fond förvaltad av socialnämnden,
+#   men uteslutande för enskilda personer/familjer inför jul, inte föreningar.
+#   https://skelleftea.se/invanare/startsida/omsorg-och-stod/ekonomi-och-forsorjningsstod/ansoka-om-fondmedel
+# - "Ärendehanteringsmodell bidrag" — processdokument för hur kommunen utreder
+#   misstänkta brott mot bidragsregler, inte ett sökbart bidrag.
+#
+# Källkonflikter (§2.5) — ingen av källorna nedan hade synligt revisionsdatum,
+# så samtliga fyra nollställdes med båda värdena i anteckning, i enlighet med
+# regeln "saknar källa datum: nollställ fältet":
+# 1. Extern kommunikation och marknadsföring — Fritidsnämndens bidragsnormer
+#    anger "1 mars-1 juni (2026)"; kategorisidan utveckling-och-inkludering OCH
+#    Bidragskalendern anger båda "2 januari-1 oktober".
+# 2. Riktat arrangemangsstöd till studieförbund — Kulturnämndens bidragsnormer
+#    OCH stipendiesidan anger "1 mars (vår) / 1 oktober (höst)"; Bidragskalendern
+#    anger "15 februari-1 april".
+# 3. Kulturstipendium — Kulturnämndens bidragsnormer anger "senast 1 oktober";
+#    stipendiesidan OCH Bidragskalendern anger båda "1 augusti-1 september".
+# 4. Ungdomskulturstipendium — samma konflikt som (3), samma källor.
+#
+# Varningssignal (§2.6) undersökt: Fritidsnämndens och Kulturnämndens bidrag har
+# båda en generell sen-ansökan-regel (25 procent avdrag vid ansökan upp till två
+# veckor sen, helt avslag därefter) som återkommer på flera bidrag inom samma
+# nämnd. Verifierat som en genuin nämndsgemensam regel angiven i löptexten på
+# båda nämndernas bidragsnormer-sidor (inte ett ärvt/gissat värde), och de två
+# nämnderna har olika ordalydelse — bedöms som en äkta gemensam policy per
+# nämnd, inte en extraktionsbugg.
+#
+# Dubbelhämtat i två oberoende pass (§3). Fyra fältkonflikter identifierade och
+# nollställda (se ovan). Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Skellefteå"
+kommun_slug: "skelleftea"
+lan: "Västerbottens län"
+befolkning: 75405
+forvaltning: "Fritidsnämnden, Kulturnämnden, Socialnämnden och Samhällsbyggnadsnämnden samt Kommunstyrelsen (nationella minoriteter) och Gymnasienämnden (kommunalt lönebidrag)"
+ansokningssystem:
+  namn: "Interbook Go"
+  url: "https://ibgo.skelleftea.se"
+kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/sok-bidrag"
+verifierad: 2026-07-21
+bidrag:
+  # --- FRITIDSNÄMNDEN ---
+  - id: "skelleftea-aktivitetsstod-idrott"
+    namn: "Kommunalt aktivitetsstöd – idrottsföreningar"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar med medlemmar 7–25 år (7–99 år för personer med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15", "09-15"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Aktiviteten ska vara ledarledd av en person som fyllt minst 13 år, ha 3–30 deltagare och pågå minst 45 minuter"
+      - "Fullständig närvarorapportering på personnivå via Riksidrottsförbundets system, signering senast 15 september (period 1) respektive 15 mars (period 2)"
+    belopp: null
+    sen_ansokan: "Vid sen ansökan/signering upp till två veckor: 25 procent reduktion av bidraget. Senare: avslag."
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "Upp till 105 aktivitetstillfällen per unik deltagare/verksamhet/förening och år. Belopp baseras på antal aktiva deltagare."
+  - id: "skelleftea-aktivitetsstod-kultur-ungdom-funktionsratt"
+    namn: "Kommunalt aktivitetsstöd – kultur-, ungdoms- och funktionsnedsättningsföreningar"
+    kategori: ["kultur", "funktionsratt"]
+    malgrupp: "Kultur-, ungdoms- och funktionsnedsättningsföreningar med medlemmar 7–25 år (7–99 år för personer med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15", "08-15"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Aktiviteten ska vara ledarledd av en person som fyllt minst 13 år, ha 3–30 deltagare och pågå minst 45 minuter"
+      - "Fullständig närvarorapportering på personnivå i NVGO, signering senast 15 augusti (period 1) respektive 15 februari (period 2)"
+    belopp: null
+    sen_ansokan: "Vid sen ansökan/signering upp till två veckor: 25 procent reduktion av bidraget. Senare: avslag."
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "Upp till 105 aktivitetstillfällen per unik deltagare/verksamhet/förening och år."
+  - id: "skelleftea-verksamhetsbidrag-funktionsnedsattning"
+    namn: "Verksamhetsbidrag – funktionsnedsättningsföreningar"
+    kategori: ["funktionsratt"]
+    malgrupp: "Funktionsnedsättningsföreningar med minst 30 registrerade medlemmar och minst 30 sammankomster"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst 30 registrerade medlemmar"
+      - "Minst 30 sammankomster under verksamhetsåret"
+    belopp: "10 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Skiljer sig från kommunalt aktivitetsstöd, som är aktivitetsbaserat."
+  - id: "skelleftea-ledsagarservice"
+    namn: "Ledsagarservice"
+    kategori: ["funktionsratt"]
+    malgrupp: "Föreningar som organiserar ledsagare åt personer med bestående funktionsnedsättning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Mottagaren ska ha en bestående funktionsnedsättning som inte beror på normalt åldrande och bo i ordinärt boende"
+      - "Ledsagaren utför uppdraget ideellt"
+    belopp: "150 kronor (1–2 timmar), 300 kronor (2–4 timmar), 425 kronor (över 4 timmar, maxbelopp)"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Kontakt via telefon 0910-73 53 65 eller e-post, inte Interbook."
+  - id: "skelleftea-samlingslokal-arligt-bidrag"
+    namn: "Årligt bidrag till allmänna samlingslokaler"
+    kategori: ["ovrig"]
+    malgrupp: "Allmän samlingslokal godkänd av fritidsnämnden"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-31"]
+    krav:
+      - "Minst 45 nyttjandetillfällen per år"
+      - "Nyttjandetillfälle ska ha minst 3 personer och pågå minst 1 timme"
+    belopp: "Beräknas utifrån kvadratmeter och antal nyttjandetillfällen, enligt fritidsnämndens årliga budget"
+    sen_ansokan: "Vid sen ansökan upp till två veckor: 25 procent reduktion av bidraget. Senare: avslag."
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, bygdegårdar/samlingslokaler)."
+  - id: "skelleftea-samlingslokal-upprustningsbidrag"
+    namn: "Upprustningsbidrag till allmänna samlingslokaler"
+    kategori: ["ovrig"]
+    malgrupp: "Allmän samlingslokal godkänd av fritidsnämnden"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Minst 45 nyttjandetillfällen per år"
+      - "Ansökan ska lämnas innan projektet påbörjas, med foton, kostnadskalkyl, offert och styrelseprotokoll"
+    belopp: "0–50 000 kr: 30 procent. 50 001–100 000 kr: 20 procent. 100 001–200 000 kr: 10 procent. 200 001 kr och uppåt: 5 procent. Max 50 000 kronor per år."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökningsfönster öppnar redan 5 januari."
+  - id: "skelleftea-samlingslokal-boverket-medfinansiering"
+    namn: "Medfinansiering till samlingslokalens ansökan hos Boverket"
+    kategori: ["ovrig"]
+    malgrupp: "Allmän samlingslokal som ansöker om bidrag från Boverket för nybyggnad, ombyggnad, standardhöjande reparation eller tillgänglighetsanpassning"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-15"]
+    krav:
+      - "Kommunal medfinansiering kräver att en parallell ansökan görs hos Boverket"
+    belopp: "Kommunal medfinansiering på 30 procent av det belopp Boverket beviljar"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/sok-bidrag/investeringar-och-renoveringar"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Kontakt fritidskontoret.foreningsarende@skelleftea.se."
+  - id: "skelleftea-fotbollsplaner-drift-investering"
+    namn: "Drift- och investeringsbidrag – fotbollsplaner"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med egna fotbollsplaner"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-04"]
+    krav:
+      - "Anläggningens innehåll, skick, storlek och faciliteter bedöms vid besiktning av kultur- och fritidskontoret"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökan senast vecka 40, utbetalas november."
+  - id: "skelleftea-ishockeyplaner-drift-investering"
+    namn: "Drift- och investeringsbidrag – ishockeyplaner"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med egna ishockeyplaner"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01"]
+    krav:
+      - "Anläggningen bedöms vid besiktning av kultur- och fritidskontoret"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökan senast vecka 5, utbetalas mars."
+  - id: "skelleftea-fast-driftbidrag-specialanlaggningar"
+    namn: "Fast driftbidrag – specialanläggningar"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med tennisbanor, skidbackar med lift, skidstugor, elbelysta motionsspår, golfbanor, skytteanläggningar, ridhus eller andra specialanläggningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01", "10-04"]
+    krav:
+      - "Besiktning av kultur- och fritidskontoret krävs vid förändringar av anläggningen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Två ansökningsomgångar: vinteranläggningar (senast vecka 5) och sommaranläggningar (senast vecka 40). Belopp fastställs individuellt — kontakta kultur- och fritidskontoret."
+  - id: "skelleftea-investeringsbidrag-egen-anlaggning"
+    namn: "Investeringsbidrag till egen föreningsanläggning"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som bygger och driver egen fritidsanläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-01"]
+    krav:
+      - "Betalas inte ut till lösa inventarier"
+    belopp: "Max 50 procent av investeringskostnader (elljusspår upp till 75 procent); 80 procent kan utbetalas i förskott"
+    sen_ansokan: "Ansökningar efter 1 oktober bedöms utifrån särskilda kriterier"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/sok-bidrag/investeringar-och-renoveringar"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-lokalbidrag-idrott-ungdom"
+    namn: "Lokalbidrag – idrotts- och ungdomsföreningar"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med kommunalt aktivitetsstöd, godkända av fritidsnämnden"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-20"]
+    krav:
+      - "Baseras på kostnader för el, olja, vatten, försäkring, hyror, sotning och sophämtning"
+    belopp: "100 kronor per sammankomst, max 75 procent av nettokostnad, max 75 000 kronor per år. Hyra räknas max 1 200 kr/kvm/år."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-lokalbidrag-funktionsnedsattning"
+    namn: "Lokalbidrag – funktionsnedsättningsföreningar"
+    kategori: ["funktionsratt"]
+    malgrupp: "Funktionsnedsättningsföreningar med kommunalt aktivitetsstöd"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Baseras på föregående års kostnader"
+    belopp: "100 kronor per sammankomst, max 75 procent av nettokostnad, max 75 000 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-maskinbidrag-motionsspar"
+    namn: "Maskinbidrag – elbelysta motionsspår"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som sköter elbelysta motionsspår öppna för allmänheten"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Maskinen ska ägas av föreningen"
+      - "Kan sökas vart 5:e år"
+    belopp: "Skoter/ATV max 35 000 kronor. Spårsläde max 35 000 kronor."
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-badplatser"
+    namn: "Bidrag till badplatser"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med badplats godkänd av fritidsnämnden"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-31"]
+    krav:
+      - "Kostnader för sop- och latrinhantering"
+    belopp: "Från 2 500 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökningsperiod 4–31 augusti."
+  - id: "skelleftea-batliv"
+    namn: "Bidrag till båtliv"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar i Båtsamrådet"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Avser investeringar och underhåll av gästbryggor"
+      - "Eget arbete är inte bidragsberättigat"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Fördelning bestäms på möte med fritidsnämndens ordförande."
+  - id: "skelleftea-fiske-investeringsbidrag"
+    namn: "Fiske – investeringsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Förening som förvaltar fiske och upplåter det till allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Avser fiskevårdande, fiskbefrämjande eller serviceåtgärder"
+      - "Ansökan ska göras innan åtgärden påbörjas"
+    belopp: "Max 50 procent av verifierade kostnader"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-fiske-skotselbidrag"
+    namn: "Fiske – skötselbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Förening som förvaltar fiske och upplåter det till allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Utbetalas i juni"
+    belopp: "1 krona per fiskedygn, 400 kr per km led, 300 kr per vindskydd/fågeltorn, 400 kr per dass, 50 kr per hyrbåt"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-fiske-utbildningsbidrag"
+    namn: "Fiske – utbildningsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Förening som förvaltar fiske och upplåter det till allmänheten"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Avser kostnader som uppmuntrar utveckling inom fiskevården"
+      - "Ansökan ska göras i god tid före utbildningen"
+    belopp: "Max 50 procent av verifierade kostnader"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ingick tidigare felaktigt hopslaget i en enda 'Utbildningsbidrag'-post."
+  - id: "skelleftea-friluftsliv-investeringsbidrag"
+    namn: "Friluftsliv – investeringsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som stimulerar friluftsliv och folkhälsa, t.ex. badplats- och besöksmålsföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska göras innan åtgärden påbörjas"
+      - "Markägarens skriftliga tillstånd krävs"
+    belopp: "Max 100 procent av verifierade kostnader"
+    sen_ansokan: "Löpande hela året, senast 31 december"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-friluftsliv-skotselbidrag"
+    namn: "Friluftsliv – skötselbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som ansvarar för av fritidsnämnden godkända besöksmål inom friluftsliv"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Utbetalas i november"
+    belopp: "400 kr per km röjd led, 300 kr per vindskydd/fågeltorn, 400 kr per dass, 50 kr per hyrbåt"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökningsperiod 1 augusti–31 oktober."
+  - id: "skelleftea-friluftsliv-utbildningsbidrag"
+    namn: "Friluftsliv – utbildningsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som ansvarar för skoterleder, vandringsleder, badplatser eller besöksmål"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Avser utbildningar, kurser och litteratur för kompetensutveckling"
+      - "Ansökan ska göras innan utbildningen startar"
+    belopp: "Max 100 procent av kostnaden, max 8 000 kronor per år och förening"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ingick tidigare felaktigt hopslaget i en enda 'Utbildningsbidrag'-post."
+  - id: "skelleftea-skoterleder"
+    namn: "Skoterleder"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar anslutna till Skoteralliansen"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Avser kostnader för drift av skoterleder"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION (tidigare medvetet uteslutet som 'utanför scope' — underkänt av RESEARCH_SPEC_v2.md §2.4). Fördelning bestäms på möte med fritidsnämndens ordförande, utbetalas mars."
+  - id: "skelleftea-inkluderingsbidrag-asyl-nyanlanda"
+    namn: "Inkluderingsbidrag för asylsökande och nyanlända"
+    kategori: ["social"]
+    malgrupp: "Föreningar med barn- och ungdomsaktiviteter"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Ska bidra till långsiktig inkludering"
+      - "Gäller inte deltagare som redan har uppehållstillstånd"
+    belopp: "Max 2 000 kronor per individ, max 10 000 kronor totalt per förening"
+    sen_ansokan: "Ansökan löpande under året, senast 31 oktober"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-nya-verksamhetsformer"
+    namn: "Nya verksamhetsformer"
+    kategori: ["idrott", "funktionsratt", "ovrig"]
+    malgrupp: "Idrotts-, ungdoms- och funktionsnedsättningsföreningar utanför Skelleftedalen"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Avser inköp av utrustning och material"
+      - "Verksamheten ska skilja sig från föreningens ordinarie verksamhet"
+    belopp: "Max 10 000 kronor"
+    sen_ansokan: "Ansökan löpande under året, senast 31 oktober"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-extern-kommunikation-marknadsforing"
+    namn: "Extern kommunikation och marknadsföring"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som uppfyller grundkraven för bidragsberättigande och är verksamma inom fritidsnämndens område"
+    deadlines:
+      typ: "fasta"
+      datum: []
+    krav:
+      - "Kommunikationen ska bidra till ökad tillgänglighet, t.ex. genom fler språk eller visning av mångfald i bild och text"
+    belopp: "50 procent av kostnaderna, max 5 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "KÄLLKONFLIKT (§2.5), nollställd: Fritidsnämndens bidragsnormer-sida anger ansökningsperiod '1 mars-1 juni (2026)'; kategorisidan utveckling-och-inkludering och Bidragskalendern anger båda '2 januari-1 oktober'. Ingen av sidorna hade synligt revisionsdatum. Loggat i konflikter.log. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "skelleftea-utbildningsbidrag-idrott"
+    namn: "Utbildningsbidrag – idrottsföreningar"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar, för deltagare som fyllt 13 år vid utbildningstillfället"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Externa utbildningar godkända av eller anordnade genom distriktsförbund, riksförbund eller specialförbund"
+      - "Redovisning senast 5 januari året efter"
+    belopp: "Max 15 000 kronor per år"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION i denna granularitet — tidigare hopslaget med ungdoms- och funktionsnedsättningsföreningars utbildningsbidrag i en enda post med ett kombinerat beloppsspann. Delat upp vid korrigerande omkörning 2026-07-21 eftersom källan beskriver dem som separata bidragsformer med olika maxbelopp."
+  - id: "skelleftea-utbildningsbidrag-ungdom"
+    namn: "Utbildningsbidrag – ungdomsföreningar"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Ungdomsföreningar, för deltagare som fyllt 13 år vid utbildningstillfället"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Externa utbildningar godkända av eller anordnade genom distrikts-/riksorganisation"
+      - "Redovisning senast 5 januari året efter"
+    belopp: "Max 27 000 kronor per år. Föreläsning max 200 kr/deltagare, kurs 4–8 timmar max 400 kr/deltagare, kurs över 8 timmar max 800 kr/deltagare."
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SPLIT 2026-07-21 — se anteckning på skelleftea-utbildningsbidrag-idrott."
+  - id: "skelleftea-utbildningsbidrag-funktionsnedsattning"
+    namn: "Utbildningsbidrag – funktionsnedsättningsföreningar"
+    kategori: ["funktionsratt"]
+    malgrupp: "Funktionsnedsättningsföreningar, för deltagare som fyllt 13 år vid utbildningstillfället"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Interna utbildningar 4–8 timmar max 400 kr/deltagare"
+      - "Redovisning senast 5 januari året efter"
+    belopp: "Max 27 000 kronor per år. Föreläsning max 200 kr/deltagare."
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SPLIT 2026-07-21 — se anteckning på skelleftea-utbildningsbidrag-idrott."
+  - id: "skelleftea-arrangemangsstod-rikskaraktar"
+    namn: "Bidrag till arrangemang av rikskaraktär eller turismnytta"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som planerar evenemang av rikskaraktär eller med turismnytta i Skellefteå"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Varje evenemang värderas utifrån medialt intresse, publikt intresse och evenemangsturism"
+      - "Kontakta kontoret redan i idéstadiet"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-idrottsstipendium"
+    namn: "Idrottsstipendium"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar och enskilda personer verksamma i Skellefteå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Kandidaten ska vara verksam i en av Riksidrottsförbundets godkända idrotter och vara minst 15 år"
+    belopp: "15 000 kronor"
+    sen_ansokan: "Nomineringar senast 15 oktober"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. INKLUDERAD trots stipendieform eftersom målgruppen uttryckligen omfattar föreningar, inte bara enskilda (jämför uteslutna Arbetsstipendium ovan). Utdelas i december."
+  - id: "skelleftea-ledarstipendium"
+    namn: "Ledarstipendium"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar och enskilda personer; ledare verksam i förening registrerad i Skellefteå kommuns föreningsregister"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Ledaren ska vara verksam i förening registrerad i kommunens föreningsregister"
+    belopp: "15 000 kronor"
+    sen_ansokan: "Nomineringar senast 15 oktober"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Namnvariant (ej blockerande källkonflikt): den fristående stipendiesidan kallar samma stipendium 'Ungdomsledarstipendium' med ansökningsperiod 2 januari–15 oktober; samma belopp (15 000 kr) och liknande krav. Bedöms vara samma stipendium under två namnvarianter. Utdelas i december."
+
+  # --- KULTURNÄMNDEN ---
+  - id: "skelleftea-startbidrag-kultur"
+    namn: "Startbidrag för nybildad kulturförening"
+    kategori: ["kultur"]
+    malgrupp: "Nystartad kulturförening verksam i Skellefteå kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara en nybildad kulturförening"
+      - "Registrerad i kommunens föreningsregister, ideell, demokratiskt uppbyggd med stadgar och bokföring"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "Beslutas löpande av kulturnämnden och/eller delegerad person."
+  - id: "skelleftea-arligt-verksamhetsbidrag"
+    namn: "Årligt verksamhetsbidrag (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Arrangerande/producerande kulturföreningar och kulturarvsföreningar med kontinuerlig verksamhet i Skellefteå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-30"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Föreningen ska årligen uppdatera kontaktuppgifter i Interbook Go och lämna helårsplan för verksamheten"
+    belopp: null
+    sen_ansokan: "Vid sen ansökan upp till två veckor: 25 procent reduktion av bidraget. Senare: avslag."
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "Beslutas av kulturnämnden i samband med budget. Täcker t.ex. artistarvoden, resekostnader, ljud/ljus, lokalhyra och marknadsföring — inte stödgalor, interna möten, administration eller skötsel av byggnader."
+  - id: "skelleftea-enstaka-arrangemang"
+    namn: "Bidrag till enstaka arrangemang"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar, organisationer, grupper och enskilda som arrangerar offentliga kulturarrangemang i Skellefteå kommun (gäller ej kommunal förvaltning, studieförbund, religiös/politisk organisation eller aktiebolag)"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-10", "03-10", "05-10", "08-10", "09-10", "11-10"]
+    krav:
+      - "Ansökan ska lämnas in innan arrangemanget genomförs"
+      - "Fullständig budget krävs; kan avse bidrag eller förlustbidrag om intäkter finns"
+      - "Täcker inte stödgalor, intern föreningsverksamhet, utbildning/forskning, litteratur/tidningar/CD/film, radio/TV eller konstnärsmaterial"
+    belopp: null
+    sen_ansokan: "Vid sen ansökan upp till två veckor: 25 procent reduktion av bidraget. Senare: avslag."
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SPLIT 2026-07-21 från tidigare sammanslaget 'enstaka arrangemang/produktion' till två separata bidrag (skelleftea-enstaka-arrangemang och skelleftea-enstaka-produktion), eftersom källan beskriver dem som skilda stödformer med olika krav (produktion har sexmånaders genomförandekrav, andra konstformer, andra undantag från vad som täcks) trots delade ansökningsperioder. Beslut under ett prisbasbelopp fattas av tjänsteperson, över prisbasbelopp av kulturnämnden (ca 8 veckors beredningstid)."
+  - id: "skelleftea-enstaka-produktion"
+    namn: "Bidrag till enstaka produktion"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar, organisationer, grupper och enskilda inom litteratur, musik, konst, teater, dans, film, fotokonst eller konsthantverk (gäller ej kommunal förvaltning, studieförbund, religiös/politisk organisation eller aktiebolag)"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-10", "03-10", "05-10", "08-10", "09-10", "11-10"]
+    krav:
+      - "Produktionen ska genomföras inom sex månader från beviljande, med offentlig publik"
+      - "Redovisning inom tre månader efter genomförande"
+      - "Täcker inte träningstid, stödgalor, utbildning/forskning, redan finansierad produktion eller produktion som tidigare fått stöd från kulturnämnden"
+    belopp: null
+    sen_ansokan: "Vid sen ansökan upp till två veckor: 25 procent reduktion av bidraget. Senare: avslag."
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SPLIT 2026-07-21 — se anteckning på skelleftea-enstaka-arrangemang."
+  - id: "skelleftea-utvecklingsbidrag-kultur"
+    namn: "Utvecklingsbidrag (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar verksamma i Skellefteå kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska pröva något nytt (produktion, nytänkande, samarbete) i linje med kulturnämndens målsättning"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Beslutstid cirka 8 veckor före kulturnämndens sammanträde."
+  - id: "skelleftea-ovriga-bidrag-kulturnamnden"
+    namn: "Övriga bidrag – kulturnämndens till förfogande"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar, organisationer, grupper och enskilda (gäller ej kommunal förvaltning, bolag, studieförbund, religiös/politisk organisation)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Satsningar av vikt för kommunens kulturliv som inte passar övriga stödformer"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21."
+  - id: "skelleftea-kulturstipendium"
+    namn: "Kulturstipendium"
+    kategori: ["kultur"]
+    malgrupp: "Enskild person, grupp, förening eller organisation verksam i Skellefteå kommun (kan nomineras)"
+    deadlines:
+      typ: "fasta"
+      datum: []
+    krav:
+      - "Genomförda kulturella insatser av betydelse, kopplade till lokal kulturplan"
+      - "Verksamheten ska vara tillgänglig för alla"
+      - "Sökande/nominerad ska vara född, bosatt eller ha koppling till Skellefteå"
+    belopp: "35 000 kronor inklusive diplom"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. INKLUDERAD trots stipendieform eftersom målgruppen uttryckligen omfattar förening/organisation. KÄLLKONFLIKT (§2.5), nollställd: Kulturnämndens bidragsnormer-sida anger 'senast 1 oktober'; den fristående stipendiesidan och Bidragskalendern anger båda '1 augusti–1 september'. Ingen sida hade synligt revisionsdatum. Loggat i konflikter.log. Utdelas i december."
+  - id: "skelleftea-ungdomskulturstipendium"
+    namn: "Ungdomskulturstipendium"
+    kategori: ["kultur"]
+    malgrupp: "Enskild person, grupp, förening eller organisation verksam i Skellefteå kommun med deltagare under 26 år (kan nomineras)"
+    deadlines:
+      typ: "fasta"
+      datum: []
+    krav:
+      - "Genomförda kulturella insatser av betydelse, kopplade till lokal kulturplan"
+      - "Verksamheten ska vara tillgänglig för alla; deltagarna ska vara under 26 år"
+    belopp: "35 000 kronor inklusive diplom"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Samma källkonflikt som skelleftea-kulturstipendium: nollställd mellan '1 oktober' (bidragsnormer) och '1 augusti–1 september' (stipendiesidan/Bidragskalendern). Loggat i konflikter.log. Utdelas i december."
+  - id: "skelleftea-studieforbund-riktat-arrangemangsstod"
+    namn: "Riktat arrangemangsstöd till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund verksamma i Skellefteå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: []
+    krav:
+      - "Arrangemanget ska ha tydlig koppling till årets fokusområde (2026: Society Expo)"
+      - "Jurybedömning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/kulturnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, studieförbund). KÄLLKONFLIKT (§2.5), nollställd: Kulturnämndens bidragsnormer och stipendiesidan anger båda '1 mars (vår) / 1 oktober (höst)'; Bidragskalendern anger '15 februari–1 april'. Ingen sida hade synligt revisionsdatum. Loggat i konflikter.log."
+
+  # --- SOCIALNÄMNDEN ---
+  - id: "skelleftea-socialnamndens-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag till föreningar inom socialnämndens ansvarsområde"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Föreningar och frivilliga organisationer som arbetar med integration och/eller riktar sig till målgrupper inom socialnämndens ansvarsområde, t.ex. seniorer/pensionärer och personer med funktionsvariationer"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01"]
+    krav:
+      - "Demokratisk styrning med vald styrelse och antagna stadgar"
+      - "Föreningen ska ha varit aktiv i minst ett år innan ansökan"
+      - "Organisationsnummer och bankkonto krävs"
+      - "Ansökan ska innehålla verksamhetsplan, budget, föregående års verksamhetsberättelse samt ekonomisk redovisning och revisionsberättelse"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/invanare/startsida/uppleva-och-gora/forenings--och-kulturstod/sok-bidrag-stod-och-stipendier/bidragsnormer/socialnamndens-bidragsformer"
+    anteckning: "Ansvarig nämnd: Socialnämnden. GRANULARITETSAVVIKELSE (ej blockerande): Bidragskalendern listar 'Integrationsförening årsbidrag' (deadline 1 mars) och 'Social förening årsbidrag' (deadline 31 mars) som egna kalenderrader utöver detta 'Aktivitetsbidrag', men socialnämndens egen bidragsnormer-sida (den mer detaljerade regelverkskällan) beskriver bara EN sammanhållen bidragsform med samma krav för samtliga målgrupper (integration, seniorer, funktionsvariationer). Ingen särskiljande krav-/beloppsdetalj hittades för att motivera en påhittad uppdelning — loggat som SKRIVET_EJ_I_REGELVERK i tackning.log snarare än gissat isär."
+  - id: "skelleftea-uppdragsersattning-oppna-motesplatser"
+    namn: "Uppdragsersättning för öppna mötesplatser på dagtid"
+    kategori: ["social", "pensionar"]
+    malgrupp: "Föreningar, frivilliga organisationer, studieförbund och trossamfund som vill starta eller fortsätta driva en öppen mötesplats på dagtid"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01"]
+    krav:
+      - "Verksamheten ska vara demokratisk, öppen och icke-diskriminerande"
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Ingen medlemsavgift eller inträdeskrav får ställas på besökare"
+      - "Ersättningen får endast användas till lokalhyra för mötesplatsen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/invanare/startsida/uppleva-och-gora/forenings--och-kulturstod/sok-bidrag-stod-och-stipendier/bidragsnormer/socialnamndens-bidragsformer"
+    anteckning: "Ansvarig nämnd: Socialnämnden. Utbetalning sker efter nämndens majsammanträde. Ingen medsökande får erhålla lokalbidrag från annan kommunal avdelning för samma mötesplats."
+
+  # --- SAMHÄLLSBYGGNADSNÄMNDEN (hela nämnden saknades i föregående version) ---
+  - id: "skelleftea-lekplats-anlaggning-renovering"
+    namn: "Bidrag till anläggning av eller renovering av lekplats"
+    kategori: ["ovrig"]
+    malgrupp: "Lekplatsförening, annan ideell förening eller organisation med organisationsnummer och bankkonto"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Markdispositionsintyg, planskiss, placeringsplan och karta ska bifogas"
+      - "Kostnadsberäkning ska bifogas; endast materialkostnad och fast lekutrustning ersätts"
+      - "Marken ska disponeras i minst fem år"
+      - "Ny- eller ombyggnad får inte påbörjas innan beslut om bidrag finns"
+    belopp: "25 000 kronor (engångsbelopp)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/samhallsbyggnadsnamndens-bidragsnormer"
+    anteckning: "HELA NÄMNDEN SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökningsperiod 5 januari–30 april. Utbetalas efter godkännande från Park och Natur-avdelningen, före årsskiftet."
+  - id: "skelleftea-lekplats-drift"
+    namn: "Bidrag för drift av lekplats"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med lekplats utanför detaljplanerat område utan allmän platsmark, med organisationsnummer och bankkonto"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Täcker förbättringsmålning, jordfräshyra, maskinunderhåll och mindre renoveringar"
+      - "Kostnaderna behöver inte redovisas, men stickprovskontroller görs"
+    belopp: "2 500 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/samhallsbyggnadsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökningsperiod 5 januari–30 april. Utbetalas före 1 juli."
+  - id: "skelleftea-tradgard-biodlarforening"
+    namn: "Bidrag till trädgårdsförening eller biodlarförening"
+    kategori: ["ovrig"]
+    malgrupp: "Trädgårdsföreningar och biodlarföreningar med organisationsnummer och bankkonto"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Trädgårdsföreningars andel baseras på medlemsantal"
+    belopp: "Biodlarförening: 8 500 kronor. Trädgårdsförening: fördelning av totalt 60 000 kronor årligen baserad på medlemsantal."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/samhallsbyggnadsnamndens-bidragsnormer"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION (tidigare medvetet uteslutet som 'utanför scope' — underkänt av RESEARCH_SPEC_v2.md §2.4). Ansökningsperiod 5 januari–30 april. Utbetalas före 1 juli."
+
+  # --- SPECIALKATEGORIER (§2.1.5) ---
+  - id: "skelleftea-underhallsbidrag-enskild-vag"
+    namn: "Underhållsbidrag till enskild väg"
+    kategori: ["ovrig"]
+    malgrupp: "Väg- och plogföreningar samt enskilda fastighetsägare för enskild utfartsväg som inte är statsbidragsberättigad"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska vara kortare än 1 000 meter, mätt från bostad till närmaste bidragsberättigade väg"
+      - "Ges inte till vägar inom detaljplanelagt område eller vägar med enbart fritidsboende"
+      - "För vägar över 1 000 meter krävs först ett avslag på statsbidrag från Trafikverket"
+    belopp: "6 kronor per meter (1–2 fastigheter), 4 kronor per meter (3–5 fastigheter), 2 kronor per meter (6–13 fastigheter)"
+    sen_ansokan: "Ej angivet i källan; handläggningstid cirka tre månader"
+    kalla_url: "https://skelleftea.se/invanare/startsida/trafik-och-samhallsutveckling/gator/enskilda-vagar/ansvar-statsbidrag-och-ansokningar-for-enskilda-vagar"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, vägföreningar/vägsamfälligheter). Kommunalt komplement till statens vägbidrag för korta utfartsvägar som inte är statsbidragsberättigade. Utbetalas som engångsbelopp i december. En separat PDF ('Regler och anvisningar för underhållsbidrag') existerar men kunde inte textextraheras vid denna körning — EJ_EXTRAHERBAR för PDF-detaljer, ovanstående är hämtat från kommunens egen redaktionella sida om ansvaret för enskilda vägar."
+  - id: "skelleftea-nationella-minoriteter"
+    namn: "Bidrag till föreningar som representerar nationella minoriteter"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar i Skellefteå kommun som representerar de nationella minoriteterna sverigefinnar, tornedalingar, romer, samer och judar"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-15"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister med årligen uppdaterade kontaktuppgifter"
+      - "Ansökan ska innehålla stadgar, signerat och justerat årsmötesprotokoll, kopia på firmatecknares legitimation, verksamhetsplan och budget för innevarande år samt verksamhetsberättelse och ekonomisk redovisning för föregående år"
+      - "Enskilda personer och företag kan inte söka; nationella eller regionala riksorganisationer får inget kommunalt bidrag"
+    belopp: "Totalt 250 000 kronor per år att fördela; om budgeten överskrids ska ärendet prövas av kommunfullmäktige"
+    sen_ansokan: "Ofullständiga ansökningar behandlas inte"
+    kalla_url: "https://skelleftea.se/download/18.7322e3e518df2895e1a6a6c/1760095942063/Riktlinjer%20f%C3%B6r%20bidrag%20till%20f%C3%B6reningar%20som%20representerar%20nationella%20minoriteter.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Beslutas av kommunstyrelsen/kommunledningskontoret, INTE av fritids- eller kulturnämnden — avviker administrativt från övriga bidrag i denna fil. Ansökan via ibgo.skelleftea.se."
+  - id: "skelleftea-lokala-utvecklingsinsatser-landsbygd"
+    namn: "Lokala utvecklingsinsatser för landsbygd"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar, organisationer och företag (inklusive byalag och samhällsföreningar) med projekt till nytta för Skellefteås landsbygder utanför Skelleftedalen"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31", "10-31"]
+    krav:
+      - "Insatserna ska gynna bygden, vara framåtsyftande och skapa utveckling i linje med kommunens utvecklingsstrategi 2030"
+      - "Stöd ges till projekt/investeringar, inte till löpande drift eller underhåll"
+      - "Ansökningar riktade till enskilda personer eller företag beviljas inte"
+    belopp: "Mindre projekt upp till 200 000 kronor per år, större belopp möjligt efter prövning. Byaplan-stöd: 5 000 kronor. Upp till 80 procent kan betalas i förskott."
+    sen_ansokan: "Projekt under 30 000 kronor kan sökas löpande under året"
+    kalla_url: "https://skelleftea.se/invanare/startsida/uppleva-och-gora/forenings--och-kulturstod/sok-bidrag-stod-och-stipendier/lokala-utvecklingsinsatser"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, byalag/samhällsföreningar). Handläggningstid upp till 7 dagar för belopp under 30 000 kr, cirka 4 veckor för belopp upp till 200 000 kr, upp till 8 veckor för större belopp."
+  - id: "skelleftea-kommunalt-lonebidrag"
+    namn: "Kommunalt lönebidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar och frivilligorganisationer i Skellefteå kommun med anställda som har lönebidrag från Arbetsförmedlingen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Anställningsavtal och kopia av Arbetsförmedlingens lönebidragsbeslut ska bifogas ansökan"
+      - "Den anställda ska vara folkbokförd i Skellefteå kommun"
+      - "Underlag för Arbetsförmedlingens utbetalningar krävs för utbetalning"
+      - "Bidrag betalas inte ut för obetald frånvaro (t.ex. sjukdom efter dag 15)"
+    belopp: "7 696 kronor per kvartal för heltidsanställd (2026), motsvarande 52 procent av föregående års prisbasbelopp. Reduceras proportionerligt vid deltid."
+    sen_ansokan: "Bidrag beviljas från och med den månad ansökan kommit in; kan avse närmast föregående kvartal"
+    kalla_url: "https://skelleftea.se/invanare/startsida/jobb-och-foretagande/arbetsmarknadsinsatser/kommunalt-lonebidrag"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansvarig nämnd: Gymnasienämnden — avviker administrativt från fritids-/kultur-/socialnämnden som administrerar övriga bidrag i denna fil. Betalas ut kvartalsvis: 1 april–22 juni (Q1), 1 juli–31 september (Q2), 1 oktober–31 december (Q3), 2 januari–31 mars (Q4)."
+forutsattningar:
+  - id: "skelleftea-bidragsberattigad-forening"
+    vad: "Bli godkänd som bidragsberättigad förening"
+    beskrivning: "Föreningen ansöker om att registreras i kommunens föreningsregister och bli bidragsberättigad. Kräver att föreningen bedrivs under demokratiska former, är ideellt uppbyggd, motverkar diskriminering och följer barnkonventionen, har valt styrelse, antagit stadgar och bokför sin ekonomi, har organisationsnummer samt postgiro, bankgiro eller bankkonto, samt tillhör distrikt- eller riksorganisation när sådan krävs. Föreningen ska ha sitt säte i Skellefteå kommun. Föreningen ska årligen uppdatera styrelseuppgifter i Interbook Go, lämna in senaste årshandlingar och ladda upp stadgar. Om vuxna i föreningen har kontakt med barn ska föreningen ha begärt ut begränsat utdrag ur belastningsregistret."
+    system: "Interbook Go"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://skelleftea.se/foreningsportalen/foreningsportalen/ekonomi-och-bidrag/bidragsnormer/fritidsnamndens-bidragsnormer"

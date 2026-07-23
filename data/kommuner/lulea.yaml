@@ -1,0 +1,498 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19, 21 bidrag) var redan ett av de mer grundliga v1-resultaten —
+# samtliga elva undersidor under "Stöd och bidrag i Luleå kommun" hade
+# lästs och dubbelhämtats. Denna körning läste om samtliga elva sidor RÅTT
+# (rå HTML-textextraktion via python/BeautifulSoup, inte bara AI-
+# sammanfattning via WebFetch) för att undvika att flera bidrag under
+# samma URL missas (mönstret som gav Karlstad 6→27, Skellefteå 9→50,
+# Karlskrona 6→26). Samtliga elva sidor bekräftades innehålla exakt de
+# bidrag som redan fanns i filen — INGA bidrag missades på de redan kända
+# sidorna. De 21 ursprungliga bidragen kvarstår oförändrade i sak (två
+# mindre detaljkompletteringar, se nedan).
+#
+# NYTT (v2.1 §2.1.5, specialkategorier): sökning utanför kultur- och
+# fritidsförvaltningens sidträd gav ETT nytt bidrag och bekräftade att
+# tre andra specialkategorier saknas av kategoriska skäl (ej av misstag):
+#
+# TILLAGT:
+# - Utfartsbidrag enskilda vägar (specialkategori väg/samfällighet).
+#   Administreras av en HELT ANNAN förvaltning (gator och trafik, kontakt
+#   Annica Brännmark) än kultur- och fritid, under /boende--gator/ i
+#   kommunens sidträd — helt utanför "Stöd och bidrag i Luleå kommun"-
+#   trädet och därför osynligt för en sökning som bara följer den
+#   redaktionella bidragssidan. Öppet för både privatpersoner OCH
+#   vägföreningar/vägsamfälligheter (bildade via Lantmäteriförrättning) —
+#   skrivs in eftersom gemensamhetsanläggningar är en förening i
+#   RESEARCH_SPEC:s mening. Bestämmelserna är antagna av kommunfullmäktige
+#   (gäller "för 2015 och framåt"), inbäddade direkt på sidan snarare än
+#   som separat PDF.
+# - Sommarskola. Fanns även i föregående körning men UTESLÖTS då ("för
+#   tunt för att skriva in utan att gissa"). v2.1 väger om detta: sidan
+#   listar bidraget explicit under rubriken "Dessa fritidsbidrag finns att
+#   söka" med eget namn och egen ansökningsperiod (1 mars–1 april) — det är
+#   inte avsaknad av bidrag, det är avsaknad av DETALJER om ett bekräftat
+#   bidrag. Saknat bidrag är värre än tomt fält (§1): bidraget skrivs nu
+#   in med de fält som går att fylla ärligt (malgrupp/krav/belopp satta
+#   till "ej specificerat" snarare än gissade) i stället för att uteslutas.
+#
+# UNDERSÖKT OCH MEDVETET UTESLUTET (§2.4, kategoriska skäl):
+# - Nio stiftelser som Luleå kommun är kopplad till (Stiftelsen Barnens
+#   väl, Luleå Sociala Samfond, Luleå Studentlokaler, Norrbottensteatern,
+#   Samfond för allmän undervisning på gymnasienivå, Teknikens Hus,
+#   Sunderby Folkhögskola, Bolivar Sundströms minne, Ulanderska fonden) —
+#   https://www.lulea.se/kommun--politik/organisation/lulea-kommuns-bolag-och-stiftelser.html.
+#   De två som gick att verifiera i detalj (Bolivar Sundströms minne:
+#   hjälp åt änkor/döttrar efter köpmän/hantverkare samt gamla orkeslösa
+#   personer; Ulanderska fonden: stipendium till enskilda gymnasieelever
+#   som läser till lärare) är individstöd till PRIVATPERSONER, inte
+#   föreningsbidrag. Övriga sju är antingen drifts-/förvaltningsstiftelser
+#   (Teknikens Hus, Norrbottensteatern, Sunderby Folkhögskola, Luleå
+#   Studentlokaler — stiftelsen driver verksamheten själv, delar inte ut
+#   bidrag till andra) eller gick inte att verifiera som öppna för
+#   föreningar trots sökning. Till skillnad från Karlstad/Växjö saknar
+#   Luleå en stiftelse öppen för föreningar som sökande (§2.7 — utelämning
+#   loggad).
+# - Studieförbund. En "Fördelningsmodell gällande studieförbund i Luleå
+#   kommun" finns (fastställd 2016-12-15, styrande dokument) men är en
+#   FÖRDELNINGSFORMEL mellan studieförbundens samverkansorgan för en
+#   kommunal pott — inte en bidragsform en enskild lokalavdelning/förening
+#   ansöker om via Rbok. Ingen aktiv, sökbar bidragssida för studieförbund
+#   hittades (samma slutsats som Karlskronas omkörning 2026-07-21).
+# - Sponsring (idrotts-/evenemangssponsring). "Riktlinjer för sponsring"
+#   (fastställd av kommundirektören 2017-09-01) beskriver ett
+#   FALL-TILL-FALL-BESLUT där kommunen själv initierar/väljer motpart
+#   ("Idrottssponsring... Avtalsnivån avgörs av värdet på avtalade
+#   marknadsytor") — inget öppet ansökningsförfarande med kriterier lika
+#   för alla föreningar, ingen deadline, ingen ansökningsblankett.
+#   Strukturellt inte ett föreningsbidrag (skiljer sig från t.ex.
+#   Karlskronas nya "Riktlinjer för elitidrottsstöd" 2025, som uttryckligen
+#   ERSATTE sponsringsmedel med ett formaliserat, sökbart stöd — Luleås
+#   sponsring har inte genomgått en sådan formalisering och förblir
+#   diskretionär).
+# - "Bidrag vid fritidsstudier" och "Hemsändningsbidrag" (båda styrande
+#   dokument) är INTE föreningsbidrag: förstnämnda är en
+#   personalförmån till kommunens egna anställda, sistnämnda riktar sig
+#   uttryckligen till livsmedelsbutiker/aktörer ("Bidraget riktar sig till
+#   livsmedelsbutiken eller aktören som utför tjänsten, inte till det
+#   enskilda hushållet") — företagsstöd, inte föreningsstöd.
+# - "Projektinriktat stöd för landsbygdsutveckling" (riktlinje fastställd
+#   2017-03-30 av Landsbygdskommittén) är INTE ett fristående bidrag utan
+#   den historiska regelverkskällan för det som idag publiceras som
+#   "Landsbygdsstöd" på bidrag-till-landsbygden.html — samma fem
+#   utvecklingsområden återges ordagrant i båda källorna. Används här som
+#   stödjande källa till lulea-landsbygdsstod, inte som eget bidrag.
+#
+# EJ_EXTRAHERBAR: Rbok (lulea.rbok.se) är JS-renderad (React-app,
+# kroppstext ca 1500 tecken vid rå hämtning, inga bidragsnamn extraherbara
+# via fetch). Täckning byggd genom sidkonvergens (elva redaktionella
+# undersidor + specialkategorisökning), inte portaluppräkning, i enlighet
+# med v2.1.
+#
+# Regelverk (§2.1 steg 1): Luleå kommun saknar — till skillnad från
+# Karlskrona/Växjö/Halmstad — en enda konsoliderad "Riktlinjer för
+# föreningsbidrag"-PDF antagen av nämnd/fullmäktige. I stället fungerar
+# själva huvudsidan "Stöd och bidrag i Luleå kommun" som regelverk: den
+# innehåller "Luleå kommuns grundläggande riktlinjer för föreningsstöd" i
+# fulltext (demokratikriterier, medlemskrav, styrelsekrav) som gäller för
+# ALLA bidragsformer, och varje enskild bidragssida innehåller sina egna
+# fastställda kriterier/belopp direkt inbäddade (bygdemedel-sidan har t ex
+# en fullständig niopunkts-riktlinje inbäddad). Sökningar efter en separat
+# PDF (insynsverige.se, site:lulea.se filetype:pdf) gav inga träffar utöver
+# denna sidstruktur och ett par ej relaterade styrande dokument (se ovan).
+# Detta är dokumenterat som strukturell skillnad, inte en lucka.
+#
+# Detaljkompletteringar (samma bidrag, mer exakt text, INTE nya bidrag):
+# - Driftsbidrag anläggningar: beloppsfältet utökat med samtliga rader ur
+#   kommunens tabell (bl a isrink med/utan sarg vid/utan seriespel,
+#   skidspår utan belysning) som föregående körnings sammanfattning hade
+#   förenklat bort.
+# - Ansökningsperiodernas startdatum (inte bara stoppdatum) tillagda i
+#   anteckning för verksamhetsbidrag fritid (15 aug), driftsbidrag
+#   anläggningar (1 mar), landsbygdsstöd (1 mar) och stora evenemangs-
+#   stödet (1 feb / 1 aug) — fanns redan rätt som stoppdatum i
+#   deadlines.datum, men startdatumet saknades i anteckning.
+#
+# Befolkning: 80 304 — Luleå kommuns egen statistiksida anger detta som
+# senaste kvartalssiffra (2025-12-31, "senaste"), ingen nyare kommunalt
+# publicerad kvartalssiffra hittades (en sökmotorsammanfattning påstod
+# 80 455 per 2026-03-31 men källhänvisningen den byggde på visade sig vid
+# kontroll gälla 79 650 per 2025-03-31 — sammanfattningen var felaktig,
+# inte kommunens data. Behåller 80 304, samma som föregående körning).
+#
+# Dubbelhämtning: samtliga elva ursprungliga undersidor + de nya källorna
+# (utfartsbidrag, stiftelselistan, sponsring, fördelningsmodell
+# studieförbund, projektinriktat stöd) hämtades RÅTT via egen HTTP-
+# hämtning och parsades som text (inte bara AI-sammanfattning), vilket är
+# en starkare form av oberoende läsning än ren dubbel WebFetch-
+# sammanfattning. Inga fältkonflikter uppstod mellan de två läsningarna.
+kommun: "Luleå"
+kommun_slug: "lulea"
+lan: "Norrbottens län"
+befolkning: 80304
+forvaltning: "Kultur- och fritidsförvaltningen, Socialförvaltningen samt Infrastruktur- och serviceförvaltningen (utfartsbidrag och offentliga julgranar)"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://lulea.rbok.se/"
+kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "lulea-verksamhetsbidrag-kultur"
+    namn: "Verksamhetsbidrag kultur"
+    kategori: ["kultur"]
+    malgrupp: "Producerande och arrangerande, ideella kulturföreningar registrerade och godkända hos kommunen"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-01"]
+    krav:
+      - "Ideell förening med stadgar, styrelse och årsmöte"
+      - "Verksamheten ska berika Luleå kommuns kulturliv"
+      - "Insända verksamhetsplan, budget, senaste verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/verksamhetsbidrag-kultur-och-fritid.html"
+    anteckning: "Ansökningsperiod 1 maj–1 juni, beslut i oktober. Föreningar med årsanställd personal kan få beslut för två år, men verksamhetsplan/budget/årshandlingar ska ändå lämnas årligen."
+  - id: "lulea-verksamhetsbidrag-fritid"
+    namn: "Verksamhetsbidrag fritid"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar och organisationer med en omfattande och regelbunden verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-15"]
+    krav:
+      - "Ideell förening med stadgar, styrelse, verksamhetsplanering och återkommande årsmöten"
+      - "Redogöra för perspektiv och arbete med jämställdhet, barn och unga samt mångfald"
+      - "Insända verksamhetsplan, budget, verksamhetsberättelse, ekonomisk redovisning och styrdokument"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/verksamhetsbidrag-kultur-och-fritid.html"
+    anteckning: "Ansökningsperiod 15 augusti–15 september."
+  - id: "lulea-lok-stod"
+    namn: "Lokalt aktivitetsstöd, LOK-stöd"
+    kategori: ["idrott", "funktionsratt"]
+    malgrupp: "Barn och unga 6–20 år som är föreningsmedlemmar, ledare 13–25 år, samt personer med funktionsnedsättning från 6 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Gruppen ska bestå av minst 3 och högst 30 deltagare"
+      - "Aktiviteten ska vara ledarledd av minst en ledare som fyllt 13 år och är medlem i föreningen; ledaren får inte ansvara för flera gruppaktiviteter samtidigt"
+      - "Aktiviteten ska pågå i minst 45 minuter"
+      - "Aktiviteten ska innehålla gemensam samling och avslutning"
+      - "Deltagarna får endast ingå i en gruppaktivitet per verksamhet och dag"
+      - "Idrottsföreningar ska vara anslutna till godkänd riksorganisation; övriga föreningar ska anmäla sig till kultur- och fritidsförvaltningen innan ansökan"
+    belopp: "5 kr per deltagartillfälle (6–20 år), 10 kr per deltagartillfälle för personer med funktionsnedsättning, 5 kr per deltagartillfälle för ledare 13–25 år"
+    sen_ansokan: "Sen anmälan ger stegvis avdrag (25/50/75 %) beroende på hur sent den kommer in; från 1 oktober (höstens verksamhet) eller 1 april (vårens verksamhet) avslås ansökan helt"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/lokalt-aktivitetsstod-lok-stod.html"
+    anteckning: "25 augusti gäller vårens verksamhet (jan–jun) och 25 februari gäller höstens verksamhet (jul–dec) — motsvarar den nationella RF/SISU-rapporteringscykeln."
+  - id: "lulea-lilla-evenemangsstodet"
+    namn: "Lilla evenemangsstödet"
+    kategori: ["kultur", "idrott"]
+    malgrupp: "Föreningar/organisationer och aktörer med F-skattsedel/FA-skattsedel som är registrerade och bidragsberättigade i kommunens system"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska inkomma minst fyra veckor innan evenemanget"
+      - "Stöd ges inte retroaktivt eller till pågående evenemang"
+      - "Prioritet ges till evenemang riktade till barn, unga och nationella minoriteter"
+    belopp: "Upp till ett (1) prisbasbelopp"
+    sen_ansokan: "Ansökan som inkommer mindre än fyra veckor innan evenemanget avslås"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/evenemangsstod.html"
+    anteckning: "Ingen handläggning i juli. Ansökningar för evenemang i juli–augusti ska ha inkommit senast 1 juni. Beslut på delegation, meddelas tidigast två veckor efter ansökan."
+  - id: "lulea-stora-evenemangsstodet"
+    namn: "Stora evenemangsstödet"
+    kategori: ["kultur", "idrott"]
+    malgrupp: "Föreningar/organisationer och aktörer med F-skattsedel/FA-skattsedel som är registrerade och bidragsberättigade i kommunens system"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31", "09-30"]
+    krav:
+      - "Kräver medfinansiering"
+      - "Ansökningar tas inte emot via post eller e-post"
+      - "Prioritet ges till evenemang riktade till barn, unga och nationella minoriteter"
+    belopp: "Över ett (1) prisbasbelopp"
+    sen_ansokan: "Ansökningar tas inte emot via post eller e-post; sen ansökan hanteras inte utanför ansökningsperioderna"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/evenemangsstod.html"
+    anteckning: "Två ansökningsperioder: 1 februari–31 mars och 1 augusti–30 september. Handläggning tar minst två månader efter att ansökningsperioden stängt, vilket innebär att stöd inte kan sökas för aktiviteter under själva handläggningsperioden (t ex vårens ansökan kan tidigast gälla höstens evenemang)."
+  - id: "lulea-offentliga-julgranar"
+    namn: "Bidrag till offentliga julgranar"
+    kategori: ["ovrig"]
+    malgrupp: "Registrerade föreningar som placerar en offentlig julgran på en väl synlig plats i en by i Luleå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-31"]
+    krav:
+      - "Sökande ska vara en registrerad förening"
+      - "Granen ska placeras på en väl synlig offentlig plats i en by i Luleå kommun"
+      - "Julgranar i stadsdelarna hanteras av kommunen, inte av detta bidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-offentliga-julgranar.html"
+    anteckning: "Kan sökas mellan 1 och 31 december. Administreras av Infrastruktur- och servicenämnden, inte kultur- och fritidsnämnden — enda av de elva redaktionella bidragen med en annan huvudman."
+  - id: "lulea-tradgardsforeningar"
+    namn: "Bidrag till trädgårdsföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Trädgårdsföreningar verksamma i Luleå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Verksamheten ska bidra till att gynna trädgårdskulturens utveckling i Luleå och Norrbotten"
+      - "Ideell förening med stadgar, styrelse, verksamhetsplanering och återkommande årsmöten"
+      - "Insända verksamhetsplan och budget, senaste verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse"
+      - "Redogöra för perspektiv och arbete med jämställdhet, barn och unga samt mångfald"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-tradgardsforeingar.html"
+    anteckning: "Ansökan mellan 1 och 30 september."
+  - id: "lulea-organisationsstadning"
+    namn: "Organisationsstädning"
+    kategori: ["ovrig"]
+    malgrupp: "Registrerade föreningar och organisationer i Luleå kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Föreningen ska ha valt styrelse och antagit stadgar"
+      - "Föreningen ska ha varit verksam inom Luleå kommun i minst sex månader före bidragstillfället"
+      - "Ansökan ska ske digitalt av en behörig person utsedd av föreningens/organisationens styrelse"
+    belopp: "Mellan 2 500 kr och 6 000 kr per område, snitt cirka 3 000 kr"
+    sen_ansokan: "Ansökan som inte inkommit inom ansökningstiden kommer att avslås"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/organisationsstadning.html"
+    anteckning: "Föreningen samlar skräp i ett tilldelat område i samarbete med Håll Sverige Rent, kommunen tillhandahåller säckar och hämtar avfallet. Anmälan öppen 1 mars–1 april."
+  - id: "lulea-verksamhetslokaler"
+    namn: "Bidrag till hyrda och egna verksamhetslokaler"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar verksamma i Luleå kommun med hyrda eller egna verksamhetslokaler"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-01"]
+    krav:
+      - "Nya eller ändrade lokaler ska godkännas av kultur- och fritidsnämnden"
+      - "Kostnader för egna lokaler ska verifieras med kvitto senast 15 december varje år"
+    belopp: "Hyrda lokaler: 100 % av lokalkostnaden, högst 50 000 kr per förening och år eller högst 500 kr per medlem och år. Egna lokaler: 50 % av redovisad godkänd kostnad, högst 30 000 kr eller högst 500 kr per medlem"
+    sen_ansokan: "Ansökan som inte inkommit inom ansökningstiden kommer att avslås"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: "Ansökningsperiod 1 april–1 maj. Hyresbidrag utgår inte om kommunen har lokal att erbjuda för verksamheten."
+  - id: "lulea-pensionarsforeningar"
+    namn: "Bidrag till pensionärsföreningar"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar anslutna till riksorganisation med minst 25 medlemmar"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01"]
+    krav:
+      - "Ansluten till riksorganisation"
+      - "Minst 25 medlemmar"
+      - "Medlemsavgifterna ska lägst motsvara kommunens bidrag"
+      - "Hyreskontrakt ska uppvisas för hyresbidrag"
+    belopp: "1 000 kr/förening och år (administrationsbidrag). Max 80 % av hyreskostnaden, högst 60 000 kr/år (hyresbidrag). 50 kr/medlem och år (verksamhetsbidrag)"
+    sen_ansokan: "Ansökan som inte inkommit inom ansökningstiden kommer att avslås"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: "Ansökningsperiod 1 januari–1 februari."
+  - id: "lulea-driftsbidrag-anlaggningar"
+    namn: "Driftsbidrag anläggningar"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som äger eller driver idrotts- och fritidsanläggningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Föreningen ska äga eller driva anläggningen"
+      - "Tidigare kommunala avtal ska respekteras"
+      - "Skoltid ska i förekommande fall tillgängliggöras för skolan"
+    belopp: "Vinteranläggningar: elljusskidspår sommar+vinterbruk 4 000 kr/km, elljusskidspår endast vinterbruk 3 000 kr/km, skidspår utan belysning 200 kr/km, isrink med sarg för seriespel 15 000 kr, isrink med sarg utan seriespel 5 000 kr, isrink utan sarg med belysning 3 000 kr, isrink utan sarg utan belysning 2 000 kr, omklädningsbyggnad vintertid 75 kr/kvm. Sommaranläggningar: gräsplan upp till 20 000 kr, skjutbanor upp till 5 000 kr, bågskytteanläggning upp till 5 000 kr, fasta orienteringskontroller 20 kr/kontroll och år, omklädningsbyggnad sommartid 50 kr/kvm. Övrigt: skoltidsuthyrda lokaler (endast föreningar med tidigare driftavtal) 50 000 kr"
+    sen_ansokan: "Ansökan som inte inkommit inom ansökningstiden kommer att avslås"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: "Ansökningsperiod 1 mars–1 april. Bidrag till annan typ av egen idrottsanläggning prövas av kultur- och fritidsnämnden efter särskild framställning."
+  - id: "lulea-driftsbidrag-snoskoterleder"
+    namn: "Driftsbidrag snöskoterleder"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar (skoterklubbar) som driver snöskoterleder"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Föreningen (skoterklubben) ska driva och underhålla leden"
+    belopp: null
+    sen_ansokan: "Ansökan som inte inkommit inom ansökningstiden kommer att avslås"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: "Separat ansökningsfönster (1 augusti–1 september) från övriga anläggningar under Driftsbidrag anläggningar. Skoterföreningarna fördelar själva bidragssumman mellan sig. Inget kronbelopp publicerat specifikt för snöskoterleder."
+  - id: "lulea-startbidrag-nya-foreningar"
+    namn: "Startbidrag nya föreningar"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Nystartade föreningar, verksamma i minst sex månader, med minst 20 medlemmar i åldern 7–25 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha varit verksam i minst sex månader"
+      - "Minst 20 medlemmar i åldern 7–25 år"
+    belopp: "2 000 kr"
+    sen_ansokan: "Ej angivet i källan (löpande ansökan året runt)"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: null
+  - id: "lulea-sommarskola"
+    namn: "Sommarskola"
+    kategori: ["ovrig"]
+    malgrupp: "Ej specificerat i källan"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav: []
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — uteslöts då som 'för tunt'. Skrivs in vid denna omkörning i enlighet med v2.1 (saknat bidrag är värre än tomt fält): sidan listar bidraget med eget namn under 'Dessa fritidsbidrag finns att söka' och egen ansökningsperiod (1 mars–1 april), men publicerar ingen målgrupp, inget belopp och inga krav utöver detta — varken i föregående eller denna körning. Möjligen samma sak som kommunens 'gratis simskola' sommarlovsprogram (separat, kommundrivet, inte ett föreningsbidrag) men det går inte att verifiera; skrivs in som eget bidrag med ärligt tomma fält snarare än att antingen gissas eller uteslutas tyst."
+  - id: "lulea-ovrigt-bidrag-fritid"
+    namn: "Övrigt bidrag fritid"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar och organisationer inom fritidsområdet med behov som inte täcks av kommunens övriga fritidsbidrag"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Bidraget kan endast sökas i dialog med kultur- och fritidsförvaltningen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan (löpande ansökan i dialog med förvaltningen)"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/fritidsbidrag.html"
+    anteckning: null
+  - id: "lulea-socialforvaltningen"
+    namn: "Föreningsbidrag från socialförvaltningen"
+    kategori: ["social"]
+    malgrupp: "Föreningar med anknytning till socialnämndens verksamhetsområde"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha anknytning till socialnämndens verksamhetsområde"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-foreningar-fran-socialforvaltningen.html"
+    anteckning: "Beslutas av socialnämnden. Ansökningsperioden hösten 2025 var 10–24 september 2025 (sidan uppdaterad 17 sep 2025). Källan anger inte om detta återkommer årligen på samma datum, därför satt till löpande i stället för ett gissat MM-DD-datum."
+  - id: "lulea-bygdemedel"
+    namn: "Bygdemedel"
+    kategori: ["ovrig"]
+    malgrupp: "Organisationer och föreningar i områden i Luleå kommun som påverkats av vattenkraftsutbyggnad"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01", "10-01"]
+    krav:
+      - "Projektet ska främja rekreation, idrott, friluftsliv och turism, eller reparera skada orsakad av vattenreglering"
+      - "Projektet ska överensstämma med Program till Vision Luleå 2040"
+      - "Sökande ska redovisa hur projektet ska följas upp och vilka effektmål som ska uppnås"
+      - "Prioritet ges till projekt som gynnar barn, unga och ett brett allmänintresse"
+    belopp: "10–70 % av sökt projektkostnad, högst 15 prisbasbelopp"
+    sen_ansokan: "Undantag är möjligt om Länsstyrelsen ser ett behov av det"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bygdemedel.html"
+    anteckning: "Slutligt beslut fattas av Länsstyrelsen efter kommunens beredning och kultur- och fritidsnämndens yttrande. Handläggning inom kommunen tar cirka fem veckor. Kommunens riktlinjer för bygdemedel (inbäddade på källsidan, §1–9) är den fullständiga regelverkskällan för detta bidrag."
+  - id: "lulea-byapeng"
+    namn: "Byapeng"
+    kategori: ["ovrig"]
+    malgrupp: "Lokala utvecklingsgrupper eller motsvarande på Luleås landsbygder och i skärgården"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Minst två genomförda aktiviteter under året"
+      - "Minst fyra protokollförda styrelsemöten"
+      - "Endast en organisation per by kan erhålla stödet"
+    belopp: "12 000 kr (0–100 invånare, 16 byar), 14 000 kr (101–300 invånare, 9 byar), 16 000 kr (301–600 invånare, 11 byar), 17 000 kr (601+ invånare, 7 byar)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-landsbygden.html"
+    anteckning: "Ansökningsfönster 15 april–31 oktober. Stödet baseras på SCB:s årliga befolkningsstatistik."
+  - id: "lulea-landsbygdsstod"
+    namn: "Landsbygdsstöd"
+    kategori: ["ovrig"]
+    malgrupp: "Lokala utvecklingsgrupper eller liknande organisationer på landsbygden/skärgården"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Projektet ska på ett märkbart sätt bidra till landsbygdens eller skärgårdens utveckling"
+      - "Maskiner, löner, löpande underhåll och större renoveringar är inte bidragsberättigade"
+      - "Föreningen ska äga utrustningen och stå för framtida underhåll"
+    belopp: "Högst ett (1) prisbasbelopp"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-landsbygden.html"
+    anteckning: "Ansökningsperiod 1 mars–30 september. Beslut på delegation, meddelas tidigast två veckor efter ansökan. Samma fem utvecklingsområden (lokal mobilisering, natur-/kulturmiljöer, hållbar utveckling, näringslivsutveckling, boendemiljö/service) återfinns ordagrant i den äldre riktlinjen 'Projektinriktat stöd för landsbygdsutveckling' (Landsbygdskommittén, 2017-03-30), som stödjer att detta är samma stöd under nytt namn/system."
+  - id: "lulea-kultur-pa-landsbygden"
+    namn: "Kultur på landsbygden"
+    kategori: ["kultur"]
+    malgrupp: "Ideell förening eller organisation på Luleås landsbygder eller i skärgården"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska inkomma minst fyra veckor innan det tänkta datumet"
+      - "Stöd ges inte retroaktivt eller till pågående evenemang"
+      - "Täcker inte arrangörsarvode eller återkommande evenemang som redan får verksamhetsbidrag"
+    belopp: "Högst ett (1) prisbasbelopp"
+    sen_ansokan: "Ansökan som inkommer mindre än fyra veckor innan tänkt datum får avslag"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-landsbygden.html"
+    anteckning: null
+  - id: "lulea-driftsbidrag-samlingslokaler"
+    namn: "Driftsbidrag till samlingslokaler på landsbygden"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som driver samlingslokaler/bygdegårdar på landsbygden, öppna och opartiska för lokala organisationer"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-15"]
+    krav:
+      - "Lokalen ska vara opartisk och tillgänglig för lokala föreningar"
+      - "Bidraget täcker bränsle, el, vatten, ränta och försäkringskostnader"
+    belopp: "Upp till 80 % av godkända driftskostnader"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-landsbygden.html"
+    anteckning: "Ansökningsfönster 15 april–15 maj. Utbetalas i efterskott."
+  - id: "lulea-investeringsbidrag-samlingslokaler"
+    namn: "Investeringsbidrag till samlingslokaler på landsbygden"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som driver samlingslokaler/bygdegårdar på landsbygden"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Prioritet ges till energieffektiviseringsåtgärder"
+      - "Kommunal medfinansiering på högst 30 %"
+    belopp: "Upp till 80 % av kostnaderna för byggnadsarbete; kommunal medfinansiering på högst 30 %"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/bidrag-till-landsbygden.html"
+    anteckning: "Ansökningsfönster 1 augusti–1 september. Beslut fattas av kultur- och fritidsnämnden i oktober."
+  - id: "lulea-utfartsbidrag-enskilda-vagar"
+    namn: "Utfartsbidrag enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Privatpersoner och gemensamhetsanläggningar (vägförening eller vägsamfällighet bildad via Lantmäteriförrättning) med enskild utfartsväg"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Väglängden ska vara minst 100 meter vid en intressent, minst 200 meter vid fler än en intressent, mätt från entré till anslutning mot allmän eller annan väg"
+      - "Minst en intressent ska vara boende vid vägen året om"
+      - "Vägen ska underhållas så att biltrafik kan ske hela året"
+      - "Bidrag utgår inte till fritidsfastighet, eller till permanentbostad inom planlagt fritidsområde (om bostaden inte fanns före planläggningen)"
+      - "Vägen får inte stängas för allmän trafik utan kommunens godkännande"
+    belopp: "6 kr per meter väg och år"
+    sen_ansokan: "Ej angivet i källan (löpande e-tjänst, bidrag utbetalas årsvis i efterskott)"
+    kalla_url: "https://www.lulea.se/boende--gator/gator-och-trafik/utfartsbidrag-enskilda-vagar.html"
+    anteckning: "NYTT VID DENNA OMKÖRNING (specialkategori väg/samfällighet, §2.1.5) — administreras av en annan förvaltning (gator och trafik) än kultur- och fritid och ligger helt utanför 'Stöd och bidrag i Luleå kommun'-sidträdet, vilket är varför det missades i föregående körning. Bestämmelserna är antagna av kommunfullmäktige och gäller 'för 2015 och framåt'. Öppet för både privatpersoner och vägföreningar/vägsamfälligheter; skrivs in eftersom gemensamhetsanläggningar räknas som förening i denna kartläggning."
+forutsattningar:
+  - id: "lulea-foreningsregister"
+    vad: "Registrera föreningen i Rbok"
+    beskrivning: "Föreningen registrerar sig i kommunens boknings- och bidragssystem Rbok med föreningens namn, adress, telefonnummer, e-postadress och organisationsnummer, samt kontaktuppgifter till ordförande och kassör. Registrering krävs för att kunna söka lokaler och ansöka om bidrag."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://sjalvservice.lulea.se/oversikt/overview/1016"
+  - id: "lulea-bidragsberattigande"
+    vad: "Ansöka om bidragsberättigande för det aktuella bidraget"
+    beskrivning: "Innan en förening kan söka ett specifikt bidrag måste den ansöka om och godkännas som bidragsberättigad för det bidraget. Kommer ansökan om bidragsberättigande in för sent kan handläggning i tid inte garanteras och föreningen riskerar att missa bidraget."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: "Ansökan om bidragsberättigande ska göras senast 7 dagar före sista ansökningsdatum för det aktuella bidraget"
+    giltighet: null
+    ordning: 2
+    kalla_url: "https://www.lulea.se/uppleva--gora/foreningar-och-organisationer/stod-och-bidrag-i-lulea-kommun/verksamhetsbidrag-kultur-och-fritid.html"

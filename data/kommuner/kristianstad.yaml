@@ -1,0 +1,421 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte redaktionell sida ensam). Föregående version (verifierad
+# 2026-07-19) rapporterades komplett med 6 bidrag men byggde uteslutande på
+# den redaktionella bidragssidan (upplevaochgora/bidrag.5404.html) och missade
+# att den sidan i sig länkar fler bidrag än vad som lästes, samt att ett
+# bidrag (Föreningsbidrag, omsorgen) i själva verket rymmer TVÅ distinkta
+# sökbara delar under samma URL, och att flera specialkategorier (väg,
+# stiftelser, byalag) och en bidragsform utanför Rbok-sfären (Marknadsförings-
+# stöd/Evenemangsbidrag, administrerat av Kommunikation och tillväxt) helt
+# saknades. Föregående körningsrapport för Kristianstad gick förlorad i en
+# tidigare krasch (nämnt i uppdraget) — kunde inte jämföras mot denna omgång.
+#
+# Metod denna omgång:
+# 1. REGELVERK: Sökte "kristianstad regler föreningsbidrag pdf" — hittade
+#    Kultur- och fritidsnämndens "Bidragsbestämmelser inom kultur- och
+#    fritidsnämndens verksamhetsområde" (antagen 2018-12-06, reviderad
+#    2020-09-17, 340 kB) samt Omsorgsnämndens motsvarighet (antagen
+#    2023-09-06, Dnr 2023/208, 175 kB). Båda lästes i sin helhet (24 resp. 5
+#    sidor). Ingen regelverks-PDF hittades för Arbete och välfärdsnämnden
+#    eller för Kommunstyrelsens bidrag (Marknadsföringsstöd, Landsbygdsfonden)
+#    — dessa täcks via förvaltningarnas egna sidor (steg 2) i stället.
+#    Kultur/fritid-regelverket räknar upp 9 bidrag; jämfört mot webbplatsens
+#    faktiska bidragsutbud (14 poster under samma nämnd) är Elitbidrag och
+#    Bidrag till studieförbund SKRIVET_EJ_I_REGELVERK — de finns på
+#    webbplatsen men inte i det formella regelverksdokumentet.
+# 2. FÖRVALTNINGARNAS SIDOR: Läste huvudsidan upplevaochgora/bidrag.5404.html
+#    i sin helhet (inte bara ingressen) — den listar 14 kommunala bidrag,
+#    mot 6 som lästes föregående körning. Varje enskild bidragssida lästes
+#    fullständigt (inte bara rubrik/ingress), vilket avslöjade att
+#    "Föreningsbidrag, omsorgen" (5415.html) länkar till ett regelverk som
+#    delar bidraget i Grund- och medlemsbidrag (automatisk formel: 3 000 kr +
+#    20 kr/medlem, max 22 000 kr) och Särskilt bidrag (diskretionär,
+#    projektbaserad ansökan) — två distinkta sökbara delar, SPLIT till två
+#    poster nedan (jämför Karlstads mönster: flera bidrag under samma URL).
+# 3. SJÄLVSERVICE/E-TJÄNST: Genomsökte e-tjanster.kristianstad.se — avslöjade
+#    "Evenemangsbidrag: Ansökan" som INTE finns länkat från den redaktionella
+#    bidragssidan. Levande sidan för samma ansökningsflöde heter numera
+#    "Marknadsföringsstöd" (marknadsforingsstod.6944.html, administreras av
+#    Kommunikation och tillväxt under Kommunstyrelsens förvaltning, inte
+#    Kultur- och fritidsnämnden) — samma ansökningsblankett/mottagare som
+#    "Ansökan om evenemangsbidrag"-PDF:en. Skrivet som en post med båda
+#    namnen noterade.
+# 4. PORTALEN (Rbok, kristianstad.rbok.se): JS-renderad, ej enumererbar för
+#    fetch — som väntat enligt v2.1. EJ_EXTRAHERBAR, gå vidare (metoden är
+#    källkonvergens, inte undantag).
+# 5. SPECIALKATEGORIER (§2.1.5):
+#    - Väg/vägsamfälligheter: HITTADES. Kommunalt bidrag till enskild väg
+#      (3 kr/meter, 2018 års nivå, indexreglerat), administreras separat från
+#      Rbok. Saknades helt föregående körning.
+#    - Bygdegårdar/samlingslokaler: Ingen egen dedikerad post hittad utöver
+#      Landsbygdsfonden, som i praktiken finansierar bygdegårds-/byalags-
+#      projekt (exempel: fönsterrenovering Oppmanna Vånga Bygdegårdsförening).
+#      Ingen separat drift-/hyresbidragsform för bygdegårdar hittad (till
+#      skillnad från Karlstad) — söktes riktat, ingen träff utöver
+#      Landsbygdsfonden.
+#    - Stiftelser/fonder: HITTADES. Kommunen förvaltar 18 stiftelser/fonder
+#      (stiftelserochfonder.1387.html). Skrivet som ETT samlat bidrag per
+#      §2.7, med Landsbygdsfonden undantagen och skriven separat p.g.a. sin
+#      tydligt organisationsriktade karaktär (se resp. anteckning). Endast
+#      Stiftelsen sociala samfonden verifierades explicit öppen för
+#      "föreningar och organisationer" under denna körning — övriga 16
+#      icke-Landsbygdsfonden-poster bör verifieras individuellt vid nästa
+#      uppdatering.
+#    - Byalag/samhällsföreningar: HITTADES. Landsbygdsfonden (max 40 000
+#      kr/förening/år, ansökan via Rbok, rapportering till Landsbygdsrådet).
+#      Saknades helt föregående körning.
+#    - Studieförbund: HITTADES redan på huvudsidan (Bidrag till
+#      studieförbund) men lästes inte föregående körning trots att den fanns
+#      med i länklistan.
+#
+# Uteslutna (kategoriskt/metodiskt skäl, §2.3–§2.4):
+# - "Ansök om svensk flagga" — fysisk gåva (flagga) till Sveriges nationaldag,
+#   inte ett ekonomiskt föreningsbidrag. Öppen på samma villkor för
+#   privatpersoner OCH föreningar (kräver bara flaggstång) — inte specifikt
+#   föreningsriktad. Jämför Karlstads uteslutning av det icke-monetära
+#   "Lokalt klimatkontrakt för föreningar".
+#   https://www.kristianstad.se/upplevaochgora/bidrag/ansokomsvenskflagga.5407.html
+# - "Byggnadsvårdsbidrag" och "Bidrag för bullerskyddsåtgärder" — generella
+#   fastighetsbidrag (kulturmiljövård respektive bullerskydd) administrerade
+#   av Miljö- och samhällsbyggnadsförvaltningen, öppna för alla ägartyper
+#   (privatpersoner, företag, kommuner, föreningar) utan att vara riktade mot
+#   föreningsverksamhet. Inte länkade från kommunens förenings-bidragsöversikt
+#   (upplevaochgora/bidrag.5404.html) utan från Bygga/bo/miljö-sfären. Gränsfall
+#   — en förening som äger en kulturhistoriskt värdefull byggnad skulle
+#   teoretiskt kunna söka, men bidraget är inte konstruerat som ett
+#   föreningsstöd. Loggat här för Jacob/Fable-granskning, inte tyst struket.
+#   https://www.kristianstad.se/byggaboochmiljo/arkitekturochkulturmiljoer/byggnadsvardsbidrag.5620.html
+# - 29 externa bidrag listade på huvudsidan (Allmänna arvsfonden, Kulturrådet,
+#   Riksidrottsförbundet, Vinnova, Naturvårdsverket m.fl.) — administreras av
+#   annan huvudman än kommunen, §2.4.
+#
+# Varningssignal (§2.6) undersökt: Kultur- och fritidsnämndens nio bidrag i
+# regelverket har fem olika deadline-kluster (25 feb, 30 sep, 31 okt, löpande,
+# blandat) — verifierat individuellt mot regelverkets egen "Ansökningstider"-
+# sektion (sid 4–5 i PDF:en), inte ärvt. Bedöms som genuina, olika
+# förvaltningscykler per bidragstyp, inte en extraktionsbugg.
+#
+# Konflikt löst (§2.5): Föregående version satte "Föreningsbidrag, omsorgen"
+# till löpande med anteckning om osäker årlig återkommelse (källan visade bara
+# "28 februari 2026" utan att bekräfta årsvis upprepning). Omsorgsnämndens
+# regelverk (antaget 2023-09-06, nyare och mer auktoritativt än den
+# redaktionella sidans formulering) bekräftar explicit "Söks senast den 28
+# februari" som stående regel — satt till fasta datum denna omgång.
+#
+# Dubbelhämtat i två oberoende läsningar av varje källa under denna session
+# (regelverks-PDF:erna lästes fullständigt två gånger; bidragssidorna
+# hämtades och tvärkontrollerades mot regelverket där sådant fanns). Inga
+# fältkonflikter mellan de två läsningarna denna omgång utöver den ovan.
+# Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Kristianstad"
+kommun_slug: "kristianstad"
+lan: "Skåne län"
+befolkning: 85852
+forvaltning: "Kultur- och fritidsförvaltningen, Omsorgsförvaltningen, Arbete och välfärdsförvaltningen, Kommunstyrelsens förvaltning (Kommunikation och tillväxt samt Landsbygdsrådet) samt Miljö- och samhällsbyggnadsförvaltningen (enskilda vägar)"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://kristianstad.rbok.se/"
+kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag.5404.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "kristianstad-aktivitetsstod"
+    namn: "Aktivitetsstöd, kommunalt"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar med minst 10 betalande medlemmar i åldern 7–20 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Minst 15 sammankomster under halvårsperioden (undantag kan ges för säsongskoncentrerad verksamhet)"
+      - "Minst tre bidragsberättigade deltagare utöver ledare per sammankomst"
+      - "Sammankomsten ska vara minst en timme och innehålla samling och avslutning"
+      - "Ledaren ska vara minst 13 år (gäller det kalenderår hen fyller år)"
+    belopp: null
+    sen_ansokan: "1–14 dagar för sent: avdrag 5 % av godkänt bidragsbelopp. 15–30 dagar för sent: avdrag 10 %. Efter 30 dagar behandlas inte ansökan."
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/aktivitetsstodkommunalt.5405.html"
+    anteckning: "Sista ansökningsdag 25 augusti gäller period 1 januari–30 juni. Sista ansökningsdag 25 februari gäller period 1 juli–31 december. Bekräftat mot kultur- och fritidsnämndens regelverk (antaget 2018-12-06, reviderat 2020-09-17)."
+  - id: "kristianstad-verksamhetsbidrag-kultur"
+    namn: "Verksamhetsbidrag, kultur"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar med regelbunden, långsiktig kulturverksamhet som innefattar eget skapande"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Regelbunden, långsiktig kulturverksamhet som innefattar eget skapande och kommer allmänheten till godo"
+    belopp: null
+    sen_ansokan: "För sent inkommen ansökan tas inte upp till behandling."
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/verksamhetsbidragkultur.5421.html"
+    anteckning: "Söks senast 31 oktober året före det år ansökan gäller."
+  - id: "kristianstad-projektbidrag-kultur"
+    namn: "Projektbidrag, kultur"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar, kulturaktörer (företag) och stiftelser"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska ha inkommit innan projektet genomförs"
+      - "Projektets tidsplan ska anges i ansökan"
+      - "Redovisning senast tre månader efter projektets genomförande, inklusive kostnadsöversikt"
+      - "Har projektet inte påbörjats inom ett år från beviljat bidrag ska bidraget betalas tillbaka"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande ansökan, ska ske innan projektstart)"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/projektbidragkultur.5420.html"
+    anteckning: "Söks löpande under året, dock innan projektets start. Kultur- och fritidsnämnden kan besluta att bidraget ska gå till annat än ändamålet anger."
+  - id: "kristianstad-driftbidrag"
+    namn: "Driftbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade föreningar inom idrott och/eller friluftsliv med anläggning i Kristianstads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Minst 15 sammankomster föregående verksamhetsår"
+      - "Anläggningen ska vara belägen i Kristianstads kommun"
+      - "Kan inte kombineras med hyresbidrag för samma anläggning, och ingen ersättning ges för hyra i kommunalt subventionerade lokaler"
+      - "Nya sökande ska lämna skriftlig avsiktsförklaring senast 30 september året innan"
+    belopp: "Bidragsdel 1: högst 225 000 kronor per förening (70 % av budgeten). Bidragsdel 2: fördelas proportionerligt efter omfattningen av ungdomsverksamheten (30 % av budgeten). Tillägg 25 000 kronor för anläggning med minst 75 % anställd vaktmästare. Tillägg 25 000 kronor till orienteringsföreningar för kartframställning."
+    sen_ansokan: "1–14 dagar för sent: avdrag 5 % av godkänt bidragsbelopp. 15–30 dagar för sent: avdrag 10 %. Efter 30 dagar behandlas inte ansökan."
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/driftbidrag.5410.html"
+    anteckning: null
+  - id: "kristianstad-hyresbidrag"
+    namn: "Hyresbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade föreningar med minst 10 betalande medlemmar i åldern 7–20 år som hyr en lokal/anläggning eller ett föreningskansli"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25"]
+    krav:
+      - "Föreningen ska uppfylla kraven för bidragsberättigad förening"
+      - "Föreningen ska ha fått aktivitetsstöd för minst 30 sammankomster föregående kalenderår"
+      - "Regelbunden verksamhet ska vara knuten till lokalen/anläggningen/kansliet"
+      - "Lokal/anläggning som används som förråd/förvaring ger inte rätt till hyresbidrag"
+      - "Lokalen/anläggningen ska finnas belägen inom Kristianstads kommun"
+      - "Kan inte kombineras med driftbidrag för samma lokal/anläggning; ingen ersättning för hyra i kommunalt subventionerade lokaler (idrottshallar, skolidrottshallar, gymnastiksalar, idrottsplatser)"
+      - "Hyresavtal ska bifogas första gången föreningen söker bidrag för en lokal/anläggning"
+    belopp: "Högst 40 000 kronor. Bidragsgrundande kostnader: årshyra/arrende, el/värme, vatten/avlopp, renhållning, sotning, försäkringskostnader. Procentsats av kostnaderna fastställs årligen av kultur- och fritidsförvaltningen utifrån budget."
+    sen_ansokan: "1–14 dagar för sent: avdrag 5 % av godkänt bidragsbelopp. 15–30 dagar för sent: avdrag 10 %. Efter 30 dagar behandlas inte ansökan."
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/hyresbidrag.5416.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Bidraget betalas ut i efterskott."
+  - id: "kristianstad-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som har eller kan komma att få aktivitetsstöd, driftbidrag eller hyresbidrag från kultur- och fritidsnämnden"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Bidraget är avsett för nybyggnad, ombyggnad, större reparationer och inköp av större inventarier och maskiner till föreningens anläggning eller lokal"
+      - "Söks alltid innan investeringen påbörjas (kan i undantagsfall påbörjas tidigare efter dialog med kultur- och fritidsförvaltningen, utan garanti om bidrag)"
+      - "Arbetet ska påbörjas inom två år och slutföras inom tre år från beviljande, annars måste föreningen söka på nytt"
+      - "Bidraget betalas alltid ut till föreningen, aldrig direkt till en leverantör"
+    belopp: null
+    sen_ansokan: "För sent inkommen ansökan tas inte upp till behandling."
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/investeringsbidrag.5418.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Bedömning sker bl.a. utifrån föreningens egen insats, tidigare beviljade investeringsbidrag, deltagartillfällen i aktivitetsstödet föregående år, antal barn- och ungdomsmedlemmar samt föreningens ekonomi. Betalas ut efterhand mot fakturakopior."
+  - id: "kristianstad-projektbidrag-fritid"
+    namn: "Projektbidrag, fritid"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade idrotts- och fritidsföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla kraven för bidragsberättigad förening"
+      - "Projektet ska ligga i linje med någon av kultur- och fritidsnämndens fem strategier i kultur- och fritidspolitiska strategin, eller innebära förnyelse-/utvecklingsarbete"
+      - "Kan även sökas av föreningar som vill arrangera tävlingar/arrangemang i en uppstartsfas"
+      - "Ansökan om projektbidrag för tävlingar/arrangemang beviljas i högst tre år"
+      - "Tilltänkt projekttid ska anges i ansökan"
+      - "Redovisning inklusive kostnadsredovisning senast tre månader efter genomfört projekt"
+      - "Har projektet inte påbörjats inom ett år från beviljande ska bidraget betalas tillbaka"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/projektbidragfritid.5419.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Söks löpande under året, dock innan projektets start; pengarna utbetalas direkt efter beslut. Motsvarigheten inom kultur heter Projektbidrag, kultur (kristianstad-projektbidrag-kultur) — två separata bidrag trots snarlika namn/villkor."
+  - id: "kristianstad-elitbidrag"
+    namn: "Elitbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsklubbar som spelar i högsta serien i sin sport eller på högsta nationella nivå"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Syftet är att stärka föreningens marknadsföring och varumärket Kristianstad"
+      - "Avtal skrivs för ett år i taget"
+    belopp: "Maximalt 250 000 kronor per år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/elitbidrag.5411.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Ansökan görs på blankett. SKRIVET_EJ_I_REGELVERK — ingår inte i kultur- och fritidsnämndens 340 kB-regelverk (antaget 2018-12-06, reviderat 2020-09-17) trots att bidraget ligger i samma URL-namnrymd som övriga kultur/fritid-bidrag."
+  - id: "kristianstad-energieffektiviseringsbidrag"
+    namn: "Energieffektiviseringsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som har eller kan komma att få driftbidrag eller hyresbidrag"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Avsett för investeringar som minskar energiförbrukningen och användningen av fossila bränslen på föreningens anläggning"
+      - "Söks alltid innan investeringen påbörjas (kan i undantagsfall påbörjas tidigare efter dialog med kultur- och fritidsförvaltningen, utan garanti om bidrag)"
+      - "Arbetet ska påbörjas inom två år och slutföras inom tre år från beviljande"
+      - "Bidraget betalas alltid ut till föreningen, aldrig direkt till en leverantör"
+    belopp: null
+    sen_ansokan: "För sent inkommen ansökan tas inte upp till behandling."
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/energieffektiviseringsbidrag.5413.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Bedömning utifrån bl.a. förväntad energieffektivisering/minskade koldioxidutsläpp i förhållande till ekonomisk kostnad. Kommunens energirådgivare kan bistå (energiradgivningen@kristianstad.se)."
+  - id: "kristianstad-arrangorsstod-kultur"
+    namn: "Arrangörsstöd, kultur"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar som arrangerar serier av offentliga kulturevenemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla kraven för bidragsberättigad förening"
+      - "För serier/arrangemang som löper under året gäller föreningens kommande verksamhetsberättelse och bokslut som uppföljning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/arrangorsstodkultur.5408.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. Söks löpande under året, dock innan arrangemangets start."
+  - id: "kristianstad-studieforbund"
+    namn: "Bidrag till studieförbund"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Studieförbund verksamma i Kristianstads kommun (källan anger sju stycken, bl.a. ABF Skåne Nordost, Studieförbundet Bilda Sydväst, Folkuniversitetet, Medborgarskolan Syd, NBV Syd, Studieförbundet Vuxenskolan/SV Skåneland, Sensus Studieförbund Skåne-Blekinge och Studiefrämjandet SydOst)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Sökande ska vara ett av de studieförbund som är verksamma i kommunen"
+      - "Verksamhetsplan ska lämnas senast 15 december"
+      - "Slutlig redovisning senast 30 april"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/bidragtillstudieforbund.5409.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION trots att bidraget fanns länkat på huvudsidan — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, studieförbund). Ansökningsperiod 1 januari–30 april, e-tjänst i Rbok. Fast fördelning till namngivna studieförbund snarare än en öppen nyansökan, men har egen ansökningsperiod och egen e-tjänst — skrivet enligt samma princip som Halmstads och Karlstads studieförbundsbidrag. Finansierar aktiviteter inom kultur, socialt arbete/integration och pensionärsverksamhet."
+  - id: "kristianstad-marknadsforingsstod"
+    namn: "Marknadsföringsstöd"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar och organisationer som arrangerar evenemang, större cuper eller tävlingar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen/organisationen får söka för maximalt två evenemang per år"
+      - "Evenemanget ska vara av stort intresse för kommunens medborgare"
+      - "Ska generera besökare utifrån, gästnätter och turistekonomiska intäkter"
+      - "Ska skapa goodwill för Kristianstad och stärka kommunens varumärke"
+      - "Bör kunna dra till sig nationellt intresse, till exempel via media"
+      - "Kristianstads kommuns logga ska synas i marknadsföringsmaterial; marknadsföringsplan samt intäkts- och kostnadsbudget ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/marknadsforingsstod.6944.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21. HITTADES VIA E-TJÄNSTLISTAN (§2.1.3), INTE via den redaktionella bidragssidan — klassiskt v2-fall. Ansökningsblanketten heter 'Ansökan om evenemangsbidrag' och skickas till Kristianstads kommun, Kommunikation och tillväxt (under Kommunstyrelsens förvaltning, inte kultur- och fritidsnämnden) — administreras alltså separat från övriga bidrag i denna fil. Vid verifieringstillfället visade sidan 'Den här ansökan är stängd' utan publicerat återkommande datum. En sekundärkälla (sökmotorsammanfattning, ej bekräftad genom direkt sidhämtning) angav tre ansökningstillfällen per år (1 mars, 1 maj, 1 oktober) för samma ansökningsflöde under namnet 'Evenemangsbidrag' — dessa datum kunde inte verifieras mot en levande sida och skrivs därför inte som fasta datum (typ satt till löpande). Verifiera exakta ansökningsdatum vid nästa uppdatering."
+  - id: "kristianstad-landsbygdsfonden"
+    namn: "Landsbygdsfonden"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar och organisationer (byalag, samhällsföreningar och liknande) verksamma på landsbygden i Kristianstads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen/organisationen ska vara verksam på landsbygden i Kristianstads kommun och registrerad i kommunens föreningsregister"
+      - "Insatsen ska vara förankrad i kommunens landsbygdsstrategi, vision och strategiska färdplan"
+      - "Utvecklingsgrupper ska rapportera arbetet till landsbygdsrådet"
+    belopp: "Max 40 000 kronor (inklusive moms) per förening/organisation och kalenderår"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/omsorgochhjalp/ekonomiochpengar/stiftelserochfonder/landsbygdsfonden.1392.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, byalag/samhällsföreningar). Ansökan görs digitalt via kristianstad.rbok.se. Två ansökningstillfällen per år (vår och höst); vid verifieringstillfället var vårfönstret 17 mars–3 maj 2026 och höstfönstret öppnade 3 september 2026 — inga stabila återkommande MM-DD-datum kunde bekräftas, satt till löpande. Fonden listas även på kommunens sida för stiftelser och fonder (stiftelserochfonder.1387.html) men skrivs som eget bidrag här p.g.a. sin organisationsriktade karaktär och egna ansökningsprocess (Rbok, inte BankID) — exkluderad ur kristianstad-stiftelser-fonder för att undvika dubbelräkning, se den postens anteckning."
+  - id: "kristianstad-stiftelser-fonder"
+    namn: "Stiftelser och fonder"
+    kategori: ["ovrig"]
+    malgrupp: "Privatpersoner samt, för vissa av fonderna, föreningar och organisationer med anknytning till Kristianstads kommun, enligt respektive stiftelses ändamål"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Kommunen förvaltar arton stiftelser/fonder (se källan för fullständig lista); merparten är riktade till enskilda behövande, pensionärer eller studerande"
+      - "Stiftelsen sociala samfonden är uttryckligen öppen för 'föreningar och organisationer' utöver enskilda behövande, med krav på anknytning till Kristianstads kommun"
+      - "Ansökan görs med mobilt BankID; annan person kan ansöka å den sökandes vägnar, eller pappersblankett via Medborgarcenter"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/omsorgochhjalp/ekonomiochpengar/stiftelserochfonder.1387.html"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning — tillagd vid korrigerande omkörning 2026-07-21. Skrivet som ETT samlat bidrag enligt §2.7. Ansökningsperiod 1 juli–30 september, utdelning under hösten samma år. Landsbygdsfonden är en av de arton fonderna på samma sida men skrivs som eget bidrag (kristianstad-landsbygdsfonden) p.g.a. sin tydligt organisationsriktade karaktär — exkluderad här för att undvika dubbelräkning. Kommunens sida anger generellt att 'en del av våra fonder kan också sökas av föreningar och organisationer' utan att specificera samtliga; endast Stiftelsen sociala samfonden verifierades explicit under denna körning. Övriga sexton fonders målgrupp (utöver Landsbygdsfonden) bör verifieras individuellt vid nästa uppdatering om tid medges — se tackningsavvikelse i rapporten."
+  - id: "kristianstad-vagbidrag"
+    namn: "Kommunalt bidrag till enskild väg"
+    kategori: ["ovrig"]
+    malgrupp: "Enskilda väghållare — privatpersoner, vägföreningar eller vägsamfälligheter — som sköter en enskild väg i Kristianstads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska huvudsakligen betjäna en bostad med personer skrivna på adressen"
+      - "En privatperson, juridisk person eller ideell organisation ska ansvara för underhållet och ha lämnat in ansökan med erforderliga uppgifter"
+      - "Vägen ska hållas farbar för fordonstrafik och vara öppen för allmän trafik"
+      - "Erhåller väghållaren statsbidrag från Trafikverket betalas kommunalt bidrag ut automatiskt"
+    belopp: "3 kronor per meter (2018 års nivå), indexregleras årligen enligt Trafikverkets index. Ersättning lämnas inte för väglängdens första 200 meter."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/trafikochresor/trafikochgator/gator.1051.html"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, vägföreningar/vägsamfälligheter). Ansökan avser innevarande år; bidrag betalas ut i februari påföljande år. Återkommande mottagare behöver inte söka på nytt — kommunen kontaktar via brev i november med ett formulär att returnera; nya väghållare ansöker via e-tjänst. Administrerande förvaltning ej explicit bekräftad i källan, sannolikt Miljö- och samhällsbyggnadsförvaltningen (samma som det uteslutna byggnadsvårdsbidraget, se filhuvudet)."
+  - id: "kristianstad-foreningsbidrag-omsorgen-grundmedlem"
+    namn: "Grund- och medlemsbidrag, omsorgen"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Pensionärsföreningar och ideella föreningar som främjar föreningslivet för äldre människor eller personer med funktionsnedsättning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Föreningen ska vara registrerad i Rbok och godkänd som bidragsberättigad förening"
+      - "Minst 25 betalande medlemmar folkbokförda i Kristianstads kommun"
+      - "Lägsta medlemsavgift 50 kr/år och person (dispens kan ges för föreningar skyldiga till lägre avgift via sin riksorganisation)"
+      - "Föreningens syfte ska vara att berika livet för pensionärer och personer med funktionsnedsättning"
+      - "Medlemsmatrikel (namn, födelseår, folkbokföringsadress) och verksamhetsplan för året ska bifogas ansökan"
+    belopp: "Grundbidrag 3 000 kronor per förening samt 20 kronor per medlem folkbokförd i Kristianstads kommun. Medlemsbidraget uppgår till maximalt 22 000 kronor per förening."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/download/18.4cc941c918c431c7acea823/1702376920775/Bidragsbest%C3%A4mmelser%20inom%20omsorgsf%C3%B6rvaltningens%20verksamhetsomr%C3%A5de%20231212.pdf"
+    anteckning: "Tidigare skrivet som ett enda bidrag 'Föreningsbidrag, omsorgen' med osäker deadline (löpande). SPLIT 2026-07-21: omsorgsnämndens regelverk (antaget 2023-09-06, Dnr 2023/208) visar att bidraget på redaktionella sidan foreningsbidragomsorgen.5415.html i själva verket rymmer TVÅ distinkta sökbara delar — denna automatiska formelbaserade del samt ett diskretionärt Särskilt bidrag (se kristianstad-foreningsbidrag-omsorgen-sarskilt). Regelverket bekräftar även att 28 februari är en STÅENDE årlig deadline, inte ett enstaka datum — löser föregående körnings konflikt/osäkerhet (§2.5, nyare källa vinner). Bidraget betalas ut senast i slutet av maj."
+  - id: "kristianstad-foreningsbidrag-omsorgen-sarskilt"
+    namn: "Särskilt bidrag, omsorgen"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Pensionärsföreningar och ideella föreningar som främjar föreningslivet för äldre människor eller personer med funktionsnedsättning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Samma grundkrav som Grund- och medlemsbidrag (registrerad, bidragsberättigad förening i Rbok, se kristianstad-foreningsbidrag-omsorgen-grundmedlem)"
+      - "Kostnadsberäkning och verksamhetsplan för den aktivitet bidraget söks för ska bifogas"
+      - "Prioritering görs med hänsyn till bidragsverksamhetens syfte — föreningar med stödjande/aktiverande verksamhet, t.ex. via omsorgsförvaltningens mötesplatser eller boenden, prioriteras"
+      - "Verksamheten kan även avse personer som inte är medlemmar i den arrangerande föreningen"
+      - "Redovisning av föregående års beviljade bidrag (kopia av fakturor eller intygande från föreningens revisorer) ska bifogas vid ny ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/download/18.4cc941c918c431c7acea823/1702376920775/Bidragsbest%C3%A4mmelser%20inom%20omsorgsf%C3%B6rvaltningens%20verksamhetsomr%C3%A5de%20231212.pdf"
+    anteckning: "SPLIT 2026-07-21 från gemensamt uppslag med kristianstad-foreningsbidrag-omsorgen-grundmedlem — se den postens anteckning för bakgrund. Till skillnad från grund-/medlemsbidraget (automatisk formel) är detta en diskretionär, projektbaserad ansökan som prioriteras individuellt. Bidraget betalas ut senast i slutet av maj."
+  - id: "kristianstad-foreningsstod-social-inkludering"
+    namn: "Föreningsstöd till insatser för social inkludering"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar som uppfyller grundkraven i riktlinjerna"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Föreningen ska vara en registrerad ideell förening"
+      - "Föreningen ska ha ett aktivt konto i Rbok"
+      - "Ansökan ska göras av behörig firmatecknare"
+      - "Godkända föreningar deltar i Föreningsråd för social inkludering två gånger per år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.kristianstad.se/upplevaochgora/bidrag/foreningsstodtillinsatserforsocialinkludering.5423.html"
+    anteckning: "Ansökan öppen 1 december–15 februari. Administreras av Arbete och välfärdsnämnden. Sidan är också nåbar via URL-aliaset foreningsbidragsocialomsorg.5423.html (samma sidnummer 5423, samma innehåll) — verifierat att det inte är ett separat bidrag."
+forutsattningar:
+  - id: "kristianstad-bidragsberattigad-forening"
+    vad: "Bli registrerad förening och godkänd som bidragsberättigad förening"
+    beskrivning: "Föreningen ska först vara registrerad hos Skatteverket med organisationsnummer, ha antagit skriftligt utformade stadgar och sänt in dessa tillsammans med kopia av bildandemötesprotokoll och ifylld anmälningsblankett till kommunens föreningsregister (görs i Rbok), samt ha valt styrelse. Föreningen ska vara uppbyggd enligt demokratiska principer, öppen för alla personer och dela uppfattningen om alla människors lika värde. Årligen ska föreningen ha årsmöte och senast två månader efter uppdatera föreningsuppgifterna med aktuella kontaktuppgifter (vid stadgeändring ska nya stadgar laddas upp på nytt). För att därefter godkännas som bidragsberättigad förening krävs att föreningen har sitt säte i Kristianstads kommun, senast två månader efter årsmötet laddar upp årsmötesprotokoll, verksamhetsberättelse och årsbokslut, innehar PlusGiro, Bankgiro eller bankkonto, samt har en lägsta medlemsavgift på 50 kr/år och person (dispens kan ges för föreningar som är skyldiga till lägre medlemsavgift via sin riksorganisation)."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.kristianstad.se/download/18.11d4daf818afe5465332768c/1697190981645/Bidragsbest%C3%A4mmelser%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20231013.pdf"

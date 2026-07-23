@@ -1,0 +1,344 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19) hade en olöst trevägskonflikt om aktivitetsbidragets deadline
+# (15/2+15/8 vs 25/2+25/8 vs 15/5) eftersom WebFetch bara fick ut
+# navigeringsskalet på Motalas bidragssidor — samma blinda fläck som
+# RESEARCH_SPEC_v2 §0 beskriver. Denna omgång användes curl + pdftotext för
+# att läsa sidorna och regelverks-PDF:erna på riktigt.
+#
+# KONFLIKT LÖST: Motalas bildningsnämnd antog en NY reviderad version av
+# "Riktlinjer för föreningsbidrag inom Verksamhet kultur och fritid" den
+# 2026-01-21 (diarienummer BN-2025/00333), gällande från 2026-02-01 — bara
+# fem och en halv månad före denna körning. PDF:ens Ansökningsdatum-tabell
+# OCH den levande webbsidan (senast uppdaterad 2026-02-25, dvs efter
+# regelverksrevideringen) anger båda entydigt: 25 februari, 25 augusti.
+# Ingen av de tre tidigare kandidaterna (15/2+15/8, 15/5) förekommer i någon
+# nu levande källa. Se motala-aktivitetsbidrag nedan.
+#
+# Metod denna omgång: (1) Sökte upp och läste regelverks-PDF:erna i sin
+# helhet via pdftotext (inte bara WebFetch-sammanfattning som gav
+# navigeringsskal): "Riktlinjer för föreningsbidrag inom Verksamhet kultur
+# och fritid" (Bildningsnämnden, reviderad 2026-01-21), "Riktlinjer
+# föreningsbidrag föreningar/organisationer som bedriver frivilligt arbete
+# inom det sociala området" (Socialnämnden, 2024-09-18, § 109) samt
+# "Riktlinjer föreningsbidrag – pensionärsföreningar och föreningar för
+# personer med funktionsnedsättning" (Socialnämnden, 2024-09-18, § 108).
+# (2) Läste varje förvaltningssida i sin helhet via curl+textextraktion
+# (WebFetch trunkerade konsekvent till navigeringsskal på dessa sidor) —
+# barn-och-ungdomsföreningar, kulturföreningar, sociala området,
+# föreningsjubileum-och-idrottsprestationer, bidragsansökan-via-Interbook-go,
+# föreningsregister, tillfällig övernattning. (3) Läste HTML-metadata
+# (article:modified_time) för varje sida för att kunna avgöra källkonflikter
+# enligt §2.5 (nyare vinner). (4) Sökte riktat efter specialkategorier
+# (§2.1.5): vägföreningar/vägsamfälligheter (hittade automatiskt vägbidrag,
+# ingen ansökan krävs), stiftelser/fonder (Motala förvaltar 7 fonder — samtliga
+# riktade till privatpersoner, ingen öppen för föreningar, se uteslutning
+# nedan), byalag/samhällsföreningar (hittade Bygdepeng, men uttryckligen
+# undantagen av källan själv, se uteslutning), bygdegårdar/hembygdsföreningar
+# (täcks av Årligt kulturbidrag, ingen separat bidragsform hittad),
+# studieförbund (uttryckligen undantagna från BÅDA de granskade
+# regelverken — ingen kommunal bidragsform för studieförbund finns i
+# Motala). Ansökningsportalen Interbook go (ibgo.motala.se) är, liksom i
+# Växjö/Halmstad/Karlstad, en Vue.js-SPA (JS-renderad, EJ_EXTRAHERBAR) —
+# täckning byggd genom sidkonvergens, inte portalräkning.
+#
+# YTTERLIGARE KONFLIKTER LÖSTA/DOKUMENTERADE (§2.5, nyare vinner):
+# - Driftsbidrag/Anläggningsbidrag samt Lokalbidrag: regelverkets
+#   Ansökningsdatum-tabell (reviderad 2026-01-21) anger "30 april", men
+#   webbsidan för barn- och ungdomsföreningar (senast uppdaterad
+#   2026-02-25, dvs EFTER regelverksrevideringen) anger konsekvent
+#   "Ansök senast 15 april" för båda. Webbsidans datum är nyare — 15 april
+#   används. Se anteckning på respektive bidrag.
+# - Föreningsbidrag inom det sociala området (frivilligt arbete): Social-
+#   nämndens regelverk (beslutat 2024-09-18) anger "2 000 kr grundbelopp +
+#   30 kr per medlem" utan tröskel. Webbsidan (senast uppdaterad
+#   2025-03-13, nyare än regelverket) anger "2 000 kr + 20 kr per medlem,
+#   gäller från medlem nummer 16". Webbsidans värde används, konflikten
+#   noteras. Samma avvägning tillämpad på pensionärs-/funktionsrätts-
+#   bidraget, vars eget regelverk (också 2024-09-18) anger samma "30 kr
+#   utan tröskel"-formel.
+#
+# RÄTTELSE FRÅN FÖREGÅENDE VERSION: "Grundbidrag till barn- och
+# ungdomsförening" (1 000 kr, automatiskt, deadline 15 april) fanns i
+# föregående fil under fel förvaltning/kategori. Grundbidraget på 1 000
+# kr existerar — men uteslutande för KULTURFÖRENINGAR (bekräftat i både
+# regelverkets kulturdel och kulturföreningssidan), inte för barn- och
+# ungdomsföreningar inom fritid. Ingen motsvarighet till ett automatiskt
+# grundbidrag finns i vare sig regelverkets fritidsdel eller barn- och
+# ungdomssidan. Rättat till motala-grundbidrag-kultur nedan (kategori
+# kultur, inte idrott).
+#
+# NYA BIDRAG SOM SAKNADES HELT I FÖREGÅENDE VERSION (I_KALLA_EJ_SKRIVET
+# åtgärdat): Driftsbidrag/Anläggningsbidrag (tabellbaserat, per
+# anläggningstyp), Driftsbidrag för maskinpreparerade skidspår, Lokalbidrag,
+# Kvalitativt verksamhetsbidrag (=Utvecklande verksamhetsbidrag),
+# Föreningsbidrag för pensionärsföreningar och föreningar för personer med
+# funktionsnedsättning (eget regelverk, eget diarienummer — helt separat
+# bidrag från det generella sociala bidraget), Bidrag för lokaler och
+# driftskostnader till träffpunkter för 65+, samt automatiskt Vägbidrag till
+# vägsamfälligheter.
+#
+# UTESLUTNA (kategoriskt/metodiskt skäl, §2.3–§2.4):
+# - "Kultur- och idrottsstipendier" (Motala kulturstipendium, musikstipendium,
+#   utvecklingsstipendium, utbytesstipendium) — individuella pris/stipendier
+#   till enskilda personer (t.ex. "Mattias Löw får årets kulturstipendium"),
+#   inte föreningsbidrag. Jämför Halmstads uteslutning av Kulturstipendium.
+#   https://www.motala.se/uppleva-och-gora/kultur-och-idrottsstipendier/
+# - Samtliga 7 fonder på Motala kommuns fondsida (W och Anna Mathilda
+#   Wernströms fond, Jungqvistska stiftelsens stipendiefond, August Wibergs
+#   donationsfond, Anette Hoffstedts Minne, AP Anderssons och Stina-Maja
+#   Carlsdotters donationsfond, Syskonen Carlssons stiftelse, Syskonen
+#   Bengtssons donationsfond) — samtliga riktade uteslutande till
+#   privatpersoner (studerande ungdomar, behövande äldre kvinnor, behövande
+#   skolbarn, personer med Downs syndrom/funktionshinder). Ingen är öppen
+#   för föreningar, till skillnad från Karlstad/Halmstad där minst en fond
+#   var förenings-sökbar. Ingen samlad §2.7-post skriven eftersom ingen
+#   kvalificerar.
+#   https://www.motala.se/omsorg-och-hjalp/ekonomi-stod-och-radgivning/fonder/
+# - "Bygdepeng till landsbygdsförening" (8 000 kr/år) — källan säger
+#   uttryckligen: "Bygdepengen är inget föreningsbidrag, tvärtom är den till
+#   för att underlätta samverkan mellan samtliga föreningar och boende i ett
+#   område." Söks av en lokal utvecklingsgrupp (kan bestå av boende och/eller
+#   föreningar tillsammans), inte av en enskild förening.
+#   https://www.motala.se/stadsplanering-och-trafik/landsbygdsutveckling/bygdepeng-till-landsbygdsforening/
+# - "Föreningsjubileum och idrottsprestationer" (uppvaktning vid 50/100/150-
+#   årsjubileum samt vid SM-guld/EM-/VM-medalj: blommor, tårtcheck, diplom)
+#   — inte ekonomiskt bidrag i egentlig mening, inget kronbelopp publicerat.
+#   Jämför Karlstads uteslutning av Lokalt klimatkontrakt (icke-monetärt).
+#   https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsjubileum-och-idrottsprestationer/
+# - "Tillfällig övernattning" — rent brandskydds-/anmälningsförfarande för
+#   övernattning i offentliga lokaler, ingen ekonomisk komponent alls.
+# - Studieförbund — sökt riktat, uttryckligen undantagna som icke
+#   bidragsberättigade i BÅDA granskade regelverk (fritid/kultur-PDF:en och
+#   socialnämndens frivilligt-arbete-PDF). Ingen egen kommunal bidragsform
+#   för studieförbund identifierad i Motala, till skillnad från Halmstad/
+#   Karlstad/Växjö.
+# - Vägföreningar/vägsamfälligheter: inget separat administrations- eller
+#   investeringsbidrag hittat utöver det automatiska vägbidraget (se
+#   motala-vagbidrag nedan) — till skillnad från Halmstad, som hade tre
+#   distinkta vägbidragsformer.
+#
+# Dubbelhämtat i två oberoende pass (§3): samtliga sidor och PDF:er hämtade
+# och lästa två gånger under körningen (curl-hämtning + separat
+# textextraktions-/analyspass). Inga ytterligare fältkonflikter utöver de
+# ovan dokumenterade. Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Motala"
+kommun_slug: "motala"
+lan: "Östergötlands län"
+befolkning: 43131
+forvaltning: "Bildningsförvaltningen samt Socialförvaltningen"
+ansokningssystem:
+  namn: "Interbook Go"
+  url: "https://ibgo.motala.se/"
+kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/"
+verifierad: 2026-07-20
+bidrag:
+  # --- BILDNINGSNÄMNDEN / KULTUR- OCH FRITIDSKONTORET: fritid (barn- och ungdomsverksamhet), via Interbook Go ---
+  - id: "motala-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar, för sammankomster med deltagare i åldern 6–25 år som uppfyller villkoren för statligt lokalt aktivitetsstöd (LOK-stöd)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Sammankomsten ska uppfylla villkoren för statligt lokalt aktivitetsstöd (LOK-stöd)"
+      - "Högst 15 deltagare räknas per sammankomst, ledare i åldersgruppen kan räknas in"
+      - "Verksamheten ska dokumenteras på närvarokort eller i digitalt närvarosystem vid varje sammankomst"
+    belopp: "8 kronor per deltagare i åldern 6–25 år (max 15 deltagare per sammankomst). Dubbelt aktivitetsbidrag för grupper särskilt riktade till personer med funktionsnedsättning."
+    sen_ansokan: "Sena ansökningar kan avslås; om årlig dokumentation saknas en månad efter sista ansökningsdatum kan ansökan avslås. Ansökan för fel verksamhets-/budgetår avslås helt (inga retroaktiva bidrag)."
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-barn-och-ungdomsforeningar/"
+    anteckning: "KONFLIKT LÖST vid denna omkörning (se filhuvud): föregående version hade en olöst trevägskonflikt (15/2+15/8, 25/2+25/8, 15/5). Både regelverket 'Riktlinjer för föreningsbidrag inom Verksamhet kultur och fritid' (reviderat av Bildningsnämnden 2026-01-21, gäller från 2026-02-01) och den levande webbsidan (senast uppdaterad 2026-02-25) anger entydigt 25 februari och 25 augusti. Ingen av de tidigare kandidatdatumen förekommer längre i någon källa."
+  - id: "motala-driftsbidrag-anlaggning"
+    namn: "Driftsbidrag / Anläggningsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar med egen anläggning som drivs i föreningens regi"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Föreningen ska redovisa vilka anläggningar som sköts av föreningen"
+      - "Bidrag för lokal ges antingen via lokalbidrag eller anläggningsbidrag, inte båda samtidigt"
+      - "Föranmälan med motivering krävs för bidrag till nya orienteringskartor"
+    belopp: "Fastställd tabell per anläggningstyp, t.ex. fotbollsplan huvudplan gräs 12 000 kr, fotbollsplan grus 2 200 kr, klubbstuga/omklädningsbyggnad (isolerad, uppvärmd) 70 kr/m², golfbana 18 hål 18 000 kr, elljusspår 1 400 kr/km — se riktlinjerna för fullständig tabell."
+    sen_ansokan: "Sena ansökningar kan avslås; komplettering krävs inom den tidsram bidragsnormerna anger för respektive bidrag."
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-barn-och-ungdomsforeningar/"
+    anteckning: "KONFLIKT (§2.5): regelverkets Ansökningsdatum-tabell (reviderad 2026-01-21) anger '30 april' för Driftsbidrag. Webbsidan (senast uppdaterad 2026-02-25, nyare än regelverksrevideringen) anger konsekvent 'Ansök senast 15 april'. Webbsidans datum används eftersom den är nyare. SAKNADES I FÖREGÅENDE VERSION som egen bidragsform (fanns bara som ett odaterat 'anläggningsbidrag' som i själva verket motsvarade dagens Investeringsbidrag, se motala-investeringsbidrag)."
+  - id: "motala-driftsbidrag-skidspar"
+    namn: "Driftsbidrag för maskinpreparerade skidspår"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade föreningar som maskinpreparerar skidspår som hålls öppna för allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-15"]
+    krav:
+      - "Skidspåren ska hållas öppna för allmänheten"
+      - "Kostnadsverifikationer ska bifogas ansökan"
+      - "Ansökan gäller för avslutad säsong (retroaktivt)"
+    belopp: "Högst 4 000 kronor per säsong, beroende på skidspårens omfattning och säsongslängd."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-barn-och-ungdomsforeningar/"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Egen deadline (15 maj, retroaktivt för avslutad säsong) skiljer sig från det generella driftsbidragets 15 april, därför skrivet som eget bidrag. I regelverkets anläggningstabell listas motsvarande post som 'Skötsel, skidspår: 4 000 kr'."
+  - id: "motala-lokalbidrag"
+    namn: "Lokalbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar för egna eller hyrda lokaler inom kommunen"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Kostnader för hyra, uppvärmning och el ska styrkas med kvitton"
+      - "Ges inte till lokaler som tillfälligt nyttjas av föreningen, till lokaler där kommunen subventionerat hyran, eller till lokal som samtidigt erhåller anläggningsbidrag"
+      - "Eventuella hyresintäkter från andrahandsuthyrning avräknas hyreskostnaden innan bidrag beräknas"
+    belopp: "75 procent av styrkta kostnader för hyra, uppvärmning och el. Max 9 000 kronor/år (organisation med 15–150 medlemmar i åldern 7–20 år) eller max 10 000 kronor/år (151 medlemmar och däröver i åldern 7–20 år)."
+    sen_ansokan: "Sena ansökningar kan avslås; komplettering krävs inom den tidsram bidragsnormerna anger för respektive bidrag."
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-barn-och-ungdomsforeningar/"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Samma konflikt (§2.5) som Driftsbidrag/Anläggningsbidrag: regelverkets tabell anger 30 april, webbsidan (nyare, uppdaterad 2026-02-25) anger 15 april. Webbsidans datum används."
+  - id: "motala-investeringsbidrag"
+    namn: "Investerings- och underhållsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade barn- och ungdomsföreningar med egen anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Avser kostnader för investeringar, reparationer och förbättringar av egen anläggning, samt inköp av inventarier eller annan utrustning"
+      - "Prövas av bildningsnämnden"
+      - "Investeringar som främjar miljöförbättring/energieffektivitet samt egen insats av föreningen prioriteras"
+    belopp: null
+    sen_ansokan: "Sena ansökningar kan avslås; komplettering krävs inom den tidsram bidragsnormerna anger för respektive bidrag."
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-barn-och-ungdomsforeningar/"
+    anteckning: "Deadline (31 oktober) bekräftad identisk i både regelverket (reviderat 2026-01-21) och webbsidan — ingen konflikt. Akuta/oförutsedda behov kan hanteras löpande under året efter dialog med kommunens fritidsstrateg. Motsvarar det som i föregående version felaktigt kallades 'anläggningsbidrag' (id motala-anlaggningsbidrag) — regelverket kallar detta 'Investeringsbidrag'; namnet i denna fil är justerat för att matcha källans egen terminologi ('Investerings- och underhållsbidrag' på webbsidan)."
+  - id: "motala-kvalitativt-verksamhetsbidrag"
+    namn: "Kvalitativt verksamhetsbidrag (utvecklande verksamhetsbidrag)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som planerar verksamhet för ökad inkludering, ökad jämställdhet, eller förbättrad folkhälsa"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Planerad verksamhet ska höra till minst ett av områdena: ökad inkludering, ökad jämställdhet, eller förbättrad folkhälsa"
+      - "Ansökan sker genom dialog mellan föreningen och fritidskontoret"
+      - "Återrapportering krävs efter genomförd verksamhet (hur pengarna använts, resultat, vägen framåt)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan (dialogbaserad ansökan utan fast deadline)"
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-barn-och-ungdomsforeningar/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Kallas 'Kvalitativt verksamhetsbidrag' i regelverkets löptext men 'Utvecklande verksamhetsbidrag' i regelverkets egen Ansökningsdatum-tabell och i Interbook Go-vägledningen — samma bidrag, terminologin varierar inom källorna själva."
+
+  # --- BILDNINGSNÄMNDEN / KULTUR- OCH FRITIDSKONTORET: kulturföreningar, via Interbook Go ---
+  - id: "motala-grundbidrag-kultur"
+    namn: "Grundbidrag (kulturföreningar)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar i Motala kommun som årligen uppdaterar sina föreningsuppgifter"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska kontrollera och vid behov uppdatera sina uppgifter i Interbook Go"
+      - "Årliga dokument (årsmötesprotokoll, verksamhetsberättelse, ekonomisk berättelse/revisionsberättelse) ska laddas upp"
+    belopp: "1 000 kronor per år för löpande kostnader."
+    sen_ansokan: "Ej tillämpligt — ingen ansökan krävs. Bidraget betalas ut automatiskt i maj, förutsatt att föreningens uppgifter och dokument i Interbook Go är kontrollerade och uppdaterade."
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-kulturforeningar/"
+    anteckning: "RÄTTELSE (se filhuvud): föregående version hade detta bidrag felaktigt kategoriserat som 'Grundbidrag till barn- och ungdomsförening' (kategori idrott/ovrig, deadline 15 april). Både regelverket och kulturföreningssidan bekräftar att grundbidraget uteslutande gäller kulturföreningar. Ingen motsvarighet finns i regelverkets eller webbsidans fritidsdel. Ingen deadline för själva kontrolluppdateringen är publicerad i nuvarande källor (till skillnad från föregående version, som angav 15 april — detta verkar ha varit en sammanblandning med Driftsbidragets/Lokalbidragets 15 april-deadline)."
+  - id: "motala-kulturbidrag-arligt"
+    namn: "Kulturbidrag — årligt bidrag"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar i Motala kommun, inklusive allmänna kulturföreningar, hembygdsföreningar och arrangerande föreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningen ska vara demokratiskt uppbyggd, öppen för alla, ha antagna stadgar, ansvarig styrelse och revisorer samt minst fem aktiva medlemmar"
+      - "Kräver en tydlig plan och kostnadskalkyl för planerade arrangemang"
+      - "Årsmöteshandlingar för innevarande år ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-kulturforeningar/"
+    anteckning: "Ansöks i oktober, senast 31 oktober inför kommande kalenderår — bekräftat identiskt i både regelverket och kulturföreningssidan, ingen konflikt. Hembygdsföreningar bekräftat inkluderade i målgruppen, ingen separat bygdegårds-/hembygdsbidragsform hittad i Motala."
+  - id: "motala-kulturbidrag-extra"
+    namn: "Extra kulturbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Ideella kulturföreningar och likvärdiga arrangörer (inte kommersiellt etablerade privata aktörer eller företag) i Motala kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Fungerar som förlustgaranti för offentliga arrangemang"
+      - "Ansökan ska skickas in och hinna behandlas innan arrangemangets start"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-till-kulturforeningar/"
+    anteckning: "Beviljas löpande under året. Maximalt belopp baseras på beräknad förlust — inget fast tak publicerat. Betalas ut efter genomfört arrangemang i relation till redovisad förlust."
+
+  # --- SOCIALNÄMNDEN, via e-tjänst (ansökningsfönster 1–30 september) ---
+  - id: "motala-social-frivilligt-arbete"
+    namn: "Föreningsbidrag för föreningar/organisationer som bedriver frivilligt arbete inom det sociala området"
+    kategori: ["social"]
+    malgrupp: "Lokal förening/organisation anknuten till en riksorganisation, med verksamhet för att förebygga sociala problem eller stödja medlemmar som utför samhälleliga uppdrag. Verksamheten ska huvudsakligen bedrivas i Motala kommun."
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Ska ha varit verksam i minst ett år och ha minst 15 medlemmar"
+      - "Ska vara demokratiskt uppbyggd med av årsmötet antagna stadgar, vald styrelse och valda revisorer"
+      - "Ansökan (med ekonomisk berättelse, verksamhetsberättelse, årsmötesprotokoll, budget, verksamhetsplan, revisorsintyg m.m.) lämnas via e-tjänst under perioden 1–30 september och kräver e-signering av behörig styrelseledamot"
+    belopp: "Grundersättning 2 000 kronor per förening plus 20 kronor per medlem (från medlem nummer 16), enligt kommunens webbplats. Verksamhetsbidrag kan ges med högst 25 procent av prisbasbeloppet till förening vars verksamhet syftar till att förbättra människors levnadsvillkor."
+    sen_ansokan: "Ansökan kan inte göras före eller efter perioden 1–30 september. Ansökan kan inte skickas in om inte alla obligatoriska bilagor är med."
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-inom-det-sociala-omradet/"
+    anteckning: "KONFLIKT (§2.5): Socialnämndens antagna regelverk (beslutat 2024-09-18, diarienummer 2024/00229, § 109) anger 'medlemsbidrag med 2 000 kr som grundbelopp per förening och därutöver 30 kr per medlem' utan tröskel. Kommunens webbplats (senast uppdaterad 2025-03-13, nyare än regelverksbeslutet) anger istället '2 000 kronor per förening plus 20 kronor per medlem, gäller från medlem nummer 16'. Webbplatsens värde används eftersom den är nyare, men osäkerheten noteras. Verksamhetsbidraget (25 procent av prisbasbeloppet) nämns bara på webbplatsen, inte i det granskade regelverket (SKRIVET_EJ_I_REGELVERK). Religiösa organisationer, studieförbund, ekonomiska/fackliga föreningar samt föreningar med väsentliga anslag från centralorganisation eller annan kommunal nämnd är uttryckligen undantagna. Mottagare av detta bidrag kan inte samtidigt få bidrag enligt pensionärs-/funktionsrättsregelverket nedan (motala-social-pensionar-funktionsratt), och vice versa."
+  - id: "motala-social-pensionar-funktionsratt"
+    namn: "Föreningsbidrag för pensionärsföreningar och föreningar för personer med funktionsnedsättning"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Pensionärsföreningar och föreningar för personer med funktionsnedsättning, anslutna till en riksorganisation som erhåller statsbidrag från Socialstyrelsen, med socialt stödjande och hälsofrämjande arbete för dessa grupper och deras anhöriga"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Ska ha varit verksam i minst ett år, ha minst 15 medlemmar och huvudsakligen bedriva verksamhet i Motala kommun"
+      - "Ska vara demokratiskt uppbyggd med av årsmötet antagna stadgar, vald styrelse och valda revisorer"
+      - "Ansökan (med ekonomisk berättelse, verksamhetsberättelse, årsmötesprotokoll, budget, verksamhetsplan, revisorsintyg m.m.) lämnas via e-tjänst under perioden 1–30 september och kräver e-signering av behörig styrelseledamot"
+    belopp: "Grundbelopp 2 000 kronor (minst 15 medlemmar) per förening, plus ersättning per medlem — se anteckning om källkonflikt kring kronbeloppet per medlem."
+    sen_ansokan: "Ansökan kan inte göras före eller efter perioden 1–30 september. Ansökan kan inte skickas in om inte alla obligatoriska bilagor är med."
+    kalla_url: "https://www.motala.se/media/uploads/Riktlinjer-for-foreningsbidrag-pensionarsforeningar-och-foreningar-for-personer-med-funktionsnedsattning.pdf"
+    anteckning: "SAKNADES HELT SOM EGET BIDRAG I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Eget regelverk (Socialnämnden, beslutat 2024-09-18, diarienummer SN 2024/0088, § 108), separat diarienummer och paragraf från det generella sociala bidraget ovan, och de två bidragen är uttryckligen ömsesidigt uteslutande enligt båda regelverken. Regelverket anger 30 kr per medlem utan tröskel; kommunens sociala-området-webbsida ger en odifferentierad sammanfattning ('20 kr per medlem från medlem 16') som inte uttryckligen skiljer mellan detta bidrag och det generella sociala bidraget — samma konfliktbedömning som motala-social-frivilligt-arbete tillämpad här (§2.5, nyare källa/webbsida väger tyngre, men se osäkerhetsnot där). Om lokal förening tillhör en samorganisation kan samorganisationen söka och fördela bidraget. Religiösa organisationer, studieförbund, ekonomiska/fackliga föreningar samt föreningar med väsentliga anslag från centralorganisation eller annan kommunal nämnd är uttryckligen undantagna."
+  - id: "motala-social-lokaler-traffpunkter"
+    namn: "Bidrag för lokaler och driftskostnader (träffpunkter för äldre)"
+    kategori: ["pensionar", "ovrig"]
+    malgrupp: "Föreningar med träffpunkter för personer över 65 år, i lokaler som tidigare var kommunala dagcentraler"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Gäller verksamhet i lokaler som tidigare var dagcentraler — nystartade föreningar omfattas inte av riktlinjerna"
+      - "Kostnaderna (hyra, el, värme) ska kunna styrkas"
+      - "I övrigt gäller samma regler som vid andra bidragsansökningar från föreningar inom socialnämndens område"
+    belopp: "Högst 90 procent av redovisade hyres- och driftskostnader (hyra, el, värme) för föregående år."
+    sen_ansokan: "Ej angivet i källan utöver den allmänna regeln att ansökan inte kan göras utanför perioden 1–30 september"
+    kalla_url: "https://www.motala.se/uppleva-och-gora/foreningar-och-foreningsbidrag/foreningsbidrag-inom-det-sociala-omradet/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Webbsidan hänvisar till 'antagna riktlinjer' för detta specifika lokalbidrag utan att länka en egen PDF; sökt riktat efter en separat regelverkshandling utan träff (EJ_EXTRAHERBAR för den specifika riktlinjehandlingen — innehållet ovan är hämtat direkt från den redaktionella sidans egen beskrivning, som är detaljerad nog för att skriva bidraget)."
+
+  # --- TEKNISKA SERVICENÄMNDEN / STADSPLANERING: vägsamfälligheter (specialkategori §2.1.5) ---
+  - id: "motala-vagbidrag"
+    namn: "Vägbidrag till vägsamfälligheter"
+    kategori: ["ovrig"]
+    malgrupp: "Vägsamfälligheter som får statligt stöd, för väg belägen inom Motala kommuns geografiska gräns"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Samfälligheten ska få statligt stöd för vägen"
+      - "Vägen ska ligga inom Motala kommuns geografiska gräns"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt — ingen ansökan krävs."
+    kalla_url: "https://www.motala.se/stadsplanering-och-trafik/gator-och-vagar/enskilda-vagar-och-vagsamfalligheter/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori §2.1.5). Automatiskt bidrag, ingen ansökan krävs; pengarna betalas ut någon gång under perioden april–juni. Inget kronbelopp eller procentsats publicerat på källan. Till skillnad från Halmstad (tre distinkta vägbidragsformer: administrationsbidrag, generellt bidrag, särskilt bidrag) verkar Motala bara ha denna enda, automatiska bidragsform för vägsamfälligheter — sökt riktat efter fler, ingen träff."
+forutsattningar:
+  - id: "motala-bidragsberattigad-forening"
+    vad: "Uppfylla grundkraven som bidragsberättigad förening (fritid/kultur, Bildningsnämnden)"
+    beskrivning: "Föreningen ska vara demokratiskt uppbyggd med av årsmöte antagna stadgar, vald styrelse och valda revisorer. Av stadgarna ska det framgå att alla som instämmer i föreningens målsättning äger rätt till medlemskap och deltagande i verksamheten. Föreningen ska ha varit verksam i minst ett år och ha minst fem medlemmar i åldern 6–25 år (undantag kan prövas), en majoritet av aktiva medlemmar bör vara mantalsskrivna i Motala kommun. Föreningen åläggs att begära in och granska begränsat registerutdrag ur belastningsregistret för ledare som arbetar med barn och ungdomar, i 2-årsintervaller. Föreningen ska årligen inlämna signerat årsmötesprotokoll, verksamhetsberättelse, ekonomisk årsredovisning och signerad revisionsberättelse i Interbook Go. Skolföreningar (utom skolidrottsföreningar anslutna till Svenska Skolidrottsförbundet), studieförbund, politiska organisationer, ekonomiska föreningar samt fackliga organisationer är undantagna."
+    system: "Interbook Go"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.motala.se/media/uploads/Riktlinjer-for-foreningsbidrag-inom-kultur-och-fritid.pdf"

@@ -1,0 +1,295 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19) hade redan hittat kultur- och fritidsnämndens regelverks-PDF
+# och fångade alla 7 bidrag däri korrekt (verifierat denna omgång genom att
+# läsa hela PDF:en sida för sida, inklusive innehållsförteckning — exakt
+# överensstämmelse, inga skillnader i belopp/deadlines/krav). Föregående
+# version missade dock två hela specialkategorier (§2.1.5) eftersom den
+# bara sökte inom kultur- och fritidsnämndens och socialnämndens spår, inte
+# brett över samtliga förvaltningar.
+#
+# Metod denna omgång: (1) Läste regelverks-PDF:en i sin helhet (19 sidor,
+# inte bara ingressen) — bekräftade att den innehåller exakt 7 bidrag
+# (Start-, Grund-, Medlems-, Aktivitets-, Lokal- och anläggnings-,
+# Motionsspårs- och Arrangemangsbidrag), samt att PDF:en EXPLICIT undantar
+# "Vägföreningar, vägsamfälligheter, hamnföreningar, villa- och
+# bostadsrättsföreningar" från kultur- och fritidsnämndens bidrag (sid 2).
+# (2) Läste kultur-/fritidsförvaltningens, socialförvaltningens och
+# näringslivsavdelningens sidor i sin helhet — 10 bidrag bekräftade,
+# matchar föregående version exakt. (3) Sökte riktat efter specialkategorier
+# (§2.1.5): vägföreningar/vägsamfälligheter — hittade att just DÄRFÖR att
+# kultur-fritid undantar dem finns ett separat, eget bidrag hos en annan
+# nämnd (Samhällsbyggnadsnämnden): driftbidrag för enskild väghållning,
+# sökbart av väghållare (inklusive samfällighets-/vägföreningar) — SAKNADES
+# HELT i föregående version. Bygdegårdar — sidan uppleva-och-gora/motesplatser/
+# bygdegardar är bara en kontaktlista, inget eget bidrag; bygdegårdsföreningar
+# får istället del av kultur-fritids generella bidrag (bekräftat i PDF:ens
+# föreningskategori-tabell sid 5, "Kultur- och bygdegårdsförening"). Byalag/
+# samhällsföreningar — enda hittade spåret är Leader/EU-stöd
+# (naringsliv-och-arbete/landsbygdsutveckling), som uttryckligen kanaliseras
+# via externa Leader-organisationer (Leader längs Göta älv & Lillån,
+# Framtidsbygder), inte ett kommunalt bidrag med egen ansökan hos kommunen —
+# uteslutet som administrerat av annan huvudman (§2.4). Stiftelser/fonder —
+# kommunen förvaltar 19 donationsstiftelser (stipendier-och-fonder-sidan);
+# läste samtliga sex namngivna stiftelsers enskilda sidor. Tre är
+# dokumenterat öppna för föreningar/organisationer (Besparingsstiftelsen,
+# Dr och fru Karl Graméns donationsstiftelse delvis, Stiftelsen Vänersborgs
+# Skollovskoloni) och SAKNADES HELT i föregående version, utan dokumenterad
+# uteslutning. Skrivna som ETT samlat bidrag enligt §2.7. (4) Ansökningsportalen
+# InterbookGo (vanersborg.ibgo.se/AssociationRegister) testad på nytt —
+# bekräftat JS-renderat sökgränssnitt utan statisk, enumererbar bidragslista
+# (EJ_EXTRAHERBAR, som väntat enligt v2.1).
+#
+# Uteslutna (kategoriskt/metodiskt skäl, §2.3–§2.4):
+# - Kulturstipendium (18–30 år) — individuellt pris/stipendium till
+#   privatperson, kan i undantagsfall tilldelas en grupp men är inte en
+#   löpande föreningsverksamhetsbidrag. Jämför Halmstads uteslutna
+#   kulturstipendium.
+#   https://vanersborg.se/uppleva-och-gora/kulturstipendium
+# - Ellen och Knut Petrés stiftelse — uteslutande behövande barn, kvinnor
+#   och "pauvres honteux", endast privatpersoner bosatta i kommunen.
+#   https://vanersborg.se/omsorg-och-hjalp/ekonomi-ekonomiskt-bistand/stipendier-och-fonder/ellen-och-knut-petres-stiftelse
+# - Stipendier för vidare utbildning — endast privatpersoner (avgångselever
+#   som fortsätter till högskola/universitet).
+#   https://vanersborg.se/omsorg-och-hjalp/ekonomi---ekonomiskt-bistand/stipendier-och-fonder/stipendier-for-vidare-utbildning
+# - Fritidskortet — statlig satsning (administreras av Försäkringskassan);
+#   familjer får kortet, föreningar får kompensation från staten, inte ett
+#   kommunalt bidrag föreningen ansöker om hos Vänersborgs kommun.
+#   Administrerat av annan huvudman, §2.4.
+#   https://vanersborg.se/uppleva-och-gora/fritidskortet
+# - Klimatklivet, energieffektiviseringsbidrag, Hållbarhetscheck m.fl. under
+#   bygga-bo-och-miljo/energi-och-uppvarmning/bidrag-och-stod — samtliga
+#   statliga/regionala (Naturvårdsverket, Boverket, VGR), inte kommunala.
+#   Administrerat av annan huvudman, §2.4.
+# - LONA-projekt (lokal naturvård) — kommunen är sökande hos Naturvårdsverket;
+#   föreningar kan initiera projekt men det finns inget eget kommunalt
+#   bidrag med egen ansökan/regelverk hos Vänersborgs kommun.
+#   https://vanersborg.se/bygga-bo-och-miljo/miljo-och-halsa/naturvard/naturvardsprojekt/lona-projekt
+# - Leaderprojekt/landsbygdsutveckling — se ovan, kanaliseras via externa
+#   Leader-organisationer, inte ett kommunalt bidrag.
+#   https://vanersborg.se/naringsliv-och-arbete/landsbygdsutveckling
+#
+# Varningssignal (§2.6) undersökt: sju av tio ursprungliga bidrag delar
+# deadline 30 september (grundbidrag, medlemsbidrag, lokal-/anläggnings-,
+# motionsspår, samt en av arrangemangsbidragets två tillfällen) — verifierat
+# i regelverks-PDF:en som en genuin, gemensam ansökningsomgång "inför
+# nästkommande år" (sid 8, 9, 13, 14), inte en extraktionsbugg. Övriga
+# bidrag (startbidrag: löpande, aktivitetsbidrag: 25/8+25/2, sociala
+# föreningar: 31/10, studieförbund: 30/6, evenemang: löpande, väg: 31/10,
+# stiftelser: 30/4+31/5) har egna, avvikande datum.
+#
+# Dubbelhämtat i två oberoende pass (§3) — de tio ursprungliga bidragen
+# omverifierade denna omgång mot regelverks-PDF:en sida för sida (exakt
+# match). De två nya bidragen (väg, stiftelser) vardera hämtade två gånger
+# från källsidorna (första och andra fetch identiska på ändamål/belopp/
+# deadline). Inga fältkonflikter identifierade denna omgång. Spot-checkas
+# av Jacob/Fable före publik deploy.
+kommun: "Vänersborg"
+kommun_slug: "vanersborg"
+lan: "Västra Götalands län"
+befolkning: 40078
+forvaltning: "Kultur- och fritidsförvaltningen, Socialförvaltningen, Samhällsbyggnadsförvaltningen samt Näringslivsavdelningen (Kommunstyrelsen)"
+ansokningssystem:
+  namn: "InterbookGo (Föreningsregistret)"
+  url: "https://vanersborg.ibgo.se/AssociationRegister"
+kalla_url: "https://vanersborg.se/uppleva-och-gora/foreningar-och-foreningsliv/stod-och-bidrag"
+verifierad: 2026-07-20
+bidrag:
+  # --- KULTUR- OCH FRITIDSFÖRVALTNINGEN (regelverk KFN 2025-05-20 §63) ---
+  - id: "vanersborg-startbidrag"
+    namn: "Startbidrag"
+    kategori: ["idrott", "kultur", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Nystartade föreningar hemmahörande i Vänersborgs kommun som avser bedriva utåtriktad verksamhet, under föreningens första verksamhetsår"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara en bidragsberättigad förening: demokratiskt uppbyggd, öppen för alla, antagna stadgar, vald styrelse och revisorer, årsmöte, medlemsavgift, inte driva partipolitisk eller diskriminerande verksamhet"
+      - "Kan endast sökas en gång per förening, under föreningens första verksamhetsår"
+      - "Justerat årsmötesprotokoll ska bifogas ansökan"
+    belopp: "4 000 kronor, fast belopp oavsett föreningens storlek"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Betalas ut löpande under året. Från och med verksamhetsår två kan föreningen i stället söka grundbidrag. Undantag från kravet på bankgiro/plusgiro: bankkonto godkänns vid utbetalning av just startbidrag."
+  - id: "vanersborg-grundbidrag"
+    namn: "Grundbidrag"
+    kategori: ["idrott", "kultur", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar hemmahörande i Vänersborgs kommun som bedrivit kontinuerlig och utåtriktad verksamhet i minst ett år (föregående kalenderår)"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Föreningen ska ha varit verksam minst ett år (föregående kalenderår) innan ansökan"
+      - "Justerat årsmötesprotokoll, ekonomisk redovisning och verksamhetsberättelse från föregående år ska bifogas"
+    belopp: "4 000 kronor (3–50 medlemmar), 6 000 kronor (51–100 medlemmar), 8 000 kronor (101–150 medlemmar), 10 000 kronor (151 medlemmar eller fler)"
+    sen_ansokan: "Föreningens eget ansvar att skicka in komplett ansökan i tid — för sent inkomna ansökningar handläggs inte"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Betalas ut i början av nästkommande år. Beloppet baseras på antal bidragsberättigade medlemmar i föreningen."
+  - id: "vanersborg-medlemsbidrag"
+    namn: "Medlemsbidrag"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Pensionärs- och funktionsrättsföreningar hemmahörande och verksamma i Vänersborgs kommun (även regionala funktionsrättsföreningar, för de medlemmar som är folkbokförda i kommunen)"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Justerat årsmötesprotokoll, ekonomisk redovisning och verksamhetsberättelse från föregående år ska bifogas"
+    belopp: null
+    sen_ansokan: "Föreningens eget ansvar att skicka in komplett ansökan i tid — för sent inkomna ansökningar handläggs inte"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Bidragets storlek baseras på antal bidragsberättigade medlemmar men är beroende av kommunens ekonomi och till verksamheten avsatt budget — inget fast schablonbelopp publicerat."
+  - id: "vanersborg-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag (kommunalt aktivitetsstöd)"
+    kategori: ["idrott", "kultur", "funktionsratt", "ovrig"]
+    malgrupp: "Ideella idrottsföreningar anslutna till specialidrottsförbund inom Riksidrottsförbundet, samt övriga bidragsberättigade föreningar som bedriver barn- och ungdomsverksamhet (6–20 år) eller verksamhet riktad till personer med funktionsnedsättning"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Bidragsberättigad sammankomst: minst 3 deltagande medlemmar 6–20 år (undantag för personer med funktionsnedsättning), ledarledd, minst 60 minuter, beslutad/planerad av styrelse, sektion eller medlemsmöte"
+      - "Föreningen ska ha medlemsregister, stadgar och en styrelse som varit verksam i minst 6 månader"
+      - "Föreningen ska ha sökt och beviljats statligt bidrag från Riksidrottsförbundet för samma verksamhet (gäller inte övriga bidragsberättigade föreningar)"
+      - "Bidrag ges för maximalt 30 deltagare per sammankomst, en gång per dag och grupp"
+    belopp: null
+    sen_ansokan: "Föreningens eget ansvar att skicka in komplett ansökan i tid — för sent inkomna ansökningar handläggs inte"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Ansökan för vårterminens sammankomster (1/1–30/6) senast 25 augusti, för höstterminens (1/7–31/12) senast 25 februari nästkommande år. Betalas ut i mars respektive september. Idrottsföreningar ansöker via IdrottOnline enligt Riksidrottsförbundets ansökningstider, övriga föreningar via närvarokort och föreningsregistret."
+  - id: "vanersborg-lokal-anlaggningsbidrag"
+    namn: "Lokal- och anläggningsbidrag"
+    kategori: ["idrott", "kultur", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som äger eller på annat sätt har nyttjanderätt till en lokal eller anläggning i Vänersborgs kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Kommunen ska inte själv kunna erbjuda motsvarande lokal, och det ska finnas ett konstaterat behov av lokalen/anläggningen"
+      - "Bidragsgrundande kostnader är lokalhyra/arrendekostnader samt löpande kostnader för el, uppvärmning, vatten och avlopp under senaste verksamhetsåret"
+      - "Föreningar som redan har hyresförhållanden där kommunen bidragit till hyressubvention kan inte få detta bidrag"
+    belopp: "Högst 50 % av föreningens bidragsgrundande kostnader, med avdrag för eventuella intäkter av uthyrning"
+    sen_ansokan: "Föreningens eget ansvar att skicka in komplett ansökan i tid — för sent inkomna ansökningar handläggs inte"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Betalas ut i början av nästkommande år."
+  - id: "vanersborg-motionsspar"
+    namn: "Bidrag till motionsspår"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som erbjuder kommunens invånare tillgång till motionsspår, elljusspår eller liknande"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Spåret (eller motsvarande) ska ha en längd om minst 3 km, vara öppet för alla, avgiftsfritt, väl skyltat och ha ordnad parkering"
+      - "Driftskostnader för motionsspåret från föregående verksamhetsår ska framgå i föreningens ekonomiska redovisning"
+    belopp: "20 000 kronor per år. Om minst 2 km av spåret är belyst med timerinställd belysning eller motsvarande kan föreningen även söka ett extra bidrag om 10 000 kronor (maximalt 30 000 kronor per år totalt)"
+    sen_ansokan: "Föreningens eget ansvar att skicka in komplett ansökan i tid — för sent inkomna ansökningar handläggs inte"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Betalas ut i början av nästkommande år. Vid nyuppförande eller upprustning av motionsspår ska projektplan och ekonomisk kalkyl presenteras; befintliga spår prioriteras före nya."
+  - id: "vanersborg-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag"
+    kategori: ["idrott", "kultur", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som anordnar offentliga arrangemang inom Vänersborgs kommuns geografiska gränser"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30", "04-30"]
+    krav:
+      - "Föreningen ska vara huvudansvarig för arrangemanget och i ansökan beskriva innehåll, beräknade kostnader/intäkter, målgrupp och uppskattat antal besökare"
+      - "Arrangemang med övervägande religiös, politisk eller social inriktning är inte bidragsberättigade, inte heller arrangemang som primärt syftar till att vara vinstdrivande"
+      - "Redovisning av arrangemangets utfall (ekonomisk och statistisk) ska lämnas senast två månader efter genomfört arrangemang"
+    belopp: "Högst 50 % av föreningens ekonomiska insats"
+    sen_ansokan: "Föreningens eget ansvar att skicka in komplett ansökan i tid — för sent inkomna ansökningar handläggs inte"
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"
+    anteckning: "Två ansökningstillfällen per år: senast 30 september inför nästkommande år, eller senast 30 april innevarande år (utbetalning i början av nästkommande år respektive i juni). Kommunen ska anges som medarrangör i marknadsföring av arrangemanget. Regelverket noterar (sid 2) att vägföreningar, vägsamfälligheter, hamnföreningar samt villa- och bostadsrättsföreningar INTE kan få bidrag av kultur- och fritidsnämnden — se separat vanersborg-driftbidrag-enskild-vag för väghållares egen bidragsform hos Samhällsbyggnadsnämnden."
+
+  # --- SOCIALFÖRVALTNINGEN ---
+  - id: "vanersborg-socialt-foreningsbidrag"
+    namn: "Föreningsbidrag för sociala föreningar"
+    kategori: ["social"]
+    malgrupp: "Lokala, frivilliga föreningar verksamma inom socialnämndens område, med säte och verksamhet i Vänersborgs kommun, vars arbete huvudsakligen är förebyggande för barn, ungdom och vuxna"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Ansökan ska lämnas av föreningens styrelse"
+      - "Verksamheten ska vara frivillig och lokal (undantag kan göras, t.ex. för BRIS)"
+      - "Verksamheten ska komplettera eller utgöra alternativ till socialnämndens arbete och vara förenlig med nämndens mål"
+      - "Föreningen ska ha giltigt bank- eller postgiro"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vanersborg.se/uppleva-och-gora/foreningar-och-foreningsliv/stod-och-bidrag/sociala-foreningar"
+    anteckning: "Söks en gång per år, elektroniskt via Mina sidor eller pappersblankett till Socialförvaltningen. Beslutas av Socialnämnden."
+
+  # --- KULTUR- OCH FRITIDSFÖRVALTNINGEN: studieförbund (separat regelverk) ---
+  - id: "vanersborg-studieforbundsbidrag"
+    namn: "Bidrag till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund verksamma i Vänersborgs kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-30"]
+    krav:
+      - "Kommunsammandrag (STUV-lista) och verksamhetsberättelse ska bifogas ansökan"
+      - "Verksamhetsplan för kommande år ska skickas in i december"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vanersborg.se/uppleva-och-gora/foreningar-och-foreningsliv/stod-och-bidrag/studieforbund"
+    anteckning: "Särskilda bestämmelser enligt kultur- och fritidsnämndens beslut 2015-03-23 §31. Fördelningen sker via Västra Götalands Bildningsförbunds fördelningsverktyg. Ansökan görs via e-post till kulturfritid@vanersborg.se / magnus.olofsson@vanersborg.se, inte via föreningsregistret."
+
+  # --- NÄRINGSLIVSAVDELNINGEN (KOMMUNSTYRELSEN) ---
+  - id: "vanersborg-evenemangsbidrag"
+    namn: "Evenemangs- och marknadsföringsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Ideell förening och organisation med verksamhet som syftar till att främja ett allmännyttigt ändamål, som planerar ett evenemang eller en aktivitet riktad till en bredare allmänhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska lämnas in senast två kalendermånader innan evenemangets genomförande"
+      - "Redovisning ska lämnas senast tre månader efter evenemanget"
+    belopp: "3 000–15 000 kronor"
+    sen_ansokan: "Ej tillämpligt (löpande, kopplat till evenemangets datum)"
+    kalla_url: "https://vanersborg.se/naringsliv-och-arbete/evenemang"
+    anteckning: "Beslutas av Kommunstyrelsen, handläggs av Näringslivsavdelningen — inte kultur- och fritidsnämnden och inte del av Föreningsregistret. Två bidragsformer: evenemangsbidrag (kostnadstäckning för planering, marknadsföring och genomförande) och marknadsföringsbidrag (mot exponering/marknadsföring av kommunen). E-tjänstens rubrik (minasidor.vanersborg.se/ksf47) nämner även \"sponsring\" som tredje sökalternativ inom samma ansökan/formulär — regelverket för kultur- och fritidsnämndens bidrag (sid 3) bekräftar att \"bidrag till sponsring, marknadsföring eller arrangemang av större, strategisk karaktär (exempelvis ett VM)\" hanteras hos Kommunstyrelsen, men ingen egen belopps-/kravtabell för sponsring specifikt är publicerad — hanteras här som samma bidragsform."
+
+  # --- SAMHÄLLSBYGGNADSFÖRVALTNINGEN (specialkategori §2.1.5: väg) ---
+  - id: "vanersborg-driftbidrag-enskild-vag"
+    namn: "Driftbidrag för enskild väghållning"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare för enskilda vägar i Vänersborgs kommun — fastighetsägare och organisationer (t.ex. samfällighets-/vägföreningar) som ansvarar för väghållningen av en väg som är utfartsväg till bebodd fastighet inom kommunen"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Vägen ska vara minst 200 meter lång och normalt körbar för personbil året runt"
+      - "Vägen ska vara utfartsväg från fastighet inom kommunen där sökanden/den boende är folkbokförd, och öppen för allmän trafik"
+      - "Det kommunala driftbidraget kan inte kombineras med bidrag från Trafikverket för samma vägsträcka — vägar som redan har Trafikverksbidrag hänvisas i stället till det statskommunala driftbidraget"
+      - "Vid första ansökningstillfället ska en karta bifogas som visar vägens sträckning"
+    belopp: "Kommunalt driftbidrag: högst 2 000 kronor per kilometer och år. Statskommunalt driftbidrag (tillägg för vägar som redan får bidrag från Trafikverket): baseras på vägkategori och driftkostnader, ingen fast schablon publicerad i källan"
+    sen_ansokan: "Ej angivet i källan utöver ordinarie deadline 31 oktober"
+    kalla_url: "https://vanersborg.se/trafik-och-resor/trafik-och-gator/enskild-vag"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori §2.1.5). Administreras av Samhällsbyggnadsförvaltningen/Samhällsbyggnadsnämnden, separat från kultur- och fritidsnämndens bidrag vars regelverk uttryckligen undantar vägföreningar och vägsamfälligheter (se anteckning på vanersborg-arrangemangsbidrag). Utbetalning i början av året efter ansökan. Väghållare som får kommunalt driftbidrag får inte stänga vägen för trafik utan Samhällsbyggnadsnämndens godkännande. Källan preciserar inte uttryckligen om även en samfällighetsförening (till skillnad från en enskild fastighetsägare) räknas som sökande \"väghållare\" — bedömt som troligt givet att detta är den vanliga organisationsformen för gemensamt förvaltade enskilda vägar i Sverige, men inte ordagrant bekräftat i källan."
+
+  # --- STIFTELSER (§2.4 / §2.7) ---
+  - id: "vanersborg-stiftelser-fonder"
+    namn: "Stiftelser och fonder öppna för föreningar"
+    kategori: ["social", "ovrig"]
+    malgrupp: "Organisationer och sammanslutningar enligt respektive stiftelses ändamål, verksamma i Vänersborgs kommun — se krav för specifikation per stiftelse"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30", "05-31"]
+    krav:
+      - "Besparingsstiftelsen: stödjer allmännyttiga företag och inrättningar, med inriktning mot fostran av uppväxande generation samt \"den arbetande klassens höjande i sedligt och moraliskt hänseende\"; förvaltas och beslutas av Kommunstyrelsen; ansökan senast 31 maj"
+      - "Dr och fru Karl Graméns donationsstiftelse: delar ut till äldre, föräldralösa barn, ensamstående mödrar, långvarigt sjuka och barn med läs-/skrivsvårigheter ELLER sammanslutningar av alkoholskadade personer (nykterhetsföreningar); förening ska vara verksam i Vänersborgs kommun; ansökan senast 30 april"
+      - "Stiftelsen Vänersborgs Skollovskoloni: ändamål är sommarrekreation, i första hand för barn från Vänersborg, därefter andra kommuninvånare i behov; det är uttryckligen ENDAST föreningar som kan ansöka, inte enskilda personer; ansökan senast 30 april"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vanersborg.se/omsorg-och-hjalp/ekonomi-ekonomiskt-bistand/stipendier-och-fonder"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning — tillagd vid korrigerande omkörning 2026-07-20 (§2.7). Vänersborgs kommun förvaltar totalt 19 donationsstiftelser (samlat kapital ca 23 miljoner kronor enligt senaste bokslut); merparten är uteslutande riktade till privatpersoner eller saknar dokumenterad möjlighet för föreningar att söka (Ellen och Knut Petrés stiftelse, Kulturstipendium, Stipendier för vidare utbildning — samtliga uteslutna enligt §2.4, se topp-kommentar). Endast dessa tre är dokumenterat öppna för organisationer/föreningar och skrivs här som ETT samlat bidrag enligt §2.7 i stället för tre separata poster. Ansökan sker via Mina sidor eller pappersblankett. Sidan senast uppdaterad enligt källan 2023-03-06 — kontrollera vid nästa omverifiering om antalet stiftelser (19) och de tre föreningsöppna stiftelsernas villkor fortfarande stämmer."
+forutsattningar:
+  - id: "vanersborg-bidragsberattigad-forening"
+    vad: "Bli bidragsberättigad förening hos kultur- och fritidsnämnden"
+    beskrivning: "Föreningen ska vara en sammanslutning som är demokratiskt uppbyggd och öppen för alla, ha en organisatorisk fasthet (stadgar där syfte och målsättning står inskrivet), ha en vald styrelse och valda revisorer, genomföra årsmöte där verksamhets-, kassa- och revisionsberättelse föredras och godkänns, ta ut medlemsavgift och föra medlemsmatrikel, samt inte driva partipolitisk verksamhet, ha en rasistisk/främlingsfientlig inriktning eller på annat sätt strida mot diskrimineringslagen. Föreningen ska vara hemmahörande och verksam i Vänersborgs kommun. Som medlem räknas fysisk person folkbokförd i Vänersborgs kommun, upptagen i föreningens medlemsförteckning med personnummer/samordningsnummer, som betalar personlig medlemsavgift och deltar regelbundet i föreningens verksamhet."
+    system: "InterbookGo"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://vanersborg.se/download/18.63cb04eb197a2053a89b3daa/1751518201295/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20inom%20kultur-%20och%20fritidsn%C3%A4mndens%20verksamhetsomr%C3%A5de%20antagten%202025-05-20.pdf"

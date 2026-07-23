@@ -1,0 +1,434 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19) skrev bara 2 bidrag eftersom Lidköping mitt under research-
+# tillfället var mitt i en bidragsreform: den nya konsoliderade sidan
+# "Stöd till kultur- och fritidsverksamhet (föreningsbidrag)" gav 200 men
+# innehållet gick inte att extrahera (JS-renderad, samma mönster som
+# Växjös/Halmstads/Karlstads Rbok-portaler).
+#
+# Metod denna omgång: (1) Sökte efter Lidköpings antagna bidragsregelverk-
+# PDF på flera sätt (direkta frågor, site:lidkoping.se filetype:pdf,
+# insynsverige.se). INGET regelverk hittades för Lidköping specifikt — två
+# träffar på insynsverige.se som såg lovande ut ("Lokala riktlinjer för
+# bidrag till ideella föreningar", "Kultur- och fritidsnämndens riktlinjer
+# för stöd") visade sig vid nedladdning och PDF-läsning vara FELAKTIGA
+# TRÄFFAR för andra kommuner (Stockholm/Östermalms stadsdelsförvaltning
+# respektive Tyresö kommun) — insynsverige.se:s sökindex matchar på
+# generisk frastext oberoende av kommun, samma fälla i två separata
+# sökningar. En nyhetsartikel (NLT 2025-04-21) bekräftar att fritids- och
+# föreningsnämnden skulle besluta om nya konsoliderade riktlinjer "nästa
+# vecka" (dvs. ca slutet av april/början av maj 2025), men inget publikt
+# indexerat PDF-dokument med det antagna regelverket hittades. Regelverket
+# (steg 1 i §2.1) är alltså EJ_HITTAT, inte EJ_EXTRAHERBAR — täckning är i
+# stället byggd på steg 3 (självservice-sidor). (2) Kommunens redaktionella
+# sidor under lidkoping.se/kommun-och-politik/bidrag-och-stipendier/* är
+# genomgående JS-renderade — 200-svar men inget extraherbart innehåll,
+# bekräftat på nio separata undersidor (den konsoliderade föreningsbidrags-
+# sidan, bidrag-till-folkbildningen, bidrag-till-lokal-utveckling, kultur--
+# och-fritidsstipendium, stod-till-landsbygdsutveckling, tillgänglighets--
+# och-bemotandepriset, ungdomspeng-sidan, m.fl.). (3) Självservice-portalen
+# (sjalvservice.lidkoping.se) är DÄREMOT extraherbar sida för sida — dess
+# indexsida listar 26 e-tjänster under kategorin "Bidrag och Stipendier".
+# Samtliga 26 hämtades individuellt. De flesta är formellt "stängda" med
+# meddelandet "E-tjänsten är nu stängd" och hänvisar till den nya
+# konsoliderade sidan för själva ansökningssteget — men varje stängd sida
+# behöll sin fullständiga målgrupps-, krav- och (ibland) belopps-/deadline-
+# text, vilket gör dem till en fullgod detaljkälla trots att de inte längre
+# är den aktiva ansökningsvägen (samma mönster som Halmstads FRI-baserade
+# enskilda bidragssidor). Detta är täckningsfacit för denna körning: 26
+# portalobjekt, varav 2 är förutsättningar (stödberättigad förening/
+# organisation), 6 är exkluderade (se nedan) och 2 är uppföljningsformulär
+# utan eget bidragsinnehåll — resterande 16 skrivna nedan. (4) Special-
+# kategorier (§2.1.5): väg/samfälligheter — hittade "Kommunalt bidrag till
+# enskilda vägar utan statsbidrag" (skrivet nedan); bygdegårdar/samlings-
+# lokaler — täcks av "Bidrag för samlingslokaler" (skrivet nedan);
+# stiftelser/fonder — sökt riktat, inget kommunalt förvaltat stiftelse-
+# bidrag till föreningar hittat (Lidköping tycks inte förvalta en jämförbar
+# stiftelseportfölj som Halmstad/Karlstad); studieförbund — "Bidrag till
+# folkbildningen" identifierad men EJ_EXTRAHERBAR (se nedan); byalag —
+# "Bidrag till lokal utveckling" identifierad men EJ_EXTRAHERBAR.
+#
+# FÖREGÅENDE PLACEHOLDER ERSATT: förra körningens enda substantiella bidrag,
+# det vaga samlingsbidraget "Stöd till kultur- och fritidsverksamhet
+# (föreningsbidrag)" (skrivet med belopp: null, krav: [1 rad]), är borttaget
+# och ersatt av de 16 faktiska bidragsformerna nedan. Den konsoliderade
+# sidan är numera bara den gemensamma ANSÖKNINGSINGÅNGEN för dessa 16 —
+# att behålla den som ett eget 17:e bidrag hade dubbelräknat samma pengar
+# under två id:n.
+#
+# Uteslutna (kategoriskt/metodiskt skäl, §2.3–§2.4):
+# - "Kultur- och fritidsstipendium" (4 underkategorier: Fritidsstipendium,
+#   Fritidsstipendium för unga, Kulturstipendium, Kulturstipendium för
+#   unga) — individuellt stipendium till privatperson bosatt i/med
+#   anknytning till kommunen, deadline 1 april. Jämför Halmstads uteslutna
+#   Kulturstipendium. https://sjalvservice.lidkoping.se/oversikt/overview/297
+# - "Stipendie Axel Lennart Larsson" — individuellt stipendium till elev
+#   vid Lidköpings högre läroverk, ansöks av eleven själv.
+#   https://sjalvservice.lidkoping.se/oversikt/overview/337
+# - "Ungdomspriset" — hedersutmärkelse + 5 000 kr till EN NAMNGIVEN individ
+#   13–25 år, inte till en förening eller grupp.
+#   https://sjalvservice.lidkoping.se/oversikt/overview/726
+# - "Hållbarhetspriset - företagsnominering" — riktar sig uteslutande till
+#   företag, inte föreningar (jämför den parallella föreningsnomineringen,
+#   som ÄR skriven nedan som lidkoping-hallbarhetspris-forening).
+#   https://sjalvservice.lidkoping.se/oversikt/overview/246
+# - "Föreningsstäd - anmälan" — inte ett bidrag utan ersättning för utfört
+#   uppdrag (6 000 kr per städområde/helg för att städa avgränsade
+#   områden i kommunen) — transaktionellt köp av en tjänst, inte stöd till
+#   föreningens egen verksamhet. https://sjalvservice.lidkoping.se/oversikt/overview/43
+# - "Sponsring ansökan/uppföljning" — sidan anger uttryckligen att
+#   kommunen slutat ta emot nya sponsringsansökningar sedan ett nytt bidrag
+#   till elit- och kulturverksamhet infördes 2022 (riktlinjer daterade
+#   januari 2017) — inaktuell/överspelad tjänst, ersatt av det nu skrivna
+#   lidkoping-elitidrott m.fl. https://sjalvservice.lidkoping.se/oversikt/overview/167
+# - "Tillgänglighets- och bemötandepriset" — EJ_EXTRAHERBAR (JS-renderad
+#   sida på lidkoping.se, ingen motsvarande självservice-e-tjänst hittad).
+#   Målgrupp (individ/företag/förening) gick inte att bekräfta — utesluten
+#   av försiktighet snarare än ett bekräftat kategoriskt skäl; se
+#   tackning.log. https://lidkoping.se/kommun-och-politik/bidrag-och-stipendier/tillganglighets--och-bemotandepriset
+# - "Stöd till landsbygdsutveckling" — EJ_EXTRAHERBAR (JS-renderad),
+#   listad under kommunens meny "Företag, näringsliv och exploatering"
+#   snarare än "Bidrag och stipendier"-huvudkategorin för föreningar, vilket
+#   antyder företagsinriktning. Utesluten av försiktighet — inte tillräckligt
+#   bekräftat att föreningar är målgrupp. Se tackning.log.
+#   https://lidkoping.se/kommun-och-politik/bidrag-och-stipendier/stod-till-landsbygdsutveckling
+# - "Föreningsbidrag äldre- och funktionsnedsättning" / "Vård och omsorg
+#   föreningsbidrag" — EJ_EXTRAHERBAR trots stark indicium: sökmotorns
+#   cachade indexträffar beskriver konsekvent ett bastöd på 5 562 kr +
+#   107 kr per aktivitetstillfälle (möten, utflykter, lägerverksamhet,
+#   sång/gymnastik, bassängträning, motionsdans m.m.), deadline 15 mars
+#   (20 % avdrag vid sen ansökan) och absolut stopp 15 april. BÅDA kända
+#   URL:er — lidkoping.se/.../foreningsbidrag-aldre--och-funktionsnedsattning
+#   OCH sjalvservice.lidkoping.se/oversikt/overview/421 — gav 404 vid
+#   upprepad hämtning 2026-07-20. Kan inte skrivas utan en levande käll-URL
+#   (§4). Troligen borttagen/omstrukturerad i samband med reformen utan att
+#   sökmotorns cache hunnit uppdateras. Se tackning.log — detta är den
+#   käll-avvikelse som mest liknar Halmstads ursprungliga miss och bör
+#   dubbelkollas manuellt av Fable/Jacob mot kommunens kontaktcenter.
+#
+# Dubbelhämtat i två oberoende pass (§3): samtliga 26 självservice-sidor
+# samt de nio JS-renderade redaktionssidorna hämtades två gånger oberoende
+# under körningen (initial kartläggning + verifieringspass för belopp/
+# deadlines). Inga fältkonflikter identifierade. Spot-checkas av Jacob/
+# Fable före publik deploy — särskilt lidkoping-aldre-funktionsnedsattning-
+# avvikelsen ovan.
+kommun: "Lidköping"
+kommun_slug: "lidkoping"
+lan: "Västra Götalands län"
+befolkning: 40341
+forvaltning: "Fritids- och föreningsnämnden samt Kulturnämnden (tidigare separata spår under vård-/omsorgsförvaltningen håller på att konsolideras i en reform som trädde i kraft 2026 — nya publicerade riktlinjer bevakas till nästa omkörning)"
+ansokningssystem:
+  namn: "Kommunens e-tjänster (Självservice) — övergång till Actor Smartbook pågår (introduktionsdatum ej publicerat)"
+  url: "https://sjalvservice.lidkoping.se/"
+kalla_url: "https://lidkoping.se/kommun-och-politik/bidrag-och-stipendier"
+verifierad: 2026-07-20
+bidrag:
+  - id: "lidkoping-aktiva-medlemmar"
+    namn: "Bidrag för aktiva medlemmar"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Stödberättigade föreningar med verksamhet för barn och unga 7–25 år; barn/unga och personer med funktionsnedsättning prioriteras"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+      - "Minst 10 aktiva medlemmar i åldersgruppen krävs för att bidrag ska betalas ut"
+      - "Aktiv medlem = deltagit vid minst 8 ledarledda sammankomster under kalenderåret"
+    belopp: "Fast belopp per aktiv medlem (exakt kronbelopp ej publicerat på källan)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/250"
+    anteckning: "E-tjänsten är formellt stängd (\"E-tjänsten är nu stängd\") och ansökan sker nu via den konsoliderade sidan Föreningsbidrag inom kultur och fritid, men bidragsformen och villkoren enligt denna sida bedöms fortsatt gälla. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-elitidrott"
+    namn: "Bidrag för elitidrott"
+    kategori: ["idrott"]
+    malgrupp: "RF-anslutna idrottsföreningar och/eller idrottsutövare på nationell elitnivå — enskilda utövare i SM-toppen (18+) samt lagidrottare i de två högsta divisionerna"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Tävling ska ske på högsta sanktionerade nivå, med officiell SM-status för vinnande lag"
+      - "Elitlicens från respektive specialidrottsförbund krävs där sådan finns"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/598"
+    anteckning: "Deadline är relativ, inte ett fast kalenderdatum: lagidrott senast 2 månader innan säsongsstart, individuell idrott senast 2 månader efter säsongsslut — därför satt till löpande snarare än ett påhittat MM-DD-värde. E-tjänsten formellt stängd, hänvisar till konsoliderad sida."
+  - id: "lidkoping-friluftslivsutveckling"
+    namn: "Bidrag för friluftslivsutveckling"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Stödberättigade föreningar för särskilda satsningar som utvecklar och förbättrar friluftslivsarbetet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/590"
+    anteckning: "E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-foreningsutveckling"
+    namn: "Bidrag för föreningsutveckling"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Stödberättigade föreningar för särskilda satsningar som utvecklar och förbättrar föreningens arbete, t.ex. samverkan och nya målgrupper"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/247"
+    anteckning: "Fanns redan i föregående version men utan detaljerat krav-underlag — kompletterat vid denna omkörning. E-tjänsten formellt stängd, hänvisar till konsoliderad sida."
+  - id: "lidkoping-investeringsstod"
+    namn: "Bidrag för investeringsstöd"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Stödberättigade föreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/662"
+    anteckning: "E-tjänsten formellt stängd, hänvisar till konsoliderad sida. Detaljerade krav gick inte att extrahera utöver stödberättigad-kravet. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-kulturarrangemang"
+    namn: "Bidrag för kulturarrangemang, produktioner och program"
+    kategori: ["kultur"]
+    malgrupp: "Stödberättigade föreningar som arrangerar offentliga kulturaktiviteter, t.ex. teaterföreställningar, konserter eller festivaler"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+    belopp: "Baseras på arrangemangets kostnader (inget fast tak publicerat)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/248"
+    anteckning: "Källan anger uttryckligen att ansökan kan lämnas löpande eller årsvis. E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-lokaler-anlaggningar"
+    namn: "Bidrag för lokaler och anläggningar"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Stödberättigade föreningar med barn- och ungdomsverksamhet som äger eller hyr egen lokal/anläggning, förutsatt att den kompletterar kommunala lokaler"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+      - "Lokalen ska vara ett angeläget komplement till kommunala lokaler"
+    belopp: "Upp till 50 procent av föreningens godkända lokalkostnader, max 30 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/251"
+    anteckning: "Beloppstaket bekräftat via en oberoende sökträff (ej portalens egen sida, som saknade beloppsuppgift) — konvergens mellan två källor. E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-lokalt-kulturarv"
+    namn: "Bidrag för lokalt kulturarv"
+    kategori: ["kultur"]
+    malgrupp: "Stödberättigade föreningar som synliggör, bevarar och tillgängliggör det lokala kulturarvet och lokala kulturhistoriska värden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad innan ansökan"
+      - "Täcker inte kostnader för byggnadsbevarande arbete"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/249"
+    anteckning: "E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-renoveringar"
+    namn: "Bidrag för renoveringar"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Stödberättigade föreningar/organisationer som äger fastigheter eller lokaler"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-01", "12-01"]
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad"
+      - "Gäller ny- eller ombyggnation samt underhållsarbete på föreningsägd fastighet"
+      - "Ideellt arbete och inventarier täcks inte"
+      - "Kan inte sökas för redan påbörjat eller avslutat arbete"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan utöver de två fasta ansökningsdatumen"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/137"
+    anteckning: "Två ansökningstillfällen per år: 1 maj och/eller 1 december. Underlag (motivering, offerter, ritningar, tidsplan) krävs. Utbetalning sker mot verifikat (fakturor); medlen ska användas inom två år. E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-samlingslokaler"
+    namn: "Bidrag för samlingslokaler"
+    kategori: ["ovrig"]
+    malgrupp: "Stödberättigade föreningar som äger en egen samlingslokal"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som stödberättigad och äga lokalen"
+      - "Lokalen ska vara ett angeläget komplement till kommunala lokaler"
+      - "Andra föreningar ska kunna hyra lokalen till rimlig kostnad"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/252"
+    anteckning: "Specialkategori enligt RESEARCH_SPEC_v2 §2.1.5 (bygdegårdar/samlingslokaler). E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-lovaktivitet"
+    namn: "Bidrag lovaktivitet"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar och studieförbund som i samverkan med kommunen erbjuder kostnadsfria lovaktiviteter för barn 6–15 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska vara kostnadsfri för deltagarna"
+      - "Samverkan sker med kommunen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/27"
+    anteckning: "E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-lovaktivitet-summer-move"
+    namn: "Bidrag lovaktivitet på Summer Move"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar och studieförbund som i samverkan med kommunen erbjuder kostnadsfria aktiviteter för unga 6–19 år kopplat till evenemanget Summer Move"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska vara kostnadsfri för deltagarna"
+      - "Kopplat till kommunens Summer Move-satsning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/696"
+    anteckning: "Skrivet som separat bidrag från lidkoping-lovaktivitet eftersom källan har en egen e-tjänst med annan åldersgrupp (6–19 år, mot 6–15 år för den ordinarie lovaktivitetsbidraget) och en namngiven koppling till ett specifikt kommunalt evenemang. Relationen mellan de två (parallell eller ersättande) är inte entydigt beskriven i källan. E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-namndens-prioriteringar"
+    namn: "Kultur- och fritids- och föreningsnämndens prioriteringar"
+    kategori: ["ovrig"]
+    malgrupp: "Idéburna organisationer verksamma för Lidköpings kommuns invånare och besökare som främjar jämställdhet och mångfald, motverkar diskriminering och bidrar till hållbar utveckling"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamhets-/projektplan ska bifogas"
+      - "Budget ska bifogas"
+      - "Föregående års verksamhetsberättelse och årsredovisning ska bifogas"
+      - "Föreningens stadgar ska bifogas"
+      - "Organisationen får inte vara statlig/kommunal eller dela ut vinst"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/606"
+    anteckning: "Bedöms utifrån brett kulturutbud, lokal förankring, ungas engagemang och nyskapande. E-tjänsten formellt stängd, hänvisar till konsoliderad sida. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-socialt-arbete-foreningsbidrag"
+    namn: "Socialt arbete, föreningsbidrag"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar som bedriver frivilligt socialt arbete i Lidköpings kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha en vald styrelse, stadgar och regelbundna möten samt ha ett ideellt syfte"
+      - "Föreningen ska ha huvuddelen av sina medlemmar folkbokförda i Lidköpings kommun"
+      - "Föreningen ska bedriva en verksamhet som motverkar diskriminering och främjar lika rättigheter och möjligheter"
+      - "Föreningen ska aktivt verka för att all verksamhet är drogfri"
+      - "Föreningen ska vara registrerad hos Skatteverket och ha ett organisationsnummer"
+      - "Föreningen ska ha registrerat bank- eller plusgiro"
+      - "Föreningens verksamhet ska kontrolleras av två, av medlemmarna, valda revisorer"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/189"
+    anteckning: "Bekräftat oförändrat vid denna omkörning (samma innehåll som föregående verifiering 2026-07-19). E-tjänsten formellt stängd, hänvisar till konsoliderad sida."
+  - id: "lidkoping-utvecklingsmedel-social-hallbarhet"
+    namn: "Utvecklingsmedel, social hållbarhet"
+    kategori: ["social"]
+    malgrupp: "Organisationer/aktörer som i samverkan (minst två parter) arbetar med social hållbarhet, särskilt psykisk hälsa och trygghetsfrämjande insatser"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arbetet ska ske i samverkan mellan minst två aktörer"
+      - "Insatsen ska adressera identifierade behov inom psykisk hälsa/trygghet"
+      - "Kunskapsbaserad metod, med fokus på verksamhetsutveckling, nya arbetssätt, kompetenshöjning eller kunskapsdokumentation"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/357"
+    anteckning: "E-tjänsten stängd/flyttad till en separat extern blankettsida (isjalvservice.lidkoping.se/utvmedel-social-hallb-ans) enligt portalens egen text — käll-URL nedan är dock den sida som faktiskt gav 200 och läsbart innehåll vid hämtning. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-hallbarhetspris-forening"
+    namn: "Hållbarhetspriset (Lidköpings kommuns pris för hållbar utveckling) — föreningsnominering"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar i Lidköpings kommun som gjort exceptionella insatser för hållbar utveckling"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-16"]
+    krav:
+      - "Vem som helst kan nominera, inklusive föreningen själv"
+      - "Bedöms mot fem kriterier: social, miljömässig och ekonomisk hållbarhet, långsiktighet, samt förebildlighet"
+    belopp: "20 000 kronor till en förening"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/139"
+    anteckning: "Motsvarar sannolikt \"Lidköpings kommuns pris för hållbar utveckling\" som listas på kommunens huvudsida för bidrag och stipendier (den sidans innehåll var i sig EJ_EXTRAHERBAR, JS-renderad) — självservice-versionen användes som källa eftersom den gick att läsa. Parallell tävlingsklass för företag (Hållbarhetspriset - företagsnominering) är medvetet utesluten, se header. SAKNADES I FÖREGÅENDE VERSION."
+  - id: "lidkoping-ungdomspeng"
+    namn: "Ungdomspeng"
+    kategori: ["ovrig"]
+    malgrupp: "Unga 12–29 år som själva arrangerar ett evenemang öppet för och riktat till andra unga i Lidköping"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Sökande ska vara 12–29 år"
+      - "Evenemanget ska vara öppet för och riktat till andra unga"
+      - "Evenemanget ska vara förlagt till Lidköping (resor/studiebesök undantagna)"
+      - "Verksamheten ska vara helt drogfri samt politiskt och religiöst obunden"
+    belopp: "Max 10 000 kronor per ansökan"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/159"
+    anteckning: "Formellt en ansökan från en enskild ung person (12–29 år), men medlen finansierar ett evenemang öppet för andra unga snarare än privat konsumtion — jämförbart med Halmstads inkluderade \"Kulturstöd för unga\" (personer eller grupper 12–25 år). Skrivet som bidrag snarare än exkluderat individuellt stipendium av det skälet. Bevakas till nästa omkörning om tolkningen bör omprövas."
+  - id: "lidkoping-vag-utan-statsbidrag"
+    namn: "Kommunalt bidrag till enskilda vägar utan statsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare (väg-/samfällighetsföreningar och enskilda) för enskilda vägar i Lidköpings kommun utan statsbidrag"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Väglängd 400–1000 meter"
+      - "Helårsboende ska finnas utmed vägen"
+      - "Vägen får inte ha förbudsskyltar — ska vara öppen för allmän trafik"
+      - "Väghållare med över 1000 meter väg bör i första hand söka statsbidrag"
+      - "Vägen ska hålla godtagbar standard och godkännas vid besiktning"
+    belopp: "1,20 kronor per meter väg och år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/44"
+    anteckning: "Specialkategori enligt RESEARCH_SPEC_v2 §2.1.5 (vägföreningar/vägsamfälligheter). Löpande bidragsperiod 2026–2028 — ansökan ska förnyas efter varje treårsperiod, kommunen skickar inga påminnelser. SAKNADES I FÖREGÅENDE VERSION (specialkategorin söktes inte alls vid förra körningen)."
+  - id: "lidkoping-folkbildning"
+    namn: "Bidrag till folkbildningen"
+    kategori: ["kultur"]
+    malgrupp: "Statsbidragsberättigade studieförbund verksamma i Lidköpings kommun (exakt målgruppsformulering ej bekräftad, se anteckning)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav: []
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidkoping.se/kommun-och-politik/bidrag-och-stipendier/bidrag-till-folkbildningen"
+    anteckning: "EJ_EXTRAHERBAR (§2.3): sidan gav 200 men innehållet är JS-renderat och inte läsbart via hämtning. Ingen motsvarande självservice-e-tjänst hittades. Bidragets existens och namn är bekräftat via kommunens huvudsida för bidrag och stipendier (som var extraherbar); målgruppen \"studieförbund\" är en direkt tolkning av begreppet \"folkbildning\" i svensk kommunal bidragspraxis, inte en gissning om detaljvillkor. Skrivet som stub hellre än uteslutet helt, per grundregeln att ett saknat bidrag är värre än ett tomt fält. SAKNADES I FÖREGÅENDE VERSION — bör läsas om vid nästa körning när/om sidan blir extraherbar."
+  - id: "lidkoping-lokal-utveckling"
+    namn: "Bidrag till lokal utveckling"
+    kategori: ["ovrig"]
+    malgrupp: "Byalag, samhällsföreningar och lokala utvecklingsgrupper i Lidköpings kommun (exakt målgruppsformulering ej bekräftad, se anteckning)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav: []
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidkoping.se/kommun-och-politik/bidrag-och-stipendier/bidrag-till-lokal-utveckling"
+    anteckning: "EJ_EXTRAHERBAR (§2.3): sidan gav 200 men innehållet är JS-renderat och inte läsbart via hämtning. Ingen motsvarande självservice-e-tjänst hittades. Specialkategori enligt §2.1.5 (byalag/samhällsföreningar) — bidragets existens och namn bekräftat via kommunens huvudsida för bidrag och stipendier. Skrivet som stub hellre än uteslutet helt. SAKNADES I FÖREGÅENDE VERSION — bör läsas om vid nästa körning när/om sidan blir extraherbar."
+forutsattningar:
+  - id: "lidkoping-stodberattigad-forening"
+    vad: "Bli godkänd som stödberättigad förening"
+    beskrivning: "Föreningen ansöker om att bli godkänd som stödberättigad, vilket krävs innan föreningsbidrag kan sökas. Föreningen ska ha en vald styrelse, hålla årsmöte, ta ut medlemsavgift och ha antagna stadgar, ha minst 10 medlemmar varav merparten folkbokförda i Lidköpings kommun, vara öppen för alla, motverka diskriminering och aktivt verka för drogfri verksamhet, vara registrerad hos Skatteverket med organisationsnummer, samt ha registrerat bank- eller plusgiro."
+    system: "Kommunens e-tjänster (Självservice)"
+    ledtid: null
+    ledtid_text: "Ansök senast en månad innan första bidragsansökan"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/20"
+  - id: "lidkoping-stodberattigad-organisation"
+    vad: "Bli godkänd som stödberättigad organisation"
+    beskrivning: "Parallell ansökningsväg till \"Stödberättigad förening\", avsedd för aktörer som inte är en traditionell förening (t.ex. studieförbund eller andra organisationsformer). Organisationen ska godkännas som stödberättigad och leva upp till kommunens värdegrund och de allmänna villkor som gäller, utöver eventuella särskilda krav per bidragsform."
+    system: "Kommunens e-tjänster (Självservice)"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 2
+    kalla_url: "https://sjalvservice.lidkoping.se/oversikt/overview/775"

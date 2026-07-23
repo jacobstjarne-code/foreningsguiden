@@ -1,0 +1,293 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 mot RESEARCH_SPEC_v2.md §2 (reviderad
+# v2.1, RESEARCH_SPEC_v2_1_paragraf2.md — källkonvergens, inte portalen, är
+# facit). Föregående version (verifierad 2026-07-19) följde i praktiken bara
+# kommunens redaktionella sidträd "Uppleva och göra > Föreningar > Stöd för
+# föreningar" (8 bidrag) och missade tre hela bidragsspår som ligger utanför
+# det trädet, administrerade av HELT ANDRA förvaltningar:
+#
+#   1. Service, Fastigheter — anläggningsstöd till samlingslokaler och
+#      hembygdsgårdar, reglerat i ett Kommunfullmäktige-beslut (§ 142,
+#      2015-10-15) som inte länkas från "Stöd för föreningar" alls.
+#   2. Förvaltningen för Teknik — tre väg-/lekplatsrelaterade bidrag
+#      (vägbidrag, särskilt vägbidrag, lekplatsbidrag) som ligger under
+#      "Trafik, resor och utemiljö", inte under "Föreningar".
+#
+# Metod denna omgång: (1) sökte efter antaget regelverk — hittade inget
+# enskilt konsoliderat "regelverk för föreningsbidrag"-PDF för den nya
+# stödmodellen (2025/2026), bara den äldre KF-beslutade anläggningsstöds-PDF:n
+# och nämndprotokoll. (2) Genomsökte självservice.kungsbacka.se separat från
+# den redaktionella bidragssidan — detta var nyckelsteget, samma mekanism som
+# avslöjade Halmstads vägbidrag: sjalvservice.kungsbacka.se listar tre
+# väg-/lekplatsbidrag som aldrig länkas från föreningssidorna. (3) Sökte
+# riktat efter förvaltningarnas egna sidor utanför Kultur & Fritid (Teknik,
+# Service/Fastigheter). (4) Rbok (rbok.kungsbacka.se) kontrollerades separat
+# — enligt kommunens egen sida "Nytt system för bokningar och stöd" hanterar
+# Rbok idag bara LOK och föreningsregistrering, bidragsfunktionalitet är
+# under utbyggnad ("efter lansering bygger vi ut med fler funktioner som
+# möjlighet att söka stöd"). Loggat som EJ_EXTRAHERBAR/ej fullständig källa
+# i tackning.log, inte fel — matchar v2.1:s förväntan. (5) Stiftelser (16
+# st) kontrollerades: till skillnad från Halmstads 52 stiftelser (uttryckligen
+# öppna för föreningar) verifierades tre av Kungsbackas stiftelser
+# individuellt (Erik Hjälmlövs stiftelse, Hallgrens och Gagnells fond,
+# Stiftelsen socialfonden) — samtliga uteslutande riktade till privatpersoner
+# (studerande, funktionsnedsatta, barnfamiljer, äldre). Övriga 13 av 16 är
+# INTE individuellt granskade — se tackning.log för reservation.
+#
+# Täckningsavstämning: 6 nya bidrag hittade och tillagda (0 fanns i
+# föregående version). 3 tjänster utanför "Stöd för föreningar" utredda och
+# uteslutna med kategoriskt skäl (Föreningsuppdrag, Ansöka om evenemang,
+# Hyra mobil utrustning). Fritidskortet och Kungsbackagalans "Årets förening"
+# utredda och uteslutna med kategoriskt skäl. Se tackning.log för fullständig
+# avstämning.
+#
+# Kungsbacka har FYRA förvaltningar med egna föreningsbidragsspår: Kultur &
+# Fritid (idrott/kultur/ungdom, 8 bidrag), Individ & Familjeomsorg (socialt
+# arbete, 1 bidrag), Service/Fastigheter (samlingslokaler/hembygdsgårdar,
+# 3 bidrag) och Teknik (väg-/lekplatsbidrag, 3 bidrag). Ansökan sker
+# huvudsakligen via Rbok (LOK, föreningsregistrering) eller separata
+# e-tjänster på sjalvservice.kungsbacka.se (övriga bidrag) — se anteckning
+# per bidrag. Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Kungsbacka"
+kommun_slug: "kungsbacka"
+lan: "Hallands län"
+befolkning: 86332
+forvaltning: "Förvaltningen för Kultur & Fritid, Förvaltningen för Individ & Familjeomsorg, Service (Fastigheter) samt Förvaltningen för Teknik"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://rbok.kungsbacka.se/"
+kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar"
+verifierad: 2026-07-20
+bidrag:
+  - id: "kungsbacka-stod-badforeningar"
+    namn: "Stöd till badföreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella badföreningar som sköter en badplats av stort intresse för kommunens invånare och som är tillgänglig för alla"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Badplatsen ska finnas med på kommunens lista över badplatser"
+      - "Signerade årsmöteshandlingar ska bifogas ansökan"
+      - "Kvitton som visar hur föregående års stöd använts ska bifogas"
+    belopp: "Stormskador upp till 30 000 kronor. Ytterligare stöd för upprustning eller utveckling av badplats kan beviljas om budget tillåter."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/stod-till-badforeningar"
+    anteckning: "Stöd prioriteras i tre steg: stormskador, nödvändig upprustning, utveckling av badplats. Upprustnings- och utvecklingsstöd beviljas endast om medel återstår efter ansökningar om stormskadestöd."
+  - id: "kungsbacka-lok"
+    namn: "Lokalt aktivitetsstöd (LOK)"
+    kategori: ["idrott", "pensionar", "funktionsratt"]
+    malgrupp: "Föreningar med organiserade aktiviteter för deltagare 7–20 år, 67 år och äldre, samt deltagare med funktionsnedsättning från 7 år och uppåt"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Föreningen ska vara stödberättigad"
+      - "Aktiviteten ska pågå minst 45 minuter med minst tre deltagare utöver ledaren"
+      - "Högst 20 deltagare per ledare"
+      - "Ingen ersättning för religiös verksamhet"
+    belopp: "10 kronor per deltagare och ledare (7–20 år); 10 kronor per deltagare och sammankomst (67 år och äldre samt funktionsnedsättning)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/lokalt-aktivitetsstod-lok"
+    anteckning: "Redovisning sker i Rbok (obligatoriskt från 2026-01-01) eller annat digitalt närvarosystem, t.ex. IdrottOnline, som kan exportera till Rbok. Vårterminen (1 jan–30 jun) redovisas senast 25 augusti, höstterminen (1 jul–31 dec) redovisas senast 25 februari. Omkörning 2026-07-20: en sökträff antydde ett separat 'lovstöd' på 7,50 kr/deltagare med samma redovisningsdatum — undersökt per §2.6 genom direkthämtning av både huvudsidan 'Stöd för föreningar' och 'Barn- och ungdomsföreningar'; ingen av dessa nämner ett fristående lovstöd. Bedöms som ett sökindex-artefakt (sannolikt en äldre cachad version av LOK-sidan med annat kronbelopp), inte ett verkligt separat bidrag. Ingen ändring gjord."
+  - id: "kungsbacka-utvecklingsstod"
+    namn: "Utvecklingsstöd"
+    kategori: ["ovrig"]
+    malgrupp: "Stödberättigade föreningar som vill utveckla ny verksamhet, stärka samverkan eller pröva arbetssätt som bygger gemenskap, rörelse och delaktighet"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Föreningen ska vara stödberättigad"
+      - "Ansökan ska beskriva ett treårigt åtagande: utvecklingsinsats, koppling till de fyra grundprinciperna (likvärdighet, samhällsengagemang, livskraftiga föreningar, breddaktiviteter), målgrupper och genomförande (lokaler, ledarskap, kvalitetssäkring, tidplan)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/utvecklingsstod"
+    anteckning: "Ansökningsfönster 1 mars–1 april. Dialog och återkoppling sker april–maj, beslut i juni. Stödet gäller ett treårigt åtagande; utbetalning för år ett sker i januari påföljande år."
+  - id: "kungsbacka-stod-arrangemang-kultur"
+    namn: "Stöd till arrangemang för kulturföreningar, grupper och personer"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar, nätverk, grupper och enskilda personer som bor eller verkar i Kungsbacka kommun och vill genomföra kulturprojekt"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska huvudsakligen drivas av boende i eller föreningar från Kungsbacka kommun"
+      - "Demokratiskt och icke-diskriminerande"
+      - "Ska presenteras offentligt"
+      - "Drogfritt"
+      - "Ideellt och inte kommersiellt drivet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/stod-till-arrangemang-for-kulturforeningar-grupper-och-personer"
+    anteckning: "Ansökan ska lämnas in senast tre veckor före projektstart. Stödberättigade kostnader: teknik, lokal, marknadsföring samt arvode till föreläsare/artister. Uppföljningsrapport krävs efter genomfört projekt. E-tjänsten heter 'Ansöka om stöd för enskilda kulturprojekt' (sjalvservice.kungsbacka.se/oversikt/overview/204) — verifierad 2026-07-20 som samma bidrag, inte ett separat."
+  - id: "kungsbacka-arligt-kulturprojektstod"
+    namn: "Årligt kulturprojektstöd för kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Ideella, partipolitiskt och religiöst obundna kulturföreningar i Kungsbacka kommun, öppna för alla medlemmar"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-15"]
+    krav:
+      - "Ideell och icke-kommersiell verksamhet"
+      - "Demokratisk organisation med stadgar, styrelse och årsmöte"
+      - "Medlemsavgift ska tas ut"
+      - "Arrangemang ska vara offentliga och drogfria"
+      - "Föreningen ska huvudsakligen bestå av personer bosatta i Kungsbacka"
+      - "Ordnad ekonomisk redovisning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/arligt-kulturprojektstod-for-kulturforeningar"
+    anteckning: "Ansökan gäller nästkommande år och ska lämnas senast 15 september. Stödberättigade kostnader: teknik, lokal, marknadsföring samt arvode till föreläsare/artister."
+  - id: "kungsbacka-stod-studieforbund"
+    namn: "Stöd till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund verksamma i Kungsbacka kommun som är berättigade till stöd enligt Folkbildningsrådet"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-31"]
+    krav:
+      - "Verksamhetsplan ska bifogas ansökan"
+      - "Verksamhetsberättelse med separat ekonomisk redovisning för arbete i kommunen"
+      - "Signerad sammanställning av studietimmar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/stod-till-studieforbund"
+    anteckning: "Stödets storlek beräknas efter antal studietimmar: 70 procent grundstöd (fördelas efter föregående års andel), 10 procent volymstöd (efter genomförda studietimmar), 20 procent riktat stöd (arbetslösa, nyanlända och personer med funktionsnedsättning). Grundstöd betalas senast 31 januari, volym- och riktat stöd senast 30 juni."
+  - id: "kungsbacka-ung-projektstod"
+    namn: "Stöd till kultur- och fritidsaktiviteter för unga"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Ungdomar 12–25 år bosatta i Kungsbacka kommun som vill genomföra kultur- eller fritidsprojekt för andra unga i kommunen (inte etablerade föreningar)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Sökande ska bo i Kungsbacka kommun och genomföra projektet i kommunen"
+      - "Projektet ska vara öppet för alla unga i kommunen"
+      - "Inkluderande och i enlighet med diskrimineringslagen"
+      - "Alkohol- och drogfritt"
+      - "Ideellt, partipolitiskt och religiöst obundet"
+      - "Kungsbacka kommuns logotyp ska synas i marknadsföringen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/stod-till-kultur--och-fritidsaktiviteter-for-unga"
+    anteckning: "Ansökan besvaras inom fyra veckor. Ekonomisk hantering sker via Kultur & Fritid-förvaltningen, inga direkta utbetalningar till projektgruppen. Ges inte till skolprojekt, utbildning, politiska partier, etablerade föreningar, religiösa samfund eller mat för försäljning. E-tjänsten går även under namnet 'Barbros bankomat' (kombinerad ansökan för 'Barbros bankomat' och 'Ungas kulturprojekt', sjalvservice.kungsbacka.se/oversikt/overview/312) — verifierad 2026-07-20 som samma bidrag under ett andra namn, inte ett separat."
+  - id: "kungsbacka-verksamhetsbidrag-socialt-arbete"
+    namn: "Verksamhetsbidrag till föreningar som bedriver socialt arbete"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar som bedriver frivilligt socialt arbete inom individ- och familjeomsorgens område och som kompletterar kommunens verksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiskt uppbyggd med vald styrelse och stadgar"
+      - "Registrerad hos Skatteverket med organisationsnummer"
+      - "Minst 75 procent av medlemmarna folkbokförda i Kungsbacka kommun"
+      - "Minst ett års verksamhet inom området"
+      - "Drogfri verksamhet"
+      - "Tydliga mål och uppföljning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stod-for-foreningar/verksamhetsbidrag-till-foreningar-som-bedriver-socialt-arbete"
+    anteckning: "Ansökan för kommande års bidrag ska vara kommunen tillhanda senast 28 februari (i källan angivet som '28 februari 2026' för bidragsår 2027), och avser ett år i taget. Källan bekräftar inte uttryckligen att 28 februari återkommer som ett fast årligt datum, därför satt som löpande i stället för fast deadline. Beslut fattas av nämnden för Individ & Familjeomsorg."
+  - id: "kungsbacka-driftbidrag-samlingslokaler"
+    namn: "Driftbidrag till samlingslokaler"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella organisationer, stiftelser eller föreningar som äger eller genom långsiktigt hyresavtal disponerar en allmän samlingslokal i Kungsbacka kommun (fristående lokal, minst 50 sittplatser, öppen för föreningslivets möten och allmänheten)"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-30"]
+    krav:
+      - "Lokalen ska vara fristående — inte inbyggd i eller del av en förenings-/klubblokal — och ha minst 50 sittplatser"
+      - "Organisationen ska arbeta utan vinstsyfte och vara fristående från kommunen eller kommunala företag"
+      - "Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse, årsmötesprotokoll, uppgifter till föreningsregistret samt redovisning av medlemsantal/uthyrningsfrekvens ska lämnas årligen utan påminnelse"
+    belopp: "Max 132 kronor per kvadratmeter (nivå för år 2015 enligt regelverket, ska räknas upp årligen i takt med kommunens övriga kostnadsutveckling — inget nyare publicerat belopp hittat i källan). Bidraget avser att täcka underskott i lokaldriften och överstiger normalt inte föreningens egna intäkter, kommunalt bidrag oräknat."
+    sen_ansokan: "Handlingar ska vara Service, Fastigheter tillhanda senast 2 månader efter årsmötet, dock senast 30 oktober året före det år ansökan avser"
+    kalla_url: "https://kungsbacka.se/download/18.4028632d1864b8f9bc313428/1676898790110/Anl%C3%A4ggningsst%C3%B6d%20till%20samlingslokaler,%20hembygdsg%C3%A5rdar%20och%20liknande.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid omkörning mot v2.1 (2026-07-20). Ligger helt utanför sidträdet 'Stöd för föreningar' (som administreras av Kultur & Fritid) — administreras i stället av Service, Fastigheter, med eget regelverk beslutat av Kommunfullmäktige § 142, 2015-10-15. 14 samlingslokaler (kommun- och föreningsägda, bl.a. bygdegårdsföreningarna i Tölö, Älvsåker, Fjärås, Löftadalen och Vallda samt Buera Byastugeförening) var bidragsberättigade vid regelverkets antagande."
+  - id: "kungsbacka-anlaggningsstod-samlingslokaler"
+    namn: "Anläggningsstöd till samlingslokaler (underhåll, investering och engångsbidrag)"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningsägda allmänna samlingslokaler i Kungsbacka kommun med behov av underhållsåtgärder, ny-/om-/tillbyggnad eller standardhöjande åtgärder"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-30"]
+    krav:
+      - "Åtgärden ska bedömas som nödvändig eller lämplig ur byggnadsteknisk synvinkel av Service, Fastigheter"
+      - "Föreningen ska själv finansiera minst 20 procent av kostnaden vid engångsbidrag"
+      - "Investeringsbidrag förutsätter att Boverket redan beviljat statligt bidrag för samma åtgärd"
+      - "Utbetalning sker i efterhand efter godkänd prestation"
+    belopp: "Tre delformer med olika tak: (1) Underhållsåtgärd — 50 procent av kostnaden upp till max 200 000 kronor per år, alternativt (om driftbidraget samtidigt reduceras med minst 50 procent) 100 procent upp till max 400 000 kronor per år. (2) Investeringsbidrag tillsammans med Boverket — kommunen bidrar med max 30 procent (staten 50 procent, föreningen 20 procent). (3) Engångsbidrag — max 500 000 kronor per år, sammanlagt för samtliga föreningar tillsammans."
+    sen_ansokan: "Ingen separat deadline angiven utöver den allmänna dokumentationsfristen 30 oktober året före"
+    kalla_url: "https://kungsbacka.se/download/18.4028632d1864b8f9bc313428/1676898790110/Anl%C3%A4ggningsst%C3%B6d%20till%20samlingslokaler,%20hembygdsg%C3%A5rdar%20och%20liknande.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid omkörning mot v2.1 (2026-07-20). Tre administrativt sammanhängande, behovsprövade stödformer (regelverkets punkter 2.3.2–2.3.5) skrivna som EN post eftersom de delar ansökningsväg (direktkontakt med Service, Fastigheter) och saknar egna namngivna e-tjänster — till skillnad från driftbidraget ovan, som är en fast årlig formel och skrivet separat. Kommunen avsätter årligen en samlad budgetram på 2,5 miljoner kronor för underhålls-, investerings- och engångsbidrag samt administrativa kostnader (drift ingår inte i den ramen)."
+  - id: "kungsbacka-stod-hembygdsgardar"
+    namn: "Stöd till hembygdsgårdar och liknande byggnader"
+    kategori: ["kultur"]
+    malgrupp: "Nordhallands Hembygdsförening, som moderorganisation och samordnare för kommunens hembygdsgillen (hembygdsgårdar, stugor, kvarnar/magasin)"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-30"]
+    krav:
+      - "Sökande ska vara Nordhallands Hembygdsförening — enskilda hembygdsgillen ansöker inte separat"
+      - "Åtgärder ska syfta till att byggnaderna bevaras och bedömas nödvändiga eller lämpliga av Service, Fastigheter"
+    belopp: "Driftbidrag: 50 procent av godkända kostnader, max 50 000 kronor per år för samtliga hembygdsgårdar/stugor tillsammans. Underhållsbidrag: max 200 000 kronor per år för samtliga tillsammans (materialkostnader; undantag för arbeten som kräver särskild byggnadsteknisk kompetens)."
+    sen_ansokan: "Söks av Nordhallands Hembygdsförening senast 30 oktober året före det år ansökan avser"
+    kalla_url: "https://kungsbacka.se/download/18.4028632d1864b8f9bc313428/1676898790110/Anl%C3%A4ggningsst%C3%B6d%20till%20samlingslokaler,%20hembygdsg%C3%A5rdar%20och%20liknande.pdf"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid omkörning mot v2.1 (2026-07-20). Samma regelverk (KF § 142, 2015-10-15) och förvaltning (Service, Fastigheter) som samlingslokalsbidragen ovan, men egen målgrupp och eget belopp — skrivet som egen post. Vid regelverkets antagande fanns 3 hembygdsgårdar, 6 stugor och 5 kvarnar/magasin under Nordhallands Hembygdsförenings paraply."
+  - id: "kungsbacka-vagbidrag"
+    namn: "Vägbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Enskilda väghållare (vägföreningar, vägsamfälligheter och andra) som ansvarar för driften av väg, gata eller separat gång- och cykelväg i Kungsbacka kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Vägen ska vara belagd med asfalt eller grus och minst 200 meter lång"
+      - "Sökande ska ha ett sökbart organisationsnummer och registrerat bank- eller plusgirokonto"
+      - "Ekonomisk redovisning och årsmötesprotokoll ska bifogas (förstagångssökande och vid ändrade gränser även karta)"
+    belopp: "11 kronor per löpmeter väg, 5,50 kronor per löpmeter gång- och cykelväg. Kommunalt och eventuellt statligt bidrag tillsammans får inte överstiga 80 procent av föreningens driftkostnader."
+    sen_ansokan: "Ansökningar som kommer in efter 31 mars behandlas inte"
+    kalla_url: "https://kungsbacka.se/trafik-resor-och-utemiljo/trafik-och-gator/gator/vem-ansvarar-for-vagen/enskild-vaghallare/vagbidrag"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid omkörning mot v2.1 (2026-07-20). Hittat via självservice.kungsbacka.se (e-tjänsteöversikt, oversikt/overview/327), inte via den redaktionella föreningssidan — samma mekanism som avslöjade Halmstads vägbidrag i förra omkörningen. Administreras av Förvaltningen för Teknik, inte Kultur & Fritid. Avser föregående års driftkostnader (ansökan 2026 avser 2025), betalas ut före 1 juni. Kontakt: teknik.vagbidrag@kungsbacka.se."
+  - id: "kungsbacka-sarskilt-vagbidrag"
+    namn: "Särskilt vägbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare som redan beviljats ordinarie vägbidrag och vill genomföra gång- och cykelfrämjande åtgärder eller trafiksäkerhetshöjande ombyggnader"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Endast de som redan beviljats vägbidrag kan söka"
+      - "Projektkostnad ska vara mellan 20 000 och 100 000 kronor inklusive moms"
+      - "Ansökan ska lämnas innan arbetet påbörjas, med kostnadsberäkning och foton på platsen före åtgärd"
+      - "Privatpersoner får inte stå som betalningsmottagare"
+    belopp: "50 procent av projektkostnaden. Kommunen avsätter 200 000 kronor per år totalt för särskilt vägbidrag."
+    sen_ansokan: "Ansökningar som kommer in efter 31 mars behandlas inte"
+    kalla_url: "https://kungsbacka.se/trafik-resor-och-utemiljo/trafik-och-gator/gator/vem-ansvarar-for-vagen/enskild-vaghallare/sarskilt-vagbidrag"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid omkörning mot v2.1 (2026-07-20). Administreras av Förvaltningen för Teknik. Betalas ut i efterskott mot redovisade kostnader. Mindre skriftlig avvikelse mellan två källor på redovisningsfristen: e-tjänsteöversikten (sjalvservice.kungsbacka.se/oversikt/overview/278) skriver 'senast 31 oktober', den redaktionella innehållssidan skriver 'före 1 november' — bedöms som samma praktiska frist uttryckt olika, ingen materiell konflikt (se konflikter.log)."
+  - id: "kungsbacka-lekplatsbidrag"
+    namn: "Lekplatsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Vägföreningar i Kungsbacka kommun som vill rusta upp allmänna lekplatser"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Sökande ska vara en vägförening"
+      - "Lekplatsen ska vara allmän och tydligt framstå som allmän — inte en privat gårdslekplats"
+      - "Avser endast upprustning, inte nyanläggning"
+      - "Bidraget avser endast redskap och material, inte arbetskostnader"
+    belopp: "Max 50 procent av redskaps- och materialkostnaden. Kommunen avsätter 200 000 kronor per år totalt för lekplatsbidrag."
+    sen_ansokan: "Ansökningar som kommer in efter 31 mars behandlas inte"
+    kalla_url: "https://kungsbacka.se/trafik-resor-och-utemiljo/torg-och-allmanna-platser/bidrag-for-lekplatser"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — tillagd vid omkörning mot v2.1 (2026-07-20). Administreras av Förvaltningen för Teknik. Betalas ut i efterskott efter att redovisning lämnats senast 31 oktober/1 november. Kontakt: magnus.bengtsson@kungsbacka.se."
+forutsattningar:
+  - id: "kungsbacka-stodberattigad-forening"
+    vad: "Bli och förbli godkänd som stödberättigad förening"
+    beskrivning: "Föreningen bekräftar att den följer kommunens regler kopplade till de fyra grundprinciperna (likvärdighet, samhällsengagemang, livskraftiga föreningar, breddaktiviteter) och är demokratiskt uppbyggd med tydlig värdegrund, styrelse om minst tre ledamöter (ordförande, sekreterare, kassör), stadgar och årsmöte. Minst 75 procent av medlemmarna ska vara folkbokförda i Kungsbacka kommun och huvudverksamheten bedrivas i kommunen. Föreningar med verksamhet för barn, unga eller personer med funktionsnedsättning ska visa efterlevnad av relevanta konventioner (bland annat barnkonventionen) samt ha ANDTS-fri verksamhet. Inom en månad efter årsmötet ska signerade årsmöteshandlingar (protokoll, verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse) och uppdaterade föreningsuppgifter laddas upp och bekräftas i Rbok."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://kungsbacka.se/uppleva-och-gora/foreningar/stodberattigad-forening"

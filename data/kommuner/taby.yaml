@@ -1,0 +1,323 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md/v2.1 §2). Föregående
+# version (verifierad 2026-07-19, 12 bidrag) byggde enbart på kommunens
+# redaktionella bidragssida. Denna omgång följer källkonvergens-ordningen:
+# (1) regelverket, (2) förvaltningens egna sidor, (3) självservice/e-tjänst,
+# (4) portalen (om extraherbar), (5) specialkategorier.
+#
+# (1) REGELVERK: Täby har TVÅ nivåer av antaget regelverk, med olika
+# detaljgrad och olika ålder:
+#   a) "Riktlinje för föreningsbidrag" (Dnr KS 2024/77-04), antagen av
+#      Kommunfullmäktige 2024-10-07 — en övergripande policy (vem är
+#      bidragsberättigad, vad beviljas ALDRIG: partipolitiska/religiösa/
+#      fackliga föreningar, skolidrottsföreningar, verksamhet som
+#      sammanfaller med kommunens egen, föreningar med skulder hos
+#      kommunen/Skatteverket/Kronofogden). Den räknar INTE upp enskilda
+#      bidragsformer — det delegeras till nämnderna.
+#      https://www.taby.se/download/18.1472478b19d24ae5186c855/1774860321374/riktlinje-foreningsbidrag-1.0.pdf
+#      (En äldre, ej ifylld utkastversion av samma dokument ligger kvar
+#      både på doc.taby.se/.../Kommunfullmäktige/2024-10-07/ och på
+#      kommunens styrande-dokument-sida — bytt ut mot den beslutade
+#      versionen ovan, ingen innehållsskillnad utöver ifyllt beslutsdatum.)
+#   b) "Riktlinjer, bidragsregler för kultur- och fritidsnämndens
+#      verksamheter" (Dnr KFN 2025/84-50, skapad 2025-11-17, senast ändrad
+#      2026-04-02) — DETTA är den faktiska bidragskatalogen: 10 namngivna
+#      bidrag med syfte/villkor/belopp/ansökan/redovisning. Källan för
+#      merparten av detaljerna nedan.
+#      https://www.taby.se/download/18.1472478b19d24ae5186217e6/1775121438910/riktlinjer-bidragsregler-for-kultur-fritidsnamndens-verksamheter_TGA.pdf
+#
+# (2) FÖRVALTNING: Kultur- och fritidsnämnden administrerar samtliga
+# föreningsbidrag i Täby, inklusive de sociala/pensionärs-/
+# funktionsrättsinriktade. Riktad sökning mot Socialnämnden och
+# Äldrenämnden hittade INGEN egen, aktuell (2025/2026) bidragslinje till
+# föreningar — Socialnämnden hade ett eget "samverkansbidrag" 2020/2021
+# (Dnr SON 2020/303-79), men det har uppenbarligen konsoliderats in under
+# KFN:s "Verksamhetsbidrag sociala insatser"; inget nyare socialnämnds-
+# spår återfanns. Kommunala pensionärsrådet (KPR) är ett rådgivande organ,
+# inget bidrag.
+#
+# (3) SJÄLVSERVICE/E-TJÄNST: kommunens huvudsida för bidrag
+# (taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar)
+# är EN sammanslagen sida med kollapsbara sektioner per bidrag (inga egna
+# undersidor längre) — bekräftad kanonisk URL, 200-svar. Legacy-e-tjänster
+# på service.taby.se (AFO, AKV, AAB) svarar 200 men kräver inloggning och
+# är inte enumererbara. AFO används fortsatt för föreningsregistrering.
+#
+# (4) PORTAL: ActorSmartbook (taby.actorsmartbook.se) är Angular/JS-
+# renderad — EJ_EXTRAHERBAR, bekräftat genom hämtning (ingen statisk
+# bidragslista i HTML-svaret). Loggat i tackning.log, inte ett fel.
+#
+# (5) SPECIALKATEGORIER: riktad sökning gav inga träffar för Täby på
+# vägföreningar/vägsamfälligheter, bygdegårdar/samlingslokaler, kommunala
+# stiftelser/donationsfonder sökbara för föreningar, samhälls-/byalag
+# (bortsett från allmän hänvisning till "Täby bygdeförening" i lokalpress,
+# ingen kommunal bidragslinje), eller ett separat studieförbunds-bidrag.
+# Rimligt för en tät Stockholms-förort utan glesbygd — men innebär att
+# dessa kategorier är MEDVETET_UTESLUTNA av avsaknad, inte av aktivt val;
+# se tackning.log.
+#
+# TÄCKNINGSFYND — SKILLNADER MOT WEBBSIDAN: KFN-regelverket (b) innehåller
+# ett bidrag som INTE finns på den redaktionella webbsidan
+# ("Arrangemangsstöd kulturföreningar" — troligen nytillkommet, ej ännu
+# publicerat i sidträdet) — skrivet nedan per §2.1 (regelverket avgör
+# täckning, inte redaktörens temp). Omvänt saknar KFN-regelverket tre
+# bidrag som FINNS på webbsidan: "Städbidrag" (allmänt), "Städbidrag Täby
+# Torg och Täby Park" (båda beskrivs på webbsidan som årsspecifika
+# skräpplockningsprojekt "under 2026"/"under hösten 2026" — sannolikt
+# återkommande kampanjer snarare än stående regelverksbidrag; loggat
+# SKRIVET_EJ_I_REGELVERK) samt "Verksamhetsbidrag för funktionshinderförening"
+# (egen sökväg och eget datum, vecka 2, distinkt från "Verksamhetsbidrag
+# sociala insatser" vecka 4 — kan vara en äldre benämning som överlevt på
+# webben men slagits ihop i det nya regelverket; ingen bekräftelse hittad
+# åt något håll, skrivet med anteckning om osäkerheten).
+#
+# NAMNKONFLIKTER (§2.5 — webbsidan "Senast uppdaterad: 15 juni 2026" är
+# nyare än regelverkets ModDate 2026-04-02, som är bästa tillgängliga
+# datumproxy eftersom PDF:en saknar synligt revideringsdatum i brödtexten;
+# nyare datum vinner => webbsidans namn/målgrupp behålls som primärvärde,
+# regelverkets version dokumenteras i anteckning): "Arrangemangsstöd"
+# (webb) vs "Arrangemangsbidrag" (regelverk, + explicit 6-månaders-
+# ansökningsfrist som webben saknar helt); "Lokalbidrag" (webb) vs
+# "Lokalbidrag till pensionärsföreningar och föreningar för personer med
+# funktionsnedsättning" (regelverk, + explicit medlemströskel >25); "Stöd
+# till kulturella insatser" (webb) vs "Verksamhetsbidrag kulturföreningar"
+# (regelverk). STÖRSTA KONFLIKTEN: "Särskilt bidrag" beskrivs på webben
+# som öppet för "alla bidragsberättigade föreningar", men regelverket
+# avgränsar det uttryckligen till barn- och ungdomsföreningar som redan
+# fått aktivitetsbidrag. Se konflikter.log och respektive anteckning —
+# spot-checkas av Jacob/Fable före publik deploy, särskilt "Särskilt
+# bidrag" som har en reell målgruppsskillnad, inte bara en namnskillnad.
+#
+# Dubbelhämtat i två oberoende pass — inga övriga avvikelser.
+kommun: "Täby"
+kommun_slug: "taby"
+lan: "Stockholms län"
+befolkning: 78547
+forvaltning: "Kultur- och fritidsnämnden"
+ansokningssystem:
+  namn: "ActorSmartbook"
+  url: "https://taby.actorsmartbook.se/"
+kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+verifierad: 2026-07-21
+bidrag:
+  - id: "taby-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "ovrig", "funktionsratt"]
+    malgrupp: "Barn- och ungdomsföreningar (medlemmar 7–20 år) samt föreningar för personer med funktionsvariationer (ingen övre åldersgräns)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-03", "09-03"]
+    krav:
+      - "Deltagare ska vara medlem i den förening som bedriver aktiviteten"
+      - "Deltagare får endast ingå i en gruppaktivitet och veckodag"
+      - "Aktiviteten ska pågå minst 60 minuter"
+      - "Max 20 barn per ledare"
+      - "Ledarstöd utgår för ålderskategorin 13–20 år"
+      - "Föreningen ska under bidragsåret ha haft minst 10 registrerade medlemmar och genomfört minst 10 aktiviteter"
+      - "En aktivitet ska omfatta minst fem bidragsberättigade deltagare"
+    belopp: "8,50 kr per deltagartillfälle (7–12 år), minst 11 kr per deltagartillfälle (13–20 år), 17 kr per deltagartillfälle (funktionsvariationer)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Ansökan ska bifoga senaste årsmöteshandlingar (årsmötesprotokoll, revisionsberättelse, bokslut, verksamhetsberättelse, verksamhetsplan). Källa för villkorsdetaljer: kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50)."
+  - id: "taby-arrangemangsstod"
+    namn: "Arrangemangsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Frilufts- och idrottsföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arrangemanget/evenemanget kan vara på lokal, regional, nationell eller internationell nivå"
+      - "Ska genomföras av den sökande föreningen"
+      - "Ska äga rum i Täby kommun"
+      - "Ska registreras i evenemangskalendern"
+      - "Gäller inte intern verksamhet (t.ex. årsmöte, föreningsstämma, seriematcher) eller arrangemang av företag/institutioner"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "KÄLLKONFLIKT (§2.5): kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50, senast ändrad 2026-04-02) kallar bidraget 'Arrangemangsbidrag' och anger en explicit ansökningsfrist som helt saknas på webbsidan: ansökan senast 6 månader före arrangemangets/evenemangets genomförande, samt att förening som planerar ett nytt arrangemang (ej tidigare genomfört) ska kontakta handläggare innan ansökan skickas in. Redovisning senast en månad efter genomfört arrangemang. Webbsidan (senast uppdaterad 2026-06-15, nyare datum) behålls som primärkälla för namn, men 6-månadersfristen är verifierad och praktiskt viktig — se konflikter.log."
+  - id: "taby-kompetensutveckling"
+    namn: "Bidrag för kompetensutveckling"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet, för tränare/ledare i direkt verksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha sökt det kommunala aktivitetsbidraget"
+      - "Gäller tränarutbildningar inom specialidrottsförbundets utbildningsstruktur, kompetenshöjande mötesplatser via specialidrottsförbund/RF SISU Stockholm, utbildningar via RF SISU Stockholm samt friluftslivsutbildningar"
+      - "Utbildningen ska pågå 1–14 dagar med minst 3 timmar per dag"
+      - "Gäller tränare/ledare som medverkar i direkt verksamhet"
+      - "Kan inte sökas om bidrag för samma utbildning erhålls från annan part"
+    belopp: "Maximalt 10 000 kr per år, beviljas med 50 procent av utbildningskostnaden"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Bidraget är budgetbegränsat och inte garanterat."
+  - id: "taby-lokal-anlaggningsbidrag-barn-ungdom"
+    namn: "Lokal- och anläggningsbidrag för barn- och ungdomsföreningar"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Barn- och ungdomsföreningar som äger, arrenderar eller hyr egen anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01"]
+    krav:
+      - "Föreningen ska ha fått aktivitetsbidrag"
+      - "Föreningen äger, arrenderar eller hyr anläggningen med en löptid på minst ett år"
+      - "Föreningen ansvarar aktivt för drift och underhåll av anläggningen och håller den i gott skick"
+      - "Föreningen ska följa aktuella myndighetskrav"
+      - "Kan inte avse lokaler som enbart innehåller kansli- och/eller klubbrum"
+      - "Gäller inte enbart hyrda kommunala lokaler som man inte tar aktivt ansvar för"
+      - "Bidrag beviljas inte för ideellt arbete, förbrukningsmaterial eller investeringar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Bidraget bygger på tre delar som kan sökas var för sig eller tillsammans: hyror, mediakostnader (el, värme, vatten), övriga verksamhetskostnader (ej personal, maskiner, amorteringar, räntekostnader, förbrukningsartiklar). Beloppet bestäms efter bedömning av varje enskilt ärende."
+  - id: "taby-lokalbidrag"
+    namn: "Lokalbidrag"
+    kategori: ["funktionsratt", "pensionar"]
+    malgrupp: "Funktionshindersföreningar och pensionärsföreningar med egen eller årshyrd lokal"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen har egen lokal eller årshyrd lokal som inte är kommunal"
+      - "Föreningen ska hålla lokalen i gott skick och följa myndighetskrav"
+      - "Kontrakt/hyresavtal ska ha en löptid på minst ett år"
+      - "Bidrag beviljas inte för ideellt arbete, förbrukningsmaterial eller investeringar"
+    belopp: "Högst 40 procent av föreningens kostnad"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Källan anger deadline för ansökan som veckonummer (\"vecka 4\"), inte exakt kalenderdatum. KÄLLKONFLIKT (namn, §2.5): kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50) kallar bidraget 'Lokalbidrag till pensionärsföreningar och föreningar för personer med funktionsnedsättning' och tillägger en medlemströskel som saknas på webbsidan — fler än 25 bidragsberättigade medlemmar. Redovisning senast 15 oktober. Webbsidan (nyare datum) behålls som primärkälla för namn."
+  - id: "taby-parasport"
+    namn: "Parasport"
+    kategori: ["idrott", "funktionsratt"]
+    malgrupp: "Föreningar med verksamhet för personer med funktionsnedsättning som har behov av extra stöd i förhållande till sin omgivning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha fått aktivitetsbidrag"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Bidraget avser merkostnader eller specialutrustning för verksamhet, läger och cuper. Enligt kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50, ej på webbsidan) ska ansökan göras senast två månader före verksamhetens genomförande; redovisning senast två månader efter."
+  - id: "taby-stadbidrag-allmant"
+    namn: "Städbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar i Täby kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst två vuxna personer och 10 barn deltar vid varje städtillfälle"
+      - "Städtillfället pågår minst fyra timmar"
+    belopp: "2 500 kr per tillfälle, maximalt 10 000 kr (fyra tillfällen)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Städtillfällena äger rum vecka 36–44, hösten 2026. Källan beskriver detta som ett skräpplocknings­projekt för \"hösten 2026\" specifikt, vilket kan indikera en återkommande men årsspecifikt annonserad kampanj snarare än ett stående bidrag. SKRIVET_EJ_I_REGELVERK (§2.3) — finns inte i kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50). Webbsidans egen länk 'Läs mer och ansöks' för detta bidrag pekar (sannolikt felaktigt) till samma kampanjsida som Städbidrag Täby Torg och Täby Park; kalla_url satt till huvudsidan där bidraget faktiskt beskrivs."
+  - id: "taby-stadbidrag-taby-torg-park"
+    namn: "Städbidrag Täby Torg och Täby Park"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar i Täby kommun, städning av Täby torg och Täby park"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-20"]
+    krav:
+      - "Minst två vuxna personer och 10 barn deltar vid varje städtillfälle"
+      - "Städtillfället pågår minst fyra timmar"
+      - "Genomförs på helger (lördag och söndag)"
+      - "Minst en ansvarig person över 18 år per uppdrag; lägsta deltagarålder 7 år, kan höjas av säkerhetsskäl beroende på område"
+    belopp: "2 500 kr per tillfälle, maximalt 10 000 kr (fyra tillfällen)"
+    sen_ansokan: "Ansökningsperioden stänger 20 mars, ansökningar hanteras enligt principen \"först till kvarn\""
+    kalla_url: "https://www.taby.se/kampanjsidor/stadbidrag-taby-torg-och-taby-park"
+    anteckning: "Städtillfällena äger rum vecka 15–23 samt 34–42, 2026. Bidrag betalas ut när samtliga städtillfällen för året är avklarade. SKRIVET_EJ_I_REGELVERK (§2.3) — finns inte i kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50), beskrivs på webbsidan som ett 2026-specifikt projekt."
+  - id: "taby-kulturella-insatser"
+    namn: "Stöd till kulturella insatser"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar med kontinuerlig verksamhet inom kulturområdet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningen ska ha till syfte att bedriva kontinuerlig verksamhet inom kulturområdet, t.ex. konst, musik, teater, dans, film, foto eller hembygdsvård"
+      - "Verksamheten ska vända sig till allmänheten och komplettera det befintliga kulturutbudet i kommunen"
+      - "Nystartade föreningar kan prioriteras"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Ansökan avser nästkommande år. Redovisning senast 15 oktober. KÄLLKONFLIKT (namn, §2.5): kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50) kallar bidraget 'Verksamhetsbidrag kulturföreningar'. Webbsidan (nyare datum) behålls som primärkälla för namn."
+  - id: "taby-verksamhetsbidrag-sociala-insatser"
+    namn: "Verksamhetsbidrag sociala insatser"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Sociala föreningar, pensionärsföreningar och funktionshindersföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska komplettera och tillföra mervärde till verksamhet kommunen bedriver i egen regi, har upphandlat eller ger bidrag till"
+      - "Föreningen ska drivas med god kvalitet: planering, uppföljning och rutiner för verksamheten"
+      - "Bidrag ges inte till inventarier, renoveringar, måltider, alkoholhaltiga drycker, hyreskostnader, redan genomförda aktiviteter eller personalkostnader"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Bidraget ska gå till aktiviteter som gör det möjligt för medlemmarna att ha en aktiv och social fritid. Källan anger deadline för ansökan som veckonummer (\"vecka 4\"), inte exakt kalenderdatum. Redovisning senast vecka 3 (enligt KFN 2025/84-50, ej på webbsidan)."
+  - id: "taby-sarskilt-bidrag"
+    namn: "Särskilt bidrag"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Alla bidragsberättigade föreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Avser engångskostnader som inte täcks av kommunens övriga bidrag"
+      - "Beviljas inte för redan finansierade eller genomförda investeringar"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "STÖRSTA KÄLLKONFLIKTEN i denna omkörning (§2.5): webbsidan beskriver målgruppen brett som 'alla bidragsberättigade föreningar', men kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50, senast ändrad 2026-04-02) avgränsar bidraget uttryckligen till BARN- OCH UNGDOMSFÖRENINGAR som redan fått aktivitetsbidrag ('Villkor: Föreningen ska ha fått aktivitetsbidrag'), med ansökan senast två månader före verksamhetens genomförande och redovisning senast två månader efter. Webbsidan har nyare angivet datum (senast uppdaterad 2026-06-15 mot regelverkets ModDate 2026-04-02) och behålls därför som primärvärde per §2.5, men detta är en reell målgruppsskillnad — inte bara en namnfråga — och bör spot-checkas av Jacob/Fable innan publik deploy. Se konflikter.log."
+  - id: "taby-verksamhetsbidrag-funktionshinderforening"
+    namn: "Verksamhetsbidrag för funktionshinderförening"
+    kategori: ["funktionsratt"]
+    malgrupp: "Funktionshindersföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav: []
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+    anteckning: "Avser exempelvis arrangerad sammankomst. Källan anger deadline för ansökan som veckonummer (\"vecka 2\"), inte exakt kalenderdatum — distinkt från Verksamhetsbidrag sociala insatser (vecka 4). SKRIVET_EJ_I_REGELVERK (§2.3) — finns inte som egen post i kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50); kan vara konsoliderat in i Verksamhetsbidrag sociala insatser (som uttryckligen omfattar funktionshindersföreningar) utan att webbsidan hunnit uppdateras, eller ett fortfarande aktivt separat spår. Ingen bekräftelse hittad åt något håll — spot-checkas."
+  - id: "taby-arrangemangsstod-kulturforeningar"
+    namn: "Arrangemangsstöd kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som genomför arrangemang/evenemang inom kultur- och fritidsnämndens verksamhetsområde"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kulturarrangemanget ska hållas i Täby och falla inom kultur- och fritidsnämndens verksamhetsområde"
+      - "Antal bidrag som ges till samma förening under ett år kan begränsas"
+      - "Bidrag ges inte till kostnader för bidragsmottagarens ordinarie verksamhet eller för representation"
+      - "Bidrag ges inte till arvode för medverkande som själv är medlem i den sökande föreningen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.taby.se/download/18.1472478b19d24ae5186217e6/1775121438910/riktlinjer-bidragsregler-for-kultur-fritidsnamndens-verksamheter_TGA.pdf"
+    anteckning: "NYTT I DENNA OMKÖRNING (§2.1) — finns i kultur- och fritidsnämndens bidragsregler (KFN 2025/84-50, senast ändrad 2026-04-02) men INTE på kommunens redaktionella bidragssida per 2026-07-21. Skrivet trots avsaknad på webben eftersom regelverket avgör täckning (§2.1). Ansökan görs löpande i Actor Smartbook och ska innehålla projektplan, budget samt underlag från senaste årsmöte. Redovisning (könsuppdelad deltagarstatistik + ekonomisk uppföljning) senast en månad efter genomfört arrangemang. Spot-checkas — kan vara så nytt att det ännu inte är sökbart i praktiken."
+forutsattningar:
+  - id: "taby-bidragsberattigad-forening"
+    vad: "Bli godkänd/registrerad som bidragsberättigad förening"
+    beskrivning: "Nya föreningar måste registrera sig som bidragsberättigad förening innan bidrag kan sökas. Alla ideella föreningar som bygger på demokratiska principer har rätt att söka bidrag; barn, ungdomar och personer med funktionsnedsättning är särskilt prioriterade grupper. Enligt riktlinje för föreningsbidrag (Dnr KS 2024/77-04, antagen av Kommunfullmäktige 2024-10-07) beviljas ALDRIG bidrag till partipolitiska, religiösa eller fackliga föreningar, skolidrottsföreningar, verksamhet som sammanfaller med kommunens egen verksamhet, eller föreningar med förfallna skulder hos Täby kommun, Skatteverket eller Kronofogden."
+    system: "Kommunens e-tjänst"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar"
+  - id: "taby-riktlinje-barn-ungdom-underskrift"
+    vad: "Underteckna och skicka in riktlinjen för barn- och ungdomsföreningar"
+    beskrivning: "Föreningar som bedriver barn- och ungdomsverksamhet ska ha antagit kommunens riktlinje för föreningar med barn- och ungdomsverksamhet (värdegrund och barnrättsperspektiv, aktivt motverka mobbning/utfrysning/kränkningar, nolltolerans mot dopning/droger/alkohol, beredskap mot sexuella övergrepp) och årligen skicka in den undertecknad till Sport och förening senast 15 februari för att föreningen ska kunna få föreningsbidrag."
+    system: null
+    ledtid: null
+    ledtid_text: null
+    giltighet: "1 år — ska undertecknas och skickas in på nytt varje år, senast 15 februari"
+    ordning: 2
+    kalla_url: "https://www.taby.se/download/18.1472478b19d24ae5186217f2/1775121455048/riktlinjer-for-barn--och-ungdomsforeningar_TGA.pdf"

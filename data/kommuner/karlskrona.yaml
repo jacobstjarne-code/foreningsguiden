@@ -1,0 +1,563 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19) rapporterades DELVIS med 6 bidrag, alla med belopp: null, på
+# grund av att "Belopp och ansökningstider för stöd inom kultur och
+# fritidsområdet"-PDF:en inte gick att läsa och att fri.karlskrona.se gav
+# DNS-fel i den körningen. Båda problemen är lösta denna omgång.
+#
+# VIKTIGT FYND — fri.karlskrona.se är nedlagd, inte ett miljöfel: en
+# auktoritativ DNS-slagning mot 8.8.8.8 och 1.1.1.1 gav NXDOMAIN för
+# fri.karlskrona.se (SOA-svar från karlskrona.se:s egen namnserver,
+# inte ett generellt uppslagningsfel). Domänen är historisk — den
+# indexerades av sökmotorer när den fortfarande fanns men svarar inte
+# längre. Den faktiska, levande ansökningsportalen är
+# https://karlskrona.interbookfri.se/ (Interbook FRI, en Vue-app, JS-
+# renderad — innehållet gick inte att enumerera via fetch/curl, se
+# EJ_EXTRAHERBAR nedan). Länken till det nya systemet återfinns direkt på
+# kommunens egna bidragssidor. ansokningssystem är uppdaterat i denna fil.
+#
+# Metod: (1) Regelverket. Kommunens antagna regelverk hittades i två
+# versioner: en äldre ("Riktlinje för stöd inom kultur- och
+# fritidsområdet", antagen 2023-05-22 §57, reviderad 2024-12-03 §96) och
+# en NYARE som ersätter den ("Riktlinjer för stöd, priser och stipendier
+# inom kultur- och fritidsområdet", antagen av kultur- och fritidsnämnden
+# 2025-12-16 §99, giltig 2026-03-01–2029-12-31, ersätter uttryckligen
+# både den äldre riktlinjen och de fristående stadgarna för stipendier/
+# priser). Den nyare versionen är den som länkas från kommunens aktuella
+# bidragssidor och är den som gäller idag (2026-07-21) — den används som
+# primärkälla här. Innehållsmässigt är stödformerna identiska mellan
+# versionerna (samma 10 idrotts-/fritidsstöd, samma 4 kulturstöd),
+# kontrollerat kapitel för kapitel. Utöver denna hittades tre ytterligare
+# regelverks-PDF:er som inte är kopplade till kultur- och fritidsnämnden:
+# "Riktlinjer för bidrag till föreningar inom socialtjänstens område"
+# (Socialnämnden, fastställt 2017-09-25 §109), "Bestämmelser för bidrag
+# till pensionärsföreningar och andra föreningar som bedriver särskilt
+# riktad verksamhet för äldre" (Äldrenämnden, fastställt 2018-02-28) samt
+# "Riktlinjer för elitidrottsstöd" (beslutad av Kommundirektören
+# 2025-09-21, HELT NYTT stöd som ersätter tidigare "sponsringsmedel" fr
+# o m 2025 — hittades inte i föregående körning). Den efterfrågade
+# bilagan "Belopp och ansökningstider för stöd inom kultur och
+# fritidsområdet 2026" hittades och lästes i sin helhet via pdftotext —
+# den gav exakta belopp/budgetrader och ansökningsdatum för i princip
+# samtliga kultur- och fritidsstöd, vilket löser samtliga belopp:null
+# och "ej verifierat datum"-luckor från föregående körning.
+# (2) Förvaltningarnas egna sidor lästes i sin helhet, inklusive sidor
+# som INTE länkas direkt från huvudöversikten "Stöd till föreningar och
+# kulturorganisationer": Elitidrott i Karlskrona (ny undersektion, 2
+# sidor), Trygghetsvandrande föreningar, samt Miljö- och samhälls-
+# byggnadsförvaltningens sida om skötsel av vägar (vägbidrag).
+# (3) Självservice/specialkategorier (§2.1.5) genomsöktes riktat:
+# vägföreningar/vägsamfälligheter (HITTAT: kommunalt bidrag för
+# underhåll av enskild utfartsväg, BL5028), byalag/samhälls-/hembygds-
+# föreningar (HITTAT: Landsbygds- och skärgårdsmiljonen, 2 mkr/år,
+# administreras av Miljö- och samhällsbyggnadsförvaltningen/
+# Kommunstyrelsen — inte av kultur- och fritidsnämnden, därför lätt att
+# missa), stiftelser/fonder (samtliga identifierade stiftelser/fonder —
+# tre donationsstiftelser, fyra arvsfonder, Leopold Rubens sjukvårdsfond,
+# Gösta Håkanssons minnesfond, fyra utbildningsstipendier — är uteslutet
+# riktade till PRIVATPERSONER, se MEDVETET_UTESLUTET nedan; Karlskrona
+# saknar, till skillnad från Växjö och Karlstad, en stiftelse öppen för
+# föreningar som sökande), studieförbund (SÖKT MEN EJ HITTAT som aktiv,
+# sökbar sida — se anmärkning nedan, ej skrivet till filen).
+# Ansökningsportalen karlskrona.interbookfri.se är, liksom övriga
+# Rbok/FRI-kommuners motsvarigheter, JS-renderad och gick inte att
+# enumerera via fetch — EJ_EXTRAHERBAR, täckning byggd genom
+# sidkonvergens (regelverk + förvaltningssidor + specialkategorisidor).
+#
+# Befolkningskonflikt LÖST (§2.5, nyare datum vinner): föregående version
+# hade 66021 vs 66012 olöst. 66021 är SCB:s befolkningssiffra per
+# 2025-12-31 (kommunens årssiffra). 66012 är SCB:s kvartalssiffra per
+# 2026-03-31, publicerad av SCB 2026-05-12 ("Folkmängd och
+# befolkningsförändringar — Kvartal 1, 2026"). 66012 har senare
+# mätdatum och senare publiceringsdatum — det värdet används.
+#
+# Uteslutna (kategoriskt skäl, §2.3–§2.4):
+# - Föreningsledarpriset, Idrottsstipendium, Karlskrona idrottspris,
+#   Kulturpris, Kulturstipendium, Världsarvets eldsjälspris (kapitel 5 i
+#   regelverket) — individuella pris/hedersutmärkelser och stipendier,
+#   tilldelas genom nominering/urval av nämnden, inte genom en
+#   konkurrensutsatt ansökan om verksamhets-/projektfinansiering. Gränsfall:
+#   Kulturpriset kan formellt gå till "person, grupp, förening eller
+#   organisation", men är ändå ett erkännande-pris, inte ett sökbart
+#   bidrag i den mening övriga poster i denna fil är — jämför Halmstads
+#   uteslutning av Kulturstipendium.
+#   https://www.karlskrona.se/kultur-fritid-och-turism/foreningar/stipendier-och-priser/
+# - Fritidskortet — individuell förmån för barn 7–16 år, administreras av
+#   den statliga E-hälsomyndigheten (fritidskortet.se), inte av
+#   Karlskrona kommun. Annan huvudman + individuellt riktat.
+#   https://www.karlskrona.se/kultur-fritid-och-turism/foreningar/fritidskortet/
+# - Samtliga donationsstiftelser (Familjen Westrings donationsfond,
+#   Ingrid Catharina Bergs minne, Aug. Andréns o Anna Lundbergs samfond),
+#   arvsfonder (Carl Stefanus Rosells Donationsfond, Flyerydsfonden,
+#   Karlskrona kommuns veterinärfond), Leopold Rubens sjukvårdsfond,
+#   Gösta Håkanssons minnesfond samt fyra utbildningsstipendier —
+#   uteslutna enligt §2.4, riktar sig uttryckligen till privatpersoner
+#   (sjuka med låg inkomst, gravida kvinnor, barn under LVU, veterinärer,
+#   studerande etc), ingen förening kan söka.
+#   https://www.karlskrona.se/kommun-och-politik/stipendier-och-fonder/
+#   GRÄNSFALL noterat: Adolf Gulins donationsfond (en av fyra arvsfonder)
+#   har en öppnare formulering ("allmännyttiga ändamål, som kommunen inte
+#   har till ansvar att verkställa och bekosta") utan uttrycklig
+#   begränsning till privatperson eller förening. Uteslöts ändå i denna
+#   omgång eftersom källan inte uttryckligen bekräftar att föreningar kan
+#   söka (till skillnad från Växjös Anna Bondes Fond och Karlstads två
+#   föreningsöppna fonder, där käll-texten uttryckligen nämner
+#   föreningar) — flaggat som gränsfall för Fables granskning, inte en
+#   säker uteslutning.
+# - Kvinnojouren Frideborgs riktade anslag ur socialnämndens bidrags-
+#   budget (10 kronor per kommuninvånare, beslutat av Kommunfullmäktige)
+#   — uteslutet som eget bidrag: det är en på förhand namngiven mottagare
+#   med en fast formel, inte ett allmänt sökbart bidrag andra föreningar
+#   kan ansöka om (jämför Karlstads uteslutning av "Stöd till näringsliv
+#   och politiska verksamheter"). Nämns i anteckningen på
+#   karlskrona-social-verksamhetsbidrag för transparens.
+#   https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/riktlinjer-for-bidrag-till-foreningar-inom-socialtjanstens-omrade.pdf
+# - Ansök om säsongstider, Bilda förening, Lotteri, Tillfällig
+#   övernattning och arrangemang nattetid — inga ekonomiska bidrag
+#   (lokalbokning, informationssida respektive tillstånds-/
+#   registreringsärenden).
+#
+# EJ SKRIVET (osäker status, ingen aktiv sida hittad):
+# - Studieförbund. Nyhetsartiklar (2024–2025) beskriver att Karlskrona-
+#   alliansen lade 500 000 av tidigare 1,8 mkr i reserv för studieförbunds-
+#   stöd under en översyn, och att antalet studiecirklar minskat kraftigt.
+#   Ingen aktiv, sökbar bidragssida för studieförbund hittades på
+#   karlskrona.se vid denna körning (till skillnad från Halmstad/Växjö
+#   som båda har en tydlig "Stöd till studieförbund"-sida). Kan vara
+#   administrerat direkt utan öppen ansökan, pausat under översynen, eller
+#   nyligen borttaget från webben. Inte skrivet till filen — osäker
+#   status, ingen verifierbar käll-URL för en aktiv ansökan.
+#
+# Karlskrona har fem administrativa hem för föreningsbidrag: Kultur- och
+# fritidsförvaltningen (störst — 18 stödformer inom idrott/fritid/kultur),
+# Socialförvaltningen (socialt inriktad föreningsverksamhet),
+# Äldreförvaltningen (pensionärs-/äldreföreningar), Miljö- och samhälls-
+# byggnadsförvaltningen (vägbidrag samt, tillsammans med Kommunstyrelsen,
+# Landsbygds- och skärgårdsmiljonen) samt Kommundirektörens stab (nya
+# elitidrottsstödet, för att hållas "enkelt och transparent" skilt från
+# ordinarie nämndbeslut). Ansökan sker för kultur-/idrotts-/fritidsstöd
+# samt elitidrottsstöd via Interbook FRI; social- och äldrebidrag via
+# separat självservice/e-tjänst eller pappersblankett; Landsbygds- och
+# skärgårdsmiljonen via egen e-tjänst; vägbidrag via pappersblankett
+# (BL5028) — se anteckning per bidrag. Spot-checkas av Jacob/Fable före
+# publik deploy.
+kommun: "Karlskrona"
+kommun_slug: "karlskrona"
+lan: "Blekinge län"
+befolkning: 66012
+forvaltning: "Kultur- och fritidsförvaltningen, Socialförvaltningen, Äldreförvaltningen, Miljö- och samhällsbyggnadsförvaltningen samt Kommunstyrelsens förvaltning/kommundirektörens stab"
+ansokningssystem:
+  namn: "Interbook FRI"
+  url: "https://karlskrona.interbookfri.se/"
+kalla_url: "https://www.karlskrona.se/kultur-fritid-och-turism/foreningar/foreningsbidrag/"
+verifierad: 2026-07-21
+bidrag:
+  # --- KULTUR- OCH FRITIDSNÄMNDEN: övergripande stöd ---
+  - id: "karlskrona-lokal-driftstod"
+    namn: "Lokal- och driftstöd"
+    kategori: ["idrott", "kultur"]
+    malgrupp: "Samtliga stödberättigade ideella föreningar inom kultur- och fritidsområdet, med kostnader för hyrd eller egenägd lokal/anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15"]
+    krav:
+      - "Föreningen ska vara godkänd stödberättigad, samt särskilt godkänd för att söka drift- och lokalstöd"
+      - "Lokal som hyrs av kultur- och fritidsförvaltningen (t.ex. gymnastiksalar) är inte bidragsberättigad"
+      - "Stöd för lokalkostnader kan inte ges till delar av en lokal som används kommersiellt"
+    belopp: "Stöd för lokalkostnader (hyrd lokal): 20–40 % av bidragsgrundande kostnader (arrende, kallhyra, försäkring, myndighetsavgifter, sotning, vatten/avlopp, värme/el, fiber), lägst 10 000 kr/år i kostnad, maxbelopp 30 000–70 000 kr/år beroende på verksamhetstyp. Driftsstöd (egenägd lokal/anläggning): samma procentsatser, maxbelopp 30 000–250 000 kr/år beroende på objektstyp, plus separat skötselstöd för egenägda anläggningar (schablon: 20 000–40 000 kr för underhåll av omklädningsrum + 5 000–30 000 kr per plan beroende på plantyp, där andelen som betalas ut är 10–80 % beroende på antal deltagartillfällen)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Delas i regelverket i två delar: stöd för lokalkostnader (hyrda lokaler) och driftsstöd (egenägda lokaler/anläggningar, inklusive skötselstöd). Fullständig beloppstabell i bilagan 'Belopp och ansökningstider för stöd inom kultur och fritidsområdet 2026'. Föregående körning kunde inte läsa denna PDF och satte belopp till null — löst denna omgång."
+  # --- KULTUR- OCH FRITIDSNÄMNDEN: idrotts- och fritidsstöd ---
+  - id: "karlskrona-snabbt-och-latt"
+    namn: "Snabbt och lätt"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som vill genomföra en särskild aktivitet utanför ordinarie verksamhet, riktad till kultur- och fritidsnämndens prioriterade målgrupper"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas en gång per år och förening"
+      - "Föreningen ska vid ansökan specificera hur pengarna ska användas"
+      - "Slutredovisning senast två månader efter genomförd aktivitet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kommun-och-politik/forfattningssamling/ersattningar-och-bidrag/riktlinjer-for-stod-priser-och-stipendier-inom-kultur--och-fritidsomradet.pdf"
+    anteckning: "2026 års bilaga anger budgetrad 0 kr för detta stöd (bedöms sannolikt case-by-case snarare än ur en förhandsbudgeterad pott), men stödet listas ändå som aktivt sökbart på kommunens sida för idrott och fritid — till skillnad från Investeringsstöd, som uttryckligen är märkt 'Ej sökbart 2026'. Avvikelsen är inte förklarad i källorna (§2.6-varningssignal, flaggad men inte löst)."
+  - id: "karlskrona-projektstod-sarskilda-insatser"
+    namn: "Projektstöd — särskilda insatser"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som driver ett avgränsat utvecklingsprojekt, inklusive särskilda elitsatsningar som träningsläger"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Preciserat mål, tydligt start- och slutdatum samt fastställd budget"
+      - "Projektägare ska framgå, liksom eventuella samverkande föreningar"
+      - "Insatsen ska kunna redovisas separat från ordinarie verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kommun-och-politik/forfattningssamling/ersattningar-och-bidrag/riktlinjer-for-stod-priser-och-stipendier-inom-kultur--och-fritidsomradet.pdf"
+    anteckning: "Utbetalas med två tredjedelar vid beslut, resterande tredjedel vid slutredovisning (senast två månader efter avslutat projekt). 2026 års budgetrad för denna inriktning anger 0 kr, se motsvarande not på karlskrona-snabbt-och-latt."
+  - id: "karlskrona-projektstod-lovaktiviteter"
+    namn: "Projektstöd — lovaktiviteter"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som ordnar kostnadsfria aktiviteter för barn och ungdomar under skolloven"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteterna ska vara kostnadsfria för deltagarna"
+      - "Stödet kan täcka ledare, materialkostnader och lokalkostnader"
+    belopp: "10 000 kronor (budget 55 000 kronor totalt för inriktningen)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Slutredovisning senast två månader efter avslutat projekt. Särskilda villkor kan tillkomma vid extra medel från regionala/nationella myndigheter."
+  - id: "karlskrona-aktivitetsstod"
+    namn: "Kommunalt aktivitetsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Bidragsberättigade idrotts- och fritidsföreningars verksamhet för medlemmar 7–25 år, samt för personer med funktionsnedsättning oavsett ålder"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Föreningen ska vara godkänd stödberättigad förening"
+      - "Minst tio medlemmar i bidragsberättigad ålder (7–25 år)"
+      - "Aktivitet: minst 3 och max 30 deltagare exklusive ledare, minst en timme, gemensam samling och avslutning"
+      - "Ges inte till studiecirklar anordnade av studieförbund eller kommersiella arrangemang"
+    belopp: "8,50 kronor per bidragsberättigat deltagartillfälle (budget 3 950 000 kronor totalt)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Två ansökningsperioder per år: vårens verksamhet (1 jan–30 jun) redovisas senast 25 augusti, höstens (1 jul–31 dec) senast 25 februari påföljande år. Deadline bekräftad identisk i både föregående körning och denna, samt i 2026 års bilaga."
+  - id: "karlskrona-medlemsstod-funktionsnedsattning"
+    namn: "Medlemsstöd för förening för funktionsnedsatta"
+    kategori: ["idrott", "funktionsratt"]
+    malgrupp: "Föreningar som bedriver verksamhet för personer med funktionsnedsättning, anslutna till statsbidragsberättigad riksorganisation"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15"]
+    krav:
+      - "Föreningen ska vara ansluten till statsbidragsberättigad riksorganisation"
+      - "Ingen övre åldersgräns för medlemmarna"
+    belopp: "40 kronor per stödberättigad medlem (budget 50 000 kronor totalt)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Föregående körning kunde inte bekräfta ett fast datum för detta stöd — löst denna omgång via 2026 års bilaga (15 mars, samma dag som lokal- och driftstöd)."
+  - id: "karlskrona-simskolestod"
+    namn: "Simskolestöd"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som bedriver simskola för barn och ungdomar 4–15 år under juni, juli och/eller augusti"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Simlärare ska vara utbildad av Svenska Livräddningssällskapet (SLS) eller Svenska Simförbundet"
+      - "Max 4–5 barn per ledare, verksamhet minst två veckor och tio tillfällen"
+      - "Ansvarig ledare minst 18 år ska finnas på plats"
+    belopp: "Fast del 2 700 kronor per simskola, plus rörlig del 160 kronor per barn (budget 60 000 kronor totalt)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Slutredovisning senast två månader efter genomförd simskola."
+  - id: "karlskrona-internationellt-utbyte"
+    namn: "Stöd till internationellt utbyte"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som deltar i internationella utbyten och samarbeten"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska innehålla presentation av besökets syfte och ekonomisk kalkyl"
+      - "Efter genomförd aktivitet ska föreningen redovisa hur stödet använts"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kommun-och-politik/forfattningssamling/ersattningar-och-bidrag/riktlinjer-for-stod-priser-och-stipendier-inom-kultur--och-fritidsomradet.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Kan avse del av uppehälle eller reskostnad, för att ta emot eller besöka utländsk förening/representanter. Utbetalas med två tredjedelar vid beslut, resterande tredjedel vid slutredovisning. 2026 års budgetrad anger 0 kr, se not på karlskrona-snabbt-och-latt."
+  - id: "karlskrona-orienteringskartor"
+    namn: "Stöd för orienteringskartor"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som har orientering som sin huvudsakliga verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-01"]
+    krav:
+      - "Föreningen ska vara ansluten till Svenska orienteringsförbundet"
+      - "Kan avse framtagande av grundmaterial, tryck-/printkostnader eller kartritarprogram"
+    belopp: "Max 60 % av kostnaden. Vid arbete i klubbregi: ersättning för ideellt arbete med 200 kronor per timme (budget 200 000 kronor totalt)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning."
+  - id: "karlskrona-team-karlskrona"
+    namn: "Team Karlskrona"
+    kategori: ["idrott"]
+    malgrupp: "Individuella elitidrottare på svensk landslagsnivå (aktuell eller potentiell), folkbokförda i Karlskrona och tillhörande en idrottsförening i kommunen"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Den aktive ska vid ansökningstidpunkten minst vara uttagen till svenskt landslag på seniornivå, eller ha resultat som motsvarar den nivån"
+      - "Den aktive ska under avtalsperioden fylla minst 17 år och tävla på junior- eller seniornivå"
+      - "Ett avtal tecknas mellan kommunen och föreningen; föreningen ska visa Team Karlskronas logotyp på sin hemsida"
+      - "Ett lag kan inte som enhet komma med i Team Karlskrona — bedömning sker individuellt"
+    belopp: "Minst 10 000 kronor per medlem i Team Karlskrona (budget 150 000 kronor totalt)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Utbetalning sker alltid till föreningen den aktive representerar, aldrig direkt till individen. Skiljer sig från det nya Elitidrottsstödet (se karlskrona-elitidrottsstod), som är poängbaserat och beslutas av kommundirektören snarare än kultur- och fritidsnämnden."
+  - id: "karlskrona-investeringsstod-idrott"
+    namn: "Investeringsstöd (idrott och fritid)"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som investerar i egenägda lokaler och anläggningar/idrottsplatser, totalkostnad över 20 000 kronor"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Totalkostnaden för investeringen ska överstiga 20 000 kronor"
+      - "Vid investeringar över 200 000 kronor krävs medfinansiärer och särskild kontakt med förvaltningen innan ansökan"
+      - "Betalas inte ut för löst verksamhetsmaterial (TV, datorer, diskmaskin, möbler etc)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kommun-och-politik/forfattningssamling/ersattningar-och-bidrag/riktlinjer-for-stod-priser-och-stipendier-inom-kultur--och-fritidsomradet.pdf"
+    anteckning: "Kommunens sida för idrott och fritid anger uttryckligen 'Ej sökbart 2026' för detta stöd, vilket matchar budgetrad 0 kr i 2026 års bilaga. Skrivet till filen ändå eftersom det är en definierad stödform i det antagna regelverket (giltigt 2026-03-01–2029-12-31) — det är pausat för budgetåret, inte avskaffat."
+  - id: "karlskrona-idrotts-fritidsarrangemang"
+    namn: "Stöd till idrotts- och fritidsarrangemang"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som genomför arrangemang med visst allmänintresse, öppna för fler än de egna medlemmarna, inom Karlskrona kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Engångsarrangemang eller återkommande (max tre gånger)"
+      - "Kan inte användas till investeringar i lokaler/utrustning, religiöst/politiskt inriktade arrangemang, stödgalor eller kommersiella vinstsyften"
+      - "Budget ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kommun-och-politik/forfattningssamling/ersattningar-och-bidrag/riktlinjer-for-stod-priser-och-stipendier-inom-kultur--och-fritidsomradet.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Slutredovisning digitalt senast två månader efter arrangemanget. 2026 års budgetrad anger 0 kr, se not på karlskrona-snabbt-och-latt."
+  - id: "karlskrona-foreningsgardar"
+    namn: "Stöd till föreningsgårdar"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som bedriver öppen föreningsgårdsverksamhet för ungdomar 10–18 år, på andra platser i kommunen än de kommunala fritidsgårdarna"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst två ledare (över 18 år, medlem i föreningen), alternativt en föreningsledare tillsammans med annan godkänd förening"
+      - "Verksamheten ska vara drog- och rökfri och skild från föreningens ordinarie verksamhet"
+      - "Öppen oberoende av etnicitet, religion, funktionsnedsättning, kön, sexuell läggning eller könsidentitet"
+    belopp: "200 kronor per öppettimme, max 40 000 kronor per år (budget 200 000 kronor, delas med uppstartsstöd nedan)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Redovisning av verksamheten görs två gånger om året (1 juni och 1 december)."
+  - id: "karlskrona-uppstart-foreningsgard"
+    namn: "Stöd till uppstart av föreningsgård"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som startar ny öppen föreningsgårdsverksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Utgår efter avtalstecknande med kultur- och fritidsförvaltningen"
+    belopp: "5 000 kronor (engångsstöd)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Listat som egen rad i 2026 års ansökningstider-tabell, skild från det löpande driftstödet till föreningsgårdar."
+  - id: "karlskrona-elitidrottsstod"
+    namn: "Elitidrottsstöd till föreningar"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med elitidrottslag, individuella elitidrottsutövare eller parasportutövare som tävlar på seniornivå för en stödberättigad förening i Karlskrona"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-31"]
+    krav:
+      - "Idrotten ska ingå i Riksidrottsförbundets specialidrottsförbund"
+      - "Laget/utövaren ska tävla på seniornivå (lag: högsta eller näst högsta nationella serienivå; individuellt: aktuell/potentiell landslagsnivå)"
+      - "Individuella idrottare måste vara aktiva utövare vid ansökningstillfället — inga tidigare meriter"
+      - "Fördelning sker efter poängsystem: serienivå/mästerskapsnivå, idrottens omfattning, konkurrenssituation, tränings-/tävlingskrav samt ekonomiska förutsättningar (1–5 poäng vardera, max 25)"
+    belopp: null
+    sen_ansokan: "Lag som kvalificerar sig som elitidrott efter 31 maj hanteras inte det året"
+    kalla_url: "https://www.karlskrona.se/globalassets/kommun-och-politik/forfattningssamling/styrande-dokument/riktlinjer-for-elitidrottsstod.pdf"
+    anteckning: "HELT NYTT STÖD — infört från och med 2025, ersätter tidigare 'sponsringsmedel' till elitföreningar. Beslutas av Kommundirektören (inte kultur- och fritidsnämnden), efter förslag från kultur- och fritidsförvaltningen — administrativt skilt från övriga stöd i denna fil av just det skälet. Utbetalning sker alltid till föreningen, aldrig direkt till laget/individen. Regelverket är märkt 'Intern information' i PDF-sidhuvudet men är fritt nedladdningsbart och länkat från kommunens publika sida om elitidrottsstöd."
+  # --- KULTUR- OCH FRITIDSNÄMNDEN: kulturstöd ---
+  - id: "karlskrona-publika-kulturarrangemang"
+    namn: "Stöd till publika kulturarrangemang"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar och kulturorganisationer som arrangerar kulturprogram inom alla konstformer (scenkonst, litteratur, film, bild och form) i Karlskrona kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas för enstaka arrangemang eller en serie arrangemang"
+      - "Kan sökas av både föreningar och andra kulturorganisationer (F-skatt, lokal förankring i Karlskrona)"
+    belopp: null
+    sen_ansokan: "Ansökan inkommen i efterhand behandlas ej"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Delar budgetrad med Förluststöd (800 000 kronor totalt för de två). Ansökningstid beror på belopp: under ett prisbasbelopp (59 200 kr 2026) — minst sex veckor innan arrangemanget; över ett prisbasbelopp — minst fyra månader innan (kräver nämndbeslut). Slutrapportering senast sex veckor efter genomfört arrangemang."
+  - id: "karlskrona-produktionsstod"
+    namn: "Produktionsstöd"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar och kulturorganisationer som producerar nya eller befintliga konstnärliga verk inom scenkonst, litteratur, film, bild och form — professionella kulturaktörer prioriteras"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas av både föreningar och andra kulturorganisationer"
+      - "Nämnden prioriterar professionella kulturaktörer (konstnärlig utbildning och/eller yrkesverksamhet inom området)"
+    belopp: null
+    sen_ansokan: "Ansökan inkommen i efterhand behandlas ej"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Budget 500 000 kronor. Samma variabla ansökningstid som publika kulturarrangemang (sex veckor under ett prisbasbelopp, fyra månader över)."
+  - id: "karlskrona-utvecklingsstod-kultur"
+    namn: "Utvecklingsstöd"
+    kategori: ["kultur"]
+    malgrupp: "Ideella kulturföreningar — kompetensutvecklande insatser inom och utanför den egna föreningen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan endast sökas av ideella föreningar (inte övriga kulturorganisationer)"
+      - "Exempel: seminarier, workshops, innovativa arbetssätt, nya kulturnätverk, uppstart av nya kulturföreningar"
+    belopp: null
+    sen_ansokan: "Ansökan inkommen i efterhand behandlas ej"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Budget 100 000 kronor. Samma variabla ansökningstid som övriga kulturstöd."
+  - id: "karlskrona-forluststod"
+    namn: "Förluststöd"
+    kategori: ["kultur"]
+    malgrupp: "Stödberättigade ideella kulturföreningar som arrangerar publika kulturarrangemang med risk för förlust vid låg biljettförsäljning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan endast sökas av stödberättigade ideella föreningar (inte övriga kulturorganisationer)"
+      - "Ges inte om arrangemanget går med vinst"
+      - "Kan inte kombineras med annat kulturstöd för samma arrangemang"
+    belopp: null
+    sen_ansokan: "Ansökan inkommen i efterhand behandlas ej"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/belopp-och-ansokningstider-for-stod-inom-kultur-och-fritidsomradet-2026.pdf"
+    anteckning: "Delar budgetrad med Stöd till publika kulturarrangemang (800 000 kronor totalt). Betalas ut efter genomfört arrangemang och slutredovisning."
+  # --- SOCIALNÄMNDEN ---
+  - id: "karlskrona-social-verksamhetsbidrag"
+    namn: "Bidrag för föreningar inom social verksamhet"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar vars verksamhet är till nytta inom eller kompletterar socialnämndens verksamhetsområde, med lokal anknytning till Karlskrona kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Ska vara demokratiskt uppbyggd (styrelse, stadgar, regelbundna möten) med ideell målsättning"
+      - "Ska kunna uppvisa alkohol- och drogpolicy såvida det inte är uppenbart obehövligt"
+      - "Ges inte till verksamhet som kan söka generella/riktade bidrag från t ex Socialstyrelsen, Länsstyrelsen eller andra nämnder i kommunen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/riktlinjer-for-bidrag-till-foreningar-inom-socialtjanstens-omrade.pdf"
+    anteckning: "Beslut om verksamhetsbidrag fattas av socialnämnden i maj. Fastställt regelverk 2017-09-25 §109, äldst av kommunens bidragsregelverk men fortfarande gällande ('giltighetstid: tills vidare'). Ur samma budget avsätts ett riktat anslag på 10 kronor per kommuninvånare till Kvinnojouren Frideborg specifikt, beslutat av Kommunfullmäktige — det är en fast, namngiven post och inte ett allmänt sökbart bidrag, därför inte skrivet som egen rad i denna fil (se MEDVETET_UTESLUTET i filhuvudet)."
+  # --- ÄLDRENÄMNDEN ---
+  - id: "karlskrona-aldre-lokalbidrag"
+    namn: "Lokalbidrag (äldreverksamhet)"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar och andra föreningar med särskilt riktad äldreverksamhet, för kostnader till ägd eller hyrd lokal"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Minst 10 medlemmar, varav minst 10 % är 65 år eller äldre (eller föreningen riktar sig särskilt till äldre)"
+      - "Lokal som hyrs av kultur- och fritidsförvaltningen (gymnastiksalar, planer, samlingslokaler) är inte bidragsberättigad"
+      - "Bidragsgrundande kostnader: arrende, fastighetsförsäkring, myndighetsavgifter, renhållning, sotning, vatten/avlopp, värme/el"
+    belopp: "Max 20 % av bidragsgrundande kostnader, högst 20 000 kronor"
+    sen_ansokan: "Ej angivet i källan utöver kravet att samtliga handlingar ska vara fullständigt inlämnade"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/an_foreningsbidrag.pdf"
+    anteckning: "SAKNADES SOM EGEN POST I FÖREGÅENDE VERSION — då sammanslaget med aktivitets- och riktat bidrag till en generisk 'äldrebidrag'-post. Delat upp denna omgång eftersom regelverket definierar tre distinkta bidragsformer under äldrenämndens föreningsbidrag. Beslut fattas årligen senast 31 maj, utbetalning sker under juni."
+  - id: "karlskrona-aldre-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag (äldreverksamhet)"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar och andra föreningar med särskilt riktad äldreverksamhet, för aktiviteter som bryter pensionärers sociala isolering"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Aktiviteter/verksamhet ska vara ämnade för kommunens invånare"
+      - "Samarrangemang med andra kommuner och vänorter kan vara bidragsberättigade"
+      - "Studieverksamhet i samarbete med studieförbund berättigar inte till aktivitetsbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan utöver kravet att samtliga handlingar ska vara fullständigt inlämnade"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/an_foreningsbidrag.pdf"
+    anteckning: "SAKNADES SOM EGEN POST I FÖREGÅENDE VERSION, se not på karlskrona-aldre-lokalbidrag. Föreningar som fått aktivitetsbidrag ska i verksamhetsberättelsen tydligt redovisa vilka aktiviteter bidraget använts till."
+  - id: "karlskrona-aldre-riktat-bidrag"
+    namn: "Riktat bidrag (äldreverksamhet)"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar och andra föreningar med särskilt riktad äldreverksamhet, för mindre investeringar eller extraordinär aktivitet"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Avser mindre investeringar som ökar möjligheten att arrangera gemenskapsskapande aktiviteter"
+      - "Kan även avse extraordinär aktivitet, t.ex. jubileumsfirande, föreläsning eller projekt med annan förening"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan utöver kravet att samtliga handlingar ska vara fullständigt inlämnade"
+    kalla_url: "https://www.karlskrona.se/globalassets/kultur-och-fritid/foreningar/dokument/an_foreningsbidrag.pdf"
+    anteckning: "SAKNADES SOM EGEN POST I FÖREGÅENDE VERSION, se not på karlskrona-aldre-lokalbidrag. Föreningar som fått riktat bidrag ska i verksamhetsberättelsen styrka att investeringen/aktiviteten genomförts, med kvittokopior."
+  # --- SPECIALKATEGORIER (§2.1.5) ---
+  - id: "karlskrona-trygghetsvandrande"
+    namn: "Trygghetsvandrande föreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som vill bidra till trygghetsarbete genom organiserade trygghetsvandringar i samarbete med kommunen och Polisen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst två personer ska vandra per förening och tillfälle"
+      - "Deltagare ska ha genomgått utbildning till trygghetsvandrare (ges av kommunen tillsammans med Polisen)"
+      - "Rapport ska fyllas i efter varje vandring för att ersättning ska betalas ut"
+    belopp: "1 000 kronor per person och tillfälle"
+    sen_ansokan: "Ej tillämpligt (löpande rekrytering till utbildning, ingen ansökningsdeadline)"
+    kalla_url: "https://www.karlskrona.se/kultur-fritid-och-turism/foreningar/trygghetsvandrande-f%C3%B6reningar/"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid denna omkörning. Är snarare en ersättning för utfört uppdrag än ett traditionellt ansöknings-/projektbidrag, men pengarna betalas uttryckligen ut till föreningen (aldrig till enskilda personer) och kvalificerar därför som föreningsbidrag enligt §2.4. Insatser sker särskilt vid lönehelger, storhelger och större sammankomster, styrt av kommunens brottsförebyggande lägesbild."
+  - id: "karlskrona-landsbygd-skargardsmiljonen"
+    namn: "Landsbygds- och skärgårdsmiljonen"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar (byalag, samhälls-, hembygds- och bygdegårdsföreningar m.fl.) som arbetar aktivt för att utveckla landsbygd och skärgård utanför stadsbygden och serviceorterna Jämjö, Rödeby och Nättraby"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningen ska ha sitt säte och/eller verksamhetsområde i det område där insatsen utförs"
+      - "Insatsen ska generera stor nytta för lokalsamhället och vara tillgänglig för alla medborgare"
+      - "Föreningen ska ha organisationsnummer och bankkonto/postgirokonto"
+      - "Förfrågningsunderlag ska skickas till minst två företag när beloppet överstiger 50 000 kronor"
+    belopp: "5 000–200 000 kronor per projekt (budget 2 000 000 kronor per år totalt)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/samhallsplanering-och-trafik/Landsbygd-och-skargard/landsbygds--och-skargardsmiljonen/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — administreras av Miljö- och samhällsbyggnadsförvaltningen och beslutas av Kommunstyrelsen, inte kultur- och fritidsnämnden, vilket sannolikt är varför det missades i en körning som bara följde kultur-/fritidsspåret. Ansökningsperioden för ett givet års medel öppnar 7 augusti och stänger 31 oktober föregående år (t.ex. öppnade perioden för 2026 års medel 2025-08-07 och stängde 2025-10-31) — datumet 10-31 i denna fil avser stängningsdatumet. Beslut tas av Kommunstyrelsen i januari/februari för det år ansökan gäller. Insatser som koordineras mellan flera föreningar på orten prioriteras. Exempel på tidigare finansierade projekt: renovering av dansbanor/bygdegårdar, elinstallationer, utegym, hembygdsmuseum."
+  - id: "karlskrona-vagbidrag"
+    namn: "Kommunalt bidrag för underhåll av enskild utfartsväg"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare (enskild fastighetsägare, vägförening eller vägsamfällighet) för enskild utfartsväg med längd minst 100 meter till allmän väg, till stadigvarande nytta för fast boende befolkning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska vara minst 100 meter lång till allmän väg eller vägsamfällighet"
+      - "Ansökan (blankett BL5028) ska ange väghållare, bidragsmottagare, vägsträckning, antal helårsbebodda fastigheter samt om vägförening/vägsamfällighet finns"
+      - "Samtliga berörda fastighetsägare längs vägen ska godkänna att bidraget betalas ut till angiven bidragsmottagare"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.karlskrona.se/samhallsplanering-och-trafik/parkering-och-trafik/skotsel-av-vagar/"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — administreras av Miljö- och samhällsbyggnadsförvaltningen (samhällsplanering och trafik), separat spår från kultur- och fritidsnämndens bidrag och lätt att missa om bara föreningsbidrags-sidorna genomsöks. Vägsamfälligheter kan även få statligt driftbidrag för vägunderhåll via Trafikverket, utöver detta kommunala bidrag. Ansökan sker på pappersblankett (BL5028, Word-format), inte via Interbook FRI. Inget publicerat maxbelopp eller fast ansökningsdatum hittades i källan — bidraget beskrivs som ett årligt underhållsbidrag utan vidare precisering."
+forutsattningar:
+  - id: "karlskrona-bidragsberattigad"
+    vad: "Bli godkänd som stödberättigad förening"
+    beskrivning: "Föreningen ansöker om att godkännas som stödberättigad hos Karlskrona kommuns kultur- och fritidsnämnd — en förutsättning för att kunna söka samtliga stöd inom idrott, fritid och kultur i denna fil (utom social- och äldrenämndens bidrag, som inte kräver detta förhandsgodkännande). Kräver föreningens organisationsnummer, bevis om organisationsnummer från Skatteverket, antal medlemmar, föreningens stadgar samt undertecknat protokoll från bildandemötet eller senaste årsmötesprotokoll."
+    system: "Interbook FRI"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.karlskrona.se/kultur-fritid-och-turism/foreningar/foreningsbidrag/ans%C3%B6k-om-att-bli-st%C3%B6dber%C3%A4ttigad2/"
+  - id: "karlskrona-berattigad-drift-lokalstod"
+    vad: "Bli berättigad att söka drift- och lokalstöd"
+    beskrivning: "Utöver grundgodkännandet som stödberättigad förening krävs ett separat godkännande innan föreningen kan söka lokal- och driftstöd. Kräver uppgifter om lokalen/anläggningen: organisationsnummer, årliga driftkostnader (arrende, kallhyra, fastighetsförsäkring, myndighetsavgifter, sotning, vatten och avlopp, värme och el, fiber), total kostnad samt hyresavtal."
+    system: "Interbook FRI"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 2
+    kalla_url: "https://www.karlskrona.se/kultur-fritid-och-turism/foreningar/foreningsbidrag/ans%C3%B6k-om-att-bli-st%C3%B6dber%C3%A4ttigad2/"

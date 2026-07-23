@@ -1,0 +1,384 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 mot RESEARCH_SPEC_v2.md (källkonvergens,
+# §2) — ersätter körningen från 2026-07-19 som byggde uteslutande på
+# kultur- och fritidsförvaltningens redaktionella bidragssida. Metod denna
+# omgång:
+# (1) Regelverket: "Regler för föreningsbidrag", fastställt av kultur- och
+#     fritidsnämnden 2025-05-23 § 44, senast ändrat 2026-04-22 — publicerat
+#     som kommunens egen §-numrerade sida (§§ 4, 6–18), inte som fristående
+#     PDF. Dubbelläst, konsekvent mellan de två läsningarna.
+# (2) Förvaltningarnas egna sidor genomsökta specifikt UTANFÖR kultur-
+#     och fritidsspåret: samhällsplanering och trafik (vägbidrag — TRÄFF,
+#     se nedan), kommun-och-politik/kommunfakta (stiftelser/fonder — TRÄFF),
+#     evenemang-och-medfinansiering (kultur- och idrottspotten, egen
+#     URL-gren utanför bidrag-stod-och-stipendier-trädet — TRÄFF), social-
+#     och omsorgsnämnd (sökt riktat, ingen separat föreningsbidragslinje
+#     hittad utöver kultur- och fritidsnämndens funktionshinders-/
+#     pensionärsspår).
+# (3) Självservice: e-tjänster.sundsvall.se genomsökt för föreningsbidrag,
+#     vägbidrag (flowoverview/2410) och den generella ansökningstjänsten
+#     (flowoverview/1603).
+# (4) Portalen Actor Smartbook (sundsvall.actorsmartbook.se) bekräftat
+#     EJ_EXTRAHERBAR — ren inloggnings-/bokningsportal, bidragslistan visas
+#     först efter inloggning.
+# (5) Specialkategorier: vägföreningar/vägsamfälligheter (TRÄFF, se nedan),
+#     bygdegårdar/samlingslokaler (täcks av befintligt driftbidrag),
+#     stiftelser/fonder (TRÄFF, se nedan — ca 20 stiftelser öppna för
+#     föreningar av kommunens totalt ca 60+, skrivna som ETT samlat bidrag
+#     enligt §2.7), byalag/samhällsföreningar (sökt riktat, inget separat
+#     kommunalt bidrag hittat utöver Leader Mittland Plus/Bygdemedel som
+#     är länsstyrelse-/EU-administrerade och därför utanför kommunens
+#     domän), studieförbund (täcks av befintligt verksamhetsbidrag).
+#
+# Fyra bidrag tillagda vid denna omkörning (se konflikter.log för fullständig
+# rotorsak per post):
+#   1-2. Vindkraftstöd (generellt) och Vindkraftstöd (investeringsbidrag) —
+#        KORRIGERAT. Uteslöts felaktigt 2026-07-19 med motiveringen
+#        "engångsutbetalning ... inte ett återkommande föreningsbidrag".
+#        Detta är inte ett giltigt uteslutningsskäl enligt §2.4 (varken
+#        tidsbegränsning eller geografisk avgränsning finns med i den
+#        uttömmande listan). Bidraget riktar sig uttryckligen till
+#        föreningar och administreras av Sundsvalls kommun via samma
+#        bidragstyper-sida och samma Smartbook-system som övriga bidrag.
+#   3. Bidrag till enskilda vägar — HELT SAKNAT 2026-07-19 (specialkategori
+#      §2.1.5). Stadsbyggnadsnämnden, inte kultur- och fritidsnämnden/
+#      Föreningsbyrån — låg helt utanför förra körningens sökområde.
+#   4. Stiftelser och fonder öppna för föreningar — HELT SAKNAT 2026-07-19.
+#      Kommunen förvaltar ca 20 stiftelser öppna för föreningar (av
+#      totalt ca 60, resten uteslutna enligt §2.4 som renodlat
+#      privatpersons- eller elevriktade). Skrivet som ETT samlat bidrag.
+#
+# Två bidrag ("Bidrag för nationella minoriteter" och "Kultur- och
+# idrottspotten") bekräftade finnas på webben men INTE i det §-numrerade
+# regelverket — SKRIVET_EJ_I_REGELVERK, se tackning.log. Båda handläggs
+# av andra funktioner än Föreningsbyrån/kultur- och fritidsnämnden.
+#
+# Dubbelhämtning (§3): samtliga huvudkällor (bidragstyper-sidan,
+# regelverket, fonder-sidan, kultur- och idrottspotten-sidan,
+# vägbidragssidan) hämtade i två oberoende pass. En tidigare olöst
+# konflikt från 2026-07-19 (Verksamhetsbidrag för studieförbund,
+# 30 vs 31 maj) löstes denna omgång: båda nya oberoende hämtningarna
+# gav samstämmigt 30 maj — deadline satt till 05-30, se konflikter.log.
+#
+# Uteslutna (kategoriskt skäl, §2.4):
+# - Stiftelsen B J Wesslers Donationsfond — administreras externt av S&P
+#   Wealth Management Services AB, inte av kommunen. Annan huvudman.
+#   Utesluten ur stiftelseaggregatet nedan (övriga ca 20 stiftelser i
+#   aggregatet är kommunalt förvaltade).
+# - Ca 40 stiftelser/skolstipendier riktade uteslutande till privatpersoner
+#   eller elever (t.ex. Fröken Nanna Platzmans stiftelse, Kulturstipendiets
+#   huvudpris, samtliga skolstipendier via barn- och utbildnings-
+#   förvaltningen) — stöd som endast riktas till privatpersoner.
+# - "LOK-stöd" (nämnt i Smartbook-manualen för RF-anslutna föreningar) —
+#   statligt bidrag administrerat via Riksidrottsförbundet, annan huvudman.
+#
+# Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Sundsvall"
+kommun_slug: "sundsvall"
+lan: "Västernorrlands län"
+befolkning: 98886
+forvaltning: "Kultur- och fritidsförvaltningen (huvudsaklig handläggare, via Föreningsbyrån), samt Stadsbyggnadsnämnden (bidrag till enskilda vägar), Kommunstyrelsen (kultur- och idrottspotten, vindkraftstöd) och kommunens centrala administration (stiftelser och fonder)"
+ansokningssystem:
+  namn: "Actor Smartbook"
+  url: "https://sundsvall.actorsmartbook.se/"
+kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+verifierad: 2026-07-21
+bidrag:
+  - id: "sundsvall-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar som anordnar enstaka offentliga arrangemang öppna för alla invånare i kommunen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arrangemanget ska rikta sig till alla invånare i kommunen"
+      - "Ansökan ska lämnas in senast 8 veckor före planerat arrangemang"
+      - "Ges inte till jubileer, fester eller tävlingar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökan görs löpande under året, senast 8 veckor före arrangemangsdatum. Motsvarar § 8 i regelverket 'Regler för föreningsbidrag'."
+
+  - id: "sundsvall-oppet-foreningsstod"
+    namn: "Öppet föreningsstöd"
+    kategori: ["social"]
+    malgrupp: "Föreningar med öppen verksamhet för barn och unga från 11 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska vara kostnadsfri och öppen för alla, inte bara medlemmar"
+      - "Verksamheten ska bedrivas i anslutning till helger"
+      - "Ansökan ska lämnas in senast 8 veckor före planerad verksamhetsstart"
+    belopp: "150 kronor per timme"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökan görs löpande under året, senast 8 veckor före verksamhetsstart."
+
+  - id: "sundsvall-lovaktivitetsbidrag"
+    namn: "Lovaktivitetsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar som ordnar kostnadsfria aktiviteter för barn och unga 6–15 år under skollov"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteterna ska vara kostnadsfria"
+      - "Ingen förtur för föreningens egna medlemmar"
+      - "Ansökan ska lämnas in senast 8 veckor innan lovet börjar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: null
+
+  - id: "sundsvall-nationella-minoriteter"
+    namn: "Bidrag för nationella minoriteter"
+    kategori: ["kultur", "social"]
+    malgrupp: "Organisationer som företräder sverigefinnar, tornedalingar, romer, samer och judar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteterna ska stärka minoritetens språk och kultur"
+      - "Aktiviteterna ska vara öppna för allmänheten"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Handläggs av samordnare för nationella minoriteter (Carina Möllerberg), inte Föreningsbyrån. SKRIVET_EJ_I_REGELVERK — nämns inte i det §-numrerade regelverket 'Regler för föreningsbidrag', se tackning.log."
+
+  - id: "sundsvall-kultur-idrottspotten"
+    namn: "Kultur- och idrottspotten"
+    kategori: ["kultur", "idrott"]
+    malgrupp: "Privatpersoner, föreningar och företag som vill genomföra ett nytänkande projekt i eller för Sundsvall"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Nyskapande — nytänkande och modig idé"
+      - "Samverkan — ambition att samverka med olika aktörer"
+      - "Tillgänglighet — sundsvallsbornas möjlighet att ta del av projektet"
+      - "80 procent av beviljat bidrag betalas ut när avtal är skrivet, resterande 20 procent efter godkänd återrapportering"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/evenemang-och-medfinansiering/kultur--och-idrottspott"
+    anteckning: "Riktar sig även till företag och privatpersoner, inte bara föreningar. Egen handläggare (kommunstyrelsens finans- och näringslivsutskott, FINU beslutar), inte Föreningsbyrån/kultur- och fritidsnämnden — SKRIVET_EJ_I_REGELVERK. Totalt anslag 15 miljoner kronor 2024–2029. Ansökningsperiod öppen 2026-07-13–2026-10-01 vid verifieringstillfället (2026-07-21); ytterligare period öppnar enligt källan i december 2026. Egen URL-gren (evenemang-och-medfinansiering) utanför bidrag-stod-och-stipendier-trädet — hittades inte i föregående körnings sökområde trots att bidraget redan då fanns med (via bidragstyper-sidans kortfattade omnämnande)."
+
+  - id: "sundsvall-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med behov av ny-, om- eller tillbyggnad av lokaler eller anläggningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-31"]
+    krav:
+      - "Investeringen får inte ha påbörjats innan ansökan lämnats in"
+      - "Investeringen ska slutföras inom ett år från beslut"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Motsvarar § 15 i regelverket. Återbetalning krävs om investeringen säljs eller överlåts inom fem år efter färdigställande."
+
+  - id: "sundsvall-hyresbidrag"
+    namn: "Hyresbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med hyreskostnader för lokaler där verksamhet bedrivs"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Barn- och ungdomsföreningar prioriteras"
+      - "Ges inte för lokaler som hyrs ut av kommunen till subventionerat pris"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 15 januari–15 februari. Angivet datum är sista ansökningsdag. Motsvarar § 10 i regelverket."
+
+  - id: "sundsvall-driftbidrag-samlingslokal"
+    namn: "Driftbidrag till föreningsägd samlingslokal"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar som äger en samlingslokal"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Lokalen ska upplåtas för uthyrning till allmänheten"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 1–31 mars. Angivet datum är sista ansökningsdag. Motsvarar § 13 i regelverket."
+
+  - id: "sundsvall-verksamhetsbidrag-studieforbund"
+    namn: "Verksamhetsbidrag för studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund verksamma i Sundsvalls kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-30"]
+    krav:
+      - "Studieförbundet ska få bidrag via Folkbildningsrådet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 1–30 maj. LÖST KONFLIKT (var nollställd 2026-07-19 pga 30 vs 31 maj i två oberoende hämtningar den gången): denna omkörnings två oberoende hämtningar (2026-07-21) gav samstämmigt 30 maj som sista ansökningsdag. Se konflikter.log."
+
+  - id: "sundsvall-patient-funktionshinder"
+    namn: "Verksamhetsbidrag för patient- och funktionshindersföreningar"
+    kategori: ["funktionsratt"]
+    malgrupp: "Etablerade patient- och funktionshindersföreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-15"]
+    krav:
+      - "Föreningen ska vara etablerad och ha god framförhållning i sin planerade verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 15 juni–15 augusti. Angivet datum är sista ansökningsdag."
+
+  - id: "sundsvall-pensionarsforeningar"
+    namn: "Verksamhetsbidrag för pensionärsföreningar"
+    kategori: ["pensionar"]
+    malgrupp: "Etablerade pensionärsföreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-15"]
+    krav:
+      - "Föreningen ska vara etablerad och ha god framförhållning i sin planerade verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 15 juni–15 augusti. Angivet datum är sista ansökningsdag."
+
+  - id: "sundsvall-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med ledarledd verksamhet för barn och unga 7–20 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-15"]
+    krav:
+      - "Minst 10 sammankomster per år"
+      - "Minst 3 deltagare per tillfälle"
+      - "Minst 60 minuter per tillfälle"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 15 augusti–15 september. Angivet datum är sista ansökningsdag. Motsvarar § 9 i regelverket."
+
+  - id: "sundsvall-anlaggningsbidrag"
+    namn: "Anläggningsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med driftkostnader för egna eller långvarigt nyttjade anläggningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-15"]
+    krav:
+      - "Föreningen ska äga anläggningen eller ha ett långvarigt nyttjanderättsavtal, alternativt ha barn- och ungdomsverksamhet med beviljat aktivitetsbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 15 augusti–15 september, avser driftkostnader för perioden 1 juli–30 juni. Angivet datum är sista ansökningsdag. Motsvarar § 12 i regelverket."
+
+  - id: "sundsvall-verksamhetsbidrag-allmant"
+    namn: "Verksamhetsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Etablerade ideella föreningar, för nästkommande års verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningen ska ha god framförhållning i sin planerade verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 1–31 oktober. Angivet datum är sista ansökningsdag. Utbetalas i förskott för kommande verksamhetsår. Motsvarar § 6 i regelverket (§ 7 för studieförbund)."
+
+  - id: "sundsvall-fiskevardsbidrag"
+    namn: "Verksamhetsbidrag till fiskevårdsområden"
+    kategori: ["ovrig"]
+    malgrupp: "Fiskevårdsområden och sportfiskeföreningar som arrenderar vatten"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Föreningen ska arrendera vatten och göra insatser för fiskevård"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "Ansökningsperiod 1–30 november. Angivet datum är sista ansökningsdag. Motsvarar § 4 i regelverket (fiskevårdsområdesföreningar undantas kravet på stadgar/medlemsavgifter i § 2)."
+
+  # --- TILLAGDA VID OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2) ---
+
+  - id: "sundsvall-vindkraftsstod-generellt"
+    namn: "Vindkraftstöd (generellt)"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar aktiva 2025 och framåt i Indal, Liden, Holm, Sättna eller Stöde"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-09"]
+    krav:
+      - "5 000 kr: inga motprestationer krävs"
+      - "10 000 kr: föreningen ska anordna en aktivitet i lokalområdet sommaren 2026"
+      - "15 000 kr: föreningen ska anordna två eller fler aktiviteter i lokalområdet sommaren 2026"
+    belopp: "5 000, 10 000 eller 15 000 kronor beroende på motprestation"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "KORRIGERAD 2026-07-21: uteslöts felaktigt vid föregående körning (2026-07-19) med motiveringen 'engångsutbetalning kopplad till specifika vindkraftsavtal, avgränsad till fem tätorter — inte ett återkommande föreningsbidrag'. Det skälet finns inte med i den uttömmande listan i §2.4 (individuellt pris till privatperson / endast för företag-privatpersoner / annan huvudman) och är därför inte giltigt — geografisk avgränsning och tidsbegränsning är inte godkända uteslutningsskäl. Bidraget riktar sig uttryckligen till föreningar och administreras av Sundsvalls kommun på samma sida och med samma ansökningsväg som övriga bidragstyper. Ansökningsperiod 8 juni–9 augusti, utbetalning juli/augusti beroende på inlämningsdag. SKRIVET_EJ_I_REGELVERK — ingår inte i 'Regler för föreningsbidrag'. Geografiskt avgränsat till fem tätorter kopplat till ett vindkraftsavtal; oklart om bidraget återkommer 2027, flaggat för uppföljning vid nästa omverifiering."
+
+  - id: "sundsvall-vindkraftsstod-investering"
+    namn: "Vindkraftstöd (investeringsbidrag)"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar aktiva i Indal, Liden, Holm, Sättna eller Stöde"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas parallellt med det ordinarie investeringsbidraget (ersätter det inte)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/bidragstyper"
+    anteckning: "KORRIGERAD 2026-07-21, samma rotorsak som Vindkraftstöd (generellt) ovan — felaktigt uteslutet 2026-07-19. Ansökan öppnar enligt källan hösten 2026; inget exakt datum publicerat vid verifieringstillfället (2026-07-21), därför satt till löpande. Uppdatera till fast datum vid nästa omverifiering när ansökan öppnat."
+
+  - id: "sundsvall-vagbidrag"
+    namn: "Bidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Samfällighetsföreningar som ansöker om bidrag till drift och underhåll av en enskild väg med statsbidrag; kan även sökas av fast boende privatpersoner med egen utfartsväg"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Väglängden (räknat från bostadshusets närhet, exklusive de första 150 metrarna) ska vara minst 293 meter"
+      - "Går inte att kombinera med kommunalt upprustningsbidrag för samma väg"
+    belopp: "3,50 kronor per meter (väglängden minus de första 150 metrarna); belopp under 500 kronor betalas inte ut"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/samhallsplanering-och-trafik/gator-och-trafik/tillstand-och-regler/ansok-om-bidrag-till-enskilda-vagar"
+    anteckning: "HELT SAKNAT i föregående körning (2026-07-19), som bara sökte kultur- och fritidsförvaltningens spår. Specialkategori enligt RESEARCH_SPEC_v2.md §2.1.5 (vägföreningar/vägsamfälligheter) — Stadsbyggnadsnämnden beslutar, inte kultur- och fritidsnämnden/Föreningsbyrån. Ingen publicerad sista ansökningsdag hittad, varken på den redaktionella sidan eller i självservice-e-tjänsten (e-tjanster.sundsvall.se/oversikt/flowoverview/2410) — satt till löpande. Utbetalning sker i efterskott februari–april."
+
+  - id: "sundsvall-stiftelser-fonder"
+    namn: "Stiftelser och fonder öppna för föreningar"
+    kategori: ["kultur", "social", "pensionar", "ovrig"]
+    malgrupp: "Föreningar (och i vissa fall offentliga organisationer) enligt respektive stiftelses ändamål — se krav för fördelning per stiftelsekluster och ansökningsperiod"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15", "03-31", "05-31", "08-31", "10-15"]
+    krav:
+      - "A P Hedbergs fond med flera allmännyttiga stiftelser (8 st), Valentinska fonden (stadens/anstalters förskönande, föreningar och offentliga organisationer) samt sommarverksamhetsstiftelserna (5 st): ansökan 1–31 mars"
+      - "Idrottsstipendium, hedersomnämnande till ideell förening inom idrott/friluftsliv: ansökan senast 15 mars"
+      - "Botvid Johanssons minnesfond, Hulda Boströms minne och Sociala fonden (föreningar med sociala/medicinska syften) samt fonderna för trivsel och aktiviteter för äldre (5 st, särskilda boenden och föreningar): ansökan 1 april–31 maj"
+      - "Kulturstipendium samt stipendium för litteratur och media med lokalhistoriskt innehåll, hedersomnämnande/pris till ideell förening: ansökan senast 31 augusti"
+      - "Stiftelsen Bertil Åströmssons fond (ideell föreningsverksamhet, begränsat till Lidens församling): ansökan 15 september–15 oktober"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sundsvall.se/kommun/kommun-och-politik/fonder-stipendier-och-utmarkelser"
+    anteckning: "HELT SAKNAT i föregående körning. Skrivet som ETT samlat bidrag enligt §2.7 — kommunen förvaltar totalt ett 60-tal stiftelser, varav ca 20 är öppna för föreningar (resten renodlat privatpersons- eller elevriktade, uteslutna enligt §2.4). Stiftelsen B J Wesslers Donationsfond (öppen för föreningar, men administreras externt av S&P Wealth Management Services AB) är MEDVETET UTESLUTEN ur detta aggregat — annan huvudman än kommunen, §2.4. Skolstipendier (30+ st, administrerade av barn- och utbildningsförvaltningen, riktade till elever) räknas inte som föreningsbidrag och ingår inte. Dubbelläst — de fem ansökningsklustren och deras datum bekräftades konsekvent över två oberoende hämtningar 2026-07-21."
+
+forutsattningar:
+  - id: "sundsvall-foreningsregister"
+    vad: "Registrera föreningen i kommunens föreningsregister"
+    beskrivning: "Föreningen ska registrera sig i Sundsvalls kommuns föreningsregister för att bli bidragsberättigad. Kräver antagna stadgar, vald styrelse och registrerat organisationsnummer hos Skatteverket. Uppgifterna ska hållas uppdaterade, bland annat efter årsmöte eller vid byte av kontaktperson."
+    system: "Actor Smartbook"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://sundsvall.se/kommun/uppleva-och-gora/foreningar-foreningsliv/bilda-forening"

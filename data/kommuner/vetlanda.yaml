@@ -1,0 +1,364 @@
+# KORRIGERANDE OMKÖRNING 2026-07-20 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens). Föregående version (verifierad 2026-07-19) hade redan ett
+# solitt regelverks-PDF-baserat researcharbete (10 bidrag) och missade inte
+# lika brett som Växjö/Halmstad/Karlstad — men två klasser av fel fanns
+# ändå: (1) ETT bidrag i regelverkets egen text lästes förbi ("Särskilt
+# bidrag", ett kompletterande bidrag utanför de namngivna bidragsformerna,
+# stod i PDF:en men saknades i föregående YAML och på webbsidans
+# sammanfattande tabell — precis den typen av "en sida rymmer fler bidrag än
+# ingressen visar"-miss v2.1 ska fånga), och (2) specialkategorier (§2.1.5)
+# söktes inte alls föregående omgång: vägföreningar/vägsamfälligheter och
+# landsbygds-/byalagsmedel saknades helt.
+#
+# Metod denna omgång: (1) Läste regelverket "Bidragsbestämmelser" (KF §81/23,
+# senast reviderad 2026-01-20, version 10) i sin helhet sida för sida —
+# inklusive Bilaga 1 (schablonbidrag för föreningsägda anläggningar) och
+# avsnittet "Särskilt bidrag" som inte syns i webbsidans tabellsammanfattning.
+# (2) Läste förvaltningarnas egna sidor: kultur- och fritidsförvaltningens
+# föreningsbidragssida (med "senast uppdaterad"-stämpel per underavsnitt),
+# socialförvaltningens och vård- och omsorgsförvaltningens riktlinje-PDF:er.
+# (3) Enumererade självservice-portalen (sjalvservice.vetlanda.se) — till
+# skillnad från Rbok/FRI i tidigare omkörda kommuner är denna portal INTE
+# JS-renderad och gick att räkna upp direkt: 11 tjänster med "bidrag/stöd/
+# stipendium/fond" i namnet hittades, vilket bekräftade fullständigheten i
+# kultur- och fritidsförvaltningens bidragsutbud (alla 11 var redan kända
+# eller kategoriskt uteslutna — se nedan). (4) Sökte riktat efter
+# specialkategorier (§2.1.5): vägföreningar/vägsamfälligheter (kommunalt
+# underhålls- och nybyggnadsbidrag för enskild väg hittat, tekniska
+# förvaltningen), bygdegårdar/samlingslokaler (inget separat kommunalt bidrag
+# utöver schablonbidraget för föreningsägda lokaler i Bilaga 1 — bygdegårdar
+# omfattas redan av vetlanda-allmant-foreningsbidrag), byalag/
+# samhällsföreningar (Landsbygdssatsningar, 500 000 kr/år, hittat),
+# stiftelser/fonder (~20 kommunalt förvaltade stiftelser identifierade —
+# samtliga riktar sig uteslutande till privatpersoner, se uteslutningar
+# nedan; ingen samlingspost enligt §2.7 behövs eftersom ingen är öppen för
+# föreningar), studieförbund (regelverket utesluter uttryckligen
+# studieförbund från Bidragsbestämmelser — "Studieförbund är inte
+# berättigade till föreningsbidrag som beskrivs i Bidragsbestämmelser" — och
+# ingen alternativ studieförbundsbidragsform hittades någon annanstans, till
+# skillnad från t.ex. Karlstad).
+#
+# KONFLIKT LÖST (§2.5, skiljer sig från föregående version): för
+# "Föreningsbidrag – inriktning social utsatthet" nollställde föregående
+# omgång deadline-fältet p.g.a. motstridiga datum (kommunsidan 28 februari,
+# socialförvaltningens riktlinje-PDF 15 mars). Denna omgång hittades en
+# explicit "Senast uppdaterad: 3 februari 2026"-stämpel på kommunens
+# föreningsbidragssida — nyare än riktlinje-PDF:ens datum (Socialnämnden
+# 2010-02-08, aldrig reviderad sedan dess). Enligt §2.5 vinner den nyare
+# källan: deadline satt till 28 februari (fasta, "02-28"). Båda värdena och
+# båda URL:erna kvarstår i anteckningen på bidraget och i konflikter.log
+# nedan.
+#
+# Uteslutna (kategoriskt/metodiskt skäl, §2.3–§2.4):
+# - Georg Selanders donationsstiftelse — individuellt stipendium till
+#   privatperson (ungdomar som studerar jord-/skogsbruk).
+#   https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/georg-selanders-donationsstiftelse
+# - PA och Lisbeths musikstiftelse — individuellt stipendium till
+#   privatperson (musiker/musikstuderande bosatta/uppvuxna i kommunen).
+#   https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/pa-och-lisbeths-musikstiftelse
+# - Samstiftelsen för social hjälpverksamhet — individuellt ekonomiskt stöd
+#   till privatpersoner (kommuninvånare med behov), inte ett föreningsbidrag.
+#   https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/samstiftelsen-for-social-hjalpverksamhet
+# - Utbildningsstipendium inom kultur — individuellt stipendium till
+#   privatperson verksam inom kultur.
+#   https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/utbildningsstipendium-inom-kultur
+# - Kulturpris — kan visserligen gå till "personer, föreningar eller
+#   organisationer", men källan saknar helt belopp, ansökningsformulär,
+#   nomineringsprocess och deadline (verifierat genom fullständig läsning av
+#   sidan, senast uppdaterad 16 maj 2024). Samma skäl som Halmstads
+#   uteslutning av "Stöd till unga arrangörer": ett kontaktnav/hedersomnämnande,
+#   inte ett sökbart bidrag i den mening övriga poster i denna fil är.
+#   https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/kulturpris
+# - Ledarpris — individuellt pris till privatperson ("personer som arbetar
+#   ideellt med att leda ungdomsverksamhet"), nomineras av andra, ingen
+#   egenansökan.
+#   https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/ledarpris
+# - Årets landsbygdsbo — hederspris till en enskild privatperson (boende på
+#   landsbygden), inget publicerat prisbelopp.
+#   https://vetlanda.se/bygga-bo-och-miljo/planer-och-utveckling/landbygdsutveckling
+# - Stiftelsen Werner von Seydlitz — fristående stiftelse med egen styrelse
+#   (Wernerstiftelser), egen ansökningsportal (wernerstiftelser.se), inte en
+#   av kommunens egna listade stiftelser (saknas på
+#   vetlanda.se/kultur-och-fritid/stod-och-stipendier). Administreras av
+#   annan huvudman än kommunen (§2.4) och har ingen sida på kommunens egen
+#   domän att citera (§4).
+#   https://wernerstiftelser.se/stiftelsen-werner-von-seydlitz/
+# - Astrid Lindgrens Hembygd — leader-liknande partnerskapsorganisation för
+#   tio kommuner (Aneby, Eksjö, Hultsfred, Högsby, Kinda, Nässjö, Vetlanda,
+#   Vimmerby, Ydre, del av Oskarshamn), EU-/stats-/kommunfinansierad men med
+#   egen styrelse och egen ansökningsportal (astridlindgrenshembygd.se).
+#   Annan huvudman än Vetlanda kommun ensamt (§2.4), ingen ansökan sker på
+#   kommunens egen domän (§4).
+#   https://vetlanda.se/bygga-bo-och-miljo/planer-och-utveckling/landbygdsutveckling
+# - Hemsändningsbidrag — riktar sig till livsmedelsbutiker på landsbygden
+#   (företag), inte föreningar (§2.4).
+#   https://vetlanda.se/bygga-bo-och-miljo/planer-och-utveckling/landbygdsutveckling
+# - Trafikverkets bidrag för enskild väg — statligt bidrag, administreras och
+#   söks hos Trafikverket, inte kommunen; källan är trafikverket.se, inte
+#   kommunens egen domän (§4). Kommunens EGET underhålls- och
+#   nybyggnadsbidrag (för vägar UTAN rätt till Trafikverket-bidrag) är
+#   inkluderat nedan.
+#   https://www.trafikverket.se/e-tjanster/bidrag-for-enskild-vag/
+#
+# Varningssignal (§2.6) undersökt: Investeringsbidrag (10-31) och
+# Landsbygdssatsningar (avslutas 09-02) är de enda två med hösten som
+# ansökningsfönster — verifierade individuellt mot sina respektive källor,
+# ingen ärvd/kopierad deadline. Landsbygdssatsningars exakta datumfönster
+# (13 april–2 september) gäller uttryckligen 2026 års omgång (avser
+# satsningar för 2027) — ansökningsfönstret kan flytta något mellan år,
+# verifiera inför nästa omverifiering.
+#
+# Dubbelhämtat i två oberoende pass (§3) för samtliga nya poster
+# (landsbygdssatsningar, väg-bidragen) — identiska belopp och krav i båda
+# passen. Regelverkets sakinnehåll är hämtat direkt ur PDF-originalet
+# (primärkälla, inte AI-sammanfattning) och därför inte föremål för samma
+# dubbelhämtningsrisk. Ingen fältkonflikt kvarstår denna omgång utöver den
+# lösta social-utsatthet-konflikten ovan. Spot-checkas av Jacob/Fable före
+# publik deploy.
+kommun: "Vetlanda"
+kommun_slug: "vetlanda"
+lan: "Jönköpings län"
+befolkning: 27313
+forvaltning: "Kultur- och fritidsförvaltningen, Socialförvaltningen, Vård- och omsorgsförvaltningen, Tekniska förvaltningen (enskilda vägar) samt Kommunstyrelsens förvaltning (landsbygdsutveckling)"
+ansokningssystem:
+  namn: "Kommunens e-tjänst"
+  url: "https://sjalvservice.vetlanda.se/"
+kalla_url: "https://vetlanda.se/kultur-och-fritid/foreningar/foreningsbidrag"
+verifierad: 2026-07-20
+bidrag:
+  # --- KULTUR- OCH FRITIDSNÄMNDEN: Bidragsbestämmelser (KF §81/23) ---
+  - id: "vetlanda-allmant-foreningsbidrag"
+    namn: "Allmänt föreningsbidrag"
+    kategori: ["idrott", "kultur", "ovrig", "funktionsratt"]
+    malgrupp: "Bidragsberättigade föreningar registrerade i Vetlanda kommun; medlems- och aktivitetsbidrag riktas till medlemmar 7–25 år, handikappföreningar oavsett ålder"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister och uppfylla kommunens allmänna bestämmelser för föreningsbidrag"
+      - "Föreningen ska ha minst tio registrerade medlemmar, varav mer än hälften folkbokförda i Vetlanda kommun"
+      - "Föreningen ska närvara vid förvaltningens årliga föreningsträff (annars avdrag 10 000 kronor från bidraget)"
+      - "Medlemmar ska betala en personlig medlemsavgift om lägst 50 kronor per år"
+    belopp: "32,70 kr per medlem 7–25 år (medlemsbidrag), 43,60 kr per sammankomst (aktivitetsbidrag, minst 60 minuter och minst tre deltagare), 50 kr per medlem för hyrda lokaler till ungdomsverksamhet (max 10 000 kr/år, handikapporganisationer högst 12 000 kr/år), schablonbelopp för föreningsägda anläggningar enligt bilaga 1"
+    sen_ansokan: "För sent inkommen ansökan behandlas inte"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: "Omfattar medlemsbidrag, lokal- och anläggningsbidrag samt aktivitetsbidrag i ett samlat ansökningsförfarande. Ansökningsperiod 1 januari–28 februari. Bilaga 1 (schablonbidrag för egna anläggningar, t.ex. fotbollsplan, ridbana, elljusspår, skidanläggning) omfattar även bygdegårdar/hembygdsgårdar som föreningsägd lokal — ingen separat bygdegårdsbidragsform finns i Vetlanda."
+  - id: "vetlanda-ledarutvecklingsbidrag"
+    namn: "Ledarutvecklingsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningsledare som genom kompetenshöjande åtgärder utvecklar föreningens verksamhet för åldersgruppen 7–25 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Ansökan ska göras senast en vecka före kurstillfället"
+      - "Redovisning ska lämnas senast en månad efter avslutat kurstillfälle"
+    belopp: "Högst 50 procent av kostnaderna (kursavgift, material, resor), maximalt 5 000 kronor per förening och år"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: "Utbildningar som främjar demokratiska värderingar, jämställdhet och folkhälsa prioriteras."
+  - id: "vetlanda-lovbidrag"
+    namn: "Lovbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar som arrangerar utåtriktade aktiviteter under skollov"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Bidrag ges inte till föreningens ordinarie verksamhet"
+    belopp: "Högst 2 000 kronor per lov och förening"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: null
+  - id: "vetlanda-arrangemangsbidrag-kultur"
+    namn: "Arrangemangsbidrag inom kulturområdet"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar som anordnar offentliga arrangemang av allmänt och kulturellt värde för kommuninvånarna"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Kontakt ska tas med kultursekreteraren minst en månad före arrangemanget"
+      - "Redovisning ska ske senast sex veckor efter genomfört arrangemang"
+    belopp: "Förlusttäckningsbidrag, högst 10 000 kronor per förening och kalenderår"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: "Kostnader och intäkter för servering räknas inte med i ansökan eller redovisning."
+  - id: "vetlanda-framtradanden-offentlig-plats"
+    namn: "Framträdanden på offentlig plats"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar inom dans, film, musik, teater, poesi och nycirkus som genomför icke entrébelagda offentliga framträdanden i Vetlanda kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-31"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Framträdandet ska pågå minst 30 minuter och vara icke entrébelagt/arvoderat"
+      - "Ansökan avser föregående års framträdanden"
+    belopp: "4 000 kronor per framträdande, högst 12 000 kronor per år"
+    sen_ansokan: "För sent inkommen ansökan behandlas inte"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: null
+  - id: "vetlanda-trivselaktiviteter"
+    namn: "Trivselaktivitetsbidrag"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Föreningar som arrangerar offentliga trivselaktiviteter (till exempel midsommar, nationaldagen eller valborg)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Ansökan görs i anslutning till arrangemanget"
+    belopp: "1 000 kronor per förening och år"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: null
+  - id: "vetlanda-traffpunktsbidrag"
+    namn: "Träffpunktsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med öppen verksamhet av karaktären fritidsgård riktad till ungdomar 7–19 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-15", "12-15"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Verksamheten ska planeras tillsammans med kommunens fritidsledare"
+      - "Verksamheten ska vara tillgänglig med vuxen ledare minst tre timmar per vecka under minst 15 veckor per termin"
+      - "Verksamheten ska vara politiskt och religiöst obunden"
+    belopp: "7 500 kronor (3–6 timmar/vecka) eller 15 000 kronor (mer än 6 timmar/vecka) per termin"
+    sen_ansokan: "För sent inkommen ansökan behandlas inte"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: "Två ansökningstillfällen per år: 15 juni för vårterminen, 15 december för höstterminen."
+  - id: "vetlanda-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar som investerar i inventarier, nybyggnation, om- och tillbyggnad eller underhåll av lokal och anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Ansökan avser belopp över ett basbelopp"
+    belopp: "Högst 50 procent av investeringsbeloppet efter nämndbeslut; egen ideell arbetsinsats värderas till 200 kronor per timma (från 16 år)"
+    sen_ansokan: "För sent inkommen ansökan behandlas inte"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: "Utbetalning sker påföljande år efter redovisning senast 30 november. Prioritering mellan ansökningar görs av kultur- och fritidsnämnden."
+  - id: "vetlanda-sarskilt-bidrag"
+    namn: "Särskilt bidrag"
+    kategori: ["idrott", "kultur", "ovrig", "funktionsratt"]
+    malgrupp: "Bidragsberättigade föreningar med behov som inte täcks av kommunens övriga namngivna bidragsformer"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla kommunens allmänna bestämmelser för föreningsbidrag"
+      - "Prövning sker i varje enskilt fall av kultur- och fritidsnämnden"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5356b/1768904071819/Bidragsbestämmelser,%20policy.pdf"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Definieras i regelverkets sista avsnitt ('Särskilt bidrag: Bidraget är avsett att komplettera övriga bidragsformer') men syns inte i kommunens webbsidas tabellsammanfattning eller i självserviceportalens tjänstelista — hittades först vid fullständig läsning av PDF-originalet. Inget fast belopp, ingen fast deadline; kultur- och fritidsnämnden prövar bidragsbeloppet individuellt."
+  # --- SOCIALFÖRVALTNINGEN OCH VÅRD- OCH OMSORGSFÖRVALTNINGEN ---
+  - id: "vetlanda-social-utsatthet"
+    namn: "Föreningsbidrag – inriktning social utsatthet"
+    kategori: ["social"]
+    malgrupp: "Föreningar och frivilligorganisationer som arbetar med stöd till människor med social problematik eller som förebygger social utsatthet och utanförskap"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Ansökan ska innehålla verksamhetsberättelse, reviderad årsredovisning, verksamhetsplan och budget för innevarande år"
+      - "Ansökan behandlas av socialnämnden vid dess aprilsammanträde"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vetlanda.se/kultur-och-fritid/foreningar/foreningsbidrag"
+    anteckning: "KONFLIKT LÖST 2026-07-20 (§2.5): socialförvaltningens riktlinje-PDF (beslutad av Socialnämnden 2010-02-08, aldrig reviderad, https://vetlanda.se/download/18.7150ddee18e85ff00c5358e/1713775584107/Föreningsbidrag,%20riktlinjer%20för%20ansökan%20socialförvaltningen.pdf) anger deadline 15 mars. Kommunens föreningsbidragssida har en explicit 'Senast uppdaterad: 3 februari 2026'-stämpel — nyare källa vinner enligt §2.5. Deadline satt till 28 februari (ansökan från 1 februari). Föregående version (2026-07-19) nollställde fältet eftersom den nyare stämpeln inte hade hittats då."
+  - id: "vetlanda-vard-och-omsorg"
+    namn: "Föreningsbidrag – inriktning vård och omsorg"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Föreningar och frivilligorganisationer som arbetar med stöd till personer inom vård- och omsorgsnämndens verksamhetsområde (bland annat äldreomsorg och funktionshinderomsorg)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Föreningen/organisationen ska ha sin huvudsakliga verksamhet förlagd i Vetlanda kommun"
+      - "Föreningen/organisationen ska vara demokratiskt uppbyggd och välkomna alla som stödjer föreningens syfte"
+      - "Ansökan ska innehålla verksamhetsberättelse, reviderad årsredovisning, verksamhetsplan och budget för innevarande år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vetlanda.se/download/18.7150ddee18e85ff00c5358d/1712152219395/Föreningsbidrag%20vård%20och%20omsorg,%20riktlinje.pdf"
+    anteckning: "Ansökan avser innevarande år och behandlas av vård- och omsorgsnämnden. Beslutad 2016-10-27 § 156, inte reviderad sedan dess — inget datumkonflikt med webbsidan denna omgång. Kontakt: vardochomsorg@vetlanda.se."
+  # --- TEKNISKA FÖRVALTNINGEN: enskild väg (specialkategori §2.1.5) ---
+  - id: "vetlanda-underhallsbidrag-vag"
+    namn: "Underhållsbidrag för enskild väg"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare för enskild väg i Vetlanda kommun utan rätt till statsbidrag från Trafikverket (fastighetsägare, vägföreningar och vägsamfälligheter)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska vara utfartsväg från permanentbostad"
+      - "Vägen ska hållas i tillfredsställande skick för sitt ändamål"
+      - "Vid flera utfartsvägar finansieras endast den kortaste (undantag om annan väg har allmänt intresse)"
+      - "Vägar som betjänar flera fastigheter kräver gemensam ansökan"
+    belopp: "2,25 kronor per löpmeter och år (inget bidrag för de första 100 metrarna); bidrag under 100 kronor betalas inte ut"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vetlanda.se/bygga-bo-och-miljo/gator-och-trafik/underhall-av-gator-och-vagar/bidrag-for-att-skota-enskild-vag"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori, vägföreningar/vägsamfälligheter). Ansökan görs vart femte år per väg, utbetalning sker i efterhand via blanketten 'Enskild väg utan statsbidrag ansökan' (PDF). Administreras av tekniska förvaltningen. Skiljer sig från Trafikverkets statsbidrag, som söks separat och inte är kommunalt (uteslutet, se filhuvudet)."
+  - id: "vetlanda-nybyggnadsbidrag-vag"
+    namn: "Bidrag för nybyggnation av enskild väg"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare för enskild väg i Vetlanda kommun (fastighetsägare, vägföreningar och vägsamfälligheter) som nybygger enskild väg"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arbetet får inte påbörjas innan tekniska nämnden godkänt åtgärden"
+      - "Kostnaden ska beräknas och godkännas av kommunen"
+    belopp: "Högst 25 procent av godkänd kostnad"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vetlanda.se/bygga-bo-och-miljo/gator-och-trafik/underhall-av-gator-och-vagar/bidrag-for-att-skota-enskild-vag"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Utbetalas efter godkännande av tekniska kontoret. Skiljer sig från underhållsbidraget (vetlanda-underhallsbidrag-vag), som gäller löpande drift av redan befintlig väg."
+  # --- KOMMUNSTYRELSENS FÖRVALTNING: landsbygdsutveckling (specialkategori §2.1.5) ---
+  - id: "vetlanda-landsbygdssatsningar"
+    namn: "Landsbygdssatsningar"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar och företag verksamma på landsbygden i Vetlanda kommun; privatpersoner kan lämna förslag om en förening eller ett företag står bakom och driver det"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-02"]
+    krav:
+      - "Förslaget ska gälla en satsning på landsbygden i Vetlanda kommun"
+      - "Kommundelsråden väljer ut förslag som sedan röstas fram av invånarna och poängsätts av en expertgrupp"
+      - "Kommunstyrelsen fattar det slutgiltiga beslutet, normalt november/december"
+    belopp: "500 000 kronor avsätts totalt per år; enskilda satsningar 2025 varierade mellan 15 000 och 80 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://vetlanda.se/bygga-bo-och-miljo/planer-och-utveckling/landbygdsutveckling/landsbygdssatsningar"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20 (specialkategori, byalag/samhällsföreningar). Förslag lämnas via e-tjänst (sjalvservice.vetlanda.se/oversikt/overview/556). Ansökningsfönstret 13 april–2 september gällde uttryckligen 2026 års omgång (avser satsningar 2027) — kan flytta något mellan år, verifiera datumen vid nästa omverifiering. Öppet även för företag, men skrivet här eftersom föreningar är en uttrycklig och central del av målgruppen (jämför Karlstads landsbygdsmedel, uteslutande föreningsriktat, samma specialkategori)."
+  # --- HEDERSPRIS ÖPPET FÖR FÖRENINGAR (gränsfall, se filhuvudet) ---
+  - id: "vetlanda-integrationspriset"
+    namn: "Integrationspriset"
+    kategori: ["ovrig"]
+    malgrupp: "Privatpersoner, föreningar eller organisationer vars arbete främjar samverkan och möten mellan människor med olika kulturell och etnisk bakgrund i Vetlanda kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Arbetet ska främja samverkan och möten mellan människor med olika kulturell och etnisk bakgrund, i linje med kommunens integrationspolicy"
+      - "Nomineringen ska innehålla en kort motivering"
+    belopp: "10 000 kronor samt diplom, delas ut årligen"
+    sen_ansokan: "Ej tillämpligt (nomineringsbaserat pris, ingen sen anmälan-hantering angiven i källan)"
+    kalla_url: "https://vetlanda.se/kultur-och-fritid/stod-och-stipendier/integrationspris"
+    anteckning: "SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Nomineringsbaserat pris, inte ett traditionellt ansökningsbidrag — men till skillnad från Kulturpris och Ledarpris (uteslutna, se filhuvudet) har detta pris ett konkret publicerat belopp, en konkret deadline, och 'alla invånare och föreningar i kommunen' kan nominera (självnominering framgår inte uttryckligen men utesluts inte). Pristagare kan vara en förening. Beslut fattas efter beredning av kultur- och fritidsnämnden/kommunstyrelsen, utdelning vid nationaldagsfirandet."
+forutsattningar:
+  - id: "vetlanda-foreningsregister"
+    vad: "Bli registrerad i kommunens föreningsregister"
+    beskrivning: "Föreningen registrerar sig själv i föreningsregistret via e-tjänsten Friweb. Kräver att föreningen är ideell, har antagit stadgar, valt styrelse och varit verksam i minst ett år, har sitt säte i Vetlanda kommun, har minst tio registrerade medlemmar (mer än hälften folkbokförda i Vetlanda kommun) samt att medlemmarna betalar minst 50 kronor i årlig medlemsavgift. Registrering är en förutsättning för att söka kommunalt föreningsbidrag från Kultur- och fritidsförvaltningen."
+    system: "Föreningsregistret (Friweb)"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://vetlanda.se/kultur-och-fritid/foreningar/foreningsregister"

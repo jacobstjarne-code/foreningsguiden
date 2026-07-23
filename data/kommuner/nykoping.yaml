@@ -1,0 +1,251 @@
+# Omkörd 2026-07-21 mot RESEARCH_SPEC v2.1 (källkonvergens, §2). Ersätter
+# tidigare version (2026-07-19, v1-metod), som lämnade startbidragets belopp
+# olöst (5 000 kr vs 1 500 kr) och inte sökte regelverket.
+#
+# KÄLLOR KONSULTERADE (i v2.1-ordning):
+# 1. Regelverk: "Riktlinje för föreningsbidrag" (KFN25/28, Kultur- och
+#    fritidsnämnden, beslutad 2025-06-04, giltig fr.o.m. 2026-01-01 tills
+#    vidare) — hittad via sökning, INTE på den plats den länkades från i
+#    författningssamlingens sökträff (fel path gav 404 två gånger; rätt path
+#    under /dokument/styrande-dokument/normerande/). Löser startbidrags-
+#    konflikten: regelverket anger uttryckligen 5 000 kr och räknar upp
+#    exakt de sju bidragstyper som redan fanns i filen. Ett äldre regelverk
+#    (diarienummer KFN19/30, omnämnt i en tjänsteskrivelse från 2023) har
+#    ersatts av KFN25/28 — det förklarar sannolikt varför en arkiverad
+#    e-tjänstsida fortfarande visar den gamla 1 500 kr-nivån.
+#    "Riktlinjer för kommunala bidrag till tätortsvägsamfälligheter"
+#    (MSN25/75, Miljö- och samhällsbyggnadsnämnden, beslutad 2026-02-10,
+#    giltig fr.o.m. 2026-03-01) — ny specialkategori-källa, väg.
+# 2. Förvaltningarnas egna sidor: nykoping.se/foreningsbidrag (huvudhubb,
+#    Division Näringsliv, kultur och fritid), Levande centrum/evenemangsbidrag
+#    (samhällsbyggnad/gator och torg), stipendier och priser (Nyköpings
+#    Arenor Fritid), stiftelser och fonder (division Social omsorg).
+# 3. Självservice/e-tjänst: nykoping.se/arkiv/etjanster/* — flera bidrag
+#    (startbidrag, vägbidrag, stiftelseansökan) ligger under /arkiv/-sökväg
+#    trots att de är i drift; se anteckning på startbidrag om varför den
+#    arkiverade sidans belopp inte vann.
+# 4. Ansökningsportal: fri.nykoping.se/bidrag/ gav HTTP 503 vid samtliga
+#    fyra försök under körningen — EJ_EXTRAHERBAR, JS-renderad/otillgänglig,
+#    i linje med v2.1:s förväntan.
+# 5. Specialkategorier: väg (två bidrag hittade, se nedan), stiftelser
+#    (endast individstipendier hittade, se MEDVETET_UTESLUTET i rapporten),
+#    studieförbund (uttryckligen exkluderat ur KFN:s regelverk; kommunbidraget
+#    fördelas av LBF Sörmland, annan huvudman — uteslutet), bygdegårdar
+#    (ingen kommunspecifik bidragsform hittad utöver nationella Boverket-stöd
+#    på annan domän), byalag (Leader Sörmlandskusten är regional/extern
+#    domän, inte kommunens egen — uteslutet enligt §4).
+#
+# NYTT I DENNA OMKÖRNING (utöver löst startbidrags-konflikt): Subventionerad
+# lokalhyra, Driftbidrag till tätortsvägsamfälligheter, Grönytebidrag,
+# Idrottsstipendium (betalas till föreningen, inte individen — se anteckning
+# på det bidraget för avgränsning mot uteslutna individstipendier).
+#
+# Dubbelhämtning: de sju ursprungliga bidragens belopp bekräftas nu av TVÅ
+# helt oberoende källtyper (regelverk + levande webbsida), vilket är starkare
+# än två fetchningar av samma sida. Nya fält (idrottsstipendium-belopp,
+# väg-bidragets kr/meter) kontrollerade mot en andra, oberoende sökning.
+#
+# Spot-checkas av Jacob före publik deploy.
+kommun: "Nyköping"
+kommun_slug: "nykoping"
+lan: "Södermanlands län"
+befolkning: 58310
+forvaltning: "Division Näringsliv, kultur och fritid (Kultur- och fritidsnämnden)"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://nykoping.rbok.se/"
+kalla_url: "https://www.nykoping.se/foreningsbidrag"
+verifierad: 2026-07-21
+bidrag:
+  - id: "nykoping-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som satsar på bred inkludering eller ny verksamhet för prioriterade grupper, med särskild prioritet för aktiviteter som ökar medlemskap i socioekonomiskt utsatta områden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Ansökan görs i kommunens bidragssystem (Rbok)"
+      - "Redovisning med kvitton/fakturor krävs före utbetalning"
+    belopp: "Max 20 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Ansökningsperiod löper 1 januari–31 december, beslut inom 2 veckor. Bekräftat i regelverket 'Riktlinje för föreningsbidrag' (KFN25/28, beslutad 2025-06-04, giltig fr.o.m. 2026-01-01)."
+  - id: "nykoping-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar som arrangerar publika evenemang öppna för alla, i första hand kulturella arrangemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Ansökan görs i kommunens bidragssystem (Rbok)"
+      - "Redovisning med kvitton/fakturor krävs före utbetalning"
+    belopp: "Max 40 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Ansökningsperiod löper 1 januari–31 december, beslut inom 2 veckor. Bidraget kan täcka en eventuell förlust på arrangemanget. Bekräftat i regelverket KFN25/28."
+  - id: "nykoping-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med oväntade kostnader utanför verksamhetsplanen som medför merkostnader"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Ansökan görs i kommunens bidragssystem (Rbok)"
+      - "Redovisning med kvitton/fakturor krävs före utbetalning"
+    belopp: "Max 75 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Ansökningsperiod löper 1 januari–31 december, beslut inom 2 veckor. Långsiktiga behov prioriteras framför kortsiktiga. Bekräftat i regelverket KFN25/28."
+  - id: "nykoping-lovbidrag"
+    namn: "Lovbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Barn och ungdomar, genom föreningar som erbjuder meningsfull fritid under sommar- och jullov"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31", "10-31"]
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Verksamhet av kollokaraktär, minst 2 timmar dagligen under flera dagar, riktad till allmänheten prioriteras"
+      - "Matkostnader kan inte beviljas"
+    belopp: "Max 40 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Två ansökningsperioder: sommarlov 1 januari–31 mars (beslut i april), jullov 1 september–31 oktober (beslut i november). Bekräftat i regelverket KFN25/28."
+  - id: "nykoping-startbidrag"
+    namn: "Startbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Nystartade föreningar i Nyköpings kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara nybildad och bidragsberättigad"
+      - "Protokoll från första mötet där föreningen bildades"
+      - "Verksamhetsplan, budget, kvalitetssäkring och stadgar"
+    belopp: "5 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "LÖST KONFLIKT (v2.1, §2.5): Regelverket 'Riktlinje för föreningsbidrag' (diarienummer KFN25/28, beslutat av Kultur- och fritidsnämnden 2025-06-04, giltigt fr.o.m. 2026-01-01 tills vidare) anger uttryckligen 'Föreningen kan söka max 5 000 kronor' för Startbidrag — vilket överensstämmer med kommunens nuvarande bidragssida (nykoping.se/foreningsbidrag). Den äldre e-tjänstsidan nykoping.se/arkiv/etjanster/startbidrag-for-foreningar/ (sidmetadata anger 'senast uppdaterad 8 april 2026') anger istället 1 500 kronor och krav på ansökan inom sex månader efter bildande. Den sidan ligger under en /arkiv/-sökväg och refererar sannolikt till ett tidigare regelverk (diarienummer KFN19/30, omnämnt i ett kommunalt ärende från 2023) som ersattes av KFN25/28. Två oberoende, aktuella källor (regelverk + levande bidragssida) konvergerar på 5 000 kronor mot en arkiverad sida på 1 500 kronor — belopp satt till 5 000 kronor. Sexmånadersregeln från arkivsidan är INTE bekräftad i det nya regelverket eller på den aktuella bidragssidan och har därför utelämnats. Konflikten kvarstår som en avvikelse mellan kommunens egna sidor och bör flaggas för kommunen."
+  - id: "nykoping-utbildningsbidrag"
+    namn: "Utbildningsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som vill utbilda styrelse, ledare eller annan grupp i föreningen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Ansökan görs i kommunens bidragssystem (Rbok)"
+      - "Redovisning med kvitton/fakturor krävs före utbetalning"
+    belopp: "Max 20 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Ansökningsperiod löper 1 januari–31 december, beslut inom 2 veckor. Utbildningar med RF-SISU eller studieförbund prioriteras. Bekräftat i regelverket KFN25/28."
+  - id: "nykoping-verksamhetsbidrag"
+    namn: "Verksamhetsbidrag"
+    kategori: ["idrott", "kultur", "funktionsratt", "ovrig"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet, driftkostnader, eller aktiviteter för funktionsvarierade"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-15"]
+    krav:
+      - "Föreningen ska ha haft verksamhet i mer än sex månader"
+      - "Årsmöteshandlingar (protokoll, verksamhetsberättelse, balans- och resultatrapport, revisionsberättelse) ska vara inskickade"
+      - "Föreningens information i bidragssystemet ska vara uppdaterad"
+      - "Regelbunden verksamhet krävs"
+      - "Hyresstöd beviljas inte för redan subventionerade lokaler eller för lånekostnader/renovering"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Ansökningsperiod löper 1 januari–15 september. Beslut fattas efter nämndens budgetbeslut i december, nämnden beslutar i oktober. Föreningar som söker över 200 000 kronor presenterar sin verksamhet för föreningsutskottet i september. Inget publicerat maxtak — bekräftat i regelverket KFN25/28, som inte heller anger något tak för denna bidragstyp."
+  - id: "nykoping-evenemangsbidrag"
+    namn: "Evenemangsbidrag (Levande centrum)"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Föreningar och företag som vill arrangera publika evenemang i Nyköpings stadskärna"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Evenemanget ska vara offentligt och genomföras i stadskärnan"
+      - "Budget och plan för arrangemanget ska presenteras"
+      - "Kommunens logotyp krävs i allt marknadsföringsmaterial"
+      - "Redovisning inom 30 dagar efter genomförandet"
+    belopp: "Max 25 000 kronor per arrangemang (totalt 300 000 kronor avsatt för 2026)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/trafik--resor/gator-och-torg/torg-och-allmanna-platser/levande-centrum/evenemangsbidrag/"
+    anteckning: "Beloppen (300 000 kr totalt, 25 000 kr per arrangemang) och sista ansökningsdatum (1 december 2026) gäller uttryckligen för 2026 i källan — ej bekräftat som årligen återkommande med samma nivåer. Ansökningar behandlas löpande, handläggningstid cirka tre veckor. Administreras av samhällsbyggnad/gator och torg, inte Kultur- och fritidsnämnden — ligger därför utanför regelverket KFN25/28. Riktat till både företag och föreningar, öppet även för icke-ideella arrangörer."
+  - id: "nykoping-subventionerad-lokalhyra"
+    namn: "Subventionerad lokalhyra (Nyköpings Arenor)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar, med extra rabatt för barn- och ungdomsverksamhet, som hyr lokal av Nyköpings Arenor"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd bidragsberättigad förening"
+      - "Extra rabatt för barn- och ungdomsverksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/foreningsbidrag"
+    anteckning: "Nytt i denna omkörning — fanns inte i föregående version. Ingen separat ansökan: rabatterad hyra gäller automatiskt för bidragsberättigade föreningar vid bokning av Nyköpings Arenors lokaler. Exakt rabattnivå (procent eller kronor) är inte publicerad i källan; hänvisar till lokalbokningen på nykopingsguiden.se för aktuell prislista (extern domän, inte extraherad). Kan inte kombineras med redan subventionerade lokaler (se Verksamhetsbidragets krav). Styrande taxedokument 'Taxa för kulturlokaler och lokaler som förmedlas genom lokalbokningen' hittat men inte extraherat i denna körning."
+  - id: "nykoping-driftbidrag-vagsamfalligheter"
+    namn: "Driftbidrag till tätortsvägsamfälligheter"
+    kategori: ["ovrig"]
+    malgrupp: "Vägförening, samfällighetsförening, fastighetsägarförening eller enskild väghållare för enskilda vägar"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Vägen ska vara farbar med bil eller cykel utan olägenhet och öppen för allmänheten"
+      - "Väg inom område detaljplanelagt som allmän platsmark med enskilt huvudmannaskap, inom förenings gemensamhetsanläggning, ej klassat som fritidshusområde"
+      - "Ort med minst 25 kringliggande fastigheter som bedöms nyttja vägarna"
+      - "Komplett kostnadsredovisning för föregående år ska bifogas ansökan"
+      - "Bidrag beviljas till endast en väghållare per väg"
+    belopp: "35,18 kronor per meter körväg eller gång- och cykelväg (2026 års belopp; räknas upp årligen med 2 procent)"
+    sen_ansokan: "För sent inkomna ansökningar medför att bidrag ej kan beviljas."
+    kalla_url: "https://www.nykoping.se/globalassets/nykoping.se/dokument/styrande-dokument/reglerande/riktlinjer-for-kommunala-bidrag-till-tatortsvagsamfalligheter.pdf"
+    anteckning: "Nytt i denna omkörning — specialkategori väg (§2.1 punkt 5), fanns inte i föregående version. Regelverk MSN25/75, beslutat av Miljö- och samhällsbyggnadsnämnden 2026-02-10, gäller fr.o.m. 2026-03-01. VARNINGSSIGNAL EJ HELT UPPLÖST (§2.6): dokumentets titel anger 'tätortsvägsamfälligheter' men §1.1 i regelverket specificerar att bidraget gäller enskilda vägar UTANFÖR Nyköpings tätort — en inkonsekvens i källdokumentet som inte kunnat lösas mot en andra källa. Kommunens e-tjänstsida (nykoping.se/arkiv/etjanster/kommunalt-vagbidrag---ansokan/, sidmetadata 'uppdaterad 27 april 2026') anger ansökningsfönster 23 februari–30 april 2026 för 2026, vilket avviker något från regelverkets 'senast 1 april'. Bör verifieras manuellt."
+  - id: "nykoping-gronytebidrag"
+    namn: "Grönytebidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Tätortsvägföreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav: []
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.nykoping.se/trafik--resor/gator-och-torg/vagforeningar-och-enskilda-vagar/"
+    anteckning: "Nytt i denna omkörning — specialkategori väg. Bidraget nämns uttryckligen på kommunens sida om vägföreningar ('Vägföreningar kan ansöka om detta bidrag') men belopp, exakta krav och ansökningsperiod kunde inte hittas i källorna (EJ_EXTRAHERBAR för dessa fält). Enligt källan hanteras det via samma digitala e-tjänst som Driftbidrag till tätortsvägsamfälligheter. Ansökan för 2026 var stängd vid verifieringstillfället. Fältet skrivs ändå in (tomt fält) hellre än att utelämnas helt, i linje med grundregeln i §1."
+  - id: "nykoping-idrottsstipendium"
+    namn: "Idrottsstipendium"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar vars medlemmar (individ eller lag) tagit medalj vid Olympiska spel, VM, EM eller SM, minst 13 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Prestationen ska vara gjord vid Olympiska spel, VM, EM eller SM"
+      - "Idrottaren eller laget ska vara minst 13 år"
+      - "Ansökan görs av föreningen via Rbok till Nyköpings Arenor Fritid"
+      - "Max ett stipendium per nivå och år per mottagare"
+    belopp: "OS: guld 12 000 kr, silver 6 000 kr, brons 3 000 kr. VM: guld 10 000 kr, silver 5 000 kr, brons 3 000 kr. EM: guld 7 000 kr, silver 4 000 kr, brons 2 500 kr. SM: guld 3 000 kr (endast guld)."
+    sen_ansokan: "Ansökan ska göras i januari för föregående års prestationer (exakt sista dag ej angiven i källan)"
+    kalla_url: "https://www.nykoping.se/uppleva--gora/stipendier-och-priser/idrottsstipendium"
+    anteckning: "Nytt i denna omkörning. Skrivs som föreningsbidrag (till skillnad från kommunens övriga individstipendier, t.ex. kulturstipendium, uppmuntransstipendium och integrationspris, som är MEDVETET UTESLUTNA — se rapport) eftersom källan uttryckligen anger att stipendiet betalas ut till medaljörens/medaljörernas FÖRENING, som tillsammans med idrottaren beslutar hur pengarna används — inte till individen direkt. Delas ut på Sveriges nationaldag 6 juni på Nyköpingshus. Beloppen för EM-nivån dubbelkontrollerade mot en andra, oberoende sökning med identiskt resultat (7 000/4 000/2 500 kr)."
+forutsattningar:
+  - id: "nykoping-bidragsberattigad-forening"
+    vad: "Bli godkänd som bidragsberättigad förening"
+    beskrivning: "Föreningen ansöker om att bli godkänd som bidragsberättigad genom att skicka in stadgar och senaste årsmöteshandlingar (protokoll, verksamhetsberättelse, balans- och resultatrapport, revisionsberättelse, verksamhetsplan och budget). Enligt regelverket (KFN25/28) ska föreningen vara ideell och aktiv, ha organisationsnummer, vara registrerad i kommunens föreningsregister, vara öppen för medlemskap för alla kommunens invånare med huvuddelen av medlemmarna bosatta i kommunen, ha huvuddelen av sin verksamhet inom kommunen, aktivt informera om sin verksamhet, vara medlemsstyrd med löpande årsmöten, stadgar och vald styrelse, ha minst 20 betalande medlemmar med en årsavgift på minst 50 kronor, årligen uppdatera föreningskontot, ta avstånd från våldsbejakande uttryck och åsikter, arbeta med kvalitetssäkring enligt kommunens instruktioner, jobba för hållbarhet, social inkludering och jämställdhet samt motverka diskriminering, och respektera enskildas grundläggande fri- och rättigheter. Idrottsföreningar ska vara vaccinerade mot doping via Antidoping Sverige och ha en aktiv antidopingplan. Ekonomiska föreningar, partipolitiska föreningar, stödföreningar/supporterklubbar och trossamfund kan inte söka bidrag."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: "Räkna med en handläggningstid på minst en månad"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.nykoping.se/globalassets/nykoping.se/dokument/styrande-dokument/normerande/riktlinje-for-foreningsbidrag.pdf"

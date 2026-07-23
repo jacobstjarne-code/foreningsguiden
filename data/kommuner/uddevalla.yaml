@@ -1,0 +1,347 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 v2.1 —
+# källkonvergens, inte portal-först). Föregående version (verifierad
+# 2026-07-19) rapporterades DELVIS med bara 2 bidrag, med motiveringen att
+# kommunens detaljsidor ("Föreningsbidrag från kommunen" och "Allmänna
+# villkor och förutsättningar") gav 404 trots att de är Google-indexerade.
+# Denna körning bekräftar att de sidorna FORTFARANDE ger 404 (verifierat på
+# nytt, samma två URL:er) — men löser täckningen genom källkonvergens
+# istället för att stanna vid den enskilda döda länken.
+#
+# Metod och fynd:
+# (1) REGELVERKET. Sökte efter det nya antagna regelverket från reformen
+# (1 januari/1 april 2026) och hittade det i sin helhet — inte som fristående
+# PDF, utan som Bilaga 2 ("Kultur och fritidsnämndens ekonomiska bidrag till
+# civilsamhällesorganisationer — Bestämmelser") till en tjänsteskrivelse
+# (Dnr KFN/2025:272) i Kultur- och fritidsnämndens kallelse till samman-
+# trädet 2025-12-16 (233 sidor, hämtad och lästa i sin helhet via curl +
+# pdftotext). Kallelsen visar att nämnden samtidigt beslutade upphäva fyra
+# äldre styrdokument: "Bestämmelser för föreningsbidrag" (2022-11-23),
+# "Bestämmelser för ekonomiskt stöd till studieförbunden" (2023-09-28),
+# "Bestämmelser om bidrag till Friluftsliv" (2022-11-23) och "Kriterier för
+# stöd till stiftelsedrivna museer" (2020-11-06) — alla fyra är nu
+# INTEGRERADE i det enhetliga regelverkets sju kategorier (studieförbund
+# under arrangemangs-/utvecklings-/kompetensbidrag, friluftsliv under
+# lokal- och driftsbidragets "Driftbidrag friluftsområde", museistiftelser
+# under verksamhetsbidraget). Det förklarar varför ingen av dessa syns som
+# egna bidrag i denna fil — de existerar, men som inriktningar inom de sju
+# kategorierna, inte som egna poster. Exakt paragrafnummer för nämndens
+# beslut 2025-12-16 kunde inte oberoende bekräftas (kallelsen visar
+# FÖRSLAGET till beslut, inte det justerade protokollet) — men att
+# bestämmelserna faktiskt trädde i kraft 2026-01-01 är bekräftat via
+# kommunens nyhetsartikel samma datum och den nu levande bidragssidan.
+# En andra nämndbehandling ("Revidering av ekonomiska bidrag till
+# civilsamhällesorganisationer") stod som första ärende på kallelsen till
+# sammanträdet 2026-03-12, vilket sammanfaller med att reviderade
+# bestämmelser trädde i kraft 1 april 2026 (bekräftat via kommunens
+# nyhetsartikel 2026-04-01). Kallelse/protokoll för just 2026-03-12-mötet
+# gick inte att hitta via sökmotor eller kommunens (JS-renderade)
+# kallelse-och-protokoll-sida — men det är inte ett hinder: det aktuella,
+# levande regelverkets INNEHÅLL (efter april-revideringen) är direkt
+# extraherat från kommunens nuvarande, publicerade och extraherbara
+# översiktssida (se punkt 2), som per definition är den mest aktuella
+# källan (§2.5, nyare datum vinner).
+# (2) FÖRVALTNINGENS EGEN SIDA. Huvudsidan
+# uppleva-och-gora/.../bidrag-stod-och-stipendier.html gav 200 och var FULLT
+# extraherbar (statisk HTML, inte JS-renderad) — till skillnad från
+# föregående körning användes den nu som primär detaljkälla, eftersom den
+# innehåller alla åtta bidragskategoriers fullständiga faktarutor, villkor,
+# poängsystem och (för lokal- och driftsbidraget) en komplett belopps-
+# tabell. Sidan är publicerad 2026-07-02 och uppges uttryckligen gälla
+# "från och med den 1 januari 2026 ... reviderad den 1 april 2026" — det är
+# alltså den mest aktuella sammanställningen som finns, nyare än december-
+# kallelsens regelverksbilaga. DUBBELVERIFIERING AV RISKOMRÅDET: den exakta
+# belopps-/procenttabellen för lokal- och driftsbidraget (som
+# RESEARCH_SPEC_v2.md §3 pekar ut som platsen där en trolig hallucination
+# fångades i en tidigare Uddevalla-körning) hämtades och extraherades två
+# gånger, oberoende, ur två helt olika dokument: december-kallelsens
+# regelverksbilaga (pdftotext) och den nu levande webbsidan (egen HTML-
+# strippning). Samtliga siffror är identiska mellan de två källorna, med
+# ETT tillägg i webbsidans nyare version — schablonraden "Badplatser eget
+# ansvar: 2 500 kr/st" — som saknas i decemberversionen men som exakt
+# matchar april-nyhetsartikelns text om att "badplatser fick ett
+# schabloniserat driftbidrag om 2 500 kronor per badplats". Det är alltså
+# en bekräftad TILLÄGGD rad från aprilrevideringen, inte en konflikt.
+# (3) SJÄLVSERVICE/E-TJÄNSTER. sjalvservice.uddevalla.se är, till skillnad
+# från Rbok, INTE JS-renderad — indexsidan (/oversikt) listar samtliga
+# e-tjänster inklusive "Ansökan om Giraffstöd", "Sponsring, ansökan" och
+# "Ansökan om utvecklingsmedel för folkhälsa". Den sistnämnda visade sig
+# vid närmare läsning vara stängd för föreningar (se MEDVETET_UTESLUTET).
+# (4) ANSÖKNINGSPORTALEN (Rbok). uddevalla.rbok.se gav 200 men är en ren
+# JS-app (27 synliga textrader, "Var god vänta...", inget bidragsinnehåll
+# extraherbart via curl) — EJ_EXTRAHERBAR, som väntat enligt v2.1.
+# (5) SPECIALKATEGORIER (§2.1.5): väg/samfälligheter SÖKT MEN EJ HITTAT —
+# kommunens enda sida om ämnet (trafik-och-resor/.../vagsamfalligheter-.html)
+# beskriver bara hur en gemensamhetsanläggning bildas, ingen kommunal
+# bidragsform till väghållare hittades. Bygdegårdar/hembygdsföreningar
+# TÄCKS inom lokal- och driftsbidragets kategori "Kultur, samlingslokaler
+# och hembygdsföreningar" (65 %, 100 000 kr) — ingen egen post behövs.
+# Stiftelser/fonder: kommunens fullständiga lista
+# (omsorg-och-hjalp/.../stipendier-och-fonder-.html) granskades post för
+# post, se nedan. Byalag/samhällsföreningar: ingen egen bidragsform utöver
+# de generella civilsamhällesorganisationskategorierna hittades. Studie-
+# förbund: se punkt (1) — integrerat, inte eget bidrag.
+#
+# STIFTELSER GRANSKADE (8 st, kommunens fullständiga lista):
+# - Stiftelsen Barnens Dag i Uddevalla — INKLUDERAD. Sidan säger uttryck-
+#   ligen "Även föreningar, skolor och andra sammanslutningar kan söka."
+# - Thordenstiftelsen — INKLUDERAD. "Thordenstiftelsen stödjer främst
+#   föreningslivet med bidrag i Bohuslän."
+# - Gustafsbergsstiftelsen, Max Albin Dahlgrens stipendiefond, Otto
+#   Hedströms stiftelse, Stiftelsen Barnhemmets vänner, Stiftelsen Hemmet
+#   för Gamla och Sjuka — UTESLUTNA, samtliga uttryckligen riktade till
+#   enskilda privatpersoner (studerande ungdomar, enskilda markägare,
+#   studerande flickor, långvarigt sjuka/handikappade individer). §2.4.
+# - Stiftelsen Samfond nr 6 — UTESLUTEN som gränsfall: riktar sig till
+#   "Behövande inom förutvarande Skredsviks socken", vilket språkligt pekar
+#   mot enskilda nödställda snarare än föreningar, och sidan nämner ingen
+#   förening som möjlig sökande. Inte lika entydigt uteslutet som de fyra
+#   ovan — flaggas för Fables granskning.
+#   https://www.uddevalla.se/omsorg-och-hjalp/ekonomi-och-pengar/stipendier-och-fonder-/stiftelsen-samfond-nr-6.html
+#
+# MEDVETET UTESLUTET (övrigt, §2.4):
+# - Utvecklingsmedel för folkhälsa — kategoriskt uteslutet: sidan säger
+#   uttryckligen "Kommunens förvaltningar och verksamheter kan ansöka om
+#   medel", dvs. bara kommunens EGNA enheter, inte föreningar/civilsamhälle.
+#   https://www.uddevalla.se/omsorg-och-hjalp/folkhalsoarbete/utvecklingsmedel-for-folkhalsa.html
+# - "Game Changer" — nämns i kallelsens bakgrundsbilaga och i en sökträff om
+#   nämndens arbete 2025 ("två Game Changer-processer med totalt 50
+#   deltagare") som en workshop-metod för att utveckla nya aktivitets-
+#   former tillsammans med unga och föreningsliv — men ingen publik
+#   ansökningssida eller käll-URL för ett sökbart bidrag hittades. Bedöms
+#   som en intern arbetsmetod, inte ett sökbart föreningsbidrag. EJ_SKRIVET,
+#   bör dubbelkollas av Fable om en ansökningsväg dyker upp.
+# - Bidragskollen — ett matchningsverktyg/filter för att hitta RÄTT bidrag
+#   bland de åtta kategorierna, inte ett eget bidrag.
+#
+# TIDIGARE VERSIONENS PLACEHOLDER-ANTECKNINGAR: föregående körnings
+# osäkerhet kring lokal- och driftsbidragets beloppstak och de exakta
+# ansökningsperioderna är nu löst i sak (se punkt 2 ovan) — de exakta
+# datumen för VARJE periods öppning saknas dock fortfarande på kommunens
+# sida för flera kategorier (bara en av två perioder är oftast publicerad);
+# detta är INTE samma brist som föregående körnings 404-problem, utan en
+# genuin lucka i vad kommunen själv publicerat utanför Rbok, och hanteras
+# per bidrag nedan med typ: lopande + anteckning i stället för påhittade
+# datum (§4).
+#
+# Befolkning: 56 744 per 2025-12-31, hämtat direkt från kommunens egen sida
+# (kommun-och-politik/kommunfakta/befolkning-arbete-byggande.html),
+# oförändrat mot föregående körning. En extern källa (Wikipedia, med
+# hänvisning till SCB:s kvartalssiffra 2026-03-31) anger 56 698 — nyare
+# mätdatum, men INTE kommunens egen domän (§4 kräver kommunens egen domän
+# som källa) och därför inte använt för att skriva över det kommun-
+# publicerade värdet. Ingen formell §2.5-konflikt loggad, eftersom Wikipedia
+# faller utanför källkretsen — men avvikelsen noteras här för transparens.
+#
+# Dubbelhämtat i två oberoende pass (§3): den fullständiga bidragssidan
+# (bidrag-stod-och-stipendier.html) samt december-kallelsens regelverks-
+# bilaga hämtades och lästes två gånger via oberoende metoder (WebFetch-
+# sammanfattning + egen curl/pdftotext-extraktion av råtext). Inga
+# fältkonflikter identifierade utöver den redan förklarade Badplatser-
+# tilläggsraden. Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Uddevalla"
+kommun_slug: "uddevalla"
+lan: "Västra Götalands län"
+befolkning: 56744
+forvaltning: "Kultur- och fritidsförvaltningen (huvudansvarig för föreningsbidraget enligt Kultur- och fritidsnämndens bestämmelser, i kraft 2026-01-01 och reviderade 2026-04-01), samt Kommunledningskontoret (sponsring, Stiftelsen Barnens Dag, Thordenstiftelsen)"
+ansokningssystem:
+  namn: "Rbok (huvudsystem för de sju kärnkategorierna), samt kommunens Självservice/e-tjänster för nystartsbidrag, sponsring och Giraffstöd"
+  url: "https://uddevalla.rbok.se/"
+kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "uddevalla-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "kultur", "funktionsratt", "pensionar", "ovrig"]
+    malgrupp: "Ideella föreningar med verksamhet i Uddevalla kommun; ledarledda aktiviteter för barn och unga 7–20 år, personer med funktionsvariation (7 år och äldre) samt seniorer (65 år och äldre)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiska stadgar, senast justerat årsprotokoll, underskriven revisionsberättelse och ekonomisk redovisning med balans- och resultatrapport"
+      - "Registerutdrag ur belastningsregistret för ledare som möter barn och unga, samt uppdaterat medlemsregister"
+      - "Föreningen ska ta ut medlemsavgift av sina medlemmar"
+      - "Aktiviteten ska vara minst 45 minuter lång, ledarledd och ha minst 3 deltagare"
+      - "Digital närvaroregistrering samt redovisning av deltagare, ålder, aktivitetstyp och tid krävs"
+      - "Krav på säte i Uddevalla kommun — enligt regelverket den enda bidragskategorin med det kravet"
+    belopp: "11 kronor per deltagare och tillfälle"
+    sen_ansokan: "Utbetalning sker i efterhand baserat på redovisade och godkända aktivitetstillfällen"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Ansökningar och utbetalningar sker två gånger per år. Ett registreringsfönster öppnade 21 januari 2026 och vårens rapport ska skickas in 1 juli–25 augusti 2026 — fullständig årlig ansökningskalender för båda perioderna är inte publicerad utanför Rbok (JS-renderad, EJ_EXTRAHERBAR)."
+  - id: "uddevalla-lokal-och-driftsbidrag"
+    namn: "Lokal- och driftsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Ideella föreningar med verksamhet i Uddevalla och lokal/anläggning, kansli/kontor eller förråd. Ekonomiska föreningar kan endast beviljas bidrag för drift och lokal om föreningen är delägd av Uddevalla kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiska stadgar, senast justerat årsprotokoll, underskriven revisionsberättelse och ekonomisk redovisning med balans- och resultatrapport"
+      - "Hyres-/ägandeavtal, ekonomisk redovisning per lokal/anläggning och beskrivning av funktion ska bifogas"
+      - "Minst 10 sammankomster föregående år (gäller ej friluftsnoder)"
+      - "Krav på tillgänglighetsanpassning för driftbidrag avseende verksamhetslokaler"
+      - "En förening kan inte få både driftbidrag och lokalbidrag för samma anläggning; flera objekt av samma typ läggs ihop och begränsas gemensamt av maxtaket för just den typen"
+      - "Basbidrag (25 000 kr/år) kan endast ges till föreningar som äger sin lokal/anläggning"
+      - "Driftbidrag ges endast för lokaler/anläggningar med kontinuerlig verksamhet, inte tillfälliga projekt eller enstaka arrangemang"
+    belopp: "Verksamhetslokal/anläggning och kansli/kontor, andel av nettokostnad och maxtak per år: fotbollsanläggning 80 % (200 000 kr), ridanläggning 80 % (200 000 kr), skatelokal 80 % (200 000 kr), kansli/kontor 80 % (50 000 kr, varav högst 5 000 kr/år får avse förråd), kultur/samlingslokaler/hembygdsföreningar 65 % (100 000 kr), bangolf-, skytte-, golf-, tennis-, motions-/gym-, båt-/segel-, motor- och kampsportsanläggning 50 % (65 000 kr). Basbidrag för ägd lokal: 25 000 kr/år. Driftbidrag friluftsområde (schablon): spår/leder 600 kr eget ansvar eller 2 000 kr/st tillsynsansvar, badplats 2 500 kr/st, belyst motionsspår 1 000 kr/st, fiskesjö 2 000–2 500 kr/st, preparerande skidspår 500 kr, stuga 65 % av kostnad (max 90 000 kr/förening), karta för friluftsliv 550 kr/km², vindskydd/eldstad 1 000 kr/st. Upprustningsbidrag kan ersätta upp till 100 % av kostnaden, maxbelopp fastställs årligen."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Ansökan och utbetalning för huvudinriktningarna sker en gång per år (exakt datum ej publicerat). Upprustningsbidraget har två ansökningsperioder per år — nästa öppnar 15 augusti och stänger 30 september. Badplatsers schablonbidrag (2 500 kr/st) tillkom i den reviderade tabellen från 1 april 2026 och saknades i regelverksbilagan från december 2025 — dubbelverifierat mot risken för hallucinerade belopp i RESEARCH_SPEC_v2.md §3, se filens header."
+  - id: "uddevalla-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag"
+    kategori: ["kultur", "idrott", "ovrig"]
+    malgrupp: "Ideella föreningar, studieförbund eller övriga civilsamhällesorganisationer med verksamhet i Uddevalla kommun som arrangerar publika och allmännyttiga evenemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiska stadgar m.m. krävs (kan undantas för övriga civilsamhällesorganisationer)"
+      - "Arrangemanget ska vara publikt och allmännyttigt (undantag kan göras för riktade målgrupper) och genomföras i Uddevalla kommun"
+      - "Budget och plan för arrangemanget ska bifogas"
+      - "Bedömning sker enligt poängsystem: genomförbarhet, måluppfyllnad, samverkan och delaktighet, 5 poäng vardera"
+      - "Kostnader för mat/fika, redan subventionerade lokaler och inköp utan direkt koppling till aktiviteten är inte bidragsgrundande"
+    belopp: null
+    sen_ansokan: "Ansökningar som behöver kompletteras kan hänvisas till nästa ansökningsperiod med skriftlig motivering; för sent inkomna ansökningar handläggs enligt regelverkets allmänna huvudregel inte"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Två ansökningsperioder per år. Andra periodens datum är publicerade: 15 september–15 oktober. Första periodens datum är inte publicerade på kommunens sida vid denna körning. Ett delegationsbeslut 2026-02-04 (KFN/2026:38) visar en tidigare beslutsomgång: 1 040 308 kronor tillgängligt mot 1 710 322 kronor sökt i 22 ansökningar, prioriterat efter poängsystemet ovan."
+  - id: "uddevalla-utvecklingsbidrag"
+    namn: "Utvecklingsbidrag"
+    kategori: ["idrott", "kultur", "social", "ovrig"]
+    malgrupp: "Ideella föreningar, studieförbund, stiftelser och övriga civilsamhällesorganisationer med verksamhet i Uddevalla kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiska stadgar m.m. krävs (kan undantas för övriga civilsamhällesorganisationer)"
+      - "Tydlig projektplan, syfte, mål och budget krävs; bidrag ges inte till ordinarie verksamhet"
+      - "Delredovisning krävs varje år för fleråriga projekt"
+      - "Bedömning sker enligt poängsystem: genomförbarhet, måluppfyllnad, samverkan, delaktighet, innovation, hållbarhet, 5 poäng vardera"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Fyra inriktningar: projekt-/verksamhets-/metodutveckling; utveckling av anläggning/utrustning/noder; medfinansiär/medsökande vid statliga eller externa bidrag (t.ex. Boverket, Arvsfonden, Länsstyrelsen); nya målgrupper/sänkta trösklar/motverka ofrivillig ensamhet. Nystartsbidrag var tidigare en femte inriktning här (bekräftat i regelverksbilagan antagen 2025-12-16) men blev en egen kategori genom revideringen 1 april 2026, se uddevalla-nystartsbidrag. Två ansökningsperioder per år, andra perioden öppnar 1 augusti och stänger 15 september."
+  - id: "uddevalla-verksamhetsbidrag"
+    namn: "Verksamhetsbidrag"
+    kategori: ["funktionsratt", "social", "ovrig"]
+    malgrupp: "Alla ideella föreningar och stiftelser (inklusive stiftelsedrivna museer) med verksamhet i Uddevalla kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiska stadgar, senast justerat årsprotokoll, underskriven revisionsberättelse och ekonomisk redovisning med balans- och resultatrapport"
+      - "Om flera inriktningar söks prövas varje inriktning för sig utifrån sina specifika krav"
+      - "För funktionsbidrag gäller att verksamheten ska rikta sig till personer med funktionsvariation"
+      - "För lov- och after school-verksamhet gäller att verksamheten ska vara kostnadsfri för deltagarna; mat/fika och redan subventionerade lokaler är inte bidragsgrundande"
+      - "För lönebidrag gäller att lönebidragstagaren ska ha en avgörande funktion för verksamheten och att ersättning utgår via Arbetsförmedlingen"
+      - "För kontinuerlig samhällsnyttig verksamhet gäller att verksamheten ska vara kontinuerlig, allmännyttig och ha lokal förankring i Uddevalla kommun"
+    belopp: "Funktionsbidrag: schablon 7 000 kronor per förening och år. Lönebidrag: 10 % av lönekostnaden, max 2 000 kronor per månad, justerat efter tjänstgöringsgrad. Kontinuerlig samhällsnyttig verksamhet samt lov-/after school-verksamhet: belopp beslutas efter bedömning av innehåll, omfattning och samhällsnytta — ingen fast schablon publicerad."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Fyra inriktningar, sökbara separat eller kombinerat: kontinuerlig samhällsnyttig verksamhet, funktionsbidrag, lönebidrag, lov-/after school-verksamhet. Årlig ansökan för huvudinriktningen; lönebidrag och lov-/after school-verksamhet kan sökas löpande. För höstlovet 2026 stänger anmälan 21 september (enstaka angivet datum, inte bekräftat som återkommande regel över flera år). Enligt regelverksbilagan antagen 2025-12-16 kan stiftelsedrivna museer beviljas verksamhetsbidrag för en treårsperiod med årlig prövning — inte omnämnt på den kortare webbsidan men inte motsagt heller."
+  - id: "uddevalla-kompetensbidrag"
+    namn: "Kompetensbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar, studieförbund och övriga civilsamhällesorganisationer med verksamhet i Uddevalla kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Demokratiska stadgar, senast justerat årsprotokoll, underskriven revisionsberättelse och ekonomisk redovisning med balans- och resultatrapport"
+      - "Insatsen ska ha koppling till föreningens verksamhet och stärka den för medlemmar och Uddevallas invånare"
+      - "Studieförbund kan endast beviljas kompetensbidrag för utbildningsinsatser riktade till flera föreningar/civilsamhällesaktörer, inte för intern utbildning av egen personal — bidraget betalas då ut till studieförbundet, inte till deltagande föreningar"
+      - "Utbildningen ska vara öppen för föreningar i Uddevalla kommun"
+      - "Tematiska prioriteringar kan införas över tid beroende på politiska beslut och aktuella behov"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Ny bidragskategori i det reviderade regelverket, infördes 2026-01-01. Två ansökningsperioder per år, exakta datum ej publicerade på kommunens sida. Delredovisning krävs efter genomförd insats."
+  - id: "uddevalla-medlemsbidrag"
+    namn: "Medlemsbidrag för prioriterade grupper"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Föreningar som bedriver verksamhet för pensionärer eller personer med funktionsvariation, med verksamhet i Uddevalla kommun. Även föreningar med säte utanför kommunen kan söka om de har lokal medlemsbas och verksamhet som gynnar Uddevalla"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Bidrag ges endast till verksamhet för de prioriterade målgrupperna funktionsvariation och pensionärer, och verksamheten ska vara återkommande och etablerad — enstaka aktiviteter eller tillfälliga satsningar räknas inte"
+      - "Medlemsregister krävs för att styrka antal medlemmar bosatta i Uddevalla kommun"
+      - "Verksamheten ska redovisas separat om föreningen har säte utanför kommunen"
+    belopp: "40 kronor per medlem bosatt i Uddevalla kommun"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Ansökan och utbetalning sker en gång per år, exakt datum ej publicerat på kommunens sida."
+  - id: "uddevalla-nystartsbidrag"
+    namn: "Nystartsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Nystartade allmännyttiga ideella föreningar med säte i Uddevalla kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara nystartad, inom de senaste 12 månaderna räknat från bildandemötets datum"
+      - "Föreningen ska ha antagit demokratiska stadgar och genomfört ett bildandemöte, styrkt genom protokoll som visar datum, beslut att bilda föreningen, antagna stadgar och vald styrelse"
+      - "Föreningen ska ha organisationsnummer samt bankgiro eller plusgiro knutet till föreningen"
+    belopp: "3 000 kronor, engångsbidrag som endast kan beviljas en gång per förening"
+    sen_ansokan: "Ej tillämpligt (kan sökas löpande under året)"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html"
+    anteckning: "Blev en egen bidragskategori genom de reviderade bestämmelserna som trädde i kraft 1 april 2026 — var tidigare en inriktning inom utvecklingsbidraget (bekräftat i regelverksbilagan antagen av nämnden 2025-12-16)."
+  - id: "uddevalla-sponsring"
+    namn: "Sponsring"
+    kategori: ["kultur", "idrott", "ovrig"]
+    malgrupp: "Föreningar, arrangörer och organisationer vars verksamhet marknadsför och gör Uddevalla känt, i första hand utanför kommungränsen — separata frågeformulär finns för idrott, kultur och övrigt"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Syftet ska vara att marknadsföra och göra platsen Uddevalla känd, främst utanför kommungränsen"
+      - "Ansökan sker digitalt och blir en allmän handling när den lämnats in"
+      - "Kommunen prioriterar arrangörer som aktivt arbetar med hållbarhet, jämställdhet och verksamhet för barn och unga"
+      - "Godkända sökande ska teckna avtal innan utbetalning, och en efterhandsutvärdering krävs"
+    belopp: null
+    sen_ansokan: "Ansökningar över 75 000 kronor bör lämnas senast sex månader före arrangemanget; ansökningar under 75 000 kronor senast tre månader före"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/sponsring.html"
+    anteckning: "Administreras av Kommunstyrelsen/kommunledningskontoret, inte Kultur- och fritidsnämnden, och ligger därför utanför de reviderade bestämmelserna för civilsamhällesorganisationer — ansökningar under 75 000 kr kan beslutas av kommunstyrelsens ordförande genom delegation, övriga av kommunstyrelsen. Kommunens sida bekräftar uttryckligen att sponsringen är oförändrad av 2026 års bidragsreform ('Ingenting har förändrats när det gäller sponsring'). Inkluderad trots det avvikande syftet (platsmarknadsföring snarare än stöd till ideell verksamhet) eftersom inget kategoriskt uteslutningsskäl enligt §2.4 föreligger — föreningar kan faktiskt söka och beviljas stödet."
+  - id: "uddevalla-giraffstod"
+    namn: "Giraff — stöd till unga"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Unga 13–26 år som bor i eller är aktiva i Uddevalla kommun och vill arrangera en kultur- eller fritidsaktivitet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Sökande ska vara 13–26 år och fungera som huvudkontakt gentemot kommunen"
+      - "Aktiviteten ska genomföras i Uddevalla kommun"
+      - "Aktiviteten ska vara öppen för andra att delta"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/uppleva-och-gora/ung-i-kommunen/giraff---stod-till-unga.html"
+    anteckning: "Formellt sökt av en enskild ung person, men aktiviteten ska vara öppen för andra att delta — jämförbart med hur bidrag till unga arrangörer i andra kommuner bedömts (t.ex. Lidköpings ungdomspeng). Administreras av Kultur och fritid/Ung i kommunen, utanför de reviderade bestämmelserna för civilsamhällesorganisationer. Stöd kan ges som pengar, arbetsinsats eller personlig vägledning — nivå bestäms från fall till fall, inget fast belopp publicerat. Kontaktpersoner enligt e-tjänsten: Kerstin Karlsson och Lotta Johansson."
+  - id: "uddevalla-stiftelsen-barnens-dag"
+    namn: "Stiftelsen Barnens Dag i Uddevalla"
+    kategori: ["social", "ovrig"]
+    malgrupp: "Familjer, föreningar, skolor och andra sammanslutningar som verkar för barn under 18 år hemmahörande i Uddevalla kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Ändamålet ska vara att främja vård och uppfostran av barn, eller ge understöd för undervisning/utbildning av barn (ej fyllda 18 år) hemmahörande i Uddevalla"
+      - "Ingen ansökningsblankett finns — ansökan formuleras fritt med en beskrivning av situationen samt bifogade handlingar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.uddevalla.se/omsorg-och-hjalp/ekonomi-och-pengar/stipendier-och-fonder-/stiftelsen-barnens-dag-i-uddevalla.html"
+    anteckning: "Specialkategori enligt §2.1.5 (stiftelser/fonder). Sidan bekräftar uttryckligen att föreningar, skolor och andra sammanslutningar — inte bara privatpersoner — kan söka. Pengarna betalas ut i maj varje år. Ansökan skickas per post till en namngiven privatperson (stiftelsens förvaltare), inte via ett kommunalt e-tjänstesystem."
+  - id: "uddevalla-thordenstiftelsen"
+    namn: "Thordenstiftelsen"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningsliv i Bohuslän, inklusive Uddevalla kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28", "09-30"]
+    krav:
+      - "Ansökan ska innehålla organisationsnummer, namn, adress, telefon, e-post och bankkontouppgifter, kontaktperson, sökt belopp samt en beskrivning av föreningens ändamål, verksamhet och medlemsantal"
+      - "Vid ansökt belopp över 50 000 kronor ska årsredovisning/bokslut bifogas"
+      - "Ansökan kan inte sparas och återupptas, och kan inte kompletteras i efterhand — uppgifterna måste vara fullständiga vid inlämning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan utöver de två fasta ansökningsdatumen"
+    kalla_url: "https://www.uddevalla.se/omsorg-och-hjalp/ekonomi-och-pengar/stipendier-och-fonder-/thordenstiftelsen.html"
+    anteckning: "Specialkategori enligt §2.1.5 (stiftelser/fonder). Extern stiftelse (grundad 1958 i samband med Uddevallavarvets rekonstruktion) som stödjer föreningslivet i hela Bohuslän, inte enbart Uddevalla — men listas på och delvis administreras via kommunens egen sida för stipendier och fonder. Fullständig ansökningsprocess sker på stiftelsens egen webbplats (thordenstiftelsen.se), utanför kommunens domän, och används därför inte som primärkälla här (§4)."
+forutsattningar: []

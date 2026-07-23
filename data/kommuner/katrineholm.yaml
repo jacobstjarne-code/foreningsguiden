@@ -1,0 +1,313 @@
+# KORRIGERANDE OMKÖRNING 2026-07-21 (RESEARCH_SPEC_v2.md §2/§2.1 —
+# källkonvergens). Föregående version (verifierad 2026-07-19) fångade 12
+# bidrag genom att bara läsa de sex redaktionella undersidorna under
+# "Föreningsbidrag". Denna omgång sökte i ordningen 1–5 (§2.1):
+#
+# 1. REGELVERKET FÖRST. Katrineholm har SJU antagna styrdokument, inte ett:
+#    "Övergripande riktlinjer för föreningsstöd" (KF 2024-12-16 § 239, gäller
+#    2024-01-01–2027-12-31) plus FYRA nämndspecifika komplement — ett per
+#    nämnd (Kulturnämnden 2025-12-09 § 43, Service- och tekniknämnden
+#    2025-11-20 § 62, Vård- och omsorgsnämnden 2025-12-11, Socialnämnden
+#    2025-12-18 § 92, samtliga gäller 2026-01-01–2027-12-31) — samt separata
+#    styrdokument för "Snabba stålar" (Kulturnämnden 2026-02-24 § 8) och
+#    "Riktlinjer för sponsring" (kommundirektör 2025-12-01, KS_2026_21).
+#    Samtliga sju hämtade och lästa i sin helhet (pdftotext, inte bara
+#    ingress). De fyra nämndspecifika dokumenten gav den exakta
+#    grundbidragsformeln (20 kr/medlem upp till 600 medlemmar, 10 kr/medlem
+#    vid bokslutsresultat > 100 000 kr, tak 12 000 kr, golv 4 000 kr —
+#    IDENTISK i alla fyra nämnders regelverk) samt exakta belopp för
+#    arrangemangsbidrag (normalt < 150 000 kr) och driftbidrag (75 % av
+#    vatten/el/slam-kostnader max 300 000 kr, plus 3 000 kr/anläggningsenhet)
+#    — samtliga tidigare null i belopp-fältet, nu ifyllda.
+# 2. FÖRVALTNINGARNAS EGNA SIDOR. De sex redaktionella undersidorna lästa på
+#    nytt i sin helhet, korsverifierade mot regelverket (identiska datum/
+#    belopp där båda anger dem — inga konflikter).
+# 3. SJÄLVSERVICE/E-TJÄNST. Hela e.katrineholm.se:s tjänstekatalog (140+
+#    tjänster) genomsökt för bidragsrelaterade poster. Detta var vägen in
+#    till två bidrag som saknades helt i föregående version (se nedan).
+# 4. PORTALEN. katrineholm.ibgo.se (Interbook Go) är en Vue.js-SPA (tomt
+#    <div id="app">, inget statiskt innehåll) — EJ_EXTRAHERBAR, som väntat
+#    enligt §2.1 punkt 4. Täckning byggd genom konvergens mellan 1–3 i
+#    stället.
+# 5. SPECIALKATEGORIER. Vägföreningar/vägsamfälligheter: HITTAT — "Bidrag
+#    till enskilda vägar", administreras av Samhällsbyggnadsförvaltningen
+#    (inte Föreningsservice), saknades helt i föregående version. Bygdegårdar
+#    /samlingslokaler: Service- och tekniknämndens regelverk nämner uttryck-
+#    ligen "Inom service- och tekniknämnden beslutas även om bidrag till
+#    samlingslokaler" i inledningstexten, men nämndens egen "Bidrag"-lista
+#    innehåller bara fyra poster (grund-, verksamhets-, arrangemangs- och
+#    driftbidrag) — ingen femte, separat samlingslokalspost hittades i
+#    regelverket, på webbsidorna eller i e-tjänstkatalogen. Bedömning:
+#    samlingslokalsägande föreningar söker samma driftbidrag som andra
+#    anläggningsägande föreningar; ingen dold, separat bidragsform finns.
+#    Stiftelser/fonder: HITTAT — kommunens fondmedel (8 stiftelser under
+#    Socialnämnden/Vård- och omsorgsnämnden) — men uteslutna, se nedan.
+#    Byalag/samhällsföreningar och studieförbund: ingen separat kommunal
+#    bidragsform hittad utöver kulturnämndens arrangemangsbidrag (som
+#    uttryckligen även kan sökas av statsbidragsberättigade studieförbund).
+#
+# NYA BIDRAG (saknades i föregående version):
+# - "Bidrag från kommunstyrelsen" — fanns på sidan "Sponsring och andra
+#   bidrag" men var i föregående version sammanslaget med sponsringstexten
+#   till EN felaktig post ("katrineholm-sponsring"). Sidan beskriver i
+#   verkligheten TVÅ helt separata scheman (exakt det Karlstad-mönster
+#   v2.1 varnar för: flera distinkta bidrag under samma URL). Bidraget från
+#   kommunstyrelsen är skrivet som egen post nedan.
+# - "Bidrag till enskilda vägar" — hittat via e-tjänstkatalogen (tjänst
+#   "Kommunalt bidrag för enskild väg", id 470) samt en egen sida under
+#   Trafik och gator, helt utanför Föreningsservice/Interbook Go-spåret.
+#
+# UTESLUTNA (kategoriskt skäl, §2.4 — inte i strid med "aldrig godkända
+# skäl", se motivering):
+# - Sponsring (kommunens sponsringssamarbeten, Riktlinjer för sponsring
+#   KS_2026_21). Kommunens eget regelverk definierar sponsring som en
+#   affärsmässig motprestation: "Sponsring ska inte förväxlas med bidrag,
+#   som inte ställer några krav på motprestation" (s. 4). Sponsring kräver
+#   en motprestation (exponering, ambassadörskap) och är enligt kommunens
+#   egen distinktion inte ett föreningsbidrag. Föregående version skrev
+#   detta felaktigt som bidrag (sammanslaget med kommunstyrelsens genuina
+#   bidrag, se ovan).
+#   https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/sponsring-och-andra-bidrag.html
+# - Fondmedel (Samfond för ändamål inom barnavård, Von Post-Manderströmska
+#   fonden, Julita sockens fattigvårdsfond, Katrineholms samfond för lung-
+#   och cancersjuka, Katrineholms blomsterfond, Arthur Bäckströms samfond,
+#   Fröken Hanna Anderssons fond, Agda och Ragnar Brostedts minnesfond).
+#   Sidan är genomgående skriven till en individuell sökande ("Katrineholms
+#   kommun delar ut bidrag till personer som är behövande", kräver
+#   folkbokföring, inte föreningssäte) — stöd som endast riktas till
+#   privatpersoner (§2.4). Ansökan för 2026 var stängd vid verifieringen.
+#   https://www.katrineholm.se/omsorg-och-stod/ekonomiskt-stod/fondmedel.html
+#
+# KORRIGERAT FAKTAFEL: föregående versions anteckning för Snabba stålar
+# påstod "Svar från kulturförvaltningen inom 4 veckor efter ansökan" — denna
+# uppgift återfinns varken i regelverket (Riktlinjer för Snabba stålar, KULN
+# 2026-02-24 § 8) eller på webbsidan. Borttagen som overifierad; troligen en
+# felläsning i föregående körning av "ansökan senast 4 veckor" som
+# förekommer på ANDRA bidrag (Halmstad/Växjö-mönster), inte detta.
+#
+# Fyra nämnder hanterar föreningsbidrag: Service- och tekniknämnden (idrott
+# och fritid, samt katrineholm-bidrag-enskilda-vagar hanteras separat av
+# Samhällsbyggnadsförvaltningen), Kulturnämnden (kultur samt Snabba stålar),
+# Vård- och omsorgsnämnden (seniorer och funktionsvariation) och
+# Socialnämnden (social verksamhet). Kommunstyrelsen hanterar dessutom ett
+# eget bidrag till arrangemang/projekt (se nedan), skilt från de fyra
+# nämndernas föreningsbidrag. Ansökan för de fyra nämndernas bidrag sker via
+# Interbook Go (katrineholm.ibgo.se). Snabba stålar, Bidrag från
+# kommunstyrelsen och Bidrag till enskilda vägar hanteras i stället via
+# separata e-tjänster på e.katrineholm.se.
+#
+# Dubbelhämtat (§3): samtliga sex redaktionella sidor och samtliga sju PDF:er
+# hämtade och extraherade två gånger (curl+pdftotext samt oberoende
+# WebFetch-läsning där tekniskt möjligt); inga avvikelser mellan passen.
+# Spot-checkas av Jacob/Fable före publik deploy.
+kommun: "Katrineholm"
+kommun_slug: "katrineholm"
+lan: "Södermanlands län"
+befolkning: 33984
+forvaltning: "Service- och tekniknämnden, Kulturnämnden, Vård- och omsorgsnämnden, Socialnämnden samt Kommunstyrelsen"
+ansokningssystem:
+  namn: "Interbook Go"
+  url: "https://katrineholm.ibgo.se/"
+kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "katrineholm-grundbidrag-idrott"
+    namn: "Grundbidrag (idrott och fritid)"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar (t.ex. idrotts- eller hembygdsgårdsföreningar) registrerade i kommunens föreningsregister och godkända som bidragsberättigade"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Föreningen ska vara godkänd som bidragsberättigad förening"
+    belopp: "20 kronor per medlem upp till 600 medlemmar (10 kronor per medlem om föreningens bokslutsresultat överstiger 100 000 kronor). Högst 12 000 kronor, lägst 4 000 kronor (nystartad förening får minimibeloppet)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-idrott-och-fritid.html"
+    anteckning: "Ska underlätta förutsättningarna för ett aktivt föreningsliv (syftesbeskrivning i källan). Bidraget används till löpande föreningskostnader (försäkringar, bankavgifter, medlemsregister m.m.), inte till verksamhet. Formeln bekräftad i Riktlinjer för föreningsstöd inom service- och tekniknämndens ansvarsområde (2025-11-20 § 62)."
+  - id: "katrineholm-verksamhetsbidrag-idrott"
+    namn: "Verksamhetsbidrag (idrott och fritid)"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar registrerade i kommunens föreningsregister och godkända som bidragsberättigade"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Föreningen ska vara godkänd som bidragsberättigad förening"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-idrott-och-fritid.html"
+    anteckning: "Ska stärka förutsättningarna för en aktiv fritid och bidra till att främja trygghet, glädje och gemenskap (syftesbeskrivning i källan). Minst 90 procent av nämndens totala medel för bidraget ska gå till barn- och ungdomsverksamhet (regelverket). Utgår inte till fester, årsmöten, tävlingsavgifter, resor, investeringar, elitverksamhet eller läger/cuper. Inget publicerat maxbelopp — bedöms individuellt inom nämndens budget."
+  - id: "katrineholm-arrangemangsbidrag-idrott"
+    namn: "Arrangemangsbidrag (idrott och fritid)"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar som uppfyller grundbidragskraven, för publika tidsbegränsade arrangemang (cuper, läger, tävlingar och andra rörelsefrämjande aktiviteter)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15", "09-15"]
+    krav:
+      - "Föreningen ska uppfylla villkoren för grundbidrag"
+    belopp: "I normalfallet under 150 000 kronor per arrangemang."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-idrott-och-fritid.html"
+    anteckning: "Två tredjedelar betalas ut vid beslut, resterande tredjedel i efterskott efter redovisning. Föreningen kan bara söka bidrag från en av kommunens nämnder för samma arrangemang."
+  - id: "katrineholm-driftbidrag-idrott"
+    namn: "Driftbidrag (idrott och fritid)"
+    kategori: ["idrott"]
+    malgrupp: "Idrotts- och fritidsföreningar med egenägd anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Föreningen ska äga sin egen anläggning"
+      - "Föreningen ska uppfylla villkoren för grundbidrag"
+    belopp: "Två delar: 75 procent av föregående års kostnader för vatten, el och slam (max 300 000 kronor), plus 3 000 kronor per år och anläggningsenhet (t.ex. fotbollsplan, hästbana, grusplan eller crossbana)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-idrott-och-fritid.html"
+    anteckning: "Ska ge ekonomiskt stöd för att täcka delar av drifts- och skötselkostnader (syftesbeskrivning i källan). Kostnader för vatten/el/slam ska styrkas med kvitton eller fakturor."
+  - id: "katrineholm-grundbidrag-kultur"
+    namn: "Grundbidrag (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar registrerade i kommunens föreningsregister och godkända som bidragsberättigade"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Föreningen ska vara registrerad i kommunens föreningsregister"
+      - "Föreningen ska vara godkänd som bidragsberättigad förening"
+    belopp: "20 kronor per medlem upp till 600 medlemmar (10 kronor per medlem om föreningens bokslutsresultat överstiger 100 000 kronor). Högst 12 000 kronor, lägst 4 000 kronor (nystartad förening får minimibeloppet)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-kultur.html"
+    anteckning: "Formeln bekräftad i Riktlinjer för föreningsbidrag inom kulturnämndens ansvarsområde (2025-12-09 § 43) — identisk formel som service- och tekniknämndens, vård- och omsorgsnämndens samt socialnämndens grundbidrag."
+  - id: "katrineholm-arrangemangsbidrag-kultur"
+    namn: "Arrangemangsbidrag (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som uppfyller grundbidragskraven samt studieförbund verksamma i kommunen, för publika tidsbegränsade arrangemang (konserter, teater, utställningar, föreläsningar eller temadagar)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-15", "09-15"]
+    krav:
+      - "Föreningen ska uppfylla villkoren för grundbidrag (studieförbund kan också söka)"
+    belopp: "I normalfallet under 150 000 kronor per arrangemang."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-kultur.html"
+    anteckning: "Två tredjedelar betalas ut vid beslut, resterande tredjedel i efterskott efter redovisning. Detta är den enda av kulturnämndens tre bidrag som studieförbund kan söka — ingen separat, egen bidragsform för studieförbund hittad."
+  - id: "katrineholm-verksamhetsbidrag-kultur"
+    namn: "Verksamhetsbidrag (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som uppfyller grundbidragskraven"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-15"]
+    krav:
+      - "Föreningen ska uppfylla villkoren för grundbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-kultur.html"
+    anteckning: "Ska stödja kulturföreningarnas verksamhet och stärka förutsättningarna för en bred och varierande kulturverksamhet (syftesbeskrivning i källan). Utgår inte till fester, årsmöten, resor eller investeringar. Inget publicerat maxbelopp."
+  - id: "katrineholm-snabba-stalar"
+    namn: "Snabba stålar"
+    kategori: ["kultur"]
+    malgrupp: "Ungdomar 13–25 år bosatta i Katrineholms kommun (ingen föreningsanslutning krävs, men bidraget kan även sökas av föreningar som endast består av personer 13–25 år)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Sökanden ska vara 13–25 år och bosatt i Katrineholms kommun"
+      - "Arrangemanget/projektet ska vara öppet för allmänheten och ha konstnärlig, kulturell eller kreativ inriktning"
+      - "Genomförs inom Katrineholms kommun"
+      - "Sökande under 18 år behöver en myndig persons underskrift"
+    belopp: "500–10 000 kronor per ansökan"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/snabba-stalar.html"
+    anteckning: "Sökanden behöver inte tillhöra en förening. Bidraget betalas normalt ut direkt efter beslut; outnyttjat belopp ska återbetalas. Ansöks via egen e-tjänst (e.katrineholm.se, tjänst-id 479), inte Interbook Go. KORRIGERAT: föregående versions uppgift om '4 veckors svarstid' kunde inte återfinnas i vare sig regelverket (KULN 2026-02-24 § 8) eller på webbsidan och har tagits bort som overifierad."
+  - id: "katrineholm-grundbidrag-senior-funktionsvariation"
+    namn: "Grundbidrag (seniorer och funktionsvariation)"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Föreningar/organisationer med värderingar och verksamhet enligt socialtjänstens målsättning och inriktning, särskilt föreningar för personer med funktionsnedsättning eller pensionärer"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Föreningen ska uppfylla villkoren enligt riktlinjer för vård- och omsorgsnämndens föreningsstöd"
+    belopp: "20 kronor per medlem upp till 600 medlemmar (10 kronor per medlem om föreningens bokslutsresultat överstiger 100 000 kronor). Högst 12 000 kronor, lägst 4 000 kronor (nystartad förening får minimibeloppet)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-seniorer-och-funktionsvariation.html"
+    anteckning: "Föreningar som uppfyller grundbidragskraven kan även söka service- och tekniknämndens arrangemangsbidrag (se katrineholm-arrangemangsbidrag-idrott). Detta är det enda bidraget vård- och omsorgsnämnden handlägger — inget verksamhets- eller arrangemangsbidrag hittat för denna nämnd."
+  - id: "katrineholm-grundbidrag-social"
+    namn: "Grundbidrag (social verksamhet)"
+    kategori: ["social"]
+    malgrupp: "Föreningar och organisationer med värderingar och verksamhet enligt socialtjänstens målsättning och inriktning, särskilt de som bedriver frivilligt socialt arbete i enlighet med socialtjänstlagen (SoL)"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31", "09-30"]
+    krav:
+      - "Föreningen ska uppfylla villkoren för socialnämndens grundbidrag"
+    belopp: "20 kronor per medlem upp till 600 medlemmar (10 kronor per medlem om föreningens bokslutsresultat överstiger 100 000 kronor). Högst 12 000 kronor, lägst 4 000 kronor (nystartad förening får minimibeloppet)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-social-verksamhet.html"
+    anteckning: "Föreningar som uppfyller kraven för grundbidrag kan även söka service- och tekniknämndens arrangemangsbidrag."
+  - id: "katrineholm-verksamhetsbidrag-social"
+    namn: "Verksamhetsbidrag (social verksamhet)"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar som uppfyller villkoren för socialnämndens grundbidrag, för kontinuerlig och långsiktig verksamhet som komplement till socialnämndens reglemente"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31", "09-30"]
+    krav:
+      - "Föreningen ska uppfylla villkoren för socialnämndens grundbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/foreningsbidrag-social-verksamhet.html"
+    anteckning: "Föreningar som riktar verksamhet till socialnämndens målgrupper prioriteras. Utgår inte till fester, årsmöten, resor, investeringar eller elitverksamhet. Inget publicerat maxbelopp."
+  - id: "katrineholm-bidrag-kommunstyrelsen"
+    namn: "Bidrag från kommunstyrelsen"
+    kategori: ["ovrig"]
+    malgrupp: "Organisationer/föreningar i Katrineholms kommun som arrangerar arrangemang eller projekt öppna för allmänheten"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska komma från en organisation i Katrineholms kommun"
+      - "Ansökan ska stämma överens med kommunplanen"
+      - "Arrangemanget/projektet ska vara öppet för allmänheten"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/foreningsbidrag/sponsring-och-andra-bidrag.html"
+    anteckning: "TIDIGARE FELAKTIGT SAMMANSLAGET med sponsring till en enda post ('katrineholm-sponsring') — sidan beskriver i själva verket två separata scheman (se tackning-anteckning i filhuvudet). Detta är det genuina föreningsbidraget; sponsring är uteslutet som ej föreningsbidrag. Söks via e-tjänst (e.katrineholm.se/oversikt/overview/932), redovisning av använt bidrag sker via separat e-tjänst (overview/1137) med verksamhets- och budgetredovisning. Hanteras av kommunstyrelsen, inte Föreningsservice/Interbook Go."
+  - id: "katrineholm-bidrag-enskilda-vagar"
+    namn: "Bidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare (privatperson eller samfällighetsförening) för enskild väg i Katrineholms kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Vägen ska vara utfartsväg för fast boende utanför bebyggelseområde med minst en permanentbostad vid vägens/vägsträckans ändpunkt, ELLER vara minst 500 meter lång (avtagsväg minst 250 meter, med vägdelens slut minst 500 meter från annan väg)"
+      - "Karta som visar vägens/vägdelarnas sträckning ska bifogas ansökan"
+      - "Mötesprotokoll som visar beslut om kontaktperson, kassör och konto för utbetalning ska bifogas"
+      - "Utdrag från Lantmäteriet som visar att samfällighet är bildad ska bifogas"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.katrineholm.se/trafik-och-gator/bidrag-till-enskilda-vagar.html"
+    anteckning: "SAKNADES HELT I FÖREGÅENDE VERSION — hittat via e-tjänstkatalogen (e.katrineholm.se, tjänst 'Kommunalt bidrag för enskild väg', id 470; uppdatering av uppgifter sker via id 1107). Administreras av Samhällsbyggnadsförvaltningen, inte Föreningsservice — helt utanför Interbook Go-spåret. Inget kronbelopp eller kr/meter-belopp publicerat på källsidan (till skillnad från t.ex. Halmstads motsvarande bidrag). Väghållare kan även söka statsbidrag från Trafikverket separat (ej kommunalt bidrag, därför inte med här)."
+forutsattningar:
+  - id: "katrineholm-bidragsberattigad-forening"
+    vad: "Bli registrerad förening och godkänd som bidragsberättigad"
+    beskrivning: "Föreningen bildas vid ett bildandemöte där stadgar antas och styrelse väljs (minst ordförande, sekreterare och kassör, gärna fler ledamöter samt två revisorer). Föreningen ansöker om organisationsnummer hos Skatteverket och öppnar bank- eller plusgirokonto i föreningens namn. Därefter registreras föreningen i kommunens föreningsregister, vilket krävs för att kunna ansöka om de flesta föreningsbidrag."
+    system: "Interbook Go"
+    ledtid: null
+    ledtid_text: null
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.katrineholm.se/uppleva-och-gora/foreningar/starta-forening.html"
+  - id: "katrineholm-arlig-redovisning-registrering"
+    vad: "Lämna in årlig redovisning för att behålla föreningsregistrering och bidragsberättigande"
+    beskrivning: "Föreningen ska varje år senast den 31 mars lämna in verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, revisionsberättelse samt årsmötesprotokoll till service- och teknikförvaltningen, samt uppdatera föreningsregistret vid förändringar (t.ex. ny styrelse eller kontaktperson). En förening som inte lämnar in dessa handlingar avregistreras och kan då inte längre söka föreningsbidrag. En registrerad förening har inte per automatik rätt till föreningsbidrag — grundbidrag, verksamhetsbidrag med mera prövas separat per bidrag. En förening ska dessutom ha minst 10 medlemmar (styrelsens ledamöter kan räknas in) för att bli registrerad."
+    system: "Interbook Go"
+    ledtid: null
+    ledtid_text: null
+    giltighet: "Årlig inlämning krävs senast 31 mars varje år för fortsatt registrering, annars avregistreras föreningen."
+    ordning: 2
+    kalla_url: "https://www.katrineholm.se/download/18.1bccd88c193ded135fadb77f/1736410346132/%C3%96vergripande%20riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d,%20KF%202024-12-16,%20%C2%A7%20239.pdf"
