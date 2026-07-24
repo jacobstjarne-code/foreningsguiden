@@ -1,0 +1,388 @@
+# Källa verifierad 2026-07-20 mot sodertalje.se, metod RESEARCH_SPEC_v2.1 §2
+# (källkonvergens). Huvudkälla: "Regler och riktlinjer för föreningsbidrag"
+# (dnr KS 2024/357, fastställt av kommunfullmäktige 2024-11-04, gäller från
+# 2025-01-01) — hämtad som PDF och extraherad lokalt med pdftotext eftersom
+# WebFetch inte kunde läsa den komprimerade PDF-strukturen direkt. 16
+# bidragsformer i huvudregelverket (kultur- och fritidsnämnden). Utöver
+# detta identifierades sex bidrag i separata styrdokument från andra
+# nämnder/kontor (socialnämnden, tekniska nämnden, kommunstyrelsen) samt två
+# tillfälliga 2026-bidrag (Kulturåret 2026, valfrämjande insatser 2026) —
+# se tackning.log-sektionen nedan för fullständig avstämning. Portalen
+# (sodertalje.fri-go.se / friweb.sodertalje.se) är på annan domän än
+# sodertalje.se och räknas därför inte som källa per spec §"Endast
+# sodertalje.se-domänen räknas som källa"; den gick heller inte att nå
+# (404/DNS-fel) vid försök. Spot-checkas av Jacob före publik deploy.
+#
+# TÄCKNINGSAVSTÄMNING (RESEARCH_SPEC_v2.1 §2.3):
+# Källor konsulterade:
+#   1. Regelverk: sk-regler-och-riktlinjer-foreningsbidrag-003.pdf (2025-01-01) — 16 bidragsformer
+#   2. Förvaltningssidor: Socialkontoret (riktlinjer-for-verksamhetsbidrag.pdf, 2020-02-25) — 1 bidrag
+#      Tekniska nämnden (stod-till-enskild-vaghallare) — 1 bidrag
+#      Kommunstyrelsen (kriterier-valframjande-insatser-2026, dnr KS 2026/000059) — 1 bidrag
+#      Kultur- och fritidsnämnden, tillfälligt (regler-foreningsbidrag-kulturaret-2026, dnr KFN 2025/000098) — 1 bidrag
+#      Kultur- och fritid, nyhetssida (Elitidrottsstöd, beslutat av KS 2026-02-20) — 1 bidrag
+#      Kultur- och fritid, egen sida (Representationsanslaget) — 1 bidrag
+#   3. Självservice/e-tjänst: foreningsstod/blanketter-och-e-tjanster/ — inga ytterligare bidrag utöver ovan
+#   4. Portal: sodertalje.fri-go.se / friweb.sodertalje.se — EJ_EXTRAHERBAR (annan domän än sodertalje.se + 404/DNS-fel vid åtkomstförsök)
+#   5. Specialkategorier:
+#      - Väg/samfälligheter: BEKRÄFTAT (kommunalt driftbidrag till enskilda vägar, tekniska nämnden)
+#      - Bygdegårdar/samlingslokaler: BEKRÄFTAT (Anläggningsbidrag till allmänna samlingslokaler, ingår i huvudregelverket 3.13.2, täcker bygdegårdar, hembygdsgårdar, Folkets hus/park)
+#      - Stiftelser/fonder föreningar kan söka ur: EJ FUNNET — sökningar efter en samlad Södertälje-stiftelsesida för föreningar (motsvarande Halmstads 52 stiftelser) gav inga träffar på sodertalje.se; enda träffar var Länsstyrelsens generella stiftelseregister (ej sodertalje.se-domän). MEDVETET_UTESLUTET av det skälet — inget kommunförvaltat stiftelsesamlingsbidrag hittat att skriva som ett samlat bidrag (§2.7).
+#      - Samhälls-/byalag: EJ FUNNET som eget bidragsspår utöver ordinarie föreningsbidrag/anläggningsbidrag.
+#      - Studieförbund: BEKRÄFTAT, ingår i huvudregelverket 3.14 (två delbidrag: allmänt + funktionsnedsättning).
+# Antal identifierat per källa: regelverk 16, förvaltningssidor/särskilda dokument 6 (socialnämnd, väg, val, kulturår, elitidrott, representation).
+# Antal skrivet till YAML: 22.
+# Avvikelser:
+#   - SKRIVET_EJ_I_REGELVERK: Socialnämndens verksamhetsbidrag, Kommunalt driftbidrag till enskilda vägar,
+#     Elitidrottsstöd, Representationsanslaget, Föreningsbidrag Kulturåret 2026, Valfrämjande insatser 2026 —
+#     samtliga sex finns på sodertalje.se men inte i kultur- och fritidsnämndens regelverk (andra nämnder/tillfälliga
+#     dokument). Skrivna ändå per §2.3.
+#   - MEDVETET_UTESLUTET: samlat stiftelsebidrag — inget sådant hittat på sodertalje.se-domänen (se ovan).
+#   - EJ_EXTRAHERBAR: bidragsportalen (fri-go.se/friweb.sodertalje.se) — annan domän + ej nåbar.
+#   - Elitidrottsstöds exakta beloppstak per förening är inte publicerat (endast totalsumma 2026: 5 mnkr till
+#     nio föreningar + tre individuella idrottare) — belopp satt till null.
+kommun: "Södertälje"
+kommun_slug: "sodertalje"
+lan: "Stockholms län"
+befolkning: 102900
+forvaltning: "Kultur- och fritidskontoret (huvudansvarig för föreningsbidrag), samt Socialkontoret, Tekniska kontoret och Kommunstyrelsens kontor för respektive bidrag"
+ansokningssystem:
+  namn: "Bidragssystemet FRI (kommunens e-tjänst)"
+  url: "https://www.sodertalje.se/kultur-och-fritid/foreningsstod/foreningsbidrag/"
+kalla_url: "https://www.sodertalje.se/kultur-och-fritid/foreningsstod/foreningsbidrag/"
+verifierad: 2026-07-20
+bidrag:
+  - id: "sodertalje-startbidrag"
+    namn: "Startbidrag"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Nybildade föreningar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha en styrelse bestående av minst tre personer valda på ett föreningsmöte av föreningens medlemmar"
+      - "Föreningen ska ha stadgar antagna på ett konstituerande föreningsmöte"
+      - "Föreningen ska vara registrerad i Södertälje kommuns föreningsregister"
+    belopp: "Engångssumma, max 5 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Beslut fattas av kultur- och fritidsnämnden. Kan bara sökas en gång per förening."
+  - id: "sodertalje-verksamhetsbidrag"
+    namn: "Verksamhetsbidrag"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Alla föreningar registrerade i Södertälje kommuns föreningsregister. Barn- och ungdomsverksamhet samt verksamhet för personer med funktionsnedsättning prioriteras"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Verksamhetens syfte ska vara tydligt beskrivet och målgruppen anges"
+      - "Verksamheten ska vara planerad, strukturerad och genomföras kontinuerligt"
+      - "Närvarorapportering ska föras digitalt för varje aktivitetstillfälle"
+      - "Deltagare får högst räknas en gång per dag och sammankomst"
+    belopp: null
+    sen_ansokan: "Ansökningar som kommer in efter 31 oktober behandlas inte"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Fester, styrelsemöten/årsmöte, planeringsmöten och religiös verksamhet är inte bidragsgrundande."
+  - id: "sodertalje-kulturforeningar"
+    namn: "Bidrag till kulturföreningar och kulturverksamheter"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar registrerade i föreningsregistret, verksamma inom kultur- och konstnärlig verksamhet — både utåtriktad publik verksamhet och medlemsbaserad verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Publika aktiviteter ska ske i Södertälje och ha relevans för boende eller besökare"
+      - "Egen finansiering och eventuella samverkanspartners ska redovisas"
+    belopp: null
+    sen_ansokan: "Ansökningar som kommer in efter 31 oktober behandlas inte"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Beslut fattas av kultur- och fritidsnämnden."
+  - id: "sodertalje-aktivitetsbidrag-idrott"
+    namn: "Aktivitetsbidrag till idrottsföreningar"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningars barn- och ungdomsaktiviteter 7–25 år (undantag för ålder vid aktiviteter anpassade för personer med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "En aktivitet ska vara minst 60 minuter, planerad och ledd av minst en ledare"
+      - "Minst tre medlemmar i bidragsberättigad ålder ska delta"
+      - "Närvarorapportering ska föras digitalt för varje tillfälle"
+    belopp: "6,80–34,00 kr per deltagare och sammankomst beroende på åldersgrupp (t.ex. 13,60 kr för 7–9 år, 17,00 kr för 17–20 år). Riktat stöd för personer med funktionsnedsättning har högre belopp, upp till 34,00 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Kan sökas vid två tillfällen per år: 25 februari och 25 augusti. Bidrag betalas ut efter genomförda aktiviteter. Beloppen fastställs årligen av kultur- och fritidsnämnden."
+  - id: "sodertalje-lovbidrag"
+    namn: "Lovbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Barn och unga 6 år till gymnasieålder, för aktiviteter under skollov (sport-, påsk-, sommar-, höst- och jullov samt särskilda högtider)"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-10", "03-15", "06-15"]
+    krav:
+      - "Aktiviteterna ska vara öppna för alla barn och unga i Södertälje och kostnadsfria"
+      - "Inga krav på förkunskaper hos deltagarna"
+      - "Aktiviteterna ska vara utöver föreningens löpande verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Tre ansökningsperioder: sportlov/påsklov 10 november–10 december, sommarlov 15 februari–15 mars, höstlov/jullov 15 maj–15 juni. Redovisas senast två månader efter aktivitetens avslut."
+  - id: "sodertalje-funktionsnedsattning-uppstart"
+    namn: "Bidrag till uppstart eller utveckling av aktiviteter för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Personer med intellektuella, fysiska och/eller neuropsykiatriska funktionsnedsättningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31", "12-15", "03-15"]
+    krav:
+      - "Insatsen ska huvudsakligen rikta sig till personer med funktionsnedsättning"
+      - "Insatser för att nå nya deltagare från kommun- och stadsdelar med få riktade aktiviteter prioriteras"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Regelverkets sammanfattningstabell (avsnitt 1.4) och löptexten (3.6) skiljer sig något åt om antal tillfällen — löptexten anger perioden 15 september–31 oktober, tabellen anger tre tillfällen (15 nov–15 dec, 15 feb–15 mar, 15 aug–15 sep) likt Projektbidrag. Samtliga tre deadlines skrivna för säkerhets skull; redovisas senast fyra månader efter avslutad insats."
+  - id: "sodertalje-sociala-foreningar"
+    namn: "Bidrag till sociala föreningar"
+    kategori: ["social"]
+    malgrupp: "Sociala föreningar registrerade i föreningsregistret vars huvudsakliga syfte är att motverka social utsatthet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Föreningens huvudsakliga syfte ska vara att främja allmännyttiga ändamål och erbjuda aktiviteter/mötesplatser för de som behöver socialt stöd"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Beslut fattas av kultur- och fritidsnämnden (skilt från socialnämndens eget verksamhetsbidrag, se sodertalje-social-verksamhetsbidrag)."
+  - id: "sodertalje-pensionarsforeningar"
+    namn: "Bidrag till pensionärsföreningar"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Insatsen ska huvudsakligen rikta sig till personer i pensionsålder"
+    belopp: "Grundbidrag efter medlemsantal: 5 000 kr (20–150 medlemmar), 7 000 kr (151–400), 10 000 kr (401 eller fler). Därutöver medlemsbidrag 30 kr per medlem och år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Grundas på antal medlemmar 31 december föregående år."
+  - id: "sodertalje-motesplats-aldre"
+    namn: "Bidrag för mötesplats för äldre"
+    kategori: ["pensionar"]
+    malgrupp: "Organisationer registrerade i föreningsregistret som erbjuder mötesplats för äldre — nystart eller kvalitetshöjande åtgärder på befintliga mötesplatser"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Ska vara tillgängligt för äldre personer och bidra till social stimulans och gemenskap"
+      - "Ska alltid finnas möjlighet till fika/förtäring till självkostnadspris och en värd/ledare på plats"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Redovisas senast två månader efter avslutad insats."
+  - id: "sodertalje-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Alla organisationer registrerade i föreningsregistret som vill genomföra publika tillställningar/offentliga arrangemang"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-15", "03-15", "09-15"]
+    krav:
+      - "Arrangemanget ska äga rum i Södertälje kommun och vara öppet för allmänheten"
+      - "Egenfinansiering ska uppgå till minst 30 % av total kostnad"
+      - "Ska tydligt framgå i utåtriktad information att kommunen bidrar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Tre ansökningstillfällen: 15 nov–15 dec, 15 feb–15 mar, 15 aug–15 sep. Ges inte till fester, cuper/turneringar i ordinarie verksamhet eller föreningar med skuld till kommunen. Redovisas senast två månader efter arrangemangets avslut."
+  - id: "sodertalje-projektbidrag"
+    namn: "Projektbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Alla organisationer registrerade i föreningsregistret. Barn- och ungdomsverksamhet samt verksamhet för personer med funktionsnedsättning prioriteras"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-15", "03-15", "09-15"]
+    krav:
+      - "Projektet ska äga rum i Södertälje kommun"
+      - "Egenfinansiering ska uppgå till minst 30 % av total kostnad"
+      - "Tydligt syfte, detaljerad tidsplan med start- och slutdatum samt mätbara mål"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Tre ansökningstillfällen: 15 nov–15 dec, 15 feb–15 mar, 15 aug–15 sep. Redovisas senast två månader efter projektets avslut."
+  - id: "sodertalje-driftbidrag"
+    namn: "Driftbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar registrerade i föreningsregistret som äger eller hyr (av annan aktör än kommunen) idrotts-/friluftsanläggningar, hembygdsgårdar, samlingslokaler eller annan anläggning för föreningsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Lokalen ska vara belägen i Södertälje kommun"
+      - "Föreningen ska kunna styrka kontrakt och förväntade driftskostnader"
+      - "Ges inte för amorteringar, enstaka evenemang eller redan subventionerade lokaler i kommunens anläggningsbestånd"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Bidraget beviljas inte per automatik utan ska sökas årligen. Verksamhet med barn/unga 7–25 år prioriteras."
+  - id: "sodertalje-anlaggningsbidrag-ridsport"
+    namn: "Anläggningsbidrag till ridsport"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som bedriver ridskoleverksamhet med föreningsdrivna anläggningar öppna för allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Anläggningen ska vara belägen i Södertälje kommun"
+      - "Föreningen ska kunna styrka kontrakt och förväntade kostnader"
+      - "Verksamhet med barn/unga 7–25 år och personer med funktionsnedsättning prioriteras; vuxenverksamhet och privatstallade hästar reducerar stödet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Beräkningsgrund är ridskoleanläggningens lokalkostnad (arrende, räntor, avskrivningar, försäkring, el/vatten/värme m.m.)."
+  - id: "sodertalje-anlaggningsbidrag-samlingslokaler"
+    namn: "Anläggningsbidrag till allmänna samlingslokaler"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Föreningar som bedriver bygdegårdar, hembygdsgårdar, Folkets Hus eller Folkets Park med kulturhistoriskt värde"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Anläggningen ska vara belägen i Södertälje kommun, ägas och drivas i föreningsform"
+      - "Ska bidra till gemenskap, kunskap, kultur och/eller turismattraktion"
+      - "Projektet får inte ha påbörjats innan beslut om bidrag fattats, och ska påbörjas senast sex månader efter beviljande"
+    belopp: "Max 30 % av total godkänd kostnad"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökningsperiod 15 september–31 oktober. Beslut fattas av berörd kommundelsnämnd (till skillnad från övriga bidrag i regelverket som beslutas av kultur- och fritidsnämnden). Redovisning senast sex månader efter projektets avslut."
+  - id: "sodertalje-studieforbund-allmant"
+    namn: "Bidrag till studieförbund — allmänt bidrag"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund med folkbildande verksamhet i Södertälje kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Den folkbildande verksamheten ska äga rum i Södertälje kommun"
+      - "Studieförbundet ska vara registrerat i föreningsregistret"
+      - "Beräknas utifrån rapporterade studiecirkeltimmar och annan verksamhet föregående år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökan senast 28 februari. Utgör 96 % av den totala ramen för studieförbundsbidrag. Fördelas proportionellt mot andel av total rapporterad verksamhet."
+  - id: "sodertalje-studieforbund-funktionsnedsattning"
+    namn: "Bidrag till studieförbund — bidrag för personer med funktionsnedsättning"
+    kategori: ["kultur", "funktionsratt"]
+    malgrupp: "Studieförbund registrerade i föreningsregistret som bedriver verksamhet för personer med funktionsnedsättning (personkrets 1 och 2 enligt LSS)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-28"]
+    krav:
+      - "Bidrag utgår för statsbidragsberättigade studietimmar"
+      - "Studiecirklar för skolpliktiga elever och elever med placering i gymnasiesärskola ingår ej"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/contentassets/5d396db643f94a60af023841f682d951/sk-regler-och-riktlinjer-foreningsbidrag-003.pdf"
+    anteckning: "Ansökan senast 28 februari. Utgör resterande 4 % av den totala ramen för studieförbundsbidrag."
+  - id: "sodertalje-social-verksamhetsbidrag"
+    namn: "Socialnämndens verksamhetsbidrag"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar vars frivilliga sociala arbete kompletterar socialtjänstens arbete och riktar sig till socialt utsatta människor i Södertälje"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-31"]
+    krav:
+      - "Föreningen ska vara registrerad i föreningsregistret och godkänd som bidragsberättigad"
+      - "Verksamheten ska komplettera insatser inom socialnämndens ansvarsområde — ges inte enbart till lokalkostnader eller administration"
+      - "Komplett ansökan från behörig firmatecknare, med redogörelse för hur tidigare bidrag använts (för återsökande föreningar)"
+    belopp: null
+    sen_ansokan: "Ansökningar utanför ansökningsperioden hanteras ej"
+    kalla_url: "https://www.sodertalje.se/globalassets/socialkontoret/riktlinjer-for-verksamhetsbidrag.pdf"
+    anteckning: "Antaget av socialnämnden 2020-02-25 — annat/äldre styrdokument än kultur- och fritidsnämndens regelverk (2025), men gällande separat bidragsspår. Ansökningsperiod 1 november–31 december året innan bidraget avser. Beslut senast i mars. Skilt från kultur- och fritidsnämndens 'Bidrag till sociala föreningar'. Avtal skrivs för ett till två år."
+  - id: "sodertalje-representationsanslaget"
+    namn: "Representationsanslaget"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar, skolor och klasser registrerade i föreningsregistret, med fokus på barn, unga och resurssvaga grupper, internationella kontakter/kulturutbyte, samt jubileer (25, 50, 75, 100 år)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska bidra till barn-, ungdoms- och resurssvaga gruppers deltagande, eller generera positiv synlighet för Södertälje"
+      - "Kommunens bidrag ska tydligt framgå i all utåtriktad kommunikation"
+      - "Redovisning inom 90 dagar efter genomfört arrangemang"
+    belopp: null
+    sen_ansokan: "Ansökan ska ha kommit in senast 60 dagar före arrangemanget"
+    kalla_url: "https://www.sodertalje.se/kultur-och-fritid/foreningsstod/Representationsbidrag/"
+    anteckning: "Beslut fattas av Representationsgruppen. Ges inte till årligen återkommande evenemang, cuper/turneringar, investeringar i utrustning/fastighet eller om dubbelfinansiering sker via annat kommunalt stöd."
+  - id: "sodertalje-elitidrottsstod"
+    namn: "Elitidrottsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar registrerade i föreningsregistret som bedriver elitidrott på seniornivå (lagidrott i högsta/näst högsta serienivå, eller individuella utövare som är aktuella/potentiella landslagsidrottare), samt individuella elitidrottare"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Lagidrott: spel i högsta eller näst högsta serienivån i Sverige (endast högsta nivån om tre eller färre serienivåer finns)"
+      - "Individuell idrott: aktuell eller potentiell landslagsidrottare för tävling på minst nationell seniornivå"
+      - "Behovsprövat utifrån utvecklingsplan; jämställd fördelning mellan kvinno- och herridrott eftersträvas"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/kultur-och-fritid/aktuellt_kof/elitidrottsstod--ett-nytt-foreningsbidrag-infors/"
+    anteckning: "Nytt bidrag, beslutat av kommunstyrelsen 2026-02-20. Kan sökas för tävlingar/träningsläger, medicinskt stöd och sociala insatser kopplade till boendekostnader. 2026: totalt 5 mnkr till nio föreningar och tre individuella idrottare — inget publicerat tak per sökande, belopp satt till null. Redogörelse för föregående år senast 1 maj."
+  - id: "sodertalje-kulturaret-2026"
+    namn: "Föreningsbidrag Kulturåret 2026"
+    kategori: ["kultur"]
+    malgrupp: "Alla föreningar och organisationer registrerade i föreningsregistret som vill planera, skapa och genomföra kulturarrangemang/aktiviteter utöver ordinarie verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-24", "01-09", "05-30"]
+    krav:
+      - "Grundläggande villkor i kommunens ordinarie regelverk (avsnitt 1.2, 1.5.1, 1.5.2) ska vara uppfyllda"
+      - "Arrangemang/aktiviteter ska genomföras i Södertälje kommun (utom vissa marknadsföringsinsatser)"
+      - "Föreningar som beviljas detta bidrag kan inte samtidigt beviljas kommunens ordinarie bidrag för samma aktivitet"
+    belopp: null
+    sen_ansokan: "För sent inkomna ansökningar behandlas inte"
+    kalla_url: "https://www.sodertalje.se/contentassets/e8873477707d449f8a7b44cb5ab93ceb/regler-foreningsbidrag-kulturaret-2026.pdf"
+    anteckning: "Tillfälligt bidrag, dnr KFN 2025/000098, antaget av kultur- och fritidsnämnden 2025-09-04, giltigt till och med 2026-12-31. Tre ansökningsperioder: 12 sep–24 okt 2025, 3 nov 2025–9 jan 2026, 2 mar–30 maj 2026 (avser aktiviteter sep–dec 2026). Beslut fattas av områdeschef för Fritid och förening enligt delegation."
+  - id: "sodertalje-valframjande-insatser-2026"
+    namn: "Föreningsbidrag kopplat till valfrämjande insatser 2026"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar, studieförbund och organisationer registrerade i föreningsregistret som är partipolitiskt obundna"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska öka kunskapen om och stärka viljan att rösta i de allmänna valen 2026"
+      - "Aktiviteten ska äga rum i offentlig miljö, under eller nära förtidsröstningsperioden 26 augusti–13 september 2026"
+      - "Aktiviteten ska vara öppen för alla i målgruppen — inte knuten till medlemskap"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan (inget explicit ansökningsdatum publicerat i dokumentet — endast redovisningsdatum 1 november 2026)"
+    kalla_url: "https://www.sodertalje.se/globalassets/kof/dokument/kriterier-for-foreningsbidrag-valframjande-insatser-daterad-2026-02-20.pdf"
+    anteckning: "Tillfälligt bidrag, dnr KS 2026/000059, antaget av kommunstyrelsen 2026-02-20, giltigt till och med 2026-12-31. Får inte användas för egna informationsblad om valet eller partipolitisk information. Redovisning senast 1 november 2026."
+  - id: "sodertalje-vagbidrag-enskild-vaghallning"
+    namn: "Kommunalt driftbidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Väghållare (bl.a. vägsamfälligheter) som redan får statligt driftbidrag från Trafikverket enligt förordningen om statsbidrag till enskild väghållning"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Väghållaren ska redan få statligt driftbidrag från Trafikverket"
+      - "Vägen ska hållas öppen för trafik och vara väl underhållen"
+      - "Gäller inte nybyggnation eller större underhållsåtgärder (breddning, förstärkning, omläggning)"
+    belopp: "30 % av den driftkostnad Trafikverket godkänt, dock så att totalt bidrag (statligt + kommunalt) inte överstiger 100 % av godkänd kostnad. Schablonen indexregleras årligen enligt entreprenadindex"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sodertalje.se/stad-och-trafik/skotsel-och-underhall/stod-till-enskild-vaghallare/"
+    anteckning: "Återinfört 2025. Beslutas av tekniska nämnden (ej kultur- och fritidsnämnden — ligger utanför ordinarie föreningsbidragsregelverk). Ansökan 1 augusti–31 oktober. Inte ett föreningsbidrag i strikt mening men riktar sig till vägsamfälligheter/väghållarorganisationer som ofta är föreningsformerade, se RESEARCH_SPEC_v2 §2.1 punkt 5 (specialkategori vägföreningar/vägsamfälligheter)."
+forutsattningar:
+  - id: "sodertalje-foreningsregister"
+    vad: "Bli registrerad i Södertälje kommuns föreningsregister"
+    beskrivning: "Grundkrav för allt kommunalt föreningsstöd. Föreningen ska ha fler än 60 % av medlemmarna folkbokförda i Södertälje kommun, minst 10 medlemmar (ordförande, sekreterare, kassör), plus- eller bankgirokonto i föreningens namn, organisationsnummer från Skatteverket, säte och huvudsaklig verksamhet i Södertälje kommun, samt hålla stadgeenliga årsmöten. Registrering görs genom att mejla forening@sodertalje.se; nya föreningar bifogar kopia på Skatteverkets registrering och protokoll från första föreningsmötet."
+    system: "E-post/manuell handläggning (forening@sodertalje.se)"
+    ledtid: null
+    ledtid_text: "Kommunen anger ingen handläggningstid. Uppgifterna ska uppdateras vid varje avslutat verksamhetsår eller efter genomfört årsmöte."
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.sodertalje.se/kultur-och-fritid/foreningsstod/foreningsregistret/"
+kommunsiffra: null

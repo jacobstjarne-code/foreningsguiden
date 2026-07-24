@@ -1,0 +1,179 @@
+# Källa verifierad 2026-07-20 mot solna.se (källkonvergens enligt RESEARCH_SPEC_v2 §2/v2.1).
+# Huvudkälla: "Förenings- och bidragsregler" (senast uppdaterad 2026-05-26) — kommunens
+# egen regelverkstext i sex numrerade avsnitt (1-6), fungerar som regelverket (§2.1 punkt 1)
+# trots att den är en HTML-sida och inte en fristående PDF. Kryssad mot "Söka bidrag"
+# (uppdaterad 2026-05-21) och "Lokalt aktivitetsstöd" (uppdaterad 2026-02-24) — samma
+# sju bidragskategorier i alla tre källor, ingen avvikelse.
+# Ansökningsportalen (solna.ibgo.se / Interbook Go) är JS-renderad — EJ_EXTRAHERBAR,
+# gick inte att räkna upp separat. Självservice-portalens indexsida (sjalvservice.solna.se)
+# är också JS-renderad — EJ_EXTRAHERBAR som lista, men enskilda e-tjänstsidor (resebidrag,
+# bilda ny förening) var läsbara och bekräftar samma bild.
+# Sökt men EJ funnet på solna.se: vägförening/samfällighetsbidrag, bygdegårds-/
+# samlingslokalbidrag, stiftelser/fonder för föreningar, byalag/samhällsförening-bidrag,
+# separat social-/funktionsrättsbidrag hos Socialnämnden eller Omvårdnadsnämnden (endast
+# en 2019-revisionsrapport nämner föreningsbidrag i omsorgssammanhang, hostad på docplayer.se
+# — utanför solna.se-domänen och för gammal för att användas som källa). Solna är en tät,
+# urban kommun utan landsbygd i klassisk mening, vilket är konsistent med avsaknaden av
+# väg-/samfällighetsbidrag.
+# Fyra stipendier (kulturstipendium barn/ungdom/vuxen, Krausstipendiet) och "Årets
+# föreningsledare" är individuella pris till privatpersoner — uteslutna enligt §2.4 (a).
+# Spot-checkas av Jacob före publik deploy.
+kommun: "Solna"
+kommun_slug: "solna"
+lan: "Stockholms län"
+befolkning: 86435
+forvaltning: "Förvaltningen för arbetsmarknad, kultur och fritid (kultur- och fritidsförvaltningen)"
+ansokningssystem:
+  namn: "Interbook Go (IBGO)"
+  url: "https://solna.ibgo.se/"
+kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+verifierad: 2026-07-20
+bidrag:
+  - id: "solna-lok-aktivitetsbidrag"
+    namn: "Lokalt aktivitetsstöd (LOK) / Aktivitetsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med ungdomsverksamhet, minst tio medlemmar i åldern 7–20 år, registrerade i Solnas föreningsregister"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-27", "02-27"]
+    krav:
+      - "Minst tio medlemmar i åldern 7–20 år"
+      - "Bidragsberättigad aktivitet: ledarledd sammankomst med minst tre och max trettio deltagare i åldern 7–20 år"
+      - "Ledaren ska vara minst tretton år och leder endast en grupp per sammankomst"
+      - "Ej entrébelagd tävling eller kommersiellt arrangemang"
+      - "Redovisning via IdrottOnline (idrottsföreningar) eller Närvaro GO (övriga föreningar), sammanställs i IBGO"
+    belopp: null
+    sen_ansokan: "Ej specifikt angivet för LOK; enligt allmänna villkor ger för sent inkommen ansökan ej rätt till bidrag"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: "Redovisningsperioder 1/1–30/6 (redovisas senast 27 augusti) och 1/7–31/12 (redovisas senast 27 februari). Dubbel LOK för handikappidrott. Riksidrottsförbundet initierade en tillfällig förlängning för höst 2025 (redovisning senast 8 mars 2026) — engångsundantag, inte den stående regeln. Bidragets storlek per deltagare (kr) styrs av ekonomisk ram och totalt antal ansökningar, inget fast belopp publicerat."
+  - id: "solna-ledarutbildning-extern"
+    namn: "Bidrag till extern ledarutbildning"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar med barn- och ungdomsverksamhet, registrerade i Solnas föreningsregister"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Utbildningen ska ha inriktning på barn- och ungdomsverksamhet"
+      - "Kursen ska omfatta minst fyra timmar per dag, högst fjorton dagar"
+      - "Anordnas av riks- eller distriktsorganisationen eller studieförbund"
+      - "Redovisning (ansökan, kursprogram/inbjudan, kursintyg/deltagarlista/diplom, betalningsbevis) insänds senast tre månader efter genomförd kurs"
+    belopp: "Max 70 % av kurskostnad upp till 5 000 kr, 50 % av belopp över 5 000 kr; ej över 10 000 kr per deltagare utan särskilda skäl. Resekostnader prövas särskilt."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: "Ansökan görs i Interbook Go som inloggad föreningsrepresentant. Studieförbund kan söka enligt samma regler eller som kulturförening (regelverket avsnitt 2.2)."
+  - id: "solna-ledarutbildning-intern"
+    namn: "Bidrag till intern ledarutbildning"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar med barn- och ungdomsverksamhet, registrerade i Solnas föreningsregister"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Utbildningen ska ha inriktning på barn- och ungdomsverksamhet"
+      - "Skriftlig ansökan med program och kalkylkostnad ska godkännas av kultur- och fritidsförvaltningen innan kurs/konferens genomförs"
+      - "Bidrag utgår ej för resa, logi eller ersättning till föreläsare från den egna föreningen"
+      - "Genomförd kurs ska redovisas senast tre månader efter"
+    belopp: "Max 70 % av kurs-/konferenskostnad upp till 5 000 kr per deltagare, 50 % av belopp över 5 000 kr; ej över 10 000 kr per deltagare utan särskilda skäl."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: null
+  - id: "solna-projektbidrag-mindre"
+    namn: "Bidrag till mindre projekt/uppdrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet samt vuxen- och pensionärsföreningar med samhällsnyttig verksamhet, registrerade i Solnas föreningsregister"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektet ska vara en enskild händelse med tydlig start- och slutpunkt (t.ex. läger eller festival)"
+      - "Uppdraget ska vara efterfrågat av berörda målgrupper och ligga i linje med nämndens antagna målinriktning"
+      - "Öppen och ej medlemsbunden verksamhet prioriteras"
+      - "Nystartad förening kan erhålla ett startbidrag"
+    belopp: null
+    sen_ansokan: "Ansökan senast sex veckor innan projektstart"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: "Undantagna från projektbidrag: föreningar som regelmässigt får bidrag från religiösa samfund, korporationsföreningar, skolidrottsföreningar, supporterföreningar, opinionsbildande/politiska föreningar, bolagsliknande verksamhet, nöjeskonsumtion (regelverket avsnitt 2.1)."
+  - id: "solna-projektbidrag-storre"
+    namn: "Bidrag till större projekt/uppdrag"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet samt vuxen- och pensionärsföreningar med samhällsnyttig verksamhet, registrerade i Solnas föreningsregister"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-30"]
+    krav:
+      - "Projektet syftar till att utveckla ny verksamhet eller del av befintlig verksamhet under en längre tidsperiod"
+      - "Ansökan kompletteras vid behov med verksamhets-, kassa- och revisionsberättelse samt verksamhetsplanering för nästa år"
+      - "Redovisning sker halv- och helårsvis; ej genomfört projekt kan medföra återbetalningsskyldighet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: "Kultur- och fritidsnämnden kan ge direktiv om prioriterade projektområden (t.ex. drogförebyggande arbete, jämställdhetsarbete, integration, idrottsskolor)."
+  - id: "solna-kulturprojektbidrag"
+    namn: "Kulturprojektbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Registrerade kulturföreningar i Solna, eller organisationer med huvudsyfte att bedriva kontinuerlig kulturverksamhet i Solna sedan minst ett år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Religiöst och politiskt obunden, demokratiskt värdegrundsbaserad verksamhet"
+      - "Projektet ska huvudsakligen äga rum i Solna med utsatt start- och slutdatum"
+      - "Bilagor: senaste verksamhetsberättelse, årsbokslut, likabehandlingsplan, ekonomisk kalkyl för projektet"
+    belopp: null
+    sen_ansokan: "Ansökan lämnas utan prövning om ofullständig eller om redovisning för tidigare bidrag saknas"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/soka-bidrag"
+    anteckning: "Ansökan sker löpande inför handläggningsdatum som kultur- och fritidsförvaltningen fastställer; exakta datum är inte publicerade i källan. Besked lämnas senast sex veckor efter handläggningsdatum. Redovisning görs via blanketten 'Redovisning av kulturprojektbidrag'."
+  - id: "solna-pensionarsforeningsbidrag"
+    namn: "Bidrag till pensionärsföreningar"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar i Solna"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Hanteras av föreningarna i samråd med Äldreforum och kultur- och fritidsnämnden"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: "Källan är otydlig om exakt ansökningsprocess och deadline. 'Söka bidrag'-sidan kopplar oväntat texten 'Villkoren för bidrag till pensionärsföreningar' till regelverkets avsnitt 6 (Övriga föreningar, deadline 30 november) — kan vara en redaktionell sammanblandning på solna.se snarare än en avsiktlig regel. Kontakt: Äldreforum (aldreforum.solna@gmail.com)."
+  - id: "solna-ovriga-foreningsbidrag"
+    namn: "Övriga föreningsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Ideell och samhällsnyttig lokalförening eller liknande sammanslutning som inte tillhör någon av kommunens övriga bidragsberättigade föreningstyper"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Ansökan till kultur- och fritidsnämnden"
+      - "Vid behov bifogas senaste verksamhets-, kassa- och revisionsberättelse samt verksamhetsplanering för nästkommande år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/forenings--och-bidragsregler"
+    anteckning: null
+  - id: "solna-resebidrag-internationella-studieresor"
+    namn: "Resebidrag för internationella studieresor"
+    kategori: ["ovrig"]
+    malgrupp: "Grund- och gymnasieskolor, fritidsverksamheter samt ideella föreningar som får föreningsbidrag från Solna stad — för barn- och ungdomsgrupper som är Solnabor"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-27"]
+    krav:
+      - "Resan ska bidra till att ge barn och unga kunskaper och färdigheter för en värld med täta kontakter över nations- och kulturgränser"
+      - "Kan ej sökas för anställda i Solna stad eller av politiska partier"
+      - "Samtliga resor ska genomföras och rapporteras under året"
+    belopp: "Max 1 500 kr per person, dock max 30 000 kr per grupp/organisation och ansökningstillfälle"
+    sen_ansokan: "Sista ansökningsdag 27 september 2026 (löpande handläggning fram till dess; ytterligare ansökningsomgång kan öppnas om medel återstår)"
+    kalla_url: "https://www.solna.se/om-solna-stad/hallbarhet-och-utveckling/internationellt-arbete/resebidrag"
+    anteckning: "Beslutas av Solna stads internationella kommitté, inte kultur- och fritidsnämnden. Datumet 27 september gäller 2026 och kan variera år till år — normaliserat till MM-DD eftersom källan beskriver en årligen återkommande ansökningsomgång."
+forutsattningar:
+  - id: "solna-foreningsregistrering"
+    vad: "Registrera sig som Solnaförening i föreningsregistret"
+    beskrivning: "Föreningen ansöker om att registreras i Solnas föreningsregister via Interbook Go. Krav: namn med Solnakoppling eller ortsneutralt, tydlig representation och säte i Solna, huvuddelen av medlemmarna i Solna, utsedd styrelse och antagna stadgar, minst 10 medlemmar (för ungdomsföreningar: minst 10 medlemmar i åldern 7–20 år), giltig e-post, korrekt adress och telefonnummer. Årsrapport ska insändas senast 31 december varje år för fortsatt registrering och bidragsrätt."
+    system: "Interbook Go (IBGO)"
+    ledtid: null
+    ledtid_text: "Ej angiven handläggningstid i källan"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.solna.se/uppleva--gora/kultur--och-foreningsstod/bilda-ny-solnaforening"
+kommunsiffra: null

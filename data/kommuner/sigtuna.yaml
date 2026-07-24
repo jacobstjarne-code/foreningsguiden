@@ -1,0 +1,166 @@
+# Källa verifierad 2026-07-21 mot sigtuna.se, källkonvergens enligt RESEARCH_SPEC_v2
+# §2: regelverk (SN/2024:19-PDF:erna för socialnämnden) + förvaltningarnas egna sidor
+# (kultur-och-fritid, individ-och-familjeomsorg, vård-och-omsorg) + specialkategori-sök
+# (landsbygdsutveckling, fonder/stiftelser, väg, bygdegårdar, studieförbund, byalag).
+# Fullständig täckningsavstämning i tackning.log, konfliktbedömning i konflikter.log
+# (repo-rot). Två kända EJ_EXTRAHERBAR-luckor: "Bidrag till sverigefinska projekt"
+# (sidan gick aldrig att hämta med 200-svar trots 5 försök, innehåll bara känt via
+# sökträffsutdrag — utelämnad, kandidat för nästa körning) och kultur- och
+# fritidsnämndens egen bidragsregel-PDF (beställs via e-post, ej publicerad på webben).
+# Sigtuna.se har två parallella URL-mönster i drift (trolig migrationsfas), vilket gav
+# intermittenta 404 på annars fungerande sidor — se anmärkning i tackning.log.
+# Spot-checkas av Jacob före publik deploy (leveransordning steg 4).
+kommun: "Sigtuna"
+kommun_slug: "sigtuna"
+lan: "Stockholms län"
+befolkning: 52767
+forvaltning: "Kultur- och fritidsförvaltningen, Socialförvaltningen och Vård- och omsorgsförvaltningen"
+ansokningssystem:
+  namn: "Kommunens e-tjänst / föreningsregister"
+  url: "https://www.sigtuna.se/uppleva-och-gora/information-for-foreningar/foreningsbidrag.html"
+kalla_url: "https://www.sigtuna.se/uppleva-och-gora/information-for-foreningar/foreningsbidrag.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "sigtuna-startbidrag"
+    namn: "Startbidrag"
+    kategori: ["kultur", "idrott", "ovrig"]
+    malgrupp: "Nybildade föreningar inom kultur- och fritidsnämndens verksamhetsområde"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara nybildad"
+      - "Föreningen ska uppfylla kultur- och fritidsnämndens allmänna bestämmelser för föreningar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-kultur-och-fritid.html"
+    anteckning: "Ansökan ska komma in senast ett år efter föreningens bildande. Syftar till att täcka del av kostnaderna i samband med bildandet."
+  - id: "sigtuna-grundbidrag-kultur"
+    namn: "Grundbidrag – kultur"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar (dans, teater, musik, litteratur, konst, kulturarv m.m.) registrerade i Sigtuna kommuns föreningsregister"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15"]
+    krav:
+      - "Årsmöteshandlingar (verksamhets- och ekonomisk berättelse)"
+      - "Revisionsberättelse"
+      - "Föreningen registrerad i kommunens föreningsregister"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-kultur-och-fritid.html"
+    anteckning: "Ansökningsperiod 15 mars–15 april årligen. Ersatte tidigare 'Årligt verksamhetsbidrag – kultur' från 26 februari 2024 (kultur- och fritidsnämndens beslut 2024-01-25). Beloppet varierar beroende på antal beviljade föreningar."
+  - id: "sigtuna-kulturprogram-bidrag"
+    namn: "Bidrag till offentliga kulturprogram – kultur"
+    kategori: ["kultur"]
+    malgrupp: "Kultur- och fritidsföreningar som arrangerar offentliga kulturprogram för allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-15", "10-15"]
+    krav:
+      - "Arrangemanget ska vara öppet för allmänheten och marknadsföras som sådant"
+      - "Arrangemanget ska anmälas i kommunens evenemangskalender"
+      - "Ingen subvention ges för arrangörens egna måltidskostnader"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-kultur-och-fritid.html"
+    anteckning: "Nytt bidrag infört 26 februari 2024. Två ansökningsperioder per år: 15 mars–15 april samt 15 september–15 oktober. Beslut meddelas senast fyra veckor efter sista ansökningsdag. Redovisning senast sex veckor efter genomförandet."
+  - id: "sigtuna-arligt-verksamhetsbidrag-fritid"
+    namn: "Årligt verksamhetsbidrag – fritid"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med ledarledd ungdomsverksamhet för 7–25-åringar"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Minst tre deltagare/ledare per registrerad sammankomst"
+      - "Årsmöteshandlingar"
+      - "Skriftliga ANDTS-riktlinjer och handlingsplan mot mobbning, trakasserier och kränkande behandling"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-kultur-och-fritid.html"
+    anteckning: "Bidraget beräknas utifrån antalet registrerade sammankomster föregående verksamhetsår (lokalt aktivitetsstöd-liknande modell)."
+  - id: "sigtuna-ledarutbildningsbidrag-fritid"
+    namn: "Ledarutbildningsbidrag – fritid"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med ungdomsverksamhet vars ledare genomgår utbildning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Utbildningen ska vara anordnad av riks-/distriktsorganisation, eller vara en lokal ledarutbildning"
+      - "Kursintyg samt kvitton/faktura ska bifogas ansökan"
+    belopp: "Upp till 100 % av kurskostnaden, max tre prisbasbelopp per deltagare och år"
+    sen_ansokan: "Ansökan ska ha kommit in senast sex månader efter avslutad utbildning"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-kultur-och-fritid.html"
+    anteckning: "Deadline löper relativt utbildningens slutdatum, inte ett fast kalenderdatum."
+  - id: "sigtuna-projekt-ovrig-fritid"
+    namn: "Bidrag till projekt och/eller övrig verksamhet – fritid"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Idrotts- och fritidsföreningar med projekt eller övrig verksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska avse integration, jämställdhet, tillgänglighet, folkhälsa, skolsamverkan eller större arrangemang"
+      - "Verksamheten ska vara offentlig och genomföras i Sigtuna kommun"
+    belopp: null
+    sen_ansokan: "Ansökan efter genomförd aktivitet ska ha kommit in senast en månad efter genomförandet"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-kultur-och-fritid.html"
+    anteckning: "Sedan februari 2024 begränsat till idrotts- och fritidsföreningar (tidigare bredare målgrupp). Kan sökas löpande under året, före eller efter genomförande."
+  - id: "sigtuna-verksamhetsbidrag-social"
+    namn: "Verksamhetsbidrag — socialnämndens föreningsbidrag"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar vars verksamhet riktar sig till barn/unga i social utsatthet, personer med missbruksproblematik, vålds- eller brottsutsatta, anhöriga till dessa grupper, nyanlända barn och vuxna, eller personer som saknar egen försörjning"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Föreningen ska vara registrerad i Sigtuna kommuns föreningsregister"
+      - "Verksamheten ska komplettera socialnämndens ordinarie verksamhet"
+      - "Ansökan om bidrag till lokalkostnader kräver skriftlig plan för systematiskt brandskyddsarbete (SBA)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sigtuna.se/download/18.1a6c760f1900c6ea6a6d318/1718288054473/SN_2024_19-Riktlinje%20för%20socialnämndens%20föreningsbidrag.pdf"
+    anteckning: "Ansökan avser kommande verksamhetsår, senast 30 november. Beslut fattas av socialnämnden senast i februari. Regler och riktlinje fastställda 2024-05-27, diarienummer SN/2024:19 (tidigare revidering IFON/2020:282)."
+  - id: "sigtuna-projektbidrag-social"
+    namn: "Projektbidrag — socialnämndens föreningsbidrag"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar vars verksamhet riktar sig till barn/unga i social utsatthet, personer med missbruksproblematik, vålds- eller brottsutsatta, anhöriga till dessa grupper, nyanlända barn och vuxna, eller personer som saknar egen försörjning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Avser särskilda satsningar, projekt eller engångsarrangemang, ev. som delfinansiering i ett samverkansprojekt"
+      - "Föreningen ska vara registrerad i Sigtuna kommuns föreningsregister"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande, hanteras av nämnden när ansökan inkommer)"
+    kalla_url: "https://www.sigtuna.se/download/18.1a6c760f1900c6ea6a6d318/1718288054473/SN_2024_19-Riktlinje%20för%20socialnämndens%20föreningsbidrag.pdf"
+    anteckning: "Beviljas för ett år i taget med möjlighet till förlängning efter uppföljning av första och andra verksamhetsåret."
+  - id: "sigtuna-foreningsbidrag-vard-omsorg"
+    namn: "Föreningsbidrag inom vård och omsorg"
+    kategori: ["pensionar", "ovrig"]
+    malgrupp: "Pensionärsföreningar och ideella föreningar registrerade i Sigtuna kommuns föreningsregister vars verksamhet kompletterar vård- och omsorgsnämndens uppdrag"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-19"]
+    krav:
+      - "Registrering i kommunens föreningsregister"
+      - "Uppgifter om organisation och medlemsantal"
+      - "Föregående års verksamhetsberättelse med ekonomisk redovisning"
+      - "Signerad revisionsberättelse och signerat årsmötesprotokoll"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sigtuna.se/kultur-och-fritid/foreningar-foreningsliv/foreningsbidrag/foreningsbidrag-inom-vard-och-omsorg.html"
+    anteckning: "Ansökningsperiod cirka 21 september–19 oktober (exakt öppningsdatum kan variera något mellan år). Nämnden beslutar om fördelning i november (beslutsdatum 2025 var 20 november). Uppföljning sker året efter, inklusive anläggningsbesök och ekonomisk granskning. Denna sida kunde bara hämtas med 200-svar en gång under körningen (se tackning.log) — dubbelhämtning enligt §3 ofullständig för just denna sida."
+forutsattningar:
+  - id: "sigtuna-registrerad-forening"
+    vad: "Bli registrerad förening i Sigtuna kommuns föreningsregister"
+    beskrivning: "Föreningen ska först vara registrerad hos Skatteverket. Därefter ansöks om registrering i kommunens föreningsregister med bl.a. styrelse om minst tre ledamöter (ordförande, kassör, sekreterare) valda vid årsmöte, antagna stadgar, styrelseprotokoll om bildande, ifylld föreningsuppgiftsblankett och medlemsförteckning. Medlemskrav: minst 20 medlemmar för fritidsföreningar, minst 10 för kultur- och pensionärsföreningar, samt medlemsavgift om minst 25 kr/person och år."
+    system: null
+    ledtid: null
+    ledtid_text: "Ingen handläggningstid publicerad"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.sigtuna.se/foretag-och-foreningar/information-for-foreningar/bilda-forening.html"
+kommunsiffra: null

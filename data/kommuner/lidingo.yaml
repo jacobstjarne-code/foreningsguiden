@@ -1,0 +1,194 @@
+# Källa verifierad 2026-07-21/22 mot lidingo.se. Kommunens webbplats migrerades
+# till ny CMS-struktur (kultur-fritid/... i stället för toppmeny/...) — alla
+# sökträffar på gamla toppmeny-URL:er gav 404 vid hämtning; nya, levande
+# sidor under /kultur-fritid/foreningsliv/ och /omsorg-stod/ekonomiskt-stod/
+# användes i stället (samtliga publicerade 2026-04-23 enligt sidfot). En äldre
+# regelverks-PDF ("Bidragsregler föreningar i Lidingö stad", länkad från
+# sökmotorcache med belopp som avviker från nuvarande sida, t.ex. 5 000 kr
+# grundbidrag mot nuvarande 2 500 kr) gav 404 och bedöms överspelad av den
+# nyare webbsidan (§2.5 — nyare källa vinner). Ingen fungerande PDF-regelverk
+# hittades under körningen; kommunens sidor under föreningsbidrag/ fungerar
+# själva som regelverk (grundvillkor + ansökan/utbetalning/bedömning-avsnitt).
+# Bidragsportalen (app.bidragsportalen.se/lidingo) är en tredjepartstjänst som
+# listar externa bidragsgivare (stiftelser, EU, statliga myndigheter) — inte
+# stadens egna bidrag — och räknas därför inte som eget bidrag. Föreningsregistret
+# FRI (fri.lidingo.se) är JS-renderat och går inte att räkna upp som portalkälla;
+# fungerar som registrerings-/dokumentuppladdningssystem, inte bidragslista.
+# Spot-checkas av Jacob före publik deploy.
+kommun: "Lidingö"
+kommun_slug: "lidingo"
+lan: "Stockholms län"
+befolkning: 48277
+forvaltning: "Idrott, lärande- och kulturförvaltningen samt Omsorgs- och socialförvaltningen"
+ansokningssystem:
+  namn: "E-tjänst för föreningsbidrag (minasidor.lidingo.se) samt Aktivitetskort på nätet (aktivitetskort.se) för aktivitetsbidrag"
+  url: "https://minasidor.lidingo.se/foreningsbidrag"
+kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+verifierad: 2026-07-21
+bidrag:
+  - id: "lidingo-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "funktionsratt"]
+    malgrupp: "Godkända föreningar med barn- och ungdomsverksamhet (7–20 år) samt personer med funktionsnedsättning (7 år och äldre)"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-15", "03-15"]
+    krav:
+      - "Godkänd förening som uppfyller särskilda villkor för barn- och ungdomsverksamhet (minst 10 aktiva medlemmar 7–20 år, minst 10 bidragsberättigade aktiviteter per år)"
+      - "Aktivitet ska vara ledarledd (ledare minst 13 år), pågå minst 45 minuter och ha minst 3 deltagare"
+      - "Ansökan görs genom att rapportera genomförd verksamhet i stadens system Aktivitetskort på nätet"
+    belopp: "Grundbidrag 2 500 kr per ansökningstillfälle och förening, plus 6 kr (7–12 år), 11 kr (13–20 år) respektive 14 kr (funktionsnedsättning, 7 år och äldre) per godkänt deltagartillfälle. Max 40 (7–9 år) eller 60 (10–20 år) godkända deltagartillfällen per individ och halvår."
+    sen_ansokan: "För sent inkommen ansökan behandlas endast i undantagsfall (gäller föreningsbidrag generellt enligt stadens grundregler)"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+    anteckning: "Ansökan senast 15 september avser verksamhet 1 jan–30 jun. Ansökan senast 15 mars avser verksamhet 1 jul–31 dec. Beräkning sker automatiserat i Aktivitetskort på nätet."
+  - id: "lidingo-startbidrag"
+    namn: "Startbidrag för nybildad förening eller sektion"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Nystartade föreningar med verksamhet för barn och ungdomar, eller befintliga föreningar som startar en ny sektion för barn och ungdomar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Nystartad förening eller ny sektion i befintlig förening, med verksamhet för barn och ungdomar"
+      - "Ansökan ska kompletteras med underlag som styrker förenings- eller sektionsbildande (t.ex. bildandeprotokoll, stadgar)"
+      - "Ansökan sker via stadens e-tjänst för föreningsbidrag"
+    belopp: "Maximalt 10 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+    anteckning: null
+  - id: "lidingo-utvecklingsbidrag"
+    namn: "Utvecklingsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Godkända föreningar; riktat mot målgruppen 7–20 år, med prioritet för ungdomar 13–20 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Godkänd förening"
+      - "Ansökan ska ange mål och syfte, målgrupp, tidsplan, budget samt plan för uppföljning/utvärdering"
+      - "Ansökan kan inte göras i efterhand"
+      - "Ansökan sker via stadens e-tjänst för föreningsbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+    anteckning: "Syftar till att främja nytänkande i att rekrytera och behålla aktiva samt skapa meningsfulla fritidsaktiviteter. Föreningen är återbetalningsskyldig för bidrag som inte förbrukats eller använts på felaktigt sätt. Belopp avgörs efter prövning av staden."
+  - id: "lidingo-skollovsbidrag"
+    namn: "Bidrag för verksamhet under skollov"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Godkända föreningar som erbjuder öppen och kostnadsfri prova-på-verksamhet för barn och ungdomar under skolans lov"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Godkänd förening"
+      - "Verksamheten ska vara öppen och kostnadsfri prova-på-verksamhet, inte föreningens ordinarie verksamhet"
+      - "Ansökan och återrapportering sker enligt anvisningar staden presenterar inför respektive skollov"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+    anteckning: "Belopp avgörs efter prövning av staden. Ingen fast årlig deadline publicerad — datum sätts per skollov."
+  - id: "lidingo-lokalbidrag"
+    namn: "Lokalbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Godkända föreningar som hyr verksamhetslokal, kanslilokal eller förråd av staden eller extern hyresvärd"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-15", "06-15"]
+    krav:
+      - "Särskilt kontrakt eller hyresavtal ska vara tecknat för lokalen, anläggningen eller förrådet"
+      - "Staden ska godkänna lokalens/förrådets storlek, standard och hyresbelopp"
+      - "Ansökan ska bifogas kopia på hyreskontrakt samt senast betalda hyresavi"
+    belopp: "Verksamhetslokaler och förråd: upp till 80 % av hyreskostnaden. Kanslilokaler för anställd, använda minst 15 timmar/vecka: upp till 40 % av hyreskostnaden."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+    anteckning: "Ansökan avser kommande sexmånadersperiod. Föreningar med barn- och ungdomsverksamhet prioriteras. Bidraget upphör och kan återkrävas om lokalen används till annat ändamål än avsett."
+  - id: "lidingo-driftbidrag"
+    namn: "Driftbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Godkända föreningar som bedriver verksamhet i egen lokal på egen mark eller på mark som arrenderas av staden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Godkänd förening med egen lokal på egen eller stadens (arrenderade) mark"
+      - "Underlag som styrker föreningens driftskostnader ska bifogas ansökan"
+      - "Ansökan sker via stadens e-tjänst för föreningsbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+    anteckning: "Belopp avgörs efter prövning av staden. Föreningar med barn- och ungdomsverksamhet prioriteras. Driftbidragsavtal med särskilda villkor kan tecknas efter prövning."
+  - id: "lidingo-verksamhetsstod-kulturforeningar"
+    namn: "Verksamhetsstöd för kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Ideella kulturföreningar med minst 10 medlemmar och minst 10 sammankomster per år, där majoriteten av medlemmarna är bosatta på Lidingö"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-31"]
+    krav:
+      - "Minst 10 registrerade medlemmar som betalar medlemsavgift"
+      - "Minst 10 dokumenterade sammankomster per år"
+      - "Majoriteten av medlemmarna ska vara bosatta på Lidingö"
+      - "Ansökan ska innehålla årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse med resultat- och balansräkning, samt ev. kopia på hyreskontrakt/hyresavi"
+    belopp: "Grundbelopp 3 000 kr (kräver minst 10 medlemmar och minst 10 sammankomster/år). Tilläggsbelopp 1 500 kr vardera vid fler än 20 sammankomster/år respektive fler än 100 medlemmar (med minst 10 sammankomster/år). Lokalstöd: högst 10 % av hyreskostnad/år för egen hyrd lokal. Verksamhetsbelopp bedöms individuellt utifrån föreningens ekonomi."
+    sen_ansokan: "För sent inkommen ansökan behandlas inte"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/stod-till-kulturforeningar/verksamhetsstod-for-kulturforeningar/"
+    anteckning: "Ansökan avser det år ansökan gäller. Bidrag betalas ut senast 31 augusti om kompletta handlingar mottagits. Kultur- och fritidsnämnden kan efter prövning frångå fastställda regler och utfärda tilläggsregler. Grundbelopp/tilläggsbelopp och verksamhetsbelopp kan sökas ihop eller var för sig."
+  - id: "lidingo-stod-offentliga-kulturarrangemang"
+    namn: "Stöd till offentliga kulturarrangemang"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar som arrangerar offentliga kulturarrangemang på Lidingö inom litteratur, musik, dans, teater, bildkonst, foto, film, kulturarv eller jämförbara områden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arrangemanget ska genomföras på Lidingö, vara av engångskaraktär och öppet för allmänheten"
+      - "Får inte ha kommersiellt syfte eller ingå i kommersiell verksamhet"
+      - "Stöd ges endast utöver föreningens ordinarie verksamhet"
+      - "Kan inte sökas av privatperson eller partipolitisk organisation"
+      - "Ansökan ska lämnas in minst en månad före arrangemanget genomförs"
+      - "Redovisning ska lämnas senast 31 januari (höstens arrangemang) respektive 30 augusti (vårens arrangemang)"
+    belopp: "Max 75 % av nettokostnaden"
+    sen_ansokan: "För sent inkommen ansökan behandlas inte"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/stod-till-kulturforeningar/stod-till-offentliga-kulturarrangemang/"
+    anteckning: "Förlustbidrag — föreningen ansöker i förväg och redovisar i efterhand. Kan inte kombineras med annat bidrag/finansiering från annan förvaltning eller nämnd inom staden utan att det anges i ansökan. Utbetalas inom tre månader efter komplett redovisning."
+  - id: "lidingo-verksamhetsbidrag-socialt-arbete"
+    namn: "Verksamhetsbidrag för frivilligt socialt arbete"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Lokalt förankrade föreningar, råd och nätverk som bedriver frivilligt socialt arbete riktat till bland annat barn/unga/vuxna i social utsatthet eller utanförskap, äldre, personer med funktionsnedsättning eller psykisk ohälsa, anhörigstöd, brottsoffer, brottsförebyggande arbete, ANDTS-prevention eller integration"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska stödja en lokalt förankrad förening, ett råd eller ett nätverk"
+      - "Minst hälften av verksamheten bör finansieras av egna medel"
+      - "Ansökan ska uppfylla villkoren enligt omsorgs- och socialnämndens riktlinjer för bidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/bidrag-for-frivilligt-socialt-arbete/"
+    anteckning: "Ansökan görs under hösten inför det kommande kalenderåret och öppnar 1 september. Exakt sista ansökningsdag är inte publicerad på nuvarande källsida (historiska årtal har haft olika sista ansökningsdag i oktober/november) — typ satt till löpande i väntan på publicerat datum. Ansökan görs via e-tjänst med e-legitimation, eller som pappersblankett per post."
+  - id: "lidingo-aktivitetsbidrag-socialt-arbete"
+    namn: "Aktivitetsbidrag för frivilligt socialt arbete"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Föreningar, råd och nätverk som bedriver frivilligt socialt arbete, för en tydligt avgränsad aktivitet eller ett speciellt ändamål riktat till samma målgrupper som verksamhetsbidraget"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Tydligt avgränsad aktivitet eller speciellt ändamål"
+      - "Kan sökas av föreningar, råd och nätverk"
+      - "Ansökan ska uppfylla villkoren enligt omsorgs- och socialnämndens riktlinjer för bidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/bidrag-for-frivilligt-socialt-arbete/"
+    anteckning: "Ansökan görs under hösten inför det kommande kalenderåret och öppnar 1 september. Exakt sista ansökningsdag är inte publicerad på nuvarande källsida — typ satt till löpande i väntan på publicerat datum. Föreningar/råd/nätverk som riktar sig till äldre kan efter överenskommelse använda seniormötesplatsernas lokaler för aktiviteten."
+forutsattningar:
+  - id: "lidingo-godkand-forening"
+    vad: "Bli godkänd förening / registrera sig i Föreningsregistret (FRI)"
+    beskrivning: "Föreningen ska vara ideell, ange Lidingö som verksamhetsområde i sina stadgar, ha organisationsnummer samt plus- eller bankgiro, ha haft dokumenterad verksamhet det senaste året, säkerställa att medlemmar erlägger medlemsavgift (redovisad som egen post eller fotnot i balans- och resultaträkning, skild från tränings-/aktivitetsavgifter) samt årligen delge staden sina årsmöteshandlingar. Föreningen ska vara uppbyggd och fungera enligt demokratiska principer och värderingar. Registrering och uppladdning av obligatoriska handlingar (signerat årsmötesprotokoll, signerad revisionsberättelse, verksamhetsberättelse och ekonomiskt bokslut, verksamhetsplan och budget) sker i Föreningsregistret (FRI)."
+    system: "Föreningsregistret (FRI)"
+    ledtid: null
+    ledtid_text: "Ingen handläggningstid publicerad"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://lidingo.se/kultur-fritid/foreningsliv/foreningsbidrag/"
+kommunsiffra: null

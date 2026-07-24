@@ -1,0 +1,308 @@
+# Källa verifierad 2026-07-23 mot partille.se. Regelverk: "Bidragsregler för
+# idrottsföreningar" (KFN/2026:3, antaget av kultur- och fritidsnämnden
+# 2026-02-26 § 15) och "Bidragsregler för kulturföreningar" (KFN/2024:11,
+# antaget 2024-04-11 § 22), båda hämtade som PDF och extraherade ordagrant
+# med pdftotext -layout (ej modell-sammanfattat).
+# Ansökningssystem har bytt namn: kultur-PDF:n (2024) anger "Adoxa", men
+# kommunens nuvarande bidragssida (live 2026-07-23) länkar samtliga bidrag
+# (idrott, kultur, pensionär/övriga idébärande) till Rbok
+# (partille.rbok.se) — nyare källa vinner (§2.5), Rbok skrivet som
+# ansökningssystem. Rbok kräver BankID-inloggning och gick inte att räkna
+# upp portalinnehållet (EJ_EXTRAHERBAR, se tackning.log).
+# Fyra priser/stipendier (Breddpriset, Barnkonventionspriset,
+# Hållbarhetspriset, Hälsopriset) är medtagna eftersom källan uttryckligen
+# anger att föreningar kan nomineras/vinna (§2.4/§2.6-praxis i denna batch).
+# Partille idrottsstipendium, Partille kulturstipendium (båda uteslutande
+# för två namngivna privatpersoner), Sociala Samfond (behövande
+# kommuninvånare) och Inger och Gösta Sundströms kulturstiftelse (privat
+# donation, tillsätts av familjerepresentant + kommunrepresentant utan
+# öppen ansöknings-/nomineringsprocess) är medvetet uteslutna — se
+# tackning.log. Ingen väg-/samfällighetsbidrag, bygdegårds-/samlingslokal-
+# bidrag eller separat studieförbundsbidrag hittades på partille.se;
+# kulturarrangemangsbidraget omfattar uttryckligen studieförbund. Spot-
+# checkas av Jacob före publik deploy.
+kommun: "Partille"
+kommun_slug: "partille"
+lan: "Västra Götalands län"
+befolkning: 41133
+forvaltning: "Kultur- och fritidsförvaltningen samt social- och arbetsförvaltningen"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://partille.rbok.se/"
+kalla_url: "https://www.partille.se/uppleva--gora/foreningsliv/stod-till-foreningar/"
+verifierad: 2026-07-23
+bidrag:
+  - id: "partille-startbidrag-idrott"
+    namn: "Startbidrag (idrottsföreningar)"
+    kategori: ["idrott"]
+    malgrupp: "Nybildade idrottsföreningar och liknande föreningar (scouter, friluftsföreningar m.fl.) med säte i Partille kommun, verksamma sedan minst sex månader"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla de allmänna villkoren för idrottsföreningar (säte i kommunen, minst 10 medlemmar, demokratisk uppbyggnad, ansluten till riks-/distriktsorganisation)"
+      - "Verksamheten ska ha pågått i minst sex månader"
+      - "Stadgar, protokoll från konstituerande möte (alternativt senaste årsmöte) samt firmatecknares underskrivna intyg om medlemsantal ska bifogas"
+    belopp: "Max 1 500 kronor"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "Ansökan görs i kommunens bidragssystem när som helst under året."
+  - id: "partille-lokalt-aktivitetsstod"
+    namn: "Lokalt aktivitetsstöd"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar med ledarledd verksamhet för åldersgruppen 7–20 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Sammankomsten ska ha minst tre deltagare (7–20 år) utöver ledare och pågå minst 45 minuter"
+      - "Ledaren ska vara minst 13 år och närvarande under hela sammankomsten, inte ledare för flera grupper samma timme"
+      - "Bidrag beviljas inte till entrébelagda tävlingar, kommersiella arrangemang (danser, bingo, basarer) eller studiecirkelsammankomster"
+      - "Närvaro ska föras och kopia sparas av föreningen i minst sju år"
+    belopp: "30 kr/sammankomst för åldersgruppen 7–12 år, 60 kr/sammankomst för 13–20 år, plus 20 kr extra vid sammankomster längre än fyra timmar"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "Söks halvårsvis i efterskott, 25 februari och 25 augusti. Bidrag utgår bara en gång per dag och grupp."
+  - id: "partille-aktivitetsstod-senior-65"
+    namn: "Aktivitetsstöd seniorer 65+ år"
+    kategori: ["idrott", "pensionar"]
+    malgrupp: "Idrotts- eller seniorföreningar med återkommande motions-/träningsaktiviteter för medlemmar som under året fyllt eller fyller 65 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Föreningen ska vara ansluten till Riksidrottsförbundet eller riks-/distriktsorganisation"
+      - "Sammankomsten ska ha minst tre stödberättigade deltagare plus ledare och pågå minst 45 minuter"
+      - "Max tre sammankomster per vecka och en per dag får medräknas per förening"
+      - "Minst 50 % av deltagarna ska vara bosatta i Partille kommun"
+      - "Närvaro styrks med närvarokort (namn, personnummer, postadress, dag och datum) som sparas i minst sju år"
+    belopp: "Max 50 kr per sammankomst, max 6 000 kr per förening och år (justeras nedåt om många föreningar söker)"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "Ansökan avser föregående kalenderårs aktiviteter, söks senast 1 april. Schema över planerade aktiviteter, medlemsmatrikel och sammanställningsblankett för närvarokort ska bifogas."
+  - id: "partille-ledarutbildningsbidrag"
+    namn: "Ledarutbildningsbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar som genomför ledarutbildning inom barn- och ungdomsverksamhet, via riks-/distriktsorganisation eller i egen regi"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kursen ska omfatta minst två och max fem dagar, i genomsnitt sex lektionstimmar per dag"
+      - "Kursintyg och kursprogram ska bifogas ansökan"
+    belopp: "400 kr per deltagare och kursdag, reducerat till faktisk kurskostnad om den är lägre"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "Ansökan ska vara kommunen tillhanda senast sex månader efter genomförd ledarutbildning — löpande deadline knuten till genomförandedatum, inte ett fast kalenderdatum."
+  - id: "partille-stimulansbidrag"
+    namn: "Stimulansbidrag"
+    kategori: ["idrott"]
+    malgrupp: "Stora idrottsföreningar med minst 300 medlemmar (varav minst 250 bosatta i Partille) i åldern 7–20 år, kontinuerlig verksamhet hela året"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Minst 300 medlemmar 7–20 år, varav minst 250 bosatta i Partille kommun"
+      - "Kontinuerlig verksamhet under hela året"
+      - "Minst 700 redovisade sammankomster per år"
+    belopp: "50 000 kr per förening och år"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "En av fem delar i verksamhetsbidraget (regelverkets punkt 2.5.1). Ingen bidragsspecifik deadline anges i källan — den generella årliga deadlinen enligt punkt 1.2 (1 april) är använd."
+  - id: "partille-sarskilda-foreningsinsatser"
+    namn: "Särskilda föreningsinsatser"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar med nyskapande verksamhet riktad till barn och ungdomar, särskilt ur jämställdhets-, integrations- och mångfaldsperspektiv"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Bidraget utgår inte till föreningens löpande verksamhet — det är ett komplement till övriga bidragsformer"
+      - "Kostnader ska verifieras med kvitton och fakturor efter utbetalning"
+    belopp: null
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "En av fem delar i verksamhetsbidraget (regelverkets punkt 2.5.2). Bidragets storlek regleras inom budgeterade medel. Ingen bidragsspecifik deadline anges — generell årlig deadline enligt punkt 1.2 (1 april) använd."
+  - id: "partille-lokalbidrag-hyrda-anlaggningar"
+    namn: "Lokalbidrag till föreningar som hyr anläggningar"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar som hyr aktivitetsutrymmen för ungdomsverksamhet, när kultur- och fritidsnämnden inte kan erbjuda egna lokaler"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Kultur- och fritidsnämnden kan inte ställa andra lokaler till förfogande"
+      - "Lokalen ska i möjligaste mån upplåtas till andra föreningar"
+      - "Hyresavtal för lokal utanför nämndens förvaltningsområde ska godkännas av nämnden i förväg för att bidrag ska kunna utgå"
+      - "Ansökan avser föregående års faktiska lokalkostnader"
+    belopp: "80 % av nettohyreskostnaden (max 120 000 kr/år) vid minst 600 sammankomster; 60 % (max 80 000 kr) vid 400–599 sammankomster; 40 % (max 50 000 kr) vid 100–399 sammankomster"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "En av fem delar i verksamhetsbidraget (regelverkets punkt 2.5.3). Nettohyreskostnad = hyra, tomträttsavgäld, arrende, el, vatten, värme, försäkring, sotning och sophämtning minus uthyrningsintäkter. Beräknas proportionerligt mot andelen 7–20-åringar vid blandad ungdoms-/vuxenverksamhet."
+  - id: "partille-lokalbidrag-egna-anlaggningar"
+    namn: "Lokalbidrag till föreningarnas egna anläggningar"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar som äger eller förvaltar egen lokal/anläggning och har underhållsansvar för den"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Föreningen ska ha ansvar för underhållsåtgärder på anläggningen/lokalen"
+      - "Ansökan avser föregående års faktiska kostnader"
+    belopp: "80 % av nettokostnaden (max 120 000 kr/år) vid minst 600 sammankomster; 60 % (max 80 000 kr) vid 400–599 sammankomster; 40 % (max 50 000 kr) vid 100–399 sammankomster"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "En av fem delar i verksamhetsbidraget (regelverkets punkt 2.5.4). Beräknas proportionerligt mot andelen 7–20-åringar vid blandad ungdoms-/vuxenverksamhet."
+  - id: "partille-investeringsbidrag-egen-anlaggning"
+    namn: "Investeringsbidrag egen anläggning"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsföreningar som äger eller förvaltar egen lokal/anläggning och ska ny-, till- eller ombygga den"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Föreningen ska ha ansvar för underhållsåtgärder på anläggningen/lokalen"
+      - "Kostnader ska verifieras med kvitton och fakturor efter utbetalning"
+    belopp: null
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+    anteckning: "En av fem delar i verksamhetsbidraget (regelverkets punkt 2.5.5). Kultur- och fritidsnämnden beslutar om bidragets storlek. Ingen bidragsspecifik deadline anges — generell årlig deadline enligt punkt 1.2 (1 april) antagen, spot-checkas."
+  - id: "partille-startbidrag-kultur"
+    namn: "Startbidrag (kulturföreningar)"
+    kategori: ["kultur"]
+    malgrupp: "Nybildade kulturföreningar, internationella föreningar och seniorföreningar med säte i Partille kommun, verksamma sedan minst sex månader"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla de allmänna villkoren för kulturföreningar (säte i kommunen, minst 10 medlemmar, demokratisk uppbyggnad, organisatorisk fasthet)"
+      - "Verksamheten ska ha pågått i minst sex månader"
+      - "Stadgar, protokoll från konstituerande möte (alternativt senaste årsmöte) samt firmatecknares underskrivna intyg om medlemsantal ska bifogas"
+    belopp: "Max 1 500 kronor"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-kultur_2024.pdf"
+    anteckning: "Ansökan kan göras när som helst under året. Regelverket (2024) anger ansökningssystemet 'Adoxa' — kommunens nuvarande bidragssida pekar på Rbok, se kommun-nivå anteckning."
+  - id: "partille-verksamhetsbidrag-kultur"
+    namn: "Verksamhetsbidrag (kulturföreningar)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som bedriver offentlig kulturell verksamhet i Partille kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Verksamhetsberättelse/årsredovisning, årsmötesprotokoll, utvärdering och verksamhetsplan med ekonomisk beräkning för kommande år ska bifogas"
+      - "Nyskapande verksamhet, samverkan med andra föreningar samt verksamhet riktad till barn och unga prioriteras vid fördelning"
+    belopp: null
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-kultur_2024.pdf"
+    anteckning: "Bidragssumman minskas om föreningen bedriver verksamhet i flera kommuner."
+  - id: "partille-kulturarrangemangsbidrag"
+    namn: "Kulturarrangemangsbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar och studieförbund i Partille kommun som genomför offentliga kulturarrangemang, samt ungdomar 13–20 år som arrangerar i Ungdomens hus under personalhandledning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Arrangemanget ska äga rum i Partille kommun, vara offentligt och av kulturell karaktär (föreläsning, teater, konstutställning, guidad kulturhistorisk vandring m.m.)"
+      - "Arrangemanget ska annonseras för allmänheten och det ska framgå att det genomförs 'med stöd av kultur- och fritidsförvaltningen i Partille kommun'"
+      - "Bidrag beviljas endast om arrangemanget uppvisar underskott — ersättning till egna medlemmar räknas inte som underlag"
+      - "Redovisning av intäkter/kostnader med fakturakopior ska ha inkommit senast tre månader efter genomfört arrangemang"
+    belopp: "Max 5 000 kronor per tillfälle, max två gånger per förening/studieförbund och kalenderår"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-kultur_2024.pdf"
+    anteckning: "Lokalhyra räknas bara som underlag när arrangören tillfälligt hyr en lokal för ändamålet, inte hyreskostnad för egen lokal. Även idrottsföreningars kulturarrangemang kan omfattas, se bidragsreglerna för idrottsföreningar punkt 2."
+  - id: "partille-bidrag-seniorforeningar-kultur"
+    namn: "Bidrag till seniorföreningar"
+    kategori: ["kultur", "pensionar"]
+    malgrupp: "Seniorföreningar med säte i Partille kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Endast medlemmar mantalsskrivna i Partille kommun får medräknas"
+      - "Verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse, årsmötesprotokoll samt firmatecknares underskrivna intyg om medlemsantal ska bifogas"
+    belopp: "Belopp per medlem, fastställs årligen av kultur- och fritidsnämnden (inget publicerat kronbelopp)"
+    sen_ansokan: "Ansökningar som inte inkommit inom föreskriven tid eller inte kompletterats enligt anvisningar kan avslås."
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-kultur_2024.pdf"
+    anteckning: "Baseras på antalet medlemmar vid slutet av det verksamhetsår ansökan avser."
+  - id: "partille-foreningsbidrag-social-verksamhet"
+    namn: "Föreningsbidrag för social verksamhet"
+    kategori: ["social"]
+    malgrupp: "Ideella, partipolitiskt obundna föreningar med demokratisk uppbyggnad, lokal anknytning till Partille, som bedriver socialt arbete riktat till målgrupper inom social- och arbetsnämndens område"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-31"]
+    krav:
+      - "Registrerad hos Skatteverket med organisationsnummer"
+      - "Minst ett års kontinuerlig verksamhet (krav för lokalbidrag)"
+      - "Verksamheten ska verka för att vara drogfri"
+      - "Presentation av mål och resultatuppföljning samt medlemsstatistik krävs"
+      - "Kan inte sökas för administration eller löner"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.partille.se/uppleva--gora/foreningsliv/foreningsbidrag-for-social-verksamhet/"
+    anteckning: "Beslutas årligen av Social- och arbetsnämnden. Föreningar som beviljas bidrag får medlen utbetalda året därpå. Ansöks via e-tjänst på Mina sidor (https://minasidor.partille.se/oversikt/overview/379)."
+  - id: "partille-breddpriset"
+    namn: "Breddpriset"
+    kategori: ["idrott"]
+    malgrupp: "Idrottsförening som, oavsett idrottsliga framgångar, erbjuder barn och unga en miljö där de trivs, utvecklas, utmanas och tränas efter egna förutsättningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Nyskapande, inkluderande verksamhet som motverkar utslagning värderas särskilt"
+      - "Nomineras via kommunens e-tjänst för priser och stipendier"
+    belopp: "10 000 kronor och diplom"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.partille.se/kommun--politik/priser-stipendier-stiftelser/"
+    anteckning: "Delas ut vid kommunens mästerskapsfirande på Partille Arena. Nominering görs via minasidor.partille.se, gemensam ansökningsperiod 1 januari–1 november med Idrottsstipendiet och Kulturstipendiet (e-tjänst overview/432, live 2026-07-23)."
+  - id: "partille-barnkonventionspriset"
+    namn: "Barnkonventionspriset"
+    kategori: ["ovrig"]
+    malgrupp: "Person, förening, grupp eller verksamhet i Partille kommun som på ett förtjänstfullt sätt arbetar med barn och ungdomar enligt FN:s barnkonvention"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Insatsen ska ha anknytning till Partille kommun"
+    belopp: "10 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.partille.se/kommun--politik/priser-stipendier-stiftelser/"
+    anteckning: "Delas ut årligen av kommunfullmäktige sedan 2009, prisutdelning i oktober. Nomineringsprocess och exakt nomineringsdeadline är inte publicerad på källsidan vid verifieringstillfället — vinnaren väljer själv hur prissumman används."
+  - id: "partille-hallbarhetspriset"
+    namn: "Hållbarhetspriset"
+    kategori: ["ovrig"]
+    malgrupp: "Privatperson, grupp, förening eller företag som bidragit till en hållbar utveckling av Partille (socialt, miljömässigt eller ekonomiskt)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Insatsen ska ha anknytning till Partille kommun"
+    belopp: "10 000 kronor och diplom"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.partille.se/kommun--politik/priser-stipendier-stiftelser/"
+    anteckning: "Nominering görs under kommunens hållbarhetsvecka; exakt nomineringsdeadline varierar år till år och är inte publicerad på partille.se vid verifieringstillfället (en extern källa, mynewsdesk.com — ej partille.se-domän, alltså inte använd som kalla_url — uppgav 21 september för 2025 års omgång)."
+  - id: "partille-halsopriset"
+    namn: "Hälsopriset"
+    kategori: ["ovrig"]
+    malgrupp: "Privatperson/er, grupper, föreningar eller verksamheter som är förebilder i hälsofrämjande arbete i Partille"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav: []
+    belopp: "15 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.partille.se/kommun--politik/priser-stipendier-stiftelser/"
+    anteckning: "Vinnare utses av kommunens folkhälsoråd, prisutdelning på våren. Exakt nomineringsdeadline inte publicerad på partille.se vid verifieringstillfället."
+forutsattningar:
+  - id: "partille-foreningsregister"
+    vad: "Registrera föreningen i föreningsregistret hos kultur- och fritidsförvaltningen"
+    beskrivning: "Föreningen ska ha sitt säte i Partille kommun, bedriva regelbunden ideell verksamhet öppen för alla i minst sex månader, vara ansluten till en riks-/distriktsorganisation (idrott) eller ha organisatorisk fasthet (kultur), ha stadgar, medlemsmatrikel, demokratiskt vald styrelse och revisorer samt minst 10 medlemmar som betalat minst 100 kr/år i medlemsavgift. Bidragsberättigad förening ska varje år skicka in blankett med föreningsuppgifter, verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse och årsmötesprotokoll till kultur- och fritidsförvaltningens föreningsregister."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: "Ingen handläggningstid publicerad"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.partille.se/siteassets/uppleva--gora/foreningsliv/bidragsregler-for-idrottsforeningar-2026.pdf"
+kommunsiffra: null

@@ -1,0 +1,258 @@
+# Källa verifierad 2026-07-23 mot enkoping.se. Täckning fastställd genom
+# källkonvergens (RESEARCH_SPEC v2.1 §2): (1) regelverket "Stöd till
+# civilsamhället i Enköpings kommun" (UPN2025/183, beslutat av Upplevelse-
+# nämnden 2025-09-25, gäller fr.o.m. 2026-01-01) — 45 sidor, hämtat som PDF
+# och läst i sin helhet med pdftotext -layout (WebFetch kunde inte extrahera
+# textlagret direkt); (2) den löpande sidan "Bidrag att söka" (bidrag-att-
+# soka.html), hämtad två oberoende gånger (WebFetch + curl/regex-extraktion)
+# — samstämmig med regelverket för samtliga sju huvudföreningsbidrag och
+# deras ansökningsfönster 2026. Specialkategorier genomsökta aktivt utanför
+# Upplevelseförvaltningens sidträd: vägbidrag (Trafik och gator), stiftelser
+# (Omsorg och stöd), aktivitetsstöd på finska (Kommunledningsförvaltningen,
+# finskt förvaltningsområde) och socialnämndens verksamhetsbidrag (Social-
+# nämnden) — samtliga fyra låg utanför "Förening i Enköping"-sidträdet, i
+# linje med RESEARCH_SPEC:s varning om att kommunens sidträd inte är en
+# fullständig förteckning. Ansökningsportalen (enkoping.rbok.se, Blazor/JS-
+# renderad) gick inte att räkna upp — EJ_EXTRAHERBAR, se tackning.log.
+# Flera gamla enkoping.se-URL:er (studieförbund, civilsamhällesstipendium,
+# idrottsstipendium) 301-omdirigerar till nya sidor efter en CMS-omstruktu-
+# rering av "Omsorg och stöd"-trädet — nya, fungerande URL:er använda och
+# 200-verifierade under körningen. Spot-checkas av Jacob före publik deploy.
+kommun: "Enköping"
+kommun_slug: "enkoping"
+lan: "Uppsala län"
+befolkning: 48804
+forvaltning: "Upplevelseförvaltningen (föreningsbidrag och civilsamhälle); Socialförvaltningen (verksamhetsbidrag frivilliga organisationer, sociala stiftelser); Samhällsbyggnadsförvaltningen (vägbidrag); Kommunledningsförvaltningen (aktivitetsstöd på finska); Utbildningsförvaltningen (utbildningsstiftelser)"
+ansokningssystem:
+  namn: "Rbok (kommunens e-tjänst för ekonomiskt stöd och föreningsregister)"
+  url: "https://enkoping.rbok.se/"
+kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+verifierad: 2026-07-23
+bidrag:
+  - id: "enkoping-startstod"
+    namn: "Startstöd till nya föreningar"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Nybildade ideella föreningar, inom sex månader efter att föreningen fått organisationsnummer från Skatteverket"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen har fått organisationsnummer från Skatteverket för högst sex månader sedan"
+      - "Föreningen måste uppfylla övriga krav för bidragsberättigad förening inom ett år efter godkänd startstödsansökan"
+      - "Föreningen ska inom det första året ta del av utbildning om att driva en ideell förening, företrädesvis via ett studieförbund"
+      - "Bedömning av rätten till startstöd görs samtidigt som föreningen ansöker om att bli bidragsberättigad"
+    belopp: null
+    sen_ansokan: "Sent inkommen ansökan hanteras inte"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Nystartade föreningar som inte uppfyller kraven inom ett år förlorar sitt bidragsberättigande. Fullständiga regler i regelverket 'Stöd till civilsamhället i Enköpings kommun' §9.2: https://enkoping.se/download/18.3074f6241931f5d6fa2b1ac/1776691502470/regler-stod-civilsamhallet.pdf"
+  - id: "enkoping-grundstod"
+    namn: "Årligt grundstöd"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Samtliga bidragsberättigade föreningar (bidrag per medlem); högre ersättning för föreningar med särskilt utsatt målgrupp; kvadratmeterersättning för lokalhållande föreningar (t.ex. bygdegårdsföreningar)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ingen separat ansökan krävs — grundstöd betalas ut automatiskt i samband med verksamhetsstödet"
+      - "Föreningen måste ansöka om verksamhetsstöd (ansökningsfönster 15 januari–1 mars) för att grundstödet ska betalas ut"
+      - "Lokalhållande föreningars kvadratmeterersättning begränsas till högst ett halvt prisbasbelopp"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (ingen separat ansökan — betalas ut med verksamhetsstödet)"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Regelverket (§9.3.2) publicerar fördelningsprincipen som 'XX kr/medlem' — det faktiska beloppet fastställs årligen i budget, ej i regelverkstexten. Analys-PM UPN2025/130 (2025-08-29, politik.enkoping.se) redovisar 2025 års faktiska nivåer som referens, ej bekräftat för 2026: 4 kr/medlem (8 kr/medlem för föreningar med särskilt utsatt målgrupp); 45 kr/kvm uthyrningsbar yta i bygdegård, 1 kr/kvm utomhus spontanyta, 45 kr/kvm lokal/anläggning för löpande verksamhet. 2025: 149 föreningar delade på 119 120 kr i medlemsbaserat grundstöd, 26 lokalhållande föreningar delade på 273 620 kr i kvadratmeterdel."
+  - id: "enkoping-verksamhetsstod"
+    namn: "Årligt verksamhetsstöd"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar; barn, unga och äldre ska premieras i fördelningen av bidrag"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-01"]
+    krav:
+      - "Stödet är retroaktivt och fördelas utifrån föregående kalenderårs verksamhet"
+      - "Föreningar med barn- och ungdomsverksamhet ska kunna redogöra för hur de inkluderat barn och unga"
+      - "Bidrag fördelas utifrån antal aktiviteter och antal deltagartillfällen (aktiv förening)"
+      - "Föreningar med beslutat styrdokument inom barn/unga, demokrati/inflytande, inkludering, miljö/hållbarhet eller trygghet/säkerhet kan få upp till 5 % högre stöd (hållbar förening)"
+      - "En aktivitet kräver minst tre deltagare under minst 45 minuter, med en ansvarig person, och får inte vara helt finansierad av deltagaravgifter eller andra bidrag"
+    belopp: null
+    sen_ansokan: "Sent inkommen ansökan hanteras inte"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Ansökningsfönster 15 januari–1 mars. Fördelningsprincip (kr/aktivitet, kr/deltagartillfälle per åldersgrupp) publiceras som 'XX kr' i regelverket (§9.7.3) — fastställs årligen i budget. Fullständiga kriterier för 'aktiv förening' och 'hållbar förening' i regelverkets §9.5–9.7."
+  - id: "enkoping-arrangorsstod"
+    namn: "Arrangörsstöd för publika kulturarrangemang"
+    kategori: ["kultur"]
+    malgrupp: "Bidragsberättigade föreningar som planerar och genomför publika kulturarrangemang öppna för allmänheten"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30", "04-30"]
+    krav:
+      - "Arrangemanget ska erbjuda en kulturupplevelse (musik, teater, dans, litteratur, bild och form, film, kulturarv, design, spoken word eller liknande) — traditionella firanden kan omfattas om de har ett tydligt kulturellt inslag"
+      - "Arrangemanget ska vara öppet för allmänheten och ha en publik"
+      - "Arrangemanget ska medföra kostnader för föreningen (gage/arvode till kulturutövare eller andra relevanta utgifter)"
+      - "Arrangören ansvarar för eventuella tillstånd och säkerhet"
+      - "Arrangemanget ska marknadsföras med tydlig angivelse av kommunens stöd"
+    belopp: "Upp till 50 % av godkända kostnader; högsta ansökningsbelopp beslutas årligen utifrån kommunens budget"
+    sen_ansokan: "Sent inkommen ansökan hanteras inte"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Två ansökningsfönster per år: 15 oktober–30 november och 15 mars–30 april. Föreningar vars huvudsakliga syfte är att arrangera kulturarrangemang prioriteras."
+  - id: "enkoping-utvecklingsstod"
+    namn: "Stöd för utvecklingsinsatser"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som vill pröva nya arbetssätt, stärka föreningens förmåga, nå nya målgrupper eller bygga upp ny verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Engångsstöd — kan beviljas endast en gång per utvecklingsinsats"
+      - "Ansökan ska tydligt vara kopplad till föreningens verksamhet"
+      - "Kan ej sökas för renovering av byggnader/anläggningar eller större inköp av utrustning/material"
+      - "Nystartade föreningar prioriteras under förutsättning att övriga kriterier är uppfyllda"
+    belopp: null
+    sen_ansokan: "Sent inkommen ansökan hanteras inte"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Ansökningsfönster 15 oktober–30 november. Regelverkets fotnot till §11 nämner 'Öppna aktiviteter' som ett exempel på insats inom utvecklingsstöd, men den löpande ansökningsplanen 2026 listar 'Öppen aktivitet' som en egen rad med annan ansökningsrytm — skrivet som separat bidrag i denna fil, se enkoping-oppen-aktivitet."
+  - id: "enkoping-oppen-aktivitet"
+    namn: "Öppen aktivitet"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som vill erbjuda kostnadsfria, medlemskapsfria aktiviteter utan krav på förkunskap, för att ge fler möjlighet att prova på föreningens verksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska vara kostnadsfri och utan krav på medlemskap"
+      - "Aktiviteten ska normalt inte ingå i föreningens ordinarie verksamhet"
+      - "Bidrag söks i efterhand, efter godkännande av handläggare"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Administreras som en del av stöd för utvecklingsinsatser (regelverkets §11, fotnot 2) men har egen löpande ansökningsrytm: handläggning sker efter 31 maj, 31 augusti och 30 november enligt kommunens ansökningsplan 2026."
+  - id: "enkoping-investeringsstod"
+    namn: "Investeringsstöd"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som äger sin lokal eller anläggning och behöver bygga nytt, bygga om, genomföra standardhöjande reparationer eller tillgänglighetsanpassa"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Föreningen måste äga sin lokal/anläggning, eller ha arrendeavtal på minst 5 år om marken inte ägs av föreningen"
+      - "Anläggningen ska vara besiktigad och bedömd lämplig och säker"
+      - "Total utgift måste överstiga ett prisbasbelopp; ej till redan påbörjade projekt"
+      - "Vid utveckling av befintlig anläggning krävs minst 50 bidragsberättigade aktiviteter föregående kalenderår på anläggningen"
+      - "Utbetalning villkoras av säkrad extern medfinansiering"
+      - "Åtgärden ska vara genomförd senast två år efter beslut"
+    belopp: "40 % av den totala utgiften, dock högst 120 000 kronor (belopp och procentsats kan ändras vid särskilda skäl)"
+    sen_ansokan: "Sent inkommen ansökan hanteras inte"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Ansökningsfönster 15 februari–31 mars. Prioriterade insatser: undanröjer akut hinder, ökar säkerhet/trygghet, ökar tillgänglighet, minskar miljöpåverkan, främjar jämställdhet."
+  - id: "enkoping-lovbidrag"
+    namn: "Stöd för kostnadsfria lovaktiviteter"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar som anordnar kostnadsfria aktiviteter för barn och unga 6–17 år, främst under sommarlovet"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30", "10-31"]
+    krav:
+      - "Aktiviteten ska vara kostnadsfri för deltagarna (6–17 år) och äga rum i Enköping"
+      - "Ingen särskild förkunskap får krävas för deltagande"
+      - "Ansvarig ledare (minst 18 år, utsedd av föreningen) ska vara närvarande"
+      - "Aktiviteten ska registreras i kommunens evenemangskalender"
+      - "Föreningen ska delta i eventuella förberedande möten/utbildningar som förvaltningen arrangerar"
+      - "Ges inte till ordinarie föreningsverksamhet som redan stöds av andra bidrag"
+    belopp: null
+    sen_ansokan: "Sent inkommen ansökan hanteras inte"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html"
+    anteckning: "Två ansökningsfönster: 15 mars–30 april (sommarlov) och 15 september–31 oktober (jullov). Aktiviteter på landsbygden prioriteras."
+  - id: "enkoping-studieforbund"
+    namn: "Bidrag till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund godkända av Folkbildningsrådet, anslutna till Uppsala läns bildningsförbund, med verksamhet i Enköpings kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Endast verksamhet bedriven inom Enköpings kommun ligger till grund för bidraget"
+      - "Ansökan ska innehålla redovisning av föregående verksamhetsårs studiecirklar, annan folkbildningsverksamhet och kulturprogram, samt underskrivet kommunsammandrag"
+      - "Verksamhetsberättelse, verksamhetsplan, utvärderingsplan och revisionsberättelse ska kunna presenteras vid förfrågan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://enkoping.se/download/18.3074f6241931f5d6fa2b1ac/1776691502470/regler-stod-civilsamhallet.pdf"
+    anteckning: "Fördelas enligt Folkbildningsrådets volymmåttsmodell (organisationsbidrag, tillgänglighetsbidrag, verksamhetsbidrag/studiecirkel, verksamhetsbidrag/annan folkbildning, verksamhetsbidrag/kulturprogram) — inget fast kronbelopp per förening. Regelverkets §5. Finns inte längre som egen sida på enkoping.se (gammal URL 301-omdirigerar till sok-foreningsbidrag.html-hubben, som i sin tur inte listar studieförbund bland 'Föreningsbidrag du kan söka') — bidraget bekräftas ändå aktivt via det gällande regelverket, se SKRIVET_EJ_I_KALLA-notering i tackning.log."
+  - id: "enkoping-aktivitetsstod-finska"
+    namn: "Aktivitetsstöd för aktiviteter på finska"
+    kategori: ["kultur"]
+    malgrupp: "Föreningar och grupper i Enköpings kommun som vill göra finskt språk och finsk kultur synligt och tillgängligt"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningar kan inte få stöd till sin ordinarie verksamhet"
+      - "Aktiviteten ska vara öppen för alla"
+      - "Prioritet ges till aktiviteter för barn och unga samt till aktivt bruk av det finska språket"
+      - "Ansökan ska beskriva planerad aktivitet, tidpunkt och budget"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka/aktivitetsstod-for-aktiviteter-pa-finska.html"
+    anteckning: "Administreras av Kommunledningsförvaltningen (finskt förvaltningsområde), inte Upplevelseförvaltningen — hittat utanför föreningsbidragens ordinarie sidträd. Ansökan skickas direkt till samordnaren (Irma Aalto) och granskas av Kommunala finska samrådet, inte via Rbok."
+  - id: "enkoping-socialnamndens-verksamhetsbidrag"
+    namn: "Socialnämndens verksamhetsbidrag till frivilliga organisationer"
+    kategori: ["social"]
+    malgrupp: "Föreningar och organisationer som arbetar för att motverka beroende, våld och kriminalitet, minska risker för social utsatthet, eller ge stöd till människor och grupper i utsatt social situation"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-30"]
+    krav:
+      - "Verksamheten ska vara till nytta inom socialnämndens område och komplettera eller stärka dess arbete"
+      - "Föreningen ska dela socialnämndens värderingar, mål och riktlinjer"
+      - "Stadgarna ska visa hur föreningen förhåller sig till alkohol och droger"
+      - "Efter årsmötet ska verksamhetsberättelse och mötesprotokoll skickas in"
+      - "Ansökan ska åtföljas av verksamhetsberättelse, årsmötesprotokoll, årsredovisning och stadgar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/soka-verksamhetsbidrag.html"
+    anteckning: "Administreras av Socialnämnden, inte Upplevelsenämnden — hittat utanför föreningsbidragens ordinarie sidträd. Bidraget gäller ett år i taget, betalas ut i januari påföljande år. Ansökan skickas per post till Socialnämnden, inte via Rbok. Beslut fattas vid nämndens sammanträde i september."
+  - id: "enkoping-vagbidrag"
+    namn: "Kommunalt vägbidrag för enskild väg"
+    kategori: ["ovrig"]
+    malgrupp: "Enskilda väghållare, vägföreningar, vägsamfälligheter och samfällighetsföreningar med ansvar för en enskild väg"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-30"]
+    krav:
+      - "Vägen ska normalt vara 400–1000 meter lång (kortare sidovägar kan godkännas om minst 200 m och minst 400 m från allmän väg; längre vägar kräver statsbidrag)"
+      - "Minst en permanentbostad ska finnas utmed vägen"
+      - "Vägen ska hållas öppen och farbar för allmän trafik"
+      - "Ansökan ska kompletteras med senaste verksamhetsårets mötesprotokoll och årsredovisning för samfällighetsföreningen/vägföreningen"
+      - "Årlig förnyad ansökan krävs"
+    belopp: "6,20 kr per löpmeter (2024 års nivå; räknas upp med konsumentprisindex vid förändring över 20 öre). Vid statsbidrag från Trafikverket täcker kommunen 13 % av det statsbidragsberättigade beloppet (exkl. moms)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://enkoping.se/trafik-och-gator/vagbidrag.html"
+    anteckning: "Administreras av Samhällsbyggnadsförvaltningen, inte Upplevelseförvaltningen — specialkategori (§2.1.5) hittad utanför föreningsbidragens sidträd. Ansökningsperiod 1 mars–30 juni. Digital ansökan via kommunens e-tjänst sedan 2024-03-01. 6,20 kr/löpmeter är senast publicerade nivå (2024) på källsidan vid körningstillfället — möjligen inte uppdaterad för 2026, spot-checkas av Jacob."
+  - id: "enkoping-civilsamhallesstipendium"
+    namn: "Civilsamhällesstipendium"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Individ, grupp eller organisation (inklusive föreningar) med koppling till Enköpings kommun som utfört värdefulla insatser för samhällsutvecklingen"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Kan sökas i eget namn eller nomineras av annan person"
+      - "Bedöms enligt kriterierna hållbarhet, kreativitet, samverkan över sektorsgränser, eller ungdomsinitiativ"
+      - "Ingen redovisningsskyldighet för hur pengarna används"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://enkoping.se/omsorg-och-stod/stiftelser-fonder-och-stipendier/civilsamhallesstipendium.html"
+    anteckning: "Stipendiet kan uttryckligen sökas av 'individ, grupp eller organisation' — inte uteslutet enligt §2.4, till skillnad från kommunens övriga stipendier (idrotts- och kulturstipendium) som riktar sig till enskilda personer. Historiska mottagare inkluderar flera föreningar (t.ex. Paddebo kulturförening 2025, Lagunda hembygdsförening 2024). Ansökningsfönster 15 september–31 oktober. Ansökan/nominering via Rbok. Ett till fyra stipendier delas ut årligen; belopp ej publicerat på källsidan."
+forutsattningar:
+  - id: "enkoping-bidragsberattigad"
+    vad: "Bli godkänd som bidragsberättigad förening"
+    beskrivning: "Föreningen ansöker digitalt via Rbok om att bli bidragsberättigad. Krav: ideell förening registrerad hos Skatteverket med organisationsnummer, av årsmötet beslutade stadgar, demokratiskt vald styrelse, utsedd firmatecknare och revisorer, plusgiro/bankgiro i föreningens namn, minst tio betalande medlemmar, inga skulder till kommunen, allmännyttigt syfte, partipolitiskt och religiöst obunden, ej vinstdrivande verksamhet, och en betydande del av verksamheten genomförd i Enköpings kommun. Riks-, distrikts- och paraplyorganisationer, partipolitiska/religiösa organisationer samt intresseorganisationer för medlemmarnas egna ekonomiska intressen (t.ex. bostadsrätts- och samfällighetsföreningar) kan inte bli bidragsberättigade. Föreningar med barn- och ungdomsverksamhet ska även kunna visa alkohol- och drogpolicy med handlingsplan samt redogöra för hur barnets bästa beaktas."
+    system: "Rbok (kommunens e-tjänst)"
+    ledtid: null
+    ledtid_text: "Ingen publicerad handläggningstid i dagar"
+    giltighet: "Ett år från beslutsdatum, dock inte mer än en månad efter föreningens årsmöte"
+    ordning: 1
+    kalla_url: "https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/innan-din-forening-kan-soka-bidrag.html"
+kommunsiffra:
+  antal_foreningar: 149
+  summa_kr: "119 120"
+  bidragstyp: "Årligt grundstöd (medlemsbaserad del), 2025"
+  utlamnad_datum: "2025-09-04"

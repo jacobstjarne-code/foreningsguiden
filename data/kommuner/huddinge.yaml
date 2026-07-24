@@ -1,0 +1,469 @@
+# Källa verifierad 2026-07-20 mot huddinge.se, regelverket HKF 8020 (antaget av
+# kommunfullmäktige 1992-12-09, senast ändrat 2019-05-13) och kommunens
+# bidragssidor (huvudsidan "Bidrag till föreningar och studieförbund" uppdaterad
+# 2026-02-19 enligt sidan själv). Källkonvergens (RESEARCH_SPEC_v2 §2): täckning
+# fastställd genom regelverket HKF 8020 + kultur- och fritidsförvaltningens
+# bidragssida + separata sidor för funktionsnedsättning/social och miljö.
+# Ansökningsportalen (Actor Smartbook, huddinge.actorsmartbook.se) är inte
+# maskinläsbar för uppräkning (JS-renderad) — täckning bygger på regelverk +
+# redaktionella sidor, se tackning.log-avsnittet nedan.
+#
+# KONFLIKTER (§2.5, nyare källa vinner — webbsidan 2026-02-19 > HKF 8020 2019-05-13):
+# - "Bidrag till arrangemang": HKF 8020 §6.1 anger löpande ansökan (senast två
+#   månader innan arrangemanget). Webbsidan (nyare) anger fyra fasta datum
+#   (1 feb/1 maj/1 sep/1 dec). Webbsidans datum använda.
+# - "Bidrag till fritidsaktiviteter för personer med funktionsnedsättning"
+#   (kultur- och fritidsnämndens variant): HKF 8020 §6.3 anger 15 december och
+#   30 maj. Webbsidan (nyare) anger fyra fasta datum. Webbsidans datum använda.
+# - "Bidrag till lokaler för öppen kulturverksamhet": HKF 8020 §7.4 ("Bidrag
+#   till lokaler för kulturverksamhet") anger upp till 100 % av kostnaden,
+#   deadline 1 december. Webbsidan (nyare) anger 65 % / högst 60 000 kr,
+#   deadline 1 februari. Webbsidans värden använda.
+# - "Hyresersättningsbidrag": HKF 8020 §3.2 anger upp till 100 % av kostnaden,
+#   deadline 15 februari. Webbsidan (nyare) anger 65 % / högst 60 000 kr,
+#   deadline 1 februari. Webbsidans värden använda.
+#
+# SKRIVET_EJ_I_REGELVERK: "Utvecklingsbidrag" och "Lovbidrag" finns på
+# webbsidan men har inte identiska namn i HKF 8020 (närmast §3.3 Projektbidrag/
+# särskilda ungdomssatsningar, som troligen bytt namn efter 2019 utan att
+# regelverket uppdaterats). "Föreningsbidrag för miljöförbättrande insatser"
+# saknar helt motsvarighet i HKF 8020 — ingen egen HKF hittad för detta bidrag.
+#
+# BEKRÄFTADE ENDAST I REGELVERKET (ingen egen webbsida hittad 2026-07-20, men
+# giltiga enligt HKF 8020 källa 1): Vänortsutbyte (§7.5), Verksamhetsbidrag
+# Kommunstyrelsen (§7.1), Bidrag för särskilda åtgärder (§7.2), generellt
+# Startbidrag via Kommunstyrelsen (§7.6).
+#
+# MEDVETET UTESLUTET (§2.4 — individuella priser/stipendier, inte
+# föreningsbidrag för verksamhet): Demokratipriset, Miljöpriset, Karin Boyes
+# litterära pris, Kulturpriset, Idrottspriset, Pris för ideella insatser,
+# Stipendium för unga talanger, Årets pedagog, Socialtjänstens kvalitetspriser,
+# Huddinges arkitekturpris (alla på huddinge.se/organisation-och-styrning/
+# sa-arbetar-vi-med/stipendier-och-priser). Föreningscenter (kontorsservice på
+# huvudbiblioteket) uteslutet — det är en tjänst/lokal, inte ett bidrag.
+# Externa bidrag (Arvsfonden, Idrottslyftet, Kulturrådet, MUCF) uteslutna —
+# annan huvudman än kommunen.
+#
+# EJ HITTADE (specialkategorier, RESEARCH_SPEC_v2 §2.1 punkt 5): inget bidrag
+# till vägföreningar/vägsamfälligheter hittat för Huddinge (sökning gav inga
+# träffar på huddinge.se, endast externa samfällighetsguider). Inget separat
+# bygdegårdsbidrag hittat (Stortorps bygdegård är en kommunal anläggning, inte
+# ett föreningsbidrag). Inga kommunala stiftelser för föreningar hittade.
+# Studieförbund har egna bidragsformer (grundbidrag/arrangemangsbidrag/
+# projektbidrag/fritidsaktiviteter funktionsnedsättning), skrivna som fyra
+# separata bidrag nedan. Kommunen publicerar inga belopp eller specifika
+# deadlines för dessa — deadlines.typ satt till "lopande" med anteckning,
+# aldrig ett gissat datum (§4).
+kommun: "Huddinge"
+kommun_slug: "huddinge"
+lan: "Stockholms län"
+befolkning: 114889
+forvaltning: "Kultur- och fritidsnämnden (huvudsaklig för idrott/kultur/fritid/pensionär), vård- och omsorgsnämnden (funktionsnedsättning), socialnämnden (sociala stöd- och hjälporganisationer) samt kommunstyrelsen (övriga bidrag)"
+ansokningssystem:
+  namn: "Actor Smartbook"
+  url: "https://huddinge.actorsmartbook.se/"
+kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+verifierad: 2026-07-20
+bidrag:
+  - id: "huddinge-utvecklingsbidrag"
+    namn: "Utvecklingsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Idrotts-, kultur- och fritidsföreningar som bedriver barn- och ungdomsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01", "05-01", "09-01", "12-01"]
+    krav:
+      - "Ska starta nya eller utveckla befintliga verksamheter"
+      - "Syftar till att fler barn och unga blir mer fysiskt aktiva och aktiva i föreningslivet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden. Namnet finns inte ordagrant i HKF 8020 — närmast §3.3 Projektbidrag/särskilda ungdomssatsningar; sannolikt omdöpt efter regelverkets senaste ändring 2019."
+  - id: "huddinge-lovbidrag"
+    namn: "Lovbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Idrotts-, kultur- och fritidsföreningar som bedriver barn- och ungdomsverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01", "05-01", "09-01", "12-01"]
+    krav:
+      - "Aktiviteter under skollov"
+      - "Ska vara avgiftsfria och öppna för alla"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden. Namnet finns inte ordagrant i HKF 8020."
+  - id: "huddinge-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "kultur", "ovrig", "funktionsratt"]
+    malgrupp: "Föreningar med minst 15 medlemmar i bidragsberättigad ålder (7–20 år, för personer med funktionsnedsättning 7 år utan övre gräns), huvuddelen bosatta i kommunen"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Bidrag beviljas med ett visst belopp för varje medlem som deltar i en bidragsberättigad sammankomst"
+      - "Högst två aktiviteter per medlem och vecka för 7–9 år, tre för 10–12 år, fyra för 13–20 år (ingen övre gräns för funktionsnedsättning 13+)"
+      - "Sammankomsten ska pågå minst en timme, minst fem bidragsberättigade medlemmar ska delta (minst 3 vid funktionsnedsättning)"
+      - "Föreningen ska föra närvaroregistrering med namn på ledare, deltagare, datum, plats och tid"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Söks i efterhand två gånger per år via aktivitetskort.se. Period 1 jan–30 jun: sista ansökningsdag 25 augusti samma år. Period 1 jul–31 dec: sista ansökningsdag 25 februari påföljande år. Bidragets storlek viktas efter ålder (faktor 1–2,5) och dubbelt/mer för funktionsnedsättning (faktor 2–5). Källa: HKF 8020 §3.1 + webbsida, samstämmiga."
+  - id: "huddinge-pensionarsbidrag"
+    namn: "Bidrag till pensionärsföreningar"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar verksamma i kommunen med minst 15 ålders-, förtids- eller sjukpensionärer som medlemmar"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Bidrag beviljas med ett visst belopp per medlem"
+      - "Förening med minst 50 medlemmar beviljas dessutom ett grundbidrag"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Ansökan avser föregående års verksamhet. Nystartad förening kan söka när som helst under året. Källa: HKF 8020 §4 + webbsida, samstämmiga om struktur (grundbidrag + rörligt), webbsidan ger deadline."
+  - id: "huddinge-arrangemangsbidrag"
+    namn: "Bidrag till arrangemang"
+    kategori: ["idrott", "kultur", "ovrig", "pensionar"]
+    malgrupp: "Pensionärs-, idrotts-, kultur- och fritidsföreningar för publika arrangemang"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01", "05-01", "09-01", "12-01"]
+    krav:
+      - "Arrangemanget ska vara offentligt och komma kommuninvånarna till del"
+      - "Ekonomisk kalkyl för det planerade arrangemanget ska bifogas"
+      - "Rapport med utvärdering och ekonomisk redovisning senast två månader efter genomfört arrangemang"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "KONFLIKT (§2.5): HKF 8020 §6.1 (2019) anger löpande ansökan, senast två månader före arrangemanget. Webbsidan (uppdaterad 2026-02-19, nyare) anger fyra fasta datum — dessa används."
+  - id: "huddinge-fritidsaktiviteter-funktionsnedsattning-kultur"
+    namn: "Bidrag till fritidsaktiviteter för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Pensionärs-, idrotts-, kultur- och fritidsföreningar som bedriver verksamhet för personer med intellektuella och/eller neuropsykiatriska funktionsnedsättningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01", "05-01", "09-01", "12-01"]
+    krav:
+      - "Syftar till att ge personer med intellektuella/neuropsykiatriska funktionsnedsättningar en aktiv fritid till samma kostnad som andra"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden — skiljer sig från grundbidrag/verksamhetsbidrag/hyresbidrag till handikappföreningar (vård- och omsorgsnämnden, se separata poster nedan). KONFLIKT (§2.5): HKF 8020 §6.3 (2019) anger 15 december och 30 maj. Webbsidan (nyare) anger fyra fasta datum — dessa används."
+  - id: "huddinge-verksamhetsbidrag-kultur"
+    namn: "Verksamhetsbidrag till kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som bedriver ett varierat kulturutbud för kommunens invånare"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-01"]
+    krav:
+      - "Föreningen ska bedriva verksamhet som stöder nämndens prioriteringar inom kulturområdet"
+      - "Ansökan ska lämnas innan verksamheten påbörjas, med ekonomisk kalkyl"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Kan beviljas upp till tre år framåt i tiden. Beviljade bidrag betalas ut årsvis i förskott efter redovisning av föregående års verksamhet och resultat. Källa: HKF 8020 §6.2 + webbsida, samstämmiga."
+  - id: "huddinge-verksamhetsbidrag-idrott-fritid"
+    namn: "Verksamhetsbidrag till idrotts- och fritidsföreningar"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Idrotts- och fritidsföreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-01"]
+    krav:
+      - "Kostnader för arvoden, specialutrustning eller riktade insatser"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden. Ej ordagrant namngiven i HKF 8020, men deadline (1 december) matchar mönstret för nämndens verksamhetsbidrag."
+  - id: "huddinge-hyresersattningsbidrag"
+    namn: "Hyresersättningsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Idrotts- och fritidsföreningar med minst 25 medlemmar i åldern 0–20 år bosatta i kommunen (minst 51 % av medlemmarna 7–20 år)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01"]
+    krav:
+      - "Bidrag kan beviljas endast om inte en lämplig kommunal lokal kan upplåtas"
+      - "Medgivande (hyresmedgivande) ska inhämtas från kultur- och fritidsnämnden innan hyresavtal tecknas eller lokalen förvärvas"
+      - "Beviljas inte till sommarhem eller utflyktsstugor"
+    belopp: "Upp till 65 % av skälig kostnad, högst 60 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "KONFLIKT (§2.5): HKF 8020 §3.2 (2019, kallad Hyresbidrag) anger upp till 100 % av kostnaden, deadline 15 februari. Webbsidan (nyare) anger 65 % / högst 60 000 kr, deadline 1 februari — används."
+  - id: "huddinge-lokalbidrag-oppen-kulturverksamhet"
+    namn: "Bidrag till lokaler för öppen kulturverksamhet"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar med hyreskostnader för egen eller hyrd lokal som huvudsakligen används till kulturverksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01"]
+    krav:
+      - "Medgivande ska inhämtas från kultur- och fritidsnämnden innan hyresavtal tecknas eller lokalen förvärvas"
+    belopp: "Upp till 65 % av skälig kostnad, högst 60 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "KONFLIKT (§2.5): HKF 8020 §7.4 (2019, kallad \"Bidrag till lokaler för kulturverksamhet\") anger upp till 100 % av kostnaden, deadline 1 december, beviljas upp till tre år framåt. Webbsidan (nyare) anger 65 % / högst 60 000 kr, deadline 1 februari — används. Möjligen samma bidrag med uppdaterade villkor."
+  - id: "huddinge-anlaggningsbidrag"
+    namn: "Anläggningsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Idrotts-, kultur- och fritidsföreningar som förvaltar egen anläggning"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-01"]
+    krav:
+      - "Beviljas till drift och underhåll (ej om föreningen har hyresbidrag) samt till byggnation och utrustning"
+      - "Bidrag ska sökas och beviljas innan föreningen binder sig för kostnader"
+    belopp: "Upp till 80 % av kostnaderna, högst 80 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Källa: HKF 8020 §7.3 (ingen % eller kr-uppgift i regelverket) + webbsida (ger 80 %/80 000 kr) — komplement, ingen konflikt."
+  - id: "huddinge-vanortsutbyte"
+    namn: "Vänortsutbyte"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar verksamma inom kultur- och fritidsnämndens verksamhetsområde"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Stimulerar utbyte mellan föreningar i Huddinge och föreningar i vänorterna Askim och Vanda"
+      - "Bidrag ges till högst 20 deltagare, gäller både resa till vänort och värdskap"
+      - "Ansökan ska vara inlämnad och bidraget beviljat innan aktiviteten äger rum"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sammantraden.huddinge.se/welcome-sv/namnder-styrelser/kommunfullmaktige/kommunfullmaktige/agenda/rev-bilaga-hkf-8020-foreningsbidragpdf?downloadMode=open"
+    anteckning: "Endast bekräftat i regelverket HKF 8020 §7.5 — ingen egen webbsida hittad 2026-07-20. Administreras av kultur- och fritidsnämnden trots placering under §7 (kommunstyrelsens kapitel)."
+  - id: "huddinge-grundbidrag-funktionsnedsattning"
+    namn: "Grundbidrag till föreningar för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Kommun-, läns- och rikstäckande föreningar för personer med funktionsnedsättning, med säte i Huddinge"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-01"]
+    krav:
+      - "Ansökan ska ange totalt medlemsantal och hur många medlemmar som är bosatta i Huddinge kommun"
+      - "Huvuddelen av medlemmarna ska själva ha funktionsnedsättning"
+      - "Bedriver verksamhet i flera kommuner: antalet medlemmar per kommun ska redovisas"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-foreningar-for-personer-med-funktionsnedsattning-och-sociala-stod--och-hjalporganisationer/"
+    anteckning: "Administreras av vård- och omsorgsnämnden. Ansökan ska lämnas senast 1 juni året före det år ansökan avser. Källa: HKF 8020 §5.1 + webbsida, samstämmiga."
+  - id: "huddinge-verksamhetsbidrag-funktionsnedsattning"
+    namn: "Verksamhetsbidrag till föreningar för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Kommun-, läns- och rikstäckande föreningar för personer med funktionsnedsättning, med säte i Huddinge"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-01"]
+    krav:
+      - "Beloppet beror på föreningens verksamhet — kostnader för möten, resor, utflykter, medlemsmöten, aktiviteter, medlemsvård"
+      - "Ansökningar som gäller belopp över 100 000 kr kräver överläggning mellan förvaltningen och föreningen innan nämnden beslutar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-foreningar-for-personer-med-funktionsnedsattning-och-sociala-stod--och-hjalporganisationer/"
+    anteckning: "Administreras av vård- och omsorgsnämnden. Källa: HKF 8020 §5.2 + webbsida, samstämmiga."
+  - id: "huddinge-hyresbidrag-funktionsnedsattning"
+    namn: "Hyresbidrag till föreningar för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Föreningar för personer med funktionsnedsättning som bedriver regelbunden verksamhet i egen eller hyrd lokal i Huddinge"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Beviljas endast undantagsvis, och endast om inte en lämplig kommunal lokal kan upplåtas"
+      - "Medgivande ska inhämtas från nämnden innan hyresavtal tecknas eller lokalen förvärvas"
+      - "Hänvisas i första hand till kommunens egen lokal för föreningar med funktionsnedsättning"
+    belopp: "Högst 65 % av hyreskostnaden"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-foreningar-for-personer-med-funktionsnedsattning-och-sociala-stod--och-hjalporganisationer/"
+    anteckning: "Administreras av vård- och omsorgsnämnden. Första hyresbidraget kan sökas när som helst under året. Källa: HKF 8020 §5.3."
+  - id: "huddinge-startbidrag-funktionsnedsattning"
+    namn: "Startbidrag till nystartad förening för personer med funktionsnedsättning"
+    kategori: ["funktionsratt"]
+    malgrupp: "Nystartad förening för personer med funktionsnedsättning (ej verksam i Huddinge senaste tre åren), minst 15 medlemmar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas när som helst under året, dock senast sex månader efter att föreningen startat sin verksamhet"
+    belopp: "Högst 2 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://service.huddinge.se/Web/FAQList.aspx?service=AFG"
+    anteckning: "Administreras av vård- och omsorgsnämnden. Beloppet (2 000 kr) från kommunens FAQ-sida för AFG-tjänsten; HKF 8020 §5.4 anger inget belopp. Källa: HKF 8020 §5.4 + FAQ, samstämmiga om villkor."
+  - id: "huddinge-grundbidrag-social"
+    namn: "Grundbidrag till sociala stöd- och hjälporganisationer"
+    kategori: ["social"]
+    malgrupp: "Kommun-, läns- och rikstäckande stöd- och hjälporganisationer inom det sociala området, med säte i Huddinge"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-01"]
+    krav:
+      - "Ansökan ska ange totalt medlemsantal och hur många medlemmar som är bosatta i Huddinge kommun"
+      - "Ska utgöra ett betydelsefullt komplement till socialnämndens verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-sociala-stod--och-hjalporganisationer"
+    anteckning: "Administreras av socialnämnden. Ansökan ska lämnas senast 1 juni året före det år ansökan avser. Källa: HKF 8020 §5.1 + webbsida, samstämmiga."
+  - id: "huddinge-verksamhetsbidrag-social"
+    namn: "Verksamhetsbidrag till sociala stöd- och hjälporganisationer"
+    kategori: ["social"]
+    malgrupp: "Kommun-, läns- och rikstäckande stöd- och hjälporganisationer inom det sociala området, med säte i Huddinge"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-01"]
+    krav:
+      - "Beloppet beror på föreningens verksamhet — kostnader för möten, resor, utflykter, medlemsmöten, aktiviteter, medlemsvård"
+      - "Ansökningar som gäller belopp över 100 000 kr kräver överläggning mellan förvaltningen och föreningen innan nämnden beslutar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-sociala-stod--och-hjalporganisationer"
+    anteckning: "Administreras av socialnämnden. Källa: HKF 8020 §5.2 + webbsida, samstämmiga."
+  - id: "huddinge-hyresbidrag-social"
+    namn: "Hyresbidrag till sociala stöd- och hjälporganisationer"
+    kategori: ["social"]
+    malgrupp: "Sociala stöd- och hjälporganisationer som bedriver regelbunden verksamhet i egen eller hyrd lokal i Huddinge"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Beviljas endast undantagsvis, och endast om inte en lämplig kommunal lokal kan upplåtas"
+      - "Medgivande ska inhämtas från nämnden innan hyresavtal tecknas eller lokalen förvärvas"
+    belopp: "Högst 65 % av hyreskostnaden"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-sociala-stod--och-hjalporganisationer"
+    anteckning: "Administreras av socialnämnden. Källa: HKF 8020 §5.3."
+  - id: "huddinge-startbidrag-social"
+    namn: "Startbidrag till nystartad social stöd- och hjälporganisation"
+    kategori: ["social"]
+    malgrupp: "Nystartad stöd- och hjälporganisation inom det sociala området (ej verksam i Huddinge senaste tre åren), minst 15 medlemmar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas när som helst under året, dock senast sex månader efter att föreningen startat sin verksamhet"
+    belopp: "Högst 2 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://service.huddinge.se/Web/FAQList.aspx?service=AFG"
+    anteckning: "Administreras av socialnämnden. Beloppet (2 000 kr) från kommunens FAQ-sida för AFG-tjänsten. Källa: HKF 8020 §5.4 + FAQ."
+  - id: "huddinge-verksamhetsbidrag-ks"
+    namn: "Verksamhetsbidrag (kommunstyrelsen, övriga bidrag)"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar vars verksamhet inte faller under kultur- och fritidsnämndens, vård- och omsorgsnämndens eller socialnämndens ansvarsområden"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-15"]
+    krav:
+      - "Föreningen ska genom sin verksamhet arbeta för att främja demokratisk utveckling, arbeta förebyggande mot missbruk, kriminalitet och socialt utanförskap, eller stödja personer utsatta för våld eller hot om våld"
+      - "Ska anses utgöra ett betydelsefullt komplement till kommunens verksamhet, bedömt mot kommunens prioriterade mål"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sammantraden.huddinge.se/welcome-sv/namnder-styrelser/kommunfullmaktige/kommunfullmaktige/agenda/rev-bilaga-hkf-8020-foreningsbidragpdf?downloadMode=open"
+    anteckning: "Endast bekräftat i regelverket HKF 8020 §7 och §7.1 — ingen egen webbsida hittad 2026-07-20. Administreras av kommunstyrelsen."
+  - id: "huddinge-sarskilda-atgarder"
+    namn: "Bidrag för särskilda åtgärder"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar enligt de allmänna bidragsbestämmelserna (HKF 8020 §2), prövning av kommunstyrelsen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Syftar till att helt eller delvis stödja särskilda åtgärder som föreningen avser vidta under året"
+      - "Storleken grundar sig på nyttan åtgärderna medför för personer bosatta i Huddinge kommun"
+      - "Utgår till max en åtgärd per verksamhetsår"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sammantraden.huddinge.se/welcome-sv/namnder-styrelser/kommunfullmaktige/kommunfullmaktige/agenda/rev-bilaga-hkf-8020-foreningsbidragpdf?downloadMode=open"
+    anteckning: "Endast bekräftat i regelverket HKF 8020 §7.2 — ingen egen webbsida hittad 2026-07-20. Administreras av kommunstyrelsen. Undantag kan medges från kravet på föreningsregistrering."
+  - id: "huddinge-startbidrag-generellt"
+    namn: "Startbidrag (kommunstyrelsen, generellt för nystartad förening)"
+    kategori: ["ovrig"]
+    malgrupp: "Nystartad förening med minst 15 medlemmar bosatta i kommunen"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Kan sökas när som helst under året, dock senast sex månader efter att föreningen startat sin verksamhet"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://sammantraden.huddinge.se/welcome-sv/namnder-styrelser/kommunfullmaktige/kommunfullmaktige/agenda/rev-bilaga-hkf-8020-foreningsbidragpdf?downloadMode=open"
+    anteckning: "Endast bekräftat i regelverket HKF 8020 §7.6 — ingen egen webbsida hittad 2026-07-20, och belopp ej angivet i regelverket. Skiljer sig från startbidraget till funktionsnedsättning/sociala organisationer (§5.4, 2 000 kr, administreras av vård-omsorg/social) genom att detta administreras av kommunstyrelsen för föreningar generellt."
+  - id: "huddinge-miljobidrag"
+    namn: "Föreningsbidrag för miljöförbättrande insatser"
+    kategori: ["ovrig"]
+    malgrupp: "Registrerade, ideella och demokratiskt uppbyggda föreningar i Huddinge som bedriver klimat-, naturvårds- eller miljöförbättrande aktiviteter"
+    deadlines:
+      typ: "fasta"
+      datum: ["12-31"]
+    krav:
+      - "Föreningen ska bo eller verka i Huddinge kommun och ha organisationsnummer"
+      - "Beviljas inte till affärsdrivande verksamhet, bostadsrättsförening eller en enskild persons intresse"
+      - "Redovisning med ekonomiskt underlag inom två månader efter genomfört projekt"
+    belopp: "1 000–50 000 kr per år, en ansökan per förening och år"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/foreningsbidrag-for-miljoforbattrande-insatser/"
+    anteckning: "Ingen motsvarighet hittad i HKF 8020 eller annan HKF. Kommunen fattar beslut cirka två månader efter att ansökningsperioden stängt. Deadline 31 december avser ansökan för nästkommande års bidrag."
+  - id: "huddinge-studieforbund-grundbidrag"
+    namn: "Grundbidrag till studieförbund"
+    kategori: ["ovrig"]
+    malgrupp: "Studieförbund verksamma i Huddinge kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Baseras på respektive studieförbunds genomförda studietimmar och antal unika deltagare föregående år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden, ansökan digitalt via Actor Smartbook med BankID. Källan publicerar inget specifikt ansökningsdatum eller belopp — satt till löpande i brist på angivet datum, gissa aldrig ett värde (§4)."
+  - id: "huddinge-studieforbund-arrangemangsbidrag"
+    namn: "Arrangemangsbidrag till studieförbund"
+    kategori: ["ovrig"]
+    malgrupp: "Studieförbund verksamma i Huddinge kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "För offentliga arrangemang"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden, ansökan digitalt via Actor Smartbook med BankID. Inget specifikt ansökningsdatum eller belopp publicerat."
+  - id: "huddinge-studieforbund-projektbidrag"
+    namn: "Projektbidrag till studieförbund"
+    kategori: ["ovrig"]
+    malgrupp: "Studieförbund verksamma i Huddinge kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "För projekt över en längre tidsperiod"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden, ansökan digitalt via Actor Smartbook med BankID. Inget specifikt ansökningsdatum eller belopp publicerat."
+  - id: "huddinge-studieforbund-fritidsaktiviteter"
+    namn: "Bidrag till fritidsaktiviteter för personer med funktionsnedsättning (studieförbund)"
+    kategori: ["funktionsratt"]
+    malgrupp: "Studieförbund verksamma i Huddinge kommun med verksamhet för personer med funktionsnedsättning"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Endast verksamhet i Huddinge kommun"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/bidrag-stod-och-stipendier/bidrag-till-foreningar-och-studieforbund/"
+    anteckning: "Administreras av kultur- och fritidsnämnden, ansökan digitalt via Actor Smartbook med BankID. Inget specifikt ansökningsdatum eller belopp publicerat."
+forutsattningar:
+  - id: "huddinge-foreningsregistrering"
+    vad: "Registrera föreningen i Huddinge kommuns föreningsregister"
+    beskrivning: "Föreningen ska vara registrerad i Huddinge kommuns föreningsregister för att kunna söka bidrag. Kräver bland annat vald styrelse, årsmötesantagna stadgar, organisationsnummer, bankkonto/plusgiro/bankgiro, minst 51 % av medlemmarna bosatta i kommunen samt att föreningen tar avstånd från våld och rasism och verkar för integration och jämställdhet."
+    system: "Föreningsregistret (huddinge.se)"
+    ledtid: null
+    ledtid_text: "Ingen handläggningstid publicerad"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.huddinge.se/fritid-natur-och-kultur/foreningar-och-bidrag/starta-forening/"
+kommunsiffra: null

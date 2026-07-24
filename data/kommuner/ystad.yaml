@@ -1,0 +1,399 @@
+# Källa verifierad 2026-07-23 mot ystad.se (huvuddomän, CMS bytt sommaren 2026 —
+# äldre www.ystad.se/fritid/... och www.ystad.se/kommun--politik/... URL:er ger 404,
+# nya strukturen ligger under ystad.se/uppleva-och-gora/..., /omsorg-och-stod/...,
+# /samhallsutveckling-och-trafik/... och /kommun-och-politik/...).
+#
+# Täckning fastställd genom källkonvergens (RESEARCH_SPEC_v2 §2): regelverket
+# "Bidragsbestämmelser för föreningar och studieförbund" (Kultur- och fritidsnämnden,
+# 1 januari 2025) och ansökningsportalen FRI (ystad.fri-go.se/bidrag/, server-
+# renderad och fullt extraherbar — INTE JS-sköld som i Växjö/Halmstad) konvergerar
+# fullständigt: regelverkets innehållsförteckning listar exakt samma 14 bidrag som
+# portalens 15:e post ("Aktivitetsstöd", type=37) är en dubblett av "Lokalt
+# aktivitetsstöd" (type=8) — ordagrant identisk Ändamål/Villkor/Utformning-text,
+# saknas i regelverkets innehållsförteckning. Skriven en gång, se tackning.log.
+# Ytterligare "Riktlinjer för priser, stipendier och utmärkelser" (Kultur- och
+# fritidsnämnden, 21 maj 2025) konvergerar fullständigt med webbsidorna för
+# kulturpris/idrottspris/kulturstipendium/idrottsstipendium (belopp, datum).
+# Utöver Kultur- och fritidsnämndens bidrag: separata bidragsspår hos Socialnämnden
+# (föreningsbidrag), Samhällsbyggnadsnämnden (samhällsbyggnadsbidrag) och
+# Samhällsutveckling och trafik (bidrag till enskilda vägar) — se tackning.log.
+# Spot-checkas av Jacob före publik deploy (leveransordning steg 4).
+kommun: "Ystad"
+kommun_slug: "ystad"
+lan: "Skåne län"
+befolkning: 32188
+forvaltning: "Kultur- och fritidsförvaltningen, Social- och omsorgsförvaltningen samt Samhällsbyggnadsförvaltningen"
+ansokningssystem:
+  namn: "FRI Webb-Bidrag (Idavall Data)"
+  url: "https://ystad.fri-go.se/bidrag/"
+kalla_url: "https://ystad.se/uppleva-och-gora/foreningsliv/foreningsbidrag"
+verifierad: 2026-07-23
+bidrag:
+  - id: "ystad-lokalt-aktivitetsstod"
+    namn: "Lokalt aktivitetsstöd (LOK-stöd)"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet, med säte och verksamhet i Ystads kommun, för medlemmar folkbokförda i Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Sammankomsten ska vara en ledarledd gruppaktivitet för åldersgruppen 4–20 år"
+      - "Ledare ska vara utsedd av föreningen och minst 13 år"
+      - "Minst 3 bidragsberättigade deltagare utöver ledare, minst 45 minuters sammankomst"
+      - "Gäller inte matcher, tävlingar eller uppvisningar"
+      - "Närvaroredovisning ska föras och sparas i minst 10 år"
+    belopp: "Max 9 kr/deltagare och tillfälle. Max två tillfällen/vecka för 4–12 år, tre tillfällen/vecka för 13–20 år"
+    sen_ansokan: "Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=8&year=2026"
+    anteckning: "Redovisningsperioder 1/1–30/6 (ansökan senast 25/8) och 1/7–31/12 (ansökan senast 25/2). Idrottsföreningar anslutna till RF redovisar direkt dit; övriga använder Närvaro GO. Portalen listade även en identisk post 'Aktivitetsstöd' (type=37) med ordagrant samma text — bedömd som portaldublett, ej med i kommunens regelverk, se tackning.log."
+  - id: "ystad-ledarutbildningsbidrag"
+    namn: "Ledarutbildningsbidrag"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Alla bidragsberättigade föreningar i Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Utbildningen ska vara kopplad till föreningens kärnverksamhet"
+      - "Inget bidrag om deltagaren har ekonomisk vinning av utbildningen"
+      - "Kursprogram och kursintyg ska bifogas ansökan (sker i efterhand)"
+    belopp: "Erlagd kursavgift, max 1 500 kr per kurs och deltagare. Max 7 500 kr/år och förening"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=20&year=2026"
+    anteckning: "Ansökningstillfälle 25/2 avser perioden 1/7–31/12 föregående år; 25/8 avser 1/1–30/6 pågående år. Kan även gå till studiematerial vid interna studiecirklar."
+  - id: "ystad-ledarersattningsbidrag"
+    namn: "Ledarersättningsbidrag"
+    kategori: ["idrott", "funktionsratt"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet för deltagare med särskilda behov"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ledarledd verksamhet för barn och ungdomar med särskilda behov, eller inkludering av dessa i befintliga/nystartade grupper"
+      - "Ansökan ska göras innan första aktivitetstillfället"
+      - "Maximalt en ledare per grupp kan få bidraget"
+    belopp: "100 kr per tillfälle, max 3 000 kr per ledare och år"
+    sen_ansokan: "Rapportering ska ske senast 15 december det aktuella året"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=22&year=2026"
+    anteckning: null
+  - id: "ystad-lovbidrag"
+    namn: "Lovbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Alla föreningar som under skolans lov arrangerar gratis aktiviteter för barn och unga 6–15 år"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska vara gratis och öppen för alla i åldersgruppen, utan krav på medlemskap eller tidigare färdigheter"
+      - "Aktiviteten ska genomföras i Ystads kommun"
+      - "Rapportering i efterhand med deltagarantal uppdelat på kön"
+    belopp: "Ingen övre gräns publicerad. Ansökningar prioriteras tills budgeten för året tar slut"
+    sen_ansokan: "Sista ansökningsdag är tre veckor innan aktuellt lovs första dag"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=26&year=2026"
+    anteckning: "Budgeten kan ta slut under året, varpå inga fler ansökningar godkänns det året."
+  - id: "ystad-projektstod-mangfald"
+    namn: "Projektstöd – mångfald"
+    kategori: ["ovrig", "funktionsratt"]
+    malgrupp: "Alla föreningar, för verksamhet som ökar delaktighet bland underrepresenterade målgrupper"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Ansökan ska ske innan projektet startar, med projektbeskrivning och budget"
+      - "Barnrättsplan krävs vid barn- och ungdomsverksamhet (annars 'ej tillämpligt')"
+      - "Projektrapportering i efterhand med utvärdering"
+    belopp: "Ingen övre gräns publicerad"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=23&year=2026"
+    anteckning: null
+  - id: "ystad-driftsbidrag"
+    namn: "Driftsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som äger en egen idrotts- eller fritidsanläggning (barn- och ungdomsföreningar prioriteras)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Grundas på föregående års bokslut och faktiska kostnader"
+      - "Barnrättsplan krävs vid barn- och ungdomsverksamhet"
+      - "Endast driftskostnader (räntor, försäkring, uppvärmning, el, vatten m.m.) och visst underhåll är bidragsgrundande"
+    belopp: "Barn- och ungdomsföreningar max 90 % av godkända kostnader. Övriga föreningar max 100 kr/medlem eller max 45 % av kostnader (lägsta beloppet gäller). Max 350 000 kr/år"
+    sen_ansokan: "Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=27&year=2026"
+    anteckning: "Ansökan avser föregående kalenderår och ska vara inne senast 30 april året efter."
+  - id: "ystad-hyresbidrag"
+    namn: "Hyresbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som hyr lokal/anläggning (barn- och ungdomsföreningar prioriteras)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Grundas på föregående års bokslut och faktiska kostnader"
+      - "Barnrättsplan krävs vid barn- och ungdomsverksamhet"
+      - "Kultur- och fritidsförvaltningen kan neka om lokalen inte bedöms nödvändig för verksamheten"
+    belopp: "Barn- och ungdomsföreningar max 75 % av godkända kostnader. Övriga föreningar max 100 kr/medlem eller max 45 % av kostnader (lägsta beloppet gäller). Max 50 000 kr/år"
+    sen_ansokan: "Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=25&year=2026"
+    anteckning: "Ansökan avser föregående kalenderår och ska vara inne senast 30 april året efter."
+  - id: "ystad-investeringsbidrag"
+    namn: "Investeringsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Alla föreningar som äger eller hyr (nyttjanderätt minst 10 år) en anläggning med kontinuerlig verksamhet (barn- och ungdomsföreningar prioriteras)"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-01"]
+    krav:
+      - "Föreningen ska ha bedrivit verksamhet i minst 12 månader"
+      - "Investeringen får inte påbörjas innan ansökan mottagits"
+      - "Ska även söka statligt eller annat bidrag om möjligt"
+      - "Anbud/offert, tidsplan och finansieringsplan ska bifogas"
+    belopp: "Ungdoms-/handikappföreningar: 40 % av kostnad upp till 300 000 kr, 10 % därutöver, max 1 500 000 kr; teknisk utrustning 25 % upp till 125 000 kr. Övriga föreningar: 20 %/5 %, max 1 500 000 kr; teknisk utrustning 20 % upp till 100 000 kr. Ingen bidrag under 20 000 kr"
+    sen_ansokan: "Investeringar under 50 000 kr söks löpande; över 50 000 kr senast 1 maj"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=10&year=2026"
+    anteckning: "Återbetalningsskyldighet vid avyttring/flytt inom 10 år (fastighet) respektive 5 år (maskin/fordon) efter utbetalning."
+  - id: "ystad-grundbidrag"
+    namn: "Grundbidrag"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Handikapp- och pensionärsföreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Bidraget grundas på antalet medlemmar vid ansökningsdatum"
+    belopp: "Max 20 kr per medlem och år, dock högst föreningens redovisade kostnader under gångna verksamhetsåret"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=13&year=2026"
+    anteckning: null
+  - id: "ystad-arligt-verksamhetsbidrag"
+    namn: "Årligt verksamhetsbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Väletablerade kulturföreningar av stor konstnärlig och kulturpolitisk betydelse för Ystads kommun (barn- och ungdomsverksamhet prioriteras)"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-01"]
+    krav:
+      - "Föreningen och verksamheten ska vara väl etablerad, dokumenterad och känd för allmänheten — nystartade föreningar hänvisas till arrangemangs-/projektbidrag"
+      - "Verksamheten ska huvudsakligen bestå av offentliga/publika arrangemang"
+      - "Representanter ska årligen delta i möte med förvaltningen"
+      - "Kan inte kombineras med arrangemangs-/projektbidrag samma år (undantag LOK-stöd)"
+    belopp: "Max 40 000 kr per år och förening"
+    sen_ansokan: "Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening (gäller redovisning, senast 15 februari)"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=33&year=2026"
+    anteckning: "Kultur- och fritidsnämnden beslutar i december vilka föreningar som får bidrag för nästkommande år."
+  - id: "ystad-arrangemangs-och-projektbidrag"
+    namn: "Arrangemangs- och projektbidrag"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar som genomför enstaka offentliga arrangemang/projekt i Ystads kommun (barn- och ungdomsverksamhet prioriteras)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara godkänd som bidragsberättigad av kultur- och fritidsnämnden"
+      - "Balanserad budget för arrangemanget/projektet"
+      - "Inget bidrag till arrangemang direkt kopplade till högtider (t.ex. midsommar, nationaldagen)"
+      - "Redovisning senast två månader efter genomfört arrangemang"
+    belopp: "Lägst 5 000 kr, högst 50 000 kr per arrangemang/projekt. Max 50 % av godkända kostnader"
+    sen_ansokan: "Handläggningstid max fem veckor. Avdrag 50 %/100 % vid sen redovisning"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=34&year=2026"
+    anteckning: null
+  - id: "ystad-landsbygdsbidrag"
+    namn: "Landsbygdsbidrag"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Alla föreningar som skapar kultur- och fritidsarrangemang/utvecklingsprojekt på landsbygden, samt föreningar som äger samlingslokaler anslutna till riksorganisation (t.ex. Bygdegårdarnas riksförbund, Folkets hus och parker)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Föreningen ska vara godkänd som bidragsberättigad av kultur- och fritidsnämnden"
+      - "Samlingslokal ska ligga på landsbygden, vara öppen och tillgänglig för alla"
+      - "Bidrag till samlingslokaler grundas på föregående års bokslut"
+    belopp: "Arrangemang/projekt: max 50 % av godkända kostnader. Samlingslokaler: max 50 % av godkända kostnader, högst 60 000 kr/år"
+    sen_ansokan: "Ansökan för arrangemang/projekt görs löpande (handläggningstid max fem veckor); för samlingslokal senast 30 april året efter. Avdrag 50 %/100 % vid försening"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=35&year=2026"
+    anteckning: "Deadline 04-30 avser samlingslokal-delen av bidraget; arrangemangs-/projektdelen är löpande."
+  - id: "ystad-dialogbidrag-studieforbund"
+    namn: "Dialogbidrag för studieförbund"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Studieförbund med verksamhet i Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-31"]
+    krav:
+      - "Samverkansavtal tecknas årsvis med kultur- och fritidsförvaltningen (uppdrag, fokusområden, mål, uppföljning)"
+      - "Årlig verksamhetsplan och ekonomisk redovisning för föregående år"
+      - "Representanter ska medverka vid minst två möten per år med förvaltningen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=36&year=2026"
+    anteckning: "Ansökan görs via föreningsportalen. Avtal tecknas under hösten, medel betalas ut i maj året därpå."
+  - id: "ystad-projektbidrag-studieforbund"
+    namn: "Projektbidrag för studieförbund"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Studieförbund med verksamhet i Ystads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektet ska vara avgiftsfritt för deltagarna"
+      - "Ansökan ska göras innan projektet startar"
+      - "Slutredovisning senast två månader efter projekttidens utgång"
+    belopp: "30 % av det totala anslagna bidraget för studieförbund utgår som projektbidrag. Förskott upp till 90 % möjligt för projekt över 50 000 kr"
+    sen_ansokan: "Handläggningstid max fem veckor"
+    kalla_url: "https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=24&year=2026"
+    anteckning: null
+  - id: "ystad-kulturpris"
+    namn: "Kulturpris"
+    kategori: ["kultur"]
+    malgrupp: "Enskilda personer, föreningar, institutioner, företag eller organisationer som bor, verkar eller har stark koppling till Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-25"]
+    krav:
+      - "Belönar en samlad kulturgärning som bidragit till att berika kulturlivet i Ystads kommun"
+      - "Nominering lämnas skriftligen till kultur- och fritidsförvaltningen av enskild person eller organisation"
+      - "Anställda i Ystads kommun/kommunalförbund/kommunalt bolag kan inte nomineras för sitt ordinarie arbete"
+    belopp: "30 000 kronor (kan delas mellan flera mottagare)"
+    sen_ansokan: "Förslag som kommit in efter sista ansökningsdag behandlas inte"
+    kalla_url: "https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/kulturpriset"
+    anteckning: "Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser (Kultur- och fritidsnämnden, 21 maj 2025). Utdelat sedan 1965."
+  - id: "ystad-idrottspris"
+    namn: "Idrottspris"
+    kategori: ["idrott"]
+    malgrupp: "Enskilda personer, föreningar, institutioner, företag eller organisationer som bor, verkar eller har stark koppling till Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-25"]
+    krav:
+      - "Belönar en samlad gärning eller särskilt utmärkande prestation inom idrottslivet i Ystads kommun"
+      - "Idrotten personen/gruppen tillhör ska vara ansluten till Riksidrottsförbundet"
+      - "Anställda i Ystads kommun/kommunalförbund/kommunalt bolag kan inte nomineras för sitt ordinarie arbete"
+    belopp: "30 000 kronor (kan delas mellan flera mottagare)"
+    sen_ansokan: "Förslag som kommit in efter sista ansökningsdag behandlas inte"
+    kalla_url: "https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/idrottspriset"
+    anteckning: "Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser (Kultur- och fritidsnämnden, 21 maj 2025)."
+  - id: "ystad-kulturstipendium"
+    namn: "Kulturstipendium"
+    kategori: ["kultur"]
+    malgrupp: "Ung kulturutövare, förening eller organisation som arbetar med kultur för unga inom Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-25"]
+    krav:
+      - "Stark koppling till Ystads kommun"
+      - "Ansökan görs själv, med arbetsprover eller motsvarande underlag som stöd för bedömningen"
+    belopp: "10 000 kronor"
+    sen_ansokan: "Ansökningar som kommit in efter sista ansökningsdag behandlas inte"
+    kalla_url: "https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/kulturstipendiet"
+    anteckning: "Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser (Kultur- och fritidsnämnden, 21 maj 2025)."
+  - id: "ystad-idrottsstipendium"
+    namn: "Idrottsstipendium"
+    kategori: ["idrott"]
+    malgrupp: "Ung idrottsutövare, förening eller organisation som arbetar med idrott för unga inom Ystads kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["09-25"]
+    krav:
+      - "Stark koppling till Ystads kommun"
+      - "Ansökan görs själv, med arbetsprover eller motsvarande underlag som stöd för bedömningen"
+    belopp: "10 000 kronor"
+    sen_ansokan: "Ansökningar som kommit in efter sista ansökningsdag behandlas inte"
+    kalla_url: "https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/idrottsstipendiet"
+    anteckning: "Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser (Kultur- och fritidsnämnden, 21 maj 2025)."
+  - id: "ystad-landsbygdspriset"
+    namn: "Landsbygdspriset"
+    kategori: ["ovrig"]
+    malgrupp: "Enskilda personer, föreningar, företag eller organisationer som bidragit till landsbygdens utveckling i Ystads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ska bo eller verka i Ystads kommun"
+      - "Anställda i Ystads kommun/kommunalförbund/kommunalt bolag kan inte nomineras för sitt ordinarie arbete"
+      - "Vinnaren utses av kommunstyrelsen"
+    belopp: "10 000 kronor samt diplom"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.se/samhallsutveckling-och-trafik/landsbygdsutveckling/landsbygdspriset"
+    anteckning: "Delas ut årligen (vid kommunfullmäktiges augustisammanträde) men sidan anger inget fast nomineringsdatum — nomineringsperioden för 2026 var stängd vid verifieringstillfället. Satt till löpande i väntan på publicerat datum, se tackning.log."
+  - id: "ystad-hallbarhetspriset"
+    namn: "Hållbarhetspriset"
+    kategori: ["ovrig"]
+    malgrupp: "Enskilda personer, föreningar, institutioner, företag eller organisationer som bor eller verkar i Ystads kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Initiativ inom miljömässig, social och/eller ekonomisk hållbarhet"
+      - "Anställda i Ystads kommun/kommunalförbund/kommunala bolag kan inte nomineras för sitt ordinarie arbete"
+      - "Pristagare utses av kommunstyrelsens arbetsutskott"
+    belopp: "10 000 kronor samt diplom"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.se/kommun-och-politik/sa-arbetar-ystads-kommun/hallbarhet/hallbarhetspriset"
+    anteckning: "Nominering för 2026 var öppen vid verifieringstillfället, men sidan anger inget fast öppnings-/stängningsdatum. Satt till löpande, se tackning.log."
+  - id: "ystad-foreningsbidrag-socialnamnden"
+    namn: "Föreningsbidrag (Socialnämnden)"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Föreningar och organisationer aktiva inom social omsorg, vars verksamhet kompletterar Socialnämndens arbete"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-30"]
+    krav:
+      - "Minst 10 registrerade medlemmar"
+      - "Demokratiskt uppbyggd organisation med styrelse, stadgar och revisorer"
+      - "Religiöst och partipolitiskt oberoende, öppen verksamhet för alla"
+      - "Årsmöte med godkänd verksamhets-, kassa- och revisionsberättelse, årlig medlemsavgift"
+      - "Föreningen ska vara i behov av pengar — ingen kapitalbindning accepteras"
+      - "Ansökan ska innehålla plan för tillgänglighet (rörelsehinder, nedsatt orienteringsförmåga, hörsel m.m.)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.se/omsorg-och-stod/stiftelser-fonder-och-foreningsbidrag/foreningsbidrag"
+    anteckning: "Regler antagna av Socialnämnden 2018-09-20 § 133. Bidraget är selektivt — varje ansökan prövas individuellt utifrån kommuninvånarnas behov, nämndens nytta, antal medlemmar/deltagare och ekonomiskt behov. Inget digitalt ansökningssystem angivet."
+  - id: "ystad-samhallsbyggnadsbidrag"
+    namn: "Samhällsbyggnadsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Byalag och intresseföreningar i kommunens byar och orter"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Åtgärden ska utföras på mark som byn/byborna har rådighet över, inte kommunal mark"
+      - "Åtgärden ska vara tillgänglig för många och hållbar minst 1–3 år"
+      - "Åtgärden ska utföras samma år som bidraget söks"
+      - "Sökande ansvarar själv för eventuella tillstånd (t.ex. bygglov, strandskyddsdispens)"
+      - "Fotodokumenterad redovisning till samhällsbyggnadsförvaltningen senast årets slut"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.se/samhallsutveckling-och-trafik/landsbygdsutveckling/bidrag-och-stod-till-landsbygdsutveckling/samhallsbyggnadsbidrag"
+    anteckning: "Samhällsbyggnadsnämnden avsätter årligen medel sedan 2020. Exempel på åtgärder: gångstigar, bänkar, lekutrustning, hjärtstartare, belysning. Varken belopp per bidrag eller fast ansökningsdatum är publicerat — bedömning görs av samhällsbyggnadsförvaltningen utifrån syfte, tidigare tilldelning och genomförbarhet."
+  - id: "ystad-bidrag-enskilda-vagar"
+    namn: "Bidrag till enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Fast boende (folkbokförd) på fastighet längs enskild väg i Ystads kommun. Vid flera boende längs vägen ska väghållningen vara ordnad genom lagakraftvunnen förrättning (samfällighet) eller kommungodkänd överenskommelse"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-31"]
+    krav:
+      - "Vägen ska hållas i gott skick och vara framkomlig för motorfordon året om"
+      - "Vägen ska vara minst 200 meter (bidrag utgår ej för de första 200 metrna)"
+      - "Ej bidrag för väg helt/delvis inom planlagt område eller till sommarhus"
+      - "Endast en väg per fastighet vid flera utfarter"
+    belopp: "Icke statsbidragsberättigade vägar: 3,60 kr/m (ej de första 200 m). Statsbidragsberättigade vägar: max 40 % av Trafikverkets beräknade driftkostnad (statligt + kommunalt bidrag max 100 % tillsammans)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.se/samhallsutveckling-och-trafik/trafik-gator-och-torg/drift-och-underhall/bidrag-till-enskilda-vagar"
+    anteckning: "Utbetalning sker senast i juni året efter det kalenderår bidraget avser. Ansökan sker elektroniskt (ext.ystad.se/s/enskildvag). Administreras av Samhällsutveckling och trafik, ej av kultur- och fritidsnämndens FRI-system. Kultur- och fritidsnämndens egna bidragsbestämmelser undantar uttryckligen vägföreningar/vägsamfälligheter från DERAS bidrag — detta är alltså ett separat, fristående vägbidragsspår hos en annan nämnd. Gränsdragningen mot att bidraget formellt riktas till en 'fast boende' snarare än en förening/samfällighet som juridisk sökande diskuteras i tackning.log."
+    # OBS: se tackning.log — gränsfall bedömt enligt §2.6, ej en ren MEDVETET_UTESLUTET-kategori.
+  - id: "ystad-horney-smithska-stiftelsen"
+    namn: "Horney-Smithska stiftelsen"
+    kategori: ["social", "pensionar"]
+    malgrupp: "Organisationer och föreningar med anknytning till Ystad vars verksamhet syftar till att främja enskildas sociala behov (stiftelsen delar också ut medel till enskilda behövande tjänstemän/pensionärer i Ystad stad och deras familjemedlemmar)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska ha anknytning till Ystad och syfta till att främja enskildas sociala behov"
+      - "Inkomstdeklaration och person-/familjebevis ska bifogas ansökan"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/ovriga-stiftelser"
+    anteckning: "Skriven som samlad post per RESEARCH_SPEC §2.7 — enda av Ystads kommunala stiftelser/fonder (utöver de rena privatpersons-fonderna, se tackning.log för uteslutna) som uttryckligen kan gå till organisationer/föreningar. 2025 års ansökningsperiod gick ut 30 september; sidan anger inte uttryckligen att detta är ett fast årligt datum, därför satt till löpande."
+forutsattningar: []

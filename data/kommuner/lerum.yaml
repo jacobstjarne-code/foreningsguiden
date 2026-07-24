@@ -1,0 +1,354 @@
+# Källa verifierad 2026-07-23 mot lerum.se. Täckning fastställd via
+# källkonvergens (RESEARCH_SPEC_v2 §2): fem antagna regelverks-PDF:er
+# (fritid KFN23.62, kultur KFN23.61, stöd och omsorg SON23.4,
+# centrumföreningar KS24.180, nattvandring KS25.146) plus en sjätte
+# nyligen antagen riktlinje (våldsutsatta KS25.414, beslutad 2026-02-26,
+# publicerad som HTML-sida i författningssamlingen, inte PDF) korsverifierade
+# mot kommunens levande bidragssidor under kultur-och-fritid samt
+# omsorg-och-stod. Ansökningssystemet har bytt namn: regelverken (2024-2025)
+# anger genomgående "Rbok"; den äldre portalen fri.lerum.se (Webbidrag/FRI,
+# senast synlig i sökindex med årtal 2023) svarar inte längre
+# (connect ECONNREFUSED vid hämtning 2026-07-23) och är ersatt av
+# lerum.rbok.se, som är BankID-inloggad och JS-renderad
+# (EJ_EXTRAHERBAR för bidragsuppräkning). Se tackning.log och
+# konflikter.log, avsnitt LERUM, för fullständig avstämning. Belopp
+# angivna i "prisbasbelopp" är omräknade med 2026 års prisbasbelopp
+# (59 200 kr, Regeringen.se/SCB, oberoende verifierat). Spot-checkas av
+# Jacob före publik deploy.
+kommun: "Lerum"
+kommun_slug: "lerum"
+lan: "Västra Götalands län"
+befolkning: 43570
+forvaltning: "Sektor Kommunledning och verksamhetsstöd (kultur- och fritidsenheterna), Sektor stöd och omsorg, Kommunstyrelsen samt Sektor samhällsbyggnad"
+ansokningssystem:
+  namn: "Rbok (kommunens bokning- och bidragssystem)"
+  url: "https://lerum.rbok.se/"
+kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier"
+verifierad: 2026-07-23
+bidrag:
+  - id: "lerum-aktivitetsstod"
+    namn: "Kommunalt aktivitetsstöd"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Idrotts-, intresse-, scout- och friluftsföreningar med ledarledd verksamhet för 7–25-åringar (ingen övre åldersgräns för grupper med funktionsnedsättning)"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-25", "08-25"]
+    krav:
+      - "Aktivitet ska vara ledarledd, minst 3 stödberättigade deltagare utöver ledare, minst 45 minuter"
+      - "Stöd utgår för maximalt 20 deltagare per ledare; ledaren ska vara minst 13 år"
+      - "Stöd per deltagare följer Riksidrottsförbundets kriterier (avtrappning vid tillfälle 3–5 per vecka)"
+      - "Närvaro för deltagare och ledare ska redovisas i Rbok"
+    belopp: null
+    sen_ansokan: "1–7 dagar sent: avdrag 25%. 7–21 dagar: avdrag 50%. 22–42 dagar: avdrag 75%. Senare än 43 dagar: avslag."
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/stod-till-foreningar-inom-idrott-och-fritid"
+    anteckning: "Beloppet per ledar- och deltagartillfälle fastställs årligen av fritidschef utifrån budget — inget fast kronbelopp publicerat."
+  - id: "lerum-verksamhetslokal"
+    namn: "Stöd verksamhetslokal"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med egen eller hyrd verksamhetslokal för sin huvudsakliga verksamhet för 7–25-åringar"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Bygger på föregående års lokalkostnader (uppvärmning/el, vatten, räntor, hyra, försäkring)"
+      - "Kommunen prövar först om en kommunal lokal kan användas istället"
+      - "Förening som inte tidigare fått stödet ska först söka förhandsbesked via Rbok"
+    belopp: "Max 75% av godkända lokalkostnader, högst 500 kr per medlem 7–25 år. Maxbelopp fastställs årligen av fritidschef men överstiger aldrig två prisbasbelopp (118 400 kr 2026)."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/stod-till-foreningar-inom-idrott-och-fritid"
+    anteckning: null
+  - id: "lerum-utvecklingsstod-fritid"
+    namn: "Utvecklingsstöd (fritid)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Fritidsföreningar (7–25 år) som arbetar med utvecklingsprojekt: nya verksamheter, ledarrekrytering, ungas delaktighet, försöksverksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Beviljas inte för ordinarie verksamhet eller aktiviteter som redan får aktivitetsstöd"
+      - "Redovisning senast ett år efter beviljat stöd, annars återbetalas 100%"
+      - "Ny ansökan kan göras först när föregående utvecklingsstöd är redovisat"
+    belopp: "Max ett prisbasbelopp per förening (59 200 kr 2026)"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/stod-till-foreningar-inom-idrott-och-fritid"
+    anteckning: null
+  - id: "lerum-investeringsstod-fritid"
+    namn: "Investeringsstöd (fritid)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar som äger eller har längre hyreskontrakt på sin anläggning (verksamhet för 7–25 år)"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Gäller renoveringar, tillbyggnader, nybyggnation, större fast utrustning och inventarier"
+      - "Beviljas inte för förbrukningsmaterial, redan genomförda investeringar eller kommunala lokaler"
+      - "Redovisas i Rbok samma år som beslutet gäller, med fakturor/verifikationer"
+    belopp: "Max 80% av investeringskostnaden, högst två prisbasbelopp (118 400 kr 2026)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/stod-till-foreningar-inom-idrott-och-fritid"
+    anteckning: null
+  - id: "lerum-startstod-fritid"
+    namn: "Startstöd (fritid)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Nybildade fritidsföreningar med verksamhet för 7–25-åringar"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Intyg om godkännande av riksorganisation eller av kommunen"
+      - "Stadgar, verksamhetsplan och protokoll från konstituerande möte"
+      - "Registrering i Rbok"
+    belopp: "3 000 kr"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/stod-till-foreningar-inom-idrott-och-fritid"
+    anteckning: null
+  - id: "lerum-verksamhetsstod-kultur"
+    namn: "Verksamhetsstöd (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar med aktiv, ideell och icke vinstdrivande verksamhet i Lerums kommun med offentliga arrangemang"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Arrangemang ska vara offentliga"
+      - "Beviljas inte för kostnader utan direkt koppling till kulturverksamheten eller för avlönade ledare/reseersättning till medlemmar"
+      - "Ansökningsfönster 1 februari–1 april; beslut meddelas i slutet av maj"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/kultur/stod-till-kulturverksamhet"
+    anteckning: "Inget publicerat kronbelopp — sektorn beslutar om storlek inom budgeterade medel."
+  - id: "lerum-investeringsstod-kultur"
+    namn: "Investeringsstöd (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar, i första hand kulturarvsföreningar som vårdar, bevarar och tillgängliggör byggnader och kulturmiljöer"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-01"]
+    krav:
+      - "Kan sökas en gång per år, ansökningsfönster 1 februari–1 april, beslut i slutet av maj"
+      - "Kan förenas med krav på garanti om extern medfinansiering"
+      - "Beviljade investeringar ska vara genomförda och redovisade i Rbok innevarande kalenderår"
+    belopp: "Upp till 80% av totalkostnaderna, högst ett prisbasbelopp (59 200 kr 2026)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/kultur/stod-till-kulturverksamhet"
+    anteckning: null
+  - id: "lerum-startstod-kultur"
+    namn: "Startstöd (kultur)"
+    kategori: ["kultur"]
+    malgrupp: "Nybildade kulturföreningar i Lerums kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Intyg om registrering hos Skatteverket"
+      - "Stadgar, verksamhetsplan och protokoll från konstituerande möte"
+      - "Registrering i Rbok"
+    belopp: "3 000 kr"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://lerum.se/kultur-och-fritid/kultur/stod-till-kulturverksamhet"
+    anteckning: null
+  - id: "lerum-enskilda-kulturprojekt"
+    namn: "Stöd till enskilda kulturprojekt"
+    kategori: ["kultur"]
+    malgrupp: "Enskilda, grupper, nätverk och föreningar som vill genomföra ett avgränsat kulturprojekt i Lerums kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektet ska vara demokratiskt, icke diskriminerande och framföras offentligt"
+      - "Ska förankras hos kulturverksamheten inom Lerum Kultur och bibliotek"
+      - "Beviljas inte för skolprojekt, utbildning, forskning, reseersättning eller arvode till arrangörer"
+      - "Redovisning senast 2 månader efter avslutat projekt"
+    belopp: "Upp till 75% av totalkostnaderna, högst 30% av prisbasbeloppet per projekt (17 760 kr 2026)"
+    sen_ansokan: "Ansökan ska vara inlämnad senast fyra veckor före projektstart; för sent inkommen ansökan anges inte hanteras."
+    kalla_url: "https://lerum.se/kultur-och-fritid/kultur/stod-till-kulturverksamhet"
+    anteckning: "Kan sökas av privatpersoner/grupper/nätverk utöver föreningar — skrivet in ändå eftersom föreningar uttryckligen ingår i målgruppen (RESEARCH_SPEC v2 §2.4)."
+  - id: "lerum-kulturpriset"
+    namn: "Kulturpriset"
+    kategori: ["kultur"]
+    malgrupp: "Personer bosatta, födda eller verksamma i Lerums kommun, samt grupper/föreningar med verksamhet inom kommunens kulturliv"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-30"]
+    krav:
+      - "Nominering med motivering skickas till kultur- och biblioteksenheten"
+      - "Nominerings-/ansökningsperiod 20 juni–30 augusti"
+      - "Utdelning i november eller december samma år"
+    belopp: "25 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/nyheter/nyhetsarkiv---lerum.se/2026-06-24-nominera-till-kulturpriset-och-ansok-om-kulturstipendiet"
+    anteckning: "Hederspris, inte ett traditionellt verksamhetsbidrag — inkluderat eftersom grupper/föreningar uttryckligen kan tilldelas priset, inte bara enskilda personer."
+  - id: "lerum-kulturfonden"
+    namn: "Kulturfonden (kulturstipendium, tidigare Stiftelsen Skallsjö)"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar med verksamhet i det tidigare Skallsjö kommunområdet"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-30"]
+    krav:
+      - "Fonden ska genom anslag stötta ideell och kulturell verksamhet i före detta Skallsjö kommun"
+      - "Delas endast ut år då stiftelsen har avkastning att fördela"
+      - "Ansökningsperiod 20 juni–30 augusti, samma fönster som Kulturpriset"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/nyheter/nyhetsarkiv---lerum.se/2026-06-24-nominera-till-kulturpriset-och-ansok-om-kulturstipendiet"
+    anteckning: "Administreras av Lerums kommun (kultur- och biblioteksenheten), som övertagit förvaltningen efter tidigare Stiftelsen Skallsjö. Inget kronbelopp publicerat eftersom utdelningen varierar med stiftelsens avkastning."
+  - id: "lerum-studieforbund"
+    namn: "Kommunalt stöd till studieförbund"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Studieförbund verksamma i Lerums kommun vars centralorganisation får statsbidrag via Folkbildningsrådet"
+    deadlines:
+      typ: "fasta"
+      datum: ["06-30", "12-15"]
+    krav:
+      - "Verksamhetsplan för kommande år lämnas senast 15 december"
+      - "Verksamhetsberättelse, ekonomisk berättelse och kommunsammandrag lämnas senast 30 juni"
+      - "Nya studieförbund i kommunen trappas in: 50% av tilldelningen första året, 100% andra året"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/kultur/stod-till-kulturverksamhet/kommunalt-stod-till-studieforbund"
+    anteckning: "Fördelningsmodell: 70% studiecirklar (50% deltagare/50% studietimmar), 10% övrig utbildningsverksamhet, 20% kulturprogram. Utbetalning senast 31 augusti. Söks via sjalvservice.lerum.se, inte Rbok."
+  - id: "lerum-foreningsstod-samverkan-funktionsratt"
+    namn: "Föreningsstöd till samverkansföreningar och lokala funktionsrättsföreningar"
+    kategori: ["funktionsratt", "pensionar"]
+    malgrupp: "Samverkansföreningar (villkor och intressebevakning för personer med funktionsnedsättning och äldre) samt lokala funktionsrättsföreningar"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Samverkansföreningar ska delta i dialogmöten som kommunen kallar till"
+      - "Stödberättigad medlem har fyllt 65 år (gäller ej funktionsrättsförening, ingen åldersgräns där) och är bosatt i kommunen"
+      - "45% av sektorns avsatta föreningsstödsmedel fördelas här, baserat på medlemsantal"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/foreningsstod-fran-sektor-stod-och-omsorg"
+    anteckning: "Fördelningsmodell utan fast kronbelopp: stöd för medlem i samverkansförening är 1,4 gånger större än för medlem i lokal funktionsrättsförening. Källdokumentet (SON23.4) är daterat 2022-03-06, äldre än övriga regelverk, men ingen nyare motsägande källa hittad — se konflikter.log."
+  - id: "lerum-lokalkostnadsstod-so"
+    namn: "Lokalkostnadsstöd (stöd och omsorg)"
+    kategori: ["funktionsratt", "pensionar"]
+    malgrupp: "Samverkansföreningar samt intresseföreningar för seniorer/pensionärer med lokalkostnader"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Baseras på föregående års kostnader i efterskott"
+      - "Hyresavi eller motsvarande handling ska bifogas"
+      - "Beviljas inte för kommersiellt uthyrda lokaler eller redan kommunalt subventionerade lokaler"
+    belopp: "130 kr per stödberättigad medlem, begränsat till max 60% av hyreskostnaden"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/foreningsstod-fran-sektor-stod-och-omsorg"
+    anteckning: null
+  - id: "lerum-verksamhetsstod-social"
+    namn: "Verksamhetsstöd för social verksamhet"
+    kategori: ["social"]
+    malgrupp: "Alla föreningar i kommunen (som uppfyller allmänna villkor och demokratikrav) med initiativ inom socialtjänstens ansvarsområden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Riktar sig mot t.ex. ensamhet/isolering, social utsatthet, äldre, funktionsnedsättning, anhörigstöd, brottsofferstöd, missbruksprevention och integration"
+      - "Stödet är selektivt — varje ansökan prövas individuellt utifrån nytta och behov"
+      - "Sektorchef kan besluta om stöd vid ändamål av särskild vikt för sektorns målgrupper"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/foreningsstod-fran-sektor-stod-och-omsorg"
+    anteckning: null
+  - id: "lerum-nystartad-so"
+    namn: "Föreningsstöd till nystartad förening (stöd och omsorg)"
+    kategori: ["social", "funktionsratt", "pensionar"]
+    malgrupp: "Nybildade föreningar som verkar inom sektor stöd och omsorgs ansvarsområden"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Stadgar, verksamhetsplan och protokoll från konstituerande möte"
+      - "Föreningsuppgifter, medlemsförteckning samt organisationsnummer"
+    belopp: "3 000 kr"
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/foreningsstod-fran-sektor-stod-och-omsorg"
+    anteckning: null
+  - id: "lerum-centrumforeningar"
+    namn: "Ekonomiskt bidrag till centrumföreningar"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella centrumföreningar (näringsidkare, fastighetsägare och kommun i samverkan för centrumutveckling) — Lerum, Floda och Gråbo har vardera en"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-20"]
+    krav:
+      - "Grundfinansieringen ska vara fördelad mellan näringsidkare, fastighetsägare och kommun"
+      - "Föreningen ska ha en utsedd centrumutvecklare eller motsvarande"
+      - "Ansökan ska innehålla föregående års bokslut/verksamhetsberättelse, budget och verksamhetsplan för aktuellt år"
+    belopp: "Max en tredjedel av parternas totala grundfinansiering, högst 400 000 kr (inklusive ev. bidrag där kommunen också är fastighetsägare)"
+    sen_ansokan: "Ansökan som inkommer senare än 20 februari behandlas inte."
+    kalla_url: "https://lerum.se/download/18.2b036d193299d95352c18c/1732002419816/Antagen%20riktlinje%20om%20ekonomiskt%20bidrag%20till%20centrumf%C3%B6reningar.pdf"
+    anteckning: "Kommunstyrelsen beslutar årligen om bidraget, ärendet behandlas i mars/senast april."
+  - id: "lerum-nattvandring"
+    namn: "Föreningsbidrag för nattvandring"
+    kategori: ["ovrig"]
+    malgrupp: "Föreningar som organiserar nattvandring för att öka tryggheten i Lerums kommun"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst fem deltagare över 22 år från föreningen krävs per nattvandringstillfälle (18–22-åringar kan delta som ungdomsvandrare)"
+      - "Ett nattvandringstillfälle avser ett sammanhängande kvälls-/nattpass om minst fem timmar"
+      - "Föreningen ska vara registrerad som bidragsberättigad i Rbok och följa förvaltningens anvisningar"
+    belopp: "5 000 kr per förening och nattvandringstillfälle (fast belopp oavsett antal deltagare utöver minimikravet)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/download/18.7a448f06196d70b2a691c22a/1747402421368/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag%20avseende%20nattvandring%20pdf"
+    anteckning: "Ingen fast ansökningsdeadline publicerad i riktlinjen — utbetalning sker vid fasta utbetalningsdatum där nattvandringspass sammanräknas."
+  - id: "lerum-valdsutsatta"
+    namn: "Föreningsbidrag till ideella organisationers arbete för att stödja våldsutsatta"
+    kategori: ["social"]
+    malgrupp: "Ideella, icke-vinstdrivande organisationer som stödjer personer utsatta för våld i nära relation eller jämförbara former av utsatthet, med verksamhet mot Lerums invånare"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Övergripande syfte ska vara att skapa trygghet och stöd för våldsutsatta"
+      - "Erbjuda öppna stödformer (rådgivning, samtalsstöd, information, föreläsningar) och arbeta förebyggande"
+      - "Ha säkerhetsprotokoll för individskydd och bedriva arbetet professionellt"
+      - "Bidragsperiod två år åt gången"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/kommun-och-politik/overklaga-beslut-insyn-och-rattssakerhet/kommunal-forfattningssamling/riktlinje-for-foreningsbidrag-till-ideella-organisationers-arbete-for-att-stodja-valdsutsatta"
+    anteckning: "Nyantagen riktlinje (KS25.414, beslutad 2026-02-26 i kommunfullmäktige). Ordinarie regel: ansökningsfrist 31 mars för innevarande och nästkommande år. En kommunnyhet (2026-03-13, lerum.se) beskriver en engångsförlängd deadline till 30 april för just startåret 2026 eftersom e-tjänsten öppnade sent (15 mars) — det är en övergångsbestämmelse, inte en ändring av den stående regeln, så 31 mars är skrivet som det återkommande datumet. Fastställt belopp fördelas lika mellan godkända ansökningar; nämnden kan besluta om högsta årliga belopp per förening, men inget kronbelopp är publicerat."
+  - id: "lerum-upprustning-vag"
+    namn: "Upprustningsbidrag enskilda vägar"
+    kategori: ["ovrig"]
+    malgrupp: "Vägsamfällighetsföreningar registrerade hos Lantmäteriet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Underhållsarbeten och driftåtgärder ersätts inte — gäller upprustning (t.ex. asfaltering, broar, belysning, fartgupp, bullerskydd)"
+      - "Vägen ska vara öppen för allmän trafik i minst 5 år efter utbetalning, annars återbetalas hela bidraget"
+      - "Minst 5 år mellan bidrag till samma förening"
+    belopp: "20 kr per meter väg enligt föreningens lantmäteriregistrering, högst 50 000 kr per ansökningstillfälle"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/bygga-bo-och-trafik/trafik-och-gator/gator-och-vagar/upprustningsbidrag-enskilda-vagar"
+    anteckning: "Ansökningar handläggs i den ordning de kommer in; räcker inte medlen flyttas ansökan till nästa år och behåller sin plats i kön. Administreras av Sektor samhällsbyggnad, ansökan via KomIn — inte via Rbok."
+  - id: "lerum-greta-bergs-minnesstiftelse"
+    namn: "Greta Bergs minnesstiftelse"
+    kategori: ["funktionsratt", "ovrig"]
+    malgrupp: "Forskning samt organisationer med säte i Lerums kommun som arbetar med rehabilitering av syn- eller hörselskadade (även privatpersoner med läkarintyg)"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-05"]
+    krav:
+      - "Organisationen ska ha säte i Lerums kommun"
+      - "Privatpersoner ska bifoga läkarintyg om syn- eller hörselnedsättning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://lerum.se/omsorg-och-stod/fonder-och-stiftelser-sektor-stod-och-omsorg"
+    anteckning: "Stiftelse förvaltad inom Sektor stöd och omsorg. Deadline 2026 angiven som 5 oktober 2026 på källsidan — troligen en återkommande höstdeadline, men bara ett enskilt årtal bekräftat i källan."
+forutsattningar:
+  - id: "lerum-rbok-registrering"
+    vad: "Registrera föreningen och ladda upp stadgar i Rbok"
+    beskrivning: "De flesta av kommunens föreningsbidrag (fritid, kultur, stöd och omsorg, nattvandring) kräver att föreningen har en aktiv profil i Rbok med uppladdade stadgar samt årligen uppdaterad verksamhetsberättelse, resultat-/balansräkning och årsmötesprotokoll. Nattvandringsbidraget kräver uttryckligen att föreningen är registrerad som 'bidragsberättigad' i Rbok innan ansökan kan beviljas."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: "Ingen publicerad handläggningstid för registrering i Rbok"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://lerum.se/kultur-och-fritid/foreningar-och-foreningsliv/foreningsstod-och-stipendier/stod-till-foreningar-inom-idrott-och-fritid"

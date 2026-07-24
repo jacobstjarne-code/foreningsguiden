@@ -1,0 +1,309 @@
+# Källa verifierad 2026-07-21 mot vallentuna.se (källkonvergens enligt RESEARCH_SPEC_v2 §2/v2.1).
+# Huvudkälla: "Bidragsnormer för föreningsverksamhet i Vallentuna" (4.4.1, FN 2018.020,
+# fastställd av kommunfullmäktige 1997-10-06, reviderad 2003-03-10 och 2021-06-07, granskad
+# av fritidsnämnden 2026-04-16) — kommunens antagna regelverk, hämtat som PDF och extraherat
+# med pdftotext eftersom WebFetchs inbyggda PDF-läsning misslyckades på binärdatan. Räknar
+# upp åtta bidragsformer under fritidsnämnden (§1.1.1), inklusive två lokalsubventioner (§8,
+# §11) som saknar egen sida på vallentuna.se och bara finns i regelverket.
+# Andra regelverkskälla: "Riktlinje för bidrag till föreningar inom socialnämndens
+# verksamhetsområde" (6.8.20, SN 2025.202, fastställd av socialnämnden 2025-11-18) — nytt
+# dokument, ersätter en äldre version. Ger två bidragskategorier: ideella föreningar och
+# pensionärsföreningar, båda med ansökan senast 10 april.
+# Tredje regelverkskälla: "Riktlinjer för bidrag speciella ändamål" (fastställda av
+# fritidsnämnden 2025-06-12) — egen PDF med fem delformer under paraplyet "Bidrag för
+# speciella ändamål" och en hård deadline (31 oktober) som den äldre AI-sammanfattade
+# webbsidan inte gav lika tydligt.
+# Kryssat mot kulturnämndens sidor (garantibidrag, övriga kulturstödjande åtgärder, snabb
+# peng, studieförbund, gemensamhetslokaler) — samtliga bekräftade med egna URL:er, ingen av
+# dem täcks av fritidsnämndens eller socialnämndens regelverk (olika nämnder/förvaltningar).
+# Ansökningsportalen (vallentuna.rbok.se) är JS-renderad — EJ_EXTRAHERBAR, gick inte att
+# räkna upp separat, men används som ansökningssystem för i princip alla bidrag ovan
+# (bekräftat via respektive sidas ansökningslänk).
+# Specialkategorier (§2.1.5): väg-/samfällighetsbidrag — sökt, EJ FUNNET på vallentuna.se
+# (kommunen hänvisar generellt till Trafikverkets statsbidrag för enskilda vägar, inget eget
+# kommunalt bidrag identifierat). Bygdegårdar/byalag — täcks sannolikt av "Gemensamhetslokaler
+# drivna av föreningar och stiftelser" (Lindholmens och Kårsta-Ekskogens bygdegårdar nämns i
+# landsbygdskontext), ingen separat kategori funnen. Stiftelser/fonder som föreningar kan söka
+# ur — Vallentuna kommuns miljöstipendium är öppet för föreningar/organisationer utöver
+# privatpersoner och tas med; övriga stipendier/fonder (Josef Anderssons fond, Skolsamfonden,
+# Össeby-Garns Magasinkassas stipendiefond, Frösunda sädesmagasinsfond, Anna Ramsten-Hedéns
+# minnesfond, Greta Perssons stiftelse, K G Zetterlunds pensionärsfond, Mariana Logrens
+# Donationsfond) riktar sig uteslutande till enskilda elever/studerande/pensionärer eller till
+# kommunens egna äldreboenden — uteslutna enligt §2.4(a). Studieförbund — täcks (kulturnämnden,
+# egen bidragsform baserad på studietimmar).
+# Fritidskortet (statligt stöd, 550 kr/barn 7-16 år) uteslutet: individuell förmån till
+# privatperson, administrerad av staten, inte ett kommunalt föreningsbidrag.
+# "Vallentunas landsbygder"/Leader-metoden nämns som utvecklingsmöjlighet men administreras av
+# en extern Leader-organisation (LAG), inte av kommunen direkt — inget eget kommunalt bidrag
+# identifierat, ej medtaget.
+# Spot-checkas av Jacob före publik deploy.
+kommun: "Vallentuna"
+kommun_slug: "vallentuna"
+lan: "Stockholms län"
+befolkning: 35375
+forvaltning: "Kultur- och fritidsförvaltningen samt Socialförvaltningen"
+ansokningssystem:
+  namn: "Rbok"
+  url: "https://vallentuna.rbok.se/"
+kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/"
+verifierad: 2026-07-21
+bidrag:
+  - id: "vallentuna-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med minst 15 bidragsberättigade medlemmar (barn/unga 7-20 år samt personer med funktionsnedsättning oavsett ålder) folkbokförda i Vallentuna kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Minst 15 bidragsberättigade medlemmar folkbokförda i Vallentuna kommun"
+      - "Minst 10 redovisade sammankomster under ansökningsperioden (20/år totalt)"
+      - "Sammankomsten ska pågå minst 45 minuter, vara ledarledd med minst tre deltagare utöver ledaren"
+      - "Närvarokort med personnummer förs vid varje sammankomst, registreras i e-tjänsten för aktivitetsstöd"
+      - "Bidrag beviljas inte till entrébelagda tävlingar, kommersiella arrangemang, styrelsemöten eller liknande"
+      - "Föreningen ska via webben hålla uppgifterna i föreningsregistret aktuella och ha status 'godkänd'"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/aktivitetsbidrag/"
+    anteckning: "Ansökan för perioden 1 jan-30 jun lämnas senast 25 augusti; för 1 jul-31 dec senast 25 februari påföljande år. Bidraget består av en fast del per sammankomst och en rörlig del per deltagare (max 30 deltagare inkl. ledare), belopp fastställs årligen av fritidsnämnden. Idrottsföreningar anslutna till specialidrottsförbund kan även söka LOK-stöd direkt från RF."
+  - id: "vallentuna-ledarutbildningsbidrag"
+    namn: "Ledarutbildningsbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar i Vallentuna kommun; rörlig del kräver redovisat aktivitetsbidrag"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Kurs arrangerad av riks- eller distriktsförbund riktad mot att leda barn och unga (lokala kurser kräver förhandsgodkännande av fritidsförvaltningen)"
+      - "Bidragsgrundande kostnader: kursavgift (hela beloppet) och övriga omkostnader (upp till 50 %)"
+      - "Samtliga kostnader ska vara verifierade; ges ej för kurser av yrkesutbildningskaraktär"
+      - "Rörlig del kan tidigast erhållas andra året föreningen är verksam i kommunen"
+    belopp: "Fast del (samma för alla föreningar, fastställs årligen av fritidsnämnden) plus rörlig del baserad på redovisade sammankomster (handikappföreningar: per medlem i stället), belopp fastställs årligen. Bidraget kan aldrig överskrida föreningens 'pott' för året."
+    sen_ansokan: "Ansökan görs efter genomförd kurs, inom samma kalenderår som kursen genomförts"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/ledarutbildningsbidrag/"
+    anteckning: "Ansökan går att lämna under hela året fram till 30 november. Kursintyg, kvitto på kursavgift och underlag för övriga kostnader ska bifogas."
+  - id: "vallentuna-verksamhetsbidrag-funktionshinder"
+    namn: "Verksamhetsbidrag till funktionshindersföreningar"
+    kategori: ["funktionsratt"]
+    malgrupp: "Föreningar registrerade som handikappföreningar med funktionshindrade medlemmar bosatta i Vallentuna kommun, oavsett ålder"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Föreningen ska vara registrerad i Vallentuna kommuns föreningsregister som handikappförening"
+      - "Medlemmarna ska vara funktionshindrade och bosatta i Vallentuna kommun"
+      - "Bidrag betalas inte ut för familjemedlemmar eller andra typer av stödmedlemmar"
+    belopp: "Ett belopp per funktionshindrad medlem bosatt i Vallentuna kommun, fastställs årligen av fritidsnämnden (inget SEK-tak publicerat)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/bidrag-handikappforeningar/"
+    anteckning: "Registrerade handikappföreningar kan även söka ledarutbildningsbidrag och hyresbidrag."
+  - id: "vallentuna-hyresbidrag"
+    namn: "Hyresbidrag"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade barn- och ungdomsföreningar som söker aktivitetsbidrag och som av särskilda skäl bedriver verksamhet i en lokal kommunen inte kan erbjuda"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska ha godkänd ansökan om aktivitetsbidrag"
+      - "Lokalen ska godkännas separat av fritidsnämnden innan hyresbidrag kan betalas ut"
+    belopp: "Ett visst belopp per sammankomst i den godkända lokalen, nivån fastställs årligen av fritidsnämnden (inget SEK-tak publicerat)"
+    sen_ansokan: "Ej tillämpligt — ingen egen ansökningsperiod; utbetalas i samband med aktivitetsbidragsansökan två gånger om året"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/hyresbidrag/"
+    anteckning: "Ansökan om lokalgodkännande skickas in löpande till fritidsförvaltningen (lokalbokning@vallentuna.se), ingen fast deadline angiven."
+  - id: "vallentuna-lokalsubvention-moteslokaler"
+    namn: "Lokalsubvention – möteslokaler"
+    kategori: ["ovrig"]
+    malgrupp: "Alla föreningar som uppfyller fritidsnämndens grundkrav"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla grundkraven i bidragsnormerna (demokratisk struktur, verksamhet i Vallentuna, registrerat konto m.m.)"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://dok.vallentuna.se/file/f%C3%B6rfattningssamling/4.%20kultur%20och%20fritid/4.4%20taxor%20och%20ers%C3%A4ttningar/4.4.1%20Bidragsnormer%20f%C3%B6r%20f%C3%B6reningsverksamhet.pdf"
+    anteckning: "Ingen separat ansökan görs. Fritidsförvaltningen kontrollerar årligen vilka registrerade föreningar som uppfyller kraven för att hyra utvalda möteslokaler till föreningstaxa. Saknar egen sida på vallentuna.se — finns bara i regelverket (§8)."
+  - id: "vallentuna-lokalsubvention-gymnastiksalar"
+    namn: "Lokalsubvention – gymnastiksalar, sporthallar och anläggningar"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet som uppfyller grundkraven och redovisar minst 20 aktiviteter per verksamhetsår"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska uppfylla samtliga grundkrav samt särskilda riktlinjer för barn- och ungdomsverksamhet"
+      - "Minst 20 aktiviteter per verksamhetsår, avstäms via föreningens aktivitetsbidragsansökan"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://dok.vallentuna.se/file/f%C3%B6rfattningssamling/4.%20kultur%20och%20fritid/4.4%20taxor%20och%20ers%C3%A4ttningar/4.4.1%20Bidragsnormer%20f%C3%B6r%20f%C3%B6reningsverksamhet.pdf"
+    anteckning: "Ingen separat ansökan görs. Fritidsförvaltningen stämmer av inför schemaläggning av säsongstider. Saknar egen sida på vallentuna.se — finns bara i regelverket (§11)."
+  - id: "vallentuna-nattvandringsbidrag"
+    namn: "Nattvandringsbidrag"
+    kategori: ["ovrig"]
+    malgrupp: "Alla föreningar som uppfyller grundkraven och som åtar sig att nattvandra under en termin"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst två deltagare över 18 år per nattvandringstillfälle"
+      - "Minst fyra tillfällen per månad under terminen enligt undertecknad överenskommelse"
+      - "Nattvandringarna leds av personal från fritidsförvaltningens fältgrupp"
+    belopp: "10 000 kr per förening, betalas ut efter avslutad termin och genomfört uppdrag"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/nattvandringsbidrag/"
+    anteckning: "Programmet för hösttermin 2026 löper 28 augusti–22 november 2026, sista anmälningsdag 14 augusti 2026. Datum för respektive termin annonseras separat via mejl och vallentuna.se inför terminsstart — regelverket anger ingen fast årlig deadline. Prioritet till föreningar som inte haft uppdraget tidigare om fler anmäler sig än platser finns."
+  - id: "vallentuna-bidrag-speciella-andamal"
+    namn: "Bidrag för speciella ändamål"
+    kategori: ["ovrig", "funktionsratt"]
+    malgrupp: "Föreningar som uppfyller grundkraven, för aktiviteter/verksamhet/projekt inom idrott och friluftsliv för barn och unga (7-20 år) samt personer med funktionsnedsättning oavsett ålder"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-31"]
+    krav:
+      - "Ansökan ska skickas in innan aktiviteten/verksamheten/projektet genomförs (undantag: bidrag för oförutsedda utgifter kan sökas i efterhand)"
+      - "Föreningen ska bidra väsentligt till finansieringen genom eget kapital och/eller ideellt arbete"
+      - "Minst 15 bidragsberättigade medlemmar folkbokförda i Vallentuna, minst 10 sammankomster under ansökningsperioden"
+      - "Täcker inte personalkostnader eller föreningens ordinarie löpande utgifter"
+      - "Fem delformer: bidrag för utvecklingsinsatser, bidrag för oförutsedda utgifter, drifts- och underhållsbidrag (beslut kan gälla upp till tre år i taget), bidrag för fysiska förbättringar, samt gåva vid 50-/75-/100-årsjubileum"
+    belopp: "Ingen fast norm — fritidsnämnden beslutar från fall till fall inom sina budgetramar. Jubileumsgåva vid 50/75/100 år: upp till 5 000 kr, ingen ansökan krävs."
+    sen_ansokan: "Ansökningar efter 31 oktober kan inte garanteras beslut innan årets slut (gäller ej bidrag för oförutsedda utgifter, som kan sökas i efterhand)"
+    kalla_url: "https://dok.vallentuna.se/file/fritid%20och%20natur/Riktlinjer%20bidrag%20speciella%20%C3%A4ndam%C3%A5l%202025-06.pdf"
+    anteckning: "Riktlinjerna (fastställda av fritidsnämnden 2025-06-12) är inte bindande — nämnden kan göra avsteg. Beslut fattas normalt av fritidsnämnden (6-7 sammanträden/år); mindre belopp är delegerade till kultur- och fritidsförvaltningens föreningssamordnare. En förening kan inte samtidigt få både hyresbidrag och drifts-/underhållsbidrag för samma lokal (om den inte hyrs av kommunen)."
+  - id: "vallentuna-garantibidrag-kulturprogram"
+    namn: "Garantibidrag till offentliga kulturprogram"
+    kategori: ["kultur"]
+    malgrupp: "Ideella föreningar, organisationer och enskilda som arrangerar offentliga kulturevenemang med lokal anknytning eller allmänt intresse för Vallentunaborna"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Arrangemanget ska vara offentligt och marknadsföras till allmän publik"
+      - "Genomförs i kommunen eller för kommuninvånare (t.ex. studiebesök)"
+      - "Biljettintäkter ska täcka en rimlig del av kostnaderna beroende på programtyp"
+      - "I marknadsföringen ska det framgå att arrangemanget sker med stöd av kulturnämnden/Kultur Vallentuna"
+      - "Redovisning med kvitton och ekonomiskt underlag inom 6 veckor efter arrangemanget, annars betalas bidraget inte ut"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/garantibidrag-till-offentliga-kulturprogram/"
+    anteckning: "Huvudansökan senast 1 november för verksamhet påföljande år, beslut i december/januari. Möjligt att ansöka löpande under året för oförutsedd programverksamhet, i mån av kvarvarande medel i kulturnämndens budget."
+  - id: "vallentuna-ovriga-kulturstodjande-atgarder"
+    namn: "Bidrag till övriga kulturstödjande åtgärder"
+    kategori: ["kultur"]
+    malgrupp: "Ideella föreningar, organisationer och enskilda som söker stöd till särskilda projekt, t.ex. dokumentation, arkivforskning, bokutgivning eller filmproduktion"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-01"]
+    krav:
+      - "Projektet ska ha lokal anknytning och/eller vara av allmänt intresse för kommuninvånarna"
+      - "Stöd beviljas inte till projekt som kan befaras störa ordningen"
+      - "Kulturnämndens stöd ska anges i marknadsföringsmaterial"
+      - "Redovisning med dokumentation (text, bilder) av godkända kostnader krävs"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/bidrag-till-ovriga-kulturstodjande-atgarder/"
+    anteckning: "Huvudansökan senast 1 november för projekt påföljande år, beslut december/januari. Löpande ansökan möjlig under året i mån av kvarvarande medel."
+  - id: "vallentuna-snabb-peng-unga"
+    namn: "Snabb peng – bidrag till unga"
+    kategori: ["kultur"]
+    malgrupp: "Grupper om minst två personer, 15-25 år, bosatta i Vallentuna kommun (under 18 år kräver vårdnadshavares uppgifter); äldre kan ansöka för att anordna aktiviteter för unga"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska vara utåtriktad, vända sig till fler ungdomar och äga rum i Vallentuna kommun"
+      - "Alkohol- och drogfri aktivitet"
+      - "Redovisning med kort beskrivning, bilder/video, deltagarantal och detaljerad budget krävs efteråt"
+      - "Original-kvitton/fakturor ska sparas; endast förhandsgodkända kostnader ersätts"
+      - "Kan inte sökas i efterhand för redan genomförd aktivitet"
+    belopp: "Max 10 000 kr per projekt"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/snabb-peng---bidrag-till-unga/"
+    anteckning: "Svar inom 2-5 veckor. Ansökningar som kommer in juni-augusti samt jul-/nyårshelgerna får försenat svar; inga beslut fattas i juli."
+  - id: "vallentuna-gemensamhetslokaler"
+    namn: "Bidrag till gemensamhetslokaler drivna av föreningar eller stiftelser"
+    kategori: ["ovrig"]
+    malgrupp: "Ideella föreningar och stiftelser som driver gemensamhetslokaler till nytta för Vallentunas kommuninvånare"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Föreningen/stiftelsen ska ha säte i Vallentuna eller bedriva huvuddelen av verksamheten i kommunen"
+      - "Öppet medlemskap och demokratisk styrning"
+      - "Organisationsnummer och registrering i kommunens föreningsregister med aktuella kontaktuppgifter"
+      - "Årsmöte med vald styrelse och formell dokumentation"
+      - "Särskilda krav vid ungdomsverksamhet: FN:s barnkonvention samt alkohol-/drogfri miljö"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/bidrag-och-stod/gemensamhetslokaler/"
+    anteckning: "Ansökningsperiod 1 januari–31 mars, beslut av kommunfullmäktige i maj, utbetalning i juni. Fullständiga riktlinjer i 'Riktlinjer för bidrag till gemensamhetslokaler drivna av föreningar eller stiftelser' (länkad från sidan, ej separat hämtad). Kan sannolikt omfatta bygdegårdar (t.ex. Lindholmen, Kårsta-Ekskogen) — ingen separat bygdegårds-/byalagskategori funnen på vallentuna.se."
+  - id: "vallentuna-studieforbund"
+    namn: "Bidrag till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "De sju studieförbund med verksamhet för Vallentunabor (ABF, Bilda, Folkuniversitetet, Medborgarskolan, Sensus, Studiefrämjandet, Studieförbundet Vuxenskolan)"
+    deadlines:
+      typ: "fasta"
+      datum: ["05-31"]
+    krav:
+      - "Verksamhetsberättelse för föregående år samt verksamhetsplan för innevarande år"
+      - "Kommunal sammanställning, revisionsberättelse, balans- och resultaträkning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/fritid-och-kultur/foreningar-och-foreningsliv/studieforbund/"
+    anteckning: "Bidraget beräknas utifrån antal studietimmar. Kulturnämnden beslutar om utbetalning i september."
+  - id: "vallentuna-foreningsbidrag-ideella-social"
+    namn: "Föreningsbidrag till ideella föreningar (socialnämnden)"
+    kategori: ["social"]
+    malgrupp: "Ideella föreningar inom socialnämndens verksamhetsområde med Vallentunabor som medlemmar/deltagare, som kompletterar socialnämndens egna verksamheter"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-10"]
+    krav:
+      - "Stadgar godkända av riksorganisationen eller kommunen; årsmöte med godkänd verksamhetsplan/budget och redovisad revisionsberättelse"
+      - "Demokratisk uppbyggnad med vald styrelse enligt stadgarna"
+      - "Organisationsnummer och plus-/bankgiro eller bankkonto i föreningens namn"
+      - "Medlemmar/deltagare folkbokförda i Vallentuna kommun"
+      - "Fokus på förebyggande socialt arbete och/eller stöd till särskilt utsatta grupper"
+      - "Kan inte ha verksamhet som sammanfaller med kommunens upphandlade verksamheter; nystartade föreningar kan tidigast söka år två"
+    belopp: "Fastställs årligen av socialnämnden utifrån verksamhetsplan och antal medlemmar/deltagare som är kommuninvånare i Vallentuna; inget SEK-tak publicerat"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/omsorg-och-hjalp/anhoriga-och-frivilliga/frivilligt-arbete-och-organisationer/foreningsbidrag/"
+    anteckning: "Regelverk: 'Riktlinje för bidrag till föreningar inom socialnämndens verksamhetsområde' (6.8.20, SN 2025.202), fastställd av socialnämnden 2025-11-18. Beslut fattas normalt i maj, besked ca 2 veckor efter sammanträde, utbetalning senast 30 juni. En förening kan bara få bidrag från en av socialnämndens två bidragskategorier."
+  - id: "vallentuna-foreningsbidrag-pensionarsforeningar-social"
+    namn: "Föreningsbidrag till pensionärsföreningar (socialnämnden)"
+    kategori: ["pensionar"]
+    malgrupp: "Pensionärsföreningar med medlemmar som är kommuninvånare i Vallentuna"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-10"]
+    krav:
+      - "Samma allmänna krav som för ideella föreningar (stadgar, årsmöte, demokratisk struktur, organisationsnummer/bankkonto, medlemmar folkbokförda i Vallentuna)"
+    belopp: "67 kr per registrerad medlem (2023 års exempelnivå i regelverket). Beloppet per medlem höjs med hälften av prisbasbeloppets årliga procentuella ökning de år basbeloppet ökar; vid minskat basbelopp behålls föregående års belopp oförändrat."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/omsorg-och-hjalp/anhoriga-och-frivilliga/frivilligt-arbete-och-organisationer/foreningsbidrag/"
+    anteckning: "Samma regelverk och deadline som föreningsbidrag till ideella föreningar (6.8.20, SN 2025.202). Beloppet 67 kr/medlem är regelverkets räkneexempel för 2023 — aktuell 2026-nivå är inte publicerad separat och ska inte antas vara samma."
+  - id: "vallentuna-miljostipendium"
+    namn: "Vallentuna kommuns miljöstipendium"
+    kategori: ["ovrig"]
+    malgrupp: "Privatpersoner, fastighetsägare, föreningar, organisationer, förskolor/skolor och företag verksamma i Vallentuna kommun"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-01"]
+    krav:
+      - "Insatsen ska visa miljö-/klimatengagemang av bredare intresse, som gynnar fler än enskilda hushåll"
+      - "Ansökan eller nominering görs via webbformulär med kontaktuppgifter och svar på fyra frågor om varför sökanden/den nominerade bör få stipendiet och vad pengarna ska användas till"
+    belopp: "Max ett halvt prisbasbelopp (ca 29 400 kr för 2025)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.vallentuna.se/omsorg-och-hjalp/ekonomi-forsorjningsstod/stipendier-och-fonder/vallentuna-kommuns-miljostipendium/"
+    anteckning: "Beslutas av kommunstyrelsens planerings- och miljöutskott, utdelas vid kommunfullmäktige i december/januari. Öppet för föreningar och organisationer, inte bara privatpersoner — därför medtaget trots att det administreras utanför kultur-/fritids-/socialförvaltningen."
+forutsattningar:
+  - id: "vallentuna-foreningsregistrering"
+    vad: "Registrera föreningen i Vallentuna kommuns föreningsregister och bli godkänd som bidragsberättigad"
+    beskrivning: "Föreningen registreras i kommunens föreningsregister via Rbok. Grundkraven enligt bidragsnormerna: i huvudsak bedriva verksamhet i Vallentuna för Vallentunas invånare, ha en demokratisk struktur (styrelse vald på årsmöte, lika rättigheter för medlemmar, tillämpa FN:s konventioner om mänskliga rättigheter och rättigheter för personer med funktionsnedsättning), tillhöra en statsbidragsberättigad riksorganisation eller ha stadgar godkända av fritidsnämnden, samt ha ett registrerat post- eller bankgirokonto."
+    system: "Rbok"
+    ledtid: null
+    ledtid_text: "Ingen handläggningstid publicerad i källorna."
+    giltighet: "Ingen tidsbestämd giltighet anges, men föreningen måste senast tre månader efter varje årsmöte skicka in verksamhetsberättelse, medlemsantal, ekonomisk redovisning, revisionsberättelse och undertecknat årsmötesprotokoll för att förbli bidragsberättigad — annars riskeras statusen."
+    ordning: 1
+    kalla_url: "https://dok.vallentuna.se/file/f%C3%B6rfattningssamling/4.%20kultur%20och%20fritid/4.4%20taxor%20och%20ers%C3%A4ttningar/4.4.1%20Bidragsnormer%20f%C3%B6r%20f%C3%B6reningsverksamhet.pdf"
+kommunsiffra: null

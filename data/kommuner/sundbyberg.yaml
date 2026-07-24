@@ -1,0 +1,286 @@
+# Källa verifierad 2026-07-21 mot sundbyberg.se, källkonvergens enligt
+# RESEARCH_SPEC_v2 §2: regelverk (fem PDF:er) + förvaltningssidor (kultur-
+# och fritidsnämnden samt social- och arbetsmarknadsnämnden) + stipendiesida.
+# Två nämnder hanterar föreningsbidrag parallellt med delvis identiska
+# bidragsnamn (verksamhets-/projekt-/lovbidrag) men olika målgrupp,
+# ansökningsväg och deadlines — skrivna som separata poster, se tackning.log.
+# Exkluderat (§2.4): Ateljéstöd (endast yrkesverksamma konstnärer, individ),
+# Drömpengen (individ/grupp, utesluter uttryckligen befintlig förening),
+# sex individrelaterade stiftelser/fonder (Adda Dahls stipendiefond,
+# Bunges minnesfond, Hyllengrens minnesfond, Skoldonationsfonden,
+# Musikskolans stipendium, Företagarnas stipendiefond, Lions i Sundbyberg)
+# — samtliga riktade till enskilda personer, inte föreningar. De fyra
+# stadsstipendierna (idrotts-/kultur-/miljö-/jämlikhetsstipendiet) TAS MED
+# eftersom de uttryckligen även kan sökas av/tilldelas förening eller
+# organisation med säte i Sundbyberg, inte bara enskild person.
+kommun: "Sundbyberg"
+kommun_slug: "sundbyberg"
+lan: "Stockholms län"
+befolkning: 56523
+forvaltning: "Kultur- och fritidsnämnden samt Social- och arbetsmarknadsnämnden"
+ansokningssystem:
+  namn: "Actor (digitalt ansökningssystem, inloggning med Mobilt BankID på föreningens sidor)"
+  url: "https://service.sundbyberg.se/minasidor"
+kalla_url: "https://www.sundbyberg.se/kultur-fritid/bidrag-stod-och-stipendier.html"
+verifierad: 2026-07-21
+bidrag:
+  - id: "sundbyberg-aktivitetsbidrag"
+    namn: "Aktivitetsbidrag"
+    kategori: ["idrott", "kultur", "pensionar", "funktionsratt"]
+    malgrupp: "Föreningar med ledarledda aktiviteter för barn och unga 7–20 år, personer med funktionsnedsättning och personer med pension"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Föreningen ska vara stödberättigad hos kultur- och fritidsnämnden"
+      - "Föreningen ska ha minst 10 bidragsberättigade medlemmar folkbokförda i Sundbyberg"
+      - "Aktiviteten ska vara ledarledd med minst tre deltagare utöver ledaren och pågå minst 45 minuter"
+      - "Föreningen ska redovisa minst 10 sammankomster för de bidragsberättigade medlemmarna under året"
+      - "Max 2 sammankomster/vecka (80/år) för deltagare 7–12 år, max 3/vecka (120/år) för övriga bidragsberättigade"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d4179b1/1722426253775/"
+    anteckning: "Ansökan avser aktiviteter 1 januari–30 juni (sök senast 25 augusti) respektive 1 juli–31 december (sök senast 25 februari efterföljande år). Bidrag per deltagare och sammankomst fastställs i budget varje år — inget publicerat schablonbelopp. Redovisning sker i och med ansökan, ingen ytterligare redovisning krävs. Beslut fattas av kultur- och fritidsförvaltningen."
+  - id: "sundbyberg-verksamhetsbidrag-kultur-fritid"
+    namn: "Verksamhetsbidrag (kultur- och fritidsnämnden)"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar med verksamhet som inte uppfyller kriterierna för aktivitetsbidrag, ej regelbunden medlemsverksamhet, eller med behov av stöd till lokalkostnader"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-01"]
+    krav:
+      - "Föreningen ska vara stödberättigad hos kultur- och fritidsnämnden"
+      - "Om föreningen är förstahandshyresgäst och söker för lokalkostnader ska en brandskyddsplan (SBA) bifogas ansökan"
+      - "Kan sökas för upp till tre år; beviljas då för ett år i taget med möjlighet till förlängning efter uppföljning"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d4179b1/1722426253775/"
+    anteckning: "Kultur- och fritidsnämnden beslutar; förvaltningen kan besluta om ansökt belopp understiger 30 000 kr enligt nämndens delegationsordning. Skriftlig och ekonomisk redovisning krävs i samband med ny ansökan, eller efter årsmötet om föreningen inte söker igen."
+  - id: "sundbyberg-projektbidrag-under-30000"
+    namn: "Projektbidrag under 30 000 kronor (kultur- och fritidsnämnden)"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar med särskilda satsningar, projekt och arrangemang, inklusive delfinansiering i samverkansprojekt"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan ska skickas in senast sex veckor före projektets eller arrangemangets genomförande"
+      - "Föreningen ska vara stödberättigad hos kultur- och fritidsnämnden"
+    belopp: "Under 30 000 kronor per ansökan"
+    sen_ansokan: "Ej tillämpligt (löpande, men senast sex veckor före genomförande)"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur"
+    anteckning: "Gräns mot sundbyberg-projektbidrag-over-30000 (fast deadline 1 oktober) — samma bidragsform, olika ansökningsväg beroende på summa. Kan sökas för upp till tre år vid behov av långsiktig planering."
+  - id: "sundbyberg-projektbidrag-over-30000"
+    namn: "Projektbidrag över 30 000 kronor (kultur- och fritidsnämnden)"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar med särskilda satsningar, projekt och arrangemang, inklusive delfinansiering i samverkansprojekt"
+    deadlines:
+      typ: "fasta"
+      datum: ["10-01"]
+    krav:
+      - "Föreningen ska vara stödberättigad hos kultur- och fritidsnämnden"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur"
+    anteckning: "Beslut fattas i december. Kan sökas för upp till tre år vid behov av långsiktig planering, med förlängning efter uppföljning."
+  - id: "sundbyberg-projektbidrag-investeringar-lokaler-inventarier"
+    namn: "Projektbidrag för investeringar i lokaler eller inventarier"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar som hyr lokal och behöver renovera, bygga om eller bygga till, eller som behöver köpa in större inventarier"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Stödet söks alltid innan investeringen påbörjas"
+      - "Föreningen ska vara stödberättigad hos kultur- och fritidsnämnden"
+    belopp: "Max 50 % av kostnaden vid lokaler som inte hyrs av staden; högre andel möjlig i stadens egna lokaler"
+    sen_ansokan: "Ej tillämpligt (löpande, men innan investeringen påbörjas)"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur"
+    anteckning: null
+  - id: "sundbyberg-projektbidrag-toppstugan"
+    namn: "Projektbidrag Toppstugan"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Föreningar som arrangerar aktiviteter i eller vid anläggningen Toppstugan (konserter, uppträdanden, allsång, lovaktiviteter m.m.)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Aktiviteten ska ske i eller vid Toppstugan"
+      - "Aktiviteten ska vara gratis eller ha en låg deltagaravgift"
+      - "Aktiviteten ska rikta sig till fler än enbart föreningens egna medlemmar"
+    belopp: "Max 30 000 kronor per ansökan"
+    sen_ansokan: "Ej tillämpligt (löpande, men senast sex veckor före projektstart)"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur"
+    anteckning: null
+  - id: "sundbyberg-lovbidrag-kultur-fritid"
+    namn: "Lovbidrag (kultur- och fritidsnämnden)"
+    kategori: ["idrott", "kultur", "ovrig"]
+    malgrupp: "Föreningar som arrangerar aktiviteter under skolloven, i första hand för barn och unga 7–20 år"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-05", "02-05", "09-05", "11-05", "12-31"]
+    krav:
+      - "Aktiviteten ska vara öppen utan krav på föranmälan (intresseanmälan för planering är dock tillåten)"
+      - "Aktiviteten ska vara gratis (enklare förtäring och lägre administrationsavgift undantagna)"
+      - "Programmet ska spridas till barn och unga i Sundbyberg och information ska finnas på stadens hemsida"
+      - "Aktivt arbete för lika möjligheter oavsett kön, könsidentitet/könsuttryck och sexuell läggning"
+    belopp: "Max 30 000 kronor per lovperiod (sportlov, påsklov, höstlov och jullov); sommarlovet kan ge högre belopp"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur"
+    anteckning: "Deadlines gäller (i kronologisk ordning under året): sportlov 5 januari, påsklov 5 februari, höstlov 5 september, jullov 5 november, sommarlov 31 december (avser sommarlovet påföljande år). Verifierat i två oberoende hämtningar, identiska datum båda gångerna."
+  - id: "sundbyberg-bidrag-studieforbund"
+    namn: "Bidrag till studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund med lokalavdelning i Sundbyberg som får statsbidrag via Folkbildningsrådet, har egen ekonomi och en i kommunen ansvarig styrelse"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Bidraget fördelas utifrån förbundets andel av totalt redovisade bidragsberättigade studietimmar (studiecirkel, kulturprogram, annan folkbildningsverksamhet) i Sundbyberg föregående år, enligt SCB/Folkbildningsrådet"
+      - "Studieförbundet ska senast 31 december skicka in verksamhetsberättelse och ekonomisk årsredovisning för föregående år"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d4179b3/1722426253841/Regler%20f%C3%B6r%20bidrag%20till%20studief%C3%B6rbunden%20-%20tillg%C3%A4nglighetsanpassad.pdf"
+    anteckning: "SKRIVET_EJ_I_REGELVERK: ansökningsdatumet 31 mars anges på kommunens bidragssida men inte i det underliggande regelverket från 2013, som i stället beskriver en automatisk fördelning baserad på redovisade studietimmar utan explicit ansökningsdeadline. Utbetalning sker under andra kvartalet årligen. Ansvarig nämnd: kultur- och fritidsnämnden."
+  - id: "sundbyberg-stod-elitsatsningar"
+    namn: "Stöd till elitsatsningar"
+    kategori: ["idrott"]
+    malgrupp: "Föreningar som bedriver elitverksamhet för seniorer på hög nationell nivå inom sin idrott"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Tydlig lokal anknytning till Sundbyberg (t.ex. säte, verksamhet)"
+      - "Bedriver elitverksamhet för seniorer på hög nationell nivå inom sin idrott (högsta nationella serien, eller landslag/Sverigeelit för individuella idrottare)"
+      - "Har en aktiv verksamhet för någon av kultur- och fritidsnämndens prioriterade målgrupper (barn och unga 7–20 år, personer med funktionsnedsättning, personer 65+/med pension)"
+      - "Erbjuder motprestationer av tydligt värde för staden (t.ex. aktiviteter för barn och unga, medverkan i stadens evenemang)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/download/18.2930f1d19c985d1f0fba53/1772461483729/"
+    anteckning: "Stödet ges genom avtal (max 3 år) mellan förening och kultur- och fritidsnämnden, inte som återkommande bidragsansökan — ingen publicerad ansökningsdeadline. VARNINGSSIGNAL undersökt (§2.6): den hämtade PDF-versionen är rubricerad 'Förslag den 25 september 2025' och fältet 'Beslutad av Kommunfullmäktige' är fortfarande ifyllt med platshållartext 'XXXX-XX-XX § XX'. Dokumentet anger ändå 'Giltig från 1 januari 2026' och är den version som länkas från stadens aktuella bidragssida för elitsatsningar, vilket tolkas som att riktlinjen är i kraft. Ersätter tidigare 'Riktlinjer för sponsring av elitidrottssatsningar' (2014-01-27), formellt upphävd av kommunfullmäktige september 2024 (KS-0556/2024 §342)."
+  - id: "sundbyberg-verksamhetsbidrag-social-arbetsmarknad"
+    namn: "Verksamhetsbidrag (social- och arbetsmarknadsnämnden)"
+    kategori: ["social", "funktionsratt"]
+    malgrupp: "Föreningar vars verksamhet förbättrar förutsättningarna för barn/unga i social utsatthet, personer med funktionsnedsättning, personer med missbruk eller beroende, hemlösa, personer i utanförskap (t.ex. arbetslöshet, bristande språkkunskaper) eller personer utsatta för våld/brott"
+    deadlines:
+      typ: "fasta"
+      datum: ["11-30"]
+    krav:
+      - "Föreningens verksamhet ska vara ett komplement till nämndens egna verksamheter"
+      - "Ansökan ska redovisa om föreningen sökt bidrag hos andra nämnder för samma period — kan vara skäl för avslag"
+      - "Föreningar som söker för lokalkostnader ska bifoga en skriftlig plan för systematiskt brandskyddsarbete (SBA)"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d49e1b3/1724248394955/"
+    anteckning: "Ansökan görs via e-post (socialocharbetsmarknadsnamnden@sundbyberg.se) eller post, inte via Actor-systemet — avviker från kultur- och fritidsnämndens digitala ansökningsväg. KONFLIKT (loggad i konflikter.log): kommunens bidragssida beskriver ansökan som digital inloggning i Actor-systemet, medan det daterade regelverket (antaget 2016-12-13 §100, reviderat 2017-02-21 §8) anger e-post/post. Regelverket har datum, webbsidans uppgift om ansökningssätt saknar synlig ändringsdatum — fältet är därför satt enligt regelverket. Beslut fattas av nämnden senast i februari påföljande år."
+  - id: "sundbyberg-projektbidrag-social-arbetsmarknad"
+    namn: "Projektbidrag (social- och arbetsmarknadsnämnden)"
+    kategori: ["social", "funktionsratt"]
+    malgrupp: "Föreningar vars verksamhet förbättrar förutsättningarna för barn/unga i social utsatthet, personer med funktionsnedsättning, personer med missbruk eller beroende, hemlösa, personer i utanförskap eller personer utsatta för våld/brott"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Hanteras av nämnden löpande när ansökan inkommer"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d49e1b3/1724248394955/"
+    anteckning: "Ansvarig nämnd: social- och arbetsmarknadsnämnden. Redovisning krävs för tidigare bidrag innan nya beviljas."
+  - id: "sundbyberg-lovbidrag-social-arbetsmarknad"
+    namn: "Lovbidrag (social- och arbetsmarknadsnämnden)"
+    kategori: ["social", "funktionsratt"]
+    malgrupp: "Föreningar vars verksamhet förbättrar förutsättningarna för barn/unga i social utsatthet, personer med funktionsnedsättning, personer med missbruk eller beroende, hemlösa, personer i utanförskap eller personer utsatta för våld/brott"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Hanteras av nämnden löpande när ansökan inkommer"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (löpande)"
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d49e1b3/1724248394955/"
+    anteckning: "Ansvarig nämnd: social- och arbetsmarknadsnämnden."
+  - id: "sundbyberg-stod-finska-kultur-sprak"
+    namn: "Ekonomiskt stöd till finska kultur- och språkaktiviteter"
+    kategori: ["kultur", "social"]
+    malgrupp: "Föreningar och externa aktörer som bedriver aktiviteter som främjar det finska språket, tvåspråkighet eller sverigefinsk kultur i Sundbyberg — aktiviteter för barn, ungdomar och äldre prioriteras"
+    deadlines:
+      typ: "fasta"
+      datum: ["01-15", "08-15"]
+    krav:
+      - "Aktiviteter för höst/vinter söks senast 15 augusti; verksamhet som löper över hela året eller planeras till vår/tidig sommar söks senast 15 januari året innan genomförande"
+      - "Ansökan görs via blankett som skickas till kommunstyrelsen (e-post eller post)"
+      - "Redovisningsblankett ska skickas in senast tre månader efter genomförd aktivitet; oanvända medel ska återbetalas"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/stod-till-finska-kultur--och-sprakaktiviteter"
+    anteckning: "Ansvarig: kommunstyrelsen, kontakt suomeksi@sundbyberg.se. Finansieras ur statsbidrag för finskt förvaltningsområde. Riktlinjer för stödet var enligt källan under bearbetning vid verifieringstillfället ('Riktlinjer för ekonomiskt stöd ur statsbidrag för finskt förvaltningsområde är under bearbetning') — nuvarande rutiner tillämpas tills vidare."
+  - id: "sundbyberg-idrottsstipendium"
+    namn: "Idrotts- och ungdomsledarstipendium"
+    kategori: ["idrott"]
+    malgrupp: "Enskild person mantalsskriven i Sundbyberg, eller organisation/verksamhet/förening med säte i Sundbyberg eller vars verksamhet kommer sundbybergarna till del"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Belönar insatser som lyfter fram Sundbybergs idrottsliv och ungdomars engagemang"
+      - "Sökande kan ansöka själv eller nominera någon annan"
+      - "Kan inte tilldelas enskild person med förtroendeuppdrag i Sundbybergs stad, eller anställd i staden för insats inom anställningens uppdrag"
+    belopp: "25 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/stipendier"
+    anteckning: "Ansökan via e-tjänst. Kontakt: kulturochfritidsnamnden@sundbyberg.se. Kan tilldelas förening, inte bara enskild person — därför skrivet trots §2.4-gränsdragningen mot individstipendier."
+  - id: "sundbyberg-kulturstipendium"
+    namn: "Kulturstipendium"
+    kategori: ["kultur"]
+    malgrupp: "Enskild person mantalsskriven i Sundbyberg, eller organisation/verksamhet/förening med säte i Sundbyberg eller vars verksamhet kommer sundbybergarna till del"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Belönar insatser som lyfter fram kulturen i Sundbyberg"
+      - "Sökande kan ansöka själv eller nominera någon annan"
+      - "Kan inte tilldelas enskild person med förtroendeuppdrag i Sundbybergs stad, eller anställd i staden för insats inom anställningens uppdrag"
+    belopp: "25 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/stipendier"
+    anteckning: "Ansökan via e-tjänst. Kontakt: kulturochfritidsnamnden@sundbyberg.se. Kan tilldelas förening, inte bara enskild person."
+  - id: "sundbyberg-miljostipendium"
+    namn: "Miljöstipendium"
+    kategori: ["ovrig"]
+    malgrupp: "Enskild person mantalsskriven i Sundbyberg, eller organisation/verksamhet/förening med säte i Sundbyberg eller vars verksamhet kommer sundbybergarna till del"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Belönar verksamhet eller arrangemang som förbättrar miljön"
+      - "Sökande kan ansöka själv eller nominera någon annan"
+      - "Kan inte tilldelas enskild person med förtroendeuppdrag i Sundbybergs stad, eller anställd i staden för insats inom anställningens uppdrag"
+    belopp: "25 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/stipendier"
+    anteckning: "Ansökan via e-tjänst. Kontakt: kommunstyrelsen@sundbyberg.se. Kan tilldelas förening, inte bara enskild person."
+  - id: "sundbyberg-jamlikhetsstipendium"
+    namn: "Jämlikhetsstipendium"
+    kategori: ["social"]
+    malgrupp: "Enskild person mantalsskriven i Sundbyberg, eller organisation/verksamhet/förening med säte i Sundbyberg eller vars verksamhet kommer sundbybergarna till del"
+    deadlines:
+      typ: "fasta"
+      datum: ["03-31"]
+    krav:
+      - "Belönar insatser som motverkar mobbning eller diskriminering"
+      - "Sökande kan ansöka själv eller nominera någon annan"
+      - "Kan inte tilldelas enskild person med förtroendeuppdrag i Sundbybergs stad, eller anställd i staden för insats inom anställningens uppdrag"
+    belopp: "25 000 kronor"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/stipendier"
+    anteckning: "Ansökan via e-tjänst. Kontakt: kommunstyrelsen@sundbyberg.se. Kan tilldelas förening, inte bara enskild person."
+forutsattningar:
+  - id: "sundbyberg-stodberattigad-kultur-fritid"
+    vad: "Bli stödberättigad förening (godkänd Sundbybergsförening) hos kultur- och fritidsnämnden"
+    beskrivning: "Föreningen registrerar sig hos kultur- och fritidssektorn och skickar in stadgar och verksamhetshandlingar. Sektorn bedömer om föreningen uppfyller grundkraven (demokratisk uppbyggnad, öppen för alla att bli medlem, ideellt engagemang, verksamhet i Sundbyberg) samt tilläggskravet att minst 50 % av de aktiva medlemmarna ska vara bosatta i Sundbyberg, eller att den största medlemsgruppen är bosatt i Sundbyberg (undantag finns för avtalsföreningar, funktionsrättsföreningar och föreningar med stort regionalt upptagningsområde). Politiska partier, ekonomiska föreningar, stiftelser, företagsföreningar, riksförbund utan lokalavdelning i Sundbyberg och studieförbund kan inte bli stödberättigade föreningar (studieförbund har i stället rätt att söka det egna studieförbundsbidraget)."
+    system: null
+    ledtid: 90
+    ledtid_text: "Det är först tre månader efter godkänd registrering som föreningen kan hyra lokaler till den subventionerade taxan för kategori 'Stödberättigad förening'; innan dess gäller taxan för 'Övriga föreningar'"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.sundbyberg.se/download/18.2e6195c8190a64a78d4179af/1722426253668/"

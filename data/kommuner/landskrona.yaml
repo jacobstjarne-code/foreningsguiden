@@ -1,0 +1,301 @@
+# Källa verifierad 2026-07-23 mot landskrona.se. Täckning fastställd via
+# källkonvergens (RESEARCH_SPEC v2.1 §2): regelverket (fyra nämnd-PDF:er,
+# beslutade 2024-03 till 2024-11, samtliga grundade på "Värdegrund och
+# allmänna bestämmelser för föreningsbidrag i Landskrona stad", antagen av
+# kommunfullmäktige 2023-10-26 § 142) + förvaltningarnas egna sidor
+# (kulturförvaltningens dedikerade bidragssidor gav mer specifika deadlines
+# än PDF-regelverket) + e-tjänstkatalogen på etjanster.landskrona.se (235
+# tjänster, statiskt renderad katalogsida — användes som tredje oberoende
+# konvergenskälla, se tackning.log) + stipendiesidan under
+# omsorg-och-hjalp/. Fyra nämnder delar ut föreningsbidrag: kulturnämnden,
+# individ- och familjenämnden, omsorgsnämnden samt teknik- och
+# fritidsnämnden (förvaltningen döptes om/delades under 2024, se
+# tackning.log för detaljer — regelverks-PDF:en från 2024-11-21 anger
+# fortfarande "Teknik- och fritidsnämnden" som beslutande nämnd).
+# Ansökningsportalen landskrona.rbok.se är JS-renderad och gick inte att
+# räkna upp direkt (EJ_EXTRAHERBAR) — täckningen är i stället fastställd
+# via regelverket + förvaltningssidorna + e-tjänstkatalogen, i linje med
+# v2.1:s reviderade metod. Spot-checkas av Jacob före publik deploy.
+kommun: "Landskrona"
+kommun_slug: "landskrona"
+lan: "Skåne län"
+befolkning: 47571
+forvaltning: "Kulturförvaltningen, Individ- och familjeförvaltningen, Omsorgsförvaltningen samt Teknik- och stadsmiljöförvaltningen (tidigare Teknik- och fritidsförvaltningen/-nämnden)"
+ansokningssystem:
+  namn: "Landskrona stads boknings- och bidragssystem (Rbok) samt kommunens e-tjänsteportal"
+  url: "https://landskrona.rbok.se/"
+kalla_url: "https://www.landskrona.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod/"
+verifierad: 2026-07-23
+bidrag:
+  - id: "landskrona-verksamhetsstod-kultur"
+    namn: "Verksamhetsstöd till kulturföreningar"
+    kategori: ["kultur"]
+    malgrupp: "Kulturföreningar med säte i Landskrona som bedriver kontinuerlig, publik verksamhet inom kulturområdet året om. Kulturarvsaktörer undantas kravet på publik verksamhet men ska driva öppen kulturarvsverksamhet med aktivt deltagande."
+    deadlines:
+      typ: "fasta"
+      datum: ["04-20"]
+    krav:
+      - "Föreningen ska bedriva verksamhet året om (ej tidsbegränsade projekt — se Kulturprojektstöd för sådant)"
+      - "Verksamhetsberättelse, ekonomisk berättelse och revisionsberättelse för föregående verksamhetsår"
+      - "Medlemsantal uppdelat på åldersgrupperna 0–6, 7–25, 26–65 samt 66 år och äldre, varav mantalsskrivna i Landskrona"
+      - "Verksamhetsplan för kommande år"
+      - "Nystartade föreningar hänvisas till projektstöd för att starta ny förening i stället"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier/verksamhetsstod-till-kulturforeningar/"
+    anteckning: "Beräknas i huvudsak på antal aktiviteter och deltagande medlemmar. Regelverk: Kulturnämndens regler för verksamhets-, utbildnings- och projektstöd till kulturföreningar (beslutad 2024-04-08, KN 2023/27 § 13), som endast anger 'ansökningsperioder som anslås på stadens hemsida' — det konkreta datumet 20 april är hämtat från kulturförvaltningens egen sida, inte PDF:en (SKRIVET_EJ_I_REGELVERK, se tackning.log)."
+  - id: "landskrona-kulturprojektstod"
+    namn: "Kulturprojektstöd"
+    kategori: ["kultur"]
+    malgrupp: "Juridiska personer (organisationer inom kulturella och kreativa branscher, föreningar och studieförbund) samt fysiska personer med F-skattsedel, för tidsbegränsade, publika kulturprojekt/arrangemang i Landskrona"
+    deadlines:
+      typ: "fasta"
+      datum: ["02-10", "05-10", "09-10", "11-10"]
+    krav:
+      - "Projektet ska vara öppet för allmänheten och tidsbegränsat (konsert, utställning, föreläsning, workshop eller verksamhetsutveckling)"
+      - "Förankrat i Landskronas kulturstrategi med minst ett utvecklingsområde"
+      - "Ej religiös eller partipolitisk verksamhet, egen konstnärlig produktion, eller arrangemang utanför Landskrona"
+      - "Marknadsföring ska ange att projektet stöds av Landskrona stads kulturnämnd"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier/kulturprojektstod/"
+    anteckning: "Ansökningar upp till 50 000 kr beslutas av tjänsteperson på kulturförvaltningen, större belopp av kulturnämnden. Ska ej förväxlas med föreningarnas ordinarie projektstöd (kulturnämndens regelverk) som är förbehållet bidragsberättigade kulturföreningar — detta stöd har en bredare målgrupp. 2026 års första ansökningsrunda: 9 ansökningar om drygt 500 000 kr, 3 beviljade om totalt 95 000 kr."
+  - id: "landskrona-kulturstipendium"
+    namn: "Kulturstipendium"
+    kategori: ["kultur"]
+    malgrupp: "Privatpersoner och organisationer/föreningar med anknytning till Landskrona som utövar kultur (ord, scenkonst, konst, film, musik, kulturarv m.m.). Kan sökas av en själv eller nomineras av annan."
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Anknytning till Landskrona"
+      - "Skriftlig motivering, max tre bilagor"
+      - "Motiveringen bör referera till Landskronas kulturstrategi 2023–2027"
+    belopp: "100 000 kr (totalt anslag 2026, fördelas av kulturstipendiekommittén på en eller flera mottagare)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier/kulturstipendium/"
+    anteckning: "Källan anger uttryckligen: 'Kulturstipendiet kan även tilldelas en förening' — uteslutet INTE trots att det är ett stipendium (RESEARCH_SPEC v2 §2.6/lärdom: stipendium som uttryckligen kan gå till förening ska inte uteslutas per automatik). Kulturstipendiekommittén (inom kulturnämnden) kan besluta att inte dela ut något år."
+  - id: "landskrona-nell-walden-stipendiet"
+    namn: "Nell Walden-stipendiet"
+    kategori: ["kultur"]
+    malgrupp: "Konstnärligt verksamma (bildkonst, skulptur, litteratur, scen, film m.fl.) med koppling till Nell Walden/Der Sturm-andan — nyskapande, ofta tvärkonstnärligt uttryck. Praxis visar att grupper/ensembler kan tilldelas stipendiet (2025 gick det till en kammarensemble)."
+    deadlines:
+      typ: "fasta"
+      datum: ["09-01"]
+    krav:
+      - "Konkret konstnärligt projekt för presentation i Landskrona senast 2027-05-31"
+      - "Presentationsform t.ex. utställning, workshop eller filmvisning"
+      - "Ansökan via e-tjänst med bakgrund, projektbeskrivning, budget och presentationsplan"
+    belopp: "20 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier/nell-walden-stipendiet/"
+    anteckning: "Sidan begränsar inte uttryckligen till privatpersoner ('Stipendiaten' utan avgränsning) och 2025 års mottagare var en ensemble (grupp), inte en enskild person — skrivet trots stipendieformen, se lärdom om föreningsstipendier."
+  - id: "landskrona-unga-ideer"
+    namn: "Unga idéer"
+    kategori: ["kultur", "ovrig"]
+    malgrupp: "Unga 13–25 år, boende eller verksamma i Landskrona, som vill förverkliga en idé inom kultur och fritid. I andra hand kan föreningar/organisationer som företräder unga söka."
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Projektet ska vara öppet för alla unga och genomföras i Landskrona"
+      - "Sök gärna minst tre månader före genomförande"
+      - "Exempel: konserter, utställningar, workshops, aktiviteter som ökar ungas kulturdeltagande"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier/unga-ideer/"
+    anteckning: "Primärt riktat till enskilda unga och informella grupper (ej en traditionell föreningsansökan), men sidan anger uttryckligen att föreningar/organisationer som företräder unga kan söka i andra hand — skrivet med den reservationen i målgruppsfältet. Exempel på beviljade belopp: podcastprojekt 5 500 kr, droneinköp 5 000 kr. Beslut inom fyra veckor."
+  - id: "landskrona-studieforbund-verksamhetsbidrag"
+    namn: "Verksamhetsbidrag för studieförbund"
+    kategori: ["kultur"]
+    malgrupp: "Studieförbund godkända av Folkbildningsrådet, verksamma i Landskrona med studiecirklar och kulturprogram för invånare i olika åldrar"
+    deadlines:
+      typ: "fasta"
+      datum: ["04-25"]
+    krav:
+      - "Verksamhetsberättelse, ekonomisk redovisning och verksamhetsplan för kommande år"
+      - "Dokumentation av genomförda studiecirklar/kulturprogram: titel, datum, medverkande, plats, publikantal"
+      - "Deltagande i årligt dialogmöte med kulturförvaltningen"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier/verksamhetsbidrag-for-studieforbund/"
+    anteckning: "Bidraget beräknas dels volymbaserat (föregående års studietimmar), dels genom bedömning av verksamhetens utveckling och räckvidd. Betalas ut i juli."
+  - id: "landskrona-verksamhetsstod-individfamilj"
+    namn: "Verksamhetsstöd (individ- och familjenämnden)"
+    kategori: ["social"]
+    malgrupp: "Invandrar-, vård- och stödföreningar som bedriver socialt arbete för nämndens målgrupper: socialt utsatta (hemlösa, personer med missbruk eller psykisk ohälsa, asylsökande), barn och unga, nationella minoriteter samt andra grupper vars insatser stärker folkhälsan i Landskrona"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska bedriva socialt arbete, ej enbart allmänna medlemsaktiviteter"
+      - "Redovisning av vilka målgrupper verksamheten stöttat och motivering av hur aktiviteterna stärkt målgruppen, utöver ordinarie verksamhetsberättelse"
+      - "Verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse och verksamhetsplan"
+      - "Kan inte sökas av föreningar som får aktivitetsstöd"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://cms.landskrona.se/wp-content/uploads/2024/12/sarskilda-regler-for-foreningsbidrag-som-delas-ut-av-individ-och-familjenamnden.pdf"
+    anteckning: "Regelverk: Regler för föreningsbidrag som ges av Individ- och familjenämnden (beslutad 2024-03-08, IFN 2024/194). Motsvarande e-tjänst 'Invandrar-, vård- och stödföreningar - ansökan om verksamhetsbidrag' bekräftar bidraget på etjanster.landskrona.se men anger inget specifikt datum — deadline satt till löpande i brist på publicerat datum, ej en gissning."
+  - id: "landskrona-verksamhetsstod-omsorg"
+    namn: "Verksamhetsstöd (omsorgsnämnden)"
+    kategori: ["pensionar", "funktionsratt"]
+    malgrupp: "Pensionärsföreningar samt funktionsstödsföreningar med verksamhet i Landskrona stad"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Verksamheten ska komma invånarna till godo genom egen medverkan eller som publik/besökare"
+      - "Verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse och verksamhetsplan"
+      - "Kan inte sökas av föreningar som får aktivitetsstöd"
+      - "Ej bidragsberättigade: föreningar som driver förskola/skola, intresseföreningar (fack, företagar-, villa-, hyresgästförening m.fl.), skol-/student-/föräldraföreningar, supporter-/kamrat-/insamlingsföreningar"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://cms.landskrona.se/wp-content/uploads/2024/12/sarskilda-regler-for-foreningsbidrag-som-delas-ut-av-omsorgsnamnden.pdf"
+    anteckning: "Regelverk: Omsorgsnämndens riktlinjer för föreningsbidrag till pensionärsföreningar och funktionsstödsföreningar (beslutad 2024-07-08, ON 2024/163). Ansökan via e-tjänst, inget specifikt datum publicerat på nämndens sidor — deadline satt till löpande."
+  - id: "landskrona-projektstod-individfamilj-omsorg"
+    namn: "Projektstöd (individ- och familjenämnden samt omsorgsnämnden)"
+    kategori: ["social", "pensionar", "funktionsratt"]
+    malgrupp: "Bidragsberättigade föreningar inom individ- och familjenämndens respektive omsorgsnämndens ansvarsområden (socialt arbete, pensionärs- och funktionsstödsföreningar) som vill driva projekt eller genomföra utvecklingsinsatser/arrangemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Redovisning av målgrupp samt motivering av hur aktiviteterna stärker målgruppen/folkhälsan"
+      - "För omsorgsnämnden: medel utlyses på hösten för genomförande under kommande 12-månadersperiod"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://cms.landskrona.se/wp-content/uploads/2024/12/sarskilda-regler-for-foreningsbidrag-som-delas-ut-av-individ-och-familjenamnden.pdf"
+    anteckning: "Regelverket beskriver mekanismen generellt ('vad som är möjligt att söka för tillfället finns att läsa på Landskrona stads hemsida') utan att ange ett fast, aktuellt namngivet projekt utöver Start av ny förening (se separat post). Skrivet ändå i enlighet med §2.4 — 'hanterbarhet'/vaghet är inte ett giltigt uteslutningsskäl. Motsvarande regel finns i omsorgsnämndens PDF (ON 2024/163) med identisk gemensam text."
+  - id: "landskrona-projektstod-start-ny-forening"
+    namn: "Projektstöd — Start av ny förening"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Nya föreningar (alla kategorier) med minst 10 personer mantalsskrivna i Landskrona kommun som är intresserade av medlemskap"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Minst 10 intresserade medlemmar mantalsskrivna i Landskrona kommun"
+      - "Plan inklusive budget för första verksamhetsåret"
+      - "Delas inte ut till föreningar som fått startbidrag eller motsvarande från annan instans"
+    belopp: "Max 5 000 kr"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod/"
+    anteckning: "Identisk regel i samtliga fyra nämnders regelverk (kultur, individ- och familj, omsorg, teknik- och fritid) — skrivet som en gemensam post eftersom villkor och belopp är identiska oavsett vilken nämnd som administrerar utifrån föreningens inriktning."
+  - id: "landskrona-utbildningsstod"
+    namn: "Utbildningsstöd"
+    kategori: ["idrott", "kultur", "social", "pensionar", "funktionsratt", "ovrig"]
+    malgrupp: "Samtliga bidragsberättigade föreningar, för ledarutbildning eller utbildning specifik för föreningens verksamhet"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan senast sex månader efter genomgången utbildning"
+      - "Kursprogram, kursintyg och faktura bifogas"
+      - "Ej stöd för resor/logi eller generella utbildningar (styrelseutbildning, föreningskunskap — dessa erbjuds i kommunal regi istället)"
+      - "Utbildningen ska stärka föreningens kvalitet, inte bara enskilda individers kunskap"
+    belopp: "Upp till 50 aktiva medlemmar: 10 000 kr. 51–250 aktiva medlemmar: 20 000 kr. 250 eller fler: 30 000 kr (årligt tak)"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod/"
+    anteckning: "Identisk regel i samtliga fyra nämnders regelverk — administreras av den nämnd som ansvarar för föreningens kategori. Deadline är löpande (relativ till genomförd utbildning, ej ett fast kalenderdatum) — därav 'lopande' snarare än ett gissat MM-DD."
+  - id: "landskrona-nolltaxa"
+    namn: "Nolltaxa"
+    kategori: ["idrott", "pensionar"]
+    malgrupp: "Bidragsberättigade föreningar med barn/unga 0–25 år (träning och matcher) samt äldre 70+ (träning) i kommunala idrottsanläggningar, idrottshallar och samlingslokaler"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Föreningen ska vara bidragsberättigad"
+      - "Matcher/tävlingar för seniorverksamhet omfattas inte, även om enskilda deltagare är 0–25 år"
+      - "Barn- och ungdomsverksamhet prioriteras vid bokning"
+    belopp: null
+    sen_ansokan: "Ej tillämpligt (avgiftsbefrielse, ej kontantbidrag)"
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod/"
+    anteckning: "Avgiftsbefrielse, inte ett kontantbidrag — belopp null av det skälet. Avvikande regler kan förekomma i specifika anläggningar; kontakta teknik- och fritidsförvaltningen. Regelverk: Teknik- och fritidsnämndens regler för föreningsbidrag (beslutad 2024-11-21)."
+  - id: "landskrona-aktivitetsstod-7-25"
+    namn: "Kommunalt aktivitetsstöd 7–25 år"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med minst 10 bidragsberättigade medlemmar 7–25 år, ledarledd verksamhet"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Minst 10 bidragsberättigade medlemmar 7–25 år"
+      - "Ledarledda grupper med minst tre deltagare 7–25 år"
+      - "Aktiviteten ska gynna folkhälsan och pågå minst 45 minuter exklusive samling/avslutning"
+      - "Följer i övrigt reglerna för statligt aktivitetsstöd till ungdomsorganisationer"
+      - "Personlig medlemsavgift om minst 75 kr"
+    belopp: "Högst 50 kr per bidragsberättigad aktivitet"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://cms.landskrona.se/wp-content/uploads/2024/12/sarskilda-regler-for-foreningsbidrag-som-delas-ut-av-teknik-och-fritidsnamnden.pdf"
+    anteckning: "Ansökan årligen senast 25 augusti för period 1 (1 jan–30 jun) respektive 25 februari för period 2 (1 jul–31 dec). Kan inte sökas av föreningar som söker verksamhetsstöd. Ansökan sker via landskrona.rbok.se (EJ_EXTRAHERBAR som portal — detaljerna är hämtade ur regelverks-PDF:en, se tackning.log)."
+  - id: "landskrona-aktivitetsstod-70plus"
+    namn: "Kommunalt aktivitetsstöd för äldre (70+)"
+    kategori: ["pensionar"]
+    malgrupp: "Föreningar/ideella organisationer anslutna till Riksidrottsförbundet, Sverok, eller med särskilt nämndbeslut (t.ex. scoutföreningar), för deltagare 70 år och äldre"
+    deadlines:
+      typ: "fasta"
+      datum: ["08-25", "02-25"]
+    krav:
+      - "Föreningen ska vara ansluten till RF, Sverok eller ha särskilt nämndbeslut"
+      - "Verksamhet i kommunens lokaler med nolltaxa"
+      - "Deltagaren ska under kalenderåret fylla minst 70 år"
+    belopp: "Högst 40 kr per bidragsberättigad aktivitet"
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://cms.landskrona.se/wp-content/uploads/2024/12/sarskilda-regler-for-foreningsbidrag-som-delas-ut-av-teknik-och-fritidsnamnden.pdf"
+    anteckning: "Samma ansökningsperioder som aktivitetsstöd 7–25 år (25 augusti/25 februari). Bekräftat som eget bidrag ('Aktivitetsstöd (70+) till föreningar') i kommunens e-tjänstkatalog."
+  - id: "landskrona-lokal-anlaggningsstod"
+    namn: "Lokal- och anläggningsstöd"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Föreningar med barn- och ungdomsverksamhet vars huvudsakliga stöd är aktivitetsstöd 7–25 år, för drift av egen eller hyrd lokal"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Beviljas inte utan att aktivitetsstöd sökts och beviljats"
+      - "Kan inte sökas om verksamheten bedrivs i kommunal lokal/anläggning"
+      - "På begäran ska hyreskontrakt och/eller verifierade lokalkostnader visas upp"
+      - "Anläggning/lokal ska vara belägen inom Landskrona kommun"
+      - "Ej stöd för lokal som används för inkomstbringande arrangemang eller som redan subventioneras av kommunen"
+    belopp: "70% av godkända kostnader, högst 1 500 kr per bidragsberättigad medlem och högst 250 kr per godkänd sammankomst. Vid lokalkostnad ≤10 000 kr utgår 100%. Högsta belopp 150 000 kr. Kan inte höjas/sänkas mer än 15% jämfört med föregående år utom vid särskilda skäl."
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://cms.landskrona.se/wp-content/uploads/2024/12/sarskilda-regler-for-foreningsbidrag-som-delas-ut-av-teknik-och-fritidsnamnden.pdf"
+    anteckning: "Hyra (inkl. värme/el/vatten/sophämtning), ränta på fastighetslån, fastighetsförsäkring och underhåll (10 kr/kvm) räknas som godkända kostnader. Eventuella hyresintäkter räknas av."
+  - id: "landskrona-stod-till-arrangemang"
+    namn: "Stöd till arrangemang (Arrangemangsstöd)"
+    kategori: ["idrott", "ovrig"]
+    malgrupp: "Bidragsberättigade föreningar och föreningar som har möjlighet att bli bidragsberättigade, för offentliga idrotts- och/eller rörelsearrangemang"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav:
+      - "Ansökan tas emot löpande, dock minst tre månader innan arrangemanget genomförs"
+      - "Redovisning senast två-tre månader efter genomfört arrangemang, med samtliga kostnader, intäkter och fakturaunderlag"
+      - "Oanvänt bidrag ska återbetalas"
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://etjanster.landskrona.se/oversikt/overview/555"
+    anteckning: "Administreras av Teknik- och stadsmiljöförvaltningen. Egen namngiven e-tjänst 'Stöd till arrangemang - Ansökan' bekräftad i kommunens e-tjänstkatalog (etjanster.landskrona.se), utöver redovisningstjänsten som är den faktiskt hämtade käll-URL:en (ansökningstjänstens specifika overview-id gick inte att fastställa — portalens per-tjänst-sidor är klientroutade, se tackning.log)."
+  - id: "landskrona-marknadsforingsstod"
+    namn: "Marknadsföringsstöd"
+    kategori: ["ovrig"]
+    malgrupp: "Den som arrangerar evenemang i Landskrona (formuleringen utesluter inte föreningar, men källan specificerar inte målgruppen närmare)"
+    deadlines:
+      typ: "lopande"
+      datum: []
+    krav: []
+    belopp: null
+    sen_ansokan: "Ej angivet i källan"
+    kalla_url: "https://etjanster.landskrona.se/oversikt/overview/96"
+    anteckning: "EJ_EXTRAHERBAR i detalj — ansökningsformuläret är en nedladdningsbar PDF (741 kB) som inte gick att läsa via den klientroutade portalsidan under körningen. Skrivet ändå med den information som gick att bekräfta, i stället för att uteslutas på vaga grunder (§2.4). Bör kompletteras vid spot-check eller nästa omverifiering."
+forutsattningar:
+  - id: "landskrona-bidragsberattigad-forening"
+    vad: "Bli bidragsberättigad förening"
+    beskrivning: "Föreningen ska ha säte i Landskrona kommun (eller beviljas undantag av bidragsgivande nämnd), vara ansluten till godkänd riksorganisation eller godkännas separat, ha organisationsnummer, vara öppen för alla, ha stadgar och en demokratiskt vald styrelse, föra medlemsmatrikel med namn/adress/födelsedata, ta ut medlemsavgift, och ha minst tio bidragsberättigade (mantalsskrivna) medlemmar. Föreningen ska registrera och årligen uppdatera/godkänna sina uppgifter i Landskrona stads föreningsregister. All bidragsberättigad verksamhet ska vara helt rök-, alkohol- och drogfri, icke-konfessionell och partipolitiskt obunden (undantag för ungdomsförbund med riksdagsrepresentation)."
+    system: "Landskrona stads föreningsregister (via landskrona.rbok.se) samt kommunens e-tjänsteportal"
+    ledtid: null
+    ledtid_text: "Ingen publicerad handläggningstid för godkännande som bidragsberättigad förening"
+    giltighet: null
+    ordning: 1
+    kalla_url: "https://www.landskrona.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod/allmanna-bestammelser-for-foreningsbidrag/"
+kommunsiffra: null
