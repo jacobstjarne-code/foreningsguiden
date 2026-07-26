@@ -76,11 +76,7 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
 
     <div class="registrera-doc__hjalp">
       <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
-      <form data-registrera-form>
-        <label for="registrera-epost">E-post</label>
-        <input type="email" id="registrera-epost" name="email" required autocomplete="email" />
-        <button type="submit" class="btn-primary">{TRATT.besked.borjaHar.hjalpKnapp}</button>
-      </form>
+      <button type="button" class="btn-primary" data-registrera-betala>{TRATT.besked.borjaHar.hjalpKnapp}</button>
       <p data-registrera-kvitto hidden>{TRATT.besked.minne}</p>
       <p data-registrera-fel hidden>Något gick fel. Försök igen.</p>
     </div>
@@ -92,30 +88,38 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
 <script>
   import { getForeningsprofil } from '../../../../lib/foreningsprofil';
 
-  const form = document.querySelector<HTMLFormElement>('[data-registrera-form]');
+  const knapp = document.querySelector<HTMLButtonElement>('[data-registrera-betala]');
   const kvitto = document.querySelector<HTMLElement>('[data-registrera-kvitto]');
   const felText = document.querySelector<HTMLElement>('[data-registrera-fel]');
   const kommunSlug = window.location.pathname.split('/').filter(Boolean)[1] ?? '';
 
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  // Stripe Checkout skickar tillbaka hit via success_url — se
+  // src/pages/api/checkout/registrering.ts. Ingen egen kvittosida:
+  // samma data-registrera-kvitto-element som redan fanns för den gamla
+  // e-postfångsten återanvänds för betalkvittot.
+  if (new URLSearchParams(window.location.search).get('betald') === '1') {
+    knapp?.setAttribute('hidden', '');
+    kvitto?.removeAttribute('hidden');
+  }
+
+  knapp?.addEventListener('click', async () => {
     felText?.setAttribute('hidden', '');
-    const data = new FormData(form);
+    knapp.disabled = true;
+
+    const data = new FormData();
     data.set('kommun', kommunSlug);
-    data.set('syfte', 'registrering');
 
     const profil = getForeningsprofil();
     if (profil) data.set('profil', JSON.stringify(profil));
 
     try {
-      const res = await fetch('/api/vantelista', { method: 'POST', body: data });
+      const res = await fetch('/api/checkout/registrering', { method: 'POST', body: data });
       const json = await res.json();
-      if (!res.ok || !json.ok) throw new Error('svar ej ok');
-
-      form.hidden = true;
-      kvitto?.removeAttribute('hidden');
+      if (!res.ok || !json.ok || !json.url) throw new Error('svar ej ok');
+      window.location.href = json.url;
     } catch {
       felText?.removeAttribute('hidden');
+      knapp.disabled = false;
     }
   });
 </script>
@@ -202,21 +206,8 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
     margin-top: var(--fg-space-7);
   }
 
-  .registrera-doc__hjalp form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--fg-space-3);
-    align-items: flex-end;
+  .registrera-doc__hjalp [data-registrera-betala] {
     margin-top: var(--fg-space-4);
-  }
-
-  .registrera-doc__hjalp input[type="email"] {
-    padding: var(--fg-space-3);
-    border: var(--fg-border-inner) solid var(--fg-border);
-    border-radius: var(--fg-radius-control);
-    font-family: var(--fg-font-sans);
-    font-size: var(--fg-text-body-lg);
-    min-width: 22ch;
   }
 
   .registrera-doc__ansvar {

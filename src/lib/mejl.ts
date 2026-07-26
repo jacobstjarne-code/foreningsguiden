@@ -91,3 +91,39 @@ export async function sendPaminnelse14(to: string, vars: PaminnelseVars): Promis
 export async function sendPaminnelse3(to: string, vars: PaminnelseVars & { veckodag: string }): Promise<void> {
   await sendMejl(to, MEJL.paminnelse3, vars);
 }
+
+export interface KopNotisVars {
+  email: string;
+  kommunSlug: string;
+  belopp: string; // kr, utan öre — redan avrundat av anroparen
+  registreraLank: string;
+}
+
+/**
+ * Internt driftmejl till Jacob vid ett bekräftat köp (stripe-webhook.ts).
+ * Faktatext, inte marknadscopy — går bara till Jacob, ingen Fable-copy
+ * eller sendMejl()-mall (den lägger på ett avregistrera-dig-sidfot som
+ * inte hör hemma i ett internt mejl). Registreringshjälpen levereras
+ * manuellt (SPEC: Betalintegration §4) — det här mejlet ÄR
+ * arbetsordern.
+ */
+export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
+  const to = 'jacob.stjarne@gmail.com';
+  const text = [
+    `Ny betald registreringshjälp — ${vars.kommunSlug}`,
+    `E-post: ${vars.email}`,
+    `Kommun: ${vars.kommunSlug}`,
+    `Belopp: ${vars.belopp} kr`,
+    `Registreringssida: ${vars.registreraLank}`,
+  ].join('\n');
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Ny betald registreringshjälp — ${vars.kommunSlug}`,
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid köpnotis: ${result.error.message}`);
+  }
+}
