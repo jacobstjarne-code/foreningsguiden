@@ -127,3 +127,30 @@ export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
     throw new Error(`Resend-fel vid köpnotis: ${result.error.message}`);
   }
 }
+
+export interface KontaktNotisVars {
+  namn: string;
+  email: string;
+  meddelande: string;
+}
+
+/**
+ * H21 (GRANSKNING_foreningsguiden.md): kontaktformulärets mejl till Jacob.
+ * replyTo = avsändarens egen adress, så ett svar går direkt till henne —
+ * inte till FROM (som är en avsändaradress, inget övervakat inkorg).
+ */
+export async function sendKontaktNotis(vars: KontaktNotisVars): Promise<void> {
+  const to = 'jacob.stjarne@gmail.com';
+  const text = [`Namn: ${vars.namn}`, `E-post: ${vars.email}`, '', vars.meddelande].join('\n');
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    replyTo: vars.email,
+    subject: `Kontaktformulär — ${vars.namn}`,
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid kontaktnotis: ${result.error.message}`);
+  }
+}

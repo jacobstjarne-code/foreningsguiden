@@ -1,0 +1,42 @@
+---
+// Kontaktsida — H21 (GRANSKNING_foreningsguiden.md): en betalande kund
+// måste kunna nå oss. Samma mönster som avregistrera/index.astro: enkel,
+// kontofri sida, POST till en API-route, redirect med ?skickat=1 för
+// kvittot. prerender=false av samma skäl (?skickat=1 finns bara vid
+// request-tid).
+//
+// Instruktionstexten nedan är minimal, funktionell copy — samma
+// undantag/precedent som avregistrera/index.astro redan satte (Codes
+// beslut för en ren utility-sida, rapporterat till Fable för justering,
+// inte väntat på innan sidan kunde finnas).
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+
+const skickat = Astro.url.searchParams.get('skickat') === '1';
+---
+<Base title="Kontakt — Föreningsguiden" description="Kontakta Föreningsguiden.">
+  <h1>Kontakta oss</h1>
+
+  {skickat ? (
+    <div class="email-signup fg-card">
+      <h2>Skickat</h2>
+      <p>Tack — vi hör av oss så snart vi kan.</p>
+    </div>
+  ) : (
+    <form class="email-signup fg-card" method="POST" action="/api/kontakt">
+      <p>Har du en fråga, hittat ett fel, eller behöver hjälp med ett köp? Skriv till oss här.</p>
+
+      <label for="kontakt-namn">Namn</label>
+      <input type="text" id="kontakt-namn" name="namn" autocomplete="name" />
+
+      <label for="kontakt-email">E-post</label>
+      <input type="email" id="kontakt-email" name="email" required autocomplete="email" />
+
+      <label for="kontakt-meddelande">Meddelande</label>
+      <textarea id="kontakt-meddelande" name="meddelande" required></textarea>
+
+      <button type="submit" class="btn-primary">Skicka</button>
+    </form>
+  )}
+</Base>

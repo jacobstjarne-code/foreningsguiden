@@ -164,6 +164,17 @@ export const OM = {
     'Uppgifterna återger kommunernas egen publicerade information. Vi gör inga egna bedömningar av enskilda ansökningar och lämnar inte juridisk rådgivning. Vid skillnad mellan det som står här och kommunens egen sida gäller alltid kommunens uppgift.',
     'Har du hittat ett fel, eller är du en kommun som vill rätta en uppgift? Hör av dig till redaktionen, så kontrollerar vi mot källan och rättar.',
   ],
+  /**
+   * H1 (GRANSKNING_foreningsguiden.md, 2026-07-26): en betaltjänst utan
+   * namngiven avsändare/org.nr är inte trovärdig för målgruppen. Juridisk
+   * part är INTE vald än (samma öppna fråga som SPEC: Betalintegration §6
+   * steg 3, väntar på revisorsavstämning) — platshållare tills dess.
+   * Renderas i en tydligt avvikande stil (.om-todo) så det syns att det
+   * är en lucka, inte färdig text.
+   */
+  avsandarRubrik: 'Vilka vi är',
+  avsandarPlatshallare:
+    '{{TODO: företagsnamn, organisationsnummer och en namngiven person — väntar på valet av juridisk part, se SPEC: Betalintegration §6 steg 3}}',
 };
 
 /** Sidfot. Kort, saklig. */

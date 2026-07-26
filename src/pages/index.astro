@@ -7,7 +7,7 @@ import UrgencyChip from '../components/UrgencyChip.astro';
 import KommunValjare from '../components/KommunValjare.astro';
 import LiveDataKort from '../components/LiveDataKort.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
-import { START } from '../lib/content';
+import { START, SIDFOT } from '../lib/content';
 
 const kommuner = loadKommuner();
 const today = todayISO();
@@ -17,6 +17,7 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
 <Base title={START.metaTitle} description={START.metaDescription}>
   <h1>{START.h1}</h1>
   <p>{START.hero}</p>
+  <p class="start-disclaimer">{SIDFOT.kortText}</p>
 
   <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
 

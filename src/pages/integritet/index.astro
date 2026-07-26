@@ -1,0 +1,24 @@
+---
+// Integritetspolicy — H23 (GRANSKNING_foreningsguiden.md). Container-sida.
+// Code skriver INTE policytexten (juridisk text, se DATAINVENTERING_GDPR.md
+// för den tekniska faktainventeringen texten ska bygga på) — Fable/Jacob
+// fyller {{FABLE:}}-slotet innan sidan är klar för skarp lansering.
+// Samma layout-mönster som /om/, samma Base.
+import Base from '../../layouts/Base.astro';
+import BreadcrumbList from '../../components/BreadcrumbList.astro';
+---
+<Base title="Integritetspolicy — Föreningsguiden" description="Så hanterar Föreningsguiden dina uppgifter.">
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: 'Integritetspolicy', url: '/integritet/' },
+  ]} />
+
+  <h1>Integritetspolicy</h1>
+
+  <p class="om-todo">
+    {'{{FABLE: policytext — vad som lagras, varför, hur länge, och hur man begär radering. Teknisk grund i DATAINVENTERING_GDPR.md (repo-rot), inklusive den öppna frågan om Stripe-köpposter och bokföringslagen.}}'}
+  </p>
+
+  <p>Vill du ta bort dina uppgifter från deadlinebevakningen? <a href="/avregistrera/">Avregistrera dig här</a>.</p>
+  <p>Frågor om dina uppgifter? <a href="/kontakt/">Kontakta oss</a>.</p>
+</Base>

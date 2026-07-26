@@ -199,6 +199,14 @@ main {
   color: var(--fg-ink-muted);
 }
 
+/* H2 (GRANSKNING_foreningsguiden.md): samma "vi är inte kommunen"-mening
+   som redan finns i footern (.site-footer), nu även synlig utan att
+   scrolla. Samma text-token som footern — ingen ny stil att lära sig. */
+.start-disclaimer {
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+}
+
 .site-footer__beta {
   font-family: var(--fg-font-mono);
   font-size: var(--fg-text-mono);
@@ -262,6 +270,20 @@ main {
   margin: var(--fg-space-5) 0;
   font-size: var(--fg-text-body);
   font-weight: var(--fg-weight-bold);
+}
+
+/* H1 (GRANSKNING_foreningsguiden.md): avsändarsektionens platshållare på
+   /om/ tills juridisk part är vald — samma stale-warning-mönster
+   (kant + text i --fg-attention, aldrig färg ensam) så det syns tydligt
+   att det är en olöst lucka, inte färdig text. */
+.om-todo {
+  background: var(--fg-surface);
+  border: var(--fg-border-inner) dashed var(--fg-attention);
+  color: var(--fg-attention);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-3) var(--fg-space-5);
+  font-size: var(--fg-text-body);
+  font-style: italic;
 }
 
 .fg-verification-row {
@@ -597,13 +619,20 @@ main {
   margin-bottom: var(--fg-space-1);
 }
 
-.email-signup input[type="email"] {
+.email-signup input[type="email"],
+.email-signup input[type="text"],
+.email-signup textarea {
   width: 100%;
   padding: var(--fg-space-3);
   border: var(--fg-border-inner) solid var(--fg-border);
   border-radius: var(--fg-radius-control);
   font-family: var(--fg-font-sans);
   font-size: var(--fg-text-body-lg);
+}
+
+.email-signup textarea {
+  min-height: 8em;
+  resize: vertical;
 }
 
 .email-signup fieldset {

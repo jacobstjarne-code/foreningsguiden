@@ -17,6 +17,7 @@ import { loadKommuner } from '../../../../lib/kommuner';
 import type { Kommun } from '../../../../lib/kommuner';
 import { VAGLEDNING } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
+import { PRIS_REGISTRERINGSHJALP_ORE } from '../../../../lib/priser';
 
 export function getStaticPaths() {
   return loadKommuner().map((kommun) => ({
@@ -28,6 +29,10 @@ export function getStaticPaths() {
 const { kommun } = Astro.props as { kommun: Kommun };
 const forutsattningar = [...kommun.forutsattningar].sort((a, b) => a.ordning - b.ordning);
 const titel = `Registreringschecklista — ${kommun.kommun}`;
+// H3 (GRANSKNING_foreningsguiden.md): priset ska synas INNAN betalknappen,
+// inte gömt bakom klicket — samma platshållarkonstant som checkout-routen
+// (src/lib/priser.ts), aldrig hårdkodat på två ställen.
+const prisKr = PRIS_REGISTRERINGSHJALP_ORE / 100;
 ---
 <Base
   title={`${titel} — Föreningsguiden`}
@@ -76,6 +81,7 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
 
     <div class="registrera-doc__hjalp">
       <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
+      <p class="registrera-doc__pris">{prisKr} kr</p>
       <button type="button" class="btn-primary" data-registrera-betala>{TRATT.besked.borjaHar.hjalpKnapp}</button>
       <p data-registrera-kvitto hidden>{TRATT.besked.minne}</p>
       <p data-registrera-fel hidden>Något gick fel. Försök igen.</p>
@@ -206,8 +212,15 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
     margin-top: var(--fg-space-7);
   }
 
-  .registrera-doc__hjalp [data-registrera-betala] {
+  .registrera-doc__pris {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-h2);
     margin-top: var(--fg-space-4);
+  }
+
+  .registrera-doc__hjalp [data-registrera-betala] {
+    margin-top: var(--fg-space-3);
   }
 
   .registrera-doc__ansvar {
