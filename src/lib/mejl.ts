@@ -78,6 +78,31 @@ export async function sendValkomst(to: string, kommunLista: string, kommunLank: 
   await sendMejl(to, MEJL.valkomst, { kommunLista, kommunLank });
 }
 
+/**
+ * H29 (GRANSKNING_foreningsguiden.md): magic-länken för föreningskontot.
+ * Path-parameter, inte querysträng — samma rotorsak som sendBekraftelse
+ * ovan skyddar mot (en lång inline-URL med "=" kan korrumperas av
+ * mejltransportens quoted-printable-radbrytning). Minimal, funktionell
+ * transaktionscopy — samma precedent som övriga utility-sidors
+ * instruktionstext (avregistrera/kontakt), inte Fable-marknadscopy.
+ */
+export async function sendInloggningsLank(to: string, token: string): Promise<void> {
+  const lank = `${siteUrl()}/api/verifiera-inloggning/${encodeURIComponent(token)}/`;
+  const text = urlPaEgenRad(
+    `Klicka på länken för att logga in på Mina sidor. Länken är giltig i 15 minuter och kan bara användas en gång.\n${lank}\n\nBad ni inte om detta? Ni kan bortse från mejlet.`
+  );
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: 'Logga in — Föreningsguiden',
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid inloggningslänk: ${result.error.message}`);
+  }
+}
+
 export interface PaminnelseVars {
   bidragsnamn: string;
   kommun: string;

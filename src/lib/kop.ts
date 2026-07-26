@@ -17,6 +17,9 @@ const redis = new Redis({ url: env.KV_REST_API_URL, token: env.KV_REST_API_TOKEN
 
 const kopKey = (stripeSessionId: string) => `kop:${stripeSessionId}`;
 const KOP_INDEX_KEY = 'kop:index';
+// H29/Mina sidor: sekundärindex så köphistorik går att slå upp per e-post
+// utan att scanna hela kop:index (som bara innehåller sessions-id:n).
+const kopPerEmailKey = (email: string) => `kop:email:${email.toLowerCase()}`;
 
 export type KopProdukt = 'registrering';
 
@@ -39,9 +42,19 @@ export interface KopEntry {
 export async function sparaKop(entry: KopEntry): Promise<void> {
   await redis.set(kopKey(entry.stripeSessionId), entry);
   await redis.sadd(KOP_INDEX_KEY, entry.stripeSessionId);
+  await redis.sadd(kopPerEmailKey(entry.email), entry.stripeSessionId);
 }
 
 /** Läser tillbaka ett köp — används för att göra webhooken idempotent (Stripe kan skicka samma event flera gånger). */
 export async function hamtaKop(stripeSessionId: string): Promise<KopEntry | null> {
   return (await redis.get<KopEntry>(kopKey(stripeSessionId))) ?? null;
+}
+
+/** Mina sidor (H29): alla köp för en e-post, senaste först. */
+export async function hamtaKopForEmail(email: string): Promise<KopEntry[]> {
+  const sessionIds = await redis.smembers(kopPerEmailKey(email));
+  const entries = await Promise.all(sessionIds.map((id) => hamtaKop(id)));
+  return entries
+    .filter((e): e is KopEntry => e !== null)
+    .sort((a, b) => b.betaldDatum.localeCompare(a.betaldDatum));
 }

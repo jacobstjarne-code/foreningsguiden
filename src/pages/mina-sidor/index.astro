@@ -1,0 +1,127 @@
+---
+// Mina sidor — H29 (GRANSKNING_foreningsguiden.md), föreningens konto.
+// Ingen ny kontodatamodell: inloggningen bevisar bara att du äger en
+// e-post som redan har en Subscriber-post (subscribers.ts). Två lägen:
+// utan session (e-postformulär, samma email-signup-stil som
+// avregistrera/kontakt) och inloggad (bevakade kommuner, föreningsprofil,
+// köphistorik). prerender=false — sessionscookien finns bara vid
+// request-tid.
+//
+// Vad denna FÖRSTA skiva av Grind 2 INTE visar än (se plan, egna pass):
+// abonnemangsstatus (ingen återkommande Stripe-prenumeration finns i
+// kodbasen), sparade utkast (persisteras inte per köp idag).
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import { SESSION_COOKIE_NAMN, hamtaSessionEmail } from '../../lib/session';
+import { getSubscriber } from '../../lib/subscribers';
+import { hamtaKopForEmail } from '../../lib/kop';
+import { getKommunBySlug, formatDate } from '../../lib/kommuner';
+
+const sessionToken = Astro.cookies.get(SESSION_COOKIE_NAMN)?.value;
+const email = sessionToken ? await hamtaSessionEmail(sessionToken) : null;
+
+const skickat = Astro.url.searchParams.get('skickat') === '1';
+const felaktigToken = Astro.url.searchParams.get('fel') === 'ogiltig';
+
+const subscriber = email ? await getSubscriber(email) : null;
+const kop = email ? await hamtaKopForEmail(email) : [];
+
+const bevakadeKommuner = (subscriber?.kommuner ?? [])
+  .map((slug) => getKommunBySlug(slug))
+  .filter((k): k is NonNullable<typeof k> => !!k);
+---
+<Base title="Mina sidor — Föreningsguiden" description="Er förenings konto: bevakade kommuner, föreningsprofil och köphistorik.">
+  <h1>Mina sidor</h1>
+
+  {!email ? (
+    <>
+      {felaktigToken && <p class="registrera-doc__giltighet">Länken är ogiltig eller har gått ut. Begär en ny nedan.</p>}
+      {skickat ? (
+        <div class="email-signup fg-card">
+          <h2>Länk skickad</h2>
+          <p>Kolla din inkorg — klicka på länken för att logga in. Den är giltig i 15 minuter.</p>
+        </div>
+      ) : (
+        <form class="email-signup fg-card" method="POST" action="/api/logga-in">
+          <p>Logga in med er förenings e-postadress, så skickar vi en inloggningslänk.</p>
+          <label for="login-email">E-post</label>
+          <input type="email" id="login-email" name="email" required autocomplete="email" />
+          <button type="submit" class="btn-primary">Skicka inloggningslänk</button>
+        </form>
+      )}
+    </>
+  ) : (
+    <div class="mina-sidor">
+      <p class="mina-sidor__inloggad">Inloggad som {email}</p>
+
+      <section>
+        <h2>Bevakade kommuner</h2>
+        {bevakadeKommuner.length === 0 ? (
+          <p>Ingen kommun bevakas än.</p>
+        ) : (
+          <ul>
+            {bevakadeKommuner.map((k) => (
+              <li><a href={`/kommun/${k.kommun_slug}/`}>{k.kommun}</a></li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {subscriber?.foreningsprofil && (
+        <section>
+          <h2>Föreningsprofil</h2>
+          <ul class="mina-sidor__profil">
+            {subscriber.foreningsprofil.verksamhet.length > 0 && <li>Verksamhet: {subscriber.foreningsprofil.verksamhet.join(', ')}</li>}
+            {subscriber.foreningsprofil.storlek && <li>Storlek: {subscriber.foreningsprofil.storlek}</li>}
+            {subscriber.foreningsprofil.alder && <li>Ålder: {subscriber.foreningsprofil.alder}</li>}
+          </ul>
+        </section>
+      )}
+
+      <section>
+        <h2>Köphistorik</h2>
+        {kop.length === 0 ? (
+          <p>Inga köp än.</p>
+        ) : (
+          <ul class="mina-sidor__kop">
+            {kop.map((k) => (
+              <li>
+                <strong>{(k.beloppOre / 100).toFixed(0)} kr</strong> — {formatDate(k.betaldDatum.slice(0, 10))} — {k.kommunSlug}
+                {k.hostedInvoiceUrl && <> — <a href={k.hostedInvoiceUrl}>Kvitto/faktura</a></>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <form method="POST" action="/api/logga-ut">
+        <button type="submit" class="btn-primary">Logga ut</button>
+      </form>
+    </div>
+  )}
+</Base>
+
+<style>
+  .mina-sidor__inloggad {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .mina-sidor section {
+    margin-top: var(--fg-space-7);
+  }
+
+  .mina-sidor__profil,
+  .mina-sidor__kop {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-3);
+  }
+
+  .mina-sidor form[action="/api/logga-ut"] {
+    margin-top: var(--fg-space-8);
+  }
+</style>
