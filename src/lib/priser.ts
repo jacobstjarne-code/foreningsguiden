@@ -8,9 +8,10 @@
  * importera från).
  */
 
-// TODO(Jacob/Fable): bekräfta belopp innan skarp aktivering — ingen spec
-// (AFFARSMODELL/KVALITETSSPEC/SLUTSPEC_LANSERING/Betalintegration) anger
-// ett kronbelopp för just Registreringshjälpen. 149 kr vald som
-// platshållare (samma nivå som utkastets ursprungspris innan
-// 07-20-revideringen till 249 kr).
-export const PRIS_REGISTRERINGSHJALP_ORE = 14900;
+// H8 (GRANSKNING_foreningsguiden.md): "registreringsutkast" ersätter det
+// tidigare manuella "Registreringshjälp"-erbjudandet (149 kr, "vi hör av
+// oss inom kort") — helt automatiserad leverans, samma motor och samma
+// pris som bidragsutkastet (249 kr, SLUTSPEC_LANSERING_2026-07-20.md).
+// Namnbytet på konstanten speglar att produkten faktiskt bytt identitet,
+// inte bara pris.
+export const PRIS_REGISTRERINGSUTKAST_ORE = 24900;

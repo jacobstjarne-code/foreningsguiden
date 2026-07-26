@@ -17,7 +17,7 @@ import { loadKommuner } from '../../../../lib/kommuner';
 import type { Kommun } from '../../../../lib/kommuner';
 import { VAGLEDNING } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
-import { PRIS_REGISTRERINGSHJALP_ORE } from '../../../../lib/priser';
+import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../../lib/priser';
 
 export function getStaticPaths() {
   return loadKommuner().map((kommun) => ({
@@ -32,7 +32,7 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
 // H3 (GRANSKNING_foreningsguiden.md): priset ska synas INNAN betalknappen,
 // inte gömt bakom klicket — samma platshållarkonstant som checkout-routen
 // (src/lib/priser.ts), aldrig hårdkodat på två ställen.
-const prisKr = PRIS_REGISTRERINGSHJALP_ORE / 100;
+const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
 ---
 <Base
   title={`${titel} — Föreningsguiden`}
@@ -79,13 +79,20 @@ const prisKr = PRIS_REGISTRERINGSHJALP_ORE / 100;
       </>
     )}
 
-    <div class="registrera-doc__hjalp">
-      <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
-      <p class="registrera-doc__pris">{prisKr} kr</p>
-      <button type="button" class="btn-primary" data-registrera-betala>{TRATT.besked.borjaHar.hjalpKnapp}</button>
-      <p data-registrera-kvitto hidden>{TRATT.besked.minne}</p>
-      <p data-registrera-fel hidden>Något gick fel. Försök igen.</p>
-    </div>
+    {forutsattningar.length > 0 && (
+      <div class="registrera-doc__hjalp">
+        <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
+        <p class="registrera-doc__pris">{prisKr} kr</p>
+        <button type="button" class="btn-primary" data-registrera-betala>{TRATT.besked.borjaHar.hjalpKnapp}</button>
+        {/* H8 (GRANSKNING_foreningsguiden.md): produkten levereras nu
+           automatiskt (mejl direkt vid betalning) — inte "vi hör av oss"
+           som den gamla, manuella Registreringshjälpen. Minimal, funktionell
+           statusrad (samma precedent som avregistrera/kontakt-sidornas
+           instruktionstext), flaggad till Fable för ev. justering. */}
+        <p data-registrera-kvitto hidden>Betalningen gick igenom — ni får ert registreringsutkast direkt till angiven e-postadress.</p>
+        <p data-registrera-fel hidden>Något gick fel. Försök igen.</p>
+      </div>
+    )}
 
     <p class="registrera-doc__ansvar">{VAGLEDNING.station5.ansvar}</p>
   </div>

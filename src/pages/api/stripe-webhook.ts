@@ -3,11 +3,15 @@
  * och triggar leverans. Enda webhooken (SPEC: Betalintegration §3 —
  * "minimal yta = minimalt underhåll", ingen egenbyggd webhook-mängd).
  *
+ * H8: leveransen är HELT AUTOMATISERAD — genereraRegistreringsUtkast()
+ * (utkastGenerator.ts, "samma motor" som bidragsutkastet) körs här och
+ * mejlas till köparen direkt, ingen manuell uppföljning från Jacob.
+ *
  * Läser RAW body (request.text(), INTE request.json()) — Stripes
  * signaturverifiering kräver den obehandlade byte-strömmen, en JSON-
  * ompparsning skulle ge en annan bytesekvens och alltid faila verifieringen.
  *
- * Svarar 200 så fort köpet är sparat, ÄVEN om notismejlet fallerar —
+ * Svarar 200 så fort köpet är sparat, ÄVEN om leveransmejlet fallerar —
  * betalningen är redan skarp (i testläge: redan "genomförd" i Stripes
  * mening) och ett mejlfel ska inte trigga en falsk webhook-retry-loop hos
  * Stripe (som annars skickar samma event igen).
@@ -20,6 +24,8 @@ import { sparaKop, hamtaKop, type KopEntry } from '../../lib/kop';
 import { addForeningsprofil } from '../../lib/subscribers';
 import { sendKopNotis, sendKopBekraftelse } from '../../lib/mejl';
 import type { Foreningsprofil } from '../../lib/foreningsprofil';
+import { getKommunBySlug } from '../../lib/kommuner';
+import { genereraRegistreringsUtkast } from '../../lib/utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
 
@@ -116,8 +122,14 @@ export const POST: APIRoute = async ({ request }) => {
     console.error('sendKopNotis misslyckades', err);
   }
 
+  // H8: den faktiska leveransen — genererar registreringsutkastet och
+  // mejlar det direkt. Ingen människa i loopen (till skillnad från det
+  // gamla, manuella "Registreringshjälp"-flödet).
+  const kommun = getKommunBySlug(kommunSlug);
+  const checklista = kommun ? genereraRegistreringsUtkast(kommun) : [];
+
   try {
-    await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl });
+    await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl, checklista });
   } catch (err) {
     console.error('sendKopBekraftelse misslyckades', err);
   }

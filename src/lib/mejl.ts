@@ -8,6 +8,7 @@
  */
 import { Resend } from 'resend';
 import { MEJL } from './content';
+import type { RegistreringsUtkastRad } from './utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
 // .trim() — rotorsak till den korrumperade bekräftelselänken (skarpt test
@@ -103,14 +104,17 @@ export interface KopNotisVars {
  * Internt driftmejl till Jacob vid ett bekräftat köp (stripe-webhook.ts).
  * Faktatext, inte marknadscopy — går bara till Jacob, ingen Fable-copy
  * eller sendMejl()-mall (den lägger på ett avregistrera-dig-sidfot som
- * inte hör hemma i ett internt mejl). Registreringshjälpen levereras
- * manuellt (SPEC: Betalintegration §4) — det här mejlet ÄR
- * arbetsordern.
+ * inte hör hemma i ett internt mejl).
+ *
+ * H8: registreringsutkastet levereras HELT AUTOMATISERAT
+ * (sendKopBekraftelse nedan) — det här mejlet är rent informationellt,
+ * inget för Jacob att göra. Skiljer sig från det gamla, manuella
+ * "Registreringshjälp"-flödet där detta mejl VAR arbetsordern.
  */
 export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
   const to = 'jacob.stjarne@gmail.com';
   const text = [
-    `Ny betald registreringshjälp — ${vars.kommunSlug}`,
+    `Nytt köp — registreringsutkast, ${vars.kommunSlug} (levererat automatiskt, inget att göra).`,
     `E-post: ${vars.email}`,
     `Kommun: ${vars.kommunSlug}`,
     `Belopp: ${vars.belopp} kr`,
@@ -120,7 +124,7 @@ export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
   const result = await resend.emails.send({
     from: FROM,
     to,
-    subject: `Ny betald registreringshjälp — ${vars.kommunSlug}`,
+    subject: `Nytt köp (levererat automatiskt) — ${vars.kommunSlug}`,
     text,
   });
   if (result.error) {
@@ -133,26 +137,41 @@ export interface KopBekraftelseVars {
   belopp: string; // kr, utan öre
   registreraLank: string;
   hostedInvoiceUrl?: string;
+  checklista: RegistreringsUtkastRad[];
 }
 
 /**
- * H10+H15 (GRANSKNING_foreningsguiden.md): köparens egen bekräftelse —
- * separat från sendKopNotis (som bara går till Jacob). Minimal,
- * funktionell transaktionscopy, samma precedent som avregistrera/
- * kontakt-sidornas instruktionstext (Code skriver utility-text för en
- * ren teknisk sida, rapporterar till Fable för justering — inte
- * marknadsprosa). Länkar till Stripes varaktiga fakturalänk (H15) och
- * tillbaka till registreringssidan. Registreringshjälpen levereras
- * manuellt (ingen generator för detta), därför "vi hör av oss" i
- * stället för ett direkt leveransbesked.
+ * H8+H10+H15 (GRANSKNING_foreningsguiden.md): köparens egen bekräftelse
+ * OCH den faktiska leveransen i samma mejl — separat från sendKopNotis
+ * (som bara går till Jacob, rent informationellt). Minimal, funktionell
+ * transaktionscopy runt checklistan (samma precedent som avregistrera/
+ * kontakt-sidornas instruktionstext — Code skriver utility-text för en
+ * ren teknisk sida, rapporterar till Fable för justering, inte
+ * marknadsprosa). Checklistans EGET innehåll är citerat, inte skrivet
+ * här — samma VAGLEDNING.station3-mallar som redan är Fable-godkända
+ * (se genereraRegistreringsUtkast, utkastGenerator.ts). Länkar även
+ * till Stripes varaktiga fakturalänk (H15) och tillbaka till
+ * registreringssidan.
  */
 export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): Promise<void> {
   const rader = [
-    `Tack för ditt köp — Registreringshjälp för er förening i ${vars.kommunSlug}.`,
+    `Tack för ditt köp — Registreringsutkast för er förening i ${vars.kommunSlug}.`,
     `Belopp: ${vars.belopp} kr.`,
-    `Vi hör av oss inom kort med hjälp att fylla i registreringen.`,
-    `Er registreringssida: ${vars.registreraLank}`,
+    '',
+    'Er registreringschecklista:',
+    '',
   ];
+
+  vars.checklista.forEach((rad, i) => {
+    rader.push(`${i + 1}. ${rad.vad}`);
+    rader.push(rad.beskrivning);
+    rader.push(rad.ledtidText);
+    if (rad.giltighetText) rader.push(rad.giltighetText);
+    rader.push(`Källa: ${rad.kallaUrl}`);
+    rader.push('');
+  });
+
+  rader.push(`Samma checklista, alltid uppdaterad: ${vars.registreraLank}`);
   if (vars.hostedInvoiceUrl) {
     rader.push(`Kvitto/faktura: ${vars.hostedInvoiceUrl}`);
   }
@@ -160,7 +179,7 @@ export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): 
   const result = await resend.emails.send({
     from: FROM,
     to,
-    subject: 'Tack för ditt köp — Föreningsguiden',
+    subject: `Ert registreringsutkast — ${vars.kommunSlug}`,
     text: rader.join('\n'),
   });
   if (result.error) {

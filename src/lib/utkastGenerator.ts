@@ -25,7 +25,7 @@ import type { Bidrag, Kommun } from './kommunTyper.ts';
 import { earliestDeadlineISO, formatDate, todayISO } from './kommunTyper.ts';
 import type { Foreningsprofil } from './foreningsprofil.ts';
 import { visaBorjaHar } from './matching.ts';
-import { VANTELISTA } from './content.ts';
+import { VANTELISTA, VAGLEDNING } from './content.ts';
 
 export interface UtkastKravRad {
   /** Bidrag.krav[i] — ordagrant citat, aldrig omskrivet. */
@@ -207,4 +207,35 @@ export function genereraUtkast(profil: Foreningsprofil, bidrag: Bidrag, kommun: 
     ansvarsrad: ANSVARSRAD,
     kalla_url: bidrag.kalla_url,
   };
+}
+
+export interface RegistreringsUtkastRad {
+  vad: string;
+  beskrivning: string;
+  ledtidText: string;
+  giltighetText: string | null;
+  kallaUrl: string;
+}
+
+/**
+ * H8 (GRANSKNING_foreningsguiden.md): "samma motor" som bidragsutkastet
+ * — den registreringsutkast-produkten kräver ("249 kr, automatiserat").
+ * Ren, deterministisk rendering av Kommun.forutsattningar[], samma
+ * VAGLEDNING.station3-mallar som registrera/index.astro:s fria vy redan
+ * använder (ingen ny svensk text). Två konsumenter: den fria sidan
+ * (oförändrad, egen rendering) och stripe-webhook.ts (mejlar detta som
+ * det köpta utkastet).
+ */
+export function genereraRegistreringsUtkast(kommun: Kommun): RegistreringsUtkastRad[] {
+  const forutsattningar = [...kommun.forutsattningar].sort((a, b) => a.ordning - b.ordning);
+  return forutsattningar.map((f) => ({
+    vad: f.vad,
+    beskrivning: f.beskrivning,
+    ledtidText:
+      f.ledtid !== null
+        ? VAGLEDNING.station3.ledtidKand.replace('{ledtid}', String(f.ledtid))
+        : (f.ledtid_text ?? VAGLEDNING.station3.ledtidOkand.replace(/{kommun}/g, kommun.kommun)),
+    giltighetText: f.giltighet ? VAGLEDNING.station3.giltighetVarning.replace('{giltighet}', f.giltighet) : null,
+    kallaUrl: f.kalla_url,
+  }));
 }

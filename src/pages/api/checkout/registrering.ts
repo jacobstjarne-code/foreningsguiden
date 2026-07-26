@@ -1,12 +1,17 @@
 /**
  * POST /api/checkout/registrering — skapar en Stripe Checkout Session
  * (testläge tills en juridisk part väljs och kontot växlas till skarpt,
- * SPEC: Betalintegration §1) för Registreringshjälpen. Hostad kassa —
- * ingen egen korthantering, vi rör aldrig kortdata (utanför PCI-scope).
+ * SPEC: Betalintegration §1) för Registreringsutkastet (H8, ersätter det
+ * tidigare manuella "Registreringshjälp"-erbjudandet — automatiserad
+ * leverans, se stripe-webhook.ts). Hostad kassa — ingen egen
+ * korthantering, vi rör aldrig kortdata (utanför PCI-scope).
  *
  * Kommun-scopad, inte bidrag-scopad — samma mönster som
  * "registrering"-syftet i vantelista.ts. Stripe Checkout samlar in
- * e-post själv; vi validerar bara att kommunen finns.
+ * e-post själv; vi validerar att kommunen finns OCH har
+ * forutsattningar att sälja — annars vore det att ta betalt för
+ * information som inte finns (AFFARSMODELL §0), inte bara ett
+ * UI-gate på registrera-sidan.
  */
 export const prerender = false;
 
@@ -14,7 +19,7 @@ import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { getKommunBySlug } from '../../../lib/kommuner';
 import { siteUrl } from '../../../lib/mejl';
-import { PRIS_REGISTRERINGSHJALP_ORE } from '../../../lib/priser';
+import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../lib/priser';
 
 const env = import.meta.env as unknown as Record<string, string>;
 
@@ -32,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
   const profilRaw = form.get('profil');
 
   const kommun = getKommunBySlug(kommunSlug);
-  if (!kommun) {
+  if (!kommun || kommun.forutsattningar.length === 0) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
@@ -50,9 +55,9 @@ export const POST: APIRoute = async ({ request }) => {
       {
         price_data: {
           currency: 'sek',
-          unit_amount: PRIS_REGISTRERINGSHJALP_ORE,
+          unit_amount: PRIS_REGISTRERINGSUTKAST_ORE,
           product_data: {
-            name: `Registreringshjälp — ${kommun.kommun}`,
+            name: `Registreringsutkast — ${kommun.kommun}`,
           },
         },
         quantity: 1,
