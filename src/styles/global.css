@@ -242,6 +242,26 @@ main {
   margin-top: 3px;
 }
 
+/* Bevakningsräknaren — live antal ur Redis (bevakningKlient.ts), golv 3.
+   Hidden by default i markupen tills skriptet bekräftar golvet är nått. */
+.bevakning-antal {
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-accent);
+  margin: var(--fg-space-3) 0 0;
+}
+
+/* Förstasidans aggregat — samma mönster, tomt tills skriptet fyller i
+   (antingen live bevakar-antal över golvet, eller deadline-fallbacken). */
+.forstasida-aggregat {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  letter-spacing: var(--fg-tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-ink-muted);
+}
+
 /* Semantisk färg (attention) alltid med text + kant, aldrig färg ensam. */
 .stale-warning {
   background: var(--fg-surface);
@@ -1131,6 +1151,23 @@ main {
   background: var(--fg-accent-soft);
   border-radius: var(--fg-radius-pill);
   padding: 4px 11px;
+  margin: 0 0 var(--fg-space-4);
+}
+
+.vantelista__kostnadsram,
+.vantelista__social-proof {
+  font-size: var(--fg-text-body);
+  font-weight: var(--fg-weight-bold);
+  color: var(--fg-ink);
+  margin: 0 0 var(--fg-space-3);
+}
+
+.vantelista__deadline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
   margin: 0 0 var(--fg-space-4);
 }
 

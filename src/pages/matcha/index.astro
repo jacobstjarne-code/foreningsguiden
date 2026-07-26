@@ -87,6 +87,7 @@ const kommuner = loadKommuner();
 
         <section class="tratt__grupp tratt__grupp--matchar">
           <h3>{TRATT.besked.kanSoka.rubrik}</h3>
+          <p class="tratt__kostnadsram" data-tratt-kostnadsram hidden></p>
           <p class="tratt__tom" data-tratt-matchar-tom hidden>{TRATT.besked.kanSoka.tom}</p>
           <ul class="tratt__bidraglista" data-tratt-matchar-lista></ul>
         </section>
@@ -116,7 +117,7 @@ const kommuner = loadKommuner();
 <script>
   import { matchKommun, type MatchSkal } from '../../lib/matching';
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type Aldersbucket, type SoktSvar } from '../../lib/foreningsprofil';
-  import { formatDate, earliestDeadlineISO, todayISO, svenskLista, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
+  import { formatDate, earliestDeadlineISO, todayISO, svenskLista, parseBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
@@ -134,6 +135,7 @@ const kommuner = loadKommuner();
     const kommunValdNamnEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald-namn]');
     const kommunBytKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-kommun-byt]');
     const fraga2El = root.querySelector<HTMLElement>('[data-tratt-fraga-container="verksamhet"]');
+    const kostnadsramEl = root.querySelector<HTMLElement>('[data-tratt-kostnadsram]');
 
     const today = todayISO();
     let kommunData: Kommun | null = null;
@@ -178,13 +180,25 @@ const kommuner = loadKommuner();
       }
     }
 
+    const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
+
     function bidragMeta(bidrag: Bidrag): string {
       // dateISO är null ENDAST för löpande bidrag (earliestDeadlineISO),
       // samma mönster som BidragCard/KommunProgressions formatDeadlines —
       // rör aldrig deadlines.datum direkt för löpande bidrag.
       const dateISO = earliestDeadlineISO(bidrag, today);
-      const deadline = dateISO ? `sista dag ${formatDate(dateISO)}` : 'löpande ansökan';
-      return `${bidrag.belopp ?? 'Belopp ej publikt'} · ${deadline}`;
+      if (!dateISO) {
+        return `${bidrag.belopp ?? 'Belopp ej publikt'} · löpande ansökan`;
+      }
+      // Verklig nedräkning — exakt dagar-tal mot det faktiska datumet,
+      // samma daysUntil/getUrgency som UrgencyChip använder överallt
+      // annars. fg-chip-klasserna är samma tokens UrgencyChip.astro
+      // renderar, men eftersom den är en Astro-komponent (kan inte
+      // instansieras i klientskript) byggs samma klass+etikett här.
+      const dagar = daysUntil(dateISO, today);
+      const urgency = getUrgency(dagar);
+      const dagarText = dagar === 1 ? '1 dag kvar' : `${dagar} dagar kvar`;
+      return `${bidrag.belopp ?? 'Belopp ej publikt'} · <span class="fg-chip fg-chip--${urgency}">${URGENCY_LABEL[urgency]}</span> sista dag ${formatDate(dateISO)} · ${dagarText}`;
     }
 
     function bidragLank(bidrag: Bidrag): string {
@@ -206,6 +220,28 @@ const kommuner = loadKommuner();
       }
 
       if (beskedEl) beskedEl.hidden = false;
+
+      // Kostnadsram — summerar ENDAST tak som faktiskt gick att parsa ur
+      // belopp-fritexten (parseBeloppTak, kommunTyper.ts). Ett bidrag utan
+      // parseat tak bidrar varken till summan eller antalet — ingen gissad
+      // rund summa, precis ordern kräver.
+      if (kostnadsramEl) {
+        let summa = 0;
+        let antalMedTak = 0;
+        resultat.matchar.forEach((bidrag) => {
+          const tak = parseBeloppTak(bidrag.belopp);
+          if (tak !== null) {
+            summa += tak;
+            antalMedTak++;
+          }
+        });
+        if (antalMedTak > 0) {
+          kostnadsramEl.textContent = `Tillsammans kan ni söka upp till ${summa.toLocaleString('sv-SE')} kr`;
+          kostnadsramEl.hidden = false;
+        } else {
+          kostnadsramEl.hidden = true;
+        }
+      }
 
       if (matcharListaEl) {
         matcharListaEl.innerHTML = '';

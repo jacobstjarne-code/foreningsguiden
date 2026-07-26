@@ -10,6 +10,8 @@
 // öppnar" — se vantelista.ts.
 import type { Kommun, Bidrag } from '../lib/kommuner';
 import { VAGLEDNING, VANTELISTA } from '../lib/content';
+import { earliestDeadlineISO, formatDate, daysUntil, getUrgency, todayISO } from '../lib/kommuner';
+import UrgencyChip from './UrgencyChip.astro';
 
 export interface Props {
   kommun: Kommun;
@@ -18,13 +20,35 @@ export interface Props {
 
 const { kommun, bidrag } = Astro.props;
 const besked = VANTELISTA.besked.replace(/{kommun}/g, kommun.kommun);
+
+// Kostnadsramen (pengarna) — bara där kommunen faktiskt lämnat ut en egen
+// sammanställning (kommuner.ts Kommunsiffra). Gissa aldrig fram en summa.
+const kostnadsram = kommun.kommunsiffra
+  ? VANTELISTA.kostnadsram.replace(/{kommun}/g, kommun.kommun).replace('{summa}', kommun.kommunsiffra.summa_kr)
+  : null;
+
+// Sann nedräkning — bara för fasta deadlines, mot det faktiska datumet
+// (samma daysUntil/getUrgency som UrgencyChip använder överallt annars).
+const today = todayISO();
+const deadlineISO = earliestDeadlineISO(bidrag, today);
+const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
 ---
-<div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-bidrag-id={bidrag.id}>
+<div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id}>
   <button type="button" class="btn-primary progression__goal-cta" data-vantelista-knapp data-utkastgenerator-byggd="false">
     {VAGLEDNING.station5.knapp} för {bidrag.namn}
   </button>
 
   <div class="vantelista__panel" data-vantelista-panel hidden>
+    {kostnadsram && <p class="vantelista__kostnadsram">{kostnadsram}</p>}
+    <p class="vantelista__social-proof" data-vantelista-social-proof hidden></p>
+
+    {deadlineISO && dagarKvar !== null && (
+      <p class="vantelista__deadline">
+        <UrgencyChip urgency={getUrgency(dagarKvar)} />
+        {' '}{dagarKvar} {dagarKvar === 1 ? 'dag' : 'dagar'} kvar · sista ansökningsdag {formatDate(deadlineISO)}
+      </p>
+    )}
+
     <p class="vantelista__pris">{VANTELISTA.prisRad}</p>
     <h4>{VANTELISTA.rubrik}</h4>
     <p>{besked}</p>
@@ -44,20 +68,37 @@ const besked = VANTELISTA.besked.replace(/{kommun}/g, kommun.kommun);
 </div>
 
 <script>
+  import { hamtaBevakningsantal, BEVAKNING_GOLV } from '../lib/bevakningKlient';
+  import { VANTELISTA } from '../lib/content';
+
   document.querySelectorAll<HTMLElement>('[data-vantelista]').forEach((widget) => {
     const kommunSlug = widget.dataset.kommunSlug ?? '';
+    const kommunNamn = widget.dataset.kommunNamn ?? '';
     const bidragId = widget.dataset.bidragId ?? '';
     const knapp = widget.querySelector<HTMLButtonElement>('[data-vantelista-knapp]');
     const panel = widget.querySelector<HTMLElement>('[data-vantelista-panel]');
     const form = widget.querySelector<HTMLFormElement>('[data-vantelista-form]');
     const kvitto = widget.querySelector<HTMLElement>('[data-vantelista-kvitto]');
     const felText = widget.querySelector<HTMLElement>('[data-vantelista-fel]');
+    const socialProofEl = widget.querySelector<HTMLElement>('[data-vantelista-social-proof]');
 
     let klickLoggat = false;
+    let socialProofHamtad = false;
+
+    async function visaSocialProof() {
+      if (socialProofHamtad || !socialProofEl || !kommunSlug) return;
+      socialProofHamtad = true;
+      const antal = await hamtaBevakningsantal(kommunSlug);
+      if (antal !== null && antal >= BEVAKNING_GOLV) {
+        socialProofEl.textContent = VANTELISTA.socialProof.replace('{antal}', String(antal)).replace(/{kommun}/g, kommunNamn);
+        socialProofEl.hidden = false;
+      }
+    }
 
     knapp?.addEventListener('click', () => {
       panel?.removeAttribute('hidden');
       knapp.hidden = true;
+      visaSocialProof();
 
       // Klicket är intentmätningen — loggas oavsett om formuläret sen fylls
       // i. keepalive: true så requesten inte tappas om något navigerar bort.

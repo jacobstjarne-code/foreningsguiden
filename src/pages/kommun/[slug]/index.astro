@@ -141,6 +141,8 @@ const webPageJsonLd = {
     </p>
   </div>
 
+  <p class="bevakning-antal" data-bevakning-antal data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} hidden></p>
+
   {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
 
   <VerificationRow kommun={kommun.kommun} verifierad={kommun.verifierad} kallaUrl={kommun.kalla_url} />
@@ -198,3 +200,20 @@ const webPageJsonLd = {
   )}
   {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
 </Base>
+
+<script>
+  import { hamtaBevakningsantal, BEVAKNING_GOLV } from '../../../lib/bevakningKlient';
+  import { VANTELISTA } from '../../../lib/content';
+
+  const el = document.querySelector<HTMLElement>('[data-bevakning-antal]');
+  const slug = el?.dataset.kommunSlug;
+  const namn = el?.dataset.kommunNamn ?? '';
+  if (el && slug) {
+    hamtaBevakningsantal(slug).then((antal) => {
+      if (antal !== null && antal >= BEVAKNING_GOLV) {
+        el.textContent = VANTELISTA.socialProof.replace('{antal}', String(antal)).replace(/{kommun}/g, namn);
+        el.hidden = false;
+      }
+    });
+  }
+</script>

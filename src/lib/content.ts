@@ -247,14 +247,14 @@ export const VAGLEDNING = {
     sentText: 'En för sen ansökan kostar pengar: {sen_ansokan_text}',
   },
 
-  // Station 3 — Vad måste göras först? (den osynliga fällan)
+  // Station 3 — Vad måste göras först? (varning → erbjudande)
   station3: {
-    rubrik: 'Vad måste göras först?',
-    intro: 'Innan ni kan söka något bidrag i {kommun} måste föreningen vara godkänd som bidragsberättigad. Det är ett eget ärende, med egen handläggningstid — och det är här föreningar oftast fastnar.',
-    ledtidOkand: '{kommun} anger inte hur lång tid godkännandet tar, men uppmanar föreningar att söka i god tid. Hinner ansökan inte handläggas före bidragets sista datum blir den inte behandlad.',
-    ledtidKand: 'Räkna med {ledtid} dagars handläggning innan ni får besked.',
-    giltighetVarning: 'Tänk på att godkännandet inte gäller för alltid: {giltighet}. Fick ni bidrag förra året betyder det inte att ni är godkända i år — statusen kan ha gått ut utan besked.',
-    extraSteg: 'Ett steg till, som är lätt att missa: {beskrivning}',
+    rubrik: 'Det här stoppar de flesta — och det är det vi hjälper er med',
+    intro: 'Innan ni kan söka något bidrag i {kommun} måste föreningen vara godkänd som bidragsberättigad. Det är ett eget ärende med egen handläggningstid, och det är den vanligaste anledningen att en ansökan inte går igenom. Är det ordnat är ni förbi det som fäller flest.',
+    ledtidOkand: '{kommun} anger inte hur lång tid godkännandet tar, men hinner det inte handläggas före bidragets sista datum blir ansökan inte behandlad. Vänta inte med det här.',
+    ledtidKand: 'Räkna med {ledtid} dagars handläggning — så börja här, inte med själva ansökan.',
+    giltighetVarning: 'Och en fälla som kostar föreningar pengar varje år: godkännandet gäller inte för alltid. {giltighet}. Fick ni bidrag förra året betyder det inte att ni är godkända i år — statusen kan ha gått ut utan besked.',
+    extraSteg: 'Ett steg till som är lätt att missa: {beskrivning}',
     inget: 'Vi har inte hittat några särskilda förkrav för {kommun}. Kontrollera ändå hos kommunen innan ni söker.',
   },
 
@@ -387,13 +387,19 @@ export const KOMMUNSIFFRA = {
  * utkastgeneratorn är byggd (UTKASTGENERATOR_BYGGD, KommunProgression.astro).
  */
 export const VANTELISTA = {
-  knapp: 'Skapa utkast till ansökan',
-  prisRad: '149 kr när tjänsten öppnar — gratis att ställa sig i kön',
-  rubrik: 'Utkasttjänsten öppnar senare i betan',
-  besked: 'Vi bygger just nu tjänsten som skriver ett utkast till er ansökan utifrån {kommun}s egna krav. Den är inte öppen än — vi kalibrerar den mot verkliga ansökningar först, för att den ska hålla måttet.',
-  cta: 'Lämna er e-postadress så säger vi till när den öppnar. Föreningar på väntelistan får prova först.',
+  knapp: 'Gör vår ansökan färdig',
+  prisRad: '149 kr när utkastet ligger klart — inget nu',
+  // Visas bara när countSubscribersByKommun(slug) >= 3 (subscribers.ts,
+  // bevakningKlient.ts BEVAKNING_GOLV). Code fyller {antal}.
+  socialProof: '{antal} föreningar i {kommun} bevakar redan sina deadlines här.',
+  // Visas bara där kommunen har kommunsiffra (idag Berg; fler när fler
+  // kommuner lämnar ut sin sammanställning, kommuner.ts Kommunsiffra).
+  kostnadsram: 'Förra året delade föreningarna i {kommun} på {summa} kr. Missar ni ansökan får ni ingenting av den.',
+  rubrik: 'Vi skriver ansökan åt er — ni lämnar in den',
+  besked: 'De flesta föreningar fastnar inte på att skriva bra. De fastnar på att komma igång, och på att missa ett formellt krav de inte visste fanns. Vi tar er förenings uppgifter och {kommun}s egna kriterier och gör ett färdigt utkast som bemöter varje krav — så det enda ni behöver göra är att läsa igenom och lämna in.',
+  cta: 'Reservera plats nu. Ni betalar först när utkastet ligger klart att läsa — och behåller det till nästa år.',
   epostLabel: 'E-postadress',
-  knappVantelista: 'Ställ oss i kön',
-  kvitto: 'Ni står i kön. Vi hör av oss när utkasttjänsten öppnar — och inte om något annat.',
-  ansvar: 'Vi skriver utkastet. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
+  knappVantelista: 'Reservera vår plats',
+  kvitto: 'Klart — er plats är reserverad. Vi hör av oss så snart utkastet för {kommun} går att skapa. Under tiden fyller vi på er föreningsprofil varje gång ni använder guiden, så det mesta redan är på plats när ni sätter igång.',
+  ansvar: 'Vi ser till att utkastet bemöter kommunens krav. Ansökan lämnar ni in själva och beslutet fattar kommunen — vi lovar inte bifall, men vi ser till att ni inte faller på formalia.',
 };

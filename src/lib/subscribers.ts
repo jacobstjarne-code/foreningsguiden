@@ -182,6 +182,17 @@ export async function getAllConfirmedSubscribers(): Promise<Subscriber[]> {
   return records.filter((r): r is Subscriber => r !== null && r.confirmed);
 }
 
+/**
+ * Antal BEKRÄFTADE prenumeranter som bevakar en given kommun — social proof
+ * (VANTELISTA.socialProof, GUIDE_TRATT_COPY.ts). Live ur Redis varje anrop,
+ * ingen cache — visas bara vid ett golv (se anroparna), så exakthet väger
+ * tyngre än hastighet på det här antalet.
+ */
+export async function countSubscribersByKommun(slug: string): Promise<number> {
+  const subs = await getAllConfirmedSubscribers();
+  return subs.filter((s) => s.kommuner.includes(slug)).length;
+}
+
 /** Har den här (typ, bidrag, datum)-påminnelsen redan gått till adressen? */
 export async function wasReminderSent(typ: '14' | '3', bidragId: string, dateISO: string, email: string): Promise<boolean> {
   return (await redis.sismember(sentKey(typ, bidragId, dateISO), email.toLowerCase())) === 1;

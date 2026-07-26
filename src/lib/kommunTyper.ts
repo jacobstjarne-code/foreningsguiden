@@ -158,6 +158,31 @@ export function possessiv(kommun: string): string {
   return /s$/i.test(kommun) ? `${kommun}'` : `${kommun}s`;
 }
 
+const KR_TAL = '(\\d[\\d\\s]*\\d|\\d)\\s*kr(?:onor)?';
+// Fall 1: HELA strängen är bara "N kr" — ingen konkurrerande formel/sats
+// att missförstå. Fall 2: talet är EXPLICIT inramat som ett tak ("max",
+// "högst", "upp till", "dock högst") — utan den inramningen kan en
+// kr-siffra lika gärna vara en per-timme-taxa ("1 000 kr/aktivitetstimme")
+// eller en fast delsumma i en flerledad formel, inte en gräns. Kräver
+// inramningen — annars summerar vi taxor som om de vore tak.
+const BELOPP_ENDA_TAL_RE = new RegExp(`^\\s*${KR_TAL}\\s*$`, 'i');
+const BELOPP_TAK_RE = new RegExp(`(?:max|högst|upp till|dock högst)\\s+${KR_TAL}`, 'i');
+
+/**
+ * Parsar ETT absolut krontak ur Bidrag.belopp fri text, eller null om
+ * ingen otvetydig sådan siffra finns (procentbaserade belopp, per-enhet-
+ * taxor utan uttalat tak, flerledade formler). Grund för matchningstrattens
+ * kostnadsram — summera ALDRIG in ett null-resultat som noll; hoppa över
+ * det bidraget helt i summeringen.
+ */
+export function parseBeloppTak(belopp: string | null): number | null {
+  if (!belopp) return null;
+  const match = belopp.match(BELOPP_ENDA_TAL_RE) ?? belopp.match(BELOPP_TAK_RE);
+  if (!match) return null;
+  const siffra = Number(match[1].replace(/\s/g, ''));
+  return Number.isFinite(siffra) && siffra > 0 ? siffra : null;
+}
+
 /**
  * Tidigaste kommande deadline för ett bidrag, som ISO-datum — null om bidraget
  * söks löpande (inget datum att jämföra mot). Underlag för progressionens
