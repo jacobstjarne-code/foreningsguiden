@@ -43,6 +43,11 @@ export const START = {
   kommunvaljareRubrik: 'Välj din kommun',
   kalenderPuff:
     'Alla sista ansökningsdatum, samlade och sorterade efter vad som ligger närmast.',
+  // Aggregatraden — live antal ur Redis (bevakningKlient.ts, golv 50).
+  // socialProofAggregat visas bara vid ≥50, annars socialProofTidigt
+  // (ingen siffra — sant oavsett hur få som bevakar idag).
+  socialProofAggregat: '{antal} föreningar bevakar redan sina bidrag här.',
+  socialProofTidigt: 'Bevaka era bidrag gratis — vi säger till innan varje deadline.',
 };
 
 /**

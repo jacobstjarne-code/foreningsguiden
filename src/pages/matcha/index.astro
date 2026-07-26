@@ -115,7 +115,7 @@ const kommuner = loadKommuner();
 </Base>
 
 <script>
-  import { matchKommun, type MatchSkal } from '../../lib/matching';
+  import { matchKommun, harMatchningsdata, type MatchSkal } from '../../lib/matching';
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type Aldersbucket, type SoktSvar } from '../../lib/foreningsprofil';
   import { formatDate, earliestDeadlineISO, todayISO, svenskLista, parseBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
@@ -221,25 +221,50 @@ const kommuner = loadKommuner();
 
       if (beskedEl) beskedEl.hidden = false;
 
-      // Kostnadsram — summerar ENDAST tak som faktiskt gick att parsa ur
-      // belopp-fritexten (parseBeloppTak, kommunTyper.ts). Ett bidrag utan
-      // parseat tak bidrar varken till summan eller antalet — ingen gissad
-      // rund summa, precis ordern kräver.
+      // harMatchningsdata (matching.ts): sant först när researchpasset
+      // fyllt i minst ett matchningsfält för kommunen. Före dess är ALLA
+      // bidrag trivialt "MATCHAR" (grov matchning per design — se
+      // matchBidrag) och en summa över resultat.matchar vore kommunens
+      // HELA pott framställd som personlig. Kostnadsramen väljer därför
+      // mellan två helt olika mallar/datakällor beroende på detta flagg,
+      // inte bara olika text på samma summa.
+      const dataFinns = harMatchningsdata(kommunData);
+
       if (kostnadsramEl) {
-        let summa = 0;
-        let antalMedTak = 0;
-        resultat.matchar.forEach((bidrag) => {
-          const tak = parseBeloppTak(bidrag.belopp);
-          if (tak !== null) {
-            summa += tak;
-            antalMedTak++;
+        if (dataFinns) {
+          // Skarp kostnadsram — summerar bara MATCHADE bidrags parsade tak.
+          let summa = 0;
+          let antalMedTak = 0;
+          resultat.matchar.forEach((bidrag) => {
+            const tak = parseBeloppTak(bidrag.belopp);
+            if (tak !== null) {
+              summa += tak;
+              antalMedTak++;
+            }
+          });
+          if (antalMedTak > 0) {
+            const mall = antalMedTak === 1 ? TRATT.besked.kostnadsramEnkel : TRATT.besked.kostnadsram;
+            kostnadsramEl.textContent = mall.replace('{summa}', summa.toLocaleString('sv-SE'));
+            kostnadsramEl.hidden = false;
+          } else {
+            kostnadsramEl.hidden = true;
           }
-        });
-        if (antalMedTak > 0) {
-          kostnadsramEl.textContent = `Tillsammans kan ni söka upp till ${summa.toLocaleString('sv-SE')} kr`;
-          kostnadsramEl.hidden = false;
         } else {
-          kostnadsramEl.hidden = true;
+          // Ofiltrerad kostnadsram — summerar ALLA kommunens bidrag, inte
+          // bara matchade (det finns inget "matchat" än), och säger det.
+          let summa = 0;
+          kommunData.bidrag.forEach((bidrag) => {
+            const tak = parseBeloppTak(bidrag.belopp);
+            if (tak !== null) summa += tak;
+          });
+          if (summa > 0) {
+            kostnadsramEl.textContent = TRATT.besked.kostnadsramOgfiltrerad
+              .replace(/{kommun}/g, kommunData.kommun)
+              .replace('{summa}', summa.toLocaleString('sv-SE'));
+            kostnadsramEl.hidden = false;
+          } else {
+            kostnadsramEl.hidden = true;
+          }
         }
       }
 
@@ -254,7 +279,12 @@ const kommuner = loadKommuner();
       }
       if (matcharTomEl) matcharTomEl.hidden = resultat.matchar.length > 0;
 
-      if (saknarGruppEl) saknarGruppEl.hidden = resultat.saknar.length === 0;
+      // dataFinns-gaten är matematiskt redundant idag (resultat.saknar är
+      // alltid tom när harMatchningsdata är false — matchBidrag kan inte
+      // producera ett skäl av två null-fält) men skrivs ut explicit: den
+      // dokumenterar VARFÖR gruppen är tom, i stället för att förlita sig
+      // på en implicit konsekvens av matchningsmotorns invariant.
+      if (saknarGruppEl) saknarGruppEl.hidden = !dataFinns || resultat.saknar.length === 0;
       if (saknarListaEl) {
         saknarListaEl.innerHTML = '';
         resultat.saknar.forEach(({ bidrag, skal }) => {

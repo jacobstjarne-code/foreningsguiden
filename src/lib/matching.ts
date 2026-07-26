@@ -108,6 +108,38 @@ export function visaBorjaHar(profil: Foreningsprofil, matchandeBidrag: Bidrag[])
   return profil.sokt !== 'ja' || matchandeBidrag.some((b) => b.kraver_registrering === true);
 }
 
+// Fälten som räknas som "riktig matchningsdata" — samma fem som faktiskt
+// kan producera ett MatchSkal i matchBidrag ovan. sate_i_kommunen är
+// medvetet UTESLUTET: ingen fråga i tratten samlar in ett motsvarande
+// profilsvar, så fältet kan aldrig påverka matchningen även om det fylls
+// i — att räkna det här skulle kunna slå på "skarp" kostnadsram/SAKNAR-
+// rendering utan att matchningen faktiskt blivit skarpare för användaren.
+function bidragHarMatchningsvillkor(bidrag: Bidrag): boolean {
+  return (
+    bidrag.min_medlemmar !== null ||
+    bidrag.alder_min !== null ||
+    bidrag.alder_max !== null ||
+    bidrag.min_verksamhetstid_manader !== null ||
+    bidrag.foreningstyp !== null ||
+    bidrag.kraver_registrering !== null
+  );
+}
+
+/**
+ * Sant när MINST ETT bidrag i kommunen har något ifyllt matchningsvillkor
+ * — dvs. researchpasset har börjat extrahera data för den här kommunen.
+ * Styr om matchningstrattens kostnadsram/SAKNAR-grupp får presentera en
+ * "skarp", personlig siffra (harMatchningsdata true) eller måste falla
+ * tillbaka på en ofiltrerad, ärlig kommun-pott (false — dagens läge för
+ * alla 80 kommuner, innan Haiku-passet fyllt i fälten). Utan den här
+ * spärren ser ALLA bidrag ut att matcha så fort alla fält är null (grov
+ * matchning per design, se matchBidrag) — det är rätt för själva
+ * matchningen, men fel att presentera som en personlig kostnadsram.
+ */
+export function harMatchningsdata(kommun: Kommun): boolean {
+  return kommun.bidrag.some(bidragHarMatchningsvillkor);
+}
+
 export interface MatchKommunResult {
   matchar: Bidrag[];
   saknar: { bidrag: Bidrag; skal: MatchSkal[] }[];

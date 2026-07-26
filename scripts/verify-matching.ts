@@ -6,7 +6,7 @@
  * Node-versionen kräver flaggan för native TS-körning).
  */
 import assert from 'node:assert/strict';
-import { matchBidrag, matchKommun, visaBorjaHar } from '../src/lib/matching.ts';
+import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
@@ -180,6 +180,21 @@ test('matchKommun grupperar korrekt: MATCHAR/SAKNAR i rätt hinkar, EJ_BEHORIG o
   assert.equal(r.ejBehorig.length, 0);
   assert.equal(r.matchar.length + r.saknar.length + r.ejBehorig.length, 3);
   assert.equal(r.borjaHar, true); // sokt='nej'
+});
+
+test('harMatchningsdata: alla bidrag helt null → false (dagens läge i alla 80 kommuner)', () => {
+  const k = kommun([bidrag({ id: 'a' }), bidrag({ id: 'b' })]);
+  assert.equal(harMatchningsdata(k), false);
+});
+
+test('harMatchningsdata: ett enda ifyllt fält på ETT bidrag → true för hela kommunen', () => {
+  const k = kommun([bidrag({ id: 'a' }), bidrag({ id: 'b', min_medlemmar: 10 })]);
+  assert.equal(harMatchningsdata(k), true);
+});
+
+test('harMatchningsdata: sate_i_kommunen ensamt ifylld räknas INTE — tratten samlar inte in ett motsvarande svar', () => {
+  const k = kommun([bidrag({ id: 'a', sate_i_kommunen: true })]);
+  assert.equal(harMatchningsdata(k), false);
 });
 
 console.log(`\n${antal} tester klara`);

@@ -88,6 +88,16 @@ export const TRATT = {
       // Per bidrag renderas namn, deadline, belopp ur YAML. Ingen ny copy behövs.
     },
 
+    // Kostnadsramen — bara när matchningsdata faktiskt finns (harMatchningsdata,
+    // matching.ts) OCH minst ett matchat bidrag har ett parseat krontak
+    // (parseBeloppTak, kommunTyper.ts). kostnadsramEnkel när antalMedTak === 1.
+    kostnadsram: 'De här bidragen är värda upp till {summa} kr för er förening. Att söka dem kostar tid — vi kan göra det åt er.',
+    kostnadsramEnkel: 'Det här bidraget är värt upp till {summa} kr för er förening.',
+    // Fallback när harMatchningsdata === false (dagens läge, före Haiku-
+    // passet) — summerar ALLA kommunens bidrag, inte matchade, och ljuger
+    // aldrig om att potten redan är personlig.
+    kostnadsramOgfiltrerad: 'Föreningarna i {kommun} delar på bidrag värda upp till {summa} kr om året. Fyll i er profil så ser ni vilka som passar just er.',
+
     // Grupp 2 — nära-matchningar med vad som saknas
     behover: {
       rubrik: 'Nära — det här saknas',

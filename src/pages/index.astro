@@ -10,14 +10,13 @@ import { START } from '../lib/content';
 
 const kommuner = loadKommuner();
 const today = todayISO();
-const allaKommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande);
-const kommandeDeadlines = allaKommandeDeadlines.slice(0, 5);
+const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).slice(0, 5);
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
   <h1>{START.h1}</h1>
   <p>{START.hero}</p>
 
-  <p class="forstasida-aggregat" data-forstasida-aggregat data-antal-deadlines={allaKommandeDeadlines.length}></p>
+  <p class="forstasida-aggregat" data-forstasida-aggregat></p>
 
   <section>
     <h2>{START.kommunvaljareRubrik}</h2>
@@ -49,23 +48,15 @@ const kommandeDeadlines = allaKommandeDeadlines.slice(0, 5);
 
 <script>
   import { hamtaBevakningsantalGlobalt, BEVAKNING_GOLV_GLOBALT } from '../lib/bevakningKlient';
+  import { START } from '../lib/content';
 
   const el = document.querySelector<HTMLElement>('[data-forstasida-aggregat]');
   if (el) {
-    // Under golvet: antal bevakade deadlines (statiskt, redan i sidans
-    // data — INTE samma tal som KommunValjares "X KOMMUNER TILLGÄNGLIGA"
-    // några rader ner, medvetet valt för att inte upprepa samma siffra).
-    const antalDeadlines = Number(el.dataset.antalDeadlines ?? '0');
     hamtaBevakningsantalGlobalt().then((antal) => {
       if (antal !== null && antal >= BEVAKNING_GOLV_GLOBALT) {
-        // TODO(Fable): skriv den skarpa raden här — antal är ett riktigt,
-        // live tal ur Redis (getAllConfirmedSubscribers().length), aldrig
-        // hårdkodat. Platshållaren nedan är medvetet ingen färdig text —
-        // Code skriver inte svensk säljcopy. Golvet (50) gör att denna
-        // gren i praktiken inte visas än på den nylanserade sajten.
-        el.textContent = `[Fable] ${antal} föreningar bevakar sina deadlines`;
-      } else if (antalDeadlines > 0) {
-        el.textContent = `${antalDeadlines} kommande deadlines bevakade just nu`;
+        el.textContent = START.socialProofAggregat.replace('{antal}', String(antal));
+      } else {
+        el.textContent = START.socialProofTidigt;
       }
     });
   }
