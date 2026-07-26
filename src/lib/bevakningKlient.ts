@@ -9,22 +9,38 @@
 export const BEVAKNING_GOLV = 3;
 export const BEVAKNING_GOLV_GLOBALT = 50;
 
+/**
+ * Ren, testbar gränsfunktion — separerad från fetch-koden just så att
+ * övergången vid golvet (49→false, 50→true) kan verifieras med ett
+ * vanligt assert-test utan att fabricera Redis-data (scripts/verify-
+ * matching.ts). Alltid "antal >= golv", ingen dold av-runda/marginal.
+ */
+export function arOverGolv(antal: number, golv: number): boolean {
+  return antal >= golv;
+}
+
 /** Antal bekräftade bevakare för en kommun, eller null vid nätverksfel. */
 export async function hamtaBevakningsantal(kommunSlug: string): Promise<number | null> {
-  return hamtaBevakningsantalRaw(`/api/bevakningsantal?kommun=${encodeURIComponent(kommunSlug)}`);
+  const data = await hamtaBevakningsantalRaw<{ antal: number }>(`/api/bevakningsantal?kommun=${encodeURIComponent(kommunSlug)}`);
+  return data?.antal ?? null;
 }
 
-/** Globalt antal bekräftade bevakare (alla kommuner), eller null vid nätverksfel. */
-export async function hamtaBevakningsantalGlobalt(): Promise<number | null> {
-  return hamtaBevakningsantalRaw('/api/bevakningsantal');
+export interface BevakningsantalGlobalt {
+  antal: number;
+  earliestDatum: string | null;
+  antalDeadlines: number;
 }
 
-async function hamtaBevakningsantalRaw(url: string): Promise<number | null> {
+/** Globala live-bevakningstalen (förstasidans live-datakort, turn-14), eller null vid nätverksfel. */
+export async function hamtaBevakningsantalGlobalt(): Promise<BevakningsantalGlobalt | null> {
+  return hamtaBevakningsantalRaw<BevakningsantalGlobalt>('/api/bevakningsantal');
+}
+
+async function hamtaBevakningsantalRaw<T>(url: string): Promise<T | null> {
   try {
     const res = await fetch(url);
     if (!res.ok) return null;
-    const data = (await res.json()) as { antal: number };
-    return data.antal;
+    return (await res.json()) as T;
   } catch {
     return null;
   }

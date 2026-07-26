@@ -1,0 +1,194 @@
+---
+// LiveDataKort — förstasidans "litet tal, stor sanning"-kort (Design turn-14,
+// incoming/foreningsguiden-tratt-tryck-v3-livedata.html). Två datalägen, EN
+// yta: under bevakningsgolvet (50) bär katalogtalet (bidrag/kommuner, sant
+// från dag ett, statiskt) den stora positionen och live-antalet (bekräftade
+// bevakare) den lilla, daterade positionen. Över golvet byter de plats.
+// Golv/fetch: bevakningKlient.ts (arOverGolv, BEVAKNING_GOLV_GLOBALT).
+//
+// Mockens debug-etikett ("3 / 50 · UNDER GOLVET") och de förklarande
+// bildtexterna ("Litet tal, stor sanning" / "Samma yta, byte av
+// förstaplats") är designgranskningsannoteringar, inte användarinnehåll —
+// utelämnade här. Logo/ordmärke i mockens kortheader utelämnat också:
+// sidans egen header (Base.astro) visar redan varumärket direkt ovanför.
+export interface Props {
+  totalBidrag: number;
+  totalKommuner: number;
+}
+
+const { totalBidrag, totalKommuner } = Astro.props;
+---
+<div class="live-data-kort" data-live-data-kort data-antal-bidrag={totalBidrag} data-antal-kommuner={totalKommuner}>
+  <div class="live-data-kort__block live-data-kort__block--stort" data-live-data-stort>
+    <div class="live-data-kort__eyebrow" data-live-data-stort-eyebrow></div>
+    <div class="live-data-kort__stort-rad">
+      <span class="live-data-kort__stort-tal" data-live-data-stort-tal></span>
+      <span class="live-data-kort__stort-enhet" data-live-data-stort-enhet></span>
+    </div>
+    <div class="live-data-kort__stort-text" data-live-data-stort-text></div>
+  </div>
+
+  <div class="live-data-kort__block live-data-kort__block--litet" data-live-data-litet>
+    <span class="live-data-kort__dot" aria-hidden="true"></span>
+    <div class="live-data-kort__litet-inner">
+      <div class="live-data-kort__litet-text" data-live-data-litet-text></div>
+      <div class="live-data-kort__litet-datum" data-live-data-litet-datum></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { hamtaBevakningsantalGlobalt, arOverGolv, BEVAKNING_GOLV_GLOBALT } from '../lib/bevakningKlient';
+  import { KATALOG_LIVEDATA } from '../lib/content';
+  import { formatDate } from '../lib/kommunTyper';
+
+  const kort = document.querySelector<HTMLElement>('[data-live-data-kort]');
+  if (kort) {
+    const totalBidrag = Number(kort.dataset.antalBidrag ?? '0');
+    const totalKommuner = Number(kort.dataset.antalKommuner ?? '0');
+    const stortEyebrow = kort.querySelector<HTMLElement>('[data-live-data-stort-eyebrow]');
+    const stortTal = kort.querySelector<HTMLElement>('[data-live-data-stort-tal]');
+    const stortEnhet = kort.querySelector<HTMLElement>('[data-live-data-stort-enhet]');
+    const stortText = kort.querySelector<HTMLElement>('[data-live-data-stort-text]');
+    const litetText = kort.querySelector<HTMLElement>('[data-live-data-litet-text]');
+    const litetDatum = kort.querySelector<HTMLElement>('[data-live-data-litet-datum]');
+    const stortBlock = kort.querySelector<HTMLElement>('[data-live-data-stort]');
+    const litetBlock = kort.querySelector<HTMLElement>('[data-live-data-litet]');
+
+    // Server-sant genast (katalogtalet kräver ingen fetch) — undviker att
+    // kortet står tomt medan live-anropet pågår, oavsett vilket läge det
+    // visar sig vara när svaret kommer.
+    if (stortEyebrow) stortEyebrow.textContent = KATALOG_LIVEDATA.eyebrowKatalog;
+    if (stortTal) stortTal.textContent = String(totalBidrag);
+    if (stortEnhet) stortEnhet.textContent = KATALOG_LIVEDATA.enhetBidrag;
+    if (stortText) stortText.textContent = KATALOG_LIVEDATA.katalogText.replace('{kommuner}', String(totalKommuner));
+
+    hamtaBevakningsantalGlobalt().then((data) => {
+      if (!data) {
+        // Nätverksfel — katalogtalet står redan korrekt och "alltid sant"
+        // på egen hand. Döljer den lilla raden hellre än att visa en tom
+        // punkt utan text.
+        if (litetBlock) litetBlock.hidden = true;
+        return;
+      }
+      const overGolv = arOverGolv(data.antal, BEVAKNING_GOLV_GLOBALT);
+
+      if (!overGolv) {
+        if (litetText) litetText.textContent = KATALOG_LIVEDATA.liveForeningarText.replace('{antal}', String(data.antal));
+        if (litetDatum) {
+          litetDatum.textContent = data.earliestDatum
+            ? KATALOG_LIVEDATA.liveSedan.replace('{datum}', formatDate(data.earliestDatum))
+            : '';
+        }
+        return; // katalogtalet är redan i "stort"-positionen — inget att byta
+      }
+
+      // Över golvet: live-antalet tar den stora positionen, katalogen blir stödtext.
+      stortBlock?.classList.add('is-swapped');
+      litetBlock?.classList.add('is-swapped');
+      if (stortEyebrow) stortEyebrow.textContent = KATALOG_LIVEDATA.eyebrowLive;
+      if (stortTal) stortTal.textContent = String(data.antal);
+      if (stortEnhet) stortEnhet.textContent = KATALOG_LIVEDATA.enhetForeningar;
+      if (stortText) {
+        stortText.textContent = KATALOG_LIVEDATA.katalogSomStod
+          .replace('{kommuner}', String(totalKommuner))
+          .replace('{bidrag}', String(totalBidrag));
+      }
+      if (litetText) litetText.textContent = KATALOG_LIVEDATA.liveDeadlinesText.replace('{antal}', String(data.antalDeadlines));
+      if (litetDatum) litetDatum.textContent = KATALOG_LIVEDATA.senastAvlast.replace('{datum}', formatDate(new Date().toISOString().slice(0, 10)));
+    });
+  }
+</script>
+
+<style>
+  .live-data-kort {
+    border: 2.5px solid var(--fg-border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--fg-surface);
+  }
+
+  .live-data-kort__block--stort {
+    padding: 20px;
+    background: var(--fg-accent-soft);
+    border-bottom: 2px solid var(--fg-border);
+  }
+
+  .live-data-kort__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+  }
+
+  .live-data-kort__stort-rad {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .live-data-kort__stort-tal {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: 2.375rem;
+    line-height: 1;
+    color: var(--fg-ink);
+  }
+
+  .live-data-kort__block--stort.is-swapped .live-data-kort__stort-tal {
+    color: var(--fg-accent);
+  }
+
+  .live-data-kort__stort-enhet {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-h2);
+    color: var(--fg-ink);
+  }
+
+  .live-data-kort__stort-text {
+    font-size: var(--fg-text-body);
+    line-height: var(--fg-lh-body);
+    color: var(--fg-ink);
+    margin-top: 6px;
+  }
+
+  .live-data-kort__block--litet {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin: 16px 20px 20px;
+    padding: 13px 15px;
+    background: var(--fg-surface-sunken);
+    border-radius: 10px;
+  }
+
+  .live-data-kort__dot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    margin-top: 5px;
+    border-radius: 50%;
+    background: var(--fg-accent);
+    box-shadow: 0 0 0 4px var(--fg-accent-soft);
+  }
+
+  .live-data-kort__litet-text {
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink);
+    line-height: 1.4;
+  }
+
+  .live-data-kort__litet-datum {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink-muted);
+    margin-top: 2px;
+  }
+</style>

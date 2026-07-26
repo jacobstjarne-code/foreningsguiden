@@ -183,6 +183,30 @@ export function parseBeloppTak(belopp: string | null): number | null {
   return Number.isFinite(siffra) && siffra > 0 ? siffra : null;
 }
 
+export interface BeloppSumma {
+  total: number;
+  capped: number; // antal bidrag med ett parseat tak — bidrar till total
+  uncapped: number; // antal bidrag UTAN parseat tak — exkluderade, kan höja den sanna summan
+}
+
+/**
+ * Summerar parseBeloppTak() över en lista bidrag. Ett bidrag utan parseat
+ * tak bidrar varken till total eller capped — bara till uncapped, så
+ * anroparen kan visa en fotnot om vad som utelämnats (Design turn-14).
+ */
+export function sumBeloppTak(bidragLista: Bidrag[]): BeloppSumma {
+  let total = 0;
+  let capped = 0;
+  for (const bidrag of bidragLista) {
+    const tak = parseBeloppTak(bidrag.belopp);
+    if (tak !== null) {
+      total += tak;
+      capped++;
+    }
+  }
+  return { total, capped, uncapped: bidragLista.length - capped };
+}
+
 /**
  * Tidigaste kommande deadline för ett bidrag, som ISO-datum — null om bidraget
  * söks löpande (inget datum att jämföra mot). Underlag för progressionens

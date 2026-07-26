@@ -97,6 +97,15 @@ export const TRATT = {
     // passet) — summerar ALLA kommunens bidrag, inte matchade, och ljuger
     // aldrig om att potten redan är personlig.
     kostnadsramOgfiltrerad: 'Föreningarna i {kommun} delar på bidrag värda upp till {summa} kr om året. Fyll i er profil så ser ni vilka som passar just er.',
+    // Fotnoten (Design turn-14, incoming/foreningsguiden-tratt-tryck-v3-
+    // livedata.html) — null-belopp exkluderas ur summan ovan, aldrig tyst.
+    // uncapped=0 → sumFotnotCappat. uncapped>0 → sumFotnotOkant, med
+    // {uncappedText} fylld av sumFotnotOkantEtt (=1) eller
+    // sumFotnotOkantFlera (>1).
+    sumFotnotCappat: 'Summan av angivna maxbelopp för {antal} bidrag.',
+    sumFotnotOkant: 'Summan gäller {antal} bidrag med angivet tak. {uncappedText} angivet belopp och kan höja summan.',
+    sumFotnotOkantEtt: 'Ett bidrag saknar',
+    sumFotnotOkantFlera: '{antal} bidrag saknar',
 
     // Grupp 2 — nära-matchningar med vad som saknas
     behover: {

@@ -193,6 +193,42 @@ export async function countSubscribersByKommun(slug: string): Promise<number> {
   return subs.filter((s) => s.kommuner.includes(slug)).length;
 }
 
+/**
+ * Datumet för den FÖRSTA bekräftade prenumerationen — "sedan {datum}" på
+ * förstasidans live-datakort (turn-14, incoming/foreningsguiden-tratt-
+ * tryck-v3-livedata.html). Ett riktigt datum, aldrig ett lanseringsdatum
+ * hårdkodat i koden — null om ingen bekräftad prenumerant finns än.
+ */
+export async function getEarliestConfirmedRegistrationDate(): Promise<string | null> {
+  const subs = await getAllConfirmedSubscribers();
+  if (subs.length === 0) return null;
+  return subs.reduce((earliest, s) => (s.registrerad < earliest ? s.registrerad : earliest), subs[0].registrerad);
+}
+
+/**
+ * Summan av (prenumerant × bevakad kommun × dess kommande fasta deadlines)
+ * — "N deadlines bevakas åt föreningar" i live-datakortets över-golv-läge.
+ * Räknas live vid varje anrop (samma "ingen cache"-princip som övriga
+ * bevakningstal) — datamängden (få hundra deadlines × få prenumeranter)
+ * är för liten för att cache ska behövas.
+ */
+export async function countTrackedDeadlines(deadlineEntries: { kommunSlug: string; isLopande: boolean }[]): Promise<number> {
+  const subs = await getAllConfirmedSubscribers();
+  const antalPerKommun = new Map<string, number>();
+  for (const e of deadlineEntries) {
+    if (e.isLopande) continue;
+    antalPerKommun.set(e.kommunSlug, (antalPerKommun.get(e.kommunSlug) ?? 0) + 1);
+  }
+
+  let total = 0;
+  for (const sub of subs) {
+    for (const kommunSlug of sub.kommuner) {
+      total += antalPerKommun.get(kommunSlug) ?? 0;
+    }
+  }
+  return total;
+}
+
 /** Har den här (typ, bidrag, datum)-påminnelsen redan gått till adressen? */
 export async function wasReminderSent(typ: '14' | '3', bidragId: string, dateISO: string, email: string): Promise<boolean> {
   return (await redis.sismember(sentKey(typ, bidragId, dateISO), email.toLowerCase())) === 1;

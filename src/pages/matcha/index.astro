@@ -88,6 +88,7 @@ const kommuner = loadKommuner();
         <section class="tratt__grupp tratt__grupp--matchar">
           <h3>{TRATT.besked.kanSoka.rubrik}</h3>
           <p class="tratt__kostnadsram" data-tratt-kostnadsram hidden></p>
+          <p class="tratt__sum-fotnot" data-tratt-sum-fotnot hidden></p>
           <p class="tratt__tom" data-tratt-matchar-tom hidden>{TRATT.besked.kanSoka.tom}</p>
           <ul class="tratt__bidraglista" data-tratt-matchar-lista></ul>
         </section>
@@ -117,7 +118,7 @@ const kommuner = loadKommuner();
 <script>
   import { matchKommun, harMatchningsdata, type MatchSkal } from '../../lib/matching';
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type Aldersbucket, type SoktSvar } from '../../lib/foreningsprofil';
-  import { formatDate, earliestDeadlineISO, todayISO, svenskLista, parseBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
+  import { formatDate, earliestDeadlineISO, todayISO, svenskLista, sumBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
@@ -136,6 +137,7 @@ const kommuner = loadKommuner();
     const kommunBytKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-kommun-byt]');
     const fraga2El = root.querySelector<HTMLElement>('[data-tratt-fraga-container="verksamhet"]');
     const kostnadsramEl = root.querySelector<HTMLElement>('[data-tratt-kostnadsram]');
+    const sumFotnotEl = root.querySelector<HTMLElement>('[data-tratt-sum-fotnot]');
 
     const today = todayISO();
     let kommunData: Kommun | null = null;
@@ -178,6 +180,25 @@ const kommuner = loadKommuner();
         default:
           return '';
       }
+    }
+
+    // Fotnoten (Design turn-14) — null-belopp exkluderas ur summan ovan,
+    // aldrig tyst. Skriver ALLTID en fotnot när capped > 0 (även vid
+    // uncapped=0, "Summan av angivna maxbelopp för N bidrag." bekräftar
+    // att INGET utelämnades, lika viktigt som att flagga när något gör det).
+    function visaSumFotnot(capped: number, uncapped: number) {
+      if (!sumFotnotEl) return;
+      if (uncapped === 0) {
+        sumFotnotEl.textContent = TRATT.besked.sumFotnotCappat.replace('{antal}', String(capped));
+      } else {
+        const uncappedText = uncapped === 1
+          ? TRATT.besked.sumFotnotOkantEtt
+          : TRATT.besked.sumFotnotOkantFlera.replace('{antal}', String(uncapped));
+        sumFotnotEl.textContent = TRATT.besked.sumFotnotOkant
+          .replace('{antal}', String(capped))
+          .replace('{uncappedText}', uncappedText);
+      }
+      sumFotnotEl.hidden = false;
     }
 
     const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
@@ -233,37 +254,29 @@ const kommuner = loadKommuner();
       if (kostnadsramEl) {
         if (dataFinns) {
           // Skarp kostnadsram — summerar bara MATCHADE bidrags parsade tak.
-          let summa = 0;
-          let antalMedTak = 0;
-          resultat.matchar.forEach((bidrag) => {
-            const tak = parseBeloppTak(bidrag.belopp);
-            if (tak !== null) {
-              summa += tak;
-              antalMedTak++;
-            }
-          });
-          if (antalMedTak > 0) {
-            const mall = antalMedTak === 1 ? TRATT.besked.kostnadsramEnkel : TRATT.besked.kostnadsram;
-            kostnadsramEl.textContent = mall.replace('{summa}', summa.toLocaleString('sv-SE'));
+          const sum = sumBeloppTak(resultat.matchar);
+          if (sum.capped > 0) {
+            const mall = sum.capped === 1 ? TRATT.besked.kostnadsramEnkel : TRATT.besked.kostnadsram;
+            kostnadsramEl.textContent = mall.replace('{summa}', sum.total.toLocaleString('sv-SE'));
             kostnadsramEl.hidden = false;
+            visaSumFotnot(sum.capped, sum.uncapped);
           } else {
             kostnadsramEl.hidden = true;
+            if (sumFotnotEl) sumFotnotEl.hidden = true;
           }
         } else {
           // Ofiltrerad kostnadsram — summerar ALLA kommunens bidrag, inte
           // bara matchade (det finns inget "matchat" än), och säger det.
-          let summa = 0;
-          kommunData.bidrag.forEach((bidrag) => {
-            const tak = parseBeloppTak(bidrag.belopp);
-            if (tak !== null) summa += tak;
-          });
-          if (summa > 0) {
+          const sum = sumBeloppTak(kommunData.bidrag);
+          if (sum.capped > 0) {
             kostnadsramEl.textContent = TRATT.besked.kostnadsramOgfiltrerad
               .replace(/{kommun}/g, kommunData.kommun)
-              .replace('{summa}', summa.toLocaleString('sv-SE'));
+              .replace('{summa}', sum.total.toLocaleString('sv-SE'));
             kostnadsramEl.hidden = false;
+            visaSumFotnot(sum.capped, sum.uncapped);
           } else {
             kostnadsramEl.hidden = true;
+            if (sumFotnotEl) sumFotnotEl.hidden = true;
           }
         }
       }
@@ -544,6 +557,18 @@ const kommuner = loadKommuner();
     margin-top: 2px;
   }
 
+  .tratt__kostnadsram {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-h2);
+    color: var(--fg-ink);
+    border: 2px solid var(--fg-border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 4px;
+  }
+
+  .tratt__sum-fotnot,
   .tratt__tom,
   .tratt__minne,
   .tratt__ansvar {

@@ -5,18 +5,20 @@
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
 import KommunValjare from '../components/KommunValjare.astro';
+import LiveDataKort from '../components/LiveDataKort.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
 import { START } from '../lib/content';
 
 const kommuner = loadKommuner();
 const today = todayISO();
 const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).slice(0, 5);
+const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
   <h1>{START.h1}</h1>
   <p>{START.hero}</p>
 
-  <p class="forstasida-aggregat" data-forstasida-aggregat></p>
+  <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
 
   <section>
     <h2>{START.kommunvaljareRubrik}</h2>
@@ -45,19 +47,3 @@ const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).
     <p><a href="/deadlines/">Se hela deadlinekalendern →</a></p>
   </section>
 </Base>
-
-<script>
-  import { hamtaBevakningsantalGlobalt, BEVAKNING_GOLV_GLOBALT } from '../lib/bevakningKlient';
-  import { START } from '../lib/content';
-
-  const el = document.querySelector<HTMLElement>('[data-forstasida-aggregat]');
-  if (el) {
-    hamtaBevakningsantalGlobalt().then((antal) => {
-      if (antal !== null && antal >= BEVAKNING_GOLV_GLOBALT) {
-        el.textContent = START.socialProofAggregat.replace('{antal}', String(antal));
-      } else {
-        el.textContent = START.socialProofTidigt;
-      }
-    });
-  }
-</script>

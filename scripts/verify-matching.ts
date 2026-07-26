@@ -7,6 +7,8 @@
  */
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
+import { sumBeloppTak } from '../src/lib/kommunTyper.ts';
+import { arOverGolv } from '../src/lib/bevakningKlient.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
@@ -195,6 +197,34 @@ test('harMatchningsdata: ett enda ifyllt fält på ETT bidrag → true för hela
 test('harMatchningsdata: sate_i_kommunen ensamt ifylld räknas INTE — tratten samlar inte in ett motsvarande svar', () => {
   const k = kommun([bidrag({ id: 'a', sate_i_kommunen: true })]);
   assert.equal(harMatchningsdata(k), false);
+});
+
+test('arOverGolv: gränsen 49→false, 50→true — den exakta övergången ordern bad om att verifiera', () => {
+  assert.equal(arOverGolv(49, 50), false);
+  assert.equal(arOverGolv(50, 50), true);
+  assert.equal(arOverGolv(3, 50), false);
+  assert.equal(arOverGolv(0, 3), false);
+  assert.equal(arOverGolv(3, 3), true);
+});
+
+test('sumBeloppTak: null-belopp exkluderas ur summan men räknas i uncapped (Design turn-14-fotnoten)', () => {
+  const lista = [
+    bidrag({ id: 'a', belopp: '20 000 kr' }),
+    bidrag({ id: 'b', belopp: '75 000 kr' }),
+    bidrag({ id: 'c', belopp: 'Upp till 30 % av redovisad kostnad' }), // ej parsebart → uncapped
+    bidrag({ id: 'd', belopp: null }),
+  ];
+  const sum = sumBeloppTak(lista);
+  assert.equal(sum.total, 95000);
+  assert.equal(sum.capped, 2);
+  assert.equal(sum.uncapped, 2);
+});
+
+test('sumBeloppTak: alla bidrag cappade → uncapped=0 (sumFotnotCappat-grenen, inte sumFotnotOkant)', () => {
+  const lista = [bidrag({ id: 'a', belopp: '10 000 kr' }), bidrag({ id: 'b', belopp: '5 000 kr' })];
+  const sum = sumBeloppTak(lista);
+  assert.equal(sum.uncapped, 0);
+  assert.equal(sum.total, 15000);
 });
 
 console.log(`\n${antal} tester klara`);

@@ -43,11 +43,6 @@ export const START = {
   kommunvaljareRubrik: 'Välj din kommun',
   kalenderPuff:
     'Alla sista ansökningsdatum, samlade och sorterade efter vad som ligger närmast.',
-  // Aggregatraden — live antal ur Redis (bevakningKlient.ts, golv 50).
-  // socialProofAggregat visas bara vid ≥50, annars socialProofTidigt
-  // (ingen siffra — sant oavsett hur få som bevakar idag).
-  socialProofAggregat: '{antal} föreningar bevakar redan sina bidrag här.',
-  socialProofTidigt: 'Bevaka era bidrag gratis — vi säger till innan varje deadline.',
 };
 
 /**
@@ -407,4 +402,24 @@ export const VANTELISTA = {
   knappVantelista: 'Reservera vår plats',
   kvitto: 'Klart — er plats är reserverad. Vi hör av oss så snart utkastet för {kommun} går att skapa. Under tiden fyller vi på er föreningsprofil varje gång ni använder guiden, så det mesta redan är på plats när ni sätter igång.',
   ansvar: 'Vi ser till att utkastet bemöter kommunens krav. Ansökan lämnar ni in själva och beslutet fattar kommunen — vi lovar inte bifall, men vi ser till att ni inte faller på formalia.',
+};
+
+/**
+ * Förstasidans live-datakort (LiveDataKort.astro, Design turn-14,
+ * incoming/foreningsguiden-tratt-tryck-v3-livedata.html). Två datalägen,
+ * en yta — katalogtalet (bidrag/kommuner) är statiskt och alltid sant;
+ * live-antalet växlar vilken position som är "stor" vid golvet (50,
+ * bevakningKlient.ts BEVAKNING_GOLV_GLOBALT).
+ */
+export const KATALOG_LIVEDATA = {
+  eyebrowKatalog: 'Kartlagt just nu',
+  enhetBidrag: 'bidrag kartlagda',
+  katalogText: 'i {kommuner} kommuner — med krav, deadlines och belopp lästa från kommunernas egna sidor.',
+  liveForeningarText: '{antal} föreningar bevakar deadlines',
+  liveSedan: 'sedan {datum}',
+  eyebrowLive: 'Bevakar deadlines just nu',
+  enhetForeningar: 'föreningar',
+  katalogSomStod: 'i {kommuner} kommuner, med {bidrag} bidrag kartlagda.',
+  liveDeadlinesText: '{antal} deadlines bevakas åt föreningar',
+  senastAvlast: 'senast avläst {datum}',
 };
