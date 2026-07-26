@@ -34,9 +34,13 @@ const kommuner = loadKommuner();
           <div data-tratt-kommunvaljare>
             <KommunValjare kommuner={kommuner} selectMode={true} />
           </div>
+          <div class="tratt__kommun-vald" data-tratt-kommun-vald hidden>
+            <span>Vald: <strong data-tratt-kommun-vald-namn></strong></span>
+            <button type="button" class="tratt__kommun-byt" data-tratt-kommun-byt>Byt</button>
+          </div>
         </div>
 
-        <div class="tratt__fraga">
+        <div class="tratt__fraga" data-tratt-fraga-container="verksamhet">
           <h2>{TRATT.fraga_verksamhet.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_verksamhet.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="verksamhet" role="group" aria-label={TRATT.fraga_verksamhet.fraga}>
@@ -125,6 +129,11 @@ const kommuner = loadKommuner();
     const saknarListaEl = root.querySelector<HTMLElement>('[data-tratt-saknar-lista]');
     const borjaHarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-borjahar]');
     const registreringWidget = root.querySelector<HTMLElement>('[data-registrering-hjalp]');
+    const kommunvaljareWrapperEl = root.querySelector<HTMLElement>('[data-tratt-kommunvaljare]');
+    const kommunValdEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald]');
+    const kommunValdNamnEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald-namn]');
+    const kommunBytKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-kommun-byt]');
+    const fraga2El = root.querySelector<HTMLElement>('[data-tratt-fraga-container="verksamhet"]');
 
     const today = todayISO();
     let kommunData: Kommun | null = null;
@@ -243,13 +252,46 @@ const kommuner = loadKommuner();
       });
     }
 
-    async function hamtaKommunData(slug: string) {
+    // Fråga 1 kollapsar till en kort "Vald: {namn}"-rad efter val — annars
+    // ligger hela sök+länslistan kvar orörd och ser ut som att klicket inte
+    // gjorde något (Jacob-fyndet: väljaren måste synligt reagera).
+    function visaValdKommun(namn: string) {
+      if (kommunvaljareWrapperEl) kommunvaljareWrapperEl.hidden = true;
+      if (kommunValdEl) kommunValdEl.hidden = false;
+      if (kommunValdNamnEl) kommunValdNamnEl.textContent = namn;
+    }
+
+    function visaKommunvaljare() {
+      if (kommunvaljareWrapperEl) kommunvaljareWrapperEl.hidden = false;
+      if (kommunValdEl) kommunValdEl.hidden = true;
+    }
+
+    async function hamtaKommunData(slug: string, opts: { scrollaTillNasta?: boolean } = {}) {
       try {
         const res = await fetch(`/kommun-data/${slug}.json`);
         if (!res.ok) throw new Error('kommun-data 404');
         kommunData = (await res.json()) as Kommun;
       } catch {
         kommunData = null;
+      }
+      if (kommunData) {
+        visaValdKommun(kommunData.kommun);
+        // Flödeskänsla (Jacob-fyndet): efter ett LIVE val — inte vid
+        // återställning från sparad profil vid sidladdning — flytta
+        // uppmärksamheten till nästa fråga i stället för att lämna
+        // användaren kvar där de klickade, långt ner i länslistan.
+        // Räknat manuellt (inte scrollIntoView + CSS scroll-margin): den
+        // sticky räknaren byter höjd med textlängden (radbryts på smala
+        // skärmar, upptäckt vid verifiering — "3 bidrag matchar" är kort
+        // men "Svara för att se vad ni matchar" bryter till två rader),
+        // så en fast scroll-margin täckte rubriken bakom räknaren i vissa
+        // tillstånd. Mäter räknarens FAKTISKA höjd vid scroll-tillfället.
+        if (opts.scrollaTillNasta && fraga2El) {
+          const raknareHojd = raknareEl?.getBoundingClientRect().height ?? 0;
+          const targetY = fraga2El.getBoundingClientRect().top + window.scrollY - raknareHojd - 12;
+          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+          fraga2El.querySelector<HTMLButtonElement>('[data-tratt-svar]')?.focus({ preventScroll: true });
+        }
       }
       render();
     }
@@ -259,7 +301,11 @@ const kommuner = loadKommuner();
       if (!detail?.slug) return;
       profil.kommunSlug = detail.slug;
       saveForeningsprofil({ kommunSlug: profil.kommunSlug });
-      hamtaKommunData(detail.slug);
+      hamtaKommunData(detail.slug, { scrollaTillNasta: true });
+    });
+
+    kommunBytKnapp?.addEventListener('click', () => {
+      visaKommunvaljare();
     });
 
     root.querySelectorAll<HTMLElement>('[data-tratt-fraga]').forEach((grupp) => {
@@ -350,6 +396,29 @@ const kommuner = loadKommuner();
     color: var(--fg-ink-muted);
     font-size: var(--fg-text-label);
     margin-bottom: 12px;
+  }
+
+  .tratt__kommun-vald {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--fg-accent-soft);
+    border: 2px solid var(--fg-accent);
+    padding: 12px 16px;
+    font-size: var(--fg-text-body);
+    color: var(--fg-ink);
+  }
+
+  .tratt__kommun-byt {
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-label);
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: var(--fg-accent);
+    cursor: pointer;
+    padding: 4px;
   }
 
   .tratt__pillgrupp {
