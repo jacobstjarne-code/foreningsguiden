@@ -16,20 +16,35 @@ const VANTELISTA_INDEX_KEY = 'vantelista:index';
 const vantelistaRecordKey = (email: string) => `vantelista:${email.toLowerCase()}`;
 const klickKey = (kommunSlug: string, bidragId: string) => `vantelista:klick:${kommunSlug}:${bidragId}`;
 
+export type VantelistaSyfte = 'utkast' | 'registrering';
+
 export interface VantelistaEntry {
   email: string;
   kommunSlug: string;
-  bidragId: string;
+  bidragId: string | null;
+  syfte: VantelistaSyfte;
   registrerad: string; // ISO-datum
 }
 
-/** Sparar en köanmälan. Idempotent nog för syftet — senaste anmälan vinner. */
-export async function addVantelista(email: string, kommunSlug: string, bidragId: string): Promise<void> {
+/**
+ * Sparar en köanmälan. Idempotent nog för syftet — senaste anmälan vinner.
+ * `syfte` skiljer utkasttjänstens väntelista (bidragId krävs) från
+ * matchningstrattens "Hjälp oss registrera" (kommun-scopad, inget enskilt
+ * bidrag — bidragId null). Default 'utkast' — oförändrat beteende för
+ * befintliga anrop.
+ */
+export async function addVantelista(
+  email: string,
+  kommunSlug: string,
+  bidragId: string | null,
+  syfte: VantelistaSyfte = 'utkast'
+): Promise<void> {
   const normalized = email.toLowerCase();
   const record: VantelistaEntry = {
     email: normalized,
     kommunSlug,
     bidragId,
+    syfte,
     registrerad: new Date().toISOString(),
   };
   await redis.set(vantelistaRecordKey(normalized), record);
@@ -37,6 +52,6 @@ export async function addVantelista(email: string, kommunSlug: string, bidragId:
 }
 
 /** Räknar ett klick på väntelista-knappen — intentmätning, oberoende av om formuläret fylls i. */
-export async function logVantelistaKlick(kommunSlug: string, bidragId: string): Promise<void> {
-  await redis.incr(klickKey(kommunSlug, bidragId));
+export async function logVantelistaKlick(kommunSlug: string, bidragId: string | null): Promise<void> {
+  await redis.incr(klickKey(kommunSlug, bidragId ?? 'registrering'));
 }

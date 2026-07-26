@@ -2,83 +2,23 @@
  * kommuner.ts — Loads and validates all kommun-YAML från data/kommuner/.
  * Bygget ska faila hårt på trasig eller ofullständig YAML (§4 UPPDRAG_POC.md) —
  * validering körs vid modul-load, alltså vid varje `astro build`/`astro dev`.
+ *
+ * Typer/konstanter/rena formaterare bor i kommunTyper.ts (inget fs/path-
+ * beroende där — se den filens filhuvud för varför). Allt re-exporteras
+ * härifrån, så befintliga `import {...} from '../lib/kommuner'` fortsätter
+ * fungera oförändrat. Klientkod (t.ex. matchningstrattens <script>) ska
+ * importera direkt från kommunTyper.ts i stället för denna fil.
  */
 
 import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import yaml from 'js-yaml';
+import {
+  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, todayISO, nextOccurrenceISO,
+} from './kommunTyper';
+import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper';
 
-export const KATEGORIER = ['idrott', 'kultur', 'social', 'pensionar', 'funktionsratt', 'ovrig'] as const;
-export type Kategori = (typeof KATEGORIER)[number];
-
-export const DEADLINE_TYPER = ['fasta', 'lopande'] as const;
-export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
-
-export interface Deadlines {
-  typ: DeadlineTyp;
-  datum: string[]; // MM-DD, återkommande
-}
-
-export interface Bidrag {
-  id: string;
-  namn: string;
-  kategori: Kategori[];
-  malgrupp: string;
-  deadlines: Deadlines;
-  krav: string[];
-  belopp: string | null;
-  sen_ansokan: string;
-  kalla_url: string;
-  anteckning: string | null;
-}
-
-export interface Ansokningssystem {
-  namn: string;
-  url: string;
-}
-
-/**
- * Förutsättning — steg som krävs innan något bidrag i kommunen kan sökas
- * (FORUTSATTNINGAR.md §2). `ledtid` är null om kommunen inte publicerar en
- * faktisk siffra — gissa aldrig en handläggningstid.
- */
-export interface Forutsattning {
-  id: string;
-  vad: string;
-  beskrivning: string;
-  system: string | null; // null när steget inte sker i ett digitalt system (t.ex. beslut på årsmötet)
-  ledtid: number | null; // dagar
-  ledtid_text: string | null;
-  giltighet: string | null;
-  ordning: number;
-  kalla_url: string;
-}
-
-/**
- * Kommunsiffran — aha-rad på kommunsidan (KOMMUNSIFFRA, content.ts). Bara
- * kommuner som lämnat ut en egen sammanställning har den; null annars.
- * Gissa aldrig fram värden — bara det kommunen faktiskt publicerat.
- */
-export interface Kommunsiffra {
-  antal_foreningar: number;
-  summa_kr: string; // förformaterat, t.ex. "781 117" — se KOMMUNSIFFRA.template
-  bidragstyp: string;
-  utlamnad_datum: string;
-}
-
-export interface Kommun {
-  kommun: string;
-  kommun_slug: string;
-  lan: string;
-  befolkning: number;
-  forvaltning: string;
-  ansokningssystem: Ansokningssystem;
-  kalla_url: string;
-  verifierad: string; // YYYY-MM-DD
-  bidrag: Bidrag[];
-  forutsattningar: Forutsattning[];
-  kommunsiffra: Kommunsiffra | null;
-}
+export * from './kommunTyper';
 
 const DATA_DIR = resolve(process.cwd(), 'data', 'kommuner');
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -93,6 +33,43 @@ class SchemaError extends Error {
 
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === 'string' && v.trim().length > 0;
+}
+
+// Delade hjälpare för matchningsfälten — samma bakåtkompatibla mönster som
+// forutsattningar/kommunsiffra: undefined/null → null, inget problems-fel.
+function numberOrNull(raw: any, field: string, where: string, problems: string[]): number | null {
+  const v = raw[field];
+  if (v === null || v === undefined) return null;
+  if (typeof v !== 'number' || v < 0) {
+    problems.push(`${where}.${field} måste vara ett icke-negativt tal eller null`);
+    return null;
+  }
+  return v;
+}
+
+function boolOrNull(raw: any, field: string, where: string, problems: string[]): boolean | null {
+  const v = raw[field];
+  if (v === null || v === undefined) return null;
+  if (typeof v !== 'boolean') {
+    problems.push(`${where}.${field} måste vara true/false eller null`);
+    return null;
+  }
+  return v;
+}
+
+function verksamhetListOrNull(raw: any, field: string, where: string, problems: string[]): Verksamhet[] | null {
+  const v = raw[field];
+  if (v === null || v === undefined) return null;
+  if (!Array.isArray(v)) {
+    problems.push(`${where}.${field} måste vara en lista eller null`);
+    return null;
+  }
+  for (const item of v) {
+    if (!VERKSAMHETER.includes(item)) {
+      problems.push(`${where}.${field} innehåller okänt värde "${item}" (tillåtna: ${VERKSAMHETER.join(', ')})`);
+    }
+  }
+  return v;
 }
 
 function normalizeDate(v: unknown): unknown {
@@ -145,6 +122,17 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   if (raw.anteckning !== null && raw.anteckning !== undefined && typeof raw.anteckning !== 'string') {
     problems.push(`${where}.anteckning måste vara text eller null`);
   }
+
+  raw.min_medlemmar = numberOrNull(raw, 'min_medlemmar', where, problems);
+  raw.alder_min = numberOrNull(raw, 'alder_min', where, problems);
+  raw.alder_max = numberOrNull(raw, 'alder_max', where, problems);
+  if (raw.alder_min !== null && raw.alder_max !== null && raw.alder_min > raw.alder_max) {
+    problems.push(`${where}.alder_min (${raw.alder_min}) är större än alder_max (${raw.alder_max})`);
+  }
+  raw.min_verksamhetstid_manader = numberOrNull(raw, 'min_verksamhetstid_manader', where, problems);
+  raw.foreningstyp = verksamhetListOrNull(raw, 'foreningstyp', where, problems);
+  raw.kraver_registrering = boolOrNull(raw, 'kraver_registrering', where, problems);
+  raw.sate_i_kommunen = boolOrNull(raw, 'sate_i_kommunen', where, problems);
 
   return raw as Bidrag;
 }
@@ -280,121 +268,6 @@ export function getKommunBySlug(slug: string): Kommun | undefined {
   return loadKommuner().find((k) => k.kommun_slug === slug);
 }
 
-/** Antal dagar sedan `verifierad`-datumet. */
-export function daysSinceVerified(verifierad: string): number {
-  const ms = Date.now() - new Date(verifierad).getTime();
-  return Math.floor(ms / (1000 * 60 * 60 * 24));
-}
-
-export const STALE_THRESHOLD_DAYS = 180;
-
-export function isStale(verifierad: string): boolean {
-  return daysSinceVerified(verifierad) > STALE_THRESHOLD_DAYS;
-}
-
-const MANADSNAMN = [
-  'januari', 'februari', 'mars', 'april', 'maj', 'juni',
-  'juli', 'augusti', 'september', 'oktober', 'november', 'december',
-];
-
-/** Formaterar ett ISO-datum (YYYY-MM-DD) som svensk klartext: "10 juli 2026". */
-export function formatDate(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number);
-  return `${d} ${MANADSNAMN[m - 1]} ${y}`;
-}
-
-/** Formaterar ett återkommande MM-DD-datum (deadlines.datum) som svensk klartext utan år: "31 januari". */
-export function formatRecurringDate(mmdd: string): string {
-  const [m, d] = mmdd.split('-').map(Number);
-  return `${d} ${MANADSNAMN[m - 1]}`;
-}
-
-const VECKODAGAR = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
-
-/** Veckodag för ett ISO-datum, gemener: "onsdag". UTC — samma dygnsgräns som daysUntil. */
-export function formatWeekday(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number);
-  return VECKODAGAR[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
-}
-
-const MANADSFORKORTNING = ['JAN', 'FEB', 'MAR', 'APR', 'MAJ', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEC'];
-
-/** Formaterar ett ISO-datum som VerificationStamp-format: "03 JUL". */
-export function formatStampDate(iso: string): string {
-  const [, m, d] = iso.split('-').map(Number);
-  return `${String(d).padStart(2, '0')} ${MANADSFORKORTNING[m - 1]}`;
-}
-
-/** "a" / "a och b" / "a, b och c" — svensk uppräkning för mall-variabler. */
-export function svenskLista(items: string[]): string {
-  if (items.length === 0) return '';
-  if (items.length === 1) return items[0];
-  return `${items.slice(0, -1).join(', ')} och ${items[items.length - 1]}`;
-}
-
-/** Svensk genitivform: "Gislaved" → "Gislaveds", men "Borås" → "Borås'" (namn på -s tar bara apostrof). */
-export function possessiv(kommun: string): string {
-  return /s$/i.test(kommun) ? `${kommun}'` : `${kommun}s`;
-}
-
-/**
- * Tidigaste kommande deadline för ett bidrag, som ISO-datum — null om bidraget
- * söks löpande (inget datum att jämföra mot). Underlag för progressionens
- * station 2/4-sortering (FORUTSATTNINGAR.md §4).
- */
-export function earliestDeadlineISO(bidrag: Bidrag, today: string): string | null {
-  if (bidrag.deadlines.typ === 'lopande') return null;
-  const occurrences = bidrag.deadlines.datum.map((mmdd) => nextOccurrenceISO(mmdd, today));
-  return occurrences.sort()[0] ?? null;
-}
-
-/** Dagens datum som YYYY-MM-DD (lokal tid). */
-export function todayISO(): string {
-  const d = new Date();
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
-
-/**
- * Räknar ut nästa förekomst av ett återkommande MM-DD-datum relativt `todayISO`,
- * som ett fullt ISO-datum (YYYY-MM-DD). Ren sträng/heltalsjämförelse — inga
- * Date-objekt inblandade, så tidszon kan aldrig ge en off-by-one.
- */
-export function nextOccurrenceISO(mmdd: string, today: string): string {
-  const [ty] = today.split('-').map(Number);
-  const todayKey = today.slice(5); // "MM-DD"
-  const year = mmdd >= todayKey ? ty : ty + 1;
-  return `${year}-${mmdd}`;
-}
-
-/** Antal dagar från `today` till `dateISO` (kan bli 0 om det är idag). */
-export function daysUntil(dateISO: string, today: string): number {
-  const toUTC = (iso: string) => {
-    const [y, m, d] = iso.split('-').map(Number);
-    return Date.UTC(y, m - 1, d);
-  };
-  return Math.round((toUTC(dateISO) - toUTC(today)) / (1000 * 60 * 60 * 24));
-}
-
-export type Urgency = 'urgent' | 'attention' | 'positive';
-
-/** Urgens-modellen (tokens.css §04): ≤3 dagar bråttom, 4–14 snart, annars god tid. */
-export function getUrgency(days: number): Urgency {
-  if (days <= 3) return 'urgent';
-  if (days <= 14) return 'attention';
-  return 'positive';
-}
-
-export interface DeadlineEntry {
-  kommun: string;
-  kommunSlug: string;
-  bidragId: string;
-  bidragNamn: string;
-  kategori: Kategori[];
-  isLopande: boolean;
-  dateISO: string | null; // null för löpande — kan inte placeras kronologiskt
-}
-
 /**
  * Platt, kronologiskt sorterad lista över alla deadlines i alla kommuner —
  * underlag för deadlinekalendern (§5 punkt 4 UPPDRAG_POC.md). Löpande
@@ -430,12 +303,3 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
 
   return entries;
 }
-
-export const KATEGORI_LABELS: Record<Kategori, string> = {
-  idrott: 'Idrott',
-  kultur: 'Kultur',
-  social: 'Social',
-  pensionar: 'Pensionär',
-  funktionsratt: 'Funktionsrätt',
-  ovrig: 'Övrigt',
-};

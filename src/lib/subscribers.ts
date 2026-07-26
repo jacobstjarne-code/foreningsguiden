@@ -12,6 +12,7 @@
  */
 
 import { Redis } from '@upstash/redis';
+import type { Foreningsprofil } from './foreningsprofil';
 
 // Redis.fromEnv() letar efter UPSTASH_REDIS_REST_URL/_TOKEN — Vercels
 // Marketplace-integration (vercel install upstash/upstash-kv) provisionerar
@@ -40,6 +41,11 @@ export interface Subscriber {
   // årsmötesdatum, sparat när prenumeranten ber om en giltighetspåminnelse.
   // Bara de kommuner som faktiskt frågats om finns med som nycklar.
   giltighetArsmoten?: Record<string, string>;
+  // Matchningstrattens bestående profil (turn-11) — mergas in FÖRST när en
+  // e-post fångas (RegistreringsHjalp.astro/framtida utkastflöde). Fram
+  // tills dess lever profilen bara i localStorage (foreningsprofil.ts).
+  // Samma "läs-och-mergea, aldrig blind overwrite"-skydd som ovan.
+  foreningsprofil?: Foreningsprofil;
 }
 
 /**
@@ -114,6 +120,39 @@ export async function addGiltighetBevakning(
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
     giltighetArsmoten: { ...(existing?.giltighetArsmoten ?? {}), [kommunSlug]: arsmotesdatum },
+  };
+  await redis.set(recordKey(normalized), record);
+  await redis.sadd(INDEX_KEY, normalized);
+
+  if (record.confirmed) {
+    return { token: null, alreadyConfirmed: true };
+  }
+
+  const token = crypto.randomUUID();
+  await redis.set(tokenKey(token), normalized, { ex: TOKEN_TTL_SEKUNDER });
+  return { token, alreadyConfirmed: false };
+}
+
+/**
+ * Mergar in matchningstrattens föreningsprofil på en subscriber-post (skapas
+ * om den inte finns). Samma "läs befintlig FÖRST"-mönster som
+ * addGiltighetBevakning — en blind overwrite här skulle regressa en redan
+ * BEKRÄFTAD adress till confirmed:false, se filhuvudets varning.
+ */
+export async function addForeningsprofil(
+  email: string,
+  profil: Foreningsprofil
+): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
+  const normalized = email.toLowerCase();
+  const existing = await getSubscriber(normalized);
+
+  const record: Subscriber = {
+    email: normalized,
+    kommuner: existing?.kommuner ?? [],
+    registrerad: existing?.registrerad ?? new Date().toISOString(),
+    confirmed: existing?.confirmed ?? false,
+    giltighetArsmoten: existing?.giltighetArsmoten,
+    foreningsprofil: profil,
   };
   await redis.set(recordKey(normalized), record);
   await redis.sadd(INDEX_KEY, normalized);

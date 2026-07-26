@@ -1,0 +1,422 @@
+---
+// Matchningstratten (turn-11) — "Vad kan er förening söka?" Fem frågor med
+// en levande räknare, besked i tre grupper (aldrig ett enda tal). Route
+// kommun-agnostisk (fråga 1 VÄLJER kommun, kan därför inte ligga under
+// /kommun/[slug]/) — mitt förslag, inte instruerat.
+//
+// Källa: incoming/Föreningsguiden kommersiell.html #turn-11 (INTE .dc.html
+// — den filen går bara till turn-6, saknar turn-11 helt). All copy ur
+// GUIDE_TRATT_COPY.ts, ingen text uppfunnen här. Matchningslogiken är
+// riktig (src/lib/matching.ts) — ingen fejk-räknare.
+import Base from '../../layouts/Base.astro';
+import KommunValjare from '../../components/KommunValjare.astro';
+import RegistreringsHjalp from '../../components/RegistreringsHjalp.astro';
+import { loadKommuner } from '../../lib/kommuner';
+import { TRATT } from '../../../GUIDE_TRATT_COPY';
+
+const kommuner = loadKommuner();
+---
+<Base title={TRATT.start.rubrik} description={TRATT.start.ingress}>
+  <section class="tratt" data-tratt>
+    <header class="tratt__header">
+      <h1>{TRATT.start.rubrik}</h1>
+      <p class="tratt__ingress">{TRATT.start.ingress}</p>
+    </header>
+
+    <p class="tratt__raknare" data-tratt-raknare aria-live="polite">{TRATT.raknare.tom}</p>
+
+    <div class="tratt__layout">
+      <div class="tratt__frageflode">
+
+        <div class="tratt__fraga">
+          <h2>{TRATT.fraga_kommun.fraga}</h2>
+          <p class="tratt__hjalp">{TRATT.fraga_kommun.hjalp}</p>
+          <div data-tratt-kommunvaljare>
+            <KommunValjare kommuner={kommuner} selectMode={true} />
+          </div>
+        </div>
+
+        <div class="tratt__fraga">
+          <h2>{TRATT.fraga_verksamhet.fraga}</h2>
+          <p class="tratt__hjalp">{TRATT.fraga_verksamhet.hjalp}</p>
+          <div class="tratt__pillgrupp" data-tratt-fraga="verksamhet" role="group" aria-label={TRATT.fraga_verksamhet.fraga}>
+            {TRATT.fraga_verksamhet.alternativ.map((a) => (
+              <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="tratt__fraga">
+          <h2>{TRATT.fraga_storlek.fraga}</h2>
+          <p class="tratt__hjalp">{TRATT.fraga_storlek.hjalp}</p>
+          <div class="tratt__pillgrupp" data-tratt-fraga="storlek" role="group" aria-label={TRATT.fraga_storlek.fraga}>
+            {TRATT.fraga_storlek.alternativ.map((a) => (
+              <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="tratt__fraga">
+          <h2>{TRATT.fraga_tid.fraga}</h2>
+          <p class="tratt__hjalp">{TRATT.fraga_tid.hjalp}</p>
+          <div class="tratt__pillgrupp" data-tratt-fraga="alder" role="group" aria-label={TRATT.fraga_tid.fraga}>
+            {TRATT.fraga_tid.alternativ.map((a) => (
+              <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="tratt__fraga">
+          <h2>{TRATT.fraga_sokt.fraga}</h2>
+          <p class="tratt__hjalp">{TRATT.fraga_sokt.hjalp}</p>
+          <div class="tratt__pillgrupp" data-tratt-fraga="sokt" role="group" aria-label={TRATT.fraga_sokt.fraga}>
+            {TRATT.fraga_sokt.alternativ.map((a) => (
+              <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tratt__besked" data-tratt-besked hidden>
+        <h2>{TRATT.besked.rubrik}</h2>
+
+        <section class="tratt__grupp tratt__grupp--matchar">
+          <h3>{TRATT.besked.kanSoka.rubrik}</h3>
+          <p class="tratt__tom" data-tratt-matchar-tom hidden>{TRATT.besked.kanSoka.tom}</p>
+          <ul class="tratt__bidraglista" data-tratt-matchar-lista></ul>
+        </section>
+
+        <section class="tratt__grupp tratt__grupp--saknar" data-tratt-grupp-saknar hidden>
+          <h3>{TRATT.besked.behover.rubrik}</h3>
+          <ul class="tratt__bidraglista" data-tratt-saknar-lista></ul>
+        </section>
+
+        <section class="tratt__grupp tratt__grupp--borjahar" data-tratt-grupp-borjahar hidden>
+          <h3>{TRATT.besked.borjaHar.rubrik}</h3>
+          <p>{TRATT.besked.borjaHar.brodtext}</p>
+          <details class="tratt__disclosure">
+            <summary>{TRATT.besked.borjaHar.fallRubrik}</summary>
+            <p>{TRATT.besked.borjaHar.fallText}</p>
+          </details>
+          <RegistreringsHjalp />
+        </section>
+
+        <p class="tratt__minne">{TRATT.besked.minne}</p>
+        <p class="tratt__ansvar">{TRATT.ansvar}</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { matchKommun, type MatchSkal } from '../../lib/matching';
+  import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type Aldersbucket, type SoktSvar } from '../../lib/foreningsprofil';
+  import { formatDate, earliestDeadlineISO, todayISO, svenskLista, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
+  import { TRATT } from '../../../GUIDE_TRATT_COPY';
+
+  const root = document.querySelector<HTMLElement>('[data-tratt]');
+  if (root) {
+    const raknareEl = root.querySelector<HTMLElement>('[data-tratt-raknare]');
+    const beskedEl = root.querySelector<HTMLElement>('[data-tratt-besked]');
+    const matcharListaEl = root.querySelector<HTMLElement>('[data-tratt-matchar-lista]');
+    const matcharTomEl = root.querySelector<HTMLElement>('[data-tratt-matchar-tom]');
+    const saknarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-saknar]');
+    const saknarListaEl = root.querySelector<HTMLElement>('[data-tratt-saknar-lista]');
+    const borjaHarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-borjahar]');
+    const registreringWidget = root.querySelector<HTMLElement>('[data-registrering-hjalp]');
+
+    const today = todayISO();
+    let kommunData: Kommun | null = null;
+
+    const sparad = getForeningsprofil();
+    const profil: Foreningsprofil = sparad ?? {
+      kommunSlug: null,
+      verksamhet: [],
+      storlek: null,
+      alder: null,
+      sokt: null,
+      uppdaterad: '',
+    };
+
+    function etikett<T extends string>(alternativ: { id: T; etikett: string }[], id: T | null): string {
+      return alternativ.find((a) => a.id === id)?.etikett ?? '';
+    }
+
+    function manaderTillText(m: number): string {
+      if (m < 12) return `${m} ${m === 1 ? 'månad' : 'månader'}`;
+      return `${Math.round(m / 12)} år`;
+    }
+
+    function skalTillText(skal: MatchSkal, bidrag: Bidrag): string {
+      switch (skal.falt) {
+        case 'min_verksamhetstid_manader':
+          return TRATT.besked.behover.saknarTid
+            .replace('{krav}', manaderTillText(bidrag.min_verksamhetstid_manader ?? 0))
+            .replace('{angivet}', etikett(TRATT.fraga_tid.alternativ, profil.alder));
+        case 'min_medlemmar':
+          return TRATT.besked.behover.saknarMedlemmar
+            .replace('{krav}', String(bidrag.min_medlemmar))
+            .replace('{angivet}', etikett(TRATT.fraga_storlek.alternativ, profil.storlek));
+        case 'foreningstyp': {
+          const etiketter = (bidrag.foreningstyp ?? []).map((v: Verksamhet) => etikett(TRATT.fraga_verksamhet.alternativ, v));
+          return TRATT.besked.behover.saknarTyp.replace('{krav}', svenskLista(etiketter));
+        }
+        case 'kraver_registrering':
+          return TRATT.besked.behover.saknarRegistrering;
+        default:
+          return '';
+      }
+    }
+
+    function bidragMeta(bidrag: Bidrag): string {
+      // dateISO är null ENDAST för löpande bidrag (earliestDeadlineISO),
+      // samma mönster som BidragCard/KommunProgressions formatDeadlines —
+      // rör aldrig deadlines.datum direkt för löpande bidrag.
+      const dateISO = earliestDeadlineISO(bidrag, today);
+      const deadline = dateISO ? `sista dag ${formatDate(dateISO)}` : 'löpande ansökan';
+      return `${bidrag.belopp ?? 'Belopp ej publikt'} · ${deadline}`;
+    }
+
+    function bidragLank(bidrag: Bidrag): string {
+      return kommunData ? `/kommun/${kommunData.kommun_slug}/#bidrag-${bidrag.id}` : '#';
+    }
+
+    function render() {
+      if (!kommunData) {
+        if (raknareEl) raknareEl.textContent = TRATT.raknare.tom;
+        if (beskedEl) beskedEl.hidden = true;
+        return;
+      }
+
+      const resultat = matchKommun(profil, kommunData);
+      const antal = resultat.matchar.length;
+
+      if (raknareEl) {
+        raknareEl.textContent = antal === 0 ? TRATT.raknare.noll : antal === 1 ? TRATT.raknare.en : TRATT.raknare.trafffar.replace('{antal}', String(antal));
+      }
+
+      if (beskedEl) beskedEl.hidden = false;
+
+      if (matcharListaEl) {
+        matcharListaEl.innerHTML = '';
+        resultat.matchar.forEach((bidrag) => {
+          const li = document.createElement('li');
+          li.className = 'tratt__bidrag';
+          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(bidrag)}</div>`;
+          matcharListaEl.appendChild(li);
+        });
+      }
+      if (matcharTomEl) matcharTomEl.hidden = resultat.matchar.length > 0;
+
+      if (saknarGruppEl) saknarGruppEl.hidden = resultat.saknar.length === 0;
+      if (saknarListaEl) {
+        saknarListaEl.innerHTML = '';
+        resultat.saknar.forEach(({ bidrag, skal }) => {
+          const li = document.createElement('li');
+          li.className = 'tratt__bidrag';
+          const skalText = skal.map((s) => skalTillText(s, bidrag)).filter(Boolean).join(' ');
+          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${skalText}</div>`;
+          saknarListaEl.appendChild(li);
+        });
+      }
+
+      if (borjaHarGruppEl) borjaHarGruppEl.hidden = !resultat.borjaHar;
+      if (registreringWidget && kommunData) {
+        registreringWidget.dataset.kommunSlug = kommunData.kommun_slug;
+      }
+    }
+
+    function markeraAktivaPillar() {
+      root!.querySelectorAll<HTMLElement>('[data-tratt-fraga]').forEach((grupp) => {
+        const fraga = grupp.dataset.trattFraga;
+        grupp.querySelectorAll<HTMLButtonElement>('[data-tratt-svar]').forEach((pill) => {
+          const varde = pill.dataset.trattSvar ?? '';
+          let aktiv = false;
+          if (fraga === 'verksamhet') aktiv = profil.verksamhet.includes(varde as Verksamhet);
+          else if (fraga === 'storlek') aktiv = profil.storlek === varde;
+          else if (fraga === 'alder') aktiv = profil.alder === varde;
+          else if (fraga === 'sokt') aktiv = profil.sokt === varde;
+          pill.classList.toggle('is-active', aktiv);
+          pill.setAttribute('aria-pressed', String(aktiv));
+        });
+      });
+    }
+
+    async function hamtaKommunData(slug: string) {
+      try {
+        const res = await fetch(`/kommun-data/${slug}.json`);
+        if (!res.ok) throw new Error('kommun-data 404');
+        kommunData = (await res.json()) as Kommun;
+      } catch {
+        kommunData = null;
+      }
+      render();
+    }
+
+    root.addEventListener('kommunvaljare:valj', (event) => {
+      const detail = (event as CustomEvent<{ slug: string; namn: string }>).detail;
+      if (!detail?.slug) return;
+      profil.kommunSlug = detail.slug;
+      saveForeningsprofil({ kommunSlug: profil.kommunSlug });
+      hamtaKommunData(detail.slug);
+    });
+
+    root.querySelectorAll<HTMLElement>('[data-tratt-fraga]').forEach((grupp) => {
+      const fraga = grupp.dataset.trattFraga;
+      grupp.querySelectorAll<HTMLButtonElement>('[data-tratt-svar]').forEach((pill) => {
+        pill.addEventListener('click', () => {
+          const varde = pill.dataset.trattSvar ?? '';
+
+          if (fraga === 'verksamhet') {
+            const v = varde as Verksamhet;
+            profil.verksamhet = profil.verksamhet.includes(v) ? profil.verksamhet.filter((x) => x !== v) : [...profil.verksamhet, v];
+            saveForeningsprofil({ verksamhet: profil.verksamhet });
+          } else if (fraga === 'storlek') {
+            profil.storlek = (profil.storlek === varde ? null : varde) as Medlemsbucket | null;
+            saveForeningsprofil({ storlek: profil.storlek });
+          } else if (fraga === 'alder') {
+            profil.alder = (profil.alder === varde ? null : varde) as Aldersbucket | null;
+            saveForeningsprofil({ alder: profil.alder });
+          } else if (fraga === 'sokt') {
+            profil.sokt = (profil.sokt === varde ? null : varde) as SoktSvar | null;
+            saveForeningsprofil({ sokt: profil.sokt });
+          }
+
+          markeraAktivaPillar();
+          render();
+        });
+      });
+    });
+
+    // Återställ sparat svar (profilen växer av användning — nästa gång
+    // börjar man här, TRATT.besked.minne).
+    markeraAktivaPillar();
+    if (profil.kommunSlug) hamtaKommunData(profil.kommunSlug);
+  }
+</script>
+
+<style>
+  .tratt {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-6, 24px);
+  }
+
+  .tratt__header h1 {
+    font-family: var(--fg-font-display);
+    font-size: var(--fg-text-h1);
+    color: var(--fg-ink);
+  }
+
+  .tratt__ingress {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-body-lg);
+    line-height: var(--fg-lh-body);
+    max-width: 60ch;
+  }
+
+  .tratt__raknare {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    font-family: var(--fg-font-mono);
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-body-lg);
+    color: var(--fg-on-accent);
+    background: var(--fg-accent);
+    padding: 12px 16px;
+    border: 2px solid var(--fg-border);
+  }
+
+  .tratt__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .tratt__fraga {
+    border-bottom: 1px solid var(--fg-border);
+    padding-bottom: 20px;
+  }
+
+  .tratt__fraga h2 {
+    font-size: var(--fg-text-h2);
+    color: var(--fg-ink);
+    margin-bottom: 4px;
+  }
+
+  .tratt__hjalp {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    margin-bottom: 12px;
+  }
+
+  .tratt__pillgrupp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tratt__pill {
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    padding: 8px 14px;
+    border: 2px solid var(--fg-border);
+    background: var(--fg-surface);
+    color: var(--fg-ink);
+    cursor: pointer;
+  }
+
+  .tratt__pill.is-active {
+    background: var(--fg-accent);
+    border-color: var(--fg-accent);
+    color: var(--fg-on-accent);
+  }
+
+  .tratt__besked {
+    background: var(--fg-surface-sunken);
+    border: 2px solid var(--fg-border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .tratt__grupp--borjahar {
+    background: var(--fg-accent-soft);
+    padding: 16px;
+    border: 2px solid var(--fg-accent);
+  }
+
+  .tratt__bidraglista {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tratt__bidrag {
+    background: var(--fg-surface);
+    border: 1px solid var(--fg-border);
+    padding: 10px 14px;
+  }
+
+  .tratt__bidrag-meta {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    margin-top: 2px;
+  }
+
+  .tratt__tom,
+  .tratt__minne,
+  .tratt__ansvar {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+  }
+
+  .tratt__disclosure {
+    margin: 10px 0;
+  }
+</style>
