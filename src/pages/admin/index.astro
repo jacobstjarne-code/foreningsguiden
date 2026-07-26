@@ -1,0 +1,84 @@
+---
+// Adminvy — Grind 2 (GRANSKNING_foreningsguiden.md): "Skyddad sida som
+// listar Redis: registrerade, köp... Minimal men läsbar, så du slipper
+// Upstash-dashboarden." Egen auth (adminSession.ts, delat lösenord) —
+// skild från användarnas magic-link (session.ts). Visar INTE
+// abonnemangsstatus (ingen återkommande Stripe-prenumeration finns i
+// kodbasen än). noindex — internt verktyg, inte en sida sajten ska
+// indexeras för.
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import { ADMIN_SESSION_COOKIE_NAMN, arAdminInloggad } from '../../lib/adminSession';
+import { getAllSubscribers } from '../../lib/subscribers';
+import { hamtaAllaKop } from '../../lib/kop';
+import { formatDate } from '../../lib/kommuner';
+
+const sessionToken = Astro.cookies.get(ADMIN_SESSION_COOKIE_NAMN)?.value;
+const inloggad = await arAdminInloggad(sessionToken);
+const felaktigtLosenord = Astro.url.searchParams.get('fel') === '1';
+
+const subscribers = inloggad ? await getAllSubscribers() : [];
+const kop = inloggad ? await hamtaAllaKop() : [];
+const summaKr = kop.reduce((sum, k) => sum + k.beloppOre, 0) / 100;
+---
+<Base title="Admin — Föreningsguiden" description="Internt adminverktyg." noindex={true}>
+  <h1>Admin</h1>
+
+  {!inloggad ? (
+    <>
+      {felaktigtLosenord && <p class="fg-fel">Fel lösenord.</p>}
+      <form class="email-signup fg-card" method="POST" action="/api/admin-logga-in">
+        <label for="admin-losenord">Lösenord</label>
+        <input type="password" id="admin-losenord" name="losenord" required />
+        <button type="submit" class="btn-primary">Logga in</button>
+      </form>
+    </>
+  ) : (
+    <div class="mina-sidor">
+      <section>
+        <h2>Sammanfattning</h2>
+        <ul class="mina-sidor__profil">
+          <li>{subscribers.length} prenumeranter</li>
+          <li>{kop.length} köp — {summaKr.toFixed(0)} kr totalt</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Prenumeranter</h2>
+        {subscribers.length === 0 ? (
+          <p>Inga prenumeranter än.</p>
+        ) : (
+          <ul class="mina-sidor__kop">
+            {subscribers.map((s) => (
+              <li>
+                <strong>{s.email}</strong> — {s.kommuner.join(', ') || 'inga kommuner'} — {s.confirmed ? 'bekräftad' : 'obekräftad'}
+                {s.foreningsprofil && <> — {s.foreningsprofil.verksamhet.join('/')}</>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <h2>Köp</h2>
+        {kop.length === 0 ? (
+          <p>Inga köp än.</p>
+        ) : (
+          <ul class="mina-sidor__kop">
+            {kop.map((k) => (
+              <li>
+                <strong>{(k.beloppOre / 100).toFixed(0)} kr</strong> — {formatDate(k.betaldDatum.slice(0, 10))} — {k.email} — {k.kommunSlug}
+                {k.hostedInvoiceUrl && <> — <a href={k.hostedInvoiceUrl}>Faktura</a></>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <form method="POST" action="/api/admin-logga-ut">
+        <button type="submit" class="btn-primary">Logga ut</button>
+      </form>
+    </div>
+  )}
+</Base>

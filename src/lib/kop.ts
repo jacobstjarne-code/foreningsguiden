@@ -59,6 +59,15 @@ export async function hamtaKopForEmail(email: string): Promise<KopEntry[]> {
     .sort((a, b) => b.betaldDatum.localeCompare(a.betaldDatum));
 }
 
+/** Adminvyn: ALLA köp, senaste först. */
+export async function hamtaAllaKop(): Promise<KopEntry[]> {
+  const sessionIds = await redis.smembers(KOP_INDEX_KEY);
+  const entries = await Promise.all(sessionIds.map((id) => hamtaKop(id)));
+  return entries
+    .filter((e): e is KopEntry => e !== null)
+    .sort((a, b) => b.betaldDatum.localeCompare(a.betaldDatum));
+}
+
 /**
  * H29-tillägg (Mina sidor: byt e-post) — flyttar INDEXET (vilka
  * sessions-id:n som hör till adressen) till den nya e-posten. Rör

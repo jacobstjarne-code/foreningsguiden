@@ -212,6 +212,23 @@ main {
   font-size: var(--fg-text-mono);
 }
 
+/* Delad kontosidelayout — Mina sidor (H29) och adminvyn (Grind 2) visar
+   samma sorts sektionerade listor (prenumeranter, köp), delad klass så
+   den inte behöver definieras två gånger (Astros <style>-block är
+   per-komponent scopat, delar inte klasser mellan sidor). */
+.mina-sidor section {
+  margin-top: var(--fg-space-7);
+}
+
+.mina-sidor__profil,
+.mina-sidor__kop {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-3);
+}
+
 /* ---- Kommunsida ---- */
 
 .kommun-header h1 {
@@ -284,6 +301,20 @@ main {
   padding: var(--fg-space-3) var(--fg-space-5);
   font-size: var(--fg-text-body);
   font-style: italic;
+}
+
+/* Global felmeddelande-rad (ogiltig länk/token, fel lösenord) — samma
+   semantisk-färg-med-kant-mönster som .stale-warning/.om-todo ovan.
+   Delad klass (Mina sidor, admin) — se not vid .mina-sidor ovan om
+   varför Astros per-komponent-scopade <style>-block inte räcker här. */
+.fg-fel {
+  background: var(--fg-surface);
+  border: var(--fg-border-inner) solid var(--fg-attention);
+  color: var(--fg-attention);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-3) var(--fg-space-5);
+  margin-bottom: var(--fg-space-5);
+  font-size: var(--fg-text-body);
 }
 
 .fg-verification-row {

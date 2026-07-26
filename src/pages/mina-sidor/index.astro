@@ -38,7 +38,7 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
 
   {!email ? (
     <>
-      {felaktigToken && <p class="registrera-doc__giltighet">Länken är ogiltig eller har gått ut. Begär en ny nedan.</p>}
+      {felaktigToken && <p class="fg-fel">Länken är ogiltig eller har gått ut. Begär en ny nedan.</p>}
       {skickat ? (
         <div class="email-signup fg-card">
           <h2>Länk skickad</h2>
@@ -128,19 +128,6 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
   .mina-sidor__bekraftelse {
     font-weight: var(--fg-weight-bold);
     margin-top: var(--fg-space-3);
-  }
-
-  .mina-sidor section {
-    margin-top: var(--fg-space-7);
-  }
-
-  .mina-sidor__profil,
-  .mina-sidor__kop {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--fg-space-3);
   }
 
   .mina-sidor form[action="/api/logga-ut"] {

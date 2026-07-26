@@ -214,6 +214,13 @@ export async function getAllConfirmedSubscribers(): Promise<Subscriber[]> {
   return records.filter((r): r is Subscriber => r !== null && r.confirmed);
 }
 
+/** Adminvyn: ALLA prenumeranter, även obekräftade (till skillnad från getAllConfirmedSubscribers ovan). */
+export async function getAllSubscribers(): Promise<Subscriber[]> {
+  const emails = await redis.smembers(INDEX_KEY);
+  const records = await Promise.all(emails.map((e) => getSubscriber(e)));
+  return records.filter((r): r is Subscriber => r !== null);
+}
+
 /**
  * Antal BEKRÄFTADE prenumeranter som bevakar en given kommun — social proof
  * (VANTELISTA.socialProof, GUIDE_TRATT_COPY.ts). Live ur Redis varje anrop,
