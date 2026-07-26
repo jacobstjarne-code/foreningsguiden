@@ -95,6 +95,13 @@ export const POST: APIRoute = async ({ request }) => {
     }
   }
 
+  // H8: den faktiska leveransen — genererar registreringsutkastet.
+  // Beräknas FÖRE sparaKop() så H22:s snapshot (samma innehåll som
+  // faktiskt mejlas) kan sparas i samma skrivning, inte som ett separat
+  // uppdateringssteg.
+  const kommun = getKommunBySlug(kommunSlug);
+  const checklista = kommun ? genereraRegistreringsUtkast(kommun) : [];
+
   const entry: KopEntry = {
     email,
     kommunSlug,
@@ -105,6 +112,7 @@ export const POST: APIRoute = async ({ request }) => {
     foreningsprofil,
     hostedInvoiceUrl,
     invoicePdf,
+    forutsattningarSnapshot: JSON.stringify(checklista),
   };
   await sparaKop(entry);
 
@@ -121,12 +129,6 @@ export const POST: APIRoute = async ({ request }) => {
     // Loggas men blockerar inte 200-svaret — se filhuvudet.
     console.error('sendKopNotis misslyckades', err);
   }
-
-  // H8: den faktiska leveransen — genererar registreringsutkastet och
-  // mejlar det direkt. Ingen människa i loopen (till skillnad från det
-  // gamla, manuella "Registreringshjälp"-flödet).
-  const kommun = getKommunBySlug(kommunSlug);
-  const checklista = kommun ? genereraRegistreringsUtkast(kommun) : [];
 
   try {
     await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl, checklista });

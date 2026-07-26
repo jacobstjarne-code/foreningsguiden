@@ -20,6 +20,12 @@ const KOP_INDEX_KEY = 'kop:index';
 // H29/Mina sidor: sekundärindex så köphistorik går att slå upp per e-post
 // utan att scanna hela kop:index (som bara innehåller sessions-id:n).
 const kopPerEmailKey = (email: string) => `kop:email:${email.toLowerCase()}`;
+// H22 (ändringsbevakning): senaste snapshotten vi FAKTISKT mejlat om per
+// köp — skild från KopEntry.forutsattningarSnapshot (som är låst till
+// köptillfället och aldrig ändras). Gör cronjobbet idempotent utan att
+// behöva hasha: samma nya tillstånd mejlas aldrig två gånger, men en
+// FÖRNYAD ändring efter det mejlas igen.
+const andringsnotisKey = (stripeSessionId: string) => `andringsnotis:${stripeSessionId}`;
 
 export type KopProdukt = 'registrering';
 
@@ -36,6 +42,10 @@ export interface KopEntry {
   // stripe-webhook.ts efter att fakturan hunnit skapas.
   hostedInvoiceUrl?: string;
   invoicePdf?: string;
+  // H22: JSON av RegistreringsUtkastRad[] (utkastGenerator.ts) vid
+  // KÖPTILLFÄLLET — låst, ändras aldrig efteråt. Ändringsbevakningens
+  // cronjobb jämför kommunens NUVARANDE checklista mot denna.
+  forutsattningarSnapshot?: string;
 }
 
 /** Sparar ett bekräftat köp. Idempotent per stripeSessionId — samma session skriver aldrig två index-poster. */
@@ -80,4 +90,20 @@ export async function flyttaKopIndex(oldEmail: string, newEmail: string): Promis
   if (sessionIds.length === 0) return;
   await redis.sadd(kopPerEmailKey(newEmail), ...sessionIds);
   await redis.del(kopPerEmailKey(oldEmail));
+}
+
+/** H22: alla köp av en given produkt (t.ex. bara 'registrering' — det enda säljbara idag). */
+export async function hamtaKopAvProdukt(produkt: KopProdukt): Promise<KopEntry[]> {
+  const alla = await hamtaAllaKop();
+  return alla.filter((k) => k.produkt === produkt);
+}
+
+/** H22: vilken snapshot vi senast FAKTISKT mejlade köparen om, eller null om aldrig. */
+export async function hamtaSenastNotifieradSnapshot(stripeSessionId: string): Promise<string | null> {
+  return redis.get<string>(andringsnotisKey(stripeSessionId));
+}
+
+/** H22: markerar att köparen nu är mejlad om denna specifika (nya) snapshot. */
+export async function markeraSnapshotNotifierad(stripeSessionId: string, snapshot: string): Promise<void> {
+  await redis.set(andringsnotisKey(stripeSessionId), snapshot);
 }

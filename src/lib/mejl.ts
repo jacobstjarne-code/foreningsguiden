@@ -236,6 +236,37 @@ export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): 
   }
 }
 
+export interface AndringsNotisVars {
+  kommunSlug: string;
+  registreraLank: string;
+}
+
+/**
+ * H22 (GRANSKNING_foreningsguiden.md): ändringsbevakning. Kommunens
+ * registreringskrav har ändrats sedan köparen fick sitt utkast — hon ska
+ * inte sitta med ett utkast mot gamla regler utan att veta om det.
+ * Minimal, funktionell transaktionstext, samma precedent som övriga
+ * utility-mejl. Säger INTE exakt vad som ändrats (ingen egen
+ * diff-renderare byggd för det) — bara att något gjort det, med länk
+ * till den alltid uppdaterade sidan.
+ */
+export async function sendAndringsNotis(to: string, vars: AndringsNotisVars): Promise<void> {
+  const text = [
+    `Kommunens registreringskrav för er förening i ${vars.kommunSlug} har uppdaterats sedan ni fick ert registreringsutkast.`,
+    `Se den uppdaterade checklistan: ${vars.registreraLank}`,
+  ].join('\n');
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Uppdaterade registreringskrav — ${vars.kommunSlug}`,
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid ändringsnotis: ${result.error.message}`);
+  }
+}
+
 export interface KontaktNotisVars {
   namn: string;
   email: string;
