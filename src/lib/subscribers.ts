@@ -198,11 +198,18 @@ export async function countSubscribersByKommun(slug: string): Promise<number> {
  * förstasidans live-datakort (turn-14, incoming/foreningsguiden-tratt-
  * tryck-v3-livedata.html). Ett riktigt datum, aldrig ett lanseringsdatum
  * hårdkodat i koden — null om ingen bekräftad prenumerant finns än.
+ *
+ * `registrerad` sparas som en full ISO-tidsstämpel (new Date().toISOString(),
+ * addPendingSubscriber m.fl.) — .slice(0, 10) till ren YYYY-MM-DD HÄR, en
+ * gång, så att kommunTyper.ts formatDate() (som bara förstår YYYY-MM-DD)
+ * aldrig får en tidsstämpel att splitta på "-" och råka Number()a en
+ * "18T21:59:57.034Z"-sträng till NaN (fångat i produktion 2026-07-26).
  */
 export async function getEarliestConfirmedRegistrationDate(): Promise<string | null> {
   const subs = await getAllConfirmedSubscribers();
   if (subs.length === 0) return null;
-  return subs.reduce((earliest, s) => (s.registrerad < earliest ? s.registrerad : earliest), subs[0].registrerad);
+  const earliest = subs.reduce((earliest, s) => (s.registrerad < earliest ? s.registrerad : earliest), subs[0].registrerad);
+  return earliest.slice(0, 10);
 }
 
 /**

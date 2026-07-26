@@ -7,7 +7,7 @@
  */
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
-import { sumBeloppTak } from '../src/lib/kommunTyper.ts';
+import { sumBeloppTak, formatDate } from '../src/lib/kommunTyper.ts';
 import { arOverGolv } from '../src/lib/bevakningKlient.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
@@ -225,6 +225,14 @@ test('sumBeloppTak: alla bidrag cappade → uncapped=0 (sumFotnotCappat-grenen, 
   const sum = sumBeloppTak(lista);
   assert.equal(sum.uncapped, 0);
   assert.equal(sum.total, 15000);
+});
+
+test('REGRESSION (produktion 2026-07-26): getEarliestConfirmedRegistrationDate måste slice:a full ISO-tidsstämpel till YYYY-MM-DD — annars ger formatDate() "NaN" i "sedan {datum}" (Subscriber.registrerad sparas som new Date().toISOString(), inte ett rent datum)', () => {
+  const fullTidsstampel = '2026-07-18T21:59:57.034Z';
+  const felaktigtDatum = formatDate(fullTidsstampel); // simulerar buggen direkt
+  assert.ok(felaktigtDatum.includes('NaN'), 'test-antagandet stämmer: full tidsstämpel ger NaN i formatDate — det är precis det .slice(0,10) i subscribers.ts förhindrar');
+  const korrektDatum = formatDate(fullTidsstampel.slice(0, 10));
+  assert.equal(korrektDatum, '18 juli 2026');
 });
 
 console.log(`\n${antal} tester klara`);
