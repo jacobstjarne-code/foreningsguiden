@@ -28,6 +28,11 @@ export interface KopEntry {
   stripeSessionId: string;
   betaldDatum: string; // ISO
   foreningsprofil?: Foreningsprofil;
+  // H10+H15: Stripes hostade, varaktiga fakturalänk (invoice_creation
+  // på checkout-sessionen, se checkout/registrering.ts) — sätts av
+  // stripe-webhook.ts efter att fakturan hunnit skapas.
+  hostedInvoiceUrl?: string;
+  invoicePdf?: string;
 }
 
 /** Sparar ett bekräftat köp. Idempotent per stripeSessionId — samma session skriver aldrig två index-poster. */

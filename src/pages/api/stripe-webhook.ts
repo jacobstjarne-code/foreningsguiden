@@ -18,7 +18,7 @@ import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { sparaKop, hamtaKop, type KopEntry } from '../../lib/kop';
 import { addForeningsprofil } from '../../lib/subscribers';
-import { sendKopNotis } from '../../lib/mejl';
+import { sendKopNotis, sendKopBekraftelse } from '../../lib/mejl';
 import type { Foreningsprofil } from '../../lib/foreningsprofil';
 
 const env = import.meta.env as unknown as Record<string, string>;
@@ -73,6 +73,22 @@ export const POST: APIRoute = async ({ request }) => {
     }
   }
 
+  // H10+H15: invoice_creation (checkout/registrering.ts) sätter
+  // session.invoice — hämta fakturans varaktiga, hostade länk om den
+  // hann skapas. Fakturan är inte kritisk för att köpet ska räknas som
+  // klart — misslyckas hämtningen sparas köpet ändå, bara utan länken.
+  let hostedInvoiceUrl: string | undefined;
+  let invoicePdf: string | undefined;
+  if (typeof session.invoice === 'string') {
+    try {
+      const invoice = await stripe.invoices.retrieve(session.invoice);
+      hostedInvoiceUrl = invoice.hosted_invoice_url ?? undefined;
+      invoicePdf = invoice.invoice_pdf ?? undefined;
+    } catch (err) {
+      console.error('Kunde inte hämta Stripe-fakturan', err);
+    }
+  }
+
   const entry: KopEntry = {
     email,
     kommunSlug,
@@ -81,6 +97,8 @@ export const POST: APIRoute = async ({ request }) => {
     stripeSessionId: session.id,
     betaldDatum: new Date().toISOString(),
     foreningsprofil,
+    hostedInvoiceUrl,
+    invoicePdf,
   };
   await sparaKop(entry);
 
@@ -88,16 +106,20 @@ export const POST: APIRoute = async ({ request }) => {
     await addForeningsprofil(email, foreningsprofil);
   }
 
+  const registreraLank = `https://foreningsguiden.se/kommun/${kommunSlug}/registrera/`;
+  const beloppKr = (entry.beloppOre / 100).toFixed(0);
+
   try {
-    await sendKopNotis({
-      email,
-      kommunSlug,
-      belopp: (entry.beloppOre / 100).toFixed(0),
-      registreraLank: `https://foreningsguiden.se/kommun/${kommunSlug}/registrera/`,
-    });
+    await sendKopNotis({ email, kommunSlug, belopp: beloppKr, registreraLank });
   } catch (err) {
     // Loggas men blockerar inte 200-svaret — se filhuvudet.
     console.error('sendKopNotis misslyckades', err);
+  }
+
+  try {
+    await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl });
+  } catch (err) {
+    console.error('sendKopBekraftelse misslyckades', err);
   }
 
   return new Response(JSON.stringify({ ok: true }), { status: 200 });

@@ -128,6 +128,46 @@ export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
   }
 }
 
+export interface KopBekraftelseVars {
+  kommunSlug: string;
+  belopp: string; // kr, utan öre
+  registreraLank: string;
+  hostedInvoiceUrl?: string;
+}
+
+/**
+ * H10+H15 (GRANSKNING_foreningsguiden.md): köparens egen bekräftelse —
+ * separat från sendKopNotis (som bara går till Jacob). Minimal,
+ * funktionell transaktionscopy, samma precedent som avregistrera/
+ * kontakt-sidornas instruktionstext (Code skriver utility-text för en
+ * ren teknisk sida, rapporterar till Fable för justering — inte
+ * marknadsprosa). Länkar till Stripes varaktiga fakturalänk (H15) och
+ * tillbaka till registreringssidan. Registreringshjälpen levereras
+ * manuellt (ingen generator för detta), därför "vi hör av oss" i
+ * stället för ett direkt leveransbesked.
+ */
+export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): Promise<void> {
+  const rader = [
+    `Tack för ditt köp — Registreringshjälp för er förening i ${vars.kommunSlug}.`,
+    `Belopp: ${vars.belopp} kr.`,
+    `Vi hör av oss inom kort med hjälp att fylla i registreringen.`,
+    `Er registreringssida: ${vars.registreraLank}`,
+  ];
+  if (vars.hostedInvoiceUrl) {
+    rader.push(`Kvitto/faktura: ${vars.hostedInvoiceUrl}`);
+  }
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: 'Tack för ditt köp — Föreningsguiden',
+    text: rader.join('\n'),
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid köpbekräftelse: ${result.error.message}`);
+  }
+}
+
 export interface KontaktNotisVars {
   namn: string;
   email: string;

@@ -59,6 +59,12 @@ export const POST: APIRoute = async ({ request }) => {
       },
     ],
     metadata,
+    // H10+H15 (GRANSKNING_foreningsguiden.md): Stripe skapar en riktig
+    // faktura per köp och mejlar en PDF till en varaktig, hostad länk
+    // (går inte ut som Checkout Session-URL:en gör) — täcker
+    // "bokföringsbart kvitto" och "varaktig leverans" i en mekanism,
+    // utan att vi bygger en egen PDF-pipeline.
+    invoice_creation: { enabled: true },
     success_url: `${base}/kommun/${kommunSlug}/registrera/?betald=1&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${base}/kommun/${kommunSlug}/registrera/`,
   };
