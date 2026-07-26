@@ -312,6 +312,8 @@ const kommuner = loadKommuner();
       if (borjaHarGruppEl) borjaHarGruppEl.hidden = !resultat.borjaHar;
       if (registreringWidget && kommunData) {
         registreringWidget.dataset.kommunSlug = kommunData.kommun_slug;
+        const registreringLank = registreringWidget.querySelector<HTMLAnchorElement>('[data-registrering-lank]');
+        if (registreringLank) registreringLank.href = `/kommun/${kommunData.kommun_slug}/registrera/`;
       }
     }
 

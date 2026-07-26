@@ -1,0 +1,227 @@
+---
+// Registreringsutkastet — SPEC_UTKASTGENERATOR.md §4: den viktigaste grenen,
+// leverbar NU utan golden set (till skillnad från bidragsutkastet, §3/§5).
+// Formell fullständighet mot kommunens PUBLICERADE forutsattningar — hittar
+// aldrig på fakta om föreningen (§8), markerar bara vad som krävs och var.
+//
+// Struktur mappar direkt mot Kommun.forutsattningar[] (redan validerad data,
+// 90/99 kommuner har den ifylld). Samma VAGLEDNING.station3-mallar som
+// KommunProgression Station 3 redan använder — ingen ny svensk text skriven
+// här, bara samma innehåll i dokumentformat i stället för inline-prosa.
+//
+// Genereras för ALLA kommuner, även de utan forutsattningar (samma
+// "inget särskilt förkrav funnet"-fallback som Station 3).
+import Base from '../../../../layouts/Base.astro';
+import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
+import { loadKommuner } from '../../../../lib/kommuner';
+import type { Kommun } from '../../../../lib/kommuner';
+import { VAGLEDNING } from '../../../../lib/content';
+import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
+
+export function getStaticPaths() {
+  return loadKommuner().map((kommun) => ({
+    params: { slug: kommun.kommun_slug },
+    props: { kommun },
+  }));
+}
+
+const { kommun } = Astro.props as { kommun: Kommun };
+const forutsattningar = [...kommun.forutsattningar].sort((a, b) => a.ordning - b.ordning);
+const titel = `Registreringschecklista — ${kommun.kommun}`;
+---
+<Base
+  title={`${titel} — Föreningsguiden`}
+  description={`Vad en förening behöver för att bli godkänd att söka bidrag i ${kommun.kommun} — steg för steg, med källa och handläggningstid där kommunen publicerat det.`}
+>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
+    { name: 'Registrering', url: `/kommun/${kommun.kommun_slug}/registrera/` },
+  ]} />
+
+  <div class="registrera-doc">
+    <p class="registrera-doc__eyebrow">{kommun.kommun} kommun · registreringschecklista</p>
+    <h1>{titel}</h1>
+
+    {forutsattningar.length === 0 ? (
+      <p class="registrera-doc__lede">{VAGLEDNING.station3.inget.replace('{kommun}', kommun.kommun)}</p>
+    ) : (
+      <>
+        <p class="registrera-doc__lede">{VAGLEDNING.station3.intro.replace('{kommun}', kommun.kommun)}</p>
+
+        <ol class="registrera-doc__lista">
+          {forutsattningar.map((f, i) => (
+            <li class="registrera-doc__steg">
+              <div class="registrera-doc__steg-nr">{i + 1}</div>
+              <div class="registrera-doc__steg-body">
+                <h2>{f.vad}</h2>
+                <p>{f.beskrivning}</p>
+                <p class="registrera-doc__ledtid">
+                  {f.ledtid !== null
+                    ? VAGLEDNING.station3.ledtidKand.replace('{ledtid}', String(f.ledtid))
+                    : (f.ledtid_text ?? VAGLEDNING.station3.ledtidOkand.replace(/{kommun}/g, kommun.kommun))}
+                </p>
+                {f.giltighet && (
+                  <p class="registrera-doc__giltighet">{VAGLEDNING.station3.giltighetVarning.replace('{giltighet}', f.giltighet)}</p>
+                )}
+                <p class="registrera-doc__kalla">
+                  Källa: <a href={f.kalla_url}>{f.kalla_url}</a>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </>
+    )}
+
+    <div class="registrera-doc__hjalp">
+      <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
+      <form data-registrera-form>
+        <label for="registrera-epost">E-post</label>
+        <input type="email" id="registrera-epost" name="email" required autocomplete="email" />
+        <button type="submit" class="btn-primary">{TRATT.besked.borjaHar.hjalpKnapp}</button>
+      </form>
+      <p data-registrera-kvitto hidden>{TRATT.besked.minne}</p>
+      <p data-registrera-fel hidden>Något gick fel. Försök igen.</p>
+    </div>
+
+    <p class="registrera-doc__ansvar">{VAGLEDNING.station5.ansvar}</p>
+  </div>
+</Base>
+
+<script>
+  import { getForeningsprofil } from '../../../../lib/foreningsprofil';
+
+  const form = document.querySelector<HTMLFormElement>('[data-registrera-form]');
+  const kvitto = document.querySelector<HTMLElement>('[data-registrera-kvitto]');
+  const felText = document.querySelector<HTMLElement>('[data-registrera-fel]');
+  const kommunSlug = window.location.pathname.split('/').filter(Boolean)[1] ?? '';
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    felText?.setAttribute('hidden', '');
+    const data = new FormData(form);
+    data.set('kommun', kommunSlug);
+    data.set('syfte', 'registrering');
+
+    const profil = getForeningsprofil();
+    if (profil) data.set('profil', JSON.stringify(profil));
+
+    try {
+      const res = await fetch('/api/vantelista', { method: 'POST', body: data });
+      const json = await res.json();
+      if (!res.ok || !json.ok) throw new Error('svar ej ok');
+
+      form.hidden = true;
+      kvitto?.removeAttribute('hidden');
+    } catch {
+      felText?.removeAttribute('hidden');
+    }
+  });
+</script>
+
+<style>
+  .registrera-doc {
+    max-width: 68ch;
+  }
+
+  .registrera-doc__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+  }
+
+  .registrera-doc__lede {
+    font-size: var(--fg-text-body-lg);
+    line-height: var(--fg-lh-body);
+    color: var(--fg-ink);
+  }
+
+  .registrera-doc__lista {
+    list-style: none;
+    padding: 0;
+    margin: var(--fg-space-6) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-6);
+  }
+
+  .registrera-doc__steg {
+    display: flex;
+    gap: 14px;
+    border: var(--fg-border-structural) solid var(--fg-border);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-5);
+  }
+
+  .registrera-doc__steg-nr {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--fg-accent);
+    color: var(--fg-on-accent);
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .registrera-doc__steg-body h2 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 6px;
+  }
+
+  .registrera-doc__ledtid {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .registrera-doc__giltighet {
+    background: var(--fg-attention-soft, var(--fg-surface-sunken));
+    border-left: 3px solid var(--fg-attention);
+    padding: 8px 12px;
+    font-size: var(--fg-text-label);
+  }
+
+  .registrera-doc__kalla {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    color: var(--fg-ink-muted);
+    margin-top: 8px;
+  }
+
+  .registrera-doc__hjalp {
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-6);
+    margin-top: var(--fg-space-7);
+  }
+
+  .registrera-doc__hjalp form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--fg-space-3);
+    align-items: flex-end;
+    margin-top: var(--fg-space-4);
+  }
+
+  .registrera-doc__hjalp input[type="email"] {
+    padding: var(--fg-space-3);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+    min-width: 22ch;
+  }
+
+  .registrera-doc__ansvar {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-top: var(--fg-space-5);
+  }
+</style>

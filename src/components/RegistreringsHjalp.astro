@@ -1,90 +1,45 @@
 ---
-// RegistreringsHjalp — grupp 3:s ("Börja här") betalväggsknapp i
-// matchningstratten (turn-11, GUIDE_TRATT_COPY.ts besked.borjaHar).
-// Samma klick→panel→e-postformulär→POST-mönster som VantelistaFlode.astro
-// (kopierat, inte återanvänt — annan copy-källa: TRATT i stället för
-// VANTELISTA), men kommun-scopad i stället för bidrag-scopad: "Hjälp oss
-// registrera" gäller kommunens bidragsberättigande-process i sin helhet,
-// inte ett enskilt bidrag. Postar syfte=registrering till samma
-// /api/vantelista-endpoints (se vantelista.ts) plus den aktuella
-// matchningstratt-profilen (localStorage), som mergas in på subscriber-
-// posten först i det ögonblick e-posten fångas — se foreningsprofil.ts.
+// RegistreringsHjalp — grupp 3:s ("Börja här") CTA i matchningstratten
+// (turn-11, GUIDE_TRATT_COPY.ts besked.borjaHar) OCH KommunProgression
+// Station 3. Länkar till registreringsutkastet
+// (/kommun/[slug]/registrera/, SPEC_UTKASTGENERATOR §4) i stället för att
+// fälla ut ett e-postformulär direkt — checklistan är fri och omedelbar,
+// ingen e-post krävs för att se den. E-postformuläret (personlig hjälp
+// att fylla i den) sitter längst ner på den sidan, se registrera/
+// index.astro.
+//
+// Klicket loggas ändå (fire-and-forget, keepalive) — samma
+// intentmätning som innan, bara utan att blockera navigeringen.
 import { TRATT } from '../../GUIDE_TRATT_COPY';
 
 export interface Props {
-  // Kommunen är okänd vid byggtid (tratten väljer kommun klientsidan,
-  // src/pages/matcha/index.astro) — default tomt, sätts via
-  // data-kommun-slug av tratt-sidans script när fråga 1 besvaras.
+  // Kommunen är okänd vid byggtid i tratten (väljs klientsidan,
+  // src/pages/matcha/index.astro) — default tomt, länken sätts/uppdateras
+  // via data-kommun-slug + JS när fråga 1 besvarats. I KommunProgression
+  // (Station 3) är kommunen känd server-sidan och skickas direkt.
   kommunSlug?: string;
 }
 
 const { kommunSlug = '' } = Astro.props;
+const href = kommunSlug ? `/kommun/${kommunSlug}/registrera/` : '#';
 ---
 <div class="registrering-hjalp" data-registrering-hjalp data-kommun-slug={kommunSlug}>
   <p class="registrering-hjalp__text">{TRATT.besked.borjaHar.hjalpText}</p>
-  <button type="button" class="btn-primary" data-registrering-knapp>{TRATT.besked.borjaHar.hjalpKnapp}</button>
-
-  <div class="registrering-hjalp__panel" data-registrering-panel hidden>
-    <form data-registrering-form>
-      <label for="registrering-epost">E-post</label>
-      <input type="email" id="registrering-epost" name="email" required autocomplete="email" />
-      <button type="submit" class="btn-primary">{TRATT.besked.borjaHar.hjalpKnapp}</button>
-    </form>
-
-    <p data-registrering-kvitto hidden>{TRATT.besked.minne}</p>
-    <p data-registrering-fel hidden>Något gick fel. Försök igen.</p>
-  </div>
+  <a href={href} class="btn-primary" data-registrering-lank>{TRATT.besked.borjaHar.hjalpKnapp}</a>
 </div>
 
 <script>
-  import { getForeningsprofil } from '../lib/foreningsprofil';
-
   document.querySelectorAll<HTMLElement>('[data-registrering-hjalp]').forEach((widget) => {
-    // Läses LIVE vid varje klick/submit, inte cachat vid modulladdning —
-    // tratt-sidan sätter data-kommun-slug efter att fråga 1 besvarats,
-    // vilket kan ske efter att det här skriptet redan kört.
-    const kommunSlug = () => widget.dataset.kommunSlug ?? '';
-    const knapp = widget.querySelector<HTMLButtonElement>('[data-registrering-knapp]');
-    const panel = widget.querySelector<HTMLElement>('[data-registrering-panel]');
-    const form = widget.querySelector<HTMLFormElement>('[data-registrering-form]');
-    const kvitto = widget.querySelector<HTMLElement>('[data-registrering-kvitto]');
-    const felText = widget.querySelector<HTMLElement>('[data-registrering-fel]');
-
+    const lank = widget.querySelector<HTMLAnchorElement>('[data-registrering-lank]');
     let klickLoggat = false;
 
-    knapp?.addEventListener('click', () => {
-      panel?.removeAttribute('hidden');
-      knapp.hidden = true;
-
-      if (!klickLoggat) {
-        klickLoggat = true;
-        const data = new FormData();
-        data.set('kommun', kommunSlug());
-        data.set('syfte', 'registrering');
-        fetch('/api/vantelista-klick', { method: 'POST', body: data, keepalive: true }).catch(() => {});
-      }
-    });
-
-    form?.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      felText?.setAttribute('hidden', '');
-      const data = new FormData(form);
-      data.set('kommun', kommunSlug());
+    lank?.addEventListener('click', () => {
+      if (klickLoggat) return;
+      klickLoggat = true;
+      const data = new FormData();
+      data.set('kommun', widget.dataset.kommunSlug ?? '');
       data.set('syfte', 'registrering');
-
-      const profil = getForeningsprofil();
-      if (profil) data.set('profil', JSON.stringify(profil));
-
-      try {
-        const res = await fetch('/api/vantelista', { method: 'POST', body: data });
-        const json = await res.json();
-        if (!res.ok || !json.ok) throw new Error('svar ej ok');
-
-        form.hidden = true;
-        kvitto?.removeAttribute('hidden');
-      } catch {
-        felText?.removeAttribute('hidden');
-      }
+      fetch('/api/vantelista-klick', { method: 'POST', body: data, keepalive: true }).catch(() => {});
     });
   });
 </script>

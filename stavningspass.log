@@ -1,0 +1,101 @@
+STAVNINGSPASS — data/kommuner/, 2026-07-26
+Körd via 4 parallella Agent-instanser (batch 1: ale–bromolla, batch 2:
+burlov–lidingo, batch 3: lidkoping–soderhamn, batch 4: sodertalje–ystad),
+identiska regler: rätta endast otvetydiga transkriptionsfel i krav[]/
+malgrupp/anteckning, aldrig omformulera, osäkra fall loggas ej ändrade.
+
+ÄNDRINGAR (20 st, 11 filer) — samtliga verifierade mot git diff manuellt
+före commit:
+
+ale.yaml
+  krav[]:        "activitet" → "aktivitet"
+  anteckning:     "anläggingens" → "anläggningens"
+
+aneby.yaml
+  krav[]:        "bedras" → "bedrivas"
+
+arjeplog.yaml
+  krav[]:        "gemenskapskap" → "gemenskap"
+
+arvika.yaml
+  krav[]:        "marknadsförat" → "marknadsfört"
+
+askersund.yaml
+  malgrupp:       "Pensionärföreningar" → "Pensionärsföreningar"
+  krav[]:        "Pensionärförening" → "Pensionärsförening"
+
+bastad.yaml
+  krav[]:        "pensionärförening" → "pensionärsförening"
+
+bollebygd.yaml (6 ändringar, 3 separata bidrag)
+  krav[]:        "bedras" → "bedrivas" (×2)
+  malgrupp:       "anläggningsunderhål" → "anläggningsunderhåll"
+  malgrupp:       "underhål" → "underhåll" (drift och underhål av lokaler)
+  krav[]:        "anläggningsunderhål" → "anläggningsunderhåll"
+  krav[]:        "underhål" → "underhåll" (lokalhyra eller underhål)
+
+boxholm.yaml
+  krav[]:        "bedras" → "bedrivas" (×2, två separata bidrag)
+
+burlov.yaml
+  krav[]:        "bedras" → "bedrivas" (×2, idrott + kultur)
+
+karlstad.yaml
+  anteckning:     "HELE KATEGORIN" → "HELA KATEGORIN"
+
+ystad.yaml
+  krav[]:        "metrna" → "metrarna" (korsverifierad mot identisk
+                  konstruktion i sundsvall.yaml rad 465)
+
+MISSTÄNKT_STAVFEL_EJ_ÄNDRAT (18 st) — flaggas till Jacob/Fable, ingen
+gissning gjord:
+
+ale.yaml
+  - "barnsskyddsprogram"/"barnsskydd" — sammansatt ord, oklar avsedd form
+  - "Investeringen ska gälla föreningen ägs eller långtidshyrs anläggning"
+    — grammatiskt trasig mening, oklart vad som saknas/ska strykas
+
+alvesta.yaml
+  - "kulturgärring" — inte ett riktigt ord, oklar rättelse
+  - "kartlagning" (i belopp-fältet, utanför scope för detta pass)
+
+arboga.yaml
+  - "konstituerade möte" — troligen "konstituerande möte", ej ändrat
+    (osäker på om "konstituerade" kan vara avsett particip i sammanhanget)
+
+berg.yaml
+  - "väglyseföreningar" — möjligen dialektalt/branschterm, osäker
+
+bjuv.yaml
+  - "kursutsgifte" — oklart avsett ord
+  - "arrangemangskostad"/"kurskostad" (belopp-fält, utanför scope)
+
+bollebygd.yaml
+  - forutsattningar.beskrivning "bedras" — samma mönster som ovan, men
+    fältet ligger utanför detta pass (endast krav/malgrupp/anteckning)
+
+borlange.yaml
+  - "könsekonomisk" — möjligen "socioekonomisk", inte säkert nog
+  - "organization" (engelsk stavning, belopp-fält, utanför scope)
+
+bracke.yaml
+  - "designerad" — oklar avsedd rättelse
+  - forutsattningar.beskrivning "bedras" — utanför scope, se bollebygd
+
+bromolla.yaml
+  - "underhål" (belopp-fält, utanför scope)
+
+arvika.yaml
+  - "Ledartränigbidrag" (namn-fält, utanför scope; troligen
+    "Ledarträningsbidrag")
+
+askersund.yaml
+  - "pensionärföreningar" (namn-fält, utanför scope, samma mönster som
+    redan fixat i malgrupp/krav ovan)
+
+Batch 3 (lidkoping–soderhamn): 0 ändringar, 0 misstänkta — dessa filer har
+tyngre verifieringsmetodik (PDF-nivå-extraktion, dubbla oberoende
+hämtningar) och innehöll inga kända transkriptionsartefakter.
+
+TOTALT: 20 ändringar i 11 filer, 18 poster som väntar på mänsklig
+bedömning (samtliga i redan namngivna filer/fält ovan).
