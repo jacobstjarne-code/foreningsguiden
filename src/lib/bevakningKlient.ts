@@ -19,6 +19,16 @@ export function arOverGolv(antal: number, golv: number): boolean {
   return antal >= golv;
 }
 
+/**
+ * Väljer singular/plural-mall (antal===1 → singular, annars plural) och
+ * fyller i {antal}/{datum}. Ren funktion, testbar utan DOM/fetch — fångade
+ * tidigare en "1 föreningar"-bugg i ett tidigare utkast av copyn.
+ */
+export function formateraBevakarText(antal: number, datumText: string, mallPlural: string, mallSingular: string): string {
+  const mall = antal === 1 ? mallSingular : mallPlural;
+  return mall.replace('{antal}', String(antal)).replace('{datum}', datumText);
+}
+
 /** Antal bekräftade bevakare för en kommun, eller null vid nätverksfel. */
 export async function hamtaBevakningsantal(kommunSlug: string): Promise<number | null> {
   const data = await hamtaBevakningsantalRaw<{ antal: number }>(`/api/bevakningsantal?kommun=${encodeURIComponent(kommunSlug)}`);

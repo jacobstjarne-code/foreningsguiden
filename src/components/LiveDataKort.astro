@@ -38,7 +38,7 @@ const { totalBidrag, totalKommuner } = Astro.props;
 </div>
 
 <script>
-  import { hamtaBevakningsantalGlobalt, arOverGolv, BEVAKNING_GOLV_GLOBALT } from '../lib/bevakningKlient';
+  import { hamtaBevakningsantalGlobalt, arOverGolv, formateraBevakarText, BEVAKNING_GOLV_GLOBALT } from '../lib/bevakningKlient';
   import { KATALOG_LIVEDATA } from '../lib/content';
   import { formatDate } from '../lib/kommunTyper';
 
@@ -74,12 +74,14 @@ const { totalBidrag, totalKommuner } = Astro.props;
       const overGolv = arOverGolv(data.antal, BEVAKNING_GOLV_GLOBALT);
 
       if (!overGolv) {
-        if (litetText) litetText.textContent = KATALOG_LIVEDATA.liveForeningarText.replace('{antal}', String(data.antal));
-        if (litetDatum) {
-          litetDatum.textContent = data.earliestDatum
-            ? KATALOG_LIVEDATA.liveSedan.replace('{datum}', formatDate(data.earliestDatum))
-            : '';
+        if (litetText) {
+          const datumText = data.earliestDatum ? formatDate(data.earliestDatum) : '';
+          litetText.textContent = formateraBevakarText(data.antal, datumText, KATALOG_LIVEDATA.bevakarPlural, KATALOG_LIVEDATA.bevakarSingular);
         }
+        // Datumet är nu inbakat i litetText (mallen har "· sedan {datum}"
+        // i en enda rad) — den separata datumraden används inte i det här
+        // dataläget.
+        if (litetDatum) litetDatum.textContent = '';
         return; // katalogtalet är redan i "stort"-positionen — inget att byta
       }
 

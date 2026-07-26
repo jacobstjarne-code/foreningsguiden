@@ -415,8 +415,10 @@ export const KATALOG_LIVEDATA = {
   eyebrowKatalog: 'Kartlagt just nu',
   enhetBidrag: 'bidrag kartlagda',
   katalogText: 'i {kommuner} kommuner — med krav, deadlines och belopp lästa från kommunernas egna sidor.',
-  liveForeningarText: '{antal} föreningar bevakar deadlines',
-  liveSedan: 'sedan {datum}',
+  // Under golvet — singular/plural, {antal}=1 väljer bevakarSingular
+  // (rättar "1 föreningar" som fanns i ett tidigare utkast av copyn).
+  bevakarPlural: '{antal} föreningar bevakar sina deadlines · sedan {datum}',
+  bevakarSingular: '1 förening bevakar sina deadlines · sedan {datum}',
   eyebrowLive: 'Bevakar deadlines just nu',
   enhetForeningar: 'föreningar',
   katalogSomStod: 'i {kommuner} kommuner, med {bidrag} bidrag kartlagda.',

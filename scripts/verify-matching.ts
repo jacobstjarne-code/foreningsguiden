@@ -8,7 +8,7 @@
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
 import { sumBeloppTak, formatDate } from '../src/lib/kommunTyper.ts';
-import { arOverGolv } from '../src/lib/bevakningKlient.ts';
+import { arOverGolv, formateraBevakarText } from '../src/lib/bevakningKlient.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
@@ -233,6 +233,16 @@ test('REGRESSION (produktion 2026-07-26): getEarliestConfirmedRegistrationDate m
   assert.ok(felaktigtDatum.includes('NaN'), 'test-antagandet stämmer: full tidsstämpel ger NaN i formatDate — det är precis det .slice(0,10) i subscribers.ts förhindrar');
   const korrektDatum = formatDate(fullTidsstampel.slice(0, 10));
   assert.equal(korrektDatum, '18 juli 2026');
+});
+
+test('formateraBevakarText: antal===1 väljer singular-mallen (rättar "1 föreningar")', () => {
+  const text = formateraBevakarText(1, '18 juli 2026', '{antal} föreningar bevakar sina deadlines · sedan {datum}', '1 förening bevakar sina deadlines · sedan {datum}');
+  assert.equal(text, '1 förening bevakar sina deadlines · sedan 18 juli 2026');
+});
+
+test('formateraBevakarText: antal>1 väljer plural-mallen', () => {
+  const text = formateraBevakarText(3, '18 juli 2026', '{antal} föreningar bevakar sina deadlines · sedan {datum}', '1 förening bevakar sina deadlines · sedan {datum}');
+  assert.equal(text, '3 föreningar bevakar sina deadlines · sedan 18 juli 2026');
 });
 
 console.log(`\n${antal} tester klara`);
