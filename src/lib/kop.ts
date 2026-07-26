@@ -58,3 +58,17 @@ export async function hamtaKopForEmail(email: string): Promise<KopEntry[]> {
     .filter((e): e is KopEntry => e !== null)
     .sort((a, b) => b.betaldDatum.localeCompare(a.betaldDatum));
 }
+
+/**
+ * H29-tillägg (Mina sidor: byt e-post) — flyttar INDEXET (vilka
+ * sessions-id:n som hör till adressen) till den nya e-posten. Rör
+ * ALDRIG de historiska KopEntry.email-fälten — ett kvitto/en faktura
+ * ska visa vad som var sant vid köptillfället, samma resonemang som att
+ * kop:-poster inte rörs av GDPR-raderingen (DATAINVENTERING_GDPR.md).
+ */
+export async function flyttaKopIndex(oldEmail: string, newEmail: string): Promise<void> {
+  const sessionIds = await redis.smembers(kopPerEmailKey(oldEmail));
+  if (sessionIds.length === 0) return;
+  await redis.sadd(kopPerEmailKey(newEmail), ...sessionIds);
+  await redis.del(kopPerEmailKey(oldEmail));
+}

@@ -103,6 +103,30 @@ export async function sendInloggningsLank(to: string, token: string): Promise<vo
   }
 }
 
+/**
+ * H29-tillägg (Mina sidor: byt e-post) — bekräftelselänken går till den
+ * NYA adressen, aldrig den gamla (se säkerhetsresonemanget i
+ * api/byt-epost.ts). Byter fullbordas först när mottagaren klickar —
+ * skydd mot felskrivning som annars låser kontot ute (Jacobs egen
+ * instruktion).
+ */
+export async function sendEpostbyteLank(nyEmail: string, token: string): Promise<void> {
+  const lank = `${siteUrl()}/api/verifiera-epostbyte/${encodeURIComponent(token)}/`;
+  const text = urlPaEgenRad(
+    `Klicka på länken för att bekräfta att ni vill använda den här adressen för ert Föreningsguiden-konto. Länken är giltig i 15 minuter och kan bara användas en gång — bytet sker inte förrän ni klickat.\n${lank}\n\nBad ni inte om detta? Ni kan bortse från mejlet, ingenting ändras.`
+  );
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to: nyEmail,
+    subject: 'Bekräfta ny e-postadress — Föreningsguiden',
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid epostbyteslänk: ${result.error.message}`);
+  }
+}
+
 export interface PaminnelseVars {
   bidragsnamn: string;
   kommun: string;

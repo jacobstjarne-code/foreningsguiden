@@ -5,11 +5,17 @@
  * Subscriber-post (subscribers.ts) — samma redis-mönster som den filens
  * bekraftelsetoken (kort TTL, engångsbruk).
  *
- * Två sorters token, olika livslängd:
+ * Tre sorters token, olika livslängd:
  *   - Inloggningstoken: skickas i mejl-länken, kort TTL (15 min),
  *     engångsbruk (raderas vid verifiering).
  *   - Sessionstoken: värdet i sessionscookien, längre TTL (30 dagar),
  *     återanvänds för varje sidladdning tills utloggning/utgång.
+ *   - Epostbytestoken (H29-tillägg): skickas till den NYA adressen när
+ *     kontot byter e-post. Kort TTL (15 min), engångsbruk. Kräver ALLTID
+ *     en redan inloggad session för att skapas (se api/byt-epost.ts) —
+ *     annars kan vem som helst döpa om en känd förenings-adress till sin
+ *     egen, eftersom bekräftelsen bara går till den nya adressen
+ *     (angriparens egen). Se plan-filens säkerhetsresonemang.
  */
 
 import { Redis } from '@upstash/redis';
@@ -19,9 +25,16 @@ const redis = new Redis({ url: env.KV_REST_API_URL, token: env.KV_REST_API_TOKEN
 
 const inloggningstokenKey = (token: string) => `inloggningstoken:${token}`;
 const sessionKey = (token: string) => `session:${token}`;
+const epostbytestokenKey = (token: string) => `epostbytestoken:${token}`;
 
 const INLOGGNINGSTOKEN_TTL_SEKUNDER = 60 * 15; // 15 minuter
 const SESSION_TTL_SEKUNDER = 60 * 60 * 24 * 30; // 30 dagar
+const EPOSTBYTESTOKEN_TTL_SEKUNDER = 60 * 15; // 15 minuter
+
+export interface EpostbyteData {
+  oldEmail: string;
+  newEmail: string;
+}
 
 export const SESSION_COOKIE_NAMN = 'fg_session';
 
@@ -55,4 +68,20 @@ export async function hamtaSessionEmail(sessionToken: string): Promise<string | 
 /** Utloggning — raderar sessionen server-sidan (cookien rensas separat av anroparen). */
 export async function raderaSession(sessionToken: string): Promise<void> {
   await redis.del(sessionKey(sessionToken));
+}
+
+/** Skapar en engångstoken för e-postbytets bekräftelselänk (skickas till NYA adressen). */
+export async function skapaEpostbytestoken(oldEmail: string, newEmail: string): Promise<string> {
+  const token = crypto.randomUUID();
+  const data: EpostbyteData = { oldEmail: oldEmail.toLowerCase(), newEmail: newEmail.toLowerCase() };
+  await redis.set(epostbytestokenKey(token), data, { ex: EPOSTBYTESTOKEN_TTL_SEKUNDER });
+  return token;
+}
+
+/** Verifierar och FÖRBRUKAR en epostbytestoken. Null om ogiltig/utgången. */
+export async function verifieraEpostbytestoken(token: string): Promise<EpostbyteData | null> {
+  const data = await redis.get<EpostbyteData>(epostbytestokenKey(token));
+  if (!data) return null;
+  await redis.del(epostbytestokenKey(token));
+  return data;
 }

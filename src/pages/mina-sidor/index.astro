@@ -23,6 +23,8 @@ const email = sessionToken ? await hamtaSessionEmail(sessionToken) : null;
 
 const skickat = Astro.url.searchParams.get('skickat') === '1';
 const felaktigToken = Astro.url.searchParams.get('fel') === 'ogiltig';
+const epostbyteSkickat = Astro.url.searchParams.get('epostbyte') === 'skickat';
+const epostbyteKlart = Astro.url.searchParams.get('epostbyte') === 'klart';
 
 const subscriber = email ? await getSubscriber(email) : null;
 const kop = email ? await hamtaKopForEmail(email) : [];
@@ -54,6 +56,7 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
   ) : (
     <div class="mina-sidor">
       <p class="mina-sidor__inloggad">Inloggad som {email}</p>
+      {epostbyteKlart && <p class="mina-sidor__bekraftelse">E-postadressen är bytt.</p>}
 
       <section>
         <h2>Bevakade kommuner</h2>
@@ -95,6 +98,20 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
         )}
       </section>
 
+      <section>
+        <h2>Byt e-post</h2>
+        {epostbyteSkickat ? (
+          <p>Kolla den nya adressens inkorg — klicka på länken för att bekräfta bytet. Den är giltig i 15 minuter, och ingenting ändras förrän ni klickat.</p>
+        ) : (
+          <form class="email-signup fg-card" method="POST" action="/api/byt-epost">
+            <label for="ny-epost">Ny e-postadress</label>
+            <input type="email" id="ny-epost" name="ny_epost" required autocomplete="email" />
+            <button type="submit" class="btn-primary">Skicka bekräftelselänk</button>
+            <p class="email-signup__integritet">Tips: registrera med en opersonlig föreningsmejl (t.ex. kassor@föreningen.se) i stället för en privat adress — då behöver ni sällan byta här, även när kassören byts ut.</p>
+          </form>
+        )}
+      </section>
+
       <form method="POST" action="/api/logga-ut">
         <button type="submit" class="btn-primary">Logga ut</button>
       </form>
@@ -106,6 +123,11 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
   .mina-sidor__inloggad {
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
+  }
+
+  .mina-sidor__bekraftelse {
+    font-weight: var(--fg-weight-bold);
+    margin-top: var(--fg-space-3);
   }
 
   .mina-sidor section {

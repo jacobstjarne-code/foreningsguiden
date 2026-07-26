@@ -175,6 +175,38 @@ export async function getSubscriber(email: string): Promise<Subscriber | null> {
   return redis.get<Subscriber>(recordKey(email));
 }
 
+/**
+ * H29-tillägg (Mina sidor: byt e-post) — flyttar kontot till en ny adress.
+ * Läser gammal post FÖRST och MERGAR in i en ev. redan befintlig post på
+ * newEmail (samma "läs-och-mergea"-princip som addForeningsprofil m.fl.
+ * ovan — en blind overwrite hade kunnat tappa newEmail:s egen bevakning
+ * om den adressen redan var i bruk av någon annan). Detta ÄR ett
+ * namnbyte, inte en kopia — den gamla postens indexpost tas bort helt.
+ * Null om oldEmail inte har någon post att flytta.
+ */
+export async function flyttaSubscriber(oldEmail: string, newEmail: string): Promise<Subscriber | null> {
+  const gammal = await getSubscriber(oldEmail);
+  if (!gammal) return null;
+
+  const normalizedNew = newEmail.toLowerCase();
+  const befintligNy = await getSubscriber(normalizedNew);
+
+  const record: Subscriber = {
+    email: normalizedNew,
+    kommuner: Array.from(new Set([...gammal.kommuner, ...(befintligNy?.kommuner ?? [])])),
+    registrerad: befintligNy?.registrerad ?? gammal.registrerad,
+    confirmed: befintligNy?.confirmed ?? gammal.confirmed,
+    giltighetArsmoten: { ...(gammal.giltighetArsmoten ?? {}), ...(befintligNy?.giltighetArsmoten ?? {}) },
+    foreningsprofil: befintligNy?.foreningsprofil ?? gammal.foreningsprofil,
+  };
+
+  await redis.set(recordKey(normalizedNew), record);
+  await redis.sadd(INDEX_KEY, normalizedNew);
+  await removeSubscriber(oldEmail);
+
+  return record;
+}
+
 /** Alla BEKRÄFTADE prenumeranter — underlag för cronjobbets utskick. */
 export async function getAllConfirmedSubscribers(): Promise<Subscriber[]> {
   const emails = await redis.smembers(INDEX_KEY);
