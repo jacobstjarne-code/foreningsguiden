@@ -106,6 +106,9 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
     if (!Array.isArray(raw.deadlines.datum)) {
       problems.push(`${where}.deadlines.datum måste vara en lista`);
     } else if (raw.deadlines.typ === 'fasta') {
+      if (raw.deadlines.datum.length === 0) {
+        problems.push(`${where}.deadlines.datum är tom men deadlines.typ är "fasta" — fasta deadlines måste ha minst ett datum`);
+      }
       for (const d of raw.deadlines.datum) {
         if (typeof d !== 'string' || !MMDD_RE.test(d)) {
           problems.push(`${where}.deadlines.datum innehåller "${d}", förväntat format MM-DD`);
