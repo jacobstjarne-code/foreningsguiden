@@ -85,7 +85,12 @@ if (kommun.bidrag.length === 1) {
 }
 
 // --- FAQ (SOKBARHETSSPEC §3.3) — synlig sektion MÅSTE spegla schemat exakt ---
+// 'okand'-bidrag utelämnas ur datumsvaret helt (samma uteslutning som
+// deadlinekalendern, getDeadlineEntries) — ett okänt datum är inget vi kan
+// svara på, och att formatera b.deadlines.datum (tom array) hade gett en
+// trasig mening ("söks senast .").
 const deadlinesammanfattning = kommun.bidrag
+  .filter((b) => b.deadlines.typ !== 'okand')
   .map((b) => (b.deadlines.typ === 'lopande'
     ? `${b.namn} söks löpande.`
     : `${b.namn} söks senast ${b.deadlines.datum.map(formatRecurringDate).join(', ')}.`))

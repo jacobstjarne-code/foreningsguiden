@@ -21,7 +21,12 @@ export type Kategori = (typeof KATEGORIER)[number];
 export const VERKSAMHETER = ['idrott', 'kultur', 'hembygd', 'friluft', 'social', 'ungdom', 'annat'] as const;
 export type Verksamhet = (typeof VERKSAMHETER)[number];
 
-export const DEADLINE_TYPER = ['fasta', 'lopande'] as const;
+// 'okand' — källan är helt tyst om ansökningsförfarande (varken ett publicerat
+// datum eller en uttrycklig löpande-formulering). Skild från 'lopande', som
+// betyder att kommunen UTTRYCKLIGEN skriver löpande/rullande ansökan.
+// 'lopande' får ALDRIG användas som utfyllnad för tystnad — se Västervik-
+// reverten 2026-07 (c995f80 backad) för vad som händer när den regeln bryts.
+export const DEADLINE_TYPER = ['fasta', 'lopande', 'okand'] as const;
 export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 
 // H26 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): kommunen kan pausa eller

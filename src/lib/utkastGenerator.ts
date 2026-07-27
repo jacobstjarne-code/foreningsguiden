@@ -176,6 +176,7 @@ function registreringForst(profil: Foreningsprofil, bidrag: Bidrag): Registrerin
 
 function deadlineText(bidrag: Bidrag): string {
   if (bidrag.deadlines.typ === 'lopande') return 'Söks löpande, inget fast datum.';
+  if (bidrag.deadlines.typ === 'okand') return 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
   const iso = earliestDeadlineISO(bidrag, todayISO());
   return iso ? formatDate(iso) : 'Söks löpande, inget fast datum.';
 }

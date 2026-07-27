@@ -241,12 +241,14 @@ const kommuner = loadKommuner();
     const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
 
     function bidragMeta(bidrag: Bidrag): string {
-      // dateISO är null ENDAST för löpande bidrag (earliestDeadlineISO),
-      // samma mönster som BidragCard/KommunProgressions formatDeadlines —
-      // rör aldrig deadlines.datum direkt för löpande bidrag.
+      // dateISO är null för BÅDE löpande och okänd deadlines.typ
+      // (earliestDeadlineISO), samma mönster som BidragCard/
+      // KommunProgressions formatDeadlines — skilj dem explicit på
+      // deadlines.typ, rör aldrig deadlines.datum direkt.
       const dateISO = earliestDeadlineISO(bidrag, today);
       if (!dateISO) {
-        return `${bidrag.belopp ?? 'Belopp ej publikt'} · löpande ansökan`;
+        const text = bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan';
+        return `${bidrag.belopp ?? 'Belopp ej publikt'} · ${text}`;
       }
       const dagar = daysUntil(dateISO, today);
       const urgency = getUrgency(dagar);

@@ -323,6 +323,12 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
         entries.push({ ...base, isLopande: true, dateISO: null });
         continue;
       }
+      // 'okand' är en egen, explicit gren — inte ett fall-through via tomt
+      // deadlines.datum. Ett okänt ansökningsdatum är ingen deadline att
+      // bevaka, så bidraget utelämnas helt ur kalendern (varken kommande-
+      // eller löpande-sektionen). Skriv INTE om detta till en implicit
+      // tom-array-check under fasta-grenen — se ordern som infört 'okand'.
+      if (bidrag.deadlines.typ === 'okand') continue;
       for (const mmdd of bidrag.deadlines.datum) {
         entries.push({ ...base, isLopande: false, dateISO: nextOccurrenceISO(mmdd, today) });
       }

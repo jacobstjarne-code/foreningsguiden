@@ -25,6 +25,7 @@ const { bidrag, verifierad, ansokningsUrl, kommunSlug } = Astro.props;
 
 function formatDeadlines(b: Bidrag): string {
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
+  if (b.deadlines.typ === 'okand') return 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
 

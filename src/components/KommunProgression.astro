@@ -177,7 +177,9 @@ const extra = forutsattningar.slice(1);
             <div class="progression__list-row__text">
               <div class="progression__list-row__namn">{bidrag.namn}</div>
               <div class="progression__list-row__meta">
-                {bidrag.belopp ?? 'Belopp ej publikt'} · {dateISO ? `sista dag ${formatDate(dateISO)}` : 'löpande ansökan'}
+                {bidrag.belopp ?? 'Belopp ej publikt'} · {dateISO
+                  ? `sista dag ${formatDate(dateISO)}`
+                  : bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan'}
               </div>
             </div>
             {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
