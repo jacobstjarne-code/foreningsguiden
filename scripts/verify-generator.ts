@@ -1,19 +1,18 @@
 /**
  * verify-generator.ts — Golden set-grinden för bidragsutkastgeneratorn
- * (utkastGenerator.ts). Samma stil som verify-matching.ts:
- * node:assert/strict, ingen testrunner (package.json har inget idag).
- * Kör: node scripts/verify-generator.ts
+ * (utkastGenerator.ts), enligt SPEC_GOLDEN_SET.md (Opus/Fable, 2026-07-27).
+ * Samma stil som verify-matching.ts: node:assert/strict, ingen testrunner
+ * (package.json har inget idag). Kör: node scripts/verify-generator.ts
  *
- * Läser varje golden-set/*.yaml (inklusive .EXEMPEL.yaml-filer — namnet är
- * bara en läsbarhetsmarkör för människor, ingen filtrering här), kör
- * generatorn mot facit-profilen, och testar de fyra spärrarna maskinellt.
+ * Kör genereraUtkast() mot varje golden-set/*.yaml-facit, för VAR OCH EN
+ * av de tre fasta testprofilerna (P1/P2/P3, SPEC_GOLDEN_SET §4), och
+ * testar de fyra kriterierna K1–K4 (SPEC_GOLDEN_SET §2) maskinellt.
  *
  * VIKTIGT — grönt här bevisar att PIPELINEN fungerar. Det bevisar INTE att
- * grinden är godkänd i Jacobs mening: en fil vars kravStatus ingen människa
+ * grinden är godkänd i Jacobs mening: en fil vars kravFacit ingen människa
  * har läst igenom och bekräftat är en demonstration, inte ett facit.
- * "Betalning aktiveras FÖRST när grinden är grön" (Jacob, 2026-07-26)
- * förutsätter riktiga, mänskligt skrivna facit-filer i golden-set/ — se
- * README.md i den mappen.
+ * "Betalning aktiveras FÖRST när grinden är grön" förutsätter riktiga,
+ * mänskligt skrivna facit-filer i golden-set/ — se README.md i den mappen.
  */
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -39,19 +38,54 @@ function getKommunBySlug(slug: string): Kommun | undefined {
   }
 }
 
+type ProfilNyckel = 'p1' | 'p2' | 'p3';
+const PROFIL_NYCKLAR: ProfilNyckel[] = ['p1', 'p2', 'p3'];
+
+/**
+ * De tre fasta testprofilerna (SPEC_GOLDEN_SET §4) — IDENTISKA för alla
+ * bidrag utom kommunSlug. Facit-skrivaren beskriver bara UTFALLET för
+ * sitt bidrag mot dessa redan fastställda profiler, aldrig egna värden
+ * — det är vad som gör 15 bidrag × 3 profiler jämförbart som 45
+ * körningar i stället för 45 egna testfall.
+ */
+const TESTPROFILER: Record<ProfilNyckel, (kommunSlug: string) => Foreningsprofil> = {
+  // P1 — Komplett: alla trattsvar ifyllda, registrerad förening.
+  p1: (kommunSlug) => ({ kommunSlug, verksamhet: ['idrott'], storlek: 'm', alder: 'etablerad', sokt: 'ja', uppdaterad: '' }),
+  // P2 — Luckor: verksamhet + kommun ifyllda, storlek och verksamhetstid saknas.
+  p2: (kommunSlug) => ({ kommunSlug, verksamhet: ['idrott'], storlek: null, alder: null, sokt: 'ja', uppdaterad: '' }),
+  // P3 — Oregistrerad: testar registreringsgrenen (spärr 4).
+  p3: (kommunSlug) => ({ kommunSlug, verksamhet: ['idrott'], storlek: 'm', alder: 'etablerad', sokt: 'nej', uppdaterad: '' }),
+};
+
+interface KravFacit {
+  forvantatStatus: 'ifyllt' | 'lucka';
+}
+
+interface ProfilFacit {
+  forvantadTyp: 'bidragsutkast' | 'registrering_forst';
+  kravFacit?: KravFacit[];
+  anteckningar?: string;
+}
+
 interface GoldenSetFacit {
   bidragId: string;
   kommunSlug: string;
-  profil: Foreningsprofil;
-  forvantadTyp: 'bidragsutkast' | 'registrering_forst';
-  kravStatus?: ('ifyllt' | 'lucka')[];
+  kalla_url?: string;
+  profiler: Partial<Record<ProfilNyckel, ProfilFacit>>;
 }
 
-// Skannar ENDAST generatorns egna strängar (ansvarsrad, kravRader[].innehall)
-// — ALDRIG kravText, eftersom det är kommunens egen text och kan legitimt
-// innehålla ord som "beviljas" i sin egen formulering (t.ex. "bidrag
-// beviljas inte till interna sammankomster"). Ett scan av kravText hade gett
-// falska positiva.
+// K2/K3 — genereraUtkast() är deterministisk och rent mallbaserad (se
+// utkastGenerator.ts:s filhuvud: "Ingen ny svensk prosa skrivs här").
+// "ifyllt"-rader kan därför ALLTID bara vara en av dessa två kända
+// mallar; något annat är ett tecken på att fri text smugit sig in.
+const KANDA_INNEHALL_MALLAR = [/^Föreningen har sitt säte i .+\.$/, /^Föreningens verksamhet: .+\.$/];
+const LUCKA_TEXT = '[Fyll i: uppgift som styrker att kravet är uppfyllt]';
+
+// K4 — skannar ENDAST generatorns egna strängar (ansvarsrad,
+// kravRader[].innehall) — ALDRIG kravText, eftersom det är kommunens
+// egen text och kan legitimt innehålla ord som "beviljas" i sin egen
+// formulering (t.ex. "bidrag beviljas inte till interna sammankomster").
+// Ett scan av kravText hade gett falska positiva.
 const BANNADE_FRASER = [
   /öka(r)?\s+(er|din|föreningens)?\s*chans/i,
   /garant(i|erar)/i,
@@ -80,6 +114,9 @@ if (filer.length === 0) {
   process.exit(0);
 }
 
+let korda = 0;
+let mojliga = 0;
+
 for (const fil of filer) {
   const facit = yaml.load(readFileSync(`golden-set/${fil}`, 'utf-8')) as GoldenSetFacit;
 
@@ -95,42 +132,67 @@ for (const fil of filer) {
   });
   if (!bidrag) continue;
 
-  const resultat = genereraUtkast(facit.profil, bidrag, kommun);
+  for (const nyckel of PROFIL_NYCKLAR) {
+    mojliga++;
+    const profilFacit = facit.profiler[nyckel];
+    if (!profilFacit) continue; // facit under uppbyggnad — se täckningsraden nedan, inte ett FAIL.
+    korda++;
 
-  test(`${fil} — spärr 4 (registreringsgate rätt typ)`, () => {
-    assert.equal(resultat.typ, facit.forvantadTyp);
-  });
+    const profil = TESTPROFILER[nyckel](facit.kommunSlug);
+    const resultat = genereraUtkast(profil, bidrag, kommun);
+    const label = `${fil} [${nyckel}]`;
 
-  if (resultat.typ !== 'bidragsutkast') continue;
-
-  test(`${fil} — spärr 1 (inget påhittat krav, ordagrant citat, rätt antal och ordning)`, () => {
-    assert.equal(resultat.kravRader.length, bidrag.krav.length, 'antal kravRader matchar inte bidragets krav[]');
-    resultat.kravRader.forEach((r, i) => {
-      assert.equal(r.kravText, bidrag.krav[i], `kravRader[${i}] är inte ett ordagrant citat av bidrag.krav[${i}]`);
+    test(`${label} — gren (bidragsutkast/registrering_forst)`, () => {
+      assert.equal(resultat.typ, profilFacit.forvantadTyp);
     });
-  });
 
-  test(`${fil} — spärr 2 (lovar aldrig bifall)`, () => {
-    const genererat = [resultat.ansvarsrad, ...resultat.kravRader.map((r) => r.innehall)].join(' ');
-    for (const monster of BANNADE_FRASER) {
-      assert.ok(!monster.test(genererat), `genererad text matchar bannat mönster: ${monster}`);
-    }
-    assert.ok(resultat.ansvarsrad.length > 0, 'ansvarsrad saknas');
-  });
+    if (resultat.typ !== 'bidragsutkast') continue;
 
-  if (facit.kravStatus) {
-    test(`${fil} — spärr 3 (luckor markerade exakt som facit)`, () => {
-      assert.equal(
-        resultat.kravRader.length,
-        facit.kravStatus!.length,
-        'drift: bidragets krav[] och facit.kravStatus har olika längd — facit måste uppdateras av en människa'
-      );
+    test(`${label} — K1 (täckning: varje krav bemött, ordagrant, rätt ordning)`, () => {
+      assert.equal(resultat.kravRader.length, bidrag.krav.length, 'antal kravRader matchar inte bidragets krav[]');
       resultat.kravRader.forEach((r, i) => {
-        assert.equal(r.status, facit.kravStatus![i], `krav[${i}] "${r.kravText}": förväntade ${facit.kravStatus![i]}, fick ${r.status}`);
+        assert.equal(r.kravText, bidrag.krav[i], `kravRader[${i}] är inte ett ordagrant citat av bidrag.krav[${i}]`);
       });
+    });
+
+    test(`${label} — K2 (ingen uppfinning: innehall är endera känd mall eller luckplatshållaren)`, () => {
+      resultat.kravRader.forEach((r, i) => {
+        if (r.status === 'lucka') {
+          assert.equal(r.innehall, LUCKA_TEXT, `krav[${i}] är "lucka" men innehall är inte standardplatshållaren — misstänkt påhittad text`);
+        } else {
+          const matchar = KANDA_INNEHALL_MALLAR.some((m) => m.test(r.innehall));
+          assert.ok(matchar, `krav[${i}] är "ifyllt" men innehall matchar ingen känd mall: "${r.innehall}"`);
+        }
+      });
+    });
+
+    if (profilFacit.kravFacit) {
+      test(`${label} — K3 (ärliga luckor: status matchar facit exakt)`, () => {
+        assert.equal(
+          resultat.kravRader.length,
+          profilFacit.kravFacit!.length,
+          'drift: bidragets krav[] och facit.kravFacit har olika längd — facit måste uppdateras av en människa'
+        );
+        resultat.kravRader.forEach((r, i) => {
+          assert.equal(
+            r.status,
+            profilFacit.kravFacit![i].forvantatStatus,
+            `krav[${i}] "${r.kravText}": förväntade ${profilFacit.kravFacit![i].forvantatStatus}, fick ${r.status}`
+          );
+        });
+      });
+    }
+
+    test(`${label} — K4 (inget bifallslöfte)`, () => {
+      const genererat = [resultat.ansvarsrad, ...resultat.kravRader.map((r) => r.innehall)].join(' ');
+      for (const monster of BANNADE_FRASER) {
+        assert.ok(!monster.test(genererat), `genererad text matchar bannat mönster: ${monster}`);
+      }
+      assert.ok(resultat.ansvarsrad.length > 0, 'ansvarsrad saknas');
     });
   }
 }
 
 console.log(`\n${antal} tester klara, ${fel} FAIL`);
+console.log(`Täckning: ${korda}/${mojliga} (bidrag × profil)-kombinationer testade (SPEC_GOLDEN_SET §4/§6 kräver 45/45 för en godkänd grind).`);
 if (fel > 0) process.exit(1);
