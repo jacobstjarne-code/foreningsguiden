@@ -98,12 +98,23 @@ export async function hamtaKopAvProdukt(produkt: KopProdukt): Promise<KopEntry[]
   return alla.filter((k) => k.produkt === produkt);
 }
 
-/** H22: vilken snapshot vi senast FAKTISKT mejlade köparen om, eller null om aldrig. */
+/**
+ * H22: vilken snapshot vi senast FAKTISKT mejlade köparen om, eller null
+ * om aldrig. Sparas inlindad i ett objekt ({ snapshot }), inte som en
+ * bar sträng — @upstash/redis auto-parsar ett JSON-likt TOPPNIVÅVÄRDE
+ * transparent vid läsning (skillnad mot ett fält NÅGONSTANS INNE i ett
+ * objekt, som förblir en sträng). En bar sträng hade tystat gjort denna
+ * funktion om till att returnera ett OBJEKT i stället för en sträng,
+ * vilket bröt strängjämförelsen i cron/andringsbevakning.ts och gjorde
+ * "idempotensen" verkningslös — fångat i ett verkligt end-to-end-test
+ * (muterad snapshot → mejl → kört cronen igen → mejlade EN GÅNG TILL).
+ */
 export async function hamtaSenastNotifieradSnapshot(stripeSessionId: string): Promise<string | null> {
-  return redis.get<string>(andringsnotisKey(stripeSessionId));
+  const data = await redis.get<{ snapshot: string }>(andringsnotisKey(stripeSessionId));
+  return data?.snapshot ?? null;
 }
 
 /** H22: markerar att köparen nu är mejlad om denna specifika (nya) snapshot. */
 export async function markeraSnapshotNotifierad(stripeSessionId: string, snapshot: string): Promise<void> {
-  await redis.set(andringsnotisKey(stripeSessionId), snapshot);
+  await redis.set(andringsnotisKey(stripeSessionId), { snapshot });
 }

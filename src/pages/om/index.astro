@@ -22,10 +22,19 @@ import { OM, BETA } from '../../lib/content';
     {OM.ansvarStycken.map((stycke) => <p>{stycke}</p>)}
   </section>
 
-  <section>
-    <h2>{OM.avsandarRubrik}</h2>
-    <p class="om-todo">{OM.avsandarPlatshallare}</p>
-  </section>
+  {/*
+    H1-sektionen (avsändare/org.nr) döljs för besökare tills juridisk
+    part är vald (Jacob, 2026-07-27: inte bra att den ligger öppen).
+    Denna kommentarform strippas helt vid bygge, syns inte ens i
+    sidans källkod. content.ts-texten (OM.avsandarRubrik och
+    OM.avsandarPlatshallare) ligger kvar orörd, redo att visas igen
+    när partsvalet är klart.
+
+    <section>
+      <h2>{OM.avsandarRubrik}</h2>
+      <p class="om-todo">{OM.avsandarPlatshallare}</p>
+    </section>
+  */}
 
   <section>
     <h2>{BETA.omRubrik}</h2>
