@@ -13,7 +13,7 @@ import BreadcrumbList from '../../components/BreadcrumbList.astro';
 import EmailSignup from '../../components/EmailSignup.astro';
 import UrgencyChip from '../../components/UrgencyChip.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS, KATEGORIER } from '../../lib/kommuner';
-import { KALENDER } from '../../lib/content';
+import { KALENDER, BEVAKNING } from '../../lib/content';
 
 const bevakningStatus = Astro.url.searchParams.get('bevakning');
 const submitted = bevakningStatus === 'klar';
@@ -54,7 +54,7 @@ const kommande = entries.filter((e) => !e.isLopande);
 
   <table class="deadline-table" id="deadline-table">
     <thead>
-      <tr><th>Läge</th><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+      <tr><th>Läge</th><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th></th></tr>
     </thead>
     <tbody>
       {kommande.map((e) => (
@@ -64,6 +64,9 @@ const kommande = entries.filter((e) => !e.isLopande);
           <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
           <td>{e.kommun}</td>
           <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
+          <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
+            <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
+          </td>
         </tr>
       ))}
     </tbody>
@@ -75,7 +78,7 @@ const kommande = entries.filter((e) => !e.isLopande);
       <p>{KALENDER.lopandeText}</p>
       <table class="deadline-table" id="deadline-table-lopande">
         <thead>
-          <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
+          <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th></th></tr>
         </thead>
         <tbody>
           {lopande.map((e) => (
@@ -83,6 +86,9 @@ const kommande = entries.filter((e) => !e.isLopande);
               <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
               <td>{e.kommun}</td>
               <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
+              <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
+                <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -112,6 +118,8 @@ const kommande = entries.filter((e) => !e.isLopande);
 </Base>
 
 <script>
+  import { BEVAKNING } from '../../lib/content';
+
   const kommunSelect = document.getElementById('filter-kommun');
   const kategoriSelect = document.getElementById('filter-kategori');
   const emptyMsg = document.getElementById('deadline-empty');
@@ -137,4 +145,113 @@ const kommande = entries.filter((e) => !e.isLopande);
 
   kommunSelect?.addEventListener('change', applyFilter);
   kategoriSelect?.addEventListener('change', applyFilter);
+
+  // "Bevaka den här" — en kompakt, en-kommun-scopad variant av
+  // EmailSignup.astro/api/prenumerera, en knapp per deadlinerad (Jacob
+  // 2026-07-27: "kalendern blir en tjänst i stället för en referens").
+  // Samma backend (addPendingSubscriber, dubbel opt-in) och samma
+  // BEVAKNING-copy som helsidesformuläret — bara ett kompakt, fetch-
+  // baserat gränssnitt i cellen i stället för en sidladdning, samma
+  // mönster som GiltighetsKontroll.astro redan etablerat.
+  function byggBevakaForm(kommunNamn: string): HTMLFormElement {
+    const form = document.createElement('form');
+    form.className = 'bevaka-rad-form';
+    form.innerHTML = `
+      <input type="email" name="email" placeholder="${BEVAKNING.epostPlaceholder}" required autocomplete="email" />
+      <label class="bevaka-rad-form__samtycke">
+        <input type="checkbox" name="samtycke" required />
+        ${BEVAKNING.samtycke}
+      </label>
+      <button type="submit" class="btn-primary">${BEVAKNING.knapp}</button>
+      <p class="bevaka-rad-form__fel" data-bevaka-fel hidden>Något gick fel. Försök igen.</p>
+    `;
+    form.setAttribute('aria-label', `Bevaka deadlines i ${kommunNamn}`);
+    return form;
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-bevaka-cell]').forEach((cell) => {
+    const knapp = cell.querySelector<HTMLButtonElement>('.bevaka-rad-knapp');
+    const kommunSlug = cell.dataset.kommunSlug ?? '';
+    const kommunNamn = cell.dataset.kommunNamn ?? '';
+
+    knapp?.addEventListener('click', () => {
+      const form = byggBevakaForm(kommunNamn);
+      cell.replaceChildren(form);
+
+      const felText = form.querySelector<HTMLElement>('[data-bevaka-fel]');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        felText?.setAttribute('hidden', '');
+        const data = new FormData(form);
+        data.set('kommun', kommunSlug);
+
+        try {
+          const res = await fetch('/api/prenumerera-json', { method: 'POST', body: data });
+          const json = await res.json();
+          if (!res.ok || !json.ok) throw new Error('svar ej ok');
+
+          const kvitto = document.createElement('p');
+          kvitto.className = 'bevaka-rad-kvitto';
+          kvitto.textContent = json.alreadyConfirmed ? BEVAKNING.kvittoRubrik : BEVAKNING.kvittoText;
+          cell.replaceChildren(kvitto);
+        } catch {
+          felText?.removeAttribute('hidden');
+        }
+      });
+    });
+  });
 </script>
+
+<style>
+  .deadline-table__bevaka {
+    min-width: 14ch;
+  }
+
+  .bevaka-rad-knapp {
+    white-space: nowrap;
+    font-size: var(--fg-text-label);
+    padding: 6px 12px;
+  }
+
+  .bevaka-rad-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-2);
+    min-width: 22ch;
+  }
+
+  .bevaka-rad-form input[type='email'] {
+    padding: var(--fg-space-2);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-label);
+  }
+
+  .bevaka-rad-form__samtycke {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: var(--fg-text-mono);
+    color: var(--fg-ink-muted);
+  }
+
+  .bevaka-rad-form button[type='submit'] {
+    font-size: var(--fg-text-label);
+    padding: 6px 12px;
+  }
+
+  .bevaka-rad-form__fel {
+    color: var(--fg-urgent);
+    font-size: var(--fg-text-mono);
+    margin: 0;
+  }
+
+  .bevaka-rad-kvitto {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    max-width: 24ch;
+    margin: 0;
+  }
+</style>
