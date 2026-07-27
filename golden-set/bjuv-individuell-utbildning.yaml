@@ -1,0 +1,51 @@
+# FACIT 10 av 10 (omgång 2) — Opus/Fable 2026-07-27, data/kommuner/
+# bjuv.yaml. Testar tre beloppsnivåer + ett negativt krav.
+#
+# kravFacit/belopp/deadline körda och bekräftade mot verklig kod, 2026-07-27.
+bidragId: "bjuv-individuell-utbildning"
+kommunSlug: "bjuv"
+kalla_url: "https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html"
+
+# FÖRBJUDET (K2):
+#   - Förenkla de tre beloppsnivåerna (50% / 2 000 kr per person /
+#     10 000 kr årligen) till en enda siffra — belopp-passthrough
+#     garanterar redan att alla tre står kvar tillsammans, se forvantadBelopp.
+#   - Annan procentsats än 50%.
+#   - Fast deadline — löpande.
+#   - Att UTELÄMNA det negativa kravet (krav 2: får inte vara
+#     konferens/årsmöte) — K1:s längd/ordning-check fångar redan om
+#     generatorn skulle strukturera bort en rad, men det negativa
+#     kravets INNEHÅLL (att det är ett förbud, inte ett villkor) är
+#     inget generatorn kan förvanska eftersom kravText citeras ordagrant.
+forvantadDeadlineTyp: "lopande"
+forvantadBelopp: "50% av kurskostad, max 2 000 kronor per person, max 10 000 kronor årligen" # alla tre nivåer måste med, ingen förenkling
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 (ungdomsförening med registrerade medlemmar) och krav 2
+    # (utbildningen får inte vara konferens/årsmöte — ett NEGATIVT
+    # krav) ligger båda utanför fyllKravs två regler. Alltid lucka —
+    # generatorn varken bekräftar föreningstypen eller intygar att en
+    # specifik, ännu obeskriven utbildning uppfyller undantaget.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 2 är ett negativt krav (förbud, inte villkor). Generatorns
+      luckplatshållare är neutral ("[Fyll i: uppgift som styrker att
+      kravet är uppfyllt]") — den påstår varken att utbildningen ÄR
+      eller INTE ÄR en konferens/årsmöte, vilket är korrekt eftersom
+      Foreningsprofil inte samlar in någon uppgift om en specifik
+      utbildnings karaktär.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt.

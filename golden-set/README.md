@@ -51,9 +51,9 @@ profilvärden.
 bidragId: "<Bidrag.id, från data/kommuner/<kommun>.yaml>"
 kommunSlug: "<Kommun.kommun_slug>"
 kalla_url: "<Bidrag.kalla_url — spårbarhet, inte maskinellt kontrollerad>"
-# Valfri extra kontroll, utöver K1-K4 (uttryckt i alla fem facit från
-# Fable: "får ALDRIG hitta på ett datum"/"får ALDRIG bli löpande").
-forvantadDeadlineTyp: "fast" # eller "lopande"
+# Valfria extra kontroller, utöver K1-K4:
+forvantadDeadlineTyp: "fast" # eller "lopande" — "får ALDRIG hitta på ett datum"/"bli löpande"
+forvantadBelopp: "8 kronor per deltagare (4 kronor för skolidrottsföreningar)" # eller null — ordagrant, ingen förenkling av differentiering/undantag (omgång 2)
 
 profiler:
   p1:

@@ -1,0 +1,54 @@
+# FACIT 6 av 10 (omgång 2) — Opus/Fable 2026-07-27, data/kommuner/
+# askersund.yaml. Testar rik data: publicerat belopp, fast deadline.
+#
+# kravFacit/belopp/deadline körda och bekräftade mot verklig kod, 2026-07-27.
+bidragId: "askersund-grundbidrag"
+kommunSlug: "askersund"
+kalla_url: "https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/bidrag-och-stod-till-civilsamhallet"
+
+# FÖRUTSÄTTNING SOM MÅSTE NÄMNAS (dokumenterat, inte maskinellt
+# kontrollerat idag): registrering i föreningsregistret, förnyas
+# årligen efter årsmötet — annars raderas föreningen ur registret
+# (giltighetsfällan).
+#
+# FÖRBJUDET (K2, strukturellt garanterat via belopp-passthrough +
+# fyllKravs snäva vitlista, se README §K2):
+#   - Kronbelopp eller belopp per medlem — beloppet är "baseras på
+#     antalet", inget tal finns att ange.
+#   - Annan åldersgräns än 7-21.
+#   - Krav på minimiantal medlemmar (grundbidraget har inget — blanda
+#     inte ihop med startbidragets 10 eller driftbidragets 20).
+#   - Handläggningstid (ledtid: null).
+forvantadDeadlineTyp: "fast" # 30 april, årligt — får ALDRIG bli "löpande"
+forvantadBelopp: "Baseras på antalet medlemmar mellan 7–21 år" # inget kronbelopp får hittas på
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 (medlemsantal 7-21 år): profilens storlek ger bara ett
+    # intervall (xs/s/m/l), aldrig ett exakt tal i åldersspannet —
+    # fyllKrav har ingen regel för medlemsantal alls. Krav 2
+    # (registrerad förening): ingen regel matchar "registrerad" som
+    # text (GUARD_TERMER blockerar inte specifikt detta, men ingen av
+    # de två reglerna — säte/verksamhet — kan någonsin träffa den här
+    # kravtexten). Båda alltid lucka.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 1: exakt antal medlemmar 7-21 år kan aldrig bekräftas ur en
+      storlek-bucket. Krav 2: "registrerad förening" är inte en
+      säte- eller verksamhetsfråga.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1 — ingen av de två kraven är storlek/alder-
+      känsliga i fyllKravs mening (fyllKrav använder aldrig storlek/
+      alder alls, bara kommunSlug och verksamhet).
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt.

@@ -1,0 +1,52 @@
+# FACIT 8 av 10 (omgång 2) — Opus/Fable 2026-07-27, data/kommuner/
+# askersund.yaml. Testar två konkreta trösklar, löpande, inget belopp.
+#
+# kravFacit/belopp/deadline körda och bekräftade mot verklig kod, 2026-07-27.
+bidragId: "askersund-startbidrag"
+kommunSlug: "askersund"
+kalla_url: "https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/bidrag-och-stod-till-civilsamhallet"
+
+# MÅLGRUPP SOM MÅSTE NÄMNAS (dokumenterat, inte maskinellt kontrollerat
+# idag): nystartade registrerade föreningar.
+#
+# FÖRBJUDET (K2):
+#   - Belopp — belopp: null, inget tak/summa/spann finns.
+#   - Fast ansökningsdatum — löpande.
+#   - Andra trösklar än 10 medlemmar och 3 månader.
+#   - Att PÅSTÅ att trösklarna är uppfyllda när profilen bara ger
+#     intervall (storlek 's' kan betyda under 10 ELLER exakt 10+,
+#     alder 'ny' täcker allt under 1 år, inte specifikt 3 månader) —
+#     generatorns fasta luckplatshållare gör redan detta rätt: den
+#     påstår aldrig ett intervall är ett exakt tal.
+forvantadDeadlineTyp: "lopande"
+forvantadBelopp: null # inget tak, ingen summa, inget spann
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 ("minst 10 medlemmar 7-21 år") och krav 2 ("aktiv minst 3
+    # månader") kräver EXAKTA trösklar som profilens buckets (storlek/
+    # alder) inte kan bekräfta — fyllKrav har ingen regel för
+    # medlemsantal eller verksamhetstid alls (bara säte/verksamhet).
+    # Alltid lucka, oavsett hur nära profilens bucket ligger tröskeln.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Detta är precis fallet facit varnar för: en profil med storlek='m'
+      (100-500, som P1/P2 sätter) ÄR uppenbarligen över 10 medlemmar,
+      och alder='etablerad' är uppenbarligen över 3 månader — men
+      generatorn gissar INTE utifrån "uppenbarligen", den har helt
+      enkelt ingen regel som läser storlek/alder för dessa kravtexter.
+      Lucka är rätt, inte en miss.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1 av samma skäl.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt.

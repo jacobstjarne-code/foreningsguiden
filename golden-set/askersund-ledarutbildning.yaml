@@ -1,0 +1,50 @@
+# FACIT 7 av 10 (omgång 2) — Opus/Fable 2026-07-27, data/kommuner/
+# askersund.yaml. Testar procentsats + retroaktiv ansökningsfrist.
+#
+# kravFacit/belopp/deadline körda och bekräftade mot verklig kod, 2026-07-27.
+bidragId: "askersund-ledarutbildning"
+kommunSlug: "askersund"
+kalla_url: "https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/bidrag-och-stod-till-civilsamhallet"
+
+# ANSÖKNINGSTID (ur sen_ansokan, dokumenterat — inte maskinellt
+# kontrollerat idag, UtkastDokument har inget sen_ansokan-fält): ansökan
+# inom 2 månader efter kursslut. Ett utkast som bara anger 28 februari
+# missar att fristen räknas från kursslut, inte kalenderåret.
+#
+# FÖRBJUDET (K2):
+#   - Annan procentsats än 75%.
+#   - Kronbelopp eller tak — beloppet är rent procentuellt, inget tak
+#     står i datan.
+#   - Krav på antal deltagare eller ålder på ledare.
+#   - Att beskriva utbildningen som KOMMANDE — bidraget är retroaktivt
+#     ("ska genomförts"), inte en ansökan om en planerad utbildning.
+forvantadDeadlineTyp: "fast" # 28 februari
+forvantadBelopp: "75 % av kurskostnaden" # aldrig "upp till 75", aldrig ett kronbelopp
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 (registrerad förening) och krav 2 (utbildningen genomförd,
+    # med datum) är båda utanför fyllKravs två regler (säte/verksamhet)
+    # — ingen Foreningsprofil-data kan bekräfta vare sig registrering
+    # eller ett kursdatum. Alltid lucka.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 2 är särskilt känsligt: generatorns fasta luckplatshållare
+      ("[Fyll i: uppgift som styrker att kravet är uppfyllt]") är
+      neutral och påstår inte att utbildningen är planerad eller
+      genomförd — det är korrekt, eftersom bidraget är retroaktivt och
+      generatorn inte får gissa vilketdera.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt.

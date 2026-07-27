@@ -1,0 +1,58 @@
+# FACIT 9 av 10 (omgång 2) — Opus/Fable 2026-07-27, data/kommuner/
+# bjuv.yaml. Testar differentierat belopp (8/4 kr) + tre trösklar.
+#
+# kravFacit/belopp/deadline körda och bekräftade mot verklig kod, 2026-07-27.
+bidragId: "bjuv-lok-aktivitetsstod"
+kommunSlug: "bjuv"
+kalla_url: "https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html"
+
+# FÖRUTSÄTTNING SOM MÅSTE NÄMNAS (dokumenterat, inte maskinellt
+# kontrollerat idag): registrering i Bjuvs föreningsregister, och för
+# ungdomsföreningar med styrelse där majoriteten är 25 år eller yngre:
+# representation på minst två av fyra årliga utbildningar för tillgång
+# till alla bidrag. Ett skarpt, lätt missat villkor.
+#
+# FÖRBJUDET (K2 — det farligaste fallet i omgång 2):
+#   - Ett enda belopp utan differentiering — 8 kr utan att nämna 4 kr-
+#     undantaget för skolidrottsföreningar hade fått en sådan förening
+#     att räkna fel på hela ansökan. genereraUtkast() kopierar
+#     bidrag.belopp rakt av (ingen sträng-bearbetning finns i koden),
+#     så differentieringen kan strukturellt inte tappas idag — men
+#     forvantadBelopp nedan är en explicit, körd kontroll av just detta.
+#   - Andra trösklar än de tre kraven anger.
+#   - Fast deadline — löpande.
+#   - Att påstå att utbildningskravet (förutsättningen ovan) är uppfyllt.
+forvantadDeadlineTyp: "lopande"
+forvantadBelopp: "8 kronor per deltagare (4 kronor för skolidrottsföreningar)" # båda talen måste med
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 (aktivitetslängd), krav 2 (deltagarantal, differentierat
+    # 3/5+), krav 3 (ledare 15+) är alla numeriska trösklar/roller som
+    # fyllKrav inte har någon regel för (bara säte/verksamhet). Alltid
+    # lucka — och särskilt krav 2:s differentiering (3 vs 5+ för
+    # ungdomsföreningar) kan generatorn varken bekräfta eller förenkla,
+    # eftersom den inte försöker fylla i det alls.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 2 är det känsligaste: "minst 3 deltagare (5+ för
+      ungdomsföreningar)" är ett SAMMANSATT villkor. Generatorns
+      luckplatshållare är neutral och påstår inte vilken tröskel som
+      gäller — korrekt, eftersom Foreningsprofil inte samlar in om
+      föreningen räknas som "ungdomsförening" i kommunens mening.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt.
