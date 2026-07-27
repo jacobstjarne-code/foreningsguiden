@@ -1,0 +1,65 @@
+# FACIT 1 av 5 — skrivet av Opus/Fable 2026-07-27 mot data/kommuner/
+# gislaved.yaml, läst 27 juli. Bekräftat: en människa har läst igenom och
+# godkänt raderna nedan (bytt status från .EXEMPEL.yaml till detta).
+#
+# kravFacit-värdena är körda och bekräftade mot verklig kod
+# (genereraUtkast(), 2026-07-27) — inte gissade för hand. Se
+# "anteckningar" per profil för Fables fulla resonemang.
+bidragId: "gislaved-arrangemangsbidrag"
+kommunSlug: "gislaved"
+kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
+
+# Testar: K1 (rika krav), K2 (förbjudna tillägg), K3 (luckor även vid
+# komplett profil).
+#
+# FÖRUTSÄTTNINGAR SOM MÅSTE NÄMNAS (dokumenterat, inte maskinellt
+# kontrollerat idag — UtkastDokument har inget forutsattningar-fält):
+# Godkännande som bidragsberättigad förening (gislaved-bidragsberattigad),
+# ledtid 90 dagar. Subventionerad föreningstaxa gäller tidigast tre
+# månader efter godkänt beslutsdatum.
+#
+# FÖRBJUDET (K2 — redan strukturellt garanterat av generatorns fasta
+# mallar, se README §K2, men dokumenterat här för människor):
+#   - Ett beloppstak eller sökt summa (belopp: null).
+#   - Krav på verksamhetsberättelse, årsmötesprotokoll, budget eller
+#     revisionsberättelse — inget av det står i krav[].
+#   - Medlemsantal eller åldersgränser.
+#   - Påstående att bidrag kan sökas för årsmöten/konferenser/jubileer
+#     — anteckning säger uttryckligen motsatsen.
+forvantadDeadlineTyp: "fast" # fyra fasta tillfällen/år — får ALDRIG bli "löpande"
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 (säte): ifyllt ur profilens kommunval. Krav 2-4 (allmänhetens
+    # tillträde, marknadsföring, evenemangskalender): ALLTID lucka —
+    # trattens fem svar innehåller ingen arrangemangsinformation.
+    kravFacit:
+      - forvantatStatus: "ifyllt"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 1 är det enda regel A (säte) kan fånga i det här bidraget.
+      Krav 2-4 rör arrangemangets specifika genomförande (namn, datum,
+      plats, hur allmänheten informeras, innehåll/syfte,
+      organisationsnummer) — Foreningsprofil samlar inte in någon sådan
+      data, oavsett profil.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    # Identiskt med P1 för DETTA bidrag: fyllKrav() använder aldrig
+    # storlek/alder. P2 skiljer sig bara från P1 på bidrag vars krav
+    # faktiskt refererar medlemsantal/verksamhetstid.
+    kravFacit:
+      - forvantatStatus: "ifyllt"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Samma utfall som P1 — det här bidragets krav[] testar inte
+      storlek/alder-luckor.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt (visaBorjaHar:
+      profil.sokt !== 'ja' räcker ensamt, oavsett bidragets egna fält).

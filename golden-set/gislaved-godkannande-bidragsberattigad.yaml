@@ -1,0 +1,54 @@
+# FACIT 2 av 5 — Opus/Fable 2026-07-27, data/kommuner/gislaved.yaml.
+# Testar: registreringsgrenen (P3), K1 på tre konkreta krav, löpande deadline.
+#
+# kravFacit körd och bekräftad mot verklig kod, 2026-07-27.
+bidragId: "gislaved-godkannande-bidragsberattigad"
+kommunSlug: "gislaved"
+kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
+
+# MÅSTE NÄMNAS (dokumenterat, inte maskinellt kontrollerat idag): att
+# subventionerad föreningstaxa gäller tidigast tre månader efter godkänt
+# beslutsdatum (ur anteckning) — den praktiska konsekvensen kassören
+# behöver veta.
+#
+# FÖRBJUDET (K2, strukturellt garanterat, se README §K2):
+#   - Beloppstak (belopp: null).
+#   - Påstående om handläggningstid utöver de 90 dagar/tre månader som
+#     står i forutsattningar.ledtid_text.
+#   - Krav på medlemsantal, verksamhetsplan eller budget.
+forvantadDeadlineTyp: "lopande" # får ALDRIG hitta på ett datum
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Inget av de tre kraven (styrelse+stadgar; riksorganisation,
+    # konditionerat "när sådan finns"; org.nr+bankkonto) är säte- eller
+    # verksamhetstyp-text — ingen av fyllKravs två regler kan någonsin
+    # träffa dem. Alltid lucka, oavsett profil.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Detta ÄR registreringsbidraget — det finns strukturellt ingen
+      Foreningsprofil-data som kan bekräfta vald styrelse, antagna
+      stadgar, riksorganisationstillhörighet eller organisationsnummer.
+      Alla tre krav ska vara luckor, aldrig gissade.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1 — storlek/alder påverkar inget av dessa tre krav.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      Detta är utkastet generatorn ska producera FÖRST, före något
+      bidragsutkast, för en oregistrerad förening. Om generatorn i
+      stället levererat ett annat bidrags bidragsutkast till en
+      oregistrerad förening (sokt=nej) hade fallet varit underkänt —
+      men gaten (registreringForst) är universell per bidrag, inte
+      bidragsspecifik, så testet gäller lika mycket här som för
+      arrangemangsbidraget i facit 1.

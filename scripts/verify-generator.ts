@@ -71,6 +71,10 @@ interface GoldenSetFacit {
   bidragId: string;
   kommunSlug: string;
   kalla_url?: string;
+  // Extra kontroll utöver K1-K4 (inte i SPEC_GOLDEN_SET.md, men direkt
+  // uttryckt i alla fem facit från Fable: "får ALDRIG hitta på ett
+  // datum"/"får ALDRIG bli löpande"). Valfri — utelämnas failar inget.
+  forvantadDeadlineTyp?: 'fast' | 'lopande';
   profiler: Partial<Record<ProfilNyckel, ProfilFacit>>;
 }
 
@@ -80,6 +84,9 @@ interface GoldenSetFacit {
 // mallar; något annat är ett tecken på att fri text smugit sig in.
 const KANDA_INNEHALL_MALLAR = [/^Föreningen har sitt säte i .+\.$/, /^Föreningens verksamhet: .+\.$/];
 const LUCKA_TEXT = '[Fyll i: uppgift som styrker att kravet är uppfyllt]';
+// Samma fasta sträng som deadlineText() (utkastGenerator.ts) returnerar
+// för typ 'lopande' — inget annat värde betyder någonsin "löpande".
+const LOPANDE_TEXT = 'Söks löpande, inget fast datum.';
 
 // K4 — skannar ENDAST generatorns egna strängar (ansvarsrad,
 // kravRader[].innehall) — ALDRIG kravText, eftersom det är kommunens
@@ -147,6 +154,16 @@ for (const fil of filer) {
     });
 
     if (resultat.typ !== 'bidragsutkast') continue;
+
+    if (facit.forvantadDeadlineTyp) {
+      test(`${label} — deadline (extra, ej K1-K4: ${facit.forvantadDeadlineTyp} förväntad)`, () => {
+        if (facit.forvantadDeadlineTyp === 'lopande') {
+          assert.equal(resultat.deadlineText, LOPANDE_TEXT, 'facit förväntar löpande men generatorn angav ett datum');
+        } else {
+          assert.notEqual(resultat.deadlineText, LOPANDE_TEXT, 'facit förväntar ett fast datum men generatorn sa "löpande"');
+        }
+      });
+    }
 
     test(`${label} — K1 (täckning: varje krav bemött, ordagrant, rätt ordning)`, () => {
       assert.equal(resultat.kravRader.length, bidrag.krav.length, 'antal kravRader matchar inte bidragets krav[]');

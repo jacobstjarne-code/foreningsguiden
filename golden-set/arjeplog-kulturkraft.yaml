@@ -1,0 +1,54 @@
+# FACIT 3 av 5 — Opus/Fable 2026-07-27, data/kommuner/arjeplog.yaml.
+# "Det farligaste fallet": tunn data, maximal frestelse att fylla ut.
+# Testar K2 i renodlad form.
+#
+# kravFacit körd och bekräftad mot verklig kod, 2026-07-27.
+bidragId: "arjeplog-kulturkraft"
+kommunSlug: "arjeplog"
+kalla_url: "https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/"
+
+# MÅSTE NÄMNAS (ur sen_ansokan, dokumenterat — inte maskinellt
+# kontrollerat idag): beslut fattas löpande under året, och sena
+# ansökningar kan avslås eftersom årets medel kan vara använda. Verklig,
+# för kassören avgörande upplysning.
+#
+# FÖRBJUDET (K2 — detta fall fälls här om någonstans):
+#   - Varje ytterligare krav. Bidraget har ETT krav (krav[] längd 1) —
+#     K1:s längd-check (kravRader.length === bidrag.krav.length) fångar
+#     redan mekaniskt om generatorn strukturerar mot fler.
+#   - Krav på registrering/godkännande som bidragsberättigad —
+#     forutsattningar: [] för Arjeplog, inget sådant förkrav publicerat.
+#   - Beloppstak (belopp: null).
+#   - Medlemsantal, åldersgränser, säteskrav, öppenhet för allmänheten.
+#   - Ansökningsdatum — löpande, inget datum finns.
+forvantadDeadlineTyp: "lopande"
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Kravtexten nämner "kulturell och kreativ aktivitet" men inte ordet
+    # "kultur" i en form VERKSAMHET_ORD.kultur matchar mot en profil med
+    # verksamhet=['idrott'] (P1/P2/P3 sätter alla idrott, inte kultur) —
+    # och även om den gjorde det skulle bidragets foreningstyp behöva
+    # inkludera 'kultur' också (regel B kräver båda). Detta bidrags
+    # foreningstyp är osatt. Lucka, oavsett.
+    kravFacit:
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Ett krav, en lucka. Ingen Foreningsprofil-data kan bekräfta HUR
+      verksamheten främjar kulturell/kreativ aktivitet enligt kommunens
+      vision — det är en beskrivande fråga, inte en ja/nej-flagga.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt, trots att
+      Arjeplog inte har NÅGRA forutsattningar publicerade för denna
+      kommun (forutsattningar: []) — gaten är profilstyrd
+      (visaBorjaHar), inte kommundata-styrd. Registrera-sidan för
+      Arjeplog kommer i sin tur visa "inget särskilt förkrav funnet".

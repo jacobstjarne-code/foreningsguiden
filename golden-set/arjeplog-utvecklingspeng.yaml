@@ -1,0 +1,40 @@
+# FACIT 4 av 5 — Opus/Fable 2026-07-27, data/kommuner/arjeplog.yaml.
+# Testar K1 på två krav, K2 mot tunn data.
+#
+# kravFacit körd och bekräftad mot verklig kod, 2026-07-27.
+bidragId: "arjeplog-utvecklingspeng"
+kommunSlug: "arjeplog"
+kalla_url: "https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/"
+
+# FÖRBJUDET (K2):
+#   - Beloppstak (belopp: null).
+#   - Registreringskrav (forutsattningar: []).
+#   - Fler än två krav.
+#   - Krav på att initiativet är kulturellt — detta är ett
+#     landsbygdsbidrag (kategori: ["ovrig"]), inte ett kulturbidrag.
+forvantadDeadlineTyp: "lopande"
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Ingen av de två kravtexterna nämner säte eller en VERKSAMHET_ORD-
+    # etikett på ett sätt regel A/B kan fånga. Alltid lucka.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 1 (byns attraktivitet/gemenskap) och krav 2 (samarbete
+      invånare/föreningar/näringsliv) är båda beskrivande — ingen
+      Foreningsprofil-data kan bekräfta dem. Två krav, två luckor.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt, trots
+      forutsattningar: [] för Arjeplog — samma resonemang som facit 3.

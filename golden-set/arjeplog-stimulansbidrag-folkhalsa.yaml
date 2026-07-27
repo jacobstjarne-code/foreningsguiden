@@ -1,0 +1,50 @@
+# FACIT 5 av 5 — Opus/Fable 2026-07-27, data/kommuner/arjeplog.yaml.
+# Testar K1, K2, och att "prioriteras" inte förvandlas till "krävs".
+#
+# kravFacit körd och bekräftad mot verklig kod, 2026-07-27.
+bidragId: "arjeplog-stimulansbidrag-folkhalsa"
+kommunSlug: "arjeplog"
+kalla_url: "https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/"
+
+# FÖRBJUDET (K2):
+#   - Beloppstak (belopp: null).
+#   - Registreringskrav (forutsattningar: []).
+#   - Att göra "prioriteras" (krav 2) till ett obligatoriskt "krävs".
+#     Generatorns fasta mallar (fyllKrav) kan bara producera "ifyllt"
+#     eller den fasta luckplatshållaren — den kan inte skärpa ett villkor
+#     till något starkare än vad kravtexten säger, så detta är redan
+#     strukturellt uteslutet (K2), men flaggat här eftersom det är den
+#     mest sannolika prosa-glidningen om generatorn någonsin byter till
+#     fri text.
+#   - Krav på målgrupp, medlemsantal eller ålder.
+forvantadDeadlineTyp: "lopande"
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    # Krav 1 nämner tre EXEMPEL (föreläsningar/fysisk aktivitet/
+    # missbruksförebyggande) men ingen VERKSAMHET_ORD-etikett en profil
+    # kan bekräfta. Krav 2 är en prioritetsklausul, inget ja/nej-villkor
+    # fyllKrav har en regel för. Båda alltid lucka.
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 1: exemplen är exempel, inte en uttömmande lista — ingen
+      Foreningsprofil-data avgör om AKTIVITETEN (inte föreningens
+      allmänna verksamhet) är hälsofrämjande. Krav 2: "prioriteras" är
+      en mjuk koppling till kommunens utvecklingsstrategi, inte ett
+      krav som kan vara "uppfyllt" eller inte — lucka är den enda
+      ärliga statusen tills en människa skriver in kopplingen.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt, trots
+      forutsattningar: [] för Arjeplog — samma resonemang som facit 3-4.
