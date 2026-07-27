@@ -7,7 +7,7 @@
  */
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
-import { sumBeloppTak, formatDate } from '../src/lib/kommunTyper.ts';
+import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik } from '../src/lib/kommunTyper.ts';
 import { arOverGolv, formateraBevakarText } from '../src/lib/bevakningKlient.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
@@ -256,6 +256,25 @@ test('formateraBevakarText: antal===1 väljer singular-mallen (rättar "1 fören
 test('formateraBevakarText: antal>1 väljer plural-mallen', () => {
   const text = formateraBevakarText(3, '18 juli 2026', '{antal} föreningar bevakar sina deadlines · sedan {datum}', '1 förening bevakar sina deadlines · sedan {datum}');
   assert.equal(text, '3 föreningar bevakar sina deadlines · sedan 18 juli 2026');
+});
+
+test('SPEC_DEADLINEKALENDER: manadNyckel/nastaManadNyckel/formatManadRubrik — grundfall', () => {
+  assert.equal(manadNyckel('2026-09-15'), '2026-09');
+  assert.equal(nastaManadNyckel('2026-09'), '2026-10');
+  assert.equal(formatManadRubrik('2026-09'), 'September 2026');
+});
+
+test('SPEC_DEADLINEKALENDER: nastaManadNyckel rullar över årsskiftet (december → januari nästa år)', () => {
+  assert.equal(nastaManadNyckel('2026-12'), '2027-01');
+  assert.equal(formatManadRubrik('2027-01'), 'Januari 2027');
+});
+
+test('SPEC_DEADLINEKALENDER: parseBeloppTak — kalenderraden visar bara otvetydiga tak, aldrig en taxa (Sundbyberg-klassen)', () => {
+  assert.equal(parseBeloppTak('40 000 kr'), 40000);
+  assert.equal(parseBeloppTak('Max 40 000 kr'), 40000);
+  assert.equal(parseBeloppTak('1 000 kr/aktivitetstimme'), null);
+  assert.equal(parseBeloppTak('Upp till 30 % av redovisad kostnad'), null);
+  assert.equal(parseBeloppTak(null), null);
 });
 
 console.log(`\n${antal} tester klara`);

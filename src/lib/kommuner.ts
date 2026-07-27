@@ -314,6 +314,7 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
         bidragId: bidrag.id,
         bidragNamn: bidrag.namn,
         kategori: bidrag.kategori,
+        belopp: bidrag.belopp,
       };
       if (bidrag.deadlines.typ === 'lopande') {
         entries.push({ ...base, isLopande: true, dateISO: null });

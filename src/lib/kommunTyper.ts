@@ -139,6 +139,28 @@ export function formatRecurringDate(mmdd: string): string {
   return `${d} ${MANADSNAMN[m - 1]}`;
 }
 
+// Kalenderns månadsgruppering (SPEC_DEADLINEKALENDER.md, 2026-07-27) —
+// "YYYY-MM" som gruppnyckel, ren sträng/heltalsaritmetik precis som
+// nextOccurrenceISO ovan, inga Date-objekt.
+
+/** "YYYY-MM" ur ett ISO-datum (YYYY-MM-DD) — kalenderns gruppnyckel. */
+export function manadNyckel(iso: string): string {
+  return iso.slice(0, 7);
+}
+
+/** Nästa månads "YYYY-MM"-nyckel, med årsrullning vid december. */
+export function nastaManadNyckel(manad: string): string {
+  const [y, m] = manad.split('-').map(Number);
+  return m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, '0')}`;
+}
+
+/** Svensk rubrikklartext för en "YYYY-MM"-nyckel, versal månad: "September 2026". */
+export function formatManadRubrik(manad: string): string {
+  const [y, m] = manad.split('-').map(Number);
+  const namn = MANADSNAMN[m - 1];
+  return `${namn.charAt(0).toUpperCase()}${namn.slice(1)} ${y}`;
+}
+
 const VECKODAGAR = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
 
 /** Veckodag för ett ISO-datum, gemener: "onsdag". UTC — samma dygnsgräns som daysUntil. */
@@ -295,6 +317,7 @@ export interface DeadlineEntry {
   kategori: Kategori[];
   isLopande: boolean;
   dateISO: string | null; // null för löpande — kan inte placeras kronologiskt
+  belopp: string | null; // rå fritext ur Bidrag.belopp — kalendern kör den genom parseBeloppTak() själv
 }
 
 export const KATEGORI_LABELS: Record<Kategori, string> = {

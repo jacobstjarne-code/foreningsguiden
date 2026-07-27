@@ -6,13 +6,29 @@
 // prerender=false — sidan behöver läsa ?bevakning=klar vid request-tid för
 // att växla EmailSignup till kvitto-läge (en statiskt byggd sida kan aldrig
 // se en query-sträng som bara finns i den faktiska förfrågan).
+//
+// Månadsgruppering + Läge-kolumnen bort + primär kategori + belopp
+// (SPEC_DEADLINEKALENDER.md, Design N2/N3:3 27 juli): hundratals rader i en
+// platt tabell var oläsbart, och "God tid" upprepad rad efter rad bar noll
+// information. Disclosure via NATIVA <details>/<summary> — samma mönster
+// som KommunValjare.astro:s länslista på förstasidan — barnen ligger kvar
+// i DOM oavsett öppet/stängt (kollapsat = CSS-dolt, aldrig borttaget), så
+// crawlers och webbläsarens sidsökning hittar raderna ändå. En <details>
+// per månad, EN <table> per <details> (ett <table> kan inte innehålla en
+// <details> runt sina rader — ogiltig HTML — därav tabell-per-månad i
+// stället för en enda tabell med dolda tbody-grupper).
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
 import EmailSignup from '../../components/EmailSignup.astro';
 import UrgencyChip from '../../components/UrgencyChip.astro';
-import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS, KATEGORIER } from '../../lib/kommuner';
+import {
+  loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO,
+  manadNyckel, nastaManadNyckel, formatManadRubrik, parseBeloppTak,
+  KATEGORI_LABELS, KATEGORIER,
+} from '../../lib/kommuner';
+import type { DeadlineEntry } from '../../lib/kommuner';
 import { KALENDER, BEVAKNING } from '../../lib/content';
 
 const bevakningStatus = Astro.url.searchParams.get('bevakning');
@@ -25,6 +41,29 @@ const today = todayISO();
 const entries = getDeadlineEntries(today);
 const lopande = entries.filter((e) => e.isLopande);
 const kommande = entries.filter((e) => !e.isLopande);
+
+// entries är redan globalt sorterade (getDeadlineEntries) — att gruppera
+// via en Map bevarar kronologisk ordning automatiskt, ingen extra sort.
+const manadGrupper = new Map<string, DeadlineEntry[]>();
+for (const e of kommande) {
+  const key = manadNyckel(e.dateISO!);
+  const lista = manadGrupper.get(key) ?? [];
+  lista.push(e);
+  manadGrupper.set(key, lista);
+}
+const innevarandeManad = manadNyckel(today);
+const nastaManad = nastaManadNyckel(innevarandeManad);
+
+function kategoriCell(e: DeadlineEntry) {
+  const forsta = KATEGORI_LABELS[e.kategori[0]];
+  const fler = e.kategori.length - 1;
+  return fler > 0 ? `${forsta} +${fler}` : forsta;
+}
+
+function beloppCell(e: DeadlineEntry): string {
+  const tak = parseBeloppTak(e.belopp);
+  return tak !== null ? `Upp till ${tak.toLocaleString('sv-SE')} kr` : '';
+}
 ---
 <Base title={KALENDER.metaTitle} description={KALENDER.metaDescription}>
   <BreadcrumbList items={[
@@ -52,25 +91,42 @@ const kommande = entries.filter((e) => !e.isLopande);
     </label>
   </div>
 
-  <table class="deadline-table" id="deadline-table">
-    <thead>
-      <tr><th>Läge</th><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th></th></tr>
-    </thead>
-    <tbody>
-      {kommande.map((e) => (
-        <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
-          <td><UrgencyChip urgency={getUrgency(daysUntil(e.dateISO!, today))} /></td>
-          <td>{formatDate(e.dateISO!)}</td>
-          <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
-          <td>{e.kommun}</td>
-          <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
-          <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
-            <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+  <div id="deadline-table-container">
+    {[...manadGrupper.entries()].map(([manad, radLista]) => (
+      <details class="deadline-manad" data-deadline-manad data-manad-nyckel={manad} open={manad === innevarandeManad || manad === nastaManad}>
+        <summary class="deadline-manad__summary">
+          <svg class="deadline-manad__chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+          <span class="deadline-manad__namn">{formatManadRubrik(manad)}</span>
+          <span class="deadline-manad__antal">{radLista.length} {radLista.length === 1 ? 'deadline' : 'deadlines'}</span>
+        </summary>
+        <table class="deadline-table">
+          <thead>
+            <tr><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th>Belopp</th><th></th></tr>
+          </thead>
+          <tbody>
+            {radLista.map((e) => {
+              const urgency = getUrgency(daysUntil(e.dateISO!, today));
+              return (
+                <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
+                  <td class="deadline-table__datum">
+                    {urgency !== 'positive' && <UrgencyChip urgency={urgency} />}
+                    {formatDate(e.dateISO!)}
+                  </td>
+                  <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+                  <td>{e.kommun}</td>
+                  <td>{kategoriCell(e)}</td>
+                  <td>{beloppCell(e)}</td>
+                  <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
+                    <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </details>
+    ))}
+  </div>
 
   {lopande.length > 0 && (
     <>
@@ -78,14 +134,15 @@ const kommande = entries.filter((e) => !e.isLopande);
       <p>{KALENDER.lopandeText}</p>
       <table class="deadline-table" id="deadline-table-lopande">
         <thead>
-          <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th></th></tr>
+          <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th>Belopp</th><th></th></tr>
         </thead>
         <tbody>
           {lopande.map((e) => (
             <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
               <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
               <td>{e.kommun}</td>
-              <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
+              <td>{kategoriCell(e)}</td>
+              <td>{beloppCell(e)}</td>
               <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
                 <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
               </td>
@@ -123,7 +180,8 @@ const kommande = entries.filter((e) => !e.isLopande);
   const kommunSelect = document.getElementById('filter-kommun');
   const kategoriSelect = document.getElementById('filter-kategori');
   const emptyMsg = document.getElementById('deadline-empty');
-  const rows = document.querySelectorAll('#deadline-table tbody tr, #deadline-table-lopande tbody tr');
+  const rows = document.querySelectorAll<HTMLElement>('#deadline-table-container tbody tr, #deadline-table-lopande tbody tr');
+  const manadSektioner = document.querySelectorAll<HTMLDetailsElement>('[data-deadline-manad]');
 
   function applyFilter() {
     if (!(kommunSelect instanceof HTMLSelectElement) || !(kategoriSelect instanceof HTMLSelectElement)) return;
@@ -132,13 +190,23 @@ const kommande = entries.filter((e) => !e.isLopande);
     let visibleCount = 0;
 
     rows.forEach((row) => {
-      if (!(row instanceof HTMLElement)) return;
       const matchKommun = kommun === 'alla' || row.dataset.kommun === kommun;
       const matchKategori = kategori === 'alla' || (row.dataset.kategori ?? '').split(' ').includes(kategori);
       const visible = matchKommun && matchKategori;
       row.hidden = !visible;
       if (visible) visibleCount++;
     });
+
+    // Fäller ut en månad som fått en träff, så filtrerade rader inte
+    // gömmer sig bakom en stängd disclosure. Fäller ALDRIG ihop
+    // programmatiskt — samma regel som KommunValjare.astro:s länslista.
+    const bade = kommun !== 'alla' || kategori !== 'alla';
+    if (bade) {
+      manadSektioner.forEach((sektion) => {
+        const harTraff = [...sektion.querySelectorAll<HTMLElement>('tbody tr')].some((row) => !row.hidden);
+        if (harTraff) sektion.open = true;
+      });
+    }
 
     if (emptyMsg instanceof HTMLElement) emptyMsg.hidden = visibleCount > 0;
   }
@@ -152,7 +220,10 @@ const kommande = entries.filter((e) => !e.isLopande);
   // Samma backend (addPendingSubscriber, dubbel opt-in) och samma
   // BEVAKNING-copy som helsidesformuläret — bara ett kompakt, fetch-
   // baserat gränssnitt i cellen i stället för en sidladdning, samma
-  // mönster som GiltighetsKontroll.astro redan etablerat.
+  // mönster som GiltighetsKontroll.astro redan etablerat. Fungerar
+  // oförändrat i en månad som just öppnats — <details> tar aldrig bort
+  // sina barn ur DOM, så querySelectorAll nedan hittar ALLA celler vid
+  // sidladdning oavsett kollapsat/öppet läge.
   function byggBevakaForm(kommunNamn: string): HTMLFormElement {
     const form = document.createElement('form');
     form.className = 'bevaka-rad-form';
@@ -204,6 +275,59 @@ const kommande = entries.filter((e) => !e.isLopande);
 </script>
 
 <style>
+  .deadline-manad {
+    margin-bottom: var(--fg-space-3);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    overflow: hidden;
+  }
+
+  .deadline-manad__summary {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    cursor: pointer;
+    list-style: none;
+    background: var(--fg-surface);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .deadline-manad__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .deadline-manad__chevron {
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+
+  .deadline-manad[open] .deadline-manad__chevron {
+    transform: rotate(90deg);
+  }
+
+  .deadline-manad__namn {
+    flex: 1;
+  }
+
+  .deadline-manad__antal {
+    font-weight: normal;
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .deadline-manad .deadline-table {
+    margin: 0;
+  }
+
+  .deadline-table__datum {
+    white-space: nowrap;
+  }
+
+  .deadline-table__datum .fg-chip {
+    margin-right: var(--fg-space-2);
+  }
+
   .deadline-table__bevaka {
     min-width: 14ch;
   }
