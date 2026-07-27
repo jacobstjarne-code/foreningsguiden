@@ -17,6 +17,7 @@ import {
   KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, todayISO, nextOccurrenceISO,
 } from './kommunTyper';
 import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper';
+import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan';
 
 export * from './kommunTyper';
 
@@ -170,7 +171,7 @@ function validateForutsattning(raw: any, kommunSlug: string, index: number, prob
   return raw as Forutsattning;
 }
 
-function validateKommun(raw: any, file: string): Kommun {
+function validateKommun(raw: any, file: string, stem: string): Kommun {
   const problems: string[] = [];
 
   if (!isNonEmptyString(raw?.kommun)) problems.push('kommun saknas eller är tom');
@@ -178,7 +179,28 @@ function validateKommun(raw: any, file: string): Kommun {
   if (isNonEmptyString(raw?.kommun_slug) && !/^[a-z0-9-]+$/.test(raw.kommun_slug)) {
     problems.push(`kommun_slug "${raw.kommun_slug}" innehåller otillåtna tecken (endast a-z, 0-9, -)`);
   }
+  // Valideringsspärr mot slugfel (Jacob, 2026-07-27): filnamnets stam MÅSTE
+  // vara identisk med kommun_slug — annars fel, inte varning. Fångar
+  // t.ex. en fil döpt "norrkoeping.yaml" med kommun_slug: "norrkoeping"
+  // (internt konsekvent, men fel — se GILTIGA_KOMMUNSLUGS-kollen nedan).
+  if (isNonEmptyString(raw?.kommun_slug) && raw.kommun_slug !== stem) {
+    problems.push(`filnamnets stam "${stem}" matchar inte kommun_slug "${raw.kommun_slug}"`);
+  }
+  // kommun_slug måste finnas i facit över Sveriges 290 kommuner
+  // (kommunlan.ts, genererat en gång från SCB) — en okänd slug är ett fel
+  // per definition, det finns inga andra kommuner. Fångar norrkoeping/
+  // vestervik/harryrda/falkopping-klassen av fel automatiskt i stället för
+  // att de upptäcks när något bryter (se HANDOVER 2026-07-27).
+  if (isNonEmptyString(raw?.kommun_slug) && !GILTIGA_KOMMUNSLUGS.has(raw.kommun_slug)) {
+    problems.push(`kommun_slug "${raw.kommun_slug}" finns inte bland Sveriges 290 kommuner (kommunlan.ts)`);
+  }
   if (!isNonEmptyString(raw?.lan)) problems.push('lan saknas eller är tom');
+  if (isNonEmptyString(raw?.kommun_slug) && isNonEmptyString(raw?.lan) && GILTIGA_KOMMUNSLUGS.has(raw.kommun_slug)) {
+    const rattLan = lanForKommunSlug(raw.kommun_slug);
+    if (rattLan !== undefined && raw.lan !== rattLan) {
+      problems.push(`lan "${raw.lan}" stämmer inte — ${raw.kommun_slug} ligger i "${rattLan}" (kommunlan.ts)`);
+    }
+  }
   if (typeof raw?.befolkning !== 'number' || raw.befolkning <= 0) {
     problems.push('befolkning måste vara ett positivt tal');
   }
@@ -256,7 +278,8 @@ export function loadKommuner(): Kommun[] {
     } catch (e) {
       throw new SchemaError(file, [`ogiltig YAML-syntax: ${(e as Error).message}`]);
     }
-    kommuner.push(validateKommun(raw, file));
+    const stem = file.replace(/\.ya?ml$/, '');
+    kommuner.push(validateKommun(raw, file, stem));
   }
 
   kommuner.sort((a, b) => a.kommun.localeCompare(b.kommun, 'sv'));
