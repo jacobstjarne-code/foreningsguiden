@@ -65,6 +65,17 @@ function verksamhetListOrNull(raw: any, field: string, where: string, problems: 
     problems.push(`${where}.${field} måste vara en lista eller null`);
     return null;
   }
+  // Tomhetskontroll (steg 5-sveppet, 2026-07): en tom lista är INTE
+  // ekvivalent med null här — matchning.ts:matchBidrag läser
+  // `foreningstyp !== null` för att avgöra om kravet ska prövas alls, och
+  // `[].some(...)` är alltid false. En tom array skulle alltså tyst
+  // exkludera bidraget ur ALLA matchningar (motsatsen till null, som
+  // matchar ALLTID) — utan byggfel, utan varning. E1 Nollregeln säger
+  // null = "inte undersökt/inte angivet", aldrig en tom lista.
+  if (v.length === 0) {
+    problems.push(`${where}.${field} är en tom lista — skriv null om fältet inte är känt/angivet i källan (en tom lista matchar ALDRIG i motorn, se matching.ts matchBidrag)`);
+    return v;
+  }
   for (const item of v) {
     if (!VERKSAMHETER.includes(item)) {
       problems.push(`${where}.${field} innehåller okänt värde "${item}" (tillåtna: ${VERKSAMHETER.join(', ')})`);
