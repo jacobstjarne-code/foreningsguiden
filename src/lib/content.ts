@@ -30,11 +30,18 @@ export const SITE_NAMN = 'Föreningsguiden';
  */
 export const AVSANDARE = 'Redaktionen Föreningsguiden';
 
-/** Startsidan. H1 bär funktion (sök); underraden bär nytta (människa). */
+/**
+ * Startsidan. metaTitle/metaDescription omgjorda 2026-07-27 (Jacob):
+ * ska matcha den synliga H1 (DESCRIPTOR, tjänsteform), inte motsäga den
+ * med den gamla katalogramen. Återanvänder ordagrant DESCRIPTOR och
+ * TRATT.start.ingress — samma text sökträffen och sidan visar, ingen ny
+ * copy. h1/hero (sökfunktionsformen) ligger kvar oanvänd av startsidan
+ * sen tratt-först-ombygget, kan behövas för framtida bruk.
+ */
 export const START = {
-  metaTitle: 'Kommunala föreningsbidrag, samlade — Föreningsguiden',
+  metaTitle: 'Vet vad din förening kan söka — Föreningsguiden',
   metaDescription:
-    'Föreningsguiden samlar kommunernas föreningsbidrag, regler och sista ansökningsdatum på ett ställe. Se vad din förening kan söka och sök i tid.',
+    'Svara på fyra korta frågor, så visar vi vilka bidrag i er kommun som passar er förening — och vad som krävs för dem ni inte når än.',
   h1: 'Kommunala föreningsbidrag, samlade på ett ställe',
   hero:
     'Varje kommun har egna bidrag, egna blanketter och egna sista datum. Föreningsguiden samlar dem kommun för kommun, så att din förening ser vad den kan söka och hinner söka i tid.',
@@ -313,7 +320,7 @@ export const MEJL = {
       'Hej,',
       'Nu bevakar vi {kommunLista} åt er. Så här fungerar det: vi mejlar två veckor före sista ansökningsdag för bidragen i era kommuner, och en gång till tre dagar före. Inget annat — inga nyhetsbrev, ingen reklam.',
       'Ett tips redan nu: kontrollera att föreningen är godkänd som bidragsberättigad i er kommun. I flera kommuner förfaller godkännandet tyst efter en tid, och utan det spelar deadlines ingen roll. Ni ser vad som gäller er kommun här: {kommunLank}',
-      'Föreningsguiden är gratis under betan.',
+      'Att bevaka bidrag hos Föreningsguiden är gratis.',
     ],
   },
 
@@ -354,12 +361,12 @@ export const MEJL = {
  */
 export const BETA = {
   badge: 'Beta',
-  rad: 'Föreningsguiden är i öppen beta. Allt är gratis medan vi bygger.',
+  rad: 'Föreningsguiden är i öppen beta. Att hitta och bevaka bidrag är gratis.',
   omRubrik: 'Om betan',
   omStycken: [
-    'Föreningsguiden är i öppen beta. Det betyder att allt du ser är gratis att använda, att vi bygger vidare i högt tempo, och att enstaka saker kan vara ofärdiga eller ändras.',
-    'Det som fungerar i dag: bidragsguider för 20 kommuner med verifierade uppgifter och källänkar, deadlinekalendern, och e-postbevakning som påminner innan sista ansökningsdag.',
-    'Det som kommer: en tjänst som skriver utkast till er ansökan utifrån kommunens egna krav. Den öppnar senare i betan — du kan ställa dig på väntelistan redan nu.',
+    'Föreningsguiden är i öppen beta. Att hitta bidrag, se vilka som passar er förening och bevaka deadlines är gratis. Vi bygger vidare i högt tempo, och enstaka saker kan vara ofärdiga eller ändras.',
+    'Det som fungerar i dag, utan att kosta något: bidragsguider för {antalKommuner} kommuner med verifierade uppgifter och källänkar, deadlinekalendern, matchningen som visar vad just er förening kan söka, och e-postbevakning som påminner innan sista ansökningsdag.',
+    'Det som kostar: vi gör i ordning er registreringsansökan — det steg som fäller flest föreningar — för 249 kronor. Och det som kommer: en tjänst som skriver utkast till själva bidragsansökan utifrån kommunens egna krav. Den öppnar senare i betan, och ni kan reservera plats redan nu.',
     'Hittar du fel, eller saknar du din kommun? Hör av dig till redaktionen. Betan blir bättre av varje påpekande.',
   ],
 };
