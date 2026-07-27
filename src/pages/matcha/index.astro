@@ -1,13 +1,24 @@
 ---
-// Matchningstratten (turn-11) — "Vad kan er förening söka?" Fem frågor med
-// en levande räknare, besked i tre grupper (aldrig ett enda tal). Route
-// kommun-agnostisk (fråga 1 VÄLJER kommun, kan därför inte ligga under
-// /kommun/[slug]/) — mitt förslag, inte instruerat.
+// Matchningstratten (turn-11, ombyggd 2026-07-27 till stegflöde per turn-12a)
+// — "Vad kan er förening söka?" En fråga i fokus åt gången, sticky
+// stegbar (räknare + kvittens + progress), besked visas först i steg 6.
+// Route kommun-agnostisk (fråga 1 VÄLJER kommun, kan därför inte ligga
+// under /kommun/[slug]/) — mitt förslag, inte instruerat.
 //
-// Källa: incoming/Föreningsguiden kommersiell.html #turn-11 (INTE .dc.html
-// — den filen går bara till turn-6, saknar turn-11 helt). All copy ur
-// GUIDE_TRATT_COPY.ts, ingen text uppfunnen här. Matchningslogiken är
-// riktig (src/lib/matching.ts) — ingen fejk-räknare.
+// Källa: incoming/foreningsguiden-tratt-tryck-v3-livedata.html #turn-12
+// (12a). All copy ur GUIDE_TRATT_COPY.ts, ingen text uppfunnen här.
+// Matchningslogiken är riktig (src/lib/matching.ts) — ingen fejk-räknare,
+// och den rörs INTE av denna ombyggnad (se plan:
+// twinkling-wondering-emerson.md — "omgörning av ytan, inte av logiken").
+//
+// "Ändra svar"-knappen (TRATT.start.knappBorjaOm) går till steg 1 UTAN
+// att nollställa sparade svar — mockens restart() nollställer allt, men
+// sajten lovar "era svar sparas" (TRATT.besked.minne). Jacob 2026-07-27:
+// etiketten "Börja om" ljög om vad knappen gör; "Ändra svar" beskriver
+// exakt handlingen OCH löser Designs H6 (synlig väg att rätta ett svar).
+// En återvändande session med sparad kommun hoppar direkt till steg 6
+// (beskedet), samma som innan ombyggnaden; "Tillbaka" eller "Ändra svar"
+// tar en till valfri fråga för att justera.
 import Base from '../../layouts/Base.astro';
 import KommunValjare from '../../components/KommunValjare.astro';
 import RegistreringsHjalp from '../../components/RegistreringsHjalp.astro';
@@ -23,12 +34,19 @@ const kommuner = loadKommuner();
       <p class="tratt__ingress">{TRATT.start.ingress}</p>
     </header>
 
-    <p class="tratt__raknare" data-tratt-raknare aria-live="polite">{TRATT.raknare.tom}</p>
+    <div class="tratt__stegbar" data-tratt-stegbar>
+      <div class="tratt__stegbar-rad">
+        <p class="tratt__raknare" data-tratt-raknare aria-live="polite">{TRATT.raknare.tom}</p>
+        <span class="tratt__kvittens" data-tratt-kvittens hidden aria-hidden="true"></span>
+      </div>
+      <span class="tratt__stegbar-progress"><span class="tratt__stegbar-fyllning" data-tratt-progress></span></span>
+      <span class="tratt__stegbar-label" data-tratt-steg-label></span>
+    </div>
 
     <div class="tratt__layout">
       <div class="tratt__frageflode">
 
-        <div class="tratt__fraga">
+        <div class="tratt__fraga" data-tratt-steg="1">
           <h2>{TRATT.fraga_kommun.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_kommun.hjalp}</p>
           <div data-tratt-kommunvaljare>
@@ -40,7 +58,7 @@ const kommuner = loadKommuner();
           </div>
         </div>
 
-        <div class="tratt__fraga" data-tratt-fraga-container="verksamhet">
+        <div class="tratt__fraga" data-tratt-steg="2" data-tratt-fraga-container="verksamhet" hidden>
           <h2>{TRATT.fraga_verksamhet.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_verksamhet.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="verksamhet" role="group" aria-label={TRATT.fraga_verksamhet.fraga}>
@@ -48,9 +66,10 @@ const kommuner = loadKommuner();
               <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
             ))}
           </div>
+          <button type="button" class="tratt__vidare" data-tratt-vidare>Vidare →</button>
         </div>
 
-        <div class="tratt__fraga">
+        <div class="tratt__fraga" data-tratt-steg="3" hidden>
           <h2>{TRATT.fraga_storlek.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_storlek.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="storlek" role="group" aria-label={TRATT.fraga_storlek.fraga}>
@@ -60,7 +79,7 @@ const kommuner = loadKommuner();
           </div>
         </div>
 
-        <div class="tratt__fraga">
+        <div class="tratt__fraga" data-tratt-steg="4" hidden>
           <h2>{TRATT.fraga_tid.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_tid.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="alder" role="group" aria-label={TRATT.fraga_tid.fraga}>
@@ -70,7 +89,7 @@ const kommuner = loadKommuner();
           </div>
         </div>
 
-        <div class="tratt__fraga">
+        <div class="tratt__fraga" data-tratt-steg="5" hidden>
           <h2>{TRATT.fraga_sokt.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_sokt.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="sokt" role="group" aria-label={TRATT.fraga_sokt.fraga}>
@@ -78,6 +97,11 @@ const kommuner = loadKommuner();
               <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
             ))}
           </div>
+        </div>
+
+        <div class="tratt__nav" data-tratt-nav>
+          <button type="button" class="tratt__nav-tillbaka" data-tratt-tillbaka>← Tillbaka</button>
+          <button type="button" class="tratt__nav-omstart" data-tratt-omstart>{TRATT.start.knappBorjaOm}</button>
         </div>
 
       </div>
@@ -124,6 +148,13 @@ const kommuner = loadKommuner();
   const root = document.querySelector<HTMLElement>('[data-tratt]');
   if (root) {
     const raknareEl = root.querySelector<HTMLElement>('[data-tratt-raknare]');
+    const kvittensEl = root.querySelector<HTMLElement>('[data-tratt-kvittens]');
+    const progressEl = root.querySelector<HTMLElement>('[data-tratt-progress]');
+    const stegLabelEl = root.querySelector<HTMLElement>('[data-tratt-steg-label]');
+    const stegElement = root.querySelectorAll<HTMLElement>('[data-tratt-steg]');
+    const tillbakaKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-tillbaka]');
+    const omstartKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-omstart]');
+    const vidareKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-vidare]');
     const beskedEl = root.querySelector<HTMLElement>('[data-tratt-besked]');
     const matcharListaEl = root.querySelector<HTMLElement>('[data-tratt-matchar-lista]');
     const matcharTomEl = root.querySelector<HTMLElement>('[data-tratt-matchar-tom]');
@@ -135,12 +166,18 @@ const kommuner = loadKommuner();
     const kommunValdEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald]');
     const kommunValdNamnEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald-namn]');
     const kommunBytKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-kommun-byt]');
-    const fraga2El = root.querySelector<HTMLElement>('[data-tratt-fraga-container="verksamhet"]');
     const kostnadsramEl = root.querySelector<HTMLElement>('[data-tratt-kostnadsram]');
     const sumFotnotEl = root.querySelector<HTMLElement>('[data-tratt-sum-fotnot]');
 
     const today = todayISO();
     let kommunData: Kommun | null = null;
+
+    // Steget som är i fokus (1–5 = fråga N, 6 = klart/besked). En riktig
+    // återvändande session (sparad kommun) hoppar direkt till 6 — se
+    // motiveringen i filhuvudet.
+    let step = 1;
+    let advancing = false;
+    let kvittensTimer: ReturnType<typeof setTimeout> | undefined;
 
     const sparad = getForeningsprofil();
     const profil: Foreningsprofil = sparad ?? {
@@ -211,11 +248,6 @@ const kommuner = loadKommuner();
       if (!dateISO) {
         return `${bidrag.belopp ?? 'Belopp ej publikt'} · löpande ansökan`;
       }
-      // Verklig nedräkning — exakt dagar-tal mot det faktiska datumet,
-      // samma daysUntil/getUrgency som UrgencyChip använder överallt
-      // annars. fg-chip-klasserna är samma tokens UrgencyChip.astro
-      // renderar, men eftersom den är en Astro-komponent (kan inte
-      // instansieras i klientskript) byggs samma klass+etikett här.
       const dagar = daysUntil(dateISO, today);
       const urgency = getUrgency(dagar);
       const dagarText = dagar === 1 ? '1 dag kvar' : `${dagar} dagar kvar`;
@@ -226,10 +258,50 @@ const kommuner = loadKommuner();
       return kommunData ? `/kommun/${kommunData.kommun_slug}/#bidrag-${bidrag.id}` : '#';
     }
 
+    /** Matchande-antal just nu — 0 om ingen kommun är vald än (samma bas mocken räknar delta mot). */
+    function currentMatchCount(): number {
+      if (!kommunData) return 0;
+      return matchKommun(profil, kommunData).matchar.length;
+    }
+
+    /** Kvittensen ("+N bidrag") — synlig kort efter varje svar, mekanisk
+     * formatering (tecken + antal + ordet "bidrag"), ingen ny prosa. */
+    function visaKvittens(delta: number) {
+      if (!kvittensEl) return;
+      window.clearTimeout(kvittensTimer);
+      if (delta === 0) {
+        kvittensEl.hidden = true;
+        return;
+      }
+      kvittensEl.textContent = `${delta > 0 ? '+' : ''}${delta} bidrag`;
+      kvittensEl.hidden = false;
+      kvittensTimer = setTimeout(() => {
+        if (kvittensEl) kvittensEl.hidden = true;
+      }, 2500);
+    }
+
+    /** Visar exakt ETT tratt__fraga-steg och besked-panelen bara i steg 6
+     * — döljs via `hidden` (aldrig tas bort ur DOM, samma regel som
+     * KommunValjares sökfilter använder). */
+    function updateStegUI() {
+      stegElement.forEach((el) => {
+        el.hidden = Number(el.dataset.trattSteg) !== step;
+      });
+      if (beskedEl) beskedEl.hidden = step !== 6 || !kommunData;
+      if (tillbakaKnapp) tillbakaKnapp.hidden = step <= 1;
+      if (stegLabelEl) stegLabelEl.textContent = step >= 6 ? 'Klart' : `Fråga ${step} av 5`;
+      if (progressEl) progressEl.style.width = `${(Math.min(step - 1, 5) / 5) * 100}%`;
+    }
+
+    function goStep(n: number) {
+      step = Math.max(1, Math.min(6, n));
+      updateStegUI();
+    }
+
     function render() {
       if (!kommunData) {
         if (raknareEl) raknareEl.textContent = TRATT.raknare.tom;
-        if (beskedEl) beskedEl.hidden = true;
+        updateStegUI();
         return;
       }
 
@@ -239,8 +311,6 @@ const kommuner = loadKommuner();
       if (raknareEl) {
         raknareEl.textContent = antal === 0 ? TRATT.raknare.noll : antal === 1 ? TRATT.raknare.en : TRATT.raknare.trafffar.replace('{antal}', String(antal));
       }
-
-      if (beskedEl) beskedEl.hidden = false;
 
       // harMatchningsdata (matching.ts): sant först när researchpasset
       // fyllt i minst ett matchningsfält för kommunen. Före dess är ALLA
@@ -253,7 +323,6 @@ const kommuner = loadKommuner();
 
       if (kostnadsramEl) {
         if (dataFinns) {
-          // Skarp kostnadsram — summerar bara MATCHADE bidrags parsade tak.
           const sum = sumBeloppTak(resultat.matchar);
           if (sum.capped > 0) {
             const mall = sum.capped === 1 ? TRATT.besked.kostnadsramEnkel : TRATT.besked.kostnadsram;
@@ -265,8 +334,6 @@ const kommuner = loadKommuner();
             if (sumFotnotEl) sumFotnotEl.hidden = true;
           }
         } else {
-          // Ofiltrerad kostnadsram — summerar ALLA kommunens bidrag, inte
-          // bara matchade (det finns inget "matchat" än), och säger det.
           const sum = sumBeloppTak(kommunData.bidrag);
           if (sum.capped > 0) {
             kostnadsramEl.textContent = TRATT.besked.kostnadsramOgfiltrerad
@@ -292,11 +359,6 @@ const kommuner = loadKommuner();
       }
       if (matcharTomEl) matcharTomEl.hidden = resultat.matchar.length > 0;
 
-      // dataFinns-gaten är matematiskt redundant idag (resultat.saknar är
-      // alltid tom när harMatchningsdata är false — matchBidrag kan inte
-      // producera ett skäl av två null-fält) men skrivs ut explicit: den
-      // dokumenterar VARFÖR gruppen är tom, i stället för att förlita sig
-      // på en implicit konsekvens av matchningsmotorns invariant.
       if (saknarGruppEl) saknarGruppEl.hidden = !dataFinns || resultat.saknar.length === 0;
       if (saknarListaEl) {
         saknarListaEl.innerHTML = '';
@@ -315,6 +377,8 @@ const kommuner = loadKommuner();
         const registreringLank = registreringWidget.querySelector<HTMLAnchorElement>('[data-registrering-lank]');
         if (registreringLank) registreringLank.href = `/kommun/${kommunData.kommun_slug}/registrera/`;
       }
+
+      updateStegUI();
     }
 
     function markeraAktivaPillar() {
@@ -347,7 +411,7 @@ const kommuner = loadKommuner();
       if (kommunValdEl) kommunValdEl.hidden = true;
     }
 
-    async function hamtaKommunData(slug: string, opts: { scrollaTillNasta?: boolean } = {}) {
+    async function hamtaKommunData(slug: string, opts: { beforeCount?: number; advance?: boolean } = {}) {
       try {
         const res = await fetch(`/kommun-data/${slug}.json`);
         if (!res.ok) throw new Error('kommun-data 404');
@@ -357,43 +421,41 @@ const kommuner = loadKommuner();
       }
       if (kommunData) {
         visaValdKommun(kommunData.kommun);
-        // Flödeskänsla (Jacob-fyndet): efter ett LIVE val — inte vid
-        // återställning från sparad profil vid sidladdning — flytta
-        // uppmärksamheten till nästa fråga i stället för att lämna
-        // användaren kvar där de klickade, långt ner i länslistan.
-        // Räknat manuellt (inte scrollIntoView + CSS scroll-margin): den
-        // sticky räknaren byter höjd med textlängden (radbryts på smala
-        // skärmar, upptäckt vid verifiering — "3 bidrag matchar" är kort
-        // men "Svara för att se vad ni matchar" bryter till två rader),
-        // så en fast scroll-margin täckte rubriken bakom räknaren i vissa
-        // tillstånd. Mäter räknarens FAKTISKA höjd vid scroll-tillfället.
-        if (opts.scrollaTillNasta && fraga2El) {
-          const raknareHojd = raknareEl?.getBoundingClientRect().height ?? 0;
-          const targetY = fraga2El.getBoundingClientRect().top + window.scrollY - raknareHojd - 12;
-          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-          fraga2El.querySelector<HTMLButtonElement>('[data-tratt-svar]')?.focus({ preventScroll: true });
-        }
       }
       render();
+      if (opts.advance) {
+        visaKvittens(currentMatchCount() - (opts.beforeCount ?? 0));
+        setTimeout(() => goStep(2), 450);
+      }
     }
 
     root.addEventListener('kommunvaljare:valj', (event) => {
       const detail = (event as CustomEvent<{ slug: string; namn: string }>).detail;
       if (!detail?.slug) return;
+      const before = currentMatchCount();
       profil.kommunSlug = detail.slug;
       saveForeningsprofil({ kommunSlug: profil.kommunSlug });
-      hamtaKommunData(detail.slug, { scrollaTillNasta: true });
+      hamtaKommunData(detail.slug, { beforeCount: before, advance: true });
     });
 
     kommunBytKnapp?.addEventListener('click', () => {
       visaKommunvaljare();
     });
 
+    tillbakaKnapp?.addEventListener('click', () => goStep(step - 1));
+    omstartKnapp?.addEventListener('click', () => goStep(1));
+    vidareKnapp?.addEventListener('click', () => goStep(3));
+
     root.querySelectorAll<HTMLElement>('[data-tratt-fraga]').forEach((grupp) => {
       const fraga = grupp.dataset.trattFraga;
+      const fragaWrapper = grupp.closest<HTMLElement>('[data-tratt-steg]');
+      const eigenStep = fragaWrapper ? Number(fragaWrapper.dataset.trattSteg) : null;
+
       grupp.querySelectorAll<HTMLButtonElement>('[data-tratt-svar]').forEach((pill) => {
         pill.addEventListener('click', () => {
+          if (advancing) return;
           const varde = pill.dataset.trattSvar ?? '';
+          const before = currentMatchCount();
 
           if (fraga === 'verksamhet') {
             const v = varde as Verksamhet;
@@ -411,15 +473,32 @@ const kommuner = loadKommuner();
           }
 
           markeraAktivaPillar();
+          visaKvittens(currentMatchCount() - before);
           render();
+
+          // Verksamhet är flerval — ingen auto-advance, "Vidare"-knappen
+          // (steg 2) styr det istället, samma skillnad som mocken gör.
+          if (fraga !== 'verksamhet' && eigenStep !== null) {
+            advancing = true;
+            setTimeout(() => {
+              advancing = false;
+              goStep(eigenStep + 1);
+            }, 450);
+          }
         });
       });
     });
 
-    // Återställ sparat svar (profilen växer av användning — nästa gång
-    // börjar man här, TRATT.besked.minne).
+    // Återställ sparat svar. En återvändande session med sparad kommun
+    // hoppar direkt till steg 6 (beskedet) — samma beteende som innan
+    // ombyggnaden — "Tillbaka" tar en till valfri fråga för att ändra svar.
     markeraAktivaPillar();
-    if (profil.kommunSlug) hamtaKommunData(profil.kommunSlug);
+    if (profil.kommunSlug) {
+      step = 6;
+      hamtaKommunData(profil.kommunSlug);
+    } else {
+      updateStegUI();
+    }
   }
 </script>
 
@@ -443,17 +522,68 @@ const kommuner = loadKommuner();
     max-width: 60ch;
   }
 
-  .tratt__raknare {
+  /* Sticky stegbar (turn-12a) — mörk, alltid synlig vid varje svar.
+     Räknare + kvittens på en rad, progressbar + "Fråga N av 5" under. */
+  .tratt__stegbar {
     position: sticky;
     top: 0;
     z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    background: var(--fg-ink);
+    color: var(--fg-on-accent);
+    padding: 12px 16px;
+    border: 2px solid var(--fg-border);
+  }
+
+  .tratt__stegbar-rad {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .tratt__raknare {
+    flex: 1;
+    margin: 0;
     font-family: var(--fg-font-mono);
     font-weight: var(--fg-weight-bold);
     font-size: var(--fg-text-body-lg);
+  }
+
+  .tratt__kvittens {
+    flex: none;
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
     color: var(--fg-on-accent);
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: var(--fg-radius-pill);
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+
+  .tratt__stegbar-progress {
+    display: block;
+    height: 6px;
+    border-radius: var(--fg-radius-pill);
+    background: rgba(255, 255, 255, 0.22);
+    overflow: hidden;
+  }
+
+  .tratt__stegbar-fyllning {
+    display: block;
+    height: 100%;
+    width: 0%;
     background: var(--fg-accent);
-    padding: 12px 16px;
-    border: 2px solid var(--fg-border);
+    transition: width 0.25s ease;
+  }
+
+  .tratt__stegbar-label {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    font-weight: var(--fg-weight-bold);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .tratt__layout {
@@ -463,8 +593,8 @@ const kommuner = loadKommuner();
   }
 
   .tratt__fraga {
-    border-bottom: 1px solid var(--fg-border);
     padding-bottom: 20px;
+    min-height: 220px;
   }
 
   .tratt__fraga h2 {
@@ -522,6 +652,59 @@ const kommuner = loadKommuner();
     background: var(--fg-accent);
     border-color: var(--fg-accent);
     color: var(--fg-on-accent);
+  }
+
+  .tratt__vidare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 12px;
+    background: var(--fg-accent);
+    color: var(--fg-on-accent);
+    border: none;
+    border-radius: var(--fg-radius-control);
+    padding: 13px;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+    cursor: pointer;
+  }
+
+  .tratt__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid var(--fg-border);
+    padding-top: 16px;
+  }
+
+  .tratt__nav-tillbaka {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink-muted);
+    cursor: pointer;
+    padding: 6px 0;
+  }
+
+  .tratt__nav-omstart {
+    background: none;
+    border: none;
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink-muted);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 6px 0;
   }
 
   .tratt__besked {

@@ -1,27 +1,59 @@
 ---
-// Startsida — §5 punkt 1 UPPDRAG_POC.md: värdeproposition, kommunväljare,
-// deadlineöversikt. Kommunväljaren och deadlineöversikten är datadrivna
-// (Code); all löptext kommer från content.ts (Fable).
+// Startsida — omgjord 2026-07-27 (Design turn-12b): tratten är den
+// primära ingången, kommunbläddring och deadlinekalendern sekundära/
+// tertiära vägar. Tidigare version (katalog med LiveDataKort ovanpå)
+// hade ingen länk till /matcha/ någonstans på sajten — tratten var en
+// helt orefererad orphan-sida. All text ur content.ts/GUIDE_TRATT_COPY.ts,
+// ingen ny svensk prosa här (se plan: twinkling-wondering-emerson.md).
+//
+// Förhandsvisningskortens underrader och färskhetsraden (Jacob 2026-07-27,
+// GUIDE_TRATT_COPY.ts TRATT.besked.kortUnder*/TRATT.start.senastAvlastRad)
+// var flaggade som saknad copy vid första leveransen — tillagda nu.
+// senastAvlast är det SENASTE `verifierad`-datumet över alla kommuner,
+// inte ett påhittat datum.
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
 import KommunValjare from '../components/KommunValjare.astro';
 import LiveDataKort from '../components/LiveDataKort.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
-import { START, SIDFOT } from '../lib/content';
+import { START, SIDFOT, DESCRIPTOR } from '../lib/content';
+import { TRATT } from '../../GUIDE_TRATT_COPY';
 
 const kommuner = loadKommuner();
 const today = todayISO();
 const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).slice(0, 5);
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
+// Sitewide färskhetsdatum för TRATT.start.senastAvlastRad — det SENASTE
+// verifierad-datumet över alla kommuner (inte ett påhittat, inte "idag").
+const senastAvlast = kommuner.reduce((max, k) => (k.verifierad > max ? k.verifierad : max), kommuner[0]?.verifierad ?? today);
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
-  <h1>{START.h1}</h1>
-  <p>{START.hero}</p>
-  <p class="start-disclaimer">{SIDFOT.kortText}</p>
+  <section class="start-hero">
+    <h1>{DESCRIPTOR}</h1>
+    <p class="start-hero__ingress">{TRATT.start.ingress}</p>
+    <a href="/matcha/" class="btn-primary">{TRATT.start.startknapp} →</a>
+    <p class="start-disclaimer">{SIDFOT.kortText}</p>
+    <p class="start-hero__senast-avlast">{TRATT.start.senastAvlastRad.replace('{datum}', formatDate(senastAvlast))}</p>
+  </section>
+
+  <div class="start-forhandsvisning">
+    <div class="fg-card start-forhandsvisning__kort">
+      <h3>{TRATT.besked.kanSoka.rubrik}</h3>
+      <p>{TRATT.besked.kortUnderMatchar}</p>
+    </div>
+    <div class="fg-card start-forhandsvisning__kort">
+      <h3>{TRATT.besked.behover.rubrik}</h3>
+      <p>{TRATT.besked.kortUnderSaknar}</p>
+    </div>
+    <div class="fg-card start-forhandsvisning__kort">
+      <h3>{TRATT.besked.borjaHar.rubrik}</h3>
+      <p>{TRATT.besked.kortUnderBorjaHar}</p>
+    </div>
+  </div>
 
   <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
 
-  <section>
+  <section class="start-sekundar">
     <h2>{START.kommunvaljareRubrik}</h2>
     <KommunValjare kommuner={kommuner} />
   </section>
@@ -48,3 +80,64 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
     <p><a href="/deadlines/">Se hela deadlinekalendern →</a></p>
   </section>
 </Base>
+
+<style>
+  .start-hero {
+    max-width: 60ch;
+    margin-bottom: var(--fg-space-8);
+  }
+
+  .start-hero h1 {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-display);
+    letter-spacing: -0.01em;
+  }
+
+  .start-hero__ingress {
+    font-size: var(--fg-text-body-lg);
+    color: var(--fg-ink-muted);
+    margin: var(--fg-space-4) 0 var(--fg-space-6);
+  }
+
+  .start-hero .btn-primary {
+    margin-bottom: var(--fg-space-5);
+  }
+
+  .start-hero__senast-avlast {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-top: var(--fg-space-3);
+  }
+
+  .start-forhandsvisning {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--fg-space-5);
+    margin-bottom: var(--fg-space-8);
+  }
+
+  .start-forhandsvisning__kort {
+    padding: var(--fg-card-padding);
+  }
+
+  .start-forhandsvisning__kort h3 {
+    margin: 0;
+  }
+
+  .start-forhandsvisning__kort p {
+    margin: var(--fg-space-2) 0 0;
+    font-size: var(--fg-text-body);
+    color: var(--fg-ink-muted);
+  }
+
+  .start-sekundar {
+    margin-top: var(--fg-space-8);
+  }
+
+  @media (max-width: 640px) {
+    .start-forhandsvisning {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

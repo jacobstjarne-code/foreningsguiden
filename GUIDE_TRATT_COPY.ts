@@ -10,6 +10,15 @@ export const TRATT = {
     rubrik: 'Vad kan er förening söka?',
     ingress: 'Svara på fyra korta frågor, så visar vi vilka bidrag i er kommun som passar er förening — och vad som krävs för dem ni inte når än.',
     startknapp: 'Börja',
+    // "Börja om" ljög om vad knappen gör — svaren nollställs inte (sajten
+    // lovar att de sparas, TRATT.besked.minne). Etiketten beskriver nu
+    // exakt handlingen: gå tillbaka och ändra ett svar, se beskedet
+    // uppdateras. Löser samtidigt Designs H6 (synlig väg att rätta ett
+    // svar) — ingen logikändring, bara rätt namn på det knappen redan gjorde.
+    knappBorjaOm: 'Ändra svar',
+    // Sitewide färskhetsrad (förstasidan) — {datum} injiceras av Code med
+    // det senaste `verifierad`-datumet över alla kommuner.
+    senastAvlastRad: 'Uppgifterna stämdes senast av mot kommunernas egna sidor {datum}.',
   },
 
   // ---- Löpande räknare (uppdateras efter varje svar) ----
@@ -80,6 +89,13 @@ export const TRATT = {
   // ---- BESKEDET: tre grupper, aldrig ett enda tal ----
   besked: {
     rubrik: 'Det här hittade vi för er förening',
+
+    // Förstasidans tre förhandsvisningskort (under rubrikerna nedan) —
+    // skrivna för att göra korten till en anledning att börja, inte en
+    // beskrivning av en produkt.
+    kortUnderMatchar: 'Bidrag där ni uppfyller de krav kommunen publicerat.',
+    kortUnderSaknar: 'Bidrag som ligger nära — och exakt vad som fattas för att nå dem.',
+    kortUnderBorjaHar: 'Det formella steget som fäller flest ansökningar, med kommunens handläggningstid.',
 
     // Grupp 1 — matchande bidrag
     kanSoka: {
