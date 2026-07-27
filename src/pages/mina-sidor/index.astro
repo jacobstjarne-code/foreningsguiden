@@ -8,14 +8,15 @@
 // request-tid.
 //
 // Vad denna FÖRSTA skiva av Grind 2 INTE visar än (se plan, egna pass):
-// abonnemangsstatus (ingen återkommande Stripe-prenumeration finns i
-// kodbasen), sparade utkast (persisteras inte per köp idag).
+// sparade utkast (persisteras inte per köp idag). Abonnemangsstatus
+// (SPEC_ABONNEMANG.md) tillagd 2026-07-27.
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
 import { SESSION_COOKIE_NAMN, hamtaSessionEmail } from '../../lib/session';
 import { getSubscriber } from '../../lib/subscribers';
 import { hamtaKopForEmail } from '../../lib/kop';
+import { hamtaAbonnemangForEmail } from '../../lib/abonnemang';
 import { getKommunBySlug, formatDate } from '../../lib/kommuner';
 
 const sessionToken = Astro.cookies.get(SESSION_COOKIE_NAMN)?.value;
@@ -28,6 +29,11 @@ const epostbyteKlart = Astro.url.searchParams.get('epostbyte') === 'klart';
 
 const subscriber = email ? await getSubscriber(email) : null;
 const kop = email ? await hamtaKopForEmail(email) : [];
+const abonnemang = email ? await hamtaAbonnemangForEmail(email) : [];
+// Senast skapade aktiva/betalningsproblem-abonnemanget — samma "senaste
+// först"-sortering som hamtaAbonnemangForEmail redan ger, en förening
+// förväntas ha högst ett i praktiken.
+const aktivtAbonnemang = abonnemang.find((a) => a.status === 'active' || a.status === 'past_due');
 
 const bevakadeKommuner = (subscriber?.kommuner ?? [])
   .map((slug) => getKommunBySlug(slug))
@@ -81,6 +87,23 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
           </ul>
         </section>
       )}
+
+      <section>
+        <h2>Abonnemang</h2>
+        {aktivtAbonnemang ? (
+          <>
+            <ul class="mina-sidor__profil">
+              <li>Status: {aktivtAbonnemang.status === 'active' ? 'aktivt' : 'betalning misslyckades'}</li>
+              <li>Gäller till {formatDate(aktivtAbonnemang.giltigTill)}</li>
+            </ul>
+            <form method="POST" action="/api/abonnemang-portal">
+              <button type="submit" class="btn-primary">Hantera abonnemang</button>
+            </form>
+          </>
+        ) : (
+          <p>Inget aktivt abonnemang.</p>
+        )}
+      </section>
 
       <section>
         <h2>Köphistorik</h2>

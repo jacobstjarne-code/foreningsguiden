@@ -15,3 +15,10 @@
 // Namnbytet på konstanten speglar att produkten faktiskt bytt identitet,
 // inte bara pris.
 export const PRIS_REGISTRERINGSUTKAST_ORE = 24900;
+
+// SPEC_ABONNEMANG.md §3 (Jacob, 2026-07-27): 495 kr/år, 41 kr/mån bredvid
+// (41 × 12 = 492, redan räknad ankring). Talet 595 förekommit i äldre
+// underlag (SLUTSPEC_LANSERING_2026-07-20.md, historiska mockar) — fel,
+// och INTE i något som faktiskt körs eller renderas. Samma tal överallt
+// tills prissättningen testats klart.
+export const PRIS_ABONNEMANG_ORE = 49500;

@@ -2,16 +2,16 @@
 // Adminvy — Grind 2 (GRANSKNING_foreningsguiden.md): "Skyddad sida som
 // listar Redis: registrerade, köp... Minimal men läsbar, så du slipper
 // Upstash-dashboarden." Egen auth (adminSession.ts, delat lösenord) —
-// skild från användarnas magic-link (session.ts). Visar INTE
-// abonnemangsstatus (ingen återkommande Stripe-prenumeration finns i
-// kodbasen än). noindex — internt verktyg, inte en sida sajten ska
-// indexeras för.
+// skild från användarnas magic-link (session.ts). Abonnemangsstatus
+// (SPEC_ABONNEMANG.md) tillagd 2026-07-27. noindex — internt verktyg,
+// inte en sida sajten ska indexeras för.
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
 import { ADMIN_SESSION_COOKIE_NAMN, arAdminInloggad } from '../../lib/adminSession';
 import { getAllSubscribers } from '../../lib/subscribers';
 import { hamtaAllaKop } from '../../lib/kop';
+import { hamtaAllaAbonnemang } from '../../lib/abonnemang';
 import { formatDate } from '../../lib/kommuner';
 
 const sessionToken = Astro.cookies.get(ADMIN_SESSION_COOKIE_NAMN)?.value;
@@ -20,7 +20,9 @@ const felaktigtLosenord = Astro.url.searchParams.get('fel') === '1';
 
 const subscribers = inloggad ? await getAllSubscribers() : [];
 const kop = inloggad ? await hamtaAllaKop() : [];
+const abonnemang = inloggad ? await hamtaAllaAbonnemang() : [];
 const summaKr = kop.reduce((sum, k) => sum + k.beloppOre, 0) / 100;
+const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
 ---
 <Base title="Admin — Föreningsguiden" description="Internt adminverktyg." noindex={true}>
   <h1>Admin</h1>
@@ -41,7 +43,23 @@ const summaKr = kop.reduce((sum, k) => sum + k.beloppOre, 0) / 100;
         <ul class="mina-sidor__profil">
           <li>{subscribers.length} prenumeranter</li>
           <li>{kop.length} köp — {summaKr.toFixed(0)} kr totalt</li>
+          <li>{aktivaAbonnemang} aktiva abonnemang ({abonnemang.length} totalt)</li>
         </ul>
+      </section>
+
+      <section>
+        <h2>Abonnemang</h2>
+        {abonnemang.length === 0 ? (
+          <p>Inga abonnemang än.</p>
+        ) : (
+          <ul class="mina-sidor__kop">
+            {abonnemang.map((a) => (
+              <li>
+                <strong>{a.email}</strong> — {a.status} — gäller till {formatDate(a.giltigTill)}
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <section>

@@ -324,6 +324,19 @@ export const MEJL = {
     ],
   },
 
+  // SPEC_ABONNEMANG.md §4 (Jacob, 2026-07-27): abonnemangets fyraveckors-
+  // påminnelse, per MATCHAT bidrag (inte per kommun som paminnelse14).
+  // {{FABLE:}}-slots — Code skriver ingen egen svensk mejltext,
+  // paminnelse14s "Två veckor kvar" duger inte bara omskrivet till fyra
+  // utan att Fable godkänt formuleringen (abonnemangsramen är ny copy,
+  // inte samma produkt som gratisbevakningen).
+  paminnelse28: {
+    amne: '{{FABLE: ämnesrad, fyra veckor kvar — {bidragsnamn} i {kommun}}}',
+    body: [
+      '{{FABLE: brödtext för abonnemangets fyraveckorspåminnelse, per matchat bidrag}}',
+    ],
+  },
+
   paminnelse14: {
     amne: 'Två veckor kvar: {bidragsnamn} i {kommun}',
     body: [

@@ -134,6 +134,11 @@ export interface PaminnelseVars {
   bidragLank: string;
 }
 
+/** SPEC_ABONNEMANG.md §4 — abonnemangets fyraveckorspåminnelse, per matchat bidrag. Se content.ts MEJL.paminnelse28 för FABLE-slot-noten. */
+export async function sendPaminnelse28(to: string, vars: PaminnelseVars): Promise<void> {
+  await sendMejl(to, MEJL.paminnelse28, vars);
+}
+
 export async function sendPaminnelse14(to: string, vars: PaminnelseVars): Promise<void> {
   await sendMejl(to, MEJL.paminnelse14, vars);
 }

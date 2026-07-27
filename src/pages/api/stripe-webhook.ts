@@ -1,26 +1,42 @@
 /**
- * POST /api/stripe-webhook — bekräftar Stripe-köp (checkout.session.completed)
- * och triggar leverans. Enda webhooken (SPEC: Betalintegration §3 —
- * "minimal yta = minimalt underhåll", ingen egenbyggd webhook-mängd).
+ * POST /api/stripe-webhook — bekräftar Stripe-köp och triggar leverans.
+ * Enda webhooken (SPEC: Betalintegration §3 — "minimal yta = minimalt
+ * underhåll", ingen egenbyggd webhook-mängd), nu med två produkter:
  *
- * H8: leveransen är HELT AUTOMATISERAD — genereraRegistreringsUtkast()
- * (utkastGenerator.ts, "samma motor" som bidragsutkastet) körs här och
- * mejlas till köparen direkt, ingen manuell uppföljning från Jacob.
+ * - `checkout.session.completed` (mode='payment'): Registreringsutkastet
+ *   (H8) — oförändrad logik, se hanteraRegistreringsCheckout().
+ * - `customer.subscription.created`, `.updated`, `.deleted`: Abonnemanget
+ *   (SPEC_ABONNEMANG.md §4, exakt de tre event-typerna specen ber om) —
+ *   se hanteraAbonnemangSkapad() m.fl. Uniform för BÅDA sätten ett
+ *   abonnemang kan skapas på (checkout/abonnemang.ts via Checkout, eller
+ *   abonnemang-faktura.ts som skapar subscriptionen direkt via API för
+ *   H11-fakturaflödet) — ingen checkout.session.completed-gren för
+ *   subscription-läge, eftersom fakturavägen aldrig har en Checkout
+ *   Session alls. metadata.foreningsprofil sätts därför på SJÄLVA
+ *   subscription-objektet (subscription_data.metadata i Checkout-fallet)
+ *   i stället för på sessionen, så en enda handler täcker båda vägarna.
  *
  * Läser RAW body (request.text(), INTE request.json()) — Stripes
  * signaturverifiering kräver den obehandlade byte-strömmen, en JSON-
  * ompparsning skulle ge en annan bytesekvens och alltid faila verifieringen.
  *
- * Svarar 200 så fort köpet är sparat, ÄVEN om leveransmejlet fallerar —
- * betalningen är redan skarp (i testläge: redan "genomförd" i Stripes
- * mening) och ett mejlfel ska inte trigga en falsk webhook-retry-loop hos
- * Stripe (som annars skickar samma event igen).
+ * Svarar 200 så fort ett event är hanterat, ÄVEN om ett leveransmejl
+ * fallerar — betalningen/statusändringen är redan skarp hos Stripe, och
+ * ett mejlfel ska inte trigga en falsk webhook-retry-loop (som annars
+ * skickar samma event igen).
+ *
+ * Idempotens per event-typ (samma fälla som H22:s Upstash-auto-parse-bugg
+ * — se kop.ts hamtaSenastNotifieradSnapshot): checkout.session.completed
+ * kollar `hamtaKop`/`hamtaAbonnemang` FÖRE skrivning; subscription.updated/
+ * deleted är rena "sätt status till X"-operationer och därför redan
+ * naturligt idempotenta (att köra dem två gånger ger samma sluttillstånd).
  */
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { sparaKop, hamtaKop, type KopEntry } from '../../lib/kop';
+import { sparaAbonnemang, hamtaAbonnemang, uppdateraAbonnemangStatus, type AbonnemangStatus } from '../../lib/abonnemang';
 import { addForeningsprofil } from '../../lib/subscribers';
 import { sendKopNotis, sendKopBekraftelse } from '../../lib/mejl';
 import type { Foreningsprofil } from '../../lib/foreningsprofil';
@@ -29,44 +45,15 @@ import { genereraRegistreringsUtkast } from '../../lib/utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
 
-export const POST: APIRoute = async ({ request }) => {
-  const stripeKey = env.STRIPE_SECRET_KEY?.trim();
-  const webhookSecret = env.STRIPE_WEBHOOK_SECRET?.trim();
-  if (!stripeKey || !webhookSecret) {
-    return new Response('betalning ej konfigurerad', { status: 503 });
-  }
-
-  const signatur = request.headers.get('stripe-signature');
-  const rawBody = await request.text();
-
-  const stripe = new Stripe(stripeKey);
-  let event: Stripe.Event;
-  try {
-    event = stripe.webhooks.constructEvent(rawBody, signatur ?? '', webhookSecret);
-  } catch (err) {
-    return new Response(`ogiltig signatur: ${(err as Error).message}`, { status: 400 });
-  }
-
-  if (event.type !== 'checkout.session.completed') {
-    return new Response(JSON.stringify({ ok: true, hoppadOver: event.type }), { status: 200 });
-  }
-
-  const session = event.data.object as Stripe.Checkout.Session;
-
-  // Idempotens — Stripe kan leverera samma event mer än en gång. Redan
-  // sparad session ⇒ svara 200 utan att skicka notismejlet igen.
-  const redanSparad = await hamtaKop(session.id);
-  if (redanSparad) {
-    return new Response(JSON.stringify({ ok: true, redanHanterad: true }), { status: 200 });
-  }
-
+async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, stripe: Stripe): Promise<void> {
   const email = session.customer_details?.email ?? null;
   const kommunSlug = session.metadata?.kommunSlug ?? null;
   if (!email || !kommunSlug) {
     // Bör aldrig hända (vi sätter alltid metadata.kommunSlug och Stripe
-    // Checkout kräver e-post) — men svara 200 så Stripe inte retry-loopar
-    // på ett event vi ändå inte kan koppla till en kommun.
-    return new Response(JSON.stringify({ ok: false, fel: 'saknar email eller kommunSlug' }), { status: 200 });
+    // Checkout kräver e-post) — men logga och returnera, inte kasta, så
+    // Stripe fortfarande får 200 (se POST-hanteraren).
+    console.error('registreringscheckout saknar email eller kommunSlug', session.id);
+    return;
   }
 
   let foreningsprofil: Foreningsprofil | undefined;
@@ -126,7 +113,6 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     await sendKopNotis({ email, kommunSlug, belopp: beloppKr, registreraLank });
   } catch (err) {
-    // Loggas men blockerar inte 200-svaret — se filhuvudet.
     console.error('sendKopNotis misslyckades', err);
   }
 
@@ -134,6 +120,131 @@ export const POST: APIRoute = async ({ request }) => {
     await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl, checklista });
   } catch (err) {
     console.error('sendKopBekraftelse misslyckades', err);
+  }
+}
+
+/**
+ * current_period_end flyttades från Subscription till SubscriptionItem i
+ * denna Stripe API-version (2026-06-24.dahlia) — bekräftat mot node_modules/
+ * stripe/.../Subscriptions.d.ts under verifiering (subscription.
+ * current_period_end fanns inte längre, gav "RangeError: Invalid time
+ * value" i ett riktigt sandbox-testköp). Våra prenumerationer har alltid
+ * EXAKT en rad (ett pris), så items.data[0] räcker — ingen sammanslagning
+ * av flera rader med olika perioder behövs.
+ */
+function hamtaGiltigTill(subscription: Stripe.Subscription): string {
+  const periodEnd = subscription.items.data[0]?.current_period_end;
+  return new Date((periodEnd ?? 0) * 1000).toISOString().slice(0, 10);
+}
+
+/**
+ * Abonnemangets startpunkt — customer.subscription.created, oavsett
+ * vilken väg som skapade prenumerationen (Checkout eller H11:s direkta
+ * API-anrop). En Subscription bär bara ett customer-ID, ingen e-post
+ * direkt — hämtar kunden för att få den, samma mönster oberoende av väg.
+ */
+async function hanteraAbonnemangSkapad(subscription: Stripe.Subscription, stripe: Stripe): Promise<void> {
+  // Idempotens — samma princip som hamtaKop-kollen i registreringsflödet.
+  const redanSparad = await hamtaAbonnemang(subscription.id);
+  if (redanSparad) return;
+
+  const customerId = typeof subscription.customer === 'string' ? subscription.customer : subscription.customer.id;
+  const customer = await stripe.customers.retrieve(customerId);
+  const email = !customer.deleted ? customer.email : null;
+  if (!email) {
+    console.error('abonnemang saknar e-post på kunden', subscription.id, customerId);
+    return;
+  }
+
+  const giltigTill = hamtaGiltigTill(subscription);
+
+  await sparaAbonnemang({
+    email,
+    stripeCustomerId: customerId,
+    stripeSubscriptionId: subscription.id,
+    status: subscription.status as AbonnemangStatus,
+    giltigTill,
+    skapad: new Date().toISOString(),
+  });
+
+  // Samma merge-mekanism som registreringsflödet redan använder — ingen
+  // ny kod, samma addForeningsprofil()-anrop. metadata ligger på SJÄLVA
+  // subscription-objektet (subscription_data.metadata i Checkout-fallet,
+  // metadata direkt i abonnemang-faktura.ts:s subscriptions.create) —
+  // inte på en Checkout Session, som inte alltid finns (H11-vägen).
+  const profilRaw = subscription.metadata?.foreningsprofil;
+  if (profilRaw) {
+    try {
+      const foreningsprofil = JSON.parse(profilRaw) as Foreningsprofil;
+      await addForeningsprofil(email, foreningsprofil);
+    } catch {
+      // Ogiltig JSON i metadata — abonnemanget är ändå giltigt sparat,
+      // bara utan en föreningsprofil att matcha mot förrän tratten
+      // besvaras separat.
+    }
+  }
+
+  // Inget kop-notis/bekräftelsemejl än — SPEC_ABONNEMANG §6 (ingen
+  // presentationsyta byggd) har heller ingen godkänd köpbekräftelsecopy
+  // för abonnemanget. Flaggat, inte tyst byggt med gissad text.
+}
+
+/** customer.subscription.updated — status/giltighetsdatum ändras (förnyelse, betalningsproblem). */
+async function hanteraAbonnemangUppdatering(subscription: Stripe.Subscription): Promise<void> {
+  await uppdateraAbonnemangStatus(subscription.id, subscription.status as AbonnemangStatus, hamtaGiltigTill(subscription));
+}
+
+/** customer.subscription.deleted — uppsägning (via Customer Portal eller annars). */
+async function hanteraAbonnemangUppsagning(subscription: Stripe.Subscription): Promise<void> {
+  await uppdateraAbonnemangStatus(subscription.id, 'canceled', hamtaGiltigTill(subscription));
+}
+
+export const POST: APIRoute = async ({ request }) => {
+  const stripeKey = env.STRIPE_SECRET_KEY?.trim();
+  const webhookSecret = env.STRIPE_WEBHOOK_SECRET?.trim();
+  if (!stripeKey || !webhookSecret) {
+    return new Response('betalning ej konfigurerad', { status: 503 });
+  }
+
+  const signatur = request.headers.get('stripe-signature');
+  const rawBody = await request.text();
+
+  const stripe = new Stripe(stripeKey);
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(rawBody, signatur ?? '', webhookSecret);
+  } catch (err) {
+    return new Response(`ogiltig signatur: ${(err as Error).message}`, { status: 400 });
+  }
+
+  try {
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object as Stripe.Checkout.Session;
+
+      // Bara mode='payment' hanteras här — mode='subscription' skapar
+      // sin egen customer.subscription.created, hanterad nedan, samma
+      // handler oavsett om subscriptionen kom via Checkout eller H11:s
+      // direkta API-anrop (abonnemang-faktura.ts).
+      if (session.mode !== 'subscription') {
+        const redanSparad = await hamtaKop(session.id);
+        if (!redanSparad) {
+          await hanteraRegistreringsCheckout(session, stripe);
+        }
+      }
+    } else if (event.type === 'customer.subscription.created') {
+      await hanteraAbonnemangSkapad(event.data.object as Stripe.Subscription, stripe);
+    } else if (event.type === 'customer.subscription.updated') {
+      await hanteraAbonnemangUppdatering(event.data.object as Stripe.Subscription);
+    } else if (event.type === 'customer.subscription.deleted') {
+      await hanteraAbonnemangUppsagning(event.data.object as Stripe.Subscription);
+    } else {
+      return new Response(JSON.stringify({ ok: true, hoppadOver: event.type }), { status: 200 });
+    }
+  } catch (err) {
+    // Ett fel i hanteringen ska INTE ge Stripe en 4xx/5xx (det triggar
+    // retry-loopar för ett event vi kanske redan delvis behandlat) —
+    // logga och svara 200, samma policy som mejlfelen nedan alltid följt.
+    console.error('stripe-webhook-hantering misslyckades', event.type, err);
   }
 
   return new Response(JSON.stringify({ ok: true }), { status: 200 });
