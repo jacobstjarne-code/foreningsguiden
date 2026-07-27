@@ -75,6 +75,13 @@ interface GoldenSetFacit {
   // uttryckt i alla fem facit från Fable: "får ALDRIG hitta på ett
   // datum"/"får ALDRIG bli löpande"). Valfri — utelämnas failar inget.
   forvantadDeadlineTyp?: 'fast' | 'lopande';
+  // Extra kontroll (omgång 2, "det farligaste är beloppen" — Fable
+  // 2026-07-27): beloppssträngen ska återges ORDAGRANT, differentiering
+  // och undantag intakt. genereraUtkast() kopierar bidrag.belopp rakt av
+  // (ingen transformation existerar i koden idag), så detta är redan
+  // strukturellt garanterat — men explicit test skyddar mot en framtida
+  // ändring som börjar formatera/förenkla beloppet.
+  forvantadBelopp?: string | null;
   profiler: Partial<Record<ProfilNyckel, ProfilFacit>>;
 }
 
@@ -162,6 +169,12 @@ for (const fil of filer) {
         } else {
           assert.notEqual(resultat.deadlineText, LOPANDE_TEXT, 'facit förväntar ett fast datum men generatorn sa "löpande"');
         }
+      });
+    }
+
+    if (facit.forvantadBelopp !== undefined) {
+      test(`${label} — belopp (extra, ej K1-K4: ordagrant, ingen förenkling)`, () => {
+        assert.equal(resultat.belopp, facit.forvantadBelopp, 'beloppssträngen skiljer sig från facit — differentiering/undantag kan ha tappats');
       });
     }
 
