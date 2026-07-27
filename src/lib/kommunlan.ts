@@ -17,8 +17,9 @@
  * KÄND AVVIKELSE (flaggad, inte tyst vald): Håbo (kod 0305, Uppsala län)
  * och Habo (kod 0643, Jönköpings län) viker båda till slugen "habo" efter
  * å/ä/ö-normalisering — enda kollisionen bland 290. Håbo har fått
- * "habo-uppsala" här tills Jacob/Fable bestämmer en slutgiltig konvention
- * (ingen av dem finns i data/kommuner/ än, så inget existerande brutet).
+ * "habo-uppsala" och Habo "habo-jonkoping" — länssuffix är den beslutade
+ * konventionen vid slugkollision efter å/ä/ö-normalisering (beslutat
+ * 2026-07-27), inte en provisorisk lösning.
  */
 
 export interface KommunFacit {
