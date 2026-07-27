@@ -101,7 +101,7 @@ export const KOMMUNFACIT: readonly KommunFacit[] = [
   { kod: '1444', slug: 'grastorp', namn: "Grästorp", lan: "Västra Götalands län" },
   { kod: '1764', slug: 'grums', namn: "Grums", lan: "Värmlands län" },
   { kod: '1447', slug: 'gullspang', namn: "Gullspång", lan: "Västra Götalands län" },
-  { kod: '0643', slug: 'habo', namn: "Habo", lan: "Jönköpings län" },
+  { kod: '0643', slug: 'habo-jonkoping', namn: "Habo", lan: "Jönköpings län" },
   { kod: '0305', slug: 'habo-uppsala', namn: "Håbo", lan: "Uppsala län" },
   { kod: '1783', slug: 'hagfors', namn: "Hagfors", lan: "Värmlands län" },
   { kod: '1863', slug: 'hallefors', namn: "Hällefors", lan: "Örebro län" },
