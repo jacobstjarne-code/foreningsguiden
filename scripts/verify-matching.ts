@@ -38,6 +38,7 @@ function bidrag(overrides: Partial<Bidrag> = {}): Bidrag {
     foreningstyp: null,
     kraver_registrering: null,
     sate_i_kommunen: null,
+    status: 'aktiv',
     ...overrides,
   };
 }
@@ -182,6 +183,18 @@ test('matchKommun grupperar korrekt: MATCHAR/SAKNAR i rätt hinkar, EJ_BEHORIG o
   assert.equal(r.ejBehorig.length, 0);
   assert.equal(r.matchar.length + r.saknar.length + r.ejBehorig.length, 3);
   assert.equal(r.borjaHar, true); // sokt='nej'
+});
+
+test('H26: pausat/avskaffat bidrag hoppas över helt i matchKommun — hamnar varken i matchar, saknar eller ejBehorig', () => {
+  const aktivt = bidrag({ id: 'a' });
+  const pausat = bidrag({ id: 'b', status: 'pausad' });
+  const avskaffat = bidrag({ id: 'c', status: 'avskaffat', min_medlemmar: 500 }); // skulle annars gett SAKNAR
+  const k = kommun([aktivt, pausat, avskaffat]);
+  const r = matchKommun(profil({ storlek: 'xs' }), k);
+
+  assert.deepEqual(r.matchar.map((b) => b.id), ['a']);
+  assert.equal(r.saknar.length, 0);
+  assert.equal(r.ejBehorig.length, 0);
 });
 
 test('harMatchningsdata: alla bidrag helt null → false (dagens läge i alla 80 kommuner)', () => {

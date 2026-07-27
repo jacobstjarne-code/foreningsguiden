@@ -24,6 +24,13 @@ export type Verksamhet = (typeof VERKSAMHETER)[number];
 export const DEADLINE_TYPER = ['fasta', 'lopande'] as const;
 export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 
+// H26 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): kommunen kan pausa eller
+// avskaffa ett bidrag utan att ta bort YAML-raden. Valfritt fält —
+// saknas det i källan defaultar validateBidrag (kommuner.ts) till
+// 'aktiv', additivt mot de 99 befintliga filerna.
+export const BIDRAG_STATUSAR = ['aktiv', 'pausad', 'avskaffat'] as const;
+export type BidragStatus = (typeof BIDRAG_STATUSAR)[number];
+
 export interface Deadlines {
   typ: DeadlineTyp;
   datum: string[]; // MM-DD, återkommande
@@ -51,6 +58,8 @@ export interface Bidrag {
   foreningstyp: Verksamhet[] | null; // behörighetsfilter — se Verksamhet ovan, skilt från kategori
   kraver_registrering: boolean | null; // kräver DETTA bidrag kommunens bidragsberättigad-status?
   sate_i_kommunen: boolean | null;
+
+  status: BidragStatus; // H26 — se BIDRAG_STATUSAR ovan. Alltid satt efter validateBidrag, default 'aktiv'.
 }
 
 export interface Ansokningssystem {
@@ -187,6 +196,29 @@ export interface BeloppSumma {
   total: number;
   capped: number; // antal bidrag med ett parseat tak — bidrar till total
   uncapped: number; // antal bidrag UTAN parseat tak — exkluderade, kan höja den sanna summan
+}
+
+export interface BeloppTackning {
+  medBelopp: number; // bidrag.belopp !== null — kommunen har publicerat NÅGOT beloppsvärde
+  utanBelopp: number; // bidrag.belopp === null
+}
+
+/**
+ * Räknar hur många av kommunens bidrag som har ett publicerat belopp
+ * (`belopp !== null`) kontra inte — grövre än parseBeloppTak/sumBeloppTak
+ * (som mäter om ett publicerat belopp gick att tolka som ett krontak).
+ * H24 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): grund för täckningsbadgen —
+ * medBelopp === 0 && utanBelopp > 0 betyder att INGET av kommunens bidrag
+ * har ett publicerat belopp, en kommunegenskap, inte ett dataglapp hos oss.
+ */
+export function beloppTackning(kommun: Kommun): BeloppTackning {
+  let medBelopp = 0;
+  let utanBelopp = 0;
+  for (const bidrag of kommun.bidrag) {
+    if (bidrag.belopp !== null) medBelopp++;
+    else utanBelopp++;
+  }
+  return { medBelopp, utanBelopp };
 }
 
 /**

@@ -1,0 +1,14 @@
+---
+// Renderas när INGET av kommunens bidrag har ett publicerat belopp
+// (H24, SPEC_ATERSTAENDE_HAL.md Kluster 4) — samma stale-warning-mönster
+// (kant + text i --fg-attention, aldrig färg ensam) som StaleWarning.astro.
+import { TACKNING } from '../lib/content';
+
+export interface Props {
+  kommun: string;
+}
+
+const { kommun } = Astro.props;
+const text = TACKNING.template.replace(/{kommun}/g, kommun);
+---
+<p class="stale-warning">{text}</p>

@@ -14,7 +14,7 @@ import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import yaml from 'js-yaml';
 import {
-  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, todayISO, nextOccurrenceISO,
+  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, todayISO, nextOccurrenceISO,
 } from './kommunTyper';
 import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper';
 import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan';
@@ -134,6 +134,12 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   raw.foreningstyp = verksamhetListOrNull(raw, 'foreningstyp', where, problems);
   raw.kraver_registrering = boolOrNull(raw, 'kraver_registrering', where, problems);
   raw.sate_i_kommunen = boolOrNull(raw, 'sate_i_kommunen', where, problems);
+
+  // H26 — valfritt fält, saknas i alla 99 befintliga filer i dag.
+  if (raw.status !== null && raw.status !== undefined && !BIDRAG_STATUSAR.includes(raw.status)) {
+    problems.push(`${where}.status är "${raw.status}" (tillåtna: ${BIDRAG_STATUSAR.join(', ')})`);
+  }
+  raw.status = raw.status ?? 'aktiv';
 
   return raw as Bidrag;
 }
@@ -301,6 +307,7 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
 
   for (const kommun of loadKommuner()) {
     for (const bidrag of kommun.bidrag) {
+      if (bidrag.status !== 'aktiv') continue; // H26 — pausat/avskaffat bidrag hör inte hemma i kalendern
       const base = {
         kommun: kommun.kommun,
         kommunSlug: kommun.kommun_slug,

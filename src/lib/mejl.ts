@@ -298,3 +298,38 @@ export async function sendKontaktNotis(vars: KontaktNotisVars): Promise<void> {
     throw new Error(`Resend-fel vid kontaktnotis: ${result.error.message}`);
   }
 }
+
+export interface FelrapportVars {
+  kommun: string;
+  bidragNamn: string;
+  bidragId: string;
+  meddelande: string;
+  email: string; // tom sträng om ingen angavs — låg tröskel, se api/felrapport.ts
+}
+
+/**
+ * H25 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): "Det här stämmer inte"-länken
+ * vid varje bidrag. Internt driftmejl till Jacob, samma mönster som
+ * sendKontaktNotis — replyTo satt bara om avsändaren lämnade en adress.
+ */
+export async function sendFelrapport(vars: FelrapportVars): Promise<void> {
+  const to = 'jacob.stjarne@gmail.com';
+  const text = [
+    `Kommun: ${vars.kommun}`,
+    `Bidrag: ${vars.bidragNamn} (${vars.bidragId})`,
+    `E-post: ${vars.email || 'ej angiven'}`,
+    '',
+    vars.meddelande,
+  ].join('\n');
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    ...(vars.email ? { replyTo: vars.email } : {}),
+    subject: `Felrapport — ${vars.bidragNamn}, ${vars.kommun}`,
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid felrapport: ${result.error.message}`);
+  }
+}

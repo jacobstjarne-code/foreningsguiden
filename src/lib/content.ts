@@ -119,6 +119,26 @@ export const KOMMUN = {
   ],
 };
 
+/**
+ * H4 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): landningsläget för en giltig
+ * men ännu OTÄCKT kommun (KOMMUNFACIT-slug utan data/kommuner/*.yaml).
+ * {kommun}-platshållaren fylls i av KommunLandningsSida.astro. `brodtext`
+ * är en FABLE-slot (ingen färdig förklarande copy finns, Code hittar inte
+ * på den) — resten är kort, faktisk formulärtext, samma klass som
+ * BEVAKNING/TACKNING ovan.
+ */
+export const KOMMUN_LANDNING = {
+  metaTitleTemplate: 'Föreningsbidrag i {kommun} — Föreningsguiden',
+  metaDescriptionTemplate: 'Vi har ännu inte samlat föreningsbidragen för {kommun}. Anmäl din e-post så hör vi av oss när kommunen är täckt.',
+  h1Template: '{kommun} är inte täckt än',
+  brodtext: '{{FABLE: kort förklarande stycke om varför kommunen saknas och vad Föreningsguiden gör åt det}}',
+  formularRubrik: 'Meddela mig när {kommun} täcks',
+  epostPlaceholder: 'namn@forening.se',
+  knapp: 'Meddela mig',
+  kvitto: 'Tack — vi hör av oss när vi täcker {kommun}.',
+  fel: 'Något gick fel. Försök igen.',
+};
+
 /** Kategori × kommun-sida. */
 export const KATEGORI_SIDA = {
   metaTitleTemplate: '{kategori} i {kommun} — föreningsbidrag',
@@ -195,6 +215,16 @@ export const SIDFOT = {
 export const STALE = {
   template:
     'Uppgifterna för den här kommunen stämdes senast av mot källan {datum} ({dagar} dagar sedan) och kan ha ändrats. Kontrollera alltid mot kommunens egen sida innan ni söker.',
+};
+
+/**
+ * Täckningsvarningen (TackningsVarning, H24). Visas när kommunen inte
+ * publicerar belopp för NÅGOT av sina bidrag — flyttar skulden till
+ * kommunen, inte till tjänsten (SPEC_ATERSTAENDE_HAL.md, Kluster 4).
+ */
+export const TACKNING = {
+  template:
+    'Kommunen anger inte belopp för sina bidrag — ingen uppgift saknas hos oss, det gäller alla bidrag i {kommun}.',
 };
 
 /**

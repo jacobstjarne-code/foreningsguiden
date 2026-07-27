@@ -12,6 +12,7 @@ import { ADMIN_SESSION_COOKIE_NAMN, arAdminInloggad } from '../../lib/adminSessi
 import { getAllSubscribers } from '../../lib/subscribers';
 import { hamtaAllaKop } from '../../lib/kop';
 import { hamtaAllaAbonnemang } from '../../lib/abonnemang';
+import { hamtaAllaKommunEfterfragningar } from '../../lib/kommunefterfragan';
 import { formatDate } from '../../lib/kommuner';
 
 const sessionToken = Astro.cookies.get(ADMIN_SESSION_COOKIE_NAMN)?.value;
@@ -21,6 +22,7 @@ const felaktigtLosenord = Astro.url.searchParams.get('fel') === '1';
 const subscribers = inloggad ? await getAllSubscribers() : [];
 const kop = inloggad ? await hamtaAllaKop() : [];
 const abonnemang = inloggad ? await hamtaAllaAbonnemang() : [];
+const kommunefterfragningar = inloggad ? await hamtaAllaKommunEfterfragningar() : [];
 const summaKr = kop.reduce((sum, k) => sum + k.beloppOre, 0) / 100;
 const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
 ---
@@ -88,6 +90,22 @@ const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
               <li>
                 <strong>{(k.beloppOre / 100).toFixed(0)} kr</strong> — {formatDate(k.betaldDatum.slice(0, 10))} — {k.email} — {k.kommunSlug}
                 {k.hostedInvoiceUrl && <> — <a href={k.hostedInvoiceUrl}>Faktura</a></>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <h2>Kommunefterfrågningar</h2>
+        <p>H4 — prioriteringsdata för nästa extraktionsbatch, sorterat per kommun.</p>
+        {kommunefterfragningar.length === 0 ? (
+          <p>Inga efterfrågningar än.</p>
+        ) : (
+          <ul class="mina-sidor__kop">
+            {kommunefterfragningar.map((k) => (
+              <li>
+                <strong>{k.kommunSlug}</strong> — {k.email} — {formatDate(k.registrerad.slice(0, 10))}
               </li>
             ))}
           </ul>

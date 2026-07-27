@@ -18,14 +18,23 @@ export interface Props {
   bidrag: Bidrag;
   verifierad: string;
   ansokningsUrl: string;
+  kommunSlug: string;
 }
 
-const { bidrag, verifierad, ansokningsUrl } = Astro.props;
+const { bidrag, verifierad, ansokningsUrl, kommunSlug } = Astro.props;
 
 function formatDeadlines(b: Bidrag): string {
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
+
+// H26 — status-notis i stället för CTA:n när kommunen pausat/avskaffat
+// bidraget. 'pausad' är tillfälligt (attention), 'avskaffat' är permanent
+// (urgent) — samma två-tonersmodell som resten av sajten.
+const statusNotis: Record<'pausad' | 'avskaffat', string> = {
+  pausad: 'Pausat av kommunen — sök inte just nu.',
+  avskaffat: 'Avskaffat av kommunen.',
+};
 ---
 <li class="bidrag-card fg-card" id={`bidrag-${bidrag.id}`}>
   <div class="kategori-tags">
@@ -76,5 +85,15 @@ function formatDeadlines(b: Bidrag): string {
   </div>
   {bidrag.anteckning && <p class="bidrag-card__kalla">{bidrag.anteckning}</p>}
 
-  <a href={ansokningsUrl} class="btn-primary bidrag-card__cta">Till ansökan</a>
+  <div class="felrapport" data-felrapport data-kommun-slug={kommunSlug} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
+    <button type="button" class="felrapport-knapp">Det här stämmer inte</button>
+  </div>
+
+  {bidrag.status === 'aktiv' ? (
+    <a href={ansokningsUrl} class="btn-primary bidrag-card__cta">Till ansökan</a>
+  ) : (
+    <p class={`bidrag-card__status-notis bidrag-card__status-notis--${bidrag.status === 'avskaffat' ? 'urgent' : 'attention'}`}>
+      {statusNotis[bidrag.status]}
+    </p>
+  )}
 </li>

@@ -154,6 +154,11 @@ export function matchKommun(profil: Foreningsprofil, kommun: Kommun): MatchKommu
   const ejBehorig: { bidrag: Bidrag; skal: MatchSkal[] }[] = [];
 
   for (const bidrag of kommun.bidrag) {
+    // H26 — ett pausat/avskaffat bidrag är inget att söka och ska aldrig
+    // kunna MATCHA, SAKNA eller vara EJ_BEHORIG. Filtreras bort tidigt,
+    // inte i matchBidrag (som prövar villkor mot en profil — status är
+    // inget villkor, det är om bidraget överhuvudtaget existerar just nu).
+    if (bidrag.status !== 'aktiv') continue;
     const { state, skal } = matchBidrag(profil, bidrag);
     if (state === 'MATCHAR') matchar.push(bidrag);
     else if (state === 'EJ_BEHORIG') ejBehorig.push({ bidrag, skal });

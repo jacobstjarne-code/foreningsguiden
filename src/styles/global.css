@@ -449,6 +449,83 @@ main {
   margin-top: var(--fg-space-5);
 }
 
+/* H26 — status-notis i stället för CTA:n på pausade/avskaffade bidrag. */
+.bidrag-card__status-notis {
+  margin: var(--fg-space-5) 0 0;
+  padding: var(--fg-space-3) var(--fg-space-4);
+  border-radius: var(--fg-radius-control);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-bold);
+  text-align: center;
+}
+
+.bidrag-card__status-notis--attention {
+  border: var(--fg-border-inner) solid var(--fg-attention);
+  color: var(--fg-attention);
+}
+
+.bidrag-card__status-notis--urgent {
+  border: var(--fg-border-inner) solid var(--fg-urgent);
+  color: var(--fg-urgent);
+}
+
+/* Felrapport-widget (H25) — trigger + inline formulär i BidragCard. */
+.felrapport {
+  margin-top: var(--fg-space-3);
+}
+
+.felrapport-knapp {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.felrapport-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-2);
+}
+
+.felrapport-form textarea {
+  padding: var(--fg-space-2);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-label);
+  resize: vertical;
+  min-height: 4.5em;
+}
+
+.felrapport-form input[type='email'] {
+  padding: var(--fg-space-2);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-label);
+}
+
+.felrapport-form button[type='submit'] {
+  align-self: flex-start;
+  font-size: var(--fg-text-label);
+  padding: 6px 12px;
+}
+
+.felrapport-form__fel {
+  color: var(--fg-urgent);
+  font-size: var(--fg-text-mono);
+  margin: 0;
+}
+
+.felrapport-kvitto {
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+  margin: var(--fg-space-3) 0 0;
+}
+
 /* VerificationStamp — oxblod, RESERVERAD för förtroendemekaniken. */
 .fg-stamp {
   display: inline-flex;

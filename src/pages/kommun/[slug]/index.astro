@@ -1,219 +1,29 @@
 ---
-// Kommunsida — §5 punkt 2 UPPDRAG_POC.md: alla bidrag i kommunen, grupperade
-// per kategori, med deadlines, krav, ansökningslänk och källhänvisning.
-// Primär SEO-yta för "föreningsbidrag [kommun]". Svar-först + FAQ enligt
-// SOKBARHETSSPEC §3.1/§3.3 — FAQ-schemat speglar EXAKT den synliga sektionen.
-import Base from '../../../layouts/Base.astro';
-import BidragCard from '../../../components/BidragCard.astro';
-import StaleWarning from '../../../components/StaleWarning.astro';
-import BreadcrumbList from '../../../components/BreadcrumbList.astro';
-import VerificationRow from '../../../components/VerificationRow.astro';
-import KommunProgression from '../../../components/KommunProgression.astro';
-import GiltighetsKontroll from '../../../components/GiltighetsKontroll.astro';
-import {
-  loadKommuner, isStale, formatDate, formatRecurringDate, svenskLista,
-  earliestDeadlineISO, todayISO,
-  KATEGORI_LABELS, KATEGORIER,
-} from '../../../lib/kommuner';
-import type { Kategori } from '../../../lib/kommuner';
-import { KOMMUN, KOMMUNSIFFRA } from '../../../lib/content';
+// Kommunsidans ROUTE — H4 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): genererar
+// EN sida per samtliga 290 KOMMUNFACIT-slugs, inte bara de med datafil.
+// Grenar tidigt mellan KommunSidaFull (kommun finns i loadKommuner()) och
+// KommunLandningsSida (giltig slug, ingen datafil än — "Vi täcker inte
+// {kommun} än" i stället för Vercels generiska 404). Tidigare (innan H4)
+// itererade getStaticPaths BARA loadKommuner() — en giltig men otäckt
+// slug föll då på 404, oskiljbar från en helt fabricerad slug.
+import { loadKommuner } from '../../../lib/kommuner';
+import { KOMMUNFACIT } from '../../../lib/kommunlan';
+import KommunSidaFull from '../../../components/KommunSidaFull.astro';
+import KommunLandningsSida from '../../../components/KommunLandningsSida.astro';
 
 export function getStaticPaths() {
-  return loadKommuner().map((kommun) => ({
-    params: { slug: kommun.kommun_slug },
-    props: { kommun },
+  const bySlug = new Map(loadKommuner().map((k) => [k.kommun_slug, k]));
+  return KOMMUNFACIT.map((facit) => ({
+    params: { slug: facit.slug },
+    props: { kommun: bySlug.get(facit.slug) ?? null, kommunNamn: facit.namn },
   }));
 }
 
-const { kommun } = Astro.props;
-const today = todayISO();
-
-const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) =>
-  kommun.bidrag.some((b) => b.kategori.includes(k))
-);
-
-// Samma sortering (tidigast deadline först, löpande sist) som
-// KommunProgression station 4, så ankarlänkarna dit landar i rätt ordning.
-const sortedBidrag = [...kommun.bidrag].sort((a, b) => {
-  const da = earliestDeadlineISO(a, today);
-  const db = earliestDeadlineISO(b, today);
-  if (da && db) return da.localeCompare(db);
-  if (da) return -1;
-  if (db) return 1;
-  return 0;
-});
-
-const metaTitle = KOMMUN.metaTitleTemplate.replace(/{kommun}/g, kommun.kommun);
-const metaDescription = KOMMUN.metaDescriptionTemplate.replace(/{kommun}/g, kommun.kommun);
-const h1 = KOMMUN.h1Template.replace(/{kommun}/g, kommun.kommun);
-const intro = KOMMUN.introTemplate.replace(/{kommun}/g, kommun.kommun);
-const ansokningstext = KOMMUN.ansokningssystemTemplate
-  .replace(/{kommun}/g, kommun.kommun)
-  .replace(/{system}/g, kommun.ansokningssystem.namn);
-
-// --- Svar-först-block (SOKBARHETSSPEC §3.1) — variant beroende på datat ---
-const fastaDeadlines = kommun.bidrag.flatMap((b) => (b.deadlines.typ === 'fasta' ? b.deadlines.datum : []));
-const kategorierText = svenskLista(kategorierMedBidrag.map((k) => KATEGORI_LABELS[k].toLowerCase()));
-
-let svarForst = '';
-if (kommun.bidrag.length === 1) {
-  svarForst = KOMMUN.svarForstEtt
-    .replace(/{kommun}/g, kommun.kommun)
-    .replace(/{bidragsnamn}/g, kommun.bidrag[0].namn)
-    .replace(/{system}/g, kommun.ansokningssystem.namn);
-} else if (kommun.bidrag.length > 1 && fastaDeadlines.length === 0) {
-  svarForst = KOMMUN.svarForstLopande
-    .replace(/{kommun}/g, kommun.kommun)
-    .replace(/{antal}/g, String(kommun.bidrag.length))
-    .replace(/{kategorier}/g, kategorierText)
-    .replace(/{system}/g, kommun.ansokningssystem.namn);
-} else if (kommun.bidrag.length > 1) {
-  const sorted = [...fastaDeadlines].sort();
-  svarForst = KOMMUN.svarForstMedDeadlines
-    .replace(/{kommun}/g, kommun.kommun)
-    .replace(/{antal}/g, String(kommun.bidrag.length))
-    .replace(/{kategorier}/g, kategorierText)
-    .replace(/{tidigaste}/g, formatRecurringDate(sorted[0]))
-    .replace(/{senaste}/g, formatRecurringDate(sorted[sorted.length - 1]))
-    .replace(/{system}/g, kommun.ansokningssystem.namn);
-}
-
-// --- FAQ (SOKBARHETSSPEC §3.3) — synlig sektion MÅSTE spegla schemat exakt ---
-const deadlinesammanfattning = kommun.bidrag
-  .map((b) => (b.deadlines.typ === 'lopande'
-    ? `${b.namn} söks löpande.`
-    : `${b.namn} söks senast ${b.deadlines.datum.map(formatRecurringDate).join(', ')}.`))
-  .join(' ');
-
-const faqRubrik = KOMMUN.faqRubrik.replace(/{kommun}/g, kommun.kommun);
-const faqEntries = kommun.bidrag.length === 0 ? [] : KOMMUN.faq.map(({ fraga, svar }) => ({
-  fraga: fraga.replace(/{kommun}/g, kommun.kommun),
-  svar: svar
-    .replace(/{kommun}/g, kommun.kommun)
-    .replace(/{antal}/g, String(kommun.bidrag.length))
-    .replace(/{system}/g, kommun.ansokningssystem.namn)
-    .replace(/{forvaltning}/g, kommun.forvaltning)
-    .replace(/{bidragslista}/g, svenskLista(kommun.bidrag.map((b) => b.namn)))
-    .replace(/{deadlinesammanfattning}/g, deadlinesammanfattning),
-}));
-
-const faqJsonLd = faqEntries.length > 0 ? {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqEntries.map(({ fraga, svar }) => ({
-    '@type': 'Question',
-    name: fraga,
-    acceptedAnswer: { '@type': 'Answer', text: svar },
-  })),
-} : null;
-
-// --- Kommunsiffran (SPRINT_COPY.ts §KOMMUNSIFFRA) — bara där datat finns ---
-const kommunsiffraText = kommun.kommunsiffra
-  ? KOMMUNSIFFRA.template
-      .replace(/{antalForeningar}/g, String(kommun.kommunsiffra.antal_foreningar))
-      .replace(/{kommun}/g, kommun.kommun)
-      .replace(/{summa}/g, kommun.kommunsiffra.summa_kr)
-      .replace(/{bidragstyp}/g, kommun.kommunsiffra.bidragstyp)
-  : null;
-const kommunsiffraKalla = kommun.kommunsiffra
-  ? KOMMUNSIFFRA.kalla.replace(/{utlamnadDatum}/g, kommun.kommunsiffra.utlamnad_datum)
-  : null;
-
-// dateModified ur verifierad (SOKBARHETSSPEC §4.5) — färskhetssignal.
-const webPageJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: h1,
-  dateModified: kommun.verifierad,
-};
+const { kommun, kommunNamn } = Astro.props;
+const { slug } = Astro.params;
 ---
-<Base title={metaTitle} description={metaDescription}>
-  <script type="application/ld+json" set:html={JSON.stringify(webPageJsonLd)} />
-  <BreadcrumbList items={[
-    { name: 'Startsida', url: '/' },
-    { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
-  ]} />
-
-  <div class="kommun-header">
-    <h1>{h1}</h1>
-    <p class="kommun-header__meta">
-      {kommun.lan} · {kommun.forvaltning} · Senast verifierad {formatDate(kommun.verifierad)}
-    </p>
-  </div>
-
-  <p class="bevakning-antal" data-bevakning-antal data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} hidden></p>
-
-  {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
-
-  <VerificationRow kommun={kommun.kommun} verifierad={kommun.verifierad} kallaUrl={kommun.kalla_url} />
-
-  {kommunsiffraText && (
-    <p class="kommunsiffra">
-      {kommunsiffraText} <span class="kommunsiffra__kalla">{kommunsiffraKalla}</span>
-    </p>
-  )}
-
-  {svarForst && <p class="svar-forst">{svarForst}</p>}
-
-  <p>{intro}</p>
-
-  {kommun.bidrag.length === 0 ? (
-    <p>{KOMMUN.ingaBidrag}</p>
-  ) : (
-    <>
-      <KommunProgression kommun={kommun} today={today} />
-      <GiltighetsKontroll kommun={kommun} today={today} />
-    </>
-  )}
-
-  <section>
-    <h2>{KOMMUN.ansokningssystemRubrik}</h2>
-    <p>
-      {ansokningstext}{' '}
-      <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
-    </p>
-  </section>
-
-  {kommun.bidrag.length > 0 && (
-    <section>
-      <h2>Alla bidrag i {kommun.kommun}, i detalj</h2>
-      <ul class="bidrag-list">
-        {sortedBidrag.map((bidrag) => (
-          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} />
-        ))}
-      </ul>
-    </section>
-  )}
-
-  {faqEntries.length > 0 && (
-    <section>
-      <h2>{faqRubrik}</h2>
-      <dl class="faq-list">
-        {faqEntries.map(({ fraga, svar }) => (
-          <>
-            <dt>{fraga}</dt>
-            <dd>{svar}</dd>
-          </>
-        ))}
-      </dl>
-    </section>
-  )}
-  {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
-</Base>
-
-<script>
-  import { hamtaBevakningsantal, BEVAKNING_GOLV } from '../../../lib/bevakningKlient';
-  import { VANTELISTA } from '../../../lib/content';
-
-  const el = document.querySelector<HTMLElement>('[data-bevakning-antal]');
-  const slug = el?.dataset.kommunSlug;
-  const namn = el?.dataset.kommunNamn ?? '';
-  if (el && slug) {
-    hamtaBevakningsantal(slug).then((antal) => {
-      if (antal !== null && antal >= BEVAKNING_GOLV) {
-        el.textContent = VANTELISTA.socialProof.replace('{antal}', String(antal)).replace(/{kommun}/g, namn);
-        el.hidden = false;
-      }
-    });
-  }
-</script>
+{kommun ? (
+  <KommunSidaFull kommun={kommun} />
+) : (
+  <KommunLandningsSida kommunSlug={slug} kommunNamn={kommunNamn} />
+)}

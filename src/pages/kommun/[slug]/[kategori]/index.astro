@@ -64,6 +64,11 @@ const webPageJsonLd = {
   <p>{intro}</p>
 
   <ul class="bidrag-list">
-    {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} />)}
+    {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} kommunSlug={kommun.kommun_slug} />)}
   </ul>
 </Base>
+
+<script>
+  import { initFelrapportWidgets } from '../../../../lib/felrapportKlient';
+  initFelrapportWidgets();
+</script>

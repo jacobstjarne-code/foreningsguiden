@@ -1,0 +1,123 @@
+---
+// Landningsläget för en giltig men ännu OTÄCKT kommun (H4,
+// SPEC_ATERSTAENDE_HAL.md Kluster 4) — "Vi täcker inte {kommun} än — vill
+// ni bli meddelade?" i stället för Vercels generiska 404. noindex: en
+// 191-sidor-lång svit utan unikt innehåll (bara ett formulär) är precis
+// den klassen "tunn sida" SOKBARHETSSPEC redan varnar för på kategori-
+// sidan — indexeras inte förrän kommunen faktiskt har data.
+import Base from '../layouts/Base.astro';
+import BreadcrumbList from './BreadcrumbList.astro';
+import { KOMMUN_LANDNING } from '../lib/content';
+
+export interface Props {
+  kommunSlug: string;
+  kommunNamn: string;
+}
+
+const { kommunSlug, kommunNamn } = Astro.props;
+
+const metaTitle = KOMMUN_LANDNING.metaTitleTemplate.replace(/{kommun}/g, kommunNamn);
+const metaDescription = KOMMUN_LANDNING.metaDescriptionTemplate.replace(/{kommun}/g, kommunNamn);
+const h1 = KOMMUN_LANDNING.h1Template.replace(/{kommun}/g, kommunNamn);
+const brodtext = KOMMUN_LANDNING.brodtext.replace(/{kommun}/g, kommunNamn);
+const formularRubrik = KOMMUN_LANDNING.formularRubrik.replace(/{kommun}/g, kommunNamn);
+const kvitto = KOMMUN_LANDNING.kvitto.replace(/{kommun}/g, kommunNamn);
+---
+<Base title={metaTitle} description={metaDescription} noindex={true}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: kommunNamn, url: `/kommun/${kommunSlug}/` },
+  ]} />
+
+  <div class="kommun-header">
+    <h1>{h1}</h1>
+  </div>
+
+  <p>{brodtext}</p>
+
+  <div class="kommun-landning-form" data-kommunefterfragan data-kommun-slug={kommunSlug}>
+    <h2>{formularRubrik}</h2>
+    <form data-kommunefterfragan-form>
+      <label for="kommunefterfragan-epost">{KOMMUN_LANDNING.epostPlaceholder}</label>
+      <input type="email" id="kommunefterfragan-epost" name="email" placeholder={KOMMUN_LANDNING.epostPlaceholder} required autocomplete="email" />
+      <button type="submit" class="btn-primary">{KOMMUN_LANDNING.knapp}</button>
+    </form>
+    <p class="kommun-landning-form__kvitto" data-kommunefterfragan-kvitto hidden>{kvitto}</p>
+    <p class="kommun-landning-form__fel" data-kommunefterfragan-fel hidden>{KOMMUN_LANDNING.fel}</p>
+  </div>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-kommunefterfragan]').forEach((widget) => {
+    const kommunSlug = widget.dataset.kommunSlug ?? '';
+    const form = widget.querySelector<HTMLFormElement>('[data-kommunefterfragan-form]');
+    const kvitto = widget.querySelector<HTMLElement>('[data-kommunefterfragan-kvitto]');
+    const felText = widget.querySelector<HTMLElement>('[data-kommunefterfragan-fel]');
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      felText?.setAttribute('hidden', '');
+      const data = new FormData(form);
+      data.set('kommun', kommunSlug);
+
+      try {
+        const res = await fetch('/api/kommunefterfragan', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error('svar ej ok');
+
+        form.hidden = true;
+        kvitto?.removeAttribute('hidden');
+      } catch {
+        felText?.removeAttribute('hidden');
+      }
+    });
+  });
+</script>
+
+<style>
+  .kommun-landning-form {
+    margin-top: var(--fg-space-6);
+    padding: var(--fg-space-5);
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+  }
+
+  .kommun-landning-form h2 {
+    margin-top: 0;
+  }
+
+  .kommun-landning-form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--fg-space-3);
+    align-items: center;
+  }
+
+  .kommun-landning-form label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .kommun-landning-form input[type='email'] {
+    flex: 1 1 20ch;
+    padding: var(--fg-space-3);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+  }
+
+  .kommun-landning-form__kvitto {
+    color: var(--fg-ink-muted);
+    margin-bottom: 0;
+  }
+
+  .kommun-landning-form__fel {
+    color: var(--fg-urgent);
+    margin-bottom: 0;
+  }
+</style>
