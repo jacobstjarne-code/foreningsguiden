@@ -26,8 +26,25 @@ const kopPerEmailKey = (email: string) => `kop:email:${email.toLowerCase()}`;
 // behöva hasha: samma nya tillstånd mejlas aldrig två gånger, men en
 // FÖRNYAD ändring efter det mejlas igen.
 const andringsnotisKey = (stripeSessionId: string) => `andringsnotis:${stripeSessionId}`;
+// H19: har utfallsfrågan för DETTA köp+bidrag redan skickats? Egen
+// nyckelrymd, inte subscribers.ts:s paminnelseskickad:*-mönster — den är
+// e-postscopad (en bevakare), den här är köp-scopad (samma person kan i
+// teorin köpa flera gånger, varje köp får sin egen utfallsfråga).
+const utfallsfraganKey = (stripeSessionId: string, bidragId: string) => `utfallsfraga:${stripeSessionId}:${bidragId}`;
 
 export type KopProdukt = 'registrering';
+
+// H19 (SPEC: Kluster 1 — efter-köp-ytan, utfallsslingan): tre
+// svarsalternativ, klartext-literaler rakt av som URL-path-segment
+// (api/utfall/[session]/[bidrag]/[svar].ts) — inga koder att slå upp.
+export type KopUtfallSvar = 'beviljat' | 'avslag' | 'vet_inte';
+
+export interface KopUtfallEntry {
+  bidragId: string;
+  bidragNamn: string;
+  svar: KopUtfallSvar;
+  svaratDatum: string; // ISO
+}
 
 export interface KopEntry {
   email: string;
@@ -46,6 +63,10 @@ export interface KopEntry {
   // KÖPTILLFÄLLET — låst, ändras aldrig efteråt. Ändringsbevakningens
   // cronjobb jämför kommunens NUVARANDE checklista mot denna.
   forutsattningarSnapshot?: string;
+  // H19: en KopEntry kan matcha FLERA bidrag (kommun-scopad registrering,
+  // inte bidrag-scopad) — en post per bidrag som faktiskt svarat, inte
+  // ett enda fält. "Senaste svaret vinner" per bidragId, ingen historik.
+  utfall?: KopUtfallEntry[];
 }
 
 /** Sparar ett bekräftat köp. Idempotent per stripeSessionId — samma session skriver aldrig två index-poster. */
@@ -117,4 +138,37 @@ export async function hamtaSenastNotifieradSnapshot(stripeSessionId: string): Pr
 /** H22: markerar att köparen nu är mejlad om denna specifika (nya) snapshot. */
 export async function markeraSnapshotNotifierad(stripeSessionId: string, snapshot: string): Promise<void> {
   await redis.set(andringsnotisKey(stripeSessionId), { snapshot });
+}
+
+/** H19: har utfallsfrågan för detta (köp, bidrag) redan skickats — cronets idempotensspärr. */
+export async function harUtfallsfraganSkickats(stripeSessionId: string, bidragId: string): Promise<boolean> {
+  return (await redis.get(utfallsfraganKey(stripeSessionId, bidragId))) !== null;
+}
+
+/** H19: markerar att utfallsfrågan för detta (köp, bidrag) nu är skickad. */
+export async function markeraUtfallsfraganSkickad(stripeSessionId: string, bidragId: string): Promise<void> {
+  await redis.set(utfallsfraganKey(stripeSessionId, bidragId), true);
+}
+
+/**
+ * H19: sparar svaret från en av de tre mejllänkarna. Läs-mergea-skriv,
+ * samma "läs befintlig FÖRST"-princip som subscribers.ts — en blind
+ * overwrite hade tappat andra bidrags redan sparade svar på samma köp.
+ * Senaste svaret för ETT bidragId vinner (klickar man en annan länk i
+ * efterhand ändras svaret, ingen historik). No-op om köpet inte finns —
+ * kan hända om länken är gammal/manipulerad, kraschar aldrig routen.
+ */
+export async function sparaUtfallssvar(
+  stripeSessionId: string,
+  bidragId: string,
+  bidragNamn: string,
+  svar: KopUtfallSvar
+): Promise<boolean> {
+  const kop = await hamtaKop(stripeSessionId);
+  if (!kop) return false;
+
+  const utfall = (kop.utfall ?? []).filter((u) => u.bidragId !== bidragId);
+  utfall.push({ bidragId, bidragNamn, svar, svaratDatum: new Date().toISOString() });
+  await redis.set(kopKey(stripeSessionId), { ...kop, utfall });
+  return true;
 }

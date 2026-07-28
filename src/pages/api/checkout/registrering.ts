@@ -19,13 +19,30 @@ import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { getKommunBySlug } from '../../../lib/kommuner';
 import { siteUrl } from '../../../lib/mejl';
-import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../lib/priser';
+import { PRIS_REGISTRERINGSUTKAST_ORE, MOMSSATS, momsAndelOre } from '../../../lib/priser';
+import { SALJARE } from '../../../lib/content';
 
 const env = import.meta.env as unknown as Record<string, string>;
+
+// H10: SALJARE (content.ts) är fortfarande TODO-platshållare — väntar på
+// valet av juridisk part. Fint i Stripe sandbox (dagens läge, syns bara
+// på testfakturor), men en riktig faktura får ALDRIG gå ut till en
+// betalande förening med "{{TODO...}}" som säljarnamn. Spärren är billig
+// att skriva nu och dyr att glömma vid växlingen till skarpt läge.
+function saljareArKlar(): boolean {
+  return !SALJARE.foretag.startsWith('{{TODO') && !SALJARE.orgnr.startsWith('{{TODO');
+}
 
 export const POST: APIRoute = async ({ request }) => {
   const stripeKey = env.STRIPE_SECRET_KEY?.trim();
   if (!stripeKey) {
+    return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {
+      status: 503,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+  if (stripeKey.startsWith('sk_live_') && !saljareArKlar()) {
+    console.error('checkout/registrering: skarpt Stripe-läge men SALJARE i content.ts är fortfarande TODO — vägrar skapa en faktura med platshållartext.');
     return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {
       status: 503,
       headers: { 'content-type': 'application/json' },
@@ -68,8 +85,23 @@ export const POST: APIRoute = async ({ request }) => {
     // faktura per köp och mejlar en PDF till en varaktig, hostad länk
     // (går inte ut som Checkout Session-URL:en gör) — täcker
     // "bokföringsbart kvitto" och "varaktig leverans" i en mekanism,
-    // utan att vi bygger en egen PDF-pipeline.
-    invoice_creation: { enabled: true },
+    // utan att vi bygger en egen PDF-pipeline. custom_fields (H10, SPEC:
+    // Kluster 1) lägger säljarens namn/org.nr och momsspecifikationen
+    // direkt på den PDF:en — Stripes konto-affärsprofil styr annars bara
+    // en generisk header, inte de här fälten.
+    invoice_creation: {
+      enabled: true,
+      invoice_data: {
+        custom_fields: [
+          { name: 'Säljare', value: SALJARE.foretag },
+          { name: 'Org.nr', value: SALJARE.orgnr },
+          {
+            name: `Varav moms (${MOMSSATS * 100}%)`,
+            value: `${(momsAndelOre(PRIS_REGISTRERINGSUTKAST_ORE) / 100).toFixed(2).replace('.', ',')} kr`,
+          },
+        ],
+      },
+    },
     success_url: `${base}/kommun/${kommunSlug}/registrera/?betald=1&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${base}/kommun/${kommunSlug}/registrera/`,
   };

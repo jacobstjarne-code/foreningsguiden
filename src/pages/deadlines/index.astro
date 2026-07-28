@@ -175,7 +175,7 @@ function beloppCell(e: DeadlineEntry): string {
 </Base>
 
 <script>
-  import { BEVAKNING } from '../../lib/content';
+  import { initBevakaWidgets } from '../../lib/bevakaKlient';
 
   const kommunSelect = document.getElementById('filter-kommun');
   const kategoriSelect = document.getElementById('filter-kategori');
@@ -214,64 +214,12 @@ function beloppCell(e: DeadlineEntry): string {
   kommunSelect?.addEventListener('change', applyFilter);
   kategoriSelect?.addEventListener('change', applyFilter);
 
-  // "Bevaka den här" — en kompakt, en-kommun-scopad variant av
-  // EmailSignup.astro/api/prenumerera, en knapp per deadlinerad (Jacob
-  // 2026-07-27: "kalendern blir en tjänst i stället för en referens").
-  // Samma backend (addPendingSubscriber, dubbel opt-in) och samma
-  // BEVAKNING-copy som helsidesformuläret — bara ett kompakt, fetch-
-  // baserat gränssnitt i cellen i stället för en sidladdning, samma
-  // mönster som GiltighetsKontroll.astro redan etablerat. Fungerar
-  // oförändrat i en månad som just öppnats — <details> tar aldrig bort
-  // sina barn ur DOM, så querySelectorAll nedan hittar ALLA celler vid
+  // "Bevaka den här" — utbruten till bevakaKlient.ts (H20, SPEC: Kluster
+  // 1) eftersom widgeten nu renderas från två sidor. Fungerar oförändrat
+  // i en månad som just öppnats — <details> tar aldrig bort sina barn ur
+  // DOM, så querySelectorAll i den delade modulen hittar ALLA celler vid
   // sidladdning oavsett kollapsat/öppet läge.
-  function byggBevakaForm(kommunNamn: string): HTMLFormElement {
-    const form = document.createElement('form');
-    form.className = 'bevaka-rad-form';
-    form.innerHTML = `
-      <input type="email" name="email" placeholder="${BEVAKNING.epostPlaceholder}" required autocomplete="email" />
-      <label class="bevaka-rad-form__samtycke">
-        <input type="checkbox" name="samtycke" required />
-        ${BEVAKNING.samtycke}
-      </label>
-      <button type="submit" class="btn-primary">${BEVAKNING.knapp}</button>
-      <p class="bevaka-rad-form__fel" data-bevaka-fel hidden>Något gick fel. Försök igen.</p>
-    `;
-    form.setAttribute('aria-label', `Bevaka deadlines i ${kommunNamn}`);
-    return form;
-  }
-
-  document.querySelectorAll<HTMLElement>('[data-bevaka-cell]').forEach((cell) => {
-    const knapp = cell.querySelector<HTMLButtonElement>('.bevaka-rad-knapp');
-    const kommunSlug = cell.dataset.kommunSlug ?? '';
-    const kommunNamn = cell.dataset.kommunNamn ?? '';
-
-    knapp?.addEventListener('click', () => {
-      const form = byggBevakaForm(kommunNamn);
-      cell.replaceChildren(form);
-
-      const felText = form.querySelector<HTMLElement>('[data-bevaka-fel]');
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        felText?.setAttribute('hidden', '');
-        const data = new FormData(form);
-        data.set('kommun', kommunSlug);
-
-        try {
-          const res = await fetch('/api/prenumerera-json', { method: 'POST', body: data });
-          const json = await res.json();
-          if (!res.ok || !json.ok) throw new Error('svar ej ok');
-
-          const kvitto = document.createElement('p');
-          kvitto.className = 'bevaka-rad-kvitto';
-          kvitto.textContent = json.alreadyConfirmed ? BEVAKNING.kvittoRubrik : BEVAKNING.kvittoText;
-          cell.replaceChildren(kvitto);
-        } catch {
-          felText?.removeAttribute('hidden');
-        }
-      });
-    });
-  });
+  initBevakaWidgets();
 </script>
 
 <style>

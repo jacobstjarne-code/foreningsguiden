@@ -333,3 +333,74 @@ export async function sendFelrapport(vars: FelrapportVars): Promise<void> {
     throw new Error(`Resend-fel vid felrapport: ${result.error.message}`);
   }
 }
+
+export interface KvittoVars {
+  produkt: string;
+  belopp: string; // kr, utan öre — redan avrundat av anroparen
+  datum: string; // svensk klartext, redan formaterad av anroparen
+  invoicePdfUrl: string;
+}
+
+/**
+ * H10 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): det bokföringsbara
+ * kvittot, SEPARAT från leveransmejlet (sendKopBekraftelse, som bär
+ * checklistan). MEJL.kvitto (content.ts) — Fable-copy, fylls direkt
+ * (samma precedent som övriga transaktionsmejl: ingen sendMejl()/sidfot,
+ * en kassörens kvitto ska inte bära en "avregistrera dig"-rad).
+ *
+ * PDF:en bifogas via Resends `path`-attachment — Resends servrar hämtar
+ * filen från Stripes invoice_pdf-URL själva. Ingen egen fetch/buffer-kod
+ * i vår Vercel-funktion, samma nollarbetsprincip som hostedInvoiceUrl.
+ */
+export async function sendKvitto(to: string, vars: KvittoVars): Promise<void> {
+  const amne = MEJL.kvitto.amne;
+  const text = MEJL.kvitto.body
+    .map((p) => p.replace('{produkt}', vars.produkt).replace('{belopp}', vars.belopp).replace('{datum}', vars.datum))
+    .join('\n\n');
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: amne,
+    text,
+    attachments: [{ filename: 'kvitto.pdf', path: vars.invoicePdfUrl }],
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid kvitto: ${result.error.message}`);
+  }
+}
+
+export interface UtfallsfragaVars {
+  bidrag: string;
+  kommun: string;
+  datum: string; // svensk klartext, redan formaterad av anroparen
+  svarBeviljatLank: string;
+  svarAvslagLank: string;
+  svarVetInteLank: string;
+}
+
+/**
+ * H19 (SPEC: Kluster 1, samma dokument): utfallsslingan. Tre svarslänkar
+ * — klartext-URL:er i ett textmejl, inte HTML-knappar (samma stil som
+ * övriga textmejl i den här filen). Ingen sendMejl()/sidfot av samma skäl
+ * som sendKvitto ovan.
+ */
+export async function sendUtfallsfraga(to: string, vars: UtfallsfragaVars): Promise<void> {
+  const amne = MEJL.utfallsfraga.amne.replace('{bidrag}', vars.bidrag);
+  const text = MEJL.utfallsfraga.body
+    .map((p) =>
+      p
+        .replace(/{bidrag}/g, vars.bidrag)
+        .replace(/{kommun}/g, vars.kommun)
+        .replace('{datum}', vars.datum)
+        .replace('{svarBeviljatLank}', vars.svarBeviljatLank)
+        .replace('{svarAvslagLank}', vars.svarAvslagLank)
+        .replace('{svarVetInteLank}', vars.svarVetInteLank)
+    )
+    .join('\n\n');
+
+  const result = await resend.emails.send({ from: FROM, to, subject: amne, text: urlPaEgenRad(text) });
+  if (result.error) {
+    throw new Error(`Resend-fel vid utfallsfråga: ${result.error.message}`);
+  }
+}

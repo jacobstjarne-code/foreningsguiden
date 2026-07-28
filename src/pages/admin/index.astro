@@ -25,6 +25,14 @@ const abonnemang = inloggad ? await hamtaAllaAbonnemang() : [];
 const kommunefterfragningar = inloggad ? await hamtaAllaKommunEfterfragningar() : [];
 const summaKr = kop.reduce((sum, k) => sum + k.beloppOre, 0) / 100;
 const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
+
+// H19 — utfallsaggregatet ("41 av 52 beviljade"). Räknat direkt ur
+// kop:s utfall[]-fält, ingen egen lagring — adminvyn ÄR läsytan tills
+// ett publikt social proof-läge byggs (inte beställt i detta pass).
+const utfall = kop.flatMap((k) => k.utfall ?? []);
+const utfallBeviljat = utfall.filter((u) => u.svar === 'beviljat').length;
+const utfallAvslag = utfall.filter((u) => u.svar === 'avslag').length;
+const utfallVetInte = utfall.filter((u) => u.svar === 'vet_inte').length;
 ---
 <Base title="Admin — Föreningsguiden" description="Internt adminverktyg." noindex={true}>
   <h1>Admin</h1>
@@ -46,6 +54,7 @@ const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
           <li>{subscribers.length} prenumeranter</li>
           <li>{kop.length} köp — {summaKr.toFixed(0)} kr totalt</li>
           <li>{aktivaAbonnemang} aktiva abonnemang ({abonnemang.length} totalt)</li>
+          <li>Utfall: {utfallBeviljat} beviljat, {utfallAvslag} avslag, {utfallVetInte} vet inte än ({utfall.length} svar totalt)</li>
         </ul>
       </section>
 
@@ -90,6 +99,9 @@ const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
               <li>
                 <strong>{(k.beloppOre / 100).toFixed(0)} kr</strong> — {formatDate(k.betaldDatum.slice(0, 10))} — {k.email} — {k.kommunSlug}
                 {k.hostedInvoiceUrl && <> — <a href={k.hostedInvoiceUrl}>Faktura</a></>}
+                {k.utfall && k.utfall.length > 0 && (
+                  <> — utfall: {k.utfall.map((u) => `${u.bidragNamn}: ${u.svar}`).join(', ')}</>
+                )}
               </li>
             ))}
           </ul>

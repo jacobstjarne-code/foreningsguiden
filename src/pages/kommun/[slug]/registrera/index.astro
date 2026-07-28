@@ -15,7 +15,7 @@ import Base from '../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
 import { loadKommuner } from '../../../../lib/kommuner';
 import type { Kommun } from '../../../../lib/kommuner';
-import { VAGLEDNING } from '../../../../lib/content';
+import { VAGLEDNING, BEVAKNING, KVITTOSIDA } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
 import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../../lib/priser';
 
@@ -89,7 +89,35 @@ const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
            som den gamla, manuella Registreringshjälpen. Minimal, funktionell
            statusrad (samma precedent som avregistrera/kontakt-sidornas
            instruktionstext), flaggad till Fable för ev. justering. */}
-        <p data-registrera-kvitto hidden>Betalningen gick igenom — ni får ert registreringsutkast direkt till angiven e-postadress.</p>
+        <div data-registrera-kvitto hidden>
+          <p>Betalningen gick igenom — ni får ert registreringsutkast direkt till angiven e-postadress.</p>
+
+          {/* H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni
+             är här". Allt beräknas klientsidan (sidan är statiskt byggd,
+             föreningsprofilen bor bara i localStorage) — se skriptet
+             nedan. Varje rad döljs tills underlaget faktiskt finns. */}
+          <div class="kvitto-vidare" data-kvitto-vidare data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun}>
+            <h3>{KVITTOSIDA.rubrik}</h3>
+
+            <p class="kvitto-vidare__rad" data-kvitto-matchade hidden>
+              <span data-kvitto-matchade-text></span>{' '}
+              <a href={`/kommun/${kommun.kommun_slug}/`}>{KVITTOSIDA.matchadeBidragLank}</a>
+            </p>
+
+            <div class="kvitto-vidare__rad" data-kvitto-deadline hidden>
+              <p><span data-kvitto-deadline-text></span></p>
+              <div class="kvitto-vidare__bevaka deadline-table__bevaka" data-bevaka-cell data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun}>
+                <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
+              </div>
+            </div>
+
+            <p class="kvitto-vidare__rad">
+              {KVITTOSIDA.delaFraga}{' '}
+              <button type="button" class="fg-btn--ghost" data-kvitto-dela>{KVITTOSIDA.delaLank}</button>
+              <span class="kvitto-vidare__dela-kvitto" data-kvitto-dela-kvitto hidden>Länk kopierad.</span>
+            </p>
+          </div>
+        </div>
         <p data-registrera-fel hidden>Något gick fel. Försök igen.</p>
       </div>
     )}
@@ -100,11 +128,92 @@ const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
 
 <script>
   import { getForeningsprofil } from '../../../../lib/foreningsprofil';
+  import { matchKommun } from '../../../../lib/matching';
+  import { formatDate, earliestDeadlineISO, todayISO, type Kommun } from '../../../../lib/kommunTyper';
+  import { KVITTOSIDA } from '../../../../lib/content';
+  import { initBevakaWidgets } from '../../../../lib/bevakaKlient';
 
   const knapp = document.querySelector<HTMLButtonElement>('[data-registrera-betala]');
   const kvitto = document.querySelector<HTMLElement>('[data-registrera-kvitto]');
   const felText = document.querySelector<HTMLElement>('[data-registrera-fel]');
   const kommunSlug = window.location.pathname.split('/').filter(Boolean)[1] ?? '';
+
+  initBevakaWidgets();
+
+  // H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni är
+  // här". Sidan är statiskt byggd (getStaticPaths) och föreningsprofilen
+  // bor bara i localStorage — allt underlag måste alltså hämtas/räknas
+  // här, klientsidan, precis som matcha/index.astro redan gör mot samma
+  // /kommun-data/{slug}.json-endpoint. Varje rad förblir dold om
+  // underlaget saknas (ingen profil, inga fasta deadlines) — se spec:en.
+  async function visaMedanNiArHar(): Promise<void> {
+    const vidare = document.querySelector<HTMLElement>('[data-kvitto-vidare]');
+    if (!vidare || !kommunSlug) return;
+
+    let kommunData: Kommun;
+    try {
+      const res = await fetch(`/kommun-data/${kommunSlug}.json`);
+      if (!res.ok) throw new Error('kommun-data 404');
+      kommunData = await res.json();
+    } catch {
+      return;
+    }
+
+    const profil = getForeningsprofil();
+    if (profil) {
+      const antal = matchKommun(profil, kommunData).matchar.length;
+      if (antal > 0) {
+        const rad = vidare.querySelector<HTMLElement>('[data-kvitto-matchade]');
+        const text = rad?.querySelector<HTMLElement>('[data-kvitto-matchade-text]');
+        if (text) {
+          text.textContent = KVITTOSIDA.matchadeBidragRad
+            .replace('{antal}', String(antal))
+            .replace(/{kommun}/g, kommunData.kommun);
+        }
+        rad?.removeAttribute('hidden');
+      }
+    }
+
+    const today = todayISO();
+    const kommandeDeadlines = kommunData.bidrag
+      .filter((b) => b.status === 'aktiv')
+      .map((b) => earliestDeadlineISO(b, today))
+      .filter((d): d is string => d !== null)
+      .sort();
+    if (kommandeDeadlines.length > 0) {
+      const rad = vidare.querySelector<HTMLElement>('[data-kvitto-deadline]');
+      const text = rad?.querySelector<HTMLElement>('[data-kvitto-deadline-text]');
+      if (text) {
+        text.textContent = KVITTOSIDA.nastaDeadlineRad
+          .replace(/{kommun}/g, kommunData.kommun)
+          .replace('{datum}', formatDate(kommandeDeadlines[0]));
+      }
+      rad?.removeAttribute('hidden');
+    }
+  }
+
+  // "Dela" — alltid tillgänglig (spec:en), ingen villkorad data. Web
+  // Share API där webbläsaren stödjer den (mobil), annars kopiera-länk.
+  document.querySelector<HTMLButtonElement>('[data-kvitto-dela]')?.addEventListener('click', async () => {
+    const url = `${window.location.origin}/kommun/${kommunSlug}/`;
+    const kommunNamn = document.querySelector<HTMLElement>('[data-kvitto-vidare]')?.dataset.kommunNamn ?? '';
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: `Föreningsbidrag i ${kommunNamn}`, url });
+        return;
+      } catch {
+        // Avbrutet av användaren eller stött av webbläsaren — faller
+        // igenom till kopiera-länk nedan.
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      document.querySelector<HTMLElement>('[data-kvitto-dela-kvitto]')?.removeAttribute('hidden');
+    } catch {
+      // Clipboard-API otillgängligt — inget att göra åt utan HTTPS.
+    }
+  });
 
   // Stripe Checkout skickar tillbaka hit via success_url — se
   // src/pages/api/checkout/registrering.ts. Ingen egen kvittosida:
@@ -113,6 +222,7 @@ const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
   if (new URLSearchParams(window.location.search).get('betald') === '1') {
     knapp?.setAttribute('hidden', '');
     kvitto?.removeAttribute('hidden');
+    visaMedanNiArHar();
   }
 
   knapp?.addEventListener('click', async () => {
@@ -234,5 +344,34 @@ const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
     margin-top: var(--fg-space-5);
+  }
+
+  /* H20 — "Medan ni är här" på kvittoläget. */
+  .kvitto-vidare {
+    margin-top: var(--fg-space-6);
+    padding-top: var(--fg-space-5);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .kvitto-vidare h3 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  .kvitto-vidare__rad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fg-space-2);
+    margin: var(--fg-space-3) 0;
+  }
+
+  .kvitto-vidare__bevaka {
+    margin-top: var(--fg-space-2);
+  }
+
+  .kvitto-vidare__dela-kvitto {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
   }
 </style>

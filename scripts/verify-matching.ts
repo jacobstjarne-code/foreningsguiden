@@ -7,8 +7,9 @@
  */
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
-import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik } from '../src/lib/kommunTyper.ts';
+import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik, subtractDays } from '../src/lib/kommunTyper.ts';
 import { arOverGolv, formateraBevakarText } from '../src/lib/bevakningKlient.ts';
+import { momsAndelOre } from '../src/lib/priser.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
@@ -275,6 +276,18 @@ test('SPEC_DEADLINEKALENDER: parseBeloppTak — kalenderraden visar bara otvetyd
   assert.equal(parseBeloppTak('1 000 kr/aktivitetstimme'), null);
   assert.equal(parseBeloppTak('Upp till 30 % av redovisad kostnad'), null);
   assert.equal(parseBeloppTak(null), null);
+});
+
+test('KLUSTER1 H19: subtractDays — grundfall och årsrullning bakåt (december-frågan går över årsskiftet)', () => {
+  assert.equal(subtractDays('2026-08-10', 14), '2026-07-27');
+  assert.equal(subtractDays('2026-01-05', 14), '2025-12-22');
+});
+
+test('KLUSTER1 H10: momsAndelOre — 25% av ett momsinklusive belopp, PRIS_REGISTRERINGSUTKAST_ORE (24900) ger 4980', () => {
+  assert.equal(momsAndelOre(24900), 4980);
+  assert.equal(momsAndelOre(0), 0);
+  // 100 kr inklusive 25% moms → 20 kr moms (100/1.25 = 80 exkl., 80*0.25=20)
+  assert.equal(momsAndelOre(10000), 2000);
 });
 
 console.log(`\n${antal} tester klara`);

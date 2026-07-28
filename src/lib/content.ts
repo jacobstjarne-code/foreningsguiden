@@ -396,6 +396,64 @@ export const MEJL = {
       'Vad som gäller i er kommun, med källa: {kommunLank}',
     ],
   },
+
+  /**
+   * H10 (SPEC: Kluster 1 — efter-köp-ytan, Opus/Fable 2026-07-28): det
+   * bokföringsbara kvittot. Skickas SEPARAT från leveransmejlet
+   * (sendKopBekraftelse, som bär checklistan) — det här mejlet är rent
+   * kvittot, med Stripes invoice_pdf som bilaga (mejl.ts sendKvitto).
+   */
+  kvitto: {
+    amne: 'Kvitto — Föreningsguiden',
+    body: [
+      'Tack för ert köp. Kvittot ligger som bilaga (PDF) och går att spara i föreningens bokföring.',
+      'Vad ni köpt: {produkt}\nBelopp: {belopp} kr inklusive moms\nDatum: {datum}',
+      'Behöver ni kvittot igen finns det alltid under Mina sidor.',
+    ],
+  },
+
+  /**
+   * H19 (SPEC: Kluster 1, samma dokument): utfallsslingan. Skickas 14
+   * dagar efter en bevakad deadline för ett matchat bidrag hos en köpare
+   * av registreringsutkastet (cron/utfallsfraga.ts). Tre svarslänkar —
+   * ren text i ett textmejl, inte riktiga knappar.
+   */
+  utfallsfraga: {
+    amne: 'Hur gick det med {bidrag}?',
+    body: [
+      'Sista ansökningsdag för {bidrag} i {kommun} var {datum}. Vi är nyfikna på hur det gick — svaret hjälper oss göra utkasten bättre, och vi visar aldrig enskilda föreningars utfall.',
+      'Vi fick bidraget: {svarBeviljatLank}\nVi fick avslag: {svarAvslagLank}\nVet inte än: {svarVetInteLank}',
+      'Fick ni avslag och vill veta om beslutet går att ompröva, svara på det här mejlet.',
+    ],
+  },
+};
+
+/**
+ * Säljaruppgifter för kvitton (H10). SAMMA öppna fråga som
+ * OM.avsandarPlatshallare: juridisk part är inte vald än (väntar på
+ * SPEC: Betalintegration §6 steg 3). checkout/registrering.ts vägrar
+ * skapa en faktura i SKARPT Stripe-läge så länge de här fälten är
+ * TODO-platshållare — se den filens live-lägesspärr. I Stripe sandbox
+ * (dagens läge) syns platshållartexten bara på testfakturor.
+ */
+export const SALJARE = {
+  foretag: '{{TODO: företagsnamn — väntar på valet av juridisk part, se SPEC: Betalintegration §6 steg 3}}',
+  orgnr: '{{TODO: organisationsnummer — väntar på valet av juridisk part}}',
+};
+
+/**
+ * H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni är här" på
+ * kvittoläget (kommun/[slug]/registrera/index.astro, ?betald=1). Tre
+ * rader, var och en villkorad på att underlaget faktiskt finns — se den
+ * filens klientskript.
+ */
+export const KVITTOSIDA = {
+  rubrik: 'Medan ni är här',
+  matchadeBidragRad: 'Ni matchade {antal} bidrag till i {kommun}.',
+  matchadeBidragLank: 'Se dem',
+  nastaDeadlineRad: 'Nästa deadline i {kommun} är {datum}. Vi kan säga till fyra veckor innan.',
+  delaFraga: 'Känner ni en annan förening som borde veta det här?',
+  delaLank: 'Dela',
 };
 
 /**

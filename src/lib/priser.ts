@@ -22,3 +22,13 @@ export const PRIS_REGISTRERINGSUTKAST_ORE = 24900;
 // och INTE i något som faktiskt körs eller renderas. Samma tal överallt
 // tills prissättningen testats klart.
 export const PRIS_ABONNEMANG_ORE = 49500;
+
+// H10 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): digitala tjänster
+// till svensk förening är 25 procent moms. Egen konstant, en plats att
+// rätta om revisorn säger annat — ingen magisk 0.25 utspridd i koden.
+export const MOMSSATS = 0.25;
+
+/** Momsandelen av ett momsinklusive öresbelopp, avrundat till hela ören. */
+export function momsAndelOre(beloppOre: number): number {
+  return Math.round((beloppOre * MOMSSATS) / (1 + MOMSSATS));
+}

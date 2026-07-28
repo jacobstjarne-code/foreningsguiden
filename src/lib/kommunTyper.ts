@@ -305,6 +305,20 @@ export function daysUntil(dateISO: string, today: string): number {
   return Math.round((toUTC(dateISO) - toUTC(today)) / (1000 * 60 * 60 * 24));
 }
 
+/**
+ * ISO-datum minus N dagar, UTC — samma dygnsgräns som daysUntil. H19
+ * (SPEC: Kluster 1, utfallsslingan): nextOccurrenceISO rullar bara
+ * FRAMÅT och kan alltså aldrig hitta "deadlinen som var 14 dagar sedan"
+ * — den frågan går åt andra hållet, därav en egen funktion i stället för
+ * att försöka vända nextOccurrenceISO baklänges.
+ */
+export function subtractDays(iso: string, days: number): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d - days));
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
+}
+
 export type Urgency = 'urgent' | 'attention' | 'positive';
 
 /** Urgens-modellen (tokens.css §04): ≤3 dagar bråttom, 4–14 snart, annars god tid. */

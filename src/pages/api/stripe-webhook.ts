@@ -38,9 +38,9 @@ import Stripe from 'stripe';
 import { sparaKop, hamtaKop, type KopEntry } from '../../lib/kop';
 import { sparaAbonnemang, hamtaAbonnemang, uppdateraAbonnemangStatus, type AbonnemangStatus } from '../../lib/abonnemang';
 import { addForeningsprofil } from '../../lib/subscribers';
-import { sendKopNotis, sendKopBekraftelse } from '../../lib/mejl';
+import { sendKopNotis, sendKopBekraftelse, sendKvitto } from '../../lib/mejl';
 import type { Foreningsprofil } from '../../lib/foreningsprofil';
-import { getKommunBySlug } from '../../lib/kommuner';
+import { getKommunBySlug, formatDate } from '../../lib/kommuner';
 import { genereraRegistreringsUtkast } from '../../lib/utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
@@ -120,6 +120,26 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
     await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl, checklista });
   } catch (err) {
     console.error('sendKopBekraftelse misslyckades', err);
+  }
+
+  // H10 (SPEC: Kluster 1): det bokföringsbara kvittot, SEPARAT mejl med
+  // fakturans PDF som bilaga. Bara om fakturan faktiskt hanns hämtas
+  // ovan — annars finns ingen PDF att bifoga, och ett kvittomejl som
+  // PÅSTÅR att kvittot ligger som bilaga fast det inte gör det är värre
+  // än inget kvittomejl alls.
+  if (invoicePdf) {
+    try {
+      await sendKvitto(email, {
+        produkt: `Registreringsutkast — ${kommun?.kommun ?? kommunSlug}`,
+        belopp: beloppKr,
+        datum: formatDate(entry.betaldDatum.slice(0, 10)),
+        invoicePdfUrl: invoicePdf,
+      });
+    } catch (err) {
+      console.error('sendKvitto misslyckades', err);
+    }
+  } else {
+    console.error('sendKvitto hoppades över — ingen invoicePdf för', session.id);
   }
 }
 
