@@ -429,16 +429,18 @@ export const MEJL = {
 };
 
 /**
- * Säljaruppgifter för kvitton (H10). SAMMA öppna fråga som
- * OM.avsandarPlatshallare: juridisk part är inte vald än (väntar på
- * SPEC: Betalintegration §6 steg 3). checkout/registrering.ts vägrar
- * skapa en faktura i SKARPT Stripe-läge så länge de här fälten är
- * TODO-platshållare — se den filens live-lägesspärr. I Stripe sandbox
- * (dagens läge) syns platshållartexten bara på testfakturor.
+ * Säljaruppgifter för kvitton (H10). Humle och Dumle AB / 556000-0000 är
+ * ett SANDBOX-testvärde (Jacob, 2026-07-28) — partsvalet självt är
+ * fortfarande inte gjort (SPEC: Betalintegration §6 steg 3), men det
+ * blockerar inte testkvitton. Byts till den riktiga juridiska partens
+ * uppgifter vid live-växling. checkout/registrering.ts:s live-lägesspärr
+ * ligger kvar oförändrad — den skyddar mot att fältet av misstag töms
+ * (eller lämnas som ett nytt TODO) utan att någon märker det innan
+ * Stripe-nyckeln växlas till skarp.
  */
 export const SALJARE = {
-  foretag: '{{TODO: företagsnamn — väntar på valet av juridisk part, se SPEC: Betalintegration §6 steg 3}}',
-  orgnr: '{{TODO: organisationsnummer — väntar på valet av juridisk part}}',
+  foretag: 'Humle och Dumle AB',
+  orgnr: '556000-0000',
 };
 
 /**
