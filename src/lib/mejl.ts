@@ -404,3 +404,43 @@ export async function sendUtfallsfraga(to: string, vars: UtfallsfragaVars): Prom
     throw new Error(`Resend-fel vid utfallsfråga: ${result.error.message}`);
   }
 }
+
+export interface DelbartBeskedBidrag {
+  namn: string;
+  belopp: string | null;
+  deadlineText: string; // redan formaterad av anroparen (api/dela-besked.ts)
+}
+
+export interface DelbartBeskedVars {
+  kommun: string;
+  kommunSlug: string;
+  bidrag: DelbartBeskedBidrag[];
+}
+
+/**
+ * H7 (SPEC: Kluster 3 — en förening blir fler, 2026-07-28): delbart
+ * besked. Innehåller de matchade bidragen DIREKT (namn, belopp, deadline)
+ * — ingen länk som kräver att svaren fylls i på nytt (föreningsprofilen
+ * finns bara i AVSÄNDARENS localStorage, en länk hade gett mottagaren en
+ * tom tratt). api/dela-besked.ts bygger raderna ur kommun.bidrag
+ * (server-sanningen), aldrig ur fritext klienten skickar.
+ */
+export async function sendDelbartBesked(to: string, vars: DelbartBeskedVars): Promise<void> {
+  const rader: string[] = [`Matchade bidrag i ${vars.kommun}:`, ''];
+  for (const b of vars.bidrag) {
+    rader.push(b.namn);
+    rader.push(`${b.belopp ?? 'Belopp ej publikt angivet'} · ${b.deadlineText}`);
+    rader.push('');
+  }
+  rader.push(`Alla bidrag och källor: ${siteUrl()}/kommun/${vars.kommunSlug}/`);
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Föreningsbidrag i ${vars.kommun} — Föreningsguiden`,
+    text: urlPaEgenRad(rader.join('\n')),
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid delbart besked: ${result.error.message}`);
+  }
+}

@@ -33,6 +33,8 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
 // inte gömt bakom klicket — samma platshållarkonstant som checkout-routen
 // (src/lib/priser.ts), aldrig hårdkodat på två ställen.
 const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
+// H31 (SPEC: Kluster 3, 2026-07-28): delaFraga har nu en {kommun}-platshållare.
+const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
 ---
 <Base
   title={`${titel} — Föreningsguiden`}
@@ -112,7 +114,7 @@ const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
             </div>
 
             <p class="kvitto-vidare__rad">
-              {KVITTOSIDA.delaFraga}{' '}
+              {delaFraga}{' '}
               <button type="button" class="fg-btn--ghost" data-kvitto-dela>{KVITTOSIDA.delaLank}</button>
               <span class="kvitto-vidare__dela-kvitto" data-kvitto-dela-kvitto hidden>Länk kopierad.</span>
             </p>

@@ -454,8 +454,11 @@ export const KVITTOSIDA = {
   matchadeBidragRad: 'Ni matchade {antal} bidrag till i {kommun}.',
   matchadeBidragLank: 'Se dem',
   nastaDeadlineRad: 'Nästa deadline i {kommun} är {datum}. Vi kan säga till fyra veckor innan.',
-  delaFraga: 'Känner ni en annan förening som borde veta det här?',
-  delaLank: 'Dela',
+  // H31 (SPEC: Kluster 3 — en förening blir fler, 2026-07-28): skärpt mot
+  // en konkret gissning (samma bidrag, samma deadlines) i stället för en
+  // generisk fråga. Kommun-scopad — {kommun} fylls i av anroparen.
+  delaFraga: 'Känner ni en annan förening i {kommun}? De söker sannolikt samma bidrag och missar samma deadlines.',
+  delaLank: 'Dela Föreningsguiden',
 };
 
 /**

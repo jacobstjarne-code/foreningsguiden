@@ -148,6 +148,29 @@ export const TRATT = {
 
     // Avslutning — kopplingen till föreningsminnet
     minne: 'Era svar sparas i er föreningsprofil. Nästa gång känner vi igen er, och ni ser direkt vad som är nytt sedan sist.',
+
+    // H7 (SPEC: Kluster 3 — en förening blir fler, 2026-07-28): delbart
+    // besked. Köpbeslutet fattas av styrelsen, inte kassören ensam —
+    // delbarhet ÄR köpprocessen. Mejlversionen (api/dela-besked.ts,
+    // mejl.ts sendDelbartBesked) innehåller de matchade bidragen direkt,
+    // ingen länk som kräver att svaren fylls i på nytt.
+    dela: {
+      rubrik: 'Dela beskedet',
+      brodtext: 'Skicka till styrelsen eller skriv ut inför nästa möte.',
+      knappMejla: 'Mejla',
+      knappSkrivUt: 'Skriv ut',
+      epostPlaceholder: 'din@forening.se',
+      knappSkicka: 'Skicka',
+      kvitto: 'Skickat.',
+    },
+
+    // H9 (SPEC: Kluster 3, samma dokument): paketpris — bara när fler än
+    // ett bidrag matchar. {antal}/{paketpris}/{styckpris} fylls i av
+    // matcha/index.astro (PRIS_PAKET_ORE/PRIS_REGISTRERINGSUTKAST_ORE,
+    // priser.ts).
+    paket: {
+      rad: 'Ni matchade {antal} bidrag. Vi kan göra utkast till alla — {paketpris} kr i stället för {styckpris} kr per bidrag.',
+    },
   },
 
   // ---- Ansvarsraden (följer beskedet, bindande formulering) ----

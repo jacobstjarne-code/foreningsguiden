@@ -32,3 +32,12 @@ export const MOMSSATS = 0.25;
 export function momsAndelOre(beloppOre: number): number {
   return Math.round((beloppOre * MOMSSATS) / (1 + MOMSSATS));
 }
+
+// H9 (SPEC: Kluster 3 — en förening blir fler, 2026-07-28): paketpris för
+// utkast till ALLA matchade bidrag i en kommun, ett flatt engångsbelopp
+// (inte per-bidrag-rabatt) — samma tolkning som "{paketpris} kr i stället
+// för {styckpris} kr per bidrag" i specen. DRAFT-VÄRDE: Jacob gav inget
+// exakt tal i beställningen (till skillnad från SALJARE/abonnemangets
+// pris, som fick exakta siffror) — 699 kr är en placeholder för att göra
+// funktionen testbar nu. Byt innan detta visas för en riktig besökare.
+export const PRIS_PAKET_ORE = 69900;

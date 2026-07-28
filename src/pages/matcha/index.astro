@@ -115,6 +115,9 @@ const kommuner = loadKommuner();
           <p class="tratt__sum-fotnot" data-tratt-sum-fotnot hidden></p>
           <p class="tratt__tom" data-tratt-matchar-tom hidden>{TRATT.besked.kanSoka.tom}</p>
           <ul class="tratt__bidraglista" data-tratt-matchar-lista></ul>
+          {/* H9 (SPEC: Kluster 3, 2026-07-28): paketpris — bara när fler
+             än ett bidrag matchar. Fylls i render(), se skriptet. */}
+          <p class="tratt__paket" data-tratt-paket hidden></p>
         </section>
 
         <section class="tratt__grupp tratt__grupp--saknar" data-tratt-grupp-saknar hidden>
@@ -134,6 +137,25 @@ const kommuner = loadKommuner();
 
         <p class="tratt__minne">{TRATT.besked.minne}</p>
         <p class="tratt__ansvar">{TRATT.ansvar}</p>
+
+        {/* H7 (SPEC: Kluster 3, 2026-07-28): delbart besked — köpbeslutet
+           fattas av styrelsen, inte kassören ensam. Mejlversionen
+           innehåller de matchade bidragen direkt (api/dela-besked.ts),
+           ingen länk som kräver att svaren fylls i på nytt. */}
+        <div class="tratt__dela" data-tratt-dela>
+          <h3>{TRATT.besked.dela.rubrik}</h3>
+          <p>{TRATT.besked.dela.brodtext}</p>
+          <div class="tratt__dela-knappar">
+            <button type="button" class="fg-btn--ghost" data-tratt-dela-mejla>{TRATT.besked.dela.knappMejla}</button>
+            <button type="button" class="fg-btn--ghost" data-tratt-dela-skriv-ut>{TRATT.besked.dela.knappSkrivUt}</button>
+          </div>
+          <form class="tratt__dela-form" data-tratt-dela-form hidden>
+            <input type="email" name="email" placeholder={TRATT.besked.dela.epostPlaceholder} required autocomplete="email" />
+            <button type="submit" class="btn-primary">{TRATT.besked.dela.knappSkicka}</button>
+            <p class="tratt__dela-fel" data-tratt-dela-fel hidden>Något gick fel. Försök igen.</p>
+          </form>
+          <p class="tratt__dela-kvitto" data-tratt-dela-kvitto hidden>{TRATT.besked.dela.kvitto}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -144,6 +166,7 @@ const kommuner = loadKommuner();
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type Aldersbucket, type SoktSvar } from '../../lib/foreningsprofil';
   import { formatDate, earliestDeadlineISO, todayISO, svenskLista, sumBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
+  import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_PAKET_ORE } from '../../lib/priser';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
   if (root) {
@@ -168,6 +191,12 @@ const kommuner = loadKommuner();
     const kommunBytKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-kommun-byt]');
     const kostnadsramEl = root.querySelector<HTMLElement>('[data-tratt-kostnadsram]');
     const sumFotnotEl = root.querySelector<HTMLElement>('[data-tratt-sum-fotnot]');
+    const paketEl = root.querySelector<HTMLElement>('[data-tratt-paket]');
+    const delaMejlaKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-dela-mejla]');
+    const delaSkrivUtKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-dela-skriv-ut]');
+    const delaForm = root.querySelector<HTMLFormElement>('[data-tratt-dela-form]');
+    const delaFelEl = root.querySelector<HTMLElement>('[data-tratt-dela-fel]');
+    const delaKvittoEl = root.querySelector<HTMLElement>('[data-tratt-dela-kvitto]');
 
     const today = todayISO();
     let kommunData: Kommun | null = null;
@@ -361,6 +390,20 @@ const kommuner = loadKommuner();
       }
       if (matcharTomEl) matcharTomEl.hidden = resultat.matchar.length > 0;
 
+      // H9 — paketpris, bara när fler än ETT bidrag matchar (ett enda
+      // bidrag har inget "alla" att paketera).
+      if (paketEl) {
+        if (resultat.matchar.length > 1) {
+          paketEl.textContent = TRATT.besked.paket.rad
+            .replace('{antal}', String(resultat.matchar.length))
+            .replace('{paketpris}', String(PRIS_PAKET_ORE / 100))
+            .replace('{styckpris}', String(PRIS_REGISTRERINGSUTKAST_ORE / 100));
+          paketEl.hidden = false;
+        } else {
+          paketEl.hidden = true;
+        }
+      }
+
       if (saknarGruppEl) saknarGruppEl.hidden = !dataFinns || resultat.saknar.length === 0;
       if (saknarListaEl) {
         saknarListaEl.innerHTML = '';
@@ -447,6 +490,38 @@ const kommuner = loadKommuner();
     tillbakaKnapp?.addEventListener('click', () => goStep(step - 1));
     omstartKnapp?.addEventListener('click', () => goStep(1));
     vidareKnapp?.addEventListener('click', () => goStep(3));
+
+    // H7 — delbart besked. Mejlversionen skickar bara ID-REFERENSER
+    // (kommunSlug + matchade bidrag-id:n) till servern, som slår upp
+    // namn/belopp/deadline själv (kommun.ts) — aldrig fritext från
+    // klienten rakt in i ett utgående mejl.
+    delaMejlaKnapp?.addEventListener('click', () => {
+      delaForm?.removeAttribute('hidden');
+      delaMejlaKnapp.setAttribute('hidden', '');
+    });
+
+    delaSkrivUtKnapp?.addEventListener('click', () => window.print());
+
+    delaForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      delaFelEl?.setAttribute('hidden', '');
+      if (!kommunData) return;
+
+      const resultat = matchKommun(profil, kommunData);
+      const data = new FormData(delaForm);
+      data.set('kommun', kommunData.kommun_slug);
+      resultat.matchar.forEach((b) => data.append('bidragId', b.id));
+
+      try {
+        const res = await fetch('/api/dela-besked', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error('svar ej ok');
+        delaForm.hidden = true;
+        delaKvittoEl?.removeAttribute('hidden');
+      } catch {
+        delaFelEl?.removeAttribute('hidden');
+      }
+    });
 
     root.querySelectorAll<HTMLElement>('[data-tratt-fraga]').forEach((grupp) => {
       const fraga = grupp.dataset.trattFraga;
@@ -765,5 +840,77 @@ const kommuner = loadKommuner();
 
   .tratt__disclosure {
     margin: 10px 0;
+  }
+
+  .tratt__paket {
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) dashed var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    font-size: var(--fg-text-label);
+    margin-top: var(--fg-space-3);
+  }
+
+  /* H7 — delbart besked. */
+  .tratt__dela {
+    margin-top: var(--fg-space-6);
+    padding-top: var(--fg-space-5);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .tratt__dela h3 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .tratt__dela-knappar {
+    display: flex;
+    gap: var(--fg-space-3);
+    margin-top: var(--fg-space-3);
+  }
+
+  .tratt__dela-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fg-space-2);
+    margin-top: var(--fg-space-3);
+  }
+
+  .tratt__dela-form input[type='email'] {
+    flex: 1 1 20ch;
+    padding: var(--fg-space-2);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+  }
+
+  .tratt__dela-fel {
+    color: var(--fg-urgent);
+    font-size: var(--fg-text-label);
+    width: 100%;
+    margin: 0;
+  }
+
+  .tratt__dela-kvitto {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    margin-top: var(--fg-space-3);
+  }
+
+  /* H7 — utskriftsvänlig vy: bara beskedet, inte frågeflödet/stegbaren/
+     navigeringen. Base.astro:s header/footer döljs globalt (global.css). */
+  @media print {
+    .tratt__stegbar,
+    .tratt__frageflode,
+    .tratt__nav,
+    .tratt__dela {
+      display: none !important;
+    }
+
+    .tratt__besked[hidden] {
+      display: block !important;
+    }
   }
 </style>

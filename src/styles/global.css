@@ -212,6 +212,17 @@ main {
   font-size: var(--fg-text-mono);
 }
 
+/* H7 (SPEC: Kluster 3 — en förening blir fler, 2026-07-28): global
+   utskriftsregel — chrome:et (header/footer) hör inte hemma på ett
+   utskrivet besked. Sidspecifika print-regler (t.ex. matcha/index.astro:s
+   frågeflöde) ligger i respektive sidas egna scopade <style>. */
+@media print {
+  .site-header,
+  .site-footer {
+    display: none !important;
+  }
+}
+
 /* Delad kontosidelayout — Mina sidor (H29) och adminvyn (Grind 2) visar
    samma sorts sektionerade listor (prenumeranter, köp), delad klass så
    den inte behöver definieras två gånger (Astros <style>-block är
