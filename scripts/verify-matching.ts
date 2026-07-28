@@ -40,6 +40,7 @@ function bidrag(overrides: Partial<Bidrag> = {}): Bidrag {
     kraver_registrering: null,
     sate_i_kommunen: null,
     status: 'aktiv',
+    senast_verifierad: null,
     ...overrides,
   };
 }

@@ -12,7 +12,11 @@
 import { Redis } from '@upstash/redis';
 import type { Foreningsprofil } from './foreningsprofil';
 
-const env = import.meta.env as unknown as Record<string, string>;
+// `?? process.env` — scripts/omverifiering-ko.ts (SPEC: Omverifiering)
+// importerar denna transitivt som ett vanligt node-skript, utanför Vites
+// import.meta.env-injektion. I Astro/Vite-kontext är import.meta.env
+// alltid satt, ?? triggas aldrig — oförändrat beteende där.
+const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 const redis = new Redis({ url: env.KV_REST_API_URL, token: env.KV_REST_API_TOKEN });
 
 const kopKey = (stripeSessionId: string) => `kop:${stripeSessionId}`;

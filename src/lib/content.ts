@@ -218,6 +218,20 @@ export const STALE = {
 };
 
 /**
+ * H27 (SPEC: Omverifiering, 2026-07-27): driftvarningen — skild från
+ * STALE ovan. STALE säger "innehållet kan vara gammalt" (baserat på när
+ * det senast BEKRÄFTADES). Den här säger något annat: "vår automatiska
+ * bevakning har inte ens LYCKATS läsa av källan" på 60 dagar — ett
+ * teknisk-drift-läge, inte ett innehålls-läge. Ny, förtroendekritisk
+ * mening (inte bara en etikett) — flaggad för Fable-koll i commit-
+ * meddelandet, men samma register som STALE.template ovan.
+ */
+export const OMVERIFIERING = {
+  template:
+    'Vi har inte kunnat läsa av {kommun}s källa på {dagar} dagar. Uppgifterna kan ha ändrats utan att vi märkt det — kontrollera alltid mot kommunens egen sida innan ni söker.',
+};
+
+/**
  * Täckningsvarningen (TackningsVarning, H24). Visas när kommunen inte
  * publicerar belopp för NÅGOT av sina bidrag — flyttar skulden till
  * kommunen, inte till tjänsten (SPEC_ATERSTAENDE_HAL.md, Kluster 4).

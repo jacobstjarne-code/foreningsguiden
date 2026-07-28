@@ -10,6 +10,7 @@
 import Base from '../layouts/Base.astro';
 import BidragCard from './BidragCard.astro';
 import StaleWarning from './StaleWarning.astro';
+import OmverifieringsVarning from './OmverifieringsVarning.astro';
 import TackningsVarning from './TackningsVarning.astro';
 import BreadcrumbList from './BreadcrumbList.astro';
 import VerificationRow from './VerificationRow.astro';
@@ -155,6 +156,7 @@ const webPageJsonLd = {
   <p class="bevakning-antal" data-bevakning-antal data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} hidden></p>
 
   {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
+  <OmverifieringsVarning kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} />
 
   <VerificationRow kommun={kommun.kommun} verifierad={kommun.verifierad} kallaUrl={kommun.kalla_url} />
 

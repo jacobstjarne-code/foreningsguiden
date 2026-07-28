@@ -1,0 +1,38 @@
+---
+// H27 (SPEC: Omverifiering, 2026-07-27) — driftvarningen. Skild från
+// StaleWarning.astro: den varnar om INNEHÅLLET kan vara gammalt (statisk,
+// byggtid, ur Kommun.verifierad). Den här varnar om vår AUTOMATISKA
+// BEVAKNING slutat nå källan (levande, ändras varje veckas cronkörning
+// oavsett deploy) — kan därför inte beräknas vid byggtid. Hidden som
+// default, avslöjas av det egna scriptet nedan bara om status:'stale'
+// — 'unknown' (cold-start, inget kört än) visar aldrig något.
+import { OMVERIFIERING } from '../lib/content';
+
+export interface Props {
+  kommunSlug: string;
+  kommunNamn: string;
+}
+
+const { kommunSlug, kommunNamn } = Astro.props;
+---
+<p class="stale-warning" data-omverifiering-varning data-kommun-slug={kommunSlug} data-kommun-namn={kommunNamn} hidden></p>
+
+<script>
+  import { hamtaOmverifieringsStatus } from '../lib/omverifieringKlient';
+  import { OMVERIFIERING } from '../lib/content';
+
+  document.querySelectorAll<HTMLElement>('[data-omverifiering-varning]').forEach((el) => {
+    const slug = el.dataset.kommunSlug;
+    const namn = el.dataset.kommunNamn ?? '';
+    if (!slug) return;
+
+    hamtaOmverifieringsStatus(slug).then((resultat) => {
+      if (resultat?.status === 'stale' && resultat.dagarSedanLyckad !== null) {
+        el.textContent = OMVERIFIERING.template
+          .replace(/{kommun}/g, namn)
+          .replace('{dagar}', String(resultat.dagarSedanLyckad));
+        el.hidden = false;
+      }
+    });
+  });
+</script>

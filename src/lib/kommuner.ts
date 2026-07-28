@@ -13,13 +13,16 @@
 import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import yaml from 'js-yaml';
+// .ts-suffix på de riktiga importerna (SPEC: Omverifiering) — se
+// omverifiering.ts:s filhuvud för varför: scripts/omverifiering-ko.ts
+// kör som ett vanligt node-skript, utanför Vites resolver.
 import {
   KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, todayISO, nextOccurrenceISO,
-} from './kommunTyper';
-import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper';
-import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan';
+} from './kommunTyper.ts';
+import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper.ts';
+import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan.ts';
 
-export * from './kommunTyper';
+export * from './kommunTyper.ts';
 
 const DATA_DIR = resolve(process.cwd(), 'data', 'kommuner');
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -154,6 +157,17 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
     problems.push(`${where}.status är "${raw.status}" (tillåtna: ${BIDRAG_STATUSAR.join(', ')})`);
   }
   raw.status = raw.status ?? 'aktiv';
+
+  // SPEC: Omverifiering — valfritt fält, saknas i alla befintliga filer
+  // i dag. Samma additiva recept som status ovan: validera bara om satt,
+  // default null (INTE dagens datum, INTE kommunens verifierad) annars.
+  raw.senast_verifierad = normalizeDate(raw.senast_verifierad ?? null);
+  if (
+    raw.senast_verifierad !== null &&
+    (!isNonEmptyString(raw.senast_verifierad) || !DATE_RE.test(raw.senast_verifierad))
+  ) {
+    problems.push(`${where}.senast_verifierad måste vara ett datum i formatet YYYY-MM-DD eller null`);
+  }
 
   return raw as Bidrag;
 }

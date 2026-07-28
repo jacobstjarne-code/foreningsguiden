@@ -65,6 +65,18 @@ export interface Bidrag {
   sate_i_kommunen: boolean | null;
 
   status: BidragStatus; // H26 — se BIDRAG_STATUSAR ovan. Alltid satt efter validateBidrag, default 'aktiv'.
+
+  // SPEC: Omverifiering (2026-07-27). Kommun.verifierad finns bara på
+  // KOMMUN-nivå — men kalla_url divergerar per bidrag i större kommuner
+  // (Karlstad: ≥10 distinkta URL:er över ~28 bidrag), så ETT bidrag kan
+  // ha blivit omkontrollerat/bekräftat vid ett ANNAT tillfälle än resten
+  // av kommunens bidrag. null = aldrig satt per bidrag (skiljer sig från
+  // "okänt datum" — betyder bara att bara kommun-nivåns verifierad finns
+  // för det här bidraget hittills). Sätts ENDAST av en forskningssession
+  // (samma "Code hittar inte på fakta"-princip som alla andra fält här)
+  // — aldrig av omverifieringLogik.ts, som bara upptäcker ATT en källa
+  // ändrats, aldrig VAD.
+  senast_verifierad: string | null;
 }
 
 export interface Ansokningssystem {

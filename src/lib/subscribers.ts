@@ -17,9 +17,13 @@ import type { Foreningsprofil } from './foreningsprofil';
 // Redis.fromEnv() letar efter UPSTASH_REDIS_REST_URL/_TOKEN — Vercels
 // Marketplace-integration (vercel install upstash/upstash-kv) provisionerar
 // istället de gamla Vercel KV-namnen KV_REST_API_URL/KV_REST_API_TOKEN.
-// import.meta.env (inte process.env) — Astro fyller bara den förra i dev-
-// serverns Vite-kontext, se debug-env-verifieringen i statusrapporten.
-const env = import.meta.env as unknown as Record<string, string>;
+// import.meta.env FÖRST (inte bara process.env) — Astro fyller bara den
+// förra i dev-serverns Vite-kontext, se debug-env-verifieringen i
+// statusrapporten. `?? process.env`-fallbacken (SPEC: Omverifiering)
+// gäller bara scripts/omverifiering-ko.ts:s plain node-körning, som
+// transitivt importerar denna fil — i Astro/Vite-kontext triggas den
+// aldrig.
+const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 const redis = new Redis({
   url: env.KV_REST_API_URL,
   token: env.KV_REST_API_TOKEN,

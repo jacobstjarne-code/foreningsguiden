@@ -14,6 +14,8 @@ import { hamtaAllaKop } from '../../lib/kop';
 import { hamtaAllaAbonnemang } from '../../lib/abonnemang';
 import { hamtaAllaKommunEfterfragningar } from '../../lib/kommunefterfragan';
 import { formatDate } from '../../lib/kommuner';
+import { hamtaAllaSignaturer, hamtaPrioriteradKo } from '../../lib/omverifiering';
+import { OMVERIFIERING_MAX_KONSEKUTIVA_FEL } from '../../lib/omverifieringLogik';
 
 const sessionToken = Astro.cookies.get(ADMIN_SESSION_COOKIE_NAMN)?.value;
 const inloggad = await arAdminInloggad(sessionToken);
@@ -23,6 +25,10 @@ const subscribers = inloggad ? await getAllSubscribers() : [];
 const kop = inloggad ? await hamtaAllaKop() : [];
 const abonnemang = inloggad ? await hamtaAllaAbonnemang() : [];
 const kommunefterfragningar = inloggad ? await hamtaAllaKommunEfterfragningar() : [];
+const omverifieringSignaturer = inloggad ? await hamtaAllaSignaturer() : [];
+const omverifieringKo = inloggad ? await hamtaPrioriteradKo() : [];
+const omverifieringOtillgangliga = omverifieringSignaturer.filter((s) => s.senasteUtfall === 'otillganglig');
+const omverifieringManuellOversyn = omverifieringOtillgangliga.filter((s) => s.konsekutivaFel >= OMVERIFIERING_MAX_KONSEKUTIVA_FEL);
 const summaKr = kop.reduce((sum, k) => sum + k.beloppOre, 0) / 100;
 const aktivaAbonnemang = abonnemang.filter((a) => a.status === 'active').length;
 
@@ -118,6 +124,41 @@ const utfallVetInte = utfall.filter((u) => u.svar === 'vet_inte').length;
             {kommunefterfragningar.map((k) => (
               <li>
                 <strong>{k.kommunSlug}</strong> — {k.email} — {formatDate(k.registrerad.slice(0, 10))}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <h2>Omverifiering</h2>
+        <p>
+          {omverifieringSignaturer.length} källor spårade —
+          {omverifieringKo.length} flaggade (ändrade eller otillgängliga),
+          {omverifieringOtillgangliga.length} otillgängliga just nu
+          ({omverifieringManuellOversyn.length} i {OMVERIFIERING_MAX_KONSEKUTIVA_FEL}+ försök i rad — manuell översyn).
+        </p>
+        {omverifieringKo.length === 0 ? (
+          <p>Inget flaggat än.</p>
+        ) : (
+          <ul class="mina-sidor__kop">
+            {omverifieringKo.map((k) => (
+              <li>
+                <strong>{k.senasteUtfall === 'andrad' ? 'Ändrad' : 'Otillgänglig'}</strong>
+                {' — '}
+                {k.bidrag.length > 0
+                  ? k.bidrag.map((b) => `${b.kommun}: ${b.bidragNamn}`).join(', ')
+                  : k.url}
+                {' — '}
+                {k.senastLyckad
+                  ? `senast lyckad kontroll ${formatDate(k.senastLyckad.slice(0, 10))}`
+                  : 'aldrig lyckad kontroll'}
+                {k.konsekutivaFel > 0 && <> — {k.konsekutivaFel} misslyckade försök i rad</>}
+                {' — '}<a href={k.url}>{k.url}</a>
+                <form method="POST" action="/api/admin-omverifiering-avfarda">
+                  <input type="hidden" name="url" value={k.url} />
+                  <button type="submit" class="fg-btn--ghost">Avfärda (falsklarm)</button>
+                </form>
               </li>
             ))}
           </ul>
