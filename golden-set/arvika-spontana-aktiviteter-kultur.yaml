@@ -1,0 +1,52 @@
+# FACIT 15 av 15 (omgång 3) — Opus/Fable 2026-07-29, data/kommuner/
+# arvika.yaml. Golden set komplett med denna fil: 15 bidrag × 3
+# profiler = 45 körningar.
+#
+# SÄRSKILT: målgruppen är "Individer eller föreningar" — det enda
+# bidraget i Arvika som är öppet för enskilda. kraver_registrering är
+# inte satt, och utkastet får inte påstå att registrering krävs.
+bidragId: "arvika-spontana-aktiviteter-kultur"
+kommunSlug: "arvika"
+kalla_url: "https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html"
+
+# FÖRBJUDET (K2): registreringskrav (kraver_registrering är inte satt).
+# Annat tak än 10 000. Att utelämna det negativa kravet (krav 2, "ingen
+# kommersiell verksamhet") — negativa krav ska bemötas, inte hoppas över.
+forvantadDeadlineTyp: "lopande" # löpande ansökan — får ALDRIG få ett fast datum
+forvantadBelopp: "Max 10 000 kronor per ansökan" # taket anges exakt, ordagrant
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      # Krav 1: "Aktiviteten måste vara kostnadsfri och öppen för
+      # allmänheten" — lucka. Två villkor i ett krav, ingen regel
+      # känner igen kostnadsfri/öppen som säte- eller
+      # verksamhetsuppgift.
+      - forvantatStatus: "lucka"
+      # Krav 2: "Ingen kommersiell verksamhet" — lucka. Negativt krav,
+      # ska bemötas (dvs. synas som lucka att styrka), inte hoppas
+      # över.
+      - forvantatStatus: "lucka"
+      # Krav 3: "Maximal ansökan: 10 000 kronor per aktivitet" — lucka.
+      # Sökt belopp inom taket är inte en profiluppgift.
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Inget av de tre kraven nämner säte/hemmahörande eller en
+      Verksamhet-etikett i en form fyllKrav känner igen — alla tre
+      alltid lucka, oavsett testprofil.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1 — fyllKrav använder aldrig storlek/alder.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt — trots att
+      målgruppen inkluderar enskilda individer gäller samma
+      registreringsfråga för föreningsprofilen som svarar. kraver_
+      registrering är inte satt på detta bidrag.

@@ -10,11 +10,31 @@ testprofilerna (P1/P2/P3, se nedan), och testar de fyra kriterierna
 K1–K4 maskinellt. **Betalning för utkastprodukten aktiveras först när
 grinden är grön** — 15 bidrag × 3 profiler = 45 körningar, alla gröna.
 
-**Fem riktiga facit klara** (Opus/Fable, 2026-07-27): `gislaved-
-arrangemangsbidrag`, `gislaved-godkannande-bidragsberattigad`,
-`arjeplog-kulturkraft`, `arjeplog-utvecklingspeng`, `arjeplog-
-stimulansbidrag-folkhalsa`. Ingen `.EXEMPEL.yaml`-demonstration finns
-längre — den första facit-filen ersatte den (samma bidrag).
+**15/15 facit klara** (Opus/Fable, omgång 1–3, 2026-07-27–29): Gislaved×2,
+Arjeplog×3 (omgång 1), Askersund×3, Bjuv×2 (omgång 2), Arvika×5 (omgång
+3, regel B — verksamhetsmatchning). Ingen `.EXEMPEL.yaml`-demonstration
+finns längre — den första facit-filen ersatte den (samma bidrag).
+
+**Grinden är RÖD** (Code, 2026-07-30, `node scripts/verify-generator.ts`):
+45/45 (bidrag × profil)-kombinationer täckta, 6/233 tester FAIL. Två
+distinkta, dokumenterade rotorsaker — INTE gissade, körda mot verklig
+kod — väntar på Jacob/Fables beslut om facit eller generator ska ändras:
+
+1. `arvika-verksamhetsbidrag-idrott` + `arvika-ungdom-kultur`, [p1]/[p2]
+   (4 fall): krav formulerade som "Verksamheten ska bedrivas i Arvika
+   kommun" facit-förväntas `ifyllt` (samma sakuppgift som en
+   säte-formulering), men `fyllKrav()`s `SATE_MONSTER`-mönster
+   (`utkastGenerator.ts`) matchar bara "säte"/"hemmahörande" ordagrant
+   — inte "bedrivs i {kommun}". Generatorn ger `lucka`.
+2. `arvika-sociala-stodforeningar`, [p1]/[p2] (2 fall): facit förväntar
+   `bidragsutkast` för en redan registrerad förening (`sokt: 'ja'`),
+   men bidraget har `kraver_registrering: true` — och
+   `visaBorjaHar()` (`matching.ts:107-109`) triggar på DET villkoret
+   ensamt, oavsett `sokt`. Generatorn ger `registrering_forst` för
+   alla tre profiler, inte bara P3.
+
+`UTKASTVY_LIVE` förblir `false` tills grinden är grön — se
+utkast/[bidragId]/index.astro.
 
 ## De tre testprofilerna (fasta, definierade i scriptet — inte per facit)
 

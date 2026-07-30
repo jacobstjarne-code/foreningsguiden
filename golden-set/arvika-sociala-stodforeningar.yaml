@@ -1,0 +1,72 @@
+# FACIT 14 av 15 (omgång 3) — Opus/Fable 2026-07-29, data/kommuner/
+# arvika.yaml.
+#
+# ⚠️ KÄND KONFLIKT MED KODEN, INTE GISSAD — se p1/p2 anteckningar nedan.
+# Facit skrivet mot Fables avsedda beteende (bidragsutkast produceras
+# för en REDAN registrerad förening, P1/P2). Körd empiriskt av Code
+# 2026-07-30 mot verklig kod: registreringForst()/visaBorjaHar()
+# (matching.ts:107-109) triggar på `bidrag.kraver_registrering === true`
+# OAVSETT profil.sokt — så P1 OCH P2 producerar idag registrering_forst,
+# inte bidragsutkast. Facit lämnas OFÖRÄNDRAT (Fables avsedda beteende,
+# inte kodens nuvarande) — grinden ska fälla detta fall tydligt i
+# stället för att tystas. Se rapport till Jacob/Fable: är facit fel,
+# eller är visaBorjaHar för bred (kraver_registrering på ETT bidrag gör
+# idag att ALLA profiler — även en redan registrerad förening — hänvisas
+# till registrering_forst för just det bidraget)?
+bidragId: "arvika-sociala-stodforeningar"
+kommunSlug: "arvika"
+kalla_url: "https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomsocialasektorn.2746.html"
+
+# FÖRBJUDET (K2): att härleda ett belopp ur potten (636 000 / 7 = 90 857
+# — den siffran finns inte i källan och får aldrig visas). Att utelämna
+# någon av de tre bilagorna i krav 3.
+forvantadDeadlineTyp: "fast" # 30 april, årligt
+forvantadBelopp: "Individuell bedömning. Sju organisationer delade 636 000 kronor årligen." # pott-siffran återges ordagrant, härleds aldrig till ett per-förening-belopp
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      # Krav 1: "Registrering som ideell förening med godkända stadgar"
+      # — lucka. Ingen regel i fyllKrav känner igen "registrering"/
+      # "stadgar" som text.
+      - forvantatStatus: "lucka"
+      # Krav 2: "Explicit syfte för social stödverksamhet i stadgarna"
+      # — lucka. Ordet "social" förekommer, men Regel B kräver att
+      # PROFILENS verksamhet innehåller "social" (testprofilerna är
+      # fixerade till idrott) — träffar aldrig i den här uppsättningen.
+      - forvantatStatus: "lucka"
+      # Krav 3: "Årsmötesprotokoll, verksamhetsberättelse och
+      # verksamhetsplan måste lämnas" — lucka. Explicit bilagelista,
+      # alla tre dokument måste namnges i utkastet — det enda bidraget
+      # i uppsättningen med en sådan lista (testar H17-underlaget).
+      - forvantatStatus: "lucka"
+      # Krav 4: "Ansökan skickas digitalt via Interbook Go" — lucka.
+      # Ansökningsväg, ingen regel känner igen den.
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      ⚠️ P1 SKA vara en redan registrerad förening (sokt=ja i
+      TESTPROFILER) — men bidrag.kraver_registrering=true gör att
+      registreringForst()/visaBorjaHar() (matching.ts) triggar ÄNDÅ,
+      oavsett sokt. Facit förväntar sig bidragsutkast eftersom en
+      förening som redan är känd som bidragsberättigad (sokt=ja) rimligen
+      inte ska hänvisas till registreringsutkastet igen för ETT specifikt
+      bidrag — men koden gör idag ingen sådan distinktion: ETT bidrag
+      med kraver_registrering=true tvingar registrering_forst för alla
+      profiler. Detta test förväntas FÄLLA grinden tills Jacob/Fable
+      avgör vilket beteende som är rätt.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Samma konflikt som P1 — se den anteckningen. Identiskt facit
+      eftersom fyllKrav aldrig använder storlek/alder.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt — här är utfallet
+      OKONTROVERSIELLT rätt, till skillnad från P1/P2 ovan.

@@ -1,0 +1,56 @@
+# FACIT 12 av 15 (omgång 3) — Opus/Fable 2026-07-29, data/kommuner/
+# arvika.yaml.
+#
+# Testar REGEL B tillsammans med facit 11 (arvika-verksamhetsbidrag-
+# idrott): två Arvika-bidrag med OLIKA foreningstyp (idrott/ungdom vs.
+# kultur/ungdom) — en förening som väljer idrott matchar det ena och
+# saknar det andra. Det skarpaste testet av att matchningen faktiskt
+# diskriminerar och inte bara släpper igenom allt.
+bidragId: "arvika-ungdom-kultur"
+kommunSlug: "arvika"
+kalla_url: "https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html"
+
+# FÖRBJUDET (K2): belopp (individuell bedömning, inget tal). Medlems-
+# antal — min_medlemmar är inte satt. Att beskriva Interbook Go som ett
+# godkännandekrav (det är ansökningssystemet, inte kommunens förenings-
+# register — utkastet får inte förväxla dem).
+forvantadDeadlineTyp: "lopande" # löpande ansökningsperiod — får ALDRIG få ett fast datum
+forvantadBelopp: "Individuell bedömning" # ordagrant — inget tal får hittas på
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      # Krav 1: "Ålder 15-25 år" — anger att deltagarna är 15-25 år.
+      # Alltid lucka; profilens alder-bucket ger inget exakt spann.
+      - forvantatStatus: "lucka"
+      # Krav 2: "Verksamheten ska bedrivas inom Arvika kommun" —
+      # bekräftar kommunen. Ifyllt ur profilens kommunval, samma
+      # utvidgade regel A som facit 11 krav 3 — se den filens
+      # anteckning.
+      - forvantatStatus: "ifyllt"
+      # Krav 3: "Organisatörer registreras digitalt via Interbook Go" —
+      # anger registrering i Interbook Go (ansökningssystemet, INTE
+      # kommunens föreningsregister). Ingen regel i fyllKrav känner
+      # igen ansökningssystem-krav — alltid lucka.
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Krav 2 är samma utvidgade regel A som facit 11 krav 3 (bedrivs-i-
+      kommunen-formuleringen). Krav 3 ska INTE tolkas som ett
+      registreringskrav trots ordet "registreras" — det är en teknisk
+      inlämningsväg, inte ett villkor för bidragsberättigande
+      (kraver_registrering är inte satt på detta bidrag).
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "ifyllt"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1 — inget av kraven är storlek/alder-känsligt i
+      fyllKravs mening.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt. kraver_
+      registrering är inte satt på detta bidrag.

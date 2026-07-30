@@ -1,0 +1,54 @@
+# FACIT 13 av 15 (omgång 3) — Opus/Fable 2026-07-29, data/kommuner/
+# arvika.yaml.
+#
+# DET VIKTIGASTE FACITET I UPPSÄTTNINGEN (Fables egen bedömning). Testar
+# två tysta felmoder samtidigt:
+#   1. foreningstyp: null ska matcha ALLA verksamheter i tratten — om
+#      matchningen någonsin producerar ett foreningstyp-skäl för det
+#      här bidraget är det underkänt (pensionär är en målgrupp, inte en
+#      Verksamhet, och finns inte i VERKSAMHETER — detta är den korrekta
+#      koden för "inget känt villkor", inte en lucka i datan).
+#   2. Siffer-literal-fällan: krav 2 innehåller siffran "10", men den
+#      syftar på antal ARRANGEMANG, inte medlemmar. min_medlemmar är
+#      KORREKT lämnat null i YAML:en — ett utkast som läser siffran som
+#      ett medlemsantalskrav har läst fel sorts siffra.
+bidragId: "arvika-pensionarsorganisationer"
+kommunSlug: "arvika"
+kalla_url: "https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomsocialasektorn.2746.html"
+
+# FÖRBJUDET (K2): min_medlemmar: 10 — se filhuvudets fälla ovan. Annan
+# tolkning av "aktiv medlem" än "deltar i minst 10 arrangemang årligen".
+forvantadDeadlineTyp: "fast" # 1 januari, årligt
+forvantadBelopp: "1 000 kronor basbelopp per organisation + tillägg per aktiv medlem" # båda delarna måste med, ordagrant
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      # Krav 1: "Föreningsstadgar som säger att organisationen är för
+      # pensionärer" — lucka. Profilen innehåller inget om stadgar.
+      - forvantatStatus: "lucka"
+      # Krav 2: "Medlemmar som deltar i minst 10 arrangemang årligen
+      # räknas som aktiva" — lucka. Siffran 10 syftar på arrangemang,
+      # inte medlemmar (se filhuvudets fälla) — ingen regel i fyllKrav
+      # kan eller ska fylla i detta.
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Ingen av de två kraven nämner säte/hemmahörande eller en
+      Verksamhet-etikett — bägge alltid lucka, oavsett testprofil. Det
+      omvända testet (foreningstyp: null matchar alla) ligger i
+      matchKommun()/tratten, inte i genereraUtkast() — den här filen
+      bevisar bara att generatorn inte hittar på ett medlemskrav ur
+      siffran 10.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+    anteckningar: >
+      Identiskt med P1 — fyllKrav använder aldrig storlek/alder.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt. kraver_
+      registrering är inte satt på detta bidrag.

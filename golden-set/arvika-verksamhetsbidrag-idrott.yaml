@@ -1,0 +1,63 @@
+# FACIT 11 av 15 (omgång 3) — Opus/Fable 2026-07-29, data/kommuner/
+# arvika.yaml (strukturerad 29 juli — foreningstyp/min_medlemmar/
+# alder_min/alder_max/sate_i_kommunen ifyllda).
+#
+# Testar REGEL B: verksamhetsmatchning, som strukturellt aldrig kunnat
+# testas förut eftersom foreningstyp var null i hela korpusen fram till
+# Arvika. Tillsammans med arvika-ungdom-kultur (facit 12): två bidrag i
+# samma kommun med OLIKA foreningstyp — det skarpaste testet av att
+# matchningen faktiskt diskriminerar.
+bidragId: "arvika-verksamhetsbidrag-idrott"
+kommunSlug: "arvika"
+kalla_url: "https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomfritidssektorn.2742.html"
+
+# FÖRBJUDET (K2): kronbelopp (belopp är "per aktiv medlem", inget tal).
+# Annan åldersgräns än 7-20. Att bemöta bara en av krav 1:s två trösklar
+# (medlemsantal OCH arrangemangsdeltagande — båda ska vara lucka
+# tillsammans, inte separat). Registreringskrav — kraver_registrering
+# är inte satt på detta bidrag.
+forvantadDeadlineTyp: "fast" # 31 mars, årligt — får ALDRIG bli "löpande"
+forvantadBelopp: "Fast belopp per aktiv medlem (åldern 7-20 år)" # inget kronbelopp får hittas på
+
+profiler:
+  p1:
+    forvantadTyp: "bidragsutkast"
+    kravFacit:
+      # Krav 1: "Minst 10 aktiva medlemmar som deltar i minst 10
+      # arrangemang årligen" — två trösklar i ett krav (medlemsantal OCH
+      # arrangemangsdeltagande). Alltid lucka; profilen ger varken.
+      - forvantatStatus: "lucka"
+      # Krav 2: "Medlemmar i åldern 7-20 år" — anger antal medlemmar i
+      # spannet. Alltid lucka; profilens storlek ger intervall, inte
+      # exakt tal.
+      - forvantatStatus: "lucka"
+      # Krav 3: "Verksamheten ska bedrivas i Arvika kommun" — bekräftar
+      # att verksamheten bedrivs i kommunen. Ifyllt ur profilens
+      # kommunval (samma säteslogik som "Föreningen har sitt säte i
+      # X" — bedrivs-i-kommunen är samma sakuppgift i annan ordform).
+      - forvantatStatus: "ifyllt"
+    anteckningar: >
+      Krav 3 är regel A i vidgad form: kravtexten säger inte bokstavligt
+      "säte" men uttrycker exakt samma sak (verksamheten är lokaliserad
+      till kommunen) som profilens kommunval redan besvarar. Om
+      generatorn markerar detta som lucka har den bara känt igen ordet
+      "säte", inte sakuppgiften — se rapport till Code/Jacob om detta
+      facit fäller grinden.
+  p2:
+    forvantadTyp: "bidragsutkast"
+    # Identiskt med P1: fyllKrav() använder aldrig storlek/alder, och
+    # inget av de tre kraven är storlek/alder-känsligt i den meningen
+    # ändå (krav 1-2 är alltid lucka oavsett profil).
+    kravFacit:
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "lucka"
+      - forvantatStatus: "ifyllt"
+    anteckningar: >
+      Samma utfall som P1 — inget av bidragets krav är storlek/alder-
+      känsligt i fyllKravs mening.
+  p3:
+    forvantadTyp: "registrering_forst"
+    anteckningar: >
+      sokt=nej triggar registreringsgrenen universellt (visaBorjaHar:
+      profil.sokt !== 'ja' räcker ensamt). kraver_registrering är inte
+      satt på detta bidrag, så P1/P2 påverkas inte av den grenen.
