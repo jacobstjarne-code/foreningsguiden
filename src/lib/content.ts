@@ -193,15 +193,16 @@ export const OM = {
   ],
   /**
    * H1 (GRANSKNING_foreningsguiden.md, 2026-07-26): en betaltjänst utan
-   * namngiven avsändare/org.nr är inte trovärdig för målgruppen. Juridisk
-   * part är INTE vald än (samma öppna fråga som SPEC: Betalintegration §6
-   * steg 3, väntar på revisorsavstämning) — platshållare tills dess.
-   * Renderas i en tydligt avvikande stil (.om-todo) så det syns att det
-   * är en lucka, inte färdig text.
+   * namngiven avsändare/org.nr är inte trovärdig för målgruppen.
+   * SKRIVEN 2026-07-27: partsvalet blockerar INTE — det behövs bara för att
+   * ta emot riktiga pengar. Företagsnamn och org.nr läses ur konstanter så
+   * bytet vid live-växling är EN ändring, inte en textredigering.
    */
   avsandarRubrik: 'Vilka vi är',
-  avsandarPlatshallare:
-    '{{TODO: företagsnamn, organisationsnummer och en namngiven person — väntar på valet av juridisk part, se SPEC: Betalintegration §6 steg 3}}',
+  avsandarStycken: [
+    'Föreningsguiden drivs av {foretag} (org.nr {orgnr}). Redaktionen ansvarar för hur uppgifterna samlas in, struktureras och hålls aktuella.',
+    'Har ni en fråga om en uppgift, ett köp eller något annat — mejla oss. Vi svarar själva, det finns ingen supportavdelning.',
+  ],
 };
 
 /** Sidfot. Kort, saklig. */
@@ -476,6 +477,76 @@ export const SALJARE = {
 };
 
 /**
+ * INTEGRITETSPOLICY (H23) och ÅTERBETALNING (H13) — Fable 2026-07-27.
+ * Faktagrund: DATAINVENTERING_GDPR.md (repo-rot). Skriven för att läsas av
+ * en föreningskassör, inte av en jurist — men korrekt ändå.
+ * Två beslut som fattades när texten skrevs, båda flaggade i inventeringen:
+ * (1) Köpposter bevaras sju år enligt bokföringslagen även vid raderingsbegäran
+ *     — GDPR art. 17.3(b) undantar rättslig förpliktelse. E-postadressen är del
+ *     av underlaget och kan därför inte plockas ur.
+ * (2) /avregistrera/ ska även rensa vantelista:-poster. BYGGT 2026-07-28
+ *     (SPEC: Det som återstår, grupp A — removeSubscriber() anropar nu
+ *     removeVantelista()) — texten och koden håller ihop.
+ * {foretag}/{orgnr} fylls ur SALJARE ovan, samma konstanter som kvittot —
+ * fortfarande sandbox-testvärdet tills den riktiga juridiska parten är vald.
+ */
+export const INTEGRITET = {
+  ingress:
+    'Vi samlar in så lite som möjligt, och bara det som behövs för att tjänsten ska fungera. Här står exakt vad det är.',
+
+  ansvarigRubrik: 'Vem som ansvarar',
+  ansvarigText:
+    'Föreningsguiden drivs av {foretag} (org.nr {orgnr}), som är personuppgiftsansvarig för uppgifterna nedan.',
+
+  vadRubrik: 'Vad vi sparar',
+  vadStycken: [
+    'Bevakar ni deadlines sparar vi er e-postadress och vilka kommuner ni bevakar. Inget mer.',
+    'Fyller ni i matchningsfrågorna sparas svaren i er egen webbläsare. De når oss först om ni lämnar en e-postadress — och då i grova intervall: verksamhetsområde, ungefärlig storlek, ungefär hur länge föreningen funnits. Vi sparar inte föreningens namn, organisationsnummer eller kontouppgifter. Vi frågar inte ens efter dem.',
+    'Köper ni något sparas vad ni köpt, belopp, datum och e-postadress. Kortuppgifter ser vi aldrig — de hanteras av Stripe och passerar aldrig våra system.',
+  ],
+
+  varforRubrik: 'Varför',
+  varforText:
+    'Bevakningen kräver e-postadressen för att kunna skicka påminnelsen — det är hela tjänsten. Köpuppgifterna behövs för att leverera det ni betalat för och för vår bokföring. Föreningsprofilen används för att visa vilka bidrag som passar just er.',
+
+  hurLangeRubrik: 'Hur länge',
+  hurLangeStycken: [
+    'Bevakningsuppgifter sparas tills ni avregistrerar er. Då raderas de helt — ingen kopia, ingen papperskorg.',
+    'Köpuppgifter måste vi spara i sju år. Bokföringslagen kräver det, och den går före en raderingsbegäran. Det betyder att kvitto, belopp, datum och den e-postadress köpet gjordes med finns kvar även om ni avregistrerar er från allt annat.',
+    'En obekräftad bekräftelselänk raderas av sig själv efter sju dagar.',
+  ],
+
+  delasRubrik: 'Vem mer som ser uppgifterna',
+  delasText:
+    'Fyra leverantörer, alla för att tjänsten ska fungera: Stripe (betalning), Resend (utskick av mejl), Upstash (databasen) och Vercel (driften). Ingen av dem använder uppgifterna till något eget. Vi säljer inte uppgifter vidare och gör inga utskick åt andra.',
+
+  cookiesRubrik: 'Kakor',
+  cookiesText:
+    'Vi använder inga kakor för spårning och har ingen kakruta att klicka bort. Besöksstatistiken mäts cookiefritt och visar bara aggregerade siffror — aldrig vem som besökt vad.',
+
+  rattigheterRubrik: 'Era rättigheter',
+  rattigheterStycken: [
+    'Ni har rätt att få veta vad vi sparat om er, få det rättat om det är fel, och få det raderat — med undantag för köpuppgifterna som bokföringslagen kräver att vi behåller.',
+    'Mejla oss så ordnar vi det. Ni behöver inte motivera varför.',
+    'Tycker ni att vi hanterat era uppgifter fel kan ni klaga hos Integritetsskyddsmyndigheten (imy.se).',
+  ],
+};
+
+/**
+ * H13 — återbetalningsgarantin. Starkast där betalbeslutet fattas
+ * (Jacob, 2026-07-30): renderas på /kommun/[slug]/registrera/ intill
+ * priset, inte bara begravd på integritetspolicyn.
+ */
+export const ATERBETALNING = {
+  rubrik: 'Återbetalning',
+  stycken: [
+    'Blev det ni köpte inte användbart för er — mejla oss inom 30 dagar så betalar vi tillbaka. Ni behöver inte förklara varför, och vi frågar inte efter ett kvitto på att ni försökt.',
+    'En förening som köper av oss räknas formellt som näringsidkare och har därför inte ångerrätt enligt lag. Garantin ovan är alltså vår egen, inte ett lagkrav — men den gäller lika för det.',
+    'Vi kan inte lova att en ansökan beviljas. Det beslutet fattar kommunen, och ett avslag är inte ett skäl till återbetalning i sig — däremot vill vi gärna veta om det händer.',
+  ],
+};
+
+/**
  * H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni är här" på
  * kvittoläget (kommun/[slug]/registrera/index.astro, ?betald=1). Tre
  * rader, var och en villkorad på att underlaget faktiskt finns — se den
@@ -544,15 +615,33 @@ export const KOMMUNSIFFRA = {
  */
 export const VANTELISTA = {
   knapp: 'Gör vår ansökan färdig',
-  prisRad: '149 kr när utkastet ligger klart — inget nu',
+  // PRIS: 249 kr, samma som registreringsutkastet. Tidigare stod 149 här
+  // medan registreringen kostade 249 — den ENKLARE produkten kostade mer,
+  // och en besökare som läste båda sidorna såg motsägelsen. Ett pris för
+  // allt utkastarbete är också lättare att kommunicera än en trappa.
+  // Talet TESTAS via väntelistknappen (149/249/395 mot klickfrekvens) —
+  // det är inte låst, men det ska vara SAMMA överallt tills testet svarat.
+  prisRad: '249 kr när utkastet ligger klart — inget nu',
   // Visas bara när countSubscribersByKommun(slug) >= 3 (subscribers.ts,
   // bevakningKlient.ts BEVAKNING_GOLV). Code fyller {antal}.
   socialProof: '{antal} föreningar i {kommun} bevakar redan sina deadlines här.',
   // Visas bara där kommunen har kommunsiffra (idag Berg; fler när fler
   // kommuner lämnar ut sin sammanställning, kommuner.ts Kommunsiffra).
   kostnadsram: 'Förra året delade föreningarna i {kommun} på {summa} kr. Missar ni ansökan får ni ingenting av den.',
-  rubrik: 'Vi skriver ansökan åt er — ni lämnar in den',
-  besked: 'De flesta föreningar fastnar inte på att skriva bra. De fastnar på att komma igång, och på att missa ett formellt krav de inte visste fanns. Vi tar er förenings uppgifter och {kommun}s egna kriterier och gör ett färdigt utkast som bemöter varje krav — så det enda ni behöver göra är att läsa igenom och lämna in.',
+  rubrik: 'Vi skriver allt utom det bara ni vet',
+  besked: 'De flesta föreningar fastnar inte på att skriva bra. De fastnar på att komma igång, och på att missa ett formellt krav de inte visste fanns. Vi tar er förenings uppgifter och {kommun}s egna kriterier och bemöter varje krav kommunen ställer. Det som återstår är det vi inte kan veta — och vi säger på förhand exakt vad det är.',
+  // Namnger luckorna FÖRE köpet. Aldrig procent ("60 % färdigt") — samma
+  // påhittade precision som 90-dagarssiffran. Tre namngivna luckor är
+  // hanterbart, en procentsats är oroande. Code fyller {luckor} ur
+  // genereraUtkast() kravStatus === 'lucka'.
+  // ORÖRD SEDAN 2026-07-30 (SPEC: Det som återstår, uppföljning): ingen
+  // yta läser detta fältet än — VantelistaFlode.astro renderar bara
+  // rubrik/besked/prisRad/cta ovan. Text-utan-yta, inte bortglömt: vänta
+  // på att en spec kopplar {luckor} till genereraUtkast(), rör inte
+  // förrän dess.
+  luckorRubrik: 'Det här fyller ni själva',
+  luckorTemplate: 'För {bidragsnamn} är det {luckor}. Allt annat skriver vi.',
+  luckorInga: 'För {bidragsnamn} behöver ni inte fylla i något — vi har allt vi behöver från era svar.',
   cta: 'Reservera plats nu. Ni betalar först när utkastet ligger klart att läsa — och behåller det till nästa år.',
   epostLabel: 'E-postadress',
   knappVantelista: 'Reservera vår plats',

@@ -1,11 +1,15 @@
 ---
-// Integritetspolicy — H23 (GRANSKNING_foreningsguiden.md). Container-sida.
-// Code skriver INTE policytexten (juridisk text, se DATAINVENTERING_GDPR.md
-// för den tekniska faktainventeringen texten ska bygga på) — Fable/Jacob
-// fyller {{FABLE:}}-slotet innan sidan är klar för skarp lansering.
-// Samma layout-mönster som /om/, samma Base.
+// Integritetspolicy — H23 (GRANSKNING_foreningsguiden.md). Renderar
+// INTEGRITET (content.ts, Fable 2026-07-27) — samma sektion-per-rubrik-
+// mönster som /om/:s ansvarStycken. {foretag}/{orgnr} fylls ur SALJARE,
+// fortfarande sandbox-testvärdet "Humle och Dumle AB" tills den riktiga
+// juridiska parten är vald (SPEC: Betalintegration §6 steg 3) — se
+// SALJARE-kommentaren i content.ts.
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
+import { INTEGRITET, ATERBETALNING, SALJARE } from '../../lib/content';
+
+const fyll = (text: string) => text.replace('{foretag}', SALJARE.foretag).replace('{orgnr}', SALJARE.orgnr);
 ---
 <Base title="Integritetspolicy — Föreningsguiden" description="Så hanterar Föreningsguiden dina uppgifter.">
   <BreadcrumbList items={[
@@ -14,10 +18,47 @@ import BreadcrumbList from '../../components/BreadcrumbList.astro';
   ]} />
 
   <h1>Integritetspolicy</h1>
+  <p>{INTEGRITET.ingress}</p>
 
-  <p class="om-todo">
-    {'{{FABLE: policytext — vad som lagras, varför, hur länge, och hur man begär radering. Teknisk grund i DATAINVENTERING_GDPR.md (repo-rot), inklusive den öppna frågan om Stripe-köpposter och bokföringslagen.}}'}
-  </p>
+  <section>
+    <h2>{INTEGRITET.ansvarigRubrik}</h2>
+    <p>{fyll(INTEGRITET.ansvarigText)}</p>
+  </section>
+
+  <section>
+    <h2>{INTEGRITET.vadRubrik}</h2>
+    {INTEGRITET.vadStycken.map((stycke) => <p>{stycke}</p>)}
+  </section>
+
+  <section>
+    <h2>{INTEGRITET.varforRubrik}</h2>
+    <p>{INTEGRITET.varforText}</p>
+  </section>
+
+  <section>
+    <h2>{INTEGRITET.hurLangeRubrik}</h2>
+    {INTEGRITET.hurLangeStycken.map((stycke) => <p>{stycke}</p>)}
+  </section>
+
+  <section>
+    <h2>{INTEGRITET.delasRubrik}</h2>
+    <p>{INTEGRITET.delasText}</p>
+  </section>
+
+  <section>
+    <h2>{INTEGRITET.cookiesRubrik}</h2>
+    <p>{INTEGRITET.cookiesText}</p>
+  </section>
+
+  <section>
+    <h2>{INTEGRITET.rattigheterRubrik}</h2>
+    {INTEGRITET.rattigheterStycken.map((stycke) => <p>{stycke}</p>)}
+  </section>
+
+  <section>
+    <h2>{ATERBETALNING.rubrik}</h2>
+    {ATERBETALNING.stycken.map((stycke) => <p>{stycke}</p>)}
+  </section>
 
   <p>Vill du ta bort dina uppgifter från deadlinebevakningen? <a href="/avregistrera/">Avregistrera dig här</a>.</p>
   <p>Frågor om dina uppgifter? <a href="/kontakt/">Kontakta oss</a>.</p>

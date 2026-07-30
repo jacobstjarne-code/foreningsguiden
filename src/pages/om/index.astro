@@ -30,12 +30,16 @@ const antalKommuner = loadKommuner().length;
     part är vald (Jacob, 2026-07-27: inte bra att den ligger öppen).
     Denna kommentarform strippas helt vid bygge, syns inte ens i
     sidans källkod. content.ts-texten (OM.avsandarRubrik och
-    OM.avsandarPlatshallare) ligger kvar orörd, redo att visas igen
-    när partsvalet är klart.
+    OM.avsandarStycken, {foretag}/{orgnr} ur SALJARE) ligger kvar orörd,
+    redo att visas igen när partsvalet är klart — idag är SALJARE
+    fortfarande sandbox-testvärdet "Humle och Dumle AB", inte den
+    riktiga juridiska parten (SPEC: Betalintegration §6 steg 3).
 
     <section>
       <h2>{OM.avsandarRubrik}</h2>
-      <p class="om-todo">{OM.avsandarPlatshallare}</p>
+      {OM.avsandarStycken.map((stycke) => (
+        <p>{stycke.replace('{foretag}', SALJARE.foretag).replace('{orgnr}', SALJARE.orgnr)}</p>
+      ))}
     </section>
   */}
 
