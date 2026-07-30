@@ -84,9 +84,12 @@ export function matchBidrag(profil: Foreningsprofil, bidrag: Bidrag): MatchResul
   }
 
   // kraver_registrering: skäl bara när profilen INTE svarat "ja" (redan
-  // registrerad). Svarar profilen "ja" produceras inget skäl — bidraget kan
-  // vara MATCHAR även om kraver_registrering är true (se visaBorjaHar för
-  // varför "Börja här"-bannern ändå kan visas i det fallet).
+  // registrerad). Svarar profilen "ja" produceras inget skäl — bidraget är
+  // MATCHAR även om kraver_registrering är true, och visaBorjaHar (nedan)
+  // visar sedan 2026-07-30 INTE "Börja här"-bannern för den föreningen
+  // heller (golden set-facit 14, arvika-sociala-stodforeningar — en redan
+  // registrerad förening ska aldrig hänvisas till registreringsutkastet
+  // igen bara för att ETT av hennes matchade bidrag kräver registrering).
   if (bidrag.kraver_registrering === true && profil.sokt !== 'ja') {
     skal.push({ falt: 'kraver_registrering', kravVarde: true, profilVarde: profil.sokt });
   }
@@ -103,9 +106,28 @@ export function matchBidrag(profil: Foreningsprofil, bidrag: Bidrag): MatchResul
   return { state, skal };
 }
 
-/** Visar "Börja här"-gruppen (grupp 3) — kommun-scopad, oberoende av enskilda bidrags state. */
+/**
+ * Visar "Börja här"-gruppen (grupp 3) — kommun-scopad, oberoende av
+ * enskilda bidrags state.
+ *
+ * FIX 2026-07-30 (Jacob, golden set-facit 14 arvika-sociala-stodforeningar):
+ * kraver_registrering ska bara trigga "Börja här" TILLSAMMANS MED
+ * profil.sokt !== 'ja' — aldrig ensamt. Den gamla OR-varianten
+ * (`sokt !== 'ja' || matchandeBidrag.some(kraver_registrering)`) visade
+ * bannern även för en förening som redan svarat "ja" (registrerad), bara
+ * för att ETT av hennes matchade bidrag råkade ha kraver_registrering
+ * satt — motsägde matchBidrags egen kommentar om att ett sådant bidrag
+ * ändå ska räknas MATCHAR. Eftersom "kräver A OCH B" alltid är en delmängd
+ * av "kräver A ensamt" kollapsar den korrekta logiken matematiskt till
+ * bara `profil.sokt !== 'ja'` — matchandeBidrag/kraver_registrering
+ * påverkar inte längre utfallet, men parametern behålls: signaturen delas
+ * med anropsstället i utkastGenerator.ts (registreringForst), och en
+ * framtida per-bidrag-registreringsstatus (skild från den grova
+ * sokt-frågan) kan behöva den igen.
+ */
 export function visaBorjaHar(profil: Foreningsprofil, matchandeBidrag: Bidrag[]): boolean {
-  return profil.sokt !== 'ja' || matchandeBidrag.some((b) => b.kraver_registrering === true);
+  void matchandeBidrag;
+  return profil.sokt !== 'ja';
 }
 
 // Fälten som räknas som "riktig matchningsdata" — samma fem som faktiskt

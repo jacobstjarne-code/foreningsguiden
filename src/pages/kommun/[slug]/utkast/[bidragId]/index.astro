@@ -4,21 +4,29 @@
 // turn-1 (1a). Se plan twinkling-wondering-emerson.md del 3 för hela
 // resonemanget.
 //
-// ⚠️ GATED — LÄS INNAN DU ÄNDRAR NÅGOT ⚠️
-// Golden set är INTE godkänt (KVALITETSSPEC.md §7): golden-set/ innehåller
-// bara EN fil, uttryckligen märkt .EXEMPEL.yaml — "inte ett verifierat
-// facit... ingen människa har läst igenom och bekräftat". Betalning
-// aktiveras först när grinden är grön mot ett tillräckligt golden set.
-// Den här skärmen får därför INTE nås av en riktig användare än.
+// ⚠️ GOLDEN SET GRÖNT (2026-07-30) — UTKASTVY_LIVE PÅSLAGEN ⚠️
+// 45/45 (bidrag×profil) godkända, node scripts/verify-generator.ts,
+// se golden-set/README.md. Jacobs instruktion: "Blir grinden grön slås
+// UTKASTVY_LIVE på och bidragsutkastet blir säljbart."
+//
+// VAD SOM FORTFARANDE SAKNAS INNAN DET FAKTISKT ÄR SÄLJBART: den här
+// skärmen är fortfarande BARA dokumentet + väggen + köpramen mot EN
+// hårdkodad demo-fixtur (Gislaved/arrangemangsbidrag) — inte det
+// ungated-formuläret som genererar sidan dynamiskt för ETT VALFRITT
+// bidrag (CODE_UPPDRAG_KOMMERSIELL §1.B.2, "egen större uppgift",
+// aldrig byggd). Köpknappen längre ner är fortfarande hårdkodad
+// `disabled` — ingen Stripe-integration finns för DENNA produkt (skilt
+// från registreringsutkastets /kommun/[slug]/registrera/, som redan är
+// en riktig köpväg). "Säljbart" i Jacobs mening kräver den dynamiska
+// routen + betalflödet + Fables paywall-copy (§4, fortfarande
+// {{FABLE:}}-slots nedan) — INTE byggt i denna commit. Rapporterat,
+// inte tystat.
 //
 // UTKASTVY_LIVE ligger MEDVETET inne i getStaticPaths()-kroppen, inte på
 // modulnivå — samma Astro-bundling-gotcha som EXEMPELSIDOR_LIVE (se
 // src/pages/exempel/[kommun]/[kategori]/index.astro): Astro bundlar
 // getStaticPaths till en egen chunk vid prerendering och missar en
-// modulnivå-const utanför funktionen. Flytta den inte ut utan att testa
-// build. Sätt till true LOKALT för pixel-verifiering mot mocken, sätt
-// tillbaka till false och bygg om INNAN commit — se plan-filens
-// verifieringssteg 2.
+// modulnivå-const utanför funktionen.
 //
 // Avvikelse från mocken, flaggad för Jacob/Design (ingen levande
 // Design-kanal i den här sessionen): mocken visar löpande PROSA
@@ -46,7 +54,7 @@ import { genereraUtkast } from '../../../../../lib/utkastGenerator';
 import type { Foreningsprofil } from '../../../../../lib/foreningsprofil';
 
 export function getStaticPaths() {
-  const UTKASTVY_LIVE = false;
+  const UTKASTVY_LIVE = true;
   if (!UTKASTVY_LIVE) return [];
 
   const kommun = getKommunBySlug('gislaved');
@@ -74,7 +82,7 @@ const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
 ---
 <Base
   title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
-  description="Utvecklingsstubb — inte publicerad, gated bakom UTKASTVY_LIVE."
+  description="Förhandsvisning av bidragsutkastet — betalning inte öppnad än."
 >
   <BreadcrumbList items={[
     { name: 'Startsida', url: '/' },
@@ -84,7 +92,7 @@ const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
 
   <div class="utkastvy-stubbanner" role="note">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4" /><path d="M12 17h.01" /><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>
-    <span><strong>Utvecklingsstubb — ej live.</strong> Generatorn är inte golden set-godkänd (KVALITETSSPEC.md §7). Sidan genereras bara när <code>UTKASTVY_LIVE</code> är satt till <code>true</code> lokalt — noll riktiga användare kan nå den.</span>
+    <span><strong>Förhandsvisning — betalning inte öppnad.</strong> Generatorn är golden set-godkänd (45/45, KVALITETSSPEC.md §7), men den här sidan visar bara en fast exempelfixtur (Gislaved) och köpknappen nedan är fortfarande avstängd i väntan på det dynamiska formuläret och betalflödet.</span>
   </div>
 
   {doc && (

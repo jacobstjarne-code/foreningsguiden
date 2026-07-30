@@ -110,6 +110,29 @@ const GUARD_TERMER = /\d|medlem|\bår\b|\bårs\b|månad|styrelse|stadga|organisa
 
 const SATE_MONSTER = /\bsäte\b|hemmahörande|hemmahör/i;
 
+/**
+ * FIX 2026-07-30 (Jacob, golden set-facit 11/12 arvika-verksamhetsbidrag-
+ * idrott/arvika-ungdom-kultur): "Verksamheten ska bedrivas i/inom X
+ * kommun" är sakligt samma säteskrav som SATE_MONSTER redan fångar, bara
+ * i annan ordform — men bara när X faktiskt ÄR den kommun bidraget
+ * tillhör. Dynamiskt byggd regex, inte statisk, av precis den anledningen:
+ * en generisk "bedrivs i [vilken kommun som helst] kommun" hade träffat
+ * fel. Stickprov mot hela korpusen (2026-07-30, grep över data/kommuner/
+ * *.yaml) hittade 24 träffar på mönstret — bland dem två som INTE är
+ * kommunnamn ("bedrivas i subventionerade kommun", "bedrivas i av
+ * kommun", sannolikt andra syftningar/extraktionsartefakter). Att kräva
+ * exakt kommun.kommun (med valfri genitiv-s: "Karlstad" → "Karlstads
+ * kommun") utesluter båda utan en egen undantagslista — ingen riktig
+ * kommun heter "subventionerade" eller "av".
+ */
+function escapeRegExp(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function bedrivsIKommunMonster(kommunNamn: string): RegExp {
+  return new RegExp(`bedriv\\w*\\s+(?:i|inom)\\s+\\b${escapeRegExp(kommunNamn)}s?\\s+kommun`, 'i');
+}
+
 const VERKSAMHET_ORD: Record<string, RegExp> = {
   idrott: /\bidrott(?:s|en)?\b/i,
   kultur: /\bkultur(?:en)?\b/i,
@@ -137,8 +160,11 @@ export function fyllKrav(kravText: string, profil: Foreningsprofil, bidrag: Bidr
 
   // Regel A — säte. Profilens kommunval ÄR sätesfrågan (GUIDE_TRATT_COPY.ts
   // fraga_kommun.hjalp: "Kommunen där föreningen har sitt säte."), så en ren
-  // säte-mening kan fyllas i säkert utan gissning.
-  if (!harGuardTerm && SATE_MONSTER.test(kravText) && profil.kommunSlug === kommun.kommun_slug) {
+  // säte-mening kan fyllas i säkert utan gissning. "Bedrivs i/inom X
+  // kommun" räknas som samma sakuppgift (se bedrivsIKommunMonster ovan) —
+  // men bara när X är DENNA kommun, inte en generisk kommun-nämning.
+  const sateTraff = SATE_MONSTER.test(kravText) || bedrivsIKommunMonster(kommun.kommun).test(kravText);
+  if (!harGuardTerm && sateTraff && profil.kommunSlug === kommun.kommun_slug) {
     return { status: 'ifyllt', innehall: `Föreningen har sitt säte i ${kommun.kommun}.`, kalla: 'kommunSlug' };
   }
 
