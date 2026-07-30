@@ -33,7 +33,7 @@ const today = todayISO();
 const deadlineISO = earliestDeadlineISO(bidrag, today);
 const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
 ---
-<div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id}>
+<div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
   <button type="button" class="btn-primary progression__goal-cta" data-vantelista-knapp data-utkastgenerator-byggd="false">
     {VAGLEDNING.station5.knapp} för {bidrag.namn}
   </button>
@@ -52,6 +52,19 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
     <p class="vantelista__pris">{VANTELISTA.prisRad}</p>
     <h4>{VANTELISTA.rubrik}</h4>
     <p>{besked}</p>
+
+    {/* A2 (SPEC: Kvarvarande luckor, 2026-07-29): namnger luckorna FÖRE
+       köpet — bara när besökaren redan har en sparad profil FÖR DENNA
+       kommun (matchningstratten, foreningsprofil.ts). Ingen profil =
+       inget att räkna på = döljs helt, gissar aldrig. Fylls av
+       skriptet nedan via fyllKrav() (utkastGenerator.ts) mot
+       bidragets egna Bidrag.krav[], citerat ordagrant — aldrig en
+       generisk uppfunnen lista. */}
+    <div data-vantelista-luckor hidden>
+      <h4 data-vantelista-luckor-rubrik hidden></h4>
+      <p data-vantelista-luckor-text></p>
+    </div>
+
     <p>{VANTELISTA.cta}</p>
 
     <form data-vantelista-form>
@@ -70,20 +83,43 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
 <script>
   import { hamtaBevakningsantal, BEVAKNING_GOLV } from '../lib/bevakningKlient';
   import { VANTELISTA } from '../lib/content';
+  import { fyllKrav } from '../lib/utkastGenerator';
+  import { getForeningsprofil } from '../lib/foreningsprofil';
+  import type { Kommun } from '../lib/kommunTyper';
+
+  // A2: en fetch per KOMMUN, delad mellan alla väntelista-widgets på
+  // samma sida (en kommunsida kan ha flera bidrag utan generator).
+  const kommunDataCache = new Map<string, Promise<Kommun | null>>();
+  function hamtaKommunData(slug: string): Promise<Kommun | null> {
+    if (!kommunDataCache.has(slug)) {
+      kommunDataCache.set(
+        slug,
+        fetch(`/kommun-data/${slug}.json`)
+          .then((res) => (res.ok ? (res.json() as Promise<Kommun>) : null))
+          .catch(() => null)
+      );
+    }
+    return kommunDataCache.get(slug)!;
+  }
 
   document.querySelectorAll<HTMLElement>('[data-vantelista]').forEach((widget) => {
     const kommunSlug = widget.dataset.kommunSlug ?? '';
     const kommunNamn = widget.dataset.kommunNamn ?? '';
     const bidragId = widget.dataset.bidragId ?? '';
+    const bidragNamn = widget.dataset.bidragNamn ?? '';
     const knapp = widget.querySelector<HTMLButtonElement>('[data-vantelista-knapp]');
     const panel = widget.querySelector<HTMLElement>('[data-vantelista-panel]');
     const form = widget.querySelector<HTMLFormElement>('[data-vantelista-form]');
     const kvitto = widget.querySelector<HTMLElement>('[data-vantelista-kvitto]');
     const felText = widget.querySelector<HTMLElement>('[data-vantelista-fel]');
     const socialProofEl = widget.querySelector<HTMLElement>('[data-vantelista-social-proof]');
+    const luckorEl = widget.querySelector<HTMLElement>('[data-vantelista-luckor]');
+    const luckorRubrikEl = widget.querySelector<HTMLElement>('[data-vantelista-luckor-rubrik]');
+    const luckorTextEl = widget.querySelector<HTMLElement>('[data-vantelista-luckor-text]');
 
     let klickLoggat = false;
     let socialProofHamtad = false;
+    let luckorHamtade = false;
 
     async function visaSocialProof() {
       if (socialProofHamtad || !socialProofEl || !kommunSlug) return;
@@ -95,10 +131,38 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
       }
     }
 
+    // A2 (SPEC: Kvarvarande luckor, 2026-07-29): namngivna luckor,
+    // bara när profilen redan gäller DENNA kommun — annars vet vi
+    // ingenting om föreningen och gissar hellre inte alls.
+    async function visaLuckor() {
+      if (luckorHamtade || !luckorEl || !luckorTextEl) return;
+      const profil = getForeningsprofil();
+      if (!profil || !profil.kommunSlug || profil.kommunSlug !== kommunSlug) return;
+      luckorHamtade = true;
+
+      const kommunData = await hamtaKommunData(kommunSlug);
+      const bidrag = kommunData?.bidrag.find((b) => b.id === bidragId);
+      if (!kommunData || !bidrag) return;
+
+      const luckor = bidrag.krav.filter((kravText) => fyllKrav(kravText, profil, bidrag, kommunData).status === 'lucka');
+
+      if (luckor.length > 0 && luckorRubrikEl) {
+        luckorRubrikEl.textContent = VANTELISTA.luckorRubrik;
+        luckorRubrikEl.hidden = false;
+        luckorTextEl.textContent = VANTELISTA.luckorTemplate
+          .replace('{bidragsnamn}', bidragNamn)
+          .replace('{luckor}', luckor.join('; '));
+      } else {
+        luckorTextEl.textContent = VANTELISTA.luckorInga.replace('{bidragsnamn}', bidragNamn);
+      }
+      luckorEl.hidden = false;
+    }
+
     knapp?.addEventListener('click', () => {
       panel?.removeAttribute('hidden');
       knapp.hidden = true;
       visaSocialProof();
+      visaLuckor();
 
       // Klicket är intentmätningen — loggas oavsett om formuläret sen fylls
       // i. keepalive: true så requesten inte tappas om något navigerar bort.

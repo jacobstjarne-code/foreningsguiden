@@ -476,6 +476,16 @@ export const SALJARE = {
   orgnr: '556000-0000',
 };
 
+// A1 (SPEC: Kvarvarande luckor, 2026-07-29): checkout/registrering.ts:s
+// TODO-spärr skyddar bara mot ett TOMT SALJARE — den kan inte skilja
+// sandbox-testvärdet ovan från en riktig juridisk part, och behöver
+// inte kunna det (fakturor testas redan säkert i sandboxläge). Men
+// /integritet/ NAMNGER en personuppgiftsansvarig i ett dokument
+// besökare läser skarpt idag — där räcker inte samma spärr. Sätt
+// SALJARE_VALD = true i SAMMA commit som SALJARE bytes till den
+// riktiga parten, aldrig innan.
+export const SALJARE_VALD = false;
+
 /**
  * INTEGRITETSPOLICY (H23) och ÅTERBETALNING (H13) — Fable 2026-07-27.
  * Faktagrund: DATAINVENTERING_GDPR.md (repo-rot). Skriven för att läsas av

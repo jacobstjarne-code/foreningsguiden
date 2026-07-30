@@ -1,13 +1,19 @@
 ---
 // Integritetspolicy — H23 (GRANSKNING_foreningsguiden.md). Renderar
 // INTEGRITET (content.ts, Fable 2026-07-27) — samma sektion-per-rubrik-
-// mönster som /om/:s ansvarStycken. {foretag}/{orgnr} fylls ur SALJARE,
-// fortfarande sandbox-testvärdet "Humle och Dumle AB" tills den riktiga
-// juridiska parten är vald (SPEC: Betalintegration §6 steg 3) — se
-// SALJARE-kommentaren i content.ts.
+// mönster som /om/:s ansvarStycken.
+//
+// A1 (SPEC: Kvarvarande luckor, 2026-07-29): {foretag}/{orgnr} fylls ur
+// SALJARE, men SALJARE är fortfarande sandbox-testvärdet "Humle och
+// Dumle AB" — att skriva ut det som personuppgiftsansvarig i ett
+// dokument besökare läser SKARPT hade namngett ett bolag som inte
+// finns. Så länge SALJARE_VALD är false visas i stället en tydligt
+// flaggad, ärlig ofullständig-uppgift-rad (samma .om-todo-stil som
+// /om/:s ännu dolda avsändarsektion) — resten av policyn är sann och
+// renderas oavsett.
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
-import { INTEGRITET, ATERBETALNING, SALJARE } from '../../lib/content';
+import { INTEGRITET, ATERBETALNING, SALJARE, SALJARE_VALD } from '../../lib/content';
 
 const fyll = (text: string) => text.replace('{foretag}', SALJARE.foretag).replace('{orgnr}', SALJARE.orgnr);
 ---
@@ -22,7 +28,11 @@ const fyll = (text: string) => text.replace('{foretag}', SALJARE.foretag).replac
 
   <section>
     <h2>{INTEGRITET.ansvarigRubrik}</h2>
-    <p>{fyll(INTEGRITET.ansvarigText)}</p>
+    {SALJARE_VALD ? (
+      <p>{fyll(INTEGRITET.ansvarigText)}</p>
+    ) : (
+      <p class="om-todo">Personuppgiftsansvarig är Föreningsguidens juridiska part. Namn och organisationsnummer är inte fastställda än — de fylls i här så snart parten är formellt vald.</p>
+    )}
   </section>
 
   <section>
