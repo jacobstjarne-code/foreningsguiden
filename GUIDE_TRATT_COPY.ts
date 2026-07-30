@@ -90,6 +90,21 @@ export const TRATT = {
   besked: {
     rubrik: 'Det här hittade vi för er förening',
 
+    // H5 (SPEC: Det som återstår, 2026-07-28): återuppta en avbruten
+    // tratt. Visas överst på beskedet BARA om profilen inte är komplett
+    // (färre än 5 frågor besvarade) — kassörer jobbar i femminuters-
+    // fönster, och en återvändande session hoppar i dag rakt till
+    // beskedet utan att märka att frågor står obesvarade. {antal} fylls
+    // i av matcha/index.astro.
+    atervand: {
+      radMall: 'Ni har svarat på {antal} frågor — fortsätt där ni slutade.',
+      knappFortsatt: 'Fortsätt',
+      knappMejla: 'Mejla mig en länk',
+      epostPlaceholder: 'din@forening.se',
+      knappSkicka: 'Skicka',
+      kvitto: 'Länk skickad — kolla din inkorg.',
+    },
+
     // Förstasidans tre förhandsvisningskort (under rubrikerna nedan) —
     // skrivna för att göra korten till en anledning att börja, inte en
     // beskrivning av en produkt.

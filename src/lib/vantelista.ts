@@ -55,3 +55,16 @@ export async function addVantelista(
 export async function logVantelistaKlick(kommunSlug: string, bidragId: string | null): Promise<void> {
   await redis.incr(klickKey(kommunSlug, bidragId ?? 'registrering'));
 }
+
+/**
+ * SPEC: Det som återstår, A (2026-07-28) — integritetspolicyn lovar att
+ * avregistrering raderar bevakningsuppgifterna helt ("ingen kopia, ingen
+ * papperskorg"). Anropas av subscribers.ts:s removeSubscriber() så en
+ * enda avregistrering rensar BÅDA ställena en adress kan förekomma —
+ * texten ska inte lova mer än koden gör.
+ */
+export async function removeVantelista(email: string): Promise<void> {
+  const normalized = email.toLowerCase();
+  await redis.del(vantelistaRecordKey(normalized));
+  await redis.srem(VANTELISTA_INDEX_KEY, normalized);
+}

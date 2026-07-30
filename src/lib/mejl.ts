@@ -190,22 +190,29 @@ export interface KopBekraftelseVars {
   kommunSlug: string;
   belopp: string; // kr, utan öre
   registreraLank: string;
+  kopLank: string;
   hostedInvoiceUrl?: string;
   checklista: RegistreringsUtkastRad[];
 }
 
 /**
- * H8+H10+H15 (GRANSKNING_foreningsguiden.md): köparens egen bekräftelse
- * OCH den faktiska leveransen i samma mejl — separat från sendKopNotis
- * (som bara går till Jacob, rent informationellt). Minimal, funktionell
- * transaktionscopy runt checklistan (samma precedent som avregistrera/
- * kontakt-sidornas instruktionstext — Code skriver utility-text för en
- * ren teknisk sida, rapporterar till Fable för justering, inte
- * marknadsprosa). Checklistans EGET innehåll är citerat, inte skrivet
- * här — samma VAGLEDNING.station3-mallar som redan är Fable-godkända
- * (se genereraRegistreringsUtkast, utkastGenerator.ts). Länkar även
- * till Stripes varaktiga fakturalänk (H15) och tillbaka till
- * registreringssidan.
+ * H8+H10+H15 (GRANSKNING_foreningsguiden.md, uppdaterad SPEC: Det som
+ * återstår 2026-07-28): köparens egen bekräftelse OCH den faktiska
+ * leveransen i samma mejl — separat från sendKopNotis (som bara går till
+ * Jacob, rent informationellt). Minimal, funktionell transaktionscopy
+ * runt checklistan (samma precedent som avregistrera/kontakt-sidornas
+ * instruktionstext — Code skriver utility-text för en ren teknisk sida,
+ * rapporterar till Fable för justering, inte marknadsprosa). Checklistans
+ * EGET innehåll är citerat, inte skrivet här — samma
+ * VAGLEDNING.station3-mallar som redan är Fable-godkända (se
+ * genereraRegistreringsUtkast, utkastGenerator.ts).
+ *
+ * H15-fix (2026-07-29): mejlet var tidigare köparens ENDA kopia — tappar
+ * hon det var köpet borta. `kopLank` pekar nu på den varaktiga,
+ * inloggningsskyddade sidan (mina-sidor/kop/[session]/) med kopiera-per-
+ * sektion och docx/pdf-export (H16) — det som faktiskt löser
+ * varaktighetslöftet, inte bara `registreraLank` (som visar kommunens
+ * NUVARANDE, ev. ändrade läge, inte vad hon betalade för).
  */
 export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): Promise<void> {
   const rader = [
@@ -225,7 +232,8 @@ export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): 
     rader.push('');
   });
 
-  rader.push(`Samma checklista, alltid uppdaterad: ${vars.registreraLank}`);
+  rader.push(`Er varaktiga kopia — kopiera, ladda ner som Word eller PDF: ${vars.kopLank}`);
+  rader.push(`Kommunens nuvarande sida (uppdateras löpande): ${vars.registreraLank}`);
   if (vars.hostedInvoiceUrl) {
     rader.push(`Kvitto/faktura: ${vars.hostedInvoiceUrl}`);
   }
@@ -405,6 +413,39 @@ export async function sendUtfallsfraga(to: string, vars: UtfallsfragaVars): Prom
   }
 }
 
+export interface InlamningPaminnelseVars {
+  bidrag: string;
+  kommun: string;
+  datum: string; // svensk klartext, redan formaterad av anroparen
+  bidragLank: string;
+  svarJaLank: string;
+  svarNejLank: string;
+}
+
+/**
+ * H18 (SPEC: Det som återstår, 2026-07-28): inlämningspåminnelsen. Två
+ * svarslänkar, samma "klartext-URL i textmejl"-stil som sendUtfallsfraga.
+ */
+export async function sendPaminnelseInlamning(to: string, vars: InlamningPaminnelseVars): Promise<void> {
+  const amne = MEJL.paminnelseInlamning.amne.replace('{bidrag}', vars.bidrag);
+  const text = MEJL.paminnelseInlamning.body
+    .map((p) =>
+      p
+        .replace(/{bidrag}/g, vars.bidrag)
+        .replace(/{kommun}/g, vars.kommun)
+        .replace('{datum}', vars.datum)
+        .replace('{bidragLank}', vars.bidragLank)
+        .replace('{svarJaLank}', vars.svarJaLank)
+        .replace('{svarNejLank}', vars.svarNejLank)
+    )
+    .join('\n\n');
+
+  const result = await resend.emails.send({ from: FROM, to, subject: amne, text: urlPaEgenRad(text) });
+  if (result.error) {
+    throw new Error(`Resend-fel vid inlämningspåminnelse: ${result.error.message}`);
+  }
+}
+
 export interface DelbartBeskedBidrag {
   namn: string;
   belopp: string | null;
@@ -442,5 +483,29 @@ export async function sendDelbartBesked(to: string, vars: DelbartBeskedVars): Pr
   });
   if (result.error) {
     throw new Error(`Resend-fel vid delbart besked: ${result.error.message}`);
+  }
+}
+
+/**
+ * H5 (SPEC: Det som återstår, 2026-07-28): "Mejla mig en länk" — en
+ * avbruten tratt kan återupptas på vilken enhet som helst, eftersom
+ * profilen kodas in i länken själv (ingen server-sparad session finns
+ * innan ett köp/en e-post fångas, se foreningsprofil.ts). Minimal,
+ * funktionell transaktionstext — samma precedent som övriga utility-
+ * mejl i den här filen.
+ */
+export async function sendTrattLank(to: string, lank: string): Promise<void> {
+  const text = urlPaEgenRad(
+    `Här är länken tillbaka till era svar i Föreningsguidens matchningstratt.\n${lank}\n\nBad ni inte om detta? Ni kan bortse från mejlet.`
+  );
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: 'Er länk tillbaka till matchningstratten — Föreningsguiden',
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid trattlänk: ${result.error.message}`);
   }
 }

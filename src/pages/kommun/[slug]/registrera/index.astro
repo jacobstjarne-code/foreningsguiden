@@ -85,6 +85,12 @@ const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
       <div class="registrera-doc__hjalp">
         <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
         <p class="registrera-doc__pris">{prisKr} kr</p>
+        {/* H12 (SPEC: Det som återstår, 2026-07-28): sista förtroende-
+           prövningen före betalning — förbereder henne för vad Swish-
+           appen faktiskt visar. Motpartsnamnet "Föreningsguiden" sätts
+           i Stripe-kontots inställningar (Jacobs jobb, ingen kod) — den
+           här raden förutsätter att det är gjort. */}
+        <p class="registrera-doc__swish-info">I Swish-appen ser ni "Föreningsguiden" som mottagare.</p>
         <button type="button" class="btn-primary" data-registrera-betala>{TRATT.besked.borjaHar.hjalpKnapp}</button>
         {/* H8 (GRANSKNING_foreningsguiden.md): produkten levereras nu
            automatiskt (mejl direkt vid betalning) — inte "vi hör av oss"
@@ -336,6 +342,12 @@ const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
     font-weight: var(--fg-weight-bold);
     font-size: var(--fg-text-h2);
     margin-top: var(--fg-space-4);
+  }
+
+  .registrera-doc__swish-info {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-top: var(--fg-space-2);
   }
 
   .registrera-doc__hjalp [data-registrera-betala] {

@@ -13,6 +13,7 @@
 
 import { Redis } from '@upstash/redis';
 import type { Foreningsprofil } from './foreningsprofil';
+import { removeVantelista } from './vantelista';
 
 // Redis.fromEnv() letar efter UPSTASH_REDIS_REST_URL/_TOKEN — Vercels
 // Marketplace-integration (vercel install upstash/upstash-kv) provisionerar
@@ -35,7 +36,7 @@ const tokenKey = (token: string) => `bekraftelsetoken:${token}`;
 // '28' — abonnemangsbevakningens fyraveckorspåminnelse (SPEC_ABONNEMANG.md
 // §4), samma nyckelmönster som den gratis 14/3-bevakningen men en egen
 // typ-literal så de två aldrig kan krocka på samma (bidragId, datum).
-const sentKey = (typ: '28' | '14' | '3', bidragId: string, dateISO: string) => `paminnelseskickad:${typ}:${bidragId}:${dateISO}`;
+const sentKey = (typ: '28' | '14' | '4' | '3', bidragId: string, dateISO: string) => `paminnelseskickad:${typ}:${bidragId}:${dateISO}`;
 
 const TOKEN_TTL_SEKUNDER = 60 * 60 * 24 * 7; // 7 dagar
 
@@ -173,9 +174,18 @@ export async function addForeningsprofil(
   return { token, alreadyConfirmed: false };
 }
 
+/**
+ * SPEC: Det som återstår, A (2026-07-28): integritetspolicyn lovar att
+ * avregistrering raderar bevakningsuppgifterna helt — "ingen kopia,
+ * ingen papperskorg". Rensar därför ÄVEN väntelistposten (vantelista.ts)
+ * för samma adress, inte bara prenumerant-posten. Utan detta kunde
+ * samma adress ligga kvar i väntelistan efter en "klar" avregistrering
+ * — texten hade lovat mer än koden gjorde.
+ */
 export async function removeSubscriber(email: string): Promise<void> {
   await redis.del(recordKey(email));
   await redis.srem(INDEX_KEY, email.toLowerCase());
+  await removeVantelista(email);
 }
 
 export async function getSubscriber(email: string): Promise<Subscriber | null> {
@@ -283,10 +293,10 @@ export async function countTrackedDeadlines(deadlineEntries: { kommunSlug: strin
 }
 
 /** Har den här (typ, bidrag, datum)-påminnelsen redan gått till adressen? */
-export async function wasReminderSent(typ: '28' | '14' | '3', bidragId: string, dateISO: string, email: string): Promise<boolean> {
+export async function wasReminderSent(typ: '28' | '14' | '4' | '3', bidragId: string, dateISO: string, email: string): Promise<boolean> {
   return (await redis.sismember(sentKey(typ, bidragId, dateISO), email.toLowerCase())) === 1;
 }
 
-export async function markReminderSent(typ: '28' | '14' | '3', bidragId: string, dateISO: string, email: string): Promise<void> {
+export async function markReminderSent(typ: '28' | '14' | '4' | '3', bidragId: string, dateISO: string, email: string): Promise<void> {
   await redis.sadd(sentKey(typ, bidragId, dateISO), email.toLowerCase());
 }

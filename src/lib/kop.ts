@@ -35,6 +35,12 @@ const andringsnotisKey = (stripeSessionId: string) => `andringsnotis:${stripeSes
 // e-postscopad (en bevakare), den här är köp-scopad (samma person kan i
 // teorin köpa flera gånger, varje köp får sin egen utfallsfråga).
 const utfallsfraganKey = (stripeSessionId: string, bidragId: string) => `utfallsfraga:${stripeSessionId}:${bidragId}`;
+// H18 (SPEC: Det som återstår): egen nyckelrymd av samma skäl som
+// utfallsfraganKey ovan — köp-scopad idempotens för cronets utskick,
+// skild från utfallsfrågans (frågorna kan i teorin gå till samma
+// köp+bidrag utan att krocka).
+const inlamningsPaminnelseKey = (stripeSessionId: string, bidragId: string) =>
+  `inlamningspaminnelse:${stripeSessionId}:${bidragId}`;
 
 export type KopProdukt = 'registrering';
 
@@ -47,6 +53,18 @@ export interface KopUtfallEntry {
   bidragId: string;
   bidragNamn: string;
   svar: KopUtfallSvar;
+  svaratDatum: string; // ISO
+}
+
+// H18 (SPEC: Det som återstår, 2026-07-28): svaret på inlämnings-
+// påminnelsens två länkar (api/inlamnad/[session]/[bidrag]/[svar]) —
+// samma mönster som KopUtfallSvar/KopUtfallEntry ovan.
+export type KopInlamningSvar = 'ja' | 'nej';
+
+export interface KopInlamningEntry {
+  bidragId: string;
+  bidragNamn: string;
+  svar: KopInlamningSvar;
   svaratDatum: string; // ISO
 }
 
@@ -71,6 +89,8 @@ export interface KopEntry {
   // inte bidrag-scopad) — en post per bidrag som faktiskt svarat, inte
   // ett enda fält. "Senaste svaret vinner" per bidragId, ingen historik.
   utfall?: KopUtfallEntry[];
+  // H18: samma "en post per bidrag, senaste svaret vinner"-mönster som utfall ovan.
+  inlamning?: KopInlamningEntry[];
 }
 
 /** Sparar ett bekräftat köp. Idempotent per stripeSessionId — samma session skriver aldrig två index-poster. */
@@ -83,6 +103,19 @@ export async function sparaKop(entry: KopEntry): Promise<void> {
 /** Läser tillbaka ett köp — används för att göra webhooken idempotent (Stripe kan skicka samma event flera gånger). */
 export async function hamtaKop(stripeSessionId: string): Promise<KopEntry | null> {
   return (await redis.get<KopEntry>(kopKey(stripeSessionId))) ?? null;
+}
+
+/**
+ * H15/H16/H17 (SPEC: Det som återstår, 2026-07-28): samma uppslag som
+ * hamtaKop, men returnerar bara träffen om den TILLHÖR den inloggade
+ * e-posten. mina-sidor/kop/[session]/ och dess docx/pdf-endpoints
+ * använder ALDRIG hamtaKop direkt — en känd/läckt Stripe-sessions-id ska
+ * aldrig räcka för att läsa en annan förenings köpta underlag.
+ */
+export async function hamtaAgtKop(email: string, stripeSessionId: string): Promise<KopEntry | null> {
+  const kop = await hamtaKop(stripeSessionId);
+  if (!kop || kop.email.toLowerCase() !== email.toLowerCase()) return null;
+  return kop;
 }
 
 /** Mina sidor (H29): alla köp för en e-post, senaste först. */
@@ -174,5 +207,35 @@ export async function sparaUtfallssvar(
   const utfall = (kop.utfall ?? []).filter((u) => u.bidragId !== bidragId);
   utfall.push({ bidragId, bidragNamn, svar, svaratDatum: new Date().toISOString() });
   await redis.set(kopKey(stripeSessionId), { ...kop, utfall });
+  return true;
+}
+
+/** H18: har inlämningspåminnelsen för detta (köp, bidrag) redan skickats — cronets idempotensspärr. */
+export async function harInlamningsPaminnelseSkickats(stripeSessionId: string, bidragId: string): Promise<boolean> {
+  return (await redis.get(inlamningsPaminnelseKey(stripeSessionId, bidragId))) !== null;
+}
+
+/** H18: markerar att inlämningspåminnelsen för detta (köp, bidrag) nu är skickad. */
+export async function markeraInlamningsPaminnelseSkickad(stripeSessionId: string, bidragId: string): Promise<void> {
+  await redis.set(inlamningsPaminnelseKey(stripeSessionId, bidragId), true);
+}
+
+/**
+ * H18: sparar svaret på "har ni lämnat in ansökan?" — samma läs-mergea-
+ * skriv-princip som sparaUtfallssvar ovan, egen fält (inlamning) så de
+ * två svarsflödena aldrig kan skriva över varandra.
+ */
+export async function sparaInlamningssvar(
+  stripeSessionId: string,
+  bidragId: string,
+  bidragNamn: string,
+  svar: KopInlamningSvar
+): Promise<boolean> {
+  const kop = await hamtaKop(stripeSessionId);
+  if (!kop) return false;
+
+  const inlamning = (kop.inlamning ?? []).filter((u) => u.bidragId !== bidragId);
+  inlamning.push({ bidragId, bidragNamn, svar, svaratDatum: new Date().toISOString() });
+  await redis.set(kopKey(stripeSessionId), { ...kop, inlamning });
   return true;
 }

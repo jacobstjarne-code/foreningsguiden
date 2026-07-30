@@ -114,6 +114,7 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
             {kop.map((k) => (
               <li>
                 <strong>{(k.beloppOre / 100).toFixed(0)} kr</strong> — {formatDate(k.betaldDatum.slice(0, 10))} — {k.kommunSlug}
+                {' '}— <a href={`/mina-sidor/kop/${encodeURIComponent(k.stripeSessionId)}/`}>Se underlaget</a>
                 {k.hostedInvoiceUrl && <> — <a href={k.hostedInvoiceUrl}>Kvitto/faktura</a></>}
               </li>
             ))}

@@ -38,19 +38,32 @@ export interface EpostbyteData {
 
 export const SESSION_COOKIE_NAMN = 'fg_session';
 
-/** Skapar en engångstoken för magic-länken. */
-export async function skapaInloggningstoken(email: string): Promise<string> {
+export interface InloggningstokenData {
+  email: string;
+  // H15/H16/H17 (SPEC: Det som återstår, 2026-07-28): en obekräftad
+  // besökare som kommer från kop-bekräftelsemejlets länk ska landa
+  // DIREKT på sitt köp efter inloggning, inte på generella /mina-sidor/.
+  // Skickas som en SERVER-lagrad väg mot detta token, inte som en
+  // querysträng på magic-länken — samma "=" -i-URL-rotorsak som redan
+  // motiverar path-parametrar överallt annars i den här filen
+  // (verifiera-inloggning/[token].ts).
+  returTo: string | null;
+}
+
+/** Skapar en engångstoken för magic-länken. `returTo` — se InloggningstokenData. */
+export async function skapaInloggningstoken(email: string, returTo: string | null = null): Promise<string> {
   const token = crypto.randomUUID();
-  await redis.set(inloggningstokenKey(token), email.toLowerCase(), { ex: INLOGGNINGSTOKEN_TTL_SEKUNDER });
+  const data: InloggningstokenData = { email: email.toLowerCase(), returTo };
+  await redis.set(inloggningstokenKey(token), data, { ex: INLOGGNINGSTOKEN_TTL_SEKUNDER });
   return token;
 }
 
 /** Verifierar och FÖRBRUKAR en inloggningstoken. Null om ogiltig/utgången. */
-export async function verifieraInloggningstoken(token: string): Promise<string | null> {
-  const email = await redis.get<string>(inloggningstokenKey(token));
-  if (!email) return null;
+export async function verifieraInloggningstoken(token: string): Promise<InloggningstokenData | null> {
+  const data = await redis.get<InloggningstokenData>(inloggningstokenKey(token));
+  if (!data) return null;
   await redis.del(inloggningstokenKey(token));
-  return email;
+  return data;
 }
 
 /** Skapar en ny, längre sessionstoken efter lyckad inloggning. */

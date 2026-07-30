@@ -14,10 +14,10 @@ export const GET: APIRoute = async ({ params, cookies, redirect }) => {
   const token = params.token;
   if (!token) return redirect('/mina-sidor/?fel=ogiltig', 303);
 
-  const email = await verifieraInloggningstoken(token);
-  if (!email) return redirect('/mina-sidor/?fel=ogiltig', 303);
+  const data = await verifieraInloggningstoken(token);
+  if (!data) return redirect('/mina-sidor/?fel=ogiltig', 303);
 
-  const sessionToken = await skapaSession(email);
+  const sessionToken = await skapaSession(data.email);
   cookies.set(SESSION_COOKIE_NAMN, sessionToken, {
     httpOnly: true,
     secure: true,
@@ -26,5 +26,5 @@ export const GET: APIRoute = async ({ params, cookies, redirect }) => {
     maxAge: SESSION_COOKIE_MAX_AGE_SEKUNDER,
   });
 
-  return redirect('/mina-sidor/', 303);
+  return redirect(data.returTo ?? '/mina-sidor/', 303);
 };

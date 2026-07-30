@@ -440,6 +440,24 @@ export const MEJL = {
       'Fick ni avslag och vill veta om beslutet går att ompröva, svara på det här mejlet.',
     ],
   },
+
+  /**
+   * H18 (SPEC: Det som återstår, 2026-07-28): inlämningspåminnelse. Går
+   * bara till köpare av registreringsutkastet (kop.ts, samma population
+   * som utfallsfraga) vars sparade profil matchar bidraget — fyra dagar
+   * före deadline, den sista rimliga marginalen innan en ansökan blir
+   * försent inlämnad (paminnelse3-registret). Frågan "har ni lämnat in
+   * än" speglar utfallsfrågans två-svarslänkar-i-textmejl-mönster
+   * (cron/inlamningspaminnelse.ts, api/inlamnad/[session]/[bidrag]/[svar]).
+   */
+  paminnelseInlamning: {
+    amne: 'Er ansökan till {bidrag} är inte inlämnad — sista dag om fyra dagar',
+    body: [
+      'Den {datum} stänger ansökan för {bidrag} i {kommun}. Vi har inte hört från er, så vi vet inte om ansökan redan är inlämnad.',
+      'Underlagen och länken till kommunens ansökan finns här: {bidragLank}',
+      'Är ansökan inlämnad? Ja: {svarJaLank}\nNej, inte än: {svarNejLank}',
+    ],
+  },
 };
 
 /**

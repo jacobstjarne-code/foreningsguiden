@@ -108,6 +108,10 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
   }
 
   const registreraLank = `https://foreningsguiden.se/kommun/${kommunSlug}/registrera/`;
+  // H15 (SPEC: Det som återstår, 2026-07-28): länken till köparens
+  // varaktiga, inloggningsskyddade kopia — se kopLank-noten i
+  // sendKopBekraftelse (mejl.ts).
+  const kopLank = `https://foreningsguiden.se/mina-sidor/kop/${encodeURIComponent(session.id)}/`;
   const beloppKr = (entry.beloppOre / 100).toFixed(0);
 
   try {
@@ -117,7 +121,7 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
   }
 
   try {
-    await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, hostedInvoiceUrl, checklista });
+    await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, kopLank, hostedInvoiceUrl, checklista });
   } catch (err) {
     console.error('sendKopBekraftelse misslyckades', err);
   }

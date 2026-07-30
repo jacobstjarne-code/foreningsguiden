@@ -1,0 +1,228 @@
+---
+// H15/H16/H17 (SPEC: Det som återstår, 2026-07-28) — det köpta
+// registreringsutkastets VARAKTIGA kopia. Fram tills nu levererades
+// köpet bara som ETT mejl (sendKopBekraftelse) — tappar kassören det är
+// köpet borta. Den här sidan är den permanenta platsen: samma checklista
+// (låst till köptillfället, forutsattningarSnapshot — inte omgenererad,
+// se kop.ts), kopiera-per-sektion och docx/pdf-export (H16), och en
+// bilagechecklista skannad ur den redan sourcade texten (H17,
+// kopDokument.ts). Kräver samma inloggning som resten av Mina sidor —
+// ägarskap verifieras av hamtaAgtKop (kop.ts), aldrig bara en känd
+// sessions-id.
+//
+// När bidragsutkastet (genereraUtkast, den bidrags-specifika
+// dokumentgeneratorn) passerar golden set-grinden renderas det på SAMMA
+// sida, som en andra sektion — inte en ny yta. Inte byggt ännu (väntar
+// på grinden), men arkitekturen stänger inte ute det.
+export const prerender = false;
+
+import Base from '../../../../layouts/Base.astro';
+import { SESSION_COOKIE_NAMN, hamtaSessionEmail } from '../../../../lib/session';
+import { hamtaAgtKop } from '../../../../lib/kop';
+import { getKommunBySlug } from '../../../../lib/kommuner';
+import { kopChecklista, harvestBilagor } from '../../../../lib/kopDokument';
+import { VAGLEDNING } from '../../../../lib/content';
+
+const sessionId = Astro.params.session ?? '';
+const returPath = `/mina-sidor/kop/${encodeURIComponent(sessionId)}/`;
+
+const sessionToken = Astro.cookies.get(SESSION_COOKIE_NAMN)?.value;
+const email = sessionToken ? await hamtaSessionEmail(sessionToken) : null;
+
+const kop = email ? await hamtaAgtKop(email, sessionId) : null;
+const kommun = kop ? getKommunBySlug(kop.kommunSlug) : null;
+
+// forutsattningarSnapshot är låst vid köptillfället (kop.ts) — det är
+// VAD HON BETALADE FÖR, inte kommunens eventuellt ändrade nuläge (den
+// jämförelsen sköter H22:s ändringsbevakning separat).
+const checklista = kop && kommun ? kopChecklista(kop, kommun) : [];
+const bilagor = checklista.length > 0 ? harvestBilagor(checklista) : [];
+---
+<Base title="Ert köpta underlag — Föreningsguiden" description="Er registreringschecklista, varaktigt tillgänglig — kopiera, ladda ner som docx eller pdf.">
+  {!email ? (
+    <div class="email-signup fg-card">
+      <h1>Logga in för att se ert köp</h1>
+      <p>Länken är personlig till er förening — logga in med samma e-postadress som köpet gjordes med.</p>
+      <form method="POST" action="/api/logga-in">
+        <input type="hidden" name="retur" value={returPath} />
+        <label for="login-email">E-post</label>
+        <input type="email" id="login-email" name="email" required autocomplete="email" />
+        <button type="submit" class="btn-primary">Skicka inloggningslänk</button>
+      </form>
+    </div>
+  ) : !kop || !kommun ? (
+    <div class="fg-card">
+      <h1>Hittar inte köpet</h1>
+      <p>Vi kan inte hitta ett köp med den här länken på ert konto. Er köphistorik finns under <a href="/mina-sidor/">Mina sidor</a>.</p>
+    </div>
+  ) : (
+    <div class="kop-doc fg-card" data-kop-doc data-session={sessionId}>
+      <p class="kop-doc__eyebrow">{kommun.kommun} kommun · registreringsutkast</p>
+      <h1>Er registreringschecklista</h1>
+      <p class="kop-doc__meta">Köpt {kop.betaldDatum.slice(0, 10)}{kop.hostedInvoiceUrl && <> · <a href={kop.hostedInvoiceUrl}>Kvitto/faktura</a></>}</p>
+
+      <div class="kop-doc__export">
+        <a class="fg-btn--ghost" href={`/api/kop/${encodeURIComponent(sessionId)}/docx/`}>Ladda ner som Word (.docx)</a>
+        <a class="fg-btn--ghost" href={`/api/kop/${encodeURIComponent(sessionId)}/pdf/`}>Ladda ner som PDF</a>
+      </div>
+
+      <ol class="kop-doc__lista">
+        {checklista.map((rad, i) => (
+          <li class="kop-doc__steg" data-kop-sektion data-kop-text={[
+            `${i + 1}. ${rad.vad}`,
+            rad.beskrivning,
+            rad.ledtidText,
+            rad.giltighetText ?? '',
+            `Källa: ${rad.kallaUrl}`,
+          ].filter(Boolean).join('\n')}>
+            <div class="kop-doc__steg-head">
+              <h2>{i + 1}. {rad.vad}</h2>
+              <button type="button" class="fg-btn--ghost kop-doc__kopiera" data-kop-kopiera>Kopiera</button>
+            </div>
+            <p>{rad.beskrivning}</p>
+            <p class="kop-doc__ledtid">{rad.ledtidText}</p>
+            {rad.giltighetText && <p class="kop-doc__giltighet">{rad.giltighetText}</p>}
+            <p class="kop-doc__kalla">Källa: <a href={rad.kallaUrl}>{rad.kallaUrl}</a></p>
+          </li>
+        ))}
+      </ol>
+
+      {bilagor.length > 0 && (
+        <div class="kop-doc__bilagor">
+          <h2>Underlag som nämns i kraven</h2>
+          <ul>
+            {bilagor.map((b) => (
+              <li>{b.etikett} <span class="kop-doc__bilaga-kalla">— nämnt under "{b.kallaVad}"</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div class="kop-doc__inlamning">
+        <h2>Lämna in ansökan</h2>
+        <p>Ansökan lämnas in hos {kommun.kommun} kommun via <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.namn}</a>, inte här.</p>
+      </div>
+
+      <p class="kop-doc__ansvar">{VAGLEDNING.station5.ansvar}</p>
+      <a href="/mina-sidor/" class="kop-doc__tillbaka">← Mina sidor</a>
+    </div>
+  )}
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-kop-kopiera]').forEach((knapp) => {
+    knapp.addEventListener('click', async () => {
+      const sektion = knapp.closest<HTMLElement>('[data-kop-sektion]');
+      const text = sektion?.dataset.kopText ?? '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const original = knapp.textContent;
+        knapp.textContent = 'Kopierat';
+        setTimeout(() => {
+          knapp.textContent = original;
+        }, 1500);
+      } catch {
+        // Clipboard-API otillgängligt (t.ex. icke-HTTPS) — inget att göra åt.
+      }
+    });
+  });
+</script>
+
+<style>
+  .kop-doc__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0;
+  }
+
+  .kop-doc__meta {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: 4px 0 var(--fg-space-5);
+  }
+
+  .kop-doc__export {
+    display: flex;
+    gap: var(--fg-space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--fg-space-6);
+  }
+
+  .kop-doc__lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-5);
+  }
+
+  .kop-doc__steg {
+    border: var(--fg-border-structural) solid var(--fg-border);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-5);
+  }
+
+  .kop-doc__steg-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--fg-space-3);
+  }
+
+  .kop-doc__steg-head h2 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 6px;
+  }
+
+  .kop-doc__kopiera {
+    flex: none;
+  }
+
+  .kop-doc__ledtid,
+  .kop-doc__kalla {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .kop-doc__giltighet {
+    background: var(--fg-attention-soft, var(--fg-surface-sunken));
+    border-left: 3px solid var(--fg-attention);
+    padding: 8px 12px;
+    font-size: var(--fg-text-label);
+  }
+
+  .kop-doc__bilagor,
+  .kop-doc__inlamning {
+    margin-top: var(--fg-space-7);
+    padding-top: var(--fg-space-6);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .kop-doc__bilagor h2,
+  .kop-doc__inlamning h2 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  .kop-doc__bilaga-kalla {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+  }
+
+  .kop-doc__ansvar {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-top: var(--fg-space-6);
+  }
+
+  .kop-doc__tillbaka {
+    display: inline-block;
+    margin-top: var(--fg-space-4);
+    font-size: var(--fg-text-label);
+  }
+</style>

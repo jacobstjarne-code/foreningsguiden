@@ -107,6 +107,24 @@ const kommuner = loadKommuner();
       </div>
 
       <div class="tratt__besked" data-tratt-besked hidden>
+        {/* H5 (SPEC: Det som återstår, 2026-07-28): återuppta en
+           avbruten tratt. Hidden som default, visas av skriptet bara
+           om profilen inte är komplett — se render()-anropande koden
+           längst ner. */}
+        <div class="tratt__atervand" data-tratt-atervand hidden>
+          <p data-tratt-atervand-text></p>
+          <div class="tratt__atervand-knappar">
+            <button type="button" class="btn-primary" data-tratt-atervand-fortsatt>{TRATT.besked.atervand.knappFortsatt}</button>
+            <button type="button" class="fg-btn--ghost" data-tratt-atervand-mejla>{TRATT.besked.atervand.knappMejla}</button>
+          </div>
+          <form class="tratt__atervand-form" data-tratt-atervand-form hidden>
+            <input type="email" name="email" placeholder={TRATT.besked.atervand.epostPlaceholder} required autocomplete="email" />
+            <button type="submit" class="btn-primary">{TRATT.besked.atervand.knappSkicka}</button>
+            <p class="tratt__atervand-fel" data-tratt-atervand-fel hidden>Något gick fel. Försök igen.</p>
+          </form>
+          <p class="tratt__atervand-kvitto" data-tratt-atervand-kvitto hidden>{TRATT.besked.atervand.kvitto}</p>
+        </div>
+
         <h2>{TRATT.besked.rubrik}</h2>
 
         <section class="tratt__grupp tratt__grupp--matchar">
@@ -197,6 +215,13 @@ const kommuner = loadKommuner();
     const delaForm = root.querySelector<HTMLFormElement>('[data-tratt-dela-form]');
     const delaFelEl = root.querySelector<HTMLElement>('[data-tratt-dela-fel]');
     const delaKvittoEl = root.querySelector<HTMLElement>('[data-tratt-dela-kvitto]');
+    const atervandEl = root.querySelector<HTMLElement>('[data-tratt-atervand]');
+    const atervandTextEl = root.querySelector<HTMLElement>('[data-tratt-atervand-text]');
+    const atervandFortsattKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-atervand-fortsatt]');
+    const atervandMejlaKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-atervand-mejla]');
+    const atervandForm = root.querySelector<HTMLFormElement>('[data-tratt-atervand-form]');
+    const atervandFelEl = root.querySelector<HTMLElement>('[data-tratt-atervand-fel]');
+    const atervandKvittoEl = root.querySelector<HTMLElement>('[data-tratt-atervand-kvitto]');
 
     const today = todayISO();
     let kommunData: Kommun | null = null;
@@ -207,6 +232,23 @@ const kommuner = loadKommuner();
     let step = 1;
     let advancing = false;
     let kvittensTimer: ReturnType<typeof setTimeout> | undefined;
+
+    // H5 — "Mejla mig en länk": profilen kan komma in via ?fortsatt=
+    // (en JSON-kodad Foreningsprofil, se api/mejla-tratt-lank.ts som
+    // byggde länken ur SERVERVALIDERADE fält). Sparas i localStorage
+    // direkt vid ankomst, så den vanliga sparad-läsningen nedan hittar
+    // den — samma "en sanning" som allt annat i profilen.
+    const fortsattParam = new URLSearchParams(window.location.search).get('fortsatt');
+    if (fortsattParam) {
+      try {
+        const fortsattProfil = JSON.parse(fortsattParam) as Partial<Foreningsprofil>;
+        if (fortsattProfil && typeof fortsattProfil === 'object') {
+          saveForeningsprofil(fortsattProfil);
+        }
+      } catch {
+        // Trasig/manipulerad länk — hoppa bara över, ingen krasch.
+      }
+    }
 
     const sparad = getForeningsprofil();
     const profil: Foreningsprofil = sparad ?? {
@@ -566,6 +608,62 @@ const kommuner = loadKommuner();
       });
     });
 
+    // H5 — antal besvarade frågor (max 5) och vilken som är FÖRSTA
+    // obesvarade, för återupptagningsbanderollen. Ren räkning, ingen ny
+    // datamodell.
+    function antalBesvarade(p: Foreningsprofil): number {
+      let n = 0;
+      if (p.kommunSlug) n++;
+      if (p.verksamhet.length > 0) n++;
+      if (p.storlek !== null) n++;
+      if (p.alder !== null) n++;
+      if (p.sokt !== null) n++;
+      return n;
+    }
+
+    function forstaObesvaradeSteg(p: Foreningsprofil): number {
+      if (p.verksamhet.length === 0) return 2;
+      if (p.storlek === null) return 3;
+      if (p.alder === null) return 4;
+      if (p.sokt === null) return 5;
+      return 6;
+    }
+
+    function visaAtervandOmBehovs() {
+      if (!atervandEl || !atervandTextEl) return;
+      const antal = antalBesvarade(profil);
+      if (antal >= 5) {
+        atervandEl.hidden = true;
+        return;
+      }
+      atervandTextEl.textContent = TRATT.besked.atervand.radMall.replace('{antal}', String(antal));
+      atervandEl.hidden = false;
+    }
+
+    atervandFortsattKnapp?.addEventListener('click', () => goStep(forstaObesvaradeSteg(profil)));
+
+    atervandMejlaKnapp?.addEventListener('click', () => {
+      atervandForm?.removeAttribute('hidden');
+      atervandMejlaKnapp.setAttribute('hidden', '');
+    });
+
+    atervandForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      atervandFelEl?.setAttribute('hidden', '');
+      const data = new FormData(atervandForm);
+      data.set('profil', JSON.stringify(profil));
+
+      try {
+        const res = await fetch('/api/mejla-tratt-lank', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error('svar ej ok');
+        atervandForm.hidden = true;
+        atervandKvittoEl?.removeAttribute('hidden');
+      } catch {
+        atervandFelEl?.removeAttribute('hidden');
+      }
+    });
+
     // Återställ sparat svar. En återvändande session med sparad kommun
     // hoppar direkt till steg 6 (beskedet) — samma beteende som innan
     // ombyggnaden — "Tillbaka" tar en till valfri fråga för att ändra svar.
@@ -573,6 +671,7 @@ const kommuner = loadKommuner();
     if (profil.kommunSlug) {
       step = 6;
       hamtaKommunData(profil.kommunSlug);
+      visaAtervandOmBehovs();
     } else {
       updateStegUI();
     }
@@ -899,13 +998,65 @@ const kommuner = loadKommuner();
     margin-top: var(--fg-space-3);
   }
 
+  /* H5 — återuppta en avbruten tratt. */
+  .tratt__atervand {
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-attention);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4) var(--fg-space-5);
+    margin-bottom: var(--fg-space-6);
+  }
+
+  .tratt__atervand p {
+    margin: 0;
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .tratt__atervand-knappar {
+    display: flex;
+    gap: var(--fg-space-3);
+    margin-top: var(--fg-space-3);
+  }
+
+  .tratt__atervand-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fg-space-2);
+    margin-top: var(--fg-space-3);
+  }
+
+  .tratt__atervand-form input[type='email'] {
+    flex: 1 1 20ch;
+    padding: var(--fg-space-2);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+  }
+
+  .tratt__atervand-fel {
+    color: var(--fg-urgent);
+    font-size: var(--fg-text-label);
+    width: 100%;
+    font-weight: normal;
+  }
+
+  .tratt__atervand-kvitto {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    font-weight: normal;
+    margin-top: var(--fg-space-3);
+  }
+
   /* H7 — utskriftsvänlig vy: bara beskedet, inte frågeflödet/stegbaren/
      navigeringen. Base.astro:s header/footer döljs globalt (global.css). */
   @media print {
     .tratt__stegbar,
     .tratt__frageflode,
     .tratt__nav,
-    .tratt__dela {
+    .tratt__dela,
+    .tratt__atervand {
       display: none !important;
     }
 
