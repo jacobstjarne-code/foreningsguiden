@@ -1267,7 +1267,36 @@ main {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* ---- Väntelistan (station 5) — SPRINT §Spår B ---- */
+/* ---- Köprutan (station 5) — FIX 2026-07-31, ersätter väntelistan.
+   Samma kortbehandling som .vantelista__panel hade (ljus yta på den
+   mörka goal-bakgrunden) — etablerat mönster, inte en ny stil. ---- */
+
+.progression__kopruta {
+  background: var(--fg-surface);
+  color: var(--fg-ink);
+  border: var(--fg-border-structural) solid var(--fg-border);
+  border-radius: var(--fg-radius-card);
+  padding: var(--fg-space-6) var(--fg-space-6);
+  margin-top: var(--fg-space-5);
+  max-width: 46ch;
+}
+
+.progression__kopruta-rubrik {
+  margin: 0 0 var(--fg-space-2);
+  font-size: var(--fg-text-body-lg);
+}
+
+.progression__kopruta-aterbetalning {
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+}
+
+/* ---- Väntelistan (station 5) — SPRINT §Spår B. ORPHANED 2026-07-31:
+   VantelistaFlode.astro har ingen kvarvarande importör sedan köprutan
+   ersatte den i KommunProgression.astro. Stilarna nedan (och komponenten,
+   VANTELISTA-konstanten i content.ts, /api/vantelista.ts,
+   /api/vantelista-klick.ts) är död kod, inte raderad här — större
+   blast radius än det Jacob bad om denna omgång, flaggat i rapporten. ---- */
 
 .vantelista__panel {
   background: var(--fg-surface);

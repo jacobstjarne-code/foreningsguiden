@@ -7,33 +7,38 @@
 // funktionsratt/ovrig). Mockens exempel-pills (Idrott/Kultur/Ungdom/
 // Studieförbund/Övrig) var illustrativa — vi filtrerar mot den taxonomi
 // som faktiskt finns i datat, inte mot påhittade nya kategorier.
-import type { Kommun, Kategori } from '../lib/kommuner';
+import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
   earliestDeadlineISO, daysUntil, getUrgency,
 } from '../lib/kommuner';
-import { VAGLEDNING } from '../lib/content';
+import { VAGLEDNING, KOPRUTA } from '../lib/content';
+import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
 import UrgencyChip from './UrgencyChip.astro';
-import VantelistaFlode from './VantelistaFlode.astro';
 import RegistreringsHjalp from './RegistreringsHjalp.astro';
 
+// FIX 2026-07-31 (Jacob, egen granskning): station 5 visade väntelistan
+// (VantelistaFlode — "Reservera plats nu. Ni betalar först när utkastet
+// ligger klart") trots att utkastvyn är LIVE sedan 2026-07-30/31
+// (UTKASTVY_LIVE, Stripe kopplat) — kommentaren nedan bad uttryckligen om
+// just detta ("Den riktiga utkastvyns länk byggs in HÄR ... samma dag
+// utkastvyn faktiskt finns"), men bytet gjordes aldrig när utkastvyn blev
+// klar. VantelistaFlode borttagen, ersatt av köprutan (KOPRUTA, samma
+// content.ts-konstant som /registrera/ och /utkast/[bidragId]/) som länkar
+// direkt till den riktiga utkastvyn. Själva köpflödet (profilmatchning,
+// Stripe, luckor) dupliceras INTE här — det finns redan, testat, på
+// /kommun/[slug]/utkast/[bidragId]/.
+//
 // Station 5:s knapp är sajtens enda betalpunkt-ingång (AFFARSMODELL.md §3,
-// DESIGN_UPPDRAG_2_KOMMERSIELL.md §2.1). VantelistaFlode.astro ÄR den knappen
-// tills en riktig utkastvy finns — ingen flagga, ingen bortlänk till
-// kommunens ansökningssystem. En tidigare UTKASTGENERATOR_BYGGD-flagga med
-// en "TODO"-gren som ändå returnerade kommun.ansokningssystem.url (fel mål,
-// oavsett flaggans läge) togs bort 2026-07-26 — en glömd fallback som
-// riskerade att skicka bort exakt de användare vägen ska konvertera. Den
-// riktiga utkastvyns länk byggs in HÄR, som en ny gren, samma dag utkastvyn
-// faktiskt finns — inte i förväg som obeprövad scaffolding.
+// DESIGN_UPPDRAG_2_KOMMERSIELL.md §2.1).
 
-// /exempel/-sidorna är avstängda i produktion tills utkastgeneratorn
-// godkänts mot golden set (KVALITETSSPEC.md §4/§7 — samma flagg-konvention
-// som EXEMPELSIDOR_LIVE i src/pages/exempel/[kommun]/[kategori]/index.astro,
-// hålls i synk manuellt eftersom Astro-komponenter inte kan importera
-// konstanter från varandras frontmatter). Länken byggs inte förrän båda
-// flaggorna slås på samtidigt — annars pekar den på en 404.
-const EXEMPEL_LANK_LIVE = false;
+// /exempel/-sidorna är avstängda i produktion (EXEMPELSIDOR_LIVE = false i
+// src/pages/exempel/[kommun]/[kategori]/index.astro). Länken till dem togs
+// bort ur station 5 i samma fix som väntelistan (2026-07-31) — den var
+// redan bakom en alltid-false-flagga (renderade aldrig) och blev dubbelt
+// obsolet när stationen gick från "en kopia per filter" till "en kopia,
+// bytt via JS". Om exempelsidorna någon gång slås på: lägg tillbaka
+// exempelHref i station5PerFilter nedan (samma mönster som beskrivning/href).
 
 export interface Props {
   kommun: Kommun;
@@ -66,6 +71,48 @@ function bidragForFilter(filter: string) {
 const forutsattningar = kommun.forutsattningar;
 const forsta = forutsattningar[0];
 const extra = forutsattningar.slice(1);
+
+// FIX 2026-07-31 (Jacob, egen granskning): station 2 och station 5
+// renderade tidigare EN FULL KOPIA per filterValue (ett bidrag-oberoende
+// "alla"-läge + en kopia per kategori), maskerade med hidden/CSS så bara
+// en syns åt gången. Sårbart (upplevd dubblering flaggad i granskningen)
+// och växer proportionellt mot antal kategorier. Ersatt: varje station
+// renderas EN gång (för filter='alla'), och en liten per-filter datamängd
+// nedan används av skriptet längst ner för att byta text/href/urgency när
+// ett kategori-piller klickas — ingen förnyad DOM-uppbyggnad, bara text.
+type Station2Entry = { urgency: Urgency; namn: string; datumText: string; href: string } | null;
+const station2PerFilter: Record<string, Station2Entry> = Object.fromEntries(
+  filterValues.map((filter) => {
+    const kandidater = bidragForFilter(filter).filter((e) => e.dateISO);
+    const forstaKandidat = kandidater[0];
+    if (!forstaKandidat || !forstaKandidat.dateISO) return [filter, null];
+    return [filter, {
+      urgency: getUrgency(daysUntil(forstaKandidat.dateISO, today)),
+      namn: forstaKandidat.bidrag.namn,
+      datumText: `${formatDate(forstaKandidat.dateISO)} · om ${daysUntil(forstaKandidat.dateISO, today)} dagar`,
+      href: `#bidrag-${forstaKandidat.bidrag.id}`,
+    }];
+  })
+);
+const station2Alla = station2PerFilter.alla;
+
+const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
+const fyllKopruta = (text: string, bidragNamn: string) =>
+  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr));
+const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
+
+type Station5Entry = { beskrivning: string; href: string } | null;
+const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
+  filterValues.map((filter) => {
+    const kandidat = bidragForFilter(filter)[0];
+    if (!kandidat) return [filter, null];
+    return [filter, {
+      beskrivning: fyllKopruta(KOPRUTA.beskrivning, kandidat.bidrag.namn),
+      href: `/kommun/${kommun.kommun_slug}/utkast/${kandidat.bidrag.id}/`,
+    }];
+  })
+);
+const station5Alla = station5PerFilter.alla;
 ---
 <div class="progression">
 
@@ -94,26 +141,17 @@ const extra = forutsattningar.slice(1);
     <span class="progression__marker">2</span>
     <div class="progression__eyebrow">Steg 2</div>
     <h3>{VAGLEDNING.station2.rubrik}</h3>
-    {filterValues.map((filter) => {
-      const kandidater = bidragForFilter(filter).filter((e) => e.dateISO);
-      const forsta = kandidater[0];
-      return (
-        <div data-filter-value={filter} hidden={filter !== 'alla'}>
-          {forsta && forsta.dateISO ? (
-            <div class="progression__urgent-row">
-              <UrgencyChip urgency={getUrgency(daysUntil(forsta.dateISO, today))} />
-              <div class="progression__urgent-row__text">
-                <div class="progression__urgent-row__namn">{forsta.bidrag.namn}</div>
-                <div class="progression__urgent-row__datum">{formatDate(forsta.dateISO)} · om {daysUntil(forsta.dateISO, today)} dagar</div>
-              </div>
-              <a href={`#bidrag-${forsta.bidrag.id}`}>Öppna →</a>
-            </div>
-          ) : (
-            <p class="progression__lede">{VAGLEDNING.station2.introUtanDeadline}</p>
-          )}
-        </div>
-      );
-    })}
+    <div class="progression__urgent-row" data-progression-urgent-row hidden={!station2Alla}>
+      <span data-chip-urgency="urgent" hidden={station2Alla?.urgency !== 'urgent'}><UrgencyChip urgency="urgent" /></span>
+      <span data-chip-urgency="attention" hidden={station2Alla?.urgency !== 'attention'}><UrgencyChip urgency="attention" /></span>
+      <span data-chip-urgency="positive" hidden={station2Alla?.urgency !== 'positive'}><UrgencyChip urgency="positive" /></span>
+      <div class="progression__urgent-row__text">
+        <div class="progression__urgent-row__namn" data-progression-urgent-namn>{station2Alla?.namn}</div>
+        <div class="progression__urgent-row__datum" data-progression-urgent-datum>{station2Alla?.datumText}</div>
+      </div>
+      <a href={station2Alla?.href ?? '#'} data-progression-urgent-lank>Öppna →</a>
+    </div>
+    <p class="progression__lede" data-progression-urgent-empty hidden={!!station2Alla}>{VAGLEDNING.station2.introUtanDeadline}</p>
   </div>
 
   <!-- STATION 3 — attention-ton: förutsättningar -->
@@ -200,32 +238,21 @@ const extra = forutsattningar.slice(1);
       <div class="progression__eyebrow" style="color: rgba(255,255,255,.85);">Steg 5 · vägens slut</div>
       <h3>{VAGLEDNING.station5.rubrik}</h3>
       <p class="progression__lede" style="color: rgba(255,255,255,.92);">{VAGLEDNING.station5.intro}</p>
-      {filterValues.map((filter) => {
-        const kandidat = bidragForFilter(filter)[0];
-        // Exempelsidan är skuren på kommun × kategori, inte per bidrag
-        // (SOKBARHETSSPEC §2.1 — 80 sidor med samma exempelförening var
-        // tunt duplicatinnehåll). Vid en specifik filter-pill är kategorin
-        // given; vid "alla" används kandidatens första kategori.
-        const exempelKategori = filter !== 'alla' ? filter : kandidat?.bidrag.kategori[0];
-        return (
-          <div data-filter-value={filter} hidden={filter !== 'alla'}>
-            {kandidat && (
-              <>
-                <VantelistaFlode kommun={kommun} bidrag={kandidat.bidrag} />
-                {EXEMPEL_LANK_LIVE && exempelKategori && (
-                  <a href={`/exempel/${kommun.kommun_slug}/${exempelKategori}/`} class="progression__goal-exempel-lank">
-                    Se ett exempel på ett färdigt utkast
-                  </a>
-                )}
-              </>
-            )}
-          </div>
-        );
-      })}
+      <div class="progression__kopruta" data-progression-kopruta hidden={!station5Alla}>
+        <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
+        <p data-progression-kopruta-beskrivning>{station5Alla?.beskrivning}</p>
+        <p>{KOPRUTA.leverans}</p>
+        <p>{kopRutaPrisOchKvitto}</p>
+        <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
+        <a href={station5Alla?.href ?? '#'} class="btn-primary progression__goal-cta" data-progression-kopruta-cta>
+          Lås upp hela utkastet — {prisKr} kr
+        </a>
+      </div>
       <p class="progression__goal-ansvar">{VAGLEDNING.station5.ansvar}</p>
     </div>
   </div>
 
+<script type="application/json" data-progression-per-filter set:html={JSON.stringify({ station2: station2PerFilter, station5: station5PerFilter })} />
 </div>
 
 <script>
@@ -234,20 +261,66 @@ const extra = forutsattningar.slice(1);
   // klick filtrerar på plats istället för att navigera; ctrl/cmd/mittklick
   // fungerar som vanligt (öppnar kategorisidan i ny flik).
   const pills = document.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>('[data-filter-pill]');
-  const filterTargets = document.querySelectorAll<HTMLElement>('[data-filter-value]');
   const listRows = document.querySelectorAll<HTMLLIElement>('.progression__list [data-kategori]');
+  // savedRows (station 1) är sedan 2026-07-31 den ENDA kvarvarande
+  // "en kopia per filter"-strukturen — station 2/5 gick över till
+  // en-kopia-bytt-via-JS (se station2PerFilter/station5PerFilter,
+  // FIX-kommentaren i frontmatter). Ett tidigare `filterTargets`
+  // (`[data-filter-value]` utan `.progression__saved`-prefix) blev
+  // dött/redundant av samma ändring — dess loop skrevs alltid över av
+  // savedRows-loopen nedan (samma element, körd sist) — borttaget.
   const savedRows = document.querySelectorAll<HTMLElement>('.progression__saved[data-filter-value]');
   const hiddenNote = document.querySelector<HTMLElement>('[data-hidden-note]');
+
+  // Station 2/5 — per-filter-data (FIX 2026-07-31, se KommunProgression.astro
+  // frontmatter). En JSON-blob istället för N renderade DOM-kopior.
+  const perFilterEl = document.querySelector<HTMLScriptElement>('[data-progression-per-filter]');
+  const perFilterData: { station2: Record<string, any>; station5: Record<string, any> } = perFilterEl
+    ? JSON.parse(perFilterEl.textContent ?? '{}')
+    : { station2: {}, station5: {} };
+
+  const urgentRow = document.querySelector<HTMLElement>('[data-progression-urgent-row]');
+  const urgentEmpty = document.querySelector<HTMLElement>('[data-progression-urgent-empty]');
+  const urgentNamn = document.querySelector<HTMLElement>('[data-progression-urgent-namn]');
+  const urgentDatum = document.querySelector<HTMLElement>('[data-progression-urgent-datum]');
+  const urgentLank = document.querySelector<HTMLAnchorElement>('[data-progression-urgent-lank]');
+  const chipSpans = document.querySelectorAll<HTMLElement>('[data-chip-urgency]');
+
+  function updateStation2(value: string) {
+    const entry = perFilterData.station2?.[value];
+    if (!urgentRow || !urgentEmpty) return;
+    urgentRow.hidden = !entry;
+    urgentEmpty.hidden = !!entry;
+    if (!entry) return;
+    chipSpans.forEach((span) => {
+      span.hidden = span.dataset.chipUrgency !== entry.urgency;
+    });
+    if (urgentNamn) urgentNamn.textContent = entry.namn;
+    if (urgentDatum) urgentDatum.textContent = entry.datumText;
+    if (urgentLank) urgentLank.href = entry.href;
+  }
+
+  const kopruta = document.querySelector<HTMLElement>('[data-progression-kopruta]');
+  const kopRutaBeskrivning = document.querySelector<HTMLElement>('[data-progression-kopruta-beskrivning]');
+  const kopRutaCta = document.querySelector<HTMLAnchorElement>('[data-progression-kopruta-cta]');
+
+  function updateStation5(value: string) {
+    const entry = perFilterData.station5?.[value];
+    if (!kopruta) return;
+    kopruta.hidden = !entry;
+    if (!entry) return;
+    if (kopRutaBeskrivning) kopRutaBeskrivning.textContent = entry.beskrivning;
+    if (kopRutaCta) kopRutaCta.href = entry.href;
+  }
 
   function applyFilter(value: string) {
     pills.forEach((p) => p.classList.toggle('is-active', p.dataset.filterPill === value));
 
-    filterTargets.forEach((el) => {
-      el.hidden = el.dataset.filterValue !== value;
-    });
     savedRows.forEach((el) => {
       el.hidden = value === 'alla' || el.dataset.filterValue !== value;
     });
+    updateStation2(value);
+    updateStation5(value);
 
     let hiddenCount = 0;
     listRows.forEach((row) => {
