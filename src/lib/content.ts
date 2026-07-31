@@ -569,11 +569,17 @@ export const ATERBETALNING = {
  * texten står kvar. På utkastvyn (som inte hade någon återbetalningsrad
  * alls) används KOPRUTA.aterbetalning. Två återbetalningslöften på samma
  * sida hade läst som ett dubbleringsfel, inte som omsorg.
+ *
+ * kravlistaRegistrering (Jacob 2026-07-31): luckorRad förutsätter ett
+ * ifyllt/lucka-koncept — registreringsprodukten har inget sådant, ALLA
+ * rader är sådant föreningen själv styrker. Ersätter luckorRad på
+ * /registrera/ specifikt, används inte på utkastvyn.
  */
 export const KOPRUTA = {
   rubrik: 'Vad ni får',
   beskrivning: '{kommun}s krav för {bidrag}, i rätt ordning, med sista ansökningsdag och belopp. Vilka bilagor som ska med. Och de uppgifter vi kan fylla i åt er redan ifyllda.',
   luckorRad: '{antal} rader behöver ni fylla i själva — vi säger vilka innan ni betalar.',
+  kravlistaRegistrering: 'Ni får hela kravlistan för att bli godkända som bidragsberättigade i {kommun}, med vad varje krav betyder och var uppgiften finns.',
   leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
   prisOchKvitto: '{pris} kr inklusive moms. Kvitto med organisationsnummer och momsspecifikation mejlas — det går att bokföra.',
   aterbetalning: 'Blev det inte användbart: mejla inom 30 dagar så betalar vi tillbaka. Ingen förklaring behövs.',

@@ -37,14 +37,15 @@ const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
 const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
 
 // KÖPRUTAN (Fable, 2026-07-31): {bidrag} blir "registrering" här — den
-// här produkten är kommun-scopad, inte ett enskilt bidrag. {antal} är
-// forutsattningar.length: registreringschecklistan har inget ifyllt/
-// lucka-begrepp (till skillnad från bidragsutkastet) — ALLA rader är
-// sådant föreningen själv ska styrka, så antalet rader ÄR antalet
-// "ni fyller i själva", ingen gissning.
+// här produkten är kommun-scopad, inte ett enskilt bidrag.
+//
+// FIX 2026-07-31 (Jacob): den generiska luckorRad ("X rader behöver ni
+// fylla i själva") passar inte den här produkten — registreringschecklistan
+// har inget ifyllt/lucka-koncept, ALLA rader är sådant föreningen själv
+// ska styrka. Ersatt med KOPRUTA.kravlistaRegistrering (egen text för
+// den här produkten, se content.ts).
 const fyllKopruta = (text: string) =>
   text.replace('{kommun}', kommun.kommun).replace('{bidrag}', 'registrering').replace('{pris}', String(prisKr));
-const luckorRad = KOPRUTA.luckorRad.replace('{antal}', String(forutsattningar.length));
 ---
 <Base
   title={`${titel} — Föreningsguiden`}
@@ -101,7 +102,7 @@ const luckorRad = KOPRUTA.luckorRad.replace('{antal}', String(forutsattningar.le
            återbetalningsrader på samma sida hade läst som ett dubbleringsfel. */}
         <h2 class="registrera-doc__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
         <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
-        <p>{luckorRad}</p>
+        <p>{fyllKopruta(KOPRUTA.kravlistaRegistrering)}</p>
         <p>{KOPRUTA.leverans}</p>
 
         <p class="registrera-doc__pris">{prisKr} kr</p>

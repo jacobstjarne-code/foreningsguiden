@@ -154,9 +154,16 @@ test('visaBorjaHar: sokt=ja + inget kraver_registrering-bidrag i matchar → fal
   assert.equal(visaBorjaHar(profil({ sokt: 'ja' }), [b]), false);
 });
 
-test('visaBorjaHar: sokt=ja MEN ett matchat bidrag har kraver_registrering=true → true (edge-caset)', () => {
+// FIX 2026-07-31: testade tidigare det gamla OR-beteendet (sokt='ja' MEN
+// visar bannern ändå om ett matchat bidrag kräver registrering) — det
+// beteendet togs bort 2026-07-30 (se matching.ts:s kommentar över
+// visaBorjaHar, golden set-facit 14 arvika-sociala-stodforeningar): en
+// redan registrerad förening ska ALDRIG hänvisas till registreringsutkastet
+// igen, oavsett vad matchandeBidrag innehåller. Ny logik kollapsar
+// matematiskt till bara profil.sokt !== 'ja' — testet uppdaterat mot det.
+test('visaBorjaHar: sokt=ja OCH ett matchat bidrag har kraver_registrering=true → false ändå (2026-07-30-fixet, AND inte OR)', () => {
   const b = bidrag({ kraver_registrering: true });
-  assert.equal(visaBorjaHar(profil({ sokt: 'ja' }), [b]), true);
+  assert.equal(visaBorjaHar(profil({ sokt: 'ja' }), [b]), false);
 });
 
 test('alder_min/alder_max satt men profilen samlar inte in medlemsålder → hoppas alltid över, EJ_BEHORIG oåtkomligt via denna UI', () => {
