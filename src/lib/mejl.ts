@@ -8,7 +8,7 @@
  */
 import { Resend } from 'resend';
 import { MEJL } from './content';
-import type { RegistreringsUtkastRad } from './utkastGenerator';
+import type { RegistreringsUtkastRad, UtkastKravRad } from './utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
 // .trim() — rotorsak till den korrumperade bekräftelselänken (skarpt test
@@ -186,6 +186,36 @@ export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
   }
 }
 
+export interface BidragsutkastNotisVars {
+  email: string;
+  kommunSlug: string;
+  bidragNamn: string;
+  belopp: string;
+  utkastLank: string;
+}
+
+/** Samma interna driftmejl-mönster som sendKopNotis, egen text (inte "registreringsutkast") — bidragsutkastet är en annan produkt. */
+export async function sendBidragsutkastNotis(vars: BidragsutkastNotisVars): Promise<void> {
+  const to = 'jacob.stjarne@gmail.com';
+  const text = [
+    `Nytt köp — bidragsutkast, ${vars.bidragNamn} (${vars.kommunSlug}) (levererat automatiskt, inget att göra).`,
+    `E-post: ${vars.email}`,
+    `Kommun: ${vars.kommunSlug}`,
+    `Belopp: ${vars.belopp} kr`,
+    `Utkastsida: ${vars.utkastLank}`,
+  ].join('\n');
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Nytt köp (levererat automatiskt) — ${vars.bidragNamn}, ${vars.kommunSlug}`,
+    text,
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid bidragsutkast-köpnotis: ${result.error.message}`);
+  }
+}
+
 export interface KopBekraftelseVars {
   kommunSlug: string;
   belopp: string; // kr, utan öre
@@ -246,6 +276,58 @@ export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): 
   });
   if (result.error) {
     throw new Error(`Resend-fel vid köpbekräftelse: ${result.error.message}`);
+  }
+}
+
+export interface BidragsutkastBekraftelseVars {
+  kommun: string;
+  bidragNamn: string;
+  belopp: string; // kr, utan öre (BELOPPET FÖR KÖPET, inte bidragets summa)
+  deadlineText: string;
+  bidragBelopp: string | null; // bidragets EGEN belopp-sträng, ordagrant ur datan
+  kravRader: UtkastKravRad[];
+  ansvarsrad: string;
+  kopLank: string;
+  hostedInvoiceUrl?: string;
+}
+
+/**
+ * CODE_UPPDRAG_KOMMERSIELL §1.B (2026-07-30): köparens bekräftelse OCH
+ * leverans i samma mejl — samma "minimal, funktionell transaktionscopy
+ * runt citerat innehåll"-princip som sendKopBekraftelse. kravRader[]
+ * kommer rakt ur genereraUtkast() (utkastGenerator.ts) — kravText och
+ * innehall citeras ordagrant, ingen egen text om VAD kravet betyder.
+ */
+export async function sendBidragsutkastBekraftelse(to: string, vars: BidragsutkastBekraftelseVars): Promise<void> {
+  const rader = [
+    `Tack för ditt köp — utkast till ${vars.bidragNamn} i ${vars.kommun}.`,
+    `Belopp: ${vars.belopp} kr.`,
+    `${vars.bidragBelopp ?? 'Belopp ej publikt'} · sista ansökningsdag ${vars.deadlineText}`,
+    '',
+    'Ert utkast:',
+    '',
+  ];
+
+  vars.kravRader.forEach((rad, i) => {
+    rader.push(`${i + 1}. ${rad.kravText}`);
+    rader.push(rad.innehall);
+    rader.push('');
+  });
+
+  rader.push(vars.ansvarsrad);
+  rader.push(`Er varaktiga kopia — kopiera, ladda ner som Word eller PDF: ${vars.kopLank}`);
+  if (vars.hostedInvoiceUrl) {
+    rader.push(`Kvitto/faktura: ${vars.hostedInvoiceUrl}`);
+  }
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Ert utkast — ${vars.bidragNamn} (${vars.kommun})`,
+    text: urlPaEgenRad(rader.join('\n')),
+  });
+  if (result.error) {
+    throw new Error(`Resend-fel vid bidragsutkastbekräftelse: ${result.error.message}`);
   }
 }
 

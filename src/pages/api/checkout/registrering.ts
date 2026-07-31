@@ -58,7 +58,11 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
-  const metadata: Record<string, string> = { kommunSlug };
+  // metadata.produkt tillagd 2026-07-30 (checkout/bidragsutkast.ts
+  // infördes samma dag) — stripe-webhook.ts grenar nu på fältet i
+  // stället för att anta registrering för allt som inte är mode=
+  // 'subscription'.
+  const metadata: Record<string, string> = { produkt: 'registrering', kommunSlug };
   if (typeof profilRaw === 'string' && profilRaw.length > 0 && profilRaw.length <= 500) {
     metadata.foreningsprofil = profilRaw;
   }

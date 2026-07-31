@@ -42,7 +42,13 @@ const utfallsfraganKey = (stripeSessionId: string, bidragId: string) => `utfalls
 const inlamningsPaminnelseKey = (stripeSessionId: string, bidragId: string) =>
   `inlamningspaminnelse:${stripeSessionId}:${bidragId}`;
 
-export type KopProdukt = 'registrering';
+// 'bidragsutkast' (CODE_UPPDRAG_KOMMERSIELL §1.B, 2026-07-30): egen
+// produkt, egen constant (PRIS_BIDRAGSUTKAST_ORE, priser.ts) — skild
+// från 'registrering' så adminvyn (hamtaAllaKop) kan skilja dem åt.
+// hamtaKopAvProdukt('registrering') i cron/utfallsfraga.ts och
+// cron/inlamningspaminnelse.ts filtrerar redan explicit på produkten —
+// bidragsutkast-köp rör INTE de croneen bara för att typen finns nu.
+export type KopProdukt = 'registrering' | 'bidragsutkast';
 
 // H19 (SPEC: Kluster 1 — efter-köp-ytan, utfallsslingan): tre
 // svarsalternativ, klartext-literaler rakt av som URL-path-segment
@@ -84,7 +90,16 @@ export interface KopEntry {
   // H22: JSON av RegistreringsUtkastRad[] (utkastGenerator.ts) vid
   // KÖPTILLFÄLLET — låst, ändras aldrig efteråt. Ändringsbevakningens
   // cronjobb jämför kommunens NUVARANDE checklista mot denna.
+  // produkt==='registrering' ENDAST.
   forutsattningarSnapshot?: string;
+  // produkt==='bidragsutkast' ENDAST — vilket bidrag köpet gäller.
+  bidragId?: string;
+  // produkt==='bidragsutkast' ENDAST: JSON av UtkastDokument
+  // (utkastGenerator.ts, genereraUtkast()-resultatet av typ
+  // 'bidragsutkast') vid KÖPTILLFÄLLET — låst, samma "aldrig omgenererat
+  // i efterhand"-princip som forutsattningarSnapshot. Föreningsprofilen
+  // som avgjorde INNEHÅLLET är densamma som foreningsprofil-fältet ovan.
+  bidragsutkastSnapshot?: string;
   // H19: en KopEntry kan matcha FLERA bidrag (kommun-scopad registrering,
   // inte bidrag-scopad) — en post per bidrag som faktiskt svarat, inte
   // ett enda fält. "Senaste svaret vinner" per bidragId, ingen historik.

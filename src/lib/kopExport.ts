@@ -1,37 +1,89 @@
 /**
  * kopExport.ts — H16 (SPEC: Det som återstår, 2026-07-28): docx/pdf-
  * nedladdning av det köpta underlaget (mina-sidor/kop/[session]/). Ren
- * rendering av redan validerat innehåll (RegistreringsUtkastRad[],
- * Bilagepost[]) — ingen ny svensk text skrivs här, bara samma strängar
- * som redan renderas i mejlet/sidan (samma "Code skriver ingen egen
- * text"-princip som mejl.ts filhuvud).
+ * rendering av redan validerat innehåll — ingen ny svensk text skrivs
+ * här, bara samma strängar som redan renderas i mejlet/sidan (samma
+ * "Code skriver ingen egen text"-princip som mejl.ts filhuvud).
+ *
+ * DokumentInnehall (2026-07-30, bidragsutkastet — CODE_UPPDRAG_
+ * KOMMERSIELL §1.B): en delad mellanrepresentation ("sektioner", vad
+ * varje krav/steg SÄGER) i stället för att docx/pdf-renderarna kände
+ * till RegistreringsUtkastRad[] respektive UtkastKravRad[] var för sig.
+ * checklistaTillDokument()/bidragsutkastTillDokument() gör mappningen —
+ * en sanning för hur ett dokument ser ut, oavsett vilken produkt det kom
+ * ifrån.
  */
 
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from 'docx';
-import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf-lib';
-import type { RegistreringsUtkastRad } from './utkastGenerator';
+import { PDFDocument, StandardFonts, rgb, type PDFFont } from 'pdf-lib';
+import type { RegistreringsUtkastRad, UtkastDokument } from './utkastGenerator';
 import type { Bilagepost } from './kopDokument';
 
-export interface KopDokumentInnehall {
-  kommunNamn: string;
-  checklista: RegistreringsUtkastRad[];
+export interface DokumentSektion {
+  rubrik: string;
+  stycken: string[];
+  kalla?: string; // renderas som egen kursiv "Källa: {kalla}"-rad
+}
+
+export interface DokumentInnehall {
+  titel: string;
+  sektioner: DokumentSektion[];
   bilagor: Bilagepost[];
   ansokningssystemNamn: string;
   ansokningssystemUrl: string;
   ansvarsrad: string;
 }
 
-export async function genereraKopDocx(innehall: KopDokumentInnehall): Promise<Buffer> {
-  const children: Paragraph[] = [
-    new Paragraph({ text: `Registreringschecklista — ${innehall.kommunNamn}`, heading: HeadingLevel.TITLE }),
-  ];
+export function checklistaTillDokument(
+  kommunNamn: string,
+  checklista: RegistreringsUtkastRad[],
+  bilagor: Bilagepost[],
+  ansokningssystemNamn: string,
+  ansokningssystemUrl: string,
+  ansvarsrad: string
+): DokumentInnehall {
+  return {
+    titel: `Registreringschecklista — ${kommunNamn}`,
+    sektioner: checklista.map((rad, i) => ({
+      rubrik: `${i + 1}. ${rad.vad}`,
+      stycken: [rad.beskrivning, rad.ledtidText, ...(rad.giltighetText ? [rad.giltighetText] : [])],
+      kalla: rad.kallaUrl,
+    })),
+    bilagor,
+    ansokningssystemNamn,
+    ansokningssystemUrl,
+    ansvarsrad,
+  };
+}
 
-  innehall.checklista.forEach((rad, i) => {
-    children.push(new Paragraph({ text: `${i + 1}. ${rad.vad}`, heading: HeadingLevel.HEADING_2 }));
-    children.push(new Paragraph({ children: [new TextRun(rad.beskrivning)] }));
-    children.push(new Paragraph({ children: [new TextRun(rad.ledtidText)] }));
-    if (rad.giltighetText) children.push(new Paragraph({ children: [new TextRun(rad.giltighetText)] }));
-    children.push(new Paragraph({ children: [new TextRun({ text: `Källa: ${rad.kallaUrl}`, italics: true })] }));
+export function bidragsutkastTillDokument(
+  doc: UtkastDokument,
+  bilagor: Bilagepost[],
+  ansokningssystemNamn: string,
+  ansokningssystemUrl: string
+): DokumentInnehall {
+  return {
+    titel: `Utkast till ansökan — ${doc.bidragNamn} (${doc.kommun})`,
+    sektioner: doc.kravRader.map((rad, i) => ({
+      rubrik: `${i + 1}. ${rad.kravText}`,
+      stycken: [rad.innehall],
+    })),
+    bilagor,
+    ansokningssystemNamn,
+    ansokningssystemUrl,
+    ansvarsrad: doc.ansvarsrad,
+  };
+}
+
+export async function genereraKopDocx(innehall: DokumentInnehall): Promise<Buffer> {
+  const children: Paragraph[] = [new Paragraph({ text: innehall.titel, heading: HeadingLevel.TITLE })];
+
+  innehall.sektioner.forEach((sektion) => {
+    children.push(new Paragraph({ text: sektion.rubrik, heading: HeadingLevel.HEADING_2 }));
+    sektion.stycken.forEach((stycke) => children.push(new Paragraph({ children: [new TextRun(stycke)] })));
+    if (sektion.kalla) {
+      children.push(new Paragraph({ children: [new TextRun({ text: `Källa: ${sektion.kalla}`, italics: true })] }));
+    }
     children.push(new Paragraph({ text: '' }));
   });
 
@@ -74,7 +126,7 @@ function wrapText(font: PDFFont, storlek: number, text: string, maxBredd: number
   return rader;
 }
 
-export async function genereraKopPdf(innehall: KopDokumentInnehall): Promise<Uint8Array> {
+export async function genereraKopPdf(innehall: DokumentInnehall): Promise<Uint8Array> {
   const pdf = await PDFDocument.create();
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const fontBold = await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -104,16 +156,14 @@ export async function genereraKopPdf(innehall: KopDokumentInnehall): Promise<Uin
     }
   }
 
-  skrivRad(`Registreringschecklista — ${innehall.kommunNamn}`, { font: fontBold, storlek: 16 });
+  skrivRad(innehall.titel, { font: fontBold, storlek: 16 });
   y -= 6;
 
-  innehall.checklista.forEach((rad, i) => {
+  innehall.sektioner.forEach((sektion) => {
     nyRadOmBehovs(30);
-    skrivRad(`${i + 1}. ${rad.vad}`, { font: fontBold, storlek: 12 });
-    skrivRad(rad.beskrivning);
-    skrivRad(rad.ledtidText);
-    if (rad.giltighetText) skrivRad(rad.giltighetText);
-    skrivRad(`Källa: ${rad.kallaUrl}`, { font: fontItalic, farg: [0.35, 0.35, 0.35] });
+    skrivRad(sektion.rubrik, { font: fontBold, storlek: 12 });
+    sektion.stycken.forEach((stycke) => skrivRad(stycke));
+    if (sektion.kalla) skrivRad(`Källa: ${sektion.kalla}`, { font: fontItalic, farg: [0.35, 0.35, 0.35] });
     y -= 8;
   });
 

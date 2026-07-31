@@ -104,6 +104,7 @@ const utfallVetInte = utfall.filter((u) => u.svar === 'vet_inte').length;
             {kop.map((k) => (
               <li>
                 <strong>{(k.beloppOre / 100).toFixed(0)} kr</strong> — {formatDate(k.betaldDatum.slice(0, 10))} — {k.email} — {k.kommunSlug}
+                {' '}— <em>{k.produkt === 'bidragsutkast' ? `bidragsutkast (${k.bidragId})` : 'registrering'}</em>
                 {k.hostedInvoiceUrl && <> — <a href={k.hostedInvoiceUrl}>Faktura</a></>}
                 {k.utfall && k.utfall.length > 0 && (
                   <> — utfall: {k.utfall.map((u) => `${u.bidragNamn}: ${u.svar}`).join(', ')}</>

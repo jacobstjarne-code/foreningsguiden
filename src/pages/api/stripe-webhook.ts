@@ -38,10 +38,10 @@ import Stripe from 'stripe';
 import { sparaKop, hamtaKop, type KopEntry } from '../../lib/kop';
 import { sparaAbonnemang, hamtaAbonnemang, uppdateraAbonnemangStatus, type AbonnemangStatus } from '../../lib/abonnemang';
 import { addForeningsprofil } from '../../lib/subscribers';
-import { sendKopNotis, sendKopBekraftelse, sendKvitto } from '../../lib/mejl';
+import { sendKopNotis, sendKopBekraftelse, sendKvitto, sendBidragsutkastNotis, sendBidragsutkastBekraftelse } from '../../lib/mejl';
 import type { Foreningsprofil } from '../../lib/foreningsprofil';
 import { getKommunBySlug, formatDate } from '../../lib/kommuner';
-import { genereraRegistreringsUtkast } from '../../lib/utkastGenerator';
+import { genereraRegistreringsUtkast, genereraUtkast } from '../../lib/utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
 
@@ -135,6 +135,119 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
     try {
       await sendKvitto(email, {
         produkt: `Registreringsutkast — ${kommun?.kommun ?? kommunSlug}`,
+        belopp: beloppKr,
+        datum: formatDate(entry.betaldDatum.slice(0, 10)),
+        invoicePdfUrl: invoicePdf,
+      });
+    } catch (err) {
+      console.error('sendKvitto misslyckades', err);
+    }
+  } else {
+    console.error('sendKvitto hoppades över — ingen invoicePdf för', session.id);
+  }
+}
+
+/**
+ * Bidragsutkastet (CODE_UPPDRAG_KOMMERSIELL §1.B, 2026-07-30). Samma
+ * struktur som hanteraRegistreringsCheckout, men produkten är bidrags-
+ * OCH profilberoende, inte bara kommun-scopad. metadata.foreningsprofil
+ * är OBLIGATORISKT här (checkout/bidragsutkast.ts vägrar skapa en
+ * session utan den — servern behöver profilen för att både verifiera
+ * matchningen INNAN köpet och generera INNEHÅLLET efter).
+ */
+async function hanteraBidragsutkastCheckout(session: Stripe.Checkout.Session, stripe: Stripe): Promise<void> {
+  const email = session.customer_details?.email ?? null;
+  const kommunSlug = session.metadata?.kommunSlug ?? null;
+  const bidragId = session.metadata?.bidragId ?? null;
+  const profilRaw = session.metadata?.foreningsprofil ?? null;
+  if (!email || !kommunSlug || !bidragId || !profilRaw) {
+    console.error('bidragsutkast-checkout saknar email/kommunSlug/bidragId/foreningsprofil', session.id);
+    return;
+  }
+
+  let foreningsprofil: Foreningsprofil;
+  try {
+    foreningsprofil = JSON.parse(profilRaw) as Foreningsprofil;
+  } catch {
+    console.error('bidragsutkast-checkout: ogiltig foreningsprofil-metadata', session.id);
+    return;
+  }
+
+  let hostedInvoiceUrl: string | undefined;
+  let invoicePdf: string | undefined;
+  if (typeof session.invoice === 'string') {
+    try {
+      const invoice = await stripe.invoices.retrieve(session.invoice);
+      hostedInvoiceUrl = invoice.hosted_invoice_url ?? undefined;
+      invoicePdf = invoice.invoice_pdf ?? undefined;
+    } catch (err) {
+      console.error('Kunde inte hämta Stripe-fakturan', err);
+    }
+  }
+
+  const kommun = getKommunBySlug(kommunSlug);
+  const bidrag = kommun?.bidrag.find((b) => b.id === bidragId);
+  // Racefönster mellan checkout-spärren och webhooken (t.ex. bidraget
+  // avaktiverat under tiden) är sannolikt ALDRIG i praktiken — men
+  // betalningen är redan skarp hos Stripe när vi når hit, så vi sparar
+  // köpet ändå med en tom snapshot hellre än att tappa det helt.
+  const resultat = kommun && bidrag ? genereraUtkast(foreningsprofil, bidrag, kommun) : null;
+  const doc = resultat?.typ === 'bidragsutkast' ? resultat : null;
+  if (!doc) {
+    console.error('bidragsutkast-checkout: genereraUtkast gav inte bidragsutkast vid webhook-tillfället', session.id);
+  }
+
+  const entry: KopEntry = {
+    email,
+    kommunSlug,
+    produkt: 'bidragsutkast',
+    bidragId,
+    beloppOre: session.amount_total ?? 0,
+    stripeSessionId: session.id,
+    betaldDatum: new Date().toISOString(),
+    foreningsprofil,
+    hostedInvoiceUrl,
+    invoicePdf,
+    bidragsutkastSnapshot: doc ? JSON.stringify(doc) : undefined,
+  };
+  await sparaKop(entry);
+  await addForeningsprofil(email, foreningsprofil);
+
+  const utkastLank = `https://foreningsguiden.se/kommun/${kommunSlug}/utkast/${bidragId}/`;
+  const kopLank = `https://foreningsguiden.se/mina-sidor/kop/${encodeURIComponent(session.id)}/`;
+  const beloppKr = (entry.beloppOre / 100).toFixed(0);
+  const bidragNamn = doc?.bidragNamn ?? bidrag?.namn ?? bidragId;
+
+  try {
+    await sendBidragsutkastNotis({ email, kommunSlug, bidragNamn, belopp: beloppKr, utkastLank });
+  } catch (err) {
+    console.error('sendBidragsutkastNotis misslyckades', err);
+  }
+
+  if (doc) {
+    try {
+      await sendBidragsutkastBekraftelse(email, {
+        kommun: doc.kommun,
+        bidragNamn: doc.bidragNamn,
+        belopp: beloppKr,
+        deadlineText: doc.deadlineText,
+        bidragBelopp: doc.belopp,
+        kravRader: doc.kravRader,
+        ansvarsrad: doc.ansvarsrad,
+        kopLank,
+        hostedInvoiceUrl,
+      });
+    } catch (err) {
+      console.error('sendBidragsutkastBekraftelse misslyckades', err);
+    }
+  } else {
+    console.error('sendBidragsutkastBekraftelse hoppades över — inget dokument kunde genereras för', session.id);
+  }
+
+  if (invoicePdf) {
+    try {
+      await sendKvitto(email, {
+        produkt: `Bidragsutkast — ${bidragNamn} (${kommun?.kommun ?? kommunSlug})`,
         belopp: beloppKr,
         datum: formatDate(entry.betaldDatum.slice(0, 10)),
         invoicePdfUrl: invoicePdf,
@@ -252,7 +365,15 @@ export const POST: APIRoute = async ({ request }) => {
       if (session.mode !== 'subscription') {
         const redanSparad = await hamtaKop(session.id);
         if (!redanSparad) {
-          await hanteraRegistreringsCheckout(session, stripe);
+          // metadata.produkt tillagd 2026-07-30 (checkout/bidragsutkast.ts).
+          // Äldre/okänd metadata (borde inte finnas i praktiken — bara
+          // dessa två checkout-routes skapar mode='payment'-sessioner)
+          // faller tillbaka till registrering, det historiska beteendet.
+          if (session.metadata?.produkt === 'bidragsutkast') {
+            await hanteraBidragsutkastCheckout(session, stripe);
+          } else {
+            await hanteraRegistreringsCheckout(session, stripe);
+          }
         }
       }
     } else if (event.type === 'customer.subscription.created') {

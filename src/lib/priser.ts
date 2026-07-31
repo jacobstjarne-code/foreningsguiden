@@ -16,6 +16,13 @@
 // inte bara pris.
 export const PRIS_REGISTRERINGSUTKAST_ORE = 24900;
 
+// Bidragsutkastet (CODE_UPPDRAG_KOMMERSIELL §1.B) — egen produkt, egen
+// konstant (Jacobs instruktion, 2026-07-30: "skild produkt så de går att
+// skilja i adminvyn"). Samma pris som registreringsutkastet av bara det
+// skälet att det är samma sorts arbete (ett strukturerat utkast mot
+// kommunens krav) — inget annat samband, byt oberoende av den andra.
+export const PRIS_BIDRAGSUTKAST_ORE = 24900;
+
 // SPEC_ABONNEMANG.md §3 (Jacob, 2026-07-27): 495 kr/år, 41 kr/mån bredvid
 // (41 × 12 = 492, redan räknad ankring). Talet 595 förekommit i äldre
 // underlag (SLUTSPEC_LANSERING_2026-07-20.md, historiska mockar) — fel,

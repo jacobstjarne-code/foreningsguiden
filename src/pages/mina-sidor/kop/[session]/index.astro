@@ -1,27 +1,34 @@
 ---
 // H15/H16/H17 (SPEC: Det som återstår, 2026-07-28) — det köpta
-// registreringsutkastets VARAKTIGA kopia. Fram tills nu levererades
-// köpet bara som ETT mejl (sendKopBekraftelse) — tappar kassören det är
-// köpet borta. Den här sidan är den permanenta platsen: samma checklista
-// (låst till köptillfället, forutsattningarSnapshot — inte omgenererad,
-// se kop.ts), kopiera-per-sektion och docx/pdf-export (H16), och en
-// bilagechecklista skannad ur den redan sourcade texten (H17,
-// kopDokument.ts). Kräver samma inloggning som resten av Mina sidor —
-// ägarskap verifieras av hamtaAgtKop (kop.ts), aldrig bara en känd
-// sessions-id.
+// underlagets VARAKTIGA kopia. Fram tills nu levererades köpet bara som
+// ETT mejl — tappar kassören det är köpet borta. Den här sidan är den
+// permanenta platsen: samma innehåll (låst till köptillfället), kopiera-
+// per-sektion och docx/pdf-export (H16), och en bilagechecklista skannad
+// ur den redan sourcade texten (H17, kopDokument.ts). Kräver samma
+// inloggning som resten av Mina sidor — ägarskap verifieras av
+// hamtaAgtKop (kop.ts), aldrig bara en känd sessions-id.
 //
-// När bidragsutkastet (genereraUtkast, den bidrags-specifika
-// dokumentgeneratorn) passerar golden set-grinden renderas det på SAMMA
-// sida, som en andra sektion — inte en ny yta. Inte byggt ännu (väntar
-// på grinden), men arkitekturen stänger inte ute det.
+// TVÅ PRODUKTER SEDAN 2026-07-30 (CODE_UPPDRAG_KOMMERSIELL §1.B,
+// bidragsutkastet): grenar på kop.produkt, SAMMA yta, annat innehåll —
+// registreringschecklistan (kommun-scopad) eller bidragsutkastets
+// kravRader (bidrags-scopad). En delad VisningsRad-vy byggs av vardera
+// grenen så templaten nedan är produktoberoende.
 export const prerender = false;
 
 import Base from '../../../../layouts/Base.astro';
 import { SESSION_COOKIE_NAMN, hamtaSessionEmail } from '../../../../lib/session';
 import { hamtaAgtKop } from '../../../../lib/kop';
 import { getKommunBySlug } from '../../../../lib/kommuner';
-import { kopChecklista, harvestBilagor } from '../../../../lib/kopDokument';
+import { kopChecklista, kopBidragsutkast, harvestBilagor, harvestBilagorFranKrav, type Bilagepost } from '../../../../lib/kopDokument';
 import { VAGLEDNING } from '../../../../lib/content';
+
+interface VisningsRad {
+  rubrik: string;
+  stycken: string[];
+  notis?: string;
+  kallaUrl?: string;
+  kopieraText: string;
+}
 
 const sessionId = Astro.params.session ?? '';
 const returPath = `/mina-sidor/kop/${encodeURIComponent(sessionId)}/`;
@@ -32,13 +39,51 @@ const email = sessionToken ? await hamtaSessionEmail(sessionToken) : null;
 const kop = email ? await hamtaAgtKop(email, sessionId) : null;
 const kommun = kop ? getKommunBySlug(kop.kommunSlug) : null;
 
-// forutsattningarSnapshot är låst vid köptillfället (kop.ts) — det är
-// VAD HON BETALADE FÖR, inte kommunens eventuellt ändrade nuläge (den
-// jämförelsen sköter H22:s ändringsbevakning separat).
-const checklista = kop && kommun ? kopChecklista(kop, kommun) : [];
-const bilagor = checklista.length > 0 ? harvestBilagor(checklista) : [];
+let eyebrow = '';
+let sidRubrik = '';
+let metaRad = '';
+let rader: VisningsRad[] = [];
+let bilagor: Bilagepost[] = [];
+let dokumentKalla: string | null = null;
+let underlagSaknas = false;
+
+if (kop && kommun) {
+  if (kop.produkt === 'bidragsutkast') {
+    const bidrag = kop.bidragId ? kommun.bidrag.find((b) => b.id === kop.bidragId) : undefined;
+    const doc = bidrag ? kopBidragsutkast(kop, kommun, bidrag) : null;
+    if (doc) {
+      eyebrow = `${kommun.kommun} kommun · ${doc.bidragNamn}`;
+      sidRubrik = 'Utkast till ansökan';
+      metaRad = `${doc.belopp ?? 'Belopp ej publikt'} · sista ansökningsdag ${doc.deadlineText}`;
+      dokumentKalla = doc.kalla_url;
+      rader = doc.kravRader.map((rad, i) => ({
+        rubrik: `${i + 1}. ${rad.kravText}`,
+        stycken: [rad.innehall],
+        kopieraText: [`${i + 1}. ${rad.kravText}`, rad.innehall].join('\n'),
+      }));
+      bilagor = harvestBilagorFranKrav(doc.kravRader);
+    } else {
+      underlagSaknas = true;
+    }
+  } else {
+    const checklista = kopChecklista(kop, kommun);
+    eyebrow = `${kommun.kommun} kommun · registreringsutkast`;
+    sidRubrik = 'Er registreringschecklista';
+    metaRad = `Köpt ${kop.betaldDatum.slice(0, 10)}`;
+    rader = checklista.map((rad, i) => ({
+      rubrik: `${i + 1}. ${rad.vad}`,
+      stycken: [rad.beskrivning],
+      notis: rad.giltighetText ?? undefined,
+      kallaUrl: rad.kallaUrl,
+      kopieraText: [`${i + 1}. ${rad.vad}`, rad.beskrivning, rad.ledtidText, rad.giltighetText ?? '', `Källa: ${rad.kallaUrl}`]
+        .filter(Boolean)
+        .join('\n'),
+    }));
+    bilagor = harvestBilagor(checklista);
+  }
+}
 ---
-<Base title="Ert köpta underlag — Föreningsguiden" description="Er registreringschecklista, varaktigt tillgänglig — kopiera, ladda ner som docx eller pdf.">
+<Base title="Ert köpta underlag — Föreningsguiden" description="Ert underlag, varaktigt tillgängligt — kopiera, ladda ner som docx eller pdf.">
   {!email ? (
     <div class="email-signup fg-card">
       <h1>Logga in för att se ert köp</h1>
@@ -55,11 +100,20 @@ const bilagor = checklista.length > 0 ? harvestBilagor(checklista) : [];
       <h1>Hittar inte köpet</h1>
       <p>Vi kan inte hitta ett köp med den här länken på ert konto. Er köphistorik finns under <a href="/mina-sidor/">Mina sidor</a>.</p>
     </div>
+  ) : underlagSaknas ? (
+    <div class="fg-card">
+      <h1>Underlaget kunde inte återskapas</h1>
+      <p>Något i er profil eller bidraget har ändrats sedan köpet. Hör av er via <a href="/kontakt/">kontaktsidan</a> så löser vi det.</p>
+    </div>
   ) : (
     <div class="kop-doc fg-card" data-kop-doc data-session={sessionId}>
-      <p class="kop-doc__eyebrow">{kommun.kommun} kommun · registreringsutkast</p>
-      <h1>Er registreringschecklista</h1>
-      <p class="kop-doc__meta">Köpt {kop.betaldDatum.slice(0, 10)}{kop.hostedInvoiceUrl && <> · <a href={kop.hostedInvoiceUrl}>Kvitto/faktura</a></>}</p>
+      <p class="kop-doc__eyebrow">{eyebrow}</p>
+      <h1>{sidRubrik}</h1>
+      <p class="kop-doc__meta">
+        {metaRad}
+        {kop.hostedInvoiceUrl && <> · <a href={kop.hostedInvoiceUrl}>Kvitto/faktura</a></>}
+      </p>
+      {dokumentKalla && <p class="kop-doc__meta">Källa: <a href={dokumentKalla}>{dokumentKalla}</a></p>}
 
       <div class="kop-doc__export">
         <a class="fg-btn--ghost" href={`/api/kop/${encodeURIComponent(sessionId)}/docx/`}>Ladda ner som Word (.docx)</a>
@@ -67,22 +121,15 @@ const bilagor = checklista.length > 0 ? harvestBilagor(checklista) : [];
       </div>
 
       <ol class="kop-doc__lista">
-        {checklista.map((rad, i) => (
-          <li class="kop-doc__steg" data-kop-sektion data-kop-text={[
-            `${i + 1}. ${rad.vad}`,
-            rad.beskrivning,
-            rad.ledtidText,
-            rad.giltighetText ?? '',
-            `Källa: ${rad.kallaUrl}`,
-          ].filter(Boolean).join('\n')}>
+        {rader.map((rad) => (
+          <li class="kop-doc__steg" data-kop-sektion data-kop-text={rad.kopieraText}>
             <div class="kop-doc__steg-head">
-              <h2>{i + 1}. {rad.vad}</h2>
+              <h2>{rad.rubrik}</h2>
               <button type="button" class="fg-btn--ghost kop-doc__kopiera" data-kop-kopiera>Kopiera</button>
             </div>
-            <p>{rad.beskrivning}</p>
-            <p class="kop-doc__ledtid">{rad.ledtidText}</p>
-            {rad.giltighetText && <p class="kop-doc__giltighet">{rad.giltighetText}</p>}
-            <p class="kop-doc__kalla">Källa: <a href={rad.kallaUrl}>{rad.kallaUrl}</a></p>
+            {rad.stycken.map((stycke) => <p>{stycke}</p>)}
+            {rad.notis && <p class="kop-doc__giltighet">{rad.notis}</p>}
+            {rad.kallaUrl && <p class="kop-doc__kalla">Källa: <a href={rad.kallaUrl}>{rad.kallaUrl}</a></p>}
           </li>
         ))}
       </ol>
@@ -142,14 +189,14 @@ const bilagor = checklista.length > 0 ? harvestBilagor(checklista) : [];
   .kop-doc__meta {
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
-    margin: 4px 0 var(--fg-space-5);
+    margin: 4px 0 0;
   }
 
   .kop-doc__export {
     display: flex;
     gap: var(--fg-space-3);
     flex-wrap: wrap;
-    margin-bottom: var(--fg-space-6);
+    margin: var(--fg-space-5) 0 var(--fg-space-6);
   }
 
   .kop-doc__lista {

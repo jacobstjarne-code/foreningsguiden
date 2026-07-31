@@ -1,88 +1,53 @@
 ---
 // Utkastvyn med väggen — CODE_UPPDRAG_KOMMERSIELL.md §1.B ("produktens
 // viktigaste skärm"), mock: incoming/Föreningsguiden kommersiell.html
-// turn-1 (1a). Se plan twinkling-wondering-emerson.md del 3 för hela
-// resonemanget.
+// turn-1 (1a).
 //
-// ⚠️ GOLDEN SET GRÖNT (2026-07-30) — UTKASTVY_LIVE PÅSLAGEN ⚠️
-// 45/45 (bidrag×profil) godkända, node scripts/verify-generator.ts,
-// se golden-set/README.md. Jacobs instruktion: "Blir grinden grön slås
-// UTKASTVY_LIVE på och bidragsutkastet blir säljbart."
+// DYNAMISK sedan 2026-07-30 (Jacobs order, efter golden set grönt):
+// genereras nu för ALLA aktiva bidrag i ALLA kommuner, inte bara
+// Gislaved-fixturen. Föreningsprofilen finns bara i localStorage (samma
+// skäl som matcha/index.astro och VantelistaFlode.astro) — sidan kan
+// alltså INTE serverrendera det personliga innehållet. Det den KAN
+// serverrendera (kommun/bidragsnamn, pris, krav-TEXTERNA, första/övriga-
+// uppdelningen — den är positionell, inte statusberoende, se
+// utkastGenerator.ts) görs här; statusen (ifyllt/lucka) och den faktiska
+// innehall-texten fylls av klientskriptet nedan, exakt samma
+// fetch(/kommun-data/{slug}.json) + genereraUtkast()-mönster som redan
+// är etablerat (VantelistaFlode.astro:s visaLuckor()).
 //
-// VAD SOM FORTFARANDE SAKNAS INNAN DET FAKTISKT ÄR SÄLJBART: den här
-// skärmen är fortfarande BARA dokumentet + väggen + köpramen mot EN
-// hårdkodad demo-fixtur (Gislaved/arrangemangsbidrag) — inte det
-// ungated-formuläret som genererar sidan dynamiskt för ETT VALFRITT
-// bidrag (CODE_UPPDRAG_KOMMERSIELL §1.B.2, "egen större uppgift",
-// aldrig byggd). Köpknappen längre ner är fortfarande hårdkodad
-// `disabled` — ingen Stripe-integration finns för DENNA produkt (skilt
-// från registreringsutkastets /kommun/[slug]/registrera/, som redan är
-// en riktig köpväg). "Säljbart" i Jacobs mening kräver den dynamiska
-// routen + betalflödet + Fables paywall-copy (§4, fortfarande
-// {{FABLE:}}-slots nedan) — INTE byggt i denna commit. Rapporterat,
-// inte tystat.
+// Betalknappen är nu KOPPLAD (api/checkout/bidragsutkast.ts) — se det
+// scriptet för server-sidans matchKommun()-spärr (Jacobs order: profilen
+// kontrolleras ÄVEN server-side innan en Checkout-session skapas, inte
+// bara i UI:t här).
 //
-// UTKASTVY_LIVE ligger MEDVETET inne i getStaticPaths()-kroppen, inte på
-// modulnivå — samma Astro-bundling-gotcha som EXEMPELSIDOR_LIVE (se
-// src/pages/exempel/[kommun]/[kategori]/index.astro): Astro bundlar
-// getStaticPaths till en egen chunk vid prerendering och missar en
-// modulnivå-const utanför funktionen.
-//
-// Avvikelse från mocken, flaggad för Jacob/Design (ingen levande
-// Design-kanal i den här sessionen): mocken visar löpande PROSA
-// ("Reftele IF ansöker härmed..."). Den riktiga generatorn
-// (genereraUtkast(), src/lib/utkastGenerator.ts) producerar en
-// STRUKTURERAD krav-checklista, inte prosa — och ska enligt sin egen
-// filkommentar aldrig producera fri prosa. Väggens blur/gradient-mekanik
-// appliceras därför på krav-listan i stället för på prosastycken, så
-// skärmen visar generatorns RIKTIGA arbete, inte fabricerad text bakom
-// en vägg som ser ut som något den inte är (KVALITETSSPEC §4/§6).
-//
-// Demo-data: samma golden-set/gislaved-arrangemangsbidrag.EXEMPEL.yaml-
-// fixtur som redan finns (profil kultur/s/etablerad/ja — vald i den
-// filen specifikt för att undvika registrering_forst-grenen). Ingen ny
-// fejk-förening uppfinns för den här ytan.
-//
-// Denna yta bygger BARA dokumentet + väggen + köpramen (CODE_UPPDRAG_
-// KOMMERSIELL §1.B, "väggen sitter inne i dokumentet"), INTE det
-// föregående ungated-formuläret (§1.B.2, egen större uppgift).
+// Fable-copyn för köprutans rubrik/abonnemangsjämförelse (§4) finns
+// fortfarande INTE — {{FABLE:}}-platshållarna är borttagna ur renderingen
+// (en riktig köpare ska aldrig se rå platshållartext bredvid en fungerande
+// betalknapp). Flaggat i rapporten till Jacob, inte tyst löst med egen text.
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
-import { getKommunBySlug } from '../../../../../lib/kommuner';
+import { loadKommuner } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
-import { genereraUtkast } from '../../../../../lib/utkastGenerator';
-import type { Foreningsprofil } from '../../../../../lib/foreningsprofil';
+import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
 
 export function getStaticPaths() {
-  const UTKASTVY_LIVE = true;
-  if (!UTKASTVY_LIVE) return [];
-
-  const kommun = getKommunBySlug('gislaved');
-  const bidrag = kommun?.bidrag.find((b) => b.id === 'gislaved-arrangemangsbidrag');
-  if (!kommun || !bidrag) return [];
-
-  return [{ params: { slug: kommun.kommun_slug, bidragId: bidrag.id }, props: { kommun, bidrag } }];
+  const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag } }[] = [];
+  for (const kommun of loadKommuner()) {
+    for (const bidrag of kommun.bidrag) {
+      if (bidrag.status !== 'aktiv') continue;
+      paths.push({ params: { slug: kommun.kommun_slug, bidragId: bidrag.id }, props: { kommun, bidrag } });
+    }
+  }
+  return paths;
 }
 
 const { kommun, bidrag } = Astro.props as { kommun: Kommun; bidrag: Bidrag };
-
-// Samma profil som golden-set-fixturen — se filhuvudet.
-const demoProfil: Foreningsprofil = {
-  kommunSlug: kommun.kommun_slug,
-  verksamhet: ['kultur'],
-  storlek: 's',
-  alder: 'etablerad',
-  sokt: 'ja',
-  uppdaterad: '',
-};
-
-const resultat = genereraUtkast(demoProfil, bidrag, kommun);
-const doc = resultat.typ === 'bidragsutkast' ? resultat : null;
-const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
+const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
+const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
 ---
 <Base
   title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
-  description="Förhandsvisning av bidragsutkastet — betalning inte öppnad än."
+  description={`Förhandsvisning av bidragsutkastet för ${bidrag.namn} i ${kommun.kommun} — personligt mot er förenings svar i matchningstratten.`}
 >
   <BreadcrumbList items={[
     { name: 'Startsida', url: '/' },
@@ -90,80 +55,197 @@ const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
     { name: 'Utkast', url: `/kommun/${kommun.kommun_slug}/utkast/${bidrag.id}/` },
   ]} />
 
-  <div class="utkastvy-stubbanner" role="note">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4" /><path d="M12 17h.01" /><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>
-    <span><strong>Förhandsvisning — betalning inte öppnad.</strong> Generatorn är golden set-godkänd (45/45, KVALITETSSPEC.md §7), men den här sidan visar bara en fast exempelfixtur (Gislaved) och köpknappen nedan är fortfarande avstängd i väntan på det dynamiska formuläret och betalflödet.</span>
-  </div>
+  <noscript>
+    <p class="utkastvy-noscript">Den här sidan visar ert personliga utkast och kräver JavaScript. Utan det ser ni bara kraven, inte om er förening redan uppfyller dem.</p>
+  </noscript>
 
-  {doc && (
-    <div class="utkastvy fg-card">
-      <div class="utkastvy__header">
-        <p class="utkastvy__eyebrow">{kommun.kommun} kommun · {doc.bidragNamn}</p>
-        <h1>Utkast till ansökan</h1>
-        <p class="utkastvy__meta">{doc.belopp ?? 'Belopp ej publikt'} · sista ansökningsdag {doc.deadlineText}</p>
-      </div>
-
-      <div class="utkastvy__dokument">
-        {forstaKrav && (
-          <div class="utkastvy__krav">
-            <p class="utkastvy__krav-text">{forstaKrav.kravText}</p>
-            <p class="utkastvy__krav-svar" data-status={forstaKrav.status}>{forstaKrav.innehall}</p>
-          </div>
-        )}
-
-        {ovrigaKrav.length > 0 && (
-          <div class="utkastvy__vagg">
-            <div class="utkastvy__vagg-innehall">
-              {ovrigaKrav.map((rad) => (
-                <div class="utkastvy__krav">
-                  <p class="utkastvy__krav-text">{rad.kravText}</p>
-                  <p class="utkastvy__krav-svar" data-status={rad.status}>{rad.innehall}</p>
-                </div>
-              ))}
-            </div>
-            <div class="utkastvy__vagg-gradient"></div>
-          </div>
-        )}
-      </div>
-
-      <div class="utkastvy__kopram">
-        <p class="placeholder-slot">{'{{FABLE: köprutans rubrik — utfall, inte funktion}}'}</p>
-        <p class="utkastvy__pris">149 kr</p>
-        <p class="placeholder-slot">{'{{FABLE: abonnemangsjämförelse — ingår i abonnemang, 495 kr/år}}'}</p>
-        <button type="button" class="btn-primary" disabled title="Betalning aktiveras inte förrän golden set är godkänt (KVALITETSSPEC §7)">
-          Lås upp hela utkastet — 149 kr
-        </button>
-        <p class="utkastvy__ansvar">{doc.ansvarsrad}</p>
-        <a href={`/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`} class="utkastvy__escape">← Tillbaka till bidraget (gratis)</a>
-      </div>
+  <div class="utkastvy fg-card" data-utkastvy data-kommun-slug={kommun.kommun_slug} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
+    <div class="utkastvy__header">
+      <p class="utkastvy__eyebrow">{kommun.kommun} kommun · {bidrag.namn}</p>
+      <h1>Utkast till ansökan</h1>
+      <p class="utkastvy__meta" data-utkastvy-meta>{bidrag.belopp ?? 'Belopp ej publikt'}</p>
     </div>
-  )}
+
+    <div data-utkastvy-status class="utkastvy__statusrad">Läser er föreningsprofil …</div>
+
+    <div class="utkastvy__dokument" data-utkastvy-dokument hidden>
+      {forstaKravText && (
+        <div class="utkastvy__krav" data-utkastvy-krav data-krav-text={forstaKravText}>
+          <p class="utkastvy__krav-text">{forstaKravText}</p>
+          <p class="utkastvy__krav-svar" data-utkastvy-krav-svar>…</p>
+        </div>
+      )}
+
+      {ovrigaKravText.length > 0 && (
+        <div class="utkastvy__vagg">
+          <div class="utkastvy__vagg-innehall">
+            {ovrigaKravText.map((kravText) => (
+              <div class="utkastvy__krav" data-utkastvy-krav data-krav-text={kravText}>
+                <p class="utkastvy__krav-text">{kravText}</p>
+                <p class="utkastvy__krav-svar" data-utkastvy-krav-svar>…</p>
+              </div>
+            ))}
+          </div>
+          <div class="utkastvy__vagg-gradient"></div>
+        </div>
+      )}
+    </div>
+
+    <div class="utkastvy__kopram" data-utkastvy-kopram hidden>
+      <p class="utkastvy__pris">{prisKr} kr</p>
+      <button type="button" class="btn-primary" data-utkastvy-betala>
+        Lås upp hela utkastet — {prisKr} kr
+      </button>
+      <p data-utkastvy-fel class="utkastvy__fel" hidden>Något gick fel. Försök igen.</p>
+      <p class="utkastvy__ansvar" data-utkastvy-ansvar></p>
+      <a href={`/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`} class="utkastvy__escape">← Tillbaka till bidraget (gratis)</a>
+    </div>
+  </div>
 </Base>
 
+<script>
+  import { getForeningsprofil } from '../../../../../lib/foreningsprofil';
+  import { genereraUtkast } from '../../../../../lib/utkastGenerator';
+  import type { Kommun } from '../../../../../lib/kommunTyper';
+
+  const root = document.querySelector<HTMLElement>('[data-utkastvy]');
+  if (root) {
+    const kommunSlug = root.dataset.kommunSlug ?? '';
+    const bidragId = root.dataset.bidragId ?? '';
+    const bidragNamn = root.dataset.bidragNamn ?? '';
+    const statusEl = root.querySelector<HTMLElement>('[data-utkastvy-status]');
+    const dokumentEl = root.querySelector<HTMLElement>('[data-utkastvy-dokument]');
+    const kopramEl = root.querySelector<HTMLElement>('[data-utkastvy-kopram]');
+    const metaEl = root.querySelector<HTMLElement>('[data-utkastvy-meta]');
+    const ansvarEl = root.querySelector<HTMLElement>('[data-utkastvy-ansvar]');
+    const betalaKnapp = root.querySelector<HTMLButtonElement>('[data-utkastvy-betala]');
+    const felEl = root.querySelector<HTMLElement>('[data-utkastvy-fel]');
+
+    function visaStatus(text: string, lank?: { href: string; text: string }) {
+      if (!statusEl) return;
+      statusEl.textContent = text + ' ';
+      if (lank) {
+        const a = document.createElement('a');
+        a.href = lank.href;
+        a.textContent = lank.text;
+        statusEl.appendChild(a);
+      }
+      statusEl.hidden = false;
+      dokumentEl?.setAttribute('hidden', '');
+      kopramEl?.setAttribute('hidden', '');
+    }
+
+    async function initiera() {
+      const profil = getForeningsprofil();
+      if (!profil || !profil.kommunSlug) {
+        visaStatus('Vi känner inte igen er förening än.', {
+          href: `/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug }))}`,
+          text: 'Svara på fem frågor för att se ert utkast',
+        });
+        return;
+      }
+      if (profil.kommunSlug !== kommunSlug) {
+        visaStatus('Er sparade profil gäller en annan kommun.', {
+          href: `/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug }))}`,
+          text: 'Svara för den här kommunen',
+        });
+        return;
+      }
+
+      let kommunData: Kommun;
+      try {
+        const res = await fetch(`/kommun-data/${kommunSlug}.json`);
+        if (!res.ok) throw new Error('kommun-data 404');
+        kommunData = (await res.json()) as Kommun;
+      } catch {
+        visaStatus('Kunde inte läsa kommunens data just nu. Ladda om sidan.');
+        return;
+      }
+
+      const bidrag = kommunData.bidrag.find((b) => b.id === bidragId);
+      if (!bidrag) {
+        visaStatus('Det här bidraget hittades inte.');
+        return;
+      }
+
+      const resultat = genereraUtkast(profil, bidrag, kommunData);
+
+      if (resultat.typ === 'registrering_forst') {
+        visaStatus('Er förening behöver registreras hos kommunen innan det här utkastet är aktuellt.', {
+          href: `/kommun/${kommunSlug}/registrera/`,
+          text: 'Till registreringsutkastet',
+        });
+        return;
+      }
+
+      // Klientens EGNA matchning — samma matchKommun() som resten av
+      // tratten. Ren UX-vägvisning: förhindrar inte köpet på egen hand,
+      // det gör api/checkout/bidragsutkast.ts server-side (Jacobs order —
+      // "kontrollera matchKommun() innan Checkout-sessionen, inte bara i
+      // UI:t"). Importeras separat för att inte dra in hela tratt-koden.
+      const { matchKommun } = await import('../../../../../lib/matching');
+      const matchning = matchKommun(profil, kommunData);
+      if (!matchning.matchar.some((b) => b.id === bidragId)) {
+        visaStatus('Det här bidraget verkar inte passa er förenings profil.', {
+          href: `/kommun/${kommunSlug}/`,
+          text: 'Se vad som faktiskt matchar',
+        });
+        return;
+      }
+
+      // Allt klart — fyll dokumentet.
+      statusEl?.setAttribute('hidden', '');
+      if (metaEl) {
+        metaEl.textContent = `${resultat.belopp ?? 'Belopp ej publikt'} · sista ansökningsdag ${resultat.deadlineText}`;
+      }
+      if (ansvarEl) ansvarEl.textContent = resultat.ansvarsrad;
+
+      const kravEls = root!.querySelectorAll<HTMLElement>('[data-utkastvy-krav]');
+      kravEls.forEach((el, i) => {
+        const rad = resultat.kravRader[i];
+        const svarEl = el.querySelector<HTMLElement>('[data-utkastvy-krav-svar]');
+        if (!rad || !svarEl) return;
+        svarEl.textContent = rad.innehall;
+        svarEl.dataset.status = rad.status;
+        if (rad.status === 'lucka') svarEl.classList.add('utkastvy__krav-svar--lucka');
+      });
+
+      dokumentEl?.removeAttribute('hidden');
+      kopramEl?.removeAttribute('hidden');
+    }
+
+    betalaKnapp?.addEventListener('click', async () => {
+      felEl?.setAttribute('hidden', '');
+      betalaKnapp.disabled = true;
+
+      const profil = getForeningsprofil();
+      const data = new FormData();
+      data.set('kommun', kommunSlug);
+      data.set('bidrag', bidragId);
+      if (profil) data.set('profil', JSON.stringify(profil));
+
+      try {
+        const res = await fetch('/api/checkout/bidragsutkast', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok || !json.url) throw new Error('svar ej ok');
+        window.location.href = json.url;
+      } catch {
+        felEl?.removeAttribute('hidden');
+        betalaKnapp.disabled = false;
+      }
+    });
+
+    initiera();
+  }
+</script>
+
 <style>
-  .utkastvy-stubbanner {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: var(--fg-space-4) var(--fg-space-6);
+  .utkastvy-noscript {
     background: var(--fg-attention);
     color: var(--fg-on-accent);
-    font-family: var(--fg-font-mono);
-    font-size: var(--fg-text-label);
-    font-weight: var(--fg-weight-bold);
+    padding: var(--fg-space-4) var(--fg-space-6);
     border-radius: var(--fg-radius-control);
     margin-bottom: var(--fg-space-6);
-  }
-
-  .utkastvy-stubbanner svg {
-    flex: none;
-  }
-
-  .utkastvy-stubbanner code {
-    background: rgba(255, 255, 255, 0.22);
-    border-radius: 4px;
-    padding: 1px 5px;
-    font-family: var(--fg-font-mono);
   }
 
   .utkastvy {
@@ -195,6 +277,14 @@ const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
     margin: 0;
   }
 
+  .utkastvy__statusrad {
+    margin: 0 var(--fg-space-7) var(--fg-space-6);
+    padding: var(--fg-space-5);
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-card);
+    font-size: var(--fg-text-body);
+  }
+
   .utkastvy__dokument {
     padding: 0 var(--fg-space-7) var(--fg-space-3);
   }
@@ -214,15 +304,15 @@ const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
     color: var(--fg-ink-muted);
   }
 
-  .utkastvy__krav-svar[data-status="lucka"] {
+  .utkastvy__krav-svar--lucka {
     font-style: italic;
   }
 
   /* Earned-curiosity-väggen (turn-1, 1a) — tre lager, extraherade ur
-     mocken, inte gissade: blur+opacity på texten, ett fönster med fast
-     höjd som klipper den, en separat gradient-overlay ovanpå. color-mix
-     i stället för mockens rgba(255,255,255,...)/#fff — samma optik, men
-     mot --fg-surface-token i stället för ett hårdkodat vitt. */
+     mocken: blur+opacity på texten, ett fönster med fast höjd som klipper
+     den, en separat gradient-overlay ovanpå. color-mix i stället för
+     mockens rgba(255,255,255,...)/#fff — samma optik mot
+     --fg-surface-token i stället för ett hårdkodat vitt. */
   .utkastvy__vagg {
     position: relative;
     height: 132px;
@@ -261,6 +351,12 @@ const [forstaKrav, ...ovrigaKrav] = doc?.kravRader ?? [];
     font-weight: var(--fg-weight-display);
     font-size: var(--fg-text-h1);
     color: var(--fg-ink);
+    margin: 0;
+  }
+
+  .utkastvy__fel {
+    color: var(--fg-attention);
+    font-size: var(--fg-text-label);
     margin: 0;
   }
 

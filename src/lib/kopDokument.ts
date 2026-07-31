@@ -12,9 +12,9 @@
  * 2026-07-29) — orden nedan är de som faktiskt återkommer, inte gissade.
  */
 
-import type { RegistreringsUtkastRad } from './utkastGenerator';
-import { genereraRegistreringsUtkast } from './utkastGenerator';
-import type { Kommun } from './kommunTyper';
+import type { RegistreringsUtkastRad, UtkastDokument } from './utkastGenerator';
+import { genereraRegistreringsUtkast, genereraUtkast } from './utkastGenerator';
+import type { Kommun, Bidrag } from './kommunTyper';
 import type { KopEntry } from './kop';
 
 /**
@@ -32,6 +32,28 @@ export function kopChecklista(kop: KopEntry, kommun: Kommun): RegistreringsUtkas
     }
   }
   return genereraRegistreringsUtkast(kommun);
+}
+
+/**
+ * Samma mönster som kopChecklista, för produkt==='bidragsutkast'
+ * (CODE_UPPDRAG_KOMMERSIELL §1.B, 2026-07-30). Snapshotten är LÅST till
+ * köptillfällets profil-svar — regenereras ALDRIG mot kommunens
+ * nuvarande data (det vore att visa något annat än vad hon betalade
+ * för). Fallback (saknad/trasig snapshot, äldre köp) kräver
+ * kop.foreningsprofil — utan den kan dokumentet inte återskapas
+ * korrekt, och funktionen returnerar null hellre än att gissa en profil.
+ */
+export function kopBidragsutkast(kop: KopEntry, kommun: Kommun, bidrag: Bidrag): UtkastDokument | null {
+  if (kop.bidragsutkastSnapshot) {
+    try {
+      return JSON.parse(kop.bidragsutkastSnapshot) as UtkastDokument;
+    } catch {
+      // faller igenom till live-fallbacken nedan
+    }
+  }
+  if (!kop.foreningsprofil) return null;
+  const resultat = genereraUtkast(kop.foreningsprofil, bidrag, kommun);
+  return resultat.typ === 'bidragsutkast' ? resultat : null;
 }
 
 export interface Bilagepost {
@@ -55,20 +77,39 @@ const BILAGE_REGLER: BilageRegel[] = [
 ];
 
 /**
+ * Delad skanningskärna — matchar BILAGE_REGLER mot en lista av
+ * (etikett-att-citera-som-källa, text-att-söka-i)-par. Ren funktion,
+ * ingen kunskap om vilken av de två produkternas datastruktur den kom
+ * ifrån (harvestBilagor/harvestBilagorFranKrav nedan gör mappningen).
+ */
+function skannaBilagor(rader: { kalla: string; text: string }[]): Bilagepost[] {
+  const funna = new Map<string, Bilagepost>();
+  for (const rad of rader) {
+    for (const regel of BILAGE_REGLER) {
+      if (!funna.has(regel.etikett) && regel.monster.test(rad.text)) {
+        funna.set(regel.etikett, { etikett: regel.etikett, kallaVad: rad.kalla });
+      }
+    }
+  }
+  return Array.from(funna.values());
+}
+
+/**
  * Skannar köparens registreringschecklista (vad+beskrivning) efter kända
  * bilage-substantiv. Returnerar bara det som faktiskt NÄMNS i texten —
  * ingen generisk "vanliga bilagor är..."-lista. Dedupar på etikett, första
  * träffen (i checklistans egen ordning) vinner källhänvisningen.
  */
 export function harvestBilagor(checklista: RegistreringsUtkastRad[]): Bilagepost[] {
-  const funna = new Map<string, Bilagepost>();
-  for (const rad of checklista) {
-    const text = `${rad.vad} ${rad.beskrivning}`;
-    for (const regel of BILAGE_REGLER) {
-      if (!funna.has(regel.etikett) && regel.monster.test(text)) {
-        funna.set(regel.etikett, { etikett: regel.etikett, kallaVad: rad.vad });
-      }
-    }
-  }
-  return Array.from(funna.values());
+  return skannaBilagor(checklista.map((rad) => ({ kalla: rad.vad, text: `${rad.vad} ${rad.beskrivning}` })));
+}
+
+/**
+ * Samma skanning för bidragsutkastets kravRader[] (UtkastKravRad —
+ * kravText+innehall) i stället för registreringschecklistans vad/
+ * beskrivning. Samma vitlista, samma "nämns det inte, listas det inte"-
+ * princip — se filhuvudet.
+ */
+export function harvestBilagorFranKrav(kravRader: UtkastDokument['kravRader']): Bilagepost[] {
+  return skannaBilagor(kravRader.map((rad) => ({ kalla: rad.kravText, text: `${rad.kravText} ${rad.innehall}` })));
 }
