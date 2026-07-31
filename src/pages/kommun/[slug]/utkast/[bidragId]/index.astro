@@ -20,15 +20,19 @@
 // kontrolleras ÄVEN server-side innan en Checkout-session skapas, inte
 // bara i UI:t här).
 //
-// Fable-copyn för köprutans rubrik/abonnemangsjämförelse (§4) finns
-// fortfarande INTE — {{FABLE:}}-platshållarna är borttagna ur renderingen
-// (en riktig köpare ska aldrig se rå platshållartext bredvid en fungerande
-// betalknapp). Flaggat i rapporten till Jacob, inte tyst löst med egen text.
+// Köprutans copy (Fable, 2026-07-31) — KOPRUTA (content.ts) ersätter de
+// tidigare {{FABLE:}}-platshållarna. {kommun}/{bidrag}/{pris} är kända
+// server-sidan (oberoende av besökarens profil); {antal} (luckor) är
+// PROFILBEROENDE och fylls av klientskriptet tillsammans med resten av
+// dokumentet. Ingen abonnemangsjämförelse i denna leverans — det FABLE-
+// slotet fanns i mocken men täcks inte av den här copy-leveransen,
+// utelämnat ur renderingen (inte ersatt med egen text).
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
 import { loadKommuner } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
+import { KOPRUTA } from '../../../../../lib/content';
 
 export function getStaticPaths() {
   const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag } }[] = [];
@@ -44,6 +48,9 @@ export function getStaticPaths() {
 const { kommun, bidrag } = Astro.props as { kommun: Kommun; bidrag: Bidrag };
 const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
+
+const fyllKopruta = (text: string) =>
+  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr));
 ---
 <Base
   title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
@@ -92,6 +99,13 @@ const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
     </div>
 
     <div class="utkastvy__kopram" data-utkastvy-kopram hidden>
+      <h2 class="utkastvy__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
+      <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
+      <p data-utkastvy-luckor-rad hidden></p>
+      <p>{KOPRUTA.leverans}</p>
+      <p>{fyllKopruta(KOPRUTA.prisOchKvitto)}</p>
+      <p class="utkastvy__aterbetalning">{KOPRUTA.aterbetalning}</p>
+
       <p class="utkastvy__pris">{prisKr} kr</p>
       <button type="button" class="btn-primary" data-utkastvy-betala>
         Lås upp hela utkastet — {prisKr} kr
@@ -107,6 +121,7 @@ const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
   import { getForeningsprofil } from '../../../../../lib/foreningsprofil';
   import { genereraUtkast } from '../../../../../lib/utkastGenerator';
   import type { Kommun } from '../../../../../lib/kommunTyper';
+  import { KOPRUTA } from '../../../../../lib/content';
 
   const root = document.querySelector<HTMLElement>('[data-utkastvy]');
   if (root) {
@@ -120,6 +135,7 @@ const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
     const ansvarEl = root.querySelector<HTMLElement>('[data-utkastvy-ansvar]');
     const betalaKnapp = root.querySelector<HTMLButtonElement>('[data-utkastvy-betala]');
     const felEl = root.querySelector<HTMLElement>('[data-utkastvy-fel]');
+    const luckorRadEl = root.querySelector<HTMLElement>('[data-utkastvy-luckor-rad]');
 
     function visaStatus(text: string, lank?: { href: string; text: string }) {
       if (!statusEl) return;
@@ -199,6 +215,10 @@ const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
         metaEl.textContent = `${resultat.belopp ?? 'Belopp ej publikt'} · sista ansökningsdag ${resultat.deadlineText}`;
       }
       if (ansvarEl) ansvarEl.textContent = resultat.ansvarsrad;
+      if (luckorRadEl) {
+        luckorRadEl.textContent = KOPRUTA.luckorRad.replace('{antal}', String(resultat.luckor));
+        luckorRadEl.hidden = false;
+      }
 
       const kravEls = root!.querySelectorAll<HTMLElement>('[data-utkastvy-krav]');
       kravEls.forEach((el, i) => {
@@ -346,12 +366,22 @@ const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
     gap: var(--fg-space-3);
   }
 
+  .utkastvy__kopruta-rubrik {
+    font-size: var(--fg-text-h2);
+    margin: 0;
+  }
+
+  .utkastvy__aterbetalning {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
   .utkastvy__pris {
     font-family: var(--fg-font-display);
     font-weight: var(--fg-weight-display);
     font-size: var(--fg-text-h1);
     color: var(--fg-ink);
-    margin: 0;
+    margin: var(--fg-space-2) 0 0;
   }
 
   .utkastvy__fel {

@@ -23,6 +23,7 @@ import {
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA } from '../lib/content';
+import { TRATT } from '../../GUIDE_TRATT_COPY';
 
 export interface Props {
   kommun: Kommun;
@@ -170,6 +171,17 @@ const webPageJsonLd = {
 
   <p>{intro}</p>
 
+  {/* Länk till tratten (Jacob, 2026-07-31: "länka till /matcha/ från
+     kommunsidorna") — kommun-sidan visar ALLA bidrag anonymt, tratten
+     visar vilka SOM PASSAR just den här föreningen. kommunSlug förifylld
+     via ?fortsatt= (samma mönster som H5:s återupptagning) så besökaren
+     inte behöver välja kommun igen. */}
+  <p class="kommun-till-tratt">
+    <a href={`/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug: kommun.kommun_slug }))}`} class="btn-primary">
+      {TRATT.start.startknapp} →
+    </a>
+  </p>
+
   {kommun.bidrag.length === 0 ? (
     <p>{KOMMUN.ingaBidrag}</p>
   ) : (
@@ -234,3 +246,9 @@ const webPageJsonLd = {
 
   initFelrapportWidgets();
 </script>
+
+<style>
+  .kommun-till-tratt {
+    margin: var(--fg-space-5) 0 var(--fg-space-7);
+  }
+</style>

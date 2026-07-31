@@ -9,8 +9,14 @@
 // Förhandsvisningskortens underrader och färskhetsraden (Jacob 2026-07-27,
 // GUIDE_TRATT_COPY.ts TRATT.besked.kortUnder*/TRATT.start.senastAvlastRad)
 // var flaggade som saknad copy vid första leveransen — tillagda nu.
-// senastAvlast är det SENASTE `verifierad`-datumet över alla kommuner,
-// inte ett påhittat datum.
+//
+// FIX 2026-07-31 (Jacob): senastAvlast var tidigare det SENASTE
+// verifierad-datumet — cherry-plockade den enskilt bäst avlästa kommunen
+// och presenterade den som om den beskrev HELA korpusen. Ärligt
+// färskhetsbesked är det ÄLDSTA verifierad-datumet: "det har gått som
+// mest X dagar sedan vi läste av en källa", inte "vår senaste avläsning
+// var för Y dagar sedan". Samma resonemang som STALE_THRESHOLD_DAYS
+// (kommunTyper.ts) redan bygger på — någon kommun ÄR alltid äldst.
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
 import KommunValjare from '../components/KommunValjare.astro';
@@ -23,9 +29,9 @@ const kommuner = loadKommuner();
 const today = todayISO();
 const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).slice(0, 5);
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
-// Sitewide färskhetsdatum för TRATT.start.senastAvlastRad — det SENASTE
+// Sitewide färskhetsdatum för TRATT.start.senastAvlastRad — det ÄLDSTA
 // verifierad-datumet över alla kommuner (inte ett påhittat, inte "idag").
-const senastAvlast = kommuner.reduce((max, k) => (k.verifierad > max ? k.verifierad : max), kommuner[0]?.verifierad ?? today);
+const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifierad : min), kommuner[0]?.verifierad ?? today);
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
   <section class="start-hero">

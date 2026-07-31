@@ -557,6 +557,29 @@ export const ATERBETALNING = {
 };
 
 /**
+ * KÖPRUTAN — Fable 2026-07-31. Ersätter {{FABLE:}}-platshållarna på
+ * utkastvyn (kommun/[slug]/utkast/[bidragId]/) och köprutan på
+ * /kommun/[slug]/registrera/. {kommun}/{bidrag}/{antal}/{pris} fylls av
+ * anroparen med riktiga värden — aldrig gissade.
+ *
+ * aterbetalning nedan täcker samma löfte som ATERBETALNING ovan, kortare
+ * — renderas DÄRFÖR bara en gång per sida: på /registrera/ (som redan
+ * hade den fulla ATERBETALNING-texten från H13, "starkast där
+ * betalbeslutet fattas") används inte KOPRUTA.aterbetalning, den fulla
+ * texten står kvar. På utkastvyn (som inte hade någon återbetalningsrad
+ * alls) används KOPRUTA.aterbetalning. Två återbetalningslöften på samma
+ * sida hade läst som ett dubbleringsfel, inte som omsorg.
+ */
+export const KOPRUTA = {
+  rubrik: 'Vad ni får',
+  beskrivning: '{kommun}s krav för {bidrag}, i rätt ordning, med sista ansökningsdag och belopp. Vilka bilagor som ska med. Och de uppgifter vi kan fylla i åt er redan ifyllda.',
+  luckorRad: '{antal} rader behöver ni fylla i själva — vi säger vilka innan ni betalar.',
+  leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
+  prisOchKvitto: '{pris} kr inklusive moms. Kvitto med organisationsnummer och momsspecifikation mejlas — det går att bokföra.',
+  aterbetalning: 'Blev det inte användbart: mejla inom 30 dagar så betalar vi tillbaka. Ingen förklaring behövs.',
+};
+
+/**
  * H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni är här" på
  * kvittoläget (kommun/[slug]/registrera/index.astro, ?betald=1). Tre
  * rader, var och en villkorad på att underlaget faktiskt finns — se den

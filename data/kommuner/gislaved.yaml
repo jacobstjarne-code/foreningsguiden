@@ -28,27 +28,25 @@ bidrag:
     sen_ansokan: "Ej angivet i källan"
     kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
     anteckning: "Handläggning fyra gånger per år. Bidrag beviljas inte till interna sammankomster (årsmöten, konferenser, jubileer)."
-  - id: "gislaved-godkannande-bidragsberattigad"
-    namn: "Godkännande som bidragsberättigad förening"
-    kategori: ["idrott", "kultur", "pensionar", "funktionsratt", "ovrig"]
-    malgrupp: "Föreningar inom idrott, kultur, fritid, funktionsvariation eller pensionärsaktivitet med säte i kommunen"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Vald styrelse och av årsmötet antagna stadgar"
-      - "Ansluten till statsbidragsberättigad riksorganisation när sådan finns"
-      - "Organisationsnummer och bankkonto/plus-/bankgiro i föreningens namn"
-    belopp: null
-    sen_ansokan: "Ej tillämpligt (löpande)"
-    kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
-    anteckning: "Subventionerad föreningstaxa tidigast tre månader efter godkänt beslutsdatum."
+# FIX 2026-07-31 (Jacob): "gislaved-godkannande-bidragsberattigad" fanns
+# tidigare BÅDE här (som ett falskt tredje bidrag) och nedan under
+# forutsattningar (korrekt — det är ett förkrav, inte ett bidrag man
+# kan söka). Samma sak dubbellagrad på fel plats. Gislaved har ETT
+# bidrag och ETT förkrav — ströks här, forutsattningar-posten är
+# källan. golden-set/gislaved-godkannande-bidragsberattigad.yaml
+# (facit mot det falska bidraget) borttagen i samma commit.
 forutsattningar:
   - id: "gislaved-bidragsberattigad"
     vad: "Bli godkänd som bidragsberättigad förening"
     beskrivning: "Föreningen ansöker om att godkännas som bidragsberättigad. Kräver vald styrelse, av årsmötet antagna stadgar, organisationsnummer och bankkonto i föreningens namn. Är föreningen ansluten till en statsbidragsberättigad riksorganisation ska den vara det."
     system: "Kommunens e-tjänst"
-    ledtid: 90
+    # FIX 2026-07-31 (Jacob): ledtid var 90 — inte en publicerad
+    # handläggningstid, utan "tre månader" felläst ur ledtid_text (som
+    # handlar om NÄR den subventionerade taxan börjar gälla EFTER
+    # godkännande, inte om själva handläggningstiden). "Räkna med 90
+    # dagars handläggning" fanns alltså inte i källan. null = okänd
+    # handläggningstid, samma disciplin som alla andra ledtid:null-fält.
+    ledtid: null
     ledtid_text: "Subventionerad föreningstaxa gäller tidigast tre månader efter godkänt beslutsdatum"
     giltighet: null
     ordning: 1

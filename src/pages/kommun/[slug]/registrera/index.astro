@@ -15,7 +15,7 @@ import Base from '../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
 import { loadKommuner } from '../../../../lib/kommuner';
 import type { Kommun } from '../../../../lib/kommuner';
-import { VAGLEDNING, BEVAKNING, KVITTOSIDA, ATERBETALNING } from '../../../../lib/content';
+import { VAGLEDNING, BEVAKNING, KVITTOSIDA, ATERBETALNING, KOPRUTA } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
 import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../../lib/priser';
 
@@ -35,6 +35,16 @@ const titel = `Registreringschecklista — ${kommun.kommun}`;
 const prisKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
 // H31 (SPEC: Kluster 3, 2026-07-28): delaFraga har nu en {kommun}-platshållare.
 const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
+
+// KÖPRUTAN (Fable, 2026-07-31): {bidrag} blir "registrering" här — den
+// här produkten är kommun-scopad, inte ett enskilt bidrag. {antal} är
+// forutsattningar.length: registreringschecklistan har inget ifyllt/
+// lucka-begrepp (till skillnad från bidragsutkastet) — ALLA rader är
+// sådant föreningen själv ska styrka, så antalet rader ÄR antalet
+// "ni fyller i själva", ingen gissning.
+const fyllKopruta = (text: string) =>
+  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', 'registrering').replace('{pris}', String(prisKr));
+const luckorRad = KOPRUTA.luckorRad.replace('{antal}', String(forutsattningar.length));
 ---
 <Base
   title={`${titel} — Föreningsguiden`}
@@ -84,6 +94,16 @@ const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
     {forutsattningar.length > 0 && (
       <div class="registrera-doc__hjalp">
         <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
+
+        {/* KÖPRUTAN (Fable, 2026-07-31) — ersätter den tidigare {{FABLE:}}-
+           platshållaren. KOPRUTA.aterbetalning renderas INTE här — samma
+           löfte täcks redan fullt ut av ATERBETALNING nedan (H13), och två
+           återbetalningsrader på samma sida hade läst som ett dubbleringsfel. */}
+        <h2 class="registrera-doc__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
+        <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
+        <p>{luckorRad}</p>
+        <p>{KOPRUTA.leverans}</p>
+
         <p class="registrera-doc__pris">{prisKr} kr</p>
         {/* H12 (SPEC: Det som återstår, 2026-07-28): sista förtroende-
            prövningen före betalning — förbereder henne för vad Swish-
@@ -91,6 +111,7 @@ const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
            i Stripe-kontots inställningar (Jacobs jobb, ingen kod) — den
            här raden förutsätter att det är gjort. */}
         <p class="registrera-doc__swish-info">I Swish-appen ser ni "Föreningsguiden" som mottagare.</p>
+        <p class="registrera-doc__swish-info">{fyllKopruta(KOPRUTA.prisOchKvitto)}</p>
         {/* H13 (SPEC: Det som återstår, 2026-07-30): återbetalningsgarantin
            intill priset — starkast där betalbeslutet fattas (Jacobs
            instruktion), inte bara begravd på integritetspolicyn. */}
@@ -342,6 +363,11 @@ const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
     border-radius: var(--fg-radius-card);
     padding: var(--fg-space-6);
     margin-top: var(--fg-space-7);
+  }
+
+  .registrera-doc__kopruta-rubrik {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 var(--fg-space-2);
   }
 
   .registrera-doc__pris {

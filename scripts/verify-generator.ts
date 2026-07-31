@@ -224,5 +224,5 @@ for (const fil of filer) {
 }
 
 console.log(`\n${antal} tester klara, ${fel} FAIL`);
-console.log(`Täckning: ${korda}/${mojliga} (bidrag × profil)-kombinationer testade (SPEC_GOLDEN_SET §4/§6 kräver 45/45 för en godkänd grind).`);
+console.log(`Täckning: ${korda}/${mojliga} (bidrag × profil)-kombinationer testade (SPEC_GOLDEN_SET §4/§6 kräver full täckning — ${mojliga}/${mojliga} — för en godkänd grind).`);
 if (fel > 0) process.exit(1);

@@ -8,33 +8,27 @@ av en människa** (Jacob/Fable) — inte av Code. `scripts/verify-generator.ts`
 kör `genereraUtkast()` mot varje fil, för VAR OCH EN av de tre fasta
 testprofilerna (P1/P2/P3, se nedan), och testar de fyra kriterierna
 K1–K4 maskinellt. **Betalning för utkastprodukten aktiveras först när
-grinden är grön** — 15 bidrag × 3 profiler = 45 körningar, alla gröna.
+grinden är grön.**
 
-**15/15 facit klara** (Opus/Fable, omgång 1–3, 2026-07-27–29): Gislaved×2,
-Arjeplog×3 (omgång 1), Askersund×3, Bjuv×2 (omgång 2), Arvika×5 (omgång
-3, regel B — verksamhetsmatchning). Ingen `.EXEMPEL.yaml`-demonstration
-finns längre — den första facit-filen ersatte den (samma bidrag).
+**14/14 facit klara, grinden är GRÖN** (Code, 2026-07-30/31,
+`node scripts/verify-generator.ts`): 42/42 (bidrag × profil)-kombinationer
+täckta, 0 FAIL. `UTKASTVY_LIVE` är sedan 2026-07-30 satt till `true`
+(utkast/[bidragId]/index.astro) — bidragsutkastet är säljbart
+(api/checkout/bidragsutkast.ts).
 
-**Grinden är RÖD** (Code, 2026-07-30, `node scripts/verify-generator.ts`):
-45/45 (bidrag × profil)-kombinationer täckta, 6/233 tester FAIL. Två
-distinkta, dokumenterade rotorsaker — INTE gissade, körda mot verklig
-kod — väntar på Jacob/Fables beslut om facit eller generator ska ändras:
+Historik: Arjeplog×3 + Gislaved×2 (omgång 1), Askersund×3 + Bjuv×2
+(omgång 2), Arvika×5 (omgång 3, regel B — verksamhetsmatchning) — 15
+facit ursprungligen. `gislaved-godkannande-bidragsberattigad.yaml`
+borttagen 2026-07-31 (Jacob): bidraget den testade var en FELAKTIG
+dubblett — samma sak fanns redan korrekt som ett `forutsattning` i
+`data/kommuner/gislaved.yaml` (ett förkrav, inte ett säljbart bidrag).
+14 facit, 42 körningar är alltså den riktiga, avsedda uppsättningen —
+inte en reducerad täckning.
 
-1. `arvika-verksamhetsbidrag-idrott` + `arvika-ungdom-kultur`, [p1]/[p2]
-   (4 fall): krav formulerade som "Verksamheten ska bedrivas i Arvika
-   kommun" facit-förväntas `ifyllt` (samma sakuppgift som en
-   säte-formulering), men `fyllKrav()`s `SATE_MONSTER`-mönster
-   (`utkastGenerator.ts`) matchar bara "säte"/"hemmahörande" ordagrant
-   — inte "bedrivs i {kommun}". Generatorn ger `lucka`.
-2. `arvika-sociala-stodforeningar`, [p1]/[p2] (2 fall): facit förväntar
-   `bidragsutkast` för en redan registrerad förening (`sokt: 'ja'`),
-   men bidraget har `kraver_registrering: true` — och
-   `visaBorjaHar()` (`matching.ts:107-109`) triggar på DET villkoret
-   ensamt, oavsett `sokt`. Generatorn ger `registrering_forst` för
-   alla tre profiler, inte bara P3.
-
-`UTKASTVY_LIVE` förblir `false` tills grinden är grön — se
-utkast/[bidragId]/index.astro.
+Omgång 3:s två rotorsaker (Arvikas "bedrivs i kommun"-formulering och
+`kraver_registrering`-bidragets registreringsgren) åtgärdades i
+generatorn (`utkastGenerator.ts`/`matching.ts`) 2026-07-30 — se
+commit-historiken, inte facit som mjukades upp.
 
 ## De tre testprofilerna (fasta, definierade i scriptet — inte per facit)
 
