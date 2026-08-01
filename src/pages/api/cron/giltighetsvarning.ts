@@ -24,6 +24,19 @@
 // (subscribers.ts:s giltighetsvarningskickad:*), kan aldrig krocka med
 // paminnelseskickad:*. Skyddad med CRON_SECRET, samma mönster som
 // paminnelser.ts/utfallsfraga.ts. ?today= samma testkrok.
+//
+// FIX 2026-08-01 (fångad av kod-audit, egen granskning): triggern var
+// `dagarSedan !== GILTIGHET_VARNING_DAGAR` — kopierat rakt av från
+// paminnelser.ts:s exakt-dag-mönster, men det mönstret förutsätter att
+// målpunkten alltid ligger i FRAMTIDEN vid anmälningstillfället (en
+// bidragsdeadline är alltid senare än idag). Årsmötesdatumet här är redan
+// PASSERAT när hon fyller i det — och widgeten (GiltighetsKontroll.astro)
+// visar OVILLKORLIGT samma "vill ni bli påminda?"-erbjudande även när
+// dagarSedan redan är 300+ ("kan ha förfallit"-läget). Med `!==` hade
+// den gruppen ALDRIG träffat exakt dag 275 igen (dagarSedan bara ökar)
+// — precis de som redan ligger i riskzonen hade tystnat för alltid.
+// `>=` + den redan befintliga idempotens-spärren löser det: skickas en
+// gång, oavsett om hon anmälde sig före eller efter tröskeldagen.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
@@ -62,7 +75,7 @@ export const GET: APIRoute = async ({ request, url }) => {
       }
 
       const dagarSedan = -daysUntil(arsmotesdatum, today);
-      if (dagarSedan !== GILTIGHET_VARNING_DAGAR) continue;
+      if (dagarSedan < GILTIGHET_VARNING_DAGAR) continue;
 
       const redanSkickat = await wasGiltighetsvarningSent(kommunSlug, arsmotesdatum, sub.email);
       if (redanSkickat) {

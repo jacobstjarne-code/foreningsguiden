@@ -586,7 +586,7 @@ export const PRIS = {
   abonnemang: {
     namn: 'Bevakningsabonnemang',
     perAr: '/ år',
-    beskrivning: '{{FABLE: produkten saknar köpyta och beskrivning helt idag — se rapporten till Jacob}}',
+    beskrivning: '{{FABLE: produkten saknar köpyta och beskrivning helt idag}}',
   },
   cta: 'Hitta er kommun',
 };
