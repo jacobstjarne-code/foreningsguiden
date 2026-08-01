@@ -163,7 +163,9 @@ export const TRATT = {
       fallText: 'Det varierar mellan kommuner, men handlar oftast om att ni har antagna stadgar, en demokratiskt vald styrelse, ett organisationsnummer och ett föreningskonto. Godkännandet har egen handläggningstid, så räkna baklänges från bidragets sista ansökningsdag — inte framåt från idag.',
       // Övergång till betald hjälp — lugn, aldrig påträngande:
       hjalpText: 'Vi kan förbereda er registreringsansökan mot just er kommuns krav, så inget fattas när ni lämnar in.',
-      hjalpKnapp: 'Hjälp oss registrera',
+      // B3 (SPRINT: Produkten, Opus/Fable 2026-07-31): "Hjälp oss registrera"
+      // läst som svenska säger att HON hjälper OSS — bytt 2026-08-01.
+      hjalpKnapp: 'Förbered vår registreringsansökan',
     },
 
     // Avslutning — kopplingen till föreningsminnet

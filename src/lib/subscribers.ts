@@ -300,3 +300,19 @@ export async function wasReminderSent(typ: '28' | '14' | '4' | '3', bidragId: st
 export async function markReminderSent(typ: '28' | '14' | '4' | '3', bidragId: string, dateISO: string, email: string): Promise<void> {
   await redis.sadd(sentKey(typ, bidragId, dateISO), email.toLowerCase());
 }
+
+// B4 (SPRINT: Produkten) — giltighetsvarningens idempotens-nyckel skiljer
+// sig i FORM från sentKey ovan (kommun+årsmötesdatum, inte bidrag+datum) —
+// EGEN nyckelrymd, samma princip som utfallsfraga.ts:s köp-scopade
+// nycklar (kan aldrig krocka med paminnelseskickad:*).
+const giltighetsvarningKey = (kommunSlug: string, arsmotesdatum: string) =>
+  `giltighetsvarningskickad:${kommunSlug}:${arsmotesdatum}`;
+
+/** Har giltighetsvarningen redan gått till adressen för DETTA kommun+årsmötesdatum? */
+export async function wasGiltighetsvarningSent(kommunSlug: string, arsmotesdatum: string, email: string): Promise<boolean> {
+  return (await redis.sismember(giltighetsvarningKey(kommunSlug, arsmotesdatum), email.toLowerCase())) === 1;
+}
+
+export async function markGiltighetsvarningSent(kommunSlug: string, arsmotesdatum: string, email: string): Promise<void> {
+  await redis.sadd(giltighetsvarningKey(kommunSlug, arsmotesdatum), email.toLowerCase());
+}

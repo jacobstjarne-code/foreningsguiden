@@ -18,6 +18,8 @@ import type { Kommun } from '../../../../lib/kommuner';
 import { VAGLEDNING, BEVAKNING, KVITTOSIDA, ATERBETALNING, KOPRUTA } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
 import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../../lib/priser';
+import { genereraRegistreringsUtkast } from '../../../../lib/utkastGenerator';
+import { harvestBilagor } from '../../../../lib/kopDokument';
 
 export function getStaticPaths() {
   return loadKommuner().map((kommun) => ({
@@ -29,6 +31,14 @@ export function getStaticPaths() {
 const { kommun } = Astro.props as { kommun: Kommun };
 const forutsattningar = [...kommun.forutsattningar].sort((a, b) => a.ordning - b.ordning);
 const titel = `Registreringschecklista — ${kommun.kommun}`;
+
+// B2 (SPRINT: Produkten, Opus/Fable 2026-07-31): bilagorna nämndes aldrig
+// på den fria sidan, bara i det köpta dokumentet. genereraRegistreringsUtkast
+// + harvestBilagor är REDAN den vitlist-baserade, "gissa aldrig"-motorn
+// som kopDokument.ts:s köpta bilagechecklista använder (kopDokument.ts
+// filhuvud) — samma härledning, bara körd tidigare i flödet, på den
+// fria sidan, inte bara efter köp.
+const bilagor = harvestBilagor(genereraRegistreringsUtkast(kommun));
 // H3 (GRANSKNING_foreningsguiden.md): priset ska synas INNAN betalknappen,
 // inte gömt bakom klicket — samma platshållarkonstant som checkout-routen
 // (src/lib/priser.ts), aldrig hårdkodat på två ställen.
@@ -89,6 +99,21 @@ const fyllKopruta = (text: string) =>
             </li>
           ))}
         </ol>
+
+        {/* B2 (SPRINT: Produkten) — samma rubrik och radformat som den
+           köpta sidans bilagechecklista (mina-sidor/kop/[session]/index.astro),
+           bara flyttad till den fria sidan. Visas bara det som faktiskt
+           nämns (harvestBilagor's egen princip) — ingen sektion om tomt. */}
+        {bilagor.length > 0 && (
+          <div class="registrera-doc__bilagor">
+            <h2>Underlag som nämns i kraven</h2>
+            <ul>
+              {bilagor.map((b) => (
+                <li>{b.etikett} <span class="registrera-doc__bilaga-kalla">— nämnt under "{b.kallaVad}"</span></li>
+              ))}
+            </ul>
+          </div>
+        )}
       </>
     )}
 
@@ -357,6 +382,22 @@ const fyllKopruta = (text: string) =>
     font-size: var(--fg-text-mono);
     color: var(--fg-ink-muted);
     margin-top: 8px;
+  }
+
+  .registrera-doc__bilagor {
+    margin-top: var(--fg-space-7);
+    padding-top: var(--fg-space-6);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .registrera-doc__bilagor h2 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  .registrera-doc__bilaga-kalla {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
   }
 
   .registrera-doc__hjalp {

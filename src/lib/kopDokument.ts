@@ -74,6 +74,16 @@ const BILAGE_REGLER: BilageRegel[] = [
   { etikett: 'Organisationsnummer (från Skatteverket)', monster: /\borganisationsnummer\b|\borg\.?\s*nr\b/i },
   { etikett: 'Bank- eller plusgirouppgifter', monster: /\bbankkonto\w*\b|\bplusgiro\w*\b|\bbankgiro\w*\b/i },
   { etikett: 'Ekonomisk redovisning (resultat- och balansräkning)', monster: /resultat-?\s*och\s*balansräkning|ekonomisk\s+redovisning|årsredovisning/i },
+  // Tillagda 2026-08-01 (SPRINT: Produkten B2) — samma vitlist-disciplin,
+  // kalibrerade mot faktiska träffar i data/kommuner (Ale/Alingsås
+  // "budget ... ska bifogas", Arboga/Strängnäs "registreringsbevis från
+  // sk(atteverket|attemyndigheterna)"). \b-gränsen är avsiktlig: fångar
+  // fristående "budget" men INTE sammansättningar som "kostnadsbudget"/
+  // "sponsringsbudget" — de senare beskriver ofta KOMMUNENS egen budget,
+  // inte ett dokument föreningen ska bifoga, och hade blivit falska
+  // positiva om mönstret vidgades.
+  { etikett: 'Budget', monster: /\bbudget\w*\b/i },
+  { etikett: 'Registreringsbevis (från Skatteverket)', monster: /\bregistreringsbevis\w*\b/i },
 ];
 
 /**

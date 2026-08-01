@@ -143,6 +143,27 @@ export async function sendPaminnelse14(to: string, vars: PaminnelseVars): Promis
   await sendMejl(to, MEJL.paminnelse14, vars);
 }
 
+export interface GiltighetsvarningVars {
+  arsmotesdatum: string;
+  kommun: string;
+  giltighetsregel: string;
+  system: string;
+  kommunLank: string;
+}
+
+/**
+ * B4 (SPRINT: Produkten, Opus/Fable 2026-07-31): GiltighetsKontrollens
+ * "erbjudande" (GiltighetsKontroll.astro → addGiltighetBevakning) sparade
+ * årsmötesdatum och skickade en bekräftelse — men själva varningsmejlet
+ * skickades aldrig, ingen cron fanns (se giltighetsbevakning.ts:s egen
+ * kommentar: "själva utskicksjobbet är inte byggt än"). MEJL.giltighetsvarning
+ * (content.ts) fanns redan färdigskriven, oanvänd. Se
+ * cron/giltighetsvarning.ts för utskicksjobbet.
+ */
+export async function sendGiltighetsvarning(to: string, vars: GiltighetsvarningVars): Promise<void> {
+  await sendMejl(to, MEJL.giltighetsvarning, vars);
+}
+
 export async function sendPaminnelse3(to: string, vars: PaminnelseVars & { veckodag: string }): Promise<void> {
   await sendMejl(to, MEJL.paminnelse3, vars);
 }

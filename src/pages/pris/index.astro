@@ -1,0 +1,117 @@
+---
+// Prissidan — D2 (SPRINT: Produkten, Opus/Fable 2026-07-31): "249 kr för
+// registrering, 249 kr för utkast, 495 kr för abonnemang — de möts aldrig
+// på samma yta. Två priser utan sammanhang läses som slumpmässiga." Priset
+// hämtas ENBART ur priser.ts (en sanning) — aldrig hårdkodat här.
+//
+// Abonnemang-kortet har ingen CTA: checkout/abonnemang.ts finns, men ingen
+// sida eller komponent i hela kodbasen länkar till det — produkten saknar
+// köpyta helt idag (verifierat: grep efter "checkout/abonnemang" utanför
+// src/pages/api/ ger noll träffar). Att länka ett kort till en rå
+// checkout-API-endpoint utan en riktig köpyta emellan hade varit en trasig
+// länk, inte en genväg. Flaggat i rapporten till Jacob — det är en egen,
+// större lucka än den här sidan.
+import Base from '../../layouts/Base.astro';
+import BreadcrumbList from '../../components/BreadcrumbList.astro';
+import { PRIS, ATERBETALNING } from '../../lib/content';
+import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_BIDRAGSUTKAST_ORE, PRIS_ABONNEMANG_ORE } from '../../lib/priser';
+
+const registreringKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
+const utkastKr = PRIS_BIDRAGSUTKAST_ORE / 100;
+const abonnemangKr = PRIS_ABONNEMANG_ORE / 100;
+---
+<Base title={PRIS.metaTitle} description={PRIS.metaDescription}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: 'Priser', url: '/pris/' },
+  ]} />
+
+  <h1>{PRIS.h1}</h1>
+  <p class="pris-intro">{PRIS.intro}</p>
+
+  <div class="pris-grid">
+    <div class="fg-card pris-kort">
+      <h2>{PRIS.registrering.namn}</h2>
+      <p class="pris-kort__pris">{registreringKr} kr</p>
+      <p>{PRIS.registrering.beskrivning}</p>
+      <a href="/matcha/" class="btn-primary">{PRIS.cta} →</a>
+    </div>
+
+    <div class="fg-card pris-kort">
+      <h2>{PRIS.utkast.namn}</h2>
+      <p class="pris-kort__pris">{utkastKr} kr</p>
+      <p>{PRIS.utkast.beskrivning}</p>
+      <a href="/matcha/" class="btn-primary">{PRIS.cta} →</a>
+    </div>
+
+    <div class="fg-card pris-kort">
+      <h2>{PRIS.abonnemang.namn}</h2>
+      <p class="pris-kort__pris">{abonnemangKr} kr <span class="pris-kort__per">{PRIS.abonnemang.perAr}</span></p>
+      <p>{PRIS.abonnemang.beskrivning}</p>
+    </div>
+  </div>
+
+  <div class="pris-aterbetalning">
+    <h2>{ATERBETALNING.rubrik}</h2>
+    {ATERBETALNING.stycken.map((stycke) => <p>{stycke}</p>)}
+  </div>
+</Base>
+
+<style>
+  .pris-intro {
+    max-width: 60ch;
+    margin: 0 0 var(--fg-space-7);
+  }
+
+  .pris-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--fg-space-5);
+    margin-bottom: var(--fg-space-8);
+  }
+
+  .pris-kort {
+    padding: var(--fg-card-padding);
+  }
+
+  .pris-kort h2 {
+    margin: 0 0 var(--fg-space-2);
+    font-size: var(--fg-text-h2);
+  }
+
+  .pris-kort__pris {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-h1);
+    color: var(--fg-ink);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  .pris-kort__per {
+    font-family: var(--fg-font-sans);
+    font-weight: normal;
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .pris-kort p {
+    margin: 0 0 var(--fg-space-4);
+  }
+
+  .pris-aterbetalning {
+    max-width: 68ch;
+    padding-top: var(--fg-space-6);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .pris-aterbetalning h2 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  @media (min-width: 720px) {
+    .pris-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

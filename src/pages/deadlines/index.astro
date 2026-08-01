@@ -30,6 +30,7 @@ import {
 } from '../../lib/kommuner';
 import type { DeadlineEntry } from '../../lib/kommuner';
 import { KALENDER, BEVAKNING } from '../../lib/content';
+import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
 const bevakningStatus = Astro.url.searchParams.get('bevakning');
 const submitted = bevakningStatus === 'klar';
@@ -41,6 +42,20 @@ const today = todayISO();
 const entries = getDeadlineEntries(today);
 const lopande = entries.filter((e) => e.isLopande);
 const kommande = entries.filter((e) => !e.isLopande);
+
+// A1 (SPRINT: Produkten, Opus/Fable 2026-07-31): kalendern hade ingen
+// verifieringsstämpel alls — enda ytan som inte sa när den lästes. Samma
+// TRATT.start.senastAvlastRad-mening som förstasidan (en sanning, en
+// källa, inte en ny formulering) — men beräknad över bara de kommuner
+// som FAKTISKT förekommer i den här tabellen, inte alla 194 (en kommun
+// utan aktiva bidrag bidrar aldrig en rad här och ska inte kunna dra ner
+// datumet). Äldsta, inte senaste — samma resonemang som förstasidans fix.
+const kommunSlugsMedDeadlines = new Set(entries.map((e) => e.kommunSlug));
+const kommunerMedDeadlines = kommuner.filter((k) => kommunSlugsMedDeadlines.has(k.kommun_slug));
+const senastAvlast = kommunerMedDeadlines.reduce(
+  (min, k) => (k.verifierad < min ? k.verifierad : min),
+  kommunerMedDeadlines[0]?.verifierad ?? today
+);
 
 // entries är redan globalt sorterade (getDeadlineEntries) — att gruppera
 // via en Map bevarar kronologisk ordning automatiskt, ingen extra sort.
@@ -73,6 +88,7 @@ function beloppCell(e: DeadlineEntry): string {
 
   <h1>{KALENDER.h1}</h1>
   <p>{KALENDER.intro}</p>
+  <p class="deadline-senast-avlast">{TRATT.start.senastAvlastRad.replace('{datum}', formatDate(senastAvlast))}</p>
 
   <div class="deadline-filters">
     <label for="filter-kommun">
@@ -223,6 +239,12 @@ function beloppCell(e: DeadlineEntry): string {
 </script>
 
 <style>
+  .deadline-senast-avlast {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-5);
+  }
+
   .deadline-manad {
     margin-bottom: var(--fg-space-3);
     border: var(--fg-border-inner) solid var(--fg-border);

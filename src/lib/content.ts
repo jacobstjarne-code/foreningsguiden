@@ -557,6 +557,41 @@ export const ATERBETALNING = {
 };
 
 /**
+ * PRIS — D2 (SPRINT: Produkten, Opus/Fable 2026-07-31): "249 kr för
+ * registrering, 249 kr för utkast, 495 kr för abonnemang — de möts aldrig
+ * på samma yta." Ny sida (/pris/) där alla tre visas tillsammans.
+ *
+ * beskrivRegistrering/beskrivUtkast är INTE nyskriven text — de är
+ * KOPRUTA.leverans (redan Fable-skriven, kommun-oberoende, samma mening
+ * gäller ordagrant båda produkterna). beskrivAbonnemang är {{FABLE:}}:
+ * abonnemangsprodukten (checkout/abonnemang.ts, PRIS_ABONNEMANG_ORE) har
+ * INGEN köpyta eller beskrivande text NÅGONSTANS i kodbasen idag — bara
+ * backend (checkout-API + cron/abonnemangsbevakning.ts). Kunde inte hitta
+ * något att återanvända, och Code skriver ingen egen produktbeskrivning.
+ * Se rapporten till Jacob.
+ */
+export const PRIS = {
+  metaTitle: 'Priser — Föreningsguiden',
+  metaDescription: 'Vad det kostar att köpa ett registreringsutkast, ett bidragsutkast eller ett bevakningsabonnemang hos Föreningsguiden.',
+  h1: 'Priser',
+  intro: 'Att hitta och bevaka bidrag är gratis. Det här är vad de tre betalprodukterna kostar.',
+  registrering: {
+    namn: 'Registreringschecklistan',
+    beskrivning: '{{FABLE: kort produktbeskrivning, kommun-oberoende}}',
+  },
+  utkast: {
+    namn: 'Bidragsutkastet',
+    beskrivning: '{{FABLE: kort produktbeskrivning, kommun-oberoende}}',
+  },
+  abonnemang: {
+    namn: 'Bevakningsabonnemang',
+    perAr: '/ år',
+    beskrivning: '{{FABLE: produkten saknar köpyta och beskrivning helt idag — se rapporten till Jacob}}',
+  },
+  cta: 'Hitta er kommun',
+};
+
+/**
  * KÖPRUTAN — Fable 2026-07-31. Ersätter {{FABLE:}}-platshållarna på
  * utkastvyn (kommun/[slug]/utkast/[bidragId]/) och köprutan på
  * /kommun/[slug]/registrera/. {kommun}/{bidrag}/{antal}/{pris} fylls av
