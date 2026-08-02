@@ -1,81 +1,130 @@
-# Källa verifierad 2026-07-10 mot berg.se. Löpande ansökan via e-tjänst.
-# Sen-ansökan-regeln (-50 %, avslag efter 2 mån) är den skarpaste
-# deadline-mekaniken i PoC-urvalet. Spot-check av Jacob före deploy.
-kommun: "Berg"
-kommun_slug: "berg"
-lan: "Jämtlands län"
+kommun: Berg
+kommun_slug: berg
+lan: Jämtlands län
 befolkning: 7069
-forvaltning: "Kultur och fritid"
+forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: "Kommunens e-tjänst för kommunala föreningsbidrag"
-  url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
-kalla_url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
-verifierad: 2026-07-10
-# Kommunsiffran (KOMMUNSIFFRA, content.ts) — kommunens egen sammanställning,
-# KS 2025/120. SPRINT_COPY.ts §KOMMUNSIFFRA, Fable 2026-07-18.
+  namn: Kommunens e-tjänst för kommunala föreningsbidrag
+  url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+verifierad: '2026-08-02'
 kommunsiffra:
   antal_foreningar: 30
-  summa_kr: "781 117"
-  bidragstyp: "drift- och underhållsbidrag"
-  utlamnad_datum: "juli 2026"
+  summa_kr: 781 117
+  bidragstyp: drift- och underhållsbidrag
+  utlamnad_datum: juli 2026
 bidrag:
-  - id: "berg-drift-underhall"
-    namn: "Drift- och underhållsbidrag"
-    kategori: ["idrott", "kultur"]
-    malgrupp: "Föreningar som äger idrottsanläggningar och allmänna samlingslokaler för fritids- och kulturaktiviteter i kommunen"
-    deadlines:
-      typ: "fasta"
-      datum: ["02-28", "08-31"]
-    krav:
-      - "Föreningsägd anläggning; kostnader redovisas och styrks med resultatrapport"
-      - "Minst tio mantalsskrivna medlemmar i Bergs kommun; säte och huvudsaklig verksamhet i kommunen"
-      - "RF-anslutna idrottsföreningar ska ha beviljats statligt och kommunalt aktivitetsstöd"
-    belopp: "Upp till 30 % av redovisad kostnad (beroende på antal sökande och budget)"
-    sen_ansokan: "Sen ansökan (max 2 mån) beviljas med 50 % av ordinarie nivå; senare än 2 mån avslås"
-    kalla_url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
-    anteckning: "Ansökan senast sista februari (period 1/7–31/12) och 31 augusti (period 1/1–30/6). Upp till tre föreningar väljs årligen för revision."
-  - id: "berg-energisparbidrag"
-    namn: "Energisparbidrag"
-    kategori: ["idrott", "ovrig"]
-    malgrupp: "Föreningar med föreningsägda/arrenderade idrottsanläggningar, samlingslokaler/bygdegårdar samt väglyseföreningar"
-    deadlines:
-      typ: "fasta"
-      datum: ["02-28"]
-    krav:
-      - "Handlings-/utvecklingsplan för anläggningen ska uppvisas vid ansökan"
-    belopp: "Max 80 % av totala projektkostnaderna (kan reduceras under beslutsprocessen)"
-    sen_ansokan: "Sen ansökan (max 2 mån) beviljas med 50 % av ordinarie nivå; senare än 2 mån avslås"
-    kalla_url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
-    anteckning: "Egen insats som motprestation värderas enligt EU:s normer; från 16 år 340 kr/timme (2026)."
-  - id: "berg-vagbelysning"
-    namn: "Bidrag till vägbelysningsföreningar"
-    kategori: ["ovrig"]
-    malgrupp: "Vägbelysningsföreningar inom BTEA:s och Härjeåns distributionsområden i Bergs kommun"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Redovisade abonnemangskostnader för perioden 1 augusti föregående år–31 juli innevarande år"
-    belopp: "Upp till hela mellanskillnaden i abonnemangsavgift jämfört med Jämtkraft (inkl. moms)"
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
-    anteckning: null
+- id: berg-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar som investerar i lokal, anläggning eller avgörande inventarier
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-15
+  krav: []
+  belopp: Max 80 procent av projektkostnaden
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  anteckning: null
+- id: berg-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar med organiserade aktiviteter
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-28
+    - 08-31
+  krav:
+  - Minst tre deltagare
+  - Minst 60 minuter
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  anteckning: null
+- id: berg-utvecklande-aktiviteter
+  namn: Övrigt bidrag – utvecklande aktiviteter och investeringar
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  malgrupp: Föreningar som genomför nya utvecklande aktiviteter eller investeringar
+  deadlines:
+    typ: lopande
+    datum: []
+  krav: []
+  belopp: Max 28 000 kronor per förening under 2026
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  anteckning: null
+- id: berg-drift-underhall
+  namn: Drift- och underhållsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar med egna anläggningar eller lokaler
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  anteckning: null
+- id: berg-energisparbidrag
+  namn: Energisparbidrag
+  kategori:
+  - ovrig
+  malgrupp: Föreningar som genomför energibesparande åtgärder
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  anteckning: null
+- id: berg-vagbelysning
+  namn: Bidrag till vägbelysningsföreningar
+  kategori:
+  - ovrig
+  malgrupp: Vägbelysningsföreningar i Bergs kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  anteckning: null
 forutsattningar:
-  - id: "berg-foreningsregister"
-    vad: "Registrera föreningen i kommunens föreningsregister"
-    beskrivning: "Föreningar som söker bidrag ska vara registrerade i Bergs föreningsregister. Årsmöteshandlingar (dagordning, protokoll, verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och värdegrundspolicy) lämnas in så snart årsmötet genomförts."
-    system: "Kommunens e-tjänst"
-    ledtid: null
-    ledtid_text: "Kommunen anger ingen handläggningstid"
-    giltighet: "Föreningsuppgifterna ska uppdateras årligen — minst en gång per år, och snarast vid förändringar"
-    ordning: 1
-    kalla_url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
-  - id: "berg-policy"
-    vad: "Anta drog- och alkoholpolicy (barn- och ungdomsverksamhet)"
-    beskrivning: "Föreningar med barn- och ungdomsverksamhet ska ha en antagen drog- och alkoholpolicy med åtgärdsplan och konsekvenshandling. Policyn ska alltid finnas på årsmötets dagordning för antagande."
-    system: null
-    ledtid: null
-    ledtid_text: "Antas på årsmötet"
-    giltighet: "Ska uppdateras årligen"
-    ordning: 2
-    kalla_url: "https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag"
+- id: berg-foreningsregister
+  vad: Registrera föreningen i kommunens föreningsregister
+  beskrivning: Föreningar som söker bidrag ska vara registrerade i Bergs föreningsregister. Årsmöteshandlingar (dagordning,
+    protokoll, verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och värdegrundspolicy) lämnas in så snart
+    årsmötet genomförts.
+  system: Kommunens e-tjänst
+  ledtid: null
+  ledtid_text: Kommunen anger ingen handläggningstid
+  giltighet: Föreningsuppgifterna ska uppdateras årligen — minst en gång per år, och snarast vid förändringar
+  ordning: 1
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+- id: berg-policy
+  vad: Anta drog- och alkoholpolicy (barn- och ungdomsverksamhet)
+  beskrivning: Föreningar med barn- och ungdomsverksamhet ska ha en antagen drog- och alkoholpolicy med åtgärdsplan och konsekvenshandling.
+    Policyn ska alltid finnas på årsmötets dagordning för antagande.
+  system: null
+  ledtid: null
+  ledtid_text: Antas på årsmötet
+  giltighet: Ska uppdateras årligen
+  ordning: 2
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
