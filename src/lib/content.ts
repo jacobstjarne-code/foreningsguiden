@@ -325,6 +325,12 @@ export const VAGLEDNING = {
     giltighetVarning: 'Och en fälla som kostar föreningar pengar varje år: godkännandet gäller inte för alltid. {giltighet}. Fick ni bidrag förra året betyder det inte att ni är godkända i år — statusen kan ha gått ut utan besked.',
     extraSteg: 'Ett steg till som är lätt att missa: {beskrivning}',
     inget: 'Vi har inte hittat några särskilda förkrav för {kommun}. Kontrollera ändå hos kommunen innan ni söker.',
+    // 1d (SPEC_HUVUDPROCESSEN §1d, Jacob 2026-08-02) — checklistaLabel
+    // ("DETTA SKA NI HA") visas bara när delaUppKravPunkter (kommunTyper.ts)
+    // faktiskt kunde dela upp beskrivningen i ≥2 punkter; annars renderas
+    // beskrivningen som prosa precis som i dag, ingen ny etikett syns.
+    checklistaLabel: 'Detta ska ni ha',
+    bilagorLabel: 'Vad kommunen vill se bifogat',
   },
 
   // Station 4 — Vad kan ni söka nu?

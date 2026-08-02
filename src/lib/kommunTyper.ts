@@ -142,6 +142,30 @@ export function hittaGiltighetsregel(forutsattningar: Forutsattning[]): string |
   return forutsattningar.find((f) => f.giltighet)?.giltighet ?? null;
 }
 
+/**
+ * 1d (SPEC_HUVUDPROCESSEN §1d, Jacob 2026-08-02): en förutsättnings
+ * beskrivning som bockningsbara punkter i stället för ett textblock.
+ * Delar ENDAST på meningsgräns (.!?) — ALDRIG på kommatecken. Ett
+ * tidigare test (förra sprinten) visade att kommatecken-splittring
+ * garblar texten för många kommuner, eftersom kommatecken i svensk
+ * löptext inte bara skiljer listelement (uppräkningar, bisatser,
+ * "X, Y och Z" blandat med annat). Meningsgränsen är den enda gränsen
+ * vi litar på utan att gissa struktur som inte står där.
+ *
+ * Ger EN punkt (hela texten oförändrad) när beskrivningen bara är en
+ * mening — det ÄR flaggan: anroparen ska då rendera prosa som i dag
+ * (samma utseende som innan denna funktion fanns), inte tvinga fram en
+ * checklista med ett enda kryss. Ingen separat "kuraterings"-lista
+ * behövs — fallback-läget är självsynligt (prosa i stället för
+ * kryssrutor) för den som tittar på sidan.
+ */
+export function delaUppKravPunkter(beskrivning: string): string[] {
+  return beskrivning
+    .split(/(?<=[.!?])\s+(?=\S)/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 /** Antal dagar sedan `verifierad`-datumet. */
 export function daysSinceVerified(verifierad: string): number {
   const ms = Date.now() - new Date(verifierad).getTime();

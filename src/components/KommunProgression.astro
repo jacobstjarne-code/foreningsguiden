@@ -10,10 +10,12 @@
 import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
-  earliestDeadlineISO, daysUntil, getUrgency,
+  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter,
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
+import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
+import { harvestBilagor } from '../lib/kopDokument';
 import UrgencyChip from './UrgencyChip.astro';
 import RegistreringsHjalp from './RegistreringsHjalp.astro';
 
@@ -71,6 +73,17 @@ function bidragForFilter(filter: string) {
 const forutsattningar = kommun.forutsattningar;
 const forsta = forutsattningar[0];
 const extra = forutsattningar.slice(1);
+
+// 1d (SPEC_HUVUDPROCESSEN §1d, Jacob 2026-08-02): bocka av-punkter i
+// stället för ett textblock, när beskrivningen faktiskt går att dela
+// mekaniskt (≥2 meningar). En enda mening → prosa som i dag, oförändrat
+// (se delaUppKravPunkter i kommunTyper.ts för varför kommatecken aldrig
+// används som gräns). Bilagorna härleds ur SAMMA motor som det köpta
+// utkastet (harvestBilagor/genereraRegistreringsUtkast) — bara det
+// kommunen faktiskt nämner i sin egen text, ingen påhittad standardlista.
+const forstaPunkter = forsta ? delaUppKravPunkter(forsta.beskrivning) : [];
+const forstaKanDelas = forstaPunkter.length >= 2;
+const bilagor = forutsattningar.length > 0 ? harvestBilagor(genereraRegistreringsUtkast(kommun)) : [];
 
 // FIX 2026-07-31 (Jacob, egen granskning): station 2 och station 5
 // renderade tidigare EN FULL KOPIA per filterValue (ett bidrag-oberoende
@@ -170,12 +183,36 @@ const station5Alla = station5PerFilter.alla;
             <div>
               <div class="progression__forutsattning-label">Förkrav</div>
               <div class="progression__forutsattning-titel">{forsta.vad}</div>
-              <div class="progression__forutsattning-text">
-                {forsta.beskrivning}{' '}
-                {forsta.ledtid !== null
-                  ? VAGLEDNING.station3.ledtidKand.replace('{ledtid}', String(forsta.ledtid))
-                  : VAGLEDNING.station3.ledtidOkand.replace(/{kommun}/g, kommun.kommun)}
-              </div>
+              {forstaKanDelas ? (
+                <>
+                  <div class="progression__checklista-label">
+                    {VAGLEDNING.station3.checklistaLabel}
+                    <span data-checklista-count>0 / {forstaPunkter.length}</span>
+                  </div>
+                  <ul class="progression__checklista" data-checklista>
+                    {forstaPunkter.map((punkt) => (
+                      <li>
+                        <label class="progression__checklista-item">
+                          <input type="checkbox" data-checklista-box />
+                          <span>{punkt}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                  <div class="progression__forutsattning-text">
+                    {forsta.ledtid !== null
+                      ? VAGLEDNING.station3.ledtidKand.replace('{ledtid}', String(forsta.ledtid))
+                      : VAGLEDNING.station3.ledtidOkand.replace(/{kommun}/g, kommun.kommun)}
+                  </div>
+                </>
+              ) : (
+                <div class="progression__forutsattning-text">
+                  {forsta.beskrivning}{' '}
+                  {forsta.ledtid !== null
+                    ? VAGLEDNING.station3.ledtidKand.replace('{ledtid}', String(forsta.ledtid))
+                    : VAGLEDNING.station3.ledtidOkand.replace(/{kommun}/g, kommun.kommun)}
+                </div>
+              )}
             </div>
           </div>
           {forsta.giltighet && (
@@ -213,6 +250,14 @@ const station5Alla = station5PerFilter.alla;
             </>
           ))}
         </div>
+        {bilagor.length > 0 && (
+          <details class="progression__bilagor">
+            <summary>{VAGLEDNING.station3.bilagorLabel}</summary>
+            <ul>
+              {bilagor.map((b) => <li>{b.etikett}</li>)}
+            </ul>
+          </details>
+        )}
         <RegistreringsHjalp kommunSlug={kommun.kommun_slug} />
       </>
     )}
@@ -367,4 +412,21 @@ const station5Alla = station5PerFilter.alla;
   });
 
   applyFilter('alla');
+
+  // 1d — checklistans räknare. Rent klientläge, ingen persistens (bocken
+  // markerar "jag har gjort det här nu", inte en profil att komma ihåg
+  // mellan besök — annat register än bevaka-knappens localStorage-minne).
+  document.querySelectorAll<HTMLElement>('[data-checklista]').forEach((lista) => {
+    const countEl = lista.previousElementSibling?.querySelector<HTMLElement>('[data-checklista-count]');
+    const boxes = lista.querySelectorAll<HTMLInputElement>('[data-checklista-box]');
+    const total = boxes.length;
+
+    function updateCount() {
+      if (!countEl) return;
+      const bockade = Array.from(boxes).filter((b) => b.checked).length;
+      countEl.textContent = `${bockade} / ${total}`;
+    }
+
+    boxes.forEach((box) => box.addEventListener('change', updateCount));
+  });
 </script>
