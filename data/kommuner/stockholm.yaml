@@ -1,97 +1,208 @@
-# Källa verifierad 2026-07-10 mot foreningsservice.stockholm och stadens
-# sidor. Stockholm har flera förvaltningar med separata bidragsspår —
-# idrottsförvaltningen (Idrottsportalen), kulturförvaltningen (kulturstod.
-# stockholm.se) och socialförvaltningen (OFU). Idrottsförvaltningen flyttar
-# under 2026 successivt stöd till e-tjänsten Idrottsportalen. Spot-check av
-# Jacob före deploy; detta är den mest sammansatta kommunen i urvalet.
-kommun: "Stockholm"
-kommun_slug: "stockholm"
-lan: "Stockholms län"
+kommun: Stockholm
+kommun_slug: stockholm
+lan: Stockholms län
 befolkning: 1000374
-forvaltning: "Idrottsförvaltningen, kulturförvaltningen och socialförvaltningen"
+forvaltning: Idrottsförvaltningen, kulturförvaltningen och socialförvaltningen
 ansokningssystem:
-  namn: "Idrottsportalen (idrott), kulturstod.stockholm.se (kultur), blankett (social)"
-  url: "https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/"
-kalla_url: "https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/"
+  namn: Idrottsportalen (idrott), kulturstod.stockholm.se (kultur), blankett (social)
+  url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
 verifierad: 2026-07-10
 bidrag:
-  - id: "stockholm-medlemsaktivitetsstod"
-    namn: "Medlemsaktivitetsstöd (idrottsförvaltningen)"
-    kategori: ["idrott", "funktionsratt"]
-    malgrupp: "Föreningar med ledarledd barn- och ungdomsverksamhet samt verksamhet för personer med funktionsnedsättning"
-    deadlines:
-      typ: "fasta"
-      datum: ["02-25"]
-    krav:
-      - "Aktivitetstillfälle minst 45 min (30 min för personer med funktionsnedsättning), minst tre medlemmar, ledarlett"
-      - "Ansökan och medlemsförteckning registrerade digitalt i Idrottsportalen, komplett med bilagor"
-      - "Medlemmar registrerade per 31 december föregående år"
-    belopp: null
-    sen_ansokan: "Om ansökan inte inkommit senast 25 februari reduceras stödbeloppet med 25 %"
-    kalla_url: "https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/stod-till-deltagaraktiviteter/medlemsaktivitetsstod/"
-    anteckning: "Baseras på aktiviteter 1 januari–31 december föregående år. Söks via Idrottsportalen (lanserad maj 2025)."
-  - id: "stockholm-nybildningsstod"
-    namn: "Nybildningsstöd (idrottsförvaltningen)"
-    kategori: ["idrott"]
-    malgrupp: "Nybildade idrottsföreningar med minst 20 medlemmar 7–20 år (minst 50 % folkbokförda i Stockholm); för funktionsnedsättning minst tio medlemmar från 7 år"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Ansökan senast ett år efter föreningens bildande"
-      - "Protokoll från konstituerande möte och besked om organisationsnummer bifogas"
-    belopp: "6 000 kronor för första verksamhetsåret"
-    sen_ansokan: "Ansökan senare än ett år efter bildandet tas ej upp"
-    kalla_url: "https://foreningsservice.stockholm/stod-till-foreningar-och-kulturaktorer/stod-vid-foreningsbildning/nybildningsstod/"
-    anteckning: null
-  - id: "stockholm-lokalhyressubvention"
-    namn: "Lokalhyressubvention / subventionerad taxa (idrottsförvaltningen)"
-    kategori: ["idrott", "kultur", "pensionar", "funktionsratt"]
-    malgrupp: "Föreningar inom idrott, kultur, nationella minoriteter, äldre m.fl. som bokar stadens lokaler och anläggningar"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Uppfylla idrottsförvaltningens kriterier; ladda upp årliga handlingar"
-      - "För kampsport/skytte/bassäng krävs godkänd riksorganisation eller specialdistriktsförbund"
-    belopp: null
-    sen_ansokan: "Ej tillämpligt (löpande)"
-    kalla_url: "https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/stod-for-lokaler/lokalhyressubvention-stadens-lokaler/"
-    anteckning: "Formellt namn: Subventionerad taxa och nolltaxa. Ej för kommersiell verksamhet, festverksamhet eller barn-/ungdomsverksamhet under skoltid."
-  - id: "stockholm-kulturstod"
-    namn: "Kulturstöd (kulturförvaltningen)"
-    kategori: ["kultur"]
-    malgrupp: "Kulturaktörer och föreningar som skapar kulturutbud i Stockholm"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Skapa sökandeprofil och logga in i stadens ansökningsportal för kulturstöd"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://kulturstod.stockholm.se/"
-    anteckning: "Separat spår från idrottsförvaltningen. Flera stödformer med olika ansökningsperioder — kompletteras vid spot-check."
-  - id: "stockholm-socialt-foreningsstod"
-    namn: "Föreningsstöd från socialförvaltningen"
-    kategori: ["social"]
-    malgrupp: "Ideella föreningar som kompletterar socialtjänsten och vänder sig till målgrupper inom socialtjänstens ansvarsområde, stadsövergripande"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Registrerad hos Skatteverket med organisationsnummer i minst två år"
-      - "Verksamhet riktad till personer med behov av stöd utifrån social situation eller varaktig funktionsnedsättning, samt anhöriga"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/socialstod/foreningsstod-fran-socialforvaltningen/"
-    anteckning: "Tidsbegränsat bidrag och verksamhetsbidrag. Organisations- och föreningsutskottet (OFU) sammanträder i juni och december; sista ansökningsdag publiceras på stadens hemsida inför respektive sammanträde."
+- id: stockholm-medlemsaktivitetsstod
+  namn: Medlemsaktivitetsstöd (idrottsförvaltningen)
+  kategori:
+  - idrott
+  - funktionsratt
+  malgrupp: Föreningar med ledarledd barn- och ungdomsverksamhet samt verksamhet för personer med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Aktivitetstillfälle minst 45 min (30 min för personer med funktionsnedsättning), minst tre medlemmar, ledarlett
+  - Ansökan och medlemsförteckning registrerade digitalt i Idrottsportalen, komplett med bilagor
+  - Medlemmar registrerade per 31 december föregående år
+  belopp: null
+  sen_ansokan: Om ansökan inte inkommit senast 25 februari reduceras stödbeloppet med 25 %
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/stod-till-deltagaraktiviteter/medlemsaktivitetsstod/
+  anteckning: Baseras på aktiviteter 1 januari–31 december föregående år. Söks via Idrottsportalen (lanserad maj 2025).
+- id: stockholm-nybildningsstod
+  namn: Nybildningsstöd (idrottsförvaltningen)
+  kategori:
+  - idrott
+  malgrupp: Nybildade idrottsföreningar med minst 20 medlemmar 7–20 år (minst 50 % folkbokförda i Stockholm); för funktionsnedsättning
+    minst tio medlemmar från 7 år
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Ansökan senast ett år efter föreningens bildande
+  - Protokoll från konstituerande möte och besked om organisationsnummer bifogas
+  belopp: 6 000 kronor för första verksamhetsåret
+  sen_ansokan: Ansökan senare än ett år efter bildandet tas ej upp
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-kulturaktorer/stod-vid-foreningsbildning/nybildningsstod/
+  anteckning: null
+- id: stockholm-lokalhyressubvention
+  namn: Lokalhyressubvention / subventionerad taxa (idrottsförvaltningen)
+  kategori:
+  - idrott
+  - kultur
+  - pensionar
+  - funktionsratt
+  malgrupp: Föreningar inom idrott, kultur, nationella minoriteter, äldre m.fl. som bokar stadens lokaler och anläggningar
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Uppfylla idrottsförvaltningens kriterier; ladda upp årliga handlingar
+  - För kampsport/skytte/bassäng krävs godkänd riksorganisation eller specialdistriktsförbund
+  belopp: null
+  sen_ansokan: Ej tillämpligt (löpande)
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/stod-for-lokaler/lokalhyressubvention-stadens-lokaler/
+  anteckning: 'Formellt namn: Subventionerad taxa och nolltaxa. Ej för kommersiell verksamhet, festverksamhet eller barn-/ungdomsverksamhet
+    under skoltid.'
+- id: stockholm-socialt-foreningsstod
+  namn: Föreningsstöd från socialförvaltningen
+  kategori:
+  - social
+  malgrupp: Ideella föreningar som kompletterar socialtjänsten och vänder sig till målgrupper inom socialtjänstens ansvarsområde,
+    stadsövergripande
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Registrerad hos Skatteverket med organisationsnummer i minst två år
+  - Verksamhet riktad till personer med behov av stöd utifrån social situation eller varaktig funktionsnedsättning, samt anhöriga
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/socialstod/foreningsstod-fran-socialforvaltningen/
+  anteckning: Tidsbegränsat bidrag och verksamhetsbidrag. Organisations- och föreningsutskottet (OFU) sammanträder i juni
+    och december; sista ansökningsdag publiceras på stadens hemsida inför respektive sammanträde.
+- id: stockholm-kultur-produktion
+  namn: Stöd till konstnärlig produktion och kulturarrangemang
+  kategori:
+  - kultur
+  malgrupp: Kulturaktörer och föreningar som producerar konst och offentliga kulturarrangemang
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-eget-skapande
+  namn: Stöd till eget skapande, deltagande och folkbildning
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Organisationer som skapar möjligheter till eget skapande, deltagande och folkbildning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-lokalforvaltande
+  namn: Stöd till lokalförvaltande organisationer
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Organisationer som driver samlingslokaler och kulturhus
+  deadlines:
+    typ: fasta
+    datum:
+    - 08-21
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/kulturstod/stod-till-lokalforvaltande-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-minoritetskultur
+  namn: Stöd till kulturprogram för finska, meänkieli och samiska språk och kultur
+  kategori:
+  - kultur
+  malgrupp: Föreningar och organisationer som genomför program för nationella minoritetsspråk och kultur
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-ungas-kulturprojekt
+  namn: Stöd till ungas egna kulturprojekt
+  kategori:
+  - kultur
+  malgrupp: Unga kulturutövare och grupper som genomför egna kulturprojekt
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-kulturetablering
+  namn: Stöd till kulturetablering och utveckling
+  kategori:
+  - kultur
+  malgrupp: Kulturaktörer och organisationer som etablerar eller utvecklar kulturverksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-kulturprogram-aldre
+  namn: Stöd till kulturprogram för äldre
+  kategori:
+  - kultur
+  - pensionar
+  malgrupp: Kulturaktörer och organisationer som genomför kulturprogram för äldre
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
+- id: stockholm-kulturprogram-forskola-skola
+  namn: Stöd till kulturprogram i förskola och skola
+  kategori:
+  - kultur
+  malgrupp: Kulturaktörer som erbjuder kulturprogram för barn och elever
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan enligt kulturförvaltningens generella och stödformsspecifika regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/
+  anteckning: Separat stödform enligt Stockholms stads samlade stödöversikt.
 forutsattningar:
-  - id: "stockholm-grundkriterier"
-    vad: "Uppfylla idrottsförvaltningens grundkriterier och registrera i Idrottsportalen"
-    beskrivning: "Föreningen ska uppfylla nämndens grundläggande kriterier och registrera medlemsförteckning digitalt i Idrottsportalen. Medlemmar räknas per 31 december föregående år."
-    system: "Idrottsportalen"
-    ledtid: null
-    ledtid_text: "Kommunen anger ingen handläggningstid"
-    giltighet: null
-    ordning: 1
-    kalla_url: "https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/stod-till-deltagaraktiviteter/medlemsaktivitetsstod/"
+- id: stockholm-grundkriterier
+  vad: Uppfylla idrottsförvaltningens grundkriterier och registrera i Idrottsportalen
+  beskrivning: Föreningen ska uppfylla nämndens grundläggande kriterier och registrera medlemsförteckning digitalt i Idrottsportalen.
+    Medlemmar räknas per 31 december föregående år.
+  system: Idrottsportalen
+  ledtid: null
+  ledtid_text: Kommunen anger ingen handläggningstid
+  giltighet: null
+  ordning: 1
+  kalla_url: https://foreningsservice.stockholm/stod-till-foreningar-och-organisationer/stod-till-deltagaraktiviteter/medlemsaktivitetsstod/
