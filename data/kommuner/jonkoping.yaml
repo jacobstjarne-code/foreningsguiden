@@ -1,48 +1,232 @@
-# Källa verifierad 2026-07-10 mot jonkoping.se. Kulturföreningsbidrag via
-# kultur- och fritidsförvaltningens (KFF) e-tjänstportal "Mina sidor".
-# Spot-check av Jacob före deploy.
-kommun: "Jönköping"
-kommun_slug: "jonkoping"
-lan: "Jönköpings län"
+kommun: Jönköping
+kommun_slug: jonkoping
+lan: Jönköpings län
 befolkning: 148304
-forvaltning: "Kultur- och fritidsförvaltningen (kultur- och fritidsnämnden, KFN/KFF)"
+forvaltning: Kultur- och fritidsförvaltningen (kultur- och fritidsnämnden, KFN/KFF)
 ansokningssystem:
-  namn: "KFF:s e-tjänstportal (Mina sidor)"
-  url: "https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod"
-kalla_url: "https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-kulturforeningar"
-verifierad: 2026-07-10
+  namn: KFF:s e-tjänstportal (Mina sidor)
+  url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod
+kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund
+verifierad: '2026-08-02'
 bidrag:
-  - id: "jonkoping-arrangemangsbidrag-kultur"
-    namn: "Arrangemangsbidrag för kulturföreningar"
-    kategori: ["kultur"]
-    malgrupp: "Bidragsberättigade ideella kulturföreningar (dans, musik, teater, scenkonst, film, foto, konst, litteratur, arkiv, museum, hembygd) med säte i Jönköpings kommun"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Föreningen ska vara bidragsberättigad kulturförening med säte i kommunen"
-      - "Arrangemanget ska ha publikt allmänintresse och äga rum i Jönköpings kommun"
-      - "Arrangemanget läggs in i kommunens evenemangskalender"
-    belopp: null
-    sen_ansokan: "Ansökan görs 2 månader innan arrangemanget (3 månader innan för arrangemang i juli–september)"
-    kalla_url: "https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-kulturforeningar"
-    anteckning: "Redovisning via Mina sidor senast två månader efter genomfört arrangemang, med könsuppdelad statistik. Trädgårds-, natur- och intresseföreningar omfattas ej."
+- id: jonkoping-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  kategori:
+  - idrott
+  - pensionar
+  - funktionsratt
+  malgrupp: Fritidsföreningar med verksamhet för barn och unga, funktionsrättsföreningar samt pensionärsföreningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: Fast och rörlig del utifrån godkända sammankomster och deltagartillfällen.
+- id: jonkoping-social-verksamhet
+  namn: Bidrag till föreningar med social verksamhet
+  kategori:
+  - social
+  malgrupp: Allmännyttiga ideella föreningar vars verksamhet stödjer människor i utsatthet
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-foreningsallians
+  namn: Bidrag till föreningsallians
+  kategori:
+  - ovrig
+  malgrupp: Föreningsallianser som företräder anslutna föreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-extern-kompetensutveckling
+  namn: Bidrag till extern kompetensutveckling
+  kategori:
+  - ovrig
+  malgrupp: Bidragsberättigade föreningar som fått aktivitetsbidrag
+  deadlines:
+    typ: lopande
+    datum: []
+  krav: []
+  belopp: Upp till 20 000 kr per år; normalt 50 % av utbildningskostnaden
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: Redovisning görs löpande; sista redovisningsdag 10 december.
+- id: jonkoping-kompetensutveckling-egen-regi
+  namn: Bidrag till kompetensutveckling i egen regi
+  kategori:
+  - ovrig
+  malgrupp: Bidragsberättigade föreningar som fått aktivitetsbidrag
+  deadlines:
+    typ: lopande
+    datum: []
+  krav: []
+  belopp: Upp till 20 000 kr per år inom gemensam budgetram
+  sen_ansokan: Ansökan senast en månad före genomförandet
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-koloniverksamhet
+  namn: Bidrag till koloniverksamhet
+  kategori:
+  - social
+  - ovrig
+  malgrupp: Föreningar som ordnar koloniverksamhet för barn 7–16 år
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav: []
+  belopp: 400 kr per godkänd deltagare och natt, högst 100 000 kr per år
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-koloniverksamhet-pensionarer
+  namn: Bidrag till koloniverksamhet för pensionärer
+  kategori:
+  - pensionar
+  - social
+  malgrupp: Föreningar och organisationer som ordnar verksamhet för pensionärer
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-31
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-driftbidrag-lokal-anlaggning
+  namn: Driftbidrag, lokal och anläggning
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar som äger eller hyr lokal eller anläggning som bedöms viktig
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-ide-jkpg
+  namn: IdéJkpg – bidrag till ungdomsinitiativ
+  kategori:
+  - kultur
+  - idrott
+  - ovrig
+  malgrupp: Unga 13–25 år och ungdomsföreningar som genomför egna initiativ
+  deadlines:
+    typ: lopande
+    datum: []
+  krav: []
+  belopp: Generell riktgräns 30 000 kr
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: null
+- id: jonkoping-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Bidragsberättigade föreningar för investeringar kopplade till verksamheten
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+  anteckning: Olika ansökningsperioder och nivåer gäller beroende på investeringens storlek och föreningskategori.
+- id: jonkoping-arrangemangsbidrag-kultur
+  namn: Arrangemangsbidrag för kulturföreningar
+  kategori:
+  - kultur
+  malgrupp: Bidragsberättigade ideella kulturföreningar
+  deadlines:
+    typ: lopande
+    datum: []
+  krav: []
+  belopp: 2 000–40 000 kr per arrangemang
+  sen_ansokan: Ansökan 2 månader före arrangemanget, 3 månader före arrangemang i juli–september
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-kulturforeningar
+  anteckning: null
+- id: jonkoping-projektbidrag-kultur
+  namn: Projektbidrag för kulturföreningar
+  kategori:
+  - kultur
+  malgrupp: Bidragsberättigade kulturföreningar som genomför avgränsade utvecklingsprojekt
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-01
+    - 10-01
+  krav: []
+  belopp: 20 000–100 000 kr per projekt
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-kulturforeningar
+  anteckning: 1 april för projekt som börjar juli–december; 1 oktober för projekt som börjar januari–juni.
+- id: jonkoping-driftbidrag-kultur
+  namn: Driftbidrag för kulturföreningars lokal och anläggning
+  kategori:
+  - kultur
+  malgrupp: Bidragsberättigade kulturföreningar som äger eller hyr lokal eller anläggning
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-01
+  krav: []
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-kulturforeningar
+  anteckning: null
+- id: jonkoping-langsiktigt-verksamhetsbidrag-kultur
+  namn: Långsiktigt verksamhetsbidrag för kulturföreningar
+  kategori:
+  - kultur
+  malgrupp: Väl etablerade kulturföreningar med omfattande publik verksamhet och extern finansiering
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: Minst 75 000 kr per år, normalt över tre år
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-kulturforeningar
+  anteckning: null
 forutsattningar:
-  - id: "jonkoping-kontakta-foreningsutvecklare"
-    vad: "Kontakta kommunens föreningsutvecklare för att få inloggning"
-    beskrivning: "Innan ansökan kan göras måste föreningen kontakta KFF:s föreningsutvecklare och meddela föreningens namn, organisationsnummer, kontaktperson med personnummer, e-post och mobilnummer. Först därefter skapas en inloggning till e-tjänstportalen."
-    system: "KFF:s e-tjänstportal (Mina sidor)"
-    ledtid: null
-    ledtid_text: "Manuellt steg — kräver kontakt med handläggare, går inte att göra på egen hand"
-    giltighet: null
-    ordning: 1
-    kalla_url: "https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar"
-  - id: "jonkoping-bidragsberattigad"
-    vad: "Ansök om att bli bidragsberättigad förening"
-    beskrivning: "När inloggningen skapats kan föreningen fylla i ansökan om att bli bidragsberättigad i e-tjänstportalen. Föreningen ska godkännas av kultur- och fritidsnämnden."
-    system: "KFF:s e-tjänstportal (Mina sidor)"
-    ledtid: null
-    ledtid_text: "Kommunen anger ingen handläggningstid"
-    giltighet: null
-    ordning: 2
-    kalla_url: "https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar"
+- id: jonkoping-kontakta-foreningsutvecklare
+  vad: Kontakta kommunens föreningsutvecklare för att få inloggning
+  beskrivning: Innan ansökan kan göras måste föreningen kontakta KFF:s föreningsutvecklare och meddela föreningens namn, organisationsnummer,
+    kontaktperson med personnummer, e-post och mobilnummer. Först därefter skapas en inloggning till e-tjänstportalen.
+  system: KFF:s e-tjänstportal (Mina sidor)
+  ledtid: null
+  ledtid_text: Manuellt steg — kräver kontakt med handläggare, går inte att göra på egen hand
+  giltighet: null
+  ordning: 1
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
+- id: jonkoping-bidragsberattigad
+  vad: Ansök om att bli bidragsberättigad förening
+  beskrivning: När inloggningen skapats kan föreningen fylla i ansökan om att bli bidragsberättigad i e-tjänstportalen. Föreningen
+    ska godkännas av kultur- och fritidsnämnden.
+  system: KFF:s e-tjänstportal (Mina sidor)
+  ledtid: null
+  ledtid_text: Kommunen anger ingen handläggningstid
+  giltighet: null
+  ordning: 2
+  kalla_url: https://www.jonkoping.se/fritid-kultur--natur/forening-och-foreningsstod/bidrag-till-foreningar-och-studieforbund/bidrag-och-regler-for-fritidsforeningar
