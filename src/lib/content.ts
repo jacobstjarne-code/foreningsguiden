@@ -592,6 +592,35 @@ export const PRIS = {
 };
 
 /**
+ * 1e — köpytan (SPEC_HUVUDPROCESSEN §1e, MOCKAR_huvudprocessen.md,
+ * Opus/Fable 2026-08-01). "Sex hål på en yta, och den enda där pengar
+ * byter händer." Verbatim ur mocken — {kommun}/{antal} fylls av
+ * anroparen (samma mönster som KOPRUTA).
+ */
+export const KOPYTAN_1E = {
+  eyebrow: 'REGISTRERINGSANSÖKAN · {kommun}',
+  rubrik: 'Det här får ni',
+  // Sista punkten är G23 — löftet som tar bort oron för en tappad flik.
+  // FIX 2026-08-02 (Code): mockens exempel ("Gislaveds fem krav") räknar
+  // 1d:s framtida bockningsbara punkter, som ännu inte finns (1d
+  // blockerad, se golden-set-fyndet i förra sprinten) — {antal} utelämnat
+  // tills det talet går att räkna fram korrekt, se registrera/index.astro.
+  vadHonFar: [
+    'Ett ifyllt ansökningsunderlag mot {kommun}s krav, som Word-fil och PDF.',
+    'Ett kopieringsfält per avsnitt för kommunens e-tjänst.',
+    'Bilagelistan med vad som ska med, och var det ska laddas upp.',
+    'Mejl med varaktig länk. Dokumentet ligger kvar i föreningens profil.',
+  ],
+  prisspecRad: 'Registreringsansökan',
+  momsRad: 'Moms 25 %',
+  attBetalaRad: 'Att betala',
+  kvittoRad: 'Kvitto med org.nr och momsspecifikation mejlas direkt — bokföringsbart som det är.',
+  swishKnapp: 'Betala med Swish',
+  kortKnapp: 'Betala med kort',
+  swishInfo: 'I Swish-appen står Föreningsguiden som mottagare.',
+};
+
+/**
  * KÖPRUTAN — Fable 2026-07-31. Ersätter {{FABLE:}}-platshållarna på
  * utkastvyn (kommun/[slug]/utkast/[bidragId]/) och köprutan på
  * /kommun/[slug]/registrera/. {kommun}/{bidrag}/{antal}/{pris} fylls av

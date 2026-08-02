@@ -52,6 +52,12 @@ export const POST: APIRoute = async ({ request }) => {
   const form = await request.formData();
   const kommunSlug = String(form.get('kommun') ?? '').trim();
   const profilRaw = form.get('profil');
+  // 1e (SPEC_HUVUDPROCESSEN §1e, Opus/Fable 2026-08-01): "Två betalknappar:
+  // Swish primärt, kort sekundärt" — låser Stripes hostade kassa till
+  // ETT betalsätt utifrån vilken knapp hon klickade, i stället för att
+  // alltid visa båda och låta henne välja på Stripes sida. Okänt/saknat
+  // värde faller på swish (samma default som knapparnas egen ordning).
+  const metod = String(form.get('metod') ?? 'swish').trim() === 'kort' ? 'kort' : 'swish';
 
   const kommun = getKommunBySlug(kommunSlug);
   if (!kommun || kommun.forutsattningar.length === 0) {
@@ -112,13 +118,16 @@ export const POST: APIRoute = async ({ request }) => {
 
   let session: Stripe.Checkout.Session;
   try {
-    session = await stripe.checkout.sessions.create({ ...sessionParams, payment_method_types: ['card', 'swish'] });
+    session = await stripe.checkout.sessions.create({ ...sessionParams, payment_method_types: metod === 'kort' ? ['card'] : ['swish'] });
   } catch (err) {
     // Swish måste aktiveras i Stripe-dashboarden (Settings → Payment
     // methods) innan Stripe accepterar den som payment_method_type —
-    // ett engångs kontoinställningssteg, oberoende av kod. Faller
-    // tillbaka till kort ensamt så knappen aldrig 500:ar för en riktig
-    // besökare bara för att den inställningen inte är gjord än.
+    // ett engångs kontoinställningssteg, oberoende av kod. Om HON valde
+    // Swish men kontot inte har det aktiverat: faller tillbaka till
+    // kort ensamt så knappen aldrig 500:ar för en riktig besökare bara
+    // för att den inställningen inte är gjord än (samma resonemang som
+    // innan — bara skrivet om för att gälla båda knapparna, inte bara
+    // en implicit "båda samtidigt"-session).
     if (err instanceof Stripe.errors.StripeInvalidRequestError && err.param === 'payment_method_types') {
       session = await stripe.checkout.sessions.create({ ...sessionParams, payment_method_types: ['card'] });
     } else {

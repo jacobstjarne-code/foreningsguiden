@@ -15,9 +15,9 @@ import Base from '../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
 import { loadKommuner } from '../../../../lib/kommuner';
 import type { Kommun } from '../../../../lib/kommuner';
-import { VAGLEDNING, BEVAKNING, KVITTOSIDA, ATERBETALNING, KOPRUTA } from '../../../../lib/content';
+import { VAGLEDNING, BEVAKNING, KVITTOSIDA, ATERBETALNING, KOPYTAN_1E } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
-import { PRIS_REGISTRERINGSUTKAST_ORE } from '../../../../lib/priser';
+import { PRIS_REGISTRERINGSUTKAST_ORE, momsAndelOre } from '../../../../lib/priser';
 import { genereraRegistreringsUtkast } from '../../../../lib/utkastGenerator';
 import { harvestBilagor } from '../../../../lib/kopDokument';
 
@@ -49,13 +49,23 @@ const delaFraga = KVITTOSIDA.delaFraga.replace(/{kommun}/g, kommun.kommun);
 // KÖPRUTAN (Fable, 2026-07-31): {bidrag} blir "registrering" här — den
 // här produkten är kommun-scopad, inte ett enskilt bidrag.
 //
-// FIX 2026-07-31 (Jacob): den generiska luckorRad ("X rader behöver ni
-// fylla i själva") passar inte den här produkten — registreringschecklistan
-// har inget ifyllt/lucka-koncept, ALLA rader är sådant föreningen själv
-// ska styrka. Ersatt med KOPRUTA.kravlistaRegistrering (egen text för
-// den här produkten, se content.ts).
-const fyllKopruta = (text: string) =>
-  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', 'registrering').replace('{pris}', String(prisKr));
+// 1e (SPEC_HUVUDPROCESSEN §1e, 2026-08-01): prisspecifikationen skriven
+// ut i klartext (netto/moms/totalt) i stället för "249 kr inkl moms" —
+// en kassör bokför nettot och momsen separat, hon ska inte behöva
+// räkna. momsAndelOre() finns redan (priser.ts, H10) — samma tal som
+// Stripe-fakturans egen momsspecifikation (checkout/registrering.ts),
+// en källa.
+const momsOre = momsAndelOre(PRIS_REGISTRERINGSUTKAST_ORE);
+const nettoKr = ((PRIS_REGISTRERINGSUTKAST_ORE - momsOre) / 100).toFixed(2).replace('.', ',');
+const momsKr = (momsOre / 100).toFixed(2).replace('.', ',');
+// {antal} FRÅN MOCKEN UTELÄMNAT MEDVETET: mockens exempel ("Gislaveds
+// fem krav") räknar 1d:s framtida bockningsbara punkter — som ännu
+// inte finns (1d är blockerad, se B1/kommatecken-fyndet i förra
+// sprinten). forutsattningar.length hade gett fel tal (räknar
+// FÖRUTSÄTTNINGS-OBJEKT, inte individuella krav inom dem — 1 för
+// Gislaved, inte 5). Bättre att inte påstå ett tal än att påstå fel
+// tal — samma "gissa aldrig"-disciplin som resten av projektet.
+const fyllKopytan = (text: string) => text.replace(/{kommun}/g, kommun.kommun);
 ---
 <Base
   title={`${titel} — Föreningsguiden`}
@@ -121,31 +131,51 @@ const fyllKopruta = (text: string) =>
       <div class="registrera-doc__hjalp">
         <p class="registrera-doc__hjalp-text">{TRATT.besked.borjaHar.hjalpText}</p>
 
-        {/* KÖPRUTAN (Fable, 2026-07-31) — ersätter den tidigare {{FABLE:}}-
-           platshållaren. KOPRUTA.aterbetalning renderas INTE här — samma
-           löfte täcks redan fullt ut av ATERBETALNING nedan (H13), och två
-           återbetalningsrader på samma sida hade läst som ett dubbleringsfel. */}
-        <h2 class="registrera-doc__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
-        <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
-        <p>{fyllKopruta(KOPRUTA.kravlistaRegistrering)}</p>
-        <p>{KOPRUTA.leverans}</p>
+        {/* 1e — köpytan (SPEC_HUVUDPROCESSEN §1e, 2026-08-01). Ersätter
+           den tidigare KÖPRUTAN (Fable, 2026-07-31) med mockens fyra
+           punkter + utskriven prisspecifikation + två betalknappar.
+           ATERBETALNING (H13) står kvar oförändrad — samma "en garanti,
+           inte två" som tidigare, den ersätter fortfarande KOPRUTA.aterbetalning. */}
+        <p class="registrera-doc__eyebrow">{fyllKopytan(KOPYTAN_1E.eyebrow)}</p>
+        <h2 class="registrera-doc__kopruta-rubrik">{KOPYTAN_1E.rubrik}</h2>
+        <ul class="registrera-doc__vad-hon-far">
+          {KOPYTAN_1E.vadHonFar.map((punkt) => (
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+              <span>{fyllKopytan(punkt)}</span>
+            </li>
+          ))}
+        </ul>
 
-        <p class="registrera-doc__pris">{prisKr} kr</p>
-        {/* H12 (SPEC: Det som återstår, 2026-07-28): sista förtroende-
-           prövningen före betalning — förbereder henne för vad Swish-
-           appen faktiskt visar. Motpartsnamnet "Föreningsguiden" sätts
-           i Stripe-kontots inställningar (Jacobs jobb, ingen kod) — den
-           här raden förutsätter att det är gjort. */}
-        <p class="registrera-doc__swish-info">I Swish-appen ser ni "Föreningsguiden" som mottagare.</p>
-        <p class="registrera-doc__swish-info">{fyllKopruta(KOPRUTA.prisOchKvitto)}</p>
+        {/* H3 (GRANSKNING_foreningsguiden.md): priset ska synas INNAN
+           betalknappen. Nu utskrivet netto/moms/totalt (1e) i stället för
+           "249 kr inkl moms" — en kassör bokför nettot och momsen
+           separat, hon ska inte behöva räkna. */}
+        <div class="registrera-doc__prisspec">
+          <p><span>{KOPYTAN_1E.prisspecRad}</span><span>{nettoKr} kr</span></p>
+          <p class="registrera-doc__prisspec-moms"><span>{KOPYTAN_1E.momsRad}</span><span>{momsKr} kr</span></p>
+          <p class="registrera-doc__prisspec-total"><span>{KOPYTAN_1E.attBetalaRad}</span><span>{prisKr} kr</span></p>
+          <p class="registrera-doc__prisspec-kvitto">{KOPYTAN_1E.kvittoRad}</p>
+        </div>
+
+        {/* H12 (SPEC: Det som återstår, 2026-07-28) + 1e: två betalknappar,
+           Swish primärt/kort sekundärt — checkout/registrering.ts läser
+           data-metod och låser Stripes hostade kassa till ETT betalsätt
+           i stället för att alltid visa båda. Motpartsnamnet
+           "Föreningsguiden" sätts i Stripe-kontots inställningar (Jacobs
+           jobb, ingen kod) — swish-info-raden förutsätter att det är gjort. */}
+        <button type="button" class="btn-primary registrera-doc__betala" data-registrera-betala data-metod="swish">{KOPYTAN_1E.swishKnapp}</button>
+        <button type="button" class="fg-btn--ghost registrera-doc__betala" data-registrera-betala data-metod="kort">{KOPYTAN_1E.kortKnapp}</button>
+        <p class="registrera-doc__swish-info">{KOPYTAN_1E.swishInfo}</p>
+
         {/* H13 (SPEC: Det som återstår, 2026-07-30): återbetalningsgarantin
            intill priset — starkast där betalbeslutet fattas (Jacobs
-           instruktion), inte bara begravd på integritetspolicyn. */}
+           instruktion), inte bara begravd på integritetspolicyn. Så länge
+           "beta" står i loggan är den inte valfri (1e). */}
         <div class="registrera-doc__aterbetalning">
           <p class="registrera-doc__aterbetalning-rubrik">{ATERBETALNING.rubrik}</p>
           {ATERBETALNING.stycken.map((stycke) => <p>{stycke}</p>)}
         </div>
-        <button type="button" class="btn-primary" data-registrera-betala>{TRATT.besked.borjaHar.hjalpKnapp}</button>
         {/* H8 (GRANSKNING_foreningsguiden.md): produkten levereras nu
            automatiskt (mejl direkt vid betalning) — inte "vi hör av oss"
            som den gamla, manuella Registreringshjälpen. Minimal, funktionell
@@ -195,7 +225,8 @@ const fyllKopruta = (text: string) =>
   import { KVITTOSIDA } from '../../../../lib/content';
   import { initBevakaWidgets } from '../../../../lib/bevakaKlient';
 
-  const knapp = document.querySelector<HTMLButtonElement>('[data-registrera-betala]');
+  // 1e — två knappar (Swish/kort) delar samma klickflöde, se nedan.
+  const knappar = document.querySelectorAll<HTMLButtonElement>('[data-registrera-betala]');
   const kvitto = document.querySelector<HTMLElement>('[data-registrera-kvitto]');
   const felText = document.querySelector<HTMLElement>('[data-registrera-fel]');
   const kommunSlug = window.location.pathname.split('/').filter(Boolean)[1] ?? '';
@@ -282,30 +313,33 @@ const fyllKopruta = (text: string) =>
   // samma data-registrera-kvitto-element som redan fanns för den gamla
   // e-postfångsten återanvänds för betalkvittot.
   if (new URLSearchParams(window.location.search).get('betald') === '1') {
-    knapp?.setAttribute('hidden', '');
+    knappar.forEach((k) => k.setAttribute('hidden', ''));
     kvitto?.removeAttribute('hidden');
     visaMedanNiArHar();
   }
 
-  knapp?.addEventListener('click', async () => {
-    felText?.setAttribute('hidden', '');
-    knapp.disabled = true;
+  knappar.forEach((knapp) => {
+    knapp.addEventListener('click', async () => {
+      felText?.setAttribute('hidden', '');
+      knappar.forEach((k) => (k.disabled = true));
 
-    const data = new FormData();
-    data.set('kommun', kommunSlug);
+      const data = new FormData();
+      data.set('kommun', kommunSlug);
+      data.set('metod', knapp.dataset.metod ?? 'swish');
 
-    const profil = getForeningsprofil();
-    if (profil) data.set('profil', JSON.stringify(profil));
+      const profil = getForeningsprofil();
+      if (profil) data.set('profil', JSON.stringify(profil));
 
-    try {
-      const res = await fetch('/api/checkout/registrering', { method: 'POST', body: data });
-      const json = await res.json();
-      if (!res.ok || !json.ok || !json.url) throw new Error('svar ej ok');
-      window.location.href = json.url;
-    } catch {
-      felText?.removeAttribute('hidden');
-      knapp.disabled = false;
-    }
+      try {
+        const res = await fetch('/api/checkout/registrering', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok || !json.url) throw new Error('svar ej ok');
+        window.location.href = json.url;
+      } catch {
+        felText?.removeAttribute('hidden');
+        knappar.forEach((k) => (k.disabled = false));
+      }
+    });
   });
 </script>
 
@@ -407,22 +441,103 @@ const fyllKopruta = (text: string) =>
     margin-top: var(--fg-space-7);
   }
 
-  .registrera-doc__kopruta-rubrik {
-    font-size: var(--fg-text-h2);
+  .registrera-doc__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: var(--fg-tracking-label);
+    color: var(--fg-ink-muted);
     margin: 0 0 var(--fg-space-2);
   }
 
-  .registrera-doc__pris {
-    font-family: var(--fg-font-display);
-    font-weight: var(--fg-weight-bold);
+  .registrera-doc__kopruta-rubrik {
     font-size: var(--fg-text-h2);
-    margin-top: var(--fg-space-4);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  /* 1e — "Vad hon får", fyra punkter med grön bock i --fg-accent-soft-cirkel. */
+  .registrera-doc__vad-hon-far {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--fg-space-6);
+    display: grid;
+    gap: var(--fg-space-3);
+  }
+
+  .registrera-doc__vad-hon-far li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fg-space-3);
+  }
+
+  .registrera-doc__vad-hon-far svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    padding: 3px;
+    border-radius: 50%;
+    background: var(--fg-accent-soft);
+    color: var(--fg-accent);
+    box-sizing: content-box;
+  }
+
+  /* 1e — prisspecifikationen: netto/moms utskrivet, totalt framhävt. */
+  .registrera-doc__prisspec {
+    border-top: var(--fg-border-inner) solid var(--fg-border);
+    padding-top: var(--fg-space-4);
+    margin-bottom: var(--fg-space-5);
+  }
+
+  .registrera-doc__prisspec p {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--fg-space-4);
+    font-family: var(--fg-font-sans);
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .registrera-doc__prisspec p span:last-child {
+    font-family: var(--fg-font-mono);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .registrera-doc__prisspec-moms {
+    color: var(--fg-ink-muted);
+  }
+
+  .registrera-doc__prisspec-total {
+    border-top: var(--fg-border-structural) solid var(--fg-border);
+    padding-top: var(--fg-space-3);
+    font-size: var(--fg-text-h2);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .registrera-doc__prisspec-kvitto {
+    display: block;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: 0;
+  }
+
+  .registrera-doc__betala {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 56px;
+  }
+
+  .registrera-doc__betala + .registrera-doc__betala {
+    margin-top: var(--fg-space-3);
   }
 
   .registrera-doc__swish-info {
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
-    margin-top: var(--fg-space-2);
+    margin-top: var(--fg-space-3);
+    text-align: center;
   }
 
   .registrera-doc__aterbetalning {
@@ -437,10 +552,6 @@ const fyllKopruta = (text: string) =>
     font-weight: var(--fg-weight-bold);
     color: var(--fg-ink);
     margin-bottom: 4px;
-  }
-
-  .registrera-doc__hjalp [data-registrera-betala] {
-    margin-top: var(--fg-space-3);
   }
 
   .registrera-doc__ansvar {
