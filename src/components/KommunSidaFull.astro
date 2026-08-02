@@ -22,8 +22,7 @@ import {
   KATEGORI_LABELS, KATEGORIER,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
-import { KOMMUN, KOMMUNSIFFRA } from '../lib/content';
-import { TRATT } from '../../GUIDE_TRATT_COPY';
+import { KOMMUN, KOMMUNSIFFRA, EKERN } from '../lib/content';
 
 export interface Props {
   kommun: Kommun;
@@ -167,20 +166,45 @@ const webPageJsonLd = {
     </p>
   )}
 
-  {svarForst && <p class="svar-forst">{svarForst}</p>}
-
   <p>{intro}</p>
 
-  {/* Länk till tratten (Jacob, 2026-07-31: "länka till /matcha/ från
-     kommunsidorna") — kommun-sidan visar ALLA bidrag anonymt, tratten
-     visar vilka SOM PASSAR just den här föreningen. kommunSlug förifylld
-     via ?fortsatt= (samma mönster som H5:s återupptagning) så besökaren
-     inte behöver välja kommun igen. */}
-  <p class="kommun-till-tratt">
-    <a href={`/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug: kommun.kommun_slug }))}`} class="btn-primary">
-      {TRATT.start.startknapp} →
-    </a>
-  </p>
+  {/* 1a — SPEC_HUVUDPROCESSEN (Opus/Fable 2026-08-01), MOCKAR_huvudprocessen.md
+     §1a: "kommunsidans ekern in i tratten". Ersätter den tidigare enkla
+     kommun-till-tratt-länken (2026-07-31) med det fulla trebandskortet.
+     Band 1 äger nu svar-först-texten (flyttad hit ur den gamla fristående
+     <p class="svar-forst">, inte duplicerad) + ett eget färskhetsdatum
+     (G2 — samma kommun.verifierad som VerificationRow ovan, en källa).
+     Band 2 är trattinbjudan, band 3 sekundära vägar (in-page-ankare till
+     #alla-bidrag / #sista-ansokningsdatum, tillagda på respektive
+     sektion). Datarättelserna G10/G11 (förkravet är inte ett andra
+     bidrag) kräver ingen ny kod här — svarForstEtt-mallen och den
+     tidigare Gislaved-datastädningen (2026-07-31) redan strukturellt
+     korrekta: bara kommun.bidrag[] (aldrig forutsattningar[]) räknas. */}
+  {svarForst && (
+    <div class="ekern">
+      <div class="ekern__band ekern__band--1">
+        <p class="ekern__svar-forst">{svarForst}</p>
+        <p class="ekern__verifierad">
+          <span class="ekern__verifierad-dot" aria-hidden="true"></span>
+          {EKERN.verifieradPrefix} {formatDate(kommun.verifierad).toUpperCase()}
+        </p>
+      </div>
+      <div class="ekern__band ekern__band--2">
+        <p class="ekern__eyebrow">{EKERN.band2Eyebrow}</p>
+        <p class="ekern__band2-rubrik">{EKERN.band2Rubrik}</p>
+        <p class="ekern__band2-text">{EKERN.band2Text}</p>
+        <a href={`/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug: kommun.kommun_slug }))}`} class="btn-primary ekern__cta">
+          {EKERN.band2Cta} →
+        </a>
+        <p class="ekern__cta-underrad">{EKERN.band2CtaUnderrad}</p>
+      </div>
+      <div class="ekern__band ekern__band--3">
+        <p class="ekern__eyebrow">{EKERN.band3Eyebrow}</p>
+        <a href="#alla-bidrag" class="ekern__sekundar-lank">{EKERN.band3Lank1.replace('{kommun}', kommun.kommun)} ↓</a>
+        <a href="#sista-ansokningsdatum" class="ekern__sekundar-lank">{EKERN.band3Lank2} ↓</a>
+      </div>
+    </div>
+  )}
 
   {kommun.bidrag.length === 0 ? (
     <p>{KOMMUN.ingaBidrag}</p>
@@ -200,7 +224,7 @@ const webPageJsonLd = {
   </section>
 
   {kommun.bidrag.length > 0 && (
-    <section>
+    <section id="alla-bidrag">
       <h2>Alla bidrag i {kommun.kommun}, i detalj</h2>
       {visaTackningsvarning && <TackningsVarning kommun={kommun.kommun} />}
       <ul class="bidrag-list">
@@ -248,7 +272,100 @@ const webPageJsonLd = {
 </script>
 
 <style>
-  .kommun-till-tratt {
-    margin: var(--fg-space-5) 0 var(--fg-space-7);
+  /* 1a — ekern (MOCKAR_huvudprocessen.md §1a). Exakta mått ur mocken,
+     inte avrundade mot närmaste befintliga token där de skiljer sig
+     (17px/19px/15px/11px har inga exakta motsvarigheter i skalan). */
+  .ekern {
+    background: var(--fg-surface);
+    border: var(--fg-border-structural) solid var(--fg-ink);
+    border-radius: 10px;
+    margin: var(--fg-space-6) 0 var(--fg-space-7);
+    overflow: hidden;
+  }
+
+  .ekern__band {
+    padding: var(--fg-card-padding);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .ekern__band--1 {
+    border-top: none;
+  }
+
+  .ekern__band--2 {
+    background: var(--fg-surface-sunken);
+  }
+
+  .ekern__svar-forst {
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0 0 var(--fg-space-4);
+  }
+
+  .ekern__verifierad {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-2);
+    font-family: var(--fg-font-mono);
+    font-size: 12px;
+    letter-spacing: var(--fg-tracking-label);
+    color: var(--fg-ink-muted);
+    margin: 0;
+  }
+
+  .ekern__verifierad-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fg-accent);
+    flex-shrink: 0;
+  }
+
+  .ekern__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: var(--fg-tracking-label);
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .ekern__band2-rubrik {
+    font-size: 19px;
+    font-weight: var(--fg-weight-bold);
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .ekern__band2-text {
+    font-size: 15px;
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-5);
+  }
+
+  .ekern__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    font-size: var(--fg-text-body-lg);
+  }
+
+  .ekern__cta-underrad {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    text-align: center;
+    margin: var(--fg-space-3) 0 0;
+  }
+
+  .ekern__band--3 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-3);
+  }
+
+  .ekern__sekundar-lank {
+    font-size: var(--fg-text-body);
+    color: var(--fg-accent);
+    font-weight: var(--fg-weight-bold);
   }
 </style>

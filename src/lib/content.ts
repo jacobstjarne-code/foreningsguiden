@@ -683,6 +683,24 @@ export const KOMMUNSIFFRA = {
 };
 
 /**
+ * EKERN — 1a i SPEC_HUVUDPROCESSEN (Opus/Fable 2026-08-01),
+ * MOCKAR_huvudprocessen.md §1a. Trebandskortet på varje kommunsida,
+ * efter svar-först, före stationerna — kommunsidans ekorre in i tratten.
+ * Verbatim ur mocken, ingen egen text.
+ */
+export const EKERN = {
+  verifieradPrefix: 'SENAST VERIFIERAD',
+  band2Eyebrow: 'GÄLLER DET HÄR ER?',
+  band2Rubrik: 'Fyra frågor, och ni ser vad just er förening kan söka',
+  band2Text: 'Kraven skiljer sig mellan bidrag. Svaren sparas, så nästa gång ser ni bara det som är nytt.',
+  band2Cta: 'Se vad ni kan söka',
+  band2CtaUnderrad: 'Gratis. Inget konto, ingen mejladress.',
+  band3Eyebrow: 'ELLER LÄS ALLT SJÄLV',
+  band3Lank1: 'Alla bidrag i {kommun} i detalj',
+  band3Lank2: 'Sista ansökningsdatum',
+};
+
+/**
  * VÄNTELISTAN — station 5-knappen under betan (SPRINT_COPY.ts, Fable
  * 2026-07-18). Ersätter länken till kommunens ansökningssystem tills
  * utkastgeneratorn är byggd (UTKASTGENERATOR_BYGGD, KommunProgression.astro).
