@@ -89,6 +89,10 @@ export const TRATT = {
       { id: 'nej', etikett: 'Nej, aldrig' },
       { id: 'osaker', etikett: 'Vet inte' },
     ],
+    // 1c (SPRINT: Huvudprocessen, MOCKAR_huvudprocessen.md §1c) — visas
+    // direkt när nej/osäker väljs, inte först på beskedet.
+    gateBesked: 'Då börjar ni inte med ansökan. Ni behöver först bli godkända som bidragsberättigade. Vi visar vad det kräver.',
+    visaBeskedetKnapp: 'Visa beskedet',
   },
 
   // ---- BESKEDET: tre grupper, aldrig ett enda tal ----

@@ -97,6 +97,19 @@ const kommuner = loadKommuner();
               <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
             ))}
           </div>
+          {/* 1c — SPEC_HUVUDPROCESSEN (Opus/Fable 2026-08-01),
+             MOCKAR_huvudprocessen.md §1c: "gaten som fjärde fråga".
+             Konsekvensen visas i SAMMA ögonblick som svaret (nej/vet
+             inte), inte först på beskedet — se skriptets sokt-hantering.
+             "Ja" fortsätter att auto-avancera som tidigare frågor; bara
+             nej/osäker stannar kvar och kräver ett medvetet "Visa
+             beskedet"-klick. */}
+          <div class="tratt__gate-besked" data-tratt-gate-besked hidden>
+            {TRATT.fraga_sokt.gateBesked}
+          </div>
+          <div class="tratt__nav tratt__nav--gate" data-tratt-visa-besked-rad hidden>
+            <button type="button" class="btn-primary" data-tratt-visa-besked>{TRATT.fraga_sokt.visaBeskedetKnapp} →</button>
+          </div>
         </div>
 
         <div class="tratt__nav" data-tratt-nav>
@@ -196,6 +209,9 @@ const kommuner = loadKommuner();
     const tillbakaKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-tillbaka]');
     const omstartKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-omstart]');
     const vidareKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-vidare]');
+    const gateBeskedEl = root.querySelector<HTMLElement>('[data-tratt-gate-besked]');
+    const visaBeskedRadEl = root.querySelector<HTMLElement>('[data-tratt-visa-besked-rad]');
+    const visaBeskedKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-visa-besked]');
     const beskedEl = root.querySelector<HTMLElement>('[data-tratt-besked]');
     const matcharListaEl = root.querySelector<HTMLElement>('[data-tratt-matchar-lista]');
     const matcharTomEl = root.querySelector<HTMLElement>('[data-tratt-matchar-tom]');
@@ -353,6 +369,16 @@ const kommuner = loadKommuner();
       }, 2500);
     }
 
+    /** 1c — gaten (MOCKAR_huvudprocessen.md §1c). Styrs helt av
+     * profil.sokt, inte av klickhändelsen, så tillståndet stämmer även
+     * vid återupptagen/återställd profil (H5) — inte bara direkt efter
+     * ett klick. */
+    function updateGateUI() {
+      const gate = profil.sokt === 'nej' || profil.sokt === 'osaker';
+      if (gateBeskedEl) gateBeskedEl.hidden = !gate;
+      if (visaBeskedRadEl) visaBeskedRadEl.hidden = profil.sokt === null;
+    }
+
     /** Visar exakt ETT tratt__fraga-steg och besked-panelen bara i steg 6
      * — döljs via `hidden` (aldrig tas bort ur DOM, samma regel som
      * KommunValjares sökfilter använder). */
@@ -364,6 +390,7 @@ const kommuner = loadKommuner();
       if (tillbakaKnapp) tillbakaKnapp.hidden = step <= 1;
       if (stegLabelEl) stegLabelEl.textContent = step >= 6 ? 'Klart' : `Fråga ${step} av 5`;
       if (progressEl) progressEl.style.width = `${(Math.min(step - 1, 5) / 5) * 100}%`;
+      updateGateUI();
     }
 
     function goStep(n: number) {
@@ -532,6 +559,7 @@ const kommuner = loadKommuner();
     tillbakaKnapp?.addEventListener('click', () => goStep(step - 1));
     omstartKnapp?.addEventListener('click', () => goStep(1));
     vidareKnapp?.addEventListener('click', () => goStep(3));
+    visaBeskedKnapp?.addEventListener('click', () => goStep(6));
 
     // H7 — delbart besked. Mejlversionen skickar bara ID-REFERENSER
     // (kommunSlug + matchade bidrag-id:n) till servern, som slår upp
@@ -597,7 +625,11 @@ const kommuner = loadKommuner();
 
           // Verksamhet är flerval — ingen auto-advance, "Vidare"-knappen
           // (steg 2) styr det istället, samma skillnad som mocken gör.
-          if (fraga !== 'verksamhet' && eigenStep !== null) {
+          // 1c — gaten: nej/osäker stannar kvar på steget så attention-
+          // rutan (redan visad av render→updateGateUI ovan) syns innan
+          // hon går vidare. "Ja" fortsätter auto-avancera som tidigare.
+          const gateStannar = fraga === 'sokt' && (varde === 'nej' || varde === 'osaker');
+          if (fraga !== 'verksamhet' && !gateStannar && eigenStep !== null) {
             advancing = true;
             setTimeout(() => {
               advancing = false;
@@ -855,6 +887,32 @@ const kommuner = loadKommuner();
     gap: 10px;
     border-top: 1px solid var(--fg-border);
     padding-top: 16px;
+  }
+
+  /* 1c — gaten (MOCKAR_huvudprocessen.md §1c). --fg-attention-soft
+     finns inte som token än (samma gap som registrera-doc__giltighet
+     löste med en fallback) — samma lösning här. */
+  .tratt__gate-besked {
+    background: var(--fg-attention-soft, var(--fg-surface-sunken));
+    border-left: 5px solid var(--fg-attention);
+    padding: var(--fg-space-4) var(--fg-space-5);
+    margin-top: var(--fg-space-4);
+    font-size: var(--fg-text-body);
+    line-height: 1.5;
+  }
+
+  .tratt__nav--gate {
+    border-top: none;
+    justify-content: flex-end;
+    padding-top: var(--fg-space-4);
+  }
+
+  .tratt__nav--gate .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    width: 100%;
   }
 
   .tratt__nav-tillbaka {
