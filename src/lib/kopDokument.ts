@@ -15,7 +15,7 @@
 import type { RegistreringsUtkastRad, UtkastDokument } from './utkastGenerator';
 import { genereraRegistreringsUtkast, genereraUtkast } from './utkastGenerator';
 import type { Kommun, Bidrag } from './kommunTyper';
-import type { KopEntry } from './kop';
+import type { KopEntry, Foreningsuppgifter } from './kop';
 
 /**
  * H15/H16/H17: samma "läs det låsta snapshottet, fall tillbaka på en live
@@ -122,4 +122,28 @@ export function harvestBilagor(checklista: RegistreringsUtkastRad[]): Bilagepost
  */
 export function harvestBilagorFranKrav(kravRader: UtkastDokument['kravRader']): Bilagepost[] {
   return skannaBilagor(kravRader.map((rad) => ({ kalla: rad.kravText, text: `${rad.kravText} ${rad.innehall}` })));
+}
+
+/**
+ * §0 (SPEC_HUVUDPROCESSEN, Opus/Fable 2026-08-01): de fyra föreningsuppgifter
+ * en registreringsansökan faktiskt kräver, fyllda i dokumentet innan det
+ * genereras. uppgifter är undefined för köp gjorda innan §0 byggdes, eller
+ * om formuläret aldrig fyllts i — samma [Fyll i: ...]-platshållarmönster
+ * som utkastGenerator.ts:s fyllKrav använder för okänd data, aldrig ett
+ * gissat namn. Returnerar en osjunken struktur (ingen import av
+ * DokumentSektion från kopExport.ts — det hade varit en cirkelimport,
+ * kopExport.ts importerar redan härifrån).
+ */
+export function foreningsuppgifterSektion(uppgifter?: Foreningsuppgifter): { rubrik: string; stycken: string[] } {
+  const f = (varde: string, etikett: string) => (varde ? varde : `[Fyll i: ${etikett}]`);
+  return {
+    rubrik: 'Föreningsuppgifter',
+    stycken: [
+      `Föreningens namn: ${f(uppgifter?.namn ?? '', 'föreningens namn')}`,
+      `Organisationsnummer: ${f(uppgifter?.orgnr ?? '', 'organisationsnummer')}`,
+      `Kontaktperson: ${f(uppgifter?.kontaktperson ?? '', 'kontaktperson')}`,
+      `Kontaktpersonens e-post: ${f(uppgifter?.kontaktEpost ?? '', 'kontaktpersonens e-post')}`,
+      `Bankgiro eller plusgiro: ${f(uppgifter?.bankgiroPlusgiro ?? '', 'bankgiro eller plusgiro')}`,
+    ],
+  };
 }

@@ -74,6 +74,20 @@ export interface KopInlamningEntry {
   svaratDatum: string; // ISO
 }
 
+/**
+ * §0 (SPEC_HUVUDPROCESSEN, Opus/Fable 2026-08-01): fyra fält en
+ * registreringsansökan faktiskt kräver, som tratten aldrig samlar in
+ * (org.nr är en annan sorts uppgift än trattens grova intervall).
+ * Samlas EFTER betalning, sparas på KÖPET — inte i föreningsprofilen.
+ */
+export interface Foreningsuppgifter {
+  namn: string;
+  orgnr: string;
+  kontaktperson: string;
+  kontaktEpost: string;
+  bankgiroPlusgiro: string;
+}
+
 export interface KopEntry {
   email: string;
   kommunSlug: string;
@@ -82,6 +96,9 @@ export interface KopEntry {
   stripeSessionId: string;
   betaldDatum: string; // ISO
   foreningsprofil?: Foreningsprofil;
+  // §0 — produkt==='registrering' i praktiken (formuläret visas bara
+  // där), men fältet är inte typmässigt låst till det.
+  foreningsuppgifter?: Foreningsuppgifter;
   // H10+H15: Stripes hostade, varaktiga fakturalänk (invoice_creation
   // på checkout-sessionen, se checkout/registrering.ts) — sätts av
   // stripe-webhook.ts efter att fakturan hunnit skapas.
@@ -222,6 +239,21 @@ export async function sparaUtfallssvar(
   const utfall = (kop.utfall ?? []).filter((u) => u.bidragId !== bidragId);
   utfall.push({ bidragId, bidragNamn, svar, svaratDatum: new Date().toISOString() });
   await redis.set(kopKey(stripeSessionId), { ...kop, utfall });
+  return true;
+}
+
+/**
+ * §0 (SPEC_HUVUDPROCESSEN, Opus/Fable 2026-08-01): sparar de fyra
+ * föreningsuppgifterna EFTER betalning, en blind overwrite av HELA
+ * objektet (inte en fältvis merge) — formuläret skickar alltid alla
+ * fyra fält tillsammans, så det finns inget att bevara mellan sparningar.
+ * No-op om köpet inte finns.
+ */
+export async function sparaForeningsuppgifter(stripeSessionId: string, uppgifter: Foreningsuppgifter): Promise<boolean> {
+  const kop = await hamtaKop(stripeSessionId);
+  if (!kop) return false;
+
+  await redis.set(kopKey(stripeSessionId), { ...kop, foreningsuppgifter: uppgifter });
   return true;
 }
 

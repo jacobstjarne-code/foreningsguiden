@@ -18,6 +18,8 @@ import { Document, Packer, Paragraph, TextRun, HeadingLevel } from 'docx';
 import { PDFDocument, StandardFonts, rgb, type PDFFont } from 'pdf-lib';
 import type { RegistreringsUtkastRad, UtkastDokument } from './utkastGenerator';
 import type { Bilagepost } from './kopDokument';
+import type { Foreningsuppgifter } from './kop';
+import { foreningsuppgifterSektion } from './kopDokument';
 
 export interface DokumentSektion {
   rubrik: string;
@@ -40,15 +42,22 @@ export function checklistaTillDokument(
   bilagor: Bilagepost[],
   ansokningssystemNamn: string,
   ansokningssystemUrl: string,
-  ansvarsrad: string
+  ansvarsrad: string,
+  foreningsuppgifter?: Foreningsuppgifter
 ): DokumentInnehall {
   return {
     titel: `Registreringschecklista — ${kommunNamn}`,
-    sektioner: checklista.map((rad, i) => ({
-      rubrik: `${i + 1}. ${rad.vad}`,
-      stycken: [rad.beskrivning, rad.ledtidText, ...(rad.giltighetText ? [rad.giltighetText] : [])],
-      kalla: rad.kallaUrl,
-    })),
+    // §0 — föreningsuppgifterna som en egen, första sektion (ingen
+    // radnumrering, det är inte ett krav ur kommunens checklista, det är
+    // formulärdata om FÖRENINGEN själv).
+    sektioner: [
+      foreningsuppgifterSektion(foreningsuppgifter),
+      ...checklista.map((rad, i) => ({
+        rubrik: `${i + 1}. ${rad.vad}`,
+        stycken: [rad.beskrivning, rad.ledtidText, ...(rad.giltighetText ? [rad.giltighetText] : [])],
+        kalla: rad.kallaUrl,
+      })),
+    ],
     bilagor,
     ansokningssystemNamn,
     ansokningssystemUrl,

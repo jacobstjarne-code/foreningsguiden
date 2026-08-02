@@ -39,7 +39,7 @@ export const GET: APIRoute = async ({ params, cookies }) => {
     const checklista = kopChecklista(kop, kommun);
     const bilagor = harvestBilagor(checklista);
     bytes = await genereraKopPdf(
-      checklistaTillDokument(kommun.kommun, checklista, bilagor, kommun.ansokningssystem.namn, kommun.ansokningssystem.url, VAGLEDNING.station5.ansvar)
+      checklistaTillDokument(kommun.kommun, checklista, bilagor, kommun.ansokningssystem.namn, kommun.ansokningssystem.url, VAGLEDNING.station5.ansvar, kop.foreningsuppgifter)
     );
     filnamn = `registreringschecklista-${kommun.kommun_slug}.pdf`;
   }

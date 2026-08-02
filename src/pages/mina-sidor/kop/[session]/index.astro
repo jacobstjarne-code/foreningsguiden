@@ -19,7 +19,7 @@ import Base from '../../../../layouts/Base.astro';
 import { SESSION_COOKIE_NAMN, hamtaSessionEmail } from '../../../../lib/session';
 import { hamtaAgtKop } from '../../../../lib/kop';
 import { getKommunBySlug } from '../../../../lib/kommuner';
-import { kopChecklista, kopBidragsutkast, harvestBilagor, harvestBilagorFranKrav, type Bilagepost } from '../../../../lib/kopDokument';
+import { kopChecklista, kopBidragsutkast, harvestBilagor, harvestBilagorFranKrav, foreningsuppgifterSektion, type Bilagepost } from '../../../../lib/kopDokument';
 import { VAGLEDNING } from '../../../../lib/content';
 
 interface VisningsRad {
@@ -32,6 +32,7 @@ interface VisningsRad {
 
 const sessionId = Astro.params.session ?? '';
 const returPath = `/mina-sidor/kop/${encodeURIComponent(sessionId)}/`;
+const uppgifterSparade = Astro.url.searchParams.get('sparat') === '1';
 
 const sessionToken = Astro.cookies.get(SESSION_COOKIE_NAMN)?.value;
 const email = sessionToken ? await hamtaSessionEmail(sessionToken) : null;
@@ -70,15 +71,27 @@ if (kop && kommun) {
     eyebrow = `${kommun.kommun} kommun · registreringsutkast`;
     sidRubrik = 'Er registreringschecklista';
     metaRad = `Köpt ${kop.betaldDatum.slice(0, 10)}`;
-    rader = checklista.map((rad, i) => ({
-      rubrik: `${i + 1}. ${rad.vad}`,
-      stycken: [rad.beskrivning],
-      notis: rad.giltighetText ?? undefined,
-      kallaUrl: rad.kallaUrl,
-      kopieraText: [`${i + 1}. ${rad.vad}`, rad.beskrivning, rad.ledtidText, rad.giltighetText ?? '', `Källa: ${rad.kallaUrl}`]
-        .filter(Boolean)
-        .join('\n'),
-    }));
+    // §0 — föreningsuppgifterna som första rad i det synliga dokumentet,
+    // samma sektion (och ordagrant samma text/platshållare) som
+    // checklistaTillDokument() lägger till i docx/pdf-exporten —
+    // en sanning, inte omskriven på tre ställen.
+    const uppgifterSektion = foreningsuppgifterSektion(kop.foreningsuppgifter);
+    rader = [
+      {
+        rubrik: uppgifterSektion.rubrik,
+        stycken: uppgifterSektion.stycken,
+        kopieraText: [uppgifterSektion.rubrik, ...uppgifterSektion.stycken].join('\n'),
+      },
+      ...checklista.map((rad, i) => ({
+        rubrik: `${i + 1}. ${rad.vad}`,
+        stycken: [rad.beskrivning],
+        notis: rad.giltighetText ?? undefined,
+        kallaUrl: rad.kallaUrl,
+        kopieraText: [`${i + 1}. ${rad.vad}`, rad.beskrivning, rad.ledtidText, rad.giltighetText ?? '', `Källa: ${rad.kallaUrl}`]
+          .filter(Boolean)
+          .join('\n'),
+      })),
+    ];
     bilagor = harvestBilagor(checklista);
   }
 }
@@ -114,6 +127,43 @@ if (kop && kommun) {
         {kop.hostedInvoiceUrl && <> · <a href={kop.hostedInvoiceUrl}>Kvitto/faktura</a></>}
       </p>
       {dokumentKalla && <p class="kop-doc__meta">Källa: <a href={dokumentKalla}>{dokumentKalla}</a></p>}
+
+      {/* §0 (SPEC_HUVUDPROCESSEN, Opus/Fable 2026-08-01) — formuläret
+         VISAS OVANFÖR DOKUMENTET, direkt efter köp. Bara för
+         registrering (bidragsutkastet har ingen egen ansökan att fylla
+         i uppgifter mot på samma sätt). Traditionell POST — sidan är
+         redan SSR, en redirect tillbaka räcker för att dokumentet
+         (rader ovan, docx/pdf) ska visa de nya värdena, ingen JS krävs.
+         Etiketterna nedan är funktionell formulärtext (fältnamn), inte
+         marknadsprosa — samma undantag som övriga korta UI-etiketter i
+         det här projektet. */}
+      {kop.produkt !== 'bidragsutkast' && (
+        <details class="kop-doc__uppgifter" open={!kop.foreningsuppgifter?.orgnr}>
+          <summary>Föreningsuppgifter (fylls i dokumentet)</summary>
+          {uppgifterSparade && <p class="kop-doc__uppgifter-kvitto">Sparat.</p>}
+          <p class="kop-doc__uppgifter-text">
+            Fyll i dessa så fylls de in i dokumentet i stället för [Fyll i: ...]. Inte obligatoriskt — dokumentet levereras ändå.
+          </p>
+          <form method="POST" action={`/api/kop/${encodeURIComponent(sessionId)}/foreningsuppgifter`} class="kop-doc__uppgifter-form">
+            <label for="namn">Föreningens namn</label>
+            <input type="text" id="namn" name="namn" value={kop.foreningsuppgifter?.namn ?? ''} />
+
+            <label for="orgnr">Organisationsnummer</label>
+            <input type="text" id="orgnr" name="orgnr" value={kop.foreningsuppgifter?.orgnr ?? ''} />
+
+            <label for="kontaktperson">Kontaktperson (namn)</label>
+            <input type="text" id="kontaktperson" name="kontaktperson" value={kop.foreningsuppgifter?.kontaktperson ?? ''} />
+
+            <label for="kontaktEpost">Kontaktpersonens e-post</label>
+            <input type="email" id="kontaktEpost" name="kontaktEpost" value={kop.foreningsuppgifter?.kontaktEpost ?? ''} />
+
+            <label for="bankgiroPlusgiro">Bankgiro eller plusgiro</label>
+            <input type="text" id="bankgiroPlusgiro" name="bankgiroPlusgiro" value={kop.foreningsuppgifter?.bankgiroPlusgiro ?? ''} />
+
+            <button type="submit" class="btn-primary">Spara</button>
+          </form>
+        </details>
+      )}
 
       <div class="kop-doc__export">
         <a class="fg-btn--ghost" href={`/api/kop/${encodeURIComponent(sessionId)}/docx/`}>Ladda ner som Word (.docx)</a>
@@ -241,6 +291,56 @@ if (kop && kommun) {
     border-left: 3px solid var(--fg-attention);
     padding: 8px 12px;
     font-size: var(--fg-text-label);
+  }
+
+  .kop-doc__uppgifter {
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-5);
+    margin-bottom: var(--fg-space-6);
+  }
+
+  .kop-doc__uppgifter summary {
+    font-weight: var(--fg-weight-bold);
+    cursor: pointer;
+  }
+
+  .kop-doc__uppgifter-text {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: var(--fg-space-3) 0 var(--fg-space-4);
+  }
+
+  .kop-doc__uppgifter-kvitto {
+    color: var(--fg-accent);
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-label);
+    margin: var(--fg-space-2) 0 0;
+  }
+
+  .kop-doc__uppgifter-form {
+    display: grid;
+    gap: var(--fg-space-3);
+  }
+
+  .kop-doc__uppgifter-form label {
+    display: block;
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-label);
+    margin-bottom: 4px;
+  }
+
+  .kop-doc__uppgifter-form input {
+    width: 100%;
+    padding: var(--fg-space-3);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+  }
+
+  .kop-doc__uppgifter-form button {
+    margin-top: var(--fg-space-2);
   }
 
   .kop-doc__bilagor,
