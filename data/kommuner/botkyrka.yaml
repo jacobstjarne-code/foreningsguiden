@@ -1,77 +1,190 @@
-# Källa verifierad 2026-07-10 mot botkyrka.se. Ansökan via InterbookGo.
-# Sociala föreningsbidrag via socialnämnden. Exakta deadlines per bidragsform
-# framgår ej fullständigt ur källan (kommunen hänvisar till tabell i systemet)
-# — kompletteras vid spot-check före deploy.
-kommun: "Botkyrka"
-kommun_slug: "botkyrka"
-lan: "Stockholms län"
+kommun: Botkyrka
+kommun_slug: botkyrka
+lan: Stockholms län
 befolkning: 97312
-forvaltning: "Kultur och fritid samt socialnämnden"
+forvaltning: Kultur och fritid samt socialnämnden
 ansokningssystem:
-  namn: "InterbookGo"
-  url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
-kalla_url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
-verifierad: 2026-07-10
+  namn: InterbookGo
+  url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+verifierad: '2026-08-02'
 bidrag:
-  - id: "botkyrka-kulturforening"
-    namn: "Föreningsbidrag – kulturföreningar"
-    kategori: ["kultur"]
-    malgrupp: "Kulturföreningar med verksamhet för att bevara och sprida konstnärliga och kulturella uttryck"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Ansökan görs digitalt i InterbookGo"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
-    anteckning: "Sista ansökningsdag per bidragsform framgår av tabell i kommunens system."
-  - id: "botkyrka-funktionsratt"
-    namn: "Föreningsbidrag – funktionsrättsföreningar"
-    kategori: ["funktionsratt"]
-    malgrupp: "Föreningar som arbetar med att tillvarata intressen för personer med funktionsnedsättning"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Ansökan görs digitalt i InterbookGo"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
-    anteckning: null
-  - id: "botkyrka-social"
-    namn: "Föreningsbidrag – socialnämnden"
-    kategori: ["social"]
-    malgrupp: "Föreningar vars verksamhet avlastar och kompletterar socialnämndens ansvarsområde (t.ex. förebyggande mot missbruk, våld, kriminalitet)"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Verksamhet inom socialnämndens ansvarsområde"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
-    anteckning: "Se Riktlinjer för föreningsbidrag inom socialnämnden (PDF på kommunens sida)."
-  - id: "botkyrka-ovrig"
-    namn: "Föreningsbidrag – övrig förening"
-    kategori: ["ovrig", "pensionar"]
-    malgrupp: "Intresseföreningar med verksamhet för barn och unga, personer med funktionsnedsättning och/eller seniorer 65+, inkl. mötesplats- och religiösa föreningar"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Ansökan görs digitalt i InterbookGo"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
-    anteckning: null
+- id: botkyrka-sommarlovsaktiviteter
+  namn: Stöd till sommarlovsaktiviteter
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Alla föreningar som ordnar sommarlovsaktiviteter
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Ansökan görs digitalt i Rbok
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-aktivitetsbidrag-ovriga
+  namn: Aktivitetsbidrag för övriga föreningar
+  kategori:
+  - ovrig
+  malgrupp: Övriga bidragsberättigade föreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Ansökan görs digitalt i Rbok
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-lokalbidrag-ovriga
+  namn: Lokalbidrag för övriga föreningar
+  kategori:
+  - ovrig
+  malgrupp: Övriga bidragsberättigade föreningar med lokalkostnader
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Ansökan görs digitalt i Rbok
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-aktivitetsbidrag-senior
+  namn: Aktivitetsbidrag för seniorverksamhet
+  kategori:
+  - pensionar
+  malgrupp: Seniorföreningar, övriga föreningar och idrottsföreningar med seniorverksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Verksamheten ska rikta sig till seniorer 65+
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-lokalbidrag-senior
+  namn: Lokalbidrag för seniorföreningar
+  kategori:
+  - pensionar
+  malgrupp: Seniorföreningar med lokalkostnader
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Föreningen ska vara godkänd som seniorförening
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-aktivitetsbidrag-idrott-scout
+  namn: Aktivitetsbidrag för idrottsföreningar och scoutkårer
+  kategori:
+  - idrott
+  malgrupp: Idrottsföreningar och scoutkårer med barn- och ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+    - 08-25
+  krav:
+  - Föreningen ska vara godkänd i Rbok
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  kategori:
+  - idrott
+  malgrupp: Idrottsföreningar med anläggningskostnader
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-01
+  krav:
+  - Föreningen ska vara godkänd som idrottsförening
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-kulturell-verksamhet
+  namn: Bidrag till kulturell verksamhet
+  kategori:
+  - kultur
+  malgrupp: Kulturföreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-01
+  krav:
+  - Föreningen ska bedriva kulturell verksamhet
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-funktionsratt
+  namn: Bidrag till funktionsrättsföreningar
+  kategori:
+  - funktionsratt
+  malgrupp: Funktionsrättsföreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-01
+  krav:
+  - Föreningen ska tillvarata intressen för personer med funktionsnedsättning
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-spontanidrott
+  namn: Bidrag till organiserad spontanidrott
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Alla föreningar som organiserar spontanidrott
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-01
+  krav:
+  - Aktiviteten ska vara organiserad och öppen enligt kommunens regler
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
+- id: botkyrka-social-verksamhet
+  namn: Bidrag för föreningar som bedriver social verksamhet
+  kategori:
+  - social
+  malgrupp: Sociala föreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-01
+  krav:
+  - Verksamheten ska komplettera eller avlasta socialnämndens insatser
+  belopp: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/foreningar-och-studieforbund/bidrag-till-foreningar
+  anteckning: null
 forutsattningar:
-  - id: "botkyrka-registrerad"
-    vad: "Registrera föreningen i InterbookGo"
-    beskrivning: "Ansökan om föreningsbidrag görs digitalt i InterbookGo och kräver att föreningen är registrerad där."
-    system: "InterbookGo"
-    ledtid: null
-    ledtid_text: "Kommunen anger ingen handläggningstid"
-    giltighet: null
-    ordning: 1
-    kalla_url: "https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar"
+- id: botkyrka-registrerad
+  vad: Registrera föreningen i InterbookGo
+  beskrivning: Ansökan om föreningsbidrag görs digitalt i InterbookGo och kräver att föreningen är registrerad där.
+  system: InterbookGo
+  ledtid: null
+  ledtid_text: Kommunen anger ingen handläggningstid
+  giltighet: null
+  ordning: 1
+  kalla_url: https://www.botkyrka.se/uppleva-och-gora/stipendier-och-stod/bidrag-till-foreningar
