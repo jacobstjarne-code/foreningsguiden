@@ -188,14 +188,29 @@ const station5Alla = station5PerFilter.alla;
             </div>
           )}
           {extra.map((f) => (
-            <div class="progression__forutsattning">
-              <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4" /><path d="M12 16h.01" /></svg></span>
-              <div>
-                <div class="progression__forutsattning-label">Ytterligare steg</div>
-                <div class="progression__forutsattning-titel">{f.vad}</div>
-                <div class="progression__forutsattning-text">{VAGLEDNING.station3.extraSteg.replace('{beskrivning}', f.beskrivning)}</div>
+            <>
+              <div class="progression__forutsattning">
+                <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4" /><path d="M12 16h.01" /></svg></span>
+                <div>
+                  <div class="progression__forutsattning-label">Ytterligare steg</div>
+                  <div class="progression__forutsattning-titel">{f.vad}</div>
+                  <div class="progression__forutsattning-text">{VAGLEDNING.station3.extraSteg.replace('{beskrivning}', f.beskrivning)}</div>
+                </div>
               </div>
-            </div>
+              {/* Bugg hittad 2026-08-02 (1f Yta 2-verifiering): en förutsättnings
+                  giltighet renderades bara om den satt på forutsattningar[0] —
+                  Helsingborgs regel sitter på [1] och försvann tyst. Samma
+                  giltighetsfälla-block som ovan, nu även för extra-stegen. */}
+              {f.giltighet && (
+                <div class="progression__forutsattning">
+                  <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4" /><path d="M12 17h.01" /><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg></span>
+                  <div>
+                    <div class="progression__forutsattning-label">Giltighetsfälla</div>
+                    <div class="progression__forutsattning-text">{VAGLEDNING.station3.giltighetVarning.replace('{giltighet}', f.giltighet)}</div>
+                  </div>
+                </div>
+              )}
+            </>
           ))}
         </div>
         <RegistreringsHjalp kommunSlug={kommun.kommun_slug} />

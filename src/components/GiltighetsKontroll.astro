@@ -15,6 +15,7 @@
 // giltighet === null → ALLTID svarOkand, aldrig en gissad beräkning
 // (samma regel som stationens egen giltighetVarning i KommunProgression).
 import type { Kommun } from '../lib/kommuner';
+import { hittaGiltighetsregel } from '../lib/kommuner';
 import { GILTIGHETSKOLL, BEVAKNING } from '../lib/content';
 
 export interface Props {
@@ -23,7 +24,7 @@ export interface Props {
 }
 
 const { kommun, today } = Astro.props;
-const giltighetsregel = kommun.forutsattningar[0]?.giltighet ?? null;
+const giltighetsregel = hittaGiltighetsregel(kommun.forutsattningar);
 const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
 ---
 <div
@@ -61,8 +62,15 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
     </p>
     <span data-giltighetskoll-arsmotesdatum hidden></span>
 
+    <!-- 1f Yta 2: känd giltighetsregel + fortfarande inom fönstret — en
+         beräknad gräns i stället för svarOk:s vagare text. Fyllda av JS
+         (kräver arsmotesdatum, satt av besökaren, + today, frusen vid
+         byggtillfället — samma mönster som resten av widgeten). -->
+    <p data-giltighetskoll-grans-rubrik hidden class="giltighetskoll__grans-rubrik"></p>
+    <p data-giltighetskoll-grans-text hidden></p>
+
     <div data-giltighetskoll-erbjudande hidden>
-      <p>{GILTIGHETSKOLL.erbjudande}</p>
+      <p data-giltighetskoll-erbjudande-text>{GILTIGHETSKOLL.erbjudande}</p>
       <button type="button" class="fg-btn--ghost" data-giltighetskoll-erbjudande-knapp>{GILTIGHETSKOLL.erbjudandeKnapp}</button>
     </div>
 
@@ -73,7 +81,7 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
         <input type="checkbox" name="samtycke" required />
         {BEVAKNING.samtycke}
       </label>
-      <button type="submit" class="btn-primary">{GILTIGHETSKOLL.erbjudandeKnapp}</button>
+      <button type="submit" class="btn-primary" data-giltighetskoll-epostform-knapp>{GILTIGHETSKOLL.erbjudandeKnapp}</button>
     </form>
 
     <div data-giltighetskoll-kvitto-bekraftelse hidden>
@@ -88,6 +96,8 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
 </div>
 
 <script>
+  import { GILTIGHETSKOLL } from '../lib/content';
+
   const MANADSNAMN = [
     'januari', 'februari', 'mars', 'april', 'maj', 'juni',
     'juli', 'augusti', 'september', 'oktober', 'november', 'december',
@@ -103,8 +113,14 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
     };
     return Math.round((toUTC(toISO) - toUTC(fromISO)) / (1000 * 60 * 60 * 24));
   }
+  function addDays(iso: string, days: number): string {
+    const [y, m, d] = iso.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d) + days * 24 * 60 * 60 * 1000);
+    return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2, '0')}-${String(dt.getUTCDate()).padStart(2, '0')}`;
+  }
 
   const RISK_TROSKEL_DAGAR = 300; // se motivering i frontmatter-kommentaren ovan
+  const GRANS_DAGAR = 365; // samma ~årliga cykel RISK_TROSKEL_DAGAR redan approximerar — se GILTIGHETSKOLL.gransText i content.ts
 
   document.querySelectorAll<HTMLElement>('[data-giltighetskoll]').forEach((widget) => {
     const kommunSlug = widget.dataset.kommunSlug ?? '';
@@ -117,9 +133,12 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
     const svarRisk = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-risk]');
     const svarOk = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-ok]');
     const svarOkand = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-okand]');
+    const gransRubrik = widget.querySelector<HTMLElement>('[data-giltighetskoll-grans-rubrik]');
+    const gransText = widget.querySelector<HTMLElement>('[data-giltighetskoll-grans-text]');
     const erbjudande = widget.querySelector<HTMLElement>('[data-giltighetskoll-erbjudande]');
     const erbjudandeKnapp = widget.querySelector<HTMLButtonElement>('[data-giltighetskoll-erbjudande-knapp]');
     const epostForm = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-epostform]');
+    const epostFormKnapp = widget.querySelector<HTMLButtonElement>('[data-giltighetskoll-epostform-knapp]');
     const kvittoBekraftelse = widget.querySelector<HTMLElement>('[data-giltighetskoll-kvitto-bekraftelse]');
     const kvittoSparat = widget.querySelector<HTMLElement>('[data-giltighetskoll-kvitto-sparat]');
     const felText = widget.querySelector<HTMLElement>('[data-giltighetskoll-fel]');
@@ -137,6 +156,8 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
       svarRisk?.setAttribute('hidden', '');
       svarOk?.setAttribute('hidden', '');
       svarOkand?.setAttribute('hidden', '');
+      gransRubrik?.setAttribute('hidden', '');
+      gransText?.setAttribute('hidden', '');
 
       const arsmotesdatumSv = formatDateSv(arsmotesdatum);
 
@@ -146,12 +167,44 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
       }
 
       const dagarSedan = daysBetween(arsmotesdatum, today);
-      const target = dagarSedan >= RISK_TROSKEL_DAGAR ? svarRisk : svarOk;
-      if (target) {
-        target.textContent = (target.textContent ?? '').replace('{arsmotesdatum}', arsmotesdatumSv);
-        target.removeAttribute('hidden');
+      const risk = dagarSedan >= RISK_TROSKEL_DAGAR;
+
+      if (risk) {
+        if (svarRisk) {
+          svarRisk.textContent = (svarRisk.textContent ?? '').replace('{arsmotesdatum}', arsmotesdatumSv);
+          svarRisk.removeAttribute('hidden');
+        }
+        erbjudande?.removeAttribute('hidden');
+        return;
       }
-      erbjudande?.removeAttribute('hidden');
+
+      // 1f Yta 2: inom fönstret — beräknad gräns i stället för svarOk:s vagare text.
+      const gransISO = addDays(arsmotesdatum, GRANS_DAGAR);
+      const manaderTillGrans = Math.max(1, Math.round(daysBetween(today, gransISO) / 30));
+      const [gy, gm] = gransISO.split('-').map(Number);
+      const gransManad = MANADSNAMN[gm - 1];
+      const paminnManad = MANADSNAMN[((gm - 1) - 1 + 12) % 12];
+
+      if (gransRubrik) {
+        gransRubrik.textContent = GILTIGHETSKOLL.gransRubrik.replace('{manader}', String(manaderTillGrans));
+        gransRubrik.removeAttribute('hidden');
+      }
+      if (gransText) {
+        gransText.textContent = GILTIGHETSKOLL.gransText
+          .replace('{kommun}', kommunNamn)
+          .replace('{arsmotesdatum}', arsmotesdatumSv)
+          .replace('{manad}', gransManad)
+          .replace('{ar}', String(gy));
+        gransText.removeAttribute('hidden');
+      }
+
+      const paminnKnappText = GILTIGHETSKOLL.paminnKnappMall.replace('{manad}', paminnManad);
+      if (erbjudandeKnapp) erbjudandeKnapp.textContent = paminnKnappText;
+      if (epostFormKnapp) epostFormKnapp.textContent = paminnKnappText;
+
+      // Gränsen är redan sagd i klartext ovan — hoppa förbi frågesteget,
+      // rakt till mejlfält + knapp (mockens enda-steg-yta).
+      epostForm?.removeAttribute('hidden');
     });
 
     erbjudandeKnapp?.addEventListener('click', () => {

@@ -40,7 +40,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { loadKommuner, formatDate, daysUntil, todayISO } from '../../../lib/kommuner';
+import { loadKommuner, formatDate, daysUntil, todayISO, hittaGiltighetsregel } from '../../../lib/kommuner';
 import { getAllConfirmedSubscribers, wasGiltighetsvarningSent, markGiltighetsvarningSent } from '../../../lib/subscribers';
 import { sendGiltighetsvarning, siteUrl } from '../../../lib/mejl';
 
@@ -68,7 +68,7 @@ export const GET: APIRoute = async ({ request, url }) => {
       const kommun = kommuner.find((k) => k.kommun_slug === kommunSlug);
       if (!kommun) continue;
 
-      const giltighetsregel = kommun.forutsattningar[0]?.giltighet ?? null;
+      const giltighetsregel = hittaGiltighetsregel(kommun.forutsattningar);
       if (!giltighetsregel) {
         ingenRegel++;
         continue;

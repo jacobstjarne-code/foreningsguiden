@@ -706,6 +706,15 @@ export const GILTIGHETSKOLL = {
   svarOkand: '{kommun} anger ingen tidsgräns för godkännandet i sina publicerade regler. Flera kommuner kräver ändå årlig uppdatering av föreningens uppgifter — kontrollera med kommunen. Vi har inte hittat en regel att räkna mot, så vi gissar inte.',
   erbjudande: 'Vill ni att vi säger till i god tid innan statusen behöver förnyas?',
   erbjudandeKnapp: 'Ja, påminn oss',
+  // 1f Yta 2 (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): känd giltighetsregel
+  // + fortfarande inom RISK_TROSKEL_DAGAR-fönstret (GiltighetsKontroll.astro)
+  // → en beräknad gräns i stället för den vaga svarOk-texten. {manader}/
+  // {manad}/{ar} räknas fram klientsidan av samma ~365-dagarscykel som redan
+  // motiverar RISK_TROSKEL_DAGAR (se den filens frontmatter-kommentar) —
+  // ingen ny gissning, bara samma approximation uttryckt som datum.
+  gransRubrik: 'Ert godkännande förfaller om {manader} månader',
+  gransText: 'Årsmöte {arsmotesdatum}. I {kommun} gäller godkännandet till nästa årsmöte redovisats — {manad} {ar} är er gräns.',
+  paminnKnappMall: 'Påminn oss i {manad}',
 };
 
 /**

@@ -127,6 +127,21 @@ export interface Kommun {
   kommunsiffra: Kommunsiffra | null;
 }
 
+/**
+ * Den giltighetsregel som faktiskt ska räknas mot (GiltighetsKontroll.astro,
+ * KommunProgression.astro station 3, cron/giltighetsvarning.ts). En kommun
+ * kan ha flera förutsättningar och `giltighet` sitter inte alltid på den
+ * första — Helsingborg har den på forutsattningar[1] (forutsattningar[0]
+ * är "registrera dig", giltighet: null; forutsattningar[1] är "förbli
+ * bidragsberättigad", giltighet satt). Ett rakt `forutsattningar[0]?.giltighet`
+ * missar den regeln helt och tystnar tyst till "vi gissar inte" — bugg
+ * hittad 2026-08-02 vid Playwright-verifiering av 1f Yta 2, ingen tidigare
+ * kommun i datat hade en andra förutsättning med giltighet satt.
+ */
+export function hittaGiltighetsregel(forutsattningar: Forutsattning[]): string | null {
+  return forutsattningar.find((f) => f.giltighet)?.giltighet ?? null;
+}
+
 /** Antal dagar sedan `verifierad`-datumet. */
 export function daysSinceVerified(verifierad: string): number {
   const ms = Date.now() - new Date(verifierad).getTime();
