@@ -323,7 +323,9 @@ const kommuner = loadKommuner();
       sumFotnotEl.hidden = false;
     }
 
-    const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
+    // 1f — samma unifiering som UrgencyChip.astro: ett urgensord ("Snart"),
+    // inte "Bråttom"/"Snart" för vad som är samma sak.
+    const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Snart', attention: 'Snart', positive: 'God tid' };
 
     function bidragMeta(bidrag: Bidrag): string {
       // dateISO är null för BÅDE löpande och okänd deadlines.typ

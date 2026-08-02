@@ -9,7 +9,12 @@ export interface Props {
 
 const { urgency } = Astro.props;
 
-const LABEL: Record<Urgency, string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
+// 1f (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): "Ett urgensord, en
+// tröskel" — urgent och attention sa olika ord (Bråttom/Snart) för vad
+// som är samma underliggande sak (raden avviker, den kräver uppmärksamhet).
+// Båda säger nu "Snart". Trösklarna/färgerna (getUrgency, kommunTyper.ts)
+// är OFÖRÄNDRADE — bara ordet unifierat, inte dagantalen bakom det.
+const LABEL: Record<Urgency, string> = { urgent: 'Snart', attention: 'Snart', positive: 'God tid' };
 const ICON: Record<Urgency, string> = {
   urgent: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
   attention: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',

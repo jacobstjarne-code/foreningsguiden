@@ -272,6 +272,12 @@ export const BEVAKNING = {
   // Avregistreringsbekräftelse.
   avreg:
     'Du är nu avregistrerad och vi har raderat din adress. Du är välkommen tillbaka när du vill.',
+  // 1f (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): deadlineradens
+  // "bevakas"-tillstånd — mockens "vi mejlar 4 veckor före" stämmer inte
+  // mot den riktiga kadensen (paminnelser.ts: 14 dagar + 3 dagar, samma
+  // tal som ingress ovan redan säger korrekt) — återanvänder den texten
+  // i stället för mockens fel-tal.
+  bevakasBadge: 'Bevakas — vi mejlar två veckor och tre dagar innan sista ansökningsdag.',
 };
 
 /**

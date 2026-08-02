@@ -10,8 +10,50 @@
  * och kommun/[slug]/registrera/index.astro) — samma mönster som
  * felrapportKlient.ts, en sanning för DOM-wiringen i stället för
  * dubblerad <script>-logik.
+ *
+ * 1f (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): "Knappen finns byggd;
+ * det som saknas är det bevakade tillståndet" — kvittot syntes bara i
+ * ögonblicket efter ett klick, en sidladdning senare var raden tillbaka
+ * i "Bevaka den här"-läget som om inget hänt. Ingen inloggning finns för
+ * kalendern (bevakning är e-post + dubbel opt-in, inte en session) — vi
+ * kan alltså inte fråga SERVERN "är den här webbläsaren bekräftad", bara
+ * komma ihåg klientsidan att DEN HÄR webbläsaren redan skickat in en
+ * bevakningsbegäran för kommunen. localStorage, en sanning delad mellan
+ * alla [data-bevaka-cell]-widgetar på sidan (bevakning är kommun-scopad
+ * i backend, addPendingSubscriber(email, kommuner: string[]) — inte
+ * per bidrag/rad, så ALLA rader för samma kommun ska visa samma tillstånd).
  */
 import { BEVAKNING } from './content';
+
+const BEVAKADE_KOMMUNER_KEY = 'foreningsguiden:bevakade-kommuner:v1';
+
+function hamtaBevakadeKommuner(): Set<string> {
+  try {
+    const raw = localStorage.getItem(BEVAKADE_KOMMUNER_KEY);
+    const lista = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(lista) ? lista : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function markeraKommunBevakad(kommunSlug: string): void {
+  try {
+    const bevakade = hamtaBevakadeKommuner();
+    bevakade.add(kommunSlug);
+    localStorage.setItem(BEVAKADE_KOMMUNER_KEY, JSON.stringify([...bevakade]));
+  } catch {
+    // localStorage kan saknas/vara blockerad — kvittot i UI:t syns ändå
+    // just nu, bara inte ihågkommet nästa sidladdning. Ingen krasch.
+  }
+}
+
+function visaBevakasBadge(cell: HTMLElement): void {
+  const badge = document.createElement('p');
+  badge.className = 'bevaka-rad-kvitto bevaka-rad-kvitto--bevakas';
+  badge.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ${BEVAKNING.bevakasBadge}`;
+  cell.replaceChildren(badge);
+}
 
 function byggBevakaForm(kommunNamn: string): HTMLFormElement {
   const form = document.createElement('form');
@@ -31,10 +73,19 @@ function byggBevakaForm(kommunNamn: string): HTMLFormElement {
 
 /** Event-delegation över sidans samtliga [data-bevaka-cell]-widgetar. */
 export function initBevakaWidgets(): void {
+  const bevakade = hamtaBevakadeKommuner();
+
   document.querySelectorAll<HTMLElement>('[data-bevaka-cell]').forEach((cell) => {
     const knapp = cell.querySelector<HTMLButtonElement>('.bevaka-rad-knapp');
     const kommunSlug = cell.dataset.kommunSlug ?? '';
     const kommunNamn = cell.dataset.kommunNamn ?? '';
+
+    // 1f — redan bevakad (den här webbläsaren har skickat in en begäran
+    // för kommunen förut): visa det tillståndet direkt, ingen knapp.
+    if (kommunSlug && bevakade.has(kommunSlug)) {
+      visaBevakasBadge(cell);
+      return;
+    }
 
     knapp?.addEventListener('click', () => {
       const form = byggBevakaForm(kommunNamn);
@@ -53,6 +104,7 @@ export function initBevakaWidgets(): void {
           const json = await res.json();
           if (!res.ok || !json.ok) throw new Error('svar ej ok');
 
+          if (kommunSlug) markeraKommunBevakad(kommunSlug);
           const kvitto = document.createElement('p');
           kvitto.className = 'bevaka-rad-kvitto';
           kvitto.textContent = json.alreadyConfirmed ? BEVAKNING.kvittoRubrik : BEVAKNING.kvittoText;

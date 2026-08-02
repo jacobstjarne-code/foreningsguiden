@@ -75,9 +75,12 @@ function kategoriCell(e: DeadlineEntry) {
   return fler > 0 ? `${forsta} +${fler}` : forsta;
 }
 
+// 1f (SPEC_HUVUDPROCESSEN §1f): explicit fallback i stället för en tom
+// cell — "belopp inte publicerat" är sakuppgiften (kommunen har inte
+// lämnat ut ett tak), inte en tom ruta som kan läsas som ett fel.
 function beloppCell(e: DeadlineEntry): string {
   const tak = parseBeloppTak(e.belopp);
-  return tak !== null ? `Upp till ${tak.toLocaleString('sv-SE')} kr` : '';
+  return tak !== null ? `Upp till ${tak.toLocaleString('sv-SE')} kr` : 'belopp inte publicerat';
 }
 ---
 <Base title={KALENDER.metaTitle} description={KALENDER.metaDescription}>
