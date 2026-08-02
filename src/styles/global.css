@@ -872,15 +872,34 @@ main {
   color: var(--fg-ink-muted);
 }
 
-.kommunvaljare__bladdra-label {
+/* 1b — den yttre "Bläddra bland alla N kommuner"-disclosuren (samma DOM
+   i hubb- och trattläge, öppen/stängd styrs enbart av selectMode/open). */
+.kommunvaljare__bladdra {
   margin-top: var(--fg-space-6);
-  margin-bottom: var(--fg-space-3);
-  font-family: var(--fg-font-mono);
-  font-size: var(--fg-text-label);
+}
+
+.kommunvaljare__bladdra-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-3);
+  padding: var(--fg-space-3) 0;
+  font-size: var(--fg-text-body-lg);
   font-weight: var(--fg-weight-bold);
-  letter-spacing: var(--fg-tracking-label);
-  text-transform: uppercase;
-  color: var(--fg-ink-muted);
+  color: var(--fg-accent);
+  cursor: pointer;
+  list-style: none;
+}
+
+.kommunvaljare__bladdra-summary::-webkit-details-marker {
+  display: none;
+}
+
+.kommunvaljare__bladdra[open] > .kommunvaljare__bladdra-summary .kommunvaljare__chevron {
+  transform: rotate(90deg);
+}
+
+.kommunvaljare__bladdra .kommunvaljare__lista {
+  margin-top: var(--fg-space-3);
 }
 
 .kommunvaljare__lista {

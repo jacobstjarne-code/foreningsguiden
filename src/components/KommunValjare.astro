@@ -51,27 +51,37 @@ const antalLan = lanGrupper.length;
   </label>
   <div class="kommunvaljare__antal" data-kommunvaljare-antal>{kommuner.length} KOMMUNER TILLGÄNGLIGA · {antalLan} LÄN</div>
 
-  <div class="kommunvaljare__bladdra-label">Eller bläddra per län</div>
-
-  <div class="kommunvaljare__lista">
-    {lanGrupper.map(({ lan, kommuner: kommunerILan }) => (
-      <details class="kommunvaljare__lan" data-kommunvaljare-lan>
-        <summary class="kommunvaljare__lan-summary">
-          <svg class="kommunvaljare__chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-          <span class="kommunvaljare__lan-namn">{lan}</span>
-          <span class="kommunvaljare__lan-antal">{kommunerILan.length}</span>
-        </summary>
-        <div class="kommunvaljare__grid">
-          {kommunerILan.map((k) => (
-            <a href={`/kommun/${k.kommun_slug}/`} class="kommunvaljare__kommun-lank" data-kommunvaljare-kommun data-namn={k.kommun.toLowerCase()} data-slug={k.kommun_slug} data-kommun-namn={k.kommun}>
-              {k.kommun}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-            </a>
-          ))}
-        </div>
-      </details>
-    ))}
-  </div>
+  <!-- 1b (SPEC_HUVUDPROCESSEN §1b, Jacob 2026-08-02): "Två lägen, ett
+       attribut" — samma DOM, samma crawlbarhet, i BÅDA lägena. Hubben (/)
+       vill ha listan utfälld (SEO-bärande), tratten (/matcha/) vill hålla
+       den undanstoppad tills man ber om den. selectMode råkar redan
+       skilja de två kontexterna åt (väljläge vs navigeringsläge) — samma
+       flagga återanvänds här för att styra open, i stället för en ny prop. -->
+  <details class="kommunvaljare__bladdra" data-kommunvaljare-bladdra open={!selectMode}>
+    <summary class="kommunvaljare__bladdra-summary">
+      <svg class="kommunvaljare__chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+      Bläddra bland alla {kommuner.length} kommuner
+    </summary>
+    <div class="kommunvaljare__lista">
+      {lanGrupper.map(({ lan, kommuner: kommunerILan }) => (
+        <details class="kommunvaljare__lan" data-kommunvaljare-lan>
+          <summary class="kommunvaljare__lan-summary">
+            <svg class="kommunvaljare__chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+            <span class="kommunvaljare__lan-namn">{lan}</span>
+            <span class="kommunvaljare__lan-antal">{kommunerILan.length}</span>
+          </summary>
+          <div class="kommunvaljare__grid">
+            {kommunerILan.map((k) => (
+              <a href={`/kommun/${k.kommun_slug}/`} class="kommunvaljare__kommun-lank" data-kommunvaljare-kommun data-namn={k.kommun.toLowerCase()} data-slug={k.kommun_slug} data-kommun-namn={k.kommun}>
+                {k.kommun}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+              </a>
+            ))}
+          </div>
+        </details>
+      ))}
+    </div>
+  </details>
 
   <p class="kommunvaljare__tom" data-kommunvaljare-tom hidden>Ingen kommun matchar sökningen.</p>
 </div>
@@ -79,6 +89,7 @@ const antalLan = lanGrupper.length;
 <script>
   document.querySelectorAll<HTMLElement>('[data-kommunvaljare]').forEach((widget) => {
     const input = widget.querySelector<HTMLInputElement>('[data-kommunvaljare-input]');
+    const bladdraDetails = widget.querySelector<HTMLDetailsElement>('[data-kommunvaljare-bladdra]');
     const lanSections = widget.querySelectorAll<HTMLDetailsElement>('[data-kommunvaljare-lan]');
     const tomMsg = widget.querySelector<HTMLElement>('[data-kommunvaljare-tom]');
     const antalEl = widget.querySelector<HTMLElement>('[data-kommunvaljare-antal]');
@@ -136,6 +147,11 @@ const antalLan = lanGrupper.length;
           : `${synligaKommuner} TRÄFFAR · ${synligaLan} LÄN`;
       }
       if (tomMsg) tomMsg.hidden = !(query !== '' && synligaKommuner === 0);
+
+      // 1b — i trattläget (stängd som default) ska en sökträff fälla ut
+      // den yttre "Bläddra..."-disclosuren också, av samma skäl som
+      // varje län fälls ut ovan: resultatet ska synas utan extra klick.
+      if (bladdraDetails && query !== '' && synligaKommuner > 0) bladdraDetails.open = true;
     }
 
     input?.addEventListener('input', applyFilter);
