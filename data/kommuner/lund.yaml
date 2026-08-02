@@ -1,54 +1,234 @@
-# Källa verifierad 2026-07-10 mot lund.se. Lund använder Rbok. Uppgift om
-# bidragsberättigande var 13:e månad och kulturstödets ansökningsfönster
-# (17 sep–14 okt 2026 för verksamhet 2027) från kommunens sidor. Nytt
-# föreningsstöd infördes under 2025 — kontrollera aktuella regler vid deploy.
-kommun: "Lund"
-kommun_slug: "lund"
-lan: "Skåne län"
+kommun: Lund
+kommun_slug: lund
+lan: Skåne län
 befolkning: 132291
-forvaltning: "Kultur- och fritidsförvaltningen (kultur- och fritidsnämnden)"
+forvaltning: Kultur- och fritidsförvaltningen (kultur- och fritidsnämnden)
 ansokningssystem:
-  namn: "Rbok (bidrags- och bokningssystem)"
-  url: "https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag"
-kalla_url: "https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag"
+  namn: Rbok (bidrags- och bokningssystem)
+  url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
 verifierad: 2026-07-10
 bidrag:
-  - id: "lund-verksamhetsstod-kultur"
-    namn: "Verksamhetsstöd till kulturverksamhet"
-    kategori: ["kultur"]
-    malgrupp: "Etablerade kulturaktörer med publika arrangemang av betydelse för kommunen. Ett- eller tvåårigt stöd."
-    deadlines:
-      typ: "fasta"
-      datum: ["10-14"]
-    krav:
-      - "Godkänd/bidragsberättigad profil i Rbok (görs om var 13:e månad, senaste årsmöteshandlingar uppladdade)"
-      - "Verksamhetsplan och budget för kommande år bifogas"
-      - "Arrangemang läggs in i kommunens evenemangskalender"
-    belopp: null
-    sen_ansokan: "Ansökan efter sista dag behandlas ej"
-    kalla_url: "https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag/stod-till-kultur/verksamhetsstod-till-kulturverksamhet"
-    anteckning: "Ansökningsfönster 17 september–14 oktober 2026 för verksamhet under 2027. Svar inom 8 veckor. Ej religiös/politisk verksamhet, ej välgörenhet, ej utbildning/forskning."
-  - id: "lund-bidragsberattigad"
-    namn: "Bli bidragsberättigad (profil i Rbok)"
-    kategori: ["idrott", "kultur", "ovrig"]
-    malgrupp: "Föreningar och företag som vill söka stöd hos kultur- och fritidsförvaltningen"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Skapa profil i bidragssystemet Rbok och bli godkänd som kund"
-      - "Ladda upp senaste årsmöteshandlingarna"
-    belopp: null
-    sen_ansokan: "Ej tillämpligt (löpande)"
-    kalla_url: "https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag/stod-till-kultur/verksamhetsstod-till-kulturverksamhet"
-    anteckning: "Görs om var 13:e månad. Processen kan ta tid — påbörja i god tid före ansökan. Redovisning/publikstatistik för föregående år senast 30 juni."
+- id: lund-startstod
+  namn: Startstöd
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Nystartade föreningar med verksamhet för barn och unga 7–20 år
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-lokalt-aktivitetsstod
+  namn: Kommunalt lokalt aktivitetsstöd (LOK)
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar med ledarledd verksamhet för barn och unga 7–20 år
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-utvecklingsstod-barn-unga
+  namn: Utvecklingsstöd för barn- och ungdomsverksamhet
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar som får kommunalt LOK-stöd och vill utveckla verksamheten
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-lokalkompensationsstod
+  namn: Lokalkompensationsstöd
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar med barn- och ungdomsverksamhet i egna eller externt hyrda lokaler
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav: []
+  belopp: Högst 95 procent av beräknad nettolokalkostnad för stödberättigad verksamhet
+  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-anlaggningsstod
+  namn: Anläggningsstöd
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar med LOK- och lokalkompensationsstöd som behöver investera i eller underhålla anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-lov-i-lund
+  namn: Lov i Lund – stöd till lovaktiviteter
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Aktörer som genomför kostnadsfria lovaktiviteter för barn och unga
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-unga-leder-unga
+  namn: Unga leder unga
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Unga 13–25 år som vill driva projekt för andra unga
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-naromradesstod-kultur
+  namn: Närområdesstöd till kultur, traditioner och högtider
+  kategori:
+  - kultur
+  malgrupp: Föreningar och aktörer som genomför lokala kulturaktiviteter och högtidsfiranden
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-projektstod-kultur
+  namn: Projektstöd för publika kulturarrangemang
+  kategori:
+  - kultur
+  malgrupp: Kulturföreningar och kulturaktörer med publika arrangemang i Lund
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-14
+  krav: []
+  belopp: null
+  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: Publicerad ansökningsperiod 17 september–14 oktober 2026 för arrangemang 2027.
+- id: lund-utvecklingsstod-kultur
+  namn: Utvecklingsstöd mini, midi och maxi
+  kategori:
+  - kultur
+  malgrupp: Aktörer med utvecklingsprojekt inom konst, kultur och innovation
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-verksamhetsstod-kultur
+  namn: Verksamhetsstöd till kulturverksamhet
+  kategori:
+  - kultur
+  malgrupp: Etablerade kulturaktörer med kontinuerlig publik verksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-14
+  krav: []
+  belopp: null
+  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-publika-idrottsarrangemang
+  namn: Stöd till publika idrottsarrangemang
+  kategori:
+  - idrott
+  malgrupp: Föreningar och aktörer som genomför publika idrottsarrangemang i Lund
+  deadlines:
+    typ: fasta
+    datum:
+    - 11-30
+  krav: []
+  belopp: null
+  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: Ansökan kan enligt kommunen göras januari–november; aktuell period visas i Rbok.
+- id: lund-hallbarhetsstod
+  namn: Hållbarhetsstöd till civilsamhället
+  kategori:
+  - ovrig
+  malgrupp: Civilsamhällesaktörer med tidsbegränsade projekt för ett klimatneutralt Lund
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-miljoanslag
+  namn: Miljöanslag för föreningar
+  kategori:
+  - ovrig
+  malgrupp: Föreningar med projekt för ekologiskt hållbar utveckling
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
+- id: lund-folkbildande-kultur
+  namn: Stöd till folkbildande kulturverksamhet och ideella föreningar
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Studieförbund och ideella organisationer med folkbildande verksamhet eller arbete för lika rättigheter
+  deadlines:
+    typ: okand
+    datum: []
+  krav: []
+  belopp: null
+  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag
+  anteckning: null
 forutsattningar:
-  - id: "lund-bidragsberattigad"
-    vad: "Bli godkänd kund och bidragsberättigad i Rbok"
-    beskrivning: "Skapa profil i bidragssystemet Rbok, bli godkänd som kund och ladda upp de senaste årsmöteshandlingarna."
-    system: "Rbok"
-    ledtid: null
-    ledtid_text: "Kommunen skriver själv att processen kan ta tid och uppmanar föreningar att påbörja den i god tid före ansökan"
-    giltighet: "Görs om var 13:e månad"
-    ordning: 1
-    kalla_url: "https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag/stod-till-kultur/verksamhetsstod-till-kulturverksamhet"
+- id: lund-bidragsberattigad
+  vad: Bli godkänd kund och bidragsberättigad i Rbok
+  beskrivning: Skapa profil i bidragssystemet Rbok, bli godkänd som kund och ladda upp de senaste årsmöteshandlingarna.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Kommunen skriver själv att processen kan ta tid och uppmanar föreningar att påbörja den i god tid före ansökan
+  giltighet: Görs om var 13:e månad
+  ordning: 1
+  kalla_url: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag/stod-till-kultur/verksamhetsstod-till-kulturverksamhet
