@@ -79,17 +79,18 @@ const kommuner = loadKommuner();
           </div>
         </div>
 
+        {/* G7 (SPRINT: Huvudprocessen, Jacob 2026-08-02): ålder/verksamhetstid-
+           frågan skuren bort helt — min_verksamhetstid_manader är fältet
+           som fylls minst i datan, vilket gjorde frågan till en
+           avhoppspunkt som nästan aldrig gav en matchning. Storlek
+           behålls (min_medlemmar finns på riktigt, t.ex. Arvika: 10).
+           Flödet är nu fyra frågor: kommun, verksamhet, storlek, sökt
+           förut (gaten, sist — som i mocken). profil.alder finns kvar i
+           Foreningsprofil (foreningsprofil.ts) och matchBidrag (matching.ts)
+           — bara frågan borttagen, inte fältet. matchBidrag degraderar
+           redan korrekt när profil.alder är null (samma mönster som
+           sate_i_kommunen, ett fält ingen fråga samlar in). */}
         <div class="tratt__fraga" data-tratt-steg="4" hidden>
-          <h2>{TRATT.fraga_tid.fraga}</h2>
-          <p class="tratt__hjalp">{TRATT.fraga_tid.hjalp}</p>
-          <div class="tratt__pillgrupp" data-tratt-fraga="alder" role="group" aria-label={TRATT.fraga_tid.fraga}>
-            {TRATT.fraga_tid.alternativ.map((a) => (
-              <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
-            ))}
-          </div>
-        </div>
-
-        <div class="tratt__fraga" data-tratt-steg="5" hidden>
           <h2>{TRATT.fraga_sokt.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_sokt.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="sokt" role="group" aria-label={TRATT.fraga_sokt.fraga}>
@@ -194,7 +195,7 @@ const kommuner = loadKommuner();
 
 <script>
   import { matchKommun, harMatchningsdata, type MatchSkal } from '../../lib/matching';
-  import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type Aldersbucket, type SoktSvar } from '../../lib/foreningsprofil';
+  import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type SoktSvar } from '../../lib/foreningsprofil';
   import { formatDate, earliestDeadlineISO, todayISO, svenskLista, sumBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_PAKET_ORE } from '../../lib/priser';
@@ -280,17 +281,14 @@ const kommuner = loadKommuner();
       return alternativ.find((a) => a.id === id)?.etikett ?? '';
     }
 
-    function manaderTillText(m: number): string {
-      if (m < 12) return `${m} ${m === 1 ? 'månad' : 'månader'}`;
-      return `${Math.round(m / 12)} år`;
-    }
-
+    // G7 (Jacob 2026-08-02): ålder/verksamhetstid-frågan skuren bort —
+    // matchBidrag (matching.ts) producerar bara ett min_verksamhetstid_manader-
+    // skäl när profil.alder !== null, vilket det aldrig blir längre (ingen
+    // fråga samlar in det). Fallet nedan är alltså strukturellt oåtkomligt
+    // nu, inte trasigt — default-grenen täcker det, samma "latent"-mönster
+    // som sate_i_kommunen redan har i matching.ts.
     function skalTillText(skal: MatchSkal, bidrag: Bidrag): string {
       switch (skal.falt) {
-        case 'min_verksamhetstid_manader':
-          return TRATT.besked.behover.saknarTid
-            .replace('{krav}', manaderTillText(bidrag.min_verksamhetstid_manader ?? 0))
-            .replace('{angivet}', etikett(TRATT.fraga_tid.alternativ, profil.alder));
         case 'min_medlemmar':
           return TRATT.besked.behover.saknarMedlemmar
             .replace('{krav}', String(bidrag.min_medlemmar))
@@ -386,15 +384,15 @@ const kommuner = loadKommuner();
       stegElement.forEach((el) => {
         el.hidden = Number(el.dataset.trattSteg) !== step;
       });
-      if (beskedEl) beskedEl.hidden = step !== 6 || !kommunData;
+      if (beskedEl) beskedEl.hidden = step !== 5 || !kommunData;
       if (tillbakaKnapp) tillbakaKnapp.hidden = step <= 1;
-      if (stegLabelEl) stegLabelEl.textContent = step >= 6 ? 'Klart' : `Fråga ${step} av 5`;
-      if (progressEl) progressEl.style.width = `${(Math.min(step - 1, 5) / 5) * 100}%`;
+      if (stegLabelEl) stegLabelEl.textContent = step >= 5 ? 'Klart' : `Fråga ${step} av 4`;
+      if (progressEl) progressEl.style.width = `${(Math.min(step - 1, 4) / 4) * 100}%`;
       updateGateUI();
     }
 
     function goStep(n: number) {
-      step = Math.max(1, Math.min(6, n));
+      step = Math.max(1, Math.min(5, n));
       updateStegUI();
     }
 
@@ -503,7 +501,6 @@ const kommuner = loadKommuner();
           let aktiv = false;
           if (fraga === 'verksamhet') aktiv = profil.verksamhet.includes(varde as Verksamhet);
           else if (fraga === 'storlek') aktiv = profil.storlek === varde;
-          else if (fraga === 'alder') aktiv = profil.alder === varde;
           else if (fraga === 'sokt') aktiv = profil.sokt === varde;
           pill.classList.toggle('is-active', aktiv);
           pill.setAttribute('aria-pressed', String(aktiv));
@@ -559,7 +556,7 @@ const kommuner = loadKommuner();
     tillbakaKnapp?.addEventListener('click', () => goStep(step - 1));
     omstartKnapp?.addEventListener('click', () => goStep(1));
     vidareKnapp?.addEventListener('click', () => goStep(3));
-    visaBeskedKnapp?.addEventListener('click', () => goStep(6));
+    visaBeskedKnapp?.addEventListener('click', () => goStep(5));
 
     // H7 — delbart besked. Mejlversionen skickar bara ID-REFERENSER
     // (kommunSlug + matchade bidrag-id:n) till servern, som slår upp
@@ -611,9 +608,6 @@ const kommuner = loadKommuner();
           } else if (fraga === 'storlek') {
             profil.storlek = (profil.storlek === varde ? null : varde) as Medlemsbucket | null;
             saveForeningsprofil({ storlek: profil.storlek });
-          } else if (fraga === 'alder') {
-            profil.alder = (profil.alder === varde ? null : varde) as Aldersbucket | null;
-            saveForeningsprofil({ alder: profil.alder });
           } else if (fraga === 'sokt') {
             profil.sokt = (profil.sokt === varde ? null : varde) as SoktSvar | null;
             saveForeningsprofil({ sokt: profil.sokt });
@@ -643,12 +637,13 @@ const kommuner = loadKommuner();
     // H5 — antal besvarade frågor (max 5) och vilken som är FÖRSTA
     // obesvarade, för återupptagningsbanderollen. Ren räkning, ingen ny
     // datamodell.
+    // G7 (Jacob 2026-08-02): fyra frågor, inte fem — alder räknas inte
+    // längre (frågas aldrig, alltid null).
     function antalBesvarade(p: Foreningsprofil): number {
       let n = 0;
       if (p.kommunSlug) n++;
       if (p.verksamhet.length > 0) n++;
       if (p.storlek !== null) n++;
-      if (p.alder !== null) n++;
       if (p.sokt !== null) n++;
       return n;
     }
@@ -656,15 +651,14 @@ const kommuner = loadKommuner();
     function forstaObesvaradeSteg(p: Foreningsprofil): number {
       if (p.verksamhet.length === 0) return 2;
       if (p.storlek === null) return 3;
-      if (p.alder === null) return 4;
-      if (p.sokt === null) return 5;
-      return 6;
+      if (p.sokt === null) return 4;
+      return 5;
     }
 
     function visaAtervandOmBehovs() {
       if (!atervandEl || !atervandTextEl) return;
       const antal = antalBesvarade(profil);
-      if (antal >= 5) {
+      if (antal >= 4) {
         atervandEl.hidden = true;
         return;
       }
@@ -697,11 +691,12 @@ const kommuner = loadKommuner();
     });
 
     // Återställ sparat svar. En återvändande session med sparad kommun
-    // hoppar direkt till steg 6 (beskedet) — samma beteende som innan
-    // ombyggnaden — "Tillbaka" tar en till valfri fråga för att ändra svar.
+    // hoppar direkt till steg 5 (beskedet, G7: fyra frågor + besked =
+    // fem steg, inte sex) — "Tillbaka" tar en till valfri fråga för att
+    // ändra svar.
     markeraAktivaPillar();
     if (profil.kommunSlug) {
-      step = 6;
+      step = 5;
       hamtaKommunData(profil.kommunSlug);
       visaAtervandOmBehovs();
     } else {
@@ -731,7 +726,7 @@ const kommuner = loadKommuner();
   }
 
   /* Sticky stegbar (turn-12a) — mörk, alltid synlig vid varje svar.
-     Räknare + kvittens på en rad, progressbar + "Fråga N av 5" under. */
+     Räknare + kvittens på en rad, progressbar + "Fråga N av 4" under. */
   .tratt__stegbar {
     position: sticky;
     top: 0;

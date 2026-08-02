@@ -68,18 +68,14 @@ export const TRATT = {
     ],
   },
 
-  // ---- Fråga 4: verksamhetstid ----
-  fraga_tid: {
-    fraga: 'Hur länge har föreningen funnits?',
-    hjalp: 'Många bidrag kräver att föreningen varit verksam en tid.',
-    alternativ: [
-      { id: 'ny', etikett: 'Mindre än ett år' },
-      { id: 'mellan', etikett: '1–3 år' },
-      { id: 'etablerad', etikett: 'Mer än 3 år' },
-    ],
-  },
+  // fraga_tid (verksamhetstid) BORTTAGEN 2026-08-02 (G7, Jacob): skuren
+  // ur flödet — min_verksamhetstid_manader är fältet som fylls minst i
+  // datan, vilket gjorde frågan till en avhoppspunkt som nästan aldrig
+  // gav en matchning. Flödet är nu fyra frågor: kommun, verksamhet,
+  // storlek, sökt förut. profil.alder finns kvar i datamodellen
+  // (foreningsprofil.ts) — bara frågan och dess copy borttagna.
 
-  // ---- Fråga 5: sökt förut (proxy för registrering) ----
+  // ---- Fråga 4: sökt förut (proxy för registrering, gaten) ----
   // Frågas som ERFARENHET, aldrig som status. Ett nej/vet inte triggar Börja här-beskedet.
   fraga_sokt: {
     fraga: 'Har ni sökt bidrag i kommunen förut?',
@@ -150,8 +146,9 @@ export const TRATT = {
     // Grupp 2 — nära-matchningar med vad som saknas
     behover: {
       rubrik: 'Nära — det här saknas',
-      // Per bidrag: konkret vad som fattas. Mallar för de vanliga fallen:
-      saknarTid: 'Kräver {krav} verksamhet — ni angav {angivet}. Det här löser sig med tiden.',
+      // Per bidrag: konkret vad som fattas. Mallar för de vanliga fallen.
+      // saknarTid (verksamhetstid) BORTTAGEN 2026-08-02 (G7) — samma skäl
+      // som fraga_tid ovan, matchBidrag kan inte längre producera det skälet.
       saknarMedlemmar: 'Kräver minst {krav} medlemmar — ni angav {angivet}.',
       saknarTyp: 'Riktar sig till {krav}. Stämmer det in på er verksamhet? Justera svaret ovan.',
       saknarRegistrering: 'Kräver att föreningen är registrerad som bidragsberättigad i kommunen — se Börja här nedan.',

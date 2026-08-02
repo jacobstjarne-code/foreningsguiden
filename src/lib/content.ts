@@ -601,12 +601,13 @@ export const KOPYTAN_1E = {
   eyebrow: 'REGISTRERINGSANSÖKAN · {kommun}',
   rubrik: 'Det här får ni',
   // Sista punkten är G23 — löftet som tar bort oron för en tappad flik.
-  // FIX 2026-08-02 (Code): mockens exempel ("Gislaveds fem krav") räknar
-  // 1d:s framtida bockningsbara punkter, som ännu inte finns (1d
-  // blockerad, se golden-set-fyndet i förra sprinten) — {antal} utelämnat
-  // tills det talet går att räkna fram korrekt, se registrera/index.astro.
+  // Punkt 1 omformulerad 2026-08-02 (Jacob): mockens exempel ("Gislaveds
+  // fem krav") räknar 1d:s framtida bockningsbara punkter, som ännu inte
+  // finns (1d blockerad, se golden-set-fyndet i förra sprinten) — rätt
+  // att inte hitta på ett tal. Generisk "kommunens krav" i stället för
+  // {kommun}s, ingen substitution behövs längre för den här raden.
   vadHonFar: [
-    'Ett ifyllt ansökningsunderlag mot {kommun}s krav, som Word-fil och PDF.',
+    'Ett ifyllt ansökningsunderlag mot kommunens krav, som Word-fil och PDF.',
     'Ett kopieringsfält per avsnitt för kommunens e-tjänst.',
     'Bilagelistan med vad som ska med, och var det ska laddas upp.',
     'Mejl med varaktig länk. Dokumentet ligger kvar i föreningens profil.',
