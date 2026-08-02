@@ -1,53 +1,216 @@
-# Källa verifierad 2026-07-10 mot gislaved.se. Extraherat ur kommunens
-# publicerade bidragsregler. Belopp och vissa villkor är sammanfattade;
-# spot-checkas av Jacob före publik deploy (leveransordning steg 4).
-kommun: "Gislaved"
-kommun_slug: "gislaved"
-lan: "Jönköpings län"
+kommun: Gislaved
+kommun_slug: gislaved
+lan: Jönköpings län
 befolkning: 28568
-forvaltning: "Samhällsutvecklingsförvaltningen"
+forvaltning: Samhällsutvecklingsförvaltningen
 ansokningssystem:
-  namn: "Kommunens e-tjänst / föreningsportal"
-  url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
-kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
-verifierad: 2026-07-10
+  namn: Kommunens e-tjänst / föreningsportal
+  url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+verifierad: '2026-08-02'
 bidrag:
-  - id: "gislaved-arrangemangsbidrag"
-    namn: "Arrangemangs- och projektbidrag"
-    kategori: ["kultur"]
-    malgrupp: "Bidragsberättigade föreningar med säte i Gislaveds kommun, för öppna publika arrangemang och projekt"
-    deadlines:
-      typ: "fasta"
-      datum: ["01-31", "04-30", "07-31", "10-31"]
-    krav:
-      - "Föreningen ska vara hemmahörande (säte) i Gislaveds kommun"
-      - "Allmänheten ska ha tillträde och ha informerats om arrangemanget"
-      - "Det ska framgå i marknadsföringen att arrangemanget genomförs med stöd från Gislaveds kommun"
-      - "Arrangemanget ska läggas in i evenemangskalendern"
-    belopp: null
-    sen_ansokan: "Ej angivet i källan"
-    kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
-    anteckning: "Handläggning fyra gånger per år. Bidrag beviljas inte till interna sammankomster (årsmöten, konferenser, jubileer)."
-# FIX 2026-07-31 (Jacob): "gislaved-godkannande-bidragsberattigad" fanns
-# tidigare BÅDE här (som ett falskt tredje bidrag) och nedan under
-# forutsattningar (korrekt — det är ett förkrav, inte ett bidrag man
-# kan söka). Samma sak dubbellagrad på fel plats. Gislaved har ETT
-# bidrag och ETT förkrav — ströks här, forutsattningar-posten är
-# källan. golden-set/gislaved-godkannande-bidragsberattigad.yaml
-# (facit mot det falska bidraget) borttagen i samma commit.
+- id: gislaved-startbidrag
+  namn: Startbidrag
+  kategori:
+  - idrott
+  - kultur
+  - funktionsratt
+  malgrupp: Nystartade föreningar
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Nystartad förening
+  - Bidragsberättigad enligt kommunens normer
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-grundbidrag
+  namn: Grundbidrag
+  kategori:
+  - idrott
+  - kultur
+  malgrupp: Etablerade barn- och ungdomsföreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-15
+  krav:
+  - Bidragsberättigad förening
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-aktivitetsbidrag
+  namn: Lokalt aktivitetsbidrag
+  kategori:
+  - idrott
+  malgrupp: Barn- och ungdomsföreningar med deltagare 7–25 år
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+    - 08-25
+  krav:
+  - Beviljat grund- eller startbidrag
+  - Närvaroregistrering i föreningsportalen
+  belopp: Bestäms utifrån kommunens totalbelopp och antal deltagaraktiviteter
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Barn- och ungdomsföreningar med hyrd lokal eller egen anläggning
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-15
+  krav:
+  - Godkänd lokal eller anläggning
+  belopp: Lokal- eller driftbidrag enligt kommunens normer
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-investeringsbidrag-litet
+  namn: Litet investeringsbidrag
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Barn- och ungdomsföreningar med mindre investeringar
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Bidragsberättigad förening
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-investeringsbidrag-stort
+  namn: Stort investeringsbidrag
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Barn- och ungdomsföreningar med större investeringar
+  deadlines:
+    typ: fasta
+    datum:
+    - 11-01
+  krav:
+  - Bidragsberättigad förening
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-ledarutbildning
+  namn: Ledarutbildningsbidrag
+  kategori:
+  - idrott
+  - kultur
+  malgrupp: Barn- och ungdomsföreningar för ledarutbildning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan senast 60 dagar efter avslutad utbildning
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: 'Relativ tidsfrist: 60 dagar efter avslutad kurs'
+- id: gislaved-namndens-forfogande
+  namn: Nämndens förfogande
+  kategori:
+  - ovrig
+  malgrupp: Bidragsberättigade föreningar med särskilda behov
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Särskild prövning
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-kultur-verksamhet
+  namn: Verksamhetsbidrag kultur
+  kategori:
+  - kultur
+  malgrupp: Kulturföreningar och studieförbund med kontinuerlig verksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Kontinuerlig kulturverksamhet
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-arrangemangsbidrag
+  namn: Arrangemangsbidrag kultur
+  kategori:
+  - kultur
+  malgrupp: Föreningar och studieförbund för enskilda offentliga arrangemang
+  deadlines:
+    typ: fasta
+    datum:
+    - 01-31
+    - 04-30
+    - 07-31
+    - 10-31
+  krav:
+  - Allmänheten ska ha tillträde
+  - Arrangemanget ska marknadsföras
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-projektbidrag
+  namn: Projektbidrag kultur
+  kategori:
+  - kultur
+  malgrupp: Föreningar och studieförbund för kulturprojekt
+  deadlines:
+    typ: fasta
+    datum:
+    - 01-31
+    - 04-30
+    - 07-31
+    - 10-31
+  krav:
+  - Projekt med kulturinriktning
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
+  anteckning: null
+- id: gislaved-socialt
+  namn: Föreningsbidrag social verksamhet
+  kategori:
+  - social
+  malgrupp: Föreningar med insatser för socialt utsatta målgrupper
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-30
+  krav:
+  - Verksamhet i Gislaveds kommun
+  - Målgrupp inom socialnämndens uppdrag
+  belopp: Individuell bedömning
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.gislaved.se/omsorg-och-stod/anhorigstod/foreningsbidrag-social-verksamhet
+  anteckning: null
 forutsattningar:
-  - id: "gislaved-bidragsberattigad"
-    vad: "Bli godkänd som bidragsberättigad förening"
-    beskrivning: "Föreningen ansöker om att godkännas som bidragsberättigad. Kräver vald styrelse, av årsmötet antagna stadgar, organisationsnummer och bankkonto i föreningens namn. Är föreningen ansluten till en statsbidragsberättigad riksorganisation ska den vara det."
-    system: "Kommunens e-tjänst"
-    # FIX 2026-07-31 (Jacob): ledtid var 90 — inte en publicerad
-    # handläggningstid, utan "tre månader" felläst ur ledtid_text (som
-    # handlar om NÄR den subventionerade taxan börjar gälla EFTER
-    # godkännande, inte om själva handläggningstiden). "Räkna med 90
-    # dagars handläggning" fanns alltså inte i källan. null = okänd
-    # handläggningstid, samma disciplin som alla andra ledtid:null-fält.
-    ledtid: null
-    ledtid_text: "Subventionerad föreningstaxa gäller tidigast tre månader efter godkänt beslutsdatum"
-    giltighet: null
-    ordning: 1
-    kalla_url: "https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar"
+- id: gislaved-bidragsberattigad
+  vad: Bli godkänd som bidragsberättigad förening
+  beskrivning: Föreningen ansöker om att godkännas som bidragsberättigad. Kräver vald styrelse, av årsmötet antagna stadgar,
+    organisationsnummer och bankkonto i föreningens namn. Är föreningen ansluten till en statsbidragsberättigad riksorganisation
+    ska den vara det.
+  system: Kommunens e-tjänst
+  ledtid: null
+  ledtid_text: Subventionerad föreningstaxa gäller tidigast tre månader efter godkänt beslutsdatum
+  giltighet: null
+  ordning: 1
+  kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
