@@ -10,7 +10,7 @@
 import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
-  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist, harEtjanstsystem,
+  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist, harEtjanstsystem, possessiv,
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
@@ -112,7 +112,7 @@ const station2Alla = station2PerFilter.alla;
 
 const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const fyllKopruta = (text: string, bidragNamn: string) =>
-  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr)).replace('{system}', kommun.ansokningssystem.namn);
+  text.replace('{kommun}', kommun.kommun).replace('{kommunPossessiv}', possessiv(kommun.kommun)).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr)).replace('{system}', kommun.ansokningssystem.namn);
 const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
 // C5 (ÅTGÄRDSSPEC, 2026-08-03 kväll): en gång per kommun, inte per bidrag.
 const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning;

@@ -657,7 +657,20 @@ export const KOPYTAN_1E = {
  */
 export const KOPRUTA = {
   rubrik: 'Vad ni får',
-  beskrivning: '{kommun}s krav för {bidrag}, i rätt ordning, med sista ansökningsdag och belopp. Vilka bilagor som ska med. Och de uppgifter vi kan fylla i åt er redan ifyllda.',
+  // {kommunPossessiv} — INTE "{kommun}s" (bugg hittat 2026-08-03: en
+  // kommun vars namn redan slutar på -s, t.ex. Västerås/Borås, hade fått
+  // "Västeråss krav" av en bokstavlig {kommun}+"s"-konkatenering; aldrig
+  // synligt live än eftersom köprutan varit tom sedan D1 skärptes samma
+  // kväll — men templatet skulle ha gett fel text så fort ett bidrag
+  // klarade D1). possessiv() (kommunTyper.ts) hanterar redan detta
+  // korrekt på andra ställen i kodbasen — samma funktion här.
+  beskrivning: '{kommunPossessiv} krav för {bidrag}, i rätt ordning, med sista ansökningsdag och belopp. Vilka bilagor som ska med. Och de uppgifter vi kan fylla i åt er redan ifyllda.',
+  // C5 (ÅTGÄRDSSPEC, 2026-08-03 kväll): kommuner med ett riktigt
+  // e-tjänstsystem (allt utom "E-post"/"Blankett", se
+  // harEtjanstsystem i kommuner.ts) säljer mot systemet de faktiskt
+  // ska öppna, inte mot ett generiskt "underlag". beskrivning ovan
+  // (oförändrad i sak) gäller där systemet SAKNAS.
+  beskrivningEtjanst: 'Allt ni behöver ha framme när ni öppnar {system} — {kommunPossessiv} krav i rätt ordning, era uppgifter ifyllda, bilagorna listade.',
   luckorRad: '{antal} rader behöver ni fylla i själva — vi säger vilka innan ni betalar.',
   kravlistaRegistrering: 'Ni får hela kravlistan för att bli godkända som bidragsberättigade i {kommun}, med vad varje krav betyder och var uppgiften finns.',
   leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',

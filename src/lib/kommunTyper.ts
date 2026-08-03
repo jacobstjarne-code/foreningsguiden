@@ -246,6 +246,21 @@ export function bidragAnsokningsUrl(bidrag: Bidrag, kommun: Kommun): string {
 }
 
 /**
+ * C5 (ÅTGÄRDSSPEC, 2026-08-03 kväll): köprutans beskrivning ska sälja mot
+ * det system besökaren faktiskt öppnar — men bara om ett riktigt
+ * e-tjänstsystem finns. Två namn i corpuset betyder uttryckligen att
+ * ansökan går utanför ett system: "E-post" (arboga, arjeplog m.fl.) och
+ * "Blankett" (pappersblankett). Verifierat mot hela corpuset 2026-08-03
+ * — de enda två värdena av 161 unika ansokningssystem.namn som inte
+ * beskriver ett faktiskt system att öppna.
+ */
+const INGET_ETJANSTSYSTEM = new Set(['e-post', 'blankett']);
+
+export function harEtjanstsystem(kommun: Kommun): boolean {
+  return !INGET_ETJANSTSYSTEM.has(kommun.ansokningssystem.namn.trim().toLowerCase());
+}
+
+/**
  * 2c (arbetsorder 2026-08-03) + uppföljning 2026-08-03: ursprungligen
  * detekterad enbart via anteckning-mönstret "Relativ tidsfrist: {frist}"
  * (kolon = ett värde att visa, skiljer från t.ex. Åstorps datamodells-

@@ -29,7 +29,7 @@
 // utelämnat ur renderingen (inte ersatt med egen text).
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
-import { loadKommuner } from '../../../../../lib/kommuner';
+import { loadKommuner, possessiv } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
 import { KOPRUTA } from '../../../../../lib/content';
@@ -50,7 +50,7 @@ const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
 
 const fyllKopruta = (text: string) =>
-  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr));
+  text.replace('{kommun}', kommun.kommun).replace('{kommunPossessiv}', possessiv(kommun.kommun)).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr));
 ---
 <Base
   title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
