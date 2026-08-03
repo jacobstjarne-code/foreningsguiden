@@ -138,6 +138,9 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   if (typeof raw.belopp === 'string' && /https?:\/\//i.test(raw.belopp)) {
     problems.push(`${where}.belopp får inte innehålla en URL`);
   }
+  if (typeof raw.belopp === 'string' && raw.belopp.trim().toLowerCase() === 'individuell bedömning') {
+    problems.push(`${where}.belopp får inte vara platshållaren "Individuell bedömning"; använd statusfält och null`);
+  }
   if (!isNonEmptyString(raw.sen_ansokan)) problems.push(`${where}.sen_ansokan saknas eller är tom`);
   if (!isNonEmptyString(raw.kalla_url)) {
     problems.push(`${where}.kalla_url saknas eller är tom`);
