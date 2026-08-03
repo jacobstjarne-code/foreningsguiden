@@ -135,8 +135,15 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   if (raw.belopp !== null && typeof raw.belopp !== 'string') {
     problems.push(`${where}.belopp måste vara text eller null`);
   }
+  if (typeof raw.belopp === 'string' && /https?:\/\//i.test(raw.belopp)) {
+    problems.push(`${where}.belopp får inte innehålla en URL`);
+  }
   if (!isNonEmptyString(raw.sen_ansokan)) problems.push(`${where}.sen_ansokan saknas eller är tom`);
-  if (!isNonEmptyString(raw.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
+  if (!isNonEmptyString(raw.kalla_url)) {
+    problems.push(`${where}.kalla_url saknas eller är tom`);
+  } else if (!/^https?:\/\//i.test(raw.kalla_url)) {
+    problems.push(`${where}.kalla_url måste börja med http:// eller https://`);
+  }
   if (raw.anteckning !== null && raw.anteckning !== undefined && typeof raw.anteckning !== 'string') {
     problems.push(`${where}.anteckning måste vara text eller null`);
   }
