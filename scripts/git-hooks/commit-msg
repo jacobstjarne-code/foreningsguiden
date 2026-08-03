@@ -1,0 +1,6 @@
+#!/bin/sh
+# Arbetsorder 2026-08-03, punkt 5 — kollar commit-meddelandet mot en
+# eventuell bidragsminskning som pre-commit-hooken flaggade (skriver
+# .git/BIDRAG_REGRESSION_PENDING.json, läses och städas bort här oavsett
+# utfall). Ingen markering, ingen minskning flaggad → passerar tyst.
+node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --kontrollera-meddelande="$1"

@@ -9,12 +9,13 @@ export interface Props {
 
 const { urgency } = Astro.props;
 
-// 1f (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): "Ett urgensord, en
-// tröskel" — urgent och attention sa olika ord (Bråttom/Snart) för vad
-// som är samma underliggande sak (raden avviker, den kräver uppmärksamhet).
-// Båda säger nu "Snart". Trösklarna/färgerna (getUrgency, kommunTyper.ts)
-// är OFÖRÄNDRADE — bara ordet unifierat, inte dagantalen bakom det.
-const LABEL: Record<Urgency, string> = { urgent: 'Snart', attention: 'Snart', positive: 'God tid' };
+// REVERSERAT 2026-08-03 (arbetsorder 2d): 1f (2026-08-02) unifierade
+// urgent/attention till samma ord ("Snart"), men live på /kommun/gislaved/
+// visade det sig göra tvånivåskalan meningslös — två olika kort med olika
+// brådska ser identiska ut. Tillbaka till distinkta ord per nivå (Bråttom/
+// Snart), samma par som fanns innan 1f-ändringen. Trösklarna/färgerna
+// (getUrgency, kommunTyper.ts) är OFÖRÄNDRADE — bara ordet, igen.
+const LABEL: Record<Urgency, string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
 const ICON: Record<Urgency, string> = {
   urgent: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
   attention: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',

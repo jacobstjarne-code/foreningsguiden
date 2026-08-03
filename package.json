@@ -9,7 +9,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "git config core.hooksPath scripts/git-hooks || true",
+    "validera": "node --experimental-strip-types scripts/validera-data.ts",
+    "verify:matching": "node --experimental-strip-types scripts/verify-matching.ts",
+    "verify:generator": "node --experimental-strip-types scripts/verify-generator.ts",
+    "verify:kalla-cta": "node --experimental-strip-types scripts/verify-kalla-cta.ts",
+    "verify:regression": "node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

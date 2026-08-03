@@ -1,0 +1,24 @@
+#!/bin/sh
+# Arbetsorder 2026-08-03, punkt 4 — valideringsgrinden. Installeras av
+# `npm install` (package.json "prepare": git config core.hooksPath
+# scripts/git-hooks). Kan kringgås (--no-verify) — CI:n (.github/workflows/
+# validera.yml) kör samma kontroller och kan inte kringgås på samma sätt.
+set -e
+
+echo "→ Schemavalidering..."
+node --experimental-strip-types scripts/validera-data.ts
+
+echo "→ Regressionsskydd (bidragsantal)..."
+node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --mot=HEAD
+
+echo "→ astro build..."
+npm run build
+
+echo "→ Matchning + golden set..."
+node --experimental-strip-types scripts/verify-matching.ts > /dev/null
+node --experimental-strip-types scripts/verify-generator.ts > /dev/null
+
+echo "→ Källa/CTA-konsistens..."
+node --experimental-strip-types scripts/verify-kalla-cta.ts > /dev/null
+
+echo "Valideringsgrinden godkänd."

@@ -19,7 +19,7 @@ import GiltighetsKontroll from './GiltighetsKontroll.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
-  KATEGORI_LABELS, KATEGORIER,
+  KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN } from '../lib/content';
@@ -229,7 +229,7 @@ const webPageJsonLd = {
       {visaTackningsvarning && <TackningsVarning kommun={kommun.kommun} />}
       <ul class="bidrag-list">
         {sortedBidrag.map((bidrag) => (
-          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={kommun.ansokningssystem.url} kommunSlug={kommun.kommun_slug} />
+          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(bidrag, kommun)} kommunSlug={kommun.kommun_slug} />
         ))}
       </ul>
     </section>

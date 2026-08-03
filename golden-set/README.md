@@ -10,6 +10,17 @@ testprofilerna (P1/P2/P3, se nedan), och testar de fyra kriterierna
 K1–K4 maskinellt. **Betalning för utkastprodukten aktiveras först när
 grinden är grön.**
 
+**Kommundatan är FRUST** (`golden-set/snapshot.yaml`, arbetsorder
+2026-08-03 punkt 6) — `verify-generator.ts` läser den frusna kopian, inte
+live `data/kommuner/*.yaml`. GPT:s parallella datarättningar ändrar
+kommun-YAML löpande; en korrekt datarättning ska aldrig ensam få grinden
+röd (facit testar generator-LOGIKEN, inte "råkar dagens YAML matcha en
+gissning skriven för veckor sedan"). Skriver du om en facit-fil mot ny
+data: kör `node --experimental-strip-types
+scripts/uppdatera-golden-set-snapshot.ts` i SAMMA commit, verifiera
+42/42 grönt, committa båda tillsammans. Låt aldrig snapshotten glida ur
+synk med facit-filerna i tysthet.
+
 **14/14 facit klara, grinden är GRÖN** (Code, 2026-07-30/31,
 `node scripts/verify-generator.ts`): 42/42 (bidrag × profil)-kombinationer
 täckta, 0 FAIL. `UTKASTVY_LIVE` är sedan 2026-07-30 satt till `true`

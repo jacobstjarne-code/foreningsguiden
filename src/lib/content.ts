@@ -705,6 +705,13 @@ export const BETA = {
 export const GILTIGHETSKOLL = {
   rubrik: 'Är er bidragsstatus fortfarande giltig?',
   intro: 'I {kommun} förfaller godkännandet som bidragsberättigad förening om det inte förnyas. Ange när föreningen senast hade årsmöte, så räknar vi ut var ni står.',
+  // Arbetsorder 2026-08-03 (2a): "intro" påstod förfall även för kommuner
+  // utan känd giltighetsregel (Gislaved: giltighet: null överallt) — motsäger
+  // svarOkand längre ned i samma widget. introOkand används i stället när
+  // hittaGiltighetsregel() inte hittar något. Kort, funktionell text (Code,
+  // inte Fable — flaggat i commit, samma klass som STALE.template/
+  // BEVAKNING.bevakasBadge tidigare i den här kodbasen).
+  introOkand: 'Ange när föreningen senast hade årsmöte, så kontrollerar vi om {kommun} anger en tidsgräns för godkännandet.',
   datumLabel: 'Föreningens senaste årsmöte',
   knapp: 'Kontrollera',
   svarRisk: 'Med årsmöte {arsmotesdatum} och regeln i {kommun} ({giltighetsregel}) kan er status ha förfallit eller vara nära att förfalla. Kontrollera i {system} att uppgifterna är uppdaterade — och gör det före nästa deadline, inte vid den.',

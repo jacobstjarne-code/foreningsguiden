@@ -143,6 +143,20 @@ export function hittaGiltighetsregel(forutsattningar: Forutsattning[]): string |
 }
 
 /**
+ * 2b (arbetsorder 2026-08-03): "Till ansökan"-knappen använde kommunens
+ * generiska ansokningssystem.url för ALLA bidrag — fel så fort ett bidrag
+ * har en egen, mer specifik källa (Gislaveds Föreningsbidrag social
+ * verksamhet ligger under omsorg-och-stod/, inte fritid-och-kultursidan
+ * knappen pekade på). kalla_url är ett obligatoriskt fält på Bidrag — ska
+ * alltid finnas — men fallbacken finns kvar defensivt, aldrig en tom href.
+ * En sanning: samma funktion som knappen OCH källfotnoten ska derivera ur,
+ * så de aldrig kan divergera igen (se testet i verify-matching.ts).
+ */
+export function bidragAnsokningsUrl(bidrag: Bidrag, kommun: Kommun): string {
+  return bidrag.kalla_url || kommun.ansokningssystem.url;
+}
+
+/**
  * 1d (SPEC_HUVUDPROCESSEN §1d, Jacob 2026-08-02): en förutsättnings
  * beskrivning som bockningsbara punkter i stället för ett textblock.
  * Delar ENDAST på meningsgräns (.!?) — ALDRIG på kommatecken. Ett

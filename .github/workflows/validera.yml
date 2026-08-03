@@ -1,0 +1,45 @@
+name: Validera
+
+# Arbetsorder 2026-08-03, punkt 4 — samma grind som pre-commit-hooken
+# (scripts/git-hooks/pre-commit), men här utan möjlighet att kringgås
+# med --no-verify. Körs på varje push och pull request mot main.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validera:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # regressionsskyddet behöver historik mot main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installera beroenden
+        run: npm ci
+
+      - name: Schemavalidering
+        run: node --experimental-strip-types scripts/validera-data.ts
+
+      - name: Regressionsskydd (bidragsantal mot main)
+        if: github.ref != 'refs/heads/main'
+        run: node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --ci-mot=origin/main
+
+      - name: astro build
+        run: npm run build
+
+      - name: Matchning
+        run: node --experimental-strip-types scripts/verify-matching.ts
+
+      - name: Golden set
+        run: node --experimental-strip-types scripts/verify-generator.ts
+
+      - name: Källa/CTA-konsistens
+        run: node --experimental-strip-types scripts/verify-kalla-cta.ts

@@ -25,7 +25,9 @@ export interface Props {
 
 const { kommun, today } = Astro.props;
 const giltighetsregel = hittaGiltighetsregel(kommun.forutsattningar);
-const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
+// 2a (arbetsorder 2026-08-03): ingressen ska inte påstå att något förfaller
+// när ingen regel är känd — det motsäger svarOkand-grenen längre ned.
+const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).replace(/{kommun}/g, kommun.kommun);
 ---
 <div
   class="giltighetskoll fg-card"
@@ -46,17 +48,26 @@ const intro = GILTIGHETSKOLL.intro.replace(/{kommun}/g, kommun.kommun);
   </form>
 
   <div data-giltighetskoll-svar hidden>
-    <p data-giltighetskoll-svar-risk hidden>
-      {GILTIGHETSKOLL.svarRisk
-        .replace(/{kommun}/g, kommun.kommun)
-        .replace(/{system}/g, kommun.ansokningssystem.namn)
-        .replace(/{giltighetsregel}/g, giltighetsregel ?? '')}
-    </p>
-    <p data-giltighetskoll-svar-ok hidden>
-      {GILTIGHETSKOLL.svarOk
-        .replace(/{kommun}/g, kommun.kommun)
-        .replace(/{giltighetsregel}/g, giltighetsregel ?? '')}
-    </p>
+    <!-- 2a (arbetsorder 2026-08-03): svarRisk/svarOk renderas bara när en
+         regel faktiskt är känd — annars bakas tomma platshållare ("regeln
+         i {kommun} ()", "förnyas — .") in i markupen för en gren som
+         klientskriptet ändå aldrig visar (giltighetsregel === null går
+         alltid till svarOkand nedan, se skriptets tidiga return). -->
+    {giltighetsregel && (
+      <>
+        <p data-giltighetskoll-svar-risk hidden>
+          {GILTIGHETSKOLL.svarRisk
+            .replace(/{kommun}/g, kommun.kommun)
+            .replace(/{system}/g, kommun.ansokningssystem.namn)
+            .replace(/{giltighetsregel}/g, giltighetsregel)}
+        </p>
+        <p data-giltighetskoll-svar-ok hidden>
+          {GILTIGHETSKOLL.svarOk
+            .replace(/{kommun}/g, kommun.kommun)
+            .replace(/{giltighetsregel}/g, giltighetsregel)}
+        </p>
+      </>
+    )}
     <p data-giltighetskoll-svar-okand hidden>
       {GILTIGHETSKOLL.svarOkand.replace(/{kommun}/g, kommun.kommun)}
     </p>

@@ -265,6 +265,18 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
     problems.push('bidrag måste vara en lista (kan vara tom om inga bidrag hittats än)');
   } else {
     raw.bidrag = raw.bidrag.map((b: any, i: number) => validateBidrag(b, raw.kommun_slug ?? file, i, problems));
+    // Arbetsorder 2026-08-03, punkt 4: unika id per kommun. bidrag[].id
+    // används som HTML-ankare (#bidrag-{id}) och som matchningsnyckel —
+    // en dubblett ger ett odefinierat ankarmål och kan dölja ett bidrag
+    // bakom ett annat i länkar/matchning.
+    const iddSedda = new Map<string, number>();
+    for (const b of raw.bidrag as { id?: string }[]) {
+      if (!isNonEmptyString(b?.id)) continue; // redan flaggat av validateBidrag ovan
+      iddSedda.set(b.id, (iddSedda.get(b.id) ?? 0) + 1);
+    }
+    for (const [id, antal] of iddSedda) {
+      if (antal > 1) problems.push(`bidrag-id "${id}" (${raw.kommun_slug ?? file}) förekommer ${antal} gånger — id måste vara unikt inom kommunen`);
+    }
   }
 
   // forutsattningar är nytt (FORUTSATTNINGAR.md §2) — saknas i äldre YAML,
@@ -301,6 +313,29 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
   }
 
   return raw as Kommun;
+}
+
+/**
+ * Arbetsorder 2026-08-03, punkt 4: valideringsgrinden (scripts/validera-
+ * data.ts) vill se ALLA trasiga filer i ett svep, inte bara den första
+ * (loadKommuner() nedan är medvetet fail-fast — en trasig fil ska aldrig
+ * tyst släppas igenom till en byggd sida). Samma parse+validera-logik,
+ * bara med varje fils fel samlat i stället för kastat vid första träff.
+ */
+export function validateAllKommunFiles(): { file: string; error: string }[] {
+  const files = readdirSync(DATA_DIR).filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'));
+  const problem: { file: string; error: string }[] = [];
+  for (const file of files) {
+    try {
+      const content = readFileSync(join(DATA_DIR, file), 'utf-8');
+      const raw = yaml.load(content);
+      const stem = file.replace(/\.ya?ml$/, '');
+      validateKommun(raw, file, stem);
+    } catch (e) {
+      problem.push({ file, error: (e as Error).message });
+    }
+  }
+  return problem;
 }
 
 let _cache: Kommun[] | null = null;

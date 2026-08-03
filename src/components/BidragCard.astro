@@ -23,9 +23,23 @@ export interface Props {
 
 const { bidrag, verifierad, ansokningsUrl, kommunSlug } = Astro.props;
 
+// 2c (arbetsorder 2026-08-03): typ 'okand' visade ett generiskt "inget
+// ansökningsdatum"-besked även när en relativ frist FANNS, angiven i
+// anteckning-fältet med konventionen "Relativ tidsfrist: {frist}" (kolon
+// = ett värde att visa). Skiljs medvetet från t.ex. Åstorps anteckning
+// "Relativ tidsfrist kan inte uttryckas..." (ingen kolon — en datamodells-
+// kommentar till den som läser YAML:en, inte text för en besökare) —
+// ett bredare mönster (utan kolon-kravet) hade läckt utvecklarjargong ut
+// på kortet för det fallet.
+const RELATIV_FRIST_RE = /^Relativ tidsfrist:\s*(.+)$/;
+
+function relativFrist(b: Bidrag): string | null {
+  return b.anteckning?.match(RELATIV_FRIST_RE)?.[1] ?? null;
+}
+
 function formatDeadlines(b: Bidrag): string {
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
-  if (b.deadlines.typ === 'okand') return 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
+  if (b.deadlines.typ === 'okand') return relativFrist(b) ?? 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
 
@@ -72,8 +86,15 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
       </>
     )}
 
-    <dt>Sen ansökan</dt>
-    <dd>{bidrag.sen_ansokan}</dd>
+    {/* 2e (arbetsorder 2026-08-03): "Ej angivet i källan" är sentinelvärdet
+        för okänt (kommunTyper.ts sen_ansokan: string, aldrig null) — döljs
+        i stället för att visas som ett tomt besked på varje kort. */}
+    {bidrag.sen_ansokan !== 'Ej angivet i källan' && (
+      <>
+        <dt>Sen ansökan</dt>
+        <dd>{bidrag.sen_ansokan}</dd>
+      </>
+    )}
   </dl>
 
   <div class="bidrag-card__divider"></div>
@@ -84,7 +105,9 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     </p>
     <VerificationStamp verifierad={verifierad} />
   </div>
-  {bidrag.anteckning && <p class="bidrag-card__kalla">{bidrag.anteckning}</p>}
+  {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
+      (relativFrist) — annars stod samma besked på kortet två gånger. */}
+  {bidrag.anteckning && !relativFrist(bidrag) && <p class="bidrag-card__kalla">{bidrag.anteckning}</p>}
 
   <div class="felrapport" data-felrapport data-kommun-slug={kommunSlug} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
     <button type="button" class="felrapport-knapp">Det här stämmer inte</button>

@@ -21,21 +21,19 @@ import { genereraUtkast } from '../src/lib/utkastGenerator.ts';
 import type { Kommun } from '../src/lib/kommunTyper.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
-// Läser kommun-YAML direkt (js-yaml, samma som kommuner.ts) i stället för
-// att importera kommuner.ts self: den filen gör en riktig VALUE-import av
-// kommunTyper.ts UTAN .ts-ändelse (rätt för Astro/Vite-bygget, fel för
-// Nodes strikta ESM-upplösning vid `node scripts/...ts`). Att lägga till
-// en extension där hade rört delad infrastruktur i onödan för ett
-// skriptbekvämlighetsproblem — enklare att låta scriptet vara
-// självförsörjande, samma princip som verify-matching.ts:s egna
-// test-fixtures.
+// Arbetsorder 2026-08-03, punkt 6: läser FRUSEN snapshot (golden-set/
+// snapshot.yaml), inte längre live data/kommuner/*.yaml. GPT:s parallella
+// datarättningar ändrar kommun-YAML löpande — en korrekt datarättning ska
+// aldrig ensam få golden set-grinden röd (facit testar generator-LOGIKEN,
+// inte "råkar dagens YAML matcha en gissning skriven för veckor sedan").
+// Uppdatera snapshotten medvetet: scripts/uppdatera-golden-set-snapshot.ts
+// (se den filens och snapshottens egna kommentarer).
+let _snapshotCache: Record<string, Kommun> | null = null;
 function getKommunBySlug(slug: string): Kommun | undefined {
-  const path = `data/kommuner/${slug}.yaml`;
-  try {
-    return yaml.load(readFileSync(path, 'utf-8')) as Kommun;
-  } catch {
-    return undefined;
+  if (!_snapshotCache) {
+    _snapshotCache = yaml.load(readFileSync('golden-set/snapshot.yaml', 'utf-8')) as Record<string, Kommun>;
   }
+  return _snapshotCache[slug];
 }
 
 type ProfilNyckel = 'p1' | 'p2' | 'p3';
@@ -121,7 +119,7 @@ function test(namn: string, fn: () => void) {
   }
 }
 
-const filer = readdirSync('golden-set').filter((f) => f.endsWith('.yaml'));
+const filer = readdirSync('golden-set').filter((f) => f.endsWith('.yaml') && f !== 'snapshot.yaml');
 
 if (filer.length === 0) {
   console.log('Inga golden-set/*.yaml-filer hittades. Grinden har inget att köra mot — se golden-set/README.md.');
