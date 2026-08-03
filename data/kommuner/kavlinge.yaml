@@ -1,201 +1,280 @@
-# Källa verifierad 2026-07-27 mot kavlinge.se enligt HAIKU_SPEC v3 §B1-B6.
-# Kävlinge kommuns webbsida för föreningsbidrag (uppleva-och-gora/foreningar/soka-
-# foreningsbidrag) och bidragsbestämmelser lästa tillsammans. Bidragstyper
-# identifierade från både huvudsida och detaljsida. Deadlines hämtade från
-# officiell källa. För vissa bidrag är detaljerade belopp specificerade (t.ex.
-# lokalt aktivitetsstöd: 14.30 kr per deltagartillfälle), andra är case-by-case.
-# Verksamhetsbidraget för kultur har deadline Sep 15 - Oct 15, för sociala
-# föreningar Apr 15 - May 15. Systemet för idrottsföreningar är "Aktivitetskort på
-# Nätet" (ApN). Spot-checkas av Jacob före publik deploy.
-kommun: "Kävlinge"
-kommun_slug: "kavlinge"
-lan: "Skåne län"
+kommun: Kävlinge
+kommun_slug: kavlinge
+lan: Skåne län
 befolkning: 32725
-forvaltning: "Arbetsliv- och fritidsnämnden"
+forvaltning: Arbetsliv- och fritidsnämnden
 ansokningssystem:
-  namn: "Aktivitetskort på Nätet (ApN) för idrottsföreningar; E-tjänster för övriga"
-  url: "https://e-tjanster.kavlinge.se/"
-kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag"
+  namn: Aktivitetskort på Nätet (ApN) för idrottsföreningar; E-tjänster för övriga
+  url: https://e-tjanster.kavlinge.se/
+kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
 verifierad: 2026-07-27
 bidrag:
-  - id: "kavlinge-lokalt-aktivitetsstod"
-    namn: "Lokalt aktivitetsstöd"
-    kategori: ["idrott"]
-    malgrupp: "Grupper för åldersgrupp 6-20 år, samt aktiviteter för personer med funktionsnedsättning"
-    deadlines:
-      typ: "fasta"
-      datum: ["02-25", "08-25"]
-    krav:
-      - "Minst 15 godkända träffar per period"
-      - "Ledare minst 13 år gamla"
-      - "Minst 3 deltagare per träff"
-      - "Minst 45 minuters varaktighet per träff"
-      - "Registrering i ApN"
-    belopp: "14.30 kronor per deltagartillfälle"
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "Ansöks via Aktivitetskort på Nätet (ApN) för idrotts- och friluftsföreningar. Två perioder per år."
-    alder_min: 6
-    foreningstyp: ["idrott", "friluft"]
-  - id: "kavlinge-lokalbidrag-hyrd"
-    namn: "Lokalbidrag – Hyrd lokal"
-    kategori: ["idrott"]
-    malgrupp: "Föreningar med hyrd lokal för verksamhet"
-    deadlines:
-      typ: "fasta"
-      datum: ["02-25", "08-25"]
-    krav:
-      - "Minst 30 godkända träffar föregående år"
-      - "Lokal belägen i Kävlinge"
-      - "Relevant lokaldokumentation"
-    belopp: "Upp till 80% av berättigade kostnader, max 26 kronor per deltagartillfälle"
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "För idrotts- och friluftsföreningar med hyrd lokal. Två ansökningsperioder per år."
-    foreningstyp: ["idrott", "friluft"]
-  - id: "kavlinge-lokalbidrag-drift"
-    namn: "Lokalbidrag – Drift (egen lokal)"
-    kategori: ["idrott"]
-    malgrupp: "Föreningar med egen lokal för verksamhet"
-    deadlines:
-      typ: "fasta"
-      datum: ["02-25"]
-    krav:
-      - "Ägd lokal för föreningens verksamhet"
-      - "Fokus på idrott eller friluftsliv"
-      - "Minst 30 träffar föregående år (50% reducering om lägre)"
-      - "Dokumenterade driftskostnader"
-    belopp: "Upp till 35% av föregående års kostnader; max 60000 kronor"
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "För föreningar med egen lokal. Endast en ansökningsperiod per år."
-    foreningstyp: ["idrott", "friluft"]
-  - id: "kavlinge-startbidrag"
-    namn: "Startbidrag"
-    kategori: ["idrott", "kultur", "ovrig"]
-    malgrupp: "Nya föreningar eller nya avdelningar som inte varit aktiva i kommunen"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Ny förening eller avdelning"
-      - "Inte aktiv i kommunen föregående fem år"
-    belopp: "3000 kronor"
-    sen_ansokan: "Löpande"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "Engångsbidrag för nya föreningar eller nya avdelningar. Löpande ansökning före projektstart."
-    min_verksamhetstid_manader: 0
-  - id: "kavlinge-utvecklingsbidrag"
-    namn: "Utvecklingsbidrag"
-    kategori: ["idrott", "kultur", "ovrig"]
-    malgrupp: "Föreningar för utvecklingsprojekt"
-    deadlines:
-      typ: "lopande"
-      datum: []
-    krav:
-      - "Skriftlig projektbeskrivning"
-      - "Budget och tidplan"
-      - "Max tre bidrag för samma/liknande projekt"
-      - "Rapport ska lämnas inom 2 månader efter projektslut"
-    belopp: null
-    sen_ansokan: "Löpande, före projektstart"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "Bidrag för utvecklingsprojekt. Bedöms individuellt."
-  - id: "kavlinge-verksamhetsbidrag-kultur"
-    namn: "Verksamhetsbidrag för kulturföreningar"
-    kategori: ["kultur"]
-    malgrupp: "Kulturföreningar"
-    deadlines:
-      typ: "fasta"
-      datum: ["09-15", "10-15"]
-    krav:
-      - "Verksamhetsplan och budget"
-      - "Medlemsdokumentation"
-      - "Minsta medlemstal och aktivitetskrav"
-    belopp: null
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "För kulturföreningar. Deadline 15 september - 15 oktober."
-  - id: "kavlinge-verksamhetsbidrag-social"
-    namn: "Verksamhetsbidrag för sociala föreningar"
-    kategori: ["ovrig"]
-    malgrupp: "Föreningar inom det sociala området"
-    deadlines:
-      typ: "fasta"
-      datum: ["04-15", "05-15"]
-    krav:
-      - "Verksamhetsplan och budget"
-      - "Medlemsdokumentation"
-      - "Beskrivning av senaste aktiviteter"
-      - "Medlemmarnas koppling till kommunen"
-    belopp: null
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "För föreningar inom socialt område. Deadline 15 april - 15 maj."
-  - id: "kavlinge-verksamhetsbidrag-ovrig"
-    namn: "Verksamhetsbidrag övrig förening"
-    kategori: ["ovrig"]
-    malgrupp: "Övriga föreningar som inte får andra bidragskategorier"
-    deadlines:
-      typ: "fasta"
-      datum: ["05-01"]
-    krav:
-      - "Kan inte ha fått bidrag från annan kategori"
-      - "Verksamhetsbeskrivning"
-      - "Medlemsantal"
-    belopp: null
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "För övriga föreningar som inte passar in i andra kategorier. Deadline 1 maj."
-  - id: "kavlinge-studieforbundsbidrag"
-    namn: "Studieförbundsbidrag"
-    kategori: ["kultur"]
-    malgrupp: "Studieförbund med godkännande från Folkbildningsrådet"
-    deadlines:
-      typ: "fasta"
-      datum: ["04-15", "05-15"]
-    krav:
-      - "Godkännande från Folkbildningsrådet"
-      - "Årlig dialogmöte med kommun"
-    belopp: "Tre komponenter: 65% grundbidrag (föregående två år); 20%+ volymökning (senaste år); 15% målgrupper"
-    sen_ansokan: "1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad"
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser"
-    anteckning: "För studieförbund med Folkbildningsrådet-godkännande. Deadline 15 april - 15 maj."
-    foreningstyp: ["kultur"]
+- id: kavlinge-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  kategori:
+  - idrott
+  malgrupp: Grupper för åldersgrupp 6-20 år, samt aktiviteter för personer med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+    - 08-25
+  krav:
+  - Minst 15 godkända träffar per period
+  - Ledare minst 13 år gamla
+  - Minst 3 deltagare per träff
+  - Minst 45 minuters varaktighet per träff
+  - Registrering i ApN
+  belopp: 14.30 kronor per deltagartillfälle
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: Ansöks via Aktivitetskort på Nätet (ApN) för idrotts- och friluftsföreningar. Två perioder per år.
+  alder_min: 6
+  foreningstyp:
+  - idrott
+  - friluft
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-lokalbidrag-hyrd
+  namn: Lokalbidrag – Hyrd lokal
+  kategori:
+  - idrott
+  malgrupp: Föreningar med hyrd lokal för verksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+    - 08-25
+  krav:
+  - Minst 30 godkända träffar föregående år
+  - Lokal belägen i Kävlinge
+  - Relevant lokaldokumentation
+  belopp: Upp till 80% av berättigade kostnader, max 26 kronor per deltagartillfälle
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: För idrotts- och friluftsföreningar med hyrd lokal. Två ansökningsperioder per år.
+  foreningstyp:
+  - idrott
+  - friluft
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-lokalbidrag-drift
+  namn: Lokalbidrag – Drift (egen lokal)
+  kategori:
+  - idrott
+  malgrupp: Föreningar med egen lokal för verksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-25
+  krav:
+  - Ägd lokal för föreningens verksamhet
+  - Fokus på idrott eller friluftsliv
+  - Minst 30 träffar föregående år (50% reducering om lägre)
+  - Dokumenterade driftskostnader
+  belopp: Upp till 35% av föregående års kostnader; max 60000 kronor
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: För föreningar med egen lokal. Endast en ansökningsperiod per år.
+  foreningstyp:
+  - idrott
+  - friluft
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-startbidrag
+  namn: Startbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Nya föreningar eller nya avdelningar som inte varit aktiva i kommunen
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Ny förening eller avdelning
+  - Inte aktiv i kommunen föregående fem år
+  belopp: 3000 kronor
+  sen_ansokan: Löpande
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: Engångsbidrag för nya föreningar eller nya avdelningar. Löpande ansökning före projektstart.
+  min_verksamhetstid_manader: 0
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar för utvecklingsprojekt
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Skriftlig projektbeskrivning
+  - Budget och tidplan
+  - Max tre bidrag för samma/liknande projekt
+  - Rapport ska lämnas inom 2 månader efter projektslut
+  belopp: null
+  sen_ansokan: Löpande, före projektstart
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: Bidrag för utvecklingsprojekt. Bedöms individuellt.
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-verksamhetsbidrag-kultur
+  namn: Verksamhetsbidrag för kulturföreningar
+  kategori:
+  - kultur
+  malgrupp: Kulturföreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-15
+    - 10-15
+  krav:
+  - Verksamhetsplan och budget
+  - Medlemsdokumentation
+  - Minsta medlemstal och aktivitetskrav
+  belopp: null
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: För kulturföreningar. Deadline 15 september - 15 oktober.
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-verksamhetsbidrag-social
+  namn: Verksamhetsbidrag för sociala föreningar
+  kategori:
+  - ovrig
+  malgrupp: Föreningar inom det sociala området
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-15
+    - 05-15
+  krav:
+  - Verksamhetsplan och budget
+  - Medlemsdokumentation
+  - Beskrivning av senaste aktiviteter
+  - Medlemmarnas koppling till kommunen
+  belopp: null
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: För föreningar inom socialt område. Deadline 15 april - 15 maj.
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-verksamhetsbidrag-ovrig
+  namn: Verksamhetsbidrag övrig förening
+  kategori:
+  - ovrig
+  malgrupp: Övriga föreningar som inte får andra bidragskategorier
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-01
+  krav:
+  - Kan inte ha fått bidrag från annan kategori
+  - Verksamhetsbeskrivning
+  - Medlemsantal
+  belopp: null
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: För övriga föreningar som inte passar in i andra kategorier. Deadline 1 maj.
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
+- id: kavlinge-studieforbundsbidrag
+  namn: Studieförbundsbidrag
+  kategori:
+  - kultur
+  malgrupp: Studieförbund med godkännande från Folkbildningsrådet
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-15
+    - 05-15
+  krav:
+  - Godkännande från Folkbildningsrådet
+  - Årlig dialogmöte med kommun
+  belopp: 'Tre komponenter: 65% grundbidrag (föregående två år); 20%+ volymökning (senaste år); 15% målgrupper'
+  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  anteckning: För studieförbund med Folkbildningsrådet-godkännande. Deadline 15 april - 15 maj.
+  foreningstyp:
+  - kultur
+  krav_status: angivet
+  krav_fullstandiga: false
+  belopp_status: overifierat
+  deadline_status: overifierat
+  giltighet_status: overifierat
+  senast_verifierad: '2026-08-03'
 forutsattningar:
-  - id: "kavlinge-organisering-och-stadgar"
-    vad: "Organisering och stadgar"
-    beskrivning: "Föreningen måste ha minst 3 styrelseledamöter, vara organiserad enligt demokratiska principer, ha skriftliga stadgar som uppdateras årligen, och registrerad organisationsnummer hos Skatteverket."
-    system: "Kävlinge kommun"
-    ledtid: null
-    ledtid_text: "Kontrolleras vid ansökning"
-    giltighet: null
-    ordning: 1
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag"
-  - id: "kavlinge-medlemsforteckning"
-    vad: "Medlemsförteckning och årsmöte"
-    beskrivning: "Föreningen måste uppdatera medlemslista och ladda upp årsmötesprotokoll, verksamhetsberättelse och årsredovisning inklusive revisionsberättelse till föreningsregistret inom två månader efter årsmötet."
-    system: "Föreningsregistret"
-    ledtid: 60
-    ledtid_text: "Måste lämnas in inom två månader efter årsmötet"
-    giltighet: null
-    ordning: 2
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag"
-  - id: "kavlinge-jamstalldhet-och-policy"
-    vad: "Jämställdhets- och värdegrundspolicy"
-    beskrivning: "Föreningen måste ha policyer kring alkohol-, drog-, tobaks- och spelförebyggande arbete samt jämställdhetspolicy."
-    system: "Kävlinge kommun"
-    ledtid: null
-    ledtid_text: "Måste finnas vid ansökning"
-    giltighet: null
-    ordning: 3
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag"
-  - id: "kavlinge-background-check"
-    vad: "Bakgrundskontroll"
-    beskrivning: "Personal och volontärer som arbetar med barn måste godkännas genom bakgrundskontroll enligt lag (2022:278)."
-    system: "Kävlinge kommun"
-    ledtid: null
-    ledtid_text: "Kontrolleras vid ansökning"
-    giltighet: null
-    ordning: 4
-    kalla_url: "https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag"
+- id: kavlinge-organisering-och-stadgar
+  vad: Organisering och stadgar
+  beskrivning: Föreningen måste ha minst 3 styrelseledamöter, vara organiserad enligt demokratiska principer, ha skriftliga
+    stadgar som uppdateras årligen, och registrerad organisationsnummer hos Skatteverket.
+  system: Kävlinge kommun
+  ledtid: null
+  ledtid_text: Kontrolleras vid ansökning
+  giltighet: null
+  ordning: 1
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
+- id: kavlinge-medlemsforteckning
+  vad: Medlemsförteckning och årsmöte
+  beskrivning: Föreningen måste uppdatera medlemslista och ladda upp årsmötesprotokoll, verksamhetsberättelse och årsredovisning
+    inklusive revisionsberättelse till föreningsregistret inom två månader efter årsmötet.
+  system: Föreningsregistret
+  ledtid: 60
+  ledtid_text: Måste lämnas in inom två månader efter årsmötet
+  giltighet: null
+  ordning: 2
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
+- id: kavlinge-jamstalldhet-och-policy
+  vad: Jämställdhets- och värdegrundspolicy
+  beskrivning: Föreningen måste ha policyer kring alkohol-, drog-, tobaks- och spelförebyggande arbete samt jämställdhetspolicy.
+  system: Kävlinge kommun
+  ledtid: null
+  ledtid_text: Måste finnas vid ansökning
+  giltighet: null
+  ordning: 3
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
+- id: kavlinge-background-check
+  vad: Bakgrundskontroll
+  beskrivning: Personal och volontärer som arbetar med barn måste godkännas genom bakgrundskontroll enligt lag (2022:278).
+  system: Kävlinge kommun
+  ledtid: null
+  ledtid_text: Kontrolleras vid ansökning
+  giltighet: null
+  ordning: 4
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
