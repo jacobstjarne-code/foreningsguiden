@@ -43,9 +43,6 @@ for (const e of getDeadlineEntries(today).filter((e) => !e.isLopande)) {
   if (kommandeDeadlines.length >= 5) break;
 }
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
-// Sitewide färskhetsdatum för TRATT.start.senastAvlastRad — det ÄLDSTA
-// verifierad-datumet över alla kommuner (inte ett påhittat, inte "idag").
-const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifierad : min), kommuner[0]?.verifierad ?? today);
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
   <section class="start-hero">
@@ -53,7 +50,7 @@ const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifie
     <p class="start-hero__ingress">{TRATT.start.ingress}</p>
     <a href="/matcha/" class="btn-primary">{TRATT.start.startknapp} →</a>
     <p class="start-disclaimer">{SIDFOT.kortText}</p>
-    <p class="start-hero__senast-avlast">{TRATT.start.senastAvlastRad.replace('{datum}', formatDate(senastAvlast))}</p>
+    <p class="start-hero__senast-avlast">{TRATT.start.senastAvlastRad}</p>
   </section>
 
   <div class="start-forhandsvisning">
@@ -73,11 +70,10 @@ const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifie
 
   <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
 
-  <section class="start-sekundar">
-    <h2>{START.kommunvaljareRubrik}</h2>
-    <KommunValjare kommuner={kommuner} />
-  </section>
-
+  {/* C2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): "Närmast i tid" flyttad över
+     kommunlistan — tabellen är sidans faktiska nyhetsvärde (vad som
+     händer snart), kommunbläddringen är navigation för den som redan
+     vet sin kommun och inte behöver vara sidans mitt. */}
   <section>
     <h2>Närmast i tid</h2>
     <p>{START.kalenderPuff}</p>
@@ -98,6 +94,11 @@ const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifie
       </tbody>
     </table>
     <p><a href="/deadlines/">Se hela deadlinekalendern →</a></p>
+  </section>
+
+  <section class="start-sekundar">
+    <h2>{START.kommunvaljareRubrik}</h2>
+    <KommunValjare kommuner={kommuner} />
   </section>
 </Base>
 

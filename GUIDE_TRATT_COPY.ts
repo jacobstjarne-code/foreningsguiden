@@ -16,14 +16,14 @@ export const TRATT = {
     // uppdateras. Löser samtidigt Designs H6 (synlig väg att rätta ett
     // svar) — ingen logikändring, bara rätt namn på det knappen redan gjorde.
     knappBorjaOm: 'Ändra svar',
-    // Sitewide färskhetsrad (förstasidan) — {datum} injiceras av Code med
-    // det ÄLDSTA `verifierad`-datumet över alla kommuner (fix 2026-07-31,
-    // Jacob: det äldsta, inte det nyaste — cherry-plockar annars den bäst
-    // avlästa kommunen). Meningen omformulerad av Code i SAMMA commit som
-    // logikändringen, av nödvändighet — "senast av" hade blivit sakligt
-    // fel med ett äldsta-datum. Faktakorrigering, ingen stilrevidering;
-    // Fable äger ordvalet om det ska låta annorlunda.
-    senastAvlastRad: 'Vår äldsta avläsning mot en kommuns egen sida är från {datum}.',
+    // C2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): den gamla raden ("Vår äldsta
+    // avläsning mot en kommuns egen sida är från {datum}") satte
+    // värsta-fallet i sidans mitt, ovanpå kommunlistan — flyttad till
+    // /om/ under Så verifierar vi (OM.senastAvlastRad, content.ts,
+    // exakt samma ordalydelse, bara ny plats). Förstasidan får i stället
+    // en evergreen, alltid sann rad utan datum — Jacobs egna ord,
+    // ordagrant.
+    senastAvlastRad: 'Varje bidrag visar när vi senast läste kommunens sida.',
   },
 
   // ---- Löpande räknare (uppdateras efter varje svar) ----

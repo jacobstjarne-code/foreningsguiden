@@ -181,6 +181,11 @@ export const OM = {
     'Varje uppgift här är hämtad från kommunens egen publicerade information och märkt med det datum vi senast stämde av den mot källan. Vi länkar alltid till kommunens sida, så att du kan läsa originalet själv. Är en uppgift äldre än ett halvår markerar vi den som möjligen inaktuell, eftersom regler och datum ändras.',
     'Vi är inte kommunen och kan inte avgöra din ansökan. Det vi gör är att hjälpa dig hitta rätt bidrag och komma ihåg när det ska sökas — ansökan lämnar du in hos kommunen. Ser du en uppgift som blivit fel, hör av dig, så rättar vi den och kontrollerar om mot källan.',
   ],
+  // C2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): värsta-fallet flyttat hit från
+  // förstasidan (GUIDE_TRATT_COPY.ts TRATT.start.senastAvlastRad) — exakt
+  // samma ordalydelse, {datum} injiceras av Code med det ÄLDSTA
+  // `verifierad`-datumet över alla kommuner, samma beräkning som innan.
+  senastAvlastRad: 'Vår äldsta avläsning mot en kommuns egen sida är från {datum}.',
   /**
    * Ansvar och källor — egen sektion längst ner på om-sidan. Gör E-E-A-T-jobbet
    * (namngiven avsändare) och håller ansvarsbegränsningen skarp. Rubrik + stycken.

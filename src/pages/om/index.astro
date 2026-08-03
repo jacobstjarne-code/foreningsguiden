@@ -6,9 +6,15 @@
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
 import { OM, BETA } from '../../lib/content';
-import { loadKommuner } from '../../lib/kommuner';
+import { loadKommuner, formatDate } from '../../lib/kommuner';
 
-const antalKommuner = loadKommuner().length;
+const kommuner = loadKommuner();
+const antalKommuner = kommuner.length;
+// C2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): värsta-fallet flyttat hit från
+// förstasidan — samma beräkning som innan (det ÄLDSTA verifierad-datumet
+// över alla kommuner, inte det nyaste — cherry-plockar annars den bäst
+// avlästa kommunen).
+const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifierad : min), kommuner[0]?.verifierad ?? '');
 ---
 <Base title={OM.metaTitle} description={OM.metaDescription}>
   <BreadcrumbList items={[
@@ -19,6 +25,7 @@ const antalKommuner = loadKommuner().length;
   <h1>{OM.h1}</h1>
 
   {OM.stycken.map((stycke) => <p>{stycke}</p>)}
+  {senastAvlast && <p>{OM.senastAvlastRad.replace('{datum}', formatDate(senastAvlast))}</p>}
 
   <section>
     <h2>{OM.ansvarRubrik}</h2>
