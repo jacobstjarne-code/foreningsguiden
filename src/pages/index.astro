@@ -27,7 +27,21 @@ import { TRATT } from '../../GUIDE_TRATT_COPY';
 
 const kommuner = loadKommuner();
 const today = todayISO();
-const kommandeDeadlines = getDeadlineEntries(today).filter((e) => !e.isLopande).slice(0, 5);
+// Bugg 2026-08-03 (Jacob): fem Pajala-rader i förhandsvisningen — flera
+// bidrag i samma kommun kan dela nästa-datum, och entries är en rad per
+// (bidrag × datum), inte en rad per kommun. Förhandsvisningen ska visa
+// SPRIDNING (vilka kommuner har något snart), inte "vilken kommun råkar
+// ha flest bidrag på samma dag" — full listan med alla bidrag finns redan
+// på /deadlines/. Dedupar till högst en rad per kommun, tar den NÄRMASTE
+// (listan är redan datumsorterad från getDeadlineEntries).
+const settaKommuner = new Set<string>();
+const kommandeDeadlines = [];
+for (const e of getDeadlineEntries(today).filter((e) => !e.isLopande)) {
+  if (settaKommuner.has(e.kommunSlug)) continue;
+  settaKommuner.add(e.kommunSlug);
+  kommandeDeadlines.push(e);
+  if (kommandeDeadlines.length >= 5) break;
+}
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
 // Sitewide färskhetsdatum för TRATT.start.senastAvlastRad — det ÄLDSTA
 // verifierad-datumet över alla kommuner (inte ett påhittat, inte "idag").
@@ -76,7 +90,7 @@ const senastAvlast = kommuner.reduce((min, k) => (k.verifierad < min ? k.verifie
           <tr>
             <td><UrgencyChip urgency={getUrgency(daysUntil(e.dateISO!, today))} /></td>
             <td>{formatDate(e.dateISO!)}</td>
-            <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+            <td><a href={`/kommun/${e.kommunSlug}/#bidrag-${e.bidragId}`}>{e.bidragNamn}</a></td>
             <td>{e.kommun}</td>
             <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
           </tr>
