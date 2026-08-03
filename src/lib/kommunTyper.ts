@@ -29,6 +29,12 @@ export type Verksamhet = (typeof VERKSAMHETER)[number];
 export const DEADLINE_TYPER = ['fasta', 'lopande', 'okand'] as const;
 export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 
+// Extraktionsstatus för kritiska fält. `overifierat` är standard och betyder
+// att källan inte har kunnat avgöras. `ingen_regel` får bara användas när
+// kommunen uttryckligen anger att ingen gräns, frist eller regel finns.
+export const FALT_STATUSAR = ['angivet', 'ingen_regel', 'overifierat'] as const;
+export type FaltStatus = (typeof FALT_STATUSAR)[number];
+
 // H26 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): kommunen kan pausa eller
 // avskaffa ett bidrag utan att ta bort YAML-raden. Valfritt fält —
 // saknas det i källan defaultar validateBidrag (kommuner.ts) till
@@ -52,6 +58,16 @@ export interface Bidrag {
   sen_ansokan: string;
   kalla_url: string;
   anteckning: string | null;
+
+
+  // Källsäkerhet per kritiskt fält. Alla fält defaultar till `overifierat`
+  // för äldre data och måste aktivt sättas av den som läst källan.
+  belopp_status: FaltStatus;
+  deadline_status: FaltStatus;
+  krav_status: FaltStatus;
+  giltighet_status: FaltStatus;
+  krav_fullstandiga: boolean;
+  giltighet: string | null;
 
   // Matchningsvillkor (matchningstratten, turn-11) — extraheras ur
   // krav/malgrupp av ett separat researchpass, INTE av Code. null = inget

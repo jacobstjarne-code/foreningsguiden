@@ -17,7 +17,7 @@ import yaml from 'js-yaml';
 // omverifiering.ts:s filhuvud för varför: scripts/omverifiering-ko.ts
 // kör som ett vanligt node-skript, utanför Vites resolver.
 import {
-  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, todayISO, nextOccurrenceISO,
+  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, FALT_STATUSAR, todayISO, nextOccurrenceISO,
 } from './kommunTyper.ts';
 import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper.ts';
 import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan.ts';
@@ -158,6 +158,24 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   raw.foreningstyp = verksamhetListOrNull(raw, 'foreningstyp', where, problems);
   raw.kraver_registrering = boolOrNull(raw, 'kraver_registrering', where, problems);
   raw.sate_i_kommunen = boolOrNull(raw, 'sate_i_kommunen', where, problems);
+
+
+  for (const field of ['belopp_status', 'deadline_status', 'krav_status', 'giltighet_status'] as const) {
+    if (raw[field] !== null && raw[field] !== undefined && !FALT_STATUSAR.includes(raw[field])) {
+      problems.push(`${where}.${field} är "${raw[field]}" (tillåtna: ${FALT_STATUSAR.join(', ')})`);
+    }
+    raw[field] = raw[field] ?? 'overifierat';
+  }
+
+  if (raw.krav_fullstandiga !== null && raw.krav_fullstandiga !== undefined && typeof raw.krav_fullstandiga !== 'boolean') {
+    problems.push(`${where}.krav_fullstandiga måste vara true eller false`);
+  }
+  raw.krav_fullstandiga = raw.krav_fullstandiga ?? false;
+
+  if (raw.giltighet !== null && raw.giltighet !== undefined && typeof raw.giltighet !== 'string') {
+    problems.push(`${where}.giltighet måste vara text eller null`);
+  }
+  raw.giltighet = raw.giltighet ?? null;
 
   // H26 — valfritt fält, saknas i alla 99 befintliga filer i dag.
   if (raw.status !== null && raw.status !== undefined && !BIDRAG_STATUSAR.includes(raw.status)) {
