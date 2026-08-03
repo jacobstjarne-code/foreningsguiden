@@ -1,47 +1,49 @@
 // Permanent, körbar-om-igen version av den engångskorrigering som gjordes
 // 2026-08-03 vid sammanslagningen med en parallell Code-sessions egen
-// (bevisligen felräknade — se DECISIONS/HANDOVER samma datum) statuslogik.
-// Till skillnad från migrera-datatillstand.ts (engångsskript, kraschar om
-// statusfält redan finns — skrivet för filer som ALDRIG haft dem) är detta
-// skriptet IDEMPOTENT: det strippar befintliga belopp_status/
-// deadline_status/krav_status/giltighet_status (och det felplacerade
-// giltighet/giltighet_status på Bidrag) och räknar om alla fyra mekaniskt
-// mot den faktiska datan, oavsett vad som stod där innan. Säkert att köra
-// om — även flera gånger i rad ger samma resultat (verifierat: en andra
-// körning direkt efter en första ger "0 filer ändrade").
+// (bevisligen felräknade) statuslogik. IDEMPOTENT: strippar befintliga
+// belopp_status/deadline_status/krav_status/giltighet_status (och det
+// felplacerade giltighet/giltighet_status på Bidrag) och räknar om
+// mekaniskt mot den faktiska datan, oavsett vad som stod där innan.
 //
-// Kör igen varje gång en extern datakälla (den parallella GPT-
-// extraktionspipen, en annan Code-session) landar bidragsinnehåll vars
-// statusfält inte litar på — mekaniska tre: fältet har ett värde →
-// angivet, annars overifierat. Kör ALLTID korrigera-belopp-platshallare.ts
-// direkt efter (platshållarfraser är osynliga för den mekaniska regeln;
-// se den filens huvudkommentar).
+// ÅTGÄRDSSPEC T1/T2 (2026-08-03 kväll, fyra-lägesrevisionen): skriptet
+// sätter BARA 'olast' (fältet har ett värde) eller 'okand' (fältet
+// saknar värde) — ALDRIG 'verifierad' (kräver ett researchpass som
+// oberoende kontrollerat mot kommunens levande sida) och ALDRIG
+// 'ingen_regel' (kräver ett researchpass som bekräftat att regeln
+// saknas). Kör ALLTID korrigera-belopp-platshallare.ts direkt efter
+// (platshållarfraser är osynliga för den mekaniska regeln).
 //
-// UNDANTAGET, medvetet: krav_fullstandiga rörs ALDRIG av det här skriptet
-// — varken strippas eller skrivs om. Det fältet är INTE mekaniskt härlett
-// (det säger inte "har krav-listan innehåll", det säger "har ett
-// researchpass BEDÖMT att listan är komplett") — bara ett researchpass får
-// sätta det, aldrig ett omräkningsskript. Ett tidigare skript i den här
-// sessionen rörde fältet ändå (bevarade visserligen `true`-värden genom
-// strip+återinsättning, men principen var fel: ett generellt
-// omräkningspass ska inte ens TEORETISKT kunna tappa en manuell bedömning).
-// verify-krav-fullstandiga-regression.ts är det oberoende skyddsnätet mot
-// att just den klassen bugg smyger sig in i EN ANNAN framtida ändring.
+// SKYDD (T2, "samma skydd som krav_fullstandiga redan har"): ett fält
+// vars NUVARANDE värde är 'ingen_regel' eller 'verifierad' rörs ALDRIG
+// — varken strippas eller skrivs om. Bugg hittad 2026-08-03 kväll: en
+// tidigare version av det här skriptet stripp+omräknade ALLA fyra fält
+// ovillkorligt, vilket tyst nollställde den enda genuina 'ingen_regel'
+// som fanns i corpuset (gislaved-namndens-forfogande.belopp_status) till
+// 'overifierat'/'okand' — upptäckt och återställt manuellt, se commit-
+// historiken. Assertion nedan avbryter om körningen ändå skulle skriva
+// verifierad/ingen_regel någonstans (kan bara hända vid en buggad
+// omskrivning, aldrig vid korrekt bruk).
+//
+// UNDANTAGET, medvetet: krav_fullstandiga rörs ALDRIG av det här
+// skriptet (varken null, true eller false) — se dess eget filhuvud i
+// kommunTyper.ts. Samma logik, samma motivering.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import yaml from 'js-yaml';
 
 const DIR = 'data/kommuner';
 const files = readdirSync(DIR).filter((f) => f.endsWith('.yaml'));
 
-const STRIP_BIDRAG = /^\s*(belopp_status|deadline_status|krav_status|giltighet_status|giltighet):\s*.*$/;
-const STRIP_FORUTSATTNING = /^\s*giltighet_status:\s*.*$/;
+const BIDRAG_FALT = ['belopp_status', 'deadline_status', 'krav_status'] as const;
+const SKYDDADE = new Set(['ingen_regel', 'verifierad']);
 
 let filerAndrade = 0;
+const rortaFiler: string[] = [];
 const counts = {
-  belopp: { angivet: 0, overifierat: 0 },
-  deadline: { angivet: 0, overifierat: 0 },
-  krav: { angivet: 0, overifierat: 0 },
-  giltighet: { angivet: 0, overifierat: 0 },
+  belopp: { olast: 0, okand: 0 },
+  deadline: { olast: 0, okand: 0 },
+  krav: { olast: 0, okand: 0 },
+  giltighet: { olast: 0, okand: 0 },
 };
 
 for (const file of files) {
@@ -49,19 +51,46 @@ for (const file of files) {
   const originalText = readFileSync(path, 'utf-8');
   const originalDoc = yaml.load(originalText) as { bidrag?: any[]; forutsattningar?: any[] };
 
-  // Pass 1: strippa belopp_status/deadline_status/krav_status/
-  // giltighet_status/giltighet på Bidrag — INTE krav_fullstandiga (se
-  // huvudkommentaren ovan för varför det fältet är undantaget).
+  // Pass 1: strippa OVILLKORLIGT det felplacerade giltighet/giltighet_status
+  // på Bidrag (aldrig ett giltigt tillstånd att skydda), men lämna
+  // belopp_status/deadline_status/krav_status ORÖRDA där de redan är
+  // skyddade (ingen_regel/verifierad) — bara strippa dem där de är
+  // 'olast'/'okand' (ska räknas om).
   const lines = originalText.split('\n');
   const stripped: string[] = [];
   let section: 'none' | 'bidrag' | 'forutsattningar' = 'none';
+  let bidragIdx = -1;
+  let forutsattningIdx = -1;
+
   for (const line of lines) {
-    if (/^bidrag:\s*$/.test(line)) { section = 'bidrag'; stripped.push(line); continue; }
-    if (/^forutsattningar:\s*$/.test(line)) { section = 'forutsattningar'; stripped.push(line); continue; }
+    if (/^bidrag:\s*$/.test(line)) { section = 'bidrag'; bidragIdx = -1; stripped.push(line); continue; }
+    if (/^forutsattningar:\s*$/.test(line)) { section = 'forutsattningar'; forutsattningIdx = -1; stripped.push(line); continue; }
     if (/^[a-zA-Z_]/.test(line) && !/^bidrag:|^forutsattningar:/.test(line)) section = 'none';
 
-    if (section === 'bidrag' && STRIP_BIDRAG.test(line)) continue;
-    if (section === 'forutsattningar' && STRIP_FORUTSATTNING.test(line)) continue;
+    const nyttListobjekt = /^(\s*)- \w+:/.test(line);
+    if (nyttListobjekt && section === 'bidrag') bidragIdx++;
+    if (nyttListobjekt && section === 'forutsattningar') forutsattningIdx++;
+
+    if (section === 'bidrag') {
+      const giltighetMatch = /^\s*(giltighet_status|giltighet):\s*.*$/.test(line);
+      if (giltighetMatch) continue; // felplacerat på Bidrag, alltid bort
+
+      const faltMatch = line.match(/^\s*(belopp_status|deadline_status|krav_status):\s*(\S+)\s*$/);
+      if (faltMatch) {
+        const [, falt, varde] = faltMatch;
+        const b = originalDoc.bidrag?.[bidragIdx];
+        if (SKYDDADE.has(b?.[falt])) { stripped.push(line); continue; } // skyddat, rör inte
+        continue; // olast/okand — strippa, räknas om i pass 2
+      }
+    }
+    if (section === 'forutsattningar') {
+      const faltMatch = line.match(/^\s*giltighet_status:\s*(\S+)\s*$/);
+      if (faltMatch) {
+        const f = originalDoc.forutsattningar?.[forutsattningIdx];
+        if (SKYDDADE.has(f?.giltighet_status)) { stripped.push(line); continue; }
+        continue;
+      }
+    }
     stripped.push(line);
   }
   const strippedText = stripped.join('\n');
@@ -88,16 +117,15 @@ for (const file of files) {
     }
   }
 
-  // Pass 2: räkna om och sätt in belopp_status/deadline_status/krav_status/
-  // giltighet_status — mekaniskt, mot den faktiska datan. krav_fullstandiga
-  // rörs inte här heller — ordningen på övriga fält efter kalla_url-raden
-  // är oförändrad mot innan.
+  // Pass 2: sätt in olast/okand för EXAKT de fält som strippades (var
+  // olast/okand innan, alltså inte skyddade) — skyddade fält ligger kvar
+  // orörda på sin ursprungliga plats, se pass 1.
   const doc = strippedDoc;
   const lines2 = strippedText.split('\n');
   const output: string[] = [];
   section = 'none';
-  let bidragIdx = -1;
-  let forutsattningIdx = -1;
+  bidragIdx = -1;
+  forutsattningIdx = -1;
 
   for (const line of lines2) {
     output.push(line);
@@ -113,27 +141,37 @@ for (const file of files) {
     if (!kallaMatch) continue;
     const indent = kallaMatch[1];
 
-    if (section === 'bidrag' && bidragIdx >= 0 && doc.bidrag?.[bidragIdx]) {
-      const b = doc.bidrag[bidragIdx];
-      const beloppStatus = b.belopp !== null && b.belopp !== undefined ? 'angivet' : 'overifierat';
-      const deadlineStatus = b.deadlines?.typ === 'okand' ? 'overifierat' : 'angivet';
-      const kravStatus = Array.isArray(b.krav) && b.krav.length > 0 ? 'angivet' : 'overifierat';
-      counts.belopp[beloppStatus]++;
-      counts.deadline[deadlineStatus]++;
-      counts.krav[kravStatus]++;
-      output.push(`${indent}belopp_status: ${beloppStatus}`);
-      output.push(`${indent}deadline_status: ${deadlineStatus}`);
-      output.push(`${indent}krav_status: ${kravStatus}`);
-    } else if (section === 'forutsattningar' && forutsattningIdx >= 0 && doc.forutsattningar?.[forutsattningIdx]) {
-      const f = doc.forutsattningar[forutsattningIdx];
-      const giltighetStatus = f.giltighet !== null && f.giltighet !== undefined ? 'angivet' : 'overifierat';
-      counts.giltighet[giltighetStatus]++;
-      output.push(`${indent}giltighet_status: ${giltighetStatus}`);
+    if (section === 'bidrag' && bidragIdx >= 0 && originalDoc.bidrag?.[bidragIdx]) {
+      const orig = originalDoc.bidrag[bidragIdx];
+      const b = doc.bidrag![bidragIdx];
+      if (!SKYDDADE.has(orig.belopp_status)) {
+        const status = b.belopp !== null && b.belopp !== undefined ? 'olast' : 'okand';
+        counts.belopp[status]++;
+        output.push(`${indent}belopp_status: ${status}`);
+      }
+      if (!SKYDDADE.has(orig.deadline_status)) {
+        const status = b.deadlines?.typ === 'okand' ? 'okand' : 'olast';
+        counts.deadline[status]++;
+        output.push(`${indent}deadline_status: ${status}`);
+      }
+      if (!SKYDDADE.has(orig.krav_status)) {
+        const status = Array.isArray(b.krav) && b.krav.length > 0 ? 'olast' : 'okand';
+        counts.krav[status]++;
+        output.push(`${indent}krav_status: ${status}`);
+      }
+    } else if (section === 'forutsattningar' && forutsattningIdx >= 0 && originalDoc.forutsattningar?.[forutsattningIdx]) {
+      const orig = originalDoc.forutsattningar[forutsattningIdx];
+      if (!SKYDDADE.has(orig.giltighet_status)) {
+        const f = doc.forutsattningar![forutsattningIdx];
+        const status = f.giltighet !== null && f.giltighet !== undefined ? 'olast' : 'okand';
+        counts.giltighet[status]++;
+        output.push(`${indent}giltighet_status: ${status}`);
+      }
     }
   }
 
   const finalText = output.join('\n');
-  let finalDoc: { bidrag?: any[]; forutsattningar?: unknown[] };
+  let finalDoc: { bidrag?: any[]; forutsattningar?: any[] };
   try {
     finalDoc = yaml.load(finalText) as typeof finalDoc;
   } catch (e) {
@@ -146,8 +184,28 @@ for (const file of files) {
     process.exit(1);
   }
   for (let i = 0; i < (originalDoc.bidrag?.length ?? 0); i++) {
-    if (originalDoc.bidrag![i].krav_fullstandiga !== finalDoc.bidrag![i].krav_fullstandiga) {
+    const o = originalDoc.bidrag![i];
+    const n = finalDoc.bidrag![i];
+    if (o.krav_fullstandiga !== n.krav_fullstandiga) {
       console.error(`AVBRYTER (insättning) — ${file}: bidrag[${i}].krav_fullstandiga ändrades av misstag.`);
+      process.exit(1);
+    }
+    // Skyddsassertion (T2): skriptet fick ALDRIG skriva verifierad/ingen_regel.
+    // Skyddade fält som redan HADE de värdena är förstås oförändrade (samma
+    // värde in som ut) — bara en NY förekomst där originalet inte redan var
+    // skyddat är ett skriptfel.
+    for (const falt of BIDRAG_FALT) {
+      if (SKYDDADE.has(n[falt]) && !SKYDDADE.has(o[falt])) {
+        console.error(`AVBRYTER (insättning) — ${file}: bidrag[${i}].${falt} blev "${n[falt]}" — skriptet får aldrig sätta det värdet.`);
+        process.exit(1);
+      }
+    }
+  }
+  for (let i = 0; i < (originalDoc.forutsattningar?.length ?? 0); i++) {
+    const o = originalDoc.forutsattningar![i];
+    const n = finalDoc.forutsattningar![i];
+    if (SKYDDADE.has(n.giltighet_status) && !SKYDDADE.has(o.giltighet_status)) {
+      console.error(`AVBRYTER (insättning) — ${file}: forutsattningar[${i}].giltighet_status blev "${n.giltighet_status}" — skriptet får aldrig sätta det värdet.`);
       process.exit(1);
     }
   }
@@ -155,10 +213,22 @@ for (const file of files) {
   if (finalText !== originalText) {
     writeFileSync(path, finalText);
     filerAndrade++;
+    rortaFiler.push(path);
   }
 }
 
-console.log(`${filerAndrade} filer omräknade (krav_fullstandiga: orört, se skriptets huvudkommentar).\n`);
+// T6, regel 2 (blandningsspärren): markör för att en mekanisk omräkning
+// kört, med VILKA filer som rördes — pre-commit-hooken läser den och
+// fäller om samma filer i den staged diffen introducerar ett NYTT
+// verifierad/ingen_regel (ett tecken på att ett researchpass och en
+// mekanisk körning blandats i samma commit, se
+// verify-mekanisk-verifiering-blandning.ts).
+if (rortaFiler.length > 0) {
+  const gitDir = execSync('git rev-parse --absolute-git-dir', { encoding: 'utf-8' }).trim();
+  writeFileSync(`${gitDir}/OMRAKNING_KORD.json`, JSON.stringify(rortaFiler, null, 2));
+}
+
+console.log(`${filerAndrade} filer omräknade (krav_fullstandiga och ingen_regel/verifierad: orörda).\n`);
 console.log('belopp_status:  ', counts.belopp);
 console.log('deadline_status:', counts.deadline);
 console.log('krav_status:    ', counts.krav);

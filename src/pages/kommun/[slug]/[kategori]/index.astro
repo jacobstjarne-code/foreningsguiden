@@ -5,7 +5,7 @@
 import Base from '../../../../layouts/Base.astro';
 import BidragCard from '../../../../components/BidragCard.astro';
 import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
-import { loadKommuner, KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl } from '../../../../lib/kommuner';
+import { loadKommuner, KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, hittaGiltighetsstatus } from '../../../../lib/kommuner';
 import type { Kategori } from '../../../../lib/kommuner';
 import { KATEGORI_SIDA } from '../../../../lib/content';
 
@@ -28,6 +28,7 @@ export function getStaticPaths() {
 const { kommun, kategori } = Astro.props;
 const bidrag = kommun.bidrag.filter((b) => b.kategori.includes(kategori));
 const kategoriLabel = KATEGORI_LABELS[kategori];
+const giltighetStatus = hittaGiltighetsstatus(kommun.forutsattningar);
 
 // introTemplate saknar en dedikerad metaDescriptionTemplate i content.ts —
 // återanvänder samma Fable-mening som synlig intro och som metabeskrivning.
@@ -64,7 +65,7 @@ const webPageJsonLd = {
   <p>{intro}</p>
 
   <ul class="bidrag-list">
-    {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(b, kommun)} kommunSlug={kommun.kommun_slug} />)}
+    {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(b, kommun)} kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} giltighetStatus={giltighetStatus} />)}
   </ul>
 </Base>
 

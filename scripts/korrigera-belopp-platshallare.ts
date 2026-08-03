@@ -1,8 +1,9 @@
-// Uppföljning 2026-08-03 (arbetsorder 2, Jacobs valideringsregel): rättar
-// belopp_status från "angivet" till "overifierat" för exakt de bidrag
-// hittaBeloppPlatshallare() (kommuner.ts) pekar ut — en platshållarfras
-// ("Individuell bedömning" m.fl., se den funktionens filhuvud) är inte
-// kommunens egna ord, och ska alltså inte påstå att vi har ett svar.
+// Uppföljning 2026-08-03 (arbetsorder 2, Jacobs valideringsregel; T1-
+// namnbytet samma kväll): rättar belopp_status från "olast"/"verifierad"
+// till "okand" för exakt de bidrag hittaBeloppPlatshallare() (kommuner.ts)
+// pekar ut — en platshållarfras ("Individuell bedömning" m.fl., se den
+// funktionens filhuvud) är inte kommunens egna ord, och ska alltså inte
+// påstå att vi har ett svar.
 //
 // Rör INTE belopp-värdet självt (det är fortfarande vad källan säger,
 // bara inte ett specifikt tal) — bara statusfältet, som är en bedömning
@@ -58,10 +59,10 @@ for (const [kommunSlug, bidragIds] of perFil) {
     if (
       currentId &&
       kvar.has(currentId) &&
-      /^(\s*)belopp_status:\s*angivet\s*$/.test(line)
+      /^(\s*)belopp_status:\s*(olast|verifierad)\s*$/.test(line)
     ) {
       const indent = line.match(/^(\s*)/)?.[1] ?? '';
-      output.push(`${indent}belopp_status: overifierat`);
+      output.push(`${indent}belopp_status: okand`);
       rattade++;
       kvar.delete(currentId);
       continue;
@@ -77,4 +78,4 @@ for (const [kommunSlug, bidragIds] of perFil) {
   writeFileSync(path, output.join('\n'));
 }
 
-console.log(`${rattade} bidrag rättade (belopp_status: angivet → overifierat) över ${perFil.size} kommuner.`);
+console.log(`${rattade} bidrag rättade (belopp_status: olast/verifierad → okand) över ${perFil.size} kommuner.`);

@@ -14,6 +14,8 @@ import type { Bidrag } from '../lib/kommuner';
 import { KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText } from '../lib/kommuner';
 import VerificationStamp from './VerificationStamp.astro';
 import VoidMark from './VoidMark.astro';
+import VoidState from './VoidState.astro';
+import OlastMark from './OlastMark.astro';
 import RelativeDeadline from './RelativeDeadline.astro';
 
 export interface Props {
@@ -21,21 +23,21 @@ export interface Props {
   verifierad: string;
   ansokningsUrl: string;
   kommunSlug: string;
+  kommunNamn: string;
+  giltighetStatus: import('../lib/kommuner').Datatillstand;
 }
 
-const { bidrag, verifierad, ansokningsUrl, kommunSlug } = Astro.props;
-const beloppDatum = formatDate(bidrag.senast_verifierad ?? verifierad);
+const { bidrag, verifierad, ansokningsUrl, kommunSlug, kommunNamn, giltighetStatus } = Astro.props;
+const datumFormaterat = formatDate(bidrag.senast_verifierad ?? verifierad);
 
-// deadlines.typ === 'relativ' avgörs INNAN denna funktion anropas (se
-// dd-blocket nedan — RelativeDeadline-komponenten tar över helt då),
-// så funktionen behöver bara skilja lopande/okand/fasta. 'ingen_regel'
-// tillagd vid sammanslagningen 2026-08-03 (en parallell Code-session
-// idé, bra) — en bekräftad "ingen fast frist" är ett annat besked än
-// "vi vet inte", samma logik som VoidState/VoidMark-uppdelningen.
+// ÅTGÄRDSSPEC T3 (2026-08-03 kväll, fyra-lägesrevisionen). typ==='relativ'
+// avgörs INNAN denna funktion anropas (RelativeDeadline-komponenten tar
+// över helt då — strukturellt särfall, orört av statusfyra), så
+// funktionen behöver bara skilja lopande/okand/fasta för de övriga tre
+// statusvärdena (verifierad/olast delar formatering, bara reservationen
+// runt dem skiljer sig — se dd-blocket nedan).
 function formatDeadlines(b: Bidrag): string {
-  if (b.deadline_status === 'ingen_regel') return 'Kommunen anger uttryckligen ingen fast ansökningsfrist.';
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
-  if (b.deadlines.typ === 'okand') return 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
 
@@ -67,16 +69,48 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
 
     <dt>Deadline</dt>
     <dd>
-      {bidrag.deadlines.typ === 'relativ' ? <RelativeDeadline bidrag={bidrag} /> : formatDeadlines(bidrag)}
+      {/* ÅTGÄRDSSPEC T3 — fyra-lägesrendering. typ==='relativ' är ett
+          strukturellt särfall (RelativeDeadline tar över helt, oavsett
+          status) — annars styr deadline_status: verifierad visas rakt
+          av, olast hedgas (OlastMark), ingen_regel är ett bekräftat
+          "ingen frist" (VoidState), okand är ett äkta hål (VoidMark). */}
+      {bidrag.deadlines.typ === 'relativ' ? (
+        <RelativeDeadline bidrag={bidrag} />
+      ) : bidrag.deadline_status === 'ingen_regel' ? (
+        <VoidState
+          rubrik="ANSÖKNINGSFRIST"
+          besked={`${kommunNamn} anger ingen fast ansökningsfrist`}
+          forklaring="Bekräftat vid källgranskning."
+        />
+      ) : bidrag.deadline_status === 'okand' ? (
+        <VoidMark
+          etikett="Ej angivet i källan"
+          faltnamn="ansökningsfrist"
+          faltnamnBestamd="ansökningsfristen"
+          datum={datumFormaterat}
+          kallaUrl={bidrag.kalla_url}
+          kommunSlug={kommunSlug}
+          bidragId={bidrag.id}
+          bidragNamn={bidrag.namn}
+        />
+      ) : bidrag.deadline_status === 'olast' ? (
+        <OlastMark kallaUrl={bidrag.kalla_url}>{formatDeadlines(bidrag)}</OlastMark>
+      ) : (
+        formatDeadlines(bidrag)
+      )}
     </dd>
 
     <dt>Belopp</dt>
     <dd>
       {bidrag.belopp_status === 'ingen_regel' ? (
-        'Kommunen anger uttryckligen inget belopp eller tak.'
+        <VoidState
+          rubrik="BELOPP"
+          besked={`${kommunNamn} anger uttryckligen inget belopp eller tak`}
+          forklaring="Bekräftat vid källgranskning."
+        />
       ) : bidrag.belopp === null ? (
         // VoidMark bara vid genuint ingen uppgift alls — INTE när
-        // belopp_status:overifierat kommer från en platshållarfras
+        // belopp_status:okand kommer från en platshållarfras
         // ("Individuell bedömning") som fortfarande är riktig, användbar
         // text från källan (korrigera-belopp-platshallare.ts rör bara
         // statusfältet, aldrig själva texten).
@@ -84,12 +118,14 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
           etikett="Ej angivet i källan"
           faltnamn="beloppsuppgift"
           faltnamnBestamd="beloppet"
-          datum={beloppDatum}
+          datum={datumFormaterat}
           kallaUrl={bidrag.kalla_url}
           kommunSlug={kommunSlug}
           bidragId={bidrag.id}
           bidragNamn={bidrag.namn}
         />
+      ) : bidrag.belopp_status === 'olast' ? (
+        <OlastMark kallaUrl={bidrag.kalla_url}>{bidrag.belopp}</OlastMark>
       ) : (
         bidrag.belopp
       )}
@@ -97,19 +133,39 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
 
     <dt>Krav</dt>
     <dd>
-      {bidrag.krav_status === 'overifierat' ? (
+      {bidrag.krav_status === 'okand' ? (
         <p>Kraven är inte verifierade ännu — kontrollera källan innan du bedömer behörighet.</p>
       ) : bidrag.krav_status === 'ingen_regel' ? (
-        <p>Kommunen anger uttryckligen inga särskilda krav.</p>
+        <VoidState
+          rubrik="KRAV"
+          besked={`${kommunNamn} anger uttryckligen inga särskilda krav`}
+          forklaring="Bekräftat vid källgranskning."
+        />
       ) : bidrag.krav.length > 0 ? (
-        <ul>
-          {bidrag.krav.map((k) => <li>{k}</li>)}
-        </ul>
+        bidrag.krav_status === 'olast' ? (
+          <OlastMark kallaUrl={bidrag.kalla_url}>
+            <ul>{bidrag.krav.map((k) => <li>{k}</li>)}</ul>
+          </OlastMark>
+        ) : (
+          <ul>
+            {bidrag.krav.map((k) => <li>{k}</li>)}
+          </ul>
+        )
       ) : (
         <p>Inga strukturerade krav har registrerats.</p>
       )}
-      {bidrag.krav_status === 'angivet' && !bidrag.krav_fullstandiga && (
+      {/* ÅTGÄRDSSPEC C7 (Jacob 2026-08-03): krav_fullstandiga fick ett
+          tredje värde — false (bedömt, ofullständigt) och null (aldrig
+          bedömt) är INTE samma besked. false är ett skarpt, verifierat
+          påstående (vanlig text). null är ett hål i vår kunskap — samma
+          void-vokabulär (dämpad text, hålmarkör) som VoidMark, men utan
+          hela komponenten (ingen felrapport-widget här — det finns
+          inget "fel" att flagga, bara en bedömning som inte gjorts än). */}
+      {bidrag.krav_status !== 'okand' && bidrag.krav_status !== 'ingen_regel' && bidrag.krav_fullstandiga === false && (
         <p><strong>Ofullständigt:</strong> fler villkor kan finnas i kommunens normer eller riktlinjer.</p>
+      )}
+      {bidrag.krav_status !== 'okand' && bidrag.krav_status !== 'ingen_regel' && bidrag.krav_fullstandiga === null && (
+        <p class="krav-obedomd"><span class="fg-void-mark" aria-hidden="true"></span> Fullständigheten inte bedömd ännu.</p>
       )}
     </dd>
 
@@ -138,7 +194,7 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     <p class="bidrag-card__kalla">
       Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
     </p>
-    <VerificationStamp bidrag={bidrag} verifierad={verifierad} />
+    <VerificationStamp bidrag={bidrag} verifierad={verifierad} giltighetStatus={giltighetStatus} />
   </div>
   {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
       (relativFrist) — annars stod samma besked på kortet två gånger. */}

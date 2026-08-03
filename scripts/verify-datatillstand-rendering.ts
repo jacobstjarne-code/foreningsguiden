@@ -1,15 +1,18 @@
 // Uppföljning 2026-08-03 (punkt 5): "Ett test: fäller om ett värde med
-// status overifierat renderas som ett påstående någonstans i utdatan."
-// Kräver att `npm run build` redan körts (dist/client finns).
+// status okand renderas som ett påstående någonstans i utdatan."
+// Uppdaterad ÅTGÄRDSSPEC T1/D1/T5 (samma kväll, fyra-lägesrevisionen —
+// angivet/overifierat döpta om till olast/okand, D1 skärpt till
+// verifierad + minst tre krav). Kräver att `npm run build` redan körts
+// (dist/client finns).
 //
 // Tre konkreta invarianter, en per spärr som byggdes i samma svep:
-// 1. Köprutan (station 5) länkar aldrig till ett bidrag med
-//    krav_status: overifierat som sitt mål — genereraUtkast() har inget
-//    att strukturera för ett sådant bidrag (se KommunProgression.astro).
+// 1. Köprutan (station 5) länkar aldrig till ett bidrag som inte klarar
+//    D1 (krav_status: verifierad OCH minst tre krav) — genereraUtkast()
+//    har inget att strukturera annars (se KommunProgression.astro).
 // 2. "Sen ansökan" renderas aldrig för ett bidrag med deadline_status:
-//    overifierat — konsekvensen av att söka sent är meningslös utan en
-//    känd deadline att vara sen mot (harRiktigSenAnsokanText).
-// 3. Belopp med belopp_status: overifierat OCH belopp === null renderas
+//    okand — konsekvensen av att söka sent är meningslös utan en känd
+//    deadline att vara sen mot (harRiktigSenAnsokanText).
+// 3. Belopp med belopp_status: okand OCH belopp === null renderas
 //    ALDRIG som rå text — VoidMark ("Ej angivet i källan") måste synas.
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -37,8 +40,8 @@ for (const kommun of kommuner) {
     const bidragIdMatch = kopRutaHrefMatch[1].match(/\/utkast\/([\w-]+)\/?$/);
     const bidragId = bidragIdMatch?.[1];
     const bidrag = kommun.bidrag.find((b) => b.id === bidragId);
-    if (bidrag && bidrag.krav_status === 'overifierat') {
-      problem.push(`${kommun.kommun_slug}: köprutan länkar till ${bidrag.id} som har krav_status: overifierat`);
+    if (bidrag && !(bidrag.krav_status === 'verifierad' && bidrag.krav.length >= 3)) {
+      problem.push(`${kommun.kommun_slug}: köprutan länkar till ${bidrag.id} som inte klarar D1 (krav_status: ${bidrag.krav_status}, ${bidrag.krav.length} krav)`);
     }
   }
 
@@ -49,8 +52,8 @@ for (const kommun of kommuner) {
     const cardEnd = html.indexOf('bidrag-card__cta', cardStart);
     const card = html.slice(cardStart, cardEnd === -1 ? cardStart + 4000 : cardEnd + 200);
 
-    if (bidrag.deadline_status === 'overifierat' && /Sen ansökan/.test(card)) {
-      problem.push(`${kommun.kommun_slug}/${bidrag.id}: "Sen ansökan" renderas trots deadline_status: overifierat`);
+    if (bidrag.deadline_status === 'okand' && /Sen ansökan/.test(card)) {
+      problem.push(`${kommun.kommun_slug}/${bidrag.id}: "Sen ansökan" renderas trots deadline_status: okand`);
     }
 
     if (bidrag.belopp === null) {
@@ -62,7 +65,7 @@ for (const kommun of kommuner) {
 }
 
 if (problem.length === 0) {
-  console.log(`Datatillstånd-renderingstest: ${kommuner.length} kommuner kontrollerade, inga påståenden om overifierade fält hittades.`);
+  console.log(`Datatillstånd-renderingstest: ${kommuner.length} kommuner kontrollerade, inga påståenden om okända fält hittades.`);
   process.exit(0);
 }
 

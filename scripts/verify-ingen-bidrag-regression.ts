@@ -27,7 +27,13 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import yaml from 'js-yaml';
 
-const MARKER_PATH = '.git/BIDRAG_REGRESSION_PENDING.json';
+// git rev-parse --absolute-git-dir (INTE hårdkodat '.git/') — i en
+// worktree är .git en FIL (gitdir-pekare), inte en katalog, och
+// '.git/X.json' kraschar med ENOTDIR. Bugg hittad 2026-08-03 kväll när
+// arbetet flyttades till en riktig worktree (fg-production-batch-01)
+// efter att ha byggts och testats enbart i en fristående scratchpad-klon.
+const GIT_DIR = execSync('git rev-parse --absolute-git-dir', { encoding: 'utf-8' }).trim();
+const MARKER_PATH = `${GIT_DIR}/BIDRAG_REGRESSION_PENDING.json`;
 
 interface Regression {
   kommun: string;

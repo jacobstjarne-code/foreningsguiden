@@ -4,23 +4,31 @@
 // Oxblod (--fg-verify) är RESERVERAD för just detta — sprids inte till annan UI.
 //
 // Uppföljning 2026-08-03 (punkt 3): stämpeln påstod "GRANSKAD" oavsett hur
-// många av bidragets tre fält (belopp/deadline/krav) som faktiskt var
-// verifierade — noll av tre räknades som samma sak som tre av tre. Tre
-// nivåer nu (bidragGranskningsniva, kommunTyper.ts): 'fullt' behåller
-// oxblod-stämpeln oförändrad, 'delvis' får en dämpad variant (inte
-// oxblod — den färgen ska inte överdriva en ofullständig granskning),
-// 'ogranskat' (noll av tre) visar INGEN stämpel alls — en "OGRANSKAT"-
-// etikett hade bara varit ännu ett påstående om ett tomrum.
+// många av bidragets fält som faktiskt var verifierade — noll räknades
+// som samma sak som alla. Tre nivåer (bidragGranskningsniva,
+// kommunTyper.ts): 'fullt' behåller oxblod-stämpeln oförändrad, 'delvis'
+// får en dämpad variant (inte oxblod — den färgen ska inte överdriva en
+// ofullständig granskning), 'ogranskat' visar INGEN stämpel alls — en
+// "OGRANSKAT"-etikett hade bara varit ännu ett påstående om ett tomrum.
+//
+// ÅTGÄRDSSPEC T4 (2026-08-03 kväll, fyra-lägesrevisionen): utökad från
+// tre till fyra fält (+ giltighet, kommun-nivå — se hittaGiltighetsstatus/
+// bidragGranskningsniva) och kriteriet skärpt — bara verifierad/
+// ingen_regel räknas som granskat nu, inte 'olast' (som bara betyder
+// "extraherat", inte "oberoende kontrollerat"). Ett bidrag där alla fyra
+// fält är 'olast' visade tidigare (felaktigt) "DELVIS GRANSKAD"; visar
+// nu ingen stämpel alls, eftersom noll fält faktiskt är granskade.
 import { formatStampDate, bidragGranskningsniva } from '../lib/kommuner';
-import type { Bidrag } from '../lib/kommuner';
+import type { Bidrag, Datatillstand } from '../lib/kommuner';
 
 export interface Props {
   bidrag: Bidrag;
   verifierad: string; // ISO-datum, kommunens (fallback när bidraget saknar eget senast_verifierad)
+  giltighetStatus: Datatillstand; // kommun-nivå (Forutsattning), se hittaGiltighetsstatus i kommunTyper.ts
 }
 
-const { bidrag, verifierad } = Astro.props;
-const niva = bidragGranskningsniva(bidrag);
+const { bidrag, verifierad, giltighetStatus } = Astro.props;
+const niva = bidragGranskningsniva(bidrag, giltighetStatus);
 const datum = formatStampDate(bidrag.senast_verifierad ?? verifierad);
 ---
 {niva !== 'ogranskat' && (

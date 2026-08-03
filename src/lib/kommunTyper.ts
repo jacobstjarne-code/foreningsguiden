@@ -40,16 +40,47 @@ export type Verksamhet = (typeof VERKSAMHETER)[number];
 export const DEADLINE_TYPER = ['fasta', 'lopande', 'okand', 'relativ'] as const;
 export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 
-// Datatillstånd (arbetsorder 2026-08-03, DATATILLSTAND_och_koprutan.md) —
-// EN skala för fyra olika fält (belopp/deadline/krav på Bidrag, giltighet
-// på Forutsattning), alla obligatoriska efter migrationen (kommuner.ts).
-// 'angivet' och 'ingen_regel' är BÅDA verifierade svar (fylld grön punkt,
-// full svärta i UI — VoidState) — skillnaden är bara OM ett värde finns.
-// 'overifierat' är ett hål i vår kunskap (streckad ram, dämpad text,
-// källänk ut — VoidMark). Migrationsskriptet (uppdatera-datatillstand.ts)
-// sätter ALDRIG 'ingen_regel' automatiskt — den etiketten kräver att någon
-// faktiskt läst källan och bekräftat att regeln saknas; att gissa den vore
-// exakt den klass av påhitt allt annat i den här kodbasen vägrar göra.
+// Datatillstånd (arbetsorder 2026-08-03, DATATILLSTAND_och_koprutan.md;
+// ÅTGÄRDSSPEC T1-T6, 2026-08-03 kväll — fyra-lägesrevisionen) — EN skala
+// för fyra olika fält (belopp/deadline/krav på Bidrag, giltighet på
+// Forutsattning), alla obligatoriska efter migrationen (kommuner.ts).
+//
+// Fyra värden, inte tre. 'angivet'/'overifierat' döptes om (ren
+// namnbyte, ingen ny bedömning) för att täcka en skillnad de aldrig
+// bar: ett värde som kommer från extraktionen är INTE samma sak som ett
+// värde någon oberoende kontrollerat mot kommunens LEVANDE sida. Det var
+// "Arvika-problemet" — ekern visade ett datum med full säkerhet, kortet
+// hedgade samma datum, och båda hade rätt givet den gamla tvåvägs-
+// uppdelningen (finns/finns inte), bara olika grad av försiktighet.
+//
+//   olast       Extraherat, INTE oberoende omkontrollerat. VÄRDET VISAS
+//               överallt (D3) med en gemensam reservation: streckad
+//               markör + "Inte kontrollerad mot kommunens sida sedan vi
+//               hämtade den." + källänk. Detta ÄR dagens 'angivet' —
+//               bara ärligare namngivet. Sätts av migrationen/GPT-
+//               extraktionen, ALDRIG av ett researchpass som faktiskt
+//               kontrollerat källan (det sätter 'verifierad').
+//   verifierad  Extraherat OCH oberoende bekräftat mot kommunens
+//               levande sida. Full markering, ingen reservation. Sätts
+//               ENDAST av ett researchpass — omrakna-datatillstand.ts
+//               får aldrig skriva detta värde (samma skydd som
+//               krav_fullstandiga).
+//   ingen_regel Bekräftat att INGET värde finns — kommunen har
+//               uttryckligen sagt att regeln/beloppet/kravet saknas.
+//               Full markering, aktiv formulering ("Gislaved anger
+//               ingen tidsgräns"), fylld markör (VoidState). Sätts
+//               ENDAST av ett researchpass, ALDRIG av migrationen —
+//               att gissa den vore exakt den klass av påhitt allt annat
+//               i den här kodbasen vägrar göra. Detta ÄR dagens
+//               'ingen_regel', oförändrat i sak — bara skyddat hårdare
+//               (se omrakna-datatillstand.ts: rör aldrig ett fält som
+//               redan är ingen_regel eller verifierad).
+//   okand       Ett äkta hål i vår kunskap — inget värde, ingen
+//               bekräftelse av att det saknas heller. Void (streckad
+//               ram, dämpad text, källänk ut — VoidMark). Detta ÄR
+//               dagens 'overifierat' — bara ärligare namngivet (samma
+//               ord ska inte betyda både "vi vet inget alls" OCH "vi
+//               har ett värde men har inte dubbelkollat det").
 //
 // (En parallell Code-session döpte samma skala FALT_STATUSAR/FaltStatus
 // och lade giltighet_status direkt på Bidrag, med en duplicerad
@@ -58,7 +89,7 @@ export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 // fältet redan fanns långt innan datatillstånd-arbetet, och används där
 // av GiltighetsKontroll.astro/hittaGiltighetsregel(). Två källor för
 // samma sak hade brutit "en sanning, ett ställe".)
-export const DATATILLSTAND = ['angivet', 'ingen_regel', 'overifierat'] as const;
+export const DATATILLSTAND = ['olast', 'okand', 'ingen_regel', 'verifierad'] as const;
 export type Datatillstand = (typeof DATATILLSTAND)[number];
 
 // H26 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): kommunen kan pausa eller
@@ -185,6 +216,22 @@ export function hittaGiltighetsregel(forutsattningar: Forutsattning[]): string |
 }
 
 /**
+ * T4 (ÅTGÄRDSSPEC 2026-08-03 kväll): stämpeln räknas nu över FYRA fält,
+ * inte tre — giltighet är kommun-nivå (Forutsattning), inte per-bidrag,
+ * men en besökare som ansöker bryr sig om hur länge beslutet gäller lika
+ * mycket som om belopp/deadline/krav. Samma forutsattning som
+ * hittaGiltighetsregel() pekar ut (den som faktiskt bär giltighet-
+ * VÄRDET) — annars kunde de två divergera och peka på olika poster.
+ * Faller tillbaka på forutsattningar[0] om ingen bär ett värde (samma
+ * "vi gissar inte"-princip: fallbacken pekar aldrig ut fel post, den
+ * pekar bara på den enda rimliga kandidaten när ingen är bättre).
+ */
+export function hittaGiltighetsstatus(forutsattningar: Forutsattning[]): Datatillstand {
+  const relevant = forutsattningar.find((f) => f.giltighet) ?? forutsattningar[0];
+  return relevant?.giltighet_status ?? 'okand';
+}
+
+/**
  * 2b (arbetsorder 2026-08-03): "Till ansökan"-knappen använde kommunens
  * generiska ansokningssystem.url för ALLA bidrag — fel så fort ett bidrag
  * har en egen, mer specifik källa (Gislaveds Föreningsbidrag social
@@ -213,18 +260,26 @@ export function bidragAnsokningsUrl(bidrag: Bidrag, kommun: Kommun): string {
  * Uppföljning 2026-08-03 (punkt 3): "GRANSKAD"-stämpeln påstod full
  * granskning oavsett hur många av bidragets fält som faktiskt var
  * verifierade — noll av tre räknades som samma sak som tre av tre.
- * Tre nivåer, av belopp_status/deadline_status/krav_status (de tre
- * fälten som sitter på Bidrag): 'overifierat' räknas INTE som granskat
- * ('ingen_regel' gör — en bekräftad frånvaro är fortfarande ett svar).
+ *
+ * T4 (ÅTGÄRDSSPEC, samma kväll, fyra-lägesrevisionen): utökad från tre
+ * till fyra fält (+ giltighet, se hittaGiltighetsstatus ovan), och
+ * granskat-kriteriet skärpt. 'olast' (extraherat, INTE oberoende
+ * omkontrollerat) räknas INTE längre som granskat — bara 'verifierad'
+ * (oberoende bekräftat mot källan) och 'ingen_regel' (bekräftad
+ * frånvaro) gör. Det är själva poängen med fyra-lägesrevisionen: ett
+ * fält som bara är extraherat har inte granskats i den mening stämpeln
+ * påstår, oavsett om vi råkar ha ett värde för det.
  * Noll granskade fält döljer stämpeln helt (VerificationStamp.astro) —
  * en "OGRANSKAT"-etikett hade bara varit ännu ett påstående om ett
  * tomrum, samma fälla som VoidMark redan finns för att undvika.
  */
 export type Granskningsniva = 'fullt' | 'delvis' | 'ogranskat';
 
-export function bidragGranskningsniva(bidrag: Bidrag): Granskningsniva {
-  const statusar = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status];
-  const antalGranskade = statusar.filter((s) => s !== 'overifierat').length;
+const GRANSKAT_STATUSAR: readonly Datatillstand[] = ['verifierad', 'ingen_regel'];
+
+export function bidragGranskningsniva(bidrag: Bidrag, giltighetStatus: Datatillstand): Granskningsniva {
+  const statusar = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status, giltighetStatus];
+  const antalGranskade = statusar.filter((s) => GRANSKAT_STATUSAR.includes(s)).length;
   if (antalGranskade === 0) return 'ogranskat';
   if (antalGranskade === statusar.length) return 'fullt';
   return 'delvis';
@@ -252,11 +307,14 @@ export function relativFrist(bidrag: Bidrag): string | null {
  * sen_ansokan saknar ett eget statusfält, men "vad händer om man söker
  * sent" är meningslöst utan en känd deadline att vara sen MOT — en
  * kvarglömd sen_ansokan-text på ett bidrag vi inte ens vet deadlinen för
- * (deadline_status: overifierat, dvs typ 'okand') skulle annars påstå en
- * konsekvens av något odefinierat.
+ * (deadline_status: 'okand', ett äkta hål) skulle annars påstå en
+ * konsekvens av något odefinierat. 'olast' spärrar INTE (fyra-
+ * lägesrevisionen, T3): vi HAR en deadline, bara inte oberoende
+ * omkontrollerad — samma reservation gäller överallt (D3), inte en
+ * anledning att dölja fältet helt.
  */
 export function harRiktigSenAnsokanText(bidrag: Bidrag): boolean {
-  if (bidrag.deadline_status === 'overifierat') return false;
+  if (bidrag.deadline_status === 'okand') return false;
   if (bidrag.sen_ansokan === 'Ej angivet i källan') return false;
   if (/varje år/i.test(bidrag.sen_ansokan)) return false;
   return true;

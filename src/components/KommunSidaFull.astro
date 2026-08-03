@@ -19,7 +19,7 @@ import GiltighetsKontroll from './GiltighetsKontroll.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
-  KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, relativFrist,
+  KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, relativFrist, hittaGiltighetsstatus,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN } from '../lib/content';
@@ -96,9 +96,16 @@ if (kommun.bidrag.length === 1) {
 // 'relativ' (tillagd samma dag) — datum: [] där också, men filtret
 // släppte igenom typen eftersom det bara uteslöt 'okand'. relativFrist()
 // ger formeln (samma text som RelativeDeadline-kortet), inte ett datum.
+//
+// D3 (ÅTGÄRDSSPEC, samma kväll): filtret läser nu deadline_status
+// (statusfältet), inte deadlines.typ direkt — 'ingen_regel' är ett annat
+// besked än 'okand' (bekräftad frånvaro av frist, inte ett hål i vår
+// kunskap) och ska INTE uteslutas tyst. typ styr fortfarande FORMATET
+// (fasta/lopande/relativ), status styr OM raden alls tas med.
 const deadlinesammanfattning = kommun.bidrag
-  .filter((b) => b.deadlines.typ !== 'okand')
+  .filter((b) => b.deadline_status !== 'okand')
   .map((b) => {
+    if (b.deadline_status === 'ingen_regel') return `${b.namn} har ingen fast ansökningsfrist.`;
     if (b.deadlines.typ === 'lopande') return `${b.namn} söks löpande.`;
     if (b.deadlines.typ === 'relativ') {
       const frist = relativFrist(b);
@@ -141,6 +148,10 @@ const kommunsiffraText = kommun.kommunsiffra
 const kommunsiffraKalla = kommun.kommunsiffra
   ? KOMMUNSIFFRA.kalla.replace(/{utlamnadDatum}/g, kommun.kommunsiffra.utlamnad_datum)
   : null;
+
+// T4 (ÅTGÄRDSSPEC 2026-08-03 kväll): kommun-nivå, samma värde för varje
+// bidrag på sidan — beräknas en gång, inte per BidragCard.
+const giltighetStatus = hittaGiltighetsstatus(kommun.forutsattningar);
 
 // dateModified ur verifierad (SOKBARHETSSPEC §4.5) — färskhetssignal.
 const webPageJsonLd = {
@@ -240,7 +251,7 @@ const webPageJsonLd = {
       {visaTackningsvarning && <TackningsVarning kommun={kommun.kommun} />}
       <ul class="bidrag-list">
         {sortedBidrag.map((bidrag) => (
-          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(bidrag, kommun)} kommunSlug={kommun.kommun_slug} />
+          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(bidrag, kommun)} kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} giltighetStatus={giltighetStatus} />
         ))}
       </ul>
     </section>

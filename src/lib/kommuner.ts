@@ -19,7 +19,7 @@ import yaml from 'js-yaml';
 import {
   KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, DATATILLSTAND, todayISO, nextOccurrenceISO,
 } from './kommunTyper.ts';
-import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper.ts';
+import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry, Datatillstand } from './kommunTyper.ts';
 import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan.ts';
 
 export * from './kommunTyper.ts';
@@ -94,24 +94,28 @@ function normalizeDate(v: unknown): unknown {
 
 /**
  * Arbetsorder 2026-08-03, punkt 3 — samma fyrfältade regel för belopp/
- * deadline/krav (Bidrag) och giltighet (Forutsattning): status saknas →
- * fäll; status=angivet men fältet tomt → fäll; status=ingen_regel eller
- * overifierat men fältet HAR ett värde → fäll (samma tomhetskrav som
- * ingen_regel — om det redan finns ett svar finns inget kvar att
- * verifiera eller sakna en regel för).
+ * deadline/krav (Bidrag) och giltighet (Forutsattning). Uppdaterad
+ * ÅTGÄRDSSPEC T1/T6 (samma kväll, fyra-lägesrevisionen): status saknas
+ * → fäll; status är olast/verifierad (HARVARDE_KRAVER_STATUSAR — "vi ska
+ * ha ett värde") men fältet tomt → fäll; status är okand/ingen_regel
+ * (inget värde förväntat) men fältet HAR ett värde → fäll (samma
+ * tomhetskrav för båda — om det redan finns ett svar finns inget kvar
+ * att vara okänt om eller sakna en regel för).
  *
  * `symmetrisk=false` (bara belopp): en platshållarfras ("Individuell
  * bedömning" m.fl., se hittaBeloppPlatshallare) är en icke-null STRÄNG
  * men INTE ett riktigt värde — korrigera-belopp-platshallare.ts sätter
- * medvetet belopp_status: overifierat trots att fältet fortfarande
- * innehåller texten (vi rör aldrig belopp-värdet självt). Den riktningen
- * ("overifierat men fältet har ett värde") är alltså en LEGITIM
- * kombination för just belopp — bara "angivet men tomt" ska fällas här.
- * Den farliga riktningen (angivet + platshållare) fångas redan av
+ * medvetet belopp_status: okand trots att fältet fortfarande innehåller
+ * texten (vi rör aldrig belopp-värdet självt). Den riktningen ("okand
+ * men fältet har ett värde") är alltså en LEGITIM kombination för just
+ * belopp — bara "olast/verifierad men tomt" ska fällas här. Den farliga
+ * riktningen (olast/verifierad + platshållare) fångas redan av
  * hittaBeloppPlatshallare, som är corpus-medveten och kan skilja en
  * platshållare från ett äkta runt tal ("5 000 kronor") — något denna
  * enfils-validering inte kan avgöra.
  */
+const HARVARDE_KRAVER_STATUSAR: readonly Datatillstand[] = ['olast', 'verifierad'];
+
 function validateDatatillstand(where: string, faltnamn: string, status: unknown, harVarde: boolean, problems: string[], symmetrisk = true): void {
   if (status === null || status === undefined) {
     problems.push(`${where}.${faltnamn}_status saknas`);
@@ -121,11 +125,12 @@ function validateDatatillstand(where: string, faltnamn: string, status: unknown,
     problems.push(`${where}.${faltnamn}_status är "${status}" (tillåtna: ${DATATILLSTAND.join(', ')})`);
     return;
   }
-  if (status === 'angivet' && !harVarde) {
-    problems.push(`${where}.${faltnamn}_status är "angivet" men fältet är tomt`);
+  const kraverVarde = HARVARDE_KRAVER_STATUSAR.includes(status as Datatillstand);
+  if (kraverVarde && !harVarde) {
+    problems.push(`${where}.${faltnamn}_status är "${status}" men fältet är tomt`);
   }
   if (!symmetrisk) return;
-  if (status !== 'angivet' && harVarde) {
+  if (!kraverVarde && harVarde) {
     problems.push(`${where}.${faltnamn}_status är "${status}" men fältet har ett värde`);
   }
 }
@@ -393,7 +398,8 @@ export function validateAllKommunFiles(): { file: string; error: string }[] {
 }
 
 /**
- * Uppföljning 2026-08-03 (arbetsorder 2): belopp_status: angivet får inte
+ * Uppföljning 2026-08-03 (arbetsorder 2, uppdaterad T1-namnbytet): ett
+ * belopp_status som kräver ett värde (olast eller verifierad) får inte
  * kombineras med ett belopp som är en platshållarfras, inte kommunens
  * egna ord. Listan byggs UR DATAN, inte gissad: en fras som återkommer
  * ORDAGRANT i flera OLIKA kommuner och inte innehåller en siffra kan per
@@ -426,7 +432,7 @@ export function hittaBeloppPlatshallare(minimumKommuner = 3): { kommun: string; 
   const traffar: { kommun: string; kommunSlug: string; bidrag: string; bidragId: string; belopp: string }[] = [];
   for (const kommun of kommuner) {
     for (const bidrag of kommun.bidrag) {
-      if (bidrag.belopp_status === 'angivet' && bidrag.belopp !== null && platshallarfraser.has(bidrag.belopp)) {
+      if ((bidrag.belopp_status === 'olast' || bidrag.belopp_status === 'verifierad') && bidrag.belopp !== null && platshallarfraser.has(bidrag.belopp)) {
         traffar.push({ kommun: kommun.kommun, kommunSlug: kommun.kommun_slug, bidrag: bidrag.namn, bidragId: bidrag.id, belopp: bidrag.belopp });
       }
     }

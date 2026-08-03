@@ -106,7 +106,7 @@ export const KOMMUN = {
     },
     {
       fraga: 'När är sista ansökningsdag för föreningsbidrag i {kommun}?',
-      svar: 'Sista ansökningsdatum skiljer sig mellan bidragen. {deadlinesammanfattning} Datumen återkommer varje år. En för sen ansökan kan ge minskat eller uteblivet bidrag, så kontrollera datumet mot kommunens egen sida i god tid.',
+      svar: 'Sista ansökningsdatum skiljer sig mellan bidragen. {deadlinesammanfattning} Kontrollera alltid datumet mot kommunens egen sida — en för sen ansökan kan ge minskat eller uteblivet bidrag.',
     },
     {
       fraga: 'Vart skickar man ansökan om föreningsbidrag i {kommun}?',
@@ -742,6 +742,16 @@ export const VOID_MARK = {
   forklaring: 'Vi hittade ingen {faltnamn} när vi läste kommunens sida {datum}. Det betyder inte att det saknas — bara att vi inte kan stå för det.',
   kallaKnappMall: 'Läs på {host}',
   felflaggaIntro: 'Vet ni {faltnamnBestamd}? Säg till oss — vi kontrollerar och rättar.',
+};
+
+/**
+ * OlastMark — "olast" (ÅTGÄRDSSPEC T3, 2026-08-03 kväll). Kort och
+ * faktisk, samma register som STALE.template/VOID_MARK — ingen
+ * övertalning, bara vad vi faktiskt kan stå för.
+ */
+export const OLAST_MARK = {
+  rad: 'Inte kontrollerad mot kommunens sida sedan vi hämtade den.',
+  kallaKnappMall: 'Läs på {host}',
 };
 
 /**

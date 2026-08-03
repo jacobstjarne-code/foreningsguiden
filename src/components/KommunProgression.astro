@@ -114,17 +114,20 @@ const fyllKopruta = (text: string, bidragNamn: string) =>
   text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr));
 const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
 
-// Uppföljning 2026-08-03 (punkt 4): köprutan får inte sälja på ett bidrag
-// utan krav att strukturera — genereraUtkast()/K1-K4 är helt byggt kring
-// krav-täckning, och ett bidrag med krav_status: overifierat (tom
-// krav-lista) har inget att strukturera alls. Spärren väljer i stället
-// FÖRSTA kandidaten i filtret som faktiskt har krav, hellre än att tyst
-// sälja mot en tom lista eller dölja köprutan helt bara för att den
-// allra första träffen råkar sakna krav.
+// Uppföljning 2026-08-03 (punkt 4) + ÅTGÄRDSSPEC D1/T5 (samma kväll):
+// köprutan får inte sälja på ett bidrag utan krav att strukturera —
+// genereraUtkast()/K1-K4 är helt byggt kring krav-täckning. D1 (delad
+// definition): kravdata "finns" bara när krav_status = verifierad OCH
+// minst tre krav är listade — olast/okand/ingen_regel duger inte, och
+// inte heller ett verifierat fält med 1-2 krav (för ofta en kollapsad
+// sammanfattning, se D1:s motivering). Spärren väljer FÖRSTA kandidaten
+// i filtret som klarar D1, hellre än att tyst sälja mot en ofullständig
+// lista eller dölja köprutan helt bara för att den allra första träffen
+// inte klarar D1.
 type Station5Entry = { beskrivning: string; href: string } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
   filterValues.map((filter) => {
-    const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status !== 'overifierat');
+    const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status === 'verifierad' && k.bidrag.krav.length >= 3);
     if (!kandidat) return [filter, null];
     return [filter, {
       beskrivning: fyllKopruta(KOPRUTA.beskrivning, kandidat.bidrag.namn),
