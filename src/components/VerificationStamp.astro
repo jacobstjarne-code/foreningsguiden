@@ -2,18 +2,32 @@
 // VerificationStamp — "granskad-stämpeln" (designsystem/screenshots/stamp.png).
 // Bär hela förtroendemekaniken (Jacob, prioriterad före övrig tokenmigrering).
 // Oxblod (--fg-verify) är RESERVERAD för just detta — sprids inte till annan UI.
-import { formatStampDate } from '../lib/kommuner';
+//
+// Uppföljning 2026-08-03 (punkt 3): stämpeln påstod "GRANSKAD" oavsett hur
+// många av bidragets tre fält (belopp/deadline/krav) som faktiskt var
+// verifierade — noll av tre räknades som samma sak som tre av tre. Tre
+// nivåer nu (bidragGranskningsniva, kommunTyper.ts): 'fullt' behåller
+// oxblod-stämpeln oförändrad, 'delvis' får en dämpad variant (inte
+// oxblod — den färgen ska inte överdriva en ofullständig granskning),
+// 'ogranskat' (noll av tre) visar INGEN stämpel alls — en "OGRANSKAT"-
+// etikett hade bara varit ännu ett påstående om ett tomrum.
+import { formatStampDate, bidragGranskningsniva } from '../lib/kommuner';
+import type { Bidrag } from '../lib/kommuner';
 
 export interface Props {
-  verifierad: string; // ISO-datum
-  fullstandigtGranskad?: boolean;
+  bidrag: Bidrag;
+  verifierad: string; // ISO-datum, kommunens (fallback när bidraget saknar eget senast_verifierad)
 }
 
-const { verifierad, fullstandigtGranskad = false } = Astro.props;
+const { bidrag, verifierad } = Astro.props;
+const niva = bidragGranskningsniva(bidrag);
+const datum = formatStampDate(bidrag.senast_verifierad ?? verifierad);
 ---
-<span class="fg-stamp">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <polyline points="20 6 9 17 4 12" />
-  </svg>
-  {fullstandigtGranskad ? 'GRANSKAD' : 'DELVIS GRANSKAD'} · {formatStampDate(verifierad)}
-</span>
+{niva !== 'ogranskat' && (
+  <span class={`fg-stamp ${niva === 'delvis' ? 'fg-stamp--delvis' : ''}`}>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+    {niva === 'fullt' ? 'GRANSKAD' : 'DELVIS GRANSKAD'} · {datum}
+  </span>
+)}

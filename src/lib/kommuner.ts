@@ -17,7 +17,7 @@ import yaml from 'js-yaml';
 // omverifiering.ts:s filhuvud för varför: scripts/omverifiering-ko.ts
 // kör som ett vanligt node-skript, utanför Vites resolver.
 import {
-  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, FALT_STATUSAR, todayISO, nextOccurrenceISO,
+  KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, DATATILLSTAND, todayISO, nextOccurrenceISO,
 } from './kommunTyper.ts';
 import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry } from './kommunTyper.ts';
 import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan.ts';
@@ -92,6 +92,44 @@ function normalizeDate(v: unknown): unknown {
   return v instanceof Date ? v.toISOString().slice(0, 10) : v;
 }
 
+/**
+ * Arbetsorder 2026-08-03, punkt 3 — samma fyrfältade regel för belopp/
+ * deadline/krav (Bidrag) och giltighet (Forutsattning): status saknas →
+ * fäll; status=angivet men fältet tomt → fäll; status=ingen_regel eller
+ * overifierat men fältet HAR ett värde → fäll (samma tomhetskrav som
+ * ingen_regel — om det redan finns ett svar finns inget kvar att
+ * verifiera eller sakna en regel för).
+ *
+ * `symmetrisk=false` (bara belopp): en platshållarfras ("Individuell
+ * bedömning" m.fl., se hittaBeloppPlatshallare) är en icke-null STRÄNG
+ * men INTE ett riktigt värde — korrigera-belopp-platshallare.ts sätter
+ * medvetet belopp_status: overifierat trots att fältet fortfarande
+ * innehåller texten (vi rör aldrig belopp-värdet självt). Den riktningen
+ * ("overifierat men fältet har ett värde") är alltså en LEGITIM
+ * kombination för just belopp — bara "angivet men tomt" ska fällas här.
+ * Den farliga riktningen (angivet + platshållare) fångas redan av
+ * hittaBeloppPlatshallare, som är corpus-medveten och kan skilja en
+ * platshållare från ett äkta runt tal ("5 000 kronor") — något denna
+ * enfils-validering inte kan avgöra.
+ */
+function validateDatatillstand(where: string, faltnamn: string, status: unknown, harVarde: boolean, problems: string[], symmetrisk = true): void {
+  if (status === null || status === undefined) {
+    problems.push(`${where}.${faltnamn}_status saknas`);
+    return;
+  }
+  if (!DATATILLSTAND.includes(status as (typeof DATATILLSTAND)[number])) {
+    problems.push(`${where}.${faltnamn}_status är "${status}" (tillåtna: ${DATATILLSTAND.join(', ')})`);
+    return;
+  }
+  if (status === 'angivet' && !harVarde) {
+    problems.push(`${where}.${faltnamn}_status är "angivet" men fältet är tomt`);
+  }
+  if (!symmetrisk) return;
+  if (status !== 'angivet' && harVarde) {
+    problems.push(`${where}.${faltnamn}_status är "${status}" men fältet har ett värde`);
+  }
+}
+
 function validateBidrag(raw: any, kommunSlug: string, index: number, problems: string[]): Bidrag | null {
   const where = `bidrag[${index}] (${kommunSlug})`;
   if (!raw || typeof raw !== 'object') {
@@ -138,9 +176,6 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   if (typeof raw.belopp === 'string' && /https?:\/\//i.test(raw.belopp)) {
     problems.push(`${where}.belopp får inte innehålla en URL`);
   }
-  if (typeof raw.belopp === 'string' && raw.belopp.trim().toLowerCase() === 'individuell bedömning') {
-    problems.push(`${where}.belopp får inte vara platshållaren "Individuell bedömning"; använd statusfält och null`);
-  }
   if (!isNonEmptyString(raw.sen_ansokan)) problems.push(`${where}.sen_ansokan saknas eller är tom`);
   if (!isNonEmptyString(raw.kalla_url)) {
     problems.push(`${where}.kalla_url saknas eller är tom`);
@@ -150,6 +185,19 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   if (raw.anteckning !== null && raw.anteckning !== undefined && typeof raw.anteckning !== 'string') {
     problems.push(`${where}.anteckning måste vara text eller null`);
   }
+
+  // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriska efter migrationen.
+  validateDatatillstand(where, 'belopp', raw.belopp_status, raw.belopp !== null && raw.belopp !== undefined, problems, false);
+  validateDatatillstand(where, 'deadline', raw.deadline_status, raw.deadlines?.typ !== 'okand', problems);
+  validateDatatillstand(where, 'krav', raw.krav_status, Array.isArray(raw.krav) && raw.krav.length > 0, problems);
+
+  if (raw.krav_fullstandiga !== null && raw.krav_fullstandiga !== undefined && typeof raw.krav_fullstandiga !== 'boolean') {
+    problems.push(`${where}.krav_fullstandiga måste vara true, false eller null`);
+  }
+  if (raw.krav_fullstandiga === true && (!Array.isArray(raw.krav) || raw.krav.length === 0)) {
+    problems.push(`${where}.krav_fullstandiga är true men krav-listan är tom`);
+  }
+  raw.krav_fullstandiga = raw.krav_fullstandiga ?? null;
 
   raw.min_medlemmar = numberOrNull(raw, 'min_medlemmar', where, problems);
   raw.alder_min = numberOrNull(raw, 'alder_min', where, problems);
@@ -161,24 +209,6 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   raw.foreningstyp = verksamhetListOrNull(raw, 'foreningstyp', where, problems);
   raw.kraver_registrering = boolOrNull(raw, 'kraver_registrering', where, problems);
   raw.sate_i_kommunen = boolOrNull(raw, 'sate_i_kommunen', where, problems);
-
-
-  for (const field of ['belopp_status', 'deadline_status', 'krav_status', 'giltighet_status'] as const) {
-    if (raw[field] !== null && raw[field] !== undefined && !FALT_STATUSAR.includes(raw[field])) {
-      problems.push(`${where}.${field} är "${raw[field]}" (tillåtna: ${FALT_STATUSAR.join(', ')})`);
-    }
-    raw[field] = raw[field] ?? 'overifierat';
-  }
-
-  if (raw.krav_fullstandiga !== null && raw.krav_fullstandiga !== undefined && typeof raw.krav_fullstandiga !== 'boolean') {
-    problems.push(`${where}.krav_fullstandiga måste vara true eller false`);
-  }
-  raw.krav_fullstandiga = raw.krav_fullstandiga ?? false;
-
-  if (raw.giltighet !== null && raw.giltighet !== undefined && typeof raw.giltighet !== 'string') {
-    problems.push(`${where}.giltighet måste vara text eller null`);
-  }
-  raw.giltighet = raw.giltighet ?? null;
 
   // H26 — valfritt fält, saknas i alla 99 befintliga filer i dag.
   if (raw.status !== null && raw.status !== undefined && !BIDRAG_STATUSAR.includes(raw.status)) {
@@ -224,6 +254,9 @@ function validateForutsattning(raw: any, kommunSlug: string, index: number, prob
   }
   if (typeof raw.ordning !== 'number') problems.push(`${where}.ordning måste vara ett heltal`);
   if (!isNonEmptyString(raw.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
+
+  // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriskt efter migrationen.
+  validateDatatillstand(where, 'giltighet', raw.giltighet_status, raw.giltighet !== null && raw.giltighet !== undefined, problems);
 
   raw.system = raw.system ?? null;
   raw.ledtid = raw.ledtid ?? null;
@@ -357,6 +390,48 @@ export function validateAllKommunFiles(): { file: string; error: string }[] {
     }
   }
   return problem;
+}
+
+/**
+ * Uppföljning 2026-08-03 (arbetsorder 2): belopp_status: angivet får inte
+ * kombineras med ett belopp som är en platshållarfras, inte kommunens
+ * egna ord. Listan byggs UR DATAN, inte gissad: en fras som återkommer
+ * ORDAGRANT i flera OLIKA kommuner och inte innehåller en siffra kan per
+ * definition inte vara en specifik uppgift ur just den kommunens källa —
+ * riktiga belopp (även runda tal som "5 000 kronor", som råkar delas av
+ * flera kommuner) innehåller alltid en siffra. Verifierat 2026-08-03:
+ * "Individuell bedömning" (34 kommuner) och dess "per {sak}"-varianter
+ * (7/2/2 kommuner) är de enda icke-numeriska fraserna som återkommer
+ * >=3 gånger i corpuset — reglen är alltså inte bara teoretisk, den
+ * fångar ett verkligt, redan existerande mönster.
+ */
+export function hittaBeloppPlatshallare(minimumKommuner = 3): { kommun: string; kommunSlug: string; bidrag: string; bidragId: string; belopp: string }[] {
+  const kommuner = loadKommuner();
+  const kommunerPerFras = new Map<string, Set<string>>();
+  for (const kommun of kommuner) {
+    for (const bidrag of kommun.bidrag) {
+      if (bidrag.belopp === null) continue;
+      const set = kommunerPerFras.get(bidrag.belopp) ?? new Set<string>();
+      set.add(kommun.kommun_slug);
+      kommunerPerFras.set(bidrag.belopp, set);
+    }
+  }
+
+  const platshallarfraser = new Set(
+    [...kommunerPerFras.entries()]
+      .filter(([fras, kommunSet]) => kommunSet.size >= minimumKommuner && !/\d/.test(fras))
+      .map(([fras]) => fras)
+  );
+
+  const traffar: { kommun: string; kommunSlug: string; bidrag: string; bidragId: string; belopp: string }[] = [];
+  for (const kommun of kommuner) {
+    for (const bidrag of kommun.bidrag) {
+      if (bidrag.belopp_status === 'angivet' && bidrag.belopp !== null && platshallarfraser.has(bidrag.belopp)) {
+        traffar.push({ kommun: kommun.kommun, kommunSlug: kommun.kommun_slug, bidrag: bidrag.namn, bidragId: bidrag.id, belopp: bidrag.belopp });
+      }
+    }
+  }
+  return traffar;
 }
 
 let _cache: Kommun[] | null = null;

@@ -145,7 +145,17 @@ const kommuner = loadKommuner();
           <h3>{TRATT.besked.kanSoka.rubrik}</h3>
           <p class="tratt__kostnadsram" data-tratt-kostnadsram hidden></p>
           <p class="tratt__sum-fotnot" data-tratt-sum-fotnot hidden></p>
-          <p class="tratt__tom" data-tratt-matchar-tom hidden>{TRATT.besked.kanSoka.tom}</p>
+          {/* ZeroResult (DATATILLSTAND_och_koprutan.md §2d, uppföljning
+             2026-08-03): noll träffar får samma streckade ring som
+             VoidMark (.fg-void-count) — samma tomrumsform överallt i
+             systemet. Ingen ny text, samma TRATT.besked.kanSoka.tom som
+             redan fanns. Skiljer sig från 2d:s kommunsida-exempel
+             (byggs INTE här — en pill kan strukturellt aldrig peka mot
+             noll bidrag på en kommunsida, se diagnos-tom-kategori.ts). */}
+          <div class="tratt__tom" data-tratt-matchar-tom hidden>
+            <span class="fg-void-count" aria-hidden="true">0</span>
+            <p>{TRATT.besked.kanSoka.tom}</p>
+          </div>
           <ul class="tratt__bidraglista" data-tratt-matchar-lista></ul>
           {/* H9 (SPEC: Kluster 3, 2026-07-28): paketpris — bara när fler
              än ett bidrag matchar. Fylls i render(), se skriptet. */}
@@ -985,11 +995,24 @@ const kommuner = loadKommuner();
   }
 
   .tratt__sum-fotnot,
-  .tratt__tom,
   .tratt__minne,
   .tratt__ansvar {
     color: var(--fg-ink-muted);
     font-size: var(--fg-text-label);
+  }
+
+  /* ZeroResult — samma streckade ring som VoidMark (.fg-void-count). */
+  .tratt__tom {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fg-space-4);
+    color: var(--fg-ink-muted);
+  }
+
+  .tratt__tom p {
+    margin: 0;
+    font-size: var(--fg-text-body-lg);
+    color: var(--fg-ink);
   }
 
   .tratt__disclosure {

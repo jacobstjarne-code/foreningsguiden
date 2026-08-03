@@ -1,0 +1,58 @@
+---
+// VoidState — "Ingen regel" / verifierad frånvaro (DATATILLSTAND_och_
+// koprutan.md §2a, Design 2026-08-03). ETT SVAR VI VERIFIERAT — renderas
+// som vilken annan bekräftad uppgift som helst: fylld grön punkt, full
+// svärta, INGET varningstecken. Motsats till VoidMark.astro (som säger
+// "vi vet inte") — blanda aldrig ihop dem, de har motsatt visuell logik.
+//
+// Formuleringen ska vara AKTIV ("{kommun} anger ingen tidsgräns"), inte
+// passiv ("tidsgräns saknas") — det senare läser som VÅR lucka, det
+// förra som kommunens eget, redan verifierade, ställningstagande.
+export interface Props {
+  rubrik: string; // sektionslabel, t.ex. "HUR LÄNGE GÄLLER BESLUTET?"
+  besked: string; // aktiv formulering, t.ex. "Gislaved anger ingen tidsgräns"
+  forklaring: string;
+}
+
+const { rubrik, besked, forklaring } = Astro.props;
+---
+<div class="fg-voidstate">
+  <p class="fg-voidstate__rubrik">{rubrik}</p>
+  <p class="fg-voidstate__besked"><span class="fg-voidstate__prick" aria-hidden="true"></span> {besked}</p>
+  <p class="fg-voidstate__forklaring">{forklaring}</p>
+</div>
+
+<style>
+  .fg-voidstate__rubrik {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0 0 8px;
+  }
+
+  .fg-voidstate__besked {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink);
+    margin: 0 0 4px;
+  }
+
+  .fg-voidstate__prick {
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--fg-positive);
+  }
+
+  .fg-voidstate__forklaring {
+    color: var(--fg-ink-muted);
+    margin: 0;
+  }
+</style>

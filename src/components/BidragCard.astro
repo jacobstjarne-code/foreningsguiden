@@ -11,8 +11,10 @@
 // pill "öppen för ansökan" (inget öppningsdatum i schemat att räkna mot),
 // Bevaka-knapp (bevakningsflödet är på is, se statusrapport).
 import type { Bidrag } from '../lib/kommuner';
-import { KATEGORI_LABELS, formatRecurringDate } from '../lib/kommuner';
+import { KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText } from '../lib/kommuner';
 import VerificationStamp from './VerificationStamp.astro';
+import VoidMark from './VoidMark.astro';
+import RelativeDeadline from './RelativeDeadline.astro';
 
 export interface Props {
   bidrag: Bidrag;
@@ -22,53 +24,20 @@ export interface Props {
 }
 
 const { bidrag, verifierad, ansokningsUrl, kommunSlug } = Astro.props;
+const beloppDatum = formatDate(bidrag.senast_verifierad ?? verifierad);
 
-// 2c (arbetsorder 2026-08-03): typ 'okand' visade ett generiskt "inget
-// ansökningsdatum"-besked även när en relativ frist FANNS, angiven i
-// anteckning-fältet med konventionen "Relativ tidsfrist: {frist}" (kolon
-// = ett värde att visa). Skiljs medvetet från t.ex. Åstorps anteckning
-// "Relativ tidsfrist kan inte uttryckas..." (ingen kolon — en datamodells-
-// kommentar till den som läser YAML:en, inte text för en besökare) —
-// ett bredare mönster (utan kolon-kravet) hade läckt utvecklarjargong ut
-// på kortet för det fallet.
-const RELATIV_FRIST_RE = /^Relativ tidsfrist:\s*(.+)$/;
-
-function relativFrist(b: Bidrag): string | null {
-  return b.anteckning?.match(RELATIV_FRIST_RE)?.[1] ?? null;
-}
-
+// deadlines.typ === 'relativ' avgörs INNAN denna funktion anropas (se
+// dd-blocket nedan — RelativeDeadline-komponenten tar över helt då),
+// så funktionen behöver bara skilja lopande/okand/fasta. 'ingen_regel'
+// tillagd vid sammanslagningen 2026-08-03 (en parallell Code-session
+// idé, bra) — en bekräftad "ingen fast frist" är ett annat besked än
+// "vi vet inte", samma logik som VoidState/VoidMark-uppdelningen.
 function formatDeadlines(b: Bidrag): string {
-  if (b.deadline_status === 'overifierat') {
-    return 'Deadline inte verifierad ännu — kontrollera källan innan du planerar ansökan.';
-  }
-  if (b.deadline_status === 'ingen_regel') {
-    return 'Kommunen anger uttryckligen ingen fast ansökningsfrist.';
-  }
+  if (b.deadline_status === 'ingen_regel') return 'Kommunen anger uttryckligen ingen fast ansökningsfrist.';
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
-  if (b.deadlines.typ === 'okand') return relativFrist(b) ?? 'Deadline angiven i källan, men kan inte uttryckas som ett fast datum.';
+  if (b.deadlines.typ === 'okand') return 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
-
-function formatBelopp(b: Bidrag): string {
-  if (b.belopp_status === 'overifierat') {
-    return 'Belopp inte verifierat ännu.';
-  }
-  if (b.belopp_status === 'ingen_regel') {
-    return 'Kommunen anger uttryckligen inget belopp eller tak.';
-  }
-  return b.belopp ?? 'Beloppet framgår av källan men saknas i den strukturerade uppgiften.';
-}
-
-const granskningsstatusar = [
-  bidrag.belopp_status,
-  bidrag.deadline_status,
-  bidrag.krav_status,
-  bidrag.giltighet_status,
-];
-
-const fullstandigtGranskad =
-  granskningsstatusar.every((status) => status !== 'overifierat') &&
-  bidrag.krav_fullstandiga;
 
 // H26 — status-notis i stället för CTA:n när kommunen pausat/avskaffat
 // bidraget. 'pausad' är tillfälligt (attention), 'avskaffat' är permanent
@@ -97,10 +66,34 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     <dd>{bidrag.malgrupp}</dd>
 
     <dt>Deadline</dt>
-    <dd>{formatDeadlines(bidrag)}</dd>
+    <dd>
+      {bidrag.deadlines.typ === 'relativ' ? <RelativeDeadline bidrag={bidrag} /> : formatDeadlines(bidrag)}
+    </dd>
 
     <dt>Belopp</dt>
-    <dd>{formatBelopp(bidrag)}</dd>
+    <dd>
+      {bidrag.belopp_status === 'ingen_regel' ? (
+        'Kommunen anger uttryckligen inget belopp eller tak.'
+      ) : bidrag.belopp === null ? (
+        // VoidMark bara vid genuint ingen uppgift alls — INTE när
+        // belopp_status:overifierat kommer från en platshållarfras
+        // ("Individuell bedömning") som fortfarande är riktig, användbar
+        // text från källan (korrigera-belopp-platshallare.ts rör bara
+        // statusfältet, aldrig själva texten).
+        <VoidMark
+          etikett="Ej angivet i källan"
+          faltnamn="beloppsuppgift"
+          faltnamnBestamd="beloppet"
+          datum={beloppDatum}
+          kallaUrl={bidrag.kalla_url}
+          kommunSlug={kommunSlug}
+          bidragId={bidrag.id}
+          bidragNamn={bidrag.namn}
+        />
+      ) : (
+        bidrag.belopp
+      )}
+    </dd>
 
     <dt>Krav</dt>
     <dd>
@@ -120,19 +113,18 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
       )}
     </dd>
 
-    <dt>Giltighet</dt>
-    <dd>
-      {bidrag.giltighet_status === 'overifierat'
-        ? 'Giltigheten är inte verifierad ännu.'
-        : bidrag.giltighet_status === 'ingen_regel'
-          ? 'Kommunen anger uttryckligen ingen särskild giltighetsregel.'
-          : bidrag.giltighet ?? 'Giltighetsregeln är angiven i källan men saknas i den strukturerade uppgiften.'}
-    </dd>
+    {/* Giltighet hör hemma på Forutsattning (kommunens "hur länge gäller
+        beslutet", inte per-bidrag) — se GiltighetsKontroll.astro,
+        hittaGiltighetsregel() i kommunTyper.ts. En parallell Code-session
+        lade tillfälligt giltighet/giltighet_status direkt på Bidrag vid
+        sammanslagningen 2026-08-03; borttaget härifrån (dubblerad källa
+        till samma sak, "en sanning, ett ställe"). */}
 
-    {/* 2e (arbetsorder 2026-08-03): "Ej angivet i källan" är sentinelvärdet
-        för okänt (kommunTyper.ts sen_ansokan: string, aldrig null) — döljs
-        i stället för att visas som ett tomt besked på varje kort. */}
-    {bidrag.sen_ansokan !== 'Ej angivet i källan' && (
+    {/* 2e + uppföljning (arbetsorder 2026-08-03): döljs för sentinelvärdet
+        "Ej angivet i källan" OCH för feltaggningar som bara restaterar
+        deadline-cykeln ("15 mars varje år") i stället för en konsekvens
+        — se harRiktigSenAnsokanText (kommunTyper.ts) för motiveringen. */}
+    {harRiktigSenAnsokanText(bidrag) && (
       <>
         <dt>Sen ansökan</dt>
         <dd>{bidrag.sen_ansokan}</dd>
@@ -146,7 +138,7 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     <p class="bidrag-card__kalla">
       Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
     </p>
-    <VerificationStamp verifierad={verifierad} fullstandigtGranskad={fullstandigtGranskad} />
+    <VerificationStamp bidrag={bidrag} verifierad={verifierad} />
   </div>
   {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
       (relativFrist) — annars stod samma besked på kortet två gånger. */}

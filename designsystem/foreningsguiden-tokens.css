@@ -38,6 +38,20 @@
    * Oxblod = granskad-stämpelns bläck. Sprid inte till annan UI.          */
   --fg-verify:         #9A3B2F;
 
+  /* --- Tomrum (DATATILLSTAND_och_koprutan.md, Design 2026-08-03) ------- *
+   * Delad primitiv för "vi vet inte" och "det finns inget att veta":
+   * ej verifierad uppgift, noll filterträffar, ofyllt utkastavsnitt.
+   * TVÅ HÅRDA REGLER:
+   * 1. Oxblod (--fg-verify) används ALDRIG i ett tomrumstillstånd — den
+   *    är reserverad för verifieringsstämpeln. Lånas den till "vi vet
+   *    inte" läses osäkerhet som fara, och stämpeln urholkas.
+   * 2. Ingen urgensfärg (--fg-urgent/--fg-attention/--fg-positive) utan
+   *    ABSOLUT datum. Relativa frister och overifierade uppgifter får
+   *    neutral statuspill — färgen får inte påstå något datan inte bär. */
+  --fg-void-line:      #8A8375; /* streckad ram + hålmarkör — 3,1:1 non-text */
+  --fg-void-surface:   #FBFAF7; /* fyllning i ofärdig behållare              */
+  --fg-void-ink:       #6E6859; /* siffra/glyf i tomrum — 4,6:1 text         */
+
   /* --- Typografi ------------------------------------------------------ */
   --fg-font-sans:    'Atkinson Hyperlegible', system-ui, sans-serif; /* UI/brödtext, vald för läsbarhet */
   --fg-font-display: 'Archivo', system-ui, sans-serif;               /* ordmärke + stora rubriker       */
@@ -168,7 +182,57 @@
 .fg-chip--urgent    { background: var(--fg-urgent);       color: #fff; }
 .fg-chip--attention { background: #fff; color: var(--fg-attention); border: var(--fg-border-inner) solid var(--fg-attention); }
 .fg-chip--positive  { background: var(--fg-positive-soft); color: var(--fg-positive); }
+/* Regel 2 (tomrum, ovan): relativa frister/overifierade uppgifter får
+   DENNA pill, aldrig urgent/attention/positive — ingen färg utan datum. */
+.fg-chip--neutral   { background: var(--fg-surface-sunken); color: var(--fg-ink-muted); border: var(--fg-border-inner) solid var(--fg-void-line); }
 .fg-tag             { background: var(--fg-accent-soft);   color: var(--fg-accent); }
+
+/* Tomrum — DATATILLSTAND_och_koprutan.md (Design 2026-08-03). Delad
+   primitiv för "vi vet inte" (VoidMark) och "det finns inget att veta"
+   (ZeroResult): samma streckade ring överallt i systemet. ------------- */
+.fg-void {
+  border: var(--fg-border-structural) dashed var(--fg-void-line);
+  background: var(--fg-void-surface);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4);
+}
+
+.fg-void-mark {
+  display: inline-block;
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: var(--fg-border-structural) solid var(--fg-void-line);
+  background: transparent;
+}
+
+.fg-void-count {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: var(--fg-border-structural) dashed var(--fg-void-line);
+  color: var(--fg-void-ink);
+  font-family: var(--fg-font-mono);
+  font-weight: var(--fg-weight-bold);
+  font-size: 1.625rem; /* 26px, spec */
+}
+
+.fg-formula {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fg-font-mono);
+  font-weight: var(--fg-weight-bold);
+  font-size: 1.0625rem; /* 17px, spec */
+  background: var(--fg-surface-sunken);
+  border-radius: var(--fg-radius-control);
+  padding: 10px 14px;
+}
 
 /* Links --------------------------------------------------------------- */
 a { color: var(--fg-accent); }

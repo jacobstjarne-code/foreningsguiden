@@ -305,7 +305,7 @@ export const VAGLEDNING = {
   station1: {
     rubrik: 'Vad gäller er?',
     intro: 'Vilken sorts förening ni är avgör vilka bidrag som är möjliga. Välj här, så visar vi bara det som gäller er.',
-    sparatText: 'Sparat till ert utkast: föreningstyp — {typ}',
+    sparatText: 'Sparat till ert underlag: föreningstyp — {typ}',
   },
 
   // Station 2 — Vad är brådskande?
@@ -342,12 +342,15 @@ export const VAGLEDNING = {
   },
 
   // Station 5 — Vad ska ni skriva?
+  // Copy bytt 2026-08-03 (arbetsorder 2, punkt 6, Jacob) — "utkast" byts
+  // mot "underlag" på hela ytan (se även den hårdkodade CTA-texten i
+  // KommunProgression.astro).
   station5: {
     rubrik: 'Vad ska ni skriva?',
-    intro: 'Ansökan bedöms mot kommunens egna kriterier. Vi kan skriva ett utkast som utgår från dem och från det ni redan fyllt i här.',
+    intro: 'Ansökan bedöms mot kommunens egna kriterier. Vi samlar dem på ett ställe, i den ordning kommunen vill ha dem, med det ni redan fyllt i här ifyllt.',
     faltStatus: '{ifyllda} av {totalt} fält är redan ifyllda',
     knapp: 'Skapa ansökan',
-    ansvar: 'Vi skriver utkastet. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
+    ansvar: 'Vi ställer i ordning underlaget. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
   },
 };
 
@@ -728,6 +731,17 @@ export const GILTIGHETSKOLL = {
   gransRubrik: 'Ert godkännande förfaller om {manader} månader',
   gransText: 'Årsmöte {arsmotesdatum}. I {kommun} gäller godkännandet till nästa årsmöte redovisats — {manad} {ar} är er gräns.',
   paminnKnappMall: 'Påminn oss i {manad}',
+};
+
+/**
+ * VoidMark — "Ej verifierat" (DATATILLSTAND_och_koprutan.md §2b, Design
+ * 2026-08-03). Text ordagrant ur specen, bara {datum}/{kommun}/{url}
+ * mekaniskt ifyllda av Code — ingen ny prosa uppfunnen här.
+ */
+export const VOID_MARK = {
+  forklaring: 'Vi hittade ingen {faltnamn} när vi läste kommunens sida {datum}. Det betyder inte att det saknas — bara att vi inte kan stå för det.',
+  kallaKnappMall: 'Läs på {host}',
+  felflaggaIntro: 'Vet ni {faltnamnBestamd}? Säg till oss — vi kontrollerar och rättar.',
 };
 
 /**

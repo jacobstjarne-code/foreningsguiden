@@ -10,7 +10,7 @@
 import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
-  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter,
+  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist,
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
@@ -114,10 +114,17 @@ const fyllKopruta = (text: string, bidragNamn: string) =>
   text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr));
 const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
 
+// Uppföljning 2026-08-03 (punkt 4): köprutan får inte sälja på ett bidrag
+// utan krav att strukturera — genereraUtkast()/K1-K4 är helt byggt kring
+// krav-täckning, och ett bidrag med krav_status: overifierat (tom
+// krav-lista) har inget att strukturera alls. Spärren väljer i stället
+// FÖRSTA kandidaten i filtret som faktiskt har krav, hellre än att tyst
+// sälja mot en tom lista eller dölja köprutan helt bara för att den
+// allra första träffen råkar sakna krav.
 type Station5Entry = { beskrivning: string; href: string } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
   filterValues.map((filter) => {
-    const kandidat = bidragForFilter(filter)[0];
+    const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status !== 'overifierat');
     if (!kandidat) return [filter, null];
     return [filter, {
       beskrivning: fyllKopruta(KOPRUTA.beskrivning, kandidat.bidrag.namn),
@@ -277,6 +284,7 @@ const station5Alla = station5PerFilter.alla;
               <div class="progression__list-row__meta">
                 {bidrag.belopp ?? 'Belopp ej publikt'} · {dateISO
                   ? `sista dag ${formatDate(dateISO)}`
+                  : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
                   : bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan'}
               </div>
             </div>
@@ -305,7 +313,7 @@ const station5Alla = station5PerFilter.alla;
         <p>{kopRutaPrisOchKvitto}</p>
         <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
         <a href={station5Alla?.href ?? '#'} class="btn-primary progression__goal-cta" data-progression-kopruta-cta>
-          Lås upp hela utkastet — {prisKr} kr
+          Lås upp hela underlaget — {prisKr} kr
         </a>
       </div>
       <p class="progression__goal-ansvar">{VAGLEDNING.station5.ansvar}</p>

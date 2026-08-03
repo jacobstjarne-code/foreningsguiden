@@ -1,0 +1,78 @@
+---
+// VoidMark — "Ej verifierat" (DATATILLSTAND_och_koprutan.md §2b, Design
+// 2026-08-03). Ett hål i vår kunskap: streckad ram, hålmarkör, dämpad
+// text, källänk ut till kommunen, och en felflagga (återanvänder den
+// BEFINTLIGA felrapport-widgeten — H25/G25 — i stället för en egen).
+//
+// Motsats till VoidState.astro: den här komponenten säger "vi vet inte",
+// VoidState säger "vi har kollat, det finns inget att veta". Blanda
+// ALDRIG ihop dem till en komponent med en flagga — de har motsatt
+// visuell logik (se filhuvudet i VoidState.astro).
+import { VOID_MARK } from '../lib/content';
+
+export interface Props {
+  etikett: string; // t.ex. "Ej angivet i källan"
+  faltnamn: string; // t.ex. "beloppsuppgift" — sätts in i "Vi hittade ingen {faltnamn}..."
+  faltnamnBestamd: string; // t.ex. "beloppet" — sätts in i "Vet ni {faltnamnBestamd}?"
+  datum: string; // formaterat datum, t.ex. "10 juli 2026" — kommunens/bidragets verifierad-datum
+  kallaUrl: string;
+  kommunSlug: string;
+  bidragId: string;
+  bidragNamn: string;
+}
+
+const { etikett, faltnamn, faltnamnBestamd, datum, kallaUrl, kommunSlug, bidragId, bidragNamn } = Astro.props;
+
+const host = new URL(kallaUrl).hostname.replace(/^www\./, '');
+const forklaring = VOID_MARK.forklaring.replace('{faltnamn}', faltnamn).replace('{datum}', datum);
+const kallaKnapp = VOID_MARK.kallaKnappMall.replace('{host}', host);
+const felflaggaIntro = VOID_MARK.felflaggaIntro.replace('{faltnamnBestamd}', faltnamnBestamd);
+---
+<div class="fg-void">
+  <p class="fg-void__etikett"><span class="fg-void-mark" aria-hidden="true"></span> {etikett}</p>
+  <p class="fg-void__forklaring">{forklaring}</p>
+  <a href={kallaUrl} class="fg-btn--ghost fg-void__kalla-knapp" target="_blank" rel="noopener">
+    {kallaKnapp}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>
+  </a>
+  <div class="fg-void__felflagga">
+    <p>{felflaggaIntro}</p>
+    <div class="felrapport" data-felrapport data-kommun-slug={kommunSlug} data-bidrag-id={bidragId} data-bidrag-namn={bidragNamn}>
+      <button type="button" class="felrapport-knapp">Det här stämmer inte</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .fg-void__etikett {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-void-ink);
+    margin: 0 0 8px;
+  }
+
+  .fg-void__forklaring {
+    color: var(--fg-void-ink);
+    margin: 0 0 var(--fg-space-4);
+  }
+
+  .fg-void__kalla-knapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .fg-void__felflagga {
+    margin-top: var(--fg-space-4);
+    padding-top: var(--fg-space-4);
+    border-top: var(--fg-border-inner) dashed var(--fg-void-line);
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .fg-void__felflagga p {
+    margin: 0 0 8px;
+  }
+</style>

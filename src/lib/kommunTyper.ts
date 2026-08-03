@@ -26,14 +26,40 @@ export type Verksamhet = (typeof VERKSAMHETER)[number];
 // betyder att kommunen UTTRYCKLIGEN skriver löpande/rullande ansökan.
 // 'lopande' får ALDRIG användas som utfyllnad för tystnad — se Västervik-
 // reverten 2026-07 (c995f80 backad) för vad som händer när den regeln bryts.
-export const DEADLINE_TYPER = ['fasta', 'lopande', 'okand'] as const;
+//
+// 'relativ' — tillagd 2026-08-03 (DATATILLSTAND_och_koprutan.md §2c).
+// Skild från 'okand': en relativ frist är INTE ett hål i vår kunskap — vi
+// har en fullständig, känd formel (t.ex. "60 dagar efter avslutad kurs"),
+// bara inget absolut datum förrän besökaren fyller i sin egen
+// referenspunkt. 'okand' migrerade tidigare in relativa frister av misstag
+// (anteckning-textmönstret "Relativ tidsfrist: X" var det enda strukturella
+// spåret) — det gav deadline_status: overifierat åt något vi faktiskt VET.
+// Ett eget typ-värde, inte ett fjärde Datatillstand-värde: de tre andra
+// fälten (belopp/krav/giltighet) har inget analogt "relativt" tillstånd,
+// och Datatillstand ska vara samma skala för alla fyra.
+export const DEADLINE_TYPER = ['fasta', 'lopande', 'okand', 'relativ'] as const;
 export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 
-// Extraktionsstatus för kritiska fält. `overifierat` är standard och betyder
-// att källan inte har kunnat avgöras. `ingen_regel` får bara användas när
-// kommunen uttryckligen anger att ingen gräns, frist eller regel finns.
-export const FALT_STATUSAR = ['angivet', 'ingen_regel', 'overifierat'] as const;
-export type FaltStatus = (typeof FALT_STATUSAR)[number];
+// Datatillstånd (arbetsorder 2026-08-03, DATATILLSTAND_och_koprutan.md) —
+// EN skala för fyra olika fält (belopp/deadline/krav på Bidrag, giltighet
+// på Forutsattning), alla obligatoriska efter migrationen (kommuner.ts).
+// 'angivet' och 'ingen_regel' är BÅDA verifierade svar (fylld grön punkt,
+// full svärta i UI — VoidState) — skillnaden är bara OM ett värde finns.
+// 'overifierat' är ett hål i vår kunskap (streckad ram, dämpad text,
+// källänk ut — VoidMark). Migrationsskriptet (uppdatera-datatillstand.ts)
+// sätter ALDRIG 'ingen_regel' automatiskt — den etiketten kräver att någon
+// faktiskt läst källan och bekräftat att regeln saknas; att gissa den vore
+// exakt den klass av påhitt allt annat i den här kodbasen vägrar göra.
+//
+// (En parallell Code-session döpte samma skala FALT_STATUSAR/FaltStatus
+// och lade giltighet_status direkt på Bidrag, med en duplicerad
+// `giltighet: string | null` — löst till förmån för DENNA version vid
+// sammanslagningen 2026-08-03: giltighet hör hemma på Forutsattning, där
+// fältet redan fanns långt innan datatillstånd-arbetet, och används där
+// av GiltighetsKontroll.astro/hittaGiltighetsregel(). Två källor för
+// samma sak hade brutit "en sanning, ett ställe".)
+export const DATATILLSTAND = ['angivet', 'ingen_regel', 'overifierat'] as const;
+export type Datatillstand = (typeof DATATILLSTAND)[number];
 
 // H26 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): kommunen kan pausa eller
 // avskaffa ett bidrag utan att ta bort YAML-raden. Valfritt fält —
@@ -59,16 +85,6 @@ export interface Bidrag {
   kalla_url: string;
   anteckning: string | null;
 
-
-  // Källsäkerhet per kritiskt fält. Alla fält defaultar till `overifierat`
-  // för äldre data och måste aktivt sättas av den som läst källan.
-  belopp_status: FaltStatus;
-  deadline_status: FaltStatus;
-  krav_status: FaltStatus;
-  giltighet_status: FaltStatus;
-  krav_fullstandiga: boolean;
-  giltighet: string | null;
-
   // Matchningsvillkor (matchningstratten, turn-11) — extraheras ur
   // krav/malgrupp av ett separat researchpass, INTE av Code. null = inget
   // känt krav — matchar ALLTID, filtrerar ALDRIG bort (se matching.ts).
@@ -81,6 +97,15 @@ export interface Bidrag {
   sate_i_kommunen: boolean | null;
 
   status: BidragStatus; // H26 — se BIDRAG_STATUSAR ovan. Alltid satt efter validateBidrag, default 'aktiv'.
+
+  // Datatillstånd (se Datatillstand ovan) — obligatoriska efter migrationen.
+  belopp_status: Datatillstand;
+  deadline_status: Datatillstand;
+  krav_status: Datatillstand;
+  // null = ej bedömt ännu (renderas som overifierat i UI, samma logik som
+  // krav_status men en separat bedömning — krav KAN vara angivna utan att
+  // vara KOMPLETTA). Sätts bara av ett researchpass, aldrig av migrationen.
+  krav_fullstandiga: boolean | null;
 
   // SPEC: Omverifiering (2026-07-27). Kommun.verifierad finns bara på
   // KOMMUN-nivå — men kalla_url divergerar per bidrag i större kommuner
@@ -113,6 +138,7 @@ export interface Forutsattning {
   ledtid: number | null; // dagar
   ledtid_text: string | null;
   giltighet: string | null;
+  giltighet_status: Datatillstand; // se Datatillstand ovan, obligatorisk efter migrationen
   ordning: number;
   kalla_url: string;
 }
@@ -170,6 +196,70 @@ export function hittaGiltighetsregel(forutsattningar: Forutsattning[]): string |
  */
 export function bidragAnsokningsUrl(bidrag: Bidrag, kommun: Kommun): string {
   return bidrag.kalla_url || kommun.ansokningssystem.url;
+}
+
+/**
+ * 2c (arbetsorder 2026-08-03) + uppföljning 2026-08-03: ursprungligen
+ * detekterad enbart via anteckning-mönstret "Relativ tidsfrist: {frist}"
+ * (kolon = ett värde att visa, skiljer från t.ex. Åstorps datamodells-
+ * kommentar "Relativ tidsfrist kan inte uttryckas..." utan kolon). Nu
+ * strukturellt riktigt: deadlines.typ === 'relativ' är den EGENTLIGA
+ * grinden (se DEADLINE_TYPER ovan) — anteckning-texten är bara källan
+ * till formelns beskrivning, inte längre detektionsmekanismen. En bidrag
+ * med typ 'relativ' men en anteckning som inte matchar kolon-mönstret
+ * visar ändå hela anteckningen hellre än inget alls.
+ */
+/**
+ * Uppföljning 2026-08-03 (punkt 3): "GRANSKAD"-stämpeln påstod full
+ * granskning oavsett hur många av bidragets fält som faktiskt var
+ * verifierade — noll av tre räknades som samma sak som tre av tre.
+ * Tre nivåer, av belopp_status/deadline_status/krav_status (de tre
+ * fälten som sitter på Bidrag): 'overifierat' räknas INTE som granskat
+ * ('ingen_regel' gör — en bekräftad frånvaro är fortfarande ett svar).
+ * Noll granskade fält döljer stämpeln helt (VerificationStamp.astro) —
+ * en "OGRANSKAT"-etikett hade bara varit ännu ett påstående om ett
+ * tomrum, samma fälla som VoidMark redan finns för att undvika.
+ */
+export type Granskningsniva = 'fullt' | 'delvis' | 'ogranskat';
+
+export function bidragGranskningsniva(bidrag: Bidrag): Granskningsniva {
+  const statusar = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status];
+  const antalGranskade = statusar.filter((s) => s !== 'overifierat').length;
+  if (antalGranskade === 0) return 'ogranskat';
+  if (antalGranskade === statusar.length) return 'fullt';
+  return 'delvis';
+}
+
+const RELATIV_FRIST_RE = /^Relativ tidsfrist:\s*(.+)$/;
+
+export function relativFrist(bidrag: Bidrag): string | null {
+  if (bidrag.deadlines.typ !== 'relativ') return null;
+  const match = bidrag.anteckning?.match(RELATIV_FRIST_RE);
+  return match ? match[1] : (bidrag.anteckning ?? null);
+}
+
+/**
+ * Uppföljning 2026-08-03 (arbetsorder, punkt 2): sen_ansokan ska bara
+ * visas när fältet faktiskt bär vad som händer vid en för sen ansökan —
+ * inte "Ej angivet i källan" (sentinelvärdet, 2e) och inte en feltaggning
+ * där fältet bara restaterar deadline-cykeln ("15 mars varje år" — ett
+ * datum, ingen konsekvens). "varje år" verifierat (grep över hela datat,
+ * 2026-08-03) att ALDRIG förekomma i en genuin konsekvens-text — bara i
+ * den här feltaggningsklassen (12 träffar, se rapporten till Jacob för
+ * vilka kommuner).
+ *
+ * Ärver deadline_status (uppföljning, punkt 2 i den andra arbetsordern):
+ * sen_ansokan saknar ett eget statusfält, men "vad händer om man söker
+ * sent" är meningslöst utan en känd deadline att vara sen MOT — en
+ * kvarglömd sen_ansokan-text på ett bidrag vi inte ens vet deadlinen för
+ * (deadline_status: overifierat, dvs typ 'okand') skulle annars påstå en
+ * konsekvens av något odefinierat.
+ */
+export function harRiktigSenAnsokanText(bidrag: Bidrag): boolean {
+  if (bidrag.deadline_status === 'overifierat') return false;
+  if (bidrag.sen_ansokan === 'Ej angivet i källan') return false;
+  if (/varje år/i.test(bidrag.sen_ansokan)) return false;
+  return true;
 }
 
 /**
