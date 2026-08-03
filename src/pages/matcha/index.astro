@@ -167,6 +167,16 @@ const kommuner = loadKommuner();
           <ul class="tratt__bidraglista" data-tratt-saknar-lista></ul>
         </section>
 
+        {/* C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): egen grupp för bidrag
+           som inte klarar D1 (krav_status: verifierad + minst tre krav)
+           — "Nära — det här saknas" ovan påstår ett känt gap, vilket
+           kräver en kartlagd kravbild. Utan den: rubrik + källänk, aldrig
+           ett gissat gap. */}
+        <section class="tratt__grupp tratt__grupp--saknar" data-tratt-grupp-okartlagd hidden>
+          <h3>{TRATT.besked.behover.rubrikOkartlagd}</h3>
+          <ul class="tratt__bidraglista" data-tratt-okartlagd-lista></ul>
+        </section>
+
         <section class="tratt__grupp tratt__grupp--borjahar" data-tratt-grupp-borjahar hidden>
           <h3>{TRATT.besked.borjaHar.rubrik}</h3>
           <p>{TRATT.besked.borjaHar.brodtext}</p>
@@ -209,6 +219,7 @@ const kommuner = loadKommuner();
   import { formatDate, earliestDeadlineISO, todayISO, svenskLista, sumBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_PAKET_ORE } from '../../lib/priser';
+  import { VOID_MARK } from '../../lib/content';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
   if (root) {
@@ -228,6 +239,8 @@ const kommuner = loadKommuner();
     const matcharTomEl = root.querySelector<HTMLElement>('[data-tratt-matchar-tom]');
     const saknarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-saknar]');
     const saknarListaEl = root.querySelector<HTMLElement>('[data-tratt-saknar-lista]');
+    const okartlagdGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-okartlagd]');
+    const okartlagdListaEl = root.querySelector<HTMLElement>('[data-tratt-okartlagd-lista]');
     const borjaHarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-borjahar]');
     const registreringWidget = root.querySelector<HTMLElement>('[data-registrering-hjalp]');
     const kommunvaljareWrapperEl = root.querySelector<HTMLElement>('[data-tratt-kommunvaljare]');
@@ -483,15 +496,35 @@ const kommuner = loadKommuner();
         }
       }
 
-      if (saknarGruppEl) saknarGruppEl.hidden = !dataFinns || resultat.saknar.length === 0;
+      // C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): dela resultat.saknar i två
+      // — D1 (krav_status: verifierad + minst tre krav) avgör om vi
+      // faktiskt känner till HELA kravbilden nog för att påstå ett gap.
+      const harD1 = (b: Bidrag) => b.krav_status === 'verifierad' && b.krav.length >= 3;
+      const saknarD1 = resultat.saknar.filter(({ bidrag }) => harD1(bidrag));
+      const saknarOkartlagd = resultat.saknar.filter(({ bidrag }) => !harD1(bidrag));
+
+      if (saknarGruppEl) saknarGruppEl.hidden = !dataFinns || saknarD1.length === 0;
       if (saknarListaEl) {
         saknarListaEl.innerHTML = '';
-        resultat.saknar.forEach(({ bidrag, skal }) => {
+        saknarD1.forEach(({ bidrag, skal }) => {
           const li = document.createElement('li');
           li.className = 'tratt__bidrag';
           const skalText = skal.map((s) => skalTillText(s, bidrag)).filter(Boolean).join(' ');
           li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${skalText}</div>`;
           saknarListaEl.appendChild(li);
+        });
+      }
+
+      if (okartlagdGruppEl) okartlagdGruppEl.hidden = !dataFinns || saknarOkartlagd.length === 0;
+      if (okartlagdListaEl) {
+        okartlagdListaEl.innerHTML = '';
+        saknarOkartlagd.forEach(({ bidrag }) => {
+          const li = document.createElement('li');
+          li.className = 'tratt__bidrag';
+          const host = new URL(bidrag.kalla_url).hostname.replace(/^www\./, '');
+          const kallaText = VOID_MARK.kallaKnappMall.replace('{host}', host);
+          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta"><a href="${bidrag.kalla_url}" target="_blank" rel="noopener">${kallaText}</a></div>`;
+          okartlagdListaEl.appendChild(li);
         });
       }
 

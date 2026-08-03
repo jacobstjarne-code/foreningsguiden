@@ -152,6 +152,15 @@ export const TRATT = {
       saknarMedlemmar: 'Kräver minst {krav} medlemmar — ni angav {angivet}.',
       saknarTyp: 'Riktar sig till {krav}. Stämmer det in på er verksamhet? Justera svaret ovan.',
       saknarRegistrering: 'Kräver att föreningen är registrerad som bidragsberättigad i kommunen — se Börja här nedan.',
+      // C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): "Nära — det här saknas"
+      // påstår att vi känner till HELA kravbilden för bidraget — sant
+      // bara när D1 är uppfyllt (krav_status: verifierad + minst tre
+      // krav). Är kraven inte kartlagda ännu hamnar bidraget här i
+      // stället, länkat till källan (VOID_MARK.kallaKnappMall,
+      // content.ts — samma "Läs på {host}"-fras som VoidMark) i stället
+      // för ett gissat gap. Ingen ny brödtext — Code hittar inte på
+      // prosa; rubriken (Jacobs egna ord) och källänken bär beskedet.
+      rubrikOkartlagd: 'Kan gälla er — kraven inte kartlagda ännu',
     },
 
     // Grupp 3 — Börja här (registreringsbeskedet). Produktens skarpaste ögonblick.
