@@ -19,7 +19,7 @@ import GiltighetsKontroll from './GiltighetsKontroll.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
-  KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl,
+  KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, relativFrist,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN } from '../lib/content';
@@ -90,11 +90,22 @@ if (kommun.bidrag.length === 1) {
 // deadlinekalendern, getDeadlineEntries) — ett okänt datum är inget vi kan
 // svara på, och att formatera b.deadlines.datum (tom array) hade gett en
 // trasig mening ("söks senast .").
+//
+// Uppföljning 2026-08-03 (arbetsorder, punkt 1 — statusstyrd rendering
+// överallt): samma tomma-array-bugg fanns latent för deadlines.typ ===
+// 'relativ' (tillagd samma dag) — datum: [] där också, men filtret
+// släppte igenom typen eftersom det bara uteslöt 'okand'. relativFrist()
+// ger formeln (samma text som RelativeDeadline-kortet), inte ett datum.
 const deadlinesammanfattning = kommun.bidrag
   .filter((b) => b.deadlines.typ !== 'okand')
-  .map((b) => (b.deadlines.typ === 'lopande'
-    ? `${b.namn} söks löpande.`
-    : `${b.namn} söks senast ${b.deadlines.datum.map(formatRecurringDate).join(', ')}.`))
+  .map((b) => {
+    if (b.deadlines.typ === 'lopande') return `${b.namn} söks löpande.`;
+    if (b.deadlines.typ === 'relativ') {
+      const frist = relativFrist(b);
+      return frist ? `${b.namn} söks senast ${frist}` : `${b.namn} har en relativ ansökningsfrist.`;
+    }
+    return `${b.namn} söks senast ${b.deadlines.datum.map(formatRecurringDate).join(', ')}.`;
+  })
   .join(' ');
 
 const faqRubrik = KOMMUN.faqRubrik.replace(/{kommun}/g, kommun.kommun);
