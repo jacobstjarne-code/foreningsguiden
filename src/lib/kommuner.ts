@@ -188,26 +188,7 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
 
   // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriska efter migrationen.
   validateDatatillstand(where, 'belopp', raw.belopp_status, raw.belopp !== null && raw.belopp !== undefined, problems, false);
-  const harStruktureradDeadline =
-    raw.deadlines?.typ === 'fasta' ||
-    raw.deadlines?.typ === 'lopande';
-
-  const harRelativDeadline =
-    typeof raw.sen_ansokan === 'string' &&
-    /(?:\b\d+\s*(?:dag|dagar|vecka|veckor|månad|månader)\b|senast|före|efter|inom)/i.test(
-      raw.sen_ansokan
-    ) &&
-    !/(?:inte verifier|ej verifier|okänd|kontrollera kommunen|kontakta kommunen|inget datum|ingen deadline)/i.test(
-      raw.sen_ansokan
-    );
-
-  validateDatatillstand(
-    where,
-    'deadline',
-    raw.deadline_status,
-    harStruktureradDeadline || harRelativDeadline,
-    problems
-  );
+  validateDatatillstand(where, 'deadline', raw.deadline_status, raw.deadlines?.typ !== 'okand', problems);
   validateDatatillstand(where, 'krav', raw.krav_status, Array.isArray(raw.krav) && raw.krav.length > 0, problems);
 
   if (raw.krav_fullstandiga !== null && raw.krav_fullstandiga !== undefined && typeof raw.krav_fullstandiga !== 'boolean') {

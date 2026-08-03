@@ -3,4 +3,9 @@
 # eventuell bidragsminskning som pre-commit-hooken flaggade (skriver
 # .git/BIDRAG_REGRESSION_PENDING.json, läses och städas bort här oavsett
 # utfall). Ingen markering, ingen minskning flaggad → passerar tyst.
+#
+# Uppföljning 2026-08-03: samma mönster för krav_fullstandiga: true —
+# se verify-krav-fullstandiga-regression.ts.
+set -e
 node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --kontrollera-meddelande="$1"
+node --experimental-strip-types scripts/verify-krav-fullstandiga-regression.ts --kontrollera-meddelande="$1"

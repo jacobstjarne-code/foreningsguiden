@@ -32,6 +32,10 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --ci-mot=origin/main
 
+      - name: Regressionsskydd (krav_fullstandiga mot main)
+        if: github.ref != 'refs/heads/main'
+        run: node --experimental-strip-types scripts/verify-krav-fullstandiga-regression.ts --ci-mot=origin/main
+
       - name: astro build
         run: npm run build
 
