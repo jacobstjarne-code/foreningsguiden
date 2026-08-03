@@ -10,7 +10,7 @@
 import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
-  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist,
+  earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist, harEtjanstsystem,
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
@@ -18,6 +18,7 @@ import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
 import { harvestBilagor } from '../lib/kopDokument';
 import UrgencyChip from './UrgencyChip.astro';
 import RegistreringsHjalp from './RegistreringsHjalp.astro';
+import VantelistaFlode from './VantelistaFlode.astro';
 
 // FIX 2026-07-31 (Jacob, egen granskning): station 5 visade väntelistan
 // (VantelistaFlode — "Reservera plats nu. Ni betalar först när utkastet
@@ -111,8 +112,10 @@ const station2Alla = station2PerFilter.alla;
 
 const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const fyllKopruta = (text: string, bidragNamn: string) =>
-  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr));
+  text.replace('{kommun}', kommun.kommun).replace('{bidrag}', bidragNamn).replace('{pris}', String(prisKr)).replace('{system}', kommun.ansokningssystem.namn);
 const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
+// C5 (ÅTGÄRDSSPEC, 2026-08-03 kväll): en gång per kommun, inte per bidrag.
+const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning;
 
 // Uppföljning 2026-08-03 (punkt 4) + ÅTGÄRDSSPEC D1/T5 (samma kväll):
 // köprutan får inte sälja på ett bidrag utan krav att strukturera —
@@ -130,12 +133,28 @@ const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
     const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status === 'verifierad' && k.bidrag.krav.length >= 3);
     if (!kandidat) return [filter, null];
     return [filter, {
-      beskrivning: fyllKopruta(KOPRUTA.beskrivning, kandidat.bidrag.namn),
+      beskrivning: fyllKopruta(kopRutaBeskrivningMall, kandidat.bidrag.namn),
       href: `/kommun/${kommun.kommun_slug}/utkast/${kandidat.bidrag.id}/`,
     }];
   })
 );
 const station5Alla = station5PerFilter.alla;
+
+// ÅTGÄRDSSPEC punkt 1 (Jacob, 2026-08-03 kväll): D1 gör köprutan tom
+// överallt just nu (noll bidrag är krav_status: verifierad ännu) —
+// "bevakningsrutan" (VantelistaFlode, samma mekanik som fanns innan
+// utkastvyn gick live 2026-07-31, se filhuvudets historik ovan) fyller
+// tomrummet i stället för att stationen bara visar en tom yta. Kandidat
+// = FÖRSTA bidraget i filtret, oavsett D1 — bevakningen ställer inget
+// krav på verifierad kravdata, den bara loggar intresse (kommun+bidrag
+// → extraktionskön, se vantelista.ts). Visas BARA där köprutan INTE
+// redan visas (D1-kandidat saknas för filtret).
+const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>[number] | null> = Object.fromEntries(
+  filterValues.map((filter) => {
+    if (station5PerFilter[filter]) return [filter, null]; // köprutan täcker redan detta filter
+    return [filter, bidragForFilter(filter)[0] ?? null];
+  })
+);
 ---
 <div class="progression">
 
@@ -319,6 +338,15 @@ const station5Alla = station5PerFilter.alla;
           Lås upp hela underlaget — {prisKr} kr
         </a>
       </div>
+      {filterValues.map((filter) => {
+        const kandidat = station5BevakaPerFilter[filter];
+        if (!kandidat) return null;
+        return (
+          <div data-progression-bevaka-filter={filter} hidden={filter !== 'alla'}>
+            <VantelistaFlode kommun={kommun} bidrag={kandidat.bidrag} />
+          </div>
+        );
+      })}
       <p class="progression__goal-ansvar">{VAGLEDNING.station5.ansvar}</p>
     </div>
   </div>
@@ -374,14 +402,19 @@ const station5Alla = station5PerFilter.alla;
   const kopruta = document.querySelector<HTMLElement>('[data-progression-kopruta]');
   const kopRutaBeskrivning = document.querySelector<HTMLElement>('[data-progression-kopruta-beskrivning]');
   const kopRutaCta = document.querySelector<HTMLAnchorElement>('[data-progression-kopruta-cta]');
+  // ÅTGÄRDSSPEC punkt 1: bevakningsrutorna är statiskt SSR-renderade, en
+  // per filter som saknar D1-kandidat (se station5BevakaPerFilter) —
+  // ingen text att uppdatera via JS, bara vilken som visas.
+  const bevakaRutor = document.querySelectorAll<HTMLElement>('[data-progression-bevaka-filter]');
 
   function updateStation5(value: string) {
     const entry = perFilterData.station5?.[value];
-    if (!kopruta) return;
-    kopruta.hidden = !entry;
-    if (!entry) return;
-    if (kopRutaBeskrivning) kopRutaBeskrivning.textContent = entry.beskrivning;
-    if (kopRutaCta) kopRutaCta.href = entry.href;
+    if (kopruta) kopruta.hidden = !entry;
+    if (kopRutaBeskrivning && entry) kopRutaBeskrivning.textContent = entry.beskrivning;
+    if (kopRutaCta && entry) kopRutaCta.href = entry.href;
+    bevakaRutor.forEach((el) => {
+      el.hidden = el.dataset.progressionBevakaFilter !== value;
+    });
   }
 
   function applyFilter(value: string) {
