@@ -38,10 +38,37 @@ function relativFrist(b: Bidrag): string | null {
 }
 
 function formatDeadlines(b: Bidrag): string {
+  if (b.deadline_status === 'overifierat') {
+    return 'Deadline inte verifierad ännu — kontrollera källan innan du planerar ansökan.';
+  }
+  if (b.deadline_status === 'ingen_regel') {
+    return 'Kommunen anger uttryckligen ingen fast ansökningsfrist.';
+  }
   if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
-  if (b.deadlines.typ === 'okand') return relativFrist(b) ?? 'Kommunen publicerar inget ansökningsdatum — kontrollera direkt hos kommunen.';
+  if (b.deadlines.typ === 'okand') return relativFrist(b) ?? 'Deadline angiven i källan, men kan inte uttryckas som ett fast datum.';
   return b.deadlines.datum.map(formatRecurringDate).join(' · ');
 }
+
+function formatBelopp(b: Bidrag): string {
+  if (b.belopp_status === 'overifierat') {
+    return 'Belopp inte verifierat ännu.';
+  }
+  if (b.belopp_status === 'ingen_regel') {
+    return 'Kommunen anger uttryckligen inget belopp eller tak.';
+  }
+  return b.belopp ?? 'Beloppet framgår av källan men saknas i den strukturerade uppgiften.';
+}
+
+const granskningsstatusar = [
+  bidrag.belopp_status,
+  bidrag.deadline_status,
+  bidrag.krav_status,
+  bidrag.giltighet_status,
+];
+
+const fullstandigtGranskad =
+  granskningsstatusar.every((status) => status !== 'overifierat') &&
+  bidrag.krav_fullstandiga;
 
 // H26 — status-notis i stället för CTA:n när kommunen pausat/avskaffat
 // bidraget. 'pausad' är tillfälligt (attention), 'avskaffat' är permanent
@@ -73,18 +100,34 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     <dd>{formatDeadlines(bidrag)}</dd>
 
     <dt>Belopp</dt>
-    <dd>{bidrag.belopp ?? 'Ej publikt angivet'}</dd>
+    <dd>{formatBelopp(bidrag)}</dd>
 
-    {bidrag.krav.length > 0 && (
-      <>
-        <dt>Krav</dt>
-        <dd>
-          <ul>
-            {bidrag.krav.map((k) => <li>{k}</li>)}
-          </ul>
-        </dd>
-      </>
-    )}
+    <dt>Krav</dt>
+    <dd>
+      {bidrag.krav_status === 'overifierat' ? (
+        <p>Kraven är inte verifierade ännu — kontrollera källan innan du bedömer behörighet.</p>
+      ) : bidrag.krav_status === 'ingen_regel' ? (
+        <p>Kommunen anger uttryckligen inga särskilda krav.</p>
+      ) : bidrag.krav.length > 0 ? (
+        <ul>
+          {bidrag.krav.map((k) => <li>{k}</li>)}
+        </ul>
+      ) : (
+        <p>Inga strukturerade krav har registrerats.</p>
+      )}
+      {bidrag.krav_status === 'angivet' && !bidrag.krav_fullstandiga && (
+        <p><strong>Ofullständigt:</strong> fler villkor kan finnas i kommunens normer eller riktlinjer.</p>
+      )}
+    </dd>
+
+    <dt>Giltighet</dt>
+    <dd>
+      {bidrag.giltighet_status === 'overifierat'
+        ? 'Giltigheten är inte verifierad ännu.'
+        : bidrag.giltighet_status === 'ingen_regel'
+          ? 'Kommunen anger uttryckligen ingen särskild giltighetsregel.'
+          : bidrag.giltighet ?? 'Giltighetsregeln är angiven i källan men saknas i den strukturerade uppgiften.'}
+    </dd>
 
     {/* 2e (arbetsorder 2026-08-03): "Ej angivet i källan" är sentinelvärdet
         för okänt (kommunTyper.ts sen_ansokan: string, aldrig null) — döljs
@@ -103,7 +146,7 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     <p class="bidrag-card__kalla">
       Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
     </p>
-    <VerificationStamp verifierad={verifierad} />
+    <VerificationStamp verifierad={verifierad} fullstandigtGranskad={fullstandigtGranskad} />
   </div>
   {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
       (relativFrist) — annars stod samma besked på kortet två gånger. */}
