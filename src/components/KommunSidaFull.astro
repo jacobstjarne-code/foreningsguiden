@@ -129,6 +129,14 @@ const deadlinesammanfattning = kommun.bidrag
   .join(' ');
 
 const faqRubrik = KOMMUN.faqRubrik.replace(/{kommun}/g, kommun.kommun);
+// TILLSTANDET_OLAST.md 4c, yta 5 (Jacob 2026-08-03 kväll, punkt 2 —
+// "mest lästa texten och hela SEO-ytan"): FAQ-svaret är ren text (delas
+// med JSON-LD:s acceptedAnswer.text, som INTE tillåter HTML) — markören
+// kan alltså inte sättas INUTI meningen. Renderas i stället som en egen
+// rad efter svaret, bara på deadline-frågan (identifierad genom att dess
+// ORIGINALMALL innehåller {deadlinesammanfattning}), bara när minst ett
+// bidrag bakom sammanfattningen har deadline_status: olast.
+const deadlinesammanfattningHarOlast = kommun.bidrag.some((b) => b.deadline_status === 'olast');
 const faqEntries = kommun.bidrag.length === 0 ? [] : KOMMUN.faq.map(({ fraga, svar }) => ({
   fraga: fraga.replace(/{kommun}/g, kommun.kommun),
   svar: svar
@@ -138,6 +146,7 @@ const faqEntries = kommun.bidrag.length === 0 ? [] : KOMMUN.faq.map(({ fraga, sv
     .replace(/{forvaltning}/g, kommun.forvaltning)
     .replace(/{bidragslista}/g, svenskLista(kommun.bidrag.map((b) => b.namn)))
     .replace(/{deadlinesammanfattning}/g, deadlinesammanfattning),
+  arDeadlineFraga: svar.includes('{deadlinesammanfattning}'),
 }));
 
 const faqJsonLd = faqEntries.length > 0 ? {
@@ -284,10 +293,18 @@ const webPageJsonLd = {
     <section>
       <h2>{faqRubrik}</h2>
       <dl class="faq-list">
-        {faqEntries.map(({ fraga, svar }) => (
+        {faqEntries.map(({ fraga, svar, arDeadlineFraga }) => (
           <>
             <dt>{fraga}</dt>
-            <dd>{svar}</dd>
+            <dd>
+              {svar}
+              {arDeadlineFraga && deadlinesammanfattningHarOlast && (
+                <p class="faq-list__olast">
+                  <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
+                  {OLAST_MARK.rad}
+                </p>
+              )}
+            </dd>
           </>
         ))}
       </dl>
