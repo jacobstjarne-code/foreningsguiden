@@ -133,6 +133,10 @@ export const TRATT = {
     // passet) — summerar ALLA kommunens bidrag, inte matchade, och ljuger
     // aldrig om att potten redan är personlig.
     kostnadsramOgfiltrerad: 'Föreningarna i {kommun} delar på bidrag värda upp till {summa} kr om året. Fyll i er profil så ser ni vilka som passar just er.',
+    // P1.3 (Jacob 2026-08-04): samma mening utan CTA-satsen — profilen
+    // är redan komplett (antalBesvarade >= 4), så "Fyll i er profil"
+    // vore fel uppmaning. Mekanisk kortning av raden ovan, ingen ny text.
+    kostnadsramOgfiltreradKomplett: 'Föreningarna i {kommun} delar på bidrag värda upp till {summa} kr om året.',
     // Fotnoten (Design turn-14, incoming/foreningsguiden-tratt-tryck-v3-
     // livedata.html) — null-belopp exkluderas ur summan ovan, aldrig tyst.
     // uncapped=0 → sumFotnotCappat. uncapped>0 → sumFotnotOkant, med

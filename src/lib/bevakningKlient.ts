@@ -8,6 +8,11 @@
 
 export const BEVAKNING_GOLV = 3;
 export const BEVAKNING_GOLV_GLOBALT = 50;
+// P0.3 (Jacob 2026-08-04): under detta talet läser "1 förening bevakar
+// sina deadlines" som svagt snarare än som bevis. Skiljer sig från
+// BEVAKNING_GOLV_GLOBALT (som styr STORT/litet-positionsbytet) — den
+// här styr bara om den lilla raden visas alls, på förstasidan.
+export const BEVAKNING_GOLV_SYNLIG_GLOBALT = 10;
 
 /**
  * Ren, testbar gränsfunktion — separerad från fetch-koden just så att

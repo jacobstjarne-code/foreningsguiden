@@ -21,7 +21,6 @@ export interface Props {
 }
 
 const { kommun, bidrag } = Astro.props;
-const besked = VANTELISTA.besked.replace(/{kommun}/g, kommun.kommun);
 
 // Kostnadsramen (pengarna) — bara där kommunen faktiskt lämnat ut en egen
 // sammanställning (kommuner.ts Kommunsiffra). Gissa aldrig fram en summa.
@@ -52,8 +51,11 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
     )}
 
     <p class="vantelista__pris">{VANTELISTA.prisRad}</p>
-    <h4>{VANTELISTA.rubrik}</h4>
-    <p>{besked}</p>
+
+    {/* P1.2 (Jacob 2026-08-04): rubrik ("Vi skriver allt utom det bara ni
+       vet") och besked ("...bemöter varje krav kommunen ställer")
+       borttagna — båda överclaimar. prisRad ovan är den gällande
+       formuleringen, oförändrad. */}
 
     {/* A2 (SPEC: Kvarvarande luckor, 2026-07-29): namnger luckorna FÖRE
        köpet — bara när besökaren redan har en sparad profil FÖR DENNA

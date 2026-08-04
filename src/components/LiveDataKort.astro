@@ -38,7 +38,7 @@ const { totalBidrag, totalKommuner } = Astro.props;
 </div>
 
 <script>
-  import { hamtaBevakningsantalGlobalt, arOverGolv, formateraBevakarText, BEVAKNING_GOLV_GLOBALT } from '../lib/bevakningKlient';
+  import { hamtaBevakningsantalGlobalt, arOverGolv, formateraBevakarText, BEVAKNING_GOLV_GLOBALT, BEVAKNING_GOLV_SYNLIG_GLOBALT } from '../lib/bevakningKlient';
   import { KATALOG_LIVEDATA } from '../lib/content';
   import { formatDate } from '../lib/kommunTyper';
 
@@ -74,6 +74,13 @@ const { totalBidrag, totalKommuner } = Astro.props;
       const overGolv = arOverGolv(data.antal, BEVAKNING_GOLV_GLOBALT);
 
       if (!overGolv) {
+        // P0.3: "1 förening bevakar sina deadlines" läser svagt vid låga
+        // tal — döljer raden helt tills den faktiskt bär något, samma
+        // grepp som nätverksfel-fallet ovan.
+        if (!arOverGolv(data.antal, BEVAKNING_GOLV_SYNLIG_GLOBALT)) {
+          if (litetBlock) litetBlock.hidden = true;
+          return;
+        }
         if (litetText) {
           const datumText = data.earliestDatum ? formatDate(data.earliestDatum) : '';
           litetText.textContent = formateraBevakarText(data.antal, datumText, KATALOG_LIVEDATA.bevakarPlural, KATALOG_LIVEDATA.bevakarSingular);

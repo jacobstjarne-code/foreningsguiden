@@ -5,6 +5,11 @@
 // prosa (SVENSK TEXT-regeln). Denna version håller sig till data: etikett
 // + kommun + datum + källänk. Be Fable om en formulerad mening om den
 // narrativa versionen ska in.
+//
+// Etiketten "Källan läst" (Jacob 2026-08-04, P1.1) — tidigare "Verifierad
+// källa" påstod mer än att sidan öppnats, och motsade fältmarkörerna
+// längre ner på samma kommunsida ("inte kontrollerad mot kommunens
+// sida"). Samma skäl som EKERN.verifieradPrefix i content.ts.
 import { formatDate } from '../lib/kommuner';
 
 export interface Props {
@@ -21,7 +26,7 @@ const { kommun, verifierad, kallaUrl } = Astro.props;
     <polyline points="8 12 11 15 16 9" />
   </svg>
   <div>
-    <div class="fg-verification-row__label">Verifierad källa</div>
+    <div class="fg-verification-row__label">Källan läst</div>
     <div class="fg-verification-row__detail">
       {kommun} · {formatDate(verifierad)} · <a href={kallaUrl}>{kallaUrl}</a>
     </div>

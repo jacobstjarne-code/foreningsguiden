@@ -790,10 +790,14 @@ export const KOMMUNSIFFRA = {
  * EKERN — 1a i SPEC_HUVUDPROCESSEN (Opus/Fable 2026-08-01),
  * MOCKAR_huvudprocessen.md §1a. Trebandskortet på varje kommunsida,
  * efter svar-först, före stationerna — kommunsidans ekorre in i tratten.
- * Verbatim ur mocken, ingen egen text.
+ * Verbatim ur mocken, ingen egen text — utom verifieradPrefix (Jacob
+ * 2026-08-04, P1.1): "Senast verifierad" påstod mer än vad som hänt när
+ * fältmarkörerna längre ner på samma sida säger "inte kontrollerad" —
+ * en besökare läser det som en motsägelse. Sant ord för det som faktiskt
+ * gjordes (vi öppnade sidan) i stället.
  */
 export const EKERN = {
-  verifieradPrefix: 'SENAST VERIFIERAD',
+  verifieradPrefix: 'KÄLLAN LÄST',
   band2Eyebrow: 'GÄLLER DET HÄR ER?',
   band2Rubrik: 'Fyra frågor, och ni ser vad just er förening kan söka',
   band2Text: 'Kraven skiljer sig mellan bidrag. Svaren sparas, så nästa gång ser ni bara det som är nytt.',
@@ -824,8 +828,9 @@ export const VANTELISTA = {
   // Visas bara där kommunen har kommunsiffra (idag Berg; fler när fler
   // kommuner lämnar ut sin sammanställning, kommuner.ts Kommunsiffra).
   kostnadsram: 'Förra året delade föreningarna i {kommun} på {summa} kr. Missar ni ansökan får ni ingenting av den.',
-  rubrik: 'Vi skriver allt utom det bara ni vet',
-  besked: 'De flesta föreningar fastnar inte på att skriva bra. De fastnar på att komma igång, och på att missa ett formellt krav de inte visste fanns. Vi tar er förenings uppgifter och {kommun}s egna kriterier och bemöter varje krav kommunen ställer. Det som återstår är det vi inte kan veta — och vi säger på förhand exakt vad det är.',
+  // rubrik/besked borttagna (Jacob 2026-08-04, P1.2): "Vi skriver allt
+  // utom det bara ni vet" och "...bemöter varje krav kommunen ställer"
+  // överclaimade. prisRad ovan är den gällande formuleringen.
   // Namnger luckorna FÖRE köpet. Aldrig procent ("60 % färdigt") — samma
   // påhittade precision som 90-dagarssiffran. Tre namngivna luckor är
   // hanterbart, en procentsats är oroande. Code fyller {luckor} ur
@@ -855,7 +860,10 @@ export const VANTELISTA = {
 export const KATALOG_LIVEDATA = {
   eyebrowKatalog: 'Kartlagt just nu',
   enhetBidrag: 'bidrag kartlagda',
-  katalogText: 'i {kommuner} kommuner — med krav, deadlines och belopp lästa från kommunernas egna sidor.',
+  // P0.2 (Jacob 2026-08-04): "lästa från" → "hämtade från" — samma skäl
+  // som P1.1: "läst" läser lätt som "kontrollerat", "hämtade" påstår
+  // bara det som faktiskt hänt (extraherat, inte oberoende verifierat).
+  katalogText: 'i {kommuner} kommuner — med krav, deadlines och belopp hämtade från kommunernas egna sidor.',
   // Under golvet — singular/plural, {antal}=1 väljer bevakarSingular
   // (rättar "1 föreningar" som fanns i ett tidigare utkast av copyn).
   bevakarPlural: '{antal} föreningar bevakar sina deadlines · sedan {datum}',

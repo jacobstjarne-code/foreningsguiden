@@ -218,7 +218,6 @@ const kommuner = loadKommuner();
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type SoktSvar } from '../../lib/foreningsprofil';
   import { formatDate, earliestDeadlineISO, todayISO, svenskLista, sumBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
-  import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_PAKET_ORE } from '../../lib/priser';
   import { VOID_MARK } from '../../lib/content';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
@@ -459,7 +458,13 @@ const kommuner = loadKommuner();
         } else {
           const sum = sumBeloppTak(kommunData.bidrag);
           if (sum.capped > 0) {
-            kostnadsramEl.textContent = TRATT.besked.kostnadsramOgfiltrerad
+            // P1.3 (Jacob 2026-08-04): "Fyll i er profil" är fel uppmaning
+            // när profilen redan är komplett — samma tröskel (>=4) som
+            // atervandOmBehovs redan använder för samma fråga.
+            const mall = antalBesvarade(profil) >= 4
+              ? TRATT.besked.kostnadsramOgfiltreradKomplett
+              : TRATT.besked.kostnadsramOgfiltrerad;
+            kostnadsramEl.textContent = mall
               .replace(/{kommun}/g, kommunData.kommun)
               .replace('{summa}', sum.total.toLocaleString('sv-SE'));
             kostnadsramEl.hidden = false;
@@ -484,16 +489,13 @@ const kommuner = loadKommuner();
 
       // H9 — paketpris, bara när fler än ETT bidrag matchar (ett enda
       // bidrag har inget "alla" att paketera).
+      // P1.4 (Jacob 2026-08-04): avstängt tills PRIS_PAKET_ORE (priser.ts)
+      // är ett riktigt tal och priset finns på /pris/ — 699 kr var alltid
+      // ett draft-värde (se kommentaren i priser.ts), aldrig menat att
+      // visas för en riktig besökare. Villkoret/logiken orörd, bara
+      // konstant-avstängd, så den kan slås på igen med en rad.
       if (paketEl) {
-        if (resultat.matchar.length > 1) {
-          paketEl.textContent = TRATT.besked.paket.rad
-            .replace('{antal}', String(resultat.matchar.length))
-            .replace('{paketpris}', String(PRIS_PAKET_ORE / 100))
-            .replace('{styckpris}', String(PRIS_REGISTRERINGSUTKAST_ORE / 100));
-          paketEl.hidden = false;
-        } else {
-          paketEl.hidden = true;
-        }
+        paketEl.hidden = true;
       }
 
       // C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): dela resultat.saknar i två

@@ -18,6 +18,12 @@
 // "extraherat", inte "oberoende kontrollerat"). Ett bidrag där alla fyra
 // fält är 'olast' visade tidigare (felaktigt) "DELVIS GRANSKAD"; visar
 // nu ingen stämpel alls, eftersom noll fält faktiskt är granskade.
+//
+// Ordet på stämpeln (Jacob 2026-08-04, P1.1): GRANSKAD/DELVIS GRANSKAD →
+// KONTROLLÄST/DELVIS KONTROLLÄST. Tre ord för samma axel (verifierad,
+// kontrollast, granskad) är samma begrepp i olika kläder — designfilen
+// är auktoritativ för utseende, inte ordval. Formen (oxblod/dämpad/
+// ingen stämpel) är oförändrad.
 import { formatStampDate, bidragGranskningsniva } from '../lib/kommuner';
 import type { Bidrag, Datatillstand } from '../lib/kommuner';
 
@@ -36,6 +42,6 @@ const datum = formatStampDate(bidrag.senast_verifierad ?? verifierad);
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polyline points="20 6 9 17 4 12" />
     </svg>
-    {niva === 'fullt' ? 'GRANSKAD' : 'DELVIS GRANSKAD'} · {datum}
+    {niva === 'fullt' ? 'KONTROLLÄST' : 'DELVIS KONTROLLÄST'} · {datum}
   </span>
 )}
