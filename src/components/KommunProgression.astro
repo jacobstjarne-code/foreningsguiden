@@ -130,7 +130,7 @@ const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtj
 type Station5Entry = { beskrivning: string; href: string } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
   filterValues.map((filter) => {
-    const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status === 'verifierad' && k.bidrag.krav.length >= 3);
+    const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status === 'kontrollast' && k.bidrag.krav.length >= 3);
     if (!kandidat) return [filter, null];
     return [filter, {
       beskrivning: fyllKopruta(kopRutaBeskrivningMall, kandidat.bidrag.namn),

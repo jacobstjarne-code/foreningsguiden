@@ -35,7 +35,7 @@ const DIR = 'data/kommuner';
 const files = readdirSync(DIR).filter((f) => f.endsWith('.yaml'));
 
 const BIDRAG_FALT = ['belopp_status', 'deadline_status', 'krav_status'] as const;
-const SKYDDADE = new Set(['ingen_regel', 'verifierad']);
+const SKYDDADE = new Set(['ingen_regel', 'kontrollast']);
 
 let filerAndrade = 0;
 const rortaFiler: string[] = [];

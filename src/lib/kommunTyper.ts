@@ -59,8 +59,8 @@ export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 //               hämtade den." + källänk. Detta ÄR dagens 'angivet' —
 //               bara ärligare namngivet. Sätts av migrationen/GPT-
 //               extraktionen, ALDRIG av ett researchpass som faktiskt
-//               kontrollerat källan (det sätter 'verifierad').
-//   verifierad  Extraherat OCH oberoende bekräftat mot kommunens
+//               kontrollerat källan (det sätter 'kontrollast').
+//   kontrollast Extraherat OCH oberoende bekräftat mot kommunens
 //               levande sida. Full markering, ingen reservation. Sätts
 //               ENDAST av ett researchpass — omrakna-datatillstand.ts
 //               får aldrig skriva detta värde (samma skydd som
@@ -89,7 +89,7 @@ export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 // fältet redan fanns långt innan datatillstånd-arbetet, och används där
 // av GiltighetsKontroll.astro/hittaGiltighetsregel(). Två källor för
 // samma sak hade brutit "en sanning, ett ställe".)
-export const DATATILLSTAND = ['olast', 'okand', 'ingen_regel', 'verifierad'] as const;
+export const DATATILLSTAND = ['olast', 'okand', 'ingen_regel', 'kontrollast'] as const;
 export type Datatillstand = (typeof DATATILLSTAND)[number];
 
 // H26 (SPEC_ATERSTAENDE_HAL.md, Kluster 4): kommunen kan pausa eller
@@ -279,7 +279,7 @@ export function harEtjanstsystem(kommun: Kommun): boolean {
  * T4 (ÅTGÄRDSSPEC, samma kväll, fyra-lägesrevisionen): utökad från tre
  * till fyra fält (+ giltighet, se hittaGiltighetsstatus ovan), och
  * granskat-kriteriet skärpt. 'olast' (extraherat, INTE oberoende
- * omkontrollerat) räknas INTE längre som granskat — bara 'verifierad'
+ * omkontrollerat) räknas INTE längre som granskat — bara 'kontrollast'
  * (oberoende bekräftat mot källan) och 'ingen_regel' (bekräftad
  * frånvaro) gör. Det är själva poängen med fyra-lägesrevisionen: ett
  * fält som bara är extraherat har inte granskats i den mening stämpeln
@@ -290,7 +290,7 @@ export function harEtjanstsystem(kommun: Kommun): boolean {
  */
 export type Granskningsniva = 'fullt' | 'delvis' | 'ogranskat';
 
-const GRANSKAT_STATUSAR: readonly Datatillstand[] = ['verifierad', 'ingen_regel'];
+const GRANSKAT_STATUSAR: readonly Datatillstand[] = ['kontrollast', 'ingen_regel'];
 
 export function bidragGranskningsniva(bidrag: Bidrag, giltighetStatus: Datatillstand): Granskningsniva {
   const statusar = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status, giltighetStatus];

@@ -96,7 +96,7 @@ function normalizeDate(v: unknown): unknown {
  * Arbetsorder 2026-08-03, punkt 3 — samma fyrfältade regel för belopp/
  * deadline/krav (Bidrag) och giltighet (Forutsattning). Uppdaterad
  * ÅTGÄRDSSPEC T1/T6 (samma kväll, fyra-lägesrevisionen): status saknas
- * → fäll; status är olast/verifierad (HARVARDE_KRAVER_STATUSAR — "vi ska
+ * → fäll; status är olast/kontrollast (HARVARDE_KRAVER_STATUSAR — "vi ska
  * ha ett värde") men fältet tomt → fäll; status är okand/ingen_regel
  * (inget värde förväntat) men fältet HAR ett värde → fäll (samma
  * tomhetskrav för båda — om det redan finns ett svar finns inget kvar
@@ -108,13 +108,13 @@ function normalizeDate(v: unknown): unknown {
  * medvetet belopp_status: okand trots att fältet fortfarande innehåller
  * texten (vi rör aldrig belopp-värdet självt). Den riktningen ("okand
  * men fältet har ett värde") är alltså en LEGITIM kombination för just
- * belopp — bara "olast/verifierad men tomt" ska fällas här. Den farliga
- * riktningen (olast/verifierad + platshållare) fångas redan av
+ * belopp — bara "olast/kontrollast men tomt" ska fällas här. Den farliga
+ * riktningen (olast/kontrollast + platshållare) fångas redan av
  * hittaBeloppPlatshallare, som är corpus-medveten och kan skilja en
  * platshållare från ett äkta runt tal ("5 000 kronor") — något denna
  * enfils-validering inte kan avgöra.
  */
-const HARVARDE_KRAVER_STATUSAR: readonly Datatillstand[] = ['olast', 'verifierad'];
+const HARVARDE_KRAVER_STATUSAR: readonly Datatillstand[] = ['olast', 'kontrollast'];
 
 function validateDatatillstand(where: string, faltnamn: string, status: unknown, harVarde: boolean, problems: string[], symmetrisk = true): void {
   if (status === null || status === undefined) {
@@ -399,7 +399,7 @@ export function validateAllKommunFiles(): { file: string; error: string }[] {
 
 /**
  * Uppföljning 2026-08-03 (arbetsorder 2, uppdaterad T1-namnbytet): ett
- * belopp_status som kräver ett värde (olast eller verifierad) får inte
+ * belopp_status som kräver ett värde (olast eller kontrollast) får inte
  * kombineras med ett belopp som är en platshållarfras, inte kommunens
  * egna ord. Listan byggs UR DATAN, inte gissad: en fras som återkommer
  * ORDAGRANT i flera OLIKA kommuner och inte innehåller en siffra kan per
@@ -432,7 +432,7 @@ export function hittaBeloppPlatshallare(minimumKommuner = 3): { kommun: string; 
   const traffar: { kommun: string; kommunSlug: string; bidrag: string; bidragId: string; belopp: string }[] = [];
   for (const kommun of kommuner) {
     for (const bidrag of kommun.bidrag) {
-      if ((bidrag.belopp_status === 'olast' || bidrag.belopp_status === 'verifierad') && bidrag.belopp !== null && platshallarfraser.has(bidrag.belopp)) {
+      if ((bidrag.belopp_status === 'olast' || bidrag.belopp_status === 'kontrollast') && bidrag.belopp !== null && platshallarfraser.has(bidrag.belopp)) {
         traffar.push({ kommun: kommun.kommun, kommunSlug: kommun.kommun_slug, bidrag: bidrag.namn, bidragId: bidrag.id, belopp: bidrag.belopp });
       }
     }

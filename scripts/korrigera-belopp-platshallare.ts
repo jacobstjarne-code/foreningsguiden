@@ -1,5 +1,5 @@
 // Uppföljning 2026-08-03 (arbetsorder 2, Jacobs valideringsregel; T1-
-// namnbytet samma kväll): rättar belopp_status från "olast"/"verifierad"
+// namnbytet samma kväll): rättar belopp_status från "olast"/"kontrollast"
 // till "okand" för exakt de bidrag hittaBeloppPlatshallare() (kommuner.ts)
 // pekar ut — en platshållarfras ("Individuell bedömning" m.fl., se den
 // funktionens filhuvud) är inte kommunens egna ord, och ska alltså inte
@@ -59,7 +59,7 @@ for (const [kommunSlug, bidragIds] of perFil) {
     if (
       currentId &&
       kvar.has(currentId) &&
-      /^(\s*)belopp_status:\s*(olast|verifierad)\s*$/.test(line)
+      /^(\s*)belopp_status:\s*(olast|kontrollast)\s*$/.test(line)
     ) {
       const indent = line.match(/^(\s*)/)?.[1] ?? '';
       output.push(`${indent}belopp_status: okand`);
@@ -78,4 +78,4 @@ for (const [kommunSlug, bidragIds] of perFil) {
   writeFileSync(path, output.join('\n'));
 }
 
-console.log(`${rattade} bidrag rättade (belopp_status: olast/verifierad → okand) över ${perFil.size} kommuner.`);
+console.log(`${rattade} bidrag rättade (belopp_status: olast/kontrollast → okand) över ${perFil.size} kommuner.`);

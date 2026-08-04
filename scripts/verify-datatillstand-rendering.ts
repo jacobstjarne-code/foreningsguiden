@@ -40,7 +40,7 @@ for (const kommun of kommuner) {
     const bidragIdMatch = kopRutaHrefMatch[1].match(/\/utkast\/([\w-]+)\/?$/);
     const bidragId = bidragIdMatch?.[1];
     const bidrag = kommun.bidrag.find((b) => b.id === bidragId);
-    if (bidrag && !(bidrag.krav_status === 'verifierad' && bidrag.krav.length >= 3)) {
+    if (bidrag && !(bidrag.krav_status === 'kontrollast' && bidrag.krav.length >= 3)) {
       problem.push(`${kommun.kommun_slug}: köprutan länkar till ${bidrag.id} som inte klarar D1 (krav_status: ${bidrag.krav_status}, ${bidrag.krav.length} krav)`);
     }
   }

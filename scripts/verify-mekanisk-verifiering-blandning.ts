@@ -30,7 +30,7 @@ function skyddadeIdn(yamlText: string): Set<string> {
     const ids = new Set<string>();
     for (const b of doc.bidrag ?? []) {
       for (const falt of ['belopp_status', 'deadline_status', 'krav_status'] as const) {
-        if (b[falt] === 'verifierad' || b[falt] === 'ingen_regel') ids.add(`${b.id}.${falt}`);
+        if (b[falt] === 'kontrollast' || b[falt] === 'ingen_regel') ids.add(`${b.id}.${falt}`);
       }
     }
     return ids;

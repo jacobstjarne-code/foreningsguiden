@@ -499,7 +499,7 @@ const kommuner = loadKommuner();
       // C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): dela resultat.saknar i två
       // — D1 (krav_status: verifierad + minst tre krav) avgör om vi
       // faktiskt känner till HELA kravbilden nog för att påstå ett gap.
-      const harD1 = (b: Bidrag) => b.krav_status === 'verifierad' && b.krav.length >= 3;
+      const harD1 = (b: Bidrag) => b.krav_status === 'kontrollast' && b.krav.length >= 3;
       const saknarD1 = resultat.saknar.filter(({ bidrag }) => harD1(bidrag));
       const saknarOkartlagd = resultat.saknar.filter(({ bidrag }) => !harD1(bidrag));
 
