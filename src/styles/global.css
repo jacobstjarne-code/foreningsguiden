@@ -439,6 +439,38 @@ main {
   margin: var(--fg-space-2) 0 0;
 }
 
+/* TILLSTANDET_OLAST.md (runda 4) — markör + värde på fältnivå.
+   Värdet ärver ALLTID vanlig textfärg (--fg-ink), aldrig dämpat — se
+   "Vad Code behöver veta" §2: värdet renderas i full svärta i olast. */
+.fg-faltmarkor {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.fg-faltmarkor--lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fg-faltmarkor--lista li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.fg-faltmarkor .fg-void-mark,
+.fg-faltmarkor .fg-read-mark,
+.fg-faltmarkor--lista .fg-void-mark,
+.fg-faltmarkor--lista .fg-read-mark {
+  flex: none;
+  margin-top: 3px;
+}
+
 .bidrag-card__divider {
   border-top: var(--fg-border-inner) dashed var(--fg-border);
   margin-top: var(--fg-space-5);

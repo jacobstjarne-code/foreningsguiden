@@ -12,10 +12,10 @@
 // Bevaka-knapp (bevakningsflödet är på is, se statusrapport).
 import type { Bidrag } from '../lib/kommuner';
 import { KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText } from '../lib/kommuner';
+import { OLAST_MARK } from '../lib/content';
 import VerificationStamp from './VerificationStamp.astro';
 import VoidMark from './VoidMark.astro';
 import VoidState from './VoidState.astro';
-import OlastMark from './OlastMark.astro';
 import RelativeDeadline from './RelativeDeadline.astro';
 
 export interface Props {
@@ -29,6 +29,13 @@ export interface Props {
 
 const { bidrag, verifierad, ansokningsUrl, kommunSlug, kommunNamn, giltighetStatus } = Astro.props;
 const datumFormaterat = formatDate(bidrag.senast_verifierad ?? verifierad);
+
+// TILLSTANDET_OLAST.md (runda 4, "Vad Code behöver veta" §3): EN
+// reservation per kort, aldrig per fält. Beräknas över de tre fält som
+// faktiskt kan bära en synlig markör här (giltighet ligger på
+// Forutsattning, inte per bidrag).
+const harOlastFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast');
+const kallaHost = new URL(bidrag.kalla_url).hostname.replace(/^www\./, '');
 
 // ÅTGÄRDSSPEC T3 (2026-08-03 kväll, fyra-lägesrevisionen). typ==='relativ'
 // avgörs INNAN denna funktion anropas (RelativeDeadline-komponenten tar
@@ -63,17 +70,33 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
 
   <h3>{bidrag.namn}</h3>
 
+  {/* TILLSTANDET_OLAST.md 4b, "Vad Code behöver veta" §3: EN reservation
+      per kort — inte upprepad per fält. Streckad hål-markör i banderollen
+      matchar markören som återkommer på varje olast-fält nedan (§4:
+      "markören renderas på alla sex ytor"). */}
+  {harOlastFalt && (
+    <div class="fg-unread-banner">
+      <span class="fg-void-mark" aria-hidden="true"></span>
+      <span>
+        {OLAST_MARK.rad}
+        {' '}<a href={bidrag.kalla_url} target="_blank" rel="noopener">{OLAST_MARK.kallaKnappMall.replace('{host}', kallaHost)}</a>
+      </span>
+    </div>
+  )}
+
   <dl>
     <dt>Målgrupp</dt>
     <dd>{bidrag.malgrupp}</dd>
 
     <dt>Deadline</dt>
     <dd>
-      {/* ÅTGÄRDSSPEC T3 — fyra-lägesrendering. typ==='relativ' är ett
-          strukturellt särfall (RelativeDeadline tar över helt, oavsett
-          status) — annars styr deadline_status: verifierad visas rakt
-          av, olast hedgas (OlastMark), ingen_regel är ett bekräftat
-          "ingen frist" (VoidState), okand är ett äkta hål (VoidMark). */}
+      {/* ÅTGÄRDSSPEC T3 + TILLSTANDET_OLAST.md (runda 4) — fyra-
+          lägesrendering. typ==='relativ' är ett strukturellt särfall
+          (RelativeDeadline tar över helt, oavsett status) — annars styr
+          deadline_status: kontrollast visas med fylld markör, olast med
+          streckad (samma markör som banderollen ovan, ingen egen
+          upprepad reservationstext), ingen_regel är ett bekräftat "ingen
+          frist" (VoidState), okand är ett äkta hål (VoidMark). */}
       {bidrag.deadlines.typ === 'relativ' ? (
         <RelativeDeadline bidrag={bidrag} />
       ) : bidrag.deadline_status === 'ingen_regel' ? (
@@ -93,10 +116,11 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
           bidragId={bidrag.id}
           bidragNamn={bidrag.namn}
         />
-      ) : bidrag.deadline_status === 'olast' ? (
-        <OlastMark kallaUrl={bidrag.kalla_url}>{formatDeadlines(bidrag)}</OlastMark>
       ) : (
-        formatDeadlines(bidrag)
+        <span class="fg-faltmarkor">
+          <span class={bidrag.deadline_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+          {formatDeadlines(bidrag)}
+        </span>
       )}
     </dd>
 
@@ -124,10 +148,11 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
           bidragId={bidrag.id}
           bidragNamn={bidrag.namn}
         />
-      ) : bidrag.belopp_status === 'olast' ? (
-        <OlastMark kallaUrl={bidrag.kalla_url}>{bidrag.belopp}</OlastMark>
       ) : (
-        bidrag.belopp
+        <span class="fg-faltmarkor">
+          <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+          {bidrag.belopp}
+        </span>
       )}
     </dd>
 
@@ -142,15 +167,14 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
           forklaring="Bekräftat vid källgranskning."
         />
       ) : bidrag.krav.length > 0 ? (
-        bidrag.krav_status === 'olast' ? (
-          <OlastMark kallaUrl={bidrag.kalla_url}>
-            <ul>{bidrag.krav.map((k) => <li>{k}</li>)}</ul>
-          </OlastMark>
-        ) : (
-          <ul>
-            {bidrag.krav.map((k) => <li>{k}</li>)}
-          </ul>
-        )
+        <ul class="fg-faltmarkor fg-faltmarkor--lista">
+          {bidrag.krav.map((k) => (
+            <li>
+              <span class={bidrag.krav_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+              {k}
+            </li>
+          ))}
+        </ul>
       ) : (
         <p>Inga strukturerade krav har registrerats.</p>
       )}

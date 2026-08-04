@@ -197,14 +197,58 @@
   padding: var(--fg-space-4);
 }
 
+/* TILLSTANDET_OLAST.md (runda 4, 2026-08-03): markören är STRECKAD, inte
+   heldragen — rättat från en tidigare (fel) heldragen ring. Formen
+   (fylld/streckad) och färgen (--marker-color) är oberoende axlar (4c) —
+   en streckad markör kan bära urgensfärg, men ALDRIG oxblod. */
 .fg-void-mark {
   display: inline-block;
   flex: none;
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  border: var(--fg-border-structural) solid var(--fg-void-line);
+  border: var(--fg-border-structural) dashed var(--marker-color, var(--fg-void-line));
   background: transparent;
+}
+
+.fg-void-mark--inline {
+  width: 9px;
+  height: 9px;
+}
+
+/* kontrollast — fylld motsvarighet till .fg-void-mark. Samma storlek,
+   samma oberoende --marker-color-axel (default --fg-accent). */
+.fg-read-mark {
+  display: inline-block;
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--marker-color, var(--fg-accent));
+}
+
+.fg-read-mark--inline {
+  width: 9px;
+  height: 9px;
+}
+
+/* Reservationen — EN per kort, aldrig per fält (TILLSTANDET_OLAST.md
+   "Vad Code behöver veta" §3). 4px void-line vänsterkant, void-surface
+   fyllning — läses som ett annat läge utan att skrika. */
+.fg-unread-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border-left: 4px solid var(--fg-void-line);
+  background: var(--fg-void-surface);
+  color: var(--fg-void-ink);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-4);
+  margin: 0 0 var(--fg-space-4);
+}
+
+.fg-unread-banner .fg-void-mark {
+  margin-top: 3px;
 }
 
 .fg-void-count {
