@@ -3,7 +3,32 @@
 # `npm install` (package.json "prepare": git config core.hooksPath
 # scripts/git-hooks). Kan kringgås (--no-verify) — CI:n (.github/workflows/
 # validera.yml) kör samma kontroller och kan inte kringgås på samma sätt.
+#
+# 2026-08-04: validerar nu exakt det som faktiskt committas, inte hela
+# arbetsträdet. Rot till produktionsutfallet samma dag (fixat i ded3eca):
+# tio kommun-YAML låg okommitterade-men-närvarande på disk när en
+# datavärde-omdöpning committades. Hooken validerade blandningen av
+# committat+okommitterat och gav grönt — men det som faktiskt gick till
+# origin/main saknade datafixen och failade i CI (som klonar den riktiga
+# committen) och i Vercels build, oupptäckt i flera timmar eftersom ingen
+# tittade på CI-status. `git stash push --keep-index` gömmer ospårade
+# ändringar i SPÅRADE filer under körningen så grinden ser samma sak som
+# CI/Vercel ser. Medvetet INTE --include-untracked: det här är ett delat
+# arbetsträd med en parallell process pågående, och ospårade artefakter
+# ska aldrig röras av den här hooken.
 set -e
+
+STASHED=0
+if ! git diff --quiet; then
+  git stash push --keep-index --quiet --message "pre-commit: temporär undanstoppning av ospårade ändringar i spårade filer"
+  STASHED=1
+fi
+aterstall() {
+  if [ "$STASHED" = "1" ]; then
+    git stash pop --quiet
+  fi
+}
+trap aterstall EXIT
 
 echo "→ Schemavalidering..."
 node --experimental-strip-types scripts/validera-data.ts
