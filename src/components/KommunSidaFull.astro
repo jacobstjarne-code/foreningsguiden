@@ -22,7 +22,7 @@ import {
   KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, relativFrist, hittaGiltighetsstatus,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
-import { KOMMUN, KOMMUNSIFFRA, EKERN } from '../lib/content';
+import { KOMMUN, KOMMUNSIFFRA, EKERN, OLAST_MARK } from '../lib/content';
 
 export interface Props {
   kommun: Kommun;
@@ -62,7 +62,19 @@ const ansokningstext = KOMMUN.ansokningssystemTemplate
 const fastaDeadlines = kommun.bidrag.flatMap((b) => (b.deadlines.typ === 'fasta' ? b.deadlines.datum : []));
 const kategorierText = svenskLista(kategorierMedBidrag.map((k) => KATEGORI_LABELS[k].toLowerCase()));
 
+// TILLSTANDET_OLAST.md 4c, yta 1 (Jacob 2026-08-03 kväll): Arvika-
+// motsägelsen var precis det här — ekern påstod ett datumintervall med
+// full säkerhet, kortet hedgade samma datum. svarForstMedDeadlines
+// (nedan) är den enda av de tre varianterna som faktiskt påstår ett
+// datum (tidigaste/senaste) — markeras bara när minst en av de bidrag
+// som bidrar till intervallet har deadline_status: olast.
+const fastaDeadlineBidrag = kommun.bidrag.filter((b) => b.deadlines.typ === 'fasta');
+
 let svarForst = '';
+// Bara svarForstMedDeadlines faktiskt påstår ett datum — de andra två
+// varianterna (ett bidrag, löpande) nämner aldrig ett tidigaste/senaste
+// datum, så olast-markören ska bara kunna visas där.
+let svarForstOlast = false;
 if (kommun.bidrag.length === 1) {
   svarForst = KOMMUN.svarForstEtt
     .replace(/{kommun}/g, kommun.kommun)
@@ -83,6 +95,7 @@ if (kommun.bidrag.length === 1) {
     .replace(/{tidigaste}/g, formatRecurringDate(sorted[0]))
     .replace(/{senaste}/g, formatRecurringDate(sorted[sorted.length - 1]))
     .replace(/{system}/g, kommun.ansokningssystem.namn);
+  svarForstOlast = fastaDeadlineBidrag.some((b) => b.deadline_status === 'olast');
 }
 
 // --- FAQ (SOKBARHETSSPEC §3.3) — synlig sektion MÅSTE spegla schemat exakt ---
@@ -206,6 +219,16 @@ const webPageJsonLd = {
     <div class="ekern">
       <div class="ekern__band ekern__band--1">
         <p class="ekern__svar-forst">{svarForst}</p>
+        {/* TILLSTANDET_OLAST.md 4c, yta 1 (Jacob 2026-08-03 kväll):
+           Arvika-motsägelsen — ekern påstod ett datumintervall med full
+           säkerhet, kortet hedgade samma datum. Markören + samma
+           OLAST_MARK-text som kortets banderoll, ingen ny prosa. */}
+        {svarForstOlast && (
+          <p class="ekern__olast">
+            <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
+            {OLAST_MARK.rad}
+          </p>
+        )}
         <p class="ekern__verifierad">
           <span class="ekern__verifierad-dot" aria-hidden="true"></span>
           {EKERN.verifieradPrefix} {formatDate(kommun.verifierad).toUpperCase()}
@@ -322,6 +345,15 @@ const webPageJsonLd = {
     font-size: 17px;
     line-height: 1.55;
     margin: 0 0 var(--fg-space-4);
+  }
+
+  .ekern__olast {
+    display: flex;
+    align-items: baseline;
+    gap: var(--fg-space-2);
+    font-size: var(--fg-text-label);
+    color: var(--fg-void-ink);
+    margin: var(--fg-space-2) 0 0;
   }
 
   .ekern__verifierad {

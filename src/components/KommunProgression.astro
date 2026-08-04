@@ -302,7 +302,17 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
         <li data-kategori={bidrag.kategori.join(' ')}>
           <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
             <div class="progression__list-row__text">
-              <div class="progression__list-row__namn">{bidrag.namn}</div>
+              <div class="progression__list-row__namn">
+                {/* TILLSTANDET_OLAST.md 4c, yta 2: 11 px hål/prick FÖRE
+                   bidragsnamnet — streckad om något av bidragets fält är
+                   olast, fylld annars. Samma trigger som kortets
+                   banderoll (harOlastFalt-mönstret), en sanning. */}
+                <span
+                  class={[bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast') ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'}
+                  aria-hidden="true"
+                ></span>
+                {bidrag.namn}
+              </div>
               <div class="progression__list-row__meta">
                 {bidrag.belopp ?? 'Belopp ej publikt'} · {dateISO
                   ? `sista dag ${formatDate(dateISO)}`
