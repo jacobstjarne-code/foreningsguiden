@@ -22,7 +22,7 @@ import UrgencyChip from '../components/UrgencyChip.astro';
 import KommunValjare from '../components/KommunValjare.astro';
 import LiveDataKort from '../components/LiveDataKort.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
-import { START, SIDFOT, DESCRIPTOR } from '../lib/content';
+import { START, SIDFOT, DESCRIPTOR, OLAST_MARK } from '../lib/content';
 import { TRATT } from '../../GUIDE_TRATT_COPY';
 
 const kommuner = loadKommuner();
@@ -43,6 +43,10 @@ for (const e of getDeadlineEntries(today).filter((e) => !e.isLopande)) {
   if (kommandeDeadlines.length >= 5) break;
 }
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
+// TILLSTANDET_OLAST.md 4c yta 4 — samma "aldrig markör utan legend"-regel
+// som kalendern (yta 3). Urgensfärgad markör hör till G1 (Jacob
+// 2026-08-04: "den är G1") — här är det bara formen, streckad/fylld.
+const harOlastIForhandsvisning = kommandeDeadlines.some((e) => e.deadlineStatus === 'olast');
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
   <section class="start-hero">
@@ -85,7 +89,10 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
         {kommandeDeadlines.map((e) => (
           <tr>
             <td><UrgencyChip urgency={getUrgency(daysUntil(e.dateISO!, today))} /></td>
-            <td>{formatDate(e.dateISO!)}</td>
+            <td>
+              <span class={e.deadlineStatus === 'olast' ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'} aria-hidden="true"></span>
+              {formatDate(e.dateISO!)}
+            </td>
             <td><a href={`/kommun/${e.kommunSlug}/#bidrag-${e.bidragId}`}>{e.bidragNamn}</a></td>
             <td>{e.kommun}</td>
             <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
@@ -93,6 +100,12 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
         ))}
       </tbody>
     </table>
+    {harOlastIForhandsvisning && (
+      <p class="start-forhandsvisning__legend">
+        <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
+        {OLAST_MARK.legend}
+      </p>
+    )}
     <p><a href="/deadlines/">Se hela deadlinekalendern →</a></p>
   </section>
 
@@ -154,6 +167,20 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
 
   .start-sekundar {
     margin-top: var(--fg-space-8);
+  }
+
+  .deadline-table .fg-void-mark,
+  .deadline-table .fg-read-mark {
+    margin-right: var(--fg-space-2);
+  }
+
+  .start-forhandsvisning__legend {
+    display: flex;
+    align-items: baseline;
+    gap: var(--fg-space-2);
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    margin: var(--fg-space-3) 0 0;
   }
 
   @media (max-width: 640px) {

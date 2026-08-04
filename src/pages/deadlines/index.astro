@@ -29,7 +29,7 @@ import {
   KATEGORI_LABELS, KATEGORIER,
 } from '../../lib/kommuner';
 import type { DeadlineEntry } from '../../lib/kommuner';
-import { KALENDER, BEVAKNING } from '../../lib/content';
+import { KALENDER, BEVAKNING, OLAST_MARK } from '../../lib/content';
 import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
 const bevakningStatus = Astro.url.searchParams.get('bevakning');
@@ -42,6 +42,12 @@ const today = todayISO();
 const entries = getDeadlineEntries(today);
 const lopande = entries.filter((e) => e.isLopande);
 const kommande = entries.filter((e) => !e.isLopande);
+
+// TILLSTANDET_OLAST.md 4c yta 3: markören bär hela anspråket i kalenderrader
+// (ingen plats för egen reservationstext) — "aldrig markör utan legend på
+// samma sida" gäller alltså raka vägen hela kalendern, inte bara en flagga
+// när just den öppna månaden råkar innehålla ett olast-datum.
+const harOlastIKalendern = kommande.some((e) => e.deadlineStatus === 'olast');
 
 // A1 (SPRINT: Produkten, Opus/Fable 2026-07-31): kalendern hade ingen
 // verifieringsstämpel alls — enda ytan som inte sa när den lästes. Samma
@@ -128,6 +134,7 @@ function beloppCell(e: DeadlineEntry): string {
               return (
                 <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
                   <td class="deadline-table__datum">
+                    <span class={e.deadlineStatus === 'olast' ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'} aria-hidden="true"></span>
                     {urgency !== 'positive' && <UrgencyChip urgency={urgency} />}
                     {formatDate(e.dateISO!)}
                   </td>
@@ -173,6 +180,13 @@ function beloppCell(e: DeadlineEntry): string {
   )}
 
   <p class="deadline-table__empty" id="deadline-empty" hidden>Inga deadlines matchar filtret.</p>
+
+  {harOlastIKalendern && (
+    <p class="deadline-legend">
+      <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
+      {OLAST_MARK.legend}
+    </p>
+  )}
 
   {bekraftad ? (
     <div class="email-signup fg-card">
@@ -299,6 +313,20 @@ function beloppCell(e: DeadlineEntry): string {
 
   .deadline-table__datum .fg-chip {
     margin-right: var(--fg-space-2);
+  }
+
+  .deadline-table__datum .fg-void-mark,
+  .deadline-table__datum .fg-read-mark {
+    margin-right: var(--fg-space-2);
+  }
+
+  .deadline-legend {
+    display: flex;
+    align-items: baseline;
+    gap: var(--fg-space-2);
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    margin: var(--fg-space-4) 0 0;
   }
 
   .deadline-table__bevaka {

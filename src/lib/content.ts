@@ -770,6 +770,10 @@ export const VOID_MARK = {
 export const OLAST_MARK = {
   rad: 'Inte kontrollerad mot kommunens sida sedan vi hämtade den.',
   kallaKnappMall: 'Läs på {host}',
+  // TILLSTANDET_OLAST.md 4c: "Aldrig markör utan legend på samma sida" —
+  // ordagrann rad ur filen, för ytor där markören bär hela anspråket utan
+  // egen reservationstext (deadlinekalendern, förstasidans närmaste).
+  legend: 'streckad ring = hämtad, ej kontrolläst',
 };
 
 /**

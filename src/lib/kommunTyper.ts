@@ -581,6 +581,7 @@ export interface DeadlineEntry {
   isLopande: boolean;
   dateISO: string | null; // null för löpande — kan inte placeras kronologiskt
   belopp: string | null; // rå fritext ur Bidrag.belopp — kalendern kör den genom parseBeloppTak() själv
+  deadlineStatus: Datatillstand; // TILLSTANDET_OLAST.md 4c yta 3/4 — markören i kalender- och förstasidesraden
 }
 
 export const KATEGORI_LABELS: Record<Kategori, string> = {
