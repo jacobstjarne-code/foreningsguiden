@@ -18,14 +18,17 @@ bidrag:
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Kopia av beslut från Skatteverket om organisationsnummer
+  - Föreningsstadgar
+  - Årsmötesprotokoll
+  belopp: 5 000 kr
+  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: kumla-startbidrag
 - namn: Grundbidrag
@@ -37,14 +40,18 @@ bidrag:
   deadlines:
     typ: lopande
     datum: []
-  krav: []
+  krav:
+  - Årsmötesprotokoll
+  - Verksamhetsberättelse
+  - Revisionsberättelse
+  - Ekonomisk berättelse
   belopp: 2 000 kr
-  sen_ansokan: Ej angivet i källan
+  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: kumla-grundbidrag
 - namn: Lokal- och anläggningsbidrag
@@ -54,16 +61,22 @@ bidrag:
   - ovrig
   malgrupp: Föreningar som äger eller hyr lokal och har grundbidrag
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: 60 procent av lokalkostnaden, högst 35 000 kr per år
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+    typ: fasta
+    datum:
+    - 02-25
+    - 08-25
+  krav:
+  - Hyresavtal eller hyresavier för perioden (om föreningen hyr lokal)
+  - Specifikation av värmekostnader för perioden, om tillämpligt
+  - Specifikation av el-, VA- och sophämtningskostnader för perioden, om tillämpligt
+  - Specifikation av lokalens eller anläggningens totala driftkostnader och hyresintäkter (om föreningen äger lokalen)
+  belopp: 60 procent av lokalkostnaden (exklusive hyresintäkter), högst 35 000 kr per förening och år
+  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: kumla-lokal-och-anlaggningsbidrag
 - namn: Projektbidrag
@@ -77,14 +90,16 @@ bidrag:
     datum:
     - 02-25
     - 08-25
-  krav: []
-  belopp: Upp till 100 procent av projektkostnaden
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Projektplan
+  - Kostnadskalkyl
+  belopp: 100 procent av projektkostnaden, högst 25 000 kr per projekt
+  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: kumla-projektbidrag
 - namn: Bidrag till ridskoleverksamhet
@@ -96,14 +111,19 @@ bidrag:
     datum:
     - 02-25
     - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Sammankomsten ska vara planerad i förväg och pågå minst 45 minuter
+  - Ledas av minst en ledare, fyllt 13 år och medlem i föreningen
+  - Minst tre bidragsberättigade deltagare utöver ledare
+  - Deltagare 4-25 år eller med funktionsvariation, folkbokförda i Kumla kommun
+  - Redovisning av antal ridlektioner bifogas ansökan i efterhand
+  belopp: 100 kr per bidragsberättigad deltagare och genomförd sammankomst, för max 10 deltagare
+  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: kumla-bidrag-till-ridskoleverksamhet
 - namn: Bidrag för sociala aktiviteter
@@ -132,16 +152,24 @@ bidrag:
   - social
   malgrupp: Föreningar med verksamhet i minst två Sydnärkekommuner
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
+    typ: fasta
+    datum:
+    - 05-01
+  krav:
+  - Föreningen ska bedriva verksamhet i minst två av de fyra Sydnärkekommunerna Askersund, Hallsberg, Kumla eller Laxå
+  - Föreningen ska tillhöra en riksorganisation, undantag kan beviljas om riksorganisation saknas
+  - Föreningen ska vara uppbyggd och fungera enligt demokratiska principer och vara öppen för alla som stödjer föreningens
+    ändamål
+  - Föreningen ska ha egen ekonomi som innefattar medlemsavgifter
+  - Föreningen ska ha organisationsnummer och bank- eller plusgiro
+  - Föreningen är skyldig att uppge om bidrag erhålls från andra bidragsgivare
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  sen_ansokan: Ej angivet i källan
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
   belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: kumla-sydnarkebidrag
 forutsattningar:
