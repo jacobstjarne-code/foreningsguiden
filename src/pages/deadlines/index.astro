@@ -84,6 +84,33 @@ for (const e of kommande) {
 const innevarandeManad = manadNyckel(today);
 const nastaManad = nastaManadNyckel(innevarandeManad);
 
+// P3.2 (Jacob 2026-08-05): 2 746 rader/2 747 knappar renderade på en
+// sida — <details> döljer dem visuellt men tar dem aldrig ur DOM
+// (kommentaren högst upp förklarar varför, crawlbarhet). Standardvyn
+// begränsas nu till de tre NÄRMASTE månadsgrupperna som faktiskt har
+// deadlines (manadGrupper är redan kronologiskt sorterad från idag och
+// framåt — de tre första nycklarna ÄR "kommande tre månader", oavsett
+// om en enskild kalendermånad råkar sakna deadlines helt). "Visa alla"
+// är en riktig SSR-navigering (?visa=alla), inte klient-JS — enklast
+// och mest robust, samma mönster som ?kommun=/?bevakning= ovan.
+const visaAlla = Astro.url.searchParams.get('visa') === 'alla';
+const allaManadNycklar = [...manadGrupper.keys()];
+const synligaManadNycklar = visaAlla ? allaManadNycklar : allaManadNycklar.slice(0, 3);
+const synligaManadGrupper = synligaManadNycklar.map((key) => [key, manadGrupper.get(key)!] as const);
+const antalSynligaKommande = synligaManadGrupper.reduce((sum, [, rader]) => sum + rader.length, 0);
+const antalTotaltKommande = kommande.length;
+
+// Bevarar övriga query-parametrar (t.ex. ?kommun= från en radlänk) när
+// vy-läget växlas — bara "visa" ska ändras av de här länkarna. Relativ
+// path+search (inte hela URL:en) — fungerar oförändrat oavsett domän
+// (produktion/preview).
+const visaAllaParams = new URLSearchParams(Astro.url.searchParams);
+visaAllaParams.set('visa', 'alla');
+const visaAllaHref = `?${visaAllaParams.toString()}`;
+const visaTreParams = new URLSearchParams(Astro.url.searchParams);
+visaTreParams.delete('visa');
+const visaTreHref = visaTreParams.toString() ? `?${visaTreParams.toString()}` : '?';
+
 function kategoriCell(e: DeadlineEntry) {
   const forsta = KATEGORI_LABELS[e.kategori[0]];
   const fler = e.kategori.length - 1;
@@ -107,6 +134,15 @@ function beloppCell(e: DeadlineEntry): string {
   <h1>{KALENDER.h1}</h1>
   <p>{KALENDER.intro}</p>
   <p class="deadline-senast-avlast">{TRATT.start.senastAvlastRad.replace('{datum}', formatDate(senastAvlast))}</p>
+  {/* P3.2 (Jacob 2026-08-05): "Antalet i vyn ska framgå av rubriken" —
+     riktig SSR-navigering (?visa=alla), ingen klient-JS. */}
+  <p class="deadline-vy-antal">
+    {visaAlla ? (
+      <>Visar alla {antalTotaltKommande} deadlines. <a href={visaTreHref}>Visa de tre närmaste månaderna</a></>
+    ) : (
+      <>Visar {antalSynligaKommande} av {antalTotaltKommande} deadlines — de tre närmaste månaderna. <a href={visaAllaHref}>Visa alla →</a></>
+    )}
+  </p>
 
   <div class="deadline-filters">
     <label for="filter-kommun">
@@ -126,7 +162,7 @@ function beloppCell(e: DeadlineEntry): string {
   </div>
 
   <div id="deadline-table-container">
-    {[...manadGrupper.entries()].map(([manad, radLista]) => (
+    {synligaManadGrupper.map(([manad, radLista]) => (
       <details class="deadline-manad" data-deadline-manad data-manad-nyckel={manad} open={manad === innevarandeManad || manad === nastaManad}>
         <summary class="deadline-manad__summary">
           <svg class="deadline-manad__chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
@@ -266,6 +302,12 @@ function beloppCell(e: DeadlineEntry): string {
 
 <style>
   .deadline-senast-avlast {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-5);
+  }
+
+  .deadline-vy-antal {
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
     margin: 0 0 var(--fg-space-5);
