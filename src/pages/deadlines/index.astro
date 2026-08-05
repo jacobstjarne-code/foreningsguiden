@@ -43,6 +43,15 @@ const entries = getDeadlineEntries(today);
 const lopande = entries.filter((e) => e.isLopande);
 const kommande = entries.filter((e) => !e.isLopande);
 
+// P3.1a (Jacob 2026-08-05): raden i kalendern länkar hit med ?kommun=slug
+// (se .bevaka-rad-knapp nedan) — SSR läser den server-sidan, samma
+// mönster som ?bevakning= ovan, så EmailSignup.astro:s ruta för just den
+// kommunen redan är förkryssad vid FÖRSTA render (ingen klient-JS-timing
+// att lita på). Validerad mot kommuner.ts — en ogiltig/manipulerad
+// slug ger bara "ingen förkryssning", aldrig ett fel.
+const kommunFranRad = Astro.url.searchParams.get('kommun');
+const preselectedKommunSlug = kommuner.some((k) => k.kommun_slug === kommunFranRad) ? (kommunFranRad ?? undefined) : undefined;
+
 // TILLSTANDET_OLAST.md 4c yta 3: markören bär hela anspråket i kalenderrader
 // (ingen plats för egen reservationstext) — "aldrig markör utan legend på
 // samma sida" gäller alltså raka vägen hela kalendern, inte bara en flagga
@@ -143,7 +152,7 @@ function beloppCell(e: DeadlineEntry): string {
                   <td>{kategoriCell(e)}</td>
                   <td>{beloppCell(e)}</td>
                   <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
-                    <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
+                    <a href={`?kommun=${e.kommunSlug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
                   </td>
                 </tr>
               );
@@ -170,7 +179,7 @@ function beloppCell(e: DeadlineEntry): string {
               <td>{kategoriCell(e)}</td>
               <td>{beloppCell(e)}</td>
               <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun}>
-                <button type="button" class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</button>
+                <a href={`?kommun=${e.kommunSlug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
               </td>
             </tr>
           ))}
@@ -196,14 +205,14 @@ function beloppCell(e: DeadlineEntry): string {
     <div class="email-signup fg-card">
       <h2>Länken fungerar inte</h2>
       <p>Den kan ha gått ut eller redan använts. Fyll i formuläret igen nedan.</p>
-      <EmailSignup submitted={false} />
+      <EmailSignup submitted={false} preselectedKommunSlug={preselectedKommunSlug} />
     </div>
   ) : uppdaterad ? (
     <div class="email-signup fg-card">
       <h2>Uppdaterat</h2>
     </div>
   ) : (
-    <EmailSignup submitted={submitted} />
+    <EmailSignup submitted={submitted} preselectedKommunSlug={preselectedKommunSlug} />
   )}
 </Base>
 
@@ -334,9 +343,11 @@ function beloppCell(e: DeadlineEntry): string {
   }
 
   .bevaka-rad-knapp {
+    display: inline-block;
     white-space: nowrap;
     font-size: var(--fg-text-label);
     padding: 6px 12px;
+    text-decoration: none;
   }
 
   .bevaka-rad-form {

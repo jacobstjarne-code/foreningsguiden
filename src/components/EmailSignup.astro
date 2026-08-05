@@ -13,18 +13,24 @@ import { BEVAKNING } from '../lib/content';
 
 export interface Props {
   submitted?: boolean;
+  // P3.1a (Jacob 2026-08-05): radens kommun förkryssad när formuläret
+  // nås med kontext (deadlines/index.astro läser ?kommun= server-sidan,
+  // SSR — behöver ingen klient-JS för att förkrysstillståndet ska vara
+  // rätt redan vid första render). undefined utanför radkontext (nav,
+  // sidfot) = nuvarande beteende, ingen ruta förkryssad.
+  preselectedKommunSlug?: string;
 }
 
-const { submitted = false } = Astro.props;
+const { submitted = false, preselectedKommunSlug } = Astro.props;
 const kommuner = loadKommuner();
 ---
 {submitted ? (
-  <div class="email-signup fg-card">
+  <div class="email-signup fg-card" id="email-signup">
     <h2>{BEVAKNING.kvittoRubrik}</h2>
     <p>{BEVAKNING.kvittoText}</p>
   </div>
 ) : (
-  <form class="email-signup fg-card" method="POST" action="/api/prenumerera">
+  <form class="email-signup fg-card" id="email-signup" method="POST" action="/api/prenumerera">
     <h2>{BEVAKNING.rubrik}</h2>
     <p>{BEVAKNING.ingress}</p>
 
@@ -35,7 +41,7 @@ const kommuner = loadKommuner();
       <legend>{BEVAKNING.kommunLabel}</legend>
       {kommuner.map((k) => (
         <label class="email-signup__kommun">
-          <input type="checkbox" name="kommuner" value={k.kommun_slug} />
+          <input type="checkbox" name="kommuner" value={k.kommun_slug} checked={k.kommun_slug === preselectedKommunSlug} />
           {k.kommun}
         </label>
       ))}

@@ -76,7 +76,15 @@ export function initBevakaWidgets(): void {
   const bevakade = hamtaBevakadeKommuner();
 
   document.querySelectorAll<HTMLElement>('[data-bevaka-cell]').forEach((cell) => {
-    const knapp = cell.querySelector<HTMLButtonElement>('.bevaka-rad-knapp');
+    // P3.1 (Jacob 2026-08-05): .bevaka-rad-knapp är nu en riktig <a
+    // href="?kommun=slug#email-signup">, inte en <button type="button"> —
+    // progressiv förbättring. Utan JS (eller om den här lyssnaren av
+    // någon anledning aldrig hinner fästa) navigerar länken till en SSR-
+    // renderad EmailSignup med kommunen redan förkryssad (P3.1a), i
+    // stället för att vara helt verkningslös som en bar <button> utan
+    // lyssnare skulle ha varit. Med JS: preventDefault, samma snabba
+    // widget som förut.
+    const knapp = cell.querySelector<HTMLAnchorElement>('.bevaka-rad-knapp');
     const kommunSlug = cell.dataset.kommunSlug ?? '';
     const kommunNamn = cell.dataset.kommunNamn ?? '';
 
@@ -87,7 +95,8 @@ export function initBevakaWidgets(): void {
       return;
     }
 
-    knapp?.addEventListener('click', () => {
+    knapp?.addEventListener('click', (event) => {
+      event.preventDefault();
       const form = byggBevakaForm(kommunNamn);
       cell.replaceChildren(form);
 
