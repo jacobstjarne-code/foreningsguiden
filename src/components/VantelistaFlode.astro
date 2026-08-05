@@ -63,9 +63,14 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
        inget att räkna på = döljs helt, gissar aldrig. Fylls av
        skriptet nedan via fyllKrav() (utkastGenerator.ts) mot
        bidragets egna Bidrag.krav[], citerat ordagrant — aldrig en
-       generisk uppfunnen lista. */}
+       generisk uppfunnen lista.
+       P1.6 (Jacob 2026-08-05): punktlista, inte en semikolonfogad
+       mening — bröt vid fler än två krav. Egen <ul> för luckorna,
+       <p> kvar bara för luckorInga-fallet (noll luckor, en riktig
+       mening). */}
     <div data-vantelista-luckor hidden>
       <h4 data-vantelista-luckor-rubrik hidden></h4>
+      <ul class="vantelista__luckor-lista" data-vantelista-luckor-lista hidden></ul>
       <p data-vantelista-luckor-text></p>
     </div>
 
@@ -117,6 +122,7 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
     const socialProofEl = widget.querySelector<HTMLElement>('[data-vantelista-social-proof]');
     const luckorEl = widget.querySelector<HTMLElement>('[data-vantelista-luckor]');
     const luckorRubrikEl = widget.querySelector<HTMLElement>('[data-vantelista-luckor-rubrik]');
+    const luckorListaEl = widget.querySelector<HTMLUListElement>('[data-vantelista-luckor-lista]');
     const luckorTextEl = widget.querySelector<HTMLElement>('[data-vantelista-luckor-text]');
 
     let klickLoggat = false;
@@ -148,12 +154,17 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
 
       const luckor = bidrag.krav.filter((kravText) => fyllKrav(kravText, profil, bidrag, kommunData).status === 'lucka');
 
-      if (luckor.length > 0 && luckorRubrikEl) {
-        luckorRubrikEl.textContent = VANTELISTA.luckorRubrik;
+      if (luckor.length > 0 && luckorRubrikEl && luckorListaEl) {
+        luckorRubrikEl.textContent = VANTELISTA.luckorRubrik.replace('{bidragsnamn}', bidragNamn);
         luckorRubrikEl.hidden = false;
-        luckorTextEl.textContent = VANTELISTA.luckorTemplate
-          .replace('{bidragsnamn}', bidragNamn)
-          .replace('{luckor}', luckor.join('; '));
+        luckorListaEl.replaceChildren(
+          ...luckor.map((kravText) => {
+            const li = document.createElement('li');
+            li.textContent = kravText;
+            return li;
+          })
+        );
+        luckorListaEl.hidden = false;
       } else {
         luckorTextEl.textContent = VANTELISTA.luckorInga.replace('{bidragsnamn}', bidragNamn);
       }

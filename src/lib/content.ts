@@ -832,16 +832,21 @@ export const VANTELISTA = {
   // utom det bara ni vet" och "...bemöter varje krav kommunen ställer"
   // överclaimade. prisRad ovan är den gällande formuleringen.
   // Namnger luckorna FÖRE köpet. Aldrig procent ("60 % färdigt") — samma
-  // påhittade precision som 90-dagarssiffran. Tre namngivna luckor är
-  // hanterbart, en procentsats är oroande. Code fyller {luckor} ur
-  // genereraUtkast() kravStatus === 'lucka'.
-  // ORÖRD SEDAN 2026-07-30 (SPEC: Det som återstår, uppföljning): ingen
-  // yta läser detta fältet än — VantelistaFlode.astro renderar bara
-  // rubrik/besked/prisRad/cta ovan. Text-utan-yta, inte bortglömt: vänta
-  // på att en spec kopplar {luckor} till genereraUtkast(), rör inte
-  // förrän dess.
-  luckorRubrik: 'Det här fyller ni själva',
-  luckorTemplate: 'För {bidragsnamn} är det {luckor}. Allt annat skriver vi.',
+  // påhittade precision som 90-dagarssiffran. Faktiskt kopplad i
+  // VantelistaFlode.astro (A2, 2026-07-29) via fyllKrav() mot
+  // bidrag.krav — kommentaren som stod här ("ORÖRD SEDAN 2026-07-30,
+  // ingen yta läser detta") var fel/inaktuell, borttagen 2026-08-05.
+  //
+  // P1.6 (Jacob 2026-08-05): renderas nu som punktlista (VantelistaFlode
+  // bygger <li> per krav), inte en semikolonfogad mening — en mall med
+  // {luckor} inline gick sönder så fort ett bidrag hade fler än två
+  // krav. luckorRubrik är därför en egen rad per bidrag ("Kommunens
+  // villkor för X"), inte "Det här fyller ni själva" — vid många krav
+  // är innehållet kommunens fulla lista, inte en kuraterad
+  // luckuppräkning. Den gamla avslutningen "Allt annat skriver vi" är
+  // borttagen (samma överclaim-mönster som P1.2), inte omformulerad —
+  // se P1.6-svaret för varför.
+  luckorRubrik: 'Kommunens villkor för {bidragsnamn}',
   luckorInga: 'För {bidragsnamn} behöver ni inte fylla i något — vi har allt vi behöver från era svar.',
   cta: 'Reservera plats nu. Ni betalar först när underlaget ligger klart att läsa — och behåller det till nästa år.',
   epostLabel: 'E-postadress',
