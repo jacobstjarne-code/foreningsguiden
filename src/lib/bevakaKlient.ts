@@ -18,18 +18,29 @@
  * kalendern (bevakning är e-post + dubbel opt-in, inte en session) — vi
  * kan alltså inte fråga SERVERN "är den här webbläsaren bekräftad", bara
  * komma ihåg klientsidan att DEN HÄR webbläsaren redan skickat in en
- * bevakningsbegäran för kommunen. localStorage, en sanning delad mellan
- * alla [data-bevaka-cell]-widgetar på sidan (bevakning är kommun-scopad
- * i backend, addPendingSubscriber(email, kommuner: string[]) — inte
- * per bidrag/rad, så ALLA rader för samma kommun ska visa samma tillstånd).
+ * bevakningsbegäran. localStorage, en sanning delad mellan alla
+ * [data-bevaka-cell]-widgetar på sidan.
+ *
+ * P3.1b (Jacob 2026-08-05): nyckeln är nu kommunSlug ELLER
+ * "kommunSlug:bidragId" beroende på om cellen har data-bidrag-id (bara
+ * deadlines/index.astro:s rader har det — registrera/index.astro:s
+ * kommun-breda widget saknar det, oförändrad). Ren tilläggning, inget
+ * brytande format: gamla v1-poster (bara kommunSlug) matchar fortfarande
+ * kommun-breda celler exakt som förut; en bidrag-scopad cell kan aldrig
+ * kollidera med en bar kommunSlug eftersom nyckeln alltid innehåller
+ * kolontecknet då.
  */
 import { BEVAKNING } from './content';
 
-const BEVAKADE_KOMMUNER_KEY = 'foreningsguiden:bevakade-kommuner:v1';
+const BEVAKADE_KEY = 'foreningsguiden:bevakade-kommuner:v1';
 
-function hamtaBevakadeKommuner(): Set<string> {
+function bevakadNyckel(kommunSlug: string, bidragId: string | undefined): string {
+  return bidragId ? `${kommunSlug}:${bidragId}` : kommunSlug;
+}
+
+function hamtaBevakade(): Set<string> {
   try {
-    const raw = localStorage.getItem(BEVAKADE_KOMMUNER_KEY);
+    const raw = localStorage.getItem(BEVAKADE_KEY);
     const lista = raw ? JSON.parse(raw) : [];
     return new Set(Array.isArray(lista) ? lista : []);
   } catch {
@@ -37,11 +48,11 @@ function hamtaBevakadeKommuner(): Set<string> {
   }
 }
 
-function markeraKommunBevakad(kommunSlug: string): void {
+function markeraBevakad(kommunSlug: string, bidragId: string | undefined): void {
   try {
-    const bevakade = hamtaBevakadeKommuner();
-    bevakade.add(kommunSlug);
-    localStorage.setItem(BEVAKADE_KOMMUNER_KEY, JSON.stringify([...bevakade]));
+    const bevakade = hamtaBevakade();
+    bevakade.add(bevakadNyckel(kommunSlug, bidragId));
+    localStorage.setItem(BEVAKADE_KEY, JSON.stringify([...bevakade]));
   } catch {
     // localStorage kan saknas/vara blockerad — kvittot i UI:t syns ändå
     // just nu, bara inte ihågkommet nästa sidladdning. Ingen krasch.
@@ -73,7 +84,7 @@ function byggBevakaForm(kommunNamn: string): HTMLFormElement {
 
 /** Event-delegation över sidans samtliga [data-bevaka-cell]-widgetar. */
 export function initBevakaWidgets(): void {
-  const bevakade = hamtaBevakadeKommuner();
+  const bevakade = hamtaBevakade();
 
   document.querySelectorAll<HTMLElement>('[data-bevaka-cell]').forEach((cell) => {
     // P3.1 (Jacob 2026-08-05): .bevaka-rad-knapp är nu en riktig <a
@@ -87,10 +98,14 @@ export function initBevakaWidgets(): void {
     const knapp = cell.querySelector<HTMLAnchorElement>('.bevaka-rad-knapp');
     const kommunSlug = cell.dataset.kommunSlug ?? '';
     const kommunNamn = cell.dataset.kommunNamn ?? '';
+    // P3.1b: bara satt på deadlines/index.astro:s rader — ogsatt (undefined)
+    // på registrera/index.astro:s kommun-breda widget, oförändrat läge där.
+    const bidragId = cell.dataset.bidragId || undefined;
 
     // 1f — redan bevakad (den här webbläsaren har skickat in en begäran
-    // för kommunen förut): visa det tillståndet direkt, ingen knapp.
-    if (kommunSlug && bevakade.has(kommunSlug)) {
+    // för just DET HÄR (kommun[, bidrag])-paret förut): visa det
+    // tillståndet direkt, ingen knapp.
+    if (kommunSlug && bevakade.has(bevakadNyckel(kommunSlug, bidragId))) {
       visaBevakasBadge(cell);
       return;
     }
@@ -107,13 +122,14 @@ export function initBevakaWidgets(): void {
         felText?.setAttribute('hidden', '');
         const data = new FormData(form);
         data.set('kommun', kommunSlug);
+        if (bidragId) data.set('bidrag', bidragId);
 
         try {
           const res = await fetch('/api/prenumerera-json', { method: 'POST', body: data });
           const json = await res.json();
           if (!res.ok || !json.ok) throw new Error('svar ej ok');
 
-          if (kommunSlug) markeraKommunBevakad(kommunSlug);
+          if (kommunSlug) markeraBevakad(kommunSlug, bidragId);
           const kvitto = document.createElement('p');
           kvitto.className = 'bevaka-rad-kvitto';
           kvitto.textContent = json.alreadyConfirmed ? BEVAKNING.kvittoRubrik : BEVAKNING.kvittoText;
