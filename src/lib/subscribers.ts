@@ -45,6 +45,15 @@ export interface Subscriber {
   kommuner: string[];
   registrerad: string; // ISO-datum
   confirmed: boolean;
+  // P3.1b (Jacob 2026-08-05): bevakning på ENSKILT bidrag, inte hela
+  // kommunen — additivt vid sidan av kommuner (aldrig en ersättning).
+  // bidragId är bara unikt INOM en kommun (kommuner.ts validateAllKommunFiles
+  // kontrollerar det, inget globalt kontrakt) — varje post måste därför
+  // bära sin kommunSlug, annars går den inte att slå upp entydigt i
+  // paminnelser.ts. Skapas av addBidragBevakning, LÄGGER ALDRIG till i
+  // kommuner — en radbevakning ska bara ge påminnelser för DET bidraget,
+  // inte tyst utökas till kommunens hela lista.
+  bidrag?: { kommunSlug: string; bidragId: string }[];
   // Giltighetskollen (SPRINT_COPY.ts §GILTIGHETSKOLL) — kommunSlug → senaste
   // årsmötesdatum, sparat när prenumeranten ber om en giltighetspåminnelse.
   // Bara de kommuner som faktiskt frågats om finns med som nycklar.
@@ -77,6 +86,45 @@ export async function addPendingSubscriber(
     kommuner: existing ? Array.from(new Set([...existing.kommuner, ...kommuner])) : kommuner,
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
+    bidrag: existing?.bidrag,
+    giltighetArsmoten: existing?.giltighetArsmoten,
+  };
+  await redis.set(recordKey(normalized), record);
+  await redis.sadd(INDEX_KEY, normalized);
+
+  if (record.confirmed) {
+    return { token: null, alreadyConfirmed: true };
+  }
+
+  const token = crypto.randomUUID();
+  await redis.set(tokenKey(token), normalized, { ex: TOKEN_TTL_SEKUNDER });
+  return { token, alreadyConfirmed: false };
+}
+
+/**
+ * P3.1b (Jacob 2026-08-05): bevakning på ENSKILT bidrag — radens "Börja
+ * bevaka" i deadlinekalendern (bevakaKlient.ts). Lägger ALDRIG till i
+ * kommuner — se Subscriber.bidrag-kommentaren för varför. Dedupar på
+ * (kommunSlug, bidragId), samma "läs-och-mergea"-mönster som övriga
+ * writers i den här filen.
+ */
+export async function addBidragBevakning(
+  email: string,
+  kommunSlug: string,
+  bidragId: string
+): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
+  const normalized = email.toLowerCase();
+  const existing = await getSubscriber(normalized);
+
+  const befintligaBidrag = existing?.bidrag ?? [];
+  const redanBevakat = befintligaBidrag.some((b) => b.kommunSlug === kommunSlug && b.bidragId === bidragId);
+
+  const record: Subscriber = {
+    email: normalized,
+    kommuner: existing?.kommuner ?? [],
+    registrerad: existing?.registrerad ?? new Date().toISOString(),
+    confirmed: existing?.confirmed ?? false,
+    bidrag: redanBevakat ? befintligaBidrag : [...befintligaBidrag, { kommunSlug, bidragId }],
     giltighetArsmoten: existing?.giltighetArsmoten,
   };
   await redis.set(recordKey(normalized), record);
@@ -127,6 +175,7 @@ export async function addGiltighetBevakning(
     kommuner: existing ? Array.from(new Set([...existing.kommuner, kommunSlug])) : [kommunSlug],
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
+    bidrag: existing?.bidrag,
     giltighetArsmoten: { ...(existing?.giltighetArsmoten ?? {}), [kommunSlug]: arsmotesdatum },
   };
   await redis.set(recordKey(normalized), record);
@@ -159,6 +208,7 @@ export async function addForeningsprofil(
     kommuner: existing?.kommuner ?? [],
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
+    bidrag: existing?.bidrag,
     giltighetArsmoten: existing?.giltighetArsmoten,
     foreningsprofil: profil,
   };
@@ -208,11 +258,17 @@ export async function flyttaSubscriber(oldEmail: string, newEmail: string): Prom
   const normalizedNew = newEmail.toLowerCase();
   const befintligNy = await getSubscriber(normalizedNew);
 
+  const ihopslagnaBidrag = [...(gammal.bidrag ?? []), ...(befintligNy?.bidrag ?? [])];
+  const unikaBidrag = ihopslagnaBidrag.filter(
+    (b, i) => ihopslagnaBidrag.findIndex((b2) => b2.kommunSlug === b.kommunSlug && b2.bidragId === b.bidragId) === i
+  );
+
   const record: Subscriber = {
     email: normalizedNew,
     kommuner: Array.from(new Set([...gammal.kommuner, ...(befintligNy?.kommuner ?? [])])),
     registrerad: befintligNy?.registrerad ?? gammal.registrerad,
     confirmed: befintligNy?.confirmed ?? gammal.confirmed,
+    bidrag: unikaBidrag.length > 0 ? unikaBidrag : undefined,
     giltighetArsmoten: { ...(gammal.giltighetArsmoten ?? {}), ...(befintligNy?.giltighetArsmoten ?? {}) },
     foreningsprofil: befintligNy?.foreningsprofil ?? gammal.foreningsprofil,
   };
