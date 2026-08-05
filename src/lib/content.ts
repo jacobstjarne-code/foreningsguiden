@@ -821,7 +821,7 @@ export const VANTELISTA = {
   // allt utkastarbete är också lättare att kommunicera än en trappa.
   // Talet TESTAS via väntelistknappen (149/249/395 mot klickfrekvens) —
   // det är inte låst, men det ska vara SAMMA överallt tills testet svarat.
-  prisRad: '249 kr när utkastet ligger klart — inget nu',
+  prisRad: '249 kr när underlaget ligger klart — inget nu',
   // Visas bara när countSubscribersByKommun(slug) >= 3 (subscribers.ts,
   // bevakningKlient.ts BEVAKNING_GOLV). Code fyller {antal}.
   socialProof: '{antal} föreningar i {kommun} bevakar redan sina deadlines här.',
@@ -843,11 +843,11 @@ export const VANTELISTA = {
   luckorRubrik: 'Det här fyller ni själva',
   luckorTemplate: 'För {bidragsnamn} är det {luckor}. Allt annat skriver vi.',
   luckorInga: 'För {bidragsnamn} behöver ni inte fylla i något — vi har allt vi behöver från era svar.',
-  cta: 'Reservera plats nu. Ni betalar först när utkastet ligger klart att läsa — och behåller det till nästa år.',
+  cta: 'Reservera plats nu. Ni betalar först när underlaget ligger klart att läsa — och behåller det till nästa år.',
   epostLabel: 'E-postadress',
   knappVantelista: 'Reservera vår plats',
   kvitto: 'Klart — er plats är reserverad. Vi hör av oss så snart utkastet för {kommun} går att skapa. Under tiden fyller vi på er föreningsprofil varje gång ni använder guiden, så det mesta redan är på plats när ni sätter igång.',
-  ansvar: 'Vi ser till att utkastet bemöter kommunens krav. Ansökan lämnar ni in själva och beslutet fattar kommunen — vi lovar inte bifall, men vi ser till att ni inte faller på formalia.',
+  ansvar: 'Ansökan lämnar ni in själva och beslutet fattar kommunen. Vi lovar inte bifall.',
 };
 
 /**
