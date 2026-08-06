@@ -17,7 +17,6 @@ import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
 import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
 import { harvestBilagor } from '../lib/kopDokument';
 import UrgencyChip from './UrgencyChip.astro';
-import RegistreringsHjalp from './RegistreringsHjalp.astro';
 import VantelistaFlode from './VantelistaFlode.astro';
 
 // FIX 2026-07-31 (Jacob, egen granskning): station 5 visade väntelistan
@@ -180,7 +179,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 
   <!-- STATION 2 — liten, skarp: brådska -->
   <div class="progression__station">
-    <span class="progression__marker">2</span>
+    <span class="progression__marker progression__marker--accent">2</span>
     <div class="progression__eyebrow">Steg 2</div>
     <h3>{VAGLEDNING.station2.rubrik}</h3>
     <div class="progression__urgent-row" data-progression-urgent-row hidden={!station2Alla}>
@@ -194,6 +193,27 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
       <a href={station2Alla?.href ?? '#'} data-progression-urgent-lank>Öppna →</a>
     </div>
     <p class="progression__lede" data-progression-urgent-empty hidden={!!station2Alla}>{VAGLEDNING.station2.introUtanDeadline}</p>
+    {/* R5.1 (OMFORDELA_TEXTMASSAN.md runda 5): "hela listan" fällbar —
+       samma underlag som station 4 (sortedBidrag), bara datumsatta
+       bidrag, ett kompakt namn+datum per rad. Icke filterreaktiv med
+       avsikt (station 4 äger det filtrerade, kanoniska läget) — det här
+       är en snabb överblick utan att lämna station 2. */}
+    {sortedBidrag.filter((e) => e.dateISO).length > 1 && (
+      <details class="progression__disclosure">
+        <summary class="progression__slutsats">
+          <span class="progression__slutsats-text">Visa alla datumsatta bidrag</span>
+          <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+        </summary>
+        <ul class="progression__fallbart progression__bradska-lista">
+          {sortedBidrag.filter((e) => e.dateISO).map(({ bidrag, dateISO }) => (
+            <li>
+              <a href={`#bidrag-${bidrag.id}`}>{bidrag.namn}</a>
+              <span class="progression__bradska-lista__datum">{formatDate(dateISO!)}</span>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
   </div>
 
   <!-- STATION 3 — attention-ton: förutsättningar -->
@@ -205,7 +225,17 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
       <p class="progression__lede">{VAGLEDNING.station3.inget.replace('{kommun}', kommun.kommun)}</p>
     ) : (
       <>
-        <p class="progression__lede">{VAGLEDNING.station3.intro.replace('{kommun}', kommun.kommun)}</p>
+        {/* R5.1+R5.5 (OMFORDELA_TEXTMASSAN.md runda 5): synlig slutsatsrad
+           (förkravets namn — samma text som redan var
+           .progression__forutsattning-titel) + fällbar prosa. Draget
+           (attention-fältet nedan) ligger UTANFÖR fällningen — det är
+           stationens enda framträdande knapp och ska alltid synas. */}
+        <details class="progression__disclosure">
+          <summary class="progression__slutsats">
+            <span class="progression__slutsats-text">{forsta.vad}</span>
+            <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+          </summary>
+        <p class="progression__lede progression__fallbart">{VAGLEDNING.station3.intro.replace('{kommun}', kommun.kommun)}</p>
         <div class="progression__forutsattningar">
           <div class="progression__forutsattning">
             <span class="progression__forutsattning-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg></span>
@@ -287,18 +317,38 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
             </ul>
           </details>
         )}
-        <RegistreringsHjalp kommunSlug={kommun.kommun_slug} />
+        </details>
+        {/* R5.5 (OMFORDELA_TEXTMASSAN.md runda 5, avvikelse mot Designs
+           tabell): "köp 249 kr" ersatt av vägledning tills beslut A
+           (registreringschecklistan som produkt) är fattat — sidans
+           enda framträdande knapp får inte peka mot något som inte går
+           att köpa. Länkar till kommunens EGEN källa, inte /registrera/.
+           R5.3: detta är sidans ENDA färgade drag — station 5:s knappar
+           är därför nedtonade (se längre ner). */}
+        <div class="progression__attention-cta">
+          <a href={kommun.kalla_url} class="btn-primary progression__attention-cta__knapp" target="_blank" rel="noopener">
+            {VAGLEDNING.station3.attentionKnappMall.replace('{kommun}', kommun.kommun)}
+          </a>
+        </div>
       </>
     )}
   </div>
 
   <!-- STATION 4 — navigerbar lista -->
   <div class="progression__station" id="sista-ansokningsdatum">
-    <span class="progression__marker">4</span>
+    <span class="progression__marker progression__marker--accent">4</span>
     <div class="progression__eyebrow">Steg 4</div>
     <h3>{VAGLEDNING.station4.rubrik}</h3>
+    {/* R5.7 (OMFORDELA_TEXTMASSAN.md runda 5): de TVÅ raderna med kortast
+       tid kvar ligger alltid öppna, oavsett position i listan — sortedBidrag
+       är redan sorterad kronologiskt (dateISO stigande, odaterade sist), så
+       de två första ÄR "kortast tid kvar". Samma <li data-kategori>-form i
+       båda listorna (huvud + fällbar) håller kategorifiltret (JS längre
+       ner, querySelectorAll('.progression__list [data-kategori]')) fungerande
+       oförändrat — det bryr sig bara om att elementen matchar selektorn,
+       inte var i DOM:en de sitter. */}
     <ul class="progression__list">
-      {sortedBidrag.map(({ bidrag, dateISO }) => (
+      {sortedBidrag.slice(0, 2).map(({ bidrag, dateISO }) => (
         <li data-kategori={bidrag.kategori.join(' ')}>
           <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
             <div class="progression__list-row__text">
@@ -313,38 +363,83 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
                 ></span>
                 {bidrag.namn}
               </div>
-              <div class="progression__list-row__meta">
-                {bidrag.belopp ?? 'Belopp ej publikt'} · {dateISO
-                  ? `sista dag ${formatDate(dateISO)}`
-                  : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
-                  : bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan'}
-              </div>
             </div>
-            {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+            {/* R5.2: belopp/datum högerställt i mono, radnivå. */}
+            <div class="progression__list-row__tal">
+              {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+              <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+              <span class="progression__list-row__datum">{dateISO
+                ? formatDate(dateISO)
+                : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
+                : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan'}</span>
+            </div>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
           </a>
         </li>
       ))}
     </ul>
+    {sortedBidrag.length > 2 && (
+      <details class="progression__disclosure">
+        <summary class="progression__slutsats">
+          <span class="progression__slutsats-text">Visa alla {sortedBidrag.length} ↓</span>
+          <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+        </summary>
+        <ul class="progression__list progression__fallbart">
+          {sortedBidrag.slice(2).map(({ bidrag, dateISO }) => (
+            <li data-kategori={bidrag.kategori.join(' ')}>
+              <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
+                <div class="progression__list-row__text">
+                  <div class="progression__list-row__namn">
+                    <span
+                      class={[bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast') ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'}
+                      aria-hidden="true"
+                    ></span>
+                    {bidrag.namn}
+                  </div>
+                </div>
+                <div class="progression__list-row__tal">
+                  {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+                  <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+                  <span class="progression__list-row__datum">{dateISO
+                    ? formatDate(dateISO)
+                    : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
+                    : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan'}</span>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
     <p class="progression__hidden-note" data-hidden-note hidden></p>
   </div>
 
   <!-- STATION 5 — mål -->
   <div class="progression__station progression__station--5">
-    <span class="progression__marker progression__marker--goal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
-    </span>
+    {/* R5.1(c): "steg 5 outline = vägens slut" — numrerad som övriga
+       steg, inte längre en flagg-ikon. */}
+    <span class="progression__marker progression__marker--goal">5</span>
     <div class="progression__goal">
       <div class="progression__eyebrow" style="color: rgba(255,255,255,.85);">Steg 5 · vägens slut</div>
       <h3>{VAGLEDNING.station5.rubrik}</h3>
-      <p class="progression__lede" style="color: rgba(255,255,255,.92);">{VAGLEDNING.station5.intro}</p>
+      {/* R5.4 (avvikelse mot Designs tabell): "Vi skriver utkastet åt
+         er" är borttaget ur produktion sedan P1.2/P1.5 (2026-08-04/05),
+         "utkast" bytt mot "underlag" på hela ytan. Synlig rad återanvänder
+         VAGLEDNING.station5.ansvar ordagrant — samma text som redan låg
+         som en tyst rad längst ner, nu stationens ledande besked i
+         stället för intro-frågan. */}
+      <p class="progression__lede" style="color: rgba(255,255,255,.92);">{VAGLEDNING.station5.ansvar}</p>
+      {/* R5.3: station 3 äger sidans enda färgade drag — kopruta-knappen
+         och VantelistaFlodes knapp är därför tysta (fg-btn--ghost), inte
+         btn-primary. */}
       <div class="progression__kopruta" data-progression-kopruta hidden={!station5Alla}>
         <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
         <p data-progression-kopruta-beskrivning>{station5Alla?.beskrivning}</p>
         <p>{KOPRUTA.leverans}</p>
         <p>{kopRutaPrisOchKvitto}</p>
         <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
-        <a href={station5Alla?.href ?? '#'} class="btn-primary progression__goal-cta" data-progression-kopruta-cta>
+        <a href={station5Alla?.href ?? '#'} class="fg-btn--ghost progression__goal-cta" data-progression-kopruta-cta>
           Lås upp hela underlaget — {prisKr} kr
         </a>
       </div>
@@ -357,7 +452,6 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
           </div>
         );
       })}
-      <p class="progression__goal-ansvar">{VAGLEDNING.station5.ansvar}</p>
     </div>
   </div>
 

@@ -606,13 +606,24 @@ main {
 
 /* ---- FAQ ---- */
 
-.faq-list dt {
-  font-weight: var(--fg-weight-bold);
-  margin-top: var(--fg-space-5);
+/* R5.1(d) (OMFORDELA_TEXTMASSAN.md runda 5, 2026-08-05): dl/dt/dd bytt
+   mot details/summary — samma disclosure som stationerna
+   (.progression__slutsats/.progression__fallbart, återanvända rakt av). */
+.faq-item {
+  border-top: var(--fg-border-inner) solid var(--fg-border);
 }
 
-.faq-list dd {
-  margin: var(--fg-space-1) 0 0 0;
+.faq-item:last-child {
+  border-bottom: var(--fg-border-inner) solid var(--fg-border);
+}
+
+.faq-item__fraga {
+  padding: var(--fg-space-4) 0;
+  font-weight: var(--fg-weight-bold);
+}
+
+.faq-item__svar {
+  padding-bottom: var(--fg-space-4);
   color: var(--fg-ink-muted);
 }
 
@@ -1108,17 +1119,24 @@ main {
   color: var(--fg-on-accent);
 }
 
+/* R5.1(c): numrerad cirkelmarkör fylld accent på ALLA stationer — även
+   station 3, som tidigare var fylld attention. Attention-tonen hör nu
+   bara till stationens DRAG (R5.5:s knapp), inte till stegmarkören —
+   markören är ren vägvisning, inte en varningssignal. */
 .progression__marker--attention {
-  background: var(--fg-attention);
+  background: var(--fg-accent);
   color: var(--fg-on-accent);
 }
 
+/* R5.1(c): "steg 5 outline = vägens slut" — enda outline-markören,
+   signalerar mål utan att fylla, samma sifferform som övriga steg. */
 .progression__marker--goal {
   left: -57px;
   width: 46px;
   height: 46px;
-  background: var(--fg-ink);
-  color: var(--fg-on-accent);
+  background: var(--fg-surface);
+  border-color: var(--fg-accent);
+  color: var(--fg-accent);
 }
 
 .progression__eyebrow {
@@ -1212,6 +1230,72 @@ main {
   font-family: var(--fg-font-mono);
   font-size: var(--fg-text-label);
   color: var(--fg-ink-muted);
+}
+
+/* R5.1 (OMFORDELA_TEXTMASSAN.md, runda 5, 2026-08-05): disclosure på
+   stationerna — samma <details>/<summary>-mönster som redan fanns för
+   gap-fälten (.progression__bilagor) i runda 4, nu lagt på hela
+   stationer. Krav (a): all text stannar i DOM, viks bara visuellt. Krav
+   (b): ingen JS krävs för att innehållet ska finnas — native <details>.
+   Krav (c): radhöjd ≥ 46px på varje tappbar rad. */
+.progression__disclosure {
+  margin-top: var(--fg-space-2);
+}
+
+.progression__slutsats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fg-space-4);
+  min-height: 46px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.progression__slutsats::-webkit-details-marker {
+  display: none;
+}
+
+.progression__slutsats-text {
+  color: var(--fg-ink);
+  font-size: var(--fg-text-body-lg);
+}
+
+.progression__slutsats-chevron {
+  flex-shrink: 0;
+  color: var(--fg-ink-muted);
+  transition: transform 0.15s ease;
+}
+
+.progression__disclosure[open] .progression__slutsats-chevron {
+  transform: rotate(90deg);
+}
+
+.progression__fallbart {
+  margin-top: var(--fg-space-4);
+}
+
+/* R5.5 (OMFORDELA_TEXTMASSAN.md runda 5): stationens enda framträdande
+   knapp, som vägledning ut till kommunens egen källa — inte ett köp.
+   Attention-fält, fylld attention-knapp (motsvarigheten till .btn-primary
+   men i --fg-attention i stället för --fg-accent, ingen sådan klass
+   fanns sen tidigare). */
+.progression__attention-cta {
+  background: color-mix(in srgb, var(--fg-attention) 10%, var(--fg-surface));
+  border: var(--fg-border-inner) solid var(--fg-attention);
+  border-radius: var(--fg-radius-control);
+  padding: var(--fg-space-5);
+  margin-top: var(--fg-space-4);
+}
+
+.progression__attention-cta__knapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  width: 100%;
+  background: var(--fg-attention);
+  font-size: var(--fg-text-body-lg);
 }
 
 .progression__forutsattningar {
@@ -1338,6 +1422,7 @@ main {
   display: flex;
   align-items: center;
   gap: var(--fg-space-4);
+  min-height: 46px;
   background: var(--fg-surface);
   border: 2px solid var(--fg-border);
   border-radius: var(--fg-radius-control);
@@ -1357,9 +1442,27 @@ main {
   font-weight: var(--fg-weight-bold);
 }
 
-.progression__list-row__meta {
+/* R5.2 (OMFORDELA_TEXTMASSAN.md runda 5): belopp/datum högerställt i
+   mono på radnivå — samma mönster som deadlinekalendern
+   (.deadline-table__datum), så formen känns igen mellan ytorna. */
+.progression__list-row__tal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: none;
+  text-align: right;
+}
+
+.progression__list-row__belopp {
   font-family: var(--fg-font-mono);
   font-size: var(--fg-text-label);
+  color: var(--fg-ink);
+}
+
+.progression__list-row__datum {
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-mono);
   color: var(--fg-ink-muted);
 }
 
@@ -1403,11 +1506,6 @@ main {
   color: var(--fg-on-accent);
 }
 
-.progression__goal-ansvar {
-  margin: var(--fg-space-4) 0 0;
-  font-size: var(--fg-text-label);
-  color: rgba(255, 255, 255, 0.85);
-}
 
 /* ---- Köprutan (station 5) — FIX 2026-07-31, ersätter väntelistan.
    Samma kortbehandling som .vantelista__panel hade (ljus yta på den

@@ -35,7 +35,12 @@ const deadlineISO = earliestDeadlineISO(bidrag, today);
 const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
 ---
 <div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
-  <button type="button" class="btn-primary progression__goal-cta" data-vantelista-knapp data-utkastgenerator-byggd="false">
+  {/* R5.3 (OMFORDELA_TEXTMASSAN.md runda 5, 2026-08-05): station 3:s
+     attention-drag är sidans enda färgade knapp — den här (station 5:s
+     alltid synliga trigger) är tystad till fg-btn--ghost. Formulärets
+     egen submit-knapp längre ner (efter att panelen redan öppnats, ett
+     interaktionssteg bort) lämnad orörd. */}
+  <button type="button" class="fg-btn--ghost progression__goal-cta" data-vantelista-knapp data-utkastgenerator-byggd="false">
     {VAGLEDNING.station5.knapp} för {bidrag.namn}
   </button>
 

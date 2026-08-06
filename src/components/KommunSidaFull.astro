@@ -292,11 +292,19 @@ const webPageJsonLd = {
   {faqEntries.length > 0 && (
     <section>
       <h2>{faqRubrik}</h2>
-      <dl class="faq-list">
+      {/* R5.1(d) (OMFORDELA_TEXTMASSAN.md runda 5): "fråga som synlig
+         rad, svar fällt" — samma disclosure som stationerna. dl/dt/dd
+         bytt mot details/summary per fråga (JSON-LD nedan läser
+         fortfarande samma faqEntries-array, oberoende av vilken
+         markup som visar dem — svar-strängen är orörd, ren text). */}
+      <div class="faq-list">
         {faqEntries.map(({ fraga, svar, arDeadlineFraga }) => (
-          <>
-            <dt>{fraga}</dt>
-            <dd>
+          <details class="faq-item">
+            <summary class="progression__slutsats faq-item__fraga">
+              <span class="progression__slutsats-text">{fraga}</span>
+              <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+            </summary>
+            <div class="progression__fallbart faq-item__svar">
               {svar}
               {arDeadlineFraga && deadlinesammanfattningHarOlast && (
                 <p class="faq-list__olast">
@@ -304,10 +312,10 @@ const webPageJsonLd = {
                   {OLAST_MARK.rad}
                 </p>
               )}
-            </dd>
-          </>
+            </div>
+          </details>
         ))}
-      </dl>
+      </div>
     </section>
   )}
   {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}

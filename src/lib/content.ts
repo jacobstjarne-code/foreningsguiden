@@ -323,7 +323,11 @@ export const VAGLEDNING = {
 
   // Station 3 — Vad måste göras först? (varning → erbjudande)
   station3: {
-    rubrik: 'Det här stoppar de flesta — och det är det vi hjälper er med',
+    // R5.5 (OMFORDELA_TEXTMASSAN.md runda 5, 2026-08-05): "— och det är
+    // det vi hjälper er med" borttaget — samma överclaim-mönster som
+    // P1.2/P1.6, och stationens drag pekar nu ut ur sajten (kommunens
+    // egen källa), inte mot en tjänst vi levererar. Kort och sant kvar.
+    rubrik: 'Det här stoppar de flesta',
     intro: 'Innan ni kan söka något bidrag i {kommun} måste föreningen vara godkänd som bidragsberättigad. Det är ett eget ärende med egen handläggningstid, och det är den vanligaste anledningen att en ansökan inte går igenom. Är det ordnat är ni förbi det som fäller flest.',
     ledtidOkand: '{kommun} anger inte hur lång tid godkännandet tar, men hinner det inte handläggas före bidragets sista datum blir ansökan inte behandlad. Vänta inte med det här.',
     ledtidKand: 'Räkna med {ledtid} dagars handläggning — så börja här, inte med själva ansökan.',
@@ -336,6 +340,12 @@ export const VAGLEDNING = {
     // beskrivningen som prosa precis som i dag, ingen ny etikett syns.
     checklistaLabel: 'Detta ska ni ha',
     bilagorLabel: 'Vad kommunen vill se bifogat',
+    // R5.5: stationens drag som vägledning, inte köp — registrerings-
+    // checklistan (produkt) kan strykas (beslut A, ej fattat). Länkar till
+    // kommunens EGEN källa (kommun.kalla_url), inte /registrera/. Byts
+    // tillbaka till en produktlänk den dag beslut A landar — bara
+    // destinationen, inte formen (Jacobs egen instruktion, ordagrant).
+    attentionKnappMall: 'Så blir ni godkända i {kommun}',
   },
 
   // Station 4 — Vad kan ni söka nu?
