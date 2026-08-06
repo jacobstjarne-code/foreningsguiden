@@ -30,7 +30,15 @@ export interface Foreningsprofil {
   uppdaterad: string; // ISO
 }
 
-const STORAGE_KEY = 'foreningsguiden:foreningsprofil:v1';
+// B3.8 (SPEC B3, Jacob 2026-08-06 — "den viktigaste punkten"): v1 → v2.
+// En sparad v1-profil bar fyra svar (kommun, verksamhet, storlek, sökt)
+// och tolkades efter B3 av en tratt med tre frågor (storlek borttagen) —
+// en gammal profil gav "0 bidrag" i Karlshamn, felet som startade hela
+// B3-granskningen. Regel: varje gång matchningsreglerna ändras bumpas
+// nyckeln, annars sitter alla som testat tidigare kvar med ett tyst
+// felaktigt besked. Ingen migrering av v1-data — en gammal profil läses
+// helt enkelt inte, samma som att aldrig ha svarat.
+const STORAGE_KEY = 'foreningsguiden:foreningsprofil:v2';
 
 const TOM_PROFIL: Foreningsprofil = {
   kommunSlug: null,
