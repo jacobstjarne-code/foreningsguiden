@@ -339,9 +339,36 @@ def cmd_batch_verify(args: argparse.Namespace) -> int:
     outside = sorted(changed_municipalities - expected_files)
     missing = sorted(expected_files - changed_municipalities)
 
+    # Ett block kan verifieras i två lägen:
+    # 1. före commit: kommunfilerna syns i lokal Git-diff,
+    # 2. efter commit: arbetskopian är ren, men APPLY_AUDIT visar exakt
+    #    vilka filer som applicerades.
+    audit_files: set[str] = set()
+    committed_mode = False
+
+    if args.block.isdigit():
+        audit_path = root / f"BLOCK_{int(args.block):02d}_APPLY_AUDIT.json"
+        if audit_path.exists():
+            try:
+                audit = json.loads(audit_path.read_text(encoding="utf-8"))
+                audit_files = set(audit.get("changed_files") or [])
+            except Exception as exc:
+                raise FgError(f"Ogiltig auditfil {audit_path.name}: {exc}") from exc
+
+    if not changed_municipalities and audit_files:
+        committed_mode = audit_files == expected_files
+        if committed_mode:
+            missing = []
+        else:
+            missing = sorted(expected_files - audit_files)
+            outside = sorted(audit_files - expected_files)
+
+    effective_changed = audit_files if committed_mode else changed_municipalities
+
     print(f"Block: {args.block}")
     print(f"Förväntade kommuner: {len(slugs)}")
-    print(f"Ändrade kommunfiler i blocket: {len(changed_municipalities & expected_files)}")
+    print(f"Verifieringsläge: {'audit/committat' if committed_mode else 'arbetskopia'}")
+    print(f"Ändrade kommunfiler i blocket: {len(effective_changed & expected_files)}")
     print(f"Ändrade kommunfiler utanför blocket: {len(outside)}")
     print(f"Kommuner utan ändring: {len(missing)}")
 
@@ -522,6 +549,8 @@ PROPOSAL_FIELDS = {
     "kraver_registrering",
     "min_medlemmar",
     "sate_i_kommunen",
+    "malgrupp",
+    "senast_verifierad",
 }
 
 
