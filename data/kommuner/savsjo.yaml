@@ -20,13 +20,17 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Ansökan senast sex veckor före arrangemanget
+  - Ansökan lämnas via föreningsportalen senast sex veckor innan arrangemanget genomförs
+  - Arrangemanget ska vända sig till fler än föreningens egna medlemmar och ligga utanför den normala verksamheten
+  - Organisationen ansvarar själv för eventuella tillstånd från polis och andra myndigheter
+  - Arrangemanget ska marknadsföras och det ska framgå att det fått stöd av Sävsjö kommun
+  - Redovisning ska lämnas senast två månader efter avslutat arrangemang
   belopp: Upp till 15 000 kronor för vinstgivande arrangemang med stort mervärde
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: Ansökan ska lämnas senast sex veckor före arrangemanget.
 - id: savsjo-hyresbidrag
@@ -38,13 +42,17 @@ bidrag:
     typ: fasta
     datum:
     - 03-01
-  krav: []
+  krav:
+  - Bidrag utgår ej för hyra av kommunalt ägda lokaler, idrotts- och/eller fritidsanläggningar
+  - Bidrag utgår ej för hyreskostnader vid entrébelagda tävlingar, matcher eller andra entrébelagda arrangemang
+  - Kontraktshandlingar bifogas ansökan vid första ansökningstillfället och vid förändrade förutsättningar
   belopp: 100 kronor per bidragsberättigad medlem, max 80 procent av kostnaden och 15 000 kronor
-  sen_ansokan: Ej angivet i källan
+  sen_ansokan: För sent inkommen ansökan minskar beviljat bidrag med 25 procent. Ansökan inkommen 1 månad efter sista datum
+    minskar beviljat bidrag med 50 procent. Ansökan inkommen 3 månader efter sista datum hanteras ej.
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: null
 - id: savsjo-anlaggningsbidrag
@@ -56,13 +64,19 @@ bidrag:
     typ: fasta
     datum:
     - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Anläggningen ska vara tillgänglig för allmänheten, skolor, andra ideella föreningar och organisationer mot skäliga villkor
+  - Bidraget baseras på föreningens driftskostnader (uppvärmning, vatten/el, sophämtning, försäkring) per 31 december föregående
+    år
+  - Bidraget kan reduceras om anläggningen inte används regelbundet eller om redovisade kostnader understiger schablonen
+  belopp: Baseras på föreningens driftskostnader (uppvärmning, vatten/el, sophämtning, försäkring av fastigheten) enligt schablon
+    för föregående kalenderår
+  sen_ansokan: För sent inkommen ansökan minskar beviljat bidrag med 25 procent. Ansökan inkommen 1 månad efter sista datum
+    minskar beviljat bidrag med 50 procent. Ansökan inkommen 3 månader efter sista datum hanteras ej.
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: null
 - id: savsjo-investeringsbidrag
@@ -74,13 +88,17 @@ bidrag:
     typ: fasta
     datum:
     - 03-01
-  krav: []
+    - 09-01
+  krav:
+  - Arbetet eller inköpen får inte påbörjas innan beslut om bidrag har fattats
+  - Investeringen ska ha en hållbarhet på minst 3 år
+  - Ansökningar över 50 000 kronor kan tas upp för särskild prövning
   belopp: Upp till 60 procent av investeringskostnaden
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: null
 - id: savsjo-aktivitetsstod
@@ -98,11 +116,12 @@ bidrag:
   - Minst fem deltagare
   - Aktiviteten ska pågå minst 45 minuter
   belopp: null
-  sen_ansokan: Ej angivet i källan
+  sen_ansokan: För sent inkommen ansökan minskar beviljat bidrag med 25 procent. Ansökan inkommen 1 månad efter sista datum
+    minskar beviljat bidrag med 50 procent. Ansökan inkommen 3 månader efter sista datum hanteras ej.
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: För sent inkommen ansökan reduceras enligt kommunens trappmodell.
 - id: savsjo-lovsbidrag
@@ -111,20 +130,23 @@ bidrag:
   - ovrig
   malgrupp: Aktiviteter för barn och unga 6–15 år
   deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-    - 09-01
+    typ: okand
+    datum: []
   krav:
-  - Aktiviteten ska genomföras och redovisas under året
+  - Aktiviteten ska vara kostnadsfri eller endast kosta en symbolisk summa
+  - Ska rikta sig till barn och ungdomar 6–15 år
+  - Ska genomföras utöver ordinarie verksamhet eller förstärka/utöka befintliga aktiviteter
+  - Ingen behovsprövning får göras av deltagande barn
+  - Redovisning av genomförda aktiviteter ska lämnas efter avslutat lov
   belopp: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  deadline_status: okand
+  krav_status: kontrollast
   krav_fullstandiga: null
-  anteckning: null
+  anteckning: Sista ansökningsdatum för respektive lovperiod (sportlov, påsklov, höstlov) anges i bidragsportalen och specificeras
+    inte på denna sida.
 - id: savsjo-sarskild-provning
   namn: Särskild prövning
   kategori:
@@ -139,8 +161,8 @@ bidrag:
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: null
 forutsattningar:
