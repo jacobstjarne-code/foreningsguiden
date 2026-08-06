@@ -11,12 +11,16 @@
 // pill "öppen för ansökan" (inget öppningsdatum i schemat att räkna mot),
 // Bevaka-knapp (bevakningsflödet är på is, se statusrapport).
 import type { Bidrag } from '../lib/kommuner';
-import { KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText } from '../lib/kommuner';
+import {
+  KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText,
+  earliestDeadlineISO, daysUntil, getUrgency, todayISO,
+} from '../lib/kommuner';
 import { OLAST_MARK } from '../lib/content';
 import VerificationStamp from './VerificationStamp.astro';
 import VoidMark from './VoidMark.astro';
 import VoidState from './VoidState.astro';
 import RelativeDeadline from './RelativeDeadline.astro';
+import UrgencyChip from './UrgencyChip.astro';
 
 export interface Props {
   bidrag: Bidrag;
@@ -29,6 +33,18 @@ export interface Props {
 
 const { bidrag, verifierad, ansokningsUrl, kommunSlug, kommunNamn, giltighetStatus } = Astro.props;
 const datumFormaterat = formatDate(bidrag.senast_verifierad ?? verifierad);
+
+// R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): kortet är nu en
+// kollapsad rad, samma radmönster som station 4 (KommunProgression) —
+// namn, datum, belopp. today() lokalt hellre än en ny prop: samma
+// billiga, rena funktion som redan anropas överallt, ingen anropskedja
+// att ändra för en enda kommunSlug-scopad sida.
+const today = todayISO();
+const dateISO = earliestDeadlineISO(bidrag, today);
+const radDatumText = dateISO
+  ? formatDate(dateISO)
+  : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
+  : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan';
 
 // TILLSTANDET_OLAST.md (runda 4, "Vad Code behöver veta" §3): EN
 // reservation per kort, aldrig per fält. Beräknas över de tre fält som
@@ -56,7 +72,34 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
   avskaffat: 'Avskaffat av kommunen.',
 };
 ---
-<li class="bidrag-card fg-card" id={`bidrag-${bidrag.id}`}>
+<li class="bidrag-card fg-card">
+  {/* R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): kortet kollapsat
+     till en rad — samma radmönster som station 4 (progression__list-row,
+     återanvänd rakt av). Ankaret (id="bidrag-X") sitter nu på det
+     FÄLLBARA elementet, inte på <li>, per instruktion — länkarna från
+     station 2/4 (#bidrag-X) siktar alltså direkt på <details>, och
+     scriptet i botten öppnar den om den är fragmentmålet (initial load
+     + hashchange), utan att innehållet någonsin kräver JS för att
+     FINNAS — bara för att auto-fällas upp. */}
+  <details class="bidrag-card__disclosure" id={`bidrag-${bidrag.id}`} data-bidrag-disclosure>
+    <summary class="bidrag-card__rad">
+      <div class="progression__list-row__text">
+        <div class="progression__list-row__namn">
+          <span
+            class={harOlastFalt ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'}
+            aria-hidden="true"
+          ></span>
+          {bidrag.namn}
+        </div>
+      </div>
+      <div class="progression__list-row__tal">
+        {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+        <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+        <span class="progression__list-row__datum">{radDatumText}</span>
+      </div>
+      <svg class="bidrag-card__rad-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+    </summary>
+    <div class="bidrag-card__djup">
   <div class="kategori-tags">
     {bidrag.kategori.map((k) => (
       <span class="kategori-tag fg-tag">
@@ -67,8 +110,6 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
       </span>
     ))}
   </div>
-
-  <h3>{bidrag.namn}</h3>
 
   {/* TILLSTANDET_OLAST.md 4b, "Vad Code behöver veta" §3: EN reservation
       per kort — inte upprepad per fält. Streckad hål-markör i banderollen
@@ -235,4 +276,6 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
       {statusNotis[bidrag.status]}
     </p>
   )}
+    </div>
+  </details>
 </li>

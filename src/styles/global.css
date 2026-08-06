@@ -401,13 +401,52 @@ main {
   list-style: none;
 }
 
-/* .fg-card (tokens.css) ger skal, kant och accent-topplist. */
+/* .fg-card (tokens.css) ger skal, kant och accent-topplist. R5.8
+   (OMFORDELA_TEXTMASSAN.md, 2026-08-06): kortet är nu kollapsat till en
+   rad i viloläge — paddingen som satt på hela <li> flyttad till
+   .bidrag-card__djup (fällt innehåll) så den synliga raden kan gå
+   kant-i-kant med kortets egen ram, samma princip som station 4:s rader
+   gör INOM sin egen box (skillnaden här: boxen är redan .fg-card, ingen
+   dubbel inramning behövs). */
 .bidrag-card {
-  padding: var(--fg-card-padding);
+  padding: 0;
 }
 
-.bidrag-card h3 {
-  margin: 0 0 var(--fg-space-1) 0;
+.bidrag-card__disclosure {
+  display: block;
+}
+
+.bidrag-card__rad {
+  display: flex;
+  align-items: center;
+  gap: var(--fg-space-4);
+  min-height: 46px;
+  padding: var(--fg-card-padding);
+  cursor: pointer;
+  list-style: none;
+}
+
+.bidrag-card__rad::-webkit-details-marker {
+  display: none;
+}
+
+.bidrag-card__rad-chevron {
+  flex-shrink: 0;
+  color: var(--fg-ink-muted);
+  transition: transform 0.15s ease;
+}
+
+.bidrag-card__disclosure[open] .bidrag-card__rad {
+  border-bottom: var(--fg-border-inner) solid var(--fg-border);
+}
+
+.bidrag-card__disclosure[open] .bidrag-card__rad-chevron {
+  transform: rotate(90deg);
+}
+
+.bidrag-card__djup {
+  padding: var(--fg-card-padding);
+  padding-top: var(--fg-space-5);
 }
 
 .bidrag-card dl {

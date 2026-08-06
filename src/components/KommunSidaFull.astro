@@ -339,6 +339,22 @@ const webPageJsonLd = {
   }
 
   initFelrapportWidgets();
+
+  // R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): bidragskorten är
+  // kollapsade <details id="bidrag-X">. Länkar hit (station 2/4:s
+  // #bidrag-X-ankare) ska landa på ett ÖPPET kort, inte ett stängt —
+  // öppnar fragmentmålet om det är en <details>, både vid första
+  // sidladdning och vid ett senare klick (hashchange, samma-sidans-
+  // navigering byter aldrig sida så bara load räcker inte). Innehållet
+  // finns oförändrat i DOM:en utan detta — det här öppnar bara åt
+  // besökaren i stället för att kräva ett extra klick efter hoppet.
+  function oppnaFragmentmal() {
+    if (!location.hash) return;
+    const mal = document.querySelector(location.hash);
+    if (mal instanceof HTMLDetailsElement) mal.open = true;
+  }
+  oppnaFragmentmal();
+  window.addEventListener('hashchange', oppnaFragmentmal);
 </script>
 
 <style>
