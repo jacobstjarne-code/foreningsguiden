@@ -20,14 +20,19 @@ bidrag:
     datum:
     - 06-30
     - 12-31
-  krav: []
+  krav:
+  - För icke statsbidragsberättigad förening ska ansökan lämnas senast 30 juni för vårens aktivitetstillfällen respektive
+    senast 31 december för höstens tillfällen, tillsammans med kopia på närvarokort
+  - För statsbidragsberättigad förening ska ansökan lämnas senast en månad efter det att föreningen fått statsbidraget, tillsammans
+    med kopia på ansökan till Riksidrottsförbundet om LOK-stöd och kopia på beviljat statsbidrag (kontoutdrag)
+  - Aktivitetsbidrag utgår inte till studiecirklar
   belopp: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
   belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Statsbidragsberättigade föreningar söker inom en månad efter statligt beslut.
 - id: hofors-grundbidrag
   namn: Grundbidrag
@@ -36,17 +41,18 @@ bidrag:
   - kultur
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
+  krav:
+  - I ansökan ska föreningen ange antalet bidragsberättigade medlemmar
   belopp: 30 kronor per medlem 7–25 år
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  sen_ansokan: Ej angivet i källan
   kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan inom två månader efter årsmöte. Kontakta kommunen om ansökningsförfarandet
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: 'Relativ tidsfrist: två månader efter hållet årsmöte.'
 - id: hofors-drift-och-hyresbidrag
   namn: Drift- och hyresbidrag
   kategori:
@@ -58,14 +64,22 @@ bidrag:
     typ: fasta
     datum:
     - 10-31
-  krav: []
-  belopp: null
+  krav:
+  - Anläggningen/lokalen ska finnas i Hofors kommun eller dess omedelbara närhet
+  - Anläggningen/lokalen ska utnyttjas av invånare i Hofors kommun
+  - Bidrag utgår inte för anläggning/lokal som kommunen redan subventionerar genom exempelvis hyresnedsättning
+  - Medel till mindre investeringar, upp till 25 000 kronor enligt 2017 års bokföringsregler, kan sökas från driftbidraget
+  - Ansökan ska innehålla en beskrivning av föreningens framtidsplaner
+  - Med ansökan skickas verksamhetsberättelse, resultat- och balansräkning, budget och eventuell underhållsplan
+  belopp: 'Bidraget baseras på föreningens faktiska bidragsgrundande kostnader (för egen fastighet: räntor, försäkringar,
+    skatt, arrende, värme, vatten, sotning, sophämtning, vaktmästeri och underhåll; för hyrd lokal: grundhyra samt värme,
+    el och städning). Inget fast kronbelopp anges i källan.'
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
 - id: hofors-investeringsbidrag
   namn: Investeringsbidrag
@@ -77,14 +91,19 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Anläggningen/lokalen ska ligga i Hofors kommun eller dess omedelbara närhet och utnyttjas av medlemmar i Hofors kommun
+  - Bidraget avser investeringar över 25 000 kronor enligt 2017 års bokföringsregler på föreningens egen anläggning/lokal
+  - Ansökan ska innehålla investeringsplan, en beskrivning av föreningens framtidsplaner samt en investerings- och finansieringskalkyl
+  - Ansökan ska göras före investeringen genomförs
+  - Ansökan om bidrag för större investeringar ska lämnas i mycket god tid för att kunna behandlas i kommunens budgetberedning
   belopp: null
   sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
   kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
   belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kontakta kommunen om ansökningsförfarandet
 - id: hofors-ovrigt-bidrag
   namn: Övrigt bidrag
@@ -96,14 +115,19 @@ bidrag:
   deadlines:
     typ: lopande
     datum: []
-  krav: []
+  krav:
+  - Verksamheten/aktiviteten ska genomföras i Hofors kommun eller för dess invånare
+  - I ansökan ska framgå syfte och mål, om fler aktörer är med och finansierar samt föreningens framtidsplaner
+  - Med ansökan skickas verksamhetsberättelse, resultat- och balansräkning samt en ekonomisk kostnads- och intäktskalkyl för
+    det ansökan gäller
+  - Ansökan kan göras när som helst under året men ska lämnas i god tid innan det man söker bidrag för ska genomföras
   belopp: null
   sen_ansokan: Kontakta kommunen om ansökningsförfarandet
   kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
   belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: För ny förening, utveckling, arrangemang eller särskilda kostnader.
 forutsattningar:
 - id: hofors-registrering
