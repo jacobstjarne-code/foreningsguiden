@@ -26,12 +26,21 @@ export const TRATT = {
     senastAvlastRad: 'Varje bidrag visar när vi senast läste kommunens sida.',
   },
 
-  // ---- Löpande räknare (uppdateras efter varje svar) ----
+  // ---- Räknaren (SPEC B3, D-A, 2026-08-06) ----
+  // B3.2/B3.4: räknaren är kommunens TOTALSUMMA aktiva bidrag, satt vid
+  // kommunval, OFÖRÄNDRAD av de tre följande svaren — aldrig "matchar er
+  // förening" (den gamla trafffar/en/noll-modellen räknade matchKommun-
+  // resultatet, en personlig siffra B3 uttryckligen underkänner). Egen,
+  // skild komponent från förloppet (se stegbar-uppdelningen i skriptet).
   raknare: {
-    tom: 'Svara för att se vad ni matchar',
-    trafffar: '{antal} bidrag matchar er förening', // {antal} injiceras
-    en: '1 bidrag matchar er förening',
-    noll: 'Inga bidrag matchar ännu — men läs vidare, det kan bero på ett krav ni kan åtgärda',
+    // Innan kommun är vald (B3, "Vad Code behöver veta" §4) — raden
+    // står kvar med sin form, aldrig borttagen, bara tom.
+    tom: 'Välj kommun, så visar vi hur många bidrag som finns.',
+    mall: '{antal} kommunala bidrag i {kommun}',
+    mallEtt: '1 kommunalt bidrag i {kommun}',
+    // Beskedskärmens rubrikvariant — samma tal, en förklarande sats till
+    // (räknaren BLIR sidans rubrik där, B3 D-A "På beskedskärmen").
+    beskedTillagg: ' — ordnade efter vad ni svarat. Alla visas.',
   },
 
   // ---- Fråga 1: kommun ----
@@ -180,6 +189,37 @@ export const TRATT = {
       // B3 (SPRINT: Produkten, Opus/Fable 2026-07-31): "Hjälp oss registrera"
       // läst som svenska säger att HON hjälper OSS — bytt 2026-08-01.
       hjalpKnapp: 'Förbered vår registreringsansökan',
+    },
+
+    // SPEC B3 (Design, runda 6, 2026-08-06), D-B — trattens NYA
+    // beskedsmodell. Ersätter INTE kanSoka/behover/borjaHar ovan (de
+    // används fortfarande av förstasidans förhandsvisningskort och av
+    // registrera-sidan, oförändrat) — det här är en egen, parallell
+    // grupp-modell bara för trattens beskedskärm.
+    //
+    // "Vad Code behöver veta" §5: grupperna bär listan i ALLA tre
+    // sökt-lägena, byter aldrig struktur på ett svar. Bara blocket
+    // OVANFÖR listan skiljer sig (registrering nedan).
+    grupper: {
+      passar: 'Passar er verksamhet',
+      kanGalla: 'Kan gälla er ändå',
+    },
+    // Blocket ovanför listan, sokt=nej/vet inte (B3, "De tre sökt-lägena").
+    // sokt=ja: inget block, grupperna direkt (ingen copy behövs).
+    registrering: {
+      etikett: 'Börja här',
+      budskapNej: 'Ni svarade att ni inte sökt bidrag i {kommun} förut. Då börjar de flesta här — det är ett eget ärende, och det som fäller flest ansökningar när det hoppas över.',
+      knapp: 'Så blir ni godkända →',
+      // Rubrik+rad för listan under registreringssteget (bara sokt=nej) —
+      // "gruppinledning", inte ett tredje beskedsläge. Gränsen ligger i
+      // registreringssteget ovanför, inte på korten (vanlig ram, ingen
+      // attention/oxblod — se .tratt__bidrag, orört).
+      vantarRubrik: 'Det här väntar när ni är godkända',
+      vantarText: 'Inget är avslaget. Vi vet bara inte om ni är godkända än — så de ligger redo, inte stängda.',
+      // sokt=vet inte: kontrollfråga i stället för besked, + kommunens
+      // egen länk (VOID_MARK.kallaKnappMall-mönstret, samma "Läs på
+      // {host}" som redan används i den okartlagda gruppen ovan).
+      kontrollfraga: 'Är ni godkända som bidragsberättigade i {kommun}?',
     },
 
     // Avslutning — kopplingen till föreningsminnet

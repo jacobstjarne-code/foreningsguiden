@@ -21,7 +21,6 @@
 // tar en till valfri fråga för att justera.
 import Base from '../../layouts/Base.astro';
 import KommunValjare from '../../components/KommunValjare.astro';
-import RegistreringsHjalp from '../../components/RegistreringsHjalp.astro';
 import { loadKommuner } from '../../lib/kommuner';
 import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
@@ -34,13 +33,24 @@ const kommuner = loadKommuner();
       <p class="tratt__ingress">{TRATT.start.ingress}</p>
     </header>
 
-    <div class="tratt__stegbar" data-tratt-stegbar>
-      <div class="tratt__stegbar-rad">
-        <p class="tratt__raknare" data-tratt-raknare aria-live="polite">{TRATT.raknare.tom}</p>
-        <span class="tratt__kvittens" data-tratt-kvittens hidden aria-hidden="true"></span>
-      </div>
-      <span class="tratt__stegbar-progress"><span class="tratt__stegbar-fyllning" data-tratt-progress></span></span>
-      <span class="tratt__stegbar-label" data-tratt-steg-label></span>
+    {/* SPEC B3, D-A (Design, runda 6, 2026-08-06): förlopp och räknare
+       är två skilda komponenter, inte längre samma svarta monospace-
+       fält. Förloppet är CHROME (tre segment, tyst grå label,
+       kommunnamn i mono) och försvinner på beskedet — frågorna är
+       slut, det har inget jobb kvar. Räknaren är ett BESKED, egen rad
+       i sunken papperston, och tas ALDRIG bort (B3, "Vad Code behöver
+       veta" §4) — bara tom innan kommun är vald. */}
+    <p class="tratt__raknare-rad" data-tratt-raknare aria-live="polite">
+      <span class="tratt__raknare-tal" data-tratt-raknare-tal hidden></span>
+      <span data-tratt-raknare-text>{TRATT.raknare.tom}</span>
+    </p>
+
+    <div class="tratt__forlopp" data-tratt-forlopp>
+      <span class="tratt__forlopp-segment" data-tratt-segment></span>
+      <span class="tratt__forlopp-segment" data-tratt-segment></span>
+      <span class="tratt__forlopp-segment" data-tratt-segment></span>
+      <span class="tratt__forlopp-label" data-tratt-steg-label></span>
+      <span class="tratt__forlopp-kommun" data-tratt-forlopp-kommun></span>
     </div>
 
     <div class="tratt__layout">
@@ -69,28 +79,19 @@ const kommuner = loadKommuner();
           <button type="button" class="tratt__vidare" data-tratt-vidare>Vidare →</button>
         </div>
 
+        {/* B3.6 (SPEC B3, Jacob 2026-08-06): storleksfrågan borttagen ur
+           tratten helt — "Fyra frågor varav en utan verkan är sämre än
+           tre som alla gör något" (B3.4). Återinförs när kravdatan bär
+           medlemsgränser strukturerat brett. profil.storlek finns kvar i
+           Foreningsprofil (foreningsprofil.ts) och matchBidrag
+           (matching.ts, används av utkastGenerator/checkout/registrera —
+           OFÖRÄNDRAT där) — bara frågan här är borttagen, samma mönster
+           G7 redan satte för alder/verksamhetstid. sorteraForTratt
+           (matching.ts) — trattens EGNA, enklare sortering för
+           beskedskärmen — läser aldrig profil.storlek alls.
+           Flödet är nu tre frågor: kommun, verksamhet, sökt förut
+           (gaten, sist). */}
         <div class="tratt__fraga" data-tratt-steg="3" hidden>
-          <h2>{TRATT.fraga_storlek.fraga}</h2>
-          <p class="tratt__hjalp">{TRATT.fraga_storlek.hjalp}</p>
-          <div class="tratt__pillgrupp" data-tratt-fraga="storlek" role="group" aria-label={TRATT.fraga_storlek.fraga}>
-            {TRATT.fraga_storlek.alternativ.map((a) => (
-              <button type="button" class="tratt__pill" data-tratt-svar={a.id}>{a.etikett}</button>
-            ))}
-          </div>
-        </div>
-
-        {/* G7 (SPRINT: Huvudprocessen, Jacob 2026-08-02): ålder/verksamhetstid-
-           frågan skuren bort helt — min_verksamhetstid_manader är fältet
-           som fylls minst i datan, vilket gjorde frågan till en
-           avhoppspunkt som nästan aldrig gav en matchning. Storlek
-           behålls (min_medlemmar finns på riktigt, t.ex. Arvika: 10).
-           Flödet är nu fyra frågor: kommun, verksamhet, storlek, sökt
-           förut (gaten, sist — som i mocken). profil.alder finns kvar i
-           Foreningsprofil (foreningsprofil.ts) och matchBidrag (matching.ts)
-           — bara frågan borttagen, inte fältet. matchBidrag degraderar
-           redan korrekt när profil.alder är null (samma mönster som
-           sate_i_kommunen, ett fält ingen fråga samlar in). */}
-        <div class="tratt__fraga" data-tratt-steg="4" hidden>
           <h2>{TRATT.fraga_sokt.fraga}</h2>
           <p class="tratt__hjalp">{TRATT.fraga_sokt.hjalp}</p>
           <div class="tratt__pillgrupp" data-tratt-fraga="sokt" role="group" aria-label={TRATT.fraga_sokt.fraga}>
@@ -139,52 +140,48 @@ const kommuner = loadKommuner();
           <p class="tratt__atervand-kvitto" data-tratt-atervand-kvitto hidden>{TRATT.besked.atervand.kvitto}</p>
         </div>
 
-        <h2>{TRATT.besked.rubrik}</h2>
+        {/* SPEC B3, D-B (Design, runda 6, 2026-08-06): räknaren (alltid
+           synlig, ovanför) BLIR sidans rubrik här — h2.rubrik ("Det här
+           hittade vi för er förening") borttagen, ersatt av räknarens
+           beskedvariant (TRATT.raknare.beskedTillagg, skriptet). */}
 
-        <section class="tratt__grupp tratt__grupp--matchar">
-          <h3>{TRATT.besked.kanSoka.rubrik}</h3>
-          <p class="tratt__kostnadsram" data-tratt-kostnadsram hidden></p>
-          <p class="tratt__sum-fotnot" data-tratt-sum-fotnot hidden></p>
-          {/* ZeroResult (DATATILLSTAND_och_koprutan.md §2d, uppföljning
-             2026-08-03): noll träffar får samma streckade ring som
-             VoidMark (.fg-void-count) — samma tomrumsform överallt i
-             systemet. Ingen ny text, samma TRATT.besked.kanSoka.tom som
-             redan fanns. Skiljer sig från 2d:s kommunsida-exempel
-             (byggs INTE här — en pill kan strukturellt aldrig peka mot
-             noll bidrag på en kommunsida, se diagnos-tom-kategori.ts). */}
-          <div class="tratt__tom" data-tratt-matchar-tom hidden>
-            <span class="fg-void-count" aria-hidden="true">0</span>
-            <p>{TRATT.besked.kanSoka.tom}</p>
+        {/* Blocket ovanför listan — det ENDA som skiljer mellan de tre
+           sökt-lägena (B3, "Vad Code behöver veta" §5). Grupperna
+           nedanför är identiska i alla tre. sokt=ja: hela blocket
+           hidden, ingenting ovanför. */}
+        <div class="tratt__registrering" data-tratt-registrering hidden>
+          <div class="tratt__registrering-block" data-tratt-registrering-block>
+            <span class="tratt__registrering-siffra" aria-hidden="true">1</span>
+            <div>
+              <p class="tratt__registrering-etikett">{TRATT.besked.registrering.etikett}</p>
+              {/* sokt=nej: besked. sokt=vet inte (osäker): kontrollfråga
+                 + kommunens egen länk. Text/href sätts av skriptet. */}
+              <p data-tratt-registrering-text></p>
+              <a href="#" class="btn-primary tratt__registrering-knapp" data-tratt-registrering-knapp target="_blank" rel="noopener"></a>
+            </div>
           </div>
-          <ul class="tratt__bidraglista" data-tratt-matchar-lista></ul>
-          {/* H9 (SPEC: Kluster 3, 2026-07-28): paketpris — bara när fler
-             än ett bidrag matchar. Fylls i render(), se skriptet. */}
-          <p class="tratt__paket" data-tratt-paket hidden></p>
+          {/* Bara sokt=nej — "gruppinledning" till listorna, inte ett
+             tredje beskedsläge (B3 §5). */}
+          <div class="tratt__registrering-vantar" data-tratt-registrering-vantar hidden>
+            <h3>{TRATT.besked.registrering.vantarRubrik}</h3>
+            <p>{TRATT.besked.registrering.vantarText}</p>
+          </div>
+        </div>
+
+        {/* Två grupper (B3.1/B3, "Vad Code behöver veta" §2) — samma i
+           alla tre sökt-lägena. Sorteringen (sorteraForTratt,
+           matching.ts) FILTRERAR ALDRIG — varje aktivt bidrag hamnar i
+           endera. En grupp döljs bara om den är tom (aldrig ett enskilt
+           bidrag). Vanlig ram, ingen attention/oxblod (B3 D-B
+           "Nyckeln") — .tratt__bidrag är redan neutral, orörd. */}
+        <section class="tratt__grupp" data-tratt-grupp-passar hidden>
+          <h3>{TRATT.besked.grupper.passar}</h3>
+          <ul class="tratt__bidraglista" data-tratt-passar-lista></ul>
         </section>
 
-        <section class="tratt__grupp tratt__grupp--saknar" data-tratt-grupp-saknar hidden>
-          <h3>{TRATT.besked.behover.rubrik}</h3>
-          <ul class="tratt__bidraglista" data-tratt-saknar-lista></ul>
-        </section>
-
-        {/* C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): egen grupp för bidrag
-           som inte klarar D1 (krav_status: verifierad + minst tre krav)
-           — "Nära — det här saknas" ovan påstår ett känt gap, vilket
-           kräver en kartlagd kravbild. Utan den: rubrik + källänk, aldrig
-           ett gissat gap. */}
-        <section class="tratt__grupp tratt__grupp--saknar" data-tratt-grupp-okartlagd hidden>
-          <h3>{TRATT.besked.behover.rubrikOkartlagd}</h3>
-          <ul class="tratt__bidraglista" data-tratt-okartlagd-lista></ul>
-        </section>
-
-        <section class="tratt__grupp tratt__grupp--borjahar" data-tratt-grupp-borjahar hidden>
-          <h3>{TRATT.besked.borjaHar.rubrik}</h3>
-          <p>{TRATT.besked.borjaHar.brodtext}</p>
-          <details class="tratt__disclosure">
-            <summary>{TRATT.besked.borjaHar.fallRubrik}</summary>
-            <p>{TRATT.besked.borjaHar.fallText}</p>
-          </details>
-          <RegistreringsHjalp />
+        <section class="tratt__grupp" data-tratt-grupp-kangalla hidden>
+          <h3>{TRATT.besked.grupper.kanGalla}</h3>
+          <ul class="tratt__bidraglista" data-tratt-kangalla-lista></ul>
         </section>
 
         <p class="tratt__minne">{TRATT.besked.minne}</p>
@@ -214,17 +211,19 @@ const kommuner = loadKommuner();
 </Base>
 
 <script>
-  import { matchKommun, harMatchningsdata, type MatchSkal } from '../../lib/matching';
-  import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type Medlemsbucket, type SoktSvar } from '../../lib/foreningsprofil';
-  import { formatDate, earliestDeadlineISO, todayISO, svenskLista, sumBeloppTak, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
+  import { sorteraForTratt } from '../../lib/matching';
+  import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type SoktSvar } from '../../lib/foreningsprofil';
+  import { formatDate, earliestDeadlineISO, todayISO, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { VOID_MARK } from '../../lib/content';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
   if (root) {
-    const raknareEl = root.querySelector<HTMLElement>('[data-tratt-raknare]');
-    const kvittensEl = root.querySelector<HTMLElement>('[data-tratt-kvittens]');
-    const progressEl = root.querySelector<HTMLElement>('[data-tratt-progress]');
+    const raknareTalEl = root.querySelector<HTMLElement>('[data-tratt-raknare-tal]');
+    const raknareTextEl = root.querySelector<HTMLElement>('[data-tratt-raknare-text]');
+    const forloppEl = root.querySelector<HTMLElement>('[data-tratt-forlopp]');
+    const segmentEls = root.querySelectorAll<HTMLElement>('[data-tratt-segment]');
+    const forloppKommunEl = root.querySelector<HTMLElement>('[data-tratt-forlopp-kommun]');
     const stegLabelEl = root.querySelector<HTMLElement>('[data-tratt-steg-label]');
     const stegElement = root.querySelectorAll<HTMLElement>('[data-tratt-steg]');
     const tillbakaKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-tillbaka]');
@@ -234,21 +233,19 @@ const kommuner = loadKommuner();
     const visaBeskedRadEl = root.querySelector<HTMLElement>('[data-tratt-visa-besked-rad]');
     const visaBeskedKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-visa-besked]');
     const beskedEl = root.querySelector<HTMLElement>('[data-tratt-besked]');
-    const matcharListaEl = root.querySelector<HTMLElement>('[data-tratt-matchar-lista]');
-    const matcharTomEl = root.querySelector<HTMLElement>('[data-tratt-matchar-tom]');
-    const saknarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-saknar]');
-    const saknarListaEl = root.querySelector<HTMLElement>('[data-tratt-saknar-lista]');
-    const okartlagdGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-okartlagd]');
-    const okartlagdListaEl = root.querySelector<HTMLElement>('[data-tratt-okartlagd-lista]');
-    const borjaHarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-borjahar]');
-    const registreringWidget = root.querySelector<HTMLElement>('[data-registrering-hjalp]');
+    const registreringEl = root.querySelector<HTMLElement>('[data-tratt-registrering]');
+    const registreringBlockEl = root.querySelector<HTMLElement>('[data-tratt-registrering-block]');
+    const registreringTextEl = root.querySelector<HTMLElement>('[data-tratt-registrering-text]');
+    const registreringKnappEl = root.querySelector<HTMLAnchorElement>('[data-tratt-registrering-knapp]');
+    const registreringVantarEl = root.querySelector<HTMLElement>('[data-tratt-registrering-vantar]');
+    const passarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-passar]');
+    const passarListaEl = root.querySelector<HTMLElement>('[data-tratt-passar-lista]');
+    const kanGallaGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-kangalla]');
+    const kanGallaListaEl = root.querySelector<HTMLElement>('[data-tratt-kangalla-lista]');
     const kommunvaljareWrapperEl = root.querySelector<HTMLElement>('[data-tratt-kommunvaljare]');
     const kommunValdEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald]');
     const kommunValdNamnEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald-namn]');
     const kommunBytKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-kommun-byt]');
-    const kostnadsramEl = root.querySelector<HTMLElement>('[data-tratt-kostnadsram]');
-    const sumFotnotEl = root.querySelector<HTMLElement>('[data-tratt-sum-fotnot]');
-    const paketEl = root.querySelector<HTMLElement>('[data-tratt-paket]');
     const delaMejlaKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-dela-mejla]');
     const delaSkrivUtKnapp = root.querySelector<HTMLButtonElement>('[data-tratt-dela-skriv-ut]');
     const delaForm = root.querySelector<HTMLFormElement>('[data-tratt-dela-form]');
@@ -265,12 +262,12 @@ const kommuner = loadKommuner();
     const today = todayISO();
     let kommunData: Kommun | null = null;
 
-    // Steget som är i fokus (1–5 = fråga N, 6 = klart/besked). En riktig
-    // återvändande session (sparad kommun) hoppar direkt till 6 — se
-    // motiveringen i filhuvudet.
+    // Steget som är i fokus (1–3 = fråga N, 4 = klart/besked). SPEC B3
+    // (2026-08-06): storleksfrågan borttagen, tratten är nu TRE frågor
+    // (kommun, verksamhet, sökt) + besked = fyra steg, inte fem. En
+    // riktig återvändande session (sparad kommun) hoppar direkt till 4.
     let step = 1;
     let advancing = false;
-    let kvittensTimer: ReturnType<typeof setTimeout> | undefined;
 
     // H5 — "Mejla mig en länk": profilen kan komma in via ?fortsatt=
     // (en JSON-kodad Foreningsprofil, se api/mejla-tratt-lank.ts som
@@ -299,52 +296,6 @@ const kommuner = loadKommuner();
       uppdaterad: '',
     };
 
-    function etikett<T extends string>(alternativ: { id: T; etikett: string }[], id: T | null): string {
-      return alternativ.find((a) => a.id === id)?.etikett ?? '';
-    }
-
-    // G7 (Jacob 2026-08-02): ålder/verksamhetstid-frågan skuren bort —
-    // matchBidrag (matching.ts) producerar bara ett min_verksamhetstid_manader-
-    // skäl när profil.alder !== null, vilket det aldrig blir längre (ingen
-    // fråga samlar in det). Fallet nedan är alltså strukturellt oåtkomligt
-    // nu, inte trasigt — default-grenen täcker det, samma "latent"-mönster
-    // som sate_i_kommunen redan har i matching.ts.
-    function skalTillText(skal: MatchSkal, bidrag: Bidrag): string {
-      switch (skal.falt) {
-        case 'min_medlemmar':
-          return TRATT.besked.behover.saknarMedlemmar
-            .replace('{krav}', String(bidrag.min_medlemmar))
-            .replace('{angivet}', etikett(TRATT.fraga_storlek.alternativ, profil.storlek));
-        case 'foreningstyp': {
-          const etiketter = (bidrag.foreningstyp ?? []).map((v: Verksamhet) => etikett(TRATT.fraga_verksamhet.alternativ, v));
-          return TRATT.besked.behover.saknarTyp.replace('{krav}', svenskLista(etiketter));
-        }
-        case 'kraver_registrering':
-          return TRATT.besked.behover.saknarRegistrering;
-        default:
-          return '';
-      }
-    }
-
-    // Fotnoten (Design turn-14) — null-belopp exkluderas ur summan ovan,
-    // aldrig tyst. Skriver ALLTID en fotnot när capped > 0 (även vid
-    // uncapped=0, "Summan av angivna maxbelopp för N bidrag." bekräftar
-    // att INGET utelämnades, lika viktigt som att flagga när något gör det).
-    function visaSumFotnot(capped: number, uncapped: number) {
-      if (!sumFotnotEl) return;
-      if (uncapped === 0) {
-        sumFotnotEl.textContent = TRATT.besked.sumFotnotCappat.replace('{antal}', String(capped));
-      } else {
-        const uncappedText = uncapped === 1
-          ? TRATT.besked.sumFotnotOkantEtt
-          : TRATT.besked.sumFotnotOkantFlera.replace('{antal}', String(uncapped));
-        sumFotnotEl.textContent = TRATT.besked.sumFotnotOkant
-          .replace('{antal}', String(capped))
-          .replace('{uncappedText}', uncappedText);
-      }
-      sumFotnotEl.hidden = false;
-    }
-
     // Reverserat 2026-08-03 (arbetsorder 2d) — samma reversering som
     // UrgencyChip.astro: distinkt ord per nivå igen, se den filens kommentar.
     const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
@@ -369,174 +320,130 @@ const kommuner = loadKommuner();
       return kommunData ? `/kommun/${kommunData.kommun_slug}/#bidrag-${bidrag.id}` : '#';
     }
 
-    /** Matchande-antal just nu — 0 om ingen kommun är vald än (samma bas mocken räknar delta mot). */
-    function currentMatchCount(): number {
-      if (!kommunData) return 0;
-      return matchKommun(profil, kommunData).matchar.length;
+    /** Räknaren (B3, D-A) — kommunens totalsumma AKTIVA bidrag. Beräknas
+     * en gång per kommunval, inte per svar (satt i render(), men render()
+     * själv anropas efter varje svar — värdet är ändå stabilt eftersom
+     * det bara beror på kommunData, aldrig på profil). */
+    function totalAktivaBidrag(kommun: Kommun): number {
+      return kommun.bidrag.filter((b) => b.status === 'aktiv').length;
     }
 
-    /** Kvittensen ("+N bidrag") — synlig kort efter varje svar, mekanisk
-     * formatering (tecken + antal + ordet "bidrag"), ingen ny prosa. */
-    function visaKvittens(delta: number) {
-      if (!kvittensEl) return;
-      window.clearTimeout(kvittensTimer);
-      if (delta === 0) {
-        kvittensEl.hidden = true;
-        return;
-      }
-      kvittensEl.textContent = `${delta > 0 ? '+' : ''}${delta} bidrag`;
-      kvittensEl.hidden = false;
-      kvittensTimer = setTimeout(() => {
-        if (kvittensEl) kvittensEl.hidden = true;
-      }, 2500);
-    }
-
-    /** 1c — gaten (MOCKAR_huvudprocessen.md §1c). Styrs helt av
-     * profil.sokt, inte av klickhändelsen, så tillståndet stämmer även
-     * vid återupptagen/återställd profil (H5) — inte bara direkt efter
-     * ett klick. */
+    /** 1c — gaten (MOCKAR_huvudprocessen.md §1c), oförändrad av B3. Styrs
+     * helt av profil.sokt, inte av klickhändelsen, så tillståndet stämmer
+     * även vid återupptagen/återställd profil (H5). */
     function updateGateUI() {
       const gate = profil.sokt === 'nej' || profil.sokt === 'osaker';
       if (gateBeskedEl) gateBeskedEl.hidden = !gate;
       if (visaBeskedRadEl) visaBeskedRadEl.hidden = profil.sokt === null;
     }
 
-    /** Visar exakt ETT tratt__fraga-steg och besked-panelen bara i steg 6
+    /** SPEC B3, D-A: tre segment (fylld accent för klarade, tyst för
+     * kvar) i stället för en kontinuerlig fyllning. Förloppet döljs helt
+     * på beskedet (steg 4) — frågorna är slut, inget jobb kvar. */
+    function updateForlopp() {
+      if (forloppEl) forloppEl.hidden = step >= 4;
+      segmentEls.forEach((seg, i) => {
+        seg.classList.toggle('is-klar', i < Math.min(step - 1, 3));
+      });
+      if (stegLabelEl) stegLabelEl.textContent = `Fråga ${Math.min(step, 3)} av 3`;
+      if (forloppKommunEl) forloppKommunEl.textContent = kommunData?.kommun ?? '';
+    }
+
+    /** Visar exakt ETT tratt__fraga-steg och besked-panelen bara i steg 4
      * — döljs via `hidden` (aldrig tas bort ur DOM, samma regel som
      * KommunValjares sökfilter använder). */
     function updateStegUI() {
       stegElement.forEach((el) => {
         el.hidden = Number(el.dataset.trattSteg) !== step;
       });
-      if (beskedEl) beskedEl.hidden = step !== 5 || !kommunData;
+      if (beskedEl) beskedEl.hidden = step !== 4 || !kommunData;
       if (tillbakaKnapp) tillbakaKnapp.hidden = step <= 1;
-      if (stegLabelEl) stegLabelEl.textContent = step >= 5 ? 'Klart' : `Fråga ${step} av 4`;
-      if (progressEl) progressEl.style.width = `${(Math.min(step - 1, 4) / 4) * 100}%`;
+      updateForlopp();
       updateGateUI();
     }
 
     function goStep(n: number) {
-      step = Math.max(1, Math.min(5, n));
+      step = Math.max(1, Math.min(4, n));
       updateStegUI();
+    }
+
+    /** SPEC B3, D-B: blocket ovanför de två grupperna. Enda som skiljer
+     * mellan sokt-lägena — grupperna nedanför är identiska i alla tre. */
+    function updateRegistrering() {
+      if (!registreringEl || !kommunData) return;
+      const kommunNamn = kommunData.kommun;
+
+      if (profil.sokt === 'nej') {
+        registreringEl.hidden = false;
+        if (registreringTextEl) registreringTextEl.textContent = TRATT.besked.registrering.budskapNej.replace(/{kommun}/g, kommunNamn);
+        if (registreringKnappEl) {
+          registreringKnappEl.textContent = TRATT.besked.registrering.knapp;
+          registreringKnappEl.href = kommunData.kalla_url;
+        }
+        if (registreringVantarEl) registreringVantarEl.hidden = false;
+      } else if (profil.sokt === 'osaker') {
+        registreringEl.hidden = false;
+        if (registreringTextEl) registreringTextEl.textContent = TRATT.besked.registrering.kontrollfraga.replace(/{kommun}/g, kommunNamn);
+        if (registreringKnappEl) {
+          const host = new URL(kommunData.kalla_url).hostname.replace(/^www\./, '');
+          registreringKnappEl.textContent = VOID_MARK.kallaKnappMall.replace('{host}', host);
+          registreringKnappEl.href = kommunData.kalla_url;
+        }
+        if (registreringVantarEl) registreringVantarEl.hidden = true;
+      } else {
+        // sokt === 'ja' eller null (obesvarad — samma tysta läge som
+        // gaten ovan redan ger null, ingen gissning på "vet inte").
+        registreringEl.hidden = true;
+      }
     }
 
     function render() {
       if (!kommunData) {
-        if (raknareEl) raknareEl.textContent = TRATT.raknare.tom;
+        if (raknareTalEl) raknareTalEl.hidden = true;
+        if (raknareTextEl) raknareTextEl.textContent = TRATT.raknare.tom;
         updateStegUI();
         return;
       }
 
-      const resultat = matchKommun(profil, kommunData);
-      const antal = resultat.matchar.length;
-
-      if (raknareEl) {
-        raknareEl.textContent = antal === 0 ? TRATT.raknare.noll : antal === 1 ? TRATT.raknare.en : TRATT.raknare.trafffar.replace('{antal}', String(antal));
+      const antal = totalAktivaBidrag(kommunData);
+      if (raknareTalEl) {
+        raknareTalEl.textContent = String(antal);
+        raknareTalEl.hidden = false;
+      }
+      if (raknareTextEl) {
+        const mall = antal === 1 ? TRATT.raknare.mallEtt : TRATT.raknare.mall;
+        const bas = mall.replace('{antal}', String(antal)).replace(/{kommun}/g, kommunData.kommun);
+        raknareTextEl.textContent = step >= 4 ? bas + TRATT.raknare.beskedTillagg : bas;
       }
 
-      // harMatchningsdata (matching.ts): sant först när researchpasset
-      // fyllt i minst ett matchningsfält för kommunen. Före dess är ALLA
-      // bidrag trivialt "MATCHAR" (grov matchning per design — se
-      // matchBidrag) och en summa över resultat.matchar vore kommunens
-      // HELA pott framställd som personlig. Kostnadsramen väljer därför
-      // mellan två helt olika mallar/datakällor beroende på detta flagg,
-      // inte bara olika text på samma summa.
-      const dataFinns = harMatchningsdata(kommunData);
+      // B3: "Sortera, aldrig filtrera" — sorteraForTratt (matching.ts)
+      // grupperar ALLA aktiva bidrag, utesluter aldrig ett baserat på
+      // profilen. En grupp döljs bara om den råkar vara tom.
+      const { passar, kanGalla } = sorteraForTratt(profil, kommunData);
 
-      if (kostnadsramEl) {
-        if (dataFinns) {
-          const sum = sumBeloppTak(resultat.matchar);
-          if (sum.capped > 0) {
-            const mall = sum.capped === 1 ? TRATT.besked.kostnadsramEnkel : TRATT.besked.kostnadsram;
-            kostnadsramEl.textContent = mall.replace('{summa}', sum.total.toLocaleString('sv-SE'));
-            kostnadsramEl.hidden = false;
-            visaSumFotnot(sum.capped, sum.uncapped);
-          } else {
-            kostnadsramEl.hidden = true;
-            if (sumFotnotEl) sumFotnotEl.hidden = true;
-          }
-        } else {
-          const sum = sumBeloppTak(kommunData.bidrag);
-          if (sum.capped > 0) {
-            // P1.3 (Jacob 2026-08-04): "Fyll i er profil" är fel uppmaning
-            // när profilen redan är komplett — samma tröskel (>=4) som
-            // atervandOmBehovs redan använder för samma fråga.
-            const mall = antalBesvarade(profil) >= 4
-              ? TRATT.besked.kostnadsramOgfiltreradKomplett
-              : TRATT.besked.kostnadsramOgfiltrerad;
-            kostnadsramEl.textContent = mall
-              .replace(/{kommun}/g, kommunData.kommun)
-              .replace('{summa}', sum.total.toLocaleString('sv-SE'));
-            kostnadsramEl.hidden = false;
-            visaSumFotnot(sum.capped, sum.uncapped);
-          } else {
-            kostnadsramEl.hidden = true;
-            if (sumFotnotEl) sumFotnotEl.hidden = true;
-          }
-        }
-      }
-
-      if (matcharListaEl) {
-        matcharListaEl.innerHTML = '';
-        resultat.matchar.forEach((bidrag) => {
+      if (passarGruppEl) passarGruppEl.hidden = passar.length === 0;
+      if (passarListaEl) {
+        passarListaEl.innerHTML = '';
+        passar.forEach((bidrag) => {
           const li = document.createElement('li');
           li.className = 'tratt__bidrag';
           li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(bidrag)}</div>`;
-          matcharListaEl.appendChild(li);
+          passarListaEl.appendChild(li);
         });
       }
-      if (matcharTomEl) matcharTomEl.hidden = resultat.matchar.length > 0;
 
-      // H9 — paketpris, bara när fler än ETT bidrag matchar (ett enda
-      // bidrag har inget "alla" att paketera).
-      // P1.4 (Jacob 2026-08-04): avstängt tills PRIS_PAKET_ORE (priser.ts)
-      // är ett riktigt tal och priset finns på /pris/ — 699 kr var alltid
-      // ett draft-värde (se kommentaren i priser.ts), aldrig menat att
-      // visas för en riktig besökare. Villkoret/logiken orörd, bara
-      // konstant-avstängd, så den kan slås på igen med en rad.
-      if (paketEl) {
-        paketEl.hidden = true;
-      }
-
-      // C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): dela resultat.saknar i två
-      // — D1 (krav_status: verifierad + minst tre krav) avgör om vi
-      // faktiskt känner till HELA kravbilden nog för att påstå ett gap.
-      const harD1 = (b: Bidrag) => b.krav_status === 'kontrollast' && b.krav.length >= 3;
-      const saknarD1 = resultat.saknar.filter(({ bidrag }) => harD1(bidrag));
-      const saknarOkartlagd = resultat.saknar.filter(({ bidrag }) => !harD1(bidrag));
-
-      if (saknarGruppEl) saknarGruppEl.hidden = !dataFinns || saknarD1.length === 0;
-      if (saknarListaEl) {
-        saknarListaEl.innerHTML = '';
-        saknarD1.forEach(({ bidrag, skal }) => {
+      if (kanGallaGruppEl) kanGallaGruppEl.hidden = kanGalla.length === 0;
+      if (kanGallaListaEl) {
+        kanGallaListaEl.innerHTML = '';
+        kanGalla.forEach((bidrag) => {
           const li = document.createElement('li');
           li.className = 'tratt__bidrag';
-          const skalText = skal.map((s) => skalTillText(s, bidrag)).filter(Boolean).join(' ');
-          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${skalText}</div>`;
-          saknarListaEl.appendChild(li);
+          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(bidrag)}</div>`;
+          kanGallaListaEl.appendChild(li);
         });
       }
 
-      if (okartlagdGruppEl) okartlagdGruppEl.hidden = !dataFinns || saknarOkartlagd.length === 0;
-      if (okartlagdListaEl) {
-        okartlagdListaEl.innerHTML = '';
-        saknarOkartlagd.forEach(({ bidrag }) => {
-          const li = document.createElement('li');
-          li.className = 'tratt__bidrag';
-          const host = new URL(bidrag.kalla_url).hostname.replace(/^www\./, '');
-          const kallaText = VOID_MARK.kallaKnappMall.replace('{host}', host);
-          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta"><a href="${bidrag.kalla_url}" target="_blank" rel="noopener">${kallaText}</a></div>`;
-          okartlagdListaEl.appendChild(li);
-        });
-      }
-
-      if (borjaHarGruppEl) borjaHarGruppEl.hidden = !resultat.borjaHar;
-      if (registreringWidget && kommunData) {
-        registreringWidget.dataset.kommunSlug = kommunData.kommun_slug;
-        const registreringLank = registreringWidget.querySelector<HTMLAnchorElement>('[data-registrering-lank]');
-        if (registreringLank) registreringLank.href = `/kommun/${kommunData.kommun_slug}/registrera/`;
-      }
-
+      updateRegistrering();
       updateStegUI();
     }
 
@@ -547,7 +454,6 @@ const kommuner = loadKommuner();
           const varde = pill.dataset.trattSvar ?? '';
           let aktiv = false;
           if (fraga === 'verksamhet') aktiv = profil.verksamhet.includes(varde as Verksamhet);
-          else if (fraga === 'storlek') aktiv = profil.storlek === varde;
           else if (fraga === 'sokt') aktiv = profil.sokt === varde;
           pill.classList.toggle('is-active', aktiv);
           pill.setAttribute('aria-pressed', String(aktiv));
@@ -569,7 +475,7 @@ const kommuner = loadKommuner();
       if (kommunValdEl) kommunValdEl.hidden = true;
     }
 
-    async function hamtaKommunData(slug: string, opts: { beforeCount?: number; advance?: boolean } = {}) {
+    async function hamtaKommunData(slug: string, opts: { advance?: boolean } = {}) {
       try {
         const res = await fetch(`/kommun-data/${slug}.json`);
         if (!res.ok) throw new Error('kommun-data 404');
@@ -582,7 +488,6 @@ const kommuner = loadKommuner();
       }
       render();
       if (opts.advance) {
-        visaKvittens(currentMatchCount() - (opts.beforeCount ?? 0));
         setTimeout(() => goStep(2), 450);
       }
     }
@@ -590,10 +495,9 @@ const kommuner = loadKommuner();
     root.addEventListener('kommunvaljare:valj', (event) => {
       const detail = (event as CustomEvent<{ slug: string; namn: string }>).detail;
       if (!detail?.slug) return;
-      const before = currentMatchCount();
       profil.kommunSlug = detail.slug;
       saveForeningsprofil({ kommunSlug: profil.kommunSlug });
-      hamtaKommunData(detail.slug, { beforeCount: before, advance: true });
+      hamtaKommunData(detail.slug, { advance: true });
     });
 
     kommunBytKnapp?.addEventListener('click', () => {
@@ -603,12 +507,14 @@ const kommuner = loadKommuner();
     tillbakaKnapp?.addEventListener('click', () => goStep(step - 1));
     omstartKnapp?.addEventListener('click', () => goStep(1));
     vidareKnapp?.addEventListener('click', () => goStep(3));
-    visaBeskedKnapp?.addEventListener('click', () => goStep(5));
+    visaBeskedKnapp?.addEventListener('click', () => goStep(4));
 
     // H7 — delbart besked. Mejlversionen skickar bara ID-REFERENSER
-    // (kommunSlug + matchade bidrag-id:n) till servern, som slår upp
-    // namn/belopp/deadline själv (kommun.ts) — aldrig fritext från
-    // klienten rakt in i ett utgående mejl.
+    // (kommunSlug + bidrag-id:n) till servern, som slår upp namn/belopp/
+    // deadline själv (kommun.ts) — aldrig fritext från klienten rakt in
+    // i ett utgående mejl. B3 (2026-08-06): skickar nu "Passar er
+    // verksamhet"-gruppen (sorteraForTratt) — närmaste motsvarighet till
+    // den gamla matchKommun().matchar, som mejlfunktionen byggdes mot.
     delaMejlaKnapp?.addEventListener('click', () => {
       delaForm?.removeAttribute('hidden');
       delaMejlaKnapp.setAttribute('hidden', '');
@@ -621,10 +527,10 @@ const kommuner = loadKommuner();
       delaFelEl?.setAttribute('hidden', '');
       if (!kommunData) return;
 
-      const resultat = matchKommun(profil, kommunData);
+      const { passar } = sorteraForTratt(profil, kommunData);
       const data = new FormData(delaForm);
       data.set('kommun', kommunData.kommun_slug);
-      resultat.matchar.forEach((b) => data.append('bidragId', b.id));
+      passar.forEach((b) => data.append('bidragId', b.id));
 
       try {
         const res = await fetch('/api/dela-besked', { method: 'POST', body: data });
@@ -646,22 +552,17 @@ const kommuner = loadKommuner();
         pill.addEventListener('click', () => {
           if (advancing) return;
           const varde = pill.dataset.trattSvar ?? '';
-          const before = currentMatchCount();
 
           if (fraga === 'verksamhet') {
             const v = varde as Verksamhet;
             profil.verksamhet = profil.verksamhet.includes(v) ? profil.verksamhet.filter((x) => x !== v) : [...profil.verksamhet, v];
             saveForeningsprofil({ verksamhet: profil.verksamhet });
-          } else if (fraga === 'storlek') {
-            profil.storlek = (profil.storlek === varde ? null : varde) as Medlemsbucket | null;
-            saveForeningsprofil({ storlek: profil.storlek });
           } else if (fraga === 'sokt') {
             profil.sokt = (profil.sokt === varde ? null : varde) as SoktSvar | null;
             saveForeningsprofil({ sokt: profil.sokt });
           }
 
           markeraAktivaPillar();
-          visaKvittens(currentMatchCount() - before);
           render();
 
           // Verksamhet är flerval — ingen auto-advance, "Vidare"-knappen
@@ -681,31 +582,28 @@ const kommuner = loadKommuner();
       });
     });
 
-    // H5 — antal besvarade frågor (max 5) och vilken som är FÖRSTA
-    // obesvarade, för återupptagningsbanderollen. Ren räkning, ingen ny
-    // datamodell.
-    // G7 (Jacob 2026-08-02): fyra frågor, inte fem — alder räknas inte
-    // längre (frågas aldrig, alltid null).
+    // H5 — antal besvarade frågor och vilken som är FÖRSTA obesvarade,
+    // för återupptagningsbanderollen. Ren räkning, ingen ny datamodell.
+    // B3.6 (2026-08-06): tre frågor, inte fyra — storlek borttagen ur
+    // tratten (samma mönster som G7 redan satte för alder).
     function antalBesvarade(p: Foreningsprofil): number {
       let n = 0;
       if (p.kommunSlug) n++;
       if (p.verksamhet.length > 0) n++;
-      if (p.storlek !== null) n++;
       if (p.sokt !== null) n++;
       return n;
     }
 
     function forstaObesvaradeSteg(p: Foreningsprofil): number {
       if (p.verksamhet.length === 0) return 2;
-      if (p.storlek === null) return 3;
-      if (p.sokt === null) return 4;
-      return 5;
+      if (p.sokt === null) return 3;
+      return 4;
     }
 
     function visaAtervandOmBehovs() {
       if (!atervandEl || !atervandTextEl) return;
       const antal = antalBesvarade(profil);
-      if (antal >= 4) {
+      if (antal >= 3) {
         atervandEl.hidden = true;
         return;
       }
@@ -738,12 +636,12 @@ const kommuner = loadKommuner();
     });
 
     // Återställ sparat svar. En återvändande session med sparad kommun
-    // hoppar direkt till steg 5 (beskedet, G7: fyra frågor + besked =
-    // fem steg, inte sex) — "Tillbaka" tar en till valfri fråga för att
+    // hoppar direkt till steg 4 (beskedet, B3.6: tre frågor + besked =
+    // fyra steg, inte fem) — "Tillbaka" tar en till valfri fråga för att
     // ändra svar.
     markeraAktivaPillar();
     if (profil.kommunSlug) {
-      step = 5;
+      step = 4;
       hamtaKommunData(profil.kommunSlug);
       visaAtervandOmBehovs();
     } else {
@@ -772,68 +670,72 @@ const kommuner = loadKommuner();
     max-width: 60ch;
   }
 
-  /* Sticky stegbar (turn-12a) — mörk, alltid synlig vid varje svar.
-     Räknare + kvittens på en rad, progressbar + "Fråga N av 4" under. */
-  .tratt__stegbar {
+  /* SPEC B3, D-A (Design, runda 6, 2026-08-06): förlopp och räknare är
+     TVÅ komponenter, inte längre samma svarta monospace-fält.
+
+     Räknaren — ett BESKED, sunken papperston, tal i Archivo 800. Aldrig
+     borttagen (bara tom innan kommun är vald), så INTE sticky/chrome —
+     den ska läsa som innehåll, inte systemstatus. */
+  .tratt__raknare-rad {
+    display: flex;
+    align-items: baseline;
+    gap: var(--fg-space-3);
+    margin: 0;
+    background: var(--fg-surface-sunken);
+    border: 2px solid var(--fg-border);
+    padding: 14px 16px;
+  }
+
+  .tratt__raknare-tal {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-h2);
+    color: var(--fg-ink);
+  }
+
+  /* Förloppet — CHROME. Tyst, ljust, tre segment (inte en kontinuerlig
+     fyllning) + "Fråga N av 3" + kommunnamn i mono. Försvinner på
+     beskedet (döljs av script, step >= 4) — frågorna är slut. */
+  .tratt__forlopp {
     position: sticky;
     top: 0;
     z-index: 5;
     display: flex;
-    flex-direction: column;
-    gap: 9px;
-    background: var(--fg-ink);
-    color: var(--fg-on-accent);
-    padding: 12px 16px;
+    align-items: center;
+    gap: 6px;
+    background: var(--fg-surface);
     border: 2px solid var(--fg-border);
+    padding: 10px 16px;
   }
 
-  .tratt__stegbar-rad {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-
-  .tratt__raknare {
+  .tratt__forlopp-segment {
     flex: 1;
-    margin: 0;
-    font-family: var(--fg-font-mono);
-    font-weight: var(--fg-weight-bold);
-    font-size: var(--fg-text-body-lg);
-  }
-
-  .tratt__kvittens {
-    flex: none;
-    font-family: var(--fg-font-mono);
-    font-size: var(--fg-text-label);
-    font-weight: var(--fg-weight-bold);
-    color: var(--fg-on-accent);
-    background: rgba(255, 255, 255, 0.18);
-    border-radius: var(--fg-radius-pill);
-    padding: 3px 10px;
-    white-space: nowrap;
-  }
-
-  .tratt__stegbar-progress {
     display: block;
     height: 6px;
     border-radius: var(--fg-radius-pill);
-    background: rgba(255, 255, 255, 0.22);
-    overflow: hidden;
+    background: #d8d4ca;
   }
 
-  .tratt__stegbar-fyllning {
-    display: block;
-    height: 100%;
-    width: 0%;
+  .tratt__forlopp-segment.is-klar {
     background: var(--fg-accent);
-    transition: width 0.25s ease;
   }
 
-  .tratt__stegbar-label {
+  .tratt__forlopp-label {
+    flex: none;
+    margin-left: 8px;
     font-family: var(--fg-font-mono);
     font-size: var(--fg-text-mono);
     font-weight: var(--fg-weight-bold);
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--fg-ink-muted);
+    white-space: nowrap;
+  }
+
+  .tratt__forlopp-kommun {
+    flex: none;
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    color: var(--fg-ink-muted);
+    white-space: nowrap;
   }
 
   .tratt__layout {
@@ -992,10 +894,66 @@ const kommuner = loadKommuner();
     gap: 20px;
   }
 
-  .tratt__grupp--borjahar {
+  /* SPEC B3, D-B (2026-08-06): registreringsblocket — accent-soft fält,
+     numrerad cirkel "1", etikett "Börja här". Ersätter det gamla
+     .tratt__grupp--borjahar (RegistreringsHjalp-baserat, borttaget). */
+  .tratt__registrering-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
     background: var(--fg-accent-soft);
-    padding: 16px;
     border: 2px solid var(--fg-accent);
+    padding: 16px;
+  }
+
+  .tratt__registrering-siffra {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--fg-accent);
+    color: var(--fg-on-accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: 1rem;
+  }
+
+  .tratt__registrering-etikett {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-accent);
+    margin: 0 0 4px;
+  }
+
+  .tratt__registrering-knapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    margin-top: 12px;
+    text-decoration: none;
+  }
+
+  /* "Det här väntar när ni är godkända" — bara sokt=nej, gruppinledning
+     till listorna nedanför, inte ett eget beskedläge. */
+  .tratt__registrering-vantar {
+    margin-top: 16px;
+  }
+
+  .tratt__registrering-vantar h3 {
+    font-size: var(--fg-text-h2);
+    margin: 0 0 4px;
+  }
+
+  .tratt__registrering-vantar p {
+    color: var(--fg-ink-muted);
+    margin: 0;
   }
 
   .tratt__bidraglista {
@@ -1006,6 +964,8 @@ const kommuner = loadKommuner();
     gap: 10px;
   }
 
+  /* B3 D-B "Nyckeln": vanlig ram, ingen attention, ingen oxblod — redan
+     neutral, oförändrad. Gränsen ligger i registreringsblocket ovanför. */
   .tratt__bidrag {
     background: var(--fg-surface);
     border: 1px solid var(--fg-border);
@@ -1018,49 +978,10 @@ const kommuner = loadKommuner();
     margin-top: 2px;
   }
 
-  .tratt__kostnadsram {
-    font-family: var(--fg-font-display);
-    font-weight: var(--fg-weight-bold);
-    font-size: var(--fg-text-h2);
-    color: var(--fg-ink);
-    border: 2px solid var(--fg-border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 4px;
-  }
-
-  .tratt__sum-fotnot,
   .tratt__minne,
   .tratt__ansvar {
     color: var(--fg-ink-muted);
     font-size: var(--fg-text-label);
-  }
-
-  /* ZeroResult — samma streckade ring som VoidMark (.fg-void-count). */
-  .tratt__tom {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--fg-space-4);
-    color: var(--fg-ink-muted);
-  }
-
-  .tratt__tom p {
-    margin: 0;
-    font-size: var(--fg-text-body-lg);
-    color: var(--fg-ink);
-  }
-
-  .tratt__disclosure {
-    margin: 10px 0;
-  }
-
-  .tratt__paket {
-    background: var(--fg-surface);
-    border: var(--fg-border-inner) dashed var(--fg-border);
-    border-radius: var(--fg-radius-control);
-    padding: var(--fg-space-3) var(--fg-space-4);
-    font-size: var(--fg-text-label);
-    margin-top: var(--fg-space-3);
   }
 
   /* H7 — delbart besked. */
@@ -1165,7 +1086,7 @@ const kommuner = loadKommuner();
   /* H7 — utskriftsvänlig vy: bara beskedet, inte frågeflödet/stegbaren/
      navigeringen. Base.astro:s header/footer döljs globalt (global.css). */
   @media print {
-    .tratt__stegbar,
+    .tratt__forlopp,
     .tratt__frageflode,
     .tratt__nav,
     .tratt__dela,

@@ -189,3 +189,55 @@ export function matchKommun(profil: Foreningsprofil, kommun: Kommun): MatchKommu
 
   return { matchar, saknar, ejBehorig, borjaHar: visaBorjaHar(profil, matchar) };
 }
+
+// ---------------------------------------------------------------------
+// SPEC B3 (Design, runda 6, 2026-08-06) — trattens BESKED-skärm.
+// ---------------------------------------------------------------------
+// Egen, medvetet enklare funktion — INTE en ersättning för matchBidrag/
+// matchKommun ovan, som fortfarande är den riktiga behörighetsmotorn och
+// används oförändrad av utkastGenerator.ts, checkout/bidragsutkast.ts,
+// registrera/utkast-sidorna och flera cron-jobb. B3:s kärnbeslut:
+// "Sortera, aldrig filtrera" — foreningstyp finns bara i 25 av 290
+// kommuner, så ett KRAV-baserat filter (matchBidrags MATCHAR/SAKNAR/
+// EJ_BEHORIG, som även prövar min_medlemmar/kraver_registrering/etc.)
+// ger fel svar i de 265 som saknar fältet. Den här funktionen gör bara
+// EN sak: sorterar (aldrig utesluter) kommunens AKTIVA bidrag i två
+// grupper baserat på om verksamhetssvaret överlappar bidragets EGEN
+// kategorisering.
+//
+// "kategori eller föreningstyp" (B3, D-B): kategori (Kategori[], samma
+// taxonomi som kommunens navigering) och foreningstyp (Verksamhet[],
+// matchBidrags taxonomi) är TVÅ OLIKA fältuppsättningar — kategori
+// saknar hembygd/friluft/ungdom/annat, foreningstyp saknar pensionar/
+// funktionsratt/ovrig. Där de delar samma strängvärde (idrott/kultur/
+// social) fångar jämförelsen överlappet ändå; en förening som svarat
+// "Hembygd" kan alltså bara hamna i "Passar er verksamhet" via ett
+// bidrags foreningstyp, aldrig via kategori — det är korrekt, inte en
+// bugg, eftersom kategori-taxonomin inte HAR ett hembygd-värde.
+export interface TrattSortering {
+  passar: Bidrag[];
+  kanGalla: Bidrag[];
+}
+
+export function sorteraForTratt(profil: Foreningsprofil, kommun: Kommun): TrattSortering {
+  const passar: Bidrag[] = [];
+  const kanGalla: Bidrag[] = [];
+
+  for (const bidrag of kommun.bidrag) {
+    // H26 — samma regel som matchKommun: ett pausat/avskaffat bidrag är
+    // inget att söka. Det här är bidragets EGET tillstånd, inte ett
+    // svar-baserat filter, så det bryter inte mot "sortera aldrig
+    // filtrera" (som handlar om ATT INTE utesluta baserat på PROFILEN).
+    if (bidrag.status !== 'aktiv') continue;
+
+    const overlappar =
+      profil.verksamhet.length > 0 &&
+      ((bidrag.foreningstyp ?? []).some((v) => profil.verksamhet.includes(v)) ||
+        bidrag.kategori.some((k) => (profil.verksamhet as readonly string[]).includes(k)));
+
+    if (overlappar) passar.push(bidrag);
+    else kanGalla.push(bidrag);
+  }
+
+  return { passar, kanGalla };
+}
