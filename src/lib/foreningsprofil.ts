@@ -6,8 +6,8 @@
  * Redis (den kräver en e-postadress som nyckel) — försök aldrig återanvända
  * Redis-mönstret här. Den bestående föreningsprofilen ("samma lagring som
  * bevakningen") är subscribers.ts Subscriber.foreningsprofil-fältet, som
- * fylls i FÖRST när en e-post fångas (se RegistreringsHjalp.astro) genom
- * att denna localStorage-profil mergas in.
+ * fylls i FÖRST när en e-post fångas (framtida utkastflöde) genom att
+ * denna localStorage-profil mergas in.
  *
  * Alla funktioner no-opar defensivt om localStorage saknas — output:'static'
  * (astro.config.mjs) kör src/lib i Node vid bygge, och även om modulen

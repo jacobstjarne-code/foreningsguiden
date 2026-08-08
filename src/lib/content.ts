@@ -41,7 +41,7 @@ export const AVSANDARE = 'Redaktionen Föreningsguiden';
 export const START = {
   metaTitle: 'Vet vad din förening kan söka — Föreningsguiden',
   metaDescription:
-    'Svara på fyra korta frågor, så visar vi vilka bidrag i er kommun som passar er förening — och vad som krävs för dem ni inte når än.',
+    'Svara på tre korta frågor, så visar vi vilka bidrag som finns i er kommun och vilka som passar er förening bäst.',
   h1: 'Kommunala föreningsbidrag, samlade på ett ställe',
   hero:
     'Varje kommun har egna bidrag, egna blanketter och egna sista datum. Föreningsguiden samlar dem kommun för kommun, så att din förening ser vad den kan söka och hinner söka i tid.',

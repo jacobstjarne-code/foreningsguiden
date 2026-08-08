@@ -59,8 +59,8 @@ export interface Subscriber {
   // Bara de kommuner som faktiskt frågats om finns med som nycklar.
   giltighetArsmoten?: Record<string, string>;
   // Matchningstrattens bestående profil (turn-11) — mergas in FÖRST när en
-  // e-post fångas (RegistreringsHjalp.astro/framtida utkastflöde). Fram
-  // tills dess lever profilen bara i localStorage (foreningsprofil.ts).
+  // e-post fångas (framtida utkastflöde). Fram tills dess lever profilen
+  // bara i localStorage (foreningsprofil.ts).
   // Samma "läs-och-mergea, aldrig blind overwrite"-skydd som ovan.
   foreningsprofil?: Foreningsprofil;
 }

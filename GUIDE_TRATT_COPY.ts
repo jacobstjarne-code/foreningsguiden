@@ -8,7 +8,11 @@ export const TRATT = {
   // ---- Ingång ----
   start: {
     rubrik: 'Vad kan er förening söka?',
-    ingress: 'Svara på fyra korta frågor, så visar vi vilka bidrag i er kommun som passar er förening — och vad som krävs för dem ni inte når än.',
+    // B4 (Jacob 2026-08-06): B3 gjorde tratten till tre frågor och bytte
+    // gapanalys-löftet ("vad som krävs för dem ni inte når än") mot två
+    // grupper som inte påstår att något fattas — ingressen låg kvar med
+    // den gamla fyra-frågors-texten och det inaktuella löftet.
+    ingress: 'Svara på tre korta frågor, så visar vi vilka bidrag som finns i er kommun och vilka som passar er förening bäst.',
     startknapp: 'Börja',
     // "Börja om" ljög om vad knappen gör — svaren nollställs inte (sajten
     // lovar att de sparas, TRATT.besked.minne). Etiketten beskriver nu
@@ -119,19 +123,20 @@ export const TRATT = {
       kvitto: 'Länk skickad — kolla din inkorg.',
     },
 
-    // Förstasidans tre förhandsvisningskort (under rubrikerna nedan) —
+    // Förstasidans två förhandsvisningskort (under rubrikerna nedan) —
     // skrivna för att göra korten till en anledning att börja, inte en
     // beskrivning av en produkt.
-    kortUnderMatchar: 'Bidrag där ni uppfyller de krav kommunen publicerat.',
-    kortUnderSaknar: 'Bidrag som ligger nära — och exakt vad som fattas för att nå dem.',
+    //
+    // B4 (Jacob 2026-08-06): de gamla tre korten (kanSoka/behover/
+    // borjaHar) beskrev en gapanalys-modell B3 tog bort — kortet
+    // "Kan sökas nu" lovade att vi vet vilka krav föreningen uppfyller
+    // (vi sorterar, vi prövar inte), "Nära — det här saknas" lovade en
+    // gapanalys som inte längre finns. Ersatta av grupper.passar/
+    // kanGalla-rubrikerna ovan + ny kortcopy nedan. Registreringskortet
+    // (borjaHar) är oförändrat och kortUnderBorjaHar likaså.
+    kortUnderPassar: 'Bidrag vars inriktning stämmer med det ni gör.',
+    kortUnderKanGalla: 'Resten av kommunens bidrag. Vi utesluter ingenting vi inte vet.',
     kortUnderBorjaHar: 'Det formella steget som fäller flest ansökningar, med kommunens handläggningstid.',
-
-    // Grupp 1 — matchande bidrag
-    kanSoka: {
-      rubrik: 'Kan sökas nu',
-      tom: 'Inget bidrag matchar er profil fullt ut ännu — se vad som saknas nedan.',
-      // Per bidrag renderas namn, deadline, belopp ur YAML. Ingen ny copy behövs.
-    },
 
     // Kostnadsramen — bara när matchningsdata faktiskt finns (harMatchningsdata,
     // matching.ts) OCH minst ett matchat bidrag har ett parseat krontak
@@ -156,26 +161,6 @@ export const TRATT = {
     sumFotnotOkantEtt: 'Ett bidrag saknar',
     sumFotnotOkantFlera: '{antal} bidrag saknar',
 
-    // Grupp 2 — nära-matchningar med vad som saknas
-    behover: {
-      rubrik: 'Nära — det här saknas',
-      // Per bidrag: konkret vad som fattas. Mallar för de vanliga fallen.
-      // saknarTid (verksamhetstid) BORTTAGEN 2026-08-02 (G7) — samma skäl
-      // som fraga_tid ovan, matchBidrag kan inte längre producera det skälet.
-      saknarMedlemmar: 'Kräver minst {krav} medlemmar — ni angav {angivet}.',
-      saknarTyp: 'Riktar sig till {krav}. Stämmer det in på er verksamhet? Justera svaret ovan.',
-      saknarRegistrering: 'Kräver att föreningen är registrerad som bidragsberättigad i kommunen — se Börja här nedan.',
-      // C3/D2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): "Nära — det här saknas"
-      // påstår att vi känner till HELA kravbilden för bidraget — sant
-      // bara när D1 är uppfyllt (krav_status: verifierad + minst tre
-      // krav). Är kraven inte kartlagda ännu hamnar bidraget här i
-      // stället, länkat till källan (VOID_MARK.kallaKnappMall,
-      // content.ts — samma "Läs på {host}"-fras som VoidMark) i stället
-      // för ett gissat gap. Ingen ny brödtext — Code hittar inte på
-      // prosa; rubriken (Jacobs egna ord) och källänken bär beskedet.
-      rubrikOkartlagd: 'Kan gälla er — kraven inte kartlagda ännu',
-    },
-
     // Grupp 3 — Börja här (registreringsbeskedet). Produktens skarpaste ögonblick.
     // Visas när fraga_sokt == nej/osaker, ELLER när ett bidrag kräver registrering.
     borjaHar: {
@@ -192,10 +177,10 @@ export const TRATT = {
     },
 
     // SPEC B3 (Design, runda 6, 2026-08-06), D-B — trattens NYA
-    // beskedsmodell. Ersätter INTE kanSoka/behover/borjaHar ovan (de
-    // används fortfarande av förstasidans förhandsvisningskort och av
-    // registrera-sidan, oförändrat) — det här är en egen, parallell
-    // grupp-modell bara för trattens beskedskärm.
+    // beskedsmodell. borjaHar ovan lever kvar oförändrat (registrera-
+    // sidan). kanSoka/behover (trattens gamla tregruppsmodell) och
+    // förstasidans kort som beskrev dem är borttagna i B4 — samma
+    // rubriker (passar/kanGalla nedan) används nu även på förstasidan.
     //
     // "Vad Code behöver veta" §5: grupperna bär listan i ALLA tre
     // sökt-lägena, byter aldrig struktur på ett svar. Bara blocket

@@ -2,8 +2,8 @@
  * bevakningKlient.ts — Klientsidan hämtning av bevakningsräknaren
  * (/api/bevakningsantal, subscribers.ts countSubscribersByKommun). Live ur
  * Redis vid varje sidvisning, ingen cache — därför en fetch, inte inbakat i
- * den statiska HTML:en. Delad av kommunsidan, VantelistaFlode.astro och
- * RegistreringsHjalp.astro så alla tre visar samma golv-logik.
+ * den statiska HTML:en. Delad av kommunsidan och VantelistaFlode.astro
+ * så båda visar samma golv-logik.
  */
 
 export const BEVAKNING_GOLV = 3;
