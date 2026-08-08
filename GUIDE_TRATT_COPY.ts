@@ -138,29 +138,6 @@ export const TRATT = {
     kortUnderKanGalla: 'Resten av kommunens bidrag. Vi utesluter ingenting vi inte vet.',
     kortUnderBorjaHar: 'Det formella steget som fäller flest ansökningar, med kommunens handläggningstid.',
 
-    // Kostnadsramen — bara när matchningsdata faktiskt finns (harMatchningsdata,
-    // matching.ts) OCH minst ett matchat bidrag har ett parseat krontak
-    // (parseBeloppTak, kommunTyper.ts). kostnadsramEnkel när antalMedTak === 1.
-    kostnadsram: 'De här bidragen är värda upp till {summa} kr för er förening. Att söka dem kostar tid — vi kan göra det åt er.',
-    kostnadsramEnkel: 'Det här bidraget är värt upp till {summa} kr för er förening.',
-    // Fallback när harMatchningsdata === false (dagens läge, före Haiku-
-    // passet) — summerar ALLA kommunens bidrag, inte matchade, och ljuger
-    // aldrig om att potten redan är personlig.
-    kostnadsramOgfiltrerad: 'Föreningarna i {kommun} delar på bidrag värda upp till {summa} kr om året. Fyll i er profil så ser ni vilka som passar just er.',
-    // P1.3 (Jacob 2026-08-04): samma mening utan CTA-satsen — profilen
-    // är redan komplett (antalBesvarade >= 4), så "Fyll i er profil"
-    // vore fel uppmaning. Mekanisk kortning av raden ovan, ingen ny text.
-    kostnadsramOgfiltreradKomplett: 'Föreningarna i {kommun} delar på bidrag värda upp till {summa} kr om året.',
-    // Fotnoten (Design turn-14, incoming/foreningsguiden-tratt-tryck-v3-
-    // livedata.html) — null-belopp exkluderas ur summan ovan, aldrig tyst.
-    // uncapped=0 → sumFotnotCappat. uncapped>0 → sumFotnotOkant, med
-    // {uncappedText} fylld av sumFotnotOkantEtt (=1) eller
-    // sumFotnotOkantFlera (>1).
-    sumFotnotCappat: 'Summan av angivna maxbelopp för {antal} bidrag.',
-    sumFotnotOkant: 'Summan gäller {antal} bidrag med angivet tak. {uncappedText} angivet belopp och kan höja summan.',
-    sumFotnotOkantEtt: 'Ett bidrag saknar',
-    sumFotnotOkantFlera: '{antal} bidrag saknar',
-
     // Grupp 3 — Börja här (registreringsbeskedet). Produktens skarpaste ögonblick.
     // Visas när fraga_sokt == nej/osaker, ELLER när ett bidrag kräver registrering.
     borjaHar: {
@@ -223,14 +200,6 @@ export const TRATT = {
       epostPlaceholder: 'din@forening.se',
       knappSkicka: 'Skicka',
       kvitto: 'Skickat.',
-    },
-
-    // H9 (SPEC: Kluster 3, samma dokument): paketpris — bara när fler än
-    // ett bidrag matchar. {antal}/{paketpris}/{styckpris} fylls i av
-    // matcha/index.astro (PRIS_PAKET_ORE/PRIS_REGISTRERINGSUTKAST_ORE,
-    // priser.ts).
-    paket: {
-      rad: 'Ni matchade {antal} bidrag. Vi kan göra utkast till alla — {paketpris} kr i stället för {styckpris} kr per bidrag.',
     },
   },
 
