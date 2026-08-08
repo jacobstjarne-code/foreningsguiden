@@ -118,6 +118,15 @@ export interface Bidrag {
   kalla_url: string;
   anteckning: string | null;
 
+  // A2 (Jacob 2026-08-08): processpår ur extraktionspasset — ALDRIG
+  // renderat. anteckning är den användarvända motsvarigheten. Ingen
+  // backfill av de 366 meningar som redan ligger fel i anteckning
+  // (PROCESSSPRAK_STRUKET_2026-08-08.md) — de hanteras av A1:s filter
+  // (strippaProcessSprak, anteckningFilter.ts) tills GPT ändå är i
+  // respektive kommun. Rör aldrig detta fält från kod — bara research-
+  // passet skriver hit.
+  qa_anteckning: string | null;
+
   // Matchningsvillkor (matchningstratten, turn-11) — extraheras ur
   // krav/malgrupp av ett separat researchpass, INTE av Code. null = inget
   // känt krav — matchar ALLTID, filtrerar ALDRIG bort (se matching.ts).

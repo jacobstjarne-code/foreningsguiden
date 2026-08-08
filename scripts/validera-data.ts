@@ -9,6 +9,7 @@
 // svep i stället för att stanna vid den första — bättre för en människa
 // som ska rätta flera fel på en gång.
 import { validateAllKommunFiles, hittaBeloppPlatshallare, loadKommuner } from '../src/lib/kommuner.ts';
+import { strippaProcessSprak } from '../src/lib/anteckningFilter.ts';
 
 const problem = validateAllKommunFiles();
 
@@ -49,3 +50,29 @@ for (const k of kommuner) {
   }
 }
 console.log(`\nolast (ej oberoende omkontrollerat): belopp ${beloppOlast}, deadline ${deadlineOlast}, krav ${kravOlast}, giltighet ${giltighetOlast}.`);
+
+// A2 (Jacob 2026-08-08), punkt 4 — processpråk i anteckning ska VARNA,
+// aldrig fälla bygget. GPT ska se det (och flytta över till
+// qa_anteckning vid nästa researchpass i respektive kommun), inte
+// blockeras av det. Samma strippaProcessSprak() som A1:s rendering-
+// filter — en sanning för vad som räknas som processpråk.
+let anteckningMedProcessSprak = 0;
+let anteckningMeningarStrukna = 0;
+const kommunerMedProcessSprak = new Set<string>();
+for (const k of kommuner) {
+  for (const b of k.bidrag) {
+    const { strukna } = strippaProcessSprak(b.anteckning);
+    if (strukna.length > 0) {
+      anteckningMedProcessSprak++;
+      anteckningMeningarStrukna += strukna.length;
+      kommunerMedProcessSprak.add(k.kommun_slug);
+    }
+  }
+}
+if (anteckningMedProcessSprak > 0) {
+  console.log(
+    `\nVARNING (fäller inte): ${anteckningMeningarStrukna} meningar processpråk i anteckning, ` +
+      `${anteckningMedProcessSprak} bidrag, ${kommunerMedProcessSprak.size} kommuner. ` +
+      `Filtreras bort vid rendering (A1) — flytta till qa_anteckning vid nästa researchpass i respektive kommun.`
+  );
+}

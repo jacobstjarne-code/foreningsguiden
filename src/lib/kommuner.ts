@@ -191,6 +191,13 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
     problems.push(`${where}.anteckning måste vara text eller null`);
   }
 
+  // A2 — valfritt fält, saknas i alla befintliga filer i dag. Samma
+  // additiva recept som status/senast_verifierad: validera bara om satt.
+  if (raw.qa_anteckning !== null && raw.qa_anteckning !== undefined && typeof raw.qa_anteckning !== 'string') {
+    problems.push(`${where}.qa_anteckning måste vara text eller null`);
+  }
+  raw.qa_anteckning = raw.qa_anteckning ?? null;
+
   // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriska efter migrationen.
   validateDatatillstand(where, 'belopp', raw.belopp_status, raw.belopp !== null && raw.belopp !== undefined, problems, false);
   validateDatatillstand(where, 'deadline', raw.deadline_status, raw.deadlines?.typ !== 'okand', problems);
