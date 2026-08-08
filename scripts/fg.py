@@ -376,8 +376,41 @@ def cmd_batch_verify(args: argparse.Namespace) -> int:
         print("\nUTANFÖR BLOCK:")
         print("\n".join(outside))
     if missing and args.require_all_changed:
-        print("\nUTAN ÄNDRING:")
-        print("\n".join(missing))
+        # En kommun får vara granskad utan faktisk diff.
+        # Proposal/state är då beviset på att kommunen behandlats.
+        reviewed_without_change: set[str] = set()
+
+        if args.block.isdigit():
+            padded = f"{int(args.block):02d}"
+            state_dir = root / f".fg-block{padded}-state"
+            proposal_path = root / f"BLOCK_{padded}_PROPOSAL.json"
+
+            if state_dir.exists():
+                for done in state_dir.glob("*.done"):
+                    reviewed_without_change.add(
+                        f"data/kommuner/{done.stem}.yaml"
+                    )
+
+            if proposal_path.exists():
+                try:
+                    proposal = json.loads(
+                        proposal_path.read_text(encoding="utf-8")
+                    )
+                    for slug in proposal.get("kommuner") or []:
+                        reviewed_without_change.add(
+                            f"data/kommuner/{slug}.yaml"
+                        )
+                except Exception:
+                    pass
+
+        missing = sorted(
+            f for f in missing
+            if f not in reviewed_without_change
+        )
+
+        if missing:
+            print("\nUTAN ÄNDRING:")
+            print("\n".join(missing))
 
     report_json = root / f"KRAVEXTRAKTION_KALLPRIORITERAT_BLOCK_{int(args.block):02d}.json" if args.block.isdigit() else None
     report_md = root / f"KRAVEXTRAKTION_KALLPRIORITERAT_BLOCK_{int(args.block):02d}.md" if args.block.isdigit() else None
