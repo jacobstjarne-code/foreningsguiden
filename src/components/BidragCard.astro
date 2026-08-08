@@ -16,6 +16,7 @@ import {
   earliestDeadlineISO, daysUntil, getUrgency, todayISO,
 } from '../lib/kommuner';
 import { OLAST_MARK } from '../lib/content';
+import { strippaProcessSprak } from '../lib/anteckningFilter';
 import VerificationStamp from './VerificationStamp.astro';
 import VoidMark from './VoidMark.astro';
 import VoidState from './VoidState.astro';
@@ -33,6 +34,12 @@ export interface Props {
 
 const { bidrag, verifierad, ansokningsUrl, kommunSlug, kommunNamn, giltighetStatus } = Astro.props;
 const datumFormaterat = formatDate(bidrag.senast_verifierad ?? verifierad);
+
+// A1 (Jacob 2026-08-08): anteckning blandar användarvänd kontext med
+// QA-spår från extraktionspasset — filtrera bort processspråket här,
+// vid rendering. Rör aldrig YAML-källan. strippaProcessSprak returnerar
+// null om hela fältet var processspråk — ingen tom ruta då.
+const { kvar: anteckningRenad } = strippaProcessSprak(bidrag.anteckning);
 
 // R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): kortet är nu en
 // kollapsad rad, samma radmönster som station 4 (KommunProgression) —
@@ -263,7 +270,7 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
   </div>
   {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
       (relativFrist) — annars stod samma besked på kortet två gånger. */}
-  {bidrag.anteckning && !relativFrist(bidrag) && <p class="bidrag-card__kalla">{bidrag.anteckning}</p>}
+  {anteckningRenad && !relativFrist(bidrag) && <p class="bidrag-card__kalla">{anteckningRenad}</p>}
 
   <div class="felrapport" data-felrapport data-kommun-slug={kommunSlug} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
     <button type="button" class="felrapport-knapp">Det här stämmer inte</button>

@@ -10,6 +10,8 @@
  * `import {...} from '../lib/kommuner'` fortsätter fungera oförändrat.
  */
 
+import { strippaProcessSprak } from './anteckningFilter.ts';
+
 export const KATEGORIER = ['idrott', 'kultur', 'social', 'pensionar', 'funktionsratt', 'ovrig'] as const;
 export type Kategori = (typeof KATEGORIER)[number];
 
@@ -305,7 +307,11 @@ const RELATIV_FRIST_RE = /^Relativ tidsfrist:\s*(.+)$/;
 export function relativFrist(bidrag: Bidrag): string | null {
   if (bidrag.deadlines.typ !== 'relativ') return null;
   const match = bidrag.anteckning?.match(RELATIV_FRIST_RE);
-  return match ? match[1] : (bidrag.anteckning ?? null);
+  if (match) return match[1];
+  // A1 (Jacob 2026-08-08): fallbacken visar hela anteckningen när kolon-
+  // mönstret inte matchar — men får aldrig visa RÅ text, samma
+  // processspråksrisk som BidragCard.astro:s källrad.
+  return strippaProcessSprak(bidrag.anteckning).kvar;
 }
 
 /**
