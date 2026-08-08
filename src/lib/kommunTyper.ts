@@ -607,3 +607,19 @@ export const KATEGORI_LABELS: Record<Kategori, string> = {
   funktionsratt: 'Funktionsrätt',
   ovrig: 'Övrigt',
 };
+
+// R7.2 (Jacob 2026-08-08), igenkänningsraden: "Ordnat för en
+// idrottsförening." — bara Verksamhet-värden som bildar ett riktigt,
+// etablerat svenskt sammansatt ord tas med. 'social' och 'annat' ger
+// inget naturligt sammansatt ord ("socialförening" är inte svenska) —
+// konsumenten faller tillbaka på en generisk formulering utan
+// substantiv-sammansättning när uppslaget saknas, eller när profilen
+// har fler än ett verksamhet-värde (ingen given regel för hur flera
+// värden ska sammanfogas till ett sammansatt ord).
+export const VERKSAMHET_FORENING_LABELS: Partial<Record<Verksamhet, string>> = {
+  idrott: 'idrottsförening',
+  kultur: 'kulturförening',
+  hembygd: 'hembygdsförening',
+  friluft: 'friluftsförening',
+  ungdom: 'ungdomsförening',
+};

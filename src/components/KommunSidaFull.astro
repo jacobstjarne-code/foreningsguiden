@@ -16,6 +16,7 @@ import BreadcrumbList from './BreadcrumbList.astro';
 import VerificationRow from './VerificationRow.astro';
 import KommunProgression from './KommunProgression.astro';
 import GiltighetsKontroll from './GiltighetsKontroll.astro';
+import IgenkanningsRad from './IgenkanningsRad.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
@@ -281,7 +282,19 @@ const webPageJsonLd = {
     <section id="alla-bidrag">
       <h2>Alla bidrag i {kommun.kommun}, i detalj</h2>
       {visaTackningsvarning && <TackningsVarning kommun={kommun.kommun} />}
-      <ul class="bidrag-list">
+      <IgenkanningsRad kommunSlug={kommun.kommun_slug} />
+      {/* R7.4 (EN_PROFIL_ALLA_YTOR.md, runda 7): grupperad vy, dold tills
+         klientskriptet (nedan) vet att profilen har verksamhet — annars
+         den ogrupperade fullständiga listan, precis som i dag. Sortera,
+         aldrig filtrera: samma <li data-bidrag-id>-noder FLYTTAS mellan
+         listorna, ingen dubblering, ingen bortfiltrerad post. */}
+      <div data-bidrag-grupper hidden>
+        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-passar></h3>
+        <ul class="bidrag-list" data-grupp-lista-passar></ul>
+        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-kangalla></h3>
+        <ul class="bidrag-list" data-grupp-lista-kangalla></ul>
+      </div>
+      <ul class="bidrag-list" data-bidrag-list-flat>
         {sortedBidrag.map((bidrag) => (
           <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(bidrag, kommun)} kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} giltighetStatus={giltighetStatus} />
         ))}
@@ -323,8 +336,11 @@ const webPageJsonLd = {
 
 <script>
   import { hamtaBevakningsantal, BEVAKNING_GOLV } from '../lib/bevakningKlient';
-  import { VANTELISTA } from '../lib/content';
+  import { VANTELISTA, IGENKANNING } from '../lib/content';
   import { initFelrapportWidgets } from '../lib/felrapportKlient';
+  import { getForeningsprofil, saveForeningsprofil } from '../lib/foreningsprofil';
+  import { sorteraForTratt } from '../lib/matching';
+  import { VERKSAMHET_FORENING_LABELS, type Kommun } from '../lib/kommunTyper';
 
   const el = document.querySelector<HTMLElement>('[data-bevakning-antal]');
   const slug = el?.dataset.kommunSlug;
@@ -355,6 +371,126 @@ const webPageJsonLd = {
   }
   oppnaFragmentmal();
   window.addEventListener('hashchange', oppnaFragmentmal);
+
+  // R7.2/R7.3/R7.4 (EN_PROFIL_ALLA_YTOR.md, runda 7) — igenkänningsraden
+  // + listans gruppering. Läser ENDAST tratten (/matcha/) sparade profil.
+  // R7.0 blockerar att station 1 skriver hit (vokabulären matchar inte
+  // profil.verksamhet) — det ändrar inte det här, bara läser vad som
+  // redan finns. Default (ingen profil, eller profil utan verksamhet):
+  // F5-raden och den ogrupperade listan står redan synliga i markupen,
+  // den här funktionen gör ingenting alls — "aldrig en tom vy".
+  async function initIgenkanning() {
+    const wrap = document.querySelector<HTMLElement>('[data-igenkanning]');
+    const dennaKommunSlug = wrap?.dataset.igenkanningKommunSlug;
+    if (!wrap || !dennaKommunSlug) return;
+
+    const profil = getForeningsprofil();
+    if (!profil || profil.verksamhet.length === 0) return;
+
+    const matchRad = wrap.querySelector<HTMLElement>('[data-igenkanning-match]');
+    const matchText = wrap.querySelector<HTMLElement>('[data-igenkanning-match-text]');
+    const visaAllaKnapp = wrap.querySelector<HTMLButtonElement>('[data-igenkanning-visa-alla]');
+    const felKommunRad = wrap.querySelector<HTMLElement>('[data-igenkanning-felkommun]');
+    const felKommunText = wrap.querySelector<HTMLElement>('[data-igenkanning-felkommun-text]');
+    const ordnaKnapp = wrap.querySelector<HTMLButtonElement>('[data-igenkanning-ordna]');
+    const tillbakaLank = wrap.querySelector<HTMLAnchorElement>('[data-igenkanning-tillbaka]');
+    const ingenRad = wrap.querySelector<HTMLElement>('[data-igenkanning-ingen]');
+
+    const grupper = document.querySelector<HTMLElement>('[data-bidrag-grupper]');
+    const listaFlat = document.querySelector<HTMLUListElement>('[data-bidrag-list-flat]');
+    const listaPassar = document.querySelector<HTMLUListElement>('[data-grupp-lista-passar]');
+    const listaKangalla = document.querySelector<HTMLUListElement>('[data-grupp-lista-kangalla]');
+    const rubrikPassar = document.querySelector<HTMLElement>('[data-grupp-rubrik-passar]');
+    const rubrikKangalla = document.querySelector<HTMLElement>('[data-grupp-rubrik-kangalla]');
+
+    // Bara EXAKT en verksamhet med ett riktigt sammansatt ord får "en
+    // {typ}"-formuleringen — annars den generiska raden (se IGENKANNING
+    // i content.ts för varför: Design gav bara exemplet "idrottsförening").
+    function mallMedTyp(mallTyp: string, mallGenerisk: string): string {
+      if (profil!.verksamhet.length === 1) {
+        const typ = VERKSAMHET_FORENING_LABELS[profil!.verksamhet[0]];
+        if (typ) return mallTyp.replace('{typ}', typ);
+      }
+      return mallGenerisk;
+    }
+
+    function grupperaListan(kommunData: Kommun) {
+      if (!listaFlat || !grupper || !listaPassar || !listaKangalla) return;
+      const { passar, kanGalla } = sorteraForTratt(profil!, kommunData);
+      const perId = new Map<string, HTMLLIElement>();
+      listaFlat.querySelectorAll<HTMLLIElement>('[data-bidrag-id]').forEach((li) => {
+        if (li.dataset.bidragId) perId.set(li.dataset.bidragId, li);
+      });
+
+      passar.forEach((b) => { const li = perId.get(b.id); if (li) listaPassar.appendChild(li); });
+      kanGalla.forEach((b) => { const li = perId.get(b.id); if (li) listaKangalla.appendChild(li); });
+
+      if (rubrikPassar) rubrikPassar.textContent = `Passar er verksamhet · ${passar.length}`;
+      if (rubrikKangalla) rubrikKangalla.textContent = `Kan gälla er ändå · ${kanGalla.length}`;
+
+      grupper.hidden = false;
+      listaFlat.hidden = true;
+    }
+
+    function visaFlatIgen() {
+      if (!listaFlat || !grupper || !listaPassar || !listaKangalla) return;
+      [...listaPassar.querySelectorAll('[data-bidrag-id]'), ...listaKangalla.querySelectorAll('[data-bidrag-id]')]
+        .forEach((li) => listaFlat.appendChild(li));
+      grupper.hidden = true;
+      listaFlat.hidden = false;
+    }
+
+    async function hamtaKommun(slug: string): Promise<Kommun | null> {
+      try {
+        const res = await fetch(`/kommun-data/${slug}.json`);
+        if (!res.ok) return null;
+        return (await res.json()) as Kommun;
+      } catch {
+        return null;
+      }
+    }
+
+    const dennaKommun = await hamtaKommun(dennaKommunSlug);
+    if (!dennaKommun) return; // ingen kommundata — F5-defaultet står kvar
+
+    // R7.3: verksamheten är kommunoberoende, så grupperingen gäller
+    // oavsett om profilens kommun matchar den här sidan eller inte.
+    grupperaListan(dennaKommun);
+
+    if (profil.kommunSlug === dennaKommunSlug) {
+      if (ingenRad) ingenRad.hidden = true;
+      if (matchRad) matchRad.hidden = false;
+      if (matchText) matchText.textContent = mallMedTyp(IGENKANNING.matchMallTyp, IGENKANNING.matchMallGenerisk);
+      visaAllaKnapp?.addEventListener('click', visaFlatIgen);
+    } else if (profil.kommunSlug) {
+      const profilKommun = await hamtaKommun(profil.kommunSlug);
+      if (!profilKommun) return;
+
+      if (ingenRad) ingenRad.hidden = true;
+      if (felKommunRad) felKommunRad.hidden = false;
+      if (felKommunText) {
+        felKommunText.textContent = mallMedTyp(IGENKANNING.felKommunMallTyp, IGENKANNING.felKommunMallGenerisk)
+          .replace('{profilKommun}', profilKommun.kommun)
+          .replace('{dennaKommun}', dennaKommun.kommun);
+      }
+      if (ordnaKnapp) {
+        ordnaKnapp.textContent = IGENKANNING.felKommunOrdna.replace('{kommun}', dennaKommun.kommun);
+        ordnaKnapp.addEventListener('click', () => {
+          // sokt är kommunspecifikt (R7.3) — nollställs vid kommunbyte,
+          // frågas inte om i raden. Enklaste korrekta väg till konsekvent
+          // tillstånd: ladda om, samma mönster som en vanlig navigering.
+          saveForeningsprofil({ kommunSlug: dennaKommunSlug, sokt: null });
+          location.reload();
+        });
+      }
+      if (tillbakaLank) {
+        tillbakaLank.textContent = IGENKANNING.felKommunTillbaka.replace('{kommun}', profilKommun.kommun);
+        tillbakaLank.href = `/kommun/${profil.kommunSlug}/`;
+      }
+    }
+  }
+
+  initIgenkanning();
 </script>
 
 <style>
@@ -462,5 +598,14 @@ const webPageJsonLd = {
     font-size: var(--fg-text-body);
     color: var(--fg-accent);
     font-weight: var(--fg-weight-bold);
+  }
+
+  /* R7.4 — gruppruriken följer .bidrag-list:s eget rytmmått ovanför
+     varje lista, ingen ny skala. */
+  .bidrag-grupp-rubrik {
+    margin: var(--fg-space-7) 0 0;
+  }
+  .bidrag-grupp-rubrik + .bidrag-list {
+    margin-top: var(--fg-space-4);
   }
 </style>

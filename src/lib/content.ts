@@ -310,7 +310,12 @@ export const VAGLEDNING = {
   station1: {
     rubrik: 'Vad gäller er?',
     intro: 'Vilken sorts förening ni är avgör vilka bidrag som är möjliga. Välj här, så visar vi bara det som gäller er.',
-    sparatText: 'Sparat till ert underlag: föreningstyp — {typ}',
+    // R7.1 (Jacob 2026-08-08): "Sparat" var osant — applyFilter() håller
+    // valet i klientminne, sidan glömmer vid omladdning (R7.0 blockerar
+    // att station 1 skriver till profilen, så det stämmer fortfarande
+    // inte). Minsta sanna version tills dess. Blir R7.0 löst byts raden
+    // mot Designs "Sparat i den här webbläsaren."
+    sparatText: 'Visar {typ}',
   },
 
   // Station 2 — Vad är brådskande?
@@ -809,13 +814,46 @@ export const KOMMUNSIFFRA = {
 export const EKERN = {
   verifieradPrefix: 'KÄLLAN LÄST',
   band2Eyebrow: 'GÄLLER DET HÄR ER?',
-  band2Rubrik: 'Fyra frågor, och ni ser vad just er förening kan söka',
+  // R7 (Jacob 2026-08-08): samma "fyra frågor"-bugg B4 fixade i
+  // TRATT.start.ingress, en annan förekomst — tratten är tre frågor
+  // sedan B3. Missad av B4:s scope (som var TRATT.start.ingress +
+  // förstasidans kort), hittad i förbigående vid R7-arbetet.
+  band2Rubrik: 'Tre frågor, och ni ser vad just er förening kan söka',
   band2Text: 'Kraven skiljer sig mellan bidrag. Svaren sparas, så nästa gång ser ni bara det som är nytt.',
   band2Cta: 'Se vad ni kan söka',
   band2CtaUnderrad: 'Gratis. Inget konto, ingen mejladress.',
   band3Eyebrow: 'ELLER LÄS ALLT SJÄLV',
   band3Lank1: 'Alla bidrag i {kommun} i detalj',
   band3Lank2: 'Sista ansökningsdatum',
+};
+
+/**
+ * IGENKÄNNINGSRADEN — EN_PROFIL_ALLA_YTOR.md (Design, runda 7, R7.2/R7.3),
+ * kommunsidan. Tre tillstånd: profil för DENNA kommun (matchMall*),
+ * profil för ANNAN kommun (felKommunMall*), ingen profil/ingen verksamhet
+ * (ingenProfil*). En rad, aldrig en banner — sorterar, spärrar aldrig
+ * ("Visa allt ändå" finns alltid när profilen matchar).
+ *
+ * matchMallTyp/felKommunMallTyp används när profilen har EXAKT en
+ * verksamhet som bildar ett riktigt sammansatt ord (kommunTyper.ts
+ * VERKSAMHET_FORENING_LABELS). matchMallGenerisk/felKommunMallGenerisk
+ * är fallback för flera verksamheter eller ett värde utan sammansatt
+ * ord ('social', 'annat') — Design gav bara exemplet "en idrottsförening",
+ * ingen regel för hur flera värden ska sammanfogas till ett ord.
+ */
+export const IGENKANNING = {
+  matchMallTyp: 'Ordnat för en {typ}. Sidan visar det som passar er först.',
+  matchMallGenerisk: 'Ordnat efter er verksamhet. Sidan visar det som passar er först.',
+  matchAndra: 'Ändra',
+  matchVisaAllaAnda: 'Visa allt ändå',
+
+  ingenProfilText: 'Säg vad ni är för förening, så ordnar vi sidan efter er.',
+  ingenProfilKnapp: 'Tre frågor',
+
+  felKommunMallTyp: 'Ni är en {typ} — det tar vi med. Men er profil gäller {profilKommun}, och det här är {dennaKommun}.',
+  felKommunMallGenerisk: 'Er verksamhet tar vi med. Men er profil gäller {profilKommun}, och det här är {dennaKommun}.',
+  felKommunOrdna: 'Ordna {kommun} för oss',
+  felKommunTillbaka: 'Till {kommun} i stället',
 };
 
 /**

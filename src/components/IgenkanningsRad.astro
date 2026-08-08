@@ -1,0 +1,78 @@
+---
+// IgenkanningsRad — EN_PROFIL_ALLA_YTOR.md (Design, runda 7, R7.2/R7.3).
+// Ren markup + CSS här, ingen logik — KommunSidaFull.astro:s klientskript
+// äger tillståndslogiken (läser foreningsprofil, väljer tillstånd,
+// kopplar aktionerna) eftersom samma skript också styr listans
+// gruppering (R7.4) och de två hänger ihop.
+//
+// Default (ingen JS, eller innan skriptet hunnit köra): F5, "ingen
+// profil" — synlig utan `hidden`. F1/F2 börjar dolda. Matchar R7.2:s
+// krav "aldrig en tom vy, aldrig ett hinder framför innehållet."
+import { IGENKANNING } from '../lib/content';
+
+export interface Props {
+  kommunSlug: string;
+}
+
+const { kommunSlug } = Astro.props;
+---
+
+<div class="igenkanning" data-igenkanning data-igenkanning-kommun-slug={kommunSlug}>
+  <p class="igenkanning__rad igenkanning__rad--accent" data-igenkanning-match hidden>
+    <span data-igenkanning-match-text></span>
+    <span class="igenkanning__actions">
+      <a href="/matcha/" class="fg-btn--ghost igenkanning__knapp">{IGENKANNING.matchAndra}</a>
+      <button type="button" class="fg-btn--ghost igenkanning__knapp" data-igenkanning-visa-alla>{IGENKANNING.matchVisaAllaAnda}</button>
+    </span>
+  </p>
+
+  <p class="igenkanning__rad igenkanning__rad--accent" data-igenkanning-felkommun hidden>
+    <span data-igenkanning-felkommun-text></span>
+    <span class="igenkanning__actions">
+      <button type="button" class="fg-btn--ghost igenkanning__knapp" data-igenkanning-ordna></button>
+      <a class="fg-btn--ghost igenkanning__knapp" data-igenkanning-tillbaka href="#"></a>
+    </span>
+  </p>
+
+  <p class="igenkanning__rad igenkanning__rad--sunken" data-igenkanning-ingen>
+    {IGENKANNING.ingenProfilText}{' '}
+    <a href="/matcha/" class="igenkanning__lank">{IGENKANNING.ingenProfilKnapp} →</a>
+  </p>
+</div>
+
+<style>
+  .igenkanning {
+    margin: var(--fg-space-5) 0;
+  }
+  .igenkanning__rad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fg-space-3) var(--fg-space-4);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    font-size: var(--fg-text-body);
+    margin: 0;
+  }
+  .igenkanning__rad--accent {
+    background: var(--fg-accent-soft);
+    color: var(--fg-ink);
+  }
+  .igenkanning__rad--sunken {
+    background: var(--fg-surface-sunken);
+    color: var(--fg-ink-muted);
+  }
+  .igenkanning__actions {
+    display: flex;
+    gap: var(--fg-space-2);
+    margin-left: auto;
+  }
+  .igenkanning__knapp {
+    white-space: nowrap;
+  }
+  .igenkanning__lank {
+    color: inherit;
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+</style>
