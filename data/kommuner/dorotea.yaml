@@ -18,19 +18,20 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 02-01
-    - 08-01
+    - 02-25
+    - 08-25
   krav:
-  - Aktiviteter för barn och ungdomar
-  - Ideell verksamhet
-  - Ansökan två gånger årligen via webbformulär från 1 februari
-  belopp: 50 kronor per sammankomst (under givna medelsramar)
+  - Deltagare i åldern 7–25 år (gäller den som under året fyller 7 respektive 25 år)
+  - Grupp om minst 3 bidragsberättigade deltagare
+  - Gruppaktiviteten ska vara planerad, ledarledd och pågå i minst 60 minuter (inklusive omklädning)
+  - 'Ansökan lämnas två gånger per år: senast 25 februari (för perioden 1/7–31/12) och senast 25 augusti (för perioden 1/1–30/6)'
+  belopp: 50 kronor per sammankomst
   sen_ansokan: Följ ansökningsperioder
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kommunalt-aktivitetsstod/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
 - id: dorotea-statligt-aktivitetsstod
   namn: Statligt aktivitetsstöd
@@ -41,17 +42,25 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 02-01
+    - 02-15
+    - 08-15
   krav:
-  - Aktiviteter ska finansieras delvis av statliga medel
-  - Kommunen ansvarar för ansökan
-  belopp: Enligt statlig tilldelning
+  - Ledarledd gruppaktivitet med minst tre deltagare i åldern 7–20 år utöver ledaren
+  - Sammankomsten ska vara genomförd av lokalavdelningen och vara minst 60 minuter
+  - Bidrag utgår för maximalt 30 deltagare per sammankomst
+  - Sammankomsten ska innehålla en gemensam samling med någon form av instruktion
+  - Bidrag utgår inte till entrébelagda tävlingar eller kommersiella arrangemang
+  - Närvarokort ska fyllas i vid varje sammankomst
+  - Ansökan ska skrivas under av en av styrelsen utsedd firmatecknare
+  - Ansökan lämnas senast 15 februari (höstens aktiviteter) respektive 15 augusti (vårens aktiviteter); för sent inlämnad
+    ansökan ger inte rätt till bidrag
+  belopp: Bidraget varierar från år till år
   sen_ansokan: Följ statens tidplaner
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/statligt-aktivitetsstod/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: okand
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
 - id: dorotea-kulturbidrag
   namn: Kulturbidrag
@@ -59,21 +68,19 @@ bidrag:
   - kultur
   malgrupp: Kulturföreningar för kulturell verksamhet
   deadlines:
-    typ: fasta
-    datum:
-    - 02-01
+    typ: lopande
+    datum: []
   krav:
-  - Kulturverksamhet ska bedras i Dorotea kommun
-  - Dokumentation av kulturell programverksamhet
-  belopp: null
+  - Bidrag utgår till föreningar/organisationer inom Dorotea kommun
+  - Ansökan ska innehålla styrkt redovisning av de kostnader föreningen haft för arrangemanget och eventuella intäkter
+  belopp: Högst 90 % av nettokostnaden för ett arrangemang, sammantaget högst 15 000 kronor per förening och år
   sen_ansokan: Följ ansökningsperioder
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturbidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 - id: dorotea-ledarutbildning
   namn: Ledarutbildningsbidrag
   kategori:
@@ -84,17 +91,21 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Utbildning för föreningsrepresentanter
-  - Relevant för föreningens verksamhet
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  - Den som går utbildningen ska vara minst 15 år
+  - Den som går utbildningen ska verka aktivt som ledare inom föreningen
+  - Bidrag utgår från och med endagskurser vilkas program omfattar minst 6 timmar
+  - Samåkning krävs
+  - Bidrag utgår ej för konferenser, kongresser, förbundsmöten eller liknande, och ej för anställd administratör eller instruktör
+  belopp: 'Bidrag till kursavgift, logi och mat samt resekostnader (högst 16 kr/mil vid egen bil). Maxbelopp per år efter
+    antal bidragsberättigade medlemmar: under 50 medlemmar 4000 kr, 51–100 medlemmar 4500 kr, 101–200 medlemmar 5000 kr, 201–300
+    medlemmar 5500 kr, 301–400 medlemmar 6000 kr. Flersektionsföreningar får ytterligare 750 kronor per sektion och år.'
+  sen_ansokan: Ansökan ska göras av föreningens huvudstyrelse senast en månad efter avslutad kurs
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/ledarutbildningsbidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 - id: dorotea-lokalbidrag
   namn: Lokalbidrag
   kategori:
@@ -104,18 +115,21 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 02-01
+    - 03-31
   krav:
-  - Föreningen måste hyra lokal för verksamhet
-  - Dokumenterade hyresavtal krävs
-  belopp: null
+  - Ansvarig styrelse ska finnas och minst två styrelsesammanträden ska ha hållits under föregående verksamhetsår
+  - Bidrag utgår inte till förening som på annat sätt genom kommunens budget tillhandahålls lokal eller erhåller bidrag till
+    omkostnaderna
+  - Bidrag utgår ej till hyreskostnader på Medborgarhuset eller till enstaka förhyrningar
+  belopp: 80 % av godkänd kostnad, dock högst 15 000 kr/år för hyrd anläggning och högst 18 000 kr/år för egen anläggning.
+    För övriga samlingslokaler 50 % av godkänd kostnad, dock högst 15 000 kr/år
   sen_ansokan: Följ ansökningsperioder
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'T8a: Översiktssidan gav inte verifierbart belopp eller uttrycklig beloppsregel.'
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/lokalbidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 - id: dorotea-anlaggningsbidrag
   namn: Anläggningsbidrag
   kategori:
@@ -125,19 +139,24 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 02-01
+    - 03-31
   krav:
-  - Föreningen måste äga eller ha långtidskontrakt på anläggning
-  - Dokumenterade kostnader för infrastruktur
-  belopp: null
+  - Årsmöte samt minst två styrelsesammanträden ska ha hållits under föregående verksamhetsår
+  - Protokollsbeslut på åtgärden ska finnas och inlämnas
+  - Bidraget kan inte sökas av förening som på annat sätt genom kommunens budget erhåller ekonomiskt bidrag för täckande av
+    drift- respektive hyreskostnad
+  belopp: 'Bidrag enligt anläggningstyp: elljusspår 5000 kr/spår och år + 400 kr per påbörjad 500 meter (max 8000 kr), skidspår
+    (max 1000 kr), isbanor (max 1000 kr), badplatser skötselbidrag (max 1500 kr), badplatser underhåll (max 3000 kr), skjutbanor
+    (max 1500 kr), bollplaner grus (max 1000 kr), bollplaner gräs (max 3000 kr), tennisbanor asfalt (max 500 kr), tennisbanor
+    stybbunderlag (max 2000 kr), motoranläggningar/banor besiktade/godkända (max 4000 kr), små slalombackar besiktade/godkända
+    (max 1000 kr)'
   sen_ansokan: Följ ansökningsperioder
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/anlaggningsbidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 - id: dorotea-specialbidrag
   namn: Särskilda bidrag
   kategori:
@@ -148,15 +167,19 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Projektbeskrivning med motivering
-  - Budget för projektet
-  belopp: null
+  - Kan sökas för ändamål som inte omfattas av övriga bidragsnormer och som främjar föreningens verksamhet
+  - Verksamheten ska bedömas vara av sådan art att kommunens stöd bör utgå
+  - Specificerad kostnadssammanställning samt verifikationer ska uppvisas och minst täcka det beviljade bidraget, annars är
+    föreningen återbetalningsskyldig
+  - Verksamheten/investeringen ska vara genomförd senast ett år efter beviljat bidrag, och verifikationer ska visas senast
+    3 månader efter verksamhetens slut
+  belopp: Prövas individuellt av kultur- och utbildningsnämnden från fall till fall; ansökningar under 300 kronor prövas inte
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/sarskilda-bidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'T8a: Översiktssidan gav inte verifierbart belopp eller uttrycklig beloppsregel.'
 - id: dorotea-bygdemedel
   namn: Bygdemedel
@@ -168,15 +191,18 @@ bidrag:
     datum:
     - 01-31
   krav:
-  - Projektet ska främja bygdeutveckling
-  - Dokumenterade kostnader krävs
-  belopp: Enligt bygdemedelsregler
+  - Föreningen/organisationen ska själv finansiera med 10 procent kontanta medel
+  - Så många som möjligt i bygden ska få ta del av bidraget
+  - Föreningen måste ha organisationsnummer och vara inregistrerad i kommunens föreningsregister
+  - Bygdemedel beviljas inte till driftskostnader, investeringar som kan kräva fortsatt bidrag, investeringar som kan orsaka
+    stat eller kommun oförutsedda utgifter, eller kommersiell verksamhet
+  belopp: Högst 90 % av faktiska, godkända och styrkta kostnader. Vid projekt över 30 000 kr kan förskott sökas med 33 %
   sen_ansokan: Enligt Länsstyrelsens tidplan
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/bygdemedel/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Nationell/regional finansiering
 forutsattningar:
 - id: dorotea-registrering

@@ -24,12 +24,11 @@ bidrag:
   belopp: 5 000 kronor
   sen_ansokan: Löpande under året
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: false
-  anteckning: Krav på tidigare års deltagaraktiviteter hör inte till startbidraget. Kravlistan är markerad som inte fullständig
-    tills normens samtliga startbidragsvillkor har verifierats.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   senast_verifierad: '2026-08-03'
 - id: gislaved-grundbidrag
   namn: Grundbidrag
@@ -50,9 +49,9 @@ bidrag:
   belopp: 3 000 kronor per år
   sen_ansokan: 15 mars varje år
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   senast_verifierad: '2026-08-03'
@@ -81,12 +80,11 @@ bidrag:
   belopp: Bestäms utifrån kommunens totalbelopp och antal deltagaraktiviteter
   sen_ansokan: 25 augusti för perioden 1 januari–30 juni och 25 februari för perioden 1 juli–31 december
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: false
-  anteckning: Kraven är utökade mot normdokumentet men markeras konservativt som inte fullständiga tills hela normen har kontrollerats
-    rad för rad mot den strukturerade listan.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   senast_verifierad: '2026-08-03'
 - id: gislaved-anlaggningsbidrag
   namn: Anläggningsbidrag
@@ -101,9 +99,11 @@ bidrag:
   krav:
   - Föreningen ska vara bidragsberättigad
   - Föreningen ska ha redovisat minst 100 deltagaraktiviteter föregående år
+  - Föreningen ska hålla anläggningen eller lokalen i gott skick
   - Hyres- eller nyttjandekontrakt ska löpa på minst tre år
   - Anläggningen eller lokalen ska uppfylla myndighetskrav, inklusive OVK och brandskydd där det är tillämpligt
   - Anläggningen eller lokalen ska vara fri från alkohol, narkotika, dopning och tobak
+  - Anläggningen eller lokalen ska vara förenlig med föreningens verksamhet enligt föreningens stadgar
   - Anläggningen eller lokalen ska vara godkänd av samhällsutvecklingsnämnden
   - Anläggningen eller lokalen ska ligga i Gislaveds kommun
   - För hyrd lokal ska gällande hyreskontrakt eller hyresavi kunna styrkas
@@ -113,13 +113,14 @@ bidrag:
     fasta normbelopp per anläggningstyp samt aktivitetsbaserad reducering (20–100 %).'
   sen_ansokan: 15 mars varje år
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: false
-  anteckning: Normtabellen innehåller fasta belopp per anläggningstyp, bland annat fotbollsplaner, hallar, friidrott, tennis,
-    golf, rid-/hundsport, motionsspår och skytte. Kraven är utökade mot normdokumentet men markeras konservativt som inte
-    fullständiga tills samtliga anläggningstyper och specialvillkor har kontrollerats.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: 'Två krav har lagts till efter kontroll mot normdokumentet: att anläggningen/lokalen ska hållas i gott skick,
+    och att den ska vara förenlig med föreningens verksamhet enligt stadgarna. Normtabellen med fasta belopp per anläggningstyp
+    (bland annat fotbollsplaner, hallar, friidrott, tennis, golf, rid-/hundsport, motionsspår och skytte) finns i normdokumentets
+    driftbidragsavsnitt.'
   senast_verifierad: '2026-08-03'
 - id: gislaved-investeringsbidrag-litet
   namn: Litet investeringsbidrag
@@ -134,12 +135,19 @@ bidrag:
   - Bidragsberättigad förening
   - Kostnadskalkyl och erforderliga handlingar ska bifogas
   - Frivilligt arbete kan värderas till 250 kronor per timme om det specificeras
-  belopp: Högst 60 % av redovisad kostnad för ansökningar upp till 100 000 kronor; gräsklippare högst 40 %
+  - Fakturakopia ska redovisas som underlag för bidraget
+  - Bidrag till personlig utrustning, till exempel hjälmar, bollar, västar och klubbor, beviljas inte
+  - Administrativ utrustning, till exempel dator, skrivare, kopiator och köksutrustning, beviljas inte
+  - Föreningen är skyldig att utnyttja förekommande statliga bidragsmöjligheter
+  - Bidrag utgår inte till redan påbörjade arbeten eller gjorda inköp
+  - Vid leasing ska en första förhöjd leasingavgift vara lika stor som det beviljade investeringsbidraget
+  - Beviljat bidrag kan användas det år det beviljats samt nästkommande år, annars återtas det automatiskt till kommunen
+  belopp: Högst 60 % av redovisad kostnad för ansökningar upp till 100 000 kronor
   sen_ansokan: Löpande under året
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   senast_verifierad: '2026-08-03'
@@ -157,12 +165,19 @@ bidrag:
   - Bidragsberättigad förening
   - Ansökan avser 100 000 kronor eller mer
   - Kostnadskalkyl och erforderliga handlingar ska bifogas
+  - Fakturakopia ska redovisas som underlag för bidraget
+  - Bidrag till personlig utrustning, till exempel hjälmar, bollar, västar och klubbor, beviljas inte
+  - Administrativ utrustning, till exempel dator, skrivare, kopiator och köksutrustning, beviljas inte
+  - Föreningen är skyldig att utnyttja förekommande statliga bidragsmöjligheter
+  - Bidrag utgår inte till redan påbörjade arbeten eller gjorda inköp
+  - Vid leasing ska en första förhöjd leasingavgift vara lika stor som det beviljade investeringsbidraget
+  - Beviljat bidrag kan användas det år det beviljats samt nästkommande år, annars återtas det automatiskt till kommunen
   belopp: Högst 60 % av redovisad kostnad för ansökningar över 100 000 kronor; gräsklippare högst 40 %
   sen_ansokan: 1 november varje år
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   senast_verifierad: '2026-08-03'
@@ -185,9 +200,9 @@ bidrag:
     000 kronor per förening och budgetår.
   sen_ansokan: Senast 60 dagar efter utbildningens eller kursens avslut
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: 'Relativ tidsfrist: 60 dagar efter avslutad kurs.'
   senast_verifierad: '2026-08-03'
@@ -202,12 +217,13 @@ bidrag:
   krav:
   - Ansökan prövas individuellt av samhällsutvecklingsnämnden
   - Föreningen ska redovisa en fakturakopia eller annan redovisning som nämnden kräver
+  - Beviljat bidrag ska användas senast ett år efter bidragsbeslutet
   belopp: null
   sen_ansokan: Löpande under året; ärendet hanteras på nästkommande sammanträde
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
   belopp_status: ingen_regel
-  deadline_status: olast
-  krav_status: olast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Kommunen anger att bidragsformen inte är knuten till särskilda villkor eller bestämmelser och att varje ansökan
     prövas av nämnden i det enskilda fallet. Något fast belopp eller tak anges därför inte.
@@ -222,6 +238,7 @@ bidrag:
     datum:
     - 03-15
   krav:
+  - Föreningen ska ha minst tio aktiva medlemmar med funktionsvariation
   - Uppfylla kommunens allmänna bidragsbestämmelser för åldern 0–99 år
   - Endast medlemmar med funktionsvariation som är bosatta i kommunen får räknas
   - Verksamhetsberättelse, ekonomisk rapport, årsmötesprotokoll och revisionsberättelse ska bifogas
@@ -229,9 +246,9 @@ bidrag:
   belopp: 140 kronor per medlem med funktionsvariation
   sen_ansokan: 15 mars varje år
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Funktionsvariationsföreningar kan endast ansöka om denna bidragsart.
   senast_verifierad: '2026-08-03'
@@ -250,11 +267,13 @@ bidrag:
   belopp: Andel av kommunens anslag till verksamhetsbidrag enligt Folkbildningsrådets riktlinjer
   sen_ansokan: 31 maj varje år
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: false
-  anteckning: null
+  anteckning: Beloppet fördelas som andel av kommunens anslag enligt Folkbildningsrådets riktlinjer, utan lokalt fast belopp.
+    Detaljerade fördelningsregler regleras externt av Folkbildningsrådet och ligger utanför kommunens egna publicerade källor,
+    varför kravlistan kvarstår som inte fullständig.
   senast_verifierad: '2026-08-03'
 - id: gislaved-kultur-verksamhet
   namn: Verksamhetsbidrag kultur
@@ -274,9 +293,9 @@ bidrag:
   belopp: Bedöms utifrån verksamhetsplan, budget samt föreningens ekonomiska och administrativa resurser
   sen_ansokan: 31 augusti varje år
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   senast_verifierad: '2026-08-03'
@@ -302,15 +321,35 @@ bidrag:
     större projekt
   - Samarrangemang mellan flera föreningar prioriteras
   - Ekonomisk redovisning ska lämnas efter genomförandet
+  - Arrangemanget ska äga rum i Gislaveds kommun
+  - Lokalen eller platsen där arrangemanget genomförs ska vara tillgänglighetsanpassad
+  - Arrangemang och projekt som vänder sig till barn och ungdomar ska vara drogfria
+  - Allmänheten ska ha tillträde till arrangemanget och ha informerats om det genom lokal massmedia, sociala medier och/eller
+    affischering
+  - Det ska tydligt framgå i marknadsföringen att arrangemanget genomförs med stöd från Gislaveds kommun, och arrangemanget
+    ska läggas in i evenemangskalendern
+  - Ansökan ska klart ange arrangemangets art, tid och plats, tidsrymd för projektet samt medverkande och ansvariga
+  - Ansökan ska innehålla en detaljerad kostnads- och inkomstkalkyl där budgeten är i balans för att kunna behandlas
+  - Bidrag som sökts eller erhållits från andra bidragsgivare ska redovisas
+  - Redovisning av arrangemanget eller projektet ska ske senast två månader efter genomförandet, annars återkallas beslutet
+    om beviljat bidrag
+  - Kvitto som styrker kostnader och intäkter ska bifogas redovisningen
+  - En förening kan bara ansöka om bidrag för samma arrangemang eller projekt från en kommunal nämnd
+  - Bidrag beviljas inte till interna sammankomster såsom årsmöten, konferenser, jubileer eller andra tillställningar som
+    endast vänder sig till föreningens medlemmar och inbjudna gäster
+  - Bidrag kan betalas ut som förlustgaranti som endast faller ut om arrangemanget går med ekonomisk förlust, och delutbetalning
+    kan ske enligt samhällsutvecklingsnämndens särskilda beslut
   belopp: null
   sen_ansokan: Senast två månader före genomförandet; handläggning sker efter 31 januari, 30 april, 31 juli och 31 oktober
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens publicerade källa anger inget belopp eller tak. Beloppet är därför overifierat, inte en individuell
-    bedömning.
+  anteckning: Normdokumentets villkor för bidragsgivning (kulturförening) bekräftar att samhällsutvecklingsnämnden beslutar
+    om belopp och eventuella delutbetalningar individuellt i varje enskilt fall, inklusive möjlighet till förlustgaranti och
+    reducering vid överskott - det finns alltså ingen fast beloppsregel, snarare en individuell bedömning. Flera krav har
+    lagts till från normdokumentets villkorslista som saknades i kravlistan.
   senast_verifierad: '2026-08-03'
 - id: gislaved-projektbidrag
   namn: Projektbidrag kultur
@@ -334,15 +373,35 @@ bidrag:
     större projekt
   - Samarrangemang mellan flera föreningar prioriteras
   - Ekonomisk redovisning ska lämnas efter genomförandet
+  - Arrangemanget ska äga rum i Gislaveds kommun
+  - Lokalen eller platsen där arrangemanget genomförs ska vara tillgänglighetsanpassad
+  - Arrangemang och projekt som vänder sig till barn och ungdomar ska vara drogfria
+  - Allmänheten ska ha tillträde till arrangemanget och ha informerats om det genom lokal massmedia, sociala medier och/eller
+    affischering
+  - Det ska tydligt framgå i marknadsföringen att arrangemanget genomförs med stöd från Gislaveds kommun, och arrangemanget
+    ska läggas in i evenemangskalendern
+  - Ansökan ska klart ange arrangemangets art, tid och plats, tidsrymd för projektet samt medverkande och ansvariga
+  - Ansökan ska innehålla en detaljerad kostnads- och inkomstkalkyl där budgeten är i balans för att kunna behandlas
+  - Bidrag som sökts eller erhållits från andra bidragsgivare ska redovisas
+  - Redovisning av arrangemanget eller projektet ska ske senast två månader efter genomförandet, annars återkallas beslutet
+    om beviljat bidrag
+  - Kvitto som styrker kostnader och intäkter ska bifogas redovisningen
+  - En förening kan bara ansöka om bidrag för samma arrangemang eller projekt från en kommunal nämnd
+  - Bidrag beviljas inte till interna sammankomster såsom årsmöten, konferenser, jubileer eller andra tillställningar som
+    endast vänder sig till föreningens medlemmar och inbjudna gäster
+  - Bidrag kan betalas ut som förlustgaranti som endast faller ut om arrangemanget går med ekonomisk förlust, och delutbetalning
+    kan ske enligt samhällsutvecklingsnämndens särskilda beslut
   belopp: null
   sen_ansokan: Senast två månader före genomförandet; handläggning sker efter 31 januari, 30 april, 31 juli och 31 oktober
   kalla_url: https://www.gislaved.se/uppleva-och-gora/foreningsliv/foreningsbidrag-fritid--och-kulturforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens publicerade källa anger inget belopp eller tak. Beloppet är därför overifierat, inte en individuell
-    bedömning.
+  anteckning: Normdokumentets villkor för bidragsgivning (kulturförening) bekräftar att samhällsutvecklingsnämnden beslutar
+    om belopp och eventuella delutbetalningar individuellt i varje enskilt fall, inklusive möjlighet till förlustgaranti och
+    reducering vid överskott - det finns alltså ingen fast beloppsregel, snarare en individuell bedömning. Flera krav har
+    lagts till från normdokumentets villkorslista som saknades i kravlistan.
   senast_verifierad: '2026-08-03'
 - id: gislaved-socialt
   namn: Föreningsbidrag social verksamhet
@@ -362,11 +421,12 @@ bidrag:
   sen_ansokan: 30 maj varje år
   kalla_url: https://www.gislaved.se/omsorg-och-stod/anhorigstod/foreningsbidrag-social-verksamhet
   belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   krav_fullstandiga: false
-  anteckning: Kommunens publicerade källa anger inget belopp eller tak. Beloppet är därför overifierat, inte en individuell
-    bedömning.
+  anteckning: Kommunens sida bekräftar målgrupperna och att föreningen ska vara verksam i Gislaveds kommun. Ett fullständigt
+    reglemente för föreningsbidrag till social verksamhet länkas till en dokumentkatalog på kommunens webbplats snarare än
+    en direkt PDF, varför kravlistans fullständighet inte kunnat verifieras helt.
   senast_verifierad: '2026-08-03'
 forutsattningar:
 - id: gislaved-bidragsberattigad
