@@ -24,9 +24,14 @@ export interface Props {
   // (öppna kommunsidan i ny flik) fungerar oavsett — samma mönster som
   // kategori-pillren i KommunProgression.astro.
   selectMode?: boolean;
+  // D5 (ARBETSORDER 2026-08-11): förstasidans sökfält postar till den nya
+  // /kommuner/-sidan (?sok=), som fyller sökfältet SSR och applicerar
+  // samma klientfilter direkt vid sidladdning i stället för att kräva ett
+  // andra skriv-anslag. undefined = befintligt beteende, tomt fält.
+  initialQuery?: string;
 }
 
-const { kommuner, selectMode = false } = Astro.props;
+const { kommuner, selectMode = false, initialQuery } = Astro.props;
 
 const lanMap = new Map<string, Kommun[]>();
 for (const k of kommuner) {
@@ -47,7 +52,7 @@ const antalLan = lanGrupper.length;
 <div class="kommunvaljare" data-kommunvaljare data-select-mode={selectMode ? 'true' : 'false'}>
   <label class="kommunvaljare__sok">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-    <input type="text" placeholder="Sök din kommun — t.ex. Gislaved" data-kommunvaljare-input autocomplete="off" />
+    <input type="text" placeholder="Sök din kommun — t.ex. Gislaved" data-kommunvaljare-input autocomplete="off" value={initialQuery ?? ''} />
   </label>
   <div class="kommunvaljare__antal" data-kommunvaljare-antal>{kommuner.length} KOMMUNER TILLGÄNGLIGA · {antalLan} LÄN</div>
 
@@ -155,5 +160,9 @@ const antalLan = lanGrupper.length;
     }
 
     input?.addEventListener('input', applyFilter);
+    // D5 — sökfältet kan komma förifyllt (?sok= från förstasidans sökform,
+    // se KommunValjare-props ovan). applyFilter() körs annars bara på
+    // 'input'-eventet, aldrig vid sidladdning.
+    if (input?.value) applyFilter();
   });
 </script>

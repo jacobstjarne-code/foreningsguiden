@@ -1,130 +1,195 @@
 ---
-// Startsida — omgjord 2026-07-27 (Design turn-12b): tratten är den
-// primära ingången, kommunbläddring och deadlinekalendern sekundära/
-// tertiära vägar. Tidigare version (katalog med LiveDataKort ovanpå)
-// hade ingen länk till /matcha/ någonstans på sajten — tratten var en
-// helt orefererad orphan-sida. All text ur content.ts/GUIDE_TRATT_COPY.ts,
-// ingen ny svensk prosa här (se plan: twinkling-wondering-emerson.md).
+// Startsida — omgjord D5 (ARBETSORDER 2026-08-11, mock 9e): sökfältet
+// primär ingång, tratten kvar som sekundär rad under (Jacobs beslut
+// 2026-08-11: "bygg mockens sökfält-först och behåll tratten som
+// sekundär rad under, så förlorar vi ingen ingång och beslutet kan tas
+// på data om några veckor" — M2/tratt_start-mätningen, samma commit-
+// session, ger just det underlaget). De tre förklaringskorten (passar/
+// kan gälla/börja här) utgår. 290-kommunerslistan flyttad till en egen
+// indexerad URL, /kommuner/ (SEO/GEO, samma princip som D1 redan
+// etablerade för bidragssidorna) — sökfältet här postar dit med ?sok=.
 //
-// Förhandsvisningskortens underrader och färskhetsraden (Jacob 2026-07-27,
-// GUIDE_TRATT_COPY.ts TRATT.besked.kortUnder*/TRATT.start.senastAvlastRad)
-// var flaggade som saknad copy vid första leveransen — tillagda nu.
+// Tidigare (2026-07-27–2026-08-11): tratten var ensam primär ingång,
+// katalogversionen (sökfält + LiveDataKort överst) hade blivit en
+// orefererad orphan. All text ur content.ts/GUIDE_TRATT_COPY.ts +
+// mocken (9e, ordagrant — ARBETSORDER: "mockarna är auktoritativa för
+// form och ytcopy") — ingen ny svensk prosa skriven här.
 //
-// FIX 2026-07-31 (Jacob): senastAvlast var tidigare det SENASTE
-// verifierad-datumet — cherry-plockade den enskilt bäst avlästa kommunen
-// och presenterade den som om den beskrev HELA korpusen. Ärligt
-// färskhetsbesked är det ÄLDSTA verifierad-datumet: "det har gått som
-// mest X dagar sedan vi läste av en källa", inte "vår senaste avläsning
-// var för Y dagar sedan". Samma resonemang som STALE_THRESHOLD_DAYS
-// (kommunTyper.ts) redan bygger på — någon kommun ÄR alltid äldst.
+// H1-bytet: DESCRIPTOR ("Vet vad din förening kan söka") var sidans H1,
+// men står REDAN i sidhuvudet på varje sida (Base.astro, .site-header__
+// descriptor) — att upprepa den som H1 här var alltid en dubblering.
+// Nu H2 i tratt-sektionen i stället, mockens sökrubrik äger H1.
+// content.ts:s START.h1/hero/heroKort (skrivna för en tidigare sökfälts-
+// version, medvetet lämnade oanvända "för framtida bruk") används INTE
+// här — mockens egen, nyare text är auktoritativ för just den här
+// leveransen, START.h1/hero/heroKort kvarstår oanvända.
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
-import KommunValjare from '../components/KommunValjare.astro';
 import LiveDataKort from '../components/LiveDataKort.astro';
-import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, KATEGORI_LABELS } from '../lib/kommuner';
-import { START, SIDFOT, DESCRIPTOR, OLAST_MARK } from '../lib/content';
+import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO } from '../lib/kommuner';
+import { START, SIDFOT, DESCRIPTOR, SITE_NAMN } from '../lib/content';
 import { TRATT } from '../../GUIDE_TRATT_COPY';
 
 const kommuner = loadKommuner();
 const today = todayISO();
-// Bugg 2026-08-03 (Jacob): fem Pajala-rader i förhandsvisningen — flera
-// bidrag i samma kommun kan dela nästa-datum, och entries är en rad per
-// (bidrag × datum), inte en rad per kommun. Förhandsvisningen ska visa
-// SPRIDNING (vilka kommuner har något snart), inte "vilken kommun råkar
-// ha flest bidrag på samma dag" — full listan med alla bidrag finns redan
-// på /deadlines/. Dedupar till högst en rad per kommun, tar den NÄRMASTE
-// (listan är redan datumsorterad från getDeadlineEntries).
+// Bugg 2026-08-03 (Jacob): flera bidrag i samma kommun kan dela nästa-
+// datum, och entries är en rad per (bidrag × datum) — dedupar till
+// högst en rad per kommun (listan är redan datumsorterad), tar den
+// allra NÄRMASTE för D5:s enda aptitretare-rad (var 5 rader före D5,
+// se historik i git — "Närmast i tid"-tabellen är kvar i sin helhet på
+// /deadlines/, bara förstasidans FÖRHANDSVISNING kortades till en rad).
 const settaKommuner = new Set<string>();
 const kommandeDeadlines = [];
 for (const e of getDeadlineEntries(today).filter((e) => !e.isLopande)) {
   if (settaKommuner.has(e.kommunSlug)) continue;
   settaKommuner.add(e.kommunSlug);
   kommandeDeadlines.push(e);
-  if (kommandeDeadlines.length >= 5) break;
+  break;
 }
+const narmast = kommandeDeadlines[0] ?? null;
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
-// TILLSTANDET_OLAST.md 4c yta 4 — samma "aldrig markör utan legend"-regel
-// som kalendern (yta 3). Urgensfärgad markör hör till G1 (Jacob
-// 2026-08-04: "den är G1") — här är det bara formen, streckad/fylld.
-const harOlastIForhandsvisning = kommandeDeadlines.some((e) => e.deadlineStatus === 'olast');
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
+  {/* D5 — mockens sökfält-först (9e). Postar till /kommuner/ (?sok=),
+     som förifyller samma KommunValjare-sökning SSR. */}
+  <section class="start-sok">
+    <p class="start-sok__eyebrow">{SITE_NAMN}</p>
+    <h1>Vad kan er förening få pengar för?</h1>
+    <form class="start-sok__form" action="/kommuner/" method="GET">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+      <input type="text" name="sok" placeholder="Skriv er kommun" autocomplete="off" />
+    </form>
+  </section>
+
+  <p class="start-prisloftet">
+    Att hitta bidragen, se vad kommunen kräver och få påminnelse före sista dag är <strong>gratis</strong>. Vi tar betalt för arbetet.
+  </p>
+
+  {narmast && (
+    <div class="start-aptitretare">
+      <UrgencyChip urgency={getUrgency(daysUntil(narmast.dateISO!, today))} />
+      <span class="start-aptitretare__namn">
+        <span class={narmast.deadlineStatus === 'olast' ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'} aria-hidden="true"></span>
+        {narmast.bidragNamn}
+      </span>
+      <span class="start-aptitretare__kommun">{narmast.kommun}</span>
+    </div>
+  )}
+  <a href="/deadlines/" class="start-aptitretare__lank">Se alla deadlines →</a>
+
+  <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
+
+  {/* D5 — tratten kvar, nu sekundär rad under sökfältet i stället för
+     sidans enda ingång (se filhuvudets kommentar om Jacobs beslut). Text
+     helt oförändrad, bara rubrikens nivå (H1 → H2, se filhuvudet). */}
   <section class="start-hero">
-    <h1>{DESCRIPTOR}</h1>
+    <h2>{DESCRIPTOR}</h2>
     <p class="start-hero__ingress">{TRATT.start.ingress}</p>
     <a href="/matcha/" class="btn-primary">{TRATT.start.startknapp} →</a>
     <p class="start-disclaimer">{SIDFOT.kortText}</p>
     <p class="start-hero__senast-avlast">{TRATT.start.senastAvlastRad}</p>
   </section>
-
-  <div class="start-forhandsvisning">
-    <div class="fg-card start-forhandsvisning__kort">
-      <h3>{TRATT.besked.grupper.passar}</h3>
-      <p>{TRATT.besked.kortUnderPassar}</p>
-    </div>
-    <div class="fg-card start-forhandsvisning__kort">
-      <h3>{TRATT.besked.grupper.kanGalla}</h3>
-      <p>{TRATT.besked.kortUnderKanGalla}</p>
-    </div>
-    <div class="fg-card start-forhandsvisning__kort">
-      <h3>{TRATT.besked.borjaHar.rubrik}</h3>
-      <p>{TRATT.besked.kortUnderBorjaHar}</p>
-    </div>
-  </div>
-
-  <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
-
-  {/* C2 (ÅTGÄRDSSPEC, 2026-08-03 kväll): "Närmast i tid" flyttad över
-     kommunlistan — tabellen är sidans faktiska nyhetsvärde (vad som
-     händer snart), kommunbläddringen är navigation för den som redan
-     vet sin kommun och inte behöver vara sidans mitt. */}
-  <section>
-    <h2>Närmast i tid</h2>
-    <p>{START.kalenderPuff}</p>
-    <table class="deadline-table">
-      <thead>
-        <tr><th>Läge</th><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th></tr>
-      </thead>
-      <tbody>
-        {kommandeDeadlines.map((e) => (
-          <tr>
-            <td><UrgencyChip urgency={getUrgency(daysUntil(e.dateISO!, today))} /></td>
-            <td>
-              <span class={e.deadlineStatus === 'olast' ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'} aria-hidden="true"></span>
-              {formatDate(e.dateISO!)}
-            </td>
-            <td><a href={`/kommun/${e.kommunSlug}/#bidrag-${e.bidragId}`}>{e.bidragNamn}</a></td>
-            <td>{e.kommun}</td>
-            <td>{e.kategori.map((k) => KATEGORI_LABELS[k]).join(', ')}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    {harOlastIForhandsvisning && (
-      <p class="start-forhandsvisning__legend">
-        <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
-        {OLAST_MARK.legend}
-      </p>
-    )}
-    <p><a href="/deadlines/">Se hela deadlinekalendern →</a></p>
-  </section>
-
-  <section class="start-sekundar">
-    <h2>{START.kommunvaljareRubrik}</h2>
-    <KommunValjare kommuner={kommuner} />
-  </section>
 </Base>
 
 <style>
-  .start-hero {
-    max-width: 60ch;
-    margin-bottom: var(--fg-space-8);
+  .start-sok {
+    background: var(--fg-ink);
+    color: var(--fg-on-accent);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-7) var(--fg-space-6);
+    margin-bottom: var(--fg-space-6);
   }
 
-  .start-hero h1 {
+  .start-sok__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--fg-accent) 65%, var(--fg-on-accent));
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .start-sok h1 {
     font-family: var(--fg-font-display);
     font-weight: var(--fg-weight-display);
     font-size: var(--fg-text-display);
+    line-height: 1.1;
+    color: var(--fg-on-accent);
+    margin: 0 0 var(--fg-space-5);
+  }
+
+  .start-sok__form {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    background: var(--fg-surface);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    max-width: 44ch;
+  }
+
+  .start-sok__form svg {
+    flex: none;
+    color: var(--fg-ink-muted);
+  }
+
+  .start-sok__form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+    color: var(--fg-ink);
+    min-height: 28px;
+  }
+
+  .start-prisloftet {
+    max-width: var(--fg-lasbredd);
+    padding-bottom: var(--fg-space-5);
+    border-bottom: var(--fg-border-inner) dashed var(--fg-border);
+    margin: 0 0 var(--fg-space-5);
+  }
+
+  .start-aptitretare {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+  }
+
+  .start-aptitretare__namn {
+    flex: 1;
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .start-aptitretare__kommun {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    color: var(--fg-ink-muted);
+  }
+
+  .start-aptitretare__lank {
+    display: block;
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-accent);
+    margin: var(--fg-space-2) 0 var(--fg-space-8);
+  }
+
+  .start-hero {
+    max-width: 60ch;
+    margin-top: var(--fg-space-8);
+    padding-top: var(--fg-space-7);
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+  }
+
+  .start-hero h2 {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-h1);
     letter-spacing: -0.01em;
   }
 
@@ -142,50 +207,5 @@ const harOlastIForhandsvisning = kommandeDeadlines.some((e) => e.deadlineStatus 
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
     margin-top: var(--fg-space-3);
-  }
-
-  .start-forhandsvisning {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--fg-space-5);
-    margin-bottom: var(--fg-space-8);
-  }
-
-  .start-forhandsvisning__kort {
-    padding: var(--fg-card-padding);
-  }
-
-  .start-forhandsvisning__kort h3 {
-    margin: 0;
-  }
-
-  .start-forhandsvisning__kort p {
-    margin: var(--fg-space-2) 0 0;
-    font-size: var(--fg-text-body);
-    color: var(--fg-ink-muted);
-  }
-
-  .start-sekundar {
-    margin-top: var(--fg-space-8);
-  }
-
-  .deadline-table .fg-void-mark,
-  .deadline-table .fg-read-mark {
-    margin-right: var(--fg-space-2);
-  }
-
-  .start-forhandsvisning__legend {
-    display: flex;
-    align-items: baseline;
-    gap: var(--fg-space-2);
-    color: var(--fg-ink-muted);
-    font-size: var(--fg-text-label);
-    margin: var(--fg-space-3) 0 0;
-  }
-
-  @media (max-width: 640px) {
-    .start-forhandsvisning {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

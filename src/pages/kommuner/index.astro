@@ -1,0 +1,33 @@
+---
+// D5 (ARBETSORDER 2026-08-11): 290-kommunerslistan flyttad hit från
+// förstasidan, som en egen indexerad URL (SEO/GEO — samma "ingenting
+// raderas, allt bor kvar på en URL"-princip D7 redan etablerade för
+// bidragssidorna). Förstasidans nya sökfält postar hit med ?sok=, som
+// förifyller KommunValjare-sökningen (SSR) i stället för att kräva ett
+// andra skriv-anslag — se KommunValjare.astro:s initialQuery-prop.
+//
+// prerender=false — samma skäl som deadlines/index.astro: ?sok= är bara
+// synligt vid själva förfrågan, en statiskt byggd sida kan aldrig se den.
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import BreadcrumbList from '../../components/BreadcrumbList.astro';
+import KommunValjare from '../../components/KommunValjare.astro';
+import { loadKommuner } from '../../lib/kommuner';
+import { START } from '../../lib/content';
+
+const kommuner = loadKommuner();
+const sok = Astro.url.searchParams.get('sok') ?? '';
+
+const metaTitle = `${START.kommunvaljareRubrik} — Föreningsguiden`;
+const metaDescription = `Alla ${kommuner.length} kommuner med föreningsbidrag i Föreningsguiden, sökbara eller grupperade per län.`;
+---
+<Base title={metaTitle} description={metaDescription}>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: START.kommunvaljareRubrik, url: '/kommuner/' },
+  ]} />
+
+  <h1>{START.kommunvaljareRubrik}</h1>
+  <KommunValjare kommuner={kommuner} initialQuery={sok} />
+</Base>
