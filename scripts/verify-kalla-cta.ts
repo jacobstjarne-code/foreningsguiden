@@ -56,13 +56,27 @@ for (const slug of readdirSync(DIST_KOMMUN_DIR)) {
   for (const card of extractCards(html.slice(alldelIdx))) {
     const namnMatch = card.match(/<h3>(.*?)<\/h3>/);
     const kallaMatch = card.match(/Källa:\s*<a[^>]*href="([^"]+)"/);
-    const ctaMatch = card.match(/href="([^"]+)"\s*class="btn-primary bidrag-card__cta"/);
+    // A5.2 (2026-08-11): CTA-knappen bytte klass (btn-primary → fg-btn--ghost,
+    // ett drag per sida). Matcha på bidrag-card__cta + href oavsett
+    // klassordning eller vilken knappstil som gäller just nu — annars
+    // tystnar testet igen nästa gång knappstilen ändras (samma fälla som
+    // hände här: 0 kort kontrollerade räknades som "alla stämmer").
+    const ctaMatch = card.match(/<a\s+href="([^"]+)"\s+class="[^"]*\bbidrag-card__cta\b[^"]*"/);
     if (!kallaMatch || !ctaMatch) continue; // pausat/avskaffat bidrag saknar CTA — inget att jämföra
     checked++;
     if (kallaMatch[1] !== ctaMatch[1]) {
       mismatches.push(`${slug} — ${namnMatch?.[1] ?? '?'}: källa=${kallaMatch[1]} cta=${ctaMatch[1]}`);
     }
   }
+}
+
+// A5.2-regressionen (2026-08-11): en trasig extraktionsregex fick `checked`
+// att stanna på 0 medan `mismatches.length === 0` ändå var sant — ett grönt
+// falskt godkännande. 0 kontrollerade kort är alltid ett testfel, aldrig
+// "inget att jämföra".
+if (checked === 0) {
+  console.error('Kalla/CTA-test FAIL — 0 bidragskort kontrollerade. Extraktionsregexen (namn/källa/CTA) matchar troligen inte längre den byggda markupen.');
+  process.exit(1);
 }
 
 if (mismatches.length === 0) {

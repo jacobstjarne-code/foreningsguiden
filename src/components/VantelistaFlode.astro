@@ -84,7 +84,10 @@ const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
     <form data-vantelista-form>
       <label for={`vantelista-epost-${bidrag.id}`}>{VANTELISTA.epostLabel}</label>
       <input type="email" id={`vantelista-epost-${bidrag.id}`} name="email" required autocomplete="email" />
-      <button type="submit" class="btn-primary">{VANTELISTA.knappVantelista}</button>
+      {/* A5.2 (2026-08-11): sekundär — renderas en gång PER bidrag utan
+         utkastgenerator, kan bli flera per sida. Ett drag totalt gäller
+         även här ("Så blir ni godkända i {kommun}" är sidans enda). */}
+      <button type="submit" class="fg-btn--ghost">{VANTELISTA.knappVantelista}</button>
     </form>
 
     <p data-vantelista-kvitto hidden>{VANTELISTA.kvitto}</p>

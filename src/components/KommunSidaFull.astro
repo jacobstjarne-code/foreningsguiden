@@ -290,7 +290,9 @@ const webPageJsonLd = {
         <p class="ekern__eyebrow">{EKERN.band2Eyebrow}</p>
         <p class="ekern__band2-rubrik">{EKERN.band2Rubrik}</p>
         <p class="ekern__band2-text">{EKERN.band2Text}</p>
-        <a href={`/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug: kommun.kommun_slug }))}`} class="btn-primary ekern__cta">
+        {/* A5.2 (2026-08-11): sekundär — "Så blir ni godkända i {kommun}"
+           (KommunProgression, station 3) är sidans ENDA färgade drag. */}
+        <a href={`/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug: kommun.kommun_slug }))}`} class="fg-btn--ghost ekern__cta">
           {EKERN.band2Cta} →
         </a>
         <p class="ekern__cta-underrad">{EKERN.band2CtaUnderrad}</p>

@@ -24,6 +24,18 @@
   max-width: var(--fg-lasbredd);
 }
 
+/* A5.1 (2026-08-11) — läsbredden var inte låst i renderingen. Enskilda
+   klasser på enskilda stycken missade element (622–1007px uppmätt på
+   Gislaved). Strukturell fix i stället: på en kommunsida (main som
+   INNEHÅLLER #alla-bidrag) begränsas VARJE direkt barn till main
+   UTOM registret självt — "textkolumnen" som en enda regel, inte en
+   spridd klass per stycke. Registret (#alla-bidrag) förblir obegränsat
+   och får bli tvåspaltigt (D-arbetet). :has() håller regeln skopad till
+   kommunsidor — andra sidors <main> (utan #alla-bidrag) påverkas inte. */
+main:has(#alla-bidrag) > *:not(#alla-bidrag) {
+  max-width: var(--fg-lasbredd);
+}
+
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;

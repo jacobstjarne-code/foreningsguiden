@@ -276,8 +276,10 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
     <button type="button" class="felrapport-knapp">Det här stämmer inte</button>
   </div>
 
+  {/* A5.2 (2026-08-11): sekundär — ett drag per kommunsida totalt
+     ("Så blir ni godkända i {kommun}"), inte ett per bidragskort. */}
   {bidrag.status === 'aktiv' ? (
-    <a href={ansokningsUrl} class="btn-primary bidrag-card__cta">Till ansökan</a>
+    <a href={ansokningsUrl} class="fg-btn--ghost bidrag-card__cta">Till ansökan</a>
   ) : (
     <p class={`bidrag-card__status-notis bidrag-card__status-notis--${bidrag.status === 'avskaffat' ? 'urgent' : 'attention'}`}>
       {statusNotis[bidrag.status]}
