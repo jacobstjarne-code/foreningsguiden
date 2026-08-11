@@ -219,7 +219,17 @@ const kommuner = loadKommuner();
   import { trackEvent } from '../../lib/umami';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
-  if (root) {
+  // FIX (uppföljning MÄTNING, Jacobs fynd 2026-08-11): tratt_fraga_
+  // besvarad avfyrades två gånger med IDENTISK payload för ett enda
+  // svar — "Vidare"-knappens click-lyssnare dubbelbunden. Grundorsaken
+  // kunde inte fastställas med säkerhet i källan (bara EN registrering
+  // av vidareKnapp.addEventListener hittas här) — misstänkt Vite/Astro
+  // dev-server-omkörning av modulscriptet, inte reproducerad utan
+  // webbläsarverktyg. Spärren nedan är riktad mot SYMTOMET oavsett
+  // orsak: om det här scriptet av någon anledning körs mer än en gång
+  // mot SAMMA DOM-nod, fästs lyssnarna bara första gången.
+  if (root && !root.dataset.trattInitierad) {
+    root.dataset.trattInitierad = '1';
     // M1 (MÄTNING, Jacob 2026-08-11): tratten faktiskt öppnad — fyller
     // frågan D5.2/M2 inte kan svara på ensam (entry-sidan mot om hon
     // FULLFÖLJER tratten).
