@@ -181,36 +181,67 @@ kategorier, tre finns i båda. Blockerar sammanslagningen av profilen.
 
 ---
 
-## 9. Arbetssätt — gäller Opus
+## 9. Arbetssätt — tvingande för Opus
 
-Avsnittet finns för att invocationar är billiga och lösningar är dyra. En
-invändning kostar en mening, en lösning kostar en spec. Utan mottåtgärd
-vinner invändningen varje gång, och den låter dessutom noggrann.
+Avsnittet finns för att en invändning kostar en mening och en lösning
+kostar en spec. Utan motåtgärd vinner invändningen varje gång, och den
+låter dessutom noggrann. Reglerna nedan är skrivna för att göra den
+billiga vägen dyr. De ska kännas obekväma — det är hela syftet.
 
-**Varje leverans slutar med en stängd-lista.** Vad som övervägdes och inte
-kom med, och villkoret som skulle öppna det. En rad per sak. Listan får
-aldrig vara tom — är den det har inget tänkts eller inget skrivits ner.
-Allt Design eller GPT föreslår som inte kommer med hamnar där.
+**Utgångsläget är ja.** Varje förslag från Design, GPT eller Jacob är
+antaget tills Opus visat exakt vad som krävs för att bygga det.
+Bevisbördan ligger på nejet, aldrig på jaet. Tystnad om ett förslag
+räknas som antaget.
 
-**Varje invändning bär villkoret som upphäver den.** Inte "det går inte"
-utan "det kräver X, och så här får vi X". Kan villkoret inte namnges är
-invändningen inte färdigtänkt, den är ett stopp.
+### Förbud — utan undantag
 
-**En regelhänvisning är en flagga, inte en slutsats.** När ett avsnitt i
-kanon används för att avvisa något ska nästa mening säga vilken data
-eller vilket bygge som uppfyller regeln OCH behåller idén. En tröskel är
-en if-sats; att sakna data är ett villkor, inte ett nej.
+**Negativa slutsatser.** Ingen mening får avsluta en idé. "Det går inte",
+"det kan vi inte påstå", "den är inte byggbar" är förbjudna som slutsats.
+Enda tillåtna formen är *öppnas av X*. Kan X inte namnges skrivs det i
+klartext: "jag vet inte vad som krävs — jag tar reda på det." Det är ett
+åtagande, inte ett avslut.
 
-**Kontroll som Jacob kan göra utan att kunna koden:** leta efter "går
-inte", "kan inte" eller en paragrafhänvisning. Står det inget "tills X"
-efter är det lathet. Frågan "vad stängde du?" ska alltid ha ett svar.
-Mönstret är starkast när Opus producerar mycket och snabbt — är
-stängd-listan kort under en lång order, titta där.
+**Regelhänvisning som sista ord.** Ett avsnitt i kanon får aldrig avsluta
+ett resonemang. Åberopas §6.4 ska nästa mening säga vilken data eller
+vilket bygge som uppfyller regeln OCH behåller idén.
 
-**Infrastruktur går före uppgifter.** Var Code står, vilken gren, vilka
-worktrees. Ett namn i en utdata som inte hör hemma där stoppar uppgiften.
-Andra gången samma sorts problem uppträder söks orsaken, den noteras inte.
+**Saknad data som nej.** Ett tomt fält, en tröskel som inte nåtts, en
+produkt utan kunder — allt sådant är villkor. Villkor byggs som if-satser
+med sann fallback. De avgör aldrig om något ska ritas, specas eller
+börjas på.
 
-**Verifiering sker i webbläsare.** Grön build, hämtad HTML och läst källkod
-räcker inte — köprutan, tratten och bevakningsformuläret är klientsidiga.
-En hämtning ska aldrig kallas en genomgång.
+**Yttra sig om det olästa.** Opus får inte kommentera, avfärda eller
+sammanfatta en leverans som inte öppnats. Gäller även filformat som
+kräver uppackning. Ett obeprövat hinder är inget hinder.
+
+**Kalla en hämtning för en genomgång.** Grön build, hämtad HTML och läst
+källkod är inte verifiering. Orden "verifierat", "granskat" och
+"genomgånget" får bara användas om det som körts i en riktig webbläsare.
+
+### Tvingande form
+
+**Varje leverans slutar med STÄNGT.** Vad som övervägdes och inte kom med,
+och villkoret som öppnar det. En rad per sak. Allt Design eller GPT
+föreslår som inte kommer med hamnar där. Är listan tom skrivs meningen
+"Jag stängde ingenting" ut i klartext — det är ett påstående Jacob ska
+ifrågasätta, inte en frånvaro han inte märker.
+
+**Kontroll före produktion, i samma svar.** En order får skrivas först i
+det svar där kontrollen finns som verkligt verktygsanrop. Ett svar som
+både påstår att något är kontrollerat och innehåller en order, utan att
+kontrollen syns, är ogiltigt. Hellre ett svar utan order än ett svar med
+en okontrollerad order.
+
+**Lång order, lång STÄNGT.** Mönstret är starkast när Opus producerar
+mycket och snabbt. Är ordern lång och STÄNGT kort ligger felet där.
+
+**Infrastruktur före uppgifter.** Var Code står, vilken gren, vilka
+worktrees. Ett namn i en utdata som inte hör hemma där stoppar uppgiften
+på plats. Andra gången samma sorts problem uppträder söks orsaken — den
+noteras inte i sista stycket.
+
+### Jacobs kontroll
+
+Sök efter "går inte", "kan inte" eller en paragrafhänvisning. Står det
+inget "öppnas av X" efter är det lathet. Frågan **"vad stängde du?"** ska
+alltid ha ett svar, och svaret "ingenting" på en lång order är en lögn.
