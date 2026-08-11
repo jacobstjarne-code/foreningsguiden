@@ -197,6 +197,31 @@ export interface Kommunsiffra {
   utlamnad_datum: string;
 }
 
+// G1/C3 (ARBETSORDER 2026-08-11) — kommunens STRUKTURERADE regel för hur
+// länge ett godkännande som bidragsberättigad förening gäller. Skild
+// från Forutsattning.giltighet (fritext, hittaGiltighetsregel() ovan) —
+// den fritexten driver GiltighetsKontroll.astro:s OMEDELBARA risk-
+// bedömning (oförändrad av detta), medan giltighet_regel driver C3:s
+// FRAMTIDA påminnelse med ett exakt beräknat förfallodatum. Två olika
+// frågor, två olika mekanismer, medvetet inte sammanslagna.
+export const GILTIGHET_REGEL_TYPER = [
+  'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'ingen_regel', 'okand',
+] as const;
+export type GiltighetRegelTyp = (typeof GILTIGHET_REGEL_TYPER)[number];
+
+export interface GiltighetRegel {
+  typ: GiltighetRegelTyp;
+  antal: number | null;
+  kalla_url: string;
+}
+
+// G1 ger MEDVETET bara tre värden här, inte hela Datatillstand-skalan —
+// 'olast' (extraherat, inte oberoende bekräftat) gäller inte en regel som
+// bara ett researchpass sätter. Egen, snävare typ i stället för att
+// återanvända Datatillstand och tillåta ett fjärde värde G1 inte bad om.
+export const GILTIGHET_REGEL_STATUSAR = ['kontrollast', 'ingen_regel', 'okand'] as const;
+export type GiltighetRegelStatus = (typeof GILTIGHET_REGEL_STATUSAR)[number];
+
 export interface Kommun {
   kommun: string;
   kommun_slug: string;
@@ -209,6 +234,59 @@ export interface Kommun {
   bidrag: Bidrag[];
   forutsattningar: Forutsattning[];
   kommunsiffra: Kommunsiffra | null;
+  // G1 — additivt, saknas i alla 290 filer i dag (0 kommuner har regeln
+  // extraherad, mätt 2026-08-11). null = inget researchpass har satt den
+  // än, skilt från giltighet_regel_status: 'okand' (ett bekräftat "vi
+  // hittade ingen regel", se giltighet_regel_status).
+  giltighet_regel: GiltighetRegel | null;
+  giltighet_regel_status: GiltighetRegelStatus | null;
+}
+
+/**
+ * C3 REVIDERAD (Jacob 2026-08-11): förfallodatum för en kommuns
+ * bidragsberättigad-status, räknat ur giltighet_regel + föreningens eget
+ * årsmötesdatum. Ren funktion, inga sidoeffekter — samma logik ska driva
+ * både "raden på sidan" (NIVÅ 1) och cronets 2-månader-innan-utskick.
+ *
+ * manader_efter_beslut räknas identiskt med manader_efter_arsmote —
+ * datamodellen har inget separat beslutsdatum (bara årsmötesdatum lagras,
+ * se Subscriber.giltighetArsmoten), så "beslutet" i praktiken ÄR
+ * årsmötesdatumet tills ett eget beslutsdatum-fält finns. Flaggat till
+ * Jacob, inte en tyst gissning.
+ *
+ * kalenderar och ingen_regel har inget datum att räkna ur (kalenderår
+ * betyder "gäller till årsskiftet", inte en formel på ett rörligt datum;
+ * ingen_regel betyder att godkännandet inte förfaller). okand betyder att
+ * vi inte vet. Alla tre ger null — aldrig ett gissat datum.
+ */
+export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string): string | null {
+  if (regel.antal === null) return null;
+  switch (regel.typ) {
+    case 'manader_efter_arsmote':
+    case 'manader_efter_beslut':
+      return addMonths(arsmotesdatum, regel.antal);
+    case 'kalenderar':
+    case 'ingen_regel':
+    case 'okand':
+      return null;
+  }
+}
+
+/**
+ * ISO-datum plus N månader, UTC. Dagen klampas till sista dagen i
+ * målmånaden om ursprungsdagen inte finns där (31 jan + 1 månad → 28/29
+ * feb, inte JS-Date:s default-beteende att rulla över till 3 mars).
+ */
+function addMonths(iso: string, months: number): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  const totalMonths = m - 1 + months;
+  const targetYear = y + Math.floor(totalMonths / 12);
+  const targetMonthIndex = ((totalMonths % 12) + 12) % 12;
+  const lastDayOfTargetMonth = new Date(Date.UTC(targetYear, targetMonthIndex + 1, 0)).getUTCDate();
+  const clampedDay = Math.min(d, lastDayOfTargetMonth);
+  const date = new Date(Date.UTC(targetYear, targetMonthIndex, clampedDay));
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
 }
 
 /**

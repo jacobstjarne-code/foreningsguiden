@@ -18,6 +18,7 @@ import yaml from 'js-yaml';
 // kör som ett vanligt node-skript, utanför Vites resolver.
 import {
   KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, DATATILLSTAND, todayISO, nextOccurrenceISO,
+  GILTIGHET_REGEL_TYPER, GILTIGHET_REGEL_STATUSAR,
 } from './kommunTyper.ts';
 import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry, Datatillstand } from './kommunTyper.ts';
 import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan.ts';
@@ -372,6 +373,35 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
       if (!isNonEmptyString(ks.bidragstyp)) problems.push(`${where}.bidragstyp saknas eller är tom`);
       if (!isNonEmptyString(ks.utlamnad_datum)) problems.push(`${where}.utlamnad_datum saknas eller är tom`);
     }
+  }
+
+  // G1/C3 (ARBETSORDER 2026-08-11) — additivt precis som kommunsiffra
+  // ovan: saknas i alla 290 filer i dag (0 kommuner extraherade), null
+  // tills ett researchpass sätter den. giltighet_regel_status validerar
+  // MOT GILTIGHET_REGEL_STATUSAR (kontrollast/ingen_regel/okand) — inte
+  // DATATILLSTAND, se kommunTyper.ts:s kommentar om varför de är skilda.
+  if (raw.giltighet_regel === undefined || raw.giltighet_regel === null) {
+    raw.giltighet_regel = null;
+  } else {
+    const gr = raw.giltighet_regel;
+    const where = `giltighet_regel (${raw.kommun_slug ?? file})`;
+    if (typeof gr !== 'object') {
+      problems.push(`${where} måste vara ett objekt eller null`);
+    } else {
+      if (!GILTIGHET_REGEL_TYPER.includes(gr.typ)) {
+        problems.push(`${where}.typ är "${gr.typ}" (tillåtna: ${GILTIGHET_REGEL_TYPER.join(', ')})`);
+      }
+      if (gr.antal !== null && typeof gr.antal !== 'number') {
+        problems.push(`${where}.antal måste vara ett tal eller null`);
+      }
+      if (!isNonEmptyString(gr.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
+    }
+  }
+
+  if (raw.giltighet_regel_status === undefined) {
+    raw.giltighet_regel_status = null;
+  } else if (raw.giltighet_regel_status !== null && !GILTIGHET_REGEL_STATUSAR.includes(raw.giltighet_regel_status)) {
+    problems.push(`giltighet_regel_status är "${raw.giltighet_regel_status}" (tillåtna: ${GILTIGHET_REGEL_STATUSAR.join(', ')}, eller null)`);
   }
 
   if (problems.length > 0) {
