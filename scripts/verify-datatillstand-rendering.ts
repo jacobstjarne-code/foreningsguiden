@@ -34,6 +34,13 @@ const problem: string[] = [];
 // missas tyst och problem.length===0 ändå läsas som ett godkännande —
 // kommuner.length (loopens YTTRE räknare) bevisar bara att filer
 // öppnades, inte att någon kort-invariant faktiskt kontrollerades.
+//
+// D1/D2 (ARBETSORDER 2026-08-11): invariant 2/3 flyttade med källan/CTA:n
+// till bidragets egna S2-sida — kommunsidans <li id="bidrag-X"> är nu bara
+// en kompakt registerrad (namn/belopp/datum), ingen "Sen ansökan"/VoidMark-
+// text kvar att hitta där. Läser S2-filen direkt i stället för att slice:a
+// fram ett "kort" ur kommunsidan (som förut avgränsades av nästa
+// bidrag-card__cta — den strängen finns inte längre på kommunsidan alls).
 let kortKontrollerade = 0;
 
 for (const kommun of kommuner) {
@@ -53,13 +60,12 @@ for (const kommun of kommuner) {
     }
   }
 
-  // --- Invariant 2 & 3: per bidrag-kort ---
+  // --- Invariant 2 & 3: per bidrag, läst från dess EGEN S2-sida ---
   for (const bidrag of kommun.bidrag) {
-    const cardStart = html.indexOf(`id="bidrag-${bidrag.id}"`);
-    if (cardStart === -1) continue;
+    const s2Path = join(DIST_KOMMUN_DIR, kommun.kommun_slug, 'bidrag', bidrag.id, 'index.html');
+    if (!existsSync(s2Path)) continue;
     kortKontrollerade++;
-    const cardEnd = html.indexOf('bidrag-card__cta', cardStart);
-    const card = html.slice(cardStart, cardEnd === -1 ? cardStart + 4000 : cardEnd + 200);
+    const card = readFileSync(s2Path, 'utf-8');
 
     if (bidrag.deadline_status === 'okand' && /Sen ansökan/.test(card)) {
       problem.push(`${kommun.kommun_slug}/${bidrag.id}: "Sen ansökan" renderas trots deadline_status: okand`);
@@ -74,7 +80,7 @@ for (const kommun of kommuner) {
 }
 
 if (kortKontrollerade === 0) {
-  console.error('Datatillstånd-renderingstest FAIL — 0 bidragskort kontrollerade. id="bidrag-X"-strängen matchar troligen inte längre den byggda markupen.');
+  console.error('Datatillstånd-renderingstest FAIL — 0 bidragskort kontrollerade. S2-sidorna (/kommun/[slug]/bidrag/[bidragId]/) saknas troligen — kör `npm run build` igen.');
   process.exit(1);
 }
 

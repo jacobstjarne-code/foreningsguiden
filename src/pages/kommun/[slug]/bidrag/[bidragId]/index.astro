@@ -19,6 +19,7 @@ import {
   earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
 } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
+import { KOMMUN } from '../../../../../lib/content';
 
 export function getStaticPaths() {
   const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag } }[] = [];
@@ -45,6 +46,14 @@ const giltighetStatus = hittaGiltighetsstatus(kommun.forutsattningar);
 
 const metaTitle = `${bidrag.namn} — ${kommun.kommun} — Föreningsguiden`;
 const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, verifierat mot kommunens egen sida.`;
+
+// D3 (ARBETSORDER 2026-08-11): "Så ansöker du"-prosan flyttad hit från
+// kommunsidan (D2 tog bort den där som en dubblett av varje bidrags egen
+// "Till ansökan"-knapp). Samma text, oförändrad — KOMMUN.ansoknings-
+// systemRubrik/-Template fanns redan, ingen ny prosa skriven för flytten.
+const ansokningstext = KOMMUN.ansokningssystemTemplate
+  .replace(/{kommun}/g, kommun.kommun)
+  .replace(/{system}/g, kommun.ansokningssystem.namn);
 
 const webPageJsonLd = {
   '@context': 'https://schema.org',
@@ -81,7 +90,23 @@ const webPageJsonLd = {
       />
     </div>
   </div>
+
+  <section>
+    <h2>{KOMMUN.ansokningssystemRubrik}</h2>
+    <p>
+      {ansokningstext}{' '}
+      <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
+    </p>
+  </section>
 </Base>
+
+<script>
+  // BidragDjup renderar felrapport-widgeten (H25) — samma wiring som
+  // KommunSidaFull.astro/[kategori]/index.astro redan gör, annars är
+  // "Det här stämmer inte"-knappen här bara död markup utan klickhandler.
+  import { initFelrapportWidgets } from '../../../../../lib/felrapportKlient';
+  initFelrapportWidgets();
+</script>
 
 <style>
   .bidrag-sida__eyebrow {

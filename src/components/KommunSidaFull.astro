@@ -8,7 +8,7 @@
 // flyttad, `kommun`-propen är nu required i stället för hämtad via
 // getStaticPaths.
 import Base from '../layouts/Base.astro';
-import BidragCard from './BidragCard.astro';
+import BidragRegisterRad from './BidragRegisterRad.astro';
 import StaleWarning from './StaleWarning.astro';
 import OmverifieringsVarning from './OmverifieringsVarning.astro';
 import TackningsVarning from './TackningsVarning.astro';
@@ -20,7 +20,7 @@ import IgenkanningsRad from './IgenkanningsRad.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
-  KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, relativFrist, hittaGiltighetsstatus,
+  KATEGORI_LABELS, KATEGORIER, relativFrist,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN, OLAST_MARK } from '../lib/content';
@@ -73,9 +73,6 @@ const metaTitle = KOMMUN.metaTitleTemplate.replace(/{kommun}/g, kommun.kommun);
 const metaDescription = KOMMUN.metaDescriptionTemplate.replace(/{kommun}/g, kommun.kommun);
 const h1 = KOMMUN.h1Template.replace(/{kommun}/g, kommun.kommun);
 const intro = KOMMUN.introTemplate.replace(/{kommun}/g, kommun.kommun);
-const ansokningstext = KOMMUN.ansokningssystemTemplate
-  .replace(/{kommun}/g, kommun.kommun)
-  .replace(/{system}/g, kommun.ansokningssystem.namn);
 
 // --- Svar-först-block (SOKBARHETSSPEC §3.1) — variant beroende på datat ---
 const fastaDeadlines = kommun.bidrag.flatMap((b) => (b.deadlines.typ === 'fasta' ? b.deadlines.datum : []));
@@ -196,10 +193,6 @@ const kommunsiffraText = kommun.kommunsiffra
 const kommunsiffraKalla = kommun.kommunsiffra
   ? KOMMUNSIFFRA.kalla.replace(/{utlamnadDatum}/g, kommun.kommunsiffra.utlamnad_datum)
   : null;
-
-// T4 (ÅTGÄRDSSPEC 2026-08-03 kväll): kommun-nivå, samma värde för varje
-// bidrag på sidan — beräknas en gång, inte per BidragCard.
-const giltighetStatus = hittaGiltighetsstatus(kommun.forutsattningar);
 
 // dateModified ur verifierad (SOKBARHETSSPEC §4.5) — färskhetssignal.
 const webPageJsonLd = {
@@ -326,16 +319,20 @@ const webPageJsonLd = {
     </>
   )}
 
-  <section>
-    <h2>{KOMMUN.ansokningssystemRubrik}</h2>
-    <p>
-      {ansokningstext}{' '}
-      <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
-    </p>
-  </section>
+  {/* D2/D3 (ARBETSORDER 2026-08-11, mock 9g "BORT/FLYTT/KVAR"): "Så
+     ansöker du"-sektionen BORT härifrån — dubblerade snart samma besked
+     som varje bidrags egen "Till ansökan"-knapp. Samma text
+     (KOMMUN.ansokningssystemRubrik/ansokningssystemTemplate, oförändrad)
+     flyttad till S2 (bidragets egen sida) i stället, se
+     kommun/[slug]/bidrag/[bidragId]/index.astro. */}
 
   {kommun.bidrag.length > 0 && (
     <section id="alla-bidrag">
+      {/* D2: "Registret ÄR sidan" — rubriken oförändrad (samma text som
+         EKERN.band3Lank1:s ankarlänk hit, ingen ny prosa), men raderna
+         är nu länkar till bidragets egen S2-URL (D1) i stället för
+         BidragCard.astro:s fällda dl med hela innehållet upprepat —
+         det var precis den dubbletten ordern pekade ut. */}
       <h2>Alla bidrag i {kommun.kommun}, i detalj</h2>
       {visaTackningsvarning && <TackningsVarning kommun={kommun.kommun} />}
       <IgenkanningsRad kommunSlug={kommun.kommun_slug} />
@@ -352,7 +349,7 @@ const webPageJsonLd = {
       </div>
       <ul class="bidrag-list" data-bidrag-list-flat>
         {sortedBidrag.map((bidrag) => (
-          <BidragCard bidrag={bidrag} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(bidrag, kommun)} kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} giltighetStatus={giltighetStatus} />
+          <BidragRegisterRad bidrag={bidrag} kommunSlug={kommun.kommun_slug} />
         ))}
       </ul>
     </section>

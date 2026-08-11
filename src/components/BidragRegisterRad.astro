@@ -1,0 +1,57 @@
+---
+// BidragRegisterRad — D2 (ARBETSORDER 2026-08-11, mock 9a): kommunsidans
+// register-rad, en ren länk till bidragets egen S2-URL (D1) i stället för
+// BidragCard.astro:s fällbara <details> med hela dl:n/krav-listan inline.
+// Rot: sedan D1 finns samma innehåll redan på /kommun/[slug]/bidrag/[id]/
+// — att visa det EN GÅNG TILL inline på kommunsidan var precis den
+// "'Alla bidrag i detalj'-dubblett" ordern ber att ta bort.
+//
+// Återanvänder .progression__list-row rakt av (redan en bordrad pill-rad,
+// redan använd som <a> i KommunProgression.astro station 4) — matchar
+// mockens beskrivna registerrad (border 2px, radie, ingen ny CSS).
+//
+// id="bidrag-{id}" behålls på <li> trots att det inte längre är ett
+// <details> — KommunProgression.astro:s fyra #bidrag-X-länkar (station
+// 2/4) siktar hit, och KommunSidaFull.astro:s oppnaFragmentmal() redan
+// bara öppnar målet OM det är en <details> (annars no-op) — ingen av dem
+// behöver ändras för att fortsätta fungera.
+import type { Bidrag } from '../lib/kommuner';
+import { earliestDeadlineISO, daysUntil, getUrgency, formatDate, relativFrist, todayISO } from '../lib/kommuner';
+import UrgencyChip from './UrgencyChip.astro';
+
+export interface Props {
+  bidrag: Bidrag;
+  kommunSlug: string;
+}
+
+const { bidrag, kommunSlug } = Astro.props;
+const today = todayISO();
+const dateISO = earliestDeadlineISO(bidrag, today);
+const radDatumText = dateISO
+  ? formatDate(dateISO)
+  : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
+  : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan';
+
+// TILLSTANDET_OLAST.md (runda 4): samma EN-reservation-per-kort-markör
+// som BidragCard/BidragDjup redan visar, bara här på radnivå.
+const harOlastFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast');
+---
+<li data-bidrag-id={bidrag.id} id={`bidrag-${bidrag.id}`}>
+  <a href={`/kommun/${kommunSlug}/bidrag/${bidrag.id}/`} class="progression__list-row">
+    <div class="progression__list-row__text">
+      <div class="progression__list-row__namn">
+        <span
+          class={harOlastFalt ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'}
+          aria-hidden="true"
+        ></span>
+        {bidrag.namn}
+      </div>
+    </div>
+    <div class="progression__list-row__tal">
+      {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+      <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+      <span class="progression__list-row__datum">{radDatumText}</span>
+    </div>
+    <svg class="bidrag-card__rad-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+  </a>
+</li>
