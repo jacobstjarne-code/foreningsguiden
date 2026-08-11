@@ -75,13 +75,16 @@ function extractByClass(html: string, className: string): string | null {
   return html.slice(start, cursor - closeTag.length);
 }
 
-/** <li> som INTE är kollapsade (varken en <details> inuti, eller den egna radens enda innehåll). */
+/** <li> som INTE är kollapsade OCH inte är sidnavigation (brödsmulor räknas inte som "innehåll"). */
 function countOppnaListrader(html: string): number {
-  // Två steg: (1) töm allt <details>...</details>-innehåll — tar bort
-  // bidragskortens krav-listor och FAQ-svarens listor, (2) ta bort <li>
-  // vars ENDA kvarvarande innehåll nu är tomt — annars räknas <li> som
-  // bara wrappar ett kollapsat bidragskort (R5.8) som en "öppen" rad.
-  const utanDetails = html.replace(/<details\b[^>]*>[\s\S]*?<\/details>/g, '');
+  // Tre steg: (1) töm <nav>...</nav> — brödsmulor är strukturell
+  // chrome på varje sida, inte ett skärmspecifikt innehållsval, (2) töm
+  // <details>...</details> — bidragskortens krav-listor och FAQ-svaren,
+  // (3) ta bort <li> vars ENDA kvarvarande innehåll nu är tomt — annars
+  // räknas <li> som bara wrappar ett kollapsat bidragskort (R5.8) som
+  // en "öppen" rad.
+  const utanNav = html.replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/g, '');
+  const utanDetails = utanNav.replace(/<details\b[^>]*>[\s\S]*?<\/details>/g, '');
   const utanTommaLi = utanDetails.replace(/<li\b[^>]*>\s*<\/li>/g, '');
   const matches = utanTommaLi.match(/<li\b/g);
   return matches ? matches.length : 0;

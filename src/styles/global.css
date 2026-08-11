@@ -249,12 +249,72 @@ main {
 /* ---- Kommunsida ---- */
 
 .kommun-header h1 {
-  margin-bottom: var(--fg-space-1);
+  margin: var(--fg-space-2) 0 var(--fg-space-1);
+}
+
+.kommun-header__avsandare {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--fg-font-sans);
+  font-weight: var(--fg-weight-bold);
+  font-size: var(--fg-text-label);
+  border-radius: var(--fg-radius-pill);
+  padding: 5px 11px;
+  background: var(--fg-accent-soft);
+  color: var(--fg-accent);
+  margin: 0;
+}
+
+/* B1 — "frågan ur URL:en", en lede-fråga direkt under H1. */
+.kommun-header__sokt-fraga {
+  font-size: var(--fg-text-body-lg);
+  font-weight: var(--fg-weight-bold);
+  margin: var(--fg-space-2) 0 var(--fg-space-3);
 }
 
 .kommun-header__meta {
   color: var(--fg-ink-muted);
   font-size: var(--fg-text-label);
+}
+
+/* B1 — "arbetet som värme". */
+.kommun-varme {
+  color: var(--fg-ink-muted);
+  margin: var(--fg-space-4) 0 var(--fg-space-3);
+}
+
+/* B1 — två bidrag med belopp och datum (ärlighetstrappan avgör om
+   beloppet visas, se arlighetstrappa.ts). */
+.kommun-forhandsvisning {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--fg-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-2);
+}
+
+.kommun-forhandsvisning__rad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fg-space-3);
+  font-size: var(--fg-text-body);
+  border-bottom: var(--fg-border-inner) solid var(--fg-void-line);
+  padding-bottom: var(--fg-space-2);
+}
+
+.kommun-forhandsvisning__namn {
+  font-weight: var(--fg-weight-bold);
+}
+
+.kommun-forhandsvisning__meta {
+  display: flex;
+  gap: var(--fg-space-3);
+  margin-left: auto;
+  color: var(--fg-ink-muted);
+  font-family: var(--fg-font-mono);
+  font-size: var(--fg-text-mono);
 }
 
 .svar-forst {

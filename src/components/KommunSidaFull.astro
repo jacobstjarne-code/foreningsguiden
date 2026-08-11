@@ -24,6 +24,7 @@ import {
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN, OLAST_MARK } from '../lib/content';
+import { trappa } from '../lib/arlighetstrappa';
 
 export interface Props {
   kommun: Kommun;
@@ -50,6 +51,23 @@ const sortedBidrag = [...kommun.bidrag].sort((a, b) => {
   if (db) return 1;
   return 0;
 });
+
+// B1 (ARBETSORDER 2026-08-11) — "två bidrag med belopp och datum".
+// Ärlighetstrappan: påståendet kräver BÅDA fälten, aldrig ett gissat
+// belopp för att fylla ut listan. Faller ett steg (bara datum) om
+// färre än två bidrag har både, och till botten (ingen förhandsvisning
+// alls) om färre än två har ens ett datum — se trappa() i
+// arlighetstrappa.ts, samma mönster som F①/F②/F③ senare i ordern.
+const bidragMedBeloppOchDatum = sortedBidrag.filter(
+  (b) => b.belopp !== null && earliestDeadlineISO(b, today) !== null
+);
+const bidragMedBaraDatum = sortedBidrag.filter((b) => earliestDeadlineISO(b, today) !== null);
+
+const forhandsvisningBidrag = trappa([
+  { villkor: bidragMedBeloppOchDatum.length >= 2, varde: { bidrag: bidragMedBeloppOchDatum.slice(0, 2), visaBelopp: true } },
+  { villkor: bidragMedBaraDatum.length >= 2, varde: { bidrag: bidragMedBaraDatum.slice(0, 2), visaBelopp: false } },
+  { villkor: true, varde: { bidrag: [] as typeof sortedBidrag, visaBelopp: false } },
+]);
 
 const metaTitle = KOMMUN.metaTitleTemplate.replace(/{kommun}/g, kommun.kommun);
 const metaDescription = KOMMUN.metaDescriptionTemplate.replace(/{kommun}/g, kommun.kommun);
@@ -191,12 +209,36 @@ const webPageJsonLd = {
     { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
   ]} />
 
+  {/* B1 (ARBETSORDER 2026-08-11, Kalla besökaren, runda 13) — första
+     skärmen: avsändaren först, frågan ur URL:en, arbetet som värme, två
+     bidrag, sedan matchningen som inbjudan (band 2 nedan, B2). */}
   <div class="kommun-header">
+    <p class="kommun-header__avsandare">{EKERN.avsandare}</p>
     <h1>{h1}</h1>
+    <p class="kommun-header__sokt-fraga fg-lasbredd">{EKERN.soktFraga.replace('{kommun}', kommun.kommun)}</p>
     <p class="kommun-header__meta">
       {kommun.lan} · {kommun.forvaltning} · Källan läst {formatDate(kommun.verifierad)}
     </p>
   </div>
+
+  <p class="kommun-varme fg-lasbredd">{EKERN.varmeRad.replace('{antal}', String(kommun.bidrag.length))}</p>
+
+  {forhandsvisningBidrag.bidrag.length > 0 && (
+    <ul class="kommun-forhandsvisning">
+      {forhandsvisningBidrag.bidrag.map((bidrag) => {
+        const dateISO = earliestDeadlineISO(bidrag, today);
+        return (
+          <li class="kommun-forhandsvisning__rad">
+            <span class="kommun-forhandsvisning__namn">{bidrag.namn}</span>
+            <span class="kommun-forhandsvisning__meta">
+              {forhandsvisningBidrag.visaBelopp && <span>{bidrag.belopp}</span>}
+              {dateISO && <span>{formatDate(dateISO)}</span>}
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  )}
 
   <p class="bevakning-antal" data-bevakning-antal data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} hidden></p>
 
@@ -253,6 +295,9 @@ const webPageJsonLd = {
         </a>
         <p class="ekern__cta-underrad">{EKERN.band2CtaUnderrad}</p>
       </div>
+      {/* B3 — insats-nudgen (14a). EN per skärm, efter svaret (band 2)
+         och före listan (band 3:s länkar in i den). */}
+      <p class="ekern__nudge fg-lasbredd">{EKERN.insatsNudge}</p>
       <div class="ekern__band ekern__band--3">
         <p class="ekern__eyebrow">{EKERN.band3Eyebrow}</p>
         <a href="#alla-bidrag" class="ekern__sekundar-lank">{EKERN.band3Lank1.replace('{kommun}', kommun.kommun)} ↓</a>
@@ -586,6 +631,14 @@ const webPageJsonLd = {
     color: var(--fg-ink-muted);
     text-align: center;
     margin: var(--fg-space-3) 0 0;
+  }
+
+  /* B3 — insats-nudgen. Utanför korten, egen rad, ingen kortram (den
+     ska läsas som en observation, inte som ännu ett block). */
+  .ekern__nudge {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-body);
+    margin: var(--fg-space-5) 0;
   }
 
   .ekern__band--3 {

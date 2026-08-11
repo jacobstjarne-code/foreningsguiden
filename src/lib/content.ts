@@ -813,15 +813,28 @@ export const KOMMUNSIFFRA = {
  */
 export const EKERN = {
   verifieradPrefix: 'KÄLLAN LÄST',
+
+  // B1 (ARBETSORDER 2026-08-11, Kalla besökaren, runda 13) — kommun-
+  // sidans första skärm: avsändaren först, frågan ur URL:en, arbetet
+  // som värme, två bidrag, sedan matchningen som inbjudan (B2/B3 nedan).
+  avsandare: 'Oberoende — inte kommunen',
+  soktFraga: 'Söker ni bidrag i {kommun}?',
+  varmeRad: 'Vi har läst alla {antal} åt er',
+
   band2Eyebrow: 'GÄLLER DET HÄR ER?',
-  // R7 (Jacob 2026-08-08): samma "fyra frågor"-bugg B4 fixade i
-  // TRATT.start.ingress, en annan förekomst — tratten är tre frågor
-  // sedan B3. Missad av B4:s scope (som var TRATT.start.ingress +
-  // förstasidans kort), hittad i förbigående vid R7-arbetet.
-  band2Rubrik: 'Tre frågor, och ni ser vad just er förening kan söka',
+  // B2: matchningen är ALLTID en fråga, aldrig ett påstående. Ersätter
+  // det tidigare påståendet ("Tre frågor, och ni ser vad just er
+  // förening kan söka", R7 2026-08-08).
+  band2Rubrik: 'Vill ni se vilka som gäller just er förening?',
   band2Text: 'Kraven skiljer sig mellan bidrag. Svaren sparas, så nästa gång ser ni bara det som är nytt.',
   band2Cta: 'Se vad ni kan söka',
   band2CtaUnderrad: 'Gratis. Inget konto, ingen mejladress.',
+
+  // B3 — insats-nudgen (14a). En per skärm, efter svaret (band 2) och
+  // före listan. Kräver ingen data, gäller i alla 290 kommuner —
+  // ordagrant ur ordern, ingen ny formulering.
+  insatsNudge: 'Bidrag missas nästan aldrig på ansökan — de missas på att sista dagen passerade, eller att föreningen inte visste att bidraget fanns.',
+
   band3Eyebrow: 'ELLER LÄS ALLT SJÄLV',
   band3Lank1: 'Alla bidrag i {kommun} i detalj',
   band3Lank2: 'Sista ansökningsdatum',
