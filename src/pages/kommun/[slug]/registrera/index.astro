@@ -13,7 +13,8 @@
 // "inget särskilt förkrav funnet"-fallback som Station 3).
 import Base from '../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
-import { loadKommuner } from '../../../../lib/kommuner';
+import GiltighetsKontroll from '../../../../components/GiltighetsKontroll.astro';
+import { loadKommuner, todayISO } from '../../../../lib/kommuner';
 import type { Kommun } from '../../../../lib/kommuner';
 import { VAGLEDNING, BEVAKNING, KVITTOSIDA, ATERBETALNING, KOPYTAN_1E } from '../../../../lib/content';
 import { TRATT } from '../../../../../GUIDE_TRATT_COPY';
@@ -31,6 +32,7 @@ export function getStaticPaths() {
 const { kommun } = Astro.props as { kommun: Kommun };
 const forutsattningar = [...kommun.forutsattningar].sort((a, b) => a.ordning - b.ordning);
 const titel = `Registreringschecklista — ${kommun.kommun}`;
+const today = todayISO();
 
 // B2 (SPRINT: Produkten, Opus/Fable 2026-07-31): bilagorna nämndes aldrig
 // på den fria sidan, bara i det köpta dokumentet. genereraRegistreringsUtkast
@@ -124,6 +126,14 @@ const fyllKopytan = (text: string) => text.replace(/{kommun}/g, kommun.kommun);
             </ul>
           </div>
         )}
+
+        {/* D4 (ARBETSORDER 2026-08-11): giltighetskalkylatorn flyttad hit
+           från kommunsidan (S1) — "förkravet får en egen skärm och URL,
+           inte en svävande kalkylator på kommunsidan" (mock 9c). Här,
+           direkt efter registreringschecklistan: samma logiska ordning
+           som sidans eget innehåll redan följer — bli godkänd, sedan
+           håll koll på när godkännandet löper ut. */}
+        <GiltighetsKontroll kommun={kommun} today={today} />
       </>
     )}
 

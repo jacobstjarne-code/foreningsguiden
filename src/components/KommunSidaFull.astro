@@ -15,7 +15,6 @@ import TackningsVarning from './TackningsVarning.astro';
 import BreadcrumbList from './BreadcrumbList.astro';
 import VerificationRow from './VerificationRow.astro';
 import KommunProgression from './KommunProgression.astro';
-import GiltighetsKontroll from './GiltighetsKontroll.astro';
 import IgenkanningsRad from './IgenkanningsRad.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
@@ -313,10 +312,7 @@ const webPageJsonLd = {
   {kommun.bidrag.length === 0 ? (
     <p>{KOMMUN.ingaBidrag}</p>
   ) : (
-    <>
-      <KommunProgression kommun={kommun} today={today} />
-      <GiltighetsKontroll kommun={kommun} today={today} />
-    </>
+    <KommunProgression kommun={kommun} today={today} />
   )}
 
   {/* D2/D3 (ARBETSORDER 2026-08-11, mock 9g "BORT/FLYTT/KVAR"): "Så
