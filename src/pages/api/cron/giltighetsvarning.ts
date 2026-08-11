@@ -1,50 +1,55 @@
 // GET /api/cron/giltighetsvarning — B4 (SPRINT: Produkten, Opus/Fable
-// 2026-07-31). GiltighetsKontroll.astro:s "erbjudande" sparar ett
-// årsmötesdatum (addGiltighetBevakning, subscribers.ts) och skickar en
-// bekräftelse — men själva varningsmejlet skickades aldrig, ingen cron
-// fanns (giltighetsbevakning.ts:s egen kommentar: "själva utskicksjobbet
-// är inte byggt än"). MEJL.giltighetsvarning (content.ts) fanns redan
-// färdigskriven, oanvänd.
+// 2026-07-31), ombyggd C3.1/C3 REVIDERAD (Jacob 2026-08-11).
 //
-// Tröskeln (GILTIGHET_VARNING_DAGAR = 275) delar resonemang med
-// GiltighetsKontroll.astro:s klientsidiga RISK_TROSKEL_DAGAR = 300 (samma
-// "ungefär årliga cykler"-antagande, samma fyra kommuner med känd regel):
-// 365 dagar antagen cykel minus 90 ("tre månader innan", Jacobs formulering
-// i sprinten) = dag 275. Det ger marginal FÖRE widgetens egen risk-tröskel
-// (275 < 300) — hon får en proaktiv påminnelse innan hon någonsin skulle
-// se "kan ha förfallit"-läget om hon kollade manuellt. Ändras det ena
-// talet bör det andra motiveras om tillsammans med det, inte var för sig.
+// Den GAMLA modellen (GILTIGHET_VARNING_DAGAR = 275) antog att ALLA
+// kommuner har en ~365-dagars årsmötescykel och räknade mot fritext
+// (Forutsattning.giltighet) — samma antagande som GiltighetsKontroll.
+// astro:s gamla RISK_TROSKEL_DAGAR/GRANS_DAGAR, och samma fel: Helsingborgs
+// källa säger "ett år från BESLUTSDAGEN", inte årsmötet, och flera av de
+// 19 kommunerna med känd fritext har regler som inte är en 365-dagarscykel
+// alls (Lund: var 13:e månad; Piteå/Täby/Trelleborg: fasta kalenderdatum;
+// Nacka: ansökningsgap, inget datum). Diagnos 2026-08-11 (produktions-
+// Redis, scripts/diagnos-giltighetsvarning.ts) bekräftade att cronet
+// ALDRIG skickat något — 0 giltighetsvarningskickad-nycklar, 1 bekräftad
+// prenumerant, 1 giltighetsbevakning. Ingen felaktig gissning nådde
+// någonsin en verklig inkorg.
 //
-// giltighetsregel (Forutsattning.giltighet) är fritext — precis som
-// widgeten SJÄLV vägrar räkna fram ett exakt förfallodatum ur den
-// (samma "gissa aldrig"-princip, se GiltighetsKontroll.astro:s filhuvud),
-// skickar den här cronen ALDRIG mejlet om regeln saknas för kommunen.
+// Tre nivåer (samma modell som GiltighetsKontroll.astro):
+//   NIVÅ 1 — kommun.giltighet_regel ger ett datum (giltighetRegelGerDatum,
+//     kommunTyper.ts) → berakForfallodatum() räknar det exakta
+//     förfallodatumet, varning två månader före (addMonths(-2)).
+//     Idempotent per (kommun, förfallodatum, e-post) — samma nyckelrymd
+//     som förut, men andra argumentet är nu förfallodatum, inte
+//     årsmötesdatum (se subscribers.ts-kommentaren, säkert eftersom
+//     nyckelrymden aldrig skrivits till).
+//   NIVÅ 2 — regeln saknas/ger inget datum → ingen beräkning. En gång om
+//     året, i januari (kommunernas deadlines klustrar februari–april, se
+//     GILTIGHETSKOLL-kommentaren i content.ts). Idempotent per (kommun,
+//     kalenderår, e-post) — egen nyckelrymd (giltighetsvarningNiva2*).
 //
-// Idempotent per (kommun, årsmötesdatum, e-post) — EGEN nyckelrymd
-// (subscribers.ts:s giltighetsvarningskickad:*), kan aldrig krocka med
-// paminnelseskickad:*. Skyddad med CRON_SECRET, samma mönster som
-// paminnelser.ts/utfallsfraga.ts. ?today= samma testkrok.
+// DRY RUN (Jacob 2026-08-11, bekräftat via AskUserQuestion): NIVÅ 1/2:s
+// mejltexter är inte skrivna än — MEJL.giltighetsvarning (content.ts)
+// byggde på det gamla fritext/275-dagarsantagandet och passar inte de nya
+// nivåerna (se mejl.ts:s sendGiltighetsvarning-kommentar). Samma klass av
+// risk som {{FABLE:}}-platshållaren som hittades live i produktion
+// tidigare i den här sessionen — hellre en tom logg än ett gissat mejl
+// till en verklig inkorg. Cronet räknar ut ALLA rätta mottagare/datum och
+// LOGGAR vad det skulle skicka, men anropar aldrig sendMejl och markerar
+// aldrig som skickat. Byt till skarpt läge (anropa sendGiltighets-
+// varningNiva1/Niva2, markera med markGiltighetsvarningSent/-Niva2Sent)
+// när Opus/Fable levererat båda mejltexterna.
 //
-// FIX 2026-08-01 (fångad av kod-audit, egen granskning): triggern var
-// `dagarSedan !== GILTIGHET_VARNING_DAGAR` — kopierat rakt av från
-// paminnelser.ts:s exakt-dag-mönster, men det mönstret förutsätter att
-// målpunkten alltid ligger i FRAMTIDEN vid anmälningstillfället (en
-// bidragsdeadline är alltid senare än idag). Årsmötesdatumet här är redan
-// PASSERAT när hon fyller i det — och widgeten (GiltighetsKontroll.astro)
-// visar OVILLKORLIGT samma "vill ni bli påminda?"-erbjudande även när
-// dagarSedan redan är 300+ ("kan ha förfallit"-läget). Med `!==` hade
-// den gruppen ALDRIG träffat exakt dag 275 igen (dagarSedan bara ökar)
-// — precis de som redan ligger i riskzonen hade tystnat för alltid.
-// `>=` + den redan befintliga idempotens-spärren löser det: skickas en
-// gång, oavsett om hon anmälde sig före eller efter tröskeldagen.
+// Skyddad med CRON_SECRET, samma mönster som paminnelser.ts/utfallsfraga.
+// ts. ?today= samma testkrok.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { loadKommuner, formatDate, daysUntil, todayISO, hittaGiltighetsregel } from '../../../lib/kommuner';
-import { getAllConfirmedSubscribers, wasGiltighetsvarningSent, markGiltighetsvarningSent } from '../../../lib/subscribers';
-import { sendGiltighetsvarning, siteUrl } from '../../../lib/mejl';
-
-const GILTIGHET_VARNING_DAGAR = 275;
+import {
+  loadKommuner, todayISO, giltighetRegelGerDatum, berakForfallodatum, addMonths,
+} from '../../../lib/kommuner';
+import {
+  getAllConfirmedSubscribers, wasGiltighetsvarningSent, wasGiltighetsvarningNiva2Sent,
+} from '../../../lib/subscribers';
 
 export const GET: APIRoute = async ({ request, url }) => {
   const env = import.meta.env as unknown as Record<string, string>;
@@ -54,12 +59,18 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 
   const today = url.searchParams.get('today') || todayISO();
+  const todayManad = Number(today.slice(5, 7));
+  const todayAr = today.slice(0, 4);
+
   const subscribers = await getAllConfirmedSubscribers();
   const kommuner = loadKommuner();
 
-  let sent = 0;
-  let skipped = 0;
-  let ingenRegel = 0;
+  let niva1SkulleSkickas = 0;
+  let niva1RedanSkickat = 0;
+  let niva2SkulleSkickas = 0;
+  let niva2RedanSkickat = 0;
+  const niva1Logg: string[] = [];
+  const niva2Logg: string[] = [];
   const errors: string[] = [];
 
   for (const sub of subscribers) {
@@ -68,31 +79,37 @@ export const GET: APIRoute = async ({ request, url }) => {
       const kommun = kommuner.find((k) => k.kommun_slug === kommunSlug);
       if (!kommun) continue;
 
-      const giltighetsregel = hittaGiltighetsregel(kommun.forutsattningar);
-      if (!giltighetsregel) {
-        ingenRegel++;
-        continue;
-      }
-
-      const dagarSedan = -daysUntil(arsmotesdatum, today);
-      if (dagarSedan < GILTIGHET_VARNING_DAGAR) continue;
-
-      const redanSkickat = await wasGiltighetsvarningSent(kommunSlug, arsmotesdatum, sub.email);
-      if (redanSkickat) {
-        skipped++;
-        continue;
-      }
-
       try {
-        await sendGiltighetsvarning(sub.email, {
-          arsmotesdatum: formatDate(arsmotesdatum),
-          kommun: kommun.kommun,
-          giltighetsregel,
-          system: kommun.ansokningssystem.namn,
-          kommunLank: `${siteUrl()}/kommun/${kommun.kommun_slug}/`,
-        });
-        await markGiltighetsvarningSent(kommunSlug, arsmotesdatum, sub.email);
-        sent++;
+        const regel = kommun.giltighet_regel;
+        if (giltighetRegelGerDatum(regel)) {
+          // NIVÅ 1
+          const forfallodatum = berakForfallodatum(regel!, arsmotesdatum);
+          if (!forfallodatum) continue; // försvar — giltighetRegelGerDatum garanterar egentligen detta
+
+          const paminnDatum = addMonths(forfallodatum, -2);
+          if (today < paminnDatum) continue; // inte dags än
+
+          const redanSkickat = await wasGiltighetsvarningSent(kommunSlug, forfallodatum, sub.email);
+          if (redanSkickat) {
+            niva1RedanSkickat++;
+            continue;
+          }
+
+          niva1SkulleSkickas++;
+          niva1Logg.push(`${sub.email} / ${kommunSlug} — förfaller ${forfallodatum} (årsmöte ${arsmotesdatum})`);
+        } else {
+          // NIVÅ 2 — bara i januari, en gång per (kommun, år, e-post)
+          if (todayManad !== 1) continue;
+
+          const redanSkickat = await wasGiltighetsvarningNiva2Sent(kommunSlug, todayAr, sub.email);
+          if (redanSkickat) {
+            niva2RedanSkickat++;
+            continue;
+          }
+
+          niva2SkulleSkickas++;
+          niva2Logg.push(`${sub.email} / ${kommunSlug} (årsmöte ${arsmotesdatum}, ingen känd regel)`);
+        }
       } catch (e) {
         errors.push(`${sub.email}/${kommunSlug}: ${(e as Error).message}`);
       }
@@ -100,7 +117,14 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 
   return new Response(
-    JSON.stringify({ today, subscribers: subscribers.length, sent, skipped, ingenRegel, errors }),
+    JSON.stringify({
+      today,
+      dryRun: true,
+      subscribers: subscribers.length,
+      niva1: { skulleSkickas: niva1SkulleSkickas, redanSkickat: niva1RedanSkickat, mottagare: niva1Logg },
+      niva2: { skulleSkickas: niva2SkulleSkickas, redanSkickat: niva2RedanSkickat, mottagare: niva2Logg },
+      errors,
+    }),
     { headers: { 'content-type': 'application/json' } }
   );
 };

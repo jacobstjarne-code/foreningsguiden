@@ -374,17 +374,39 @@ export async function markReminderSent(typ: '28' | '14' | '4' | '3', bidragId: s
 }
 
 // B4 (SPRINT: Produkten) — giltighetsvarningens idempotens-nyckel skiljer
-// sig i FORM från sentKey ovan (kommun+årsmötesdatum, inte bidrag+datum) —
-// EGEN nyckelrymd, samma princip som utfallsfraga.ts:s köp-scopade
-// nycklar (kan aldrig krocka med paminnelseskickad:*).
-const giltighetsvarningKey = (kommunSlug: string, arsmotesdatum: string) =>
-  `giltighetsvarningskickad:${kommunSlug}:${arsmotesdatum}`;
+// sig i FORM från sentKey ovan (kommun+datum, inte bidrag+datum) — EGEN
+// nyckelrymd, samma princip som utfallsfraga.ts:s köp-scopade nycklar
+// (kan aldrig krocka med paminnelseskickad:*).
+//
+// C3.1 (Jacob 2026-08-11): andra argumentet bytte MENING från
+// årsmötesdatum till förfallodatum (berakForfallodatum()) — NIVÅ 1:s
+// påminnelse triggas nu av det beräknade förfallodatumet, inte det datum
+// besökaren fyllde i. Säkert att byta utan migrering: diagnos-
+// giltighetsvarning.ts (2026-08-11) bekräftade 0 giltighetsvarningskickad-
+// nycklar någonsin skrivna — cronet har aldrig skickat något.
+const giltighetsvarningKey = (kommunSlug: string, forfallodatum: string) =>
+  `giltighetsvarningskickad:${kommunSlug}:${forfallodatum}`;
 
-/** Har giltighetsvarningen redan gått till adressen för DETTA kommun+årsmötesdatum? */
-export async function wasGiltighetsvarningSent(kommunSlug: string, arsmotesdatum: string, email: string): Promise<boolean> {
-  return (await redis.sismember(giltighetsvarningKey(kommunSlug, arsmotesdatum), email.toLowerCase())) === 1;
+/** Har NIVÅ 1-varningen redan gått till adressen för DETTA kommun+förfallodatum? */
+export async function wasGiltighetsvarningSent(kommunSlug: string, forfallodatum: string, email: string): Promise<boolean> {
+  return (await redis.sismember(giltighetsvarningKey(kommunSlug, forfallodatum), email.toLowerCase())) === 1;
 }
 
-export async function markGiltighetsvarningSent(kommunSlug: string, arsmotesdatum: string, email: string): Promise<void> {
-  await redis.sadd(giltighetsvarningKey(kommunSlug, arsmotesdatum), email.toLowerCase());
+export async function markGiltighetsvarningSent(kommunSlug: string, forfallodatum: string, email: string): Promise<void> {
+  await redis.sadd(giltighetsvarningKey(kommunSlug, forfallodatum), email.toLowerCase());
+}
+
+// C3.1 — NIVÅ 2:s egen nyckelrymd: ingen förfallodatum att räkna mot (regeln
+// saknas/ger inget datum), så idempotensen är per (kommun, kalenderår) i
+// stället — januari-genomgången ska bara gå ut EN gång per år, inte en gång
+// per (kommun, datum) som saknar mening här.
+const giltighetsvarningNiva2Key = (kommunSlug: string, ar: string) =>
+  `giltighetsvarningniva2skickad:${kommunSlug}:${ar}`;
+
+export async function wasGiltighetsvarningNiva2Sent(kommunSlug: string, ar: string, email: string): Promise<boolean> {
+  return (await redis.sismember(giltighetsvarningNiva2Key(kommunSlug, ar), email.toLowerCase())) === 1;
+}
+
+export async function markGiltighetsvarningNiva2Sent(kommunSlug: string, ar: string, email: string): Promise<void> {
+  await redis.sadd(giltighetsvarningNiva2Key(kommunSlug, ar), email.toLowerCase());
 }

@@ -88,9 +88,10 @@ export type DeadlineTyp = (typeof DEADLINE_TYPER)[number];
 // och lade giltighet_status direkt på Bidrag, med en duplicerad
 // `giltighet: string | null` — löst till förmån för DENNA version vid
 // sammanslagningen 2026-08-03: giltighet hör hemma på Forutsattning, där
-// fältet redan fanns långt innan datatillstånd-arbetet, och används där
-// av GiltighetsKontroll.astro/hittaGiltighetsregel(). Två källor för
-// samma sak hade brutit "en sanning, ett ställe".)
+// fältet redan fanns långt innan datatillstånd-arbetet (C3.1, 2026-08-11:
+// fritexten läses idag bara av giltighet_status/VerificationStamp, inte
+// längre av GiltighetsKontroll.astro — se giltighet_regel nedan). Två
+// källor för samma sak hade brutit "en sanning, ett ställe".)
 export const DATATILLSTAND = ['olast', 'okand', 'ingen_regel', 'kontrollast'] as const;
 export type Datatillstand = (typeof DATATILLSTAND)[number];
 
@@ -199,15 +200,17 @@ export interface Kommunsiffra {
 
 // G1/C3 (ARBETSORDER 2026-08-11) — kommunens STRUKTURERADE regel för hur
 // länge ett godkännande som bidragsberättigad förening gäller. Skild från
-// Forutsattning.giltighet (fritext, hittaGiltighetsregel() nedan) — men
-// C3.1 (Jacob 2026-08-11, Helsingborg-fyndet) rev EN skillnad som fanns
-// här tidigare: GiltighetsKontroll.astro trodde en gång att fritexten
-// kunde driva en EGEN, oberoende beräkning (RISK_TROSKEL_DAGAR/
-// GRANS_DAGAR ≈ 365 dagar, gissat). Det gav fel svar (Helsingborg: "ett
-// år från beslutsdagen" i källan blev "om 7 månader, mars 2027" i
-// widgeten — fel bas, fel matte). Fritexten är nu ENDAST källa till
-// hittaGiltighetsregel()-strängen som visas i källfotnoten/rådata —
-// widgeten räknar UTESLUTANDE mot giltighet_regel + berakForfallodatum().
+// Forutsattning.giltighet (fritext) — men C3.1 (Jacob 2026-08-11,
+// Helsingborg-fyndet) rev EN skillnad som fanns här tidigare:
+// GiltighetsKontroll.astro trodde en gång att fritexten kunde driva en
+// EGEN, oberoende beräkning (RISK_TROSKEL_DAGAR/GRANS_DAGAR ≈ 365 dagar,
+// gissat). Det gav fel svar (Helsingborg: "ett år från beslutsdagen" i
+// källan blev "om 7 månader, mars 2027" i widgeten — fel bas, fel matte).
+// Fritexten driver inte längre någon beräkning alls (den gamla
+// hittaGiltighetsregel()-lookupen är raderad, se kommentaren ovanför
+// hittaGiltighetsstatus()) — bara giltighet_status/VerificationStamp
+// läser den nu. Widgeten och cronet räknar UTESLUTANDE mot giltighet_regel
+// + berakForfallodatum().
 export const GILTIGHET_REGEL_TYPER = [
   'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'ingen_regel', 'okand',
 ] as const;
@@ -308,28 +311,25 @@ export function addMonths(iso: string, months: number): string {
   return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
 }
 
-/**
- * Den giltighetsregel som faktiskt ska räknas mot (GiltighetsKontroll.astro,
- * KommunProgression.astro station 3, cron/giltighetsvarning.ts). En kommun
- * kan ha flera förutsättningar och `giltighet` sitter inte alltid på den
- * första — Helsingborg har den på forutsattningar[1] (forutsattningar[0]
- * är "registrera dig", giltighet: null; forutsattningar[1] är "förbli
- * bidragsberättigad", giltighet satt). Ett rakt `forutsattningar[0]?.giltighet`
- * missar den regeln helt och tystnar tyst till "vi gissar inte" — bugg
- * hittad 2026-08-02 vid Playwright-verifiering av 1f Yta 2, ingen tidigare
- * kommun i datat hade en andra förutsättning med giltighet satt.
- */
-export function hittaGiltighetsregel(forutsattningar: Forutsattning[]): string | null {
-  return forutsattningar.find((f) => f.giltighet)?.giltighet ?? null;
-}
+// hittaGiltighetsregel() (fritext-lookup, gav strängen bakom Forutsattning.
+// giltighet) RADERAD C3.1 (Jacob 2026-08-11) — superseterad, inte
+// text-utan-yta: dess enda yta var GiltighetsKontroll.astro:s realtids-
+// besked + den gamla 275-dagarscronen, och båda pekar nu uteslutande på
+// giltighet_regel + berakForfallodatum() (se GiltighetsKontroll.astro och
+// cron/giltighetsvarning.ts filhuvuden). 0 kvarvarande anropsställen vid
+// borttagningen (grep -rn "hittaGiltighetsregel" src/ gav bara denna fils
+// egen definition). hittaGiltighetsstatus() nedan är INTE samma sak —
+// den läser giltighet_status (granskningsläget på fritexten, till
+// VerificationStamp-badgen), en helt annan fråga, och rörs inte av detta.
 
 /**
  * T4 (ÅTGÄRDSSPEC 2026-08-03 kväll): stämpeln räknas nu över FYRA fält,
  * inte tre — giltighet är kommun-nivå (Forutsattning), inte per-bidrag,
  * men en besökare som ansöker bryr sig om hur länge beslutet gäller lika
- * mycket som om belopp/deadline/krav. Samma forutsattning som
- * hittaGiltighetsregel() pekar ut (den som faktiskt bär giltighet-
- * VÄRDET) — annars kunde de två divergera och peka på olika poster.
+ * mycket som om belopp/deadline/krav. Samma sök-mönster som Helsingborg
+ * ursprungligen avslöjade (giltighet sitter inte alltid på
+ * forutsattningar[0] — Helsingborg har den på [1]): hittar den
+ * förutsättning som faktiskt BÄR ett giltighet-värde, oavsett index.
  * Faller tillbaka på forutsattningar[0] om ingen bär ett värde (samma
  * "vi gissar inte"-princip: fallbacken pekar aldrig ut fel post, den
  * pekar bara på den enda rimliga kandidaten när ingen är bättre).

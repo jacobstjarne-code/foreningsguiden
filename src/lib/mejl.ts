@@ -152,13 +152,14 @@ export interface GiltighetsvarningVars {
 }
 
 /**
- * B4 (SPRINT: Produkten, Opus/Fable 2026-07-31): GiltighetsKontrollens
- * "erbjudande" (GiltighetsKontroll.astro → addGiltighetBevakning) sparade
- * årsmötesdatum och skickade en bekräftelse — men själva varningsmejlet
- * skickades aldrig, ingen cron fanns (se giltighetsbevakning.ts:s egen
- * kommentar: "själva utskicksjobbet är inte byggt än"). MEJL.giltighetsvarning
- * (content.ts) fanns redan färdigskriven, oanvänd. Se
- * cron/giltighetsvarning.ts för utskicksjobbet.
+ * B4 (SPRINT: Produkten, Opus/Fable 2026-07-31) — TEXT-UTAN-YTA sedan C3.1
+ * (Jacob 2026-08-11): cron/giltighetsvarning.ts anropar INTE längre den
+ * här funktionen. MEJL.giltighetsvarning byggde på fritext-giltighet +
+ * "ungefär nu"-timing, ett antagande C3.1 tog bort (se cronets filhuvud).
+ * NIVÅ 1/NIVÅ 2 behöver EGNA mejltexter (exakt förfallodatum respektive
+ * januari-genomgången utan datum) — inte skrivna än, Code skriver aldrig
+ * svensk brödtext själv. Funktionen och MEJL.giltighetsvarning ligger kvar
+ * orörda (ingenting ersätter dem, döda dem inte) tills den texten finns.
  */
 export async function sendGiltighetsvarning(to: string, vars: GiltighetsvarningVars): Promise<void> {
   await sendMejl(to, MEJL.giltighetsvarning, vars);
