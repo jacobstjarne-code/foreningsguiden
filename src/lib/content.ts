@@ -739,36 +739,42 @@ export const BETA = {
 };
 
 /**
- * GILTIGHETSKOLLEN — widget på kommunsidan, station 3-området
- * (SPRINT_COPY.ts, Fable 2026-07-18). Ett datum in, ett besked ut.
- * svarRisk/svarOk kräver en känd giltighetsregel (forutsattningar[0].giltighet);
- * svarOkand används ALLTID när regeln saknas — ingen beräkning gissas fram.
+ * GILTIGHETSKOLLEN — widget på kommunsidan, station 3-området (SPRINT_COPY.ts,
+ * Fable 2026-07-18; ombyggd C3.1, Jacob 2026-08-11 efter Helsingborg-fyndet:
+ * widgeten räknade tidigare mot en gissad ~365-dagarscykel oavsett kommunens
+ * faktiska regel — "ett år från beslutsdagen" blev "om 7 månader, mars 2027").
+ *
+ * Nu tre nivåer, styrda av giltighetRegelGerDatum() (kommunTyper.ts):
+ *   NIVÅ 1 (regel ger datum + årsmötesdatum angivet) → nivaEttSvar, ett
+ *   riktigt beräknat förfallodatum ur berakForfallodatum().
+ *   NIVÅ 2 (regel saknas/ger inget datum + årsmötesdatum angivet) →
+ *   nivaTva*, ingen gissning, bara löftet om januari-genomgången.
+ *   NIVÅ 3 (inget årsmötesdatum än) → bara frågan (formuläret), inget
+ *   påstående alls.
  */
 export const GILTIGHETSKOLL = {
   rubrik: 'Är er bidragsstatus fortfarande giltig?',
   intro: 'I {kommun} förfaller godkännandet som bidragsberättigad förening om det inte förnyas. Ange när föreningen senast hade årsmöte, så räknar vi ut var ni står.',
   // Arbetsorder 2026-08-03 (2a): "intro" påstod förfall även för kommuner
-  // utan känd giltighetsregel (Gislaved: giltighet: null överallt) — motsäger
-  // svarOkand längre ned i samma widget. introOkand används i stället när
-  // hittaGiltighetsregel() inte hittar något. Kort, funktionell text (Code,
-  // inte Fable — flaggat i commit, samma klass som STALE.template/
-  // BEVAKNING.bevakasBadge tidigare i den här kodbasen).
+  // utan känd giltighetsregel — motsäger nivaTva-grenen längre ned i samma
+  // widget. introOkand används i stället när giltighetRegelGerDatum() är
+  // falsk. Kort, funktionell text (Code, inte Fable — flaggat i commit,
+  // samma klass som STALE.template/BEVAKNING.bevakasBadge tidigare).
   introOkand: 'Ange när föreningen senast hade årsmöte, så kontrollerar vi om {kommun} anger en tidsgräns för godkännandet.',
   datumLabel: 'Föreningens senaste årsmöte',
   knapp: 'Kontrollera',
-  svarRisk: 'Med årsmöte {arsmotesdatum} och regeln i {kommun} ({giltighetsregel}) kan er status ha förfallit eller vara nära att förfalla. Kontrollera i {system} att uppgifterna är uppdaterade — och gör det före nästa deadline, inte vid den.',
-  svarOk: 'Med årsmöte {arsmotesdatum} bör er status vara giltig ännu en tid. Men den förfaller om den inte förnyas — {giltighetsregel}.',
-  svarOkand: '{kommun} anger ingen tidsgräns för godkännandet i sina publicerade regler. Flera kommuner kräver ändå årlig uppdatering av föreningens uppgifter — kontrollera med kommunen. Vi har inte hittat en regel att räkna mot, så vi gissar inte.',
-  erbjudande: 'Vill ni att vi säger till i god tid innan statusen behöver förnyas?',
-  erbjudandeKnapp: 'Ja, påminn oss',
-  // 1f Yta 2 (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): känd giltighetsregel
-  // + fortfarande inom RISK_TROSKEL_DAGAR-fönstret (GiltighetsKontroll.astro)
-  // → en beräknad gräns i stället för den vaga svarOk-texten. {manader}/
-  // {manad}/{ar} räknas fram klientsidan av samma ~365-dagarscykel som redan
-  // motiverar RISK_TROSKEL_DAGAR (se den filens frontmatter-kommentar) —
-  // ingen ny gissning, bara samma approximation uttryckt som datum.
-  gransRubrik: 'Ert godkännande förfaller om {manader} månader',
-  gransText: 'Årsmöte {arsmotesdatum}. I {kommun} gäller godkännandet till nästa årsmöte redovisats — {manad} {ar} är er gräns.',
+  // NIVÅ 1 — Jacobs text ordagrant (C3 REVIDERAD, 2026-08-11): "Ni är
+  // godkända till mars 2027. Vi säger till i januari, innan det går ut."
+  // {manad}/{ar} = förfallomånaden ur berakForfallodatum(); {paminnManad}
+  // = två månader före (addMonths(forfallodatum, -2)).
+  nivaEttSvar: 'Ni är godkända till {manad} {ar}. Vi säger till i {paminnManad}, innan det går ut.',
+  // NIVÅ 2 — Jacobs text ordagrant (C3.1, 2026-08-11), uppdelad i tre
+  // bitar så "Kolla hos kommunen" kan renderas som en riktig länk till
+  // kommun.kalla_url i markupen i stället för platt text.
+  nivaTvaForeLank: 'Vi vet inte vad som gäller i {kommun}. ',
+  nivaTvaLank: 'Kolla hos kommunen',
+  nivaTvaEfterLank: ' — och vi hör av oss i januari.',
+  paminnKnapp: 'Ja, påminn oss', // initial/fallback-text, overskrivs alltid av paminnKnappMall vid submit
   paminnKnappMall: 'Påminn oss i {manad}',
 };
 

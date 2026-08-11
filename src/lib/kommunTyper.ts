@@ -198,12 +198,16 @@ export interface Kommunsiffra {
 }
 
 // G1/C3 (ARBETSORDER 2026-08-11) — kommunens STRUKTURERADE regel för hur
-// länge ett godkännande som bidragsberättigad förening gäller. Skild
-// från Forutsattning.giltighet (fritext, hittaGiltighetsregel() ovan) —
-// den fritexten driver GiltighetsKontroll.astro:s OMEDELBARA risk-
-// bedömning (oförändrad av detta), medan giltighet_regel driver C3:s
-// FRAMTIDA påminnelse med ett exakt beräknat förfallodatum. Två olika
-// frågor, två olika mekanismer, medvetet inte sammanslagna.
+// länge ett godkännande som bidragsberättigad förening gäller. Skild från
+// Forutsattning.giltighet (fritext, hittaGiltighetsregel() nedan) — men
+// C3.1 (Jacob 2026-08-11, Helsingborg-fyndet) rev EN skillnad som fanns
+// här tidigare: GiltighetsKontroll.astro trodde en gång att fritexten
+// kunde driva en EGEN, oberoende beräkning (RISK_TROSKEL_DAGAR/
+// GRANS_DAGAR ≈ 365 dagar, gissat). Det gav fel svar (Helsingborg: "ett
+// år från beslutsdagen" i källan blev "om 7 månader, mars 2027" i
+// widgeten — fel bas, fel matte). Fritexten är nu ENDAST källa till
+// hittaGiltighetsregel()-strängen som visas i källfotnoten/rådata —
+// widgeten räknar UTESLUTANDE mot giltighet_regel + berakForfallodatum().
 export const GILTIGHET_REGEL_TYPER = [
   'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'ingen_regel', 'okand',
 ] as const;
@@ -221,6 +225,19 @@ export interface GiltighetRegel {
 // återanvända Datatillstand och tillåta ett fjärde värde G1 inte bad om.
 export const GILTIGHET_REGEL_STATUSAR = ['kontrollast', 'ingen_regel', 'okand'] as const;
 export type GiltighetRegelStatus = (typeof GILTIGHET_REGEL_STATUSAR)[number];
+
+/**
+ * Sant bara när giltighet_regel faktiskt kan ge ett beräknat förfallodatum
+ * (manader_efter_arsmote/manader_efter_beslut + ett känt antal) — falskt
+ * för null, för kalenderar/ingen_regel/okand, och för antal: null. Enda
+ * källan till "har vi en riktig regel att räkna mot" — GiltighetsKontroll.
+ * astro använder den både server- och klientsidan så de aldrig kan
+ * divergera om vilken gren som visas.
+ */
+export function giltighetRegelGerDatum(regel: GiltighetRegel | null): boolean {
+  if (regel === null || regel.antal === null) return false;
+  return regel.typ === 'manader_efter_arsmote' || regel.typ === 'manader_efter_beslut';
+}
 
 export interface Kommun {
   kommun: string;
@@ -273,11 +290,13 @@ export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string)
 }
 
 /**
- * ISO-datum plus N månader, UTC. Dagen klampas till sista dagen i
- * målmånaden om ursprungsdagen inte finns där (31 jan + 1 månad → 28/29
- * feb, inte JS-Date:s default-beteende att rulla över till 3 mars).
+ * ISO-datum plus N månader, UTC (negativt N går bakåt — GiltighetsKontroll.
+ * astro använder addMonths(forfallodatum, -2) för påminnelsemånaden).
+ * Dagen klampas till sista dagen i målmånaden om ursprungsdagen inte
+ * finns där (31 jan + 1 månad → 28/29 feb, inte JS-Date:s default-
+ * beteende att rulla över till 3 mars).
  */
-function addMonths(iso: string, months: number): string {
+export function addMonths(iso: string, months: number): string {
   const [y, m, d] = iso.split('-').map(Number);
   const totalMonths = m - 1 + months;
   const targetYear = y + Math.floor(totalMonths / 12);

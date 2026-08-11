@@ -2,20 +2,24 @@
 // GiltighetsKontroll — GILTIGHETSKOLLEN-widgeten (SPRINT §Spår B,
 // SPRINT_COPY.ts §GILTIGHETSKOLL). Ett årsmötesdatum in, ett besked ut.
 //
-// Beräkningen: giltighet (Forutsattning) är fritext, inte en strukturerad
-// varaktighet — vi gissar aldrig ett exakt förfallodatum ur den. De fyra
-// kommuner som idag har en känd regel (Berg, Helsingborg, Lund, Umeå) är
-// alla ungefär årliga ("årligen", "ett år", "var 13:e månad"), så tröskeln
-// nedan (RISK_TROSKEL_DAGAR) approximerar "nära ett år sedan årsmötet" —
-// matchar den medvetet vaga copyn (svarRisk säger "kan ha förfallit ELLER
-// vara nära att förfalla", inte ett exakt datum). Om en kommun senare läggs
-// till med en genuint annan cadence (t.ex. vartannat år) måste den här
-// tröskeln motiveras om — inte antas fortsatt rätt.
+// C3.1 (Jacob 2026-08-11, Helsingborg-fyndet): widgeten byggde tidigare på
+// Forutsattning.giltighet (fritext) + en gissad ~365-dagarscykel
+// (RISK_TROSKEL_DAGAR/GRANS_DAGAR) — fel bas för kommuner vars regel inte
+// faktiskt var "ett år efter årsmötet" (Helsingborg: "ett år från
+// beslutsdagen", widgeten sa "mars 2027, om 7 månader"). Widgeten räknar
+// nu UTESLUTANDE mot kommun.giltighet_regel + berakForfallodatum()
+// (kommunTyper.ts) — samma funktion som ska driva cronets NIVÅ 1/2.
 //
-// giltighet === null → ALLTID svarOkand, aldrig en gissad beräkning
-// (samma regel som stationens egen giltighetVarning i KommunProgression).
+// Tre nivåer, ett svar per sida (widgeten är ENDA platsen ett beräknat
+// förfallodatum visas — ingen separat rad någon annanstans på sidan):
+//   NIVÅ 1: giltighetRegelGerDatum(kommun.giltighet_regel) sann + besökaren
+//     anger årsmötesdatum → ett riktigt beräknat förfallodatum.
+//   NIVÅ 2: regeln saknas eller ger inget datum + årsmötesdatum angivet →
+//     ingen gissning, bara löftet om januari-genomgången + länk till
+//     kommunens sida.
+//   NIVÅ 3: inget årsmötesdatum än → bara frågan, inget påstående.
 import type { Kommun } from '../lib/kommuner';
-import { hittaGiltighetsregel } from '../lib/kommuner';
+import { giltighetRegelGerDatum } from '../lib/kommunTyper';
 import { GILTIGHETSKOLL, BEVAKNING } from '../lib/content';
 
 export interface Props {
@@ -24,18 +28,17 @@ export interface Props {
 }
 
 const { kommun, today } = Astro.props;
-const giltighetsregel = hittaGiltighetsregel(kommun.forutsattningar);
-// 2a (arbetsorder 2026-08-03): ingressen ska inte påstå att något förfaller
-// när ingen regel är känd — det motsäger svarOkand-grenen längre ned.
-const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).replace(/{kommun}/g, kommun.kommun);
+const regel = kommun.giltighet_regel;
+const gerDatum = giltighetRegelGerDatum(regel);
+const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).replace(/{kommun}/g, kommun.kommun);
 ---
 <div
   class="giltighetskoll fg-card"
   data-giltighetskoll
   data-kommun-slug={kommun.kommun_slug}
-  data-kommun-namn={kommun.kommun}
-  data-system={kommun.ansokningssystem.namn}
-  data-giltighetsregel={giltighetsregel ?? ''}
+  data-ger-datum={gerDatum ? '1' : ''}
+  data-regel-typ={regel?.typ ?? ''}
+  data-regel-antal={regel?.antal ?? ''}
   data-today={today}
 >
   <h3>{GILTIGHETSKOLL.rubrik}</h3>
@@ -48,42 +51,13 @@ const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkan
   </form>
 
   <div data-giltighetskoll-svar hidden>
-    <!-- 2a (arbetsorder 2026-08-03): svarRisk/svarOk renderas bara när en
-         regel faktiskt är känd — annars bakas tomma platshållare ("regeln
-         i {kommun} ()", "förnyas — .") in i markupen för en gren som
-         klientskriptet ändå aldrig visar (giltighetsregel === null går
-         alltid till svarOkand nedan, se skriptets tidiga return). -->
-    {giltighetsregel && (
-      <>
-        <p data-giltighetskoll-svar-risk hidden>
-          {GILTIGHETSKOLL.svarRisk
-            .replace(/{kommun}/g, kommun.kommun)
-            .replace(/{system}/g, kommun.ansokningssystem.namn)
-            .replace(/{giltighetsregel}/g, giltighetsregel)}
-        </p>
-        <p data-giltighetskoll-svar-ok hidden>
-          {GILTIGHETSKOLL.svarOk
-            .replace(/{kommun}/g, kommun.kommun)
-            .replace(/{giltighetsregel}/g, giltighetsregel)}
-        </p>
-      </>
+    {gerDatum ? (
+      <p data-giltighetskoll-svar-niva-ett hidden>{GILTIGHETSKOLL.nivaEttSvar}</p>
+    ) : (
+      <p data-giltighetskoll-svar-niva-tva hidden>
+        {GILTIGHETSKOLL.nivaTvaForeLank.replace(/{kommun}/g, kommun.kommun)}<a href={kommun.kalla_url} target="_blank" rel="noopener">{GILTIGHETSKOLL.nivaTvaLank}</a>{GILTIGHETSKOLL.nivaTvaEfterLank}
+      </p>
     )}
-    <p data-giltighetskoll-svar-okand hidden>
-      {GILTIGHETSKOLL.svarOkand.replace(/{kommun}/g, kommun.kommun)}
-    </p>
-    <span data-giltighetskoll-arsmotesdatum hidden></span>
-
-    <!-- 1f Yta 2: känd giltighetsregel + fortfarande inom fönstret — en
-         beräknad gräns i stället för svarOk:s vagare text. Fyllda av JS
-         (kräver arsmotesdatum, satt av besökaren, + today, frusen vid
-         byggtillfället — samma mönster som resten av widgeten). -->
-    <p data-giltighetskoll-grans-rubrik hidden class="giltighetskoll__grans-rubrik"></p>
-    <p data-giltighetskoll-grans-text hidden></p>
-
-    <div data-giltighetskoll-erbjudande hidden>
-      <p data-giltighetskoll-erbjudande-text>{GILTIGHETSKOLL.erbjudande}</p>
-      <button type="button" class="fg-btn--ghost" data-giltighetskoll-erbjudande-knapp>{GILTIGHETSKOLL.erbjudandeKnapp}</button>
-    </div>
 
     <form data-giltighetskoll-epostform hidden>
       <label for="giltighetskoll-epost">{BEVAKNING.epostLabel}</label>
@@ -93,7 +67,7 @@ const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkan
         {BEVAKNING.samtycke}
       </label>
       {/* A5.2 (2026-08-11): sekundär — ett drag per sida totalt. */}
-      <button type="submit" class="fg-btn--ghost" data-giltighetskoll-epostform-knapp>{GILTIGHETSKOLL.erbjudandeKnapp}</button>
+      <button type="submit" class="fg-btn--ghost" data-giltighetskoll-epostform-knapp>{GILTIGHETSKOLL.paminnKnapp}</button>
     </form>
 
     <div data-giltighetskoll-kvitto-bekraftelse hidden>
@@ -109,46 +83,31 @@ const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkan
 
 <script>
   import { GILTIGHETSKOLL } from '../lib/content';
+  import { berakForfallodatum, addMonths } from '../lib/kommunTyper';
+  import type { GiltighetRegel, GiltighetRegelTyp } from '../lib/kommunTyper';
 
   const MANADSNAMN = [
     'januari', 'februari', 'mars', 'april', 'maj', 'juni',
     'juli', 'augusti', 'september', 'oktober', 'november', 'december',
   ];
-  function formatDateSv(iso: string): string {
-    const [y, m, d] = iso.split('-').map(Number);
-    return `${d} ${MANADSNAMN[m - 1]} ${y}`;
-  }
-  function daysBetween(fromISO: string, toISO: string): number {
-    const toUTC = (iso: string) => {
-      const [y, m, d] = iso.split('-').map(Number);
-      return Date.UTC(y, m - 1, d);
-    };
-    return Math.round((toUTC(toISO) - toUTC(fromISO)) / (1000 * 60 * 60 * 24));
-  }
-  function addDays(iso: string, days: number): string {
-    const [y, m, d] = iso.split('-').map(Number);
-    const dt = new Date(Date.UTC(y, m - 1, d) + days * 24 * 60 * 60 * 1000);
-    return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2, '0')}-${String(dt.getUTCDate()).padStart(2, '0')}`;
-  }
-
-  const RISK_TROSKEL_DAGAR = 300; // se motivering i frontmatter-kommentaren ovan
-  const GRANS_DAGAR = 365; // samma ~årliga cykel RISK_TROSKEL_DAGAR redan approximerar — se GILTIGHETSKOLL.gransText i content.ts
+  // NIVÅ 2 har ingen egen förfallomånad att räkna en påminnelse mot — Jacobs
+  // spec (C3 REVIDERAD) säger januari rakt av: kommunernas deadlines
+  // klustrar februari–april, så januari är rätt tid oavsett vilken kommun.
+  const NIVA_TVA_PAMINN_MANAD = 'januari';
 
   document.querySelectorAll<HTMLElement>('[data-giltighetskoll]').forEach((widget) => {
-    const kommunSlug = widget.dataset.kommunSlug ?? '';
-    const kommunNamn = widget.dataset.kommunNamn ?? '';
     const today = widget.dataset.today ?? '';
-    const giltighetsregel = widget.dataset.giltighetsregel ?? '';
+    const gerDatum = widget.dataset.gerDatum === '1';
+    const regelTyp = widget.dataset.regelTyp as GiltighetRegelTyp | undefined;
+    const regelAntalRaw = widget.dataset.regelAntal ?? '';
+    const regel: GiltighetRegel | null = regelTyp
+      ? { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), kalla_url: '' }
+      : null;
 
     const form = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-form]');
     const svarBlock = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar]');
-    const svarRisk = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-risk]');
-    const svarOk = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-ok]');
-    const svarOkand = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-okand]');
-    const gransRubrik = widget.querySelector<HTMLElement>('[data-giltighetskoll-grans-rubrik]');
-    const gransText = widget.querySelector<HTMLElement>('[data-giltighetskoll-grans-text]');
-    const erbjudande = widget.querySelector<HTMLElement>('[data-giltighetskoll-erbjudande]');
-    const erbjudandeKnapp = widget.querySelector<HTMLButtonElement>('[data-giltighetskoll-erbjudande-knapp]');
+    const svarNivaEtt = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-niva-ett]');
+    const svarNivaTva = widget.querySelector<HTMLElement>('[data-giltighetskoll-svar-niva-tva]');
     const epostForm = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-epostform]');
     const epostFormKnapp = widget.querySelector<HTMLButtonElement>('[data-giltighetskoll-epostform-knapp]');
     const kvittoBekraftelse = widget.querySelector<HTMLElement>('[data-giltighetskoll-kvitto-bekraftelse]');
@@ -165,62 +124,31 @@ const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkan
 
       form.hidden = true;
       svarBlock?.removeAttribute('hidden');
-      svarRisk?.setAttribute('hidden', '');
-      svarOk?.setAttribute('hidden', '');
-      svarOkand?.setAttribute('hidden', '');
-      gransRubrik?.setAttribute('hidden', '');
-      gransText?.setAttribute('hidden', '');
 
-      const arsmotesdatumSv = formatDateSv(arsmotesdatum);
+      let paminnManadNamn = NIVA_TVA_PAMINN_MANAD;
 
-      if (!giltighetsregel) {
-        svarOkand?.removeAttribute('hidden');
-        return;
-      }
+      const forfallodatum = gerDatum && regel ? berakForfallodatum(regel, arsmotesdatum) : null;
+      if (forfallodatum) {
+        const [fy, fm] = forfallodatum.split('-').map(Number);
+        const paminnISO = addMonths(forfallodatum, -2);
+        const [, pm] = paminnISO.split('-').map(Number);
+        paminnManadNamn = MANADSNAMN[pm - 1];
 
-      const dagarSedan = daysBetween(arsmotesdatum, today);
-      const risk = dagarSedan >= RISK_TROSKEL_DAGAR;
-
-      if (risk) {
-        if (svarRisk) {
-          svarRisk.textContent = (svarRisk.textContent ?? '').replace('{arsmotesdatum}', arsmotesdatumSv);
-          svarRisk.removeAttribute('hidden');
+        if (svarNivaEtt) {
+          svarNivaEtt.textContent = (svarNivaEtt.textContent ?? '')
+            .replace('{manad}', MANADSNAMN[fm - 1])
+            .replace('{ar}', String(fy))
+            .replace('{paminnManad}', paminnManadNamn);
+          svarNivaEtt.removeAttribute('hidden');
         }
-        erbjudande?.removeAttribute('hidden');
-        return;
+      } else {
+        // NIVÅ 2 — regeln saknas/ger inget datum. Ingen beräkning, ingen
+        // gissning (samma väg om gerDatum var sann men berakForfallodatum
+        // ändå gav null — kan i praktiken inte hända, men gissar aldrig).
+        svarNivaTva?.removeAttribute('hidden');
       }
 
-      // 1f Yta 2: inom fönstret — beräknad gräns i stället för svarOk:s vagare text.
-      const gransISO = addDays(arsmotesdatum, GRANS_DAGAR);
-      const manaderTillGrans = Math.max(1, Math.round(daysBetween(today, gransISO) / 30));
-      const [gy, gm] = gransISO.split('-').map(Number);
-      const gransManad = MANADSNAMN[gm - 1];
-      const paminnManad = MANADSNAMN[((gm - 1) - 1 + 12) % 12];
-
-      if (gransRubrik) {
-        gransRubrik.textContent = GILTIGHETSKOLL.gransRubrik.replace('{manader}', String(manaderTillGrans));
-        gransRubrik.removeAttribute('hidden');
-      }
-      if (gransText) {
-        gransText.textContent = GILTIGHETSKOLL.gransText
-          .replace('{kommun}', kommunNamn)
-          .replace('{arsmotesdatum}', arsmotesdatumSv)
-          .replace('{manad}', gransManad)
-          .replace('{ar}', String(gy));
-        gransText.removeAttribute('hidden');
-      }
-
-      const paminnKnappText = GILTIGHETSKOLL.paminnKnappMall.replace('{manad}', paminnManad);
-      if (erbjudandeKnapp) erbjudandeKnapp.textContent = paminnKnappText;
-      if (epostFormKnapp) epostFormKnapp.textContent = paminnKnappText;
-
-      // Gränsen är redan sagd i klartext ovan — hoppa förbi frågesteget,
-      // rakt till mejlfält + knapp (mockens enda-steg-yta).
-      epostForm?.removeAttribute('hidden');
-    });
-
-    erbjudandeKnapp?.addEventListener('click', () => {
-      erbjudande?.setAttribute('hidden', '');
+      if (epostFormKnapp) epostFormKnapp.textContent = GILTIGHETSKOLL.paminnKnappMall.replace('{manad}', paminnManadNamn);
       epostForm?.removeAttribute('hidden');
     });
 
@@ -228,7 +156,7 @@ const intro = (giltighetsregel ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkan
       event.preventDefault();
       felText?.setAttribute('hidden', '');
       const data = new FormData(epostForm);
-      data.set('kommun', kommunSlug);
+      data.set('kommun', widget.dataset.kommunSlug ?? '');
       data.set('arsmotesdatum', arsmotesdatum);
 
       try {
