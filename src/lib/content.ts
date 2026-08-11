@@ -117,6 +117,12 @@ export const KOMMUN = {
       svar: 'Beloppen varierar mellan bidrag och är inte alltid publikt angivna i förväg. Där kommunen anger ett belopp eller en beräkningsgrund står det vid respektive bidrag ovan. För exakt summa gäller kommunens besked på ansökan.',
     },
   ],
+  // A6.3 (Jacob 2026-08-11) — singularvariant av faq[0].svar när kommunen
+  // har exakt ETT bidrag ("1 kommunala bidrag" var grammatiskt fel).
+  // "kommunalt bidrag" återanvänder ordagrant samma böjning som redan
+  // finns i svarForstEtt ovan — ingen ny formulering, samma etablerade
+  // singularform på två ställen i samma fil.
+  faqSvarEtt: 'I {kommun} kan föreningar söka ett kommunalt bidrag: {bidragslista}. Vilka just din förening kan söka beror på verksamhet och målgrupp — kraven står vid varje bidrag ovan. Bidragen handläggs av {forvaltning}.',
 };
 
 /**
@@ -819,7 +825,10 @@ export const EKERN = {
   // som värme, två bidrag, sedan matchningen som inbjudan (B2/B3 nedan).
   avsandare: 'Oberoende — inte kommunen',
   soktFraga: 'Söker ni bidrag i {kommun}?',
-  varmeRad: 'Vi har läst alla {antal} åt er',
+  // A6.3 (Jacob 2026-08-11): "alla 1" var grammatiskt fel — singular när
+  // kommunen har exakt ETT bidrag.
+  varmeRadEtt: 'Vi har läst det åt er',
+  varmeRadFlera: 'Vi har läst alla {antal} åt er',
 
   band2Eyebrow: 'GÄLLER DET HÄR ER?',
   // B2: matchningen är ALLTID en fråga, aldrig ett påstående. Ersätter

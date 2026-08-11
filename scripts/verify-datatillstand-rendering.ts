@@ -27,6 +27,14 @@ if (!existsSync(DIST_KOMMUN_DIR)) {
 
 const kommuner = loadKommuner();
 const problem: string[] = [];
+// A6.2 (2026-08-11) — samma fälla som verify-kalla-cta.ts: invariant 2/3
+// hoppar tyst över ett bidrag (`continue`) om cardStart===-1, dvs. om
+// id="bidrag-X"-strängen inte hittas i den byggda HTML:en (t.ex. efter
+// en markupändring). Utan en egen räknare skulle ALLA bidrag kunna
+// missas tyst och problem.length===0 ändå läsas som ett godkännande —
+// kommuner.length (loopens YTTRE räknare) bevisar bara att filer
+// öppnades, inte att någon kort-invariant faktiskt kontrollerades.
+let kortKontrollerade = 0;
 
 for (const kommun of kommuner) {
   const indexPath = join(DIST_KOMMUN_DIR, kommun.kommun_slug, 'index.html');
@@ -49,6 +57,7 @@ for (const kommun of kommuner) {
   for (const bidrag of kommun.bidrag) {
     const cardStart = html.indexOf(`id="bidrag-${bidrag.id}"`);
     if (cardStart === -1) continue;
+    kortKontrollerade++;
     const cardEnd = html.indexOf('bidrag-card__cta', cardStart);
     const card = html.slice(cardStart, cardEnd === -1 ? cardStart + 4000 : cardEnd + 200);
 
@@ -64,8 +73,13 @@ for (const kommun of kommuner) {
   }
 }
 
+if (kortKontrollerade === 0) {
+  console.error('Datatillstånd-renderingstest FAIL — 0 bidragskort kontrollerade. id="bidrag-X"-strängen matchar troligen inte längre den byggda markupen.');
+  process.exit(1);
+}
+
 if (problem.length === 0) {
-  console.log(`Datatillstånd-renderingstest: ${kommuner.length} kommuner kontrollerade, inga påståenden om okända fält hittades.`);
+  console.log(`Datatillstånd-renderingstest: ${kommuner.length} kommuner, ${kortKontrollerade} bidragskort kontrollerade, inga påståenden om okända fält hittades.`);
   process.exit(0);
 }
 

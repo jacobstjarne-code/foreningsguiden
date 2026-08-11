@@ -121,9 +121,13 @@ function test(namn: string, fn: () => void) {
 
 const filer = readdirSync('golden-set').filter((f) => f.endsWith('.yaml') && f !== 'snapshot.yaml');
 
+// A6.2 (2026-08-11) — samma fälla som verify-kalla-cta.ts: en tom
+// golden-set (fel katalog, borttagna filer, en trasig glob) fick tidigare
+// grönt exit 0 här. Grinden kräver "full täckning" (SPEC_GOLDEN_SET §4/§6)
+// — noll filer att köra mot är alltid ett testfel, aldrig "inget att göra".
 if (filer.length === 0) {
-  console.log('Inga golden-set/*.yaml-filer hittades. Grinden har inget att köra mot — se golden-set/README.md.');
-  process.exit(0);
+  console.error('Inga golden-set/*.yaml-filer hittades. Grinden kräver full täckning (SPEC_GOLDEN_SET §4/§6) — 0 filer är alltid ett fel, inte "inget att köra".');
+  process.exit(1);
 }
 
 let korda = 0;

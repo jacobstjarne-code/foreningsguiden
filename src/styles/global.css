@@ -24,15 +24,30 @@
   max-width: var(--fg-lasbredd);
 }
 
-/* A5.1 (2026-08-11) — läsbredden var inte låst i renderingen. Enskilda
-   klasser på enskilda stycken missade element (622–1007px uppmätt på
-   Gislaved). Strukturell fix i stället: på en kommunsida (main som
-   INNEHÅLLER #alla-bidrag) begränsas VARJE direkt barn till main
-   UTOM registret självt — "textkolumnen" som en enda regel, inte en
-   spridd klass per stycke. Registret (#alla-bidrag) förblir obegränsat
-   och får bli tvåspaltigt (D-arbetet). :has() håller regeln skopad till
-   kommunsidor — andra sidors <main> (utan #alla-bidrag) påverkas inte. */
-main:has(#alla-bidrag) > *:not(#alla-bidrag) {
+/* A6.1 (2026-08-11) — A5.1:s regel begränsade BEHÅLLARE (main:s direkta
+   barn: .ekern, .progression, .giltighetskoll), inte textelementen inuti
+   dem. En behållare utan egen padding stretchar sina barn till samma
+   bredd som behållarens content-box, men så fort ett barn (t.ex.
+   .ekern__band) har EGEN padding blir dess innehåll SMALARE än
+   behållarens max-width — inte bredare — så det gapet ensamt förklarar
+   inte hela avvikelsen (651px mätt mot en 60ch-behållare). Regeln
+   missade helt enkelt VAR texten faktiskt renderas: p/li/dd-element,
+   inte deras föräldrars föräldrar. Uppmätt i webbläsare (Gislaved):
+   nio av tretton textstycken över 560px trots A5.1.
+   Fix: rikta om till de faktiska textelementen, var de än sitter i
+   djupet under en kommunsidas <main> — UTOM allt inuti registret
+   (#alla-bidrag), som förblir obegränsat och får bli tvåspaltigt
+   (D-arbetet). Kort/behållare (.ekern, .progression-stationer,
+   .giltighetskoll) förblir sin egen, bredare bredd — det är textEN
+   som ska vara smal, inte kortet den sitter i. */
+main:has(#alla-bidrag) :is(p, li, dd):not(#alla-bidrag, #alla-bidrag *) {
+  max-width: var(--fg-lasbredd);
+}
+
+/* Sidfoten ligger UTANFÖR <main> — A5.1:s main-skopade regel nådde den
+   aldrig (1391px uppmätt, helt obegränsad). Enkel textblock, ingen
+   kort-komplexitet — hela behållaren kan begränsas direkt. */
+.site-footer {
   max-width: var(--fg-lasbredd);
 }
 

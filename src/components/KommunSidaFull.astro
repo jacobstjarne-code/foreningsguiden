@@ -156,7 +156,14 @@ const faqRubrik = KOMMUN.faqRubrik.replace(/{kommun}/g, kommun.kommun);
 // ORIGINALMALL innehåller {deadlinesammanfattning}), bara när minst ett
 // bidrag bakom sammanfattningen har deadline_status: olast.
 const deadlinesammanfattningHarOlast = kommun.bidrag.some((b) => b.deadline_status === 'olast');
-const faqEntries = kommun.bidrag.length === 0 ? [] : KOMMUN.faq.map(({ fraga, svar }) => ({
+// A6.3 (2026-08-11): faq[0].svar har en singularvariant (KOMMUN.faqSvarEtt)
+// för "kommunen har exakt ett bidrag" — bytt in FÖRE samma .map()-
+// ersättningskedja körs, så {kommun}/{bidragslista}/{forvaltning} fylls
+// i likadant oavsett vilken mall det gäller.
+const faqMallar = kommun.bidrag.length === 1
+  ? [{ ...KOMMUN.faq[0], svar: KOMMUN.faqSvarEtt }, ...KOMMUN.faq.slice(1)]
+  : KOMMUN.faq;
+const faqEntries = kommun.bidrag.length === 0 ? [] : faqMallar.map(({ fraga, svar }) => ({
   fraga: fraga.replace(/{kommun}/g, kommun.kommun),
   svar: svar
     .replace(/{kommun}/g, kommun.kommun)
@@ -221,7 +228,9 @@ const webPageJsonLd = {
     </p>
   </div>
 
-  <p class="kommun-varme fg-lasbredd">{EKERN.varmeRad.replace('{antal}', String(kommun.bidrag.length))}</p>
+  <p class="kommun-varme fg-lasbredd">
+    {kommun.bidrag.length === 1 ? EKERN.varmeRadEtt : EKERN.varmeRadFlera.replace('{antal}', String(kommun.bidrag.length))}
+  </p>
 
   {forhandsvisningBidrag.bidrag.length > 0 && (
     <ul class="kommun-forhandsvisning">
