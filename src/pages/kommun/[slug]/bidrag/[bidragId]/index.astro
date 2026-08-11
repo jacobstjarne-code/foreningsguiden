@@ -1,0 +1,117 @@
+---
+// D1 (ARBETSORDER 2026-08-11) — varje bidrag får en egen URL,
+// /kommun/[slug]/bidrag/[bidrag-slug]/, i stället för att bara existera som
+// ett fällt <details>-kort på kommunsidan. Innehållet ÄR BidragDjup.astro,
+// samma komponent BidragCard.astro (kommunsidans kollapsade rad) redan
+// använder — "en sanning, ett ställe", ingen andra kopia av dl/krav-
+// listan/käll-footern.
+//
+// D7: ingen filtrering på bidrag.status — pausade/avskaffade bidrag har
+// fortfarande en URL (BidragDjup renderar redan status-notisen i stället
+// för CTA:n för dem). "Ingenting raderas ur databasen, allt bor kvar på
+// någon URL" gäller lika mycket ett pausat bidrag som ett aktivt.
+import Base from '../../../../../layouts/Base.astro';
+import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
+import BidragDjup from '../../../../../components/BidragDjup.astro';
+import UrgencyChip from '../../../../../components/UrgencyChip.astro';
+import {
+  loadKommuner, bidragAnsokningsUrl, hittaGiltighetsstatus,
+  earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
+} from '../../../../../lib/kommuner';
+import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
+
+export function getStaticPaths() {
+  const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag } }[] = [];
+  for (const kommun of loadKommuner()) {
+    for (const bidrag of kommun.bidrag) {
+      paths.push({ params: { slug: kommun.kommun_slug, bidragId: bidrag.id }, props: { kommun, bidrag } });
+    }
+  }
+  return paths;
+}
+
+const { kommun, bidrag } = Astro.props as { kommun: Kommun; bidrag: Bidrag };
+
+const today = todayISO();
+const dateISO = earliestDeadlineISO(bidrag, today);
+const radDatumText = dateISO
+  ? formatDate(dateISO)
+  : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
+  : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan';
+
+// Samma kommun-nivå-beräkning som KommunSidaFull.astro gör en gång för
+// alla bidragskort på sidan — här bara för DETTA bidrags egen sida.
+const giltighetStatus = hittaGiltighetsstatus(kommun.forutsattningar);
+
+const metaTitle = `${bidrag.namn} — ${kommun.kommun} — Föreningsguiden`;
+const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, verifierat mot kommunens egen sida.`;
+
+const webPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `${bidrag.namn} — ${kommun.kommun}`,
+  dateModified: bidrag.senast_verifierad ?? kommun.verifierad,
+};
+---
+<Base title={metaTitle} description={metaDescription}>
+  <script type="application/ld+json" set:html={JSON.stringify(webPageJsonLd)} />
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
+    { name: bidrag.namn, url: `/kommun/${kommun.kommun_slug}/bidrag/${bidrag.id}/` },
+  ]} />
+
+  <p class="bidrag-sida__eyebrow">{kommun.kommun} kommun</p>
+  <h1>{bidrag.namn}</h1>
+  <div class="bidrag-sida__meta">
+    {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+    <span class="bidrag-sida__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+    <span class="bidrag-sida__datum">{radDatumText}</span>
+  </div>
+
+  <div class="bidrag-card fg-card bidrag-sida__kort">
+    <div class="bidrag-card__djup">
+      <BidragDjup
+        bidrag={bidrag}
+        verifierad={kommun.verifierad}
+        ansokningsUrl={bidragAnsokningsUrl(bidrag, kommun)}
+        kommunSlug={kommun.kommun_slug}
+        kommunNamn={kommun.kommun}
+        giltighetStatus={giltighetStatus}
+      />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .bidrag-sida__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0;
+  }
+
+  .bidrag-sida__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    font-size: var(--fg-text-body-lg);
+    margin: var(--fg-space-2) 0 var(--fg-space-6);
+  }
+
+  .bidrag-sida__belopp {
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .bidrag-sida__datum {
+    color: var(--fg-ink-muted);
+  }
+
+  .bidrag-sida__kort {
+    padding: 0;
+    overflow: hidden;
+  }
+</style>

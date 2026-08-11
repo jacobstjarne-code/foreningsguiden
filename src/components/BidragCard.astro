@@ -12,15 +12,9 @@
 // Bevaka-knapp (bevakningsflödet är på is, se statusrapport).
 import type { Bidrag } from '../lib/kommuner';
 import {
-  KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText,
-  earliestDeadlineISO, daysUntil, getUrgency, todayISO,
+  formatDate, relativFrist, earliestDeadlineISO, daysUntil, getUrgency, todayISO,
 } from '../lib/kommuner';
-import { OLAST_MARK } from '../lib/content';
-import { strippaProcessSprak } from '../lib/anteckningFilter';
-import VerificationStamp from './VerificationStamp.astro';
-import VoidMark from './VoidMark.astro';
-import VoidState from './VoidState.astro';
-import RelativeDeadline from './RelativeDeadline.astro';
+import BidragDjup from './BidragDjup.astro';
 import UrgencyChip from './UrgencyChip.astro';
 
 export interface Props {
@@ -33,13 +27,6 @@ export interface Props {
 }
 
 const { bidrag, verifierad, ansokningsUrl, kommunSlug, kommunNamn, giltighetStatus } = Astro.props;
-const datumFormaterat = formatDate(bidrag.senast_verifierad ?? verifierad);
-
-// A1 (Jacob 2026-08-08): anteckning blandar användarvänd kontext med
-// QA-spår från extraktionspasset — filtrera bort processspråket här,
-// vid rendering. Rör aldrig YAML-källan. strippaProcessSprak returnerar
-// null om hela fältet var processspråk — ingen tom ruta då.
-const { kvar: anteckningRenad } = strippaProcessSprak(bidrag.anteckning);
 
 // R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): kortet är nu en
 // kollapsad rad, samma radmönster som station 4 (KommunProgression) —
@@ -56,28 +43,11 @@ const radDatumText = dateISO
 // TILLSTANDET_OLAST.md (runda 4, "Vad Code behöver veta" §3): EN
 // reservation per kort, aldrig per fält. Beräknas över de tre fält som
 // faktiskt kan bära en synlig markör här (giltighet ligger på
-// Forutsattning, inte per bidrag).
+// Forutsattning, inte per bidrag). Samma beräkning som BidragDjup gör
+// för banderollen — den kollapsade radens ikon behöver den INNAN
+// BidragDjup renderas, så duplicerad hellre än trådad som en prop för
+// en tre-rads ren funktion.
 const harOlastFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast');
-const kallaHost = new URL(bidrag.kalla_url).hostname.replace(/^www\./, '');
-
-// ÅTGÄRDSSPEC T3 (2026-08-03 kväll, fyra-lägesrevisionen). typ==='relativ'
-// avgörs INNAN denna funktion anropas (RelativeDeadline-komponenten tar
-// över helt då — strukturellt särfall, orört av statusfyra), så
-// funktionen behöver bara skilja lopande/okand/fasta för de övriga tre
-// statusvärdena (verifierad/olast delar formatering, bara reservationen
-// runt dem skiljer sig — se dd-blocket nedan).
-function formatDeadlines(b: Bidrag): string {
-  if (b.deadlines.typ === 'lopande') return 'Löpande ansökan';
-  return b.deadlines.datum.map(formatRecurringDate).join(' · ');
-}
-
-// H26 — status-notis i stället för CTA:n när kommunen pausat/avskaffat
-// bidraget. 'pausad' är tillfälligt (attention), 'avskaffat' är permanent
-// (urgent) — samma två-tonersmodell som resten av sajten.
-const statusNotis: Record<'pausad' | 'avskaffat', string> = {
-  pausad: 'Pausat av kommunen — sök inte just nu.',
-  avskaffat: 'Avskaffat av kommunen.',
-};
 ---
 <li class="bidrag-card fg-card" data-bidrag-id={bidrag.id}>
   {/* R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): kortet kollapsat
@@ -107,186 +77,14 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
       <svg class="bidrag-card__rad-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
     </summary>
     <div class="bidrag-card__djup">
-  <div class="kategori-tags">
-    {bidrag.kategori.map((k) => (
-      <span class="kategori-tag fg-tag">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-        {KATEGORI_LABELS[k]}
-      </span>
-    ))}
-  </div>
-
-  {/* TILLSTANDET_OLAST.md 4b, "Vad Code behöver veta" §3: EN reservation
-      per kort — inte upprepad per fält. Streckad hål-markör i banderollen
-      matchar markören som återkommer på varje olast-fält nedan (§4:
-      "markören renderas på alla sex ytor"). */}
-  {harOlastFalt && (
-    <div class="fg-unread-banner">
-      <span class="fg-void-mark" aria-hidden="true"></span>
-      <span>
-        {OLAST_MARK.rad}
-        {' '}<a href={bidrag.kalla_url} target="_blank" rel="noopener">{OLAST_MARK.kallaKnappMall.replace('{host}', kallaHost)}</a>
-      </span>
-    </div>
-  )}
-
-  <dl>
-    <dt>Målgrupp</dt>
-    <dd>{bidrag.malgrupp}</dd>
-
-    <dt>Deadline</dt>
-    <dd>
-      {/* ÅTGÄRDSSPEC T3 + TILLSTANDET_OLAST.md (runda 4) — fyra-
-          lägesrendering. typ==='relativ' är ett strukturellt särfall
-          (RelativeDeadline tar över helt, oavsett status) — annars styr
-          deadline_status: kontrollast visas med fylld markör, olast med
-          streckad (samma markör som banderollen ovan, ingen egen
-          upprepad reservationstext), ingen_regel är ett bekräftat "ingen
-          frist" (VoidState), okand är ett äkta hål (VoidMark). */}
-      {bidrag.deadlines.typ === 'relativ' ? (
-        <RelativeDeadline bidrag={bidrag} />
-      ) : bidrag.deadline_status === 'ingen_regel' ? (
-        <VoidState
-          rubrik="ANSÖKNINGSFRIST"
-          besked={`${kommunNamn} anger ingen fast ansökningsfrist`}
-          forklaring="Bekräftat vid källgranskning."
-        />
-      ) : bidrag.deadline_status === 'okand' ? (
-        <VoidMark
-          etikett="Ej angivet i källan"
-          faltnamn="ansökningsfrist"
-          faltnamnBestamd="ansökningsfristen"
-          datum={datumFormaterat}
-          kallaUrl={bidrag.kalla_url}
-          kommunSlug={kommunSlug}
-          bidragId={bidrag.id}
-          bidragNamn={bidrag.namn}
-        />
-      ) : (
-        <span class="fg-faltmarkor">
-          <span class={bidrag.deadline_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
-          {formatDeadlines(bidrag)}
-        </span>
-      )}
-    </dd>
-
-    <dt>Belopp</dt>
-    <dd>
-      {bidrag.belopp_status === 'ingen_regel' ? (
-        <VoidState
-          rubrik="BELOPP"
-          besked={`${kommunNamn} anger uttryckligen inget belopp eller tak`}
-          forklaring="Bekräftat vid källgranskning."
-        />
-      ) : bidrag.belopp === null ? (
-        // VoidMark bara vid genuint ingen uppgift alls — INTE när
-        // belopp_status:okand kommer från en platshållarfras
-        // ("Individuell bedömning") som fortfarande är riktig, användbar
-        // text från källan (korrigera-belopp-platshallare.ts rör bara
-        // statusfältet, aldrig själva texten).
-        <VoidMark
-          etikett="Ej angivet i källan"
-          faltnamn="beloppsuppgift"
-          faltnamnBestamd="beloppet"
-          datum={datumFormaterat}
-          kallaUrl={bidrag.kalla_url}
-          kommunSlug={kommunSlug}
-          bidragId={bidrag.id}
-          bidragNamn={bidrag.namn}
-        />
-      ) : (
-        <span class="fg-faltmarkor">
-          <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
-          {bidrag.belopp}
-        </span>
-      )}
-    </dd>
-
-    <dt>Krav</dt>
-    <dd>
-      {bidrag.krav_status === 'okand' ? (
-        <p>Kraven är inte verifierade ännu — kontrollera källan innan du bedömer behörighet.</p>
-      ) : bidrag.krav_status === 'ingen_regel' ? (
-        <VoidState
-          rubrik="KRAV"
-          besked={`${kommunNamn} anger uttryckligen inga särskilda krav`}
-          forklaring="Bekräftat vid källgranskning."
-        />
-      ) : bidrag.krav.length > 0 ? (
-        <ul class="fg-faltmarkor fg-faltmarkor--lista">
-          {bidrag.krav.map((k) => (
-            <li>
-              <span class={bidrag.krav_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
-              {k}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Inga strukturerade krav har registrerats.</p>
-      )}
-      {/* ÅTGÄRDSSPEC C7 (Jacob 2026-08-03): krav_fullstandiga fick ett
-          tredje värde — false (bedömt, ofullständigt) och null (aldrig
-          bedömt) är INTE samma besked. false är ett skarpt, verifierat
-          påstående (vanlig text). null är ett hål i vår kunskap — samma
-          void-vokabulär (dämpad text, hålmarkör) som VoidMark, men utan
-          hela komponenten (ingen felrapport-widget här — det finns
-          inget "fel" att flagga, bara en bedömning som inte gjorts än). */}
-      {bidrag.krav_status !== 'okand' && bidrag.krav_status !== 'ingen_regel' && bidrag.krav_fullstandiga === false && (
-        <p><strong>Ofullständigt:</strong> fler villkor kan finnas i kommunens normer eller riktlinjer.</p>
-      )}
-      {bidrag.krav_status !== 'okand' && bidrag.krav_status !== 'ingen_regel' && bidrag.krav_fullstandiga === null && (
-        <p class="krav-obedomd"><span class="fg-void-mark" aria-hidden="true"></span> Fullständigheten inte bedömd ännu.</p>
-      )}
-    </dd>
-
-    {/* Giltighet hör hemma på Forutsattning (kommunens "hur länge gäller
-        beslutet", inte per-bidrag) — se GiltighetsKontroll.astro,
-        giltighet_regel/berakForfallodatum() i kommunTyper.ts (C3.1,
-        2026-08-11 — ersatte den äldre fritext-lookupen hittaGiltighets-
-        regel(), som är raderad). En parallell Code-session
-        lade tillfälligt giltighet/giltighet_status direkt på Bidrag vid
-        sammanslagningen 2026-08-03; borttaget härifrån (dubblerad källa
-        till samma sak, "en sanning, ett ställe"). */}
-
-    {/* 2e + uppföljning (arbetsorder 2026-08-03): döljs för sentinelvärdet
-        "Ej angivet i källan" OCH för feltaggningar som bara restaterar
-        deadline-cykeln ("15 mars varje år") i stället för en konsekvens
-        — se harRiktigSenAnsokanText (kommunTyper.ts) för motiveringen. */}
-    {harRiktigSenAnsokanText(bidrag) && (
-      <>
-        <dt>Sen ansökan</dt>
-        <dd>{bidrag.sen_ansokan}</dd>
-      </>
-    )}
-  </dl>
-
-  <div class="bidrag-card__divider"></div>
-
-  <div class="bidrag-card__footer">
-    <p class="bidrag-card__kalla">
-      Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
-    </p>
-    <VerificationStamp bidrag={bidrag} verifierad={verifierad} giltighetStatus={giltighetStatus} />
-  </div>
-  {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
-      (relativFrist) — annars stod samma besked på kortet två gånger. */}
-  {anteckningRenad && !relativFrist(bidrag) && <p class="bidrag-card__kalla">{anteckningRenad}</p>}
-
-  <div class="felrapport" data-felrapport data-kommun-slug={kommunSlug} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
-    <button type="button" class="felrapport-knapp">Det här stämmer inte</button>
-  </div>
-
-  {/* A5.2 (2026-08-11): sekundär — ett drag per kommunsida totalt
-     ("Så blir ni godkända i {kommun}"), inte ett per bidragskort. */}
-  {bidrag.status === 'aktiv' ? (
-    <a href={ansokningsUrl} class="fg-btn--ghost bidrag-card__cta">Till ansökan</a>
-  ) : (
-    <p class={`bidrag-card__status-notis bidrag-card__status-notis--${bidrag.status === 'avskaffat' ? 'urgent' : 'attention'}`}>
-      {statusNotis[bidrag.status]}
-    </p>
-  )}
+      <BidragDjup
+        bidrag={bidrag}
+        verifierad={verifierad}
+        ansokningsUrl={ansokningsUrl}
+        kommunSlug={kommunSlug}
+        kommunNamn={kommunNamn}
+        giltighetStatus={giltighetStatus}
+      />
     </div>
   </details>
 </li>
