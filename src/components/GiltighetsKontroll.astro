@@ -91,6 +91,7 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
   import { GILTIGHETSKOLL } from '../lib/content';
   import { berakForfallodatum, addMonths } from '../lib/kommunTyper';
   import type { GiltighetRegel, GiltighetRegelTyp } from '../lib/kommunTyper';
+  import { trackEvent } from '../lib/umami';
 
   const MANADSNAMN = [
     'januari', 'februari', 'mars', 'april', 'maj', 'juni',
@@ -122,6 +123,8 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
 
     let arsmotesdatum = '';
 
+    const kommunSlug = widget.dataset.kommunSlug ?? '';
+
     form?.addEventListener('submit', (event) => {
       event.preventDefault();
       const input = form.querySelector<HTMLInputElement>('input[name="arsmotesdatum"]');
@@ -134,6 +137,10 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
       let paminnManadNamn = NIVA_TVA_PAMINN_MANAD;
 
       const forfallodatum = gerDatum && regel ? berakForfallodatum(regel, arsmotesdatum) : null;
+      // M4 (MÄTNING, Jacob 2026-08-11): svarar "hur ofta vi svarar 'vi vet
+      // inte', alltså hur mycket G1 är värd" — NIVÅ 1/2, samma gren som
+      // faktiskt avgör vilken text besökaren ser.
+      trackEvent('giltighet_kontrollerad', { kommun: kommunSlug, niva: forfallodatum ? 1 : 2 });
       if (forfallodatum) {
         const [fy, fm] = forfallodatum.split('-').map(Number);
         const paminnISO = addMonths(forfallodatum, -2);
@@ -156,13 +163,16 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
 
       if (epostFormKnapp) epostFormKnapp.textContent = GILTIGHETSKOLL.paminnKnappMall.replace('{manad}', paminnManadNamn);
       epostForm?.removeAttribute('hidden');
+      // M3: samma "var lämnar hon mejladressen"-fråga som EmailSignup.astro/
+      // bevakaKlient.ts, bara ett tredje ställe formuläret kan dyka upp.
+      trackEvent('bevakning_visad', { kommun: kommunSlug });
     });
 
     epostForm?.addEventListener('submit', async (event) => {
       event.preventDefault();
       felText?.setAttribute('hidden', '');
       const data = new FormData(epostForm);
-      data.set('kommun', widget.dataset.kommunSlug ?? '');
+      data.set('kommun', kommunSlug);
       data.set('arsmotesdatum', arsmotesdatum);
 
       try {
@@ -171,6 +181,7 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
         if (!res.ok || !json.ok) throw new Error('svar ej ok');
 
         epostForm.hidden = true;
+        trackEvent('bevakning_skickad', { kommun: kommunSlug });
         if (json.alreadyConfirmed) {
           kvittoSparat?.removeAttribute('hidden');
         } else {

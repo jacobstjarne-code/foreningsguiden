@@ -31,6 +31,7 @@
  * kolontecknet då.
  */
 import { BEVAKNING } from './content';
+import { trackEvent } from './umami';
 
 const BEVAKADE_KEY = 'foreningsguiden:bevakade-kommuner:v1';
 
@@ -114,6 +115,9 @@ export function initBevakaWidgets(): void {
       event.preventDefault();
       const form = byggBevakaForm(kommunNamn);
       cell.replaceChildren(form);
+      // M3 (MÄTNING, Jacob 2026-08-11): formuläret blev synligt — svarar
+      // "var i flödet folk faktiskt lämnar mejladress".
+      trackEvent('bevakning_visad', { kommun: kommunSlug });
 
       const felText = form.querySelector<HTMLElement>('[data-bevaka-fel]');
 
@@ -130,6 +134,7 @@ export function initBevakaWidgets(): void {
           if (!res.ok || !json.ok) throw new Error('svar ej ok');
 
           if (kommunSlug) markeraBevakad(kommunSlug, bidragId);
+          trackEvent('bevakning_skickad', { kommun: kommunSlug });
           const kvitto = document.createElement('p');
           kvitto.className = 'bevaka-rad-kvitto';
           kvitto.textContent = json.alreadyConfirmed ? BEVAKNING.kvittoRubrik : BEVAKNING.kvittoText;

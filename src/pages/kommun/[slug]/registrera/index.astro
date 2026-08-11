@@ -234,6 +234,7 @@ const fyllKopytan = (text: string) => text.replace(/{kommun}/g, kommun.kommun);
   import { formatDate, earliestDeadlineISO, todayISO, type Kommun } from '../../../../lib/kommunTyper';
   import { KVITTOSIDA } from '../../../../lib/content';
   import { initBevakaWidgets } from '../../../../lib/bevakaKlient';
+  import { trackEvent } from '../../../../lib/umami';
 
   // 1e — två knappar (Swish/kort) delar samma klickflöde, se nedan.
   const knappar = document.querySelectorAll<HTMLButtonElement>('[data-registrera-betala]');
@@ -242,6 +243,15 @@ const fyllKopytan = (text: string) => text.replace(/{kommun}/g, kommun.kommun);
   const kommunSlug = window.location.pathname.split('/').filter(Boolean)[1] ?? '';
 
   initBevakaWidgets();
+
+  // M5 (MÄTNING, Jacob 2026-08-11): registreringens köpruta är alltid
+  // server-renderad synlig (till skillnad från bidragsutkastets, som
+  // väntar på en matchning) — "visad" är alltså varje sidladdning där
+  // knapparna finns i DOM:en. produkt skiljer den från bidragsutkastets
+  // kopruta_visad/-klick i samma Umami-ström.
+  if (knappar.length > 0) {
+    trackEvent('kopruta_visad', { kommun: kommunSlug, produkt: 'registrering' });
+  }
 
   // H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni är
   // här". Sidan är statiskt byggd (getStaticPaths) och föreningsprofilen
@@ -332,6 +342,7 @@ const fyllKopytan = (text: string) => text.replace(/{kommun}/g, kommun.kommun);
     knapp.addEventListener('click', async () => {
       felText?.setAttribute('hidden', '');
       knappar.forEach((k) => (k.disabled = true));
+      trackEvent('kopruta_klick', { kommun: kommunSlug, produkt: 'registrering', metod: knapp.dataset.metod ?? 'swish' });
 
       const data = new FormData();
       data.set('kommun', kommunSlug);

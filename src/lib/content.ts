@@ -577,8 +577,13 @@ export const INTEGRITET = {
     'Fyra leverantörer, alla för att tjänsten ska fungera: Stripe (betalning), Resend (utskick av mejl), Upstash (databasen) och Vercel (driften). Ingen av dem använder uppgifterna till något eget. Vi säljer inte uppgifter vidare och gör inga utskick åt andra.',
 
   cookiesRubrik: 'Kakor',
+  // MÄTNING (Jacob 2026-08-11): namngav tidigare inte VERKTYGET, bara
+  // metoden — "en tjänst som säljer sig på att inte påstå mer än den vet
+  // ska inte ha ett oomnämnt analysverktyg på sidan". Umami tillagt,
+  // samma "leverantör (syfte)"-mönster som delasText redan använder för
+  // Stripe/Resend/Upstash/Vercel — ingen ny prosa, en namngivning.
   cookiesText:
-    'Vi använder inga kakor för spårning och har ingen kakruta att klicka bort. Besöksstatistiken mäts cookiefritt och visar bara aggregerade siffror — aldrig vem som besökt vad.',
+    'Vi använder inga kakor för spårning och har ingen kakruta att klicka bort. Besöksstatistiken mäts cookiefritt (Umami) och visar bara aggregerade siffror — aldrig vem som besökt vad.',
 
   rattigheterRubrik: 'Era rättigheter',
   rattigheterStycken: [

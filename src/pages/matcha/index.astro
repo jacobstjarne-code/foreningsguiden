@@ -216,9 +216,14 @@ const kommuner = loadKommuner();
   import { formatDate, earliestDeadlineISO, todayISO, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { VOID_MARK } from '../../lib/content';
+  import { trackEvent } from '../../lib/umami';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
   if (root) {
+    // M1 (MÄTNING, Jacob 2026-08-11): tratten faktiskt öppnad — fyller
+    // frågan D5.2/M2 inte kan svara på ensam (entry-sidan mot om hon
+    // FULLFÖLJER tratten).
+    trackEvent('tratt_start');
     const raknareTalEl = root.querySelector<HTMLElement>('[data-tratt-raknare-tal]');
     const raknareTextEl = root.querySelector<HTMLElement>('[data-tratt-raknare-text]');
     const forloppEl = root.querySelector<HTMLElement>('[data-tratt-forlopp]');
@@ -363,8 +368,17 @@ const kommuner = loadKommuner();
     }
 
     function goStep(n: number) {
-      step = Math.max(1, Math.min(4, n));
+      const mal = Math.max(1, Math.min(4, n));
+      // M1: bara framåtrörelse räknas som "en fråga besvarad" — Tillbaka/
+      // Börja om ska inte blåsa upp siffran, hon svarade inte på nåt nytt.
+      if (mal > step) {
+        trackEvent('tratt_fraga_besvarad', { steg: step, kommun: kommunData?.kommun ?? null });
+      }
+      step = mal;
       updateStegUI();
+      if (step === 4) {
+        trackEvent('tratt_besked', { kommun: kommunData?.kommun ?? null, sokt: profil.sokt });
+      }
     }
 
     /** SPEC B3, D-B: blocket ovanför de två grupperna. Enda som skiljer
@@ -642,7 +656,13 @@ const kommuner = loadKommuner();
     markeraAktivaPillar();
     if (profil.kommunSlug) {
       step = 4;
-      hamtaKommunData(profil.kommunSlug);
+      // M1: samma händelse som goStep()s väg dit — en återvändande
+      // session som hoppar direkt till besked räknas likadant. Väntar in
+      // hamtaKommunData() så kommunnamnet är samma slags värde som i
+      // goStep() (kommunData.kommun, inte bara sluggen).
+      hamtaKommunData(profil.kommunSlug).then(() => {
+        trackEvent('tratt_besked', { kommun: kommunData?.kommun ?? null, sokt: profil.sokt });
+      });
       visaAtervandOmBehovs();
     } else {
       updateStegUI();

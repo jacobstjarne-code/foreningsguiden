@@ -122,6 +122,7 @@ const fyllKopruta = (text: string) =>
   import { genereraUtkast } from '../../../../../lib/utkastGenerator';
   import type { Kommun } from '../../../../../lib/kommunTyper';
   import { KOPRUTA } from '../../../../../lib/content';
+  import { trackEvent } from '../../../../../lib/umami';
 
   const root = document.querySelector<HTMLElement>('[data-utkastvy]');
   if (root) {
@@ -232,11 +233,16 @@ const fyllKopruta = (text: string) =>
 
       dokumentEl?.removeAttribute('hidden');
       kopramEl?.removeAttribute('hidden');
+      // M5 (MÄTNING, Jacob 2026-08-11): köprutan faktiskt synlig — kräver
+      // matchning + registrerad profil, så "visad" är redan en riktig
+      // filtrering, inte bara en sidladdning.
+      trackEvent('kopruta_visad', { kommun: kommunSlug, bidrag: bidragId });
     }
 
     betalaKnapp?.addEventListener('click', async () => {
       felEl?.setAttribute('hidden', '');
       betalaKnapp.disabled = true;
+      trackEvent('kopruta_klick', { kommun: kommunSlug, bidrag: bidragId });
 
       const profil = getForeningsprofil();
       const data = new FormData();

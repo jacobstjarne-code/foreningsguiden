@@ -25,12 +25,12 @@ const { submitted = false, preselectedKommunSlug } = Astro.props;
 const kommuner = loadKommuner();
 ---
 {submitted ? (
-  <div class="email-signup fg-card" id="email-signup">
+  <div class="email-signup fg-card" id="email-signup" data-email-signup-submitted="1" data-email-signup-kommun={preselectedKommunSlug ?? ''}>
     <h2>{BEVAKNING.kvittoRubrik}</h2>
     <p>{BEVAKNING.kvittoText}</p>
   </div>
 ) : (
-  <form class="email-signup fg-card" id="email-signup" method="POST" action="/api/prenumerera">
+  <form class="email-signup fg-card" id="email-signup" method="POST" action="/api/prenumerera" data-email-signup-kommun={preselectedKommunSlug ?? ''}>
     <h2>{BEVAKNING.rubrik}</h2>
     <p>{BEVAKNING.ingress}</p>
 
@@ -63,3 +63,19 @@ const kommuner = loadKommuner();
     </p>
   </form>
 )}
+
+<script>
+  // M3 (MÄTNING, Jacob 2026-08-11): formuläret är ett riktigt POST + 303-
+  // redirect (inte fetch), så "skickad" kan inte fångas i ett submit-
+  // intercept — prenumerera.ts redirectar redan med ?bevakning=klar/
+  // uppdaterad vid lyckat POST, och submitted-propen (satt server-sidan av
+  // deadlines/index.astro utifrån SAMMA query-param) avgör om det är
+  // kvittoläget vi ser just nu. En sida-load i det läget ÄR "skickad".
+  import { trackEvent } from '../lib/umami';
+
+  const root = document.getElementById('email-signup');
+  if (root) {
+    const kommun = root.dataset.emailSignupKommun || null;
+    trackEvent(root.dataset.emailSignupSubmitted === '1' ? 'bevakning_skickad' : 'bevakning_visad', { kommun });
+  }
+</script>
