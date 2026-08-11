@@ -37,6 +37,11 @@ const kommuner = loadKommuner();
     <label for="email-signup-email">{BEVAKNING.epostLabel}</label>
     <input type="email" id="email-signup-email" name="email" placeholder={BEVAKNING.epostPlaceholder} required autocomplete="email" />
 
+    {/* C1 (ARBETSORDER 2026-08-11): frivilligt — inget required, ett namn
+        på föreningen blockerar aldrig bevakningen. */}
+    <label for="email-signup-foreningsnamn">{BEVAKNING.foreningsnamnLabel}</label>
+    <input type="text" id="email-signup-foreningsnamn" name="foreningsnamn" autocomplete="organization" />
+
     <fieldset>
       <legend>{BEVAKNING.kommunLabel}</legend>
       {kommuner.map((k) => (

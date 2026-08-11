@@ -15,6 +15,11 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const form = await request.formData();
   const email = String(form.get('email') ?? '').trim();
   const samtycke = form.get('samtycke');
+  // C1 (ARBETSORDER 2026-08-11): frivilligt — tomt fält skickas som
+  // undefined, aldrig en tom sträng vidare (se addPendingSubscriber-
+  // kommentaren om varför en tom sträng aldrig får skriva över ett
+  // tidigare sparat namn).
+  const foreningsnamn = String(form.get('foreningsnamn') ?? '').trim() || undefined;
   const alla = loadKommuner();
   const giltigaSlugs = new Set(alla.map((k) => k.kommun_slug));
   const kommunSlugs = form.getAll('kommuner').map(String).filter((slug) => giltigaSlugs.has(slug));
@@ -23,7 +28,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     return new Response('Ogiltig anmälan — e-post, samtycke och minst en kommun krävs.', { status: 400 });
   }
 
-  const { token, alreadyConfirmed } = await addPendingSubscriber(email, kommunSlugs);
+  const { token, alreadyConfirmed } = await addPendingSubscriber(email, kommunSlugs, foreningsnamn);
 
   // Redan bekräftad adress — kommunerna är tillagda direkt (subscribers.ts),
   // inget nytt mejl att skicka. Egen redirect-status så EmailSignup inte

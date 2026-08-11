@@ -63,6 +63,12 @@ export interface Subscriber {
   // bara i localStorage (foreningsprofil.ts).
   // Samma "läs-och-mergea, aldrig blind overwrite"-skydd som ovan.
   foreningsprofil?: Foreningsprofil;
+  // C1 (ARBETSORDER 2026-08-11, Jacob): föreningsminnet utan konto —
+  // frivilligt fritextsvar på "Vilken förening bevakar ni för?"
+  // (EmailSignup.astro). undefined = frågan aldrig besvarad, skilt från en
+  // framtida tom sträng (kan inte uppstå — prenumerera.ts skickar aldrig
+  // ett tomt fält vidare, se addPendingSubscriber).
+  foreningsnamn?: string;
 }
 
 /**
@@ -76,7 +82,8 @@ export interface Subscriber {
  */
 export async function addPendingSubscriber(
   email: string,
-  kommuner: string[]
+  kommuner: string[],
+  foreningsnamn?: string
 ): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
   const normalized = email.toLowerCase();
   const existing = await getSubscriber(normalized);
@@ -88,6 +95,10 @@ export async function addPendingSubscriber(
     confirmed: existing?.confirmed ?? false,
     bidrag: existing?.bidrag,
     giltighetArsmoten: existing?.giltighetArsmoten,
+    foreningsprofil: existing?.foreningsprofil,
+    // C1: ett nytt ifyllt namn vinner (föreningen kan rätta ett tidigare
+    // svar), men ett tomt fält skriver ALDRIG över ett redan sparat namn.
+    foreningsnamn: foreningsnamn || existing?.foreningsnamn,
   };
   await redis.set(recordKey(normalized), record);
   await redis.sadd(INDEX_KEY, normalized);
@@ -126,6 +137,8 @@ export async function addBidragBevakning(
     confirmed: existing?.confirmed ?? false,
     bidrag: redanBevakat ? befintligaBidrag : [...befintligaBidrag, { kommunSlug, bidragId }],
     giltighetArsmoten: existing?.giltighetArsmoten,
+    foreningsprofil: existing?.foreningsprofil,
+    foreningsnamn: existing?.foreningsnamn,
   };
   await redis.set(recordKey(normalized), record);
   await redis.sadd(INDEX_KEY, normalized);
@@ -177,6 +190,8 @@ export async function addGiltighetBevakning(
     confirmed: existing?.confirmed ?? false,
     bidrag: existing?.bidrag,
     giltighetArsmoten: { ...(existing?.giltighetArsmoten ?? {}), [kommunSlug]: arsmotesdatum },
+    foreningsprofil: existing?.foreningsprofil,
+    foreningsnamn: existing?.foreningsnamn,
   };
   await redis.set(recordKey(normalized), record);
   await redis.sadd(INDEX_KEY, normalized);
@@ -211,6 +226,7 @@ export async function addForeningsprofil(
     bidrag: existing?.bidrag,
     giltighetArsmoten: existing?.giltighetArsmoten,
     foreningsprofil: profil,
+    foreningsnamn: existing?.foreningsnamn,
   };
   await redis.set(recordKey(normalized), record);
   await redis.sadd(INDEX_KEY, normalized);

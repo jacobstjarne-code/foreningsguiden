@@ -265,6 +265,11 @@ export const BEVAKNING = {
     'Vi mejlar två veckor och tre dagar innan sista ansökningsdag för de bidrag du väljer att bevaka. Inget annat.',
   epostLabel: 'Din e-postadress',
   epostPlaceholder: 'namn@forening.se',
+  // C1 (ARBETSORDER 2026-08-11, Jacob): föreningsminnet utan konto — vet vi
+  // vilken förening som bevakar kan framtida mejl/sidor tilltala föreningen
+  // vid namn i stället för bara adressen. Frivilligt (inget required-attribut
+  // i EmailSignup.astro) — ett namn på förening blockerar inte bevakningen.
+  foreningsnamnLabel: 'Vilken förening bevakar ni för?',
   kommunLabel: 'Vilka kommuner vill du bevaka?',
   knapp: 'Börja bevaka',
   // Samtyckestext vid kryssruta — uttryckligt ändamål, GDPR-minimum.
