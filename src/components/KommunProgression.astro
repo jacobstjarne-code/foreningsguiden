@@ -156,11 +156,18 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 );
 ---
 <div class="progression">
+  {/* D6 (ARBETSORDER 2026-08-11, mock 9f): A:s enda strandade drag,
+     "Börja med godkännandet" — den numrerade tidslinjens fem cirkelmarkörer
+     (1-5) är borta, det här ledande blocket ersätter dem som stationens
+     framtoning. Text ordagrant ur mocken. */}
+  <div class="progression__lead">
+    <span class="progression__lead-titel">Börja med godkännandet</span>
+    <span class="progression__lead-text">tar tid — det stoppar de flesta</span>
+  </div>
 
   <!-- STATION 1 — stor: gaffeln -->
   <div class="progression__station progression__station--1">
-    <span class="progression__marker progression__marker--accent">1</span>
-    <div class="progression__eyebrow progression__eyebrow--accent">Steg 1 · börjar er ansökan</div>
+    <div class="progression__eyebrow progression__eyebrow--accent">börjar er ansökan</div>
     <h2>{VAGLEDNING.station1.rubrik}</h2>
     <p class="progression__lede">{VAGLEDNING.station1.intro}</p>
     <div class="progression__pills" role="group" aria-label={VAGLEDNING.station1.rubrik}>
@@ -179,8 +186,6 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 
   <!-- STATION 2 — liten, skarp: brådska -->
   <div class="progression__station">
-    <span class="progression__marker progression__marker--accent">2</span>
-    <div class="progression__eyebrow">Steg 2</div>
     <h3>{VAGLEDNING.station2.rubrik}</h3>
     <div class="progression__urgent-row" data-progression-urgent-row hidden={!station2Alla}>
       <span data-chip-urgency="urgent" hidden={station2Alla?.urgency !== 'urgent'}><UrgencyChip urgency="urgent" /></span>
@@ -218,8 +223,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 
   <!-- STATION 3 — attention-ton: förutsättningar -->
   <div class="progression__station">
-    <span class="progression__marker progression__marker--attention">3</span>
-    <div class="progression__eyebrow progression__eyebrow--attention">Steg 3 · gör detta först</div>
+    <div class="progression__eyebrow progression__eyebrow--attention">gör detta först</div>
     <h3>{VAGLEDNING.station3.rubrik}</h3>
     {forutsattningar.length === 0 ? (
       <p class="progression__lede">{VAGLEDNING.station3.inget.replace('{kommun}', kommun.kommun)}</p>
@@ -336,8 +340,6 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 
   <!-- STATION 4 — navigerbar lista -->
   <div class="progression__station" id="sista-ansokningsdatum">
-    <span class="progression__marker progression__marker--accent">4</span>
-    <div class="progression__eyebrow">Steg 4</div>
     <h3>{VAGLEDNING.station4.rubrik}</h3>
     {/* R5.7 (OMFORDELA_TEXTMASSAN.md runda 5): de TVÅ raderna med kortast
        tid kvar ligger alltid öppna, oavsett position i listan — sortedBidrag
@@ -417,11 +419,8 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 
   <!-- STATION 5 — mål -->
   <div class="progression__station progression__station--5">
-    {/* R5.1(c): "steg 5 outline = vägens slut" — numrerad som övriga
-       steg, inte längre en flagg-ikon. */}
-    <span class="progression__marker progression__marker--goal">5</span>
     <div class="progression__goal">
-      <div class="progression__eyebrow" style="color: rgba(255,255,255,.85);">Steg 5 · vägens slut</div>
+      <div class="progression__eyebrow" style="color: rgba(255,255,255,.85);">vägens slut</div>
       <h3>{VAGLEDNING.station5.rubrik}</h3>
       {/* R5.4 (avvikelse mot Designs tabell): "Vi skriver utkastet åt
          er" är borttaget ur produktion sedan P1.2/P1.5 (2026-08-04/05),

@@ -1218,68 +1218,63 @@ main {
   }
 }
 
-/* ---- Progressionen ("vägen") — designsystem leverans 3 ---- */
+/* ---- Progressionen ("vägen") — designsystem leverans 3 ----
+   D6 (ARBETSORDER 2026-08-11, mock 9f "Designs B"): den numrerade
+   vertikala tidslinjen (border-left + fem absolutpositionerade
+   cirkelmarkörer 1-5) ersatt av staplade block med en delad linje
+   mellan varje — samma mönster .ekern__band redan använder på samma
+   sida (KommunSidaFull.astro). Logiken i varje station (filter, check-
+   lista, kopruta, bevaka) är OFÖRÄNDRAD — bara tidslinje-kromet är
+   borta, ingen innehållsomorganisering gjord utan en fullständig mock
+   för alla fem stationers B-variant (fanns bara en illustrativ två-
+   stations-jämförelse, inte en full spec). */
 
 .progression {
-  position: relative;
   margin: var(--fg-space-7) 0;
-  border-left: 3px solid var(--fg-border);
-  margin-left: 21px;
-  padding-left: 34px;
   display: flex;
   flex-direction: column;
 }
 
 .progression__station {
-  position: relative;
-  padding: var(--fg-space-5) 0 44px;
+  padding: var(--fg-space-6) 0;
+  border-top: var(--fg-border-inner) dashed var(--fg-border);
 }
 
-.progression__station--5 {
-  padding-bottom: var(--fg-space-5);
+.progression__station:first-child {
+  border-top: none;
+  padding-top: 0;
 }
 
-.progression__marker {
-  position: absolute;
-  left: -55px;
-  top: 16px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--fg-surface);
-  border: 3px solid var(--fg-border);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--fg-font-display);
-  font-weight: var(--fg-weight-display);
-  font-size: 1.2rem;
+.progression__station:last-child {
+  padding-bottom: 0;
+}
+
+/* D6 — "Börja med godkännandet", A:s enda strandade drag från den
+   numrerade varianten, nu ett fristående ledande block överst i
+   stället för en stationsmarkör. Text ordagrant ur mocken (9f) —
+   mockarna är auktoritativa för form och ytcopy (ARBETSORDER
+   2026-08-11). Samma color-mix-behandling som .progression__attention-
+   cta redan använder, ingen ny färgvariabel. */
+.progression__lead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: color-mix(in srgb, var(--fg-attention) 10%, var(--fg-surface));
+  border-left: 4px solid var(--fg-attention);
+  border-radius: 0 var(--fg-radius-control) var(--fg-radius-control) 0;
+  padding: var(--fg-space-3) var(--fg-space-4);
+  margin-bottom: var(--fg-space-6);
+}
+
+.progression__lead-titel {
+  font-weight: var(--fg-weight-bold);
+  font-size: var(--fg-text-body);
   color: var(--fg-ink);
 }
 
-.progression__marker--accent {
-  background: var(--fg-accent);
-  color: var(--fg-on-accent);
-}
-
-/* R5.1(c): numrerad cirkelmarkör fylld accent på ALLA stationer — även
-   station 3, som tidigare var fylld attention. Attention-tonen hör nu
-   bara till stationens DRAG (R5.5:s knapp), inte till stegmarkören —
-   markören är ren vägvisning, inte en varningssignal. */
-.progression__marker--attention {
-  background: var(--fg-accent);
-  color: var(--fg-on-accent);
-}
-
-/* R5.1(c): "steg 5 outline = vägens slut" — enda outline-markören,
-   signalerar mål utan att fylla, samma sifferform som övriga steg. */
-.progression__marker--goal {
-  left: -57px;
-  width: 46px;
-  height: 46px;
-  background: var(--fg-surface);
-  border-color: var(--fg-accent);
-  color: var(--fg-accent);
+.progression__lead-text {
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
 }
 
 .progression__eyebrow {
