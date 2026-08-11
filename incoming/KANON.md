@@ -178,3 +178,39 @@ station 1 knappar i stället för länkar försvinner de.
 
 **D. Trattens och station 1:s vokabulär.** Sju verksamhetsvärden mot sex
 kategorier, tre finns i båda. Blockerar sammanslagningen av profilen.
+
+---
+
+## 9. Arbetssätt — gäller Opus
+
+Avsnittet finns för att invocationar är billiga och lösningar är dyra. En
+invändning kostar en mening, en lösning kostar en spec. Utan mottåtgärd
+vinner invändningen varje gång, och den låter dessutom noggrann.
+
+**Varje leverans slutar med en stängd-lista.** Vad som övervägdes och inte
+kom med, och villkoret som skulle öppna det. En rad per sak. Listan får
+aldrig vara tom — är den det har inget tänkts eller inget skrivits ner.
+Allt Design eller GPT föreslår som inte kommer med hamnar där.
+
+**Varje invändning bär villkoret som upphäver den.** Inte "det går inte"
+utan "det kräver X, och så här får vi X". Kan villkoret inte namnges är
+invändningen inte färdigtänkt, den är ett stopp.
+
+**En regelhänvisning är en flagga, inte en slutsats.** När ett avsnitt i
+kanon används för att avvisa något ska nästa mening säga vilken data
+eller vilket bygge som uppfyller regeln OCH behåller idén. En tröskel är
+en if-sats; att sakna data är ett villkor, inte ett nej.
+
+**Kontroll som Jacob kan göra utan att kunna koden:** leta efter "går
+inte", "kan inte" eller en paragrafhänvisning. Står det inget "tills X"
+efter är det lathet. Frågan "vad stängde du?" ska alltid ha ett svar.
+Mönstret är starkast när Opus producerar mycket och snabbt — är
+stängd-listan kort under en lång order, titta där.
+
+**Infrastruktur går före uppgifter.** Var Code står, vilken gren, vilka
+worktrees. Ett namn i en utdata som inte hör hemma där stoppar uppgiften.
+Andra gången samma sorts problem uppträder söks orsaken, den noteras inte.
+
+**Verifiering sker i webbläsare.** Grön build, hämtad HTML och läst källkod
+räcker inte — köprutan, tratten och bevakningsformuläret är klientsidiga.
+En hämtning ska aldrig kallas en genomgång.
