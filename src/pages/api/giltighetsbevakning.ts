@@ -20,6 +20,9 @@ export const POST: APIRoute = async ({ request }) => {
   const samtycke = form.get('samtycke');
   const kommunSlug = String(form.get('kommun') ?? '').trim();
   const arsmotesdatum = String(form.get('arsmotesdatum') ?? '').trim();
+  // C1 (ARBETSORDER 2026-08-11): frivilligt — tomt fält skickas som
+  // undefined, aldrig en tom sträng (se addGiltighetBevakning-kommentaren).
+  const foreningsnamn = String(form.get('foreningsnamn') ?? '').trim() || undefined;
 
   const kommun = getKommunBySlug(kommunSlug);
   const todayISO = new Date().toISOString().slice(0, 10);
@@ -28,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
-  const { token, alreadyConfirmed } = await addGiltighetBevakning(email, kommunSlug, arsmotesdatum);
+  const { token, alreadyConfirmed } = await addGiltighetBevakning(email, kommunSlug, arsmotesdatum, foreningsnamn);
 
   if (!alreadyConfirmed && token) {
     try {

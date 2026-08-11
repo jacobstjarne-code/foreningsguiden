@@ -178,7 +178,8 @@ export async function confirmSubscriberByToken(token: string): Promise<Subscribe
 export async function addGiltighetBevakning(
   email: string,
   kommunSlug: string,
-  arsmotesdatum: string
+  arsmotesdatum: string,
+  foreningsnamn?: string
 ): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
   const normalized = email.toLowerCase();
   const existing = await getSubscriber(normalized);
@@ -191,7 +192,12 @@ export async function addGiltighetBevakning(
     bidrag: existing?.bidrag,
     giltighetArsmoten: { ...(existing?.giltighetArsmoten ?? {}), [kommunSlug]: arsmotesdatum },
     foreningsprofil: existing?.foreningsprofil,
-    foreningsnamn: existing?.foreningsnamn,
+    // C1 (ARBETSORDER 2026-08-11): giltighetskontrollen är den flöde där
+    // mejl+årsmötesdatum FAKTISKT fångas ihop (C3 kräver båda + föreningsnamn
+    // + giltighet_regel samtidigt) — så föreningsnamnet måste kunna sättas
+    // HÄR, inte bara i det allmänna /deadlines/-formuläret (prenumerera.ts).
+    // Samma "nytt vinner, tomt skriver aldrig över"-regel som addPendingSubscriber.
+    foreningsnamn: foreningsnamn || existing?.foreningsnamn,
   };
   await redis.set(recordKey(normalized), record);
   await redis.sadd(INDEX_KEY, normalized);

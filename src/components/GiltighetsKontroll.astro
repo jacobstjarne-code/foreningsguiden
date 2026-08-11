@@ -62,6 +62,12 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
     <form data-giltighetskoll-epostform hidden>
       <label for="giltighetskoll-epost">{BEVAKNING.epostLabel}</label>
       <input type="email" id="giltighetskoll-epost" name="email" placeholder={BEVAKNING.epostPlaceholder} required autocomplete="email" />
+      {/* C1 (ARBETSORDER 2026-08-11): HÄR, inte bara i det allmänna
+          /deadlines/-formuläret — det är i giltighetskontrollen mejl och
+          årsmötesdatum faktiskt fångas ihop, vilket C3 kräver tillsammans
+          med föreningsnamnet. Frivilligt, samma som EmailSignup.astro. */}
+      <label for="giltighetskoll-foreningsnamn">{BEVAKNING.foreningsnamnLabel}</label>
+      <input type="text" id="giltighetskoll-foreningsnamn" name="foreningsnamn" autocomplete="organization" />
       <label class="email-signup__consent">
         <input type="checkbox" name="samtycke" required />
         {BEVAKNING.samtycke}
