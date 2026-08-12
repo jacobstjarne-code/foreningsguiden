@@ -733,6 +733,27 @@ export const KOPRUTA = {
 };
 
 /**
+ * Konverteringsstapeln (F①–⑦, 2026-08-12, Jacob) — sju villkorade grepp
+ * på utkastvyn, gate först i vart och ett. De tre raderna nedan är INTE
+ * uppfunnen säljprosa — var och en ställer bara två redan kända fakta
+ * (belopp+pris, deadline+typ, antal+kommun) bredvid varandra, samma
+ * register som KOPRUTA ovan. Skrivna av Code i avsaknad av en Fable-
+ * leverans (jfr PRIS.abonnemang.beskrivning, samma {{FABLE:}}-läge) —
+ * flaggat i leveransrapporten, byt gärna ut mot Design/Fables egna ord.
+ * {kommun}/{bidrag}/{pris}/{belopp}/{antal} fylls av anroparen.
+ */
+export const KONVERTERINGSSTAPEL = {
+  // F① — sant-gren när kommunens köpantal når SOCIALT_BEVIS_GOLV (kopKlient.ts).
+  socialtBevis: '{antal} föreningar i {kommun} har redan köpt ett underlag hos oss.',
+  // F② — kräver bidrag.belopp_status === 'kontrollast'.
+  vardeankring: '{kommun} kommun anger {belopp} för {bidrag}. Utkastet kostar {pris} kr.',
+  // F③ — kräver bidrag.deadlines.typ === 'fasta' (årligt återkommande
+  // MM-DD-datum utan år, se DEADLINE_TYPER i kommunTyper.ts — 'lopande'/
+  // 'relativ'/'okand' har inget "om ett år" som är sant).
+  forlustaversion: 'Missar ni det här datumet öppnar nästa ansökningstillfälle om ungefär ett år.',
+};
+
+/**
  * H20 (SPEC: Kluster 1 — efter-köp-ytan, 2026-07-28): "Medan ni är här" på
  * kvittoläget (kommun/[slug]/registrera/index.astro, ?betald=1). Tre
  * rader, var och en villkorad på att underlaget faktiskt finns — se den

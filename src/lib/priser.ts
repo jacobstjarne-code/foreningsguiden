@@ -39,3 +39,20 @@ export const MOMSSATS = 0.25;
 export function momsAndelOre(beloppOre: number): number {
   return Math.round((beloppOre * MOMSSATS) / (1 + MOMSSATS));
 }
+
+// Konverteringsstapelns F⑤/F⑥/F⑦-grindar (2026-08-12, Jacob). Inte
+// feature flags i den vanliga bemärkelsen — ingen växlar dem, ingen
+// spelare/testare ser en toggle. De är en grep-bar plats för "är den
+// här FÖRUTSÄTTNINGEN sann just nu?" i stället för utspridda kommentarer.
+// Sätts till true av Jacob/Code TILLSAMMANS när respektive sakförhållande
+// verkligen ändras — inte av en dev-inställning.
+//
+// F⑤ — påminnelsemejlet (cron/abonnemangsbevakning.ts) är mallkod, ingen
+// skarp leverans än. Så länge detta är false: bara engångspriset (249 kr)
+// visas, ingen 495 kr/år-jämförelse.
+export const ABONNEMANG_LEVERANS_LIVE = false;
+// F⑥/F⑦ — Jacobs uttryckliga instruktion 2026-08-12: "Kräver skarpt
+// betalflöde. Bygg grinden, låt innehållet vänta." Garantins/kvittots
+// FÖRSTÄRKTA form (utöver den befintliga ATERBETALNING/KOPRUTA.
+// aterbetalning-texten, som redan renderas ovillkorat) väntar på detta.
+export const BETALFLODE_SKARPT_VERIFIERAT = false;

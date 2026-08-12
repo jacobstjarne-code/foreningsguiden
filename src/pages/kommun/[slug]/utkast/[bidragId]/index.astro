@@ -27,30 +27,69 @@
 // dokumentet. Ingen abonnemangsjämförelse i denna leverans — det FABLE-
 // slotet fanns i mocken men täcks inte av den här copy-leveransen,
 // utelämnat ur renderingen (inte ersatt med egen text).
+//
+// Konverteringsstapeln (F①–⑦, 2026-08-12, Jacob) — gate först i vart och
+// ett, se KONVERTERINGSSTAPEL (content.ts) för grindmotiveringen per
+// grepp:
+//   F① Socialt bevis — server-sant genast (arbetsbeviset, samma två tal
+//      som förstasidans bevisrad), klientskriptet UPPGRADERAR till det
+//      lokala köpantalet om det når SOCIALT_BEVIS_GOLV (kopKlient.ts).
+//      Aldrig en tom container medan fetchen pågår — samma
+//      "server-sant genast"-mönster som LiveDataKort.astro.
+//   F② Värdeankring — bidrag.belopp_status === 'kontrollast', känt
+//      server-sidan, ingen fetch behövs.
+//   F③ Förlustaversion — bidrag.deadlines.typ === 'fasta' (årligt
+//      återkommande MM-DD, se kommunTyper.ts), känt server-sidan.
+//   F④ Värdestapel — KOPRUTAs befintliga meningar omstrukturerade till
+//      en lista, ingen ny text.
+//   F⑤ Prisankring 249/495 — ABONNEMANG_LEVERANS_LIVE (priser.ts) är
+//      false idag (påminnelsemejlet är mallkod) — grinden byggd, inget
+//      nytt syns förrän Jacob sätter den true.
+//   F⑥/F⑦ Garanti/kvitto — BETALFLODE_SKARPT_VERIFIERAT (priser.ts) är
+//      false — grind byggd på Jacobs uttryckliga instruktion, innehållet
+//      väntar.
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
-import { loadKommuner, possessiv } from '../../../../../lib/kommuner';
-import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
-import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
-import { KOPRUTA } from '../../../../../lib/content';
+import { loadKommuner, possessiv, beraknaArbetsbevis } from '../../../../../lib/kommuner';
+import type { Kommun, Bidrag, Arbetsbevis } from '../../../../../lib/kommuner';
+import { PRIS_BIDRAGSUTKAST_ORE, ABONNEMANG_LEVERANS_LIVE, BETALFLODE_SKARPT_VERIFIERAT } from '../../../../../lib/priser';
+import { KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
 
 export function getStaticPaths() {
-  const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag } }[] = [];
-  for (const kommun of loadKommuner()) {
+  const kommuner = loadKommuner();
+  const arbetsbevis = beraknaArbetsbevis(kommuner);
+  const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag; arbetsbevis: Arbetsbevis } }[] = [];
+  for (const kommun of kommuner) {
     for (const bidrag of kommun.bidrag) {
       if (bidrag.status !== 'aktiv') continue;
-      paths.push({ params: { slug: kommun.kommun_slug, bidragId: bidrag.id }, props: { kommun, bidrag } });
+      paths.push({ params: { slug: kommun.kommun_slug, bidragId: bidrag.id }, props: { kommun, bidrag, arbetsbevis } });
     }
   }
   return paths;
 }
 
-const { kommun, bidrag } = Astro.props as { kommun: Kommun; bidrag: Bidrag };
+const { kommun, bidrag, arbetsbevis } = Astro.props as { kommun: Kommun; bidrag: Bidrag; arbetsbevis: Arbetsbevis };
 const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
 
 const fyllKopruta = (text: string) =>
-  text.replace('{kommun}', kommun.kommun).replace('{kommunPossessiv}', possessiv(kommun.kommun)).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr));
+  text
+    .replace('{kommun}', kommun.kommun)
+    .replace('{kommunPossessiv}', possessiv(kommun.kommun))
+    .replace('{bidrag}', bidrag.namn)
+    .replace('{pris}', String(prisKr))
+    .replace('{belopp}', bidrag.belopp ?? '');
+
+// F① — fallback-texten, server-sant genast (samma mall/tal som H1.5).
+const socialtBevisFallback = FORSTASIDAN_SVARAR.bevisMall
+  .replace('{bidrag}', arbetsbevis.totalBidrag.toLocaleString('sv-SE'))
+  .replace('{kontrollasta}', arbetsbevis.kontrollastAntal.toLocaleString('sv-SE'));
+
+// F② — kräver kontrollast OCH ett faktiskt belopp (typvakt, inte bara statusflaggan).
+const vardeankringText = bidrag.belopp_status === 'kontrollast' && bidrag.belopp ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring) : null;
+
+// F③ — 'fasta' = årligt återkommande MM-DD-datum (kommunTyper.ts), enda typen där "om ett år" stämmer.
+const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAPEL.forlustaversion : null;
 ---
 <Base
   title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
@@ -66,7 +105,7 @@ const fyllKopruta = (text: string) =>
     <p class="utkastvy-noscript">Den här sidan visar ert personliga utkast och kräver JavaScript. Utan det ser ni bara kraven, inte om er förening redan uppfyller dem.</p>
   </noscript>
 
-  <div class="utkastvy fg-card" data-utkastvy data-kommun-slug={kommun.kommun_slug} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
+  <div class="utkastvy fg-card" data-utkastvy data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
     <div class="utkastvy__header">
       <p class="utkastvy__eyebrow">{kommun.kommun} kommun · {bidrag.namn}</p>
       <h1>Utkast till ansökan</h1>
@@ -100,11 +139,35 @@ const fyllKopruta = (text: string) =>
 
     <div class="utkastvy__kopram" data-utkastvy-kopram hidden>
       <h2 class="utkastvy__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
+
+      {/* F① — server-sant genast (arbetsbeviset), klientskriptet
+         uppgraderar till kommunens köpantal om det når SOCIALT_BEVIS_GOLV.
+         Aldrig tom medan fetchen pågår. */}
+      <p class="utkastvy__socialt-bevis" data-utkastvy-socialt-bevis>{socialtBevisFallback}</p>
+
       <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
       <p data-utkastvy-luckor-rad hidden></p>
-      <p>{KOPRUTA.leverans}</p>
-      <p>{fyllKopruta(KOPRUTA.prisOchKvitto)}</p>
+
+      {/* F④ — värdestapel: samma tre KOPRUTA-meningar som tidigare stod
+         som lösa stycken, nu en lista. Ingen ny text. */}
+      <ul class="utkastvy__vardestapel">
+        <li>{KOPRUTA.leverans}</li>
+        <li>{fyllKopruta(KOPRUTA.prisOchKvitto)}</li>
+      </ul>
+
       <p class="utkastvy__aterbetalning">{KOPRUTA.aterbetalning}</p>
+
+      {/* F② — kräver bidrag.belopp_status === 'kontrollast'. */}
+      {vardeankringText && <p class="utkastvy__vardeankring">{vardeankringText}</p>}
+
+      {/* F③ — kräver bidrag.deadlines.typ === 'fasta'. */}
+      {forlustaversionText && <p class="utkastvy__forlustaversion">{forlustaversionText}</p>}
+
+      {/* F⑤ — ABONNEMANG_LEVERANS_LIVE är false idag (påminnelsemejlet
+         är mallkod). Grinden byggd; ingen 495 kr/år-jämförelse renderas
+         förrän Jacob sätter konstanten true och skriver jämförelsetexten
+         (samma {{FABLE:}}-läge som PRIS.abonnemang.beskrivning). */}
+      {ABONNEMANG_LEVERANS_LIVE && null}
 
       <p class="utkastvy__pris">{prisKr} kr</p>
       <button type="button" class="btn-primary" data-utkastvy-betala>
@@ -112,6 +175,13 @@ const fyllKopruta = (text: string) =>
       </button>
       <p data-utkastvy-fel class="utkastvy__fel" hidden>Något gick fel. Försök igen.</p>
       <p class="utkastvy__ansvar" data-utkastvy-ansvar></p>
+
+      {/* F⑥/F⑦ — BETALFLODE_SKARPT_VERIFIERAT är false (Jacobs instruktion
+         2026-08-12: bygg grinden, låt innehållet vänta). Den befintliga
+         ATERBETALNING-garantin ovan renderas oförändrat och ovillkorat —
+         det här är en STARKARE, ännu oskriven variant, inte en ersättning. */}
+      {BETALFLODE_SKARPT_VERIFIERAT && null}
+
       <a href={`/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`} class="utkastvy__escape">← Tillbaka till bidraget (gratis)</a>
     </div>
   </div>
@@ -121,8 +191,9 @@ const fyllKopruta = (text: string) =>
   import { getForeningsprofil } from '../../../../../lib/foreningsprofil';
   import { genereraUtkast } from '../../../../../lib/utkastGenerator';
   import type { Kommun } from '../../../../../lib/kommunTyper';
-  import { KOPRUTA } from '../../../../../lib/content';
+  import { KOPRUTA, KONVERTERINGSSTAPEL } from '../../../../../lib/content';
   import { trackEvent } from '../../../../../lib/umami';
+  import { hamtaKopantal, arOverSocialtBevisGolv } from '../../../../../lib/kopKlient';
 
   const root = document.querySelector<HTMLElement>('[data-utkastvy]');
   if (root) {
@@ -137,6 +208,17 @@ const fyllKopruta = (text: string) =>
     const betalaKnapp = root.querySelector<HTMLButtonElement>('[data-utkastvy-betala]');
     const felEl = root.querySelector<HTMLElement>('[data-utkastvy-fel]');
     const luckorRadEl = root.querySelector<HTMLElement>('[data-utkastvy-luckor-rad]');
+    const socialtBevisEl = root.querySelector<HTMLElement>('[data-utkastvy-socialt-bevis]');
+
+    // F① — servern har redan fyllt socialtBevisEl med arbetsbeviset
+    // (server-sant genast). Uppgraderar TYST till det lokala köpantalet
+    // bara om det faktiskt når tröskeln — ett nätverksfel eller en siffra
+    // under golvet lämnar fallbacken orörd, den är redan sann.
+    const kommunNamn = root.dataset.kommunNamn ?? kommunSlug;
+    hamtaKopantal(kommunSlug).then((antal) => {
+      if (antal === null || !arOverSocialtBevisGolv(antal) || !socialtBevisEl) return;
+      socialtBevisEl.textContent = KONVERTERINGSSTAPEL.socialtBevis.replace('{antal}', String(antal)).replace('{kommun}', kommunNamn);
+    });
 
     function visaStatus(text: string, lank?: { href: string; text: string }) {
       if (!statusEl) return;
@@ -380,6 +462,33 @@ const fyllKopruta = (text: string) =>
   .utkastvy__aterbetalning {
     font-size: var(--fg-text-label);
     color: var(--fg-ink-muted);
+  }
+
+  /* F① — social bevis-raden, samma vikt som ingressen (KOPRUTA.beskrivning),
+     inte en diskret fotnot: den ska mötas tidigt. */
+  .utkastvy__socialt-bevis {
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink);
+  }
+
+  /* F④ — värdestapeln. .fg-lasbredd-diciplinen gäller inte listor
+     (registret), men det här ÄR brödtext i listform, samma radlängd
+     som styckena den ersatte. */
+  .utkastvy__vardestapel {
+    margin: 0;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* F②/F③ — kort, faktisk, samma register som .utkastvy__aterbetalning
+     (label-storlek, dämpad färg) — upplysning, inte en andra rubrik. */
+  .utkastvy__vardeankring,
+  .utkastvy__forlustaversion {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: 0;
   }
 
   .utkastvy__pris {

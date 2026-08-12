@@ -41,7 +41,7 @@
 // motsagt "ett drag"-principen.
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
-import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO } from '../lib/kommuner';
+import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, beraknaArbetsbevis } from '../lib/kommuner';
 import { START, SITE_NAMN, FORSTASIDAN_SVARAR } from '../lib/content';
 
 const kommuner = loadKommuner();
@@ -61,7 +61,9 @@ for (const e of getDeadlineEntries(today).filter((e) => !e.isLopande)) {
   break;
 }
 const narmast = kommandeDeadlines[0] ?? null;
-const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
+// F① (konverteringsstapeln, 2026-08-12) återanvänder samma två tal på
+// utkastvyn — en räkning, delad via beraknaArbetsbevis() (kommuner.ts).
+const { totalBidrag, kontrollastAntal } = beraknaArbetsbevis(kommuner);
 
 // H1.2 — svarsytans fyra belopp läses ur datan, ALDRIG skrivna som
 // strängar (annars ljuger sidan så fort GPT rättar Gislaveds nästa
@@ -121,10 +123,8 @@ interface BeloppKort {
 
 const kontrollastaKandidater: BeloppKort[] = [];
 const olastaKandidater: BeloppKort[] = [];
-let kontrollastAntal = 0; // H1.5 — ALLA kontrollästa belopp, inte bara de "enkla" ovan
 for (const k of kommuner) {
   for (const b of k.bidrag) {
-    if (b.belopp_status === 'kontrollast') kontrollastAntal++;
     if (!b.belopp) continue;
     if (b.anteckning && POOL_RE.test(b.anteckning)) continue;
     const tal = talUrEnkeltBelopp(b.belopp);

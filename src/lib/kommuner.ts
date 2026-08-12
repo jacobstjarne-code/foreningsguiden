@@ -506,6 +506,29 @@ export function getKommunBySlug(slug: string): Kommun | undefined {
   return loadKommuner().find((k) => k.kommun_slug === slug);
 }
 
+export interface Arbetsbevis {
+  totalBidrag: number;
+  kontrollastAntal: number;
+}
+
+/**
+ * "Arbetsbeviset" — de två talen som bär förstasidans bevisrad (H1.5) och
+ * F①:s socialt bevis-fallback (konverteringsstapeln, 2026-08-12) när den
+ * lokala köptröskeln inte är nådd. EN räkning, två anropsställen — annars
+ * driver de isär första gången någon räknar om på bara det ena stället.
+ */
+export function beraknaArbetsbevis(kommuner: Kommun[]): Arbetsbevis {
+  let totalBidrag = 0;
+  let kontrollastAntal = 0;
+  for (const k of kommuner) {
+    for (const b of k.bidrag) {
+      totalBidrag++;
+      if (b.belopp_status === 'kontrollast') kontrollastAntal++;
+    }
+  }
+  return { totalBidrag, kontrollastAntal };
+}
+
 /**
  * Platt, kronologiskt sorterad lista över alla deadlines i alla kommuner —
  * underlag för deadlinekalendern (§5 punkt 4 UPPDRAG_POC.md). Löpande
