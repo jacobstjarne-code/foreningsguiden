@@ -78,9 +78,30 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
 // riktig data innan leverans: designdokumentets eget exempel (Gislaveds
 // Startbidrag, 5 000 kr) hamnar i just den här "enkla belopp"-mängden,
 // vilket bekräftade formen. Ingen hårdkodad kommunlista.
+//
+// H1.7 (2026-08-12, Jacob): "högst tal" utan typspridning gav fyra
+// kapitalstöd (800k/200k/100k/50k, alla anläggnings-/investerings-/
+// projektstöd) — sidan läste som att den var för stora föreningar.
+// Byt till en kort per BIDRAGSTYP (namn-mönster — kategori-fältet är en
+// målgruppstaxonomi, idrott/kultur/social, inte en bidragstyp, kan inte
+// skilja grundbidrag från anläggningsbidrag). Fortfarande "högst tal"
+// inom varje typ, fortfarande läst ur datan.
 const KR_TAL = '([0-9][0-9\\s.]*[0-9]|[0-9])\\s*(?:kr|kronor)';
 const ENDA_TAL_RE = new RegExp(`^\\s*${KR_TAL}(?:\\s*/\\s*\\S+|\\s+per\\s+\\S+(?:\\s+\\S+)?)?\\s*$`, 'i');
 const TAK_RE = new RegExp(`^\\s*(?:max|högst|upp till|dock högst)\\s+${KR_TAL}\\s*$`, 'i');
+const BIDRAGSTYP_BUCKETS = [
+  /grundbidrag|verksamhetsbidrag/i,
+  /aktivitetsbidrag|aktivitetsstöd/i,
+  /anläggningsbidrag|anläggningsstöd|investeringsbidrag|investeringsstöd|investerings-/i,
+];
+// H1.7-upptäckt: "680 000 kr" för Tranås Aktivitetsstöd är EN rent skriven
+// siffra (klarar filtret ovan) men anteckningen säger "Årlig budget
+// 680 000 kr för 2026" — en KOMMUNPOOL delad mellan alla föreningar, inte
+// vad en enskild förening kan få. Belopp-fältet själv skiljer inte pool
+// från per-förening-tak, så en andra spärr på anteckningen krävs specifikt
+// för förstasidans "detta kan NI få"-påstående (kommunsidans egen dd
+// berörs inte här, samma ambiguitet finns kvar där tills datan rättas).
+const POOL_RE = /totalt|total budget|årlig budget|fördelas (mellan|på)|delas (mellan|på)/i;
 
 function talUrEnkeltBelopp(belopp: string): number | null {
   const match = belopp.match(ENDA_TAL_RE) ?? belopp.match(TAK_RE);
@@ -105,6 +126,7 @@ for (const k of kommuner) {
   for (const b of k.bidrag) {
     if (b.belopp_status === 'kontrollast') kontrollastAntal++;
     if (!b.belopp) continue;
+    if (b.anteckning && POOL_RE.test(b.anteckning)) continue;
     const tal = talUrEnkeltBelopp(b.belopp);
     if (tal === null) continue;
     const kort: BeloppKort = { kommun: k.kommun, kommunSlug: k.kommun_slug, bidragNamn: b.namn, bidragId: b.id, belopp: b.belopp, tal };
@@ -115,20 +137,21 @@ for (const k of kommuner) {
 kontrollastaKandidater.sort((a, b) => b.tal - a.tal);
 olastaKandidater.sort((a, b) => b.tal - a.tal);
 
-// En kommun kan ha flera stora, rent skrivna belopp (Tranås hade tre över
-// 350 000 kr) — utan spärr blir alla tre korten samma kommuns absolut
-// största anslag, långt från designdokumentets "olika kommuner svarar
-// olika mycket". Högst en kort per kommun håller "högst tal" som regel
-// men gör svarsytan bred i stället för smal (uppmätt 2026-08-12).
+// Spärren (oförändrad från förra leveransen): en kommun kan ha flera
+// stora, rent skrivna belopp (Tranås hade tre över 350 000 kr) — utan
+// spärr blir flera kort samma kommuns anslag. Högst en kort per kommun,
+// nu delad över alla fyra val (tre typer + olast) så samma kommun inte
+// dyker upp två gånger på andra vägen.
 const sedda = new Set<string>();
 const svarsytaKontrollast: BeloppKort[] = [];
-for (const kort of kontrollastaKandidater) {
-  if (sedda.has(kort.kommunSlug)) continue;
-  sedda.add(kort.kommunSlug);
-  svarsytaKontrollast.push(kort);
-  if (svarsytaKontrollast.length === 3) break;
+for (const monster of BIDRAGSTYP_BUCKETS) {
+  const traff = kontrollastaKandidater.find((kort) => monster.test(kort.bidragNamn) && !sedda.has(kort.kommunSlug));
+  if (!traff) continue; // ingen kandidat av den typen — hoppa, hitta aldrig på ett kort
+  sedda.add(traff.kommunSlug);
+  svarsytaKontrollast.push(traff);
 }
-const svarsytaOlast = olastaKandidater[0] ?? null;
+const svarsytaOlast = olastaKandidater.find((kort) => !sedda.has(kort.kommunSlug)) ?? null;
+if (svarsytaOlast) sedda.add(svarsytaOlast.kommunSlug);
 const bevisText = FORSTASIDAN_SVARAR.bevisMall
   .replace('{bidrag}', totalBidrag.toLocaleString('sv-SE'))
   .replace('{kontrollasta}', kontrollastAntal.toLocaleString('sv-SE'));
