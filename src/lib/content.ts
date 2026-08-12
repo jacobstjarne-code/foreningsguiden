@@ -57,11 +57,27 @@ export const START = {
  * 2026-08-12, incoming/FORSTASIDAN_SVARAR_15-16.md). Ramtext runt
  * svarsytans belopp — själva talen/kommunerna/bidragsnamnen läses ur
  * datan i index.astro, skrivs ALDRIG som strängar här (H1.2).
+ *
+ * I1 — handling + identitet (Design runda 17–18, 2026-08-12,
+ * incoming/FORSTASIDAN_HANDLING_IDENTITET_17-18.md). identitetsrad
+ * svarar KANON §3:s 10-sekunderstest ovanför H1. seAllaMall gör
+ * beloppskorten till dörrar in i kommunens register ({n} = Code, antal
+ * bidrag i den kommunen). bevakningsremsa ersätter den villkorade
+ * remsan i Designs mock — Jacob (I1.3): "kommunval" som villkor
+ * fungerar inte på förstasidan (sökfältet navigerar bort, ingen
+ * kvardröjande vald-kommun-status att villkora på), så texten är
+ * generell och alltid synlig, ingen andra primärknapp.
  */
 export const FORSTASIDAN_SVARAR = {
   bevisMall: '{bidrag} bidrag kartlagda · {kontrollasta} belopp lästa för hand',
   olastPrefix: 'Upp till',
   olastEtikett: 'ej kontrolläst',
+  identitetsrad: {
+    text: 'Vi samlar alla kommunala föreningsbidrag i Sverige på ett ställe — och hjälper er förening att söka dem.',
+    suffix: 'Oberoende, inte en myndighet.',
+  },
+  seAllaMall: 'Se alla {n} ›',
+  bevakningsremsa: 'Sista dag är ofta i mars. Vi påminner er i tid — gratis, ingen inloggning.',
   prisrad: {
     gratisEtikett: 'HITTA · GRATIS',
     gratisText: 'Alla bidrag, krav, deadlines. Påminnelser.',
