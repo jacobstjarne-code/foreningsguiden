@@ -22,6 +22,14 @@
  * Kräver att `npm run build` redan körts. Fäller ALDRIG (process.exit(0)
  * alltid) — det är en rapport, inte en grind.
  *
+ * FÄLLBART-VILLKOR (E5.1, 2026-08-12): tredje gången samma buggfamilj —
+ * en display-egenskap satt utan [open]-villkor på ett element inuti
+ * <details> upphäver webbläsarens inbyggda kollaps (R7.4:s ul.bidrag-list,
+ * VarmSkarm.astro:s .varm-skarm__kort-lista). Den här delen är käll-
+ * kodsbaserad (.astro + CSS), inte byggd HTML — bygget är redan kollapsat
+ * korrekt av webbläsaren oavsett vad CSS:en säger, så bara källan avslöjar
+ * regeln. Körs alltid, oavsett om dist/client finns.
+ *
  * Kör: node --experimental-strip-types scripts/lint-design-guard.ts
  */
 import { readFileSync, existsSync, readdirSync } from 'fs';
@@ -29,10 +37,11 @@ import { join } from 'path';
 import { delaIMeningar } from '../src/lib/anteckningFilter.ts';
 
 const DIST_CLIENT = join(process.cwd(), 'dist', 'client');
+const SRC_DIR = join(process.cwd(), 'src');
 
-if (!existsSync(DIST_CLIENT)) {
-  console.error('dist/client saknas — kör `npm run build` innan detta lint.');
-  process.exit(0); // rapporterar, fäller aldrig — se filhuvudet
+const distClientFinns = existsSync(DIST_CLIENT);
+if (!distClientFinns) {
+  console.error('dist/client saknas — de HTML-baserade kontrollerna (svarsstycke/listrader/färgat drag) hoppas över. Källkodskontrollen (fällbart-villkor) körs ändå.');
 }
 
 const SVARSSTYCKE_MAX_MENINGAR = 2;
@@ -95,6 +104,196 @@ function countFargatDrag(html: string): number {
   return matches ? matches.length : 0;
 }
 
+// --- Fällbart-villkor: display satt utan [open] på <details>-barn ---------
+
+interface CssRegel {
+  selector: string;
+  body: string;
+}
+
+/** Enkel djup-medveten CSS-parser. @-regler (@media m.fl.) beskrivs inte
+ * som en regel i sig — vi kliver ner i deras kropp så de inre reglerna
+ * fångas precis som toppnivå-regler. */
+function parseCssRules(css: string, regler: CssRegel[] = []): CssRegel[] {
+  const utanKommentarer = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  let cursor = 0;
+  while (cursor < utanKommentarer.length) {
+    const braceIdx = utanKommentarer.indexOf('{', cursor);
+    if (braceIdx === -1) break;
+    const prelude = utanKommentarer.slice(cursor, braceIdx).trim();
+    let depth = 1;
+    let j = braceIdx + 1;
+    while (j < utanKommentarer.length && depth > 0) {
+      if (utanKommentarer[j] === '{') depth++;
+      else if (utanKommentarer[j] === '}') depth--;
+      j++;
+    }
+    const body = utanKommentarer.slice(braceIdx + 1, j - 1);
+    if (prelude.startsWith('@')) {
+      parseCssRules(body, regler);
+    } else if (prelude) {
+      regler.push({ selector: prelude, body });
+    }
+    cursor = j;
+  }
+  return regler;
+}
+
+/** Tar bort HTML-kommentarer och Astro/JSX-mallkommentarer INNAN detaljblock
+ * söks — annars matchar startRe en bokstavlig "<details>" som bara nämns i
+ * ett dokumentationsstycke (hände i BidragCard.astro rad 57) som om den vore
+ * riktig markup, vilket förfalskar hela block-avgränsningen därefter. */
+function stripAstroComments(source: string): string {
+  return source.replace(/<!--[\s\S]*?-->/g, '').replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+}
+
+function extractStyleBlocks(source: string): string {
+  const re = /<style\b[^>]*>([\s\S]*?)<\/style>/g;
+  const delar: string[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(source))) delar.push(m[1]);
+  return delar.join('\n');
+}
+
+/** <details>...</details>, djup-medveten (samma teknik som extractByClass). */
+function extractDetailsBlocks(source: string): string[] {
+  const block: string[] = [];
+  const startRe = /<details\b[^>]*>/g;
+  let m: RegExpExecArray | null;
+  while ((m = startRe.exec(source))) {
+    const start = m.index + m[0].length;
+    let depth = 1;
+    let cursor = start;
+    while (depth > 0) {
+      const nextOpenRel = source.slice(cursor).search(/<details\b/);
+      const nextClose = source.indexOf('</details>', cursor);
+      if (nextClose === -1) { cursor = source.length; break; }
+      const nextOpenAbs = nextOpenRel === -1 ? -1 : cursor + nextOpenRel;
+      if (nextOpenAbs !== -1 && nextOpenAbs < nextClose) {
+        depth++;
+        cursor = nextOpenAbs + '<details'.length;
+      } else {
+        depth--;
+        cursor = nextClose + '</details>'.length;
+      }
+    }
+    block.push(source.slice(start, Math.max(start, cursor - '</details>'.length)));
+    startRe.lastIndex = cursor;
+  }
+  return block;
+}
+
+/** Klassnamn ur EN tagg-attributsträng (mellan taggnamn och `>`), inte hela blocket —
+ * annars fångar vi klasser på barnbarn, vilket är fel nivå (se filhuvud-kommentar). */
+function extractClassNamesFromAttrs(attrs: string): string[] {
+  const namn = new Set<string>();
+  const attrRe = /class="([^"]*)"/;
+  const m = attrRe.exec(attrs);
+  if (m) for (const cls of m[1].split(/\s+/)) if (cls) namn.add(cls);
+  // class:list={[ 'a', cond && 'b' ]} — plocka citerade strängar heuristiskt.
+  const listM = /class:list=\{[^}]*\}/.exec(attrs);
+  if (listM) {
+    const strRe = /['"]([^'"]+)['"]/g;
+    let sm: RegExpExecArray | null;
+    while ((sm = strRe.exec(listM[0]))) {
+      for (const cls of sm[1].split(/\s+/)) if (cls) namn.add(cls);
+    }
+  }
+  return [...namn];
+}
+
+/** Direkta barn-taggar av ett <details>-block (djup 0), <summary> undantagen —
+ * det är BARA dessa webbläsaren döljer när <details> saknar [open]. En klass
+ * djupare ner ärver dolt-läget av sin förälder oavsett egen display-regel,
+ * så att kolla hela blocket (som v1 gjorde) gav 40+ falska träffar. */
+function extractDirectChildren(block: string): { tag: string; attrs: string }[] {
+  const tagRe = /<\/?([a-zA-Z][\w:-]*)\b([^>]*)>/g;
+  let depth = 0;
+  const barn: { tag: string; attrs: string }[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = tagRe.exec(block))) {
+    const isClose = m[0].startsWith('</');
+    const isSelfClose = /\/\s*>$/.test(m[0]);
+    if (isClose) {
+      depth = Math.max(0, depth - 1);
+      continue;
+    }
+    if (depth === 0 && m[1] !== 'summary') barn.push({ tag: m[1], attrs: m[2] });
+    if (!isSelfClose) depth++;
+  }
+  return barn;
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function samlaAstroFiler(dir: string): string[] {
+  const resultat: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) resultat.push(...samlaAstroFiler(full));
+    else if (entry.name.endsWith('.astro')) resultat.push(full);
+  }
+  return resultat;
+}
+
+function lintFallbartUtanOppenVillkor() {
+  const globalCssPath = join(SRC_DIR, 'styles', 'global.css');
+  const globalCss = existsSync(globalCssPath) ? readFileSync(globalCssPath, 'utf-8') : '';
+  const globalaRegler = parseCssRules(globalCss);
+
+  for (const filPath of samlaAstroFiler(SRC_DIR)) {
+    const source = stripAstroComments(readFileSync(filPath, 'utf-8'));
+    const detailsBlock = extractDetailsBlocks(source);
+    if (detailsBlock.length === 0) continue;
+
+    const lokalaRegler = parseCssRules(extractStyleBlocks(source));
+    const allaRegler = [...lokalaRegler, ...globalaRegler];
+    const relPath = filPath.replace(process.cwd() + '/', '');
+
+    const kolladeElement = new Set<string>();
+    for (const block of detailsBlock) {
+      for (const barn of extractDirectChildren(block)) {
+        const klasser = extractClassNamesFromAttrs(barn.attrs);
+        if (klasser.length === 0) continue;
+        const elementNyckel = klasser.slice().sort().join(' ');
+        if (kolladeElement.has(elementNyckel)) continue;
+        kolladeElement.add(elementNyckel);
+
+        const matchandeRegler = allaRegler.filter((regel) =>
+          klasser.some((klass) => new RegExp(`\\.${escapeRegExp(klass)}(?![\\w-])`).test(regel.selector))
+        );
+
+        // Om NÅGON regel (villkorad eller ej) gömmer elementet är mönstret
+        // redan säkert — t.ex. bas-klass + modifier-klass där modifiern
+        // default:ar till none (VarmSkarms fixade .varm-skarm__kort-lista--
+        // resten). Flagga bara när ingen regel alls sätter none.
+        const harNagonNoneRegel = matchandeRegler.some((regel) => {
+          const dm = /display\s*:\s*([a-zA-Z-]+)/.exec(regel.body);
+          return dm && dm[1].trim().toLowerCase() === 'none';
+        });
+        if (harNagonNoneRegel) continue;
+
+        const ovillkoradIckeNone = matchandeRegler.find((regel) => {
+          if (/\[open\]/i.test(regel.selector)) return false;
+          const dm = /display\s*:\s*([a-zA-Z-]+)/.exec(regel.body);
+          return dm && dm[1].trim().toLowerCase() !== 'none';
+        });
+        if (!ovillkoradIckeNone) continue;
+
+        const dm = /display\s*:\s*([a-zA-Z-]+)/.exec(ovillkoradIckeNone.body)!;
+        fynd.push({
+          sida: relPath,
+          typ: 'fällbart innehåll utan [open]-villkor',
+          varde: `<${barn.tag} class="${klasser.join(' ')}"> — display: ${dm[1].trim()} i "${ovillkoradIckeNone.selector.trim()}", ingen display:none-regel någonstans för elementet`,
+          budget: 'direkt barn till <details> (ej <summary>) ska ha minst en display:none-regel, annars villkoras med [open]',
+        });
+      }
+    }
+  }
+}
+
 interface Fynd {
   sida: string;
   typ: string;
@@ -153,11 +352,16 @@ const URVAL = [
   'deadlines/index.html',
 ];
 
-for (const rel of URVAL) {
-  const full = join(DIST_CLIENT, rel);
-  if (!existsSync(full)) continue;
-  lintaSida(rel, readFileSync(full, 'utf-8'));
+if (distClientFinns) {
+  for (const rel of URVAL) {
+    const full = join(DIST_CLIENT, rel);
+    if (!existsSync(full)) continue;
+    lintaSida(rel, readFileSync(full, 'utf-8'));
+  }
 }
+
+// Källkodsbaserad, kräver inte dist/client — körs alltid.
+lintFallbartUtanOppenVillkor();
 
 if (fynd.length === 0) {
   console.log('Täthetsbudget: inga överskridanden i urvalet.');

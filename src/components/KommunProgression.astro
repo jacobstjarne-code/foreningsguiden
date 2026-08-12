@@ -386,7 +386,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
           <span class="progression__slutsats-text">Visa alla {sortedBidrag.length} ↓</span>
           <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
         </summary>
-        <ul class="progression__list progression__fallbart">
+        <ul class="progression__list progression__list--resten progression__fallbart">
           {sortedBidrag.slice(2).map(({ bidrag, dateISO }) => (
             <li data-kategori={bidrag.kategori.join(' ')}>
               <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
