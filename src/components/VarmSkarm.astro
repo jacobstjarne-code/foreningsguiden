@@ -54,6 +54,25 @@ function radDatumText(bidrag: Bidrag, dateISO: string | null): string {
   return 'löpande ansökan';
 }
 
+// E5.3-fix (Jacob 2026-08-12): mockens exempel ("40 000 kr") antog att
+// belopp alltid är en kort siffra — verkligheten (Gislaved: 14/14 bidrag,
+// upp till 269 tecken, t.ex. "Kurskostnaden, högst 550 kronor per
+// deltagare för en dag, 800 kronor för två dagar...") gör den 30px
+// hero-stora sifferstilen oläsbar och ser ut som förväxlade fält när den
+// tomma beskrivningsraden (foreningstyp: null, samma kommun) står bredvid
+// tomhänt. Ingen text trunkeras eller flyttas — bara TECKENSTORLEKEN på
+// belopp-fältet växlar under ett tröskelvärde, samma belopp-sträng i
+// båda fallen. "belopp inte publicerat"-frasen matchar BidragCard/
+// BidragRegisterRad ordagrant (var 'Belopp ej publikt' här, en egen,
+// inkonsekvent fras — fixat till samma vokabulär som resten av sajten).
+const BELOPP_KORT_GRANS = 24; // "3 000 kronor per år" = 19 tecken, ryms
+function beloppText(bidrag: Bidrag): string {
+  return bidrag.belopp ?? 'belopp inte publicerat';
+}
+function beloppArKort(bidrag: Bidrag): boolean {
+  return beloppText(bidrag).length <= BELOPP_KORT_GRANS;
+}
+
 const forsta = sortedBidrag.slice(0, 2);
 const resten = sortedBidrag.slice(2);
 ---
@@ -98,7 +117,7 @@ const resten = sortedBidrag.slice(2);
       {forsta.map(({ bidrag, dateISO }) => (
         <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
           <div class="varm-skarm__kort-topp">
-            <span class="varm-skarm__kort-belopp">{bidrag.belopp ?? 'Belopp ej publikt'}</span>
+            <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
             {dateISO && <span class="varm-skarm__kort-badge">{formatDate(dateISO)} · {daysUntil(dateISO, today)} dgr</span>}
           </div>
           <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
@@ -112,11 +131,11 @@ const resten = sortedBidrag.slice(2);
           <span>{VARM_SKARM.visaAllaMall.replace('{antal}', String(resten.length))}</span>
           <span class="varm-skarm__resten-lank">{VARM_SKARM.visaAllaLank}</span>
         </summary>
-        <div class="varm-skarm__kort-lista">
+        <div class="varm-skarm__kort-lista varm-skarm__kort-lista--resten">
           {resten.map(({ bidrag, dateISO }) => (
             <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
               <div class="varm-skarm__kort-topp">
-                <span class="varm-skarm__kort-belopp">{bidrag.belopp ?? 'Belopp ej publikt'}</span>
+                <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
                 <span class="varm-skarm__kort-badge">{radDatumText(bidrag, dateISO)}</span>
               </div>
               <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
@@ -342,6 +361,18 @@ const resten = sortedBidrag.slice(2);
     color: var(--fg-ink);
   }
 
+  /* E5.3-fix (Jacob 2026-08-12) — belopp är inte alltid en kort siffra
+     ("Kurskostnaden, högst 550 kronor per deltagare för en dag..." finns
+     i verkliga data, se VarmSkarm.astro:s beloppArKort()). Samma
+     belopp-sträng, bara nedskalad från hero-siffra till vanlig löptext
+     när den är för lång för att bära den stora stilen. */
+  .varm-skarm__kort-belopp--lang {
+    font-family: var(--fg-font-sans);
+    font-size: 15px;
+    font-weight: var(--fg-weight-bold);
+    line-height: 1.4;
+  }
+
   .varm-skarm__kort-badge {
     font-family: var(--fg-font-mono);
     font-size: 12px;
@@ -394,7 +425,22 @@ const resten = sortedBidrag.slice(2);
     font-weight: var(--fg-weight-bold);
   }
 
-  .varm-skarm__resten .varm-skarm__kort-lista {
+  /* E5.1-fix (Jacob 2026-08-12): rot — .varm-skarm__kort-lista { display:
+     flex } är återanvänd för BÅDA listorna (forsta, alltid synlig; resten,
+     inuti <details>). Att sätta display EXPLICIT på ett <details>-barn
+     bryter webbläsarens inbyggda "dölj barn när <details> är stängd"-
+     beteende (den nedärvda display:none vinner annars över author-CSS
+     bara när author-CSS INTE rör display alls). Resultat: alla tolv
+     "resten"-korten stod synliga, öppna eller inte. Egen klass
+     (--resten) i stället för att förlita sig på attribut-specificitet —
+     display:none tills <details> faktiskt är öppen, aldrig display:flex
+     som grundläge för just den här listan. */
+  .varm-skarm__kort-lista--resten {
+    display: none;
     margin-top: 10px;
+  }
+
+  .varm-skarm__resten[open] .varm-skarm__kort-lista--resten {
+    display: flex;
   }
 </style>
