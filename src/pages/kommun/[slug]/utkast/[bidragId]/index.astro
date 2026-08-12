@@ -50,7 +50,7 @@
 //      väntar.
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
-import { loadKommuner, possessiv, beraknaArbetsbevis } from '../../../../../lib/kommuner';
+import { loadKommuner, possessiv, beraknaArbetsbevis, beloppArEttEnkeltTal } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag, Arbetsbevis } from '../../../../../lib/kommuner';
 import { PRIS_BIDRAGSUTKAST_ORE, ABONNEMANG_LEVERANS_LIVE, BETALFLODE_SKARPT_VERIFIERAT } from '../../../../../lib/priser';
 import { KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
@@ -85,8 +85,11 @@ const socialtBevisFallback = FORSTASIDAN_SVARAR.bevisMall
   .replace('{bidrag}', arbetsbevis.totalBidrag.toLocaleString('sv-SE'))
   .replace('{kontrollasta}', arbetsbevis.kontrollastAntal.toLocaleString('sv-SE'));
 
-// F② — kräver kontrollast OCH ett faktiskt belopp (typvakt, inte bara statusflaggan).
-const vardeankringText = bidrag.belopp_status === 'kontrollast' && bidrag.belopp ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring) : null;
+// F② — kräver kontrollast OCH att beloppet är ett rent tal, inte en
+// formel/pool ("Bestäms utifrån kommunens totalbelopp...", F8-fyndet:
+// samma regel som beloppArEttEnkeltTal ger förstasidans svarsyta).
+const vardeankringText =
+  bidrag.belopp_status === 'kontrollast' && beloppArEttEnkeltTal(bidrag) !== null ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring) : null;
 
 // F③ — 'fasta' = årligt återkommande MM-DD-datum (kommunTyper.ts), enda typen där "om ett år" stämmer.
 const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAPEL.forlustaversion : null;

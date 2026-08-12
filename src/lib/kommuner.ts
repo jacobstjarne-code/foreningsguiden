@@ -511,13 +511,19 @@ export interface Arbetsbevis {
   kontrollastAntal: number;
 }
 
+let _arbetsbevisCache: Arbetsbevis | null = null;
+
 /**
- * "Arbetsbeviset" — de två talen som bär förstasidans bevisrad (H1.5) och
- * F①:s socialt bevis-fallback (konverteringsstapeln, 2026-08-12) när den
- * lokala köptröskeln inte är nådd. EN räkning, två anropsställen — annars
- * driver de isär första gången någon räknar om på bara det ena stället.
+ * "Arbetsbeviset" — de två talen som bär förstasidans bevisrad (H1.5),
+ * F①:s fallback på utkastvyn OCH F①:s fallback i kommunsidans egen
+ * köpruta (station 5, KommunProgression.astro — F8, 2026-08-12).
+ * EN räkning, tre anropsställen — annars driver de isär första gången
+ * någon räknar om på bara ETT av dem. Memoiserad (samma mönster som
+ * loadKommuner()s _cache): kommunsidan anropar detta en gång PER
+ * kommun (290 statiska sidor), utan cache 290 × 2808 varv i onödan.
  */
 export function beraknaArbetsbevis(kommuner: Kommun[]): Arbetsbevis {
+  if (_arbetsbevisCache) return _arbetsbevisCache;
   let totalBidrag = 0;
   let kontrollastAntal = 0;
   for (const k of kommuner) {
@@ -526,7 +532,8 @@ export function beraknaArbetsbevis(kommuner: Kommun[]): Arbetsbevis {
       if (b.belopp_status === 'kontrollast') kontrollastAntal++;
     }
   }
-  return { totalBidrag, kontrollastAntal };
+  _arbetsbevisCache = { totalBidrag, kontrollastAntal };
+  return _arbetsbevisCache;
 }
 
 /**

@@ -11,8 +11,9 @@ import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
   earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist, harEtjanstsystem, possessiv,
+  loadKommuner, beraknaArbetsbevis, beloppArEttEnkeltTal,
 } from '../lib/kommuner';
-import { VAGLEDNING, KOPRUTA } from '../lib/content';
+import { VAGLEDNING, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
 import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
 import { harvestBilagor } from '../lib/kopDokument';
@@ -126,7 +127,19 @@ const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtj
 // i filtret som klarar D1, hellre än att tyst sälja mot en ofullständig
 // lista eller dölja köprutan helt bara för att den allra första träffen
 // inte klarar D1.
-type Station5Entry = { beskrivning: string; href: string } | null;
+// F8 (2026-08-12, Jacob): F②:s ankringsrad fanns bara på utkastvyn — EFTER
+// köpbeslutet, inte före. Köprutan HÄR (station 5) är den faktiska
+// beslutspunkten (samma KOPRUTA-konstant, samma länk till utkastvyn).
+// Kräver kontrollast OCH att beloppet är ett rent tal, inte en formel/
+// pool (F8-fyndet på just den här kandidaten: "Bestäms utifrån kommunens
+// totalbelopp och antal deltagaraktiviteter" — samma regel som
+// förstasidans svarsyta, beloppArEttEnkeltTal, kommunTyper.ts).
+const vardeankring = (bidrag: Kommun['bidrag'][number]) =>
+  bidrag.belopp_status === 'kontrollast' && beloppArEttEnkeltTal(bidrag) !== null
+    ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring, bidrag.namn).replace('{belopp}', bidrag.belopp ?? '')
+    : null;
+
+type Station5Entry = { beskrivning: string; href: string; vardeankring: string | null } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
   filterValues.map((filter) => {
     const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status === 'kontrollast' && k.bidrag.krav.length >= 3);
@@ -134,10 +147,18 @@ const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
     return [filter, {
       beskrivning: fyllKopruta(kopRutaBeskrivningMall, kandidat.bidrag.namn),
       href: `/kommun/${kommun.kommun_slug}/utkast/${kandidat.bidrag.id}/`,
+      vardeankring: vardeankring(kandidat.bidrag),
     }];
   })
 );
 const station5Alla = station5PerFilter.alla;
+
+// F8: F①:s fallback — kommun-scopat (inte bidrag-scopat, samma köpruta
+// oavsett vilken D1-kandidat filtret råkar visa), server-sant genast,
+// samma arbetsbevis-tal som utkastvyn och förstasidan (EN räkning).
+const socialtBevisFallback = FORSTASIDAN_SVARAR.bevisMall
+  .replace('{bidrag}', beraknaArbetsbevis(loadKommuner()).totalBidrag.toLocaleString('sv-SE'))
+  .replace('{kontrollasta}', beraknaArbetsbevis(loadKommuner()).kontrollastAntal.toLocaleString('sv-SE'));
 
 // ÅTGÄRDSSPEC punkt 1 (Jacob, 2026-08-03 kväll): D1 gör köprutan tom
 // överallt just nu (noll bidrag är krav_status: verifierad ännu) —
@@ -155,7 +176,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
   })
 );
 ---
-<div class="progression">
+<div class="progression" data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun}>
   {/* D6 (ARBETSORDER 2026-08-11, mock 9f): A:s enda strandade drag,
      "Börja med godkännandet" — den numrerade tidslinjens fem cirkelmarkörer
      (1-5) är borta, det här ledande blocket ersätter dem som stationens
@@ -434,9 +455,14 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
          btn-primary. */}
       <div class="progression__kopruta" data-progression-kopruta hidden={!station5Alla}>
         <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
+        {/* F① (F8, 2026-08-12) — server-sant genast, klientskriptet
+           uppgraderar till kommunens köpantal om det når SOCIALT_BEVIS_GOLV. */}
+        <p class="progression__kopruta-socialt-bevis" data-progression-kopruta-socialt-bevis>{socialtBevisFallback}</p>
         <p data-progression-kopruta-beskrivning>{station5Alla?.beskrivning}</p>
         <p>{KOPRUTA.leverans}</p>
         <p>{kopRutaPrisOchKvitto}</p>
+        {/* F② (F8) — bara när D1-kandidaten har ett kontrollast belopp. */}
+        <p class="progression__kopruta-vardeankring" data-progression-kopruta-vardeankring hidden={!station5Alla?.vardeankring}>{station5Alla?.vardeankring}</p>
         <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
         <a href={station5Alla?.href ?? '#'} class="fg-btn--ghost progression__goal-cta" data-progression-kopruta-cta>
           Lås upp hela underlaget — {prisKr} kr
@@ -458,6 +484,9 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 </div>
 
 <script>
+  import { hamtaKopantal, arOverSocialtBevisGolv } from '../lib/kopKlient';
+  import { KONVERTERINGSSTAPEL } from '../lib/content';
+
   // Kategori-pillren är riktiga <a href="/kommun/slug/kategori/">-länkar
   // (crawlbarhet, SOKBARHETSSPEC §2.2 — inga föräldralösa sidor). Vanligt
   // klick filtrerar på plats istället för att navigera; ctrl/cmd/mittklick
@@ -505,6 +534,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
   const kopruta = document.querySelector<HTMLElement>('[data-progression-kopruta]');
   const kopRutaBeskrivning = document.querySelector<HTMLElement>('[data-progression-kopruta-beskrivning]');
   const kopRutaCta = document.querySelector<HTMLAnchorElement>('[data-progression-kopruta-cta]');
+  const kopRutaVardeankring = document.querySelector<HTMLElement>('[data-progression-kopruta-vardeankring]');
   // ÅTGÄRDSSPEC punkt 1: bevakningsrutorna är statiskt SSR-renderade, en
   // per filter som saknar D1-kandidat (se station5BevakaPerFilter) —
   // ingen text att uppdatera via JS, bara vilken som visas.
@@ -515,6 +545,10 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
     if (kopruta) kopruta.hidden = !entry;
     if (kopRutaBeskrivning && entry) kopRutaBeskrivning.textContent = entry.beskrivning;
     if (kopRutaCta && entry) kopRutaCta.href = entry.href;
+    if (kopRutaVardeankring) {
+      kopRutaVardeankring.hidden = !entry?.vardeankring;
+      if (entry?.vardeankring) kopRutaVardeankring.textContent = entry.vardeankring;
+    }
     bevakaRutor.forEach((el) => {
       el.hidden = el.dataset.progressionBevakaFilter !== value;
     });
@@ -559,6 +593,22 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
   });
 
   applyFilter('alla');
+
+  // F① (F8, 2026-08-12) — köprutans egen socialt bevis-rad, oberoende av
+  // vilket filter/D1-kandidat som visas (kommun-scopat, inte bidrag-
+  // scopat). Fallbacken (arbetsbeviset) står redan där, server-sant —
+  // samma tysta uppgradering som utkastvyn, aldrig en tom rad medan
+  // fetchen pågår.
+  const progressionRoot = document.querySelector<HTMLElement>('.progression[data-kommun-slug]');
+  const socialtBevisEl = progressionRoot?.querySelector<HTMLElement>('[data-progression-kopruta-socialt-bevis]');
+  if (progressionRoot && socialtBevisEl) {
+    const kommunSlug = progressionRoot.dataset.kommunSlug ?? '';
+    const kommunNamn = progressionRoot.dataset.kommunNamn ?? kommunSlug;
+    hamtaKopantal(kommunSlug).then((antal) => {
+      if (antal === null || !arOverSocialtBevisGolv(antal)) return;
+      socialtBevisEl.textContent = KONVERTERINGSSTAPEL.socialtBevis.replace('{antal}', String(antal)).replace('{kommun}', kommunNamn);
+    });
+  }
 
   // 1d — checklistans räknare. Rent klientläge, ingen persistens (bocken
   // markerar "jag har gjort det här nu", inte en profil att komma ihåg

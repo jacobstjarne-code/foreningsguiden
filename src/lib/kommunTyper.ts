@@ -575,6 +575,37 @@ export function parseBeloppTak(belopp: string | null): number | null {
   return Number.isFinite(siffra) && siffra > 0 ? siffra : null;
 }
 
+// H1.2/F② (2026-08-12) — bredare än parseBeloppTak ovan: den kräver att
+// HELA strängen är bara talet, ingen "/år"/"per medlem"-svans ("3 000
+// kronor per år" missar annars, trots att det är lika entydigt som "3 000
+// kronor"). Skild funktion, inte en utökning av parseBeloppTak — den
+// funktionens snäva kontrakt (matchningstrattens kostnadssummering) ska
+// inte bli lösare bara för att förstasidan/köprutan har andra behov.
+const KR_TAL_LOS = '([0-9][0-9\\s.]*[0-9]|[0-9])\\s*(?:kr|kronor)';
+const BELOPP_ENKELT_RE = new RegExp(`^\\s*${KR_TAL_LOS}(?:\\s*/\\s*\\S+|\\s+per\\s+\\S+(?:\\s+\\S+)?)?\\s*$`, 'i');
+const BELOPP_TAK_LOS_RE = new RegExp(`^\\s*(?:max|högst|upp till|dock högst)\\s+${KR_TAL_LOS}\\s*$`, 'i');
+// Ett rent skrivet belopp kan ändå vara en KOMMUNPOOL, inte ett per-
+// förening-tak (Tranås Aktivitetsstöd, H1.7-fyndet: "680 000 kr" i
+// belopp-fältet, "Årlig budget 680 000 kr för 2026" i anteckningen).
+// belopp-fältet ensamt skiljer inte de två — anteckningen måste kollas med.
+const BELOPP_POOL_RE = /totalt|total budget|årlig budget|fördelas (mellan|på)|delas (mellan|på)/i;
+
+/**
+ * Ett bidrags belopp, om och bara om det är EN sak (bara talet, ev. med
+ * "/år"/"per medlem", eller ett explicit uttryckt tak) OCH inte är en
+ * kommunpool enligt anteckningen. Grund för F②:s ankringsrad (kommunsidans
+ * köpruta OCH utkastvyn) och förstasidans svarsyta (H1.2/H1.7) — samma
+ * regel på alla tre ställena, inte tre separata gissningar.
+ */
+export function beloppArEttEnkeltTal(bidrag: Bidrag): number | null {
+  if (!bidrag.belopp) return null;
+  if (bidrag.anteckning && BELOPP_POOL_RE.test(bidrag.anteckning)) return null;
+  const match = bidrag.belopp.match(BELOPP_ENKELT_RE) ?? bidrag.belopp.match(BELOPP_TAK_LOS_RE);
+  if (!match) return null;
+  const tal = Number(match[1].replace(/[\s.]/g, ''));
+  return Number.isFinite(tal) && tal > 0 ? tal : null;
+}
+
 export interface BeloppSumma {
   total: number;
   capped: number; // antal bidrag med ett parseat tak — bidrar till total

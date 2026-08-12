@@ -46,8 +46,27 @@ main:has(#alla-bidrag) :is(p, li, dd):not(#alla-bidrag, #alla-bidrag *) {
 
 /* Sidfoten ligger UTANFÖR <main> — A5.1:s main-skopade regel nådde den
    aldrig (1391px uppmätt, helt obegränsad). Enkel textblock, ingen
-   kort-komplexitet — hela behållaren kan begränsas direkt. */
+   kort-komplexitet — hela behållaren kapades DIREKT (540px + margin:auto)
+   i stället för att rikta om till textelementen, som A6.1 gör för main.
+   F8 (2026-08-12, Jacob): just den genvägen var felet — en 540px-box
+   centrerad mot BODY hamnar inte där en 540px-box centrerad mot MAIN
+   hade hamnat, så fort main:s eget innehåll INTE själv är centrerat
+   (kommunsidans brödtext står vänsterställd på main:s inre kant, inte
+   centrerad — 258px isär, uppmätt). Fix: sidfoten ärver main:s EGEN
+   boxmodell (samma 1100px/margin:auto/padding — se main-regeln nedan)
+   i stället för att vara sin egen smalare, centrerade box. Textcappet
+   flyttat till sidfotens p-element (samma A6.1-mönster: kapa TEXTEN,
+   inte behållaren) — vänsterställt, ärver då automatiskt main:s inre
+   kant på VILKEN sida som helst, oavsett om sidans EGNA huvudinnehåll
+   råkar vara centrerat (förstasidan) eller vänsterställt (kommunsidan).
+   Förstasidan behöver därför en egen motverkande centrering, se
+   index.astro (.start-kolumn-familjen centrerar sin EGEN kolumn — det
+   är samma mönster som fanns innan denna leverans, bara medvetet nu). */
 .site-footer {
+  max-width: 1100px;
+}
+
+.site-footer > p {
   max-width: var(--fg-lasbredd);
 }
 
@@ -1672,6 +1691,20 @@ main {
 .progression__kopruta-rubrik {
   margin: 0 0 var(--fg-space-2);
   font-size: var(--fg-text-body-lg);
+}
+
+/* F8 (2026-08-12) — samma register som utkastvyns .utkastvy__socialt-bevis/
+   .utkastvy__vardeankring (konverteringsstapeln, F①/F②), nu på kommun-
+   sidans egen köpruta (station 5) — den faktiska beslutspunkten. */
+.progression__kopruta-socialt-bevis {
+  font-weight: var(--fg-weight-bold);
+  margin: 0 0 var(--fg-space-2);
+}
+
+.progression__kopruta-vardeankring {
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+  margin: 0;
 }
 
 .progression__kopruta-aterbetalning {

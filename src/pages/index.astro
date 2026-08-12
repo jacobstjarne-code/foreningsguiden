@@ -41,7 +41,7 @@
 // motsagt "ett drag"-principen.
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
-import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, beraknaArbetsbevis } from '../lib/kommuner';
+import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO, beraknaArbetsbevis, beloppArEttEnkeltTal } from '../lib/kommuner';
 import { START, SITE_NAMN, FORSTASIDAN_SVARAR } from '../lib/content';
 
 const kommuner = loadKommuner();
@@ -88,29 +88,16 @@ const { totalBidrag, kontrollastAntal } = beraknaArbetsbevis(kommuner);
 // målgruppstaxonomi, idrott/kultur/social, inte en bidragstyp, kan inte
 // skilja grundbidrag från anläggningsbidrag). Fortfarande "högst tal"
 // inom varje typ, fortfarande läst ur datan.
-const KR_TAL = '([0-9][0-9\\s.]*[0-9]|[0-9])\\s*(?:kr|kronor)';
-const ENDA_TAL_RE = new RegExp(`^\\s*${KR_TAL}(?:\\s*/\\s*\\S+|\\s+per\\s+\\S+(?:\\s+\\S+)?)?\\s*$`, 'i');
-const TAK_RE = new RegExp(`^\\s*(?:max|högst|upp till|dock högst)\\s+${KR_TAL}\\s*$`, 'i');
 const BIDRAGSTYP_BUCKETS = [
   /grundbidrag|verksamhetsbidrag/i,
   /aktivitetsbidrag|aktivitetsstöd/i,
   /anläggningsbidrag|anläggningsstöd|investeringsbidrag|investeringsstöd|investerings-/i,
 ];
-// H1.7-upptäckt: "680 000 kr" för Tranås Aktivitetsstöd är EN rent skriven
-// siffra (klarar filtret ovan) men anteckningen säger "Årlig budget
-// 680 000 kr för 2026" — en KOMMUNPOOL delad mellan alla föreningar, inte
-// vad en enskild förening kan få. Belopp-fältet själv skiljer inte pool
-// från per-förening-tak, så en andra spärr på anteckningen krävs specifikt
-// för förstasidans "detta kan NI få"-påstående (kommunsidans egen dd
-// berörs inte här, samma ambiguitet finns kvar där tills datan rättas).
-const POOL_RE = /totalt|total budget|årlig budget|fördelas (mellan|på)|delas (mellan|på)/i;
-
-function talUrEnkeltBelopp(belopp: string): number | null {
-  const match = belopp.match(ENDA_TAL_RE) ?? belopp.match(TAK_RE);
-  if (!match) return null;
-  const tal = Number(match[1].replace(/[\s.]/g, ''));
-  return Number.isFinite(tal) && tal > 0 ? tal : null;
-}
+// "Rent tal"-filtret (klarar "3 000 kronor per år" men inte "Max 50% av
+// kostnaden...") OCH kommunpool-spärren (Tranås Aktivitetsstöd-fyndet,
+// H1.7) flyttade till beloppArEttEnkeltTal() (kommunTyper.ts) 2026-08-12
+// (F8) — F②:s ankringsrad på kommunsidans köpruta och utkastvyn behövde
+// SAMMA regel, inte tre separata gissningar som drev isär.
 
 interface BeloppKort {
   kommun: string;
@@ -126,8 +113,7 @@ const olastaKandidater: BeloppKort[] = [];
 for (const k of kommuner) {
   for (const b of k.bidrag) {
     if (!b.belopp) continue;
-    if (b.anteckning && POOL_RE.test(b.anteckning)) continue;
-    const tal = talUrEnkeltBelopp(b.belopp);
+    const tal = beloppArEttEnkeltTal(b);
     if (tal === null) continue;
     const kort: BeloppKort = { kommun: k.kommun, kommunSlug: k.kommun_slug, bidragNamn: b.namn, bidragId: b.id, belopp: b.belopp, tal };
     if (b.belopp_status === 'kontrollast') kontrollastaKandidater.push(kort);
@@ -427,10 +413,18 @@ const forslagKommun = svarsytaKontrollast[0]?.kommun ?? null;
     margin: var(--fg-space-2) auto var(--fg-space-8);
   }
 
-  /* Sidfotscentreringen (Jacob, 2026-08-12: "fortfarande vänsterställd,
-     bör vara centrerad som resten") flyttad till global.css:s .site-footer
-     — samma oavsiktliga glapp fanns på kommun-/tratt-sidorna (main och
-     footer fick identisk padding i samma commit 2026-07-10, bara main
-     fick margin:auto). En sanning, ett ställe — ingen sidscoped override
-     kvar här. */
+  /* F8 (2026-08-12, Jacob): global.css:s .site-footer ärver nu main:s EGNA
+     boxmodell (1100px) och kapar bara textens p-element vid --fg-lasbredd,
+     vänsterställt — rätt sitewide-default, eftersom varje annan sidas
+     brödtext (kommun, tratt) SJÄLV står vänsterställd på main:s inre kant.
+     Förstasidan är undantaget: dess EGNA huvudinnehåll (.start-kolumn) är
+     medvetet centrerat (Design runda 15–16, H1.1), inte vänsterställt —
+     så bara här måste sidfotens text centreras tillbaka för att fortsätta
+     dela kolumn med resten av sidan (kort/kolumn båda 540px på x=627,
+     Jacob bekräftat). :global() eftersom .site-footer renderas av
+     Base.astro, utanför den här filens scope. */
+  :global(.site-footer > p) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
