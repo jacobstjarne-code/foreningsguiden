@@ -32,6 +32,7 @@
  */
 import { BEVAKNING } from './content';
 import { trackEvent } from './umami';
+import { leggTillBevakatBidrag } from './foreningsprofil';
 
 const BEVAKADE_KEY = 'foreningsguiden:bevakade-kommuner:v1';
 
@@ -134,6 +135,12 @@ export function initBevakaWidgets(): void {
           if (!res.ok || !json.ok) throw new Error('svar ej ok');
 
           if (kommunSlug) markeraBevakad(kommunSlug, bidragId);
+          // E2 "lager ett" (Jacob 2026-08-11): bara BIDRAG-scopade
+          // bevakningar (bidragId satt) räknas som "sökt/bevakat DET HÄR
+          // bidraget" — en kommun-bred bevakning (giltighetskontrollen,
+          // eller denna widget utan bidragId på registrera/index.astro)
+          // säger inget om ETT specifikt bidrag.
+          if (kommunSlug && bidragId) leggTillBevakatBidrag(kommunSlug, bidragId);
           trackEvent('bevakning_skickad', { kommun: kommunSlug });
           const kvitto = document.createElement('p');
           kvitto.className = 'bevaka-rad-kvitto';

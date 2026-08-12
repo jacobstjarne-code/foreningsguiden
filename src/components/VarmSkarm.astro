@@ -1,0 +1,400 @@
+---
+// VarmSkarm — E (ARBETSORDER 2026-08-11, mock "Runda 12 · Inte förklarad.
+// Byggd."). Ersätter EKERN (kommunsidans kalla första skärm, B1) när
+// Foreningsprofil.foreningsnamn är känt klientsidan (E1). SSR-renderad
+// hidden som allt annat progressivt-förbättrat på sajten (IgenkanningsRad-
+// mönstret) — synligheten (E1) och de besökar-specifika bitarna (E2/E4)
+// avgörs av <script> nedan, ALDRIG server-sidan (statisk sida, känner
+// inte besökaren). E3 (målgrupp, inte ett påstående om henne) är statisk
+// per bidrag — renderas direkt här, ingen JS krävs för den delen.
+//
+// Kortstilen (belopp/badge/namn/beskrivning) är EGEN, inte återanvänd
+// BidragRegisterRad/BidragDjup — mocken visar en tydligt annan, "big
+// number"-orienterad kortform än registrets kompakta rader (D2), och
+// försöket att pressa in mockens exakta mått i en delad komponent hade
+// gjort BÅDA sämre. Samma tokens (--fg-*), inga nya färger.
+import type { Kommun, Bidrag } from '../lib/kommuner';
+import { formatDate, earliestDeadlineISO, daysUntil, relativFrist, VERKSAMHET_FORENING_LABELS, svenskLista } from '../lib/kommuner';
+import { VARM_SKARM } from '../lib/content';
+
+export interface Props {
+  kommun: Kommun;
+  today: string;
+  // Samma ordning som KommunSidaFull/KommunProgression redan sorterar i
+  // (tidigast deadline först, löpande sist) — plain Bidrag[], dateISO
+  // räknas här i stället för att kräva att varje anropsställe skickar in
+  // en förformad {bidrag, dateISO}-form.
+  sortedBidrag: Bidrag[];
+}
+
+const { kommun, today, sortedBidrag: sortedBidragRaw } = Astro.props;
+const sortedBidrag = sortedBidragRaw.map((bidrag) => ({ bidrag, dateISO: earliestDeadlineISO(bidrag, today) }));
+
+const introText = VARM_SKARM.intro
+  .replace('{kommun}', kommun.kommun)
+  .replace('{antal}', String(kommun.bidrag.length));
+const signaturText = VARM_SKARM.signaturRad.replace('{datum}', formatDate(kommun.verifierad));
+
+// E3 — "riktar sig till {malgrupp}", ingen rad om foreningstyp saknas
+// eller ingen av värdena har en label (gissar aldrig fram en målgrupp).
+function riktarSigTillText(bidrag: Bidrag): string | null {
+  if (!bidrag.foreningstyp || bidrag.foreningstyp.length === 0) return null;
+  const etiketter = bidrag.foreningstyp
+    .map((v) => VERKSAMHET_FORENING_LABELS[v])
+    .filter((label): label is string => Boolean(label))
+    .map((label) => `${label}ar`); // "idrottsförening" → "idrottsföreningar" (regelbunden -förening-böjning)
+  if (etiketter.length === 0) return null;
+  return VARM_SKARM.riktarSigTill.replace('{malgrupp}', svenskLista(etiketter));
+}
+
+function radDatumText(bidrag: Bidrag, dateISO: string | null): string {
+  if (dateISO) return formatDate(dateISO);
+  if (bidrag.deadlines.typ === 'relativ') return relativFrist(bidrag) ?? 'löpande ansökan';
+  if (bidrag.deadlines.typ === 'okand') return 'inget publicerat datum';
+  return 'löpande ansökan';
+}
+
+const forsta = sortedBidrag.slice(0, 2);
+const resten = sortedBidrag.slice(2);
+---
+<div
+  class="varm-skarm"
+  data-varm-skarm
+  hidden
+  data-kommun-slug={kommun.kommun_slug}
+  data-regel-typ={kommun.giltighet_regel?.typ ?? ''}
+  data-regel-antal={kommun.giltighet_regel?.antal ?? ''}
+>
+  <div class="varm-skarm__statusrad">
+    <span class="varm-skarm__brand">Föreningsguiden</span>
+    <span class="varm-skarm__kommun-tag">{kommun.kommun.toUpperCase()}</span>
+  </div>
+
+  <div class="varm-skarm__hero">
+    <p class="varm-skarm__eyebrow" data-varm-namn></p>
+    <h2 class="varm-skarm__h2" set:html={VARM_SKARM.h2} />
+    <p class="varm-skarm__kursiv">{VARM_SKARM.kursivRad}</p>
+    <p class="varm-skarm__intro" set:html={introText} />
+    <div class="varm-skarm__signatur">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+      <span class="varm-skarm__signatur-text" set:html={signaturText} />
+    </div>
+  </div>
+
+  {/* E4 — tom mall, JS fyller/visar bara när Foreningsprofil.giltighet
+     matchar DENNA kommun och kommunens giltighet_regel ger ett datum
+     (samma ärlighetstrappa som C4/GiltighetsKontroll redan kräver). */}
+  <div class="varm-skarm__lattnad" data-varm-lattnad hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.7 21a2 2 0 0 1-3.4 0" /></svg>
+    <div>
+      <div class="varm-skarm__lattnad-rad1" data-varm-lattnad-rad1></div>
+      <div class="varm-skarm__lattnad-rad2" data-varm-lattnad-rad2></div>
+    </div>
+  </div>
+
+  <div class="varm-skarm__register">
+    <p class="varm-skarm__register-label">{VARM_SKARM.registerLabel}</p>
+    <div class="varm-skarm__kort-lista">
+      {forsta.map(({ bidrag, dateISO }) => (
+        <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
+          <div class="varm-skarm__kort-topp">
+            <span class="varm-skarm__kort-belopp">{bidrag.belopp ?? 'Belopp ej publikt'}</span>
+            {dateISO && <span class="varm-skarm__kort-badge">{formatDate(dateISO)} · {daysUntil(dateISO, today)} dgr</span>}
+          </div>
+          <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
+          <div class="varm-skarm__kort-beskrivning" data-varm-kort-beskrivning>{riktarSigTillText(bidrag)}</div>
+        </div>
+      ))}
+    </div>
+    {resten.length > 0 && (
+      <details class="varm-skarm__resten">
+        <summary class="varm-skarm__resten-rad">
+          <span>{VARM_SKARM.visaAllaMall.replace('{antal}', String(resten.length))}</span>
+          <span class="varm-skarm__resten-lank">{VARM_SKARM.visaAllaLank}</span>
+        </summary>
+        <div class="varm-skarm__kort-lista">
+          {resten.map(({ bidrag, dateISO }) => (
+            <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
+              <div class="varm-skarm__kort-topp">
+                <span class="varm-skarm__kort-belopp">{bidrag.belopp ?? 'Belopp ej publikt'}</span>
+                <span class="varm-skarm__kort-badge">{radDatumText(bidrag, dateISO)}</span>
+              </div>
+              <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
+              <div class="varm-skarm__kort-beskrivning" data-varm-kort-beskrivning>{riktarSigTillText(bidrag)}</div>
+            </div>
+          ))}
+        </div>
+      </details>
+    )}
+  </div>
+</div>
+
+<script>
+  import { getForeningsprofil } from '../lib/foreningsprofil';
+  import { berakForfallodatum, addMonths } from '../lib/kommunTyper';
+  import { VARM_SKARM } from '../lib/content';
+
+  const MANADSNAMN = [
+    'januari', 'februari', 'mars', 'april', 'maj', 'juni',
+    'juli', 'augusti', 'september', 'oktober', 'november', 'december',
+  ];
+
+  // E2 — texten som redan står i markupen (E3:s "riktar sig till X") byts
+  // ut mot "Det ni redan sökt förr." för de kort vars bidrag-id finns i
+  // Foreningsprofil.bevakadeBidrag för DENNA kommun. Körs oavsett om
+  // varma skärmen visas — no-op om profilen saknar namn (E1 avgör bara
+  // om HELA skärmen syns, inte om denna funktion får köras).
+  document.querySelectorAll<HTMLElement>('[data-varm-skarm]').forEach((root) => {
+    const profil = getForeningsprofil();
+    const kommunSlug = root.dataset.kommunSlug ?? '';
+
+    const bevakade = new Set(
+      (profil?.bevakadeBidrag ?? [])
+        .filter((b) => b.kommunSlug === kommunSlug)
+        .map((b) => b.bidragId)
+    );
+    root.querySelectorAll<HTMLElement>('[data-varm-kort]').forEach((kort) => {
+      if (!bevakade.has(kort.dataset.bidragId ?? '')) return;
+      const beskrivning = kort.querySelector<HTMLElement>('[data-varm-kort-beskrivning]');
+      if (beskrivning) beskrivning.textContent = VARM_SKARM.redanSokt;
+    });
+
+    // E4 — lättnadsremsan, bara när giltighet.kommunSlug matchar DENNA
+    // kommun (Foreningsprofil.giltighet bär sin egen kommunSlug, se
+    // foreningsprofil.ts) och kommunens giltighet_regel faktiskt ger ett
+    // datum. Ingendera → ingen rad, gissar aldrig.
+    const giltighet = profil?.giltighet;
+    const regelTyp = root.dataset.regelTyp as import('../lib/kommunTyper').GiltighetRegelTyp | undefined;
+    const regelAntalRaw = root.dataset.regelAntal ?? '';
+    if (giltighet && giltighet.kommunSlug === kommunSlug && regelTyp) {
+      const regel = { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), kalla_url: '' };
+      const forfallodatum = berakForfallodatum(regel, giltighet.arsmotesdatum);
+      if (forfallodatum) {
+        const [fy, fm] = forfallodatum.split('-').map(Number);
+        const paminnISO = addMonths(forfallodatum, -2);
+        const [, pm] = paminnISO.split('-').map(Number);
+
+        const rad1 = root.querySelector<HTMLElement>('[data-varm-lattnad-rad1]');
+        const rad2 = root.querySelector<HTMLElement>('[data-varm-lattnad-rad2]');
+        if (rad1) rad1.textContent = VARM_SKARM.lattnadRad1.replace('{manad}', MANADSNAMN[fm - 1]).replace('{ar}', String(fy));
+        if (rad2) rad2.textContent = VARM_SKARM.lattnadRad2.replace('{paminnManad}', MANADSNAMN[pm - 1]);
+        root.querySelector<HTMLElement>('[data-varm-lattnad]')?.removeAttribute('hidden');
+      }
+    }
+  });
+</script>
+
+<style>
+  .varm-skarm {
+    background: #14100a;
+    border-radius: 32px;
+    padding: 12px;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    margin: var(--fg-space-6) 0 var(--fg-space-7);
+  }
+
+  .varm-skarm__statusrad {
+    background: var(--fg-ink);
+    padding: 14px 20px 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .varm-skarm__brand {
+    font-family: var(--fg-font-display);
+    font-size: 16px;
+    font-weight: var(--fg-weight-bold);
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .varm-skarm__kommun-tag {
+    font-family: var(--fg-font-mono);
+    font-size: 11px;
+    color: #b7d6c1;
+    letter-spacing: 0.04em;
+  }
+
+  .varm-skarm__hero {
+    position: relative;
+    padding: 30px 24px 26px;
+    background: linear-gradient(180deg, #f6f1e6 0%, #efe9de 100%);
+  }
+
+  .varm-skarm__eyebrow {
+    font-family: var(--fg-font-mono);
+    font-size: 12px;
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-accent);
+    margin: 0;
+  }
+
+  .varm-skarm__h2 {
+    margin: 12px 0 0;
+    font-family: var(--fg-font-display);
+    font-size: 2.5rem;
+    line-height: 1.02;
+    font-weight: var(--fg-weight-display);
+    letter-spacing: -0.025em;
+    color: var(--fg-ink);
+  }
+
+  .varm-skarm__kursiv {
+    margin: 8px 0 0;
+    font-family: var(--fg-font-sans);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--fg-accent);
+  }
+
+  .varm-skarm__intro {
+    margin: 20px 0 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--fg-ink);
+    max-width: 30ch;
+  }
+
+  .varm-skarm__signatur {
+    margin: 22px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fg-accent);
+  }
+
+  .varm-skarm__signatur-text {
+    font-family: var(--fg-font-sans);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--fg-ink-muted);
+    line-height: 1.35;
+  }
+
+  .varm-skarm__lattnad {
+    background: var(--fg-accent);
+    color: #fff;
+    padding: 15px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .varm-skarm__lattnad-rad1 {
+    font-size: 16px;
+    font-weight: var(--fg-weight-bold);
+    line-height: 1.35;
+  }
+
+  .varm-skarm__lattnad-rad2 {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #e6efe7;
+  }
+
+  .varm-skarm__register {
+    background: #efe9de;
+    padding: 22px 20px 26px;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .varm-skarm__register-label {
+    font-family: var(--fg-font-mono);
+    font-size: 11px;
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0 0 12px;
+  }
+
+  .varm-skarm__kort-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .varm-skarm__kort {
+    background: var(--fg-surface);
+    border: 2px solid var(--fg-ink);
+    border-radius: 12px;
+    padding: 16px 17px;
+  }
+
+  .varm-skarm__kort-topp {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .varm-skarm__kort-belopp {
+    font-family: var(--fg-font-display);
+    font-size: 1.875rem;
+    font-weight: var(--fg-weight-display);
+    line-height: 1;
+    color: var(--fg-ink);
+  }
+
+  .varm-skarm__kort-badge {
+    font-family: var(--fg-font-mono);
+    font-size: 12px;
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-accent);
+    background: var(--fg-accent-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    flex: none;
+  }
+
+  .varm-skarm__kort-namn {
+    margin-top: 8px;
+    font-size: 17px;
+    font-weight: var(--fg-weight-bold);
+    line-height: 1.25;
+  }
+
+  .varm-skarm__kort-beskrivning {
+    font-size: 14px;
+    color: var(--fg-ink-muted);
+    line-height: 1.4;
+    margin-top: 2px;
+    min-height: 1em;
+  }
+
+  .varm-skarm__resten {
+    margin-top: 10px;
+  }
+
+  .varm-skarm__resten-rad {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 4px 4px 0;
+    font-size: 15px;
+    color: var(--fg-ink-muted);
+    cursor: pointer;
+    list-style: none;
+    min-height: 46px;
+  }
+
+  .varm-skarm__resten-rad::-webkit-details-marker {
+    display: none;
+  }
+
+  .varm-skarm__resten-lank {
+    color: var(--fg-accent);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .varm-skarm__resten .varm-skarm__kort-lista {
+    margin-top: 10px;
+  }
+</style>

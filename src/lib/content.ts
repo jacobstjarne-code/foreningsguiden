@@ -866,6 +866,41 @@ export const EKERN = {
 };
 
 /**
+ * DEN VARMA SKÄRMEN — E (ARBETSORDER 2026-08-11, mock: "Runda 12 · Inte
+ * förklarad. Byggd."). Ersätter EKERN när Foreningsprofil.foreningsnamn
+ * är känt klientsidan (E1) — annars gäller B/EKERN oförändrat. All text
+ * ordagrant ur mocken (id="12a") — ARBETSORDER säger mockarna är
+ * auktoritativa för form och ytcopy, ingen ny svensk prosa här.
+ */
+export const VARM_SKARM = {
+  h2: 'Ni behöver inte<br>läsa allt.',
+  kursivRad: 'Det har vi gjort åt er.',
+  intro: '{kommun} har <strong>{antal} föreningsbidrag</strong>. De flesta känner till två. Vi läste alla och ställde dem i ordning efter er.',
+  signaturRad: 'Läst för hand {datum} — av oss,<br>inte en robot.',
+
+  // E4 — lättnadsremsan. Två rader, samma sakuppgift som GILTIGHETSKOLL.
+  // nivaEttSvar (C3.1) men i mockens egen tvåradsform, med en tredje
+  // mening tillagd. Visas bara när Foreningsprofil.giltighet + kommunens
+  // giltighet_regel BÅDA ger ett beräknat datum (samma ärlighetstrappa
+  // som C4 redan kräver — ingen data, ingen rad).
+  lattnadRad1: 'Ni är godkända till {manad} {ar}.',
+  lattnadRad2: 'Vi säger till i {paminnManad}, innan det går ut. En sak mindre att bära.',
+
+  registerLabel: 'Börjar med det som brådskar för er',
+  // E2 — bara när bidraget finns i Foreningsprofil.bevakadeBidrag.
+  redanSokt: 'Det ni redan sökt förr.',
+  // E3 (Kanon §6.4) — ersätter det gamla "Nytt för er — passar en
+  // gymnastikförening" (ett påstående om HENNE). Vi säger vad kommunen
+  // riktar bidraget till, inte att det passar henne. {malgrupp} =
+  // svenskLista() av bidrag.foreningstyp via VERKSAMHET_FORENING_LABELS,
+  // pluraliserat. Utelämnas helt (ingen rad) om foreningstyp saknas —
+  // gissar aldrig fram en målgrupp.
+  riktarSigTill: 'Riktar sig till {malgrupp}.',
+  visaAllaMall: 'Och {antal} till, ordnade efter er.',
+  visaAllaLank: 'Visa alla ↓',
+};
+
+/**
  * IGENKÄNNINGSRADEN — EN_PROFIL_ALLA_YTOR.md (Design, runda 7, R7.2/R7.3),
  * kommunsidan. Tre tillstånd: profil för DENNA kommun (matchMall*),
  * profil för ANNAN kommun (felKommunMall*), ingen profil/ingen verksamhet

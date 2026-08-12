@@ -9,6 +9,7 @@
 // getStaticPaths.
 import Base from '../layouts/Base.astro';
 import BidragRegisterRad from './BidragRegisterRad.astro';
+import VarmSkarm from './VarmSkarm.astro';
 import StaleWarning from './StaleWarning.astro';
 import OmverifieringsVarning from './OmverifieringsVarning.astro';
 import TackningsVarning from './TackningsVarning.astro';
@@ -268,8 +269,15 @@ const webPageJsonLd = {
      bidrag) kräver ingen ny kod här — svarForstEtt-mallen och den
      tidigare Gislaved-datastädningen (2026-07-31) redan strukturellt
      korrekta: bara kommun.bidrag[] (aldrig forutsattningar[]) räknas. */}
+  {/* E1 (ARBETSORDER 2026-08-11, "den varma skärmen"): VarmSkarm ersätter
+     ekern (nedan) klientsidan när Foreningsprofil.foreningsnamn är känt —
+     SSR-renderad hidden, precis som ekern SSR-renderas visible. Ordningen
+     (VarmSkarm före ekern i DOM) spelar ingen roll, bara en av dem är
+     synlig åt gången (se <script> nedan). */}
+  <VarmSkarm kommun={kommun} today={today} sortedBidrag={sortedBidrag} />
+
   {svarForst && (
-    <div class="ekern">
+    <div class="ekern" data-ekern-kall>
       <div class="ekern__band ekern__band--1">
         <p class="ekern__svar-forst fg-lasbredd">{svarForst}</p>
         {/* TILLSTANDET_OLAST.md 4c, yta 1 (Jacob 2026-08-03 kväll):
@@ -390,6 +398,21 @@ const webPageJsonLd = {
   import { getForeningsprofil, saveForeningsprofil } from '../lib/foreningsprofil';
   import { sorteraForTratt } from '../lib/matching';
   import { VERKSAMHET_FORENING_LABELS, type Kommun } from '../lib/kommunTyper';
+
+  // E1 (ARBETSORDER 2026-08-11): VarmSkarm ersätter ekern när Foreningsprofil.
+  // foreningsnamn är känt — annars gäller B (ekern) helt oförändrat, båda
+  // SSR-renderade, bara synligheten byts här. Namnet fylls i samma steg.
+  {
+    const varmSkarm = document.querySelector<HTMLElement>('[data-varm-skarm]');
+    const ekernKall = document.querySelector<HTMLElement>('[data-ekern-kall]');
+    const foreningsnamn = getForeningsprofil()?.foreningsnamn;
+    if (varmSkarm && foreningsnamn) {
+      const namnEl = varmSkarm.querySelector<HTMLElement>('[data-varm-namn]');
+      if (namnEl) namnEl.textContent = foreningsnamn;
+      varmSkarm.removeAttribute('hidden');
+      ekernKall?.setAttribute('hidden', '');
+    }
+  }
 
   const el = document.querySelector<HTMLElement>('[data-bevakning-antal]');
   const slug = el?.dataset.kommunSlug;

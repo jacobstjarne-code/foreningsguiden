@@ -49,6 +49,17 @@ export interface Foreningsprofil {
   // jämför alltså giltighet.kommunSlug mot sin EGEN kommun_slug innan
   // den litar på fältet.
   giltighet: { kommunSlug: string; arsmotesdatum: string } | null;
+  // E2 (ARBETSORDER 2026-08-11, "den varma skärmen") + Jacobs uppföljning
+  // 2026-08-11 ("lager ett", direkt byggbart): "Det ni redan sökt förr"
+  // kräver en bevakning på JUST DET bidraget — INTE en e-postbaserad
+  // uppslagning (mejladress ska ALDRIG i localStorage eller en query-
+  // sträng, "en uppräkningslucka, inte en integritetsdetalj"). Klienten
+  // vet redan vad hon bevakade i samma ögonblick hon skickar bevaka-
+  // formuläret (bevakaKlient.ts) — skrivs direkt hit, ingen uppslagning.
+  // "Lager två" (köp + andra enheter, via bekräftelsetoken i stället för
+  // e-post) är medvetet INTE byggt än — väntar tills C är live/
+  // verifierad, se Jacobs kommentar.
+  bevakadeBidrag: { kommunSlug: string; bidragId: string }[];
 }
 
 // B3.8 (SPEC B3, Jacob 2026-08-06 — "den viktigaste punkten"): v1 → v2.
@@ -70,6 +81,7 @@ const TOM_PROFIL: Foreningsprofil = {
   uppdaterad: '',
   foreningsnamn: null,
   giltighet: null,
+  bevakadeBidrag: [],
 };
 
 function harLocalStorage(): boolean {
@@ -105,6 +117,21 @@ export function saveForeningsprofil(patch: Partial<Omit<Foreningsprofil, 'uppdat
     }
   }
   return next;
+}
+
+/**
+ * E2 "lager ett" (Jacob 2026-08-11) — lägger till ett (kommunSlug,
+ * bidragId)-par i bevakadeBidrag, dedupat. saveForeningsprofil() gör
+ * bara en ytlig spread — ett rakt `saveForeningsprofil({bevakadeBidrag:
+ * [x]})` hade ERSATT hela listan, inte lagt till. Samma "läs-och-
+ * mergea"-princip som addBidragBevakning (subscribers.ts) redan följer
+ * server-sidan.
+ */
+export function leggTillBevakatBidrag(kommunSlug: string, bidragId: string): Foreningsprofil {
+  const existing = getForeningsprofil() ?? TOM_PROFIL;
+  const redanBevakat = existing.bevakadeBidrag.some((b) => b.kommunSlug === kommunSlug && b.bidragId === bidragId);
+  if (redanBevakat) return existing;
+  return saveForeningsprofil({ bevakadeBidrag: [...existing.bevakadeBidrag, { kommunSlug, bidragId }] });
 }
 
 export function clearForeningsprofil(): void {
