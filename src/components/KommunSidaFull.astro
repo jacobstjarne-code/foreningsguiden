@@ -332,12 +332,17 @@ const webPageJsonLd = {
 
   {kommun.bidrag.length > 0 && (
     <section id="alla-bidrag">
-      {/* D2: "Registret ÄR sidan" — rubriken oförändrad (samma text som
-         EKERN.band3Lank1:s ankarlänk hit, ingen ny prosa), men raderna
-         är nu länkar till bidragets egen S2-URL (D1) i stället för
-         BidragCard.astro:s fällda dl med hela innehållet upprepat —
-         det var precis den dubbletten ordern pekade ut. */}
-      <h2>Alla bidrag i {kommun.kommun}, i detalj</h2>
+      {/* D2 (2026-08-12, Jacob): rubriken "Alla bidrag i {kommun}, i
+         detalj" TAGEN BORT — raderna länkar till bidragets egen D1-URL
+         i stället för att visa hela innehållet inline (det var själva
+         dubbletten ordern pekade ut), så "i detalj" är inte längre sant
+         om den HÄR sidan. "Registret ÄR sidan": ingen ny rubrik i
+         stället — sektionen behöver ingen egen announcing-rubrik utöver
+         #alla-bidrag-ankaret som redan pekas ut från ekerns band 3
+         (EKERN.band3Lank1, oförändrad — den länken är fortfarande sann,
+         den leder till "alla bidrag", bara inte längre till en "i
+         detalj"-vy). Ingenting raderas: full information finns kvar,
+         bara på bidragets egen URL (D1), inte upprepad här. */}
       {visaTackningsvarning && <TackningsVarning kommun={kommun.kommun} />}
       <IgenkanningsRad kommunSlug={kommun.kommun_slug} />
       {/* R7.4 (EN_PROFIL_ALLA_YTOR.md, runda 7): grupperad vy, dold tills
