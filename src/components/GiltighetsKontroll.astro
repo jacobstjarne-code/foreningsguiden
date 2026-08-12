@@ -176,13 +176,15 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
       data.set('kommun', kommunSlug);
       data.set('arsmotesdatum', arsmotesdatum);
 
-      // E1-uppföljning (Jacob 2026-08-11): speglar föreningsnamnet till
-      // Foreningsprofil (localStorage), samma "tomt skriver aldrig
-      // över"-regel som EmailSignup.astro. Sparas OAVSETT om själva
-      // fetch:en lyckas — hon skrev namnet, det är sant oberoende av
-      // nätverksutfallet.
+      // E1/E4-uppföljning (Jacob 2026-08-11): speglar föreningsnamn +
+      // årsmötesdatum till Foreningsprofil (localStorage), samma "tomt
+      // skriver aldrig över"-regel som EmailSignup.astro. Sparas OAVSETT
+      // om själva fetch:en lyckas — hon skrev det, sant oberoende av
+      // nätverksutfallet. giltighet bär sin egen kommunSlug (se
+      // foreningsprofil.ts) — rör aldrig profilens delade kommunSlug.
       const foreningsnamn = (data.get('foreningsnamn') ?? '').toString().trim();
       if (foreningsnamn) saveForeningsprofil({ foreningsnamn });
+      if (arsmotesdatum) saveForeningsprofil({ giltighet: { kommunSlug, arsmotesdatum } });
 
       try {
         const res = await fetch('/api/giltighetsbevakning', { method: 'POST', body: data });

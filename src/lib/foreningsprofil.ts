@@ -39,6 +39,16 @@ export interface Foreningsprofil {
   // ännu, skilt från en framtida tom sträng (uppstår inte — se
   // saveForeningsnamnFranFormular, sparar aldrig ett tomt fält).
   foreningsnamn: string | null;
+  // E4 ("den gröna remsan på löftet att minnas") — speglad från
+  // GiltighetsKontroll.astro:s epostForm, SAMMA ögonblick som
+  // foreningsnamn ovan. Bär sin EGEN kommunSlug i stället för att
+  // återanvända profilens delade kommunSlug-fält (som matchningstratten/
+  // IgenkanningsRad redan äger, för ett annat syfte — att interagera med
+  // giltighetskontrollen på kommun X ska inte tyst byta "hennes kommun"
+  // för bidragsgrupperingen på en helt annan sida). En kommunsida
+  // jämför alltså giltighet.kommunSlug mot sin EGEN kommun_slug innan
+  // den litar på fältet.
+  giltighet: { kommunSlug: string; arsmotesdatum: string } | null;
 }
 
 // B3.8 (SPEC B3, Jacob 2026-08-06 — "den viktigaste punkten"): v1 → v2.
@@ -59,6 +69,7 @@ const TOM_PROFIL: Foreningsprofil = {
   sokt: null,
   uppdaterad: '',
   foreningsnamn: null,
+  giltighet: null,
 };
 
 function harLocalStorage(): boolean {
