@@ -426,4 +426,17 @@ const forslagKommun = svarsytaKontrollast[0]?.kommun ?? null;
     color: var(--fg-accent);
     margin: var(--fg-space-2) auto var(--fg-space-8);
   }
+
+  /* Sidfoten (Base.astro, .site-footer) är sitewide vänsterställd med
+     egen max-width — rätt på kommun-/tratt-sidorna (som är vänsterställda
+     genomgående, inte centrerade kolumner), men fel HÄR där allt ovanför
+     nu är en centrerad 540px-kolumn (Jacob, 2026-08-12: "fortfarande
+     vänsterställd, bör vara centrerad som resten"). :global() eftersom
+     .site-footer renderas av Base.astro, utanför den här filens scope —
+     override gäller bara förstasidan, ändrar inte de andra sidornas
+     layoutspråk. */
+  :global(.site-footer) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
