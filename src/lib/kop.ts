@@ -50,6 +50,19 @@ const inlamningsPaminnelseKey = (stripeSessionId: string, bidragId: string) =>
 // bidragsutkast-köp rör INTE de croneen bara för att typen finns nu.
 export type KopProdukt = 'registrering' | 'bidragsutkast';
 
+// F① (konverteringsstapeln, 2026-08-12, Jacob): "de fyra köpen i Gislaved
+// är Jacobs egna från juli" — kända testköp, uteslutna ur RÄKNINGAR som
+// visas för besökare (socialt bevis-tröskeln, kopantal.ts). Uteslutna
+// bara därifrån — hamtaAllaKop()/adminvyn/kvitton visar dem oförändrat,
+// Jacob behöver se sina egna testtransaktioner där. Byggd nu medan talet
+// är litet och synligt, inte som en efterhandsstädning.
+const TESTKOP_EPOSTADRESSER = new Set(['jacob.stjarne@gmail.com']);
+
+/** Sant för ett känt testköp (se TESTKOP_EPOSTADRESSER) — uteslut ur besökarvända räkningar, aldrig ur adminvyn/kvitton. */
+export function arTestkop(entry: Pick<KopEntry, 'email'>): boolean {
+  return TESTKOP_EPOSTADRESSER.has(entry.email.toLowerCase());
+}
+
 // H19 (SPEC: Kluster 1 — efter-köp-ytan, utfallsslingan): tre
 // svarsalternativ, klartext-literaler rakt av som URL-path-segment
 // (api/utfall/[session]/[bidrag]/[svar].ts) — inga koder att slå upp.

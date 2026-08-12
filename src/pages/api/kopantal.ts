@@ -12,7 +12,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getKommunBySlug } from '../../lib/kommuner';
-import { hamtaAllaKop } from '../../lib/kop';
+import { hamtaAllaKop, arTestkop } from '../../lib/kop';
 
 export const GET: APIRoute = async ({ url }) => {
   const slug = url.searchParams.get('kommun');
@@ -21,7 +21,9 @@ export const GET: APIRoute = async ({ url }) => {
   }
 
   const alla = await hamtaAllaKop();
-  const antal = alla.filter((k) => k.kommunSlug === slug).length;
+  // F① (2026-08-12): kända testköp (kop.ts, arTestkop) räknas inte in —
+  // annars räknar den sociala bevis-tröskeln egna testtransaktioner.
+  const antal = alla.filter((k) => k.kommunSlug === slug && !arTestkop(k)).length;
   return new Response(JSON.stringify({ antal }), {
     headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
   });
