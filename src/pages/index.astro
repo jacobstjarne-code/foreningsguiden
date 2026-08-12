@@ -26,12 +26,23 @@
 // sträng — dubblering kvarstod, bara en nivå ner. Bytt mot TRATT.start.rubrik
 // ("Vad kan er förening söka?"), som redan fanns i GUIDE_TRATT_COPY.ts men
 // aldrig konsumerades här — ingen ny svensk text skriven.
+//
+// H1 (2026-08-12, Design runda 15–16, incoming/FORSTASIDAN_SVARAR_15-16.md):
+// "Rubriken frågade, sidan svarade aldrig" — tom sökruta, noll kr. Hela
+// .start-hero-sektionen (tratt-teaser: rubrik/ingress/knapp/disclaimer)
+// TAGEN BORT — tratten är sedan 2026-07-31 redan en textlänk i navet
+// (Base.astro, "Vad kan ni söka?"), så H1.6 var redan uppfylld där; kvar
+// var bara att sluta duplicera den som en knapp på sidan. LiveDataKort
+// (stort "litet tal, stor sanning"-kort) ersatt av en liten bevisrad
+// (H1.5) — orphan efter det här, borttagen härifrån men filen kvar
+// orörd tills Design/Jacob bestämmer om den ska hem någon annanstans.
+// .start-prisloftet (gamla "gratis"-stycket) borttaget — samma besked
+// ligger nu i prisraden (H1.3), två separata "gratis"-påståenden hade
+// motsagt "ett drag"-principen.
 import Base from '../layouts/Base.astro';
 import UrgencyChip from '../components/UrgencyChip.astro';
-import LiveDataKort from '../components/LiveDataKort.astro';
 import { loadKommuner, getDeadlineEntries, formatDate, daysUntil, getUrgency, todayISO } from '../lib/kommuner';
-import { START, SIDFOT, SITE_NAMN } from '../lib/content';
-import { TRATT } from '../../GUIDE_TRATT_COPY';
+import { START, SITE_NAMN, FORSTASIDAN_SVARAR } from '../lib/content';
 
 const kommuner = loadKommuner();
 const today = todayISO();
@@ -51,25 +62,145 @@ for (const e of getDeadlineEntries(today).filter((e) => !e.isLopande)) {
 }
 const narmast = kommandeDeadlines[0] ?? null;
 const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
+
+// H1.2 — svarsytans fyra belopp läses ur datan, ALDRIG skrivna som
+// strängar (annars ljuger sidan så fort GPT rättar Gislaveds nästa
+// startbidrag). Ett bidrags belopp är fri text ("210 kr/medlem", "Max
+// 50% av kostnaden, högst 200 000 kr, se § 4...") — talrikt provat mot
+// riktig data (se commit) innan den här formen valdes: varken renodlat
+// "högst tal" eller "lägst tal" över ALLA belopp duger, det ena drar in
+// hela kommunbudgetar ("800 000 kr" — ett kommunanslag, inte vad EN
+// förening får), det andra per-deltagare-ören. Filtret nedan kräver att
+// belopp-strängen är EN sak — bara talet (ev. med "/år", "per medlem")
+// eller ett explicit uttryckt tak ("upp till"/"max"/"högst") — inga
+// flerledade formler. Bland de kvarvarande, "störst tal" (Jacobs regel,
+// 2026-08-12: "kontrollästa belopp med högst tal") — verifierat mot
+// riktig data innan leverans: designdokumentets eget exempel (Gislaveds
+// Startbidrag, 5 000 kr) hamnar i just den här "enkla belopp"-mängden,
+// vilket bekräftade formen. Ingen hårdkodad kommunlista.
+const KR_TAL = '([0-9][0-9\\s.]*[0-9]|[0-9])\\s*(?:kr|kronor)';
+const ENDA_TAL_RE = new RegExp(`^\\s*${KR_TAL}(?:\\s*/\\s*\\S+|\\s+per\\s+\\S+(?:\\s+\\S+)?)?\\s*$`, 'i');
+const TAK_RE = new RegExp(`^\\s*(?:max|högst|upp till|dock högst)\\s+${KR_TAL}\\s*$`, 'i');
+
+function talUrEnkeltBelopp(belopp: string): number | null {
+  const match = belopp.match(ENDA_TAL_RE) ?? belopp.match(TAK_RE);
+  if (!match) return null;
+  const tal = Number(match[1].replace(/[\s.]/g, ''));
+  return Number.isFinite(tal) && tal > 0 ? tal : null;
+}
+
+interface BeloppKort {
+  kommun: string;
+  kommunSlug: string;
+  bidragNamn: string;
+  bidragId: string;
+  belopp: string;
+  tal: number;
+}
+
+const kontrollastaKandidater: BeloppKort[] = [];
+const olastaKandidater: BeloppKort[] = [];
+let kontrollastAntal = 0; // H1.5 — ALLA kontrollästa belopp, inte bara de "enkla" ovan
+for (const k of kommuner) {
+  for (const b of k.bidrag) {
+    if (b.belopp_status === 'kontrollast') kontrollastAntal++;
+    if (!b.belopp) continue;
+    const tal = talUrEnkeltBelopp(b.belopp);
+    if (tal === null) continue;
+    const kort: BeloppKort = { kommun: k.kommun, kommunSlug: k.kommun_slug, bidragNamn: b.namn, bidragId: b.id, belopp: b.belopp, tal };
+    if (b.belopp_status === 'kontrollast') kontrollastaKandidater.push(kort);
+    else if (b.belopp_status === 'olast') olastaKandidater.push(kort);
+  }
+}
+kontrollastaKandidater.sort((a, b) => b.tal - a.tal);
+olastaKandidater.sort((a, b) => b.tal - a.tal);
+
+// En kommun kan ha flera stora, rent skrivna belopp (Tranås hade tre över
+// 350 000 kr) — utan spärr blir alla tre korten samma kommuns absolut
+// största anslag, långt från designdokumentets "olika kommuner svarar
+// olika mycket". Högst en kort per kommun håller "högst tal" som regel
+// men gör svarsytan bred i stället för smal (uppmätt 2026-08-12).
+const sedda = new Set<string>();
+const svarsytaKontrollast: BeloppKort[] = [];
+for (const kort of kontrollastaKandidater) {
+  if (sedda.has(kort.kommunSlug)) continue;
+  sedda.add(kort.kommunSlug);
+  svarsytaKontrollast.push(kort);
+  if (svarsytaKontrollast.length === 3) break;
+}
+const svarsytaOlast = olastaKandidater[0] ?? null;
+const bevisText = FORSTASIDAN_SVARAR.bevisMall
+  .replace('{bidrag}', totalBidrag.toLocaleString('sv-SE'))
+  .replace('{kontrollasta}', kontrollastAntal.toLocaleString('sv-SE'));
+
+// H1.4 — "förslagskommun ifylld": samma regel som svarsytan (inte en
+// hårdkodad kommun) — kommunen bakom det högsta kontrollästa kortet,
+// redan bevisat med ett äkta belopp några rader ovanför i samma DOM.
+// Ett redigerbart sökfältsexempel, ingen personaliseringsclaim.
+const forslagKommun = svarsytaKontrollast[0]?.kommun ?? null;
+// "Andra söker"-chips (H1.4) INTE byggda — kräver riktig sök-/besöks-
+// statistik per kommun för att vara sant. Umami (MÄTNING-passet) har
+// bara varit igång sedan 2026-08-11 och exponerar ingen serverfrågbar
+// aggregering här. Att hitta på tre kommunnamn som "andra söker" hade
+// varit exakt den typen av påstådd data H1.2 uttryckligen varnar för.
+// Flaggat till Jacob i leveransrapporten, inte tyst utelämnat.
 ---
 <Base title={START.metaTitle} description={START.metaDescription}>
-  {/* D5 — mockens sökfält-först (9e). Postar till /kommuner/ (?sok=),
-     som förifyller samma KommunValjare-sökning SSR. */}
-  <section class="start-sok">
+  {/* H1.1 — hjälte, svarsyta och prisrad delar en centrerad 540px-kolumn
+     (.start-kolumn nedan). D5 — mockens sökfält-först (9e), postar till
+     /kommuner/ (?sok=), som förifyller samma KommunValjare-sökning SSR. */}
+  <section class="start-sok start-kolumn">
     <p class="start-sok__eyebrow">{SITE_NAMN}</p>
     <h1>Vad kan er förening få pengar för?</h1>
     <form class="start-sok__form" action="/kommuner/" method="GET">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-      <input type="text" name="sok" placeholder="Skriv er kommun" autocomplete="off" />
+      <input type="text" name="sok" placeholder="Skriv er kommun" autocomplete="off" value={forslagKommun ?? ''} />
     </form>
+
+    {/* H1.3 — prisraden, hjältens rad två. Statisk upplysning, ingen knapp. */}
+    <div class="start-sok__prisrad">
+      <div class="start-sok__pris">
+        <span class="start-sok__pris-etikett">{FORSTASIDAN_SVARAR.prisrad.gratisEtikett}</span>
+        <span class="start-sok__pris-text">{FORSTASIDAN_SVARAR.prisrad.gratisText}</span>
+      </div>
+      <div class="start-sok__pris start-sok__pris--betalt">
+        <span class="start-sok__pris-etikett">{FORSTASIDAN_SVARAR.prisrad.betaltEtikett}</span>
+        <span class="start-sok__pris-text">{FORSTASIDAN_SVARAR.prisrad.betaltText}</span>
+      </div>
+    </div>
   </section>
 
-  <p class="start-prisloftet">
-    Att hitta bidragen, se vad kommunen kräver och få påminnelse före sista dag är <strong>gratis</strong>. Vi tar betalt för arbetet.
-  </p>
+  {/* H1.2 — svarsytan: fyra riktiga belopp, aldrig ett tal utan status. */}
+  <ul class="svarsyta start-kolumn">
+    {svarsytaKontrollast.map((kort) => (
+      <li class="belopp-kort">
+        <a href={`/kommun/${kort.kommunSlug}/bidrag/${kort.bidragId}/`} class="belopp-kort__lank">
+          <span class="fg-read-mark" aria-hidden="true"></span>
+          <span class="belopp-kort__text">
+            <span class="belopp-kort__belopp">{kort.belopp}</span>
+            <span class="belopp-kort__namn">{kort.bidragNamn} · {kort.kommun}</span>
+          </span>
+        </a>
+      </li>
+    ))}
+    {svarsytaOlast && (
+      <li class="belopp-kort belopp-kort--olast">
+        <a href={`/kommun/${svarsytaOlast.kommunSlug}/bidrag/${svarsytaOlast.bidragId}/`} class="belopp-kort__lank">
+          <span class="fg-void-mark" aria-hidden="true"></span>
+          <span class="belopp-kort__text">
+            <span class="belopp-kort__belopp">{FORSTASIDAN_SVARAR.olastPrefix} {svarsytaOlast.tal.toLocaleString('sv-SE')} kr</span>
+            <span class="belopp-kort__namn">{svarsytaOlast.bidragNamn} · {svarsytaOlast.kommun} · {FORSTASIDAN_SVARAR.olastEtikett}</span>
+          </span>
+        </a>
+      </li>
+    )}
+  </ul>
+
+  {/* H1.5 — bevisrad, liten, efter varan. Aldrig hjälterubrik. */}
+  <p class="bevisrad start-kolumn">{bevisText}</p>
 
   {narmast && (
-    <div class="start-aptitretare">
+    <div class="start-aptitretare start-kolumn">
       <UrgencyChip urgency={getUrgency(daysUntil(narmast.dateISO!, today))} />
       <span class="start-aptitretare__namn">
         <span class={narmast.deadlineStatus === 'olast' ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'} aria-hidden="true"></span>
@@ -78,29 +209,25 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
       <span class="start-aptitretare__kommun">{narmast.kommun}</span>
     </div>
   )}
-  <a href="/deadlines/" class="start-aptitretare__lank">Se alla deadlines →</a>
-
-  <LiveDataKort totalBidrag={totalBidrag} totalKommuner={kommuner.length} />
-
-  {/* D5 — tratten kvar, nu sekundär rad under sökfältet i stället för
-     sidans enda ingång (se filhuvudets kommentar om Jacobs beslut). Text
-     helt oförändrad, bara rubrikens nivå (H1 → H2, se filhuvudet). */}
-  <section class="start-hero">
-    <h2>{TRATT.start.rubrik}</h2>
-    <p class="start-hero__ingress">{TRATT.start.ingress}</p>
-    <a href="/matcha/" class="btn-primary">{TRATT.start.startknapp} →</a>
-    <p class="start-disclaimer">{SIDFOT.kortText}</p>
-    <p class="start-hero__senast-avlast">{TRATT.start.senastAvlastRad}</p>
-  </section>
+  <a href="/deadlines/" class="start-aptitretare__lank start-kolumn">Se alla deadlines →</a>
 </Base>
 
 <style>
-  .start-sok {
+  /* H1.1 — hjälte, svarsyta, prisrad (i hjälten) och bevisrad delar denna
+     centrerade kolumn. Extra desktopyta blir marginal, aldrig bredare
+     rader (Design runda 15–16, "Sätt 540 och låt det gälla"). */
+  .start-kolumn {
     max-width: var(--fg-lasbredd);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .start-sok {
     background: var(--fg-ink);
     color: var(--fg-on-accent);
     border-radius: var(--fg-radius-card);
     padding: var(--fg-space-7) var(--fg-space-6);
+    margin-top: var(--fg-space-6);
     margin-bottom: var(--fg-space-6);
   }
 
@@ -147,11 +274,106 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
     min-height: 28px;
   }
 
-  .start-prisloftet {
-    max-width: var(--fg-lasbredd);
-    padding-bottom: var(--fg-space-5);
-    border-bottom: var(--fg-border-inner) dashed var(--fg-border);
-    margin: 0 0 var(--fg-space-5);
+  /* H1.3 — prisraden, hjältens rad två. Tvådelad, statisk (ingen knapp,
+     inget href) — "ett drag på sidan, och det är sökfältet". */
+  .start-sok__prisrad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--fg-space-4);
+    margin-top: var(--fg-space-6);
+    padding-top: var(--fg-space-5);
+    border-top: 1px solid color-mix(in srgb, var(--fg-on-accent) 18%, transparent);
+  }
+
+  .start-sok__pris {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: var(--fg-radius-control);
+  }
+
+  .start-sok__pris--betalt {
+    background: color-mix(in srgb, var(--fg-accent) 35%, transparent);
+    padding: var(--fg-space-3);
+    border-radius: var(--fg-radius-control);
+  }
+
+  .start-sok__pris-etikett {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    color: color-mix(in srgb, var(--fg-accent) 65%, var(--fg-on-accent));
+  }
+
+  .start-sok__pris--betalt .start-sok__pris-etikett {
+    color: var(--fg-on-accent);
+  }
+
+  .start-sok__pris-text {
+    font-size: var(--fg-text-body);
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--fg-on-accent) 82%, transparent);
+  }
+
+  /* H1.2 — svarsytan. Varje kort bär sin status: fylld prick = kontrolläst
+     och exakt tal, streckad ring = olast, "upp till", "ej kontrolläst". */
+  .svarsyta {
+    list-style: none;
+    margin: 0 auto var(--fg-space-3);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-3);
+  }
+
+  .belopp-kort {
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    background: var(--fg-surface);
+  }
+
+  .belopp-kort__lank {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fg-space-3);
+    padding: var(--fg-space-4);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .belopp-kort .fg-read-mark,
+  .belopp-kort .fg-void-mark {
+    margin-top: 5px;
+  }
+
+  .belopp-kort__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .belopp-kort__belopp {
+    font-weight: var(--fg-weight-bold);
+    font-size: var(--fg-text-body-lg);
+    color: var(--fg-ink);
+  }
+
+  .belopp-kort--olast .belopp-kort__belopp {
+    color: var(--fg-ink-muted);
+  }
+
+  .belopp-kort__namn {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  /* H1.5 — bevis, inte rubrik. Liten rad efter varan. */
+  .bevisrad {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    color: var(--fg-ink-muted);
+    margin: 0 auto var(--fg-space-8);
   }
 
   .start-aptitretare {
@@ -179,36 +401,6 @@ const totalBidrag = kommuner.reduce((sum, k) => sum + k.bidrag.length, 0);
     font-size: var(--fg-text-label);
     font-weight: var(--fg-weight-bold);
     color: var(--fg-accent);
-    margin: var(--fg-space-2) 0 var(--fg-space-8);
-  }
-
-  .start-hero {
-    max-width: 60ch;
-    margin-top: var(--fg-space-8);
-    padding-top: var(--fg-space-7);
-    border-top: var(--fg-border-inner) dashed var(--fg-border);
-  }
-
-  .start-hero h2 {
-    font-family: var(--fg-font-display);
-    font-weight: var(--fg-weight-display);
-    font-size: var(--fg-text-h1);
-    letter-spacing: -0.01em;
-  }
-
-  .start-hero__ingress {
-    font-size: var(--fg-text-body-lg);
-    color: var(--fg-ink-muted);
-    margin: var(--fg-space-4) 0 var(--fg-space-6);
-  }
-
-  .start-hero .btn-primary {
-    margin-bottom: var(--fg-space-5);
-  }
-
-  .start-hero__senast-avlast {
-    font-size: var(--fg-text-label);
-    color: var(--fg-ink-muted);
-    margin-top: var(--fg-space-3);
+    margin: var(--fg-space-2) auto var(--fg-space-8);
   }
 </style>

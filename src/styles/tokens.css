@@ -102,12 +102,15 @@
   --fg-focus-offset: 2px;
   --fg-focus-color:  var(--fg-accent);
 
-  /* --- Läsbredd (ARBETSORDER 2026-08-11, Täthetsdisciplin A1) ---------- *
-   * Brödtext och svar låsta till ~60 tecken (≈560px vid 16px brödtext) —
-   * överskott på desktop blir marginal, inte bredare rader. Gäller ALDRIG
-   * registret (bidragslistan), som får bli tvåspaltigt. En enda siffra,
-   * inte den tidigare spridningen 68ch/54ch/46ch på olika ställen. */
-  --fg-lasbredd: 60ch;
+  /* --- Läsbredd (H1, 2026-08-12, Design runda 15–16) ------------------- *
+   * Var 60ch (ARBETSORDER 2026-08-11 A1) — men ch-enheten renderade 700px
+   * i praktiken (uppmätt live, 1794px viewport), inte de ~560px A1 antog.
+   * Design specar en fast pixelbredd i stället, 540px, låst oavsett
+   * teckensnittets ch-bredd: "Sätt 540 och låt det gälla — extra bredd
+   * blir marginal." Gäller ALDRIG registret (bidragslistan), som får bli
+   * tvåspaltigt. En enda siffra, inte den tidigare spridningen
+   * 68ch/54ch/46ch/60ch på olika ställen. */
+  --fg-lasbredd: 540px;
 }
 
 /* ==========================================================================

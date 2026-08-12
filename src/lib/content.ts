@@ -53,6 +53,24 @@ export const START = {
 };
 
 /**
+ * H1 — förstasidan svarar + säg priset först (Design runda 15–16,
+ * 2026-08-12, incoming/FORSTASIDAN_SVARAR_15-16.md). Ramtext runt
+ * svarsytans belopp — själva talen/kommunerna/bidragsnamnen läses ur
+ * datan i index.astro, skrivs ALDRIG som strängar här (H1.2).
+ */
+export const FORSTASIDAN_SVARAR = {
+  bevisMall: '{bidrag} bidrag kartlagda · {kontrollasta} belopp lästa för hand',
+  olastPrefix: 'Upp till',
+  olastEtikett: 'ej kontrolläst',
+  prisrad: {
+    gratisEtikett: 'HITTA · GRATIS',
+    gratisText: 'Alla bidrag, krav, deadlines. Påminnelser.',
+    betaltEtikett: 'HJÄLP ATT SÖKA · 249 KR',
+    betaltText: 'Kraven i ordning, era uppgifter ifyllda.',
+  },
+};
+
+/**
  * Kommunsida. Funktion i titel/H1 (Code sätter in kommunnamnet via mall).
  * introTemplate tar kommunnamn som {kommun}; Code ersätter vid render.
  */
