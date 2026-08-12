@@ -92,6 +92,7 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
   import { berakForfallodatum, addMonths } from '../lib/kommunTyper';
   import type { GiltighetRegel, GiltighetRegelTyp } from '../lib/kommunTyper';
   import { trackEvent } from '../lib/umami';
+  import { saveForeningsprofil } from '../lib/foreningsprofil';
 
   const MANADSNAMN = [
     'januari', 'februari', 'mars', 'april', 'maj', 'juni',
@@ -174,6 +175,14 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
       const data = new FormData(epostForm);
       data.set('kommun', kommunSlug);
       data.set('arsmotesdatum', arsmotesdatum);
+
+      // E1-uppföljning (Jacob 2026-08-11): speglar föreningsnamnet till
+      // Foreningsprofil (localStorage), samma "tomt skriver aldrig
+      // över"-regel som EmailSignup.astro. Sparas OAVSETT om själva
+      // fetch:en lyckas — hon skrev namnet, det är sant oberoende av
+      // nätverksutfallet.
+      const foreningsnamn = (data.get('foreningsnamn') ?? '').toString().trim();
+      if (foreningsnamn) saveForeningsprofil({ foreningsnamn });
 
       try {
         const res = await fetch('/api/giltighetsbevakning', { method: 'POST', body: data });

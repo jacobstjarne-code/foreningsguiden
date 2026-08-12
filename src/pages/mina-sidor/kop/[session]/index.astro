@@ -207,6 +207,19 @@ if (kop && kommun) {
 </Base>
 
 <script>
+  import { saveForeningsprofil } from '../../../../lib/foreningsprofil';
+
+  // E1-uppföljning (Jacob 2026-08-11): föreningens namn i ett KÖP är en
+  // starkare signal än bevakningsformulärens — det här är en riktig
+  // ansökan till kommunen. Speglas till Foreningsprofil (localStorage)
+  // synkront i 'submit', samma mönster som EmailSignup.astro (riktig
+  // POST, inget fetch-intercept). Tomt fält sparas aldrig.
+  const uppgifterForm = document.querySelector<HTMLFormElement>('.kop-doc__uppgifter-form');
+  uppgifterForm?.addEventListener('submit', () => {
+    const varde = (new FormData(uppgifterForm).get('namn') ?? '').toString().trim();
+    if (varde) saveForeningsprofil({ foreningsnamn: varde });
+  });
+
   document.querySelectorAll<HTMLButtonElement>('[data-kop-kopiera]').forEach((knapp) => {
     knapp.addEventListener('click', async () => {
       const sektion = knapp.closest<HTMLElement>('[data-kop-sektion]');

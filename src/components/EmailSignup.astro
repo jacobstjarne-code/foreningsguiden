@@ -72,10 +72,24 @@ const kommuner = loadKommuner();
   // deadlines/index.astro utifrån SAMMA query-param) avgör om det är
   // kvittoläget vi ser just nu. En sida-load i det läget ÄR "skickad".
   import { trackEvent } from '../lib/umami';
+  import { saveForeningsprofil } from '../lib/foreningsprofil';
 
   const root = document.getElementById('email-signup');
   if (root) {
     const kommun = root.dataset.emailSignupKommun || null;
     trackEvent(root.dataset.emailSignupSubmitted === '1' ? 'bevakning_skickad' : 'bevakning_visad', { kommun });
+
+    // E1-uppföljning (Jacob 2026-08-11): speglar föreningsnamnet till
+    // Foreningsprofil (localStorage) i SAMMA ögonblick som formuläret
+    // postas — riktig POST+redirect, inget fetch-intercept, så det här
+    // MÅSTE ske synkront i 'submit' innan navigeringen händer. Ett tomt
+    // fält sparas aldrig (samma "tomt skriver aldrig över" som server-
+    // sidans addPendingSubscriber).
+    if (root instanceof HTMLFormElement) {
+      root.addEventListener('submit', () => {
+        const varde = (new FormData(root).get('foreningsnamn') ?? '').toString().trim();
+        if (varde) saveForeningsprofil({ foreningsnamn: varde });
+      });
+    }
   }
 </script>

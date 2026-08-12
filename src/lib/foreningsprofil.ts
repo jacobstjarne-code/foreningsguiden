@@ -28,6 +28,17 @@ export interface Foreningsprofil {
   alder: Aldersbucket | null;
   sokt: SoktSvar | null;
   uppdaterad: string; // ISO
+  // E1 (ARBETSORDER 2026-08-11, "den varma skärmen") + Jacobs uppföljning
+  // 2026-08-11: INTE en fjärde tratt-fråga (B3.6 tog bort en fråga för
+  // att hålla tratten kort — att fråga vem hon ÄR i stället för vad hon
+  // BEHÖVER hade varit ett steg tillbaka). Speglas i stället från de
+  // ställen hon redan skriver namnet: bevakningsformulären (C1,
+  // EmailSignup.astro/GiltighetsKontroll.astro) och köpets förenings-
+  // uppgiftsformulär (kop.ts Foreningsuppgifter.namn, starkare signal —
+  // en riktig ansökan till kommunen). null = aldrig sett något av de två
+  // ännu, skilt från en framtida tom sträng (uppstår inte — se
+  // saveForeningsnamnFranFormular, sparar aldrig ett tomt fält).
+  foreningsnamn: string | null;
 }
 
 // B3.8 (SPEC B3, Jacob 2026-08-06 — "den viktigaste punkten"): v1 → v2.
@@ -47,6 +58,7 @@ const TOM_PROFIL: Foreningsprofil = {
   alder: null,
   sokt: null,
   uppdaterad: '',
+  foreningsnamn: null,
 };
 
 function harLocalStorage(): boolean {
