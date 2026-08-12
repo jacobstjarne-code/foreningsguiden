@@ -199,8 +199,29 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   }
   raw.qa_anteckning = raw.qa_anteckning ?? null;
 
+  // A (belopp-avser-spårbarhet, 2026-08-12) — kommunens_pott normaliseras
+  // FÖRE belopp_status-validering så att harVarde-beräkningen kan läsa den.
+  if (raw.kommunens_pott !== null && raw.kommunens_pott !== undefined && typeof raw.kommunens_pott !== 'string') {
+    problems.push(`${where}.kommunens_pott måste vara text eller null`);
+  }
+  raw.kommunens_pott = raw.kommunens_pott ?? null;
+
+  // belopp_avser — BEDÖMNINGSFÄLT. Tillåter bara per_forening|okand.
+  // Default är ALLTID 'okand' — skriptet sätter ALDRIG 'per_forening'.
+  if (raw.belopp_avser !== null && raw.belopp_avser !== undefined) {
+    if (!['per_forening', 'okand'].includes(raw.belopp_avser)) {
+      problems.push(`${where}.belopp_avser är "${raw.belopp_avser}" (tillåtna: per_forening, okand)`);
+    }
+  }
+  raw.belopp_avser = raw.belopp_avser ?? 'okand'; // ALDRIG automatiskt 'per_forening'
+
   // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriska efter migrationen.
-  validateDatatillstand(where, 'belopp', raw.belopp_status, raw.belopp !== null && raw.belopp !== undefined, problems, false);
+  // harVarde för belopp: belopp-fältet ELLER kommunens_pott räcker — om bara
+  // potten är känd (belopp: null, kommunens_pott: "X kr") är belopp_status:
+  // kontrollast en giltig kombination (vi har verifierad pott-info).
+  const beloppHarVarde = (raw.belopp !== null && raw.belopp !== undefined) ||
+    (raw.kommunens_pott !== null && raw.kommunens_pott !== undefined);
+  validateDatatillstand(where, 'belopp', raw.belopp_status, beloppHarVarde, problems, false);
   validateDatatillstand(where, 'deadline', raw.deadline_status, raw.deadlines?.typ !== 'okand', problems);
   validateDatatillstand(where, 'krav', raw.krav_status, Array.isArray(raw.krav) && raw.krav.length > 0, problems);
 

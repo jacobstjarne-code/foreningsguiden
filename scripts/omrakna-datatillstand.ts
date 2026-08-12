@@ -37,6 +37,13 @@ const files = readdirSync(DIR).filter((f) => f.endsWith('.yaml'));
 const BIDRAG_FALT = ['belopp_status', 'deadline_status', 'krav_status'] as const;
 const SKYDDADE = new Set(['ingen_regel', 'kontrollast']);
 
+// BEDÖMNINGSFÄLT — rör ALDRIG dessa, varken vid strippning eller omräkning.
+// Samma princip som krav_fullstandiga: sätts UTESLUTANDE av ett researchpass.
+// Skriptet saknar logik för dem (de hanteras inte i strip- eller insättnings-
+// passet nedan) och det är AVSIKTLIGT — en framtida ändring som råkar lägga
+// till hantering av dessa fält bryter den här assertionen (se nedan).
+const BEDOMNINGSFALT_BIDRAG = ['belopp_avser', 'kommunens_pott'] as const;
+
 let filerAndrade = 0;
 const rortaFiler: string[] = [];
 const counts = {
@@ -197,6 +204,14 @@ for (const file of files) {
     for (const falt of BIDRAG_FALT) {
       if (SKYDDADE.has(n[falt]) && !SKYDDADE.has(o[falt])) {
         console.error(`AVBRYTER (insättning) — ${file}: bidrag[${i}].${falt} blev "${n[falt]}" — skriptet får aldrig sätta det värdet.`);
+        process.exit(1);
+      }
+    }
+    // Skyddsassertion för bedömningsfält: belopp_avser och kommunens_pott
+    // får ALDRIG ändras av det här skriptet (de är researchpassets domän).
+    for (const falt of BEDOMNINGSFALT_BIDRAG) {
+      if (o[falt] !== n[falt]) {
+        console.error(`AVBRYTER — ${file}: bidrag[${i}].${falt} ändrades av misstag (${o[falt]} → ${n[falt]}) — bedömningsfält rör aldrig omräkningsskriptet.`);
         process.exit(1);
       }
     }

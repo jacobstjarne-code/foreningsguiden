@@ -161,6 +161,24 @@ export interface Bidrag {
   // — aldrig av omverifieringLogik.ts, som bara upptäcker ATT en källa
   // ändrats, aldrig VAD.
   senast_verifierad: string | null;
+
+  // A (belopp-avser-spårbarhet, 2026-08-12) — BEDÖMNINGSFÄLT.
+  // Sätts UTESLUTANDE av ett researchpass, aldrig av migrerings- eller
+  // omräkningskod (se omrakna-datatillstand.ts). "okand" är default —
+  // ALDRIG automatiskt satt till "per_forening".
+  //
+  // "per_forening": belopp-fältet avser vad EN enskild förening/ansökan/
+  //   projekt kan söka eller beräknas ut från. Skild från kommunens_pott.
+  // "okand": vi vet inte vad belopp-fältet avser (default).
+  //
+  // Skilt från belopp_status (verifieringsgrad av info vi HAR) och från
+  // kommunens_pott (den totala kommunala budgeten för bidraget).
+  belopp_avser: 'per_forening' | 'okand';
+
+  // Kommunens totala budget/pott för detta bidrag, som fritext.
+  // null = inte känd/angiven. Skild från belopp (vad EN förening kan söka).
+  // Sätts UTESLUTANDE av ett researchpass, aldrig av migrerings-/omräkningskod.
+  kommunens_pott: string | null;
 }
 
 export interface Ansokningssystem {
