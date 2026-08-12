@@ -221,27 +221,6 @@ const webPageJsonLd = {
     </p>
   </div>
 
-  <p class="kommun-varme fg-lasbredd">
-    {kommun.bidrag.length === 1 ? EKERN.varmeRadEtt : EKERN.varmeRadFlera.replace('{antal}', String(kommun.bidrag.length))}
-  </p>
-
-  {forhandsvisningBidrag.bidrag.length > 0 && (
-    <ul class="kommun-forhandsvisning">
-      {forhandsvisningBidrag.bidrag.map((bidrag) => {
-        const dateISO = earliestDeadlineISO(bidrag, today);
-        return (
-          <li class="kommun-forhandsvisning__rad">
-            <span class="kommun-forhandsvisning__namn">{bidrag.namn}</span>
-            <span class="kommun-forhandsvisning__meta">
-              {forhandsvisningBidrag.visaBelopp && <span>{bidrag.belopp}</span>}
-              {dateISO && <span>{formatDate(dateISO)}</span>}
-            </span>
-          </li>
-        );
-      })}
-    </ul>
-  )}
-
   <p class="bevakning-antal" data-bevakning-antal data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} hidden></p>
 
   {isStale(kommun.verifierad) && <StaleWarning verifierad={kommun.verifierad} />}
@@ -255,20 +234,24 @@ const webPageJsonLd = {
     </p>
   )}
 
-  <p class="fg-lasbredd">{intro}</p>
+  {/* D2.2 (2026-08-12, Jacob) — svar-först slås ihop till EN yta.
+     kommun-varme (egen "vi har läst X åt er"-rad) och den fristående
+     intro-paragrafen TAGNA BORT som egna block — inget innehåll
+     förloras, båda rollerna täcks redan av svarForst/VARM_SKARM.intro
+     (samma "vi har läst allt åt er"-besked, en gång, inte tre).
+     kommun-forhandsvisning (den fristående tvåradslistan) flyttad IN i
+     ekerns band 1 nedan i stället för att stå som ett eget block före
+     kortet — samma markup/klasser, bara ny plats. Talet {antal
+     bidrag} stod tidigare i kommun-varme OCH svarForst/VARM_SKARM.intro
+     (tre källor räknat båda ekern/VarmSkarm-varianterna som alltid
+     SSR-renderas): nu bara i svarForst/VARM_SKARM.intro, en gång per
+     variant.
 
-  {/* 1a — SPEC_HUVUDPROCESSEN (Opus/Fable 2026-08-01), MOCKAR_huvudprocessen.md
-     §1a: "kommunsidans ekern in i tratten". Ersätter den tidigare enkla
-     kommun-till-tratt-länken (2026-07-31) med det fulla trebandskortet.
-     Band 1 äger nu svar-först-texten (flyttad hit ur den gamla fristående
-     <p class="svar-forst">, inte duplicerad) + ett eget färskhetsdatum
-     (G2 — samma kommun.verifierad som VerificationRow ovan, en källa).
-     Band 2 är trattinbjudan, band 3 sekundära vägar (in-page-ankare till
-     #alla-bidrag / #sista-ansokningsdatum, tillagda på respektive
-     sektion). Datarättelserna G10/G11 (förkravet är inte ett andra
-     bidrag) kräver ingen ny kod här — svarForstEtt-mallen och den
-     tidigare Gislaved-datastädningen (2026-07-31) redan strukturellt
-     korrekta: bara kommun.bidrag[] (aldrig forutsattningar[]) räknas. */}
+     VarmSkarm rörs INTE — den har redan sin egen självständiga
+     intro+bidragsförhandsvisning (VARM_SKARM.intro, forsta-korten) och
+     behövde ingen dubblett tillagd. Bara ekern (nedan) fick
+     kommun-forhandsvisning+intro flyttade in, för att bli lika
+     självbärande som VarmSkarm redan var. */}
   {/* E1 (ARBETSORDER 2026-08-11, "den varma skärmen"): VarmSkarm ersätter
      ekern (nedan) klientsidan när Foreningsprofil.foreningsnamn är känt —
      SSR-renderad hidden, precis som ekern SSR-renderas visible. Ordningen
@@ -289,6 +272,22 @@ const webPageJsonLd = {
             <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
             {OLAST_MARK.rad}
           </p>
+        )}
+        {forhandsvisningBidrag.bidrag.length > 0 && (
+          <ul class="kommun-forhandsvisning">
+            {forhandsvisningBidrag.bidrag.map((bidrag) => {
+              const dateISO = earliestDeadlineISO(bidrag, today);
+              return (
+                <li class="kommun-forhandsvisning__rad">
+                  <span class="kommun-forhandsvisning__namn">{bidrag.namn}</span>
+                  <span class="kommun-forhandsvisning__meta">
+                    {forhandsvisningBidrag.visaBelopp && <span>{bidrag.belopp}</span>}
+                    {dateISO && <span>{formatDate(dateISO)}</span>}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         )}
         <p class="ekern__verifierad">
           <span class="ekern__verifierad-dot" aria-hidden="true"></span>
@@ -311,6 +310,10 @@ const webPageJsonLd = {
       <p class="ekern__nudge fg-lasbredd">{EKERN.insatsNudge}</p>
       <div class="ekern__band ekern__band--3">
         <p class="ekern__eyebrow">{EKERN.band3Eyebrow}</p>
+        {/* D2.2 — den forna fristående intro-paragrafen (KOMMUN.introTemplate),
+           oförändrad text, flyttad hit: den förklarar exakt det registret
+           nedan länken går till (gruppering, länkar, senast avstämt). */}
+        <p class="ekern__band3-intro fg-lasbredd">{intro}</p>
         <a href="#alla-bidrag" class="ekern__sekundar-lank">{EKERN.band3Lank1.replace('{kommun}', kommun.kommun)} ↓</a>
         <a href="#sista-ansokningsdatum" class="ekern__sekundar-lank">{EKERN.band3Lank2} ↓</a>
       </div>
@@ -677,6 +680,14 @@ const webPageJsonLd = {
     display: flex;
     flex-direction: column;
     gap: var(--fg-space-3);
+  }
+
+  /* D2.2 — den forna fristående intro-paragrafen, nu här. Samma
+     dämpade register som .ekern__band2-text, ingen ny skala. */
+  .ekern__band3-intro {
+    font-size: 15px;
+    color: var(--fg-ink-muted);
+    margin: 0;
   }
 
   .ekern__sekundar-lank {

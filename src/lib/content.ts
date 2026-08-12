@@ -900,7 +900,7 @@ export const EKERN = {
   insatsNudge: 'Bidrag missas nästan aldrig på ansökan — de missas på att sista dagen passerade, eller att föreningen inte visste att bidraget fanns.',
 
   band3Eyebrow: 'ELLER LÄS ALLT SJÄLV',
-  band3Lank1: 'Alla bidrag i {kommun} i detalj',
+  band3Lank1: 'Alla bidrag i {kommun}',
   band3Lank2: 'Sista ansökningsdatum',
 };
 

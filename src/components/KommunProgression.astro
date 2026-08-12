@@ -359,83 +359,19 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
     )}
   </div>
 
-  <!-- STATION 4 — navigerbar lista -->
+  <!-- STATION 4 — pekare till registret -->
+  {/* D2.2 (2026-08-12, Jacob): "bidragen visas på fyra ställen ...
+     station 4, registret. Efter: två." Den fullständiga kronologiska
+     listan (två öppna rader + "visa alla resten") TAGEN BORT härifrån
+     — samma sortedBidrag som registret redan visar, grupperat annorlunda
+     men samma 14 bidrag, samma namn. Station 2 (ovan) täcker redan "det
+     mest brådskande" som en riktig förhandsvisning (namn+datum+länk) —
+     station 4 behöver inte UPPREPA hela listan för att peka mot den,
+     bara länka dit. #sista-ansokningsdatum-ankaret (EKERN.band3Lank2)
+     oförändrat, landar nu på pekaren i stället för listan. */}
   <div class="progression__station" id="sista-ansokningsdatum">
     <h3>{VAGLEDNING.station4.rubrik}</h3>
-    {/* R5.7 (OMFORDELA_TEXTMASSAN.md runda 5): de TVÅ raderna med kortast
-       tid kvar ligger alltid öppna, oavsett position i listan — sortedBidrag
-       är redan sorterad kronologiskt (dateISO stigande, odaterade sist), så
-       de två första ÄR "kortast tid kvar". Samma <li data-kategori>-form i
-       båda listorna (huvud + fällbar) håller kategorifiltret (JS längre
-       ner, querySelectorAll('.progression__list [data-kategori]')) fungerande
-       oförändrat — det bryr sig bara om att elementen matchar selektorn,
-       inte var i DOM:en de sitter. */}
-    <ul class="progression__list">
-      {sortedBidrag.slice(0, 2).map(({ bidrag, dateISO }) => (
-        <li data-kategori={bidrag.kategori.join(' ')}>
-          <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
-            <div class="progression__list-row__text">
-              <div class="progression__list-row__namn">
-                {/* TILLSTANDET_OLAST.md 4c, yta 2: 11 px hål/prick FÖRE
-                   bidragsnamnet — streckad om något av bidragets fält är
-                   olast, fylld annars. Samma trigger som kortets
-                   banderoll (harOlastFalt-mönstret), en sanning. */}
-                <span
-                  class={[bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast') ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'}
-                  aria-hidden="true"
-                ></span>
-                {bidrag.namn}
-              </div>
-            </div>
-            {/* R5.2: belopp/datum högerställt i mono, radnivå. */}
-            <div class="progression__list-row__tal">
-              {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
-              <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
-              <span class="progression__list-row__datum">{dateISO
-                ? formatDate(dateISO)
-                : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
-                : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan'}</span>
-            </div>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-          </a>
-        </li>
-      ))}
-    </ul>
-    {sortedBidrag.length > 2 && (
-      <details class="progression__disclosure">
-        <summary class="progression__slutsats">
-          <span class="progression__slutsats-text">Visa alla {sortedBidrag.length} ↓</span>
-          <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-        </summary>
-        <ul class="progression__list progression__list--resten progression__fallbart">
-          {sortedBidrag.slice(2).map(({ bidrag, dateISO }) => (
-            <li data-kategori={bidrag.kategori.join(' ')}>
-              <a href={`#bidrag-${bidrag.id}`} class="progression__list-row">
-                <div class="progression__list-row__text">
-                  <div class="progression__list-row__namn">
-                    <span
-                      class={[bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast') ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'}
-                      aria-hidden="true"
-                    ></span>
-                    {bidrag.namn}
-                  </div>
-                </div>
-                <div class="progression__list-row__tal">
-                  {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
-                  <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
-                  <span class="progression__list-row__datum">{dateISO
-                    ? formatDate(dateISO)
-                    : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
-                    : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan'}</span>
-                </div>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </details>
-    )}
-    <p class="progression__hidden-note" data-hidden-note hidden></p>
+    <a href="#alla-bidrag" class="progression__station4-lank">Visa alla {sortedBidrag.length} ↓</a>
   </div>
 
   <!-- STATION 5 — mål -->
