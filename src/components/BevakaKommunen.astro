@@ -1,0 +1,500 @@
+---
+// K1 (2026-08-16, incoming/BEVAKNINGEN_KOMMUNSIDAN_19.md, mock §19a/19b i
+// "Föreningsguiden huvudprocessen.dc.html"). Bevaka-ytan flyttar ut ur
+// /registrera/ (ett ansökningsärende) och blir sin egen ruta på kommun-
+// sidan. Placering (Jacob 2026-08-16, efter D2.2 tog bort station 4:s
+// synliga datumlista): "Bevakningsrutan ligger efter registret, före
+// FAQ... Design kan vända placeringen när de ser den byggd — men bygg
+// inte mot 19a:s ankare, det finns inte längre." KommunSidaFull.astro
+// renderar den mellan #alla-bidrag och FAQ-sektionen.
+//
+// F2 (scope): hela kommunen är förval (icke-interaktiv statusrad, matchar
+// mocken — det finns inget att "kryssa ur", alternativet är den separata
+// "Välj enskilda bidrag i stället"-disclosuren nedanför). Per-bidrag-
+// bevakning återanvänder EXAKT samma [data-bevaka-cell]/bevakaKlient.ts-
+// mekanism som redan finns på deadlines/index.astro — INGEN ny backend,
+// ingen ny multi-select-mekanism (prenumerera-json.ts stödjer bara HELA
+// kommunen eller ETT enskilt bidrag per anrop, aldrig ett urval av flera).
+//
+// Samtyckeskryssrutan (BEVAKNING.samtycke) syns inte i mockens 19a-ruta,
+// men /api/prenumerera-json kräver den (samma kontrakt som EmailSignup.
+// astro och bevaka-rad-form) — Code-beslut att lägga till den kompakt,
+// inte tyst hoppa över ett GDPR-krav för att mocken inte ritade det.
+import { formatDate, getDeadlineEntries } from '../lib/kommuner';
+import type { Kommun } from '../lib/kommuner';
+import { BEVAKNING, BEVAKA_KOMMUN, FORSTASIDAN_SVARAR } from '../lib/content';
+
+export interface Props {
+  kommun: Kommun;
+  today: string;
+}
+
+const { kommun, today } = Astro.props;
+
+// F4 — nästa KONTROLLÄSTA frist för kommunen (alla bidrag). Code-beslut
+// (ingen mock-täckning för fallet): headlinen "Sista dag i {kommun} är
+// {datum}" påstår ett datum som FAKTUM — kan bara sättas för en
+// kontrolläst frist, aldrig för en olast (samma "aldrig ett påstående om
+// osäker data"-princip som belopp-kort--olast/FORSTASIDAN_SVARAR.
+// olastPrefix redan följer). Finns ingen kontrolläst frist alls: ingen
+// specifik datumrad — I1:s redan godkända, kommun-oberoende
+// bevakningsremsa-text i stället för en gissning eller en ny mening.
+const nastaKontrollastFrist = getDeadlineEntries(today)
+  .filter((e) => e.kommunSlug === kommun.kommun_slug && !e.isLopande && e.dateISO && e.deadlineStatus !== 'olast')
+  .sort((a, b) => a.dateISO!.localeCompare(b.dateISO!))[0] ?? null;
+
+const antalBidrag = kommun.bidrag.length;
+---
+<section class="bevaka-kommunen" data-bevaka-kommunen data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-antal-bidrag={antalBidrag}>
+  {/* F4 — remsan. */}
+  {nastaKontrollastFrist ? (
+    <p class="bevaka-remsa">
+      <span class="fg-read-mark" aria-hidden="true"></span>
+      {BEVAKA_KOMMUN.remsanMall.replace('{kommun}', kommun.kommun).replace('{datum}', formatDate(nastaKontrollastFrist.dateISO!))}
+    </p>
+  ) : (
+    <p class="bevaka-remsa">{FORSTASIDAN_SVARAR.bevakningsremsa}</p>
+  )}
+
+  {/* F1+F2 — bevaka-ytan. */}
+  <div class="bevaka-ruta" data-bevaka-ruta>
+    <div class="bevaka-ruta__label">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.7 21a2 2 0 0 1-3.4 0" /></svg>
+      <span>{BEVAKA_KOMMUN.boxLabelMall.replace('{kommun}', kommun.kommun)}</span>
+    </div>
+    <p class="bevaka-ruta__body">{BEVAKA_KOMMUN.bodyMall.replace('{kommun}', kommun.kommun)}</p>
+
+    <div class="bevaka-ruta__scope">
+      <span class="bevaka-ruta__scope-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+      <span class="bevaka-ruta__scope-text">{BEVAKA_KOMMUN.scopeAllaMall.replace('{n}', String(antalBidrag)).replace('{kommun}', kommun.kommun)}</span>
+      <span class="bevaka-ruta__scope-etikett">{BEVAKA_KOMMUN.scopeForvalEtikett}</span>
+    </div>
+
+    {antalBidrag > 0 && (
+      <details class="bevaka-ruta__fordjupning">
+        <summary>{BEVAKA_KOMMUN.scopeValjLank}</summary>
+        <ul class="bevaka-ruta__bidraglista">
+          {kommun.bidrag.map((bidrag) => (
+            <li class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id}>
+              <span class="bevaka-ruta__bidragnamn">{bidrag.namn}</span>
+              {/* href — samma no-JS-reservfall som deadlines/index.astro:s
+                 rader (P3.1): navigerar till helsidesformuläret med
+                 kommunen förkryssad om klientskriptet av någon anledning
+                 aldrig fäster. Inte bidrag-specifikt (EmailSignup.astro
+                 saknar en sådan url-parameter) — bättre en fungerande
+                 kommun-bred reserv än en trasig länk. */}
+              <a href={`/deadlines/?kommun=${kommun.kommun_slug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
+
+    <form class="bevaka-ruta__form" data-bevaka-ruta-form>
+      <div class="bevaka-ruta__form-rad">
+        <input type="email" name="email" placeholder={BEVAKNING.epostPlaceholder} required autocomplete="email" aria-label={BEVAKNING.epostLabel} />
+        <button type="submit" class="btn-primary">{BEVAKA_KOMMUN.knapp}</button>
+      </div>
+      <label class="bevaka-ruta__foreningsnamn-label" for={`bevaka-ruta-foreningsnamn-${kommun.kommun_slug}`}>{BEVAKNING.foreningsnamnLabel}</label>
+      <input type="text" id={`bevaka-ruta-foreningsnamn-${kommun.kommun_slug}`} name="foreningsnamn" autocomplete="organization" />
+      <label class="bevaka-ruta__samtycke">
+        <input type="checkbox" name="samtycke" required />
+        {BEVAKNING.samtycke}
+      </label>
+      <p class="bevaka-ruta__fel" data-bevaka-ruta-fel hidden>{BEVAKA_KOMMUN.felText}</p>
+    </form>
+    <p class="bevaka-ruta__footer">{BEVAKA_KOMMUN.footer}</p>
+  </div>
+
+  {/* F3 — bekräftelsen, egen vy. Byggd server-sidan (dolt tills klienten
+     visar den efter ett lyckat POST) så det inte finns TVÅ olika
+     markup-versioner (en byggd i JS, en i Astro) att hålla synkade. */}
+  <div class="bevaka-kvitto" data-bevaka-kvitto hidden>
+    <div class="bevaka-kvitto__head">
+      <span class="bevaka-kvitto__check" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+      <span class="bevaka-kvitto__headline">{BEVAKA_KOMMUN.confirmHeadlineMall.replace('{kommun}', kommun.kommun)}</span>
+    </div>
+    {/* data-mall — själva mallsträngen med {epost} kvar osubstituerad;
+       klientskriptet fyller den EFTER ett lyckat POST (vi känner inte
+       adressen server-sidan, formuläret postas aldrig till Astro). */}
+    <p class="bevaka-kvitto__body" data-bevaka-kvitto-body data-mall={BEVAKA_KOMMUN.confirmBodyMall.replace('{kommun}', kommun.kommun)}></p>
+
+    {nastaKontrollastFrist && (
+      <div class="bevaka-kvitto__nasta">
+        <p class="bevaka-kvitto__nasta-label">{BEVAKA_KOMMUN.nastaPaminnelseLabel}</p>
+        <div class="bevaka-kvitto__nasta-rad">
+          <span class="fg-read-mark" aria-hidden="true"></span>
+          <span class="bevaka-kvitto__nasta-namn">{nastaKontrollastFrist.bidragNamn}</span>
+          <span class="bevaka-kvitto__nasta-datum">{formatDate(nastaKontrollastFrist.dateISO!)}</span>
+        </div>
+      </div>
+    )}
+
+    <p class="bevaka-kvitto__omfattning">{BEVAKA_KOMMUN.omfattningMall.replace(/{n}/g, String(antalBidrag)).replace('{kommun}', kommun.kommun)}</p>
+
+    <div class="bevaka-kvitto__inget-konto">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+      <span>{BEVAKA_KOMMUN.ingetKontoText}</span>
+    </div>
+
+    <a href="#alla-bidrag" class="bevaka-kvitto__se-alla">
+      <span>{BEVAKA_KOMMUN.seAllaBidragMall.replace('{n}', String(antalBidrag)).replace('{kommun}', kommun.kommun)}</span>
+      <span aria-hidden="true">›</span>
+    </a>
+  </div>
+</section>
+
+<script>
+  // Per-bidrag-fördjupningens rader — samma delade widget som deadlines/
+  // index.astro, ingen egen submit-logik här.
+  import { initBevakaWidgets } from '../lib/bevakaKlient';
+  import { trackEvent } from '../lib/umami';
+  import { saveForeningsprofil } from '../lib/foreningsprofil';
+
+  initBevakaWidgets();
+
+  // Hela-kommunen-formuläret — EGEN submit-logik (inte bevakaKlient.ts):
+  // "Ingen sessionslagring krävs — bara mejladress + scope skickas"
+  // (K1, "Till Code"). Bekräftelsen byggs av samma data som skickades,
+  // ingen ny server-runda för att RENDERA kvittot (bara för att spara
+  // prenumerationen).
+  document.querySelectorAll<HTMLElement>('[data-bevaka-kommunen]').forEach((root) => {
+    const kommunSlug = root.dataset.kommunSlug ?? '';
+    const kommunNamn = root.dataset.kommunNamn ?? '';
+    const form = root.querySelector<HTMLFormElement>('[data-bevaka-ruta-form]');
+    const felText = root.querySelector<HTMLElement>('[data-bevaka-ruta-fel]');
+    const ruta = root.querySelector<HTMLElement>('[data-bevaka-ruta]');
+    const kvitto = root.querySelector<HTMLElement>('[data-bevaka-kvitto]');
+    const kvittoBody = root.querySelector<HTMLElement>('[data-bevaka-kvitto-body]');
+    if (!form || !ruta || !kvitto || !kvittoBody) return;
+
+    trackEvent('bevakning_kommunsida_visad', { kommun: kommunSlug });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      felText?.setAttribute('hidden', '');
+
+      const data = new FormData(form);
+      const email = String(data.get('email') ?? '').trim();
+      const foreningsnamn = String(data.get('foreningsnamn') ?? '').trim();
+      data.set('kommun', kommunSlug);
+
+      try {
+        const res = await fetch('/api/prenumerera-json', { method: 'POST', body: data });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error('svar ej ok');
+
+        // Samma "tomt fält skriver aldrig över"-regel som EmailSignup.
+        // astro/GiltighetsKontroll.astro.
+        if (foreningsnamn) saveForeningsprofil({ foreningsnamn });
+        trackEvent('bevakning_kommunsida_skickad', { kommun: kommunSlug });
+
+        kvittoBody.textContent = kvittoBody.dataset.mall
+          ? kvittoBody.dataset.mall.replace('{epost}', email)
+          : '';
+        ruta.hidden = true;
+        kvitto.hidden = false;
+        kvitto.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch {
+        felText?.removeAttribute('hidden');
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Design-token-anpassning av mockens §19a/§19b (Föreningsguiden
+     huvudprocessen.dc.html) — samma padding/radie/typ-värden, men
+     --accent/--ink/--muted/--surface/--line/--sunken mappade till
+     Föreningsguidens egna --fg-*-tokens i stället för mockens råa
+     canvas-variabler, samma princip som resten av design-systemet
+     (CSS-variabler enbart, inga hårdkodade färger). */
+  .bevaka-remsa {
+    display: flex;
+    align-items: baseline;
+    gap: var(--fg-space-3);
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-ink);
+    margin: var(--fg-space-6) 0 var(--fg-space-4);
+  }
+
+  .bevaka-remsa .fg-read-mark {
+    transform: translateY(2px);
+  }
+
+  .bevaka-ruta {
+    background: var(--fg-accent-soft);
+    border: var(--fg-border-inner) dashed var(--fg-border);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-5) var(--fg-space-6);
+    margin-bottom: var(--fg-space-7);
+  }
+
+  .bevaka-ruta__label {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    color: var(--fg-accent);
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    margin-bottom: var(--fg-space-2);
+  }
+
+  .bevaka-ruta__body {
+    font-size: var(--fg-text-body-lg);
+    line-height: 1.5;
+    color: var(--fg-ink);
+    margin: 0 0 var(--fg-space-4);
+  }
+
+  .bevaka-ruta__scope {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-ink);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    margin-bottom: var(--fg-space-3);
+  }
+
+  .bevaka-ruta__scope-check {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: var(--fg-accent);
+    color: var(--fg-on-accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bevaka-ruta__scope-text {
+    flex: 1;
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .bevaka-ruta__scope-etikett {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+  }
+
+  .bevaka-ruta__fordjupning {
+    margin: 0 0 var(--fg-space-5) 2px;
+    font-size: var(--fg-text-label);
+  }
+
+  .bevaka-ruta__fordjupning summary {
+    color: var(--fg-accent);
+    font-weight: var(--fg-weight-bold);
+    cursor: pointer;
+  }
+
+  /* lint-design-guard.ts (J1-tillägget om fällbart-utan-öppet-villkor):
+     direkt barn till <details> (inte <summary>) med egen display måste
+     antingen ha en display:none-regel eller villkoras med [open] — annars
+     kan barnets display kollidera med den native collapse-mekanismen
+     (samma buggklass som KommunProgression--resten-fyndet). Villkorat
+     här i stället för en separat display:none-regel. */
+  .bevaka-ruta__fordjupning[open] .bevaka-ruta__bidraglista {
+    list-style: none;
+    margin: var(--fg-space-3) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--fg-space-2);
+  }
+
+  .bevaka-ruta__fordjupning[open] .bevaka-ruta__bidraglista li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--fg-space-3);
+    background: var(--fg-surface);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+  }
+
+  .bevaka-ruta__bidragnamn {
+    font-size: var(--fg-text-body);
+  }
+
+  .bevaka-ruta__form-rad {
+    display: flex;
+    gap: var(--fg-space-3);
+    margin-bottom: var(--fg-space-3);
+  }
+
+  .bevaka-ruta__form-rad input {
+    flex: 1;
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-ink);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+    color: var(--fg-ink);
+  }
+
+  .bevaka-ruta__foreningsnamn-label {
+    display: block;
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-bottom: var(--fg-space-2);
+  }
+
+  .bevaka-ruta__form input[type='text'] {
+    width: 100%;
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    color: var(--fg-ink);
+    margin-bottom: var(--fg-space-3);
+    box-sizing: border-box;
+  }
+
+  .bevaka-ruta__samtycke {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fg-space-2);
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-bottom: var(--fg-space-3);
+  }
+
+  .bevaka-ruta__fel {
+    color: var(--fg-attention);
+    font-size: var(--fg-text-label);
+  }
+
+  .bevaka-ruta__footer {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* F3 — bekräftelsen */
+  .bevaka-kvitto {
+    background: var(--fg-surface);
+    border: var(--fg-border-structural) solid var(--fg-border);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-6);
+    margin-bottom: var(--fg-space-7);
+  }
+
+  .bevaka-kvitto__head {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-4);
+    margin-bottom: var(--fg-space-4);
+  }
+
+  .bevaka-kvitto__check {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--fg-accent);
+    color: var(--fg-on-accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bevaka-kvitto__headline {
+    font-family: var(--fg-font-display);
+    font-size: var(--fg-text-h2);
+    font-weight: var(--fg-weight-display);
+    line-height: 1.1;
+    color: var(--fg-ink);
+  }
+
+  .bevaka-kvitto__body {
+    font-size: var(--fg-text-body-lg);
+    line-height: 1.55;
+    color: var(--fg-ink);
+    margin: 0 0 var(--fg-space-4);
+  }
+
+  .bevaka-kvitto__nasta {
+    border: var(--fg-border-inner) solid var(--fg-ink);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4);
+    margin-bottom: var(--fg-space-3);
+  }
+
+  .bevaka-kvitto__nasta-label {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .bevaka-kvitto__nasta-rad {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+  }
+
+  .bevaka-kvitto__nasta-namn {
+    flex: 1;
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .bevaka-kvitto__nasta-datum {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-mono);
+    color: var(--fg-ink);
+  }
+
+  .bevaka-kvitto__omfattning {
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4);
+    margin-bottom: var(--fg-space-3);
+    font-size: var(--fg-text-body);
+    line-height: 1.5;
+  }
+
+  .bevaka-kvitto__inget-konto {
+    display: flex;
+    gap: var(--fg-space-3);
+    align-items: flex-start;
+    font-size: var(--fg-text-label);
+    line-height: 1.55;
+    color: var(--fg-ink-muted);
+    margin-bottom: var(--fg-space-4);
+  }
+
+  .bevaka-kvitto__inget-konto svg {
+    flex: none;
+    margin-top: 1px;
+  }
+
+  .bevaka-kvitto__se-alla {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-accent);
+    text-decoration: none;
+    border-top: var(--fg-border-inner) dashed var(--fg-border);
+    padding-top: var(--fg-space-4);
+  }
+</style>

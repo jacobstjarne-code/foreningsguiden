@@ -17,6 +17,7 @@ import BreadcrumbList from './BreadcrumbList.astro';
 import VerificationRow from './VerificationRow.astro';
 import KommunProgression from './KommunProgression.astro';
 import IgenkanningsRad from './IgenkanningsRad.astro';
+import BevakaKommunen from './BevakaKommunen.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
@@ -366,6 +367,13 @@ const webPageJsonLd = {
       </ul>
     </section>
   )}
+
+  {/* K1 (2026-08-16, Jacob): "Bevakningsrutan ligger efter registret,
+     före FAQ. Inte vid station 4 — den bär bara en länk sedan D2.2.
+     Skälet: Designs 19a säger 'under deadlinelistan', och listan är
+     numera registret. Erbjudandet ska komma efter att hon sett
+     fristerna, inte före." */}
+  <BevakaKommunen kommun={kommun} today={today} />
 
   {faqEntries.length > 0 && (
     <section>

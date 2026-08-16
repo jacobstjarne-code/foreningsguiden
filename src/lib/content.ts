@@ -295,8 +295,11 @@ export const TACKNING = {
  */
 export const BEVAKNING = {
   rubrik: 'Bevaka deadlines för din kommun',
+  // J3/K1 (2026-08-16): rättat "två veckor" → "fyra veckor" — cron/
+  // paminnelser.ts gick från 14/3 till 28/3 (J2, MEJLTEXTER.md:s
+  // "Rytm"-avsnitt). Talrättelse, ingen ny mening.
   ingress:
-    'Vi mejlar två veckor och tre dagar innan sista ansökningsdag för de bidrag du väljer att bevaka. Inget annat.',
+    'Vi mejlar fyra veckor och tre dagar innan sista ansökningsdag för de bidrag du väljer att bevaka. Inget annat.',
   epostLabel: 'Din e-postadress',
   epostPlaceholder: 'namn@forening.se',
   // C1 (ARBETSORDER 2026-08-11, Jacob): föreningsminnet utan konto — vet vi
@@ -323,11 +326,47 @@ export const BEVAKNING = {
   avreg:
     'Du är nu avregistrerad och vi har raderat din adress. Du är välkommen tillbaka när du vill.',
   // 1f (SPEC_HUVUDPROCESSEN §1f, Jacob 2026-08-02): deadlineradens
-  // "bevakas"-tillstånd — mockens "vi mejlar 4 veckor före" stämmer inte
-  // mot den riktiga kadensen (paminnelser.ts: 14 dagar + 3 dagar, samma
-  // tal som ingress ovan redan säger korrekt) — återanvänder den texten
-  // i stället för mockens fel-tal.
-  bevakasBadge: 'Bevakas — vi mejlar två veckor och tre dagar innan sista ansökningsdag.',
+  // "bevakas"-tillstånd. J3/K1 (2026-08-16): den ursprungliga kommentaren
+  // här sa att mockens "4 veckor" var fel och 14/3 rätt — sedan J2 (28/3-
+  // rytmen) är det TVÄRTOM, mockens "4 veckor" var rätt hela tiden.
+  // Samma talrättelse som ingress ovan.
+  bevakasBadge: 'Bevakas — vi mejlar fyra veckor och tre dagar innan sista ansökningsdag.',
+};
+
+/**
+ * K1 (2026-08-16, incoming/BEVAKNINGEN_KOMMUNSIDAN_19.md, mock §19a/19b
+ * i "Föreningsguiden huvudprocessen.dc.html"). Bevaka-ytan på kommun-
+ * sidan, egen komponent (BevakaKommunen.astro), placerad efter registret
+ * (Jacob 2026-08-16: "Bevakningsrutan ligger efter registret, före FAQ").
+ *
+ * "30, 14 och 3 dagar" i mockens egen copy är FEL sedan J2:s 28/3-rytm
+ * (Jacob 2026-08-16, K1-uppdraget: "K1 mot rytmen 28/3. Bekräftelse-
+ * skärmen visar två mejl, inte tre.") — rättat till "28 och 3 dagar"
+ * överallt nedan, samma minimala talrättelse som ingress/bevakasBadge
+ * ovan, ingen ny meningsstruktur. Övrig copy ordagrant ur mocken.
+ */
+export const BEVAKA_KOMMUN = {
+  // F4 — remsan. Fallback (ingen kontrolläst frist hittad för kommunen)
+  // återanvänder I1:s redan godkända, kommun-oberoende bevakningsremsa-
+  // text (FORSTASIDAN_SVARAR.bevakningsremsa) i stället för en ny,
+  // ospecificerad "vet inte"-mening.
+  remsanMall: 'Sista dag i {kommun} är {datum}.',
+  boxLabelMall: 'Bevaka {kommun} · gratis, inget konto',
+  bodyMall: 'Vi mejlar er 28 och 3 dagar innan varje sista dag i {kommun}.',
+  scopeAllaMall: 'Alla {n} bidrag i {kommun}',
+  scopeForvalEtikett: 'förval',
+  scopeValjLank: 'Välj enskilda bidrag i stället ›',
+  knapp: 'Bevaka →',
+  footer: 'Ingen inloggning, inget konto. Avsluta när ni vill — en länk finns i varje mejl.',
+  felText: 'Något gick fel. Försök igen.',
+
+  // F3 — bekräftelsen, egen vy (inte en toast).
+  confirmHeadlineMall: 'Klart. Ni bevakar {kommun}.',
+  confirmBodyMall: 'Vi mejlar {epost} — 28 och 3 dagar innan varje sista dag i {kommun}. Ni behöver inte göra något mer.',
+  nastaPaminnelseLabel: 'Nästa påminnelse gäller',
+  omfattningMall: 'Ni bevakar alla {n} bidrag i {kommun}. Vi lägger till fler i takt med att vi läser in kommunens sidor — bevakningen växer med dem, utan att ni gör något.',
+  ingetKontoText: 'Inget konto skapades — vi lagrar bara er mejladress. Vill ni ändra eller sluta? Varje mejl har en länk längst ned.',
+  seAllaBidragMall: 'Se alla {n} bidrag i {kommun}',
 };
 
 /**
