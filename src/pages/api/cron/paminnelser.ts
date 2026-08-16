@@ -1,10 +1,17 @@
 // GET /api/cron/paminnelser — utskicksmotorn (SPRINT §Spår A). Körs dagligen
-// via Vercel Cron (vercel.json, 07:00 UTC). Skickar MEJL.paminnelse14/
-// paminnelse3 till BEKRÄFTADE prenumeranter vars bevakade kommuner har
-// bidrag med fast deadline exakt 14 eller 3 dagar bort. Idempotent:
+// via Vercel Cron (vercel.json, 07:00 UTC). Skickar MEJL.paminnelse28/
+// paminnelseSista till BEKRÄFTADE prenumeranter vars bevakade kommuner har
+// bidrag med fast deadline exakt 28 eller 3 dagar bort. Idempotent:
 // wasReminderSent/markReminderSent (subscribers.ts) spårar per
 // (typ, bidrag, faktiskt datum) — samma dag kan aldrig skicka två gånger
 // även om cronjobbet triggas om.
+//
+// J2 (2026-08-16, MEJLTEXTER.md "Rytm"): rytmen bytt från 14/3 till 28/3
+// — samma rytm och samma två mejl (paminnelse28/paminnelseSista) som
+// abonnemanget (cron/abonnemangsbevakning.ts) redan använde. "Inte
+// 30/14/3": källfilens skäl är volym — bevakningens förval är hela
+// kommunen (Gislaved har fjorton bidrag), tre mejl per frist blir
+// fyrtiotvå mejl om året från en enda kommun.
 //
 // P3.1b (Jacob 2026-08-05): en andra körning bearbetar sub.bidrag (enskild
 // bidragsbevakning, subscribers.ts addBidragBevakning) utöver den
@@ -21,13 +28,13 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { loadKommuner, formatDate, formatWeekday, nextOccurrenceISO, daysUntil, todayISO } from '../../../lib/kommuner';
+import { loadKommuner, formatDate, nextOccurrenceISO, daysUntil, todayISO } from '../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../lib/kommuner';
 import { getAllConfirmedSubscribers, wasReminderSent, markReminderSent } from '../../../lib/subscribers';
-import { sendPaminnelse14, sendPaminnelse3, siteUrl } from '../../../lib/mejl';
+import { sendPaminnelse28, sendPaminnelseSista, siteUrl } from '../../../lib/mejl';
 
 interface Raknare {
-  sent14: number;
+  sent28: number;
   sent3: number;
   skipped: number;
   errors: string[];
@@ -39,7 +46,7 @@ async function behandlaBidrag(email: string, kommun: Kommun, bidrag: Bidrag, tod
   for (const mmdd of bidrag.deadlines.datum) {
     const occurrence = nextOccurrenceISO(mmdd, today);
     const days = daysUntil(occurrence, today);
-    const typ: '14' | '3' | null = days === 14 ? '14' : days === 3 ? '3' : null;
+    const typ: '28' | '3' | null = days === 28 ? '28' : days === 3 ? '3' : null;
     if (!typ) continue;
 
     const redanSkickat = await wasReminderSent(typ, bidrag.id, occurrence, email);
@@ -50,20 +57,19 @@ async function behandlaBidrag(email: string, kommun: Kommun, bidrag: Bidrag, tod
 
     const bidragLank = `${siteUrl()}/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`;
     try {
-      if (typ === '14') {
-        await sendPaminnelse14(email, {
+      if (typ === '28') {
+        await sendPaminnelse28(email, {
           bidragsnamn: bidrag.namn,
           kommun: kommun.kommun,
           datum: formatDate(occurrence),
           bidragLank,
         });
-        raknare.sent14++;
+        raknare.sent28++;
       } else {
-        await sendPaminnelse3(email, {
+        await sendPaminnelseSista(email, {
           bidragsnamn: bidrag.namn,
           kommun: kommun.kommun,
           datum: formatDate(occurrence),
-          veckodag: formatWeekday(occurrence),
           bidragLank,
         });
         raknare.sent3++;
@@ -83,13 +89,13 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 
   // ?today=YYYY-MM-DD — testkrok, skyddad av samma CRON_SECRET som resten
-  // av endpointen. Låter oss verifiera 14-/3-dagarslogiken mot en riktig
+  // av endpointen. Låter oss verifiera 28-/3-dagarslogiken mot en riktig
   // kommande deadline utan att vänta på kalendern eller fabricera data.
   const today = url.searchParams.get('today') || todayISO();
   const subscribers = await getAllConfirmedSubscribers();
   const kommuner = loadKommuner();
 
-  const raknare: Raknare = { sent14: 0, sent3: 0, skipped: 0, errors: [] };
+  const raknare: Raknare = { sent28: 0, sent3: 0, skipped: 0, errors: [] };
 
   for (const sub of subscribers) {
     for (const slug of sub.kommuner) {

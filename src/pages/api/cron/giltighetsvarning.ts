@@ -34,14 +34,14 @@
 // januari triggar) OCH 0 för NIVÅ 1 (ingen kommun har giltighet_regel) —
 // ingen bakgrundsfylld mottagare kunde få ett förvånande första-mejl.
 //
-// NIVÅ 1 KVAR I DRY RUN: MEJLTEXTER.md #5 finns i content.ts
-// (MEJL.giltighetsvarningNiva1) men saknar en {regeltext}-fraskälla
-// (GiltighetRegel{typ,antal} → svensk fras, t.ex. "tolv månader efter
-// årsmötet") — Code skriver ingen egen brödtext för att fylla den
-// luckan. Jacob (2026-08-16): "renderas aldrig i dag — giltighet_regel
-// finns i noll kommuner — men texten ska ligga klar när G1 landar."
-// Koppla NIVÅ 1 till sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar
-// OCH regeltext-frasen finns — logga bara tills dess.
+// NIVÅ 1 KVAR I DRY RUN (2026-08-16, J2): MEJLTEXTER.md #5 OCH
+// regeltext-frastabellen finns nu (regeltext(), kommunTyper.ts) — loggen
+// nedan räknar ut och visar frasen för varje mottagare, som bevis på att
+// den är redo. Ändå ingen avsändning: Jacob (2026-08-16) "renderas
+// aldrig i dag — giltighet_regel finns i noll kommuner — men texten ska
+// ligga klar när G1 landar." G1 (kommun.giltighet_regel populerad i
+// datan) är den enda kvarvarande spärren nu. Koppla NIVÅ 1 till
+// sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar.
 //
 // Skyddad med CRON_SECRET, samma mönster som paminnelser.ts/utfallsfraga.
 // ts. ?today= samma testkrok.
@@ -49,7 +49,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import {
-  loadKommuner, todayISO, giltighetRegelGerDatum, berakForfallodatum, addMonths,
+  loadKommuner, todayISO, giltighetRegelGerDatum, berakForfallodatum, addMonths, regeltext,
 } from '../../../lib/kommuner';
 import { sendGiltighetsvarningNiva2, siteUrl } from '../../../lib/mejl';
 import {
@@ -101,8 +101,13 @@ export const GET: APIRoute = async ({ request, url }) => {
             continue;
           }
 
+          // regeltext() (kommunTyper.ts) — inte null här: giltighetRegelGerDatum()
+          // (grenens villkor ovan) släpper bara igenom manader_efter_arsmote/
+          // manader_efter_beslut, båda täckta i regeltext()-tabellen.
+          const fras = regeltext(regel!);
+
           niva1SkulleSkickas++;
-          niva1Logg.push(`${sub.email} / ${kommunSlug} — förfaller ${forfallodatum} (årsmöte ${arsmotesdatum})`);
+          niva1Logg.push(`${sub.email} / ${kommunSlug} — förfaller ${forfallodatum} (årsmöte ${arsmotesdatum}, regeltext: "${fras}")`);
         } else {
           // NIVÅ 2 — bara i januari, en gång per (kommun, år, e-post)
           if (todayManad !== 1) continue;

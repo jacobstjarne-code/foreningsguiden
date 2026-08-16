@@ -474,23 +474,21 @@ export const MEJL = {
     ],
   },
 
-  paminnelse14: {
-    amne: 'Två veckor kvar: {bidragsnamn} i {kommun}',
+  // J2 (2026-08-16, MEJLTEXTER.md #6 "Sista påminnelsen — tre dagar
+  // före"). Ersätter de superseterade paminnelse14 (14-dagarsledet
+  // utgår helt, se "Rytm"-avsnittet i källfilen: "Två mejl per frist:
+  // 28 dagar och 3 dagar... Inte 30/14/3") och paminnelse3 (samma
+  // 3-dagarsplats, ny, kortare text — "till alla som fått mejl 2 för
+  // samma bidrag"). Delad mellan gratis bevakning (cron/paminnelser.ts)
+  // och abonnemanget (cron/abonnemangsbevakning.ts) — samma rytm för
+  // båda populationerna nu. {bidragLank} — samma variabelnamn som
+  // paminnelse28, källtextens {lank} döpt om vid inplacering.
+  paminnelseSista: {
+    amne: '{bidragsnamn} i {kommun} — sista dagen är {datum}',
     body: [
-      'Hej,',
-      'Den {datum} är sista ansökningsdag för {bidragsnamn} i {kommun}.',
-      'Två saker att kontrollera i god tid: att föreningen är godkänd som bidragsberättigad (det är ett eget ärende med egen handläggningstid), och att ni har underlagen som krävs. Kraven, beloppen och länken till kommunens ansökan finns här: {bidragLank}',
-      'Vi påminner en gång till tre dagar före.',
-    ],
-  },
-
-  paminnelse3: {
-    amne: 'Tre dagar kvar: {bidragsnamn} i {kommun}',
-    body: [
-      'Hej,',
-      'På {veckodag} den {datum} stänger ansökan för {bidragsnamn} i {kommun}.',
-      'Är ansökan inte inskickad än: allt ni behöver finns här — krav, belopp och länk till kommunens system: {bidragLank}',
-      'En för sent inlämnad ansökan behandlas i många kommuner inte alls, så tre dagar är marginal, inte utrymme.',
+      'På {datum} stänger ansökan för {bidragsnamn} i {kommun}. Det är om tre dagar.',
+      'Har ni redan skickat in behöver ni inte göra något.',
+      'Se vad kommunen kräver: {bidragLank}',
     ],
   },
 
@@ -530,16 +528,15 @@ export const MEJL = {
     ],
   },
 
-  // J1 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten är
-  // klar men INTE kopplad till avsändning (Jacob 2026-08-16: "renderas
-  // aldrig i dag — giltighet_regel finns i noll kommuner — men texten
-  // ska ligga klar när G1 landar"). Saknar dessutom en {regeltext}-källa
-  // — GiltighetRegel{typ,antal,kalla_url} har ingen färdig svensk fras
-  // för typ+antal (t.ex. "tolv månader efter årsmötet"), och Code
-  // skriver ingen egen brödtext för att fylla den luckan. Bygg
-  // regeltext-frasen OCH koppla cron/giltighetsvarning.ts:s NIVÅ 1-gren
-  // till sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar och den
-  // frasen finns.
+  // J1+J2 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten
+  // är klar. {regeltext}-källan som J1 saknade finns nu (MEJLTEXTER.md
+  // "Regeltext"-tabellen, J2) — regeltext() i kommunTyper.ts, en fras
+  // per giltighet_regel.typ/antal, verbatim ur tabellen. INTE kopplad
+  // till avsändning ändå: Jacob (2026-08-16) "renderas aldrig i dag —
+  // giltighet_regel finns i noll kommuner — men texten ska ligga klar
+  // när G1 landar" — G1 (datafältet) är den kvarvarande spärren, inte
+  // texten eller frasen längre. cron/giltighetsvarning.ts NIVÅ 1 räknar
+  // och LOGGAR (med regeltext) men skickar inte, tills G1 landar.
   giltighetsvarningNiva1: {
     amne: 'Ert godkännande i {kommun} går ut {manad}',
     body: [
@@ -714,21 +711,50 @@ export const ATERBETALNING = {
  */
 export const PRIS = {
   metaTitle: 'Priser — Föreningsguiden',
+  // metaDescription INTE uppdaterad i J2 — PRISTEXTER.md adresserar bara
+  // ingress/kort/regler, inte SEO-metatext. Nämner fortfarande tre
+  // produktnamn, ett steg efter hjalp/variant-sammanslagningen nedan.
+  // Flaggat till Jacob i leveransrapporten, inte tyst kvarlämnat.
   metaDescription: 'Vad det kostar att köpa ett registreringsutkast, ett bidragsutkast eller ett bevakningsabonnemang hos Föreningsguiden.',
   h1: 'Priser',
-  intro: 'Att hitta och bevaka bidrag är gratis. Det här är vad de tre betalprodukterna kostar.',
-  registrering: {
-    namn: 'Registreringschecklistan',
-    beskrivning: '{{FABLE: kort produktbeskrivning, kommun-oberoende}}',
+  // J2 (2026-08-16, PRISTEXTER.md "Sidans ingress").
+  intro: 'Att hitta bidragen, se vad kommunen kräver och få påminnelse före sista dag är gratis. Vi tar betalt för arbetet.',
+  // J2: "Två produkter, inte tre: registreringschecklistan och
+  // bidragsutkastet är samma sak — att bli godkänd som bidragsberättigad
+  // förening ÄR en ansökan till kommunen." Ersätter de tidigare separata
+  // PRIS.registrering/PRIS.utkast (två {{FABLE:}}-kort för samma produkt)
+  // med EN post. `variant` är samma produkt riktad mot registreringen i
+  // stället för ett enskilt bidrag — ingen anropare än (ingen yta
+  // skiljer i dag på "sök ett bidrag" och "bli godkänd" som separata
+  // köpvägar på /pris/), sparad här ordagrant för när en sådan yta finns.
+  hjalp: {
+    namn: 'Få hjälp med ansökan',
+    beskrivning: [
+      'Kommunens krav för det bidrag ni valt, i rätt ordning, med sista ansökningsdag, belopp och bilagorna listade. Era uppgifter ifyllda där ni angett dem.',
+      'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
+      'Ansökan lämnar ni in själva och beslutet fattar kommunen. Vi lovar inte bifall.',
+    ],
+    variant: {
+      namn: 'Få hjälp att bli godkända',
+      beskrivning: [
+        'Kommunens krav för att bli bidragsberättigad förening, i rätt ordning, med blanketter och handläggningstid. Det formella steget som fäller flest ansökningar, och som måste vara klart innan ni kan söka något alls.',
+      ],
+    },
   },
-  utkast: {
-    namn: 'Bidragsutkastet',
-    beskrivning: '{{FABLE: kort produktbeskrivning, kommun-oberoende}}',
-  },
+  // J2: bakom ABONNEMANG_LEVERANS_LIVE (priser.ts) — "Renderas inte
+  // förrän leveransen finns. Villkoret är att påminnelserna går ut
+  // skarpt och att föreningsprofilen överlever en webbläsarrensning."
+  // Påminnelserna (paminnelse28/paminnelseSista) skickas skarpt sedan
+  // J1/J2 — profil-överlevnadsvillkoret är INTE verifierat i den här
+  // leveransen, flaggan står kvar false tills båda är bekräftade.
   abonnemang: {
-    namn: 'Bevakningsabonnemang',
+    namn: 'Föreningsabonnemang',
     perAr: '/ år',
-    beskrivning: '{{FABLE: produkten saknar köpyta och beskrivning helt idag}}',
+    beskrivning: [
+      'Ansökningarna ingår, hur många ni än gör under året. Två söka bidrag och ni har tjänat på det.',
+      'Föreningsprofilen sparas mellan år och mellan enheter, så nästa kassör slipper börja om.',
+      'Besked när kommunen ändrar datum, belopp eller villkor.',
+    ],
   },
   cta: 'Hitta er kommun',
 };

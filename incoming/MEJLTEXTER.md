@@ -91,6 +91,60 @@ Så gör ni i {kommun}: {kalla_url}
 
 ---
 
+## 6. Sista påminnelsen — tre dagar före
+
+Går ut tre dagar före sista ansökningsdag, till alla som fått mejl 2 för
+samma bidrag. Kort, en enda sak.
+
+**Ämne:** {bidragsnamn} i {kommun} — sista dagen är {datum}
+
+På {datum} stänger ansökan för {bidragsnamn} i {kommun}. Det är om tre
+dagar.
+
+Har ni redan skickat in behöver ni inte göra något.
+
+Se vad kommunen kräver: {lank}
+
+---
+
+## Rytm
+
+Två mejl per frist: **28 dagar** och **3 dagar** före sista ansökningsdag.
+
+Inte 30/14/3. Skälet är volym: bevakningens förval är hela kommunen, och
+Gislaved har fjorton bidrag. Tre mejl per frist blir fyrtiotvå mejl om året
+från en kommun, ofta klustrade februari–april. Bevakningen är produktens enda
+återkommande kontakt och tål inte den volymen — den som avregistrerar sig
+förlorar vi helt.
+
+Tjugoåtta dagar ger tid att ordna godkännandet som bidragsberättigad förening,
+vilket är det som faktiskt tar tid. Tre dagar fångar den som lade undan det.
+
+---
+
+## Regeltext — fraser till mejl 5, giltighet nivå ett
+
+{regeltext} böjs in i meningen "I {kommun} gäller godkännandet som
+bidragsberättigad förening {regeltext}, vilket betyder att ert löper ut
+{forfallodatum}."
+
+En fras per `giltighet_regel.typ`:
+
+| typ | regeltext |
+|---|---|
+| `manader_efter_arsmote`, antal 1 | i en månad efter årsmötet |
+| `manader_efter_arsmote`, antal n | i {n} månader efter årsmötet |
+| `manader_efter_beslut`, antal 12 | i ett år från beslutsdagen |
+| `manader_efter_beslut`, antal 13 | i tretton månader från beslutsdagen |
+| `manader_efter_beslut`, antal n | i {n} månader från beslutsdagen |
+| `fast_datum` | till och med {datum} varje år |
+| `kalenderar` | kalenderåret ut |
+
+Saknas typen, eller är den `okand`: mejl 5 går inte ut. Då gäller mejl 4.
+Ingen fras uppfinns, inget datum räknas.
+
+---
+
 ## Sidfot i varje mejl
 
 Ni får det här för att ni bevakar {kommun}. Avsluta: {avregistrera}

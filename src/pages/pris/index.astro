@@ -1,23 +1,21 @@
 ---
-// Prissidan — D2 (SPRINT: Produkten, Opus/Fable 2026-07-31): "249 kr för
-// registrering, 249 kr för utkast, 495 kr för abonnemang — de möts aldrig
-// på samma yta. Två priser utan sammanhang läses som slumpmässiga." Priset
-// hämtas ENBART ur priser.ts (en sanning) — aldrig hårdkodat här.
+// Prissidan — J2 (2026-08-16, PRISTEXTER.md): "Två produkter, inte tre —
+// registreringschecklistan och bidragsutkastet är samma sak." Ett kort
+// (PRIS.hjalp, 249 kr) i stället för de två tidigare {{FABLE:}}-korten.
+// Priset hämtas ENBART ur priser.ts (en sanning) — aldrig hårdkodat här.
 //
-// Abonnemang-kortet har ingen CTA: checkout/abonnemang.ts finns, men ingen
-// sida eller komponent i hela kodbasen länkar till det — produkten saknar
-// köpyta helt idag (verifierat: grep efter "checkout/abonnemang" utanför
-// src/pages/api/ ger noll träffar). Att länka ett kort till en rå
-// checkout-API-endpoint utan en riktig köpyta emellan hade varit en trasig
-// länk, inte en genväg. Flaggat i rapporten till Jacob — det är en egen,
-// större lucka än den här sidan.
+// Abonnemangskortet är bakom ABONNEMANG_LEVERANS_LIVE (priser.ts, false
+// idag) — PRISTEXTER.md: "Renderas inte förrän leveransen finns...
+// Tills dess visas bara engångspriset." Ingen CTA på abonnemangskortet
+// även när grinden öppnas: checkout/abonnemang.ts finns, men ingen sida
+// länkar dit än (samma lucka som innan J2, oförändrad, flaggad i
+// rapporten).
 import Base from '../../layouts/Base.astro';
 import BreadcrumbList from '../../components/BreadcrumbList.astro';
 import { PRIS, ATERBETALNING } from '../../lib/content';
-import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_BIDRAGSUTKAST_ORE, PRIS_ABONNEMANG_ORE } from '../../lib/priser';
+import { PRIS_REGISTRERINGSUTKAST_ORE, PRIS_ABONNEMANG_ORE, ABONNEMANG_LEVERANS_LIVE } from '../../lib/priser';
 
-const registreringKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
-const utkastKr = PRIS_BIDRAGSUTKAST_ORE / 100;
+const hjalpKr = PRIS_REGISTRERINGSUTKAST_ORE / 100;
 const abonnemangKr = PRIS_ABONNEMANG_ORE / 100;
 ---
 <Base title={PRIS.metaTitle} description={PRIS.metaDescription}>
@@ -29,26 +27,21 @@ const abonnemangKr = PRIS_ABONNEMANG_ORE / 100;
   <h1>{PRIS.h1}</h1>
   <p class="pris-intro">{PRIS.intro}</p>
 
-  <div class="pris-grid">
+  <div class:list={['pris-grid', { 'pris-grid--en': !ABONNEMANG_LEVERANS_LIVE }]}>
     <div class="fg-card pris-kort">
-      <h2>{PRIS.registrering.namn}</h2>
-      <p class="pris-kort__pris">{registreringKr} kr</p>
-      <p>{PRIS.registrering.beskrivning}</p>
+      <h2>{PRIS.hjalp.namn}</h2>
+      <p class="pris-kort__pris">{hjalpKr} kr</p>
+      {PRIS.hjalp.beskrivning.map((stycke) => <p>{stycke}</p>)}
       <a href="/matcha/" class="btn-primary">{PRIS.cta} →</a>
     </div>
 
-    <div class="fg-card pris-kort">
-      <h2>{PRIS.utkast.namn}</h2>
-      <p class="pris-kort__pris">{utkastKr} kr</p>
-      <p>{PRIS.utkast.beskrivning}</p>
-      <a href="/matcha/" class="btn-primary">{PRIS.cta} →</a>
-    </div>
-
-    <div class="fg-card pris-kort">
-      <h2>{PRIS.abonnemang.namn}</h2>
-      <p class="pris-kort__pris">{abonnemangKr} kr <span class="pris-kort__per">{PRIS.abonnemang.perAr}</span></p>
-      <p>{PRIS.abonnemang.beskrivning}</p>
-    </div>
+    {ABONNEMANG_LEVERANS_LIVE && (
+      <div class="fg-card pris-kort">
+        <h2>{PRIS.abonnemang.namn}</h2>
+        <p class="pris-kort__pris">{abonnemangKr} kr <span class="pris-kort__per">{PRIS.abonnemang.perAr}</span></p>
+        {PRIS.abonnemang.beskrivning.map((stycke) => <p>{stycke}</p>)}
+      </div>
+    )}
   </div>
 
   <div class="pris-aterbetalning">
@@ -111,7 +104,17 @@ const abonnemangKr = PRIS_ABONNEMANG_ORE / 100;
 
   @media (min-width: 720px) {
     .pris-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* J2 — abonnemanget bakom sin grind: ett kort ska inte sträckas
+       över hela tvåkolumnsbredden när det andra kortet inte renderas. */
+    .pris-grid--en {
+      grid-template-columns: minmax(0, 1fr) 1fr;
+    }
+
+    .pris-grid--en .pris-kort {
+      grid-column: 1;
     }
   }
 </style>

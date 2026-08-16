@@ -29,11 +29,11 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { getKommunBySlug, formatDate, formatWeekday, nextOccurrenceISO, daysUntil, todayISO } from '../../../lib/kommuner';
+import { getKommunBySlug, formatDate, nextOccurrenceISO, daysUntil, todayISO } from '../../../lib/kommuner';
 import { hamtaAllaAbonnemang } from '../../../lib/abonnemang';
 import { getSubscriber, wasReminderSent, markReminderSent } from '../../../lib/subscribers';
 import { matchKommun } from '../../../lib/matching';
-import { sendPaminnelse28, sendPaminnelse3, siteUrl } from '../../../lib/mejl';
+import { sendPaminnelse28, sendPaminnelseSista, siteUrl } from '../../../lib/mejl';
 
 export const GET: APIRoute = async ({ request, url }) => {
   const env = import.meta.env as unknown as Record<string, string>;
@@ -97,11 +97,10 @@ export const GET: APIRoute = async ({ request, url }) => {
             });
             sent28++;
           } else {
-            await sendPaminnelse3(ab.email, {
+            await sendPaminnelseSista(ab.email, {
               bidragsnamn: bidrag.namn,
               kommun: kommun.kommun,
               datum: formatDate(occurrence),
-              veckodag: formatWeekday(occurrence),
               bidragLank,
             });
             sent3++;

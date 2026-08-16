@@ -311,6 +311,45 @@ export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string)
 }
 
 /**
+ * J2 (2026-08-16, MEJLTEXTER.md "Regeltext — fraser till mejl 5"): fras
+ * för {regeltext} i MEJL.giltighetsvarningNiva1 (content.ts), en rad per
+ * typ+antal, verbatim ur källfilens tabell — ingen egen svensk text.
+ * "Saknas typen, eller är den okand: mejl 5 går inte ut... Ingen fras
+ * uppfinns" — null täcker ingen_regel/okand (ingen rad i tabellen ger
+ * dem en fras) och antal: null.
+ *
+ * kalenderar HAR en fras i tabellen ("kalenderåret ut") och returneras
+ * här, men når ändå aldrig mejl 5 i praktiken — INTE på grund av en
+ * saknad fras, utan för att berakForfallodatum() (ovan) returnerar null
+ * för kalenderar (inget beräkningsbart förfallodatum, mejl 5 kräver
+ * {forfallodatum}). Två olika spärrar av olika skäl — ingen orsak att
+ * låtsas att bara en av dem finns.
+ *
+ * fast_datum FINNS I KÄLLTEXTENS TABELL men INTE i GILTIGHET_REGEL_TYPER
+ * — kan inte skrivas som ett switch-case (TypeScript tillåter inte ett
+ * otillgängligt typvärde). Källtexten antar en regel-typ G1 aldrig byggde
+ * (eller som väntar på en framtida utökning) — flaggat till Jacob i
+ * leveransrapporten, inte tyst uteslutet eller gissat på.
+ */
+export function regeltext(regel: GiltighetRegel): string | null {
+  if (regel.antal === null) return null;
+  const n = regel.antal;
+  switch (regel.typ) {
+    case 'manader_efter_arsmote':
+      return n === 1 ? 'i en månad efter årsmötet' : `i ${n} månader efter årsmötet`;
+    case 'manader_efter_beslut':
+      if (n === 12) return 'i ett år från beslutsdagen';
+      if (n === 13) return 'i tretton månader från beslutsdagen';
+      return `i ${n} månader från beslutsdagen`;
+    case 'kalenderar':
+      return 'kalenderåret ut';
+    case 'ingen_regel':
+    case 'okand':
+      return null;
+  }
+}
+
+/**
  * ISO-datum plus N månader, UTC (negativt N går bakåt — GiltighetsKontroll.
  * astro använder addMonths(forfallodatum, -2) för påminnelsemånaden).
  * Dagen klampas till sista dagen i målmånaden om ursprungsdagen inte

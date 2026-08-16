@@ -138,13 +138,20 @@ export interface PaminnelseVars {
   bidragLank: string;
 }
 
-/** SPEC_ABONNEMANG.md §4 — abonnemangets fyraveckorspåminnelse, per matchat bidrag. Se content.ts MEJL.paminnelse28 för FABLE-slot-noten. */
+/** SPEC_ABONNEMANG.md §4 — fyraveckorspåminnelsen (MEJLTEXTER.md #2), delad mellan gratis bevakning och abonnemang sedan J2 (28/3-rytmen). */
 export async function sendPaminnelse28(to: string, vars: PaminnelseVars): Promise<void> {
   await sendMejl(to, MEJL.paminnelse28, vars);
 }
 
-export async function sendPaminnelse14(to: string, vars: PaminnelseVars): Promise<void> {
-  await sendMejl(to, MEJL.paminnelse14, vars);
+/**
+ * J2 (2026-08-16, MEJLTEXTER.md #6 "Sista påminnelsen"). Ersätter de
+ * superseterade sendPaminnelse14 och sendPaminnelse3 (14/3-rytmen
+ * utgår helt — "Rytm"-avsnittet i källfilen: "Inte 30/14/3"). Delad
+ * mellan cron/paminnelser.ts (gratis bevakning) och cron/
+ * abonnemangsbevakning.ts (abonnemang) — samma slot, samma text.
+ */
+export async function sendPaminnelseSista(to: string, vars: PaminnelseVars): Promise<void> {
+  await sendMejl(to, MEJL.paminnelseSista, vars);
 }
 
 export interface GiltighetsvarningNiva2Vars {
@@ -166,11 +173,10 @@ export async function sendGiltighetsvarningNiva2(to: string, vars: Giltighetsvar
 export interface GiltighetsvarningNiva1Vars {
   arsmotesdatum: string;
   kommun: string;
-  // Fras för regel.typ+regel.antal (t.ex. "tolv månader efter
-  // årsmötet") — INGEN källa för den frasen finns ännu (se
-  // MEJL.giltighetsvarningNiva1-kommentaren, content.ts). Caller-
-  // ansvar, inte byggt av Code. Interfacet är redo, ingen anropare
-  // finns än (cron/giltighetsvarning.ts NIVÅ 1 är kvar i dry run).
+  // Fras för regel.typ+regel.antal (t.ex. "i tretton månader från
+  // beslutsdagen") — källa: regeltext() (kommunTyper.ts), byggd J2 ur
+  // MEJLTEXTER.md:s regeltext-tabell. Caller (cron/giltighetsvarning.ts)
+  // beräknar den, inte den här filen.
   regeltext: string;
   forfallodatum: string;
   manad: string;
@@ -178,11 +184,12 @@ export interface GiltighetsvarningNiva1Vars {
 }
 
 /**
- * J1 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten finns,
- * men INGEN anropare kopplad än (Jacob 2026-08-16: "renderas aldrig i
- * dag — giltighet_regel finns i noll kommuner — men texten ska ligga
- * klar när G1 landar"). Koppla cron/giltighetsvarning.ts:s NIVÅ 1-gren
- * hit när G1 landar OCH regeltext-frasen finns.
+ * J1+J2 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten och
+ * regeltext-källan finns, men INGEN anropare kopplad än (Jacob
+ * 2026-08-16: "renderas aldrig i dag — giltighet_regel finns i noll
+ * kommuner — men texten ska ligga klar när G1 landar"). G1 (datafältet)
+ * är den kvarvarande spärren. Koppla cron/giltighetsvarning.ts:s NIVÅ
+ * 1-gren hit när G1 landar.
  */
 export async function sendGiltighetsvarningNiva1(to: string, vars: GiltighetsvarningNiva1Vars): Promise<void> {
   await sendMejl(to, MEJL.giltighetsvarningNiva1, vars);
@@ -204,10 +211,6 @@ export interface AndringsbeskedVars {
  */
 export async function sendAndringsbesked(to: string, vars: AndringsbeskedVars): Promise<void> {
   await sendMejl(to, MEJL.andringsbesked, vars);
-}
-
-export async function sendPaminnelse3(to: string, vars: PaminnelseVars & { veckodag: string }): Promise<void> {
-  await sendMejl(to, MEJL.paminnelse3, vars);
 }
 
 export interface KopNotisVars {
