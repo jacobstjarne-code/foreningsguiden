@@ -36,6 +36,9 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: node --experimental-strip-types scripts/verify-krav-fullstandiga-regression.ts --ci-mot=origin/main
 
+      - name: Avregistreringslänk i bevakningsmejlen (J1.3)
+        run: node --experimental-strip-types scripts/verify-mejl-avregistrering.ts
+
       - name: astro build
         run: npm run build
 

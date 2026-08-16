@@ -27,17 +27,21 @@
 //     GILTIGHETSKOLL-kommentaren i content.ts). Idempotent per (kommun,
 //     kalenderår, e-post) — egen nyckelrymd (giltighetsvarningNiva2*).
 //
-// DRY RUN (Jacob 2026-08-11, bekräftat via AskUserQuestion): NIVÅ 1/2:s
-// mejltexter är inte skrivna än — MEJL.giltighetsvarning (content.ts)
-// byggde på det gamla fritext/275-dagarsantagandet och passar inte de nya
-// nivåerna (se mejl.ts:s sendGiltighetsvarning-kommentar). Samma klass av
-// risk som {{FABLE:}}-platshållaren som hittades live i produktion
-// tidigare i den här sessionen — hellre en tom logg än ett gissat mejl
-// till en verklig inkorg. Cronet räknar ut ALLA rätta mottagare/datum och
-// LOGGAR vad det skulle skicka, men anropar aldrig sendMejl och markerar
-// aldrig som skickat. Byt till skarpt läge (anropa sendGiltighets-
-// varningNiva1/Niva2, markera med markGiltighetsvarningSent/-Niva2Sent)
-// när Opus/Fable levererat båda mejltexterna.
+// NIVÅ 2 (2026-08-16, J1): LIVE. MEJLTEXTER.md #4 levererad av Opus —
+// sendGiltighetsvarningNiva2 (mejl.ts) anropas nu, markGiltighetsvarning-
+// Niva2Sent sätts vid lyckad sändning. Verifierat riskfritt innan
+// omkopplingen: dry run-räkningen var 0 för NIVÅ 2 (fel månad, bara
+// januari triggar) OCH 0 för NIVÅ 1 (ingen kommun har giltighet_regel) —
+// ingen bakgrundsfylld mottagare kunde få ett förvånande första-mejl.
+//
+// NIVÅ 1 KVAR I DRY RUN: MEJLTEXTER.md #5 finns i content.ts
+// (MEJL.giltighetsvarningNiva1) men saknar en {regeltext}-fraskälla
+// (GiltighetRegel{typ,antal} → svensk fras, t.ex. "tolv månader efter
+// årsmötet") — Code skriver ingen egen brödtext för att fylla den
+// luckan. Jacob (2026-08-16): "renderas aldrig i dag — giltighet_regel
+// finns i noll kommuner — men texten ska ligga klar när G1 landar."
+// Koppla NIVÅ 1 till sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar
+// OCH regeltext-frasen finns — logga bara tills dess.
 //
 // Skyddad med CRON_SECRET, samma mönster som paminnelser.ts/utfallsfraga.
 // ts. ?today= samma testkrok.
@@ -47,8 +51,10 @@ import type { APIRoute } from 'astro';
 import {
   loadKommuner, todayISO, giltighetRegelGerDatum, berakForfallodatum, addMonths,
 } from '../../../lib/kommuner';
+import { sendGiltighetsvarningNiva2, siteUrl } from '../../../lib/mejl';
 import {
   getAllConfirmedSubscribers, wasGiltighetsvarningSent, wasGiltighetsvarningNiva2Sent,
+  markGiltighetsvarningNiva2Sent,
 } from '../../../lib/subscribers';
 
 export const GET: APIRoute = async ({ request, url }) => {
@@ -107,6 +113,12 @@ export const GET: APIRoute = async ({ request, url }) => {
             continue;
           }
 
+          await sendGiltighetsvarningNiva2(sub.email, {
+            kommun: kommun.kommun,
+            kalla_url: `${siteUrl()}/kommun/${kommunSlug}/`,
+          });
+          await markGiltighetsvarningNiva2Sent(kommunSlug, todayAr, sub.email);
+
           niva2SkulleSkickas++;
           niva2Logg.push(`${sub.email} / ${kommunSlug} (årsmöte ${arsmotesdatum}, ingen känd regel)`);
         }
@@ -119,10 +131,14 @@ export const GET: APIRoute = async ({ request, url }) => {
   return new Response(
     JSON.stringify({
       today,
-      dryRun: true,
+      // NIVÅ 1 fortfarande dry run (se filhuvudet), NIVÅ 2 live sedan
+      // J1 (2026-08-16) — "niva2SkulleSkickas" är nu antal FAKTISKT
+      // skickade, fältnamnet oförändrat för att inte bryta ev. loggparsning.
+      niva1DryRun: true,
+      niva2Live: true,
       subscribers: subscribers.length,
       niva1: { skulleSkickas: niva1SkulleSkickas, redanSkickat: niva1RedanSkickat, mottagare: niva1Logg },
-      niva2: { skulleSkickas: niva2SkulleSkickas, redanSkickat: niva2RedanSkickat, mottagare: niva2Logg },
+      niva2: { skickade: niva2SkulleSkickas, redanSkickat: niva2RedanSkickat, mottagare: niva2Logg },
       errors,
     }),
     { headers: { 'content-type': 'application/json' } }

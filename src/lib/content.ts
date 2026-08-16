@@ -439,26 +439,38 @@ export const MEJL = {
     ],
   },
 
+  // J1 (2026-08-16, Opus 12 augusti, incoming/MEJLTEXTER.md #1
+  // "Bekräftelse — när hon anmäler bevakning"). Filens egen rubrik
+  // döljer att texten INTE ber om ett klick — "Bevakningen är igång"
+  // konstateras som redan sant, {lank} är bara en genväg. Det matchar
+  // funktionellt VALKOMST-slotet (skickas EFTER klicket på
+  // MEJL.bekraftelse, api/bekrafta/[token].ts), inte bekraftelse-slotet
+  // (som ber om klicket och vars text MEJLTEXTER.md inte adresserar).
+  // MEJL.bekraftelse lämnad orörd. {kommun}/{lank} — mejl.ts:s
+  // sendValkomst mappar in sina befintliga kommunLista/kommunLank-värden
+  // under de här namnen (samma innehåll, bara variabelnamnet ändrat för
+  // att matcha källtexten ordagrant).
   valkomst: {
-    amne: 'Bevakningen är igång',
+    amne: 'Bevakningen är igång — {kommun}',
     body: [
-      'Hej,',
-      'Nu bevakar vi {kommunLista} åt er. Så här fungerar det: vi mejlar två veckor före sista ansökningsdag för bidragen i era kommuner, och en gång till tre dagar före. Inget annat — inga nyhetsbrev, ingen reklam.',
-      'Ett tips redan nu: kontrollera att föreningen är godkänd som bidragsberättigad i er kommun. I flera kommuner förfaller godkännandet tyst efter en tid, och utan det spelar deadlines ingen roll. Ni ser vad som gäller er kommun här: {kommunLank}',
-      'Att bevaka bidrag hos Föreningsguiden är gratis.',
+      'Ni bevakar nu föreningsbidragen i {kommun}. Vi hör av oss fyra veckor före varje sista ansökningsdag, och när kommunen ändrar datum, belopp eller villkor.',
+      'Ingen inloggning, inget konto. Vill ni sluta räcker det med länken längst ned i varje mejl.',
+      'Se vad {kommun} har: {lank}',
     ],
   },
 
   // SPEC_ABONNEMANG.md §4 (Jacob, 2026-07-27): abonnemangets fyraveckors-
   // påminnelse, per MATCHAT bidrag (inte per kommun som paminnelse14).
-  // {{FABLE:}}-slots — Code skriver ingen egen svensk mejltext,
-  // paminnelse14s "Två veckor kvar" duger inte bara omskrivet till fyra
-  // utan att Fable godkänt formuleringen (abonnemangsramen är ny copy,
-  // inte samma produkt som gratisbevakningen).
+  // {{FABLE:}}-platshållaren ersatt J1 (MEJLTEXTER.md #2, ordagrant).
+  // {bidragLank} — samma variabelnamn som paminnelse14/paminnelse3
+  // (PaminnelseVars, mejl.ts), källtextens {lank} döpt om vid inplacering.
   paminnelse28: {
-    amne: '{{FABLE: ämnesrad, fyra veckor kvar — {bidragsnamn} i {kommun}}}',
+    amne: '{bidragsnamn} i {kommun} — fyra veckor kvar',
     body: [
-      '{{FABLE: brödtext för abonnemangets fyraveckorspåminnelse, per matchat bidrag}}',
+      'Sista ansökningsdag för {bidragsnamn} i {kommun} är {datum}. Det är fyra veckor bort.',
+      'Har ni sökt bidraget förut brukar det gå fort. Är det första gången behöver föreningen vara godkänd som bidragsberättigad i kommunen innan ansökan kan behandlas, och det tar tid att ordna. Kontrollera det nu, inte i sista veckan.',
+      'Se vad kommunen kräver: {bidragLank}',
+      'Ändrar kommunen datum, belopp eller villkor hör vi av oss.',
     ],
   },
 
@@ -482,13 +494,58 @@ export const MEJL = {
     ],
   },
 
-  giltighetsvarning: {
-    amne: 'Kontrollera er bidragsstatus i {kommun}',
+  // J1 (2026-08-16, MEJLTEXTER.md #3 "Ändringsbeskedet"). TEXT-UTAN-YTA:
+  // ingen cron/sändare anropar sendAndringsbesked (mejl.ts) än — den
+  // bevakning-scopade ändringsdetekteringen (jämföra ett kommun-bidrags
+  // datum/belopp/villkor mot ett tidigare avläst tillstånd, PER
+  // BEVAKNINGSPRENUMERANT) finns inte byggd. Förväxla inte med H22:s
+  // sendAndringsNotis nedan — den är en ANNAN population (köpare av
+  // registreringsutkast, jämför mot deras låsta snapshot), inte gratis
+  // bevakningsprenumeranter. Rapporterat till Jacob i J1-leveransen,
+  // döda inte den här texten.
+  andringsbesked: {
+    amne: '{kommun} har ändrat {bidragsnamn}',
     body: [
-      'Hej,',
-      'Ni angav att föreningen hade årsmöte {arsmotesdatum}. I {kommun} gäller: {giltighetsregel}. Det betyder att er status som bidragsberättigad förening kan behöva förnyas ungefär nu.',
-      'Vårt råd: kontrollera i {system} att föreningens uppgifter är uppdaterade och statusen aktiv — innan ni räknar med pengar från nästa ansökningsomgång. Ett förfallet godkännande upptäcks oftast först när det är för sent att hinna åtgärda.',
-      'Vad som gäller i er kommun, med källa: {kommunLank}',
+      'Vi läste {kommun}s sida i dag och något har ändrats sedan sist.',
+      '{vad_som_andrats}',
+      'Läs hos kommunen: {kalla_url}',
+      'Vi kontrollerar era bevakade bidrag löpande. Det här är det enda vi hittade.',
+    ],
+  },
+
+  // J1 (2026-08-16, MEJLTEXTER.md #4 "Januarimejlet — giltighet, nivå
+  // två"). Ersätter den gamla, aldrig skarpt körda MEJL.giltighetsvarning
+  // (275-dagarsantagandet, se historik i mejl.ts/cron/giltighetsvarning.ts
+  // — 0 riktiga mejl någonsin skickade av den, superseterad här, inget
+  // innehåll att migrera). Går ut i januari till prenumeranter vars
+  // kommun saknar giltighet_regel (cron/giltighetsvarning.ts NIVÅ 2) —
+  // nu LIVE (Jacob 2026-08-16: dry-run-läget krävde bara att texten
+  // fanns, se cron-filens historik).
+  giltighetsvarningNiva2: {
+    amne: 'Är er förening fortfarande godkänd i {kommun}?',
+    body: [
+      'I många kommuner måste en förening förnya sitt godkännande som bidragsberättigad, ofta efter årsmötet. Vi vet inte vad som gäller i {kommun} — kommunen publicerar ingen regel vi kunnat läsa.',
+      'Kontrollera hos kommunen innan ansökningarna öppnar: {kalla_url}',
+      'Vi hör av oss i januari varje år tills ni säger till att sluta.',
+    ],
+  },
+
+  // J1 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten är
+  // klar men INTE kopplad till avsändning (Jacob 2026-08-16: "renderas
+  // aldrig i dag — giltighet_regel finns i noll kommuner — men texten
+  // ska ligga klar när G1 landar"). Saknar dessutom en {regeltext}-källa
+  // — GiltighetRegel{typ,antal,kalla_url} har ingen färdig svensk fras
+  // för typ+antal (t.ex. "tolv månader efter årsmötet"), och Code
+  // skriver ingen egen brödtext för att fylla den luckan. Bygg
+  // regeltext-frasen OCH koppla cron/giltighetsvarning.ts:s NIVÅ 1-gren
+  // till sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar och den
+  // frasen finns.
+  giltighetsvarningNiva1: {
+    amne: 'Ert godkännande i {kommun} går ut {manad}',
+    body: [
+      'Ni angav att föreningens senaste årsmöte var {arsmotesdatum}. I {kommun} gäller godkännandet som bidragsberättigad förening {regeltext}, vilket betyder att ert löper ut {forfallodatum}.',
+      'Förnya innan dess, annars kan ansökningar avvisas utan prövning.',
+      'Så gör ni i {kommun}: {kalla_url}',
     ],
   },
 

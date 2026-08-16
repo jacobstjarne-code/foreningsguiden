@@ -1,9 +1,10 @@
 // POST /api/giltighetsbevakning — GILTIGHETSKOLLEN "erbjudandet" (SPRINT
 // §Spår B, SPRINT_COPY.ts §GILTIGHETSKOLL). Sparar årsmötesdatum + adress
-// mot kommunen, som underlag för en framtida giltighetspåminnelse
-// (MEJL.giltighetsvarning, content.ts — själva utskicksjobbet är inte
-// byggt än, se rapporten till Jacob). Anropas via fetch() från
-// GiltighetsKontroll.astro, inte en full formulärnavigering — svarar JSON.
+// mot kommunen, som underlag för giltighetspåminnelsen
+// (MEJL.giltighetsvarningNiva1/Niva2, content.ts — utskicket sker via
+// cron/giltighetsvarning.ts, se den filen för NIVÅ 1/2-status, J1
+// 2026-08-16). Anropas via fetch() från GiltighetsKontroll.astro, inte en
+// full formulärnavigering — svarar JSON.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';

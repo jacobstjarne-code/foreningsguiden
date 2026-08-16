@@ -74,8 +74,12 @@ export async function sendBekraftelse(to: string, kommunLista: string, token: st
   await sendMejl(to, MEJL.bekraftelse, { kommunLista, bekraftaLank });
 }
 
+// J1 (2026-08-16): parameternamnen kommunLista/kommunLank är kvar
+// oförändrade (samma anrop från api/bekrafta/[token].ts) — bara vilka
+// mallnycklar de fyller mappades om, till {kommun}/{lank}
+// (MEJLTEXTER.md #1, se MEJL.valkomst-kommentaren i content.ts).
 export async function sendValkomst(to: string, kommunLista: string, kommunLank: string): Promise<void> {
-  await sendMejl(to, MEJL.valkomst, { kommunLista, kommunLank });
+  await sendMejl(to, MEJL.valkomst, { kommun: kommunLista, lank: kommunLank });
 }
 
 /**
@@ -143,26 +147,63 @@ export async function sendPaminnelse14(to: string, vars: PaminnelseVars): Promis
   await sendMejl(to, MEJL.paminnelse14, vars);
 }
 
-export interface GiltighetsvarningVars {
-  arsmotesdatum: string;
+export interface GiltighetsvarningNiva2Vars {
   kommun: string;
-  giltighetsregel: string;
-  system: string;
-  kommunLank: string;
+  kalla_url: string;
 }
 
 /**
- * B4 (SPRINT: Produkten, Opus/Fable 2026-07-31) — TEXT-UTAN-YTA sedan C3.1
- * (Jacob 2026-08-11): cron/giltighetsvarning.ts anropar INTE längre den
- * här funktionen. MEJL.giltighetsvarning byggde på fritext-giltighet +
- * "ungefär nu"-timing, ett antagande C3.1 tog bort (se cronets filhuvud).
- * NIVÅ 1/NIVÅ 2 behöver EGNA mejltexter (exakt förfallodatum respektive
- * januari-genomgången utan datum) — inte skrivna än, Code skriver aldrig
- * svensk brödtext själv. Funktionen och MEJL.giltighetsvarning ligger kvar
- * orörda (ingenting ersätter dem, döda dem inte) tills den texten finns.
+ * J1 (2026-08-16, MEJLTEXTER.md #4). Ersätter den superseterade
+ * sendGiltighetsvarning/MEJL.giltighetsvarning (275-dagarsantagandet,
+ * C3.1 2026-08-11 — 0 riktiga mejl någonsin skickade, inget innehåll att
+ * migrera). NIVÅ 2: kommunen saknar giltighet_regel, går ut en gång om
+ * året i januari — cron/giltighetsvarning.ts.
  */
-export async function sendGiltighetsvarning(to: string, vars: GiltighetsvarningVars): Promise<void> {
-  await sendMejl(to, MEJL.giltighetsvarning, vars);
+export async function sendGiltighetsvarningNiva2(to: string, vars: GiltighetsvarningNiva2Vars): Promise<void> {
+  await sendMejl(to, MEJL.giltighetsvarningNiva2, vars);
+}
+
+export interface GiltighetsvarningNiva1Vars {
+  arsmotesdatum: string;
+  kommun: string;
+  // Fras för regel.typ+regel.antal (t.ex. "tolv månader efter
+  // årsmötet") — INGEN källa för den frasen finns ännu (se
+  // MEJL.giltighetsvarningNiva1-kommentaren, content.ts). Caller-
+  // ansvar, inte byggt av Code. Interfacet är redo, ingen anropare
+  // finns än (cron/giltighetsvarning.ts NIVÅ 1 är kvar i dry run).
+  regeltext: string;
+  forfallodatum: string;
+  manad: string;
+  kalla_url: string;
+}
+
+/**
+ * J1 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten finns,
+ * men INGEN anropare kopplad än (Jacob 2026-08-16: "renderas aldrig i
+ * dag — giltighet_regel finns i noll kommuner — men texten ska ligga
+ * klar när G1 landar"). Koppla cron/giltighetsvarning.ts:s NIVÅ 1-gren
+ * hit när G1 landar OCH regeltext-frasen finns.
+ */
+export async function sendGiltighetsvarningNiva1(to: string, vars: GiltighetsvarningNiva1Vars): Promise<void> {
+  await sendMejl(to, MEJL.giltighetsvarningNiva1, vars);
+}
+
+export interface AndringsbeskedVars {
+  kommun: string;
+  bidragsnamn: string;
+  vad_som_andrats: string;
+  kalla_url: string;
+}
+
+/**
+ * J1 (2026-08-16, MEJLTEXTER.md #3 "Ändringsbeskedet"). TEXT-UTAN-YTA:
+ * ingen anropare byggd än — bevakningens ändringsdetektering (jämföra
+ * ett bevakat bidrags datum/belopp/villkor mot ett tidigare avläst
+ * tillstånd) finns inte. Förväxla inte med sendAndringsNotis nedan (H22,
+ * en annan population — köpare av registreringsutkast).
+ */
+export async function sendAndringsbesked(to: string, vars: AndringsbeskedVars): Promise<void> {
+  await sendMejl(to, MEJL.andringsbesked, vars);
 }
 
 export async function sendPaminnelse3(to: string, vars: PaminnelseVars & { veckodag: string }): Promise<void> {
@@ -574,7 +615,7 @@ export async function sendDelbartBesked(to: string, vars: DelbartBeskedVars): Pr
   const rader: string[] = [`Matchade bidrag i ${vars.kommun}:`, ''];
   for (const b of vars.bidrag) {
     rader.push(b.namn);
-    rader.push(`${b.belopp ?? 'Belopp ej publikt angivet'} · ${b.deadlineText}`);
+    rader.push(`${b.belopp ?? 'Individuellt belopp inte fastställt'} · ${b.deadlineText}`);
     rader.push('');
   }
   rader.push(`Alla bidrag och källor: ${siteUrl()}/kommun/${vars.kommunSlug}/`);
