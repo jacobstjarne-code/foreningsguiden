@@ -52,7 +52,7 @@
 // todayISO därmed oanvända här, borttagna. Sidan slutar vid bevisraden
 // (I1.5) — bevakningsremsan flyttad FÖRE den, inget efter.
 import Base from '../layouts/Base.astro';
-import { loadKommuner, beraknaArbetsbevis, beloppArEttEnkeltTal } from '../lib/kommuner';
+import { loadKommuner, beraknaArbetsbevis, beloppArEttEnkeltTal, individuelltBelopp } from '../lib/kommuner';
 import { START, SITE_NAMN, FORSTASIDAN_SVARAR } from '../lib/content';
 
 const kommuner = loadKommuner();
@@ -110,10 +110,11 @@ const kontrollastaKandidater: BeloppKort[] = [];
 const olastaKandidater: BeloppKort[] = [];
 for (const k of kommuner) {
   for (const b of k.bidrag) {
-    if (!b.belopp) continue;
+    const belopp = individuelltBelopp(b);
+    if (!belopp) continue;
     const tal = beloppArEttEnkeltTal(b);
     if (tal === null) continue;
-    const kort: BeloppKort = { kommun: k.kommun, kommunSlug: k.kommun_slug, bidragNamn: b.namn, bidragId: b.id, belopp: b.belopp, tal, bidragAntal: k.bidrag.length };
+    const kort: BeloppKort = { kommun: k.kommun, kommunSlug: k.kommun_slug, bidragNamn: b.namn, bidragId: b.id, belopp, tal, bidragAntal: k.bidrag.length };
     if (b.belopp_status === 'kontrollast') kontrollastaKandidater.push(kort);
     else if (b.belopp_status === 'olast') olastaKandidater.push(kort);
   }

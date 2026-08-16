@@ -175,8 +175,9 @@ for (const fil of filer) {
     }
 
     if (facit.forvantadBelopp !== undefined) {
-      test(`${label} — belopp (extra, ej K1-K4: ordagrant, ingen förenkling)`, () => {
-        assert.equal(resultat.belopp, facit.forvantadBelopp, 'beloppssträngen skiljer sig från facit — differentiering/undantag kan ha tappats');
+      test(`${label} — belopp (ordagrant när per förening är belagt, annars dolt)`, () => {
+        const expected = bidrag.belopp_avser === 'per_forening' ? facit.forvantadBelopp : null;
+        assert.equal(resultat.belopp, expected, 'generatorn förenklade ett bekräftat individuellt belopp eller exponerade ett oklassificerat belopp');
       });
     }
 

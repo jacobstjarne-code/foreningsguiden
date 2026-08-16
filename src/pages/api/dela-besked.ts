@@ -10,7 +10,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { getKommunBySlug, earliestDeadlineISO, daysUntil, formatDate, todayISO } from '../../lib/kommuner';
+import { getKommunBySlug, earliestDeadlineISO, daysUntil, formatDate, todayISO, individuelltBelopp } from '../../lib/kommuner';
 import type { Bidrag } from '../../lib/kommuner';
 import { sendDelbartBesked } from '../../lib/mejl';
 
@@ -50,7 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
     await sendDelbartBesked(email, {
       kommun: kommun.kommun,
       kommunSlug: kommun.kommun_slug,
-      bidrag: matchade.map((b) => ({ namn: b.namn, belopp: b.belopp, deadlineText: deadlineText(b, today) })),
+      bidrag: matchade.map((b) => ({ namn: b.namn, belopp: individuelltBelopp(b), deadlineText: deadlineText(b, today) })),
     });
   } catch (e) {
     console.error('dela-besked: utskick misslyckades', e);

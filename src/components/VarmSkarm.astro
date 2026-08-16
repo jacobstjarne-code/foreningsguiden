@@ -14,7 +14,7 @@
 // försöket att pressa in mockens exakta mått i en delad komponent hade
 // gjort BÅDA sämre. Samma tokens (--fg-*), inga nya färger.
 import type { Kommun, Bidrag } from '../lib/kommuner';
-import { formatDate, earliestDeadlineISO, daysUntil, relativFrist, VERKSAMHET_FORENING_LABELS, svenskLista } from '../lib/kommuner';
+import { formatDate, earliestDeadlineISO, daysUntil, relativFrist, VERKSAMHET_FORENING_LABELS, svenskLista, individuelltBelopp } from '../lib/kommuner';
 import { VARM_SKARM } from '../lib/content';
 
 export interface Props {
@@ -67,7 +67,7 @@ function radDatumText(bidrag: Bidrag, dateISO: string | null): string {
 // inkonsekvent fras — fixat till samma vokabulär som resten av sajten).
 const BELOPP_KORT_GRANS = 24; // "3 000 kronor per år" = 19 tecken, ryms
 function beloppText(bidrag: Bidrag): string {
-  return bidrag.belopp ?? 'belopp inte publicerat';
+  return individuelltBelopp(bidrag) ?? 'individuellt belopp inte fastställt';
 }
 function beloppArKort(bidrag: Bidrag): boolean {
   return beloppText(bidrag).length <= BELOPP_KORT_GRANS;

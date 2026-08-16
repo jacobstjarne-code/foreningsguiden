@@ -50,7 +50,7 @@
 //      väntar.
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
-import { loadKommuner, possessiv, beraknaArbetsbevis, beloppArEttEnkeltTal } from '../../../../../lib/kommuner';
+import { loadKommuner, possessiv, beraknaArbetsbevis, beloppArEttEnkeltTal, individuelltBelopp } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag, Arbetsbevis } from '../../../../../lib/kommuner';
 import { PRIS_BIDRAGSUTKAST_ORE, ABONNEMANG_LEVERANS_LIVE, BETALFLODE_SKARPT_VERIFIERAT } from '../../../../../lib/priser';
 import { KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
@@ -71,6 +71,7 @@ export function getStaticPaths() {
 const { kommun, bidrag, arbetsbevis } = Astro.props as { kommun: Kommun; bidrag: Bidrag; arbetsbevis: Arbetsbevis };
 const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const [forstaKravText, ...ovrigaKravText] = bidrag.krav;
+const beloppPerForening = individuelltBelopp(bidrag);
 
 const fyllKopruta = (text: string) =>
   text
@@ -78,7 +79,7 @@ const fyllKopruta = (text: string) =>
     .replace('{kommunPossessiv}', possessiv(kommun.kommun))
     .replace('{bidrag}', bidrag.namn)
     .replace('{pris}', String(prisKr))
-    .replace('{belopp}', bidrag.belopp ?? '');
+    .replace('{belopp}', beloppPerForening ?? '');
 
 // F① — fallback-texten, server-sant genast (samma mall/tal som H1.5).
 const socialtBevisFallback = FORSTASIDAN_SVARAR.bevisMall
@@ -112,7 +113,7 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
     <div class="utkastvy__header">
       <p class="utkastvy__eyebrow">{kommun.kommun} kommun · {bidrag.namn}</p>
       <h1>Utkast till ansökan</h1>
-      <p class="utkastvy__meta" data-utkastvy-meta>{bidrag.belopp ?? 'Belopp ej publikt'}</p>
+      <p class="utkastvy__meta" data-utkastvy-meta>{beloppPerForening ?? 'Individuellt belopp inte fastställt'}</p>
     </div>
 
     <div data-utkastvy-status class="utkastvy__statusrad">Läser er föreningsprofil …</div>
@@ -298,7 +299,7 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       // Allt klart — fyll dokumentet.
       statusEl?.setAttribute('hidden', '');
       if (metaEl) {
-        metaEl.textContent = `${resultat.belopp ?? 'Belopp ej publikt'} · sista ansökningsdag ${resultat.deadlineText}`;
+        metaEl.textContent = `${resultat.belopp ?? 'Individuellt belopp inte fastställt'} · sista ansökningsdag ${resultat.deadlineText}`;
       }
       if (ansvarEl) ansvarEl.textContent = resultat.ansvarsrad;
       if (luckorRadEl) {

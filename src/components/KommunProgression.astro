@@ -11,7 +11,7 @@ import type { Kommun, Kategori, Urgency } from '../lib/kommuner';
 import {
   KATEGORIER, KATEGORI_LABELS, formatRecurringDate, formatDate,
   earliestDeadlineISO, daysUntil, getUrgency, delaUppKravPunkter, relativFrist, harEtjanstsystem, possessiv,
-  loadKommuner, beraknaArbetsbevis, beloppArEttEnkeltTal,
+  loadKommuner, beraknaArbetsbevis, beloppArEttEnkeltTal, individuelltBelopp,
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
@@ -136,7 +136,7 @@ const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtj
 // förstasidans svarsyta, beloppArEttEnkeltTal, kommunTyper.ts).
 const vardeankring = (bidrag: Kommun['bidrag'][number]) =>
   bidrag.belopp_status === 'kontrollast' && beloppArEttEnkeltTal(bidrag) !== null
-    ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring, bidrag.namn).replace('{belopp}', bidrag.belopp ?? '')
+    ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring, bidrag.namn).replace('{belopp}', individuelltBelopp(bidrag) ?? '')
     : null;
 
 type Station5Entry = { beskrivning: string; href: string; vardeankring: string | null } | null;

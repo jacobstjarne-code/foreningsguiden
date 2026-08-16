@@ -13,6 +13,7 @@
 import type { Bidrag } from '../lib/kommuner';
 import {
   formatDate, relativFrist, earliestDeadlineISO, daysUntil, getUrgency, todayISO,
+  individuelltBelopp,
 } from '../lib/kommuner';
 import BidragDjup from './BidragDjup.astro';
 import UrgencyChip from './UrgencyChip.astro';
@@ -48,6 +49,7 @@ const radDatumText = dateISO
 // BidragDjup renderas, så duplicerad hellre än trådad som en prop för
 // en tre-rads ren funktion.
 const harOlastFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast');
+const beloppPerForening = individuelltBelopp(bidrag);
 ---
 <li class="bidrag-card fg-card" data-bidrag-id={bidrag.id}>
   {/* R5.8 (OMFORDELA_TEXTMASSAN.md, Jacob 2026-08-06): kortet kollapsat
@@ -71,7 +73,7 @@ const harOlastFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_
       </div>
       <div class="progression__list-row__tal">
         {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
-        <span class="progression__list-row__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+        <span class="progression__list-row__belopp">{beloppPerForening ?? 'individuellt belopp inte fastställt'}</span>
         <span class="progression__list-row__datum">{radDatumText}</span>
       </div>
       <svg class="bidrag-card__rad-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>

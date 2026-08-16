@@ -17,6 +17,7 @@ import UrgencyChip from '../../../../../components/UrgencyChip.astro';
 import {
   loadKommuner, bidragAnsokningsUrl, hittaGiltighetsstatus,
   earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
+  individuelltBelopp,
 } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
 import { KOMMUN } from '../../../../../lib/content';
@@ -39,6 +40,7 @@ const radDatumText = dateISO
   ? formatDate(dateISO)
   : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
   : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan';
+const beloppPerForening = individuelltBelopp(bidrag);
 
 // Samma kommun-nivå-beräkning som KommunSidaFull.astro gör en gång för
 // alla bidragskort på sidan — här bara för DETTA bidrags egen sida.
@@ -74,7 +76,7 @@ const webPageJsonLd = {
   <h1>{bidrag.namn}</h1>
   <div class="bidrag-sida__meta">
     {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
-    <span class="bidrag-sida__belopp">{bidrag.belopp ?? 'belopp inte publicerat'}</span>
+    <span class="bidrag-sida__belopp">{beloppPerForening ?? 'individuellt belopp inte fastställt'}</span>
     <span class="bidrag-sida__datum">{radDatumText}</span>
   </div>
 

@@ -18,7 +18,7 @@ import yaml from 'js-yaml';
 // kör som ett vanligt node-skript, utanför Vites resolver.
 import {
   KATEGORIER, VERKSAMHETER, DEADLINE_TYPER, BIDRAG_STATUSAR, DATATILLSTAND, todayISO, nextOccurrenceISO,
-  GILTIGHET_REGEL_TYPER, GILTIGHET_REGEL_STATUSAR,
+  GILTIGHET_REGEL_TYPER, GILTIGHET_REGEL_STATUSAR, individuelltBelopp,
 } from './kommunTyper.ts';
 import type { Verksamhet, Bidrag, Forutsattning, Kommun, DeadlineEntry, Datatillstand } from './kommunTyper.ts';
 import { GILTIGA_KOMMUNSLUGS, lanForKommunSlug } from './kommunlan.ts';
@@ -214,6 +214,9 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
     }
   }
   raw.belopp_avser = raw.belopp_avser ?? 'okand'; // ALDRIG automatiskt 'per_forening'
+  if (raw.belopp_avser === 'per_forening' && raw.belopp === null) {
+    problems.push(`${where}.belopp_avser är per_forening men belopp är null`);
+  }
 
   // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriska efter migrationen.
   // harVarde för belopp: belopp-fältet ELLER kommunens_pott räcker — om bara
@@ -574,7 +577,7 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
         bidragId: bidrag.id,
         bidragNamn: bidrag.namn,
         kategori: bidrag.kategori,
-        belopp: bidrag.belopp,
+        belopp: individuelltBelopp(bidrag),
         deadlineStatus: bidrag.deadline_status,
       };
       if (bidrag.deadlines.typ === 'lopande') {

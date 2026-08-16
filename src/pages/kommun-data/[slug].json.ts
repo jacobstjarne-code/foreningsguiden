@@ -5,7 +5,7 @@
 // fråga 1 besvarats, i stället för att bädda in alla 80+ kommuners
 // bidragsdata i sidans initiala payload.
 import type { APIRoute } from 'astro';
-import { loadKommuner } from '../../lib/kommuner';
+import { loadKommuner, individuelltBelopp } from '../../lib/kommuner';
 
 export function getStaticPaths() {
   return loadKommuner().map((kommun) => ({
@@ -16,5 +16,9 @@ export function getStaticPaths() {
 
 export const GET: APIRoute = ({ props }) => {
   const { kommun } = props as { kommun: ReturnType<typeof loadKommuner>[number] };
-  return new Response(JSON.stringify(kommun), { headers: { 'content-type': 'application/json' } });
+  const publicKommun = {
+    ...kommun,
+    bidrag: kommun.bidrag.map((bidrag) => ({ ...bidrag, belopp: individuelltBelopp(bidrag) })),
+  };
+  return new Response(JSON.stringify(publicKommun), { headers: { 'content-type': 'application/json' } });
 };

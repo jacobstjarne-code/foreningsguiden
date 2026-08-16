@@ -213,7 +213,7 @@ const kommuner = loadKommuner();
 <script>
   import { sorteraForTratt } from '../../lib/matching';
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type SoktSvar } from '../../lib/foreningsprofil';
-  import { formatDate, earliestDeadlineISO, todayISO, daysUntil, getUrgency, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
+  import { formatDate, earliestDeadlineISO, todayISO, daysUntil, getUrgency, individuelltBelopp, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { VOID_MARK } from '../../lib/content';
   import { trackEvent } from '../../lib/umami';
@@ -319,6 +319,7 @@ const kommuner = loadKommuner();
     const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
 
     function bidragMeta(bidrag: Bidrag): string {
+      const belopp = individuelltBelopp(bidrag) ?? 'Individuellt belopp inte fastställt';
       // dateISO är null för BÅDE löpande och okänd deadlines.typ
       // (earliestDeadlineISO), samma mönster som BidragCard/
       // KommunProgressions formatDeadlines — skilj dem explicit på
@@ -326,12 +327,12 @@ const kommuner = loadKommuner();
       const dateISO = earliestDeadlineISO(bidrag, today);
       if (!dateISO) {
         const text = bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan';
-        return `${bidrag.belopp ?? 'Belopp ej publikt'} · ${text}`;
+        return `${belopp} · ${text}`;
       }
       const dagar = daysUntil(dateISO, today);
       const urgency = getUrgency(dagar);
       const dagarText = dagar === 1 ? '1 dag kvar' : `${dagar} dagar kvar`;
-      return `${bidrag.belopp ?? 'Belopp ej publikt'} · <span class="fg-chip fg-chip--${urgency}">${URGENCY_LABEL[urgency]}</span> sista dag ${formatDate(dateISO)} · ${dagarText}`;
+      return `${belopp} · <span class="fg-chip fg-chip--${urgency}">${URGENCY_LABEL[urgency]}</span> sista dag ${formatDate(dateISO)} · ${dagarText}`;
     }
 
     function bidragLank(bidrag: Bidrag): string {

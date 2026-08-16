@@ -13,7 +13,7 @@
 import type { Bidrag } from '../lib/kommuner';
 import {
   KATEGORI_LABELS, formatRecurringDate, formatDate, relativFrist, harRiktigSenAnsokanText,
-  earliestDeadlineISO, todayISO,
+  earliestDeadlineISO, todayISO, individuelltBelopp,
 } from '../lib/kommuner';
 import { OLAST_MARK } from '../lib/content';
 import { strippaProcessSprak } from '../lib/anteckningFilter';
@@ -74,6 +74,7 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
 // skriven text, ingen ny prosa). Visas bara när minst en krav-rad faktiskt
 // är streckad.
 const kravStreckad = bidrag.krav_status === 'olast';
+const beloppPerForening = individuelltBelopp(bidrag);
 ---
 <div class="kategori-tags">
   {bidrag.kategori.map((k) => (
@@ -140,7 +141,7 @@ const kravStreckad = bidrag.krav_status === 'olast';
     )}
   </dd>
 
-  <dt>Belopp</dt>
+  <dt>{beloppPerForening !== null ? 'Belopp för föreningen' : bidrag.belopp !== null ? 'Ekonomisk uppgift' : 'Individuellt belopp'}</dt>
   <dd>
     {bidrag.belopp_status === 'ingen_regel' ? (
       <VoidState
@@ -148,7 +149,20 @@ const kravStreckad = bidrag.krav_status === 'olast';
         besked={`${kommunNamn} anger uttryckligen inget belopp eller tak`}
         forklaring="Bekräftat vid källgranskning."
       />
-    ) : bidrag.belopp === null ? (
+    ) : beloppPerForening !== null ? (
+      <span class="fg-faltmarkor">
+        <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+        {beloppPerForening}
+      </span>
+    ) : bidrag.belopp !== null ? (
+      <>
+        <span class="fg-faltmarkor">
+          <span class="fg-void-mark" aria-hidden="true"></span>
+          {bidrag.belopp}
+        </span>
+        <p class="krav-obedomd">Inte fastställt om uppgiften gäller en förening eller kommunens totala pott.</p>
+      </>
+    ) : (
       // VoidMark bara vid genuint ingen uppgift alls — INTE när
       // belopp_status:okand kommer från en platshållarfras
       // ("Individuell bedömning") som fortfarande är riktig, användbar
@@ -164,13 +178,20 @@ const kravStreckad = bidrag.krav_status === 'olast';
         bidragId={bidrag.id}
         bidragNamn={bidrag.namn}
       />
-    ) : (
-      <span class="fg-faltmarkor">
-        <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
-        {bidrag.belopp}
-      </span>
     )}
   </dd>
+
+  {bidrag.kommunens_pott !== null && (
+    <>
+      <dt>Kommunens pott</dt>
+      <dd>
+        <span class="fg-faltmarkor">
+          <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+          {bidrag.kommunens_pott}
+        </span>
+      </dd>
+    </>
+  )}
 
   <dt>Kommunens krav</dt>
   <dd>

@@ -20,7 +20,7 @@ import IgenkanningsRad from './IgenkanningsRad.astro';
 import {
   isStale, formatDate, formatRecurringDate, svenskLista,
   earliestDeadlineISO, todayISO, beloppTackning,
-  KATEGORI_LABELS, KATEGORIER, relativFrist,
+  KATEGORI_LABELS, KATEGORIER, relativFrist, individuelltBelopp,
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN, OLAST_MARK } from '../lib/content';
@@ -59,7 +59,7 @@ const sortedBidrag = [...kommun.bidrag].sort((a, b) => {
 // alls) om färre än två har ens ett datum — se trappa() i
 // arlighetstrappa.ts, samma mönster som F①/F②/F③ senare i ordern.
 const bidragMedBeloppOchDatum = sortedBidrag.filter(
-  (b) => b.belopp !== null && earliestDeadlineISO(b, today) !== null
+  (b) => individuelltBelopp(b) !== null && earliestDeadlineISO(b, today) !== null
 );
 const bidragMedBaraDatum = sortedBidrag.filter((b) => earliestDeadlineISO(b, today) !== null);
 
@@ -281,7 +281,7 @@ const webPageJsonLd = {
                 <li class="kommun-forhandsvisning__rad">
                   <span class="kommun-forhandsvisning__namn">{bidrag.namn}</span>
                   <span class="kommun-forhandsvisning__meta">
-                    {forhandsvisningBidrag.visaBelopp && <span>{bidrag.belopp}</span>}
+                    {forhandsvisningBidrag.visaBelopp && <span>{individuelltBelopp(bidrag)}</span>}
                     {dateISO && <span>{formatDate(dateISO)}</span>}
                   </span>
                 </li>

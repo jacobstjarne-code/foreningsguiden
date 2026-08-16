@@ -609,6 +609,15 @@ const BELOPP_TAK_LOS_RE = new RegExp(`^\\s*(?:max|högst|upp till|dock högst)\\
 const BELOPP_POOL_RE = /totalt|total budget|årlig budget|fördelas (mellan|på)|delas (mellan|på)/i;
 
 /**
+ * Den ekonomiska uppgift som säkert avser en enskild förening/ansökan.
+ * `belopp` kan finnas kvar på ännu oklassificerade poster, men får då
+ * aldrig användas som individuellt tak i produktens sammanfattningsytor.
+ */
+export function individuelltBelopp(bidrag: Bidrag): string | null {
+  return bidrag.belopp_avser === 'per_forening' ? bidrag.belopp : null;
+}
+
+/**
  * Ett bidrags belopp, om och bara om det är EN sak (bara talet, ev. med
  * "/år"/"per medlem", eller ett explicit uttryckt tak) OCH inte är en
  * kommunpool enligt anteckningen. Grund för F②:s ankringsrad (kommunsidans
@@ -616,9 +625,10 @@ const BELOPP_POOL_RE = /totalt|total budget|årlig budget|fördelas (mellan|på)
  * regel på alla tre ställena, inte tre separata gissningar.
  */
 export function beloppArEttEnkeltTal(bidrag: Bidrag): number | null {
-  if (!bidrag.belopp) return null;
+  const belopp = individuelltBelopp(bidrag);
+  if (!belopp) return null;
   if (bidrag.anteckning && BELOPP_POOL_RE.test(bidrag.anteckning)) return null;
-  const match = bidrag.belopp.match(BELOPP_ENKELT_RE) ?? bidrag.belopp.match(BELOPP_TAK_LOS_RE);
+  const match = belopp.match(BELOPP_ENKELT_RE) ?? belopp.match(BELOPP_TAK_LOS_RE);
   if (!match) return null;
   const tal = Number(match[1].replace(/[\s.]/g, ''));
   return Number.isFinite(tal) && tal > 0 ? tal : null;
@@ -631,8 +641,8 @@ export interface BeloppSumma {
 }
 
 export interface BeloppTackning {
-  medBelopp: number; // bidrag.belopp !== null — kommunen har publicerat NÅGOT beloppsvärde
-  utanBelopp: number; // bidrag.belopp === null
+  medBelopp: number; // säkert individuellt belopp finns
+  utanBelopp: number; // individuellt belopp saknas eller är ännu oklassificerat
 }
 
 /**
@@ -647,7 +657,7 @@ export function beloppTackning(kommun: Kommun): BeloppTackning {
   let medBelopp = 0;
   let utanBelopp = 0;
   for (const bidrag of kommun.bidrag) {
-    if (bidrag.belopp !== null) medBelopp++;
+    if (individuelltBelopp(bidrag) !== null) medBelopp++;
     else utanBelopp++;
   }
   return { medBelopp, utanBelopp };
@@ -662,7 +672,7 @@ export function sumBeloppTak(bidragLista: Bidrag[]): BeloppSumma {
   let total = 0;
   let capped = 0;
   for (const bidrag of bidragLista) {
-    const tak = parseBeloppTak(bidrag.belopp);
+    const tak = parseBeloppTak(individuelltBelopp(bidrag));
     if (tak !== null) {
       total += tak;
       capped++;
@@ -741,7 +751,7 @@ export interface DeadlineEntry {
   kategori: Kategori[];
   isLopande: boolean;
   dateISO: string | null; // null för löpande — kan inte placeras kronologiskt
-  belopp: string | null; // rå fritext ur Bidrag.belopp — kalendern kör den genom parseBeloppTak() själv
+  belopp: string | null; // endast bekräftat individuellt belopp — kalendern kör det genom parseBeloppTak()
   deadlineStatus: Datatillstand; // TILLSTANDET_OLAST.md 4c yta 3/4 — markören i kalender- och förstasidesraden
 }
 

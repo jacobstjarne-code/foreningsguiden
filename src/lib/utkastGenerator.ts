@@ -22,7 +22,7 @@
  */
 
 import type { Bidrag, Kommun } from './kommunTyper.ts';
-import { earliestDeadlineISO, formatDate, todayISO } from './kommunTyper.ts';
+import { earliestDeadlineISO, formatDate, todayISO, individuelltBelopp } from './kommunTyper.ts';
 import type { Foreningsprofil } from './foreningsprofil.ts';
 import { visaBorjaHar } from './matching.ts';
 import { VANTELISTA, VAGLEDNING } from './content.ts';
@@ -227,7 +227,7 @@ export function genereraUtkast(profil: Foreningsprofil, bidrag: Bidrag, kommun: 
     bidragNamn: bidrag.namn,
     kommun: kommun.kommun,
     kommunSlug: kommun.kommun_slug,
-    belopp: bidrag.belopp,
+    belopp: individuelltBelopp(bidrag),
     deadlineText: deadlineText(bidrag),
     kravRader,
     luckor: kravRader.filter((r) => r.status === 'lucka').length,

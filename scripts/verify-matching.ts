@@ -7,7 +7,7 @@
  */
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
-import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik, subtractDays } from '../src/lib/kommunTyper.ts';
+import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik, subtractDays, individuelltBelopp } from '../src/lib/kommunTyper.ts';
 import { arOverGolv, formateraBevakarText } from '../src/lib/bevakningKlient.ts';
 import { momsAndelOre } from '../src/lib/priser.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
@@ -41,6 +41,8 @@ function bidrag(overrides: Partial<Bidrag> = {}): Bidrag {
     sate_i_kommunen: null,
     status: 'aktiv',
     senast_verifierad: null,
+    belopp_avser: 'okand',
+    kommunens_pott: null,
     ...overrides,
   };
 }
@@ -231,9 +233,9 @@ test('arOverGolv: gränsen 49→false, 50→true — den exakta övergången ord
 
 test('sumBeloppTak: null-belopp exkluderas ur summan men räknas i uncapped (Design turn-14-fotnoten)', () => {
   const lista = [
-    bidrag({ id: 'a', belopp: '20 000 kr' }),
-    bidrag({ id: 'b', belopp: '75 000 kr' }),
-    bidrag({ id: 'c', belopp: 'Upp till 30 % av redovisad kostnad' }), // ej parsebart → uncapped
+    bidrag({ id: 'a', belopp: '20 000 kr', belopp_avser: 'per_forening' }),
+    bidrag({ id: 'b', belopp: '75 000 kr', belopp_avser: 'per_forening' }),
+    bidrag({ id: 'c', belopp: 'Upp till 30 % av redovisad kostnad', belopp_avser: 'per_forening' }), // ej parsebart → uncapped
     bidrag({ id: 'd', belopp: null }),
   ];
   const sum = sumBeloppTak(lista);
@@ -243,10 +245,29 @@ test('sumBeloppTak: null-belopp exkluderas ur summan men räknas i uncapped (Des
 });
 
 test('sumBeloppTak: alla bidrag cappade → uncapped=0 (sumFotnotCappat-grenen, inte sumFotnotOkant)', () => {
-  const lista = [bidrag({ id: 'a', belopp: '10 000 kr' }), bidrag({ id: 'b', belopp: '5 000 kr' })];
+  const lista = [
+    bidrag({ id: 'a', belopp: '10 000 kr', belopp_avser: 'per_forening' }),
+    bidrag({ id: 'b', belopp: '5 000 kr', belopp_avser: 'per_forening' }),
+  ];
   const sum = sumBeloppTak(lista);
   assert.equal(sum.uncapped, 0);
   assert.equal(sum.total, 15000);
+});
+
+test('belopp_avser-spärr: rått/okänt belopp exponeras aldrig som individuellt belopp', () => {
+  assert.equal(individuelltBelopp(bidrag({ belopp: '800 000 kr', belopp_avser: 'okand' })), null);
+  assert.equal(individuelltBelopp(bidrag({ belopp: 'Max 20 000 kr', belopp_avser: 'per_forening' })), 'Max 20 000 kr');
+});
+
+test('sumBeloppTak: kommunens pott och oklassificerat belopp räknas inte in', () => {
+  const sum = sumBeloppTak([
+    bidrag({ id: 'pott', belopp: null, belopp_avser: 'okand', kommunens_pott: '800 000 kr' }),
+    bidrag({ id: 'okand', belopp: '500 000 kr', belopp_avser: 'okand' }),
+    bidrag({ id: 'individ', belopp: 'Max 20 000 kr', belopp_avser: 'per_forening' }),
+  ]);
+  assert.equal(sum.total, 20000);
+  assert.equal(sum.capped, 1);
+  assert.equal(sum.uncapped, 2);
 });
 
 test('REGRESSION (produktion 2026-07-26): getEarliestConfirmedRegistrationDate måste slice:a full ISO-tidsstämpel till YYYY-MM-DD — annars ger formatDate() "NaN" i "sedan {datum}" (Subscriber.registrerad sparas som new Date().toISOString(), inte ett rent datum)', () => {
