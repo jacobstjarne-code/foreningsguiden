@@ -294,9 +294,9 @@ export interface Kommun {
   bidrag: Bidrag[];
   forutsattningar: Forutsattning[];
   kommunsiffra: Kommunsiffra | null;
-  // G1 — additivt, saknas i alla 290 filer i dag (0 kommuner har regeln
-  // extraherad, mätt 2026-08-11). null = inget researchpass har satt den
-  // än, skilt från giltighet_regel_status: 'okand' (ett bekräftat "vi
+  // G1 — additivt; populerat för 19 kommuner 2026-08-17. null = inget
+  // researchpass har satt regeln än, skilt från giltighet_regel_status:
+  // 'okand' (ett bekräftat "vi
   // hittade ingen regel", se giltighet_regel_status).
   giltighet_regel: GiltighetRegel | null;
   giltighet_regel_status: GiltighetRegelStatus | null;

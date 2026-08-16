@@ -570,12 +570,9 @@ export const MEJL = {
   // J1+J2 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten
   // är klar. {regeltext}-källan som J1 saknade finns nu (MEJLTEXTER.md
   // "Regeltext"-tabellen, J2) — regeltext() i kommunTyper.ts, en fras
-  // per giltighet_regel.typ/antal, verbatim ur tabellen. INTE kopplad
-  // till avsändning ändå: Jacob (2026-08-16) "renderas aldrig i dag —
-  // giltighet_regel finns i noll kommuner — men texten ska ligga klar
-  // när G1 landar" — G1 (datafältet) är den kvarvarande spärren, inte
-  // texten eller frasen längre. cron/giltighetsvarning.ts NIVÅ 1 räknar
-  // och LOGGAR (med regeltext) men skickar inte, tills G1 landar.
+  // per giltighet_regel.typ/antal, verbatim ur tabellen. G1 (2026-08-17)
+  // populerade datafältet och kopplade cron/giltighetsvarning.ts:s NIVÅ
+  // 1 till verklig avsändning för regler som ger ett säkert datum.
   giltighetsvarningNiva1: {
     amne: 'Ert godkännande i {kommun} går ut {manad}',
     body: [

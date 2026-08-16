@@ -34,14 +34,9 @@
 // januari triggar) OCH 0 för NIVÅ 1 (ingen kommun har giltighet_regel) —
 // ingen bakgrundsfylld mottagare kunde få ett förvånande första-mejl.
 //
-// NIVÅ 1 KVAR I DRY RUN (2026-08-16, J2): MEJLTEXTER.md #5 OCH
-// regeltext-frastabellen finns nu (regeltext(), kommunTyper.ts) — loggen
-// nedan räknar ut och visar frasen för varje mottagare, som bevis på att
-// den är redo. Ändå ingen avsändning: Jacob (2026-08-16) "renderas
-// aldrig i dag — giltighet_regel finns i noll kommuner — men texten ska
-// ligga klar när G1 landar." G1 (kommun.giltighet_regel populerad i
-// datan) är den enda kvarvarande spärren nu. Koppla NIVÅ 1 till
-// sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar.
+// NIVÅ 1 LIVE (2026-08-17, G1): G1 har populerat giltighet_regel från de
+// 20 befintliga fritextraderna. Bara regler som ger ett säkert datum når
+// denna gren; okand/ingen_regel ligger kvar i NIVÅ 2 utan gissning.
 //
 // J3 (2026-08-16): kalenderar och fast_datum ger nu BÅDA ett beräknat
 // förfallodatum (berakForfallodatum, kommunTyper.ts) — giltighetRegelGer-
@@ -56,11 +51,12 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import {
   loadKommuner, todayISO, giltighetRegelGerDatum, berakForfallodatum, addMonths, regeltext,
+  formatDate, formatManadRubrik,
 } from '../../../lib/kommuner';
-import { sendGiltighetsvarningNiva2, siteUrl } from '../../../lib/mejl';
+import { sendGiltighetsvarningNiva1, sendGiltighetsvarningNiva2, siteUrl } from '../../../lib/mejl';
 import {
   getAllConfirmedSubscribers, wasGiltighetsvarningSent, wasGiltighetsvarningNiva2Sent,
-  markGiltighetsvarningNiva2Sent,
+  markGiltighetsvarningSent, markGiltighetsvarningNiva2Sent,
 } from '../../../lib/subscribers';
 
 export const GET: APIRoute = async ({ request, url }) => {
@@ -112,6 +108,16 @@ export const GET: APIRoute = async ({ request, url }) => {
           // kalenderar, fast_datum) har en rad i regeltext()-tabellen.
           const fras = regeltext(regel!);
 
+          await sendGiltighetsvarningNiva1(sub.email, {
+            arsmotesdatum: formatDate(arsmotesdatum),
+            kommun: kommun.kommun,
+            regeltext: fras!,
+            forfallodatum: formatDate(forfallodatum),
+            manad: formatManadRubrik(forfallodatum.slice(0, 7)).toLowerCase(),
+            kalla_url: regel!.kalla_url,
+          });
+          await markGiltighetsvarningSent(kommunSlug, forfallodatum, sub.email);
+
           niva1SkulleSkickas++;
           niva1Logg.push(`${sub.email} / ${kommunSlug} — förfaller ${forfallodatum} (årsmöte ${arsmotesdatum}, regeltext: "${fras}")`);
         } else {
@@ -142,13 +148,13 @@ export const GET: APIRoute = async ({ request, url }) => {
   return new Response(
     JSON.stringify({
       today,
-      // NIVÅ 1 fortfarande dry run (se filhuvudet), NIVÅ 2 live sedan
-      // J1 (2026-08-16) — "niva2SkulleSkickas" är nu antal FAKTISKT
-      // skickade, fältnamnet oförändrat för att inte bryta ev. loggparsning.
-      niva1DryRun: true,
+      // Båda nivåerna är live. *_SkulleSkickas-fältnamnen behålls internt
+      // för bakåtkompatibel loggning, men räknar nu faktiska lyckade skick.
+      niva1DryRun: false,
+      niva1Live: true,
       niva2Live: true,
       subscribers: subscribers.length,
-      niva1: { skulleSkickas: niva1SkulleSkickas, redanSkickat: niva1RedanSkickat, mottagare: niva1Logg },
+      niva1: { skickade: niva1SkulleSkickas, redanSkickat: niva1RedanSkickat, mottagare: niva1Logg },
       niva2: { skickade: niva2SkulleSkickas, redanSkickat: niva2RedanSkickat, mottagare: niva2Logg },
       errors,
     }),

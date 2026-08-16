@@ -39,6 +39,7 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
   data-ger-datum={gerDatum ? '1' : ''}
   data-regel-typ={regel?.typ ?? ''}
   data-regel-antal={regel?.antal ?? ''}
+  data-regel-datum={regel?.datum ?? ''}
   data-today={today}
 >
   <h3>{GILTIGHETSKOLL.rubrik}</h3>
@@ -108,12 +109,14 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
     const gerDatum = widget.dataset.gerDatum === '1';
     const regelTyp = widget.dataset.regelTyp as GiltighetRegelTyp | undefined;
     const regelAntalRaw = widget.dataset.regelAntal ?? '';
-    // datum: null — samma J3-flaggade lucka som VarmSkarm.astro: fast_datum-
-    // stöd inte trådat till den här widgeten än, ofarligt idag (0 kommuner
-    // har giltighet_regel), men widgeten visar inte NIVÅ 1 för fast_datum
-    // ens efter G1 förrän data-regel-datum finns.
+    const regelDatumRaw = widget.dataset.regelDatum ?? '';
     const regel: GiltighetRegel | null = regelTyp
-      ? { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), datum: null, kalla_url: '' }
+      ? {
+          typ: regelTyp,
+          antal: regelAntalRaw === '' ? null : Number(regelAntalRaw),
+          datum: regelDatumRaw === '' ? null : regelDatumRaw,
+          kalla_url: '',
+        }
       : null;
 
     const form = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-form]');

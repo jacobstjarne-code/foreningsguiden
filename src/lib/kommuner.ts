@@ -400,8 +400,8 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
   }
 
   // G1/C3 (ARBETSORDER 2026-08-11) — additivt precis som kommunsiffra
-  // ovan: saknas i alla 290 filer i dag (0 kommuner extraherade), null
-  // tills ett researchpass sätter den. giltighet_regel_status validerar
+  // ovan: saknas i övriga kommuner och normaliseras då till null.
+  // giltighet_regel_status validerar
   // MOT GILTIGHET_REGEL_STATUSAR (kontrollast/ingen_regel/okand) — inte
   // DATATILLSTAND, se kommunTyper.ts:s kommentar om varför de är skilda.
   if (raw.giltighet_regel === undefined || raw.giltighet_regel === null) {
@@ -420,14 +420,33 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
       }
       // J3 (2026-08-16): datum — MM-DD för fast_datum, samma format/
       // regex som deadlines.datum. Additivt precis som resten av fältet:
-      // saknas i alla filer i dag, normaliseras till null tills G1/GPT
-      // sätter den.
+      // saknas värdet normaliseras det till null.
       if (gr.datum === undefined) {
         gr.datum = null;
       } else if (gr.datum !== null && (typeof gr.datum !== 'string' || !MMDD_RE.test(gr.datum))) {
         problems.push(`${where}.datum är "${gr.datum}", förväntat format MM-DD eller null`);
       }
       if (!isNonEmptyString(gr.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
+
+      // G1 (2026-08-17): typens parametrar är en diskriminerad union även
+      // i YAML. Utan den här spärren kan fast_datum tyst sakna datum eller
+      // behandlas som en månadsregel, vilket gör både nivå 1-mejlet och den
+      // varma raden fel trots att grundschemat passerar.
+      const arManadsregel = gr.typ === 'manader_efter_arsmote' || gr.typ === 'manader_efter_beslut';
+      if (arManadsregel) {
+        if (!Number.isInteger(gr.antal) || gr.antal <= 0) {
+          problems.push(`${where}.antal måste vara ett positivt heltal för ${gr.typ}`);
+        }
+        if (gr.datum !== null) problems.push(`${where}.datum måste vara null för ${gr.typ}`);
+      } else if (gr.typ === 'fast_datum') {
+        if (gr.antal !== null) problems.push(`${where}.antal måste vara null för fast_datum`);
+        if (typeof gr.datum !== 'string' || !MMDD_RE.test(gr.datum)) {
+          problems.push(`${where}.datum måste vara MM-DD för fast_datum`);
+        }
+      } else if (GILTIGHET_REGEL_TYPER.includes(gr.typ)) {
+        if (gr.antal !== null) problems.push(`${where}.antal måste vara null för ${gr.typ}`);
+        if (gr.datum !== null) problems.push(`${where}.datum måste vara null för ${gr.typ}`);
+      }
     }
   }
 
@@ -435,6 +454,14 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
     raw.giltighet_regel_status = null;
   } else if (raw.giltighet_regel_status !== null && !GILTIGHET_REGEL_STATUSAR.includes(raw.giltighet_regel_status)) {
     problems.push(`giltighet_regel_status är "${raw.giltighet_regel_status}" (tillåtna: ${GILTIGHET_REGEL_STATUSAR.join(', ')}, eller null)`);
+  }
+
+  if (raw.giltighet_regel && raw.giltighet_regel_status) {
+    const typ = raw.giltighet_regel.typ;
+    const forvantadStatus = typ === 'okand' ? 'okand' : typ === 'ingen_regel' ? 'ingen_regel' : 'kontrollast';
+    if (raw.giltighet_regel_status !== forvantadStatus) {
+      problems.push(`giltighet_regel_status är "${raw.giltighet_regel_status}" men typ "${typ}" kräver "${forvantadStatus}"`);
+    }
   }
 
   if (problems.length > 0) {

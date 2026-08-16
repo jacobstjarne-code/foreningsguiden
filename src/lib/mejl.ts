@@ -184,12 +184,9 @@ export interface GiltighetsvarningNiva1Vars {
 }
 
 /**
- * J1+J2 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). Texten och
- * regeltext-källan finns, men INGEN anropare kopplad än (Jacob
- * 2026-08-16: "renderas aldrig i dag — giltighet_regel finns i noll
- * kommuner — men texten ska ligga klar när G1 landar"). G1 (datafältet)
- * är den kvarvarande spärren. Koppla cron/giltighetsvarning.ts:s NIVÅ
- * 1-gren hit när G1 landar.
+ * J1+J2 (2026-08-16, MEJLTEXTER.md #5 "Giltighet, nivå ett"). G1
+ * (2026-08-17) kopplade cron/giltighetsvarning.ts:s NIVÅ 1-gren hit när
+ * den strukturerade regeldatan landade.
  */
 export async function sendGiltighetsvarningNiva1(to: string, vars: GiltighetsvarningNiva1Vars): Promise<void> {
   await sendMejl(to, MEJL.giltighetsvarningNiva1, vars);
