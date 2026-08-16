@@ -75,6 +75,9 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
 // är streckad.
 const kravStreckad = bidrag.krav_status === 'olast';
 const beloppPerForening = individuelltBelopp(bidrag);
+const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening !== null
+  ? 'Belopp för föreningen'
+  : bidrag.belopp !== null ? 'Belopp' : 'Individuellt belopp';
 ---
 <div class="kategori-tags">
   {bidrag.kategori.map((k) => (
@@ -141,7 +144,7 @@ const beloppPerForening = individuelltBelopp(bidrag);
     )}
   </dd>
 
-  <dt>{beloppPerForening !== null ? 'Belopp för föreningen' : bidrag.belopp !== null ? 'Ekonomisk uppgift' : 'Individuellt belopp'}</dt>
+  <dt>{beloppRubrik}</dt>
   <dd>
     {bidrag.belopp_status === 'ingen_regel' ? (
       <VoidState
@@ -154,14 +157,6 @@ const beloppPerForening = individuelltBelopp(bidrag);
         <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
         {beloppPerForening}
       </span>
-    ) : bidrag.belopp !== null ? (
-      <>
-        <span class="fg-faltmarkor">
-          <span class="fg-void-mark" aria-hidden="true"></span>
-          {bidrag.belopp}
-        </span>
-        <p class="krav-obedomd">Inte fastställt om uppgiften gäller en förening eller kommunens totala pott.</p>
-      </>
     ) : (
       // VoidMark bara vid genuint ingen uppgift alls — INTE när
       // belopp_status:okand kommer från en platshållarfras

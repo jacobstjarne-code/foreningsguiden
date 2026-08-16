@@ -162,14 +162,15 @@ export interface Bidrag {
   // ändrats, aldrig VAD.
   senast_verifierad: string | null;
 
-  // A (belopp-avser-spårbarhet, 2026-08-12) — BEDÖMNINGSFÄLT.
-  // Sätts UTESLUTANDE av ett researchpass, aldrig av migrerings- eller
-  // omräkningskod (se omrakna-datatillstand.ts). "okand" är default —
-  // ALDRIG automatiskt satt till "per_forening".
+  // A (belopp-avser-spårbarhet, 2026-08-12). `per_forening` är en
+  // uttrycklig researchbedömning. `okand` är däremot bara standardvärdet:
+  // avsaknad av bedömning får inte i sig dölja ett belopp. Fältet sätts
+  // aldrig automatiskt till `per_forening` av migrerings-/omräkningskod.
   //
   // "per_forening": belopp-fältet avser vad EN enskild förening/ansökan/
   //   projekt kan söka eller beräknas ut från. Skild från kommunens_pott.
-  // "okand": vi vet inte vad belopp-fältet avser (default).
+  // "okand": ingen belopp_avser-bedömning är gjord (default); visningen
+  //   följer då det tidigare belopp_status-beteendet.
   //
   // Skilt från belopp_status (verifieringsgrad av info vi HAR) och från
   // kommunens_pott (den totala kommunala budgeten för bidraget).
@@ -648,12 +649,16 @@ const BELOPP_TAK_LOS_RE = new RegExp(`^\\s*(?:max|högst|upp till|dock högst)\\
 const BELOPP_POOL_RE = /totalt|total budget|årlig budget|fördelas (mellan|på)|delas (mellan|på)/i;
 
 /**
- * Den ekonomiska uppgift som säkert avser en enskild förening/ansökan.
- * `belopp` kan finnas kvar på ännu oklassificerade poster, men får då
- * aldrig användas som individuellt tak i produktens sammanfattningsytor.
+ * Det belopp som ska visas för en enskild förening/ansökan.
+ *
+ * `okand` är modellens standardvärde, inte en ren-pott-klassificering,
+ * och ska därför behålla det tidigare belopp_status-styrda beteendet.
+ * En migrerad ren kommunpott har i stället `belopp: null` och sitt värde
+ * i `kommunens_pott`, så den kan aldrig läcka ut som individuellt belopp.
+ * Blandfall har `per_forening` + `kommunens_pott` och visar båda separat.
  */
 export function individuelltBelopp(bidrag: Bidrag): string | null {
-  return bidrag.belopp_avser === 'per_forening' ? bidrag.belopp : null;
+  return bidrag.belopp;
 }
 
 /**

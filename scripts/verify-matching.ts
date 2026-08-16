@@ -254,20 +254,21 @@ test('sumBeloppTak: alla bidrag cappade → uncapped=0 (sumFotnotCappat-grenen, 
   assert.equal(sum.total, 15000);
 });
 
-test('belopp_avser-spärr: rått/okänt belopp exponeras aldrig som individuellt belopp', () => {
-  assert.equal(individuelltBelopp(bidrag({ belopp: '800 000 kr', belopp_avser: 'okand' })), null);
+test('belopp_avser-visning: okand behåller belopp, ren pott saknar individuellt belopp', () => {
+  assert.equal(individuelltBelopp(bidrag({ belopp: '5 000 kr', belopp_avser: 'okand' })), '5 000 kr');
   assert.equal(individuelltBelopp(bidrag({ belopp: 'Max 20 000 kr', belopp_avser: 'per_forening' })), 'Max 20 000 kr');
+  assert.equal(individuelltBelopp(bidrag({ belopp: null, belopp_avser: 'okand', kommunens_pott: '800 000 kr' })), null);
 });
 
-test('sumBeloppTak: kommunens pott och oklassificerat belopp räknas inte in', () => {
+test('sumBeloppTak: kommunens pott räknas inte in men standardvärdet okand behåller sitt belopp', () => {
   const sum = sumBeloppTak([
     bidrag({ id: 'pott', belopp: null, belopp_avser: 'okand', kommunens_pott: '800 000 kr' }),
     bidrag({ id: 'okand', belopp: '500 000 kr', belopp_avser: 'okand' }),
     bidrag({ id: 'individ', belopp: 'Max 20 000 kr', belopp_avser: 'per_forening' }),
   ]);
-  assert.equal(sum.total, 20000);
-  assert.equal(sum.capped, 1);
-  assert.equal(sum.uncapped, 2);
+  assert.equal(sum.total, 520000);
+  assert.equal(sum.capped, 2);
+  assert.equal(sum.uncapped, 1);
 });
 
 test('REGRESSION (produktion 2026-07-26): getEarliestConfirmedRegistrationDate måste slice:a full ISO-tidsstämpel till YYYY-MM-DD — annars ger formatDate() "NaN" i "sedan {datum}" (Subscriber.registrerad sparas som new Date().toISOString(), inte ett rent datum)', () => {

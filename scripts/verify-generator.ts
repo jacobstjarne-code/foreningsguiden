@@ -18,7 +18,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import yaml from 'js-yaml';
 import { genereraUtkast } from '../src/lib/utkastGenerator.ts';
-import type { Kommun } from '../src/lib/kommunTyper.ts';
+import { individuelltBelopp, type Kommun } from '../src/lib/kommunTyper.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
 // Arbetsorder 2026-08-03, punkt 6: läser FRUSEN snapshot (golden-set/
@@ -175,9 +175,9 @@ for (const fil of filer) {
     }
 
     if (facit.forvantadBelopp !== undefined) {
-      test(`${label} — belopp (ordagrant när per förening är belagt, annars dolt)`, () => {
-        const expected = bidrag.belopp_avser === 'per_forening' ? facit.forvantadBelopp : null;
-        assert.equal(resultat.belopp, expected, 'generatorn förenklade ett bekräftat individuellt belopp eller exponerade ett oklassificerat belopp');
+      test(`${label} — belopp (ordagrant när belopp finns; ren pott saknar belopp)`, () => {
+        const expected = individuelltBelopp(bidrag);
+        assert.equal(resultat.belopp, expected, 'generatorn förenklade ett individuellt belopp eller exponerade en ren kommunpott');
       });
     }
 
