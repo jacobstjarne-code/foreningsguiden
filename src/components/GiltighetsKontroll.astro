@@ -108,8 +108,12 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
     const gerDatum = widget.dataset.gerDatum === '1';
     const regelTyp = widget.dataset.regelTyp as GiltighetRegelTyp | undefined;
     const regelAntalRaw = widget.dataset.regelAntal ?? '';
+    // datum: null — samma J3-flaggade lucka som VarmSkarm.astro: fast_datum-
+    // stöd inte trådat till den här widgeten än, ofarligt idag (0 kommuner
+    // har giltighet_regel), men widgeten visar inte NIVÅ 1 för fast_datum
+    // ens efter G1 förrän data-regel-datum finns.
     const regel: GiltighetRegel | null = regelTyp
-      ? { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), kalla_url: '' }
+      ? { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), datum: null, kalla_url: '' }
       : null;
 
     const form = widget.querySelector<HTMLFormElement>('[data-giltighetskoll-form]');
@@ -137,7 +141,7 @@ const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).repl
 
       let paminnManadNamn = NIVA_TVA_PAMINN_MANAD;
 
-      const forfallodatum = gerDatum && regel ? berakForfallodatum(regel, arsmotesdatum) : null;
+      const forfallodatum = gerDatum && regel ? berakForfallodatum(regel, arsmotesdatum, today) : null;
       // M4 (MÄTNING, Jacob 2026-08-11): svarar "hur ofta vi svarar 'vi vet
       // inte', alltså hur mycket G1 är värd" — NIVÅ 1/2, samma gren som
       // faktiskt avgör vilken text besökaren ser.

@@ -711,11 +711,12 @@ export const ATERBETALNING = {
  */
 export const PRIS = {
   metaTitle: 'Priser — Föreningsguiden',
-  // metaDescription INTE uppdaterad i J2 — PRISTEXTER.md adresserar bara
-  // ingress/kort/regler, inte SEO-metatext. Nämner fortfarande tre
-  // produktnamn, ett steg efter hjalp/variant-sammanslagningen nedan.
-  // Flaggat till Jacob i leveransrapporten, inte tyst kvarlämnat.
-  metaDescription: 'Vad det kostar att köpa ett registreringsutkast, ett bidragsutkast eller ett bevakningsabonnemang hos Föreningsguiden.',
+  // J3 (2026-08-16, Jacob: "metaDescription på /pris/ enligt ovan" — dvs.
+  // rätta till mot J2:s tre→två-produktflaggning). Ingen ny prosa —
+  // PRIS.hjalp.namn/PRIS.abonnemang.namn (redan Opus-godkända ordval,
+  // PRISTEXTER.md) omkombinerade, samma "Vad det kostar att X"-mall som
+  // förut.
+  metaDescription: 'Vad det kostar att få hjälp med en ansökan eller ett föreningsabonnemang hos Föreningsguiden.',
   h1: 'Priser',
   // J2 (2026-08-16, PRISTEXTER.md "Sidans ingress").
   intro: 'Att hitta bidragen, se vad kommunen kräver och få påminnelse före sista dag är gratis. Vi tar betalt för arbetet.',

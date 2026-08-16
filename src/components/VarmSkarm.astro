@@ -83,6 +83,7 @@ const resten = sortedBidrag.slice(2);
   data-kommun-slug={kommun.kommun_slug}
   data-regel-typ={kommun.giltighet_regel?.typ ?? ''}
   data-regel-antal={kommun.giltighet_regel?.antal ?? ''}
+  data-today={today}
 >
   <div class="varm-skarm__statusrad">
     <span class="varm-skarm__brand">Föreningsguiden</span>
@@ -185,9 +186,17 @@ const resten = sortedBidrag.slice(2);
     const giltighet = profil?.giltighet;
     const regelTyp = root.dataset.regelTyp as import('../lib/kommunTyper').GiltighetRegelTyp | undefined;
     const regelAntalRaw = root.dataset.regelAntal ?? '';
+    const today = root.dataset.today ?? '';
     if (giltighet && giltighet.kommunSlug === kommunSlug && regelTyp) {
-      const regel = { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), kalla_url: '' };
-      const forfallodatum = berakForfallodatum(regel, giltighet.arsmotesdatum);
+      // datum: null — J3 (2026-08-16): fast_datum-stöd (data-regel-datum,
+      // trådat hela vägen från KommunSidaFull.astro) inte byggt i den här
+      // widgeten än. Ofarligt idag (0 kommuner har någon giltighet_regel
+      // alls), men en kommun med typ fast_datum kommer INTE visa
+      // lättnadsraden här ens efter G1 — bara i mejl 5 (cron/
+      // giltighetsvarning.ts, som läser regel.datum på riktigt). Flaggat,
+      // inte tyst ofullständigt.
+      const regel = { typ: regelTyp, antal: regelAntalRaw === '' ? null : Number(regelAntalRaw), datum: null, kalla_url: '' };
+      const forfallodatum = berakForfallodatum(regel, giltighet.arsmotesdatum, today);
       if (forfallodatum) {
         const [fy, fm] = forfallodatum.split('-').map(Number);
         const paminnISO = addMonths(forfallodatum, -2);

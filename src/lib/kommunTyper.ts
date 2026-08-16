@@ -230,14 +230,23 @@ export interface Kommunsiffra {
 // hittaGiltighetsstatus()) — bara giltighet_status/VerificationStamp
 // läser den nu. Widgeten och cronet räknar UTESLUTANDE mot giltighet_regel
 // + berakForfallodatum().
+// fast_datum tillagd J3 (2026-08-16, Jacob): "lägg in i GILTIGHET_REGEL_
+// TYPER. Frasen finns redan [MEJLTEXTER.md:s regeltext-tabell]. Datan
+// kommer från GPT" — G1-researchpasset extraherar värdena, den här
+// commiten gör bara typen och beräkningen redo att ta emot dem.
 export const GILTIGHET_REGEL_TYPER = [
-  'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'ingen_regel', 'okand',
+  'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'fast_datum', 'ingen_regel', 'okand',
 ] as const;
 export type GiltighetRegelTyp = (typeof GILTIGHET_REGEL_TYPER)[number];
 
 export interface GiltighetRegel {
   typ: GiltighetRegelTyp;
   antal: number | null;
+  // J3 (2026-08-16) — MM-DD, samma format och validering som deadlines.
+  // datum (MMDD_RE, kommuner.ts), för fast_datum ("31 mars varje år").
+  // null för alla andra typer — antal och datum är ömsesidigt
+  // uteslutande beroende på typ, aldrig båda satta på riktigt.
+  datum: string | null;
   kalla_url: string;
 }
 
@@ -250,15 +259,27 @@ export type GiltighetRegelStatus = (typeof GILTIGHET_REGEL_STATUSAR)[number];
 
 /**
  * Sant bara när giltighet_regel faktiskt kan ge ett beräknat förfallodatum
- * (manader_efter_arsmote/manader_efter_beslut + ett känt antal) — falskt
- * för null, för kalenderar/ingen_regel/okand, och för antal: null. Enda
- * källan till "har vi en riktig regel att räkna mot" — GiltighetsKontroll.
- * astro använder den både server- och klientsidan så de aldrig kan
- * divergera om vilken gren som visas.
+ * — falskt för null, för ingen_regel/okand, och när det fält typen kräver
+ * (antal för manader_efter_*, datum för fast_datum) saknas. J3
+ * (2026-08-16): kalenderar och fast_datum ger nu BÅDA ett förfallodatum
+ * (berakForfallodatum nedan) och räknas därför hit — NIVÅ 1, inte längre
+ * NIVÅ 2. GiltighetsKontroll.astro använder funktionen både server- och
+ * klientsidan så de aldrig kan divergera om vilken gren som visas.
  */
 export function giltighetRegelGerDatum(regel: GiltighetRegel | null): boolean {
-  if (regel === null || regel.antal === null) return false;
-  return regel.typ === 'manader_efter_arsmote' || regel.typ === 'manader_efter_beslut';
+  if (regel === null) return false;
+  switch (regel.typ) {
+    case 'manader_efter_arsmote':
+    case 'manader_efter_beslut':
+      return regel.antal !== null;
+    case 'kalenderar':
+      return true;
+    case 'fast_datum':
+      return regel.datum !== null;
+    case 'ingen_regel':
+    case 'okand':
+      return false;
+  }
 }
 
 export interface Kommun {
@@ -286,6 +307,8 @@ export interface Kommun {
  * bidragsberättigad-status, räknat ur giltighet_regel + föreningens eget
  * årsmötesdatum. Ren funktion, inga sidoeffekter — samma logik ska driva
  * både "raden på sidan" (NIVÅ 1) och cronets 2-månader-innan-utskick.
+ * `today` (J3, 2026-08-16) — bara kalenderar/fast_datum använder den,
+ * de två manader_efter_*-grenarna räknar oförändrat ur arsmotesdatum.
  *
  * manader_efter_beslut räknas identiskt med manader_efter_arsmote —
  * datamodellen har inget separat beslutsdatum (bara årsmötesdatum lagras,
@@ -293,18 +316,33 @@ export interface Kommun {
  * årsmötesdatumet tills ett eget beslutsdatum-fält finns. Flaggat till
  * Jacob, inte en tyst gissning.
  *
- * kalenderar och ingen_regel har inget datum att räkna ur (kalenderår
- * betyder "gäller till årsskiftet", inte en formel på ett rörligt datum;
- * ingen_regel betyder att godkännandet inte förfaller). okand betyder att
- * vi inte vet. Alla tre ger null — aldrig ett gissat datum.
+ * kalenderar (J3): förfallodatum = 31 december INNEVARANDE år, räknat ur
+ * `today` — Jacobs egen instruktion, inklusive "mejl 5 går inte ut om
+ * datumet redan passerat". Det villkoret kan i praktiken aldrig slå till
+ * (31 december av today:s EGET år är alltid >= today) — kvar som samma
+ * "kan inte hända men gissar aldrig"-försvar som redan finns i
+ * GiltighetsKontroll.astro, inte borttaget för att det ser onödigt ut.
+ *
+ * fast_datum (J3): Code-beslut, ingen uttrycklig instruktion för den här
+ * grenen — samma "nästa förekomst, rulla framåt om passerad"-princip som
+ * riktiga ansökningsdeadlines (nextOccurrenceISO nedan), eftersom en
+ * fast_datum-regel återkommer varje år (till skillnad från kalenderar,
+ * där Jacob uttryckligen ville ha null i stället för att rulla framåt).
+ *
+ * ingen_regel (inget förfaller) och okand (vet inte) har inget datum att
+ * räkna ur. Ger null — aldrig ett gissat datum.
  */
-export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string): string | null {
-  if (regel.antal === null) return null;
+export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string, today: string): string | null {
   switch (regel.typ) {
     case 'manader_efter_arsmote':
     case 'manader_efter_beslut':
-      return addMonths(arsmotesdatum, regel.antal);
-    case 'kalenderar':
+      return regel.antal === null ? null : addMonths(arsmotesdatum, regel.antal);
+    case 'kalenderar': {
+      const forfallodatum = `${today.slice(0, 4)}-12-31`;
+      return forfallodatum < today ? null : forfallodatum;
+    }
+    case 'fast_datum':
+      return regel.datum === null ? null : nextOccurrenceISO(regel.datum, today);
     case 'ingen_regel':
     case 'okand':
       return null;
@@ -319,31 +357,30 @@ export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string)
  * uppfinns" — null täcker ingen_regel/okand (ingen rad i tabellen ger
  * dem en fras) och antal: null.
  *
- * kalenderar HAR en fras i tabellen ("kalenderåret ut") och returneras
- * här, men når ändå aldrig mejl 5 i praktiken — INTE på grund av en
- * saknad fras, utan för att berakForfallodatum() (ovan) returnerar null
- * för kalenderar (inget beräkningsbart förfallodatum, mejl 5 kräver
- * {forfallodatum}). Två olika spärrar av olika skäl — ingen orsak att
- * låtsas att bara en av dem finns.
- *
- * fast_datum FINNS I KÄLLTEXTENS TABELL men INTE i GILTIGHET_REGEL_TYPER
- * — kan inte skrivas som ett switch-case (TypeScript tillåter inte ett
- * otillgängligt typvärde). Källtexten antar en regel-typ G1 aldrig byggde
- * (eller som väntar på en framtida utökning) — flaggat till Jacob i
- * leveransrapporten, inte tyst uteslutet eller gissat på.
+ * kalenderar ("kalenderåret ut") och fast_datum ("till och med {datum}
+ * varje år", J3 2026-08-16 — datum formaterat via formatRecurringDate,
+ * samma svenska klartext som deadlines redan använder) ger båda en fras
+ * OCH ett beräkningsbart förfallodatum (berakForfallodatum ovan) sedan
+ * J3 — når mejl 5 på riktigt, inte bara i tabellen.
  */
 export function regeltext(regel: GiltighetRegel): string | null {
-  if (regel.antal === null) return null;
-  const n = regel.antal;
   switch (regel.typ) {
-    case 'manader_efter_arsmote':
+    case 'manader_efter_arsmote': {
+      if (regel.antal === null) return null;
+      const n = regel.antal;
       return n === 1 ? 'i en månad efter årsmötet' : `i ${n} månader efter årsmötet`;
-    case 'manader_efter_beslut':
+    }
+    case 'manader_efter_beslut': {
+      if (regel.antal === null) return null;
+      const n = regel.antal;
       if (n === 12) return 'i ett år från beslutsdagen';
       if (n === 13) return 'i tretton månader från beslutsdagen';
       return `i ${n} månader från beslutsdagen`;
+    }
     case 'kalenderar':
       return 'kalenderåret ut';
+    case 'fast_datum':
+      return regel.datum === null ? null : `till och med ${formatRecurringDate(regel.datum)} varje år`;
     case 'ingen_regel':
     case 'okand':
       return null;

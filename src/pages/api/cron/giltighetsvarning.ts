@@ -43,6 +43,12 @@
 // datan) är den enda kvarvarande spärren nu. Koppla NIVÅ 1 till
 // sendGiltighetsvarningNiva1 (mejl.ts) när G1 landar.
 //
+// J3 (2026-08-16): kalenderar och fast_datum ger nu BÅDA ett beräknat
+// förfallodatum (berakForfallodatum, kommunTyper.ts) — giltighetRegelGer-
+// Datum() räknar dem till NIVÅ 1, inte NIVÅ 2 som förut. Ändrar inte
+// grenlogiken nedan (den läser redan giltighetRegelGerDatum() rakt av),
+// bara vilka typer som faktiskt tar den grenen.
+//
 // Skyddad med CRON_SECRET, samma mönster som paminnelser.ts/utfallsfraga.
 // ts. ?today= samma testkrok.
 export const prerender = false;
@@ -89,7 +95,7 @@ export const GET: APIRoute = async ({ request, url }) => {
         const regel = kommun.giltighet_regel;
         if (giltighetRegelGerDatum(regel)) {
           // NIVÅ 1
-          const forfallodatum = berakForfallodatum(regel!, arsmotesdatum);
+          const forfallodatum = berakForfallodatum(regel!, arsmotesdatum, today);
           if (!forfallodatum) continue; // försvar — giltighetRegelGerDatum garanterar egentligen detta
 
           const paminnDatum = addMonths(forfallodatum, -2);
@@ -101,9 +107,9 @@ export const GET: APIRoute = async ({ request, url }) => {
             continue;
           }
 
-          // regeltext() (kommunTyper.ts) — inte null här: giltighetRegelGerDatum()
-          // (grenens villkor ovan) släpper bara igenom manader_efter_arsmote/
-          // manader_efter_beslut, båda täckta i regeltext()-tabellen.
+          // regeltext() (kommunTyper.ts) — inte null här (J3): alla typer
+          // giltighetRegelGerDatum() släpper igenom hit (manader_efter_*,
+          // kalenderar, fast_datum) har en rad i regeltext()-tabellen.
           const fras = regeltext(regel!);
 
           niva1SkulleSkickas++;

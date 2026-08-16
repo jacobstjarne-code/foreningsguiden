@@ -418,6 +418,15 @@ function validateKommun(raw: any, file: string, stem: string): Kommun {
       if (gr.antal !== null && typeof gr.antal !== 'number') {
         problems.push(`${where}.antal måste vara ett tal eller null`);
       }
+      // J3 (2026-08-16): datum — MM-DD för fast_datum, samma format/
+      // regex som deadlines.datum. Additivt precis som resten av fältet:
+      // saknas i alla filer i dag, normaliseras till null tills G1/GPT
+      // sätter den.
+      if (gr.datum === undefined) {
+        gr.datum = null;
+      } else if (gr.datum !== null && (typeof gr.datum !== 'string' || !MMDD_RE.test(gr.datum))) {
+        problems.push(`${where}.datum är "${gr.datum}", förväntat format MM-DD eller null`);
+      }
       if (!isNonEmptyString(gr.kalla_url)) problems.push(`${where}.kalla_url saknas eller är tom`);
     }
   }
