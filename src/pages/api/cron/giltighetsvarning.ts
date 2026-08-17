@@ -44,6 +44,24 @@
 // grenlogiken nedan (den läser redan giltighetRegelGerDatum() rakt av),
 // bara vilka typer som faktiskt tar den grenen.
 //
+// L1.3 (2026-08-17, Jacob — "Det här är första gången vi räknar ett
+// datum och lovar en människa något i framtiden"): tre spärrar tillagda
+// mot NIVÅ 1-flippen ovan, som gick live utan dem.
+//   1. giltighetRegelGerDatum(regel, status) kräver nu status ===
+//      kontrollast — en typ som SER beräkningsbar ut (rätt antal/datum)
+//      men inte är oberoende bekräftad ska aldrig trigga ett mejl.
+//      Försvar i djupet: schemavalidatorn (kommuner.ts) kräver redan
+//      kontrollast för en beräkningsbar typ, men cronet ska inte lita
+//      blint på att den spärren aldrig försvagas.
+//   2. forfallodatum < today → hoppa. Ett förbisett cronbortfall eller
+//      en kalenderar-regel vars 31 december redan varit ska aldrig
+//      skicka ett mejl om en frist som redan är förbi.
+//   3. Tom arsmotesdatum → hoppa (strukturellt oåtkomligt idag, men
+//      gissar aldrig på att den garantin håller för alltid).
+// Testat mot fixtur (scripts/verify-giltighet-regler.ts, i grinden) —
+// ett känt svar per regeltyp som G1 faktiskt satt, plus giltighetRegel-
+// GerDatum()s statusspärr testad direkt.
+//
 // Skyddad med CRON_SECRET, samma mönster som paminnelser.ts/utfallsfraga.
 // ts. ?today= samma testkrok.
 export const prerender = false;
@@ -84,15 +102,28 @@ export const GET: APIRoute = async ({ request, url }) => {
   for (const sub of subscribers) {
     const arsmoten = sub.giltighetArsmoten ?? {};
     for (const [kommunSlug, arsmotesdatum] of Object.entries(arsmoten)) {
+      // L1.3 (2026-08-17): "inget mejl utan angivet årsmötesdatum" —
+      // strukturellt oåtkomligt idag (Object.entries itererar bara satta
+      // nycklar, en tom sträng kan inte lagras via /api/giltighetsbevakning.
+      // ts:s DATE_RE-validering) men gissar aldrig på att den spärren
+      // aldrig kan svikta.
+      if (!arsmotesdatum) continue;
+
       const kommun = kommuner.find((k) => k.kommun_slug === kommunSlug);
       if (!kommun) continue;
 
       try {
         const regel = kommun.giltighet_regel;
-        if (giltighetRegelGerDatum(regel)) {
+        if (giltighetRegelGerDatum(regel, kommun.giltighet_regel_status)) {
           // NIVÅ 1
           const forfallodatum = berakForfallodatum(regel!, arsmotesdatum, today);
           if (!forfallodatum) continue; // försvar — giltighetRegelGerDatum garanterar egentligen detta
+
+          // L1.3: "inget mejl om förfallodatumet redan passerat" — ett
+          // ouppmärksammat cronbortfall (eller en kalenderar-regel vars
+          // 31 december redan varit) ska aldrig skicka ett mejl om en
+          // frist som redan är förbi.
+          if (forfallodatum < today) continue;
 
           const paminnDatum = addMonths(forfallodatum, -2);
           if (today < paminnDatum) continue; // inte dags än

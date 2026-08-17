@@ -265,9 +265,19 @@ export type GiltighetRegelStatus = (typeof GILTIGHET_REGEL_STATUSAR)[number];
  * (berakForfallodatum nedan) och räknas därför hit — NIVÅ 1, inte längre
  * NIVÅ 2. GiltighetsKontroll.astro använder funktionen både server- och
  * klientsidan så de aldrig kan divergera om vilken gren som visas.
+ *
+ * L1.3 (2026-08-17, Jacob): "inget mejl när giltighet_regel_status inte
+ * är kontrollast" — `status` är ett OBLIGATORISKT andra argument, inte
+ * valfritt, så inget anropsställe kan råka glömma det. Schemavalidatorn
+ * (kommuner.ts) kräver redan att en beräkningsbar typ har status
+ * kontrollast (annars kastar den vid validering) — den här kollen är
+ * försvar i djupet, inte den enda spärren: om validatorn någonsin
+ * försvagas ska cronet ändå aldrig skicka mot en oberoende obekräftad
+ * regel. Samma gren driver GiltighetsKontroll-widgeten OCH cronets
+ * NIVÅ 1/2 — de kan aldrig divergera om vilken nivå som visas/skickas.
  */
-export function giltighetRegelGerDatum(regel: GiltighetRegel | null): boolean {
-  if (regel === null) return false;
+export function giltighetRegelGerDatum(regel: GiltighetRegel | null, status: GiltighetRegelStatus | null): boolean {
+  if (regel === null || status !== 'kontrollast') return false;
   switch (regel.typ) {
     case 'manader_efter_arsmote':
     case 'manader_efter_beslut':

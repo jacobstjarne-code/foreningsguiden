@@ -29,7 +29,7 @@ export interface Props {
 
 const { kommun, today } = Astro.props;
 const regel = kommun.giltighet_regel;
-const gerDatum = giltighetRegelGerDatum(regel);
+const gerDatum = giltighetRegelGerDatum(regel, kommun.giltighet_regel_status);
 const intro = (gerDatum ? GILTIGHETSKOLL.intro : GILTIGHETSKOLL.introOkand).replace(/{kommun}/g, kommun.kommun);
 ---
 <div

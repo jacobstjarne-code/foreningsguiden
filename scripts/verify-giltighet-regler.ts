@@ -12,7 +12,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import yaml from 'js-yaml';
 import {
-  GILTIGHET_REGEL_TYPER, berakForfallodatum, regeltext,
+  GILTIGHET_REGEL_TYPER, berakForfallodatum, regeltext, giltighetRegelGerDatum,
 } from '../src/lib/kommunTyper.ts';
 import type {
   GiltighetRegel, GiltighetRegelStatus, GiltighetRegelTyp,
@@ -144,6 +144,73 @@ if (!varmSkarmKalla.includes('data-regel-datum={kommun.giltighet_regel?.datum'))
 }
 if (!cronKalla.includes('await sendGiltighetsvarningNiva1(') || !cronKalla.includes('await markGiltighetsvarningSent(')) {
   fail.push('giltighetsmejlets nivå 1 är inte kopplad till sändning + idempotensmarkering');
+}
+
+// L1.3 (Jacob 2026-08-17): tre spärrar innan mejl 5 går ut. Källtextkoll
+// (samma stil som cronKalla-kollen ovan) — säkerställer att spärrarna
+// inte tyst kan försvinna i en framtida omskrivning utan att grinden
+// märker det.
+if (!cronKalla.includes('giltighetRegelGerDatum(regel, kommun.giltighet_regel_status)')) {
+  fail.push('cronet skickar giltighet_regel_status till giltighetRegelGerDatum — spärren mot icke-kontrollästa regler saknas');
+}
+if (!cronKalla.includes('forfallodatum < today')) {
+  fail.push('cronet saknar spärren mot ett redan passerat förfallodatum');
+}
+if (!cronKalla.includes('if (!arsmotesdatum) continue')) {
+  fail.push('cronet saknar den explicita spärren mot ett tomt årsmötesdatum');
+}
+if (!giltighetskontrollKalla.includes('giltighetRegelGerDatum(regel, kommun.giltighet_regel_status)')) {
+  fail.push('GiltighetsKontroll skickar inte giltighet_regel_status till giltighetRegelGerDatum — widgeten kan visa nivå 1 för en icke-kontrolläst regel');
+}
+
+// L1.2 (Jacob 2026-08-17): "Kontrollera berakForfallodatum() mot varje
+// regeltyp som faktiskt förekommer i de tjugo. Ett testfall per typ med
+// känt svar... Det här är första gången vi räknar ett datum och lovar en
+// människa något i framtiden." Fyra riktiga G1-kommuner (en per typ som
+// faktiskt förekommer) plus två syntetiska fall (kalenderar och
+// antal=1-ordformen) som ingen kommun har än — regeltext()/
+// berakForfallodatum() ska ändå ge rätt svar den dagen G1 sätter dem.
+//
+// Jacobs eget exempel för manader_efter_arsmote var "Enköping 1" —
+// kontrollerat mot RULES ovan: Enköpings regel är typ "okand", inte
+// manader_efter_arsmote. De riktiga kommunerna med den typen är
+// Norrtälje (antal 2) och Vallentuna (antal 3), använda nedan i stället
+// — flaggat i leveransrapporten, inte tyst bytt ut.
+for (const golden of [
+  { namn: 'Norrtälje (manader_efter_arsmote, antal 2)', regel: { typ: 'manader_efter_arsmote' as const, antal: 2, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-05-01', fras: 'i 2 månader efter årsmötet' },
+  { namn: 'Vallentuna (manader_efter_arsmote, antal 3)', regel: { typ: 'manader_efter_arsmote' as const, antal: 3, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-06-01', fras: 'i 3 månader efter årsmötet' },
+  { namn: 'Helsingborg (manader_efter_beslut, antal 12)', regel: { typ: 'manader_efter_beslut' as const, antal: 12, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2027-03-01', fras: 'i ett år från beslutsdagen' },
+  { namn: 'Lund (manader_efter_beslut, antal 13)', regel: { typ: 'manader_efter_beslut' as const, antal: 13, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2027-04-01', fras: 'i tretton månader från beslutsdagen' },
+  { namn: 'syntetisk (manader_efter_arsmote, antal 1 — "en månad"-ordformen, ingen kommun har detta värde än)', regel: { typ: 'manader_efter_arsmote' as const, antal: 1, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-04-01', fras: 'i en månad efter årsmötet' },
+  { namn: 'syntetisk (kalenderar, ingen kommun har typen än)', regel: { typ: 'kalenderar' as const, antal: null, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-12-31', fras: 'kalenderåret ut' },
+]) {
+  const forfallodatum = berakForfallodatum(golden.regel, '2026-03-01', golden.today);
+  if (forfallodatum !== golden.forfaller) {
+    fail.push(`${golden.namn}: förfallodatum ${forfallodatum}, väntat ${golden.forfaller}`);
+  }
+  const fras = regeltext(golden.regel);
+  if (fras !== golden.fras) {
+    fail.push(`${golden.namn}: regeltext "${fras}", väntat "${golden.fras}"`);
+  }
+}
+
+// L1.3 — giltighetRegelGerDatum() kräver status som obligatoriskt andra
+// argument sedan L1.3 (2026-08-17): "inget mejl när giltighet_regel_
+// status inte är kontrollast" — testar funktionen direkt, inte bara
+// källtextnärvaron ovan.
+{
+  const beraknbarRegel: GiltighetRegel = { typ: 'manader_efter_arsmote', antal: 2, datum: null, kalla_url: '' };
+  if (giltighetRegelGerDatum(beraknbarRegel, 'kontrollast') !== true) {
+    fail.push('giltighetRegelGerDatum: kontrollast + beräkningsbar typ ska ge true');
+  }
+  for (const status of ['okand', 'ingen_regel', null] as const) {
+    if (giltighetRegelGerDatum(beraknbarRegel, status) !== false) {
+      fail.push(`giltighetRegelGerDatum: status "${status}" ska ge false trots en typ som annars vore beräkningsbar`);
+    }
+  }
+  if (giltighetRegelGerDatum(null, 'kontrollast') !== false) {
+    fail.push('giltighetRegelGerDatum: null-regel ska alltid ge false, oavsett status');
+  }
 }
 
 for (const golden of [
