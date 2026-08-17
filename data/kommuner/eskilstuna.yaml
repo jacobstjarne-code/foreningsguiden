@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Rbok (eskilstuna.rbok.se)
   url: https://eskilstuna.rbok.se/
 kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-verifierad: 2026-07-10
+verifierad: '2026-08-17'
+giltighet_regel:
+  typ: okand
+  antal: null
+  datum: null
+  kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/bli-stodberattigad-forening
+giltighet_regel_status: okand
 bidrag:
 - id: eskilstuna-verksamhetsbidrag-barn-unga
   namn: Verksamhetsbidrag för barn och unga samt personer med funktionsnedsättning
@@ -19,44 +25,61 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 11-30
+    - 04-30
   krav:
-  - Registrerad i kommunens portal för bokning och bidrag; personnummer och BankID/Freja eID
+  - Föreningen ska vara stödberättigad och ha stödberättigad verksamhet för målgruppen
+  - Deltagarnas närvaro ska registreras i kommunens portal för bokning och bidrag
+  - För idrottsföreningar fördelas stödet efter deltagare per aktivitet; för övriga efter aktiva medlemmar med minst sex aktiviteter under två månader
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Total pott (2024): 4 900 000 kr"
+  belopp_avser: ren_pott
+  kommunens_pott: 4 900 000 kr (2025)
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan öppen ca 16 september–30 november. Total pott (2024) 4 900 000 kr.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Alla föreningar som uppfyller villkoren får del av den budgeterade potten.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: eskilstuna-verksamhetsbidrag-samhallsnytta
-  namn: Verksamhetsbidrag för särskild samhällsnytta och parasport
+  namn: Verksamhetsbidrag för särskild samhällsnytta
   kategori:
   - funktionsratt
   - social
-  malgrupp: Stödberättigade föreningar med verksamhet som skapar särskild samhällsnytta, inkl. parasport och vuxna med funktionsnedsättning
-    21–64 år
+  malgrupp: Stödberättigade föreningar med verksamhet som skapar särskild samhällsnytta för prioriterade målgrupper
   deadlines:
     typ: fasta
     datum:
-    - 04-30
+    - 10-31
   krav:
-  - Föreningar redovisar deltagarnas närvaro i portalen för bokning och bidrag
+  - Föreningen ska vara stödberättigad och lämna ansökan senast sista ansökningsdag
+  - Verksamheten ska skapa särskild samhällsnytta, exempelvis meningsfull fritid, trygghet, folkhälsa, socialt stöd eller miljönytta
+  - Verksamhetsplan och uppskattad budget för kommande verksamhetsår ska bifogas
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Total pott (2024): 3 200 000 kr"
+  belopp_avser: ren_pott
+  kommunens_pott: 3 200 000 kr (2025, inklusive parasport)
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Total pott (2024) 3 200 000 kr.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningar prioriteras efter verksamhetens syfte, målgrupp och omfattning.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: eskilstuna-projektstod-kultur
   namn: Projektstöd till fria kulturutövare
   kategori:
@@ -67,15 +90,21 @@ bidrag:
     datum: []
   krav:
   - Projektet genomförs för en publik inom Eskilstuna kommun
+  - Projektet ska vara ett publikt kulturprojekt eller evenemang inom en konstform
+  - Ansökan ska beskriva projektets innehåll, genomförande och kostnader
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 500 000 kr (2025)
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan öppen hela året.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - kultur
 - id: eskilstuna-investeringsbidrag
   namn: Investeringsbidrag (större/mindre)
   kategori:
@@ -86,16 +115,28 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Enligt kommunens villkor för investeringsbidrag
-  belopp: null
+  - Föreningen ska vara stödberättigad och ha beviljats bidrag för verksamhetslokaler och anläggningar samma år
+  - Bidraget får bara användas till faktiska och redovisningsbara investeringskostnader i anläggningen
+  - Mindre investering ska slutredovisas inom 1,5 år och större investering inom tre år från beslutet
+  belopp: Upp till 30 procent av investeringskostnaden; högst 50 000 kr för mindre och 300 000 kr för större investering
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan öppen hela året.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: eskilstuna-lovstod
   namn: Lovstöd
   kategori:
@@ -103,19 +144,375 @@ bidrag:
   - kultur
   malgrupp: Föreningar som arrangerar kostnadsfria lovaktiviteter för unga 6–18 år
   deadlines:
+    typ: fasta
+    datum:
+    - 03-20
+    - 05-13
+    - 10-02
+    - 11-16
+  krav:
+  - Kostnadsfria aktiviteter under loven för barn och unga 6–18 år
+  - Aktiviteten ska genomföras under det lov som respektive ansökningsperiod avser
+  - Föreningen ska beskriva aktivitetens målgrupp, genomförande och kostnader i ansökan
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 5 000 000 kr (2025, minst 55 procent till föreningslivet)
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Datumen avser sista dag för sommarlov, höstlov och jullov 2026 samt sportlov 2027.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-arrangemangsbidrag
+  namn: Arrangemangsbidrag för publik verksamhet
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Stödberättigade föreningar som arrangerar publik verksamhet i Eskilstuna
+  deadlines:
     typ: lopande
     datum: []
   krav:
-  - Kostnadsfria aktiviteter under loven för barn och unga 6–18 år
+  - Föreningen ska vara stödberättigad
+  - Arrangemanget ska vara publikt och genomföras i Eskilstuna, exempelvis en föreställning, festival eller större idrottstävling
+  - Ansökan ska avse kostnader för ett eller flera kommande arrangemang och redovisning ska lämnas efteråt
   belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: ren_pott
+  kommunens_pott: 2 500 000 kr (2025)
+  sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Egna ansökningsfönster per lov (publiceras på bidragssidan). Ansökningsperioder 2026 varierar per lov.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Serveringstillstånd kan påverka bidragets storlek.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-finskt-arrangemangsbidrag
+  namn: Finskt arrangemangsbidrag
+  kategori:
+  - kultur
+  malgrupp: Föreningar som arrangerar verksamhet för att främja, bevara och utveckla finsk kultur och finska språket i Eskilstuna
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en förening
+  - Arrangemanget ska främja, bevara eller utveckla den finska kulturen eller det finska språket i kommunen
+  - Ansökan ska avse kostnader för ett publikt arrangemang och lämnas via kommunens bidragsportal
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 250 000 kr (2025)
+  sen_ansokan: Ej tillämpligt (löpande)
+  kalla_url: https://www.eskilstuna.se/kommun-och-politik/hallbar-stad/finskt-forvaltningsomrade
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet finansieras genom statsbidraget för finskt förvaltningsområde.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag för ledare och styrelse
+  kategori:
+  - idrott
+  - kultur
+  - funktionsratt
+  - ovrig
+  malgrupp: Stödberättigade föreningar med verksamhet för barn och unga eller personer med funktionsnedsättning
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad och ha verksamhet för barn och unga 7–20 år eller personer med funktionsnedsättning
+  - Ansökan ska lämnas senast en månad efter genomförd ledar- eller styrelseutbildning
+  - Kursprogram med schemalagd tid ska bifogas ansökan
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 150 000 kr (2025)
+  sen_ansokan: Senast en månad efter genomförd utbildning
+  kalla_url: https://www.eskilstuna.se/download/18.30a54a0a193dec24956fe48/1736769622252/Riktlinjer%20f%C3%B6r%20Kultur-%20och%20fritidsn%C3%A4mndens%20st%C3%B6d%20till%20f%C3%B6reningslivet%20i%20Eskilstuna.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidrag betalas per godkänd kursdag så länge avsatta medel räcker.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-stimulansbidrag-kultur-idrott
+  namn: Stimulansbidrag för kultur och idrott
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Stödberättigade föreningar med en särskild satsning som bidrar till kommunens idrotts- eller kulturpolitiska mål
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad
+  - Satsningen ska vara särskild och exempelvis nå nya målgrupper, pröva nya verksamhetsformer eller stärka jämställdhet och mångfald
+  - Satsningen ska slutredovisas i bidragsportalen senast två månader efter avslut
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 610 758 kr (2025)
+  sen_ansokan: Ej tillämpligt (löpande)
+  kalla_url: https://www.eskilstuna.se/download/18.30a54a0a193dec24956fe48/1736769622252/Riktlinjer%20f%C3%B6r%20Kultur-%20och%20fritidsn%C3%A4mndens%20st%C3%B6d%20till%20f%C3%B6reningslivet%20i%20Eskilstuna.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En ny ansökan handläggs först när föregående beviljad satsning har slutredovisats.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-verksamhetsbidrag-studieforbund
+  namn: Verksamhetsbidrag för studieförbund
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Studieförbund som uppfyller statens och Eskilstuna kommuns villkor
+  deadlines:
+    typ: fasta
+    datum:
+    - 06-30
+  krav:
+  - Studieförbundet ska vara statsbidragsberättigat och bedriva folkbildningsverksamhet i Eskilstuna
+  - Verksamhetsberättelse, ekonomisk redogörelse, kommunintyg och verksamhetsplan med budget ska lämnas årligen
+  - Ansökan om årets verksamhetsbidrag ska lämnas senast 30 juni i kommunens portal
+  belopp: Kommunens anslag fördelas till 75 procent som grundbidrag och 25 procent genom samverkansöverenskommelser
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.eskilstuna.se/download/18.1a8c2ef17f44c608401ff59/1648553503383/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20studief%C3%B6rbunden.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Grundbidraget följer Länsbildningsförbundet Sörmlands fördelningsmodell.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - kultur
+  - social
+  - annat
+- id: eskilstuna-verksamhetslokaler-anlaggningar
+  namn: Bidrag för verksamhetslokaler och anläggningar
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Stödberättigade föreningar som äger eller hyr en lokal eller anläggning som är ett viktigt alternativ till kommunens lokaler
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-30
+  krav:
+  - Föreningen ska vara stödberättigad och äga eller hyra lokalen eller anläggningen
+  - Lokalen ska vara ett angeläget komplement när kommunens lokaler saknar rätt funktion, kapacitet eller närhet
+  - Föreningen ska tillsammans med kommunen göra anläggningen tillgänglig för så många barn, unga och personer med funktionsnedsättning som möjligt
+  belopp: Den budgeterade potten fördelas genom ett poängsystem efter anläggningstyp och verksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.eskilstuna.se/download/18.30a54a0a193dec24956fe48/1736769622252/Riktlinjer%20f%C3%B6r%20Kultur-%20och%20fritidsn%C3%A4mndens%20st%C3%B6d%20till%20f%C3%B6reningslivet%20i%20Eskilstuna.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget får avse drift, underhåll eller hyra.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-orienteringskartor
+  namn: Bidrag för framtagande av orienteringskartor
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Stödberättigade föreningar med orienteringsverksamhet som behöver kartor för träning och tävling
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad och bedriva orienteringsverksamhet
+  - Kartorna ska tas fram för föreningens tränings- eller tävlingsverksamhet
+  - Föreningarna ska samordna fördelningen av kartbidraget genom kartgruppen före den enskilda ansökan
+  belopp: Kartgruppen fördelar kommunens totala kartbidrag mellan de sökande föreningarna
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej tillämpligt (löpande)
+  kalla_url: https://www.eskilstuna.se/download/18.63eb85061817fcf33862122e/1743358988478/Rbok%20-%20Lathund%20f%C3%B6r%20bidrag%20f%C3%B6r%20framtagande%20av%20orienteringskartor.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan är öppen hela året enligt kommunens aktuella bidragssida.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - friluft
+- id: eskilstuna-landsbygdsutvecklingsbidrag
+  namn: Stöd för levande landsbygder 2026–2028
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Samverkande ideella föreningar, byalag, bygdegårds- och hembygdsföreningar, utvecklingsgrupper och samfälligheter på Eskilstunas landsbygd
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Ansökan ska bygga på samarbete mellan minst två lokala aktörer och kan även omfatta privatpersoner och näringsliv
+  - Insatsen ska vara en ny idé, exempelvis en mötesplats, tillgänglighetsåtgärd, trygghetsinsats, platsutveckling eller natur- och kulturinsats
+  - Stöd lämnas inte till drift, löpande kostnader, interna aktiviteter eller redan påbörjade eller avslutade projekt
+  - Från 2027 krävs en lokal utvecklingsgrupp och utvecklingsplan för bygden
+  belopp: Inget fast belopp publiceras för satsningen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag på informationssidan
+  kalla_url: https://www.eskilstuna.se/nyheter/nyheter/2026-06-22-oppet-hus-traffar-om-nytt-stod-for-levande-landsbygder
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Satsningen gäller 2026–2028 och ersätter den föråldrade informationen om 2024 års landsbygdsutvecklingsbidrag.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-foreningsdriven-fritidsgard
+  namn: Uppdragsersättning för föreningsdriven fritidsgård
+  kategori:
+  - social
+  - ovrig
+  malgrupp: Stödberättigade föreningar som driver öppen fritidsgårdsverksamhet för unga från årskurs 6 till 20 år
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad och bifoga plan och budget för fritidsgårdsverksamheten
+  - Verksamheten ska vara öppen och avgiftsfri utan krav på medlemskap samt fri från droger, tobak, dopning och spel om pengar
+  - Föreningen ska registrera besöksstatistik, särredovisa ekonomin och redovisa verksamheten varje år
+  belopp: Inget fast belopp publiceras; ersättningen bestäms i en ettårig överenskommelse med kommunen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras under hela året och bedöms vanligtvis vid två tillfällen
+  kalla_url: https://www.eskilstuna.se/download/18.30a54a0a193dec24956fe48/1736769622252/Riktlinjer%20f%C3%B6r%20Kultur-%20och%20fritidsn%C3%A4mndens%20st%C3%B6d%20till%20f%C3%B6reningslivet%20i%20Eskilstuna.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet är en uppdragsersättning och överenskommelsen gäller ett år i taget.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-vanortsbidrag-resa
+  namn: Vänortsbidrag – resebidrag
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Föreningar i Eskilstunas föreningsregister som genomför utbyte med föreningar i kommunens vänorter
+  deadlines:
+    typ: fasta
+    datum:
+    - 12-31
+  krav:
+  - Föreningen ska vara registrerad i Eskilstuna kommuns föreningsregister
+  - Resan ska skapa utbyte med en förening i en av kommunens vänorter och ungdomsutbyten prioriteras
+  - Före utbetalning ska program och deltagarförteckning lämnas och efter resan ska en reserapport skickas in
+  belopp: Inget fast resebelopp publiceras; vänortsdelegationen fördelar årets anslag mellan ansökningarna
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.eskilstuna.se/e-tjanster-och-blanketter/ansok-om-vanortsbidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan avser verksamhet under kommande år och beslutas av vänortsdelegationen i februari.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: eskilstuna-vanortsbidrag-administration
+  namn: Vänortsbidrag – administrationsbidrag
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Vänortsföreningar i Eskilstuna kommuns föreningsregister
+  deadlines:
+    typ: fasta
+    datum:
+    - 12-31
+  krav:
+  - Sökanden ska vara en registrerad vänortsförening i Eskilstuna kommun
+  - Föreningen ska bedriva verksamhet som stödjer kontakter och utbyten med kommunens vänorter
+  - Efter årsmötet ska verksamhetsberättelse, årsredovisning och medlemsförteckning lämnas före utbetalning
+  belopp: Inget fast administrationsbelopp publiceras; vänortsdelegationen fördelar årets anslag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.eskilstuna.se/e-tjanster-och-blanketter/ansok-om-vanortsbidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning sker efter att föreningens årshandlingar har lämnats.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - ungdom
+  - annat
 forutsattningar:
 - id: eskilstuna-registrerad
   vad: Registrera föreningen i portalen för bokning och bidrag
@@ -123,7 +520,7 @@ forutsattningar:
   system: Rbok (eskilstuna.rbok.se)
   ledtid: null
   ledtid_text: Kommunen anger ingen handläggningstid
-  giltighet: null
+  giltighet: Föreningen ska varje år uppdatera sina registeruppgifter och lämna aktuella årsmöteshandlingar
   ordning: 1
-  kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/soka-bidrag
-  giltighet_status: okand
+  kalla_url: https://www.eskilstuna.se/kultur-och-fritid/foreningsliv-och-bidrag/bli-stodberattigad-forening
+  giltighet_status: kontrollast
