@@ -33,7 +33,24 @@ import { PRIS_ABONNEMANG_ORE } from '../../../lib/priser';
 
 const env = import.meta.env as unknown as Record<string, string>;
 
-export const POST: APIRoute = async ({ request }) => {
+// M1.1 (Jacob 2026-08-17, "säkerhet först"): STÄNGD. Ingen UI-yta har
+// någonsin länkat hit (grep bekräftat), men endpointen var live och
+// helt ogated — vem som helst kunde POSTa en godtycklig e-postadress
+// och få Föreningsguiden att skapa en riktig Stripe-kund + skicka en
+// riktig faktura (495 kr/år) till den adressen, utan betalning,
+// inloggning eller CAPTCHA. Trakasserifara (skicka fakturor till
+// främmande adresser i Föreningsguidens namn) + obegränsad Stripe-
+// dataskapande. 410 utan att röra Stripe alls — koden nedan orörd för
+// den dagen ett riktigt gated flöde (ADMIN_SECRET eller en byggd,
+// inloggningsskyddad admin-yta) faktiskt ska anropa den.
+export const POST: APIRoute = async () => {
+  return new Response(JSON.stringify({ ok: false, fel: 'stängd' }), {
+    status: 410,
+    headers: { 'content-type': 'application/json' },
+  });
+};
+
+async function _stangdOanvandKod(request: Request) {
   const stripeKey = env.STRIPE_SECRET_KEY?.trim();
   if (!stripeKey) {
     return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {

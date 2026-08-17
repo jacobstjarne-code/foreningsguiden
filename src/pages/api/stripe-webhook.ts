@@ -20,10 +20,17 @@
  * signaturverifiering kräver den obehandlade byte-strömmen, en JSON-
  * ompparsning skulle ge en annan bytesekvens och alltid faila verifieringen.
  *
- * Svarar 200 så fort ett event är hanterat, ÄVEN om ett leveransmejl
- * fallerar — betalningen/statusändringen är redan skarp hos Stripe, och
- * ett mejlfel ska inte trigga en falsk webhook-retry-loop (som annars
- * skickar samma event igen).
+ * Svarar 200 om ett leveransmejl fallerar (sendKopNotis/sendKopBekraftelse
+ * m.fl., isolerade i egna try/catch INNE i respektive hanterarfunktion) —
+ * betalningen/statusändringen är redan sparad hos oss när de körs, och en
+ * mejlretry skulle inte reparera något (idempotensspärren nedan hindrar
+ * en Stripe-retry från att nå hanterarfunktionen igen ändå).
+ *
+ * Svarar ICKE 200 (M1.2, 2026-08-17) om den KRITISKA skrivningen
+ * (sparaKop/sparaAbonnemang/uppdateraAbonnemangStatus) eller ett
+ * obligatoriskt fält på det inkommande Stripe-objektet fallerar — det
+ * betyder att ett betalt köp riskerar att aldrig levereras. Se den yttre
+ * catch-blockets kommentar i POST-hanteraren för hela resonemanget.
  *
  * Idempotens per event-typ (samma fälla som H22:s Upstash-auto-parse-bugg
  * — se kop.ts hamtaSenastNotifieradSnapshot): checkout.session.completed
@@ -49,11 +56,12 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
   const email = session.customer_details?.email ?? null;
   const kommunSlug = session.metadata?.kommunSlug ?? null;
   if (!email || !kommunSlug) {
-    // Bör aldrig hända (vi sätter alltid metadata.kommunSlug och Stripe
-    // Checkout kräver e-post) — men logga och returnera, inte kasta, så
-    // Stripe fortfarande får 200 (se POST-hanteraren).
-    console.error('registreringscheckout saknar email eller kommunSlug', session.id);
-    return;
+    // M1.2 (Jacob 2026-08-17): kastar nu i stället för att tyst returnera
+    // — "bör aldrig hända" är inte samma sak som "får tystas". Ett
+    // betalt köp utan email/kommunSlug ska synas som ett misslyckat
+    // webhook-anrop (icke-200, se POST-hanteraren), inte försvinna som
+    // en loggrad ingen läser.
+    throw new Error(`registreringscheckout saknar email eller kommunSlug, session ${session.id}`);
   }
 
   let foreningsprofil: Foreningsprofil | undefined;
@@ -103,8 +111,19 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
   };
   await sparaKop(entry);
 
+  // M1.2: sparaKop() OVAN är den kritiska skrivningen (köpet). Ett fel
+  // där ska propagera (icke-200, Stripe försöker igen). Profilmergen
+  // HÄR sker EFTER att köpet redan räknas som klart hos oss — hamtaKop-
+  // idempotensspärren i POST-hanteraren gör att en retry aldrig skulle
+  // nå hit igen ändå, så ett kastat fel här vore synligt men inte
+  // reparerbart genom retry. Loggat lokalt i stället, samma princip som
+  // notismejlen nedan.
   if (foreningsprofil) {
-    await addForeningsprofil(email, foreningsprofil);
+    try {
+      await addForeningsprofil(email, foreningsprofil);
+    } catch (err) {
+      console.error('addForeningsprofil misslyckades (registrering)', session.id, err);
+    }
   }
 
   const registreraLank = `https://foreningsguiden.se/kommun/${kommunSlug}/registrera/`;
@@ -160,17 +179,17 @@ async function hanteraBidragsutkastCheckout(session: Stripe.Checkout.Session, st
   const kommunSlug = session.metadata?.kommunSlug ?? null;
   const bidragId = session.metadata?.bidragId ?? null;
   const profilRaw = session.metadata?.foreningsprofil ?? null;
+  // M1.2 (2026-08-17): kastar i stället för att tyst returnera — se
+  // motsvarande kommentar i hanteraRegistreringsCheckout.
   if (!email || !kommunSlug || !bidragId || !profilRaw) {
-    console.error('bidragsutkast-checkout saknar email/kommunSlug/bidragId/foreningsprofil', session.id);
-    return;
+    throw new Error(`bidragsutkast-checkout saknar email/kommunSlug/bidragId/foreningsprofil, session ${session.id}`);
   }
 
   let foreningsprofil: Foreningsprofil;
   try {
     foreningsprofil = JSON.parse(profilRaw) as Foreningsprofil;
   } catch {
-    console.error('bidragsutkast-checkout: ogiltig foreningsprofil-metadata', session.id);
-    return;
+    throw new Error(`bidragsutkast-checkout: ogiltig foreningsprofil-metadata, session ${session.id}`);
   }
 
   let hostedInvoiceUrl: string | undefined;
@@ -211,7 +230,16 @@ async function hanteraBidragsutkastCheckout(session: Stripe.Checkout.Session, st
     bidragsutkastSnapshot: doc ? JSON.stringify(doc) : undefined,
   };
   await sparaKop(entry);
-  await addForeningsprofil(email, foreningsprofil);
+
+  // M1.2 — samma resonemang som hanteraRegistreringsCheckout: sparaKop()
+  // ovan är den kritiska skrivningen, profilmergen sker efter att köpet
+  // redan räknas som klart (idempotensspärren gör en retry meningslös
+  // härifrån). Loggat lokalt, inte kastat.
+  try {
+    await addForeningsprofil(email, foreningsprofil);
+  } catch (err) {
+    console.error('addForeningsprofil misslyckades (bidragsutkast)', session.id, err);
+  }
 
   const utkastLank = `https://foreningsguiden.se/kommun/${kommunSlug}/utkast/${bidragId}/`;
   const kopLank = `https://foreningsguiden.se/mina-sidor/kop/${encodeURIComponent(session.id)}/`;
@@ -289,8 +317,9 @@ async function hanteraAbonnemangSkapad(subscription: Stripe.Subscription, stripe
   const customer = await stripe.customers.retrieve(customerId);
   const email = !customer.deleted ? customer.email : null;
   if (!email) {
-    console.error('abonnemang saknar e-post på kunden', subscription.id, customerId);
-    return;
+    // M1.2 — kastar i stället för att tyst returnera, samma resonemang
+    // som checkout-hanterarna.
+    throw new Error(`abonnemang saknar e-post på kunden, subscription ${subscription.id}, customer ${customerId}`);
   }
 
   const giltigTill = hamtaGiltigTill(subscription);
@@ -386,10 +415,30 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ ok: true, hoppadOver: event.type }), { status: 200 });
     }
   } catch (err) {
-    // Ett fel i hanteringen ska INTE ge Stripe en 4xx/5xx (det triggar
-    // retry-loopar för ett event vi kanske redan delvis behandlat) —
-    // logga och svara 200, samma policy som mejlfelen nedan alltid följt.
-    console.error('stripe-webhook-hantering misslyckades', event.type, err);
+    // M1.2 (Jacob 2026-08-17, "säkerhet först"): TIDIGARE svarade den här
+    // grenen alltid 200 här — "ett fel ska inte trigga en falsk retry-
+    // loop". Det var fel för den här sortens fel. Ett kastat fel härifrån
+    // betyder att sparaKop/sparaAbonnemang/uppdateraAbonnemangStatus (den
+    // KRITISKA skrivningen — betalningen är redan skarp hos Stripe)
+    // aldrig lyckades, eller att en betald session saknade obligatoriska
+    // fält. Att kvittera det som lyckat gömmer ett tappat köp bakom en
+    // grön logg. Notismejl-fel (sendKopNotis m.fl.) och profilmerge-fel
+    // (addForeningsprofil) är redan isolerade i egna try/catch INNE i
+    // respektive hanterarfunktion och når aldrig hit — bara fel FÖRE
+    // eller UNDER den kritiska skrivningen gör det. Loggar med full
+    // kontext (event-typ, event-id, felet) och svarar icke-200 så Stripe
+    // faktiskt försöker igen (och så felet syns i Stripes egen
+    // leveranslogg om det ändå inte kan självläka).
+    console.error('KRITISKT: stripe-webhook-hantering misslyckades', {
+      eventType: event.type,
+      eventId: event.id,
+      error: err instanceof Error ? err.message : String(err),
+      stack: err instanceof Error ? err.stack : undefined,
+    });
+    return new Response(JSON.stringify({ ok: false, fel: 'hanteringen misslyckades, se serverloggen' }), {
+      status: 500,
+      headers: { 'content-type': 'application/json' },
+    });
   }
 
   return new Response(JSON.stringify({ ok: true }), { status: 200 });
