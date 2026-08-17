@@ -2,7 +2,7 @@
  * G1 golden/regressionstest för kommunernas strukturerade giltighetsregler.
  *
  * Läser de verkliga YAML-filerna och låser tre saker:
- *  1. exakt de 20 redan lästa fritextraderna i 19 kommuner finns kvar,
+ *  1. exakt de 21 redan lästa fritextraderna i 20 kommuner finns kvar,
  *     inklusive id och käll-URL (ingen provenance förloras),
  *  2. varje rad har den fastställda kommunregeln/statusen,
  *  3. fast_datum är en riktig återkommande typ — Täby och Katrineholm
@@ -42,6 +42,7 @@ const RULES: Record<string, ExpectedRule> = {
   katrineholm: { typ: 'fast_datum', antal: null, datum: '03-31', status: 'kontrollast' },
   kungalv: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   lund: { typ: 'manader_efter_beslut', antal: 13, datum: null, status: 'kontrollast' },
+  malmo: { typ: 'manader_efter_arsmote', antal: 1, datum: null, status: 'kontrollast' },
   nacka: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   norrtalje: { typ: 'manader_efter_arsmote', antal: 2, datum: null, status: 'kontrollast' },
   pitea: { typ: 'fast_datum', antal: null, datum: '04-01', status: 'kontrollast' },
@@ -65,6 +66,7 @@ const FIXTURES: Fixture[] = [
   { slug: 'katrineholm', id: 'katrineholm-arlig-redovisning-registrering', text: 'Årlig inlämning krävs senast 31 mars varje år för fortsatt registrering, annars avregistreras föreningen.', rule: RULES.katrineholm },
   { slug: 'kungalv', id: 'kungalv-registerutdrag', text: 'Ska begäras vid varje nytillsättning av ledare med barnkontakt; rekommenderas ske regelbundet även för redan tillsatta ledare', rule: RULES.kungalv },
   { slug: 'lund', id: 'lund-bidragsberattigad', text: 'Görs om var 13:e månad', rule: RULES.lund },
+  { slug: 'malmo', id: 'malmo-bidragsberattigad', text: 'Justerat årsmötesprotokoll ska lämnas inom 30 dagar efter årsmötet och obligatoriska årshandlingar ska lämnas varje år.', rule: RULES.malmo },
   { slug: 'nacka', id: 'nacka-bidragsberattigad-forening', text: 'Upphör om föreningen inte ansökt om eller beviljats aktivitetsbidrag för två på varandra följande ansökningsperioder', rule: RULES.nacka },
   { slug: 'norrtalje', id: 'norrtalje-arliga-arshandlingar', text: 'Handlingarna ska laddas upp senast två månader efter genomfört årsmöte, varje år, för fortsatt bidragsrätt', rule: RULES.norrtalje },
   { slug: 'pitea', id: 'pitea-bidragsberattigad-forening', text: 'Uppgifterna ska uppdateras senast 1 april varje år', rule: RULES.pitea },
@@ -103,10 +105,10 @@ const allRows = [...docs.values()].flatMap((doc) =>
 );
 
 const fail: string[] = [];
-if (FIXTURES.length !== 20) fail.push(`fixturelistan har ${FIXTURES.length} rader, väntat 20`);
-if (new Set(FIXTURES.map((row) => row.slug)).size !== 19) fail.push('fixturelistan måste omfatta exakt 19 kommuner');
-if (allRows.length !== 20) fail.push(`korpusen har ${allRows.length} giltighetsrader, väntat 20`);
-if (new Set(allRows.map((row) => row.slug)).size !== 19) fail.push('korpusen måste omfatta exakt 19 kommuner med giltighetsfritext');
+if (FIXTURES.length !== 21) fail.push(`fixturelistan har ${FIXTURES.length} rader, väntat 21`);
+if (new Set(FIXTURES.map((row) => row.slug)).size !== 20) fail.push('fixturelistan måste omfatta exakt 20 kommuner');
+if (allRows.length !== 21) fail.push(`korpusen har ${allRows.length} giltighetsrader, väntat 21`);
+if (new Set(allRows.map((row) => row.slug)).size !== 20) fail.push('korpusen måste omfatta exakt 20 kommuner med giltighetsfritext');
 
 for (const fixture of FIXTURES) {
   const doc = docs.get(fixture.slug);
@@ -181,7 +183,7 @@ for (const golden of [
   { namn: 'Vallentuna (manader_efter_arsmote, antal 3)', regel: { typ: 'manader_efter_arsmote' as const, antal: 3, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-06-01', fras: 'i 3 månader efter årsmötet' },
   { namn: 'Helsingborg (manader_efter_beslut, antal 12)', regel: { typ: 'manader_efter_beslut' as const, antal: 12, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2027-03-01', fras: 'i ett år från beslutsdagen' },
   { namn: 'Lund (manader_efter_beslut, antal 13)', regel: { typ: 'manader_efter_beslut' as const, antal: 13, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2027-04-01', fras: 'i tretton månader från beslutsdagen' },
-  { namn: 'syntetisk (manader_efter_arsmote, antal 1 — "en månad"-ordformen, ingen kommun har detta värde än)', regel: { typ: 'manader_efter_arsmote' as const, antal: 1, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-04-01', fras: 'i en månad efter årsmötet' },
+  { namn: 'syntetisk (manader_efter_arsmote, antal 1 — "en månad"-ordformen; Malmö fick detta värde 2026-08-17, se RULES.malmo/FIXTURES ovan för den riktiga kommunraden)', regel: { typ: 'manader_efter_arsmote' as const, antal: 1, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-04-01', fras: 'i en månad efter årsmötet' },
   { namn: 'syntetisk (kalenderar, ingen kommun har typen än)', regel: { typ: 'kalenderar' as const, antal: null, datum: null, kalla_url: '' }, today: '2026-08-17', forfaller: '2026-12-31', fras: 'kalenderåret ut' },
 ]) {
   const forfallodatum = berakForfallodatum(golden.regel, '2026-03-01', golden.today);
@@ -237,6 +239,6 @@ if (fail.length > 0) {
   process.exit(1);
 }
 
-console.log('verify:giltighet-regler — 20/20 fritextrader, 19/19 kommuner');
+console.log(`verify:giltighet-regler — ${allRows.length}/${FIXTURES.length} fritextrader, ${new Set(allRows.map((r) => r.slug)).size}/${new Set(FIXTURES.map((r) => r.slug)).size} kommuner`);
 console.log('fast_datum golden: Täby 02-15 PASS, Katrineholm 03-31 PASS');
 console.log('PASS');
