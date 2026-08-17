@@ -9,11 +9,11 @@ ansokningssystem:
 kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag
 verifierad: 2026-07-26
 giltighet_regel:
-  typ: okand
+  typ: ingen_regel
   antal: null
   datum: null
-  kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag
-giltighet_regel_status: okand
+  kalla_url: https://www.tranas.se/download/18.4ecee4b819a7b1efe21a3f/1764328638087/F%C3%B6reningsbidrag%20-%20information%20och%20riktlinjer%2C%20tillg%C3%A4nglighetsanpassad.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: tranas-aktivitetsstod
   namn: Aktivitetsstöd
@@ -31,17 +31,27 @@ bidrag:
   - Verksamheten riktar sig till barn/ungdomar 6-25 år
   - Aktiviteter ska vara planerade, ledarleddade, minst 45 minuter
   - 3-30 deltagare (måste vara medlemmar)
-  - Genomgångsdokumentation krävs
+  - Närvaro ska registreras för varje aktivitet eller sammankomst
   - Max 2 ledare per aktivitet (minsta ålder 13 år)
+  - Verksamhetsberättelse, revisionsberättelse och årsredovisning ska bifogas
+  - Riktlinjer för att skapa trygga föreningsmiljöer ska godkännas
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "680 000 kr"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/aktivitetsstod
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Årlig budget 680 000 kr för 2026. Max 3 aktiviteter/vecka för 6-9 år, max 5 för 7-25 år per deltagare.
 - id: tranas-arrangemangsbidrag
   namn: Arrangemangsbidrag
@@ -61,14 +71,27 @@ bidrag:
   - 'Obligatoriska bilagor: senaste verksamhetsberättelse, årsredovisning samt revisionsberättelse'
   - Föreningen ska godkänna Riktlinjer för att skapa trygga föreningsmiljöer
   - Max 50 000 kr kan beviljas per arrangemang och ansökningsperiod
-  belopp: 150 000 kr
+  - Arrangemanget ska vara offentligt, öppet för alla, religiöst och partipolitiskt obundet samt genomföras i Tranås kommun
+  - Bidrag ges inte till slutna eller interna arrangemang, egen administration eller föreningens egen lokal
+  - Redovisning med resultat, finansiering och kostnadsunderlag ska lämnas senast två månader efter arrangemanget
+  belopp: Högst 50 000 kr per arrangemang och ansökningsperiod
+  belopp_avser: per_forening
+  kommunens_pott: "150 000 kr"
   sen_ansokan: 'Två fasta ansökningsperioder per år: 1 januari–31 mars (för arrangemang höst-vinter) och 1 september–31 oktober
     (för arrangemang vår-sommar). Ansökan öppnar nästa gång 2026-09-01.'
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/arrangemangsbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Total budget 150 000 kr för 2026, max 50 000 kr per arrangemang. Svar lämnas senast två månader efter respektive
     ansökningsperiods slut. Redovisning ska lämnas senast två månader efter avslutat arrangemang.
 - id: tranas-investeringsbidrag
@@ -86,15 +109,26 @@ bidrag:
   - Föreningen måste äga eller långtidshyra lokalen/anläggningen
   - Ansökan måste göras innan arbete påbörjas eller inköp genomförs
   - Max 30% av totala investeringskostnaden beviljas
+  - Ansökan ska innehålla projektbeskrivning och kostnadsberäkning samt kopia om stöd sökts från annan part
+  - Barn- och ungdomsverksamhet, tillgänglighet eller trygghet samt ekologisk hållbarhet prioriteras
+  - Återrapportering med resultat, finansiering och kostnadsunderlag ska lämnas senast två månader efter projektet
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "200 000 kr"
   sen_ansokan: Ej tillåtet
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/investeringsbidrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: 'Årlig budget 200 000 kr för 2026. Deadline 31 mars. Prioriteras: barn-/ungdomsverksamhet, tillgänglighet/trygghet,
     minskad CO2 och ekologisk hållbarhet. Återrapportering senast 2 månader efter avslutat projekt.'
 - id: tranas-stodbidrag-foreningsutveckling
@@ -114,15 +148,25 @@ bidrag:
   - Om föreningen sökt bidrag från andra parter ska kopia på den ansökan bifogas
   - 'Obligatoriska bilagor: senaste verksamhetsberättelse, årsredovisning samt revisionsberättelse'
   - Föreningen ska godkänna Riktlinjer för att skapa trygga föreningsmiljöer
+  - Återrapportering med resultat, finansiering och kostnadsunderlag ska lämnas senast två månader efter projektet
+  - Projekt som löper längre än ett kalenderår ska delrapporteras senast i december
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "30 000 kr"
   sen_ansokan: Löpande från 2026-01-01
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/stodbidrag---foreningsutveckling
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Årlig budget 30 000 kr för 2026. Löpande ansökan. Projektet ska vara utveckling av aktiviteter, ledarutbildning
     eller möjlighet att nå nya målgrupper. Utbetalning 1 månad efter beslut. Slutrapport krävs inom 2 månader.
 - id: tranas-lokalbidrag
@@ -142,13 +186,23 @@ bidrag:
   - Bidrag ges inte för lokaler som kommunen redan subventionerar
   - 'Obligatoriska bilagor: senaste verksamhetsberättelse, årsredovisning samt revisionsberättelse'
   - Föreningen ska godkänna Riktlinjer för att skapa trygga föreningsmiljöer
-  belopp: 12 000 kr
+  belopp: 60 kr per medlem 6–25 år, högst 80 procent av årshyran och högst 7 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: "12 000 kr"
   sen_ansokan: Sista ansökningsdatum 31 mars 2026
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/lokalbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Budget 12 000 kr för 2026. Bidraget beräknas till 60 kronor per medlem i åldern 6-25 år, högst 80 procent av
     föreningens årshyra eller högst 7000 kronor per förening och år.
 - id: tranas-anlaggningsbidrag
@@ -165,19 +219,30 @@ bidrag:
   - Minst 10 medlemmar (medlemsavgift minst 25 kronor)
   - Föreningen äger sin anläggning/lokal eller bedriver den under ägarliknande former
   - Föreningen bedriver barn- och ungdomsverksamhet, verifierat genom beviljat aktivitetsstöd
+  - Anläggningen eller lokalen ska vara viktig för föreningen och allmänheten samt vara tillgänglig för allmänhet, skolor och
+    andra föreningar på skäliga villkor
+  - Bidraget ska användas till drift och årligt underhåll, inklusive mindre reparationer
   - 'Prioriteras: minst 15 redovisade aktiviteter/sammankomster per år'
   - 'Prioriteras: minst 10 medlemmar i åldern 6-25 år'
   - Ansökan ska innehålla årsredovisning, verksamhetsberättelse och revisionsberättelse
   - Föreningen ska godkänna Riktlinjer för att skapa trygga föreningsmiljöer
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "800 000 kr"
   sen_ansokan: Sista ansökningsdatum 31 mars 2026
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/anlaggningsbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Budget 800 000 kr för 2026, fördelas proportionellt mellan sökande föreningar. Vid överteckning minskas bidragen
     proportionellt. Utbetalning sker normalt inom en månad efter ansökningsperiodens slut vid komplett ansökan.
 - id: tranas-projektbidrag-prosocialt
@@ -200,16 +265,88 @@ bidrag:
   - Bidrag ges inte till föreningens ordinarie verksamhet eller till insatser som redan finansieras på annat sätt
   - Bidrag ges inte till insatser med övervägande religiös eller politisk inriktning
   - Enstaka evenemang, resor eller läger ges inte bidrag om de inte ingår i ett större projekt/sammanhang
-  belopp: 358 000 kr
+  - Samma insats eller aktivitet kan få bidrag högst tre år i följd
+  - Ansökan ska innehålla projektbeskrivning och kostnadsberäkning samt kopia om stöd sökts från annan part
+  - Återrapportering med resultat, finansiering och kostnadsunderlag ska lämnas senast två månader efter projektet
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: "358 000 kr"
   sen_ansokan: 'Två ansökningsperioder per år: 1 januari–31 mars och 1 maj–31 augusti'
   kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/projektbidrag-prosociala-insatser-social-hallbarhet/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: 'Budget 358 000 kr för 2026. Två ansökningsperioder: 1 januari–31 mars och 1 maj–31 augusti. Prioriterade områden
     2026: ungas psykiska/fysiska hälsa, tillgänglighet och inkludering för personer med funktionsnedsättning och äldre (65+),
     minskad ensamhet bland äldre, landsbygd/utsatta områden, ökad trygghet.'
+- id: tranas-verksamhetsbidrag-studieforbund
+  namn: Verksamhetsbidrag för studieförbund
+  kategori:
+  - kultur
+  malgrupp: Studieförbund som bedriver folkbildningsverksamhet i Tranås kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-31
+  krav:
+  - Bidrag betalas endast ut till studieförbund
+  - Verksamhetsberättelse ska bifogas ansökan
+  - Revisionsrapport ska bifogas ansökan
+  - Balans- och resultatrapport ska bifogas ansökan
+  - Kommunsammandrag ska bifogas ansökan
+  - Riktlinjer för att skapa trygga föreningsmiljöer ska godkännas
+  belopp: Fördelas som 70 procent basbidrag, 15 procent volymbidrag och 15 procent målgruppsrelaterat bidrag
+  belopp_avser: per_forening
+  kommunens_pott: "489 000 kr"
+  sen_ansokan: Sista ansökningsdatum 31 mars 2026
+  kalla_url: https://tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/verksamhetsbidrag-for-studieforbund/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - annat
+  anteckning: Bidraget beräknas på föregående års verksamhet och betalas normalt ut inom en månad efter sista ansökningsdag
+    när ansökan är komplett. Ingen separat återrapportering krävs.
+- id: tranas-verksamhetsbidrag-funktionsvariationer
+  namn: Verksamhetsbidrag till föreningar för personer med funktionsvariationer
+  kategori:
+  - social
+  malgrupp: Föreningar med verksamhet för personer med funktionsvariationer
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-31
+  krav:
+  - Föreningen ska vara ansluten till en riksorganisation
+  - Föreningen ska ha en lokalavdelning i Tranås kommun eller bedriva verksamhet i kommunen
+  - Lokalavdelningen ska ha minst tio medlemmar; en organisation med säte på annan ort ska ha minst tio deltagare i Tranås
+  - Årsredovisning ska bifogas ansökan
+  - Verksamhetsberättelse ska bifogas ansökan
+  - Revisionsberättelse ska bifogas ansökan
+  - Riktlinjer för att skapa trygga föreningsmiljöer ska godkännas
+  belopp: 1 000 kr i grundbidrag per förening; resterande medel fördelas efter medlemsantal
+  belopp_avser: per_forening
+  kommunens_pott: "40 000 kr"
+  sen_ansokan: Sista ansökningsdatum 31 mars 2026
+  kalla_url: https://tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag/verksamhetsbidrag-till-foreningar-for-personer-med-funktionsvariationer/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - social
+  anteckning: Bidraget betalas ut en gång per år, normalt inom en månad efter sista ansökningsdag när ansökan är komplett.
+    Ingen separat återrapportering krävs.
 forutsattningar:
 - id: tranas-bidragsberattigad-forening
   vad: Bli registrerad som bidragsberättigad förening
@@ -231,5 +368,5 @@ forutsattningar:
   ledtid_text: Godkännande kan göras årligen i samband med ansökan
   giltighet: Årlig
   ordning: 2
-  kalla_url: https://www.tranas.se/uppleva-och-gora/foreningar-och-studieforbund/foreningsbidrag
-  giltighet_status: olast
+  kalla_url: https://www.tranas.se/download/18.4ecee4b819a7b1efe21a3f/1764328638087/F%C3%B6reningsbidrag%20-%20information%20och%20riktlinjer%2C%20tillg%C3%A4nglighetsanpassad.pdf
+  giltighet_status: kontrollast

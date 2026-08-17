@@ -162,19 +162,21 @@ export interface Bidrag {
   // ändrats, aldrig VAD.
   senast_verifierad: string | null;
 
-  // A (belopp-avser-spårbarhet, 2026-08-12). `per_forening` är en
-  // uttrycklig researchbedömning. `okand` är däremot bara standardvärdet:
+  // A (belopp-avser-spårbarhet, 2026-08-12). `per_forening` och
+  // `ren_pott` är uttryckliga researchbedömningar. `okand` är däremot bara standardvärdet:
   // avsaknad av bedömning får inte i sig dölja ett belopp. Fältet sätts
   // aldrig automatiskt till `per_forening` av migrerings-/omräkningskod.
   //
   // "per_forening": belopp-fältet avser vad EN enskild förening/ansökan/
   //   projekt kan söka eller beräknas ut från. Skild från kommunens_pott.
+  // "ren_pott": den publicerade summan är endast kommunens totala pott;
+  //   belopp ska vara null och värdet ligga i kommunens_pott.
   // "okand": ingen belopp_avser-bedömning är gjord (default); visningen
   //   följer då det tidigare belopp_status-beteendet.
   //
   // Skilt från belopp_status (verifieringsgrad av info vi HAR) och från
   // kommunens_pott (den totala kommunala budgeten för bidraget).
-  belopp_avser: 'per_forening' | 'okand';
+  belopp_avser: 'per_forening' | 'ren_pott' | 'okand';
 
   // Kommunens totala budget/pott för detta bidrag, som fritext.
   // null = inte känd/angiven. Skild från belopp (vad EN förening kan söka).

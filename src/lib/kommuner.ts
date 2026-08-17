@@ -206,16 +206,22 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   }
   raw.kommunens_pott = raw.kommunens_pott ?? null;
 
-  // belopp_avser — BEDÖMNINGSFÄLT. Tillåter bara per_forening|okand.
+  // belopp_avser — BEDÖMNINGSFÄLT. Tillåter per_forening|ren_pott|okand.
   // Default är ALLTID 'okand' — skriptet sätter ALDRIG 'per_forening'.
   if (raw.belopp_avser !== null && raw.belopp_avser !== undefined) {
-    if (!['per_forening', 'okand'].includes(raw.belopp_avser)) {
-      problems.push(`${where}.belopp_avser är "${raw.belopp_avser}" (tillåtna: per_forening, okand)`);
+    if (!['per_forening', 'ren_pott', 'okand'].includes(raw.belopp_avser)) {
+      problems.push(`${where}.belopp_avser är "${raw.belopp_avser}" (tillåtna: per_forening, ren_pott, okand)`);
     }
   }
   raw.belopp_avser = raw.belopp_avser ?? 'okand'; // ALDRIG automatiskt 'per_forening'
   if (raw.belopp_avser === 'per_forening' && raw.belopp === null) {
     problems.push(`${where}.belopp_avser är per_forening men belopp är null`);
+  }
+  if (raw.belopp_avser === 'ren_pott' && raw.belopp !== null) {
+    problems.push(`${where}.belopp_avser är ren_pott men belopp är inte null`);
+  }
+  if (raw.belopp_avser === 'ren_pott' && raw.kommunens_pott === null) {
+    problems.push(`${where}.belopp_avser är ren_pott men kommunens_pott saknas`);
   }
 
   // Arbetsorder 2026-08-03, punkt 3 — datatillstånd, obligatoriska efter migrationen.

@@ -28,7 +28,7 @@ const GOLDEN: Array<{ slug: string; namn: string; expected: WorkClass; etikett: 
 interface PersistedBidrag {
   namn: string;
   belopp: string | null;
-  belopp_avser?: 'per_forening' | 'okand';
+  belopp_avser?: 'per_forening' | 'ren_pott' | 'okand';
   kommunens_pott?: string | null;
 }
 
@@ -37,6 +37,7 @@ function persistedClass(bidrag: PersistedBidrag): WorkClass {
   const pott = typeof bidrag.kommunens_pott === 'string' && bidrag.kommunens_pott.length > 0;
   if (individuellt && pott) return 'blandfall';
   if (individuellt) return 'per_forening';
+  if (bidrag.belopp === null && bidrag.belopp_avser === 'ren_pott' && pott) return 'ren_pott';
   if (bidrag.belopp === null && bidrag.belopp_avser === 'okand' && pott) return 'ren_pott';
   return 'okand';
 }

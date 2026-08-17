@@ -35,7 +35,7 @@ type PublicKommun = {
   bidrag: Array<{
     id: string;
     belopp: string | null;
-    belopp_avser: 'per_forening' | 'okand';
+    belopp_avser: 'per_forening' | 'ren_pott' | 'okand';
     kommunens_pott: string | null;
   }>;
 };
