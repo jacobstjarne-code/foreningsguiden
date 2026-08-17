@@ -10,13 +10,19 @@
  * faktiskt matchar bidraget. Kontrollera matchKommun() innan Checkout-
  * sessionen, inte bara i UI:t." Klientens egen matchKommun()-koll i
  * utkastvyn är bara vägvisning — DEN HÄR kollen är den som faktiskt
- * skyddar mot ett manipulerat/förbigånget klientanrop. Två villkor,
+ * skyddar mot ett manipulerat/förbigånget klientanrop. Tre villkor,
  * inte ett:
  *   1. bidragId finns i matchKommun(profil, kommun).matchar.
  *   2. genereraUtkast(profil, bidrag, kommun) ger typ 'bidragsutkast',
  *      inte 'registrering_forst' — annars säljer vi fel produkt till
  *      en förening som borde köpa registreringsutkastet först (samma
  *      spärr 4 som utkastGenerator.ts:s eget filhuvud beskriver).
+ *   3. SPÄRR (Jacobs order, 2026-08-17, M2.4): checklistan har faktiskt
+ *      något ifyllt innehåll — resultat.kravRader.length === 0 eller
+ *      resultat.luckor === resultat.kravRader.length (alla rader tomma
+ *      platshållare) nekar köpet. Läst ur datan live, ingen hårdkodad
+ *      bidrag-lista — 96% av katalogen (2703/2808 bidrag) föll under
+ *      detta villkor vid mätningen 2026-08-17.
  * Ingen profil alls = kan inte verifieras = inget köp.
  */
 export const prerender = false;
@@ -82,6 +88,20 @@ export const POST: APIRoute = async ({ request }) => {
   const resultat = genereraUtkast(profil, bidrag, kommun);
   if (!matchar || resultat.typ !== 'bidragsutkast') {
     return new Response(JSON.stringify({ ok: false, fel: 'matchar_inte' }), { status: 400, headers: { 'content-type': 'application/json' } });
+  }
+
+  // M2.4 (Jacob 2026-08-17): "Ett jakande behörighetssvar på tomma fält
+  // får inte grinda ett köp" — samma princip här på checklistans EGET
+  // innehåll. Läst ur datan vid varje anrop (resultat.kravRader/luckor
+  // ovan), aldrig en hårdkodad bidrag-lista — när GPT fyller fler krav i
+  // en kommun öppnas köpet av sig självt, ingen flagga att komma ihåg
+  // att ta bort. Klientens utkastvy döljer redan köpknappen för samma
+  // fall (UX) — den här kollen är vad som faktiskt stoppar ett
+  // manipulerat/förbigånget anrop, samma "server-sidan är spärren"-
+  // princip som matchar-kollen ovan.
+  const allaTomma = resultat.kravRader.length === 0 || resultat.luckor === resultat.kravRader.length;
+  if (allaTomma) {
+    return new Response(JSON.stringify({ ok: false, fel: 'inget_att_salja' }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
   const metadata: Record<string, string> = {

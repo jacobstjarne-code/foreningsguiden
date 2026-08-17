@@ -1085,6 +1085,67 @@ main {
    (sex kolumner, en av dem en knapp) — den ska skrolla i sin egen
    container i stället för att dra ut hela sidan. 735px overflow vid
    390px mätt före fixen. */
+/* M2.4 (Jacob 2026-08-17) — flyttat hit från deadlines/index.astro:s
+   scopade <style>. bevakaKlient.ts:s byggBevakaForm() skapar dessa
+   element med document.createElement/className — de bär aldrig en
+   sidas data-astro-cid-*, så scopad CSS matchade dem aldrig (upptäckt
+   när widgeten återanvändes på utkastvyn, kom in helt ostylad). Global
+   är den enda platsen dessa regler faktiskt kan verka, eftersom
+   elementen kan skapas av VILKEN sida som helst som anropar
+   initBevakaWidgets(). */
+.deadline-table__bevaka {
+  min-width: 14ch;
+}
+
+.bevaka-rad-knapp {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: var(--fg-text-label);
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.bevaka-rad-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-2);
+  min-width: 22ch;
+}
+
+.bevaka-rad-form input[type='email'] {
+  padding: var(--fg-space-2);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-label);
+}
+
+.bevaka-rad-form__samtycke {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--fg-text-mono);
+  color: var(--fg-ink-muted);
+}
+
+.bevaka-rad-form button[type='submit'] {
+  font-size: var(--fg-text-label);
+  padding: 6px 12px;
+}
+
+.bevaka-rad-form__fel {
+  color: var(--fg-urgent);
+  font-size: var(--fg-text-mono);
+  margin: 0;
+}
+
+.bevaka-rad-kvitto {
+  font-size: var(--fg-text-label);
+  color: var(--fg-ink-muted);
+  max-width: 24ch;
+  margin: 0;
+}
+
 .deadline-table-scroll {
   overflow-x: auto;
 }

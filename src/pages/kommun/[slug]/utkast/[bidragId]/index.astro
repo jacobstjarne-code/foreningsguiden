@@ -189,6 +189,23 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
 
       <a href={`/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`} class="utkastvy__escape">← Tillbaka till bidraget (gratis)</a>
     </div>
+
+    {/* M2.4 (Jacob 2026-08-17): visas I STÄLLET för köprutan när
+       checklistan inte har något ifyllt innehåll att sälja — samma
+       spärr som checkout/bidragsutkast.ts (kravRader.length === 0 eller
+       luckor === kravRader.length), läst ur samma resultat i
+       klientskriptet, ingen hårdkodad lista. "En tom yta där köpknappen
+       stod är sämre än en säljande knapp" (Jacob) — bevakning är gratis
+       och fungerar i alla 290 kommuner, det enda vi faktiskt kan
+       leverera där checklistan inte kan det än. */}
+    <div class="utkastvy__kopram utkastvy__kopram--bevaka" data-utkastvy-bevaka hidden>
+      <h2 class="utkastvy__kopruta-rubrik">Vi kan inte fylla i något än för det här bidraget</h2>
+      <p>Kommunen har inte publicerat tillräckligt för att vi ska kunna skriva en personlig checklista för just det här bidraget än. Bevaka det i stället — gratis, och vi hör av oss i god tid innan sista ansökningsdag.</p>
+      <div class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id}>
+        <a href={`/deadlines/?kommun=${kommun.kommun_slug}#email-signup`} class="btn-primary bevaka-rad-knapp utkastvy__bevaka-knapp">Bevaka det här bidraget</a>
+      </div>
+      <a href={`/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`} class="utkastvy__escape">← Tillbaka till bidraget (gratis)</a>
+    </div>
   </div>
 </Base>
 
@@ -199,6 +216,7 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
   import { KOPRUTA, KONVERTERINGSSTAPEL } from '../../../../../lib/content';
   import { trackEvent } from '../../../../../lib/umami';
   import { hamtaKopantal, arOverSocialtBevisGolv } from '../../../../../lib/kopKlient';
+  import { initBevakaWidgets } from '../../../../../lib/bevakaKlient';
 
   const root = document.querySelector<HTMLElement>('[data-utkastvy]');
   if (root) {
@@ -208,12 +226,18 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
     const statusEl = root.querySelector<HTMLElement>('[data-utkastvy-status]');
     const dokumentEl = root.querySelector<HTMLElement>('[data-utkastvy-dokument]');
     const kopramEl = root.querySelector<HTMLElement>('[data-utkastvy-kopram]');
+    const bevakaEl = root.querySelector<HTMLElement>('[data-utkastvy-bevaka]');
     const metaEl = root.querySelector<HTMLElement>('[data-utkastvy-meta]');
     const ansvarEl = root.querySelector<HTMLElement>('[data-utkastvy-ansvar]');
     const betalaKnapp = root.querySelector<HTMLButtonElement>('[data-utkastvy-betala]');
     const felEl = root.querySelector<HTMLElement>('[data-utkastvy-fel]');
     const luckorRadEl = root.querySelector<HTMLElement>('[data-utkastvy-luckor-rad]');
     const socialtBevisEl = root.querySelector<HTMLElement>('[data-utkastvy-socialt-bevis]');
+
+    // M2.4 — wiras en gång, oavsett om bevaka-slotet visar sig senare.
+    // initBevakaWidgets() letar [data-bevaka-cell] i hela dokumentet vid
+    // anropstillfället; elementet finns redan i DOM:en (bara hidden).
+    initBevakaWidgets();
 
     // F① — servern har redan fyllt socialtBevisEl med arbetsbeviset
     // (server-sant genast). Uppgraderar TYST till det lokala köpantalet
@@ -237,6 +261,7 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       statusEl.hidden = false;
       dokumentEl?.setAttribute('hidden', '');
       kopramEl?.setAttribute('hidden', '');
+      bevakaEl?.setAttribute('hidden', '');
     }
 
     async function initiera() {
@@ -319,11 +344,22 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       });
 
       dokumentEl?.removeAttribute('hidden');
-      kopramEl?.removeAttribute('hidden');
-      // M5 (MÄTNING, Jacob 2026-08-11): köprutan faktiskt synlig — kräver
-      // matchning + registrerad profil, så "visad" är redan en riktig
-      // filtrering, inte bara en sidladdning.
-      trackEvent('kopruta_visad', { kommun: kommunSlug, bidrag: bidragId });
+
+      // M2.4 (Jacob 2026-08-17) — samma spärr som checkout/bidragsutkast.
+      // ts SPÄRR 3, läst ur samma resultat: inget ifyllt innehåll att
+      // sälja. Bevakningsrutan tar köpknappens plats i stället för en
+      // tom yta — gratis, fungerar i alla 290 kommuner oavsett kravdata.
+      const intetAttSalja = resultat.kravRader.length === 0 || resultat.luckor === resultat.kravRader.length;
+      if (intetAttSalja) {
+        bevakaEl?.removeAttribute('hidden');
+        trackEvent('utkast_bevaka_visad', { kommun: kommunSlug, bidrag: bidragId });
+      } else {
+        kopramEl?.removeAttribute('hidden');
+        // M5 (MÄTNING, Jacob 2026-08-11): köprutan faktiskt synlig — kräver
+        // matchning + registrerad profil, så "visad" är redan en riktig
+        // filtrering, inte bara en sidladdning.
+        trackEvent('kopruta_visad', { kommun: kommunSlug, bidrag: bidragId });
+      }
     }
 
     betalaKnapp?.addEventListener('click', async () => {
@@ -457,6 +493,33 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
     display: flex;
     flex-direction: column;
     gap: var(--fg-space-3);
+  }
+
+  /* M2.4 — .bevaka-rad-knapp/.bevaka-rad-form (global.css) är dimensionerade
+     för en smal tabellcell (deadlines/kommunsidan). Här ersätter de en hel
+     köpruta, samma visuella vikt som .btn-primary/data-utkastvy-betala
+     hade — kombinerad selector (två klasser) vinner över den enklare
+     globala regeln utan !important. */
+  .utkastvy__bevaka-knapp.bevaka-rad-knapp {
+    display: inline-block;
+    font-size: var(--fg-text-body);
+    padding: var(--fg-space-4) var(--fg-space-6);
+    align-self: flex-start;
+  }
+
+  .utkastvy__kopram--bevaka .bevaka-rad-form {
+    min-width: 0;
+    max-width: 40ch;
+  }
+
+  .utkastvy__kopram--bevaka .bevaka-rad-form input[type='email'] {
+    padding: var(--fg-space-3);
+    font-size: var(--fg-text-body);
+  }
+
+  .utkastvy__kopram--bevaka .bevaka-rad-form button[type='submit'] {
+    font-size: var(--fg-text-body);
+    padding: var(--fg-space-3) var(--fg-space-5);
   }
 
   .utkastvy__kopruta-rubrik {
