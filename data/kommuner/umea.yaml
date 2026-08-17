@@ -7,13 +7,13 @@ ansokningssystem:
   namn: Rbok (boknings- och bidragssystem)
   url: https://umea.rbok.se/
 kalla_url: https://www.umea.se/bidrag
-verifierad: '2026-08-02'
+verifierad: '2026-08-17'
 giltighet_regel:
-  typ: okand
-  antal: null
+  typ: manader_efter_arsmote
+  antal: 12
   datum: null
   kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bildaochregistreraforening.4.250f9659174ae4b9794e7f.html
-giltighet_regel_status: okand
+giltighet_regel_status: kontrollast
 bidrag:
 - id: umea-aktivitetsstod-ungdom
   namn: Aktivitetsstöd ungdom (verksamhetsstöd)
@@ -31,15 +31,18 @@ bidrag:
   - Registrerad i Umeå kommuns föreningsregister
   - Aktivitet med minst 3 och högst 30 deltagare i bidragsberättigad ålder
   - Ansökan godkänd av person i föreningens styrelse; årsmöteshandlingar bifogas
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Belopp per deltagartillfälle eller aktivitetstimme fastställs av fritidsnämnden.
+  sen_ansokan: Ansökan senast 25 februari för höstterminen och 25 augusti för vårterminen.
   kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/idrottfritidochfolkhalsa/aktivitetsstodungdomverksamhetsstod.4.4ff54ec174f999469c1b8b.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser aktiviteter registrerade föregående termin (1/1–25/2 respektive 1/7–25/8).
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, annat]
 - id: umea-kulturverksamhet-utvecklingsstod
   namn: Kulturverksamhet och arrangemang (utvecklingsstöd)
   kategori:
@@ -55,17 +58,21 @@ bidrag:
     - 09-15
     - 11-15
   krav:
+  - Ideell förening registrerad i Umeå kommuns föreningsregister
   - Arrangemang öppna för alla och genomförda i Umeå kommun
   - Kan ej sökas för löpande ordinarie verksamhet
-  belopp: null
+  belopp: Stödbeloppet bestäms efter prövning; maximalt 50 procent kan betalas ut i förskott.
   sen_ansokan: Ej tillämpligt (löpande inlämning, handläggs vid sex fasta tillfällen)
   kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/kulturverksamhetocharrangemang/kulturverksamhetocharrangemangutvecklingsstod.4.1b4d24fb1752122eb841342.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Går arrangemanget med vinst dras stödet ned i motsvarande mån. Förskott max 50 %.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
 - id: umea-kulturverksamhet-verksamhetsstod
   namn: Kulturverksamhet (verksamhetsstöd)
   kategori:
@@ -76,17 +83,21 @@ bidrag:
     datum:
     - 09-15
   krav:
+  - Ideell förening som bedrivit kontinuerlig kulturverksamhet i minst ett år
   - Huvudsaklig verksamhet inom det konstnärliga fältet (ord, bild, scen, ton, film)
   - Uppgifter uppdaterade i föreningsregistret efter senaste årsmötet
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Stödbeloppet beslutas årligen av kulturnämnden efter verksamhetens omfattning och kulturpolitiska prioriteringar.
+  sen_ansokan: Ansökan senast 15 september för utbetalning nästkommande år.
   kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/kulturverksamhetocharrangemang/kulturverksamhetverksamhetsstod.4.1b4d24fb1752122eb8412d6.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Sista ansökningsdag 15 september för utbetalning nästkommande år.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
 - id: umea-lokalhyra-verksamhetsstod
   namn: Stöd till lokalhyra (verksamhetsstöd)
   kategori:
@@ -98,37 +109,47 @@ bidrag:
     typ: fasta
     datum:
     - 03-31
+    - 09-30
   krav:
-  - Registrerad i Umeå kommuns föreningsregister
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ideell förening registrerad i Umeå kommuns föreningsregister och beviljad Aktivitetsstöd ungdom
+  - Lokalen ska vara icke-kommunal, ligga i Umeå kommun och hyras för barn- och ungdomsverksamhet
+  - Faktisk lokalkostnad för föregående termin ska styrkas med hyresavtal, fakturor eller motsvarande
+  belopp: Högst 60 procent av redovisad lokalkostnad och högst 125 000 kr per termin.
+  sen_ansokan: Ansökan senast 31 mars respektive 30 september för föregående termins kostnader.
   kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/ansokningstider.4.5d9221f0174f99211465e4.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Enligt ansökningstider 2026 gäller 31 mars för lokalkostnad höstterminen. Under 4 juli–3 augusti hanteras inga
     ansökningar.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, annat]
 - id: umea-anlaggningar-verksamhetsstod
   namn: Stöd till anläggningar (verksamhetsstöd)
   kategori:
   - idrott
   - ovrig
   malgrupp: Ideella föreningar som driver eller ansvarar för anläggningar
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['01-31', '03-31']}
+  krav:
+  - Ideell förening registrerad i Umeå kommuns föreningsregister och verksam i minst ett år
+  - Föreningen ska äga och driva en lokal eller anläggning inom idrott, friluftsliv eller en allmän samlingslokal i kommunen
+  - Anläggningen ska komma kommuninvånarna till del; investeringar ska avse nybyggnad, renovering, miljöförbättring eller tillgänglighet
+  belopp: Driftstöd och investeringsstöd beräknas enligt kommunens anläggningsregler och beslutas efter prövning.
+  sen_ansokan: Drift- och investeringsstöd senast 31 januari; driftstöd för samlingslokaler senast 31 mars.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet omfattar både drift och investering; samlingslokaler har separat ansökningsdatum.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, hembygd, friluft, annat]
 - id: umea-prioriterade-grupper
   namn: Fritidsaktivitet för prioriterade grupper (verksamhetsstöd)
   kategori:
@@ -136,19 +157,23 @@ bidrag:
   - social
   - funktionsratt
   malgrupp: Föreningar som erbjuder fritidsaktiviteter för prioriterade grupper
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['10-31']}
+  krav:
+  - Ideell förening registrerad i kommunens föreningsregister och verksam i minst ett år
+  - Verksamheten ska rikta sig till barn och unga 7–25 år, personer med funktionsnedsättning, nyanlända eller ett politiskt ungdomsförbund
+  - Insatsen ska vara särskild utöver Aktivitetsstöd ungdom och bedrivas i drogfri miljö
+  belopp: Stödbeloppet beslutas årligen av fritidsnämnden; kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan senast 31 oktober.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningar med vissa andra årliga verksamhetsstöd kan inte få stödet samtidigt.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, social, ungdom, annat]
 - id: umea-folkhalsa-anlaggningar
   namn: Folkhälsa och anläggningar (utvecklingsstöd)
   kategori:
@@ -156,19 +181,23 @@ bidrag:
   - social
   - ovrig
   malgrupp: Ideella föreningar med utvecklingsinsatser inom folkhälsa eller anläggningar
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['01-15', '03-15', '05-15', '08-15', '09-15', '11-15']}
+  krav:
+  - Ideell förening registrerad i Umeå kommuns föreningsregister
+  - Insatsen ska vara tillfällig och utveckla verksamhet eller anläggning utifrån ett folkhälsoperspektiv
+  - Verksamheten ska vara drogfri; barn och unga 7–25 år samt personer med funktionsnedsättning prioriteras
+  belopp: Stödbeloppet bestäms efter prövning; maximalt 50 procent kan betalas ut i förskott.
+  sen_ansokan: Ansökningar handläggs 15 januari, 15 mars, 15 maj, 15 augusti, 15 september och 15 november.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kan inte sökas för löpande ordinarie verksamhet.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
 - id: umea-gratis-lovaktiviteter
   namn: Gratis lovaktiviteter
   kategori:
@@ -177,38 +206,46 @@ bidrag:
   - social
   - ovrig
   malgrupp: Föreningar som ordnar avgiftsfria aktiviteter under skollov
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  deadlines: {typ: fasta, datum: ['01-15', '03-15', '05-15', '09-15', '11-15']}
+  krav:
+  - Sökanden ska vara en registrerad ideell förening i Umeå kommun
+  - Aktiviteten ska vara avgiftsfri, öppen för målgruppen 6–15 år och genomföras i Umeå kommun under skollov
+  - Aktiviteten ska vara alkohol- och drogfri och föreningen ska följa kommunens redovisningsvillkor
+  belopp: Stödbeloppet bestäms efter aktivitetens kostnader; kommunen publicerar inget fast belopp.
+  sen_ansokan: Sista datum är 15 januari, 15 mars, 15 maj, 15 september och 15 november beroende på lov.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/idrottfritidochfolkhalsa/gratislovaktiviteter.4.6f42d30317a9d804b843fc7.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Separata omgångar för sport-, påsk-, sommar-, höst- och jullov.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, social, ungdom, annat]
 - id: umea-uvts
   namn: Stöd till insatser för att Umeå ska växa tryggt och säkert (UVTS)
   kategori:
   - social
   - ovrig
   malgrupp: Ideella föreningar som genomför trygghetsskapande insatser
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  deadlines: {typ: fasta, datum: ['11-30']}
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad i Umeå kommun sedan minst ett år
+  - Insatsen ska ge fler barn och unga möjlighet att delta eller stärka föreningens förmåga att nå och behålla dem
+  - Verksamheten ska vara drogfri och stödet får inte användas till löner, verksamhet utanför kommunen eller partipolitiska eller religiösa syften
+  belopp: Stödbeloppet bestäms efter prövning; kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan tas emot löpande januari–november, senast 30 november.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/idrottfritidochfolkhalsa/stodtillinsatserforattumeaskavaxatryggtochsakert.4.7f0802b0191917c8a646306.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Löpande ansökan under årets första elva månader.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, social, ungdom, annat]
 - id: umea-trygga-idrottsplatser
   namn: Trygga idrottsplatser (UVTS)
   kategori:
@@ -216,36 +253,46 @@ bidrag:
   - social
   malgrupp: Idrottsföreningar som genomför trygghetsskapande insatser på idrottsplatser
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad i kommunens boknings- och bidragssystem sedan minst ett år
+  - Insatsen ska öka tryggheten på en idrottsplats och ge fler barn och unga möjlighet att delta i idrott
+  - Verksamheten ska vara drogfri och får inte ha ett explicit partipolitiskt eller religiöst syfte
+  belopp: Stödbeloppet bestäms efter prövning; kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan görs löpande enligt kommunens ansökningstider.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/idrottfritidochfolkhalsa/tryggaidrottsplatserendelavuvtsstod.4.523923fe19e3a7f29755635.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En särskild inriktning inom UVTS för fysiska och verksamhetsnära trygghetsåtgärder.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, ungdom]
 - id: umea-social-forebyggande
   namn: Social och förebyggande verksamhet (verksamhetsstöd)
   kategori:
   - social
   malgrupp: Ideella föreningar med social och förebyggande verksamhet
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['10-31']}
+  krav:
+  - Ideell förening som normalt varit verksam minst ett år och arbetar nära socialtjänstens ansvarsområden
+  - Verksamheten ska stödja socialt utsatta, komplettera socialtjänstens insatser eller förebygga framtida stödbehov
+  - Föreningen ska lämna årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan samt revisions- och ekonomiska handlingar
+  belopp: Stödbeloppet beslutas årligen av individ- och familjenämnden; kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan senast 31 oktober.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningar som får årligt stöd från andra nämnder kan inte få stödet samtidigt.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
 - id: umea-rattighetsfragor
   namn: Verksamhet för rättighetsfrågor (verksamhetsstöd)
   kategori:
@@ -253,19 +300,23 @@ bidrag:
   - funktionsratt
   - ovrig
   malgrupp: Ideella föreningar som arbetar med rättighetsfrågor
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['10-31']}
+  krav:
+  - Ideell förening som normalt varit verksam minst ett år
+  - Föreningen ska aktivt värna rättigheter och vara röstbärare för en målgrupp med koppling till diskrimineringslagstiftningen
+  - Föreningen ska lämna årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan samt revisions- och ekonomiska handlingar
+  belopp: Stödbeloppet beslutas årligen av fritidsnämnden; kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan senast 31 oktober.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kan inte kombineras med verksamhetsstöd från annan nämnd eller stödet till prioriterade grupper.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
 - id: umea-rattigheter-samhallsnytta
   namn: Rättigheter och samhällsnytta (utvecklingsstöd)
   kategori:
@@ -273,93 +324,114 @@ bidrag:
   - funktionsratt
   - ovrig
   malgrupp: Ideella föreningar med utvecklingsinsatser inom rättigheter och samhällsnytta
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['01-15', '03-15', '05-15', '08-15', '09-15', '11-15']}
+  krav:
+  - Ideell förening registrerad i Umeå kommuns föreningsregister
+  - Insatsen ska vara tillfällig och bidra till samhällsnytta i kommunen eller stärka underrepresenterade gruppers rättigheter
+  - Verksamheten ska vara drogfri och får inte avse löpande ordinarie verksamhet, löner eller explicit partipolitiska eller religiösa syften
+  belopp: Stödbeloppet bestäms efter prövning; maximalt 50 procent kan betalas ut i förskott.
+  sen_ansokan: Ansökningar handläggs 15 januari, 15 mars, 15 maj, 15 augusti, 15 september och 15 november.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Studieförbund och resor eller studiebesök utanför kommunen får normalt inte stöd.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, ungdom, annat]
 - id: umea-kulturpotten-minoriteter
   namn: Kulturpotten – nationella minoriteter
   kategori:
   - kultur
   - ovrig
   malgrupp: Föreningar och aktörer som genomför kulturinsatser för nationella minoriteter
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  deadlines: {typ: fasta, datum: ['09-30']}
+  krav:
+  - Sökanden ska vara en registrerad ideell förening med säte i Umeå kommun
+  - Insatsen ska avse kultur för någon av minoriteterna samer, sverigefinnar eller tornedalingar
+  - Stödet får inte användas till interna löner eller arvoden eller hyra av föreningens egen lokal
+  belopp: Riktmärke högst 20 000 kr per ansökan.
+  sen_ansokan: Ansökan tas emot löpande 1 januari–30 september.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/rattigheterochsamhallsnytta/kulturpottennationellaminoriteter.4.4b6d645e17520a0e6a513aa.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningar prövas löpande under årets första nio månader.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur, social, annat]
 - id: umea-festivaler-arrangemang
   namn: Festivaler och kulturarrangemang (verksamhetsstöd)
   kategori:
   - kultur
   malgrupp: Ideella föreningar som genomför återkommande festivaler eller kulturarrangemang
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  deadlines: {typ: fasta, datum: ['09-15']}
+  krav:
+  - Ideell förening som bedrivit kontinuerlig kulturverksamhet i minst ett år
+  - Festivalen eller kulturevenemanget ska genomföras inom ord, bild, scen, ton eller film
+  - Ansökan ska innehålla budget och evenemangsbeskrivning samt föreningens senaste års-, revisions- och ekonomiska handlingar
+  belopp: Stödbeloppet beslutas årligen av kulturnämnden efter verksamhetens omfattning och kulturpolitiska prioriteringar.
+  sen_ansokan: Ansökan senast 15 september.
   kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Större verksamhetsförändringar under stödåret ska meddelas kommunen.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
 - id: umea-skapande-skola
   namn: Skapande skola
   kategori:
   - kultur
   malgrupp: Kulturaktörer och föreningar som medverkar i skapande skola
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  deadlines: {typ: fasta, datum: ['12-31']}
+  krav:
+  - Sökanden ska vara professionell kulturaktör och uppfylla Kulturrådets krav
+  - Förslaget ska rikta sig till grundskola eller anpassad grundskola i Umeå
+  - Förslag lämnas augusti–december och endast planerade inköp kontaktas
+  belopp: Ersättning avtalas som köp av kulturutbud, inte som föreningsbidrag.
+  sen_ansokan: Förslag lämnas under augusti–december.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/skapandeskola.4.640818217563dc9fe529e0.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen köper professionellt kulturutbud; detta är inte ett föreningsbidrag och ingår därför inte bland aktiva stöd.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+  status: avskaffat
 - id: umea-kulturnamnden-uvts
   namn: Kulturnämndens stöd – Umeå växer tryggt och säkert
   kategori:
   - kultur
   - social
   malgrupp: Kulturföreningar och aktörer med trygghetsskapande insatser
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  deadlines: {typ: fasta, datum: ['11-30']}
+  krav:
+  - Ideella kulturföreningar ska bedriva barn- och ungdomsverksamhet i Umeå kommun och vara registrerade och bidragsberättigade
+  - Kulturföreningen ska ha varit aktiv i kommunens föreningsregister i minst ett år; studieförbund ska ha verksamhet i Umeå kommun
+  - Insatsen ska nå barn och unga, vara drogfri och får inte avse löner, verksamhet utanför kommunen eller partipolitiska eller religiösa syften
+  belopp: Stödbeloppet bestäms efter prövning; kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan tas emot löpande januari–november, senast 30 november.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/kulturverksamhetocharrangemang/kulturnamndensstodumeavaxertryggtochsakert.4.7cfcfcec193664c5bec1bf3e.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Löpande ansökan under årets första elva månader.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur, social, ungdom, annat]
 - id: umea-elitsponsring
   namn: Elitsponsring
   kategori:
@@ -368,16 +440,85 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Föreningen ska tillhöra ett specialidrottsförbund inom Riksidrottsförbundet och ha sin huvudsakliga verksamhet i Umeå kommun
+  - Laget ska spela i högsta nationella serien inom en lagidrott, alternativt i Hockeyallsvenskan, Superettan eller Elitettan
+  - Föreningen får inte vara på obestånd och ska kunna ge kommunen avtalade marknadsföringsrättigheter som motprestation
+  belopp: Sponsringsbeloppet bestäms i avtal; kommunen publicerar inget fast belopp.
+  sen_ansokan: Kommunen publicerar ingen ansökningstid.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/elitsponsring.4.544b30ee185384bdfbe691b.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Sponsring med krav på motprestation; kommunen publicerar varken fast belopp eller ansökningsfrist.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott]
+- id: umea-landsbygdsstod-llu
+  namn: Landsbygdsstöd – stöd till lokalt ledd utveckling (LLU)
+  kategori: [ovrig]
+  malgrupp: Föreningar och andra icke-vinstdrivande aktörer på Umeås landsbygder
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska bedriva verksamhet på Umeås landsbygder utanför Umeå, Sävar, Holmsund, Obbola och Hörnefors tätorter
+  - Projektet ska sakna vinstintresse, vara tillfälligt och genomföras helt eller delvis i Umeå kommun
+  - Insatsen ska bidra till kommunens landsbygdsprogram och stärka samverkan eller kunskap om Umeås landsbygder
+  belopp: Upp till 35 000 kr per projekt.
+  sen_ansokan: Ansökan görs löpande under hela året.
+  kalla_url: https://www.umea.se/byggaboochmiljo/samhallsutvecklingochhallbarhet/landsbygdsutveckling/stodtilllandsbygdsutveckling.4.4ff54ec174f999469c1898.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet ligger utanför bidragsmenyn men finns på kommunens landsbygdssidor och i ansökningstiderna.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [hembygd, friluft, social, annat]
+- id: umea-miljoskjutsen
+  namn: Miljöskjutsen
+  kategori: [ovrig]
+  malgrupp: Ideella föreningar med konkreta projekt för hållbar utveckling och minskad miljöbelastning
+  deadlines: {typ: fasta, datum: ['04-05']}
+  krav:
+  - Sökanden ska vara en ideell förening och den projektansvariga ska vara minst 18 år
+  - Projektet ska genomföras helt eller delvis i Umeå kommun och bidra till lokala, globala eller nationella miljömål
+  - Projektet ska vara handlingsinriktat, medskapande och inkluderande, genomföras under ansökningsåret och vara alkohol- och drogfritt
+  belopp: Fem stöd om 20 026 kr vardera för 2026.
+  sen_ansokan: Ansökan för 2026 var öppen 2 februari–5 april.
+  kalla_url: https://www.umea.se/byggaboochmiljo/samhallsutvecklingochhallbarhet/klimatmiljoochhallbarhet/miljoskjutsen.4.41b8dff11790bd2e90a5065.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet ligger utanför bidragsmenyn men är ett kommunalt föreningsstöd som söks i Rbok.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [annat]
+- id: umea-studieforbund-verksamhetsstod
+  namn: Kommunalt stöd till studieförbund (verksamhetsstöd)
+  kategori: [kultur]
+  malgrupp: Studieförbund som bedriver statsbidragsberättigad folkbildningsverksamhet i Umeå kommun
+  deadlines: {typ: fasta, datum: ['04-30']}
+  krav:
+  - Studieförbundet ska bedriva verksamhet i Umeå kommun och uppfylla statens villkor för statsbidrag
+  - Ansökan ska innehålla föregående års verksamhetsredovisning, senaste verksamhetsberättelse och verksamhetsplan för kommande år
+  - Ansökan ska innehålla ekonomisk redovisning och lämnas i kommunens boknings- och bidragssystem
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.umea.se/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  sen_ansokan: Ansökan senast 30 april.
+  kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bidragochstod/ansokningstider.4.5d9221f0174f99211465e4.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet saknar egen sida i bidragsmenyn men finns i ansökningstiderna och kommunens beslutsunderlag för 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: ren_pott
+  kommunens_pott: 8 600 000 kr fördelas totalt 2026 efter föregående års rapporterade verksamhet
+  foreningstyp: [kultur, annat]
 forutsattningar:
 - id: umea-bidragsberattigad
   vad: Bli godkänd som bidragsberättigad förening
@@ -390,4 +531,4 @@ forutsattningar:
   giltighet: Föreningen måste årligen uppdatera sina uppgifter i systemet för att fortsatt vara bidragsberättigad
   ordning: 1
   kalla_url: https://www.umea.se/upplevaochgora/foreningarforeningsliv/bildaochregistreraforening.4.250f9659174ae4b9794e7f.html
-  giltighet_status: olast
+  giltighet_status: kontrollast
