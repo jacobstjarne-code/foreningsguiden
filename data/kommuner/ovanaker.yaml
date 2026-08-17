@@ -7,7 +7,13 @@ ansokningssystem:
   namn: E-tjänst (Mina sidor)
   url: https://minasidor.ovanaker.se/
 kalla_url: https://www.ovanaker.se/kulturochfritid/foreningarforeningsbidrag.320.html
-verifierad: 2026-07-20
+verifierad: 2026-08-17
+giltighet_regel:
+  typ: okand
+  antal: null
+  datum: null
+  kalla_url: https://www.ovanaker.se/kulturochfritid/foreningarforeningsbidrag/foreningsregister.4569.html
+giltighet_regel_status: okand
 bidrag:
 - id: ovanaker-aktivitetsbidrag
   namn: Aktivitetsbidrag
@@ -36,6 +42,11 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - ungdom
+  - annat
   anteckning: 'Två ansökningsperioder per år: för perioden 1 januari–30 juni ansöks senast 25 augusti, för perioden 1 juli–31
     december senast 25 februari. Listad i e-tjänsteportalens tjänstelista.'
 - id: ovanaker-anlaggningsbidrag
@@ -66,6 +77,16 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Ansökan görs en gång om året via e-tjänst. Listad i e-tjänsteportalens tjänstelista.
 - id: ovanaker-kulturforeningsbidrag
   namn: Årligt kulturföreningsbidrag
@@ -88,17 +109,21 @@ bidrag:
   - Minst ett publikt arrangemang inom Ovanåkers kommun under kommande verksamhetsår
   - Ingen verksamhet som uppmuntrar till diskriminering
   - Får inte vara läns- eller riksorganisation
-  belopp: null
+  belopp: Beloppets storlek beslutas efter en samlad bedömning av sju viktade kriterier; inget fast belopp anges
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ovanaker.se/kulturochfritid/foreningarforeningsbidrag/bidragtillforeningarochstudieforbund/kulturforeningsbidrag/arligtkulturforeningsbidrag.410.html
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
   anteckning: Ansökan avser nästkommande verksamhetsår. Beslut tas normalt cirka en månad efter sista ansökningsdag, baserat
-    på sju viktade bedömningskriterier. För bidrag över 10 000 kr/år krävs ekonomisk redovisning efter årets slut. URL uppdaterad
-    denna körning — sidan flyttades från bidragtillforeningarochstudieforbund/kulturforeningsbidrag.410.html till en ny undermapp
-    när menyträdet omstrukturerades; gamla URL:en fungerar dock fortfarande som alias.
+    på sju viktade bedömningskriterier. För bidrag över 10 000 kr/år krävs ekonomisk redovisning efter årets slut.
+  qa_anteckning: Sidan har flyttats från bidragtillforeningarochstudieforbund/kulturforeningsbidrag.410.html till en undermapp;
+    den gamla URL:en fungerar fortfarande som alias.
 - id: ovanaker-utbildningsbidrag
   namn: Utbildningsbidrag
   kategori:
@@ -120,6 +145,16 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Listad i e-tjänsteportalens tjänstelista.
 - id: ovanaker-sponsring-evenemang
   namn: Sponsring av evenemang
@@ -145,6 +180,16 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Löpande ansökningar tills årets budget för sponsring är förbrukad. Sidans titel är "Sponsring av evenemang 2026",
     vilket tyder på att villkoren kan uppdateras årligen. Listad i e-tjänsteportalens tjänstelista.
 - id: ovanaker-studieforbundsbidrag
@@ -163,17 +208,22 @@ bidrag:
   - Vid flerkommunal verksamhet ska Ovanåkers kommuns del klart kunna särskiljas, inklusive angivet statligt bidragsbelopp
   - Bidragsmottagande organisation är skyldig att ställa sina räkenskaper och redovisningshandlingar till kommunens förfogande
     på det sätt kommunen bestämmer
-  belopp: null
+  belopp: Beräknas utifrån utbetalt statligt bidrag för cirkelverksamhet; nivån fastställs årligen av kommunfullmäktige
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ovanaker.se/kulturochfritid/foreningarforeningsbidrag/bidragtillforeningarochstudieforbund/studieforbundsbidrag.342.html
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - annat
   anteckning: Beräkningsgrund är antalet genomförda studiecirkeltimmar/utbetalda statliga bidrag för cirkelverksamhet. Bidraget
     fastställs årligen av kommunfullmäktige och betalas ut per kalenderår. Kan sökas via e-tjänst eller genom nedladdningsbar
-    Word-blankett med bilagor. Källa bytt denna körning från minasidor.ovanaker.se/oversikt/overview/150 (samma innehåll,
-    odaterad) till kommunens redaktionella sida (daterad 2025-07-14) per källhierarkin i §2.1.
+    Word-blankett med bilagor.
+  qa_anteckning: Källan har bytts från minasidor.ovanaker.se/oversikt/overview/150 till kommunens daterade redaktionella sida
+    enligt källhierarkin.
 - id: ovanaker-kulturella-aktiviteter-arrangemang
   namn: Bidrag till föreningar för kulturella aktiviteter/arrangemang
   kategori:
@@ -191,20 +241,21 @@ bidrag:
   - Redovisning av intäkter och kostnader lämnas senast fyra veckor efter genomfört arrangemang
   - Arrangören ska undersöka möjligheter till andra bidrag
   - Bidrag ges endast för speciella offentliga kulturprogram som inte ingår i föreningens ordinarie verksamhet
-  belopp: null
+  belopp: Bidraget betalas ut efter redovisning av arrangemangets kostnader och intäkter; inget fast belopp anges
   sen_ansokan: Ansökan ska lämnas in senast fyra veckor innan aktiviteten genomförs
   kalla_url: https://minasidor.ovanaker.se/oversikt/overview/155
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Pengarna fördelas så långt möjligt jämnt över året. VARNINGSSIGNAL (§2.6), olöst: kommunens gamla redaktionella
-    sida för detta bidrag (.../kulturbidrag/bidragtillforeningarforkulturellaaktiviteterarrangemang.2210.html) ger nu 404.
-    Ett nytt, snarlikt bidrag ("Kulturarrangemangsbidrag", se separat post) finns på en daterad sida i det nuvarande menyträdet
-    — men denna äldre ansökningstjänst är fortfarande live och listas som egen post i e-tjänsteportalens tjänstelista, med
-    annan ansökningsstruktur (löpande/4 veckors varsel mot tre fasta ansökningsperioder). Oklart om två parallella bidragsformer
-    finns eller om detta är en administrativ kvarleva efter sidomstrukturering. Skriven separat från Kulturarrangemangsbidrag
-    av försiktighetsskäl — se konflikter.log. Rekommenderas verifieras direkt med kommunen.'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
+  anteckning: Pengarna fördelas så långt möjligt jämnt över året. Den publicerade e-tjänsten har löpande ansökan med minst fyra
+    veckors varsel, till skillnad från Kulturarrangemangsbidragets tre fasta ansökningsperioder.
+  qa_anteckning: Den äldre redaktionella sidan ger 404. E-tjänsten är fortfarande publicerad parallellt med det nya
+    Kulturarrangemangsbidraget, men kommunen anger inte om detta är två bidragsformer eller en administrativ kvarleva.
 - id: ovanaker-kulturarrangemangsbidrag
   namn: Kulturarrangemangsbidrag
   kategori:
@@ -229,19 +280,23 @@ bidrag:
   - Föreningen ska vara demokratiskt uppbyggd, öppen för alla, religiöst och partipolitiskt obunden samt icke vinstdrivande
   - Föreningen får inte vara läns- eller riksorganisation
   - Arrangemang som täcker sina kostnader genom intäkter är inte bidragsberättigade
-  belopp: null
+  belopp: Inget fast belopp anges; preliminärt besked lämnas före arrangemanget och slutligt beslut tas efter ekonomisk redovisning
   sen_ansokan: 'Ansökan görs inom en av tre årliga ansökningsperioder: 1 mars–15 april, 1 juli–15 augusti, 1 november–15 december.
     Beslut cirka en månad efter periodens slut; preliminärt godkännande krävs före arrangemanget, slutgiltigt beslut efter
     ekonomisk redovisning.'
   kalla_url: https://www.ovanaker.se/kulturochfritid/foreningarforeningsbidrag/bidragtillforeningarochstudieforbund/kulturforeningsbidrag/kulturarrangemangsbidrag.9077.html
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: NYTT i denna körning — hittades i det omstrukturerade menyträdet, sidan daterad 2026-04-17. Beslutas av kultur-
-    och fritidsnämnden. Kan inte kombineras med sponsring av evenemang för samma arrangemang. Prioritet ges till bred kulturutbud,
-    professionella utövare, barn-/ungdomsprogram och geografisk spridning. Se VARNINGSSIGNAL i posten "Bidrag till föreningar
-    för kulturella aktiviteter/arrangemang" — möjlig överlappning som inte gått att slutgiltigt avgöra med tillgängliga källor.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
+  anteckning: Beslutas av kultur- och fritidsnämnden. Kan inte kombineras med sponsring av evenemang för samma arrangemang.
+    Prioritet ges till bredd i kulturutbudet, professionella utövare, barn- och ungdomsprogram samt geografisk spridning.
+  qa_anteckning: Sidan är daterad 2026-04-17. Den möjliga överlappningen med den äldre publicerade e-tjänsten har inte kunnat
+    avgöras utifrån kommunens publicerade material.
 - id: ovanaker-startbidrag-kulturforening
   namn: Startbidrag för kulturföreningar
   kategori:
@@ -255,6 +310,10 @@ bidrag:
   - Föreningen har haft verksamhet i max sex månader vid ansökningstillfället
   - Medlemsantal över fem personer bosatta i Ovanåkers kommun
   - Antagna stadgar, vald styrelse, registrerad i kommunens föreningsregister
+  - Föreningen ska ha ett allmännyttigt ändamål
+  - Föreningen ska verka inom kultur
+  - Föreningen ska vara demokratiskt uppbyggd, öppen för alla, religiöst och politiskt obunden samt inte vinstdrivande
+  - Föreningen får inte bedriva verksamhet som uppmuntrar till diskriminering
   - Protokoll från föreningens uppstartsmöte bifogas
   - Föreningens stadgar bifogas
   - Föreningens alkohol- och drogpolicy bifogas
@@ -264,11 +323,15 @@ bidrag:
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
   anteckning: Ansökan signeras digitalt med e-legitimation. Kommunen kan neka bidrag vid misstanke om att föreningen bildats
-    enbart för att erhålla bidraget, utan egentlig verksamhet. Deadline (6 månader efter bildande) och belopp (2 000 kr) är
-    nya uppgifter i denna körning — fanns inte i föregående version, som bara nådde sidan via minasidor.ovanaker.se/oversikt/overview/367
-    (odaterad, saknade dessa uppgifter).
+    enbart för att erhålla bidraget, utan egentlig verksamhet.
+  qa_anteckning: Deadline och belopp har verifierats mot kommunens daterade riktlinjesida; den äldre e-tjänstesidan saknade
+    de uppgifterna.
 - id: ovanaker-snabba-pengar-ung-kultur
   namn: '"Snabba pengar" för ung kultur'
   kategori:
@@ -290,11 +353,15 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: NYTT i denna körning — hittades i det omstrukturerade menyträdet under Kulturföreningsbidrag. Redovisning med
-    kostnader, intäkter och kvitton krävs efter genomfört arrangemang. Inte alla ansökningar beviljas — nya typer av arrangemang
-    prioriteras, arrangemang utan publik eller nämnvärda kostnader beviljas inte. Riktar sig till unga individer/informella
-    grupper snarare än registrerade föreningar, men är strukturerat som ett sökbart evenemangsbidrag (jämför Halmstads Kulturstöd
-    för unga) snarare än ett konkurrensutsatt pris/stipendium till en enskild vinnare — exkluderas därför inte enligt §2.4.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
+  - ungdom
+  anteckning: Redovisning med kostnader, intäkter och kvitton krävs efter genomfört arrangemang. Nya typer av arrangemang prioriteras;
+    arrangemang utan publik eller nämnvärda kostnader beviljas inte.
+  qa_anteckning: Bidraget riktar sig till unga individer och informella grupper men är publicerat som ett sökbart evenemangsbidrag,
+    inte som ett konkurrensutsatt pris eller stipendium.
 - id: ovanaker-tillfalligt-ovrigt-arrangemangsbidrag
   namn: Tillfälligt övrigt arrangemangsbidrag
   kategori:
@@ -309,18 +376,22 @@ bidrag:
   krav:
   - Avser verksamhet/arrangemang av tillfällig karaktär (inte ordinarie löpande verksamhet)
   - Ansökan görs online och prövas av politisk nämnd
-  belopp: null
+  - Redovisning ska göras via webben senast två månader efter arrangemangets genomförande
+  belopp: Inget fast belopp anges; bidragsansökan prövas av politisk nämnd
   sen_ansokan: Ansökan ska göras minst tre månader före arrangemangets genomförande; redovisning senast två månader efter
     genomförandet
   kalla_url: https://www.ovanaker.se/kulturochfritid/foreningarforeningsbidrag/bidragtillforeningarochstudieforbund/tillfalligtovrigtarrangemangsbidrag.7277.html
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'NYTT i denna körning — hittades i det omstrukturerade menyträdet, sidan daterad 2025-12-22. Hittades INTE i
-    e-tjänsteportalens tjänstelista (minasidor.ovanaker.se/oversikt/overview/34) trots att sidan anger att ansökan görs online
-    — sannolikt en direktkontaktväg snarare än det generella e-tjänstflödet. Kontakt: Erik Lundin, kultur- och fritidschef
-    (erik.lundin@ovanaker.se).'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - annat
+  anteckning: Ansökan görs via kontakt med kommunens kultur- och fritidschef.
+  qa_anteckning: Sidan är daterad 2025-12-22. Bidraget finns i kommunens menyträd men inte i e-tjänsteportalens tjänstelista.
 forutsattningar:
 - id: ovanaker-foreningsregistrering
   vad: Registrera föreningen i kommunens föreningsregister
