@@ -131,9 +131,9 @@ export const TRATT = {
     // borjaHar) beskrev en gapanalys-modell B3 tog bort — kortet
     // "Kan sökas nu" lovade att vi vet vilka krav föreningen uppfyller
     // (vi sorterar, vi prövar inte), "Nära — det här saknas" lovade en
-    // gapanalys som inte längre finns. Ersatta av grupper.passar/
-    // kanGalla-rubrikerna ovan + ny kortcopy nedan. Registreringskortet
-    // (borjaHar) är oförändrat och kortUnderBorjaHar likaså.
+    // gapanalys som inte längre finns. Ersatta av grupper-rubrikerna
+    // nedan + ny kortcopy nedan. Registreringskortet (borjaHar) är
+    // oförändrat och kortUnderBorjaHar likaså.
     kortUnderPassar: 'Bidrag vars inriktning stämmer med det ni gör.',
     kortUnderKanGalla: 'Resten av kommunens bidrag. Vi utesluter ingenting vi inte vet.',
     kortUnderBorjaHar: 'Det formella steget som fäller flest ansökningar, med kommunens handläggningstid.',
@@ -157,14 +157,30 @@ export const TRATT = {
     // beskedsmodell. borjaHar ovan lever kvar oförändrat (registrera-
     // sidan). kanSoka/behover (trattens gamla tregruppsmodell) och
     // förstasidans kort som beskrev dem är borttagna i B4 — samma
-    // rubriker (passar/kanGalla nedan) används nu även på förstasidan.
+    // rubriker (grupper nedan) används nu även på förstasidan.
     //
     // "Vad Code behöver veta" §5: grupperna bär listan i ALLA tre
     // sökt-lägena, byter aldrig struktur på ett svar. Bara blocket
     // OVANFÖR listan skiljer sig (registrering nedan).
+    //
+    // M2.3 (Jacob 2026-08-17, precisionsordern): "Passar er verksamhet"/
+    // "Kan gälla er ändå" var två rubriker — ersatta av tre nivåer
+    // (matching.ts sorteraForTratt, i strikt prövningsordning:
+    // foreningstyp → kategori → varken/eller). Skälet visas per RAD, inte
+    // bara under rubriken, eftersom troligenRelevantSkal interpolerar
+    // bidragets EGNA matchandeForeningstyp-värden — samma rad kan alltså
+    // ha olika skäl-text beroende på vilket bidrag det gäller.
+    // garInteAttBedomaSkal är INTE "matchar inte" — frånvaro av
+    // kategoriöverlapp bevisar ingen obehörighet, formuleringen får aldrig
+    // antyda det (Jacobs egen gräns för den här nivån).
     grupper: {
-      passar: 'Passar er verksamhet',
-      kanGalla: 'Kan gälla er ändå',
+      troligenRelevant: 'Troligen relevant',
+      // {foreningstyp} = svenskLista(rad.matchandeForeningstyp), satt av anropsstället.
+      troligenRelevantSkal: 'Kommunen riktar bidraget till {foreningstyp}.',
+      kanVaraRelevant: 'Kan vara relevant',
+      kanVaraRelevantSkal: 'Kategorin stämmer, men kommunen anger ingen målgrupp vi kunnat läsa.',
+      garInteAttBedoma: 'Går inte att bedöma',
+      garInteAttBedomaSkal: 'Vi vet inte om det gäller er. Kommunen anger ingen målgrupp, och kategorin stämmer inte med era svar.',
     },
     // Blocket ovanför listan, sokt=nej/vet inte (B3, "De tre sökt-lägena").
     // sokt=ja: inget block, grupperna direkt (ingen copy behövs).

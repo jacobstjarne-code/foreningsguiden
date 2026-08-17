@@ -354,11 +354,18 @@ const webPageJsonLd = {
          den ogrupperade fullständiga listan, precis som i dag. Sortera,
          aldrig filtrera: samma <li data-bidrag-id>-noder FLYTTAS mellan
          listorna, ingen dubblering, ingen bortfiltrerad post. */}
+      {/* M2.3 (Jacob 2026-08-17): tre nivåer i stället för två, samma
+         DOM-flytt-mönster som innan (grupperaListan nedan) — bara fler
+         mål. Rubrikerna importeras nu från TRATT (GUIDE_TRATT_COPY.ts)
+         i stället för att hårdkodas, samma källa som matcha/index.astro
+         redan använde — den divergensen var ett eget fel, rättat här. */}
       <div data-bidrag-grupper hidden>
-        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-passar></h3>
-        <ul class="bidrag-list" data-grupp-lista-passar></ul>
-        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-kangalla></h3>
-        <ul class="bidrag-list" data-grupp-lista-kangalla></ul>
+        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-troligen></h3>
+        <ul class="bidrag-list" data-grupp-lista-troligen></ul>
+        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-kanske></h3>
+        <ul class="bidrag-list" data-grupp-lista-kanske></ul>
+        <h3 class="bidrag-grupp-rubrik" data-grupp-rubrik-obekant></h3>
+        <ul class="bidrag-list" data-grupp-lista-obekant></ul>
       </div>
       <ul class="bidrag-list" data-bidrag-list-flat>
         {sortedBidrag.map((bidrag) => (
@@ -412,8 +419,9 @@ const webPageJsonLd = {
   import { VANTELISTA, IGENKANNING } from '../lib/content';
   import { initFelrapportWidgets } from '../lib/felrapportKlient';
   import { getForeningsprofil, saveForeningsprofil } from '../lib/foreningsprofil';
-  import { sorteraForTratt } from '../lib/matching';
-  import { VERKSAMHET_FORENING_LABELS, type Kommun } from '../lib/kommunTyper';
+  import { sorteraForTratt, type TrattRad } from '../lib/matching';
+  import { VERKSAMHET_FORENING_LABELS, svenskLista, type Kommun } from '../lib/kommunTyper';
+  import { TRATT } from '../../GUIDE_TRATT_COPY';
 
   // E1 (ARBETSORDER 2026-08-11): VarmSkarm ersätter ekern när Foreningsprofil.
   // foreningsnamn är känt — annars gäller B (ekern) helt oförändrat, båda
@@ -486,10 +494,12 @@ const webPageJsonLd = {
 
     const grupper = document.querySelector<HTMLElement>('[data-bidrag-grupper]');
     const listaFlat = document.querySelector<HTMLUListElement>('[data-bidrag-list-flat]');
-    const listaPassar = document.querySelector<HTMLUListElement>('[data-grupp-lista-passar]');
-    const listaKangalla = document.querySelector<HTMLUListElement>('[data-grupp-lista-kangalla]');
-    const rubrikPassar = document.querySelector<HTMLElement>('[data-grupp-rubrik-passar]');
-    const rubrikKangalla = document.querySelector<HTMLElement>('[data-grupp-rubrik-kangalla]');
+    const listaTroligen = document.querySelector<HTMLUListElement>('[data-grupp-lista-troligen]');
+    const listaKanske = document.querySelector<HTMLUListElement>('[data-grupp-lista-kanske]');
+    const listaObekant = document.querySelector<HTMLUListElement>('[data-grupp-lista-obekant]');
+    const rubrikTroligen = document.querySelector<HTMLElement>('[data-grupp-rubrik-troligen]');
+    const rubrikKanske = document.querySelector<HTMLElement>('[data-grupp-rubrik-kanske]');
+    const rubrikObekant = document.querySelector<HTMLElement>('[data-grupp-rubrik-obekant]');
 
     // Bara EXAKT en verksamhet med ett riktigt sammansatt ord får "en
     // {typ}"-formuleringen — annars den generiska raden (se IGENKANNING
@@ -502,27 +512,57 @@ const webPageJsonLd = {
       return mallGenerisk;
     }
 
+    // M2.3 — skälet per rad, samma logik som matcha/index.astro (motorn
+    // (matching.ts) känner inte till copy, se sorteraForTratt-filhuvudet
+    // — bara denna renderingssidas jobb att interpolera).
+    function skalText(rad: TrattRad): string {
+      if (rad.niva === 'troligen_relevant') {
+        return TRATT.besked.grupper.troligenRelevantSkal.replace('{foreningstyp}', svenskLista(rad.matchandeForeningstyp));
+      }
+      if (rad.niva === 'kan_vara_relevant') return TRATT.besked.grupper.kanVaraRelevantSkal;
+      return TRATT.besked.grupper.garInteAttBedomaSkal;
+    }
+
+    function flyttaMedSkal(lista: HTMLUListElement | null, rader: TrattRad[], perId: Map<string, HTMLLIElement>) {
+      if (!lista) return;
+      rader.forEach((rad) => {
+        const li = perId.get(rad.bidrag.id);
+        if (!li) return;
+        let skalEl = li.querySelector<HTMLElement>('[data-bidrag-skal]');
+        if (!skalEl) {
+          skalEl = document.createElement('p');
+          skalEl.className = 'bidrag-list__skal';
+          skalEl.setAttribute('data-bidrag-skal', '');
+          li.appendChild(skalEl);
+        }
+        skalEl.textContent = skalText(rad);
+        lista.appendChild(li);
+      });
+    }
+
     function grupperaListan(kommunData: Kommun) {
-      if (!listaFlat || !grupper || !listaPassar || !listaKangalla) return;
-      const { passar, kanGalla } = sorteraForTratt(profil!, kommunData);
+      if (!listaFlat || !grupper || !listaTroligen || !listaKanske || !listaObekant) return;
+      const { troligenRelevant, kanVaraRelevant, garInteAttBedoma } = sorteraForTratt(profil!, kommunData);
       const perId = new Map<string, HTMLLIElement>();
       listaFlat.querySelectorAll<HTMLLIElement>('[data-bidrag-id]').forEach((li) => {
         if (li.dataset.bidragId) perId.set(li.dataset.bidragId, li);
       });
 
-      passar.forEach((b) => { const li = perId.get(b.id); if (li) listaPassar.appendChild(li); });
-      kanGalla.forEach((b) => { const li = perId.get(b.id); if (li) listaKangalla.appendChild(li); });
+      flyttaMedSkal(listaTroligen, troligenRelevant, perId);
+      flyttaMedSkal(listaKanske, kanVaraRelevant, perId);
+      flyttaMedSkal(listaObekant, garInteAttBedoma, perId);
 
-      if (rubrikPassar) rubrikPassar.textContent = `Passar er verksamhet · ${passar.length}`;
-      if (rubrikKangalla) rubrikKangalla.textContent = `Kan gälla er ändå · ${kanGalla.length}`;
+      if (rubrikTroligen) rubrikTroligen.textContent = `${TRATT.besked.grupper.troligenRelevant} · ${troligenRelevant.length}`;
+      if (rubrikKanske) rubrikKanske.textContent = `${TRATT.besked.grupper.kanVaraRelevant} · ${kanVaraRelevant.length}`;
+      if (rubrikObekant) rubrikObekant.textContent = `${TRATT.besked.grupper.garInteAttBedoma} · ${garInteAttBedoma.length}`;
 
       grupper.hidden = false;
       listaFlat.hidden = true;
     }
 
     function visaFlatIgen() {
-      if (!listaFlat || !grupper || !listaPassar || !listaKangalla) return;
-      [...listaPassar.querySelectorAll('[data-bidrag-id]'), ...listaKangalla.querySelectorAll('[data-bidrag-id]')]
+      if (!listaFlat || !grupper || !listaTroligen || !listaKanske || !listaObekant) return;
+      [...listaTroligen.querySelectorAll('[data-bidrag-id]'), ...listaKanske.querySelectorAll('[data-bidrag-id]'), ...listaObekant.querySelectorAll('[data-bidrag-id]')]
         .forEach((li) => listaFlat.appendChild(li));
       grupper.hidden = true;
       listaFlat.hidden = false;

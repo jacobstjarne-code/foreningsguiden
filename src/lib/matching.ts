@@ -201,9 +201,9 @@ export function matchKommun(profil: Foreningsprofil, kommun: Kommun): MatchKommu
 // kommuner, så ett KRAV-baserat filter (matchBidrags MATCHAR/SAKNAR/
 // EJ_BEHORIG, som även prövar min_medlemmar/kraver_registrering/etc.)
 // ger fel svar i de 265 som saknar fältet. Den här funktionen gör bara
-// EN sak: sorterar (aldrig utesluter) kommunens AKTIVA bidrag i två
-// grupper baserat på om verksamhetssvaret överlappar bidragets EGEN
-// kategorisering.
+// EN sak: sorterar (aldrig utesluter) kommunens AKTIVA bidrag efter om
+// verksamhetssvaret överlappar bidragets EGEN kategorisering — och,
+// sedan M2.3, hur säkert det överlappet är (relevansniva nedan).
 //
 // "kategori eller föreningstyp" (B3, D-B): kategori (Kategori[], samma
 // taxonomi som kommunens navigering) och foreningstyp (Verksamhet[],
@@ -211,17 +211,57 @@ export function matchKommun(profil: Foreningsprofil, kommun: Kommun): MatchKommu
 // saknar hembygd/friluft/ungdom/annat, foreningstyp saknar pensionar/
 // funktionsratt/ovrig. Där de delar samma strängvärde (idrott/kultur/
 // social) fångar jämförelsen överlappet ändå; en förening som svarat
-// "Hembygd" kan alltså bara hamna i "Passar er verksamhet" via ett
+// "Hembygd" kan alltså bara hamna i den överlappande gruppen via ett
 // bidrags foreningstyp, aldrig via kategori — det är korrekt, inte en
 // bugg, eftersom kategori-taxonomin inte HAR ett hembygd-värde.
+//
+// M2.3 (Jacob 2026-08-17, precisionsordern): "Passar er verksamhet"/"Kan
+// gälla er ändå" var två rubriker som båda överclaimade — den ena med för
+// mycket säkerhet, den andra genom att INTE säga varför den inte hörde
+// hemma i den första. Ersatt av tre nivåer, i STRIKT ORDNING (foreningstyp
+// prövas alltid först — den finns bara i 25/290 kommuner, se ovan, men där
+// den finns är den ett riktigt, kommunuttalat krav, starkare signal än
+// kategori som alltid är ifylld):
+//
+//   troligen_relevant    bidrag.foreningstyp finns OCH överlappar profilen
+//   kan_vara_relevant    foreningstyp saknas, kategori överlappar
+//   gar_inte_att_bedoma  varken foreningstyp eller kategori överlappar
+//
+// Nivå tre är INTE "matchar inte" — frånvaro av kategoriöverlapp bevisar
+// ingen obehörighet (samma "null filtrerar aldrig bort"-princip som
+// matchBidrag). Skäl-copyn (GUIDE_TRATT_COPY.ts) får aldrig antyda det.
+// Motorn känner inte till copy (se filhuvudet) — bara matchandeForeningstyp
+// (de VÄRDEN som faktiskt överlappade, för skälets "{foreningstyp}"-
+// interpolation), ingen svensk text härifrån.
+export type Relevansniva = 'troligen_relevant' | 'kan_vara_relevant' | 'gar_inte_att_bedoma';
+
+export interface TrattRad {
+  bidrag: Bidrag;
+  niva: Relevansniva;
+  // Bara ifylld när niva === 'troligen_relevant'.
+  matchandeForeningstyp: Verksamhet[];
+}
+
+function bedomRelevans(profil: Foreningsprofil, bidrag: Bidrag): TrattRad {
+  if (bidrag.foreningstyp !== null) {
+    const matchande = bidrag.foreningstyp.filter((v) => profil.verksamhet.includes(v));
+    if (matchande.length > 0) return { bidrag, niva: 'troligen_relevant', matchandeForeningstyp: matchande };
+  }
+  const kategoriOverlappar = bidrag.kategori.some((k) => (profil.verksamhet as readonly string[]).includes(k));
+  if (kategoriOverlappar) return { bidrag, niva: 'kan_vara_relevant', matchandeForeningstyp: [] };
+  return { bidrag, niva: 'gar_inte_att_bedoma', matchandeForeningstyp: [] };
+}
+
 export interface TrattSortering {
-  passar: Bidrag[];
-  kanGalla: Bidrag[];
+  troligenRelevant: TrattRad[];
+  kanVaraRelevant: TrattRad[];
+  garInteAttBedoma: TrattRad[];
 }
 
 export function sorteraForTratt(profil: Foreningsprofil, kommun: Kommun): TrattSortering {
-  const passar: Bidrag[] = [];
-  const kanGalla: Bidrag[] = [];
+  const troligenRelevant: TrattRad[] = [];
+  const kanVaraRelevant: TrattRad[] = [];
+  const garInteAttBedoma: TrattRad[] = [];
 
   for (const bidrag of kommun.bidrag) {
     // H26 — samma regel som matchKommun: ett pausat/avskaffat bidrag är
@@ -230,14 +270,20 @@ export function sorteraForTratt(profil: Foreningsprofil, kommun: Kommun): TrattS
     // filtrera" (som handlar om ATT INTE utesluta baserat på PROFILEN).
     if (bidrag.status !== 'aktiv') continue;
 
-    const overlappar =
-      profil.verksamhet.length > 0 &&
-      ((bidrag.foreningstyp ?? []).some((v) => profil.verksamhet.includes(v)) ||
-        bidrag.kategori.some((k) => (profil.verksamhet as readonly string[]).includes(k)));
+    // Obesvarad verksamhetsfråga (i praktiken hindrat av tratten/
+    // igenkänningsraden innan sorteraForTratt någonsin anropas, men
+    // motorn ska ändå aldrig gissa): varken foreningstyp eller kategori
+    // kan jämföras mot ett tomt svar — sant att vi inte kan bedöma det,
+    // inte en gissning.
+    const rad =
+      profil.verksamhet.length > 0
+        ? bedomRelevans(profil, bidrag)
+        : { bidrag, niva: 'gar_inte_att_bedoma' as const, matchandeForeningstyp: [] as Verksamhet[] };
 
-    if (overlappar) passar.push(bidrag);
-    else kanGalla.push(bidrag);
+    if (rad.niva === 'troligen_relevant') troligenRelevant.push(rad);
+    else if (rad.niva === 'kan_vara_relevant') kanVaraRelevant.push(rad);
+    else garInteAttBedoma.push(rad);
   }
 
-  return { passar, kanGalla };
+  return { troligenRelevant, kanVaraRelevant, garInteAttBedoma };
 }

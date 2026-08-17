@@ -168,20 +168,29 @@ const kommuner = loadKommuner();
           </div>
         </div>
 
-        {/* Två grupper (B3.1/B3, "Vad Code behöver veta" §2) — samma i
-           alla tre sökt-lägena. Sorteringen (sorteraForTratt,
-           matching.ts) FILTRERAR ALDRIG — varje aktivt bidrag hamnar i
-           endera. En grupp döljs bara om den är tom (aldrig ett enskilt
-           bidrag). Vanlig ram, ingen attention/oxblod (B3 D-B
-           "Nyckeln") — .tratt__bidrag är redan neutral, orörd. */}
-        <section class="tratt__grupp" data-tratt-grupp-passar hidden>
-          <h3>{TRATT.besked.grupper.passar}</h3>
-          <ul class="tratt__bidraglista" data-tratt-passar-lista></ul>
+        {/* Tre grupper (B3.1/B3, "Vad Code behöver veta" §2, M2.3-
+           precisionsordern) — samma i alla tre sökt-lägena. Sorteringen
+           (sorteraForTratt, matching.ts) FILTRERAR ALDRIG — varje aktivt
+           bidrag hamnar i endera av de tre. En grupp döljs bara om den
+           är tom (aldrig ett enskilt bidrag). Vanlig ram, ingen
+           attention/oxblod (B3 D-B "Nyckeln") — .tratt__bidrag är redan
+           neutral, orörd. Skälet ("varför ligger bidraget här") skrivs
+           per RAD av render() nedan, inte som en delad grupptext — nivå
+           ett interpolerar bidragets EGNA matchandeForeningstyp, så
+           samma rubrik kan bära olika skäl-text beroende på bidrag. */}
+        <section class="tratt__grupp" data-tratt-grupp-troligen hidden>
+          <h3>{TRATT.besked.grupper.troligenRelevant}</h3>
+          <ul class="tratt__bidraglista" data-tratt-troligen-lista></ul>
         </section>
 
-        <section class="tratt__grupp" data-tratt-grupp-kangalla hidden>
-          <h3>{TRATT.besked.grupper.kanGalla}</h3>
-          <ul class="tratt__bidraglista" data-tratt-kangalla-lista></ul>
+        <section class="tratt__grupp" data-tratt-grupp-kanske hidden>
+          <h3>{TRATT.besked.grupper.kanVaraRelevant}</h3>
+          <ul class="tratt__bidraglista" data-tratt-kanske-lista></ul>
+        </section>
+
+        <section class="tratt__grupp" data-tratt-grupp-obekant hidden>
+          <h3>{TRATT.besked.grupper.garInteAttBedoma}</h3>
+          <ul class="tratt__bidraglista" data-tratt-obekant-lista></ul>
         </section>
 
         <p class="tratt__minne">{TRATT.besked.minne}</p>
@@ -211,9 +220,9 @@ const kommuner = loadKommuner();
 </Base>
 
 <script>
-  import { sorteraForTratt } from '../../lib/matching';
+  import { sorteraForTratt, type TrattRad } from '../../lib/matching';
   import { getForeningsprofil, saveForeningsprofil, type Foreningsprofil, type SoktSvar } from '../../lib/foreningsprofil';
-  import { formatDate, earliestDeadlineISO, todayISO, daysUntil, getUrgency, individuelltBelopp, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
+  import { formatDate, earliestDeadlineISO, todayISO, daysUntil, getUrgency, individuelltBelopp, svenskLista, type Bidrag, type Kommun, type Verksamhet } from '../../lib/kommunTyper';
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { VOID_MARK } from '../../lib/content';
   import { trackEvent } from '../../lib/umami';
@@ -253,10 +262,12 @@ const kommuner = loadKommuner();
     const registreringTextEl = root.querySelector<HTMLElement>('[data-tratt-registrering-text]');
     const registreringKnappEl = root.querySelector<HTMLAnchorElement>('[data-tratt-registrering-knapp]');
     const registreringVantarEl = root.querySelector<HTMLElement>('[data-tratt-registrering-vantar]');
-    const passarGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-passar]');
-    const passarListaEl = root.querySelector<HTMLElement>('[data-tratt-passar-lista]');
-    const kanGallaGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-kangalla]');
-    const kanGallaListaEl = root.querySelector<HTMLElement>('[data-tratt-kangalla-lista]');
+    const troligenGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-troligen]');
+    const troligenListaEl = root.querySelector<HTMLElement>('[data-tratt-troligen-lista]');
+    const kanskeGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-kanske]');
+    const kanskeListaEl = root.querySelector<HTMLElement>('[data-tratt-kanske-lista]');
+    const obekantGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-obekant]');
+    const obekantListaEl = root.querySelector<HTMLElement>('[data-tratt-obekant-lista]');
     const kommunvaljareWrapperEl = root.querySelector<HTMLElement>('[data-tratt-kommunvaljare]');
     const kommunValdEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald]');
     const kommunValdNamnEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald-namn]');
@@ -337,6 +348,27 @@ const kommuner = loadKommuner();
 
     function bidragLank(bidrag: Bidrag): string {
       return kommunData ? `/kommun/${kommunData.kommun_slug}/#bidrag-${bidrag.id}` : '#';
+    }
+
+    // M2.3 — skälet per rad. Bara "troligen relevant" interpolerar
+    // (bidragets EGNA matchandeForeningstyp), de andra två är fasta.
+    function skalText(rad: TrattRad): string {
+      if (rad.niva === 'troligen_relevant') {
+        return TRATT.besked.grupper.troligenRelevantSkal.replace('{foreningstyp}', svenskLista(rad.matchandeForeningstyp));
+      }
+      if (rad.niva === 'kan_vara_relevant') return TRATT.besked.grupper.kanVaraRelevantSkal;
+      return TRATT.besked.grupper.garInteAttBedomaSkal;
+    }
+
+    function renderBidragLista(el: HTMLElement | null, rader: TrattRad[]) {
+      if (!el) return;
+      el.innerHTML = '';
+      rader.forEach((rad) => {
+        const li = document.createElement('li');
+        li.className = 'tratt__bidrag';
+        li.innerHTML = `<a href="${bidragLank(rad.bidrag)}">${rad.bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(rad.bidrag)}</div><p class="tratt__bidrag-skal">${skalText(rad)}</p>`;
+        el.appendChild(li);
+      });
     }
 
     /** Räknaren (B3, D-A) — kommunens totalsumma AKTIVA bidrag. Beräknas
@@ -445,31 +477,18 @@ const kommuner = loadKommuner();
       }
 
       // B3: "Sortera, aldrig filtrera" — sorteraForTratt (matching.ts)
-      // grupperar ALLA aktiva bidrag, utesluter aldrig ett baserat på
-      // profilen. En grupp döljs bara om den råkar vara tom.
-      const { passar, kanGalla } = sorteraForTratt(profil, kommunData);
+      // grupperar ALLA aktiva bidrag i tre nivåer, utesluter aldrig ett
+      // baserat på profilen. En grupp döljs bara om den råkar vara tom.
+      const { troligenRelevant, kanVaraRelevant, garInteAttBedoma } = sorteraForTratt(profil, kommunData);
 
-      if (passarGruppEl) passarGruppEl.hidden = passar.length === 0;
-      if (passarListaEl) {
-        passarListaEl.innerHTML = '';
-        passar.forEach((bidrag) => {
-          const li = document.createElement('li');
-          li.className = 'tratt__bidrag';
-          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(bidrag)}</div>`;
-          passarListaEl.appendChild(li);
-        });
-      }
+      if (troligenGruppEl) troligenGruppEl.hidden = troligenRelevant.length === 0;
+      renderBidragLista(troligenListaEl, troligenRelevant);
 
-      if (kanGallaGruppEl) kanGallaGruppEl.hidden = kanGalla.length === 0;
-      if (kanGallaListaEl) {
-        kanGallaListaEl.innerHTML = '';
-        kanGalla.forEach((bidrag) => {
-          const li = document.createElement('li');
-          li.className = 'tratt__bidrag';
-          li.innerHTML = `<a href="${bidragLank(bidrag)}">${bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(bidrag)}</div>`;
-          kanGallaListaEl.appendChild(li);
-        });
-      }
+      if (kanskeGruppEl) kanskeGruppEl.hidden = kanVaraRelevant.length === 0;
+      renderBidragLista(kanskeListaEl, kanVaraRelevant);
+
+      if (obekantGruppEl) obekantGruppEl.hidden = garInteAttBedoma.length === 0;
+      renderBidragLista(obekantListaEl, garInteAttBedoma);
 
       updateRegistrering();
       updateStegUI();
@@ -555,10 +574,14 @@ const kommuner = loadKommuner();
       delaFelEl?.setAttribute('hidden', '');
       if (!kommunData) return;
 
-      const { passar } = sorteraForTratt(profil, kommunData);
+      // M2.3: "Passar er verksamhet" är borta — närmaste motsvarighet
+      // till gamla matchKommun().matchar är nu de två nivåer som faktiskt
+      // hade ett kategori/foreningstyp-överlapp, INTE "Går inte att
+      // bedöma" (det är den gamla "Kan gälla er ändå", aldrig skickad här).
+      const { troligenRelevant, kanVaraRelevant } = sorteraForTratt(profil, kommunData);
       const data = new FormData(delaForm);
       data.set('kommun', kommunData.kommun_slug);
-      passar.forEach((b) => data.append('bidragId', b.id));
+      [...troligenRelevant, ...kanVaraRelevant].forEach((rad) => data.append('bidragId', rad.bidrag.id));
 
       try {
         const res = await fetch('/api/dela-besked', { method: 'POST', body: data });
@@ -1012,6 +1035,16 @@ const kommuner = loadKommuner();
     color: var(--fg-ink-muted);
     font-size: var(--fg-text-label);
     margin-top: 2px;
+  }
+
+  /* M2.3 — skälet ("varför ligger bidraget här") per rad, tyst tonläge
+     samma som -meta ovan. Ingen egen accent — det här förklarar,
+     hävdar inte. */
+  .tratt__bidrag-skal {
+    color: var(--fg-ink-muted);
+    font-size: var(--fg-text-label);
+    font-style: italic;
+    margin: 4px 0 0;
   }
 
   .tratt__minne,
