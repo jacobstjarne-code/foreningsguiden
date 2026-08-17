@@ -8,6 +8,12 @@ ansokningssystem:
   url: https://etjanster.rattvik.se/
 kalla_url: https://www.rattvik.se/uppleva-och-gora/foreningar-och-bidrag/bidrag-stod-och-stipendier.html
 verifierad: 2026-07-21
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.rattvik.se/download/18.6a48d872159d3ad55ba177c1/1618998911236/Normer%20f%C3%B6reningsbidrag%20fr%20o%20m%2020170101.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: rattvik-foreningsstod
   namn: Föreningsstöd till ungdoms-, idrotts-, handikapp- och pensionärsföreningar
@@ -29,18 +35,23 @@ bidrag:
   - Ideell verksamhet i drogfri miljö med samhällsnyttigt ändamål, huvuddelen av medlemmarna skrivna i kommunen
   - Föreningen får inte tillhöra kategorierna ekonomiska föreningar, vuxenföreningar, elevföreningar (gäller inte skol-IF),
     föreningar knutna till svenska försvaret, eller stödföreningar (t.ex. supporterklubbar)
-  belopp: null
+  belopp: Belopp och eventuell lokalsubvention bestäms individuellt i en överenskommelse med föreningen; inget fast belopp publiceras
+  belopp_avser: per_forening
   sen_ansokan: Sista ansökningsdag är 30 april årligen (poststämpelns/mejlets datum gäller). För sent inkommen ansökan kan
     innebära att ansökan avslås.
   kalla_url: https://etjanster.rattvik.se/oversikt/overview/147
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Ansökan görs av föreningens huvudstyrelse via trafik-, ungdoms- och fritidsenheten. Stödformer: subventionerad
-    uthyrning av kommunens lokaler (0–100 %, taxor enligt bilaga), ekonomiskt föreningsbidrag och bidrag för viss prestation
-    — nivå förhandlas individuellt, ingen fast kronsumma publicerad. Överenskommelse dokumenteras med avtal, kan skrivas på
-    1–3 år. Dubbelhämtat 2026-07-21, identiskt i båda pass.'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Stödet kan bestå av lokalsubvention, ekonomiskt föreningsbidrag eller ersättning för en viss prestation. Överenskommelsen
+    dokumenteras i avtal på ett till tre år.
   senast_verifierad: '2026-08-03'
 - id: rattvik-extra-foreningsstod
   namn: Extra föreningsstöd
@@ -59,15 +70,22 @@ bidrag:
   - Föreningen ska under året redan ha erhållit ordinarie föreningsstöd (kontantstöd/lokalsubvention) från trafik-, ungdoms-
     och fritidsenheten
   - E-legitimation krävs för ansökan; föreningar med skyddad identitet hänvisas att kontakta enheten direkt
-  belopp: null
+  - Beviljade medel ska redovisas och följas upp vid nästa föreningsdialog
+  belopp: Belopp beslutas individuellt; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://etjanster.rattvik.se/oversikt/overview/211
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 juni–31 oktober årligen. Redovisning av medlens användning sker vid nästa föreningsdialog.
-    Dubbelhämtat 2026-07-21, identiskt i båda pass.
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Ansökningsperioden är 1 juni–31 oktober varje år. Redovisning av medlens användning sker vid nästa föreningsdialog.
   senast_verifierad: '2026-08-03'
 - id: rattvik-kulturstod
   namn: Kulturstöd för föreningar
@@ -82,15 +100,19 @@ bidrag:
   - Föreningen ska vara ideell och kulturarrangerande, med huvudsakligt syfte inom t.ex. kulturmiljövård, hantverk, dans,
     musik, litteratur, teater eller bild och form
   - Protokoll och kassarapport från årets årsmöte samt en redogörelse för planerad verksamhet ska bifogas ansökan
-  belopp: null
+  - Bidraget söks för ett kalenderår i taget och sökanden ska representera föreningen
+  belopp: Belopp beslutas individuellt; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan kan innebära reducerat bidrag eller avslag
   kalla_url: https://etjanster.rattvik.se/oversikt/overview/141
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bidraget kan sökas och beviljas för ett kalenderår i taget. Söks via kommunens kulturenhet/e-tjänst. Dubbelhämtat
-    2026-07-21, identiskt i båda pass.
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - kultur
+  - hembygd
+  anteckning: Bidraget kan sökas och beviljas för ett kalenderår i taget via kommunens kulturenhet.
   senast_verifierad: '2026-08-03'
 - id: rattvik-studieforbundsbidrag
   namn: Bidrag till studieförbund
@@ -107,21 +129,20 @@ bidrag:
   - Verksamhet i kommunen vid utbetalningstillfället, eller verksamhetsplan som visar att verksamhet kommer att bedrivas under
     pågående verksamhetsår
   - Normalt ges inget bidrag för verksamhet under 500 deltagartimmar
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "80 % grundbidrag, 20 % volymbidrag ur kommunalt anslag"
+  belopp: 80 procent av kommunens anslag fördelas som grundbidrag efter föregående års andel och 20 procent som volymbidrag efter deltagartimmar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.rattvik.se/download/18.6a48d872159d3ad55ba177c1/1618998911236/Normer%20f%C3%B6reningsbidrag%20fr%20o%20m%2020170101.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Anslaget delas i grundbidrag (80 %, fördelas efter föregående års procentuella andel) och volymbidrag (20 %,
-    beräknas på deltagartimmar). Kommunintyg, verksamhets- och revisionsberättelse samt verksamhetsplan ska vara kommunen
-    tillhanda senast 15 maj; bidragen betalas ut senast 30 juni varje år. Ingen separat e-tjänstsida hittad — källan är kommunens
-    riktlinje-PDF. PDF-URL:en verifierad levande (200) 2026-07-21; textextraktion ur PDF:en är teknisk begränsad (komprimerad
-    textström) men rubriken 'Studieförbund' bekräftades i dokumentet och detaljvärdena är oförändrade sedan föregående fulla
-    extraktion 2026-07-19.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - kultur
+  - annat
+  anteckning: Kommunintyg, verksamhets- och revisionsberättelse samt verksamhetsplan ska lämnas senast 15 maj. Bidraget
+    betalas ut senast 30 juni.
   senast_verifierad: '2026-08-03'
 - id: rattvik-social-verksamhetsstod
   namn: Föreningsstöd till social verksamhet
@@ -135,16 +156,18 @@ bidrag:
   krav:
   - Föreningen ska vara ideell, ej vinstdrivande och uppbyggd enligt demokratiska principer
   - Verksamheten ska vara lokaliserad i Rättviks kommun och riktad till kommunens invånare
-  belopp: null
+  - Verksamheten ska komplettera socialtjänstens område och utgå från socialförvaltningens värdegrund
+  belopp: Belopp prövas individuellt från fall till fall; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.rattvik.se/download/18.6a48d872159d3ad55ba177c1/1618998911236/Normer%20f%C3%B6reningsbidrag%20fr%20o%20m%2020170101.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Söks via Rättviks kommuns socialförvaltning. Kan sökas och beviljas för ett kalenderår i taget, särskild prövning
-    görs från fall till fall. Ingen separat e-tjänstsida hittad — källan är kommunens riktlinje-PDF (samma verifieringsstatus
-    som rattvik-studieforbundsbidrag ovan).
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - social
+  anteckning: Bidraget söks via socialförvaltningen och kan beviljas för ett kalenderår i taget.
   senast_verifierad: '2026-08-03'
 - id: rattvik-lonebidrag
   namn: Kommunalt lönebidrag till föreningar
@@ -162,16 +185,18 @@ bidrag:
   - Personen som anställs ska bo och vara folkbokförd i Rättviks kommun samt ha en lönebidrags- eller trygghetsanställning
     med dokumenterat funktionshinder
   - Föreningens stadgar ska bifogas ansökan
-  belopp: null
+  belopp: Schablonbidrag där avsatta medel fördelas efter antalet ansökningar och personernas anställningsvillkor
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.rattvik.se/download/18.6a48d872159d3ad55ba177c1/1618998911236/Normer%20f%C3%B6reningsbidrag%20fr%20o%20m%2020170101.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Söks via Rättviks kommuns personalenhet med särskild blankett. Utformat som schablonbidrag där avsatta medel
-    fördelas utifrån antal ansökningar och anställningsvillkor. Kan sökas och beviljas för ett kalenderår i taget. Ingen separat
-    e-tjänstsida hittad — källan är kommunens riktlinje-PDF (samma verifieringsstatus som rattvik-studieforbundsbidrag ovan).
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - social
+  - annat
+  anteckning: Bidraget söks via personalenheten med särskild blankett och kan beviljas för ett kalenderår i taget.
   senast_verifierad: '2026-08-03'
 - id: rattvik-bystugebidrag
   namn: Bystugebidrag
@@ -190,18 +215,19 @@ bidrag:
   - Ansökan ska innehålla projektbeskrivning (sammanfattning, mål, målgrupp, tidsplan, budget) samt verksamhetsberättelse,
     årsmötesprotokoll och resultat- och balansräkning
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunen avsätter normalt ca 100 000 kr per år totalt"
+  belopp_avser: ren_pott
+  kommunens_pott: "100 000 kr per år"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://etjanster.rattvik.se/oversikt/overview/173
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Medel till drift ges inte. Egen delfinansiering premieras, och ansökningar som använder kommunens bidrag som
-    medfinansiering till andra bidrag (t.ex. Boverket) prioriteras. Ingen garanti för bidrag även om kraven uppfylls, då medlen
-    är begränsade. Dubbelhämtat 2026-07-21, identiskt i båda pass. Kommunen avsätter normalt cirka 100 000 kronor per år totalt
-    för samtliga bystugoföreningar; detta är inte ett tak per sökande.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - hembygd
+  - annat
+  anteckning: Medel ges inte till drift. Egen delfinansiering och användning av kommunstödet som medfinansiering till andra
+    bidrag prioriteras. Beloppet är kommunens gemensamma årspott, inte ett tak per förening.
   senast_verifierad: '2026-08-03'
 - id: rattvik-vindkraftspeng
   namn: Vindkraftspeng
@@ -211,7 +237,7 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 07-31
+    - 03-31
   krav:
   - Endast ideella föreningar och organisationer i Rättviks kommun med giltigt organisationsnummer kan söka. Företag och privatpersoner
     är inte behöriga.
@@ -221,25 +247,23 @@ bidrag:
     beskrivning av aktiviteten/projektet/investeringen
   belopp: Högst 100 000 kronor per förening och år. Vid större investeringar kan utbetalning fördelas över högst två år efter
     särskilt beslut.
+  belopp_avser: per_forening
   sen_ansokan: Ansökningar som inkommer efter sista ansökningsdag behandlas inte.
   kalla_url: https://etjanster.rattvik.se/oversikt/overview/317
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'KÄLLKONFLIKT LÖST (§2.5, nyare vinner): föregående version noterade en olöst diskrepans mellan en tidigare
-    daterad riktlinje (2026-05-06, ''31 mars'' utan undantag) och nyare källor. Denna omgång bekräftar entydigt, via tre oberoende
-    och samstämmiga källor nyare än 2026-05-06 — kommunens nyhetsartikel ''Rättviks kommun satsar på föreningslivet med nya
-    vindkraftspengar'' (publicerad 2026-06-03), kommunstyrelsens referat från sammanträdet 2026-06-16 (beslut att anta riktlinjer
-    för vindkraftspeng, med uppmaning att prioritera föreningarna i Ore socken vid fördelningen) samt den löpande e-tjänstsidan
-    för ansökan (etjanster.rattvik.se/vindkraftspeng, hämtad 2026-07-21) — att sista ansökningsdag för 2026 är 31 juli 2026,
-    som ett engångsundantag för det första verksamhetsåret. Från och med 2027 återgår ansökningsdatumet till 31 mars årligen,
-    i linje med den äldre riktlinjens återkommande regel. Fältet ovan (07-31) är alltså den faktiskt gällande deadlinen vid
-    denna verifiering (2026-07-21, tio dagar innan fristen går ut) — kommande års YAML-uppdatering ska ändra datumet till
-    03-31 när 2027 börjar gälla. Utbetalning sker med 75 % direkt, resterande 25 % efter godkänd slutredovisning. Ej att förväxla
-    med rattvik-bygdepeng-dalfors-orebygden nedan, som är ett äldre och geografiskt avgränsat program finansierat av ett annat
-    vindkraftsöverskott (Hedbodberget). Uppgifter om kommunens totala statliga vindkraftsstöd beskriver den gemensamma budgeten,
-    inte vad en enskild förening kan få.'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Från 2027 är sista ansökningsdag 31 mars varje år; 31 juli 2026 var ett engångsundantag. Utbetalning sker med
+    75 procent efter beslut och resterande 25 procent efter godkänd slutredovisning.
   senast_verifierad: '2026-08-03'
 - id: rattvik-vagbidrag
   namn: Bidrag för enskilda vägar
@@ -247,25 +271,23 @@ bidrag:
   - ovrig
   malgrupp: Juridiskt bildade samfällighetsföreningar som ansvarar för enskild väg i Rättviks kommun
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Sökande ska vara en juridiskt bildad samfällighetsförening (enskild fastighetsägare kan inte söka)
   - Minst två fastigheter med permanentboende ska nyttja vägen
   - Vägen ska vara väl avgrusad och dikad
-  belopp: null
+  belopp: Kommunen publicerar inget fast belopp eller beräkningssätt
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.rattvik.se/trafik-och-gator/gator/bidrag-vagar-belysning.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5, källa
-    hittad via samhällsbyggnad/trafik-och-gator snarare än det redaktionella föreningsbidrags-sidträdet). Administreras av
-    Samhällsutvecklingsförvaltningen, ansökan skickas direkt till förvaltningen (ingen e-tjänst hittad). Separat: enligt beslut
-    i nämnden lämnas inga bidrag till nyuppsättning av gatubelysning, men en väg-/samfällighetsförening kan själv finansiera
-    ny belysning som kommunen sedan tar över driftansvaret för — detta är inget sökbart bidrag och är inte skrivet som egen
-    post.'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - annat
+  anteckning: Ansökan skickas direkt till samhällsutvecklingsförvaltningen. Kommunen ger inte bidrag till ny gatubelysning.
   senast_verifierad: '2026-08-03'
 - id: rattvik-bygdepeng-dalfors-orebygden
   namn: Bygdepeng för Dalfors och Orebygden
@@ -281,25 +303,25 @@ bidrag:
   - Projektet eller anläggningen ska främja utvecklingen av Dalfors och Orebygden — allt från mindre kulturarrangemang (musikkvällar,
     utställningar) till större renoveringar eller anläggningsinvesteringar
   - Fullständiga villkor anges på ansökningsblanketten 'Ansökan bygdepeng'
+  - Sökanden ska vara verksam i Dalfors eller Orebygden och använda medlen till lokal nytta i området
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Ca 300 000 kronor per år avsätts totalt till Dalfors/Orebygden"
+  belopp_avser: ren_pott
+  kommunens_pott: "300 000 kr per år"
   sen_ansokan: Sista ansökningsdag är 31 mars varje år; infaller datumet på en helgdag flyttas fristen till nästa vardag.
   kalla_url: https://www.rattvik.se/kommun-och-politik/kommunens-organisation/stiftelser-fonder-och-bygdepeng/bygdepeng-for-dalfors-och-orebygden.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-21 (specialkategori §2.1.5/samhälls-
-    och byalag, källa hittad under 'Stiftelser, fonder och bygdepeng' snarare än föreningsbidrags-sidträdet). Administreras
-    av Kanslienheten (Kommunstyrelsens förvaltning). Geografiskt avgränsat till Dalfors och Orebygden — gäller alltså inte
-    föreningar i övriga Rättviks kommun. Sidan specificerar inte explicit att enbart föreningar (till skillnad från privatpersoner)
-    får söka, men exemplen på användning (gemensamma anläggningar, offentliga kulturarrangemang) tyder på att föreningar/organisationer
-    är en central målgrupp tillsammans med privatpersoner/byalag. Bekräftat aktuellt för 2026 via nyhetsartikel 'Sök bygdepeng
-    för Dalfors och Orebygden' (publicerad 2026-03-02, angav samma 31 mars 2026-deadline). Ej att förväxla med rattvik-vindkraftspeng
-    ovan, som är kommunens nya, kommunövergripande statliga vindkraftsstöd — bygdepengen är ett äldre, geografiskt avgränsat
-    program finansierat av Hedbodbergets vindkraftsöverskott. Cirka 300 000 kronor per år avsätts totalt till Dalfors/Orebygden.
-    Beloppet är en gemensam pott och inte ett tak per sökande.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Stödet är geografiskt avgränsat till Dalfors och Orebygden och kan sökas av både föreningar och privatpersoner.
+    Beloppet är områdets gemensamma årspott, inte ett tak per sökande.
   senast_verifierad: '2026-08-03'
 forutsattningar:
 - id: rattvik-bidragsberattigad-forening

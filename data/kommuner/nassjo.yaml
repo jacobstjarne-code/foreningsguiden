@@ -8,6 +8,12 @@ ansokningssystem:
   url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
 kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
 verifierad: '2026-08-02'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 1
+  datum: null
+  kalla_url: https://nassjo.se/download/18.5db66e4e170e76ba8a769653/1587039116241/Allm%C3%A4nna%20best%C3%A4mmelser%20och%20generella%20regler%20f%C3%B6r%20N%C3%A4ssj%C3%B6%20kommuns%20bidrag%20till%20f%C3%B6reningslivet.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: nassjo-driftbidrag
   namn: Driftbidrag
@@ -23,13 +29,21 @@ bidrag:
   - Föreningen ska hemmahöra i Nässjö kommun
   - Fastighetsåtagande (hyra eller ägande) för hela året
   - Verksamhet riktad mot barn och ungdomar
+  - Föreningen ska redovisa föregående verksamhetsårs styrkta driftkostnader och anläggningens ytor och utbud
+  - Verksamhetsberättelse, resultat- och balansrapport, revisionsberättelse, årsmötesprotokoll och verksamhetsplan med budget ska lämnas inom en månad efter årsmötet
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Driftbidragets budget fördelas efter samtliga sökande föreningars gemensamma poängsumma
   sen_ansokan: Ej möjlig efter deadline
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - annat
   anteckning: null
   senast_verifierad: '2026-08-03'
 - id: nassjo-arrangemangsbidrag
@@ -45,13 +59,19 @@ bidrag:
   - Arrangöd inom Nässjö kommun
   - Annonsering i lokala medier
   - Arrangöra ska skapa mervärde för lokalt gemenskapsliv
-  belopp: null
+  - Föreningens huvudsakliga verksamhet ska bedrivas i Nässjö kommun och föreningen ska uppfylla de generella bidragsreglerna
+  - Ansökan ska lämnas minst två månader före det planerade arrangemanget
+  belopp: Belopp beslutas individuellt; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande, dock senast två månader innan arrangemanget)
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - kultur
+  - annat
   anteckning: Stöd och stimulans för lokal kultur och aktivitetsbidrag.
   senast_verifierad: '2026-08-03'
 - id: nassjo-sociala-initiativ
@@ -68,13 +88,16 @@ bidrag:
   - Målgruppen ska vara en prioriterad grupp identifierad av föreningens resurser eller nätverk
   - 'Dokumentation krävs: verksamhetsberättelse, revisionsrapport, stadgar, verksamhetsplan, årsmötes- och resultatrapport,
     balansräkning'
-  belopp: null
+  belopp: Belopp beslutas individuellt; e-tjänsten publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Ej möjlig efter deadline
   kalla_url: https://sjalvservice.nassjo.se/oversikt/overview/636
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - social
   anteckning: Stöd för föreningsdriven socialt ansvar. Fokus på långsiktig socialt hållbar utveckling.
   senast_verifierad: '2026-08-03'
 - id: nassjo-grundstod-pensionarer
@@ -89,13 +112,16 @@ bidrag:
   - Föreningen ska vara representerad i KPR
   - Registrerad i kommunens föreningsregister
   - Aktuella årshandlingar uppladdade
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Belopp beslutas utifrån medlemsunderlag och tillgängliga medel; inget fast belopp publiceras
+  belopp_avser: per_forening
+  sen_ansokan: Kommunen publicerar ingen fast ansökningsdag på den öppna bidragssidan
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - social
   anteckning: Grundstöd riktat till samtliga pensionärsföreningar i kommunen. Ej angivet i källan
   senast_verifierad: '2026-08-03'
 - id: nassjo-kommundelspeng
@@ -109,13 +135,20 @@ bidrag:
   krav:
   - Lokalt förankrad verksamhet
   - Fokus på utveckling och förbättring
-  belopp: null
+  - Insatsen ska öka trivsel, gemenskap, attraktivitet eller trygghet i kommundelen och vara tillgänglig för allmänheten
+  - Ansökan ska göras innan projektet börjar och innehålla projektidé, sökande, kostnadsuppskattning och tidplan
+  belopp: Högst 25 000–100 000 kr beroende på kommundel och ansökningsår; hjärtstartare kan beviljas med högst 5 000 kr
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - hembygd
+  - social
+  - annat
   anteckning: Möjliggör för lokala aktörer att genomföra utvecklingsinsatser inom sina områden.
   senast_verifierad: '2026-08-03'
 - id: nassjo-offentlig-medfinansiering
@@ -129,13 +162,22 @@ bidrag:
   krav:
   - Projekt med utvecklingsuppdrag
   - Samverkan med offentlig sektor
-  belopp: null
+  - Projektet ska kräva offentlig medfinansiering för att få stöd från nationell eller internationell myndighet
+  - Investeringen ska skapa, utveckla eller förbättra en offentligt tillgänglig mötesplats till allmän nytta utanför Nässjö stad
+  - Projektägaren ska redovisa hur medlen används enligt den stödgivande myndighetens krav och tidplan
+  belopp: Högst det belopp som den stödgivande myndigheten kräver i offentlig medfinansiering
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://friweb.nassjo.se/bidrag/ansokaninfo.aspx?type=44&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - hembygd
+  - social
+  - annat
   anteckning: Finansiering av externa projekt genom offentlig medfinansiering.
   senast_verifierad: '2026-08-03'
 - id: nassjo-administrationsbidrag
@@ -149,14 +191,25 @@ bidrag:
     typ: fasta
     datum:
     - 02-25
-  krav: []
+  krav:
+  - Föreningen ska ha genomfört minst 15 sammankomster under verksamhetsåret
+  - Föreningen ska ha minst 15 medlemmar i åldern 7–25 år; för personer med funktionsnedsättning gäller ingen övre åldersgräns
+  - Föreningen ska ta ut minst 25 kr i årlig medlemsavgift och uppdatera föreningsregistret årligen
+  - Årshandlingarna ska lämnas till kommunen senast en månad efter årsmötet
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Administrationsbidragets budget fördelas efter de sökande föreningarnas gemensamma medlemsantal
   sen_ansokan: Ansökan utanför ansökningsperioden är inte giltig
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - ungdom
+  - annat
   anteckning: null
   senast_verifierad: '2026-08-03'
 - id: nassjo-aktivitetsbidrag
@@ -170,14 +223,26 @@ bidrag:
     typ: fasta
     datum:
     - 02-25
-  krav: []
+  krav:
+  - Aktiviteten ska vara beslutad och genomförd av föreningen samt vara ledarledd och pågå minst 60 minuter
+  - En godkänd sammankomst ska ha 3–20 deltagare och närvaro ska registreras vid varje tillfälle
+  - Bidragsberättigade deltagare ska vara medlemmar i åldern 7–25 år; för personer med funktionsnedsättning gäller ingen övre åldersgräns
+  - Högst två ledare som är minst 13 år får räknas per sammankomst
+  - Föreningen ska uppfylla de generella reglerna och lämna fullständiga årshandlingar inom en månad efter årsmötet
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Aktivitetsbidragets budget fördelas efter godkända deltagar- och ledartillfällen
   sen_ansokan: Ansökan utanför ansökningsperioden är inte giltig
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - ungdom
+  - annat
   anteckning: null
   senast_verifierad: '2026-08-03'
 - id: nassjo-investeringsbidrag
@@ -192,14 +257,26 @@ bidrag:
     datum:
     - 02-01
     - 09-01
-  krav: []
-  belopp: null
+  krav:
+  - Investeringen ska utveckla föreningens verksamhet eller anläggning eller lokal
+  - Ansökan ska avse en kommande investering och lämnas i någon av årets två ansökningsomgångar
+  - Föreningens huvudsakliga verksamhet ska bedrivas i Nässjö kommun och föreningen ska uppfylla de generella bidragsreglerna
+  - Fullständiga årshandlingar och uppdaterade föreningsuppgifter ska vara inlämnade inom en månad efter årsmötet
+  belopp: Belopp beslutas efter särskild prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Ansökan utanför ansökningsperioden är inte giltig
   kalla_url: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - social
+  - ungdom
+  - annat
   anteckning: Kommunen anger 1 februari eller 1 september som ansökningsdatum.
   senast_verifierad: '2026-08-03'
 forutsattningar:

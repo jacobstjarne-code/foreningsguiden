@@ -8,6 +8,12 @@ ansokningssystem:
   url: https://www.ljusdal.se/upplevagora/foreningslivstodochstipendier/bidragochstod.4.4b396cf614e46c4923cbcf59.html
 kalla_url: https://www.ljusdal.se/upplevagora/foreningslivstodochstipendier/bidragochstod.4.4b396cf614e46c4923cbcf59.html
 verifierad: '2026-08-01'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.ljusdal.se/upplevagora/foreningslivstodochstipendier/bidragochstod.4.4b396cf614e46c4923cbcf59.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: ljusdal-ordinarie-foreningsbidrag
   namn: Ordinarie föreningsbidrag
@@ -29,13 +35,20 @@ bidrag:
     årsmötet
   - Föreningar med barn- och ungdomsverksamhet ska ha drogpolicy och jämställdhetspolicy
   - Ansökan ska vara undertecknad av behörig firmatecknare med aktuella styrelse- och kontaktuppgifter
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Belopp beror på stödform; kommunen publicerar ingen gemensam fast beloppsregel
+  belopp_avser: per_forening
+  sen_ansokan: Kommunen publicerar ingen gemensam ansökningsfrist för stödformerna
   kalla_url: https://www.ljusdal.se/upplevagora/foreningslivstodochstipendier/bidragochstod.4.4b396cf614e46c4923cbcf59.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - social
+  - ungdom
+  - annat
   anteckning: Söks via Interbook; bidragssystemet ses över under 2026. Kontakta kommunen om ansökningsförfarandet
 - id: ljusdal-tillfalligt-foreningsbidrag-2026
   namn: Tillfälligt föreningsbidrag 2026
@@ -57,12 +70,20 @@ bidrag:
   - Ansökan ska innehålla verksamhetsbeskrivning, målgrupp med förväntat antal deltagare, tidsplan, budget samt kontaktperson
   - Föreningen ska bifoga senaste årsbokslut
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 1 000 000 kr för 2026
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.ljusdal.se/upplevagora/foreningslivstodochstipendier/bidragochstod.4.4b396cf614e46c4923cbcf59.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp:
+  - idrott
+  - kultur
+  - social
+  - ungdom
+  - annat
   anteckning: För nya eller förstärkta aktiviteter för barn, unga och äldre.
 - id: ljusdal-foreningsbidrag-omsorgsnamnden
   namn: Föreningsbidrag omsorgsnämnden
@@ -73,14 +94,20 @@ bidrag:
     typ: fasta
     datum:
     - 03-13
-  krav: []
-  belopp: null
+  krav:
+  - Föreningen eller den frivilliga organisationen ska främja goda levnadsförhållanden för särskilt utsatta barn eller vuxna
+  - Alla uppgifter i ansökan ska vara ifyllda
+  - Verksamhetsberättelse, budget och verksamhetsplan ska bifogas ansökan
+  belopp: Belopp beslutas individuellt; e-tjänsten publicerar inget fast belopp
+  belopp_avser: per_forening
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.ljusdal.se/upplevagora/foreningslivstodochstipendier/bidragochstod.4.4b396cf614e46c4923cbcf59.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  kalla_url: https://sjalvservice.ljusdal.se/oversikt/overview/126
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp:
+  - social
   anteckning: För verksamhet för särskilt utsatta barn och vuxna.
 forutsattningar:
 - id: ljusdal-registrering
