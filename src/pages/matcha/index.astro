@@ -329,7 +329,15 @@ const kommuner = loadKommuner();
     // UrgencyChip.astro: distinkt ord per nivå igen, se den filens kommentar.
     const URGENCY_LABEL: Record<'urgent' | 'attention' | 'positive', string> = { urgent: 'Bråttom', attention: 'Snart', positive: 'God tid' };
 
-    function bidragMeta(bidrag: Bidrag): string {
+    // M2.5 (Jacob 2026-08-17, säkerhetsordern): byggd med DOM-API:er/
+    // textContent i stället för en HTML-sträng — bidrag.belopp är
+    // extraherad kommuntext (researchpasset), inte kod vi litar på.
+    // Tidigare interpolerades den orenat i li.innerHTML (renderBidragLista
+    // nedan); en kommunsida med "<script>" i beloppfältet hade kunnat
+    // exekvera i besökarens webbläsare.
+    function bidragMetaEl(bidrag: Bidrag): HTMLElement {
+      const el = document.createElement('div');
+      el.className = 'tratt__bidrag-meta';
       const belopp = individuelltBelopp(bidrag) ?? 'Individuellt belopp inte fastställt';
       // dateISO är null för BÅDE löpande och okänd deadlines.typ
       // (earliestDeadlineISO), samma mönster som BidragCard/
@@ -338,12 +346,17 @@ const kommuner = loadKommuner();
       const dateISO = earliestDeadlineISO(bidrag, today);
       if (!dateISO) {
         const text = bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan';
-        return `${belopp} · ${text}`;
+        el.textContent = `${belopp} · ${text}`;
+        return el;
       }
       const dagar = daysUntil(dateISO, today);
       const urgency = getUrgency(dagar);
       const dagarText = dagar === 1 ? '1 dag kvar' : `${dagar} dagar kvar`;
-      return `${belopp} · <span class="fg-chip fg-chip--${urgency}">${URGENCY_LABEL[urgency]}</span> sista dag ${formatDate(dateISO)} · ${dagarText}`;
+      const chip = document.createElement('span');
+      chip.className = `fg-chip fg-chip--${urgency}`;
+      chip.textContent = URGENCY_LABEL[urgency];
+      el.append(`${belopp} · `, chip, ` sista dag ${formatDate(dateISO)} · ${dagarText}`);
+      return el;
     }
 
     function bidragLank(bidrag: Bidrag): string {
@@ -360,13 +373,23 @@ const kommuner = loadKommuner();
       return TRATT.besked.grupper.garInteAttBedomaSkal;
     }
 
+    // M2.5 — samma skäl som bidragMetaEl ovan: bidrag.namn och skalText
+    // (troligen_relevant-grenen interpolerar matchandeForeningstyp, men
+    // resten av kedjan är extraherad kommuntext) sätts via textContent,
+    // aldrig via en HTML-sträng.
     function renderBidragLista(el: HTMLElement | null, rader: TrattRad[]) {
       if (!el) return;
-      el.innerHTML = '';
+      el.replaceChildren();
       rader.forEach((rad) => {
         const li = document.createElement('li');
         li.className = 'tratt__bidrag';
-        li.innerHTML = `<a href="${bidragLank(rad.bidrag)}">${rad.bidrag.namn}</a><div class="tratt__bidrag-meta">${bidragMeta(rad.bidrag)}</div><p class="tratt__bidrag-skal">${skalText(rad)}</p>`;
+        const a = document.createElement('a');
+        a.href = bidragLank(rad.bidrag);
+        a.textContent = rad.bidrag.namn;
+        const skal = document.createElement('p');
+        skal.className = 'tratt__bidrag-skal';
+        skal.textContent = skalText(rad);
+        li.append(a, bidragMetaEl(rad.bidrag), skal);
         el.appendChild(li);
       });
     }
