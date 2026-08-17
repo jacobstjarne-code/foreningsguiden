@@ -169,6 +169,7 @@ function beloppCell(e: DeadlineEntry): string {
           <span class="deadline-manad__namn">{formatManadRubrik(manad)}</span>
           <span class="deadline-manad__antal">{radLista.length} {radLista.length === 1 ? 'deadline' : 'deadlines'}</span>
         </summary>
+        <div class="deadline-table-scroll">
         <table class="deadline-table">
           <thead>
             <tr><th>Datum</th><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th>Belopp</th><th></th></tr>
@@ -195,6 +196,7 @@ function beloppCell(e: DeadlineEntry): string {
             })}
           </tbody>
         </table>
+        </div>
       </details>
     ))}
   </div>
@@ -203,6 +205,7 @@ function beloppCell(e: DeadlineEntry): string {
     <>
       <h2>{KALENDER.lopandeRubrik}</h2>
       <p>{KALENDER.lopandeText}</p>
+      <div class="deadline-table-scroll">
       <table class="deadline-table" id="deadline-table-lopande">
         <thead>
           <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th>Belopp</th><th></th></tr>
@@ -221,6 +224,7 @@ function beloppCell(e: DeadlineEntry): string {
           ))}
         </tbody>
       </table>
+      </div>
     </>
   )}
 

@@ -196,18 +196,46 @@ a:hover {
 
 .site-header__nav {
   display: flex;
+  align-items: center;
   gap: var(--fg-space-5);
   font-size: var(--fg-text-body);
 }
 
 .site-header__nav a {
+  display: inline-flex;
+  align-items: center;
   color: var(--fg-ink);
   text-decoration: none;
+  padding: 11px 6px;
+  margin: -11px -6px;
 }
 
 .site-header__nav a[aria-current="page"] {
   color: var(--fg-accent);
   font-weight: var(--fg-weight-bold);
+}
+
+/* M2.1 (Jacob 2026-08-17): navet radbröt aldrig — logo + tre länkar i en
+   ovikbar rad drog start/matchning/förhandsvisning ut till ~544px vid
+   390px viewport. Stapla logo över nav och låt navlänkarna radbryta
+   i stället för att skjuta ut sidan. */
+@media (max-width: 480px) {
+  .site-header {
+    padding: 0 var(--fg-space-4);
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--fg-space-3);
+    padding: var(--fg-space-4) 0;
+  }
+
+  .site-header__nav {
+    flex-wrap: wrap;
+    gap: var(--fg-space-3);
+    font-size: var(--fg-text-label);
+  }
 }
 
 main {
@@ -1041,6 +1069,14 @@ main {
   font-size: var(--fg-text-body);
 }
 
+/* M2.1 (Jacob 2026-08-17): tabellen är för smal för att kunna krympa
+   (sex kolumner, en av dem en knapp) — den ska skrolla i sin egen
+   container i stället för att dra ut hela sidan. 735px overflow vid
+   390px mätt före fixen. */
+.deadline-table-scroll {
+  overflow-x: auto;
+}
+
 .deadline-table {
   width: 100%;
   border-collapse: collapse;
@@ -1091,6 +1127,7 @@ main {
 
 .kommunvaljare__sok input {
   flex: 1;
+  min-height: 44px;
   border: none;
   background: transparent;
   font-family: var(--fg-font-sans);
@@ -1612,6 +1649,7 @@ main {
 
 .progression__list-row__text {
   flex: 1;
+  min-width: 0;
 }
 
 .progression__list-row__namn {
@@ -1623,13 +1661,19 @@ main {
 
 /* R5.2 (OMFORDELA_TEXTMASSAN.md runda 5): belopp/datum högerställt i
    mono på radnivå — samma mönster som deadlinekalendern
-   (.deadline-table__datum), så formen känns igen mellan ytorna. */
+   (.deadline-table__datum), så formen känns igen mellan ytorna.
+   M2.1 (Jacob 2026-08-17): flex: none tvingade beloppet till sin
+   ihoptryckta max-content-bredd (t.ex. "individuellt belopp inte
+   fastställt" ovikt) — det var det som drog Gislaved till 2599px.
+   Får nu krympa och radbryta som resten av raden. */
 .progression__list-row__tal {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
-  flex: none;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 55%;
   text-align: right;
 }
 
@@ -1637,6 +1681,7 @@ main {
   font-family: var(--fg-font-mono);
   font-size: var(--fg-text-label);
   color: var(--fg-ink);
+  overflow-wrap: break-word;
 }
 
 .progression__list-row__datum {
