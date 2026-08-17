@@ -40,7 +40,7 @@ const RULES: Record<string, ExpectedRule> = {
   helsingborg: { typ: 'manader_efter_beslut', antal: 12, datum: null, status: 'kontrollast' },
   jarfalla: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   katrineholm: { typ: 'fast_datum', antal: null, datum: '03-31', status: 'kontrollast' },
-  kungalv: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  kungalv: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   lund: { typ: 'manader_efter_beslut', antal: 13, datum: null, status: 'kontrollast' },
   nacka: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   norrtalje: { typ: 'manader_efter_arsmote', antal: 2, datum: null, status: 'kontrollast' },
@@ -51,7 +51,7 @@ const RULES: Record<string, ExpectedRule> = {
   umea: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   vallentuna: { typ: 'manader_efter_arsmote', antal: 3, datum: null, status: 'kontrollast' },
   varberg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
-  vaxjo: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  vaxjo: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
 };
 
 const FIXTURES: Fixture[] = [
