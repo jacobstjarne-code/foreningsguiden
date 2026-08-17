@@ -7,9 +7,16 @@ ansokningssystem:
   namn: FRI (föreningsregistret)
   url: https://fri.halmstad.se/bidrag/
 kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar.n1898.html
-verifierad: 2026-07-20
+verifierad: '2026-08-17'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/reglerforattkunnafaforeningsbidrag/riktlinjerochvillkorforforeningsbidrag.n1940.html
+giltighet_regel_status: kontrollast
 bidrag:
 - id: halmstad-aktivitetsbidrag
+  status: aktiv
   namn: Aktivitetsbidrag
   kategori:
   - idrott
@@ -25,17 +32,22 @@ bidrag:
   - Sammankomst ska ha minst tre deltagare plus ledare och vara minst 60 minuter
   - Årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse, verksamhetsplan och ledarguide ska finnas
   belopp: 34 kronor per bidragsberättigad sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget
     bidrag.'
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/aktivitetsbidrag.n1350.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Två ansökningsperioder per år: sammankomster 1 januari–30 juni ansöks senast 25 augusti, sammankomster 1 juli–31
     december ansöks senast 25 februari.'
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
 - id: halmstad-anlaggningsbidrag
+  status: aktiv
   namn: Anläggningsbidrag
   kategori:
   - idrott
@@ -50,23 +62,29 @@ bidrag:
   - Årlig återansökan krävs
   belopp: Max 220 000 kronor per anläggning. Beloppet varierar efter anläggningstyp (t.ex. fotbollsplan 3–6 kr/m², tennis
     3 500–7 000 kr/bana, golf 10 000–60 000 kr beroende på ungdomsandel)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget
     bidrag.'
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/anlaggningsbidrag.n1902.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
 - id: halmstad-driftbidrag-lokalhallande
+  status: aktiv
   namn: Driftbidrag till lokalhållande föreningar
   kategori:
   - ovrig
   malgrupp: Föreningar och stiftelser som äger eller förvaltar en egen lokal, tillgänglig för andra samhällsaktiviteter
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 03-31
   krav:
   - Föreningen måste först ansöka om och godkännas som lokalhållande förening
   - Förbinder sig att hyra ut lokalerna till t.ex. myndigheter, företag, privatpersoner och andra föreningar
@@ -74,16 +92,21 @@ bidrag:
   - Ska fastställa och årligen redovisa en fast hyrestaxa till kommunen
   belopp: 'Beräknas utifrån en fördelningsmodell: 50 procent av bidraget baseras på lokalyta, 25 procent på uthyrningsintäkter,
     25 procent på antal uthyrningstillfällen. Utöver detta avsätts 10 procent årligen till en renoverings- och underhållsfond'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/driftbidragtilllokalhallandeforeningar.n2364.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Inget ansökningsdatum publicerat i källan för själva driftbidraget (till skillnad från övriga bidrag med 25
-    februari-deadline).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan ska lämnas senast 31 mars. Tio procent av beviljat bidrag avsätts i föreningens renoverings- och underhållsfond.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - hembygd
+  - annat
 - id: halmstad-investeringsbidrag
+  status: aktiv
   namn: Investeringsbidrag
   kategori:
   - idrott
@@ -95,18 +118,26 @@ bidrag:
   krav:
   - Föreningen ska ha långsiktig tillgång till egen eller hyrd lokal/anläggning
   - Kan inte sökas i efterhand för något som redan är påbörjat eller klart
-  belopp: null
+  - Investeringen ska avse nybyggnation, förbättring, reparation eller orienteringskarta och får inte vara lös egendom
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast maxbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget
     bidrag.'
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/investeringsbidrag.n1904.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Täcker nybyggnation, förbättringsarbeten, reparationer samt orienteringskartor. Täcker inte lös egendom som
     båtar eller datorer.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
+  - friluft
+  - ungdom
 - id: halmstad-ledarutbildningsbidrag
+  status: aktiv
   namn: Ledarutbildningsbidrag
   kategori:
   - idrott
@@ -122,16 +153,22 @@ bidrag:
   - Ledarguide ska finnas
   belopp: Lägst 3 000 kronor garanterat om utbildningskostnaderna når det beloppet. Utöver det varierar beloppet utifrån antal
     sökande föreningar och antal rapporterade barn- och ungdomssammankomster
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget
     bidrag.'
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/ledarutbildningsbidrag.n1906.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser de senaste tolv månadernas utbildningskostnader. Kost och logi täcks inte.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
+  - ungdom
 - id: halmstad-lokalbidrag
+  status: aktiv
   namn: Lokalbidrag
   kategori:
   - idrott
@@ -146,38 +183,55 @@ bidrag:
   - Årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse, verksamhetsplan, hyreskontrakt och fakturor ska redovisas
   belopp: Cirka 40 procent av lokalkostnaden vid 40–200 sammankomster/år, cirka 60 procent vid 201–500, cirka 80 procent vid
     fler än 500. Max 75 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Inom tre veckor efter sista ansökningsdag: 10 procent avdrag på bidragssumman. Mer än tre veckor sen: inget
     bidrag.'
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/lokalbidrag.n1908.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
+  - kultur
+  - ungdom
 - id: halmstad-nolltaxa
+  status: aktiv
   namn: Nolltaxa – fri hyra för föreningar
   kategori:
   - idrott
   malgrupp: Föreningar med barn- och ungdomsverksamhet 0–20 år, samt grupper där majoriteten av deltagarna har en funktionsnedsättning
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Ska bedriva barn- och ungdomsverksamhet för 0–20-åringar (eller majoritet med funktionsnedsättning)
   - Vara registrerad i kommunens föreningsregister med årligen uppdaterade uppgifter
   - Ha antagit en ledarguide framtagen med RF-SISU
-  belopp: null
+  belopp: Fri hyra för aktivitetsytan under verksamhetstid; tilläggstjänster och ställtid ingår inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande bokning av lokaltid, inte ett ansökningsbidrag med deadline)
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/nolltaxafrihyraforforeningar.n2328.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kostnadsfri hyra gäller endast aktivitetsytan under verksamhetstid, inte tilläggstjänster eller ställtid. Registrerade
     föreningar får prioriterad bokning inför säsong.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: halmstad-spontanaktivitetsbidrag
+  status: aktiv
   namn: Spontanaktivitetsbidrag
   kategori:
   - idrott
@@ -190,15 +244,25 @@ bidrag:
   - Kostnadsfri för deltagarna, inget medlemskrav eller krav på regelbundet deltagande
   - Förhandsanmälan krävs minst tre veckor innan aktiviteten
   belopp: 300 kronor per timme
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar som kommer in senare än 30 dagar efter sista aktivitetstillfället beviljas inte
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/spontanaktivitetsbidrag.n1910.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Prioriteringskriterier: geografisk spridning, jämställdhet, underprioriterade områden, brottsförebyggande samverkan.'
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: halmstad-motesplatser-barn-unga
+  status: aktiv
   namn: Stöd till föreningsdrivna mötesplatser för barn och unga
   kategori:
   - ovrig
@@ -211,15 +275,23 @@ bidrag:
   - Minst två vuxna (18+) närvarande, max fem timmar per tillfälle
   - Föreningen står för verksamhetens kostnader
   belopp: 125 kronor per öppettimme vardagskvällar, 175 kronor per öppettimme fredag–lördag kväll. Max 20 000 kronor per termin
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillforeningsdrivnamotesplatserforbarnochunga.n2476.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kan sökas under hela året, för ett år i taget.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - kultur
+  - social
+  - ungdom
+  - annat
 - id: halmstad-samhallsforeningar
+  status: aktiv
   namn: Stöd till samhällsföreningar
   kategori:
   - ovrig
@@ -227,23 +299,28 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 12-01
+    - 11-30
   krav:
   - Ska vara en av kommunen godkänd samhällsförening
   - Ska fungera som länk mellan invånare och myndigheter
   - Ska främja lokal demokrati och gemenskap
-  belopp: null
+  belopp: Beloppet bestäms efter bedömning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillsamhallsforeningar.6521.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Ansökan avser kommande verksamhetsår, beslut meddelas i februari. Redovisning ska lämnas senast 30 april året
-    efter verksamhetsåret. I FRI-portalens egen sammanfattning beskrivs bidraget bredare: föreningar som verkar med demokrati-
-    och rättighetsfrågor, inklusive integrations-, jämställdhets- eller hbtq-perspektiv.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan avser kommande verksamhetsår. Beslut meddelas i februari och redovisning ska lämnas senast 30 april året efter verksamhetsåret.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - hembygd
+  - social
+  - annat
 - id: halmstad-seniorforeningar
+  status: aktiv
   namn: Stöd till seniorföreningar
   kategori:
   - pensionar
@@ -257,17 +334,23 @@ bidrag:
   - Ska uppfylla kommunens generella krav för föreningsbidrag
   - Ska bedriva ideell, allmännyttig verksamhet för kommunens invånare
   - Ska dokumentera antal betalande medlemmar föregående verksamhetsår
-  belopp: null
+  belopp: Medlemsbidrag som varierar med hemvårdsnämndens budget, antalet ansökningar och föreningens betalande medlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Sena eller ofullständiga ansökningar behandlas inte. Dispens kan ges vid särskilda skäl.
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillseniorforeningar.n2484.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidragets storlek beror på antalet betalande medlemmar föregående verksamhetsår och varierar utifrån hemvårdsnämndens
     budget. Beviljade bidrag betalas ut efter nämndens majmöte.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - social
+  - annat
 - id: halmstad-sociala-hjalp-funktionsratt
+  status: aktiv
   namn: Stöd till sociala hjälp- och funktionsrättsorganisationer
   kategori:
   - social
@@ -283,17 +366,25 @@ bidrag:
   - Ska ha antagna stadgar och vald styrelse
   - Minst 25 registrerade och avgiftsbetalande medlemmar senaste verksamhetsåret
   - Lokaler ska vara tillgängliga och tillgänglighetsanpassade
-  belopp: null
+  belopp: Beloppet bestäms efter bedömning av verksamhetens nytta inom socialnämndens område
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/stodtillsocialahjalpochfunktionsrattsorganisationer.n2482.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidragets storlek bestäms utifrån en bedömning av nyttan verksamheten tillför socialnämndens område. Beslut
     meddelas senast i slutet av januari, utbetalning senast 28 februari.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - idrott
+  - kultur
+  - social
+  - annat
 - id: halmstad-arrangemangs-projektstod-kultur
+  status: aktiv
   namn: Arrangemangs- och projektstöd inom kultur
   kategori:
   - kultur
@@ -308,16 +399,21 @@ bidrag:
   - Arrangemanget ska vara öppet för allmänheten och äga rum i Halmstads kommun
   - Avser engångsarrangemang/projekt, inte löpande verksamhet
   - Ansökan ska lämnas in senast sex veckor före arrangemangets genomförande
-  belopp: null
+  belopp: Ingen beloppsgräns publicerad; ansökans budget prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan utöver kravet att ansöka senast sex veckor före arrangemanget
   kalla_url: https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/arrangemangsochprojektstod.n2406.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Inget maxbelopp publicerat, men ansökningar som överstiger ett prisbasbelopp beslutas av kulturnämnden.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - kultur
 - id: halmstad-verksamhetsstod-kultur
+  status: aktiv
   namn: Verksamhetsstöd inom kultur
   kategori:
   - kultur
@@ -330,16 +426,21 @@ bidrag:
   - Ordinarie, kontinuerlig kulturverksamhet riktad till allmänheten
   - Verksamheten ska bedrivas i Halmstads kommun
   - Ska komplettera eller utveckla kommunens kulturutbud
-  belopp: null
+  belopp: Ingen beloppsgräns publicerad; ansökans budget prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/verksamhetsstodinomkultur.n2442.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Stöd beviljas för tre år åt gången. Redovisning ska lämnas senast 30 april varje år.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - kultur
 - id: halmstad-kulturstod-unga
+  status: aktiv
   namn: Kulturstöd för unga
   kategori:
   - kultur
@@ -354,41 +455,76 @@ bidrag:
   - Ska genomföras i drog- och alkoholfria miljöer
   - Max två beviljade ansökningar per person/grupp/organisation och år
   belopp: Max 40 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som kommer in senare än fyra veckor före projektet/arrangemanget beviljas inte
   kalla_url: https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/kulturstodforunga.n2391.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan ska lämnas in senast fyra veckor innan projektet genomförs. Bidraget täcker inte privat lön eller icke-nödvändig
     utrustning.
   senast_verifierad: '2026-08-03'
+  foreningstyp:
+  - kultur
+  - ungdom
 - id: halmstad-stod-studieforbund
+  status: aktiv
   namn: Stöd till studieförbund
   kategori:
   - kultur
   malgrupp: Statsbidragsberättigade studieförbund verksamma i Halmstads kommun
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Ska vara statsbidragsberättigat enligt Folkbildningsrådets definition
   - Ska bedriva publik eller utåtriktad kulturverksamhet i Halmstads kommun
   - Ska ha lämnat verksamhetsplan för kommande år
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Stödet fördelas 10%/8%/82% per kategori ur kommunalt anslag"
+  belopp_avser: ren_pott
+  kommunens_pott: "Kommunens anslag fördelas 10% som organisationsbidrag, 8% som tillgänglighetsbidrag och 82% som verksamhetsbidrag"
   sen_ansokan: Ej angivet i källan (framgår av ansökningsformuläret)
   kalla_url: https://www.halmstad.se/upplevaochgora/kultur/bidragochstodinomkulturochfolkbildning/stodtillstudieforbund.n2452.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Sista ansökningsdatum anges i ansökningsformuläret, inte publicerat på denna sida. Stödet fördelas: 10 procent
-    organisationsbidrag, 8 procent tillgänglighetsbidrag, 82 procent verksamhetsbidrag (varav 62 procent studiecirklar, 5
-    procent övrig folkbildning, 15 procent kulturprogram). Redovisning senast 30 april.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet fördelas som organisations-, tillgänglighets- och verksamhetsbidrag. Redovisning ska lämnas senast 30 april.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - kultur
+- id: halmstad-reservfonden-lokalhallande
+  status: aktiv
+  namn: Reservfonden för lokalhållande föreningar
+  kategori:
+  - ovrig
+  malgrupp: Godkända lokalhållande föreningar och stiftelser med medel avsatta i kommunens renoverings- och underhållsfond
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara godkänd som lokalhållande förening eller stiftelse
+  - Medlen ska användas till renovering eller underhåll av den lokal som omfattas av driftbidraget
+  - Fonden ska redovisas separat i föreningens eller stiftelsens bokslut
+  - Medel får inte tas ur fonden utan kommunens godkännande
+  belopp: Upp till föreningens tillgängliga fondsaldo, som byggs upp av 10 procent av beviljade driftbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej tillämpligt (löpande ansökan)
+  kalla_url: https://fri.halmstad.se/bidrag/ansokaninfo.aspx?type=81&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan är öppen löpande i kommunens bidragsportal.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - hembygd
+  - annat
 - id: halmstad-konstnarlig-utveckling
+  status: avskaffat
   namn: Stöd till konstnärlig utveckling
   kategori:
   - kultur
@@ -409,13 +545,10 @@ bidrag:
   deadline_status: olast
   krav_status: olast
   krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Riktar sig till en enskild kulturutövare
-    (enskild näringsidkare), inte till en förening som juridisk form, men söks i samma system (FRI) och listas i föreningsregistrets
-    egen bidragsöversikt tillsammans med kommunens föreningsbidrag — därför inte kategoriskt uteslutet enligt §2.3 (jämför
-    med Kulturstipendium, som är ett konkurrensutsatt pris/stipendium och därför är uteslutet). Redovisning av beviljade medel
-    ska lämnas inom två månader efter avslutat projekt.
-  senast_verifierad: '2026-08-03'
+  anteckning: Stödformen upphörde när kulturnämndens nya riktlinje för kulturstöd började gälla den 1 november 2025. Den riktade sig enbart till enskilda näringsidkare.
+  senast_verifierad: '2026-08-17'
 - id: halmstad-administrationsbidrag-vagforeningar
+  status: aktiv
   namn: Administrationsbidrag till vägföreningar
   kategori:
   - ovrig
@@ -427,67 +560,78 @@ bidrag:
   krav:
   - Sökande ska vara en registrerad vägförening
   - Bidraget avser föregående verksamhetsår
+  - Ansökan ska avse de gator som vägföreningen ansvarar för
   belopp: 1 461 kronor som fast belopp plus 0,72 kronor per meter väg. Max 9 129 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar som kommer in efter 30 november behandlas inte
   kalla_url: https://www.halmstad.se/trafikochinfrastruktur/vagarochgator/vagforeningarochvagsamfalligheter.n640.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Listas i ansökningssystemet FRI
-    (fri.halmstad.se/bidrag/ansokaninfo.aspx?type=80) men ansöks i praktiken via e-tjänsten för enskild väg (tjanster.halmstad.se/BVAG).
-    Administreras av Teknik- och fastighetsförvaltningen, utbetalas för föregående verksamhetsår.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas ut för föregående verksamhetsår.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - annat
 - id: halmstad-generellt-bidrag-vagsamfalligheter
+  status: aktiv
   namn: Generellt bidrag till vägsamfälligheter
   kategori:
   - ovrig
   malgrupp: Vägsamfälligheter i Halmstads kommun, med eller utan statsbidrag
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
   - Väg med minst 200 meters väglängd (för vägsamfälligheter utan statsbidrag)
   - Vägen ska vara öppen för allmän trafik och utgöra utfartsväg för helårsboende
+  - Vägsamfälligheter utan statsbidrag ska ansvara för väg som används för helårsboende eller det rörliga friluftslivet
   belopp: 'Med statsbidrag: mellanskillnaden mellan 90 procent av statligt bidragsunderlag och mottaget statsbidrag. Utan
     statsbidrag: 2,50 kronor per meter och år'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/trafikochinfrastruktur/vagarochgator/vagforeningarochvagsamfalligheter.n640.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Kallas 'Driftbidrag' i ansökningssystemet
-    FRI (fri.halmstad.se/bidrag/ansokaninfo.aspx?type=63) — inte att förväxla med 'Driftbidrag till lokalhållande föreningar'
-    (helt annat bidrag, se ovan). Ansöks via e-tjänsten för enskild väg (tjanster.halmstad.se/BVAG), administreras av Teknik-
-    och fastighetsförvaltningen. Ingen publicerad fast ansökningsdeadline hittad, till skillnad från administrationsbidraget
-    (30 november).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: För vägsamfälligheter med statsbidrag kan beloppet bli lägre om kommunens bidragsbudget är begränsad.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - annat
 - id: halmstad-sarskilt-bidrag-vagsamfalligheter
+  status: aktiv
   namn: Särskilt bidrag till vägsamfälligheter
   kategori:
   - ovrig
   malgrupp: Vägsamfälligheter i Halmstads kommun som vill genomföra ombyggnad för trafiksäkerhet eller framkomlighet
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
   - Avser ombyggnader för att öka trafiksäkerheten, i andra hand åtgärder för ökad tillgänglighet (t.ex. mötesplatser, förbättrad
     väggeometri)
   - Ger inte bidrag till standardförbättringar som förstärkning av överbyggnad, ny beläggning eller dikning
   - Lägsta bidragsbelopp som kan sökas är 10 000 kronor, motsvarande en projektkostnad på 20 000 kronor
   belopp: 50 procent av total projektkostnad, max 50 000 kronor per vägsamfällighet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/trafikochinfrastruktur/vagarochgator/vagforeningarochvagsamfalligheter.n640.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION — tillagd vid korrigerande omkörning 2026-07-20. Kallas 'Särskilt bidrag' i ansökningssystemet
-    FRI (fri.halmstad.se/bidrag/ansokaninfo.aspx?type=75). Betalas ut i efterskott efter projektkontroll. Ansöks via e-tjänsten
-    för enskild väg (tjanster.halmstad.se/BVAG), administreras av Teknik- och fastighetsförvaltningen.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas ut i efterskott när kostnaderna redovisats och projektet besiktigats och godkänts.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - annat
 - id: halmstad-stiftelser-fonder
+  status: aktiv
   namn: Stiftelser och fonder
   kategori:
   - ovrig
@@ -500,18 +644,23 @@ bidrag:
   krav:
   - Sökande (eller den ansökan avser) ska vara folkbokförd i Halmstads kommun; för föreningar/verksamheter krävs säte i kommunen
   - Ändamål, målgrupp och behörighet varierar per stiftelse — se respektive stiftelses villkor i kommunens sökfunktion
-  belopp: null
+  - Ansökan ska avse ett ändamål och en målgrupp som omfattas av den valda stiftelsens villkor
+  belopp: Beloppet varierar mellan stiftelserna och bestäms efter respektive stiftelses utdelningsbara avkastning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.halmstad.se/omsorgochstod/ekonomiochforsorjningsstod/sokapengarfranstiftelserochfonder.7474.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning — tillagd vid korrigerande omkörning 2026-07-20.
-    Kommunen förvaltar 52 stiftelser med skilda ändamål, varav flera riktar sig till fritidsföreningar och kulturorganisationer.
-    Skrivet som ETT samlat bidrag per RESEARCH_SPEC_v2.md §2.4 i stället för en post per stiftelse. Ansökningsperiod 1 maj–31
-    augusti, utdelning sker i mitten av december. Ansökan görs med BankID via separat e-tjänst (ej FRI).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden är 1 maj–31 augusti. Kommunen förvaltar 52 stiftelser med olika ändamål; flera kan ge stöd till föreningar och verksamheter.
+  senast_verifierad: '2026-08-17'
+  foreningstyp:
+  - kultur
+  - social
+  - ungdom
+  - annat
 forutsattningar:
 - id: halmstad-bidragsberattigad-forening
   vad: Registrera förening och bli bidragsberättigad i Halmstads kommun
@@ -523,7 +672,7 @@ forutsattningar:
   system: FRI (föreningsregistret)
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Föreningens uppgifter och årsmöteshandlingar ska uppdateras inom två månader efter genomfört årsmöte
   ordning: 1
   kalla_url: https://www.halmstad.se/upplevaochgora/foreningarochforeningsliv/bidragochstodtillforeningar/reglerforattkunnafaforeningsbidrag/riktlinjerochvillkorforforeningsbidrag.n1940.html
-  giltighet_status: okand
+  giltighet_status: kontrollast
