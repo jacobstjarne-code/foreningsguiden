@@ -2,12 +2,18 @@ kommun: Malmö
 kommun_slug: malmo
 lan: Skåne län
 befolkning: 368682
-forvaltning: Fritidsförvaltningen, kulturförvaltningen samt arbetsmarknads- och socialförvaltningen
+forvaltning: Fritidsförvaltningen, kulturförvaltningen, arbetsmarknads- och socialförvaltningen, funktionsstödsförvaltningen samt stadskontoret
 ansokningssystem:
-  namn: Malmö stads självservice / e-tjänster (Rbok införs för vissa bidrag)
-  url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Bidrag-och-stod.html
-kalla_url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Bidrag-och-stod.html
-verifierad: 2026-07-10
+  namn: Malmö stads självservice och Rbok
+  url: https://malmo.rbok.se/
+kalla_url: https://malmo.se/For-foreningar.html
+verifierad: '2026-08-17'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 1
+  datum: null
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+giltighet_regel_status: kontrollast
 bidrag:
 - id: malmo-aktivitetsstod
   namn: Aktivitetsstöd
@@ -18,153 +24,798 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 02-25
+    - 01-25
+    - 04-25
     - 08-25
+    - 10-25
   krav:
-  - Bidragsberättigad förening enligt fritidsnämndens riktlinjer för föreningsstöd
-  - Närvarorapportering per period; utbetalas per bidragsberättigad medlem som deltagit i godkänd aktivitet
-  belopp: null
+  - Minst fem bidragsberättigade deltagare krävs, eller tre vid verksamhet för personer med funktionsnedsättning
+  - Aktiviteten ska vara ledarledd och pågå minst 45 minuter
+  - Ledaren ska vara minst 13 år och närvarande hela aktiviteten
+  - Öppen, religiös och skoltidförlagd verksamhet räknas inte
+  belopp: 5,40 kr per deltagartillfälle för flickor 4–25 år och 4,90 kr för övriga bidragsberättigade medlemmar.
   sen_ansokan: Ej angivet i källan
   kalla_url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Viktiga-datum-att-ha-koll-pa.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Registrering och ansökan för perioden 1 jan–31 mar respektive 1 jul–30 sep. Kan ansökas en gång per kvartal
-    efter närvarorapportering.
-  senast_verifierad: '2026-08-03'
-- id: malmo-grundstod
-  namn: Grundstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar; grundtrygghet för föreningens verksamhet
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Bidragsberättigad förening enligt fritidsnämndens riktlinjer
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kan ansökas en gång per kvartal. Föreningar med kalenderår som räkenskapsår skickar in ansökan efter årsmötet;
-    brutet räkenskapsår har annan tidpunkt. Kan sökas som kontantbidrag eller konsulentstöd.
-  senast_verifierad: '2026-08-03'
-- id: malmo-lokalstod
-  namn: Lokalstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar med aktiviteter i egna eller hyrda lokaler i Malmö
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Bidragsberättigad förening; avser lokalkostnader under föregående år
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kan ansökas en gång per år för föregående års lokalkostnader.
-  senast_verifierad: '2026-08-03'
-- id: malmo-evenemangsbidrag
-  namn: Evenemangsbidrag (mindre/större)
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Bidragsberättigade föreningar som arrangerar publika evenemang i Malmö
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - 'Mindre evenemangsbidrag: ansökan senast 60 dagar före start'
-  - 'Större evenemangsbidrag: ansökan senast 90 dagar före start; ska följa stadens evenemangsstrategi'
-  belopp: null
-  sen_ansokan: Ansökan efter angiven frist (60/90 dagar) behandlas ej
-  kalla_url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: malmo-grundstod
+  namn: "Grundstöd"
+  kategori: ["idrott", "kultur", "social", "ovrig"]
+  malgrupp: "Bidragsberättigade Malmöföreningar med medlems- och aktivitetsunderlag"
+  deadlines: {typ: fasta, datum: ["03-01", "09-01"]}
+  krav:
+  - Kontant stöd kräver minst 25 bidragsberättigade medlemmar och 50 deltagartillfällen
+  - Varje räknad medlem ska ha deltagit minst två gånger
+  - Föreningen väljer kontantbidrag, konsulentstöd eller en kombination
+  - Föreningar med verksamhetsstöd för mötesplats omfattas inte
+  belopp: "114 kr per medlem och år, högst 22 833 kr; vid minst 181 medlemmar och 2 640 deltagartillfällen 172 kr per medlem, högst 34 248 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-lokalstod
+  namn: "Lokalstöd"
+  kategori: ["idrott", "kultur", "social", "ovrig"]
+  malgrupp: "Bidragsberättigade Malmöföreningar med egna eller hyrda lokaler"
+  deadlines: {typ: fasta, datum: ["04-15", "10-15"]}
+  krav:
+  - Lokalen ska vara egen eller hyrd och finnas i Malmö
+  - Kostnader ska styrkas med avtal, fakturor och betalningsbevis
+  - Brandskyddsintyg ska lämnas
+  - Stadssubventionerade lokaler och stödda mötesplatser omfattas inte
+  belopp: "10 000 kr plus 150 kr per medlem, högst 75 procent av godkänd årskostnad."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-evenemangsbidrag
+  namn: "Mindre evenemangsstöd"
+  kategori: ["idrott", "kultur", "ovrig"]
+  malgrupp: "Bidragsberättigade föreningar med mindre publika evenemang"
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Ansökan ska lämnas minst 60 dagar före evenemanget
+  - Evenemanget ska vara offentligt och bredare än medlemskretsen
+  - Evenemangsstrategi och demokratiska värderingar ska följas
+  - Realistisk budget krävs
+  belopp: "Högst 15 000 kr och 75 procent av kostnaderna; högst två stöd per år."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
 - id: malmo-projektstod-kultur
-  namn: Projektstöd inom kultur (kulturförvaltningen)
-  kategori:
-  - kultur
-  malgrupp: Kulturaktörer och föreningar för arrangemang och projekt inom kulturområdet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-02
-    - 09-04
+  namn: "Projektstöd för publika kulturarrangemang"
+  kategori: ["kultur"]
+  malgrupp: "Malmöbaserade kulturföreningar med publika arrangemang"
+  deadlines: {typ: fasta, datum: ["02-02", "09-04"]}
   krav:
-  - Organisationens styrelse ansvarar för ansökan; ansökan via kulturförvaltningens e-tjänster
-  - Rimlig och realistisk budget; det konstnärliga innehållet vägs in
-  belopp: Upp till 250 000 kr per ansökan (2026)
-  sen_ansokan: Ansökan utanför ansökningsperioden behandlas ej
+  - Sökanden ska vara en registrerad juridisk kulturorganisation i Malmö
+  - Arrangemanget ska vara öppet för allmänheten och genomföras i Malmö
+  - Verksamheten ska huvudsakligen vara professionell och konstnärlig
+  - Ordning på ekonomi, stadgar, styrelse och revision krävs
+  belopp: "Högst 250 000 kr per ansökan."
+  sen_ansokan: Ej angivet i källan
   kalla_url: https://malmo.se/For-foretag-och-verksamheter/Stod-till-kulturskapare/Stod-till-kulturorganisationer-och-studieforbund/Projektstod-inom-kultur.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Två perioder/år. 2026: vår 9 jan–2 feb, höst 14 aug–4 sep. Beslut vanligen inom 6–8 veckor efter sista ansökningsdag.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["kultur"]
 - id: malmo-verksamhetsstod-kultur
-  namn: Verksamhetsstöd till kulturorganisationer
-  kategori:
-  - kultur
-  malgrupp: Fristående kulturorganisationer i Malmö registrerade med organisationsnummer
-  deadlines:
-    typ: fasta
-    datum:
-    - 06-30
+  namn: "Verksamhetsstöd till kulturorganisationer"
+  kategori: ["kultur"]
+  malgrupp: "Etablerade fristående kulturorganisationer i Malmö"
+  deadlines: {typ: fasta, datum: ["06-09"]}
   krav:
-  - Registrerad juridisk person (ideell/ekonomisk förening, stiftelse eller bolag)
-  belopp: null
+  - Sökanden ska vara en registrerad juridisk kulturorganisation i Malmö
+  - Verksamheten ska vara etablerad och betydelsefull för Malmös kulturliv
+  - Verksamheten ska omfatta hela året och vara professionellt konstnärlig
+  - Ordning på ekonomi, stadgar, styrelse och revision krävs
+  belopp: "Bestäms individuellt efter verksamhet, ekonomi och kulturpolitisk betydelse."
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://sjalvservice.malmo.se/oversikt/overview/658
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Sista ansökningsdag 30 juni.
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://malmo.se/For-foretag-och-verksamheter/Stod-till-kulturskapare/Stod-till-kulturorganisationer-och-studieforbund/Verksamhetsstod-till-kulturorganisationer.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["kultur"]
 - id: malmo-socialt-bidrag
-  namn: Bidrag till idéburna organisationer inom det sociala området
-  kategori:
-  - social
-  malgrupp: Idéburna organisationer med verksamhet inom det sociala området
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: "Organisationsbidrag inom det sociala området"
+  kategori: ["social", "ovrig"]
+  malgrupp: "Ideella organisationer med social verksamhet för Malmöbor"
+  deadlines: {typ: fasta, datum: ["12-15"]}
   krav:
-  - Verksamhet inom arbetsmarknads- och socialnämndens ansvarsområde
-  belopp: null
+  - Organisationen ska vara ideell, obunden och registrerad sedan minst ett år
+  - Verksamheten ska rikta sig till en social målgrupp i Malmö
+  - Organisationen ska vara demokratisk, följa mänskliga rättigheter och sakna skulder
+  - Verksamhetsplan, budget och årshandlingar krävs
+  belopp: "Högst 1 000 000 kr per ansökan."
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://malmo.se/For-foreningar/Bidrag-till-ideburna-organisationer-inom-det-sociala-omradet.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Organisationsbidrag och verksamhetsbidrag via arbetsmarknads- och socialnämnden.
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://malmo.se/For-foreningar/Bidrag-till-ideburna-organisationer-inom-det-sociala-omradet/Vilka-bidrag-kan-vi-ansoka.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-lonebidragsanstallda
+  namn: "Stöd till lönebidragsanställda"
+  kategori: ["social"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["01-15", "04-15", "07-15", "10-15"]}
+  krav:
+  - Giltigt Arbetsförmedlingsbeslut
+  - Registrerad skuldfri arbetsgivare
+  - God arbetsmiljö och lämpliga uppgifter
+  belopp: "Bestäms individuellt."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-drop-in
+  namn: "Drop-in-stöd"
+  kategori: ["ovrig"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["09-01"]}
+  krav:
+  - Gratis och öppet utan medlemskrav
+  - Normalt utanför skoltid
+  - Ordinarie eller religiös verksamhet omfattas inte
+  belopp: "Högst 50 000 kr per år."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-storre-evenemang
+  namn: "Större evenemangsstöd"
+  kategori: ["kultur"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Ansökan 90 dagar före start
+  - Offentligt och enligt evenemangsstrategin
+  - Hållbar plan och balanserad budget
+  belopp: "Upp till 100 procent av kostnaderna."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-lovstod
+  namn: "Lovstöd"
+  kategori: ["ovrig"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["04-01", "09-01", "12-01"]}
+  krav:
+  - Gratis och öppet utan medlemskrav
+  - Högst fem timmar per dag
+  - Ordinarie eller religiös verksamhet omfattas inte
+  belopp: "Bestäms individuellt."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-jamstalldhetsstod
+  namn: "Jämställdhetsstöd"
+  kategori: ["social", "ovrig"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Bidragsberättigad förening
+  - Flickor och ickebinära 12–25 år
+  - Aktivera målgruppen eller utveckla ledare
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-kulturprojekt-utveckling
+  namn: "Projektstöd för utvecklingsprojekt inom kultur"
+  kategori: ["kultur"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["02-02", "09-04"]}
+  krav:
+  - Juridisk kulturorganisation i Malmö
+  - Utvecklar metoder, nätverk eller samarbeten
+  - Avgränsat professionellt projekt
+  belopp: "Högst 250 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/For-foretag-och-verksamheter/Stod-till-kulturskapare/Stod-till-kulturorganisationer-och-studieforbund/Projektstod-inom-kultur.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-kulturprojekt-medskapande
+  namn: "Projektstöd för medskapande kultur"
+  kategori: ["kultur", "social"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["02-02", "09-04"]}
+  krav:
+  - Juridisk kulturorganisation i Malmö
+  - Samarbete med lokala grupper
+  - Malmöbor skapar konst på fritiden
+  belopp: "Högst 250 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/For-foretag-och-verksamheter/Stod-till-kulturskapare/Stod-till-kulturorganisationer-och-studieforbund/Projektstod-inom-kultur.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-stod-studieforbund
+  namn: "Stöd till studieförbund"
+  kategori: ["kultur"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["12-15"]}
+  krav:
+  - Godkänt av Folkbildningsrådet
+  - Lokal folkbildning i Malmö
+  - Ingen dubbelräkning med aktivitetsstöd
+  belopp: "80 procent efter plan och 20 procent enligt fördelningsverktyg."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/For-foretag-och-verksamheter/Stod-till-kulturskapare/Stod-till-kulturorganisationer-och-studieforbund/Projektstod-inom-kultur.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-kultur-mot-rasism
+  namn: "Projektstöd för kulturprojekt som motverkar rasism och diskriminering"
+  kategori: ["kultur", "social"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Juridisk person i Malmö
+  - Konstnärligt motverka rasism
+  - Lokalt projekt på högst ett år
+  belopp: "Högst 150 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/For-foretag-och-verksamheter/Stod-till-kulturskapare/Stod-till-kulturorganisationer-och-studieforbund/Projektstod-inom-kultur.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: "1 000 000 kronor 2026"
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-organisationsstod-funktionsstod-aldre
+  namn: "Organisationsstöd inom funktionsstöds- och äldreområdet"
+  kategori: ["social"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["05-31"]}
+  krav:
+  - Ideell organisation i Malmö
+  - Kompletterar staden för äldre eller funktionsnedsatta
+  - Demokrati, årshandlingar och skuldfrihet
+  belopp: "Bestäms individuellt."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-verksamhetsbidrag-socialt
+  namn: "Verksamhetsbidrag inom det sociala området"
+  kategori: ["social"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["12-15"]}
+  krav:
+  - Ideell organisation
+  - Social målgrupp i Malmö
+  - Tydliga mål, budget och uppföljning
+  belopp: "Högst 1 000 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-verksamhetsstod-hallbarhet
+  namn: "Verksamhetsstöd inom hållbarhetsområdet"
+  kategori: ["social"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["10-31"]}
+  krav:
+  - Civilsamhällesorganisation
+  - Bidrar till hållbar utveckling
+  - Demokratisk och ekonomiskt redovisad
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-verksamhetsstod-naringsliv-kompetens
+  namn: "Verksamhetsstöd inom näringsliv och kompetensförsörjning"
+  kategori: ["ovrig"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["10-31"]}
+  krav:
+  - Civilsamhällesorganisation
+  - Utvecklar näringsliv eller kompetens
+  - Följer bidragsreglerna
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-ung-i-sommar-handledare
+  namn: "Handledarersättning inom Ung i sommar"
+  kategori: ["social", "ovrig"]
+  malgrupp: "Malmöföreningar och organisationer som uppfyller stödets villkor"
+  deadlines: {typ: fasta, datum: ["03-01"]}
+  krav:
+  - Ideell organisation
+  - Meningsfulla uppgifter åt 16–19-åringar
+  - Handledare, trygg miljö och närvarorapportering
+  belopp: "31 142 kr per heltidsanställd handledare."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["idrott", "kultur", "ungdom", "social", "annat"]
+- id: malmo-stiftelse-henningsson
+  namn: "Anna och M Henningssons fond"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Insatsen ska avse hjälp till äldre
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Bo-och-leva/Stod-och-omsorg/Forsorjning-och-ekonomi/Stiftelser-och-bidrag/Malmo-stads-stiftelser.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-ernst-kruse
+  namn: "Ernst Kruses fond"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["04-30"]}
+  krav:
+  - Insatsen ska avse välgörande allmännytta
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Bo-och-leva/Stod-och-omsorg/Forsorjning-och-ekonomi/Stiftelser-och-bidrag/Malmo-stads-stiftelser.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-trolle-hervander
+  namn: "Trolle och Hervanders donation för barn och ungdom"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["04-30"]}
+  krav:
+  - Insatsen ska avse stöd och förebyggande fritid för barn
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Bo-och-leva/Stod-och-omsorg/Forsorjning-och-ekonomi/Stiftelser-och-bidrag/Malmo-stads-stiftelser.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-aldres-valbefinnande
+  namn: "Malmö stads samfond för äldres välbefinnande"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Insatsen ska avse välbefinnande i särskilt boende
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Bo-och-leva/Stod-och-omsorg/Forsorjning-och-ekonomi/Stiftelser-och-bidrag/Malmo-stads-stiftelser.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-dhuner
+  namn: "Disponent Hjalmar Dhunérs stiftelse"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["03-15"]}
+  krav:
+  - Insatsen ska avse elever med särskilda behov
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://sjalvservice.malmo.se/oversikt/overview/464
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-sociala-samfond-barn
+  namn: "Malmö stads sociala samfond för barn"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["03-15"]}
+  krav:
+  - Insatsen ska avse barns goda utveckling
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://sjalvservice.malmo.se/oversikt/overview/464
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-bengt-johnsson
+  namn: "Rektor Bengt Johnssons minnesstiftelse"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["03-15"]}
+  krav:
+  - Insatsen ska avse elever med funktionsnedsättning
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://sjalvservice.malmo.se/oversikt/overview/464
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-cg-nilsson
+  namn: "Rektor C.G. Nilssons stiftelse"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["03-15"]}
+  krav:
+  - Insatsen ska avse elever med funktionsnedsättning
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://sjalvservice.malmo.se/oversikt/overview/464
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-stiftelse-valborg-nilsson
+  namn: "Valborg Nilssons minnesstiftelse"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["03-15"]}
+  krav:
+  - Insatsen ska avse naturutflykter för barn
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "Kommunen anger inget fast belopp."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://sjalvservice.malmo.se/oversikt/overview/464
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-manskliga-rattigheter-pris
+  namn: "Malmö stads pris för mänskliga rättigheter"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["09-30"]}
+  krav:
+  - Insatsen ska avse insatser för mänskliga rättigheter
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "50 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Om-Malmo-stad/Priser-och-anslag/Malmo-stads-pris-for-manskliga-rattigheter.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-foreningspris-hallbarhet
+  namn: "Föreningspris för ideella insatser för en hållbar stad"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["09-30"]}
+  krav:
+  - Insatsen ska avse ideella hållbarhetsinsatser
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "30 000 kr och diplom."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Om-Malmo-stad/Priser-och-anslag/Priser-inom-miljo-och-hallbarhet.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-eleonorapriset
+  namn: "Eleonorapriset"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: fasta, datum: ["10-01"]}
+  krav:
+  - Insatsen ska avse funktionsrätt och tillgänglighet
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "10 000 kr, gåva och diplom."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Om-Malmo-stad/Priser-och-anslag/Eleonorapriset---pris-inom-LSS.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-foreningsgalan-arets-forening
+  namn: "Årets förening vid Föreningsgalan"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Insatsen ska avse framgångsrik ideell förening
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "25 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Foreningsgalan/Nominera-till-Foreningsgalan.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-foreningsgalan-idrottsforening
+  namn: "Årets idrottsförening vid Föreningsgalan"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Insatsen ska avse framgångsrik idrottsförening
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "25 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Foreningsgalan/Nominera-till-Foreningsgalan.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-foreningsgalan-friskus
+  namn: "Årets Friskuspris vid Föreningsgalan"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Insatsen ska avse insatser för personer med funktionsnedsättning
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "25 000 kr."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Foreningsgalan/Nominera-till-Foreningsgalan.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
+- id: malmo-foreningsgalan-unga-ledare
+  namn: "Årets unga ledare – föreningspriset"
+  kategori: [ovrig]
+  malgrupp: Malmöföreningar som uppfyller villkoren
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Insatsen ska avse utveckling av unga ledare
+  - Föreningen ska lämna en fullständig beskrivning och motivering
+  - Begärda verksamhets- och ekonomihandlingar ska lämnas
+  belopp: "25 000 kr när priset går till en förening."
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://malmo.se/Foreningsgalan/Nominera-till-Foreningsgalan.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: ["social", "ungdom", "annat"]
 forutsattningar:
 - id: malmo-bidragsberattigad
   vad: Registrera föreningen som bidragsberättigad
   beskrivning: Föreningen måste registreras och uppfylla kraven enligt fritidsnämndens riktlinjer för föreningsstöd innan
     något bidrag kan sökas. Observera att varje enskilt bidrag dessutom har egna krav.
-  system: Malmö stads självservice
+  system: Rbok
   ledtid: null
   ledtid_text: Kommunen anger ingen handläggningstid
-  giltighet: null
+  giltighet: Justerat årsmötesprotokoll ska lämnas inom 30 dagar efter årsmötet och obligatoriska årshandlingar ska lämnas varje år.
   ordning: 1
-  kalla_url: https://malmo.se/For-foreningar/Foreningsliv---Idrott-och-fritid/Bidrag-och-stod.html
-  giltighet_status: okand
+  kalla_url: https://motenmedborgarportal.malmo.se/welcome-sv/namnder-styrelser/fritidsnamnden/mote-2025-11-20/agenda/foreningsstod-2026-efter-aupdf?downloadMode=open
+  giltighet_status: kontrollast
