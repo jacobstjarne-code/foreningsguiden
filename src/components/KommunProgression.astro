@@ -15,8 +15,9 @@ import {
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
-import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
+import { genereraRegistreringsUtkast, genereraUtkast } from '../lib/utkastGenerator';
 import { harvestBilagor } from '../lib/kopDokument';
+import type { Foreningsprofil } from '../lib/foreningsprofil';
 import UrgencyChip from './UrgencyChip.astro';
 import VantelistaFlode from './VantelistaFlode.astro';
 
@@ -118,15 +119,19 @@ const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(pris
 const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning;
 
 // Uppföljning 2026-08-03 (punkt 4) + ÅTGÄRDSSPEC D1/T5 (samma kväll):
-// köprutan får inte sälja på ett bidrag utan krav att strukturera —
-// genereraUtkast()/K1-K4 är helt byggt kring krav-täckning. D1 (delad
-// definition): kravdata "finns" bara när krav_status = verifierad OCH
-// minst tre krav är listade — olast/okand/ingen_regel duger inte, och
-// inte heller ett verifierat fält med 1-2 krav (för ofta en kollapsad
-// sammanfattning, se D1:s motivering). Spärren väljer FÖRSTA kandidaten
-// i filtret som klarar D1, hellre än att tyst sälja mot en ofullständig
-// lista eller dölja köprutan helt bara för att den allra första träffen
-// inte klarar D1.
+// köprutan får inte sälja på ett bidrag utan krav att strukturera.
+// M3 (Jacob 2026-08-17): D1 mätte KRAVDATANS EXISTENS (krav_status
+// kontrollast + minst tre krav) — men inte om checklistan faktiskt går
+// att fylla i något åt en riktig besökare. De två frågorna såg lika ut
+// så länge M2.4:s riktiga spärr (genereraUtkast/luckor) bara satt på
+// /utkast/-sidan: kommunsidan visade "Lås upp hela underlaget" för
+// bidrag som sedan blockerades i samma ögonblick besökaren klickade
+// sig vidare dit — bekräftat på 12 av Gislaveds 14 bidrag vid M3-
+// granskningen, samtliga med krav_status=kontrollast och ≥3 krav men
+// noll ifyllbara rader. arSaljbar (nedan) ersätter D1 med samma
+// genereraUtkast-kontroll som /utkast/-sidan gör, körd med en
+// konservativ profil (se SALJBARHETSPROFIL) eftersom kommunsidan
+// byggs statiskt utan besökarens sparade svar.
 // F8 (2026-08-12, Jacob): F②:s ankringsrad fanns bara på utkastvyn — EFTER
 // köpbeslutet, inte före. Köprutan HÄR (station 5) är den faktiska
 // beslutspunkten (samma KOPRUTA-konstant, samma länk till utkastvyn).
@@ -139,10 +144,32 @@ const vardeankring = (bidrag: Kommun['bidrag'][number]) =>
     ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring, bidrag.namn).replace('{belopp}', individuelltBelopp(bidrag) ?? '')
     : null;
 
+// M3 — konservativ profil för sidans EGEN sälbarhetskontroll (statisk
+// byggtid, ingen besökarprofil finns). kommunSlug=DENNA kommun räcker
+// för Regel A (säte, matching.ts fyllKrav) att fylla i något. Tom
+// verksamhet missar Regel B, men den "förväntas nästan aldrig träffa"
+// (matching.ts kommentar) — undervärderar hellre än lovar för mycket.
+const SALJBARHETSPROFIL: Foreningsprofil = {
+  kommunSlug: kommun.kommun_slug,
+  verksamhet: [],
+  storlek: null,
+  alder: null,
+  sokt: 'ja',
+  uppdaterad: '',
+  foreningsnamn: null,
+  giltighet: null,
+  bevakadeBidrag: [],
+};
+
+function arSaljbar(bidrag: Kommun['bidrag'][number]): boolean {
+  const resultat = genereraUtkast(SALJBARHETSPROFIL, bidrag, kommun);
+  return resultat.typ === 'bidragsutkast' && resultat.kravRader.length > 0 && resultat.luckor < resultat.kravRader.length;
+}
+
 type Station5Entry = { beskrivning: string; href: string; vardeankring: string | null } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
   filterValues.map((filter) => {
-    const kandidat = bidragForFilter(filter).find((k) => k.bidrag.krav_status === 'kontrollast' && k.bidrag.krav.length >= 3);
+    const kandidat = bidragForFilter(filter).find((k) => arSaljbar(k.bidrag));
     if (!kandidat) return [filter, null];
     return [filter, {
       beskrivning: fyllKopruta(kopRutaBeskrivningMall, kandidat.bidrag.namn),
@@ -391,17 +418,21 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
          btn-primary. */}
       <div class="progression__kopruta" data-progression-kopruta hidden={!station5Alla}>
         <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
-        {/* F① (F8, 2026-08-12) — server-sant genast, klientskriptet
-           uppgraderar till kommunens köpantal om det når SOCIALT_BEVIS_GOLV. */}
-        <p class="progression__kopruta-socialt-bevis" data-progression-kopruta-socialt-bevis>{socialtBevisFallback}</p>
         <p data-progression-kopruta-beskrivning>{station5Alla?.beskrivning}</p>
         <p>{KOPRUTA.leverans}</p>
         <p>{kopRutaPrisOchKvitto}</p>
         {/* F② (F8) — bara när D1-kandidaten har ett kontrollast belopp. */}
         <p class="progression__kopruta-vardeankring" data-progression-kopruta-vardeankring hidden={!station5Alla?.vardeankring}>{station5Alla?.vardeankring}</p>
         <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
+        {/* M3 (Jacob 2026-08-17): F① flyttad hit, intill köpet — låg
+           tidigare mellan rubriken och leveransbeskrivningen och lästes
+           som en punkt i "vad ni får" i stället för socialt bevis för
+           själva köpet. F① (F8, 2026-08-12) — server-sant genast,
+           klientskriptet uppgraderar till kommunens köpantal om det når
+           SOCIALT_BEVIS_GOLV. */}
+        <p class="progression__kopruta-socialt-bevis" data-progression-kopruta-socialt-bevis>{socialtBevisFallback}</p>
         <a href={station5Alla?.href ?? '#'} class="fg-btn--ghost progression__goal-cta" data-progression-kopruta-cta>
-          Lås upp hela underlaget — {prisKr} kr
+          Lås upp hela checklistan — {prisKr} kr
         </a>
       </div>
       {filterValues.map((filter) => {

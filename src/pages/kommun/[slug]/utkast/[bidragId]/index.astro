@@ -145,11 +145,6 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
     <div class="utkastvy__kopram" data-utkastvy-kopram hidden>
       <h2 class="utkastvy__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
 
-      {/* F① — server-sant genast (arbetsbeviset), klientskriptet
-         uppgraderar till kommunens köpantal om det når SOCIALT_BEVIS_GOLV.
-         Aldrig tom medan fetchen pågår. */}
-      <p class="utkastvy__socialt-bevis" data-utkastvy-socialt-bevis>{socialtBevisFallback}</p>
-
       <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
       <p data-utkastvy-luckor-rad hidden></p>
 
@@ -174,9 +169,17 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
          (samma {{FABLE:}}-läge som PRIS.abonnemang.beskrivning). */}
       {ABONNEMANG_LEVERANS_LIVE && null}
 
+      {/* M3 (Jacob 2026-08-17): F① flyttad hit, intill priset/knappen —
+         låg tidigare mellan rubriken och dokumentbeskrivningen och
+         lästes som en punkt i "vad ni får" i stället för socialt bevis
+         för själva köpet. Server-sant genast (arbetsbeviset),
+         klientskriptet uppgraderar till kommunens köpantal om det når
+         SOCIALT_BEVIS_GOLV. Aldrig tom medan fetchen pågår. */}
+      <p class="utkastvy__socialt-bevis" data-utkastvy-socialt-bevis>{socialtBevisFallback}</p>
+
       <p class="utkastvy__pris">{prisKr} kr</p>
       <button type="button" class="btn-primary" data-utkastvy-betala>
-        Lås upp hela utkastet — {prisKr} kr
+        Lås upp hela checklistan — {prisKr} kr
       </button>
       <p data-utkastvy-fel class="utkastvy__fel" hidden>Något gick fel. Försök igen.</p>
       <p class="utkastvy__ansvar" data-utkastvy-ansvar></p>

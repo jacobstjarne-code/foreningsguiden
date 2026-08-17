@@ -454,7 +454,9 @@ export const VAGLEDNING = {
     intro: 'Ansökan bedöms mot kommunens egna kriterier. Vi samlar dem på ett ställe, i den ordning kommunen vill ha dem, med det ni redan fyllt i här ifyllt.',
     faltStatus: '{ifyllda} av {totalt} fält är redan ifyllda',
     knapp: 'Skapa ansökan',
-    ansvar: 'Vi ställer i ordning underlaget. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
+    // M3 (Jacob 2026-08-17, auditens P0.7): "underlag" bytt mot
+    // "ansökningschecklista" — se KONVERTERINGSSTAPEL ovan för samma byte.
+    ansvar: 'Vi ställer i ordning ansökningschecklistan. Ansökan lämnar ni in själva, och beslutet fattar kommunen.',
   },
 };
 
@@ -886,9 +888,11 @@ export const KOPRUTA = {
  */
 export const KONVERTERINGSSTAPEL = {
   // F① — sant-gren när kommunens köpantal når SOCIALT_BEVIS_GOLV (kopKlient.ts).
-  socialtBevis: '{antal} föreningar i {kommun} har redan köpt ett underlag hos oss.',
+  // M3 (Jacob 2026-08-17, auditens P0.7): "underlag"/"utkast" bytt mot
+  // "ansökningschecklista" — produktens namn, inte en synonym per ställe.
+  socialtBevis: '{antal} föreningar i {kommun} har redan köpt en ansökningschecklista hos oss.',
   // F② — kräver bidrag.belopp_status === 'kontrollast'.
-  vardeankring: '{kommun} kommun anger {belopp} för {bidrag}. Utkastet kostar {pris} kr.',
+  vardeankring: '{kommun} kommun anger {belopp} för {bidrag}. Checklistan kostar {pris} kr.',
   // F③ — kräver bidrag.deadlines.typ === 'fasta' (årligt återkommande
   // MM-DD-datum utan år, se DEADLINE_TYPER i kommunTyper.ts — 'lopande'/
   // 'relativ'/'okand' har inget "om ett år" som är sant).
