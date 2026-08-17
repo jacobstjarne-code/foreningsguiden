@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Kommunens e-tjänst eller blankett
   url: https://morakommun.se/uppleva-och-gora/foreningar-och-foreningsstod/soka-foreningsstod.html
 kalla_url: https://morakommun.se/uppleva-och-gora/foreningar-och-foreningsstod/soka-foreningsstod.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-17'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://morakommun.se/download/18.6b65e58a18ced773dbf99f/1704803441564/Regler%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: mora-arsbidrag
   namn: Årsbidrag
@@ -24,6 +30,9 @@ bidrag:
     datum:
     - 09-30
   krav:
+  - Föreningen ska ha ansvarig styrelse, revisorer och antagna stadgar godkända av riksorganisation eller kommunen
+  - Föreningen ska vara ideell, ha sitt säte och huvuddelen av sina medlemmar i Mora kommun
+  - Föreningen ska ha minst 10 aktiva medlemmar, organisationsnummer och ta ut medlemsavgift
   - Verksamhetsberättelse med resultat- och balansrapport från senaste årsmötet
   - Revisionsberättelse från senaste årsmötet
   - Verksamhetsplan och budget för kommande verksamhetsår
@@ -35,7 +44,17 @@ bidrag:
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Samlat årligt stöd som kan omfatta kontantstöd och subventionerade lokalhyror.
 - id: mora-sarskilt-bidrag
   namn: Särskilt bidrag
@@ -50,16 +69,28 @@ bidrag:
     datum:
     - 04-30
   krav:
+  - Föreningen ska uppfylla kommunens grundvillkor för föreningsstöd
   - Kan endast sökas av föreningar som redan har årsbidrag
   - Avser verksamhet som inte kunnat förutses när överenskommelsen om årsbidrag gjordes (t.ex. nystartad verksamhet, projekt
     eller oförutsedda händelser i föreningsägd anläggning)
+  - Ansökan ska avse verksamhet eller en händelse under innevarande år
   belopp: Inget fast belopp - beslutas individuellt av kultur- och fritidsnämnden
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://morakommun.se/uppleva-och-gora/foreningar-och-foreningsstod/soka-foreningsstod/arsbidrag.html
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: För oförutsedda händelser, nystartad verksamhet, projekt eller särskilda aktiviteter för föreningar med årsbidrag.
 - id: mora-arrangemangsbidrag
   namn: Arrangemangsbidrag
@@ -72,11 +103,14 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska vara godkänd för föreningsstöd och uppfylla kommunens grundvillkor
   - Beräknad budget för arrangemanget med kostnader och intäkter ska bifogas ansökan
   - Arrangemanget ska äga rum i Mora kommun och vara offentligt, öppet för alla
   - Ansökan ska lämnas in minst två månader före planerat arrangemang
   - Arrangemanget ska marknadsföras, bland annat i kommunens evenemangskalender
   - Redovisning ska lämnas efter genomfört arrangemang som underlag för utbetalning
+  - Stöd ges inte till mästerskap, tävlingar eller arrangemang med religiös eller politisk inriktning
+  - Bidraget kan inte sökas för arrangemang som föreningen redan får årsbidrag för
   belopp: Förlustgaranti med maxbelopp utifrån beräknad förlust; lokalsubvention för eventlokal högst 50 procent av lokalkostnaden
     eller max 10 000 kronor per arrangemang
   sen_ansokan: Kontakta kommunen om ansökningsförfarandet
@@ -84,7 +118,17 @@ bidrag:
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: Ansökan ska lämnas senast två månader före arrangemanget; stödet fungerar som förlustgaranti.
 - id: mora-kulturarvsbidrag
   namn: Kulturarvsbidrag
@@ -95,17 +139,24 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska uppfylla kommunens grundvillkor för föreningsstöd
   - Plan med budget för genomförandet ska bifogas ansökan
   - Vid kulturarvsantikvariska insatser ska planen vara framtagen i samråd med yrkesverksam antikvarie eller motsvarande
   - Insatsen ska äga rum i Mora kommun och skapa mervärde för trakten
   - Projektet ska redovisas inom två månader efter avslutat projekt, annars ska bidraget återbetalas
+  - Stöd ges inte till byggnadsantikvariska insatser
   belopp: Inget fast belopp - betalas ut helt eller delvis beroende på projektets omfattning
   sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
   kalla_url: https://morakommun.se/uppleva-och-gora/foreningar-och-foreningsstod/soka-foreningsstod/kulturarvsbidrag.html
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
+  - hembygd
   anteckning: Kontakta kommunen om ansökningsförfarandet
 - id: mora-skotselbidrag
   namn: Skötselbidrag
@@ -119,15 +170,25 @@ bidrag:
     datum:
     - 09-30
   krav:
+  - Föreningen ska uppfylla kommunens grundvillkor för föreningsstöd
   - Föreningen ska ansvara för drift och driftkostnader för anläggningen
   - Ansökan ska innehålla en uppskattning av anläggningens nyttjandegrad
+  - Föreningen ska äga anläggningen och den ska vara tillgänglig för allmänheten
   belopp: Rekommenderad nivå högst 10 000 kronor per anläggning och år
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://morakommun.se/uppleva-och-gora/foreningar-och-foreningsstod/soka-foreningsstod/skotselbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - annat
   anteckning: För drift av mindre lokala idrottsplatser, skidspår, elljusspår eller lokaler för publik verksamhet.
 forutsattningar:
 - id: mora-registrering

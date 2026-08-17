@@ -7,10 +7,16 @@ ansokningssystem:
   namn: Karlskoga kommuns föreningsregister (Rbok)
   url: https://minasidor.karlskoga.se/oversikt/external/231
 kalla_url: https://karlskoga.se/uppleva--gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-verifierad: 2026-07-27
+verifierad: 2026-08-17
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://karlskoga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag-och-stod.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: karlskoga-ordinarie-foreningsbidrag
-  namn: Ordinarie föreningsbidrag
+  namn: Årligt föreningsbidrag
   kategori:
   - idrott
   - kultur
@@ -21,18 +27,22 @@ bidrag:
     datum:
     - 10-15
   krav:
-  - Registrerad förening i Karlskoga kommuns föreningsregister
-  - Minst ett års verksamhet och registrering före ansökningsdatum
-  - Dokumentation av verksamhet
-  - Ideell verksamhet
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Föreningen ska ha organisationsnummer och säte i Karlskoga kommun samt vara registrerad i kommunens föreningsregister Rbok
+  - Verksamheten ska bedrivas i Karlskoga kommun; endast verksamhet i kommunen är bidragsberättigad
+  - Föreningen ska ha godkända stadgar, minst tre styrelseledamöter, minst en fristående revisor och minst tio aktiva medlemmar
+  - Föreningen ska ta ut årlig medlemsavgift, bygga på demokratiska grunder och vara öppen för alla som följer stadgarna
+  - Verksamhetsberättelse, revisionsberättelse, verksamhetsplan, årsmötesprotokoll samt resultat- och balansrapport ska lämnas
+  - Barn- och ungdomsföreningar ska ha rutiner för belastningsregister, aktuell ANDTS-policy och vid anslutning till specialidrottsförbund ha sökt LOK-stöd eller motsvarande
+  belopp: Inget fast belopp publiceras; stödet beslutas årsvis och betalas ut i januari och juni
+  sen_ansokan: Ansökan efter den 15 oktober kan lämnas utan bidrag
   kalla_url: https://karlskoga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ordinarie föreningsbidrag ansöks årligen senast 15 oktober för kommande kalenderår. Ansökan öppnar i augusti.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  anteckning: Årligt föreningsbidrag ansöks 1 september–15 oktober för kommande kalenderår. Ansökan öppnar i september.
     Utbetalning sker i januari och juni.
   min_verksamhetstid_manader: 12
   kraver_registrering: true
@@ -41,7 +51,7 @@ bidrag:
   - kultur
   - social
   - ungdom
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
 - id: karlskoga-extra-foreningsbidrag
   namn: Extra föreningsbidrag
   kategori:
@@ -55,17 +65,21 @@ bidrag:
     datum:
     - 04-15
   krav:
-  - Registrerad förening i Karlskoga kommuns föreningsregister
+  - Föreningen ska ha organisationsnummer och säte i Karlskoga kommun samt vara registrerad i kommunens föreningsregister Rbok
   - Minst ett års verksamhet och registrering före ansökningsdatum
   - Specifikt projekt eller investering som stärker föreningens utvecklingsarbete
   - Kan inte användas för ordinär verksamhet
-  belopp: null
+  - Föreningen ska ha minst tio aktiva medlemmar, årlig medlemsavgift, godkända stadgar, fungerande styrelse och minst en fristående revisor
+  - Beviljade medel ska redovisas följande kalenderår med kvitton eller fakturor; felaktigt använda medel ska återbetalas
+  belopp: Inget fast belopp publiceras; kultur- och fritidsnämnden beslutar efter beredning
   sen_ansokan: 15 april varje år
   kalla_url: https://karlskoga.se/arkiv/nyheter/nyheter/2026-03-06-nya-riktlinjer-for-ansokan-om-extra-foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
   anteckning: Ansökan görs en gång per år. För 2026 var ansökningsperioden 1 mars–15 april. Stödet gäller specifika satsningar
     eller investeringar och får inte användas för ordinarie drift.
   min_verksamhetstid_manader: 12
@@ -76,7 +90,7 @@ bidrag:
   - social
   - ungdom
   - annat
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-17'
 - id: karlskoga-idrottsbidrag
   namn: Idrottsbidrag
   kategori:
@@ -106,6 +120,7 @@ bidrag:
   foreningstyp:
   - idrott
   senast_verifierad: '2026-08-03'
+  status: avskaffat
 - id: karlskoga-kulturbidrag
   namn: Kulturbidrag
   kategori:
@@ -132,6 +147,7 @@ bidrag:
   foreningstyp:
   - kultur
   senast_verifierad: '2026-08-03'
+  status: avskaffat
 - id: karlskoga-socialbidrag
   namn: Socialbidrag
   kategori:
@@ -159,6 +175,7 @@ bidrag:
   foreningstyp:
   - social
   senast_verifierad: '2026-08-03'
+  status: avskaffat
 - id: karlskoga-studieverbundsbidrag
   namn: Studieförbundsbidrag
   kategori:
@@ -185,6 +202,7 @@ bidrag:
   foreningstyp:
   - kultur
   senast_verifierad: '2026-08-03'
+  status: avskaffat
 - id: karlskoga-sisu-bidrag
   namn: SISU-bidrag
   kategori:
@@ -211,6 +229,7 @@ bidrag:
   foreningstyp:
   - idrott
   senast_verifierad: '2026-08-03'
+  status: avskaffat
 - id: karlskoga-sarskilt-bidrag
   namn: Särskilt bidrag
   kategori:
@@ -240,6 +259,43 @@ bidrag:
   - ungdom
   - annat
   senast_verifierad: '2026-08-03'
+  status: avskaffat
+- id: karlskoga-vanortsbidrag
+  namn: Vänortsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  malgrupp: Föreningar registrerade i Karlskoga kommuns föreningsregister som planerar ett utbyte med en vän- eller samverkansort
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad i Karlskoga kommuns föreningsregister
+  - Utbytet ska ske med en förening eller organisation med samma eller liknande verksamhet i någon av kommunens vän- eller samverkansorter
+  - Ansökan ska beskriva syfte, ort, tid, specificerade rese- eller mottagningskostnader och antal deltagare
+  - Stöd för resa gäller den sökande föreningens resekostnader; den gästande föreningens resa och skolor får inte stöd
+  - Redovisning ska lämnas efter besöket och senast tolv månader efter utbetalning; oanvänt bidrag ska återbetalas
+  belopp: Högst 6 000 kr för resa till vänort eller värdskap för vänortsbesök
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: https://karlskoga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag-och-stod.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Ungdomsutbyten prioriteras. Ansökan och redovisning lämnas via e-post till kommunens föreningskonsulent.
+  senast_verifierad: '2026-08-17'
 forutsattningar:
 - id: karlskoga-registrering
   vad: Registrering i föreningsregistret

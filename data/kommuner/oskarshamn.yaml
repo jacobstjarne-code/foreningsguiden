@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Kommunens blankett/e-tjänst
   url: https://www.oskarshamn.se/kultur-och-fritid/foreningsliv/foreningsbidrag/bidrag-kulturforeningar/
 kalla_url: https://www.oskarshamn.se/kultur-och-fritid/foreningsliv/foreningsbidrag/bidrag-kulturforeningar/
-verifierad: '2026-08-02'
+verifierad: '2026-08-17'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 03-01
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+giltighet_regel_status: kontrollast
 bidrag:
 - id: oskarshamn-kultur-arrangerande
   namn: Bidrag för arrangerande/utövande kulturföreningar
@@ -19,16 +25,23 @@ bidrag:
     datum:
     - 03-01
   krav:
+  - Föreningen ska vara lokalt registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
   - Fullständigt ifylld ansökan
   - Kulturföreningar med ungdomsverksamhet ska bifoga uppdaterad handlingsplan mot droger, alkohol och sexuella trakasserier
   - Årsmötesprotokoll för aktuellt år ska bifogas ansökan
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Arrangemanget ska vara öppet för allmänheten; verksamhet för barn och ungdomar prioriteras
+  - Redovisning av hur bidraget använts ska lämnas senast 1 mars året efter bidragsåret
+  belopp: Individuellt anpassat bidrag eller stöd genom att en lokal ställs till förfogande; inget fast belopp publiceras
+  sen_ansokan: För sent inkomna handlingar handläggs inte
   kalla_url: https://www.oskarshamn.se/kultur-och-fritid/foreningsliv/foreningsbidrag/bidrag-kulturforeningar/
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
   anteckning: Handläggs av Kulturkontoret. Kulturföreningar med registrerad ungdomsverksamhet redovisar deltagartillfällen
     7–25 år senast 1 mars året efter.
 - id: oskarshamn-lokalbidrag-ungdom
@@ -51,28 +64,39 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: null
   anteckning: null
+  status: avskaffat
 - id: oskarshamn-lokalt-aktivitetsstod
   namn: Kommunalt lokalt aktivitetsstöd
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Föreningar med ledarledd verksamhet för barn och unga 7–25 år samt deltagare med funktionsnedsättning 26 år och
-    äldre
+  malgrupp: Föreningar med ledarledd verksamhet för barn och unga 6–25 år samt deltagare med funktionsnedsättning utan övre åldersgräns
   deadlines:
     typ: fasta
     datum:
     - 03-01
   krav:
-  - Redovisa deltagartillfällen enligt kommunens eller Riksidrottsförbundets regler
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Föreningen ska vara godkänd som bidragsberättigad och registrerad hos Oskarshamns kommun
+  - Aktiviteten ska vara ledarledd, pågå minst 60 minuter och ha 3–30 deltagare i åldern 6–25 år
+  - Deltagarna ska vara medlemmar; ledare som räknas som deltagare ska vara minst 13 år
+  - Kommersiella arrangemang och studiecirkelverksamhet är inte bidragsberättigade
+  - Närvarokort och ansökan ska sparas i åtta år
+  belopp: 8 kr per deltagaraktivitet; 12 kr per deltagaraktivitet för personer med funktionsnedsättning utan övre åldersgräns
+  sen_ansokan: För sent inkommen redovisning är inte bidragsberättigad
   kalla_url: https://www.oskarshamn.se/kultur-och-fritid/foreningsliv/foreningsbidrag/bidrag-fritidsforeningar/
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Redovisning för perioden 1 januari–31 december ska lämnas senast 1 mars följande år.
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - ungdom
+  - annat
+  anteckning: Redovisning för perioden 1 januari–31 december ska lämnas senast 1 mars följande år. RF-anslutna idrottsföreningar redovisar till Riksidrottsförbundet.
 - id: oskarshamn-lovbidrag
   namn: Lovbidrag
   kategori:
@@ -84,16 +108,28 @@ bidrag:
     typ: okand
     datum: []
   krav:
+  - Föreningen ska vara registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
   - Aktiviteten ska genomföras under skollov
+  - Aktiviteten ska vara en ungdomsaktivitet som är öppen för allmänheten
   - Redovisning ska lämnas efter genomförd aktivitet
-  belopp: 400 kronor per heldag eller 200 kronor per halvdag, högst 4 000 kronor per förening och år
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: 600 kr för aktivitet under 4 timmar eller 800 kr för aktivitet över 4 timmar
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
   kalla_url: https://www.oskarshamn.se/kultur-och-fritid/foreningsliv/foreningsbidrag/bidrag-fritidsforeningar/
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Vid lovaktiviteter kan vissa av kommunens gymnastiksalar upplåtas kostnadsfritt.
 - id: oskarshamn-ledarutbildningsbidrag
   namn: Ledarutbildningsbidrag
   kategori:
@@ -102,18 +138,30 @@ bidrag:
   - ovrig
   malgrupp: Föreningar som utbildar ledare genom kurs om minst två dagar
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
+  - Föreningen ska vara registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
   - Ansökan senast en månad efter avslutad kurs
   - Kursprogram, kursintyg och kvitto på kursavgift ska bifogas
-  belopp: 300 kronor per kursdag, högst 1 500 kronor per kurs och 10 000 kronor per förening och år
+  - Kursen ska avse utbildning av föreningens ledare
+  belopp: 300 kr per kursdag, högst 1 500 kr per kurs och person samt 10 000 kr per förening och år
   sen_ansokan: Ansökan ska lämnas senast en månad efter avslutad kurs
   kalla_url: https://www.oskarshamn.se/kultur-och-fritid/foreningsliv/foreningsbidrag/bidrag-fritidsforeningar/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: null
 - id: oskarshamn-lokalbidrag
   namn: Lokalbidrag
@@ -127,14 +175,27 @@ bidrag:
     datum:
     - 03-01
   krav:
+  - Föreningen ska vara registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
   - Årliga föreningsuppgifter och begärda årsmöteshandlingar ska vara inlämnade
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://minasidor.oskarshamn.se/oversikt/overview/479
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska hyra lokalen för sin verksamhet och kunna styrka hyran med ett gällande hyreskontrakt
+  - Bildningsförvaltningen ska godkänna både förhyrningen och lokalkostnaden; tillfälligt hyrda lokaler ger inget bidrag
+  belopp: 70 procent av hyreskostnaden, högst 7 000 kr per förening och år; högst 5 000 kr för subventionerad lokal i Föreningshuset Åsa
+  sen_ansokan: För sent inkomna handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   anteckning: E-tjänsten anger att olika bidrag kan sökas beroende på föreningstyp, bland annat lokalbidrag.
 - id: oskarshamn-skotselbidrag
   namn: Skötselbidrag
@@ -147,12 +208,225 @@ bidrag:
     datum:
     - 03-01
   krav:
+  - Föreningen ska vara registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
   - Årliga föreningsuppgifter och begärda årsmöteshandlingar ska vara inlämnade
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://minasidor.oskarshamn.se/oversikt/overview/479
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska äga och driva anläggningen eller lokalen
+  - Utbyggnad av anläggningen ska godkännas av bildningsförvaltningen för att bli bidragsberättigad
+  belopp: Schablon per anläggningstyp, exempelvis 40 000 kr för gräsplan 11 mot 11, högst 25 000 kr för klubblokal och högst 35 000 kr för omklädningsbyggnad med åretruntbruk
+  sen_ansokan: För sent inkomna handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: E-tjänsten listar skötselbidrag som en möjlig stödform.
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - annat
+  anteckning: Normens bilaga 2 publicerar en fullständig schablontabell för anläggningar, byggnader och motionsspår.
+- id: oskarshamn-startbidrag
+  namn: Startbidrag
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  malgrupp: Nybildade föreningar som registreras som bidragsberättigade i någon av kommunens föreningskategorier
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska ansöka om registrering hos bildningsförvaltningen
+  - Verksamhetsplan, styrelseförteckning och stadgar ska bifogas
+  - Idrottsföreningar ska vara anslutna till en riksorganisation
+  - Föreningen ska följa kommunens allmänna bidragsbestämmelser och godkännas som bidragsberättigad
+  belopp: 1 000 kr
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  anteckning: Beviljas i samband med att en ny förening registreras som bidragsberättigad.
+- id: oskarshamn-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Bidragsberättigade ungdomsföreningar som äger lokaler eller behöver särskilda inventarier och maskiner
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
+  - Investeringen ska avse om- eller tillbyggnad av föreningens egen lokal eller inköp av särskilda inventarier eller maskiner
+  - Ansökan ska lämnas på särskild blankett eller som egen ansökan
+  belopp: Inget fast belopp publiceras; bildningsnämnden gör en särskild prövning inom budgeterade medel
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - ungdom
+  - annat
+  anteckning: Ingår bland normens övriga bidragsformer för ungdomsföreningar inom fritid.
+- id: oskarshamn-kulturminnesbidrag
+  namn: Kulturminnesbidrag
+  kategori:
+  - kultur
+  malgrupp: Föreningar som äger och driver hembygdsgårdar eller andra kulturminnen
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav:
+  - Föreningen ska vara registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
+  - Föreningen ska äga och driva en hembygdsgård eller ett annat kulturminne
+  - Ansökan ska beskriva den del av årets drift och förvaltning som stödet söks för
+  - Redovisning av hur bidraget använts ska lämnas senast 1 mars året efter bidragsåret
+  belopp: Inget fast belopp publiceras; stödet avser drift och förvaltning
+  sen_ansokan: För sent inkomna handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
+  - hembygd
+  anteckning: Ansökan och efterföljande redovisning lämnas på förtryckt blankett.
+- id: oskarshamn-grundbidrag-funktionsratt
+  namn: Grundbidrag för funktionsrättsföreningar
+  kategori:
+  - funktionsratt
+  malgrupp: Lokala föreningar för personer med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav:
+  - Föreningen ska vara lokalt registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
+  - Medlemmarna som redovisas ska vara bosatta eller folkbokförda i Oskarshamns kommun
+  - Medlemmen ska ha betalat medlemsavgift, finnas i medlemsmatrikeln och regelbundet ha deltagit i verksamheten
+  - Tillfälliga bingo-, dans- och stödmedlemmar samt enstaka deltagare får inte räknas
+  belopp: Beloppet fastställs årligen i fem medlemsintervall från 1–50 till 451 eller fler medlemmar
+  sen_ansokan: För sent inkomna handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - annat
+  anteckning: Lokal- och aktivitetsbidrag söks genom de gemensamma stödformerna Lokalbidrag respektive kommunalt LOK-stöd.
+- id: oskarshamn-grundbidrag-pensionar
+  namn: Grundbidrag för pensionärsföreningar
+  kategori:
+  - pensionar
+  malgrupp: Lokala pensionärsföreningar
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav:
+  - Föreningen ska vara lokalt registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
+  - Redovisade medlemmar ska vara ålderspensionärer som är 65 år eller äldre
+  - Medlemmen ska ha betalat medlemsavgift, finnas i medlemsmatrikeln och regelbundet ha deltagit i verksamheten
+  - Tillfälliga bingo-, dans- och stödmedlemmar samt enstaka deltagare får inte räknas
+  belopp: Belopp per medlem fastställs årligen av bildningsförvaltningen
+  sen_ansokan: För sent inkomna handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - annat
+  anteckning: Lokalbidrag söks genom den gemensamma stödformen Lokalbidrag.
+- id: oskarshamn-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori:
+  - kultur
+  malgrupp: Statsbidragsberättigade studieförbund som bedriver verksamhet i Oskarshamns kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav:
+  - Studieförbundet ska vara statsbidragsberättigat och fördelas av Folkbildningsrådet
+  - Verksamheten som ligger till grund för stödet ska bedrivas i Oskarshamns kommun
+  - Projektbidrag ska avse särskilda projekt eller utvecklingsarbete
+  - Volymbidrag beräknas efter redovisade deltagarstudietimmar året innan
+  belopp: Årets anslag fördelas som projektbidrag samt 70 procent grundbidrag och 30 procent volymbidrag
+  sen_ansokan: För sent inkomna årliga handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - kultur
+  - annat
+  anteckning: RF-SISU Smålands stöd regleras i ett enskilt avtal.
+- id: oskarshamn-vuxenforeningsbidrag
+  namn: Bidrag till vuxenföreningar och övriga fritidsföreningar
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Fritidsföreningar utan redovisad ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+  krav:
+  - Föreningen ska vara lokalt registrerad hos Oskarshamns kommun och följa de allmänna bidragsbestämmelserna
+  - Föreningen ska tillhöra kategorin vuxenförening eller övrig fritidsförening och inte redovisa ungdomsverksamhet
+  - Stödet ska vara kopplat till kostnader för en egen eller hyrd anläggning eller lokal
+  belopp: Ett mindre bidrag fastställs individuellt efter särskild prövning
+  sen_ansokan: För sent inkomna årliga handlingar handläggs inte
+  kalla_url: https://www.oskarshamn.se/mer-om-kommunen/politik-och-forvaltning/styrande-dokument/forfattningssamling-och-styrande-dokument/bidragsbestammelser-for-kultur--och-fritidsforeningar-i-oskarshamns-kommun/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - annat
+  anteckning: Föreningar i denna kategori har inte rätt till bidragen i normens bilaga 1 och 2.
