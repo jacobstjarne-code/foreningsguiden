@@ -2,12 +2,18 @@ kommun: Göteborg
 kommun_slug: goteborg
 lan: Västra Götalands län
 befolkning: 614229
-forvaltning: Idrotts- och föreningsförvaltningen samt kulturförvaltningen
+forvaltning: Idrotts- och föreningsförvaltningen, kulturförvaltningen, förvaltningen för funktionsstöd samt socialförvaltningarna
 ansokningssystem:
   namn: Boknings- och bidragssystemet (bokningochbidrag.goteborg.se)
   url: https://bokningochbidrag.goteborg.se/
-kalla_url: https://goteborg.se/wps/portal/start/kultur-och-fritid/bidrag--stipendier--foreningar
-verifierad: '2026-08-02'
+kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar
+verifierad: '2026-08-17'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www4.goteborg.se/prod/Intraservice/Namndhandlingar/SamrumPortal.nsf/CE99FE85F4877DB4C1258D5D00475ED2/$File/7.%20Bilaga%201.%20Anvisning%20for%20foreningsbidrag%202026.pdf?OpenElement=
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: goteborg-aktivitetsbidrag
   namn: Aktivitetsbidrag
@@ -23,20 +29,21 @@ bidrag:
     - 02-25
   krav:
   - Föreningen måste vara aktivitetsbidragsgodkänd av idrotts- och föreningsnämnden
-  - Uppfylla nämndens grundläggande kriterier (demokratisk uppbyggnad, styrelse om minst tre personer, ordförande och kassör
-    ej samma person)
-  - Driva ideell verksamhet i Göteborg för barn och unga 7–25 år, personer med funktionsnedsättning eller personer över 65
-    år
-  belopp: null
+  - Aktiviteten ska vara planerad, ledarledd, minst 45 minuter och ha minst tre bidragsberättigade deltagare
+  - Aktiviteten ska vara en återkommande medlemsaktivitet och normalt genomföras i Göteborg
+  - Fester, religiöst eller partipolitiskt arbete, nöjeskonsumtion, skolverksamhet och öppna aktiviteter räknas inte
+  belopp: Flickor/kvinnor 9,89 kr per deltagare och aktivitet; pojkar/män, ledare och deltagare 65+ 8,02 kr. Högst 40 deltagare per aktivitet.
   sen_ansokan: Ej angivet i källan
   kalla_url: https://goteborg.se/wps/portal?uri=gbglnk%3AAktivitetsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan 1 juli–25 augusti avser aktiviteter jan–juni; motsvarande vårperiod för juli–dec. Bidrag beviljas inte
-    till föreningar med skatteskuld hos Kronofogden.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan görs i efterhand för föregående halvårs genomförda aktiviteter.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
 - id: goteborg-lokalbidrag
   namn: Lokalbidrag
   kategori:
@@ -49,55 +56,620 @@ bidrag:
     - 03-01
   krav:
   - Föreningen måste vara aktivitetsbidragsgodkänd
-  belopp: null
+  - Föreningen ska ha beviljats aktivitetsbidrag för båda perioderna föregående år
+  - Lokalen ska vara egen eller långtidshyrd och minst hälften av användningen ska avse bidragsberättigad verksamhet
+  - Föreningen ska stå för hyreskontraktet och lokalen ska uppfylla myndighetskrav
+  belopp: Högst 65 procent av bidragsgrundande lokalkostnad; högst 200 000 kr för ungdoms- och funktionsrättsföreningar och 100 000 kr för pensionärsföreningar.
   sen_ansokan: Ej angivet i källan
   kalla_url: https://goteborg.se/wps/portal?uri=gbglnk%3A2018222163749688
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 januari–1 mars. Förstagångssökande kan i vissa fall prövas vid andra tillfällen.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Förstagångssökande och nyligen godkända föreningar kan efter särskild prövning söka vid annat tillfälle.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-utvecklingsbidrag-idrott-fritid
+  namn: Utvecklingsbidrag inom idrott och fritid
+  kategori: [idrott, social, ovrig]
+  malgrupp: Ideella föreningar och organisationer som genomför en ny utvecklingssatsning för prioriterade målgrupper
+  deadlines: {typ: fasta, datum: [05-31, 11-30]}
+  krav:
+  - Satsningen ska ligga utanför föreningens ordinarie verksamhet och ge långsiktiga effekter
+  - Satsningen ska främja jämlikhet, fysisk aktivitet, föreningsdeltagande eller cirkulär ekonomi
+  - Insatsen ska rikta sig till eller gynna en av nämndens prioriterade målgrupper
+  - Avgiftsbelagd verksamhet, ordinarie verksamhet, skoltid och redan finansierade satsningar beviljas inte
+  belopp: Faktiska kostnader efter individuell bedömning; ledararvode beviljas normalt inte.
+  sen_ansokan: Bidrag beviljas inte retroaktivt
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-bidrag-till-foreningar-inom-idrott-och-fritid/utvecklingsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan ska lämnas i god tid före satsningens start.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, friluft, ungdom, social, annat]
+- id: goteborg-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar och organisationer som äger eller långtidshyr en anläggning
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Investeringen ska avse fast egendom eller fasta inventarier i kärnverksamheten
+  - Projektkostnaden ska överstiga 20 000 kronor
+  - Föreningen ska äga eller långtidshyra anläggningen
+  - Ansökan ska göras före byggstart och redovisning ska lämnas inom beslutad tid
+  belopp: Högst 50 procent av byggprojektets kostnad som grundregel; högre andel kan ges i särskilda fall.
+  sen_ansokan: Projektet får normalt inte vara påbörjat före ansökan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-bidrag-till-foreningar-inom-idrott-och-fritid/investeringsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Barn- och ungdomsverksamhet, tillgänglighet och lokal anläggningstillgång vägs in i prioriteringen.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+- id: goteborg-kommunal-borgen
+  namn: Kommunal borgen för föreningsanläggning
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar och organisationer som investerar i egen eller långtidshyrd anläggning
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Föreningen ska uppfylla nämndens grundläggande kriterier
+  - Styrelsen ska ha fattat ett formellt beslut om borgensansökan
+  - Lånet ska avse fast egendom eller fasta inventarier i egen eller långtidshyrd anläggning
+  - Kreditgivaren ska stå under Finansinspektionens tillsyn
+  belopp: Kommunal borgen för högst 75 procent av byggprojektets kostnad.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www4.goteborg.se/prod/Intraservice/Namndhandlingar/SamrumPortal.nsf/CE99FE85F4877DB4C1258D5D00475ED2/$File/7.%20Bilaga%201.%20Anvisning%20for%20foreningsbidrag%202026.pdf?OpenElement=
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet framgår av nämndens anvisning men saknas i webbmenyn. Oanvänd borgen upphör 24 månader efter beslut.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+- id: goteborg-sarskilt-verksamhetsbidrag
+  namn: Särskilt verksamhetsbidrag
+  kategori: [idrott, ovrig]
+  malgrupp: Ideella föreningar och organisationer med särskilt betydelsefull fritidsverksamhet för barn, unga eller personer med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [08-31]}
+  krav:
+  - Verksamheten ska vara av stor betydelse för utbudet i Göteborgs föreningsliv
+  - Verksamheten ska förbättra möjligheten till aktiv fritid för 7–25-åringar eller personer med funktionsnedsättning
+  - Verksamheten ska bidra till ett mer jämlikt och jämställt Göteborg
+  - Verksamheten ska till viss del bedrivas ideellt
+  belopp: Bestäms efter individuell bedömning av budgeterade verksamhetskostnader och nämndens budget.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-bidrag-till-foreningar-inom-idrott-och-fritid/sarskilt-verksamhetsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nystartade verksamheter och projekt hänvisas i första hand till utvecklingsbidrag.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, ungdom, social, annat]
 - id: goteborg-sarskilt-driftsbidrag
   namn: Särskilt driftsbidrag för egen anläggning
   kategori:
   - idrott
   malgrupp: Ideella föreningar som driver egen idrotts- eller fritidsanläggning, huvudsakligen för 7–25-åringar
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: fasta, datum: [08-31]}
   krav:
-  - Anläggningen ska användas regelbundet av föreningar eller allmänhet
-  - Verksamheten i huvudsak för 7–25-åringar
-  belopp: null
+  - Föreningen ska driva en anläggning som täcker ett stort behov hos Göteborgs föreningsliv
+  - Anläggningen ska användas regelbundet av föreningar eller allmänhet och huvudsakligen för 7–25-åringar
+  - Merparten av tiden ska avse barn- och ungdomsverksamhet i en rök-, alkohol- och drogfri miljö
+  - Flickor och pojkar ska ha lika möjligheter och bokningsbara tider ska så långt möjligt vara öppna för andra ideella föreningar
+  belopp: Bestäms efter individuell bedömning av budgeterade löpande driftskostnader och nämndens budget.
   sen_ansokan: Ej angivet i källan
   kalla_url: https://goteborg.se/wps/portal?uri=gbglnk%3A2022321162949614
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: goteborg-kulturstod
-  namn: Kulturstöd (kulturförvaltningen)
-  kategori:
-  - kultur
-  malgrupp: Kulturaktörer och föreningar som skapar kulturutbud i Göteborg
-  deadlines:
-    typ: lopande
-    datum: []
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget kan inte användas för byggnation, separata kanslilokaler, elit- eller vuxenanläggningar eller kostnader som får lokalbidrag.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, friluft, ungdom, annat]
+- id: goteborg-lovaktiviteter
+  namn: Bidrag till lovaktiviteter
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar och ideella organisationer som ordnar kostnadsfria aktiviteter för barn och unga under skollov
+  deadlines: {typ: fasta, datum: [04-12]}
   krav:
-  - Ansökan via boknings- och bidragssystemet; se aktuella ansökningsomgångar på goteborg.se/kulturstod
-  belopp: null
+  - Aktiviteten ska genomföras under ett skollov och rikta sig till barn och unga 7–16 år i Göteborg
+  - Aktiviteten ska vara öppen utan medlemskrav och kostnadsfri för deltagarna
+  - Föreningen ska vara ideell, demokratiskt uppbyggd och ha lokal anknytning
+  belopp: Kommunen publicerar inget fast belopp.
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://etjanst.kulturstod.goteborg.se/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kulturförvaltningen har flera separata stödformer och ansökningsomgångar. Denna post är medvetet en samlingspost
-    i väntan på separat kulturstödsrevision.
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-bidrag-till-foreningar-inom-idrott-och-fritid/bidrag-till-lovaktiviteter
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Den publicerade omgången avser sommarlovsaktiviteter 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-parapulsfestivalen-2026
+  namn: Bidrag för deltagande i Parapulsfestivalen 2026
+  kategori: [idrott, funktionsratt]
+  malgrupp: Göteborgsföreningar som erbjuder prova-på-aktiviteter för personer med funktionsnedsättning under Parapulsfestivalen
+  deadlines: {typ: fasta, datum: [05-31, 08-09]}
+  krav:
+  - Föreningen ska delta med en aktivitet under Parapulsfestivalen 28–29 augusti 2026
+  - Aktiviteten ska ge målgruppen möjlighet att prova en aktivitet och möta föreningslivet
+  - Föreningen ska uppfylla stadens grundläggande demokrati- och föreningskrav
+  belopp: Kommunen publicerar inget fast belopp.
+  sen_ansokan: Ansökan stängde 9 augusti 2026
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-bidrag-till-foreningar-inom-idrott-och-fritid
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Tillfällig stödform för festivalen 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, ungdom, social, annat]
+- id: goteborg-kultur-projektstod
+  namn: Projektstöd kultur
+  kategori: [kultur]
+  malgrupp: Juridiska personer och kulturaktörer med F-skatt som genomför publika konst- eller kulturprojekt i Göteborg
+  deadlines: {typ: fasta, datum: [03-18, 10-21]}
+  krav:
+  - Projektet ska ha en tydlig början och ett slut och genomföras i Göteborg
+  - Projektet ska skapa ett konstnärligt verk eller ett kulturevenemang som presenteras publikt
+  - Sökanden ska vara juridisk person eller fysisk person med F-skattsedel
+  - Projektbudget ska vara balanserad och projektet får inte sökas retroaktivt
+  belopp: Ingen övre beloppsgräns; beviljade stöd har vanligen varit 10 000–250 000 kr.
+  sen_ansokan: Projekt i efterhand eller förlusttäckning beviljas inte
+  kalla_url: https://goteborg.se/wps/portal/enheter/kulturstod/ekonomiskt-stod/stod-att-soka/projektstod
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Filmproduktion och icke-publika utvecklingsprojekt har egna stödformer.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-kultur-projektstod-pronto
+  namn: Projektstöd Pronto
+  kategori: [kultur]
+  malgrupp: Juridiska personer och kulturaktörer med F-skatt som genomför mindre konst- eller kulturprojekt i Göteborg
+  deadlines: {typ: fasta, datum: [02-11, 04-22, 09-02]}
+  krav:
+  - Projektet ska avse ett konstnärligt verk eller kulturevenemang i Göteborg
+  - Sökanden ska vara juridisk person eller fysisk person med F-skattsedel
+  - Projektet får inte vara genomfört, utlandsregistrerat eller offentligt finansierat
+  - Budgeten ska vara balanserad och projektet ska följa kulturstödets riktlinjer
+  belopp: Högst 40 000 kronor per projekt.
+  sen_ansokan: Projekt i efterhand eller förlusttäckning beviljas inte
+  kalla_url: https://goteborg.se/wps/portal/enheter/kulturstod/ekonomiskt-stod/stod-att-soka/projektstod-pronto
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Tre ansökningsomgångar publiceras för 2026; den tredje är också synlig i kulturstödets portal.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-kultur-mikrostod-film
+  namn: Mikrostöd för film och rörlig bild
+  kategori: [kultur]
+  malgrupp: Filmaktörer och juridiska personer med mindre filmprojekt i Göteborg
+  deadlines: {typ: fasta, datum: [12-04]}
+  krav:
+  - Projektet ska avse film eller rörlig bild och ha anknytning till Göteborg
+  - Sökanden ska vara juridisk person eller fysisk person med F-skattsedel
+  - Projektet ska följa kulturförvaltningens riktlinjer och lämna en genomförbar budget
+  belopp: Högst 40 000 kronor.
+  sen_ansokan: Ansökan är löpande 1 september–4 december 2026
+  kalla_url: https://goteborg.se/wps/portal/enheter/filmkontoret/finansiering-och-resurser
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Besked lämnas normalt senast sex veckor efter ansökan.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-kultur-produktionsstod-film
+  namn: Produktionsstöd för film och rörlig bild
+  kategori: [kultur]
+  malgrupp: Professionella filmaktörer och juridiska personer som producerar film eller rörlig bild
+  deadlines: {typ: fasta, datum: [03-18, 10-21]}
+  krav:
+  - Ansökan ska avse konstnärlig produktion av film eller rörlig bild
+  - Sökanden ska vara juridisk person eller fysisk person med F-skattsedel
+  - Projektet ska ha en genomförbar plan, finansiering och anknytning till Göteborg
+  belopp: Ingen fast övre beloppsgräns publiceras; stöd beslutas efter konstnärlig och ekonomisk bedömning.
+  sen_ansokan: Projekt i efterhand beviljas inte
+  kalla_url: https://goteborg.se/wps/portal/enheter/filmkontoret/finansiering-och-resurser
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Två ansökningsomgångar publiceras för 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-kultur-utvecklingsstod-film
+  namn: Utvecklingsstöd för film och rörlig bild
+  kategori: [kultur]
+  malgrupp: Filmaktörer och juridiska personer som utvecklar filmprojekt eller filmkulturell verksamhet
+  deadlines: {typ: fasta, datum: [12-04]}
+  krav:
+  - Projektet ska avse utveckling inom film eller rörlig bild
+  - Sökanden ska vara juridisk person eller fysisk person med F-skattsedel
+  - Projektet ska ha anknytning till Göteborg och följa kulturstödets riktlinjer
+  belopp: Ingen fast övre beloppsgräns publiceras; stöd beslutas efter bedömning.
+  sen_ansokan: Ansökan är löpande 1 september–4 december 2026
+  kalla_url: https://goteborg.se/wps/portal/enheter/filmkontoret/finansiering-och-resurser
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Besked lämnas normalt senast åtta veckor efter ansökan.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-kultur-utjamningsbidrag
+  namn: Utjämningsbidrag för kultur för barn och unga
+  kategori: [kultur]
+  malgrupp: Professionella fria kulturaktörer med produktioner för barn och unga 0–19 år i Göteborg
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Verket, produktionen eller föreställningen ska rikta sig till barn och unga 0–19 år
+  - Sökanden ska verka professionellt och produktionen ska ha hög konstnärlig kvalitet
+  - Produktionen ska genomföras i Göteborg och godkännas innan subvention kan användas
+  belopp: Subventionen beräknas per genomfört och godkänt besök och betalas ut i efterhand mot faktura.
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: https://goteborg.se/wps/portal/enheter/kulturstod/ekonomiskt-stod/stod-att-soka/utjamningsbidrag-for-kultur-for-barn-och-unga
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Godkända aktörer kan även anmäla utbud till KuBo.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur, ungdom]
+- id: goteborg-kultur-utvecklingsstod
+  namn: Utvecklingsstöd kultur
+  kategori: [kultur]
+  malgrupp: Juridiska personer och kulturaktörer med F-skatt som driver konstnärliga eller kulturella utvecklingsprojekt
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Projektet ska stimulera konstnärlig eller kulturell utveckling i Göteborg
+  - Sökanden ska vara juridisk person eller fysisk person med F-skattsedel
+  - Projektet får inte sökas i efterhand eller avse förlusttäckning
+  - Publika evenemang och filmproduktionsutveckling hänvisas till andra stödformer
+  belopp: Ingen fast övre beloppsgräns publiceras; stöd beslutas efter bedömning.
+  sen_ansokan: Ingen ansökningsomgång var utlyst vid kontrollen
+  kalla_url: https://goteborg.se/wps/portal/enheter/kulturstod/ekonomiskt-stod/stod-att-soka/utvecklingsstod
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kulturförvaltningen hade inte publicerat någon ansökningsomgång för 2026 vid kontrollen.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-kultur-verksamhetsstod
+  namn: Verksamhetsstöd kultur
+  kategori: [kultur]
+  malgrupp: Fria konst- och kulturverksamheter i Göteborg med kontinuerlig verksamhet
+  deadlines: {typ: fasta, datum: [06-10]}
+  krav:
+  - Verksamheten ska tillhöra det fria kulturlivet och hålla hög konstnärlig kvalitet
+  - Sökanden ska vara juridisk person eller enskild firma med F-skattsedel
+  - Verksamheten ska vara särskilt viktig för sin målgrupp eller kulturpolitiskt värdefull för Göteborg
+  - Sökanden ska tidigare ha sökt stöd från kulturnämnden
+  belopp: Ingen övre beloppsgräns publiceras; stöd kan sökas för ett eller tre år.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/enheter/kulturstod/ekonomiskt-stod/stod-att-soka/verksamhetsstod
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden 6 maj–10 juni 2026 avser verksamhetsåret 2027.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [kultur]
+- id: goteborg-funktionshinder-verksamhetsbidrag
+  namn: Verksamhetsbidrag inom funktionshinderområdet
+  kategori: [funktionsratt, social]
+  malgrupp: Civilsamhällets organisationer med varaktig verksamhet inom funktionshinderområdet i Göteborg
+  deadlines: {typ: fasta, datum: [09-18]}
+  krav:
+  - Organisationen ska bedriva förebyggande, intressepolitiskt, medlemsvårdande eller anhörigstödjande verksamhet
+  - Organisationen ska följa stadens riktlinje och nämndens anvisning för föreningsbidrag
+  - Verksamheten får inte vara partipolitisk, religiös, diskriminerande eller droguppmuntrande
+  belopp: Ingen beloppsgräns.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-forenings--och-organisationsstod-inom-funktionshinderomradet/soka-verksamhetsbidrag-inom-funktionshinderomradet
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden 17 augusti–18 september 2026 avser kommande verksamhetsår.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
+- id: goteborg-funktionshinder-tillfalligt-aktivitetsbidrag-2026
+  namn: Tillfälligt aktivitetsbidrag funktionshinder 2026
+  kategori: [funktionsratt, social]
+  malgrupp: Föreningar utanför funktionshinderområdet som ordnar aktiviteter för personer med funktionsnedsättning eller stärker sin kompetens
+  deadlines: {typ: fasta, datum: [06-18, 11-06]}
+  krav:
+  - Föreningen ska ha stadgar, styrelse, revisor och firmatecknare
+  - Föreningen ska vara demokratisk, lokalt förankrad, öppen och arbeta för lika rättigheter
+  - Aktiviteten ska rikta sig till personer med funktionsnedsättning eller stärka kunskap om funktionshinder
+  - Verksamheten får inte vara partipolitisk, religiös, diskriminerande eller droguppmuntrande
+  belopp: Bestäms i varje enskilt fall.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-forenings--och-organisationsstod-inom-funktionshinderomradet/tillfalligt-aktivitetsbidrag-funktionshinder-2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens totala budget för stödformen 2026 är 700 000 kronor. Organisationer inom funktionshinderområdet hänvisas till utvecklingsbidrag.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: 700 000 kronor för 2026
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-funktionshinder-utvecklingsbidrag
+  namn: Utvecklingsbidrag inom funktionshinderområdet
+  kategori: [funktionsratt, social]
+  malgrupp: Organisationer inom funktionshinderområdet som genomför nya eller prioriterade utvecklingsinsatser
+  deadlines: {typ: fasta, datum: [06-18, 11-06]}
+  krav:
+  - Organisationen ska arbeta för jämlika levnadsvillkor, intressepolitik, medlemsvård eller anhörigstöd
+  - Insatsen ska avse ett identifierat behov, en oförutsedd händelse, ett nytt projekt eller lärande och samverkan
+  - Organisationen ska följa stadens riktlinje och nämndens anvisning för föreningsbidrag
+  belopp: Ingen fast beloppsgräns publiceras; bidraget bedöms individuellt.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-forenings--och-organisationsstod-inom-funktionshinderomradet/soka-utvecklingsbidrag-inom-funktionshinderomradet
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Två ansökningsomgångar publiceras för 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
+- id: goteborg-socialt-arbete-verksamhetsbidrag
+  namn: Verksamhetsbidrag inom socialt arbete
+  kategori: [social]
+  malgrupp: Organisationer med stadenövergripande social verksamhet som rör fler än ett stadsområde
+  deadlines: {typ: fasta, datum: [06-30]}
+  krav:
+  - Verksamheten ska stärka jämlika levnadsvillkor, civilsamhället eller folkhälsan
+  - Organisationen ska ge kvalificerat stöd eller skapa arbete och livskvalitet för socialt utsatta grupper
+  - Organisationen ska följa stadens riktlinje och socialnämndens anvisning
+  belopp: Ingen fast beloppsgräns publiceras; stödet bedöms efter verksamhet och budget.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-foreningsbidrag-till-organisationer-inom-socialt-arbete-/soka-verksamhetsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden 1 maj–30 juni 2026 avser verksamhetsbidrag för 2027.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social]
+- id: goteborg-socialt-arbete-utvecklingsbidrag
+  namn: Utvecklingsbidrag inom socialt arbete
+  kategori: [social]
+  malgrupp: Organisationer med stadenövergripande social verksamhet och ett tidsbegränsat utvecklingsbehov
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Insatsen ska avse ett nytt projekt, lärande, organisering, samverkan eller en oförutsedd situation
+  - Organisationen ska arbeta för jämlika levnadsvillkor, civilsamhället eller socialt utsatta grupper
+  - Organisationen ska följa stadens riktlinje och socialnämndens anvisning
+  belopp: Bestäms efter individuell bedömning; belopp över fyra prisbasbelopp beslutas av nämnden.
+  sen_ansokan: Bidrag beviljas inte retroaktivt
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-foreningsbidrag-till-organisationer-inom-socialt-arbete-/soka-utvecklingsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan tas emot löpande under 2026 så länge budget finns och ska lämnas före planerad start.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social]
+- id: goteborg-lokalt-foreningsbidrag-centrum
+  namn: Lokalt föreningsbidrag Centrum
+  kategori: [social, ovrig]
+  malgrupp: Föreningar med aktiviteter eller verksamhet till nytta för boende i stadsområde Centrum
+  deadlines: {typ: fasta, datum: [10-15, 11-15]}
+  krav:
+  - Föreningen ska uppfylla Göteborgs Stads riktlinje för föreningsbidrag
+  - Föreningen ska ha lokal anknytning till Centrum eller vara till nytta för de boende
+  - Aktiviteten ska bidra till meningsfull fritid, trygghet eller grannskapsarbete
+  belopp: Faktiska kostnader; vanligen 10 000–50 000 kronor men både lägre och högre belopp kan sökas.
+  sen_ansokan: Ansök i god tid före aktiviteten
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-och-redovisa-lokalt-foreningsbidrag/ansok-om-foreningsbidrag-i-socialforvaltningen-centrum
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Datumen avser höstlovs- respektive jullovsaktiviteter; övriga ansökningar lämnas före genomförandet.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-lokalt-aktivitetsbidrag-hisingen
+  namn: Lokalt aktivitetsbidrag Hisingen
+  kategori: [social, ovrig]
+  malgrupp: Föreningar med öppna och kostnadsfria aktiviteter för boende på Hisingen
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Aktiviteten ska gynna boende på Hisingen och föreningen ska ha tydlig lokal anknytning
+  - Aktiviteten ska vara öppen utan medlemskrav och kostnadsfri för deltagarna
+  - Föreningen ska uppfylla stadens riktlinje och lämna aktuella års- och ekonomihandlingar
+  belopp: Faktiska kostnader; vanligen 10 000–50 000 kronor.
+  sen_ansokan: Ansökan kan lämnas till sista dagen varje månad
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-och-redovisa-lokalt-foreningsbidrag/ansok-om-foreningsbidrag-i-socialforvaltningen-hisingen
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet gäller enstaka eller längre aktiviteter utanför skolloven.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-lokalt-lovbidrag-hisingen
+  namn: Lokalt lovbidrag Hisingen 2026
+  kategori: [social, ovrig]
+  malgrupp: Föreningar som ordnar kostnadsfria lovaktiviteter för barn och unga 7–20 år på Hisingen
+  deadlines: {typ: fasta, datum: [05-15, 10-13, 11-19]}
+  krav:
+  - Aktiviteten ska genomföras under skollov på Hisingen
+  - Aktiviteten ska vara gratis och öppen för barn och unga 7–20 år
+  - Föreningen ska ha lokal anknytning och uppfylla stadens föreningsriktlinje
+  belopp: Faktiska kostnader; vanligen 10 000–50 000 kronor.
+  sen_ansokan: Ansökan ska lämnas före respektive lov
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-och-redovisa-lokalt-foreningsbidrag/ansok-om-foreningsbidrag-i-socialforvaltningen-hisingen
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Datumen avser sommarlov, höstlov och jullov 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-lokalt-enstaka-aktivitet-nordost
+  namn: Lokalt bidrag för enstaka aktivitet Nordost
+  kategori: [social, ovrig]
+  malgrupp: Föreningar med lokalt förankrade aktiviteter till nytta för boende i Nordost
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Föreningen ska ha lokal anknytning till Nordost och uppfylla stadens riktlinje
+  - Aktiviteten ska ha allmänintresse och gynna boende i stadsområdet
+  - Verksamheten ska främja meningsfull fritid, folkhälsa, inkludering, trygghet eller jämställdhet
+  belopp: Faktiska kostnader; vanligen 10 000–100 000 kronor.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-och-redovisa-lokalt-foreningsbidrag/ansok-om-foreningsbidrag-i-socialforvaltningen-nordost
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan för enstaka aktivitet är öppen till 30 november 2026.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-lokalt-lovbidrag-nordost
+  namn: Lokalt lovbidrag Nordost 2026
+  kategori: [social, ovrig]
+  malgrupp: Föreningar med avgiftsfria lovaktiviteter för barn och unga i Nordost
+  deadlines: {typ: fasta, datum: [09-28, 11-23]}
+  krav:
+  - Föreningen ska ha tydlig lokal anknytning till Nordost och uppfylla stadens riktlinje
+  - Aktiviteten ska gynna boende i Nordost och i första hand barn och unga 10–20 år
+  - Aktiviteten ska vara avgiftsfri eller ha låg kostnad och främja meningsfull fritid, trygghet eller hälsa
+  belopp: Faktiska kostnader; vanligen 10 000–100 000 kronor.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-och-redovisa-lokalt-foreningsbidrag/ansok-om-foreningsbidrag-i-socialforvaltningen-nordost
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Datumen avser höstlov och jullov 2026; årets tidigare lovomgångar var stängda vid kontrollen.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-lokalt-foreningsbidrag-sydvast
+  namn: Lokalt föreningsbidrag Sydväst
+  kategori: [social, ovrig]
+  malgrupp: Föreningar med öppna och kostnadsfria lokala aktiviteter i Sydväst, särskilt för barn och unga 10–20 år
+  deadlines: {typ: fasta, datum: [03-01, 11-27]}
+  krav:
+  - Aktiviteten ska genomföras i Sydväst och ha lokal nytta
+  - Aktiviteten ska vara öppen utan medlemskrav och kostnadsfri
+  - Föreningen ska uppfylla stadens föreningsriktlinje och lämna komplett ansökan före genomförandet
+  belopp: Faktiska skäliga kostnader efter individuell bedömning.
+  sen_ansokan: Bidrag beviljas inte retroaktivt
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-och-redovisa-lokalt-foreningsbidrag/ansok-om-foreningsbidrag-i-socialforvaltningen-sydvast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Fler-månadersaktiviteter söks senast 1 mars; övriga aktiviteter minst fyra veckor i förväg och hela bidragsperioden stänger 27 november.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [idrott, kultur, ungdom, social, annat]
+- id: goteborg-cirkular-ekonomi-tillfallig-insats
+  namn: Bidrag för tillfällig insats inom cirkulär ekonomi och delningsekonomi
+  kategori: [ovrig, social]
+  malgrupp: Idéburna organisationer i Göteborg som genomför utveckling eller enstaka aktiviteter inom cirkulär ekonomi och delningsekonomi
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Organisationen ska bidra till hållbar utveckling genom återbruk, reparation, lån, byte eller delning
+  - Insatsen ska avse metodutveckling, ett event, en föreläsning eller annan avgränsad aktivitet 2026
+  - Organisationen ska följa stadens riktlinje och områdets särskilda anvisning
+  belopp: Ingen fast beloppsgräns publiceras; stöd lämnas efter behovs- och budgetbedömning.
+  sen_ansokan: Ansökan tas emot så länge medel finns
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-foreningsbidrag-till-organisationer-inom-cirkular-ekonomi-och-delningsekonomi
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan är löpande under 2026 och stängs i e-tjänsten när medlen är slut.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
+- id: goteborg-cirkular-ekonomi-grundverksamhet
+  namn: Bidrag för grundverksamhet inom cirkulär ekonomi och delningsekonomi 2027
+  kategori: [ovrig, social]
+  malgrupp: Idéburna organisationer med kontinuerlig verksamhet inom cirkulär ekonomi och delningsekonomi i Göteborg
+  deadlines: {typ: fasta, datum: [09-30]}
+  krav:
+  - Organisationens grundverksamhet ska pågå under hela 2027
+  - Verksamheten ska bidra till hållbar utveckling eller kunskapsspridning inom cirkulär ekonomi och delningsekonomi
+  - Organisationen ska följa stadens riktlinje och områdets särskilda anvisning
+  belopp: Ingen fast beloppsgräns publiceras; stöd lämnas efter verksamhets- och budgetbedömning.
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://goteborg.se/wps/portal/start/foretag-och-organisationer/foreningar/kulturstod-och-bidrag-till-foreningar/ansok-om-foreningsbidrag-till-organisationer-inom-cirkular-ekonomi-och-delningsekonomi
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden är 1–30 september 2026 för verksamhetsåret 2027.
+  senast_verifierad: '2026-08-17'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
 forutsattningar:
 - id: goteborg-aktivitetsbidragsgodkand
   vad: Bli aktivitetsbidragsgodkänd förening
