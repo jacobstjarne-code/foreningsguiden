@@ -39,7 +39,7 @@ const bevakadeKommuner = (subscriber?.kommuner ?? [])
   .map((slug) => getKommunBySlug(slug))
   .filter((k): k is NonNullable<typeof k> => !!k);
 ---
-<Base title="Mina sidor — Föreningsguiden" description="Er förenings konto: bevakade kommuner, föreningsprofil och köphistorik.">
+<Base title="Mina sidor — Föreningsguiden" description="Er förenings konto: bevakade kommuner, föreningsprofil och köphistorik." noindex={true}>
   <h1>Mina sidor</h1>
 
   {!email ? (

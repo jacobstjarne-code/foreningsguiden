@@ -24,6 +24,19 @@ function arOtacktKommunLandning(pathname) {
   return match ? !verifieradPerSlug.has(match[1]) : false;
 }
 
+// M2.2 (Jacob 2026-08-17): noindex-sidor (Base noindex={true} — admin,
+// avregistrera, mina-sidor, utkastvyerna) hamnade ändå i sitemapen, samma
+// klass av läcka som H4 ovan. 2808 utkast-URL:er var störst — ett internt
+// personligt förhandsvisningsläge, inte en sökbar sida.
+function arNoindexadYta(pathname) {
+  return (
+    pathname === '/admin/' ||
+    pathname === '/avregistrera/' ||
+    pathname.startsWith('/mina-sidor/') ||
+    /^\/kommun\/[a-z0-9-]+\/utkast\//.test(pathname)
+  );
+}
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://foreningsguiden.se',
@@ -31,7 +44,10 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [
     sitemap({
-      filter: (page) => !arOtacktKommunLandning(new URL(page).pathname),
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+        return !arOtacktKommunLandning(pathname) && !arNoindexadYta(pathname);
+      },
       serialize(item) {
         const lastmod = lastmodForPath(new URL(item.url).pathname);
         return lastmod ? { ...item, lastmod } : item;
