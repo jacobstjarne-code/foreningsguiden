@@ -23,6 +23,7 @@
 import { formatDate, getDeadlineEntries } from '../lib/kommuner';
 import type { Kommun } from '../lib/kommuner';
 import { BEVAKNING, BEVAKA_KOMMUN, FORSTASIDAN_SVARAR } from '../lib/content';
+import { arKommunKlar9av9 } from '../lib/kommunKlar';
 
 export interface Props {
   kommun: Kommun;
@@ -30,6 +31,11 @@ export interface Props {
 }
 
 const { kommun, today } = Astro.props;
+
+// Q1 (Jacob 2026-08-17): "Ordet alla får bara stå när kommunen klarar
+// 9/9 i verify-kommun-klar." Samma nio regler som CLI-grinden — se
+// kommunKlar.ts, inte en egen bedömning här.
+const klar9av9 = arKommunKlar9av9(kommun);
 
 // F4 — nästa KONTROLLÄSTA frist för kommunen (alla bidrag). Code-beslut
 // (ingen mock-täckning för fallet): headlinen "Sista dag i {kommun} är
@@ -66,7 +72,7 @@ const antalBidrag = kommun.bidrag.length;
 
     <div class="bevaka-ruta__scope">
       <span class="bevaka-ruta__scope-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
-      <span class="bevaka-ruta__scope-text">{BEVAKA_KOMMUN.scopeAllaMall.replace('{n}', String(antalBidrag)).replace('{kommun}', kommun.kommun)}</span>
+      <span class="bevaka-ruta__scope-text">{(klar9av9 ? BEVAKA_KOMMUN.scopeAllaMall : BEVAKA_KOMMUN.scopeHittadeMall).replace('{n}', String(antalBidrag)).replace('{kommun}', kommun.kommun)}</span>
       <span class="bevaka-ruta__scope-etikett">{BEVAKA_KOMMUN.scopeForvalEtikett}</span>
     </div>
 
@@ -130,7 +136,7 @@ const antalBidrag = kommun.bidrag.length;
       </div>
     )}
 
-    <p class="bevaka-kvitto__omfattning">{BEVAKA_KOMMUN.omfattningMall.replace(/{n}/g, String(antalBidrag)).replace('{kommun}', kommun.kommun)}</p>
+    <p class="bevaka-kvitto__omfattning">{(klar9av9 ? BEVAKA_KOMMUN.omfattningMall : BEVAKA_KOMMUN.omfattningHittadeMall).replace(/{n}/g, String(antalBidrag)).replace('{kommun}', kommun.kommun)}</p>
 
     <div class="bevaka-kvitto__inget-konto">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
@@ -138,7 +144,7 @@ const antalBidrag = kommun.bidrag.length;
     </div>
 
     <a href="#alla-bidrag" class="bevaka-kvitto__se-alla">
-      <span>{BEVAKA_KOMMUN.seAllaBidragMall.replace('{n}', String(antalBidrag)).replace('{kommun}', kommun.kommun)}</span>
+      <span>{(klar9av9 ? BEVAKA_KOMMUN.seAllaBidragMall : BEVAKA_KOMMUN.seHittadeBidragMall).replace('{n}', String(antalBidrag)).replace('{kommun}', kommun.kommun)}</span>
       <span aria-hidden="true">›</span>
     </a>
   </div>

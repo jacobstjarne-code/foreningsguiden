@@ -69,7 +69,10 @@ export const START = {
  * generell och alltid synlig, ingen andra primärknapp.
  */
 export const FORSTASIDAN_SVARAR = {
-  bevisMall: '{bidrag} bidrag kartlagda · {kontrollasta} belopp lästa för hand',
+  // Q1 (Jacob 2026-08-17): "kartlagda" påstod en systematisk genomgång
+  // — "hittade" säger bara vad vi faktiskt vet, utan att antyda att
+  // katalogen är komplett (bevisraden ska aldrig påstå fullständighet).
+  bevisMall: '{bidrag} bidrag hittade · {kontrollasta} belopp lästa för hand',
   olastPrefix: 'Upp till',
   olastEtikett: 'ej kontrolläst',
   identitetsrad: {
@@ -353,7 +356,14 @@ export const BEVAKA_KOMMUN = {
   remsanMall: 'Sista dag i {kommun} är {datum}.',
   boxLabelMall: 'Bevaka {kommun} · gratis, inget konto',
   bodyMall: 'Vi mejlar er 28 och 3 dagar innan varje sista dag i {kommun}.',
+  // Q1 (Jacob 2026-08-17): "alla {n}" påstår att listan är komplett —
+  // sant bara när kommunen klarar 9/9 i verify-kommun-klar.ts (Örebro
+  // 18 publicerade/5 i basen, Stockholm 36/12 bevisade motsatsen).
+  // Anropsstället (BevakaKommunen.astro) väljer mall utifrån
+  // arKommunKlar9av9() — samma nio regler som CLI-grinden, inte en
+  // egen bedömning.
   scopeAllaMall: 'Alla {n} bidrag i {kommun}',
+  scopeHittadeMall: '{n} bidrag i {kommun}',
   scopeForvalEtikett: 'förval',
   scopeValjLank: 'Välj enskilda bidrag i stället ›',
   knapp: 'Bevaka →',
@@ -365,8 +375,11 @@ export const BEVAKA_KOMMUN = {
   confirmBodyMall: 'Vi mejlar {epost} — 28 och 3 dagar innan varje sista dag i {kommun}. Ni behöver inte göra något mer.',
   nastaPaminnelseLabel: 'Nästa påminnelse gäller',
   omfattningMall: 'Ni bevakar alla {n} bidrag i {kommun}. Vi lägger till fler i takt med att vi läser in kommunens sidor — bevakningen växer med dem, utan att ni gör något.',
+  // Q1 — samma spärr som scopeAllaMall/scopeHittadeMall ovan.
+  omfattningHittadeMall: 'Ni bevakar {n} bidrag i {kommun} — det vi hittat hittills. Vi lägger till fler i takt med att vi läser in kommunens sidor, bevakningen växer med dem, utan att ni gör något.',
   ingetKontoText: 'Inget konto skapades — vi lagrar bara er mejladress. Vill ni ändra eller sluta? Varje mejl har en länk längst ned.',
   seAllaBidragMall: 'Se alla {n} bidrag i {kommun}',
+  seHittadeBidragMall: 'Se {n} bidrag i {kommun}',
 };
 
 /**
@@ -1169,8 +1182,11 @@ export const VANTELISTA = {
  * bevakningKlient.ts BEVAKNING_GOLV_GLOBALT).
  */
 export const KATALOG_LIVEDATA = {
-  eyebrowKatalog: 'Kartlagt just nu',
-  enhetBidrag: 'bidrag kartlagda',
+  // Q1 (Jacob 2026-08-17): "kartlagt/kartlagda" påstod en systematisk,
+  // avslutad genomgång — "hittat/hittade" säger bara vad vi faktiskt
+  // vet. Bevisraden ska aldrig påstå fullständighet.
+  eyebrowKatalog: 'Hittat just nu',
+  enhetBidrag: 'bidrag hittade',
   // P0.2 (Jacob 2026-08-04): "lästa från" → "hämtade från" — samma skäl
   // som P1.1: "läst" läser lätt som "kontrollerat", "hämtade" påstår
   // bara det som faktiskt hänt (extraherat, inte oberoende verifierat).
@@ -1181,7 +1197,7 @@ export const KATALOG_LIVEDATA = {
   bevakarSingular: '1 förening bevakar sina deadlines · sedan {datum}',
   eyebrowLive: 'Bevakar deadlines just nu',
   enhetForeningar: 'föreningar',
-  katalogSomStod: 'i {kommuner} kommuner, med {bidrag} bidrag kartlagda.',
+  katalogSomStod: 'i {kommuner} kommuner, med {bidrag} bidrag hittade.',
   liveDeadlinesText: '{antal} deadlines bevakas åt föreningar',
   senastAvlast: 'senast avläst {datum}',
 };

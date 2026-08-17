@@ -18,6 +18,7 @@ import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
 import { genereraRegistreringsUtkast, genereraUtkast } from '../lib/utkastGenerator';
 import { harvestBilagor } from '../lib/kopDokument';
 import type { Foreningsprofil } from '../lib/foreningsprofil';
+import { arKommunKlar9av9 } from '../lib/kommunKlar';
 import UrgencyChip from './UrgencyChip.astro';
 import VantelistaFlode from './VantelistaFlode.astro';
 
@@ -50,6 +51,10 @@ export interface Props {
 }
 
 const { kommun, today } = Astro.props;
+
+// Q1 (Jacob 2026-08-17): "Ordet alla får bara stå när kommunen klarar
+// 9/9 i verify-kommun-klar." Samma nio regler som CLI-grinden.
+const klar9av9 = arKommunKlar9av9(kommun);
 
 const kategorierMedBidrag = KATEGORIER.filter((k: Kategori) => kommun.bidrag.some((b) => b.kategori.includes(k)));
 
@@ -398,7 +403,8 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
      oförändrat, landar nu på pekaren i stället för listan. */}
   <div class="progression__station" id="sista-ansokningsdatum">
     <h3>{VAGLEDNING.station4.rubrik}</h3>
-    <a href="#alla-bidrag" class="progression__station4-lank">Visa alla {sortedBidrag.length} ↓</a>
+    {/* Q1 — "alla" bara när kommunen klarar 9/9, se filhuvudet. */}
+    <a href="#alla-bidrag" class="progression__station4-lank">{klar9av9 ? `Visa alla ${sortedBidrag.length} ↓` : `Visa ${sortedBidrag.length} ↓`}</a>
   </div>
 
   <!-- STATION 5 — mål -->
