@@ -1437,9 +1437,16 @@ main {
    fulla listan togs bort härifrån. Samma register som ekerns
    .ekern__sekundar-lank (annan fil, annat Astro-scope, kan inte
    återanvändas som klass över filgränsen — samma CSS-värden i stället). */
+/* P3 (Jacob 2026-08-17): mätte 25px — samma fix som syskonklassen
+   .ekern__sekundar-lank (KommunSidaFull.astro), samma värden dubblerade
+   av samma skäl som kommentaren ovan redan förklarar. */
 .progression__station4-lank {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   margin-top: var(--fg-space-3);
+  padding: 0 var(--fg-space-2);
+  margin-left: calc(var(--fg-space-2) * -1);
   font-size: var(--fg-text-body);
   color: var(--fg-accent);
   font-weight: var(--fg-weight-bold);
@@ -1607,6 +1614,17 @@ main {
 
 .progression__fallbart {
   margin-top: var(--fg-space-4);
+}
+
+/* P3 (Jacob 2026-08-17): per-bidrag-hopplänkarna i "Visa alla
+   datumsatta bidrag"-disclosuren mätte 22px — helt ostylad länk,
+   samma inline-flex/min-height-mönster som brödsmulan/sidfoten (P2). */
+.progression__bradska-lista a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--fg-space-2);
+  margin: 0 calc(var(--fg-space-2) * -1);
 }
 
 /* R5.5 (OMFORDELA_TEXTMASSAN.md runda 5): stationens enda framträdande
