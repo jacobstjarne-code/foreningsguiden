@@ -226,6 +226,7 @@ const kommuner = loadKommuner();
   import { TRATT } from '../../../GUIDE_TRATT_COPY';
   import { VOID_MARK } from '../../lib/content';
   import { trackEvent } from '../../lib/umami';
+  import { formateraBevakarText } from '../../lib/bevakningKlient';
 
   const root = document.querySelector<HTMLElement>('[data-tratt]');
   // FIX (uppföljning MÄTNING, Jacobs fynd 2026-08-11): tratt_fraga_
@@ -681,7 +682,9 @@ const kommuner = loadKommuner();
         atervandEl.hidden = true;
         return;
       }
-      atervandTextEl.textContent = TRATT.besked.atervand.radMall.replace('{antal}', String(antal));
+      // P1.C — formateraBevakarText tar {datum} också, men radMall har
+      // ingen sådan platshållare, så den delen är ett no-op här.
+      atervandTextEl.textContent = formateraBevakarText(antal, '', TRATT.besked.atervand.radMall, TRATT.besked.atervand.radMallSingular);
       atervandEl.hidden = false;
     }
 

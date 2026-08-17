@@ -162,10 +162,26 @@
   padding: 14px 20px;
   cursor: pointer;
 }
+/* P1.B (Jacob 2026-08-17): saknade helt padding/font-size/träffyta —
+   förlitade sig på att alltid kombineras med .fg-btn, men används
+   ENSAM på 25+ ställen i kodbasen (bekräftat via grep), så varenda
+   användning blev en ~29px hög träffyta (bara textens line-height +
+   2px border × 2). Samma mått som .btn-primary (global.css) för
+   visuell konsekvens mellan primär/sekundär knapp — bara färgen
+   skiljer dem åt. */
 .fg-btn--ghost {                 /* sekundär knapp / väljare */
+  display: inline-block;
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-body-lg);
+  font-weight: var(--fg-weight-bold);
   color: var(--fg-ink);
   background: var(--fg-surface);
   border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-control);
+  padding: 14px 20px;
+  min-height: 44px;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 /* Tillstånd — gäller alla interaktiva element ------------------------- */

@@ -486,6 +486,14 @@ main {
   color: var(--fg-positive);
 }
 
+/* P1.A (Jacob 2026-08-17): flex-barnet saknade min-width:0 — flexbox
+   default (min-width:auto) golvar barnets bredd vid dess UNWRAPPED
+   innehåll, så overflow-wrap på länken nedan aldrig fick effekt. Samma
+   rotorsak som M2.1:s progression__list-row__tal-fix. */
+.fg-verification-row__body {
+  min-width: 0;
+}
+
 .fg-verification-row__label {
   font-weight: var(--fg-weight-bold);
   font-size: var(--fg-text-label);
@@ -696,6 +704,17 @@ main {
 }
 
 .bidrag-card__kalla a {
+  overflow-wrap: anywhere;
+}
+
+/* P1.A (Jacob 2026-08-17): samma mönster som .bidrag-card__kalla a
+   ovan (förlaga, orörd) — delad regel för länkar vars TEXT ÄR url:en
+   (inte en etikett som "Läs mer") i stället för tre separata kopior.
+   Utan den bryter en lång källadress ut sidan vid 390px (530px mätt
+   på Gislaved). */
+.fg-verification-row__detail a,
+.registrera-doc__kalla a,
+.kop-doc__meta a {
   overflow-wrap: anywhere;
 }
 
@@ -1097,12 +1116,27 @@ main {
   min-width: 14ch;
 }
 
+/* P1.B (Jacob 2026-08-17): medvetet kompakt för en tabellcell
+   (deadlines/index.astro) — men bär alltid .fg-btn--ghost också, som nu
+   sätter min-height:44px som bas. min-height:auto här återställer den
+   ursprungliga, omedvetna storleken (~32-38px) i just den kompakta
+   kontexten. .bevaka-ruta__bidraglista (nedan) ger kommunsidans egen
+   instans en riktig träffyta i stället, utan att röra markupen. */
 .bevaka-rad-knapp {
   display: inline-block;
   white-space: nowrap;
   font-size: var(--fg-text-label);
   padding: 6px 12px;
+  min-height: auto;
   text-decoration: none;
+}
+
+/* BevakaKommunen.astro "Välj enskilda bidrag i stället" — samma
+   .bevaka-rad-knapp som deadlines/index.astro:s tabellcell, men här ska
+   den vara en riktig träffyta, inte en kompakt kolumn. */
+.bevaka-ruta__bidraglista .bevaka-rad-knapp {
+  min-height: 44px;
+  padding: 10px 12px;
 }
 
 .bevaka-rad-form {

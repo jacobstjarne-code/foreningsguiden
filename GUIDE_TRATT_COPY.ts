@@ -115,7 +115,13 @@ export const TRATT = {
     // beskedet utan att märka att frågor står obesvarade. {antal} fylls
     // i av matcha/index.astro.
     atervand: {
+      // P1.C (Jacob 2026-08-17): "Ni har svarat på 1 frågor" — flaggad
+      // 12 augusti, levde kvar för att radMall aldrig hade en
+      // singularform. formateraBevakarText (bevakningKlient.ts) finns
+      // redan för exakt den här buggklassen ("1 föreningar") men
+      // återanvändes aldrig här.
       radMall: 'Ni har svarat på {antal} frågor — fortsätt där ni slutade.',
+      radMallSingular: 'Ni har svarat på 1 fråga — fortsätt där ni slutade.',
       knappFortsatt: 'Fortsätt',
       knappMejla: 'Mejla mig en länk',
       epostPlaceholder: 'din@forening.se',
