@@ -12,8 +12,11 @@ import type { APIRoute } from 'astro';
 import { GILTIGA_KOMMUNSLUGS } from '../../lib/kommunlan';
 import { VERKSAMHETER } from '../../lib/kommuner';
 import { sendTrattLank, siteUrl } from '../../lib/mejl';
+import { underGransen, klientIdentitet, forManga } from '../../lib/rateLimit';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_MAX = 254; // RFC 5321
+const PROFIL_RAW_MAX = 2000; // ett litet JSON-objekt, generöst tak mot missbruk
 const MEDLEMSBUCKETS = ['xs', 's', 'm', 'l'];
 const ALDERSBUCKETS = ['ny', 'mellan', 'etablerad'];
 const SOKT_SVAR = ['ja', 'nej', 'osaker'];
@@ -23,8 +26,14 @@ export const POST: APIRoute = async ({ request }) => {
   const email = String(form.get('email') ?? '').trim();
   const profilRaw = String(form.get('profil') ?? '');
 
-  if (!EMAIL_RE.test(email)) {
+  if (!EMAIL_RE.test(email) || email.length > EMAIL_MAX || profilRaw.length > PROFIL_RAW_MAX) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
+  }
+
+  // M2.6 (Jacob 2026-08-17): mejlar en godtycklig adress — samma
+  // dubbelspärr (IP + mål-e-post) som övriga bevakningsendpoints.
+  if (!(await underGransen('mejla-tratt-lank-ip', klientIdentitet(request), 5, '10 m')) || !(await underGransen('mejla-tratt-lank-epost', email, 5, '1 h'))) {
+    return forManga();
   }
 
   let profil: unknown;

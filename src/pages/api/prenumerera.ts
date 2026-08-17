@@ -8,8 +8,16 @@ import type { APIRoute } from 'astro';
 import { loadKommuner, svenskLista } from '../../lib/kommuner';
 import { addPendingSubscriber } from '../../lib/subscribers';
 import { sendBekraftelse } from '../../lib/mejl';
+import { underGransen, klientIdentitet } from '../../lib/rateLimit';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// M2.6 (Jacob 2026-08-17): endpointen mejlar en GODTYCKLIG adress —
+// utan spärr kan den missbrukas för att spamma en tredje parts inkorg
+// med bekräftelsemejl, inte bara bränna vår Resend-kvot. Två räknare:
+// IP (snabb utskicksfrekvens) och mål-e-post (samma offer via många
+// IP-adresser).
+const EMAIL_MAX = 254; // RFC 5321
+const FORENINGSNAMN_MAX = 200;
 
 export const POST: APIRoute = async ({ request, redirect }) => {
   const form = await request.formData();
@@ -19,13 +27,18 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   // undefined, aldrig en tom sträng vidare (se addPendingSubscriber-
   // kommentaren om varför en tom sträng aldrig får skriva över ett
   // tidigare sparat namn).
-  const foreningsnamn = String(form.get('foreningsnamn') ?? '').trim() || undefined;
+  const foreningsnamnRaw = String(form.get('foreningsnamn') ?? '').trim();
+  const foreningsnamn = foreningsnamnRaw || undefined;
   const alla = loadKommuner();
   const giltigaSlugs = new Set(alla.map((k) => k.kommun_slug));
   const kommunSlugs = form.getAll('kommuner').map(String).filter((slug) => giltigaSlugs.has(slug));
 
-  if (!EMAIL_RE.test(email) || !samtycke || kommunSlugs.length === 0) {
+  if (!EMAIL_RE.test(email) || email.length > EMAIL_MAX || !samtycke || kommunSlugs.length === 0 || foreningsnamnRaw.length > FORENINGSNAMN_MAX) {
     return new Response('Ogiltig anmälan — e-post, samtycke och minst en kommun krävs.', { status: 400 });
+  }
+
+  if (!(await underGransen('prenumerera-ip', klientIdentitet(request), 5, '10 m')) || !(await underGransen('prenumerera-epost', email, 5, '1 h'))) {
+    return new Response('För många försök. Vänta en stund och försök igen.', { status: 429 });
   }
 
   const { token, alreadyConfirmed } = await addPendingSubscriber(email, kommunSlugs, foreningsnamn);

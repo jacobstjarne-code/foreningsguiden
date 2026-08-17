@@ -21,8 +21,10 @@ import type { APIRoute } from 'astro';
 import { getKommunBySlug } from '../../lib/kommuner';
 import { addPendingSubscriber, addBidragBevakning } from '../../lib/subscribers';
 import { sendBekraftelse } from '../../lib/mejl';
+import { underGransen, klientIdentitet, forManga } from '../../lib/rateLimit';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_MAX = 254; // RFC 5321
 
 export const POST: APIRoute = async ({ request }) => {
   const form = await request.formData();
@@ -40,8 +42,14 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
-  if (!EMAIL_RE.test(email) || !samtycke || !kommun) {
+  if (!EMAIL_RE.test(email) || email.length > EMAIL_MAX || !samtycke || !kommun) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
+  }
+
+  // M2.6 (Jacob 2026-08-17): samma spärr som /api/prenumerera — mejlar
+  // en godtycklig adress, kan missbrukas mot en tredje part.
+  if (!(await underGransen('prenumerera-ip', klientIdentitet(request), 5, '10 m')) || !(await underGransen('prenumerera-epost', email, 5, '1 h'))) {
+    return forManga();
   }
 
   const { token, alreadyConfirmed } = bidrag

@@ -13,8 +13,10 @@ import type { APIRoute } from 'astro';
 import { getKommunBySlug, earliestDeadlineISO, daysUntil, formatDate, todayISO, individuelltBelopp } from '../../lib/kommuner';
 import type { Bidrag } from '../../lib/kommuner';
 import { sendDelbartBesked } from '../../lib/mejl';
+import { underGransen, klientIdentitet, forManga } from '../../lib/rateLimit';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_MAX = 254; // RFC 5321
 
 // Samma logik som matcha/index.astro:s bidragMeta(), fast som klartext
 // utan HTML/urgency-chip — ett mejl är text, inte markup.
@@ -35,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
   const bidragIds = form.getAll('bidragId').map(String);
 
   const kommun = getKommunBySlug(kommunSlug);
-  if (!EMAIL_RE.test(email) || !kommun || bidragIds.length === 0) {
+  if (!EMAIL_RE.test(email) || email.length > EMAIL_MAX || !kommun || bidragIds.length === 0) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
@@ -43,6 +45,12 @@ export const POST: APIRoute = async ({ request }) => {
   const matchade = kommun.bidrag.filter((b) => idSet.has(b.id));
   if (matchade.length === 0) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
+  }
+
+  // M2.6 (Jacob 2026-08-17): mejlar en godtycklig adress — samma
+  // dubbelspärr (IP + mål-e-post) som övriga bevakningsendpoints.
+  if (!(await underGransen('dela-besked-ip', klientIdentitet(request), 5, '10 m')) || !(await underGransen('dela-besked-epost', email, 5, '1 h'))) {
+    return forManga();
   }
 
   const today = todayISO();

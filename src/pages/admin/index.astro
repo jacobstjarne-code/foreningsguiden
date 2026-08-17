@@ -20,6 +20,7 @@ import { OMVERIFIERING_MAX_KONSEKUTIVA_FEL } from '../../lib/omverifieringLogik'
 const sessionToken = Astro.cookies.get(ADMIN_SESSION_COOKIE_NAMN)?.value;
 const inloggad = await arAdminInloggad(sessionToken);
 const felaktigtLosenord = Astro.url.searchParams.get('fel') === '1';
+const forMangaForsok = Astro.url.searchParams.get('fel') === 'for-manga';
 
 const subscribers = inloggad ? await getAllSubscribers() : [];
 const kop = inloggad ? await hamtaAllaKop() : [];
@@ -46,6 +47,7 @@ const utfallVetInte = utfall.filter((u) => u.svar === 'vet_inte').length;
   {!inloggad ? (
     <>
       {felaktigtLosenord && <p class="fg-fel">Fel lösenord.</p>}
+      {forMangaForsok && <p class="fg-fel">För många försök. Vänta 15 minuter och försök igen.</p>}
       <form class="email-signup fg-card" method="POST" action="/api/admin-logga-in">
         <label for="admin-losenord">Lösenord</label>
         <input type="password" id="admin-losenord" name="losenord" required />

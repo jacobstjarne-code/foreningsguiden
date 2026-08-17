@@ -11,9 +11,12 @@ import type { APIRoute } from 'astro';
 import { getKommunBySlug } from '../../lib/kommuner';
 import { addGiltighetBevakning } from '../../lib/subscribers';
 import { sendBekraftelse } from '../../lib/mejl';
+import { underGransen, klientIdentitet, forManga } from '../../lib/rateLimit';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const EMAIL_MAX = 254; // RFC 5321
+const FORENINGSNAMN_MAX = 200;
 
 export const POST: APIRoute = async ({ request }) => {
   const form = await request.formData();
@@ -23,13 +26,28 @@ export const POST: APIRoute = async ({ request }) => {
   const arsmotesdatum = String(form.get('arsmotesdatum') ?? '').trim();
   // C1 (ARBETSORDER 2026-08-11): frivilligt — tomt fält skickas som
   // undefined, aldrig en tom sträng (se addGiltighetBevakning-kommentaren).
-  const foreningsnamn = String(form.get('foreningsnamn') ?? '').trim() || undefined;
+  const foreningsnamnRaw = String(form.get('foreningsnamn') ?? '').trim();
+  const foreningsnamn = foreningsnamnRaw || undefined;
 
   const kommun = getKommunBySlug(kommunSlug);
   const todayISO = new Date().toISOString().slice(0, 10);
 
-  if (!EMAIL_RE.test(email) || !samtycke || !kommun || !DATE_RE.test(arsmotesdatum) || arsmotesdatum > todayISO) {
+  if (
+    !EMAIL_RE.test(email) ||
+    email.length > EMAIL_MAX ||
+    !samtycke ||
+    !kommun ||
+    !DATE_RE.test(arsmotesdatum) ||
+    arsmotesdatum > todayISO ||
+    foreningsnamnRaw.length > FORENINGSNAMN_MAX
+  ) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
+  }
+
+  // M2.6 (Jacob 2026-08-17): mejlar en godtycklig adress — samma
+  // dubbelspärr (IP + mål-e-post) som /api/prenumerera.
+  if (!(await underGransen('giltighetsbevakning-ip', klientIdentitet(request), 5, '10 m')) || !(await underGransen('giltighetsbevakning-epost', email, 5, '1 h'))) {
+    return forManga();
   }
 
   const { token, alreadyConfirmed } = await addGiltighetBevakning(email, kommunSlug, arsmotesdatum, foreningsnamn);
