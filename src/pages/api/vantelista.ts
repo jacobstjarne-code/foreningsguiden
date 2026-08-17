@@ -1,9 +1,24 @@
 // POST /api/vantelista — köanmälan till utkasttjänsten (SPRINT §Spår B,
 // SPRINT_COPY.ts §VÄNTELISTA), och sen matchningstrattens (turn-11)
 // "Hjälp oss registrera" (syfte=registrering, kommun-scopad — inget
-// enskilt bidrag). Ingen dubbel opt-in — kvittot lovar inget
-// bekräftelsemejl. Anropas via fetch(), inte en full formulärnavigering —
-// svarar JSON.
+// enskilt bidrag).
+//
+// M2 (Jacob 2026-08-17, "säkerhet först"-uppföljning): STÄNGD. Ingen
+// dubbel opt-in fanns — en godtycklig e-postadress kunde läggas i
+// väntelistan utan att ägaren bekräftat. Lägre allvarsgrad än M1.1:s
+// fakturaendpoint (inget mejl skickas härifrån, ingen ekonomisk eller
+// trakasserifara — bara en oönskad databaspost), men samma klass av
+// hål. Jacobs val mellan "dubbel opt-in som prenumerera.ts" eller
+// "stäng som fakturaendpointen": stängning valt eftersom dubbel opt-in
+// hade krävt en ny bekräftelsemejltext (Code skriver aldrig svensk
+// kundtext själv) — stängning är både mindre kod OCH görbar utan att
+// vänta på Opus. TILL SKILLNAD FRÅN abonnemang-faktura.ts är den här
+// endpointen LIVE ANVÄND (VantelistaFlode.astro, bidragsutkastets
+// väntelista) — stängningen gör att den knappen visar "Något gick fel.
+// Försök igen." (redan byggd felhantering i komponenten, ingen ny UI-
+// kod behövdes) i stället för att faktiskt lägga till i väntelistan,
+// tills en riktig dubbel-opt-in-text finns. Ursprunglig kod kvar orörd
+// i en oanropad funktion.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
@@ -14,7 +29,14 @@ import type { Foreningsprofil } from '../../lib/foreningsprofil';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async () => {
+  return new Response(JSON.stringify({ ok: false, fel: 'stängd' }), {
+    status: 410,
+    headers: { 'content-type': 'application/json' },
+  });
+};
+
+async function _stangdOanvandKod(request: Request) {
   const form = await request.formData();
   const email = String(form.get('email') ?? '').trim();
   const kommunSlug = String(form.get('kommun') ?? '').trim();
