@@ -35,7 +35,9 @@ tre kräver en webbläsare.
 5. Varje bidrag har `belopp_status: kontrollast` eller `ingen_regel`
 6. Varje bidrag har `belopp_avser` satt till annat än `okand`
 7. Varje bidrag har `foreningstyp` ifylld
-8. Kommunen har `giltighet_regel` med `giltighet_regel_status: kontrollast`
+8. Kommunen har `giltighet_regel_status: kontrollast` eller `ingen_regel`
+   (O3, 2026-08-17: samma mönster som rad 4/5 — en läst källa som
+   uttryckligen inte publicerar en giltighetsregel räknas klar)
 9. Noll processpråk i `anteckning` (inga paragrafer, inga diarienummer)
 
 ### Yta (webbläsare)

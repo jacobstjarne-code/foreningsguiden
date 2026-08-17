@@ -51,8 +51,12 @@ const BIDRAGSREGLER: BidragRegel[] = [
   { namn: 'noll processpråk i anteckning', ok: (b) => strippaProcessSprak(b.anteckning).strukna.length === 0 },
 ];
 
+// O3 (Jacob 2026-08-17): samma "kontrollast eller ingen_regel"-mönster
+// som rad 4/5 (deadline_status/belopp_status) — en läst källa som
+// uttryckligen inte publicerar en giltighetsregel är lika klar som en
+// kontrollast regel, inte en lucka.
 function giltighetOk(kommun: Kommun): boolean {
-  return kommun.giltighet_regel !== null && kommun.giltighet_regel_status === 'kontrollast';
+  return kommun.giltighet_regel_status === 'kontrollast' || kommun.giltighet_regel_status === 'ingen_regel';
 }
 
 interface RegelUtfall {
@@ -81,7 +85,7 @@ function granska(kommun: Kommun): KommunResultat {
 
   // Rad 8: giltighet_regel, kommun-nivå.
   const giltighetPass = giltighetOk(kommun);
-  rader.push({ namn: 'giltighet_regel med giltighet_regel_status kontrollast (kommunnivå)', ok: giltighetPass, fattasBidragIds: [] });
+  rader.push({ namn: 'giltighet_regel_status: kontrollast eller ingen_regel (kommunnivå)', ok: giltighetPass, fattasBidragIds: [] });
 
   // Rad 9: processspråk (sist i BIDRAGSREGLER).
   const sistaRegel = BIDRAGSREGLER[7];
