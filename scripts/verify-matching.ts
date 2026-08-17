@@ -75,11 +75,17 @@ function kommun(bidragLista: Bidrag[]): Kommun {
   };
 }
 
-test('alla sju fält null → alltid MATCHAR, oavsett profil (grov matchning som designegenskap)', () => {
+// M2.7 (Jacob 2026-08-17): FÖRE denna fix kollapsade "inget att pröva
+// mot" och "prövat och godkänt" till samma MATCHAR-utfall — "ett
+// jakande behörighetssvar på tomma fält" som sedan grindade ett köp
+// (checkout/bidragsutkast.ts) som om det vore en riktig matchning.
+// Testet nedan ersätter det gamla 'alla sju fält null → alltid MATCHAR'
+// (som testade precis det beteendet ordern pekade ut som felet).
+test('alla sju fält null → OKAND, inte MATCHAR (M2.7-fixet: inget att pröva mot är inte samma sak som en riktig matchning)', () => {
   const b = bidrag();
   const p = profil({ verksamhet: ['kultur'], storlek: 'xs', alder: 'ny', sokt: 'nej' });
   const r = matchBidrag(p, b);
-  assert.equal(r.state, 'MATCHAR');
+  assert.equal(r.state, 'OKAND');
   assert.equal(r.skal.length, 0);
 });
 
@@ -91,9 +97,15 @@ test('foreningstyp satt, ingen gemensam verksamhet → SAKNAR (mjukt, inte EJ_BE
   assert.equal(r.skal[0].falt, 'foreningstyp');
 });
 
-test('foreningstyp null → matchar oavsett profil.verksamhet, även tom', () => {
+test('foreningstyp null (och inget annat fält satt) → OKAND, inte MATCHAR (M2.7)', () => {
   const b = bidrag({ foreningstyp: null });
   const p = profil({ verksamhet: [] });
+  assert.equal(matchBidrag(p, b).state, 'OKAND');
+});
+
+test('foreningstyp null MEN ett annat fält ifyllt och godkänt → riktig MATCHAR, inte OKAND', () => {
+  const b = bidrag({ foreningstyp: null, kraver_registrering: true });
+  const p = profil({ verksamhet: [], sokt: 'ja' });
   assert.equal(matchBidrag(p, b).state, 'MATCHAR');
 });
 
@@ -139,10 +151,11 @@ test('kraver_registrering=true + sokt=ja → inget skäl, MATCHAR', () => {
   assert.equal(matchBidrag(p, b).state, 'MATCHAR');
 });
 
-test('kraver_registrering=null → aldrig ett skäl, oavsett sokt', () => {
+test('kraver_registrering=null (och inget annat fält satt) → aldrig ett skäl, men OKAND inte MATCHAR (M2.7)', () => {
   const b = bidrag({ kraver_registrering: null });
-  assert.equal(matchBidrag(profil({ sokt: 'nej' }), b).state, 'MATCHAR');
-  assert.equal(matchBidrag(profil({ sokt: 'ja' }), b).state, 'MATCHAR');
+  assert.equal(matchBidrag(profil({ sokt: 'nej' }), b).state, 'OKAND');
+  assert.equal(matchBidrag(profil({ sokt: 'ja' }), b).state, 'OKAND');
+  assert.equal(matchBidrag(profil({ sokt: 'nej' }), b).skal.length, 0);
 });
 
 test('visaBorjaHar: sokt=null/osaker/nej → true oavsett matchande bidrag', () => {
@@ -168,7 +181,11 @@ test('visaBorjaHar: sokt=ja OCH ett matchat bidrag har kraver_registrering=true 
   assert.equal(visaBorjaHar(profil({ sokt: 'ja' }), [b]), false);
 });
 
-test('alder_min/alder_max satt men profilen samlar inte in medlemsålder → hoppas alltid över, EJ_BEHORIG oåtkomligt via denna UI', () => {
+// M2.7: alder_min/alder_max ÄR med i bidragHarMatchningsvillkor (till
+// skillnad från sate_i_kommunen, se test nedan) — riktig MATCHAR, inte
+// OKAND, trots att inget skäl någonsin kan produceras (profilen samlar
+// inte in medlemsålder).
+test('alder_min/alder_max satt men profilen samlar inte in medlemsålder → hoppas alltid över, riktig MATCHAR (inte OKAND), EJ_BEHORIG oåtkomligt via denna UI', () => {
   const b = bidrag({ alder_min: 7, alder_max: 25 });
   const p = profil({ verksamhet: ['ungdom'] });
   const r = matchBidrag(p, b);
@@ -176,28 +193,35 @@ test('alder_min/alder_max satt men profilen samlar inte in medlemsålder → hop
   assert.equal(r.skal.length, 0);
 });
 
-test('matchKommun grupperar korrekt: MATCHAR/SAKNAR i rätt hinkar, EJ_BEHORIG oåtkomlig via denna UI, + borjaHar', () => {
-  const matchande = bidrag({ id: 'a' });
+// M2.7 (2026-08-17): omskrivet — 'a' och 'c' hamnade tidigare i matchar
+// (grov matchning kollapsad med riktig matchning). 'a' (allt null) och
+// 'c' (bara sate_i_kommunen, uttryckligen UTESLUTET ur
+// bidragHarMatchningsvillkor eftersom tratten inte samlar in det
+// profilsvaret) hamnar nu i okand i stället. 'd' tillagd som det ENDA
+// riktiga MATCHAR-fallet i testet — ett fält faktiskt ifyllt OCH
+// godkänt (min_medlemmar 10 ≤ xs-buckets övre gräns 24).
+test('matchKommun grupperar korrekt: MATCHAR/SAKNAR/OKAND i rätt hinkar, EJ_BEHORIG oåtkomlig via denna UI, + borjaHar', () => {
+  const okandAllt = bidrag({ id: 'a' });
   const saknar = bidrag({ id: 'b', min_medlemmar: 500 });
-  // sate_i_kommunen: profilen samlar inte in ett motsvarande svar (alltid
-  // null/obesvarat i denna UI, se foreningsprofil.ts) → ingen skal
-  // produceras → detta bidraget hoppar in i MATCHAR, inte EJ_BEHORIG.
-  const utanProfilsignal = bidrag({ id: 'c', sate_i_kommunen: true });
-  const k = kommun([matchande, saknar, utanProfilsignal]);
+  const okandSate = bidrag({ id: 'c', sate_i_kommunen: true });
+  const riktigMatchning = bidrag({ id: 'd', min_medlemmar: 10 });
+  const k = kommun([okandAllt, saknar, okandSate, riktigMatchning]);
   const p = profil({ storlek: 'xs', sokt: 'nej' });
   const r = matchKommun(p, k);
 
-  assert.equal(r.matchar.length, 2);
-  assert.deepEqual(r.matchar.map((b) => b.id).sort(), ['a', 'c']);
+  assert.deepEqual(r.matchar.map((b) => b.id), ['d']);
   assert.equal(r.saknar.length, 1);
   assert.equal(r.saknar[0].bidrag.id, 'b');
   assert.equal(r.ejBehorig.length, 0);
-  assert.equal(r.matchar.length + r.saknar.length + r.ejBehorig.length, 3);
+  assert.deepEqual(r.okand.map((b) => b.id).sort(), ['a', 'c']);
+  assert.equal(r.matchar.length + r.saknar.length + r.ejBehorig.length + r.okand.length, 4);
   assert.equal(r.borjaHar, true); // sokt='nej'
 });
 
-test('H26: pausat/avskaffat bidrag hoppas över helt i matchKommun — hamnar varken i matchar, saknar eller ejBehorig', () => {
-  const aktivt = bidrag({ id: 'a' });
+test('H26: pausat/avskaffat bidrag hoppas över helt i matchKommun — hamnar varken i matchar, saknar, ejBehorig eller okand', () => {
+  // M2.7: 'a' har inget fält ifyllt → okand, inte matchar (samma fix som
+  // testet ovan). min_medlemmar satt så bidraget hamnar i matchar.
+  const aktivt = bidrag({ id: 'a', min_medlemmar: 10 });
   const pausat = bidrag({ id: 'b', status: 'pausad' });
   const avskaffat = bidrag({ id: 'c', status: 'avskaffat', min_medlemmar: 500 }); // skulle annars gett SAKNAR
   const k = kommun([aktivt, pausat, avskaffat]);
@@ -205,6 +229,7 @@ test('H26: pausat/avskaffat bidrag hoppas över helt i matchKommun — hamnar va
 
   assert.deepEqual(r.matchar.map((b) => b.id), ['a']);
   assert.equal(r.saknar.length, 0);
+  assert.equal(r.okand.length, 0);
   assert.equal(r.ejBehorig.length, 0);
 });
 

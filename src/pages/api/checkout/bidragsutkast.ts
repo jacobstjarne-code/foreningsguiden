@@ -87,7 +87,15 @@ export const POST: APIRoute = async ({ request }) => {
   const matchar = matchning.matchar.some((b) => b.id === bidragId);
   const resultat = genereraUtkast(profil, bidrag, kommun);
   if (!matchar || resultat.typ !== 'bidragsutkast') {
-    return new Response(JSON.stringify({ ok: false, fel: 'matchar_inte' }), { status: 400, headers: { 'content-type': 'application/json' } });
+    // M2.7 (Jacob 2026-08-17): OKAND (matching.ts) landar aldrig i
+    // matchar, så den här grenen redan täcker det fallet — men ett eget
+    // felkod-utfall gör avsikten explicit i stället för att förlita sig
+    // på att OKAND råkar sakna en plats i matchar. "Ett jakande
+    // behörighetssvar på tomma fält får inte grinda ett köp": ett bidrag
+    // utan ett enda ifyllt matchningsvillkor ska nekas köpet som ett
+    // "vi kan inte avgöra", inte tyst falla igenom som matchar_inte.
+    const okand = matchning.okand.some((b) => b.id === bidragId);
+    return new Response(JSON.stringify({ ok: false, fel: okand ? 'kan_inte_avgora' : 'matchar_inte' }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
   // M2.4 (Jacob 2026-08-17): "Ett jakande behörighetssvar på tomma fält

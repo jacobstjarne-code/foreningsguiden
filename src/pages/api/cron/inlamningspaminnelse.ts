@@ -45,7 +45,10 @@ export const GET: APIRoute = async ({ request, url }) => {
 
     const resultat = matchKommun(profil, kommun);
 
-    for (const bidrag of resultat.matchar) {
+    // M2.7 (2026-08-17) — matchar+okand tillsammans: samma breda omfång
+    // som innan matching.ts:s OKAND-uppdelning (se abonnemangsbevakning.
+    // ts filhuvud för resonemanget). Bara köpflödet tightnar mot OKAND.
+    for (const bidrag of [...resultat.matchar, ...resultat.okand]) {
       if (bidrag.deadlines.typ !== 'fasta') continue;
 
       for (const mmdd of bidrag.deadlines.datum) {

@@ -16,7 +16,7 @@
 import type { Bidrag, Kommun, Verksamhet } from './kommunTyper';
 import type { Foreningsprofil, Medlemsbucket, Aldersbucket } from './foreningsprofil';
 
-export type MatchState = 'MATCHAR' | 'SAKNAR' | 'EJ_BEHORIG';
+export type MatchState = 'MATCHAR' | 'SAKNAR' | 'EJ_BEHORIG' | 'OKAND';
 
 export type MatchSkalFalt =
   | 'foreningstyp'
@@ -101,7 +101,21 @@ export function matchBidrag(profil: Foreningsprofil, bidrag: Bidrag): MatchResul
   // 6/7 börjar samla in det (se matching-motorns filhuvud).
 
   const hard = skal.some((s) => !MJUKA_FALT.has(s.falt));
-  const state: MatchState = hard ? 'EJ_BEHORIG' : skal.length > 0 ? 'SAKNAR' : 'MATCHAR';
+  // M2.7 (Jacob 2026-08-17): "Ett jakande behörighetssvar på tomma fält
+  // får inte grinda ett köp." Utan skal-poster (inget villkor sa emot
+  // profilen) betydde MATCHAR hittills två olika saker som råkade se
+  // lika ut: en verklig, prövad matchning ELLER "vi har inget att pröva
+  // mot" (bidragHarMatchningsvillkor false — 2719/2808 aktiva bidrag,
+  // uppmätt 2026-08-17). OKAND skiljer dem åt. bidragHarMatchningsvillkor
+  // definieras längre ner i filen (function-hissning, samma mönster som
+  // harMatchningsdata redan bygger på).
+  const state: MatchState = hard
+    ? 'EJ_BEHORIG'
+    : skal.length > 0
+      ? 'SAKNAR'
+      : bidragHarMatchningsvillkor(bidrag)
+        ? 'MATCHAR'
+        : 'OKAND';
 
   return { state, skal };
 }
@@ -166,6 +180,11 @@ export interface MatchKommunResult {
   matchar: Bidrag[];
   saknar: { bidrag: Bidrag; skal: MatchSkal[] }[];
   ejBehorig: { bidrag: Bidrag; skal: MatchSkal[] }[];
+  // M2.7 — bidrag utan ett enda ifyllt matchningsvillkor. Inte samma sak
+  // som saknar (som kräver ett FAKTISKT motsägande skäl) — okand betyder
+  // "vi har inget att pröva mot alls". Egen hink, faller ALDRIG in i
+  // matchar eller saknar av misstag (se matchBidrag).
+  okand: Bidrag[];
   borjaHar: boolean;
 }
 
@@ -174,6 +193,7 @@ export function matchKommun(profil: Foreningsprofil, kommun: Kommun): MatchKommu
   const matchar: Bidrag[] = [];
   const saknar: { bidrag: Bidrag; skal: MatchSkal[] }[] = [];
   const ejBehorig: { bidrag: Bidrag; skal: MatchSkal[] }[] = [];
+  const okand: Bidrag[] = [];
 
   for (const bidrag of kommun.bidrag) {
     // H26 — ett pausat/avskaffat bidrag är inget att söka och ska aldrig
@@ -184,10 +204,11 @@ export function matchKommun(profil: Foreningsprofil, kommun: Kommun): MatchKommu
     const { state, skal } = matchBidrag(profil, bidrag);
     if (state === 'MATCHAR') matchar.push(bidrag);
     else if (state === 'EJ_BEHORIG') ejBehorig.push({ bidrag, skal });
+    else if (state === 'OKAND') okand.push(bidrag);
     else saknar.push({ bidrag, skal });
   }
 
-  return { matchar, saknar, ejBehorig, borjaHar: visaBorjaHar(profil, matchar) };
+  return { matchar, saknar, ejBehorig, okand, borjaHar: visaBorjaHar(profil, matchar) };
 }
 
 // ---------------------------------------------------------------------

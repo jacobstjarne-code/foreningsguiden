@@ -314,6 +314,17 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       // UI:t"). Importeras separat för att inte dra in hela tratt-koden.
       const { matchKommun } = await import('../../../../../lib/matching');
       const matchning = matchKommun(profil, kommunData);
+      // M2.7 (Jacob 2026-08-17): OKAND ("vi kan inte avgöra") är INTE
+      // samma sak som "passar inte" — bidraget saknar bara ett enda
+      // ifyllt matchningsvillkor att pröva mot. Egen, ärlig text i
+      // stället för att låta det tysta falla in i "verkar inte passa".
+      if (matchning.okand.some((b) => b.id === bidragId)) {
+        visaStatus('Vi kan inte avgöra om det här bidraget gäller er — kommunen har inte publicerat tillräckligt för att pröva mot.', {
+          href: `/kommun/${kommunSlug}/`,
+          text: 'Se bidraget ändå',
+        });
+        return;
+      }
       if (!matchning.matchar.some((b) => b.id === bidragId)) {
         visaStatus('Det här bidraget verkar inte passa er förenings profil.', {
           href: `/kommun/${kommunSlug}/`,

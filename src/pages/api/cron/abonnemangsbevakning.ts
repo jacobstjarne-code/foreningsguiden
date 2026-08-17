@@ -11,12 +11,19 @@
 // GROV MATCHNING — FLAGGAT MEDVETET, INTE EN BUGG (Jacob, 2026-07-27):
 // alla matchningsfält (min_medlemmar, alder_min/max,
 // min_verksamhetstid_manader, foreningstyp, kraver_registrering) är
-// null i hela datakorpusen idag, så matchKommun().matchar innehåller i
-// praktiken nästan alla bidrag i kommunen — samma grova-matchning-per-
-// design som harMatchningsdata() (matching.ts) redan dokumenterar och
-// motiverar. Utskicket skärps AUTOMATISKT när struktureringspasset
-// fyller i fälten — den här cronen är byggd MOT det grova läget, inte
-// runt det, och behöver ingen ändring när datan blir skarpare.
+// null för de flesta bidrag i datakorpusen, så matchKommun() ger
+// nästan alla bidrag i kommunen — samma grova-matchning-per-design som
+// harMatchningsdata() (matching.ts) redan dokumenterar och motiverar.
+// M2.7 (2026-08-17) delade upp det tidigare MATCHAR-utfallet i MATCHAR
+// (minst ett villkor faktiskt prövat) och OKAND (inget att pröva mot
+// alls) — matchKommun().matchar innehåller nu bara det förra. DEN HÄR
+// cronen (påminnelser, ingen köpspärr) vill fortfarande ha samma breda
+// omfång som innan uppdelningen, så den itererar matchar+okand
+// tillsammans nedan — bara köpflödet (checkout/bidragsutkast.ts) ska
+// behandla OKAND som "kan inte avgöra". Utskicket skärps AUTOMATISKT
+// när struktureringspasset fyller i fälten (fler bidrag flyttar från
+// okand till matchar) — den här cronen är byggd MOT det grova läget,
+// inte runt det, och behöver ingen ändring när datan blir skarpare.
 //
 // Delad idempotensnyckel för "3 dagar kvar" med den gratis bevakningen
 // (paminnelseskickad:3:<bidragId>:<datum>, subscribers.ts): en
@@ -71,7 +78,9 @@ export const GET: APIRoute = async ({ request, url }) => {
 
     const resultat = matchKommun(profil, kommun);
 
-    for (const bidrag of resultat.matchar) {
+    // M2.7 — matchar+okand tillsammans, se filhuvudet: den här cronen
+    // ska behålla sitt tidigare breda omfång, bara köpflödet tightnar.
+    for (const bidrag of [...resultat.matchar, ...resultat.okand]) {
       if (bidrag.deadlines.typ !== 'fasta') continue;
 
       for (const mmdd of bidrag.deadlines.datum) {
