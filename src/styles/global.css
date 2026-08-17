@@ -249,6 +249,7 @@ main {
 .breadcrumb ol {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.35rem;
   list-style: none;
   margin: 0 0 var(--fg-space-5) 0;
@@ -263,7 +264,15 @@ main {
   color: var(--fg-ink-muted);
 }
 
+/* P2 (Jacob 2026-08-17): brödsmulans länkar mätte 17px — inline text
+   utan träffyta. En regel för hela ytan, inte en per sida som återanvänder
+   komponenten. */
 .breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--fg-space-2);
+  margin: 0 calc(var(--fg-space-2) * -1);
   color: var(--fg-ink-muted);
 }
 
@@ -279,6 +288,16 @@ main {
   margin-right: auto;
   font-size: var(--fg-text-label);
   color: var(--fg-ink-muted);
+}
+
+/* P2 (Jacob 2026-08-17): Källpolicy/Priser/Kontakt/Integritetspolicy
+   mätte 17px — plain länkar i löptext. En regel för alla fyra. */
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--fg-space-2);
+  margin: 0 calc(var(--fg-space-2) * -1);
 }
 
 /* H2 (GRANSKNING_foreningsguiden.md): samma "vi är inte kommunen"-mening
