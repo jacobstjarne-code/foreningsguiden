@@ -1,12 +1,37 @@
 /**
- * G1 golden/regressionstest för kommunernas strukturerade giltighetsregler.
+ * G1 valideringssvit för kommunernas strukturerade giltighetsregler,
+ * delad i två (P4, Jacob 2026-08-17): "golden set — fasta namngivna
+ * fall, växer bara när någon medvetet lägger till ett referensfall.
+ * validator — varje rad i datan är strukturellt giltig, oavsett hur
+ * många rader som finns. Med den delningen bryter inte bygget när GPT
+ * lägger till en kommun." Samma mönster som verify-belopp-avser.ts.
  *
- * Läser de verkliga YAML-filerna och låser tre saker:
- *  1. exakt de 21 redan lästa fritextraderna i 20 kommuner finns kvar,
- *     inklusive id och käll-URL (ingen provenance förloras),
- *  2. varje rad har den fastställda kommunregeln/statusen,
- *  3. fast_datum är en riktig återkommande typ — Täby och Katrineholm
- *     rullar till nästa år när årets datum passerat.
+ * Rotorsak till delningen: den här filen höll tidigare EN kombinerad
+ * kontroll — ett exakt totalt radantal ("20 rader, 19 kommuner") som
+ * bara kunde ändras manuellt. Två separata concurrent research-commits
+ * samma dag (kungalv/vaxjo, sen Malmö) lade till legitima nya
+ * giltighetsvärden och fällde CI båda gångerna, trots att datan var
+ * korrekt — bygget kände inte till att korpusen hade växt.
+ *
+ * DEL 1 — GOLDEN SET: namngivna referensfall, uppslagna via slug+id,
+ * ALDRIG via ett totalt radantal. Växer bara när ett nytt fall
+ * MEDVETET läggs till i FIXTURES/RULES.
+ *
+ * DEL 2 — VALIDATOR: körs över HELA den levande korpusen, oavsett
+ * antal kommuner. De rent strukturella reglerna (typ-enum, status-enum,
+ * typ↔status↔antal/datum-konsistens) valideras redan av schemat
+ * (src/lib/kommuner.ts, npm run validera) och upprepas inte här. Det
+ * schemat INTE täcker: att giltighet_regel.kalla_url faktiskt går att
+ * spåra till en av kommunens egna giltighetsfritext-rader. Det var
+ * exakt vaxjo-buggen 2026-08-17 (giltighet_regel.kalla_url pekade på
+ * kommunens generella sida i stället för raden giltighetstexten kom
+ * från) — en count-agnostisk validator hade fångat den automatiskt,
+ * utan att vaxjo behövde vara ett namngivet golden-fall.
+ *
+ * Utöver de två delarna: käll-/klientkoppling (rad ~140) och
+ * fast_datum/manader_efter_*-beräkningarna (rad ~180) är egna, redan
+ * count-agnostiska golden-tester (fasta indata, fasta facit) — rörda
+ * inte av denna delning.
  */
 
 import { readFileSync, readdirSync } from 'node:fs';
@@ -49,7 +74,7 @@ const RULES: Record<string, ExpectedRule> = {
   taby: { typ: 'fast_datum', antal: null, datum: '02-15', status: 'kontrollast' },
   tranas: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   trelleborg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
-  umea: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  umea: { typ: 'manader_efter_arsmote', antal: 12, datum: null, status: 'kontrollast' },
   vallentuna: { typ: 'manader_efter_arsmote', antal: 3, datum: null, status: 'kontrollast' },
   varberg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   vaxjo: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
@@ -98,18 +123,10 @@ for (const file of readdirSync('data/kommuner').filter((name) => name.endsWith('
   docs.set(doc.kommun_slug, doc);
 }
 
-const allRows = [...docs.values()].flatMap((doc) =>
-  (doc.forutsattningar ?? [])
-    .filter((row) => typeof row.giltighet === 'string')
-    .map((row) => ({ slug: doc.kommun_slug, id: row.id }))
-);
-
 const fail: string[] = [];
-if (FIXTURES.length !== 21) fail.push(`fixturelistan har ${FIXTURES.length} rader, väntat 21`);
-if (new Set(FIXTURES.map((row) => row.slug)).size !== 20) fail.push('fixturelistan måste omfatta exakt 20 kommuner');
-if (allRows.length !== 21) fail.push(`korpusen har ${allRows.length} giltighetsrader, väntat 21`);
-if (new Set(allRows.map((row) => row.slug)).size !== 20) fail.push('korpusen måste omfatta exakt 20 kommuner med giltighetsfritext');
 
+// DEL 1 — GOLDEN SET. Uppslag per namngivet fall (slug+id), inget
+// totalt radantal någonstans i denna loop.
 for (const fixture of FIXTURES) {
   const doc = docs.get(fixture.slug);
   const row = doc?.forutsattningar?.find((item) => item.id === fixture.id);
@@ -131,6 +148,23 @@ for (const fixture of FIXTURES) {
     fail.push(`${fixture.slug}: status ${doc.giltighet_regel_status}, väntat ${expected.status}`);
   }
   if (actual.kalla_url !== row.kalla_url) fail.push(`${fixture.slug}/${fixture.id}: provenance-URL divergerar`);
+}
+
+// DEL 2 — VALIDATOR. Körs över alla kommuner i data/kommuner, oavsett
+// antal — växer automatiskt, kräver ingen uppdatering här. Kollar bara
+// kommuner där G1-extraktionen redan kört (giltighet_regel satt); en
+// kommun med obehandlad giltighetsfritext (olast, väntar på G1) är
+// normalt pipeline-läge, inte ett fel.
+let provenanceKontrollerade = 0;
+for (const doc of docs.values()) {
+  if (!doc.giltighet_regel) continue;
+  const giltighetRader = (doc.forutsattningar ?? []).filter((row) => typeof row.giltighet === 'string');
+  if (giltighetRader.length === 0) continue;
+  provenanceKontrollerade++;
+  const sparbar = giltighetRader.some((row) => row.kalla_url === doc.giltighet_regel!.kalla_url);
+  if (!sparbar) {
+    fail.push(`${doc.kommun_slug}: giltighet_regel.kalla_url matchar ingen av kommunens giltighetsfritext-rader — provenance bruten`);
+  }
 }
 
 if (!GILTIGHET_REGEL_TYPER.includes('fast_datum')) fail.push('fast_datum saknas i GILTIGHET_REGEL_TYPER');
@@ -239,6 +273,6 @@ if (fail.length > 0) {
   process.exit(1);
 }
 
-console.log(`verify:giltighet-regler — ${allRows.length}/${FIXTURES.length} fritextrader, ${new Set(allRows.map((r) => r.slug)).size}/${new Set(FIXTURES.map((r) => r.slug)).size} kommuner`);
+console.log(`verify:giltighet-regler — golden set: ${FIXTURES.length} rader / ${new Set(FIXTURES.map((r) => r.slug)).size} kommuner. Validator: provenance kontrollerad för ${provenanceKontrollerade} kommuner (hela korpusen med giltighet_regel satt).`);
 console.log('fast_datum golden: Täby 02-15 PASS, Katrineholm 03-31 PASS');
 console.log('PASS');
