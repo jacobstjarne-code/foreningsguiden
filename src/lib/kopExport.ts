@@ -73,9 +73,16 @@ export function bidragsutkastTillDokument(
 ): DokumentInnehall {
   return {
     titel: `Utkast till ansökan — ${doc.bidragNamn} (${doc.kommun})`,
+    // R2 (Jacob 2026-08-18): källhänvisning per krav — bidrag.krav[] har
+    // ingen egen URL per rad (till skillnad från forutsattningar-radernas
+    // kallaUrl ovan i checklistaTillDokument), så samma doc.kalla_url
+    // citeras under varje krav. Sakligt korrekt: det ÄR varifrån varje
+    // krav-text kommer, inte en gissning på en mer specifik källa som
+    // inte finns i datan.
     sektioner: doc.kravRader.map((rad, i) => ({
       rubrik: `${i + 1}. ${rad.kravText}`,
       stycken: [rad.innehall],
+      kalla: doc.kalla_url,
     })),
     bilagor,
     ansokningssystemNamn,

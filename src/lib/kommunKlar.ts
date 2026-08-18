@@ -85,3 +85,19 @@ export function granskaKommunKlar(kommun: Kommun): KommunKlarResultat {
 export function arKommunKlar9av9(kommun: Kommun): boolean {
   return granskaKommunKlar(kommun).passerade === 9;
 }
+
+/**
+ * R2 (Jacob 2026-08-18): blockets villkor bytt — inte längre "råkar en
+ * kravrad vara en bar sätesmening" (KommunProgression.astro:s gamla
+ * arSaljbar/SALJBARHETSPROFIL-genväg via genereraUtkast, 93 bidrag,
+ * 100% via samma sätesregel, okorrelerat med datakvalitet). Samma tre
+ * rader som KLAR 1-3 (BIDRAGSREGLER[0..2] ovan) — "har kommunens data
+ * för DETTA bidrag räcker till en användbar checklista", oberoende av
+ * besökarens profil. Enda källan: köpteasern (KommunProgression.astro),
+ * checkout-spärren (api/checkout/bidragsutkast.ts) och utkastsidans
+ * kopram/bevaka-val (utkast/[bidragId]/index.astro) läser alla härifrån
+ * — samma spärr på tre ställen, aldrig en egen kopia.
+ */
+export function arBidragSaljbart(bidrag: Bidrag): boolean {
+  return BIDRAGSREGLER.slice(0, 3).every((regel) => regel.ok(bidrag));
+}

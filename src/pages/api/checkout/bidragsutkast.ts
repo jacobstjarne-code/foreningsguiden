@@ -17,12 +17,18 @@
  *      inte 'registrering_forst' — annars säljer vi fel produkt till
  *      en förening som borde köpa registreringsutkastet först (samma
  *      spärr 4 som utkastGenerator.ts:s eget filhuvud beskriver).
- *   3. SPÄRR (Jacobs order, 2026-08-17, M2.4): checklistan har faktiskt
- *      något ifyllt innehåll — resultat.kravRader.length === 0 eller
- *      resultat.luckor === resultat.kravRader.length (alla rader tomma
- *      platshållare) nekar köpet. Läst ur datan live, ingen hårdkodad
- *      bidrag-lista — 96% av katalogen (2703/2808 bidrag) föll under
- *      detta villkor vid mätningen 2026-08-17.
+ *   3. SPÄRR (Jacobs order, 2026-08-18, R2): kommunens data för DETTA
+ *      bidrag räcker till en användbar checklista — arBidragSaljbart()
+ *      (kommunKlar.ts), samma tre rader som KLAR 1-3 (krav_status
+ *      kontrollast, minst tre krav, krav_fullstandiga true). Ersätter
+ *      M2.4:s luckor-baserade spärr (resultat.luckor === kravRader.
+ *      length): den öppnade bara när en kravrad RÅKADE vara en bar
+ *      sätesmening (R1-mätningen 2026-08-17 — 93 bidrag i hela basen,
+ *      100% av samma skäl), okorrelerat med kommunens datakvalitet och
+ *      utan att säga något om föreningen. Denna spärr är ren
+ *      bidragsdata, ingen profil inblandad — samma spärr som
+ *      kommunsidans köpteaser (KommunProgression.astro) och
+ *      utkastsidans kopram/bevaka-val.
  * Ingen profil alls = kan inte verifieras = inget köp.
  */
 export const prerender = false;
@@ -32,6 +38,7 @@ import Stripe from 'stripe';
 import { getKommunBySlug } from '../../../lib/kommuner';
 import { matchKommun } from '../../../lib/matching';
 import { genereraUtkast } from '../../../lib/utkastGenerator';
+import { arBidragSaljbart } from '../../../lib/kommunKlar';
 import type { Foreningsprofil } from '../../../lib/foreningsprofil';
 import { siteUrl } from '../../../lib/mejl';
 import { PRIS_BIDRAGSUTKAST_ORE, MOMSSATS, momsAndelOre } from '../../../lib/priser';
@@ -98,17 +105,16 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ ok: false, fel: okand ? 'kan_inte_avgora' : 'matchar_inte' }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
-  // M2.4 (Jacob 2026-08-17): "Ett jakande behörighetssvar på tomma fält
+  // R2 (Jacob 2026-08-18): "Ett jakande behörighetssvar på tomma fält
   // får inte grinda ett köp" — samma princip här på checklistans EGET
-  // innehåll. Läst ur datan vid varje anrop (resultat.kravRader/luckor
-  // ovan), aldrig en hårdkodad bidrag-lista — när GPT fyller fler krav i
-  // en kommun öppnas köpet av sig självt, ingen flagga att komma ihåg
-  // att ta bort. Klientens utkastvy döljer redan köpknappen för samma
-  // fall (UX) — den här kollen är vad som faktiskt stoppar ett
-  // manipulerat/förbigånget anrop, samma "server-sidan är spärren"-
-  // princip som matchar-kollen ovan.
-  const allaTomma = resultat.kravRader.length === 0 || resultat.luckor === resultat.kravRader.length;
-  if (allaTomma) {
+  // innehåll. Läst ur bidragets EGEN data vid varje anrop, aldrig en
+  // hårdkodad bidrag-lista — när GPT fyller fler krav i en kommun öppnas
+  // köpet av sig självt, ingen flagga att komma ihåg att ta bort.
+  // Klientens utkastvy döljer redan köpknappen för samma fall (UX) — den
+  // här kollen är vad som faktiskt stoppar ett manipulerat/förbigånget
+  // anrop, samma "server-sidan är spärren"-princip som matchar-kollen
+  // ovan.
+  if (!arBidragSaljbart(bidrag)) {
     return new Response(JSON.stringify({ ok: false, fel: 'inget_att_salja' }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 

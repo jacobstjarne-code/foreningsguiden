@@ -134,6 +134,25 @@ export function leggTillBevakatBidrag(kommunSlug: string, bidragId: string): For
   return saveForeningsprofil({ bevakadeBidrag: [...existing.bevakadeBidrag, { kommunSlug, bidragId }] });
 }
 
+/**
+ * R2 (Jacob 2026-08-18): konservativ fallback-profil — används när
+ * besökaren inte har någon sparad profil (eller en som gäller en annan
+ * kommun) så att utkastvyn ändå kan RENDERA strukturen (krav, bilagor,
+ * arbetsordning, deadline) i stället för att blockera hela sidan.
+ * kommunSlug=DENNA kommun räcker för Regel A (säte, utkastGenerator.ts
+ * fyllKrav) att fylla i något utan att gissa något om föreningen.
+ * sokt:'ja' undviker registreringsspärren — en förhandsvisning som
+ * inte påstår sig veta något om föreningen ska inte heller påstå att
+ * den saknar registrering. "Använd besökarens riktiga profil när den
+ * finns, den konservativa när den saknas" (Jacob, R2) — svara på
+ * matchningstrattens frågor fyller fler rader och avgör om köpet är
+ * möjligt (api/checkout/bidragsutkast.ts kräver fortfarande en riktig,
+ * matchande profil för själva betalningen).
+ */
+export function konservativProfil(kommunSlug: string): Foreningsprofil {
+  return { ...TOM_PROFIL, kommunSlug, sokt: 'ja' };
+}
+
 export function clearForeningsprofil(): void {
   if (!harLocalStorage()) return;
   try {

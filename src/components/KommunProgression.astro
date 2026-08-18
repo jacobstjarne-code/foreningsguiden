@@ -15,10 +15,9 @@ import {
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
-import { genereraRegistreringsUtkast, genereraUtkast } from '../lib/utkastGenerator';
+import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
 import { harvestBilagor } from '../lib/kopDokument';
-import type { Foreningsprofil } from '../lib/foreningsprofil';
-import { arKommunKlar9av9 } from '../lib/kommunKlar';
+import { arKommunKlar9av9, arBidragSaljbart } from '../lib/kommunKlar';
 import UrgencyChip from './UrgencyChip.astro';
 import VantelistaFlode from './VantelistaFlode.astro';
 
@@ -123,20 +122,16 @@ const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(pris
 // C5 (ÅTGÄRDSSPEC, 2026-08-03 kväll): en gång per kommun, inte per bidrag.
 const kopRutaBeskrivningMall = harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning;
 
-// Uppföljning 2026-08-03 (punkt 4) + ÅTGÄRDSSPEC D1/T5 (samma kväll):
-// köprutan får inte sälja på ett bidrag utan krav att strukturera.
-// M3 (Jacob 2026-08-17): D1 mätte KRAVDATANS EXISTENS (krav_status
-// kontrollast + minst tre krav) — men inte om checklistan faktiskt går
-// att fylla i något åt en riktig besökare. De två frågorna såg lika ut
-// så länge M2.4:s riktiga spärr (genereraUtkast/luckor) bara satt på
-// /utkast/-sidan: kommunsidan visade "Lås upp hela underlaget" för
-// bidrag som sedan blockerades i samma ögonblick besökaren klickade
-// sig vidare dit — bekräftat på 12 av Gislaveds 14 bidrag vid M3-
-// granskningen, samtliga med krav_status=kontrollast och ≥3 krav men
-// noll ifyllbara rader. arSaljbar (nedan) ersätter D1 med samma
-// genereraUtkast-kontroll som /utkast/-sidan gör, körd med en
-// konservativ profil (se SALJBARHETSPROFIL) eftersom kommunsidan
-// byggs statiskt utan besökarens sparade svar.
+// R2 (Jacob 2026-08-18): blockets villkor — inte längre ifyllnad/luckor.
+// R1-mätningen visade att den gamla arSaljbar-gaten (genereraUtkast +
+// en konservativ profil) öppnade för 93 bidrag i hela basen, alla av
+// EXAKT samma skäl (en kravrad råkade vara en bar sätesmening) —
+// okorrelerat med kommunens datakvalitet, och utan att säga något om
+// föreningen. arBidragSaljbart (kommunKlar.ts) ersätter den med samma
+// tre rader som KLAR 1-3: krav_status kontrollast, minst tre krav,
+// krav_fullstandiga true. Ren datakvalitet på BIDRAGET, ingen profil,
+// ingen genereraUtkast-körning här längre — samma spärr delas nu med
+// checkout/bidragsutkast.ts och utkastsidans kopram/bevaka-val.
 // F8 (2026-08-12, Jacob): F②:s ankringsrad fanns bara på utkastvyn — EFTER
 // köpbeslutet, inte före. Köprutan HÄR (station 5) är den faktiska
 // beslutspunkten (samma KOPRUTA-konstant, samma länk till utkastvyn).
@@ -149,27 +144,7 @@ const vardeankring = (bidrag: Kommun['bidrag'][number]) =>
     ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring, bidrag.namn).replace('{belopp}', individuelltBelopp(bidrag) ?? '')
     : null;
 
-// M3 — konservativ profil för sidans EGEN sälbarhetskontroll (statisk
-// byggtid, ingen besökarprofil finns). kommunSlug=DENNA kommun räcker
-// för Regel A (säte, matching.ts fyllKrav) att fylla i något. Tom
-// verksamhet missar Regel B, men den "förväntas nästan aldrig träffa"
-// (matching.ts kommentar) — undervärderar hellre än lovar för mycket.
-const SALJBARHETSPROFIL: Foreningsprofil = {
-  kommunSlug: kommun.kommun_slug,
-  verksamhet: [],
-  storlek: null,
-  alder: null,
-  sokt: 'ja',
-  uppdaterad: '',
-  foreningsnamn: null,
-  giltighet: null,
-  bevakadeBidrag: [],
-};
-
-function arSaljbar(bidrag: Kommun['bidrag'][number]): boolean {
-  const resultat = genereraUtkast(SALJBARHETSPROFIL, bidrag, kommun);
-  return resultat.typ === 'bidragsutkast' && resultat.kravRader.length > 0 && resultat.luckor < resultat.kravRader.length;
-}
+const arSaljbar = arBidragSaljbart;
 
 type Station5Entry = { beskrivning: string; href: string; vardeankring: string | null } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(

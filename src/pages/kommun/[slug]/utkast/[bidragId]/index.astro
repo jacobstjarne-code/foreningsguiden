@@ -213,8 +213,9 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
 </Base>
 
 <script>
-  import { getForeningsprofil } from '../../../../../lib/foreningsprofil';
+  import { getForeningsprofil, konservativProfil } from '../../../../../lib/foreningsprofil';
   import { genereraUtkast } from '../../../../../lib/utkastGenerator';
+  import { arBidragSaljbart } from '../../../../../lib/kommunKlar';
   import type { Kommun } from '../../../../../lib/kommunTyper';
   import { KOPRUTA, KONVERTERINGSSTAPEL } from '../../../../../lib/content';
   import { trackEvent } from '../../../../../lib/umami';
@@ -267,22 +268,19 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       bevakaEl?.setAttribute('hidden', '');
     }
 
+    // R2 (Jacob 2026-08-18): "använd besökarens riktiga profil när den
+    // finns, den konservativa när den saknas" — en sparad profil för
+    // FEL kommun räknas som saknad här (ingen mening att låtsas den
+    // gäller). harRiktigProfil styr dels om matchKommun()-vägvisningen
+    // körs (meningslös mot en konservativ/tom profil, se nedan), dels
+    // vad "Lås upp"-knappen gör vid klick.
+    let harRiktigProfil = false;
+    const matchaHref = `/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug }))}`;
+
     async function initiera() {
-      const profil = getForeningsprofil();
-      if (!profil || !profil.kommunSlug) {
-        visaStatus('Vi känner inte igen er förening än.', {
-          href: `/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug }))}`,
-          text: 'Svara på fem frågor för att se ert utkast',
-        });
-        return;
-      }
-      if (profil.kommunSlug !== kommunSlug) {
-        visaStatus('Er sparade profil gäller en annan kommun.', {
-          href: `/matcha/?fortsatt=${encodeURIComponent(JSON.stringify({ kommunSlug }))}`,
-          text: 'Svara för den här kommunen',
-        });
-        return;
-      }
+      const sparadProfil = getForeningsprofil();
+      harRiktigProfil = !!sparadProfil?.kommunSlug && sparadProfil.kommunSlug === kommunSlug;
+      const profil = harRiktigProfil ? sparadProfil! : konservativProfil(kommunSlug);
 
       let kommunData: Kommun;
       try {
@@ -315,25 +313,35 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       // det gör api/checkout/bidragsutkast.ts server-side (Jacobs order —
       // "kontrollera matchKommun() innan Checkout-sessionen, inte bara i
       // UI:t"). Importeras separat för att inte dra in hela tratt-koden.
-      const { matchKommun } = await import('../../../../../lib/matching');
-      const matchning = matchKommun(profil, kommunData);
-      // M2.7 (Jacob 2026-08-17): OKAND ("vi kan inte avgöra") är INTE
-      // samma sak som "passar inte" — bidraget saknar bara ett enda
-      // ifyllt matchningsvillkor att pröva mot. Egen, ärlig text i
-      // stället för att låta det tysta falla in i "verkar inte passa".
-      if (matchning.okand.some((b) => b.id === bidragId)) {
-        visaStatus('Vi kan inte avgöra om det här bidraget gäller er — kommunen har inte publicerat tillräckligt för att pröva mot.', {
-          href: `/kommun/${kommunSlug}/`,
-          text: 'Se bidraget ändå',
-        });
-        return;
-      }
-      if (!matchning.matchar.some((b) => b.id === bidragId)) {
-        visaStatus('Det här bidraget verkar inte passa er förenings profil.', {
-          href: `/kommun/${kommunSlug}/`,
-          text: 'Se vad som faktiskt matchar',
-        });
-        return;
+      //
+      // R2 (Jacob 2026-08-18): körs bara med en RIKTIG profil — mot den
+      // konservativa fallbacken är matchningen meningslös brus (allt
+      // hamnar i OKAND eftersom inget verkligt svar finns att pröva),
+      // och skulle bara blockera en sida som nu ska visa strukturen åt
+      // alla. Utan riktig profil visas dokumentet direkt; "Lås upp"-
+      // knappen (nedan) skickar den till /matcha/ i stället för att
+      // försöka betala mot en profil som ändå aldrig kan matcha.
+      if (harRiktigProfil) {
+        const { matchKommun } = await import('../../../../../lib/matching');
+        const matchning = matchKommun(profil, kommunData);
+        // M2.7 (Jacob 2026-08-17): OKAND ("vi kan inte avgöra") är INTE
+        // samma sak som "passar inte" — bidraget saknar bara ett enda
+        // ifyllt matchningsvillkor att pröva mot. Egen, ärlig text i
+        // stället för att låta det tysta falla in i "verkar inte passa".
+        if (matchning.okand.some((b) => b.id === bidragId)) {
+          visaStatus('Vi kan inte avgöra om det här bidraget gäller er — kommunen har inte publicerat tillräckligt för att pröva mot.', {
+            href: `/kommun/${kommunSlug}/`,
+            text: 'Se bidraget ändå',
+          });
+          return;
+        }
+        if (!matchning.matchar.some((b) => b.id === bidragId)) {
+          visaStatus('Det här bidraget verkar inte passa er förenings profil.', {
+            href: `/kommun/${kommunSlug}/`,
+            text: 'Se vad som faktiskt matchar',
+          });
+          return;
+        }
       }
 
       // Allt klart — fyll dokumentet.
@@ -359,24 +367,37 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
 
       dokumentEl?.removeAttribute('hidden');
 
-      // M2.4 (Jacob 2026-08-17) — samma spärr som checkout/bidragsutkast.
-      // ts SPÄRR 3, läst ur samma resultat: inget ifyllt innehåll att
-      // sälja. Bevakningsrutan tar köpknappens plats i stället för en
+      // R2 (Jacob 2026-08-18) — samma spärr som checkout/bidragsutkast.ts
+      // SPÄRR 3: kommunens data för DET HÄR bidraget räcker till en
+      // användbar checklista. Bidragets EGEN data, ingen profil
+      // inblandad — samma resultat oavsett om harRiktigProfil är sant
+      // eller ej. Bevakningsrutan tar köpknappens plats i stället för en
       // tom yta — gratis, fungerar i alla 290 kommuner oavsett kravdata.
-      const intetAttSalja = resultat.kravRader.length === 0 || resultat.luckor === resultat.kravRader.length;
-      if (intetAttSalja) {
+      if (!arBidragSaljbart(bidrag)) {
         bevakaEl?.removeAttribute('hidden');
         trackEvent('utkast_bevaka_visad', { kommun: kommunSlug, bidrag: bidragId });
-      } else {
-        kopramEl?.removeAttribute('hidden');
-        // M5 (MÄTNING, Jacob 2026-08-11): köprutan faktiskt synlig — kräver
-        // matchning + registrerad profil, så "visad" är redan en riktig
-        // filtrering, inte bara en sidladdning.
-        trackEvent('kopruta_visad', { kommun: kommunSlug, bidrag: bidragId });
+        return;
+      }
+      kopramEl?.removeAttribute('hidden');
+      trackEvent('kopruta_visad', { kommun: kommunSlug, bidrag: bidragId, harRiktigProfil: String(harRiktigProfil) });
+
+      // R2 — utan en riktig profil kan checkout-spärren (matchKommun,
+      // api/checkout/bidragsutkast.ts) aldrig gå igenom: den konservativa
+      // profilen har inga verkliga svar att pröva mot. Knappen skickar
+      // då till /matcha/ i stället för att göra ett anrop som ändå
+      // avvisas — samma nudge-text som de andra /matcha/-länkarna på
+      // sidan, "svara gör dokumentet bättre OCH gör köpet möjligt".
+      if (!harRiktigProfil && betalaKnapp) {
+        betalaKnapp.textContent = 'Svara på fem frågor för att kunna köpa';
       }
     }
 
     betalaKnapp?.addEventListener('click', async () => {
+      if (!harRiktigProfil) {
+        window.location.href = matchaHref;
+        return;
+      }
+
       felEl?.setAttribute('hidden', '');
       betalaKnapp.disabled = true;
       trackEvent('kopruta_klick', { kommun: kommunSlug, bidrag: bidragId });

@@ -85,7 +85,9 @@ export const FORSTASIDAN_SVARAR = {
     gratisEtikett: 'HITTA · GRATIS',
     gratisText: 'Alla bidrag, krav, deadlines. Påminnelser.',
     betaltEtikett: 'HJÄLP ATT SÖKA · 249 KR',
-    betaltText: 'Kraven i ordning, era uppgifter ifyllda.',
+    // R2 (Jacob 2026-08-18): "Ingen rad får påstå att vi fyller i
+    // föreningens uppgifter" — produkten säljer struktur, inte ifyllnad.
+    betaltText: 'Kraven i ordning, källan till varje krav.',
   },
 };
 
@@ -781,14 +783,15 @@ export const PRIS = {
   // köpvägar på /pris/), sparad här ordagrant för när en sådan yta finns.
   // M2.4 (Jacob 2026-08-17): "Produkten heter ansökningschecklista, inte
   // hjälp med ansökan." — namnet lovade en insats ("hjälp") produkten
-  // inte alltid håller (96% av bidragen har inga ifyllda fält, se
-  // checkout/bidragsutkast.ts SPÄRR). Checklistan i rätt ordning med
-  // bilagor och arbetsordning är värt priset i sig — men bara om den
-  // säljs som det den är, inte som personlig assistans.
+  // inte alltid höll. R2 (2026-08-18) drog samma linje ett steg längre:
+  // "Produkten säljer struktur, inte ifyllnad... Ingen rad får påstå att
+  // vi fyller i föreningens uppgifter." Checklistan i rätt ordning med
+  // bilagor, källhänvisning och arbetsordning är värt priset i sig —
+  // men bara om den säljs som det den är, inte som personlig assistans.
   hjalp: {
     namn: 'Personlig ansökningschecklista',
     beskrivning: [
-      'Kommunens krav för det bidrag ni valt, i rätt ordning, med sista ansökningsdag, belopp och bilagorna listade. De uppgifter vi kan fylla i utifrån era svar är ifyllda — resten står tydligt märkta som sådant ni fyller i själva.',
+      'Kommunens krav för det bidrag ni valt, i rätt ordning, med sista ansökningsdag, belopp och bilagorna listade. Källan till varje krav står med, så ni kan kontrollera den.',
       'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
       'Ansökan lämnar ni in själva och beslutet fattar kommunen. Vi lovar inte bifall.',
     ],
@@ -875,13 +878,18 @@ export const KOPRUTA = {
   // kväll — men templatet skulle ha gett fel text så fort ett bidrag
   // klarade D1). possessiv() (kommunTyper.ts) hanterar redan detta
   // korrekt på andra ställen i kodbasen — samma funktion här.
-  beskrivning: '{kommunPossessiv} krav för {bidrag}, i rätt ordning, med sista ansökningsdag och belopp. Vilka bilagor som ska med. Och de uppgifter vi kan fylla i åt er redan ifyllda.',
+  // R2 (Jacob 2026-08-18): "Produkten säljer struktur, inte ifyllnad...
+  // Ingen rad får påstå att vi fyller i föreningens uppgifter." Ersätter
+  // löftet om ifyllda uppgifter med vad dokumentet faktiskt innehåller:
+  // krav i rätt ordning, bilagor, källa per krav, arbetsordning fram
+  // till inlämning.
+  beskrivning: '{kommunPossessiv} krav för {bidrag}, i rätt ordning, med sista ansökningsdag och belopp. Vilka bilagor som ska med, källan till varje krav, och var ni lämnar in ansökan.',
   // C5 (ÅTGÄRDSSPEC, 2026-08-03 kväll): kommuner med ett riktigt
   // e-tjänstsystem (allt utom "E-post"/"Blankett", se
   // harEtjanstsystem i kommuner.ts) säljer mot systemet de faktiskt
   // ska öppna, inte mot ett generiskt "underlag". beskrivning ovan
   // (oförändrad i sak) gäller där systemet SAKNAS.
-  beskrivningEtjanst: 'Allt ni behöver ha framme när ni öppnar {system} — {kommunPossessiv} krav i rätt ordning, era uppgifter ifyllda, bilagorna listade.',
+  beskrivningEtjanst: 'Allt ni behöver ha framme när ni öppnar {system} — {kommunPossessiv} krav i rätt ordning, källan till varje krav, bilagorna listade.',
   luckorRad: '{antal} rader behöver ni fylla i själva — vi säger vilka innan ni betalar.',
   kravlistaRegistrering: 'Ni får hela kravlistan för att bli godkända som bidragsberättigade i {kommun}, med vad varje krav betyder och var uppgiften finns.',
   leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
