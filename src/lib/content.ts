@@ -1285,3 +1285,55 @@ export const KATALOG_LIVEDATA = {
   liveDeadlinesText: '{antal} deadlines bevakas åt föreningar',
   senastAvlast: 'senast avläst {datum}',
 };
+
+/**
+ * IDROTT_INGANGEN — runda 21 (incoming/IDROTTSINGANGEN_21.md, "auktoritativ
+ * för form, ordning och ytcopy. Kanon: läst. Inga avsteg."). Statisk
+ * ytcopy — texten som INTE varierar med lok.datum[]/lok.sanktioner[]
+ * (de renderas datadrivet i sidan/SanctionLadder, inte härifrån).
+ * {identitetsord}/{vinkelmening}/{enhetslista} kommer som props till
+ * IdrottsIngangen.astro (V1.4-mallen), fylls inte i här.
+ */
+export const IDROTT_INGANGEN = {
+  lede: 'Först det som gäller alla i hela Sverige. Sedan det din kommun lägger till.',
+  nationelltBanner: 'Nationellt · samma i alla 290 kommuner',
+  kommunaltBanner: 'Kommunalt · olika per ort',
+
+  lokUnderrubrik: 'Statligt aktivitetsstöd. Söks två gånger om året — samma datum överallt.',
+
+  rfRad: 'RF-medlemskap via specialidrottsförbund',
+  rfEtikett: 'villkor',
+  projektstodRad: 'Projektstöd IF',
+  projektstodEtikett: 'villkor per distrikt',
+  // F5 — ett villkor, inte ett avvisande.
+  gateFraga: 'Inte med i ett specialidrottsförbund?',
+  gateSvar: 'Då gäller inte det statliga stödet ovan — men er kommun kan ha bidrag ändå. Fortsätt nedan.',
+
+  // Bevakningsfångsten — EFTER hela nationella halvan, FÖRE
+  // kommunövergången (rättelsen redan inarbetad i källdokumentet).
+  // Rubriken beskriver tjänsten, aldrig förlusten (kanon §7).
+  captureRubrik: 'Vi håller reda på datumen åt er',
+  // Delad i tre delar i stället för en set:html-regex i komponenten —
+  // mittdelen ({captureBodyStark}) är den enda som fetstilas.
+  captureBodyForst: 'Vi påminner er ',
+  captureBodyStark: 'fyra veckor innan, och tre dagar innan',
+  captureBodySist: '. Gratis, ingen inloggning.',
+  captureKnapp: 'Påminn oss gratis →',
+  capturePlaceholder: 'Er mejladress',
+  captureFint: 'Avsluta när ni vill — länk i varje mejl.',
+  // GDPR-minimum, samma mönster som BEVAKNING.samtycke — mocken visar
+  // ingen kryssruta (samma avsteg som BevakaKommunen.astro:s
+  // 19a-ruta, se den filens kommentar), men samtycket är obligatoriskt
+  // oavsett vad mocken visar.
+  captureSamtycke: 'Jag vill att Föreningsguiden sparar min e-postadress för att skicka påminnelser om LOK-stödets datum. Jag kan avsluta när som helst.',
+
+  transitRubrik: 'Din kommun avgör resten.',
+  transitBody: 'Vi tar er till er kommuns bidrag och frister. Ett fält — inget konto.',
+  transitPlaceholder: 'Skriv er kommun',
+  transitKnapp: 'Visa ›',
+  transitFel: 'Hittar ingen kommun med det namnet — kolla stavningen.',
+
+  lockedRubrik: 'Öppnas när kommunen är vald',
+  lockedPunkt1: 'Kommunens egna bidrag för er ort',
+  lockedPunkt2: 'Förkravet: godkänd som bidragsberättigad förening',
+};

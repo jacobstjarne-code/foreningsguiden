@@ -1,0 +1,35 @@
+---
+// /idrott/ — runda 21 (incoming/IDROTTSINGANGEN_21.md). Den generiska
+// föräldern: IdrottsIngangen.astro parametriserad med LOK-stödets
+// generiska ram (identitetsord="idrottsförening", ingen enhetslista —
+// den finns bara för specialiseringar med ett eget register, som en
+// framtida /bandy/). Sidtypen bär idrotten (F2/"Till Code") — den här
+// sidan skickar ingen egen idrott-parameter till kommunövergången.
+import Base from '../../layouts/Base.astro';
+import BreadcrumbList from '../../components/BreadcrumbList.astro';
+import IdrottsIngangen from '../../components/IdrottsIngangen.astro';
+import { loadKommuner } from '../../lib/kommuner';
+import { loadNationellaStod } from '../../lib/nationellaStod';
+
+const kommuner = loadKommuner();
+const lokStod = loadNationellaStod().find((s) => s.id === 'lok-stod');
+if (!lokStod) {
+  throw new Error('/idrott/ kräver lok-stod i data/nationella-stod/ — hittades inte.');
+}
+---
+<Base
+  title="Vad kan en idrottsförening söka? — Föreningsguiden"
+  description="LOK-stödets datum och sanktionstrappa, samma för alla 290 kommuner. Sedan din kommuns egna bidrag."
+>
+  <BreadcrumbList items={[
+    { name: 'Startsida', url: '/' },
+    { name: 'Idrott', url: '/idrott/' },
+  ]} />
+
+  <IdrottsIngangen
+    identitetsord="idrottsförening"
+    vinkelmening="Först det som gäller alla i hela Sverige. Sedan det din kommun lägger till."
+    stod={lokStod}
+    kommuner={kommuner}
+  />
+</Base>
