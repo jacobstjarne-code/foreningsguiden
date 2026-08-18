@@ -10,10 +10,17 @@ ansokningssystem:
     våldsutsatta, vägbidrag) söks separat via e-post eller egen e-tjänst, se respektive bidrags kalla_url.
   url: https://alingsas.actorsmartbook.se/MyPrivatePages/
 kalla_url: https://www.alingsas.se/uppleva-och-gora/foreningsliv/foreningsbidrag/
-verifierad: 2026-07-23
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: alingsas-verksamhetsbidrag
   namn: Bidrag till verksamhet (verksamhetsbidrag 7–25 år)
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -32,19 +39,21 @@ bidrag:
   - Deltagarstöd utgår för deltagare som under kalenderåret fyller lägst 7 och högst 25 år
   - Max 2 ledarstöd per gruppaktivitet; ledare som får ledarstöd räknas inte som deltagare
   - RF-anslutna föreningar ansöker via IdrottOnline, övriga via kommunens bidrags- och bokningssystem
-  belopp: null
+  belopp: Belopp per ledar- och deltagartillfälle fastställs inom den årliga budgeten
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan ger 90 % av berättigat bidrag (generell regel för kultur- och utbildningsnämndens bidrag); ofullständig
     ansökan som inte kompletteras i tid avslås.
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 25 augusti avser perioden 1 jan–31 jun, utbetalning i oktober. 25 februari avser perioden 1 jul–31 dec, utbetalning
     i april.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-folkbildningsbidrag
   namn: Bidrag till folkbildning
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   - ovrig
@@ -59,19 +68,20 @@ bidrag:
   - 'Nya studieförbund fasas in: 50 % av anslaget första utbetalningsåret, 100 % andra året'
   - Studieförbund med fast lokalkontor och personal i Alingsås kan söka ersättning för bemanning, upp till ett halvt prisbasbelopp
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "Anslaget fördelas 70%/10%/20% på folkbildningskategorier"
   sen_ansokan: Sen ansökan ger 90 % av berättigat bidrag (generell regel för kultur- och utbildningsnämndens bidrag).
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Anslaget fördelas 70 % studiecirklar, 10 % annan folkbildningsverksamhet, 20 % kulturarrangemang. Överenskommelsen
     ska skrivas senast 1 mars, då föregående överenskommelse också ska utvärderas och redovisas.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-ungdomsforeningar-anlaggningar
   namn: Bidrag till ungdomsföreningar med anläggningar
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -87,16 +97,18 @@ bidrag:
   - Kostnaderna baseras på föregående år
   belopp: 1 basbelopp vid 50–300 aktiviteter, 2 basbelopp vid 301–500, 3 basbelopp vid 501–1000, 4 basbelopp vid fler än 1000.
     Anläggning som i hög grad nyttjas av allmänheten får ytterligare 1 basbelopp, dock max 50 % av driftskostnaden.
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan ger 90 % av berättigat bidrag (generell regel för kultur- och utbildningsnämndens bidrag).
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kräver att föreningen sökt verksamhetsbidrag året innan. Utbetalning i juni.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-annan-anlaggning
   namn: Bidrag till annan anläggning
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Föreningar som sköter anläggning till nytta för allmänheten och civilsamhället, t.ex. bryggor eller samlingslokal
@@ -108,18 +120,21 @@ bidrag:
   krav:
   - Kräver att föreningen sökt verksamhetsbidrag året innan
   - Anläggningen ska gagna samhällsnyttan och civilsamhället
+  - Föregående års aktiviteter och kostnader för anläggningen ska redovisas i ansökan
   belopp: 'Skötsel av bryggor på allmän badplats: 5 000 kr. Samlingslokal med under 50 aktiviteter: 10 000 kr, under 101 aktiviteter:
     15 000 kr, under 151 aktiviteter: 20 000 kr.'
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan ger 90 % av berättigat bidrag (generell regel för kultur- och utbildningsnämndens bidrag).
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Utbetalning i juni.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-projektbidrag-folkhalsa-miljo
   namn: Projektbidrag samt folkhälso- och miljöbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -136,19 +151,20 @@ bidrag:
   - Bidrag för lov- och simskoleverksamhet kräver att minst 25 % av deltagarna inte är aktiva i ordinarie verksamhet
   - Projektbeskrivningen ska ange syfte, målsättning, målgrupp, tidsplan, arbetssätt och ekonomi, och ansökan ska göras i
     god tid före genomförandet
-  belopp: null
+  belopp: Stödbeloppet beslutas efter projektets innehåll och ekonomi inom tillgänglig budget
+  belopp_avser: per_forening
   sen_ansokan: Redovisning som lämnas efter angivet datum ger 10 % avdrag på beviljat belopp.
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Ansökan görs löpande 1 januari–30 november. Utbetalning: 50 % vid beviljande, 50 % vid redovisning av projektet,
-    eller hela beloppet på en gång. Regelverket beskriver detta som EN bidragstyp trots att kommunens webbsida rubricerar
-    ''Folkhälso- och miljöbidrag'' och ''Projektbidrag'' separat med identisk text — sammanslaget här, se tackning.log.'
-  senast_verifierad: '2026-08-03'
+    eller hela beloppet på en gång. Regelverket behandlar folkhälso-, miljö- och projektbidraget som en gemensam stödform.'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-startbidrag
   namn: Startbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -161,20 +177,23 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska vara nybildad och verksam i Alingsås kommun
   - Föreningen ska ha genomfört godkänd registrering i föreningsregistret och blivit bidragsgodkänd
   - Efter sex månader kan föreningen istället söka ordinarie bidrag
   belopp: Max 10 000 kr
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Administrativt en del av samma bidragspott som Projektbidrag samt folkhälso- och miljöbidrag, men behålls som
     egen rad då den har egen målgrupp (nystartade föreningar) och egen rubrik på kommunens webbplats.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-funktionsvariation-social
   namn: Föreningsbidrag till organisationer och föreningar som jobbar med funktionsvariationsfrågor eller med social verksamhet
+  foreningstyp: [social, annat]
   kategori:
   - social
   - funktionsratt
@@ -187,19 +206,22 @@ bidrag:
   krav:
   - Föreningen ska ha minst 10 medlemmar
   - Föreningen ska aktivt verka mot alkohol och droger, mot främlingsfientlighet, för jämställdhet, mångfald och demokrati
-  belopp: null
+  - Verksamheten ska ha nära anknytning till socialnämndens målgrupper och rikta sig till kommunens invånare
+  belopp: Stödbeloppet beslutas inom tillgänglig budget; inget fast belopp publiceras
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan ger 90 % av berättigat bidrag (generell regel för kultur- och utbildningsnämndens bidrag).
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kallas 'Bidrag till hjälporganisationer' på kommunens webbsida — regelverkets fullständiga namn används här.
     Ursprungligen Socialnämndens bidrag, samordning och beslutanderätt övertagen av (dåvarande) kultur- och fritidsnämnden
     genom KF-beslut 2014-05-28 § 64. Utbetalning i juni.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-samverkansbidrag
   namn: Bidrag till samverkansorganisationer
+  foreningstyp: [social, annat]
   kategori:
   - ovrig
   malgrupp: Organisationer med samhällsnytta som kan vara kommunen behjälplig vid svår påfrestning eller krissituation
@@ -210,22 +232,21 @@ bidrag:
   krav:
   - Samhällsnyttan ska ha samband med eller kunna användas i samband med krishantering
   - En egen organisation för ledning vid praktiska insatser föredras, med utsedd samverkansperson i kontakt med kommunen
-  belopp: null
+  - Organisationen ska kunna bistå kommunen vid svår påfrestning eller krissituation
+  belopp: Stödbeloppet beslutas inom tillgänglig budget; inget fast belopp publiceras
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'KONFLIKT (se konflikter.log): regelverket anger ansökningsperiod 1 oktober–31 december med utbetalning i januari.
-    Kommunens föreningsbidragssida anger istället att ansökan lämnas senast 31 december för nästkommande kalenderår med utbetalning
-    i april. Deadline-datumet (31 december) sammanfaller i båda källorna; utbetalningsmånaden gör det inte. Ingen av källorna
-    är daterad på ett sätt som avgör vilken som är nyare — båda värdena redovisas här. Ursprungligen Kommunstyrelsens bidrag,
-    samordning och beslutanderätt övertagen av (dåvarande) kultur- och fritidsnämnden genom samma KF-beslut 2014-05-28 § 64
-    som ovan.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden är 1 oktober–31 december. Kommunens två publicerade källor anger olika utbetalningsmånad,
+    januari respektive april; sista ansökningsdag är 31 december i båda.
+  senast_verifierad: '2026-08-18'
 - id: alingsas-pensionarsbidrag
   namn: Bidrag till pensionärsföreningar
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   malgrupp: Pensionärsföreningar med lokal anknytning till Alingsås kommun, riktade till kommunens invånare 65+
@@ -243,18 +264,19 @@ bidrag:
     intressen är undantagna
   - Bokslut, verksamhetsplan, projektplan, verksamhetsberättelse, revisionsberättelse och budget för innevarande år ska bifogas
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "80 % av den avsatta potten till pensionärsbidrag"
   sen_ansokan: Ansökan som inkommer efter 1 april beviljas inte bidrag för det aktuella året.
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Övertaget från vård- och omsorgsnämnden av kultur- och utbildningsnämnden genom KF-beslut 2024-03-27 § 35.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-kompletterande-pensionarsbidrag
   namn: Kompletterande föreningsbidrag till pensionärsföreningar
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   malgrupp: Pensionärsföreningar som uppfyller grundkraven för pensionärsbidrag och dessutom minst ett av de särskilda kriterierna
@@ -271,18 +293,21 @@ bidrag:
   - Beviljas inte för investeringskostnader eller för att minska självkostnaden för föreningens egna aktiviteter
   - Beviljas inte för regelbundna uppträdanden/aktiviteter på äldreboenden (kontakt tas istället med vård- och omsorgsförvaltningens
     förebyggandeenhet)
-  belopp: 20 % av den avsatta potten till pensionärsbidrag
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 20 % av den avsatta potten till pensionärsbidrag
   sen_ansokan: Ansökan som inkommer efter sista ansökningsdag beviljas inte bidrag för det aktuella året.
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Del av samma bidragsavsnitt som ordinarie pensionärsbidrag, men egen målgrupps- och deadlinelogik (två ansökningstillfällen
     per år). Övertaget från vård- och omsorgsnämnden genom samma KF-beslut 2024-03-27 § 35.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-investeringsbidrag
   namn: Investeringsbidrag för föreningar
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -305,42 +330,46 @@ bidrag:
     och verksamhetsplan/-berättelse
   belopp: Kommunens insats bör inte överstiga 50 % av den totala investeringen. Beslut fattas av Kommunstyrelsen, delegerat
     till ekonomichef för belopp upp till 100 000 kr.
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2023/06/Riktlinje-for-investeringsbidrag.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan skickas till kommunstyrelsen@alingsas.se och behandlas löpande. Kommunen prioriterar barn- och ungdomsverksamhet
     samt kulturhistorisk verksamhet. Antagen av Kommunstyrelsen 2023-06-07 § 101.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-sponsring
   namn: Sponsring
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
   malgrupp: Idrottsföreningar, kulturföreningar, organisationer och evenemang med tydlig lokal förankring i Alingsås kommun
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Ska innehålla en tydlig motprestation (exponering, aktiviteter till nytta för kommunen, eller möjlighet att representera
     kommunen) — sponsring ska inte förväxlas med bidrag eller gåva
   - Kommunen ingår inte sponsoravtal med parter som kan skada kommunens trovärdighet, t.ex. alkohol- och tobaksföretag
   - Avtal ska inte omfatta mer än ett år eller ett evenemang åt gången
-  belopp: null
+  belopp: Kommunen publicerar inget fast sponsringsbelopp
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.alingsas.se/wp-content/uploads/networks/1/sites/2/2020/10/Riktlinje-f%C3%B6r-sponsring-Alings%C3%A5s-kommun.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Kommunens sponsringsbudget är begränsad, endast ett fåtal ansökningar beviljas per år. Kommundirektören beslutar.
     Kontakt: niklas.ehnfors@alingsas.se. Antagen av Kommunstyrelsen 2020-03-09 § 30.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-valdsutsatta
   namn: Föreningsbidrag till ideella organisationers arbete för att stödja våldsutsatta
+  foreningstyp: [social, annat]
   kategori:
   - social
   malgrupp: Ideella, icke vinstdrivande organisationer/föreningar vars övergripande syfte är att skapa trygghet och stöd för
@@ -357,20 +386,21 @@ bidrag:
     verksamhet
   - Aktuellt bank- eller plusgiro i föreningens namn krävs för utbetalning
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "Total budget 400 tkr per år fördelas mellan alla ansökningar"
   sen_ansokan: 'Ofullständig ansökan: kompletteringar begärs in; ansökan som inte kompletteras inom angiven tid avslås.'
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2026/03/riktlinjer-for-foreningsbidrag-till-ideella-organisationers-arbete-for-att-stodja-valdsutsatta.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidraget gäller två år i taget med startår 2026. Ansökan senast 31 mars ger bidrag för innevarande och nästkommande
     kalenderår. Administreras av Socialnämnden, ansökan via socialnamnden@alingsas.se. Antagen av Socialnämnden 2026-03-17
     § 16. Total budget 400 tkr per år för perioden 2026–2027, fördelas mellan alla ansökningar som uppfyller samtliga villkor
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-vagbidrag-ordinarie
   namn: Ordinarie vägbidrag
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Föreningar (t.ex. vägföreningar, samfällighetsföreningar) och privatpersoner som underhåller en enskild väg på
@@ -384,20 +414,21 @@ bidrag:
   - Vägen ska huvudsakligen försörja åretruntbostäder
   - Sedan 2024 kan även väghållare som får statligt vägbidrag ansöka om kommunalt bidrag
   - Slumpmässiga vägbesiktningar kontrollerar att bidraget använts rätt
-  belopp: null
+  belopp: Kommunen publicerar inget fast kronor-per-meter-belopp
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.alingsas.se/trafik-och-gator/vagbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Bidraget är en kompensation för underhållskostnader, inte full kostnadstäckning. Ansökan öppnar 1 oktober,
     stänger 16 november, utbetalning i början av påföljande år. Digital ansökan: minasidor.alingsas.se/vagunderhall. Inget
-    publicerat kronor-per-meter-belopp hittat i källan vid körningstillfället — spot-checkas av Jacob. Kontakt: trafik@alingsas.se
-    / park@alingsas.se.'
-  senast_verifierad: '2026-08-03'
+    publicerat kronor-per-meter-belopp anges.'
+  senast_verifierad: '2026-08-18'
 - id: alingsas-vagbidrag-utokat
   namn: Utökat vägbidrag
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: 'Föreningar och privatpersoner som underhåller en enskild väg på minst 500 meter i eller till något av kommunens
@@ -409,16 +440,18 @@ bidrag:
   krav:
   - Vägen ska vara öppen för allmänheten utan begränsningar
   - Syftar till att förbättra tillgängligheten till handel, kultur och service i kommunens centrumorter
-  belopp: null
+  - Vägen ska vara minst 500 meter och ligga i eller leda till Alingsås, Sollebrunn eller Ingared
+  belopp: Kommunen publicerar inget fast kronor-per-meter-belopp
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.alingsas.se/trafik-och-gator/vagbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Ansökan öppnar 1 oktober, stänger 16 november. En treårig omställningsperiod inleddes 2024 för att ge lika
     stor ersättning per meter oavsett vägens storlek. Digital ansökan: minasidor.alingsas.se/Utokat_vagbidrag.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: alingsas-foreningsregistrering
   vad: Registrera föreningen i föreningsregistret och bli bidragsgodkänd
@@ -431,5 +464,5 @@ forutsattningar:
   giltighet: null
   ordning: 1
   kalla_url: https://municipio.alingsas.se/wp-content/uploads/networks/1/sites/2/2025/11/regler-och-riktlinjer-for-foreningsbidrag-antagen.pdf
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
