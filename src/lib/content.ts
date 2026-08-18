@@ -485,6 +485,15 @@ export const MEJL = {
   sidfot:
     'Du får det här mejlet för att den här adressen bevakar bidrag på Föreningsguiden. Vill du sluta bevaka? Avregistrera dig direkt: {avregLank} — då raderar vi adressen.',
 
+  // U3 (Jacob 2026-08-19, mejl 8): "Ni får det här för att ni bevakar
+  // LOK-stödet. Avsluta: {avregistrera}" — {avregistrera} bytt mot
+  // {avregLank}, den nyckel sendMejl (mejl.ts) faktiskt fyller i
+  // (avregLank auto-injiceras där); {avregistrera} orört hade lämnat
+  // en trasig platshållare i ett riktigt utskick. Samma text gäller
+  // mejl 7 — sidfoten skiljer sig inte mellan paret, se
+  // sendNationellPaminnelse28/Sista (mejl.ts).
+  nationellSidfot: 'Ni får det här för att ni bevakar LOK-stödet. Avsluta: {avregLank}',
+
   bekraftelse: {
     amne: 'Bekräfta er bevakning hos Föreningsguiden',
     body: [
@@ -564,17 +573,15 @@ export const MEJL = {
     ],
   },
 
-  // U2.2 (MEJL 8) — Jacobs diktat AVBRÖTS efter "Har ni redan skickat in
-  // behöver ni inte göra något." Resten av texten saknas — INTE
-  // kompletterad här (skulle vara påhittad text i ett utskick som
-  // faktiskt går till riktiga mottagare). Kvar oförändrad tills Jacob
-  // ger resten, se rapporten samma tur som denna kommentar skrevs.
+  // U3 (Jacob 2026-08-19): resten av mejl 8 levererat, ordagrant. Samma
+  // "LOK-stödet"-hårdkodning som mejl 7 (nationellPaminnelse28), samma
+  // skäl — stod.namn ("LOK-stöd") saknar bestämd artikel.
   nationellPaminnelseSista: {
-    amne: '{bidragsnamn} — sista dagen är {datum}',
+    amne: 'LOK-stödet — sista dagen är {datum}',
     body: [
-      'På {datum} stänger ansökan för {bidragsnamn}. Det är om tre dagar.',
-      'Har ni redan skickat in behöver ni inte göra något.',
-      'Se villkor och den strukturerade sanktionstrappan: {bidragLank}',
+      'På {datum} stänger ansökan för LOK-stödet. Det är om tre dagar.',
+      'Har ni redan skickat in behöver ni inte göra något. Är ansökan påbörjad men inte inskickad räknas den inte.',
+      '{lank}',
     ],
   },
 

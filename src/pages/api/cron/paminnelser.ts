@@ -85,9 +85,8 @@ async function behandlaNationelltStod(email: string, stod: NationelltStod, today
         raknare.sent28++;
       } else {
         await sendNationellPaminnelseSista(email, {
-          bidragsnamn: stod.namn,
           datum: formatDate(occurrence),
-          bidragLank: `${siteUrl()}/nationella-stod/${stod.id}/`,
+          lank: `${siteUrl()}/nationella-stod/${stod.id}/`,
         });
         raknare.sent3++;
       }

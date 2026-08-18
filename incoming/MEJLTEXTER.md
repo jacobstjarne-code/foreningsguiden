@@ -132,18 +132,20 @@ Så här söker ni: {lank}
 
 ## 8. LOK-stödet, 3 dagar före
 
-**OFULLSTÄNDIG — Jacobs diktat (U2.2, 2026-08-18) avbröts mitt i.**
-Bekräftat ordagrant: ämnesraden och de två första styckena nedan. Resten
-saknas — inte kompletterad här, se rapporten samma tur denna rad
-skrevs. MEJL.nationellPaminnelseSista i content.ts är ORÖRD (Codex
-generiska text) tills det här är klart.
+Komplett (U3, Jacob 2026-08-19) — resten av diktatet som avbröts i U2.2.
 
 **Ämne:** LOK-stödet — sista dagen är {datum}
 
 På {datum} stänger ansökan för LOK-stödet. Det är om tre dagar.
 
-Har ni redan skickat in behöver ni inte göra något. Är ansökan
-[TEXTEN AVBRUTEN HÄR — resten saknas]
+Har ni redan skickat in behöver ni inte göra något. Är ansökan påbörjad
+men inte inskickad räknas den inte.
+
+{lank}
+
+**Sidfot (gäller mejl 7 och 8, ersätter den generella "Sidfot i varje
+mejl" nedan för LOK-stödets bevakning):** Ni får det här för att ni
+bevakar LOK-stödet. Avsluta: {avregLank}
 
 ---
 

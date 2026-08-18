@@ -55,11 +55,15 @@ interface MejlMall {
   body: string[];
 }
 
-async function sendMejl(to: string, mall: MejlMall, vars: Record<string, string>): Promise<void> {
+// U3 (Jacob 2026-08-19): sidfotOverride — LOK-stödets bevakning är inte
+// "bidrag på Föreningsguiden" (MEJL.sidfot, generisk), hon bevakar
+// namngivet LOK-stödet. Valfri, default oförändrad för alla befintliga
+// anrop.
+async function sendMejl(to: string, mall: MejlMall, vars: Record<string, string>, sidfotOverride?: string): Promise<void> {
   const allVars = { avregLank: `${siteUrl()}/avregistrera/`, ...vars };
   const subject = fillTemplate(mall.amne, allVars);
   const bodyText = mall.body.map((p) => fillTemplate(p, allVars)).join('\n\n');
-  const sidfot = fillTemplate(MEJL.sidfot, allVars);
+  const sidfot = fillTemplate(sidfotOverride ?? MEJL.sidfot, allVars);
   const text = urlPaEgenRad(`${bodyText}\n\n—\n${sidfot}`);
 
   const result = await resend.emails.send({ from: FROM, to, subject, text });
@@ -154,24 +158,26 @@ export async function sendPaminnelseSista(to: string, vars: PaminnelseVars): Pro
   await sendMejl(to, MEJL.paminnelseSista, vars);
 }
 
-// U2.2 (Jacob 2026-08-18, MEJL 7): eget varsformat — {period}/{slutdatum}
-// är specifika för LOK-stödets sanktionstrappa, inte en generell
-// nationell-påminnelseform. MEJL 8:s vars är oförändrade (Omit<...
-// 'kommun'>) tills Jacob ger resten av sitt diktat, se content.ts.
+// U3 (Jacob 2026-08-19): båda mejlen klara nu, eget varsformat vardera
+// — {period}/{slutdatum} är specifika för mejl 7 (LOK-stödets
+// sanktionstrappa), mejl 8 behöver bara {datum}/{lank}.
 export interface NationellPaminnelse28Vars {
   datum: string;
   period: string;
   slutdatum: string;
   lank: string;
 }
-export type NationellPaminnelseVars = Omit<PaminnelseVars, 'kommun'>;
-
-export async function sendNationellPaminnelse28(to: string, vars: NationellPaminnelse28Vars): Promise<void> {
-  await sendMejl(to, MEJL.nationellPaminnelse28, vars);
+export interface NationellPaminnelseSistaVars {
+  datum: string;
+  lank: string;
 }
 
-export async function sendNationellPaminnelseSista(to: string, vars: NationellPaminnelseVars): Promise<void> {
-  await sendMejl(to, MEJL.nationellPaminnelseSista, vars);
+export async function sendNationellPaminnelse28(to: string, vars: NationellPaminnelse28Vars): Promise<void> {
+  await sendMejl(to, MEJL.nationellPaminnelse28, vars, MEJL.nationellSidfot);
+}
+
+export async function sendNationellPaminnelseSista(to: string, vars: NationellPaminnelseSistaVars): Promise<void> {
+  await sendMejl(to, MEJL.nationellPaminnelseSista, vars, MEJL.nationellSidfot);
 }
 
 export interface GiltighetsvarningNiva2Vars {
