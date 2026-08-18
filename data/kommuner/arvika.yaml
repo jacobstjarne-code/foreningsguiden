@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Interbook Go Arvika
   url: https://arvika.ibgo.se
 kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.2740.html
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.2740.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: arvika-verksamhetsbidrag-kultur
   namn: Verksamhetsbidrag — Kultur
@@ -29,7 +35,7 @@ bidrag:
   - Föreningen ska bedriva en aktiv verksamhet enligt kommunens bedömning, baserad på verksamhetsberättelse och redovisade
     planer
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "1 508 000 kronor delas mellan 53 föreningar"
   foreningstyp:
   - kultur
@@ -37,18 +43,18 @@ bidrag:
   sate_i_kommunen: true
   sen_ansokan: Ej möjlig. Fördelning sker i början av verksamhetsåret baserat på föregående års redovisning.
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'T8a: Siffran har inte kunnat återfinnas på den angivna aktuella källsidan; behålls men lyfts inte.'
+  anteckning: Kommunledningsutskottets beslut 2026 fördelar potten mellan 42 övriga kulturföreningar och 11 föreningar med samlingslokal.
 - id: arvika-arrangemangsbidrag-kultur
   namn: Arrangemangsbidrag — Kultur
   kategori:
   - kultur
   malgrupp: Föreningar som arrangerar offentliga kulturarrangemang
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget måste vara offentligt och tydligt marknadsfört lokalt
@@ -62,16 +68,18 @@ bidrag:
   - Beviljad förening ska lämna redovisning efter avslutat arrangemang
   - Förening som redan får årligt arrangemangsbidrag kan inte söka detta bidrag
   belopp: Bedöms från fall till fall med hänsyn till disponibla medel.
+  belopp_avser: per_forening
+  kommunens_pott: null
   foreningstyp:
   - kultur
   kraver_registrering: true
   sen_ansokan: Möjlig löpande men måste anlända 14 arbetsdagar före arrangemang
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
   belopp_status: ingen_regel
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'T8a: Kommunen anger uttryckligen bedömning från fall till fall.'
+  anteckning: Stödet kan lämnas som förlustbidrag eller direkt arrangemangsbidrag.
 - id: arvika-utvecklingsprojekt-kultur
   namn: Bidrag till kulturella utvecklingsprojekt
   kategori:
@@ -84,69 +92,47 @@ bidrag:
   - Projektbeskrivning med budget och tidsplan krävs
   - Prioritering ges till projekt för ungdom, personer med funktionshinder, etniska minoriteter och kulturarvsprojekt
   - Utåtriktad verksamhet som vänder sig till allmänheten värderas positivt vid bedömningen
-  belopp: null
+  belopp: Kommunen publicerar ingen generell beloppsnivå; ansökan bedöms utifrån projektbeskrivning och ekonomisk kalkyl
+  belopp_avser: per_forening
+  kommunens_pott: null
   foreningstyp:
   - kultur
   sen_ansokan: Möjlig. Löpande ansökningsperiod.
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'T8a: Källan anger kriterier och löpande ansökan men inget belopp eller uttrycklig beloppsregel.'
-- id: arvika-spontana-aktiviteter-kultur
-  namn: Stöd till spontana aktiviteter — Kultur
-  kategori:
-  - kultur
-  malgrupp: Individer eller föreningar som arrangerar engångsaktiviteter
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Aktiviteten måste vara kostnadsfri och öppen för allmänheten
-  - Ingen kommersiell verksamhet
-  - 'Maximal ansökan: 10 000 kronor per aktivitet'
-  - Aktiviteten får inte kunna abonneras eller bokas
-  - Aktiviteten ska genomföras i Arvika kommun
-  - Kommunal förvaltning, bolag, företag, kulturinstitutioner och utbildningsinstitutioner kan inte söka bidraget
-  belopp: Max 10 000 kronor per ansökan
-  foreningstyp:
-  - kultur
-  sen_ansokan: Möjlig. Löpande ansökningsperiod.
-  kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
-  belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: null
+  anteckning: Prioriterade målgrupper är barn och unga, personer med funktionsnedsättning och personer med annan etnisk bakgrund.
 - id: arvika-ungdom-kultur
   namn: Kultur- och fritidsverksamhet för unga
   kategori:
   - kultur
   malgrupp: Unga 15-25 år som organiserar egen verksamhet
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Ålder 15-25 år
   - Verksamheten ska bedrivas inom Arvika kommun
   - Organisatörer registreras digitalt via Interbook Go
   - Föreningar, organisationer och andra ungdomsgrupper kan ansöka
-  belopp: null
+  belopp: Kommunen publicerar ingen generell beloppsnivå för stödformen
+  belopp_avser: per_forening
+  kommunens_pott: null
   alder_min: 15
   alder_max: 25
   foreningstyp:
   - kultur
   - ungdom
   sate_i_kommunen: true
-  sen_ansokan: Möjlig. Löpande ansökningsperiod.
+  sen_ansokan: Ingen ansökningsfrist publiceras för stödformen
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
-  belopp_status: okand
-  deadline_status: kontrollast
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  anteckning: Stödet ska särskilt uppmuntra unga arrangörer och samverkan mellan fritid och kultur.
 - id: arvika-verksamhetsbidrag-idrott
   namn: Verksamhetsbidrag — Idrott (ungdomsverksamhet)
   kategori:
@@ -163,6 +149,8 @@ bidrag:
   - Bidraget beräknas per aktiv medlem som är boende i Arvika kommun
   - Medlemsredovisning krävs med namn, födelseår, telefon och aktivitetstillfällen
   belopp: Fast belopp per aktiv medlem (åldern 7-20 år)
+  belopp_avser: per_forening
+  kommunens_pott: null
   min_medlemmar: 10
   alder_min: 7
   alder_max: 20
@@ -172,7 +160,7 @@ bidrag:
   sate_i_kommunen: true
   sen_ansokan: Ej möjlig efter 31 mars
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomfritidssektorn.2742.html
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -191,18 +179,103 @@ bidrag:
   - Fokus på ungdomar inte redan organiserade i föreningar
   - Aktiviteter som stimulerar hälsosamma livsstilar
   - Föreningen ska på anmodan redovisa kostnader och intäkter för verksamheten
-  belopp: null
+  belopp: Ansökningar prövas individuellt utifrån disponibla medel; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   foreningstyp:
   - idrott
   - ungdom
   sen_ansokan: Ej möjlig efter 31 oktober för kommande verksamhetsår
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomfritidssektorn.2742.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  anteckning: Verksamheten ska vara öppen utan krav på medlemskap och ha fritidsgårdskaraktär.
+- id: arvika-sarskilda-insatser-barn-unga
+  namn: Stöd till särskilda insatser för barn och ungdomar
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Etablerade föreningar eller andra grupper som vill nå nya målgrupper bland barn och unga
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Insatsen ska rikta sig till barn eller tonåringar som inte redan är föreningsaktiva eller som har särskilda behov
+  - Verksamheten ska främja ungas medinflytande, ansvarstagande, demokrati eller en sund livsstil fri från droger och våld
+  - Insatsen ska attrahera både flickor och pojkar
+  - Ansökan ska lämnas i god tid före start och innehålla en verksamhetsplan med mål, syfte och ekonomisk kalkyl
+  belopp: Ansökningar prövas individuellt utifrån disponibla medel; stödet kan lämnas som ett engångsbelopp eller flera belopp över tid
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas i god tid före planerad verksamhetsstart
+  kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomfritidssektorn.2742.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beviljad förening ska på begäran redovisa verksamhetens kostnader och intäkter.
+- id: arvika-verksamhetsbidrag-samlingslokaler
+  namn: Verksamhetsbidrag för samlingslokaler
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar som äger en allmän samlingslokal som hålls öppen och tillgänglig för allmänheten och föreningslivet
+  foreningstyp: [kultur, hembygd, annat]
+  deadlines: { typ: fasta, datum: [02-28] }
+  krav:
+  - Lokalen ska vara öppen och tillgänglig för föreningslivets möten, studieverksamhet, kultur- eller fritidsverksamhet
+  - Finansieringsplan, revisionsberättelse, verksamhetsberättelse och resultaträkning ska lämnas
+  - Lokalens storlek, standard, skötsel och nyttjandegrad ska redovisas
+  - Kostnader för löner, räntor och amorteringar är inte bidragsgrundande
+  belopp: Bedöms utifrån lokalens storlek, standard, skötsel, nyttjandegrad och föreningens ekonomi; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 28 februari
+  kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Fördelningen bygger på föregående års redovisning.
+- id: arvika-sarskilt-bidrag-samlingslokaler
+  namn: Särskilt bidrag för samlingslokaler
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar som behöver rusta upp eller renovera en föreningsägd allmän samlingslokal i mindre omfattning
+  foreningstyp: [kultur, hembygd, annat]
+  deadlines: { typ: fasta, datum: [04-30] }
+  krav:
+  - Åtgärden ska avse upprustning, tillbyggnad, reparation eller annan mindre underhålls- eller investeringsinsats
+  - Åtgärden får inte vara påbörjad innan kommunen har fattat slutligt beslut
+  - Finansieringsplan, revisionsberättelse, verksamhetsberättelse och resultaträkning ska lämnas
+  - Lokalen ska vara tillgänglig för allmänheten och föreningslivet och föreningens ekonomi vägs in i bedömningen
+  belopp: Beslutas efter prövning av åtgärden och föreningens ekonomi; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet kompletterar verksamhetsbidraget för samlingslokaler.
+- id: arvika-verksamhetsbidrag-studieforbund
+  namn: Verksamhetsbidrag till studieförbund
+  kategori: [kultur, social, ovrig]
+  malgrupp: Lokala studieförbundsavdelningar vars riksförbund ingår i Folkbildningsrådet och som har dokumenterad verksamhet i Arvika
+  foreningstyp: [kultur, social, annat]
+  deadlines: { typ: fasta, datum: [11-30] }
+  krav:
+  - Riksförbundet ska ingå i Folkbildningsrådet och den lokala avdelningen ska ha dokumenterad verksamhet i Arvika
+  - Verksamhetsberättelse, årsredovisning, revisionsberättelse och verksamhetsplan ska bifogas
+  - Verksamhetsberättelsen ska vara separat för Arvika och redogöra för genomförd verksamhet och uppfyllda mål i kommunen
+  - Ansökan ska göras digitalt i Interbook Go under perioden 15 oktober–30 november
+  belopp: 60 procent av föregående års bidrag lämnas som grundbidrag; återstoden fördelas efter lokalkontor och verksamhetsandelar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 november
+  kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomkultursektorn.2744.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen prövar stödnivån i samband med budgetarbetet.
 - id: arvika-ledartranering
   namn: Ledarträningsbidrag
   kategori:
@@ -219,6 +292,8 @@ bidrag:
   - Föreningen ska uppfylla de krav som gäller för ungdomsverksamhet
   - Kursprogram, kursintyg och verifikat för kurs-, logi- och resekostnader ska bifogas ansökan
   belopp: Max 600 kronor per kursdag. I bidragsgrundande kostnader ingår kursavgift, logi och resor.
+  belopp_avser: per_forening
+  kommunens_pott: null
   foreningstyp:
   - idrott
   sen_ansokan: Möjlig inom 6 månader efter kursslut
@@ -245,6 +320,8 @@ bidrag:
   - Bidragets storlek begränsas av ett fastställt maxtak per förening och bedöms utifrån anläggningens storlek, standard,
     skötsel och nyttjande
   belopp: Max 70% av godkänd driftkostnad, begränsat av ett fastställt maxtak per förening.
+  belopp_avser: per_forening
+  kommunens_pott: null
   foreningstyp:
   - idrott
   sen_ansokan: Ej möjlig efter 28 februari
@@ -269,6 +346,8 @@ bidrag:
   - Ansökan senast 30 april
   - Ansökan prövas vid kommunledningens sammanträde; bidragets storlek beror på tillgängliga anslagna medel
   belopp: Vanligtvis 70% av redovisad kostnad, men avvikelser både uppåt och nedåt har förekommit i särskilda fall.
+  belopp_avser: per_forening
+  kommunens_pott: null
   foreningstyp:
   - idrott
   sen_ansokan: Ej möjlig efter 30 april
@@ -277,63 +356,63 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Källan bekräftar fast årlig deadline 30 april; tidigare uppgift om löpande ansökan var felaktig och har korrigerats.
+  anteckning: Stödet är ett engångsanslag som kompletterar driftbidraget.
 - id: arvika-funktionsratt
   namn: Funktionsrätt Arvika — Årligt bidrag
   kategori:
   - funktionsratt
   malgrupp: Medlemsorganisationer i funktionsrätt-arbetet
   deadlines:
-    typ: fasta
-    datum:
-    - 01-01
+    typ: okand
+    datum: []
   krav:
   - Medlemsorganisation i Funktionsrätt Arvika-nätverket
   - Arbete för delaktighet, tillgänglighet och jämlika levnadsvillkor
   - Funktionsrätt Arvika ska årligen redovisa bidragets fördelning och användning till kommunen samt tillhandahålla uppgifter
     kommunen efterfrågar för uppföljning
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årligt anslag till Funktionsrätt Arvika; aktuell totalsumma publiceras inte i stödregeln
+  foreningstyp: [social, annat]
   sen_ansokan: Ej tillämpligt (årligt fastställt)
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomsocialasektorn.2746.html
-  belopp_status: okand
-  deadline_status: kontrollast
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad. Källan anger ingen ansökningsdeadline för detta bidrag; nuvarande datum (1 januari) kunde inte återfinnas
-    i källan och bör kontrolleras.
+  anteckning: Funktionsrätt Arvika ansvarar för fördelningen enligt organisationens egna riktlinjer och prioriteringar.
 - id: arvika-pensionarsorganisationer
   namn: Bidrag till pensionärsorganisationer
   kategori:
   - pensionar
   malgrupp: Föreningar för pensionärer
   deadlines:
-    typ: fasta
-    datum:
-    - 01-01
+    typ: okand
+    datum: []
   krav:
   - Föreningsstadgar som säger att organisationen är för pensionärer
   - Medlemmar som deltar i minst 10 arrangemang årligen räknas som aktiva
   - Föreningen ska redovisa sina aktiva medlemmar med namn och telefonnummer
   belopp: 1 000 kronor grundbidrag per organisation samt tillägg i förhållande till antalet aktiva medlemmar boende i Arvika
     kommun.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  foreningstyp: [social, annat]
   sen_ansokan: Ej tillämpligt (årligt fastställt)
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomsocialasektorn.2746.html
   belopp_status: kontrollast
-  deadline_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Källan anger ingen ansökningsdeadline för detta bidrag; nuvarande datum (1 januari) kunde inte återfinnas i
-    källan och bör kontrolleras.
+  anteckning: Aktiv medlem är den som deltagit i minst tio aktiviteter under föregående kalenderår.
 - id: arvika-sociala-stodforeningar
   namn: Bidrag till sociala stödföreningar
   kategori:
   - social
   malgrupp: Organisationer som stödjer människor i socialt utsatta situationer
   deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+    typ: okand
+    datum: []
   krav:
   - Registrering som ideell förening med godkända stadgar
   - Explicit syfte för social stödverksamhet i stadgarna
@@ -342,18 +421,19 @@ bidrag:
   - Ansökan görs av föreningens lokala styrelse
   - Förvaltningsberättelse ska bifogas utöver övriga handlingar
   - Föreningen är skyldig att ge kommunen insyn för kontroll av lämnade uppgifter och användning av beviljade medel
-  belopp: Sju organisationer delade 636 000 kronor årligen.
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 636 000 kronor fördelades mellan sju sociala stödföreningar i 2026 års beslut
   foreningstyp:
   - social
   kraver_registrering: true
   sen_ansokan: Ej möjlig efter 30 april
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier/stodinomsocialasektorn.2746.html
-  belopp_status: okand
-  deadline_status: kontrollast
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'T8a: Siffran har inte kunnat verifieras på den angivna aktuella källsidan; behålls men lyfts inte. Källan anger
-    inte heller någon ansökningsdeadline; nuvarande datum (30 april) kunde inte återfinnas i källan och bör kontrolleras.'
+  anteckning: Kommunledningsutskottets beslut 2026 anger potten och antalet mottagande föreningar.
 forutsattningar:
 - id: arvika-ideell-forening
   vad: Registrering som ideell förening
@@ -365,7 +445,7 @@ forutsattningar:
   giltighet: null
   ordning: 1
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.2740.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: arvika-interbook-go
   vad: Digital ansökan via Interbook Go Arvika
   beskrivning: Alla ansökningar skickas digitalt via Interbook Go Arvika. Medlemmar i föreningar som redan använder systemet
@@ -376,7 +456,7 @@ forutsattningar:
   giltighet: null
   ordning: 2
   kalla_url: https://arvika.ibgo.se
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: arvika-allmanna-handlingar
   vad: Inlämnade ansökningar blir allmänna handlingar
   beskrivning: Inlämnad ansökan diarieförs och blir därmed allmän handling enligt offentlighets- och sekretesslagen.
@@ -386,4 +466,4 @@ forutsattningar:
   giltighet: null
   ordning: 3
   kalla_url: https://www.arvika.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.2740.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
