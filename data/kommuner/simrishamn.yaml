@@ -4,212 +4,248 @@ lan: Skåne län
 befolkning: 18771
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: E-tjänster och webbformulär
-  url: https://www.simrishamn.se/kultur-och-fritid/foreningsstod/
-kalla_url: https://www.simrishamn.se/kultur-och-fritid/foreningsstod/
-verifierad: 2026-07-26
+  namn: Interbook Go
+  url: https://ibgo.simrishamn.se/#/
+kalla_url: &main https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 06-01
+  kalla_url: &register https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/bilda-forening
+giltighet_regel_status: kontrollast
 bidrag:
 - id: simrishamn-arrangemangsbidrag
-  namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för offentliga arrangemang och kulturella evenemang
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-28
-    - 09-30
+  namn: Arrangörsbidrag för kulturföreningar
+  foreningstyp: [kultur, hembygd]
+  kategori: [kultur]
+  malgrupp: Bidragsberättigade kulturföreningar som genomför offentliga kulturarrangemang i kommunen
+  deadlines: { typ: fasta, datum: [02-15] }
   krav:
-  - Arrangementet ska vara offentligt och tillgängligt för alla
-  - Ansökan minst två månader före eventet
-  - Detaljerad budget och beskrivning av arrangemang
-  - Ideell förening eller organisation
-  belopp: Max 50 000 kronor per arrangement
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Två ansökningsperioder per år. Betalning efter genomförande av arrangementet. T8b (2026-08-08): Källsidan är
-    omstrukturerad för 2026 och visar andra bidragsnamn, belopp och datum. Bidraget kunde inte återfinnas under detta namn.'
-- id: simrishamn-verksamhetsbidrag
-  namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för årlig verksamhet och medlemsaktiviteter
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav:
-  - Registrerad förening med medlemmar från Simrishamn
-  - Planerad årlig verksamhet
-  - Verksamheten ska gynna medlemmar och lokalsamhället
-  - Jämlik och icke-diskriminerande verksamhet
+  - Sökanden ska vara en bidragsberättigad kulturförening och arrangemanget ska vara offentligt och äga rum i Simrishamns kommun
+  - Ett eller en serie kulturarrangemang ska beskrivas i samma ansökan med budget och finansiering
+  - Stöd kan avse artist, icke-kommunal lokal, teknik, tillstånd och marknadsföring
+  - Medlemsverksamhet, administration, mat, interna möten, religiös eller politisk verksamhet, välgörenhet, studiecirklar, skolverksamhet och inventarier omfattas inte
+  - Beviljat stöd ska redovisas senast 1 december
   belopp: null
-  sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: 718 000 kr för 2026
+  sen_ansokan: Senast 15 februari; komplettering kan bara ske under ansökningsperioden
+  kalla_url: *main
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Huvudsakligt bidrag för föreningar. Kan kombineras med arrangemangsbidrag för särskilda projekt. T8a: Den aktuella
-    sidan har ändrad bidragsstruktur och den tidigare formuleringen kunde inte verifieras. T8b (2026-08-08): Källsidan är
-    omstrukturerad för 2026 och visar andra bidragsnamn, belopp och datum. Bidraget kunde inte återfinnas under detta namn.'
-- id: simrishamn-ungdomsbidrag
-  namn: Ungdomsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar med fokus på barn och ungdom (under 25 år)
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-kulturverksamhetsstod
+  namn: Verksamhetsstöd för kulturverksamheter
+  foreningstyp: [kultur]
+  kategori: [kultur]
+  malgrupp: Etablerade kulturverksamheter med säte i Simrishamn och direkt verksamhetsstöd från Region Skåne
+  deadlines: { typ: fasta, datum: [02-15] }
   krav:
-  - Minst 50% av aktiviteterna riktar sig till barn/ungdom
-  - Fokus på utveckling, sammanhållning och inkludering
-  - Registrerad förening
-  - Plan för barn- och ungdomsarbete
-  belopp: Upp till 100 000 kronor per år
-  sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
+  - Verksamheten ska ha säte i Simrishamns kommun och få direkt verksamhetsstöd från Region Skåne
+  - Verksamheten ska vara etablerad och kontinuerlig med lokal förankring
+  - Sökanden ska ha bank- eller plusgiro och planerad, dokumenterad kulturverksamhet riktad till allmänheten
+  - Kommunens logotyp ska användas och beviljat stöd ska redovisas enligt beslutet
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 450 000 kr för 2026
+  sen_ansokan: Senast 15 februari
+  kalla_url: *main
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Prioriterad satsning för att stärka ungdomsverksamheten i kommunen. T8b (2026-08-08): Källsidan är omstrukturerad
-    för 2026 och visar andra bidragsnamn, belopp och datum. Bidraget kunde inte återfinnas under detta namn.'
-- id: simrishamn-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som hyr lokal för sin verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 05-31
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-lokalt-aktivitetsbidrag
+  namn: Lokalt aktivitetsbidrag
+  foreningstyp: [idrott, friluft]
+  kategori: [idrott]
+  malgrupp: Bidragsberättigade idrotts-, sport- och friluftsföreningar med stödberättigade gruppaktiviteter
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Befintligt hyreskontrakt för lokal
-  - Lokalen används för föreningens medlemsaktiviteter
-  - Hyresavgift dokumenterad
-  - Registrerad förening
-  belopp: Max 50% av årlig hyreskostnad, upp till 30 000 kronor
-  sen_ansokan: Ej möjlig efter 31 maj
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
+  - Idrottsföreningar ska följa Riksidrottsförbundets LOK-regler; andra sport- och friluftsföreningar omfattas utan krav på RF-medlemskap
+  - Varje sammankomst ska dokumenteras med förening, aktivitet, plats, datum, tid, deltagarnas namn, födelseuppgifter och kön samt ansvarig ledare
+  - Närvaron ska styrkas av ledaren och avse en stödberättigad gruppaktivitet
+  - Perioden 1 juli–31 december söks senast 25 februari och perioden 1 januari–30 juni senast 25 augusti
+  belopp: Ledarstöd och deltagarnivå varierar utifrån årets budget och godkända ansökningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 februari respektive 25 augusti
+  kalla_url: *main
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Gäller både kommunägda och privata lokaler. Hyresavtal måste bifogas ansökan. T8b (2026-08-08): Källsidan är
-    omstrukturerad för 2026 och visar andra bidragsnamn, belopp och datum. Bidraget kunde inte återfinnas under detta namn.'
-- id: simrishamn-integrationsbidrag
-  namn: Integrationsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  malgrupp: Föreningar som arbetar med integration och inkludering av nyanlända
-  deadlines:
-    typ: fasta
-    datum:
-    - 06-30
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-drift-lokal
+  namn: Driftsbidrag för egen anläggning eller hyrd lokal
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar med egen eller minst treårigt hyrd anläggning eller lokal för kontinuerlig kultur- eller idrottsverksamhet
+  deadlines: { typ: fasta, datum: [04-15] }
   krav:
-  - Projekt eller verksamhet för integration av nyanlända
-  - Fokus på social gemenskap och språkinlärning
-  - Öppen för bred målgrupp
-  belopp: Max 75 000 kronor.
-  sen_ansokan: Ej möjlig efter 30 juni
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
+  - Föreningen ska bedriva kontinuerlig kultur- eller idrottsverksamhet i egen lokal eller med hyresavtal på minst tre år
+  - Kommunal anläggning ska användas i första hand och lokalen får inte redan vara kommunalt subventionerad
+  - Endast en förening kan få stöd för samma anläggning eller lokal
+  - Ansökan ska styrka föregående års godkända driftkostnader och redovisa hyresintäkter
+  - Verksamhet med hög nyttjandegrad och barn, unga, pensionärer eller personer med funktionsnedsättning prioriteras
+  belopp: Högst 70 % av godkända kostnader vid minst 250 stödberättigade deltagartillfällen, annars högst 45 %; hyresintäkter över 60 000 kr minskar underlaget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 april
+  kalla_url: *main
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Särskild satsning för att underlätta integration i lokalsamhället. T8a: Beloppet kunde inte återfinnas på den
-    aktuella angivna sidan; behålls men lyfts inte. T8b (2026-08-08): Källsidan är omstrukturerad för 2026 och visar andra
-    bidragsnamn, belopp och datum. Bidraget kunde inte återfinnas under detta namn.'
-- id: simrishamn-miljobidrag
-  namn: Miljöbidrag för hållbara aktiviteter
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar med miljömässigt hållbara projekt och verksamheter
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-31
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-socialt-foreningsbidrag
+  namn: Föreningsbidrag inom socialt område
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [social, ovrig]
+  malgrupp: Föreningar, organisationer och ideella bolag med social verksamhet som gagnar kommuninvånare
+  deadlines: { typ: fasta, datum: [03-15] }
   krav:
-  - Miljöfokus i verksamheten eller projektet
-  - Kan vara återvinning, naturvård, källsortning eller klimatprojekt
-  - Kan kombineras med andra bidragstyper
-  belopp: Max 25 000 kronor
-  sen_ansokan: Ej möjlig efter 31 augusti
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
+  - Verksamheten ska rikta sig till målgrupper enligt socialtjänstlagens femte kapitel och gagna invånare i Simrishamns kommun
+  - Insatsen ska vara förebyggande eller ge kvalificerat stöd och får inte ersätta service som en myndighet redan tillhandahåller
+  - Samma verksamhet får inte redan finansieras med annat kommunalt bidrag
+  - Ansökan ska beskriva målgrupp, syfte, genomförande och användning av stödet samt innehålla budget och verksamhetsplan
+  belopp: Individuellt fördelat efter godkända ansökningar och tillgängliga medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 mars
+  kalla_url: *main
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Klimat- och hållbarhetsinitiativ prioriteras högt i Simrishamn kommun. T8b (2026-08-08): Källsidan är omstrukturerad
-    för 2026 och visar andra bidragsnamn, belopp och datum. Bidraget kunde inte återfinnas under detta namn.'
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-lagsasongsbidrag
+  namn: Lågsäsongsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Bidragsberättigade föreningar som skapar offentlig verksamhet under september–maj
+  deadlines: { typ: fasta, datum: [08-15] }
+  krav:
+  - Aktiviteten ska helt eller huvudsakligen äga rum september–maj och skapa liv under lågsäsongen
+  - Aktiviteten ska vara offentlig och öppen samt ha tydlig målgrupp och förväntad effekt
+  - Ansökan ska innehålla genomförbar plan, tidsplan och en rimlig budget knuten till aktiviteten
+  - Stöd ges inte till normal drift, dubbel kommunal finansiering eller investeringar
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 400 000 kr för 2026
+  sen_ansokan: Senast 15 augusti
+  kalla_url: https://www.simrishamn.se/nyheter/nyhetsarkiv/2026-05-27-simrishamn-infor-ett-nytt-lagsasongsbidrag-for-foreningar
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: simrishamn-utvecklingsbidrag
-  namn: Utvecklingsbidrag för nya initiativ
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar eller grupper med nya idéer och pilotprojekt
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Utvecklingsbidrag för egen anläggning eller hyrd lokal
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Bidragsberättigade föreningar med egen eller hyrd anläggning eller lokal
+  deadlines: { typ: fasta, datum: [10-01] }
   krav:
-  - Nytt projekt eller initiativ som kan stödja lokalsamhället
-  - Beskrivning av syfte, målgrupp och budget
-  - Förslag på resultatmätning och utvärdering
-  belopp: Max 40 000 kronor.
-  sen_ansokan: Möjlig löpande året om
-  kalla_url: https://www.simrishamn.se/kultur/fritid-och-forening/forening-och-foreningsliv/driva-forening/foreningsbidrag
-  belopp_status: okand
+  - Projektet får inte påbörjas före kommunens beslut och ska avse en investering på 10 000–200 000 kr inklusive moms
+  - Varje ansökan ska avse en investering och redovisa samtliga kostnader, offerter eller kalkyler samt annan offentlig finansiering
+  - Eget arbete ersätts inte, utom inköpt arbete av behörig specialist enligt reglerna
+  - Miljö- och energiåtgärder, tillgänglighet, bevarande och mindre till- eller ombyggnad prioriteras
+  belopp: Högst 50 % av den totala investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 1 september–1 oktober; senast 1 oktober
+  kalla_url: *main
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Stöd för pilotprojekt och innovativa idéer inom idrott, kultur och fritid. T8a: Beloppet kunde inte återfinnas
-    på den aktuella angivna sidan; behålls men lyfts inte. T8b (2026-08-08): Källsidan är omstrukturerad för 2026. Ett bidrag
-    med samma namn finns kvar men avser nu investeringar i miljö/energi/tillgänglighet med ansökningsperiod 1/8-1/9, inte
-    löpande ansökan för pilotprojekt.'
+  krav_fullstandiga: true
+  anteckning: Den aktuella sidans sammanfattning anger även 1 augusti–1 september, men länktext, detaljregel och antaget regelverk anger 1 september–1 oktober.
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-utsmyckningsersattning
+  namn: Utsmyckningsersättning
+  foreningstyp: [hembygd, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Registrerade byalag och intresseföreningar i kommunens tätorter och småorter
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Sökanden ska vara ett registrerat byalag eller en intresseförening för en ort som omfattas av reglerna
+  - Första ansökan ska innehålla stadgar och årsmöteshandlingar med ekonomi, revision och verksamhetsberättelse; därefter lämnas årshandlingar årligen
+  - Åtgärden ska vara fysisk utsmyckning på offentlig mark som kommer orten till del
+  - Ansökan ska innehålla kostnadsberäkning och redovisning med kvitton ska lämnas senast 31 december
+  belopp: Högst 10 000 kr per tätort och 5 000 kr per småort; beloppet delas om flera föreningar söker för samma ort
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 mars
+  kalla_url: https://www.simrishamn.se/gata-park-och-natur/gata/utsmyckningsersattning
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-studieforbundsbidrag
+  namn: Studieförbundsbidrag
+  foreningstyp: [kultur, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Studieförbund med redovisad folkbildningsverksamhet för invånare i Simrishamns kommun
+  deadlines: { typ: fasta, datum: [05-15] }
+  krav:
+  - Studieförbundet ska redovisa SCB-rapporterade deltagare och studietimmar i Simrishamns kommun
+  - Verksamheten ska vara riktad till kommuninvånare
+  - Aktuellt årsmötesprotokoll, revisionsberättelse, ekonomisk berättelse och verksamhetsberättelse ska lämnas årligen
+  - Ansökan och årshandlingar ska lämnas senast 15 maj
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 400 000 kr för 2026
+  sen_ansokan: Senast 15 maj
+  kalla_url: https://www.simrishamn.se/kultur/foreningar-och-foreningsliv/foreningsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: simrishamn-vagbidrag
+  namn: Vägbidrag
+  foreningstyp: [annat]
+  kategori: [ovrig]
+  malgrupp: Samfälligheter och vägföreningar som ansvarar för stödberättigad enskild väg
+  deadlines: { typ: fasta, datum: [07-31] }
+  krav:
+  - Vägen ska gå från allmän väg till sista permanentbostad, vara öppen för allmän trafik och hållas farbar året runt
+  - Vägnätet ska vara minst 100 meter och uppfylla kommunens krav på bredd och mötesplatser
+  - Sökanden ska ha styrelse, årligt möte och organiserad verksamhet
+  - Kommunalt stöd utan statsbidrag söks året efter bidragsåret med blankett, fakturor och undertecknat årsmötesprotokoll
+  - Endast direkta vägkostnader är stödberättigade; vägar med statsbidrag hanteras via Trafikverkets underlag
+  belopp: Utan statsbidrag 55 % av årsunderlaget för grusväg eller 45 % för asfalt, högst styrkta fakturor; med statsbidrag 16 % respektive 8 %
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 juli för kommunalt stöd utan statsbidrag
+  kalla_url: https://www.simrishamn.se/gata-park-och-natur/gata/vagbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: simrishamn-registrering
-  vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste vara registrerad och godkänd för bidrag i Simrishamn kommuns föreningsregister för att kunna
-    ansöka.
-  system: Simrishamns föreningsregister
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
+  vad: Registrering och årligt bidragsgodkännande i Interbook Go
+  beskrivning: Föreningen ska vara registrerad i Interbook Go, ha bedrivit verksamhet i minst ett år före första ansökan om bidragsberättigande och årligen lämna undertecknade årsmöteshandlingar och medlemsstatistik.
+  system: Interbook Go
+  ledtid: 365
+  ledtid_text: Minst ett års verksamhet före första ansökan om bidragsberättigande
+  giltighet: Ett år; bidragsberättigandet förnyas senast 1 juni med aktuella handlingar.
   ordning: 1
-  kalla_url: https://www.simrishamn.se/kultur-och-fritid/foreningsstod/
-  giltighet_status: okand
-- id: simrishamn-e-tjanster
-  vad: Ansökan via e-tjänster
-  beskrivning: De flesta bidrag ansöks via webbformulär och e-tjänster. Kontakta Kultur- och fritidsförvaltningen för frågor
-    om digital ansökan och inloggning.
-  system: Simrishamn e-tjänster
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
-  ordning: 2
-  kalla_url: https://www.simrishamn.se/kultur-och-fritid/foreningsstod/
-  giltighet_status: okand
-- id: simrishamn-kontakt
-  vad: Kultur- och fritidsförvaltningen
-  beskrivning: 'För frågor om föreningsbidrag: fritid@simrishamn.se eller 0414-81 90 00. Öppettider: mån-fre 08:00-16:30.'
-  system: Simrishamn kommun
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
-  ordning: 3
-  kalla_url: https://www.simrishamn.se/kultur-och-fritid/foreningsstod/
-  giltighet_status: okand
+  kalla_url: *register
+  giltighet_status: kontrollast
