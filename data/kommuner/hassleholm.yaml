@@ -2,167 +2,393 @@ kommun: Hässleholm
 kommun_slug: hassleholm
 lan: Skåne län
 befolkning: 51899
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsförvaltningen, Tekniska förvaltningen samt Kommunledningsförvaltningens näringslivsenhet
 ansokningssystem:
-  namn: E-tjänster
-  url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
+  namn: FRI Go, ApN och kommunens blanketter
+  url: https://hassleholm.fri-go.se/
 kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 1
+  datum: null
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: hassleholm-aktivitetsbidrag
   namn: Aktivitetsbidrag
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   kategori:
   - idrott
-  - kultur
-  malgrupp: Föreningar för ungdomar 7-20 år och FSS-aktiviteter
+  - funktionsratt
+  - ovrig
+  malgrupp: Frilufts-, funktionsrätts-, idrotts-, nykterhets- och skolidrottsföreningar med aktiv fritidsverksamhet för 7–20-åringar, samt FSS-verksamhet utan åldersgräns
   deadlines:
     typ: fasta
     datum:
     - 02-25
     - 08-25
   krav:
-  - Ungdomar 7-20 år eller funktionshinder
-  - Idrotts-, dans-, fritids-, handikapp-föreningar
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Verksamheten ska omfatta aktivt utövande i föreningens egen regi för 7–20-åringar eller FSS-verksamhet utan åldersgräns
+  - Föreningen ska ha minst tio sammankomster och minst 50 deltagartillfällen per halvår
+  - Varje sammankomst ska vara ledarledd, pågå minst 60 minuter och ha 3–30 bidragsberättigade deltagare utöver ledaren
+  - Närvaro och plats ska registreras direkt i ett digitalt närvarosystem som kommunen godkänt
+  - Samma deltagare ger bidrag högst en gång per dag i samma förening
+  - Idrottsföreningar ska beskriva hur toppning motverkas för barn till och med tolv år
+  - Studiecirklar, drop-in, publikbesök, skolundervisning, läxhjälp, konfessionell verksamhet, årsmöten och fester är inte bidragsberättigade
+  belopp: Kommunens regler anger bidrag per deltagartillfälle men publicerar ingen taxa för 2026
+  sen_ansokan: Efter 25 februari eller 25 augusti minskas bidraget 25 procent; efter 31 mars respektive 30 september ges inget bidrag
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Periodrapporten för juli–december lämnas 25 februari och rapporten för januari–juni lämnas 25 augusti.
+  senast_verifierad: '2026-08-18'
 - id: hassleholm-lokalbidrag
   namn: Lokalbidrag
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   kategori:
   - idrott
-  - kultur
-  malgrupp: Föreningar med egen eller hyrd lokal
+  - funktionsratt
+  - ovrig
+  malgrupp: Dans-, frilufts-, funktionsrätts-, idrotts- och nykterhetsföreningar med egen eller hyrd lokal eller anläggning där kommunen inte kan erbjuda ett likvärdigt alternativ
   deadlines:
     typ: fasta
     datum:
     - 02-25
-    - 08-25
   krav:
-  - Lokal för verksamhet
-  - Samma villkor som aktivitetsbidrag
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Lokalen eller anläggningen ska höra till föreningens verksamhetsidé och användas för minst tio sammankomster per halvår
+  - Lokalen eller anläggningen ska ligga i kommunen, vara godkänd av förvaltningen och uppfylla krav på bygglov, brandsäkerhet och försäkring
+  - Endast en förening kan söka för samma anläggning
+  - Kommunalt subventionerad hyra och lokaler som huvudsakligen används kommersiellt ger inte bidrag
+  - Hyres-, arrende- och kostnadsunderlag ska lämnas på begäran; underhåll och reparation kräver kvitto eller faktura
+  - Verksamhetsutrustning, nyinvesteringar, kvalitetshöjning, bygglov, avskrivningar, amorteringar och eget föreningsarbete ersätts inte
+  - Föreningen ska redovisa eventuella inkomster från lokalen eller anläggningen separat
+  belopp: 50 procent av årshyra/arrende; upp till 75 procent av godkända drifts- och underhållskostnader. Totalt max 16 000–210 000 kr beroende på deltagartillfällen, plus eventuell vaktmästarersättning 50 000 kr
+  sen_ansokan: Efter 25 februari minskas bidraget 25 procent; efter 31 mars ges inget bidrag
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Bowlingklubbar kan få 50 procent av godkända tränings- och seriekostnader. Ansökan avser föregående års kostnader.
+  senast_verifierad: '2026-08-18'
 - id: hassleholm-bygdegard
-  namn: Bygdegårdsbidrag
+  namn: Driftsbidrag för allmänna samlingslokaler
+  foreningstyp: [idrott, hembygd, annat]
   kategori:
   - kultur
-  malgrupp: Bygdegårdsföreningar för samlingsverksamhet
+  - ovrig
+  malgrupp: Bygdegårds-, byalags- och idrottsföreningar som driver allmänna samlingslokaler där kommunen inte kan erbjuda ett likvärdigt alternativ
   deadlines:
     typ: fasta
     datum:
     - 02-25
-    - 08-25
   krav:
-  - Offentligt tillgänglig samlingsplats
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska driva en allmän samlingslokal i Hässleholms kommun
+  - Kommunen ska sakna en likvärdig kommunal lokal
+  - Lokalen ska vara öppen att hyra för alla som delar demokratisk värdegrund
+  - Lokalen ska vara godkänd av kultur- och fritidsförvaltningen och uppfylla krav på bygglov, brandsäkerhet och försäkring
+  - Föreningen ska ha minst 20 uthyrningar per år
+  - Föregående års kostnader för el, vatten, renhållning, värme och försäkring ska redovisas
+  - Ansökan ska vara komplett och lämnas digitalt året efter kostnadsåret
+  belopp: Högst 45 000 kr, fördelat utifrån föregående års godkända kostnader
+  sen_ansokan: Efter 25 februari minskas bidraget 25 procent; efter 31 mars ges inget bidrag
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Sösdalaortens bygdegårdsförening får därutöver en särskild avtalsersättning för Vannaröds slottspark; den är inte en öppen bidragsform.
+  senast_verifierad: '2026-08-18'
 - id: hassleholm-kulturverksamhet
   namn: Verksamhetsbidrag - kultur
+  foreningstyp: [kultur, hembygd]
   kategori:
   - kultur
   malgrupp: Kulturföreningar (musik, konst, teater, dans, film, litteratur, kulturarv)
   deadlines:
     typ: fasta
     datum:
-    - 02-25
-    - 08-25
+    - 09-30
   krav:
-  - Kulturell verksamhet
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Föreningen ska bedriva kontinuerlig, bred och varierad kultur- eller kulturminnesvårdande verksamhet i kommunen
+  - Verksamheten ska hålla kvalitet, vara utåtriktad och öppen för allmänheten samt ha ett allmänintresse utöver de egna medlemmarna
+  - Budget och verksamhetsplan för kommande år ska vara uppladdade i föreningsregistret senast 30 september
+  - Bidraget får inte användas till hyra
+  - Marknadsföringen ska ange att kultur- och fritidsnämnden stödjer föreningen
+  - Föreningen ska informera om och bjuda in till sin verksamhet
+  - Ansökan bedöms utifrån brett utbud, tillgänglighet för nya målgrupper och samverkan med andra aktörer
+  belopp: Individuellt bedömt verksamhetsbidrag inom nämndens årliga budget; något fast belopp publiceras inte
+  sen_ansokan: För sent inkommen ansökan behandlas inte
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Föreningar som får mer än 75 000 kr följs upp i ett årligt enskilt dialogmöte.
+  senast_verifierad: '2026-08-18'
 - id: hassleholm-arrangemangsbidrag
   namn: Arrangemangsbidrag
+  foreningstyp: [kultur, hembygd, annat]
   kategori:
   - kultur
-  - idrott
-  malgrupp: Föreningar för offentliga arrangemang
+  malgrupp: Ideella organisationer och andra föreningsliknande grupper som genomför ett kort, tidsbegränsat och publikt kulturarrangemang i Hässleholms kommun
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Offentligt arrangemang
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Sponsrings- och verksamhetsbidrag för evenemang Tidigare platshållare "Individuell bedömning" har tagits bort.
-    Kommunens faktiska beloppsregel är ännu inte verifierad.
-  senast_verifierad: '2026-08-03'
+  - Arrangemanget ska genomföras i Hässleholms kommun och vara öppet för allmänheten
+  - Arrangemanget ska vara kort, tidsbegränsat, hålla god kvalitet och vara av intresse för allmänheten
+  - Ansökan ska beskriva mål, syfte, projekttid, praktiskt genomförande och budget
+  - Stöd ges inte till kommunal verksamhet eller investeringar som efteråt gynnar arrangören
+  - Politiska eller religiösa projekt, stödgalor, välgörenhet och vinstdrivande projekt får inte bidrag
+  - Utbildning, forskning och renodlat pedagogiska projekt som kan bedrivas som studiecirkel får inte bidrag
+  - Redovisning ska lämnas senast tre månader efter genomförandet
+  belopp: Kommunen fastställer en årlig budget men publicerar inget fast individuellt belopp
+  sen_ansokan: Handläggning sker löpande
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Normen tillåter även enskilda sökande, men denna post gäller endast organisationer enligt produktens avgränsning.
+  senast_verifierad: '2026-08-18'
 - id: hassleholm-tatortsbidrag
   namn: Tätortsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - kultur
-  malgrupp: Föreningar för stadsutveckling
+  malgrupp: Föreningar och organisationer i Bjärnum, Hästveda, Sösdala, Tyringe, Vinslöv och Vittsjö med aktiviteter som stärker orten som mötes- och handelsplats
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Aktiviteten eller arrangemanget ska genomföras i någon av de sex angivna tätorterna
+  - Insatsen ska stärka ortens roll som mötes- och handelsplats
+  - Samma aktivitet får inte samtidigt få annan finansiering från Hässleholms kommun
+  - Kommunens stöd ska synliggöras i marknadsföring eller information till deltagarna
+  - Ansökan lämnas till ortens sammankallande förening, som fördelar stödet i samråd med övriga föreningar och organisationer
+  - Genomförda aktiviteter och kostnader ska redovisas; kostnadsunderlag lämnas på begäran
+  belopp: Ortens sammankallande förening beslutar fördelningen; något individuellt belopp publiceras inte
+  sen_ansokan: Varje sammankallande förening bestämmer när och hur ansökan görs; kommunen publicerar ingen gemensam frist
+  kalla_url: https://www.hassleholm.se/download/18.28c96a201840e272ce56ae0/1667225739046/Regler%20f%C3%B6r%20t%C3%A4tortsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Sex lokala föreningar administrerar stödet, en per tätort. Bidrag för aktiviteter som inte genomförs ska återbetalas eller avräknas.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-pensionarsrad
+  namn: Bidrag till Kommunala pensionärsrådets medlemsföreningar
+  foreningstyp: [social, annat]
+  kategori:
+  - pensionar
+  malgrupp: Bidragsberättigade pensionärsföreningar som ingår i kommunens råd och bedriver regelbunden verksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Föreningen ska bedriva regelbunden verksamhet för pensionärer
+  - Föreningen ska ingå i det kommunala rådet
+  - Medlemsantalet ska vara aktuellt eftersom det ligger till grund för fördelningen
+  belopp: Rådets årliga budget fördelas procentuellt mellan medlemsföreningarna utifrån medlemsantal
+  sen_ansokan: Ingen särskild ansökan krävs
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Förvaltningen fördelar stödet utan särskild ansökan och betalar ut det i juni.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-tillganglighetsrad
+  namn: Bidrag till Kommunala tillgänglighetsrådets medlemsföreningar
+  foreningstyp: [social, annat]
+  kategori:
+  - funktionsratt
+  malgrupp: Bidragsberättigade funktionsrättsföreningar som ingår i kommunens tillgänglighetsråd
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Föreningen ska bedriva regelbunden verksamhet inom funktionsrättsområdet
+  - Föreningen ska ingå i tillgänglighetsrådet
+  - Föreningen får inte samtidigt få aktivitetsbidrag eller särskilt bidrag från kultur- och fritidsnämnden
+  - Verksamhetens omfattning och informationsinsatser ska kunna redovisas till rådet
+  belopp: 50 procent av rådets budget fördelas efter medlemsantal, 40 procent efter verksamhetens omfattning och 10 procent till informationsinsatser
+  sen_ansokan: Rådets representanter fördelar bidraget i april–maj; kommunen publicerar ingen ansökningsfrist
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Rådet beslutar fördelningen och kultur- och fritidsförvaltningen administrerar utbetalningen i juni.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-kartritningsbidrag
+  namn: Kartritningsbidrag
+  foreningstyp: [idrott, friluft]
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Orienteringsklubbar som nyframställer eller digitaliserar orienteringskartor
   deadlines:
     typ: fasta
     datum:
-    - 02-25
-    - 08-25
+    - 10-31
   krav:
-  - Aktiviteter i stadskärna
-  - Stärker tätorten som mötes- och handelsplats
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Strand- och vattenvärdssatsningar inkluderade Tidigare platshållare "Individuell bedömning" har tagits bort.
-    Kommunens faktiska beloppsregel är ännu inte verifierad.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Föreningen ska vara en orienteringsklubb
+  - Föreningen ska ha minst tio sammankomster per halvår i linje med sin verksamhetsidé
+  - Ansökan ska avse nyframställning eller digitalisering av orienteringskartor
+  - Orienteringsföreningarna ska samråda om fördelningen och redovisa kartproduktionen till förvaltningen
+  belopp: Kultur- och fritidsnämnden fastställer en årlig budget; något fast individuellt belopp publiceras inte
+  sen_ansokan: Ansökan ska vara inkommen senast 31 oktober
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: En representant för orienteringsföreningarna lämnar fördelningen; utbetalning sker i november.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-magnarpskolonin
+  namn: Bidrag till minne av Magnarpskolonin
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Bidragsberättigade föreningar med projekt som provar nya former av fysisk aktivitet eller utvecklar ideell ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-01
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad i Hässleholms kommun
+  - Föreningen ska ha bedrivit verksamhet i minst ett år efter registreringen
+  - Projektet ska testa nya former av fysisk aktivitet eller stödja, stärka och utveckla ideell ungdomsverksamhet
+  - Ansökan ska beskriva mål, syfte, projekttid, praktiskt genomförande och budget
+  - Projektet ska påbörjas inom sex månader från beslutet
+  - Utvärdering och ekonomisk redovisning ska lämnas senast en månad efter projektets slut
+  - Överblivna medel ska återbetalas
+  belopp: Kultur- och fritidsnämnden fastställer en årlig budget; något fast individuellt belopp publiceras inte
+  sen_ansokan: Komplett digital ansökan senast 1 oktober
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Nämnden fattar beslut senast i november och stödet betalas ut i december.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-skotselbidrag-badplatser
+  namn: Skötselbidrag för badplatser
+  foreningstyp: [friluft, annat]
+  kategori:
+  - ovrig
+  malgrupp: Registrerade föreningar som genom avtal ansvarar för skötseln av en allmän badplats
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-15
+  krav:
+  - Föreningen ska vara registrerad i Hässleholms kommun om dispens inte har beviljats
+  - Badplatsen ska vara tillgänglig för allmänheten
+  - Föreningen och kultur- och fritidsförvaltningen ska ha ett skötselavtal som fördelar ansvaret
+  - Föreningen ska sköta badplats, toalett, brygga, sopkärl och övriga delar enligt avtalet
+  - Efter badsäsongen ska föreningen lämna en driftsjournal undertecknad av ordförande eller kassör
+  belopp: Belopp och närmare villkor bestäms i föreningens separata skötselavtal och publiceras inte generellt
+  sen_ansokan: Efter 30 oktober minskas bidraget 25 procent; efter 31 december ges inget bidrag
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Driftsjournalen är underlag för utbetalning i oktober.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-strand-vattenvard
+  namn: Föreningsbidrag för strand- och vattenvårdsåtgärder
+  foreningstyp: [friluft, hembygd, annat]
+  kategori:
+  - ovrig
+  malgrupp: Ideella föreningar som förbättrar strand- eller vattenmiljö och rekreationsvärden vid sjöar och vattendrag i Hässleholms kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-12
+  krav:
+  - Åtgärden ska i första hand förbättra strand- eller vattenmiljön och i andra hand höja rekreationsvärdet
+  - Eget arbete ersätts inte
+  - Ansökan ska beskriva åtgärd, syfte, förväntad effekt och varför föreningen bör få bidrag
+  - Föreningsnamn, organisationsnummer, kontaktperson, sökt belopp, kostnadsfördelning, egen finansiering och tidsplan ska anges
+  - Stadgar och senaste årsmötesprotokoll med firmatecknare ska bifogas, och ansökan ska undertecknas av firmatecknaren
+  - Föreningen ansvarar för nödvändiga tillstånd och anmälningar
+  - Slutredovisningen ska innehålla kvitton, betalningsuppgifter, digital dokumentation och karta
+  - Vassklippning ska genomföras 1 juni–30 augusti och redovisas senast 15 oktober; övriga åtgärder senast 30 november
+  belopp: 80 procent av den totala kostnaden, högst 25 000 kr per förening; maxbeloppet kan sänkas om många söker
+  sen_ansokan: Ansökan senast 12 maj
+  kalla_url: https://www.hassleholm.se/bygga-bo-och-miljo/naturvard/naturvardsprojekt/ovriga-naturvardsprojekt/foreningsbidrag-for-strand--och-vattenvardsatgarder
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Tekniska nämnden beslutar. Utbetalning sker efter godkänd slutredovisning och styrkta kostnader.
+  senast_verifierad: '2026-08-18'
+- id: hassleholm-sponsringsbidrag
+  namn: Sponsringsbidrag och marknadsföringssamarbete
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar och organisationer verksamma i Hässleholms kommun som genom idrott, kultur, evenemang eller annan aktivitet kan stärka kommunens varumärke
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-01
+    - 09-01
+  krav:
+  - Sökanden ska vara en förening eller organisation verksam i Hässleholms kommun
+  - Samarbetet ska ge kommunen en tydlig motprestation som motsvarar sponsorinsatsen och regleras i ett tidsbegränsat avtal
+  - Aktiviteten ska överensstämma med kommunens värdegrund och övergripande mål samt stärka kommunens varumärke
+  - Politiska och religiösa organisationer får inte sponsring
+  - Ansökan ska ange sponsringskategori, uppfyllda kriterier, aktivitetens syfte och mål, samarbetspartner och övriga sponsorer
+  - Verksamhetsberättelse ska bifogas om organisationen inte redan lämnar den årligen till kommunen
+  - Föreningen ska årligen redovisa sin avtalade motprestation innan ett nytt eller förlängt avtal kan tecknas
+  - Utbetalda medel ska återbetalas om evenemanget inte genomförs eller kriterierna inte längre uppfylls
+  belopp: Kommunstyrelsens arbetsutskott beslutar belopp efter individuell prövning; något fast maxbelopp publiceras inte
+  sen_ansokan: Ansökningar behandlas efter 1 mars och 1 september; besked lämnas normalt inom en till två månader
+  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/soka-sponsring/sponsring--och-reklamavtal-riktlinjer
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Riktlinjen medger även individuella elitidrottare, men denna post gäller endast organisationer enligt produktens avgränsning.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: hassleholm-registrering
-  vad: Förening registrerad
-  beskrivning: Föreningen måste vara registrerad för att kunna söka bidrag.
-  system: Hässleholm föreningsregister
+  vad: Registrera föreningen och håll uppgifterna aktuella
+  beskrivning: Föreningen ska ha säte i Hässleholms kommun, minst tre medlemmar, organisationsnummer, fungerande e-postadress, antagna stadgar, vald styrelse och revisor samt vara demokratiskt uppbyggd och öppen. För bidragsberättigande krävs normalt minst 15 aktiva medlemmar som betalat minst 50 kronor, bankgiro och verksamhet huvudsakligen för kommuninvånare. Senast en månad efter varje årsmöte ska föreningsuppgifter, verksamhetsberättelse, ekonomisk rapport, revisionsberättelse och årsmötesprotokoll laddas upp i föreningsregistret.
+  system: FRI Go
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid för registrering eller bidragsberättigande
+  giltighet: Föreningsuppgifterna och årsmöteshandlingarna ska uppdateras senast en månad efter årsmötet
   ordning: 1
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  giltighet_status: okand
-- id: hassleholm-kontakt
-  vad: Kontakt
-  beskrivning: 'Fritid: conny.jonsson@hassleholm.se, Kultur: catharina.hjalmarsson@hassleholm.se'
-  system: Hässleholm kommun
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
-  ordning: 2
-  kalla_url: https://www.hassleholm.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  giltighet_status: okand
+  kalla_url: https://www.hassleholm.se/download/18.4a95204f19a7180d0601ed2/1762854437865/Regler%20och%20riktlinjer%20f%C3%B6r%20st%C3%B6d%202026.pdf
+  giltighet_status: kontrollast
