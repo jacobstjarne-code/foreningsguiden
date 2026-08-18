@@ -8,7 +8,13 @@ ansokningssystem:
   namn: Kommunens e-tjänstportal (enskilda e-formulär per bidragstyp)
   url: https://vellinge.se/sjalvservice
 kalla_url: https://vellinge.se/sjalvservice/fritid-och-kultur/bidrag-ungdomsverksamhet/
-verifierad: 2026-07-26
+verifierad: 2026-08-18
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://vellinge.se/naringsliv-och-jobb/foreningar/bidrag-stod-och-stipendier-for-foreningar
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: vellinge-ungdomsverksamhet
   namn: Föreningsbidrag för ungdomsverksamhet
@@ -16,164 +22,146 @@ bidrag:
   - idrott
   - kultur
   malgrupp: Förening som bedriver ungdomsverksamhet för barn och unga.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
     - 04-30
-  krav: []
-  belopp: null
+  krav:
+  - Sökanden ska vara en ideell förening som bedriver ungdomsverksamhet i Vellinge kommun
+  - Verksamhetsberättelse för föregående år ska bifogas
+  - Bokslut för föregående år ska bifogas
+  belopp: Det årliga föreningsbidraget bestäms efter prövning av ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Bidraget betalas ut efter ansökan godkänts. Exakt handläggningstid ej angiven.
   kalla_url: https://vellinge.se/sjalvservice/fritid-och-kultur/bidrag-ungdomsverksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Årligt bidrag för ungdomsverksamhet. Beloppsgränser fastställs årligen i budgeten. Ansökan via webform på e-tjänstportalen.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Årligt bidrag som söks utifrån föregående års verksamhet. Utbetalning sker under perioden juni–september.
+  senast_verifierad: '2026-08-18'
 - id: vellinge-lovaktiviteter
   namn: Extra stöd till nya lovaktiviteter
   kategori:
   - idrott
   - kultur
   malgrupp: Förening som erbjuder nya lovaktiviteter för barn och unga under lovperioder.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vellinge.se/sjalvservice/fritid-och-kultur/bidrag-ungdomsverksamhet/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Extra stöd till nya lovaktiviteter (merinvestering för att utöka verksamheten under lovperioder). Deadline ej
-    publicerad i tillgänglig källa — kontakta Nämnden för fritid och kultur för detaljer. Ej angiven i källan.
-  senast_verifierad: '2026-08-03'
+  krav:
+  - Sökanden ska företräda en förening som bedriver ungdomsverksamhet i Vellinge kommun
+  - Stödet ska avse en ny lovaktivitet; stöd beviljas inte för arrangemang som redan ägt rum
+  - Aktiviteten och dess beräknade kostnader ska vara bestämda och sammanställda före ansökan
+  - Ansökan ska ange totalt medlemsantal och antal flickor respektive pojkar
+  - Genomförda ledarutbildningar under föregående år ska beskrivas och uppgifterna i föreningsregistret kontrolleras
+  belopp: Beloppet bestäms efter prövning av aktivitetens planerade kostnader; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen fast ansökningstid för stödet.
+  kalla_url: https://vellinge.se/e-tjanster/uppleva-och-gora/ungdomsverksamhet---ansokan-om-extra-stod
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan görs med e-legitimation och handläggs av Fritidsenheten.
+  senast_verifierad: '2026-08-18'
 - id: vellinge-social-verksamhet
   namn: Föreningsbidrag för social verksamhet
   kategori:
   - social
   malgrupp: Förening som bedriver social verksamhet för målgrupper i behov av samhällets stöd.
+  foreningstyp: [social]
   deadlines:
     typ: fasta
     datum:
     - 11-30
-  krav: []
+  krav:
+  - Föreningen ska vara ideell, demokratiskt uppbyggd samt religiöst och partipolitiskt obunden
+  - Verksamheten ska ha lokal anknytning, rikta sig till Vellingebor inom omsorgsnämndens område och ge mervärde utöver kommunens service
+  - Föreningen ska vara öppen för alla inom målgruppen på lika villkor
+  - Ungdomsverksamhet ska präglas av ett alkohol- och drogfritt förhållningssätt
+  - Verksamhet som helt finansieras genom andra bidrag är inte bidragsberättigad
+  - Verksamhetsberättelse, stadgar och redovisning av eventuellt tidigare kommunalt föreningsbidrag ska bifogas
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Omsorgsnämnden beslutar årligen om det totala anslaget och rangordnar ansökningarna efter prioriterade områden och mervärde
   sen_ansokan: Beslut fattas 30 december, utbetalning januari följande år.
   kalla_url: https://vellinge.se/sjalvservice/fritid-och-kultur/bidrag-social-verksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Årligt bidrag för social verksamhet. Beloppsgränser fastställs årligen i budgeten. Ansökan via webform. Beslut
-    fattas före årsskiftet, utbetalning i januari.
-  senast_verifierad: '2026-08-03'
-- id: vellinge-kulturstipendium
-  namn: Kulturstipendium
-  kategori:
-  - kultur
-  malgrupp: Person eller förening som arbetar med kulturell verksamhet.
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angiven i källan.
-  kalla_url: https://vellinge.se/naringsliv-och-jobb/foreningar/bidrag-stod-och-stipendier-for-foreningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Stipendium för personer/föreningar inom kultur. Beloppet varierar efter ansökningar och budget. Deadline 1 oktober.
-    Ansökan via e-tjänst.
-  senast_verifierad: '2026-08-03'
-- id: vellinge-stipendium-ledare-idrottsutovare
-  namn: Stipendium för föreningsledare och idrottsutövare
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningsledare och idrottsutövare som gjort betydande insatser.
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-01
-  krav: []
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "20 000 kronor totalt (kan delas mellan flera mottagare)"
-  sen_ansokan: Ansökan eller förslag på stipendiat, med motivering och kontaktuppgifter, ska lämnas senast 1 oktober till
-    Kultur- och fritidsutskottet, Vellinge kommun, 235 81 Vellinge.
-  kalla_url: https://vellinge.se/naringsliv-och-jobb/foreningar/bidrag-stod-och-stipendier-for-foreningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: 'Stipendium för föreningsledare och framstående idrottsutövare. Totalt 20 000 kr som kan delas mellan flera
-    mottagare. OBS källverifiering (2026-07-27): kalla_url ovan (den allmänna översiktssidan) nämner INTE detta stipendium
-    alls. Deadline 1 oktober kommer från kommunens tidigare dedikerade sida för stipendiet (vellinge.se/fritid-och-kultur/foreningar/bidrag-stod-och-stipendier/stipendium-for-foreningsledare-och-idrottsutovare/),
-    som ger 404 vid direkthämtning idag men bekräftat fanns och gav 200 så sent som 2024-02-21 (Wayback Machine) — sidan verkar
-    ha flyttats/tagits bort vid en CMS-omstrukturering, inte ett tecken på att uppgiften är påhittad. Datumet är korroborerat
-    två oberoende gånger via sökmotorträffar med identisk, specifik text (inkl. korrekt postadress 235 81 Vellinge). Verifiera
-    mot en levande kommun-URL vid nästa uppdatering av denna fil.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningarna rangordnas bland annat efter insatser mot utanförskap, ohälsa, ensamhet och isolering. Beslut fattas
+    i december och utbetalning sker i januari.
+  senast_verifierad: '2026-08-18'
 - id: vellinge-evenemangsbidrag
   namn: Evenemangsbidrag
   kategori:
   - kultur
   - idrott
   malgrupp: Förening som arrangerar offentligt evenemang av betydelse för Vellinge kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
-  - Minimalt 6 månaders framförvarning innan evenemang
-  - Fasta belopp enligt kommunens bidragsmodell
-  belopp: Fasta belopp (varierar beroende på eventtyp)
-  sen_ansokan: Ansökan måste inkomma minst 6 månader innan evenemang.
+  - Evenemanget ska vara av stort intresse för kommunens invånare, öppet för alla och kunna stärka Vellinge kommuns varumärke
+  - Arrangören ska visa kunnande, kompetens och förmåga att genomföra ett evenemang av god kvalitet
+  - Evenemanget ska vara politiskt och religiöst obundet samt kunna attrahera en stor publik och/eller deltagare i alla åldrar
+  - Budget för evenemanget ska bifogas ansökan
+  - Bidrag får inte erhållas från flera kommunala instanser för samma projekt
+  belopp: Bidraget beslutas som ett fast belopp för den enskilda ansökan; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen rekommenderar ansökan minst sex månader före evenemanget; handläggningstiden beror på sökt belopp.
   kalla_url: https://vellinge.se/naringsliv-och-jobb/foretagarservice/att-arrangera-evenemang
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bidrag för att arrangera större evenemang av betydelse för kommunen. Ansökan måste inkomma med minst 6 månaders
-    framförvarning. Beloppet är fastställt enligt kommunens bidragsmodell för evenemang. Kontakta Kommunledningskontoret för
-    ansökan och detaljer.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Om bidraget villkoras med återrapportering ska genomförande, ekonomiskt utfall, kommunens synlighet och måluppfyllelse redovisas.
+  senast_verifierad: '2026-08-18'
 - id: vellinge-vag-och-samfallighetsforeningar
   namn: Väg- och samfällighetsföreningsbidrag
   kategori:
   - ovrig
   malgrupp: Väg- och samfällighetsföreningar för väghållning och skötsel av gemensam egendom.
+  foreningstyp: [annat]
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
-  - Registrerad väg- eller samfällighetsförening
-  - Långsiktig väghållning eller skötsel av gemensam egendom
-  belopp: 'Föreskriven taxa: 13–32 kr/m väg; 1 kr/m² grönyta; 4–6 000 kr lekplatser; max 75 000 kr investeringsbidrag'
-  sen_ansokan: Ej tillämpligt (löpande bidrag, ingen fast ansökningsperiod).
-  kalla_url: https://vellinge.se/boende-miljo-och-trafik/fordon-och-trafik/vag-och-samfallighetsforeningar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Årligt driftbidrag för väghållning enligt föreskriven taxa per meter väg och kvadratmeter grönyta. Separat bidrag
-    för lekplatser (4–6 000 kr) och större investeringsbidrag (max 75 000 kr). Löpande ansökan via Tekniska nämnden. Taxa
-    justeras årligen enligt kommunens budget.
-  senast_verifierad: '2026-08-03'
+  - Väghållaren ska ansvara enligt förrättning för de vägar, grönytor eller lekplatser som ansökan avser
+  - Bidragsberättigade vägar, grönytor och lekplatser ska vara öppna för allmänheten
+  - Nybildade samfälligheter ska bifoga förrättningshandlingar, uppgifter om ytor och lekplatser, kontaktuppgifter samt konto
+  - Ekonomisk redovisning med verksamhetsberättelse, resultat- och balansräkning och undertecknad revisionsberättelse ska lämnas årligen
+  - För lekplatser krävs årlig säkerhetsbesiktning av certifierad besiktningsperson och inskickat besiktningsprotokoll
+  belopp: 'Väg 10,11–32,83 kr/m beroende på typ och nyttjande; grönyta 0,14–1,02 kr/m²; liten lekplats 4 072,22 kr, stor lekplats 6 108,34 kr; investering i lekredskap högst 50 % och max 50 000 kr för liten eller 75 000 kr för stor lekplats'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Nybildade samfälligheter ska ansöka senast 30 november. Beviljad ansökan kvarstår tills kommunen begär förnyelse eller förutsättningarna ändras.
+  kalla_url: https://vellinge.se/samhalle-och-miljo/trafik-gator-och-stadsplanering/vag--och-samfallighetsforeningar
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidragsnivåerna räknas upp årligen. Föreningens kontaktuppgifter ska uppdateras eller bekräftas varje år för fortsatt utbetalning.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
-- id: vellinge-registrering-bok-kommunal
-  vad: Registrera föreningen kommunalt
-  beskrivning: Föreningen måste registreras i kommunens föreningsregister innan bidrag kan sökas. Föreningen ska ha organisationsnummer
-    från Skatteverket, huvudsaklig verksamhet i Vellinge kommun, antagna stadgar, demokratiskt vald styrelse och årsmöte.
-  system: Vellinge kommuns föreningsregister
+- id: vellinge-aktuella-foreningsuppgifter
+  vad: Kontrollera föreningsuppgifter och årshandlingar
+  beskrivning: Föreningen ska kontrollera att uppgifterna i föreningsregistret är korrekta och ha de verksamhets- och ekonomihandlingar
+    som krävs för den aktuella ansökan.
+  system: Rbok och kommunens e-tjänster
   ledtid: null
-  ledtid_text: Registrering handläggs normalt inom några veckor.
+  ledtid_text: Uppgifterna ska vara aktuella när ansökan lämnas.
   giltighet: null
   ordning: 1
-  kalla_url: https://vellinge.se/sjalvservice
-  giltighet_status: okand
+  kalla_url: https://vellinge.se/naringsliv-och-jobb/foreningar/bidrag-stod-och-stipendier-for-foreningar
+  giltighet_status: ingen_regel
 kommunsiffra: null
