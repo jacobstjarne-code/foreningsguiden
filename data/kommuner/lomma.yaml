@@ -2,12 +2,18 @@ kommun: Lomma
 kommun_slug: lomma
 lan: Skåne län
 befolkning: 24698
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Förvaltningen för utbildning, kost, kultur och fritid
 ansokningssystem:
-  namn: Lomma kommuns e-tjänster
-  url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier.html
+  namn: Lomma kommuns e-tjänster och blanketter
+  url: https://eservice.lomma.se/MenuGroup2.aspx?groupId=1004
 kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier.html
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Verksamhetsstöd till idrotts- och friluftsföreningar
   kategori:
@@ -29,14 +35,18 @@ bidrag:
   - Föreningen ska vid behov kunna visa upp ekonomiska verifikationer
   belopp: Stödets storlek fastställs inte i förväg utan bestäms efter samtal mellan kommunen och föreningens ordförande och
     kassör. Verksamhetsstödet påverkas av föreningens sociala bokslut.
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://lomma.se/upplevaochgora/foreningarforeningsliv/stodbidragochstipendier/verksamhetsstodtillforeningar.1153.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen anger att stödet söks en gång per år men publicerar ingen sista ansökningsdag.
+  kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier/verksamhetsstod-till-foreningar.html
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: Lokalhyressubvention och lokalt aktivitetsstöd ingår i det samlade verksamhetsstödet för idrotts- och friluftsföreningar.
   id: lomma-verksamhetsstod-till-idrotts-och-friluftsforeningar
+  foreningstyp: [idrott, friluft, ungdom]
+  senast_verifierad: '2026-08-18'
 - namn: Verksamhetsstöd till kulturföreningar
   kategori:
   - kultur
@@ -59,33 +69,143 @@ bidrag:
   - Kultur- och fritidsnämnden ska anges som samarbetspart vid arrangemanget
   belopp: Stödets storlek fastställs inte i förväg utan bestäms efter samtal mellan kommunen och föreningens ordförande och
     kassör.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska lämnas in senast den 1 december för bidrag avseende nästkommande år.
-  kalla_url: https://lomma.se/upplevaochgora/foreningarforeningsliv/stodbidragochstipendier/verksamhetsstodtillforeningar.1153.html
+  kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier/verksamhetsstod-till-foreningar.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
   id: lomma-verksamhetsstod-till-kulturforeningar
+  foreningstyp: [kultur, hembygd]
+  senast_verifierad: '2026-08-18'
 - namn: Projekt- och evenemangsbidrag
   kategori:
+  - idrott
   - kultur
+  - social
   - ovrig
-  malgrupp: Ideella föreningar i kommunen
+  malgrupp: Ideella föreningar som genomför offentliga evenemang eller projekt för allmänheten
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ingen egen sida för 'Projekt- och evenemangsbidrag' hittades på lomma.se. Möjligen avses delkategorin 'kulturarrangemang
-    och projekt' inom Verksamhetsstöd till kulturföreningar, men detta är inte bekräftat.
+  krav:
+  - Projektet eller evenemanget ska rikta sig till allmänheten; evenemang kan avse både kultur och idrott
+  - Föreningen ska medfinansiera minst 50 procent av projektets eller evenemangets kostnader
+  - Föreningen ska vara ideell, demokratiskt uppbyggd och ha godkända stadgar, styrelse, årsmöte, organisationsnummer samt eget plus- eller bankgiro
+  - Minst tio medlemmar ska vara folkbokförda i Lomma kommun och föreningens huvudsakliga verksamhet ska bedrivas i kommunen
+  - Ansökan ska lämnas på blanketten för evenemang, integrationsprojekt eller spontanprojekt beroende på projektets inriktning
+  belopp: Högst 5 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag; stödet betalas efter ansökan och prövning.
+  kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier/verksamhetsstod-till-foreningar.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens portal har separata blanketter för evenemang, integrationsprojekt och spontanprojekt under den gemensamma stödformen.
   id: lomma-projekt-och-evenemangsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- namn: Verksamhetsstöd till pensionärsföreningar
+  kategori: [pensionar, social]
+  malgrupp: Pensionärsföreningar med huvudsaklig verksamhet i Lomma kommun
+  deadlines:
+    typ: fasta
+    datum: [12-01]
+  krav:
+  - Föreningen ska vara ideell, demokratiskt uppbyggd och ha godkända stadgar, styrelse, årsmöte, organisationsnummer samt eget plus- eller bankgiro
+  - Föreningens huvudsakliga verksamhet ska bedrivas i Lomma kommun
+  - En bidragsgrundande medlem ska bo i Lomma kommun, ha betalat årsavgift och ha rösträtt på årsmötet
+  - Föreningen ska lämna efterfrågade års- och ekonomihandlingar och redovisa sitt sociala bokslut
+  belopp: Stödet bestäms utifrån antalet bidragsgrundande medlemmar vid senaste årsskiftet och påverkas av föreningens sociala bokslut
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästkommande kalenderår ska lämnas senast den 1 december
+  kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier/verksamhetsstod-till-foreningar.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: lomma-verksamhetsstod-till-pensionarsforeningar
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
+- namn: Lokalstöd till pensionärsföreningar
+  kategori: [pensionar, social]
+  malgrupp: Pensionärsföreningar som behöver hyra en annan lokal än kommunens
+  deadlines:
+    typ: fasta
+    datum: [12-01]
+  krav:
+  - Föreningen ska vara en bidragsberättigad pensionärsförening som inte kan bedriva sin verksamhet i kommunens lokaler
+  - Den hyrda lokalen ska finnas i Lomma kommun och huvudsakligen användas för föreningens verksamhet
+  - Lokalen ska vara godkänd av berörda myndigheter och stödet kräver kultur- och fritidsnämndens godkännande
+  - Föreningen ska lämna ansökan på särskild blankett och kunna visa ekonomiska verifikationer
+  belopp: Kommunen publicerar inget generellt belopp; en del av kostnaden för att hyra annan lokal kan beviljas efter prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästkommande kalenderår ska lämnas senast den 1 december
+  kalla_url: https://lomma.se/download/18.36b5b5ba17e21f6b7e8e6b2/1641302459764/L%2004%20Regler%20f%C3%B6r%20st%C3%B6d%20till%20f%C3%B6reningar%20i%20Lomma%20kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödformen framgår av kommunens gällande föreskrift men saknar en egen post i den publicerade bidragsmenyn.
+  id: lomma-lokalstod-till-pensionarsforeningar
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
+- namn: Startbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nya ideella föreningar som startar ny verksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara nybildad och starta en ny verksamhet
+  - Föreningen ska vara ideell och demokratiskt uppbyggd med stadgar, styrelse och årsmöte
+  - Föreningen ska ha organisationsnummer och ett eget plus- eller bankgirokonto
+  - Ansökan ska prövas av förvaltningen innan bidrag betalas ut
+  belopp: Högst 5 000 kr per ny förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag; ansökan sker på särskild blankett
+  kalla_url: https://lomma.se/download/18.36b5b5ba17e21f6b7e8e6b2/1641302459764/L%2004%20Regler%20f%C3%B6r%20st%C3%B6d%20till%20f%C3%B6reningar%20i%20Lomma%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödformen finns i kommunens gällande föreskrift men saknar en egen post i den publicerade bidragsmenyn och e-tjänsteportalen.
+  id: lomma-startbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- namn: Kommunalt aktivitetsstöd för kulturföreningar
+  kategori: [kultur, ovrig]
+  malgrupp: Kulturföreningar med barn- och ungdomsverksamhet för åldrarna 7–25 år
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Föreningen ska bedriva bidragsberättigad barn- och ungdomsverksamhet för deltagare i åldern 7–25 år
+  - Ledarledda aktiviteter och deltagartillfällen ska redovisas på närvarokort eller med underlag från Riksidrottsförbundets system
+  - Ansökan ska undertecknas av en firmatecknare utsedd av föreningens styrelse
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsstöd
+  belopp: Kommunen publicerar inget generellt belopp; aktivitetsstödet bestäms efter redovisade deltagartillfällen och kommunens årliga budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Vårens verksamhet redovisas senast den 25 augusti och höstens verksamhet senast den 25 februari
+  kalla_url: https://eservice.lomma.se/Form.ashx?id=36
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: För idrotts- och friluftsföreningar ingår aktivitetsstödet i det samlade verksamhetsstödet; den separata formen avser kulturföreningars barn- och ungdomsverksamhet.
+  id: lomma-kommunalt-aktivitetsstod-kulturforeningar
+  foreningstyp: [kultur, ungdom]
+  senast_verifierad: '2026-08-18'
 - namn: Sociala bidrag – föreningsbidrag
   kategori:
   - social
@@ -106,15 +226,19 @@ bidrag:
   - Föreningen har skyldighet att ställa sina räkenskaper och revisionshandlingar till förfogande för granskning
   - Bidrag utgår normalt inte till verksamhet som är berättigad till annat kommunalt stöd
   belopp: Bidraget är avsett att täcka en del av kostnaderna för föreningens verksamhet. Exakt belopp anges inte i regeldokumentet.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan avseende nästkommande år ska ha inkommit till socialnämnden senast den 30 september. Beslut om bidrag
     fattas senast i december och utbetalning sker i januari påföljande år.
   kalla_url: https://lomma.se/download/18.73960ca619afcdce4876eee/1765274315758/Regler%20f%C3%B6r%20bidragsgivning%20till%20f%C3%B6reningar%20inom%20socialn%C3%A4mndens%20verksamhetsomr%C3%A5de.pdf
-  belopp_status: kontrollast
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: lomma-sociala-bidrag-foreningsbidrag
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
 - namn: Verksamhetsstöd till studieförbund
   kategori:
   - kultur
@@ -132,23 +256,27 @@ bidrag:
   - Årlig redovisning (skriftlig och muntlig vid möte sammankallat av kulturnämnden) ska omfatta måluppfyllelse, antal cirklar/kulturgrupper/evenemang,
     deltagarantal per ämnesområde samt resursfördelning mellan verksamhet och administration
   belopp: Stödets storlek fastställs inte i förväg utan bestäms på uppföljningssamtal mellan kommunen och studieförbundet.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Studieförbund ansöker om verksamhetsstöd en gång årligen senast den 1 december.
   kalla_url: https://lomma.se/upplevaochgora/foreningarforeningsliv/stodbidragochstipendier/verksamhetsstodtillstudieforbund.1154.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
   id: lomma-verksamhetsstod-till-studieforbund
+  foreningstyp: [kultur, annat]
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: lomma-registrering
   vad: Registrering och aktuella föreningsuppgifter
   beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Lomma kommuns e-tjänster
+  system: Lomma kommuns e-tjänster och blanketter
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
   kalla_url: https://lomma.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stipendier.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
