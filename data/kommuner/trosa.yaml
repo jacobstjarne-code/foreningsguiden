@@ -2,85 +2,298 @@ kommun: Trosa
 kommun_slug: trosa
 lan: Södermanlands län
 befolkning: 14892
-forvaltning: Kultur- och fritidsenheten
+forvaltning: Kultur- och fritidsnämnden
 ansokningssystem:
   namn: Interbook GO
-  url: https://trosa.ibgo.se/
-kalla_url: https://www.trosa.se/uppleva-och-gora/fritidsaktiviteter/foreningsliv/
-verifierad: '2026-07-31'
+  url: &portal https://trosa.ibgo.se/
+kalla_url: &huvud https://www.trosa.se/uppleva-och-gora/fritidsaktiviteter/foreningsliv/
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: kontrollast
 bidrag:
 - id: trosa-startbidrag
   namn: Startbidrag
-  kategori:
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Nystartade bidragsberättigade föreningar
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Föreningen får inte ha varit aktiv längre än 12 månader
-  belopp: 3 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.trosa.se/uppleva-och-gora/fritidsaktiviteter/foreningsliv/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Reglerna 2024–2027 behöver läsas i sin helhet för att säkert dela upp samtliga stödformer. Filen är fortsatt
-    ofullständigt verifierad.
-  senast_verifierad: '2026-08-03'
-- id: trosa-foreningsbidrag
-  namn: Föreningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - ovrig
-  malgrupp: Bidragsberättigade ideella föreningar i Trosa kommun
+  - Föreningen ska vara nystartad och ha varit verksam i högst 12 månader
+  - Kultur- och fritidsnämnden ska ha godkänt föreningen som bidragsberättigad
+  - Föreningen ska vara demokratisk, partipolitiskt och religiöst obunden, öppen och ta ut medlemsavgift
+  - Organisationsnummer, föreningskonto, styrelseuppgifter och verksamhetsplan ska finnas eller vara under ansökan
+  - Föreningar för barn och unga ska arbeta mot kränkningar och ANDT samt kontrollera barnledares belastningsregister
+  belopp: 3 000 kr som automatiskt engångsbidrag för första verksamhetsåret
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet betalas ut i samband med beslutet om bidragsberättigande.
+  kalla_url: &norm https://cms.trosa.se/wp-content/uploads/2023/12/regler-for-foreningsbidrag-2024-2027-1.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: trosa-aktivitetsbidrag-idrott
+  namn: Aktivitetsbidrag för idrottsföreningar
+  status: aktiv
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Bidragsberättigade idrottsföreningar med verksamhet för barn och unga
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Årlig redovisning i Interbook GO krävs
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.trosa.se/uppleva-och-gora/fritidsaktiviteter/foreningsliv/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska uppfylla Riksidrottsförbundets föreskrifter för statligt LOK-stöd
+  - Aktiviteten ska ske i föreningens regi, vara ledarledd och pågå minst 60 minuter inklusive omklädning
+  - Minst tre bidragsberättigade deltagare utöver ledaren ska vara 7–25 år; stöd kan även lämnas för ledare 13–25 år
+  - Ledaren ska vara utsedd av föreningen och ha fyllt 13 år
+  - Gruppen får inte delas för att skapa flera sammankomster och en deltagare får bara räknas en gång per dag
+  - Föreningen ska kunna redovisa antal sammankomster, deltagare och närvarounderlag
+  belopp: 19,80 kr per godkänd sammankomst och 16,50 kr per godkänd deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag i den gällande regeln.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: trosa-studieforbund
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
   malgrupp: Studieförbund som bedriver folkbildningsverksamhet i Trosa kommun
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Studieförbundet ska följa kommunens särskilda regler för bidrag till studieförbund
+  - Studieförbundet ska bedriva folkbildningsverksamhet i Trosa kommun
+  - Studieförbundet ska uppfylla statens och Folkbildningsrådets villkor för statsbidrag
+  - Verksamheten ska bidra till demokrati, delaktighet, minskade utbildningsklyftor och ett breddat kulturliv
+  - Verksamhetsunderlag ska lämnas så att den kommunala andelen kan fördelas genom Länsbildningsförbundet Sörmland
+  - Kommunen ska kunna kontrollera den lokala verksamheten och användningen av stödet
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.trosa.se/kommun-och-politik/kommunfakta/forfattningssamling/kultur-och-fritidsnamnden-styrdokument/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kommunen publicerar separata regler för bidrag till studieförbund. Se kommunens styrdokument och ansökningsanvisningar
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Årligt kommunanslag fördelas mellan statsbidragsberättigade studieförbund genom Länsbildningsförbundet Sörmland; totalsumman och 2026 års fördelningsnyckel publiceras inte
+  sen_ansokan: Kommunen publicerar ingen generell sista ansökningsdag.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Den separata skannade 1998-regeln anger den äldre modellen 70 procent grund, 10 procent volym och 20 procent målgrupp; 2024–2027-regeln säger att senare Folkbildningsrådsmodell ska styra, därför används inte 1998-procentsatserna som aktuell nivå.
+  senast_verifierad: '2026-08-18'
+- id: trosa-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  status: aktiv
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Idrottsföreningar som utbildar ledare för sin verksamhet
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Föreningen ska uppfylla Riksidrottsförbundets villkor för statligt LOK-stöd
+  - Utbildningen ska skapa eller höja kompetens som hjälper föreningen att nå sina stadgeenliga mål
+  - Kursdeltagaren ska vara minst 13 år och efter utbildningen verka i föreningens verksamhet
+  - Intern utbildnings kursplan, kostnadskalkyl och deltagarantal ska godkännas av kommunen före genomförandet
+  - Bevis på genomförd utbildning och föreningens faktiska nettokostnader ska bifogas ansökan
+  - Kongress, förbundsmöte, läger eller motsvarande ger inte stöd
+  belopp: 75 procent av föreningens faktiska nettokostnader för ledarutbildning inklusive resor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sök retroaktivt under samma kalenderår eller senast en månad efter utbildningen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En förening som inte tillhör en riksorganisation kan beviljas stöd efter särskild prövning.
+  senast_verifierad: '2026-08-18'
+- id: trosa-verksamhetsbidrag-kultur
+  namn: Verksamhetsbidrag för kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Bidragsberättigade kulturföreningar med planerad verksamhet i Trosa kommun
+  deadlines: {typ: fasta, datum: [03-31, 09-30]}
+  krav:
+  - Föreningen ska vara godkänd i kommunens kategori kulturförening
+  - Ansökan ska baseras på planerad verksamhet under innevarande år
+  - Aktiviteterna ska genomföras i Trosa kommun
+  - Helår eller första halvår söks senast 31 mars; andra halvår söks senast 30 september
+  - Samtliga aktiviteter i verksamhetsplanen ska redovisas efter avslutad period
+  - Prioriterade målgrupper är barn och unga, nyanlända och personer med funktionsvariation
+  belopp: 77 kr per medlem, 1 000 kr per öppen aktivitet, 2 000 kr per aktivitet för prioriterad målgrupp och 400 kr per dag för konstutställning; högst 40 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Helår och första halvår senast 31 mars; andra halvår senast 30 september.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: trosa-aktivitetsbidrag-social-pensionar
+  namn: Aktivitetsbidrag för sociala föreningar och pensionärsföreningar
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Bidragsberättigade sociala föreningar och pensionärsföreningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara godkänd i kommunens kategori social förening eller pensionärsförening
+  - Aktiviteten ska främja integration, samverkan mellan eller inom åldersgrupper eller stödja socialt utsatta grupper
+  - Sammankomsten ska ske i föreningens regi, vara ledarledd och pågå minst 60 minuter
+  - Minst tre deltagare utöver ledaren ska delta
+  - Gruppen får inte delas för att skapa flera bidragsgrundande sammankomster
+  - En deltagare får endast räknas en gång per dag
+  belopp: 3,30 kr per sammankomst och 2,90 kr per godkänd deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag i den gällande regeln.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: trosa-driftbidrag-lokal-anlaggning
+  namn: Driftbidrag för lokal och anläggning
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som driver, förvaltar eller hyr icke kommunal lokal eller anläggning
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska driva, förvalta eller hyra en lokal eller anläggning som inte ägs eller redan subventioneras av kommunen
+  - Kommunens godkännande ska inhämtas före förändring eller nyanskaffning av lokal eller anläggning
+  - Bidragsgrundande löpande kostnader är hyra, amortering, ränta, uppvärmning, förbrukningsel, försäkring, sophämtning och sotning
+  - Nettokostnader ska redovisas och hyresförening ska ha hyreskontrakt
+  - Kommunal lokal ger inte kontant driftbidrag eftersom den redan hyrs till subventionerad föreningstaxa
+  belopp: Idrottsförening får högst 60 procent av nettokostnaden och högst 110 000 kr; kultur-, social- och pensionärsförening högst 40 procent och 44 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag i den gällande regeln.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Procentsats och tak gäller både egenägd och externt hyrd lokal eller anläggning inom respektive föreningskategori.
+  senast_verifierad: '2026-08-18'
+- id: trosa-arrangemangsbidrag
+  namn: Arrangemangsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som genomför offentliga arrangemang i kommunen
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Arrangemanget ska äga rum i Trosa kommun och vara öppet för allmänheten
+  - Arrangemanget ska vara oplanerat och inte ingå i föreningens verksamhetsplan för året
+  - Föreningen ska ha andra finansieringsmöjligheter och redovisa dem i kostnadskalkylen
+  - Ansökan ska innehålla en fullständig kostnadskalkyl
+  - Arrangemanget och dess ekonomi ska redovisas under samma kalenderår
+  - Utbetalning sker efter genomfört och godkänt redovisat arrangemang
+  belopp: Högst 60 procent av bidragsberättigade kostnader och högst 10 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan bör lämnas minst två månader före genomförandet för att kommunen ska kunna garantera handläggning.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: trosa-utvecklingsprojekt-sarskilda-insatser
+  namn: Stöd för utvecklingsprojekt och särskilda insatser
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med längre eller fördjupade projekt och lokalanpassningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Kultur-, social- och pensionärsförening ska vara bidragsberättigad och inte vinstdrivande; idrottsförening ska dessutom uppfylla aktivitetsbidragets krav
+  - Projektet ska testa en ny verksamhetsgren, rikta sig till särskild målgrupp eller vara en annan fördjupad utvecklingsinsats
+  - Lokalanpassning kräver egen lokal eller förstahandskontrakt för icke kommunal lokal; idrottsförening ska ha redovisat minst 50 aktivitetstillfällen föregående år
+  - Prioritering görs för barn och unga, nyanlända, personer med funktionsvariation, folkhälsa, samverkan och målgruppsinflytande
+  - Budgeten ska innehålla minst två leverantörsofferter samt tidplan
+  - Ordinarie verksamhet och underhåll ger inte stöd; projektet ska redovisas efter genomförandet
+  belopp: Högst ett prisbasbelopp per projekt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen generell sista ansökningsdag.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: trosa-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar och godkända ideella organisationer som bokar kommunala lokaler
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Bidragsberättigad förening får föreningstaxa; annan förening eller organisation kan få den för en öppen, ideell, politiskt och religiöst obunden sammankomst efter prövning
+  - Bokningen ska avse en lokal eller anläggning i kommunens aktuella taxebeslut
+  - Sluten eller kommersiell sammankomst av icke bidragsberättigad förening debiteras privattaxa och ger inte subventionen
+  - Bokaren ska följa kommunens hyres-, ordnings-, städ- och avbokningsregler
+  belopp: Föreningstaxan är 40 procent av privattaxan; 2026 exempelvis 199 kr per timme för hel Multum- eller Hedebyhall mot 497 kr privat och 73 kr för gymnastiksal mot 186 kr privat
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen gemensam sista ansökningsdag publiceras; lokalen bokas enligt tillgänglighet och hyresregler.
+  kalla_url: https://www.trosa.se/app/uploads/2026/06/kfn_2026_28-taxor-for-uthyrning-av-kommunala-lokaler.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningsbidragsregeln likställer uttryckligen den subventionerade föreningstaxan med kontantstöd.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: trosa-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
+  vad: Godkännande som bidragsberättigad förening
+  beskrivning: Föreningen ska registreras i kommunens föreningsregister och godkännas av kultur- och fritidsnämnden. Den ska ha demokratisk styrelse, årliga möten, vara partipolitiskt och religiöst obunden, öppen, ta medlemsavgift och ha organisationsnummer samt föreningskonto.
   system: Interbook GO
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ansökan behandlas vid närmast kommande nämndsammanträde om den kommit in i tid för beredning.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.trosa.se/uppleva-och-gora/fritidsaktiviteter/foreningsliv/
-  giltighet_status: okand
-kommunsiffra: null
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: trosa-arlig-redovisning
+  vad: Årlig redovisning för fortsatt bidragsberättigande
+  beskrivning: För fortsatt bidragsberättigande ska föreningen varje år redovisa föregående års verksamhetsberättelse och reviderade årsredovisning samt kommande budget och verksamhetsplan, ungdomsekonomi och medlemsantal fördelat på ålder och kön. Registeruppgifterna ska också uppdateras årligen.
+  system: Interbook GO
+  ledtid: null
+  ledtid_text: Årligen; kommunen publicerar ingen gemensam kalenderdag för redovisningen.
+  giltighet: Ett kalenderår i taget genom årlig redovisning och registeruppdatering
+  ordning: 2
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: trosa-barn-och-ungdomstrygghet
+  vad: Trygghetsrutiner för barn- och ungdomsverksamhet
+  beskrivning: Föreningar för barn och unga ska aktivt motverka mobbning, kränkningar, särbehandling, sexuellt ofredande och ANDT samt rutinmässigt kontrollera begränsat belastningsregisterutdrag för ledare och andra som arbetar med barn.
+  system: Föreningens egna dokumenterade rutiner
+  ledtid: null
+  ledtid_text: Rutinerna ska finnas och kunna redovisas på begäran.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
