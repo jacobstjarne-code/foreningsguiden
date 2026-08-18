@@ -9,7 +9,7 @@ ansokningssystem:
   namn: Interbook Go
   url: https://varberg.ibgo.se
 kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-verifierad: 2026-07-21
+verifierad: '2026-08-18'
 giltighet_regel:
   typ: okand
   antal: null
@@ -41,16 +41,24 @@ bidrag:
   belopp: '90 kronor fast summa per godkänd aktivitet (samtliga målgrupper), plus rörlig summa per deltagare för barn-/ungdomsverksamhet
     (tak: 3 aktiviteter/idrott/vecka för 7–9 år, 5 aktiviteter/idrott/vecka för 10–25 år) och för föreningar för personer
     med funktionsnedsättning. Endast fast belopp (ingen rörlig del) för seniorverksamhet.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-verksamhet-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Två ansökningsperioder per år: 28 februari (för perioden 1 juli–31 december föregående år) och 28 augusti (för
     perioden 1 januari–30 juni innevarande år). Utbetalning i mars/april respektive september/oktober. Ingen redovisning krävs
     i efterhand. Ansökan kräver export från IdrottOnline eller NärvaroGo.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - social
+  - ungdom
+  - annat
 - id: varberg-medlemsbidrag-funktionsnedsattning
   namn: Medlemsbidrag till föreningar för personer med funktionsnedsättning
   kategori:
@@ -61,18 +69,25 @@ bidrag:
     datum:
     - 02-28
   krav:
-  - Minst 10 medlemmar och minst 20 godkända aktiviteter föregående år
+  - Föreningen ska vara registrerad och verksam i Varbergs kommun
+  - Föreningen ska vara registrerad som förening för personer med funktionsnedsättning
+  - Medlemsantalet ska vara registrerat i samband med föreningens årsmöte
   belopp: Baseras på antal registrerade medlemmar (oavsett ålder) vid föreningens årsmöte samt antal redovisade och godkända
     aktiviteter föregående år — inget publicerat kronbelopp per medlem i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-verksamhet-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: NYTT i denna omkörning (2026-07-21) — låg på samma URL som LOK-stödet men missades i föregående körning. Utbetalning
-    i mars-april, efter utbetalat lokalt aktivitetsstöd. Ingen redovisning krävs i efterhand. Söks via Interbook Go.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - social
+  - annat
 - id: varberg-dialogbaserat-verksamhetsbidrag
   namn: Dialogbaserat verksamhetsbidrag
   kategori:
@@ -83,18 +98,24 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Föreningen ska ha löpande verksamhet under året eller omfattande verksamhet del av året
-  belopp: null
+  - Föreningen ska bedriva verksamhet för barn och ungdomar
+  - Föreningen ska ha löpande verksamhet under året eller omfattande verksamhet under en del av året
+  - Föreningen ska inte kunna uppfylla villkoren för lokalt aktivitetsstöd och bidraget utformas i dialog med kommunen
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-verksamhet-inom-idrotts--och-fritidsomradet
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: NYTT i denna omkörning (2026-07-21) — låg på samma URL som LOK-stödet men missades i föregående körning. Handläggs
-    i dialog med kultur- och fritidsförvaltningen, ansökan 1-2 gånger per år via Interbook Go. Redovisning enligt överenskommelse
-    med förvaltningen.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - ungdom
 - id: varberg-projektbidrag-idrott-fritid
   namn: Projektbidrag inom idrotts- och fritidsområdet
   kategori:
@@ -111,40 +132,20 @@ bidrag:
   - Det ska tydligt framgå vem som är projektägare
   - Aktiviteter som genomförs inom projektet kan inte samtidigt ligga till grund för ansökan om lokalt aktivitetsstöd
   belopp: Max 30 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-verksamhet-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: NYTT i denna omkörning (2026-07-21) — låg på samma URL som LOK-stödet men missades i föregående körning. Ansökningsperiod
-    1 januari–31 mars, utbetalning april-maj. Redovisning (ekonomisk redogörelse och beskrivning av genomförda insatser) senast
-    2 månader efter genomförandet. Ej att förväxla med Kulturprojektstöd (kulturområdet) eller det kommunala Investeringsbidraget
-    (lokaler/anläggningar) nedan.
-  senast_verifierad: '2026-08-03'
-- id: varberg-bidrag-rf-sisu-halland
-  namn: Bidrag till RF Sisu Halland
-  kategori:
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
   - idrott
-  malgrupp: RF-SISU Halland (distriktsidrottsförbundet/SISU-distriktet i Halland)
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Överenskommelse med kultur- och fritidsförvaltningen
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-verksamhet-inom-idrotts--och-fritidsomradet
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: NYTT i denna omkörning (2026-07-21). Årligt verksamhetsbidrag enligt överenskommelse, hanteras i dialog januari-maj.
-    Till skillnad från övriga bidrag i detta kapitel är detta INTE en allmänt sökbar bidragsform öppen för valfri förening,
-    utan ett institutionellt anslag till en specifik namngiven distriktsorganisation. Inget av de tre giltiga uteslutningsskälen
-    i §2.4 matchar exakt (det är varken ett individuellt pris, ett stöd som endast riktas till företag/privatpersoner, eller
-    administrerat av annan huvudman än kommunen) — inkluderad för fullständighet, flaggad här för Fable-granskning som gränsfall.
-  senast_verifierad: '2026-08-03'
+  - annat
 - id: varberg-lokal-anlaggningsbidrag
   namn: Lokal- och anläggningsbidrag
   kategori:
@@ -166,13 +167,19 @@ bidrag:
   kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-lokaler-och-anlaggningar-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökningsperiod 1 januari–31 maj, baseras på föregående års redovisade uppgifter. Utbetalning juni eller juli.
     Ingen redovisning krävs i efterhand.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - social
+  - ungdom
+  - annat
 - id: varberg-samlingslokaler-bygdegardar
   namn: Bidrag för samlingslokaler och bygdegårdar
   kategori:
@@ -184,19 +191,26 @@ bidrag:
     datum:
     - 05-31
   krav:
-  - Föreningen ska uppfylla allmänna bestämmelser för bidrag från Varbergs kommun
-  - Lokalerna ska hyras ut till skäliga priser och villkor
+  - Föreningen ska driva en samlingslokal eller bygdegård i Varbergs kommun
+  - Lokalen ska vara aktiv och tillgänglig för föreningsliv eller allmänhet
+  - Ansökan ska redovisa fasta kostnader, underhåll, inventarier och aktiv lokalyta
   belopp: 'Driftsbidrag: 50 procent av fasta kostnader (uppvärmning, el, vatten/avlopp, sophämtning), max 150 000 kronor;
     50 procent underhåll, max 20 000 kronor; 50 procent inköp av inventarier, max 10 000 kronor. Därutöver fördelas resterande
     medel per kvadratmeter aktiv lokalyta (lokalyta-delen).'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-lokaler-och-anlaggningar-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökningsperiod 1 januari–31 maj. Utbetalning juni eller juli. Ingen redovisning krävs i efterhand.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 - id: varberg-oforutsedda-kostnader
   namn: Bidrag för oförutsedda kostnader
   kategori:
@@ -209,17 +223,25 @@ bidrag:
     datum:
     - 11-30
   krav:
-  - Föreningen ska vara ansvarig för underhållsåtgärder på anläggningen/lokalen
+  - Kostnaden ska vara oförutsedd och ligga utanför föreningens normala planering
+  - Kostnaden ska avse föreningens lokal, anläggning eller verksamhet
+  - Kostnaden ska inte kunna finansieras genom föreningens ordinarie bidrag
   belopp: Max 20 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-lokaler-och-anlaggningar-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Ansökningsperiod 1 januari–30 november, ansökan prövas enskilt. Utbetalning sker i samband med beviljat bidrag.
     Redovisning: verifikationer/kvitton på gjorda utlägg.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - annat
 - id: varberg-investeringsbidrag
   namn: Investeringsbidrag (kommunalt, lokaler/anläggningar)
   kategori:
@@ -238,14 +260,20 @@ bidrag:
   - Ansökan ska innehålla beskrivning av objektet, kostnadskalkyl samt beskrivning av föreningens ideella insats och eventuella
     andra finansiärer
   belopp: Max 250 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-lokaler-och-anlaggningar-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökningsperiod 1 januari–31 mars. Utbetalning april eller maj. Redovisning senast 2 månader efter genomförandet.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - annat
 - id: varberg-kartbidrag-orientering
   namn: Kartbidrag för orienteringsklubbar
   kategori:
@@ -260,14 +288,20 @@ bidrag:
   - Orienteringsklubben ska vara ansluten till Riksidrottsförbundet
   - Kostnaderna ska styrkas i ansökan
   belopp: 85 procent av kostnaderna, max 50 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-lokaler-och-anlaggningar-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser föregående års kostnader för kartframställan. Utbetalning i mars. Ingen redovisning krävs i efterhand.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - friluft
 - id: varberg-investeringsbidrag-boverket
   namn: Investeringsbidrag för samlingslokaler (Boverket)
   kategori:
@@ -279,19 +313,26 @@ bidrag:
     datum:
     - 12-01
   krav:
-  - Föreningen ska äga sin lokal eller ha ett nyttjanderättsavtal
-  - Föreningen får inte ta lån till förbättringar av lokalen utan kommunens godkännande
+  - Föreningen ska driva en allmän samlingslokal
+  - Investeringen ska vara stödberättigad enligt Boverkets regler
+  - Föreningen ska göra en parallell ansökan till Boverket och svara för sin egen finansieringsandel
   belopp: 'Fördelning: staten 50 procent, Varbergs kommun 30 procent, sökande förening 20 procent'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/foreningsbidrag-inom-idrotts--och-fritidsomradet/foreningsbidrag-for-lokaler-och-anlaggningar-inom-idrotts--och-fritidsomradet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Söks direkt hos Boverket (boverket.se), inte via Interbook Go. Kopia av ansökningshandlingarna skickas samtidigt
     till Varbergs kommun (ks@varberg.se) för kommunens finansieringsdel. Kommunstyrelsen bereder ansökan till kommunfullmäktige
     i samråd med kultur- och fritidsförvaltningen.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 - id: varberg-stimulansbidrag-hallbar-utveckling
   namn: Stimulansbidrag för insatser kring hållbar utveckling
   kategori:
@@ -301,18 +342,23 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Arbetet ska vila mot minst tre av FN:s 17 globala mål i Agenda 2030
-  - Större investeringsinsatser ryms inte i detta bidrag utan söks inom ramen för investeringsbidraget
-  belopp: null
+  - Föreningen ska vara bidragsberättigad och verksam i Varbergs kommun
+  - Insatsen ska bidra till ekologisk, social eller ekonomisk hållbar utveckling
+  - Ansökan ska beskriva insatsen, dess mål och kostnader
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/utvecklings--och-hallbarhetsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan görs löpande under året, dock senast 1 december. Handläggningstid max 60 dagar. Redovisning senast två
-    månader efter genomförandet. Outnyttjade medel ska återbetalas.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
 - id: varberg-startbidrag
   namn: Startbidrag
   kategori:
@@ -327,14 +373,19 @@ bidrag:
   - Föreningen ska ha organisationsnummer samt bank- eller plusgirokonto
   - Ansökan ska göras inom 6 månader från föreningens konstituerande möte
   belopp: 5 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/utvecklings--och-hallbarhetsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ingen redovisning krävs i efterhand.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
 - id: varberg-vanortsutbyte
   namn: Vänortsutbyte
   kategori:
@@ -345,17 +396,24 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Föreningen ska ha ett genomtänkt och tydligt planerat utbyte
-  - Föreningen ska möta människor med liknande intresse, och utbyta erfarenheter/utmaningar
+  - Utbytet ska genomföras med en av Varbergs vänorter
+  - Deltagarna ska representera en förening verksam i Varbergs kommun
+  - Ansökan ska beskriva utbytets syfte, deltagare och kostnader
   belopp: 1 000 kronor per deltagare, max 30 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/utvecklings--och-hallbarhetsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Redovisning senast två månader efter genomförandet.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - ungdom
+  - annat
 - id: varberg-kommunalt-lonebidrag
   namn: Kommunalt lönebidrag
   kategori:
@@ -377,15 +435,21 @@ bidrag:
   belopp: 'Upp till 25 procent av Arbetsförmedlingens lönebidragstak, max 5 000 kronor per anställd och månad för heltidstjänst
     (deltid ger reducerad ersättning). Extra arbetsgivarstöd 2025: 20 000 kronor per anställd och år, varav 2 000 kronor ska
     användas som friskvårdsbidrag.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/kommunalt-lonebidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kvartalsvisa ansökningsdatum (15 jan, 15 apr, 15 jul, 15 okt) för föregående kvartals period. Utbetalning i
     efterskott. Ingen redovisning krävs efteråt utöver anställningsavtal och Arbetsförmedlingens beslut om lönebidrag.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - annat
 - id: varberg-socialforvaltningens-foreningsbidrag
   namn: Socialförvaltningens föreningsbidrag
   kategori:
@@ -397,21 +461,27 @@ bidrag:
     datum:
     - 09-30
   krav:
-  - Föreningen ska vara ett betydelsefullt komplement till Socialnämndens verksamheter
   - Föreningen ska ha sin utgångspunkt i Varbergs kommun
-  belopp: null
+  - Verksamheten ska vara ett betydelsefullt komplement till socialnämndens verksamheter
+  - Ansökan ska uppfylla socialnämndens riktlinjer och avse kommande verksamhetsår
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/omsorg-och-stod/ekonomi-och-pengar/socialforvaltningens-foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser nästkommande år (ansökan för 2026 senast 30 september 2025). Bidragsperiod 1 januari–31 december.
     Söks via kommunens e-tjänst 'Föreningsbidrag Socialförvaltningen' (sjalvservice.varberg.se/oversikt/overview/653), inte
     via Interbook Go. Detaljerade krav i PDF 'Riktlinjer för bidrag till föreningar inom socialnämndens verksamhetsområde'
     (122,6 kB) — dokumentet gick inte att hämta som text i denna körning (endast sökreferens hittad, ingen fungerande direktlänk);
     belopp därför fortsatt null.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - social
 - id: varberg-kultur-verksamhetsstod-forening
   namn: Verksamhetsstöd till arrangörs- och kulturföreningar
   kategori:
@@ -426,24 +496,25 @@ bidrag:
   - Bidraget får inte användas till löner
   - Föreningen ska delta i dialogmöten två gånger per år
   - Politiska partier, trossamfund och välgörenhetsorganisationer omfattas inte
-  belopp: null
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier-inom-kulturomradet/bidrag-for-kulturaktorer-ideella-foreningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Källkonflikt löst enligt §2.5: regelverket (Kommunfullmäktige 2024-11-12 §136) anger deadline 1 oktober, webbsidan
-    (senast ändrad 2026-03-16) anger 30 oktober — nyare webbsida vinner, 30 oktober används. Ansökan avser kommande år. Utbetalning
-    senast 15 februari.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
 - id: varberg-kultur-fria-kulturlivet
   namn: Verksamhetsstöd till det fria kulturlivet
   kategori:
   - kultur
-  malgrupp: Professionella fria kulturaktörer med publik/offentlig verksamhet till nytta för Varbergs kommuns invånare. Sökande
-    ska ha en juridisk person (ideell eller ekonomisk förening, stiftelse eller bolag) eller enskild firma med F-skattsedel
-    som huvudman.
+  malgrupp: Ideella och ekonomiska föreningar samt stiftelser med professionell publik kulturverksamhet till nytta för Varbergs invånare
   deadlines:
     typ: fasta
     datum:
@@ -453,25 +524,25 @@ bidrag:
     konstnärlig yrkesverksamhet på professionell nivå
   - Kan inte sökas för en enskild kulturutövares eget konstnärliga arbete utan kräver juridisk person/F-skatt som sökande
   - Bedömning sker i konkurrens med andra sökande; beviljat stöd ett verksamhetsår innebär ingen garanti för fortsatt stöd
-  belopp: null
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier-inom-kulturomradet/bidrag-for-kulturaktorer-ideella-foreningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SJÄLVKORRIGERING (2026-07-21): felaktigt MEDVETET_UTESLUTET i föregående körning (2026-07-19) med motiveringen
-    att bidraget ''riktar sig till professionella enskilda kulturutövare/bolag med F-skattsedel, inte föreningar''. Regelverket
-    anger dock uttryckligen att en ideell förening är en godkänd sökandeform — §2.4(b) gäller därför inte. Återinförd. Källkonflikt
-    löst enligt §2.5: regelverket anger deadline 1 oktober, webbsidan (senast ändrad 2026-03-16) anger 30 oktober — nyare
-    webbsida vinner. Redovisning senast 30 augusti.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
 - id: varberg-kulturprojektstod
   namn: Kulturprojektstöd
   kategori:
   - kultur
-  malgrupp: Ideella föreningar, fria kulturskapare, organisationer, nätverk och bolag som genomför kulturprojekt i Varbergs
-    kommun
+  malgrupp: Ideella föreningar och organisationer som genomför kulturprojekt i Varbergs kommun
   deadlines:
     typ: lopande
     datum: []
@@ -480,19 +551,20 @@ bidrag:
   - Definierat projekt med tydligt mål, start- och slutdatum samt budget
   - Max 20 procent av budgeten får avse arrangörsarvoden
   - Ges inte till välgörenhet, reseersättning till arrangör, lokalinvesteringar eller lön till arrangör
-  belopp: null
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier-inom-kulturomradet/bidrag-for-kulturaktorer-ideella-foreningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Källkonflikt löst enligt §2.5: regelverket (2024-11-12) beskriver två fasta ansökningsomgångar (10 januari–10
-    mars och 10 augusti–10 november), webbsidan (senast ändrad 2026-03-16) beskriver löpande ansökan, senast två månader innan
-    projektstart. Nyare webbsida vinner. Inga nya ansökningar behandlas 1 juni–1 augusti. Ansökan sker på pappersblankett
-    till Kultur- och fritidsförvaltningen eller via e-post till kfn@varberg.se, inte via Interbook Go. Redovisning inom två
-    månader efter projektavslut.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
 - id: varberg-stod-studieforbund
   namn: Stöd till studieförbund
   kategori:
@@ -508,15 +580,20 @@ bidrag:
   - Kommunsammandrag över bidragsberättigad verksamhet i Varbergs kommun ska bifogas
   - Anslaget fördelas som verksamhetsbidrag (82 procent), organisationsbidrag (10 procent) och tillgänglighetsbidrag (8 procent)
     enligt studietimmar, unika deltagare och kulturprogram
-  belopp: null
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier-inom-kulturomradet/stod-till-studieforbund
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser kommande verksamhetsår. Utbetalning senast 15 februari året därpå.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
 - id: varberg-drift-underhall-vagforening
   namn: Drift- och underhållsbidrag för vägföreningar
   kategori:
@@ -534,18 +611,20 @@ bidrag:
   - Underhållsåtgärder som överstiger 25 000 kronor (t.ex. toppbeläggning) ska godkännas av förvaltningen före påbörjande
   belopp: 100 procent av verklig redovisad kostnad för gator/vägar klassade som allmän platsmark i detaljplan (ej kvartersmark
     eller privat mark). Arvode/administration ersätts separat via schablonbelopp baserat på antal löpmeter väg.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/vagsamfallighet-och-vagforening
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'NYTT i denna omkörning (2026-07-21) — specialkategori (§2.1.5), administreras av Hamn- och gatuförvaltningen,
-    helt utanför kultur-/fritids- och socialspåren. Ansökningsblankett, verifikationer/fakturor, bokslut, verksamhetsberättelse
-    och revisionsberättelse ska vara inskickade senast 3 månader efter föreningens verksamhetsårs slut. Vägföreningar med
-    drift- och underhållsavtal med kommunen är inte berättigade till bidrag (utom ansvarsförsäkringskostnad). Källa: ''Villkor
-    för kommunalt bidrag gällande enskilda vägar'', Kommunfullmäktige 2017-11-14 § 198, KS 2017/0575, gäller tills vidare.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 - id: varberg-sarskilt-driftsbidrag-vagsamfallighet
   namn: Särskilt driftsbidrag för vägsamfälligheter
   kategori:
@@ -564,46 +643,20 @@ bidrag:
   - Hamn- och gatuförvaltningen ska kallas till förbesiktning och slutbesiktning
   belopp: Max 50 procent av redovisat bidragsunderlag (verklig kostnad exklusive moms). Kommunalt och statligt bidrag tillsammans
     max 80 procent av åtgärdernas kostnad.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/vagsamfallighet-och-vagforening
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'NYTT i denna omkörning (2026-07-21) — specialkategori (§2.1.5), administreras av Hamn- och gatuförvaltningen.
-    Deadline avser ansökan året FÖRE bidragsåret (senast 31 oktober). Utöver detta bidrag utgår ett automatiskt ''årligt driftbidrag''
-    (20-30 procent beroende på Trafikverkets ersättningsnivå) som INTE kräver egen ansökan — kommunen följer Trafikverkets
-    utanordningslista — därför inte upptaget som egen sökbar post här. Källa: ''Villkor för kommunalt bidrag gällande enskilda
-    vägar'', Kommunfullmäktige 2017-11-14 § 198, KS 2017/0575, gäller tills vidare.'
-  senast_verifierad: '2026-08-03'
-- id: varberg-enskild-utfartsvag
-  namn: Bidrag till enskild utfartsväg
-  kategori:
-  - ovrig
-  malgrupp: Väghållare för enskild utfartsväg i Varbergs kommun, minst 500 meter (kan vara flera sammanräknade vägsträckor),
-    öppen för allmän trafik, till fastighet med åretruntboende
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-01
-  krav:
-  - Vid flera delägare ska ansökan vara gemensam för samtliga
-  - Vägen ska markeras på karta i ansökan
-  - Ansvarsförsäkring krävs
-  - Förändringar som påverkar bidraget ska omgående anmälas till Hamn- och gatuförvaltningen
-  belopp: 'Ersättning per löpmeter väg, beloppet fastställs årligen i budget för enskild utfartsväg (exempel i källan: 2 kronor/löpmeter
-    — en väghållare med 750 meter väg fick 1 500 kronor i årligt bidrag)'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://varberg.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/vagsamfallighet-och-vagforening
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'NYTT i denna omkörning (2026-07-21) — specialkategori (§2.1.5), administreras av Hamn- och gatuförvaltningen.
-    Deadline avser nytillkommande väg — ansökan ska vara inkommen senast 1 november före kommande bidragsår. Betalas ut årligen.
-    Källa: ''Villkor för kommunalt bidrag gällande enskilda vägar'', Kommunfullmäktige 2017-11-14 § 198, KS 2017/0575, gäller
-    tills vidare.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 - id: varberg-byapengen
   namn: Byapengen
   kategori:
@@ -615,48 +668,51 @@ bidrag:
     datum:
     - 06-30
   krav:
-  - Utvecklingsgruppen ska utse en kontaktperson från landsbygden som kan vara kommunens kontakt i landsbygdsfrågor
-  - Digital ansökan kräver BankID samt intyg om behörighet att söka för föreningens räkning (pappersansökan möjlig men med
-    längre handläggningstid)
-  belopp: null
+  - Sökanden ska vara en lokal utvecklingsgrupp, exempelvis ett byalag eller en samhällsförening
+  - Gruppen ska verka för utveckling inom ett avgränsat geografiskt område
+  - Gruppen ska utse en kontaktperson som kan vara kommunens bollplank i frågor om bygdens utveckling
+  belopp: 5 000 kronor för föreningar med högst 150 medlemmar, 10 000 kronor för föreningar med fler än 150 medlemmar och 15 000 kronor för Varbergs Landsbygdsråd
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://sjalvservice.varberg.se/oversikt/overview/65
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'NYTT i denna omkörning (2026-07-21) — specialkategori (§2.1.5, byalag/samhällsförening). Källkonflikt (§2.5):
-    kommunens e-tjänst (denna kalla_url, odaterad, bekräftad i två oberoende hämtningar) anger 10 000 kr för föreningar med
-    över 150 medlemmar, annars 5 000 kr, och 15 000 kr för Varbergs Landsbygdsråd. Den redaktionella sidan (varberg.se/.../stod-till-landsbygdsutveckling,
-    senast ändrad 2026-07-01) anger istället 15 000 kr (över 150 medlemmar), 10 000 kr (färre) och 20 000 kr (Landsbygdsrådet).
-    E-tjänsten saknar synlig datummärkning — enligt §2.5 nollställs belopp vid avsaknad av datum på minst en källa. Pengarna
-    ska användas till föreningens verksamhet för att stärka demokratisk dialog kring landsbygdens utveckling.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 - id: varberg-landsbygdschecken
   namn: Landsbygdschecken
   kategori:
   - ovrig
-  malgrupp: Lokala utvecklingsgrupper, föreningar, organisationer och mindre företag som utvecklar landsbygden i Varbergs
-    kommun
+  malgrupp: Lokala utvecklingsgrupper, föreningar och ideella organisationer på Varbergs landsbygd
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Insatsen ska avse attraktiv boendemiljö, bygdeutveckling eller marknadsföring av Varbergs landsbygd
-  belopp: null
+  - Sökanden ska vara en förening eller ideell organisation verksam på Varbergs landsbygd
+  - Projektet ska avse attraktiv boendemiljö, bygdeutveckling eller marknadsföring av Varbergs landsbygd
+  - Ansökan ska beskriva idén, nyttan för landsbygden och projektets kostnader
+  belopp: Max 30 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://sjalvservice.varberg.se/oversikt/overview/64
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'NYTT i denna omkörning (2026-07-21) — specialkategori (§2.1.5, landsbygdsutveckling). Källkonflikt (§2.5):
-    kommunens e-tjänst (denna kalla_url, odaterad, bekräftad i två oberoende hämtningar) anger ''upp till 20 000 kr per år''.
-    Den redaktionella sidan (varberg.se/.../stod-till-landsbygdsutveckling, senast ändrad 2026-07-01) anger istället ''upp
-    till 30 000 kr per år''. E-tjänsten saknar synlig datummärkning — enligt §2.5 nollställs belopp. Sökes löpande via e-tjänst
-    i fyra steg (uppgifter, projektbeskrivning, förhandsgranska, skicka in). Riktar sig delvis även till mindre företag, men
-    är inte ENDAST ett företagsstöd (§2.4b gäller inte) eftersom föreningar och organisationer uttryckligen är sökandeberättigade.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 - id: varberg-motesplatser-landsbygd
   namn: Investeringsstöd till mötesplatser på landsbygden
   kategori:
@@ -667,22 +723,24 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Lokalt initiativ och engagemang
-  - En organiserad mottagargrupp för investeringen (t.ex. byalag eller samhällsförening)
-  belopp: null
+  - Investeringen ska utveckla en mötesplats eller utomhusmiljö i en serviceort eller på landsbygden
+  - Det ska finnas ett lokalt initiativ och engagemang
+  - Det ska finnas en organiserad mottagargrupp, exempelvis ett byalag eller en samhällsförening
+  belopp: Beloppet bestäms efter prövning; kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://varberg.se/bygga-bo-och-miljo/samhallsutveckling/landsbygd/stod-till-landsbygdsutveckling
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: NYTT i denna omkörning (2026-07-21) — specialkategori (§2.1.5, landsbygdsutveckling). Kontaktbaserat stöd utan
-    publicerat ansökningsformulär eller fast belopp — kontakta landsbygdssamordnaren (Elisabeth Svensson Agerbjer) för dialog
-    om aktuellt mötesplatsprojekt. Investeringspengar för utveckling av utomhusmiljöer i serviceorter och på landsbygden.
-    Inkluderad trots ofullständiga villkor eftersom kommunen själv beskriver det som en distinkt stödform (samma dialogbaserade
-    mönster som 'Dialogbaserat verksamhetsbidrag' ovan) — bedömdes inte tillräckligt odefinierat för att motivera uteslutning
-    enligt §2.4.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - annat
+  - hembygd
 forutsattningar:
 - id: varberg-bidragsberattigad-forening
   vad: Vara registrerad och verksam förening i Varbergs kommun
@@ -698,4 +756,4 @@ forutsattningar:
   giltighet: Kräver årlig uppdatering av uppgifter i föreningsregistret samt inlämning av årsmöteshandlingar
   ordning: 1
   kalla_url: https://varberg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/allmanna-bestammelser-for-bidrag-fran-varbergs-kommun
-  giltighet_status: olast
+  giltighet_status: kontrollast
