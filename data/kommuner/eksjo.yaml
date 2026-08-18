@@ -7,10 +7,17 @@ ansokningssystem:
   namn: E-tjänstportal
   url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
 kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://eksjo.se/download/18.1d1960cb166a54dca4c1516b/1544091979051/Bidragsregler%20WEBB.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: eksjo-aktivitetsbidrag
   namn: Aktivitetsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -28,8 +35,11 @@ bidrag:
   - Närvarokort ska kunna redovisas på begäran
   - Beviljas inte för aktivitet som fått arrangemangsbidrag eller annat kommunalt produktionsstöd
   - Årsmötesprotokoll, ekonomisk årsredovisning och verksamhets-/revisionsberättelse redovisas senast två månader efter årsmöte
+  - Arvode eller lön till ledare är inte bidragsgrundande
   - Ansökan digitalt
   belopp: Beloppet per deltagare fastställs av nämnden efter varje halvårsredovisning.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig upp till 1 månad efter deadline (10% avdrag), upp till 2 månader (20% avdrag), mer än 2 månader ger
     avslag
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
@@ -37,16 +47,17 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Två ansökningsperioder: höst (25 feb) och vår (25 aug) T8a: Kommunens bidragssystem anger att satsen fastställs
-    efter varje redovisningsperiod.'
+  senast_verifierad: '2026-08-18'
+  anteckning: Två redovisningsperioder per år; nämnden fastställer satsen efter respektive period.
 - id: eksjo-arrangemangsbidrag
   namn: Arrangemangsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - kultur
   - idrott
   malgrupp: Föreningar för offentliga arrangemang
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget ska vara offentligt och annonserat i massmedia eller affischerat
@@ -55,16 +66,23 @@ bidrag:
   - Ekonomisk redovisning och budget för arrangemanget krävs, senast två månader efter arrangemanget
   - Bidrag betalas i efterskott (förskott möjligt vid särskilda skäl)
   - Marknadsföring ska ange att arrangemanget sker med bidrag från/stöd av Eksjö kommun
+  - Sammanhängande arrangemang ska sökas som en helhet och ha en samlad budget
+  - Stödet ska bidra till ett rikt, mångsidigt och kvalitativt kulturliv eller stärka kommunens attraktivitet och positiva marknadsföring
+  - Förlustgaranti prioriteras för större kulturarrangemang där omsättningen överstiger ett prisbasbelopp
   belopp: Behovsprövas individuellt, ingen fast beloppsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande, min 6 veckor före
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Bekräftat via Bidragsregler-PDF (Eksjö kommun): bidraget är behovsprövat, ingen fast beloppstabell finns.'
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: eksjo-lokalbidrag
   namn: Lokalbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -79,10 +97,15 @@ bidrag:
   - 'Hyrd lokal: bidrag ges med högst 3 000 kr/år, dock max 80 procent av årskostnaden'
   - Bidrag ges inte för hyror till kommunägda eller kommunalt subventionerade lokaler
   - Föreningsuppgifterna ska vara uppdaterade och godkända av föreningen
+  - Bidrag för föreningsägd lokal bedöms även efter kommun- och samhällsnytta, barn- och totalnyttjande, standard, drift, underhåll och egna intäkter
+  - Mark- och vattenarrenden av allmänintresse prövas individuellt
   belopp: 'Föreningsägd lokal/anläggning: bidrag enligt riktvärden per anläggningstyp, t.ex. gräsfotbollsplan 29 000 kr, grusplan
     6 000 kr, isbana bandy 27 000 kr, tennisbana grus 5 000 kr (permanentbeläggning 2 000 kr), elbelyst motionsspår 8 kr/m,
+    permanent motionsspår 1 200 kr per 2,5 km, enkel friidrottsanläggning 3 000 kr,
     omklädningsrum 70-180 kr/kvm, klubbrum 50-90 kr/kvm, belysning fotboll/bandy 16 000 kr. Hyrd lokal: högst 3 000 kr/år,
     max 80% av årskostnaden. Handikapporganisationer: 3 000 kr/år utan krav på ungdomsverksamhet.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig upp till 1 månad efter deadline (10% avdrag), upp till 2 månader (20% avdrag), mer än 2 månader ger
     avslag
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
@@ -90,10 +113,11 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: eksjo-investeringsbidrag
   namn: Investeringsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -108,17 +132,21 @@ bidrag:
   - Andra bidragsmöjligheter ska om möjligt nyttjas i första hand
   - Bidraget betalas ut efter inlämnad fakturakopia på genomförda arbeten och/eller gjorda inköp
   - I akuta situationer kan investeringsbidrag sökas löpande
+  - Stödet kan avse ny eller reviderad fritidskarta samt maskiner, redskap och fasta inventarier som behövs för anläggningens skötsel, drift eller funktion
   belopp: Bidrag ges med högst 80 procent av kostnaden, efter särskild prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 1 november, men kan sökas löpande i akuta situationer
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: eksjo-stod-projekt
   namn: Stödbidrag för projekt
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - kultur
   - idrott
@@ -133,16 +161,19 @@ bidrag:
   - Vid ansökan om bidrag till ny förening ska stadgar samt protokoll från konstituerande möte bifogas
   - Bidraget är ett engångsbidrag
   belopp: Engångsbidrag, storlek bestäms efter särskild prövning, ingen fast beloppsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Bekräftat via Bidragsregler-PDF: bidraget kompletterar övriga bidragsformer, är ett engångsbidrag utan fast
-    belopp och beviljas efter särskild prövning.'
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: eksjo-samlingslokalbidrag
   namn: Samlingslokalbidrag
+  foreningstyp: [kultur, hembygd, social, annat]
   kategori:
   - kultur
   - idrott
@@ -152,13 +183,16 @@ bidrag:
     datum:
     - 11-01
   krav:
-  - Föreningen ska äga och/eller ansvara för drift av allmän samlingslokal
+  - Föreningen ska äga och/eller ansvara för drift av en allmän samlingslokal, även i byggnad som ägs av kommunen eller kommunalt bolag
   - Ansökan med redovisningar för föregående år ska vara kommunen tillhanda senast 1 november
   - Bidragssumman bedöms utifrån drifts-/underhållskostnader, betydelse för kommunen/landsbygdsutveckling, antal nyttjare
-    7-20 år samt uthyrningsomfattning
+    7-20 år, totalt nyttjande, uthyrningsomfattning och uppskattade nyttjandetimmar
+  - Driftskostnader som kommunen redan betalar ska räknas av från underlaget
   - Uppgifterna ska framgå i föreningens årsredovisning och verksamhetsberättelse
   belopp: Behovsprövat driftbidrag; storlek bestäms utifrån drifts- och underhållskostnader samt nyttjandegrad, ingen fast
     beloppstabell
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig upp till 1 månad efter deadline (10% avdrag), upp till 2 månader (20% avdrag), mer än 2 månader ger
     avslag
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
@@ -166,10 +200,11 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: eksjo-studieforbund
   namn: Studieförbundsbidrag
+  foreningstyp: [kultur, social, annat]
   kategori:
   - kultur
   malgrupp: Studieförbund för folkbildningsverksamhet
@@ -178,12 +213,13 @@ bidrag:
     datum:
     - 04-01
   krav:
-  - Registrerat studieförbund
-  - Folkbildningsverksamhet enligt statliga kriterier
-  - Redovisning av deltagartimmar i studiecirklar/folkbildningsverksamhet samt antal kulturarrangemang för föregående år
+  - Studieförbundet ska bedriva verksamhet i Eksjö kommun
+  - Föregående års deltagartimmar i studiecirklar och övrig folkbildningsverksamhet samt antal kulturarrangemang ska redovisas
+  - Andelen av studieförbundens samlade redovisade verksamhetsvolym ligger till grund för fördelningen
+  - Årsmötesprotokoll, ekonomisk årsredovisning, verksamhetsberättelse och revisionsberättelse ska lämnas senast två månader efter årsmötet
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunens totalt redovisade volym fördelas procentuellt"
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas mellan studieförbunden efter respektive andel av total redovisad volym deltagartimmar i studiecirklar och övrig folkbildning samt kulturarrangemang föregående år; totalsumma publiceras inte
   sen_ansokan: Möjlig upp till 1 månad efter deadline (10% avdrag), upp till 2 månader (20% avdrag), mer än 2 månader ger
     avslag
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
@@ -191,40 +227,91 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
-- id: eksjo-kulturpeng-unga
-  namn: Kulturpeng för unga
-  kategori:
-  - kultur
-  malgrupp: Ungdomar 12-20 år för kulturarrangemang
-  deadlines:
-    typ: lopande
-    datum: []
+- id: eksjo-elitstod
+  namn: Elitstöd
+  foreningstyp: [idrott]
+  kategori: [idrott]
+  malgrupp: Idrottsföreningar med verksamhet på högsta nationella nivå
+  deadlines: {typ: fasta, datum: [11-01]}
   krav:
-  - Sökande ska vara 12-20 år och bosatt i Eksjö kommun
-  - Evenemanget ska vara publikt så att ungdomar utanför projektgruppen kan delta
-  - Personer under 18 år måste ha målsmans medgivande
-  - Ansökan kan skickas in löpande under året och behandlas skyndsamt
-  - Efter avslutat arrangemang ska ekonomisk redovisning samt skriftlig dokumentation lämnas in
-  belopp: Upp till 5 000 kr per ansökan
-  sen_ansokan: Möjlig löpande, ingen angiven minsta ledtid
-  kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
-  belopp_status: kontrollast
+  - Laget ska spela i högsta serien eller föreningen bedriva verksamhet på högsta nationella nivå
+  - Föreningen ska ha en aktiv och bred ungdomsverksamhet för både flickor och pojkar
+  - Föreningen ska ha policyer för jämställdhet, integration, droger och dopning
+  - Elitverksamheten ska ge lokal och nationell medieexponering samt ha publik- och uppmärksamhetsvärde
+  - Företrädare ska kunna vara förebilder i kommunens ungdomsverksamhet, skola och andra föreningar
+  - Eksjö kommuns namn och logotyp ska synas i inbjudningar, program, webb, annonser, lokaler och anläggningar
+  - Verksamheten ska marknadsföras på kommunens webbplats
+  - Föreningen ska ha sund ekonomi och får inte ha skuld till kommunen
+  - Kommunen får använda elitverksamheten i sin marknadsföring
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet beslutas efter prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 november
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Bekräftat via Bidragsregler-PDF: maxbelopp 5 000 kr, ansökan löpande utan förhandsfrist.'
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: eksjo-internationella-utbyten
+  namn: Bidrag till internationella projekt och utbyten
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar och nätverk som genomför internationella projekt eller utbyten
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Projektet eller utbytet ska ligga i linje med Eksjö kommuns internationella policy
+  - Projektets syfte ska vara tydligt och förankrat
+  - Föreningsutbyten bedöms utifrån utbytets ändamål
+  - Sökanden ska bidra med viss egen finansiering
+  - Långsiktig och bred samverkan är meriterande
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet beslutas efter prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen sista ansökningsdag publiceras
+  kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Aktiv e-tjänst finns för ansökan.
+- id: eksjo-sociala-foreningsbidrag
+  namn: Bidrag till brukarorganisationer och intresseföreningar inom social verksamhet
+  foreningstyp: [social, annat]
+  kategori: [social, funktionsratt, pensionar]
+  malgrupp: Brukarorganisationer och intresseföreningar inom social verksamhet
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Sökanden ska vara en brukarorganisation eller intresseförening inom social verksamhet
+  - Verksamheten eller aktiviteterna ska rikta sig till människor inom socialnämndens verksamhetsområden
+  - Ansökan får avse lokal- och verksamhetskostnader
+  - Verksamheten ska stimulera engagemang och meningsfull fritid, motverka ensamhet och ohälsa samt stärka fysisk, psykisk och social hälsa
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet beslutas efter prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 oktober
+  kalla_url: https://eksjo.se/omsorg-och-stod/ekonomiskt-stod/bidrag-till-organisationer-och-foreningar
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 forutsattningar:
 - id: eksjo-registrering
-  vad: Registrering som ideell förening
-  beskrivning: Föreningen måste vara registrerad för att kunna ansöka om bidrag från Eksjö kommun.
-  system: Föreningsregistret
+  vad: Årliga föreningshandlingar
+  beskrivning: Årsmötesprotokoll, ekonomisk årsredovisning, verksamhetsberättelse och revisionsberättelse ska lämnas till kommunen varje år.
+  system: E-tjänstportal
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast två månader efter årsmötet
+  giltighet: Årshandlingar senast två månader efter årsmötet
   ordning: 1
-  kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 - id: eksjo-e-tjanst
   vad: Digital ansökan via e-tjänstportal
   beskrivning: Ansökningar görs digitalt via Eksjö kommuns e-tjänstportal. Fritidsavdelningen hanterar föreningsbidrag.
@@ -234,7 +321,7 @@ forutsattningar:
   giltighet: null
   ordning: 2
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: eksjo-kontakt
   vad: Kontaktinformation
   beskrivning: 'Fritidsavdelningen, Tel: 0381-360 00, E-post: fritid@eksjo.se'
@@ -244,4 +331,4 @@ forutsattningar:
   giltighet: null
   ordning: 3
   kalla_url: https://eksjo.se/kultur-och-fritid/foreningsliv/foreningsbidrag
-  giltighet_status: okand
+  giltighet_status: ingen_regel
