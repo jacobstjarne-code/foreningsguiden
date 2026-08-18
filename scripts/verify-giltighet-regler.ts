@@ -68,7 +68,7 @@ const RULES: Record<string, ExpectedRule> = {
   kungalv: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   lund: { typ: 'manader_efter_beslut', antal: 13, datum: null, status: 'kontrollast' },
   malmo: { typ: 'manader_efter_arsmote', antal: 1, datum: null, status: 'kontrollast' },
-  nacka: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  nacka: { typ: 'sammansatt', antal: null, datum: null, status: 'kontrollast' },
   norrtalje: { typ: 'manader_efter_arsmote', antal: 2, datum: null, status: 'kontrollast' },
   pitea: { typ: 'fast_datum', antal: null, datum: '04-01', status: 'kontrollast' },
   taby: { typ: 'fast_datum', antal: null, datum: '02-15', status: 'kontrollast' },
