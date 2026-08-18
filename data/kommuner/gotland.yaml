@@ -6,11 +6,19 @@ forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
   namn: E-tjänstportal
   url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv
-kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv
-verifierad: 2026-07-26
+kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: gotland-driftsstod-idrottsanlaggning
   namn: Driftsstöd för föreningsägd idrottsanläggning
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom, annat]
   kategori:
   - idrott
   malgrupp: Idrottsföreningar som äger eller har långsiktig nyttjanderätt till egen anläggning
@@ -19,19 +27,25 @@ bidrag:
     datum:
     - 02-28
   krav:
-  - Minst 30 betalande medlemmar och 30 godkända sammankomster
-  - Ägande eller nyttjanderätts-/arrendeavtal på minst fem år
+  - Registrerad i Region Gotlands föreningsregister med säte och verksamhet på Gotland
+  - Minst 30 betalande medlemmar och 30 godkända sammankomster per år
+  - Äga anläggningen till 100 procent eller ha nyttjanderätts- eller arrendeavtal på minst fem år
+  - Ansvara för driften och kostnaderna samt bedriva verksamhet för prioriterade målgrupper
   belopp: Målsättning omkring 70 procent av godkända kostnader, beroende på budget
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: För 2026 och 2027 behöver föreningen redovisa ett respektive två kostnadsår i stället för tre. En ny anläggning kan bedömas utifrån förväntade kostnader.
+  senast_verifierad: '2026-08-18'
 - id: gotland-hyresstod-idrottsanlaggning
   namn: Stöd för hyreskostnader för idrottsanläggning
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom, annat]
   kategori:
   - idrott
   malgrupp: Föreningar som hyr och i hög grad driver en anläggning som Region Gotland inte kan tillhandahålla
@@ -40,19 +54,25 @@ bidrag:
     datum:
     - 02-28
   krav:
-  - Hyresavtal på minst fem år
-  - Minst 30 medlemmar och 30 godkända sammankomster
-  belopp: Upp till cirka 70 procent av godkända kostnader; högst 300 000 kronor per år och anläggning
+  - Registrerad i Region Gotlands föreningsregister med säte och verksamhet på Gotland
+  - Hyresavtal på minst fem år för långtidshyra; korttidshyra prövas enligt särskilda villkor
+  - Minst 30 medlemmar och 30 godkända sammankomster samt ett redovisat behov av stöd
+  - Anläggningen ska vara viktig för prioriterade målgrupper och sakna motsvarighet hos Region Gotland
+  belopp: Omkring 70 procent av godkända kostnader, högst 300 000 kr per år och anläggning. Korttidshyra kan ersättas med 50 procent, högst 100 kr per timme och 50 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet gäller hyra från annan än Region Gotland och ges inte för en förenings korttidshyra i den egna anläggningen.
+  senast_verifierad: '2026-08-18'
 - id: gotland-investeringsstod-idrottsanlaggning
   namn: Investeringsstöd för föreningsägd idrottsanläggning
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom, annat]
   kategori:
   - idrott
   malgrupp: Idrottsföreningar som äger och driver egen idrottsanläggning
@@ -61,59 +81,81 @@ bidrag:
     datum:
     - 02-28
   krav:
-  - Investeringen får inte vara påbörjad före ansökan
+  - Registrerad i Region Gotlands föreningsregister med säte och verksamhet på Gotland
+  - Äga anläggningen eller ha en långsiktig nyttjanderätt eller arrenderätt
+  - Investeringen får inte vara genomförd eller påbörjad före ansökan och får inte delas upp på flera ansökningar
+  - Investeringen ska förbättra tillgänglighet, användbarhet eller hållbarhet och utbetalning sker mot kostnadsredovisning
   belopp: Upp till 70 procent av kostnaden, högst 200 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Särskild utrustning kan omfattas när den är en förutsättning för verksamheten.
+  senast_verifierad: '2026-08-18'
 - id: gotland-barn-ungdom-aktivitet
   namn: Aktivitetsstöd för barn- och ungdomsverksamhet
+  status: aktiv
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
-  malgrupp: Föreningar med barn- och ungdomsverksamhet 7–20 år
+  malgrupp: Registrerade ideella föreningar med verksamhet för barn och unga 7–20 år som inte söker via Riksidrottsförbundets system
   deadlines:
     typ: fasta
     datum:
-    - 02-25
+    - 02-15
     - 08-25
   krav:
-  - Minst tio medlemmar i bidragsberättigad ålder
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  - Registrerad hos Region Gotland och minst tio medlemmar i bidragsberättigad ålder
+  - Minst tre deltagande medlemmar; aktiviteten ska vara styrelsebeslutad och pågå minst 45 minuter
+  - Aktiviteten ska ledas av en medlem som är minst 13 år; högst 20 deltagare får redovisas per närvarande ledare
+  - Aktiviteten får inte vara kommersiell, ligga inom skoldagen eller innehålla religiösa eller partipolitiska inslag
+  belopp: 33 kr per sammankomst och 3,85 kr per deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks halvårsvis i efterhand senast 15 februari och 25 augusti
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/669
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: RF-anslutna idrottsföreningar använder i stället Riksidrottsförbundets system.
+  senast_verifierad: '2026-08-18'
 - id: gotland-barn-ungdom-resor
   namn: Resestöd för barn- och ungdomsverksamhet
+  status: aktiv
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
-  malgrupp: Föreningar med barn- och ungdomsverksamhet 7–20 år
+  malgrupp: Registrerade ideella föreningar med resor för aktiva ungdomar 12–20 år som inte söker via RF-SISU
   deadlines:
     typ: fasta
     datum:
-    - 01-15
-    - 07-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+    - 02-15
+    - 08-25
+  krav:
+  - Registrerad hos Region Gotland och bedriva ungdomsverksamhet på Gotland
+  - Resan ska avse ungdomar 12–20 år och gå till eller från Gotland
+  - Minst tio godkända sammankomster per år
+  - Genomförda resor söks halvårsvis i efterhand; distriktsorganisation kan söka när ungdomar har representerat distriktet
+  belopp: Ersättningen baseras på Destination Gotlands idrottsresepris oavsett färdsätt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks halvårsvis i efterhand senast 15 februari och 25 augusti
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/669
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: RF-anslutna idrottsföreningar söker genom RF-SISU:s resebidragssystem.
+  senast_verifierad: '2026-08-18'
 - id: gotland-fritidsarrangemang
   namn: Stöd till fritidsarrangemang
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -122,18 +164,25 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Ansökan senast två månader före arrangemangets start
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad i Region Gotlands föreningsregister
+  - Arrangemanget ska vara tidsbegränsat och stärka Gotlands fritidsutbud och Gotland som mötesplats
+  - Ansökan ska lämnas minst två månader före arrangemangets start och innehålla intäkter och utgifter
+  - Stöd ges inte för ideella arbetsinsatser eller egen personal och kontantstöd slututbetalas efter redovisning
+  belopp: Stöd kan ges som lokaler, utrustning eller kontantstöd; beloppet prövas utifrån behov, omfattning och kriterier
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Löpande, minst två månader före arrangemangets start
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/1415
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Rörelse för barn och unga, landsbygd, lågsäsong, samverkan och hållbarhet väger särskilt tungt.
+  senast_verifierad: '2026-08-18'
 - id: gotland-funktionsratt-aktivitet-resa-medlem
   namn: Aktivitets-, rese- och medlemsstöd till funktionsrättsföreningar
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   malgrupp: Föreningar för personer med funktionsnedsättning
@@ -142,38 +191,52 @@ bidrag:
     datum:
     - 02-15
   krav:
-  - Minst tio medlemmar
-  - Verksamhet på Gotland
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  - Registrerad i Region Gotlands föreningsregister; stadgarna ska rikta sig till personer med funktionsnedsättning
+  - Minst tio medlemmar och minst tio godkända sammankomster per år
+  - En aktivitet ska ha minst tre deltagare, vara styrelsebeslutad, ledarledd och pågå minst 45 minuter
+  - Resestöd gäller genomförda resor utanför Gotland och ges inte när ersättning lämnas enligt andra bestämmelser
+  belopp: 50 kr per sammankomst, 5 kr per deltagartillfälle och 40 kr per betalande medlem; resestöd beräknas enligt godkända resekostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks årsvis i efterhand senast 15 februari
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/1364
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En nödvändig medföljande kan räknas med i resestödet.
+  senast_verifierad: '2026-08-18'
 - id: gotland-funktionsratt-samordning
   namn: Samordningsstöd inom funktionsrätt
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   malgrupp: Ideella föreningar som samordnar en bred grupp funktionsrättsföreningar på hela Gotland
   deadlines:
     typ: fasta
     datum:
-    - 02-28
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    - 02-15
+  krav:
+  - Registrerad i Region Gotlands föreningsregister och ideell, allmännyttig och demokratisk
+  - Den samordnande rollen ska dokumenteras i stadgar och verksamhetsberättelse samt genom medlemsavgift och medlemsregister
+  - Samordningen ska omfatta en stor bredd av funktionsrättsföreningar och täcka hela Gotland
+  - Visa behov av stöd och måluppfyllelse inom hållbar hälsa och ett tryggt och inkluderande samhälle
+  belopp: Stödets storlek prövas utifrån måluppfyllelse, behov och föreningens strategiska roll
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 februari varje år
   kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Förnyad ansökan krävs varje år.
+  senast_verifierad: '2026-08-18'
 - id: gotland-pensionar-aktivitet-medlem
   namn: Aktivitets- och medlemsstöd till pensionärsföreningar och 65+
+  status: aktiv
+  foreningstyp: [social, idrott, annat]
   kategori:
   - pensionar
   malgrupp: Pensionärsföreningar och föreningar med verksamhet för personer 65 år och äldre
@@ -181,36 +244,53 @@ bidrag:
     typ: fasta
     datum:
     - 02-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  krav:
+  - Registrerad i Region Gotlands föreningsregister och minst tio medlemmar i bidragsberättigad ålder
+  - Minst tio godkända sammankomster per år; varje aktivitet ska ha minst tre deltagare och pågå minst 45 minuter
+  - Aktiviteten ska vara beslutad av styrelsen och ledas av en medlem som är minst 13 år
+  - Medlemsstöd kan endast sökas av pensionärsförening ansluten till en riksorganisation och samma medlem får inte redovisas dubbelt
+  belopp: 50 kr per sammankomst och 5 kr per deltagartillfälle; anslutna pensionärsföreningar kan dessutom få 40 kr per betalande medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Pensionärsföreningar söker årsvis i efterhand senast 15 februari
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/967
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Övriga 65+-föreningar söker halvårsvis den 25 februari och 25 augusti; RF-anslutna idrottsföreningar redovisar genom Riksidrottsförbundet.
+  senast_verifierad: '2026-08-18'
 - id: gotland-sociala-foreningar
   namn: Verksamhetsstöd till sociala föreningar
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - social
   malgrupp: Ideella allmännyttiga föreningar som bedriver särskilt viktig verksamhet inom socialt stöd
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+    typ: fasta
+    datum:
+    - 11-01
+  krav:
+  - Registrerad i Region Gotlands föreningsregister och ideell, allmännyttig och demokratisk
+  - Verksamheten ska vara särskilt viktig inom socialt stöd och föreningen ska visa behov av stöd
+  - Ansökan ska redovisa medlemmar, egna och publika aktiviteter samt stöd till målgruppen
+  - Redovisa kvalitet och måluppfyllelse inom social hållbarhet enligt Region Gotlands kriterier
+  belopp: Regionstyrelsen beslutar beloppet efter en helhetsbedömning av kvantitet, kvalitet, föreningens roll och tillgänglig budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 november varje år
   kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan öppnar normalt den 1 oktober.
+  senast_verifierad: '2026-08-18'
 - id: gotland-kultur-verksamhetsstod
   namn: Verksamhetsstöd till kulturorganisationer
+  status: aktiv
+  foreningstyp: [kultur, hembygd]
   kategori:
   - kultur
   malgrupp: Kulturorganisationer med säte och huvudsaklig verksamhet på Gotland
@@ -219,75 +299,262 @@ bidrag:
     datum:
     - 08-31
   krav:
-  - Ansökningsperiod 1–31 augusti
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Kulturorganisation baserad på Gotland, exempelvis en ideell förening eller stiftelse
+  - Enskild firma, studieförbund, institution och annan offentlig verksamhet kan inte söka
+  - Ansökan ska avse löpande verksamhet enligt verksamhetsplan och innehålla alla uppgifter inklusive budget
+  - Förändringar ska meddelas och Region Gotlands stöd ska anges i kommunikation och marknadsföring
+  belopp: Beloppet prövas individuellt efter verksamhetens kvalitet, angelägenhet, omfattning, tillgänglighet och utvecklingsfokus
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden 2026 är 1–31 augusti
   kalla_url: https://gotland.se/kultur-och-fritid/kultur/stod-stipendier-och-priser/verksamhetsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kan beviljas för ett till tre år
-  senast_verifierad: '2026-08-03'
-- id: gotland-projektstod
-  namn: Projektstöd fritid och kultur
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stöd kan beviljas för ett, två eller tre år i taget.
+  senast_verifierad: '2026-08-18'
+- id: gotland-kultur-projektstod
+  namn: Projektstöd kultur
+  status: aktiv
+  foreningstyp: [kultur]
   kategori:
   - kultur
-  - idrott
-  malgrupp: Föreningar för ett- eller flerårsprojekt
+  malgrupp: Kulturorganisationer baserade på Gotland för tidsbegränsade kulturprojekt som pågår ett till tre år
   deadlines:
-    typ: lopande
+    typ: fasta
+    datum:
+    - 09-30
+  krav:
+  - Sökanden ska vara en kulturorganisation baserad på Gotland; föreningar och stiftelser kan söka
+  - Projektet ska vara tidsbegränsat, pågå ett till tre år och bidra till förnyelse och utveckling av kulturen på Gotland
+  - Projektet ska ha flera finansiärer och ansökan ska visa finansiering från fler håll än Region Gotland
+  - Evenemang inom projektet ska vara öppna och tillgängliga och projektet ska redovisas senast tre månader efter avslut
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Region Gotland avsätter 500 000 kr per år till ett fåtal projekt
+  sen_ansokan: Ansökningsperioden 2026 är 1–30 september
+  kalla_url: https://gotland.se/kultur-och-fritid/kultur/stod-stipendier-och-priser/projektstod
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beslut gäller ett år i taget och fleråriga projekt kräver förnyad ansökan varje år.
+  senast_verifierad: '2026-08-18'
+- id: gotland-lokstod-idrott
+  namn: Kommunalt aktivitetsstöd för RF-anslutna idrottsföreningar
+  status: aktiv
+  foreningstyp: [idrott, ungdom]
+  kategori: [idrott]
+  malgrupp: RF-anslutna idrottsföreningar på Gotland med barn- och ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum: ['02-25', '08-25']
+  krav:
+  - Ansluten till Riksidrottsförbundet och ha sin bas eller huvudsakliga verksamhet på Gotland
+  - Verksamheten ska avse bidragsberättigade aktiviteter för barn och unga
+  - Aktiviteterna ska närvaroregistreras och redovisas i Riksidrottsförbundets system
+  belopp: Den individuella ersättningsnivån publiceras inte på Region Gotlands stödsida
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks halvårsvis i efterhand senast 25 februari och 25 augusti
+  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan lämnas genom Riksidrottsförbundets system.
+  senast_verifierad: '2026-08-18'
+- id: gotland-resestod-idrott
+  namn: Resestöd för RF-anslutna idrottsföreningar
+  status: aktiv
+  foreningstyp: [idrott, ungdom]
+  kategori: [idrott]
+  malgrupp: RF-anslutna idrottsföreningar på Gotland med bidragsberättigade resor
+  deadlines:
+    typ: fasta
+    datum: ['01-15', '07-15']
+  krav:
+  - Ansluten till Riksidrottsförbundet och ha sin bas eller huvudsakliga verksamhet på Gotland
+  - Resan ska vara bidragsberättigad enligt RF-SISU Gotlands resebidragsregler
+  - Genomförda resor ska redovisas i RF-SISU:s resebidragssystem
+  belopp: Den individuella ersättningsnivån publiceras inte på Region Gotlands stödsida
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 januari och 15 juli
+  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan lämnas genom RF-SISU:s resebidragssystem.
+  senast_verifierad: '2026-08-18'
+- id: gotland-politiska-ungdomsforbund-grundstod
+  namn: Grundstöd till politiska ungdomsförbund
+  status: aktiv
+  foreningstyp: [ungdom, annat]
+  kategori: [ovrig]
+  malgrupp: Politiska ungdomsförbund vars moderparti är representerat i regionfullmäktige
+  deadlines:
+    typ: okand
     datum: []
   krav:
-  - Projektsökan
-  - Registrerad förening
-  belopp: 10000 kr per projekt
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Via RF-SISU och Region Gotland
-  senast_verifierad: '2026-08-03'
-- id: gotland-fritidskortet
-  namn: Fritidskortet
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Barn 7-16 år
+  - Ungdomsförbundet ska vara en egen förening registrerad hos Region Gotland
+  - Moderpartiet ska vara representerat i Region Gotlands regionfullmäktige
+  - Föreningen ska ha sin bas eller huvudsakliga verksamhet på Gotland
+  belopp: Region Gotland publicerar ingen fast individuell stödnivå på stödsidan eller e-tjänstens översikt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Region Gotland publicerar inget fast sista datum
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/1030
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet rekvireras i Region Gotlands e-tjänst.
+  senast_verifierad: '2026-08-18'
+- id: gotland-politiska-ungdomsforbund-projektstod
+  namn: Projekt- och arrangemangsstöd till politiska ungdomsförbund
+  status: aktiv
+  foreningstyp: [ungdom, annat]
+  kategori: [ovrig]
+  malgrupp: Politiska ungdomsförbund vars moderparti är representerat i regionfullmäktige
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
-  - Barn mellan 7-16 år
-  belopp: 550 kr årsstat från staten, max 2500 kr för familjer med bostadsstöd
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Statligt stöd för barn-fritidsaktiviteter
-  senast_verifierad: '2026-08-03'
+  - Ungdomsförbundet ska vara en egen förening registrerad hos Region Gotland
+  - Moderpartiet ska vara representerat i Region Gotlands regionfullmäktige
+  - Ansökan ska avse ett projekt eller arrangemang och lämnas på Region Gotlands blankett
+  - Ett beviljat och genomfört projekt eller arrangemang ska redovisas till Region Gotland
+  belopp: Region Gotland publicerar ingen fast individuell stödnivå på stödsidan eller e-tjänstens översikt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Region Gotland publicerar inget fast sista datum
+  kalla_url: https://etjanst.gotland.se/oversikt/overview/695
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan och redovisning görs på separata blanketter.
+  senast_verifierad: '2026-08-18'
+- id: gotland-kultur-arrangemangsstod
+  namn: Arrangemangsstöd kultur
+  status: aktiv
+  foreningstyp: [kultur]
+  kategori: [kultur]
+  malgrupp: Kulturorganisationer baserade på Gotland som genomför offentliga kulturarrangemang
+  deadlines:
+    typ: fasta
+    datum: ['01-20', '03-20', '08-20']
+  krav:
+  - Kulturorganisation baserad på Gotland
+  - Arrangemanget ska vara offentligt, tidsbegränsat och öppet för alla
+  - Ansökan ska lämnas före genomförandet och beskriva målgrupp, medverkande, marknadsföring och budget
+  - Organisation som får mer än 45 000 kr i verksamhetsstöd kan inte söka arrangemangsstöd
+  belopp: Beloppet prövas individuellt utifrån arrangemangets kvalitet, angelägenhet, genomförbarhet och prioriteringar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 20 januari, 20 mars och 20 augusti
+  kalla_url: https://gotland.se/kultur-och-fritid/kultur/stod-stipendier-och-priser/arrangemangsstod
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Arrangemang för barn och unga samt arrangemang under lågsäsong prioriteras.
+  senast_verifierad: '2026-08-18'
+- id: gotland-kultur-resestod
+  namn: Resestöd för kulturorganisationer
+  status: aktiv
+  foreningstyp: [kultur]
+  kategori: [kultur]
+  malgrupp: Kulturorganisationer som redan får kulturstöd från Region Gotland och behöver färjeresa för ett kulturuppdrag
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Organisationen ska redan få någon form av kulturstöd från Region Gotland
+  - Resan ska avse ett uppdrag på fastlandet eller gäster med uppdrag på Gotland
+  - Begäran om rabattkod ska ange organisation, resans syfte, antal resenärer och om resenärerna är gotlänningar eller gäster
+  belopp: 10–40 procents rabatt på ordinarie färjepris för tur och retur, upp till nio personer och ett fordon under sex meter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Region Gotland publicerar inget fast sista datum
+  kalla_url: https://gotland.se/kultur-och-fritid/kultur/stod-stipendier-och-priser/resestod
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Rabatten varierar med avgång och bokningstid; vissa avgångar vid helger och storhelger är undantagna.
+  senast_verifierad: '2026-08-18'
+- id: gotland-landsbygd-lokalstod
+  namn: Årligt lokalstöd för landsbygdernas samlingslokaler
+  status: aktiv
+  foreningstyp: [hembygd, kultur, friluft, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Ideella organisationer som äger och driver allmänna samlingslokaler på Gotlands landsbygder
+  deadlines:
+    typ: fasta
+    datum: ['11-30']
+  krav:
+  - Driva en allmän samlingslokal på Gotlands landsbygd som är tillgänglig för olika aktiviteter
+  - Fastigheten eller byggnaden ska innehas med äganderätt
+  - Föregående års årsmöteshandlingar ska skickas in till Region Gotland
+  - Ansökan ska beskriva verksamhet, kommande aktiviteter, målgrupper, marknadsföring och budget
+  belopp: Alla godkända sökande får ett grundbidrag; ytterligare medel fördelas efter verksamhet och prioriteringar
+  belopp_avser: per_forening
+  kommunens_pott: För 2026 fördelades totalt 525 000 kr
+  sen_ansokan: Ansökningsperiod 1–30 november för nästa års stöd
+  kalla_url: https://gotland.se/kultur-och-fritid/kultur/stod-stipendier-och-priser/landsbygdernas-lokaler
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Barn- och ungdomsverksamhet, helårsverksamhet, geografisk spridning och allmän tillgänglighet prioriteras.
+  senast_verifierad: '2026-08-18'
+- id: gotland-landsbygd-investeringsstod
+  namn: Investeringsstöd för landsbygdernas samlingslokaler
+  status: aktiv
+  foreningstyp: [hembygd, kultur, friluft, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Ideella organisationer som äger och driver allmänna samlingslokaler på Gotlands landsbygder
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Driva en allmän samlingslokal på Gotlands landsbygd och äga fastigheten eller byggnaden
+  - Investeringen ska förbättra lokalens tillgänglighet, användbarhet eller hållbarhet och får inte vara påbörjad
+  - Investeringen får inte delas upp på flera ansökningar
+  - Ansökan ska innehålla budget, ritningar, offerter, genomförandeplan och en beskrivning av långsiktigt underhållsbehov
+  belopp: Högst 70 procent av den totala kostnaden, maximalt 200 000 kr per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: För 2026 fördelades totalt 625 000 kr
+  sen_ansokan: Ansökningsperiod 1 januari–31 mars
+  kalla_url: https://gotland.se/kultur-och-fritid/kultur/stod-stipendier-och-priser/landsbygdernas-lokaler
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bedömningen väger in hållbarhet, tidigare användning, geografisk spridning och tillgänglighet.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: gotland-registrering
   vad: Registrering hos Region Gotland
-  beskrivning: Föreningen måste ansöka om registrering i föreningsregistret hos Region Gotland för att kunna söka bidrag.
-  system: Region Gotland föreningsregister
+  beskrivning: Föreningen ska vara ideell, allmännyttig och demokratisk samt registrerad i Region Gotlands föreningsregister för att kunna söka de flesta stöden.
+  system: Region Gotlands föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Region Gotland publicerar ingen fast handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv
-  giltighet_status: okand
+  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
+  giltighet_status: ingen_regel
 - id: gotland-kontakt
-  vad: Kontakt Region Gotland
-  beskrivning: 'För frågor om bidrag och stöd: regiongotland@gotland.se, 0498-26 90 00 eller e-tjänster på https://etjanst.gotland.se'
-  system: Region Gotland
+  vad: Årliga årsmöteshandlingar
+  beskrivning: Registrerade föreningar ska varje år lämna signerat årsmötesprotokoll, revisionsberättelse, verksamhetsberättelse samt resultat- och balansrapport. Annars avregistreras föreningen.
+  system: Region Gotlands e-tjänster
   ledtid: null
-  ledtid_text: null
-  giltigkeit: null
+  ledtid_text: Region Gotland publicerar ingen fast handläggningstid
+  giltighet: 1 år
   ordning: 2
-  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv
-  giltighet_status: okand
+  kalla_url: https://gotland.se/kultur-och-fritid/bokning-bidrag-och-foreningsliv/stod-till-fritids--och-idrottsforeningar
+  giltighet_status: kontrollast
