@@ -7,38 +7,42 @@ ansokningssystem:
   namn: Rbok
   url: https://osthammar.rbok.se/
 kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
+giltighet_regel_status: kontrollast
 bidrag:
-- id: osthammar-foreningsbidrag
-  namn: Föreningsbidrag
-  kategori:
-  - idrott
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Föreningar verksamma i Östhammars kommun
+- id: osthammar-startbidrag
+  namn: Startbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nybildade ideella föreningar i Östhammars kommun med barn- och ungdomsverksamhet
   deadlines:
-    typ: fasta
-    datum:
-    - 12-15
+    typ: relativ
+    datum: []
   krav:
   - Föreningen ska finnas och vara verksam i Östhammars kommun
   - Majoriteten av medlemmarna ska vara bosatta i kommunen
-  - Ungdomsorganisation ska ha minst 10 bidragsberättigade medlemmar i åldrarna 7–19 år
-  - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
-  - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Föreningen ska ha minst 10 medlemmar i åldern 7–19 år samt ha antagit stadgar och valt styrelse
+  - Ansökan ska lämnas inom sex månader från att föreningen bildades och bidrag lämnas inte i efterskott
+  belopp: Individuellt prövat startbidrag; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas inom sex månader från att föreningen bildades
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-investerings-utrustningsbidrag
   namn: Investerings- och utrustningsbidrag
-  kategori:
-  - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
   malgrupp: Ideella föreningar som äger eller driver anläggning eller föreningslokal
   deadlines:
     typ: fasta
@@ -46,25 +50,24 @@ bidrag:
     - 10-15
     - 11-15
   krav:
-  - Föreningen ska finnas och vara verksam i Östhammars kommun
-  - Majoriteten av medlemmarna ska vara bosatta i kommunen
-  - Ungdomsorganisation ska ha minst 10 bidragsberättigade medlemmar i åldrarna 7–19 år
-  - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
-  - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Föreningen ska vara skriven i Östhammars kommun och äga eller genom avtal driva en egen anläggning
+  - Ansökan ska avse förbättringsarbete i föreningens lokal eller anläggning, eller inköp av utrustning eller maskiner för verksamheten eller anläggningsskötseln
+  - Kultur- och fritidsnämnden prioriterar ansökningarna och beslutar inom tillgänglig budget
+  belopp: Högst 50 procent av redovisad kostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden på hösten är 15 oktober–15 november; kommunen publicerar att stöd söks vid två tillfällen per år
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-foreningslyftet
   namn: Föreningslyftet
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [kultur, idrott, social, ovrig]
   malgrupp: Allmännyttiga föreningar med projekt som stärker kommunens attraktivitet
   deadlines:
     typ: fasta
@@ -72,22 +75,26 @@ bidrag:
     - 04-20
     - 08-31
   krav:
-  - Ansökan bedöms utifrån föreningens egeninsats och hur många utöver de egna medlemmarna som får del av insatsen
+  - Sökande ska vara en allmännyttig förening eller föreningsallians med säte i kommunen, minst 10 registrerade medlemmar, antagna stadgar och demokratisk uppbyggnad
+  - Projektet ska skapa tillgängliga aktiviteter eller kultur- och idrottsmiljöer för breda målgrupper och stärka kommunens attraktivitet, utveckling eller tillväxt
+  - Ansökan ska beskriva målgrupp, syfte, kostnader, finansiering och genomförande; föreningens egeninsats och nyttan utanför den egna medlemskretsen vägs in
+  - Stöd lämnas inte till ordinarie drift, löpande underhåll, individuella redskap eller utrustning eller religiösa och politiska organisationer
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 1 miljon kronor fördelas årligen till och med 2026"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
+  belopp_avser: ren_pott
+  kommunens_pott: Totalt 1 miljon kronor fördelas årligen till och med 2026
+  sen_ansokan: Ansökan kan lämnas hela året; 2026 års publicerade beslutsdeadlines är 20 april och 31 augusti
+  kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningslyftet/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - ovrig
-  malgrupp: Registrerade föreningar
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade ungdomsorganisationer och andra bidragsberättigade ideella föreningar
   deadlines:
     typ: fasta
     datum:
@@ -99,44 +106,46 @@ bidrag:
   - Ungdomsorganisation ska ha minst 10 bidragsberättigade medlemmar i åldrarna 7–19 år
   - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
   - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Individuellt grundbidrag för ekonomisk grundtrygghet och administration; aktuell beloppsregel publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 december
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-anlaggningsstod
   namn: Anläggningsstöd
-  kategori:
-  - idrott
-  - ovrig
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kategori: [idrott, ovrig]
   malgrupp: Föreningar som äger eller driver anläggning
   deadlines:
     typ: fasta
     datum:
     - 12-15
   krav:
-  - Årlig ansökan via Rbok
-  - Föreningen ska finnas och vara verksam i Östhammars kommun
-  - Majoriteten av medlemmarna ska vara bosatta i kommunen
-  - Ungdomsorganisation ska ha minst 10 bidragsberättigade medlemmar i åldrarna 7–19 år
-  - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
-  - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Föreningen ska äga eller driva en anläggning i Östhammars kommun och uppfylla kommunens allmänna föreningskrav
+  - Stödet ska användas för att underhålla och driva en egen anläggning, exempelvis idrottsplats, elljusspår, skjutbana, tennis-, motor-, frilufts- eller ridanläggning
+  - Kultur- och fritidsnämnden besiktigar och värderar anläggningen innan beslut fattas
+  - Ansökan görs tillsammans med föreningens årliga ansökan om föreningsbidrag
+  belopp: Belopp fastställs efter kommunens besiktning och värdering av anläggningen; aktuell beloppstabell publiceras inte på stödsidan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 december
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-skotselbidrag
   namn: Skötselbidrag
-  kategori:
-  - idrott
-  - ovrig
+  foreningstyp: [idrott, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, social, ovrig]
   malgrupp: Föreningar som sköter anläggning
   deadlines:
     typ: fasta
@@ -149,18 +158,47 @@ bidrag:
   - Ungdomsorganisation ska ha minst 10 bidragsberättigade medlemmar i åldrarna 7–19 år
   - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
   - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Individuellt beslutat bidrag för skötsel av anläggning, badplats, vandringsled eller motsvarande; fast beloppsregel publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 december
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-administrationsbidrag
   namn: Administrationsbidrag
-  kategori:
-  - funktionsratt
+  foreningstyp: [social, annat]
+  kategori: [pensionar, funktionsratt, social]
+  malgrupp: Pensionärsföreningar och funktionsrättsorganisationer med minst 25 medlemmar
+  deadlines:
+    typ: fasta
+    datum:
+    - 12-15
+  krav:
+  - Årlig ansökan via Rbok
+  - Föreningen ska finnas och vara verksam i Östhammars kommun
+  - Majoriteten av medlemmarna ska vara bosatta i kommunen
+  - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
+  - Föreningen ska ha stadgar och styrelse
+  belopp: 450 kr vid 0–49 medlemmar, 900 kr vid 50–99, 1 800 kr vid 100–249, 2 700 kr vid 250–349, 3 600 kr vid 350–449 och 4 500 kr vid minst 450 medlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 december
+  kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: osthammar-verksamhetsbidrag-funktionsratt
+  namn: Verksamhetsbidrag för funktionsrättsorganisationer
+  foreningstyp: [social, annat]
+  kategori: [funktionsratt, social]
   malgrupp: Funktionsrättsorganisationer
   deadlines:
     typ: fasta
@@ -172,42 +210,22 @@ bidrag:
   - Majoriteten av medlemmarna ska vara bosatta i kommunen
   - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
   - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Fast belopp per medlem för kostnader för föreningsmöten, resor, inventarier och motionsaktiviteter; aktuell medlemsersättning publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 december
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-- id: osthammar-verksamhetsbidrag-–-funktionsratt
-  namn: Verksamhetsbidrag – funktionsrätt
-  kategori:
-  - funktionsratt
-  malgrupp: Funktionsrättsorganisationer
-  deadlines:
-    typ: fasta
-    datum:
-    - 12-15
-  krav:
-  - Årlig ansökan via Rbok
-  - Föreningen ska finnas och vara verksam i Östhammars kommun
-  - Majoriteten av medlemmarna ska vara bosatta i kommunen
-  - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
-  - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: osthammar-speciellt-bidrag
   namn: Speciellt bidrag
-  kategori:
-  - funktionsratt
-  malgrupp: Funktionsrättsorganisationer med särskilt ändamål
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  malgrupp: Bidragsberättigade ungdoms-, pensionärs- och funktionsrättsorganisationer med ett särskilt ändamål
   deadlines:
     typ: fasta
     datum:
@@ -218,14 +236,113 @@ bidrag:
   - Majoriteten av medlemmarna ska vara bosatta i kommunen
   - Pensionärs- eller handikapporganisation ska ha minst 25 medlemmar
   - Föreningen ska ha stadgar och styrelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Individuellt prövat bidrag till ett särskilt ändamål; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Skälen redovisas i den årliga ansökan senast 15 december
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: osthammar-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade ideella föreningar med ledarledda gruppaktiviteter för barn och unga
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Föreningen ska vara registrerad hos kultur- och fritidsnämnden och ansökan ska lämnas av en person som föreningsstyrelsen utsett
+  - Gruppaktiviteten ska vara planerad, ledarledd, pågå minst 60 minuter och ha 3–30 deltagare utöver ledaren
+  - Deltagarstöd lämnas för medlemmar 7–25 år; för deltagare med funktionsnedsättning finns ingen övre åldersgräns
+  - Föreningen ska föra fullständig närvaroredovisning och kunna visa den för kommunen vid kontroll
+  belopp: 13 kr i ledarstöd per gruppaktivitet, ytterligare 3 kr med minst två ledare samt 5 kr per bidragsberättigad deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 augusti för perioden januari–juni och 25 februari för perioden juli–december
+  kalla_url: https://www.osthammar.se/link/10c7d13a86a742abb63bac747ec705e5.aspx
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: osthammar-samlingslokalbidrag
+  namn: Driftbidrag till allmänna samlingslokaler
+  foreningstyp: [kultur, hembygd, social, ungdom, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Föreningar som driver allmänna samlingslokaler i Östhammars kommun
+  deadlines:
+    typ: fasta
+    datum: [10-01]
+  krav:
+  - Samlingslokalen ska opartiskt och på skäliga villkor hållas tillgänglig för föreningslivet på orten och största möjliga samnyttjande ska eftersträvas
+  - Bidragsberättigade sammankomster ska vara planerade, ha minst tre deltagare och en ansvarig ledare och får inte vara kommersiella
+  - Bidragsberättigad lokalyta ska användas för verksamhet och vara fysiskt tillgänglig för personer med funktionsnedsättning
+  - Ansökan ska innehålla budget, föregående års resultat, verksamhetsberättelse, verksamhetsrapport och revisionsberättelse
+  belopp: 50 kr per bidragsberättigad sammankomst och 65 kr per kvadratmeter godkänd lokalyta
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 oktober året före bidragsåret
+  kalla_url: https://www.osthammar.se/link/10c7d13a86a742abb63bac747ec705e5.aspx
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: osthammar-kultur-verksamhetsstod
+  namn: Verksamhetsstöd kultur
+  foreningstyp: [kultur]
+  kategori: [kultur]
+  malgrupp: Ideella kulturföreningar med säte i Östhammars kommun
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Föreningen ska ha säte i Östhammars kommun och bedriva regelbunden, långsiktig och utåtriktad kulturverksamhet som kommer allmänheten till godo
+  - Ansökan bedöms utifrån tillgänglighet, planering och genomförande, målgrupper, geografisk spridning och samarbeten
+  - Verksamhetsberättelse samt balans- och resultaträkning för senast avslutade verksamhetsår och verksamhetsplan för kommande år ska lämnas
+  - Mottagare kan bara i undantagsfall beviljas kommunens övriga kulturstöd och ska ange kommunens stöd i sin kommunikation
+  belopp: Individuellt prövat årsvis verksamhetsstöd; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 oktober året före det år ansökan gäller
+  kalla_url: https://www.osthammar.se/uppleva-och-gora/foreningar-foreningsliv/kulturstod/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: osthammar-kultur-evenemangsstod
+  namn: Evenemangsstöd kultur
+  foreningstyp: [kultur]
+  kategori: [kultur]
+  malgrupp: Ideella kulturföreningar med säte i Östhammars kommun som arrangerar offentliga kulturevenemang
+  deadlines:
+    typ: fasta
+    datum: [02-15, 05-15, 08-15, 11-15]
+  krav:
+  - Föreningen ska ha säte i Östhammars kommun och evenemanget ska vara offentligt och genomföras i kommunen
+  - Stödet täcker en del av kostnaderna; lokalkostnad godtas bara för hyrd lokal och inte för föreningens egen lokal
+  - Ansökan bedöms utifrån tillgänglighet, planering och genomförande, målgrupper, geografisk spridning och samarbeten
+  - Verksamhets- och kostnadsredovisning ska lämnas senast tre månader efter evenemanget och kommunens stöd ska anges i kommunikationen
+  belopp: Individuellt prövat stöd till en del av evenemangets kostnader; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsdagar är 15 februari, 15 maj, 15 augusti och 15 november
+  kalla_url: https://www.osthammar.se/uppleva-och-gora/foreningar-foreningsliv/kulturstod/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: osthammar-registrering
   vad: Registrering och aktuella föreningshandlingar
@@ -234,8 +351,8 @@ forutsattningar:
   system: Rbok
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Registrering och aktuella föreningshandlingar ska förnyas varje år.
   ordning: 1
   kalla_url: https://www.osthammar.se/uppleva-och-gora/stod-och-stipendier/foreningsstod/
-  giltighet_status: okand
+  giltighet_status: kontrollast
 kommunsiffra: null
