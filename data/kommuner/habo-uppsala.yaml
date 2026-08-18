@@ -7,10 +7,17 @@ ansokningssystem:
   namn: Håbo kommuns e-tjänst
   url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod.html
 kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod.html
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: habo-uppsala-aktivitetsbidrag
   namn: Aktivitetsbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -37,16 +44,19 @@ bidrag:
     vid rekrytering)
   - Närvaro ska registreras vid varje sammankomst och ledaren ska vara närvarande under hela sammankomsten
   - Aktivitetsbidrag kan inte sökas för lovverksamhet
-  belopp: null
+  belopp: Belopp per redovisat deltagartillfälle; ersättningsnivån beslutas årligen av kommunen
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sen ansökan avslås normalt
   kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/aktivitetsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
 - id: habo-uppsala-pensionar-funktionsratt
   namn: Bidrag till pensionärs- och handikappföreningar
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   - funktionsratt
@@ -66,71 +76,19 @@ bidrag:
   - Föreningens medlemmar och verksamhet ska vara försäkrade, antingen genom anslutning till riksförbund eller på annat sätt
   - Pensionärer och/eller personer med funktionsvariation ska vara föreningens huvudmålgrupp
   - Revisionsstyrkt medlemsförteckning gällande bidragsgrundande år ska bifogas ansökan
-  belopp: null
+  belopp: Belopp per medlem och år; ersättningsnivån kan revideras årligen av kommunstyrelsen
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/bidrag-till-pensionars--och-handikappforeningar.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: null
-- id: habo-uppsala-ungdomsbidrag
-  namn: Ungdomsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Ungdomar 12–18 år och föreningar/ungdomsgrupper med projekt för unga
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Sökande ska vara 12–18 år
-  - Sökande ska bo i Håbo kommun
-  - Bidraget kan sökas av ungdomar i föreningar samt av ungdomar/ungdomsgrupper som inte är föreningsanknutna
-  - Bidraget kan sökas för aktiviteter, projekt och arrangemang av och för barn och unga
-  - Redovisning ska ske på särskild blankett senast en månad efter att projektet avslutats
-  - Utbetalda pengar som inte använts i projektet ska återbetalas till kommunen
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/ungdomsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: null
-- id: habo-uppsala-projekt-publika-arrangemang
-  namn: Projektbidrag för publika arrangemang
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Föreningar, organisationer och enskilda som ordnar publika arrangemang i Håbo
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-01
-    - 04-01
-    - 10-01
-  krav:
-  - Kan sökas av organisationer (t.ex. ideell eller ekonomisk förening), enskilda personer eller grupp av enskilda personer
-  - Arrangemanget ska hålla god kvalitet och tillföra allmänheten ett brett utbud
-  - Arrangemanget ska vara öppet för allmänheten och präglas av allmänintresse
-  - Arrangemanget ska ha anknytning till Håbo kommuns område eller till kommunens medlemmar
-  - Arrangemanget ska följa kommunens allmänna bestämmelser om värdegrund
-  - Bidrag kan inte beviljas till investeringar i lokaler/utrustning, projekt med övervägande religiös eller politisk inriktning,
-    stödgalor eller annan verksamhet för välgörande ändamål, projekt med huvudsakligt syfte att främja vinst inom kommersiell
-    näringsverksamhet, projekt inom utbildning eller forskning, eller renodlad pedagogisk verksamhet
-  - Projektplan och ekonomisk plan ska bifogas ansökan
-  - Arrangören ansvarar för att arrangemanget är säkert, att nödvändiga tillstånd finns och att arrangemanget är försäkrat
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/projektbidrag-for-publika-arrangemang.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
 - id: habo-uppsala-verksamhet-publika-arrangemang
   namn: Verksamhetsbidrag för publika arrangemang
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
   kategori:
   - kultur
   - idrott
@@ -152,16 +110,19 @@ bidrag:
     näringsverksamhet, verksamhet inom utbildning eller forskning, eller renodlad pedagogisk verksamhet
   - En kalkyl ska bifogas ansökan
   - Arrangören ansvarar för att arrangemangen är säkra, att nödvändiga tillstånd finns och att arrangemangen är försäkrade
-  belopp: null
+  belopp: Inget fast belopp publiceras; ansökan prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/verksamhetsbidrag-for-publika-arrangemang.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
 - id: habo-uppsala-lokal-drift
   namn: Lokal- och driftsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -178,16 +139,19 @@ bidrag:
   - Lokalen ska hyras av annan part än kommunen (kommunalt subventionerade lokaler omfattas inte)
   - Bidraget täcker inte räntor och amorteringar för en egenägd lokal
   - Föreningen ska kunna styrka sina kostnader och intäkter och själv ansvara för underlaget
-  belopp: Upp till 50 procent av lokalkostnaden, högst 4,5 prisbasbelopp
+  belopp: Upp till 10 procent av utgifterna för vuxenverksamhet eller 50 procent för huvudsaklig barn- och ungdomsverksamhet, högst 4,5 prisbasbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/lokal--och-driftsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
 - id: habo-uppsala-projektbidrag
   namn: Projektbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -204,36 +168,124 @@ bidrag:
   - Projektet ska bidra till en hållbar utveckling av föreningens verksamhet
   - En kalkyl ska bifogas ansökan
   - Bidraget är inget generellt bidrag; prioritering görs utifrån bedömning av angelägenhetsgrad och befintliga resurser
-  belopp: null
+  belopp: Upp till 50 000 kronor per projekt; högre belopp kan beslutas i särskilda fall
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens samlingssida uppgav att bidraget var pausat under 2025; aktuell status bör kontrolleras.
+  anteckning: null
 - id: habo-uppsala-nattvandring
   namn: Nattvandringsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - social
   - ovrig
   malgrupp: Bidragsberättigade föreningar som nattvandrar
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
   krav:
   - Föreningen ska vara berättigad att söka kommunens föreningsbidrag
   - Föreningen ska engagera 6 vuxenvandrare per tilldelad nattvandringskväll
   - Föreningen ska utse en kontaktperson inom gruppen/föreningen som vandringsvärd
   - Nattvandringen sker på utvalda fredag- och lördagskvällar samt övriga utvalda kvällar och nätter utifrån behov
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Minst 2 400 kronor per genomförd nattvandringskväll; högre ersättning kan lämnas för särskilt viktiga dagar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Anmälan görs löpande till kommunens utvalda nattvandringstillfällen
+  kalla_url: https://www.habo.se/kommun-och-politik/sakerhet-och-beredskap/brottsforebyggande-arbete/trygghet-och-samverkan/nattvandring-i-habo-kommun.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
+- id: habo-uppsala-uppdragsbidrag
+  namn: Uppdragsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori:
+  - kultur
+  - idrott
+  - ovrig
+  malgrupp: Lokala föreningar och andra aktörer med kontinuerlig kultur- eller fritidsverksamhet
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Verksamheten ska komplettera, utöka eller ersätta kultur- eller fritidsverksamhet som bedrivs i kommunal eller annan regi
+  - Verksamheten ska vara av intresse och till nytta för kommuninvånarna
+  - Verksamheten ska vara utåtriktad och av stort värde för fler än de egna medlemmarna
+  - Föreningen eller aktören ska teckna en överenskommelse med kommunen om uppdragets innehåll
+  - Löpande uppdrag ska redovisas och följas upp årligen enligt överenskommelsen
+  belopp: Inget fast belopp publiceras; omfattning och ersättning fastställs i en överenskommelse med kommunen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Initiativ till uppdrag kan tas löpande genom kontakt med tillväxt- och kommunikationsenheten
+  kalla_url: https://www.habo.se/download/18.6fa2e55419613aabd98edf4f/1745323608165/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%202025.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: habo-uppsala-studieforbund
+  namn: Bidrag till studieförbund
+  foreningstyp: [kultur, annat]
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Studieförbund som är verksamma i Håbo kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-15
+  krav:
+  - Studieförbundet ska omfattas av kommunens regler och bedriva verksamhet i Håbo kommun
+  - Endast statsbidragsberättigad verksamhet i Håbo kommun får ligga till grund för bidrag
+  - Ansökan ska innehålla sökande, konto, kontaktperson, organisationsnummer, ansvarig uppgiftslämnare och verksamhetsplan
+  - Verksamhetsberättelse, bokslut, revisionsberättelse och statistik från Folkbildningsrådet ska redovisas
+  - Organisationen ska på kommunens begäran ställa räkenskaper och redovisningshandlingar till förfogande
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas mellan behöriga studieförbund efter organisations-, tillgänglighets- och verksamhetsmått
+  sen_ansokan: Ansökan ska vara inlämnad senast 15 februari varje år
+  kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod/studieforbund.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: habo-uppsala-socialtjanstens-foreningsbidrag
+  namn: Föreningsbidrag inom socialtjänstens område
+  foreningstyp: [social, annat]
+  kategori:
+  - social
+  - pensionar
+  - funktionsratt
+  malgrupp: Lokala föreningar och organisationer med verksamhet inom socialnämndens eller vård- och omsorgsnämndens område
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-30
+  krav:
+  - Föreningen eller organisationen ska vara lokal och bedriva verksamhet med anknytning till nämndens verksamhetsområde
+  - Verksamheten ska innehålla fritidskvalitet, stöd- eller hjälpinsatser för Håbo kommuns invånare
+  - Verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse för föregående räkenskapsår ska bifogas
+  - Budget och plan för hur det sökta bidraget ska användas ska bifogas
+  - Sökta och beviljade bidrag från andra bidragsgivare ska redovisas
+  - Samtliga handlingar ska vara aktuella och högst ett år gamla
+  belopp: Inget fast belopp publiceras; ansökan prövas individuellt inom nämndens budgetram
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april för det aktuella året
+  kalla_url: https://www.habo.se/omsorg-och-stod/ekonomiskt-stod-och-radgivning/fonder-bidrag-stipendier/foreningsbidrag-inom-socialtjanstens-omrade.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 forutsattningar:
 - id: habo-uppsala-registrering
   vad: Registrering och aktuella föreningshandlingar
@@ -244,6 +296,6 @@ forutsattningar:
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://www.habo.se/omsorg-och-stod/ekonomiskt-stod-och-radgivning/fonder-bidrag-stipendier.html
-  giltighet_status: okand
+  kalla_url: https://www.habo.se/uppleva-och-gora/foreningar/bidrag-och-stod.html
+  giltighet_status: ingen_regel
 kommunsiffra: null
