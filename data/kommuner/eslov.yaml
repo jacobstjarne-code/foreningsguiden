@@ -2,126 +2,317 @@ kommun: Eslöv
 kommun_slug: eslov
 lan: Skåne län
 befolkning: 35082
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsförvaltningen samt Miljö och Samhällsbyggnad
 ansokningssystem:
-  namn: Rbok e-tjänster (BankID)
-  url: https://eslov.se/uppleva-gora/foreningar-och-studieforbund/bidrag-stod-och-stipendier/
+  namn: Rbok
+  url: https://eslov.rbok.se/ansok
 kalla_url: https://eslov.se/uppleva-gora/foreningar-och-studieforbund/bidrag-stod-och-stipendier/
-verifierad: '2026-08-02'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: sammansatt
+  antal: null
+  datum: null
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- id: eslov-arrangemangsstod
-  namn: Arrangemangsstöd
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för offentliga arrangemang
+- id: eslov-lokalsubvention
+  namn: Lokalsubvention
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Stödberättigade ideella idrotts-, fritids- och kulturföreningar samt kulturstiftelser i Eslövs kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen eller stiftelsen ska vara godkänd som stödberättigad i Rbok för det aktuella året
+  - Sökanden ska uppfylla kommunens formella krav och demokrativillkor
+  - Subventionen gäller bokning av kommunens lokaler och anläggningar med beslutade föreningstaxor eller hyresavtal
+  belopp: Subventionerad taxa eller hyra vid bokning av kommunens lokaler; någon generell rabattnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökan görs; subventionen ges automatiskt när en stödberättigad förening bokar kommunens lokaler.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningen behöver förnya sin status som stödberättigad efter varje årsmöte för att behålla lokalsubventionen.
+  senast_verifierad: '2026-08-18'
+- id: eslov-grundstod
+  namn: Grundstöd
+  kategori: [pensionar, funktionsratt]
+  malgrupp: Ideella pensionärs- och funktionshindersföreningar med aktiva fullvärdiga medlemmar folkbokförda i Eslövs kommun.
+  foreningstyp: [social]
   deadlines:
     typ: fasta
-    datum:
-    - 10-31
+    datum: [02-01]
   krav:
-  - Arrangementet ska vara offentligt
-  - Ansökan före deadline året innan
-  belopp: null
-  sen_ansokan: Ej möjlig efter 31 oktober
-  kalla_url: https://eslov.se/uppleva-gora/foreningar-och-studieforbund/bidrag-stod-och-stipendier/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  senast_verifierad: '2026-08-03'
-- id: eslov-snabbstod
-  namn: Snabbstöd
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Unga organisatörer och föreningar
+  - Föreningen ska vara godkänd som stödberättigad i Rbok för det aktuella året
+  - Endast aktiva fullvärdiga medlemmar folkbokförda i Eslövs kommun får räknas
+  - Medlemsförteckningen ska styrka antalet stödberättigade medlemmar och bifogas ansökan
+  - Föreningen får välja grundstöd eller lokalt aktivitetsstöd för samma verksamhetsår, inte båda
+  belopp: Högst 50 kr per aktiv fullvärdig medlem; nivån kan justeras efter kommunens budgetförutsättningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar ger 20 procents avdrag och senare ansökningar behandlas inte.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Passiva medlemmar och stödmedlemmar är inte bidragsgrundande.
+  senast_verifierad: '2026-08-18'
+- id: eslov-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  kategori: [idrott, pensionar, funktionsratt, ovrig]
+  malgrupp: Stödberättigade föreningar med regelbundna ledarledda gruppaktiviteter för deltagare 6–25 år, deltagare 65+ eller personer med funktionsnedsättning.
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [02-25, 08-25]
   krav:
-  - Kan ansökas löpande året om
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://eslov.se/uppleva-gora/foreningar-och-studieforbund/bidrag-stod-och-stipendier/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  senast_verifierad: '2026-08-03'
-- id: eslov-idrott-fritid
-  namn: Stöd inom idrott och fritid
-  kategori:
-  - idrott
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Idrotts-, scout-, funktionsrätts- och pensionärsföreningar
+  - Aktiviteten ska vara planerad av föreningen, ledas av en medlem som fyller minst 13 år och pågå minst 45 minuter
+  - Minst tre stödberättigade deltagare ska delta och högst 20 deltagare får räknas per ledare
+  - Närvaro ska registreras digitalt och underlaget sparas i minst två år
+  - Verksamheten ska bedrivas regelbundet under året och får inte enbart bestå av lovverksamhet, möten eller öppen verksamhet
+  belopp: Fast stöd per ledarledd gruppaktivitet, extra ledarstöd vid minst två ledare samt deltagarstöd med nivå efter åldersgrupp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar ger 20 procents avdrag och senare ansökningar behandlas inte.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Februariansökan avser juli–december och augustiansökan avser januari–juni. Deltagare med funktionsnedsättning saknar övre åldersgräns.
+  alder_min: 6
+  alder_max: 25
+  senast_verifierad: '2026-08-18'
+- id: eslov-lokalkompensationsstod
+  namn: Lokalkompensationsstöd
+  kategori: [idrott, pensionar, funktionsratt, ovrig]
+  malgrupp: Stödberättigade föreningar som äger eller långsiktigt driver en lokal eller anläggning som kommunen inte kan ersätta med ett lämpligt alternativ.
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [04-01]
   krav:
-  - Ansökan görs via kommunens boknings- och bidragssystem Rbok
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://eslov.se/uppleva-gora/foreningar-och-studieforbund/bidrag-stod-och-stipendier/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska ha fått lokalt aktivitetsstöd eller grundstöd under samma verksamhetsår
+  - Föreningen ska äga anläggningen eller ha ett långsiktigt hyres- eller nyttjanderättsavtal
+  - Lokalen eller anläggningen ska ligga i Eslövs kommun och vara godkänd av kultur- och fritidsförvaltningen före ansökan
+  - Kostnader för redan subventionerade kommunala lokaler och entrébelagda arrangemang får inte tas med
+  belopp: 30 procent av stödberättigad hyres- eller driftskostnad samt ersättning per redovisad sammankomst för föreningar med lokalt aktivitetsstöd
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar ger 20 procents avdrag och senare ansökningar behandlas inte.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Värme, el, vatten, avlopp, arrende, sophämtning och lokalens försäkring kan ingå. Ridsport kan få förstärkt ersättning per sammankomst.
+  senast_verifierad: '2026-08-18'
+- id: eslov-investeringsstod
+  namn: Investeringsstöd
+  kategori: [idrott, pensionar, funktionsratt, ovrig]
+  malgrupp: Stödberättigade föreningar som planerar framtida investeringar i en egen eller långsiktigt disponerad lokal eller anläggning.
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  deadlines:
+    typ: fasta
+    datum: [06-01]
+  krav:
+  - Föreningen ska ha fått både lokalt aktivitetsstöd och lokalkompensationsstöd under samma verksamhetsår
+  - Föreningen ska äga eller långsiktigt disponera anläggningen och den ska ligga i Eslövs kommun
+  - Investeringen ska vara framtida och får inte vara genomförd före ansökan
+  - Föreningen ska finansiera resterande kostnad med andra stöd, bidrag, lån eller egna medel
+  belopp: Högst 50 procent av stödberättigad kostnad och maximalt 50 000 kr per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar efter 1 juni behandlas inte.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Förbrukningsmaterial, lös inredning och löpande driftkostnader omfattas inte.
+  senast_verifierad: '2026-08-18'
+- id: eslov-utvecklingsstod
+  namn: Utvecklingsstöd
+  kategori: [idrott, pensionar, funktionsratt, ovrig]
+  malgrupp: Stödberättigade föreningar som vill utveckla, förbättra eller förnya sin verksamhet genom en satsning eller ett projekt.
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  deadlines:
+    typ: fasta
+    datum: [05-01, 11-01]
+  krav:
+  - Föreningen ska ha fått lokalt aktivitetsstöd under samma verksamhetsår
+  - Satsningen ska utveckla föreningens verksamhet och ligga i linje med kommunens övergripande och fritidspolitiska mål
+  - Ansökan ska beskriva projekt, syfte, målgrupp, tidsplan och budget inför ett dialogmöte med kommunen
+  - Stödet är främst avsett för projekt och utvecklingsinsatser, inte fristående inköp av utrustning
+  belopp: Stödet fastställs efter dialog och individuell prövning; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1 maj gäller projektstart på höstterminen och 1 november gäller projektstart på vårterminen; senare ansökningar behandlas inte.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beviljat stöd ska återrapporteras senast ett år efter beslutet.
+  senast_verifierad: '2026-08-18'
+- id: eslov-arrangemangsstod
+  namn: Stöd till kulturarrangemang
+  kategori: [kultur]
+  malgrupp: Ideella kulturföreningar och kulturstiftelser utan vinstsyfte, med säte i Eslövs kommun.
+  foreningstyp: [kultur, hembygd, ungdom, annat]
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Sökanden ska vara en stödberättigad ideell förening eller stiftelse utan vinstsyfte och ha säte i Eslövs kommun
+  - Arrangemanget ska vara offentligt, ha kulturinriktning och genomföras i Eslövs kommun eller efter undantag inom Biosfärområdet Storkriket
+  - Stöd ges inte till interna, vinstdrivande, tydligt religiösa eller politiska arrangemang, investeringar, mat eller dryck
+  - Beviljat stöd ska framgå i marknadsföringen och återrapporteras i Rbok
+  belopp: Stödet fastställs efter bedömning av kvalitet, genomförbarhet och den samlade geografiska, genremässiga och målgruppsmässiga bredden; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 oktober året före arrangemanget.
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stöd ges i första hand till kulturinnehåll som arvoden, resor för kulturutövare, scenteknik, licenser och workshopmaterial.
+  senast_verifierad: '2026-08-18'
+- id: eslov-foreningar-pa-stan
+  namn: Föreningar på stan – kvälls- och nattvandring
+  kategori: [ovrig]
+  malgrupp: Föreningar som vill bidra till kommunens trygghetsskapande arbete genom kvälls- och nattvandring i Eslöv.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines:
+    typ: fasta
+    datum: [08-30]
+  krav:
+  - Minst två personer från föreningen ska delta i varje vandring
+  - Vandringen ska genomföras under en komplett sex timmars kväll mellan klockan 18 och 24
+  - Deltagarna ska synas ute och får inte agera eller ingripa i händelser
+  - Föreningen ska lämna återrapportering efter avslutad vandring
+  belopp: 1 000 kr per komplett sex timmars vandring
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Höstterminens ansökan 2026 var öppen 22 juni–30 augusti.
+  kalla_url: https://eslov.rbok.se/ansok
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Vandringarna sker på fredagar och lördagar. Utbetalning görs halvårsvis i december.
+  senast_verifierad: '2026-08-18'
 - id: eslov-studieforbund
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund med verksamhet i Eslövs kommun
+  kategori: [kultur, ovrig]
+  malgrupp: Statsbidragsgodkända studieförbund med folkbildnings- och kulturverksamhet i Eslövs kommun.
+  foreningstyp: [kultur, social, annat]
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Studieförbundets centrala organisation ska vara godkänd för statsbidrag av Folkbildningsrådet
+  - Studieförbundet ska bedriva verksamhet i Eslövs kommun
+  - Verksamhetsplan med mål och riktlinjer samt årlig skriftlig och muntlig redovisning ska lämnas
+  - Verksamhet och ekonomi i Eslöv ska kunna särskiljas om avdelningen omfattar flera kommuner
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens totala studieförbundsanslag fördelas som 70 procent grundbidrag, 15 procent volymbidrag och 15 procent målgruppsbidrag
+  sen_ansokan: Ansökningshandlingar och bidragsunderlag ska lämnas senast 30 april.
+  kalla_url: https://eslov.se/app/uploads/studieforbundsbidrag-regler.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Volymdelen beräknas på deltagartimmar. Målgruppsdelen avser verksamhet för bland annat arbetslösa, personer med funktionsnedsättning och invandrare.
+  senast_verifierad: '2026-08-18'
+- id: eslov-driftbidrag-vagsamfallighet
+  namn: Driftbidrag till vägsamfälligheter
+  kategori: [ovrig]
+  malgrupp: Vägsamfälligheter, ideella föreningar och godkända samarbeten som ansvarar för minst 400 meter enskild väg öppen för allmän motorfordonstrafik.
+  foreningstyp: [hembygd, annat]
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Vägen ska vara en enskild väg för allmän motorfordonstrafik och ligga inom Eslövs kommun
+  - Väghållningen ska skötas av en vägsamfällighet, ideell förening eller ett kommunalt godkänt samarbete mellan väghållare
+  - Den sammanlagda stödberättigade väglängden ska vara minst 400 meter och får inte avse enskilda fastigheters utfarter
+  - Vägen ska hållas öppen för allmän trafik och vara tillgänglig för kommunens kontroll
+  belopp: Basnivå 2,07 kr per löpmeter för vägsamfällighet med statligt bidrag och 6,51 kr per löpmeter utan statligt bidrag; nivåerna indexjusteras årligen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas 1 januari–30 april året efter bidragsåret. Ansökan krävs minst vart tredje år eller på kommunens begäran.
+  kalla_url: https://eslov.se/app/uploads/bestammelser-for-kommunalt-bidrag-till-enskild-vaghallning-antagna.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Basnivåerna avser 2022 och räknas årligen om med Trafikverkets kostnadsindex.
+  senast_verifierad: '2026-08-18'
+- id: eslov-vagforeningsbidrag
+  namn: Vägföreningsbidrag
+  kategori: [ovrig]
+  malgrupp: Vägföreningar som ansvarar för minst 400 meter enskild väg öppen för allmän motorfordonstrafik i Eslövs kommun.
+  foreningstyp: [hembygd, annat]
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Verksamheten ska följa kommunens regler för studieförbundsbidrag
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://eslov.se/kommun-politik/kommunfakta/regler-och-styrande-dokument/bidragsnormer/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
-- id: eslov-enskild-vag
-  namn: Kommunalt bidrag till enskild väghållning
-  kategori:
-  - ovrig
-  malgrupp: Vägföreningar och väghållare för enskilda vägar
+  - Vägen ska vara en enskild väg för allmän motorfordonstrafik och ligga inom Eslövs kommun
+  - Väghållningen ska skötas av en vägförening i ett detaljplanerat, tättbebyggt område
+  - Den sammanlagda stödberättigade väglängden ska vara minst 400 meter och får inte avse enskilda fastigheters utfarter
+  - Bidraget ska användas till drift och underhåll och vägen ska vara öppen för allmän trafik
+  belopp: Basnivå 31,76 kr per löpmeter, indexjusterad årligen efter Trafikverkets kostnadsindex
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen ansökan krävs normalt; kommunen kan begära att vägföreningen lämnar en ansökan.
+  kalla_url: https://eslov.se/app/uploads/bestammelser-for-kommunalt-bidrag-till-enskild-vaghallning-antagna.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Basnivån avser 2022. Utbetalning görs senast i juni varje år.
+  senast_verifierad: '2026-08-18'
+- id: eslov-sarskilt-byggnadsbidrag-vag
+  namn: Särskilt byggnadsbidrag för enskild väg
+  kategori: [ovrig]
+  malgrupp: Vägföreningar, vägsamfälligheter, ideella föreningar och godkända samarbeten som planerar en standardhöjande åtgärd på en stödberättigad enskild väg.
+  foreningstyp: [hembygd, annat]
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Vägen ska omfattas av kommunens bestämmelser för enskild väghållning
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://eslov.se/kommun-politik/kommunfakta/regler-och-styrande-dokument/bidragsnormer/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  - Åtgärden ska höja vägens standard och avse en stödberättigad enskild väg i Eslövs kommun
+  - Ansökan ska innehålla ritning eller skiss, en högst 120 dagar gammal offert och en beskrivning av åtgärd, plats och syfte
+  - Besked från Trafikverket ska bifogas när statligt bidrag kan lämnas
+  - Kommunen ska ges möjlighet att kontrollera arbetet och delta i slutbesiktningen
+  belopp: Högst 90 procent av beräknad kostnad inklusive eventuellt bidrag från Trafikverket
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas före arbetet; kommunen publicerar inget fast sista ansökningsdatum.
+  kalla_url: https://eslov.se/app/uploads/bestammelser-for-kommunalt-bidrag-till-enskild-vaghallning-antagna.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas ut när arbetet är slutfört och godkänt. Vid större arbeten kan delutbetalning göras mot underlag.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: eslov-rbok
-  vad: Ansökan via Rbok e-tjänster
-  beskrivning: Ansökningar görs via Rbok med BankID-inloggning baserat på roll tilldelad av förening.
+  vad: Registrera föreningen och bli stödberättigad i Rbok
+  beskrivning: Föreningen registreras i Rbok och skickar därefter in årsmötesprotokoll, verksamhetsberättelse och ekonomisk redovisning samt godkänner kommunens formella krav och demokrativillkor.
   system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid.
+  giltighet: Godkännandet gäller i ett år och längst till nästa årsmöte. Efter årsmötet måste föreningen skicka in en ny ansökan för att behålla tillgången till stöd och lokalsubventioner.
   ordning: 1
-  kalla_url: https://friwebb.eslov.se/bidrag/
-  giltighet_status: okand
+  kalla_url: https://eslov.se/app/uploads/reviderade-riktlinjer-for-stod-till-kultur-och-foreningslivet-i-eslovs-kommun-att-galla-fran-1-juli-2026.pdf
+  giltighet_status: kontrollast
+kommunsiffra: null
