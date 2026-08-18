@@ -7,30 +7,42 @@ ansokningssystem:
   namn: Actor
   url: https://sjogrenska.knivsta.se/
 kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier
-verifierad: '2026-08-02'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier
+giltighet_regel_status: kontrollast
 bidrag:
 - id: knivsta-grundstod-barn-ungdom
   namn: Grundstöd – barn och ungdom
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
   malgrupp: Bidragsberättigade barn- och ungdomsföreningar
   deadlines:
     typ: fasta
-    datum:
-    - 02-15
-    - 05-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [05-01]
+  krav:
+  - Föreningen ska vara ideell, uppfylla kommunens generella krav och vara ansluten till ett godkänt riks-, region- eller distriktsförbund
+  - Föreningen ska ha minst 10 betalande och regelbundet aktiva medlemmar i åldern 0–25 år samt minst 10 bidragsberättigade aktivitetstillfällen per år
+  - Ansökan ska innehålla verksamhetsberättelse, årsmötesprotokoll, ekonomisk redovisning, revisionsberättelse, förbundsbevis och medlemsantal
+  belopp: Fast summa per bidragsberättigad medlem 0–25 år; aktuell summa publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 februari–1 maj
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-aktivitetsstod-barn-ungdom
   namn: Aktivitetsstöd – barn och ungdom
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   malgrupp: Bidragsberättigade barn- och ungdomsföreningar
@@ -39,37 +51,50 @@ bidrag:
     datum:
     - 02-25
     - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Föreningen ska vara en bidragsberättigad barn- och ungdomsförening och ha genomfört minst fem bidragsberättigade aktivitetstillfällen under terminen
+  - Varje aktivitet ska vara ledarledd, pågå minst 60 minuter och omfatta minst tre deltagande medlemmar i åldern 0–25 år
+  - Vid gemensamma aktiviteter får föreningen bara redovisa egna medlemmar; prova-på-deltagare får räknas i rekryteringssyfte
+  belopp: Fast belopp per bidragsberättigad deltagare och aktivitetstillfälle; aktuell summa publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 februari respektive 25 augusti för föregående termin
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-ledarutbildningsstod
   namn: Ledarutbildningsstöd
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
   malgrupp: Barn- och ungdomsföreningar som utbildar ledare
   deadlines:
     typ: fasta
-    datum:
-    - 01-15
-    - 10-31
-  krav: []
+    datum: [10-31]
+  krav:
+  - Föreningen ska vara en bidragsberättigad barn- och ungdomsförening
+  - Utbildningen ska vara genomförd av ett riks-, region- eller distriktsförbund, en lokal förening eller ett relevant företag och huvudsakligen gälla ledarskap för barn och unga
+  - Deltagaren ska vara minst 13 år och ha eller förväntas få ett ledaruppdrag i föreningen
+  - Ansökan ska lämnas senast tre månader efter utbildningen och redovisa kurs-, rese- och boendekostnader
   belopp: Upp till 75 % av godkända kostnader
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 januari–31 oktober och senast tre månader efter avslutad utbildning
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-projektstod
   namn: Projektstöd
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -77,20 +102,26 @@ bidrag:
   malgrupp: Barn- och ungdomsföreningar som genomför tidsbegränsade utvecklingsprojekt
   deadlines:
     typ: fasta
-    datum:
-    - 01-15
-    - 11-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [11-15]
+  krav:
+  - Föreningen ska vara en bidragsberättigad barn- och ungdomsförening
+  - Projektet ska vara tidsbegränsat, ha tydlig start och sluttid, tydligt mål, definierad budget och utsedd projektledare
+  - Insatsen ska ligga utanför eller bredda föreningens ordinarie verksamhet och vara praktiskt genomförbar
+  - Projekt som främjar jämställdhet, hållbarhet, integration, tillgänglighet, samarrangemang eller möjlighet för många att delta prioriteras
+  belopp: Individuellt beslutat projektstöd efter helhetsbedömning; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 januari–15 november
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-lovstod
   namn: Lovstöd
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -104,55 +135,74 @@ bidrag:
     - 05-11
     - 10-18
     - 11-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Föreningen ska vara en bidragsberättigad barn- och ungdomsförening och aktiviteten ska genomföras under ett av kommunens fastställda skollov
+  - Aktiviteten ska rikta sig till allmänheten och huvudsakligen barn och unga i Knivsta kommun, ha minst en ledare och vara kostnadsfri
+  - Genomförandet ska välkomna barn med olika förkunskaper och behov och kommunens stöd ska anges i marknadsföringen
+  - Jämställdhet, hållbarhet, integration, tillgänglighet, samarrangemang och möjlighet för många att delta prioriteras
+  belopp: Individuellt beräknat utifrån antal timmar, ledare och materialkostnader; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Löpande lovdeadlines 2026 enligt kommunens tabell
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Deadlines avser loven 2026.
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-ridsportsstod
   namn: Ridsportsstöd
+  foreningstyp: [idrott, ungdom]
   kategori:
   - idrott
   malgrupp: Bidragsberättigade barn- och ungdomsföreningar inom ridsport
   deadlines:
     typ: fasta
-    datum:
-    - 01-15
-    - 02-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [02-25]
+  krav:
+  - Föreningen ska vara en bidragsberättigad barn- och ungdomsförening med regelbunden ridskoleverksamhet och minst 1 000 bidragsberättigade deltagartillfällen per år
+  - Föreningen ska äga anläggningen eller ha minst fem års nyttjanderätt med minst ett år kvar efter ansökningsperioden
+  - Hästvälfärden ska vara godkänd av ridsportförbundet och ridlärare ska ha godkänd utbildning och ha lämnat polisregisterutdrag
+  - Driftkostnader, medlemmar, uppsittningar, hästar och hyresintäkter ska redovisas
+  belopp: Behovsprövat utifrån medlemmar, uppsittningar och godkända driftkostnader, högst 75 procent av anläggningens totala driftkostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 januari–25 februari
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-grundstod-pensionar
   namn: Grundstöd – pensionär
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   malgrupp: Bidragsberättigade pensionärsföreningar
   deadlines:
     typ: fasta
-    datum:
-    - 01-15
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [03-01]
+  krav:
+  - Föreningen ska vara ideell, uppfylla kommunens generella krav och vara ansluten till en godkänd riksorganisation
+  - Föreningen ska ha minst 10 pensionärsmedlemmar som har betalat årets medlemsavgift samt minst 10 bidragsberättigade aktivitetstillfällen per år
+  - Ansökan ska innehålla verksamhetsberättelse, årsmötesprotokoll, ekonomisk redovisning, revisionsberättelse, förbundsbevis och medlemsantal
+  belopp: Fast summa per bidragsberättigad medlem; aktuell summa publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 januari–1 mars
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-pensionarsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-aktivitetsstod-pensionar
   namn: Aktivitetsstöd – pensionär
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   malgrupp: Bidragsberättigade pensionärsföreningar
@@ -161,55 +211,72 @@ bidrag:
     datum:
     - 02-25
     - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Föreningen ska vara en bidragsberättigad pensionärsförening
+  - Aktiviteten ska anordnas av föreningen, pågå minst 60 minuter och ha minst fem bidragsberättigade pensionärsmedlemmar med betald medlemsavgift
+  - Aktiviteten får inte få annat bidrag, vara inkomstbringande eller innehålla alkohol och ska redovisas på kommunens aktivitetskort
+  belopp: Fast belopp per bidragsberättigad deltagare och aktivitetstillfälle; aktuell summa publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars respektive 25 augusti för föregående termin
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-pensionarsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-grundstod-bygdegard
   namn: Grundstöd – bygdegård
+  foreningstyp: [kultur, hembygd, social, annat]
   kategori:
   - ovrig
   malgrupp: Bidragsberättigade bygdegårdsföreningar
   deadlines:
     typ: fasta
-    datum:
-    - 03-15
-    - 05-01
-  krav: []
+    datum: [05-01]
+  krav:
+  - Föreningen ska uppfylla kommunens generella krav och vara ansluten till och godkänd av Bygdegårdarnas Riksförbund
+  - Föreningen ska ha minst 10 bidragsberättigade aktivitetstillfällen per år och eventuell uthyrning ska ske till aktörer som följer lag och icke-diskrimineringsprincipen
+  - Ansökan ska innehålla verksamhetsberättelse, årsmötesprotokoll, ekonomisk redovisning, revisionsberättelse och förbundsbevis
   belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag för grundstöd delas lika mellan alla bidragsberättigade bygdegårdsföreningar; totalsumman publiceras inte
+  sen_ansokan: Ansökningsperiod 15 mars–1 maj
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-bygdegardsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-aktivitetsstod-bygdegard
   namn: Aktivitetsstöd – bygdegård
+  foreningstyp: [kultur, hembygd, social, annat]
   kategori:
   - ovrig
   malgrupp: Bidragsberättigade bygdegårdsföreningar
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
-    - 10-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [10-01]
+  krav:
+  - Föreningen ska vara en bidragsberättigad bygdegårdsförening
+  - Aktiviteten ska anordnas i bygdegårdens, en annan förenings, kyrkans eller ett annat samfunds regi
+  - Arrangemang som innehåller alkohol är inte bidragsberättigade och föreningen ska redovisa föregående verksamhetsårs aktiviteter
+  belopp: Fast belopp per bidragsberättigat aktivitetstillfälle; aktuell summa publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 25 augusti–1 oktober för verksamhetsåret 1 september–31 augusti
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-bygdegardsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-anlaggningsstod
   namn: Anläggningsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -217,20 +284,26 @@ bidrag:
   malgrupp: Bidragsberättigade föreningar som driver egen anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 12-01
-    - 02-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [02-25]
+  krav:
+  - Föreningen ska vara bidragsberättigad barn- och ungdoms-, pensionärs-, bygdegårds- eller kulturförening
+  - Föreningen ska ha sökt aktivitetsstöd för minst 10 aktiviteter föregående år
+  - Föreningen ska äga anläggningen eller ha minst fem års nyttjanderätt med minst ett års återstående giltighet vid ansökningsperiodens slut
+  - Driftkostnaderna ska vara löpande och tydligt knutna till anläggningen; personal, större underhåll och verksamhetskostnader godtas inte
+  belopp: Fast grundsumma plus belopp per stödberättigad sammankomst, sammanlagt högst 80 procent av anläggningens godkända driftkostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 1 december–25 februari
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-underhallsstod
   namn: Underhållsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -238,57 +311,95 @@ bidrag:
   malgrupp: Bidragsberättigade föreningar för investeringar och fysiska förbättringar i egen anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 02-15
-    - 10-31
-  krav: []
+    datum: [10-31]
+  krav:
+  - Föreningen ska vara bidragsberättigad och äga anläggningen eller ha minst fem års nyttjanderätt med minst ett år kvar efter ansökningsperioden
+  - Insatsen ska avse underhåll, fysisk förbättring eller tillgänglighetsanpassning som går utöver löpande drift
+  - Föreningens eget kapital och arbete ska motsvara minst 50 procent av kostnaden och budget med externa finansiärer ska bifogas
+  - Genomförd insats får vara högst ett år gammal eller planerad att starta inom 18 månader; planerade och akuta åtgärder prioriteras
   belopp: Högst 50 % av total kostnad
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 februari–31 oktober
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/stod-till-barn--och-ungdomsforeningar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-startstod
   namn: Startstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Nybildade föreningar i Knivsta kommun
   deadlines:
     typ: fasta
-    datum:
-    - 02-15
-    - 10-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [10-31]
+  krav:
+  - Föreningen ska vara nybildad, ha säte och verksamhet i Knivsta kommun och vara en bygdegårdsförening eller bedriva verksamhet för barn, unga eller pensionärer
+  - Föreningen ska ha genomfört konstituerande årsmöte och antagit stadgar
+  - Budget och verksamhetsplan för föreningens första år ska vara upprättade och ansökan ska lämnas senast 12 månader efter bildandet
+  belopp: Fast startbelopp till godkända föreningar; aktuell summa publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 februari–31 oktober och senast 12 månader efter att föreningen bildades
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/foreningsgemensamma-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: knivsta-funktionsstod
   namn: Funktionsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - funktionsratt
   - ovrig
   malgrupp: Föreningar som bedriver eller tillgängliggör verksamhet för personer med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 02-15
-    - 10-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+    datum: [10-31]
+  krav:
+  - Föreningen ska uppfylla kommunens krav för en bidragsberättigad eller övrig förening
+  - Insatsen ska bedriva eller tillgängliggöra verksamhet för personer med funktionsnedsättning eller strategiskt förbättra deras förutsättningar
+  - Ansökan ska beskriva genomförd eller planerad aktivitet, ledarutbildning eller investering och innehålla relevant budget eller ekonomisk redovisning
+  belopp: Individuellt prövat stöd för aktiviteter, ledarutbildning eller tillgänglighetsinvesteringar; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 februari–31 oktober
   kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier/foreningsgemensamma-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: knivsta-konsertkarusellen
+  namn: Konsertkarusellen
+  foreningstyp: [kultur, hembygd, social, ungdom, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar i Knivsta kommun som vill arrangera en konsert i Musik i Upplands Konsertkarusell
+  deadlines:
+    typ: fasta
+    datum: [05-15]
+  krav:
+  - Sökande ska vara en förening verksam i Knivsta kommun; kulturorienterade föreningar har företräde men alla föreningar får ansöka
+  - Föreningen ska arrangera tilldelad konsert, sälja biljetter och marknadsföra arrangemanget
+  - Efter konserten ska föreningen lämna en redovisning med kommentarer om arrangemanget och en ekonomisk redogörelse
+  belopp: Arrangörsföreningen får behålla biljettintäkterna; något separat fast stödbelopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 1 mars–15 maj; konserterna fördelas i maj eller juni
+  kalla_url: https://knivsta.se/download/18.3fecf55318383cc18ff29ee0/1665570541333/Regler%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20i%20Knivsta%20kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: knivsta-registrering
   vad: Registrering och aktuella föreningshandlingar
@@ -297,8 +408,8 @@ forutsattningar:
   system: Actor
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Status som bidragsberättigad förening förnyas varje år genom ansökan om grundstöd.
   ordning: 1
-  kalla_url: https://sjogrenska.knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier
-  giltighet_status: okand
+  kalla_url: https://knivsta.se/uppleva-och-gora/foreningsliv/foreningsstod-och-stipendier
+  giltighet_status: kontrollast
 kommunsiffra: null
