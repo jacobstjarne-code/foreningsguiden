@@ -4,38 +4,85 @@ lan: Skåne län
 befolkning: 17693
 forvaltning: Kultur-, arbete- och folkhälsonämnden
 ansokningssystem:
-  namn: E-tjänster (frihr.unikom.se)
-  url: https://etjanster.hoor.se/
+  namn: InterbookFRI och Höörs e-tjänster
+  url: https://hoor.interbookfri.se/
 kalla_url: https://www.hoor.se/uppleva-och-gora/foreningar-och-foreningsliv/
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &ungdom https://www.hoor.se/wp-content/uploads/kaf_bestammelser_barn_och_ungdomsverksamhet_antagna_av_kf-2019_10_23.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- id: hoor-startbidrag
-  namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Nya föreningar
-  deadlines:
-    typ: lopande
-    datum: []
+- id: hoor-startbidrag-kultur
+  namn: Startbidrag – kulturföreningar
+  foreningstyp: [kultur, hembygd]
+  kategori: [kultur]
+  malgrupp: Nybildade ideella kulturföreningar
+  deadlines: { typ: fasta, datum: [11-30] }
   krav:
-  - Ny förening
-  - Ej varit aktiv i kommunen förra 3 åren
-  - Stadgar
-  - Organisationscertifikat vid behov
-  belopp: 'Kulturförening: ingen fast beloppsgräns, prövning i varje enskilt fall. Barn-/ungdomsförening: högst 3 000 kronor
-    (engångsbelopp).'
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://etjanster.hoor.se/oversikt/overview/191
+  - Föreningen ska vara nybildad, ideell och registrerad i Höörs föreningsregister
+  - Stadgar, protokoll från bildandet, verksamhetsplan och budget ska bifogas
+  - Intyg från riksorganisation ska bifogas om föreningen är ansluten; verksamheten ska vara drogfri
+  - Behörig firmatecknare ska ansöka och verksamheten får inte finansieras dubbelt av kommunen eller trossamfund
+  belopp: Individuellt prövat startbidrag; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas under året men senast 30 november
+  kalla_url: &kultur https://www.hoor.se/app/uploads/kaf_bestammelser_for_kommunala_bidrag_kulturforeningar_antagna_av_kf-2020-11-04.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-startbidrag-ungdom
+  namn: Startbidrag – barn- och ungdomsföreningar
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Nybildade föreningar med barn- och ungdomsverksamhet
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska vara nybildad, fylla ett stort behov och vara godkänd som bidragsberättigad
+  - Föreningen ska ha organisationsnummer, föreningskonto, lokal verksamhet och uppdatera föreningsuppgifterna årligen
+  - Minst tio medlemmar 5–20 år ska delta i minst tio träffar per år
+  - Föreningen ska följa kommunens krav om ANDT, barnrätt och belastningsregister för ledare
+  belopp: Högst 3 000 kr som engångsbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *ungdom
   belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Kulturförening: ingen fast beloppsgräns (prövning i varje enskilt fall). Barn-/ungdomsförening: högst 3 000
-    kr engångsbelopp enligt bestämmelser för barn- och ungdomsverksamhet (2019-10-23). Krav ''Ej varit aktiv i kommunen förra
-    3 åren'' kunde inte verifieras eller motsägas i tillgängliga officiella källor och lämnas därför oförändrat.'
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-startbidrag-pensionar-funktionsratt
+  namn: Startbidrag – pensionärs- och funktionsrättsföreningar
+  foreningstyp: [social, annat]
+  kategori: [social, pensionar, funktionsratt]
+  malgrupp: Nybildade pensionärs- och funktionsrättsföreningar
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska vara nybildad, fylla ett stort behov och vara ansluten till en riksorganisation
+  - Föreningen ska finnas i kommunens föreningsregister och bedriva lokal verksamhet
+  - Demokratiska stadgar, styrelse, revisor, organisationsnummer, föreningskonto och medlemsregister krävs
+  belopp: Högst 3 000 kr som engångsbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: &socialnorm https://www.hoor.se/app/uploads/kaf_bestammelser_for_kommunala_bidrag_pensionars_och_handikappforeningar_antagna_av_kf_2019_10_23.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hoor-aktivitetsbidrag
-  namn: Aktivitetsbidrag
+  namn: Lokalt aktivitetsstöd
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -50,19 +97,21 @@ bidrag:
   - Gruppaktivitet minst 60 minuter med minst en ledare (minst 15 år)
   - Minst 3 och högst 30 deltagare per aktivitet och tillfälle
   - Närvarokort förs och sparas i minst 5 år
-  belopp: null
+  belopp: Årligen beslutat belopp per poäng; en poäng per deltagande medlem 5–20 år och fem poäng för deltagare med funktionsnedsättning oavsett ålder
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Möjlig men med reducerat belopp: 25% reducering vid ansökan 26/8-1/9 resp 26/2-1/3, 50% vid 2/9-15/9 resp
     2/3-15/3, 75% vid 16/9-30/9 resp 16/3-31/3. Ansökan efter 1/10 resp 1/4 behandlas ej.'
   kalla_url: https://www.hoor.se/app/uploads/kaf_bestammelser_barn_och_ungdomsverksamhet_antagna_av_kf-2019_10_23.pdf
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kallas 'Lokalt aktivitetsstöd' i kommunens bestämmelser. Bidraget är poängbaserat (1 poäng per bidragsberättigad
-    medlem 5-20 år, 5 poäng för medlem med funktionsnedsättning) och nämnden beslutar årligen bidragets storlek per poäng,
-    därför fastställs inget fast kronbelopp.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hoor-lokalbidrag
-  namn: Lokalbidrag
+  namn: Anläggningsbidrag – barn- och ungdomsföreningar
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -72,24 +121,50 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Föreningen ska bedriva stödberättigad barn- och ungdomsverksamhet
   - Lokal/anläggning ligger inom Höörs kommun, är godkänd av nämnden och uppfyller myndighetskrav (bygglov, brandsäkerhet,
     försäkring)
   - Godkända kostnader styrkta med kvitto
   - Vid första ansökan bifogas kopia av hyreskontrakt
+  - Ny eller förändrad hyra ska anmälas senast 1 september året före
   belopp: Max 70% av godkända kostnader (hyra, arrende, värme, el, vatten/avlopp, renhållning, försäkring, löpande underhåll).
     Föreningar som driver egen anläggning kan i stället teckna ett särskilt avtal baserat på föregående års bokslut, tecknat
     på 3 år.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Möjlig men med reducerat belopp: 25% reducering vid försenad ansökan, 50% efter 15 dagar. Ansökan mer än en
     månad försent behandlas ej.'
   kalla_url: https://www.hoor.se/app/uploads/kaf_bestammelser_barn_och_ungdomsverksamhet_antagna_av_kf-2019_10_23.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kallas 'Anläggningsbidrag' i kommunens bestämmelser. Bidrag max 70% av godkända kostnader, ansökan senast 1
-    april. Sen ansökan möjlig men med reducering.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-utbildningsbidrag-ungdom
+  namn: Utbildningsbidrag – ungdomsföreningar
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Godkända barn- och ungdomsföreningar som utbildar ledare eller styrelse
+  deadlines: { typ: fasta, datum: [11-30] }
+  krav:
+  - Föreningen ska vara godkänd för barn- och ungdomsbidrag
+  - Utbildningen ska avse fortlöpande utbildning av ledare eller styrelse eller rekrytering av nya ledare
+  - Ekonomisk redovisning, kursprogram, kursintyg samt deltagarförteckning eller kvitto ska bifogas
+  belopp: Högst 5 000 kr per år plus 25 kr per medlem 5–20 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas under året men senast 30 november
+  kalla_url: *ungdom
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hoor-kulturverksamhet
-  namn: Verksamhetsbidrag - kultur
+  namn: Verksamhetsbidrag – kulturföreningar
+  foreningstyp: [kultur, hembygd]
   kategori:
   - kultur
   malgrupp: Kulturföreningar
@@ -98,89 +173,162 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Föreningen ska bedriva kontinuerlig kulturverksamhet i Höör och vara registrerad och drogfri
   - Föreningen är registrerad hos sektorn för kultur, arbete och folkhälsa
   - Verksamheten är drogfri
   - Ansökan bifogas årsmöteshandlingar (protokoll, verksamhetsberättelse, verksamhetsplan, ekonomisk redovisning, revisionsberättelse,
     budget)
-  belopp: null
+  - Stödet ska i första hand möjliggöra kulturarrangemang som annars inte blir av och kan omfatta bygdegårdsdrift
+  - Samma verksamhet får inte finansieras dubbelt av kommunen
+  belopp: Individuellt prövat utifrån bland annat föregående års överskott och verksamhetens omkostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Ej möjlig efter deadline. Undantag: anstånd kan beviljas av nämnden vid särskilda skäl.'
   kalla_url: https://www.hoor.se/app/uploads/kaf_bestammelser_for_kommunala_bidrag_kulturforeningar_antagna_av_kf-2020-11-04.pdf
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Verksamhetsbidrag för kulturföreningar, ansökan senast 1 april. Beloppets storlek beslutas av nämnden utifrån
-    föregående års överskott och arrangemangets omkostnader (inget fast kronbelopp).
-- id: hoor-studieförbund
-  namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  malgrupp: Studieförbund
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-15
-    - 08-15
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-projektbidrag-kultur
+  namn: Projektbidrag – kulturföreningar
+  foreningstyp: [kultur, hembygd]
+  kategori: [kultur]
+  malgrupp: Registrerade kulturföreningar med tidsbegränsade kulturprojekt
+  deadlines: { typ: fasta, datum: [11-30] }
   krav:
-  - Registrerad studieförbund
-  - Folkbildningsverksamhet
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.hoor.se/uppleva-gora/foreningar-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-- id: hoor-evenemang
-  namn: Evenemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för arrangemang
-  deadlines:
-    typ: lopande
-    datum: []
+  - Ansökan ska innehålla projektets mål, syfte, tidplan och organisation samt en budget
+  - Projekt inom integration, barn och unga, folkhälsa, äldreboenden eller funktionsrätt prioriteras
+  - Annan finansiering ska redovisas och verksamheten får inte få dubbelt kommunalt stöd
+  - Privatpersoner kan inte få stödet
+  belopp: Individuellt prövat projektbidrag; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas under året men senast 30 november
+  kalla_url: *kultur
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-grundbidrag-pensionar-funktionsratt
+  namn: Grundbidrag – pensionärs- och funktionsrättsföreningar
+  foreningstyp: [social, annat]
+  kategori: [social, pensionar, funktionsratt]
+  malgrupp: Pensionärs- och funktionsrättsföreningar med medlemmar bosatta i Höör
+  deadlines: { typ: fasta, datum: [04-01] }
   krav:
-  - Offentligt arrangemang
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.hoor.se/uppleva-gora/foreningar-foreningsliv/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För lokala event och aktiviteter Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska
-    beloppsregel är ännu inte verifierad.
+  - Föreningen ska finnas i kommunens register, vara riksansluten och bedriva lokal verksamhet
+  - Medlemmarna ska vara bosatta i Höör, betala medlemsavgift och finnas i medlemsregister
+  - Föreningen ska ha organisationsnummer, föreningskonto och årligen lämna fullständiga årsmöteshandlingar
+  - Verksamheten ska följa demokrati, folkhälsa, jämställdhet, mångfald och miljöhänsyn; en sektion kan inte söka separat
+  belopp: Högst 50 kr per stödberättigad medlem bosatt i Höör och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 april varje år
+  kalla_url: *socialnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-anlaggningsbidrag-pensionar-funktionsratt
+  namn: Anläggningsbidrag – pensionärs- och funktionsrättsföreningar
+  foreningstyp: [social, annat]
+  kategori: [social, pensionar, funktionsratt]
+  malgrupp: Pensionärs- och funktionsrättsföreningar med egen eller externt hyrd lokal
+  deadlines: { typ: fasta, datum: [04-01] }
+  krav:
+  - Föreningen ska uppfylla grundvillkoren för pensionärs- eller funktionsrättsbidrag
+  - Lokalen ska vara egen eller osubventionerat hyrd när kommunen saknar motsvarande alternativ
+  - Lokalen ska ligga i Höör, vara förhandsgodkänd och uppfylla krav på bygglov, brandsäkerhet och försäkring
+  - Kostnader ska styrkas och hyreskontrakt bifogas första gången; ny eller ändrad hyra anmäls 1 september året före
+  belopp: Högst 50 % av godkända kostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 april varje år
+  kalla_url: *socialnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hoor-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa och träningstider
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Bidragsberättigade Höörföreningar som bokar kommunala lokaler och anläggningar
+  deadlines: { typ: fasta, datum: [03-01, 04-30, 09-01] }
+  krav:
+  - Föreningen ska vara bidragsberättigad i Höör och söka säsongstid inom rätt ansökningsperiod
+  - En vuxen företrädare ansvarar för bokningen och lokalerna ska vara drog- och rökfria
+  - Fördelningen bedöms efter grupper, aktiva, tidigare nyttjande och behov samt ska vara könsneutral och tillgänglig
+  belopp: Subventionerad U-taxa 2026, från 50 kr per timme i bibliotekslokal till 111 kr per timme för vissa hallar och anläggningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Säsongsansökan senast 1 mars, 30 april eller 1 september beroende på anläggning och säsong; strötider kan bokas löpande
+  kalla_url: https://www.hoor.se/app/uploads/kaf_taxa_och_riktlinjer_for_uthyrning_av_kommunala_lokaler_indexupprakning_ks_2025_12_02_c2a7_258.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Privatpersoner kan boka till ordinarie taxa, men den subventionerade U-taxan gäller endast bidragsberättigade föreningar.
+  senast_verifierad: '2026-08-18'
+- id: hoor-driftsbidrag-enskilda-vagar
+  namn: Driftsbidrag till enskilda vägar
+  foreningstyp: [annat]
+  kategori: [ovrig]
+  malgrupp: Vägorganisationer med dokumenterat väghållningsansvar
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Sökanden ska vara en vägförening, vägsamfällighet eller annan organiserad sammanslutning med dokumenterat väghållningsansvar
+  - Vägen ska vara öppen för allmänt bruk och vara minst 400 meter eller få statsbidrag
+  - Vägen får inte endast betjäna skogs-, lantbruks- eller industriverksamhet, en fastighet, en annan kommun eller redan underhållas av kommunen
+  - Organisationen ansvarar för underhåll, snöröjning, diken, sikt, kontroll och kommunal insyn
+  - En ny väg ska styrkas med lagakraftvunnen lantmäteriförrättning, protokoll, beslut, karta och delägarlista
+  belopp: 3 kr per meter väg
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 mars; statsbidragsförening ansöker vart femte år men verifierar utbetalningsunderlag årligen
+  kalla_url: https://www.hoor.se/trafik-gator-parker/trafik-och-gator/gator-och-vagar/bidrag-till-enskilda-vagar/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: hoor-registrering
   vad: Föreningsregistrering
-  beskrivning: Föreningen måste vara registrerad för att kunna söka bidrag. Nya föreningar kan söka startbidrag.
+  beskrivning: Föreningen måste vara registrerad för att kunna söka bidrag och ungdoms-, pensionärs- och kulturföreningar ska uppdatera eller bekräfta registeruppgifterna varje år.
   system: Höör föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Ej angivet i källan
+  giltighet: Årlig revidering av föreningsuppgifterna
   ordning: 1
-  kalla_url: https://www.hoor.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  giltighet_status: okand
+  kalla_url: https://www.hoor.se/wp-content/uploads/kaf_bestammelser_barn_och_ungdomsverksamhet_antagna_av_kf-2019_10_23.pdf
+  giltighet_status: kontrollast
 - id: hoor-ansok
   vad: Ansökan via e-tjänster
-  beskrivning: Föreningsbidrag söks genom Höör kommuns e-tjänstportal (etjanster.hoor.se) eller legacy-systemet frihr.unikom.se
-  system: E-tjänster
+  beskrivning: Föreningsbidrag söks genom InterbookFRI eller kommunens publicerade e-tjänster.
+  system: InterbookFRI och Höörs e-tjänster
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ej angivet i källan
   giltighet: null
   ordning: 2
   kalla_url: https://etjanster.hoor.se/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: hoor-kontakt
   vad: Kultur-, arbete- och folkhälsa
   beskrivning: 'För frågor om föreningsbidrag: 0413-28 000 eller e-post'
   system: Höör kommun
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ej angivet i källan
   giltighet: null
   ordning: 3
   kalla_url: https://www.hoor.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
