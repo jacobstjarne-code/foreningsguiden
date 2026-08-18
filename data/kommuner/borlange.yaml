@@ -2,170 +2,324 @@ kommun: Borlänge
 kommun_slug: borlange
 lan: Dalarnas län
 befolkning: 51389
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsnämnden, Social- och arbetsmarknadsnämnden samt Kommunstyrelsen
 ansokningssystem:
-  namn: E-tjänst med mobilt Bank-ID
-  url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
+  namn: Kommunens Mina sidor, Artvise e-tjänster och ansökan via e-post
+  url: https://minasidor.borlange.se/oversikt/overview/124
 kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.borlange.se/download/18.7565929c19be70efec83202f/1771324922209/Policy%20f%C3%B6r%20f%C3%B6reningsbidrag%20.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: borlange-grundbidrag
   namn: Grundbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Registrerade föreningar för basala verksamheter
+  malgrupp: Godkända ideella föreningar i Borlänge med minst fem bidragsgrundande aktiviteter per år
   deadlines:
     typ: fasta
     datum:
     - 09-15
   krav:
-  - Föreningen måste vara huvudsakligen verksam i Borlänge
-  - Verksamheten ska riktas till Borlängeborna
-  - Årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan krävs
-  - Stadgar om ändringar eller nybildning
-  belopp: 4 000 kronor per organization
-  sen_ansokan: Ej möjlig efter 15 september
-  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: borlange-aktivitetsbidrag
-  namn: Aktivitetsbidrag
+  - Föreningen ska vara godkänd i Borlänge kommun, registrerad hos Skatteverket som ideell förening och ha organisationsnummer
+  - Föreningen ska bedriva verksamhet i Borlänge som i huvudsak riktas till Borlängebor
+  - Föreningen ska uppfylla kommunens demokrativillkor och får inte främja alkohol, tobak eller andra droger
+  - Föreningen ska ha minst fem aktiviteter per år; styrelsemöten räknas inte som aktivitet
+  - Justerat årsmötesprotokoll, verksamhetsplan, verksamhetsberättelse, balans- och resultatrapport samt behandlad revisionsberättelse ska redovisas årligen
+  - Föreningen ska ha aktuellt medlemsregister och minst två protokollförda styrelsemöten per år
+  - Föreningen får inte ha obetalda skulder till kommunen, skulder hos Kronofogden eller vara försatt i konkurs
+  - Föreningar med barn- och ungdomsverksamhet ska inhämta begränsade registerutdrag för personer med uppdrag
+  belopp: 4 000 kronor per förening och år
+  sen_ansokan: Ansökningsperioden stänger 15 september. Sena underlag eller kompletteringar ger 25 procent avdrag inom sju dagar, 50 procent inom 30 dagar och avslag därefter
+  kalla_url: https://www.borlange.se/download/18.7565929c19be70efec83202f/1771324922209/Policy%20f%C3%B6r%20f%C3%B6reningsbidrag%20.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Grundbidrag, verksamhetsbidrag och lokalbidrag söks tillsammans efter årsmötet under perioden 15 februari–15 september.
+  senast_verifierad: '2026-08-18'
+- id: borlange-verksamhetsbidrag
+  namn: Verksamhetsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
+  - pensionar
+  - funktionsratt
   - ovrig
-  malgrupp: Föreningar för träningar, matcher, repetitioner och liknande
+  malgrupp: Godkända föreningar med bidragsgrundande barn-, ungdoms-, senior-, funktionsrätts-, kultur-, kulturarvs- eller social verksamhet i Borlänge
   deadlines:
     typ: fasta
     datum:
     - 09-15
   krav:
-  - Föreningen måste vara huvudsakligen verksam i Borlänge
-  - Verksamheten ska riktas till Borlängeborna
-  - Årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan krävs
-  - 'För idrottsföreningar: aktuellt vaccinationsintyg från Riksidrottsförbundet'
-  belopp: null
-  sen_ansokan: Ej möjlig efter 15 september
-  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'T8a: Översiktssidan anger inte belopp eller fullständig beräkningsregel.'
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara godkänd i Borlänge kommun och uppfylla de allmänna kriterierna för föreningsbidrag
+  - Verksamheten ska bedrivas i Borlänge och i huvudsak riktas till Borlängebor
+  - Barn- och ungdomsaktiviteter för 6–25-åringar ska vara ledarledda och ha deltagarstatistik över antal, kön och ålder
+  - Bidragsgrundande gruppaktivitet ska ha minst fem aktiva deltagare; individuell idrott ska ha minst tre
+  - Senior- och funktionsrättsverksamhet ska rikta sig till personer från 65 år eller personer med funktionsnedsättning
+  - Mötesplats eller uppsökande verksamhet ska bryta isolering eller ge socialt stöd och vara tillgänglig för målgruppen
+  - Kulturverksamhet ska bredda kommunens kulturutbud, vara riktad till allmänheten och bedöms även utifrån kompetens, erfarenhet och långsiktigt värde
+  - Kulturarvsverksamhet bedöms utifrån hur den synliggör, bevarar och tillgängliggör kulturarvet
+  - Årsmöteshandlingar, ekonomiska rapporter, verksamhetsplan, verksamhetsberättelse och revisionsberättelse ska redovisas årligen
+  belopp: Bidraget baseras på redovisade aktiviteter eller verksamhetens omfattning; för kultur och kulturarv vägs även kvalitet, kompetens, tillgänglighet och långsiktigt värde in. Kommunen publicerar ingen fast taxa
+  sen_ansokan: Ansökningsperioden stänger 15 september. Sena underlag eller kompletteringar ger 25 procent avdrag inom sju dagar, 50 procent inom 30 dagar och avslag därefter
+  kalla_url: https://www.borlange.se/download/18.7565929c19be70efec83202f/1771324922209/Policy%20f%C3%B6r%20f%C3%B6reningsbidrag%20.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Den reviderade policyn från 2026 benämner bidragsdelen verksamhetsbidrag, inte aktivitetsbidrag.
+  senast_verifierad: '2026-08-18'
 - id: borlange-lokalbidrag
   namn: Lokalbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Föreningar för lokaler med platsbundet material
+  malgrupp: Godkända föreningar som hyr eller äger en bidragsberättigad lokal i Borlänge
   deadlines:
     typ: fasta
     datum:
     - 09-15
   krav:
-  - Lokalen får ej redan vara subventionerad på annat sätt
-  - Lokalen måste innehålla platsbundet material
-  - Årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan krävs
-  - Föreningen måste vara huvudsakligen verksam i Borlänge
-  belopp: Storleken baseras på hur föreningen nyttjar lokalen; högre nyttjande ger högre bidrag.
-  sen_ansokan: Ej möjlig efter 15 september
-  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
+  - Föreningen ska vara godkänd i Borlänge kommun och uppfylla de allmänna kriterierna för föreningsbidrag
+  - Lokalen ska ligga inom Borlänge kommun och får inte redan vara subventionerad av kommunen
+  - Lokal för äldre, personer med funktionsnedsättning, psykisk ohälsa, social problematik eller barn och unga i risk för utanförskap ska ha regelbundna öppettider
+  - Kultur-, fritids- och idrottslokal ska behövas för bidragsgrundande aktiviteter, exempelvis genom platsbundet material
+  - Minst 50 procent av en kultur-, fritids- eller idrottslokal ska nyttjas av den egna eller andra bidragsgodkända föreningar
+  - Allmän samlingslokal ska stå till allmänhetens förfogande för möten, studieverksamhet, kulturarrangemang eller fritidsaktiviteter
+  - Föreningen ska redovisa nyttjandet av lokalen och förutsättningarna för samnyttjande
+  - Årsmöteshandlingar, ekonomiska rapporter, verksamhetsplan, verksamhetsberättelse och revisionsberättelse ska redovisas årligen
+  belopp: Högst 70 procent av lokalkostnaden. Allmänna samlingslokaler får ett fast bidrag på 5 000 kronor per lokal och år
+  sen_ansokan: Ansökningsperioden stänger 15 september. Sena underlag eller kompletteringar ger 25 procent avdrag inom sju dagar, 50 procent inom 30 dagar och avslag därefter
+  kalla_url: https://www.borlange.se/download/18.7565929c19be70efec83202f/1771324922209/Policy%20f%C3%B6r%20f%C3%B6reningsbidrag%20.pdf
   belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'T8a: Kommunens sida beskriver uttryckligen bedömningsgrunden.'
-  senast_verifierad: '2026-08-03'
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Stödet bedöms utifrån nyttjande och samnyttjande. Möteslokal som redan kan hyras subventionerat genom kommunen ger inte lokalbidrag.
+  senast_verifierad: '2026-08-18'
 - id: borlange-utvecklingsbidrag
   namn: Utvecklingsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Föreningar för utvecklingsprojekt och nya aktivitetsformat
+  malgrupp: Godkända föreningar som utvecklar verksamheten genom en ny idé, målgrupp, verksamhetsform eller kompetensinsats
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Projektet ska utveckla föreningsverksamheten utifrån nya behov och idéer
-  - Projektidén ska tydligt formulerats
-  - Budget krävs
-  - 'Projektet ska främja minst ett av följande: nya aktivitetsformat, nya deltagargrupper, inkluderande och socioekonomisk
-    föreningsverksamhet, eller ledarskapsutbildning'
-  - Flertalet föreningar kan ansöka tillsammans för ett projekt
-  belopp: Max 10 000 kronor per organisation
-  sen_ansokan: Möjlig löpande via onlineformulär
+  - Föreningen ska vara godkänd i Borlänge kommun och uppfylla de allmänna kriterierna för föreningsbidrag
+  - Projektidén ska formuleras tydligt och en specificerad budget ska lämnas
+  - Insatsen ska etablera nya verksamhetsformer eller aktiviteter, nå nya målgrupper, öka deltagandet, främja inkludering och jämställdhet eller utveckla ledarskap och kompetens
+  - Verksamheten ska bedrivas i Borlänge och i huvudsak vara till nytta för Borlängebor
+  - Två eller flera föreningar får ansöka gemensamt om de samverkar kring samma idé
+  - Beviljat stöd ska kunna redovisas och förändrade förutsättningar ska meddelas kommunen
+  - Outnyttjade medel eller medel som inte används för avsett ändamål kan krävas tillbaka
+  belopp: Högst 10 000 kronor; beloppet bestäms efter individuell bedömning och årets tillgängliga budget
+  sen_ansokan: Ansökan kan lämnas när som helst under året och beslut fattas fyra gånger per år
   kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag/utvecklingsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Redovisning av användning av medel krävs
-  senast_verifierad: '2026-08-03'
-- id: borlange-riktat-stod
-  namn: Riktat stöd och anläggningsavtal
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Stödet betalas ut i förskott. Inriktning och tillgängliga medel kan ändras från år till år.
+  senast_verifierad: '2026-08-18'
+- id: borlange-riktat-stod-kultur-fritid
+  namn: Riktat stöd – kultur och fritid
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Föreningar med särskilt stödbehov eller anläggningssamarbete
+  malgrupp: Godkända föreningar med utåtriktad kultur- eller fritidsverksamhet som kompletterar, utökar eller ersätter befintlig verksamhet
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara godkänd i Borlänge kommun och verksamheten ska i huvudsak riktas till Borlängebor
+  - Verksamheten ska vara utåtriktad och av stort intresse och nytta för Borlängeborna
+  - Stödet ska avse verksamhet som kompletterar, utökar eller ersätter befintlig kultur- eller fritidsverksamhet, eller nödvändig utrustning och material
+  - Budgeterade kostnader ska redovisas och stöd från andra aktörer för samma utgift ska anges med belopp
+  - Föreningen ska uppfylla demokrativillkoren, ha årsmöte varje år och lämna föreskrivna verksamhets- och ekonomihandlingar
+  - Föreningen får inte ha obetalda skulder till kommunen, skulder hos Kronofogden eller vara försatt i konkurs
+  - Beviljat stöd ska återrapporteras via kommunens e-tjänst
+  belopp: Stöd kan ges för hela eller delar av den ansökta utgiften; storleken baseras på budgeterade kostnader, nämndens prioriteringar och tillgängliga resurser
+  sen_ansokan: Ansökan kan lämnas löpande via den särskilda e-tjänsten när den är öppen
+  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag/riktat-stod-och-anlaggningsavtal
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Publika arrangemang hänvisas i första hand till evenemangsstödet. Anläggningsavtal ingår inte eftersom kommunen uttryckligen anger att det inte är ett sökbart stöd.
+  senast_verifierad: '2026-08-18'
+- id: borlange-riktat-stod-social-hallbarhet
+  namn: Riktat stöd – social hållbarhet och arbetsmarknad
+  foreningstyp: [social, ungdom, annat]
+  kategori:
+  - social
+  - funktionsratt
+  - ovrig
+  malgrupp: Godkända föreningar med utåtriktade insatser för social hållbarhet, inkludering, sysselsättning, integration eller social gemenskap
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara godkänd i Borlänge kommun och verksamheten ska i huvudsak riktas till Borlängebor
+  - Insatsen ska komplettera, förstärka eller ersätta verksamhet inom social- och arbetsmarknadsnämndens uppdrag
+  - Insatsen ska vara utåtriktad och ha särskild betydelse för Borlängebor, exempelvis genom delaktighet, integration, arbetslivsnära insatser eller social gemenskap
+  - Ansökan ska beskriva syfte, målgrupp, aktiviteter, tidsperiod och förväntade effekter
+  - Specificerad budget eller kostnadsberäkning samt andra sökta eller beviljade stöd för samma insats ska redovisas
+  - Årsmöteshandlingar, stadgar, verksamhetsberättelse och revisionsberättelse ska bifogas
+  - Föreningen ska uppfylla demokrativillkoren och får inte ha skulder hos kommunen eller Kronofogden
+  - Föreningen ska delta i den uppföljning som nämnden beslutar, exempelvis skriftlig återrapportering eller ekonomisk redovisning
+  belopp: Hela eller delar av den ansökta kostnaden kan beviljas; beloppet bedöms utifrån insatsens budget, nämndens prioriteringar och tillgängliga resurser
+  sen_ansokan: Ansökan hanteras löpande och lämnas via e-post till social- och arbetsmarknadsnämnden
+  kalla_url: https://www.borlange.se/download/18.543040f119dbb7a3d85d691/1777541890786/Riktlinje%20f%C3%B6r%20riktat%20st%C3%B6d%20-%20Social-och%20arbetsmarknadsn%C3%A4mnden%20%281%29.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Det riktade stödet är ett komplement till det ordinarie föreningsbidraget och finansieras inom nämndens befintliga budgetram.
+  senast_verifierad: '2026-08-18'
+- id: borlange-lilla-evenemangsstodet
+  namn: Lilla evenemangsstödet
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori:
+  - kultur
+  - idrott
+  - ovrig
+  malgrupp: Föreningar och organisationer som arrangerar ett öppet evenemang eller möte i Borlänge under uppbyggnads- eller utvecklingsskede
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en förening eller organisation; privatpersoner och företag kan inte söka
+  - Evenemanget ska vara öppet för Borlängebor och inte enbart rikta sig till den egna föreningens medlemmar
+  - Evenemanget ska bidra till Borlänges varumärke, ett starkare föreningsliv, en attraktiv fritid eller möten mellan kulturer
+  - Arrangören ska kunna visa god kvalitet, kunnande, kreativitet och miljömässig, social och samhällsekonomisk hållbarhet
+  - Budget ska lämnas och evenemang som klarar sig utan ekonomiskt stöd prioriteras inte
+  - Nödvändiga tillstånd ska sökas i god tid och kopior bör bifogas ansökan
+  - En skriftlig redovisning ska lämnas senast en månad efter evenemanget
+  - Kommunens överenskomna synlighet och övriga motprestationer ska uppfyllas
+  belopp: Högst 15 000 kronor
+  sen_ansokan: Ansökan kan lämnas hela året men minst en månad före evenemanget. Ansökningar handläggs inte 17 juni–24 augusti
+  kalla_url: https://www.borlange.se/uppleva-och-gora/evenemang/arrangera-evenemang/evenemangsstod/lilla-evenemangsstodet
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Stödet är behovsbaserat. Beviljat stöd betalas mot e-faktura efter genomfört och redovisat evenemang.
+  senast_verifierad: '2026-08-18'
+- id: borlange-stora-evenemangsstodet
+  namn: Stora evenemangsstödet
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori:
+  - kultur
+  - idrott
+  - ovrig
+  malgrupp: Föreningar och organisationer som arrangerar större evenemang med betydande publik, deltagande eller besöksnäringseffekt i Borlänge
   deadlines:
     typ: fasta
     datum:
-    - 09-15
+    - 04-30
+    - 10-15
   krav:
-  - Föreningen måste vara huvudsakligen verksam i Borlänge
-  - Särskild motivering för riktad stödansökan
-  - Årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan krävs
-  belopp: null
-  sen_ansokan: Ej möjlig efter 15 september
-  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Separat process för anläggningsavtal Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens
-    faktiska beloppsregel är ännu inte verifierad.
-  senast_verifierad: '2026-08-03'
+  - Sökanden ska vara en förening eller organisation; privatpersoner och företag kan inte söka
+  - Evenemanget ska skapa turistekonomiska mervärden och bidra till ekonomisk tillväxt i Borlänge
+  - Evenemanget ska locka stor publik eller många deltagare och bidra till ett ökat eller jämnare besöksantal över året
+  - Evenemanget ska stärka varumärket Borlänge genom lokal, nationell eller internationell synlighet
+  - Evenemanget ska involvera andra föreningar eller organisationer och bidra till samarbeten och nätverk
+  - Fullständig budget ska bifogas och sökanden får inte ha skulder till Borlänge kommun eller Kronofogden
+  - Arrangören ska söka nödvändiga tillstånd i god tid
+  - Arrangören ska återrapportera efter genomfört evenemang och uppfylla överenskomna motprestationer
+  belopp: Individuellt behovsprövat belopp; kommunen publicerar inget fast tak och tillämpar hårdare kriterieprövning ju större ekonomisk insats som övervägs
+  sen_ansokan: Ansökan ska lämnas senast 30 april eller 15 oktober och minst sex månader före evenemanget
+  kalla_url: https://www.borlange.se/uppleva-och-gora/evenemang/arrangera-evenemang/evenemangsstod/stora-evenemangsstodet
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Stora evenemangsrådet bereder ansökningarna och kommunstyrelsens arbetsutskott beslutar. Stödet betalas mot e-faktura efter genomförande och återrapportering.
+  senast_verifierad: '2026-08-18'
+- id: borlange-trevligt-lov
+  namn: Trevligt lov – stöd till lovaktiviteter
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar och andra arrangörer som genomför kostnadsfria aktiviteter för barn och ungdomar under skolloven i Borlänge
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-18
+  krav:
+  - Aktiviteten ska följa Trevligt lovs syfte, riktlinjer och Borlänge kommuns värdegrund
+  - Aktiviteten ska vara gratis för målgruppen och inga dolda avgifter får förekomma
+  - Aktiviteter längre än tre timmar ska erbjuda mellanmål och heldagsaktiviteter ska även erbjuda lunch
+  - Arrangören får inte ge förtur eller reservera platser för vissa barn eller ungdomar inom målgruppen
+  - Tillräckligt många ledare ska finnas på plats och aktivt säkerställa att aktiviteten är trygg
+  - Arrangören ska rapportera förändringar eller inställda aktiviteter snarast
+  - Utvärderingsfrågorna ska besvaras och arrangören ska delta i minst en arrangörsträff per år
+  - Genomförd aktivitet ska återrapporteras innan fakturan behandlas
+  belopp: Högst 5 000 kronor per aktivitet
+  sen_ansokan: För sommarlovet 2026 var sista ansökningsdag 18 maj; kommunen publicerar nya ansökningsperioder inför respektive lov
+  kalla_url: https://www.borlange.se/uppleva-och-gora/ung-i-kommunen/trevligt-lov/valkommen-som-arrangor
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
+  anteckning: Sidan tillåter även andra aktörer, men denna post gäller föreningars ansökningar enligt produktens avgränsning. Stödet betalas efter genomförd och redovisad aktivitet.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
-- id: borlange-registrering
-  vad: Registrering som föreningsmedlem i Borlänge
-  beskrivning: Föreningen måste vara huvudsakligen verksam i Borlänge och rikta verksamheten till Borlängeborna. Verksamheten
-    får inte ha politiska eller religiösa syften.
-  system: Föreningsregistret
+- id: borlange-godkand-forening
+  vad: Godkänd förening i Borlänge kommun
+  beskrivning: Föreningen ansöker en gång om att bli godkänd och registrerad. Den ska vara en ideell förening med organisationsnummer, verksam i Borlänge och uppfylla demokrativillkoren.
+  system: Kommunens föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid
+  giltighet: Godkännandet saknar publicerat fast slutdatum; kommunen begär uppdaterade underlag vid översyn av registret
   ordning: 1
-  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-  giltighet_status: okand
-- id: borlange-dokumentation
-  vad: Årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan
-  beskrivning: För all ansökan krävs årsmötesprotokoll med balans- och resultatrapport (signerad revisionsberättelse godkänd
-    på årsmöte), verksamhetsberättelse godkänd på årsmöte, och verksamhetsplan godkänd på årsmöte.
-  system: Ansökan via e-tjänst
+  kalla_url: https://www.borlange.se/download/18.7565929c19be70efec83202f/1771324922209/Policy%20f%C3%B6r%20f%C3%B6reningsbidrag%20.pdf
+  giltighet_status: kontrollast
+- id: borlange-arsunderlag
+  vad: Årliga årsmötes- och verksamhetshandlingar
+  beskrivning: Justerat årsmötesprotokoll, balans- och resultatrapport, verksamhetsplan, verksamhetsberättelse och revisionsberättelse ska redovisas årligen. Idrottsföreningar inom RF ska även bifoga aktuellt antidopingintyg.
+  system: Föreningsbidragets e-tjänst
   ledtid: null
-  ledtid_text: Måste bifoga dokument vid ansökan
-  giltighet: null
+  ledtid_text: Handlingarna kan lämnas före ansökningsperioden eller tillsammans med ansökan efter årsmötet
+  giltighet: Handlingarna ska vara godkända eller behandlade vid senaste årsmötet och redovisas varje år
   ordning: 2
   kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-  giltighet_status: okand
-- id: borlange-e-tjanst
-  vad: Ansökan via e-tjänst med mobilt Bank-ID
-  beskrivning: Alla ansökningar skickas via Borlänges e-tjänstportal med mobilt Bank-ID. Öppet hus för assistans erbjuds 14
-    april och 27 maj.
-  system: E-tjänst
-  ledtid: 15
-  ledtid_text: Handläggning 15 dagar från ansökningsperiod slut (16 september) till beslut i november-december
+  giltighet_status: kontrollast
+- id: borlange-e-legitimation
+  vad: Mobilt Bank-ID för ordinarie föreningsbidrag
+  beskrivning: Den som lämnar ordinarie ansökan identifierar sig med mobilt Bank-ID i kommunens Mina sidor. Andra stöd använder separata e-tjänster eller e-post.
+  system: Borlänge kommuns Mina sidor
+  ledtid: null
+  ledtid_text: Krävs vid inloggning och ansökan
   giltighet: null
   ordning: 3
-  kalla_url: https://www.borlange.se/uppleva-och-gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://minasidor.borlange.se/oversikt/overview/124
+  giltighet_status: ingen_regel
