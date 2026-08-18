@@ -2,452 +2,432 @@ kommun: Kalix
 kommun_slug: kalix
 lan: Norrbottens län
 befolkning: 15265
-forvaltning: Fritids- och kulturförvaltningen samt samhällsbyggnadsförvaltningen
+forvaltning: Kultur och fritid inom kommunledningsförvaltningen samt kommunstyrelsens utvecklingsutskott
 ansokningssystem:
-  namn: PDF-blanketter via e-post/post — inget digitalt ansökningssystem för bidrag (FRI Webb-Bokning på forening.kalix.se
-    används enbart för lokalbokning)
-  url: https://www.kalix.se/Uppleva/Foreningar/Blanketter/
-kalla_url: https://www.kalix.se/Uppleva/Foreningar/Foreningsstod/
-verifierad: 2026-07-20
+  namn: Kalix kommuns PDF-blanketter och lokalbokning
+  url: &blanketter https://www.kalix.se/kommun/Sjalvservice/Blanketter/Blanketter---kultur-och-fritid/
+kalla_url: &huvud https://www.kalix.se/Uppleva/Foreningar/Foreningsstod/
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: kalix-stod-idrottsforeningar
-  namn: Stöd till idrottsföreningar (verksamhets- och anläggningsstöd)
-  kategori:
-  - idrott
-  malgrupp: Idrottsföreningar anslutna till Riksidrottsförbundet (eller med liknande idrottsverksamhet — undantag för föreningar
-    utan riksorganisation samt scoutföreningar) med aktiva medlemmar 6–20 år
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+- id: kalix-verksamhetsstod-idrottsforeningar
+  namn: Verksamhetsstöd till idrottsföreningar
+  status: aktiv
+  kategori: [idrott, funktionsratt]
+  foreningstyp: &idrott [idrott, friluft, ungdom, annat]
+  malgrupp: Idrotts- och scoutföreningar med kontinuerlig barn- och ungdomsverksamhet
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Föreningen ska uppfylla föreningsstödets allmänna bestämmelser (demokratisk uppbyggnad, vald styrelse, minst 10 sammankomster/år
-    med minst 5 deltagare, huvuddelen av medlemmarna i kommunen)
-  - Minst 20 ungdomssammankomster per år på anläggningen krävs för anläggningsstöd
-  - Föreningen ska äga sin idrottsanläggning för att få anläggningsstöd
-  - Aktiv definieras som deltagande i minst 30 % av föreningens planerade sammankomster
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "325 kr/aktiv (6–20 år) i verksamhetsstöd. Föreningar med egen anläggning får ytterligare 425 kr/aktiv, totalt 750 kr/aktiv"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ingen övre åldersgräns för personer med funktionsnedsättning. Stödet utgår inte för redan subventionerade lokaler
-    i kommunens anläggningsbestånd. Ansökan sker via den generella Föreningsstöd 2026-blanketten (samma deadline).
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara RF-ansluten eller bedriva idrott i liknande form; undantag kan göras för idrottsföreningar utan riksorganisation och scoutföreningar anslutna till scoutförbund
+  - En stödberättigad deltagare ska vara 6–20 år och delta i minst 30 procent av föreningens gemensamma, planerade och ledarledda sammankomster
+  - En aktiv deltagare får bara redovisas i en grupp inom samma förening, utom i flersektionsföreningar med både sommar- och vinteridrott
+  - För deltagare med diagnostiserad fysisk eller psykisk funktionsnedsättning finns ingen övre åldersgräns
+  - Ansökan ska innehålla deltagarförteckning samt verksamhetsplan, budget, årsredovisning, revision och värdegrundsplan
+  belopp: 325 kr per aktiv deltagare 6–20 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara komplett och lämnas senast 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: kalix-anlaggningsstod-idrottsforeningar
+  namn: Stöd till föreningsägda idrottsanläggningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Idrotts- och scoutföreningar som äger den anläggning där barn- och ungdomsverksamheten bedrivs
+  deadlines: {typ: fasta, datum: [11-15]}
+  krav:
+  - Föreningen ska uppfylla villkoren för verksamhetsstöd till idrottsföreningar och äga den aktuella idrottsanläggningen
+  - Anläggningen ska regelbundet användas för barn- och ungdomsverksamhet och ha minst 20 ungdomssammankomster per år
+  - En stödberättigad deltagare ska vara 6–20 år och delta i minst 30 procent av föreningens planerade och ledarledda sammankomster
+  - Stöd ges inte för kommunala lokaler eller anläggningar som redan upplåts till subventionerad hyra
+  - Ansökan ska redovisa anläggningen och aktiva deltagare samt innehålla fullständiga års-, ekonomi- och värdegrundshandlingar
+  belopp: 425 kr per aktiv deltagare utöver verksamhetsstödet, totalt 750 kr per aktiv deltagare 6–20 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara komplett och lämnas senast 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-utbildningsbidrag
   namn: Utbildningsbidrag för ledare och funktionärer
-  kategori:
-  - idrott
-  - kultur
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Föreningar som utbildar ledare/funktionärer via distrikts-, riks- eller specialförbund, eller genom internutbildning
-    inom kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som utbildar ledare och funktionärer
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Deltagaren ska ha fyllt 13 år vid utbildningstillfället och fortsätta vara aktiv i föreningen efteråt
-  - Kursavgifter ska styrkas med kvitton eller intyg
-  - Resor, mat och boende är inte bidragsgrundande
-  - Ansökan görs samtidigt som ansökan om föreningsstöd, med kursprogram och deltagarförteckning bifogat
-  belopp: 70 % av verifierade nettokostnader, dock högst 15 000 kr per år och förening
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  - Utbildningen ska anordnas i Sverige av distrikts-, riks- eller specialförbund; intern utbildning är stödberättigad om den genomförs inom Kalix kommun
+  - Deltagaren ska ha fyllt 13 år vid utbildningstillfället och fortsätta vara aktiv i föreningen efter utbildningen
+  - Endast kursavgiften är stödberättigad; resor, mat, boende och liknande kostnader får inte räknas
+  - Kursprogram, deltagarförteckning och kvitto eller intyg som styrker kursavgiften ska bifogas
+  - Andra bidrag ska dras av innan den stödberättigade nettokostnaden beräknas
+  belopp: 70 % av verifierad nettokostnad, högst 15 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks tillsammans med det årliga föreningsstödet senast 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: kalix-bidrag-studieforbund
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
   malgrupp: Studieförbund med verksamhet i Kalix kommun
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Bidraget fördelas enligt centrala regler antagna av Folkbildningsrådet, baserat på studietimmar, kulturprogram och unika
-    deltagare i studiecirkel
-  - Förstärkningsbidrag riktas till deltagare med funktionsnedsättning respektive deltagare med behov av språkligt stöd
+  - Studieförbundet ska bedriva verksamhet i Kalix kommun
+  - Grundbidraget beräknas på genomsnittet av förbundets procentuella andel av det totala kommunbidraget under de två föregående verksamhetsåren
+  - Verksamhetsdelen beräknas på studietimmar i studiecirklar, kulturprogram, annan folkbildningsverksamhet och unika deltagare
+  - Förstärkningsdelen kräver redovisning av deltagare med funktionsnedsättning och deltagare som invandrat och behöver språkligt stöd i svenska
+  - Underlaget ska vara uppföljningsbart per studieförbund och avse verksamhet i kommunen
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "73%/14%/5%/4%/4% av kommunbidraget fördelas per kategori"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Regelverket anger ingen ansökningsdeadline eller -process för denna kategori — bidraget fördelas administrativt
-    av förvaltningen inom budgetutrymmet.
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 'Kommunbidraget fördelas med 73 % grundbidrag, 14 % efter studietimmar, 5 % efter unika deltagare och två förstärkningsdelar om 4 % vardera; totalsumman publiceras inte'
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag för studieförbundsbidraget.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-stod-samlingslokaler
-  namn: Stöd till samlingslokaler (bygdegårdar, museer, Folkets Hus)
-  kategori:
-  - ovrig
-  malgrupp: Bygdegårdsförening eller motsvarande som äger sin lokal eller har långsiktigt hyresavtal, och som är huvudman
-    för drift och underhåll
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+  namn: Stöd till samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Bygdegårdsföreningar och motsvarande huvudmän för allmänna samlingslokaler
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Lokalen ska vara öppen och tillgänglig för föreningar, organisationer och boende, upplåten opartiskt och på skäliga villkor
-  - Lokalen ska uppfylla gällande lagstiftning om brandskydd och tillgänglighet för personer med funktionsnedsättning
-  - Minst 20 nyttjandetillfällen föregående verksamhetsår, varav minst 5 öppna för allmänheten, minst 3 deltagare per tillfälle
-    (styrelsemöten räknas inte)
-  belopp: '5 500 kr för samlingslokal med aktivitet. 5 500 kr för museum med verksamhet. Utöver detta schablonbidrag till
-    tre namngivna Folkets Hus i byarna: Båtskärsnäs 35 000 kr, Morjärvs 30 000 kr, Nyborgs 35 000 kr'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Redovisning av nyttjandetillfällen lämnas i samband med ansökan om föreningsstöd (blankett finns separat). Ungdomsverksamhet
-    med regelbundna ledarledda träffar i lokalen ger även verksamhetsbidrag enligt stöd till idrottsföreningar.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska äga lokalen eller ha ett långsiktigt hyresavtal och ansvara för dess drift och underhåll
+  - Lokalen ska upplåtas opartiskt och på skäliga villkor till föreningar, organisationer och boende i Kalix kommun
+  - Det ska finnas ett varaktigt lokalt behov som inte kan tillgodoses i närliggande lokaler och lokalen ska ha eller väntas få allsidig användning
+  - Lokalen ska uppfylla gällande krav på brandskydd och tillgänglighet för personer med funktionsnedsättning
+  - Minst 20 nyttjandetillfällen ska ha genomförts föregående år, varav minst fem öppna för allmänheten och minst tre deltagare per tillfälle; styrelsemöten räknas inte
+  belopp: '5 500 kr för aktiv samlingslokal eller museum; schablonbidrag till Båtskärsnäs Folkets Hus 35 000 kr, Morjärvs Folkets Hus 30 000 kr och Nyborgs Folkets Hus 35 000 kr'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Redovisning av nyttjandetillfällen lämnas med föreningsstödsansökan senast 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-stod-skoterleder
   namn: Stöd till skoterleder
-  kategori:
-  - ovrig
-  malgrupp: Kalix Snöskoterråd (skoterklubbarnas lokala sammanslutning) för underhåll och spårpreparering av skoterleder
-  deadlines:
-    typ: lopande
-    datum: []
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: [friluft, annat]
+  malgrupp: Kalix Snöskoterråd och de lokala skoterklubbar som ansvarar för kommunens skoterleder
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Bidraget grundar sig på respektive förenings ansvars-/skötselområde (antal mil)
+  - Stödet administreras genom Kalix Snöskoterråd, skoterklubbarnas lokala sammanslutning
+  - Respektive förening ska ansvara för ett definierat upptagnings- och skötselområde
+  - Lederna ska underhållas i körbart skick med aktuell ledmarkering eller motsvarande skyltning
+  - Stödet avser drift, spårpreparering och underhåll av skoterleder
+  - Fördelningen grundas på antal mil inom respektive förenings ansvars- och skötselområde
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 100 000 kr fördelas via Kalix Snöskoterråd"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Regelverket anger ingen ansökningsdeadline eller -process; bidraget administreras via Kalix Snöskoterråd, inte
-    enskilda skoterklubbar direkt.
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 100 000 kr fördelas genom Kalix Snöskoterråd
+  sen_ansokan: Kommunen publicerar ingen ansökningsdag för fördelningen genom Kalix Snöskoterråd.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-stod-isbanor
-  namn: Stöd till isbanor (ishockey- och bandybanor)
-  kategori:
-  - idrott
-  malgrupp: Föreningar som äger en ishockey- eller bandybana som bedöms viktig för allmänheten och är öppen för allmänheten
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Stöd till föreningsägda isbanor
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, annat]
+  malgrupp: Föreningar som äger en ishockey- eller bandybana av betydelse för allmänheten
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Föreningen ska svara för att isbanan hålls i gott skick
-  belopp: 'Ishockeybana med sarg, fullstor: 30 000 kr/år. Bandybana med belysning, fullstor: 40 000 kr/år. Bandybana med belysning,
-    minst 50×30 meter: 30 000 kr/år'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Regelverket anger ingen ansökningsdeadline eller -process för denna kategori.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska äga den ishockey- eller bandybana som stödet avser
+  - Isbanan ska bedömas som viktig för allmänheten och hållas öppen för allmänheten
+  - Föreningen ska ansvara för att isbanan hålls i gott skick
+  - Bandybanan ska ha belysning och uppfylla den storlek som ligger till grund för sökt schablon
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor och lämna fullständiga års- och ekonomihandlingar
+  belopp: 'Fullstor ishockeybana med sarg: 30 000 kr/år; fullstor bandybana med belysning: 40 000 kr/år; belyst bandybana minst 50 × 30 meter: 30 000 kr/år'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingår i det årliga föreningsstödet med sista ansökningsdag 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-grundbidrag-kulturforeningar
   namn: Grundbidrag till kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar och kulturarvsföreningar som bedriver kontinuerlig konstnärlig verksamhet (musik, sång, teater,
-    dans, bildkonst, konsthantverk eller kulturarvsbevarande) och varit verksamma minst ett år
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Aktiva kultur- och kulturarvsföreningar med kontinuerlig verksamhet
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Den huvudsakliga verksamheten ska bedrivas inom det kulturella området
-  - Ett av föreningens syften ska vara att uttrycka verksamheten publikt
-  belopp: 5 500 kr/år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan sker sannolikt via den generella Föreningsstöd-blanketten (15 november) — regelverket specificerar inget
-    separat ansökningsdatum för just denna kategori.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska ha varit verksam i minst ett år och den huvudsakliga verksamheten ska ligga inom kulturområdet
+  - Verksamheten ska omfatta exempelvis musik, sång, teater, dans, bildkonst, konsthantverk eller bevarande av kulturarv
+  - Ett av föreningens syften ska vara att uttrycka hela eller delar av verksamheten publikt
+  - Verksamheten ska bidra till fritids- och kulturnämndens mål och ett rikt och mångsidigt kulturliv i kommunen
+  - Föreningen ska uppfylla de allmänna villkoren och lämna fullständiga års-, ekonomi- och värdegrundshandlingar
+  belopp: 5 500 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingår i det årliga föreningsstödet med sista ansökningsdag 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-samtalsmodellen
-  namn: Stöd via samtalsmodellen (namngivna föreningar)
-  kategori:
-  - kultur
-  - idrott
-  - social
-  - funktionsratt
-  malgrupp: 'Åtta namngivna föreningar: Kalix Konstförening, Kalix Riksteaterförening, Kalix För Alla, Stiftelsen Englundsgården,
-    Kalix Golfklubb, Kalix Kennelklubb, Kalix Brukshundklubb och RSMH Kalix Ljusglimten'
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Föreningsstöd via samtalsmodellen
+  status: aktiv
+  kategori: [idrott, kultur, social, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: De föreningar och stiftelser som namnges i kommunens beslutade samtalsmodell
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Föreningen ska uppfylla föreningsstödets allmänna bestämmelser
-  - Stödet fastställs genom dialog mellan nämndens arbetsutskott, förvaltningschef, föreningsstrateg och föreningen, utifrån
-    föreningens årsredovisning och verksamhetsplan
-  belopp: null
-  sen_ansokan: Ej tillämpligt — nämnden initierar dialogen med de namngivna föreningarna, ingen öppen ansökan för andra
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Träffarna ska vara genomförda senast februari. Stödet till respektive förening fastställs individuellt efter
-    dialogen, inte enligt en fast schablon som övriga bidrag.
-  senast_verifierad: '2026-08-03'
+  - Mottagaren ska vara Kalix Konstförening, Kalix Riksteaterförening, Kalix För Alla, Stiftelsen Englundsgården, Kalix Golfklubb, Kalix Kennelklubb, Kalix Brukshundklubb eller RSMH Kalix Ljusglimten
+  - Föreningen eller stiftelsen ska uppfylla föreningsstödets allmänna bestämmelser
+  - Årsredovisning och verksamhetsplan ska ligga till grund för dialogen om kommande års stöd
+  - Dialogen genomförs med fritids- och kulturnämndens arbetsutskott, förvaltningschef och föreningsstrateg
+  - Stödet fastställs individuellt när samtliga dialogträffar har genomförts
+  belopp: Individuellt fastställt efter årsredovisning, verksamhetsplan och dialog
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen öppen ansökningsdag publiceras; de namngivna föreningarnas dialogträffar ska vara genomförda senast i februari.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-stod-pensionarsforeningar
   namn: Stöd till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Föreningar anslutna till PRO, SPF, SPRF, Svenska Kommunalpensionärers Riksförbund eller Sverigefinska pensionärer
-    (övriga föreningar prövas av förvaltningens handläggare)
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+  status: aktiv
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Lokala pensionärsföreningar med betalande medlemmar bosatta i Kalix kommun
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Som medlem räknas den som betalat föreningens fastställda medlemsavgift för senast avslutade verksamhetsår — tillfälligt
-    eller passivt medlemskap (bingo, stödmedlem, besökare) godtas inte
-  belopp: Grundbidrag 2 000 kr plus 25 kr/medlem bosatt i Kalix kommun
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ingår i föreningsstödets allmänna ansökningscykel — regelverket anger inget separat ansökningsdatum för denna
-    kategori specifikt utöver föreningsstödets 15 november. Kallades tidigare 'folkhälsobefrämjande bidrag' på kommunens webb.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara ansluten till PRO, SPF, SPRF, Svenska Kommunalpensionärers Riksförbund eller Sverigefinska pensionärer; andra föreningar prövas av handläggare
+  - Endast medlem som betalat den fastställda medlemsavgiften för senast avslutade verksamhetsår får räknas
+  - Tillfälliga eller passiva medlemskap, stödmedlemmar, bingodeltagare och arrangemangsbesökare får inte räknas
+  - Medlemmen ska vara bosatt i Kalix kommun för att ge medlemsbidrag
+  - Föreningen ska uppfylla de allmänna villkoren och lämna fullständiga års- och ekonomihandlingar
+  belopp: 2 000 kr i grundbidrag plus 25 kr per betalande medlem bosatt i Kalix kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingår i det årliga föreningsstödet med sista ansökningsdag 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-stod-funktionshindersforeningar
   namn: Stöd till funktionshindersföreningar
-  kategori:
-  - funktionsratt
-  malgrupp: Funktionshindersföreningar anslutna till Funktionsrätt (övriga föreningar prövas av förvaltningens handläggare)
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+  status: aktiv
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Funktionshindersföreningar med betalande medlemmar bosatta i Kalix kommun
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Som medlem räknas den som betalat föreningens fastställda medlemsavgift för senast avslutade verksamhetsår — tillfälligt
-    eller passivt medlemskap godtas inte
-  belopp: Grundbidrag 2 000 kr plus 45 kr/medlem bosatt i Kalix kommun
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ingår i föreningsstödets allmänna ansökningscykel — regelverket anger inget separat ansökningsdatum för denna
-    kategori specifikt. Kallades tidigare 'folkhälsobefrämjande bidrag' på kommunens webb.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara ansluten till Funktionsrätt; andra föreningar prövas av handläggare
+  - Endast medlem som betalat den fastställda medlemsavgiften för senast avslutade verksamhetsår får räknas
+  - Tillfälliga eller passiva medlemskap och stödmedlemmar får inte räknas
+  - Medlemmen ska vara bosatt i Kalix kommun för att ge medlemsbidrag
+  - Föreningen ska uppfylla de allmänna villkoren och lämna fullständiga års- och ekonomihandlingar
+  belopp: 2 000 kr i grundbidrag plus 45 kr per betalande medlem bosatt i Kalix kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingår i det årliga föreningsstödet med sista ansökningsdag 15 november.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-startbidrag
   namn: Startbidrag för nybildad förening
-  kategori:
-  - idrott
-  - kultur
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Nybildad organisation/förening som huvudsakligen bedriver ungdomsverksamhet och uppfyller föreningsstödets allmänna
-    bestämmelser
-  deadlines:
-    typ: lopande
-    datum: []
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nybildade föreningar och organisationer som huvudsakligen bedriver ungdomsverksamhet
+  deadlines: {typ: lopande, datum: []}
   krav:
+  - Sökanden ska vara en nybildad organisation eller förening vars huvudsakliga verksamhet riktas till ungdomar
+  - Föreningen ska vara demokratiskt uppbyggd, ha vald styrelse och antagna stadgar
+  - Föreningen ska vara öppen, bedriva huvuddelen av verksamheten i Kalix och ha medlemsregister samt egen ekonomisk medverkan
   - Föreningens stadgar ska bifogas ansökan
+  - Föreningen ska registreras i kommunens föreningsregister för att kunna få stöd
   belopp: 2 500 kr
-  sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Separat ansökningsblankett finns (Startbidrag) utöver regelverket: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/startbidrag.pdf.
-    En äldre, odaterad webbsammanfattning angav 2 000 kr — det aktuella regelverket (gäller från 2026-01-01) anger 2 500 kr
-    och används här som senaste källa; se ANMARKNING i forskningsrapporten.'
-  senast_verifierad: '2026-08-03'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras löpande under hela året.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-kommunalt-lonebidrag
   namn: Kommunalt lönebidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar/samhällsnyttiga organisationer med minst 25 aktiva medlemmar 6–20 år bosatta i Kalix kommun, som beviljats
-    bidrag av Arbetsförmedlingen
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och samhällsnyttiga organisationer med lönebidragsanställda
+  deadlines: {typ: fasta, datum: [11-15]}
   krav:
-  - Föreningen ska uppfylla föreningsstödets allmänna bestämmelser
-  - Arbetsförmedlingen ska bevilja bidrag
-  - Minst 25 aktiva medlemmar 6–20 år bosatta i Kalix kommun krävs för att beviljas lönebidrag
-  - Max två heltidstjänster (fler behandlas endast vid synnerliga skäl)
-  belopp: Högst 1 400 kr/heltidsanställd/månad, beroende på förvaltningens budgetutrymme
-  sen_ansokan: Ansökan som lämnas in efter 15 november behandlas om synnerliga skäl finns
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Utbetalning sker löpande i efterskott och ska rekvireras senast 31 augusti (för perioden jan–juni) respektive
-    31 januari påföljande år (för juli–dec). Bidraget reduceras proportionellt vid oavlönad frånvaro.
-  senast_verifierad: '2026-08-03'
+  - Föreningen eller organisationen ska uppfylla fritids- och kulturnämndens allmänna föreningsvillkor
+  - Arbetsförmedlingen ska ha beviljat bidrag för anställningen
+  - Föreningen ska ha minst 25 aktiva medlemmar 6–20 år som är bosatta i Kalix kommun
+  - Stödet omfattar högst två heltidstjänster; fler kan prövas endast om synnerliga skäl finns
+  - Utbetalning sker i efterskott efter redovisning och reduceras proportionellt vid oavlönad frånvaro
+  belopp: Högst 1 400 kr per heltidsanställd och månad, inom förvaltningens budgetutrymme
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 november; en senare ansökan behandlas endast om synnerliga skäl finns. Rekvisition ska lämnas senast 31 augusti respektive 31 januari.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-sarskilt-bidrag
   namn: Särskilt bidrag till fritids- och kulturarrangemang
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som arrangerar fritids- och kulturarrangemang öppna för alla, genomförda i Kalix kommun
-  deadlines:
-    typ: lopande
-    datum: []
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som arrangerar offentliga fritids- och kulturarrangemang i Kalix kommun
+  deadlines: {typ: relativ, datum: []}
   krav:
-  - Arrangemanget ska vara öppet för alla att delta i, genomföras i Kalix kommun under aktuellt kalenderår och marknadsföras
-    på rimligt sätt
-  - Det ska framgå att stöd utgår från Fritid- och kultur, Kalix kommun
-  - Ges inte till ordinarie verksamhet, cuper, turneringar eller annan tävlingsverksamhet
-  - Ansökan ska innehålla budget med beräknade kostnader och intäkter och göras minst två veckor före arrangemangets genomförande
-  belopp: Högst 50 % av verifierade nettokostnader, dock högst 15 000 kr per gång
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Redovisning med utvärdering och ekonomiskt utfall lämnas senast två månader efter arrangemanget; bidraget betalas
-    ut efter redovisning. Beviljas exempelvis inte till litteratur-/tidnings-/CD-/filmproduktion, radio/TV-produktion, marknadsföring,
-    stödgalor, gästspel/turnéer utanför kommunen, konstnärsmaterial, kommersiella arrangemang, intern föreningsverksamhet
-    eller administration. Blankett: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/sarskilt-bidrag.pdf'
-  senast_verifierad: '2026-08-03'
-- id: kalix-idrottsstipendium
-  namn: Kalix kommuns idrottsstipendium
-  kategori:
-  - idrott
-  malgrupp: Aktiv idrottsutövare eller ledare som på förtjänstfullt sätt bedriver eller har bedrivit verksamhet inom idrottsområdet
-    — född eller verksam i Kalix kommun ges företräde
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-31
+  - Arrangemanget ska vara öppet för alla, genomföras i Kalix kommun under aktuellt kalenderår och marknadsföras på ett rimligt sätt
+  - Ansökan ska lämnas före genomförandet och innehålla en budget med beräknade kostnader och intäkter
+  - Stödet får inte avse ordinarie verksamhet, cuper, turneringar, tävlingar, interna möten eller kommersiella arrangemang
+  - Stödberättigade kostnader kan vara artist- och konstnärsarvoden, deras resor, ljud, ljus och extern lokalhyra
+  - Kommunens stöd ska framgå i kommunikationen och skriftlig verksamhets- och ekonomiredovisning med verifikationer ska lämnas senast två månader efter arrangemanget
+  belopp: Högst 50 % av verifierade nettokostnader, högst 15 000 kr per arrangemang
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under året men ska vara kommunen tillhanda minst två veckor före arrangemanget.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: kalix-subventionerade-kommunala-lokaler
+  namn: Subventionerade kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som bokar kommunala lokaler och anläggningar
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Förslag på stipendiat eller egen ansökan ska vara Kalix kommun tillhanda senast 31 augusti
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/link/5d595702eab0417ab1c008e2675a46a9.aspx
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Kommunstyrelsen fastställer årligen den totala stipendiesumman (inget publicerat individbelopp); kommunstyrelsens
-    arbets- och personalutskott utser stipendiat/-er. Kan tilldelas förening — historiskt exempel: RSMH Ljusglimten (2023).
-    Utdelas på föreningsgalan i oktober. Stadgar fastställda av kommunstyrelsen 2026-06-01 § 116.'
-  senast_verifierad: '2026-08-03'
-- id: kalix-kulturstipendium
-  namn: Kalix kommuns kulturstipendium
-  kategori:
-  - kultur
-  malgrupp: Person eller grupp av personer som på förtjänstfullt sätt bedriver eller har bedrivit verksamhet inom kulturområdet
-    — född eller verksam i Kalix kommun ges företräde
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-31
-  krav:
-  - Förslag på stipendiat eller egen ansökan ska vara Kalix kommun tillhanda senast 31 augusti
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/link/06c21629c9a04b0fb8e2752624bb3ee2.aspx
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kommunstyrelsen fastställer årligen den totala stipendiesumman (inget publicerat individbelopp); kommunstyrelsens
-    arbets- och personalutskott utser stipendiat/-er. Kan tilldelas förening (grupp av personer). Utdelas på föreningsgalan
-    i oktober. Stadgar fastställda av kommunstyrelsen 2026-06-01 § 116.
-  senast_verifierad: '2026-08-03'
-- id: kalix-bidrag-enskild-vag
-  namn: Kommunalt bidrag till underhåll av enskild väg utan statsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Vägförening, vägsamfällighet eller enskild fastighetsägare med dokumenterat väghållningsansvar för väg inom Kalix
-    kommun, för permanentboende (folkbokförd, helårstaxerad fastighet)
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Vägsträckan ska vara minst 200 meter och belägen inom Kalix kommun
-  - Sökanden eller medlem i vägföreningen ska vara folkbokförd på fastigheten, som ska vara taxerad som helårsbostad och bebodd
-  - Vägsträckan får inte sedan tidigare underhållas av kommunen och ska vara öppen för allmänheten (bommar tillåtna endast
-    under förfallstid)
-  - Vägsträcka som endast betjänar sommar-/fritidsbebyggelse eller obebodd fastighet är inte bidragsberättigad
-  - Ansökan förnyas vart tredje år och skickas ut till sökanden på begäran
-  belopp: 'Trappstegsformel per meter väglängd (grundbelopp från 2013, gäller tills annat beslutas): 0–500 m 100 % (14,72
-    kr/m), 501–1000 m 60 % (8,83 kr/m), 1001–1500 m 50 % (7,36 kr/m), 1501–2000 m 40 % (5,89 kr/m), 2001–2500 m 30 % (4,42
-    kr/m), 2501–3000 m 20 % (2,94 kr/m), över 3000 m 10 % (1,47 kr/m). Belopp under 100 kr betalas inte ut'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kalix.se/contentassets/ef19f824652c4d879e1e01682984ac72/bidragsregler_riktlinjer-enskild-vaghallning.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Beslutat av kommunfullmäktige 2005-11-28 § 159, kompletterat 2006-06-19 § 70. Om vägförening finns ska det framgå
-    i ansökan även om bidraget formellt betalas ut till enskild fastighetsägare. Bidrag betalas ut per kalenderår i efterskott.
-    Administreras av samhällsbyggnadsförvaltningen, inte fritids- och kulturförvaltningen.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad i Kalix kommuns föreningsregister för att få föreningstaxa
+  - Bokningen ska avse en kommunal lokal eller anläggning där en särskild föreningstaxa är publicerad
+  - Ungdomstaxa gäller grupper eller lag som inte deltar i seniorserie och där en majoritet av deltagarna är yngre än 20 år
+  - Bokning, avbokning, städning, nyckelhantering och användning ska följa kommunens aktuella villkor
+  - Föreningen ska betala den taxa som gäller för anläggning, åldersgrupp och användningssätt
+  belopp: 'Subventionerad föreningstaxa enligt 2026 års avgifter, exempelvis sporthall 75 kr/timme för juniorer och 135 kr/timme för seniorer, jämfört med privat ungdom 170 kr och privat vuxen 330 kr/timme'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag för föreningstaxan.
+  kalla_url: https://www.kalix.se/Uppleva/Friluftsliv-motion-och-idrott/Idrottsanlaggningar-och-bad/Avgifter/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: kalix-elitsponsring
   namn: Elitsponsring
-  kategori:
-  - idrott
-  malgrupp: Idrottsföreningar (elitnivå) vars sportgren/arrangemang/utövare ger exponering i traditionella och digitala medier
-    och är publikdragande — sponsras endast via förening, inte enskilda lag, grupper eller individer direkt
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-28
+  status: aktiv
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Idrottsföreningar vars elitverksamhet eller arrangemang ger kommunen relevant exponering
+  deadlines: {typ: fasta, datum: [02-28]}
   krav:
-  - Mottagaren ska vara en förening — lag, grupper eller enskilda kan bara sponsras genom en förening
-  - Föreningen ska bedriva verksamheten seriöst, sakna skatteskulder och inte stå i motsättning till kommunens värdegrund,
-    vision och styrdokument
-  - Sponsring kräver alltid en motprestation (fastställs i varje enskilt fall) — skiljer sig därmed juridiskt från ett bidrag
-  - Ansökan görs på blanketten Ansökan om elitsponsring
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt sponsringsutrymme fastställs i kommunstyrelsens årsbudget"
-  sen_ansokan: Ej angivet i källan
+  - Mottagaren ska vara en förening; lag, grupper och enskilda kan endast omfattas genom en förening
+  - Föreningen ska bedriva verksamheten seriöst, sakna skatteskulder och följa kommunens värdegrund, vision och styrdokument
+  - Idrottens nivå, förväntad exponering i traditionella och digitala medier samt publikintresse ligger till grund för bedömningen
+  - Sponsringen kräver en affärsmässigt rimlig motprestation som fastställs i varje avtal
+  - Avtalstiden får vara högst det aktuella budgetåret och genomförda motprestationer ska kunna följas upp
+  belopp: Individuellt beslutat av kommunstyrelsen efter prövning av exponering, idrottsnivå, publikvärde och motprestation
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara utvecklingsutskottet tillhanda senast sista februari; kommunstyrelsen fattar beslut under april.
   kalla_url: https://www.kalix.se/contentassets/51479d6ba0834f0881145b3257d6fff9/riktlinjer-for-elitsponsring.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Formellt en affärsmässig sponsringsrelation, inte ett bidrag i traditionell mening — kommunens egna riktlinjer
-    skiljer uttryckligen sponsring från föreningsbidrag. Ansökan ska vara utvecklingsutskottet tillhanda sista februari; beslut
-    fattas av kommunstyrelsen under april. Avtalstid längst innevarande budgetår. Totalt sponsringsutrymme fastställs i kommunstyrelsens
-    årsbudget — inget fast belopp per förening publicerat.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Sponsring är en affärsmässig relation med motprestation och skiljs i riktlinjen från föreningsbidrag.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: kalix-foreningsregister
   vad: Registrera föreningen i Kalix kommuns föreningsregister
-  beskrivning: För att kunna få föreningsstöd krävs att föreningen är registrerad i Kalix kommuns föreningsregister. Registrerade
-    föreningar kan boka lokaler till föreningstaxa, söka bidrag, få inbjudningar till utbildningar/dialogmöten och synas med
-    kontaktuppgifter på kommunens hemsida.
-  system: null
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsregister för att kunna få föreningsstöd eller boka till föreningstaxa.
+  system: Kalix kommuns föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.kalix.se/contentassets/c36364d7a9e44ab698f3dee0c34cec6e/bidragsregler--2026.pdf
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: kalix-allmanna-villkor
+  vad: Uppfyll kommunens allmänna föreningsvillkor
+  beskrivning: Föreningen ska vara allmännyttig och ideell, demokratiskt uppbyggd, ha vald styrelse och godkända stadgar, vara öppen, ha medlemsregister och egen ekonomisk medverkan samt huvudsakligen vara verksam och ha medlemmar i Kalix.
+  system: null
+  ledtid: null
+  ledtid_text: Villkoren prövas i samband med ansökan.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: kalix-arliga-handlingar
+  vad: Lämna fullständiga års- och värdegrundshandlingar
+  beskrivning: Den årliga ansökan ska innehålla föreningsuppgifter, verksamhetsplan och budget, föregående verksamhetsberättelse och ekonomisk rapport med revision, värdegrundsplan, senaste konstituerande protokoll och stadgar när de ändrats.
+  system: PDF-blankett via e-post eller post
+  ledtid: null
+  ledtid_text: Komplett ordinarie ansökan ska lämnas senast 15 november.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
