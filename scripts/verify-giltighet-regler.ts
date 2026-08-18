@@ -63,7 +63,7 @@ const RULES: Record<string, ExpectedRule> = {
   bromolla: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   enkoping: { typ: 'sammansatt', antal: null, datum: null, status: 'kontrollast' },
   helsingborg: { typ: 'manader_efter_beslut', antal: 12, datum: null, status: 'kontrollast' },
-  jarfalla: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  jarfalla: { typ: 'kalenderar', antal: null, datum: null, status: 'kontrollast' },
   katrineholm: { typ: 'fast_datum', antal: null, datum: '03-31', status: 'kontrollast' },
   kungalv: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   lund: { typ: 'manader_efter_beslut', antal: 13, datum: null, status: 'kontrollast' },
