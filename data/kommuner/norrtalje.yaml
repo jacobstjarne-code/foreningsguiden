@@ -2,12 +2,12 @@ kommun: Norrtälje
 kommun_slug: norrtalje
 lan: Stockholms län
 befolkning: 67036
-forvaltning: Kultur- och fritidsförvaltningen, Samhällsbyggnadskontoret (bygga-bo-miljö) samt Kommunstyrelsens förvaltning
+forvaltning: Kultur- och fritidsförvaltningen, kommunstyrelsen, samhällsbyggnadskontoret samt socialförvaltningen
 ansokningssystem:
-  namn: Rbok
+  namn: Rbok och kommunens e-tjänster
   url: https://norrtalje.rbok.se
-kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/
-verifierad: 2026-07-20
+kalla_url: https://www.norrtalje.se/bidrag
+verifierad: '2026-08-18'
 giltighet_regel:
   typ: manader_efter_arsmote
   antal: 2
@@ -26,23 +26,34 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Minst tre bidragsberättigade deltagare utöver ledare per aktivitet
   - Minst tio bidragsberättigade aktiviteter per år
   - Aktiviteten ska vara minst 60 minuter med gemensam samling och avslutning
-  - Ledarledd verksamhet, ansvarig ledare minst 15 år (18 år vid simhallsaktiviteter med krav på HLR-kunskap)
+  - Ledarledd verksamhet, ansvarig ledare minst 15 år
+  - Vid simhallsaktiviteter ska ansvarig ledare vara minst 18 år, simkunnig och ha kunskaper i HLR, vattenlivräddning och första hjälpen
   - En deltagare får endast räknas en gång per dag
   - Skolaktiviteter, fester, bingo och inkomstbringande arrangemang är inte bidragsberättigade
-  belopp: null
+  - Närvaro för deltagare och ledare ska dokumenteras och signeras av ansvarig ledare
+  belopp: Ersättning lämnas per bidragsberättigad aktivitet; kommunen publicerar inget fast belopp per aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/barn-och-ungdomsforeningar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 februari–1 april (deadline 1 april). Ersättning utgår procentuellt per bidragsberättigad
-    aktivitet; dubbel ersättning för deltagare med behov av särskilt stöd. Närvaro ska dokumenteras och signeras av ansvarig
-    ledare. Bekräftat i kultur- och fritidsnämndens reviderade bidragsregler (gäller från 2026-07-01).
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 februari–1 april. Dubbel ersättning lämnas för deltagare i behov av särskilt stöd.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - ungdom
+  - annat
+  kraver_registrering: true
+  alder_min: 4
+  alder_max: 20
 - id: norrtalje-aktivitetsbidrag-pensionar
   namn: Aktivitetsbidrag för pensionärsföreningar
   kategori:
@@ -53,20 +64,30 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Minst tre bidragsberättigade deltagare utöver ledare per aktivitet
   - Minst tio bidragsberättigade aktiviteter per år
   - Aktiviteten ska vara minst 60 minuter
   - Föreningen ska vara ansluten till riks- eller distriktsorganisation för pensionärer
-  belopp: null
+  - Aktiviteten ska vara ledarledd
+  - Närvaro för deltagare och ledare ska dokumenteras och signeras av ansvarig ledare
+  - Studiecirklar och fester ger inte aktivitetsbidrag
+  belopp: Ersättningen per aktivitet beror på pensionärsbidragets totala summa; kommunen publicerar inget fast belopp per aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/pensionarsforeningar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 februari–1 april (deadline 1 april). Ersättning utgår procentuellt per bidragsberättigad
-    aktivitet. Bidragsberättigad pensionärsförening kan hyra kommunala lokaler till subventionerad taxa.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 februari–1 april.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - social
+  kraver_registrering: true
+  alder_min: 65
 - id: norrtalje-verksamhetsbidrag-funktionsratt
   namn: Verksamhetsbidrag för funktionsrättsföreningar
   kategori:
@@ -77,20 +98,26 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Minst tre aktiviteter på minst en timme vardera ska genomföras och redovisas per år
   - Föreningen ska vara ansluten till riks- eller distriktsorganisation för funktionshindrade
-  - Föreningen ska uppfylla de grundläggande villkoren för bidragsberättigade föreningar
-  belopp: null
+  - Verksamhetsberättelsen ska redovisa föregående års regelbundna verksamhet och dess nytta för medlemmar och närstående
+  - Ansökan ska redovisa antal aktiviteter, deltagarantal och ungefärlig ålder på deltagarna
+  belopp: Beloppet bedöms utifrån föregående års regelbundna verksamhet; kommunen publicerar inget fast belopp per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/handikappforeningar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 februari–1 april (deadline 1 april). Bidragets storlek avgörs utifrån föregående års verksamhet;
-    entréfria aktiviteter och verksamhet för barn/unga prioriteras. Bidragsberättigad förening kan hyra kommunala lokaler
-    till subventionerad taxa.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Entréfria lokala aktiviteter och aktiviteter för barn och unga premieras.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - social
+  kraver_registrering: true
 - id: norrtalje-verksamhetsbidrag-kultur
   namn: Verksamhetsbidrag för kulturföreningar
   kategori:
@@ -101,19 +128,27 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Minst tio aktiviteter på minst en timme vardera per år
   - Bör vara ansluten till riks- eller distriktsorganisation för kulturföreningar
-  - Verksamhet öppen för allmänheten prioriteras
-  belopp: null
+  - Verksamhetsberättelsen ska redovisa föregående års regelbundna verksamhet och hur den tillgodosett medlemmarnas kulturintressen
+  - Ansökan ska redovisa antal aktiviteter, deltagarantal och ungefärlig ålder på deltagarna
+  belopp: Beloppet bedöms utifrån föregående års regelbundna verksamhet och omfattning; kommunen publicerar inget fast belopp per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/kulturforeningar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 februari–1 april (deadline 1 april). Bidragets storlek baseras på föregående års regelbundna
-    verksamhet. Bidragsberättigad förening kan hyra kommunala lokaler till subventionerad taxa.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Verksamhet som är öppen för allmänheten premieras.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
+  - hembygd
+  kraver_registrering: true
 - id: norrtalje-anlaggningsbidrag
   namn: Anläggningsbidrag
   kategori:
@@ -128,23 +163,32 @@ bidrag:
   krav:
   - Föreningen ska vara bidragsberättigad
   - Anläggningen ska ligga i Norrtälje kommun
-  - Föreningen ska kunna styrka driftskostnader
+  - Föreningen ska äga, arrendera eller långsiktigt hyra lokalen eller anläggningen
+  - Föreningen ska kunna styrka kontrakt och driftkostnader
+  - Driftansökan ska innehålla kostnadskalkyl, uppgifter om andra nyttjare, föregående års aktiviteter och verksamhetsbeskrivning
+  - Investeringsstöd ska sökas innan investeringen påbörjas och redovisas före utbetalning
   - Ersätter inte amorteringar eller enstaka evenemang
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "2026 fördelades totalt 1 927 000 kr till 21 lokalhållande föreningar"
+  belopp: Driftbidraget baseras på ytor och föregående års driftkostnader; investeringsbidraget täcker två tredjedelar av godkänd investering
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/anlaggningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Ansökningsperiod 15 augusti–15 september (deadline 15 september). Driftbidrag täcker löpande kostnader (hyra,
-    värme, el, försäkring, vatten, renhållning, larm, låneränta, underhåll). Investeringsbidrag täcker 2/3 av godkänd investering;
-    miljöförbättring, energieffektivisering, tillgänglighet och trygghet prioriteras. Omfattar även bygdegårdar/samlingslokaler
-    — 2026 fördelades totalt 1 927 000 kr till 21 lokalhållande föreningar (källa: Norrtelje Tidning, ej kommunens egen domän,
-    endast som bekräftande sekundärkälla).'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 15 augusti–15 september. Miljö, energieffektivitet, nya målgrupper, trygghet och fysisk tillgänglighet prioriteras för investeringar.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  kraver_registrering: true
 - id: norrtalje-hyresbidrag-barn-ungdom
   namn: Hyresbidrag för barn- och ungdomsföreningar
   kategori:
@@ -155,17 +199,34 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Verksamheten ska rikta sig till 4–20-åringar
+  - Ingen kommunal lokal eller anläggning ska uppfylla verksamhetens behov
   - Gäller inte lokaler som redan är kommunala timhyreslokaler
+  - Ansökan ska redovisa antal aktiviteter och syftet med varje aktivitet
+  - Handlingar som styrker hyreskostnaderna ska bifogas
+  - Kvitton ska redovisas efter varje tillfälle
   belopp: Max 50 % av hyreskostnaden, högst 10 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/bidrag-till-ideell-forening/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tillfälligt bidrag när ingen kommunal lokal finns tillgänglig för verksamheten.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan kan göras året runt.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
+  kraver_registrering: true
+  alder_min: 4
+  alder_max: 20
 - id: norrtalje-programbidrag
   namn: Programbidrag
   kategori:
@@ -179,23 +240,28 @@ bidrag:
     - 09-15
     - 12-15
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Arrangemanget ska vara öppet och tillgängligt för allmänheten
   - God arrangörsmässig kvalitet
   - Genomförs i Norrtälje kommun
   - Budget och finansieringsplan ska bifogas ansökan
   - Norrtälje kommuns logotyp ska synas i marknadsföringen
-  belopp: null
+  - Fullständig redovisning ska lämnas efter genomfört arrangemang före utbetalning
+  belopp: Kommunen publicerar inget fast belopp per arrangemang
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/programbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Fyra ansökningsomgångar per år, vardera kopplad till en genomförandeperiod: deadline 15 december (genomförande
-    1 mars–31 december), 15 februari (1 maj–31 december), 15 maj (1 oktober–31 december), 15 september (1 januari–31 december
-    påföljande år). Bekräftat oberoende i två källor: den redaktionella programbidrag-sidan och kommunens samlade bidragsformer-tabell.
-    Utbetalning sker efter godkänd redovisning av genomfört arrangemang.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: De fyra sista ansökningsdagarna motsvarar olika genomförandeperioder som anges i kommunens bidragsregler.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
+  kraver_registrering: true
 - id: norrtalje-jubileumsbidrag
   namn: Jubileumsbidrag
   kategori:
@@ -209,22 +275,36 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
+  - Föreningen ska fylla 25, 50, 75 eller 100 år, eller ha ett senare jubileum som är jämnt delbart med 25
   - Skriftlig inbjudan till nämnden senast fyra veckor före jubileet
   belopp: 5 000 kronor (25 år), 10 000 kronor (50 år), 15 000 kronor (75 år), 20 000 kronor (100 år och äldre)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/bidrag-till-ideell-forening/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Gäller vid 25-, 50-, 75- och 100-årsjubileum. Endast bidragsberättigad förening kan ta del av bidraget.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan kan göras året runt.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  kraver_registrering: true
 - id: norrtalje-evenemangsbidrag
   namn: Evenemangsbidrag
   kategori:
   - kultur
   - ovrig
-  malgrupp: Föreningar, företag och organisationer som genomför publika evenemang i Norrtälje kommun
+  malgrupp: Föreningar som arrangerar nya publika evenemang i Norrtälje kommun
   deadlines:
     typ: fasta
     datum:
@@ -235,18 +315,29 @@ bidrag:
   - Budget och finansieringsplan ska bifogas
   - Bankkonto för utbetalning krävs
   - Norrtälje kommuns logotyp ska synas i marknadsföringen
-  belopp: null
+  - Föreningen får inte ha skuld till Norrtälje kommun eller annan myndighet
+  - Fullständig redovisning ska lämnas efter evenemanget före utbetalning
+  - Bidrag lämnas inte för ordinarie verksamhet, självfinansierade evenemang eller arvoden till personer i föreningen eller projektorganisationen
+  belopp: Beloppet beror på ansökans innehåll; kommunen publicerar inget fast belopp per evenemang
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillåten enligt källan
   kalla_url: https://www.norrtalje.se/sjalvservice/kultur-fritid/evenemangsbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nytt bidrag, infört 2026. Ansökningsperiod 1 september–15 oktober för evenemang som genomförs 2027 — bekräftat
-    samstämmigt i två oberoende, aktuella källor denna omgång (självservicesidan, uppdaterad 2026-03-09, samt kommunens samlade
-    bidragsformer-tabell), vilket löser den källkonflikt som noterades i föregående version (en tidigare sökträff hade angett
-    mars-april 2026 för evenemang 2026, sannolikt den första, nu avslutade ansökningsomgången innan bidraget blev återkommande).
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 september–15 oktober för evenemang som genomförs följande år. Endast föreningsspåret ingår här.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: norrtalje-oppen-verksamhet-barn-ungdom
   namn: Öppen verksamhet för barn- och ungdomsföreningar
   kategori:
@@ -257,42 +348,32 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad i Norrtälje kommun
   - Verksamheten ska vara av drop-in-karaktär utan föranmälan eller medlemskrav
   - Ledarledd verksamhet i samverkan med kommunen
-  belopp: null
+  - Kommunens logotyp ska finnas i eventuell marknadsföring
+  - Närvaro ska registreras och dokumentationen ska signeras av ansvarig ledare
+  belopp: Kommunen bekostar använda lokaler och kan lämna ledarbidrag enligt kultur- och fritidskontorets schablon; schablonbeloppet publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/bidrag-till-ideell-forening/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kommunen bekostar ledararvode och lokalkostnad enligt schema. Ansökan sker inte via Rbok utan genom kontakt
-    med kultur.fritidsnamnden@norrtalje.se.
-  senast_verifierad: '2026-08-03'
-- id: norrtalje-snabb-peng
-  namn: Snabb peng (ungdomsstipendium)
-  kategori:
-  - ovrig
-  malgrupp: Ungdomar 15–25 år bosatta i Norrtälje kommun
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Projektet ska vara drogfritt
-  - Projektet ska vara ideellt och genomföras av och för ungdomar
-  belopp: Max 5 000 kronor per projekt
-  sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.norrtalje.se/sjalvservice/kultur-fritid/ungdomsstipendium-snabb-peng/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Svar ges normalt inom 14 dagar. Formellt ett stipendium riktat till enskilda ungdomar/ungdomsgrupper snarare
-    än registrerade föreningar, men skrivet med här eftersom det listas tillsammans med kommunens övriga föreningsbidrag på
-    huvudöversikten och kan sökas av en ideell, tillfällig projektgrupp.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kontakt med kultur- och fritidsnämnden krävs för ansökan och samverkan.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
+  kraver_registrering: true
 - id: norrtalje-bidrag-studieforbund
-  namn: Bidrag till studieförbund
+  namn: Verksamhetsbidrag till studieförbund
   kategori:
   - kultur
   malgrupp: Statsbidragsberättigade studieförbund som bedriver folkbildningsverksamhet och studiecirkelverksamhet i Norrtälje
@@ -302,27 +383,130 @@ bidrag:
     datum:
     - 04-01
   krav:
+  - Studieförbundet ska få statsbidrag via Folkbildningsrådet
   - Ska vara registrerat i kommunens föreningsregister
   - Utbildningsverksamheten ska bedrivas inom Norrtälje kommun
   - Årlig redovisning av verksamheten krävs
   - Studieförbund utan lokalt säte men med verksamhet i kommunen kan ansöka efter särskild prövning, med separat redovisning
     för den kommunala verksamheten
   - Kommersiellt eller uppdragsfinansierat arbete är inte bidragsberättigat
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt ca 1 300 000 kronor fördelades 2026 till åtta studieförbund"
+  - Föregående års verksamhet och kommande års verksamhetsplan ska redovisas
+  - Underlag för antal unika deltagare och ekonomiskt resultat ska kunna visas på begäran
+  belopp: Bidraget baseras på föregående års genomförda och innevarande års planerade verksamhet; kommunen publicerar inget fast belopp per studieförbund
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/studieforbund/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION trots att bidraget ligger på exakt samma sidträd (kultur-och-fritid/bidrag-och-stipendier)
-    som föregående versions övriga 11 bidrag — ren utelämning, inte en fråga om annan förvaltning. Fördelning sker efter samråd
-    med Studieförbundens samorganisation (STUSAM) i Norrtälje; totalt cirka 1 300 000 kronor fördelades 2026 mellan åtta studieförbund
-    (sekundärkälla utanför kommunens egen domän, endast som bekräftande uppgift). Bekräftat i kultur- och fritidsnämndens
-    reviderade bidragsregler (gäller från 2026-07-01, se nyhetsartikel norrtalje.se/nyheterna/2026-03/samlingsplats-for-motorburen-ungdom-camp-kultur-och-nya-bidragsregler).
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 februari–1 april. Studieförbund är undantagna från kravet på minst tio bidragsberättigade medlemmar.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
+- id: norrtalje-arets-barn-ungdomsforening
+  namn: Årets barn- och ungdomsförening
+  kategori:
+  - idrott
+  - ovrig
+  malgrupp: Bidragsberättigade barn- och ungdomsföreningar inom idrott och fritid i Norrtälje kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-15
+  krav:
+  - Föreningen ska vara bidragsberättigad och verksam inom idrott eller fritid för barn och unga
+  - Verksamheten ska präglas av gemenskap under demokratiska former och skapa en trygg miljö
+  - Föreningen ska ha god tillgänglighet, brett engagemang och bred verksamhet för barn och unga
+  - Bedömningen avser föreningens verksamhet före ansökningsdagen
+  - Ansökan eller nominering får lämnas av föreningen eller en sektion i föreningen
+  belopp: Priset består av diplom och ett kontantbelopp vars storlek beslutas av nämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.norrtalje.se/bidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 september–15 oktober.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - friluft
+  - ungdom
+  - annat
+  kraver_registrering: true
+- id: norrtalje-jamstalldhet-inkluderingspris
+  namn: Jämställdhets- och inkluderingspris
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  malgrupp: Föreningar och föreningsprojekt som har främjat jämställdhet och inkludering inom kultur-, idrotts- eller fritidsverksamhet i Norrtälje kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-31
+  krav:
+  - Insatsen ska ha ägt rum i Norrtälje kommun
+  - Insatsen ska ha gett tydliga förbättringar ur ett jämställdhets- eller inkluderingsperspektiv
+  - Ansökan ska motivera hur föreningen eller projektet har bidragit till ökad inkludering och jämställdhet
+  - Ansökan eller nominering får lämnas av den sökande föreningen eller av allmänheten
+  belopp: Priset består av diplom och ett kontantbelopp vars storlek beslutas av nämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.norrtalje.se/bidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 16–31 oktober. Endast förenings- och föreningsprojektspåret ingår här.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+- id: norrtalje-kulturarvsstipendium
+  namn: Kulturarvsstipendium
+  kategori:
+  - kultur
+  malgrupp: Föreningar som verkar för att bevara, dokumentera eller tillgängliggöra kulturarvet i Norrtälje kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-15
+  krav:
+  - Föreningen ska vara verksam i Norrtälje kommun
+  - Verksamheten ska avse bevarande, dokumentation, forskning, utbildning, digitalisering eller traditionella hantverk med koppling till kulturarvet
+  - Den sökande får inte ha fått Norrtälje kommuns kulturstipendium under de senaste åren
+  - Ansökan ska redovisa hur verksamheten uppfyller stipendiets syfte
+  - Ansökan kan lämnas av föreningen själv eller som nominering av allmänheten
+  belopp: Stipendiet består av diplom och ett kontantbelopp vars storlek beslutas av nämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.norrtalje.se/bidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 september–15 oktober. Endast föreningsspåret ingår här.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - kultur
+  - hembygd
 - id: norrtalje-hallbarhetsbidrag
   namn: Hållbarhetsbidrag
   kategori:
@@ -333,22 +517,32 @@ bidrag:
     datum:
     - 04-30
   krav:
+  - Sökanden ska vara en ideell förening som bedriver verksamhet i Norrtälje kommun
+  - Föreningen ska uppfylla kommunens grundläggande villkor för ideella föreningar
   - Projektet ska falla inom klimat, cirkulär ekonomi, biologisk mångfald, giftfri miljö eller vattenkvalitet
+  - Projektet ska beskriva tillgänglighet, förväntad effekt, spridning, genomförbarhet och medfinansiering
+  - Projektet ska ha en tydlig projektplan, tidsplan och budget
   - E-legitimation krävs för att använda e-tjänsten
   belopp: "Max 60 000 kronor per projekt"
   belopp_avser: per_forening
   kommunens_pott: "Kommunens totala pott är 250 000 kronor per år"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/bygga-bo-miljo/klimat-och-natur/hallbarhetsbidrag/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: SAKNADES I FÖREGÅENDE VERSION, uttryckligen exkluderad med motiveringen 'administreras av andra förvaltningar'
-    — inte ett godkänt uteslutningsskäl enligt RESEARCH_SPEC_v2.md §2.4. Administreras av samhällsbyggnadskontoret (bygga-bo-miljö),
-    inte kultur- och fritidsnämnden. Ansökningsperiod 16 mars–30 april, beslut i september. Ansökan görs via https://service.norrtalje.se/hallbarhetsbidrag,
-    inte via Rbok. Kommunens totala pott är 250 000 kronor per år.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 16 mars–30 april. Kommunstyrelsen fattar beslut i september.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: norrtalje-landsbygds-skargardspeng
   namn: Landsbygds- och skärgårdsutvecklingspeng
   kategori:
@@ -359,26 +553,35 @@ bidrag:
     datum:
     - 03-31
   krav:
-  - E-legitimation krävs för att använda e-tjänsten
+  - Sökanden ska vara en förening eller annan icke-vinstdrivande organisation i Norrtälje kommun
+  - Projektet ska tillgodose ett allmänintresse och visa konkret nytta för lokalsamhället
+  - Projektet ska avse lokal utvecklingsgrupp, lokal utvecklingsplan, platsutveckling, bryggrelaterad åtgärd eller förstudie
+  - Ansökan ska beskriva projektets syfte, behov, mål, aktiviteter, genomförande och förväntade resultat
+  - Budget och finansieringsplan ska bifogas
   - Dokument som styrker firmateckningsrätt och styrelsens sammansättning ska bifogas
   - Protokoll från styrelsemöte som godkänner ansökan ska bifogas
   - Separat ansökan krävs för varje projekt
-  belopp: null
+  belopp: Lokala utvecklingsgrupper och planer högst 10 000 kronor, platsutveckling högst 200 000 kronor, bryggåtgärder högst 100 000 kronor och förstudier högst 30 000 kronor per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.norrtalje.se/info/bygga-bo-miljo/norrtalje-vaxer/landsbygd-skargard/lokal-utvecklingspeng-for-landsbygd-och-skargard/riktlinjer-for-landsbygdspeng/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SAKNADES I FÖREGÅENDE VERSION, uttryckligen exkluderad med motiveringen ''administreras av andra förvaltningar''
-    — inte ett godkänt uteslutningsskäl enligt RESEARCH_SPEC_v2.md §2.4. Administreras av samhällsbyggnadskontoret. Avser
-    lokala utvecklingsprojekt, ortsutveckling, förstudier och lokala utvecklingsgruppers arbete. Ansökan senast 31 mars, handläggs
-    april–maj, beslut i juni. Ansökan görs via https://www.norrtalje.se/sjalvservice/bygga-bo-miljo/landsbygds--och-skargardsutvecklingspeng-ansokan/,
-    inte via Rbok. Kontakt: gustav.broms@norrtalje.se.'
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://www.norrtalje.se/utvecklingspeng
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 februari–31 mars. Beslut fattas i juni.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - hembygd
+  - friluft
+  - social
+  - annat
 - id: norrtalje-trygghetsfonden
   namn: Trygghetsfonden
   kategori:
+  - social
   - ovrig
   malgrupp: Föreningar och organisationer baserade i Norrtälje kommun, för aktiviteter som genomförs i kommunen
   deadlines:
@@ -387,28 +590,34 @@ bidrag:
     - 04-01
     - 09-30
   krav:
+  - Aktiviteten, insatsen eller investeringen ska genomföras i Norrtälje kommun
+  - Ansökan ska motivera hur insatsen bidrar till eller kompletterar kommunens trygghetsarbete
+  - Målgrupp, förväntade positiva effekter och risker som ska motverkas ska anges
   - Föreningens stadgar, senaste verksamhetsberättelse och dokument som styrker firmateckningsrätt ska bifogas
   - PRV-dokumentation som bekräftar organisationsnummer krävs
   - 'Vid barn-/ungdomsverksamhet: dokumentation av trygghetsrutiner (t.ex. Trygga Möten, Safe from Harm, Youth Protection
     eller motsvarande)'
   - Budget, tidsplan och beskrivning av hur insatsen bidrar till kommunens samlade trygghetsarbete ska bifogas
-  belopp: null
+  belopp: Högst 100 000 kronor för enstaka arrangemang, 50 000 kronor för uppstart eller pågående långsiktig aktivitet och 20 000 kronor för kompetenshöjande åtgärder; inget tak anges för trygghetsinvesteringar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/sjalvservice/trygghet-sakerhet/trygghetsfonden/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SAKNADES I FÖREGÅENDE VERSION, uttryckligen exkluderad med motiveringen ''administreras av andra förvaltningar''
-    — inte ett godkänt uteslutningsskäl enligt RESEARCH_SPEC_v2.md §2.4. Beslutas av kommunstyrelsen två gånger per år. KÄLLKONFLIKT
-    (§2.5): vårfönstrets öppningsdatum anges som 31 januari på kommunens fonder-och-stiftelser-sida men som 13 februari på
-    trygghetsfondens egen självservicesida — inget av källorna daterat, slutdatumet 1 april sammanfaller i båda så själva
-    deadline-fältet påverkas inte. Höstfönstret (20 augusti–30 september) var samstämmigt i båda källorna. Formell riktlinje-PDF
-    finns (riktlinger-240105.pdf) men gav 200-svar med binärt/olisbart innehåll vid extraktion — detaljer hämtade från självservicesidan
-    istället. Räknas formellt bland kommunens ''fonder och stiftelser'' men skrivs som eget bidrag här eftersom det har egen
-    dedikerad ansökningsväg och egen post på kultur- och fritidsnämndens huvudöversikt över bidrag, till skillnad från övriga
-    stiftelser (se norrtalje-stiftelser-fonder).'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Två ansökningsperioder per år avslutas 1 april respektive 30 september.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
 - id: norrtalje-anlaggningsbidrag-gang-cykelvag
   namn: Anläggningsbidrag för gång- och cykelvägar på landsbygden
   kategori:
@@ -420,27 +629,30 @@ bidrag:
     datum:
     - 06-30
   krav:
+  - Projektet ska avse en ny gång- eller cykelväg eller standardhöjning av en befintlig sträcka på landsbygden
   - Tillstånd från markägare och ledningsägare ska finnas, med långsiktig rätt att ha vägen kvar
   - Föreningen tecknar avtal med kommunen om drift och underhåll av gång-/cykelvägen efter byggnation
-  - Genomförande ska ske under det kalenderår bidraget beviljas
+  - Kompletta handlingar ska lämnas in före ansökningsdagens slut
   - Rimlig kostnadsberäkning, tidsplan och genomförandebeskrivning ska bifogas
+  - Föreningen ska visa att projektet kan genomföras
+  - Genomförandet bör färdigställas under det kalenderår bidraget beviljas
+  - Bidrag lämnas inte till framtida driftåtgärder
   belopp: "Upp till 75 procent av byggkostnaden"
   belopp_avser: per_forening
-  kommunens_pott: "Kommunens totala pott var 5 miljoner kronor för 2025"
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.norrtalje.se/info/trafik-gator-parker/ansokan-om-anlaggningsbidrag-for-gang--och-cykelvagar-pa-landsbygden/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SAKNADES I FÖREGÅENDE VERSION, uttryckligen exkluderad med motiveringen ''administreras av andra förvaltningar''
-    — inte ett godkänt uteslutningsskäl enligt RESEARCH_SPEC_v2.md §2.4. Deadline anges i källan som ''sista ansökningsdag
-    för 2026 är den 30 juni'' — formulerat årsspecifikt snarare än som en fastslagen återkommande regel; 30 juni använt här
-    som senast bekräftade datum, men kan komma att sättas om år till år. Prioriteringskriterier: användarbehov, barns säkerhet,
-    trafikmängd, rekreationsvärde. Inget stöd till drift efter byggnation. Ansökningsblankett är en PDF (inte Rbok); kontakt
-    kontaktcenter@norrtalje.se. Kommunens totala pott var 5 miljoner kronor för 2025; kommunen planerar motsvarande belopp
-    årligen.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperiod 1 januari–30 juni. Projekt prioriteras efter användarbehov, barns säkerhet, trafikmängd och rekreationsvärde.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - hembygd
+  - friluft
+  - annat
 - id: norrtalje-bredbandsstod
   namn: Lokalt bredbandsstöd
   kategori:
@@ -453,56 +665,59 @@ bidrag:
     - 10-31
   krav:
   - Fastigheterna som ska anslutas ska ligga i Norrtälje kommun
+  - Sökanden ska vara ett lokalt byalag eller en förening som genomför utbyggnaden i egen regi
+  - Nätet ska ge minst 1 Gbit/s till de anslutna fastigheterna
   - Dokumentation som styrker organisationens rättsliga status ska bifogas
   - Styrelsebeslut som godkänner ansökan krävs
   - Projektbeskrivning och karta över planerad kabeldragning och anslutna fastigheter ska bifogas
   - Kommersiell nätoperatör ska bekräfta att inga konkurrerande utbyggnadsplaner finns för området samma år
   - Projektet ska påbörjas samma år som beviljande sker och slutföras inom tre år
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunens totala pott: 602 000 kronor per år (301 000 kr per period)"
-  sen_ansokan: Ej angivet i källan
+  belopp: 7 000 kronor per ansluten fastighet
+  belopp_avser: per_forening
+  kommunens_pott: Kommunens totala pott är 602 000 kronor per år, 301 000 kronor per ansökningsperiod
+  sen_ansokan: Ytterligare utlysning kan tillkomma om medel återstår
   kalla_url: https://www.norrtalje.se/info/bygga-bo-miljo/bredband/soka-lokalt-bredbandsstod/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning — nytt fynd denna omgång, hittades inte ens
-    i den lista över exkluderade bidrag som föregående version angav. Administreras av kommunstyrelsekontoret (kontakt: peter.jansson@norrtalje.se),
-    inte kultur- och fritidsnämnden. Ansökan skickas till kommunstyrelsen@norrtalje.se märkt ''Lokalt bredbandsstöd'', inte
-    via Rbok. Avser utbyggnad av bredband (1 Gbit/s) i marknadsmässigt olönsamma områden. Kommunens totala årliga pott är
-    602 000 kronor, fördelad med 301 000 kronor per ansökningsperiod.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan skickas till kommunstyrelsen och märks Lokalt bredbandsstöd.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - hembygd
+  - annat
 - id: norrtalje-stiftelser-fonder
-  namn: Stiftelser och fonder (samlat)
+  namn: Stiftelser och fonder öppna för föreningar
   kategori:
   - pensionar
   - social
-  malgrupp: 'Av kommunens tolv förvaltade fonder/stiftelser är två öppna för föreningar: Ebba Genteles stiftelse (pensionärsföreningar/äldre,
-    med prioritet för Rådmansö socken) och Stenbergska I (föreningar med ideella/sociala ändamål, prioritet för behövande)'
+  malgrupp: Pensionärsföreningar med social verksamhet samt föreningar med ideella och sociala ändamål i Norrtälje kommun
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 10-11
   krav:
-  - Ansökan görs per stiftelse, en ansökan per fond
-  - Villkor och behörighet varierar per stiftelse enligt respektive donationsbrev — se kommunens sida för fullständig lista
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.norrtalje.se/info/stod-vard-omsorg/fonder-och-stiftelser-som-kommunen-forvaltar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'SAKNADES HELT I FÖREGÅENDE VERSION, utan dokumenterad uteslutning. Skrivet som ETT samlat bidrag enligt RESEARCH_SPEC_v2.md
-    §2.7 istället för en post per stiftelse. Fördelning sker enligt kommunens allmänna information två gånger per år (maj
-    och november), men en exakt, publicerad sista ansökningsdag för just denna delmängd av stiftelser hittades inte i de granskade
-    källorna — ''lopande'' använt istället för en gissad siffra (§4: ''gissa aldrig''). Ansökan görs via https://www.norrtalje.se/sjalvservice/kultur-fritid/bidrag-ur-stiftelse-och-fond/
-    med e-legitimation, inte via Rbok. Övriga tio stiftelser (Carlssonska Roslagsbro, J.M. Holmers och Österholms fond, Norrtälje
-    skolfond, Stenbergska stiftelsen, Fonden till förmån till behövande, Karl Johan Mattssons stiftelse, Linnéa Anderssons
-    fond, Fonden till förmån för lärare, Anna och Rolf Balkenhausens Donationsfond) riktar sig uteslutande till privatpersoner
-    och är därför inte föreningsbidrag (§2.4). Trygghetsfonden räknas också formellt hit men är skriven som eget bidrag (se
-    norrtalje-trygghetsfonden) på grund av egen dedikerad ansökningsväg.'
-  senast_verifierad: '2026-08-03'
+  - Ansökan ska avse Ebba Genteles stiftelse eller Stenbergska I
+  - Ebba Genteles stiftelse gäller pensionärsföreningar med ideell verksamhet och social anknytning; verksamhet i Rådmansö församling har företräde
+  - Stenbergska I gäller föreningar med ideella och sociala ändamål som behöver stöd och uppmuntran
+  - En separat ansökan ska lämnas för varje stiftelse
+  - Sökande stiftelse och sökt belopp ska anges i ansökan
+  - Föreningen ska lämna de kontakt-, konto- och verksamhetsuppgifter som ansökningsblanketten kräver
+  belopp: Utdelningen bedöms enligt respektive stiftelses ändamål; kommunen publicerar inget fast belopp per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den publicerade höstfristen 11 oktober gäller Stenbergska I; Ebba Genteles stiftelse har ingen publicerad sista ansökningsdag
+  kalla_url: https://www.norrtalje.se/stiftelser-och-ansokan-om-bidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ebba Genteles stiftelse delar normalt ut medel i maj och november. Stenbergska I har ansökningsperiod 10 augusti–11 oktober hösten 2026.
+  senast_verifierad: '2026-08-18'
+  status: aktiv
+  foreningstyp:
+  - social
 forutsattningar:
 - id: norrtalje-bidragsberattigad-registrering
   vad: Registrera sig som bidragsberättigad förening
@@ -512,12 +727,11 @@ forutsattningar:
     och drogfri verksamhet. E-legitimation krävs för att använda e-tjänsten.
   system: Rbok
   ledtid: null
-  ledtid_text: Ingen handläggningstid anges på källsidan. Bidraget grundar sig på den verksamhet föreningen hade föregående
-    kalenderår, om inget annat anges.
+  ledtid_text: Ingen handläggningstid anges på källsidan.
   giltighet: null
   ordning: 1
   kalla_url: https://www.norrtalje.se/sjalvservice/kultur-fritid/bidragsberattigad-forening--registrering/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: norrtalje-arliga-arshandlingar
   vad: Ladda upp årliga föreningshandlingar
   beskrivning: Bidragsberättigade föreningar ska ladda upp fullständiga årshandlingar (justerat årsmötesprotokoll, verksamhetsberättelse,
@@ -528,4 +742,4 @@ forutsattningar:
   giltighet: Handlingarna ska laddas upp senast två månader efter genomfört årsmöte, varje år, för fortsatt bidragsrätt
   ordning: 2
   kalla_url: https://www.norrtalje.se/info/kultur-och-fritid/bidrag-och-stipendier/grundlaggande-villkor-for-ideella-foreningar/
-  giltighet_status: olast
+  giltighet_status: kontrollast
