@@ -2,15 +2,22 @@ kommun: Österåker
 kommun_slug: osteraker
 lan: Stockholms län
 befolkning: 49902
-forvaltning: Kultur- och fritidsförvaltningen samt Socialförvaltningen
+forvaltning: Kultur- och fritidsförvaltningen, Socialförvaltningen samt Kommunstyrelsen
 ansokningssystem:
-  namn: FRI (fri.osteraker.se/bidrag, ansökningsportal från tredjepartsleverantören FRI-GO) samt kommunens e-tjänster (service.osteraker.se)
+  namn: FRI-GO, kommunens e-tjänster samt bidragsspecifika formulär och e-post
   url: https://service.osteraker.se/oversikt
 kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod.4.367d658917909e8fc2bdbc.html
-verifierad: 2026-07-21
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://osteraker.fri-go.se/bidrag/
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: osteraker-aktivitetsbidrag
   namn: Aktivitetsbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -24,18 +31,22 @@ bidrag:
   - Föreningen ska vara godkänd som bidragsberättigad av Kultur- och fritidsnämnden
   - Aktiviteten ska vara minst en timme lång med minst tre deltagare och en ledare
   - Deltagarna ska vara folkbokförda i Österåkers kommun
+  - Föreningens senaste årsmöteshandlingar, konstituerande styrelseprotokoll, alkohol- och drogpolicy samt ledarpolicy ska vara uppdaterade i FRI senast 31 januari respektive 31 juli
+  - Bidrag beviljas endast en gång per dag och grupp; gruppen får inte delas för att ge fler bidrag och närvaro ska registreras vid varje aktivitet
+  - Ledaren ska vara utsedd av föreningen och minst 13 år; högst 30 deltagare räknas per aktivitet
   belopp: 24 kr per aktivitet samt 4 kr per deltagare (max 30 deltagare per aktivitet)
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod.4.367d658917909e8fc2bdbc.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan 25 augusti avser vårterminens aktiviteter, ansökan 25 februari avser höstterminens. Söks digitalt via
-    FRI (osteraker.fri-go.se/bidrag) — bekräftat via portalen som oberoende konvergerande källa.
-  senast_verifierad: '2026-08-03'
+  belopp_avser: per_forening
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan den 25 augusti avser vårterminen och ansökan den 25 februari avser föregående hösttermin.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-anlaggningsbidrag
   namn: Anläggningsbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -47,18 +58,22 @@ bidrag:
   krav:
   - Föreningen ska äga, hyra privat eller arrendera den anläggning bidraget avser
   - Styrkande underlag krävs beroende på kategori (äganderätt, hyresavtal eller arrendeavtal)
-  belopp: null
+  - Vid arrende, drift- eller nyttjanderätt ska relevanta kostnadsunderlag och eventuella beslutade utvecklingsplaner bifogas
+  - Vid egen anläggning ska relevanta kostnadsunderlag och eventuella beslutade utvecklingsplaner bifogas
+  - Föreningen ska vara en bidragsberättigad ideell barn- och ungdomsförening i Österåker
+  belopp: Individuellt anläggningsbidrag bedöms efter kategori och styrkta kostnader; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod.4.367d658917909e8fc2bdbc.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Söks via kommunens e-tjänst (service.osteraker.se/oversikt/overview/30). E-tjänstens introduktionssida är inloggningsskyddad
-    och publicerar inget beloppstak — loggat som EJ_EXTRAHERBAR för beloppsdetalj i tackning.log.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Söks en gång per år via kommunens e-tjänst; underlagen varierar beroende på om föreningen hyr, arrenderar eller äger anläggningen.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-kulturevenemangsbidrag
   namn: Kulturevenemangsbidrag
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Arrangörer/föreningar som producerar offentliga kulturevenemang i Österåkers kommun
@@ -70,17 +85,21 @@ bidrag:
   - Evenemanget ska vara offentligt
   - Prioritet ges till evenemang med professionella kulturaktörer, hög kvalitet och producenter med visad erfarenhet
   - Redovisning av hur bidraget använts krävs enligt anvisad mall efter genomfört evenemang
-  belopp: null
+  - Ansökan ska beskriva föreningen, evenemangets mål, plats, genomförande, medverkande och målgrupp samt innehålla budget och sökt belopp
+  - Evenemanget ska genomföras i Österåkers kommun och föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  belopp: Individuellt evenemangsbidrag bedöms efter ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod.4.367d658917909e8fc2bdbc.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Beslut meddelas under våren efter behandling i Kultur- och fritidsnämnden.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: osteraker-kulturbidrag-aldre
   namn: Kulturbidrag för äldre
+  foreningstyp: [kultur, social, annat]
   kategori:
   - kultur
   - pensionar
@@ -95,19 +114,21 @@ bidrag:
   - Målgruppen för aktiviteten ska till övervägande del vara 65 år eller äldre
   - Ansökan ska innehålla beskrivning av aktiviteten, begärda medel och ekonomisk plan
   - Redovisning senast två månader efter avslutad aktivitet
-  belopp: null
+  - Aktiviteten ska vara kulturell, gagna och utveckla föreningens medlemmar samt bidra till gemenskap och minskat utanförskap
+  - Fester, högtider, jubileumsfester samt verksamhet som redan får social stimulans inom vård och omsorg finansieras inte
+  belopp: Individuellt kulturbidrag bedöms efter aktivitetsbeskrivning, sökt belopp och ekonomisk plan; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod.4.367d658917909e8fc2bdbc.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Källkonflikt om sista ansökningsdag — se konflikter.log. Kommunens webbsidor (flera oberoende hämtningar) anger
-    1 december, styrdokumentet 'Bestämmelser avseende bidrag till kultur för äldre' (uppladdat jan 2024, inget eget antagandedatum
-    i dokumentet) anger 1 november. Webbsidans nyare uppgift skriven enligt §2.5.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens aktuella bidragssida anger ansökningsperioden 1 oktober–1 december och har företräde framför den äldre pdf-filens datum 1 november.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-kulturpris
   namn: Österåkers kulturpris
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Person, grupp eller förening med särskild kulturell insats, född/bosatt i Österåker eller med särskild anknytning
@@ -117,20 +138,22 @@ bidrag:
     datum:
     - 10-05
   krav:
+  - Priset avser en särskild insats inom ett kulturellt område
   - Pristagaren ska vara född eller bosatt i Österåker, eller ha annan särskild anknytning till kommunen
   - Nomineras via e-post till Kultur- och fritidsnämnden; självnominering tillåten
   belopp: 10 000 kr
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod.4.367d658917909e8fc2bdbc.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kan tilldelas föreningar (t.ex. Södra Ljusterö byggnadsförening Granliden, kulturpris 2024) — inte ett rent
-    individuellt pris, och därför inte uteslutet enligt §2.4.
-  senast_verifierad: '2026-08-03'
+  belopp_avser: per_forening
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Priset kan tilldelas en förening, en grupp eller en person; denna post gäller föreningars egna ansökningar och nomineringar.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-hallbarhetsbidrag
   namn: Hållbarhetsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Politiskt och religiöst obundna organisationer och föreningar, inklusive samfälligheter och villaägarföreningar,
@@ -144,21 +167,23 @@ bidrag:
     2030
   - Aktiviteten ska genomföras inom Österåker och inte tidigare ha beviljats bidrag
   - Redovisning med kvitton krävs senast vid årsskiftet; ej använda eller oredovisade medel ska återbetalas
+  - Föreningen eller organisationen ska vara icke vinstdrivande, politiskt och religiöst oberoende samt verksam enligt demokratiska principer
+  - Ansökan ska innehålla en konkret projektplan med moment, tidsplan, ansvar och budget samt beskriva effekt, spridning och tillgänglighet
+  - Samma utgift får inte få annat kommunalt bidrag och sökanden får inte ha oreglerade skulder till kommunen
   belopp: "Upp till 60 000 kronor per projekt"
   belopp_avser: per_forening
   kommunens_pott: "Kommunens totala pott för 2026: 250 000 kronor"
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.osteraker.se/specialsidor/kommunalaverksamheter/hallbarhetochmiljo/ansokomhallbarhetsbidrag2026.4.4d8ccb9818167a0763326f2.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Källkonflikt om ansökningsperiod — se konflikter.log. Den bidragsspecifika 2026-sidan (senast uppdaterad 2026-06-17)
-    anger 26 maj–14 augusti 2026; hubbsidan 'Bidrag och stöd' anger separat ett generellt återkommande fönster 1 september–15
-    oktober. Den nyare, årsspecifika sidan skriven enligt §2.5. Kommunens totala pott för 2026 är 250 000 kronor.
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://www.osteraker.se/download/18.44fe6fa019e40e754cd7c4e/1782415109143/Riktlinjer%20f%C3%B6r%20h%C3%A5llbarhetsbidrag%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: De årsspecifika riktlinjerna för 2026 anger ansökningsperioden 26 maj–14 augusti. Högre belopp än 60 000 kronor kan beslutas för särskilt angelägna åtgärder.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-inkluderingsbidrag
   namn: Inkluderingsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - social
   malgrupp: Bidragsberättigade föreningar som erbjuder meningsfull aktivitet för barn och unga med verkliga eller upplevda
@@ -170,17 +195,22 @@ bidrag:
   - Projekt-/verksamhetsbeskrivningen ska tydligt visa hur målgruppens specifika behov samt arbete med inkludering/integration
     hanteras
   - Uppföljning via redovisningsblankett senast en månad efter avslutat projekt, alternativt efter avslutad verksamhetsperiod
-  belopp: null
+  - Ansökan ska tydligt beskriva hur verksamheten arbetar med inkludering och vad de sökta resurserna ska användas till
+  - Stödet avser ett särskilt projekt eller utveckling av löpande verksamhet som behöver utökade resurser
+  - Sökanden ska vara en bidragsberättigad förening i Österåkers kommun och uppfylla de övergripande föreningskraven
+  belopp: Individuellt bidrag beviljas inom det maxbelopp som nämnden beslutar i årets budget; något aktuellt maxbelopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.osteraker.se/download/18.5f4ce35f18ecbde7180664b/1720095809495/riktlinjer_inkludering.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.osteraker.se/download/18.40523b741958b6adf7413698/1749030967987/Riktlinjer%20f%C3%B6r%20inkluderingsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Maxbelopp beslutas årligen av Kultur- och fritidsnämnden i budget och är inte publicerat som ett fast tak.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: osteraker-socialnamndens-foreningsbidrag
   namn: Socialnämndens föreningsbidrag
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   - pensionar
@@ -196,21 +226,22 @@ bidrag:
   - Verksamheten ska komplettera socialtjänstens insatser för en prioriterad målgrupp
   - Föreningen får inte söka identiskt bidrag från annan kommunal nämnd samtidigt
   - Ansökan ska innehålla senaste styrelseprotokoll, verksamhetsberättelse och detaljerad budget
-  belopp: null
-  belopp_avser: okand
+  - Ansökan ska ange föreningen, antalet medlemmar i Österåker, lokal eller träffpunkt, vad medlen ska användas till och kontouppgifter
+  - Sökanden ska medge att uppgifterna får kontrolleras och försäkra att de är sanningsenliga
+  belopp: Bidraget fördelas i tre nivåer efter räckvidd eller antal medlemmar; riktlinjen exemplifierar nivåerna med 0,10, 0,25 respektive 1 krona per kommuninvånare. Bidraget får vara högst 50 procent av föreningens budget och aldrig högre än sökt belopp
+  belopp_avser: per_forening
   kommunens_pott: "Totalt 200 000 kr fördelas årligen i tre nivåer"
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.osteraker.se/upplevagora/foreningarochforeningsliv/bidragochstod/riktlinjerforsocialnamndensforeningsbidrag.4.77c924619b9d91e3e2aab.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Totalt 200 000 kr fördelas årligen i tre nivåer (cirka 0,10 kr, 0,25 kr respektive 1 kr per kommuninvånare beroende
-    på räckvidd). Bidraget får inte överstiga 50 % av föreningens budget. Beslut i juni. Riktlinjerna senast uppdaterade 2026-01-16
-    enligt sidan.
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://www.osteraker.se/download/18.40523b741958b6adf7417c35/1756729225601/Riktlinjer%20f%C3%B6r%20socialn%C3%A4mndens%20f%C3%B6reningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Endast kompletta ansökningar för det aktuella året behandlas. Socialnämnden fattar beslut i juni.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-studieforbundsbidrag
   namn: Bidrag till studieförbund
+  foreningstyp: [kultur, annat]
   kategori:
   - ovrig
   malgrupp: Lokalt verksamma studieförbundsavdelningar (en eller flera samverkande kommuner i regionen) anslutna till ett
@@ -225,19 +256,19 @@ bidrag:
   - Bidrag till SFI-cirklar (svenska för invandrare) lämnas inte enligt dessa regler
   - Slutlig redovisning, verksamhets- och revisionsberättelse för avslutat verksamhetsår lämnas efter avdelningens årsmöte,
     senast 31 maj
-  belopp: null
+  - Studieförbundet ska vara godkänt av Folkbildningsrådet och ansökan ska avse föregående verksamhetsår
+  belopp: Individuellt bidrag fördelas proportionellt efter studieförbundets antal genomförda studietimmar i kommunen under det senaste verksamhetsåret; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/download/18.27d4a62417c113509425456/1634587978536/Regler%20Studief%C3%B6rbund.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bidraget fördelas proportionerligt efter antal genomförda studietimmar i kommunen senaste verksamhetsåret (uppgift
-    hämtas från Folkbildningsrådet) — inget fast belopp per förening. Utbetalning sker en gång per år i juni. Regelverket
-    är en skannad PDF utan textlager — extraherat via nedladdning och OCR (tesseract) på sidbilder. Bekräftat via FRI-GO-portalen
-    som oberoende konvergerande källa (samma 31 maj-deadline).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Underlaget för verksamhetsvolymen hämtas från Folkbildningsrådet och bidraget betalas ut en gång per år i juni.
+  senast_verifierad: '2026-08-18'
 - id: osteraker-bygdegardsbidrag
+  status: pausad
   namn: Bidrag till bygdegårdar och andra samlingslokaler
   kategori:
   - ovrig
@@ -266,6 +297,7 @@ bidrag:
     Jacob före publik deploy.
   senast_verifierad: '2026-08-03'
 - id: osteraker-ungas-egen-organisering
+  status: pausad
   namn: Ungas egen organisering
   kategori:
   - ovrig
@@ -300,4 +332,14 @@ forutsattningar:
   ordning: 1
   kalla_url: https://www.osteraker.se/download/18.71681f6a17d7773cad8127dc/1651483276918/Best%C3%A4mmelser%20f%C3%B6r%20bidrag%20och%20st%C3%B6d%20f%C3%B6r%20ideella%20f%C3%B6reningar%20i%20%C3%96ster%C3%A5kers%20kommun.pdf
   giltighet_status: okand
+- id: osteraker-arlig-dokumentuppdatering
+  vad: Uppdatera föreningsuppgifter och årshandlingar
+  beskrivning: Föreningar som söker bidrag ska varje år ladda upp verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse samt hålla kontaktuppgifterna i föreningsregistret aktuella.
+  system: FRI-GO
+  ledtid: null
+  ledtid_text: Ingen handläggningstid angiven
+  giltighet: Uppgifterna ska granskas och vid behov uppdateras och godkännas minst årligen efter årsmötet; någon gemensam exakt förfallodag publiceras inte
+  ordning: 2
+  kalla_url: https://osteraker.fri-go.se/bidrag/
+  giltighet_status: kontrollast
 kommunsiffra: null
