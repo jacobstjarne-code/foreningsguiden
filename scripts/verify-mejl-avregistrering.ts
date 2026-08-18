@@ -29,6 +29,14 @@ if (!MEJL.sidfot.includes('{avregLank}')) {
   errors.push('MEJL.sidfot saknar {avregLank} — sidfotsraden bär inte längre avregistreringslänken.');
 }
 
+// U3 (Jacob 2026-08-19): nationellSidfot — LOK-stödets mejl 7/8 använder
+// en EGEN sidfot (sendMejl:s sidfotOverride-parameter), inte MEJL.sidfot
+// direkt. Kontroll #1 ovan täcker den inte — separat check, annars kunde
+// en framtida ändring tömma {avregLank} härifrån utan att testet märkte.
+if (!MEJL.nationellSidfot.includes('{avregLank}')) {
+  errors.push('MEJL.nationellSidfot saknar {avregLank} — LOK-stödets mejl 7/8 skulle sakna avregistreringslänk.');
+}
+
 // Bevakningspopulationens sändfunktioner (mejl.ts) — MEJLTEXTER.md #1–#5
 // plus de äldre gratis-bevakningsmejlen (paminnelse14/3) som redan gick
 // via sendMejl() innan J1. Transaktionsmejlen (kvitto, köpbekräftelse,
@@ -42,6 +50,10 @@ const BEVAKNINGSFUNKTIONER = [
   'sendAndringsbesked',
   'sendGiltighetsvarningNiva1',
   'sendGiltighetsvarningNiva2',
+  // U3 (Jacob 2026-08-19) — LOK-stödet (MEJLTEXTER.md #7/#8), samma
+  // bevakningspopulation, tidigare utelämnade ur den här listan.
+  'sendNationellPaminnelse28',
+  'sendNationellPaminnelseSista',
 ];
 
 const mejlTsPath = join(process.cwd(), 'src', 'lib', 'mejl.ts');
