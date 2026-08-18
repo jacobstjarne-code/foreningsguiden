@@ -7,215 +7,228 @@ ansokningssystem:
   namn: E-tjänster för bidrag inom kultur och fritid
   url: https://etjanster.nynashamn.se/EService/EServiceStart.aspx?id=eea6376d-666b-4adf-8396-613fff3311d7
 kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-verifierad: 2026-07-27
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- id: nynashamn-lokalt-aktivitetsstod
-  namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  malgrupp: Föreningar med barn- och ungdomsverksamhet eller aktiviteter för personer med funktionsnedsättning
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Registrerad förening
-  - Kontinuerlig rapportering av deltagande i ApN (Aktivitetskort på nätet)
-  - Rapport senast 25 februari för period 1 juli - 31 december
-  - Rapport senast 25 augusti för period 1 januari - 30 juni
-  belopp: null
-  sen_ansokan: Rapportering måste ske senast deadline för att erhålla bidrag
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Lokalt aktivitetsstöd är kommunens basstöd till föreningar med barn- och ungdomsverksamhet. Belopp baseras på
-    rapporterad aktivitet.
-  foreningstyp:
-  - idrott
-  - ungdom
-  senast_verifierad: '2026-08-03'
-- id: nynashamn-lokal-och-driftsbidrag
-  namn: Lokal- och driftsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar med lokalkostnader för sin verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav:
-  - Dokumenterade lokalkostnader från föregående år
-  - Hyrd eller ägd lokal i Nynäshamn
-  - Registrerad förening
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bidrag för lokalkostnader baseras på föregående år. Ansökning via e-tjänst senast 31 mars.
-  foreningstyp:
-  - idrott
-  - kultur
-  senast_verifierad: '2026-08-03'
-- id: nynashamn-stod-publika-evenemang
-  namn: Stöd till publika evenemang
-  kategori:
-  - kultur
-  malgrupp: Föreningar för specifika publika kulturarrangemang
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Specifikt kulturarrangemang för publik
-  - Ansökning bör göras i god tid före evenemanget
-  - Registrerad förening
-  belopp: null
-  sen_ansokan: Löpande, men bör ansökas i god tid före evenemanget
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd för publika evenemang kan ansökas löpande under året. Ansökning bör göras i god tid före arrangemanget.
-  foreningstyp:
-  - kultur
-  senast_verifierad: '2026-08-03'
 - id: nynashamn-startbidrag
   namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Nya föreningar eller nya verksamhetsgrenar
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Nystartade ideella föreningar inom kultur- och fritidsområdet i Nynäshamns kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
   krav:
-  - Ny förening eller ny verksamhetsgren
-  - Verksamhetsplan
-  belopp: null
-  sen_ansokan: Löpande
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Startbidrag för nya föreningar. Löpande ansökning via e-tjänst.
-  foreningstyp:
-  - idrott
-  - kultur
-  - annat
-  senast_verifierad: '2026-08-03'
-- id: nynashamn-studieverbundsbidrag
-  namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  malgrupp: Studieförbund med folkbildningsverksamhet
-  deadlines:
-    typ: lopande
-    datum: []
+  - Föreningen ska vara ideell, demokratiskt uppbyggd, öppen för målgruppen och bedriva kontinuerlig verksamhet i Nynäshamns kommun
+  - Föreningen ska ha bildats under de senaste tre månaderna och ansökan ska lämnas inom tre månader från bildandet
+  - Ansökan ska innehålla konstituerande protokoll, stadgar, verksamhetsplan, uppgift om hur stödet ska användas, medlemsförteckning eller revisorsintyg, organisationsnummer och konto
+  - Föreningen ska vara registrerad i kommunens föreningsregister, ha minst 100 kronor i årlig medlemsavgift om inte undantag medges och uppfylla kommunens demokrati-, försäkrings- och dokumentationsvillkor
+  - Stödet ska redovisas senast sex månader efter utbetalningen
+  belopp: Kommunen publicerar ingen generell beloppsnivå för startbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under året men måste komma in inom tre månader från föreningens bildande.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan görs digitalt och kan avse den nya föreningens uppstart, inte en ny sektion i en befintlig förening.
+  senast_verifierad: '2026-08-18'
+- id: nynashamn-lokalt-aktivitetsstod
+  namn: Kommunalt lokalt aktivitetsstöd
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar med gruppaktiviteter för barn och unga 6–20 år eller personer med funktionsnedsättning oavsett ålder.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Godkänt studieförbund
-  - Folkbildningsverksamhet
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor och vara registrerad i föreningsregistret och Aktivitetskort på nätet
+  - En sammankomst ska vara planerad, pågå minst 60 minuter, ha gemensam start och avslutning samt ledas av en ansvarig ledare som fyllt 15 år
+  - Gruppen ska ha minst tre bidragsberättigade medlemmar; deltagare 6–12 år får räknas vid högst 40 och deltagare 13–15 år vid högst 60 sammankomster per halvår
+  - Närvaro ska registreras löpande och en ledare får inte samtidigt ansvara för flera grupper; normalt räknas högst en aktivitet per förening och dag
+  - Ansökan för januari–juni ska lämnas senast 25 augusti och för juli–december senast 25 februari
+  belopp: Stödet beräknas efter godkända deltagartillfällen; integrerad verksamhet där deltagare med funktionsnedsättning kräver extra ledare får tre gånger ordinarie stöd
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sena ansökningar avslås om inte föreningen visar rimliga och relevanta omständigheter.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen publicerar beräkningsgrunden men inte den ordinarie kronnivån; stödet rapporteras halvårsvis i ApN.
+  alder_min: 6
+  alder_max: 20
+  senast_verifierad: '2026-08-18'
+- id: nynashamn-stod-publika-evenemang
+  namn: Stöd till publika evenemang
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar, organisationer, juridiska personer, grupper och enskilda som arrangerar kortare offentliga kultur-, idrotts- eller traditionsanknutna evenemang i kommunen.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [03-25, 09-25] }
+  krav:
+  - Evenemanget ska vara offentligt, hålla god kvalitet, ha allmänintresse och genomföras i Nynäshamns kommun
+  - Ansökan ska innehålla projektplan och ekonomisk plan och kommunen ska anges som stödgivare med kommunens logotyp
+  - Stöd ges inte till kommunal eller redan kommunfinansierad verksamhet, bestående investeringar, religiösa eller politiska projekt, välgörenhet eller vinstsyfte
+  - Sökande föreningar ska uppfylla kommunens allmänna demokrati-, försäkrings-, register- och dokumentationsvillkor
+  - Evenemanget och ekonomin ska redovisas senast tre månader efter genomförandet
+  belopp: Stödet prövas individuellt och får inte finansiera hela evenemanget; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 mars för evenemang april–september och 25 september för evenemang oktober–mars.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet kan även sökas av enskilda och grupper, men posten ingår eftersom föreningar uttryckligen är bidragsberättigade.
+  senast_verifierad: '2026-08-18'
+- id: nynashamn-lokal-och-driftsbidrag
+  namn: Lokal- och driftsbidrag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar vars huvudsakliga verksamhet bedrivs i en egen eller externt hyrd lokal eller anläggning.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och huvudsakligen använda lokalen eller anläggningen för sin bidragsberättigade verksamhet
+  - Kommunal lokal ska saknas för verksamheten; en ny sökande ska kontakta kommunen före ansökan och lokal utanför kommunen godtas bara när motsvarande möjlighet saknas lokalt
+  - Stödet avser verksamhetsyta, inte kontor eller klubblokal, och kostnader och intäkter ska kunna styrkas; kulturbyggnader ska vara godkända i förväg
+  - Godtagbara kostnader är investeringar i verksamhetsytor, el, vatten och avlopp, värme, avfall, försäkring, hyra, ränta och tomträtt eller arrende
+  - Ansökan ska avse föregående års kostnader och lämnas senast 31 mars
+  belopp: Högst 50 procent av beräknad nettolokalkostnad upp till 1 000 000 kr och högst 70 procent för kostnadsdelen mellan 1 000 000 och 1 500 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars; utbetalning sker senast 30 april.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Fördelningen påverkas av kommunens årliga budget och antalet godkända ansökningar.
+  senast_verifierad: '2026-08-18'
+- id: nynashamn-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur]
+  malgrupp: Lokala avdelningar av studieförbund som är godkända av Folkbildningsrådet och bedriver verksamhet i Nynäshamns kommun.
+  foreningstyp: [kultur, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [04-30] }
+  krav:
+  - Studieförbundet ska vara godkänt av Folkbildningsrådet, följa dess statsbidragsvillkor och ha en lokal avdelning med verksamhet i Nynäshamns kommun
+  - Ansökan får endast avse den lokala verksamheten och samma verksamhet får inte få annat kommunalt stöd
+  - Ansökan ska innehålla stadgar, verksamhetsberättelse, årsmötes- och konstituerande protokoll, resultat- och balansräkning, revisionsberättelse och firmateckningsunderlag
+  - Folkbildningsrådets sammanställning över föregående års studietimmar i kommunen ska bifogas
+  - Ansökan ska lämnas senast 30 april
   belopp: null
-  sen_ansokan: Löpande
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bidrag för studieförbund med folkbildningsverksamhet. Löpande ansökning.
-  foreningstyp:
-  - kultur
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Det årliga anslaget till studieförbunden fördelas efter godkända studietimmar och tillgänglig budget
+  sen_ansokan: Ansökan ska lämnas senast 30 april; utbetalning sker senast 31 maj.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Fördelningen ska främja likvärdiga förutsättningar mellan studieförbunden.
+  senast_verifierad: '2026-08-18'
 - id: nynashamn-sarskilt-bidrag
   namn: Särskilt bidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar för särskilda projekt eller ändamål
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella och ekonomiska föreningar med en tillfällig kostnad, investering eller ett projekt utanför den ordinarie verksamheten.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
   krav:
-  - Registrerad förening
-  - Särskilt projekt eller ändamål
-  - Detaljerad ansökan och budget
-  belopp: null
-  sen_ansokan: Löpande, handläggningstid cirka 1 månad
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Särskilt bidrag för projekt utanför föreningens ordinarie verksamhet. Löpande ansökning med cirka 1 månad handläggningstid.
-  foreningstyp:
-  - idrott
-  - kultur
-  - annat
-  senast_verifierad: '2026-08-03'
-- id: nynashamn-semesteraktiviteter
-  namn: Stöd för semesteraktiviteter
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som erbjuder aktiviteter under semesterperioder
-  deadlines:
-    typ: lopande
-    datum: []
+  - Föreningen ska uppfylla kommunens allmänna villkor; även ekonomiska föreningar kan söka detta stöd
+  - Ansökan ska avse en nödvändig engångskostnad, ett inköp, ett projekt eller en investering utanför ordinarie verksamhet och innehålla beskrivning och budget
+  - Åtgärden får inte redan vara genomförd eller finansierad och stödet får inte täcka hela kostnaden
+  - Verksamhet för barn och unga, pensionärer och personer med funktionsnedsättning samt geografisk spridning prioriteras
+  - Beviljat stöd ska redovisas senast tre månader efter genomförandet
+  belopp: Högst 50 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande; normal handläggningstid är cirka en månad.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan ska göras innan kostnaden uppstår eller projektet genomförs.
+  senast_verifierad: '2026-08-18'
+- id: nynashamn-lovaktiviteter
+  namn: Stöd till lovaktiviteter
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar som ordnar kostnadsfria lovaktiviteter för barn, unga och deras vårdnadshavare.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
   krav:
-  - Semesteraktiviteter för barn och ungdomar
-  - Registrerad förening
-  - Dokumentation av aktiviteterna
-  belopp: null
-  sen_ansokan: Löpande
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor och aktiviteten ska genomföras i Nynäshamns kommun
+  - Aktiviteten ska vara kostnadsfri, offentlig och hålla god kvalitet under ett skollov för barn, unga och deras vårdnadshavare; påsklovsaktiviteter omfattas inte
+  - Stöd ges inte till medlemsintern verksamhet, permanenta investeringar, religiösa eller politiska aktiviteter, välgörenhet eller vinstsyfte
+  - Ansökan ska innehålla aktivitetsbeskrivning och budget och lämnas minst sex veckor före det aktuella lovet
+  - Genomförandet ska redovisas senast två månader efter aktiviteten
+  belopp: Ledararvode får beräknas till högst 95 kr per timme och ledare; övrigt stöd prövas mot redovisad budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas minst sex veckor före det lov då aktiviteten ska genomföras.
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet kan också användas för utbildning av unga ledare inom lovverksamheten.
+  senast_verifierad: '2026-08-18'
+- id: nynashamn-samkraftsvandring
+  namn: Samkraftsvandring (nattvandring)
+  kategori: [social, ovrig]
+  malgrupp: Registrerade föreningar som trygghetsvandrar under större helger i Nynäshamns kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska vara registrerad i kommunens föreningsregister och uppfylla kommunens allmänna villkor för föreningsstöd
+  - Föreningen ska teckna avtal med Nattvandring.nu och får genom avtalet utbildning, västar och försäkring
+  - Helg, tid och plats ska överenskommas med kommunens samordnare
+  - Varje vandringsgrupp ska bestå av minst fyra personer från föreningen, samtliga över 18 år, och begärda utdrag ur belastningsregistret ska lämnas
+  - Minst en person i varje grupp ska ha genomfört Nattvandring.nu:s grundutbildning och varje ersättningsgrundande pass ska pågå i fyra timmar
+  belopp: 3 000 kr per genomfört fyratimmarspass under en större helg
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag; helger och pass planeras med samordnaren.
   kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För varje genomförd fyrtiomminuterssamkraftsvandring under flaggdag utgörs ersättning med 3000 kronor, som betalas
-    ut efter genomförd promenad. Även allmänna semesteraktiviteter kan stödjas.
-  foreningstyp:
-  - idrott
-  - kultur
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ersättningen betalas ut efter genomförd vandring.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: nynashamn-registrering
-  vad: Registrering som förening
-  beskrivning: Föreningen måste vara registrerad i Nynäshamn kommun för att kunna söka föreningsbidrag.
-  system: Nynäshamn kommuns föreningsregister
+  vad: Registrering och allmänna föreningsvillkor
+  beskrivning: Föreningen ska vara införd i kommunens föreningsregister, vara demokratiskt uppbyggd och öppen, bedriva kontinuerlig ideell verksamhet i kommunen samt uppfylla villkoren om medlemskap, försäkring, mänskliga rättigheter och drogförebyggande arbete.
+  system: Nynäshamns kommuns föreningsregister
   ledtid: null
-  ledtid_text: Kontrolleras vid ansökning
-  giltighet: null
+  ledtid_text: Registreringen ska vara klar före ansökan
+  giltighet: Registreringen och föreningsuppgifterna ska hållas aktuella
   ordning: 1
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  giltighet_status: okand
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  giltighet_status: kontrollast
+- id: nynashamn-arliga-handlingar
+  vad: Årliga föreningshandlingar
+  beskrivning: Verksamhetsberättelse, årsmötes- och konstituerande protokoll, resultat- och balansräkning, revisionsberättelse, firmateckning och vid behov försäkringsintyg ska lämnas digitalt.
+  system: Nynäshamns kommuns e-tjänst
+  ledtid: null
+  ledtid_text: Lämnas årligen
+  giltighet: Handlingarna ska lämnas varje kalenderår och vara aktuella och högst ett år gamla
+  ordning: 2
+  kalla_url: https://nynashamn.se/download/18.2cb62a9619b081ae16b2a5f3/1765973638790/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20kultur%20och%20fritidsverksamheter%20i%20Nyn%C3%A4shamns%20kommun.pdf
+  giltighet_status: kontrollast
 - id: nynashamn-apn-registrering
   vad: Registrering i Aktivitetskort på nätet (ApN)
-  beskrivning: För lokalt aktivitetsstöd måste föreningen registreras i ApN-systemet. Vid första användning kontaktas kommunens
-    föreningssamordnare för registrering.
+  beskrivning: Föreningar som söker kommunalt lokalt aktivitetsstöd ska registreras i ApN och rapportera närvaro löpande där.
   system: Aktivitetskort på nätet (ApN)
   ledtid: null
-  ledtid_text: Registrering görs innan första rapportering
-  giltighet: null
-  ordning: 2
-  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
-  giltighet_status: okand
-- id: nynashamn-redovisning
-  vad: Redovisning av bidrag
-  beskrivning: Föreningar som mottagit bidrag måste redovisa hur medlen användes genom e-tjänstens rapporteringsfunktion.
-  system: E-tjänster Nynäshamn kommun
-  ledtid: null
-  ledtid_text: Redovisning efter bidragsperioden
+  ledtid_text: Registrering görs före första rapporteringen
   giltighet: null
   ordning: 3
-  kalla_url: https://etjanster.nynashamn.se/EService/EServiceStart.aspx?id=00f5ecb0-09a2-4619-8e57-11716e8b59c7
-  giltighet_status: okand
+  kalla_url: https://nynashamn.se/service/kultur--fritid/foreningsliv/foreningsbidrag-inom-kultur-och-fritid
+  giltighet_status: ingen_regel
