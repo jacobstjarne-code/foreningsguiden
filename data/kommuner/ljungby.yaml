@@ -4,10 +4,16 @@ lan: Kronobergs län
 befolkning: 28105
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: E-tjänst / Webbformulär
-  url: https://etjanster.ljungby.se/oversikt/overview/53
+  namn: FRI Webb-Bidrag / e-tjänst
+  url: https://fri.ljungby.se/bidrag/
 kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: ljungby-anlaggningsstod
   namn: Anläggningsstöd
@@ -20,17 +26,23 @@ bidrag:
     datum:
     - 05-01
   krav:
-  - Föreningen måste ha verksamhetslokaler
-  - Lokalen ska användas för föreningens medlemsaktiviteter
-  - Ekonomisk redogörelse från föregående år krävs
-  belopp: null
+  - Föreningen ska äga anläggningen eller ha ett minst tioårigt tomträtts- eller arrendeavtal med driftansvar
+  - Anläggningen ska vara driftsäker och i funktionsdugligt skick
+  - Föreningen ska svara för samtliga driftkostnader och bedriva kontinuerlig verksamhet i anläggningen
+  - En underhållsplan på minst tre år bör finnas i föreningsregistret
+  - Stöd lämnas inte för kommunalt ägd anläggning eller anläggning med ekonomiskt avtal där kommunen är part
+  belopp: Schablonbelopp som bestäms av anläggningens eller lokalens typ
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig 2 maj-30 juni med halverat stödbelopp
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=51&year=2026
+  belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [idrott, kultur, friluft, annat]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-hyresstod
   namn: Hyresstöd
   kategori:
@@ -45,14 +57,20 @@ bidrag:
   krav:
   - Föreningen ska ha minst 10 medlemmar i åldern 7-25 år
   - Föreningen ska ha genomfört minst 15 sammankomster för åldersgruppen under verksamhetsåret
-  belopp: null
+  - Stödet avser lokalkostnader för barn- och ungdomsverksamheten och kräver hyresavtal
+  - Stöd lämnas inte för kommunala eller subventionerade lokaler, kommersiella arrangemang eller lokaler med annat driftstöd
+  belopp: 50 % av årskostnaden för barn- och ungdomsverksamheten, högst 20 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig 2-30 juni med reducerat belopp
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=3&year=2026
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: Reducerat stöd (halvat belopp) för ansökningar mellan 2-30 juni.
+  foreningstyp: [idrott, kultur, ungdom]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-investeringsstod
   namn: Investeringsbidrag
   kategori:
@@ -63,17 +81,23 @@ bidrag:
     typ: lopande
     datum: []
   krav:
-  - Dokumenterad kostnad för investeringen krävs
-  - Föreningen ska äga anläggningen eller lokalen som investeringen avser
-  - Projektkalkyl och budget för investeringen krävs
-  belopp: null
+  - Föreningen ska verka inom kultur, idrott eller friluft och äga anläggningen eller lokalen
+  - Investeringen och kostnaden ska beskrivas tydligt och får inte vara genomförd före ansökan
+  - Ekonomisk redovisning med fakturor eller kvitton ska lämnas senast tolv veckor efter beslut
+  - Normalt underhåll och förbrukningsartiklar är inte stödberättigade
+  - Efterfrågade föreningsdokument ska ha publicerats i föreningsregistret i obruten följd i minst två år
+  belopp: 50 % av redovisade kostnader, högst 25 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande under året
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=43&year=2026
+  belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Stöd för större investeringar i utrustning eller anläggningar.
+  foreningstyp: [idrott, kultur, friluft]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-ledarbidrag
   namn: Ledarutbildningsstöd
   kategori:
@@ -81,20 +105,27 @@ bidrag:
   - kultur
   malgrupp: Ledare verksamma i föreningens barn- och ungdomsverksamhet, för utbildning och kompetensutveckling
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Utbildningen ska vara för ledare som är verksamma i föreningens barn- och ungdomsverksamhet
-  - Dokumentation av deltagare och utbildningsinnehåll krävs
+  - Utbildningen ska vara genomförd och avslutad och ha en fastställd kursplan
+  - Deltagarnas namn, föreningsroller och utbildningsbevis ska bifogas
+  - Fakturor eller kvitton för utbildningen ska bifogas
   - Ansökan senast 6 månader efter genomförd utbildning
-  belopp: null
+  - Reseersättning, förlorad arbetsförtjänst, domarutbildning och elittränarutbildning ersätts inte
+  belopp: Utbildnings- och logikostnader, högst 20 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=4&year=2026
+  belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Stöd för utveckling av ledarresurser inom föreningen.
+  foreningstyp: [idrott, kultur, ungdom]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-aktivitetsstod
   namn: Lokalt aktivitetsstöd
   kategori:
@@ -110,16 +141,22 @@ bidrag:
   krav:
   - Föreningen ska ha minst 10 medlemmar i åldrarna 6-25 år
   - Föreningen ska ha genomfört minst 15 sammankomster för åldersgruppen under verksamhetsåret
-  - Verksamhetsplan för året krävs
-  - Årsräkenskaper från föregående år ska inlämnas
-  belopp: null
+  - Sammankomsten ska vara beslutad av föreningen, ledarledd och ha minst fem deltagare i målgruppen
+  - Aktiviteten ska pågå minst 45 minuter och ha minst en ledare per 20 deltagare
+  - Närvaro ska registreras och samma medlem får bara räknas en gång per dag i samma förening
+  - Föreningens medlemsuppgifter ska uppdateras årligen och föreningen ska intyga kontroll av belastningsregister för berörda ledare
+  belopp: Stöd per godkänd sammankomst; kommunen publicerar ingen aktuell kronor-per-sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=54&year=2026
+  belopp_status: ingen_regel
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Två sökperioder årligen: höst (deadline 25 februari) och vår (deadline 25 augusti).'
+  foreningstyp: [idrott, kultur, ungdom]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-social-organisation
   namn: Bidrag till social organisation
   kategori:
@@ -139,6 +176,8 @@ bidrag:
   - Minst 10 medlemmar som är bosatta/folkbokförda i Ljungby kommun
   - Föreningen ska ta ut en skälig medlemsavgift
   belopp: max 24700
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter deadline
   kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
   belopp_status: kontrollast
@@ -146,6 +185,8 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Stöd för organisationer som utför socialt utvecklingsarbete som komplement till kommunens verksamhet.
+  foreningstyp: [social]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-funktionsnedsatta
   namn: Bidrag för funktionsnedsatta och patientföreningar
   kategori:
@@ -166,6 +207,8 @@ bidrag:
   - Minst 10 medlemmar som är bosatta/folkbokförda i Ljungby kommun
   - Föreningen ska ta ut en skälig medlemsavgift
   belopp: max 24700
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter deadline
   kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
   belopp_status: kontrollast
@@ -173,6 +216,8 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Stöd för organisationer för personer med funktionsnedsättning och patientföreningar.
+  foreningstyp: [social]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-pensionar
   namn: Pensionärsföreningsstöd
   kategori:
@@ -192,6 +237,8 @@ bidrag:
   - Minst 10 medlemmar som är bosatta/folkbokförda i Ljungby kommun
   - Föreningen ska ta ut en skälig medlemsavgift
   belopp: max 24700
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter deadline
   kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
   belopp_status: kontrollast
@@ -199,6 +246,8 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Stöd för pensionärsföreningar som befrämjar gemenskap och aktivitet för äldre medlemmar.
+  foreningstyp: [social]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-jubileum
   namn: Stöd till jubilerande förening
   kategori:
@@ -214,54 +263,378 @@ bidrag:
   - Föreningen ska beskriva hur de kommer att uppmärksamma sitt jubileum
   - Ansökan ska göras under jubileumsåret (ej året före eller efter)
   belopp: 5000-15000
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=44&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: '50 år: 5 000 kr, 100 år: 10 000 kr, 150 år: 15 000 kr.'
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - id: ljungby-arrangemang-stort
   namn: Större arrangemang
   kategori:
   - kultur
   malgrupp: Föreningar som arrangerar större kulturarrangemang
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget måste vara öppet för allmänheten
   - Arrangerat inom Ljungby kommun
   - Ansökan senast fyra månader före genomförande
-  - Försäkring för arrangemanget krävs
+  - Start- och slutdatum samt kostnader och intäkter ska framgå av ansökan
+  - Entrébelagda arrangemang ska godta Kompiskortet
+  - Religiösa eller partipolitiska arrangemang, marknader, basarer, välgörenhetsevenemang och insamlingar stöds inte
   belopp: max 50000
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan senast fyra månader före arrangemanget
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=41&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd för större kulturarrangemang av betydelse för kommunen.
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: 2026 års medel är fördelade och kommunen tar inte emot fler ansökningar under året.
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+  status: pausad
 - id: ljungby-snabbstod
   namn: Snabbstöd arrangemang
   kategori:
   - kultur
   malgrupp: Föreningar som arrangerar arrangemang inom kort tid
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget ska vara öppet för allmänheten
   - Arrangerat inom Ljungby kommun
   - Ansökan senast en månad före genomförande
+  - Start- och slutdatum samt fastställd budget eller kostnadsberäkning ska bifogas
+  - Entrébelagda arrangemang ska godta Kompiskortet
+  - Religiösa eller partipolitiska arrangemang, marknader, basarer, välgörenhetsevenemang och insamlingar stöds inte
   belopp: max 10000
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan senast en månad före arrangemanget
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=40&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Snabbt stöd för nya arrangemang (max 10 000 kr) eller återkommande (max 5 000 kr).
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-boverket-samlingslokaler
+  namn: Kommunal medfinansiering till Boverkets allmänna samlingslokaler
+  kategori: [kultur, ovrig]
+  malgrupp: Ideella organisationer och andra icke-vinstdrivande aktörer som äger eller disponerar en allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [05-01]
+  krav:
+  - Boverket ska bevilja investeringsbidraget för att kommunalt stöd ska kunna lämnas
+  - Organisationen ska äga lokalen eller ha nyttjanderättsavtal och ha förutsättningar att långsiktigt driva och förvalta den
+  - Lokalen ska användas allsidigt och vara lättillgänglig för föreningsliv, möten, kultur eller fritidsaktiviteter
+  - Åtgärdsbeskrivning, tidsplan, kostnads- och finansieringsplan, driftkalkyl, årsredovisning, verksamhetsberättelse och stadgar ska lämnas
+  - Ansökan ska undertecknas av behörig firmatecknare och lämnas till både Boverket och kommunen
+  belopp: Kommunens medfinansiering beslutas individuellt; någon generell kommunal beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 maj
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=32&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunalt stöd är villkorat av Boverkets beslut.
+  foreningstyp: [kultur, hembygd, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-lss-paraidrott-aktivitetsstod
+  namn: LSS- och paraidrottsaktivitetsstöd
+  kategori: [idrott, funktionsratt]
+  malgrupp: Föreningar med gruppaktiviteter för deltagare med funktionsnedsättning från 6 år
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Föreningen ska ha minst 10 medlemmar i målgruppen från 6 år och minst 5 sammankomster under verksamhetsåret
+  - Deltagare ska vara medlemmar, med ett begränsat undantag för rekryteringsaktiviteter
+  - Sammankomsten ska vara föreningsbeslutad, ledarledd och ha minst fem deltagare i målgruppen
+  - Aktiviteten ska pågå minst 45 minuter och ha minst en ledare per 20 deltagare
+  - Närvaro ska registreras och samma medlem får bara räknas en gång per dag i samma förening
+  - Föreningen ska uppdatera medlemsuppgifterna i föreningsregistret årligen
+  belopp: Stöd per godkänd sammankomst; kommunen publicerar ingen aktuell kronor-per-sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Två ansökningstillfällen per år, 25 februari och 25 augusti
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=63&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ingen övre åldersgräns gäller för deltagarna.
+  foreningstyp: [idrott, social]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-lokalt-utvecklingsstod
+  namn: Lokalt utvecklingsstöd
+  kategori: [ovrig]
+  malgrupp: Sockenråd, byalag, byföreningar, utvecklingsgrupper, bygdeföreningar och samhällsföreningar
+  deadlines:
+    typ: fasta
+    datum: [05-31]
+  krav:
+  - Föreningen ska arbeta för bygdens eller ortens utveckling och attraktivitet
+  - Verksamhetsberättelse, årsmötesprotokoll, verksamhetsplan, stadgar, resultatrapport och balansrapport ska bifogas
+  - Ansökan ska lämnas av en förening som tillhör den publicerade målgruppen
+  belopp: 7 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar 1 juni–26 juli kan få halverat belopp; därefter stänger ansökan
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=53&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  foreningstyp: [hembygd, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-bygdegardsforeningar
+  namn: Stöd till bygdegårdsföreningar
+  kategori: [kultur, ovrig]
+  malgrupp: Bygdegårdsföreningar som äger eller har driftansvar för en lokal eller anläggning
+  deadlines:
+    typ: fasta
+    datum: [05-01]
+  krav:
+  - Föreningen ska ha minst 12 aktivitetstillfällen per år
+  - Föreningen ska äga lokalen eller ha driftansvar för lokalen eller anläggningen
+  - Egna styrelsemöten får inte räknas som stödgrundande aktiviteter
+  - Verksamhetsberättelse, årsmötesprotokoll, verksamhetsplan, resultatrapport och balansrapport ska bifogas
+  belopp: Verksamhetsstödet beräknas efter lokalens yta och antalet egna aktiviteter och uthyrningar; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar 2 maj–30 juni får halverat stödbelopp
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=33&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  foreningstyp: [hembygd, kultur, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-hembygdsforeningar
+  namn: Stöd till hembygdsföreningar
+  kategori: [kultur, ovrig]
+  malgrupp: Hembygdsföreningar med verksamhet i Ljungby kommun
+  deadlines:
+    typ: fasta
+    datum: [05-01]
+  krav:
+  - Sökanden ska vara en hembygdsförening
+  - Verksamhetsberättelse, årsmötesprotokoll, verksamhetsplan, resultatrapport och balansrapport ska bifogas
+  - Föreningen ska uppge om den äger eller har driftansvar för en hembygdspark eller hembygdsgård
+  belopp: Ett av två schablonbelopp beroende på om föreningen äger eller driver en hembygdspark eller hembygdsgård; nivåerna publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar 2 maj–30 juni får halverat stödbelopp
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=34&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  foreningstyp: [hembygd]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-agunnaryds-bygdefond
+  namn: Agunnaryds bygdefond
+  kategori: [ovrig]
+  malgrupp: Opolitiska föreningar med hemvist i Agunnaryd som stärker serviceortens utveckling och attraktivitet
+  deadlines: { typ: fasta, datum: [03-01] }
+  krav:
+  - Sökanden ska vara en opolitisk förening med hemvist inom Agunnaryds tätortsgräns
+  - Projektet ska vara föreningsinitierat och inte ha påbörjats eller genomförts före ansökan
+  - Samma kostnad får inte finansieras av ett annat kommunalt stöd
+  - Religiösa eller politiska projekt och projekt för enskilda hushåll eller personer stöds inte
+  - Investeringar ska ha en plan för drift, underhåll, framtida kostnader och uppskattad livslängd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årets utdelningsbara avkastning i Agunnaryds bygdefond; aktuell totalsumma publiceras inte
+  sen_ansokan: Ansökningsperiod 16 januari–1 mars 2026
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=56&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kostnader redovisas före utbetalning och senast tre år efter beslut.
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-hamneda-bygdefond
+  namn: Hamneda bygdefond
+  kategori: [ovrig]
+  malgrupp: Opolitiska föreningar med hemvist i Hamneda som stärker serviceortens utveckling och attraktivitet
+  deadlines: { typ: fasta, datum: [03-01] }
+  krav:
+  - Sökanden ska vara en opolitisk förening med hemvist inom Hamnedas tätortsgräns
+  - Projektet ska vara föreningsinitierat och inte ha påbörjats eller genomförts före ansökan
+  - Samma kostnad får inte finansieras av ett annat kommunalt stöd
+  - Religiösa eller politiska projekt och projekt för enskilda hushåll eller personer stöds inte
+  - Investeringar ska ha en plan för drift, underhåll, framtida kostnader och uppskattad livslängd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årets utdelningsbara avkastning i Hamneda bygdefond; aktuell totalsumma publiceras inte
+  sen_ansokan: Ansökningsperiod 16 januari–1 mars 2026
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=57&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kostnader redovisas före utbetalning och senast tre år efter beslut.
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-lagan-bygdefond
+  namn: Lagan bygdefond
+  kategori: [ovrig]
+  malgrupp: Opolitiska föreningar med hemvist i Lagan som stärker serviceortens utveckling och attraktivitet
+  deadlines: { typ: fasta, datum: [03-01] }
+  krav:
+  - Sökanden ska vara en opolitisk förening med hemvist inom Lagans tätortsgräns
+  - Projektet ska vara föreningsinitierat och inte ha påbörjats eller genomförts före ansökan
+  - Samma kostnad får inte finansieras av ett annat kommunalt stöd
+  - Religiösa eller politiska projekt och projekt för enskilda hushåll eller personer stöds inte
+  - Investeringar ska ha en plan för drift, underhåll, framtida kostnader och uppskattad livslängd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årets utdelningsbara avkastning i Lagan bygdefond; aktuell totalsumma publiceras inte
+  sen_ansokan: Ansökningsperiod 16 januari–1 mars 2026
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=58&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kostnader redovisas före utbetalning och senast tre år efter beslut.
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-lidhults-bygdefond
+  namn: Lidhults bygdefond
+  kategori: [ovrig]
+  malgrupp: Opolitiska föreningar med hemvist i Lidhult som stärker serviceortens utveckling och attraktivitet
+  deadlines: { typ: fasta, datum: [03-01] }
+  krav:
+  - Sökanden ska vara en opolitisk förening med hemvist inom Lidhults tätortsgräns
+  - Projektet ska vara föreningsinitierat och inte ha påbörjats eller genomförts före ansökan
+  - Samma kostnad får inte finansieras av ett annat kommunalt stöd
+  - Religiösa eller politiska projekt och projekt för enskilda hushåll eller personer stöds inte
+  - Investeringar ska ha en plan för drift, underhåll, framtida kostnader och uppskattad livslängd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årets utdelningsbara avkastning i Lidhults bygdefond; aktuell totalsumma publiceras inte
+  sen_ansokan: Ansökningsperiod 16 januari–1 mars 2026
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=59&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kostnader redovisas före utbetalning och senast tre år efter beslut.
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-ryssby-bygdefond
+  namn: Ryssby bygdefond
+  kategori: [ovrig]
+  malgrupp: Opolitiska föreningar med hemvist i Ryssby som stärker serviceortens utveckling och attraktivitet
+  deadlines: { typ: fasta, datum: [03-01] }
+  krav:
+  - Sökanden ska vara en opolitisk förening med hemvist inom Ryssbys tätortsgräns
+  - Projektet ska vara föreningsinitierat och inte ha påbörjats eller genomförts före ansökan
+  - Samma kostnad får inte finansieras av ett annat kommunalt stöd
+  - Religiösa eller politiska projekt och projekt för enskilda hushåll eller personer stöds inte
+  - Investeringar ska ha en plan för drift, underhåll, framtida kostnader och uppskattad livslängd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årets utdelningsbara avkastning i Ryssby bygdefond; aktuell totalsumma publiceras inte
+  sen_ansokan: Ansökningsperiod 16 januari–1 mars 2026
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=60&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kostnader redovisas före utbetalning och senast tre år efter beslut.
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-landsbygdsfond
+  namn: Landsbygdsfond
+  kategori: [ovrig]
+  malgrupp: Opolitiska föreningar utanför Ljungby stad och serviceorterna som stärker landsbygdens utveckling och attraktivitet
+  deadlines: { typ: fasta, datum: [03-01] }
+  krav:
+  - Föreningen ska bedriva samhällsutveckling eller idrotts-, kultur-, barn- eller ungdomsverksamhet
+  - Föreningen ska ha hemvist utanför Ljungby stad och kommunens serviceorter
+  - Projektet ska vara föreningsinitierat och inte ha påbörjats eller genomförts före ansökan
+  - Samma kostnad får inte finansieras av ett annat kommunalt stöd
+  - Religiösa eller politiska projekt och projekt för företag, hushåll eller enskilda personer stöds inte
+  - Investeringar ska ha en plan för drift, underhåll, framtida kostnader och uppskattad livslängd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Ljungby kommuns landsbygdsfond; aktuell utdelningsbar totalsumma publiceras inte
+  sen_ansokan: Ansökan senast 1 mars 2026
+  kalla_url: https://fri.ljungby.se/bidrag/ansokaninfo.aspx?type=61&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kostnader redovisas före utbetalning och senast tre år efter beslut.
+  foreningstyp: [idrott, kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-stad-90-ar
+  namn: Evenemangsstöd Ljungby stad 90 år
+  kategori: [kultur, ovrig]
+  malgrupp: Organisationer och andra arrangörer som genomför publika jubileumsevenemang i Ljungby stad under 2026
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Evenemanget ska arrangeras under 2026 och lyfta Ljungbys 90-årsjubileum genom tema eller innehåll
+  - Evenemanget ska vara öppet för allmänheten, rikta sig till en bred målgrupp och vara politiskt och religiöst obundet
+  - Evenemanget ska märkas med jubileumssymbolen och publiceras i kommunens evenemangskalender
+  - Ansökan ska innehålla arrangör, datum, plats, beskrivning, specificerad kostnadsbudget och sökt belopp
+  - Efter genomförandet ska en rapport lämnas med bekräftelse, synliggörande av jubileet och uppskattat besöksantal
+  belopp: Högst 7 000 kr och högst 75 % av evenemangets totala kostnader per arrangör
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr avsatt för jubileumsevenemang under 2026
+  sen_ansokan: Ansökningar behandlas löpande tills potten är slut
+  kalla_url: https://www.ljungby.se/uppleva-och-gora/motesplatser-och-lokaler/arrangera-evenemang/ljungby-90-ar
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Tillfälligt stöd för jubileumsåret 2026.
+  foreningstyp: [kultur, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: ljungby-evenemang-bolmen-2026
+  namn: Sponsorpengar för evenemang vid Bolmen 2026
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar och organisationer i Ljungby, Hylte, Gislaved och Värnamo som ordnar evenemang kring sjön Bolmen
+  deadlines: { typ: fasta, datum: [12-01] }
+  krav:
+  - Insatsen ska stärka platsens attraktivitet och skapa liv och rörelse runt sjön Bolmen
+  - Kostnader ska kunna styrkas med kvitton
+  - Kommunens medfinansiering ska framgå i arrangörens kanaler och kommunens beachflagga ska användas under evenemanget
+  - Evenemanget ska publiceras i kommunens evenemangskalender
+  - Underlag för samtliga utgifter och inkomster ska lämnas digitalt senast en månad efter arrangemanget
+  belopp: Högst 75 % av kostnaderna och högst 10 000 kr per förening eller organisation
+  belopp_avser: per_forening
+  kommunens_pott: Totalt 50 000 kr för evenemang vid Bolmen 2026
+  sen_ansokan: Senast 1 december 2026; beslut fattas löpande
   kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
   belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Snabbt stöd för nya arrangemang (max 10 000 kr) eller återkommande (max 5 000 kr).
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Tillfälligt stöd för 2026.
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: ljungby-registrering
   vad: Registrera föreningen i kommunens föreningsregister
@@ -273,7 +646,7 @@ forutsattningar:
   giltighet: null
   ordning: 1
   kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: ljungby-dokumentation
   vad: Uppdatera årsräkenskaper och verksamhetsberättelse
   beskrivning: Föreningen ska årligen inlämna årsräkenskaper och verksamhetsberättelse. Detta är en förutsättning för att
@@ -281,10 +654,10 @@ forutsattningar:
   system: Föreningsregistret
   ledtid: null
   ledtid_text: Uppdateras årligen före bidragsdeadlines
-  giltighet: null
+  giltighet: Föreningsuppgifterna och handlingarna ska uppdateras årligen; kommunen publicerar ingen tidsbestämd giltighet för bidragsrätten
   ordning: 2
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/
-  giltighet_status: okand
+  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
+  giltighet_status: kontrollast
 - id: ljungby-kontakt
   vad: Kontakt för föreningsfrågor
   beskrivning: Kultur- och fritidsförvaltningen är den centrala kontaktpunkten för föreningsfrågor, bidrag och registrering.
@@ -294,5 +667,5 @@ forutsattningar:
   ledtid_text: null
   giltighet: null
   ordning: 3
-  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/
-  giltighet_status: okand
+  kalla_url: https://www.ljungby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
+  giltighet_status: ingen_regel
