@@ -4,264 +4,456 @@ lan: Dalarnas län
 befolkning: 16203
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
+  namn: Självservice, FRI Webb-Bidrag och blanketter
   url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-verifierad: '2026-08-01'
+kalla_url: &huvud https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: leksand-lokal-och-anlaggningsbidrag
   namn: Lokal- och anläggningsbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [idrott, ovrig]
+  foreningstyp: &idrott [idrott, friluft]
+  malgrupp: Idrotts- och friluftsföreningar med hyrd eller ägd lokal eller anläggning
   deadlines:
     typ: fasta
     datum:
     - 09-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod september.
+  krav:
+  - Föreningen ska äga eller hyra den lokal eller anläggning som ansökan avser
+  - Hyreskontrakt och verifierade kostnader för hyra, el och andra stödberättigade utgifter ska lämnas
+  - Stadgar, årsmötesprotokoll, års- och revisionshandlingar, verksamhetsplan och budget ska vara aktuella
+  belopp: Godkända verifierade kostnader för hyra, el med mera; ingen generell procentsats eller maxnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 september; senare ansökningar kan avvisas.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: leksand-driftbidrag-foreningsagd-anlaggning
   namn: Driftbidrag föreningsägd anläggning
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Idrotts- och friluftsföreningar som äger en anläggning
   deadlines:
     typ: fasta
     datum:
     - 09-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod september.
+  krav:
+  - Föreningen ska äga den anläggning vars driftkostnader ansökan avser
+  - Kostnader för el, bränsle och annan stödberättigad drift ska verifieras
+  - Fullständiga års- och ekonomihandlingar, verksamhetsplan och budget ska lämnas
+  belopp: Bidrag till verifierade driftkostnader som el och bränsle; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 september; senare ansökningar kan avvisas.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: leksand-ledarutbildningsbidrag
   namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Idrotts- och friluftsföreningar som utbildar ledare
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Kursen ska normalt anordnas av distrikts- eller riksorganisation och omfatta minst fyra lektionstimmar per dag
+  - Högst 14 kursdagar räknas; kongress, förbundsmöte, årsmöte och yrkesutbildning är inte stödberättigade
+  - Kursinbjudan, program och kursintyg ska bifogas och ansökan görs av föreningen, inte medlemmen
+  belopp: Högst 250 kr per deltagare och dag; årsmax 3 000–11 000 kr beroende på föregående års LOK-sammankomster
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast en månad efter avslutad kurs.
+  kalla_url: &norm https://leksand.se/download/18.2bc5213a18f7747564c8042/1715782231358/riktlinjer-for-foreningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-lokalt-anordnad-kurs
+  namn: Bidrag till lokalt anordnad kurs
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Idrotts- och friluftsföreningar som anordnar lokal ledarutbildning
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Kursen ska vara en lokal ledarutbildning i studiecirkel eller annan godkänd form
+  - Andra föreningar ska bjudas in om den egna föreningen inte fyller kursen
+  - Kostnadskalkyl, andra sökta bidrag, program, budget och fullständiga års- och ekonomihandlingar ska lämnas
+  belopp: Den del av kostnaden som inte täcks av annat statligt eller kommunalt stöd; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas minst en månad före kursen.
+  kalla_url: https://leksand.fri-go.se/bidrag/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: leksand-skidsparsbidrag
   namn: Skidspårsbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-- id: leksand-motionssparsbidrag
-  namn: Motionsspårsbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-- id: leksand-orienteringskartbidrag
-  namn: Orienteringskartbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-- id: leksand-isbanebidrag
-  namn: Isbanebidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-- id: leksand-lokalt-aktivitetsstod
-  namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-- id: leksand-verksamhetsbidrag-kulturforeningar
-  namn: Verksamhetsbidrag kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-- id: leksand-nyskapande-kulturprojekt
-  namn: Nyskapande kulturprojekt
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Föreningar som preparerar skidspår
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Föreningen ska preparera och sköta skidspår för allmän användning
+  - Nedlagd arbetstid ska redovisas i ansökan
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor och lämna aktuella års- och ekonomihandlingar
+  belopp: 150 kr per redovisad arbetstimme
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande enligt den aktuella portalen.
+  kalla_url: https://leksand.fri-go.se/bidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-motionssparsbidrag
+  namn: Motionsspårsbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Föreningar som sköter motionsspår
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningen ska ansvara för skötsel av ett motionsspår
+  - Nedlagd arbetstid och bränslekostnader ska redovisas och kostnader verifieras
+  - Ansökan ska lämnas till kommunens fritidsavdelning efter säsongens slut
+  belopp: Kan avse redovisad arbetstid och bränsle; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas efter säsongens slut.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-orienteringskartbidrag
+  namn: Orienteringskartbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Orienteringsföreningar som nyritar eller reviderar kartor
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en orienteringsförening
+  - Kostnaden ska avse nyritning eller revidering av orienteringskarta
+  - Fakturor eller motsvarande verifierade kostnadsunderlag ska bifogas
+  belopp: Bidrag till verifierade kartkostnader; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande enligt den aktuella portalen.
+  kalla_url: https://leksand.fri-go.se/bidrag/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-isbanebidrag
+  namn: Isbanebidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott
+  malgrupp: Föreningar som anlägger och sköter isbana
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska anlägga och sköta isbanan
+  - Isbanans yta ska anges i ansökan
+  - Elkostnader ska styrkas med fakturor eller kvitton
+  belopp: 0,50 kr per kvadratmeter is samt högst 3 000 kr i styrkt elkostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande enligt den aktuella portalen.
+  kalla_url: https://leksand.fri-go.se/bidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  kategori: [idrott, social, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med ledarledda aktiviteter för unga, pensionärer eller personer med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Verksamhet för 7–25-åringar ska följa de statliga LOK-reglerna
+  - Närvaro ska registreras vid varje sammankomst och underlagen sparas i fyra år
+  - En deltagare får bara räknas i en stödgrundande sammankomst åt gången; RF-föreningar kan importera kommunfil
+  belopp: 25 kr per sammankomst för 7–25 år; 30 kr per sammankomst för barn under 7 år samt personer med funktionsnedsättning eller pensionärer
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari respektive 25 augusti.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-verksamhetsbidrag-kulturforeningar
+  namn: Verksamhetsbidrag kulturföreningar
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Ideella kultur- och hembygdsföreningar med återkommande verksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-30
+  krav:
+  - Sökanden ska vara en ideell kulturförening, exempelvis hembygds-, musik- eller konstförening
+  - Kulturaktiviteter ska ingå i verksamhetsprogrammet och ansökan avser nästa verksamhetsår
+  - Stadgar, årsmötesprotokoll, års- och revisionshandlingar, verksamhetsplan och budget ska lämnas
+  belopp: Individuellt verksamhetsbidrag; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 september för nästa verksamhetsår.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-nyskapande-kulturprojekt
+  namn: Nyskapande kulturprojekt
+  kategori: [kultur]
+  foreningstyp: [kultur]
+  malgrupp: Juridiska personer med ett tidsbegränsat nyskapande kulturprojekt i Leksand
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en juridisk person och projektet ska vara tidsbegränsat, genomföras i Leksand och knyta an till kommunens styrdokument
+  - Ansökan ska beskriva mål, syfte, mervärde, metod, genomförande, budget, finansiering och hur resultaten tas till vara
+  - Stödet avser inte lokal, teknik, utrustning, drift, personstipendium, studieresa eller utbildning
+  belopp: Individuellt projektstöd; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: leksand-garantibelopp-och-punktbidrag-kulturevenemang
   namn: Garantibelopp och punktbidrag kulturevenemang
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [kultur]
+  foreningstyp: [kultur]
+  malgrupp: Ideella föreningar som ordnar offentliga kulturevenemang
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Evenemanget ska vara offentligt; garantibelopp gäller arrangemang med inträde och punktbidrag avgiftsfria arrangemang
+  - Sökanden ska vara en ideell förening, inte privatperson eller kommersiell aktör, och lämna budget, intäkter och senaste bokslut
+  - Verksamhetsrapport och ekonomisk rapport ska lämnas inom tre månader och kommunen anges som medarrangör i marknadsföring
+  belopp: Sökt belopp prövas individuellt; någon generell maxnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men ska göras före evenemanget.
+  kalla_url: https://leksand.se/download/18.d08a34f18ecb60b85c35465/1713346658052/ansokan-garantibelopp--punktbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 - id: leksand-startbidrag-social-verksamhet
   namn: Startbidrag social verksamhet
-  kategori:
-  - social
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [social]
+  foreningstyp: [social]
+  malgrupp: Nya ideella organisationer inom socialutskottets område
   deadlines:
     typ: fasta
     datum:
     - 09-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Organisationen ska vara ideell, verka inom socialutskottets område och ha minst tio medlemmar
+  - Verksamheten ska komplettera eller förstärka kommunens arbete, följa socialtjänstlagens värderingar och ha positiv betydelse lokalt
+  - Stadgar, årsmötesprotokoll, års- och revisionshandlingar, verksamhetsplan och budget ska lämnas
+  belopp: Individuellt startbidrag; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 september.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: leksand-verksamhetsbidrag-social-verksamhet
   namn: Verksamhetsbidrag social verksamhet
-  kategori:
-  - social
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [social]
+  foreningstyp: [social]
+  malgrupp: Ideella organisationer med etablerad social verksamhet
   deadlines:
     typ: fasta
     datum:
     - 09-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Organisationen ska ha bedrivit social verksamhet i minst ett år och ansökan avser ett kalenderår
+  - Aktuell registerblankett, medlemsantal, hyresavtal, kostnadsverifikat och andra bidragsgivare ska redovisas
+  - Stadgar, årsmötesprotokoll, års- och revisionshandlingar, verksamhetsplan och budget ska lämnas
+  belopp: Individuellt verksamhetsbidrag; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 september.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: leksand-studieforbundsbidrag
   namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med lokal verksamhet
   deadlines:
     typ: fasta
     datum:
     - 09-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Studieförbundet ska bedriva regelbunden och betydande verksamhet för kommuninvånare
+  - Centralorganisationen ska få statsbidrag genom Folkbildningsrådet
+  - Stadgar, årsmötesprotokoll, års- och revisionshandlingar, verksamhetsplan och budget ska lämnas
+  belopp: Individuellt bidrag; generell nivå och fördelningsregel publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 september.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-spontanansokan-foreningsstod
+  namn: Spontanansökan om föreningsstöd
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar vars ansökan inte ryms i en ordinarie ansökningsomgång
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara demokratiskt uppbyggd, ha stadgar, vald styrelse och revisor samt vara registrerad hos Skatteverket
+  - Verksamheten ska vara lokalt förankrad och uppfylla kommunens vision, värdegrund och minst ett av riktlinjens samhällsnyttiga ändamål
+  - Stadgar, årsmötesprotokoll, års- och revisionshandlingar, redovisning av tidigare bidrag, verksamhetsplan och budget ska lämnas
+  belopp: Individuellt efter prövning; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Spontanansökningar kan lämnas under året.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-kommunalt-stod-enskild-vaghallning
+  namn: Kommunalt stöd till enskild väghållning
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Formella väghållningsorganisationer med avtal om enskild väg
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Vägen ska förvaltas av en gemensamhetsanläggning med samfällighetsförening; annan organisationsform godtas bara vid synnerliga skäl
+  - Vägen ska leda till permanentboende, vara öppen för allmän trafik året runt och uppfylla teknisk standard och kommunal besiktning
+  - Organisationen ska ha avtal med kommunen och årligen senast 31 maj redovisa årsmöte, ekonomi, firmatecknare, förändringar och statsbidrag
+  belopp: Kommunal skötsel eller 30 kr per meter och år 2026; statsbidragsväg får mellanskillnaden upp till kommunnivån
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Återkommande ansökan senast 31 oktober enligt den gällande riktlinjen.
+  kalla_url: https://leksand.se/download/18.604f268119fa2fba2e21fd2f/1785326197697/Reviderat%20bidrag-Regler%20f%C3%B6r%20kommunalt%20st%C3%B6d%20till%20enskilda%20v%C3%A4gar%20Kf%202019-06-12%20%C2%A7%2037.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: leksand-bidrag-gemensamhetsanlaggning
+  namn: Bidrag till ny- eller ombildad gemensamhetsanläggning
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Samfällighetsföreningar och väghållningsorganisationer för en ny- eller ombildad gemensamhetsanläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara den samfällighetsförening eller väghållningsorganisation som ska förvalta gemensamhetsanläggningen
+  - Gemensamhetsanläggningen ska vara nybildad eller ombildad
+  - Organisationen ska ha organisationsnummer och behörig företrädare med e-legitimation
+  belopp: Engångsbelopp på 10 kr per löpmeter väg
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag.
+  kalla_url: https://sjalvservice.leksand.se/gemensamhetsanlaggningar
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 forutsattningar:
 - id: leksand-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  vad: Allmän behörighet för föreningsstöd
+  beskrivning: Föreningen ska vara demokratiskt uppbyggd, ha stadgar, vald styrelse och revisor, vara registrerad hos Skatteverket och bedriva lokalt förankrad verksamhet i linje med kommunens vision och värdegrund.
+  system: Självservice, FRI Webb-Bidrag och blanketter
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://leksand.se/foretag-och-foreningsliv/foreningar-och-foreningsliv/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: leksand-obligatoriska-underlag
+  vad: Obligatoriska ansökningsunderlag
+  beskrivning: Stadgar, senaste årsmötesprotokoll inklusive firmatecknare, verksamhetsberättelse, balans- och resultatrapport, revisionsberättelse, redovisning av tidigare kommunbidrag samt verksamhetsplan och budget ska lämnas.
+  system: Självservice, FRI Webb-Bidrag och blanketter
+  ledtid: null
+  ledtid_text: Underlagen lämnas med respektive ansökan
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
