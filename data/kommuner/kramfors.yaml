@@ -7,258 +7,523 @@ ansokningssystem:
   namn: Kommunens e-tjänst eller blankett
   url: https://www.kramfors.se/se--gora/bidrag.html
 kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.kramfors.se/download/18.1994628c17f255446eb14b/1645611863483/Riktlinje-kommunala-bidrag-till-ideella-f%C3%B6reningar.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: kramfors-driftbidrag-samlingslokaler
-  namn: Driftbidrag samlingslokaler
+  namn: Driftbidrag till föreningsägda samlingslokaler
   kategori:
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 11-01
-  krav: []
+  krav:
+  - Föreningen ska äga samlingslokalen och byggnaden ska bedömas som angelägen
+  - Lägenheter och kommersiella ytor ska särredovisas och är inte stödberättigade
+  - Föregående års kostnader och årsredovisning ska bifogas
+  - Ordförande och kassör ska intyga uppgifterna
   belopp: 25 procent av bruttokostnaderna
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  kalla_url: https://www.kramfors.se/download/18.1994628c17f255446eb14b/1645611921911/Tj%C3%A4nstef%C3%B6reskrift%20Driftbidrag%20f%C3%B6renings%C3%A4gda%20samlingslokaler.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-lokalkostnadsbidrag
   namn: Lokalkostnadsbidrag
   kategori:
   - idrott
   - kultur
+  - ovrig
+  foreningstyp: &ungdom [idrott, kultur, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 03-15
-  krav: []
-  belopp: null
+  krav:
+  - Lokalen ska ägas eller hyras för föreningens ungdomsverksamhet
+  - Endast ungdomsverksamhetens andel av lokalkostnaden är stödgrundande
+  - Föreningen får inte samtidigt få drift- och underhållsbidrag för samma egenägda anläggning
+  - Årsmöteshandlingar och lokalunderlag ska lämnas
+  belopp: 30 kr per sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-ledarutbildningsbidrag
   namn: Ledarutbildningsbidrag
   kategori:
   - idrott
   - kultur
+  - ovrig
+  foreningstyp: *ungdom
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Kursen ska ordnas av distrikts- eller riksorganisation
+  - En kursdag ska omfatta minst fem lektionstimmar; kvällskurs minst fyra dagar med tre timmar per kväll
+  - Deltagaren ska vara minst 13 år och kursen får inte vara studiecirkel
+  - Ordförande och revisor eller studieorganisatör ska styrka deltagare och kursdagar; program och intyg sparas i två år
+  belopp: Högst 100 kr per deltagare och bidragsberättigad utbildningsdag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sök efter avslutad kurs
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: Söks efter avslutad kurs.
 - id: kramfors-lokalt-aktivitetsbidrag
   namn: Lokalt aktivitetsbidrag
   kategori:
   - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *ungdom
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 02-25
     - 08-25
-  krav: []
-  belopp: null
+  krav:
+  - Verksamheten ska huvudsakligen rikta sig till 7–25-åringar
+  - Sammankomsten ska ha minst tre deltagare utöver ledare och högst 30 deltagare
+  - Aktiviteten ska vara planerad, ledarledd och minst 60 minuter
+  - Statliga sammankomstregler och närvaroredovisning ska följas; entréarrangemang och tävling stöds inte
+  belopp: 12 kr per sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-drift-och-underhallsbidrag-anlaggning
   namn: Drift- och underhållsbidrag anläggning
   kategori:
   - idrott
+  - ovrig
+  foreningstyp: [idrott, friluft, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 11-01
-  krav: []
-  belopp: null
+  krav:
+  - Föreningen ska äga en idrotts- eller friluftsanläggning
+  - Stödet täcker en del av anläggningens nettodrift och underhåll
+  - Årsmöteshandlingar och kostnadsunderlag ska lämnas
+  - Ansökan avser följande kalenderår
+  belopp: Schablon prövas årligen utifrån anläggning, kostnader, verksamhet, skolans och allmänhetens användning samt disponibla medel
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-foreningsdriven-fritidsgard
   namn: Föreningsdriven fritidsgård
   kategori:
   - social
   - ovrig
+  foreningstyp: [social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 11-01
-  krav: []
-  belopp: null
+  krav:
+  - Verksamheten ska vara öppen för barn och unga 7–20 år
+  - Fritidsgården ska öppna efter klockan 18 och hålla öppet minst tre timmar
+  - Samma verksamhet får inte samtidigt få lokal-, aktivitets- eller driftstöd
+  - Årsmöteshandlingar krävs och verksamheten redovisas halvårsvis 15 juli och 15 januari
+  belopp: 400 kr per öppet tillfälle måndag–torsdag och 600 kr fredag–lördag; högst 50 000 kr per verksamhet och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-- id: kramfors-ungdomsarrangemang
-  namn: Ungdomsarrangemang
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-ovrigt-stod-anlaggning-och-verksamhet
   namn: Övrigt stöd anläggning och verksamhet
   kategori:
   - idrott
   - ovrig
+  - kultur
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 03-23
     - 09-01
-  krav: []
-  belopp: null
+  krav:
+  - Behovet ska inte passa in i någon annan kommunal stödform
+  - Insatsen ska vara angelägen för kommunen eller invånarna
+  - Stödet kan avse underhåll eller förbättring av föreningsägd anläggning, driftsinventarie eller verksamhetsutveckling
+  - Kostnadsberäkning och ändamålsbeskrivning krävs; fakturor och slutkostnad ska redovisas
+  belopp: Högst 50 procent av kostnaden; prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-grundbidrag-fiskeforeningar
   namn: Grundbidrag fiskeföreningar
   kategori:
   - ovrig
+  foreningstyp: &fiske [friluft, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 03-01
-  krav: []
+  krav:
+  - Sökanden ska vara en verksam fiskevårdsområdesförening i Kramfors kommun
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor
+  - Föreningen ska plantera in fisk under samma kalenderår
+  - Utbetalning sker bara till föreningens bank- eller plusgiro
   belopp: 600 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-fiskevardsbidrag
-  namn: Fiskevårdsbidrag
+  namn: Bidrag till inplantering av fisk
   kategori:
   - ovrig
+  foreningstyp: *fiske
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 03-01
-  krav: []
+  krav:
+  - Kommunen ska godkänna åtgärden innan den påbörjas
+  - Stödet ska avse faktisk inplantering av fisk
+  - Betald faktura ska lämnas och bidraget betalas efter utfört arbete
   belopp: Högst 10 procent av kostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-kulturarrangemangsbidrag
-  namn: Kulturarrangemangsbidrag
+  namn: Bidrag till offentliga kulturarrangemang
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan senast två veckor före arrangemang. Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Arrangemanget ska vara offentligt, kulturellt och inte redan genomfört
+  - Vid samarrangemang ska endast en organisation stå som sökande
+  - Stödgrundande kostnader är lokal, ljus, annonser, affischer, gage, resor och traktamente
+  - Kommunen ska anges som medarrangör; representation, ordinarie drift och redan årsfinansierade arrangörer stöds inte
+  - Arrangemanget ska redovisas inom två månader
+  belopp: Högst 50 procent av nettokostnaden och 8 000 kr per engångsarrangemang; fleraktivitets- eller flerdagarsarrangemang 4 000 kr per dag; större festival 6 000 kr per dag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast två veckor före arrangemanget
+  kalla_url: https://www.kramfors.se/download/18.5a682b7016f1ab4f27a687d5/1579080161799/Riktlinje-f%C3%B6r-st%C3%B6d-till-kulturverksamhet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Den aktuella webbsidan anger två veckor; den äldre normen anger en månad.
 - id: kramfors-studieforbundsbidrag
   namn: Studieförbundsbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 05-01
-  krav: []
+  krav:
+  - Studieförbundet ska bedriva verksamhet i Kramfors kommun
+  - Grunddelen baseras på genomsnittliga studietimmar under två år och volymdelen på föregående kommunbidrag
+  - Förstärkningsdelen avser deltagare med funktionsnedsättning, utrikesfödda och integration
+  - Deltagarrapport samt verksamhetsberättelse, plan, ekonomi och revision ska lämnas
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens totala anslag fördelas med 75 procent grundbidrag, 10 procent volymbidrag och 15 procent förstärkningsbidrag; totalsumma publiceras inte
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 - id: kramfors-pensionars-och-funktionsrattsbidrag
-  namn: Pensionärs- och funktionsrättsbidrag
+  namn: Kommunalt grund- och lokalkostnadsbidrag – pensionärs- och funktionsrättsorganisationer
   kategori:
   - pensionar
   - funktionsratt
+  foreningstyp: [social, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 06-30
-  krav: []
-  belopp: null
+  krav:
+  - Sökanden ska vara pensionärsförening eller funktionsrättsorganisation
+  - Ansökan ska avse föregående verksamhetsår
+  - Årsredovisning med resultat- och balansräkning ska bifogas
+  - För lokalkostnadsbidrag krävs förstahandskontrakt eller hyresavtal och ansökan ska undertecknas av behörig firmatecknare
+  belopp: Individuellt efter prövning; belopp under 100 kr betalas inte ut
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-sarskilt-fiskevardsbidrag
+  namn: Särskilt fiskevårdsbidrag
+  kategori: [ovrig]
+  foreningstyp: *fiske
+  malgrupp: Fiskevårdsområdesföreningar med särskilda fiskevårdsåtgärder
+  deadlines: {typ: fasta, datum: [04-01, 09-01]}
+  krav:
+  - Åtgärden ska avse underhåll eller förbättring av anläggning eller annan fiskevård
+  - Preliminär ansökan ska innehålla kostnadsberäkning och ändamålsbeskrivning
+  - Slutlig faktisk kostnad ska redovisas senast två kalenderår efter ansökan
+  - Utbetalning sker till föreningens bank- eller plusgiro
+  belopp: Individuellt efter särskild prövning; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april eller 1 september
+  kalla_url: https://e-tjanster.kramfors.se/oversikt/overview/107
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-filmstudioverksamhet
+  namn: Bidrag till filmstudioverksamhet
+  kategori: [kultur]
+  foreningstyp: [kultur, annat]
+  malgrupp: Filmstudioföreningar med återkommande kvalitetsfilmvisning
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Föreningen ska visa film varje termin
+  - Filmurvalet ska hålla kvalitet och inte konkurrera med kommunens biograf
+  - Föreningen ska vara ansluten till Sveriges Förenade Filmstudios
+  - Styrelsen ska fortbildas och detta redovisas i verksamhetsplan och verksamhetsberättelse
+  belopp: 1 500 kr per film, högst 15 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 april
+  kalla_url: https://www.kramfors.se/download/18.5a682b7016f1ab4f27a687d5/1579080161799/Riktlinje-f%C3%B6r-st%C3%B6d-till-kulturverksamhet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-konstutstallningsverksamhet
+  namn: Bidrag till konstutställningsverksamhet
+  kategori: [kultur]
+  foreningstyp: [kultur, annat]
+  malgrupp: Föreningar som arrangerar konstutställningar
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Föreningen ska genomföra minst fyra utställningar per år i Kramfors konsthall
+  - Minst en professionell konstnär ska årligen bjudas in för fortbildning och programförslag
+  - Styrelsens fortbildning ska redovisas i verksamhetsplan och verksamhetsberättelse
+  belopp: Högst 30 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 april
+  kalla_url: https://www.kramfors.se/download/18.5a682b7016f1ab4f27a687d5/1579080161799/Riktlinje-f%C3%B6r-st%C3%B6d-till-kulturverksamhet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-scenkonstverksamhet
+  namn: Bidrag till scenkonstverksamhet
+  kategori: [kultur]
+  foreningstyp: [kultur, annat]
+  malgrupp: Föreningar med återkommande scenkonstprogram
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Verksamheten ska visa teater, dans eller nyskapande scenkonst
+  - Minst 75 procent av stödet ska användas till teater, dans eller motsvarande föreställningar
+  - Styrelsen ska fortbildas kontinuerligt och redovisa detta i plan och verksamhetsberättelse
+  belopp: Högst 150 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 april
+  kalla_url: https://www.kramfors.se/download/18.5a682b7016f1ab4f27a687d5/1579080161799/Riktlinje-f%C3%B6r-st%C3%B6d-till-kulturverksamhet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-hembygdsforeningsbidrag
+  namn: Hembygdsföreningsbidrag
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd, kultur]
+  malgrupp: Hembygdsföreningar verksamma i Kramfors kommun
+  deadlines: {typ: fasta, datum: [05-31]}
+  krav:
+  - Föreningen ska vara verksam i Kramfors och registrerad i kommunens föreningsregister
+  - Föreningen ska vara ansluten till Sveriges Hembygdsförbund
+  - Allmän verksamhet ska bedrivas under en del av året
+  - Verksamhetsberättelse, verksamhetsplan, ekonomi och revisionsberättelse ska bifogas
+  belopp: Lika fördelning, högst 5 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 maj
+  kalla_url: https://www.kramfors.se/download/18.5a682b7016f1ab4f27a687d5/1579080161799/Riktlinje-f%C3%B6r-st%C3%B6d-till-kulturverksamhet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-evenemangsstod
+  namn: Evenemangsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och organisationer som arrangerar publika evenemang
+  deadlines: {typ: fasta, datum: [08-16, 10-18]}
+  krav:
+  - Evenemanget ska vara publikt, genomföras i Kramfors och stärka platsvarumärke och attraktivitet
+  - Evenemanget ska vara öppet, inkluderande och hållbart samt locka tillresande
+  - Religiösa, politiska, slutna eller kommunala arrangemang stöds inte
+  - Arrangören ansvarar för kostnader, risk och tillstånd och ska använda kommunens platslogotyp
+  - Utvärdering och ekonomisk redovisning ska lämnas inom tre månader
+  belopp: Högst en tredjedel av total kostnad efter avdrag för intäkter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Publicerade ansökningsdatum för 2026 är 16 augusti och 18 oktober
+  kalla_url: https://e-tjanster.kramfors.se/oversikt/overview/402
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Riktlinjen anger tre beslutsomgångar per år men portalen publicerar två datum för 2026.
+- id: kramfors-samhalls-och-ortsutvecklingsmedel
+  namn: Medel för samhälls- och ortsutveckling
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och utvecklingsgrupper som genomför lokala investeringar eller satsningar
+  deadlines: {typ: fasta, datum: [02-28, 08-31]}
+  krav:
+  - Sökanden ska ha organisationsnummer, demokratiska värden och ett samhällsnyttigt ändamål
+  - Investeringen eller satsningen ska genomföras i Kramfors och omfatta minst två utvecklingsområden
+  - Redan uppkomna utgifter, lön, drift, återkommande evenemang och konkurrensfördel stöds inte
+  - Projektplan, budget, delaktighet och förväntad effekt ska redovisas och arbetet invänta beslut
+  - Slutredovisning ska lämnas inom två månader; utbetalning sker med 75 procent och resterande 25 procent efter redovisning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 1 000 000 kr sökbart per år
+  sen_ansokan: Ansökan senast 28 februari; höstomgång 31 augusti genomförs om medel återstår
+  kalla_url: https://www.kramfors.se/download/18.22412c6419afceb05b08ea/1765187281894/Riktlinje%20medel%20samh%C3%A4lls-%20och%20ortsutveckling%202025.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: kramfors-iop-aldreomsorg
+  namn: Idéburet offentligt partnerskap inom äldreomsorgen
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Idéburna aktörer och pensionärsföreningar som samverkar om allmännytta för äldre
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Den idéburna aktören ska vara registrerad i kommunens föreningsregister och själv ta initiativet
+  - Parterna ska identifiera ett gemensamt samverkansbehov och allmännytta för äldre
+  - Insatsen får inte omfattas av ordinarie föreningsbidrag eller vara ett tjänsteköp på en marknad
+  - Organisationen ska bidra med egna resurser såsom pengar, volontärer eller lokal
+  belopp: Ekonomiskt stöd och parternas övriga resurser regleras i överenskommelsen; inget fast belopp publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen öppen sista ansökningsdag publiceras
+  kalla_url: https://www.kramfors.se/stod--omsorg/aldre/ideburet-offentligt-partnerskap.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
 forutsattningar:
 - id: kramfors-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  beskrivning: Föreningen ska vara ideell, ha minst tio medlemmar, ha varit registrerad i kommunens föreningsregister i minst tre månader, ha bank- eller plusgiro, stadgar, styrelse och revisorer samt följa demokratiska och öppna arbetsformer. Efter varje årsmöte ska alla föreningar uppdatera uppgifterna om styrelseförändringar och kontaktpersoner i föreningsregistret.
+  system: Kommunens e-tjänst och föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Minst tre månaders registrering före första ansökan
+  giltighet: Efter varje årsmöte ska alla föreningar uppdatera uppgifterna om styrelseförändringar och kontaktpersoner i föreningsregistret.
   ordning: 1
-  kalla_url: https://www.kramfors.se/se--gora/bidrag.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
