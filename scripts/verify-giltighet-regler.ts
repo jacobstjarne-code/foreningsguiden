@@ -61,7 +61,7 @@ const RULES: Record<string, ExpectedRule> = {
   berg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   boxholm: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   bromolla: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
-  enkoping: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  enkoping: { typ: 'sammansatt', antal: null, datum: null, status: 'kontrollast' },
   helsingborg: { typ: 'manader_efter_beslut', antal: 12, datum: null, status: 'kontrollast' },
   jarfalla: { typ: 'okand', antal: null, datum: null, status: 'okand' },
   katrineholm: { typ: 'fast_datum', antal: null, datum: '03-31', status: 'kontrollast' },
@@ -208,8 +208,9 @@ if (!giltighetskontrollKalla.includes('giltighetRegelGerDatum(regel, kommun.gilt
 // berakForfallodatum() ska ändå ge rätt svar den dagen G1 sätter dem.
 //
 // Jacobs eget exempel för manader_efter_arsmote var "Enköping 1" —
-// kontrollerat mot RULES ovan: Enköpings regel är typ "okand", inte
-// manader_efter_arsmote. De riktiga kommunerna med den typen är
+// Enköpings regel är sammansatt: ett år från beslut, men högst en månad
+// efter årsmötet. Den får därför aldrig reduceras till en månadsregel.
+// De riktiga kommunerna med den typen är
 // Norrtälje (antal 2) och Vallentuna (antal 3), använda nedan i stället
 // — flaggat i leveransrapporten, inte tyst bytt ut.
 for (const golden of [
@@ -246,6 +247,12 @@ for (const golden of [
   }
   if (giltighetRegelGerDatum(null, 'kontrollast') !== false) {
     fail.push('giltighetRegelGerDatum: null-regel ska alltid ge false, oavsett status');
+  }
+  const sammansattRegel: GiltighetRegel = { typ: 'sammansatt', antal: null, datum: null, kalla_url: '' };
+  if (giltighetRegelGerDatum(sammansattRegel, 'kontrollast') !== false ||
+      berakForfallodatum(sammansattRegel, '2026-03-01', '2026-08-18') !== null ||
+      regeltext(sammansattRegel) !== null) {
+    fail.push('sammansatt giltighetsregel får aldrig ge gissat datum eller regeltext');
   }
 }
 

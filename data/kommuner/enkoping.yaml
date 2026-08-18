@@ -9,16 +9,17 @@ ansokningssystem:
   namn: Rbok (kommunens e-tjänst för ekonomiskt stöd och föreningsregister)
   url: https://enkoping.rbok.se/
 kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-verifierad: 2026-07-23
+verifierad: '2026-08-18'
 giltighet_regel:
-  typ: okand
+  typ: sammansatt
   antal: null
   datum: null
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/innan-din-forening-kan-soka-bidrag.html
-giltighet_regel_status: okand
+giltighet_regel_status: kontrollast
 bidrag:
 - id: enkoping-startstod
   namn: Startstöd till nya föreningar
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -35,18 +36,19 @@ bidrag:
   - Föreningen måste uppfylla övriga krav för bidragsberättigad förening inom ett år efter godkänd startstödsansökan
   - Föreningen ska inom det första året ta del av utbildning om att driva en ideell förening, företrädesvis via ett studieförbund
   - Bedömning av rätten till startstöd görs samtidigt som föreningen ansöker om att bli bidragsberättigad
-  belopp: null
+  belopp: Individuellt startstöd fördelas efter godkänd ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Sent inkommen ansökan hanteras inte
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Nystartade föreningar som inte uppfyller kraven inom ett år förlorar sitt bidragsberättigande. Fullständiga
-    regler i regelverket ''Stöd till civilsamhället i Enköpings kommun'' §9.2: https://enkoping.se/download/18.3074f6241931f5d6fa2b1ac/1776691502470/regler-stod-civilsamhallet.pdf'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nystartade föreningar som inte uppfyller de ordinarie kraven inom ett år förlorar sitt bidragsberättigande.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-grundstod
   namn: Årligt grundstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -63,22 +65,19 @@ bidrag:
   - Ingen separat ansökan krävs — grundstöd betalas ut automatiskt i samband med verksamhetsstödet
   - Föreningen måste ansöka om verksamhetsstöd (ansökningsfönster 15 januari–1 mars) för att grundstödet ska betalas ut
   - Lokalhållande föreningars kvadratmeterersättning begränsas till högst ett halvt prisbasbelopp
-  belopp: null
+  belopp: Årligen beslutade nivåer per medlem och, för godkända lokalhållande föreningar, per kvadratmeter; lokalersättningen är högst ett halvt prisbasbelopp
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (ingen separat ansökan — betalas ut med verksamhetsstödet)
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Regelverket (§9.3.2) publicerar fördelningsprincipen som ''XX kr/medlem'' — det faktiska beloppet fastställs
-    årligen i budget, ej i regelverkstexten. Analys-PM UPN2025/130 (2025-08-29, politik.enkoping.se) redovisar 2025 års faktiska
-    nivåer som referens, ej bekräftat för 2026: 4 kr/medlem (8 kr/medlem för föreningar med särskilt utsatt målgrupp); 45
-    kr/kvm uthyrningsbar yta i bygdegård, 1 kr/kvm utomhus spontanyta, 45 kr/kvm lokal/anläggning för löpande verksamhet.
-    2025: 149 föreningar delade på 119 120 kr i medlemsbaserat grundstöd, 26 lokalhållande föreningar delade på 273 620 kr
-    i kvadratmeterdel.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nivåerna per medlem och kvadratmeter beslutas i kommunens budget för kalenderåret; ingen separat ansökan görs.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-verksamhetsstod
   namn: Årligt verksamhetsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -99,19 +98,19 @@ bidrag:
     kan få upp till 5 % högre stöd (hållbar förening)
   - En aktivitet kräver minst tre deltagare under minst 45 minuter, med en ansvarig person, och får inte vara helt finansierad
     av deltagaravgifter eller andra bidrag
-  belopp: null
+  belopp: Årligen beslutade nivåer per aktivitet och deltagartillfälle; upp till 5 procent tillägg för hållbar förening och ett årligt beslutat lägsta totalbelopp tillsammans med grundstödet
+  belopp_avser: per_forening
   sen_ansokan: Sent inkommen ansökan hanteras inte
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsfönster 15 januari–1 mars. Fördelningsprincip (kr/aktivitet, kr/deltagartillfälle per åldersgrupp)
-    publiceras som 'XX kr' i regelverket (§9.7.3) — fastställs årligen i budget. Fullständiga kriterier för 'aktiv förening'
-    och 'hållbar förening' i regelverkets §9.5–9.7.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan är öppen 15 januari–1 mars och avser föregående kalenderårs verksamhet.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-arrangorsstod
   namn: Arrangörsstöd för publika kulturarrangemang
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Bidragsberättigade föreningar som planerar och genomför publika kulturarrangemang öppna för allmänheten
@@ -128,17 +127,19 @@ bidrag:
   - Arrangören ansvarar för eventuella tillstånd och säkerhet
   - Arrangemanget ska marknadsföras med tydlig angivelse av kommunens stöd
   belopp: Upp till 50 % av godkända kostnader; högsta ansökningsbelopp beslutas årligen utifrån kommunens budget
+  belopp_avser: per_forening
   sen_ansokan: Sent inkommen ansökan hanteras inte
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Två ansökningsfönster per år: 15 oktober–30 november och 15 mars–30 april. Föreningar vars huvudsakliga syfte
     är att arrangera kulturarrangemang prioriteras.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: enkoping-utvecklingsstod
   namn: Stöd för utvecklingsinsatser
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -157,19 +158,20 @@ bidrag:
   - Ansökan ska tydligt vara kopplad till föreningens verksamhet
   - Kan ej sökas för renovering av byggnader/anläggningar eller större inköp av utrustning/material
   - Nystartade föreningar prioriteras under förutsättning att övriga kriterier är uppfyllda
-  belopp: null
+  - Bidraget får täcka faktiska kostnader för bland annat kommunikation, tillfällig lokal, material, resor och vissa tillfälliga arvoden
+  belopp: Individuellt utvecklingsstöd bedöms efter insatsens faktiska kostnader; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Sent inkommen ansökan hanteras inte
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökningsfönster 15 oktober–30 november. Regelverkets fotnot till §11 nämner 'Öppna aktiviteter' som ett exempel
-    på insats inom utvecklingsstöd, men den löpande ansökningsplanen 2026 listar 'Öppen aktivitet' som en egen rad med annan
-    ansökningsrytm — skrivet som separat bidrag i denna fil, se enkoping-oppen-aktivitet.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden för höstens omgång är 15 oktober–30 november; 2027 tillkommer en omgång 15 april–31 maj.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-oppen-aktivitet
   namn: Öppen aktivitet
+  foreningstyp: [idrott, kultur, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -177,27 +179,30 @@ bidrag:
   - pensionar
   - funktionsratt
   - ovrig
-  malgrupp: Bidragsberättigade föreningar som vill erbjuda kostnadsfria, medlemskapsfria aktiviteter utan krav på förkunskap,
-    för att ge fler möjlighet att prova på föreningens verksamhet
+  malgrupp: Bidragsberättigade föreningar som erbjuder kostnadsfria prova-på-aktiviteter för barn och unga 9–15 år
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Aktiviteten ska vara kostnadsfri och utan krav på medlemskap
-  - Aktiviteten ska normalt inte ingå i föreningens ordinarie verksamhet
-  - Bidrag söks i efterhand, efter godkännande av handläggare
-  belopp: null
+  - Aktiviteten ska vara gratis och öppen för barn och unga 9–15 år, frivillig och utan krav på prestation eller utrustning
+  - Medlemskap får normalt inte krävas; om medlemskap krävs för försäkring får ingen medlemsavgift tas ut
+  - Minst två trygga vuxna ska ansvara för aktiviteten och ledarnas aktuella registerutdrag ska kontrolleras
+  - Föreningen ska vara bidragsberättigad, delta i kommunens möten och marknadsföra aktiviteten i evenemangskalendern
+  - Aktiviteten ska vara fri från mobbning, trakasserier, alkohol, rökning och droger
+  - Bidraget söks i efterhand och samma aktivitet får inte finansieras av en annan part
+  belopp: 1 000 kronor per genomförd aktivitet; en aktivitet ska ha tydlig start och sluttid och pågå 1–4 timmar
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Administreras som en del av stöd för utvecklingsinsatser (regelverkets §11, fotnot 2) men har egen löpande
-    ansökningsrytm: handläggning sker efter 31 maj, 31 augusti och 30 november enligt kommunens ansökningsplan 2026.'
-  senast_verifierad: '2026-08-03'
+  kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/driva-forening/aktiviteter-for-barn-och-unga/oppen-aktivitet.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningen ansöker först om att delta och redovisar därefter genomförda aktiviteter löpande i Rbok.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-investeringsstod
   namn: Investeringsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -219,17 +224,19 @@ bidrag:
   - Utbetalning villkoras av säkrad extern medfinansiering
   - Åtgärden ska vara genomförd senast två år efter beslut
   belopp: 40 % av den totala utgiften, dock högst 120 000 kronor (belopp och procentsats kan ändras vid särskilda skäl)
+  belopp_avser: per_forening
   sen_ansokan: Sent inkommen ansökan hanteras inte
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Ansökningsfönster 15 februari–31 mars. Prioriterade insatser: undanröjer akut hinder, ökar säkerhet/trygghet,
     ökar tillgänglighet, minskar miljöpåverkan, främjar jämställdhet.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: enkoping-lovbidrag
   namn: Stöd för kostnadsfria lovaktiviteter
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -250,18 +257,21 @@ bidrag:
   - Aktiviteten ska registreras i kommunens evenemangskalender
   - Föreningen ska delta i eventuella förberedande möten/utbildningar som förvaltningen arrangerar
   - Ges inte till ordinarie föreningsverksamhet som redan stöds av andra bidrag
-  belopp: null
+  - En majoritet av deltagarna ska bo i Enköpings kommun och aktiviteten ska främja likvärdigt deltagande och möten mellan barn med olika bakgrund
+  belopp: Individuellt lovbidrag bedöms efter aktivitetens budget och kan hel- eller delfinansiera godkända kostnader; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Sent inkommen ansökan hanteras inte
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Två ansökningsfönster: 15 mars–30 april (sommarlov) och 15 september–31 oktober (jullov). Aktiviteter på landsbygden
     prioriteras.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: enkoping-studieforbund
   namn: Bidrag till studieförbund
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   malgrupp: Studieförbund godkända av Folkbildningsrådet, anslutna till Uppsala läns bildningsförbund, med verksamhet i Enköpings
@@ -275,45 +285,43 @@ bidrag:
   - Ansökan ska innehålla redovisning av föregående verksamhetsårs studiecirklar, annan folkbildningsverksamhet och kulturprogram,
     samt underskrivet kommunsammandrag
   - Verksamhetsberättelse, verksamhetsplan, utvärderingsplan och revisionsberättelse ska kunna presenteras vid förfrågan
-  belopp: null
+  belopp: Individuellt bidrag fördelas enligt Folkbildningsrådets volymmått för organisation, tillgänglighet, studiecirklar, annan folkbildning och kulturprogram; något fast kronbelopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://enkoping.se/download/18.3074f6241931f5d6fa2b1ac/1776691502470/regler-stod-civilsamhallet.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Fördelas enligt Folkbildningsrådets volymmåttsmodell (organisationsbidrag, tillgänglighetsbidrag, verksamhetsbidrag/studiecirkel,
-    verksamhetsbidrag/annan folkbildning, verksamhetsbidrag/kulturprogram) — inget fast kronbelopp per förening. Regelverkets
-    §5. Finns inte längre som egen sida på enkoping.se (gammal URL 301-omdirigerar till sok-foreningsbidrag.html-hubben, som
-    i sin tur inte listar studieförbund bland 'Föreningsbidrag du kan söka') — bidraget bekräftas ändå aktivt via det gällande
-    regelverket, se SKRIVET_EJ_I_KALLA-notering i tackning.log.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan avser föregående verksamhetsår och ska vara kommunen tillhanda senast den 30 april.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-aktivitetsstod-finska
   namn: Aktivitetsstöd för aktiviteter på finska
+  foreningstyp: [kultur, social, ungdom, annat]
   kategori:
   - kultur
   malgrupp: Föreningar och grupper i Enköpings kommun som vill göra finskt språk och finsk kultur synligt och tillgängligt
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Föreningar kan inte få stöd till sin ordinarie verksamhet
   - Aktiviteten ska vara öppen för alla
   - Prioritet ges till aktiviteter för barn och unga samt till aktivt bruk av det finska språket
   - Ansökan ska beskriva planerad aktivitet, tidpunkt och budget
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Individuellt stöd bedöms efter aktivitetsbeskrivning och budget; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Kommunen publicerar ingen generell ansökningstid
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/bidrag-att-soka/aktivitetsstod-for-aktiviteter-pa-finska.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Administreras av Kommunledningsförvaltningen (finskt förvaltningsområde), inte Upplevelseförvaltningen — hittat
-    utanför föreningsbidragens ordinarie sidträd. Ansökan skickas direkt till samordnaren (Irma Aalto) och granskas av Kommunala
-    finska samrådet, inte via Rbok.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan skickas till kommunledningsförvaltningen och bedöms i Kommunala finska samrådet.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-socialnamndens-verksamhetsbidrag
   namn: Socialnämndens verksamhetsbidrag till frivilliga organisationer
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   malgrupp: Föreningar och organisationer som arbetar för att motverka beroende, våld och kriminalitet, minska risker för
@@ -328,19 +336,19 @@ bidrag:
   - Stadgarna ska visa hur föreningen förhåller sig till alkohol och droger
   - Efter årsmötet ska verksamhetsberättelse och mötesprotokoll skickas in
   - Ansökan ska åtföljas av verksamhetsberättelse, årsmötesprotokoll, årsredovisning och stadgar
-  belopp: null
+  belopp: Individuellt verksamhetsbidrag bedöms efter ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/soka-verksamhetsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Administreras av Socialnämnden, inte Upplevelsenämnden — hittat utanför föreningsbidragens ordinarie sidträd.
-    Bidraget gäller ett år i taget, betalas ut i januari påföljande år. Ansökan skickas per post till Socialnämnden, inte
-    via Rbok. Beslut fattas vid nämndens sammanträde i september.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget gäller ett år i taget, betalas ut i januari det år ansökan avser och beslutas av socialnämnden i september.
+  senast_verifierad: '2026-08-18'
 - id: enkoping-vagbidrag
   namn: Kommunalt vägbidrag för enskild väg
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Enskilda väghållare, vägföreningar, vägsamfälligheter och samfällighetsföreningar med ansvar för en enskild väg
@@ -357,49 +365,15 @@ bidrag:
   - Årlig förnyad ansökan krävs
   belopp: 6,20 kr per löpmeter (2024 års nivå; räknas upp med konsumentprisindex vid förändring över 20 öre). Vid statsbidrag
     från Trafikverket täcker kommunen 13 % av det statsbidragsberättigade beloppet (exkl. moms)
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://enkoping.se/trafik-och-gator/vagbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Administreras av Samhällsbyggnadsförvaltningen, inte Upplevelseförvaltningen — specialkategori (§2.1.5) hittad
-    utanför föreningsbidragens sidträd. Ansökningsperiod 1 mars–30 juni. Digital ansökan via kommunens e-tjänst sedan 2024-03-01.
-    6,20 kr/löpmeter är senast publicerade nivå (2024) på källsidan vid körningstillfället — möjligen inte uppdaterad för
-    2026, spot-checkas av Jacob.
-  senast_verifierad: '2026-08-03'
-- id: enkoping-civilsamhallesstipendium
-  namn: Civilsamhällesstipendium
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Individ, grupp eller organisation (inklusive föreningar) med koppling till Enköpings kommun som utfört värdefulla
-    insatser för samhällsutvecklingen
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
-  krav:
-  - Kan sökas i eget namn eller nomineras av annan person
-  - Bedöms enligt kriterierna hållbarhet, kreativitet, samverkan över sektorsgränser, eller ungdomsinitiativ
-  - Ingen redovisningsskyldighet för hur pengarna används
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://enkoping.se/omsorg-och-stod/stiftelser-fonder-och-stipendier/civilsamhallesstipendium.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stipendiet kan uttryckligen sökas av 'individ, grupp eller organisation' — inte uteslutet enligt §2.4, till
-    skillnad från kommunens övriga stipendier (idrotts- och kulturstipendium) som riktar sig till enskilda personer. Historiska
-    mottagare inkluderar flera föreningar (t.ex. Paddebo kulturförening 2025, Lagunda hembygdsförening 2024). Ansökningsfönster
-    15 september–31 oktober. Ansökan/nominering via Rbok. Ett till fyra stipendier delas ut årligen; belopp ej publicerat
-    på källsidan.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningsperioden är 1 mars–30 juni och kommunens sida publicerar fortfarande 2024 års grundnivå med årlig KPI-justering.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: enkoping-bidragsberattigad
   vad: Bli godkänd som bidragsberättigad förening
@@ -417,7 +391,7 @@ forutsattningar:
   giltighet: Ett år från beslutsdatum, dock inte mer än en månad efter föreningens årsmöte
   ordning: 1
   kalla_url: https://enkoping.se/fritid-och-kultur/forening-i-enkoping/sok-foreningsbidrag/innan-din-forening-kan-soka-bidrag.html
-  giltighet_status: olast
+  giltighet_status: kontrollast
 kommunsiffra:
   antal_foreningar: 149
   summa_kr: 119 120

@@ -237,7 +237,7 @@ export interface Kommunsiffra {
 // kommer från GPT" — G1-researchpasset extraherar värdena, den här
 // commiten gör bara typen och beräkningen redo att ta emot dem.
 export const GILTIGHET_REGEL_TYPER = [
-  'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'fast_datum', 'ingen_regel', 'okand',
+  'manader_efter_arsmote', 'manader_efter_beslut', 'kalenderar', 'fast_datum', 'sammansatt', 'ingen_regel', 'okand',
 ] as const;
 export type GiltighetRegelTyp = (typeof GILTIGHET_REGEL_TYPER)[number];
 
@@ -288,6 +288,7 @@ export function giltighetRegelGerDatum(regel: GiltighetRegel | null, status: Gil
       return true;
     case 'fast_datum':
       return regel.datum !== null;
+    case 'sammansatt':
     case 'ingen_regel':
     case 'okand':
       return false;
@@ -355,6 +356,7 @@ export function berakForfallodatum(regel: GiltighetRegel, arsmotesdatum: string,
     }
     case 'fast_datum':
       return regel.datum === null ? null : nextOccurrenceISO(regel.datum, today);
+    case 'sammansatt':
     case 'ingen_regel':
     case 'okand':
       return null;
@@ -393,6 +395,7 @@ export function regeltext(regel: GiltighetRegel): string | null {
       return 'kalenderåret ut';
     case 'fast_datum':
       return regel.datum === null ? null : `till och med ${formatRecurringDate(regel.datum)} varje år`;
+    case 'sammansatt':
     case 'ingen_regel':
     case 'okand':
       return null;
