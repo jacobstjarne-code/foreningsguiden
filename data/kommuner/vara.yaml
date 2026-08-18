@@ -4,138 +4,319 @@ lan: Västra Götalands län
 befolkning: 16004
 forvaltning: Kultur- och fritidsverksamheten
 ansokningssystem:
-  namn: Vara föreningssystem
-  url: https://vara.se/upplevaochgora/foreningar.818.html
-kalla_url: https://vara.se/upplevaochgora/foreningar.818.html
-verifierad: '2026-07-31'
+  namn: Actor Smartbook och kommunens självservice
+  url: https://vara.actorsmartbook.se/
+kalla_url: &huvud https://vara.se/upplevaochgora/foreningar/stodtillforeningslivet.832.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://vara.se/kommunochpolitik/varorganisationochverksamhet/planerochstyrandedokument/bidrag/reglerforbildningsnamndensstodtillforeningarochfolkbildning.1363.html
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Stöd till föreningslivet
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i Vara kommun
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vara.se/upplevaochgora/foreningar.818.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Detaljerade bidragsformer finns i bildningsnämndens regler. Ej angivet i källan
-  id: vara-stod-till-foreningslivet
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Bidrag till lokalhyra för pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar med lokalhyra
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vara.se/upplevaochgora/foreningar.818.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ej angivet i källan
-  id: vara-bidrag-till-lokalhyra-for-pensionarsforeningar
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Verksamhetsbidrag till organisationer
-  kategori:
-  - social
-  - funktionsratt
-  - pensionar
-  - ovrig
-  malgrupp: Organisationer enligt socialnämndens regler
-  deadlines:
-    typ: fasta
-    datum:
-    - 12-01
-  krav: []
-  belopp: Grundbidrag och medlemsbidrag enligt organisationens geografiska nivå; särskilda insatser prövas separat
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://vara.se/kommunochpolitik/varorganisationochverksamhet/planerochstyrandedokument/bidrag/reglerforverksamhetsbidragtillorganisationer.1947.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: null
-  id: vara-verksamhetsbidrag-till-organisationer
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Godkända studieförbund
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vara.se/upplevaochgora/foreningar.818.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ej angivet i källan
-  id: vara-bidrag-till-studieforbund
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Föreningsvandring
-  kategori:
-  - social
-  - ovrig
-  malgrupp: Föreningar som genomför trygghetsskapande vandringar
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://vara.se/upplevaochgora/foreningar.818.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: null
-  id: vara-foreningsvandring
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: vara-bidrag-enskild-vag
-  namn: Bidrag till enskild väg
-  kategori:
-  - ovrig
-  malgrupp: Vägföreningar och ansvariga för bidragsberättigade enskilda vägar
-  deadlines:
-    typ: okand
-    datum: []
+- id: vara-aktivitetsstod-barn-och-unga
+  namn: Aktivitetsstöd för barn och unga
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med stödberättigade aktiviteter för barn och unga 6–25 år
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
   krav:
-  - Vägen ska uppfylla kommunens regler för enskilda vägar
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vara.se/kommunochpolitik/varorganisationochverksamhet/planerochstyrandedokument/bidrag.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  anteckning: Aktuell ansökningstid framgår av kommunens regler
-  status: aktiv
-  senast_verifierad: '2026-08-03'
-  krav_fullstandiga: null
+  - Aktiviteten ska uppfylla RF:s regler för lokalt aktivitetsstöd och deltagarna ska vara 6–25 år och bosatta i Vara kommun
+  - En person får räknas högst en gång per dag och förening och högst 30 deltagare får räknas per tillfälle
+  - En ansvarig ledare ska vara närvarande och vår- respektive höstperiod ska redovisas separat
+  belopp: Andel av anslaget efter antal deltagartillfällen; exakt belopp kan inte fastställas i förväg
+  belopp_avser: per_forening
+  kommunens_pott: Kommunens anslag fördelas mellan alla sökande; totalsumman publiceras inte
+  sen_ansokan: Ansökan senast 25 februari respektive 25 augusti.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-samlingslokalstod
+  namn: Samlingslokalsstöd
+  kategori: [ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella organisationer som äger och driver en allmän samlingslokal
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Lokalen ska ägas av en ideell organisation och vara öppen och tillgänglig för kultur, fritid, studier och möten
+  - Minst tio externa uthyrningar ska redovisas, men ekonomiskt stöd börjar beräknas från den elfte uthyrningen
+  - Bokningsjournal, hyresintäkter och offentlig egen aktivitet ska redovisas; interna möten räknas inte och högst 250 bokningar ingår
+  belopp: Andel av anslaget efter bokningskoefficient; 11–20 bokningar ger 1,5, 21–40 ger 1,4, 41–60 ger 1,3, 61–80 ger 1,2, 81–100 ger 1,1 och 101–250 ger 1,0
+  belopp_avser: per_forening
+  kommunens_pott: Kommunens samlingslokalsanslag fördelas mellan sökande; totalsumman publiceras inte
+  sen_ansokan: Ansökan senast 31 mars.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-arrangemangsstod
+  namn: Arrangemangsstöd
+  kategori: [kultur]
+  foreningstyp: *alla
+  malgrupp: Föreningar som genomför offentliga ideella arrangemang
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Arrangemanget ska vara offentligt, icke kommersiellt och inte internt, politiskt eller en tävling
+  - Ansvarig ska finnas på plats och arrangemanget ska marknadsföras; fri entré kräver särskilda skäl
+  - Realistisk kalkyl, andra offentliga stöd och offert eller prisunderlag ska lämnas
+  - Redovisning ska lämnas inom två månader och senast 31 december
+  belopp: Individuell bedömning av angelägenhet, kvalitet, kostnader och publicerade kriterier; årsmax publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan före arrangemanget; ansökan över 5 000 kr minst en månad före.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-upprustningsstod
+  namn: Upprustningsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som rustar upp en föreningsägd lokal eller anläggning
+  deadlines: {typ: fasta, datum: [10-01]}
+  krav:
+  - Åtgärden ska avse ny-, till- eller ombyggnad eller extraordinär renovering, inte normalt underhåll
+  - Lokalen eller anläggningen ska vara nödvändig för föreningens och allmänhetens verksamhet
+  - God kontant eller ideell medfinansiering och andra sökta stöd ska redovisas; tillgänglighet och energi prioriteras
+  - Projektet bör inte starta före beslut och ska slutredovisas och kunna besiktigas senast 30 november året efter
+  belopp: Högst 40 procent av materialkostnaden
+  belopp_avser: per_forening
+  kommunens_pott: Begränsat årligt anslag; totalsumman publiceras inte
+  sen_ansokan: Ansökan senast 1 oktober.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-utvecklingsstod
+  namn: Utvecklingsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med projekt utanför den ordinarie verksamheten
+  deadlines: {typ: fasta, datum: [02-01, 08-01]}
+  krav:
+  - Projektet ska ligga utanför ordinarie verksamhet och skapa ny eller unik verksamhet eller nå en ny målgrupp
+  - Projektbeskrivning och uppgifter om annan finansiering ska lämnas
+  - Bedömningen väger in nyskapande, angelägenhet, samverkan och plan för fortsatt verksamhet
+  - Redovisning ska lämnas inom två månader och senast 31 december
+  belopp: Individuellt efter nyskapande, angelägenhet, samverkan och plan för fortlevnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 februari eller 1 augusti.
+  kalla_url: https://sjalvservice.vara.se/oversikt/overview/187
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-stod-genom-sarskilda-avtal
+  namn: Stöd genom särskilda avtal
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med särskilda återkommande uppdrag eller anläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Stödet ska avse återkommande kulturarrangemang, särskild målgrupp eller särskild kultur- eller rekreationsanläggning
+  - Föreningen ska föra dialog med Bildningsnämnden och följa ett avtal som anger uppdrag, belopp och avtalstid
+  - Årlig redovisning ska innehålla årsmötesprotokoll, verksamhets- och ekonomisk berättelse samt verksamhetsplan
+  belopp: Uppdrag och belopp fastställs i individuellt avtal på ett till tre år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen allmän ansökningsfrist för avtalsstödet.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-bygdestod
+  namn: Bygdestöd
+  kategori: [ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Lokala utvecklingsgrupper och intresseföreningar
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Sökanden ska vara en lokal utvecklingsgrupp med föreningar i samverkan eller en intresseförening
+  - Ansökan ska beskriva specificerade aktiviteter som ökar trivseln i bygden
+  - Tidigare stöd ska redovisas tillsammans med ny ansökan och slutredovisning ska lämnas senast nästa 31 mars
+  belopp: Kommunen publicerar ingen generell beloppsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-investeringsstod
+  namn: Investeringsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar med större investeringar i ett eget objekt
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska vara ideell, ha säte och huvudsaklig verksamhet i Vara och vara allmännyttig och öppen på lika villkor
+  - Föreningen ska äga objektet och ingen kostnad får finansieras dubbelt
+  - Minst 50 procent ska finansieras med andra bidrag, eget kapital eller sponsring, inte lån
+  - Projektbeskrivning, budget, sökt belopp, tidsplan, stadgar, årsredovisning och firmatecknare ska lämnas efter dialog med föreningssamordnaren
+  belopp: Sökbeloppet ska överstiga 500 000 kr och får vara högst 50 procent av projektkostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 mars.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-bidrag-till-lokalhyra-for-pensionarsforeningar
+  namn: Bidrag till lokalhyra för pensionärsföreningar
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med lokalhyra
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Sökanden ska vara en pensionärsförening
+  - Hyran ska avse medlemsmöte, inklusive årsmöte, och styrkas med kvitto
+  - Konsert, tävling, rekrytering, bingo och annan social aktivitet omfattas inte
+  - Ansökan ska lämnas på kommunens särskilda blankett
+  belopp: Faktisk hyreskostnad för medlemsmöten mot kvitto
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande.
+  kalla_url: https://vara.se/kommunochpolitik/varorganisationochverksamhet/planerochstyrandedokument/bidrag/bidragtilllokalhyraforpensionarsforeningar.1946.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-verksamhetsbidrag-till-organisationer
+  namn: Verksamhetsbidrag till organisationer
+  kategori: [social, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Organisationer enligt socialnämndens regler
+  deadlines: {typ: fasta, datum: [12-01]}
+  krav:
+  - Funktionsrättsorganisation ska normalt vara ansluten till riksorganisation och öppen för målgruppen; undantag kan prövas särskilt
+  - Organisationen ska ha vald styrelse, stadgar, medlemsinflytande och årligen styrka verksamheten
+  - En medlem ska vara registrerad, ha betalat avgift och kunna påverka beslut; kommunen får granska underlagen
+  - Annan organisation ska höra till socialnämndens område, nå ett betydande antal personer och visa kontinuitet
+  belopp: Lokal organisation 1 700 kr plus 20 kr per Vara-medlem; regional 850 kr plus 20 kr per medlem; nationell 50 kr per medlem; annan mycket nyttig organisation 0,40 kr per Vara-invånare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 december; särskilda insatser prövas separat.
+  kalla_url: https://vara.se/kommunochpolitik/varorganisationochverksamhet/planerochstyrandedokument/bidrag/reglerforverksamhetsbidragtillorganisationer.1947.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-bidrag-till-studieforbund
+  namn: Studieförbundsstöd
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Godkända studieförbund
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundet ska vara statsbidragsberättigat och ha självständig ekonomi
+  - Ansvarig styrelse ska ha säte i kommunen eller regionen och förbundet ska bedriva statsbidragsberättigad verksamhet i Vara
+  - Granskningshandlingar ska lämnas och Västra Götalands bildningsförbunds förfarande ska följas
+  belopp: Budgetbeloppet fördelas efter statsbidragsberättigad verksamhet i Vara och Folkbildningsrådets modell
+  belopp_avser: per_forening
+  kommunens_pott: Bildningsnämnden fastställer den totala ramen; summan publiceras inte
+  sen_ansokan: Vara publicerar ingen exakt ansökningsdag.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-foreningsvandring
+  namn: Föreningsvandring
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som genomför trygghetsskapande vandringar
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska intresseanmäla sig och invänta tilldelning
+  - Minst två personer som är 25 år eller äldre ska vandra tillsammans i minst tre timmar, vanligen fredag eller lördag 20–23
+  - Vandrarna ska röra sig på tilldelade gator och torg och skapa kontakt med unga men har inga särskilda befogenheter
+  - En kort rapport ska skickas efteråt och utbetalningen går till föreningens registrerade konto
+  belopp: 1 500 kr per kväll
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Intresseanmälan kan lämnas löpande.
+  kalla_url: https://vara.se/upplevaochgora/foreningar/foreningsvandringar.827.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vara-folkhalsoradets-bidrag
+  namn: Folkhälsorådets bidrag
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Verksamheter, organisationer, ungdomsgrupper och föreningar i Vara
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Satsningen ska ligga utanför den ordinarie verksamheten och utveckla den
+  - Ansökan ska ha tydligt hälsomål, anknyta till folkhälsorådets prioriteringar och göra det möjligt för många att delta
+  - Stödet får inte avse normal drift eller personal, med undantag för föreläsare
+  - Insatsen ska marknadsföras, erfarenheter delas och skriftlig uppföljning lämnas senast 1 november eller enligt avtal
+  belopp: Kommunen publicerar ingen generell beloppsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande.
+  kalla_url: https://sjalvservice.vara.se/oversikt/overview/19
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: vara-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Vara föreningssystem
+  vad: Registrering, handlingar och aktuella uppgifter
+  beskrivning: Föreningen ska lämna stadgar, årsmötesprotokoll, verksamhetsberättelse, ekonomiska handlingar, styrelseuppgifter,
+    organisationsnummer och konto samt hålla e-post och övriga kontaktuppgifter aktuella.
+  system: Actor Smartbook
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen giltighetstid eller gemensam förnyelsedag.
   giltighet: null
   ordning: 1
-  kalla_url: https://vara.se/upplevaochgora/foreningar.818.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: vara-grundvillkor
+  vad: Bildningsnämndens grundvillkor
+  beskrivning: Föreningen ska bedriva kultur- eller fritidsverksamhet i Vara, vara öppen för alla och icke kommersiell samt ha
+    alkohol- och drogfri verksamhet med barn och unga. Lokal huvudorganisation, inte sektion, söker och kommunens stöd ska synliggöras.
+  system: Actor Smartbook
+  ledtid: null
+  ledtid_text: Underlag ska arkiveras i fyra år utöver innevarande år.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
