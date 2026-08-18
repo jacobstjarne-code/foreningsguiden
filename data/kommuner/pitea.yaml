@@ -8,7 +8,7 @@ ansokningssystem:
     flera separata system per bidragstyp)
   url: https://friweb.pitea.se/FRI_bidrag/default.aspx
 kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/
-verifierad: 2026-07-23
+verifierad: 2026-08-18
 giltighet_regel:
   typ: fast_datum
   antal: null
@@ -23,6 +23,7 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Nybildade föreningar inom kultur- och fritidsnämndens ansvarsområde, registrerade i föreningsregistret
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
@@ -31,12 +32,13 @@ bidrag:
   - Föreningen ska uppfylla grundläggande krav för föreningsbidrag
   - Redovisning inom 6 månader efter utbetalning
   belopp: 5 000 kr per förening
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Stod-till-kulturverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan digital, löpande under året.
   senast_verifierad: '2026-08-03'
 - id: pitea-aktivitetsstod
@@ -48,6 +50,7 @@ bidrag:
   - ovrig
   malgrupp: Föreningar med barn- och ungdomsverksamhet (7–25 år) samt verksamhet för personer med funktionsnedsättning (ingen
     åldersgräns)
+  foreningstyp: [idrott, kultur, social, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
@@ -60,16 +63,15 @@ bidrag:
   - Närvaro registreras vid varje sammankomst, deltagare ska vara medlemmar
   - Ges inte till arbetsgrupper, entrébelagda arrangemang, skolverksamhet eller studiecirklar
   belopp: 28 kr per sammankomst plus 5 kr per deltagare — ingen skillnad mellan idrottsföreningar och övriga föreningar
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan kan ge reducerat eller avslaget bidrag (grundläggande krav för föreningsbidrag); dispens kan sökas
     hos kommunen
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/aktivitetsstod/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bekräftat även i FRI-portalen (friweb.pitea.se/FRI_bidrag) med samma deadlines. En äldre, nu 404:ad sida i sökindex
-    angav 3 kr/deltagare för idrottsföreningar mot 5 kr för övriga — den nu levande sidan är entydig om att samma sats (5
-    kr) gäller alla, se tackning.log.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: FRI-portalen visar samma deadlines och beloppsregel som den gällande riktlinjen.
   senast_verifierad: '2026-08-03'
 - id: pitea-lov-spontanaktiviteter
   namn: Lov och spontanaktiviteter
@@ -78,6 +80,7 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar som erbjuder aktiviteter för barn och unga under lov, kvällar och helger
+  foreningstyp: [idrott, kultur, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
@@ -88,12 +91,13 @@ bidrag:
   - Marknadsförs via kommunens evenemangskalender
   - Registrering i föreningsregistret och grundläggande krav uppfyllda
   belopp: Max 3 000 kr per aktivitet/arrangemang
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Ovriga-foreningar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Redovisning inom 6 månader efter utbetalning. Prioritering sker utifrån aktivitetstyp, målgrupp och kostnad.
   senast_verifierad: '2026-08-03'
 - id: pitea-arsligt-verksamhetsstod-kultur
@@ -101,6 +105,7 @@ bidrag:
   kategori:
   - kultur
   malgrupp: Kulturföreningar med kontinuerlig, dokumenterad verksamhet under kalenderåret
+  foreningstyp: [kultur]
   deadlines:
     typ: fasta
     datum:
@@ -111,14 +116,14 @@ bidrag:
   - Evenemang registreras i kommunens evenemangskalender
   - Ska framgå i marknadsföring att stöd getts av Piteå kommun
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "Totalt ca 3 miljoner kr fördelat till 11 kulturföreningar (2026)"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Stod-till-kulturverksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Beslut om belopp upp till 500 000 kr fattas på delegation; däröver av nämnden. Exempel 2026: STOFF kulturförening
     tilldelades 300 000 kr, totalt 3 miljoner kr fördelat till 11 kulturföreningar (enligt kommunens sida).'
   senast_verifierad: '2026-08-03'
@@ -127,19 +132,23 @@ bidrag:
   kategori:
   - kultur
   malgrupp: Föreningar som bedriver kontinuerlig kultur- och teaterverksamhet riktad till barn och unga
+  foreningstyp: [kultur, ungdom]
   deadlines:
     typ: fasta
     datum:
     - 09-30
   krav:
-  - Kontinuerlig verksamhet, inga förkunskapskrav på deltagarna
-  belopp: null
+  - Föreningen ska uppfylla grundläggande krav för föreningsstöd och vara registrerad i föreningsregistret
+  - Verksamheten ska vara kontinuerlig, dokumenterad och spridd över kalenderåret
+  - Inga förkunskapskrav får ställas på de barn och unga som deltar
+  belopp: Ingen fast nivå publicerad; belopp beslutas efter ansökan
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Stod-till-kulturverksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Delar ansökningssida och deadline med årligt verksamhetsstöd till kulturföreningar. Kontakt Micael Jonsson,
     0911-69 68 13.
   senast_verifierad: '2026-08-03'
@@ -150,19 +159,22 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med anställda som har statligt beviljat lönebidrag från Arbetsförmedlingen
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
   krav:
   - Anställd ska bo och vara mantalsskriven i Piteå kommun
   - Föreningen ska uppfylla grundläggande krav för föreningsstöd och vara registrerad i föreningsregistret
+  - Arbetsförmedlingen ska ha beviljat statligt lönebidrag för den anställde
   belopp: 10 % av det statliga lönebidraget som Arbetsförmedlingen betalar ut månadsvis till föreningen
+  belopp_avser: per_forening
   sen_ansokan: Ansökan för perioden oktober–december kan göras i efterhand, dock senast 31 mars året därpå
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Stod-till-kulturverksamhet/lonestod/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan via FRI-portalen (friweb.pitea.se). Utbetalning löpande under året.
   senast_verifierad: '2026-08-03'
 - id: pitea-utvecklingsstod
@@ -174,23 +186,23 @@ bidrag:
   - ovrig
   malgrupp: Registrerade föreningar med nyskapande och utvecklande projekt för barn, unga, personer med funktionsnedsättning
     eller som främjar mångfald
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
   krav:
   - Föreningen ska uppfylla grundläggande krav för föreningsstöd
   - Projektet ska stämma överens med kultur- och fritidsnämndens prioriterade mål
+  - Projektet ska vara nyskapande eller utvecklande och i första hand rikta sig till prioriterade målgrupper
   belopp: Max 50 % av kostnaden, högst 10 000 kr per förening och år
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/utveckling-och-arrangemang/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Redovisning inom 6 månader efter utbetalning. Samma stödform beskrivs även på en äldre sida under rubriken 'Föreningsutveckling
-    — Projektbidrag' (https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Foreningsutveckling/, fortsatt
-    live men ej länkad från huvudnavigeringen) med i huvudsak identisk beskrivning — bedömt som samma bidrag, inte en dubblett,
-    se tackning.log.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Redovisning ska lämnas inom 6 månader efter utbetalning.
   senast_verifierad: '2026-08-03'
 - id: pitea-arrangemangsstod
   namn: Arrangemangsstöd
@@ -198,6 +210,7 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Registrerade föreningar som anordnar publika arrangemang under kultur- och fritidsnämndens ansvarsområde
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
@@ -206,12 +219,13 @@ bidrag:
   - 'Bidragsberättigade kostnader: artist-/utövararvoden (ej egna medlemmar), resor, ljud/ljus, marknadsföring, lokalhyra'
   - Täcker inte arrangörsarvoden, intern verksamhet, catering, insamlingsgalor, publikationer eller administration
   belopp: Max 50 % av dokumenterade kostnader
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/utveckling-och-arrangemang/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan digital med fastställda ansökningstillfällen som publiceras på kommunens webbplats. Redovisning inom
     6 månader efter utbetalning.
   senast_verifierad: '2026-08-03'
@@ -221,6 +235,7 @@ bidrag:
   - kultur
   malgrupp: Registrerade ideella föreningar som anordnar publika, entrébelagda kulturarrangemang — gäller inte föreningar
     med årligt verksamhetsstöd
+  foreningstyp: [kultur]
   deadlines:
     typ: fasta
     datum:
@@ -228,13 +243,15 @@ bidrag:
   krav:
   - Arrangemanget ska registreras i kommunens evenemangskalender
   - Digital redovisning krävs innan utbetalning
+  - Föreningen får inte samtidigt få årligt verksamhetsstöd
   belopp: Max 20 000 kr per arrangemang
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/utveckling-och-arrangemang/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan senast fyra veckor före arrangemanget, dock senast 15 november — det som infaller först.
   senast_verifierad: '2026-08-03'
 - id: pitea-driftstod-foreningsanlaggningar
@@ -243,6 +260,7 @@ bidrag:
   - idrott
   - ovrig
   malgrupp: Föreningar som äger anläggningar för barn- och ungdomsverksamhet eller anläggningar av allmänt intresse
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
@@ -250,13 +268,15 @@ bidrag:
   krav:
   - Registrering i föreningsregistret och grundläggande krav för föreningsstöd
   - Föreningen har fullt driftansvar för anläggningen
-  belopp: null
+  - Anläggningen ska hållas i bra och driftsäkert skick
+  belopp: Fast belopp utifrån anläggningens typ, yta och storlek; nivåerna publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Sen ansökan kan ge upp till 50 % reducerat bidrag (grundläggande krav för föreningsbidrag)
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Stödet utgår med fast belopp utifrån typ av yta och anläggningens storlek — ingen beloppsnivå publicerad. Utbetalning
     senast 31 maj.
   senast_verifierad: '2026-08-03'
@@ -266,42 +286,49 @@ bidrag:
   - idrott
   - ovrig
   malgrupp: Föreningar som äger idrotts- eller fritidsanläggningar, i första hand för barn, unga, pensionärer och allmänheten
+  foreningstyp: [idrott, friluft, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
-    - 08-31
+    - 09-30
   krav:
   - Registrering i föreningsregistret och grundläggande krav för föreningsstöd
   - Arbeten får inte påbörjas innan stödbeslut
   - Vid hyres-/arrenderätt krävs nyttjanderättsavtal på minst 10 år
   - Arbetet ska påbörjas under bidragsåret och vara upparbetat senast 2 år efter
   belopp: Max 70 % av godkänd kostnad för byggnader/markanläggningar; 6 000 kr/km² för orienteringskartor
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/investeringsstod-foreningsanlaggningar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan löpande, senast 31 augusti för kommande år. Beslut vid kultur- och fritidsnämndens decembermöte.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan kan lämnas löpande, senast 30 september för kommande år. Beslut fattas vid kultur- och fritidsnämndens decembermöte.
   senast_verifierad: '2026-08-03'
 - id: pitea-investeringsstod-gemensamma-anlaggningar
   namn: Investeringsstöd gemensamma anläggningar och lokaler
   kategori:
   - ovrig
   malgrupp: Byalag/föreningar som förvaltar gemensamma anläggningar i lokalsamhället
+  foreningstyp: [hembygd, friluft, annat]
   deadlines:
     typ: fasta
     datum:
-    - 08-31
+    - 09-30
   krav:
   - Egeninsats kan bestå av ideellt arbete, material eller kontant insats
+  - Arbetet får inte påbörjas innan beslut om stöd
+  - Anläggningen eller lokalen ska vara av allmänt intresse och ingå i byns utvecklingsplan
+  - Beviljat stöd ska vara upparbetat senast två år efter bidragsåret
   belopp: Max 70 % av godkänd kostnad
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/investeringsstod-gemensamma--anlaggningar-och-lokaler/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Beslut vid kultur- och fritidsnämndens decembermöte.
   senast_verifierad: '2026-08-03'
 - id: pitea-driftstod-samlingslokaler
@@ -309,6 +336,7 @@ bidrag:
   kategori:
   - ovrig
   malgrupp: Föreningar som erbjuder allmänna samlingslokaler öppna för alla, utan ideologiska eller målsättningsbundna begränsningar
+  foreningstyp: [hembygd, kultur, social, annat]
   deadlines:
     typ: fasta
     datum:
@@ -318,14 +346,15 @@ bidrag:
   - Kultur- och fritidsnämnden ska ha beslutat att lokalen behövs som allmän samlingslokal
   - Lokalen ska upplåtas opartiskt, i skälig omfattning och på skäliga villkor
   - Stödberättigad yta ska vara uppvärmd
-  belopp: null
+  belopp: Fast belopp utifrån lokalens yta och storlek; nivåerna publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/driftstod-till-allmanna-samlingsstod/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Utbetalning senast 31 maj. Motsvarar bygdegårds-/samlingslokalskategorin (RESEARCH_SPEC §2.1.5).
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet beräknas med fast belopp efter lokalens yta och storlek; nivåerna publiceras inte. Utbetalning sker senast 31 maj.
   senast_verifierad: '2026-08-03'
 - id: pitea-hyresstod
   namn: Hyresstöd
@@ -335,6 +364,7 @@ bidrag:
   - ovrig
   malgrupp: Föreningar som hyr extern lokal för barn- och ungdomsverksamhet och som fått minst 20 beviljade aktivitetsstöd
     föregående redovisningsår
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
@@ -344,12 +374,13 @@ bidrag:
   - Ingen subventionerad eller reducerad hyra redan från kommunen
   - Lokalen får inte användas för entrébelagda eller kommersiella arrangemang
   belopp: 70 % av godkända hyreskostnader, högst 30 000 kr per år
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/Hyresstod---Barn--och-ungdomsverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Godkända kostnader inkluderar hyra, sluträkning för vatten/el och sophämtning.
   senast_verifierad: '2026-08-03'
 - id: pitea-foreningstaxa
@@ -359,19 +390,22 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Bidragsberättigade föreningar med barn- och ungdomsverksamhet som hyr kommunala lokaler
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Föreningen ska vara godkänd bidragsberättigad och registrerad i föreningsregistret
   - Gäller inte entrébelagda arrangemang, matcher, tävlingar eller utställningar
-  belopp: null
+  - Föreningen ska bedriva barn- och ungdomsverksamhet och följa reglerna för kommunalt aktivitetsstöd
+  belopp: Subventionerad taxa; någon generell rabattsats publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (automatisk rabatterad taxa, ingen separat ansökan)
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ingen separat ansökan — subventionerad taxa gäller automatiskt vid bokning av kommunal lokal för godkända föreningar.
   senast_verifierad: '2026-08-03'
 - id: pitea-tillsynsavgifter
@@ -381,18 +415,22 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med egen eller hyrd anläggning som behöver miljötillsyn
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
   krav:
   - Registrering i föreningsregistret och grundläggande krav för föreningsstöd
+  - Föreningen ska ha en egen eller hyrd anläggning som omfattas av miljötillsyn
+  - Föreningen ska vara beviljad driftstöd eller hyresstöd för anläggningen
   belopp: Max 70 % av kostnaden, högst 10 000 kr per år
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/anlaggningsstod/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan senast 3 månader efter mottagen faktura för tillsynsavgiften.
   senast_verifierad: '2026-08-03'
 - id: pitea-byapeng
@@ -401,6 +439,7 @@ bidrag:
   - ovrig
   malgrupp: Lokala utvecklingsgrupper eller ideella föreningar verksamma i en by inom Piteå kommun — endast en sökande per
     by och kalenderår
+  foreningstyp: [hembygd, annat]
   deadlines:
     typ: fasta
     datum:
@@ -409,37 +448,40 @@ bidrag:
   - Endast en lokal utvecklingsgrupp eller förening per by kan söka under samma kalenderår
   - Byns föreningar ska gemensamt utse vilken som står som sökande, med beskrivning av förfarandet
   - Redovisning av föregående års byapeng samt utvecklingsplan bifogas ansökan
-  belopp: null
+  belopp: Belopp beslutas av kommunstyrelsen; ingen fast nivå publiceras
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/contentassets/2fd5d4d6f02c4c88b22c09e6345fe9b4/bestammelser-for-stod-till-gles--och-landsbygd.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kommunstyrelsen beslutar bidragets storlek — inget fast belopp publicerat. Regelverk antaget av Kommunstyrelsen
-    2025-06-09 §, giltigt till 2028-03-31, diarienummer 25KS364. Ansökan till Samhällsbyggnad via e-tjänst (pitea.enamnd.se/landsbygd).
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunstyrelsen beslutar stödets storlek; inget fast belopp publiceras. Bestämmelserna gäller till 2028-03-31.
   senast_verifierad: '2026-08-03'
 - id: pitea-naromradesutveckling
   namn: Närområdesutveckling
   kategori:
   - ovrig
   malgrupp: Aktiva lokala utvecklingsgrupper eller ideella föreningar i Piteå kommun
+  foreningstyp: [hembygd, annat]
   deadlines:
     typ: fasta
     datum:
     - 02-28
     - 09-30
   krav:
-  - Utvecklingsprojekt i byar, grannskap eller närområden
-  belopp: null
+  - Sökanden ska vara en ideell förening som uppfyller kommunens grundläggande krav för föreningsstöd
+  - Föreningen ska vara verksam i den aktuella byn eller det aktuella området
+  - Ansökan ska avse ett utvecklingsprojekt i en by, ett grannskap eller ett närområde
+  belopp: Belopp beslutas efter ansökan; ingen fast nivå publiceras
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/contentassets/2fd5d4d6f02c4c88b22c09e6345fe9b4/bestammelser-for-stod-till-gles--och-landsbygd.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Två ansökningstillfällen per år. Samma regelverk som Byapeng (25KS364, antaget 2025-06-09, giltigt till 2028-03-31).
-    Ansökan till Samhällsbyggnad via e-tjänst.
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Två ansökningstillfällen per år. Bestämmelserna gäller till 2028-03-31.
   senast_verifierad: '2026-08-03'
 - id: pitea-bebyggd-kulturmiljo
   namn: Stöd till den bebyggda kulturmiljön
@@ -447,6 +489,7 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Ideella föreningar med driftsansvar för värdefulla bebyggda kulturmiljöer på landsbygden
+  foreningstyp: [kultur, hembygd, annat]
   deadlines:
     typ: fasta
     datum:
@@ -454,38 +497,40 @@ bidrag:
   krav:
   - Föreningen äger och driver den kulturhistoriskt värdefulla anläggningen
   - Verksamhetsberättelse, räkenskapssammandrag, revisionsberättelse samt planering för kommande år bifogas
-  belopp: null
+  - Föreningen ska uppfylla kommunens grundläggande krav för föreningsstöd
+  belopp: Belopp beslutas efter ansökan; ingen fast nivå publiceras
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/contentassets/2fd5d4d6f02c4c88b22c09e6345fe9b4/bestammelser-for-stod-till-gles--och-landsbygd.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan skickas till Piteå kommun, Samhällsbyggnad, Box 37, 941 21 Piteå. Samma regelverk som Byapeng/Närområdesutveckling
-    (25KS364).
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan lämnas till Samhällsbyggnad. Bestämmelserna gäller till 2028-03-31.
   senast_verifierad: '2026-08-03'
 - id: pitea-gles-landsbygd-satsningar
   namn: Särskilda satsningar på gles- och landsbygden
   kategori:
   - ovrig
   malgrupp: Föreningar verksamma i berörd by samt företag i området som söker för allmänna, icke vinstdrivande ändamål
+  foreningstyp: [hembygd, friluft, annat]
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - 'Investeringsprojekt: nyanläggning eller kvalitets-/standardhöjande om- och tillbyggnad'
   - Ska främja friluftsliv och vara av allmänt intresse, tillgängligt för allmänheten
   - Medel får inte användas som driftkostnader
   - Egeninsats (medfinansiering) krävs för resterande kostnad
-  belopp: null
-  belopp_avser: okand
+  belopp: Max 70 % av godkända kostnader
+  belopp_avser: per_forening
   kommunens_pott: "Kommunens totala ram är högst 2 miljoner kronor per år"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/contentassets/2fd5d4d6f02c4c88b22c09e6345fe9b4/bestammelser-for-stod-till-gles--och-landsbygd.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan sker i samråd med Samhällsbyggnad, inget fast ansökningsdatum. Del av satsningen 2025–2027 på fem landsbygdscentra
     (Rosvik, Norrfjärden, Roknäs/Sjulnäs, Hortlax, Jävre) enligt kommunens webbsida. Kommunens totala årliga ram för landsbygdscentra
     är högst 2 miljoner kronor; detta är inte ett tak per sökande.
@@ -495,6 +540,7 @@ bidrag:
   kategori:
   - ovrig
   malgrupp: Enskilda fastighetsägare, samfällighetsföreningar och vägföreningar som ansvarar för enskild väg utan statsbidrag
+  foreningstyp: [annat]
   deadlines:
     typ: fasta
     datum:
@@ -505,13 +551,14 @@ bidrag:
   - Vägen ska vara 100–1 000 meter lång och ansluta till allmän väg eller annan bidragsberättigad enskild väg
   - Gäller bara vägar utan statligt bidrag (Trafikverket)
   - Separat ansökan krävs per väg om en vägförening ansvarar för flera vägar i en by
-  belopp: null
+  belopp: Varierar årligen utifrån budget, väglängd och antal ansökningar
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/Trafik-gator/Mer-fran-Trafik-och-gator/kommunala-bidrag-till-enskilda-vagar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökningsfönster 1 januari–31 mars, utbetalning senast 30 april. Belopp varierar år till år utifrån budget,
     väglängd och antal ansökningar. Redan godkända mottagare behöver inte söka om årligen. Ansökan via e-tjänst pitea.enamnd.se/enskildvag.
   senast_verifierad: '2026-08-03'
@@ -521,6 +568,7 @@ bidrag:
   - ovrig
   malgrupp: Fiskevårdsföreningar inom kultur- och fritidsnämndens ansvarsområde med nyttjanderätt till vatten som är allmänt
     eller fritt tillgängligt för fiske
+  foreningstyp: [friluft, annat]
   deadlines:
     typ: fasta
     datum:
@@ -531,12 +579,13 @@ bidrag:
   - Föregående års årsmöteshandlingar (verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse) samt planering för
     innevarande år bifogas
   belopp: 10 000 kr fast del per förening och år, plus rörlig del utifrån godkända kostnader
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Fiske/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Täcker långsiktiga insatser för fiskevård, serviceanläggningar, marknadsföring, information och utbildning.
     Ansökan via pitea.enamnd.se/oversikt/overview/1296.
   senast_verifierad: '2026-08-03'
@@ -545,6 +594,7 @@ bidrag:
   kategori:
   - ovrig
   malgrupp: Föreningar och företag som uppfyller grundläggande krav för föreningsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   deadlines:
     typ: lopande
     datum: []
@@ -553,16 +603,16 @@ bidrag:
   - Ansökan ska innehålla syfte, mål, budget och verksamhetsbeskrivning
   - Verksamheten ska vara öppen för alla unga i Piteå, om inte särskilda skäl finns
   - Beviljade medel ska användas inom ansökningsåret
-  belopp: null
+  belopp: Belopp beslutas efter ansökan; ingen fast nivå publiceras
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/medel-for-motesplatser-for-unga/medel-till-motesplatser-for-unga/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 2025 fick cirka 15 föreningar mellan 6 000 och 300 000 kr, bland andra Malmgatan 5 (300 000 kr) och Piteå Skol
-    IF (250 000 kr). Ansökan via pitea.enamnd.se/oversikt/overview/3363. Notera att både föreningar och företag kan söka —
-    skrivet ändå eftersom föreningar uttryckligen är en av två sökandekategorier, inte uteslutna (§2.4).
+    IF (250 000 kr). Ansökan kan lämnas löpande under året.
   senast_verifierad: '2026-08-03'
 - id: pitea-socialnamnden-foreningsstod
   namn: Socialnämndens stöd till föreningslivet
@@ -572,6 +622,7 @@ bidrag:
   - social
   malgrupp: Föreningar verksamma inom Kommunala pensionärsrådet, Kommunala tillgänglighetsrådet och det kommunala brotts-
     och drogförebyggande rådets ansvarsområden
+  foreningstyp: [social, annat]
   deadlines:
     typ: fasta
     datum:
@@ -583,16 +634,41 @@ bidrag:
   - Antagna stadgar, aktiv styrelse och revisor, demokratisk verksamhet
   - Ansluten till statsbidragsberättigad riksorganisation
   belopp: Grundbidrag cirka 5 000 kr per förening plus cirka 50 kr per medlem, samt verksamhetsspecifika tilläggsbidrag
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.pitea.se/invanare/Omsorg-stod/ovrigt-stod/mer-fran-socialtjansten/socialnamndens-bidrag-till-foreningslivet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Utbetalning i juni bidragsåret. Kontakt Ingela Tallhed (prevention/tillgänglighet) eller Ewa Karlsson Sjölander
-    (pensionärsrådet). Administreras av Socialnämnden, inte Kultur- och fritidsnämnden — separat förvaltningsspår (RESEARCH_SPEC
-    §5).
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning sker i juni bidragsåret. Stödet administreras av Socialnämnden.
   senast_verifierad: '2026-08-03'
+- id: pitea-sponsring
+  namn: Sponsring
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Föreningar och organisationer med samhällsnyttig och tillväxtfrämjande verksamhet, evenemang eller initiativ
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Verksamheten, aktiviteten eller evenemanget ska vara samhällsnyttigt och tillväxtfrämjande
+  - Det ska vara positivt för Piteå kommun att förknippas med det sponsrade sammanhanget
+  - Sponsringen ska bygga på ett ömsesidigt samarbete där kommunen får en motprestation
+  - Sökanden får inte vara en enskild person eller ett kommunägt bolag
+  belopp: Belopp beslutas efter ansökan; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  sen_ansokan: Ej angivet i källan
+  kalla_url: https://www.pitea.se/Medborgarservice/sponsring/
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Sponsring skiljs från föreningsstöd genom kravet på motprestation. Ansökan görs i kommunens e-tjänst.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: pitea-bidragsberattigad-forening
   vad: Bli registrerad och godkänd som bidragsberättigad förening
@@ -609,5 +685,5 @@ forutsattningar:
   giltighet: Uppgifterna ska uppdateras senast 1 april varje år
   ordning: 1
   kalla_url: https://www.pitea.se/invanare/fritid-kultur/foreningar/foreningsstod/Allmanna-bestammelser/
-  giltighet_status: olast
+  giltighet_status: kontrollast
 kommunsiffra: null
