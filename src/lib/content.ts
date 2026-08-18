@@ -835,8 +835,12 @@ export const KOPYTAN_1E = {
   // finns (1d blockerad, se golden-set-fyndet i förra sprinten) — rätt
   // att inte hitta på ett tal. Generisk "kommunens krav" i stället för
   // {kommun}s, ingen substitution behövs längre för den här raden.
+  // S3.2 (Jacob 2026-08-18): "Ett ifyllt ansökningsunderlag" antydde
+  // ifyllnad — samma fel som KOPRUTA hade innan R2, bara på en annan
+  // yta (registreringsprodukten, inte bidragsutkastet). Ersatt med vad
+  // dokumentet faktiskt är: kommunens krav i rätt ordning, som Word/PDF.
   vadHonFar: [
-    'Ett ifyllt ansökningsunderlag mot kommunens krav, som Word-fil och PDF.',
+    'Kommunens krav för registrering, i rätt ordning, som Word-fil och PDF.',
     'Ett kopieringsfält per avsnitt för kommunens e-tjänst.',
     'Bilagelistan med vad som ska med, och var det ska laddas upp.',
     'Mejl med varaktig länk. Dokumentet ligger kvar i föreningens profil.',
@@ -891,10 +895,35 @@ export const KOPRUTA = {
   // (oförändrad i sak) gäller där systemet SAKNAS.
   beskrivningEtjanst: 'Allt ni behöver ha framme när ni öppnar {system} — {kommunPossessiv} krav i rätt ordning, källan till varje krav, bilagorna listade.',
   luckorRad: '{antal} rader behöver ni fylla i själva — vi säger vilka innan ni betalar.',
+  // S3.3 (Jacob 2026-08-18, "Auditens P0.7 i sin helhet"): vad hon får
+  // FÖRE köpet, som konkreta tal — inte bara prosa. antalKrav/
+  // antalBilagor beräknas server-sidan (index.astro), oberoende av
+  // besökarens profil. "Raderna är kommunens egna villkor" ersätter
+  // varje formulering som antyder att VI fyller i dem.
+  // {bilagorText} — färdigböjd av anroparen ("1 bilaga"/"2 bilagor"),
+  // inte {antalBilagor} rakt in i en hårdkodad plural — "1 bilagor" är
+  // fel svenska.
+  innehallsrad: '{antalKrav} krav, {bilagorText}. Källa anges vid varje krav. Raderna är kommunens egna villkor — er förening fyller i det som stämmer.',
   kravlistaRegistrering: 'Ni får hela kravlistan för att bli godkända som bidragsberättigade i {kommun}, med vad varje krav betyder och var uppgiften finns.',
   leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
   prisOchKvitto: '{pris} kr inklusive moms. Kvitto med organisationsnummer och momsspecifikation mejlas — det går att bokföra.',
   aterbetalning: 'Blev det inte användbart: mejla inom 30 dagar så betalar vi tillbaka. Ingen förklaring behövs.',
+};
+
+/**
+ * BEKRAFTELSE — S3.1 (Jacob 2026-08-18). Utkastvyns tillstånd efter ett
+ * lyckat köp (?betald=1&session_id=... i URL:en). Ersätter köprutan —
+ * klientskriptet läste tidigare aldrig den querysträngen, så en betald
+ * besökare mötte samma säljpitch med en aktiv köpknapp igen.
+ * kopLankText nämner mejlet bara för den varaktiga kopian (kräver
+ * inloggning, en medveten säkerhetsgräns — se session.ts) — inte för
+ * själva bekräftelsen, som visas direkt på skärmen.
+ */
+export const BEKRAFTELSE = {
+  rubrik: 'Tack för köpet',
+  besked: '{bidrag} i {kommun} — {pris} kr. Er ansökningschecklista finns här nedanför.',
+  kopLankText: 'Er varaktiga kopia (Word/PDF) och kvittot väntar på Mina sidor — vi har mejlat en inloggningslänk dit.',
+  kopLankKnapp: 'Till er varaktiga kopia',
 };
 
 /**
@@ -1174,11 +1203,21 @@ export const VANTELISTA = {
   // borttagen (samma överclaim-mönster som P1.2), inte omformulerad —
   // se P1.6-svaret för varför.
   luckorRubrik: 'Kommunens villkor för {bidragsnamn}',
-  luckorInga: 'För {bidragsnamn} behöver ni inte fylla i något — vi har allt vi behöver från era svar.',
+  // S3.2 (Jacob 2026-08-18): "vi har allt vi behöver från era svar"
+  // antydde ifyllnad som produktlöfte — sant bara i det sällsynta
+  // enskilda fallet (fyllKrav träffade på ALLA krav för just detta
+  // bidrag), men läst som ett generellt löfte. Omskriven till ett
+  // sakligt konstaterande utan att kreditera "era svar".
+  luckorInga: 'Inga öppna krav kvar att bevaka för {bidragsnamn} just nu.',
   cta: 'Reservera plats nu. Ni betalar först när underlaget ligger klart att läsa — och behåller det till nästa år.',
   epostLabel: 'E-postadress',
   knappVantelista: 'Reservera vår plats',
-  kvitto: 'Klart — er plats är reserverad. Vi hör av oss så snart utkastet för {kommun} går att skapa. Under tiden fyller vi på er föreningsprofil varje gång ni använder guiden, så det mesta redan är på plats när ni sätter igång.',
+  // S3.2 (Jacob 2026-08-18): "så det mesta redan är på plats när ni
+  // sätter igång" antydde att fler svar/besök gradvis fyller i mer —
+  // fill-rate-mätningen visar motsatsen (0,10 rader per bidrag även
+  // med bästa möjliga profil). Profilen sparas fortfarande — det är
+  // sant och nämns — men utan löftet om vad den ger.
+  kvitto: 'Klart — er plats är reserverad. Vi hör av oss så snart utkastet för {kommun} går att skapa.',
   ansvar: 'Ansökan lämnar ni in själva och beslutet fattar kommunen. Vi lovar inte bifall.',
 };
 

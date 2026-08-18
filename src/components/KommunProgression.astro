@@ -15,9 +15,10 @@ import {
 } from '../lib/kommuner';
 import { VAGLEDNING, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../lib/priser';
-import { genereraRegistreringsUtkast } from '../lib/utkastGenerator';
-import { harvestBilagor } from '../lib/kopDokument';
+import { genereraRegistreringsUtkast, genereraUtkast } from '../lib/utkastGenerator';
+import { harvestBilagor, harvestBilagorFranKrav } from '../lib/kopDokument';
 import { arKommunKlar9av9, arBidragSaljbart } from '../lib/kommunKlar';
+import { konservativProfil } from '../lib/foreningsprofil';
 import UrgencyChip from './UrgencyChip.astro';
 import VantelistaFlode from './VantelistaFlode.astro';
 
@@ -146,7 +147,18 @@ const vardeankring = (bidrag: Kommun['bidrag'][number]) =>
 
 const arSaljbar = arBidragSaljbart;
 
-type Station5Entry = { beskrivning: string; href: string; vardeankring: string | null } | null;
+// S3.3 (Jacob 2026-08-18, "Auditens P0.7 i sin helhet"): vad hon får
+// FÖRE köpet, som tal — samma beräkning som /utkast/-sidan gör
+// server-sidan, körd här för teaserns kandidatbidrag per filter.
+// Oberoende av profil (se den sidans kommentar för varför).
+const innehallsrad = (bidrag: Kommun['bidrag'][number]) => {
+  const resultat = genereraUtkast(konservativProfil(kommun.kommun_slug), bidrag, kommun);
+  const antalBilagor = resultat.typ === 'bidragsutkast' ? harvestBilagorFranKrav(resultat.kravRader).length : 0;
+  const bilagorText = antalBilagor === 1 ? '1 bilaga' : `${antalBilagor} bilagor`;
+  return KOPRUTA.innehallsrad.replace('{antalKrav}', String(bidrag.krav.length)).replace('{bilagorText}', bilagorText);
+};
+
+type Station5Entry = { beskrivning: string; href: string; vardeankring: string | null; innehallsrad: string } | null;
 const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
   filterValues.map((filter) => {
     const kandidat = bidragForFilter(filter).find((k) => arSaljbar(k.bidrag));
@@ -155,6 +167,7 @@ const station5PerFilter: Record<string, Station5Entry> = Object.fromEntries(
       beskrivning: fyllKopruta(kopRutaBeskrivningMall, kandidat.bidrag.namn),
       href: `/kommun/${kommun.kommun_slug}/utkast/${kandidat.bidrag.id}/`,
       vardeankring: vardeankring(kandidat.bidrag),
+      innehallsrad: innehallsrad(kandidat.bidrag),
     }];
   })
 );
@@ -400,6 +413,9 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
       <div class="progression__kopruta" data-progression-kopruta hidden={!station5Alla}>
         <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
         <p data-progression-kopruta-beskrivning>{station5Alla?.beskrivning}</p>
+        {/* S3.3 — antal krav, antal bilagor, källhänvisning, raderna
+           hennes att fylla i. Samma tal som /utkast/-sidan visar. */}
+        <p data-progression-kopruta-innehallsrad>{station5Alla?.innehallsrad}</p>
         <p>{KOPRUTA.leverans}</p>
         <p>{kopRutaPrisOchKvitto}</p>
         {/* F② (F8) — bara när D1-kandidaten har ett kontrollast belopp. */}
@@ -481,6 +497,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
 
   const kopruta = document.querySelector<HTMLElement>('[data-progression-kopruta]');
   const kopRutaBeskrivning = document.querySelector<HTMLElement>('[data-progression-kopruta-beskrivning]');
+  const kopRutaInnehallsrad = document.querySelector<HTMLElement>('[data-progression-kopruta-innehallsrad]');
   const kopRutaCta = document.querySelector<HTMLAnchorElement>('[data-progression-kopruta-cta]');
   const kopRutaVardeankring = document.querySelector<HTMLElement>('[data-progression-kopruta-vardeankring]');
   // ÅTGÄRDSSPEC punkt 1: bevakningsrutorna är statiskt SSR-renderade, en
@@ -492,6 +509,7 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
     const entry = perFilterData.station5?.[value];
     if (kopruta) kopruta.hidden = !entry;
     if (kopRutaBeskrivning && entry) kopRutaBeskrivning.textContent = entry.beskrivning;
+    if (kopRutaInnehallsrad && entry) kopRutaInnehallsrad.textContent = entry.innehallsrad;
     if (kopRutaCta && entry) kopRutaCta.href = entry.href;
     if (kopRutaVardeankring) {
       kopRutaVardeankring.hidden = !entry?.vardeankring;

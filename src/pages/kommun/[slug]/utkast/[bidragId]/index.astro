@@ -53,7 +53,10 @@ import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
 import { loadKommuner, possessiv, beraknaArbetsbevis, beloppArEttEnkeltTal, individuelltBelopp } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag, Arbetsbevis } from '../../../../../lib/kommuner';
 import { PRIS_BIDRAGSUTKAST_ORE, ABONNEMANG_LEVERANS_LIVE, BETALFLODE_SKARPT_VERIFIERAT } from '../../../../../lib/priser';
-import { KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
+import { KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR, BEKRAFTELSE } from '../../../../../lib/content';
+import { konservativProfil } from '../../../../../lib/foreningsprofil';
+import { genereraUtkast } from '../../../../../lib/utkastGenerator';
+import { harvestBilagorFranKrav } from '../../../../../lib/kopDokument';
 
 export function getStaticPaths() {
   const kommuner = loadKommuner();
@@ -94,6 +97,21 @@ const vardeankringText =
 
 // F③ — 'fasta' = årligt återkommande MM-DD-datum (kommunTyper.ts), enda typen där "om ett år" stämmer.
 const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAPEL.forlustaversion : null;
+
+// S3.3 (Jacob 2026-08-18, "Auditens P0.7 i sin helhet"): vad hon får
+// FÖRE köpet — antal krav, antal bilagor, att varje krav har
+// källhänvisning, att raderna är hennes att fylla i. Krav-antalet och
+// bilagelistan beror INTE på besökarens profil (krav-texterna och
+// vilka bilage-substantiv de nämner är samma oavsett vem som läser) —
+// beräknas därför server-sidan med konservativProfil, samma mönster
+// som KommunProgression.astro:s arSaljbar körde före R2, fast här bara
+// för att räkna, aldrig för att gissa fram ett gate-resultat.
+const previewResultat = genereraUtkast(konservativProfil(kommun.kommun_slug), bidrag, kommun);
+const antalKrav = bidrag.krav.length;
+const antalBilagor = previewResultat.typ === 'bidragsutkast' ? harvestBilagorFranKrav(previewResultat.kravRader).length : 0;
+const innehallsradText = KOPRUTA.innehallsrad
+  .replace('{antalKrav}', String(antalKrav))
+  .replace('{bilagorText}', antalBilagor === 1 ? '1 bilaga' : `${antalBilagor} bilagor`);
 ---
 <Base
   title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
@@ -146,6 +164,10 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       <h2 class="utkastvy__kopruta-rubrik">{KOPRUTA.rubrik}</h2>
 
       <p>{fyllKopruta(KOPRUTA.beskrivning)}</p>
+      {/* S3.3 — vad hon får FÖRE köpet, som tal: antal krav, antal
+         bilagor, källhänvisning, raderna hennes att fylla i. Beräknad
+         server-sidan (index.astro), oberoende av profil. */}
+      <p class="utkastvy__innehallsrad">{innehallsradText}</p>
       <p data-utkastvy-luckor-rad hidden></p>
 
       {/* F④ — värdestapel: samma tre KOPRUTA-meningar som tidigare stod
@@ -193,6 +215,20 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       <a href={`/kommun/${kommun.kommun_slug}/#bidrag-${bidrag.id}`} class="utkastvy__escape">← Tillbaka till bidraget (gratis)</a>
     </div>
 
+    {/* S3.1 (Jacob 2026-08-18): visas I STÄLLET för köprutan när
+       ?betald=1 finns i URL:en (Stripes success_url). Klientskriptet
+       läste tidigare aldrig den querysträngen — en betald besökare
+       möttes av EXAKT samma säljpitch, aktiv köpknapp inkluderad
+       (dubbelbetalningsrisk, S1.2-fyndet). Dokumentet ovan (kravraderna)
+       renderas oförändrat — bekräftelsen ersätter bara köprutan under
+       det, aldrig kravinnehållet. */}
+    <div class="utkastvy__kopram utkastvy__kopram--bekraftelse" data-utkastvy-bekraftelse hidden>
+      <h2 class="utkastvy__kopruta-rubrik">{BEKRAFTELSE.rubrik}</h2>
+      <p data-utkastvy-bekraftelse-besked></p>
+      <p>{BEKRAFTELSE.kopLankText}</p>
+      <a href="#" class="btn-primary" data-utkastvy-bekraftelse-lank>{BEKRAFTELSE.kopLankKnapp}</a>
+    </div>
+
     {/* M2.4 (Jacob 2026-08-17): visas I STÄLLET för köprutan när
        checklistan inte har något ifyllt innehåll att sälja — samma
        spärr som checkout/bidragsutkast.ts (kravRader.length === 0 eller
@@ -217,7 +253,8 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
   import { genereraUtkast } from '../../../../../lib/utkastGenerator';
   import { arBidragSaljbart } from '../../../../../lib/kommunKlar';
   import type { Kommun } from '../../../../../lib/kommunTyper';
-  import { KOPRUTA, KONVERTERINGSSTAPEL } from '../../../../../lib/content';
+  import { KOPRUTA, KONVERTERINGSSTAPEL, BEKRAFTELSE } from '../../../../../lib/content';
+  import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
   import { trackEvent } from '../../../../../lib/umami';
   import { hamtaKopantal, arOverSocialtBevisGolv } from '../../../../../lib/kopKlient';
   import { initBevakaWidgets } from '../../../../../lib/bevakaKlient';
@@ -230,6 +267,9 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
     const statusEl = root.querySelector<HTMLElement>('[data-utkastvy-status]');
     const dokumentEl = root.querySelector<HTMLElement>('[data-utkastvy-dokument]');
     const kopramEl = root.querySelector<HTMLElement>('[data-utkastvy-kopram]');
+    const bekraftelseEl = root.querySelector<HTMLElement>('[data-utkastvy-bekraftelse]');
+    const bekraftelseBeskedEl = root.querySelector<HTMLElement>('[data-utkastvy-bekraftelse-besked]');
+    const bekraftelseLankEl = root.querySelector<HTMLAnchorElement>('[data-utkastvy-bekraftelse-lank]');
     const bevakaEl = root.querySelector<HTMLElement>('[data-utkastvy-bevaka]');
     const metaEl = root.querySelector<HTMLElement>('[data-utkastvy-meta]');
     const ansvarEl = root.querySelector<HTMLElement>('[data-utkastvy-ansvar]');
@@ -237,6 +277,20 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
     const felEl = root.querySelector<HTMLElement>('[data-utkastvy-fel]');
     const luckorRadEl = root.querySelector<HTMLElement>('[data-utkastvy-luckor-rad]');
     const socialtBevisEl = root.querySelector<HTMLElement>('[data-utkastvy-socialt-bevis]');
+
+    // S3.1 (Jacob 2026-08-18): Stripes success_url landar tillbaka här
+    // med ?betald=1&session_id=... — klientskriptet läste tidigare
+    // ALDRIG den querysträngen, så en precis betalande besökare mötte
+    // exakt samma säljpitch med en aktiv köpknapp igen (S1.2-fyndet).
+    // Ingen ny sensitiv information avslöjas av att lita på flaggan
+    // rakt av: dokumentet (kravraderna) visas redan gratis oavsett
+    // köpstatus, det köprutan/bekräftelsen skiljer är bara vilken TEXT
+    // och KNAPP som visas under det — samma modell som Stripe själva
+    // dokumenterar success_url för (UX, inte en säkerhetsgräns; den
+    // riktiga gränsen är webhooken + inloggningen på Mina sidor).
+    const params = new URLSearchParams(location.search);
+    const betald = params.get('betald') === '1';
+    const sessionId = params.get('session_id');
 
     // M2.4 — wiras en gång, oavsett om bevaka-slotet visar sig senare.
     // initBevakaWidgets() letar [data-bevaka-cell] i hela dokumentet vid
@@ -299,6 +353,41 @@ const forlustaversionText = bidrag.deadlines.typ === 'fasta' ? KONVERTERINGSSTAP
       }
 
       const resultat = genereraUtkast(profil, bidrag, kommunData);
+
+      // S3.1 (Jacob 2026-08-18) — betald=1 vinner över ALLT annat i den
+      // här funktionen. Hon har redan betalat; varken "registrera er
+      // först"-vägvisningen eller matchningskontrollen nedan är rätt
+      // att möta henne med, oavsett vad hennes NUVARANDE localStorage-
+      // profil råkar visa (kan ha ändrats/rensats mellan betalning och
+      // redirect). Den riktiga behörighetskontrollen redan kördes
+      // server-sidan innan Checkout-sessionen skapades
+      // (checkout/bidragsutkast.ts) — det här är bara vyn.
+      if (betald && sessionId && bekraftelseEl) {
+        statusEl?.setAttribute('hidden', '');
+        const kravEls = root!.querySelectorAll<HTMLElement>('[data-utkastvy-krav]');
+        kravEls.forEach((el, i) => {
+          const rad = resultat.typ === 'bidragsutkast' ? resultat.kravRader[i] : undefined;
+          const svarEl = el.querySelector<HTMLElement>('[data-utkastvy-krav-svar]');
+          if (!rad || !svarEl) return;
+          svarEl.textContent = rad.innehall;
+          svarEl.dataset.status = rad.status;
+          if (rad.status === 'lucka') svarEl.classList.add('utkastvy__krav-svar--lucka');
+        });
+        dokumentEl?.removeAttribute('hidden');
+        if (bekraftelseBeskedEl) {
+          const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
+          bekraftelseBeskedEl.textContent = BEKRAFTELSE.besked
+            .replace('{bidrag}', bidragNamn)
+            .replace('{kommun}', kommunNamn)
+            .replace('{pris}', String(prisKr));
+        }
+        if (bekraftelseLankEl) {
+          bekraftelseLankEl.href = `/mina-sidor/kop/${encodeURIComponent(sessionId)}/`;
+        }
+        bekraftelseEl.removeAttribute('hidden');
+        trackEvent('utkast_bekraftelse_visad', { kommun: kommunSlug, bidrag: bidragId });
+        return;
+      }
 
       if (resultat.typ === 'registrering_forst') {
         visaStatus('Er förening behöver registreras hos kommunen innan det här utkastet är aktuellt.', {
