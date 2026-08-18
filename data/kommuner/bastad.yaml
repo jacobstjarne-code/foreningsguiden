@@ -4,140 +4,351 @@ lan: Skåne län
 befolkning: 16026
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: Rbok
+  namn: Rbok och kommunens kulturblanketter
   url: https://bastad.rbok.se/ansok
-kalla_url: https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-verifierad: '2026-08-02'
+kalla_url: &huvud https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: bastad-barn-ungdomsforeningar
-  namn: Bidrag till barn- och ungdomsföreningar
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Barn- och ungdomsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+- id: bastad-startbidrag
+  namn: Startbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: &ungdomstyper [idrott, friluft, ungdom]
+  malgrupp: Nybildade barn- och ungdomsföreningar
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Föreningen måste registrera närvaro i Rbok-systemet för aktivitetsbidrag
-  - Föreningen ska ha sitt säte i Båstads kommun och/eller bedriva verksamheten i Båstads kommun med majoriteten av medlemmarna
-    mantalsskrivna i Båstads kommun
-  - Föreningen ska vara ansluten till en riksorganisation som är godkänd för att erhålla statligt stöd till sin centrala verksamhet
-  - Bidrag utgår till förening med minst 10 medlemmar i åldern 4-25 år, mantalsskrivna i Båstads, Laholms och/eller Ängelholms
-    kommun
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska vara ideell och allmännyttig, ha säte eller huvudsaklig verksamhet i Båstad och uppfylla kommunens gemensamma föreningsvillkor
+  - Minst tio registrerade medlemmar ska vara 4–25 år och ingen likadan föreningsverksamhet får ha funnits på orten de senaste tre åren
+  - Intyg om riksorganisation, konstituerande protokoll, stadgar, verksamhetsplan, giro och styrelsekontakter ska lämnas
+  - Bidraget ska återbetalas om verksamhetsberättelse och ekonomisk redovisning för det första året inte lämnas
+  belopp: 10 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under det första verksamhetsåret.
+  kalla_url: &norm https://www.bastad.se/download/18.41a2e81919b353de2c42b3d/1766152537544/Riktlinje-for-kommunalt-foreningsstod-i-Ba%C3%A5stads-kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade bidragstyper och belopp ej dokumenterade i webbkällor'
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-verksamhetsstod-barn-unga
+  namn: Verksamhetsstöd till barn- och ungdomsföreningar
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Föreningar med regelbunden verksamhet för barn och unga 4–25 år
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Föreningen ska ha minst tio medlemmar 4–25 år och minst 300 deltagaraktiviteter per år
+  - Varje medlem ska vara aktiv minst åtta gånger per år och närvaro ska registreras digitalt
+  - Aktiviteten ska vara planerad, pågå minst 45 minuter och normalt ha minst fem deltagare inklusive ledare; tennis, padel, ridning och bågskytte får ha tre
+  - En person får räknas högst en gång per idrott och dag och högst fyra gånger per vecka
+  - Entrétävlingar, kommersiell verksamhet, lovaktiviteter och studiecirklar är inte stödberättigade
+  belopp: 6 kr per deltagaraktivitet för 4–6 år, 18 kr för 7–20 år och 6 kr för 21–25 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Hösttermin redovisas senast 25 februari och vårtermin senast 25 augusti.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Barn- och ungdomsföreningar som utbildar ledare
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Ansökan ska godkännas före utbildningen; efterhandsansökan ger inget stöd
+  - Utbildningen ska avse föreningens barn- och ungdomsverksamhet och belysa folkhälsa, jämställdhet eller integration
+  - Utbildaren ska vara godkänd av kommunen
+  - Faktura och deltagarbevis ska lämnas efter utbildningen
+  belopp: 100 kr per aktiv medlem 4–25 år och år; varje stödberättigad förening kan söka minst 7 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men måste göras före utbildningen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-lokalbidrag-barn-unga
+  namn: Lokalbidrag till barn- och ungdomsföreningar
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Barn- och ungdomsföreningar som hyr en icke kommunsubventionerad lokal
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Lokalen ska ligga i Båstads kommun och huvudsakligen användas för barn- och ungdomsverksamhet
+  - Hyresavtalet ska godkännas av kommunen varje år och lokalen får inte redan vara kommunsubventionerad
+  - Lån, renovering, utomhusanläggningar och uteverksamhet vid egen lokal är inte stödberättigade
+  belopp: Högst 50 procent av godkänd hyra, maximalt 80 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-anlaggningsstod
+  namn: Anläggningsstöd
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Barn- och ungdomsföreningar med egen anläggning och kommunalt vatten
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska vara bidragsberättigad enligt kommunens regler för barn- och ungdomsföreningar
+  - Anläggningen ska belastas med kommunal grundavgift för vatten och avlopp
+  - Fakturan som styrker avgiften ska bifogas ansökan
+  belopp: Hela grundavgiften för vatten enligt gällande VA-taxa för 20 millimeters ledning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-driftsbidrag
+  namn: Driftsbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Föreningar som äger, driver eller arrenderar en anläggning
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska äga, driva eller arrendera anläggningen och bedriva stödberättigad barn- och ungdomsverksamhet
+  - Kommunens detaljerade anläggningspoäng ska användas för beräkningen
+  - Stödet avser drift, löpande och periodiskt underhåll samt inventarier och maskiner; uthyrda delar stöds normalt inte
+  - Anläggningen ska skötas på godtagbart sätt och begärd ändring av poäng ska anmälas senast 31 december
+  belopp: 800 kr per driftspoäng; högst 50 000 kr vid 150–999 aktivitetstillfällen, 70 000 kr vid 1 000–1 999, 100 000 kr vid 2 000–2 999 och 130 000 kr vid 3 000 eller fler
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Barn- och ungdomsföreningar med nödvändiga reparations- eller investeringsbehov
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Ansökan ska lämnas före arbetets start och beskriva nyttan, sökt belopp, kalkyl, offerter och eventuella ritningar
+  - Åtgärden ska vara en nödvändig reparation för tillgänglighet, energi eller myndighetskrav, eller en nyinvestering för ungdomar eller allmänhet
+  - Föreningen ska söka andra möjliga stöd och redovisa extern finansiering, egna pengar och ideell tid
+  - Fakturor ska lämnas efter genomförandet; fasta drifts- och inventariekostnader stöds inte
+  belopp: Individuellt efter budgetprövning; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari och alltid före projektstart.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-hyresbidrag-namngivna-anlaggningar
+  namn: Hyresbidrag för barn- och ungdomsverksamhet i namngivna anläggningar
+  kategori: [idrott, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Uthyrande föreningar i kommunens särskilt uppräknade anläggningar
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Den uthyrande föreningen ska söka för en extern aktörs barn- och ungdomsverksamhet
+  - Endast Grevie idrottshall, Drivanhallen, Borgarhallen, Parketthallen samt konstgräs hos Förslövs IF och Båstads GIF omfattas
+  - Föreningen får inte söka för sin egen eller ett knutet bolags användning av anläggningen
+  belopp: Grevie idrottshall 25 kr per timme vardag 08–16, 65 kr vardag 17–22 och 25 kr helg; Drivanhallen och Borgarhallen 55 kr, Parketthallen 110 kr samt konstgräs vardag 150 kr och helg 225 kr per timme
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Hösttermin söks senast 25 februari och vårtermin senast 25 augusti.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: bastad-fordyrande-foreningsverksamhet
+  namn: Bidrag till fördyrande föreningsverksamhet
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: *ungdomstyper
+  malgrupp: Barn- och ungdomsföreningar med särskilt fördyrande drift
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska visa att verksamheten har särskilt fördyrande drift
+  - Kostnaden kan exempelvis bero på miljöbegränsningar eller tillgänglighetsåtgärder
+  - Ansökan prioriteras mot kommunens idrotts- och fritidspolitiska mål
+  belopp: Individuellt efter budgetprövning; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: bastad-funktionsratt-foreningar
-  namn: Bidrag till föreningar för funktionshindrade
-  kategori:
-  - funktionsratt
+  namn: Bidrag till föreningar för personer med funktionsvariation
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
   malgrupp: Föreningar för personer med funktionsnedsättning
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+  deadlines: {typ: fasta, datum: [02-25]}
   krav:
-  - Föreningen ska arbeta för personer med funktionsnedsättning
-  - Föreningen ska ha stadgar och ett syfte som är godkända av fritidsenheten
-  - Föreningen ska ha Båstads kommun som upptagningsområde och ha varit verksam under minst 6 månader
-  - Bidrag utgår inte till föreningar som erhåller bidrag av annan kommunal eller kyrklig nämnd i Båstads kommun
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska förbättra livsvillkor och bevaka intressen för personer med varaktig funktionsnedsättning
+  - Stadgar och syfte ska vara godkända och Båstads kommun ska ingå i upptagningsområdet
+  - Föreningen ska ha varit verksam minst sex månader, vara öppen och ta ut skälig medlemsavgift
+  - Föreningen får inte få stöd från annan kommunal eller kyrklig nämnd i Båstads kommun
+  belopp: 450 kr per medlem för medlem 1–15 och 100 kr per medlem från och med medlem 16
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari.
+  kalla_url: https://bastad.rbok.se/ansok-bidragsansokan?id=bf60e432-8682-43bd-80f6-3490bd39f3d5
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'EJ_EXTRAHERBAR: Bidragstyper och belopp ej fullt dokumenterade'
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: bastad-pensionarforeningar
-  namn: Bidrag till pensionärsföreningar
-  kategori:
-  - pensionar
+  namn: Grundbidrag till pensionärsföreningar
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
   malgrupp: Pensionärsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Föreningen måste vara pensionärsförening
   - Föreningen ska bedriva verksamhet för pensionärer i Båstads kommun med huvuddelen av sina medlemmar i kommunen
-  - Föreningen ska ha kontinuerlig verksamhet med minst 10 sammankomster per år och ha varit verksam under minst sex månader
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska ha minst tio sammankomster per år
+  - Föreningen ska ha varit verksam i minst sex månader
+  belopp: 28 kr per medlem folkbokförd i Båstads kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen anger årlig ansökan men publicerar ingen sista ansökningsdag.
+  kalla_url: https://bastad.rbok.se/ansok-bidragsansokan?id=51b75fef-bd04-4249-9a68-de7ab85406a7
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'EJ_EXTRAHERBAR: Bidragsvillkor ej detaljerade i källan'
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: bastad-kulturforeningar
-  namn: Bidrag till kulturföreningar
-  kategori:
-  - kultur
+  namn: Kulturbidrag
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
   malgrupp: Kulturföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Föreningen måste bedriva kulturverksamhet
-  - Ansökan ska årligen kompletteras med föreningsuppgifter, verksamhetsplan samt föreningens resultat- och balansräkning
-    och revisionsberättelse från senaste verksamhetsåret
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: olast
+  - Kulturföreningens huvudstyrelse ska söka för kommande verksamhetsår
+  - Föreningsuppgifter, verksamhetsplan, verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse ska lämnas
+  - Föreningen och kommunen ska underteckna ett avtal; stöd under år två till fyra är villkorat av kommunens budget
+  belopp: Nivån bestäms efter överläggning och kommunbudget; avtal kan löpa i ett till fyra år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen anger årlig ansökan men publicerar ingen sista ansökningsdag.
+  kalla_url: https://www.bastad.se/download/18.44f10c1718bc1835f89c/1699793153962/Kulturbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'EJ_EXTRAHERBAR: Bidragstyper och belopp ej dokumenterade'
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: bastad-arrangemangsbidrag
   namn: Arrangemangsbidrag
-  kategori:
-  - kultur
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
   malgrupp: Kulturföreningar och studieförbund som ordnar offentliga arrangemang
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: relativ, datum: []}
   krav:
-  - Ansökan ska lämnas i god tid före arrangemanget
-  - Föreningen/organisationen ska ha varit verksam i minst sex månader, antagit stadgar samt valt styrelse
-  - Arrangemanget ska vara offentligt och marknadsföras mot allmänheten
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bastad.se/uppleva-och-gora/kultur/stod-bidrag-och-stipendium.html
-  belopp_status: okand
-  deadline_status: olast
+  - Sökanden ska vara en kulturförening eller ett studieförbund verksamt i Båstads kommun sedan minst sex månader
+  - Föreningen ska ha stadgar och vald styrelse och arrangemanget ska vara offentligt och marknadsfört
+  - Ansökan ska ange datum, plats, medverkande samt fullständiga kostnader och intäkter
+  - Mat, dryck och blommor är inte stödberättigade kostnader
+  belopp: Förlustgaranti på 50 procent; kommunen publicerar inget högsta belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas i god tid före arrangemanget.
+  kalla_url: https://www.bastad.se/download/18.44f10c1718bc1835f89d/1699793153996/Arrangemangsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: bastad-lokalbidrag-pensionar
   namn: Lokalbidrag till pensionärsföreningar
-  kategori:
-  - pensionar
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
   malgrupp: Pensionärsföreningar med lokalkostnader
-  deadlines:
-    typ: okand
-    datum: []
+  deadlines: {typ: fasta, datum: [02-25]}
   krav:
-  - Lokalbidraget utbetalas till pensionärsföreningar som uppfyller kriterierna för föreningsbidrag
-  - Lokalbidrag beviljas om lokalen ligger i Båstads kommun, används till ändamålsenlig verksamhet och är godkänd av fritidsenheten
-  - Kostnad för lokal som används för entréliknande arrangemang eller rent kommersiella tillställningar är inte bidragsberättigad
-  - Ansökan ska göras årligen senast 25 februari och kompletteras med verksamhetsberättelse, rapport över ekonomisk ställning
-    och resultat samt revisionsberättelse
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.bastad.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  belopp_status: okand
-  deadline_status: okand
+  - Föreningen ska uppfylla villkoren för pensionärsgrundbidrag
+  - Lokalen ska ligga i Båstads kommun, vara ändamålsenlig och godkänd av kommunen
+  - Lokalen får inte användas för entréliknande eller kommersiella arrangemang
+  - Verksamhetsberättelse, ekonomisk ställning och resultat samt revisionsberättelse ska lämnas
+  belopp: Högst 70 procent av godkänd hyra och maximalt 10 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari; stödet betalas i efterskott.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-forutsattningar: []
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+forutsattningar:
+- id: bastad-godkand-forening
+  vad: Godkänd ideell förening
+  beskrivning: Föreningen ska vara ideell och allmännyttig, ha säte eller huvudsaklig verksamhet i Båstads kommun, organisationsnummer,
+    bank- eller plusgiro, demokratiska stadgar, årsmöte, revision, egen ekonomisk bärkraft och ge kommunen insyn.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Kommunen publicerar ingen giltighetstid för godkännandet.
+  giltighet: null
+  ordning: 1
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: bastad-barn-ungdomsvillkor
+  vad: Särskilda villkor för barn- och ungdomsföreningar
+  beskrivning: Föreningen ska vara öppen, följa barnkonventionen och antidiskrimineringskrav, erbjuda drogfri miljö, ha alkohol- och
+    drogpolicy samt jämställdhets- och likabehandlingsplan, minst tio medlemmar 4–25 år och minst 300 deltagaraktiviteter per år.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Årlig kommunal föreningsutbildning ingår i villkoren.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: bastad-arsunderlag
+  vad: Års- och ekonomihandlingar
+  beskrivning: Föreningen ska kunna lämna årsmötesprotokoll, verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse,
+    verksamhetsplan och bokföring samt registrera närvaro digitalt när stödformen kräver det.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Kommunen publicerar ingen gemensam sista dag för handlingarna.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
