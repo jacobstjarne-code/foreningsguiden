@@ -7,81 +7,206 @@ ansokningssystem:
   namn: Interbook GO
   url: https://avesta.ibgo.se/
 kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/bli-bidragsberattigad/
+giltighet_regel_status: kontrollast
 bidrag:
-- id: avesta-kultur-fritidsbidrag
-  namn: Kultur- och fritidsbidrag
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Registrerade föreningar för kultur- och fritidsverksamhet
+- id: avesta-grundbidrag
+  namn: Grundbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Bidragsberättigade ideella föreningar med verksamhet för barn, unga eller personer som är 65 år eller äldre
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
+    datum: [09-30]
   krav:
-  - Föreningen måste vara registrerad på adress i Avesta kommun
-  belopp: null
-  sen_ansokan: Sista ansökningsdag 30 september årligen
-  kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade belopp, specifika krav och bidragstyper ej fullt dokumenterade i webbkällor'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: avesta-kulturbidrag
-  namn: Kulturbidrag
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar med olika kulturuttryck
+  - Föreningen ska ha varit verksam i minst ett år och vara registrerad som bidragsberättigad i Avesta kommun
+  - Föreningen ska ha minst 10 betalande medlemmar samt vara öppen, demokratiskt uppbyggd och bedriva ideell verksamhet utan vinstsyfte
+  - Idrotts- och friluftsföreningar som söker för medlemmar 65 år eller äldre ska sedan minst ett år bedriva kontinuerlig verksamhet för barn och unga
+  - Kulturföreningars verksamhet för barn, unga eller personer som är 65 år eller äldre ska omfatta minst 10 workshoppar eller studiecirkeltillfällen per år
+  belopp: 15 kr per medlem till och med 25 år och 15 kr per medlem från 65 år, högst 10 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september för nästkommande år
+  kalla_url: https://www.avesta.se/globalassets/for-alla-sidor/gora-och-uppleva/evenemang/bilder/riktlinjer-foreningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  min_medlemmar: 10
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: 12
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-18'
+  krav_fullstandiga: true
+- id: avesta-verksamhetsbidrag
+  namn: Verksamhetsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Bidragsberättigade ideella föreningar som bedriver hälsofrämjande verksamhet i Avesta kommun
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
+    datum: [09-30]
   krav:
-  - Föreningen ska bedriva kulturverksamhet med olika kulturuttryck
+  - Föreningen ska ha varit verksam i minst ett år och vara registrerad som bidragsberättigad i Avesta kommun
+  - Verksamheten ska vara hälsofrämjande och bedrivas i Avesta kommun, med undantag för samarbetsprojekt
+  - Ansökan ska avse ordinarie verksamhet, investering, arrangemang eller projekt; publika kulturarrangemang prioriteras
+  - Stödet lämnas inte för lokal- eller anläggningskostnader, omfattande renoveringar, föreningskläder eller löner
+  belopp: Individuellt prövat utifrån budget, tidigare bidrag och utfall samt föreningens egna kapital och tillgångar; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september för nästkommande år
+  kalla_url: https://www.avesta.se/globalassets/for-alla-sidor/gora-och-uppleva/evenemang/bilder/riktlinjer-foreningsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  min_medlemmar: 10
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: 12
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-18'
+  krav_fullstandiga: true
+- id: avesta-lokalbidrag
+  namn: Lokalbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Bidragsberättigade föreningar som äger eller hyr en lokal som är nödvändig för verksamheten
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Föreningen ska vara beviljad Grundbidrag och lokalen ska vara nödvändig och användas kontinuerligt i verksamheten
+  - Lokalen ska ägas eller hyras av föreningen och får inte omfattas av kommunens subventionerade taxor
+  - Hyresintäkter ska räknas bort och föreningen ska bifoga hyresavtal, fakturor eller andra specifikationer som styrker kostnaderna
+  - Hembygdsföreningar ska genomföra publika kulturarrangemang för att vara bidragsberättigade
+  belopp: Högst 30 procent av föregående års godkända lokal- eller driftskostnader och högst 30 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september för nästkommande år
+  kalla_url: https://www.avesta.se/globalassets/for-alla-sidor/gora-och-uppleva/evenemang/bilder/riktlinjer-foreningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  min_medlemmar: 10
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: 12
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-18'
+  krav_fullstandiga: true
+- id: avesta-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kategori: [idrott, ovrig]
+  malgrupp: Bidragsberättigade föreningar som sköter en kommunal anläggning
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Föreningen ska vara registrerad som bidragsberättigad i Avesta kommun
+  - Föreningen ska sköta en anläggning som ägs av Avesta kommun
+  - Stödets villkor och omfattning ska fastställas genom dialog och överenskommelse med kommunen
+  belopp: Fast summa efter dialog och överenskommelse med kommunen; beloppet publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september för nästkommande år
+  kalla_url: https://www.avesta.se/globalassets/for-alla-sidor/gora-och-uppleva/evenemang/bilder/riktlinjer-foreningsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  min_medlemmar: 10
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: 12
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-18'
+  krav_fullstandiga: true
+- id: avesta-studieforbund
+  namn: Bidrag för studieförbund
+  foreningstyp: [kultur, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Studieförbund som bedriver eller planerar kultur- och folkbildningsverksamhet i Avesta kommun
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Studieförbundet ska bedriva eller planera kultur- och folkbildningsverksamhet i Avesta kommun
+  - Fördelningen grundas på föregående års statistik som redovisats till SCB för studiecirklar, annan folkbildning och kulturprogram
+  - Ansökan ska innehålla nästa års verksamhetsplan, undertecknat årsmötesprotokoll, verksamhetsberättelse, ekonomisk redovisning och undertecknad revisionsberättelse
   belopp: null
-  sen_ansokan: Sista ansökningsdag 30 september årligen
-  kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade regler och belopp ej tillgängliga'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag på 1 000 000 kr fördelas med 70 procent till studiecirklar, 10 procent till annan folkbildning och 20 procent till kulturarrangemang
+  sen_ansokan: Ansökan ska lämnas senast 31 oktober
+  kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/bidrag-for-studieforbund/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  min_medlemmar: null
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-18'
+  krav_fullstandiga: true
 - id: avesta-omsorgsforeningsbidrag
-  namn: Omsorgsförvaltningens föreningsbidrag
-  kategori:
-  - social
-  - pensionar
-  - funktionsratt
-  malgrupp: Föreningar som är ett viktigt komplement till omsorgsförvaltningens insatser
+  namn: Omsorgsstyrelsens föreningsbidrag
+  foreningstyp: [social, annat]
+  kategori: [social, pensionar, funktionsratt]
+  malgrupp: Föreningar och organisationer vars arbete kompletterar omsorgens insatser för utsatta grupper
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
+    datum: [11-30]
   krav:
-  - Föreningen ska arbeta med omsorgsrelaterad verksamhet
-  - Ett viktigt komplement till omsorgsförvaltningens egna insatser
-  belopp: null
-  sen_ansokan: Sista ansökningsdag 30 september årligen
-  kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Fullständiga bidragsvillkor ej dokumenterade'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska ha registrerad adress i Avesta kommun, vara demokratiskt uppbyggd och bedriva allmännyttig verksamhet för utsatta grupper
+  - Föreningen ska ha stadgar, vald styrelse och revisorer, ordnad ekonomi, eget bank- eller plusgiro och organisationsnummer
+  - Ansökan ska beskriva aktivitet, målgrupp, deltagarantal, tidsåtgång, förväntat resultat och sökt belopp samt innehålla verksamhetsplan och ekonomiska handlingar
+  - Stöd lämnas inte för kommersiella arrangemang eller arrangemang med entré, verksamhet som finansieras dubbelt eller verksamhet som är en annan myndighets ansvar
+  belopp: Aktivitetsstöd prövas individuellt; stöd för egen lokal är 50 procent av faktisk kostnad, högst 20 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 november
+  kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/grundbidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  min_medlemmar: null
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-18'
+  krav_fullstandiga: true
 forutsattningar:
 - id: avesta-forening-registrering
-  vad: Registrering som föreningar
-  beskrivning: Föreningen måste vara registrerad på en adress i Avesta kommun för att vara berättigad till stöd.
+  vad: Registrering som bidragsberättigad förening
+  beskrivning: Föreningen ska registreras i Interbook GO och lämna aktuella årshandlingar för att vara bidragsberättigad.
   system: Interbook GO
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Årshandlingarna ska lämnas in varje år.
   ordning: 1
-  kalla_url: https://avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: https://www.avesta.se/gora-och-uppleva/foreningsliv-och-lokaler/foreningsbidrag/bli-bidragsberattigad/
+  giltighet_status: kontrollast
