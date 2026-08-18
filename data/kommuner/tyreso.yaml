@@ -2,16 +2,22 @@ kommun: Tyresö
 kommun_slug: tyreso
 lan: Stockholms län
 befolkning: 49742
-forvaltning: Kultur- och fritidsförvaltningen (samt arbetsmarknads- och socialförvaltningen och äldre- och omsorgsförvaltningen
-  för föreningsstöd inom det sociala området)
+forvaltning: Kultur- och fritidsförvaltningen samt ansvariga social- och omsorgsförvaltningar
 ansokningssystem:
-  namn: Rbok (boknings- och bidragssystem / föreningsregister)
+  namn: Rbok, kommunens e-tjänster och bokningssystem
   url: https://tyreso.rbok.se/
-kalla_url: https://www.tyreso.se/uppleva--gora/forening/allt-om-foreningar/foreningsbidrag-och-stipendier.html
-verifierad: 2026-07-21
+kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/lokalt-aktivitetsstod-lok/allmanna-bestammelser---foreningsstod.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: tyreso-verksamhetsbidrag
   namn: Verksamhetsbidrag för natur- och kulturverksamhet
+  foreningstyp: [kultur, hembygd, friluft, annat]
   kategori:
   - kultur
   - ovrig
@@ -26,18 +32,20 @@ bidrag:
   - Bedriver kontinuerlig verksamhet
   - Verksamheten är öppen för allmänheten eller bedöms som samhällsnyttig
   - Kan inte samtidigt beviljas lokalt aktivitetsstöd (LOK)
-  belopp: null
+  - Ansökan ska beskriva verksamheten och styrka behovet av bidrag
+  belopp: Individuellt verksamhetsbidrag bedöms efter ansökan och behov; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/verksamhetsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan en gång per år, för nästkommande verksamhetsår, senast 30 november, via e-tjänst. Ingen redovisning
-    krävs (ändrat från 2020 års version av regelverket, som krävde redovisning). Regelverk §3.1.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan görs en gång per år för nästkommande verksamhetsår.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-bidrag-oppen-verksamhet
   namn: Bidrag för öppen verksamhet
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   - funktionsratt
@@ -50,18 +58,21 @@ bidrag:
   - Uppfyller de allmänna bestämmelserna för bidragsberättigad förening
   - Verksamheten bedrivs utan krav på medlemskap
   - Verksamheten är tidsbegränsad
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ansökan ska beskriva verksamheten, målgruppen, syftet, kostnaderna, finansieringen och sökt belopp
+  - Beviljat bidrag ska redovisas senast tre månader efter genomförd aktivitet
+  belopp: Individuellt bidrag bedöms efter ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Komplett ansökan ska lämnas senast sex veckor före nästa sammanträde i kultur- och fritidsnämnden
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/bidrag-for-oppen-verksamhet.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan via e-tjänst, senast 6 veckor före nästa sammanträde i kultur- och fritidsnämnden. Redovisning inom
-    tre månader efter genomförd aktivitet. Regelverk §3.2.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet gäller tidsbegränsad verksamhet för prioriterade grupper och redovisas inom tre månader.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-projektbidrag
   namn: Projektbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -77,18 +88,21 @@ bidrag:
   - Uppfyller de allmänna bestämmelserna för bidragsberättigad förening
   - Projektet är tidsbegränsat
   - Beviljas endast som ett engångsbelopp
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ansökan ska beskriva projektets syfte, målgrupp, kostnader, finansiering och sökt belopp
+  - Projektet ska redovisas senast tre månader efter avslut
+  belopp: Individuellt projektbidrag bedöms efter ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Komplett ansökan ska lämnas senast sex veckor före nästa sammanträde i kultur- och fritidsnämnden
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/projektbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kan sökas löpande under året, men komplett ansökan ska vara inlämnad senast 6 veckor före nästa nämndsammanträde
-    för att hinna beredas. Regelverk §3.3.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget söks löpande och redovisas inom tre månader efter projektets slut.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-mangfaldsbidrag
   namn: Mångfaldsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   - funktionsratt
@@ -99,18 +113,22 @@ bidrag:
   krav:
   - Uppfyller de allmänna bestämmelserna för bidragsberättigad förening
   - Verksamheten inkluderar och engagerar underrepresenterade grupper
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ansökan ska beskriva aktiviteten, målgruppen, syftet och hur insatsen ska bidra till ökad inkludering
+  - Ansökan ska innehålla budget, finansiering och sökt belopp
+  - Bidraget ska redovisas senast tre månader efter avslutad insats
+  belopp: Individuellt mångfaldsbidrag bedöms efter ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Komplett ansökan ska lämnas senast sex veckor före nästa sammanträde i kultur- och fritidsnämnden
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/mangfaldsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan via e-tjänst senast 6 veckor före nästa nämndsammanträde. Redovisning inom tre månader efter avslutad
-    insats. Regelverk §3.4.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget söks löpande och redovisas inom tre månader efter insatsens slut.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-enstaka-bidrag
   namn: Enstaka bidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -123,18 +141,22 @@ bidrag:
     datum: []
   krav:
   - Uppfyller de allmänna bestämmelserna för bidragsberättigad förening
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ansökan ska avse ett enstaka eller särskilt ändamål som inte täcks av kommunens övriga bidragsformer
+  - Ansökan ska beskriva ändamålet, målgruppen, kostnaderna, finansieringen och sökt belopp
+  - Föreningen ska följa de redovisningsvillkor som kommunen beslutar för bidraget
+  belopp: Individuellt bidrag bedöms efter det särskilda fallet; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Komplett ansökan ska lämnas senast sex veckor före nästa sammanträde i kultur- och fritidsnämnden
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/enstaka-bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan via e-tjänst senast 6 veckor före nästa nämndsammanträde. Villkor för redovisning bestäms i dialog med
-    den sökande föreningen. Regelverk §3.5.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Redovisningsvillkoren fastställs i samband med kommunens beslut.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-kulturbidrag
   namn: Kulturbidrag – bidrag till enstaka kulturarrangemang
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Föreningar och studieförbund som anordnar offentliga kulturprogram öppna för Tyresö kommuns invånare; under vissa
@@ -149,19 +171,21 @@ bidrag:
   - Arrangemanget ska vara offentligt, öppet och tillgängligt (ekonomiskt och lokalmässigt) för alla kommunens invånare
   - Senast fastställda föreningsuppgifter (verksamhetsberättelse, revisionsberättelse, ekonomisk redovisning) ska vara inlämnade
   - Beviljas inte för föreningens egna återkommande medlemsaktiviteter med deltagaranmälan
-  belopp: null
+  - Ansökan ska beskriva arrangemanget, målgruppen, tidplanen, budgeten, finansieringen, sökt belopp och andra sökta bidrag
+  - Redovisning ska lämnas senast tre månader efter arrangemanget
+  belopp: Individuellt kulturbidrag bedöms utifrån kulturellt värde, intäkter och kostnader; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/kulturbidrag---bidrag-till-enstaka-kulturarrangemang.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 15 april avser perioden 1 juli–31 december samma år, 15 oktober avser perioden 1 januari–30 juni året efter.
-    Bidraget är en delfinansiering — nämnden bedömer beloppet utifrån kulturellt värde, intäkter och kostnader. Regelverk
-    §3.6.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Den 15 april avser arrangemang 1 juli–31 december och den 15 oktober arrangemang 1 januari–30 juni året därpå.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd (LOK)
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -176,23 +200,21 @@ bidrag:
   - Minst en ansvarig ledare, minst 13 år, ska närvara hela sammankomsten
   - Minst tre deltagare 7–20 år (utöver ledaren) per sammankomst
   - Deltagaren ska vara individuellt ansluten och ha betalt föreningens årsavgift
-  belopp: null
-  sen_ansokan: 'Sen ansökan ger avdrag enligt trappa (bekräftad ordagrant i både regelverket och kommunsidan): inkommer 26
-    augusti–1 september respektive 26 februari–1 mars → 10 procent avdrag. 2–15 september respektive 2–15 mars → 30 procent
-    avdrag. 16–30 september respektive 16–31 mars → 50 procent avdrag. Från 1 oktober respektive 1 april avslås ansökan helt.
-    Föreningen kan beviljas dispens om förseningen beror på omständigheter utanför föreningens kontroll eller om särskilda
-    skäl föreligger, förutsatt att komplett ansökan och förklaring lämnas senast 30 september respektive 31 mars.'
+  - Aktiviteten ska följa föreningens ändamål och demokratiska principer samt motverka diskriminering och brottslighet
+  - Samma medlem får endast räknas en gång per dag i samma förening, om inte verksamheten bedrivs i självständiga sektioner
+  belopp: Bidrag per deltagartillfälle enligt den nivå kultur- och fritidsnämnden beslutar årligen; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Ansökan 26 augusti–1 september respektive 26 februari–1 mars ger 10 procent avdrag; 2–15 september respektive 2–15 mars ger 30 procent; 16–30 september respektive 16–31 mars ger 50 procent; senare ansökan avslås inom kommunens angivna slutperioder
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/lokalt-aktivitetsstod-lok.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan grundas på deltagar- och närvarostatistik som rapporteras via Rbok. Utbetalning i september (vårperioden)
-    respektive mars (höstperioden). Bidragsbelopp per deltagartillfälle fastställs årligen av nämnden, ej publicerat som fast
-    kronbelopp. Regelverk §3.7.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Vårens aktiviteter söks senast 25 augusti och höstens aktiviteter senast 25 februari via Rbok.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-lokalbidrag
   namn: Lokalbidrag (förhöjt aktivitetsstöd)
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -205,19 +227,22 @@ bidrag:
   - Uppfyller de allmänna bestämmelserna för bidragsberättigad förening
   - Kultur- och fritidsnämnden bedömer att verksamheten inte kan bedrivas i kommunägda lokaler
   - Deltagartillfället ska även uppfylla villkoren för lokalt aktivitetsstöd
-  belopp: null
-  sen_ansokan: Ej angivet separat i källan för själva ansökan om rätt till lokalbidrag.
+  - Föreningen ska använda en förhyrd eller egen lokal i eller nära Tyresö och styrka lokalkostnaden
+  - Ansökan ska beskriva lokalen, behovet och kostnaden samt innehålla styrkande underlag
+  - Föreningen ska årligen registrera dokumentation som styrker lokalkostnaden
+  belopp: Fast belopp per bidragsberättigat deltagartillfälle enligt den nivå nämnden beslutar; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Ansökan om rätt till lokalbidrag ska lämnas senast sex veckor före nästa nämndsammanträde
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/lokalbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan om rätt till lokalbidrag görs via e-tjänst, senast 6 veckor före nästa nämndsammanträde. Utbetalning
-    följer samma cykel som lokalt aktivitetsstöd (september/mars). Föreningen ska årligen registrera dokumentation som styrker
-    lokalkostnaden i föreningsregistret. Regelverk §3.8.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning följer samma halvårscykel som lokalt aktivitetsstöd.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-studieforbundsbidrag
   namn: Studieförbundsbidrag
+  foreningstyp: [kultur, annat]
   kategori:
   - ovrig
   - funktionsratt
@@ -231,47 +256,51 @@ bidrag:
   - Uppfyller de allmänna bestämmelserna för studieförbund
   - Verksamheten genomförs i Tyresö och riktar sig huvudsakligen till kommunens invånare
   - Intyg från studieförbundets verksamhetsredovisning (STUV) ska bifogas ansökan
+  - Aktuella verksamhets-, revisions- och ekonomihandlingar ska vara registrerade
+  - Ansökan ska redovisa studietimmar per ämneskategori, verksamhetsform och prioriterad målgrupp
   belopp: 16 kr per studietimme (ämneskategori 1 och 9), 29,50 kr per studietimme (kategori 0 och 2–8), 48 kr per studietimme
     om majoriteten av deltagarna vid tillfället tillhör en prioriterad målgrupp (oavsett kategori). Inget grundbelopp betalas
     ut. Studietimmar räknas x2 om över hälften av deltagarna har utländsk bakgrund/är arbetssökande och insatsen riktade särskilda
     insatser mot målgruppen, x2,5 vid motsvarande andel funktionsnedsättning, och halveras för 'annan folkbildningsverksamhet'
     till skillnad från studiecirkel.
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/studieforbundsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'KÄLLKONFLIKT (se konflikter.log): kommunsidan (senast uppdaterad 2026-04-07) anger deadline ''1 april'', vilket
-    är nyare och vinner enligt §2.5 och är vad som skrivits här. Både regelverkets 2024-version (beslutad 2024-03-18 § 26,
-    §3.9.4) och den äldre 2020-versionen (§ 23) anger dock samstämmigt ''1 maj'' — två oberoende antagna regelverksversioner
-    som är eniga mot en enskild webbsida är ett skäl till spot-check innan publicering.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan avser föregående års verksamhet och lämnas senast den 1 april.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-integrationsbidrag
   namn: Integrationsbidrag som utgår från etableringsersättningen
+  foreningstyp: [social, kultur, ungdom, annat]
   kategori:
   - social
   - ovrig
   malgrupp: Insamlingsorganisationer, föreningar och studieförbund vars verksamhet främjar integration mellan människor i
     kommunen
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Uppfyller i övrigt de allmänna bestämmelserna för bidragsberättigade föreningar och studieförbund
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Verksamheten ska främja integration mellan människor i Tyresö kommun
+  - Ansökan ska beskriva aktiviteten, syftet, målgruppen, kostnaderna, finansieringen och sökt belopp
+  - Stöd lämnas inte för verksamhet som kan finansieras med studieförbundsbidrag
+  belopp: Individuellt integrationsbidrag bedöms efter ansökan och tillgänglig etableringsersättning; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  sen_ansokan: Kommunen publicerar ingen generell ansökningstid
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/integrationsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Finansieras av den statliga etableringsersättning som tilldelats kultur- och fritidsnämndens verksamhetsområde.
-    Kan, till skillnad från de flesta andra bidrag i regelverket, beviljas för löner och löneliknande förmåner. Utgår inte
-    för sådant som täcks av studieförbundsbidraget. Regelverk §3.10.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget får användas till löner och löneliknande förmåner när villkoren i övrigt är uppfyllda.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-tillgang-kommunala-anlaggningar
   namn: Tillgång till kommunala anläggningar och lokaler (inkl. subventionerade lokaler)
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - pensionar
@@ -280,27 +309,28 @@ bidrag:
   malgrupp: Bidragsberättigade föreningar, inklusive ideella föreningar, studieförbund, stödjande organisationer och intresseorganisationer,
     som vill boka kommunens bokningsbara anläggningar och lokaler
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Uppfyller de allmänna bestämmelserna för bidragsberättigad förening
   - Följer kommunens vid var tid gällande villkor för uthyrning av anläggningar och lokaler
-  belopp: null
+  - Verksamheten ska vara lämpad för den lokal eller anläggning som bokas
+  - Föreningsuppgifter och behöriga företrädare ska vara aktuella i bokningssystemet
+  - Vid säsongsfördelning prioriteras de verksamhetsgrupper kommunen anger för respektive anläggning
+  belopp: Subventionerad föreningstaxa och tilldelning av kommunala lokaler; något fast stödbelopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt — säsongsvis tidfördelning sker automatiskt för föreningar som uppfyller kriterierna, ingen
     ansökan krävs för grundtilldelningen.
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/tillgang-till-kommunala-anlaggningar-och-lokaler.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Inför varje säsong tilldelas aktiva föreningar återkommande tider automatiskt, utan ansökan. Barn/unga och personer
-    med funktionsnedsättning prioriteras generellt, elitverksamhet prioriteras i idrottsanläggningar, pensionärsriktad verksamhet
-    prioriteras dagtid i Kvarnhjulet. Enstaka bokningar görs via http://bokning.tyreso.se/. Föreningar som uppfyller allmänna
-    bestämmelser (inkl. stödjande/intresseorganisationer) omfattas av subventionerad föreningstaxa. Regelverk §3.11 — i 2024
-    års version sammanslaget med det som i 2020 års version hette 'Subventionerade lokaler' (dåvarande §3.9).
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Aktiva föreningar kan få återkommande tider och subventionerad föreningstaxa; enstaka tider bokas i kommunens bokningssystem.
+  senast_verifierad: '2026-08-18'
 - id: tyreso-ekonomiskt-stod-socialt
   namn: Ekonomiskt stöd till föreningar inom det sociala området
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   - pensionar
@@ -313,19 +343,19 @@ bidrag:
   krav:
   - Verksamhetens innehåll ska överensstämma med den berörda nämndens mål
   - Verksamheten ska komplettera nämndens egen verksamhet och bygga på frivilligt socialt engagemang
-  belopp: null
+  - Sökanden ska vara en ideell förening eller organisation med frivilligt socialt engagemang
+  - Ansökan ska beskriva verksamheten, målgruppen och hur stödet ska användas
+  - Verksamhetsberättelse, bokslut och revisionsberättelse för föregående år ska lämnas efter årsmötet före utbetalning
+  belopp: Individuellt föreningsstöd bedöms efter ansökan; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/ekonomiskt-stod-till-foreningar-inom-det-sociala-omradet.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Administreras separat från kultur- och fritidsnämndens riktlinjer — av arbetsmarknads- och socialnämnden respektive
-    äldre- och omsorgsnämnden (nämns som eget spår redan i KFN-riktlinjernas inledning). Beslut meddelas i slutet av februari.
-    Utbetalning tidigast i mars, efter att föreningen lämnat in årsmöteshandlingar (verksamhetsberättelse, ekonomisk redovisning,
-    revisionsberättelse) för aktuellt år. Kontakt: Aila Thorsander (arbetsmarknads-/socialnämnden), Sofia Bågander (äldre-/omsorgsnämnden).
-    Sida senast uppdaterad 2025-03-19.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beslut meddelas normalt i slutet av februari och utbetalning kan ske tidigast i mars efter att årsmöteshandlingarna lämnats.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: tyreso-bidragsberattigad
   vad: Bli godkänd som bidragsberättigad förening
@@ -342,5 +372,5 @@ forutsattningar:
   giltighet: null
   ordning: 1
   kalla_url: https://www.tyreso.se/uppleva--gora/forening/foreningsbidrag-och-stipendier/lokalt-aktivitetsstod-lok/allmanna-bestammelser---foreningsstod.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
