@@ -7,7 +7,13 @@ ansokningssystem:
   namn: E-tjänster
   url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas.html
 kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas.html
-verifierad: '2026-08-02'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: hoganas-aktivitetsstod
   namn: Aktivitetsstöd ungdom
@@ -26,6 +32,8 @@ bidrag:
   - Ansluten till godkänd riksorganisation eller godkänd som stödberättigad organisation
   - Deltagande vid kultur- och fritidsförvaltningens årliga föreningskväll
   belopp: 90 kr per sammankomst/träning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 15 februari
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/aktivitetsstod.html
   belopp_status: kontrollast
@@ -33,10 +41,12 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [idrott, ungdom]
+  senast_verifierad: '2026-08-18'
 - id: hoganas-pensionarer
   namn: Pensionärsorganisationsbidrag
   kategori:
-  - social
+  - pensionar
   malgrupp: Pensionärsorganisationer
   deadlines:
     typ: fasta
@@ -48,6 +58,8 @@ bidrag:
   - Aktiv lokalförening i Höganäs kommun
   - Bedriver kompletterande verksamhet för pensionärer och äldre utöver övriga samhällsinsatser
   belopp: 3 400 kr grundbidrag per samorganisation + 41 kr/medlem, dock högst två prisbasbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 31 mars
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/pensionarsorganisation.html
   belopp_status: kontrollast
@@ -55,6 +67,8 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Årligt grundbidrag plus medlemsbaserat tillägg
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
 - id: hoganas-lokalstod
   namn: Lokalstöd
   kategori:
@@ -71,6 +85,8 @@ bidrag:
   - Gäller endast barn- och ungdomsverksamhet
   - Föreningen får inte ha skulder till kommunen
   belopp: 30 kr per sammankomst/träning, dock högst 70 procent av redovisad hyreskostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sent inkommen ansökan behandlas inte
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/lokalstod.html
   belopp_status: kontrollast
@@ -78,30 +94,36 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [idrott, ungdom]
+  senast_verifierad: '2026-08-18'
 - id: hoganas-utvecklingsstod
   namn: Utvecklingsstöd
   kategori:
   - idrott
   malgrupp: Elitidrottsföreningar
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Sökbart i första hand för idrottsföreningar i Höganäs kommun, individer kan söka efter särskild prövning
   - Aktiva kan få stöd från och med det år de fyller 15 år
   - Kvalificering baseras på föregående års tävlingsresultat
-  belopp: null
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit minst en månad före arrangemangets eller projektets genomförande
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/utvecklingsstod.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [idrott]
+  senast_verifierad: '2026-08-18'
 - id: hoganas-funktionsnedsattning
   namn: Funktionsnedsättningsstöd
   kategori:
-  - social
+  - funktionsratt
   malgrupp: Föreningar för funktionshinder och social omsorg
   deadlines:
     typ: fasta
@@ -111,8 +133,12 @@ bidrag:
   krav:
   - Lokal förening ansluten till HSO (Handikappföreningarnas samarbetsorganisation i Höganäs), eller funktionshinderförening
     med aktiv verksamhet för medlemmar bosatta i Höganäs kommun
+  - Föreningen ska bedriva kompletterande service såsom aktivering eller uppsökande verksamhet
+  - Verksamhetsberättelse, ekonomiska handlingar, revisionsberättelse, årsmötesprotokoll, budget och medlemsantal ska bifogas
   belopp: 3 400 kr grundbidrag per förening (23 372 kr till HSO) + 166 kr/medlem baserat på medlemsantal 31 december föregående
     år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 31 mars
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/funktionshinderforening.html
   belopp_status: kontrollast
@@ -120,6 +146,8 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [social]
+  senast_verifierad: '2026-08-18'
 - id: hoganas-startbidrag
   namn: Startbidrag
   kategori:
@@ -128,7 +156,7 @@ bidrag:
   - ovrig
   malgrupp: Nystartade föreningar inom kultur- och fritidsområdet
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Förening inom kultur- och fritidsområdet i Höganäs kommun
@@ -136,14 +164,18 @@ bidrag:
   - Kan inte sökas för projekt/arrangemang med övervägande religiöst, politiskt eller vinstsyfte
   - I marknadsföringen ska det framgå att föreningen/individen stöds av Höganäs kommun
   - Ansökan ska ha inkommit minst en månad före arrangemangets eller projektets genomförande
-  belopp: null
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan behandlas löpande
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/startbidrag.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [idrott, kultur, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - id: hoganas-socialtjanstens-verksamhet
   namn: Föreningsbidrag inom socialtjänstens verksamhet
   kategori:
@@ -157,8 +189,9 @@ bidrag:
   - Ideell demokratisk förening med anknytning till Höganäs kommun eller dess invånare
   - Lokal förening i kommunen, eller verksamhet som i väsentlig grad gynnar kommunens invånare
   - Bedriver kompletterande verksamhet, t.ex. aktivering och/eller uppsökande verksamhet
-  belopp: Socialnämnden avsätter totalt 200 000 kr/år för föreningsbidrag inom socialnämndens verksamhetsområde (ingen individuell
-    beloppsformel per förening)
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 200 000 kr per år för föreningsbidrag inom socialnämndens verksamhetsområde
   sen_ansokan: Ansökningar efter 31 mars prövas inte
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/socialtjanstens-verksamhet.html
   belopp_status: kontrollast
@@ -166,6 +199,213 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [social]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-sommarblommor
+  namn: Bidrag till sommarblommor
+  kategori: [ovrig]
+  malgrupp: Byföreningar som sköter blomsterutsmyckningar i kommunens byar
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Bidraget ska användas till blomsterutsmyckningar som byföreningen själv sköter, inte till kommunens befintliga rabatter
+  - Föreningen ska själv köpa eller tillverka urnor och krukor samt köpa och sköta blommorna
+  - Förslag, bild eller beskrivning av utsmyckningens placering och utseende ska bifogas
+  - Ansökan ska ange förening, utbetalningskonto och kontaktperson
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens tillgängliga belopp fördelas mellan de sökande byföreningarna; någon aktuell totalsumma publiceras inte
+  sen_ansokan: Kommunen publicerar ingen aktuell ansökningsfrist för 2026
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/bidrag-till-sommarblommor.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Den publicerade detaljsidan anger endast en avslutad ansökningsomgång för 2025.
+  foreningstyp: [annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-gron-kvalitetsturism
+  namn: Grön kvalitetsturism
+  kategori: [ovrig]
+  malgrupp: By-, hamn- och vägföreningar samt likvärdiga ideella föreningar
+  deadlines: { typ: fasta, datum: [04-15] }
+  krav:
+  - Åtgärden ska ge teknisk kvalitet, miljökvalitet eller aktivitetskvalitet som gynnar turism eller rörligt friluftsliv i kommunen
+  - Ansökan ska beskriva ändamål, yta, skäl till kostnaderna och innehålla en kostnadsberäkning
+  - Kostnader och verifikationer ska redovisas senast 15 september
+  - Bidrag lämnas inte för byggnader, maskinservice, drivmedel eller nyinvestering i uthyrningsutrustning
+  belopp: Högst 50 procent av faktiska kostnader; toaletter 5 000–17 500 kr beroende på antal, tillgänglighet och öppettid, samt 2 kr per m² klippt yta med robotgräsklippare
+  belopp_avser: per_forening
+  kommunens_pott: Högst det belopp kommunfullmäktige årligen anvisar; vid översökning minskas alla stöd proportionellt
+  sen_ansokan: 15 april
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/gron-kvalitetsturism.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Drift- och anläggningsstöd för lösningar och miljöåtgärder i det offentliga rummet.
+  foreningstyp: [friluft, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-integrationsstod
+  namn: Integrationsstöd
+  kategori: [social, ovrig]
+  malgrupp: Ideella föreningar och organisationer med avgränsade integrationsprojekt
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Projektet ska främja integration mellan individer eller etniska grupper och vara tydligt avgränsat
+  - Ideell förening ska vara sökande eller nära samarbetspartner till en offentlig huvudman
+  - Projektet ska marknadsföras via kommunens kanaler och kommunens stöd ska framgå
+  - Ordinarie verksamhet, interna aktiviteter, mat, resor, utrustning, läger och utbildning finansieras inte
+  - Projektet ska redovisas senast tre månader efter slutdatum och oanvända medel ska återbetalas
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst en månad före projektets genomförande
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/integrationsstod.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nya projekt prioriteras och stödet trappas successivt ned för återkommande projekt.
+  foreningstyp: [social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-motverka-ensamhet
+  namn: Stöd för att motverka ensamhet
+  status: pausad
+  kategori: [social, pensionar]
+  malgrupp: Föreningar som ordnar aktiviteter mot ensamhet för personer som är 65 år eller äldre
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Aktiviteten ska motverka ensamhet bland personer som är 65 år eller äldre
+  - Aktiviteten bör vara återkommande; en engångsaktivitet ska genomföras inom kommunen
+  - Utbetalning sker till den sökandes bank- eller plusgiro
+  - Användningen av pengarna och genomförda aktiviteter ska redovisas vid årets slut
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Normalt löpande, men samtliga medel för 2026 är fördelade och e-tjänsten är tillfälligt stängd
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/motverka-ensamhet.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan öppnar igen när kommunen har nya medel att fördela.
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-projekt-arrangemangsstod
+  namn: Projekt- och arrangemangsstöd
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och organisationer som arrangerar eller medarrangerar kultur- eller idrottsprojekt
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Projektet ska bidra till ett mångsidigt, innovativt och varierat kultur- eller idrottsutbud
+  - Ansökan ska lämnas minst en månad före genomförandet med aktuella föreningsuppgifter
+  - Ordinarie verksamhet, interna aktiviteter, mat, resor, lös utrustning, läger, utbildning och hyror finansieras inte
+  - Projekt med vinstsyfte eller stöd från en annan kommunal förvaltning finansieras inte
+  - Projektet ska redovisas senast tre månader efter slutdatum och oanvända medel ska återbetalas
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst en månad före projektets eller arrangemangets genomförande
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/projekt--och-arrangemangsstod.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Barn- och ungdomsprojekt samt nya projekt- och arrangemangsformer prioriteras.
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-tillganglighetsstod
+  namn: Tillgänglighetsstöd
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  malgrupp: Ideella föreningar och organisationer som ökar tillgängligheten för barn och unga med funktionsnedsättning
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Projektet ska öka föreningens kunskap eller möjlighet att möta barn och unga med funktionsnedsättning
+  - Ideell förening ska vara sökande eller nära samarbetspartner till en offentlig huvudman
+  - Ansökan ska lämnas minst en månad före genomförandet med aktuella föreningsuppgifter
+  - Ordinarie verksamhet, interna aktiviteter, mat, resor, utrustning, läger och utbildning finansieras inte
+  - Projektet ska redovisas senast tre månader efter slutdatum och oanvända medel ska återbetalas
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst en månad före projektets eller arrangemangets genomförande
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/tillganglighetsstod.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet riktas till föreningslivets tillgänglighetsarbete för barn och unga.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-toleransmedel
+  namn: Medel för toleransfrämjande aktiviteter och resor
+  kategori: [social, ovrig]
+  malgrupp: Föreningar med toleransfrämjande projekt för barn och unga i Höganäs kommun
+  deadlines: { typ: fasta, datum: [06-30, 12-31] }
+  krav:
+  - Aktiviteten eller resan ska främja tolerans, inkludering och förståelse för mångfald
+  - Projektet ska rikta sig till barn och ungdomar i Höganäs kommun
+  - Projektet ska vara genomförbart inom angiven budget och tidsram och en budget ska bifogas
+  - Ansökan ska beskriva hur projektet ska redovisas och utbetalningskontot ska tillhöra föreningen
+  - Slutrapport och ekonomisk redovisning ska lämnas inom två månader efter genomförandet
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioder 1 april–30 juni och 1 oktober–31 december
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/toleransframjande-aktiviteter-och-resor.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningarna bereds av integrationsrådet och beslutas av kommunstyrelsens arbetsutskott.
+  foreningstyp: [social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-ungdomsstod
+  namn: Ungdomsstöd
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ungdomsdrivna publika kultur- och idrottsprojekt för andra unga
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Projektet ska vara publikt, ha anknytning till kultur eller idrott och rikta sig till andra unga
+  - Ansökan ska lämnas minst två veckor före projektets eller arrangemangets genomförande
+  - Bidrag lämnas inte för lön eller uppehälle till projektgruppen
+  - Mat, resor, utrustning, läger, utbildning och projekt med vinstsyfte finansieras inte
+  - Projektet ska redovisas senast tre månader efter slutdatum och oanvända medel ska återbetalas
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst två veckor före projektets eller arrangemangets genomförande
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/ungdomsstod.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nya former av ungdomsprojekt och arrangemang prioriteras.
+  foreningstyp: [idrott, kultur, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: hoganas-arsbidrag-kultur
+  namn: Årsbidrag till kulturförening
+  kategori: [kultur]
+  malgrupp: Kulturföreningar med kontinuerlig utåtriktad verksamhet för kommunens invånare och besökare
+  deadlines: { typ: fasta, datum: [10-31] }
+  krav:
+  - Föreningen ska ha kontinuerlig utåtriktad verksamhet och delta i kommunens årliga föreningsdialog
+  - Arrangemangen ska vara publika, marknadsföras via kommunens kanaler och ange kommunens stöd
+  - Verksamhetsplan, senaste verksamhetsberättelse, bokslut, revisionsberättelse och aktuella föreningsuppgifter ska bifogas
+  - Sökt belopp ska anges och tidigare stöd redovisas i nästa års ansökan
+  - Stöd lämnas inte för interna aktiviteter, ordinarie kostnader, mat, resor, utrustning, läger eller utbildning
+  belopp: Beslutas efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 31 oktober
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas/arsbidrag.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning sker efter beslut i januari.
+  foreningstyp: [kultur, hembygd]
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: hoganas-registrering
   vad: Digital ansökan
@@ -175,8 +415,8 @@ forutsattningar:
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://minasidor.hoganas.se/
-  giltighet_status: okand
+  kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv/sokbara-stod-i-hoganas.html
+  giltighet_status: ingen_regel
 - id: hoganas-kontakt
   vad: Kontakt kommun
   beskrivning: kommunen@hoganas.se, 042-33 71 00
@@ -186,4 +426,4 @@ forutsattningar:
   giltighet: null
   ordning: 2
   kalla_url: https://www.hoganas.se/besok--upplev/foreningar-och-foreningsliv.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
