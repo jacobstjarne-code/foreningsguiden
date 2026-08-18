@@ -7,9 +7,16 @@ ansokningssystem:
   namn: Rbok
   url: https://lindesberg.rbok.se
 kalla_url: https://www.lindesberg.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsbidrag
-verifierad: '2026-08-01'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: sammansatt
+  antal: null
+  datum: null
+  kalla_url: https://www.lindesberg.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsbidrag
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Aktivitetsbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -29,26 +36,33 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  - Sammankomsten ska ha 3–30 deltagare i åldern 3–20 år och pågå minst 60 minuter
+  - Sammankomsten ska vara planerad, ledarledd av en ledare som är minst 15 år samt ha gemensam start och avslutning
+  - Deltagaren ska vara medlem och närvaron ska registreras med personnummer; prova-på-verksamhet i rekryteringssyfte kan räknas
+  - Sammankomster under skoltid, kommersiella arrangemang och aktiviteter som redovisas till studieförbund är inte bidragsgrundande
+  belopp: Belopp per redovisad sammankomst och deltagartillfälle; nivån fastställs av tillväxtnämnden efter varje ansökningstillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan behandlas inte
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan sker digitalt via aktivitetskort på nätet (ApN). Aktuella ansökningstider meddelas i systemet. För sent
-    inkommen ansökan behandlas inte
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-aktivitetsbidrag
   senast_verifierad: '2026-08-03'
 - namn: Ledarutbildningsbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
   malgrupp: Föreningar som utbildar ledare, främst inom barn- och ungdomsverksamhet
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
   - Föreningen ska bedriva utåtriktad verksamhet inom kultur- och fritidsområdet
@@ -60,25 +74,32 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
+  - Utbildningen ska avse ledare, i första hand inom barn- och ungdomsverksamhet eller en prioriterad verksamhet som breddar utbudet
+  - Föreningen ska redovisa den genomförda utbildningen och kunna visa kursprogram och kvitto
+  - Kostnadsfri utbildning, mat och logi är inte bidragsberättigade
   belopp: Kursavgifter och resekostnader; inte mat eller logi
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 kan lämnas till och med 30 november
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kursprogram och kvitto ska kunna visas. För sent inkommen ansökan behandlas inte
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-ledarutbildningsbidrag
   senast_verifierad: '2026-08-03'
 - namn: Spontanaktivitetsbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
   malgrupp: Föreningar som ordnar kostnadsfria ledarledda aktiviteter för barn och unga 6–20 år utan medlemskrav
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
   - Föreningen ska bedriva utåtriktad verksamhet inom kultur- och fritidsområdet
@@ -90,24 +111,31 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
-  belopp: Högst 30 aktivitetstimmar per år
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  - Aktiviteten ska vara ledarledd, kostnadsfri och genomföras utanför skoltid för barn och unga 6–20 år
+  - Deltagande ska vara möjligt utan medlemskap och utan krav på regelbundet deltagande
+  - Aktiviteten får inte vara ordinarie medlemsverksamhet eller redan ha beviljats aktivitetsbidrag
+  - Kalas, avslutningsfester, årsmöten och entrébelagd verksamhet ger inte bidrag
+  belopp: 200 kronor per aktivitetstimme, högst 30 timmar per år (maximalt 6 000 kronor)
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 kan lämnas till och med 30 november
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Aktiviteten ska ske utanför skoltid och utan krav på regelbundet deltagande. För sent inkommen ansökan behandlas
-    inte
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-spontanaktivitetsbidrag
   senast_verifierad: '2026-08-03'
 - namn: Nystartsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Föreningar som startar verksamhet som inte redan finns i kommunen
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
   - Föreningen ska bedriva utåtriktad verksamhet inom kultur- och fritidsområdet
@@ -119,17 +147,23 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
-  belopp: null
-  sen_ansokan: För sent inkommen ansökan behandlas inte
+  - Verksamheten som startas ska inte redan finnas i kommunen
+  - Föreningen ska vara godkänd som ideell förening i Rbok eller bifoga senaste årsmöteshandlingar och uppdaterade stadgar
+  - Ansökan ska styrkas med beslut från föreningens styrelse
+  belopp: 2 500 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 kan lämnas till och med 30 november
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Undantagen från kravet på sex månaders registrering.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-nystartsbidrag
   senast_verifierad: '2026-08-03'
 - namn: Driftsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -149,18 +183,24 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
+  - Anläggningen ska ligga i Lindesbergs kommun
+  - Anläggningen ska användas regelbundet i föreningens huvudsakliga verksamhet
+  - Anläggningen ska vara tillgänglig för andra föreningar och kommunens invånare
+  - Bidrag får inte sökas i efterhand utan särskild överenskommelse med kommunen
   belopp: Upp till 100 000 kronor; högre belopp kräver dialog
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan behandlas inte; fast ansökningsdag publiceras inte i riktlinjen
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Anläggningen ska ligga i kommunen och regelbundet användas i föreningens verksamhet. För sent inkommen ansökan
-    behandlas inte
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-driftsbidrag
   senast_verifierad: '2026-08-03'
 - namn: Investeringsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -169,7 +209,7 @@ bidrag:
   malgrupp: Föreningar med investeringar som utvecklar verksamhet, folkhälsa, jämställdhet, integration, tillgänglighet eller
     miljö
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
@@ -182,24 +222,32 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
+  - Investeringen ska bredda barn- och ungdomsverksamhet, främja folkhälsa, jämställdhet, integration, tillgänglighet eller miljö
+  - Investeringen ska ha en längre livslängd och får normalt inte avse löpande underhåll eller reparation
+  - Investeringen får inte vara genomförd eller påbörjas innan ansökan beviljats
+  - Ansökan ska styrkas med offerter, budget, projektplan eller motsvarande
+  - Beviljad investering ska redovisas senast en månad efter genomförandet
   belopp: Högst 75 procent av investeringskostnaden
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningstiden är löpande; 2026 års portal är öppen till och med 30 november
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Investeringen får inte vara genomförd innan ansökan beviljats. För sent inkommen ansökan behandlas inte
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-investeringsbidrag
   senast_verifierad: '2026-08-03'
 - namn: Bidrag till kultur- och fritidsarrangemang
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
   malgrupp: Föreningar som ordnar offentliga kultur- eller fritidsarrangemang i kommunen
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
@@ -212,25 +260,34 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  - Arrangemanget ska genomföras i Lindesbergs kommun, vara offentligt och vända sig till allmänheten
+  - Arrangemanget ska bidra till ett varierat kultur- och fritidsutbud över året och kommunen
+  - Arrangemanget ska ha egen grundfinansiering; stöd söks endast för en del av kostnaderna eller en förlust
+  - Matcher, turneringar och andra idrottsarrangemang ger inte bidrag
+  - Ansökan ska göras minst en månad före arrangemanget och stöd ska anges i marknadsföringen
+  - Redovisning ska lämnas senast en månad efter genomfört arrangemang
+  belopp: Del av arrangemangets kostnader eller förlust; inget fast maxbelopp publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst en månad före arrangemanget; 2026 års portal är öppen till och med 30 november
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansökan ska göras minst en månad före arrangemanget. Bidrag ges inte till matcher, turneringar eller andra idrottsarrangemang.
-    För sent inkommen ansökan behandlas inte
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-kultur-och-fritidsarrangemang
   senast_verifierad: '2026-08-03'
 - namn: Bidrag till föreningsdrivna mötesplatser
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   - ovrig
   malgrupp: Föreningar som driver drogfri och öppen mötesplats, särskilt för unga 12–20 år
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum:
+    - 11-30
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
   - Föreningen ska bedriva utåtriktad verksamhet inom kultur- och fritidsområdet
@@ -242,25 +299,32 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  - Mötesplatsen ska bedriva social verksamhet för invånare i Lindesbergs kommun
+  - Mötesplatsen ska vara drogfri, öppen och kostnadsfri utan krav på medlemskap
+  - Verksamhet för unga 12–20 år prioriteras
+  - Stöd prioriteras i segregerade områden eller där kommunen bedömer ett särskilt behov
+  belopp: Individuellt prövat bidrag; inget fast belopp publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 kan lämnas till och med 30 november
   kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Prioriteras i segregerade områden eller där kommunen bedömer behovet som särskilt. För sent inkommen ansökan
-    behandlas inte
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-foreningsdrivna-motesplatser
   senast_verifierad: '2026-08-03'
 - namn: Bidrag till studieförbund
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   - ovrig
   malgrupp: Studieförbund med lokal verksamhet i Lindesbergs kommun
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum:
+    - 05-31
   krav:
   - Föreningen ska uppfylla kraven för ideell förening och ha ett ideellt ändamål
   - Föreningen ska bedriva utåtriktad verksamhet inom kultur- och fritidsområdet
@@ -272,26 +336,62 @@ bidrag:
   - Föreningen ska ha ett registrerat plus- eller bankgirokonto
   - Föreningen ska vara demokratiskt uppbyggd, ha stadgar, hålla årsmöte och välja styrelse och revisorer
   - Föreningen ska motverka diskriminering, kränkande behandling, våld, hot och tvång
+  - Studieförbundet ska vara berättigat till statsbidrag enligt Folkbildningsrådets villkor
+  - Studieförbundet ska ha bedrivit lokal verksamhet i Lindesbergs kommun under föregående verksamhetsår
+  - Ansökan ska innehålla verksamhets- eller förvaltningsberättelse, ekonomisk redovisning, årsmöteshandlingar och revisionsberättelse
+  - Beskrivning av verksamheten och verksamhetsplan ska bifogas
+  - Ofullständig ansökan eller ansökan som inte lämnas enligt anvisningen behandlas inte
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.lindesberg.se/download/18.4089c5481870839f4e9b55d/1679648136904/Regler%20och%20villkor%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Fördelning baseras på rapporterad verksamhet samt utbildnings- och kursdagar. För sent inkommen ansökan behandlas
-    inte
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga totalbidrag fördelas mellan behöriga studieförbund utifrån redovisad lokal verksamhet och kommunens fördelningsmodell
+  sen_ansokan: Ansökan ska lämnas senast 31 maj
+  kalla_url: https://lindesberg.rbok.se/ansok
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: lindesberg-studieforbund
   senast_verifierad: '2026-08-03'
+- namn: Föreningsbidrag för organisationer i hela Sverige
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori:
+  - social
+  - kultur
+  - ovrig
+  malgrupp: Allmännyttiga organisationer som erbjuder verksamhet för eller på annat sätt gynnar Lindesbergs kommuns invånare
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-28
+    - 08-30
+  krav:
+  - Sökande ska vara en allmännyttig ideell förening, stiftelse, ekonomisk förening, arbetsintegrerat socialt företag, kooperativ eller annan organisation
+  - Verksamheten ska erbjudas till eller gynna invånare i Lindesbergs kommun
+  - Ansökan ska avse projekt, aktivitet eller arrangemang som inte ryms inom kommunens övriga förenings- eller marknadsföringsbidrag
+  - Ansökan ska beskriva vad medlen ska användas till och varför
+  - Utbetalt bidrag ska återbetalas om evenemanget ställs in eller organisationen upphör under avtalsperioden
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunstyrelseförvaltningens årliga budget på 200 000 kronor fördelas mellan beviljade ansökningar
+  sen_ansokan: Ansökan lämnas senast 28 februari eller 30 augusti
+  kalla_url: https://www.lindesberg.se/download/18.16f94dd18d82a668645bcba/1709045564619/F%C3%B6reningsbidrag%20f%C3%B6r%20organisationer%20i%20hela%20Sverige%202024%20till%202027%20Riktlinje.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: lindesberg-organisationer-hela-sverige
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: lindesberg-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänster
+  beskrivning: Föreningen ska vara registrerad i Rbok och inför varje ansökan uppdatera kontaktuppgifterna samt lämna senaste verksamhetsberättelse, ekonomiska rapporter, revisionsberättelse och årsmötesprotokoll.
+  system: Rbok
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Föreningsuppgifterna ska uppdateras och de senaste årshandlingarna lämnas i samband med varje ansökan.
   ordning: 1
-  kalla_url: https://www.lindesberg.se/uppleva-och-gora/foreningar-och-foreningsliv
-  giltighet_status: okand
+  kalla_url: https://www.lindesberg.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsbidrag
+  giltighet_status: kontrollast
 kommunsiffra: null
