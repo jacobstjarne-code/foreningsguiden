@@ -4,81 +4,108 @@ lan: Västernorrlands län
 befolkning: 18029
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
+  namn: ACTOR Smartbook
+  url: https://solleftea.actorsmartbook.se/
 kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-verifierad: '2026-08-01'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.solleftea.se/download/18.33e2398d185cf941b9529e6/1676966971928/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar%2C%20KS%202023-01-10%20%C2%A7%208.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: solleftea-arsbidrag-kulturforening
   namn: Årsbidrag kulturförening
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Föreningen ska bedriva regelbunden, planerad och utåtriktad kulturverksamhet i Sollefteå kommun
+  - Föregående års verksamhetsberättelse och revisionsberättelse samt årsmötesprotokoll ska bifogas
+  - Bedömningen görs utifrån föreningens verksamhetsplan och ansökan
+  belopp: Individuellt prövat årsbidrag; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 mars varje år
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-grundbidrag-hembygdsforening
   namn: Grundbidrag hembygdsförening
+  foreningstyp: [hembygd]
   kategori:
   - kultur
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Hembygdsgården ska vara öppen minst 15 dagar under sommaren och bemannad minst tre timmar per öppetdag utan förbokning
+  - Föregående års verksamhetsberättelse och revisionsberättelse samt årsmötesprotokoll ska bifogas
+  - Föreningen ska uppfylla kommunens allmänna villkor och bedriva huvuddelen av verksamheten i Sollefteå
+  belopp: Individuellt prövat grundbidrag; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 mars varje år
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-arrangemangsbidrag-kultur
   namn: Arrangemangsbidrag kultur
+  foreningstyp: [kultur, hembygd, annat]
   kategori:
   - kultur
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan senast två veckor före arrangemang.
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Arrangemanget ska avse konst eller kulturhistoria, ha god konstnärlig och organisatorisk kvalitet och vara offentligt annonserat
+  - Arrangemanget får inte ha religiösa inslag; traditionellt högtidsfirande är inte stödberättigat
+  - Kommunens logotyp ska användas i annonser och trycksaker och redovisning ska lämnas snarast, senast 15 december
+  belopp: Individuellt prövat arrangemangsbidrag; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas under hela året men komplett ansökan ska lämnas senast två veckor före arrangemanget
+  kalla_url: https://www.solleftea.se/Uppleva--gora/kultur/stod-och-bidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-studieforbundsbidrag
   namn: Studieförbundsbidrag
+  foreningstyp: [kultur, social, annat]
   kategori:
   - kultur
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  deadlines: { typ: fasta, datum: [06-01] }
+  krav:
+  - Studieförbundet ska vara centralt statsbidragsberättigat genom Folkbildningsrådet eller vara SISU Idrottsutbildarna
+  - Statsbidragsberättigad verksamhet ska bedrivas i Sollefteå för kommunens invånare
+  - Ansökan ska innehålla kommande års arbets- och verksamhetsplan, föregående års verksamhets- och ekonomiska redovisning samt kommunsammandrag
+  belopp: Fördelas ur det årliga anslaget enligt kommunens publicerade fördelningsmodell
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 juni varje år
+  kalla_url: https://www.solleftea.se/download/18.499760a71853e28aa2aeb56/1583993821938/Normer%20f%C3%B6r%20Sollefte%C3%A5%20kommun%20g%C3%A4llande%20%C3%A5rsbidrag%20till%20studief%C3%B6rbunden.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-bidrag-fritidsgardar
   namn: Bidrag fritidsgårdar
+  foreningstyp: [ungdom, social, annat]
   kategori:
   - social
   - ovrig
@@ -86,17 +113,24 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Stödet avser en föreningsdriven fritidsgård i Sollefteå kommun
+  - Föreningen ska ha vald styrelse, årsmöte och stadgar och vara öppen för alla
+  - Räkenskaper, verksamhetsberättelse och medlemsregister ska kunna visas och beviljat stöd ska redovisas
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-administrationsbidrag
   namn: Administrationsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -104,34 +138,49 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Föreningen ska bedriva regelbunden fritidsverksamhet och ha minst tio medlemmar 7–25 år
+  - Minst tolv sammankomster ska genomföras per år
+  - Medlemsuppgifter ska redovisas årligen senast 1 maj; en nystartad förening lämnar stadgar och intyg från distrikts- eller riksorganisation
+  belopp: 600 kr vid 15 medlemmar; därutöver 10 kr per medlem 16–100, 8 kr per medlem 101–200, 4 kr per medlem 201–300 och 3 kr per medlem över 300
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist för stödet
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Medlemsredovisningen 1 maj är ett underlag och registreringskrav, inte publicerad ansökningsfrist.
+  senast_verifierad: '2026-08-18'
 - id: solleftea-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Aktiviteten ska vara planerad, ledarledd, pågå minst 60 minuter och avse deltagare 7–25 år
+  - RF-ansluten förening ska ha minst tre deltagare utöver ledaren; annan förening minst tre deltagare totalt
+  - En person får räknas vid högst en stödgrundande sammankomst per förening och dag
+  - Distriktsintyg ska styrka statsbidrag när det är tillämpligt
+  belopp: 20 kr per stödberättigad sammankomst, eller 22 kr med dokumenterad ANDT-insats
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-lokalbidrag
   namn: Lokalbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -140,17 +189,25 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Föreningen ska bedriva verksamhet för 7–25-åringar och få lokalt aktivitetsstöd
+  - Lokalen ska vara egen eller hyrd, ligga i kommunen och användas aktivt när kommunen inte kan erbjuda motsvarande lokal inom rimligt avstånd
+  - Hyran ska vara godkänd; en ägd lokal ska upplåtas till andra föreningar när den är ledig
+  - Stödet avser publicerade driftkostnader och inte vinstinriktade arrangemang med entré
+  belopp: Högst 8 500 kr per förening och år; föreningens egen insats ska vara minst 5 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-samlingslokalsbidrag
   namn: Samlingslokalsbidrag
+  foreningstyp: [kultur, hembygd, social, annat]
   kategori:
   - kultur
   - ovrig
@@ -158,112 +215,207 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Stödet avser en föreningsdriven samlingslokal i Sollefteå kommun
+  - Föreningen ska ha vald styrelse, årsmöte och stadgar och vara öppen för alla
+  - Räkenskaper, verksamhetsberättelse och medlemsregister ska kunna visas och beviljat stöd ska redovisas
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-fiskevardsbidrag
   namn: Fiskevårdsbidrag
+  foreningstyp: [friluft, annat]
   kategori:
   - ovrig
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Årsmötet ska ha godkänt verksamhets-, revisions- och ekonomisk redovisning samt tider för fiskeförbud
+  - Föreningen får inte dela ut vinst och ska erbjuda kommunen årlig inspektion
+  - Sökta fiskevårdsåtgärder ska beskrivas och budgeteras; stödgrundande anläggningar ska ligga intill vattnet och godkännas vid inspektion
+  belopp: Grundbidrag 3 700 kr samt 200 kr vardera för minst två toaletter, tre kastbryggor, tre vindskydd och minst en båt; fiskevård och utåtriktade insatser prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Grundbidraget betalas ut i efterhand.
+  senast_verifierad: '2026-08-18'
 - id: solleftea-ridskolebidrag
   namn: Ridskolebidrag
+  foreningstyp: [idrott]
   kategori:
   - idrott
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  deadlines: { typ: fasta, datum: [01-15] }
+  krav:
+  - Ridskolan ska ha länsstyrelsens tillstånd och minst 30 registrerade avgiftsbetalande ridande medlemmar 7–25 år från föregående år
+  - Föreningen ska ha säte, verksamhet och organisationsnummer i Sollefteå och verksamheten ska gagna kommunens invånare
+  - Föreningen ska vara öppen och demokratisk, finnas i kommunens register och kunna visa handlingar, medlemsregister och lektionsstatistik
+  belopp: Högst 250 000 kr per ridskola
+  belopp_avser: per_forening
+  kommunens_pott: 1 000 000 kr totalt, varav 500 000 kr för östra och 500 000 kr för västra delen av kommunen
+  sen_ansokan: Senast 15 januari; en ny ridskola ska ha anmält sig senast 1 augusti året före
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-byalagsbidrag
   namn: Byalagsbidrag
+  foreningstyp: [hembygd, friluft, social, annat]
   kategori:
   - ovrig
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Stödet avser byalagsverksamhet i Sollefteå kommun
+  - Föreningen ska ha vald styrelse, årsmöte och stadgar och vara öppen för alla
+  - Räkenskaper, verksamhetsberättelse och medlemsregister ska kunna visas och beviljat stöd ska redovisas
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: solleftea-pensionarsforeningsbidrag
+  namn: Pensionärsföreningsbidrag
+  foreningstyp: [social, annat]
+  kategori: [pensionar, social]
+  malgrupp: Riksanslutna pensionärsföreningar med lokal verksamhet och minst 30 stödberättigade medlemmar
+  deadlines: { typ: fasta, datum: [08-31] }
+  krav:
+  - Föreningen ska vara riksansluten, ha stadgar, styrelse och revisorer och bedriva lokal verksamhet
+  - Ansökan ska beskriva verksamhet, budget och stödets ändamål
+  - Föreningen ska ha minst 30 stödberättigade medlemmar och på begäran lämna årsmötes-, verksamhets-, ekonomi- och revisionshandlingar
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-- id: solleftea-pensionars-funktionsratts-och-stodforeningar
-  namn: Pensionärs-, funktionsrätts- och stödföreningar
-  kategori:
-  - pensionar
-  - funktionsratt
-  - social
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  belopp_avser: ren_pott
+  kommunens_pott: Totala ramen är 65 000 kr och fördelas per pensionsåldersmedlem folkbokförd i Sollefteå
+  sen_ansokan: Senast 31 augusti varje år
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: solleftea-funktionsrattsforeningsbidrag
+  namn: Bidrag till organisationer inom funktionsrättsområdet
+  foreningstyp: [social, annat]
+  kategori: [funktionsratt, social]
+  malgrupp: Lokala organisationer inom funktionsrättsområdet
+  deadlines: { typ: fasta, datum: [08-31] }
+  krav:
+  - Organisationen ska bedriva lokal verksamhet inom funktionsrättsområdet och ha minst tio medlemmar och tolv sammankomster per år
+  - Medlemmarna ska vara registrerade, folkbokförda och avgiftsbetalande med stadgeenligt inflytande
+  - Stöd kan avse administration, lokal, aktiviteter, samverkan samt ledar-, instruktörs- och förtroendevaldutbildning
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 augusti varje år
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: solleftea-stodforeningsbidrag
+  namn: Stödföreningsbidrag
+  foreningstyp: [social, annat]
+  kategori: [social, ovrig]
+  malgrupp: Föreningar som erbjuder stöd eller hjälp till invånare i Sollefteå
+  deadlines: { typ: fasta, datum: [09-01] }
+  krav:
+  - Föreningen ska erbjuda stöd eller hjälp till samhället; mottagarna behöver inte vara medlemmar
+  - Verksamheten ska finnas i Sollefteå och rikta sig till kommunens invånare
+  - Föreningen ska ha styrelse, årsmöte och stadgar och kunna visa räkenskaper, verksamhetsberättelse och medlemsregister
+  belopp: Individuellt prövat efter verksamhetens omfattning; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 september varje år
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: solleftea-vuxna-pa-stan
   namn: Vuxna på stan
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - social
   - ovrig
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: 1 500 kronor per tillfälle
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Minst två personer som är 25 år eller äldre ska delta samtidigt under hela passet
+  - Passet ska omfatta tre timmar någon gång mellan 19.30 och 01.00 och även besöka motorungdomars samlingsplatser
+  - Föreningen ska lämna intresseanmälan, invänta bekräftelse och får boka högst två pass åt gången
+  belopp: 1 500 kr per genomfört pass
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar pass och datum men ingen sista anmälningsdag
+  kalla_url: https://www.solleftea.se/omsorg--hjalp/akut-hjalp--krisstod/trygg-och-saker/brottsforebyggande/vuxna-pa-stan
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ersättningen betalas ut efter genomfört pass.
+  senast_verifierad: '2026-08-18'
+- id: solleftea-bussbidrag-kultur
+  namn: Bussbidrag till kulturevenemang
+  foreningstyp: [kultur, hembygd, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar som hyr buss till ett kulturevenemang på annan ort inom Sollefteå kommun
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Resan ska gå till ett kulturevenemang på en annan ort inom Sollefteå kommun
+  - Föreningen ska hyra bussen och får ta ut en skälig avgift av allmänheten eller andra föreningar
+  - Kommunens logotyp ska användas i annonser och trycksaker och redovisning ska lämnas senast 15 december
+  belopp: Kommunen täcker verifierad busskostnad efter föreningens första 1 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas under hela året men komplett ansökan ska lämnas senast två veckor före resan
+  kalla_url: https://www.solleftea.se/Uppleva--gora/kultur/stod-och-bidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: solleftea-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsregister, ha huvuddelen av verksamheten i Sollefteå, vald styrelse, årsmöte och stadgar, vara öppen och inte bedrivas för medlemmarnas ekonomiska intresse. Registeruppgifterna ska uppdateras varje år.
+  system: ACTOR Smartbook och kommunens föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Ej angivet i källan
+  giltighet: Uppgifterna ska uppdateras årligen
   ordning: 1
-  kalla_url: https://www.solleftea.se/uppleva--gora/fritid/foreningar/stod-och-bidrag
-  giltighet_status: okand
+  kalla_url: https://www.solleftea.se/download/18.33e2398d185cf941b9529e6/1676966971928/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar%2C%20KS%202023-01-10%20%C2%A7%208.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null
