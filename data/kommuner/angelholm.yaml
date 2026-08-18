@@ -8,10 +8,17 @@ ansokningssystem:
   namn: Rbok (kommunens föreningsregister och ansökningssystem för föreningsbidrag)
   url: https://engelholm.rbok.se/#/
 kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag.html
-verifierad: 2026-07-23
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/bra-att-veta-nar-du-soker-foreningsbidrag.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: angelholm-lok
   namn: Lokalt aktivitetsstöd (LOK)
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -44,19 +51,21 @@ bidrag:
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
   belopp: 25 kr/sammankomst + 6 kr/deltagare
+  belopp_avser: per_forening
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Redovisningsperiod 1 jan–30 jun: sista ansökningsdag 25 augusti. Redovisningsperiod 1 jul–31 dec: sista ansökningsdag
     25 februari. Utbetalning i efterskott två gånger per år, senast 31 mars och 30 september. Följer i stort riktlinjerna
     för det statliga lokala aktivitetsstödet. Kan inte sökas för kommersiella arrangemang (t.ex. teater- eller idrottsevenemangsbesök),
     drop in-verksamhet, skolundervisning eller studiecirklar.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-lokalbidrag
   namn: Lokalbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -83,20 +92,22 @@ bidrag:
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
   belopp: Högst 60 procent av godkända lokalkostnader, dock maximalt 100 000 kronor, inom ramen för kommunfullmäktiges anslag
+  belopp_avser: per_forening
   sen_ansokan: Om en ansökan kommer in för sent betalar kommunen inte ut något bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/lokalbidrag---villkor-vid-ansokan.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Bidraget baseras på lokalkostnader från föregående kalenderår. Ansökningsperioden öppnar 1 december, sista
     ansökningsdag 25 februari. Utbetalning senast 31 mars. Kan inte sökas för lokal som används vid enstaka tillfällen, för
     fester/evenemang med entré, för boende vid läger/tävlingar, för gym/träningsinstitut med träningskort, eller för lokal
     i annan kommun. Reparations- och underhållskostnader räknas inte som bidragsgrundande. Godkända kostnader: hyra/ränta
     (äger man själv), kallhyra (hyr man), el/värme/VA/sotning/sophämtning, försäkring, avskrivningar.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-verksamhetsstod
   namn: Verksamhetsstöd
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -123,19 +134,21 @@ bidrag:
   - Föreningen ska ha registrerat plus- eller bankgiro
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
-  belopp: null
+  belopp: Bidrag ges för en del av verksamhetens budget och fördelas inom kommunens budgetram
+  belopp_avser: per_forening
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/verksamhetsstod---villkor-vid-ansokan.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidrag ges för del av verksamhetens budget, fördelas utifrån kommunens budget. Ansökan görs inför kommande kalenderårs
     aktiviteter, utbetalning senast 31 januari. Verksamhet där statligt/regionalt stöd är villkorat av kommunalt stöd, eller
     där fler finansiärer bidrar, beaktas särskilt.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-social-aldre-funktionsnedsatta
   namn: Stöd till social verksamhet — äldre och funktionsnedsatta
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   - funktionsratt
@@ -161,19 +174,19 @@ bidrag:
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
   belopp: 33 kr/medlem folkbokförd i Ängelholms kommun
+  belopp_avser: per_forening
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/stod-till-social-verksamhet---villkor-vid-ansokan.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Utbetalning senast 31 mars. Stickprov varje år på slumpmässigt utvalda föreningar. OBS källkvalitet: sidans
-    löptext anger felaktigt ''Sista ansökningsdag är den 25 februari 2023'' (kvarglömt årtal från en tidigare uppdatering)
-    — den strukturerade tabellen ''Viktiga datum'' längre ner på samma sida bekräftar 25 februari som återkommande årligt
-    datum, vilket är det som skrivits här. Se konflikter.log.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan öppnar 1 december och ska lämnas senast 25 februari. Utbetalning sker senast 31 mars. Kommunen gör
+    varje år stickprov hos slumpmässigt utvalda föreningar.
+  senast_verifierad: '2026-08-18'
 - id: angelholm-social-sarskilt-viktig-verksamhet
   namn: Stöd till social verksamhet — särskilt viktig verksamhet
+  foreningstyp: [social, annat]
   kategori:
   - social
   malgrupp: Förening med lokal anknytning som bedriver samhällsangelägen social verksamhet, t.ex. driver träffpunkt för människor
@@ -196,18 +209,20 @@ bidrag:
   - Föreningen ska ha registrerat plus- eller bankgiro
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
-  belopp: null
+  belopp: Bidrag ges för en del av verksamhetens budget och fördelas inom kommunens budgetram
+  belopp_avser: per_forening
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/stod-till-social-verksamhet---villkor-vid-ansokan.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidrag ges för del av verksamhetens budget, fördelas utifrån kommunens budget. Ansökan görs inför kommande kalenderårs
     aktiviteter, utbetalning senast 31 januari.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-landsbygdspotten
   namn: Landsbygdspotten
+  foreningstyp: [kultur, hembygd, friluft, annat]
   kategori:
   - kultur
   - ovrig
@@ -232,17 +247,19 @@ bidrag:
   - Föreningen ska ha registrerat plus- eller bankgiro
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
-  belopp: null
+  belopp: Bidrag ges för en del av verksamhetens budget och fördelas inom kommunens budgetram
+  belopp_avser: per_forening
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/landsbygdspotten---villkor-vid-ansokan.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidrag ges för del av verksamhetens budget, fördelas utifrån kommunens budget. Utbetalning senast 31 december.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-projektstod
   namn: Projektstöd
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -270,20 +287,22 @@ bidrag:
   - Föreningen ska ha registrerat plus- eller bankgiro
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
-  belopp: null
+  belopp: Bidrag ges för en del av projektets budget och fördelas inom kommunens budgetram
+  belopp_avser: per_forening
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/projektstod---villkor-vid-ansokan.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Aktiviteter: konserter, utställningar, idrottsarrangemang, tävlingar, riktad verksamhet för nya målgrupper,
     föreläsningar eller workshops. Bidrag ges för del av projektets budget, fördelas utifrån kommunens budget. Projekt med
     fler finansiärer beaktas särskilt. Utbetalning senast 31 december. Redovisning till kommunen senast två månader efter
     genomfört projekt.'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-inventariestod
   namn: Inventariestöd
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -313,21 +332,22 @@ bidrag:
   kommunens_pott: null
   sen_ansokan: Vid för sent inkommen ansökan utgår inte bidrag.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/inventariestod---villkor-vid-ansokan.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan görs inför kommande kalenderårs aktiviteter. Utbetalning senast 31 december. Bidrag ges för del av budgeten,
     fördelas utifrån kommunens budget.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-skotselbidrag
   namn: Skötselbidrag
+  foreningstyp: [idrott]
   kategori:
   - idrott
   malgrupp: Förening som nyttjar en kommunalt ägd idrottsanläggning och sköter kommunens egendom enligt överenskommen skötselplan.
     Gäller ej gymnastiksalar eller idrottshallar.
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Nyttjanderätt på en kommunalt ägd idrottsanläggning
@@ -343,25 +363,27 @@ bidrag:
   - Föreningen ska ha registrerat plus- eller bankgiro
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
-  belopp: null
+  belopp: Bidraget fördelas enligt en modell som bygger på anläggningens yta och funktioner samt kommunens budget
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (avtalsbaserat, ingen ordinarie ansökningsomgång med fast deadline).
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Beslutas av kommunfullmäktige i samband med budgetprocessen, inte via en löpande ansökningsomgång. Bidrag grundas
     på en fördelningsmodell baserad på idrottsanläggningens yta och funktioner, fördelas utifrån kommunens budget. Kommunen
     bekostar dessutom anläggningens konsumtionsavgifter som ett indirekt bidrag. Stickprov varje år på två slumpmässigt utvalda
     föreningar.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-subventionerade-taxor
   namn: Subventionerade taxor
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Ideell förening som bedriver verksamhet i kommunalt ägda lokaler i Ängelholms kommun.
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Föreningen ska vara ideell och ha organisationsnummer från Skatteverket
@@ -375,19 +397,21 @@ bidrag:
   - Föreningen ska ha registrerat plus- eller bankgiro
   - Föreningen ska årligen uppdatera kontaktuppgifter, medlemsinformation, årsmötesprotokoll, verksamhetsberättelse, resultatrapport
     och stadgar i Rbok
-  belopp: null
+  belopp: Lägre hyra enligt kommunens fastställda taxor; ingen kontant utbetalning
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande, ingen kontantutbetalning).
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Inte ett kontant bidrag. Stöd ges i form av lägre hyra i kommunalt ägda lokaler, enligt kommunens fastställda
     taxor för förhyrning av kommunens lokaler (differentierad prissättning: förening/intern, barn & unga/funktionsvariation,
     förening/intern vuxen, extern/privat — se regler-och-riktlinjer under Boka lokal eller anläggning).'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-studieforbund
   namn: Studieförbund
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   malgrupp: 'Verksamma studieförbund i Ängelholms kommun. För närvarande sju studieförbund: ABF, Bilda, Studiefrämjandet,
@@ -397,22 +421,26 @@ bidrag:
     datum:
     - 10-31
   krav:
+  - Sökanden ska vara ett studieförbund som är verksamt i Ängelholms kommun
   - 75 procent av det totala anslaget utgör ett basbidrag som grundar sig på respektive studieförbunds verksamhet och utbetalt
     kommunalt bidrag de tre senast kända åren
   - 25 procent grundas på respektive studieförbunds antal kulturprogram
   belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 75 procent av anslaget fördelas som basbidrag och 25 procent efter antal kulturprogram
   sen_ansokan: Ej angivet i källan.
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag/studieforbund---villkor-vid-ansokan.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökningsperiod 1 september–31 oktober enligt tabellen 'Viktiga datum' på huvudsidan. Utbetalningsdatum är
     inte specifikt angivet i källan för studieförbundsbidraget (till skillnad från övriga bidrag på samma sida, som alla anger
     ett utbetalningsdatum).
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-sponsring
   namn: Sponsring till idrott, kultur och evenemang
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -428,24 +456,23 @@ bidrag:
   - Aktiviteterna ska vara publika och öppna för allmänheten
   - Kommunen sponsrar inte privatpersoner, och inte organisationer eller evenemang av politisk eller religiös karaktär
   - '''Sponsringsobjekt'' med tydligt fokus på utveckling och tillväxt av regionen prioriteras'
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Maximalt 400 000 kronor"
+  belopp: Maximalt 400 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan (men ansökan utanför ordinarie period är uttryckligen möjlig, se anteckning).
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/sponsring-till-idrott-kultur-och-evenemang.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Digital ansökan senast 30 oktober varje år, men det finns även möjlighet att ansöka utanför denna period. Bedöms
     utifrån målgruppens storlek, publiktillströmning, uppmärksamhetsvärde/synlighet, medieintresse, turismekonomiska effekter
-    och bidrag till platsens utveckling. Bedömning sker november-december, därefter avtal och utbetalning. Regleras i enskilda
-    avtal (policy: ''Policy om sponsring för Ängelholms kommun 2024-2028''). CMS-anmärkning: äldre separata sidor/rubriker
-    ''Evenemangsbidrag'' (564 000 kr år 2024) och elitidrottssponsring gav 404 vid hämtning 2026-07-23 — enligt extern press
-    (mynewsdesk/idrottensaffarer, jan 2025) ersattes båda av denna gemensamma sponsringspolicy 2025 (~2 mnkr totalt). Se tackning.log.'
-  senast_verifierad: '2026-08-03'
+    och bidrag till platsens utveckling. Bedömning sker november-december, därefter tecknas avtal och utbetalning görs. Stödet
+    regleras i enskilda avtal enligt kommunens sponsringspolicy 2024-2028.'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-visionsfonden
   namn: Ängelholms visionsfond
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Privatpersoner, organisationer, företag och föreningar med idéer som utvecklar och förändrar Ängelholm i linje
@@ -465,25 +492,27 @@ bidrag:
   - Kan inte kombineras med samtidig finansiering från annan kommunal verksamhet
   - Endast en person kan söka medel för samma projekt
   belopp: Max 20 000 kronor per projekt
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan.
   kalla_url: https://www.engelholm.se/kommun-och-politik/angelholm-gor-det-omojliga-mojligt/ansok-om-pengar-fran-angelholms-kommuns-visionsfond.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: 'Sökanden behöver inte vara folkbokförd i Ängelholms kommun. Beslutsprocess i tre steg: administrativ kontroll
     (visionslotsen), grupp med kommunens högsta chefer + kreativt råd, slutgiltigt beslut i kommunstyrelsens arbetsutskott.
     Cirka 2,5 månader från sista ansökningsdag till beslut. Flera tidigare beviljade projekt har gått till lokala föreningar
     (t.ex. Ängelholms pistolskytteklubb 2026, Med Naturen i Tåstarp 2026).'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-vag-arligt-driftbidrag
   namn: Enskild väghållning — årligt driftbidrag
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Väghållare (vägförening eller samfällighet bildad genom lantmäteriförrättning, eller frivillig överenskommelse
     enligt Trafikverkets regler för vägar med statligt bidrag) registrerad i kommunens föreningsregister Rbok.
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Vägen/samfälligheten bildad genom lantmäteriförrättning, eller frivillig överenskommelse enligt Trafikverkets regler (endast
@@ -497,21 +526,23 @@ bidrag:
     område: 70 procent av medelvärdet av beräknad driftskostnad i lägsta trafikklass (kräver att föreningen snöröjer/halkbekämpar).
     Grönområde: bidrag vid skötsel till minst 3 slaghackningar per växtsäsong. Lekplatser: belopp beror på lekplatsens storlek
     (stor: minst 5 lekredskap, liten: högst 4).'
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (löpande — första ansökan krävs, därefter omprövning vart femte år).
   kalla_url: https://www.engelholm.se/trafik-och-stadsplanering/trafik-och-gator/enskilda-vagar/riktlinjer-for-kommunalt-bidrag-till-enskild-vaghallning.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Täcker barmarksunderhåll (grusning, dammbindning, hyvling, sladdning, dikesrensning, beläggningsunderhåll) och
     vinterväghållning (kantmarkering, plogning, halkbekämpning). Bidrag kan också ges till cykelvägar, grönområden och lekplatser
     (se belopp). Extra driftsbidrag för särskilda händelser kan sökas separat om kostnaden för samma åtgärd under de senaste
     tre åren överstiger tidigare erhållet bidrag; betalas normalt ut året efter ansökan. Kommunen bestämmer vägens kategori/trafikklass
     utifrån Trafikverkets klassificering. Ansökan via kommunens e-tjänstportal (inte Rbok för själva bidragsansökan — Rbok
     gäller föreningsregistreringen).
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-vag-sarskilt-driftbidrag
   namn: Enskild väghållning — särskilt driftbidrag
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Väghållare som redan får årligt driftbidrag, med behov av ett större underhållsarbete på vägen.
@@ -528,14 +559,15 @@ bidrag:
   belopp: 'Vägar med statligt bidrag: kommunen ger bidrag på mellanskillnaden så att föreningen själv betalar 15 procent av
     godkänd kostnad, efter att Trafikverket godkänt arbetet. Vägar utan statligt bidrag samt gång- och cykelvägar/lekplatser:
     kommunen ger bidrag på 85 procent av godkänd kostnad.'
+  belopp_avser: per_forening
   sen_ansokan: 'För vägar utan statligt bidrag samt gång- och cykelvägar/lekplatser: ansökan senast 30 augusti året innan
     åtgärden ska utföras. Kommunen kan besluta att bevilja bidrag i upp till två år efter att ansökan inkommit. Lämnas inte
     för kostnader som uppkommit innan bidraget beviljats, om inte kommunen medger undantag i särskilda fall.'
   kalla_url: https://www.engelholm.se/trafik-och-stadsplanering/trafik-och-gator/enskilda-vagar/riktlinjer-for-kommunalt-bidrag-till-enskild-vaghallning.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: '''Särskilt bidrag'' är Trafikverkets benämning, som Ängelholms kommun också använder. Exempel på bidragsberättigade
     arbeten: byte av vägtrummor (minst 500 mm diameter), förstärkning/omläggning av vägsträcka, ombyggnad av vägskäl, vägräcken/trafiksäkerhetsåtgärder,
     ombyggnad/reparation av broar, beläggningsåtgärder i trafikklass hög, upprustning av ny bidragsväg. Bidrag betalas ut
@@ -543,9 +575,10 @@ bidrag:
     vid begränsade medel: 1) vägar med statligt bidrag, 2) lekplatser med allvarliga brister samt vägar med skolskjuts, 3)
     cykelvägar, 4) övriga enskilda vägar. 08-30-deadline gäller uttryckligen vägar utan statligt bidrag samt gång-/cykelvägar/lekplatser
     — för vägar MED statligt bidrag anges inget eget fast datum i källan (processen följer i stället Trafikverkets granskning).'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-segerstrom-skollovskolonifond
   namn: Stiftelsen Lisa och Wilhelm Segerströms skollovskolonifond
+  foreningstyp: [ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Föreningar verksamma i Ängelholms stad som har haft lägerverksamhet med lägertid på minst 5 och högst 10 dagars
@@ -555,22 +588,26 @@ bidrag:
     datum:
     - 09-01
   krav:
+  - Föreningen ska vara verksam i Ängelholms stad och ha genomfört lägerverksamheten
   - Deltagarna ska vara i åldern 7-18 år
+  - Lägret ska omfatta 5-10 dagars sammanhängande övernattning utanför kommunen
   - En av föreningen bestyrkt (undertecknad och intygad) deltagarlista ska bifogas ansökan
-  belopp: null
+  belopp: Stiftelsens avkastning fördelas mellan godkända ansökningar; inget fast belopp publiceras
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan.
   kalla_url: https://www.engelholm.se/stod-och-omsorg/ekonomiskt-och-socialt-stod/stiftelser-och-fonder.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Stiftelsens ändamål är att avkastningen ska gå till feriehemsverksamhet för barn och ungdomar från Ängelholms
     stad. Egen deadline (1 september) avviker från övriga stiftelsers gemensamma ansökningsperiod (1 augusti–1 oktober). Ansökan
     via e-tjänst ('Ansökan om fondmedel - Övriga fonder'). Utbetalning oktober-december samma år. Kommunstyrelsen ansvarar
     för den ekonomiska förvaltningen av kommunens stiftelser.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: angelholm-kulturpriset
   namn: Kulturpriset
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Person, förening eller annan organisation som bidragit med värdefulla insatser som främjar kreativitet och utvecklar
@@ -580,24 +617,26 @@ bidrag:
     datum:
     - 04-15
   krav:
+  - Den nominerade ska vara en person, förening eller annan organisation
+  - Insatsen ska främja kreativitet och utveckla kulturlivet i Ängelholms kommun
   - Kan bara tilldelas en gång per person eller organisation
   - Går inte att söka/nominera för egen räkning
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "25 000 kronor"
+  belopp: 25 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (nomineringsprocess, inte egen ansökan).
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/priser-och-nomineringar.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Nomineringsperiod 28 februari–15 april, via e-tjänst. Nämnden för kultur, idrott och fritid beslutar. Kommunen
     delar samma period även ut kulturstipendier (sammanlagt 17 000 kr/år) — dessa föreslås dock av Kulturskolan och riktas
-    till enskilda personer, inte till föreningar, och är därför inte upptagna som ett eget bidrag här (se MEDVETET_UTESLUTET
-    i tackning.log).
-  senast_verifierad: '2026-08-03'
+    till enskilda personer, inte till föreningar, och ingår därför inte som ett eget föreningsstöd.
+  senast_verifierad: '2026-08-18'
 - id: angelholm-idrottspriset-profil
   namn: Idrottspriset — Årets idrottsprofil
+  foreningstyp: [idrott]
   kategori:
   - idrott
   malgrupp: Individ, förening eller annan organisation som med sitt engagemang under en längre tid bidragit med värdefulla
@@ -607,22 +646,25 @@ bidrag:
     datum:
     - 04-15
   krav:
+  - Den nominerade ska vara en individ, förening eller annan organisation
+  - Engagemanget ska under längre tid ha stimulerat ett rikt idrottsliv i Ängelholms kommun
   - Går inte att söka/nominera för egen räkning
-  belopp: null
+  belopp: Kommunen publicerar inget kronbelopp för idrottspriset
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (nomineringsprocess, inte egen ansökan).
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/priser-och-nomineringar.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Nomineringsperiod 28 februari–15 april, via e-tjänst. Nämnden för kultur, idrott och fritid beslutar. Idrottspriset
     omfattar även Årets idrottsledare (delas ut till en enskild föreningsledare) och Årets idrottsprestation (delas ut till
-    individ eller lag) — dessa två kategorier riktar sig uttryckligen till individer/lag och inte till föreningen som organisation,
-    och är därför inte egna rader här (se MEDVETET_UTESLUTET i tackning.log). Inget kronbelopp anges för Idrottspriset i källan
-    (till skillnad från Kultur- och Miljöpriset).
-  senast_verifierad: '2026-08-03'
+    individ eller lag) — dessa två kategorier riktar sig uttryckligen till individer eller lag och ingår därför inte som
+    egna föreningsstöd. Kommunen publicerar inget kronbelopp för idrottspriset.
+  senast_verifierad: '2026-08-18'
 - id: angelholm-miljopriset
   namn: Miljöpriset
+  foreningstyp: [friluft, annat]
   kategori:
   - ovrig
   malgrupp: Personer, skolklasser, företag, föreningar eller organisationer i kommunen som genomfört värdefulla miljöinsatser
@@ -636,15 +678,16 @@ bidrag:
   - Insatser gjorda under de senaste fem kalenderåren (inklusive prisåret) räknas, även tidigare nominerade som inte prisbelönats
   - Delas inte ut för insatser inom arbetsmiljö
   belopp: 25 000 kronor
+  belopp_avser: per_forening
   sen_ansokan: Ej tillämpligt (nomineringsprocess, inte egen ansökan).
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/priser-och-nomineringar.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Nomineringsperiod 28 februari–26 april, via e-tjänst. Vinnaren utses av Miljö- och tillståndsnämndens presidium
     tillsammans med minst en representant för Huvuduppdrag Samhälle.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: angelholm-registrering-rbok
   vad: Registrera föreningen i Rbok
@@ -662,5 +705,5 @@ forutsattningar:
   giltighet: null
   ordning: 1
   kalla_url: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/bra-att-veta-nar-du-soker-foreningsbidrag.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
