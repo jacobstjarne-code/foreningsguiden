@@ -7,9 +7,12 @@ ansokningssystem:
   namn: e-srv/e-tjänst
   url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
 kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-18'
+giltighet_regel: null
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Startbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -19,12 +22,17 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska utgå från och ha sin bas i Kumla kommun och verksamheten ska gynna kommunens invånare
+  - Föreningen ska vara ideell, demokratiskt uppbyggd, ha stadgar och beslutad medlemsavgift
+  - Föreningen ska ha organisationsnummer och konto i föreningens namn samt vara religiöst och politiskt obunden
   - Kopia av beslut från Skatteverket om organisationsnummer
   - Föreningsstadgar
   - Årsmötesprotokoll
   belopp: 5 000 kr
-  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks löpande under året, senast ett år efter föreningens första årsmöte
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
@@ -32,6 +40,7 @@ bidrag:
   anteckning: null
   id: kumla-startbidrag
 - namn: Grundbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -41,20 +50,121 @@ bidrag:
     typ: lopande
     datum: []
   krav:
+  - Föreningen ska utgå från och ha sin bas i Kumla kommun och verksamheten ska gynna kommunens invånare
+  - Föreningen ska vara ideell, demokratiskt uppbyggd, ha stadgar och beslutad medlemsavgift
+  - Föreningen ska ha organisationsnummer och konto i föreningens namn samt vara religiöst och politiskt obunden
   - Årsmötesprotokoll
   - Verksamhetsberättelse
   - Revisionsberättelse
   - Ekonomisk berättelse
   belopp: 2 000 kr
-  sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks löpande under året
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: kumla-grundbidrag
+- namn: Aktivitetsbidrag för barn, ungdomar och personer med funktionsvariationer
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, funktionsratt, ovrig]
+  malgrupp: Föreningar med ordinarie gruppverksamhet för barn och unga 4–25 år eller personer med funktionsvariation
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
+  - Sammankomsten ska vara planerad, öppen för kommunens invånare, pågå minst 45 minuter och ha gemensam samling och avslutning
+  - Minst tre bidragsberättigade deltagare utöver ledare ska delta och ledaren ska vara minst 13 år samt medlem i föreningen
+  - Deltagare ska vara 4–25 år; för deltagare med funktionsvariation finns ingen övre åldersgräns
+  - Närvarokort med deltagares och ledares namn och personnummer ska sparas i minst tre år
+  belopp: 40 kronor per heltimme för 3–10 deltagare, 60 kronor för 11–20 och 80 kronor för 21–30; högst tre timmar per aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Aktiviteter 1 januari–30 juni söks senast 25 augusti; aktiviteter 1 juli–31 december senast 25 februari året efter
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: kumla-aktivitetsbidrag-barn-unga-funktionsvariation
+- namn: Aktivitetsbidrag för seniorer
+  foreningstyp: [idrott, kultur, friluft, social, annat]
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  malgrupp: Föreningar med ordinarie gruppverksamhet för personer över 65 år
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
+  - Sammankomsten ska vara planerad, öppen för kommunens invånare och främja trygghet, social gemenskap eller hälsa
+  - Sammankomsten ska pågå minst 45 minuter, ledas av en medlem i föreningen och ha minst tre bidragsberättigade deltagare utöver ledare
+  - Deltagarna ska vara över 65 år och folkbokförda i Kumla kommun
+  - Närvarokort med deltagares och ledares namn och personnummer ska sparas i minst tre år
+  belopp: 20 kronor per heltimme för 3–10 deltagare, 40 kronor för 11–20 och 60 kronor för 21–30; högst tre timmar per aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Aktiviteter 1 januari–30 juni söks senast 25 augusti; aktiviteter 1 juli–31 december senast 25 februari året efter
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: kumla-aktivitetsbidrag-seniorer
+- namn: Evenemangsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som genomför ett offentligt och publikt evenemang i Kumla kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
+  - Evenemanget ska vara öppet och tillgängligt för allmänheten samt äga rum i Kumla kommun
+  - Evenemanget ska hålla hög kvalitet, ge tillgång till kultur-, fritids- eller idrottsutbud och främja demokrati, jämställdhet, förståelse och tolerans
+  - Ansökan ska innehålla en realistisk kostnadskalkyl och evenemanget ska redovisas skriftligt och ekonomiskt senast sex veckor efter slutdatum
+  belopp: Förlustgaranti på högst 15 procent av evenemangets nettokostnad, maximalt 25 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks löpande under året; beslut meddelas senast sex veckor före evenemangets start
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: kumla-evenemangsbidrag
+- namn: Utbildningsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som kompetensutvecklar ledare eller andra aktiva för att höja verksamhetens kvalitet
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
+  - Utbildningen ska pågå minst två timmar exklusive pauser och genomföras inom Norden
+  - Utbildningen ska förbättra föreningens verksamhet och höja kvaliteten på kultur-, idrotts- eller fritidsverksamhet för kommunens invånare
+  - Utbildningen ska ha begränsade möjligheter till annan finansiering och ansökan ska innehålla kostnadskalkyl
+  - Skriftlig rapport och ekonomisk redovisning ska lämnas senast sex veckor efter utbildningens slut
+  belopp: 100 procent av kurskostnaden, högst 5 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks löpande under året
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: kumla-utbildningsbidrag
 - namn: Lokal- och anläggningsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -66,20 +176,26 @@ bidrag:
     - 02-25
     - 08-25
   krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
+  - Lokalen eller anläggningen ska ligga i Kumla kommun, behövas för ordinarie verksamhet och nyttjas kontinuerligt
+  - Lokalbehovet ska inte kunna tillgodoses av kommunen på annat sätt
   - Hyresavtal eller hyresavier för perioden (om föreningen hyr lokal)
   - Specifikation av värmekostnader för perioden, om tillämpligt
   - Specifikation av el-, VA- och sophämtningskostnader för perioden, om tillämpligt
   - Specifikation av lokalens eller anläggningens totala driftkostnader och hyresintäkter (om föreningen äger lokalen)
   belopp: 60 procent av lokalkostnaden (exklusive hyresintäkter), högst 35 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
   id: kumla-lokal-och-anlaggningsbidrag
 - namn: Projektbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -91,11 +207,16 @@ bidrag:
     - 02-25
     - 08-25
   krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
+  - Projektet ska vara tidsbegränsat, ha ett definierat mål och främja utveckling eller nytänkande i föreningens verksamhet
+  - Projektet ska huvudsakligen genomföras i Kumla kommun och ha tydlig lokal förankring
   - Projektplan
   - Kostnadskalkyl
   belopp: 100 procent av projektkostnaden, högst 25 000 kr per projekt
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
@@ -103,6 +224,7 @@ bidrag:
   anteckning: null
   id: kumla-projektbidrag
 - namn: Bidrag till ridskoleverksamhet
+  foreningstyp: [idrott, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar med ridskoleverksamhet
@@ -112,14 +234,17 @@ bidrag:
     - 02-25
     - 08-25
   krav:
+  - Föreningen ska ha beviljats startbidrag eller grundbidrag under de senaste 12 månaderna
   - Sammankomsten ska vara planerad i förväg och pågå minst 45 minuter
   - Ledas av minst en ledare, fyllt 13 år och medlem i föreningen
   - Minst tre bidragsberättigade deltagare utöver ledare
   - Deltagare 4-25 år eller med funktionsvariation, folkbokförda i Kumla kommun
   - Redovisning av antal ridlektioner bifogas ansökan i efterhand
   belopp: 100 kr per bidragsberättigad deltagare och genomförd sammankomst, för max 10 deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
+  kalla_url: https://www.kumla.se/download/18.47b5e2cd19395401797a985/1734600278180/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20%28reviderad%202024-12-12%29%201.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
@@ -127,6 +252,7 @@ bidrag:
   anteckning: null
   id: kumla-bidrag-till-ridskoleverksamhet
 - namn: Bidrag för sociala aktiviteter
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   kategori:
   - social
   - pensionar
@@ -136,17 +262,48 @@ bidrag:
     typ: fasta
     datum:
     - 02-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Prövoperiod 1 juli 2026–25 februari 2027.
+  krav:
+  - Föreningen ska utgå från och ha sin bas i Kumla kommun och verksamheten ska gynna kommunens invånare
+  - Föreningen ska vara ideell och demokratiskt uppbyggd samt ha stadgar och beslutad medlemsavgift
+  - Föreningen ska klassificeras som idrotts-, kultur- eller fritidsförening enligt kommunens regler
+  - Föreningen ska vara religiöst och politiskt obunden och bedriva verksamhet där amatörer och allmänhet kan delta
+  belopp: Individuellt prövat bidrag; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Prövoperioden löper från 1 juli 2026 till och med 25 februari 2027
+  kalla_url: https://etjanst.kumla.se/oversikt/overview/670
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: kumla-bidrag-for-sociala-aktiviteter
+- namn: Bidrag till föreningars jubileumsfirande
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar med huvudsakligt verksamhetsområde i Kumla kommun som firar ett bidragsberättigat jubileum
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningens huvudsakliga verksamhetsområde ska vara Kumla kommun eller en del av kommunen
+  - Föreningen ska fira 25, 75 eller 125 år eller ett jämnt tiotal år från och med 30 år; samma slags jubileumsstöd kan ges med minst 15 års mellanrum
+  - Ansökan ska lämnas senast sex månader före jubileumsfirandet
+  - Stöd till offentlig jubileumsaktivitet förutsätter att aktiviteten är fritt tillgänglig för allmänheten och äger rum i kommunen
+  - Ansökan om jubileumsaktivitet ska innehålla preliminärt program och kostnadskalkyl
+  belopp: Individuellt prövat bidrag till jubileumsskrift, offentlig jubileumsaktivitet eller utmärkelser; något fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast sex månader före jubileumsfirandet
+  kalla_url: https://www.kumla.se/download/18.f36d14315437bafd79570e/1463476257189/Jubileumsfirande_foreningar.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: kumla-jubileumsbidrag
 - namn: Sydnärkebidrag
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   - social
@@ -163,24 +320,27 @@ bidrag:
   - Föreningen ska ha egen ekonomi som innefattar medlemsavgifter
   - Föreningen ska ha organisationsnummer och bank- eller plusgiro
   - Föreningen är skyldig att uppge om bidrag erhålls från andra bidragsgivare
+  - Ansökan ska innehålla föregående års verksamhetsberättelse och ekonomiska redovisning, innevarande års årsmötesprotokoll, medlemsregister och vid behov stadgar
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  belopp_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: De fyra Sydnärkekommunernas gemensamma anslag fördelas mellan behöriga föreningar; totalsumman publiceras inte i riktlinjen
+  sen_ansokan: Senast 1 maj året före utbetalningsåret för verksamhet som genomförts föregående år
+  kalla_url: https://www.kumla.se/download/18.f36d14315437bafd79570b/1463476256835/Bidragsregler_sydn%C3%A4rkef%C3%B6reningar.pdf
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
   id: kumla-sydnarkebidrag
 forutsattningar:
 - id: kumla-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: e-srv/e-tjänst
+  vad: Behörig företrädare och föreningsuppgifter
+  beskrivning: Ansökan skickas av föreningens ordförande, kassör eller firmatecknare, som ska vara registrerad medlem i föreningen.
+  system: Kumla kommuns e-tjänst
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
   kalla_url: https://www.kumla.se/uppleva-och-gora/foreningar/bidrag.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
