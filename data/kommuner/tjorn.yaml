@@ -5,15 +5,24 @@ befolkning: 15966
 forvaltning: Kultur- och fritidsverksamheten
 ansokningssystem:
   namn: Rbok
-  url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
-kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
-verifierad: '2026-07-31'
+  url: https://tjorn.rbok.se/ansok
+kalla_url: &huvud https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.tjorn.se/download/18.69ac471819bbeca05c680229/1769699263529/F%C3%B6reningsbidragsregler%20f%C3%B6r%20Tj%C3%B6rns%20kommun.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Aktivitetsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  - pensionar
+  - funktionsratt
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med aktiviteter
   deadlines:
     typ: fasta
@@ -29,42 +38,51 @@ bidrag:
   - 'Obligatoriskt underlag i ansökan: uppgifter om antal aktiviteter, deltagare och ledare'
   belopp: 'Deltagarstöd: 50 % av Riksidrottsförbundets (RF) beslutade LOK-stödsbelopp. Ledarstöd: 10 kr per ledarledd gruppaktivitet,
     plus 5 kr per extra ledare vid två eller fler ledare. Tillägg för deltagare med funktionsnedsättning (minst en deltagare
-    per aktivitet, extra ledare krävs): 75 kr per deltagare och 75 kr per extra ledare.'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+    per aktivitet, extra ledare krävs): 75 kr per deltagare och 75 kr per extra ledare. Pensionärsförening får 5 kr per Tjörn-deltagare
+    och ledare 50 kr i egen regi eller 25 kr med studieförbund; godkänd funktionsrättsorganisation får 150 kr per Tjörn-medlem och år.'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari.
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kriterier och sökperioder publiceras i Rbok. Ej angivet i källan
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: tjorn-aktivitetsbidrag
 - namn: Ledarutbildningsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar som utbildar ledare
   deadlines:
     typ: fasta
     datum:
-    - 11-01
+    - 10-01
   krav:
   - Ansökan ska göras samma år som utbildningen genomförs
   - Bidrag beslutas på delegation av avdelningschefen för fritid
   - 'Obligatoriskt underlag: kortfattad beskrivning av utbildningen och dess syfte, antal deltagare, kurskostnad per deltagare;
     underlag på genomförd utbildning bifogas ansökan'
   belopp: Max 75 % av kurskostnaden, högst 5 000 kronor per förening och år.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den levande Rbok-omgången anger 1 oktober 2026; den reviderade normen anger 1 november för kommande omgångar.
+  kalla_url: https://tjorn.rbok.se/ansok
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kriterier och sökperioder publiceras i Rbok. Ej angivet i källan
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: tjorn-ledarutbildningsbidrag
 - namn: Kulturverksamhetsbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur]
   malgrupp: Kulturföreningar
   deadlines:
     typ: fasta
@@ -77,17 +95,20 @@ bidrag:
   - 'Obligatoriskt underlag: verksamhetsplan samt budget för det år bidraget avser'
   belopp: Inget fast belopp. Fördelningen baseras på i vilken utsträckning kulturföreningens verksamhet överensstämmer med
     målen i Kulturpolitisk strategi för Tjörns kommun samt nämndens budget för året.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april för kommande års löpande verksamhet.
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kriterier och sökperioder publiceras i Rbok. Ej angivet i källan
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: tjorn-kulturverksamhetsbidrag
 - namn: Bygdegårdsbidrag
-  kategori:
-  - ovrig
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd, annat]
   malgrupp: Bygdegårdsföreningar
   deadlines:
     typ: fasta
@@ -96,20 +117,25 @@ bidrag:
   krav:
   - Kan endast sökas av bygdegårdsföreningar med egna lokaler
   - 'Obligatoriskt underlag: verksamhetsplan'
+  - Föreningen ska uppfylla kommunens grundvillkor och lämna efterfrågade årsmötes- och ekonomihandlingar
   belopp: 5 000 kronor per år.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 mars; komplettering senast 1 maj.
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kompletteringar till ansökan ska vara inne senast 1 maj.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: tjorn-bygdegardsbidrag
 - namn: Driftsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar med driftkostnader
   deadlines:
     typ: fasta
@@ -124,19 +150,23 @@ bidrag:
   - 'Obligatoriskt underlag: redovisning/verifikat av verksamhetens/anläggningens faktiska drift- och underhållskostnader
     under föregående år'
   belopp: Inget fast belopp; bidraget beräknas utifrån redovisade faktiska kostnader.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 mars; komplettering senast 1 maj.
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kompletteringar till ansökan ska vara inne senast 1 maj.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: tjorn-driftsbidrag
 - namn: Projektbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar med projekt
   deadlines:
     typ: fasta
@@ -155,53 +185,92 @@ bidrag:
     och redovisning); vid investering även motivering till investeringen, kostnadskalkyl, finansieringsplan och offerter från
     minst två leverantörer om planerad investering är minst 50 000 kronor'
   belopp: Inget fast belopp; kräver alltid viss självfinansiering. Beslut fattas av kultur- och fritidsnämnden.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 februari, 1 april eller 1 september och alltid före projektstart.
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kriterier och sökperioder publiceras i Rbok. Ej angivet i källan
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: tjorn-projektbidrag
-- namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med arrangemang
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-01
-    - 04-01
-    - 09-01
+- id: tjorn-konstgrasbidrag-2026
+  namn: Bidrag för konstgräs 2026
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Idrottsföreningar med befintlig föreningsdriven konstgräsanläggning
+  deadlines: {typ: fasta, datum: [03-25]}
   krav:
-  - Kan sökas av föreningar, organisationer och enskilda individer, även utan huvudsaklig verksamhet i Tjörns kommun, under
-    förutsättning att sökande arbetar för Tjörns invånares allmänna intresse och har särskild anknytning till Tjörns geografiska
-    område
-  - Arrangemanget ska äga rum i Tjörns kommun, vara offentligt och annonseras för allmänheten med tydlig angivelse att det
-    genomförs med stöd av Tjörns kommun
-  - Arrangemanget ska präglas av öppenhet och kunna granskas av allmänheten utan risk för bristande tilltro
-  - Sökande ska ställa sig bakom kommunens värdegrund för föreningsbidrag (avsnitt 2.2)
-  - 'Obligatoriskt underlag: utförlig beskrivning av arrangemanget (inklusive syfte och huvudsaklig målgrupp), ekonomisk kalkyl
-    (kostnader och intäkter), information om övrig finansiering, marknadsföringsplan'
-  belopp: Inget fast belopp angivet; beslut fattas av kultur- och fritidsnämnden.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
+  - Sökanden ska vara en idrottsförening med en befintlig föreningsdriven konstgräsanläggning på Tjörn
+  - Stödet ska användas för renovering av konstgräsplanen
+  - Ansökan ska lämnas i Rbok inom 2026 års omgång och kostnader och utfall ska kunna styrkas
+  - Föreningen ska uppfylla kommunens föreningsformalia och grundvillkor
+  belopp: Kommunen publicerar ingen generell individuell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Rbok-omgången 2026 var öppen 9 januari–25 mars.
+  kalla_url: https://tjorn.rbok.se/ansok
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kriterier och sökperioder publiceras i Rbok. Ej angivet i källan
-  id: tjorn-arrangemangsbidrag
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: tjorn-lekplatsbidrag-2026
+  namn: Lekplatsbidrag 2026
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägföreningar, vägsamfälligheter och samfälligheter som rustar upp en befintlig lekplats
+  deadlines: {typ: fasta, datum: [06-15]}
+  krav:
+  - Sökanden ska vara en registrerad vägförening, vägsamfällighet eller samfällighet verksam på Tjörn med styrelse, stadgar, konto och utan kommunskuld
+  - Ansökan ska avse reparation, nya lekredskap eller ny utformning av en befintlig lekplats och innehålla anläggnings- eller övertagandebeslut
+  - Projektbeskrivning och minst två offerter ska lämnas och Konsumentverkets säkerhetsregler ska följas
+  - Utbetalning kräver genomfört arbete, godkänd besiktning och betalda fakturor; ideellt arbete ersätts inte
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 1 000 000 kr för 2026; stödet täcker faktiska kostnader men inte ideellt arbete
+  sen_ansokan: Ansökan senast 15 juni 2026 via e-post eller brev.
+  kalla_url: https://www.tjorn.se/nyheter/2026-05-07-ansok-om-bidrag-for-att-rusta-upp-lekplatser
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: tjorn-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
+  vad: Registrering och årlig uppdatering
+  beskrivning: Föreningen ska vara registrerad och uppdatera grunduppgifterna minst en gång per år samt ha styrelse med ordförande,
+    sekreterare och kassör, stadgar, konto, riks- eller distriktsanslutning där sådan finns och inga skulder hos Kronofogden.
   system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Grunduppgifterna ska uppdateras minst en gång per år.
+  giltighet: 12 månader
   ordning: 1
-  kalla_url: https://www.tjorn.se/kultur-fritid-och-turism/stod-bidrag-och-stipendier
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: tjorn-grundvillkor
+  vad: Kommunens grundvillkor för föreningsstöd
+  beskrivning: Föreningen ska bedriva huvudsaklig och löpande verksamhet på Tjörn, vara ideell, öppen och demokratisk samt religiöst
+    och politiskt obunden. Rena stöd- och uthyrningsföreningar är inte stödberättigade och verksamheten ska ha bedrivits minst fyra månader.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Minst fyra månaders kontinuerlig verksamhet.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: tjorn-ansokningsunderlag
+  vad: Årshandlingar och intyg vid ansökan
+  beskrivning: Vid varje ansökan ska föreningen intyga kriterierna och ladda upp årsmötesprotokoll, resultat- och balansräkning samt revisionsberättelse.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Lämnas med ansökan.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
