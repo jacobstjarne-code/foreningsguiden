@@ -6,158 +6,203 @@ forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
   namn: ACTOR Smartbook
   url: https://skara.actorsmartbook.se/
-kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-verifierad: '2026-08-01'
+kalla_url: https://www.skara.se/upplevaochgora/foreningsliv/foreningsbidragstodochstipendier/foreningsbidrag.2286.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nystartade bidragsgodkända föreningar
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
+- id: skara-startbidrag
+  namn: Startbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nystartade ideella föreningar som vill bli bidragsgodkända
+  deadlines: { typ: fasta, datum: [11-15] }
+  krav:
+  - Föreningen ska vara nystartad och registreras i föreningsportalen ACTOR
+  - Stadgar och protokoll från föreningens bildande ska bifogas
+  - Föreningen ska ha bankkonto, bankgiro eller plusgiro knutet till föreningen
+  - Verksamhetsplan och budget ska bifogas
+  - Registreringsbevis med organisationsnummer från Skatteverket ska bifogas
   belopp: 5 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Kan sökas när som helst under året. Kommunens regler anger också 15 november i portalens ansökningshantering.
-  id: skara-startbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  malgrupp: Idrotts- och ungdomsföreningar med barn- och ungdomsverksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
-  belopp: 27 kr per sammankomst och 2 kr per deltagare
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget kan registreras under året men den publicerade portaltiden är senast 15 november
+  kalla_url: &huvud https://www.skara.se/upplevaochgora/foreningsliv/foreningsbidragstodochstipendier/foreningsbidrag.2286.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: skara-lokalt-aktivitetsstod
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Aktivitetsbidrag
-  kategori:
-  - kultur
-  - ovrig
+  senast_verifierad: '2026-08-18'
+- id: skara-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  foreningstyp: [idrott, ungdom]
+  kategori: [idrott]
+  malgrupp: Godkända idrotts- och ungdomsföreningar med ledarledd verksamhet för barn och unga
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
+  krav:
+  - Deltagarna ska vara 6–20 år; för registrerad verksamhet för personer med funktionsnedsättning finns ingen övre åldersgräns
+  - Sammankomsten ska vara planerad, ledarledd, pågå minst 30 minuter och ha minst tre deltagare utöver ledaren
+  - Närvarokort ska bifogas om föreningen inte söker statligt LOK-stöd; RF-anslutna föreningar ska ge kommunen åtkomst till aktuell LOK-stödsfil
+  - En deltagare får räknas en gång per dag och stödet minskas med 25 % för föreningar som använder kommunens anläggningar
+  - Fester, läxläsning, matlagning, högtidsfirande, trossamfunds- och skolverksamhet samt studiecirklar och SISU-timmar är inte stödgrundande
+  belopp: 27 kr per stödberättigad sammankomst och 2 kr per deltagare, för 3–30 deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 februari för höstens verksamhet och 25 augusti för vårens verksamhet
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Den nedre åldersgränsen sänktes från 7 till 6 år genom KFN 2025-12-18 § 132.
+  senast_verifierad: '2026-08-18'
+- id: skara-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  foreningstyp: [kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [kultur, social, ovrig]
   malgrupp: Kultur- och fritidsföreningar samt hembygds- och bygdegårdsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  deadlines: { typ: fasta, datum: [04-15] }
+  krav:
+  - Föreningen ska vara bidragsgodkänd och uppfylla kommunens allmänna villkor
+  - Stödet beräknas på föregående års utåtriktade aktiviteter och genomfört årsmöte
+  - Årsredovisning, årsmötesprotokoll, verksamhetsberättelse och revisionsberättelse ska bifogas
+  belopp: 500 kr per utåtriktad aktivitet för högst åtta aktiviteter samt 500 kr för årsmöte, högst 4 500 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 april varje år
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: skara-aktivitetsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Samverkansavtal
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som driver och äger anläggningar eller har långsiktiga externa hyresavtal
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: Högst 65 procent av godkända driftskostnader
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Avtal kan tecknas för högst tre år.
-  id: skara-samverkansavtal
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Driftsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsgodkända föreningar med godkända driftskostnader för lokal eller anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  senast_verifierad: '2026-08-18'
+- id: skara-samverkansavtal
+  namn: Samverkansavtal
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som äger eller driver anläggning eller har ett långsiktigt externt hyresavtal
+  deadlines: { typ: fasta, datum: [04-15] }
+  krav:
+  - Föreningen ska äga eller driva anläggningen eller ha ett långsiktigt externt hyresavtal
+  - Avtalet grundas på föreningens verksamhet, en underhållsplan för kommande tre år och godkända driftskostnader
+  - Årsmötesprotokoll, verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse ska lämnas varje år under avtalsperioden
+  - Godkända kostnader är hyra, el, vatten, avlopp, renhållning, bränsle, arrende och fastighets- eller lokalförsäkring
+  belopp: Högst 65 % av godkända driftskostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 april; avtal kan tecknas för högst tre år
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Om budgetramen överskrids fördelas stödet proportionellt inom beslutad budget.
+  senast_verifierad: '2026-08-18'
+- id: skara-driftsbidrag
+  namn: Driftsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som äger eller driver anläggning eller har ett långsiktigt externt hyresavtal
+  deadlines: { typ: fasta, datum: [04-15] }
+  krav:
+  - Föreningen ska äga eller driva anläggningen eller ha ett långsiktigt externt hyresavtal
+  - Stödet söks årligen och grundas på föreningens verksamhet och redovisade driftskostnader
+  - Hyra av kommunala anläggningar är inte stödberättigad
+  - Godkända kostnader är hyra, el, vatten, avlopp, renhållning, bränsle, arrende och fastighets- eller lokalförsäkring
+  belopp: Högst 65 % av godkända driftskostnader; för hembygds- och bygdegårdsföreningar högst 10 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 april varje år
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Om budgetramen överskrids fördelas stödet proportionellt inom beslutad budget.
+  senast_verifierad: '2026-08-18'
+- id: skara-utvecklingsmedel
+  namn: Utvecklingsmedel
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Bidragsgodkända föreningar med en särskild aktivitet, utvecklingsinsats eller ett arrangemang
+  deadlines: { typ: fasta, datum: [11-15] }
+  krav:
+  - Insatsen ska vara en särskild aktivitet, föreningsutveckling eller ett arrangemang som inte ryms i kommunens andra stödformer
+  - Ansökan ska beskriva förväntat resultat och hur stödet ska användas samt innehålla budget med intäkter och kostnader
+  - Årsmötesprotokoll, verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse ska bifogas
+  - Vid inköp av tjänster ska tre offerter redovisas
+  - Föreningen ska kunna följa upp användningen och kan bli återbetalningsskyldig om stödet används för annat ändamål
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 november varje år
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: skara-driftsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Utvecklingsmedel
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsgodkända föreningar med utvecklingsinsatser
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: null
-  id: skara-utvecklingsmedel
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Anslag till studieförbund och SISU
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund och SISU Idrottsutbildarna
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/regler/reglerforforeningsstod.2242.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Stödformen finns i kommunens regler; öppna sidan anger inte ett entydigt ansökningsdatum. Ej angivet i källan
-  id: skara-anslag-studieforbund-sisu
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
+- id: skara-anslag-studieforbund-sisu
+  namn: Anslag till studieförbund och SISU
+  foreningstyp: [kultur, social, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Godkända studieförbund och SISU Idrottsutbildarna med verksamhet i Skara
+  deadlines: { typ: fasta, datum: [08-31] }
+  krav:
+  - Studieförbundet ska vara godkänt och bedriva verksamhet som uppfyller statens syften med stödet till folkbildningen
+  - Ansökan ska redovisa unika deltagare, studietimmar och deltagare med funktionsnedsättning i studiecirklar och annan folkbildning
+  - Kulturverksamheten ska redovisas som antal kulturarrangemang
+  - SISU-stöd beslutas en gång per år efter redovisning av föregående års verksamhet
+  belopp: Fördelas enligt Västergötlands Bildningsförbunds rekommendation; 70 % efter studiecirklar, 10 % efter annan folkbildning och 20 % efter kulturarrangemang
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 augusti varje år via ACTOR
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nya studieförbund fasas in efter genomförd verksamhet med 50 % första utbetalningsåret och 100 % det andra.
+  senast_verifierad: '2026-08-18'
+- id: skara-allmanna-samlingslokaler
+  namn: Kommunalt bidrag till allmänna samlingslokaler
+  foreningstyp: [hembygd, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Föreningar som driver allmänna samlingslokaler där ett motsvarande kommunalt alternativ saknas
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Föreningen ska vara registrerad i kommunens föreningsregister och årligen lämna verksamhetsberättelse, årsmötesprotokoll, resultat- och balansräkning samt revisionsberättelse
+  - Lokalen ska ligga i Skara kommun, ägas eller disponeras genom ett långsiktigt hyresavtal och uppfylla myndighetskrav
+  - Lokalen ska vara en varaktigt behövd allmän samlingslokal som hyrs ut till skäliga villkor till aktörer med demokratisk värdegrund
+  - Projektet får inte vara påbörjat och ansökan ska innehålla projektbeskrivning, detaljerad kostnadskalkyl, finansieringsplan och relevanta föreningshandlingar
+  - Efter kommunens beslut om medfinansiering ska föreningen styrka att ansökan har lämnats till Boverket innan utbetalning
+  belopp: Individuellt prövat stöd utifrån projektets finansiering och kommunens ekonomiska förutsättningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ej tillämpligt (löpande); stödet är inte avsett för omedelbara eller akuta projekt
+  kalla_url: https://www.skara.se/kommunochpolitik/styrandedokument/riktlinjer/riktlinjeforkommunaltbidragtillallmannasamlingslokaler.3530.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning förutsätter även godkänd ekonomisk redovisning och en samordnad betalningsplan.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: skara-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Föreningsportalen
+  vad: Registrering och godkännande i ACTOR
+  beskrivning: Föreningen ska ha sin huvudsakliga verksamhet och hemvist i Skara, ha minst tio regelbundet aktiva betalande medlemmar, styrelse, stadgar och medlemsförteckning samt vara demokratiskt uppbyggd och öppen. Vid ansökan ska undertecknade årshandlingar lämnas och minst en föreningsperson ha mobilt BankID.
+  system: ACTOR Smartbook
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ej angivet i källan
   giltighet: null
   ordning: 1
   kalla_url: https://www.skara.se/upplevaochgora/foreningsliv/foreningsbidragstodochstipendier/foreningsbidrag.2286.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
