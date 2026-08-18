@@ -36,7 +36,8 @@ import { leggTillBevakatBidrag } from './foreningsprofil';
 
 const BEVAKADE_KEY = 'foreningsguiden:bevakade-kommuner:v1';
 
-function bevakadNyckel(kommunSlug: string, bidragId: string | undefined): string {
+function bevakadNyckel(kommunSlug: string, bidragId: string | undefined, nationelltStodId?: string): string {
+  if (nationelltStodId) return `nationell:${nationelltStodId}`;
   return bidragId ? `${kommunSlug}:${bidragId}` : kommunSlug;
 }
 
@@ -50,10 +51,10 @@ function hamtaBevakade(): Set<string> {
   }
 }
 
-function markeraBevakad(kommunSlug: string, bidragId: string | undefined): void {
+function markeraBevakad(kommunSlug: string, bidragId: string | undefined, nationelltStodId?: string): void {
   try {
     const bevakade = hamtaBevakade();
-    bevakade.add(bevakadNyckel(kommunSlug, bidragId));
+    bevakade.add(bevakadNyckel(kommunSlug, bidragId, nationelltStodId));
     localStorage.setItem(BEVAKADE_KEY, JSON.stringify([...bevakade]));
   } catch {
     // localStorage kan saknas/vara blockerad — kvittot i UI:t syns ändå
@@ -89,6 +90,10 @@ export function initBevakaWidgets(): void {
   const bevakade = hamtaBevakade();
 
   document.querySelectorAll<HTMLElement>('[data-bevaka-cell]').forEach((cell) => {
+    // Flera serverkomponenter kan finnas på samma sida. Varje cell ska
+    // bara få en submit-/click-lyssnare även om modulen initieras igen.
+    if (cell.dataset.bevakaInitierad) return;
+    cell.dataset.bevakaInitierad = '1';
     // P3.1 (Jacob 2026-08-05): .bevaka-rad-knapp är nu en riktig <a
     // href="?kommun=slug#email-signup">, inte en <button type="button"> —
     // progressiv förbättring. Utan JS (eller om den här lyssnaren av
@@ -103,22 +108,24 @@ export function initBevakaWidgets(): void {
     // P3.1b: bara satt på deadlines/index.astro:s rader — ogsatt (undefined)
     // på registrera/index.astro:s kommun-breda widget, oförändrat läge där.
     const bidragId = cell.dataset.bidragId || undefined;
+    const nationelltStodId = cell.dataset.nationelltStodId || undefined;
+    const bevakningsetikett = nationelltStodId ? (cell.dataset.stodNamn ?? 'nationellt stöd') : kommunNamn;
 
     // 1f — redan bevakad (den här webbläsaren har skickat in en begäran
     // för just DET HÄR (kommun[, bidrag])-paret förut): visa det
     // tillståndet direkt, ingen knapp.
-    if (kommunSlug && bevakade.has(bevakadNyckel(kommunSlug, bidragId))) {
+    if ((kommunSlug || nationelltStodId) && bevakade.has(bevakadNyckel(kommunSlug, bidragId, nationelltStodId))) {
       visaBevakasBadge(cell);
       return;
     }
 
     knapp?.addEventListener('click', (event) => {
       event.preventDefault();
-      const form = byggBevakaForm(kommunNamn);
+      const form = byggBevakaForm(bevakningsetikett);
       cell.replaceChildren(form);
       // M3 (MÄTNING, Jacob 2026-08-11): formuläret blev synligt — svarar
       // "var i flödet folk faktiskt lämnar mejladress".
-      trackEvent('bevakning_visad', { kommun: kommunSlug });
+      trackEvent('bevakning_visad', { kommun: kommunSlug || 'nationell' });
 
       const felText = form.querySelector<HTMLElement>('[data-bevaka-fel]');
 
@@ -126,22 +133,23 @@ export function initBevakaWidgets(): void {
         event.preventDefault();
         felText?.setAttribute('hidden', '');
         const data = new FormData(form);
-        data.set('kommun', kommunSlug);
+        if (kommunSlug) data.set('kommun', kommunSlug);
         if (bidragId) data.set('bidrag', bidragId);
+        if (nationelltStodId) data.set('nationelltStod', nationelltStodId);
 
         try {
           const res = await fetch('/api/prenumerera-json', { method: 'POST', body: data });
           const json = await res.json();
           if (!res.ok || !json.ok) throw new Error('svar ej ok');
 
-          if (kommunSlug) markeraBevakad(kommunSlug, bidragId);
+          if (kommunSlug || nationelltStodId) markeraBevakad(kommunSlug, bidragId, nationelltStodId);
           // E2 "lager ett" (Jacob 2026-08-11): bara BIDRAG-scopade
           // bevakningar (bidragId satt) räknas som "sökt/bevakat DET HÄR
           // bidraget" — en kommun-bred bevakning (giltighetskontrollen,
           // eller denna widget utan bidragId på registrera/index.astro)
           // säger inget om ETT specifikt bidrag.
           if (kommunSlug && bidragId) leggTillBevakatBidrag(kommunSlug, bidragId);
-          trackEvent('bevakning_skickad', { kommun: kommunSlug });
+          trackEvent('bevakning_skickad', { kommun: kommunSlug || 'nationell' });
           const kvitto = document.createElement('p');
           kvitto.className = 'bevaka-rad-kvitto';
           kvitto.textContent = json.alreadyConfirmed ? BEVAKNING.kvittoRubrik : BEVAKNING.kvittoText;

@@ -28,16 +28,74 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { loadKommuner, formatDate, nextOccurrenceISO, daysUntil, todayISO } from '../../../lib/kommuner';
+import { loadKommuner, formatDate, formatRecurringDate, nextOccurrenceISO, daysUntil, todayISO } from '../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../lib/kommuner';
+import { loadNationellaStod } from '../../../lib/nationellaStod';
+import type { NationelltStod } from '../../../lib/nationellaStod';
 import { getAllConfirmedSubscribers, wasReminderSent, markReminderSent } from '../../../lib/subscribers';
-import { sendPaminnelse28, sendPaminnelseSista, siteUrl } from '../../../lib/mejl';
+import { sendPaminnelse28, sendPaminnelseSista, sendNationellPaminnelse28, sendNationellPaminnelseSista, siteUrl } from '../../../lib/mejl';
 
 interface Raknare {
   sent28: number;
   sent3: number;
   skipped: number;
   errors: string[];
+}
+
+async function behandlaNationelltStod(email: string, stod: NationelltStod, today: string, raknare: Raknare): Promise<void> {
+  for (const mmdd of stod.deadlines.datum) {
+    const occurrence = nextOccurrenceISO(mmdd, today);
+    const days = daysUntil(occurrence, today);
+    const typ: '28' | '3' | null = days === 28 ? '28' : days === 3 ? '3' : null;
+    if (!typ) continue;
+
+    // Egen nyckelrymd; kan aldrig krocka med ett kommunalt bidrag-id.
+    const reminderId = `nationell:${stod.id}`;
+    if (await wasReminderSent(typ, reminderId, occurrence, email)) {
+      raknare.skipped++;
+      continue;
+    }
+
+    try {
+      if (typ === '28') {
+        // U2.2 (MEJL 7): {period}/{slutdatum} beräknas ur samma post,
+        // inte hårdkodat. Antagande som gäller för LOK-stödets data:
+        // deadlines.perioder och sanktionstrappa.steg[i].perioder är
+        // parvis ordnade i samma index-ordning som deadlines.datum
+        // (schemat kräver bara att varje periods datum FINNS i
+        // deadlines.datum, inte index-parkoppling) — håller för den
+        // här posten, inte ett generellt kontrakt.
+        const periodIndex = stod.deadlines.datum.indexOf(mmdd);
+        const nationellPeriod = stod.deadlines.perioder.find((p) => p.datum === mmdd);
+        const avslagSteg = stod.sanktionstrappa.steg.find((s) => s.pafoljd === 'avslag');
+        const avslagPeriod = avslagSteg?.perioder[periodIndex];
+        if (!nationellPeriod || !avslagPeriod) {
+          raknare.errors.push(`${email}/nationell:${stod.id}/28: kunde inte para ihop period/sanktionstrappa för ${mmdd}`);
+          continue;
+        }
+        const occurrenceAr = Number(occurrence.slice(0, 4));
+        const periodAr = nationellPeriod.avser.ar_relation === 'foregaende_ar' ? occurrenceAr - 1 : occurrenceAr;
+        const period = `${formatRecurringDate(nationellPeriod.avser.fran)}–${formatRecurringDate(nationellPeriod.avser.till)} ${periodAr}`;
+        await sendNationellPaminnelse28(email, {
+          datum: formatDate(occurrence),
+          period,
+          slutdatum: formatRecurringDate(avslagPeriod.fran),
+          lank: `${siteUrl()}/nationella-stod/${stod.id}/`,
+        });
+        raknare.sent28++;
+      } else {
+        await sendNationellPaminnelseSista(email, {
+          bidragsnamn: stod.namn,
+          datum: formatDate(occurrence),
+          bidragLank: `${siteUrl()}/nationella-stod/${stod.id}/`,
+        });
+        raknare.sent3++;
+      }
+      await markReminderSent(typ, reminderId, occurrence, email);
+    } catch (e) {
+      raknare.errors.push(`${email}/${reminderId}/${typ}: ${(e as Error).message}`);
+    }
+  }
 }
 
 async function behandlaBidrag(email: string, kommun: Kommun, bidrag: Bidrag, today: string, raknare: Raknare): Promise<void> {
@@ -94,6 +152,7 @@ export const GET: APIRoute = async ({ request, url }) => {
   const today = url.searchParams.get('today') || todayISO();
   const subscribers = await getAllConfirmedSubscribers();
   const kommuner = loadKommuner();
+  const nationellaStod = loadNationellaStod();
 
   const raknare: Raknare = { sent28: 0, sent3: 0, skipped: 0, errors: [] };
 
@@ -113,6 +172,11 @@ export const GET: APIRoute = async ({ request, url }) => {
       if (!kommun || !bidrag) continue;
 
       await behandlaBidrag(sub.email, kommun, bidrag, today, raknare);
+    }
+
+    for (const stodId of sub.nationellaStod ?? []) {
+      const stod = nationellaStod.find((s) => s.id === stodId && s.status === 'aktiv');
+      if (stod) await behandlaNationelltStod(sub.email, stod, today, raknare);
     }
   }
 

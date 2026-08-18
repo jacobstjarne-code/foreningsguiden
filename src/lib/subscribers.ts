@@ -54,6 +54,10 @@ export interface Subscriber {
   // kommuner — en radbevakning ska bara ge påminnelser för DET bidraget,
   // inte tyst utökas till kommunens hela lista.
   bidrag?: { kommunSlug: string; bidragId: string }[];
+  // T1: nationella stöd har en egen identitet och får aldrig låtsas vara
+  // en kommun. Additivt och valfritt så befintliga Redis-poster fortsätter
+  // fungera utan migrering.
+  nationellaStod?: string[];
   // Giltighetskollen (SPRINT_COPY.ts §GILTIGHETSKOLL) — kommunSlug → senaste
   // årsmötesdatum, sparat när prenumeranten ber om en giltighetspåminnelse.
   // Bara de kommuner som faktiskt frågats om finns med som nycklar.
@@ -94,6 +98,7 @@ export async function addPendingSubscriber(
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
     bidrag: existing?.bidrag,
+    nationellaStod: existing?.nationellaStod,
     giltighetArsmoten: existing?.giltighetArsmoten,
     foreningsprofil: existing?.foreningsprofil,
     // C1: ett nytt ifyllt namn vinner (föreningen kan rätta ett tidigare
@@ -136,6 +141,7 @@ export async function addBidragBevakning(
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
     bidrag: redanBevakat ? befintligaBidrag : [...befintligaBidrag, { kommunSlug, bidragId }],
+    nationellaStod: existing?.nationellaStod,
     giltighetArsmoten: existing?.giltighetArsmoten,
     foreningsprofil: existing?.foreningsprofil,
     foreningsnamn: existing?.foreningsnamn,
@@ -147,6 +153,35 @@ export async function addBidragBevakning(
     return { token: null, alreadyConfirmed: true };
   }
 
+  const token = crypto.randomUUID();
+  await redis.set(tokenKey(token), normalized, { ex: TOKEN_TTL_SEKUNDER });
+  return { token, alreadyConfirmed: false };
+}
+
+/** Lägger till bevakning av ett nationellt stöd utan kommun-sentinel. */
+export async function addNationelltStodBevakning(
+  email: string,
+  stodId: string
+): Promise<{ token: string | null; alreadyConfirmed: boolean }> {
+  const normalized = email.toLowerCase();
+  const existing = await getSubscriber(normalized);
+  const nationellaStod = Array.from(new Set([...(existing?.nationellaStod ?? []), stodId]));
+
+  const record: Subscriber = {
+    email: normalized,
+    kommuner: existing?.kommuner ?? [],
+    registrerad: existing?.registrerad ?? new Date().toISOString(),
+    confirmed: existing?.confirmed ?? false,
+    bidrag: existing?.bidrag,
+    nationellaStod,
+    giltighetArsmoten: existing?.giltighetArsmoten,
+    foreningsprofil: existing?.foreningsprofil,
+    foreningsnamn: existing?.foreningsnamn,
+  };
+  await redis.set(recordKey(normalized), record);
+  await redis.sadd(INDEX_KEY, normalized);
+
+  if (record.confirmed) return { token: null, alreadyConfirmed: true };
   const token = crypto.randomUUID();
   await redis.set(tokenKey(token), normalized, { ex: TOKEN_TTL_SEKUNDER });
   return { token, alreadyConfirmed: false };
@@ -190,6 +225,7 @@ export async function addGiltighetBevakning(
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
     bidrag: existing?.bidrag,
+    nationellaStod: existing?.nationellaStod,
     giltighetArsmoten: { ...(existing?.giltighetArsmoten ?? {}), [kommunSlug]: arsmotesdatum },
     foreningsprofil: existing?.foreningsprofil,
     // C1 (ARBETSORDER 2026-08-11): giltighetskontrollen är den flöde där
@@ -230,6 +266,7 @@ export async function addForeningsprofil(
     registrerad: existing?.registrerad ?? new Date().toISOString(),
     confirmed: existing?.confirmed ?? false,
     bidrag: existing?.bidrag,
+    nationellaStod: existing?.nationellaStod,
     giltighetArsmoten: existing?.giltighetArsmoten,
     foreningsprofil: profil,
     foreningsnamn: existing?.foreningsnamn,
@@ -291,6 +328,7 @@ export async function flyttaSubscriber(oldEmail: string, newEmail: string): Prom
     registrerad: befintligNy?.registrerad ?? gammal.registrerad,
     confirmed: befintligNy?.confirmed ?? gammal.confirmed,
     bidrag: unikaBidrag.length > 0 ? unikaBidrag : undefined,
+    nationellaStod: Array.from(new Set([...(gammal.nationellaStod ?? []), ...(befintligNy?.nationellaStod ?? [])])),
     giltighetArsmoten: { ...(gammal.giltighetArsmoten ?? {}), ...(befintligNy?.giltighetArsmoten ?? {}) },
     foreningsprofil: befintligNy?.foreningsprofil ?? gammal.foreningsprofil,
   };
@@ -353,12 +391,17 @@ export async function getEarliestConfirmedRegistrationDate(): Promise<string | n
  * bevakningstal) — datamängden (få hundra deadlines × få prenumeranter)
  * är för liten för att cache ska behövas.
  */
-export async function countTrackedDeadlines(deadlineEntries: { kommunSlug: string; isLopande: boolean }[]): Promise<number> {
+export async function countTrackedDeadlines(deadlineEntries: (
+  | { niva: 'kommunal'; kommunSlug: string; isLopande: boolean }
+  | { niva: 'nationell'; stodId: string; isLopande: false }
+)[]): Promise<number> {
   const subs = await getAllConfirmedSubscribers();
   const antalPerKommun = new Map<string, number>();
+  const antalPerNationelltStod = new Map<string, number>();
   for (const e of deadlineEntries) {
     if (e.isLopande) continue;
-    antalPerKommun.set(e.kommunSlug, (antalPerKommun.get(e.kommunSlug) ?? 0) + 1);
+    if (e.niva === 'nationell') antalPerNationelltStod.set(e.stodId, (antalPerNationelltStod.get(e.stodId) ?? 0) + 1);
+    else antalPerKommun.set(e.kommunSlug, (antalPerKommun.get(e.kommunSlug) ?? 0) + 1);
   }
 
   let total = 0;
@@ -366,6 +409,7 @@ export async function countTrackedDeadlines(deadlineEntries: { kommunSlug: strin
     for (const kommunSlug of sub.kommuner) {
       total += antalPerKommun.get(kommunSlug) ?? 0;
     }
+    for (const stodId of sub.nationellaStod ?? []) total += antalPerNationelltStod.get(stodId) ?? 0;
   }
   return total;
 }

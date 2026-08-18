@@ -548,6 +548,36 @@ export const MEJL = {
     ],
   },
 
+  // U2.2 (Jacob 2026-08-18, MEJL 7) — diktat ordagrant, se
+  // incoming/MEJLTEXTER.md #7. "LOK-stödet" hårdkodat i stället för ett
+  // {bidragsnamn}-uttag: stod.namn i datan är "LOK-stöd" utan bestämd
+  // artikel, och skulle ha gett fel svenska om det tolkats in här. Ett
+  // framtida andra nationellt stöd behöver ett eget mallpar, inte detta
+  // generiskt omskrivet.
+  nationellPaminnelse28: {
+    amne: 'LOK-stödet — fyra veckor kvar till {datum}',
+    body: [
+      'Sista ansökningsdag för LOK-stödet är {datum}. Ansökan avser aktiviteterna under {period}.',
+      'Kontrollera att alla aktiviteter är registrerade innan ni skickar in. Registrerade aktiviteter är inte samma sak som en inskickad ansökan — det är det vanligaste sättet att förlora stödet.',
+      'En sen ansökan kostar direkt: en vecka sen ger 25 procent avdrag, två veckor 50 procent, en månad 75 procent. Efter {slutdatum} avslås den.',
+      'Så här söker ni: {lank}',
+    ],
+  },
+
+  // U2.2 (MEJL 8) — Jacobs diktat AVBRÖTS efter "Har ni redan skickat in
+  // behöver ni inte göra något." Resten av texten saknas — INTE
+  // kompletterad här (skulle vara påhittad text i ett utskick som
+  // faktiskt går till riktiga mottagare). Kvar oförändrad tills Jacob
+  // ger resten, se rapporten samma tur som denna kommentar skrevs.
+  nationellPaminnelseSista: {
+    amne: '{bidragsnamn} — sista dagen är {datum}',
+    body: [
+      'På {datum} stänger ansökan för {bidragsnamn}. Det är om tre dagar.',
+      'Har ni redan skickat in behöver ni inte göra något.',
+      'Se villkor och den strukturerade sanktionstrappan: {bidragLank}',
+    ],
+  },
+
   // J1 (2026-08-16, MEJLTEXTER.md #3 "Ändringsbeskedet"). TEXT-UTAN-YTA:
   // ingen cron/sändare anropar sendAndringsbesked (mejl.ts) än — den
   // bevakning-scopade ändringsdetekteringen (jämföra ett kommun-bidrags

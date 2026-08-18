@@ -9,6 +9,7 @@
 // svep i stället för att stanna vid den första — bättre för en människa
 // som ska rätta flera fel på en gång.
 import { validateAllKommunFiles, hittaBeloppPlatshallare, loadKommuner } from '../src/lib/kommuner.ts';
+import { loadNationellaStod, validateAllNationellaStodFiles } from '../src/lib/nationellaStod.ts';
 import { strippaProcessSprak } from '../src/lib/anteckningFilter.ts';
 
 const problem = validateAllKommunFiles();
@@ -22,6 +23,14 @@ if (problem.length > 0) {
 }
 
 console.log('Schemavalidering: alla kommun-YAML-filer är giltiga.');
+
+const nationellaProblem = validateAllNationellaStodFiles();
+if (nationellaProblem.length > 0) {
+  console.error(`Nationell schemavalidering FAIL — ${nationellaProblem.length} fil(er) med fel:\n`);
+  for (const p of nationellaProblem) console.error(`${p.file}:\n  ${p.error.replace(/\n/g, '\n  ')}\n`);
+  process.exit(1);
+}
+console.log(`Nationell schemavalidering: ${loadNationellaStod().length} stöd är giltiga.`);
 
 // Uppföljning 2026-08-03: belopp_status: olast/verifierad får inte
 // kombineras med en platshållarfras (se hittaBeloppPlatshallare i

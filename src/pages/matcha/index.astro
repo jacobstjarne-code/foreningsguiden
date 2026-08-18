@@ -22,9 +22,11 @@
 import Base from '../../layouts/Base.astro';
 import KommunValjare from '../../components/KommunValjare.astro';
 import { loadKommuner } from '../../lib/kommuner';
+import { loadNationellaStod } from '../../lib/nationellaStod';
 import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
 const kommuner = loadKommuner();
+const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'aktiv' && s.kategori.includes('idrott'));
 ---
 <Base title={TRATT.start.rubrik} description={TRATT.start.ingress}>
   <section class="tratt" data-tratt>
@@ -193,6 +195,19 @@ const kommuner = loadKommuner();
           <ul class="tratt__bidraglista" data-tratt-obekant-lista></ul>
         </section>
 
+        <section class="tratt__grupp" data-tratt-nationella hidden>
+          <h3>Nationella stöd för idrottsföreningar</h3>
+          <p>De här stöden gäller i hela Sverige och räknas inte som kommunens bidrag.</p>
+          <ul class="tratt__bidraglista">
+            {nationellaIdrottsstod.map((stod) => (
+              <li class="tratt__bidrag">
+                <a href={`/nationella-stod/${stod.id}/`}>{stod.namn}</a>
+                <p class="tratt__bidrag-skal">Gäller idrottsföreningar i alla 290 kommuner.</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <p class="tratt__minne">{TRATT.besked.minne}</p>
         <p class="tratt__ansvar">{TRATT.ansvar}</p>
 
@@ -269,6 +284,7 @@ const kommuner = loadKommuner();
     const kanskeListaEl = root.querySelector<HTMLElement>('[data-tratt-kanske-lista]');
     const obekantGruppEl = root.querySelector<HTMLElement>('[data-tratt-grupp-obekant]');
     const obekantListaEl = root.querySelector<HTMLElement>('[data-tratt-obekant-lista]');
+    const nationellaEl = root.querySelector<HTMLElement>('[data-tratt-nationella]');
     const kommunvaljareWrapperEl = root.querySelector<HTMLElement>('[data-tratt-kommunvaljare]');
     const kommunValdEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald]');
     const kommunValdNamnEl = root.querySelector<HTMLElement>('[data-tratt-kommun-vald-namn]');
@@ -483,6 +499,7 @@ const kommuner = loadKommuner();
 
     function render() {
       if (!kommunData) {
+        if (nationellaEl) nationellaEl.hidden = true;
         if (raknareTalEl) raknareTalEl.hidden = true;
         if (raknareTextEl) raknareTextEl.textContent = TRATT.raknare.tom;
         updateStegUI();
@@ -504,6 +521,10 @@ const kommuner = loadKommuner();
       // grupperar ALLA aktiva bidrag i tre nivåer, utesluter aldrig ett
       // baserat på profilen. En grupp döljs bara om den råkar vara tom.
       const { troligenRelevant, kanVaraRelevant, garInteAttBedoma } = sorteraForTratt(profil, kommunData);
+
+      // Nationella stöd är en separat grupp och påverkar aldrig kommunens
+      // bidragsantal, sortering eller köpflöde.
+      if (nationellaEl) nationellaEl.hidden = !profil.verksamhet.includes('idrott');
 
       if (troligenGruppEl) troligenGruppEl.hidden = troligenRelevant.length === 0;
       renderBidragLista(troligenListaEl, troligenRelevant);
