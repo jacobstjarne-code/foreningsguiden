@@ -4,122 +4,130 @@ lan: Stockholms län
 befolkning: 29107
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: E-tjänster (digitalt)
-  url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
+  namn: Kultur- och fritidsförvaltningens e-tjänst för bidrag och stöd
+  url: https://ekero.fri-go.se/bidrag/
 kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.ekero.se/download/18.7a1eecc51773f534e56395ee/1613476866439/Bidrag%20och%20stipendier%20f%C3%B6r%20f%C3%B6reningar%20och%20privatpersoner.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: ekero-publika-arrangemang
   namn: Bidrag till publika arrangemang och öppna aktiviteter
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för offentliga och medlemsöppna aktiviteter
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [kultur, idrott, ovrig]
+  malgrupp: Godkända ideella kultur- och idrottsföreningar som ordnar publika arrangemang, upplevelser eller öppna aktiviteter i Ekerö kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
   krav:
-  - Aktiviteten måste vara öppen för alla, inte bara medlemmar
-  - Medlemmar från alla målgrupper ska kunna delta
-  - Ansökan digitalt via e-tjänster
-  belopp: Max 20 000 kronor per aktivitet
-  sen_ansokan: Möjlig löpande, svar inom tre veckor
-  kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara godkänd för bidrag, finnas i föreningsregistret och uppfylla kommunens demokrati- och likabehandlingsvillkor
+  - Arrangemanget eller aktiviteten ska genomföras i Ekerö kommun och vara öppet för alla i den tänkta målgruppen, inte bara föreningens medlemmar
+  - Stöd ges till en del av kostnaderna, exempelvis gage, marknadsföring och utrustning; föreningen ska medfinansiera och stöd ges inte till lön eller arvode för egna medlemmar
+  - Regelbunden kursverksamhet som kräver föranmälan omfattas inte
+  - Aktiviteten ska marknadsföras till målgruppen, publiceras i kommunens evenemangskalender samt utvärderas och återrapporteras
+  belopp: Högst 20 000 kr för en enstaka aktivitet; stöd för aktiviteter under hela verksamhetsåret prövas separat
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Enstaka aktiviteter under 20 000 kr söks löpande med besked inom tre veckor; årsansökan för nästkommande verksamhetsår ska lämnas senast 31 oktober.
+  kalla_url: https://www.ekero.se/download/18.7a1eecc51773f534e56395ee/1613476866439/Bidrag%20och%20stipendier%20f%C3%B6r%20f%C3%B6reningar%20och%20privatpersoner.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: E-tjänsten har en separat årsansökan och en ansökan för enstaka arrangemang; årsansökan 2026 har sista ansökningsdag 31 oktober.
+  senast_verifierad: '2026-08-18'
 - id: ekero-aktivitetsstod
   namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  malgrupp: Föreningar med barn/ungdom (6-20 år) eller funktionsnedsatta (6-29 år)
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Godkända ideella föreningar med fritidsverksamhet för barn och unga 6–20 år eller personer med funktionsnedsättning 6–29 år.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Min 10 medlemmar i målgrupp
-  - Föreningen måste vara medlem i riksorganisation med statsbidrag
-  - Arbetar enligt demokratiska principer
-  - Värderar alla människors lika värde
-  belopp: null
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Två deadlines: 25 februari (höst) och 25 augusti (vår) T8a: Kommunens sida anger villkor och datum men inget
-    belopp; riktlinje-PDF behöver granskas.'
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara godkänd för bidrag, finnas i föreningsregistret, ha minst tio medlemmar i målgrupperna sammanlagt och vara ansluten till en riksorganisation som får statsbidrag
+  - Verksamheten ska bedrivas på fritiden i Ekerö kommun, finnas i föreningens verksamhetsplan och främja barnrätt, etik, delaktighet, ideellt engagemang, jämställdhet, integration och drogfrihet
+  - En gruppaktivitet ska pågå minst 45 minuter, ha gemensam start och avslutning samt bestå av minst tre och högst 30 deltagare utöver en utsedd ledare som fyllt 13 år
+  - Deltagaren ska vara kommuninvånare och medlem i föreningen, med ett begränsat undantag för rekryteringsaktiviteter; ledaren får inte ansvara för flera aktiviteter samtidigt
+  - Närvaro med föreskrivna deltagar- och aktivitetsuppgifter ska redovisas löpande och kunna visas för kommunen
+  belopp: 10 kr per deltagare och tillfälle; 30 kr per deltagare med funktionsnedsättning och tillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 augusti för aktiviteter januari–juni och 25 februari för aktiviteter juli–december; ursäktande omständigheter kan ge reducerat eller fullt stöd vid sen ansökan.
+  kalla_url: https://ekero.fri-go.se/bidrag/ansokaninfo.aspx?type=1&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Om redovisad aktivitetsvolym överstiger nämndens budget minskas anslaget proportionellt vid årets sista utbetalning.
+  alder_min: 6
+  alder_max: 29
+  min_medlemmar: 10
+  senast_verifierad: '2026-08-18'
 - id: ekero-kompetens-utveckling
-  namn: Bidrag för kompetens och utveckling
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för integration, tillgänglighet, säkerhet, inkludering eller metodutveckling
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Bidrag för föreningars kompetens och utveckling
+  kategori: [kultur, idrott, ovrig]
+  malgrupp: Godkända föreningar med aktivitetsbaserad, utåtriktad eller publik kultur- och fritidsverksamhet i Ekerö kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
   krav:
-  - Projekt för utveckling inom nämnda områden
-  - Målbeskrivning och budget krävs
-  - Ansökan via e-tjänster
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'T8a: Kommunens sida anger två stödtyper men inget belopp; riktlinje-PDF behöver granskas.'
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara godkänd för bidrag, verksam i Ekerö kommun och respektera demokrati, allas lika värde, jämlikhet, jämställdhet och förbud mot diskriminering
+  - Insatsen ska utveckla verksamhetens kompetens, kvalitet eller tillgänglighet inom exempelvis integration, trygghet, inkludering, bemötande eller metodutveckling
+  - Stödet får inte avse en utvecklingsinsats som förbättrar idrotts- eller tävlingsprestationer
+  - Ansökan ska avse ett eget projekt eller en utbildningsinsats hos en annan arrangör och innehålla kalkyl
+  - Aktiviteten ska utvärderas och återrapporteras
+  belopp: Bidragets storlek prövas individuellt; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan sker löpande; upp till 20 000 kr ges besked inom tre veckor och högre belopp beslutas vid nästkommande nämndsammanträde.
+  kalla_url: https://ekero.fri-go.se/bidrag/ansokaninfo.aspx?type=7&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: E-tjänsten har separata ansökningsvägar för eget projekt och utbildning via annan arrangör.
+  senast_verifierad: '2026-08-18'
 - id: ekero-anlaggningsstod-drift
   namn: Anläggningsstöd för drift
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som äger eller arrenderar en lokal eller anläggning som står till allmänhetens förfogande
-  deadlines:
-    typ: okand
-    datum: []
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Godkända föreningar som äger eller arrenderar en lokal eller anläggning som står till allmänhetens förfogande.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [05-31] }
   krav:
-  - Lokalen eller anläggningen ska vara bokningsbar för allmänheten och/eller användas för verksamhet som är öppen för allmänheten
-  - Varje kostnad ska kunna verifieras
-  belopp: Högst 50 procent av godkända kostnader för egen lokal eller anläggning
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stödet publiceras som en fjärde bidragsform på kommunens sida. Ej angivet i källan
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara godkänd för bidrag, finnas i föreningsregistret och ha laddat upp de årliga handlingar som kommunen kräver
+  - Föreningen ska äga eller arrendera lokalen eller anläggningen
+  - Lokalen eller anläggningen ska vara bokningsbar för allmänheten eller användas för verksamhet som är öppen för allmänheten
+  - Varje sökt kostnad ska verifieras så att det tydligt framgår vad stödet ska användas till
+  - Ansökan för bidragsår 2026 ska lämnas senast 31 maj
+  belopp: Högst 50 procent av godkända kostnader för den egna lokalen eller anläggningen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sista ansökningsdag är 31 maj.
+  kalla_url: https://ekero.fri-go.se/bidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet ligger under Övriga stöd i kommunens aktuella bidragsportal och är separat från de tre bidragsrubrikerna på kommunens informationssida.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
-- id: ekero-registrering
-  vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste vara registrerad i Ekerö kommuns föreningsregister för att kunna ansöka om bidrag. Arbetsstäder
-    enligt demokratiska principer och värna alla människors lika värde krävs.
-  system: Föreningsregistret
+- id: ekero-godkand-forening
+  vad: Godkänd förening och årliga handlingar
+  beskrivning: För att söka kultur- och fritidsnämndens föreningsbidrag ska föreningen finnas i föreningsregistret och årligen lämna årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse samt ändrade stadgar och rutin för belastningsregisterutdrag.
+  system: Ekerö kommuns föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Handlingarna granskas innan föreningen godkänns för bidrag
+  giltighet: Godkännandet förnyas varje kalenderår genom aktuella föreningshandlingar
   ordning: 1
-  kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsregister---hitta-din-aktivitet
-  giltighet_status: okand
-- id: ekero-e-tjanster
-  vad: Digital ansökan via e-tjänster
-  beskrivning: Alla föreningsbidrag-ansökningar ska göras digitalt via Ekerö kommuns e-tjänster. Svar normalt inom tre veckor
-    från fullständig ansökan.
-  system: E-tjänster
+  kalla_url: https://www.ekero.se/download/18.7a1eecc51773f534e56395ee/1613476866439/Bidrag%20och%20stipendier%20f%C3%B6r%20f%C3%B6reningar%20och%20privatpersoner.pdf
+  giltighet_status: kontrollast
+- id: ekero-inloggning
+  vad: Behörig inloggning i bidragsportalen
+  beskrivning: Ansökan görs av ordförande, kanslichef eller en annan person som föreningen har utsett; föreningen får inloggningsuppgifter från Ekerö Direkt.
+  system: Kultur- och fritidsförvaltningens e-tjänst för bidrag och stöd
   ledtid: null
-  ledtid_text: null
-  giltigkeit: null
+  ledtid_text: Inloggning ska finnas före digital ansökan
+  giltighet: null
   ordning: 2
-  kalla_url: https://www.ekero.se/uppleva-gora/idrott--foreningar/foreningsstod-och-bidrag
-  giltighet_status: okand
+  kalla_url: https://ekero.fri-go.se/bidrag/
+  giltighet_status: ingen_regel
