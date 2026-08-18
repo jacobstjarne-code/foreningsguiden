@@ -2,15 +2,22 @@ kommun: Upplands Väsby
 kommun_slug: upplands-vasby
 lan: Stockholms län
 befolkning: 50666
-forvaltning: Kultur- och fritidsnämnden samt kommunstyrelsen (klimat-, miljö- och hållbarhetsutskottet)
+forvaltning: Kultur- och fritidsnämnden samt kommunstyrelsens klimat-, miljö- och hållbarhetsutskott
 ansokningssystem:
-  namn: Aktivitetskort på nätet (ApN) samt kommunens bidragssystem FRI-GO
-  url: https://aktivitetskort.se/?ftag=0114
+  namn: Aktivitetskort på nätet (ApN), FRI-GO och separata webbformulär
+  url: https://upplandsvasby.fri-go.se/bidrag/default.aspx
 kalla_url: https://www.upplandsvasby.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier.html
-verifierad: 2026-07-21
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: upplandsvasby-startbidrag
   namn: Startbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -25,18 +32,23 @@ bidrag:
   - Föreningen ska ha varit verksam i minst tre månader
   - Föreningen ska vara registrerad i Upplands Väsby kommuns föreningsregister
   - Föreningen ska uppfylla kultur- och fritidsnämndens grundläggande bidragskrav
-  belopp: 500 kronor per månad under det första verksamhetsåret
+  - Föreningen ska ha organisationsnummer samt bank- eller plusgiro och ta ut minst 50 kronor i årlig medlemsavgift
+  - Föreningens verksamhet ska bedrivas i Upplands Väsby och vara demokratisk, öppen, jämlik och jämställd
+  - Årsmöteshandlingar och föreskrivna policyer ska vara uppladdade och uppgifterna i föreningsregistret aktuella
+  belopp: 6 000 kronor under det första verksamhetsåret
   sen_ansokan: Löpande under hela året, när föreningen har varit verksam i tre månader och övriga kriterier är uppfyllda
-  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea0d82/1736250664884/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
   anteckning: Tremånaderskravet är uttryckligen publicerat för startbidraget och är inte ett felvandrat grundbidragskrav.
     Fullständiga grundkrav finns i nämndens bidragsregler.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-lokalbidrag
   namn: Lokalbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -51,20 +63,23 @@ bidrag:
   - Föreningen ska kunna påvisa särskilda behov av lokal eller anläggning
   - Bidragsberättigade kostnader är uppvärmning, vatten, sophämtning samt hyra (i förekommande fall även ränta och amortering)
   - Fakturor samt årsmöteshandlingar bifogas ansökan
+  - Föreningen ska vara registrerad och bidragsberättigad samt ha uppdaterat och godkänt sina registeruppgifter
+  - Föreningen ska uppfylla de grundläggande kraven om organisationsnummer, konto, verksamhetsort, demokrati, öppenhet och medlemsavgift
   belopp: "Max 50 % av total hyreskostnad, maximerat till 40 000 kr"
   belopp_avser: per_forening
   kommunens_pott: null
   sen_ansokan: 100 % av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70 %. Senare
     komplettering godkänns inte.
-  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea0d82/1736250664884/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-fritidsbidrag
   namn: Fritidsbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -78,19 +93,25 @@ bidrag:
   - Ansökan i kommunens bidragssystem samt dialogmöte med handläggare på kultur- och fritidskontoret där behoven redovisas
   - Bidraget får inte användas till internrepresentation (t.ex. fika vid styrelsemöten, gåvor till styrelsemedlemmar)
   - 'RF-ansluten idrottsförening: bidraget reduceras med 50 % efter 3 år och upphör efter ytterligare 2 år (karens 3 år därefter)'
-  belopp: null
+  - Föreningen ska vara registrerad och uppfylla nämndens grundläggande krav på organisationsnummer, konto, demokrati, öppenhet och årlig medlemsavgift
+  - Planerad verksamhet, antal aktiva medlemmar och föreningens förnyelsearbete ska redovisas; verksamhet för barn och unga prioriteras
+  - Bidraget ska användas till verksamhet för medlemmar eller allmänheten och får inte användas till internrepresentation
+  - Avtal tecknas efter beslut och användningen redovisas vid nästa bidragsmöte
+  belopp: Individuellt verksamhetsbidrag utifrån antalet sökande, planerad verksamhet, aktiva medlemmar och förnyelsearbete; något fast belopp publiceras inte
   sen_ansokan: 100 % av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70 %. Senare
     komplettering godkänns inte.
-  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea0d82/1736250664884/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
   anteckning: Verksamhetsbidrag som betalas ut i förskott för kommande verksamhetsår. Avtal tecknas mellan kultur- och fritidskontoret
     och föreningen; bryts avtalet ska bidraget återbetalas.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-kulturbidrag
   namn: Kulturbidrag
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Kulturföreningar
@@ -101,19 +122,25 @@ bidrag:
   krav:
   - Anmälan till bidragsmöte samt uppladdning av efterfrågade dokument i kommunens bidragssystem senast 15 oktober
   - Bidraget får inte användas till internrepresentation (t.ex. fika vid styrelsemöten, gåvor till styrelsemedlemmar)
-  belopp: null
+  - Föreningen ska vara registrerad och uppfylla nämndens grundläggande krav på organisationsnummer, konto, demokrati, öppenhet och årlig medlemsavgift
+  - Föreningen ska redovisa kommande års behov, planerad omfattning och innehåll, hur många som kan ta del av verksamheten samt förnyelsearbete
+  - Bidraget ska användas till verksamhet för föreningens medlemmar eller allmänheten
+  - Avtal tecknas efter beslut och användningen redovisas vid nästa bidragsmöte
+  belopp: Individuellt verksamhetsbidrag utifrån antalet sökande, planerad omfattning och innehåll, räckvidd samt förnyelsearbete; något fast belopp publiceras inte
   sen_ansokan: 100 % av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70 %. Senare
     komplettering godkänns inte.
-  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea0d82/1736250664884/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
   anteckning: Verksamhetsbidrag i dialogform; storleken bedöms utifrån planerad omfattning, innehåll och förnyelsearbete.
     Betalas ut i förskott för kommande verksamhetsår.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-aktivitetsbidrag
   namn: Aktivitetsbidrag
+  foreningstyp: [idrott]
   kategori:
   - idrott
   - funktionsratt
@@ -127,18 +154,23 @@ bidrag:
   - Minst 5 aktiviteter per halvår; sammankomst minst 60 minuter med minst 3 deltagare utöver ledare
   - Medlem ska vara 7–20 år, ha deltagit minst 8 gånger per år och betalat minst 50 kr i medlemsavgift
   - Max 60 sammankomster per person och halvår. Ingen övre åldersgräns eller krav på gruppstorlek för deltagare med funktionsvariation
+  - Sammankomsten ska vara en ledarledd gruppaktivitet i föreningens regi med gemensam samling och avslutning; drop-in och studiecirklar ger inte bidrag
+  - Samma medlem får räknas högst en gång per dag i samma förening och ansvarig ledare ska vara närvarande under hela aktiviteten
+  - Föreningen ska vara registrerad, uppfylla grundkraven och ha senaste årsmöteshandlingarna tillgängliga i bidragssystemet
   belopp: 68 kr/sammankomst (7–13 år), 85 kr/sammankomst (14–20 år)
   sen_ansokan: 100 % av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70 %. Senare
     komplettering godkänns inte.
-  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea0d82/1736250664884/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
   anteckning: 'Två ansökningsperioder: 1/1–30/6 (ansöks senast 25 augusti) och 1/7–31/12 (ansöks senast 25 februari).'
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-grundbidrag
   namn: Grundbidrag
+  foreningstyp: [idrott]
   kategori:
   - idrott
   malgrupp: Idrottsföreningar anslutna till Riksidrottsförbundet som ansökt om aktivitetsbidrag
@@ -149,18 +181,23 @@ bidrag:
   krav:
   - Söks automatiskt i samband med ansökan om aktivitetsbidrag – ingen separat ansökan krävs
   - Samma medlemskrav som aktivitetsbidrag (7–20 år, minst 50 kr medlemsavgift)
+  - Föreningen ska ha minst 14 aktiva medlemmar i åldern 7–20 år och minst fem aktiviteter per halvår
+  - En bidragsberättigad medlem ska ha deltagit minst åtta gånger under året
+  - Föreningen ska vara registrerad, uppfylla grundkraven och ha senaste årsmöteshandlingarna i bidragssystemet
   belopp: 85 kr per bidragsberättigad medlem och år
   sen_ansokan: 100 % av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70 %. Senare
     komplettering godkänns inte.
-  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea0d82/1736250664884/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  belopp_avser: per_forening
   anteckning: Betalas ut en gång per år, på våren, för föregående års antal bidragsberättigade medlemmar.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-kvallsvandra
   namn: Kvällsvandra
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -173,17 +210,20 @@ bidrag:
   krav:
   - Intresseanmälan för perioden april–oktober görs via formulär, sista anmälningsdag 28 februari
   - Föreningen ska vara bidragsberättigad inom kultur- och fritidsområdet
+  - Föreningen ska följa kommunens anvisningar och genomföra de tilldelade kvällsvandringarna på fredags- och lördagskvällar
   belopp: 1 500 kr/kväll (maj–augusti), 1 000 kr/kväll (april samt september–oktober)
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_avser: per_forening
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kvällsvandring sker fredag och lördag kväll. Inga schemalagda vandringar november–mars.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-uppdragsbidrag-utanforskap
   namn: Uppdragsbidrag kopplat till arbete mot utanförskap
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   - ovrig
@@ -194,17 +234,22 @@ bidrag:
     datum: []
   krav:
   - Uppdraget utformas i samråd med kultur- och fritidskontoret
-  belopp: null
+  - Föreningen ska redovisa en aktivitetsplan och budget som beskriver den planerade verksamheten
+  - Ansökan ska beskriva hur verksamheten når målgruppen barn och unga samt hur föreningen avser att samverka med andra aktörer
+  - Föreningen ska vara ideell, lokalt verksam och uppfylla kommunens grundläggande krav för bidragsberättigade föreningar
+  belopp: Individuellt uppdragsbidrag bedöms i samråd med kultur- och fritidskontoret; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-foreningsbidrag-funktionsnedsattning-verksamhet
   namn: Föreningsbidrag för verksamhet för personer med funktionsnedsättning
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - funktionsratt
   malgrupp: Föreningar som vill starta eller utveckla verksamhet för personer med funktionsnedsättning
@@ -213,18 +258,23 @@ bidrag:
     datum: []
   krav:
   - Föreningen ska vara godkänd bidragsberättigad förening
-  belopp: null
+  - Ansökan ska innehålla aktivitetsplan och budget för den verksamhet som ska startas eller utvecklas
+  - Föreningen ska beskriva målgruppen, hur verksamheten når målgruppen och planerade samarbeten
+  - Bidraget ska användas till verksamhet för personer med funktionsnedsättning i Upplands Väsby
+  belopp: Individuellt verksamhetsbidrag bedöms efter plan och budget; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Administreras av kultur- och fritidskontoret via ApN. Skiljer sig från kommunstyrelsens bidrag till organisationer
     för personer med funktionsnedsättning nedan (annan förvaltning, annat syfte).
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-studieforbund
   namn: Bidrag till studieförbund (grundbidrag och rörligt bidrag)
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   malgrupp: Studieförbund (förbund samverkande i region) verksamma i kommunen, anslutna till Folkbildningsrådet, med egen
@@ -237,19 +287,21 @@ bidrag:
   - Minst 50 redovisade timmar (studiecirklar, kulturarrangemang, annan folkbildning) krävs för grundbidrag
   - Verksamhetsberättelse med bokslut, årsmötesprotokoll och verksamhetsplan från lokalavdelningen bifogas
   - Verksamhetsvolymen ska bestyrkas av centralorganisationen genom underskrivet kommunsammandrag
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Rörligt bidrag som andel av kommunens totala verksamhet"
+  - Studieförbundet ska vara statsbidragsberättigat, bedriva lokal verksamhet och ha egen ekonomisk förvaltning samt styrelse i kommunen eller regionen
+  belopp: Grundbidrag med högst 15 000 kronor för studieförbund med egen lokal i kommunen och högst 5 000 kronor utan egen lokal, plus ett rörligt bidrag efter förbundets andel av den samlade verksamheten under de två föregående åren
+  belopp_avser: per_forening
+  kommunens_pott: Den rörliga delen fördelas ur kommunens beslutade budget efter varje studieförbunds tvåårsgenomsnitt
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/download/18.3635a2a918e3786380d1a7/1710763019266/Regler%20f%C3%B6r%20bidrag%20till%20studief%C3%B6rbund.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidraget betalas ut i juni för innevarande år. Kultur- och fritidsnämnden kan göra revision på inlämnade uppgifter.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-organisationer-funktionsnedsattning
   namn: Föreningsbidrag till organisationer för personer med funktionsnedsättning
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   malgrupp: Lokala organisationer för personer med funktionsnedsättning. Organisationer i grannkommuner eller Stockholms län
@@ -262,21 +314,24 @@ bidrag:
   - Organisationen ska ta tillvara de funktionsnedsattas intressen i den kommunala verksamheten
   - Registrerad i kommunens föreningsregister med organisationsnummer samt bank- eller plusgiro
   - Årsmötesprotokoll, revisionsberättelse, verksamhetsberättelse, verksamhetsplan och ekonomisk berättelse bifogas
+  - Organisationen ska vara ideell, ha aktuell registrering och redovisa hur föregående års kommunbidrag har använts
   belopp: Grundbidrag 4 023 kr/år (delas mellan kommunerna vid samarbetsförening, betalas ej ut till länsorganisationer).
     Medlemsbidrag 28 kr per folkbokförd medlem i Upplands Väsby och år. Beloppen räknas upp årligen enligt prisbasbelopp
+  belopp_avser: per_forening
   sen_ansokan: 100 procent av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70
     procent. Senare komplettering godkänns inte.
   kalla_url: https://www.upplandsvasby.se/download/18.13568ed118a91dd06791214/1695895050521/riktlinjer-for-foreningsbidrag-for-organisationer-for-personer-med-funktionsnedsattning-samt-frivillig-och-intresseorganisationer.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: RSMH bedöms i bidragshänseende som frivilligorganisation och kan beviljas större bidrag än övriga handikapporganisationer.
     Funktionsrätt Väsby (FRV) är en paraplyorganisation som beviljas verksamhetsbidrag utifrån typ och omfattning av verksamheten.
     Beslutas av kommunstyrelsens klimat-, miljö- och hållbarhetsutskott.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-frivilligorganisationer
   namn: Föreningsbidrag till frivilligorganisationer
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   malgrupp: Organisationer som bedriver ideell verksamhet som komplement eller alternativ till social- och/eller omsorgsnämndens
@@ -288,21 +343,24 @@ bidrag:
   krav:
   - Verksamhetens inriktning och innehåll får inte sammanfalla med kommunens egna upphandlade verksamheter
   - Organisationen ska vara öppen för alla kommuninvånare som faller inom ramen för verksamheten
+  - Organisationen ska vara ideell, registrerad med organisationsnummer och eget konto samt lämna föreskrivna års- och ekonomihandlingar
   belopp: 'Lokal organisation: verksamhetsbidrag bedömt utifrån praxis, omfattning och redovisade kostnader. Grannkommun:
     0,85 kr per kommuninvånare och år (ej Sollentuna). Länet: max 2 873 kr per organisation och år (ej Sollentuna). Beloppen
     räknas upp årligen enligt prisbasbelopp'
+  belopp_avser: per_forening
   sen_ansokan: 100 procent av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70
     procent. Senare komplettering godkänns inte.
   kalla_url: https://www.upplandsvasby.se/download/18.13568ed118a91dd06791214/1695895050521/riktlinjer-for-foreningsbidrag-for-organisationer-for-personer-med-funktionsnedsattning-samt-frivillig-och-intresseorganisationer.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Prioritering sker utifrån kommuninvånarnas behov, socialtjänstens nytta av verksamheten, antal medlemmar/deltagare
     från Upplands Väsby och organisationens behov av bidrag. Beslutas av kommunstyrelsens klimat-, miljö- och hållbarhetsutskott.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-intresseorganisationer
   namn: Föreningsbidrag till intresseorganisationer
+  foreningstyp: [social, annat]
   kategori:
   - ovrig
   malgrupp: Organisationer som tar tillvara en viss grupps intressen i en verksamhet som är en kommunal angelägenhet
@@ -313,41 +371,48 @@ bidrag:
   krav:
   - Det frivilliga ideella arbetet ska vara grunden i verksamheten; kommunbidraget ska vara av kompletterande art
   - Innehållet bör ha ett stort mått av allmänintresse och verka för ökad integration mellan grupper i samhället
+  - Organisationen ska vara ideell, registrerad med organisationsnummer och eget konto samt lämna föreskrivna års- och ekonomihandlingar
   belopp: Bedöms utifrån angelägenhetsgrad och verksamhetens omfattning
+  belopp_avser: per_forening
   sen_ansokan: 100 procent av godkänt bidrag vid ansökan i tid. Komplettering inom 7 dagar efter sista ansökningsdag ger 70
     procent. Senare komplettering godkänns inte.
   kalla_url: https://www.upplandsvasby.se/download/18.13568ed118a91dd06791214/1695895050521/riktlinjer-for-foreningsbidrag-for-organisationer-for-personer-med-funktionsnedsattning-samt-frivillig-och-intresseorganisationer.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Samverkan mellan organisationer, och mellan organisationer och kommunen, prioriteras. Beslutas av kommunstyrelsens
     klimat-, miljö- och hållbarhetsutskott.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-engangs-och-projektbidrag-ks
   namn: Engångsbidrag och projektbidrag (kommunstyrelsen)
+  foreningstyp: [social, ungdom, annat]
   kategori:
   - social
   - funktionsratt
   - ovrig
   malgrupp: Föreningar och organisationer inom funktionsnedsättning, frivilligverksamhet och intresseverksamhet
   deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
+    typ: fasta
+    datum:
+    - 11-30
+  krav:
+  - Engångsbidraget ska avse föreningens jubileum eller ett liknande enstaka ändamål, eller projektbidraget ett tidsbegränsat projekt
+  - Föreningen ska vara ideell och registrerad i kommunens föreningsregister med organisationsnummer och eget bank- eller plusgiro
+  - Ansökan ska innehålla föreskrivna års- och ekonomihandlingar samt redovisning av tidigare kommunbidrag
+  belopp: Individuellt bidrag bedöms efter ändamål och underlag; något fast belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/download/18.13568ed118a91dd06791214/1695895050521/riktlinjer-for-foreningsbidrag-for-organisationer-for-personer-med-funktionsnedsattning-samt-frivillig-och-intresseorganisationer.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Regelverket anger att engångsbidrag kan beviljas till föreningars jubileum och liknande, samt att bidrag till
-    tidsbegränsade projekt kan beviljas. Ingen egen deadline eller ansökningsprocess anges för denna sektion; det generella
-    datumet 30 november för dokumentets övriga bidrag anges inte uttryckligen gälla denna kategori.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Regelverket anger att engångsbidrag kan beviljas till föreningars jubileum och liknande samt att bidrag till tidsbegränsade projekt kan beviljas. Den gemensamma årliga ansökningsdagen i riktlinjen är 30 november.
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-folkhalsobidrag-senior
   namn: Folkhälsobidrag till seniorföreningar
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   malgrupp: Seniorföreningar verksamma i Upplands Väsby kommun, registrerade i kommunens föreningsregister som seniorförening
@@ -360,21 +425,23 @@ bidrag:
   - Ansökan ska beskriva planerade aktiviteter/projekt samt budget, och ange totalt antal medlemmar, planerade folkhälsofrämjande
     aktiviteter och bedömt antal deltagande seniorer
   - Årsmötesprotokoll, verksamhetsberättelse och bokslut från senaste årsmöte bifogas
+  - Föreningen ska vara registrerad som seniorförening i Upplands Väsby och verksamheten ska vara folkhälsofrämjande för seniorer
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "Total bidragsbudget 120 000 kronor fördelas mellan beviljade föreningar"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/download/18.11ea930419a75a29e90ac5/1763710673455/Riktlinjer%20f%C3%B6r%20folkh%C3%A4lsobidrag%20till%20seniorf%C3%B6reningar%20i%20Upplands%20V%C3%A4sby%20kommun.pdf
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Beslut fattas av kultur- och fritidsnämnden senast 30 november, utbetalning sker i december. Riktlinjerna antogs
     2019-05-21 och reviderades senast 2025-11-11. Kommunens totala bidragsbudget är 120 000 kronor och fördelas mellan beviljade
     föreningar. Detta är inte ett tak per sökande.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-adolf-stafs-fond
   namn: Adolf Stafs Fond
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   malgrupp: Föreningar som bedriver fritidsverksamhet för pensionärer, särskilt i särskilt boende eller annan omsorgsverksamhet
@@ -386,25 +453,28 @@ bidrag:
   - Årsredovisning med revisionsberättelse bifogas
   - Beskrivning av hur bidraget ska användas samt redogörelse för föregående års bidrag
   - Kontaktuppgifter och bankkontouppgifter
+  - Föreningen ska vara registrerad i kommunens föreningsregister och årligen bekräfta att uppgifterna är aktuella
+  - Fritidsverksamheten ska rikta sig till pensionärer; fonden prioriterar verksamhet vid särskilt boende eller annan omsorgsverksamhet
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "85 % av fondens avkastning till pensionärsorganisationer; 15 % kan sökas av andra föreningar"
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/omsorg-och-hjalp/ekonomi-ekonomiskt-bistand/stipendier-och-fonder.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Förvaltas av kommunstyrelsens klimat-, miljö- och hållbarhetsutskott. 85 % av fondens avkastning fördelas till
     pensionärsorganisationer med minst 50 ålderspensionärer som medlemmar; resterande 15 % kan sökas av pensionärsföreningar
     och andra ideella föreningar för fritidsverksamhet riktad till pensionärer.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: upplandsvasby-statsbidrag-finskt-forvaltningsomrade
   namn: Statsbidrag för finskt förvaltningsområde
+  foreningstyp: [kultur, ungdom, annat]
   kategori:
   - kultur
   - ovrig
-  malgrupp: Föreningar, företag och enskilda som arbetar med sverigefinsk kultur och språk i kommunen
+  malgrupp: Föreningar som arbetar med sverigefinsk kultur och språk i kommunen
   deadlines:
     typ: fasta
     datum:
@@ -412,17 +482,41 @@ bidrag:
   krav:
   - Organisationsnummer samt postgiro/bankgiro
   - Verksamhetsbeskrivning med mål, målgrupp, tidsplan och budget
-  belopp: null
+  - Insatsen ska främja och synliggöra finska språket eller den sverigefinska kulturen och vara öppen för kommunens sverigefinska befolkning
+  - Verksamheten ska genomföras i Upplands Väsby; insatser för barn, unga, äldre och språkbevarande prioriteras
+  belopp: Föreningen anger sökt belopp och budget; något fast högsta belopp publiceras inte
+  belopp_avser: per_forening
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.upplandsvasby.se/omsorg-och-hjalp/ekonomi-ekonomiskt-bistand/stipendier-och-fonder.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Del av kommunens minoritetsspråksåtagande (finskt förvaltningsområde). Ansökan sker via separat webbformulär,
-    inte kommunens ordinarie bidragssystem. Öppen för föreningar men även företag och enskilda, därför ej uteslutet enligt
-    §2.4.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens ansökningssida tillåter även företag och enskilda, men denna post gäller endast föreningars ansökningar.
+  senast_verifierad: '2026-08-18'
+- id: upplandsvasby-musikradets-bidrag
+  namn: Bidrag från Upplands Väsby musikråd
+  foreningstyp: [kultur]
+  kategori:
+  - kultur
+  malgrupp: Lokala musik- och dansföreningar samt föreningar som arrangerar konserter, festivaler eller andra musikarrangemang i Upplands Väsby
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en lokal förening eller arrangör inom musik- eller dansområdet
+  - Bidraget ska användas till en konsert, festival eller annat arrangemang som utvecklar det lokala musiklivet
+  - Ansökan lämnas till Upplands Väsby musikråd, som fördelar kommunens årliga anslag till musiklivet
+  belopp: Individuellt arrangemangsbidrag fördelas av musikrådet; något fast belopp publiceras inte av kommunen
+  belopp_avser: per_forening
+  sen_ansokan: Ingen sista ansökningsdag publiceras på kommunens sida
+  kalla_url: https://www.upplandsvasby.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen ger ett årligt anslag till Upplands Väsby musikråd, som fördelar stöd till det lokala musiklivet. Musikrådets individuella musikstipendium ingår inte i denna föreningspost.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: upplandsvasby-foreningsregister
   vad: Registrera föreningen i kommunens föreningsregister
@@ -438,4 +532,14 @@ forutsattningar:
   ordning: 1
   kalla_url: https://www.upplandsvasby.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsregister.html
   giltighet_status: okand
+- id: upplandsvasby-arlig-registeruppdatering
+  vad: Uppdatera föreningsuppgifter och årsmöteshandlingar
+  beskrivning: Föreningen ska hålla registeruppgifterna aktuella och lämna de handlingar som bidragsreglerna kräver efter årsmötet.
+  system: Aktivitetskort på nätet (ApN)
+  ledtid: null
+  ledtid_text: Ingen handläggningstid angiven i riktlinjen
+  giltighet: Föreningen ska bekräfta eller uppdatera registeruppgifterna årligen direkt efter årsmötet och lämna föreskrivna årsmöteshandlingar
+  ordning: 2
+  kalla_url: https://www.upplandsvasby.se/download/18.5b8b3897193799f8ea023de/1737039756712/Kultur-%20och%20fritidsn%C3%A4mndens%20bidragsregler.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null
