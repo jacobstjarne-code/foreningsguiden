@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Mjölby kommun webansökan för föreningsbidrag
   url: https://minasidor.mjolby.se/
 kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-verifierad: 2026-07-27
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
+giltighet_regel_status: kontrollast
 bidrag:
 - id: mjolby-verksamhetsbidrag
   namn: Verksamhetsbidrag
@@ -27,6 +33,8 @@ bidrag:
   - Minst 10 aktiva medlemmar i åldersgruppen 7–25 år
   belopp: '30 kronor per bidragsberättigad ledarledd sammankomst, plus rörligt belopp per deltagartillfälle: 8 kr (7–12 år),
     14 kr (13–20 år), 5 kr (21–25 år), 25 kr för funktionsnedsatta (ingen övre åldersgräns)'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Betalt senast 30 april
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
   belopp_status: kontrollast
@@ -57,6 +65,8 @@ bidrag:
   - Minst 10 aktiva medlemmar i åldersgruppen 7–25 år
   - Hyr lokal externt – bidrag utgår inte till förening som hyr kommunal lokal
   belopp: 40% av redovisad hyreskostnad föregående år, max 60 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Betalt senast 30 juni
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
   belopp_status: kontrollast
@@ -84,11 +94,13 @@ bidrag:
   - Minst 10 aktiva medlemmar i åldersgruppen 7–25 år
   - Föreningen svarar för driften och samtliga driftskostnader (även vid ägarliknande förhållande som tomträtt eller långsiktigt
     arrendeavtal)
-  belopp: null
+  belopp: Fast belopp per anläggning och år fastställs i ett tvåårigt avtal; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan behöver inte göras om avtal redan finns. Ny förening eller anläggning ansöker skriftligen om att avtal
     ska tecknas.
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -108,10 +120,13 @@ bidrag:
   krav:
   - Registrerad funktionsnedsättningsförening
   - Avtal med kommun
-  belopp: null
+  - Föreningen ska delta i obligatoriskt dialogmöte vartannat år för uppföljning och nytt avtal
+  belopp: Fast belopp per förening och år fastställs i ett tvåårigt avtal; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan behöver inte göras. Bidraget regleras via tvåårigt avtal mellan förening och kultur- och fritidsförvaltningen.
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -129,16 +144,20 @@ bidrag:
   krav:
   - Registrerad pensionärsförening
   - Avtal med kommun
-  belopp: null
+  - Föreningen ska delta i obligatoriskt dialogmöte vartannat år för uppföljning och nytt avtal
+  belopp: Fast belopp per förening och år fastställs i avtal; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan behöver inte göras. Bidraget regleras via avtal mellan förening och kultur- och fritidsförvaltningen.
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Bidrag för pensionärsföreningar utgår enligt avtal med kommun. Avtalsbaserat
   foreningstyp:
-  - ungdom
+  - social
+  - annat
 - id: mjolby-hembygd-bygdegard-bidrag
   namn: Bidrag för hembygds- och bygdegårdsföreningar
   kategori:
@@ -151,10 +170,13 @@ bidrag:
   krav:
   - Registrerad hembygds- eller bygdegårdsförening med egenägd anläggning
   - Avtal med kommun
-  belopp: null
+  - Föreningen ska delta i obligatoriskt dialogmöte vartannat år för uppföljning och nytt avtal
+  belopp: Fast belopp per förening och år fastställs i avtal; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan behöver inte göras. Bidraget regleras via avtal mellan förening och kultur- och fritidsförvaltningen.
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -178,6 +200,8 @@ bidrag:
   - Sverok redovisar årligen föreningens verksamhet till kultur- och fritidsförvaltningen
   belopp: 1 000 kronor (3–10 medlemmar), 3 000 kronor (11–20 medlemmar), 5 000 kronor (21 eller fler medlemmar) per registrerad
     förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Bidraget söks inte av föreningen. Sverok redovisar årligen föreningarnas verksamhet till kultur- och fritidsförvaltningen.
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
   belopp_status: kontrollast
@@ -205,6 +229,8 @@ bidrag:
   - Verksamheten är inte berättigad till ordinarie verksamhetsbidrag eller andra stödformer samtidigt
   - Kan ges under maximalt två år, med möjlighet till förlängning efter särskild prövning
   belopp: Max 100 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
   belopp_status: kontrollast
@@ -235,6 +261,8 @@ bidrag:
   - Kan sökas för inköp retroaktivt upp till tre månader
   belopp: 'Max 50% av kostnaden, max 15 000 kronor per förening och år. För utrustning till parasport/funktionsnedsatta: max
     75% av kostnaden, max 20 000 kronor per förening och år'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
   belopp_status: kontrollast
@@ -266,6 +294,8 @@ bidrag:
   belopp: 'Arrangörsbidrag: max 5 000 kronor per arrangemang, max 60 000 kronor per förening och år (högre belopp endast efter
     särskild prövning); underskottstäckning max 75% av underskottet, högst 10 000 kronor. Övriga arrangemang: bidrag efter
     särskild prövning baserat på verksamhetens omfattning och ekonomiska förutsättningar'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
   belopp_status: kontrollast
@@ -321,10 +351,12 @@ bidrag:
   - Bedriver kontinuerlig kultur- eller fritidsverksamhet som kompletterar, utökar eller ersätter kommunal verksamhet
   - Av stort intresse och nytta för kommuninvånarna, utåtriktad mot allmänheten
   - Bidraget är inte sökbart – regleras genom överenskommelse med kultur- och fritidsnämnden
-  belopp: null
+  belopp: Beloppet fastställs i överenskommelsen om kommunens uppdrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Bidraget är inte sökbart. Regleras genom överenskommelse mellan kultur- och fritidsnämnden och mottagaren.
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -343,10 +375,10 @@ forutsattningar:
   system: Mjölby kommuns föreningsregister
   ledtid: null
   ledtid_text: Kontrolleras vid registrering
-  giltighet: null
+  giltighet: Föreningens uppgifter och årsmöteshandlingar ska uppdateras varje år
   ordning: 1
   kalla_url: https://www.mjolby.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar
-  giltighet_status: okand
+  giltighet_status: kontrollast
 - id: mjolby-webansoka
   vad: Webansökan och inloggning
   beskrivning: Föreningen behöver inloggningsuppgifter för att kunna ansöka om bidrag via webansökan. Kontakta kultur- och
