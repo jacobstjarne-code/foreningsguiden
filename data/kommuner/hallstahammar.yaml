@@ -4,19 +4,26 @@ lan: Västmanlands län
 befolkning: 16617
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: Rbok/e-tjänst
-  url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-verifierad: '2026-08-01'
+  namn: Rbok och kommunens e-tjänster
+  url: https://rbok.hallstahammar.se/
+kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och--bidrag
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 1
+  datum: null
+  kalla_url: &norm https://www.hallstahammar.se/download/18.191defd616fec73d794b9413/1706513746875/Regler%20f%C3%B6r%20bidrag%20till%20f%C3%B6reningar%20i%20Hallstahammars%20kommun.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Verksamhetsbidrag för barn- och ungdomsorganisationer
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &ungdom [idrott, kultur, friluft, social, ungdom, annat]
   malgrupp: Föreningar vars huvudsakliga verksamhet riktas till barn och ungdomar
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Stadgar godkända av Hallstahammars kommun
@@ -36,22 +43,26 @@ bidrag:
   - Ansökan ska bifogas verksamhetsberättelse, ekonomisk berättelse (balans- och resultaträkning), revisionsberättelse, verksamhetsplan
     och budget
   - Ansökan ska vara inlämnad senast en månad efter föreningens årsmöte
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Gruppverksamhet per grupp och antal sammankomster; 5–10 ger 700 kr, 11–15 1 250 kr, 16–20 1 600 kr, 21–30 1 950 kr, 31–40 2 300 kr, 41–50 3 050 kr, 51–60 3 800 kr, 61–75 4 550 kr och 76 eller fler 5 300 kr. Utbildning högst 300 kr per dag och deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan och redovisning senast en månad efter årsmötet
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Handlingar ska lämnas senast en månad efter årsmötet. Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: 80 procent betalas som förskott; resten efter redovisad verksamhet.
   id: hallstahammar-verksamhetsbidrag-for-barn-och-ungdomsorganisationer
 - namn: Verksamhetsbidrag för kulturföreningar
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Kulturföreningar
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [06-01]
   krav:
   - Stadgar godkända av Hallstahammars kommun
   - Minst tio medlemmar som regelbundet deltar i verksamheten
@@ -65,24 +76,28 @@ bidrag:
   - Ansökan ska vara inlämnad senast 1 juni för att föreningen ska kunna erhålla bidrag året efter
   - Ansökan ska bifogas verksamhetsberättelse, ekonomisk berättelse (balans- och resultaträkning), revisionsberättelse, verksamhetsplan
     och budget
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Individuellt riktat verksamhetsbidrag; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 juni för bidrag året efter; undantag kan beviljas i särskilda fall
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Handlingar ska lämnas senast en månad efter årsmötet. Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hallstahammar-verksamhetsbidrag-for-kulturforeningar
 - namn: Riktat verksamhetsbidrag för pensionärs- och funktionsrättsorganisationer
   kategori:
   - pensionar
   - funktionsratt
   - social
+  foreningstyp: &social [social, annat]
   malgrupp: Pensionärs- och funktionsrättsföreningar
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [06-01]
   krav:
   - Stadgar godkända av Hallstahammars kommun
   - Minst tio medlemmar som regelbundet deltar i verksamheten
@@ -93,23 +108,27 @@ bidrag:
   - Öppen för alla enligt antagna stadgar
   - Tillhöra en riksorganisation
   - Ansökan görs på särskild blankett bland kommunens e-tjänster eller hos kultur- och fritidsförvaltningen
-  - Ansökan ska vara inlämnad senast en månad efter föreningens årsmöte för att föreningen ska kunna erhålla bidrag året efter
+  - Ansökan ska vara inlämnad senast 1 juni för att föreningen ska kunna erhålla bidrag året efter
   - Ansökan ska bifogas verksamhetsberättelse, ekonomisk berättelse (balans- och resultaträkning), revisionsberättelse, verksamhetsplan
     och budget
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Individuellt riktat verksamhetsbidrag; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 juni för bidrag året efter; undantag kan beviljas i särskilda fall
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Handlingar ska lämnas senast en månad efter årsmötet. Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hallstahammar-riktat-verksamhetsbidrag-for-pensionars-och-funktionsrattsorganisationer
 - namn: Stöd för evenemang eller projekt
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med publikt evenemang eller projekt
   deadlines:
     typ: okand
@@ -124,13 +143,16 @@ bidrag:
   - Ansökan ska bifogas verksamhetsberättelse, ekonomisk berättelse (balans- och resultaträkning), revisionsberättelse, preliminär
     verksamhetsplan och preliminärt budgetförslag
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: Individuellt fördelat evenemangs- eller projektstöd; totalram publiceras inte
+  sen_ansokan: Ingen sista ansökningsdag publiceras
+  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och--bidrag
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hallstahammar-stod-for-evenemang-eller-projekt
 - namn: Stöd för lokalkostnader
   kategori:
@@ -140,9 +162,10 @@ bidrag:
   - pensionar
   - funktionsratt
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar med lokalhyra
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Stadgar godkända av Hallstahammars kommun
@@ -160,22 +183,26 @@ bidrag:
     för kommersiella arrangemang som dans, basarer och bingo
   - Barn- och ungdomsföreningar ska årligen redovisa sina kostnader för anläggningen till kultur- och fritidsförvaltningen
   - Ansökan ska vara inlämnad senast en månad efter föreningens årsmöte
-  belopp: Kommunen subventionerar del av lokalkostnaden
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  belopp_status: olast
-  deadline_status: okand
+  belopp: Hyrd extern lokal subventioneras med 20 procent. I kommunal lokal betalar ungdomsförening 170 kr/kvm och år, pensionärs- och funktionsrättsförening 330 kr och vuxenförening 430 kr; särskilda timtaxor gäller hallar och anläggningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast en månad efter årsmötet
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: Ungdomsförening betalar högst 100 000 kr per år för vissa kommunala idrottsanläggningar.
   id: hallstahammar-stod-for-lokalkostnader
 - namn: Riktat bidrag för allmänna lokaler
   kategori:
   - kultur
   - ovrig
+  foreningstyp: [kultur, hembygd, social, annat]
   malgrupp: Föreningar som driver allmän lokal
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Stadgar godkända av Hallstahammars kommun
@@ -187,24 +214,27 @@ bidrag:
   - Ansökan ska vara inlämnad senast en månad efter föreningens årsmöte
   - Ansökan ska bifogas verksamhetsberättelse, ekonomisk berättelse (balans- och resultaträkning), revisionsberättelse, verksamhetsplan
     och budget
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Individuellt riktat stöd; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast en månad efter årsmötet
+  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och--bidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hallstahammar-riktat-bidrag-for-allmanna-lokaler
 forutsattningar:
 - id: hallstahammar-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Rbok/e-tjänst
+  beskrivning: Föreningen ska ha säte och huvudsaklig verksamhet i Hallstahammar, minst tio medlemmar, årsmötesantagna stadgar, medlemsregister, styrelse och egen ekonomisk förvaltning samt lämna verksamhetsberättelse, ekonomi, revision, plan och budget.
+  system: Rbok och kommunens e-tjänster
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Årshandlingar senast en månad efter årsmötet
+  giltighet: Årshandlingar senast en månad efter årsmötet
   ordning: 1
-  kalla_url: https://www.hallstahammar.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
