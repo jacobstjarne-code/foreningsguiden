@@ -76,7 +76,7 @@ const RULES: Record<string, ExpectedRule> = {
   trelleborg: { typ: 'manader_efter_beslut', antal: 12, datum: null, status: 'kontrollast' },
   umea: { typ: 'manader_efter_arsmote', antal: 12, datum: null, status: 'kontrollast' },
   vallentuna: { typ: 'manader_efter_arsmote', antal: 3, datum: null, status: 'kontrollast' },
-  varberg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  varberg: { typ: 'kalenderar', antal: null, datum: null, status: 'kontrollast' },
   vaxjo: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
 };
 
