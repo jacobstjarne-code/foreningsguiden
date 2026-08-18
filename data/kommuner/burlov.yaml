@@ -4,152 +4,100 @@ lan: Skåne län
 befolkning: 20444
 forvaltning: Utbildnings- och kulturförvaltningen
 ansokningssystem:
-  namn: Föreningsregistret / E-tjänster
+  namn: Interbook Go
   url: https://ibgo.burlov.se/AssociationRegister
-kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-verifierad: 2026-07-26
+kalla_url: https://burlov.se/kulturfritid/foreningariburlov/ekonomiskastod.4.529b5b9c19a0a1e99e18e8a3.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://burlov.se/download/18.4fca773018e5a91a6b5111e2/1711098659868/Allm%C3%A4nna%20best%C3%A4mmelser%20f%C3%B6r%20st%C3%B6d%20till%20f%C3%B6reningar%20och%20medborgarinitiativ%20inom%20Kultur%20och%20fritid%202021-12-08.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: burlov-idrottsforeningar
-  namn: Föreningsbidrag — Idrottsföreningar
-  kategori:
-  - idrott
-  malgrupp: Registrerade idrottsföreningar
+  namn: Aktivitetsstöd
+  foreningstyp: [idrott]
+  kategori: [idrott]
+  malgrupp: Stödberättigade föreningar anslutna till Riksidrottsförbundet
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [02-25]
   krav:
-  - Föreningen måste vara registrerad i Föreningsregistret
-  - Idrottsverksamhet ska bedrivas i Burlöv kommun
-  - Ansökan via Föreningsregistret / e-tjänster
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Se kommunens allmänna bestämmelser för detaljer om krav och belopp Tidigare platshållare "Individuell bedömning"
-    har tagits bort. Kommunens faktiska beloppsregel är ännu inte verifierad.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara ansluten till Riksidrottsförbundet och uppfylla Burlövs kriterier för stödberättigad förening
+  - Varje gruppaktivitet ska ha minst tre deltagare utöver ledare eller tränare och pågå minst 60 minuter med gemensam start och avslut
+  - Matcher i serier, cuper eller turneringar är inte bidragsberättigade
+  - Högst tre ledare per gruppaktivitet får räknas med
+  - Ansökan ska redovisa föregående kalenderårs deltagartillfällen och inget stöd får ha beviljats för aktiviteten från en annan kommun
+  belopp: Deltagarstöd baserat på redovisade deltagartillfällen och högst tre ledare per aktivitet; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 februari för hela föregående kalenderårs aktiviteter
+  kalla_url: https://burlov.se/kulturfritid/foreningariburlov/ekonomiskastod.4.529b5b9c19a0a1e99e18e8a3.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: burlov-kulturforeningar
-  namn: Föreningsbidrag — Kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Registrerade kulturföreningar
+  namn: Verksamhetsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Stödberättigade föreningar utanför Riksidrottsförbundet samt statsbidragsgodkända studieförbund
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [03-25]
   krav:
-  - Föreningen måste vara registrerad i Föreningsregistret
-  - Kulturverksamhet ska bedrivas i Burlöv kommun
-  - Ansökan via Föreningsregistret / e-tjänster
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Se kommunens allmänna bestämmelser för detaljer Tidigare platshållare "Individuell bedömning" har tagits bort.
-    Kommunens faktiska beloppsregel är ännu inte verifierad.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: burlov-pensionarsforeningar
-  namn: Föreningsbidrag — Pensionärsföreningar
-  kategori:
-  - ovrig
-  malgrupp: Registrerade pensionärsföreningar
+  - Sökande förening ska uppfylla Burlövs kriterier för stödberättigad förening och får inte vara medlem i Riksidrottsförbundet
+  - Ett sökande studieförbund ska vara godkänt av Folkbildningsrådet och bedriva verksamhet i Burlöv för deltagare som är kommuninvånare
+  - Verksamheten ska bidra till ett varierat och inkluderande kultur- och fritidsutbud
+  - Bedömningen utgår från hur många kommuninvånare verksamheten når och hur väl den svarar mot kommunens fokusområden
+  - Stöd ges inte för aktivitet som fått stöd från en annan kommun eller till en annan förening eller ett annat studieförbund
+  belopp: Individuellt bedömt efter räckvidd och överensstämmelse med kommunens kultur- och fritidsstrategi; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 mars varje år
+  kalla_url: https://burlov.se/kulturfritid/foreningariburlov/ekonomiskastod.4.529b5b9c19a0a1e99e18e8a3.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: burlov-drift-hyresstod
+  namn: Drift- och hyresstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  malgrupp: Föreningar som äger eller långtidshyr och driver lokal eller anläggning i Burlövs kommun
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [03-25]
   krav:
-  - Föreningen måste vara registrerad pensionärsförening
-  - Verksamheten ska riktas till pensionärer
-  - Ansökan via Föreningsregistret / e-tjänster
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: burlov-studieforbund
-  namn: Föreningsbidrag — Studieförbund
-  kategori:
-  - kultur
-  malgrupp: Registrerade studieförbund
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Studieförbundet måste vara registrerat
-  - Folkbildningsverksamhet enligt statliga kriterier
-  - Ansökan via Föreningsregistret / e-tjänster
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: burlov-medborgareinitiativ
-  namn: Stöd till medborgarinitiativ
-  kategori:
-  - ovrig
-  malgrupp: Medborgarinitiativ och lokala samlingsprojekt
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Initiativet ska vara registrerat eller organiserat
-  - Verksamheten ska vara till nytta för Burlövsbor
-  - Ansökan via e-tjänster
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska uppfylla Burlövs kriterier för stödberättigad förening och äga eller långtidshyra en lokal eller anläggning där föreningen ansvarar för driften
+  - Vid långtidshyra ska ett skriftligt avtal finnas; kommunala driftuppdrag ska regleras genom avtal med Burlövs kommun
+  - Verksamheten ska rikta sig till barn och unga 0–20 år, personer med funktionsnedsättning eller personer som är minst 65 år
+  - Stöd får avse drift, hyra, värme, vatten och el men inte redan subventionerad kommunal lokal, entrébelagt eller vinstinriktat arrangemang eller lokal i annan kommun
+  - Ansökan ska redovisa lokalens eller anläggningens typ och yta i kvadratmeter
+  belopp: Högst 75 % av godkända kostnader för drift, hyra, värme, vatten och el
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 mars varje år
+  kalla_url: https://burlov.se/download/18.4fca773018e5a91a6b5111e2/1711098659868/Allm%C3%A4nna%20best%C3%A4mmelser%20f%C3%B6r%20st%C3%B6d%20till%20f%C3%B6reningar%20och%20medborgarinitiativ%20inom%20Kultur%20och%20fritid%202021-12-08.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: burlov-registrering
-  vad: Registrering i Föreningsregistret
-  beskrivning: Föreningen måste vara registrerad i Burlövs Föreningsregister. Registrering sker via Föreningsregistret eller
-    e-tjänster.
-  system: Föreningsregistret
+  vad: Registrering och aktuella föreningshandlingar
+  beskrivning: Föreningen ska vara registrerad i Interbook Go med organisationsuppgifter, stadgar, senaste årsmöteshandlingar, ekonomi, bank- och kontaktuppgifter.
+  system: Interbook Go
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://ibgo.burlov.se/AssociationRegister
-  giltighet_status: okand
-- id: burlov-e-tjanster
-  vad: Ansökan via e-tjänster eller Föreningsregistret
-  beskrivning: Föreningsbidrag-ansökningar skickas via Föreningsregistret eller Burlövs e-tjänstportal. Registrerade föreningsrepresentanter
-    kan ansöka.
-  system: E-tjänster / Föreningsregistret
-  ledtid: null
-  ledtid_text: Löpande ansökningsprocess
-  giltighet: null
-  ordning: 2
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  giltighet_status: okand
-- id: burlov-kontakt
-  vad: Kontaktinformation för föreningsstöd
-  beskrivning: 'Kultur- och fritidsenheten hanterar föreningsbidrag. Tel: 040-625 60 00, E-post: fritid@burlov.se. För detaljer
-    om belopp och krav, se kommunens allmänna bestämmelser för stöd till föreningar.'
-  system: Utbildnings- och kulturförvaltningen
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
-  ordning: 3
-  kalla_url: https://burlov.se/kulturfritid/foreningariburlov.4.609e1877159f0e59b9f29437.html
-  giltighet_status: okand
+  kalla_url: https://burlov.se/kulturfritid/foreningariburlov/bildaochregistreraforening.4.609e1877159f0e59b9f29ab5.html
+  giltighet_status: ingen_regel
