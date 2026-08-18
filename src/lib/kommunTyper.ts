@@ -861,6 +861,7 @@ export function getUrgency(days: number): Urgency {
 }
 
 export interface DeadlineEntry {
+  niva: 'kommunal';
   kommun: string;
   kommunSlug: string;
   bidragId: string;

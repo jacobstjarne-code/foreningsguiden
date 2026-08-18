@@ -1,0 +1,48 @@
+---
+import { loadNationellaStod } from '../lib/nationellaStod';
+import { formatRecurringDate } from '../lib/kommuner';
+
+export interface Props {
+  kategori?: string;
+}
+
+const { kategori } = Astro.props;
+const stod = loadNationellaStod().filter((s) => s.status === 'aktiv' && (!kategori || s.kategori.includes(kategori as never)));
+---
+{stod.length > 0 && (
+  <section class="nationella-stod" aria-labelledby="nationella-stod-rubrik">
+    <p class="nationella-stod__eyebrow">Gäller i hela Sverige</p>
+    <h2 id="nationella-stod-rubrik">Nationella stöd</h2>
+    <p>De här stöden hör inte till kommunen. De gäller föreningar i alla 290 kommuner och visas därför separat.</p>
+    <ul class="nationella-stod__lista">
+      {stod.map((s) => (
+        <li>
+          <div>
+            <a href={`/nationella-stod/${s.id}/`}><strong>{s.namn}</strong></a>
+            <p>{s.malgrupp}</p>
+            <p class="nationella-stod__datum">Återkommande sista datum: {s.deadlines.datum.map(formatRecurringDate).join(' och ')}</p>
+          </div>
+          <div data-bevaka-cell data-nationellt-stod-id={s.id} data-stod-namn={s.namn}>
+            <a href={`/nationella-stod/${s.id}/#bevaka`} class="fg-btn--ghost bevaka-rad-knapp">Bevaka den här</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<script>
+  import { initBevakaWidgets } from '../lib/bevakaKlient';
+  initBevakaWidgets();
+</script>
+
+<style>
+  .nationella-stod { margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--border, #d8d3ca); border-radius: .75rem; }
+  .nationella-stod__eyebrow { margin: 0 0 .25rem; font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .nationella-stod h2 { margin-top: 0; }
+  .nationella-stod__lista { list-style: none; margin: 1rem 0 0; padding: 0; }
+  .nationella-stod__lista li { display: flex; align-items: start; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border, #d8d3ca); }
+  .nationella-stod__lista p { margin: .25rem 0; }
+  .nationella-stod__datum { font-size: .92rem; }
+  @media (max-width: 42rem) { .nationella-stod__lista li { display: block; } .nationella-stod__lista [data-bevaka-cell] { margin-top: 1rem; } }
+</style>

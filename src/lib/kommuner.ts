@@ -614,6 +614,7 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
     for (const bidrag of kommun.bidrag) {
       if (bidrag.status !== 'aktiv') continue; // H26 — pausat/avskaffat bidrag hör inte hemma i kalendern
       const base = {
+        niva: 'kommunal' as const,
         kommun: kommun.kommun,
         kommunSlug: kommun.kommun_slug,
         bidragId: bidrag.id,

@@ -154,6 +154,26 @@ export async function sendPaminnelseSista(to: string, vars: PaminnelseVars): Pro
   await sendMejl(to, MEJL.paminnelseSista, vars);
 }
 
+// U2.2 (Jacob 2026-08-18, MEJL 7): eget varsformat — {period}/{slutdatum}
+// är specifika för LOK-stödets sanktionstrappa, inte en generell
+// nationell-påminnelseform. MEJL 8:s vars är oförändrade (Omit<...
+// 'kommun'>) tills Jacob ger resten av sitt diktat, se content.ts.
+export interface NationellPaminnelse28Vars {
+  datum: string;
+  period: string;
+  slutdatum: string;
+  lank: string;
+}
+export type NationellPaminnelseVars = Omit<PaminnelseVars, 'kommun'>;
+
+export async function sendNationellPaminnelse28(to: string, vars: NationellPaminnelse28Vars): Promise<void> {
+  await sendMejl(to, MEJL.nationellPaminnelse28, vars);
+}
+
+export async function sendNationellPaminnelseSista(to: string, vars: NationellPaminnelseVars): Promise<void> {
+  await sendMejl(to, MEJL.nationellPaminnelseSista, vars);
+}
+
 export interface GiltighetsvarningNiva2Vars {
   kommun: string;
   kalla_url: string;
