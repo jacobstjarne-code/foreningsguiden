@@ -7,10 +7,18 @@ ansokningssystem:
   namn: Interbook Go (ibgo.skovde.se)
   url: https://ibgo.skovde.se/IBGO/
 kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/
-verifierad: 2026-07-23
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.skovde.se/globalassets/kommun-och-politik/taxor-avgifter-och-styrande-dokument/forfattningssamling/allmanna-regler-for-bidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: skovde-arrangorsstod
   namn: Arrangörsstöd (stöd till evenemang och möten)
+  status: aktiv
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - kultur
   - ovrig
@@ -22,18 +30,22 @@ bidrag:
   - Ansökan ska lämnas senast 3 månader före arrangemanget
   - För profilarrangemang gäller senast 12 månader före arrangemanget
   - Ansökan görs i nio steg via e-tjänsten (bl.a. målgrupp, hållbarhet, besöksstatistik) med bifogad budget
-  belopp: null
+  belopp: Stödet bestäms efter prövning; kommunen publicerar ingen fast beloppsgräns
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 3 månader före arrangemanget (12 månader för profilarrangemang)
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/arrangorsstod/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Handläggs av arrangemangsgruppen, beslut normalt inom sex veckor. Ansökan görs via e-tjänsten 'Ansökan om stöd,
     evenemang och möten' (https://sjalvservice.skovde.se/oversikt/overview/320). Ingen fast övre beloppsgräns för stora profilarrangemang.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-landsbygdsutveckling
   namn: Bidrag för landsbygdsutveckling
+  status: aktiv
+  foreningstyp: [hembygd, friluft, annat]
   kategori:
   - ovrig
   malgrupp: Demokratiskt uppbyggda, registrerade föreningar som vill utveckla landsbygden i Skövde kommun
@@ -50,17 +62,20 @@ bidrag:
   - Ej kommersiell verksamhet som konkurrerar på en marknad
   belopp: 'Fem delbidrag med olika tak: Utvecklingspeng 20 000 kr, Kultur och fritid 50 000 kr, Vatten och avlopp 25 000 kr,
     Digitalisering 30 000 kr (två delposter), Bygdepeng 100 000 kr'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 31 januari
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-for-landsbygden/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Handläggs ej 6 juli-16 augusti. Utvecklingspeng betalas i förskott, Bygdepeng 50 % i förskott/50 % vid slutredovisning,
-    övriga vid projektavslut inom fyra veckor. Dubbelverifierat mot källan (belopp och deadline oförändrade vid andra hämtning).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utvecklingspeng betalas i förskott, Bygdepeng till hälften i förskott och hälften efter slutredovisning, övriga efter projektavslut.
+  senast_verifierad: '2026-08-18'
 - id: skovde-bygdegard-lokalbidrag
   namn: Lokalbidrag till bygdegårdsföreningar
+  status: aktiv
+  foreningstyp: [hembygd, kultur, annat]
   kategori:
   - ovrig
   malgrupp: Bygdegårdsföreningar anslutna till Bygdegårdarnas riksförbund, registrerade i Skövde kommuns föreningsregister
@@ -73,16 +88,20 @@ bidrag:
   - Samlingslokal öppen för uthyrning, ska uppfylla ett varaktigt lokalt behov
   - Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och årsmötesprotokoll ska bifogas
   belopp: Belopp per kvadratmeter, beslutas årligen av kultur- och fritidsnämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast en månad efter genomfört årsmöte
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-bygdegardsforeningar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Deadline är relativ till föreningens eget årsmöte, ej ett fast kalenderdatum — satt till löpande.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan lämnas senast en månad efter föreningens årsmöte.
+  senast_verifierad: '2026-08-18'
 - id: skovde-bygdegard-investeringsbidrag
   namn: Investeringsbidrag till bygdegårdsföreningar
+  status: aktiv
+  foreningstyp: [hembygd, idrott, friluft, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Bygdegårdsföreningar samt bidragsberättigade ungdomsföreningar inom idrott, natur och friluftsliv som äger, arrenderar
@@ -98,16 +117,20 @@ bidrag:
   - Offerter ska bifogas
   - Vid arrende/hyra krävs giltigt avtal med minst ett års löptid
   belopp: Maximerat till 50 % av godkända kostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 1 mars (andra omgång 1 september om medel kvarstår)
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-bygdegardsforeningar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Dubbelverifierat mot källan (belopp och deadline oförändrade vid andra hämtning).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En andra ansökningsomgång öppnar till 1 september om medel finns kvar.
+  senast_verifierad: '2026-08-18'
 - id: skovde-bygdegard-rantefria-lan
   namn: Ränte- och amorteringsfria lån till bygdegårdsföreningar
+  status: aktiv
+  foreningstyp: [hembygd, idrott, friluft, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Bygdegårdsföreningar samt bidragsberättigade ungdomsföreningar inom idrott, natur och friluftsliv
@@ -121,16 +144,20 @@ bidrag:
   - Föreningen ska utnyttja statliga bidragsmöjligheter
   - Projektbeskrivning, kostnadskalkyl, finansieringsplan, ritningar och tidplan krävs
   belopp: Högst 50 % av kultur- och fritidsnämndens godkända nettokostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 30 april
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-bygdegardsforeningar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Lånet avskrivs för föreningen efter 10 år. Dubbelverifierat mot källan.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Lånet kan användas från 1 januari året efter beslutet, ska vara fullt utnyttjat inom två år och skrivs av efter tio år.
+  senast_verifierad: '2026-08-18'
 - id: skovde-funktionsnedsattning-verksamhetsbidrag
   namn: Verksamhetsbidrag till föreningar för personer med funktionsnedsättning
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   malgrupp: Lokala föreningar för personer med fysiska, neuropsykiatriska och/eller intellektuella funktionsnedsättningar
@@ -149,15 +176,16 @@ bidrag:
   kommunens_pott: null
   sen_ansokan: Senast 10 maj varje år
   kalla_url: https://www.skovde.se/globalassets/kommun-och-politik/taxor-avgifter-och-styrande-dokument/forfattningssamling/regler-for-bidrag-till-foreningar-for-personer-med-funktionsnedsattning.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Regler för bidrag till föreningar för personer med funktionsnedsättning, beslutad av KF 2022-02-28 § 19/22,
-    reviderad 2023-12-06 och 2025-04-16. Hämtad som PDF (pdftotext) — matchar sidsammanfattningen på webbsidan.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidragsnivån bestäms inför varje år utifrån ansökningarna och nämndens budget.
+  senast_verifierad: '2026-08-18'
 - id: skovde-funktionsnedsattning-lokalbidrag
   namn: Lokalbidrag till föreningar för personer med funktionsnedsättning
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   malgrupp: Bidragsberättigade föreningar för personer med funktionsnedsättning som hyr eller har kostnader för lokal/anläggning
@@ -171,16 +199,20 @@ bidrag:
   - Lokalen ska huvudsakligen användas regelmässigt av föreningens medlemmar
   - Ges ej till lokaler som föreningen hyr av Skövde kommun
   belopp: 100 % av godkända nettolokalkostnader, dock högst 50 grundbelopp per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast tre veckor efter föreningens årsmöte, dock senast 1 november
   kalla_url: https://www.skovde.se/globalassets/kommun-och-politik/taxor-avgifter-och-styrande-dokument/forfattningssamling/regler-for-bidrag-till-foreningar-for-personer-med-funktionsnedsattning.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-funktionsnedsattning-utvecklingsbidrag
   namn: Utvecklingsbidrag för funktionshinderföreningar
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - funktionsratt
   malgrupp: Bidragsberättigade föreningar för personer med funktionsnedsättning som vill genomföra projekt eller utåtriktade
@@ -194,41 +226,104 @@ bidrag:
   - Tidigare beviljat projekt måste vara avslutat och slutredovisat innan ny ansökan kan godkännas
   - Kan ej sökas för rehabiliterande eller återkommande aktiviteter i ordinarie verksamhet
   belopp: Kan betalas ut med 100 % av godkända nettokostnader. Nämnden kan bevilja lägre belopp än sökt om medlen inte räcker.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 10 maj varje år (kompletterande höstomgång kan utlysas om medel kvarstår)
   kalla_url: https://www.skovde.se/globalassets/kommun-och-politik/taxor-avgifter-och-styrande-dokument/forfattningssamling/regler-for-bidrag-till-foreningar-for-personer-med-funktionsnedsattning.pdf
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Redovisning av använt bidrag ska in senast 28 februari året efter.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-socialt-arbete
-  namn: Bidrag till föreningar med socialt arbete
+  namn: Verksamhetsbidrag till föreningar med socialt arbete
+  status: aktiv
+  foreningstyp: [social, annat]
   kategori:
   - social
   malgrupp: Föreningar med verksamhet för barn och ungdomar i riskzon, vuxna med missbruksproblem eller social utsatthet,
     personer med psykiska funktionsnedsättningar, eller stöd till anhöriga som vårdar personer med funktionsnedsättning/långvarig
     sjukdom
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 04-01
   krav:
   - Minst 10 medlemmar
   - Verksamhet i Skövde kommun (undantag kan förekomma)
-  - Se Riktlinjer för föreningsbidrag från socialnämnden för fullständiga krav
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Föreningen ska vara en juridisk person med stadgar och vald styrelse samt bedriva verksamhet på demokratisk grund
+  - Verksamhetsplan, verksamhetsberättelse, revisionsberättelse, resultat- och balansräkning samt årsmötesprotokoll ska bifogas
+  - Ansökan ska redovisa medlemsantalet den 31 december samt aktiviteter med datum och deltagarantal
+  belopp: Grundbidrag högst 5 000 kronor per år samt aktivitetsbidrag med 20 kronor per aktiv medlem och aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 april det år bidraget avser
   kalla_url: https://sjalvservice.skovde.se/oversikt/overview/115
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Administreras av Socialnämnden, inte Interbook Go. Fullständiga regler i 'Riktlinjer för föreningsbidrag från
-    socialnämnden' (PDF länkad i e-tjänsten, ej separat extraherad). Syftar till att uppmuntra nytänkande/metodutveckling
-    och komplettera nämndens egen verksamhet.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En bidragsgrundande aktivitet ska pågå minst en timme och ha minst fem deltagare. Beslut fattas normalt i juni.
+  senast_verifierad: '2026-08-18'
+- id: skovde-socialt-startbidrag
+  namn: Startbidrag till föreningar med socialt arbete
+  status: aktiv
+  foreningstyp: [social, annat]
+  kategori:
+  - social
+  malgrupp: Nystartade föreningar med verksamhet för socialnämndens målgrupper
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-01
+  krav:
+  - Föreningen ska ha minst 10 medlemmar och verksamhet riktad till socialnämndens målgrupper
+  - Föreningen ska vara en juridisk person med stadgar och vald styrelse samt bedriva verksamhet på demokratisk grund
+  - Verksamhetsplan, verksamhetsberättelse, revisionsberättelse, resultat- och balansräkning samt årsmötesprotokoll ska bifogas
+  - Stadgar ska bifogas vid den första ansökan
+  belopp: Högst 4 000 kronor och endast en gång per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 april det år bidraget avser
+  kalla_url: https://www.skovde.se/globalassets/kommun-och-politik/taxor-avgifter-och-styrande-dokument/forfattningssamling/riktlinjer-for-foreningsbidrag-fran-socialnamnden.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beslut om socialnämndens föreningsbidrag fattas normalt i juni.
+  senast_verifierad: '2026-08-18'
+- id: skovde-socialt-sarskilt-verksamhetsbidrag
+  namn: Särskilt verksamhetsbidrag till föreningar med socialt arbete
+  status: aktiv
+  foreningstyp: [social, annat]
+  kategori:
+  - social
+  malgrupp: Föreningar med särskild verksamhet för socialnämndens målgrupper som inte uppfyller reglerna för ordinarie verksamhetsbidrag
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-01
+  krav:
+  - Föreningen ska ha minst 10 medlemmar och fylla en viktig social funktion för kommuninvånarna
+  - Ansökan ska avse en särskild verksamhet eller inriktning för socialnämndens målgrupper
+  - Föreningen ska vara en juridisk person med stadgar och vald styrelse samt bedriva verksamhet på demokratisk grund
+  - Verksamhetsplan, verksamhetsberättelse, revisionsberättelse, resultat- och balansräkning samt årsmötesprotokoll ska bifogas
+  belopp: Beloppet bestäms efter en bedömning av verksamhetens nytta och värde; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 april det år bidraget avser
+  kalla_url: https://www.skovde.se/globalassets/kommun-och-politik/taxor-avgifter-och-styrande-dokument/forfattningssamling/riktlinjer-for-foreningsbidrag-fran-socialnamnden.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nyttan och värdet för socialnämndens målgrupper ligger till grund för bedömningen.
+  senast_verifierad: '2026-08-18'
 - id: skovde-ungdom-aktivitetsstod
   namn: Kommunalt aktivitetsstöd
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar inom idrott, natur och friluftsliv med ungdomsverksamhet för 7-20-åringar
@@ -238,22 +333,26 @@ bidrag:
     - 02-28
     - 08-28
   krav:
-  - Ansluten till Riksidrottsförbundets system IdrottOnline
+  - Föreningen ska vara ansluten till ett riksförbund inom idrott, natur eller friluftsliv och rapportera i IdrottOnline eller kommunens system
   - Minst 10 registerförda medlemmar 7-20 år, minst 50 % folkbokförda i Skövde kommun
   - Minst 10 bidragsberättigade aktiviteter under verksamhetsåret
   - Max 4 bidragsberättigade aktiviteter/vecka för 7-15 år, ingen begränsning för 16-20 år
   - Antagen plan för barnens rättigheter kopplad till barnkonventionen
-  belopp: null
+  belopp: Bidragsnivån bestäms av kultur- och fritidsnämnden; kommunen publicerar ingen fast taxa i det aktuella regelverket
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 28 februari (avser 1/7-31/12 föregående år) och 28 augusti (avser 1/1-30/6 innevarande år)
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Dubbelverifierat mot källan i två separata hämtningar — deadlines oförändrade.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet söks halvårsvis i efterhand. Årsmöteshandlingar och planen för barnets rättigheter ska finnas i verksamhetssystemet.
+  senast_verifierad: '2026-08-18'
 - id: skovde-ungdom-lokalbidrag
   namn: Lokalbidrag till ungdomsföreningar
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar inom idrott, natur och friluftsliv med ungdomsverksamhet som hyr lokal/anläggning
@@ -267,16 +366,20 @@ bidrag:
   - Lokalen ska huvudsakligen användas regelmässigt för medlemmar 7-20 år
   - Ges ej till kanslier eller lokaler hyrda av Skövde kommun
   belopp: Högst 75 % av godkända nettolokalkostnader, dock högst 50 grundbelopp per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast tre veckor efter årsmötet, dock senast 1 november
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-ungdom-anlaggningsbidrag
   namn: Anläggningsbidrag till ungdomsföreningar
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar inom idrott, natur och friluftsliv som äger eller långfristigt hyr/arrenderar (minst 10 år) en anläggning
@@ -286,18 +389,25 @@ bidrag:
     - 11-01
   krav:
   - Föreningen ska äga eller ha ett långsiktigt (minst 10 år) hyres- eller arrendeavtal för anläggningen
+  - Anläggningen ska ligga i Skövde kommun och huvudsakligen användas regelbundet av föreningens medlemmar 7–20 år
+  - Permanent uthyrda lokaler får inte räknas med
+  - Kansli, kontor, personalrum och förråd är inte bidragsberättigade ytor
   belopp: 'Poängbaserat bidrag per anläggningstyp (exempel: konstgräsplan inomhus 9 mot 9 = 153 poäng, gymnastiksal per kvm
     = 0,18 poäng). Kvarvarande medel efter sista ansökningsdag fördelas procentuellt mellan sökande.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast tre veckor efter årsmötet, dock senast 1 november
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-ungdom-investeringsbidrag
   namn: Investeringsbidrag till ungdomsföreningar
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar inom idrott, natur och friluftsliv med ungdomsverksamhet
@@ -311,16 +421,20 @@ bidrag:
   - Offerter ska bifogas
   - Projektet får ej ha påbörjats vid ansökningstillfället
   belopp: Högst 50 % av kultur- och fritidsnämndens godkända nettokostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 1 mars (andra omgång 1 september om medel kvarstår)
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-ungdom-rantefria-lan
   namn: Ränte- och amorteringsfria lån till ungdomsföreningar
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar inom idrott, natur och friluftsliv med ungdomsverksamhet
@@ -331,17 +445,24 @@ bidrag:
   krav:
   - Totalkostnaden ska överstiga 30 grundbelopp
   - Lånet ska vara fullt utnyttjat inom 2 år från beviljande
+  - Föreningen ska äga eller långtidsarrendera anläggningen i minst tio år och styrka detta med avtal
+  - Ansökan ska innehålla projektbeskrivning, kostnadskalkyl, finansieringsplan, ritningar, tidplan och foton
+  - Statliga bidragsmöjligheter ska utnyttjas och räknas av före låneberäkningen
   belopp: Högst 50 % av kultur- och fritidsnämndens godkända nettokostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 30 april
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Lånet avskrivs för föreningen efter 10 år.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-ungdom-sarskilda-insatser
   namn: Bidrag till särskilda insatser eller projekt (ungdomsföreningar)
+  status: aktiv
+  foreningstyp: [idrott, friluft, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar inom idrott, natur och friluftsliv med ungdomsverksamhet som vill genomföra insatser utöver ordinarie
@@ -352,17 +473,23 @@ bidrag:
   krav:
   - Insatsen/projektet ska ligga utöver föreningens ordinarie verksamhet
   - 'Prioriterade områden: fler ungdomar i föreningslivet, att ungdomar stannar längre, projekt för livslångt engagemang'
-  belopp: null
+  - Föreningen ska vara bidragsberättigad ungdomsförening inom idrott, natur eller friluftsliv
+  - Ansökan ska lämnas minst en månad före verksamhetsstart
+  belopp: Beloppet bestäms efter prövning och tillgängliga medel; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan senast en månad innan verksamheten planeras starta; hanteras löpande under året
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kultur- och fritidsnämnden kan även bevilja bidrag på eget initiativ, utan föregående ansökan.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningar tas emot löpande så länge det finns medel kvar.
+  senast_verifierad: '2026-08-18'
 - id: skovde-parasportbidrag
   namn: Parasportbidrag
+  status: aktiv
+  foreningstyp: [idrott, social, ungdom, annat]
   kategori:
   - idrott
   - funktionsratt
@@ -374,19 +501,27 @@ bidrag:
     - 02-28
     - 08-28
   krav:
+  - Föreningen ska vara medlem i Riksidrottsförbundet och bedriva parasport
+  - Aktiviteterna ska vara för personer från 7 år och uppåt
   - Varje aktivitetstillfälle ska vara minst 45 minuter
+  - Ansökan ska innehålla redovisning av verksamhet, aktiviteter, deltagare och ledare
+  - Kvitton eller fakturor i föreningens namn ska bifogas för resor, specialmaterial och inventarier
   belopp: 200 kr/ledare/verksamhetstimme för max fyra ideellt arbetande ledare (sex vid förbundsevenemang); 50 % av resekostnader,
     max 10 000 kr/år; 50 % av kostnad för specialmaterial, max 10 000 kr/år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Senast 28 februari och 28 augusti
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-foreningar-med-ungdomsverksamhet/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ligger på samma sida/regelverk som ungdomsverksamhetens bidrag men riktar sig specifikt till parasport.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget söks för föregående halvårs verksamhet. Ledarkostnader prioriteras före resor och specialmaterial.
+  senast_verifierad: '2026-08-18'
 - id: skovde-studieforbund
   namn: Bidrag till studieförbund
+  status: aktiv
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   - ovrig
@@ -401,18 +536,22 @@ bidrag:
   - Verksamhetsplan ska lämnas senast 15 december året innan
   - Verksamhetsberättelse med ekonomisk redovisning senast 30 juni
   - Signerade kommunsammanställningar senast 30 juni
-  belopp: null
+  belopp: Kommunbidraget fördelas enligt Västra Götalands Bildningsförbunds modell; kommunen publicerar ingen fast nivå per studieförbund
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Verksamhetsplan senast 15 december, redovisning senast 30 juni
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/bidrag-till-studieforbund/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Fördelning sker enligt Västra Götalands Bildningsförbunds fördelningsverktyg. Kommunbidrag betalas ut i sin
     helhet senast 31 januari.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-subventionerad-lokalhyra
   namn: Subventionerad lokalhyra i bygdegårdar
+  status: aktiv
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Registrerade föreningar och studieförbund i Skövde kommun som hyr lokal i en registrerad bygdegård
@@ -430,18 +569,21 @@ bidrag:
   - Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och årsmötesprotokoll krävs (räcker en gång per år vid
     flera ansökningar)
   belopp: 80 % av lokalhyran, dock högst 80 % av 1 000 kronor per tillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Kvartalsvis: förhyrning nov-jan senast sista februari, feb-april senast sista maj, maj-juli senast sista augusti,
     aug-okt senast sista november'
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/subventionerad-lokalhyra-i-bygdegardar/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bekräftat identisk lydelse i det dedikerade funktionsnedsättningsregelverket (PDF) — konvergerande källor, ingen
-    konflikt.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Årsmöteshandlingarna behöver bara skickas in en gång per år om föreningen gör flera ansökningar.
+  senast_verifierad: '2026-08-18'
 - id: skovde-kulturforeningar-verksamhetsbidrag
   namn: Verksamhetsbidrag för kulturföreningar
+  status: aktiv
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Kulturföreningar som klassas som sådana och är aktivt verksamma i Skövde kommun
@@ -454,42 +596,103 @@ bidrag:
   - Kontinuerlig verksamhet inom det konstnärliga eller kulturella fältet med utåtriktade arrangemang
   - Verksamheten ska vara öppen för alla och bidra till kulturella mötesplatser
   - Aktivitetsplan med budget, verksamhetsberättelse, styrelseprotokoll, ekonomisk redovisning och revisionsberättelse krävs
-  belopp: null
+  belopp: Beloppet beslutas årligen efter prövning; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Mellan 1 juni och 1 september för nästkommande års bidrag
   kalla_url: https://www.skovde.se/naringsliv-foretag-forening/forening/foreningsbidrag/verksamhetsbidrag-for-kulturforeningar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Bidraget betalas ut i januari påföljande år.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: skovde-enskilda-vagar
-  namn: Driftbidrag till enskilda vägar
+  namn: Driftbidrag till enskilda vägar utan statligt bidrag
+  status: aktiv
+  foreningstyp: [annat]
   kategori:
   - ovrig
-  malgrupp: Väghållare för enskilda vägar utan eller med statligt driftbidrag — vägsamfällighetsföreningar och enskilda fastighetsägare
+  malgrupp: Samfällighetsföreningar, vägföreningar, vägsamfälligheter och ideella föreningar som sköter enskild väg utan statligt driftbidrag
   deadlines:
     typ: fasta
     datum:
     - 03-31
   krav:
-  - 'Väg utan statsbidrag: minst 250 meter lång'
-  - 'Väg med statsbidrag: godkännandebrev från Trafikverket, karta och kostnadsberäkning bifogas'
-  - 'Efterhand: besiktningsprotokoll och fakturor för särskilt driftbidrag'
-  belopp: 'Väg utan statsbidrag: 3 kr/meter inkl. moms. Väg med statsbidrag: högst 30 % av Trafikverket-godkända kostnader.
-    Särskilt driftbidrag: 50 % av mellanskillnaden mellan statsbidrag och faktiska kostnader, beroende på budget.'
+  - Sökanden ska vara en förening eller samfällighet som ansvarar för vägen; stödspåret för enskilda fastighetsägare ingår inte i Föreningsguiden
+  - Vägen ska sakna statligt driftbidrag och vara minst 250 meter lång
+  - En karta som visar vägens placering och sträckning ska bifogas
+  - Foton som visar vägens skick ska bifogas när det är aktuellt
+  - Den som inte sökt tidigare ska först kontakta kommunen för en bedömning
+  belopp: 3 kronor inklusive moms per meter väg
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan mellan 1 januari och 31 mars det år bidraget avser
   kalla_url: https://www.skovde.se/gator-gronomraden/ansvar-for-vagar-och-gator/enskilda-vagar-och-driftbidrag/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Administreras av Samhällsbyggnad, inte Interbook Go — ligger utanför kultur- och fritidsnämndens sidträd. Bidragsperiod
-    löper tre år (innevarande år plus föregående och efterföljande); ny ansökan krävs för varje period. Kartbild/foto på vägens
-    skick kan krävas.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidragsperioden är tre år och omfattar ansökningsåret, föregående år och efterföljande år. En ny ansökan krävs inför varje period.
+  senast_verifierad: '2026-08-18'
+- id: skovde-enskilda-vagar-statligt-bidrag
+  namn: Driftbidrag till enskilda vägar med statligt bidrag
+  status: aktiv
+  foreningstyp: [annat]
+  kategori:
+  - ovrig
+  malgrupp: Föreningar och samfälligheter som sköter enskild väg med statligt driftbidrag
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-31
+  krav:
+  - Sökanden ska vara en förening eller samfällighet som ansvarar för vägen; stödspåret för enskilda fastighetsägare ingår inte i Föreningsguiden
+  - Vägen ska följa Trafikverkets regler för statligt driftbidrag
+  - Väghållare för vägar längre än 1 000 meter ska i första hand söka statligt bidrag
+  - En karta som visar vägens placering och sträckning ska bifogas
+  - Foton som visar vägens skick ska bifogas när det är aktuellt
+  belopp: Högst 30 procent av Trafikverkets godkända driftkostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan görs 1 januari–31 mars det år bidraget avser
+  kalla_url: https://www.skovde.se/gator-gronomraden/ansvar-for-vagar-och-gator/enskilda-vagar-och-driftbidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidragsperioden är tre år och en ny ansökan krävs inför varje period. Utbetalning sker årligen för föregående år.
+  senast_verifierad: '2026-08-18'
+- id: skovde-enskilda-vagar-sarskilt-driftbidrag
+  namn: Särskilt driftbidrag till enskilda vägar
+  status: aktiv
+  foreningstyp: [annat]
+  kategori:
+  - ovrig
+  malgrupp: Föreningar och samfälligheter med statligt driftbidrag som genomför en större godkänd vägåtgärd
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening eller samfällighet som ansvarar för vägen; stödspåret för enskilda fastighetsägare ingår inte i Föreningsguiden
+  - Trafikverket ska ha godkänt åtgärden för särskilt driftbidrag
+  - Beslut från Trafikverket, karta och offert eller kostnadsuppskattning ska bifogas ansökan
+  - Efter arbetet ska godkänt besiktningsprotokoll, Trafikverkets utbetalningsbeslut och entreprenörsfakturor skickas in
+  belopp: 50 procent av mellanskillnaden mellan Trafikverkets bidrag och den faktiska kostnaden inklusive moms, i mån av budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar inget sista ansökningsdatum
+  kalla_url: https://www.skovde.se/gator-gronomraden/ansvar-for-vagar-och-gator/enskilda-vagar-och-driftbidrag/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet kan bland annat avse vägtrummor, förstärkning, asfaltering, broar och större reparationer.
+  senast_verifierad: '2026-08-18'
 - id: skovde-vagforeningar-driftbidrag
   namn: Driftbidrag till vägföreningar
+  status: aktiv
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Etablerade vägföreningar i Lerdala, Timmersdala, Ulvåker och Värsås
@@ -498,41 +701,48 @@ bidrag:
     datum:
     - 03-31
   krav:
-  - Verksamhetsberättelse och ekonomisk redovisning ska bifogas
+  - Sökanden ska vara en av vägföreningarna i Lerdala, Timmersdala, Ulvåker eller Värsås
+  - Årsredovisning och verksamhetsberättelse ska bifogas
+  - Bokslut med resultat- och balansräkning ska bifogas
   - Särskilt driftbidrag för större projekt kräver projektplan, tidplan, offerter och foton
   belopp: Beräknas per kvadratmeter väg, avsett att täcka drift och underhåll av gator, vägar och torg. Särskilt driftbidrag
     för större projekt beroende på budgetutrymme.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan mellan 1 januari och 31 mars det år bidraget avser
   kalla_url: https://www.skovde.se/gator-gronomraden/ansvar-for-vagar-och-gator/enskilda-vagar-och-driftbidrag/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Administreras av Samhällsbyggnad, inte Interbook Go. Skild från det generella driftbidraget till enskilda vägar
-    genom att det riktar sig specifikt till fyra namngivna, etablerade vägföreningar.
-  senast_verifierad: '2026-08-03'
-- id: skovde-idrottskandidater
-  namn: Idrottskandidater
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Det ordinarie bidraget avser drift och underhåll av gator, vägar och torg inom föreningens område.
+  senast_verifierad: '2026-08-18'
+- id: skovde-vagforeningar-sarskilt-driftbidrag
+  namn: Särskilt driftbidrag till vägföreningar
+  status: aktiv
+  foreningstyp: [annat]
   kategori:
-  - idrott
-  malgrupp: Idrottsutövare (individuellt eller i lag, bredd- och elitnivå) samt föreningar verksamma i Skövde kommun
+  - ovrig
+  malgrupp: Vägföreningarna i Lerdala, Timmersdala, Ulvåker och Värsås som behöver genomföra en större åtgärd utöver vanligt underhåll
   deadlines:
-    typ: fasta
-    datum:
-    - 11-30
+    typ: okand
+    datum: []
   krav:
-  - Ska ha utmärkt sig genom stark utveckling, enastående prestationer eller imponerande resultat under året
-  belopp: null
-  sen_ansokan: Nominering senast 30 november
-  kalla_url: https://www.skovde.se/kommun-och-politik/pengar-du-kan-soka-och-utmarkelser/idrottskandidater/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nomineringsbaserad utmärkelse, inte ett traditionellt föreningsbidrag med fast utbetalning — men målgruppen
-    omfattar uttryckligen föreningar (ej bara individer), och utesluts därför inte enligt spec §2.4. Vinnare utses av nomineringskommitté
-    och uppmärksammas vid Skövdes kultur- och idrottsgala.
-  senast_verifierad: '2026-08-03'
+  - Sökanden ska vara en av vägföreningarna i Lerdala, Timmersdala, Ulvåker eller Värsås
+  - Ansökan ska innehålla föreningens namn, kontaktperson och en plan med plats, åtgärd och tidsperiod
+  - Karta och offert eller kostnadsuppskattning ska bifogas samt foton när det är aktuellt
+  - Efter åtgärden ska fakturor, verifikationer och eventuellt besiktningsprotokoll skickas in
+  belopp: Bidrag ges i mån av budget; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar inget sista ansökningsdatum
+  kalla_url: https://www.skovde.se/gator-gronomraden/ansvar-for-vagar-och-gator/enskilda-vagar-och-driftbidrag/
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet kan avse exempelvis asfaltering, dränering, broar, murar, tekniska anläggningar eller trafiksäkerhetsåtgärder.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: skovde-bidragsberattigad
   vad: Bli registrerad och godkänd som bidragsberättigad förening
