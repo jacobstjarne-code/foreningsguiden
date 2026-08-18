@@ -7,10 +7,17 @@ ansokningssystem:
   namn: FRI Webb-Bidrag (Idavall Data)
   url: https://ystad.fri-go.se/bidrag/
 kalla_url: https://ystad.se/uppleva-och-gora/foreningsliv/foreningsbidrag
-verifierad: 2026-07-23
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: sammansatt
+  antal: null
+  datum: null
+  kalla_url: https://ystad.se/appresource/4.17a6dbb18b37d70e0545164/12.660677dc19301da04633d45/download?file=c1be7b95-16d3-4f11-ae3e-c214ef1e8571&folder=c46a94ef-7c33-42cc-9d66-ed4d16d6468e
+giltighet_regel_status: kontrollast
 bidrag:
 - id: ystad-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd (LOK-stöd)
+  foreningstyp: [idrott, ungdom]
   kategori:
   - idrott
   malgrupp: Föreningar med barn- och ungdomsverksamhet, med säte och verksamhet i Ystads kommun, för medlemmar folkbokförda
@@ -27,18 +34,19 @@ bidrag:
   - Gäller inte matcher, tävlingar eller uppvisningar
   - Närvaroredovisning ska föras och sparas i minst 10 år
   belopp: Max 9 kr/deltagare och tillfälle. Max två tillfällen/vecka för 4–12 år, tre tillfällen/vecka för 13–20 år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=8&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Redovisningsperioder 1/1–30/6 (ansökan senast 25/8) och 1/7–31/12 (ansökan senast 25/2). Idrottsföreningar anslutna
-    till RF redovisar direkt dit; övriga använder Närvaro GO. Portalen listade även en identisk post 'Aktivitetsstöd' (type=37)
-    med ordagrant samma text — bedömd som portaldublett, ej med i kommunens regelverk, se tackning.log.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Redovisningsperioder 1 januari–30 juni söks senast 25 augusti och 1 juli–31 december senast 25 februari. RF-anslutna idrottsföreningar redovisar till RF; övriga använder Närvaro GO. Portalposten Aktivitetsstöd type 37 återger samma stöd och är inte ett separat bidrag i nämndens bestämmelser.
+  senast_verifierad: '2026-08-18'
 - id: ystad-ledarutbildningsbidrag
   namn: Ledarutbildningsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -54,17 +62,20 @@ bidrag:
   - Inget bidrag om deltagaren har ekonomisk vinning av utbildningen
   - Kursprogram och kursintyg ska bifogas ansökan (sker i efterhand)
   belopp: Erlagd kursavgift, max 1 500 kr per kurs och deltagare. Max 7 500 kr/år och förening
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=20&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökningstillfälle 25/2 avser perioden 1/7–31/12 föregående år; 25/8 avser 1/1–30/6 pågående år. Kan även gå
     till studiematerial vid interna studiecirklar.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-ledarersattningsbidrag
   namn: Ledarersättningsbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - funktionsratt
@@ -77,37 +88,43 @@ bidrag:
   - Ansökan ska göras innan första aktivitetstillfället
   - Maximalt en ledare per grupp kan få bidraget
   belopp: 100 kr per tillfälle, max 3 000 kr per ledare och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Rapportering ska ske senast 15 december det aktuella året
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=22&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-lovbidrag
   namn: Lovbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
-  malgrupp: Alla föreningar som under skolans lov arrangerar gratis aktiviteter för barn och unga 6–15 år
+  malgrupp: Alla bidragsberättigade föreningar som under skolans lov arrangerar gratis aktiviteter för barn och unga 6–18 år
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Aktiviteten ska vara gratis och öppen för alla i åldersgruppen, utan krav på medlemskap eller tidigare färdigheter
+  - Aktiviteten ska vara gratis och öppen för alla barn och unga 6–18 år, utan krav på medlemskap eller tidigare färdigheter
   - Aktiviteten ska genomföras i Ystads kommun
   - Rapportering i efterhand med deltagarantal uppdelat på kön
   belopp: Ingen övre gräns publicerad. Ansökningar prioriteras tills budgeten för året tar slut
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Sista ansökningsdag är tre veckor innan aktuellt lovs första dag
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=26&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Budgeten kan ta slut under året, varpå inga fler ansökningar godkänns det året.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-projektstod-mangfald
   namn: Projektstöd – mångfald
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   - funktionsratt
@@ -122,16 +139,19 @@ bidrag:
   - Barnrättsplan krävs vid barn- och ungdomsverksamhet (annars 'ej tillämpligt')
   - Projektrapportering i efterhand med utvärdering
   belopp: Ingen övre gräns publicerad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=23&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-driftsbidrag
   namn: Driftsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -146,16 +166,19 @@ bidrag:
   - Endast driftskostnader (räntor, försäkring, uppvärmning, el, vatten m.m.) och visst underhåll är bidragsgrundande
   belopp: Barn- och ungdomsföreningar max 90 % av godkända kostnader. Övriga föreningar max 100 kr/medlem eller max 45 % av
     kostnader (lägsta beloppet gäller). Max 350 000 kr/år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=27&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser föregående kalenderår och ska vara inne senast 30 april året efter.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-hyresbidrag
   namn: Hyresbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -168,18 +191,21 @@ bidrag:
   - Grundas på föregående års bokslut och faktiska kostnader
   - Barnrättsplan krävs vid barn- och ungdomsverksamhet
   - Kultur- och fritidsförvaltningen kan neka om lokalen inte bedöms nödvändig för verksamheten
-  belopp: Barn- och ungdomsföreningar max 75 % av godkända kostnader. Övriga föreningar max 100 kr/medlem eller max 45 % av
+  belopp: Barn- och ungdomsföreningar max 90 % av godkända kostnader. Övriga föreningar max 100 kr/medlem eller max 45 % av
     kostnader (lägsta beloppet gäller). Max 50 000 kr/år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=25&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan avser föregående kalenderår och ska vara inne senast 30 april året efter.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-investeringsbidrag
   namn: Investeringsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -195,18 +221,21 @@ bidrag:
   - Ska även söka statligt eller annat bidrag om möjligt
   - Anbud/offert, tidsplan och finansieringsplan ska bifogas
   belopp: 'Ungdoms-/handikappföreningar: 40 % av kostnad upp till 300 000 kr, 10 % därutöver, max 1 500 000 kr; teknisk utrustning
-    25 % upp till 125 000 kr. Övriga föreningar: 20 %/5 %, max 1 500 000 kr; teknisk utrustning 20 % upp till 100 000 kr.
+    25 % upp till 125 000 kr. Övriga föreningar: 30 % upp till 200 000 kr och 5 % därutöver, max 1 500 000 kr; teknisk utrustning 20 % upp till 100 000 kr.
     Ingen bidrag under 20 000 kr'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Investeringar under 50 000 kr söks löpande; över 50 000 kr senast 1 maj
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=10&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Återbetalningsskyldighet vid avyttring/flytt inom 10 år (fastighet) respektive 5 år (maskin/fordon) efter utbetalning.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-grundbidrag
   namn: Grundbidrag
+  foreningstyp: [social, annat]
   kategori:
   - pensionar
   - funktionsratt
@@ -217,17 +246,22 @@ bidrag:
     - 04-30
   krav:
   - Bidraget grundas på antalet medlemmar vid ansökningsdatum
+  - Föreningen ska vara en bidragsberättigad ideell förening med säte och huvudsaklig verksamhet i Ystads kommun
+  - Föreningen ska ha antagna stadgar, vald styrelse, medlemsförteckning och bankkonto i föreningens namn
   belopp: Max 20 kr per medlem och år, dock högst föreningens redovisade kostnader under gångna verksamhetsåret
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=13&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-arligt-verksamhetsbidrag
   namn: Årligt verksamhetsbidrag
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Väletablerade kulturföreningar av stor konstnärlig och kulturpolitisk betydelse för Ystads kommun (barn- och ungdomsverksamhet
@@ -243,17 +277,20 @@ bidrag:
   - Representanter ska årligen delta i möte med förvaltningen
   - Kan inte kombineras med arrangemangs-/projektbidrag samma år (undantag LOK-stöd)
   belopp: Max 40 000 kr per år och förening
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Avdrag 50 % vid upp till en månads försening, 100 % vid mer än en månads försening (gäller redovisning, senast
     15 februari)
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=33&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kultur- och fritidsnämnden beslutar i december vilka föreningar som får bidrag för nästkommande år.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: För föreningar med verksamhet av betydelsefullt kommunalt, regionalt eller nationellt intresse kan nämnden besluta om ett högre belopp och flerårigt avtal.
+  senast_verifierad: '2026-08-18'
 - id: ystad-arrangemangs-och-projektbidrag
   namn: Arrangemangs- och projektbidrag
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Kulturföreningar som genomför enstaka offentliga arrangemang/projekt i Ystads kommun (barn- och ungdomsverksamhet
@@ -267,42 +304,46 @@ bidrag:
   - Inget bidrag till arrangemang direkt kopplade till högtider (t.ex. midsommar, nationaldagen)
   - Redovisning senast två månader efter genomfört arrangemang
   belopp: Lägst 5 000 kr, högst 50 000 kr per arrangemang/projekt. Max 50 % av godkända kostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Handläggningstid max fem veckor. Avdrag 50 %/100 % vid sen redovisning
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=34&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-landsbygdsbidrag
   namn: Landsbygdsbidrag
+  foreningstyp: [kultur, hembygd, friluft, ungdom, annat]
   kategori:
   - kultur
   - ovrig
   malgrupp: Alla föreningar som skapar kultur- och fritidsarrangemang/utvecklingsprojekt på landsbygden, samt föreningar som
     äger samlingslokaler anslutna till riksorganisation (t.ex. Bygdegårdarnas riksförbund, Folkets hus och parker)
   deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+    typ: lopande
+    datum: []
   krav:
   - Föreningen ska vara godkänd som bidragsberättigad av kultur- och fritidsnämnden
   - Samlingslokal ska ligga på landsbygden, vara öppen och tillgänglig för alla
   - Bidrag till samlingslokaler grundas på föregående års bokslut
   belopp: 'Arrangemang/projekt: max 50 % av godkända kostnader. Samlingslokaler: max 50 % av godkända kostnader, högst 60
     000 kr/år'
-  sen_ansokan: Ansökan för arrangemang/projekt görs löpande (handläggningstid max fem veckor); för samlingslokal senast 30
-    april året efter. Avdrag 50 %/100 % vid försening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Arrangemang och projekt söks löpande med högst fem veckors handläggningstid. Samlingslokalsdelen söks senast 30 april året efter kostnadsåret; vid sen ansökan minskas stödet 50 eller 100 procent.
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=35&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Deadline 04-30 avser samlingslokal-delen av bidraget; arrangemangs-/projektdelen är löpande.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Portalens huvudpost är löpande. Samlingslokalsdelen har den särskilda sista dagen 30 april.
+  senast_verifierad: '2026-08-18'
 - id: ystad-dialogbidrag-studieforbund
   namn: Dialogbidrag för studieförbund
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   - ovrig
@@ -315,17 +356,20 @@ bidrag:
   - Samverkansavtal tecknas årsvis med kultur- och fritidsförvaltningen (uppdrag, fokusområden, mål, uppföljning)
   - Årlig verksamhetsplan och ekonomisk redovisning för föregående år
   - Representanter ska medverka vid minst två möten per år med förvaltningen
-  belopp: null
+  belopp: Beloppet fastställs individuellt i det årliga samverkansavtalet; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=36&year=2026
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Ansökan görs via föreningsportalen. Avtal tecknas under hösten, medel betalas ut i maj året därpå.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-projektbidrag-studieforbund
   namn: Projektbidrag för studieförbund
+  foreningstyp: [kultur, annat]
   kategori:
   - kultur
   - ovrig
@@ -337,18 +381,20 @@ bidrag:
   - Projektet ska vara avgiftsfritt för deltagarna
   - Ansökan ska göras innan projektet startar
   - Slutredovisning senast två månader efter projekttidens utgång
-  belopp: 30 % av det totala anslagna bidraget för studieförbund utgår som projektbidrag. Förskott upp till 90 % möjligt för
-    projekt över 50 000 kr
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 30 % av kultur- och fritidsnämndens totala anslag till studieförbund avsätts för projektbidrag
   sen_ansokan: Handläggningstid max fem veckor
   kalla_url: https://ystad.fri-go.se/bidrag/ansokaninfo.aspx?type=24&year=2026
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: ystad-kulturpris
   namn: Kulturpris
+  foreningstyp: [kultur]
   kategori:
   - kultur
   malgrupp: Enskilda personer, föreningar, institutioner, företag eller organisationer som bor, verkar eller har stark koppling
@@ -362,17 +408,19 @@ bidrag:
   - Nominering lämnas skriftligen till kultur- och fritidsförvaltningen av enskild person eller organisation
   - Anställda i Ystads kommun/kommunalförbund/kommunalt bolag kan inte nomineras för sitt ordinarie arbete
   belopp: 30 000 kronor (kan delas mellan flera mottagare)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Förslag som kommit in efter sista ansökningsdag behandlas inte
   kalla_url: https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/kulturpriset
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser
-    (Kultur- och fritidsnämnden, 21 maj 2025). Utdelat sedan 1965.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningar kan vara mottagare och nominering för 2026 ska lämnas senast 25 september. Priset har delats ut sedan 1965.
+  senast_verifierad: '2026-08-18'
 - id: ystad-idrottspris
   namn: Idrottspris
+  foreningstyp: [idrott]
   kategori:
   - idrott
   malgrupp: Enskilda personer, föreningar, institutioner, företag eller organisationer som bor, verkar eller har stark koppling
@@ -386,17 +434,19 @@ bidrag:
   - Idrotten personen/gruppen tillhör ska vara ansluten till Riksidrottsförbundet
   - Anställda i Ystads kommun/kommunalförbund/kommunalt bolag kan inte nomineras för sitt ordinarie arbete
   belopp: 30 000 kronor (kan delas mellan flera mottagare)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Förslag som kommit in efter sista ansökningsdag behandlas inte
   kalla_url: https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/idrottspriset
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser
-    (Kultur- och fritidsnämnden, 21 maj 2025).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningar kan vara mottagare och nominering för 2026 ska lämnas senast 25 september.
+  senast_verifierad: '2026-08-18'
 - id: ystad-kulturstipendium
   namn: Kulturstipendium
+  foreningstyp: [kultur, ungdom]
   kategori:
   - kultur
   malgrupp: Ung kulturutövare, förening eller organisation som arbetar med kultur för unga inom Ystads kommun
@@ -407,18 +457,21 @@ bidrag:
   krav:
   - Stark koppling till Ystads kommun
   - Ansökan görs själv, med arbetsprover eller motsvarande underlag som stöd för bedömningen
+  - En förening eller organisation ska arbeta med kultur för unga inom Ystads kommun
   belopp: 10 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar som kommit in efter sista ansökningsdag behandlas inte
   kalla_url: https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/kulturstipendiet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser
-    (Kultur- och fritidsnämnden, 21 maj 2025).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stipendiet kan sökas av en förening eller organisation och ska för 2026 sökas senast 25 september.
+  senast_verifierad: '2026-08-18'
 - id: ystad-idrottsstipendium
   namn: Idrottsstipendium
+  foreningstyp: [idrott, ungdom]
   kategori:
   - idrott
   malgrupp: Ung idrottsutövare, förening eller organisation som arbetar med idrott för unga inom Ystads kommun
@@ -429,63 +482,70 @@ bidrag:
   krav:
   - Stark koppling till Ystads kommun
   - Ansökan görs själv, med arbetsprover eller motsvarande underlag som stöd för bedömningen
+  - En förening eller organisation ska arbeta med idrott för unga inom Ystads kommun
   belopp: 10 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar som kommit in efter sista ansökningsdag behandlas inte
   kalla_url: https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/idrottsstipendiet
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nominerings-/ansökningsperiod 1 januari–25 september enligt Riktlinjer för priser, stipendier och utmärkelser
-    (Kultur- och fritidsnämnden, 21 maj 2025).
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stipendiet kan sökas av en förening eller organisation och ska för 2026 sökas senast 25 september.
+  senast_verifierad: '2026-08-18'
 - id: ystad-landsbygdspriset
   namn: Landsbygdspriset
+  foreningstyp: [hembygd, friluft, annat]
   kategori:
   - ovrig
   malgrupp: Enskilda personer, föreningar, företag eller organisationer som bidragit till landsbygdens utveckling i Ystads
     kommun
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Ska bo eller verka i Ystads kommun
   - Anställda i Ystads kommun/kommunalförbund/kommunalt bolag kan inte nomineras för sitt ordinarie arbete
   - Vinnaren utses av kommunstyrelsen
   belopp: 10 000 kronor samt diplom
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.se/samhallsutveckling-och-trafik/landsbygdsutveckling/landsbygdspriset
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Delas ut årligen (vid kommunfullmäktiges augustisammanträde) men sidan anger inget fast nomineringsdatum — nomineringsperioden
-    för 2026 var stängd vid verifieringstillfället. Satt till löpande i väntan på publicerat datum, se tackning.log.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Priset delas ut årligen vid kommunfullmäktiges augustisammanträde. Kommunen publicerar inget återkommande fast nomineringsdatum.
+  senast_verifierad: '2026-08-18'
 - id: ystad-hallbarhetspriset
   namn: Hållbarhetspriset
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Enskilda personer, föreningar, institutioner, företag eller organisationer som bor eller verkar i Ystads kommun
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Initiativ inom miljömässig, social och/eller ekonomisk hållbarhet
   - Anställda i Ystads kommun/kommunalförbund/kommunala bolag kan inte nomineras för sitt ordinarie arbete
   - Pristagare utses av kommunstyrelsens arbetsutskott
   belopp: 10 000 kronor samt diplom
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.se/kommun-och-politik/sa-arbetar-ystads-kommun/hallbarhet/hallbarhetspriset
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Nominering för 2026 var öppen vid verifieringstillfället, men sidan anger inget fast öppnings-/stängningsdatum.
-    Satt till löpande, se tackning.log.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningar och organisationer kan vara mottagare. Kommunen publicerar inget återkommande fast öppnings- eller stängningsdatum.
+  senast_verifierad: '2026-08-18'
 - id: ystad-foreningsbidrag-socialnamnden
   namn: Föreningsbidrag (Socialnämnden)
+  foreningstyp: [social]
   kategori:
   - social
   - pensionar
@@ -502,24 +562,25 @@ bidrag:
   - Årsmöte med godkänd verksamhets-, kassa- och revisionsberättelse, årlig medlemsavgift
   - Föreningen ska vara i behov av pengar — ingen kapitalbindning accepteras
   - Ansökan ska innehålla plan för tillgänglighet (rörelsehinder, nedsatt orienteringsförmåga, hörsel m.m.)
-  belopp: null
+  belopp: Beslutas individuellt utifrån kommuninvånarnas behov, nämndens nytta, antalet medlemmar eller deltagare och föreningens ekonomiska behov; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.se/omsorg-och-stod/stiftelser-fonder-och-foreningsbidrag/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Regler antagna av Socialnämnden 2018-09-20 § 133. Bidraget är selektivt — varje ansökan prövas individuellt
-    utifrån kommuninvånarnas behov, nämndens nytta, antal medlemmar/deltagare och ekonomiskt behov. Inget digitalt ansökningssystem
-    angivet.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget är selektivt och varje ansökan prövas individuellt. Ansökan lämnas till socialnämnden; kommunen anger inget särskilt digitalt ansökningssystem.
+  senast_verifierad: '2026-08-18'
 - id: ystad-samhallsbyggnadsbidrag
   namn: Samhällsbyggnadsbidrag
+  foreningstyp: [hembygd, friluft, annat]
   kategori:
   - ovrig
   malgrupp: Byalag och intresseföreningar i kommunens byar och orter
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Åtgärden ska utföras på mark som byn/byborna har rådighet över, inte kommunal mark
@@ -527,19 +588,20 @@ bidrag:
   - Åtgärden ska utföras samma år som bidraget söks
   - Sökande ansvarar själv för eventuella tillstånd (t.ex. bygglov, strandskyddsdispens)
   - Fotodokumenterad redovisning till samhällsbyggnadsförvaltningen senast årets slut
-  belopp: null
+  belopp: Beslutas efter hur väl åtgärden uppfyller bidragets syften, tidigare stöd till byn och åtgärdens genomförbarhet; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.se/samhallsutveckling-och-trafik/landsbygdsutveckling/bidrag-och-stod-till-landsbygdsutveckling/samhallsbyggnadsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Samhällsbyggnadsnämnden avsätter årligen medel sedan 2020. Exempel på åtgärder: gångstigar, bänkar, lekutrustning,
-    hjärtstartare, belysning. Varken belopp per bidrag eller fast ansökningsdatum är publicerat — bedömning görs av samhällsbyggnadsförvaltningen
-    utifrån syfte, tidigare tilldelning och genomförbarhet.'
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Samhällsbyggnadsnämnden har avsatt årliga medel sedan 2020. Exempel på åtgärder är gångstigar, bänkar, lekutrustning, hjärtstartare och belysning. Kommunen publicerar varken generell stödnivå eller återkommande fast sista ansökningsdag.
+  senast_verifierad: '2026-08-18'
 - id: ystad-bidrag-enskilda-vagar
   namn: Bidrag till enskilda vägar
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Fast boende (folkbokförd) på fastighet längs enskild väg i Ystads kommun. Vid flera boende längs vägen ska väghållningen
@@ -555,41 +617,81 @@ bidrag:
   - Endast en väg per fastighet vid flera utfarter
   belopp: 'Icke statsbidragsberättigade vägar: 3,60 kr/m (ej de första 200 m). Statsbidragsberättigade vägar: max 40 % av
     Trafikverkets beräknade driftkostnad (statligt + kommunalt bidrag max 100 % tillsammans)'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.se/samhallsutveckling-och-trafik/trafik-gator-och-torg/drift-och-underhall/bidrag-till-enskilda-vagar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Utbetalning sker senast i juni året efter det kalenderår bidraget avser. Ansökan sker elektroniskt (ext.ystad.se/s/enskildvag).
-    Administreras av Samhällsutveckling och trafik, ej av kultur- och fritidsnämndens FRI-system. Kultur- och fritidsnämndens
-    egna bidragsbestämmelser undantar uttryckligen vägföreningar/vägsamfälligheter från DERAS bidrag — detta är alltså ett
-    separat, fristående vägbidragsspår hos en annan nämnd. Gränsdragningen mot att bidraget formellt riktas till en 'fast
-    boende' snarare än en förening/samfällighet som juridisk sökande diskuteras i tackning.log.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning sker senast i juni året efter bidragsåret. För flera boende längs vägen ska väghållningen vara ordnad genom en samfällighet eller kommunalt godkänd överenskommelse. Stödet administreras utanför kultur- och fritidsförvaltningens bidragssystem.
+  senast_verifierad: '2026-08-18'
 - id: ystad-horney-smithska-stiftelsen
   namn: Horney-Smithska stiftelsen
+  foreningstyp: [social]
   kategori:
   - social
   - pensionar
   malgrupp: Organisationer och föreningar med anknytning till Ystad vars verksamhet syftar till att främja enskildas sociala
     behov (stiftelsen delar också ut medel till enskilda behövande tjänstemän/pensionärer i Ystad stad och deras familjemedlemmar)
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Verksamheten ska ha anknytning till Ystad och syfta till att främja enskildas sociala behov
-  - Inkomstdeklaration och person-/familjebevis ska bifogas ansökan
-  belopp: null
+  - Den sökande föreningen eller organisationen ska beskriva verksamhetens sociala ändamål och anknytning till Ystad
+  - Ansökan ska lämnas via kommunens e-tjänst eller på den blankett kommunen tillhandahåller under årets ansökningsperiod
+  belopp: Stiftelsen beslutar belopp efter prövning; kommunen publicerar ingen generell nivå för föreningar och organisationer
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://ystad.se/kommun-och-politik/ovrig-service/bidrag-priser-stipendier-stiftelser-och-fonder/ovriga-stiftelser
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Skriven som samlad post per RESEARCH_SPEC §2.7 — enda av Ystads kommunala stiftelser/fonder (utöver de rena
-    privatpersons-fonderna, se tackning.log för uteslutna) som uttryckligen kan gå till organisationer/föreningar. 2025 års
-    ansökningsperiod gick ut 30 september; sidan anger inte uttryckligen att detta är ett fast årligt datum, därför satt till
-    löpande.
-  senast_verifierad: '2026-08-03'
-forutsattningar: []
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Av Ystads redovisade sociala stiftelser är detta den som uttryckligen kan ge medel till organisationer och föreningar. Kommunens sida visar 30 september för 2025 men anger inte att dagen är en fast årlig regel.
+  senast_verifierad: '2026-08-18'
+forutsattningar:
+- id: ystad-registrering-och-grundvillkor
+  vad: Vara registrerad och godkänd som bidragsberättigad
+  beskrivning: Föreningen ska vara ideell och demokratiskt uppbyggd, ha säte och huvudsaklig verksamhet i Ystads kommun, antagna stadgar, vald styrelse, medlemsförteckning och bankkonto i föreningens namn. Kulturarrangemang i Ystad kan omfattas av undantaget från säteskravet.
+  system: Ystads kommuns föreningsregister
+  ledtid: null
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid för godkännandet.
+  giltighet: null
+  ordning: 1
+  kalla_url: https://ystad.se/appresource/4.17a6dbb18b37d70e0545164/12.660677dc19301da04633d45/download?file=c1be7b95-16d3-4f11-ae3e-c214ef1e8571&folder=c46a94ef-7c33-42cc-9d66-ed4d16d6468e
+  giltighet_status: ingen_regel
+- id: ystad-arsmoteshandlingar
+  vad: Lämna års- och årsmöteshandlingar
+  beskrivning: Årsmötesprotokoll, årsredovisning med resultat- och balansrapport samt revisionsberättelse ska lämnas in årligen. Föreningsregistrets uppgifter ska uppdateras senast 30 april och vid senare ändringar.
+  system: Ystads kommuns föreningsregister
+  ledtid: 60
+  ledtid_text: Årsmöteshandlingarna ska lämnas senast två månader efter årsmötet; registeruppgifterna senast 30 april och ändringar senast två månader efter årsmötet.
+  giltighet: Årsmötesprotokoll, årsredovisning och revisionsberättelse ska lämnas senast två månader efter årsmötet; föreningsregistret ska uppdateras senast 30 april och vid ändringar senast två månader efter årsmötet
+  ordning: 2
+  kalla_url: https://ystad.se/appresource/4.17a6dbb18b37d70e0545164/12.660677dc19301da04633d45/download?file=c1be7b95-16d3-4f11-ae3e-c214ef1e8571&folder=c46a94ef-7c33-42cc-9d66-ed4d16d6468e
+  giltighet_status: kontrollast
+- id: ystad-medlemmar-och-verksamhet
+  vad: Uppfylla medlems- och verksamhetskraven
+  beskrivning: Föreningen ska normalt ha bedrivit verksamhet i minst tolv månader och ha minst 15 medlemmar. Endast medlemmar folkbokförda i Ystads kommun är bidragsgrundande och medlemsavgiften ska normalt vara minst 50 kronor.
+  system: Ystads kommuns föreningsregister
+  ledtid: null
+  ledtid_text: Villkoren ska vara uppfyllda när ansökan lämnas; lokalt aktivitetsstöd omfattas av undantag från minimiantalet.
+  giltighet: null
+  ordning: 3
+  kalla_url: https://ystad.se/appresource/4.17a6dbb18b37d70e0545164/12.660677dc19301da04633d45/download?file=c1be7b95-16d3-4f11-ae3e-c214ef1e8571&folder=c46a94ef-7c33-42cc-9d66-ed4d16d6468e
+  giltighet_status: ingen_regel
+- id: ystad-barnrattsplan
+  vad: Ha en aktuell plan för barns rättigheter
+  beskrivning: Föreningar med barn- och ungdomsverksamhet ska ha en plan för barns rättigheter som antagits av årsmötet och beskriver hur barnkonventionen genomförs, följs upp och utvecklas i föreningen.
+  system: Ystads kommuns föreningsregister
+  ledtid: null
+  ledtid_text: Planen ska revideras vartannat år.
+  giltighet: Barnrättsplanen ska revideras vartannat år
+  ordning: 4
+  kalla_url: https://ystad.se/appresource/4.17a6dbb18b37d70e0545164/12.660677dc19301da04633d45/download?file=c1be7b95-16d3-4f11-ae3e-c214ef1e8571&folder=c46a94ef-7c33-42cc-9d66-ed4d16d6468e
+  giltighet_status: kontrollast
+kommunsiffra: null
