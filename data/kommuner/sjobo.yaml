@@ -4,12 +4,19 @@ lan: Skåne län
 befolkning: 19416
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: Sjöbo kommuns föreningsstöd
-  url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
+  namn: FRI
+  url: https://sjobo.fri-go.se/bidrag/
 kalla_url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://www.sjobo.se/download/18.5c7b33c316748c2e36de7f/1545041022928/Regelverk%20f%C3%B6reningsst%C3%B6d%202018%20%20antagen%20handling.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Lokalt aktivitetsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -28,16 +35,20 @@ bidrag:
     kommunalt stöd
   belopp: Lägst 4,50 kr/deltagartillfälle (3–6 år och 21–25 år), 6 kr/deltagartillfälle (7–20 år och +65 år), 12 kr/deltagartillfälle
     för personer med funktionsnedsättning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Ansökan som kommer in för sent ger reducerat stöd: 1–7 dagar för sent -10 %, 8–14 dagar -25 %, 15–21 dagar
     -50 %; senare än 21 dagar är föreningen inte berättigad till stöd'
-  kalla_url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
-  belopp_status: olast
-  deadline_status: olast
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: sjobo-lokalt-aktivitetsstod
 - namn: Kulturstöd
+  foreningstyp: [kultur, hembygd]
   kategori:
   - kultur
   malgrupp: Ideella föreningar i kommunen
@@ -49,18 +60,23 @@ bidrag:
   - Föreningen ska bedriva kontinuerlig publik kulturverksamhet (t.ex. litteratur, konst, musik, dans, scenkonst, film, kulturminnesvård)
     öppen för allmänheten
   - Beviljas inte för verksamhet som omfattas av lokalt aktivitetsstöd
+  - Ansökan ska beskriva föregående och planerad verksamhet samt lämnas med föreningens aktuella årshandlingar
   belopp: Stödet utgår årsvis och beviljas efter särskild prövning utifrån kommunstyrelsens mål för kulturverksamheten i kommunen;
     inget fast belopp per förening anges i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Ansökan som kommer in för sent ger reducerat stöd: 1–7 dagar för sent -10 %, 8–14 dagar -25 %, 15–21 dagar
     -50 %; senare än 21 dagar är föreningen inte berättigad till stöd'
-  kalla_url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
-  belopp_status: olast
-  deadline_status: olast
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: sjobo-kulturstod
 - namn: Hyresstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -73,18 +89,23 @@ bidrag:
   krav:
   - Kommunen ska i förväg ha godkänt förhyrningen i det enskilda fallet
   - Gäller endast om likvärdiga kommunala lokalalternativ inte kan erbjudas
+  - Lokalen ska användas för föreningens ordinarie verksamhet och hyreskostnaden ska styrkas
   belopp: Högst 90 % av föregående års hyreskostnad för förening som redovisat minst 400 deltagartillfällen enligt lokalt
     aktivitetsstöd; för föreningar som inte når upp till detta högst 30 %
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Ansökan som kommer in för sent ger reducerat stöd: 1–7 dagar för sent -10 %, 8–14 dagar -25 %, 15–21 dagar
     -50 %; senare än 21 dagar är föreningen inte berättigad till stöd'
-  kalla_url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
-  belopp_status: olast
-  deadline_status: olast
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: sjobo-hyresstod
 - namn: Investeringsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -97,19 +118,156 @@ bidrag:
   krav:
   - Stöd utgår endast för anläggning/lokal som Sjöbo kommun i förväg godkänt
   - Kan sökas för ny-, till- eller ombyggnad, ökad tillgänglighet samt miljö- och energiåtgärder
+  - Ansökan ska innehålla kostnadsunderlag och investeringen ska slutredovisas innan resterande stöd betalas ut
   belopp: Högst 90 % av föregående års investeringskostnad för förening som redovisat minst 400 deltagartillfällen enligt
     lokalt aktivitetsstöd; för föreningar som inte når upp till detta högst 30 %. Utbetalas med 50 % vid planering och resterande
     vid slutredovisning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Ansökan som kommer in för sent ger reducerat stöd: 1–7 dagar för sent -10 %, 8–14 dagar -25 %, 15–21 dagar
     -50 %; senare än 21 dagar är föreningen inte berättigad till stöd'
-  kalla_url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
-  belopp_status: olast
-  deadline_status: olast
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  anteckning: null
+  senast_verifierad: '2026-08-18'
   id: sjobo-investeringsstod
+- id: sjobo-studieforbund
+  namn: Stöd till studieförbund
+  foreningstyp: [annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Sjöbo kommun
+  deadlines: { typ: fasta, datum: [10-25] }
+  krav:
+  - Studieförbundet ska vara statsbidragsberättigat och bedriva lokal verksamhet enligt nationella folkbildningsregler
+  - Ansökan ska avse föregående års verksamhet i Sjöbo kommun
+  - Underlaget ska redovisa målgruppsstudietimmar och övriga studietimmar
+  - Aktuella årshandlingar och verksamhetsredovisning ska lämnas till kommunen
+  belopp: Lägst 40 kr per målgruppsstudietimme och 30 kr per övrig studietimme
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 oktober
+  kalla_url: https://sjobo.fri-go.se/bidrag/ansokaninfo.aspx?type=6&year=2027
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: sjobo-drift-foreningsagd-anlaggning
+  namn: Driftstöd till föreningsägd anläggning eller lokal
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som driver en i förväg godkänd egen anläggning eller lokal
+  deadlines: { typ: fasta, datum: [10-25] }
+  krav:
+  - Anläggningen eller lokalen ska ligga i Sjöbo kommun och vara godkänd i förväg av kommunen
+  - Lokalen ska användas för föreningens ordinarie verksamhet
+  - Ansökan ska redovisa föregående års nettodriftkostnad och nyttjandegrad
+  - Bedömningen tar hänsyn till verksamhetens omfattning och prioriterade målgrupper
+  belopp: Högst 90 % av godkänd nettodriftkostnad vid minst 400 LOK-deltagartillfällen, annars högst 30 %
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 oktober
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: sjobo-samlingslokaler
+  namn: Stöd till samlingslokaler
+  foreningstyp: [hembygd, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Folkets hus- och bygdegårdsföreningar som driver allmän samlingslokal
+  deadlines: { typ: fasta, datum: [10-25] }
+  krav:
+  - Sökanden ska vara en ekonomisk förening som driver Folkets hus eller bygdegård som allmän samlingslokal
+  - Ansökan ska redovisa föregående års nettodriftkostnad
+  - Antalet uthyrningar till föreningsverksamhet ska redovisas
+  - Stödformen omfattar inte investeringar i lokalen
+  belopp: Individuellt prövat efter nettodriftkostnad, föreningsuthyrningar och tillgängliga medel; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 25 oktober
+  kalla_url: https://sjobo.fri-go.se/bidrag/ansokaninfo.aspx?type=13&year=2027
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: sjobo-arrangemangsstod
+  namn: Arrangemangsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar och organiserade aktörer som genomför offentliga arrangemang i Sjöbo kommun
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Arrangemanget ska vara nyskapande, genomföras i Sjöbo kommun och vara öppet för allmänheten
+  - Ansökan ska beskriva syfte, målgrupp, genomförande och budget
+  - Ansökan ska lämnas minst två månader före arrangemanget
+  - Aktuella föreningshandlingar ska finnas registrerade hos kommunen
+  belopp: Kontantstöd eller förlustgaranti efter individuell prövning och tillgängliga medel; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst två månader före arrangemanget
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: sjobo-utvecklingsstod
+  namn: Utvecklingsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som utvecklar nya verksamheter, metoder eller målgrupper
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Satsningen ska vara nyskapande och genomföras i Sjöbo kommun
+  - Projektet ska utveckla nya metoder, verksamheter eller målgrupper utanför ordinarie verksamhet
+  - Ansökan ska lämnas minst två månader före projektstart
+  - Ansökan ska beskriva mål, aktiviteter, tidsplan och budget
+  belopp: Individuellt prövat utvecklingsstöd; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Minst två månader före projektstart
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: sjobo-kostnadsfri-lokalupplatelse
+  namn: Kostnadsfri upplåtelse av kommunal lokal
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  malgrupp: Bidragsberättigade föreningar med ordinarie verksamhet för prioriterade målgrupper
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Lokalen ska användas för föreningens ordinarie icke-kommersiella verksamhet
+  - Verksamheten ska främst rikta sig till 3–25-åringar, personer över 65 år eller personer med funktionsnedsättning
+  - Upplåtelsen gäller kommunägda eller kommunhyrda lokaler enligt tillgänglighet och bokningsregler
+  - Entrébelagda aktiviteter omfattas inte och avbokning ska ske minst 24 timmar i förväg
+  belopp: Kostnadsfri upplåtelse av kommunägd eller kommunhyrd lokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - namn: Driftsbidrag till enskilda vägar
+  foreningstyp: [annat]
   kategori:
   - ovrig
   malgrupp: Vägföreningar och vägsamfälligheter i Sjöbo kommun
@@ -121,16 +279,42 @@ bidrag:
   - Gäller vägar som är statsbidragsberättigade hos Trafikverket
   - Sökande ska vara vägförening eller vägsamfällighet i Sjöbo kommun, registrerad i kommunens föreningsregister FRI
   - Ansökningsperiod januari–mars
-  belopp: null
+  belopp: 20 % av Trafikverkets beräknade årliga underhållskostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter 31 mars prövas nästföljande år
   kalla_url: https://www.sjobo.se/trafik-och-gator/gator/bidrag-till-enskilda-vagar.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
   id: sjobo-driftsbidrag-enskilda-vagar
+- id: sjobo-byggnadsbidrag-enskilda-vagar
+  namn: Byggnads-, iståndsättnings- och beläggningsbidrag till enskilda vägar
+  foreningstyp: [annat]
+  kategori: [ovrig]
+  malgrupp: Vägföreningar och vägsamfälligheter med statsbidragsberättigad väg
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Trafikverket ska ha beslutat om statsbidrag och godkänt åtgärden och kostnadsberäkningen
+  - Åtgärden ska avse byggande, iståndsättning eller beläggning och främja trafiksäkerhet eller allmän nyttotrafik
+  - Sökanden ska vara en organiserad vägförening eller vägsamfällighet i Sjöbo kommun
+  - Slutkostnaden ska styrkas och åtgärden slutbesiktigas enligt vägreglerna
+  belopp: Högst 15 % av statsbidragsberättigad godkänd eller verklig kostnad; alternativt förskottering i högst tio år med 70 % av årligt kommunalt underhållsbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 mars
+  kalla_url: https://www.sjobo.se/download/18.350e2e34176e8dadda0451b3/1610701095464/Best%C3%A4mmelser%20-%20kommunalt%20bidrag%20till%20enskilda%20v%C3%A4gar%2C%20antagna%202019-09-25.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - namn: Bidrag till försköning och julgran
+  foreningstyp: [hembygd, annat]
   kategori:
   - ovrig
   malgrupp: Byalag och representativa föreningar i mindre orter och byar
@@ -146,24 +330,25 @@ bidrag:
   - Protokoll från föreningens senaste årsmöte ska bifogas för försköningsbidrag
   belopp: "Försköning: högst 5 000 kr per förening/by; julgran: 1 500 kr per ort"
   belopp_avser: per_forening
-  kommunens_pott: null
+  kommunens_pott: 50 000 kr per år, varav cirka 35 000 kr till försköning och 15 000 kr till julgranar
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.sjobo.se/trafik-och-gator/torg-och-arrangemang/bidrag-till-forskoning-och-julgran.html
-  belopp_status: olast
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
   id: sjobo-forskoningsbidrag-och-julgran
 forutsattningar:
 - id: sjobo-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Sjöbo kommuns föreningsstöd
+  vad: Registrering och aktuella årshandlingar i FRI
+  beskrivning: Föreningen ska vara ideell, öppen och demokratiskt uppbyggd, ha minst tio aktiva betalande medlemmar, minst 50 kr i medlemsavgift, stadgar, styrelse och revisor, organisationsnummer samt plus- eller bankgiro. Årsmötesprotokoll, verksamhetsberättelse, socialt och ekonomiskt bokslut, revisionsberättelse, verksamhetsplan, budget och uppdaterade uppgifter lämnas årligen.
+  system: FRI
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Årshandlingarna ska lämnas senast två månader efter föreningens stadgeenliga årsmötesmånad.
   ordning: 1
-  kalla_url: https://www.sjobo.se/uppleva-och-gora/idrott-motion-och-aktiviteter/for-dig-som-driver-forening/stod-for-foreningar.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
