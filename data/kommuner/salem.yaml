@@ -7,13 +7,20 @@ ansokningssystem:
   namn: Salems boknings- och bidragssystem
   url: https://salem.rbok.se
 kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://www.salem.se/download/18.74e34ace19545e0fec2daf7/1741691695262/F%C3%B6reningsbidrag%20regler%20-%20Kultur-%20och%20fritidsf%C3%B6rvaltningen.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: salem-aktivitetsbidrag-var
   namn: Aktivitetsbidrag vår
   kategori:
   - idrott
   - kultur
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med aktiviteter för barn och ungdom 5-20 år (1 januari - 30 juni)
   deadlines:
     typ: fasta
@@ -28,21 +35,24 @@ bidrag:
   - Närvarokort ska föras för alla aktiviteter
   - Närvarokort måste förvaras minst 4 år
   - Bidrag utgår endast för en deltagar sammankomst per person och dag
-  belopp: Belopp per deltagare (barn/ungdom 5-20 år)
+  belopp: Belopp per stödgrundande deltagartillfälle; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 25 augusti
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: Aktiviteter som matchspel, turnering eller tävling inom Salem berättigar till bidrag. Ej för aktiviteter utanför
     kommunen eller entrébelagda arrangemang.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: salem-aktivitetsbidrag-host
   namn: Aktivitetsbidrag höst
   kategori:
   - idrott
   - kultur
+  foreningstyp: *alla
   malgrupp: Föreningar med aktiviteter för barn och ungdom 5-20 år (1 juli - 31 december)
   deadlines:
     typ: fasta
@@ -57,20 +67,23 @@ bidrag:
   - Närvarokort ska föras för alla aktiviteter
   - Närvarokort måste förvaras minst 4 år
   - Bidrag utgår endast för en deltagers sammankomst per person och dag
-  belopp: Belopp per deltagare (barn/ungdom 5-20 år)
+  belopp: Belopp per stödgrundande deltagartillfälle; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 25 februari
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: Motsvarande regler som vårperioden. Två ansökningsperioder per år för aktivitetsbidrag.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: salem-grundbidrag
   namn: Grundbidrag
   kategori:
   - idrott
   - kultur
+  foreningstyp: *alla
   malgrupp: Registrerade föreningar för årlig verksamhet för barn och ungdom 5-20 år
   deadlines:
     typ: fasta
@@ -84,22 +97,25 @@ bidrag:
   - Verksamhetsberättelse
   - Revisionsberättelse
   - Dokumentation av medlemsantal
-  belopp: Belopp per medlem i åldersgruppen 5-20 år
+  belopp: Belopp per medlem 5–20 år; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 31 mars
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: Grundbidrag är huvudsakligt bidrag för registrerade föreningar. Föreningar som ingår idrottsallians räknas som
     en förening. Nystartad förening erhåller grundbidrag med omedelbar verkan.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: salem-funktionsnedsattning
   namn: Bidrag till föreningar med funktionsnedsatta
   kategori:
   - idrott
   - kultur
   - social
+  foreningstyp: [idrott, kultur, social, ungdom, annat]
   malgrupp: Föreningar som arbetar med funktionsnedsatta ungdomar 5-20 år
   deadlines:
     typ: fasta
@@ -110,22 +126,24 @@ bidrag:
   - Verksamhet anpassad för ungdomar med funktionsnedsättning
   - Plan för inkludering och tillgänglighet
   - Årsmötesprotokoll, bokslut, verksamhetsberättelse och revisionsberättelse
-  belopp: null
+  belopp: Individuellt efter prövning; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 31 mars
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Särskilt stöd för att skapa inkluderande verksamhet för ungdomar med funktionsnedsättning. Tidigare platshållare
-    "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte verifierad.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: Stöd för inkluderande verksamhet för ungdomar med funktionsnedsättning.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: salem-sarskilt-bidrag
   namn: Särskilt bidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för utveckling av ordinarie verksamhet eller nya verksamhetsområden
   deadlines:
     typ: fasta
@@ -144,17 +162,83 @@ bidrag:
   - Integration
   - Miljöarbete
   belopp: Kan efter prövning av kultur- och fritidsnämnden beviljas för bidragsberättigad verksamhet eller projekt.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 31 mars
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
   belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: olast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: 'Särskilt bidrag kan generellt inte sökas för ordinarie verksamhet såsom läger, träning eller material om det
     inte ingår som del av verksamhetsutveckling. Prioriterade områden: Jämställd förening, Inkluderande verksamhet för personer
     med funktionsnedsättning, Integration, Miljöarbete. Utbetalning: 75% i förskott, 25% efter redovisning senast 30 november
-    samma år. T8a: Ordalydelsen stöds av kommunens sida.'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+    samma år.'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: salem-foreningsservice
+  namn: Föreningsservice
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som behöver stöd i föreningsarbetet
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara registrerad i Salems föreningsregister
+  - Servicen ska avse föreningens organisation eller bidragsberättigade verksamhet
+  - Föreningen ska hålla kontakt- och årsmötesuppgifter aktuella
+  belopp: Kommunal rådgivning och föreningsservice; ingen generell kontantnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen sista ansökningsdag publiceras
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: salem-nolltaxa
+  namn: Nolltaxa i kommunala lokaler
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade Salemföreningar med verksamhet för barn och unga 5–20 år
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara registrerad i Salems kommun
+  - Bokningen ska avse föreningens verksamhet för barn och unga 5–20 år
+  - Lokalen eller anläggningen ska omfattas av nolltaxan och bokningsreglerna ska följas
+  - Ishall omfattas inte av nolltaxan
+  belopp: Kostnadsfri upplåtelse enligt kommunens nolltaxa
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat sista ansökningsdag publiceras
+  kalla_url: https://salem.se/fritidochkultur/idrott/taxoravgifterochregler.4.40db0dec1936a329c813ee98.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: salem-sommarlovsaktivitetsmedel-2026
+  namn: Medel för sommarlovsaktiviteter 2026
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och organisationer som ordnar sommarlovsaktiviteter för barn och unga
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Aktiviteten ska genomföras under sommarlovet 2026 för barn och unga i Salem
+  - Förslaget ska beskriva aktivitet, målgrupp, tid och plats
+  - Sökanden ska ange beräknad kostnad och kontaktuppgifter
+  belopp: Individuellt utifrån aktivitetens beräknade kostnad; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen sista ansökningsdag publiceras
+  kalla_url: https://www.salem.se/fritidochkultur/lovaktiviteter/ansokommedelforsommarlovaktiviteter.4.69755fc319b2be124e438a48.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 forutsattningar:
 - id: salem-registrering
   vad: Registrering i föreningsregistret
@@ -163,11 +247,11 @@ forutsattningar:
     efter årsmötet. Föreningen måste också årligen uppdatera sina föreningsuppgifter.
   system: Salems föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast två månader efter årsmötet
+  giltighet: Årshandlingar senast två månader efter årsmötet
   ordning: 1
-  kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 - id: salem-medlemskrav
   vad: Medlemskrav för bidragsberättigad förening
   beskrivning: Minst 65% av medlemmarna i åldersgruppen 5-20 år måste bo i Salems kommun. Barn och ungdom från andra kommuner
@@ -178,7 +262,7 @@ forutsattningar:
   giltighet: null
   ordning: 2
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: salem-bidragssystem
   vad: Ansökan via bidragssystem
   beskrivning: Bidrag ansöks via Salems kommuns boknings- och bidragssystem (salem.rbok.se). Aktivitetsbidrag kan även ansökas
@@ -190,7 +274,7 @@ forutsattningar:
   giltighet: null
   ordning: 3
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: salem-kontakt
   vad: Kultur- och fritidsförvaltningen
   beskrivning: För frågor om föreningsbidrag kontaktar man Kultur- och fritidsförvaltningen. Alla handlingar relaterade till
@@ -201,4 +285,4 @@ forutsattningar:
   giltighet: null
   ordning: 4
   kalla_url: https://salem.se/fritidochkultur/foreningarochforeningsliv/foreningsbidrag.4.47083fea1932977dcc43ca05.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
