@@ -2,192 +2,410 @@ kommun: Orust
 kommun_slug: orust
 lan: Västra Götalands län
 befolkning: 15311
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Sektor samhällsutveckling, kultur och fritid
 ansokningssystem:
-  namn: Orust e-tjänster
-  url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-verifierad: '2026-07-31'
+  namn: Orust självservice
+  url: https://sjalvservice.orust.se/oversikt/overview/82
+kalla_url: https://www.orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 05-01
+  kalla_url: https://www.orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Stöd för investering och projektutveckling
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: orust-stod-for-investering-och-projektutveckling
+  namn: Investerings-, upprustnings- och projektstöd
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Alla stödberättigade föreningar
+  deadlines: {typ: fasta, datum: [11-01]}
+  krav:
+  - Ansökan ska beskriva investeringens eller projektets syfte, förväntade nytta och kostnader
+  - Föreningen ska visa aktiv och regelbunden verksamhet med tydlig lokal förankring
+  - Satsningen ska stärka kvalitet, tillgänglighet eller kapacitet och vara långsiktigt hållbar
+  - Bredd, medlemsutveckling, egen insats och samfinansiering vägs in i bedömningen
+  - Kommunen ska senast 31 juli underrättas om satsningen har påbörjats, ändrats väsentligt eller inte genomförs
+  belopp: Individuell behovsprövning inom kommunstyrelsens årliga budgetram; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 november året före utbetalningsåret; den reviderade normen ersätter kalendersidans äldre uppgift 31 januari.
+  kalla_url: &norm https://www.orust.se/download/18.3b6a0a6619c933b3ffc64c5b/1774270338236/F%C3%B6reningsst%C3%B6d%20till%20ideella%20f%C3%B6reningar%20-%20regler.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-stod-for-investering-och-projektutveckling
-- namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Barn- och ungdomsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Idrottsföreningar med barn- och ungdomsverksamhet
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Minst 10 stödberättigade sammankomster ska ha genomförts per period för deltagare 7–25 år
+  - Sammankomsten ska vara ledarledd, planerad, minst 45 minuter och ha minst tre deltagare utöver ledaren
+  - Deltagarna ska vara betalande aktiva medlemmar och till största delen kommuninvånare
+  - Endast ett deltagartillfälle per person, dag och grupp får räknas
+  - Entrétävlingar, kommersiella arrangemang, studiecirklar och skolsamarbete under skoltid ger inte stöd
+  belopp: Ersättning per deltagartillfälle enligt kommunens årliga budget; aktuell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 26 februari–1 mars respektive 26 augusti–1 september ger 25 procents avdrag, därefter 50 och 75 procent; efter 31 mars respektive 30 september avslås ansökan.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-lokalt-aktivitetsstod
-- namn: Driftsstöd till föreningsägd idrottsanläggning
-  kategori:
-  - idrott
-  malgrupp: Föreningar med egen idrottsanläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-driftsstod-till-foreningsagd-idrottsanlaggning
+  namn: Stöd till föreningsägd eller arrenderad idrottsanläggning
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Idrottsföreningar som äger eller arrenderar en anläggning
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska äga eller arrendera anläggningen och använda stödet till drift och underhåll
+  - Föreningen ska uppfylla villkoren för kommunalt aktivitetsstöd
+  - Stöd lämnas för högst en grusplan och en konstgräs-, gräs-, golf-, aktivitetsyta eller motionsslinga per förening
+  - Ansökan ska redovisa stödgrundande yta eller löpmeter
+  belopp: 2 kr/m² för gräsplan, golfbana, aktivitetsyta, paddock och manege; 3 kr/m² för grus- och konstgräsplan; 2 kr/löpmeter belyst motionsslinga samt högst 1 kr/löpmeter extra för maskinspårning, totalt max 25 000 kr/år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-driftsstod-till-foreningsagd-idrottsanlaggning
-- namn: Driftsstöd till föreningsägd verksamhetslokal
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med egen verksamhetslokal
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-driftsstod-till-foreningsagd-verksamhetslokal
+  namn: Stöd till föreningsägd verksamhetslokal
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med egen verksamhetslokal och huvudsaklig ungdomsverksamhet
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska huvudsakligen bedriva ungdomsverksamhet och äga verksamhetslokalen
+  - Endast tomtarrende, vägavgift, obligatorisk sophämtning, vatten och el är stödgrundande
+  - Ansökan ska avse och styrka föregående kalenderårs kostnader
+  belopp: Högst 50 procent av godkända driftkostnader, som ett årligt engångsbelopp inom kommunens budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-driftsstod-till-foreningsagd-verksamhetslokal
-- namn: Driftsstöd till hyrd lokal
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som hyr lokal
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-driftsstod-till-hyrd-lokal
+  namn: Stöd till hyrd verksamhetslokal
+  kategori: [idrott, kultur, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som hyr en icke-kommunal lokal för sin kontinuerliga huvudverksamhet
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska ha hyreskontrakt för en icke-kommunal lokal
+  - Lokalen ska användas för föreningens kontinuerliga huvudsakliga verksamhet
+  - Ansökan ska avse och styrka föregående kalenderårs hyreskostnader
+  belopp: Högst 50 procent av hyreskostnaden och maximalt 40 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-driftsstod-till-hyrd-lokal
-- namn: Stöd till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-till-hyrd-kommunal-lokal-anlaggning
+  namn: Stöd till hyrd eller avtalad kommunal lokal eller anläggning
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med avtal om kommunal lokal eller anläggning
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska ha ett avtal med kommunen om lokalen eller anläggningen
+  - Ansökan ska avse föregående kalenderårs styrkta hyres- och driftkostnader
+  - Stödgrundande drift kan omfatta vägavgift, obligatorisk sophämtning, vatten och el
+  - Särskilda hyresvillkor gäller för idrotts- och skollokaler, bibliotek och andra kommunala anläggningar
+  belopp: Högst 50 procent av avtalad hyres- och driftkostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-stod-till-pensionarsforeningar
-- namn: Stöd till handikappföreningar
-  kategori:
-  - funktionsratt
-  malgrupp: Funktionsrättsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-for-vandringsled
+  namn: Stöd för vandringsled
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, hembygd, friluft, annat]
+  malgrupp: Idrotts- och samhällsföreningar som sköter vandringsled
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska ha en skriftlig överenskommelse eller ett avtal med kommunen
+  - Föreningen ska ansvara för vandringsledens framkomlighet
+  - Föreningen ska ansvara för vandringsledens kvalitet enligt avtalet
+  belopp: 1 kr per löpmeter vandringsled, högst 30 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-stod-till-handikappforeningar
-- namn: Stöd till museiverksamhet och dokumentation
-  kategori:
-  - kultur
-  malgrupp: Musei- och kulturarvsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-till-pensionarsforeningar
+  namn: Medlemsstöd till pensionärsföreningar
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar i Orust kommun
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska vara en pensionärsförening verksam i Orust kommun
+  - Föreningen ska vara ansluten till en statsbidragsberättigad riksorganisation
+  - Endast registrerade medlemmar folkbokförda i Orust kommun är stödgrundande
+  belopp: 15 kr per registrerad medlem som är folkbokförd i Orust kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-stod-till-museiverksamhet-och-dokumentation
-- namn: Driftstöd för simskola
-  kategori:
-  - idrott
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-till-handikappforeningar
+  namn: Medlemsstöd till funktionsrättsföreningar
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Funktionsrättsföreningar med säte i Orust eller samverkande huvudförening i närkommun
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska ha säte i Orust eller ingå i en samverkande huvudförening med närkommuner
+  - Föreningen ska vara ansluten till en statsbidragsberättigad riksorganisation
+  - Endast medlemmar folkbokförda i Orust kommun är stödgrundande
+  belopp: 150 kr per medlem och år som är folkbokförd i Orust kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-simskolestod
+  namn: Stöd till föreningsdriven simskola
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
   malgrupp: Föreningar som driver simskola
-  deadlines:
-    typ: fasta
-    datum:
-    - 05-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  deadlines: {typ: fasta, datum: [10-01]}
+  krav:
+  - Föreningen ska bedriva simskola och ha personal med utbildad simskolelärare
+  - Föreningen ska ha giltig försäkring för verksamheten
+  - Endast deltagare folkbokförda i Orust kommun är stödgrundande
+  - Information om simskolan ska lämnas för offentlig publicering senast 31 maj
+  belopp: 250 kr per simdeltagare folkbokförd i Orust kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Information om simskolan senast 31 maj; stödansökan senast 1 oktober utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: orust-driftstod-for-simskola
+  senast_verifierad: '2026-08-18'
+- id: orust-skotselstod-badplats
+  namn: Skötselstöd för offentlig badplats
+  kategori: [ovrig]
+  foreningstyp: [hembygd, friluft, annat]
+  malgrupp: Föreningar som ansvarar för en kommunalt godkänd offentlig badplats
+  deadlines: {typ: fasta, datum: [05-15]}
+  krav:
+  - Föreningen ska ansvara för en offentlig badplats som är godkänd av kommunen och får inte redan ha skötselavtal
+  - Badplatsen ska vara tillgänglig för alla och information för kommunens publicering ska lämnas
+  - Föreningen ansvarar för säkerheten på bryggor och hopptorn samt tillsyn av bottenytan
+  - Sophantering ska vara ordnad på badplatsen
+  belopp: Fast årligt skötselbelopp för godkänd förening; kronnivån publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 15 maj utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-upprustningsstod-badplats
+  namn: Upprustningsstöd för badplats
+  kategori: [ovrig]
+  foreningstyp: [hembygd, friluft, annat]
+  malgrupp: Godkända föreningar som rustar upp offentlig badplats
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Sökanden ska vara en godkänd förening som ansvarar för badplatsen
+  - Stödet kan avse material, investering, underhåll eller liknande upprustning
+  - Föreningen bör visa egen insats och ange kommunens medfinansiering i marknadsföring
+  - Kommunen ska senast 30 september underrättas om projektet ändras eller inte genomförs
+  belopp: Individuellt prövat; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-till-museiverksamhet-och-dokumentation
+  namn: Stöd till museiverksamhet och kulturell dokumentation
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar och organisationer med musei- eller dokumentationsverksamhet i Orust
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Verksamheten ska avse museum eller kulturell dokumentation i Orust kommun
+  - Ansökan ska ange ändamål, projektets omfattning, målsättning och kostnad
+  - Specificerad kostnadskalkyl och uppgift om stöd från andra håll ska lämnas
+  - Ansökan ska vara godkänd av kommunen innan arbetet påbörjas
+  belopp: Individuellt prövat; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 mars utbetalningsåret.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-till-kulturarrangemang
+  namn: Stöd till kulturarrangemang
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar och organisationer som ordnar offentliga kulturarrangemang i Orust
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Arrangemanget ska vara offentligt och genomföras i Orust kommun
+  - Arrangemanget ska vara scenframträdande, utställning, föredrag eller motsvarande kulturarrangemang
+  - Ansökan ska specificera kostnader, intäkter och stöd som söks från annat håll
+  - Stödgrundande kostnader är arvode och resa samt vid stor ideell insats teknik, material, lokal och information
+  - Kommunen ska anges som medarrangör i marknadsföringen
+  belopp: Individuellt prövat; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas hela året men ansökan ska vara kommunen tillhanda minst en månad före arrangemanget.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-stod-till-studieforbund
+  namn: Stöd till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Lokala studieförbundsavdelningar verksamma i Orust
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundets riksorganisation ska få statligt anslag genom Folkbildningsrådet
+  - Den lokala enheten ska bedriva statsbidragsgrundande verksamhet i Orust kommun
+  - Stödgrundande verksamheter är studiecirklar, kulturarrangemang och annan gruppverksamhet
+  - Underlaget ska redovisa grupper, studietimmar, deltagare och kulturarrangemang
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag till lokala studieförbund fördelas enligt Västra Götalands Bildningsförbunds årliga rekommendation och Folkbildningsrådets kvalitetsmodell; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist för studieförbundsstödet.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-lovaktivitetsstod
+  namn: Ersättning för lovaktiviteter
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar och organisationer som ordnar aktiviteter under skollov
+  deadlines: {typ: fasta, datum: [01-30, 04-01]}
+  krav:
+  - Sökanden ska vara en förening eller organisation verksam i Orust kommun
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna stödvillkor
+  - Aktiviteten ska genomföras under sport-, påsk-, sommar-, höst- eller jullov
+  - För sportlov ska deltagande anmälas före lovet och ersättning redovisas efter aktiviteten
+  belopp: Ersättning efter genomförd lovaktivitet; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sportlov publiceras 30 januari för deltagande och 1 april för ersättningsansökan; övriga lov har utlysningsspecifika tider.
+  kalla_url: &portal https://sjalvservice.orust.se/oversikt/overview/82
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: orust-breddlagerstod
+  namn: Stöd till breddläger
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Registrerade föreningar som ordnar breddläger
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Sökanden ska vara en förening eller organisation verksam i Orust kommun
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna stödvillkor
+  - Ansökan ska avse ett breddläger inom föreningens barn- eller ungdomsverksamhet
+  - Ansökan ska lämnas genom kommunens e-tjänst för föreningsstöd
+  belopp: Kommunen publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist för breddläger.
+  kalla_url: *portal
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
-- id: orust-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Orust e-tjänster
+- id: orust-arlig-registrering
+  vad: Årlig registrering i kommunens föreningsregister
+  beskrivning: Föreningen ska vara ideell, skriven och verksam i Orust, ha varit verksam minst ett år och ha minst tio aktiva betalande medlemmar. Vid registreringen lämnas organisationsnummer, konto, verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse. Inget stöd betalas utan godkänd aktuell registrering.
+  system: Orust självservice
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Registrering senast 1 maj varje år
+  giltighet: Ett kalenderår; förnyas genom årlig registrering senast 1 maj
   ordning: 1
-  kalla_url: https://orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
-  giltighet_status: okand
+  kalla_url: https://www.orust.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod
+  giltighet_status: kontrollast
+- id: orust-allmanna-villkor
+  vad: Allmänna demokrati- och kontrollvillkor
+  beskrivning: Föreningen ska vara ideell och demokratisk, om möjligt riksansluten, lämna riktiga uppgifter och spara stödgrundande handlingar i tio år. Barn- och ungdomsföreningar ska följa barnkonventionen och arbeta med nolltolerans mot alkohol och droger.
+  system: Orust självservice
+  ledtid: null
+  ledtid_text: Kontrolleras vid registrering och ansökan
+  giltighet: Gäller så länge föreningen söker eller tar emot kommunalt stöd
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
