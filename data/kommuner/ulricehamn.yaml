@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Ulricehamns digitala bidragssystem
   url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
 kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: sammansatt
+  antal: null
+  datum: null
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Aktivitetsstöd
   kategori:
@@ -20,16 +26,22 @@ bidrag:
     datum:
     - 02-25
     - 08-25
-  krav: []
+  krav:
+  - Aktiviteten ska vara planerad, ledarledd, beslutad av föreningen och pågå minst 60 minuter
+  - Minst tre medlemmar i åldern 7–25 år ska delta och närvaro ska föras vid varje aktivitet
+  - En deltagare får räknas högst en gång per dag och aktiviteten ska arrangeras av lokalföreningen
   belopp: 52 kr per aktivitet och 7 kr per deltagare upp till 20 deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: ulricehamn-aktivitetsstod
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
 - namn: Driftbidrag till allmän samlingslokal
   kategori:
   - ovrig
@@ -38,34 +50,46 @@ bidrag:
     typ: fasta
     datum:
     - 04-01
-  krav: []
-  belopp: 57 kr per kvadratmeter samt aktivitetsbaserad del
+  krav:
+  - Föreningen ska äga en allmän samlingslokal som hyrs ut till aktiviteter för allmänheten och föreningar
+  - Minst 20 aktivitetstillfällen i egen regi eller genom uthyrning ska ha genomförts under året
+  - Verksamhetsberättelse, revisionsberättelse, balans- och resultatrapport samt årsmötesprotokoll ska laddas upp
+  belopp: 57 kronor per godkänd kvadratmeter samt 76 kronor per aktivitet upp till 1 000 aktiviteter och 15 kronor per aktivitet däröver
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: ulricehamn-driftbidrag-till-allman-samlingslokal
+  foreningstyp: [kultur, hembygd, annat]
 - namn: Driftbidrag till övriga föreningsägda anläggningar
   kategori:
   - idrott
   - ovrig
   malgrupp: Föreningar som äger anläggning
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  krav:
+  - Föreningen ska äga anläggningen och hålla den i användbart och försäkrat skick
+  - Föreningen ska ha minst 15 bidragsberättigade medlemmar och redovisa minst 40 aktiviteter under året
+  - Anläggningen ska regelbundet användas för ungdomsverksamhet och grundbidragsansökan ska vara godkänd
+  belopp: Poängbaserat driftbidrag enligt kommunens anläggningstabell eller särskilt beslut
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas tillsammans med grundbidragsansökan senast en månad efter årsmötet
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan i samband med grundbidrag, senast en månad efter årsmöte. Ej angivet i källan
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Poängtal publiceras för bland annat motorbana, tennis, golf, ridsport, orienteringskartor, fotbollshall och discgolf.
   id: ulricehamn-driftbidrag-till-ovriga-foreningsagda-anlaggningar
+  foreningstyp: [idrott, friluft, ungdom, annat]
 - namn: Lokalbidrag
   kategori:
   - idrott
@@ -73,52 +97,70 @@ bidrag:
   - ovrig
   malgrupp: Föreningar som äger eller långtidshyr lokal
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
-  belopp: 60–80 procent av godkända kostnader inom yttak
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  krav:
+  - Föreningen ska äga eller långtidshyra en godkänd lokal i kommunen som regelbundet används för ungdomsverksamhet
+  - Föreningen ska ha minst 15 bidragsberättigade medlemmar och minst 40 aktiviteter under året
+  - Ett arrende- eller hyresavtal ska ha minst tre års löptid och endast verksamhetsytor räknas
+  belopp: 60 procent av godkända kostnader, högst 228 kronor per kvadratmeter för idrottsföreningar; 80 procent, högst 211 kronor per kvadratmeter för övriga föreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas tillsammans med grundbidragsansökan senast en månad efter årsmötet
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidragsgrundande yta begränsas enligt en tabell baserad på antalet medlemmar 7–25 år.
   id: ulricehamn-lokalbidrag
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
 - namn: Grundbidrag till pensionärsföreningar
   kategori:
   - pensionar
   malgrupp: Pensionärsföreningar
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
+  krav:
+  - Föreningen ska bedriva verksamhet för pensionärer i Ulricehamns kommun och uppfylla kommunens grundläggande krav
+  - Bidragsberättigad medlem ska vara pensionär, folkbokförd i kommunen och ha betalat medlemsavgift föregående år
+  - Verksamhetsberättelse, revisionsberättelse, balans- och resultatrapport samt årsmötesprotokoll ska laddas upp
   belopp: 45 kr per medlem, minst 2 250 kr vid 15–50 medlemmar
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en månad efter årsmötet
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: ulricehamn-grundbidrag-till-pensionarsforeningar
+  foreningstyp: [social, annat]
 - namn: Bidrag till funktionsrättsföreningar
   kategori:
   - funktionsratt
   malgrupp: Funktionsrättsföreningar
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
+  krav:
+  - Föreningen ska bedriva verksamhet för personer med funktionsnedsättning i Ulricehamns kommun
+  - Bidragsberättigade medlemmar räknas från sju år utan övre åldersgräns och ska avse föregående verksamhetsår
+  - Verksamhetsberättelse, revisionsberättelse, balans- och resultatrapport samt årsmötesprotokoll ska laddas upp
   belopp: 45 kr per medlem samt verksamhetsbidrag 10 000 kr
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en månad efter årsmötet
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Föreningar med 15–50 bidragsberättigade medlemmar får ett medlemsbaserat belopp på 2 250 kronor.
   id: ulricehamn-bidrag-till-funktionsrattsforeningar
+  foreningstyp: [social, annat]
 - namn: Kostnadskrävande projekt
   kategori:
   - idrott
@@ -129,16 +171,23 @@ bidrag:
     typ: fasta
     datum:
     - 11-30
-  krav: []
+  krav:
+  - Projektet ska avse inventarier, uppförande, om- eller tillbyggnad eller underhåll av en ägd eller långtidshyrd anläggning eller lokal
+  - Projektet eller inköpet får inte vara påbörjat utan kommunens igångsättnings- eller inköpstillstånd
+  - Motiv, fullständig kostnads- och eventuell driftkalkyl, finansieringsplan samt anbud eller offert ska bifogas
+  - Arrende eller långt hyresavtal ska ha minst fem års löptid och projektet ska slutredovisas inom tre år
   belopp: 50 procent av godkänd kostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Projektets totala kostnad ska vara minst 20 000 och högst 500 000 kronor.
   id: ulricehamn-kostnadskravande-projekt
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
 - namn: Oförutsett och övrigt
   kategori:
   - idrott
@@ -150,16 +199,22 @@ bidrag:
     datum:
     - 05-30
     - 10-30
-  krav: []
+  krav:
+  - Stödet ska avse materiel, en särskild utvecklingsinsats eller annat projekt som kompletterar övriga bidragsformer
+  - Projektet eller inköpet får inte ha påbörjats utan att detta först anmälts till kultur och fritid
+  - Motiv och kostnadsberäkning eller offert samt uppgifter om andra sökta bidrag ska bifogas
   belopp: 50 procent av godkänd kostnad, projekt högst 20 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: ulricehamn-oforutsett-och-ovrigt
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
 - namn: Startbidrag
   kategori:
   - idrott
@@ -169,16 +224,22 @@ bidrag:
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Föreningen ska vara nybildad, klassas som bidragsgrundande och ha minst 15 medlemmar i åldern 7–25 år
+  - Stadgar, budget, intyg om riksorganisationsmedlemskap, föreningslista och protokoll från första årsmötet ska lämnas
+  - Föreningen ska ha eget post- eller bankgiro och uppfylla kommunens grundläggande samt särskilda krav
   belopp: 3 000 kr
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen ansökningsfrist; kontakta kultur och fritid
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Efter sex månaders redovisad verksamhet prövas om föreningen omfattas av övriga bidrag.
   id: ulricehamn-startbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
 - namn: Stöd till större projekt
   kategori:
   - idrott
@@ -189,25 +250,396 @@ bidrag:
     typ: fasta
     datum:
     - 04-30
-  krav: []
+  krav:
+  - Projektet ska avse en investering över 500 000 kronor i en föreningsägd anläggning eller lokal och får inte vara påbörjat
+  - Minst en extern delfinansiär utöver föreningen och kommunen ska delta
+  - Motiv, fullständig kostnadskalkyl, femårig driftkalkyl, finansieringsplan och anbud eller offert ska bifogas
+  - Föreningen ska uppfylla kommunens särskilda föreningskrav och villkoren för kostnadskrävande projekt
   belopp: Högst 30 procent av godkänd projektkostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: ulricehamn-stod-till-storre-projekt
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+- id: ulricehamn-driftbidrag-elljusspar
+  namn: Driftbidrag till föreningsägda elljusspår
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar som äger ett elljusspår
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Föreningen ska äga elljusspåret och hålla det i användbart skick
+  - Spåret ska vara tillgängligt för allmänheten och anläggningen ska vara försäkrad
+  - Ansökan ska lämnas tillsammans med en godkänd grundbidragsansökan
+  belopp: 80 procent av elkostnaden, högst 3 411 kronor per kilometer
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast en månad efter föreningens årsmöte
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: ulricehamn-driftbidrag-idrottsplatser
+  namn: Driftbidrag till föreningsägda idrottsplatser
+  kategori: [idrott]
+  malgrupp: Föreningar som äger en idrottsanläggning som används regelbundet för ungdomsverksamhet
+  foreningstyp: [idrott, ungdom]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Föreningen ska äga idrottsplatsen och hålla den i användbart och försäkrat skick
+  - Minst 15 bidragsberättigade medlemmar och 40 aktiviteter under året ska redovisas
+  - Anläggningen ska regelbundet användas för ungdomsverksamhet och ansökan ska lämnas med grundbidraget
+  belopp: Poängbaserat stöd efter anläggningens standard, antal planer, belysning och seriespelande lag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast en månad efter föreningens årsmöte
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: ulricehamn-elitidrottsstod
+  namn: Ekonomiskt stöd till elitidrott
+  kategori: [idrott]
+  malgrupp: Föreningar med elitverksamhet och ungdomsverksamhet i Ulricehamns kommun
+  foreningstyp: [idrott]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Sökanden ska vara en förening inom Riksidrottsförbundet eller jämförbar organisation och bedriva elit- och ungdomsverksamhet i kommunen
+  - Lag ska tävla i högsta nationella serien eller föreningen ha en utövare bland de tio främsta i en officiell SM-gren
+  - Föreningen ska marknadsföra kommunen på tävlingsdräkten och medverka i skolverksamhet minst en dag per säsong
+  belopp: Högst 40 000 kronor för seniorverksamhet, 20 000 kronor för juniorverksamhet eller 10 000 kronor för jämförbar verksamhet utanför RF
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Lagidrott senast två månader före seriestart; annan idrott senast två månader efter säsongsavslutning
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet ska ge kommunen marknadsföring i samband med officiella svenska mästerskap.
+- id: ulricehamn-garantianslag
+  namn: Garantianslag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Bidragsberättigade föreningar som arrangerar en större nationell eller internationell tävling eller ett arrangemang
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Arrangemanget ska vara av större nationell eller internationell karaktär och föreningen ska uppfylla grundkraven
+  - Ansökan ska innehålla en ekonomisk beräkning och arrangemanget får inte budgeteras med underskott
+  - Stödet betalas endast för arrangörsföreningens direkta kostnader och vid styrkt faktiskt underskott
+  belopp: Kommunstyrelsen beslutar beloppet i varje enskilt fall; beslutet är inte normgivande
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast tre månader före arrangemanget
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet fungerar som förlustgaranti.
+- id: ulricehamn-grundbidrag-ungdom
+  namn: Grundbidrag för barn- och ungdomsverksamhet
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar med minst 15 bidragsberättigade medlemmar i åldern 7–25 år
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Föreningen ska vara registrerad, uppfylla grundkraven och ha minst 15 bidragsberättigade medlemmar 7–25 år
+  - Minst 20 bidragsberättigade aktiviteter ska ha genomförts och redovisats under senaste verksamhetsåret
+  - Verksamhetsberättelse, revisionsberättelse, balans- och resultatrapport samt årsmötesprotokoll ska laddas upp
+  belopp: 45 kronor per medlem, eller 50 kronor för förening som följer överenskommelsen Samsyn; minst 2 250 kronor för 15–50 medlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast en månad efter föreningens årsmöte
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Godkänt grundbidrag krävs för övriga fritidsbidrag, med angivna undantag.
+- id: ulricehamn-kostnadskravande-projekt-samlingslokaler
+  namn: Kostnadskrävande projekt för samlingslokaler och bygdegårdar
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar som äger eller långtidshyr en allmän samlingslokal eller bygdegård
+  foreningstyp: [kultur, hembygd, annat]
+  deadlines: { typ: fasta, datum: [11-30] }
+  krav:
+  - Projektet ska avse inventarier, uppförande, om- eller tillbyggnad eller underhåll av samlingslokalen
+  - Projektet eller inköpet får inte vara påbörjat utan kommunens tillstånd
+  - Motiv, kostnads- och eventuell driftkalkyl, finansieringsplan, offert och eventuellt minst femårigt avtal ska bifogas
+  belopp: 50 procent av godkänd kostnad för projekt mellan 20 000 och 500 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas från 1 september och ska vara inne senast 30 november
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Projektet ska slutföras och redovisas inom tre år.
+- id: ulricehamn-badplatsskotsel
+  namn: Bidrag för skötsel av badplats
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar med särskilt avtal om skötsel av kommunala friluftsbad
+  foreningstyp: [friluft, hembygd, annat]
+  deadlines: { typ: fasta, datum: [10-31] }
+  krav:
+  - Föreningen ska ha ett särskilt avtal med kultur och fritid om skötsel av ett kommunalt friluftsbad
+  - Arbetet ska avse städning, tillsyn, enklare reparationer eller gräsklippning enligt avtalet
+  - Genomförda insatser ska redovisas på kommunens särskilda blankett
+  belopp: Fast belopp per kvadratmeter för gräsklippning samt 80 kronor per timme upp till 200 timmar och 40 kronor per timme däröver
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Redovisning ska lämnas senast 31 oktober; utebliven ansökan ger inget stöd för året
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Tiden räknas per badplatssäsong.
+- id: ulricehamn-folkhalsostod
+  namn: Stöd för att främja hälsa och förebygga ohälsa
+  kategori: [social, ovrig]
+  malgrupp: Föreningar som vill testa nya metoder, arbetssätt eller verksamheter inom kommunens prioriterade folkhälsoområden
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Insatsen ska följa årets prioriterade områden och målgrupper i kommunens och hälso- och sjukvårdsnämndens verksamhetsplan
+  - Ansökan ska beskriva aktiviteter, målgrupp, indikatorer, hälsoeffekt, införande i ordinarie verksamhet och ekonomi
+  - Föreningen ska uppfylla grundkraven och använda kommunens och regionens logotyper i kommunikationen
+  - Ekonomisk redovisning och uppföljning ska normalt lämnas senast två månader efter avslutad insats
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas mot årets folkhälsoplan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar hanteras löpande under året
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet ska hjälpa sökanden att föra in fungerande metoder i ordinarie verksamhet.
+- id: ulricehamn-driftbidrag-hembygdsforeningar
+  namn: Driftbidrag till hembygdsföreningar
+  kategori: [kultur, ovrig]
+  malgrupp: Hembygdsföreningar som förvaltar byggnader med lokal byggnadskultur och publik verksamhet
+  foreningstyp: [kultur, hembygd]
+  deadlines: { typ: fasta, datum: [04-30] }
+  krav:
+  - Föreningen ska förvalta byggnader som representerar lokal byggnadskultur och används i publik verksamhet
+  - Bidragsgrundande ytor ska vara godkända av kultur och fritid
+  - Föreningen ska ordna arrangemang och aktiviteter som är öppna för fler än medlemmarna
+  - Verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse och årsmötesprotokoll ska bifogas
+  belopp: Fast årsbelopp baserat på byggnader och godkänd kvadratmeteryta, upp till ett maxbelopp som kultur och fritid fastställer
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: https://www.ulricehamn.se/uppleva-och-gora/kultur/bidrag-for-kultur
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Uppgifterna avser föregående verksamhetsår.
+- id: ulricehamn-kostnadskravande-projekt-hembygd
+  namn: Kostnadskrävande projekt för hembygdsföreningar
+  kategori: [kultur, ovrig]
+  malgrupp: Hembygdsföreningar som vårdar lokal byggnadskultur och använder miljöerna i regelbunden publik verksamhet
+  foreningstyp: [kultur, hembygd]
+  deadlines: { typ: fasta, datum: [11-30] }
+  krav:
+  - Projektet ska avse renovering, bevarande eller utveckling av hembygdsgård eller annan publik kulturmiljö
+  - Föreningen ska vara berättigad till driftbidrag för hembygdsföreningar och projektet får inte ha påbörjats utan tillstånd
+  - Motiv, kostnads- och eventuell driftkalkyl, finansieringsplan, offert och eventuellt minst femårigt avtal ska bifogas
+  belopp: 50 procent av godkänd kostnad för projekt mellan 20 000 och 500 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas från 1 september och ska vara inne senast 30 november
+  kalla_url: https://www.ulricehamn.se/uppleva-och-gora/kultur/bidrag-for-kultur
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Projektet ska slutföras och redovisas inom tre år.
+- id: ulricehamn-studieforbundsstod
+  namn: Stöd till studieförbund
+  kategori: [kultur, social, ovrig]
+  malgrupp: Studieförbund verksamma i Ulricehamns kommun vars centrala organisation får statsbidrag genom Folkbildningsrådet
+  foreningstyp: [kultur, social, annat]
+  deadlines: { typ: fasta, datum: [06-30, 12-15] }
+  krav:
+  - Studieförbundet ska vara verksamt i kommunen och den centrala organisationen ska få statsbidrag genom Folkbildningsrådet
+  - Verksamhetsberättelse, ekonomisk berättelse och påskrivet kommunsammandrag ska lämnas senast 30 juni
+  - Verksamhetsplan för kommande år ska lämnas senast 15 december
+  belopp: Anslaget beräknas på två års verksamhet och fördelas med 70 procent till studiecirklar, 10 procent till annan folkbildning och 20 procent till kulturarrangemang
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Verksamhetsredovisning senast 30 juni och verksamhetsplan senast 15 december
+  kalla_url: https://www.ulricehamn.se/uppleva-och-gora/kultur/bidrag-for-kultur
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas ut under första kvartalet.
+- id: ulricehamn-projektstod-kultur-for-aldre
+  namn: Projektstöd för studieförbund till kultur för äldre
+  kategori: [kultur, social]
+  malgrupp: Ett eller flera studieförbund med ett nyskapande projekt där äldre aktivt skapar och deltar
+  foreningstyp: [kultur, social, annat]
+  deadlines: { typ: fasta, datum: [01-31] }
+  krav:
+  - Projektet ska vara nyskapande och ge äldre stor möjlighet att själva skapa och delta aktivt
+  - Deltagandet ska vara kostnadsfritt och stöd ges inte till befintlig verksamhet på äldreboenden
+  - Ansökan ska tydligt beskriva eventuell samverkan med föreningar och projektet ska redovisas senast 31 december
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 100 000 kronor per år för kulturarrangemang för äldre
+  sen_ansokan: Ansökan ska vara kommunen till handa senast 31 januari
+  kalla_url: https://www.ulricehamn.se/uppleva-och-gora/kultur/bidrag-for-kultur
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stöd kan avse köpta kulturtjänster och förbrukningsmaterial, men inte musikanläggning eller lokalhyra.
+- id: ulricehamn-skotsel-gronomraden-lekplatser
+  namn: Bidrag för skötsel av grönområden och lekplatser
+  kategori: [ovrig]
+  malgrupp: Väg- och samhällsföreningar utanför kommunens entreprenadavtal som sköter grönområden eller lekplatser på orten
+  foreningstyp: [hembygd, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska vara en väg- eller samhällsförening som inte ingår i kommunens entreprenadavtal
+  - Föreningen ska sköta grönområden eller lekplatser på sin ort
+  - Redovisning av föregående års skötsel ska lämnas i kommunens e-tjänst
+  belopp: Årligt belopp beräknat på de ytor föreningen sköter; nivån ändras endast vid budget- eller ytförändring
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen skickar påminnelse men riktlinjen anger inget sista datum
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Godkänd utbetalning sker normalt i maj.
+- id: ulricehamn-utsmyckning-allman-plats
+  namn: Bidrag för utsmyckning av allmän plats
+  kategori: [ovrig]
+  malgrupp: Väg- och samhällsföreningar som smyckar allmän plats i kommunens kransorter
+  foreningstyp: [hembygd, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Sökanden ska vara en väg- eller samhällsförening i en kransort
+  - Stödet ska användas till utsmyckning av allmän plats
+  - Föreningen ska lämna kommunens utskickade ansökningsblankett
+  belopp: 5 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Information och blankett skickas ut i början av året; inget sista datum publiceras
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: ulricehamn-investeringsprojekt-landsbygd
+  namn: Bidrag till investeringsprojekt på landsbygden
+  kategori: [ovrig]
+  malgrupp: Godkända utvecklingsgrupper och föreningar som söker genom en utvecklingsgrupp
+  foreningstyp: [hembygd, annat]
+  deadlines: { typ: fasta, datum: [10-30] }
+  krav:
+  - Projektet ska utveckla eller försköna landsbygden för boende och besökare och får inte avse lokalrenovering, drift eller underhåll
+  - Föreningen ska verka inom sitt geografiska område och vara eller söka genom en godkänd utvecklingsgrupp
+  - Tidigare och andra sökta eller beviljade stöd för samma ändamål ska redovisas
+  - Styrelseprotokoll om ansökan ska bifogas; eget kvalificerat arbete får värderas till 200 kronor per timme
+  belopp: Beslutas efter prövning av tillväxtenheten och Landsbygdsalliansen; riktlinjen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas 1 april–30 oktober
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: ulricehamn-administrativt-stod-utvecklingsgrupper
+  namn: Administrativt stöd till utvecklingsgrupper
+  kategori: [ovrig]
+  malgrupp: Utvecklingsgrupper registrerade hos Landsbygdsalliansen Ulricehamn
+  foreningstyp: [hembygd, annat]
+  deadlines: { typ: fasta, datum: [06-01] }
+  krav:
+  - Utvecklingsgruppen ska vara registrerad hos Landsbygdsalliansen Ulricehamn
+  - Årsmötesprotokoll, verksamhetsplan och verksamhetsberättelse ska bifogas
+  - Styrelseprotokoll som visar beslutet att söka stödet ska bifogas
+  belopp: 5 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 juni
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalning sker löpande efter att ansökan kommit in.
+- id: ulricehamn-representationsstod
+  namn: Stöd vid kommunal representation
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som önskar kommunal representation vid ett större arrangemang
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Ärendet ska avse kommunal representation vid ett större arrangemang
+  - Föreningen ska kontakta verksamheten kultur och fritid inför arrangemanget
+  - Kommunstyrelsen prövar varje ansökan individuellt och beslutet är inte normgivande
+  belopp: Kommunstyrelsen beslutar beloppet i varje enskilt fall; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen ansökningsfrist
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: ulricehamn-oforutsett-hembygd
+  namn: Oförutsett och övrigt för hembygdsföreningar
+  status: pausad
+  kategori: [kultur, ovrig]
+  malgrupp: Hembygdsföreningar med mindre kulturarvsprojekt eller inköp
+  foreningstyp: [kultur, hembygd]
+  deadlines: { typ: fasta, datum: [05-30, 10-30] }
+  krav:
+  - Stödet ska avse information, skyltning, mindre lagningar, inventarier eller annat kulturarvsarbete
+  - Projektet eller inköpet får inte ha påbörjats utan att detta anmälts till kultur och fritid
+  - Motiv, kostnadsberäkning eller offert och uppgifter om andra sökta stöd ska lämnas
+  belopp: 50 procent av godkänd kostnad för projekt eller inköp på högst 20 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödformen är pausad under 2026
+  kalla_url: https://www.ulricehamn.se/uppleva-och-gora/kultur/bidrag-for-kultur
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen meddelar uttryckligen att inga medel kan lämnas för stödformen under 2026.
 forutsattningar:
 - id: ulricehamn-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Ulricehamns digitala bidragssystem
+  beskrivning: Föreningen ska vara registrerad eller godkänd som bidragsberättigad, uppfylla kommunens demokrati- och likabehandlingskrav samt lämna årshandlingar. En fritidsförening som inte sökt föreningsbidrag under två år måste ansöka om bidragsberättigande på nytt.
+  system: Ulricehamns digitala bidragssystem och föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Startbidragsförening prövas för övriga stöd efter sex månaders redovisad verksamhet
+  giltighet: Bidragsberättigandet upphör efter två år utan ansökan om föreningsbidrag; därefter krävs en ny prövning
   ordning: 1
-  kalla_url: https://www.ulricehamn.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  giltighet_status: okand
+  kalla_url: https://www.ulricehamn.se/download/18.4b24d4e19753bee473b4c3/1743512577720/St%C3%B6d%20och%20bidrag%20till%20civilsamh%C3%A4llet.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null
