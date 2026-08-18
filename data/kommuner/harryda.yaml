@@ -4,10 +4,16 @@ lan: Västra Götalands län
 befolkning: 39966
 forvaltning: Kommunledningskontoret / Föreningsservice
 ansokningssystem:
-  namn: Rbok (Sveriges Föreningssystem) eller Kommunens e-tjänst
-  url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar.4.42a851691818a5d975f1d88.html
+  namn: Rbok
+  url: https://harryda.rbok.se/ansok
 kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar.4.42a851691818a5d975f1d88.html
-verifierad: 2026-07-27
+verifierad: 2026-08-18
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.harryda.se/download/18.3da236e2192bd38f2818030/1730372279321/Rutin%20f%C3%B6r%20certifiering%20av%20ideella%20f%C3%B6reningar%20i%20H%C3%A4rryda%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: harryda-aktivitetsstod-deltagare
   namn: Aktivitetsstöd - deltagare
@@ -17,6 +23,7 @@ bidrag:
   - ovrig
   malgrupp: Föreningar med ledarledd gruppaktivitet för barn och ungdom 7–20 år, personer med funktionsvariationer (alla åldrar),
     eller pensionärer 65+ år
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
@@ -34,19 +41,19 @@ bidrag:
   - Max 30 deltagar-tillfällen per aktivitet räknas
   - En deltagar-tillfälle = en person en dag (flera aktiviteter samma dag räknas som ett)
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt tilldelat stöd (15 prisbasbelopp fr.o.m. 2026) fördelas bland godkända föreningar"
-  sen_ansokan: Ej angiven
+  belopp_avser: ren_pott
+  kommunens_pott: Det anslagna stödet fördelas mellan alla sökande föreningar utifrån deltagartillfällen och utjämningsfaktorer
+  sen_ansokan: För sent inlämnade ansökningar behandlas inte.
   kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar/aktivitetsstoddeltagare.4.446cba66182e9265b814f4c.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Totalt tilldelat stöd (15 prisbasbelopp från 2026) fördelas bland alla godkända föreningar. Exakta belopp kan
-    inte förutses. Motsvarar Riksidrottsförbundets LOK-stöddatum (25 feb, 25 aug).
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Det anslagna stödet fördelas mellan alla sökande föreningar och exakt föreningsbelopp kan därför inte anges i
+    förväg. Ansökningsdatumen motsvarar Riksidrottsförbundets LOK-stöd.
   alder_min: 7
   alder_max: 20
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: harryda-aktivitetsstod-arrangemang
   namn: Aktivitetsstöd - arrangemang
   kategori:
@@ -54,8 +61,9 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar som arrangerar publika, icke-kommersiella aktiviteter för allmänheten
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget ska vara publikt och icke-kommersiellt
@@ -63,16 +71,20 @@ bidrag:
   - För bidrag över 5 000 kr krävs ansökan minst en månad före arrangemang
   - Redovisning av kostnader och närvaro ska lämnas inom två månader efter arrangemang, senast 31 december samma år
   - 'Ej bidragsberättigat: kommersiella arrangemang, interna föreningsaktiviteter, politiska evenemang eller tävlingar'
+  - En ansvarig person ska vara närvarande vid arrangemanget
+  - Relevanta marknadsföringsinsatser ska planeras och genomföras
   belopp: Max 10 000 kr per organisation och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Utbetalning sker senast fyra veckor efter godkänd redovisning
   kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar/aktivitetsstodarrangemang.4.446cba66182e9265b814f77.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Kostnadsstöd för arrangemang (t.ex. honorärer, resor, lokal). Prioritering för arrangemang med barn-/ungdomsdeltagare,
     samverkan, unikt samhällsvärde och deltagar-medverkan.
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: harryda-fobjudring-lokal-anlaggning
   namn: Stöd till förbättring av lokal eller anläggning
   kategori:
@@ -80,23 +92,29 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar som önskar reparera, renovera eller förbättra sin lokal eller anläggning
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   deadlines:
     typ: fasta
     datum:
-    - 04-30
+    - 11-01
   krav:
-  - Förbättrings-/renoveringsprojekten ska stärka föreningens verksamhet
-  - Prioritet ges till tillgänglighetsanpassningar och energieffektiviseringsmåtgärder
-  - Föreningen ska kunna påvisa kostnadsbedömning från verkstad/entreprenör
-  belopp: null
-  sen_ansokan: Ej angiven
+  - Åtgärden ska behövas för att föreningen ska kunna utöva sin verksamhet; vanligt underhåll beviljas inte stöd
+  - Tillgänglighetsanpassningar och energieffektiviserande åtgärder prioriteras
+  - Föreningen ska ha god medfinansiering genom pengar och/eller ideellt arbete
+  - Insatsen bör inte ha påbörjats innan föreningen har sökt och beviljats stöd
+  - Stödet kan inte sökas av studieförbund eller andra folkbildningsorganisationer med särskilt avtal
+  belopp: Upp till 50 % av kostnaderna
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inlämnade ansökningar behandlas inte.
   kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar/stodtillforbattringavlokalelleranlaggning.4.446cba66182e9265b814fa2.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stödet tilldelas årligen. Exakta belopp bestäms utifrån budget och ansökningar.
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan senast 1 november avser medel ur kommande budgetår. Redovisning ska lämnas senast 30 november året efter
+    beslut.
+  senast_verifierad: '2026-08-18'
 - id: harryda-utvecklingsstod
   namn: Utvecklingsstöd
   kategori:
@@ -105,41 +123,55 @@ bidrag:
   - social
   - ovrig
   malgrupp: Föreningar som genomför utvecklingsprojekt (t.ex. ungdomsråd, nätverk, handledning)
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 02-01
+    - 08-01
   krav:
-  - Projektet ska stärka föreningens organisation eller verksamhet
-  - Utvecklingsprojekt kan omfatta t.ex. ungdomsråd, nätverk, handledning eller kompetenshöjning
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar.4.42a851691818a5d975f1d88.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Löpande ansökan. Exakta villkor fastställs vid ansökan-dialogen.
-  senast_verifierad: '2026-08-03'
+  - Insatsen ska vara nyskapande utveckling av föreningens verksamhet, exempelvis ny verksamhet, nya målgrupper eller innovativa samarbeten
+  - Ansökan ska innehålla projektbeskrivning med mål, syfte, aktiviteter, tidplan och budget
+  - Ansökan ska redovisa vilka andra organisationer som medel har sökts och/eller beviljats hos
+  - Projektet ska ha en rimlig plan för hur utvecklingsinsatsen integreras i föreningens verksamhet efter projekttidens slut
+  - Stödet kan inte sökas av studieförbund eller andra folkbildningsorganisationer med särskilt avtal
+  belopp: Beloppet bestäms efter bedömning av nyskapande, angelägenhetsgrad och plan för fortsatt verksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inlämnade ansökningar behandlas inte.
+  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar/utvecklingsstod.4.446cba66182e9265b814fcd.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet prioriterar bland annat ungas delaktighet, möten över generationer, digital inkludering och samarbete med
+    andra aktörer. Beviljat belopp betalas ut efter redovisning.
+  senast_verifierad: '2026-08-18'
 - id: harryda-folkbildningsstod
   namn: Folkbildningsstöd
   kategori:
   - kultur
   malgrupp: Studieförbund och föreningar som arrangerar studiecirklar, kulturprogram eller motsvarande folkbildningsverksamhet
+  foreningstyp: [kultur, annat]
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
-  - Verksamheten ska utgöra folkbildning (studiecirklar, kulturprogram, m.m.)
-  - Arrangemanget ska vara öppet för allmänheten
+  - Sökanden ska vara ett studieförbund som är statsbidragsberättigat enligt Folkbildningsrådet
+  - Studieförbundet ska bedriva verksamhet i Härryda kommun
+  - Ansökan ska göras i kommunens e-tjänst eller på kommunens särskilda blankett
+  - Ansökan och redovisning följer Västra Götalands Bildningsförbunds rekommenderade förfarande
   belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar.4.42a851691818a5d975f1d88.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stödet ges för att möjliggöra folkbildningsverksamhet. Exakta belopp varierar.
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Det anslagna stödet fördelas i proportion till varje studieförbunds verksamhet i kommunen
+  sen_ansokan: Kommunen publicerar ingen egen fast tidsfrist; förfarandet följer Västra Götalands Bildningsförbunds rekommendationer.
+  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar/stodtillstudieforbunden.4.446cba66182e9265b814ff8.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet är det enda kommunala stöd som beviljas studieförbunden.
+  senast_verifierad: '2026-08-18'
 - id: harryda-sarskilda-avtal
   namn: Särskilda avtal
   kategori:
@@ -148,33 +180,38 @@ bidrag:
   - social
   - ovrig
   malgrupp: Föreningar med långsiktig samverkansöverenskommelse (t.ex. idrottsanläggningar, cykelvägar, skidspår, ungdomslokaler)
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
-  - Föreningen ska ha upprättat ett avtal med kommunen
-  - Avtalet ska precisera åtaganden, ansvar och stöd för längre tid framöver
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar.4.42a851691818a5d975f1d88.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Långsiktiga avtal för strategisk samverkan. Exakta villkor och belopp fastställs per avtal.
-  senast_verifierad: '2026-08-03'
+  - Organisationens verksamhet ska bedömas vara av särskilt stor samhällelig betydelse, exempelvis av demokratiska eller geografiska skäl
+  - Insatsen ska ge den breda allmänheten tillgång till särskilt angelägen kultur- eller fritidsverksamhet eller särskilda lokaler/anläggningar
+  - Avtalet ska tydligt beskriva föreningens insats och det stöd kommunen ger för genomförandet
+  - Avtalet kan slutas för ett till tre år och beslutas av nämnden för utbildning, kultur och fritid
+  belopp: Den ekonomiska ramen bestäms särskilt för varje avtal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen allmän ansökningstid för nya särskilda avtal.
+  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar/stodgenomsarskildaavtal.4.446cba66182e9265b815023.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ett särskilt avtal kan innebära att föreningen inte kan söka övriga stödformer.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
-- id: harryda-registrering-foreningsservice
-  vad: Registrera föreningen hos Föreningsservice
-  beskrivning: Föreningen måste vara registrerad och godkänd hos Härryda kommuns Föreningsservice för att kunna söka stöd.
-    Registreringen säkerställer att föreningen uppfyller grundläggande krav på demokrati, stadgar, styrelsebeslut och bankkonto.
-  system: Föreningsservice, Härryda kommun
-  ledtid: 30
-  ledtid_text: Registrering hanteras vanligtvis inom två till fyra veckor från fullständig ansökan
-  giltighet: null
+- id: harryda-certifieringsforsakran
+  vad: Lämna försäkran för certifiering
+  beskrivning: Föreningens firmatecknare ska i samband med varje ansökan om ekonomiskt stöd försäkra att föreningen uppfyller
+    kommunens certifieringskrav. Om kraven uppfylls och stöd beviljas anses föreningen certifierad.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Försäkran lämnas i samband med ansökan
+  giltighet: Ny försäkran lämnas varje gång föreningen ansöker om ekonomiskt stöd.
   ordning: 1
-  kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar.4.446cba66182e9265b814ef6.html
-  giltighet_status: okand
+  kalla_url: https://www.harryda.se/download/18.3da236e2192bd38f2818030/1730372279321/Rutin%20f%C3%B6r%20certifiering%20av%20ideella%20f%C3%B6reningar%20i%20H%C3%A4rryda%20kommun.pdf
+  giltighet_status: kontrollast
 - id: harryda-stadgar-arsmotet
   vad: Anta stadgar och hålla årsmöte
   beskrivning: Föreningen ska ha antagna stadgar och hålla ett årsmöte varje år. År sedan startade ska föreningen ha minst
@@ -182,10 +219,10 @@ forutsattningar:
   system: null
   ledtid: null
   ledtid_text: Årsmöte ska hållas enligt föreningens stadgar; normalt en gång per år
-  giltighet: null
+  giltighet: Årsmöte ska hållas enligt föreningens stadgar; verksamhetsplan, budget, verksamhetsberättelse och ekonomisk berättelse behandlas.
   ordning: 2
   kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar.4.446cba66182e9265b814ef6.html
-  giltighet_status: okand
+  giltighet_status: kontrollast
 - id: harryda-bankkonto
   vad: Registrera bank-/plusgiro-konto
   beskrivning: Föreningen ska ha ett registrerat bank- eller plusgiro-konto i föreningens namn. Detta är en grundläggande
@@ -196,5 +233,5 @@ forutsattningar:
   giltighet: null
   ordning: 3
   kalla_url: https://www.harryda.se/upplevaochgora/foreningar/stodtillideellaforeningar/reglerforstodtillideellaforeningar.4.446cba66182e9265b814ef6.html
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null
