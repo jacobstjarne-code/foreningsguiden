@@ -2,42 +2,235 @@ kommun: Töreboda
 kommun_slug: toreboda
 lan: Västra Götalands län
 befolkning: 9081
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kommunkansliet, kultur och fritid samt folkhälsoarbetet
 ansokningssystem:
-  namn: Töreboda e-tjänster
+  namn: E-post och kommunens PDF-blankett
   url: https://toreboda.se/uppleva-och-gora/idrott-motion-och-friluftsliv/foreningsliv-och-foreningar/foreningsbidrag
-kalla_url: https://toreboda.se/uppleva-och-gora/idrott-motion-och-friluftsliv/foreningsliv-och-foreningar/foreningsbidrag
-verifierad: '2026-07-31'
+kalla_url: &huvud https://toreboda.se/uppleva-och-gora/idrott-motion-och-friluftsliv/foreningsliv-och-foreningar/foreningsbidrag
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://toreboda.se/download/18.59adf92c199a32e16b53a33/1759741374879/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%20antagen%20av%20Kf%202025-06-18.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Föreningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Demokratiskt uppbyggda föreningar som bedriver fritids- eller kulturverksamhet i kommunen
+- id: toreboda-kommunalt-lokalt-aktivitetsstod
+  namn: Kommunalt lokalt aktivitetsstöd för barn- och ungdomsverksamhet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  malgrupp: Registrerade föreningar inom kultur, idrott, natur och friluftsliv med verksamhet för barn och unga 0–20 år
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska vara registrerad i kommunens föreningsregister och uppfylla de allmänna villkoren om lokalt säte och verksamhet, medlemsanknytning, organisationsnummer, styrelse, stadgar, medlemsregister och drogpolicy
+  - Föreningen ska erbjuda barn- och ungdomsverksamhet för åldern 0–20 år vid minst sju tillfällen per år
+  - Verksamhetsberättelsen ska styrka antalet sammankomster med barn- och ungdomsverksamhet
+  - Ansökan ska innehålla stadgar, justerat årsmötesprotokoll, verksamhetsberättelse, balans- och resultatrapport, revisionsberättelse och underlag om firmatecknare
+  - En plan för barns rättigheter kopplad till barnkonventionen ska bifogas
+  belopp: Individuellt beslutat verksamhetsbidrag; kommunen publicerar ingen generell kronnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med samtliga handlingar ska vara kommunen tillhanda senast 31 mars; ofullständig ansökan är ogiltig
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: toreboda-verksamhetsbidrag
+  namn: Verksamhetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade föreningar inom kultur, idrott, natur och friluftsliv samt föreningar för en viss målgrupp
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska vara registrerad i kommunens föreningsregister och ha säte i Töreboda, bedriva huvuddelen av verksamheten där och ha minst hälften av medlemmarna folkbokförda i kommunen
+  - Föreningen ska ha organisationsnummer, styrelse, stadgar och medlemsregister med namn, födelseår och uppgift om betald medlemsavgift
+  - Föreningen ska dela kommunens värdegrund, ha en policy mot alkohol, tobak och andra droger samt bedriva ideell eller allmännyttig verksamhet inom en stödberättigad inriktning
+  - Ansökan ska innehålla stadgar, justerat årsmötesprotokoll, föregående års verksamhetsberättelse, balans- och resultatrapport samt revisionsberättelse
+  - Underlag som styrker föreningens firmatecknare ska bifogas
+  belopp: Individuellt beslutat verksamhetsbidrag; kommunen publicerar ingen generell kronnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med samtliga handlingar ska vara kommunen tillhanda senast 31 mars; ofullständig ansökan är ogiltig
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: toreboda-skotselbidrag
+  namn: Skötselbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  malgrupp: Föreningar med kommunalt avtal om drift av en anläggning, lokal eller fastighet
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsbidrag och vara registrerad i föreningsregistret
+  - Föreningen ska verka inom kultur, idrott, natur eller friluftsliv
+  - Ett gällande skötselavtal med Töreboda kommun om drift av exempelvis motionsspår, mindre lokal idrottsplats, hyrd lokal eller fastighet ska bifogas
+  - Ansökan ska innehålla stadgar, justerat årsmötesprotokoll, verksamhetsberättelse, balans- och resultatrapport samt revisionsberättelse för föregående räkenskapsår
+  - Underlag som styrker föreningens firmatecknare ska bifogas
+  belopp: Individuellt beslutat skötselbidrag enligt föreningens avtal; kommunen publicerar ingen generell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med samtliga handlingar ska vara kommunen tillhanda senast 31 mars; ofullständig ansökan är ogiltig
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: toreboda-samhallslokals-bygdegardsbidrag
+  namn: Samhällslokals- och bygdegårdsbidrag
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Registrerade föreningar som äger en egen samhällslokal, bygdegård eller hembygdsgård
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska vara registrerad i kommunens föreningsregister och uppfylla samtliga allmänna villkor för föreningsbidrag
+  - Föreningen ska äga den lokal som ansökan avser, exempelvis en bygdegård eller hembygdsgård
+  - Lagfart som styrker ägandet ska bifogas ansökan
+  - Ansökan ska innehålla stadgar, justerat årsmötesprotokoll, verksamhetsberättelse, balans- och resultatrapport samt revisionsberättelse för föregående räkenskapsår
+  - Underlag som styrker föreningens firmatecknare ska bifogas
+  belopp: Individuellt beslutat lokalbidrag; kommunen publicerar ingen generell kronnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med samtliga handlingar ska vara kommunen tillhanda senast 31 mars; ofullständig ansökan är ogiltig
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: toreboda-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund som bedriver verksamhet i Töreboda kommun och är anslutna till kommunens föreningsregister
+  deadlines:
+    typ: fasta
+    datum: ['06-30']
+  krav:
+  - Studieförbundet ska vara anslutet till Töreboda kommuns föreningsregister och bedriva verksamhet i kommunen
+  - Fördelningen sker enligt kommunfullmäktiges beslut att följa Västra Götalands bildningsförbunds rekommendation för kommunala studieförbundsanslag
+  - Verksamhetsplan för kommande år ska bifogas
+  - Verksamhetsberättelse inklusive ekonomisk berättelse för föregående år ska bifogas
+  - Påskrivna kommunsammandrag ska bifogas ansökan
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens totala studieförbundsanslag fördelas enligt Västra Götalands bildningsförbunds rekommendation; totalsumman publiceras inte
+  sen_ansokan: Fullständig ansökan ska vara kommunen tillhanda senast 30 juni och bidraget betalas ut före augusti månads utgång
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
+- id: toreboda-sarskild-bidragsansokan
+  namn: Särskild bidragsansökan
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Registrerade föreningar med ett stödbehov som inte ryms inom kommunens ordinarie bidragsformer
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Föreningen ska vara ansluten till Töreboda kommuns föreningsregister och uppfylla de allmänna villkoren för föreningsbidrag
+  - Ansökan ska avse ett behov som inte ryms inom de ordinarie riktlinjerna och motivera varför ett särskilt stöd behövs
+  - Ansökan ska innehålla stadgar, justerat årsmötesprotokoll och underlag som styrker föreningens firmatecknare
+  - Verksamhetsberättelse, balans- och resultatrapport samt revisionsberättelse från föregående räkenskapsår eller året dessförinnan ska bifogas
+  - Stödet kan exempelvis avse ett större renoveringsbehov eller ett större evenemang som bidrar till kommuninvånarnas trivsel och gemenskap
+  belopp: Individuellt beslutat särskilt bidrag efter central beredning och politiskt beslut; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag; ansökan bereds centralt och avgörs genom politiskt beslut
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: toreboda-folkhalsomedel
+  namn: Bidrag ur folkhälsans budget
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar och frivilligorganisationer med en ny folkhälsofrämjande eller förebyggande insats för kommuninvånare
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Sökanden ska vara en frivilligorganisation eller förening som bedriver verksamhet i Töreboda kommun och har organisationsnummer, styrelse, stadgar och medlemsregister
+  - Projektet eller insatsen ska ligga utanför den ordinarie verksamheten, främja hälsa eller förebygga ohälsa och ligga i linje med det gemensamma folkhälsoarbetets verksamhetsplan
+  - Insatser för jämlik hälsa och grupper som annars är svåra att nå prioriteras, och deltagandet ska vara kostnadsfritt
+  - Ansökan ska beskriva bakgrund, syfte, målgrupp, metod, eventuell samverkan, möjlighet till fortsatt verksamhet och projektets totala budget inklusive egen och annan finansiering
+  - Organisationen ska aktivt stå för demokratiska värderingar, ta avstånd från våld, rasism och droger samt bifoga stadgar, årsmötesprotokoll, föregående års ekonomiska handlingar, revision och firmateckningsunderlag
+  - Ekonomisk redovisning och projektutvärdering ska lämnas senast två månader efter projektets slut
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://toreboda.se/uppleva-och-gora/idrott-motion-och-friluftsliv/foreningsliv-och-foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Nya riktlinjer gäller från 1 januari 2026; detaljer finns i kommunens dokument. Ej angivet i källan
-  id: toreboda-foreningsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 108 000 kr att söka ur folkhälsans budget
+  sen_ansokan: Ansökan ska vara kommunen tillhanda senast 31 mars varje verksamhetsår; kvarstående medel kan inte sökas efter ansökningsperioden
+  kalla_url: &folkhalsa https://toreboda.se/omsorg-och-stod/folkhalsoarbete
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
 forutsattningar:
-- id: toreboda-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Töreboda e-tjänster
+- id: toreboda-registrering-och-grundvillkor
+  vad: Registrering och grundläggande bidragsbehörighet
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsregister, ha säte i Töreboda, bedriva huvuddelen av verksamheten där och ha minst hälften av medlemmarna folkbokförda i kommunen. Den ska ha organisationsnummer, styrelse, stadgar, medlemsregister med betalda avgifter, dela kommunens värdegrund och ha en policy mot alkohol, tobak och andra droger. Partipolitiska föreningar, vinstdrivande eller droguppmuntrande arrangemang, föreningar med kommunskuld samt föreningar i likvidation eller konkurs får inte stöd.
+  system: Töreboda kommuns föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid eller återkommande förnyelsefrist för registreringen
   giltighet: null
   ordning: 1
-  kalla_url: https://toreboda.se/uppleva-och-gora/idrott-motion-och-friluftsliv/foreningsliv-och-foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: toreboda-ansokningshandlingar
+  vad: Fullständig ansökan och årshandlingar
+  beskrivning: De ordinarie föreningsbidragen söks med kommunens PDF-blankett via e-post. Stadgar, justerat årsmötesprotokoll, verksamhetsberättelse, balans- och resultatrapport, revisionsberättelse och firmateckningsunderlag ska bifogas enligt stödformens anvisning; en ofullständig ansökan räknas som ogiltig.
+  system: E-post och kommunens PDF-blankett
+  ledtid: null
+  ledtid_text: Fyra ordinarie bidrag söks senast 31 mars; studieförbund söker senast 30 juni och särskild ansökan saknar publicerad tidsfrist
+  giltighet: null
+  ordning: 2
+  kalla_url: https://toreboda.se/download/18.505cc9bb19d055a509b5910/1774351800123/Anvisningar%20f%C3%B6r%20ans%C3%B6kan%20om%20%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null
