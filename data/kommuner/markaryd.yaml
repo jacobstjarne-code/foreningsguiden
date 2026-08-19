@@ -2,352 +2,597 @@ kommun: Markaryd
 kommun_slug: markaryd
 lan: Kronobergs län
 befolkning: 9831
-forvaltning: Kultur- och fritidsenheten
+forvaltning: Kultur- och fritidsenheten samt Arbete- och välfärdsförvaltningen
 ansokningssystem:
-  namn: Markaryds bidragshantering
-  url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-verifierad: '2026-07-31'
+  namn: FRI Webb-Bidrag
+  url: https://foreningar.markaryd.se/bidrag/
+kalla_url: &huvud https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.markaryd.se/download/18.4026b9e19b353b7ba8b5043/1767946614164/Riktlinje%20f%C3%B6r%20kommunala%20f%C3%B6reningsbidrag%20%20slutgiltig.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Barn- och ungdomsföreningar
+- id: markaryd-aktivitetsbidrag
+  namn: Aktivitetsstöd
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med ledarledd verksamhet för barn och unga 4–25 år eller handikappidrott utan övre åldersgräns
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [02-25, 08-25]
+  krav:
+  - &grund Föreningen ska vara ideell, hemmahörande och/eller verksam i Markaryd, öppen för alla, demokratiskt uppbyggd och aktiv med verksamhet till nytta för kommunens invånare
+  - &formalia Föreningen ska ha vald styrelse, antagna stadgar, medlemsmatrikel med årlig medlemsavgift och normalt vara ansluten till en riksorganisation; kommunen kan godkänna undantag
+  - &arshandlingar Årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse samt aktuella medlems- och registeruppgifter ska lämnas årligen
+  - &ansokan Ansökan ska vara komplett, sökas digitalt av huvudstyrelsen och undertecknas av ordförande eller utsedd firmatecknare; kommunen har rätt till ekonomisk och verksamhetsmässig insyn
+  - &trygghet Föreningar med barn- och ungdomsverksamhet ska årligen ha antagen ANDTS- och likabehandlingspolicy samt kontrollera belastningsregister för berörda ledare från 15 år
+  - Aktiviteten ska vara planerad och ledarledd, pågå minst 45 minuter och ha minst tre deltagare 4–25 år utöver ledaren; maximalt 30 deltagare får räknas
+  - Ledaren ska vara minst 13 år, närvarande och inte leda flera samtidiga grupper; medlemmen får räknas högst en gång per dag och förening
+  - Närvarokort ska föras; entrétävlingar, kommersiella arrangemang, studiecirklar och skolaktiviteter under skoltid är inte stödgrundande
+  belopp: 5 kr per deltagare och sammankomst samt 10 kr per sammankomst; beloppen minskas proportionellt om årspotten överskrids
+  belopp_avser: per_forening
+  kommunens_pott: 360 000 kr per verksamhetsår
+  sen_ansokan: 25 augusti gäller verksamhet 1 januari–30 juni och 25 februari gäller 1 juli–31 december; RF-anslutna söker 6–25-årsverksamhet via statligt LOK-underlag.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: markaryd-aktivitetsbidrag
-- namn: Driftsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som äger lokal eller anläggning
+- id: markaryd-lokalhyresbidrag
+  namn: Lokalhyresbidrag – barn- och ungdomsföreningar
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med aktivitetsstöd som hyr egen lokal för regelbunden verksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [04-30]
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - *trygghet
+  - Föreningen ska få aktivitetsstöd och lokalen ska vara godkänd av kultur- och fritidsenheten samt användas minst åtta månader per år
+  - Stödet gäller inte timvis förhyrning; intäkt från fast hyresgäst ska räknas av från hyreskostnaden
+  - Ny eller bytt lokal ska godkännas i samråd med Kultur och fritid
+  belopp: 60 % av kostnaden för hyra, el, vatten och försäkring, högst 9 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april året före det kalenderår som stödet avser.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: markaryd-driftsbidrag
-- namn: Föreningarnas förfogande
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
+- id: markaryd-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med ungdomsverksamhet som får aktivitetsstöd
   deadlines:
-    typ: fasta
-    datum:
-    - 09-30
-  krav: []
-  belopp: Föreningen ska själv bidra med minst 40 procent av kostnaden
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-foreningarnas-forfogande
-- namn: Kulturbidrag
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-kulturbidrag
-- namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med ungdomsverksamhet och lokalt aktivitetsstöd
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: Högst 1 500 kr per kurs och deltagare, maximalt 4 500 kr per förening och år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kommunens aktuella sida anger 30 april.
-  id: markaryd-ledarutbildningsbidrag
-- namn: Lokalhyresbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med lokalt aktivitetsstöd som hyr lokal
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: 60 procent av kostnaden, högst 9 000 kr per år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-lokalhyresbidrag
-- namn: Lokalhållandebidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som tillhandahåller samlingslokaler
-  deadlines:
-    typ: fasta
-    datum:
-    - 05-20
-    - 12-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-lokalhallandebidrag
-- namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nybildade föreningar
-  deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
-  krav: []
-  belopp: 2 000 kr, utbetalat i två delar
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - *trygghet
+  - Föreningen ska bedriva ungdomsverksamhet och få kommunalt aktivitetsstöd
+  - Kursen eller studiecirkeln ska arrangeras av riks-, distrikts- eller lokal organisation; intern studiecirkel kan få stöd främst för studiematerial
+  - Kursprogram och kursintyg ska bifogas; specialkurs där deltagaren har ekonomisk vinning ger inget stöd
+  belopp: Erlagd kursavgift, högst 1 500 kr per kurs och deltagare och totalt högst 4 500 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast två månader efter avslutad kurs.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: markaryd-startbidrag
-- namn: Evenemangsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-evenemangsbidrag
-- namn: Verksamhets- och utvecklingsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-verksamhets-och-utvecklingsbidrag
-- namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Godkända studieförbund
+- id: markaryd-driftsbidrag
+  namn: Driftsbidrag för egen anläggning
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som äger eller driver en anläggning av betydelse för kommunens fritidsverksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [04-30]
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Anläggningen ska ägas eller drivas av föreningen, vara betydelsefull för fritidsverksamheten och bedömas angelägen att stödja
+  - Stödgrundande poster är arrende, uppvärmning, vatten, försäkringar och skötsel
+  - Föreningar med ungdomsverksamhet prioriteras och kostnaderna ska kunna utläsas ur bokföringen
+  belopp: Individuell fördelning med vägledning av kommunens beloppsnormer; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästkommande kalenderår ska lämnas senast 30 april året före.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: markaryd-bidrag-till-studieforbund
-- namn: Bidrag till sociala organisationer
-  kategori:
-  - social
-  malgrupp: Ideella föreningar i kommunen
+- id: markaryd-foreningarnas-forfogande
+  namn: Bidrag till föreningarnas förfogande
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med ungdoms-, vuxen-, motions- eller idrottsverksamhet som har ett projekt utanför övriga bidragsformer
   deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Projektet kan avse motionsverksamhet, reparation eller nyanläggning, inventarier, antidrogkampanj, större tävling eller ungdomsaktivitet
+  - Föreningen ska själv finansiera minst 40 % av den totala kostnaden
+  - Ekonomisk redovisning av det genomförda projektet krävs före utbetalning
+  belopp: Individuellt prövat komplement; föreningens egen insats ska vara minst 40 % av totalkostnaden och någon fast stödnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september året före det år projektet avser.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: markaryd-bidrag-till-sociala-organisationer
-- namn: Integrationsbidrag
-  kategori:
-  - social
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: markaryd-integrationsbidrag
 - id: markaryd-ridskolebidrag
   namn: Ridskolebidrag
-  kategori:
-  - idrott
-  malgrupp: Förening som bedriver ridskola för barn och unga 4–25 år
+  kategori: [idrott]
+  foreningstyp: [idrott, ungdom]
+  malgrupp: Ridföreningar i Markaryd som bedriver organiserad ridskola för medlemmar 4–25 år
   deadlines:
     typ: fasta
-    datum:
-    - 05-20
-    - 12-01
+    datum: [05-20, 12-01]
   krav:
-  - Föreningen ska bedriva ridskoleverksamhet
-  belopp: 500 kr per termin och elev, högst 100 elever per termin
-  sen_ansokan: Underlag ska lämnas senast 20 maj respektive 1 december
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - *trygghet
+  - Ridskolan ska drivas av en ridförening inom Markaryds kommun och eleven ska vara medlem och 4–25 år
+  - Föreningen ska söka både statligt och kommunalt aktivitetsstöd för verksamheten
+  - Redovisningen ska ange antal elever, ålder, könsfördelning, antal verksamhetstillfällen, tidsperiod och ansvarig ledare
+  belopp: Högst 500 kr per termin och elev, för maximalt 100 elever per termin
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Underlag för vårterminen ska lämnas senast 20 maj och för höstterminen senast 1 december.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
+- id: markaryd-lokalhallandebidrag
+  namn: Bidrag till lokalhållande föreningar
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som tillhandahåller samlingslokaler för föreningar, allmänhet, företag och myndigheter
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Föreningen ska följa kommunens uthyrningsreglemente och vara medlem i Bygdegårdarnas Riksförbund, Folkets Hus och Parker eller Våra Gårdar
+  - Lokalen ska kunna hyras av olika intressenter med tillgång till kök och porslin; fast taxa ska lämnas till kommunen varje år
+  - Minst 25 000 kr per år ska normalt komma från enstaka uthyrning inklusive egna arrangemang; 10 % av bidraget ska avsättas till renovering och underhåll
+  - Stödet får inte kombineras med annat kommunalt drift-, lokalhyres- eller kulturbidrag för fastighetens drift
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årsanslaget fördelas 40 % efter stödberättigad lokalyta, 55 % efter hyresintäkter och enstaka uthyrningar samt 5 % efter politiska sammanträden med nolltaxa; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 30 april det år stödet avser.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   status: aktiv
-  senast_verifierad: '2026-08-02'
-- id: markaryd-pensionar-funktionsratt
-  namn: Bidrag till pensionärs- och funktionsrättsföreningar
-  kategori:
-  - pensionar
-  - funktionsratt
-  malgrupp: Pensionärs- och funktionsrättsföreningar i kommunen
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-subventionerad-lokalhyra
+  namn: Subventionerad hyra i kommunala och lokalhållande föreningars lokaler
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade föreningar och organisationer i Markaryds kommun som hyr stödberättigade lokaler eller anläggningar
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Föreningen ska tillhöra målgruppen och bedriva verksamhet i kommunen
-  belopp: Grundbidrag 3 000 kr plus 25 kr per medlem; lokalhyresbidrag högst 60 procent, max 9 000 kr
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.markaryd.se/sidor/stod-och-omsorg/foreningar-och-foreningsbidrag/bidrag-till-pensionars--och-handikappforeningar.html
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Aktuell ansökningstid framgår av kommunens e-tjänst
+  - Föreningen eller organisationen ska vara registrerad i Markaryds kommun
+  - Bokningen ska avse kommunal lokal eller anläggning eller en lokal hos en lokalhållande förening
+  - Entréarrangemang, bingo, årsfest med supé eller dans, basar och försäljning betalar full hyra
+  belopp: 70 % rabatt på fastställd lokalhyra
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist publiceras; rabatten tillämpas vid stödberättigad förhyrning.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   status: aktiv
-  senast_verifierad: '2026-08-02'
-- id: markaryd-halkskydd
-  namn: Bidrag till utdelning av halkskydd
-  kategori:
-  - pensionar
-  - social
-  malgrupp: Föreningar som distribuerar halkskydd till kommuninvånare 70 år och äldre
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-kulturbidrag
+  namn: Bidrag till kulturföreningar och kulturverksamhet
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kultur- och hembygdsföreningar som erbjuder ett brett kulturutbud för kommunens invånare
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [04-30]
   krav:
-  - Erbjudandet ska rikta sig till hela målgruppen
-  - Utdelningen ska återredovisas
-  belopp: 2,5 promille av prisbasbeloppet per utdelat halkskydd
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.markaryd.se/sidor/stod-och-omsorg/foreningar-och-foreningsbidrag/bidrag-till-pensionars--och-handikappforeningar.html
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Aktuell ansökningstid framgår av kommunen
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Verksamheten ska stödja och uppmuntra ett brett kulturutbud i kommunen
+  - Stödet kan avse kulturbyggnad, hembygdspark, arrangemang eller kulturell dokumentation
+  - Föreningens verksamhet och arrangemang ska vara öppna för kommunens invånare
+  belopp: Individuellt prövat; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april det år stödet avser.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   status: aktiv
-  senast_verifierad: '2026-08-02'
-- id: markaryd-barn-ungdomskultur-stromsnasbruk-traryd
-  namn: Bidrag till barn- och ungdomskultur i Strömsnäsbruk och Traryd
-  kategori:
-  - kultur
-  malgrupp: Föreningar, sammanslutningar och kommunala institutioner med kulturverksamhet för barn och unga, främst i Strömsnäsbruk
-    eller Traryd
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-bidrag-till-studieforbund
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Folkbildningsrådsgodkända studieförbund med folkbildningsverksamhet i Markaryd
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Studieförbundets centralorganisation ska vara godkänd av Folkbildningsrådet
+  - Studieförbundet ska bedriva bidragsgrundande folkbildningsverksamhet i Markaryds kommun
+  - Verksamhetsplan med utvärderingsplan och verksamhetsberättelse ska redovisas årligen
+  - Kommunens krav på verksamhetsredovisning ska följas och stora verksamhetsförändringar kan leda till omprövning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens ramanslag fördelas till 70 % som grundbidrag efter föregående års relativa bidragsandel och 30 % som volymbidrag efter senast redovisade verksamhetsår; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 30 april det år stödet avser.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-startbidrag
+  namn: Startbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Nybildade ideella föreningar som registrerar sig hos Kultur och fritid
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Verksamheten ska avse exempelvis dans, konst, musik eller teater
-  belopp: "Högst 5 000 kr per ansökan"
+  - *grund
+  - *formalia
+  - Föreningen ska vara nybildad och lämna bevis på anslutning till riksorganisation
+  - Registreringen hos Kultur och fritid utgör ansökan och ska innehålla bildandeprotokoll, antagna stadgar och föreningens målsättning
+  - Den andra utbetalningen förutsätter ett års verksamhet och att föreningen då får aktivitetsstöd
+  belopp: 2 000 kr som engångsbelopp, varav 1 000 kr vid föreningsstart och 1 000 kr efter ett års verksamhet tillsammans med aktivitetsstöd
   belopp_avser: per_forening
-  kommunens_pott: "Totalt 10 000 kr per år"
-  sen_ansokan: Kan sökas löpande så länge fondmedel finns
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/kultur/foreningsbidrag-inom-kultur.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
+  kommunens_pott: null
+  sen_ansokan: Ingen sista ansökningsdag publiceras; registreringen av den nybildade föreningen gäller som ansökan.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   status: aktiv
-  senast_verifierad: '2026-08-02'
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-evenemangsbidrag
+  namn: Evenemangsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som arrangerar ett offentligt evenemang i Markaryds kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Evenemanget ska äga rum i Markaryd, vara offentligt, öppet för alla och marknadsfört genom exempelvis media, sociala medier eller affischer
+  - Marknadsföringen ska tydligt ange Markaryds kommun som medarrangör och föreningen ansvarar för nödvändiga polistillstånd
+  - Redovisning med underlag som styrker användningen ska lämnas senast en månad efter evenemanget; lägre faktiska kostnader kan minska stödet
+  belopp: Individuellt prövat; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan och utbetalning sker löpande under året; kommunen publicerar ingen sista ansökningsdag.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-verksamhets-och-utvecklingsbidrag
+  namn: Verksamhets- och utvecklingsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med utvecklingsinsats, samverkansprojekt eller särskilt behov som inte täcks av ordinarie bidrag
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Insatsen kan avse ordinarie verksamhet, verksamhetsutveckling, samverkansprojekt eller särskilda behov som uppstår under året
+  - Extern medfinansiering och insatser som når flera delar av kommunen prioriteras
+  - Stödet kan inte ersätta ett ordinarie bidrag som inte sökts i tid eller kombineras med redan beviljat stöd för samma ändamål utan särskilda skäl
+  belopp: Individuellt prövat inom tillgängligt budgetutrymme; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan tas emot löpande under året och kan bara beviljas medan budgetutrymme finns.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-pensionar-funktionsratt-grundbidrag
+  namn: Grundbidrag – pensionärs- och funktionsrättsföreningar
+  kategori: [pensionar, funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärs- och funktionsrättsföreningar med verksamhet till nytta för invånare i Markaryd
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Ansökan ska innehålla verksamhetsplan, användning av sökt stöd och redovisning av hur tidigare kommunbidrag har använts
+  - Medlemsantalet ska styrkas genom föreningens medlemsmatrikel
+  belopp: 3 000 kr i fast grundbidrag plus 25 kr per medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den digitala 2026-ansökan är öppen löpande; kommunens ordinarie fördelning sker efter 30 april och senare ansökningar kan bara få medel om budget återstår.
+  kalla_url: &valfard https://www.markaryd.se/sidor/stod-och-omsorg/foreningar-och-foreningsbidrag.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-pensionar-funktionsratt-lokalhyresbidrag
+  namn: Lokalhyresbidrag – pensionärs- och funktionsrättsföreningar
+  kategori: [pensionar, funktionsratt, social, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärs- och funktionsrättsföreningar med kostnad för föreningslokal
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Föreningen ska redovisa verksamhetsplan, hur stödet ska användas och hur eventuellt tidigare kommunbidrag har använts
+  - Hyra, el, vatten, försäkring och annan handling som styrker den sökta lokalkostnaden ska bifogas
+  belopp: Högst 60 % av kostnaden för hyra, el, vatten och försäkring, maximalt 9 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den digitala 2026-ansökan är öppen löpande; kommunens ordinarie fördelning sker efter 30 april och senare ansökningar kan bara få medel om budget återstår.
+  kalla_url: *valfard
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-halkskydd
+  namn: Bidrag till halkskydd
+  kategori: [pensionar, social, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar som delar ut halkskydd till alla kommuninvånare som är 70 år eller äldre
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *ansokan
+  - Föreningen ska organisera, administrera, informera om och distribuera halkskydd till hela målgruppen oavsett föreningstillhörighet
+  - Ansökan ska innehålla medgivande till debitering av felaktigt eller oanvänt belopp
+  - Utdelningen ska återredovisas senast 31 december; utebliven redovisning eller oanvända medel faktureras tillbaka
+  belopp: 2,5 promille av prisbasbeloppet per utdelat halkskydd
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den digitala 2026-ansökan är öppen löpande; återredovisning ska lämnas senast 31 december samma år.
+  kalla_url: *valfard
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-kvalitetshojande-insatser
+  namn: Bidrag till kvalitetshöjande insatser
+  kategori: [pensionar, funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Civilsamhällesorganisationer med aktiviteter för äldre, personer med funktionsnedsättning eller anhörigvårdare
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Aktiviteten ska rikta sig till äldre i särskilt eller ordinärt boende, personer med funktionsnedsättning eller anhöriga som vårdar närstående
+  - Ansökan ska beskriva aktiviteten, målgruppen, förväntat antal deltagare och sökt belopp
+  - Bedömningen grundas på hur många aktiviteten når och hur den kommer målgruppen till gagn
+  belopp: Individuellt bedömt; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *valfard
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-bidrag-till-sociala-organisationer
+  namn: Bidrag till sociala organisationer
+  kategori: [social]
+  foreningstyp: [social, annat]
+  malgrupp: Ideella sociala organisationer som stödjer barn eller, vid särskilda skäl, vuxna med behov av särskilt stöd
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Verksamheten ska i första hand stödja barn; stöd till vuxna med behov av särskilt stöd kräver särskilda skäl
+  - Verksamheten ska komplettera Arbete- och välfärdsnämndens verksamhet
+  - Ansökan ska ange användning under året, målgrupp och sökt belopp samt redovisa tidigare kommunbidrag
+  belopp: Individuellt bedömt; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den digitala 2026-ansökan är öppen löpande; kommunens ordinarie fördelning sker efter 30 april och senare ansökningar kan bara få medel om budget återstår.
+  kalla_url: *valfard
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-integrationsbidrag
+  namn: Integrationsbidrag
+  kategori: [social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar och civilsamhällesorganisationer som genomför integrationsfrämjande aktiviteter i Markaryd
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - *arshandlingar
+  - *ansokan
+  - Aktiviteten ska främja integration i samhället
+  - Ansökan ska beskriva aktiviteten, målgruppen, förväntat antal deltagare och sökt belopp
+  - Bedömningen grundas på hur aktiviteten främjar integration; tidigare kommunbidrag ska redovisas
+  belopp: Individuellt bedömt; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *valfard
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: markaryd-barn-ungdomskultur-stromsnasbruk-traryd
+  namn: Bidrag till barn- och ungdomskultur i Strömsnäsbruk och Traryd
+  kategori: [kultur]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar, sammanslutningar och kommunala institutioner med kulturverksamhet för barn och unga, främst i Strömsnäsbruk eller Traryd
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Bidragsmottagaren ska vara en förening, sammanslutning eller kommunal institution med säte i Markaryds kommun, framför allt i Strömsnäsbruk eller Traryd
+  - Verksamheten ska vara kulturell barn- och ungdomsverksamhet, exempelvis dans, konst, musik eller teater
+  - Ansökan ska innehålla en beskrivning av arrangemanget och det belopp som söks
+  belopp: Högst 5 000 kr per ansökan, så länge fondmedel finns
+  belopp_avser: per_forening
+  kommunens_pott: 10 000 kr per år
+  sen_ansokan: Ansökan kan lämnas löpande under året tills de fonderade medlen är slut.
+  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/kultur/foreningsbidrag-inom-kultur.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: markaryd-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Markaryds bidragshantering
+- id: markaryd-bidragsberattigad
+  vad: Grundvillkor för kommunalt föreningsbidrag
+  beskrivning: Föreningen ska vara ideell, öppen och demokratisk, ha verksamhet till nytta för Markaryds invånare, vald styrelse, stadgar, medlemsmatrikel och årlig medlemsavgift samt normalt vara ansluten till en riksorganisation.
+  system: FRI Webb-Bidrag
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid för godkännandet.
+  giltighet: Årshandlingar och registeruppgifter ska lämnas varje år.
   ordning: 1
-  kalla_url: https://www.markaryd.se/sidor/uppleva-och-gora/foreningsinformation/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: markaryd-arliga-handlingar
+  vad: Årlig uppdatering av föreningens handlingar
+  beskrivning: Årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse samt medlemsantal och föreningsregisteruppgifter ska lämnas årligen.
+  system: FRI Webb-Bidrag
+  ledtid: null
+  ledtid_text: Varje år; något gemensamt fast datum publiceras inte.
+  giltighet: kalenderår
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: markaryd-trygg-barnverksamhet
+  vad: Trygghetskrav för barn- och ungdomsföreningar
+  beskrivning: Föreningen ska årligen anta ANDTS- och likabehandlingspolicy och intyga att berörda barn- och ungdomsledare från 15 år har visat belastningsregisterutdrag; verksamma ledare kontrolleras på nytt vart tredje år.
+  system: FRI Webb-Bidrag
+  ledtid: null
+  ledtid_text: Policyn ska antas årligen och registerutdragen uppdateras vart tredje år.
+  giltighet: sammansatt
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
