@@ -5,15 +5,27 @@ befolkning: 9307
 forvaltning: Kultur, turism och fritid
 ansokningssystem:
   namn: Rbok
-  url: https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
-kalla_url: https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
-verifierad: '2026-08-01'
+  url: https://hjo.rbok.se/
+kalla_url: &huvud https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &register https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsregister/
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Aktivitetsbidrag
+- id: hjo-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - social
+  - pensionar
+  - funktionsratt
   - ovrig
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Bidragsberättigade föreningar med redovisade aktiviteter
   deadlines:
     typ: fasta
@@ -23,27 +35,35 @@ bidrag:
   krav:
   - Föreningen ska vara registrerad i Hjo kommuns föreningsregister, demokratiskt uppbyggd, ha organisationsnummer samt plusgiro-
     eller bankgirokonto och bedriva verksamhet i Hjo kommun
+  - Föreningen ska uppdatera sina registeruppgifter minst årligen, vara öppen för alla och bedriva barn- och ungdomsverksamhet enligt barnkonventionen i drog-, rök- och dopningsfria miljöer
   - Minst 10 bidragsberättigade sammankomster per halvår för barn 5–20 år, funktionsnedsatta oavsett ålder eller pensionärer
     65 år och äldre
   - En sammankomst ska ha minst 3 deltagare utöver ledare, vara ledarledd, pågå minst 60 minuter och ledas av person som fyllt
     minst 13 år
   - Entrébelagd tävling, kommersiellt arrangemang, styrelsemöte eller studiecirkel räknas inte som bidragsgrundande sammankomst
+  - Samma person får bara räknas i en aktivitet per dag och sektion och en grupp får inte delas i mindre grupper för att ge högre stöd
   - Föreningen ska varje år skicka in årsmötesprotokoll, ekonomisk redovisning och revisionsberättelse för senaste verksamhetsåret
   belopp: 8 kr/deltagare (5–12 år), 11 kr/deltagare (13–17 år), 6 kr/deltagare (18–20 år), 6 kr/deltagare (65 år och äldre),
     11 kr/deltagare (funktionsnedsatta oavsett ålder), per bidragsberättigad sammankomst
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
+  kalla_url: &norm https://hjo.se/globalassets/dokument/kultur-turism-och-fritid/fritid/bidrag/bidrag-2021/foreningsbidragriktlinjer.pdf
+  belopp_avser: per_forening
+  kommunens_pott: null
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: Se Riktlinjer för föreningsbidrag (Kommunstyrelsen 2021-02-10 § 7) för fullständiga allmänna bestämmelser.
-  id: hjo-aktivitetsbidrag
-- namn: Utvecklings- och investeringsbidrag
+- id: hjo-utvecklings-och-investeringsbidrag
+  namn: Utvecklings- och investeringsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - social
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Bidragsberättigade föreningar med utvecklings- eller investeringsbehov
   deadlines:
     typ: lopande
@@ -51,25 +71,35 @@ bidrag:
   krav:
   - Föreningen ska vara registrerad i Hjo kommuns föreningsregister, demokratiskt uppbyggd, ha organisationsnummer samt plusgiro-
     eller bankgirokonto och bedriva verksamhet i Hjo kommun
+  - Föreningen ska uppdatera sina registeruppgifter minst årligen, vara öppen för alla och varje år lämna årsmötesprotokoll, ekonomisk redovisning och revisionsberättelse
+  - Verksamhet för barn och unga ska följa barnkonventionen och bedrivas i drog-, rök- och dopningsfria miljöer
   - Kostnaden för projektet/investeringen ska uppgå till minst 3 000 kronor
   - Kontakt ska tas med kommunen innan ansökan lämnas in
   - Ansökan ska innehålla en enkel beskrivning av projektet, tidplan och budget
+  - Utvecklingsinsatsen kan avse rekrytering, nya prioriterade målgrupper, ökad tillgänglighet, utbildning eller större lovaktiviteter; investeringen kan avse nödvändiga inventarier, nyanläggning, nybyggnation, renovering eller ombyggnad
+  - Vid större ansökningar prioriteras föreningar som bidrar med egna medel och/eller annan extern finansiering
   - En enkel rapport ska skrivas efter projektets slutförande
   belopp: Ersättning för faktiska kostnader, bidragets storlek bestäms efter bedömning av varje enskild ansökan. Kostnaden
     för projektet/investeringen ska uppgå till minst 3 000 kronor
   sen_ansokan: Ej tillämpligt (löpande ansökan) — ansökan ska lämnas i god tid innan satsningen ska göras
-  kalla_url: https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
-  belopp_status: kontrollast
+  kalla_url: *norm
+  belopp_avser: per_forening
+  kommunens_pott: null
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: Bidraget kan sökas när som helst under året men i god tid innan satsningen ska göras.
-  id: hjo-utvecklings-och-investeringsbidrag
-- namn: Anläggningsbidrag
+- id: hjo-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - social
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Bidragsberättigade föreningar med lokal eller anläggning
   deadlines:
     typ: fasta
@@ -78,30 +108,96 @@ bidrag:
   krav:
   - Föreningen ska vara registrerad i Hjo kommuns föreningsregister, demokratiskt uppbyggd, ha organisationsnummer samt plusgiro-
     eller bankgirokonto och bedriva verksamhet i Hjo kommun
+  - Föreningen ska uppdatera sina registeruppgifter minst årligen, vara öppen för alla och varje år lämna årsmötesprotokoll, ekonomisk redovisning och revisionsberättelse
+  - Verksamhet för barn och unga ska följa barnkonventionen och bedrivas i drog-, rök- och dopningsfria miljöer
   - Föreningen ska ha kostnader för lokaler eller anläggning och äga eller på lång tid hyra lokalen/anläggningen
   - Anläggningsbidrag kan inte sökas för kommunala lokaler
   - Föreningar med verksamhet för barn- och ungdomar, funktionsnedsatta eller pensionärer över 65 år prioriteras vid fördelningen
+  - Endast hyra, arrende, sophämtning, vatten, värme, el, bränsle och försäkring räknas som driftkostnader; telefon, internet, förbrukningsmaterial och personalkostnader utesluts
+  - Avgifter och andra intäkter från medlemmar och externa kunder kan räknas av från driftkostnaderna
   belopp: Grundbidrag max 50 % av prisbasbeloppet (aktivitetsytor, klubbrum och omklädningsrum) eller max 25 % av prisbasbeloppet
     (enbart klubbrum och/eller omklädningsrum). Driftbidrag max 80 % av godkända driftkostnader (hyra, arrende, sophämtning,
     vatten, värme, el, bränsle och försäkringar)
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
+  kalla_url: *norm
+  belopp_avser: per_forening
+  kommunens_pott: null
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: Bidraget består av grundbidrag och driftbidrag. Telefon, internet, förbrukningsmaterial och personalkostnader
     räknas inte som driftkostnad.
-  id: hjo-anlaggningsbidrag
+- id: hjo-studieforbundsbidrag
+  namn: Kommunalt bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med statsbidragsberättigad lokal folkbildningsverksamhet
+  deadlines:
+    typ: fasta
+    datum: [02-28]
+  krav:
+  - Studieförbundets riksorganisation ska vara mottagare av statligt anslag
+  - Studieförbundet ska redovisa den verksamhet som har bedrivits i Hjo kommun, inklusive deltagare, studietimmar och kulturprogram enligt fördelningsmodellen
+  - Ansökan ska innehålla verksamhetsberättelse, verksamhetsplan för kommande år och ekonomisk redovisning
+  - Uppgifterna ska ge kommunen underlag för att fördela anslaget mellan studiecirklar, annan folkbildningsverksamhet och kulturarrangemang
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas med 70 procent till studiecirklar, 10 procent till annan folkbildningsverksamhet och 20 procent till kulturarrangemang; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen regel för sen ansökan
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: För studiecirklar och annan folkbildningsverksamhet viktas deltagare och studietimmar lika; kulturarrangemang fördelas efter antal kulturprogram.
+- id: hjo-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade Hjo-föreningar som bokar kommunala lokaler, anläggningar eller grönytor
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad förening i Hjo kommun och uppdatera sina registeruppgifter minst en gång per år
+  - Föreningen ska vara demokratiskt uppbyggd, ha organisationsnummer och plus- eller bankgiro, bedriva verksamhet i Hjo och vara öppen för alla
+  - Bokningen ska avse en kommunal lokal, anläggning eller grönyta och göras genom kommunens bokningssystem
+  - Föreningen ska följa villkoren och den publicerade standardavgiften för den aktuella resursen; vissa resurser och säsongsavgifter är endast tillgängliga för bidragsberättigade föreningar
+  belopp: Bidragsberättigade Hjo-föreningar får 50 procents subvention på den publicerade standardavgiften
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist publiceras; bokningen beror på tillgängligheten för respektive resurs
+  kalla_url: https://www.hjo.se/Kultur_turism_fritid/boka-lokal/Avgifter-for-lokalbokning/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Standardavgifterna varierar mellan resurser och bokningstyper.
 forutsattningar:
 - id: hjo-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  vad: Registrering och årlig uppdatering i föreningsregistret
+  beskrivning: Föreningen ska vara registrerad i Rbok och uppdatera sina föreningsuppgifter minst en gång per år.
   system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Minst en uppdatering per år
+  giltighet: Uppgifterna ska hållas aktuella och uppdateras minst en gång per kalenderår
   ordning: 1
-  kalla_url: https://www.hjo.se/Kultur_turism_fritid/foreningsliv/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: *register
+  giltighet_status: kontrollast
+- id: hjo-arsmoteshandlingar
+  vad: Årliga årsmötes- och ekonomihandlingar
+  beskrivning: Föreningen ska varje år lämna årsmötesprotokoll, ekonomisk redovisning och revisionsberättelse för det senaste verksamhetsåret.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Varje år; kommunen publicerar inget gemensamt datum
+  giltighet: Årlig uppdatering
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
