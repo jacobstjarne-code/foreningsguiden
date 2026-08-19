@@ -2,173 +2,471 @@ kommun: Åmål
 kommun_slug: amal
 lan: Västra Götalands län
 befolkning: 11579
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kultur- och utbildningsförvaltningen, teknik- och fritidsförvaltningen Säffle–Åmål, kommunstyrelseförvaltningen samt välfärds- och arbetsmarknadsförvaltningen
 ansokningssystem:
-  namn: Åmåls e-tjänster och Interbook Go
-  url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar
-kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar
-verifierad: '2026-07-31'
+  namn: Åmåls e-tjänster, Dalslands e-tjänster och Interbook Go
+  url: https://service.amal.se/MenuGroup2.aspx?groupId=33
+kalla_url: &huvud https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &kommunnorm https://amal.se/download/18.308cdfd81900ff6e8b297153/1737558477834/Antagna%20riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20i%20%C3%85m%C3%A5ls%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Underskottsbidrag till lokalhållande förening
-  kategori:
-  - ovrig
-  malgrupp: En lokalhållande förening per tätort utanför centralorten Åmål
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
+- id: amal-generellt-verksamhetsbidrag
+  namn: Generellt verksamhetsbidrag
+  status: aktiv
+  kategori: [kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: &icke_idrott [kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Icke-idrottsföreningar som uppfyller Åmåls generella bidragskriterier och inte har särskilt eller kulturstrategiskt uppdrag
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Uppfylla Åmåls kommuns generella kriterier i riktlinjerna för bidrag till Åmåls föreningar
-  - Arbeta för att ställa lokaler till allmänhetens förfogande i tätorten
-  belopp: Max 50 000 kr eller högst 50 procent av underskott över 100 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-att-framja-en-levande-landsbygd
+  - Föreningen ska vara icke vinstdrivande, ha säte och verksamhet i Åmål samt arbeta för barn och unga 5–20 år, äldre över 65 år, personer med funktionsvariation eller boende på landsbygden
+  - Föreningen ska ha minst tio aktiva betalande medlemmar i Åmål, årlig medlemsavgift på minst 100 kronor, organisationsnummer, föreningskonto, stadgar, vald styrelse och revisor
+  - Föreningen ska vara öppen och demokratisk, följa diskriminerings- och demokrativillkoren och vid barnverksamhet följa barnkonventionen, ha drogfri miljö och kontrollera belastningsregister
+  - Ansökan ska göras efter årsmöte eller konstituerande möte och innehålla årsmötesprotokoll, senast antagna stadgar, verksamhetsberättelse och bokslut
+  - Idrottsföreningar samt föreningar med särskilt eller kulturstrategiskt uppdrag kan inte få detta bidrag
+  belopp: 1 500 kr per förening och år samt ytterligare 1 500 kr om styrelsen har en ordinarie ledamot eller mötesdeltagande suppleant som är 15–25 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks efter genomfört årsmöte eller konstituerande möte; kommunen publicerar ingen gemensam sista kalenderdag
+  kalla_url: https://amal.se/uppleva-och-gora/kultur/sok-stod-bidrag-eller-kulturpris/generellt-verksamhetsbidrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Söks efter avslutat verksamhetsår.
-  id: amal-underskottsbidrag-till-lokalhallande-forening
-- namn: Evenemangsbidrag för en levande landsbygd
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar huvudsakligen verksamma utanför centralorten Åmål
-  deadlines:
-    typ: lopande
-    datum: []
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-aktivitetsbaserat-verksamhetsbidrag
+  namn: Aktivitetsbaserat verksamhetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *icke_idrott
+  malgrupp: Icke-idrottsföreningar som genomför medlemsaktiviteter och uppfyller Åmåls generella bidragskriterier
+  deadlines: {typ: fasta, datum: [06-30, 12-31]}
   krav:
-  - Uppfylla Åmåls kommuns generella kriterier i riktlinjerna för bidrag till Åmåls föreningar
-  - Planera större publika arrangemang som överensstämmer med bidragets syfte
+  - Föreningen ska uppfylla kommunens generella kriterier och får inte vara idrottsförening eller ha särskilt eller kulturstrategiskt uppdrag
+  - Varje aktivitet ska vara minst 60 minuter och ha minst en ledare och tre deltagande medlemmar; samtliga ledare och deltagare ska vara föreningsmedlemmar
+  - Aktiviteten får inte vara förenad med entréavgift eller biljettköp och högst fem aktiviteter per kalendervecka ersätts
+  - Ansökan ska redovisa tidpunkt, plats, aktivitetsbeskrivning och antal deltagare samt innehålla ifylld aktivitetsrapport
+  - Föreningen ska dokumentera vilka medlemmar som deltog och kunna lämna underlaget vid kommunens uppföljning
+  belopp: 15 kr per aktivitet samt 3 kr per deltagare; deltagare 7–25 år och 65 år eller äldre ger 5 kr per person
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioderna öppnar 1 juni respektive 1 december och stänger 30 juni respektive 31 december
+  kalla_url: https://amal.se/uppleva-och-gora/kultur/sok-stod-bidrag-eller-kulturpris/aktivitetsbaserat-verksamhetsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-lokal-och-anlaggningsbidrag
+  namn: Lokal- och anläggningsbidrag – föreningar som inte är idrottsföreningar
+  status: aktiv
+  kategori: [kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *icke_idrott
+  malgrupp: Icke-idrottsföreningar som behöver en lämplig lokal eller fast anläggning för sin verksamhet
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Föreningen ska uppfylla kommunens generella kriterier och får inte vara idrottsförening eller ha särskilt eller kulturstrategiskt uppdrag
+  - Lokalen eller anläggningen ska bedömas lämplig och endast de delar som används i föreningsverksamheten är bidragsgrundande
+  - Ansökan ska lämnas senast två månader efter årsmötet och redovisa driftkostnader samt samtliga intäkter från uthyrning
+  - Endast ränta på lånat kapital upp till 500 000 kr, el, värme, VA, sotning, sophämtning, hyra, arrende och fastighetsförsäkring räknas; reparation och underhåll räknas inte
+  - Kommunala lokaler som upplåts kostnadsfritt eller med subventionerad hyra ger inte rätt till bidraget
+  belopp: Högst 35 000 kr per förening och år; 40–90 procent av nettokostnaden beroende på medlemsantal och kostnadsintervall
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Komplett ansökan ska lämnas senast två månader efter föreningens årsmöte
+  kalla_url: &ickeidrott https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-foreningar-som-inte-ar--idrottsforeningar
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-marknadsforingsbidrag
+  namn: Marknadsföringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som arrangerar publika evenemang som stärker Åmåls attraktionskraft som besöksmål
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska uppfylla Åmåls generella kriterier och får inte ha ett kulturstrategiskt uppdrag
+  - Evenemanget ska vara publikt och tillräckligt uppmärksammat för att bidra till Åmåls attraktionskraft som plats att bo, arbeta eller besöka
+  - Ansökan ska lämnas i god tid före evenemanget och ange målgrupp, förväntat deltagarantal, kostnader och den marknadsföring som stödet ska finansiera
+  - Kommunens stöd och logotyp ska synas i marknadsföringen och kommunen ska erbjudas plats att marknadsföra Åmål vid arrangemanget
+  belopp: Högst 50 000 kr per evenemang inom tilldelad budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras hela året men måste komma in i god tid före det planerade evenemanget
+  kalla_url: *ickeidrott
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-investeringsbidrag
+  namn: Investeringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med stor positiv betydelse för Åmåls invånare som behöver förstärka eller utveckla sin verksamhet genom en angelägen investering
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska uppfylla kommunens generella kriterier och genom medlemsantal, långsiktig verksamhet, besökare eller motsvarande visa avsevärd positiv inverkan för Åmåls invånare
+  - Investeringen ska avse egen lokal, anläggning, teknisk apparatur, maskin eller motsvarande som föreningen inte klarar inom ordinarie resurser
+  - Investeringen ska vara särskilt angelägen och avgörande för verksamheten eller öka samhällsnytta, trygghet, besöksattraktion eller miljömässig hållbarhet
+  - Ansökan ska utförligt beskriva investeringen, förväntad effekt, kostnader, försök att få annan finansiering och långsiktig finansieringsplan
+  belopp: Högst 50 procent av investeringskostnaden och maximalt 500 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras löpande; kommunen anger cirka två månaders beslutstid
+  kalla_url: *ickeidrott
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-lonebidragsanstallning
+  namn: Föreningsbidrag till lönebidragsanställning
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som kan erbjuda lämplig arbetsmiljö och arbetsuppgifter för en person med statligt beslutad arbetsmarknadspolitisk anställning
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Föreningen ska uppfylla Åmåls generella kriterier och erbjuda en arbetsmiljö och arbetsuppgifter som lämpar sig för stödets syfte
+  - Ett statligt beslut om lönebidrag, trygghetsanställning, utvecklingsanställning eller motsvarande ska finnas
+  - Den anställde ska vara folkbokförd i Åmål och föreningen har fullt arbetsgivaransvar
+  - Högst tre heltidsanställningar per förening kan omfattas och förändringar i anställningen ska omedelbart anmälas
+  - Ansökan avser nästa kalenderår och beslutet gäller högst ett kalenderår i taget
+  belopp: Kommunalt bidrag till del av kostnaden för högst tre heltidsanställningar; någon generell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för påföljande kalenderår ska lämnas senast 31 oktober
+  kalla_url: *ickeidrott
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Utbetalning sker 15 februari, 15 maj, 15 augusti och 15 november.
+- id: amal-samhallsstarkande-bidrag
+  namn: Samhällsstärkande bidrag
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som kan komplettera kommunen med viktiga uppgifter inom trygghet, säkerhet, beredskap eller social hållbarhet
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska uppfylla Åmåls generella kriterier samt ha förmåga, lämplighet och allmänhetens förtroende att utföra uppdraget
+  - Uppgiften ska komplettera kommunens arbete inom främst trygghet, säkerhet, beredskap eller social hållbarhet
+  - Ansökan ska beskriva föreningen, den samhällsstärkande funktion som erbjuds och hur föreningen uppfyller villkoren
+  - Ett samverkansavtal mellan kommunen och föreningen ska reglera uppdraget och hänsyn ska tas till eventuella upphandlingskrav
+  belopp: Fast årligt bidrag på upp till 50 000 kr inom budgeterade medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar hanteras fortlöpande
+  kalla_url: &samhallsstod https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/samhallsstarkande-bidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-akutbidrag
+  namn: Akutbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som drabbats av en kostnad som inte rimligen kunnat förutses eller förebyggas
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Föreningen ska uppfylla Åmåls generella kriterier för föreningsstöd
+  - Kostnaden ska ha varit omöjlig att förutse eller förebygga och innebära en risk för föreningens fortsatta verksamhet
+  - Ansökan ska göras omedelbart när händelsen inträffar
+  - Ansökan ska beskriva hur kostnaden uppstod, styrka kostnaden och förklara konsekvenserna för verksamheten
+  belopp: Högst 50 procent av den oförutsedda kostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska göras omedelbart vid händelsen
+  kalla_url: *samhallsstod
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-sarskilt-kulturuppdrag
+  namn: Särskilt kulturuppdrag
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar med omfattande och utåtriktad verksamhet av särskild betydelse för Åmål som boende- och besöksplats
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska uppfylla Åmåls generella kriterier, vara aktiv inom kultur och får inte ha ett kulturstrategiskt uppdrag
+  - Verksamheten ska vara angelägen för många Åmålsbor, locka många besökare eller vara av sådan kvalitet eller särart att ett upphörande skulle skada kulturlivet
+  - Ansökan ska beskriva verksamheten och hur den uppfyller kriterierna allmän relevans, kommersiell potential, nyskapande, kulturhistoriskt värde, social relevans och kulturell särart
+  - Årsmötesprotokoll, senast antagna stadgar, verksamhetsberättelse och bokslut ska bifogas
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-att-framja-en-levande-landsbygd
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Kommunen anger cirka sex veckors beslutstid.
-  id: amal-evenemangsbidrag-for-en-levande-landsbygd
-- namn: Projektbidrag för en levande landsbygd
-  kategori:
-  - ovrig
-  malgrupp: Föreningar huvudsakligen verksamma utanför centralorten Åmål
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Uppfylla Åmåls kommuns generella kriterier i riktlinjerna för bidrag till Åmåls föreningar
-  belopp: Max 50 000 kr per projekt
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-att-framja-en-levande-landsbygd
+  belopp_avser: ren_pott
+  kommunens_pott: Budgetramen för särskilda kulturuppdrag fördelas efter sex publicerade bedömningskriterier; totalsumman publiceras inte
+  sen_ansokan: Ansökningsperioden är 1 februari–31 mars
+  kalla_url: https://amal.se/uppleva-och-gora/kultur/sok-stod-bidrag-eller-kulturpris/sarskilt-kulturuppdrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: För särskilda insatser som inte täcks av andra bidrag.
-  id: amal-projektbidrag-for-en-levande-landsbygd
-- namn: Bidrag för byalag
-  kategori:
-  - ovrig
-  malgrupp: Stadgebundna byalag utanför centralorten Åmål
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-27
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Bidrag kan beviljas för ett eller två år.
+- id: amal-kulturstrategiskt-uppdrag
+  namn: Kulturstrategiskt uppdrag
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar vars verksamhet har hög relevans även regionalt eller nationellt och kan utveckla Åmåls kulturliv långsiktigt
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Stadgebundna byalag med årlig verksamhetsplan
-  - Uppfylla Åmåls kommuns generella kriterier i riktlinjerna för bidrag till Åmåls föreningar
-  belopp: 8 000 kr per förening
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-att-framja-en-levande-landsbygd
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Utbetalning senast 31 mars.
-  id: amal-bidrag-for-byalag
-- namn: Allmänt verksamhetsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med frilufts- och rörelsefrämjande verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav:
-  - Uppfylla de allmänna bestämmelserna för föreningsbidrag
-  - Rörelse/friluftsliv ska vara det primära syftet och träffen ska vara organiserad
-  - Varje tillfälle ska omfatta minst en timme
-  - Föreningen ska hålla minst 10 träffar per kalenderår
-  - Verksamhetsberättelse för föregående år ska bifogas
-  - Bokslut över föregående år ska bifogas
-  - Revisionsberättelse ska bifogas
-  - Sammanställningslista över förda närvarokort ska bifogas
+  - Föreningen ska vara verksam inom kultur, uppfylla Åmåls generella kriterier och hålla en kvalitet och omfattning med relevans utanför kommungränsen
+  - Verksamheten ska vara utåtriktad och inkluderande samt präglas av barn- och ungdomsperspektiv, tillgänglighet, jämlikhet, mångfald och inkludering
+  - Föreningen ska arbeta för lokal och regional samverkan och även söka nationella eller internationella samarbeten
+  - Ansökan ska beskriva den planerade verksamhetsutvecklingen och beräkna kostnaderna för utvecklingsinsatsen
+  - Föreningen ska rapportera bidragets användning varje verksamhetsår och omedelbart meddela väsentliga förändringar
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-foreningar-som-bedriver-frilufts--och-rorelseframjande-verksamhet
-  belopp_status: okand
-  deadline_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Budgeterade medel för kulturstrategiska uppdrag fördelas efter utlysning; totalsumman publiceras inte
+  sen_ansokan: En årlig utlysning görs under januari–februari för påföljande år; exakt sista dag publiceras i utlysningen
+  kalla_url: https://amal.se/uppleva-och-gora/kultur/sok-stod-bidrag-eller-kulturpris/kulturstrategiskt-uppdrag
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Minst tio träffar per kalenderår.
-  id: amal-allmant-verksamhetsbidrag
-- namn: Särskilt verksamhetsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med kostnadskrävande frilufts- och rörelseverksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Uppdraget beviljas för tre år i taget.
+- id: amal-projektbidrag-for-en-levande-landsbygd
+  namn: Projektbidrag för en levande landsbygd
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar huvudsakligen verksamma utanför centralorten Åmål som genomför särskilda landsbygdsinsatser
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Uppfylla de allmänna bestämmelserna för föreningsbidrag
-  - Verksamhetsberättelse för föregående verksamhetsår ska bifogas
-  - Redovisning av antalet medlemmar ska bifogas
-  - Bokslut för föregående verksamhetsår ska bifogas
-  - Revisionsberättelse ska bifogas
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-foreningar-som-bedriver-frilufts--och-rorelseframjande-verksamhet
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Prövas av teknik- och fritidsnämnden.
-  id: amal-sarskilt-verksamhetsbidrag
-- namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som äger sin anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav:
-  - Uppfylla de allmänna bestämmelserna för föreningsbidrag
-  - Föreningen äger sin anläggning
-  - Ansökan ska innehålla syfte, målsättning, tidsplan och budget för projektet
-  belopp: Högst 40–50 procent av godkända kostnader, max 100 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-foreningar-som-bedriver-frilufts--och-rorelseframjande-verksamhet
+  - Föreningen ska huvudsakligen verka utanför centralorten och uppfylla Åmåls generella bidragskriterier
+  - Projektet ska vara en särskild insats som inte täcks av andra stöd och skapa trivsel, gemenskap, trygghet, fler besök eller ökad attraktivitet på landsbygden
+  - Ansökan ska beskriva projektet, dess varaktiga positiva påverkan, platsen och eventuell koppling till lokala traditioner, historia, hantverk eller levnadssätt
+  - Ansökan ska innehålla projektets samlade kostnader och det belopp som söks från kommunen
+  belopp: Högst 50 000 kr per projekt inom tilldelad budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar tas emot fortlöpande
+  kalla_url: &landsbygd https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-att-framja-en-levande-landsbygd
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Redovisning av utfört arbete senast 1 december.
-  id: amal-anlaggningsbidrag
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-bidrag-for-byalag
+  namn: Bidrag för byalag
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Stadgebundna byalag och motsvarande föreningar huvudsakligen verksamma utanför centralorten Åmål
+  deadlines: {typ: fasta, datum: [02-27]}
+  krav:
+  - Föreningen ska huvudsakligen verka utanför centralorten och uppfylla Åmåls generella bidragskriterier
+  - Sökanden ska vara ett stadgebundet byalag och endast ett byalag per definierad tätort kan få bidrag
+  - Föreningen ska lämna föregående års verksamhetsberättelse
+  - Ansökan ska innehålla en kort beskrivning av föreningens prioriteringar och verksamhetsplan för det kommande året
+  belopp: 8 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inkommen senast 27 februari för utbetalning senast 31 mars
+  kalla_url: *landsbygd
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: En mottagare kan utses i vardera Tösse/Tydje, Fengersfors/Fröskog, Ånimskog, Edsleskog, Västra Åmål och Mo/Berga.
+- id: amal-evenemangsbidrag-for-en-levande-landsbygd
+  namn: Evenemangsbidrag för en levande landsbygd
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar huvudsakligen verksamma utanför centralorten som planerar större publika landsbygdsevenemang
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska huvudsakligen verka utanför centralorten, uppfylla Åmåls generella kriterier och planera ett större publikt arrangemang
+  - Evenemanget ska ha lokal förankring och kunna locka deltagare utanför orten, marknadsföra landsbygden eller stärka hållbarheten
+  - Vid samarrangemang får endast en av de arrangerande föreningarna söka bidraget
+  - Ansökan ska redovisa evenemangets kostnader, sökt belopp, förväntat deltagarintresse och bidrag till landsbygdens attraktionskraft
+  belopp: Individuellt beslutat belopp inom tilldelad budget; föreningen anger sökt summa i ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar tas emot löpande; god framförhållning prioriteras och kommunen anger cirka sex veckors beslutstid
+  kalla_url: *landsbygd
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-underskottsbidrag-till-lokalhallande-forening
+  namn: Underskottsbidrag till lokalhållande förening
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: En lokalhållande förening per tätort utanför centralorten Åmål som driver en allmän samlingsplats
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Föreningen ska uppfylla Åmåls generella kriterier och driva en lokal i en av de angivna tätorterna utanför centralorten
+  - Lokalen ska stå till allmänhetens förfogande som samlingspunkt för lokala arrangemang, möten och annan samhällsstärkande samvaro
+  - Föreningen ska trots välskött ekonomi och andra bidrag redovisa underskott i lokalens löpande drift
+  - Ansökan ska redovisa medlems- och bokningsintäkter samt stödgrundande kostnader; renoveringar och större underhåll räknas inte
+  - Endast en lokalhållande förening per tätort kan få bidrag
+  belopp: Högst 50 000 kr per verksamhetsår; om underskottet överstiger 100 000 kr högst 50 procent av underskottet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas efter avslutat verksamhetsår och senast 30 april
+  kalla_url: *landsbygd
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Förskott kan lämnas med högst 75 procent av kommunens godkända budgeterade underskott mot årsredovisning och årsmötesbeslutad budget.
+- id: amal-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med folkbildningsverksamhet i Åmåls kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundet ska omfattas av förordningen om statsbidrag till folkbildningen och bedriva verksamhet i Åmål
+  - Förbundet ska redovisa studiecirklar, annan folkbildningsverksamhet och kulturarrangemang i kommunen
+  - Underlaget ska omfatta unika deltagare, studietimmar, deltagare med funktionsnedsättning och antal kulturarrangemang
+  - Verksamhetsplan, verksamhetsberättelse med ekonomisk berättelse och undertecknat kommunsammandrag ska lämnas enligt den rekommendation kommunen tillämpar
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens budgeterade studieförbundsanslag fördelas efter Västra Götalands Bildningsförbunds rekommendation utifrån folkbildningsverksamhet och kulturarrangemang; totalsumman publiceras inte
+  sen_ansokan: Kommunens aktuella sida publicerar ingen giltig sista ansökningsdag för 2026
+  kalla_url: https://amal.se/uppleva-och-gora/kultur/studieforbundens-bidragsgivning
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den länkade kommunbidragsrekommendationen avser 2024 och dess datumsatta rapportering används därför inte som aktuell deadline.
+- id: amal-allmant-verksamhetsbidrag
+  namn: Allmänt verksamhetsbidrag – frilufts- och rörelsefrämjande verksamhet
+  status: aktiv
+  kategori: [idrott, funktionsratt, pensionar, ovrig]
+  foreningstyp: &rorelse [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar vars primära syfte är organiserad rörelse- eller friluftsverksamhet
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska uppfylla teknik- och fritidsnämndens allmänna bestämmelser och vara bidragsberättigad i Åmål
+  - Varje stödgrundande tillfälle ska vara organiserat, ha rörelse eller friluftsliv som primärt syfte och pågå minst 60 minuter
+  - Föreningen ska genomföra minst tio stödgrundande träffar per kalenderår; deltagare med funktionsnedsättning räknas oavsett ålder
+  - Ansökan ska innehålla verksamhetsberättelse, bokslut, revisionsberättelse och sammanställning av närvarokorten
+  - Föreningsuppgifterna och aktivitetsstatistiken ska kontrolleras och registreras i Interbook Go eller lämnas på kommunens blankett
+  belopp: Grundbidrag per deltagare och per ledare vid varje aktivitet; ytterligare ledarstöd för extra ledare, men årets kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars varje år
+  kalla_url: &rorelsesida https://amal.se/uppleva-och-gora/foreningsliv/bidrag-for-amals-foreningar/bidrag-for-foreningar-som-bedriver-frilufts--och-rorelseframjande-verksamhet
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: En ledare över 65 år får även räknas som aktiv deltagare.
+- id: amal-sarskilt-verksamhetsbidrag
+  namn: Särskilt verksamhetsbidrag – frilufts- och rörelsefrämjande verksamhet
+  status: aktiv
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: *rorelse
+  malgrupp: Rörelse- och friluftsföreningar med stora kostnader för att upprätthålla en god och säker verksamhet
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska uppfylla teknik- och fritidsnämndens allmänna bestämmelser
+  - Verksamheten ska ha stora kostnader och bidraget ska hjälpa föreningen att upprätthålla god och säker standard
+  - Ansökan ska kort beskriva årets verksamhet, ange sökt belopp och motivera beloppet
+  - Föregående verksamhetsårs verksamhetsberättelse, medlemsredovisning, bokslut och revisionsberättelse ska bifogas
+  - Teknik- och fritidsnämnden bedömer verksamhetens aktivitet, deltagarantal och bidrag till jämställdhet
+  belopp: Individuellt prövat belopp; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars varje år
+  kalla_url: *rorelsesida
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: amal-anlaggningsbidrag
+  namn: Anläggningsbidrag – frilufts- och rörelsefrämjande föreningar
+  status: aktiv
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: *rorelse
+  malgrupp: Bidragsberättigade föreningar som äger en anläggning och investerar i eller återinvesterar i den
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska uppfylla teknik- och fritidsnämndens allmänna bestämmelser och äga anläggningen
+  - Projektet ska avse aktivitetsytor, tillgänglighet, förlängd nyttjandeperiod, ny- eller tillbyggnad eller annan investering i den föreningsägda anläggningen
+  - Verksamhetskostnader är inte stödgrundande och föreningen ska ha minst elva stödgrundande sammankomster per år
+  - Ansökan ska lämnas före projektet och innehålla syfte, mål, tidsplan och budget
+  - Verifikationer för utfört arbete ska lämnas senast 1 december samma år
+  belopp: Högst 40 procent av godkända kostnader vid 11–50 sammankomster och 50 procent vid minst 51 sammankomster; maximalt 100 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars; utfört arbete redovisas senast 1 december
+  kalla_url: *rorelsesida
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: amal-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Åmåls e-tjänster
+- id: amal-generella-kriterier
+  vad: Lokal, demokratisk och bidragsberättigad förening
+  beskrivning: Föreningen ska vara icke vinstdrivande, ha säte och verksamhet i Åmål, minst tio aktiva betalande kommunmedlemmar, stadgar, vald styrelse och revisor, organisationsnummer och eget föreningskonto samt följa kommunens demokrati- och likabehandlingsvillkor.
+  system: Åmåls e-tjänster eller Interbook Go enligt stödform
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen anger ingen generell tid för godkännandet.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.amal.se/uppleva-och-gora/foreningsliv/
-  giltighet_status: okand
+  kalla_url: *kommunnorm
+  giltighet_status: ingen_regel
+- id: amal-barn-och-ungdomsskydd
+  vad: Barnkonvention, drogfrihet och registerkontroll
+  beskrivning: Föreningar med barn- och ungdomsverksamhet ska följa barnkonventionen, bedriva riktade aktiviteter i en alkohol- och drogfri miljö och begära belastningsregisterutdrag för ledare och andra vuxna med återkommande barnkontakt.
+  system: Föreningens egen dokumentation
+  ledtid: null
+  ledtid_text: Ska vara uppfyllt när föreningen söker ekonomiskt stöd.
+  giltighet: Gäller när föreningen söker stöd och under barn- och ungdomsverksamheten.
+  ordning: 2
+  kalla_url: *kommunnorm
+  giltighet_status: kontrollast
+- id: amal-ansokan-och-redovisning
+  vad: Fullständig ansökan och redovisning
+  beskrivning: Ansökan ska lämnas via anvisad e-tjänst eller blankett, kompletteras inom kommunens tidsfrist och innehålla stödformens handlingar; beviljade medel och verksamheten ska redovisas och kommunen får granska ekonomi och genomförande.
+  system: Åmåls e-tjänster, Dalslands e-tjänster eller Interbook Go
+  ledtid: null
+  ledtid_text: Före respektive stöds sista dag eller enligt dess relativa ansökningstid.
+  giltighet: Gäller den aktuella ansökan och dess uppföljning.
+  ordning: 3
+  kalla_url: *kommunnorm
+  giltighet_status: kontrollast
 kommunsiffra: null
