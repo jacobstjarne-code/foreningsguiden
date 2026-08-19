@@ -2,17 +2,25 @@ kommun: Valdemarsvik
 kommun_slug: valdemarsvik
 lan: Östergötlands län
 befolkning: 7547
-forvaltning: Kommunstyrelsen
+forvaltning: Kommunstyrelsen samt näringsliv och landsbygdsutveckling
 ansokningssystem:
-  namn: Digitalt föreningssystem
-  url: https://www.valdemarsvik.se/kommun/kultur-fritid/foreningsbidrag/
-kalla_url: https://www.valdemarsvik.se/kommun/kultur-fritid/foreningsbidrag/
-verifierad: '2026-07-31'
+  namn: Mina sidor och kommunens blanketter
+  url: https://minasidor.valdemarsvik.se/
+kalla_url: &meny https://www.valdemarsvik.se/kommun/kultur-fritid/foreningsbidrag/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: valdemarsvik-grundstod
   namn: Grundstöd
+  status: aktiv
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Bidragsberättigade ideella föreningar
   deadlines:
     typ: fasta
@@ -21,19 +29,27 @@ bidrag:
   krav:
   - Minst tio betalande medlemmar
   - Föreningen ska ha varit verksam minst sex månader
+  - Föreningen ska vara ideell och demokratiskt uppbyggd, ha en årsmötesvald styrelse, fastställda stadgar och organisationsnummer hos Skatteverket
+  - Föreningen ska ha sitt säte och kontinuerligt bedriva merparten av sin verksamhet i Valdemarsviks kommun samt vara registrerad och årligen uppdaterad i kommunens digitala föreningssystem
   belopp: 500 kronor per förening plus 25 kronor per stödberättigad medlem, minst 750 och högst 5 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+  belopp_avser: per_forening
+  kommunens_pott: 9 procent av kommunens totala budgetanslag för föreningsstöd
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Den tillfälliga förlängningen 2026 publicerades på https://www.valdemarsvik.se/blog/reviderade-riktlinjer-foreningsstod/.
 - id: valdemarsvik-aktivitetsstod
   namn: Lokalt aktivitetsstöd
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  - funktionsratt
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med gruppverksamhet för barn och unga 4–25 år
   deadlines:
     typ: fasta
@@ -54,17 +70,24 @@ bidrag:
   - Bidrag utgår inte till aktivitet som anordnas av riksorganisation, distriktsorganisation eller lokalt samarbetsorgan
   - Underlag för närvaro ska registreras vid varje gruppaktivitet och sparas i minst tre år
   belopp: 20 kronor per sammankomst och 2 kronor per deltagare, högst 80 kronor per sammankomst
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+  belopp_avser: per_forening
+  kommunens_pott: 10 procent av kommunens totala budgetanslag, fördelat med 5 procent per redovisningsperiod
+  sen_ansokan: Höstens aktiviteter redovisas senast 25 februari och vårens senast 25 augusti; hösten 2025 hade övergångsdatumet 28 februari 2026
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: valdemarsvik-driftstod
   namn: Driftstöd
+  status: aktiv
   kategori:
+  - idrott
+  - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som äger eller disponerar anläggning
   deadlines:
     typ: fasta
@@ -86,17 +109,24 @@ bidrag:
     av isbana 3 000 kr, Padelbana (max 2 planer per förening) 2 000 kr, Ridanläggning 15 000 kr, Ridanläggning endast utomhus
     4 000 kr, Samlingslokaler (ansökningar över 10 000 kr beslutas av kommunstyrelsen), Skidbacke 17 000 kr, Skjutbana 4 000
     kr, Tennisbana 4 000 kr'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+  belopp_avser: per_forening
+  kommunens_pott: 40 procent av kommunens totala budgetanslag, varav 100 000 kronor till samlingslokaler
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Samlingslokalsansökningar över 10 000 kronor beslutas av kommunstyrelsen.
 - id: valdemarsvik-investeringsstod
   namn: Investerings- och upprustningsstöd
+  status: aktiv
   kategori:
+  - idrott
+  - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med egen eller långsiktigt arrenderad anläggning
   deadlines:
     typ: fasta
@@ -114,17 +144,24 @@ bidrag:
     eller inte tilldelats bidrag för ett investeringsprojekt under de senaste åren
   - Kvitton och fakturor för genomförd investering ska vara inlämnade inom ett år från besked om stöd
   belopp: Max 50 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+  belopp_avser: per_forening
+  kommunens_pott: 10 procent av kommunens totala budgetanslag för föreningsstöd
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Vid budgetbrist prioriteras barn- och ungdomsverksamhet samt föreningar som inte nyligen sökt eller beviljats investeringsstöd.
 - id: valdemarsvik-lokalstod
   namn: Lokalstöd
+  status: aktiv
   kategori:
+  - idrott
+  - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med egna eller hyrda lokaler
   deadlines:
     typ: fasta
@@ -137,18 +174,25 @@ bidrag:
   - Föreningar kan inte ansöka om stödet för lokaler som hyrs subventionerat av kommunen
   - 'Lokalkostnaderna ska styrkas: vid hyrd lokal genom intyg av hyresvärd, vid egen lokal av föreningens ordförande'
   belopp: 50 procent av kostnaderna, max 5 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+  belopp_avser: per_forening
+  kommunens_pott: 4 procent av kommunens totala budgetanslag för föreningsstöd
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Barn- och ungdomsföreningar prioriteras om ansökningarna överstiger budgeten.
 - id: valdemarsvik-evenemangsstod
   namn: Evenemangsstöd
+  status: aktiv
   kategori:
+  - idrott
   - kultur
-  malgrupp: Föreningar och intressegrupper som arrangerar evenemang
+  - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som arrangerar publika evenemang
   deadlines:
     typ: fasta
     datum:
@@ -158,41 +202,49 @@ bidrag:
   - Evenemanget ska ha lokal anknytning och vara av allmänintresse för kommuninvånarna eller bedömas ha en positiv påverkan
     på turism- och besöksnäringen i kommunen
   - Ansökan ska innehålla en redogörelse för evenemangets program och tidsperiod samt en finansieringsplan
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
-  belopp_status: ingen_regel
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: null
-- id: valdemarsvik-ungdomspotten-”snabbslanten”
-  namn: Ungdomspotten ”snabbslanten”
-  kategori:
-  - ovrig
-  malgrupp: Ungdomar 13–25 år som genomför projekt
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Kan inte sökas av förening, endast av enskilda eller grupper av enskilda personer
-  - Personer kan söka stödet från och med det år de fyller 13 till och med det år de fyller 25
-  - Arrangera en publik aktivitet (inte enbart för en begränsad grupp, t.ex. medlemmar) i Valdemarsviks kommun
-  - Projektet ska vara alkohol-, narkotika-, dopnings- och tobaksfritt
-  - Ansökan ska innehålla en kort beskrivning av den planerade aktiviteten inklusive tidpunkt, ungefärlig varaktighet och
-    en ungefärlig kostnadsberäkning
-  belopp: Maximalt 5 000 kronor per projekt
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
+  - Kommunens stöd ska framgå i marknadsföringen genom aktuell kommunlogotyp
+  belopp: Föreningen anger sökt belopp och nivån beslutas individuellt av kommunstyrelsen eller tjänsteperson på delegation
+  belopp_avser: per_forening
+  kommunens_pott: 10 procent av kommunens totala budgetanslag för föreningsstöd
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Den beslutade evenemangsstödsraden är begränsad till ideella föreningar; privat sponsring ligger utanför riktlinjen.
+- id: valdemarsvik-bygdepeng
+  namn: Kommunal-regional bygdepeng
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Föreningar som formellt företräder en lokal utvecklingsgrupp på landsbygden eller i en ort med färre än 1 000 invånare
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Ansökan måste formellt lämnas av en förening, exempelvis byalag, intresse-, hembygds-, socken- eller samhällsförening, som företräder utvecklingsgruppen och samtliga berörda lokala aktörer.
+  - Utvecklingsarbetet ska omfatta alla boende i området och gruppen ska bjuda in boende och föreningar att gemensamt besluta hur pengen används.
+  - Endast en utvecklingsgrupp i varje geografiskt område kan få bygdepeng; området ska ligga på landsbygden eller vara en ort med färre än 1 000 invånare.
+  - Pengarna får användas för omkostnader i lokalt utvecklingsarbete, exempelvis mötesplats, lokal, material, resa eller föreläsare, men inte löner.
+  - Gruppen ska vara kontaktlänk till kommunen och lämna slutredovisning av användning och effekter senast 31 oktober.
+  - Tidigare bygdepeng ska vara förbrukad eller intecknad för ett specifikt ändamål innan en ny ansökan lämnas.
+  belopp: 6 000 kronor per bygdepeng, varav Region Östergötland bidrar med 4 000 kronor och kommunen med minst 2 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas i början av året; kommunen publicerar ingen exakt sista ansökningsdag, medan slutredovisningen ska lämnas senast 31 oktober
+  kalla_url: https://www.valdemarsvik.se/naringsliv/utveckling/landsbygdsutveckling/bygdepeng/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Sidan beskriver utvecklingsgruppen brett, men den aktuella officiella ansökningsblanketten kräver att en förening är formell sökande.
 - id: valdemarsvik-kulturforeningsstod
   namn: Kulturföreningsstöd
+  status: aktiv
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Föreningar med kulturverksamhet i kommunen
   deadlines:
     typ: fasta
@@ -204,50 +256,73 @@ bidrag:
   - Föreningen ska leva upp till de generella villkoren för föreningsstöd
   - Ansökan ska åtföljas av verksamhetsberättelse för kommande år samt årsberättelse för föregående års verksamhet, inklusive
     resultat- och balansräkning, vinst- och förlusträkning samt revisionsberättelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
-  belopp_status: ingen_regel
+  - Kommunens stöd ska framgå i marknadsföringen genom aktuell kommunlogotyp
+  belopp: Individuellt verksamhetsstöd beräknat utifrån kulturverksamhetens innehåll och omfattning
+  belopp_avser: per_forening
+  kommunens_pott: 12 procent av kommunens totala budgetanslag för föreningsstöd
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-- id: valdemarsvik-stod-till-studieforbund-och-barnrattsorganisationer
-  namn: Stöd till studieförbund och barnrättsorganisationer
-  kategori:
-  - ovrig
-  malgrupp: Studieförbund och barnrättsorganisationer
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
+  senast_verifierad: '2026-08-19'
+  anteckning: Om ansökningarna överstiger ramen fördelas stödet efter behovsbedömning av de kulturella insatserna.
+- id: valdemarsvik-studieforbund
+  namn: Verksamhetsstöd till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund med verksamhet i Valdemarsviks kommun
+  deadlines: {typ: fasta, datum: [02-25]}
   krav:
-  - Studieförbundet ska bedriva verksamhet i Valdemarsviks kommun
-  - Studieförbundet ska vara demokratiskt uppbyggt och styras av stadgar samt av årsmötet utsedd styrelse, samt vara öppet
-    för alla och verka i enlighet med RF 1 kap. 2 §
-  - Barnrättsorganisationen ska bedriva verksamhet riktad mot barn och ungdomar i Valdemarsviks kommun
-  - Studieförbund ska via Bildningsförbundet Östergötland årligen redovisa verksamheten samt studietimmar enligt fördelningsmodellen,
-    och inkomma med verksamhetsberättelse, verksamhetsplan, uppgifter om styrelsens sammansättning samt revisionsberättelse
-  - Barnrättsorganisationer ska tillsammans med ansökan lämna in verksamhetsberättelse, verksamhetsplan, budget, stadgar samt
-    revisionsberättelse
+  - Studieförbundet ska bedriva verksamhet i Valdemarsviks kommun.
+  - Studieförbundet ska vara demokratiskt uppbyggt, styras av stadgar och en årsmötesvald styrelse, vara öppet för alla och följa RF 1 kap. 2 §.
+  - Verksamheten och studietimmarna ska redovisas årligen via Bildningsförbundet Östergötland enligt fördelningsmodellen.
+  - Verksamhetsberättelse, verksamhetsplan, uppgifter om styrelsens sammansättning och revisionsberättelse ska lämnas.
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.valdemarsvik.se/wp-content/uploads/2023/02/riktlinjer-foreningsstod-klk-2025-79-c2a7-5.pdf
-  belopp_status: ingen_regel
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag till studieförbund fördelas enligt särskild fördelningsmodell och avtal; totalsumman publiceras inte
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Studieförbundens redovisning lämnas samlat av Bildningsförbundet Östergötland och beslut samt utbetalning sker senast första veckan i september.
+- id: valdemarsvik-barnrattsorganisationer
+  namn: Verksamhetsstöd till barnrättsorganisationer
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: [social, ungdom, annat]
+  malgrupp: Barnrättsorganisationer med verksamhet för barn och unga i Valdemarsviks kommun
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Sökanden ska vara en barnrättsorganisation.
+  - Organisationen ska bedriva verksamhet riktad till barn och ungdomar i Valdemarsviks kommun.
+  - Ansökan ska innehålla verksamhetsberättelse, verksamhetsplan, budget, stadgar och revisionsberättelse.
+  - Ansökan ska lämnas via kommunens tjänst för stöd till barnrättsorganisationer.
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 2 procent av kommunens totala budgetanslag för föreningsstöd
+  sen_ansokan: Ordinarie sista dag är 25 februari; för ansökningsomgången 2026 förlängde kommunen tillfälligt tiden till 25 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: För stödet gäller inte riktlinjens generella föreningsbestämmelser; de särskilda villkoren ovan gäller.
 forutsattningar:
-- id: valdemarsvik-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Digitalt föreningssystem
+- id: valdemarsvik-registrering-och-arsuppdatering
+  vad: Bidragsberättigande, registrering och årlig uppdatering
+  beskrivning: Föreningen ska vara ideell och demokratisk med årsmötesvald styrelse och stadgar, ha organisationsnummer, ha varit verksam minst sex månader, ha säte och huvuddelen av verksamheten i kommunen samt normalt minst tio betalande medlemmar med minst 50 kronor i medlemsavgift. Föreningen ska registreras och godkännas i kommunens digitala föreningssystem och där årligen uppdatera och godkänna föreningsuppgifter, signerat årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning, signerad revisionsberättelse, verksamhetsplan, budget och stadgar.
+  system: Mina sidor
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna och handlingarna ska uppdateras och godkännas varje år; kommunen publicerar inget gemensamt fast datum
+  giltighet: Registreringen och fullständiga föreningshandlingar ska hållas aktuella genom årlig uppdatering i det digitala föreningssystemet
   ordning: 1
-  kalla_url: https://www.valdemarsvik.se/kommun/kultur-fritid/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
