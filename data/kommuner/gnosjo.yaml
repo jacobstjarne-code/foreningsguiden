@@ -2,153 +2,325 @@ kommun: Gnosjö
 kommun_slug: gnosjo
 lan: Jönköpings län
 befolkning: 9000
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Teknik- och fritidsförvaltningen samt Kultur- och utbildningsförvaltningen
 ansokningssystem:
-  namn: Actor Smartbook e-tjänst
+  namn: Actor Smartbook och kommunens webbformulär
   url: https://gnosjo.actorsmartbook.se
-kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-for-foreningar
-verifierad: 2026-07-26
+kalla_url: &huvud https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &regler https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/regler-for-foreningsbidrag
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: gnosjo-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Alla registrerade föreningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar som behöver ekonomisk grundtrygghet
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
+    datum: ['03-31']
   krav:
-  - Registrerad förening
-  - Minst 10 aktivitetstillfällen för ungdomar 7-25 år under föregående kalenderår samt ansökt om lokalt aktivitetsstöd, för
-    förhöjt bidrag (3000 kr)
-  - Bifoga senaste verksamhetsberättelse och ekonomisk berättelse med tillhörande revisionsberättelse
-  - Bifoga antidrogpolicy
-  belopp: 1500 kr, eller 3000 kr om min 10 möten för ungdomar 7-25 år
-  sen_ansokan: Ej möjlig efter 31 mars
+  - Föreningen ska vara ansluten till en riksorganisation, verksam i Gnosjö kommun och ha minst tio avgiftsbetalande medlemmar i ett upprättat medlemsregister
+  - Föreningen ska följa kommunens demokrati-, barnrätts-, jämlikhets- och jämställdhetsvillkor samt aktivt motverka våld, rasism, diskriminering, kränkningar och kriminalitet
+  - Senaste årsmötesprotokoll ska visa att kommunens gemensamma värdegrund har behandlats
+  - Ansökan ska innehålla senaste verksamhetsberättelse, ekonomiska berättelse, revisionsberättelse och antidrogpolicy
+  - För dubbelt grundbidrag ska föreningen föregående kalenderår ha redovisat minst tio aktivitetstillfällen för ungdomar 7–25 år och sökt kommunalt lokalt aktivitetsstöd för dessa
+  belopp: 1 500 kr per förening; 3 000 kr om villkoren för dubbelt grundbidrag är uppfyllda
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 januari–31 mars; en sen ansökan kan avslås helt eller delvis
   kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/grundbidrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: gnosjo-aktivitetsbidrag
-  namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för barn och ungdom 7-25 år
+  namn: Lokalt aktivitetsstöd, LOK
+  status: aktiv
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Barn- och ungdomsföreningar samt funktionsrättsföreningar med ledarledda aktiviteter
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
-    - 02-25
+    datum: ['02-25', '08-25']
   krav:
-  - Aktivitet med minst 3 och max 30 deltagare (utöver ledare) i åldern 3-25 år
-  - Ansvarig ledare får inte vara under 13 år
-  - Föreningen ska praktisera Riksidrottsförbundets rutin för kontroll av registerutdrag för ledare, med dokumentation som
-    kan visas för Fritidsenheten
-  belopp: Max 50 kr per godkänd sammankomst (lokalt aktivitetsstöd, LOK)
-  sen_ansokan: Ej möjlig efter deadline
+  - Aktiviteten ska omfatta minst tre och högst 30 deltagare utöver ledaren i åldern 3–25 år
+  - Ansvarig ledare ska vara minst 13 år
+  - Föreningen ska följa Riksidrottsförbundets rutin för kontroll av registerutdrag för ledare i barn- och ungdomsverksamhet och kunna visa kommunens fritidsenhet att kontrollen är utförd
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor och använda stödet för den målgrupp som stödet har beviljats för
+  - En RF-ansluten förening som har sökt statligt lokalt aktivitetsstöd behöver inte lämna en separat kommunal ansökan eftersom kommunen hämtar redovisningen från RF
+  belopp: Högst 50 kr per godkänd sammankomst; den faktiska nivån bestäms av avsatt totalbelopp och antal redovisade aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Höstterminen söks 1 januari–25 februari och vårterminen 1 juli–25 augusti; en sen ansökan kan avslås helt eller delvis
   kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/lokalt-aktivitetsstod-lok
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: gnosjo-startbidrag
-  namn: Startbidrag/Etableringsstöd
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Nya föreningar eller nya verksamheter
+  namn: Startbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Nybildade föreningar samt intresse- och ungdomsgrupper som ännu inte är bidragsberättigade
   deadlines:
-    typ: fasta
-    datum:
-    - 03-31
+    typ: lopande
+    datum: []
   krav:
-  - Nystartad förening med minst tre medlemmar
-  - Förening eller intresse-/ungdomsgrupp som ännu inte uppfyller kraven för att vara bidragsberättigad
-  - Upprättad verksamhetsplan där det framgår att minst fem aktiviteter kommer att genomföras
-  - Bifoga årsmötesprotokoll, föreningens stadgar och registreringsbevis
-  belopp: 3000 kr (engångsbidrag till nybildad förening)
-  sen_ansokan: Ej möjlig efter 31 mars
+  - Den nya föreningen eller gruppen ska bestå av minst tre personer
+  - En verksamhetsplan ska visa att minst fem aktiviteter kommer att genomföras under året
+  - En nybildad förening ska bifoga årsmötesprotokoll, stadgar och registreringsbevis
+  - Ansökningsblankett beställs från kommunens fritidskontor och ska ange att ansökan avser startbidrag
+  belopp: 3 000 kr till en nybildad förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under hela året
   kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/startbidrag
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Källans sida för startbidrag anger inget separat ansökningsdatum. Tidigare uppgift om deadline 31 mars/sen_ansokan
-    kvarstår overifierad mot denna sida.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
 - id: gnosjo-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar med egen/hyrd lokal
+  namn: Anläggningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar med föreningsägd eller externt förhyrd lokal eller anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
+    datum: ['03-31']
   krav:
-  - Föreningen ska vara godkänd som bidragsberättigad och erhålla grundbidrag från Gnosjö kommun
-  - Lokalen/anläggningen ska vara godkänd av fritidsförvaltningen som nödvändig för verksamheten
-  belopp: 'Schablonbelopp efter verksamhetsnivå: under 30 sammankomster 50%, 30-39 sammankomster 75%, över 40 sammankomster
-    100% av fastställt schablonbelopp (t.ex. gräsfotbollsplan 22 000 kr/år/plan, omklädningsrum med dusch 126 kr/år/kvm, samlingslokal
-    33 kr/år/kvm)'
-  sen_ansokan: Ej möjlig efter 31 mars
+  - Föreningen ska vara godkänd som bidragsberättigad och ha beviljats grundbidrag av Gnosjö kommun
+  - En förhyrd lokal ska vara nödvändig för verksamheten och förhyrningen ska vara godkänd av fritidsenheten
+  - Förhyrningsbidrag avser kallhyra, uppvärmning, el, vatten, renhållning och försäkring för en lokal som föreningen disponerar helt enligt egen planering
+  - Bidrag för en föreningsägd anläggning beräknas efter godkända lokala aktiviteter under föregående kalenderår; elljusspår undantas från aktivitetsbegränsningen
+  - Ansökan avser föregående kalenderår och ska följa kommunens allmänna föreningsvillkor
+  belopp: 'Förhyrd lokal: 80 % av godkända kostnader, högst 6 600 kr per förening och år. Föreningsägd anläggning: 50 % utan godkända aktiviteter, 75 % vid 30–39 aktiviteter och 100 % vid minst 40 aktiviteter av kommunens publicerade anläggningsschabloner'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 januari–31 mars och avser föregående kalenderår
   kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/anlaggningsbidrag
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Motsvaras numera av 'Anläggningsbidrag' på kommunens sajt (tidigare 'lokalbidrag'-sida gav 404). Ansökan avser
-    föregående kalenderårs verksamhet; sidan anger inget fast ansökningsdatum, så tidigare uppgift om deadline 31 mars kvarstår
-    overifierad.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Schablonerna omfattar bland annat fotbollsplaner, omklädnings- och klubbrum, samlingssalar, sommarhem, ridhus, skjutbana och tennishall; övriga anläggningar prövas individuellt
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: gnosjo-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för investeringar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som driver en fritidsanläggning som bedöms vara angelägen för kommunen
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
+    datum: ['01-31']
   krav:
-  - Investeringen ska uppgå till minst 5000 kr
-  - Investeringen ska avse ny-, till- eller ombyggnad av fritidsanläggning, eller inköp av större maskiner eller utrustning
-  - Bidrag beviljas inte till redan påbörjade arbeten eller gjorda inköp
-  - Föreningen ska i första hand söka externa bidrag; dessa räknas av från totalkostnaden före utbetalning av kommunalt bidrag
-  - Allmänna bidragsbestämmelser ska vara uppfyllda
-  belopp: null
-  sen_ansokan: Ej möjlig efter 31 mars
+  - Föreningen ska uppfylla kommunens allmänna bidragsbestämmelser och driva en fritidsanläggning som är angelägen för kommunen
+  - Investeringen ska uppgå till minst 5 000 kr och avse ny-, till- eller ombyggnad, större maskin eller utrustning för anläggningens drift, eller nyritning eller revidering av orienteringskarta
+  - Arbetet eller inköpet får inte vara påbörjat innan bidraget prövas
+  - Föreningen ska om möjligt söka externa bidrag; dessa räknas av från totalkostnaden före kommunal utbetalning
+  - Offert och betalningsunderlag ska bifogas; ideellt arbete värderas enligt kommunalarbetarnas GS-avtal grupp 1
+  - Ett outnyttjat bidrag kan senast 1 december begäras reserverat i högst ett år om investeringsobjektet kvarstår
+  belopp: Individuellt prövat investeringsbidrag; kommunen publicerar ingen generell bidragsandel eller maxnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den antagna regelns bidragstabell anger ansökningsperioden 1–31 januari
   kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/investeringsbidrag
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Sidan anger ingen exakt bidragsandel/procentsats för själva utbetalningen, endast minimigränsen för investeringen
-    (5000 kr) och att beviljat men ej nyttjat bidrag kan reserveras till 1 december. Beloppsregeln kvarstår därför okänd.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunens ansökningsöversikt anger 31 mars medan den antagna regelns bidragstabell anger 31 januari; regelns datum används
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: gnosjo-ledarutbildningsbidrag
+  namn: Bidrag för ledarutbildning
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som kompetensutvecklar sina ledare
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Kursen ska arrangeras av en riks-, distrikts- eller lokalorganisation; lokala kurser med annan utformning kan godkännas efter särskild prövning
+  - En endagskurs ska omfatta minst sex kurstimmar, en tvådagarskurs minst tio, en tredagarskurs minst 16 och en veckokurs minst 28 kurstimmar om 45 minuter
+  - Kursprogram, kursintyg och kvitto på betald kursavgift ska bifogas ansökan
+  - Stöd lämnas inte till en lokalt arrangerad kurs som får annat kommunalt bidrag, exempelvis en studiecirkel
+  - Bidragsgrundande kostnader är kursavgift, resa, kursmaterial och förlorad arbetsförtjänst
+  belopp: 75 % av kostnaderna, högst 300 kr per deltagare för en dag, 500 kr för två dagar, 700 kr för tre dagar och 2 500 kr för en vecka; högst 5 000 kr per år för en förening med en sektion och 7 000 kr för en förening med flera sektioner
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en månad efter avslutad utbildning
+  kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/bidrag-for-ledarutbildning
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: gnosjo-verksamhet-funktionsnedsattning
+  namn: Bidrag för verksamhet riktad till personer med funktionsnedsättning
+  status: aktiv
+  kategori: [social, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Lokala funktionsrättsföreningar och, efter särskild prövning, närliggande lokalavdelningar med verksamhet för Gnosjöbor
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Lokalavdelningen ska bedriva bidragsberättigad verksamhet i Gnosjö kommun
+  - Om lokalavdelning saknas i kommunen kan en avdelning i annan kommun prövas om verksamheten finns i Gnosjö eller angränsande kommuner och är tillgänglig för Gnosjöbor
+  - Lokalavdelningen ska normalt ha minst tio avgiftsbetalande medlemmar med funktionsnedsättning som var registrerade under föregående redovisningsår
+  - Familjemedlemmar och närstående får räknas om de har betalat medlemsavgift och uppfyller föreningens stadgar och årsmötesbeslut; avvikelser kräver särskild prövning
+  - Föreningen ska följa samma grundprinciper och allmänna föreningsvillkor som kommunens barn- och ungdomsföreningar
+  belopp: Individuellt fastställt efter antalet deltagare eller medlemmar från Gnosjö kommun som tar del av verksamheten; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för stödformen
+  kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/bidrag-for-verksamhet-riktad-till-personer-med-funktionsnedsattning
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
+- id: gnosjo-allmanna-utskottets-forfogande
+  namn: Bidrag till Allmänna utskottets förfogande
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar vars behov inte täcks av kommunens övriga bidragsformer
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en barn- och ungdomsförening, funktionsrättsförening eller övrig bidragsberättigad förening
+  - Stödet ska komplettera kommunens övriga föreningsbidrag och prövas individuellt av Allmänna utskottet
+  - Föreningen ska redovisa föreningsbidrag som den får från andra håll eftersom detta kan påverka beloppet
+  - Kommunens allmänna föreningsvillkor om demokrati, värdegrund, medlemsregister, lokal verksamhet och korrekt ansökan ska följas
+  belopp: Individuellt prövat engångsbelopp; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under hela året
+  kalla_url: *regler
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: gnosjo-nattvandring
+  namn: Ersättning för nattvandring
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som genomför planerad nattvandring i samverkan med kommunens fritidsledare
+  deadlines:
+    typ: fasta
+    datum: ['11-30']
+  krav:
+  - Sökanden ska vara en förening och följa kommunens allmänna föreningsvillkor
+  - Nattvandringen ska vara planerad tillsammans med kommunens fritidsledare
+  - Nattvandringen ska vara kommunicerad med fritidsledarna innan ersättning kan beviljas
+  - Ansökan ska lämnas under den publicerade perioden 1 april–30 november via kommunens föreningsportal
+  belopp: Ersättning för genomförd nattvandring; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 april–30 november
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: gnosjo-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med lokal verksamhet i Gnosjö vars riksorganisation får bidrag från Folkbildningsrådet
+  deadlines:
+    typ: fasta
+    datum: ['05-31']
+  krav:
+  - Studieförbundets riksorganisation ska få bidrag från Folkbildningsrådet och lokalavdelningen ska vara verksam i Gnosjö kommun
+  - Om avdelningen omfattar flera kommuner ska verksamhet och ekonomi för Gnosjö särredovisas tydligt
+  - Ansökan ska innehålla verksamhetsplan, ekonomisk redovisning, verksamhetsberättelse och verksamhetsstatistik för Gnosjö kommun
+  - Under 2026 ska underlag för verksamhetsåren 2023, 2024 och 2025 bifogas som pdf-filer via kommunens webbformulär
+  - Uppdragsutbildning är inte bidragsberättigad och en ofullständig eller sen ansökan behandlas inte
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunfullmäktiges årliga studieförbundsanslag fördelas efter kultur- och utbildningsutskottets prövning; totalsumman publiceras inte
+  sen_ansokan: Ansökan för 2026 ska lämnas senast 31 maj; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: https://www.gnosjo.se/uppleva-och-gora/kultur/bidrag-till-studieforbund
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
 forutsattningar:
-- id: gnosjo-ansok
-  vad: Ansökan via Actor Smartbook e-tjänst
-  beskrivning: Föreningsbidrag söks digitalt via Actor Smartbook-portalen.
-  system: Actor Smartbook
+- id: gnosjo-bidragsberattigad-forening
+  vad: Godkänd och registrerad förening
+  beskrivning: Föreningen ska vara ansluten till en riksorganisation, verksam i Gnosjö kommun, synas i kommunens föreningsregister och själv hålla registeruppgifterna korrekta. Den ska ha minst tio avgiftsbetalande medlemmar i ett medlemsregister.
+  system: Actor Smartbook och kommunens föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen giltighetstid eller fast förnyelsefrist för föreningens registrering eller bidragsgodkännande
   giltighet: null
   ordning: 1
-  kalla_url: https://gnosjo.actorsmartbook.se
-  giltighet_status: okand
-- id: gnosjo-kontakt
-  vad: Kontakt Fritidskontoret
-  beskrivning: 'För frågor: Fritidskontoret, 335 80 Gnosjö, 0370-33 10 00, kommun@gnosjo.se'
-  system: Fritidskontoret
+  kalla_url: *regler
+  giltighet_status: ingen_regel
+- id: gnosjo-vardegrund-arsmote
+  vad: Demokrati och gemensam värdegrund
+  beskrivning: Föreningen ska vara demokratiskt uppbyggd, ha stadgar och medlemsinflytande, följa barnkonventionen samt arbeta för jämlikhet och jämställdhet och mot våld, rasism, diskriminering, kränkningar och kriminalitet. Senaste årsmötesprotokoll ska visa att värdegrunden har behandlats.
+  system: Föreningens årsmöte
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Protokollet från det senaste årsmötet bifogas vid ansökan; kommunen anger ingen separat gemensam årsfrist
   giltighet: null
   ordning: 2
-  kalla_url: https://www.gnosjo.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod-for-foreningar
-  giltighet_status: okand
+  kalla_url: *regler
+  giltighet_status: ingen_regel
+- id: gnosjo-ansokan
+  vad: Komplett ansökan och föreningskonto
+  beskrivning: Ansökan ska lämnas digitalt med korrekta uppgifter och handlingar inom stödformens frist. Utbetalning görs endast till huvudföreningens bank- eller postgiro och kommunala skulder regleras före utbetalning.
+  system: Actor Smartbook
+  ledtid: null
+  ledtid_text: Varje stödform har sin egen ansökningsperiod; en sen ansökan kan avslås helt eller delvis
+  giltighet: null
+  ordning: 3
+  kalla_url: *regler
+  giltighet_status: ingen_regel
