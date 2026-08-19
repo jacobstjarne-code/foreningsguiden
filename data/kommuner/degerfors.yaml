@@ -4,176 +4,236 @@ lan: Örebro län
 befolkning: 9221
 forvaltning: Kultur- och utbildningsförvaltningen
 ansokningssystem:
-  namn: E-tjänstportal
-  url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
-kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
-verifierad: 2026-07-26
+  namn: Degerfors kommuns e-tjänster och Interbook Go
+  url: https://etjanster.degerfors.se/
+kalla_url: &huvud https://degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: degerfors-verksamhetsbidrag
   namn: Årligt verksamhetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
-  malgrupp: Etablerade föreningar för årlig verksamhet
+  - social
+  - ovrig
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar med planerad verksamhet under kalenderåret
   deadlines:
     typ: fasta
     datum:
     - 04-15
   krav:
-  - Föreningen måste ha mottagit startbidrag två gånger innan årligt stöd kan erhållas
-  - Verksamheten ska bedras i Degerfors kommun
-  - Ansökan med bilagor måste lämnas in senast 15 april
-  - Föreningen ska ha godkända stadgar
-  - Föreningen ska bedriva verksamhet fri från alkohol, narkotika, dopning och tobak, på demokratiska grunder
-  - Föreningen ska ha registrerat organisationsnummer hos Skatteverket och vara registrerad i kommunens föreningsregister
-  - Föreningen får inte ha skuld till kommunen vid ansökningstillfället
+  - Föreningen ska ha godkända stadgar, registrerat organisationsnummer, vara registrerad i kommunens föreningsregister och inte ha en oreglerad skuld till kommunen
+  - Verksamheten ska bygga på demokratiska grunder, vara öppen för alla som följer stadgarna och bedrivas fri från alkohol, narkotika, dopning och tobak
+  - Verksamheten och merparten av medlemmarna ska finnas i Degerfors kommun; undantag kan göras för verksamhet som bedrivs tillsammans med andra kommuner
+  - Föreningen ska tillhöra en publicerad stödberättigad grupp, exempelvis barn- och ungdomsförening, kultur- eller hembygdsförening, social eller etnisk förening, studieförbund eller uppdragsförening
+  - Barn- och ungdomsförening ska ha minst 10 regelbundet deltagande medlemmar 6–25 år och kunna visa belastningsregisterutdrag för samtliga barn- och ungdomsledare på kommunens begäran
+  - Föreningen ska ha beviljats startbidrag i två omgångar innan årligt verksamhetsbidrag kan erhållas
   - Ansökan ska innehålla verksamhetsplan och budget, verksamhetsberättelse, ekonomisk berättelse och revisionsberättelse
     från senaste årsmötet, komplett ifylld och undertecknad av ordförande och kassör
-  belopp: null
-  sen_ansokan: Ej möjlig efter 15 april
-  kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
+  belopp: Individuellt kontantbidrag som bedöms utifrån verksamhetens omfattning, ekonomiska ställning, verksamhetsplan, budget och övrigt offentligt stöd; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ofullständig eller senare inkommen ansökan behandlas inte för innevarande kalenderår
+  kalla_url: &norm https://degerfors.se/download/18.594fd2b416073aa95fe7cf/1516349433611/Riktlinje%20f%C3%B6reningsst%C3%B6d%20i%20Degerfors%20kommun.pdf
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Ansökningsperiod: 15 mars – 15 april. Verifierat mot kommunens riktlinje för föreningsstöd (KF § 41/2017-06-19,
-    dnr KS 262-2016): bidraget baseras på individuell helhetsbedömning (verksamhetens omfattning, ekonomi, plan och budget)
-    — ingen fast beloppsregel finns.'
+  senast_verifierad: '2026-08-19'
+  anteckning: Verksamhetsbidraget ska ge föreningen grundtrygghet under verksamhetsåret.
 - id: degerfors-startbidrag
   namn: Startbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
-  malgrupp: Nya eller växande föreningar
+  - social
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Nya föreningar under de två första bidragsomgångarna
   deadlines:
     typ: fasta
     datum:
     - 04-15
   krav:
-  - Föreningen måste vara etablerande eller växa
-  - Maximalt två gånger innan övergång till årligt bidrag
-  - Ansökan via e-tjänst mellan 15 mars och 15 april
-  - Föreningen ska ha godkända stadgar, registrerat organisationsnummer hos Skatteverket och vara registrerad i kommunens
-    föreningsregister
-  - Föreningen ska bedriva verksamhet fri från alkohol, narkotika, dopning och tobak, på demokratiska grunder
-  - Föreningen får inte ha skuld till kommunen vid ansökningstillfället
-  - Ansökan ska innehålla verksamhetsplan och budget samt övriga begärda handlingar från senaste årsmötet, komplett ifylld
-    och undertecknad av ordförande och kassör
-  belopp: null
-  sen_ansokan: Ej möjlig efter 15 april
-  kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
+  - Föreningen ska vara ny och uppfylla kommunens allmänna villkor om stadgar, organisationsnummer, föreningsregister, lokal anknytning, demokrati, öppenhet och drogfri verksamhet
+  - Barn- och ungdomsförening ska ha minst 10 regelbundet deltagande medlemmar 6–25 år och kunna visa belastningsregisterutdrag för ledarna på kommunens begäran
+  - Startbidrag ska beviljas i två omgångar innan föreningen kan övergå till årligt verksamhetsbidrag
+  - Ansökan ska innehålla verksamhetsplan och budget samt de verksamhets-, ekonomi- och revisionshandlingar som finns tillgängliga för föreningen
+  - Ansökan ska vara komplett och undertecknad av ordförande och kassör senast den 15 april
+  belopp: Individuellt bedömt startbidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ofullständig eller senare inkommen ansökan behandlas inte för innevarande kalenderår
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Steg mot årligt verksamhetsbidrag. Verifierat mot kommunens riktlinje för föreningsstöd (KF § 41/2017-06-19,
-    dnr KS 262-2016): bidraget baseras på individuell helhetsbedömning — ingen fast beloppsregel finns.'
+  senast_verifierad: '2026-08-19'
+  anteckning: Startbidraget utgör de två första bidragsomgångarna före årligt verksamhetsbidrag.
 - id: degerfors-specialbidrag
   namn: Specialbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
-  malgrupp: Föreningar för särskilda projekt och arrangemang
+  - social
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade eller nystartade föreningar med ett särskilt arrangemang, projekt eller aktivitet
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Projekt eller arrangemang med specifik syftesbeskrivning
-  - Ansökan via e-tjänstportal löpande
-  - Föreningen ska uppfylla kommunens allmänna grundvillkor för bidragsberättigande (godkända stadgar, registrerat organisationsnummer,
-    registrering i föreningsregistret, ingen skuld till kommunen, drogfri och demokratisk verksamhet)
-  - Bidraget kan även beviljas till en nystartad förening
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
+  - Ansökan ska avse ett specificerat arrangemang, projekt eller en aktivitet
+  - Sökanden ska vara en bidragsberättigad förening eller en nystartad förening
+  - Föreningen ska uppfylla kommunens allmänna villkor om stadgar, organisationsnummer, föreningsregister, lokal anknytning, demokrati, öppenhet och drogfri verksamhet
+  - Ansökan ska beskriva ändamålet och lämnas genom kommunens särskilda e-tjänst
+  belopp: Individuellt bedömt särskilt bidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: &special https://etjanster.degerfors.se/oversikt/overview/104
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Verifierat mot kommunens riktlinje för föreningsstöd (KF § 41/2017-06-19, dnr KS 262-2016), avsnitt 4.5 'Särskilt
-    bidrag'. Ansökan kan lämnas löpande under året. Ingen fast beloppsregel — beviljas efter kommunens bedömning.
+  senast_verifierad: '2026-08-19'
+  anteckning: Stödet kan även beviljas en nystartad förening.
 - id: degerfors-forlustback
-  namn: Förlusttäckning / Arrangemangsbidrag
+  namn: Förlusttäckningsgaranti
+  status: aktiv
   kategori:
   - kultur
   - idrott
-  malgrupp: Föreningar för evenemang med ekonomisk risk
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som genomför ett särskilt arrangemang med ekonomisk risk
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Arrangemanget måste ha dokumenterad ekonomisk risk
-  - Budgetförslag och risk-analys krävs
-  - Ansökan via e-tjänst löpande
-  - Både arrangemanget och förlusttäckningsgarantin ska vara godkända av kommunen i förväg
-  - Föreningen ska uppfylla kommunens allmänna grundvillkor för bidragsberättigande
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
+  - Garantin ska avse en möjlig ekonomisk förlust i samband med ett specificerat arrangemang
+  - Både arrangemanget och förlusttäckningsgarantin ska godkännas av kommunen i förväg
+  - Föreningen ska uppfylla kommunens allmänna villkor om stadgar, organisationsnummer, föreningsregister, lokal anknytning, demokrati, öppenhet och drogfri verksamhet
+  - Ansökan ska beskriva arrangemanget och dess ekonomi och lämnas genom kommunens särskilda e-tjänst
+  belopp: Ekonomisk garanti för den eventuella förlust som kommunen godkänner i förväg; ingen generell maxnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men måste godkännas före arrangemanget
+  kalla_url: *special
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Verifierat mot kommunens riktlinje för föreningsstöd (KF § 41/2017-06-19, dnr KS 262-2016), avsnitt 4.6 'Förlusttäckningsgaranti'.
-    Arrangemang och garanti ska godkännas av kommunen i förväg. Ansökan löpande under året. Ingen fast beloppsregel.
-- id: degerfors-kulturbidrag
-  namn: Kulturbidrag
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar och studieförbund
+  senast_verifierad: '2026-08-19'
+  anteckning: Garantin avser endast en faktisk förlust efter kommunens förhandsgodkännande.
+- id: degerfors-utbildningsbidrag
+  namn: Utbildningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som utbildar medlemmar och ledare
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
+    datum: [04-15]
   krav:
-  - Kulturverksamhet ska bedras i Degerfors
-  - Dokumentation av kulturell verksamhet krävs
-  - Ansökan mellan 15 mars och 15 april
-  - 'Föreningen ska klassas som kulturförening: förening som genomför kulturarrangemang och/eller aktiviteter samt hembygdsförening'
-  - Föreningen ska uppfylla kommunens allmänna grundvillkor (godkända stadgar, registrerat organisationsnummer, registrering
-    i föreningsregistret, ingen skuld till kommunen, drogfri och demokratisk verksamhet)
-  - Ansökan ska innehålla verksamhetsplan, budget, verksamhetsberättelse, ekonomisk berättelse och revisionsberättelse från
-    senaste årsmötet
-  belopp: null
-  sen_ansokan: Ej möjlig efter 15 april
-  kalla_url: https://degerfors.se/uppleva-och-gora/kultur.html
+  - Föreningen ska uppfylla kommunens allmänna villkor om stadgar, organisationsnummer, föreningsregister, lokal anknytning, demokrati, öppenhet och drogfri verksamhet
+  - Utbildningen ska avse föreningens medlemmar, exempelvis ungdomsledare eller personer med styrelsefunktioner
+  - Kommunen ska ha godkänt utbildningen innan den genomförs
+  - Ansökan ska innehålla verksamhetsplan och budget samt senaste verksamhets-, ekonomi- och revisionshandlingar
+  - Ansökan ska vara komplett och undertecknad av ordförande och kassör senast den 15 april
+  belopp: Individuellt utbildningsbidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ofullständig eller senare inkommen ansökan behandlas inte för innevarande kalenderår
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Rådgivning tillgänglig från Kultur- och utbildningsförvaltningen. Verifierat mot kommunens riktlinje för föreningsstöd
-    (KF § 41/2017-06-19, dnr KS 262-2016): kulturföreningar omfattas av samma allmänna grundvillkor och individuella helhetsbedömning
-    som övrigt föreningsstöd — ingen fast beloppsregel finns.'
+  senast_verifierad: '2026-08-19'
+  anteckning: Förhandsgodkännande krävs innan utbildningen genomförs.
+- id: degerfors-lokalsubvention
+  namn: Lokalsubvention och nolltaxa
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar med behov av kommunal lokal eller godkänd samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor om stadgar, organisationsnummer, föreningsregister, lokal anknytning, demokrati, öppenhet och drogfri verksamhet
+  - Stödet ska avse föreningens behov av en lokal avsedd för uthyrningsverksamhet eller en godkänd samlingslokal
+  - Ansökan ska göras en gång per kalenderår och ett godkännande gäller endast innevarande kalenderår
+  - Efter godkänd ansökan får verksamheten boka valfri ledig godkänd samlingslokal under det kalenderåret
+  - Den årliga ansökan ska vara komplett senast den 15 april
+  belopp: Lägre hyreskostnad eller nolltaxa för uthyrningslokal eller godkänd samlingslokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ofullständig eller senare inkommen ansökan behandlas inte för innevarande kalenderår
+  kalla_url: &revidering https://degerfors.se/download/18.7c242fc01882e12134ab52/1686907080187/Protokoll%20kommunfullm%C3%A4ktige%202023-06-12.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunfullmäktige fastställde den nuvarande årsvisa nolltaxeregeln 2023-06-12 § 76.
+- id: degerfors-skotsel-och-nyttjanderattsavtal
+  namn: Skötsel- och nyttjanderättsavtal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som sköter eller upplåter en anläggning
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor om stadgar, organisationsnummer, föreningsregister, lokal anknytning, demokrati, öppenhet och drogfri verksamhet
+  - Avtalet ska avse föreningens skötsel och nyttjanderätt av en kommunal anläggning eller kommunens rätt att nyttja en anläggning som föreningen äger
+  - Ett separat skriftligt avtal ska upprättas mellan kommunen och föreningen och undertecknas av båda parter
+  - Avtalets längd och parternas överenskomna åtaganden ska framgå
+  - Ansökan ska innehålla verksamhetsplan, budget och senaste verksamhets-, ekonomi- och revisionshandlingar och vara komplett senast den 15 april
+  belopp: Stödets innehåll och ekonomiska värde regleras i det separata avtalet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ofullständig eller senare inkommen ansökan behandlas inte för innevarande kalenderår
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Avtalet kan gälla en kommunal anläggning eller en föreningsägd anläggning som kommunen får nyttja.
 forutsattningar:
 - id: degerfors-registrering
-  vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste vara registrerad i Degerfors kommuns föreningsregister för att kunna ansöka om bidrag och
-    hyra kommunala anläggningar.
-  system: Föreningsregistret
+  vad: Registrering och grundläggande bidragsbehörighet
+  beskrivning: Föreningen ska vara registrerad i Degerfors kommuns föreningsregister, ha organisationsnummer och godkända stadgar samt uppfylla kommunens demokrati-, öppenhets-, lokalanknytnings- och drogfrihetsvillkor.
+  system: Interbook Go
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
-  giltighet_status: okand
-- id: degerfors-e-tjanster
-  vad: Ansökan via e-tjänstportal
-  beskrivning: 'Alla föreningsbidrag-ansökningar skickas via Degerfors kommuns e-tjänstportal. Huvudansökningsperiod: 15 mars
-    – 15 april för årligt och startbidrag.'
-  system: E-tjänstportal
+  kalla_url: https://degerfors.ibgo.se/
+  giltighet_status: ingen_regel
+- id: degerfors-arsansokan
+  vad: Årlig ansökan och föreningshandlingar
+  beskrivning: För årligt verksamhetsbidrag och övriga ordinarie stöd ska föreningen lämna verksamhetsplan, budget, verksamhetsberättelse, ekonomisk berättelse och revisionsberättelse samt en komplett ansökan undertecknad av ordförande och kassör.
+  system: Degerfors kommuns e-tjänster
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ansökningsperiod 15 mars–15 april; ingen handläggningstid publiceras
   giltighet: null
   ordning: 2
-  kalla_url: https://etjanster.degerfors.se/
-  giltighet_status: okand
-- id: degerfors-kontakt
-  vad: Kontaktinformation för föreningsstöd
-  beskrivning: 'Sofia Luthman hanterar föreningsfrågor. Tel: 0586-481 00, E-post: kommun@degerfors.se'
-  system: Kultur- och utbildningsförvaltningen
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
-  ordning: 3
-  kalla_url: https://www.degerfors.se/uppleva-och-gora/foreningar-och-foreningsstod
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+kommunsiffra: null
