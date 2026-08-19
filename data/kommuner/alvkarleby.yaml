@@ -2,94 +2,263 @@ kommun: Älvkarleby
 kommun_slug: alvkarleby
 lan: Uppsala län
 befolkning: 9553
-forvaltning: Kultur- och fritidskontoret
+forvaltning: Kultur- och fritidsavdelningen samt kommunstyrelsen
 ansokningssystem:
-  namn: Rbok
+  namn: Rbok, kommunens e-tjänster och Länsstyrelsens e-tjänst
   url: https://alvkarleby.rbok.se/
-kalla_url: https://www.alvkarleby.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier.html
-verifierad: '2026-07-31'
+kalla_url: &huvud https://www.alvkarleby.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://www.alvkarleby.se/download/18.148cd9a117d9efedf49a12/1644841988455/Regler%20och%20riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: alvkarleby-foreningsstod
   namn: Föreningsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Kommunalt registrerade föreningar
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Kommunalt registrerade ideella föreningar med verksamhet i Älvkarleby kommun
   deadlines:
     typ: fasta
-    datum:
-    - 09-15
+    datum: [09-15]
   krav:
-  - Föreningen ska vara registrerad i kommunen
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.alvkarleby.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier.html
-  belopp_status: okand
+  - &registrerad Föreningen ska vara kommunalt registrerad och ansökan ska lämnas av styrelsen samt undertecknas av ordföranden
+  - &stadgar Föreningen ska ha stadgar som godkänts av en riksorganisation eller kommunen, vara demokratiskt uppbyggd och öppen för alla
+  - &lokal Föreningen ska ha minst tio regelbundet deltagande medlemmar, ha bedrivit verksamhet i minst nio månader och bedriva verksamheten med huvuddelen av medlemmarna i Älvkarleby kommun
+  - &vardering Verksamheten ska bedrivas i en rök-, alkohol- och drogfri miljö och vara fri från rasistisk, sexuell och annan kränkande diskriminering
+  - Ansökan ska avse innevarande års verksamhet och innehålla verksamhetsplan samt senaste verksamhetsberättelse, ekonomiska rapport och revisionsberättelse
+  - Ekonomiska föreningar, politiska vuxenföreningar, religiösa föreningar, elevföreningar utom skol-IF, försvarsanknutna föreningar och stödföreningar får normalt inte stöd
+  - Beviljat stöd regleras i ett ettårigt avtal som anger verksamheten, stödformerna och utbetalningstidpunkterna och följs upp av kommunen
+  belopp: Individuellt prövat efter ansökan, dialog och avtal inom kommunens budget; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Komplett ansökan ska vara fritidskontoret tillhanda senast 15 september.
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunens publika sida redovisar ett samlat föreningsstöd med sista ansökningsdag 15 september; underliggande
-    stödformer framgår inte öppet.
-- id: alvkarleby-enskilda-vagar
-  namn: Driftbidrag till enskilda vägar
-  kategori:
-  - ovrig
-  malgrupp: Vägföreningar och väghållare för enskilda vägar
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvkarleby-subventionerad-uthyrning
+  namn: Subventionerad uthyrning av kommunens lokaler
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Kommunalt registrerade föreningar som hyr kommunens sporthallar, ishall eller andra lokaler
   deadlines:
     typ: fasta
-    datum:
-    - 06-30
+    datum: [09-15]
   krav:
-  - Vägen ska ligga inom Älvkarleby kommun
-  - Underhållet ska hålla en sådan standard att vägen inte försämras
-  - Föreningen ska ha antagna stadgar
-  - Föreningen ska ha en styrelse utsedd på årsmöte
-  - Föreningen ska årligen upprätta verksamhetsberättelse med balansräkning, årsmötesprotokoll och budgetförslag
-  - Bidrag lämnas inte till områden med fritidsbebyggelse eller till sökande som inte har bildat förening
-  belopp: 3 kronor per löpmeter väg
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.alvkarleby.se/download/18.148cd9a117d9efedf49a15/1712839182067/Bidragsbest%C3%A4mmelser%20f%C3%B6r%20v%C3%A4gf%C3%B6reningar.pdf
+  - *registrerad
+  - *stadgar
+  - *lokal
+  - *vardering
+  - Subventionens omfattning ska anges i föreningens skriftliga ettårsavtal om föreningsstöd
+  - Föreningen ska boka en kommunal lokal och följa boknings-, ordnings- och avbokningsreglerna
+  - Vuxenverksamhet får inte bedrivas på tid som bokats och subventionerats för barn- och ungdomsverksamhet
+  belopp: Subventionsgraden kan vara 0–100 procent; från 1 augusti 2026 är föreningstaxan för barn, ungdomar och juniorer 85–165 kr per timme beroende på lokal, tid och användning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödformen ingår i den samlade föreningsstödsansökan senast 15 september; själva lokalen bokas separat.
+  kalla_url: https://www.alvkarleby.se/download/18.5e484f4b19ed4844be311a6d/1782476080108/Taxor%20och%20avgifter%20f%C3%B6r%20sporthallar%20och%20ishall%20fr%C3%A5n%202026-08-01.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-- id: alvkarleby-en-pase-pengar
-  namn: En påse pengar (PÅPP-bidrag)
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ungdomar 13–20 år, skolklasser, föreningar eller privatpersoner som ordnar aktiviteter för andra barn och ungdomar
+- id: alvkarleby-bidrag-viss-prestation
+  namn: Bidrag för viss prestation (uppdragsverksamhet)
+  kategori: [kultur, idrott, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Kommunalt registrerade föreningar som utför en särskild prestation eller ett uppdrag för kommunen
+  deadlines:
+    typ: fasta
+    datum: [09-15]
+  krav:
+  - *registrerad
+  - *stadgar
+  - *lokal
+  - *vardering
+  - Föreningen ska åta sig en särskild prestation, exempelvis ett framträdande av sångkör, orkester eller annan kulturförening
+  - Uppdraget, prestationen, ersättningen och utbetalningstidpunkterna ska dokumenteras i ett skriftligt avtal
+  - Föreningen ska genomföra den avtalade verksamheten och lämna underlag för kommunens uppföljning och granskning
+  belopp: Ersättningen fastställs individuellt i avtalet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödformen ingår i den samlade föreningsstödsansökan senast 15 september.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvkarleby-studieforbundsbidrag
+  namn: Kommunalt bidrag till studieförbund
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med icke-kommersiell verksamhet i Älvkarleby kommun
+  deadlines:
+    typ: fasta
+    datum: [11-15]
+  krav:
+  - Studieförbundet ska få statsbidrag genom Folkbildningsrådet och ha en självständig ekonomi och ansvarig styrelse
+  - Den sökta verksamheten ska uppfylla villkoren för statligt bidrag, genomföras i Älvkarleby kommun och vara icke-kommersiell
+  - Ansökan ska ange kontaktperson, behörig uppgiftslämnare, organisationsnummer, utbetalningskonto och en tydlig beskrivning av den planerade verksamheten
+  - Studieförbundet ska delta i kommunens dialog och följa de mål och villkor som gäller för det beviljade stödet
+  - Årsredovisning eller verksamhetsberättelse, bokslut och revisionsberättelse ska lämnas direkt efter avdelningens årsmöte, senast 30 april
+  - Det ska tydligt framgå hur det tidigare kommunala bidraget har använts i Älvkarleby kommun och räkenskaperna ska kunna granskas
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Samhällsbyggnadsnämnden fastställer årligen ett anslag som prioriteras och fördelas mellan studieförbunden; totalsumman publiceras inte
+  sen_ansokan: Ansökan för nästa kalenderår ska lämnas senast 15 november.
+  kalla_url: &studienorm https://www.alvkarleby.se/download/18.148cd9a117d9efedf49a22/1644842017327/Riktlinjer%20f%C3%B6r%20kommunalt%20bidrag%20till%20studief%C3%B6rbund.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvkarleby-kultur-i-varden
+  namn: Kultur i vården
+  kategori: [kultur, social]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund som genomför riktad kultur- eller folkbildningsverksamhet inom kommunal omsorg
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Arrangemanget ska vara öppet för fler än arrangörerna
-  - Arrangemanget ska vara drogfritt
-  - Vuxen samarbetspartner krävs om arrangörerna är under 18 år
-  - En juridisk person ska medverka
-  - En ansvarig ungdom ska utses för arrangemanget
-  - Arrangemanget ska dokumenteras och utvärderas (skriftligt, muntligt, filmat eller fotograferat)
-  - En sammanställning av kostnader ska redovisas
+  - Sökanden ska vara ett studieförbund som får statsbidrag genom Folkbildningsrådet och bedriver verksamhet i Älvkarleby kommun
+  - Den särskilda ansökan ska avse mindre, specifik och riktad verksamhet inom kommunal omsorg, exempelvis service- eller gruppboende
+  - Verksamheten ska vara icke-kommersiell och följa folkbildningsstödets syfte och kommunens prioriteringar
+  - Studieförbundet ska senast 15 november ha lämnat en övergripande verksamhetsplan för Älvkarleby kommun
+  - Genomförd verksamhet och användningen av stödet ska redovisas och räkenskaperna hållas tillgängliga för kommunens kontroll
   belopp: null
-  sen_ansokan: Ansökan behandlas löpande; kommunen anger svar inom sju arbetsdagar
-  kalla_url: https://sjalvservice.alvkarleby.se/oversikt/overview/176
-  belopp_status: okand
-  deadline_status: olast
+  belopp_avser: ren_pott
+  kommunens_pott: En prioriterad del av kommunens årliga studieförbundsanslag avsätts för Kultur i vården; summan publiceras inte
+  sen_ansokan: Särskilda ansökningar kan lämnas löpande, men en övergripande verksamhetsplan ska vara inlämnad senast 15 november.
+  kalla_url: *studienorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Stöd till ungdomsarrangemang som exempelvis spelningar, turneringar, teater eller lägerverksamhet.
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvkarleby-jubileumsbidrag
+  namn: Jubileumsbidrag
+  kategori: [ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar verksamma i Älvkarleby kommun som firar 25-, 50-, 75- eller 100-årsjubileum
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening verksam i Älvkarleby kommun
+  - Föreningen ska ansöka om bidraget med anledning av sitt jubileum
+  - Föreningen ska fylla 25, 50, 75 eller 100 år
+  belopp: 3 000 kr vid 25 år, 4 000 kr vid 50 år, 5 000 kr vid 75 år och 6 000 kr vid 100 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag.
+  kalla_url: https://www.alvkarleby.se/download/18.2df7d8901991399b0f16cbe/1757417328664/Reglemente%20f%C3%B6r%20Jubileumsbidrag%20och%20uppvaktning.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvkarleby-bygdemedel
+  namn: Bygdemedel för utvecklingsprojekt
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Registrerade föreningar i Älvkarleby kommun som gör en allmännyttig investering eller utvecklingsinsats
+  deadlines:
+    typ: fasta
+    datum: [02-27]
+  krav:
+  - Föreningen ska vara registrerad, ha organisationsnummer och arbeta för att utveckla bygden eller förbättra för boende i Älvkarleby kommun
+  - Projektet eller investeringen ska vara allmännyttig och komma så många som möjligt i bygden till del
+  - Stöd lämnas inte till driftskostnader, underhåll, lös inredning, egen arbetstid eller investeringar som fortsatt kräver offentligt bidrag
+  - Ansökan ska innehålla projektbeskrivning, mål, tidplan, kostnadsberäkning och uppgift om tillstånd, framtida investeringar och finansiering
+  - Föreningen ska bifoga beslut om att söka stödet, uppgift om behörig firmatecknare, verksamhetsberättelse och vid behov offert
+  - Beviljat stöd betalas i efterhand efter redovisning av betalda utgifter; arbete före beslut sker på föreningens egen risk
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Tillgängliga bygdemedel för Älvkarleby kommun fördelas av Länsstyrelsen efter kommunens yttrande; totalsumman för 2026 publiceras inte
+  sen_ansokan: Utlysningen 2026 var öppen 2–27 februari.
+  kalla_url: https://www.lansstyrelsen.se/uppsala/natur-och-landsbygd/stod-till-jordbruk-och-landsbygd/bygdemedel.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvkarleby-enskilda-vagar
+  namn: Driftbidrag till enskilda vägar
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägföreningar som ansvarar för enskilda vägar i Älvkarleby kommun
+  deadlines:
+    typ: fasta
+    datum: [06-30]
+  krav:
+  - Vägen ska ligga inom Älvkarleby kommun och underhållas så att dess standard inte försämras
+  - Vägföreningen ska ha antagna stadgar och en styrelse som utsetts av årsmötet
+  - Föreningen ska till varje årsmöte upprätta verksamhetsberättelse med balansräkning, årsmötesprotokoll och budgetförslag
+  - Ansökan ska ange föreningens totala väglängd i kommunen, vägarnas namn och innehålla en karta där vägarna markerats
+  - Verksamhetsberättelse och budgetförslag för innevarande år ska bifogas ansökan
+  - Bidrag lämnas inte till områden med fritidsbebyggelse eller sökande som inte har bildat förening
+  belopp: 3 kronor per löpmeter väg
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska ha kommit in senast 30 juni.
+  kalla_url: https://www.alvkarleby.se/download/18.148cd9a117d9efedf49a15/1712839182067/Bidragsbest%C3%A4mmelser%20f%C3%B6r%20v%C3%A4gf%C3%B6reningar.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: alvkarleby-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Rbok
+  vad: Kommunalt registrerad förening
+  beskrivning: Föreningen ansöker om kommunalt godkännande med fullständig styrelsesammansättning, verksamhetsplan och, om verksamhet redan bedrivits, verksamhetsberättelse. Godkännandet ger rätt att söka föreningsstöd och finnas i föreningsregistret.
+  system: Rbok och formuläret Föreningsuppgifter
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid för den första registreringen.
+  giltighet: Registreringen behålls genom aktuella föreningsuppgifter; en förening avregistreras om aktuella uppgifter inte har lämnats under de senaste tre åren.
   ordning: 1
-  kalla_url: https://www.alvkarleby.se/uppleva-och-gora/kultur/bidrag-stod-och-stipendier.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: alvkarleby-arsmoteshandlingar
+  vad: Årlig uppdatering efter årsmötet
+  beskrivning: Undertecknad verksamhetsberättelse, ekonomisk rapport och revisionsberättelse ska lämnas efter varje årsmöte. Ändrade registeruppgifter lämnas via formuläret Föreningsuppgifter.
+  system: Rbok och formuläret Föreningsuppgifter
+  ledtid: 60
+  ledtid_text: Senast två månader efter årsmötet och i samtliga fall före 15 september.
+  giltighet: Uppgifterna uppdateras årligen; om årshandlingarna saknas den 15 september tas föreningen bort ur registret.
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: alvkarleby-grundvillkor
+  vad: Lokala och demokratiska grundvillkor
+  beskrivning: Föreningen ska normalt ha godkända stadgar, minst tio regelbundet deltagande medlemmar, minst nio månaders verksamhet, lokal förankring, demokratisk öppenhet och en trygg, drogfri och icke-diskriminerande verksamhet.
+  system: Kommunens regler för föreningsstöd
+  ledtid: null
+  ledtid_text: Villkoren prövas när föreningen registreras och vid varje ansökan.
+  giltighet: Grundvillkoren ska vara uppfyllda under hela stödperioden; kommunen kan annars stänga av föreningen från stöd och säga upp hyresavtal.
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
