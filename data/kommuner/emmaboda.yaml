@@ -1,209 +1,696 @@
-kommun: Emmaboda
+kommun: 'Emmaboda'
 kommun_slug: emmaboda
 lan: Kalmar län
 befolkning: 8747
-forvaltning: Bildningsnämnden / Teknik- och fritidsnämnden
+forvaltning: Bildningsnämnden samt teknik- och fritidsnämnden
 ansokningssystem:
-  namn: Mina sidor (e-tjänster)
-  url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
-kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
-verifierad: 2026-07-26
+  namn: Mina sidor, blanketter och e-post
+  url: &portal https://minasidor.emmaboda.se/oversikt
+kalla_url: &huvud https://www.emmaboda.se/uppleva--gora/foreningar-och-foreningsliv/bidrag-stod--och-stipendier.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.emmaboda.se/download/18.79c65efe17883e93e406ce2/1618499838277/Bidragsnormer%20f%C3%B6r%20F%C3%B6reningar%20och%20studief%C3%B6rbund%20Emmaboda%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: emmaboda-verksamhetsbidrag
-  namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Fritids- och idrottsföreningar
+- id: emmaboda-aktivitetsbidrag-fritidsforeningar
+  namn: Aktivitetsbidrag till idrotts- och fritidsföreningar
+  status: aktiv
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala föreningar med regelbunden verksamhet för medlemmar 5–25 år
   deadlines:
     typ: fasta
-    datum:
-    - 03-01
+    datum: ['02-25', '03-01']
   krav:
-  - Ideell förening registrerad
-  - Verksamheten ska bedrivas i Emmaboda
-  belopp: null
-  sen_ansokan: Ej möjlig efter 1 mars
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
-- id: emmaboda-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för lokaldrift
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav:
-  - Dokumenterade lokalkostnader
-  - Ansökan via Mina sidor
-  - Lokalen ska till övervägande del användas i föreningens verksamhet för medlemmar 5-25 år
-  - Lokalen ska utnyttjas minst 300 timmar per år (föreningar kan samverka för att nå timantalet)
-  - Hyrning av lokal samt lokalkostnad ska godkännas av teknik- och fritidsnämnden i förväg
-  - Omfattar inte hyrning av fotbollsplaner eller lokalkostnader vid entrébelagda tävlingar, matcher eller arrangemang
-  - Kommunägda lokaler ska i första hand hyras, i andra hand övriga lokaluthyrare
-  belopp: Högst 50 % av kostnader för kallhyra, uppvärmning, el, vatten, renhållning och försäkringar för hyrd lokal
-  sen_ansokan: Ej möjlig efter 1 mars
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Föreningen ska ha antagit stadgar, valt styrelse, varit verksam i minst sex månader och vara ansluten till en statsbidragsberättigad riksorganisation
+  - Lokalavdelningen ska ha minst tio medlemmar 5–25 år och minst 25 sammankomster eller 200 medlemsaktiviteter per år
+  - Deltagaren ska vara 5–25 år, finnas i medlemsregistret och ha betalat fastställd medlemsavgift
+  - Sammankomsten ska uppfylla villkoren för statligt lokalt aktivitetsstöd och ha minst tre stödberättigade deltagare samt en ledare
+  - Genomförda medlemsaktiviteter och sammankomster ska styrkas med närvarounderlag eller motsvarande verifikation
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska lämnas med årsansökan eller snarast efter årsmötet
+  belopp: 7 kr per godkänd medlemsaktivitet för verksamhetsåret 2025
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: RF-SISU-anslutna föreningar redovisar senast 25 februari; kommunens samlade årsansökan ska vara inne senast 1 mars. Sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: &beslut2026 https://www.emmaboda.se/download/18.76c77b5019e40cea8437b9/1779716446610/Teknik-%20och%20fritidsn%C3%A4mnden%20protokoll%202026-05-21%20signerat.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Beloppsregel och krav verifierade mot kommunens bidragsnormer (PDF, teknik- och fritidsnämnden avsnitt 2).
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den beslutade 2026-fördelningen anger 7 kr för verksamhetsåret 2025; den äldre samlingsnormen anger 5 kr
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-lokalbidrag-fritidsforeningar
+  namn: Lokalbidrag till idrotts- och fritidsföreningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala föreningar som hyr en extern lokal för huvudsaklig verksamhet för medlemmar 5–25 år
+  deadlines:
+    typ: fasta
+    datum: ['03-01']
+  krav:
+  - Lokalen ska till övervägande del användas för föreningens verksamhet för medlemmar 5–25 år
+  - Lokalen ska användas minst 300 timmar per år; flera föreningar får samverka för att nå timantalet
+  - Teknik- och fritidsnämnden ska i förväg godkänna både hyrningen och lokalkostnaden
+  - Kommunägda lokaler ska väljas i första hand och lokalbidrag lämnas inte för en redan kommunsubventionerad lokal
+  - Stödet omfattar inte fotbollsplaner eller lokalkostnader vid entrébelagda tävlingar, matcher och arrangemang
+  - Kostnader för kallhyra, värme, el, vatten, renhållning och försäkring ska styrkas med verifikationer
+  belopp: Högst 50 % av godkända kostnader för kallhyra, uppvärmning, el, vatten, renhållning och försäkring
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 1 mars; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/99/86
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-subventionerad-kommunal-lokal
+  namn: Subventionerad hyra i kommunala fritidslokaler
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala föreningar som bokar kommunägda sporthallar, gymnastiksalar eller andra fritidslokaler
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening som bedriver lokal verksamhet i Emmaboda kommun
+  - Bokningen ska avse en kommunägd lokal och följa kommunens boknings- och uthyrningsvillkor
+  - Kommunens hyressubvention ersätter separat lokalbidrag för samma lokalkostnad
+  - Föreningen ska lämna korrekta förenings- och kontaktuppgifter samt betala den fastställda subventionerade hyran
+  belopp: Subventionerad kommunal föreningshyra; den individuella taxan beror på lokal och bokning
+  belopp_avser: per_forening
+  kommunens_pott: 38 000 kr redovisades som interna lokalbidrag i 2026 års fördelning
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; stödet ges genom lokalbokningen
+  kalla_url: *beslut2026
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Organisationer som driver en allmänt använd fritidsanläggning i Emmaboda kommun
+  deadlines:
+    typ: fasta
+    datum: ['03-01']
+  krav:
+  - Föreningen ska driva en fritidsanläggning i kommunen som används av allmänheten
+  - Anläggningen ska hållas i tillfredsställande och funktionsdugligt skick
+  - En ny anläggning ska vara godkänd av teknik- och fritidsnämnden innan stöd kan lämnas
+  - Skjutbanor ska vara godkända av Polismyndigheten och kommunala myndigheter
+  - Ansökan ska redovisa anläggningstyp, ytor, banor, tavelställ eller andra uppgifter som schablonen kräver
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska bifogas årsansökan
+  belopp: Schabloner per anläggning, bland annat 24 400 kr för livligt använd fullstor gräsplan, 125 kr/m² för helårsanvänt uppvärmt omklädningsrum, 4 300 kr per golfhål och 26 500 kr per motocrossbana; övriga anläggningar prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 1 mars; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Schablontabellen omfattar även fotbolls- och tennisplaner, lokaler, spår, isbana, belysning samt skytte-, golf- och motorcrossanläggningar
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-isspolningsbidrag
+  namn: Isspolningsbidrag
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, hembygd, friluft, ungdom, annat]
+  malgrupp: Ideella föreningar som spolar och sköter lokala isbanor i Emmaboda kommun
+  deadlines:
+    typ: fasta
+    datum: ['02-28']
+  krav:
+  - Föreningen ska spola och sköta en lokal isbana under vintersäsongen
+  - Isbanan ska ha varit användbar för isaktiviteter under den period som redovisas
+  - Ansökan ska ange hur många veckor föreningen haft användbar is under säsongen
+  - Föreningens namn, organisationsnummer, kontaktuppgifter och bank- eller plusgiro ska lämnas
+  belopp: Individuellt utifrån genomförd isspolning; kommunen publicerar ingen generell nivå i blanketten
+  belopp_avser: per_forening
+  kommunens_pott: 17 200 kr fördelades som isspolningsbidrag 2026
+  sen_ansokan: Ansökan ska lämnas senast 28 februari efter säsongen
+  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/idrott-och-motion/skridskoakning.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
 - id: emmaboda-kartbidrag
-  namn: Kartbidrag
-  kategori:
-  - ovrig
-  malgrupp: Orienterings- och kartverksamhet
+  namn: Bidrag till kartframställning
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft]
+  malgrupp: Föreningar som nyritar fritids- eller orienteringskartor
   deadlines:
     typ: fasta
-    datum:
-    - 03-01
+    datum: ['03-01']
   krav:
-  - Orienterings- eller kartsportverksamhet
-  - Bidraget avser nyritning av fritidskartor eller orienteringskartor
-  - Ansökan ska lämnas senast 1 mars året innan kartan ska vara färdigställd
-  - Förening ska ha antagit stadgar, valt styrelse och varit verksam i minst 6 månader samt vara ansluten till riksorganisation
-  belopp: Högst 34 500 kr/år
-  sen_ansokan: Ej möjlig efter 1 mars
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Stödet ska avse nyritning av en fritidskarta eller orienteringskarta
+  - Föreningen ska uppfylla de allmänna villkoren för teknik- och fritidsnämndens bidrag
+  - Ansökan ska beskriva kartprojektet och lämnas året innan kartan ska vara färdig
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska bifogas
+  belopp: Högst 34 500 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 1 mars året innan kartan ska färdigställas
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Beloppsregel och krav verifierade mot kommunens bidragsnormer (PDF, teknik- och fritidsnämnden avsnitt 6).
-- id: emmaboda-pensionarer
-  namn: Bidrag till pensionärsföreningar
-  kategori:
-  - ovrig
-  malgrupp: Pensionärsföreningar
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-hastbidrag-eriksmala-ridklubb
+  namn: Hästbidrag till Eriksmåla Ridklubb
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott]
+  malgrupp: Eriksmåla Ridklubb för hästar som används i föreningens lokala ridverksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 03-01
+    datum: ['03-01']
   krav:
-  - Registrerad pensionärsförening
-  - Minst 10 medlemmar krävs för att bidrag ska utgå
-  belopp: 'Verksamhetsbidrag: 40 kr/medlem (10-75 medlemmar), 20 kr/medlem (76-150 medlemmar), 10 kr/medlem (151- medlemmar).
-    Lokalbidrag: högst 50 % av kostnader för kallhyra, uppvärmning, el, vatten, renhållning och försäkringar.'
-  sen_ansokan: Ej möjlig efter 1 mars
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Sökanden ska vara Eriksmåla Ridklubb
+  - Hästarna ska ingå i föreningens bidragsgrundande ridverksamhet
+  - Antalet hästar som stödet söks för ska redovisas och kan högst vara 20
+  - Föreningens verksamhetsberättelse, ekonomiska redogörelse och revisionsberättelse ska lämnas
+  belopp: 1 000 kr per häst, högst för 20 hästar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ingår i årsansökan till teknik- och fritidsnämnden senast 1 mars
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Beloppsregel och krav verifierade mot kommunens bidragsnormer (PDF, teknik- och fritidsnämnden avsnitt 7).
-- id: emmaboda-funktionsnedsattning
-  namn: Bidrag till funktionshinderorganisationer
-  kategori:
-  - ovrig
-  malgrupp: Organisationer för personer med funktionsnedsättningar
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den faktiska fördelningen 2026 var 20 000 kr
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-pensionarsforeningsbidrag
+  namn: Verksamhets- och lokalbidrag till pensionärsföreningar
+  status: aktiv
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med minst tio medlemmar och lokal verksamhet i Emmaboda kommun
   deadlines:
     typ: fasta
-    datum:
-    - 03-01
+    datum: ['03-01']
   krav:
-  - Fokus på funktionshinderverksamhet
-  - Minst 10 medlemmar bosatta i Emmaboda kommun
-  - Bidrag ges endast för de medlemmar som är bosatta i Emmaboda kommun
-  belopp: 'Verksamhetsbidrag: 40 kr/medlem (10-75 medlemmar), 20 kr/medlem (76-150 medlemmar), 10 kr/medlem (151- medlemmar),
-    gäller endast medlemmar bosatta i Emmaboda kommun. Lokalbidrag: högst 50 % av kostnader för kallhyra, uppvärmning, el,
-    vatten, renhållning och försäkringar.'
-  sen_ansokan: Ej möjlig efter 1 mars
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Föreningen ska ha minst tio medlemmar
+  - Medlemsantalet ska redovisas som grund för verksamhetsbidraget
+  - Hyresavtal och lokalkostnad ska godkännas av teknik- och fritidsnämnden i förväg för lokalbidrag
+  - Kommunägda lokaler ska användas i första hand
+  - Godkända lokalkostnader ska avse kallhyra, värme, el, vatten, renhållning eller försäkring och styrkas
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska lämnas
+  belopp: 'Verksamhetsbidrag: 40 kr per medlem vid 10–75 medlemmar, 20 kr vid 76–150 och 10 kr från medlem 151; lokalbidrag: 50 % av godkända kostnader'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 1 mars; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/102/89
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Beloppsregel och krav verifierade mot kommunens bidragsnormer (PDF, teknik- och fritidsnämnden avsnitt 8).
-- id: emmaboda-studieforbund
-  namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  malgrupp: Registrerade studieförbund
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-funktionsrattsforeningsbidrag
+  namn: Administrations-, lokal- och aktivitetsbidrag till funktionsrättsföreningar
+  status: aktiv
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Funktionsrättsföreningar med minst tio medlemmar folkbokförda i Emmaboda kommun
   deadlines:
     typ: fasta
-    datum:
-    - 05-01
+    datum: ['03-01']
   krav:
-  - Folkbildningsverksamhet enligt statliga kriterier
-  - Ansökan via Mina sidor
-  - Minst 2 deltagare per studiecirkel ska vara folkbokförda i Emmaboda kommun
-  - Statliga bidrag ska utgå till studieförbundets verksamhet och följa Folkbildningsrådets grunder
-  belopp: Bidrag per studietimme fastställs årligen av bildningsnämnden utifrån tilldelad budget; bidraget per studietimme
-    halveras för studiecirklar med färre än 5 deltagare
-  sen_ansokan: Ej möjlig efter 1 maj
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Föreningen ska ha minst tio medlemmar bosatta i Emmaboda kommun och stöd lämnas bara för dessa medlemmar
+  - En kommunövergripande förening ska särredovisa antalet medlemmar i Emmaboda
+  - Medlemsantal, medlemsavgift och antal aktiviteter ska redovisas på kommunens blankett
+  - Hyresavtal och lokalkostnad ska godkännas i förväg och kommunägda lokaler ska användas i första hand
+  - Aktivitetsstödet avser en medlem bosatt i kommunen som deltagit i en av föreningen arrangerad eller beslutad aktivitet
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska lämnas
+  belopp: 'Administrationsbidrag: 40 kr per medlem vid 10–75 medlemmar, 20 kr vid 76–150 och 10 kr från medlem 151; lokalbidrag: 50 % av godkända kostnader; aktivitetsbidrag: 5 kr per deltagande medlem och aktivitet'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 1 mars; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/95/82
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Beloppsmodell och krav verifierade mot kommunens bidragsnormer (PDF, bildningsnämnden avsnitt 2). Bidraget per
-    studietimme är budgetberoende och fastställs årligen, ej ett fast kronbelopp.
-- id: emmaboda-kulturforeningar
-  namn: Bidrag till kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Registrerade kulturföreningar
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Länsföreningar och kommunövergripande föreningar prövas efter Emmabodamedlemmarnas andel
+  kraver_registrering: false
+  sate_i_kommunen: false
+- id: emmaboda-motionsidrottsforbund
+  namn: Bidrag till motionsidrottsförbund
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, annat]
+  malgrupp: Lokala motionsidrottsförbund som tillhör Svenska Motionsidrottsförbundet
   deadlines:
     typ: fasta
-    datum:
-    - 05-01
+    datum: ['03-01']
   krav:
-  - Kulturverksamhet i Emmaboda
-  - Förening ska ha antagit stadgar, valt styrelse och varit verksam i minst 6 månader samt vara ansluten till riksorganisation
-  - Föreningens verksamhet ska vara öppen för alla
-  - Minst 10 träffar/repetitioner per år krävs för att bidraget ska utgå
-  - Bidrag utgår inte om föreningen får bidrag för motsvarande verksamhet från annan kommunal myndighet
-  belopp: 'Verksamhetsbidrag: Hembygdsförening 10 000 kr, Musikkårer 14 000 kr, Skapande/utövande förening 5 500 kr'
-  sen_ansokan: Ej möjlig efter 1 maj
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Förbundet ska tillhöra Svenska Motionsidrottsförbundet och följa Rikskorpens regler
+  - Förbundet ska ha en demokratiskt vald styrelse, minst tio anslutna korporationer och en skälig medlemsavgift
+  - Aktiviteten ska vara ledarledd och varje start ska vara rapporterad och godkänd av Svenska Motionsidrottsförbundet
+  - Lokalbidraget får bara avse hyrd anläggning eller lokal som inte redan är subventionerad
+  - Ekonomisk berättelse, verksamhetsberättelse och underlag som styrker starter och kostnader ska bifogas
+  belopp: 'Aktivitetsbidrag: 1,30 kr per godkänd start; lokalbidrag: 50 % av nettokostnaden för extern hyra, medan kommunal lokal debiteras med 35 % av fastställd hyra; administrationsbidrag lämnas vid fler än tio korporationer utan publicerad nivå'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 1 mars; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/101/88
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Beloppsregel och krav verifierade mot kommunens bidragsnormer (PDF, bildningsnämnden avsnitt 1, Verksamhetsbidrag).
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-tfn-forfogandebidrag
+  namn: Bidrag till teknik- och fritidsnämndens förfogande
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala föreningar med ett angeläget projekt som inte täcks av övriga stödformer
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en organisation med lokal föreningsverksamhet
+  - Projektet ska komplettera kommunens övriga bidragsformer och behöver inte höra till en särskild stödtyp
+  - Föreningen ska kontakta teknik- och fritidsnämnden redan när aktiviteten planeras
+  - Ansökan ska redovisa projektets kostnader och hela finansieringen
+  - Kommunen får granska föreningens bokföring, verifikationer och protokoll
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Högst 5 % av ramen för ungdoms- och idrottsinriktade verksamhetsbidrag får avsättas; totalsumman publiceras inte
+  sen_ansokan: Kontakta teknik- och fritidsnämnden i samband med aktivitetens planering
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-bidrag-ovriga-foreningar
+  namn: Bidrag till övriga föreningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala föreningar som inte kan hänföras till någon annan bidragskategori i kommunens norm
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening som inte kan hänföras till någon annan grupp i bidragsnormen
+  - Föreningen ska bedriva verksamhet i Emmaboda kommun
+  - Ansökan ska beskriva föreningens verksamhet, ändamålet med stödet och det belopp som söks
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska lämnas för prövningen
+  - Kommunen ska få granska bokföring, verifikationer och protokoll
+  belopp: Individuellt prövat vid varje ansökningstillfälle; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag för denna stödform
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-driftbidrag-enligt-avtal
+  namn: Driftbidrag till lokalägande föreningar enligt avtal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  malgrupp: Lokalägande föreningar som har ett särskilt driftavtal med Emmaboda kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska äga eller ansvara för en lokal eller anläggning av kommunalt intresse
+  - Ett gällande avtal med kommunen ska reglera driftuppdraget och stödet
+  - Föreningen ska fullgöra skötsel, tillgänglighet och övriga åtaganden enligt avtalet
+  - Årlig verksamhets- och ekonomiredovisning ska lämnas enligt avtalets villkor
+  belopp: Individuellt belopp enligt avtal; 2026 års beslut redovisar separata driftbidrag till fyra föreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen öppen sista ansökningsdag; stödet regleras i befintliga avtal
+  kalla_url: *beslut2026
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Emmaboda Idrottssällskap, Emmaboda Verda OK, Eriksmåla Ridklubb och Vissefjärda Samhällsförening fick driftbidrag 2026
+  kraver_registrering: false
+  sate_i_kommunen: true
 - id: emmaboda-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för anläggningsinvesteringar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar verksamma i Emmaboda som investerar i en lokal, anläggning, maskin eller inventarie
   deadlines:
     typ: fasta
-    datum:
-    - 09-01
+    datum: ['04-01']
   krav:
-  - Investeringsprojekt med kostnadsförslag
-  - Gäller större ny-, till- eller ombyggnad av anläggning samt inköp av större maskiner för skötsel av anläggningen
-  - Organisationen är skyldig att utnyttja statliga bidragsmöjligheter; sådana bidrag räknas av innan det kommunala bidraget
-    beräknas
-  belopp: Cirka 50 % av redovisade nettokostnader för större ny-, till- eller ombyggnad av anläggning samt inköp av större
-    maskiner för anläggningens skötsel, efter särskild prövning och i mån av kommunfullmäktiges anslagna medel
-  sen_ansokan: Ej möjlig efter 1 september
-  kalla_url: https://www.emmaboda.se/uppleva--gora/gora/kultur/bidrag--stod/foreningsbidrag.html
+  - Investeringen ska avse ny-, till- eller ombyggnad av anläggning eller lokal eller inköp av maskin eller inventarie för föreningens verksamhet
+  - Inventarien eller anläggningen ska ha längre livslängd än tre år och ett anskaffningsvärde på minst 1 000 kr
+  - Ansökan ska lämnas och beslut inväntas innan projektet eller inköpet påbörjas
+  - Ansökan ska innehålla behovsbeskrivning samt ekonomisk analys av kostnader och finansiering
+  - Möjliga statliga och andra externa bidrag ska sökas och redovisas
+  - Beviljat stöd ska redovisas med verifikat före årsskiftet, annars kan kommunen återkräva pengarna
+  belopp: Högst 50 % av godkänd investering och högst 30 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: Budgeten beslutas årligen av teknik- och fritidsnämnden; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska vara inne senast 1 april och åtgärden får inte vara påbörjad
+  kalla_url: https://www.emmaboda.se/uppleva--gora/foreningar-och-foreningsliv/bidrag-stod--och-stipendier/investeringsbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Deadline korrigerad från 1 april till 1 september enligt kommunens bidragsnormer (PDF, teknik- och fritidsnämnden
-    avsnitt 10) samt foreningsbidrag.html.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Energisparåtgärder och tillgänglighetsanpassningar prioriteras
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-bygdepeng
+  namn: Bygdepeng
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar verksamma i Emmaboda som utvecklar eller underhåller en föreningsdriven anläggning eller lokal
+  deadlines:
+    typ: fasta
+    datum: ['04-01']
+  krav:
+  - Projektet ska avse ny-, till- eller ombyggnad av föreningsdriven anläggning, lokalreparation eller energisparåtgärd
+  - Föreningen ska själv bidra med minst en tredjedel genom eget arbete eller egen finansiering
+  - Ideellt arbete får värderas till 200 kr per beräknad arbetstimme
+  - Ansökan ska lämnas och beslut inväntas innan projektet eller åtgärden påbörjas
+  - Ansökan ska innehålla behovsbeskrivning och en rimlig kostnads- och finansieringskalkyl
+  - Beviljat stöd ska redovisas med verifikat före årsskiftet, annars kan kommunen återkräva pengarna
+  belopp: Högst 30 000 kr per förening och projekt
+  belopp_avser: per_forening
+  kommunens_pott: Budgeten beslutas årligen av teknik- och fritidsnämnden; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska vara inne senast 1 april och projektet får inte vara påbörjat
+  kalla_url: https://www.emmaboda.se/uppleva--gora/foreningar-och-foreningsliv/bidrag-stod--och-stipendier/bygdepeng.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Energisparåtgärder och tillgänglighetsanpassningar prioriteras
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-utsmyckningsbidrag
+  namn: Utsmyckningsbidrag till samhällsföreningar
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Samhällsföreningar i Emmaboda kommun som utsmyckar sin ort
+  deadlines:
+    typ: fasta
+    datum: ['12-15']
+  krav:
+  - Sökanden ska vara en samhällsförening i Emmaboda kommun
+  - Ansökan ska avse kostnader för lokal utsmyckning och betalda kvitton ska bifogas
+  - Utsmyckningen får inte störa trafiken
+  - Blomsterlådor bör vara minst 50 centimeter höga och ha reflexer
+  - Emmaboda samhällsförening och Hela Lindås på fötter omfattas inte eftersom Teknisk service sköter deras utsmyckning
+  belopp: Högst 4 000 kr per samhällsförening mot kvitto
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan och kvitton ska vara tekniska kontoret tillhanda senast 15 december innevarande år
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/105/92
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-kulturverksamhetsbidrag
+  namn: Verksamhetsbidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Godkända kulturföreningar med kontinuerlig verksamhet i Emmaboda kommun
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Föreningen ska verka inom kulturområdet, ha antagit stadgar, valt styrelse och varit verksam minst sex månader
+  - Föreningen ska vara ansluten till en riksorganisation och verksamheten ska vara öppen för alla
+  - Minst tio träffar eller repetitioner ska ha genomförts under verksamhetsåret
+  - Verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse ska bifogas
+  - Stöd lämnas inte för motsvarande verksamhet som redan får stöd från en annan kommunal myndighet
+  belopp: Hembygdsförening 10 000 kr, musikkår 14 000 kr och skapande eller utövande kulturförening 5 500 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående verksamhetsår ska vara inne senast 1 maj; sen eller ofullständig ansökan behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/97/84
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: emmaboda-kulturarrangemangsbidrag
+  namn: Arrangemangsbidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Skapande, utövande eller arrangerande kulturföreningar i Emmaboda kommun
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Sökanden ska vara en godkänd kulturförening med stadgar, vald styrelse, minst sex månaders verksamhet och öppen verksamhet
+  - Ansökan ska redovisa genomförda arrangemang med datum, deltagare, publik och eventuella samarrangörer
+  - Verksamhetsberättelse, ekonomisk redogörelse, revisionsberättelse och arrangemangsredovisning ska bifogas
+  - En representant för kommunens kulturavdelning ska ha rätt till fri entré vid stödberättigade arrangemang
+  - Kommunen ska få granska föreningens bokföring, verifikationer och protokoll
+  belopp: Individuellt prövat per ansökan; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående verksamhetsår ska vara inne senast 1 maj; sen eller ofullständig ansökan behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/97/84
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: emmaboda-kulturlokalbidrag
+  namn: Lokalbidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar som hyr en extern lokal för sin verksamhet
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Sökanden ska vara en godkänd kulturförening som inte själv äger lokalen
+  - Lokalen och kostnaden ska godkännas av bildningsnämnden i förväg
+  - Kommunägda lokaler ska hyras i första hand
+  - Verksamhetsberättelse, ekonomisk redogörelse, revisionsberättelse och verifikationer ska bifogas
+  - Stödet får inte avse kostnader som redan finansieras av en annan kommunal myndighet
+  belopp: 50 % av godkända kostnader för kallhyra, uppvärmning, el, vatten, renhållning och försäkring
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående verksamhetsår ska vara inne senast 1 maj; sen eller ofullständig ansökan behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/97/84
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: emmaboda-kulturaktivitetsbidrag
+  namn: Aktivitetsbidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, ungdom]
+  malgrupp: Godkända kulturföreningar med medlemsaktiviteter för barn och unga 5–20 år
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Deltagarna ska vara medlemmar i åldern 5–20 år
+  - Minst fem personer ska vara närvarande vid varje stödgrundande aktivitet
+  - Samma deltagare får räknas vid högst en sammankomst per dag
+  - Arrangemang är inte stödgrundande som medlemsaktivitet
+  - Aktivitetskort ska bifogas årsansökan tillsammans med verksamhets- och ekonomihandlingar
+  belopp: 10 kr per godkänd medlemsaktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående verksamhetsår ska vara inne senast 1 maj; sen eller ofullständig ansökan behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/overview/98
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: emmaboda-lovaktivitetsbidrag-kultur
+  namn: Bidrag till kulturaktiviteter under skollov
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som arrangerar kulturaktiviteter för barn och unga under skollov i Emmaboda kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en förening eller kommunal verksamhet som arrangerar en aktivitet för barn eller unga
+  - Aktiviteten ska syfta till att väcka och stärka barns och ungdomars kulturintresse
+  - Aktiviteter som genomförs under skollov prioriteras
+  - Ansökan ska tydligt beskriva aktivitetens omfattning, målgrupp och kostnader
+  - Ansökan ska undertecknas av behöriga företrädare och beviljat stöd ska kunna granskas
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Bildningsnämnden avsätter årligen medel för särskilda barn- och ungdomssatsningar; totalsumman publiceras inte
+  sen_ansokan: Anslaget kan sökas under hela året; kommunen samordnar lovprogram inför varje lovperiod
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunens aktuella lovsida samordnar föreningarnas aktiviteter cirka en månad före respektive lov
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-halsa-och-kultur
+  namn: Bidrag Hälsa och kultur
+  status: aktiv
+  kategori: [kultur, social]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som arrangerar professionella kulturinslag för personer som får stöd av socialförvaltningen
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en förening eller kommunal verksamhet
+  - Insatsen ska vara ett professionellt kulturarrangemang för personer som socialförvaltningen stödjer
+  - Arrangemang med regionala kulturinstitutioner prioriteras
+  - Arrangemanget ska företrädesvis ske på kommunens träffpunkter eller allaktivitetshus och stärka välbefinnande, hälsa och känsla av sammanhang
+  - Ansökan ska redovisa verksamhetens omfattning och kostnader och undertecknas av behöriga företrädare
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Bildningsnämnden avsätter årligen medel för Hälsa och kultur; totalsumman publiceras inte
+  sen_ansokan: Anslaget kan sökas under hela året
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: emmaboda-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med studiecirkelverksamhet i Emmaboda kommun
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Studieförbundet ska vara verksamt i Emmaboda och få statligt stöd enligt Folkbildningsrådets grunder
+  - Minst två deltagare per studiecirkel ska vara folkbokförda i Emmaboda kommun
+  - Ansökan ska redovisa studietimmar för cirklar med tre till fyra respektive minst fem deltagare inklusive cirkelledaren
+  - Kulturtimmar får inte räknas som studietimmar
+  - Verksamhetsberättelse, lokal kvalitetsredovisning, ekonomisk redogörelse och revisionsberättelse ska bifogas
+  - Studieförbundet ska kunna visa deltagarlistor, studieplaner och godkänt studiematerial vid granskning
+  belopp: Årligt fastställt belopp per studietimme; cirklar med tre till fyra deltagare inklusive ledaren får 50 % av timbeloppet och cirklar med minst fem får fullt timbelopp
+  belopp_avser: per_forening
+  kommunens_pott: Timnivån bestäms efter bildningsnämndens årliga budget; totalsumman publiceras inte
+  sen_ansokan: Ansökan för föregående verksamhetsår ska vara inne senast 1 maj; sen eller ofullständig ansökan behandlas inte
+  kalla_url: https://minasidor.emmaboda.se/oversikt/getflowform/104/91
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: false
 forutsattningar:
-- id: emmaboda-mina-sidor
-  vad: Digital ansökan via Mina sidor
-  beskrivning: Ansökningsformulär finns tillgängliga via Mina sidor e-tjänstportal. Utbetalning sker året efter genomförd
-    verksamhet.
-  system: Mina sidor
+- id: emmaboda-allmanna-villkor
+  vad: Allmänna villkor för stödberättigad förening
+  beskrivning: Föreningen ska vara lokalt verksam, ha antagit stadgar, valt styrelse och normalt ha varit verksam i minst sex månader samt vara ansluten till en statsbidragsberättigad riksorganisation. Verksamheten ska vara öppen och stöd lämnas inte dubbelt för samma verksamhet från flera kommunala organ.
+  system: Emmaboda kommun
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Prövas i samband med respektive bidragsansökan
   giltighet: null
   ordning: 1
-  kalla_url: https://minasidor.emmaboda.se/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: emmaboda-arshandlingar
+  vad: Årlig verksamhets- och ekonomiredovisning
+  beskrivning: Ansökan ska undertecknas av behöriga företrädare och innehålla verksamhetsberättelse, ekonomisk redogörelse och revisionsberättelse. Om årsmötet ligger efter sista ansökningsdagen ska ansökan lämnas i tid och återstående handlingar skickas snarast efter årsmötet. Kommunen får granska bokföring, verifikationer och protokoll.
+  system: Mina sidor, blankett eller e-post
+  ledtid: null
+  ledtid_text: Lämnas med årsansökan eller snarast efter årsmötet
+  giltighet: null
+  ordning: 2
+  kalla_url: https://www.emmaboda.se/uppleva--gora/nyheter-for-uppleva-och-gora/nyheter-for-uppleva-och-gora/2026-02-18-ansok-om-bidrag-hos-teknik--och-fritidsnamnden.html
+  giltighet_status: ingen_regel
+- id: emmaboda-utbetalning-och-kontroll
+  vad: Utbetalningskonto, redovisning och återkrav
+  beskrivning: Bidrag betalas till föreningens bank- eller plusgiro. Sökanden ska lämna korrekta uppgifter, använda stödet för beviljat ändamål och ge kommunen insyn; ofullständig eller sen ansökan kan avvisas och felaktigt eller oredovisat stöd kan återkrävas.
+  system: Mina sidor, blankett eller e-post
+  ledtid: null
+  ledtid_text: Bidragen betalas normalt ut året efter genomfört verksamhetsår
+  giltighet: null
+  ordning: 3
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+kommunsiffra: null
