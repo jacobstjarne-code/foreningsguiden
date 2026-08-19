@@ -2,194 +2,429 @@ kommun: Mellerud
 kommun_slug: mellerud
 lan: Västra Götalands län
 befolkning: 9049
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kommunstyrelseförvaltningen, Socialförvaltningen, Samhällsbyggnadsförvaltningen samt Kultur- och utbildningsnämnden
 ansokningssystem:
-  namn: Melleruds e-tjänster
-  url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/
-kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/
-verifierad: '2026-07-31'
+  namn: Melleruds e-tjänster och särskilda avtal
+  url: https://etjanst.mellerud.se/MenuGroup2.aspx?groupId=1157
+kalla_url: &huvud https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://mellerud.se/media/o05hn2kv/riktlinjer-for-foreningsstod-i-melleruds-kommun-2025-10-08.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Stöd till barn- och ungdomsverksamhet
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med barn- och ungdomsverksamhet
+- id: mellerud-kommunalt-lokalt-aktivitetsstod
+  namn: Kommunalt lokalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som arrangerar aktiviteter för barn och unga 6–25 år eller för personer med funktionsnedsättning utan övre åldersgräns
   deadlines:
-    typ: okand
+    typ: fasta
+    datum: ['02-25', '08-25']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor om ideell organisationsform, organisationsnummer, föreningskonto, öppenhet, stadgar, styrelse, revisorer, lokalt säte och verksamhet, medlemsantal, sammankomster och registrering i föreningsregistret
+  - En sammankomst ska vara planerad, ledarledd och pågå i minst 45 minuter med gemensam samling och avslutning samt omfatta minst tre bidragsberättigade deltagare utöver ledaren
+  - Ledaren ska fylla minst 13 år under kalenderåret; samma deltagare får räknas högst en gång per dag och lokalavdelning
+  - Entrébelagda eller kommersiella arrangemang, studiecirklar och SISU-timmar, fester, högtidsfiranden, publika arrangemang, schemalagd skolverksamhet samt studier i trosuppfattning eller politisk ideologi ger inte stöd
+  - Närvarounderlaget ska ange aktivitet, datum, deltagarnas namn, kön och födelsedatum, kunna knytas till ansökan och sparas i minst fyra år
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Det årligt budgeterade aktivitetsstödet fördelas mellan alla sökande föreningar; totalsumman publiceras inte
+  sen_ansokan: Perioden januari–juni söks senast 25 augusti och perioden juli–december senast 25 februari; en för sen ansökan behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-bidrag-for-oppen-verksamhet-barn-unga
+  namn: Bidrag för öppen verksamhet för barn- och ungdomsföreningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som erbjuder öppen fritids- eller kulturverksamhet för barn och unga 7–25 år
+  deadlines:
+    typ: fasta
+    datum: ['02-25', '08-25']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor och verksamheten ska rikta sig till barn och unga 7–25 år
+  - Verksamheten ska vara kostnadsfri, av drop-in-karaktär och ske utanför skoltid utan krav på föranmälan, medlemskap eller kontinuerlig närvaro
+  - Aktiviteten ska vara ledarledd och ansvarig ledare ska vara utsedd av föreningen
+  - Stöd lämnas inte för föreningens ordinarie medlemsverksamhet eller för aktiviteter som kan få kommunalt aktivitetsstöd
+  - Närvaro med antal aktiva deltagare och kön ska dokumenteras vid varje aktivitet, signeras av ansvarig ledare och kunna visas för kommunen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Det årligt budgeterade stödet för öppen verksamhet fördelas mellan alla sökande föreningar; totalsumman publiceras inte
+  sen_ansokan: Perioden januari–juni söks senast 25 augusti och perioden juli–december senast 25 februari; en för sen ansökan behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-bidrag-till-fotbollsanlaggning
+  namn: Bidrag till fotbollsanläggning
+  status: aktiv
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Fotbollsföreningar som sköter en anläggning och huvudsakligen bedriver barn- och ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor och själv sköta den fotbollsanläggning som stödet avser
+  - Föreningen ska huvudsakligen bedriva verksamhet för barn och unga
+  - Minst 20 bidragsberättigade aktiviteter med kommunalt aktivitetsstöd ska genomföras per år
+  - Föreningen och Samhällsbyggnadsförvaltningen ska träffa en överenskommelse och teckna ett särskilt skriftligt avtal om anläggningsbidraget
+  - Anläggningens delar poängsätts enligt kommunens modell och poängvärdet justeras årligen inom beslutad budget
+  belopp: Individuellt anläggningsbidrag enligt en kommunal poängmodell; poängvärdet budgetjusteras årligen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-bidrag-till-foreningsagda-eller-forhyrda-anlaggningar
+  namn: Bidrag till föreningsägda eller förhyrda anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med kontinuerlig barn- och ungdomsverksamhet i en egen eller externt hyrd lokal eller anläggning
+  deadlines:
+    typ: fasta
+    datum: ['03-15']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor och lokalen eller anläggningen ska behövas för bidragsberättigad verksamhet för barn och unga
+  - Lokalen får inte omfattas av kommunens subventionerade hyrestaxor
+  - Föreningen ska föregående år ha genomfört minst 20 bidragsberättigade aktiviteter och fått aktivitetsbidrag; nyligen godkända föreningar är undantagna
+  - Bokningsbara tider ska i möjligaste mån göras tillgängliga för andra ideella föreningar i Mellerud och endast de delar som används i verksamheten får räknas
+  - Hyra eller arrende, ränta, värme och el, renhållning, sotning, vatten och avlopp samt fastighetsförsäkring ska styrkas; andra fastighetsbidrag och verksamhetens ungdomsandel påverkar beräkningen
+  - Aktuellt hyreskontrakt eller lagfart ska lämnas vid årets första ansökan och ett nytt kontrakt ska lämnas om villkoren ändras
+  belopp: Mellan 50 och 75 procent av bidragsgrundande lokalkostnad, efter individuell bedömning av kostnader, andra stöd och barn- och ungdomsverksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas via kommunens e-tjänst senast 15 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-bidrag-till-spontanidrottsplats-eller-motionsspar
+  namn: Bidrag till spontanidrottsplats eller motionsspår
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, annat]
+  malgrupp: Föreningar som erbjuder kommuninvånarna ett motionsspår, utegym eller annan spontanidrottsplats
+  deadlines:
+    typ: fasta
+    datum: ['09-30']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  - Anläggningen ska ge kommuninvånarna tillgång till exempelvis löparspår, skidspår, utegym eller annan spontanidrott
+  - Anläggningen ska vara öppen för alla och avgiftsfri
+  - Anläggningen ska vara väl uppskyltad och ha ordnad parkering
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Det årligt budgeterade stödet fördelas mellan alla sökande föreningar; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas via kommunens e-tjänst senast 30 september
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-aktivitetsstod-65-plus
+  namn: Aktivitetsstöd för personer 65+
+  status: aktiv
+  kategori: [social, pensionar, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som arrangerar aktiviteter för personer som är 65 år eller äldre
+  deadlines:
+    typ: fasta
+    datum: ['02-25', '08-25']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor och aktiviteten ska rikta sig till personer som är minst 65 år
+  - En sammankomst ska vara planerad, pågå minst 60 minuter och omfatta minst tre bidragsberättigade deltagare utöver ledaren
+  - En ledare som räknas som deltagare ska fylla minst 65 år under kalenderåret; samma grupp och deltagare får räknas högst en gång per dag
+  - Aktiviteten ska arrangeras i den sökande föreningens regi och får inte vara kommersiell, entrébelagd, studiecirkel, fest, högtidsfirande, publikt arrangemang eller studie i religion eller politisk ideologi
+  - Närvaro med aktivitet, datum, namn och födelsedatum ska dokumenteras, knytas till ansökan och sparas i minst fyra år
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Det årligt budgeterade aktivitetsstödet för 65+ fördelas mellan alla sökande föreningar; totalsumman publiceras inte
+  sen_ansokan: Perioden januari–juni söks senast 25 augusti och perioden juli–december senast 25 februari; en för sen ansökan berättigar inte till bidrag
+  kalla_url: https://etjanst.mellerud.se/KSF_33
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-foreningsbidrag-inom-socialnamndens-verksamhetsomrade
+  namn: Föreningsbidrag inom socialnämndens verksamhetsområde
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsorganisationer, funktionsrättsföreningar och anhörigföreningar med verksamhet och medlemsbas i Mellerud
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Sökanden ska vara en pensionärsorganisation, förening inom funktionsrättsrörelsen eller anhörigförening; en pensionärsorganisation ska rikta verksamheten till pensionärer eller ha minst två tredjedelar pensionärer bland de bidragsberättigade medlemmarna
+  - Föreningen ska ha verksamhet och en bas av medlemmar i Melleruds kommun även om det geografiska verksamhetsområdet är större
+  - Bedömningen skiljer mellan helt lokala föreningar, föreningar som stöder kommuninvånare men har begränsad lokal verksamhet och lokala sammanslutningar vars grundföreningar får eget stöd
+  - Ansökan ska innehålla årsmötesprotokoll, föregående års verksamhetsberättelse, bokslut och revisionsberättelse, registrerat plus- eller bankgiro samt underskrift av firmatecknare
+  - Föreningens planerade verksamhet väger särskilt tungt vid bedömningen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 25 000 kr för 2026, fördelat mellan godkända ansökningar
+  sen_ansokan: Ansökan ska vara socialnämnden tillhanda senast 31 mars för utbetalning samma år
+  kalla_url: https://mellerud.se/media/1eml2bv4/kallelse-sn-2026-04-28.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: mellerud-microbidrag
+  namn: Microbidrag
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärs-, funktionsrätts- och anhörigföreningar som ordnar en avgränsad aktivitet, själva eller tillsammans
+  deadlines:
+    typ: lopande
     datum: []
   krav:
-  - 'Bidrag till lokaler: föreningen ska ha genomfört minst 20 bidragsberättigade aktiviteter föregående år'
-  - 'Bidrag till lokaler: bokningsbara tider i anläggningen ska, i den mån det är möjligt, vara tillgängliga för andra ideella
-    föreningar'
-  - 'Bidrag till lokaler: ansökan lämnas senast 15 mars via kommunens e-tjänst tillsammans med aktuellt hyreskontrakt'
-  - 'Bidrag för öppen verksamhet: verksamheten ska rikta sig till barn och unga 7–25 år utan medlemskapskrav eller anmälningsplikt'
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: mellerud-stod-till-barn--och-ungdomsverksamhet
-- namn: Bidrag till kulturverksamma
-  kategori:
-  - kultur
-  malgrupp: Enskilda, grupper och föreningar som genomför kulturaktiviteter i Mellerud
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav:
-  - Aktiviteten ska ha ett kulturellt syfte och bedrivas som en ideell insats, inte i spekulativt syfte
-  - Aktiviteten ska vara förlagd till Melleruds kommun eller på annat sätt komma kommunens invånare till del
-  - Aktiviteten får inte stödja antidemokratiska eller rasistiska syften
-  - Mottagaren ska redovisa hur bidraget använts
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/kulturverksamhet/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Engångsstöd så länge årets medel räcker.
-  id: mellerud-bidrag-till-kulturverksamma
-- namn: Föreningsbidrag inom socialnämndens verksamhetsområde
-  kategori:
-  - pensionar
-  - funktionsratt
-  - social
-  malgrupp: Pensionärs-, funktionsrätts- och anhörigföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav:
-  - Föreningen ska ha verksamhet och medlemsbas i Melleruds kommun
-  - Ansökan skickas till socialnamnd@mellerud.se eller till Socialnämnden, Melleruds kommun, Box 64, 464 80 Mellerud, ankomststämplad
-    senast 31 mars
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/pensionarsverksamhet-och-verksamhet-for-personer-med-funktionsnedsattningar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: ''
-  id: mellerud-foreningsbidrag-inom-socialnamndens-verksamhetsomrade
-- namn: Microbidrag
-  kategori:
-  - pensionar
-  - funktionsratt
-  - social
-  - ovrig
-  malgrupp: En eller flera föreningar som genomför en gemensam aktivitet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Aktiviteten ska genomföras under samlad tid eller vid ett tillfälle
-  - Aktiviteten ska höra till socialnämndens verksamhetsområden och stödja nämndens målsättningar
+  - Värdföreningen ska vara en pensionärsorganisation, funktionsrättsförening eller anhörigförening; andra föreningar får delta som medarrangörer men inte vara värdförening
+  - Aktiviteten ska genomföras under en tidsbegränsad period med viss regelbundenhet eller vid ett enskilt tillfälle
+  - Aktiviteten ska höra till socialnämndens verksamhetsområde och stödja nämndens mål
+  - Ansökan ska ange deltagande föreningar och värdförening, vad, när och hur aktiviteten genomförs, målgrupp och förväntat deltagarantal
+  - Registrerat plus- eller bankgiro och underskrift av utsedd firmatecknare ska finnas
   belopp: Upp till 3 000 kr per aktivitet
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/pensionarsverksamhet-och-verksamhet-for-personer-med-funktionsnedsattningar/
-  belopp_status: olast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas när som helst under året
+  kalla_url: https://mellerud.se/media/eizbiwjm/riktlinje-f%C3%B6r-socialn%C3%A4mndens-bidrag-till-f%C3%B6reningar.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: ''
-  id: mellerud-microbidrag
-- namn: Bidrag till samlingslokalhållande föreningar
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som håller allmänna samlingslokaler
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: mellerud-lonebidrag-till-foreningar
+  namn: Bidrag till föreningar för anställning med lönebidrag
+  status: aktiv
+  kategori: [social, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som anställer en person med funktionsnedsättning eller ohälsa med lönebidrag från Arbetsförmedlingen
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  - Arbetstagaren ska ha en dokumenterad anställning i föreningen med lönebidrag från Arbetsförmedlingen och vara folkbokförd i Melleruds kommun
+  - Samma förening får stöd för högst fyra samtidiga anställningar
+  - Ansökan ska innehålla föreningens anställningsavtal, Arbetsförmedlingens beslut och underskrift av utsedd firmatecknare
+  - Beslutet gäller högst tolv månader inom ett kalenderår och inte retroaktivt; månadsrekvisition med lönebesked och Arbetsförmedlingens avisering lämnas senast den 15:e följande månad
+  belopp: Högst 8 procent av lönekostnaden upp till en bruttolön på 20 000 kr per månad vid heltid; den faktiska procentsatsen beror på budget och antal sökande
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas när som helst under året; stödet beviljas inte retroaktivt
+  kalla_url: https://etjanst.mellerud.se/SF_29
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-driftbidrag-bygdegardar-samlingslokaler
+  namn: Driftbidrag till bygdegårdar och allmänna samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella organisationer som äger och allsidigt upplåter en allmän samlingslokal
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Föreningen ska uppfylla kommunens definition av annan samlingslokal och de allmänna reglerna för bidragsgivning
-  - Driftbidraget får endast användas till driftkostnader (el, vatten, försäkring, uppvärmning)
-  - Ansökan ska innehålla redovisning över driftskostnader och driftsintäkter, verksamhetsberättelse, ekonomisk redovisning,
-    revisionsberättelse samt specifikation över hur lokalen nyttjats föregående kalenderår
+  - Lokalen ska ägas av en ideell organisation, användas allsidigt och vara öppen och lättillgänglig för föreningsmöten, studier, kultur, förströelse, fritid, fester, högtider eller liknande verksamhet
+  - Lokalen ska vara öppen för alla i rimlig omfattning på skäliga villkor och kunna användas som trygghets- eller informationspunkt efter samråd med kommunen
+  - Endast el, vatten, försäkring och uppvärmning är bidragsgrundande driftkostnader; hyres- och ränteintäkter samt andra fastighetsbidrag räknas som driftintäkter
+  - Ansökan ska innehålla driftkostnader och driftintäkter, verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och specifikation av föregående års lokalnyttjande
+  - En ny samlingslokal ska godkännas av kommunstyrelsen innan driftbidrag kan lämnas
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/samlingslokalhallandeforeningar/
-  belopp_status: okand
-  deadline_status: olast
+  belopp_avser: ren_pott
+  kommunens_pott: Det årligt budgeterade driftstödet fördelas utifrån lokalens kostnader, hyresintäkter och antal aktiviteter; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 30 april; en ofullständig eller sen ansökan behandlas inte det året
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: ''
-  id: mellerud-bidrag-till-samlingslokalhallande-foreningar
-- namn: Kommunalt investeringsbidrag – bygdepeng
-  kategori:
-  - ovrig
-  malgrupp: Lokala föreningar registrerade hos kommunstyrelsen
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-subventionerade-kommunala-lokaler
+  namn: Subventionerade kommunala lokaler
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som använder kommunala lokaler för medlemsverksamhet
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Sökande ska vara en lokal förening registrerad hos kommunstyrelsen. Företag och privatpersoner är inte behöriga att söka.
-  - Bidraget kan sökas för materialkostnader vid nybyggnation, tillbyggnation eller ombyggnation av egna, hyrda eller långsiktigt
-    förhyrda lokaler, större renoveringar/underhåll, skapande av mötesplatser (särskilt för unga), tillgänglighetsanpassningar,
-    energieffektivisering/miljöförbättringar samt utrustning med minst fem års livslängd
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/ovrigt/
-  belopp_status: okand
-  deadline_status: okand
+  - Föreningen ska uppfylla kommunens allmänna bestämmelser för bidragsgivning
+  - Lokalen ska användas för den sorts verksamhet som den är avsedd för
+  - Kommunens principer för tidfördelning och aktuella uthyrningsvillkor ska följas
+  - Lokalen kan bokas för enstaka tillfällen eller för en hel säsong
+  belopp: Reducerad hyra under kommunens självkostnad enligt gällande föreningstaxa och lokalvillkor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för hyressubventionen
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: mellerud-kommunalt-investeringsbidrag---bygdepeng
-- namn: Bidrag till spontanidrottsplats eller motionsspår
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som erbjuder avgiftsfria motionsspår eller spontanidrottsytor
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-kommunalt-investeringsbidrag-bygdepeng
+  namn: Kommunalt investeringsbidrag – bygdepeng
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Lokala föreningar registrerade hos kommunstyrelsen som investerar i lokaler, anläggningar eller varaktig utrustning
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
-  krav: []
+    datum: ['09-30']
+  krav:
+  - Sökanden ska vara en lokal förening registrerad hos kommunstyrelsen; företag och privatpersoner är inte behöriga
+  - Investeringen ska vara nödvändig för verksamheten och avse material till ny-, till- eller ombyggnad, ett särskilt stort renoveringsbehov, mötesplats, tillgänglighet, energi- eller miljöåtgärd eller varaktig utrustning
+  - Föreningen ska ha god medfinansiering i pengar eller ideell tid, redovisa andra sökta stöd och normalt invänta beslut innan arbetet börjar
+  - Föreningen ska äga, arrendera eller långtidshyra objektet; fastighetsägaren ska godkänna byggnationen om föreningen inte äger det
+  - Ansökan ska innehålla syfte, kostnadsberäkning med särredovisat arbete och material, beskrivning eller ritning, tre kostnadsförslag, verksamhetsberättelse, ekonomi, revision och behöriga underskrifter
+  - Användning och effekt ska redovisas med fakturor eller kvitton senast ett år efter utbetalningen; outnyttjade eller felanvända medel återkrävs
+  belopp: Individuellt prövat investeringsbidrag inom årlig budget och efter avräkning av annan finansiering; ingen generell maxnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 maj–30 september; stödet kan sökas en gång per år
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: mellerud-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund som bedriver verksamhet i Mellerud och vars centralorganisation är statsbidragsgodkänd av Folkbildningsrådet
+  deadlines:
+    typ: fasta
+    datum: ['04-30']
+  krav:
+  - Studieförbundet ska vara verksamt i Mellerud och dess centralorganisation ska vara godkänd för statsbidrag av Folkbildningsrådet
+  - Uppdragsutbildning och verksamhet som får kommunalt aktivitetsstöd eller motsvarande stöd är inte bidragsgrundande
+  - Ansökan ska innehålla ekonomisk redovisning, verksamhets- och revisionsberättelse för senast avslutat verksamhetsår samt verksamhetsplan och riktlinjer för kommande år
+  - Ett studieförbund med verksamhet i flera kommuner ska särredovisa verksamhet och ekonomi för Mellerud
+  - Bidragsmottagaren ska på kommunens begäran ställa räkenskaper och redovisningshandlingar till förfogande
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/ovrigt/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: ''
-  id: mellerud-bidrag-till-spontanidrottsplats-eller-motionsspar
-- namn: Stöd genom särskilda avtal
-  kategori:
-  - ovrig
-  malgrupp: Föreningar och organisationer med särskild överenskommelse med kommunen
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas enligt Västra Götalandsregionens Bildningsförbunds verktyg; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas via kommunens e-tjänst senast 30 april och utbetalning sker under maj
+  kalla_url: https://etjanst.mellerud.se/KSF_48
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: mellerud-stod-genom-sarskilda-avtal
+  namn: Stöd genom särskilda avtal
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar och organisationer som utför en särskild insats åt kommunen enligt avtal eller överenskommelse
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/ovrigt/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: mellerud-stod-genom-sarskilda-avtal
+  krav:
+  - Sökanden ska vara en förening eller organisation och uppfylla tillämpliga allmänna bidragsvillkor
+  - Stödet ska avse ett särskilt fall som regleras genom avtal eller överenskommelse med kommunen
+  - Avtalet ska utformas efter de lokala förutsättningarna
+  - Avtalet ska tydligt beskriva föreningens eller organisationens insats och vilket stöd kommunen lämnar för genomförandet
+  belopp: Stödets form och storlek fastställs i det individuella avtalet eller överenskommelsen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen öppen ansökningsfrist; villkoren regleras i respektive avtal
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 forutsattningar:
-- id: mellerud-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Melleruds e-tjänster
-  ledtid: null
-  ledtid_text: null
+- id: mellerud-registrering-och-grundvillkor
+  vad: Registrering och grundläggande bidragsbehörighet
+  beskrivning: Föreningen ska vara registrerad hos Skatteverket som ideell förening och i kommunens föreningsregister, ha organisationsnummer och föreningskonto, vara öppen och demokratisk med stadgar, vald styrelse och revisorer, ha säte och kontinuerlig verksamhet i Mellerud sedan minst sex månader, minst tio aktiva medlemmar och minst fyra dokumenterade sammankomster per år. Socialnämnden kan göra lokala undantag för föreningar som stöder kommuninvånare.
+  system: Melleruds föreningsregister och e-tjänster
+  ledtid: 180
+  ledtid_text: Minst sex månaders verksamhet i kommunen krävs normalt före bidragsbehörighet; kommunen publicerar ingen förnyelsefrist för registreringen
   giltighet: null
   ordning: 1
-  kalla_url: https://mellerud.se/uppleva-och-gora/foreningar/foreningsliv/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: mellerud-ansokan-och-kontroll
+  vad: Fullständig ansökan, föreningskonto och kommunal kontroll
+  beskrivning: Ansökan ska vara komplett och lämnas på anvisat sätt senast den publicerade fristen. För sena ansökningar behandlas inte och beviljat stöd betalas endast till konto kopplat till föreningens organisationsnummer. Medlemsmatrikel ska sparas i minst fyra år och kommunen får begära kompletterande underlag, hålla inne stöd och kräva återbetalning vid felaktiga uppgifter.
+  system: Melleruds e-tjänster
+  ledtid: null
+  ledtid_text: Tidsfrist och underlag varierar mellan stödformerna; kommunen publicerar ingen gemensam handläggningstid
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
