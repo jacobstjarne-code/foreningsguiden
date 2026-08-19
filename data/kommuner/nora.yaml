@@ -2,194 +2,290 @@ kommun: Nora
 kommun_slug: nora
 lan: Örebro län
 befolkning: 10554
-forvaltning: Kommunförvaltningen
+forvaltning: Kommunstyrelsen, kultur- och fritidsverksamheten samt socialtjänsten
 ansokningssystem:
-  namn: Rbok/e-tjänst
-  url: https://etjanster.nora.se/oversikt/overview/311
-kalla_url: https://etjanster.nora.se/oversikt/overview/311
-verifierad: '2026-08-01'
+  namn: Rbok och Nora kommuns e-tjänster
+  url: https://nora.rbok.se/ansok
+kalla_url: &huvud https://www.nora.se/upplevagora/foreningarochforeningsliv/bidragstodochstipendier/kommunalabidrag.4.539d1c491275e7d056480003962.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.nora.se/download/18.7a7c1e1a151abe0dc6ee4a/1452249831504/Bidragsregler%20f%C3%B6r%20kultur%20och%20fritid.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Kommunalt aktivitetsstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med aktiviteter för barn och unga
+- id: nora-kommunalt-aktivitetsstod
+  namn: Kommunalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar med regelbunden verksamhet för barn och unga
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+    datum: [02-25, 08-25]
   krav:
-  - Föreningen ska vara ansluten till bidragsberättigad riksorganisation
-  - 'Bidragsberättigad sammankomst: minst 5 deltagare i åldern 3–20 år, minst 60 minuter, högst en sammankomst per dag och
-    organisation'
-  - Endast lokala arrangemang och ej entrébelagda tävlingar; ej danser, basarer eller bingo
-  - Redovisning av genomförda sammankomster ska lämnas senast 25 februari respektive 25 augusti
+  - Föreningen ska vara lokalt verksam och ansluten till en bidragsberättigad riksorganisation
+  - Aktiviteten ska vara planerad av styrelse, sektion eller medlemsmöte och pågå minst 60 minuter
+  - Minst fem deltagare 3–20 år ska delta; ledare i åldersgruppen får räknas och samma person får bara räknas en gång per dag och förening
+  - Endast lokala aktiviteter och tävlingar utan entré berättigar till stöd; dans, basar, bingo, studiecirklar och distrikts- eller riksarrangemang utesluts
+  - Närvarokort ska undertecknas av ledaren och sparas i minst fyra år
   belopp: 25 kronor per bidragsberättigad sammankomst
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  belopp_status: olast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Höstens aktiviteter redovisas senast 25 februari och vårens senast 25 augusti; sena ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
-  id: nora-kommunalt-aktivitetsstod
-- namn: Bidrag för ungdomsledarutbildning
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som utbildar ungdomsledare
+  krav_fullstandiga: true
+  anteckning: E-tjänsten beskriver 2026 deltagare 3–25 år, medan den ännu gällande bidragsregeln till och med 2026 anger 3–20 år.
+  senast_verifierad: '2026-08-19'
+- id: nora-driftsbidrag
+  namn: Driftsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som äger eller långsiktigt disponerar en lokal eller anläggning
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Max tre ledarutbildningsbidrag per förening och år
-  - Resekostnad ersätts enligt billigaste färdsätt (tåg 2:a klass eller bil enligt Skatteverkets normer); samåkning ska ske
-  belopp: Högst 80 % av kurskostnaderna och högst 80 % av resekostnaderna inom Norden, totalt max 1 500 kronor; högst tre
-    bidrag per förening och år
-  sen_ansokan: Ansökan om bidrag ska lämnas in till nämnden senast två veckor innan utbildningen påbörjas.
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  belopp_status: olast
-  deadline_status: okand
+  - Föreningen ska äga anläggningen eller ha ett långsiktigt nyttjanderättsavtal och svara för driften
+  - Anläggningen ska ligga i Nora kommun, användas regelbundet för föreningens huvudsakliga verksamhet och vara tillgänglig för föreningar och kommuninvånare
+  - Föreningen ska bedriva barn- och ungdomsverksamhet och uppfylla kommunens allmänna bidragsvillkor
+  - Ansökan ska avse kommande drift och får inte lämnas retroaktivt om det inte följer av ett särskilt avtal
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas efter anläggningens drift och föreningens verksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet söks årligen, men kommunen publicerar inget gemensamt sista ansökningsdatum.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ansök senast två veckor före utbildningen. Ej angivet i källan
-  id: nora-bidrag-for-ungdomsledarutbildning
-- namn: Bidrag för kultur- och fritidsverksamhet
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Kultur- och fritidsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-28
-  krav:
-  - Söks av förening som arrangerar evenemang som bidrar till ett brett utbud av kultur- och fritidsaktiviteter i Nora kommun
-  - 'Prioriteringsordning: 1) eget utövande/delaktighet för och med barn och unga, 2) arrangemang inriktade på barn och unga,
-    3) eget utövande i huvudsak för vuxna, 4) arrangemang i huvudsak för vuxna'
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-  id: nora-bidrag-for-kultur-och-fritidsverksamhet
-- namn: Bidrag för omsorg, äldre och socialt område
-  kategori:
-  - social
-  - pensionar
-  - funktionsratt
-  malgrupp: Föreningar som kompletterar socialtjänstens område
+  senast_verifierad: '2026-08-19'
+- id: nora-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som utvecklar kultur- och fritidsverksamheten och når nya grupper
   deadlines:
-    typ: fasta
-    datum:
-    - 02-28
-  krav:
-  - Riktar sig till föreningar för personer med funktionsnedsättning och äldre samt verksamhet inom socialtjänstens område
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
-  id: nora-bidrag-for-omsorg-aldre-och-socialt-omrade
-- namn: Bidrag till lovaktivitet
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som ordnar lovaktivitet för barn
-  deadlines:
-    typ: okand
+    typ: lopande
     datum: []
   krav:
-  - Anordnande av aktivitet för barn under skollov
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  belopp_status: okand
-  deadline_status: okand
+  - Insatsen ska utveckla eller bredda kultur- och fritidsverksamheten och ligga utanför föreningens ordinarie verksamhet
+  - Barn och unga, jämställdhet, personer med funktionsnedsättning, integration och folkhälsa är prioriterade områden
+  - Projekt med extern medfinansiering prioriteras och ansökan ska beskriva ändamål, målgrupp, genomförande och ekonomi
+  - Genomförande och ekonomi ska redovisas inom en månad efter avslutat projekt eller vid den tid kommunen beslutar
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande och ska göras innan projektet genomförs.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunens lovsida för 2026 anger att ansökan om lovbidrag ska lämnas tre veckor före respektive lov; e-tjänstens
-    översikt anger två veckor. Kontrollera aktuell frist i Rbok vid ansökan. Ej angivet i källan
-  id: nora-bidrag-till-lovaktivitet
-- namn: Bidrag enligt avtal
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med avtal
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-  id: nora-bidrag-enligt-avtal
-- namn: Bidrag för flaggning eller städning på stan
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med ungdomsverksamhet som hjälper kommunen med flaggning eller städning
+  senast_verifierad: '2026-08-19'
+- id: nora-bidrag-for-ungdomsledarutbildning
+  namn: Bidrag för ungdomsledarutbildning
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar som utbildar ledare för ungdomsverksamhet
   deadlines:
-    typ: fasta
-    datum:
-    - 12-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.nora.se/upplevagora/foreningarochforeningsliv/bidragstodochstipendier/kommunalabidrag.4.539d1c491275e7d056480003962.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kommunens sida anger ansökan senast 31 december.
-  id: nora-flaggning-och-stadning
-- namn: Ungt initiativ
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Ungdomar 13–25 år som vill genomföra ett evenemang eller en aktivitet; förening krävs inte
-  deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
-  - Sökanden är 13–25 år och bosatt i Nora kommun
-  - Arrangemanget ska vara öppet för alla, drogfritt samt religiöst och partipolitiskt fritt från propaganda
-  belopp: Upp till 5 000 kr
-  sen_ansokan: Ansökan sker senast två veckor innan arrangemanget ska genomföras.
-  kalla_url: https://www.nora.se/upplevagora/foreningarochforeningsliv/bidragstodochstipendier/kommunalabidrag.4.539d1c491275e7d056480003962.html
-  belopp_status: olast
-  deadline_status: okand
+  - Utbildningen ska avse ledare i föreningens ungdomsverksamhet och föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  - Ansökan ska lämnas innan utbildningen börjar och innehålla kurs- och kostnadsuppgifter
+  - Resan ska göras med billigaste färdsätt; tåg ersätts i andra klass och bil enligt Skatteverkets norm med samåkning när det är möjligt
+  - En förening kan få stöd för högst tre ledarutbildningar per år
+  belopp: Högst 80 procent av kurskostnaden och 80 procent av resekostnaden inom Norden, totalt högst 1 500 kronor; maximalt tre bidrag per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast två veckor innan utbildningen börjar.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Stödet kan sökas av ungdomar och kräver inte att sökanden är en förening. Ej angivet i källan
-  id: nora-ungt-initiativ
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: nora-bidrag-for-kultur-och-fritidsverksamhet
+  namn: Bidrag för kultur- och fritidsverksamhet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som erbjuder kultur- och fritidsverksamhet i Nora kommun
+  deadlines:
+    typ: fasta
+    datum: [02-28]
+  krav:
+  - Föreningen ska uppfylla de allmänna bidragsvillkoren och erbjuda verksamhet i Nora kommun
+  - Ansökan ska beskriva verksamheten, deltagarna, planerade aktiviteter och föreningens ekonomi
+  - Eget utövande och delaktighet för barn och unga prioriteras först, därefter arrangemang för barn och unga, vuxnas eget utövande och vuxenarrangemang
+  - Beviljat stöd ska användas för det beslutade ändamålet och föreningen ska lämna de handlingar kommunen begär för uppföljning
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet behovsprövas efter verksamhet och prioriteringsordning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 28 februari.
+  kalla_url: https://etjanster.nora.se/oversikt/overview/311
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: nora-bidrag-for-omsorg-aldre-och-socialt-omrade
+  namn: Bidrag för omsorg, äldre och socialt område
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar för äldre och personer med funktionsnedsättning samt föreningar inom socialtjänstens område
+  deadlines:
+    typ: fasta
+    datum: [02-28]
+  krav:
+  - Föreningen ska bedriva verksamhet för äldre, personer med funktionsnedsättning eller inom socialtjänstens område
+  - Verksamheten ska vara ideell, demokratiskt uppbyggd, öppen för målgruppen och huvudsakligen gagna invånare i Nora kommun
+  - Ansökan ska beskriva verksamhet, målgrupp, planerade aktiviteter och ekonomi samt innehålla efterfrågade årshandlingar
+  - Kommunen ska kunna granska föreningens räkenskaper, verksamhetsberättelse, revisionshandlingar och medlemsuppgifter
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas efter verksamhetens innehåll och omfattning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 28 februari.
+  kalla_url: https://etjanster.nora.se/oversikt/overview/311
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: nora-bidrag-till-lovaktivitet
+  namn: Bidrag till lovaktivitet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som ordnar kostnadsfria lovaktiviteter för barn och unga
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Aktiviteten ska genomföras under ett skollov och rikta sig till barn och unga 3–20 år
+  - Aktiviteten ska vara kostnadsfri, öppen för alla i målgruppen och genomföras av en förening
+  - Ansökan ska lämnas före lovet med uppgifter om aktivitet, målgrupp, tid, plats och kostnader
+  - Genomförandet ska följa kommunens allmänna villkor för föreningsstöd och redovisas enligt beslutet
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas för respektive lovaktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens lovsida för 2026 anger ansökan senast tre veckor före respektive lov.
+  kalla_url: https://www.nora.se/upplevagora/barnochungainora/lov/lovlamnauppgifteromaktiviteter.4.798dadfe18ab665c73afc.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: E-tjänstens generella översikt anger två veckor före, medan kommunens särskilda lovsida för 2026 anger tre veckor före.
+  senast_verifierad: '2026-08-19'
+- id: nora-bidrag-enligt-avtal
+  namn: Bidrag enligt avtal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med ett gällande bidrags- eller verksamhetsavtal med Nora kommun
+  deadlines:
+    typ: fasta
+    datum: [01-31]
+  krav:
+  - Föreningen ska ha ett gällande avtal med Nora kommun om verksamhet eller bidrag
+  - Begäran om utbetalning ska avse den ersättning och de åtaganden som regleras i avtalet
+  - Föreningen ska vara registrerad, uppfylla kommunens allmänna föreningsvillkor och ha fullgjort tidigare redovisningskrav
+  - Underlag som visar att avtalets villkor är uppfyllda ska lämnas när kommunen begär det
+  belopp: Beloppet och föreningens åtaganden regleras i respektive avtal; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Begäran om utbetalning enligt avtal ska lämnas senast 31 januari.
+  kalla_url: https://etjanster.nora.se/oversikt/overview/311
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: nora-flaggning-och-stadning
+  namn: Bidrag för flaggning eller städning på stan
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med ungdomsverksamhet som utför flaggning eller städning åt kommunen
+  deadlines:
+    typ: fasta
+    datum: [12-31]
+  krav:
+  - Sökanden ska vara en förening med ungdomsverksamhet i Nora kommun
+  - Föreningen ska åta sig flaggning eller städning på stan enligt kommunens anvisningar
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna bidragsvillkor
+  - Uppdraget ska genomföras och redovisas enligt kommunens beslut eller överenskommelse
+  belopp: Kommunen publicerar ingen generell ersättningsnivå för uppdraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 december.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: nora-evenemangsstod
+  namn: Evenemangsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som arrangerar offentliga evenemang i Nora kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska ha säte eller verksamhet i Nora och evenemanget ska vara offentligt, inkluderande samt partipolitiskt och religiöst obundet
+  - Evenemanget ska genomföras i Nora kommun och bedöms bland annat efter miljö, hälsa, jämställdhet, mångfald och ungas delaktighet
+  - Ansökan ska innehålla budget, uppgift om annan finansiering, säkerhet och tillstånd samt en plan för kommunikation
+  - Nora kommuns stöd ska synliggöras enligt anvisning och genomförande, ekonomi, publik och kommunikation ska redovisas i Rbok
+  - Oanvända medel ska återbetalas och väsentliga ändringar ska godkännas av kommunen
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande; evenemang i juli eller augusti ska sökas senast 15 juni.
+  kalla_url: https://www.nora.se/upplevagora/foreningarochforeningsliv/evenemangsstod.4.fe6ed2c1961e0c7f4165c.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 forutsattningar:
-- id: nora-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Rbok/e-tjänst
+- id: nora-registrerad-bidragsberattigad-forening
+  vad: Registrering och allmän bidragsbehörighet
+  beskrivning: Föreningen ska registreras i Rbok, vara ideell och demokratiskt uppbyggd, ha säte och huvudsaklig verksamhet i Nora, vara öppen för alla, normalt vara ansluten till en riksorganisation och ha minst tio betalande medlemmar.
+  system: Rbok
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid eller giltighetstid för registreringen.
   giltighet: null
   ordning: 1
-  kalla_url: https://etjanster.nora.se/oversikt/overview/311
-  giltighet_status: okand
+  kalla_url: https://www.nora.se/upplevagora/foreningarochforeningsliv/registreraenforening.4.320fce1318bfb1f88bcaed.html
+  giltighet_status: ingen_regel
+- id: nora-foreningshandlingar-och-insyn
+  vad: Föreningshandlingar, värdegrund och kommunal insyn
+  beskrivning: Föreningen ska ha stadgar, vald styrelse och revisor, föra medlemsregister och räkenskaper samt kunna lämna årsmötesprotokoll, verksamhets- och revisionsberättelse, ekonomisk redovisning, verksamhetsplan och närvarounderlag. Verksamheten ska vara fri från alkohol, narkotika, dopning och tobak enligt kommunens policy.
+  system: Rbok och kommunens e-tjänster
+  ledtid: null
+  ledtid_text: Handlingarna lämnas med ansökan eller på kommunens begäran; ingen gemensam årlig sista dag publiceras.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
