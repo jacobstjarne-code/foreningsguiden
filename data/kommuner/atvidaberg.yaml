@@ -2,86 +2,313 @@ kommun: Åtvidaberg
 kommun_slug: atvidaberg
 lan: Östergötlands län
 befolkning: 11478
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Samhällsbyggnadsförvaltningen
 ansokningssystem:
-  namn: Självservice
-  url: https://sjalvservice.atvidaberg.se/
-kalla_url: https://www.atvidaberg.se/uppleva-och-gora/foreningsliv.html
-verifierad: '2026-08-02'
+  namn: Interbook
+  url: https://atvidaberg.interbookfri.se/
+kalla_url: &huvud https://www.atvidaberg.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.atvidaberg.se/download/18.1731ac5b18c8ac6532e4f27/1719388388543/atvidabergs-kommuns-regler-for-foreningsbidrag.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: atvidaberg-evenemangsbidrag
   namn: Evenemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som arrangerar tillfälliga offentliga evenemang
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://fri.atvidaberg.se/bidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som arrangerar tillfälliga offentliga evenemang eller regelbunden offentlig kulturverksamhet
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Evenemanget ska ha lokal anknytning eller allmänt intresse för kommuninvånarna
+  - Evenemanget ska vara offentligt, marknadsföras brett och publiceras i kommunens kostnadsfria evenemangskalender
+  - Stödet avser ett enskilt tillfälle eller aktivitet under högst en vecka; interna evenemang, tävlingar, utflykter och studiebesök stöds inte
+  - Varor för försäljning och andra förbrukningsvaror stöds inte men ska framgå av budgeten
+  - Genomförande och ekonomi ska redovisas i det digitala föreningssystemet
+  belopp: Individuell prövning utifrån avsatta medel, samhällsnytta, tidigare stöd och föreningens möjlighet till andra intäkter; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan prövas vid två årliga ansökningstillfällen
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - id: atvidaberg-medfinansieringsbidrag
-  namn: Medfinansieringsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som behöver kommunal medfinansiering för stöd från annan aktör
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://fri.atvidaberg.se/bidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  namn: Kommunal medfinansiering till ideella föreningar
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som behöver kommunal medfinansiering för stöd från annan aktör
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - En annan myndighet eller organisation ska kräva kommunal medfinansiering för projektet
+  - Projektet ska utveckla eller garantera föreningens fortsatta verksamhet och skapa långsiktigt mervärde för kommuninvånarna
+  - Föreningens egen insats ska vara minst 15 procent; eget arbete får värderas till 200 kr per timme
+  - Föreningens stadgar ska visa ideellt syfte utan enskild ekonomisk vinning; företag, ekonomiska föreningar, stödföreningar, försvarsanknutna och fackliga organisationer utesluts
+  belopp: Högst 35 procent av totalkostnaden och högst 100 000 kr per projekt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Handläggningstiden bör inte överstiga fyra månader för komplett ansökan
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: atvidaberg-ovriga-foreningsstod
-  namn: Övriga föreningsstöd enligt kommunens riktlinjer
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar i Åtvidabergs kommun
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.atvidaberg.se/uppleva-och-gora/foreningar-och-foreningsliv
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Fullständig portal- och regelverksgenomgång krävs för fortsatt uppdelning. Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+- id: atvidaberg-aktivitetsstod-barn-unga
+  namn: Aktivitetsbidrag för barn- och ungdomsverksamhet
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med verksamhet för barn och unga 0–25 år
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Sammankomsten ska ske i föreningens regi och ha minst tre deltagare 0–25 år utöver minst en ledare som är minst 13 år
+  - Aktiviteten ska pågå minst 60 minuter med gemensam samling och avslutning; högst 30 deltagare får redovisas
+  - Närvaro för deltagare och ledare ska registreras och godkännas av ansvarig ledare
+  - Föreningen ska årligen beskriva sitt arbete med minst fem av åtta kriterier om likabehandling, drogpolicy, unga ledare, ledarutveckling, fair play, prova-på, samverkan och inkludering
+  - Entrébelagda tävlingar och kommersiella arrangemang är inte stödgrundande
+  belopp: 30 kr per sammankomst och 2 kr per deltagare om alla åtta kvalitetskriterier uppfylls; 15 kr per sammankomst och 2 kr per deltagare om minst fem uppfylls
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+- id: atvidaberg-hyresbidrag
+  namn: Hyresbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med kontinuerlig barn- och ungdomsverksamhet som hyr icke-kommunal lokal
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska ha minst en ungdomsgrupp med kontinuerliga träffar, minst tre deltagare 0–25 år och en ledare äldre än 13 år
+  - Hyran ska betalas till annan hyresvärd än Åtvidabergs kommun och vara skälig
+  - Stöd utgår inte när entréavgift tas ut och föregående års medlemsantal ska ligga till grund för ansökan
+  - Vid översökning bedöms samhällsnytta, antal unga och totala nyttjare, driftkostnader samt andra intäktsmöjligheter
+  belopp: 50 procent av skälig hyra, högst 30 kr per medlem 0–25 år och högst 15 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: atvidaberg-driftsbidrag
+  namn: Driftsbidrag för egen anläggning
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med barn- och ungdomsverksamhet som äger eller ägarlikt driver en anläggning
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska ha minst en kontinuerlig ungdomsgrupp med minst tre deltagare 0–25 år och en ledare äldre än 13 år
+  - Föreningen ska helt svara för anläggningens drift och kostnader; tomträtt eller långsiktigt arrende kan räknas som ägarlikt
+  - Stöd utgår inte för lokal som används till bingo, dans eller annat inkomstbringande eller entrébelagt evenemang
+  - Ansökan bygger på föregående års medlemsantal och redovisas i samband med ansökan
+  belopp: Schabloner per anläggningsdel, bland annat 1,50 kr/m² klippt gräsyta, 1 500–2 500 kr per omklädningsrum och 2 500 kr per elljusspår; högst 50 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: atvidaberg-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med barn- och ungdomsverksamhet som investerar i sin anläggning
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska normalt ha minst en kontinuerlig ungdomsgrupp med minst tre deltagare 0–25 år och en ledare äldre än 13 år
+  - Investeringen ska avse maskiner, redskap eller fasta inventarier som behövs för anläggningens skötsel, drift eller funktion
+  - Arbeten eller inköp får inte påbörjas före beslut utan särskilt medgivande och statliga stöd ska nyttjas om möjligt
+  - Ansökan ska redovisa projektets kostnader, finansiering och framtida drift; kostnader och effekter redovisas skriftligen efteråt
+  belopp: Individuell prövning; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: atvidaberg-aktivitetsstod-funktionsratt
+  namn: Aktivitetsbidrag för funktionsrättsföreningar
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar med verksamhet riktad till personer med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och bedriva verksamhet riktad till personer med funktionsnedsättning
+  - Föregående års medlemsantal ska ligga till grund för ansökan och medlemsregistret ska kunna visas
+  - Stödet bör inte användas till redan subventionerad kommunal hyra eller när entréavgift tas ut i en icke-kommunal lokal
+  belopp: 15 kr per medlem och år till hyra eller aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: atvidaberg-aktivitetsstod-pensionar
+  namn: Aktivitetsbidrag för pensionärsföreningar
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med verksamhet huvudsakligen riktad till pensionärer
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och huvudsakligen bedriva verksamhet för pensionärer
+  - Medlemsantalet ska kunna styrkas genom aktuellt medlemsregister
+  - Stödet bör inte användas till redan subventionerad kommunal hyra eller när entréavgift tas ut i en icke-kommunal lokal
+  belopp: 15 kr per medlem och år till hyra eller aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: atvidaberg-utvecklingsbidrag-noder
+  namn: Utvecklingsbidrag för noder för bebyggelse och service
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med tydlig anknytning till Björsäter, Grebo, Falerum eller Hannäs socken
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - En lokal förening med tydlig geografisk anknytning till en av de fyra noderna ska stå som sökande
+  - Insatsen ska vara tillgänglig för hela ortens befolkning utan krav på medlemskap
+  - Stödet får användas till flerårigt utvecklingsprojekt, anläggningsutveckling eller offentlig medfinansiering, men inte löpande verksamhet
+  - Arbete och inköp får inte påbörjas före beslut utan särskilt medgivande
+  - Projektets effekter ska redovisas skriftligt och muntligt och kommunen ska synliggöras som finansiär
+  belopp: Högst 25 000 kr per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan ger inte rätt till stöd
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Föreningen kan vara ombud för privatperson eller företag, men kommunen kräver att en lokal förening är formell sökande
+- id: atvidaberg-bygdepeng
+  namn: Bygdepeng
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Lokala utvecklingsgrupper som verkar för en landsbygdsbygds gemensamma utveckling
+  deadlines: {typ: fasta, datum: [02-25]}
+  krav:
+  - Sökanden ska vara en förening som uppfyller grundreglerna och representerar en lokal utvecklingsgrupp i en ort med färre än 1 000 invånare eller en utpekad nod
+  - Utvecklingsgruppen ska vara medlem i Hela Sverige ska leva, finnas och verka i området samt omfatta alla boende i sitt utvecklingsarbete
+  - Pengarna ska avse planerade omkostnader för lokalt utvecklingsarbete, exempelvis möten, lokal, webb, material, resor eller föreläsare
+  - Alla boende och föreningar i området ska bjudas in att gemensamt besluta om användningen
+  - Endast en grupp per område kan få stödet; löner, ideellt arbete och kostnader som täcks av annat stöd är inte stödgrundande
+  belopp: 6 000 kr per bygdepeng, varav Region Östergötland bidrar med 4 000 kr och Åtvidabergs kommun med 2 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan efter 25 februari behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Stödet fanns i den fulla normen men saknades i huvudmenyn
+- id: atvidaberg-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som bokar kommunala hallar, planer, kultur- och konferenslokaler
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Bokningen ska göras av en förening och följa kommunens bokningsregler
+  - Föreningstaxan gäller kommunala idrottsanläggningar och vissa kultur- och konferenslokaler enligt 2026 års taxa
+  - Bokningsförfrågan ska normalt skickas minst sju dagar före tillfället och den som hyr ska vara minst 18 år
+  belopp: Lägre föreningstaxa än normaltaxa; 2026 kostar exempelvis gymnastiksalar 72–93 kr per timme, Kopparvallen 670 kr per timme och bibliotekets konferenslokal är kostnadsfri
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist publiceras; bokningsförfrågan ska normalt lämnas minst sju dagar före
+  kalla_url: https://www.atvidaberg.se/download/18.573c9ff01856f386b3f139b4/1777298396558/taxor-och-avgifter-for-atvidabergs-kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: atvidaberg-arets-forening
+  namn: Årets förening
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som tar socialt ansvar och utvecklar sin verksamhet i linje med kommunens mål
+  deadlines: {typ: fasta, datum: [10-24]}
+  krav:
+  - Mottagaren ska vara en förening i Åtvidabergs kommun
+  - Föreningen ska aktivt ta socialt ansvar för kommunens barn och ungdomar
+  - Föreningen ska utveckla verksamheten utifrån kommunens vision och målsättning
+  - Föreningen kan själv ansöka eller nomineras av allmänheten före årets nomineringsfrist
+  belopp: 10 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Nomineringar och ansökningar tas emot till och med 24 oktober
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: atvidaberg-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Självservice
+  vad: Registrerad och ideell förening
+  beskrivning: Föreningen ska vara ideell och demokratiskt uppbyggd, ha årsmötesvald styrelse, vara öppen för medlemskap och arbeta efter årsmötesfastställda stadgar.
+  system: Interbook
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Registrering kräver bland annat stadgar, protokoll från konstituerande möte, budget och verksamhetsberättelse
+  giltighet: Föreningen ska årligen uppdatera och godkänna sina uppgifter i kommunens digitala föreningssystem
   ordning: 1
-  kalla_url: https://www.atvidaberg.se/uppleva-och-gora/foreningsliv.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: atvidaberg-lokal-verksamhet
+  vad: Lokal verksamhet och fullständiga årshandlingar
+  beskrivning: Föreningen ska bedriva verksamhet i och vända sig till kommuninvånarna, ha tydlig målsättning och verksamhetsplan samt årligen upprätta verksamhetsberättelse och bokslut.
+  system: Interbook
+  ledtid: null
+  ledtid_text: Uppgifterna och årshandlingarna hålls aktuella varje år
+  giltighet: Kalenderår
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: atvidaberg-riksorganisation-bankgiro
+  vad: Riksanslutning och föreningskonto
+  beskrivning: Föreningen ska normalt vara ansluten till en riksorganisation, ha eget bankgiro, lämna de handlingar som varje stöd kräver och tillåta kommunens granskning.
+  system: Interbook
+  ledtid: null
+  ledtid_text: Undantag från riksanslutning kan beslutas av kommunen
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
