@@ -2,12 +2,18 @@ kommun: Malung-Sälen
 kommun_slug: malung-salen
 lan: Dalarnas län
 befolkning: 10160
-forvaltning: Kultur- och fritidsnämnden
+forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
+  namn: Kommunens bidragsblanketter och föreningsregister
   url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
 kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
-verifierad: '2026-08-01'
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://malung-salen.se/download/18.4fd9741419ac5edf2a4469c0/1764601970648/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: malung-salen-lokal-anlaggnings-och-driftsbidrag
   namn: Lokal-, anläggnings- och driftsbidrag
@@ -15,6 +21,14 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -39,6 +53,8 @@ bidrag:
   - Bidrag kan sökas för el-, värme- och vattenkostnader, sophämtning och försäkring
   - Föregående års resultaträkning ligger till grund för ansökan
   belopp: Bidrag utbetalas med högst 50 % av föreningens faktiska driftskostnader (el, värme, vatten, sophämtning, försäkring)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Bidragsansökningar som inte inkommit inom angiven tidsram kommer inte att behandlas. Ofullständig ansökan som
     inte kompletteras inom 5 arbetsdagar avslås. Bidrag kan endast sökas för angiven tidsperiod och aldrig retroaktivt.
   kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
@@ -46,6 +62,8 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: malung-salen-verksamhetsbidrag
   namn: Verksamhetsbidrag
@@ -53,6 +71,14 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -77,8 +103,8 @@ bidrag:
     behov av särskilt stöd/funktionsvariation/socialt stöd/integration) eller till kulturell- och fritidsverksamhet
   - Bidraget avser föreningens löpande verksamhet, dvs. den eller de aktiviteter föreningen huvudsakligen ägnar sig åt, och
     ska komma medlemmarna till gagn
-  belopp: null
-  belopp_avser: okand
+  belopp: Individuellt verksamhetsstöd efter behovsprövning och fördelning inom årets pott; kommunen publicerar ingen generell beloppsnivå.
+  belopp_avser: per_forening
   kommunens_pott: "Nämnden fastställer årligen en pott; fördelning beroende av pott och antal sökande"
   sen_ansokan: Bidragsansökningar som inte inkommit inom angiven tidsram kommer inte att behandlas. Ofullständig ansökan som
     inte kompletteras inom 5 arbetsdagar avslås. Bidrag kan endast sökas för angiven tidsperiod och aldrig retroaktivt.
@@ -87,6 +113,8 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: malung-salen-investeringsbidrag
   namn: Investeringsbidrag
@@ -94,6 +122,14 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -123,6 +159,8 @@ bidrag:
   - Kommunen återkräver medel som inte använts eller som använts till annat ändamål än det beslutade
   belopp: Inget fast bidragsbelopp anges. Investeringsbeloppet måste uppgå till minst ett halvt prisbasbelopp för att räknas
     som investering
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Bidragsansökningar som inte inkommit inom angiven tidsram kommer inte att behandlas. Ofullständig ansökan som
     inte kompletteras inom 5 arbetsdagar avslås. Bidrag kan endast sökas för angiven tidsperiod och aldrig retroaktivt.
   kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
@@ -130,15 +168,25 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: malung-salen-arrangemangsbidrag
   namn: Arrangemangsbidrag
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Är en ideell förening med styrelse och verksamhet förlagd till Malung-Sälens kommun
@@ -160,6 +208,8 @@ bidrag:
   - Redovisning av arrangemanget ska lämnas in senast tre (3) månader efter arrangemanget, med ekonomisk redogörelse och uppnådd
     effekt (t.ex. besöksantal, massmedial uppmärksamhet)
   belopp: Högst 25 000 kronor per arrangemang
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Söks löpande under året. Ansökan ska ha kommit in senast en (1) månad innan arrangemanget äger rum. Ofullständig
     ansökan som inte kompletteras inom 5 arbetsdagar avslås.
   kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
@@ -167,16 +217,26 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För enstaka kultur- och idrottsarrangemang.
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: malung-salen-utbildningsbidrag
   namn: Utbildningsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Föreningar vars ledare eller funktionärer deltar i godkända utbildningar
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Är en ideell förening med styrelse och verksamhet förlagd till Malung-Sälens kommun
@@ -194,33 +254,43 @@ bidrag:
   - Bidragsberättigad kursdag ska omfatta minst 4 lektionstimmar
   - Bidraget kan endast sökas och erhållas av föreningen, inte av enskild medlem
   - Inga bidrag utbetalas för deltagande i kongresser, förbundsmöten, årsmöten eller liknande
-  - Bidraget ska sökas det år som utbildningen har anordnats
-  belopp: null
-  sen_ansokan: Söks löpande under året, det år utbildningen har anordnats. Ofullständig ansökan som inte kompletteras inom
-    5 arbetsdagar avslås.
+  - Ansökan ska lämnas senast en månad efter genomförd utbildning och avse en utbildning som anordnats samma år
+  - Kursprogram, deltagarbevis och underlag för kursavgiften ska bifogas
+  belopp: Kommunen publicerar ingen generell beloppsnivå; föreningen anger sökt utbildningsbidrag och styrker kursavgiften.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en månad efter genomförd utbildning och under samma kalenderår.
   kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: malung-salen-stod-extern-arrangor
   namn: Stöd till extern arrangör
   kategori:
   - kultur
   - ovrig
-  malgrupp: Organisationer och föreningar utanför kommunen som bedriver verksamhet till nytta för kommunens invånare
+  foreningstyp:
+  - kultur
+  - social
+  - annat
+  malgrupp: Organisationer och föreningar utanför kommunen, utom studieförbund som omfattas av den separata studieförbundsraden
   deadlines:
     typ: fasta
     datum:
     - 04-30
   krav:
-  - Riktar sig till organisationer och föreningar (t.ex. regionorganisationer, studieförbund, kulturföreningar) som verkar
-    för och gynnar kommunens invånare ur ett kulturellt och främjande samhällsperspektiv
-  - Bidrag till studieförbund baseras på statistik som studieförbunden redovisar till SCB och fördelas enligt Folkbildningsrådets
-    rekommendationer
-  belopp: Inget fast belopp anges. Bidrag till studieförbund baseras på statistik som redovisas till SCB och fördelas enligt
-    Folkbildningsrådets rekommendationer
+  - Sökanden ska vara en organisation eller förening med säte utanför Malung-Sälens kommun.
+  - Verksamheten ska verka för och gynna kommunens invånare ur ett kulturellt och främjande samhällsperspektiv.
+  - Ansökan ska motivera syftet och beskriva hur verksamheten verkar för och gynnar kommunens invånare.
+  - Verksamhetsplan för kommande verksamhetsår och en förtydligad redovisning av verksamheten i Malung-Sälens kommun ska bifogas.
+  - Organisationens ordförande eller kassör ska underteckna ansökan och sökt belopp ska anges.
+  belopp: Kommunen publicerar ingen generell beloppsnivå; sökanden anger önskat belopp och stödet prövas individuellt.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Bidragsansökningar som inte inkommit inom angiven tidsram kommer inte att behandlas. Ofullständig ansökan som
     inte kompletteras inom 5 arbetsdagar avslås. Bidrag kan endast sökas för angiven tidsperiod och aldrig retroaktivt.
   kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
@@ -228,16 +298,124 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: malung-salen-lovverksamhet
+  namn: Stöd till lovverksamhet för barn och ungdomar
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Ideella föreningar som anordnar lovverksamhet för barn och ungdomar
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsbidrag.
+  - Verksamheten ska genomföras för barn och ungdomar under sportlov, påsklov, sommarlov, höstlov eller jullov.
+  - Föreningar som har en tydlig ambition att nå barn som står utanför föreningslivet prioriteras.
+  - Föreningar som riktar sig till barn med funktionsvariation prioriteras.
+  - Ansökan ska beskriva hur föreningen strategiskt ska nå målgruppen och lämnas senast sex veckor innan lovet börjar.
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas utifrån ansökan och tillgängliga medel.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast sex veckor innan lovet börjar.
+  kalla_url: https://malung-salen.se/download/18.4fd9741419ac5edf2a4469c0/1764601970648/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: malung-salen-nolltaxa
+  namn: Nolltaxa i kommunala lokaler och anläggningar
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar och organisationer som är bidragsberättigade enligt kommunens riktlinjer
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen eller organisationen ska vara bidragsberättigad enligt kommunens riktlinjer för föreningsbidrag.
+  - Bokningen ska avse en organiserad gruppaktivitet med minst en av föreningen utsedd ledare och minst tre deltagare.
+  - Aktiviteten ska innehålla gemensam samling och avslutning.
+  - Nolltaxan gäller även poolspel, cuper för barn och unga samt seriespel.
+  - Den avgiftsfria tiden får inte överlåtas till annan verksamhet och föreningen får inte ta ut hyresavgift av medlemmarna för aktiviteten.
+  belopp: Nolltaxa för stödberättigad användning av kommunala lokaler och anläggningar.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat sista ansökningsdag; stödet erhålls genom lokalbokningen enligt gällande uthyrningsregler.
+  kalla_url: https://malung-salen.se/kultur-och-fritid/idrott-motion-friluftsliv/idrottshallar/riktlinjer-vid-uthyrning-av-lokaler-och-anlaggningar
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: malung-salen-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori:
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - kultur
+  - social
+  - annat
+  malgrupp: Studieförbund med verksamhet i Malung-Sälens kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-30
+  krav:
+  - Studieförbundet ska bedriva folkbildningsverksamhet i Malung-Sälens kommun.
+  - Ansökan ska innehålla kontaktuppgifter till lokalt verksamhetsansvarig samt föreningens plus- eller bankgiro.
+  - Verksamhetsberättelse och revisionsberättelse från det senast avslutade verksamhetsåret ska bifogas.
+  - Verksamheten i Malung-Sälens kommun ska särredovisas tillsammans med STUV-lista och verksamhetsplan för kommande år.
+  - Vid marknadsföring av arrangemang med kommunalt stöd ska kommunens logotyp finnas med på affischer och i annonser.
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunanslaget fördelas med 70 procent grundbidrag efter föregående års relativa bidragsandel, 15 procent volymbidrag efter deltagartimmar och 15 procent målgruppsbidrag efter deltagartimmar för prioriterade målgrupper. Totalsumman publiceras inte.
+  sen_ansokan: Ansökan ska lämnas senast den 30 april.
+  kalla_url: https://malung-salen.se/download/18.2342be9e17e5ed578bb1a093/1643979546978/Riktlinjer%20f%C3%B6r%20studief%C3%B6rbundsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 forutsattningar:
 - id: malung-salen-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  vad: Registrering, grundvillkor och årliga handlingar
+  beskrivning: Föreningen ska vara ideell, allmännyttig, demokratiskt uppbyggd och öppen, ha ansvarig styrelse, godkända stadgar och minst tio medlemmar varav minst 51 procent är folkbokförda i kommunen. Föreningen ska vara registrerad i föreningsregistret och hålla uppgifterna aktuella.
+  system: Kommunens föreningsregister och bidragsblanketter
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Intyg om organisationsnummer lämnas en gång per år vid ansökan. Kommunen publicerar ingen gemensam giltighetstid eller separat förnyelsedag för registreringen.
   giltighet: null
   ordning: 1
-  kalla_url: https://malung-salen.se/kultur-och-fritid/foreningar-stod-och-stipendier
-  giltighet_status: okand
+  kalla_url: https://malung-salen.se/download/18.4fd9741419ac5edf2a4469c0/1764601970648/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null
