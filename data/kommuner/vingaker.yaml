@@ -2,158 +2,385 @@ kommun: Vingåker
 kommun_slug: vingaker
 lan: Södermanlands län
 befolkning: 8652
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kommunstyrelsen, socialnämnden och samhällsbyggnadsnämnden
 ansokningssystem:
-  namn: Kommunens e-tjänster
-  url: https://vingaker.se/kultur--fritid/foreningsliv
-kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-verifierad: '2026-07-31'
+  namn: Mina sidor, blanketter och kommunens lokalbokning
+  url: &portal https://minasidor.vingaker.se/oversikt
+kalla_url: &huvud https://vingaker.se/kultur--fritid/foreningsliv
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: '04-01'
+  kalla_url: &norm https://vingaker.se/download/18.2a5f6dca19d9a7a7d1d1719d/1777447360688/Flik%209.4%20Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20som%20hanteras%20av%20kommunstyrelsen.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: vingaker-aktivitetsstod
   namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Ideella föreningar med lokal verksamhet
+  status: aktiv
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade föreningar med ledarledd verksamhet för barn och unga 7–25 år
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+    datum: ['02-25', '08-25']
+  krav:
+  - Föreningen ska vara registrerad i kommunens föreningsregister och uppfylla de allmänna kraven på ideell, demokratisk och lokalt samhällsnyttig verksamhet
+  - Aktiviteten ska vara ledarledd och uppfylla Riksidrottsförbundets gällande föreskrifter för lokalt aktivitetsstöd
+  - Deltagarna ska normalt vara 7–25 år; de särskilda åldersreglerna för verksamhet för personer med funktionsnedsättning följer RF:s föreskrifter
+  - Föreningen ska redovisa antal sammankomster och deltagartillfällen uppdelat på period, kön och ålder
+  - Redovisningen ska intygas av ordförande och kassör och kunna styrkas med närvarounderlag
+  - Barn- och ungdomsverksamheten ska vara drogfri och följa barnkonventionen samt, för idrott, RF:s antidopningsregler
+  belopp: Belopp enligt Riksidrottsförbundets gällande LOK-stödsföreskrifter; kommunen publicerar ingen egen generell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Perioden juli–december redovisas senast 25 februari och januari–juni senast 25 augusti; sena ansökningar behandlas inte
+  kalla_url: https://minasidor.vingaker.se/oversikt/getflowform/929/741
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den reviderade normen anger 7–25 år medan kommunens redovisningsblankett fortfarande grupperar deltagare som 6–9 och 10–25 år
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: vingaker-driftbidrag
   namn: Driftbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar med driftskostnader
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som driver en egen anläggning eller sköter en kommunal anläggning på uppdrag
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+    datum: ['08-25']
+  krav:
+  - Föreningen ska ansvara för driften av en egen anläggning eller helt eller delvis sköta en kommunägd anläggning på kommunens uppdrag
+  - Anläggningen ska användas regelbundet i föreningens huvudsakliga verksamhet
+  - Anläggningen ska vara tillgänglig för andra föreningar och kommunens invånare
+  - Ansökan ska redovisa faktiska kostnader för perioden 1 augusti föregående år till 31 juli innevarande år
+  - Stödgrundande kostnader är ränta, el, vatten, försäkring, renhållning, arrende, drivmedel, underhåll och mindre reparationer
+  - Årsmötesprotokoll, verksamhetsberättelse, balans- och resultaträkning samt ägarhandling eller hyresavtal ska lämnas om kommunen inte redan har dem
+  belopp: Fördelas i förhållande till föreningens verifierade faktiska driftskostnader inom kommunens årliga anslag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för innevarande år ska lämnas senast 25 augusti; sena ansökningar behandlas inte
+  kalla_url: https://minasidor.vingaker.se/oversikt/getflowform/105/737
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: vingaker-hyresbidrag
   namn: Hyresbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar med hyreskostnader
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med verksamhet för 7–25-åringar som behöver hyra en extern lokal eller anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+    datum: ['08-25']
+  krav:
+  - Föreningen ska bedriva barn- och ungdomsverksamhet för åldersgruppen 7–25 år
+  - Föreningen ska ha ett särskilt behov av en extern lokal eller anläggning för en ändamålsenlig verksamhet
+  - Möjligheten att använda en kommunal lokal till subventionerad hyra ska alltid prövas först
+  - Hyreskontrakt och årshyra för inom- eller utomhusanläggningen ska redovisas
+  - Årsmötesprotokoll, verksamhetsberättelse, balans- och resultaträkning samt revisionsberättelse ska lämnas om kommunen inte redan har dem
+  - Föreningsregistrets uppgifter och medlemsförteckningen över bidragsberättigade ungdomar ska vara uppdaterade
+  belopp: Kommunens anslag för hyresbidrag fördelas proportionellt mellan de godkända sökandena
+  belopp_avser: per_forening
+  kommunens_pott: Årligt anslag för hyresbidrag; totalsumman publiceras inte
+  sen_ansokan: Ansökan för innevarande år ska lämnas senast 25 augusti; sena ansökningar behandlas inte
+  kalla_url: https://minasidor.vingaker.se/oversikt/getflowform/108/739
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: vingaker-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som planerar investeringar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som äger eller långsiktigt hyr eller arrenderar en anläggning i Vingåkers kommun
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+    datum: ['08-25']
+  krav:
+  - Föreningen ska äga eller långsiktigt hyra eller arrendera anläggningen i Vingåkers kommun
+  - Investeringen ska avse ny-, till- eller ombyggnad, förbättring eller reparation, fast inredning eller en förstudie inför aktivitet eller arrangemang
+  - Ansökan ska beskriva investeringen, planerat genomförande och vilken anläggning som berörs
+  - En specificerad kostnadsberäkning, finansieringsplan, egen insats och sökt belopp ska redovisas
+  - Årsmötesprotokoll, verksamhetsberättelse, balans- och resultaträkning, revisionsberättelse och ägarhandling eller hyresavtal ska lämnas
+  - Genomförd investering ska redovisas efter verksamhetsårets slut
+  belopp: Individuellt prövat; kommunen lämnar vanligen stöd till endast en del av den totala kostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästkommande år ska lämnas senast 25 augusti; investeringen redovisas senast 25 februari året efter verksamhetsåret
+  kalla_url: https://minasidor.vingaker.se/oversikt/getflowform/1010/738
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: vingaker-evenemangsbidrag
-  namn: Evenemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som arrangerar evenemang
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: vingaker-subventionerad-kommunal-lokal
+  namn: Subventionerad hyra i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Registrerade lokala föreningar som bokar kommunens hallar, salar och andra uthyrningsbara lokaler
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Ansökan minst en månad före evenemanget
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: olast
-  anteckning: Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad i kommunens föreningsregister för att få använda kommunens föreningsservice
+  - Bokningen ska avse en av kommunens uthyrningsbara lokaler eller anläggningar
+  - Föreningen ska följa lokalens boknings-, ordnings- och betalningsvillkor
+  - Föreningen ska lämna aktuella kontakt- och föreningsuppgifter i bokningsförfrågan
+  - Separat hyresbidrag för extern lokal förutsätter att möjligheten till kommunal subventionerad lokal först har prövats
+  belopp: Subventionerad föreningshyra; avgiften beror på vald lokal, tid och bokning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; bokningsförfrågningar hanteras i lokalbokningen
+  kalla_url: https://tjanster.vingaker.se/bokning/default.aspx
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: vingaker-studieforbund
   namn: Stöd till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund med verksamhet i kommunen
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Vingåkers kommun
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Studieförbundet ska vara verksamt i Vingåkers kommun och uppfylla statens villkor för stöd till folkbildningen
+  - Verksamheten ska vara öppen och tillgänglig för alla och genomsyras av en idéburen profil
+  - Verksamheten ska bidra till demokrati, delaktighet, minskade utbildningsklyftor och ett breddat kulturliv
+  - Verksamhetsberättelse och ekonomisk redogörelse med revisorsintyg ska lämnas
+  - Kommunintyg för genomförd verksamhet och verksamhetsplan med budget ska lämnas
+  - Verksamheten ska kunna följas från planering till genomförande
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ansökan och fördelning sker enligt särskilda regler. Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas efter samråd med Södermanlands bildningsförbund; totalsumman publiceras inte
+  sen_ansokan: Årsredovisning och övriga underlag ska lämnas senast 1 maj
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: null
 - id: vingaker-sponsring
-  namn: Sponsring
-  kategori:
-  - ovrig
-  malgrupp: Föreningar och andra aktörer efter samråd med kommunen
+  namn: Sponsring till föreningar och organisationer
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar och organisationer som ger kommunen tydlig exponering genom elitidrott eller publikdragande arrangemang
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Hanteras enligt kommunens särskilda sponsringspolicy. Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav:
+  - Sponsringen ska riktas till en förening eller organisation och får inte betalas till en individuell idrottare
+  - Aktiviteten eller evenemanget ska vara publikt och vända sig till allmänheten
+  - Insatsen ska ge ömsesidig nytta och stärka Vingåkers kommuns varumärke genom en affärsmässigt värderad motprestation
+  - Kommunen ska exponeras i annonser, affischer, programblad, kläder, skyltar eller på annat överenskommet sätt
+  - Ett skriftligt avtal ska ange åtagande, motprestation och uppföljning och får omfatta högst ett år eller ett evenemang
+  - Föreningen ska rapportera resultat och exponering; utbetald sponsring ska återbetalas om arrangemanget ställs in eller verksamheten upphör
+  belopp: Individuellt beslutad sponsring i kontanta medel, varor eller tjänster efter målgrupp, publik, uppmärksamhetsvärde och medial exponering
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: https://vingaker.se/download/18.12354f29193678fefd06c0/1732622471693/Flik-7.3-Policy-for-sponsring.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Sponsring upp till 15 000 kr kan i policyn i stället bedömas som samverkan när alla parter bidrar eller insatsen är av ringa värde
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: vingaker-socialnamndens-basbidrag
+  namn: Socialnämndens basbidrag
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Ideella föreningar och organisationer som arbetar inom socialnämndens område för kommuninvånare, särskilt utsatta grupper
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Sökanden ska vara en ideell förening med organisationsnummer, stadgar, styrelse och revisorer och vara ansluten till riksorganisation om sådan finns
+  - Verksamheten ska ligga inom socialnämndens område, bedrivas i Vingåkers kommun och vara öppen och demokratiskt uppbyggd
+  - Föreningen ska ha minst fem betalande medlemmar bosatta i Vingåkers kommun och ta ut medlemsavgift
+  - Antagna stadgar, resultat- och balansräkning, verksamhets- och revisionsberättelse samt aktuell styrelse- och revisorsförteckning ska bifogas
+  - Ansökan ska ange plus- eller bankgiro, uppdaterade föreningsuppgifter samt antal betalande kommunmedlemmar under respektive över 20 år
+  - Föreningen ska ha en drogpolicy och redovisa andra sökta stöd samt hur tidigare kommunstöd har använts
+  belopp: 1 000 kr i grundbelopp plus 25 kr per betalande medlem bosatt i kommunen; förening med säte utanför kommunen får halvt grundbelopp vid dokumenterad lokal verksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 31 mars och behandlas inte om obligatoriska uppgifter saknas
+  kalla_url: &socialnorm https://vingaker.se/download/18.12354f29193678fefd0730/1732623464348/Flik-8.27-Stadga-for-foreningsbidrag-som-hanteras-av-socialnamnden.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: vingaker-socialnamndens-ovriga-bidrag
+  namn: Socialnämndens övriga föreningsbidrag enligt avtal
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, kultur, ovrig]
+  foreningstyp: [social, kultur, annat]
+  malgrupp: Ideella organisationer som genom avtal kompletterar socialnämndens verksamhet eller stödjer utsatta grupper
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska uppfylla socialnämndens allmänna villkor för ideell, demokratisk och lokalt verksam organisation
+  - Insatsen ska avlasta kommunens ansvar, ge direkt stöd till utsatta grupper eller erbjuda aktivering, självhjälp, intressebevakning eller andra samhällsnyttiga aktiviteter
+  - Ett ettårigt avtal ska beskriva vad föreningen åtar sig, stödets form och storlek samt parternas uppföljning
+  - Ansökan ska innehålla verksamhets- och ekonomihandlingar, aktuell planering och de uppgifter som krävs för basbidraget
+  - Stödet ska användas för det avtalade ändamålet och verksamhetsförändringar ska omgående meddelas kommunen
+  - Föreningen ska efter verksamhetsåret lämna verksamhetsberättelse och ekonomisk redovisning även om den inte söker nytt stöd
+  belopp: Kontant ersättning, lokalstöd eller annan individuellt avtalad insats; belopp och åtaganden fastställs i ett ettårigt avtal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inne senast 31 mars
+  kalla_url: *socialnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: vingaker-socialnamndens-lokalstod
+  namn: Subventionerade och avgiftsfria lokaler inom socialnämndens verksamhet
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar som ordnar aktiviteter för boende eller andra av socialnämndens målgrupper
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska uppfylla socialnämndens allmänna villkor och verksamheten ska riktas till nämndens målgrupper
+  - Avgiftsfri lokal förutsätter att verksamheten till stor del riktas till boende på Sävstagården eller Ekgården och Humlegården och planeras i samverkan med kommunen
+  - Upplåtelsen får inte inkräkta på kommunens egen verksamhet
+  - Nettohyra gäller för förening som får bidrag av socialnämnden eller kommunens kultur- och fritidsverksamhet och som inte har särskilda avtalsvillkor
+  - Vid entrébelagt evenemang tas alltid den högre ordinarie hyran ut
+  - Föreningen ska återställa och grovstäda lokalen efter aktiviteten
+  belopp: 'Avgiftsfritt vid samverkad målgruppsverksamhet; annars nettohyra: Sävstagårdens matsal 50 kr/timme, konferensrum 30 kr/timme och bastu 50 kr/3 timmar, samt Humlegården och Ekgårdens samlingssal 50 kr/timme eller 150 kr/dag och tränings- eller konferensrum 30 kr/timme'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om socialnämndens föreningsstöd ska vara inne senast 31 mars; lokalens tillgänglighet avtalas med kommunen
+  kalla_url: *socialnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: vingaker-vingakersbygden-vaxer
+  namn: Vingåkersbygden växer
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade utvecklingsgrupper och föreningar som genomför konkreta insatser för ökad inflyttning
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en bidragsberättigad utvecklingsgrupp eller förening och minst tre lokalt förankrade personer ska vara engagerade i insatsen
+  - Projektet ska ha en konkret och trovärdig koppling till att fler personer folkbokför sig i Vingåkers kommun
+  - Ansökan ska beskriva insats, målgrupp, genomförbarhet, förväntad inflyttningseffekt, lokala samarbeten, budget och tidplan
+  - Lokalt samarbete mellan föreningar och företag prioriteras och stödet får användas som medfinansiering
+  - Insatsen ska vara genomförd senast 31 december 2026 om inte särskilda omständigheter beviljas
+  - Insatsen ska återrapporteras till kommunens landsbygdsutvecklare senast tre månader efter genomförandet
+  belopp: Högst 20 000 kr per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr totalt för det tillfälliga stödet under 2025–2026
+  sen_ansokan: Föreningens ansökan ska lämnas senast en månad före insatsens genomförande
+  kalla_url: https://vingaker.se/download/18.67908afb195b26b3dc013493/1743594561141/Samh%C3%A4llsbyggnadsn%C3%A4mnden%202025-04-08%20Kallelse.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Det tillfälliga stödet gäller till och med 2026 och den ansvariga föreningen kan söka särskilda omständigheter för senare genomförande
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: vingaker-kommunalt-driftbidrag-enskild-vag
+  namn: Kommunalt driftbidrag till enskild väg
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägföreningar och samfällighetsföreningar med statligt driftbidrag
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Sökanden ska vara en vägförening eller samfällighetsförening
+  - Den väg som ansökan avser ska ha beviljats statligt driftbidrag från Trafikverket
+  - De stödgrundande vägarna ska ritas in tydligt på en karta som bifogas ansökan
+  - Ansökan ska ange föreningens namn, organisationsnummer, kontaktuppgifter och bankgiro
+  - Trafikverkets totala årliga driftbidrag ska redovisas som beräkningsunderlag
+  - Ansökan ska undertecknas av en eller flera styrelserepresentanter för vägföreningen
+  belopp: 10 % av det statliga driftbidrag som Trafikverket har betalat ut
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 januari–31 mars; ansökan utan karta godkänns inte
+  kalla_url: https://minasidor.vingaker.se/oversikt/getflowform/719/763
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: null
 forutsattningar:
-- id: vingaker-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Kommunens e-tjänster
+- id: vingaker-bidragsberattigad-forening
+  vad: Bidragsberättigad och registrerad förening
+  beskrivning: Föreningen ska ha säte och huvudsaklig verksamhet i Vingåkers kommun, vara ideell och demokratiskt uppbyggd, göra en samhällsnyttig insats och vara registrerad i kommunens föreningsregister. Relevanta verksamheter ska även arbeta med folkhälsa, lokalt kultur- och fritidsutbud, drogfri ungdomsverksamhet, barnkonventionen och RF:s antidopningsregler.
+  system: Vingåkers kommuns föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Före ansökan om kommunalt föreningsbidrag eller användning av föreningsservice
+  giltighet: För att behålla bidragsunderlaget aktuellt ska föreningen lämna verksamhetsberättelse, balansräkning och vinst- och förlusträkning senast 1 april varje år
   ordning: 1
-  kalla_url: https://vingaker.se/kultur--fritid/foreningsliv
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: vingaker-arsmote-och-handlingar
+  vad: Årsmöte, ekonomiska handlingar och ändringsanmälan
+  beskrivning: Föreningen ska årligen hålla årsmöte där styrelse, verksamhetsberättelse, ekonomisk rapport, balans- och resultaträkning samt revisionsberättelse behandlas och godkänns. Räkenskaper ska sparas i minst fem år och förändringar av säte, adress, firmatecknare, styrelse, verksamhet eller syfte ska anmälas omgående.
+  system: Mina sidor eller kommunens blanketter
+  ledtid: null
+  ledtid_text: Årshandlingarna lämnas senast 1 april och förändringar anmäls omgående
+  giltighet: Till nästa årliga uppdatering
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
