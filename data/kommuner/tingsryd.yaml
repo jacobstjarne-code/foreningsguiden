@@ -2,203 +2,261 @@ kommun: Tingsryd
 kommun_slug: tingsryd
 lan: Kronobergs län
 befolkning: 11842
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Tekniska förvaltningen och Bildningsförvaltningen
 ansokningssystem:
   namn: Tingsryds kommuns e-tjänster
-  url: https://tingsryd.se/uppleva-och-gora/foreningar/stod-och-bidrag/
-kalla_url: https://tingsryd.se/uppleva-och-gora/foreningar/stod-och-bidrag/
-verifierad: '2026-07-31'
+  url: https://minasidor.tingsryd.se/
+kalla_url: &huvud https://tingsryd.se/uppleva-och-gora/foreningar/stod-och-bidrag/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Verksamhetsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 12-01
-    - 02-15
+- id: tingsryd-verksamhetsstod
+  namn: Verksamhetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade barn-, ungdoms-, fritids-, kultur-, samlingslokals- samt individ- och samhällsfrämjande föreningar
+  deadlines: {typ: fasta, datum: [02-15]}
   krav:
-  - Föreningen är verksam i Tingsryds kommun
-  - Föreningen är öppen för alla och har ett aktuellt medlemsregister med spårbar medlemsidentitet
-  - Föreningens verksamhet är demokratisk och följer svensk lagstiftning, barnkonventionen och principen om alla människors
-    lika värde
-  - Föreningen följer diskrimineringsgrunderna enligt svensk lagstiftning
-  - Föreningen verkar mot doping och droger; aktiviteter bedrivs i alkohol- och drogfri miljö
-  - Föreningen har godkända stadgar
-  - Föreningen är registrerad i kommunens föreningsregister
-  - Föreningen har dokumenterad verksamhet och egen ekonomisk bärighet
-  - Föreningen har giltigt bank-, plusgiro- eller postgirokonto samt organisationsnummer
-  - Föreningen håller årsmöte där verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse godkänns
-  - Föreningen ska årligen skicka in verksamhetsberättelse, resultatrapport, balansrapport och revisionsberättelse
-  - Vid första ansökan ska även drogpolicy, jämställdhetsplan, tillgänglighetsplan, hållbarhetsplan, plan mot mobbning och
-    särbehandling samt stadgar skickas in
-  - Från och med 2020 ska föreningen begära begränsat registerutdrag ur belastningsregistret för ledare med direkt och regelbunden
-    kontakt med barn
-  belopp: 'Varierar per föreningskategori enligt Riktlinjer för föreningsstöd: barn-/ungdoms-/fritidsföreningar t.ex. aktivitetsbidrag
-    5 kr/deltagartillfälle och driftsbidrag enligt anläggningsschablon; kulturföreningar (bl.a. hembygdsföreningar) max 15
-    000 kr; samlingslokalägande föreningar grundbidrag upp till 5 000 kr eller 60 kr/kvm samt aktivitetsbidrag max 70 kr/tillfälle;
-    pensionärsföreningar upp till 5 000 kr; övriga föreningar upp till 4 000 kr.'
-  sen_ansokan: Ansökningsperiod 1 december–15 februari. Sen ansökan efter detta datum är inte angiven i källan.
-  kalla_url: https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
-  belopp_status: olast
-  deadline_status: olast
+  - Föreningen ska vara verksam i Tingsryds kommun, öppen för alla, demokratiskt uppbyggd och registrerad i kommunens föreningsregister
+  - Föreningen ska ha godkända stadgar, organisationsnummer, föreningskonto, aktuellt medlemsregister, dokumenterad verksamhet och egen ekonomisk bärkraft
+  - Verksamheten ska följa svensk lag, barnkonventionen, diskrimineringsgrunderna och kommunens krav på alkohol-, drog- och dopningsfri miljö
+  - Ansökan ska innehålla verksamhetsberättelse, resultat- och balansrapport samt revisionsberättelse; vid första ansökan även stadgar och kommunens efterfrågade policyer och planer
+  - Föreningar med regelbunden barn- och ungdomsverksamhet ska kontrollera berörda ledares begränsade registerutdrag och intyga detta i den årliga ansökan
+  belopp: Barn-, ungdoms- och fritidsföreningar kan få bland annat 5 kr per deltagartillfälle och anläggningsschabloner; kulturföreningar högst 15 000 kr; samlingslokaler grundbidrag högst 5 000 kr eller 60 kr per kvm samt högst 70 kr per uthyrning; lokala utvecklingsgrupper högst 7 000 kr, pensionärsföreningar högst 5 000 kr och övriga föreningar högst 4 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 december–15 februari; komplett ansökan och föreningshandlingar ska vara inne senast 15 februari
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Engångsbelopp, kan endast sökas en gång per år. Beslut fattas av teknik- och fritidsnämnden. Möjlighet finns
-    till dialogmöte med kommunen om vad stödet ska omfatta.
-  id: tingsryd-verksamhetsstod
-- namn: Evenemangsstöd – mindre arrangemang
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-evenemangsstod-mindre-arrangemang
+  namn: Evenemangsstöd – mindre arrangemang
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som ordnar mindre offentliga evenemang
+  deadlines: {typ: relativ, datum: []}
   krav:
-  - Evenemanget ska välkomna alla grupper i samhället och marknadsföras till allmänheten
-  - Evenemanget ska ha en fastställd entré- eller biljettavgift samt utgifter i form av gager och hyreskostnader
-  - Förväntad publik bör vara minst 25 personer
-  - Årsmöten är inte bidragsberättigade; kostnader för fika, mat eller marknadsföring räknas inte in
-  - Ansökan om stödet ska göras innan evenemanget äger rum
-  - Redovisning av antal kvinnor respektive män som besökt evenemanget krävs för att utbetalning ska ske
-  - I ansökan ska det framgå vilka som sponsrar eller är medarrangör, samt med vilket belopp
-  - Redovisning ska göras i e-tjänsten Evenemangsstöd redovisning – mindre arrangemang snarast efter avslutat evenemang
-  belopp: Upp till 150 kr per såld biljett eller entré (förlustgaranti). Ett maxbelopp fastställs vid beviljande och stödet
-    kan aldrig överstiga detta, oavsett faktisk publiksiffra.
-  sen_ansokan: Kan sökas hela året, men ansökan ska göras innan evenemanget äger rum. Sen ansökan efter genomfört evenemang
-    är inte möjlig enligt källan.
-  kalla_url: https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
-  belopp_status: olast
-  deadline_status: olast
+  - Evenemanget ska ha ett allmänintresse, välkomna alla grupper och marknadsföras till allmänheten
+  - Evenemanget ska ha fastställd entré- eller biljettavgift, gage- eller hyreskostnader och en förväntad publik på minst 25 personer
+  - Ansökan ska lämnas före evenemanget och ange sponsorer och medarrangörer samt deras ekonomiska insatser
+  - Årsmöten samt kostnader för fika, mat och marknadsföring är inte stödberättigade
+  - Efter evenemanget ska faktisk publik och könsfördelning redovisas innan utbetalning kan ske
+  belopp: Högst 150 kr per såld biljett eller entré och aldrig mer än det maxbelopp som beviljades före evenemanget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet kan sökas hela året men ansökan ska lämnas innan evenemanget äger rum
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kallas förlustgaranti i riktlinjerna. Bidraget överstiger aldrig 150 kr per såld biljett eller entré, och aldrig
-    det maxbelopp som beviljats innan evenemanget.
-  id: tingsryd-evenemangsstod-mindre-arrangemang
-- namn: Evenemangsstöd – större arrangemang
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-01
-    - 04-30
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-evenemangsstod-storre-arrangemang
+  namn: Evenemangsstöd – större arrangemang
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som ordnar större offentliga evenemang i kommunen
+  deadlines: {typ: fasta, datum: [04-30]}
   krav:
-  - Evenemanget ska ha ett allmänintresse, till exempel konserter, utställningar eller festivaler
-  - Arrangemanget ska bedömas vara av stort värde för kommunen utifrån antal besökare från ett stort upptagningsområde
-  - Ingen sponsring från kommunen ges om stödet beviljas
-  - Tingsryds kommuns logotyp ska synas i evenemangets marknadsföring; planerad exponering ska framgå i ansökan
-  - Redovisning av antal kvinnor respektive män som närvarat krävs för att utbetalning ska ske
-  - Redovisning ska göras i e-tjänsten Evenemangsstöd redovisning – större arrangemang snarast efter avslutat evenemang
-  belopp: Beloppet fastställs individuellt av teknik- och fritidsnämnden utifrån evenemangets värde för kommunen; ingen fast
-    schablon anges i källan.
-  sen_ansokan: Ansökningsperiod 1 januari–30 april. Sen ansökan efter detta datum är inte angiven i källan.
-  kalla_url: https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
-  belopp_status: olast
-  deadline_status: olast
+  - Evenemanget ska äga rum i kommunen och ha ett allmänintresse, exempelvis som konsert, utställning eller festival
+  - Arrangemanget ska vara av stort värde för kommunen genom besökare från ett stort upptagningsområde och möjliga effekter på gästnätter och handel
+  - Ansökan ska beskriva hur Tingsryds kommuns logotyp exponeras i marknadsföringen
+  - Föreningen kan inte samtidigt få kommunal sponsring för evenemanget
+  - Efter evenemanget ska antal kvinnor och män i publiken redovisas innan utbetalning kan ske
+  belopp: Individuellt beslutat av ansvarig nämnd efter evenemangets värde för kommunen; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 januari–30 april; ansökan ska lämnas senast 30 april
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökningar behandlas av teknik- och fritidsnämnden som fastställer beloppet i varje enskilt fall.
-  id: tingsryd-evenemangsstod-storre-arrangemang
-- namn: Investeringsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-01
-    - 04-30
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-investeringsstod
+  namn: Investeringsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som investerar i egen lokal, anläggning eller betydelsefull utrustning
+  deadlines: {typ: fasta, datum: [04-30]}
   krav:
-  - Stödet gäller föreningsägd anläggning eller lokal, eller inköp av betydelsefull utrustning
-  - Ansökan ska göras innan investeringen påbörjas; påbörjade arbeten och investeringar godkänns inte
-  - Ansökan ska göras tillsammans med kostnadskalkyl och eventuella offerter
-  - Föreningen bör ha undersökt om det finns eventuella medfinansiärer
-  - Periodiskt underhåll medges inte som investering
-  - Efter avslutad investering ska redovisning med bifogade fakturor skickas in för att utbetalning ska ske, via e-tjänsten
-    Investeringsstöd redovisning
-  belopp: 30 % av redovisade kostnader, dock max 25 000 kr. I vissa fall kan högre belopp beviljas vid samansökan med t.ex.
-    Boverket, vilket kräver 30 % kommunal delfinansiering och prövas separat.
-  sen_ansokan: Ansökningsperiod 1 januari–30 april. Ansökan måste vara beviljad innan investeringen påbörjas; sen ansökan
-    för redan påbörjad investering godkänns inte.
-  kalla_url: https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
-  belopp_status: olast
-  deadline_status: olast
+  - Investeringen ska avse en föreningsägd anläggning eller lokal eller inköp av betydelsefull utrustning
+  - Ansökan ska lämnas och beviljas innan investeringen eller arbetet påbörjas
+  - Kostnadskalkyl och relevanta offerter ska bifogas och föreningen bör ha undersökt annan medfinansiering
+  - Periodiskt underhåll är inte stödberättigat
+  - Efter avslutat arbete ska fakturor och slutredovisning lämnas innan utbetalning sker
+  belopp: 30 procent av redovisade kostnader, högst 25 000 kr; högre kommunal medfinansiering kan prövas separat vid samansökan med exempelvis Boverket
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 januari–30 april och beslut måste finnas innan investeringen påbörjas
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Stödet betalas ut efter slutredovisning.
-  id: tingsryd-investeringsstod
-- namn: Utvecklingsstöd
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-01
-    - 04-30
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-utvecklingsstod
+  namn: Utvecklingsstöd
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella organisationer som inte omfattas av kommunens övriga föreningsstöd
+  deadlines: {typ: fasta, datum: [04-30]}
   krav:
-  - Sökande organisation får inte falla inom ramen för övriga föreningsstöd (verksamhets-, evenemangs- eller investeringsstöd)
-  - Stödet är ett arrangörsstöd/uppmuntrande bidrag, till exempel för lokala utvecklingsgrupper, jourverksamhet av ideell
-    karaktär eller projekt
-  - Nattpatruller kan söka upp till 5 000 kr, bedöms utifrån verksamhet
-  - Individ- och samhällsfrämjande föreningar/organisationer kan söka upp till 4 000 kr, bedöms utifrån verksamhet
-  - Specifika arrangemang prövas i varje enskilt fall
-  belopp: 'Varierar per delkategori: nattpatruller upp till 5 000 kr; individ- och samhällsfrämjande föreningar/organisationer
-    upp till 4 000 kr; specifika arrangemang prövas i varje enskilt fall utan angivet maxbelopp.'
-  sen_ansokan: Ansökningsperiod 1 januari–30 april. Sen ansökan efter detta datum är inte angiven i källan.
-  kalla_url: https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
-  belopp_status: olast
-  deadline_status: olast
+  - Sökanden ska vara en organisation som inte faller inom verksamhets-, evenemangs- eller investeringsstödets målgrupper
+  - Stödet ska avse en lokal utvecklingsgrupp, ideell jourverksamhet, ett projekt, en nattpatrull eller annan samhällsfrämjande insats
+  - Ansökan ska beskriva verksamheten eller det specifika arrangemang som ska genomföras
+  - Sökanden ska uppfylla kommunens krav på demokrati, öppenhet, lokal verksamhet och ekonomisk redovisning
+  belopp: Nattpatruller kan få högst 5 000 kr och individ- och samhällsfrämjande föreningar och organisationer högst 4 000 kr; specifika arrangemang prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 januari–30 april; ansökan ska lämnas senast 30 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Avsett för organisationer som inte faller inom ramen för övriga föreningsstöd.
-  id: tingsryd-utvecklingsstod
-- namn: Lovbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som ordnar lovaktiviteter för barn och unga
-  deadlines:
-    typ: lopande
-    datum: []
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-lovbidrag
+  namn: Lovaktivitetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som ordnar kostnadsfria lovaktiviteter för barn och unga
+  deadlines: {typ: relativ, datum: []}
   krav:
-  - Kan sökas av föreningar, evenemangsbolag, övriga arrangörer och entreprenörer
-  - Ansökan ska göras senast två veckor innan avsett skollov (sportlov, påsklov, sommarlov, höstlov, jullov)
-  - Aktiviteterna ska vara kostnadsfria för barn och unga i åldrarna 6–15 år
-  - Aktiviteterna ska ge barn och unga stimulans och personlig utveckling
-  - Aktiviteterna ska stimulera barns och ungas deltagande, främja integration och skapa nya kontaktytor mellan barn med olika
-    social bakgrund
-  - Ingen behovsprövning får göras av de barn som deltar
-  - Redovisning ska göras via e-tjänsten Redovisning för lovaktiviteter efter genomförd aktivitet
+  - Aktiviteten ska vara kostnadsfri och rikta sig till barn och unga i åldern 6–15 år
+  - Aktiviteten ska ge stimulans och personlig utveckling, främja deltagande och integration samt skapa kontakter mellan barn med olika social bakgrund
+  - Alla barn ska behandlas lika i fråga om tillgång och deltagande och ingen behovsprövning får göras
+  - Ansökan ska lämnas senast två veckor före sport-, påsk-, sommar-, höst- eller jullovet
+  - Genomförd aktivitet ska redovisas i kommunens e-tjänst senast två månader efteråt
+  belopp: Kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas hela året men senast två veckor före det aktuella skollovet
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund som bedriver folkbildningsverksamhet i Tingsryds kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundet ska bedriva och redovisa verksamhet i Tingsryds kommun
+  - Redovisningen ska omfatta deltagartimmar som rapporterats till SCB inom studiecirklar, annan gruppverksamhet och kulturprogram
+  - Kommunen fördelar det årliga anslaget mellan studieförbunden efter redovisad lokal verksamhet
+  - Studieförbundet ska lämna de verksamhets- och ekonomiska underlag som kommunen begär för beslut och uppföljning
   belopp: null
-  sen_ansokan: Kan sökas hela året, dock senast två veckor innan avsett lov. Ansökan efter denna tidsfrist är inte angiven
-    i källan.
-  kalla_url: https://tingsryd.se/wp-content/uploads/2025/05/riktlinjer-for-foreningsstod-2311061.pdf
-  belopp_status: okand
-  deadline_status: olast
+  belopp_avser: ren_pott
+  kommunens_pott: 261 000 kr avsattes till studieförbund 2026
+  sen_ansokan: Kommunen publicerar ingen aktuell gemensam sista ansökningsdag
+  kalla_url: &studie https://tingsryd.se/wp-content/uploads/2026/04/protokoll-bn-2026-03-24-hemsidan.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Öppet även för evenemangsbolag, övriga arrangörer och entreprenörer, inte enbart föreningar.
-  id: tingsryd-lovbidrag
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-subventionerade-kommunala-lokaler
+  namn: Subventionerad föreningstaxa i kommunala lokaler och idrottsanläggningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar i kommunen som bokar kommunala lokaler eller idrottsanläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Bokningen ska avse en kommunal idrottshall, gymnastiksal, isanläggning, konstgräsplan eller annan lokal där föreningstaxa gäller
+  - Den lägre ungdomstaxan gäller ledarledd ungdomsverksamhet i en förening
+  - Den lokala föreningstaxan förutsätter att föreningen är verksam i Tingsryds kommun
+  - Bokningsförfrågan ska lämnas i god tid och en helgbokning senast två vardagar före önskad tid
+  belopp: Föreningstaxan 2026 är från 54 kr per timme för ledarledd ungdomsverksamhet, 108 kr för seniorverksamhet, 100 kr för halv konstgräsplan och 165 kr för ungdomsverksamhet i Dackehallen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; bokningsförfrågan för helg ska lämnas minst två vardagar före
+  kalla_url: &taxa https://tingsryd.se/kommun-och-politik/avgifter-och-taxor/kultur-och-fritid/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tingsryd-kulturnatten-2026
+  namn: Bidrag till kulturevenemang under Kulturnatten 2026
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och organisationer med verksamhet i Tingsryds kommun som arrangerar under Kulturnatten
+  deadlines: {typ: fasta, datum: [08-23]}
+  krav:
+  - Föreningen ska vara godkänd och registrerad i kommunens föreningsregister och den ansvariga arrangören ska vara över 18 år
+  - Evenemanget ska genomföras i Tingsryds tätort under Kulturnatten den 7 november 2026
+  - Evenemanget ska vara publikt, alkohol- och drogfritt, ha fri entré och ha kulturellt eller konstnärligt innehåll
+  - Arrangören ansvarar för säkerhet, tillstånd, försäkringar, teknik och marknadsföring med kommunens och Kulturnattens logotyper
+  - Om evenemanget inte genomförs ska det beviljade bidraget återbetalas
+  belopp: Högst 20 000 kr per förening eller organisation
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr för Kulturnatten 2026
+  sen_ansokan: Sista ansökningsdag är 23 augusti 2026; sena eller ofullständiga ansökningar behandlas inte
+  kalla_url: &kulturnatt https://bibliotek.tingsryd.se/-/kulturnatten-2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: tingsryd-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
+  vad: Registrering och årlig uppdatering
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsregister och efter varje årsmöte uppdatera styrelse- och kontaktuppgifter. Verksamhetsberättelse, resultat- och balansrapport samt revisionsberättelse ska lämnas årligen.
   system: Tingsryds kommuns e-tjänster
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna och föreningshandlingarna ska uppdateras varje år
+  giltighet: kalenderår
   ordning: 1
-  kalla_url: https://tingsryd.se/uppleva-och-gora/foreningar/stod-och-bidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: tingsryd-grundvillkor
+  vad: Grundvillkor för föreningsstöd
+  beskrivning: Föreningen ska vara lokalt verksam, öppen och demokratisk, ha stadgar, organisationsnummer, föreningskonto, medlemsregister och egen ekonomisk bärkraft samt följa kommunens värdegrunds-, drog- och diskrimineringskrav.
+  system: Tingsryds kommuns e-tjänster
+  ledtid: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid för registrering eller godkännande
+  giltighet: kalenderår
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: tingsryd-registerutdrag-barnledare
+  vad: Registerutdrag för barn- och ungdomsledare
+  beskrivning: Föreningar med barn- och ungdomsverksamhet ska kontrollera begränsat registerutdrag för ledare som regelbundet möter barn. Kontrollen ska dokumenteras utan att utdraget sparas och föreningen intygar efterlevnaden i den årliga bidragsansökan.
+  system: Föreningens egen kontroll
+  ledtid: null
+  ledtid_text: Utdraget ska uppdateras vart tredje år för verksamma ledare och alltid begäras för nya ledare
+  giltighet: 3 år
+  ordning: 3
+  kalla_url: *huvud
+  giltighet_status: kontrollast
 kommunsiffra: null
