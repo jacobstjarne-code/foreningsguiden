@@ -4,179 +4,340 @@ lan: Värmlands län
 befolkning: 11367
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Blankett/e-tjänst
-  url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-verifierad: '2026-08-01'
+  namn: Hagfors e-tjänster och blanketter
+  url: https://e-tjanster.hagfors.se/
+kalla_url: &huvud https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &register https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsregister.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Lokalt aktivitetsstöd
   kategori:
   - idrott
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Föreningar med aktiviteter för deltagare 5–25 år
   deadlines:
     typ: fasta
     datum:
     - 02-15
     - 08-15
-  krav: []
+  krav:
+  - Sammankomsten ska genomföras i en förening med verksamhet i Hagfors kommun
+  - Minst fem deltagare ska delta i sammankomsten
+  - Deltagarna ska vara 5–25 år
   belopp: Högst 25 kr per sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   id: hagfors-lokalt-aktivitetsstod
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Instruktörsbidrag
   kategori:
   - idrott
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Föreningar med instruktörsledda sammankomster för deltagare 5–25 år
   deadlines:
     typ: fasta
     datum:
     - 02-15
     - 08-15
-  krav: []
-  belopp: null
+  krav:
+  - Sammankomsten ska vara instruktörsledd och genomföras i en förening med verksamhet i Hagfors kommun
+  - Minst fem deltagare ska delta i sammankomsten
+  - Deltagarna ska vara 5–25 år
+  belopp: Kommunen publicerar ingen separat beloppsnivå för instruktörsbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Kommunen anger att instruktörsbidrag kan sökas enligt samma regler som lokalt aktivitetsstöd.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
   id: hagfors-instruktorsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Anläggningsbidrag
   kategori:
   - idrott
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Föreningar med egen anläggnings- eller lokalkostnad
   deadlines:
     typ: fasta
     datum:
     - 08-15
-  krav: []
-  belopp: 75 procent av godkända kostnader, högst 60 000 kr per förening och år
+  krav:
+  - Föreningen ska under året ha haft minst 500 kronor i egen anläggnings- eller lokalkostnad
+  - Godkända kostnader är ränta, försäkring, tomthyra, arrende, el, bränsle, underhåll, vatten och renhållning
+  - Kostnader för lönebidragsanställda, avskrivningar och oavlönat arbete får inte räknas med
+  - Egna hyresintäkter och andra bidrag till anläggningens eller lokalens drift ska redovisas
+  belopp: 75 procent av godkända kostnader, högst 600 kr per medlem 5–25 år och högst 60 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   id: hagfors-anlaggningsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Ledarutbildningsbidrag
   kategori:
   - idrott
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Föreningar som utbildar ledare
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: Högst 200 kr per dag och deltagare samt högst 300 kr per dag för förlorad arbetsinkomst
+  krav:
+  - Utbildningen ska avse ledare i en förening
+  - Kursavgift, kursmaterial och resa med billigaste färdsätt ska styrkas i ansökan
+  - Resor som är mycket långa prövas särskilt av kommunstyrelsen och antalet deltagare kan begränsas
+  - Förlorad arbetsinkomst ska styrkas av arbetsgivaren
+  belopp: Hela kostnaden för kursavgift, kursmaterial och resa, högst 200 kr per dag och deltagare, samt 300 kr per dag för styrkt förlorad arbetsinkomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   id: hagfors-ledarutbildningsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Evenemangs- och utvecklingsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Föreningar med evenemang eller utvecklingsinsatser
   deadlines:
     typ: fasta
     datum:
     - 11-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Nya evenemang kan sökas löpande under verksamhetsåret.
+  krav:
+  - Föreningen ska ha säte i Hagfors, godkända stadgar och minst tio aktiva medlemmar
+  - Minst 80 procent av medlemmarna och föreningens verksamhet ska finnas i kommunen; medlemsavgiften ska vara minst 50 kr för vuxna och 25 kr för yngre
+  - Insatsen ska bland annat vara publik, utveckla föreningens verksamhet, bidra till miljö, besöksnäring eller större evenemang eller marknadsföra Hagfors positivt
+  - Ansökan ska beskriva evenemanget, plats och tid, budget med kostnader och intäkter samt andra sökta bidrag
+  - Kommunens stöd ska framgå i marknadsföringen; ansökningar över 20 000 kr ska styrkas med styrelsebeslut och firmatecknare
+  belopp: Individuellt prövat belopp; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Planerad verksamhet söks senast 15 november; nya idéer löpande cirka två månader före genomförandet
+  kalla_url: https://www.hagfors.se/download/18.5df90ad9157ccec3ebc9defa/1476945712508/normer%2Bf%C3%B6r%2Bevenemangs%2Boch%2Buvecklingsbidrag%2BA5.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
   id: hagfors-evenemangs-och-utvecklingsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Lokalbidrag till lokalhållande föreningar
   kategori:
   - kultur
   - ovrig
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - annat
   malgrupp: Lokalhållande föreningar som upplåter lokaler och anordnar aktiviteter
   deadlines:
     typ: fasta
     datum:
     - 05-15
-  krav: []
-  belopp: null
+  krav:
+  - Föreningen ska vara lokalhållande och ansluten till en godkänd riksorganisation
+  - Föreningen ska upplåta lokalen och anordna aktiviteter för allmänheten
+  - Lokalen ska vara uppvärmd och kunna hyras ut året runt
+  - Stödgrundande lokalyta kan omfatta entréhall, toalett, kapprum, kök och motsvarande utrymmen som hyresgästen behöver
+  belopp: Individuellt prövat lokalbidrag; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   id: hagfors-lokalbidrag-till-lokalhallande-foreningar
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Bevarandebidrag
   kategori:
   - kultur
+  foreningstyp:
+  - hembygd
   malgrupp: Hembygdsföreningar med museal verksamhet
   deadlines:
     typ: fasta
     datum:
     - 05-15
-  krav: []
-  belopp: null
+  krav:
+  - Sökanden ska vara en hembygdsförening
+  - Hembygdsföreningen ska bedriva sin verksamhet som lokalhållande förening
+  - Föreningen ska ansvara för att den museala delen hålls i gott skick och är tillgänglig för allmänheten
+  belopp: Individuellt prövat bevarandebidrag; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   id: hagfors-bevarandebidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 - namn: Bidrag till studieförbund
   kategori:
   - kultur
   - ovrig
+  foreningstyp:
+  - kultur
+  - annat
   malgrupp: Studieförbund med verksamhet i kommunen
   deadlines:
     typ: fasta
     datum:
     - 05-15
-  krav: []
-  belopp: null
+  krav:
+  - Sökanden ska vara ett studieförbund med verksamhet i Hagfors kommun
+  - Ansökan ska avse och redovisa studieförbundets ordinarie lokala verksamhet
+  - Underlaget ska lämnas senast 15 maj så att kommunen kan pröva den redovisade verksamheten
+  belopp: Bidrag baserat på redovisad ordinarie verksamhet; ingen aktuell generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   id: hagfors-bidrag-till-studieforbund
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+- namn: Lokalt aktivitetsstöd 65+
+  kategori:
+  - idrott
+  - pensionar
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar med aktiviteter för deltagare över 65 år
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-15
+    - 08-15
+  krav:
+  - Sammankomsten ska genomföras i en förening enligt samma modell som kommunens lokala aktivitetsstöd
+  - Minst fem deltagare över 65 år ska delta i sammankomsten
+  - Sammankomsten ska ha en ansvarig ledare
+  belopp: Högst 25 kr per sammankomst och 25 kr för ansvarig ledare, totalt högst 50 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Samma ansökningsperioder som kommunens lokala aktivitetsstöd
+  kalla_url: https://www.hagfors.se/download/18.6b9461e619afcc95193804a0/1765956606857/Protokoll%20KF%20251215.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  id: hagfors-lokalt-aktivitetsstod-65-plus
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+- namn: Föreningsbidrag för pensionärs- och funktionshinderföreningar
+  kategori:
+  - social
+  - pensionar
+  - funktionsratt
+  foreningstyp:
+  - social
+  - annat
+  malgrupp: Pensionärsföreningar och föreningar inom funktionshinderområdet
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-31
+  krav:
+  - Föreningen ska bedriva lokal och kontinuerlig verksamhet, huvudsakligen för målgruppen, och ha minst tio medlemmar i lokalavdelningen
+  - Föreningen ska vara ansluten till godkänd riksorganisation, vara partipolitiskt och religiöst obunden samt ha demokratiska stadgar, styrelse och revisorer
+  - Medlemsavgift ska tas ut och ansökan ska visa medlemsantalet, inklusive vilka medlemmar som är folkbokförda i Hagfors
+  - Styrelsen ska lämna en komplett ansökan med verksamhetsberättelse, årsmötesprotokoll, resultat och balans, revision, verksamhetsplan, budget och uppgift om andra stöd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årlig budgetram som fördelas efter Hagforsmedlemmar samt genomförda och planerade aktiviteter; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska vara inlämnad senast 31 oktober inför kommande verksamhetsår
+  kalla_url: &socialnorm https://www.hagfors.se/download/18.45182d2c1916dfc80a15db55/1724676652764/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%20omr%C3%A5de%20pension%C3%A4rsf%C3%B6reningar%20och%20omr%C3%A5de%20funktionshinder%2C%20rev%202023-08-28.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  id: hagfors-pensionars-och-funktionshinderforeningar
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: hagfors-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Blankett/e-tjänst
+  beskrivning: Kommunen har ett sökbart föreningsregister där föreningar kan lämna sina uppgifter. De olika bidragsreglerna anger egna behörighets- och dokumentkrav.
+  system: Hagfors föreningsregister och e-tjänster
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen tidsfrist för omregistrering eller förnyelse
   giltighet: null
   ordning: 1
-  kalla_url: https://www.hagfors.se/undersidor/fritid-och-kultur/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: *register
+  giltighet_status: ingen_regel
 kommunsiffra: null
