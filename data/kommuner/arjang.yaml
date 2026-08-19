@@ -4,194 +4,425 @@ lan: Värmlands län
 befolkning: 9722
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Interbook GO
+  namn: Interbook FRI och kommunens e-tjänster
   url: https://arjang.interbookfri.se/
-kalla_url: https://www.arjang.se/uppleva-och-gora/foreningar.html
-verifierad: '2026-08-01'
+kalla_url: &huvud https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Verksamhetsstöd till ungdomsförening
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ungdomsföreningar
+- id: arjang-verksamhetsstod-till-ungdomsforening
+  namn: Verksamhetsstöd till ungdomsförening
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Godkända ungdomsföreningar med regelbunden verksamhet för 7–25-åringar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31]
+  krav:
+  - &ungdomsgrund Föreningen ska vara godkänd av kultur- och fritidsnämnden, ha demokratiska stadgar och vald styrelse samt normalt vara ansluten till en statsbidragsberättigad riksorganisation
+  - &ungdomsverksamhet Föreningen ska ha minst tio registrerade medlemmar 7–25 år och genomföra minst tio stödberättigade ungdomssammankomster per år
+  - &ungdomspolicy Föreningen ska ha en fungerande drogpolicy som kultur- och fritidsnämnden godkänt och bedriva verksamheten på demokratisk grund
+  - &ungdomsarsdocs Ansökan ska vara beslutad av styrelsen, undertecknad av ordförande, kassör eller sekreterare och kompletteras med verksamhetsberättelse, årsmötesprotokoll, resultat- och balansräkning samt revisionsberättelse
+  - Stödet beräknas efter antalet registrerade och avgiftsbetalande medlemmar 7–25 år under senast avslutade verksamhetsår
+  belopp: 70 kr per medlem för medlem 1–100, 50 kr per medlem för medlem 101–250 och 30 kr per medlem därutöver
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan kan ge 50 procent och för sen komplettering ger inget stöd.
+  kalla_url: &ungdomsnorm https://www.arjang.se/download/18.593d8dad18529d4d62442de6/1773133609965/Regler%20ungdomsf%C3%B6rening.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-verksamhetsstod-till-ungdomsforening
-- namn: Driftstöd till ungdomsförening
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Ungdomsföreningar med driftkostnader
+- id: arjang-driftstod-till-ungdomsforening
+  namn: Driftstöd till ungdomsförening
+  kategori: [idrott, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Godkända ungdomsföreningar som äger eller långsiktigt driver en fritidsanläggning
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  id: arjang-driftstod-till-ungdomsforening
-- namn: Hyresstöd till ungdomsförening
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ungdomsföreningar med hyrd lokal
+    datum: [03-31]
+  krav:
+  - *ungdomsgrund
+  - *ungdomsverksamhet
+  - *ungdomspolicy
+  - *ungdomsarsdocs
+  - Föreningen ska äga eller kontinuerligt disponera anläggningen och använda den i sin barn- och ungdomsverksamhet
+  - Endast styrkta kostnader för tillsyn, mindre reparationer, löpande underhåll och drift är stödgrundande; kostnader för lönebidragsanställda räknas inte
+  - Arbetsjournal, verifierade kostnader eller markerad huvudbok ska bifogas och nya anläggningar ska godkännas av kommunen
+  belopp: 100 procent av godkända kostnader inom kommunens anläggningsschabloner, bland annat högst 30 000 kr för gräsplan, 90 000 kr för rid- eller travanläggning, 35 000 kr för samlingslokal, 25 000 kr för elljusspår och 400 000 kr för slalomanläggning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan kan ge 50 procent och för sen komplettering ger inget stöd.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: Endast huvudanläggningen får full schablon; en ytterligare anläggning av samma typ kan få 50 procent.
+- id: arjang-begransat-driftstod-till-ungdomsforening
+  namn: Begränsat driftstöd till övrig ungdomsförening
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ungdomsföreningar med minst tio medlemmar 7–25 år men färre än tio stödberättigade sammankomster per år
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31]
+  krav:
+  - *ungdomsgrund
+  - Föreningen ska ha minst tio registrerade medlemmar 7–25 år och bedriva viss ungdomsverksamhet men färre än tio stödberättigade sammankomster per år
+  - *ungdomspolicy
+  - *ungdomsarsdocs
+  - Föreningen ska äga eller kontinuerligt disponera anläggningen och använda den i ungdomsverksamheten
+  - Endast styrkta kostnader för tillsyn, mindre reparationer, löpande underhåll och drift är stödgrundande; arbetsjournal och kostnadsunderlag ska bifogas
+  belopp: 100 procent av godkända kostnader inom den begränsade schablontabellen, bland annat högst 15 000 kr för gräsplan, 45 000 kr för rid- eller travanläggning, 17 000 kr för samlingslokal och 80 000 kr för slalomanläggning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan kan ge 50 procent och för sen komplettering ger inget stöd.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-hyresstod-till-ungdomsforening
-- namn: Ledarutbildningsstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Ungdomsföreningar som utbildar ledare
+- id: arjang-hyresstod-till-ungdomsforening
+  namn: Hyresstöd till ungdomsförening
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Godkända ungdomsföreningar som hyr lokal för verksamhet för 7–25-åringar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31]
+  krav:
+  - *ungdomsgrund
+  - *ungdomsverksamhet
+  - *ungdomspolicy
+  - *ungdomsarsdocs
+  - Lokalen ska hyras för föreningens verksamhet för barn och unga 7–25 år
+  - Hyresavtalet ska godkännas av kultur- och fritidsnämnden och hyran bedömas som skälig
+  - Hyreskostnaden ska styrkas med verifikationer
+  belopp: 75 procent av godkänd hyra, högst 3 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan kan ge 50 procent och för sen komplettering ger inget stöd.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-ledarutbildningsstod
-- namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  malgrupp: Ungdomsföreningar med dokumenterad barn- och ungdomsverksamhet
+- id: arjang-ledarutbildningsstod
+  namn: Ledarutbildningsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Godkända ungdomsföreningar som utbildar sina ledare
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-    - 08-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31]
+  krav:
+  - *ungdomsgrund
+  - *ungdomsverksamhet
+  - *ungdomspolicy
+  - *ungdomsarsdocs
+  - Utbildningen ska avse ledare i föreningens barn- och ungdomsverksamhet
+  - Kursavgift ska styrkas och kursprogram eller kursintyg ska bifogas
+  - Årsgränsen beräknas efter föreningens stödberättigade medlemmar 7–25 år
+  belopp: Högst 50 kr per stödberättigad medlem 7–25 år och kalenderår
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan kan ge 50 procent och för sen komplettering ger inget stöd.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-aktivitetsstod
-- namn: Verksamhetsstöd till övrig förening
-  kategori:
-  - kultur
-  - social
-  - funktionsratt
-  - ovrig
-  malgrupp: Övriga föreningar och organisationer
+- id: arjang-aktivitetsstod
+  namn: Aktivitetsstöd
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Godkända ungdomsföreningar med ledarledd verksamhet för 7–25-åringar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31, 08-31]
+  krav:
+  - *ungdomsgrund
+  - *ungdomsverksamhet
+  - *ungdomspolicy
+  - Aktiviteten ska vara beslutad och planerad av föreningen, pågå minst 45 minuter och ha gemensam start och avslutning
+  - Minst fem deltagare 7–25 år och en närvarande ledare krävs
+  - Närvarokort ska föras och sparas i fyra år; endast lokala aktiviteter och arrangemang utan entréavgift är stödgrundande
+  belopp: 5 kr per deltagare och stödberättigat aktivitetstillfälle; nivån kan justeras efter kommunens budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den 31 mars gäller verksamhet 1 juli–31 december och den 31 augusti gäller verksamhet 1 januari–30 juni.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-verksamhetsstod-till-ovrig-forening
-- namn: Medlemsstöd till pensionärsförening
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar
+- id: arjang-sarskilt-foreningsstod
+  namn: Särskilt föreningsstöd och startbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ungdomsföreningar med en särskild aktivitet utöver ordinarie verksamhet samt nybildade föreningar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [11-15]
+  krav:
+  - *ungdomsgrund
+  - *ungdomspolicy
+  - Aktiviteten ska ligga utanför föreningens ordinarie verksamhet och genomföras under ansökningsåret; startbidrag kan lämnas till en ny förening
+  - Ansökan ska tydligt beskriva aktivitet, målgrupp och genomförande
+  - Budgeten ska skilja föreningens egen finansiering från det belopp som söks hos kommunen
+  - Sommarlovsverksamhet kan endast få stöd i efterhand som täckning för redovisad förlust
+  belopp: Individuellt prövat; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 november under det år då aktiviteten genomförs.
+  kalla_url: *ungdomsnorm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-medlemsstod-till-pensionarsforening
-- namn: Hyresstöd till pensionärsförening
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar med hyrd lokal
+- id: arjang-verksamhetsstod-till-ovrig-forening
+  namn: Verksamhetsstöd till övrig förening
+  kategori: [kultur, social, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som inte är ungdoms- eller pensionärsföreningar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31]
+  krav:
+  - &ovriggrund Föreningen eller organisationen ska ha verksamhet i Årjäng, årsmötesantagna stadgar, vald styrelse och konto i organisationens namn
+  - &ovrigformalia Ansökan ska vara beslutad av styrelsen och undertecknad av ordförande, kassör eller sekreterare; ekonomiska eller yrkesorganisationer, stödföreningar, politiska och militära föreningar samt paraplyorganisationer omfattas inte
+  - &ovrigarsdocs Verksamhetsberättelse, årsmötesprotokoll, resultat- och balansräkning samt revisionsberättelse för senast avslutade verksamhetsår ska bifogas
+  - Föreningen ska varken vara ungdomsförening eller pensionärsförening enligt kommunens övriga stödregler
+  - Verksamhetens totala kostnader, inklusive eventuell hyra, ska styrkas med fakturor eller markerad huvudbok
+  - Samma verksamhet får inte samtidigt få stöd från annan kommunal nämnd eller styrelse
+  belopp: Individuellt prövat utifrån verksamhetens styrkta kostnader och kommunens årliga budget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan eller komplettering behandlas inte.
+  kalla_url: &ovrignorm https://www.arjang.se/download/18.593d8dad18529d4d62442de7/1773133634365/Regler%20%C3%B6vriga%20f%C3%B6reningar.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-hyresstod-till-pensionarsforening
-- namn: Lokalstöd
-  kategori:
-  - kultur
-  - social
-  - ovrig
-  malgrupp: Godkända föreningar
+- id: arjang-medlemsstod-till-pensionarsforening
+  namn: Medlemsstöd till pensionärsförening
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med registrerade och avgiftsbetalande medlemmar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.arjang.se/kommunalservice/startsida/upplevaochgora/foreningsliv/foreningsstod.9838.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [03-31]
+  krav:
+  - *ovriggrund
+  - *ovrigformalia
+  - *ovrigarsdocs
+  - Medlemsunderlaget ska avse registrerade och avgiftsbetalande medlemmar under senast avslutade verksamhetsår; befrielse från avgift kan godtas
+  - Föreningen ska kunna styrka medlemsantalet
+  - Samma verksamhet får inte samtidigt få stöd från annan kommunal nämnd eller styrelse
+  belopp: 18 kr per stödberättigad medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan eller komplettering behandlas inte.
+  kalla_url: *ovrignorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: arjang-lokalstod
+- id: arjang-hyresstod-till-pensionarsforening
+  namn: Hyresstöd till pensionärsförening
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar som hyr lokal för sin verksamhet
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - *ovriggrund
+  - *ovrigformalia
+  - *ovrigarsdocs
+  - Lokalen ska hyras för pensionärsföreningens verksamhet
+  - Hyresavtalet ska godkännas av kultur- och fritidsnämnden och hyran bedömas som skälig
+  - Hyreskostnaden ska styrkas med verifikationer
+  belopp: 85 procent av godkänd hyra, högst 20 000 kr per organisation och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan eller komplettering behandlas inte.
+  kalla_url: *ovrignorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: arjang-lokalstod
+  namn: Lokalstöd till allmän samlingslokal
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som äger eller driver en godkänd allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - *ovriggrund
+  - *ovrigformalia
+  - *ovrigarsdocs
+  - Kultur- och fritidsnämnden ska först ha godkänt lokalen och fastställt dess stödberättigade uthyrningsyta
+  - Lokalen ska vara en allmän samlingslokal som upplåts till föreningsliv och allmänhet
+  - Kostnaderna för lokalen ska styrkas; upplåtelse till olaglig, ordningsstörande eller antidemokratisk verksamhet kan medföra indraget stöd
+  belopp: 155 kr per kvadratmeter godkänd uthyrningsyta, högst 90 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan eller komplettering behandlas inte.
+  kalla_url: *ovrignorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: arjang-studieforbundsstod
+  namn: Stöd till studieförbund
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Årjäng
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - *ovriggrund
+  - Studieförbundet ska vara verksamt i Årjäng och ingå i en riksorganisation som Folkbildningsrådet godkänt
+  - Verksamhetsplanen ska särredovisa lokala studietimmar, kulturarrangemang och integrationsverksamhet i kommunen
+  - Verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse ska bifogas
+  - Integrationsdelen ska avse verksamhet som integrerar och inkluderar nyanlända
+  - Samma verksamhet får inte samtidigt få stöd från annan kommunal nämnd eller styrelse
+  belopp: 10 kr per studietimme, där kulturarrangemang räknas som nio studietimmar; 22 kr per timme för studieförbund med kontor i Årjäng
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr per år, varav 30 000 kr till integration och 70 000 kr till övrig studie- och kulturverksamhet
+  sen_ansokan: Ansökan senast 31 mars och komplettering senast 31 maj; sen ansökan eller komplettering behandlas inte.
+  kalla_url: *ovrignorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: arjang-arrangemangsbidrag
+  namn: Arrangemangsbidrag
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, social, ungdom, annat]
+  malgrupp: Ideella föreningar med säte i Årjäng som ordnar offentliga arrangemang i kommunen
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningen ska vara ideell, ha säte i Årjäng, organisationsnummer, konto i föreningens namn, stadgar och registrering i kommunens föreningsregister
+  - Arrangemanget ska vara offentligt, genomföras i kommunen, främja människors lika värde och ha en ekonomiskt försvarbar plan; kulturarrangemang prioriteras
+  - Ansökan ska ange arrangör, innehåll, tid, plats, kontaktperson, marknadsföring och fullständig budget
+  - Kommunens stöd ska synliggöras och arrangemanget marknadsföras, bland annat i Visit Årjängs kalender
+  - Egen lokalhyra, ideellt arbete, anställningskostnader, ränta, amortering, skulder, studieresor och planeringsfika är inte stödgrundande
+  - Genomförande och ekonomi ska redovisas med underlag senast sex veckor efter arrangemanget
+  belopp: Individuellt prövat; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas hela året men ska vara kommunen tillhanda minst tre månader före arrangemanget.
+  kalla_url: https://www.arjang.se/download/18.3a3421bb1969f7cfb0c71dd/1746693683355/Riktlinje%20f%C3%B6r%20arrangemangsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: arjang-investeringsstod
+  namn: Investeringsstöd till föreningsverksamhet
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar, allmännyttiga stiftelser och bolag som investerar i stödberättigad föreningsverksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en ideell förening, allmännyttig stiftelse eller ett bolag som bedriver verksamhet som uppfyller kommunens föreningsstödsregler
+  - Investeringen ska avse den egna verksamheten och utveckla eller förbättra en anläggning eller nödvändig utrustning
+  - Ansökan ska beskriva investeringen, nyttan, kostnaden och finansieringen samt redovisa andra sökta eller beviljade stöd
+  - Senaste årsredovisning och aktuella resultat- och balansuppgifter ska kunna lämnas; ritningar, kartor, offerter eller fakturor ska styrka projektet
+  - Investeringen och kostnaderna ska följas upp enligt kommunens beslut
+  belopp: Högst 30 procent av den godkända totala investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen generell ansökningsfrist i den gällande riktlinjen.
+  kalla_url: https://www.arjang.se/download/18.72110eb518f378cf87c17c5a/1715686952735/KOF%202024-05-07%20Protokoll.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: arjang-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänster
+  beskrivning: Föreningen registreras i kommunens föreningsregister och håller stadgar, styrelse, kontaktuppgifter och konto i föreningens namn aktuella.
+  system: Interbook FRI
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.arjang.se/uppleva-och-gora/foreningar.html
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: arjang-allmanna-villkor
+  vad: Demokratiska föreningsvillkor
+  beskrivning: Föreningen ska vara demokratiskt uppbyggd med årsmötesantagna stadgar, vald styrelse och verksamhet som uppfyller den aktuella stödformens medlems- och verksamhetskrav.
+  system: Kommunens föreningsregler
+  ledtid: null
+  ledtid_text: Prövas i samband med ansökan.
+  giltighet: null
+  ordning: 2
+  kalla_url: *ungdomsnorm
+  giltighet_status: ingen_regel
+- id: arjang-arshandlingar
+  vad: Årsmötes- och ekonomihandlingar
+  beskrivning: Verksamhetsberättelse, årsmötesprotokoll, resultat- och balansräkning samt revisionsberättelse för senast avslutade verksamhetsår lämnas med den årliga ansökan eller kompletteringen.
+  system: Interbook FRI och kommunens blanketter
+  ledtid: null
+  ledtid_text: Ordinarie ansökan senast 31 mars och komplettering senast 31 maj för de årliga stöden.
+  giltighet: null
+  ordning: 3
+  kalla_url: *ovrignorm
+  giltighet_status: ingen_regel
 kommunsiffra: null
