@@ -2,33 +2,42 @@ kommun: Vännäs
 kommun_slug: vannas
 lan: Västerbottens län
 befolkning: 9165
-forvaltning: Kultur och fritid
+forvaltning: Kommunstyrelseförvaltningen samt Barn- och utbildningsförvaltningen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
+  namn: E-serve och kommunens e-tjänster
   url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium
-kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium
-verifierad: '2026-08-01'
+kalla_url: &huvud https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: '03-31'
+  kalla_url: &norm https://vannas.se/download/18.5bad700b19b284ee8a4592/1768828400125/Bidragsreglemente%202026%20V%C3%A4nn%C3%A4s%20kommun.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: vannas-drift-lokal
   namn: Drift- och lokalbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som äger eller hyr en lokal eller anläggning i Vännäs kommun
   deadlines:
     typ: fasta
     datum:
     - 03-31
   krav:
-  - Föreningen ska ha säte i kommunen
-  - Föreningen ska ha handlingsprogram gällande alkohol, droger och dopning samt jämställdhet
-  - 'Bidraget baseras på styrkta kostnader föregående år: hyra, el, uppvärmning, försäkring, räntor, vatten, renhållning och
-    underhåll'
-  - Anläggningar som får bidrag förutsätts, efter samråd med ägaren, vara öppna för allmän verksamhet
-  belopp: 'Inget fast belopp - beräknas utifrån styrkta kostnader föregående år: hyra, el, uppvärmning, försäkring, räntor,
-    vatten, renhållning och underhåll'
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
+  - Föreningen ska uppfylla kommunens allmänna villkor och äga eller hyra lokalen eller anläggningen i Vännäs kommun
+  - Anläggningar som får bidrag ska vara öppna för allmän verksamhet
+  - Ansökan ska styrka föregående års kostnader för hyra, el, internet, uppvärmning, försäkring, räntor, vatten, renhållning eller underhåll samt redovisa hyresintäkter
+  - Prövningen beaktar aktiviteter och ungdomsverksamhet, mötesplatsens betydelse, nyttjandegrad, geografiskt läge, kulturvärde, kostnader och intäkter samt storlek och standard
+  - Underlagen för beviljat bidrag ska sparas i tre år för kommunens stickprovskontroll
+  belopp: Individuellt prövat utifrån styrkta drift-, underhålls- och hyreskostnader samt hyresintäkter; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med styrkta kostnader ska lämnas senast 31 mars varje år
   kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/drift--och-lokalbidrag
   belopp_status: ingen_regel
   deadline_status: kontrollast
@@ -39,49 +48,50 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: true
-  status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: vannas-ledarutbildning
   namn: Ledarutbildningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som uppfyller villkoren för sammankomstbidrag och utbildar verksamma eller blivande ledare
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
-  - Föreningen ska uppfylla kraven för sammankomstbidrag
-  - Utbildningen ska vara tydligt riktad mot ledarutbildning och arrangerad av eller i samverkan med riks- eller distriktsorganisation
-  - Studiecirklar, kongresser, workshops, läger och konferenser är inte bidragsgrundande
-  - Ansökan, inklusive program, kostnadsredovisning och deltagarförteckning, ska lämnas in senast 2 månader efter genomförd
-    utbildning
-  belopp: 400 kronor per dag och person, max 3 dagar per utbildning
-  sen_ansokan: Ansökan lämnas in senast 2 månader efter genomförd utbildning, tillsammans med program, kostnadsredovisning
-    och deltagarförteckning.
+  - Föreningen ska uppfylla kommunens allmänna villkor och kraven för sammankomstbidrag
+  - Utbildningen ska stärka ledarkompetensen och arrangeras av eller i samverkan med ett riks- eller distriktsförbund
+  - Avgift, material, resa, mat och logi kan vara stödgrundande; studiecirklar, kongresser, workshops, läger och konferenser är uteslutna
+  - Ansökan ska innehålla utbildningsprogram, kostnadsredovisning och deltagarförteckning
+  - Underlagen för beviljat bidrag ska sparas i tre år
+  belopp: Högst 400 kr per dag och person under maximalt tre dagar; längre utbildningar prövas särskilt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast två månader efter genomförd utbildning
   kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/ledarutbildningsbidrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Relativ tidsfrist: 2 månader efter genomförd utbildning, kan inte anges som ett årligt MM-DD-datum.'
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: vannas-utveckling
   namn: Utvecklingsbidrag
+  status: aktiv
   kategori:
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som vill genomföra ett projekt eller utveckla sin verksamhet
   deadlines:
     typ: fasta
     datum:
@@ -93,98 +103,222 @@ bidrag:
   - Ansökan ska ange sökt belopp och övrig finansiering
   - Ansökan ska ange följderna om en mindre summa än det sökta beloppet delas ut
   - Användningen av bidraget ska redovisas till kommunen, inklusive övrig finansiering och resultat
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Individuellt prövat projekt- eller utvecklingsbidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars genom kommunens e-tjänst
   kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/utvecklingsbidrag
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: vannas-kulturarrangemang
   namn: Kulturarrangemangsbidrag
+  status: aktiv
   kategori:
   - kultur
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: [kultur, hembygd, ungdom, annat]
+  malgrupp: Föreningar som genomför ett eller flera offentliga kulturarrangemang i Vännäs kommun
   deadlines:
     typ: fasta
     datum:
     - 01-20
   krav:
-  - Max en ansökan och max 20 000 kr i bidrag per förening och år
   - Föreningen ska uppfylla de allmänna kraven i kommunens bidragsreglemente
   - Arrangemanget ska vara öppet för allmänheten och genomföras under perioden januari till december
-  belopp: Max 20 000 kr per förening och år (max en ansökan per förening och år)
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  - En förening får lämna en ansökan per år men den kan omfatta ett eller flera egna eller gemensamma arrangemang
+  - Ansökan ska ange belopp och övrig finansiering samt beskriva användning, invånarnytta, inkludering, jämställdhet och barn-, tillgänglighets- och hållbarhetsperspektiv
+  - Stödet får användas till arvoden, inköp och andra nödvändiga genomförandekostnader
+  - Redovisning med beskrivning, antal arrangemang och besökare samt ekonomiskt utfall ska lämnas inom två månader och senast 31 december
+  belopp: Högst 20 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 20 januari; redovisning ska lämnas inom två månader och senast 31 december
   kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/bidrag-for-kulturarrangemang
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Utbetalning sker efter godkänd redovisning.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
+  senast_verifierad: '2026-08-19'
+- id: vannas-sammankomstbidrag
+  namn: Sammankomstbidrag
   status: aktiv
-  senast_verifierad: '2026-08-01'
-- id: vannas-ungdomsstiftelse
-  namn: Bidrag från Östen Berglunds ungdomsstiftelse
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  kategori: [idrott, kultur, social, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som ordnar aktiviteter för barn och unga 6–25 år eller personer med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 10-09
+    datum: ['02-25', '08-25']
   krav:
-  - Mottagare kan vara enskild under 20 år, grupp av enskilda under 20 år eller förening som har eller planerar att starta
-    verksamhet riktad till barn och ungdomar under 20 år
-  - Enskild eller grupp av enskilda ska vara folkbokförd i Vännäs kommun för att kunna beviljas medel
-  - Föreningen ska vara registrerad i Vännäs kommun och/eller ha verksamhet i Vännäs kommun för att kunna beviljas medel
-  - Medel som mottas ska endast riktas till verksamhet som är fri från alkohol, tobak, narkotika och doping
-  - Ansökan ska innehålla uppgift om vad mottagaren avser använda medlen till
-  belopp: Inget fast belopp - stiftelsen delar ut avkastningen av stiftelsekapitalet; efter de första 20 åren högst 5 % av
-    ursprungskapitalet per år
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vannas.se/kommun-och-politik/ekonomi-budget-och-taxor/stipendier/osten-berglunds-ungdomsstiftelse
-  belopp_status: ingen_regel
+  - Föreningen ska uppfylla kommunens allmänna villkor och aktiviteten ska genomföras som en del av föreningens verksamhet
+  - Aktiviteten ska ledas av en ledare som är minst 13 år
+  - Sammankomsten ska pågå minst 45 minuter och ha minst tre deltagare utöver ledaren i åldern 6–25 år eller anordnas för personer med funktionsnedsättning oavsett ålder
+  - En naturlig grupp får inte delas och bidrag betalas endast en gång per dag och grupp
+  - Studiecirkelverksamhet och aktiviteter i samarbete med skolan under skoltid är inte stödgrundande
+  - Underlagen ska sparas i tre år för kommunens stickprovskontroll
+  belopp: 50 kr per bidragsberättigad sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 1 juli–31 december ska lämnas senast 25 februari och för 1 januari–30 juni senast 25 augusti
+  kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/sammankomstbidrag
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Ansökningsperiod 2026: 12 augusti-9 oktober. Perioden fastställs årligen av kommunstyrelsen och kan variera
-    mellan år.'
-  min_medlemmar: null
-  alder_min: null
-  alder_max: 20
-  min_verksamhetstid_manader: null
-  foreningstyp: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Reglerna är öppna för alla föreningstyper och kräver inte anslutning till idrottsrörelsen.
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: vannas-fri-lokalhyra
+  namn: Fri lokalhyra
+  status: aktiv
+  kategori: [idrott, kultur, social, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med sammankomstbidrag och stödgrundande verksamhet i kommunens lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och vara berättigad till sammankomstbidrag
+  - Föreningen ska ha minst 20 aktiviteter per år; kravet gäller inte verksamhet för personer med funktionsnedsättning
+  - Den fria hyran gäller lokaler och anläggningar som ägs och drivs av Vännäs kommun
+  - Fri hyra gäller inte verksamhet med enbart deltagare över 25 år, om de inte är ledare eller har funktionsnedsättning
+  - En bokad tid som inte utnyttjas debiteras enligt ordinarie taxa
+  - I ishallen gäller den fria hyran endast föreningar vars huvudsakliga verksamhet bedrivs på is
+  belopp: Fri hyra i kommunägda och kommunalt drivna lokaler och anläggningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist; rätten följer av sammankomstbidraget och aktivitetsvillkoren
+  kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/fri-lokalhyra
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: vannas-boverket-medfinansiering
+  namn: Kommunal medfinansiering av Boverkets investeringsbidrag för allmänna samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar och andra organisationer utan vinstsyfte som söker Boverkets investeringsbidrag
+  deadlines:
+    typ: fasta
+    datum: ['10-01']
+  krav:
+  - Ansökan ska avse en allmän samlingslokal i Vännäs kommun som organisationen äger eller disponerar genom långsiktig nyttjanderätt
+  - Lokalen ska vara tillgänglig för föreningsliv, möten, studier, kulturarrangemang eller fritidsaktiviteter
+  - En sökande förening ska vara registrerad i kommunens register; organisationen ska ha eget organisationsnummer och konto samt vara skuldfri hos kommunen
+  - Åtgärden ska vara stödberättigad hos Boverket och den kompletta Boverketansökan ska bifogas
+  - Boverket måste bevilja investeringsbidraget och dess godkända slutredovisningsbeslut ska senare lämnas till kommunen
+  - Underkänd slutredovisning medför full återbetalning och kommunens stöd ska framgå i marknadsföringen
+  belopp: Minst 30 procent av den projektkostnad som Boverket godkänner; stödet kan vara ekonomiskt eller likvärdigt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara kommunstyrelseförvaltningen tillhanda senast 1 oktober; sena ansökningar behandlas inte
+  kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium/investeringsbidrag-via-boverket
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunens medfinansiering förutsätter budgetutrymme och bifall från Boverket.
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: vannas-kulturforening-verksamhetsbidrag
+  namn: Verksamhetsbidrag för ideella kulturföreningar 2026–2028
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Etablerade ideella kulturföreningar som löpande breddar kulturutbudet för Vännäs invånare
+  deadlines:
+    typ: fasta
+    datum: ['04-15']
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och ha varit verksam i minst fem år
+  - Föreningen ska vara ansluten till en riksorganisation eller motsvarande; undantag kan beviljas efter särskild prövning
+  - Verksamheten ska ge invånarna kulturupplevelser vid flera tillfällen per år och komplettera eller bredda kommunens kulturutbud
+  - Föreningen ska synliggöra verksamheten, publicera evenemang på Visit Vännäs eller enligt överenskommelse och arbeta mot verksamhetsplanens mål
+  - Ansökan ska innehålla stadgar, signerat årsmötesprotokoll, verksamhetsplan samt föregående års verksamhets-, revisions- och ekonomihandlingar
+  - Föreningen ska årligen återrapportera användningen samt lämna verksamhetsberättelse, resultat- och balansräkning och verksamhetsplan senast 31 mars
+  belopp: Högst två prisbasbelopp per år under den treåriga överenskommelsen 2026–2028
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för avtalsperioden 2026–2028 skulle lämnas senast 15 april 2026
+  kalla_url: https://vannas.se/download/18.7b0b1b7219cfccb61f5201/1774512615728/Verksamhetsbidrag%20f%C3%B6r%20ideella%20kulturf%C3%B6reningar,%20riktlinje%20och%20bed%C3%B6mningskriterier.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: En beviljad förening har som utgångspunkt inte rätt till ytterligare kommunal sponsring eller kulturarrangemangsbidrag under avtalsperioden.
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: vannas-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med lokalt förankrad verksamhet i Vännäs kommun
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Studieförbundet ska ingå i Folkbildningsrådet, få statsbidrag och ha lokal förankring för planering och ledning
+  - Bidrag ges endast för verksamhet i Vännäs kommun och ska användas till kostnader direkt knutna till verksamheten
+  - Bidraget får inte förmedlas som ekonomisk förmån till enskilda deltagare, grupper eller föreningar
+  - Skollik, institutionsfinansierad eller kommersiell verksamhet samt fritidsaktiviteter som får stöd på annat sätt är uteslutna
+  - Verksamhetsredovisningen ska beskriva föregående års lokala verksamhet och komplettera statistiken
+  - Kommunen kan begära ytterligare handlingar och nya studieförbund beslutas första året i särskild ordning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Barn- och utbildningsnämndens årsanslag fördelas med 90 procent som grundbidrag och 10 procent som kulturprogramsbidrag efter tvåårsgenomsnitt av studietimmar; ett kulturprogram motsvarar 7,3 studietimmar och totalsumman publiceras inte
+  sen_ansokan: Verksamhetsredovisningen ska vara barn- och utbildningsnämnden tillhanda senast 1 maj
+  kalla_url: https://vannas.se/download/18.2f2053db19dd25d6b1ee01c/1777462250058/Bidragsregler%20studief%C3%B6rbund%20-%20beslut%202008-10-30.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Hela det beviljade anslaget betalas ut i maj efter mottagen verksamhetsredovisning.
   kraver_registrering: null
   sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-01'
 forutsattningar:
 - id: vannas-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  vad: Registrering och årlig uppdatering av föreningsuppgifter
+  beskrivning: Föreningen ska vara ideell, allmännyttig, öppen och demokratiskt uppbyggd, ha vald styrelse och antagna stadgar, ha sitt säte och huvudsakliga verksamhet i Vännäs samt varje år fylla i aktuella uppgifter i kommunens föreningsregister.
+  system: E-serve
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Aktuella föreningsuppgifter ska lämnas senast 31 mars varje år
+  giltighet: Föreningsregistrets uppgifter ska uppdateras årligen senast den 31 mars
   ordning: 1
-  kalla_url: https://vannas.se/kultur-och-fritid/foreningsliv-och-foreningar/stod-bidrag-och-stipendium
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: vannas-barn-och-ungdomsvillkor
+  vad: Särskilda trygghetsvillkor för barn- och ungdomsverksamhet
+  beskrivning: Föreningar med barn- och ungdomsverksamhet ska följa barnkonventionen, ha alkohol- och drogpolicy med handlingsprogram samt en verksamhetsanpassad krisplan; idrottsföreningar ska även följa Idrotten Vill.
+  system: Kommunens föreningsregister och bidragsansökan
+  ledtid: null
+  ledtid_text: Policyerna ska revideras kontinuerligt och krisplanen följas upp och uppdateras regelbundet
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
