@@ -4,15 +4,22 @@ lan: Jämtlands län
 befolkning: 15834
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
-kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
-verifierad: '2026-08-01'
+  namn: Krokoms e-tjänster och blanketter
+  url: https://e-tjanster.krokom.se/
+kalla_url: &huvud https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://e-tjanster.krokom.se/oversikt/overview/118
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: krokom-aktivitetsbidrag
   namn: Aktivitetsbidrag
   kategori:
   - idrott
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -25,19 +32,25 @@ bidrag:
   - Sammankomsten ska omfatta minst 60 minuter
   - Föreningen ska redovisa minst tio bidragsberättigade sammankomster per kalenderår
   - Närvarokort ska sparas i minst fyra år
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
-  belopp_status: okand
+  - Aktiviteten ska ha gemensam samling, instruktion och avslutning; entrétävlingar, kommersiell verksamhet och studiecirklar räknas inte
+  - Ledaren ska vara minst 13 år, närvara och intyga närvarokortet; ordförande samt revisor eller kassör intygar ansökan
+  belopp: Ersättning per deltagartillfälle; kommunen publicerar ingen aktuell sats
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari respektive 25 augusti.
+  kalla_url: https://e-tjanster.krokom.se/oversikt/getflowform/188/749
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: krokom-anlaggningsbidrag-sommaranlaggningar
   namn: Anläggningsbidrag sommaranläggningar
   kategori:
   - idrott
   - ovrig
+  foreningstyp: [idrott, friluft, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -45,21 +58,26 @@ bidrag:
     - 05-01
   krav:
   - Anläggningen ska vara föreningsägd eller föreningsdriven
-  - Minst tio bidragsberättigade sammankomster per anläggning och år krävs
-  belopp: Beloppet varierar efter anläggningstyp enligt kommunens schablon, exempelvis elljusspår 7 000–11 000 kr, fotbollsplaner
-    4 000–50 000 kr, isbanor 6 000–11 000 kr
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+  - Föreningen ska ha minst tio medlemmar från sju år, skälig medlemsavgift och minst en styrelseledamot under 25 år
+  - Normalt krävs minst tio stödgrundande sammankomster per anläggning och år; allmännyttiga anläggningar kan undantas
+  - Ansökan ska ange anläggningstyp, ansvarig person, betalningsuppgifter och erforderliga avtal eller besiktningsunderlag
+  belopp: Schablon efter anläggningstyp; fotbolls- och friidrottsanläggningar 1 000–50 000 kr, motoranläggningar 25 000 kr, ridanläggningar 15 000–20 000 kr samt skjut- och tennisanläggningar 2 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 maj; förening med skötselavtal behöver inte söka årligen.
+  kalla_url: https://e-tjanster.krokom.se/oversikt/getflowform/200/54
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: krokom-anlaggningsbidrag-vinteranlaggningar
   namn: Anläggningsbidrag vinteranläggningar
   kategori:
   - idrott
   - ovrig
+  foreningstyp: [idrott, friluft, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -67,20 +85,25 @@ bidrag:
     - 12-01
   krav:
   - Anläggningen ska vara föreningsägd eller föreningsdriven
-  - Minst tio bidragsberättigade sammankomster per anläggning och år krävs
-  belopp: Beloppet varierar efter anläggningstyp enligt kommunens schablon, exempelvis elljusspår 7 000–11 000 kr, fotbollsplaner
-    4 000–50 000 kr, isbanor 6 000–11 000 kr
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+  - Föreningen ska ha minst tio medlemmar från sju år, skälig medlemsavgift och minst en styrelseledamot under 25 år
+  - Normalt krävs minst tio stödgrundande sammankomster per anläggning och år; allmännyttiga anläggningar kan undantas
+  - Elkostnader ska styrkas när elbidrag söks och ansökan ska ange ansvarig förening och person
+  belopp: Elljusspår 7 000–11 000 kr, skoter 3 000–5 000 kr, el 2 200 kr, värmestuga 2 000 kr, övrigt skidspår 2 000–4 000 kr, is med sarg 6 000–11 000 kr, is utan sarg 1 000–5 000 kr, replift 3 000 kr och skidskytte 1 500 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 december; förening med skötselavtal behöver inte söka årligen.
+  kalla_url: https://e-tjanster.krokom.se/oversikt/getflowform/201/55
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: krokom-skoterledsbidrag
   namn: Skoterledsbidrag
   kategori:
   - ovrig
+  foreningstyp: [idrott, friluft, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -91,20 +114,25 @@ bidrag:
   - Leden ska hållas uppröjd till minst 2 meters bredd
   - Uppmärkning ska ske enligt Naturvårdsverkets riktlinjer
   - Föreningen är skyldig att omgående anmäla eventuella förändringar till kommunen
+  - Leden ska underhållas, renhållas och skyltarna kontrolleras löpande; ansvarig förening och kontaktperson ska anges
   belopp: 1 000 kronor per mil godkänd led och år
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 december.
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-- id: krokom-lokalbidrag
-  namn: Lokalbidrag
+  senast_verifierad: '2026-08-18'
+- id: krokom-lokalbidrag-foreningsagd
+  namn: Lokalbidrag för föreningsägd lokal
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -112,45 +140,74 @@ bidrag:
     - 04-01
   krav:
   - I styrelsen ska ingå minst en ledamot under 25 år
-  - Verifikat på betalda räkningar krävs
+  - Kommunstyrelsen avgör om lokalen är stödberättigad och ungdomsföreningar ska få hyra lokalen i mån av plats
+  - Verksamhets- och ekonomisk berättelse samt verifikat på senast 31 december betalda kostnader för belysning, uppvärmning och försäkring krävs
   - Söks i efterskott för föregående kalenderår
-  belopp: 'Föreningsägda lokaler: upp till 30 procent av kostnaderna. Föreningshyrda lokaler: 100 procent av skälig lokalkostnad,
-    högst 3 000 kronor per år'
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+  belopp: Upp till 30 procent av kostnader för belysning, uppvärmning samt fastighets- och ansvarsförsäkring; procentsatsen kan budgetjusteras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april för föregående kalenderår.
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ansökan avser föregående kalenderår och ska vara kommunen tillhanda senast 1 april.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: krokom-lokalbidrag-foreningshyrd
+  namn: Lokalbidrag för föreningshyrd lokal
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som behöver hyra extern lokal för verksamheten
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Lokalen ska hyras för föreningens verksamhet och ligga i Krokoms kommun
+  - Kommunala lokaler ska användas i första hand
+  - Verksamhets- och ekonomisk berättelse samt betalda hyresverifikat ska lämnas
+  - Högre stöd än normalgränsen kan bara prövas där kommunal lokal saknas och kräver budget och verksamhetsplan
+  belopp: 100 procent av skälig hyra, normalt högst 3 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: krokom-ledarutbildningsbidrag
   namn: Ledarutbildningsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: relativ, datum: []}
   krav:
   - Kursdeltagare ska vara minst 13 år
+  - Kongress, konferens och förbundsmöte är inte stödberättigade
   - Deltagarintyg och kursprogram krävs
   - Extern utbildning söks senast tre månader efter avslutad kurs
   - Intern utbildning kräver förskottsprövning med kursprogram, deltagarförteckning, budget och kostnadsredovisning
   belopp: 200 kronor per hel kursdag eller 100 kronor per halv kursdag och deltagare
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Extern utbildning söks senast tre månader efter kursen; intern utbildning söks i förväg.
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Extern utbildning söks senast tre månader efter avslutad kurs; intern utbildning söks i förväg.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: krokom-lonebidrag-till-foreningar
   namn: Lönebidrag till föreningar
   kategori:
   - social
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -160,46 +217,164 @@ bidrag:
     - 07-15
     - 10-15
   krav:
+  - Sökanden ska vara en ideell förening med en lönebidragsanställd
   - Kommunen ska godkänna anställningen i förväg
-  - Verifikat på föreningens lönekostnad krävs
+  - Kvartalsansökan och verifikat på föreningens lönekostnad krävs
   belopp: Högst 5 procent av lönekostnaden inklusive personalkostnad, dock högst motsvarande kostnad för en kommunal tjänst
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://krokom.se/kultur-och-fritid/idrott-och-motion/stod-och-bidrag/stod-och-bidrag-till-foreningar.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kvartalsvis senast 15 januari, 15 april, 15 juli och 15 oktober.
+  kalla_url: *huvud
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: krokom-kulturbidrag
   namn: Kulturbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: relativ, datum: []}
   krav:
   - Föreningen ska ha sin huvudsakliga verksamhet inom Krokoms kommun
   - Verksamheten ska vara öppen för alla
   - Tydlig budget krävs, där eventuell annan medfinansiering ska anges
   - Kommunen kan begära att få granska räkenskaper och redovisningshandlingar
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
+  - Verksamheten ska bidra till jämställdhet, ungdomsinflytande och kulturell mångfald; slutna möten, läger och resor stöds inte
+  - Kommunens logotyp ska användas vid arrangemang
+  belopp: Individuell prövning inom budget; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan minst tre veckor före arrangemanget.
   kalla_url: https://krokom.se/kultur-och-fritid/kultur/stod-och-bidrag.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ansökan ska vara kommunen tillhanda senast tre veckor innan arrangemanget.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: krokom-anslag-folkbildning
+  namn: Kommunalt anslag till folkbildning
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Krokom
+  deadlines: {typ: fasta, datum: [05-01]}
+  krav:
+  - Studieförbundet ska vara verksamt i Krokom och centralorganisationen ska vara statsbidragsgodkänd av Folkbildningsrådet
+  - Aktiviteterna ska vara statsbidragsberättigade och den planerade verksamheten ska främst rikta sig till kommuninvånare
+  - Verksamhetsplan, verksamhetsberättelse med ekonomisk redogörelse, kommunsammandrag och revisionsberättelse ska lämnas
+  - Unika deltagare, studietimmar och kulturprogram ska redovisas
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årligt kommunanslag; 10 procent organisationsanslag, 8 procent tillgänglighetsanslag och 82 procent verksamhetsanslag; totalen publiceras inte
+  sen_ansokan: Ansökan senast 1 maj.
+  kalla_url: https://e-tjanster.krokom.se/oversikt/getflowform/824/329
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: krokom-aktivitetsbaserad-ersattning-65-plus
+  namn: Aktivitetsbaserad ersättning 65 plus
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, friluft, social, annat]
+  malgrupp: Registrerade föreningar som ordnar hälsofrämjande aktiviteter för personer 65 år och äldre
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Föreningen ska vara registrerad i Krokom och aktiviteten ska stärka fysisk, psykisk eller social hälsa
+  - Aktiviteten ska vara ledarledd, pågå minst 60 minuter och ha minst tre deltagare som är 65 år eller äldre
+  - Högst 20 deltagare får räknas per ledare och ledaren ska vara minst 13 år
+  - Styrelse- och årsmöten räknas inte och närvaroblankett ska lämnas i efterhand
+  belopp: 7 kr per deltagare, ledare och aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 februari respektive 25 augusti.
+  kalla_url: https://e-tjanster.krokom.se/oversikt/overview/419
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: krokom-bidrag-pensionars-och-handikapporganisationer
+  namn: Bidrag till pensionärs- och funktionsrättsorganisationer
+  kategori: [pensionar, funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Ideella pensionärs- och funktionsrättsorganisationer
+  deadlines: {typ: fasta, datum: [04-01]}
+  krav:
+  - Sökanden ska vara en ideell pensionärs- eller funktionsrättsorganisation
+  - Medlemsantalet ska avse 31 december föregående år och styrkas av revisor
+  - Organisationen ska kunna redovisa aktivitet och användning av stödet
+  - Stödet får användas till del av administration, lokalhyra och ledarutbildning
+  belopp: 40 kr per medlem upp till 300 medlemmar; medlemmar över 300 ger inget ytterligare bidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april.
+  kalla_url: https://e-tjanster.krokom.se/oversikt/getflowform/199/53
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: krokom-driftsbidrag-vaglyse
+  namn: Driftsbidrag till väglyse
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägbelysningsföreningar i Krokoms kommun
+  deadlines: {typ: fasta, datum: [02-28]}
+  krav:
+  - Sökanden ska vara en vägbelysningsförening verksam i Krokoms kommun
+  - Ansökan ska avse föregående års energikostnader
+  - Fakturakopior, föreningskontakt och utbetalningsuppgifter ska lämnas
+  belopp: 20 procent av redovisad energikostnad föregående år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan 1 januari–28 februari.
+  kalla_url: https://krokom.se/bo-trafik-och-miljo/nyhetsarkiv-bo-trafik-och-miljo/arkiv/2026-01-08-ny-e-tjanst-for-vaglysebidrag-lanseras.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: krokom-bygdemedel-utvecklingsinsatser
+  namn: Bygdemedel för utvecklingsinsatser
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade organisationer med allmännyttiga utvecklingsprojekt i vattenkraftspåverkad bygd
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Sökanden ska vara en registrerad organisation som är öppen för alla och har organisationsnummer
+  - Projektet ska vara en konkret, varaktig och besiktningsbar allmännyttig investering eller utvecklingsinsats i vattenkraftspåverkad bygd
+  - Stöd ges inte till drift, eget arbete, lätt avyttringsbara inköp eller kommersiell verksamhet
+  - Projektbeskrivning, kostnadsbudget och underlag för fastighets- eller nyttjanderätt ska lämnas
+  belopp: Individuell prövning; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 oktober; Länsstyrelsen beslutar efter kommunens prioritering.
+  kalla_url: https://www.lansstyrelsen.se/jamtland/natur-och-landsbygd/stod-till-jordbruk-och-landsbygd/bygdemedel.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: krokom-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  beskrivning: Föreningen ska registrera eller uppdatera föreningsuppgifter och lämna kommunens efterfrågade kontakt-, verksamhets-
+    och årsmöteshandlingar. Kommunen publicerar ingen giltighetstid eller särskild förnyelseregel för registreringen.
+  system: Krokoms e-tjänster
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ingen publicerad giltighetstid eller gemensam förnyelsedag.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.krokom.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  giltighet_status: okand
+  kalla_url: https://e-tjanster.krokom.se/oversikt/overview/118
+  giltighet_status: ingen_regel
 kommunsiffra: null

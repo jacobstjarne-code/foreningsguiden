@@ -2,22 +2,28 @@ kommun: Hörby
 kommun_slug: horby
 lan: Skåne län
 befolkning: 15525
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Sektor Livsmiljö, kultur och fritid samt Omtankenämnden
 ansokningssystem:
-  namn: E-tjänster (fri.horby.se)
+  namn: FRI Webb-Bidrag
   url: https://fri.horby.se/bidrag/default.aspx
-kalla_url: https://www.horby.se/uppleva-och-gora/foreningar-och-foreningsliv/stod-bidrag-och-stipendier/
-verifierad: 2026-07-26
+kalla_url: &portal https://fri.horby.se/bidrag/default.aspx
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://www.horby.se/wp-content/uploads/foreningsstod-1.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: horby-evenemangsbidrag
   namn: Evenemangsbidrag
   kategori:
   - kultur
   - idrott
+  - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar för offentliga arrangemang
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: fasta, datum: [02-01, 05-01, 08-01, 11-01]}
   krav:
   - Öppet för allmänheten
   - God kvalitet, kunnande, kreativitet och kompetens hos arrangören
@@ -29,29 +35,31 @@ bidrag:
     i utrustning
   - Vid återkommande evenemang ges bidrag max 3 gånger för samma/liknande evenemang per förening
   - Ska genomföras inom Hörby kommuns gränser (undantag vid samverkan med Mitt Skånes kommuner, t.ex. Höör och Eslöv)
-  belopp: Totalt maximalt 40 000 kr delas ut i evenemangsbidrag per år; bidraget kan utgöra en del eller merparten av evenemangets
-    kostnader, ej fast belopp per ansökan
-  sen_ansokan: Löpande, men ansökan måste lämnas senast 1 månad innan evenemanget arrangeras; bidrag beviljas ej retroaktivt
-  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=39&year=2025
+  - Projektplan och budget ska lämnas, egen insats krävs och rapport ska lämnas inom tre månader
+  - Evenemanget ska publiceras i kommunens kalender och kommunens logotyp användas
+  belopp: Individuellt bedömt och kan täcka en del eller merparten av projektkostnaden
+  belopp_avser: per_forening
+  kommunens_pott: 40 000 kr per år
+  sen_ansokan: Ansökan minst två månader före evenemanget och senast 1 februari, 1 maj, 1 augusti eller 1 november; inget retroaktivt stöd.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=39&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 40 000 kr är kommunens totala årliga budget för evenemangsbidrag, inte ett tak per ansökan. Ansökan senast 1
-    månad innan evenemanget.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: horby-aktivitetsbidrag
-  namn: Lokalt aktivitetsstöd 7-25 år
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för ungdomar 7-25 år
+  namn: Verksamhetsbidrag 7–25 år, 60+ och funktionsnedsatta
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med aktiviteter för 7–25-åringar, personer 60+ eller personer med funktionsnedsättning
   deadlines:
     typ: fasta
     datum:
     - 02-25
     - 08-25
   krav:
-  - Minst tre deltagare i ledarledd aktivitet om lägst 60 minuter (ledaren måste vara minst 15 år)
+  - Minst tre deltagare i ledarledd aktivitet om lägst 45 minuter; ledaren ska vara minst 15 år
   - Max 30 deltagare per gruppaktivitet är bidragsberättigade
   - Sammankomsten ska genomföras av föreningen själv, inte av riks- eller distriktsorganisationen
   - Närvarokort ska föras och vara tillgängliga i minst 3 år
@@ -59,50 +67,47 @@ bidrag:
   - Bidrag ges endast till aktivt utövande/skapande, ej t.ex. styrelsemöten, föreläsningar eller åskådande vid idrottsevenemang
   - Bidrag ges inte till studiecirklar eller kommersiella arrangemang som danser, bingo eller medlemsträffar
   - Endast ett bidragstillfälle per dag oavsett antal deltagare eller aktivitetens längd
-  belopp: 'Verksamhetsbidrag per deltagare och tillfälle: 7-12 år 7 kr, 13-16 år 13 kr, 17-20 år 10 kr, 21-25 år 7 kr'
+  - För 7–9 år får högst tre och för 10–25 år högst fem aktiviteter per vecka räknas; funktionsnedsatta från 26 år följer femgränsen
+  belopp: 'Per deltagare och tillfälle: 7–12 år 7 kr, 13–16 år 13 kr, 17–20 år 10 kr, 21–25 år 7 kr, 60+ 7 kr och funktionsnedsatta i alla åldrar 25 kr; hela årsbudgeten för 7–25 år könsutjämnas'
+  belopp_avser: per_forening
+  kommunens_pott: Hela årets budgeterade verksamhetsbidrag fördelas; totalsumman publiceras inte
   sen_ansokan: 'Möjlig men medför avdrag: 1-14 dagar sen ger 5% avdrag på godkänt bidragsbelopp, 15-30 dagar sen ger 10% avdrag;
     efter 30 dagar behandlas inte ansökan'
-  kalla_url: https://fri.horby.se/bidrag/default.aspx
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=1&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökningsdatum är 25 februari och 25 augusti (ej 15:e). Bidraget är en del av samma regelverk som gäller för
-    60+ och funktionsnedsatta.
-- id: horby-pensionarstod
-  namn: Lokalt aktivitetsstöd pensionärer
-  kategori:
-  - social
-  malgrupp: Pensionärföreningar och seniorverksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: horby-socialt-inriktad-verksamhet
+  namn: Bidrag till socialt inriktad verksamhet
+  kategori: [social, funktionsratt, pensionar, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Sociala föreningar som kompletterar Omtankenämndens verksamhetsområde
+  deadlines: {typ: fasta, datum: [02-15, 09-15]}
   krav:
-  - Minst tre deltagare i ledarledd aktivitet om lägst 60 minuter (ledaren måste vara minst 15 år)
-  - Max 30 deltagare per gruppaktivitet är bidragsberättigade
-  - Sammankomsten ska genomföras av föreningen själv, inte av riks- eller distriktsorganisationen
-  - Närvarokort ska föras och vara tillgängliga i minst 3 år
-  - Minst 10 godkända sammankomster per termin (1/1-30/6 respektive 1/7-31/12)
-  - Bidrag ges endast till aktivt utövande/skapande, ej t.ex. styrelsemöten, föreläsningar eller åskådande vid idrottsevenemang
-  - Bidrag ges inte till studiecirklar eller kommersiella arrangemang som danser, bingo eller medlemsträffar
-  - Endast ett bidragstillfälle per dag oavsett antal deltagare eller aktivitetens längd
-  belopp: 'Verksamhetsbidrag 60+: 7 kr per deltagare och tillfälle'
-  sen_ansokan: 'Möjlig men medför avdrag: 1-14 dagar sen ger 5% avdrag på godkänt bidragsbelopp, 15-30 dagar sen ger 10% avdrag;
-    efter 30 dagar behandlas inte ansökan'
-  kalla_url: https://fri.horby.se/bidrag/default.aspx
+  - Sökanden ska vara en registrerad social förening med säte i Hörby och ansökan ska lämnas av styrelsen
+  - Verksamheten ska vara frivillig, förebyggande eller främjande för barn, unga eller vuxna
+  - Insatsen ska avlasta eller komplettera Omtankenämndens ansvarsområde
+  - Ansökan ska beskriva mål, aktiviteter, budget, uppföljning, kompletterande effekt och andra finansiärer
+  belopp: Varierar efter föreningens verksamhet; inga fasta minimi- eller maximibelopp publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 februari eller 15 september.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=40&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökningsdatum är 25 februari och 25 augusti (ej 15:e). Bidraget ingår i samma regelavsnitt som aktivitetsstödet
-    för 7-25 år.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: horby-verksamhetsbidrag
-  namn: Verksamhetsbidrag
+  namn: Verksamhetsbidrag – kultur
   kategori:
   - kultur
-  malgrupp: Föreningar med egen lokal
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Kultur-, by- och hembygdsföreningar
   deadlines:
     typ: fasta
     datum:
@@ -114,21 +119,25 @@ bidrag:
   - 'Bidrag söks för godkända lokalkostnader: hyra, arrende, el, värme, vatten, sophantering, försäkring och löpande underhåll'
   - Ansökan ska innehålla verksamhetsplan, ekonomisk kalkyl för ansökt år och förenklad verksamhetsberättelse för innevarande
     år
-  belopp: Maximalt 45 procent av godkända lokalkostnader (hyra, arrende, el, värme, vatten, sophantering, försäkring, löpande
-    underhåll)
+  - Ett avtal ska ange stöd och motprestation och utbetalning sker efter godkänd redovisning av kvalitet, ungdomsverksamhet och marknadsföring
+  belopp: Individuell behovsprövning efter omfattning, barn- och ungdomsverksamhet samt medlemsantal; högst 45 procent av godkända lokalkostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Möjlig men medför avdrag: 1-14 dagar sen ger 5% avdrag på godkänt bidragsbelopp, 15-30 dagar sen ger 10% avdrag;
     efter 30 dagar behandlas inte ansökan'
-  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=32&year=2025
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=32&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: En ansökan per år, senast 31 oktober (ej två gånger per år som tidigare stod). Gäller kulturföreningar, byföreningar
-    och hembygdsföreningar.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: horby-studieförbund
   namn: Studieförbundsbidrag
   kategori:
   - kultur
+  - ovrig
+  foreningstyp: [kultur, annat]
   malgrupp: Studieförbund
   deadlines:
     typ: fasta
@@ -141,36 +150,158 @@ bidrag:
     Kultur- och Fritid
   - Bidrag för samarbeten i kulturprogram och annan folkbildande verksamhet ges endast om studieförbundet haft en avgörande
     roll i samarbetet
+  - Kommunala samarbetsevenemang är inte stödberättigade och kommunen kan göra stickprov i underlagen
+  - Redovisningen ska följa kommunens sex publicerade prioriteringsområden
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Fördelas proportionerligt via poängsystem"
+  belopp_avser: ren_pott
+  kommunens_pott: 100 procent av den budgeterade studieförbundspotten; totalsumman publiceras inte
   sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=48&year=2025
-  belopp_status: ingen_regel
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=48&year=2026
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Belopp fördelas proportionerligt via poängsystem, inget fast belopp per förbund. Ansökan (ifylld mall/exceldokument)
-    för ett verksamhetsårs bidrag lämnas senast 28 februari året efter.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: horby-utbildningsbidrag
+  namn: Utbildningsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med barn- och ungdomsverksamhet som utbildar ledare
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Föreningen ska bedriva barn- och ungdomsverksamhet och ha fått verksamhetsbidrag minst en gång under de senaste tre åren
+  - Kursen ska anordnas av eller i samverkan med riks- eller distriktsförbund
+  - Endast kursavgift är stödberättigad, inte resa, kost eller inkomstbortfall
+  - Underlag för kursavgiften ska bifogas
+  belopp: Högst 4 000 kr per år vid upp till 75 aktiva 7–25 år, 8 000 kr vid 76–300 och 10 000 kr vid fler än 300
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande fram till portalens stopp 30 november.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=5&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: horby-lokal-och-anlaggningsbidrag
+  namn: Lokal- och anläggningsbidrag
+  kategori: [idrott, kultur, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med egen eller hyrd icke kommunsubventionerad lokal eller anläggning
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Lokalen eller anläggningen ska vara nödvändig, ligga i Hörby och vara egen eller hyrd utan kommunal subvention
+  - Föregående års faktiska kostnader och bokslut ska redovisas
+  - Kulturförening som får verksamhetsbidrag för kultur kan inte samtidigt få detta stöd
+  - Samlingslokal ska vara öppen för medborgare och registrerade organisationer; fullständiga boksluts-, stadge- och drogpolicyhandlingar ska lämnas
+  belopp: Särskilt avtal eller 55 procent vid fler än 100 medlemmar och minst 50 procent 7–25 år, 50 procent vid färre än 100, annars 20–45 procent efter ungdomsandel; pensionär 20 procent, samlingslokal 25 procent och fotbollsplan 30 000 kr per plan
+  belopp_avser: per_forening
+  kommunens_pott: Budgeten används fullt ut; totalsumman publiceras inte
+  sen_ansokan: Ansökan senast 31 mars.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=2&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: horby-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med nya idéer, verksamheter eller projekt
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Insatsen ska vara en idé, utveckling, uppstart eller ett projekt i linje med kommunens vision och mål
+  - Projektet får inte vara påbörjat eller genomfört före beslut och föreningen ska invänta besked
+  - Samma eller liknande insats kan få stöd högst tre gånger
+  - Ansökan och dialog ska beskriva projekt, syfte, målgrupp, tidplan och budget; resultat och lärdomar ska redovisas
+  belopp: Behovsprövat efter angelägenhet och disponibla medel, högst 50 procent av ansökningsbeloppet
+  belopp_avser: per_forening
+  kommunens_pott: Årets budget; totalsumman publiceras inte och stöd ges inte när den är slut
+  sen_ansokan: Ansökan kan lämnas löpande fram till portalens stopp 30 november.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=34&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: horby-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som reparerar eller investerar i lokal, anläggning eller verksamhetsmaterial
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Investeringen ska avse reparation eller investering i föreningslokal, anläggning eller verksamhetsmaterial
+  - Projektet får inte vara påbörjat eller genomfört före beslut; miljö, energi och kommunens vision prioriteras
+  - Samma anläggning får normalt inte stöd igen inom tre år
+  - Offerter och signerade underlag ska lämnas och redovisning ske inom två månader; andra finansiärer uppmuntras
+  belopp: Behovsprövat efter angelägenhet och disponibla medel, högst 50 procent av ansökningsbeloppet eller projektkostnaden
+  belopp_avser: per_forening
+  kommunens_pott: Årets budget; totalsumman publiceras inte och stöd ges inte när den är slut
+  sen_ansokan: Ansökan kan lämnas löpande fram till portalens stopp 30 november.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=35&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: horby-startbidrag
+  namn: Startbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nybildade föreningar, sektioner och verksamheter
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Sökanden ska vara en nybildad förening eller en ny sektion eller verksamhet som uppfyller de allmänna bidragskraven
+  - Motsvarande verksamhet får inte ha funnits i kommunen under de senaste fem åren
+  - Ansökan ska lämnas inom sex månader från att organisationsnummer erhölls
+  - Studieförbund och riksorganisationer kan inte få startbidrag
+  belopp: 3 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan inom sex månader från organisationsnummer och senast 30 november i 2026 års portal.
+  kalla_url: https://fri.horby.se/bidrag/ansokaninfo.aspx?type=52&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: horby-ansok
-  vad: Ansökan via fri.horby.se
-  beskrivning: Föreningsbidrag söks genom online-systemet fri.horby.se. Kräver login med användarnamn och lösenord för vissa
-    bidrag. Event-bidrag och ungdoms-verksamhet kan sökas utan login.
+  vad: Registrering och grundvillkor
+  beskrivning: Föreningen ska vara registrerad, ideell och inte vinstdriven, ha organisationsnummer, föreningskonto, medlemsregister,
+    säte eller väsentlig nytta i Hörby och inga förfallna kommunskulder. Ekonomiska, stöd-, supporter-, föräldra-, politiska och religiösa föreningar utesluts.
   system: fri.horby.se
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Registrering och aktuella uppgifter krävs för ansökan.
   giltighet: null
   ordning: 1
-  kalla_url: https://fri.horby.se/bidrag/default.aspx
-  giltighet_status: okand
-- id: horby-kontakt
-  vad: Hörby kommun
-  beskrivning: 'För frågor om bidrag: Erika Wetterholtz 0415-37 82 49, kommunen@horby.se, 0415-37 80 00'
-  system: Hörby kommun
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: horby-arsmoteshandlingar
+  vad: Årlig uppdatering efter årsmötet
+  beskrivning: Årsmötesprotokoll, verksamhetsberättelse och årsbokslut ska uppdateras och laddas upp senast två månader efter årsmötet.
+  system: fri.horby.se
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast två månader efter årsmötet.
+  giltighet: 2 månader efter årsmötet
   ordning: 2
-  kalla_url: https://www.horby.se/uppleva-och-gora/foreningar-och-foreningsliv/stod-bidrag-och-stipendier/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: horby-vardegrund
+  vad: Värdegrund och föreningsansvar
+  beskrivning: Föreningen ska följa kommunens krav om droger, alkohol, tobak, sexuella trakasserier och jämlikhet samt lämna kommunen insyn i medlems- och ekonomiska underlag.
+  system: fri.horby.se
+  ledtid: null
+  ledtid_text: Gäller löpande.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel

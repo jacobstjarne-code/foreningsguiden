@@ -6,13 +6,20 @@ forvaltning: Fritids- och kulturförvaltningen
 ansokningssystem:
   namn: FRI Webb-Bidrag
   url: https://funktion.solvesborg.se/bidrag/
-kalla_url: https://funktion.solvesborg.se/bidrag/
-verifierad: '2026-07-31'
+kalla_url: https://solvesborg.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://solvesborg.se/download/18.32db828618bab70336c29a5/1699455651399/FFS%208-1%20Bidragsregler%20240101.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Aktivitetsbidrag – vår
   kategori:
   - idrott
   - ovrig
+  foreningstyp: &ungdom [idrott, kultur, friluft, social, ungdom, annat]
   malgrupp: Ungdomsorganisationer med verksamhet för 7–20 år
   deadlines:
     typ: fasta
@@ -27,18 +34,22 @@ bidrag:
   - Bidrag utbetalas endast en gång per dag och deltagare
   - Bidrag utgår inte till entrébelagda tävlingar, kommersiella arrangemang, fritidsgårdsverksamhet eller studiecirkelsammankomst
   belopp: 8 kr per deltagartillfälle; 16 kr för deltagare med funktionsnedsättning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Efter 25 augusti minskas bidraget med 10 procent; efter 30 september lämnas inget bidrag
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-aktivitetsbidrag-var
 - namn: Aktivitetsbidrag – höst
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *ungdom
   malgrupp: Ungdomsorganisationer med verksamhet för 7–20 år
   deadlines:
     typ: fasta
@@ -53,12 +64,15 @@ bidrag:
   - Bidrag utbetalas endast en gång per dag och deltagare
   - Bidrag utgår inte till entrébelagda tävlingar, kommersiella arrangemang, fritidsgårdsverksamhet eller studiecirkelsammankomst
   belopp: 8 kr per deltagartillfälle; 16 kr för deltagare med funktionsnedsättning
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Efter 25 februari minskas bidraget med 10 procent; efter 31 mars lämnas inget bidrag
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-aktivitetsbidrag-host
 - namn: Lokalbidrag – ungdomsorganisationer
@@ -66,6 +80,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *ungdom
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -81,17 +96,21 @@ bidrag:
   belopp: 'Förhyrd lokal: högst 80 procent av hyreskostnaden (hyra, vatten, el), maximalt 50 000 kr per förening och år. Egen
     lokal/anläggning: högst 80 procent av godkänd nettokostnad för drift och löpande underhåll, maximalt 120 000 kr per förening
     och år'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-lokalbidrag-ungdomsorganisationer
 - namn: Administrationsbidrag – funktionsrätt
   kategori:
   - funktionsratt
+  foreningstyp: &social [social, annat]
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -100,18 +119,23 @@ bidrag:
   krav:
   - Föreningen ska vara registrerad som en handikappförening (funktionsrättsförening)
   - Uppgivna medlemssiffror ska avse förhållandena vid senaste årsmötet och vara verifierade av föreningens revisor
+  - Medlemsunderlaget ska avse medlemmar folkbokförda i Sölvesborgs kommun
   belopp: 35 kr per medlem folkbokförd i Sölvesborgs kommun, plus grundbidrag på 2 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-administrationsbidrag-funktionsratt
 - namn: Lokalbidrag – funktionsrätt
   kategori:
   - funktionsratt
+  foreningstyp: *social
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -122,17 +146,21 @@ bidrag:
   - Lokalen eller anläggningen ska ligga inom kommunen och vara godkänd av fritids- och kulturnämnden
   - Avtal om förhyrning eller kontrakt för egen lokal ska i förväg godkännas av nämnden
   belopp: Högst 80 procent av godkänd kostnad, maximalt 50 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-lokalbidrag-funktionsratt
 - namn: Administrationsbidrag – pensionär
   kategori:
   - pensionar
+  foreningstyp: *social
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -140,13 +168,18 @@ bidrag:
     - 04-30
   krav:
   - Föreningen ska vara registrerad och godkänd som en pensionärsförening
+  - Föreningen ska ha sitt säte eller sin huvudsakliga verksamhet i Sölvesborgs kommun
+  - Årliga föreningshandlingar och medlemsuppgifter ska vara aktuella
   belopp: Grundbidrag på 5 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-administrationsbidrag-pensionar
 - namn: Lokalbidrag – pensionär och övriga
@@ -154,6 +187,7 @@ bidrag:
   - pensionar
   - kultur
   - ovrig
+  foreningstyp: [kultur, hembygd, social, annat]
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -167,47 +201,175 @@ bidrag:
   belopp: 'Pensionärsföreningar: högst 80 procent av hyreskostnaden för förhyrd lokal, maximalt 18 000 kr per förening och
     år. Övriga föreningar och kulturföreningar: högst 50 procent av hyres- eller nettokostnaden för förhyrd eller egen lokal,
     maximalt 15 000 kr per förening och år'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://funktion.solvesborg.se/bidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: solvesborg-lokalbidrag-pensionar-och-ovriga
-- namn: Projekt- och arrangörsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
+- id: solvesborg-namndens-forfogande
+  namn: Bidrag ur nämndens förfogande
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar med ett nytt eller särskilt behov
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Bidrag kan sökas av bidragsberättigad förening eller enskild arrangör av specifikt kulturprojekt
-  - Fullständig budget för projektet ska bifogas ansökan
-  - Samtliga andra bidrag och stöd som söks för samma projekt ska anges i ansökan
-  - Bidrag för ytterligare liknande projekt kan inte beviljas
-  - Redovisning enligt särskild blankett ska lämnas 2–3 månader efter genomförandet
-  belopp: null
-  sen_ansokan: Ansökan med fullständig budget ska ha inkommit till fritid- och kulturavdelningen senast 2 månader innan projektet
-    påbörjas.
-  kalla_url: https://funktion.solvesborg.se/bidrag/
-  belopp_status: ingen_regel
+  - Insatsen ska ligga utanför aktivitets-, lokal- och andra kommunala stödformer
+  - Projektet eller inköpet får inte ha påbörjats före nämndens beslut
+  - Ansökan ska innehålla plan, budget och uppgifter om andra sökta stöd
+  - Beviljat stöd ska användas samma kalenderår och redovisas inom två månader efter genomförandet
+  belopp: Högst 30 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande före projektstart eller inköp
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
-  id: solvesborg-projekt-och-arrangorsbidrag
+- id: solvesborg-verksamhetsbidrag-kultur
+  namn: Verksamhetsbidrag till kulturförening genom programöverenskommelse
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar med fast eller återkommande offentligt program
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska bedriva ett fast offentligt program eller årligen återkommande kulturverksamhet
+  - Överenskommelsen initieras av fritids- och kulturavdelningen och tecknas för ett till tre år
+  - Föreningen ska delrapportera varje år och slutredovisa inom sex månader efter avtalsperioden
+  belopp: Individuellt enligt programöverenskommelse; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen öppen ansökningsdeadline publiceras
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: solvesborg-stimulansbidrag-lonebidrag
+  namn: Stimulansbidrag för lönebidragsanställd
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som anställer med statligt lönebidrag
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Anställningen ska samrådas med kommunen innan den påbörjas
+  - Föreningen är arbetsgivare och ska bifoga anställnings- och lönebidragsunderlag
+  - Normalt stöds högst en anställd per förening om inte särskilda skäl finns
+  - Kommunalt och statligt stöd får tillsammans täcka högst 98 procent av lönekostnaden
+  belopp: Högst 12 000 kr per år och högst 6 procent av lön inklusive personalomkostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande efter förhandssamråd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: solvesborg-foreningsjubileum
+  namn: Nämndens uppvaktning vid föreningsjubileum
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade bidragsberättigade föreningar som firar jubileum
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad i Sölvesborgs kommun
+  - Jubileet ska avse 10, 25, 50, 75 eller 100 år
+  - Föreningen ska anmäla jubileet minst fyra veckor i förväg
+  belopp: 10 år 2 000 kr; 25 år 3 000 kr; 50 år 5 000 kr; 75 år 7 500 kr; 100 år 10 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Anmälan senast fyra veckor före jubileet
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: solvesborg-subventionerade-kommunala-lokaler
+  namn: Subventionerade kommunala lokaler
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som hyr kommunala lokaler
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad
+  - Bokningen ska avse kommunal lokal eller anläggning som omfattas av föreningstaxa
+  - Föreningen ska följa kommunens boknings- och ordningsregler
+  belopp: Subvention genom lägre föreningstaxa; ingen generell kontantnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat sista ansökningsdag publiceras
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: solvesborg-subventionerad-foreningsservice
+  namn: Subventionerad föreningsservice
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som behöver kopiering eller biljettutskrift
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara registrerad hos Sölvesborgs kommun
+  - Servicen ska avse föreningens egen verksamhet
+  - Kopiering och biljettutskrift erbjuds enligt kommunens villkor och kapacitet
+  belopp: Kopiering och biljettutskrift till subventionerat pris
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen sista beställningsdag publiceras
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: solvesborg-studieforbund
+  namn: Bidrag till studieförbund
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med lokal folkbildning
+  deadlines: {typ: fasta, datum: [05-01]}
+  krav:
+  - Studieförbundet ska vara godkänt av Folkbildningsrådet och bedriva verksamhet i Sölvesborg
+  - Lokal organisation, styrelse, demokratiska arbetsformer och tydligt arrangörskap krävs
+  - Årlig verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och kommande verksamhetsplan ska lämnas
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas med 8 procent tillgänglighet, 65 procent studiecirklar, 16 procent annan folkbildning och 11 procent kulturprogram; totalsumma publiceras inte
+  sen_ansokan: Ansökan senast 1 maj
+  kalla_url: https://solvesborg.se/download/18.65081fa016fa8c7ddcf4f726/1580906457309/FFS%208.2%20Studief%C3%B6rbunden%20200101.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 forutsattningar:
 - id: solvesborg-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
+  beskrivning: Föreningen ska ha säte eller huvudsaklig verksamhet i kommunen, vara demokratisk och öppen, genomföra minst tio möten per år, ha minst tio betalande medlemmar och lämna årshandlingar samt årligen uppdatera föreningsuppgifterna.
   system: FRI Webb-Bidrag
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna ska uppdateras och godkännas varje år
+  giltighet: Kalenderår; årlig uppdatering av föreningsuppgifterna
   ordning: 1
-  kalla_url: https://funktion.solvesborg.se/bidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null

@@ -2,115 +2,174 @@ kommun: Vaxholm
 kommun_slug: vaxholm
 lan: Stockholms län
 befolkning: 11697
-forvaltning: Teknik-, fritids- och kulturförvaltningen
+forvaltning: Tekniska enheten, utbildningsförvaltningen, kulturansvarig samt socialförvaltningen
 ansokningssystem:
-  namn: Digitalt boknings- och bidragssystem
-  url: https://www.vaxholm.se/uppleva--gora/foreningsliv-och-bidrag/bidrag-och-stod-till-foreningar
-kalla_url: https://www.vaxholm.se/uppleva--gora/foreningsliv-och-bidrag/bidrag-och-stod-till-foreningar
-verifierad: '2026-07-31'
+  namn: Rbok samt nämndspecifik post- och e-postansökan
+  url: https://vaxholm.rbok.se/
+kalla_url: &huvud https://www.vaxholm.se/uppleva--gora/foreningsliv-och-bidrag/bidrag-och-stod-till-foreningar
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &kommunnorm https://www.vaxholm.se/download/18.1712078418b84eeda6d50494/1699362590134/Kommun%C3%B6vergripande%20riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: vaxholm-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar som hyr eller äger lokal eller anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-01
+  namn: Lokalbidrag – idrotts- och friluftsföreningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: &idrott_friluft [idrott, friluft]
+  malgrupp: Bidragsberättigade idrotts- och friluftsföreningar som hyr eller äger lokal eller anläggning när kommunal lokal saknas
+  deadlines: {typ: fasta, datum: [02-01]}
   krav:
-  - Föreningen ska hyra egen lokal eller inneha egen fastighet, om kommunal anläggning saknas
-  - Lokalen eller anläggningen ska användas för föreningsverksamhet
-  belopp: 30 procent av bidragsgrundande kostnader
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaxholm.se/uppleva--gora/foreningsliv-och-bidrag/bidrag-och-stod-till-foreningar
+  - Föreningen ska vara en registrerad ideell idrotts- eller friluftsförening som huvudsakligen verkar i Vaxholm för kommunens invånare och har minst tio aktiva medlemmar
+  - Föreningen ska ha demokratisk styrelse och stadgar, vara öppen för alla, sakna oreglerade kommunskulder och hålla verksamhetsberättelse, årsmötesprotokoll och ekonomisk redovisning aktuella i Rbok
+  - Föreningen ska hyra eller äga lokalen eller anläggningen därför att kommunal lokal inte finns att tillgå eller därför att särskilda skäl föreligger
+  - Lokalen ska användas för föreningsverksamhet; vid exklusiv hyra av kommunal fastighet är endast hyra som avser barn- och ungdomsverksamheten stödgrundande
+  - Stödgrundande kostnader och hyresintäkter ska redovisas; hyresintäkterna räknas av från stödet
+  - Barn- och ungdomsföreningar ska följa barnkonventionen och ha en tillämpad policy mot alkohol, narkotika och tobak
+  belopp: 30 procent av godkända kostnader för hyra, markarrende, el och uppvärmning, vatten, sopor samt vissa räntor och försäkringar; hyresintäkter dras av
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan avser föregående kalenderår och ska vara komplett i Rbok senast den 1 februari; sena ansökningar behandlas inte
+  kalla_url: &tfknorm https://www.vaxholm.se/download/18.66feee0c199c8d6f1fc22a73/1760425802936/Riktlinjer%20f%C3%B6r%20bidragsgivning%20TFK%202025-66.048.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: vaxholm-aktivitetsbidrag
   namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med aktiviteter för barn och ungdomar 7–20 år
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-30
-    - 02-28
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott_friluft
+  malgrupp: Bidragsberättigade idrotts- och friluftsföreningar med aktiviteter för barn och ungdomar 7–20 år
+  deadlines: {typ: fasta, datum: [02-28, 08-30]}
   krav:
-  - Aktiviteten ska pågå minst 60 minuter
-  - Minst fem deltagare utöver ledaren
-  - Minst tio sammankomster under ansökningsperioden
-  - Aktiviteten ska vara ledarledd
-  - Ledaren ska vara minst 13 år och utsedd av föreningen
-  belopp: Fast del per sammankomst plus rörlig del per deltagare; beloppen fastställs årligen av nämnden
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaxholm.se/uppleva--gora/foreningsliv-och-bidrag/bidrag-och-stod-till-foreningar
+  - Föreningen ska vara registrerad, ideell och demokratiskt uppbyggd, huvudsakligen verksam i Vaxholm och ha minst tio aktiva medlemmar samt inga oreglerade skulder till kommunen
+  - Aktiviteten ska vara planerad och ledarledd, pågå i minst 60 minuter och samla minst fem deltagare utöver ledaren
+  - Deltagarna ska vara 7–20 år och ledaren ska vara utsedd av föreningen och minst 13 år
+  - Föreningen ska redovisa minst tio godkända sammankomster under ansökningsperioden; stöd ges högst en gång per dag och grupp
+  - Närvaro ska rapporteras i Rbok eller via Riksidrottsförbundets kommunfil senast den 25 februari respektive den 25 augusti
+  - Föreningen ska hålla senaste verksamhetsberättelse, årsmötesprotokoll och ekonomiska redovisning aktuella samt följa barnkonventionen och sin policy mot alkohol, narkotika och tobak
+  belopp: Ett årligen fastställt grundbelopp per sammankomst plus en årligen fastställd deltagarpeng per sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för höstterminen ska lämnas senast den 28 februari följande år och för vårterminen senast den 30 augusti samma år; sena ansökningar behandlas inte
+  kalla_url: *tfknorm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-- id: vaxholm-kulturbidrag
-  namn: Kulturbidrag
-  kategori:
-  - kultur
-  malgrupp: Kulturaktiviteter i Vaxholm, särskilt för barn, unga och äldre
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-15
-  krav:
-  - Aktiviteten ska genomföras under innevarande år
-  - Stöd ges inte till redan genomförd aktivitet
-  - Redovisning ska lämnas till kommunen senast 31 december samma år
-  - Bidrag ges inte till filminspelning, musikproduktion, litteratur, idrottsevenemang, inköp av utrustning, studieresor eller
-    mat och dryck
-  belopp: Vaxholms stad fördelar totalt 85 000 kronor per år till kulturaktiviteter; belopp per ansökan anges inte
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaxholm.se/omsorg--stod/ekonomiskt-stod-och-radgivning/stipendier-och-bidrag/kulturbidrag-for-aktiviteter-i-vaxholm
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+- id: vaxholm-lokalbidrag-barn-och-utbildningsnamnden
+  namn: Lokalbidrag inom barn- och utbildningsnämndens område
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala ideella föreningar vars verksamhet kompletterar utbildningsförvaltningen och gagnar Vaxholms barn och ungdomar
+  deadlines: {typ: fasta, datum: [02-28]}
+  krav:
+  - Föreningen ska vara en lokalt verksam ideell förening med minst tio aktiva medlemmar och verksamhet som kompletterar och tillför mervärde inom barn- och utbildningsnämndens område
+  - Verksamheten ska vara inriktad på Vaxholms barn och ungdomar och föreningens medlemmar ska stadigvarande bo i kommunen
+  - Föreningen ska ha medlemsvald styrelse, demokratiska stadgar, vara öppen för alla och bedriva ett aktivt jämställdhetsarbete som beskrivs i verksamhetsberättelsen
+  - Föreningen ska följa barnkonventionen, ha en tillämpad policy mot alkohol, narkotika och tobak samt bedriva verksamhet fri från mobbning, trakasserier, hot, våld och övergrepp
+  - Lokal eller anläggning ska användas för föreningsverksamheten och kommunal lokal ska saknas eller särskilda skäl föreligga
+  - Ansökan ska redovisa lokalens godkända kostnader och hyresintäkter; samma kostnad får inte ersättas av flera kommunala nämnder
+  - Föreningen ska årligen lämna en revisorsgranskad verksamhetsberättelse som visar hur bidraget har använts
+  belopp: 30 procent av godkända kostnader för hyra, markarrende, el och uppvärmning, vatten, sopor samt vissa räntor och försäkringar; hyresintäkter dras av
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Komplett blankett ska skickas per post och vara kommunen tillhanda senast den sista februari; sena eller ofullständiga ansökningar handläggs inte
+  kalla_url: &bunnorm https://www.vaxholm.se/download/18.25c8360218f2907c246be31f/1715672936423/Riktlinjer-foreningsbidrag-inom-barn-och-utbildningsnamnden.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Beslut fattas för ett kalenderår i taget och varje ansökan prövas individuellt.
+- id: vaxholm-lokalsubvention
+  namn: Subventionerad föreningstaxa i kommunala idrottslokaler
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *idrott_friluft
+  malgrupp: Bidragsberättigade Vaxholmsföreningar som bokar sporthallar, gymnastiksalar och andra motionsanläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska uppfylla nämndens grundkrav och vara registrerad som bidragsberättigad ideell idrotts- eller friluftsförening i Vaxholm
+  - Föreningen ska ha demokratisk styrelse och stadgar, minst tio aktiva medlemmar, inga oreglerade kommunskulder och aktuella årshandlingar i Rbok
+  - Lokalen ska vara en av stadens sporthallar, gymnastiksalar eller andra motionsanläggningar och bokningen ska göras i kommunens bokningssystem
+  - Föreningen ska uppfylla villkoren i kommunens årligen beslutade taxor och avgifter; staden kontrollerar behörigheten i samband med fördelning av säsongstider
+  - Föreningar med barn- och ungdomsverksamhet ska följa barnkonventionen och sin policy mot alkohol, narkotika och tobak
+  belopp: Subventionerat timpris enligt kommunens årligen beslutade taxor och avgifter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat bidragsansökan görs; behörigheten kontrolleras när säsongstider fördelas
+  kalla_url: *tfknorm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Subventionen tilldelas automatiskt som berättigad taxa i Rbok.
 - id: vaxholm-socialnamndens-foreningsbidrag
   namn: Föreningsbidrag från socialnämnden
-  kategori:
-  - social
-  malgrupp: Föreningar med anknytning till socialnämndens verksamhetsområde
-  deadlines:
-    typ: fasta
-    datum:
-    - 12-31
+  status: aktiv
+  kategori: [social, funktionsratt, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Ideella föreningar med verksamhet som kompletterar socialtjänsten och riktar sig till Vaxholmsbor
+  deadlines: {typ: fasta, datum: [12-31]}
   krav:
-  - Verksamhet i Vaxholm eller med medlemmar/hjälpsökande bosatta i Vaxholm
-  - Föreningen ska efter årsmötet bifoga verksamhetsberättelse, revisionsberättelse, årsmötesprotokoll, resultat- och balansräkning
-    samt verksamhetsplan
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaxholm.se/omsorg--stod/ekonomiskt-stod-och-radgivning/stipendier-och-bidrag/foreningsbidrag-fran-socialnamnden
-  belopp_status: okand
+  - Föreningen ska vara en juridisk person med organisationsnummer och ha plusgiro, bankgiro eller bankkonto i föreningens namn
+  - Verksamheten ska ha relevans för socialnämndens ansvarsområde och bedrivas i Vaxholm eller rikta sig till medlemmar eller hjälpsökande som bor i kommunen
+  - Föreningen ska ha demokratiska stadgar, styrelse och revisorer, vara öppen för målgruppen och arbeta för jämställdhet, delaktighet, lika rättigheter och barnkonventionen
+  - Verksamheten får inte vara partipolitisk, religiös, vinstdriven, droguppmuntrande, diskriminerande eller motarbeta det demokratiska styrelseskicket
+  - Ansökan ska beskriva mål och inriktning samt antal medlemmar eller hjälpsökande i Vaxholm och innehålla verksamhetsplan med budget
+  - Efter årsmötet ska senaste verksamhetsberättelse, resultat- och balansräkning, undertecknad revisionsberättelse och årsmötesprotokoll lämnas senast den 30 april
+  - Beviljat bidrag ska kunna redovisas och väsentliga förändringar ska rapporteras utan dröjsmål
+  belopp: Individuellt beslutat inom socialnämndens årliga budget utifrån verksamhetens relevans och nytta samt antalet medlemmar eller hjälpsökande i Vaxholm
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande år ska vara inne senast den 31 december; ofullständiga handlingar kompletteras efter årsmötet men senast den 30 april och sena ansökningar behandlas inte
+  kalla_url: &social https://www.vaxholm.se/omsorg--stod/ekonomiskt-stod-och-radgivning/stipendier-och-bidrag/foreningsbidrag-fran-socialnamnden
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För bidragsåret 2027 är sista ansökningsdag 31 december 2026; handlingar kompletteras efter årsmötet, senast
-    30 april.
+  senast_verifierad: '2026-08-19'
+  anteckning: Sista ansökningsdag för bidragsåret 2027 är den 31 december 2026.
 forutsattningar:
-- id: vaxholm-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Digitalt boknings- och bidragssystem
+- id: vaxholm-juridisk-person
+  vad: Juridisk person med lokal samhällsnytta
+  beskrivning: Sökanden ska vara en juridisk person med organisationsnummer, godkända stadgar, styrelse och revisor samt bedriva demokratisk och allmännyttig verksamhet med lokal anknytning för Vaxholmsbor.
+  system: Rbok eller ansvarig nämnds ansökningsväg
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen anger ingen generell handläggnings- eller registreringstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.vaxholm.se/uppleva--gora/foreningsliv-och-bidrag/bidrag-och-stod-till-foreningar
-  giltighet_status: okand
+  kalla_url: *kommunnorm
+  giltighet_status: ingen_regel
+- id: vaxholm-registrering-och-handlingar
+  vad: Registrering och aktuella föreningshandlingar
+  beskrivning: För TFK-bidrag ska föreningen vara godkänd och registrerad i Rbok, ha en behörig administratör och alltid hålla senaste verksamhetsberättelse, årsmötesprotokoll och ekonomiska redovisning aktuella.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Handlingarna ska hållas aktuella, men kommunen anger ingen gemensam tidsfrist efter årsmötet.
+  giltighet: null
+  ordning: 2
+  kalla_url: *tfknorm
+  giltighet_status: ingen_regel
+- id: vaxholm-ansokan-och-redovisning
+  vad: Fullständig ansökan och styrkt redovisning
+  beskrivning: Ansökan ska lämnas av behörig företrädare med rätt bilagor inom stödets tidsram; beviljade medel ska användas för beslutat ändamål, redovisas med styrkbara underlag och kan hållas inne eller återkrävas vid fel eller utebliven redovisning.
+  system: Rbok, post eller e-post enligt respektive stöd
+  ledtid: null
+  ledtid_text: Före respektive stöds sista ansökningsdag.
+  giltighet: Gäller den aktuella ansökan och dess uppföljning.
+  ordning: 3
+  kalla_url: *kommunnorm
+  giltighet_status: kontrollast
 kommunsiffra: null

@@ -5,43 +5,108 @@ befolkning: 19707
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
   namn: Rbok
-  url: https://alvesta.rbok.se
+  url: https://alvesta.rbok.se/#/Valkommen
 kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/registrera-er-forening-i-rbok/
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: alvesta-verksamhetsstod
-  namn: Årligt verksamhetsstöd
-  kategori:
-  - idrott
-  - kultur
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Registrerade föreningar i Alvesta kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 05-31
+  namn: Aktivitetsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar med stödberättigade gruppaktiviteter för deltagare 7–25 år
+  deadlines: { typ: fasta, datum: [05-31] }
   krav:
-  - Verksamhetsberättelse för föregående år ska bifogas
-  - Revisionsberättelse för föregående år ska bifogas
-  - Resultat- och balansrapport för föregående år ska bifogas
-  - Verksamhetsplan för innevarande år ska bifogas
-  - Budget för innevarande år ska bifogas
-  belopp: 'Aktivitetsstöd: 7 kronor per deltagare och gruppaktivitet (ålder 7-25 år). Stöd till förhyrda lokaler: upp till
-    60% av hyreskostnaden, max 50 000 kronor per år och lokal. Stöd till drift av egen anläggning/lokal: fast del (underhålls-
-    och tillsynspoäng x 450 kronor) samt rörlig del om 80% av vissa driftskostnader. Främjandestöd: beviljas efter individuell
-    prövning, ingen fast summa.'
-  sen_ansokan: Ansökan som inkommer efter 31 maj behandlas ej utan att särskilda skäl föreligger. Utbetalning görs i februari
-    till föreningens konto.
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  - Aktiviteten ska pågå minst 45 minuter och ha minst tre deltagare utöver ledare
+  - Deltagarna ska vara 7–25 år; för deltagare med funktionsnedsättning finns ingen övre åldersgräns och ledare 13–25 år får räknas som deltagare
+  - Aktiviteten ska ledas av en utsedd ledare över 13 år och det ska finnas minst en ledare per 20 deltagare
+  - En deltagare får räknas i högst en gruppaktivitet per förening och veckodag
+  - Närvaro ska föras och sparas i fyra år; studiecirklar och kommersiella arrangemang ger inte stöd
+  belopp: 7 kr per deltagare i en stödberättigad gruppaktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 maj varje år inom ansökan om årligt föreningsstöd
+  kalla_url: &norm https://www.alvesta.se/wp-content/uploads/2026/02/Riktlinjer-for-foreningsstod-i-Alvesta-kommun-antagna-av-KFN-%C2%A7-81_2025-och-reviderade-%C2%A7-14_2026-.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Omfattar verksamhetsstöd, anläggningsstöd, hyresstöd och utvecklingsstöd. Individuell bedömning per förening.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-drift-egen-anlaggning-lokal
+  namn: Stöd till drift av egen anläggning eller lokal
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar med stödberättigad egen fritidsanläggning eller samlingslokal
+  deadlines: { typ: fasta, datum: [05-31] }
+  krav:
+  - Anläggningen eller lokalen ska vara godkänd som stödberättigad av kultur- och fritidsnämnden och hållas i funktionsdugligt skick
+  - Hembygdsgårdar och liknande omfattas inte utan söker främjandestöd
+  - Lokalen ska på begäran hyras ut till andra stödberättigade föreningar till skälig och jämförbar taxa
+  - Ansökan ska redovisa stödberättigade kostnader och hyresintäkter; stödet minskas med 25 % av hyresintäkterna
+  belopp: 450 kr gånger underhållspoäng plus 450 kr gånger tillsynspoäng samt 80 % av godkända driftkostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 maj varje år inom ansökan om årligt föreningsstöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-forhyrda-lokaler
+  namn: Stöd till förhyrda lokaler
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som hyr lokal för regelbunden barn- och ungdomsverksamhet
+  deadlines: { typ: fasta, datum: [05-31] }
+  krav:
+  - Lokalen ska regelbundet användas för barn- och ungdomsverksamhet och ligga i Alvesta kommun
+  - Hyran får inte redan vara kommunalt subventionerad och jämförbar kommunal lokal får inte finnas
+  - Förhyrningen, hyreskontraktet och ändringar ska godkännas i förväg av kultur- och fritidsnämnden
+  - Årlig förhyrning kräver årskontrakt och full dispositionsrätt; kommunal lokal ska användas först vid tillfällig förhyrning
+  belopp: Upp till 60 % av hyreskostnaden, högst 50 000 kr per lokal och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 maj varje år inom ansökan om årligt föreningsstöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-framjandestod
+  namn: Främjandestöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  malgrupp: Föreningar som inte omfattas av driftstödet eller stödet till förhyrda lokaler
+  deadlines: { typ: fasta, datum: [05-31] }
+  krav:
+  - Föreningen ska uppfylla kommunens generella villkor för föreningsstöd
+  - Föreningen får inte omfattas av stöd till egen anläggning eller förhyrd lokal
+  - Ansökan ska redovisa aktiviteter, verksamhetsplan, medlemsantal och publika evenemang
+  - Bedömningen väger även in samverkan, ny verksamhet och verksamhet för barn och ungdomar
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 maj varje år inom ansökan om årligt föreningsstöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-nystartat-bidrag
-  namn: Stöd till nystartade föreningar
+  namn: Stöd till nybildad förening
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -58,21 +123,47 @@ bidrag:
   - Ekonomisk redovisning och budget för kommande år ska bifogas
   - Vid ansökan om att bli godkänd barn- och ungdomsförening ska även föreningens alkohol- och drogpolicy bifogas
   belopp: Upp till 2 500 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-kompletteringsstod
+  namn: Kompletteringsstöd till ny förening
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nya föreningar som beviljats startstöd men ännu inte fått årligt föreningsstöd
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Föreningen ska tidigare ha beviljats stöd till nybildad förening
+  - Årligt föreningsstöd ska ännu inte ha börjat betalas ut
+  - Föreningen ska ha ett dokumenterat ekonomiskt behov under väntetiden
+  - Ansökan ska innehålla förklaring av ekonomin, budget, verksamhetsplan och sökt belopp
+  belopp: Behovsprövat belopp; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-projekt-ungdom
-  namn: 'Projektbidrag: Ungdom leder ungdom'
+  namn: Stöd till unga leder unga
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   malgrupp: Föreningar för ungdomsledda projekt
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Projektet ska planeras och genomföras av barn och unga i åldern 13-25 år
@@ -80,22 +171,26 @@ bidrag:
   - Redovisning ska lämnas senast två månader efter genomfört evenemang/projekt
   - Stöd utgår ej för ledararvode
   belopp: Upp till 15 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Rapportering senast 2 månader efter projektet
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-projekt-fritid
-  namn: 'Projektbidrag: Aktiv fritid för alla'
+  namn: Stöd till aktiv fritid för alla
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
   malgrupp: Föreningar för fritidsaktiviteter för alla åldersgrupper
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Aktiviteten eller evenemanget ska stärka folkhälsan, nå nya målgrupper, öka integration/inkludering eller öka samverkan
@@ -104,20 +199,24 @@ bidrag:
   - Redovisning ska lämnas senast två månader efter genomfört evenemang/projekt
   - Stöd utgår ej för ledararvode
   belopp: Upp till 15 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Rapportering senast 2 månader efter projektet
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-projekt-kultur
-  namn: 'Projektbidrag: Kulturarrangemang'
+  namn: Stöd till kulturarrangemang
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - kultur
   malgrupp: Kulturföreningar för arrangemang
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget ska vara inom ett konstnärligt område, t.ex. musik, teater, film, dans eller konst
@@ -127,15 +226,19 @@ bidrag:
   - Stöd beviljas ej till stödgalor eller arrangemang för välgörande ändamål, och ej för mat och dryck
   - Stödet är ett arrangemangsstöd och avser ej produktion
   belopp: Upp till 20 000 kronor, kan ges som förlustbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Rapportering senast 2 månader efter projektet
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-investeringsstod
   namn: Investeringsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -153,22 +256,70 @@ bidrag:
   - Ansökan ska lämnas senast 1 oktober och avse investeringar som planeras genomföras under nästkommande kalenderår
   - Redovisning med fakturor och kontoutdrag ska lämnas senast 31 december samma år som investeringen genomförs
   belopp: Upp till 50% av investeringskostnaden. Lägsta summa som kan sökas är 10 000 kronor.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan för återkommande investeringar senast 1 oktober
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Akuta åtgärder eller reparationer, samt redan påbörjade investeringar som kräver omedelbar åtgärd, kan i stället
     sökas som löpande investeringsstöd (ansökan löpande, beslut senast tre veckor efter ansökan).
+  senast_verifierad: '2026-08-18'
+- id: alvesta-lopande-investeringsstod
+  namn: Löpande investeringsstöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar med en akut åtgärd i anläggning, lokal eller maskinpark
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Åtgärden eller reparationen ska vara akut och avgörande för att föreningen ska kunna fortsätta verksamheten
+  - Ansökan ska beskriva situationen, planerad åtgärd och kostnad samt innehålla offert
+  - Redan påbörjad investering kan omfattas endast när åtgärden måste inledas omedelbart
+  - Redovisade kostnader ska styrkas och lägre kostnad än förskott medför återbetalning
+  belopp: Upp till 50 % av den totala investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande; beslut tas senast tre veckor efter ansökan
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-kartframstallning
+  namn: Stöd till kartframställning
+  foreningstyp: [idrott, friluft]
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar som tar fram eller reviderar orienteringskartor i Alvesta kommun
+  deadlines: { typ: fasta, datum: [10-01] }
+  krav:
+  - Kartan ska avse framtagande eller revidering av orienteringskarta i Alvesta kommun
+  - Kartan ska kunna användas av orienteringsklubbar, skolor och allmänhet
+  - Arbetet ska planeras för nästkommande år och ansökan ska redovisa kostnaderna
+  - Lägre redovisad kostnad än utbetalt förskott medför återbetalning
+  belopp: Upp till 50 % av kostnaden, högst 30 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 1 oktober för kartarbete under nästkommande år
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-ledarutbildning
   namn: Ledarutbildningsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   malgrupp: Föreningar för utbildning av ledare och instruktörer
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska ha barn- och ungdomsverksamhet
@@ -178,46 +329,95 @@ bidrag:
   belopp: '100% av kurskostnaderna (ej reseersättning eller förlorad arbetsförtjänst). Takbelopp beroende på antal gruppaktiviteter
     föregående år: 20-99 aktiviteter 6 000 kronor, 100-249 aktiviteter 8 000 kronor, 250-399 aktiviteter 10 000 kronor, 400+
     aktiviteter 15 000 kronor.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska vara kultur- och fritidsförvaltningen tillhanda senast tre månader efter avslutad kurs. För att
     räknas på innevarande verksamhetsår ska ansökan skickas in senast 31 december.
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: alvesta-rantstod
-  namn: Räntestöd för föreningslån
+  namn: Räntestöd för godkända borgenslån
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
   - ovrig
   malgrupp: Föreningar med kommunalt godkänt lån för investeringar
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Föreningen ska ha kommunal borgen beviljad för lånet
   - Lånet ska godkännas av kommunstyrelsen som stödberättigat innan det tecknas
+  - Stödet gäller under den amorteringstid som kommunen beslutat för det godkända lånet
   belopp: 90% av räntekostnaderna under den beslutade amorteringstiden
-  sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar inget separat ansökningsdatum
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-lovaktivitetsstod
+  namn: Stöd till lovaktivitet
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som ordnar kostnadsfria lovaktiviteter för barn och unga
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Aktiviteten ska planeras och genomföras av en förening och rikta sig till barn och unga under aktuellt lov
+  - Aktiviteten ska vara kostnadsfri och öppen för deltagare i den angivna målgruppen
+  - Intresseanmälan ska ange aktivitet, åldersgrupp, datum, tid och plats
+  - Ansökan ska lämnas före den tidsfrist som kommunen publicerar för respektive lov
+  belopp: 1 500 kr per lovaktivitet samt möjlighet till kostnadsfri kommunal lokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Tidsfristen publiceras för varje lovutlysning
+  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsbrev/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: alvesta-studieforbund
+  namn: Stöd till studieförbund
+  foreningstyp: [kultur, social, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Folkbildningsrådets godkända studieförbund med verksamhet i Alvesta kommun
+  deadlines: { typ: fasta, datum: [05-31] }
+  krav:
+  - Studieförbundet ska vara godkänt av Folkbildningsrådet och bedriva lokal verksamhet i Alvesta kommun
+  - Årlig ansökan och redovisning ska lämnas för föregående års verksamhet
+  - Årsberättelse och revisionsberättelse ska bifogas
+  - Underlaget ska redovisa studiecirkeltimmar och kulturarrangemang; annan folkbildningsverksamhet räknas inte
+  belopp: Fördelas efter studiecirkeltimmar och kulturarrangemang multiplicerade med 7,3; fast belopp per sökande publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 maj enligt gällande regler
+  kalla_url: https://etjanster.alvesta.se/oversikt/overview/267
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: alvesta-rbok-registrering
-  vad: Registrering i Rbok-systemet
-  beskrivning: Föreningen måste vara registrerad i kommunens Rbok-system. Föreningen ska bedriva ideell, icke vinstdrivande
-    verksamhet och ha demokratisk struktur med godkända stadgar. Ordförande och ledare som arbetar med barn/ungdom måste ha
-    polisanmälan för barnmisshandling, grov misshandling och sexualbrott. Årsredovisning med resultat- och balansräkning krävs
-    årligen.
-  system: Rbok (alvesta.rbok.se)
+  vad: Registrering och föreningsgodkännande i Rbok
+  beskrivning: Föreningen registreras i Rbok och ska normalt ha godkända stadgar, vara ideell, öppen och demokratiskt uppbyggd, arbeta för integration och jämställdhet, ha minst tio medlemmar, ha bedrivit verksamhet minst sex månader, ha säte och verksamhet i kommunen, ta medlemsavgift samt ha organisationsnummer och bankkonto. Föreningar med barn-, ungdoms- eller funktionsrättsverksamhet ska dokumentera registerutdrag för berörda ledare.
+  system: Rbok
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod-och-externa-bidrag/
-  giltighet_status: okand
+  kalla_url: https://www.alvesta.se/uppleva-och-gora/foreningar-och-foreningsliv/registrera-er-forening-i-rbok/
+  giltighet_status: ingen_regel

@@ -2,102 +2,412 @@ kommun: Gällivare
 kommun_slug: gallivare
 lan: Norrbottens län
 befolkning: 17123
-forvaltning: Ungdoms-, fritids- och kulturförvaltningen
+forvaltning: Kommunstyrelsen, socialförvaltningen samt ungdoms-, fritids- och kulturförvaltningen
 ansokningssystem:
-  namn: E-tjänster
-  url: https://gallivare.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-kalla_url: https://gallivare.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-verifierad: 2026-07-26
+  namn: E-tjänster och blanketter
+  url: https://gallivare.se/kommun-och-politik/politik-och-demokrati/e-tjanster-och-blanketter/uppleva-och-gora
+kalla_url: &huvud https://gallivare.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-for-foreningar
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: gallivare-fritidkultur
-  namn: Fritids- och kulturbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för fritid- och kulturverksamhet
+- id: gallivare-verksamhetsbidrag-ungdom
+  namn: Verksamhetsbidrag för ungdomsorganisationer
+  kategori: [idrott, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ungdomsorganisationer med regelbunden verksamhet för barn och unga
   deadlines:
     typ: fasta
-    datum:
-    - 10-15
+    datum: [02-25, 08-25]
   krav:
-  - Verksamhet i Gällivare kommun
-  - Ideell förening
-  belopp: null
-  sen_ansokan: Ej möjlig efter 15 oktober
-  kalla_url: https://gallivare.se/omsorg-och-stod/ekonomi---stod-och-radgivning/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ungdoms-, fritids- och kulturförvaltningen fördelar stöd (verksamhetsbidrag, aktivitetsstöd, anläggningsstöd,
-    startbidrag) enligt kommunens allmänna föreningsbidrag-sida, men ett eget bidrag benämnt 'Fritids- och kulturbidrag' med
-    ansökningsdatum 15 oktober kunde inte återfinnas i officiella källor. Kommunens faktiska belopps-, deadline- och kravregler
-    för detta bidrag är fortsatt overifierade.
-- id: gallivare-kulturstod
-  namn: Kulturstöd
-  kategori:
-  - kultur
-  malgrupp: Kulturarbetare och kulturföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 12-15
-  krav:
-  - Förening, organisation eller kulturarbetare med allmänkulturell inriktning (konst, musik, dans, film, teater, foto, konsthantverk,
-    kulturarv)
-  - 'Förening/organisation: antagna stadgar, vald styrelse och egen kassaförvaltning. Kulturarbetare: registrerad med organisationsnummer
-    och egen kassaförvaltning'
-  - Sökande ska vara registrerad/verksam i Gällivare kommun
-  - Bidrag lämnas med högst 75 % till barn- och ungdomsverksamhet (t.o.m. 20 år) och högst 25 % till vuxenverksamhet, och
-    avser endast nettokostnader
-  - Verksamheten/arrangemanget ska vara öppet för allmänheten, och Gällivare kommun ska framgå som medarrangör vid marknadsföring
-  - Helårsverksamhet med varierat programutbud och ungdomsverksamhet prioriteras
-  - Alkohol- och drogfrihet ska gälla vid ungdomsarrangemang
-  - Verksamhetsberättelse och ekonomisk redovisning ska lämnas senast 1 maj
-  belopp: null
-  sen_ansokan: Inget separat regelverk för sen ansökan är publicerat i e-tjänsten; ansökan ska ha inkommit senast 15 december
-    året före den bedrivna verksamheten.
-  kalla_url: https://gallivare.enamnd.se/oversikt/overview/3361
-  belopp_status: okand
+  - Organisationen ska ha verksamhet i Gällivare och minst tio registrerade medlemmar 7–20 år; landsbygdsförening kan ha minst fem
+  - Varje deltagare ska ha deltagit i minst fem aktiviteter under redovisningsperioden
+  - Rapporteringsblankett och närvarounderlag ska lämnas med ansökan
+  - Föreningen ska vara demokratiskt uppbyggd, partipolitiskt och religiöst obunden och lämna fullständiga års- och ekonomihandlingar
+  belopp: Kommunstyrelsen fastställer belopp per deltagare och aktivitet samt eventuell prioritering
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för hösten senast 25 februari och för våren senast 25 augusti
+  kalla_url: &norm https://gallivare.se/download/18.79a301f518851710d0ade177/1686593687646/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20till%20id%C3%A9buren%20sektor.pdf
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Inget kronbelopp anges; bidraget begränsas till högst 75 % (barn/ungdom) respektive 25 % (vuxen) av nettokostnaden,
-    se krav. Ansöknings- och behörighetsregler verifierade via kommunens e-tjänst för årligt Kulturstöd.
-- id: gallivare-socialbidrag
-  namn: Socialt verksamhetsbidrag
-  kategori:
-  - social
-  malgrupp: Föreningar för socialt arbete
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-anlaggningsstod-ungdom
+  namn: Anläggningsstöd för ungdomsorganisationer
+  kategori: [idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ungdomsorganisationer med egen eller förhyrd lokal eller anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 04-14
+    datum: [03-31]
   krav:
-  - Verksamhet enligt kommunens vision
-  - Främjar jämlikhet och mångfald
-  - Verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse för föregående år bifogas ansökan
-  - Verksamhetsplan och budget för kommande år bifogas ansökan
-  belopp: null
-  sen_ansokan: Inget separat regelverk för sen ansökan är publicerat; ansökan ska ha inkommit senast 14 april (baserat på
-    2025 års ansökningsomgång, kan variera enstaka dagar mellan år).
-  kalla_url: https://gallivare.se/omsorg-och-stod/arkiv/nyheter/2025/2025-03-03-aktivitetsstod-for-2025
-  belopp_status: okand
+  - Organisationen ska bedriva barn- och ungdomsverksamhet i Gällivare och ha egen eller förhyrd lokal eller anläggning
+  - Stödet grundas på aktiva medlemmar 7–20 år och föregående års redovisade kostnader
+  - Verksamhetsberättelse, årsmötesprotokoll, resultat- och balansräkning samt anläggnings- och kostnadsuppgifter ska lämnas
+  - Föreningen ska uppfylla kommunens gemensamma demokrati-, redovisnings- och insynsvillkor
+  belopp: Högst 80 procent av föregående års kostnader eller det maxbelopp per aktiv medlem som kommunstyrelsen beslutar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Bekräftat via kommunens nyhetsartikel om aktivitetsstöd 2025 (riktar sig till funktionshinderorganisationer
-    och sociala föreningar). Inget kronbelopp anges. Deadline och ansökningshandlingar verifierade; övrig text baseras på
-    kommunens allmänna vision/mångfaldskrav.
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-socialnamnd-aktivitet-projekt-administration
+  namn: Socialnämndens aktivitets-, projekt- och administrationsbidrag
+  kategori: [social]
+  foreningstyp: &social [social, annat]
+  malgrupp: Föreningar och organisationer med verksamhet inom socialnämndens område
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Ansökan ska avse en aktivitet eller ett projekt inom socialnämndens område eller administration för löpande social verksamhet
+  - Målgrupp, tid, omfattning, mål, förväntat resultat och budget ska beskrivas
+  - Verksamheten ska knyta an till kommunens mål, socialnämndens fokus och den nya socialtjänstlagen
+  - Verksamhetsberättelse, ekonomi, revision, verksamhetsplan och budget ska lämnas enligt kommunens gemensamma villkor
+  belopp: Individuellt efter prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningstiden för 2026 förlängdes till 15 april
+  kalla_url: https://gallivare.se/download/18.61e8f8fd19bac5bb2cf3aeba/1768392069960/F%C3%B6reningsbidrag%20ans%C3%B6kningsblankett%202026.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-startbidrag
+  namn: Startbidrag för ungdomsorganisationer
+  kategori: [idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nybildade ungdomsorganisationer
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Organisationen ska vara nybildad, ha minst tio medlemmar 7–20 år och inte ha bedrivit verksamhet de senaste tre åren
+  - Organisationen ska vara ansluten till distrikts- eller riksorganisation om inte särskilda skäl finns
+  - Stadgar, protokoll från bildande eller interimsstyrelse och medlemsantal ska lämnas
+  belopp: 500–1 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-anskaffning-ombyggnad-fritidsanlaggning
+  namn: Bidrag till anskaffning eller ombyggnad av fritidsanläggning
+  kategori: [idrott]
+  foreningstyp: *alla
+  malgrupp: Ungdomsorganisationer som anskaffar eller bygger om en fritidsanläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en ungdomsorganisation i Gällivare kommun
+  - Åtgärden ska avse anskaffning eller ombyggnad av en fritidsanläggning
+  - Ansökan prövas individuellt och ska innehålla kostnads- och finansieringsunderlag
+  belopp: Högst 50 procent av totalkostnaden och högst 250 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-nif-arrangemang
+  namn: Bidrag till Norrbottens idrottsförbunds ungdomsarrangemang
+  kategori: [idrott]
+  foreningstyp: [idrott, ungdom, annat]
+  malgrupp: Föreningar vars ungdomar deltar i Norrbottens idrottsförbunds arrangemang
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening i Gällivare kommun
+  - Ungdomar ska delta i ett barn- eller ungdomsarrangemang inom Norrbottens idrottsförbund
+  - Stödet kan avse exempelvis Lilla VM, Kurirspelen eller bredd- och elitläger
+  belopp: Individuellt efter prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-socialnamnd-hyresbidrag
+  namn: Socialnämndens hyresbidrag
+  kategori: [social]
+  foreningstyp: *social
+  malgrupp: Sociala föreningar och organisationer med förhyrd lokal
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Sökanden ska vara en social förening eller organisation med verksamhet i Gällivare
+  - Giltigt hyreskontrakt ska bifogas ansökan
+  - Nyanskaffning av lokal ska anmälas till socialnämnden
+  belopp: Högst 80 procent av hyran, högst 500 kronor per medlem och högst 60 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningstiden för 2026 förlängdes till 15 april
+  kalla_url: https://gallivare.se/download/18.61e8f8fd19bac5bb2cf3aeba/1768392069960/F%C3%B6reningsbidrag%20ans%C3%B6kningsblankett%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-funktionsnedsattning-grund-aktivitetsstod
+  namn: Grund- och aktivitetsstöd för föreningar för personer med funktionsnedsättning
+  kategori: [funktionsratt]
+  foreningstyp: *social
+  malgrupp: Organisationer där majoriteten är personer med varaktig funktionsnedsättning eller deras närstående
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Majoriteten ska vara personer med varaktig funktionsnedsättning och stora vardagssvårigheter; för barn eller personer som inte själva kan bevaka sin rätt får majoriteten vara närstående
+  - Organisationen ska ha bedrivit verksamhet i minst två år och redovisa betalande medlemmar och stödmedlemmar
+  - Medlemsinformation, aktiviteter, kurser och studiecirklar samt fullständiga års- och ekonomihandlingar ska redovisas
+  belopp: Grundstöd 6 000 kronor vid minst 50 medlemmar och 3 000 kronor vid minst 25; aktivitetsstöd 40, 80 eller 150 kronor per medlem beroende på föreningsgrupp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag i den aktuella blanketten
+  kalla_url: https://gallivare.se/download/18.61e8f8fd19bac5bb2cf4d6d6/1768469997659/Ans%C3%B6kan%20grund-%20och%20aktivitetsst%C3%B6d%20till%20f%C3%B6reningar%20f%C3%B6r%20personer%20med%20funktionsneds%C3%A4ttning%20i%20G%C3%A4llivare%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med statsbidragsberättigad verksamhet i Gällivare
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Studieförbundet ska bedriva och redovisa statsbidragsberättigad verksamhet i Gällivare kommun
+  - Kommunintyg ska lämnas för studiecirklar, övrig folkbildning och kulturprogram
+  - Underlag ska lämnas för grund-, målgrupps-, volym- och kulturdelarna i kommunens fördelningsmodell
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunanslaget fördelas med 70 procent grundbidrag, 10 procent målgruppsbidrag, 10 procent volymbidrag och 10 procent kulturbidrag; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-integration-nyanlanda-asylsokande
+  namn: Bidrag till integration av nyanlända och asylsökande
+  kategori: [social]
+  foreningstyp: *social
+  malgrupp: Föreningar som genomför integrerande insatser för nyanlända och asylsökande
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Aktiviteten ska vara förebyggande, långsiktig och integrerande
+  - Aktiviteten ska rikta sig till nyanlända eller asylsökande och får inte redan vara genomförd
+  - Skriftlig och ekonomisk slutrapport ska lämnas enligt kommunens instruktioner
+  belopp: Individuellt efter prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-social-hallbarhet
+  namn: Bidrag för social hållbarhet
+  kategori: [social]
+  foreningstyp: *social
+  malgrupp: Organisationer och föreningar med insatser för social hållbarhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en organisation eller förening
+  - Insatsen ska stärka social hållbarhet i Gällivare kommun och avse ett prioriterat fokusområde
+  - Skriftlig verksamhetsredovisning och ekonomisk redovisning ska lämnas
+  belopp: Individuellt efter prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-foreningsjubileum
+  namn: Bidrag vid föreningsjubileum
+  kategori: [ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som firar 25-, 50-, 75- eller 100-årsjubileum
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska fylla 25, 50, 75 eller 100 år
+  - Bidraget ska användas för att utveckla föreningens verksamhet
+  - Särskild ungdomsinriktning ska beaktas
+  belopp: 2 500 kronor vid 25 år, 5 000 vid 50 år, 7 500 vid 75 år och 10 000 vid 100 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-kommunalt-lonebidrag
+  namn: Kommunalt lönebidrag
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och organisationer med anställd som har statligt lönebidrag eller motsvarande anställningsstöd
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Arbetsförmedlingen ska ha beviljat lönebidrag, trygghetsanställning eller utvecklingsanställning
+  - Anställningsbevis och Arbetsförmedlingens beslut ska lämnas före utbetalning samt avisering och lönespecifikation varje månad
+  - Förändringar ska anmälas; om ingen rekvisition görs under sex månader avslutas ärendet
+  - Funktionsrätts- och social verksamhet, viktiga anläggningar och särskilt viktig ungdomsverksamhet prioriteras
+  belopp: Vid heltid 16 200 kronor per år för en enhet, 24 300 för en och en halv och 32 400 för två; stödet följer sysselsättningsgraden och får inte överstiga lönen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Fackliga organisationer, studieförbund och Folkets hus omfattas inte.
+- id: gallivare-jakt-fiskevardsbidrag
+  namn: Bidrag till jakt- och fiskevårdande åtgärder
+  kategori: [ovrig]
+  foreningstyp: [friluft, annat]
+  malgrupp: Organiserade jakt- och fiskevårdsområden och föreningar
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Sökanden ska vara ett skifteslag eller en förening organiserad enligt samfällighets-, fiske- eller jaktvårdsområdeslag och ha minst tio medlemmar
+  - Fiskekort ska säljas till allmänheten och kommunbor och minst hälften av intäkterna ska användas till fiskevård
+  - Ekonomisk redovisning och erforderliga tillstånd från länsstyrelsen ska lämnas för utsättning eller vattenarbete
+  - Fiskevårdsplan, års- och verksamhetsberättelse samt planerade åtgärder och kostnader ska bifogas
+  belopp: 50 procent av redovisade fiskevårdskostnader, 60 procent vid egen sättfiskodling; övriga jakt-, vilt- och anläggningsåtgärder prövas enligt reglerna
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars; ofullständig ansökan behandlas inte
+  kalla_url: https://gallivare.se/download/18.79a301f518851710d0ade374/1686594575421/Villkor%20f%C3%B6r%20bidragsgivning%20till%20jakt-%20och%20fiskev%C3%A5rdande%20%C3%A5tg%C3%A4rder.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-kulturlokalstod
+  namn: Kulturlokalstöd
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar och bygdegårdar med kostnader för öppethållande vid kulturevenemang
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en kulturförening eller bygdegård i Gällivare kommun
+  - Kostnaden ska avse öppethållande vid ett evenemang eller en avgränsad evenemangsperiod
+  - Evenemang som gynnar barn och ungdomar prioriteras
+  belopp: Högst 80 procent av kostnaderna för öppethållande
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://gallivare.se/uppleva-och-gora/kultur/stod-bidrag-och-stipendier
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+- id: gallivare-minoritetsspraksmedel
+  namn: Minoritetsspråksmedel
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med språk- och kulturinsatser för nationella minoriteter i Gällivare
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Ansökan ska ha en ansvarig förening och både sökanden och projektet ska vara verksamma i Gällivare
+  - Projektet ska främja finska, meänkieli eller samiska språk eller sverigefinsk, tornedalsk eller samisk kultur
+  - Stödet är delfinansiering och projektbudget samt annan finansiering ska anges
+  - Aktiviteten ska vara drogfri och får inte vara en nöjes- eller rekreationsresa
+  - Verksamhetsberättelse och ekonomisk redovisning ska lämnas senast vid årets slut
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 60 000 kronor för externa ansökningar 2026
+  sen_ansokan: Ansökan senast 31 mars eller 30 september
+  kalla_url: https://gallivare.se/kommun-och-politik/nationella-minoriteter-och-minoritetssprak/ansokan-minoritetsspraksmedel
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
 forutsattningar:
-- id: gallivare-vision
-  vad: Kommunens vision och värdegrund
-  beskrivning: Stöd ska användas för initiativ som är förenliga med kommunens vision, värderingar och mål. Främjar delaktighet,
-    jämlikhet och mångfald.
+- id: gallivare-gemensamma-villkor
+  vad: Grundvillkor för idéburen sektor
+  beskrivning: Föreningen ska ha verksamhet i Gällivare, vald styrelse och stadgar, vara demokratiskt uppbyggd, partipolitiskt och religiöst obunden samt arbeta med samverkan, samhällsengagemang och tillgänglighet.
   system: Gällivare kommun
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://gallivare.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: gallivare-arsunderlag
+  vad: Års- och ekonomihandlingar
+  beskrivning: Verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse, uppgifter om andra stöd samt aktuell verksamhetsplan och budget ska lämnas; kommunen får granska och göra stickprov.
+  system: Gällivare kommun
+  ledtid: null
+  ledtid_text: Lämnas enligt respektive stödforms ansökningsrutin
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel

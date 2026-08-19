@@ -2,244 +2,328 @@ kommun: Kil
 kommun_slug: kil
 lan: Värmlands län
 befolkning: 12024
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid samt Kommunstyrelsen
 ansokningssystem:
   namn: Rbok
-  url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-verifierad: '2026-08-01'
+  url: https://kil.rbok.se/ansok
+kalla_url: &huvud https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nybildade lokala föreningar med minst 10 medlemmar
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: kil-startbidrag
+  namn: Startbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Nybildade lokala ideella föreningar i Kils kommun
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska vara nybildad, lokal och ha minst 10 medlemmar
+  - Föreningen ska ha antagit stadgar och ha plusgiro eller bankgiro
+  - Föreningen ska vara registrerad i Rbok och uppfylla kommunens allmänna bidragsvillkor
+  - Startbidrag kan beviljas endast en gång per förening
+  belopp: Kommunen publicerar ingen aktuell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: kil-startbidrag
-- namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Kommunala föreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: kil-grundbidrag
+  namn: Grundbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade ideella föreningar i Kils kommun
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Föreningen ska vara registrerad i Rbok och uppfylla kommunens allmänna bidragsvillkor
+  - Föreningen ska bedriva frivillig och regelbunden verksamhet i Kil minst åtta månader per år
+  - Föreningen ska bifoga årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse samt resultat- och balansräkning
+  - Bidraget har en nivå för föreningar med minst 15 medlemmar och en högre nivå för föreningar med minst 30 medlemmar
+  belopp: Två bidragsnivåer utifrån minst 15 respektive minst 30 medlemmar; kronbeloppen publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: kil-grundbidrag
-- namn: Hyresbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som hyr lokal
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: Max 75 % av godkända nettokostnader, med årligt maxtak
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: kil-hyresbidrag
+  namn: Hyresbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som hyr en lokal för sin verksamhet
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Föreningen ska hyra lokalen och ansökan ska avse föregående verksamhetsårs faktiska kostnader
+  - Godkända kostnader är hyra, vatten, el, uppvärmning, avlopp, sotning och sophämtning
+  - Föreningen får inte söka både hyresbidrag och anläggningsbidrag för samma verksamhetsår
+  - Hyra för kommunala skolsalar, gymnastiksalar och vissa kommunala mötesrum är inte stödgrundande
+  belopp: Högst 75 procent av godkända faktiska årliga nettokostnader, inom ett årligt maxtak per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående verksamhetsår ska lämnas senast 30 april
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: kil-hyresbidrag
-- namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som driver egen anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
-  belopp: Max 75 % av godkända nettokostnader, med årligt maxtak
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: kil-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som driver och underhåller en egenägd anläggning
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Föreningen ska ansvara för drift och underhåll av en egenägd anläggning
+  - Godkända kostnader är räntor, vatten, el, uppvärmning, avlopp, fastighetsförsäkring, sotning och sophämtning
+  - Ansökan ska avse föregående verksamhetsårs faktiska kostnader
+  - Föreningen får inte söka både anläggningsbidrag och hyresbidrag för samma verksamhetsår
+  belopp: Högst 75 procent av godkända faktiska årliga nettokostnader, inom ett årligt maxtak per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående verksamhetsår ska lämnas senast 30 april
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: kil-anlaggningsbidrag
-- namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som investerar i lokal, anläggning eller inventarier
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-15
-    - 06-15
-    - 09-15
-    - 12-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Behandlas kvartalsvis.
-  id: kil-investeringsbidrag
-- namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - ovrig
-  malgrupp: Föreningar som utvecklar verksamhet eller når nya målgrupper
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-15
-    - 06-15
-    - 09-15
-    - 12-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Behandlas kvartalsvis.
-  id: kil-verksamhetsbidrag
-- namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - funktionsratt
-  malgrupp: Barn- och ungdomsföreningar; funktionsrättsföreningar utan åldersgräns
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
+- id: kil-kostnadsfria-kommunala-lokaler
+  namn: Kostnadsfri upplåtelse av kommunala lokaler
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade barn- och ungdoms-, pensionärs- och funktionsrättsföreningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara en bidragsberättigad barn- och ungdomsförening, pensionärsförening eller funktionsrättsförening
+  - Upplåtelsen gäller kommunala skolsalar, gymnastiksalar och vissa kommunala mötesrum
+  - Lokalen ska användas för föreningsverksamhet och bokas genom kommunens bokningssystem
+  - Hyresbidrag kan inte sökas för en lokal som kommunen upplåter kostnadsfritt
+  belopp: Kostnadsfri upplåtelse av kommunala skolsalar, gymnastiksalar och vissa mötesrum
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för den kostnadsfria upplåtelsen
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kil-investeringsbidrag
+  namn: Investeringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som investerar i lokal, anläggning, maskiner eller inventarier
+  deadlines: {typ: fasta, datum: [03-15, 06-15, 09-15, 12-15]}
+  krav:
+  - Investeringen ska avse kommande renovering, ny-, till- eller ombyggnad, maskinell utrustning eller andra inventarier
+  - Ansökan ska redovisa verksamhetens behov, anläggningens användning, arbetsbeskrivning samt investerings- och driftkalkyl och vid behov ritningar
+  - Föreningen ska beskriva investeringens långsiktiga påverkan och undersöka alternativa bidrag och fondmedel
+  - Vid byggåtgärd i hyrd lokal ska hyres- eller nyttjanderättsavtalet gälla i minst fem år
+  - Utbetalning sker först när beställning styrks med beställningsbekräftelse, faktura eller offert
+  belopp: Individuellt investeringsbidrag inom ett årligt maxtak per förening; kommunen publicerar inte takets storlek
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar behandlas 15 mars, 15 juni, 15 september och 15 december; bidrag beviljas högst en gång per förening och år
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kil-verksamhetsbidrag
+  namn: Verksamhetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som utvecklar verksamhet eller når en ny målgrupp
+  deadlines: {typ: fasta, datum: [03-15, 06-15, 09-15, 12-15]}
+  krav:
+  - Insatsen ska bredda eller utveckla befintlig verksamhet eller vidareutveckla den för att nå en ny målgrupp
+  - Barn och unga, folkhälsa genom kultur eller idrott, jämställdhet, jämlikhet, inkludering och integration prioriteras
+  - Ansökan ska avse kommande verksamhet och den beslutade normen kräver minst en månads verksamhet
+  - Aktiviteten ska publiceras i kommunens evenemangskalender och utvärderas efter genomförandet tillsammans med kultur och fritid
+  belopp: Individuellt verksamhetsbidrag inom ett årligt maxtak per förening; kommunen publicerar inte takets storlek
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar behandlas 15 mars, 15 juni, 15 september och 15 december; föreningen kan söka i varje period och få högst ett bidrag per period
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kil-aktivitetsbidrag
+  namn: Kommunalt aktivitetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med barn- och ungdomsverksamhet samt funktionsrättsföreningar utan övre åldersgräns
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Sammankomsten ska vara planerad och beslutad av styrelse, medlemsmöte eller motsvarande och pågå minst 45 minuter
+  - Minst fem deltagare ska närvara och deltagare räknas normalt i åldern 7–25 år; funktionsrättsföreningar saknar övre åldersgräns
+  - En deltagare får räknas i högst en sammankomst per dag i samma organisation och en aktivitet får bara ett bidrag per sammankomst och dag
+  - Närvarobok ska föras och kunna kontrolleras i minst fyra år
+  - Föreningen ska redovisa via Rbok, med fil från IdrottOnline eller annan digital plattform när sådan används
   belopp: 35 kr per godkänd sammankomst
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Vårperioden redovisas senast 25 augusti och höstperioden senast 25 februari
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: kil-aktivitetsbidrag
-- namn: Arrangemangsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som genomför offentliga arrangemang i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Mindre arrangemang senast 3 månader före; större arrangemang 6–12 månader före.
-  id: kil-arrangemangsbidrag
-- namn: Bidrag till förebyggande socialt arbete
-  kategori:
-  - social
-  malgrupp: Föreningar och organisationer med förebyggande social verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: kil-arrangemangsbidrag
+  namn: Arrangemangsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som genomför offentliga arrangemang i Kils kommun
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Arrangemanget ska vara öppet för allmänheten, äga rum i Kils kommun och främja ett kommunalt medborgarperspektiv
+  - Ansökan ska innehålla arrangemangsbeskrivning, ekonomisk kalkyl samt föreningens och externa parters insatser
+  - Ansökan om högst 15 000 kr ska lämnas minst tre månader före arrangemanget
+  - Ansökan över 15 000 kr kräver särskilt beslut av kommunstyrelsen och ska lämnas sex till tolv månader före arrangemanget
+  - Redovisning ska lämnas senast två månader efter genomförandet och avvikande eller uteblivet genomförande kan medföra återbetalning
+  belopp: Individuellt prövat; ansökningar till och med 15 000 kr handläggs kvartalsvis och högre belopp kräver särskilt beslut
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast tre månader före vid ansökan om högst 15 000 kr och sex till tolv månader före vid högre ansökan; sena ansökningar behandlas inte
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: kil-bidrag-till-forebyggande-socialt-arbete
-- namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som utbildar ledare och ungdomsdomare
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-15
-    - 06-15
-    - 09-15
-    - 12-15
-  krav: []
-  belopp: Max 75 % av kursavgift och billigaste resa, inom årligt maxtak
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan minst en månad före utbildningen; utbetalning kvartalsvis.
-  id: kil-ledarutbildningsbidrag
-- namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Statsbidragsberättigade studieförbund med cirkelverksamhet i Kil
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-30
-  krav: []
+- id: kil-bidrag-till-forebyggande-socialt-arbete
+  namn: Bidrag till förebyggande socialt arbete
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar och organisationer med förebyggande social verksamhet i Kil eller för kommuninvånare
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Sökanden ska vara en förening eller organisation som bedriver förebyggande social verksamhet i Kil eller riktar insatser till kommuninvånare
+  - Insatsen ska främja hälsa och förebygga att problem uppstår eller förvärras genom generella eller riktade insatser
+  - Verksamheten kan rikta sig till barn och familjer, ungdomar eller vuxna på individ-, grupp- eller strukturell nivå
+  - Sökanden ska vara registrerad som kund i Rbok och ansökan avser det gångna verksamhetsåret
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökningsperiod 1 januari–30 april.
-  id: kil-studieforbundsbidrag
+  belopp_avser: ren_pott
+  kommunens_pott: 246 060 kr avsattes i kommunens budget för bidrag till förebyggande socialt arbete 2026
+  sen_ansokan: Den beslutade föreningsbidragsnormen anger 30 april; bidraget söks en gång per år för det gångna verksamhetsåret
+  kalla_url: &social https://kil.se/download/18.616c808019b2be1058c1480e/1767778298966/Kallelse%20KS%20260113.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kil-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som utbildar ledare eller ungdomsdomare
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - De stödgrundande kostnaderna ska uppgå till minst 500 kr
+  - Ansökan ska lämnas minst en månad innan utbildningen äger rum; sena ansökningar behandlas inte
+  - Bidraget avser kursavgift och resa med billigaste färdsätt, även för utbildning av ungdomsdomare
+  - Intyg från genomgången utbildning ska lämnas innan bidraget betalas ut
+  - Föreningen kan få bidrag flera gånger per år men inom det årliga tak som följer av budgeten
+  belopp: Högst 75 procent av kursavgiften inklusive resa med billigaste färdsätt, inom ett årligt maxtak
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan minst en månad före utbildningen; utbetalning sker kvartalsvis den 15 mars, 15 juni, 15 september och 15 december
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kil-studieforbundsbidrag
+  namn: Studieförbundsbidrag
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med studiecirkelverksamhet i Kils kommun
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Studieförbundet ska få statsbidrag via Folkbildningsrådet och ha bedrivit studiecirkelverksamhet i Kils kommun
+  - Ansökan ska innehålla ekonomisk redovisning samt verksamhets- och revisionsberättelse för senast avslutat verksamhetsår
+  - Intyg från studieförbundets verksamhetsredovisning, STUV, ska bifogas
+  - Ansökan avser föregående verksamhetsår och bidraget beräknas på verksamhet två år bakåt för utbetalning nästkommande år
+  belopp: Beräknas med utbetalda statliga bidrag för studiecirkelverksamhet som grund; kommunen publicerar ingen generell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan är öppen 1 januari–30 april
+  kalla_url: https://kil.rbok.se/ansok-bidragsansokan?id=e7dd9e36-82ed-4cc6-b61e-cffebcdd4844
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: kil-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  vad: Registrering och årlig uppdatering i Rbok
+  beskrivning: Föreningen ska vara ideell, ha säte i Kil och vara registrerad i Rbok. Kontaktuppgifterna ska uppdateras varje år och aktuella evenemang ska synliggöras i kommunens kanaler.
   system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppdatera kontaktuppgifterna varje år
+  giltighet: kalenderår
   ordning: 1
-  kalla_url: https://kil.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-och-stod
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: kil-allmanna-villkor
+  vad: Allmänna villkor för kommunalt föreningsbidrag
+  beskrivning: Föreningen ska ha minst 10 aktiva medlemmar, skälig minimiavgift, plus- eller bankgiro och minst åtta månaders frivillig regelbunden verksamhet i Kil. Den ska följa kommunens värdegrund, arbeta med ANDTS, antidiskriminering, demokrati och jämställdhet samt inte få annat kommunalt skattefinansierat bidrag för verksamheten.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Villkoren ska vara uppfyllda när ansökan lämnas
+  giltighet: null
+  ordning: 2
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: kil-arsmoteshandlingar
+  vad: Årsmötes- och ekonomihandlingar
+  beskrivning: Årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse samt resultat- och balansräkning ska bifogas ansökan. Kommunen har rätt att kontrollera lämnade uppgifter.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Handlingarna ska finnas vid ansökan
+  giltighet: null
+  ordning: 3
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
 kommunsiffra: null

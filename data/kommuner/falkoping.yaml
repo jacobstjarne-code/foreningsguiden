@@ -2,309 +2,344 @@ kommun: Falköping
 kommun_slug: falkoping
 lan: Västra Götalands län
 befolkning: 32866
-forvaltning: Kultur- och fritidsförvaltningen samt Samhällsbyggnad
+forvaltning: Kultur- och fritidsförvaltningen, kommunledningsförvaltningen samt Samrådet för lokalt folkhälsoarbete
 ansokningssystem:
-  namn: Kommunens e-tjänst samt e-post till föreningsbidrag@falkoping.se
+  namn: Actor, kommunens e-tjänster och särskilda ansökningsvägar
   url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
 kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-verifierad: 2026-07-27
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
+- id: falkoping-anlaggningsbidrag
+  namn: Anläggningsbidrag – föreningsägd anläggning
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar som äger och driver en anläggning för sin verksamhet i Falköpings kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [04-30] }
+  krav:
+  - Föreningen ska vara ideell, bedriva verksamhet i Falköpings kommun, ha minst fem medlemmar, antagna stadgar, vald styrelse och revisor samt konto i föreningens namn
+  - Verksamheten ska vara öppen för alla och föreningen ska följa kommunens demokrati-, jämlikhets-, mångfalds- och drogförebyggande villkor
+  - Ansökan ska avse en föreningsägd anläggning och styrkta kostnader för exempelvis el, uppvärmning, försäkring, vatten, avlopp, renhållning eller arrende
+  - Årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse, verksamhetsplan, budget och stadgar ska bifogas
+  - Den rörliga delen bedöms efter anläggningens storlek och typ samt verksamhetens innehåll och nyttjandegrad
+  belopp: Fast del på 40 procent av godkända driftskostnader samt en rörlig del efter årlig bedömning
+  belopp_avser: per_forening
+  kommunens_pott: 5 068 000 kr (gemensam pott för anläggningar, lokaler och investeringar 2026)
+  sen_ansokan: Ansökan görs under perioden 1 januari–30 april.
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Den gemensamma budgetramen omfattar även externt hyrda anläggningar och investeringar.
+  min_medlemmar: 5
+  senast_verifierad: '2026-08-18'
+- id: falkoping-lokalbidrag
+  namn: Bidrag till externt hyrda anläggningar
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar som hyr en icke-kommunal anläggning eller lokal för sin verksamhet i Falköpings kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [04-30] }
+  krav:
+  - Föreningen ska uppfylla kommunens gemensamma grundvillkor för föreningsbidrag
+  - Hyran ska avse en externt hyrd anläggning eller lokal, inte en kommunal anläggning
+  - Godkända kostnader kan vara hyra eller arrende, försäkring, el och uppvärmning
+  - Årsmöteshandlingar, ekonomiska handlingar, verksamhetsplan, budget, stadgar och underlag för kostnaderna ska bifogas
+  - Utökat bidrag kan prövas när anläggningen har särskild betydelse, högt nyttjande eller särskilda kostnadsförutsättningar
+  belopp: 40 procent av godkända driftskostnader; utökat bidrag kan beviljas efter särskild prövning
+  belopp_avser: per_forening
+  kommunens_pott: 5 068 000 kr (gemensam pott för anläggningar, lokaler och investeringar 2026)
+  sen_ansokan: Ansökan görs under perioden 1 januari–30 april.
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget gäller externa lokalkostnader; kommunens egna anläggningar omfattas inte.
+  senast_verifierad: '2026-08-18'
+- id: falkoping-investeringsbidrag
+  namn: Bidrag till investeringar, reparationer och inventarier
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar som behöver investera i, reparera eller köpa inventarier till en föreningsägd anläggning.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [04-30] }
+  krav:
+  - Åtgärden ska avse en föreningsägd anläggning och får inte påbörjas innan beslut om bidrag
+  - Ansökan ska innehålla åtgärdsbeskrivning, kostnadsberäkning eller offerter, finansieringsplan och tidsplan
+  - Samma investering får inte samtidigt finansieras med ett annat kommunalt bidrag
+  - Årsmöteshandlingar, ekonomiska handlingar, verksamhetsplan, budget och stadgar ska bifogas
+  - Slutredovisning ska lämnas inom tre månader; fleråriga projekt redovisas årligen och bidrag över 500 000 kr kräver oberoende auktoriserad revisor
+  belopp: Normalt 20 procent av godkänd kostnad och efter särskild prövning högst 50 procent; investeringar över 1 miljon kr kan få förskott
+  belopp_avser: per_forening
+  kommunens_pott: 5 068 000 kr (gemensam pott för anläggningar, lokaler och investeringar 2026)
+  sen_ansokan: Ansökan görs under perioden 1 januari–30 april.
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Förskottsutbetalning kan prövas för investeringar som överstiger en miljon kronor.
+  senast_verifierad: '2026-08-18'
+- id: falkoping-boverket-medfinansiering
+  namn: Kommunal medfinansiering till Boverkets investeringsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar med investeringsprojekt som söker Boverkets stöd till allmänna samlingslokaler.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [11-01] }
+  krav:
+  - Projektet ska uppfylla Boverkets villkor för investeringsbidrag till allmänna samlingslokaler
+  - Föreningen ska lämna projektbeskrivning, kostnadskalkyl, finansieringsplan, ritningar och övriga underlag som krävs för kommunens prövning
+  - Kommunens beslut och protokollsutdrag om medfinansiering ska bifogas ansökan till Boverket
+  - Föreningen ansvarar för att den fullständiga ansökan når Boverket senast den 1 december
+  belopp: Kommunens medfinansiering ska uppgå till minst 30 procent av den kostnad Boverket godkänner
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens ansökningsperiod är 1 augusti–1 november; Boverkets slutdag är 1 december.
+  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens medfinansieringsbeslut behövs innan föreningen skickar sin slutliga ansökan till Boverket.
+  senast_verifierad: '2026-08-18'
 - id: falkoping-aktivitetsstod
   namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med organiserad verksamhet för barn 6–25 år, pensionärer 65+ år, eller personer med funktionshinder
-    (alla åldrar)
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-    - 04-30
+  kategori: [idrott, kultur, funktionsratt, pensionar, ovrig]
+  malgrupp: Ideella föreningar med organiserad verksamhet för deltagare 6–25 år, personer över 65 år eller personer med funktionsnedsättning oavsett ålder.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [04-30] }
   krav:
-  - Föreningen ska vara ideell och bedriva verksamhet i Falköpings kommun
-  - Föreningen ska ha minst 5 medlemmar
-  - Föreningen ska ha formella stadgar och väljad styrelse
-  - Föreningen ska ha ett registrerat bankkonto i föreningens namn
-  - Stödet baseras på kombinerad ledare- och deltagar-redovisning
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Aktivitetsstöd för barn-, ungdoms- och pensionärsverksamhet samt funktionshindrade. Ansökan 1 april–30 april
-    varje år.
+  - Föreningen ska uppfylla kommunens gemensamma grundvillkor för föreningsbidrag
+  - En aktivitet ska normalt ha minst tre stödberättigade deltagare och en ansvarig ledare
+  - Deltagarna ska vara 6–25 år eller över 65 år; för personer med funktionsnedsättning gäller ingen åldersgräns
+  - Ansökan ska avse föregående kalenderårs genomförda och närvaroregistrerade aktiviteter
+  - Föreningen ska lämna årsmöteshandlingar, ekonomiska handlingar, verksamhetsplan, budget, stadgar och aktivitetsredovisning
+  belopp: Stödet består av ledar- och deltagarersättning; nivåerna beslutas årligen av kultur- och fritidsnämnden
+  belopp_avser: per_forening
+  kommunens_pott: 4 525 000 kr (gemensam pott för aktivitetsstöd, arrangemangsstöd och studieförbund 2026)
+  sen_ansokan: Ansökan görs under perioden 1 januari–30 april och avser föregående år.
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kultur- och fritidsnämnden kan medge undantag från kravet på tre deltagare.
   alder_min: 6
   alder_max: 25
   min_medlemmar: 5
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: falkoping-arrangemangsstod
   namn: Arrangemangsstöd
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som arrangerar publika evenemang
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-31
-    - 03-31
-    - 08-31
-    - 09-30
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar som genomför publika engångsarrangemang eller en årlig serie arrangemang i Falköpings kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [01-31, 03-31, 04-30, 08-31, 09-30] }
   krav:
-  - Arrangemanget ska vara öppet för alla
-  - Arrangemanget ska ha bred allmän nytta
-  - Arrangemanget ska vara tillgängligt och väl marknadsförda
-  - Föreningen ska vara ideell och verka i Falköpings kommun
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd till publika arrangemang och evenemang. Fyra ansökningstillfällen per år.
-  senast_verifierad: '2026-08-03'
-- id: falkoping-utvecklingsprojekt
-  namn: Stöd till utvecklingsprojekt
-  kategori:
-  - idrott
-  - kultur
-  - social
-  malgrupp: Föreningar som arbetar med utvecklingsprojekt inom hållbarhet (ekonomi, social, miljö)
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-31
-    - 03-31
-    - 08-31
-    - 09-30
-  krav:
-  - Projektet ska fokusera på hållbar utveckling
-  - Projektet kan vara fokuserat på ekonomisk, social eller miljömässig aspekt
-  - Föreningen ska redovisa projektplan och budget
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd till utvecklingsprojekt för hållbarhet. Fyra ansökningstillfällen per år.
-  senast_verifierad: '2026-08-03'
-- id: falkoping-anlaggningsbidrag
-  namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar med behov av investeringar i eller för sina idrotts- eller kulturanläggningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-    - 04-30
-  krav:
-  - Föreningen ska äga eller långtidsupplåta en anläggning i Falköpings kommun
-  - Investeringen ska öka föreningens långsiktiga möjligheter och attraktivitet
-  - Kostnadsförslag från verkstad/entreprenör krävs
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Fast bidrag för anläggningsunderhål och variabel del för investeringar. Ansökan april månad.
-  senast_verifierad: '2026-08-03'
-- id: falkoping-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som hyr lokal för sin verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-    - 04-30
-  krav:
-  - Föreningen ska hyra lokal för sin verksamhet
-  - Hyreskostnaden ska vara väl dokumenterad
-  - Lokalen ska användas för den registrerade föreningsverksamheten
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd till hyra för föreningslokaler. Ansökan april månad.
-  senast_verifierad: '2026-08-03'
-- id: falkoping-investeringsbidrag
-  namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som planerar att investera i utrustning, renoveringar eller mindre byggprojekt
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-    - 04-30
-  krav:
-  - Investeringen ska stärka föreningens verksamhet
-  - Kostnadsförslag från leverantör ska bifogas
-  - Föreningen ska kunna redovisa egenkapital eller finansiering
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd till reparation, utrustning och mindre investeringar. Ansökan april månad.
-  senast_verifierad: '2026-08-03'
-- id: falkoping-boverket-medfinansiering
-  namn: Boverket-medfinansiering
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar med större investeringsprojekt som söker Boverket-medel
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-01
-    - 11-01
-  krav:
-  - Projektet ska uppfylla Boverkets kriterier för stöd
-  - Föreningen ska ha godkänd projektplan
-  - Kommunen hanterar ansökan till Boverket
-  belopp: Enligt Boverkets regler
-  sen_ansokan: Slutlig deadline 1 december samma år
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'Större investeringsprojekt kan få stöd via Boverket. Två perioder för ansökan: 1 aug–1 nov (deadline 1 dec).'
-  senast_verifierad: '2026-08-03'
+  - Arrangemanget ska vara publikt, öppet för alla, ha ett brett allmänintresse och marknadsföras
+  - Arrangemanget ska vara tillgängligt och får inte vara en intern föreningsaktivitet
+  - Ansökan ska innehålla beskrivning, tidsplan, budget med faktiska kostnader och beräknade intäkter samt uppgift om annan finansiering
+  - Föreningen ska uppfylla kommunens gemensamma grundvillkor och lämna de förenings- och ekonomihandlingar som riktlinjen kräver
+  - Engångsarrangemang redovisas inom tre månader och en årlig serie inom tre månader efter årsmötet
+  belopp: Stödet bestäms efter prövning av faktiska kostnader, beräknade intäkter och övrig finansiering
+  belopp_avser: per_forening
+  kommunens_pott: 4 525 000 kr (gemensam pott för aktivitetsstöd, arrangemangsstöd och studieförbund 2026)
+  sen_ansokan: Årliga arrangemangsserier söks senast 30 april; engångsarrangemang senast 31 januari, 31 mars, 31 augusti eller 30 september.
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökningstidpunkten beror på om ansökan gäller en årlig serie eller ett enstaka arrangemang.
+  senast_verifierad: '2026-08-18'
 - id: falkoping-studieforbundsbidrag
-  namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  malgrupp: Registrerade studieförbund verksamma i Falköpings kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 06-30
+  namn: Bidrag till studieförbund
+  kategori: [kultur]
+  malgrupp: Studieförbund som tillhör Västra Götalands bildningsförbund och bedriver folkbildningsverksamhet i Falköpings kommun.
+  foreningstyp: [kultur, annat]
+  deadlines: { typ: fasta, datum: [06-30] }
   krav:
-  - Organisationen ska vara registrerat studieförbund
-  - Verksamheten ska utgöra studiecirklar eller motsvarande folkbildning
-  belopp: null
-  sen_ansokan: Ej angiven
+  - Studieförbundet ska tillhöra Västra Götalands bildningsförbund och bedriva verksamhet i Falköpings kommun
+  - Ansökan och fördelningen ska följa den regionala rekommendation och fördelningsnyckel som gäller för året
+  - Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse, verksamhetsplan och budget ska lämnas
+  - De uppgifter om lokal folkbildningsverksamhet som kommunen begär ska kunna styrkas
+  belopp: Fördelas enligt Västra Götalands bildningsförbunds årliga rekommendation och fördelningsnyckel
+  belopp_avser: per_forening
+  kommunens_pott: 4 525 000 kr (gemensam pott för aktivitetsstöd, arrangemangsstöd och studieförbund 2026)
+  sen_ansokan: Kommunens publicerade ansökningsperiod är 1 december–30 juni.
   kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd för folkbildningsverksamhet. Bidrag enligt regional rekommendation.
-  senast_verifierad: '2026-08-03'
-- id: falkoping-vag-anslutningsbidrag
-  namn: VA-anslutningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Landsbygdsföreningar som behöver VA-anslutning för sina anläggningar
-  deadlines:
-    typ: lopande
-    datum: []
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Riktlinjen hänvisar till de årliga regionala datumen; kommunens aktuella sida anger 30 juni.
+  senast_verifierad: '2026-08-18'
+- id: falkoping-utvecklingsprojekt
+  namn: Bidrag till utvecklingsprojekt
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar, studieförbund och grupper utan juridisk person som genom en ansvarig värdorganisation driver ett tidsbegränsat utvecklingsprojekt.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [01-31, 03-31, 08-31, 09-30] }
   krav:
-  - Föreningen ska ligga på landsbygd utan befintlig VA-anslutning
-  - Föreningen ska kunna redovisa kostnader för VA-anslutning
+  - Projektet ska vara avgränsat från ordinarie verksamhet och bidra till ekonomisk, social eller miljömässig hållbarhet och lokal utveckling
+  - Projektet ska ha tydlig start, avslutning, mål, budget, finansieringsplan och plan för tiden efter projektet
+  - En grupp utan juridisk person ska ha en förening eller ett studieförbund med organisationsnummer som värd och administrativt ansvarig
+  - Fysiska projekt ska ha nödvändiga tillstånd och en plan för framtida drift och underhåll
+  - Projektet ska redovisas senast tre månader efter avslutningen
   belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd till VA-anslutning för landsbygdsföreningar. Löpande ansökan.
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 187 000 kr (budgeterad pott för utvecklingsprojekt 2026)
+  sen_ansokan: Ansökan lämnas senast 31 januari, 31 mars, 31 augusti eller 30 september.
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En värdorganisation får enligt riktlinjen 25 procent av det sökta beloppet för administration. Högsta projektbelopp beslutas årligen men är inte publicerat för 2026.
+  senast_verifierad: '2026-08-18'
 - id: falkoping-folkhalsorad
-  namn: Folkhälsoråd (samordning)
-  kategori:
-  - social
-  malgrupp: Organisationer verksamma inom folkhälsa och samhällsutveckling
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Projektmedel från Samrådet för lokalt folkhälsoarbete
+  kategori: [social, funktionsratt, pensionar, ovrig]
+  malgrupp: Organisationer som genomför lokala, hälsofrämjande och förebyggande projekt i Falköpings kommun.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: okand, datum: [] }
   krav:
-  - Organisationen ska bedriva folkhälsoarbete
-  - Samordningen ska stärka lokalt folkhälsoarbete
-  belopp: null
-  sen_ansokan: Ej angiven
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Stöd till samordning och samverkan för folkhälsa. Löpande process.
-  senast_verifierad: '2026-08-03'
+  - Projektet ska vara hälsofrämjande eller förebyggande och genomföras i Falköpings kommun
+  - Insatser för barn och unga 0–25 år samt personer 60 år och äldre prioriteras
+  - Ansökan ska beskriva mål, målgrupp, genomförande, samverkan, tidsplan, budget och hur resultatet ska följas upp
+  - Medel ges inte till ordinarie verksamhet eller till en isolerad engångsaktivitet utan planerad fortsättning
+  belopp: Ansökningar till och med 40 000 kr beslutas löpande av folkhälsostrateg och presidium; högre belopp beslutas av samrådet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag.
+  kalla_url: https://sjalvservice.falkoping.se/sokpengar
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: 40 000 kr är en beslutsgräns, inte ett publicerat maxbelopp.
+  senast_verifierad: '2026-08-18'
+- id: falkoping-belysning-anlaggning
+  namn: Bidrag till ny enskild belysningsanläggning
+  kategori: [ovrig]
+  malgrupp: Väg- eller belysningsföreningar och andra föreningar som ansvarar för en stödberättigad enskild vägbelysningsanläggning.
+  foreningstyp: [hembygd, friluft, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Föreningen ska ansvara för en enskild väg som betjänar boende, näringsliv eller friluftsliv eller är en viktig genomfarts- eller uppsamlingsväg för fritidsbebyggelse
+  - Ansökan ska göras och beslut fattas innan installationsarbetet påbörjas
+  - Ansökan ska innehålla föreningsuppgifter, organisationsnummer, behörig firmatecknare, berörda fastigheter, offert, karta och ritning
+  - Anläggningen ska följa aktuella standarder, godkännas av kommunen och vara funktionsduglig
+  - Efter slutfört arbete ska kvitton, kontoutdrag och övrigt utbetalningsunderlag lämnas
+  belopp: 75 procent av redovisad nyanläggningskostnad, högst 3 000 kr per ljuspunkt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas i god tid och godkännas innan arbetet påbörjas.
+  kalla_url: https://www.falkoping.se/download/18.3664353018fe4e6f628197f1/1727678264383/Best%C3%A4mmelser%20om%20kommunal%20bidragsgivning%20till%20enskilda%20anl%C3%A4ggningar%20f%C3%B6r%20v%C3%A4gbelysning.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet hittades utanför föreningsbidragsmenyn på kommunens sida om enskilda belysningsanläggningar.
+  senast_verifierad: '2026-08-18'
+- id: falkoping-belysning-drift
+  namn: Driftbidrag till enskild belysningsanläggning
+  kategori: [ovrig]
+  malgrupp: Väg- eller belysningsföreningar och andra föreningar som ansvarar för en godkänd enskild vägbelysningsanläggning.
+  foreningstyp: [hembygd, friluft, annat]
+  deadlines: { typ: fasta, datum: [04-01] }
+  krav:
+  - Föreningen ska ansvara för en stödberättigad enskild väg och en godkänd, fungerande belysningsanläggning
+  - Den första ansökan ska innehålla föreningsuppgifter, organisationsnummer, firmatecknare, berörda fastigheter samt karta och ritning över ljuspunkterna
+  - Kommunen kan kontrollera anläggningen och förändringar av antal ljuspunkter eller ansvar ska anmälas
+  - För årlig utbetalning ska föreningen 1–31 december lämna mötesprotokoll om firmatecknare och kontoutdrag som visar föreningens konto
+  belopp: 750 kr per ljuspunkt och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Första ansökan ska lämnas senast 1 april. När stödet har godkänts behövs ingen ny grundansökan; utbetalningsunderlag lämnas 1–31 december varje år.
+  kalla_url: https://www.falkoping.se/download/18.3664353018fe4e6f628197f1/1727678264383/Best%C3%A4mmelser%20om%20kommunal%20bidragsgivning%20till%20enskilda%20anl%C3%A4ggningar%20f%C3%B6r%20v%C3%A4gbelysning.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Grundansökan och den återkommande decemberbegäran är två skilda moment.
+  senast_verifierad: '2026-08-18'
+- id: falkoping-vag-anslutningsbidrag
+  namn: Bidrag till VA-föreningar
+  kategori: [ovrig]
+  malgrupp: Samfällighetsföreningar och ekonomiska föreningar som gemensamt ansluter fastigheter utanför kommunalt verksamhetsområde till avloppsnätet.
+  foreningstyp: [annat]
+  deadlines: { typ: fasta, datum: [12-31] }
+  krav:
+  - Föreningen skulle vara bildad genom Lantmäteriet eller som ekonomisk förening och ansluta flera fastigheter gemensamt
+  - Bidraget gällde inte enskilda fastighetsägare
+  - Utbetalning skedde efter att nätet anlagts och föreningen lämnat slutredovisning
+  - Det samlade stödet fick inte överstiga 200 000 euro per förening under tre år
+  belopp: 5 000 kr per ansluten fastighet samt 30 kr per meter ledning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sista ansökningsdag var 31 december 2025. Stödet upphörde därefter.
+  kalla_url: https://www.falkoping.se/download/18.5b7f4af4172139070c65372/1592824118390/Villkor%20f%C3%B6r%20bidrag%20till%20VA-f%C3%B6reningar.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens webbsida ligger kvar men normdokumentet anger att stödet upphörde den 31 december 2025.
+  status: avskaffat
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: falkoping-ideell-status
-  vad: Vara registrerad som ideell förening
-  beskrivning: Föreningen måste vara ideell (non-profit) och verka i Falköpings kommun för att kunna söka kommunala bidrag.
+  vad: Vara ideell förening med verksamhet i kommunen
+  beskrivning: Föreningen ska vara ideell, ha verksamhet i Falköpings kommun och vara öppen för alla som delar föreningens ändamål.
   system: null
   ledtid: null
-  ledtid_text: Registrering som förening kan vanligtvis göras omedelbar vid årsmöte
+  ledtid_text: Ingen generell kommunal handläggningstid publiceras.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 - id: falkoping-stadgar-styrelse
-  vad: Anta stadgar och välja styrelse
-  beskrivning: Föreningen måste ha antagna stadgar (godkända på årsmöte) och en väljd styrelse för att kunna söka bidrag.
+  vad: Ha stadgar, styrelse och revisor
+  beskrivning: Föreningen ska ha antagna stadgar, demokratiskt vald styrelse och utsedd revisor.
   system: null
   ledtid: null
-  ledtid_text: Styrelseval och stadgegodkännande hålls på årsmöte
+  ledtid_text: Kontrolleras genom föreningens aktuella årsmöteshandlingar.
   giltighet: null
   ordning: 2
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 - id: falkoping-minst-fem-medlemmar
-  vad: Ha minst 5 medlemmar
-  beskrivning: Föreningen måste ha minst 5 registrerade medlemmar för att kunna söka aktivitetsbidrag och övriga stöd.
+  vad: Ha minst fem medlemmar
+  beskrivning: Föreningen ska ha minst fem medlemmar för att omfattas av de gemensamma bidragsvillkoren.
   system: null
   ledtid: null
-  ledtid_text: Medlemskap registreras vid föreningsbidrag-ansökan
+  ledtid_text: Medlemsantalet redovisas i ansökan och föreningshandlingarna.
   giltighet: null
   ordning: 3
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 - id: falkoping-bankkonto
-  vad: Registrera bankkonto i föreningens namn
-  beskrivning: Föreningen måste ha ett registrerat bankkonto i föreningens namn för att kunna ta emot bidrag från kommunen.
+  vad: Ha konto i föreningens namn
+  beskrivning: Föreningen ska ha bankkonto, bankgiro eller plusgiro i föreningens namn för utbetalning.
   system: Bank
-  ledtid: 7
-  ledtid_text: Kontoöppning tar normalt 1–2 veckor via bank
+  ledtid: null
+  ledtid_text: Kommunen publicerar ingen generell ledtid för att öppna konto.
   giltighet: null
   ordning: 4
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 - id: falkoping-demokratiska-varden
-  vad: Förbinda sig till demokratiska värden och mångfald
-  beskrivning: Föreningen måste aktivt arbeta för demokratiska värden, mångfald och inkludering, och motsätta sig alla former
-    av diskriminering och våld.
+  vad: Följa demokratiska värden och motverka diskriminering
+  beskrivning: Föreningen ska arbeta för demokrati, jämställdhet, jämlikhet och mångfald samt motverka missbruk, våld och diskriminering.
   system: null
   ledtid: null
-  ledtid_text: Deklaration enligt föreningens stadgar och årsmöte-beslut
+  ledtid_text: Villkoret bedöms i samband med bidragsprövningen.
   giltighet: null
   ordning: 5
-  kalla_url: https://www.falkoping.se/uppleva--gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.falkoping.se/download/18.5f7d535517115b399404b2d/1762521121107/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null

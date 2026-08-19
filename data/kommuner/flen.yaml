@@ -2,107 +2,159 @@ kommun: Flen
 kommun_slug: flen
 lan: Södermanlands län
 befolkning: 15015
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kommunledningsförvaltningen samt barn-, utbildnings- och kulturnämnden
 ansokningssystem:
-  namn: E-tjänster
-  url: https://flen.se/uppleva--gora/foreningsliv
-kalla_url: https://flen.se/uppleva--gora/foreningsliv
-verifierad: '2026-08-02'
+  namn: Flens kommuns e-tjänster
+  url: &etjanster https://etjanster.flen.se/oversikt/overview/121
+kalla_url: &huvud https://flen.se/uppleva--gora/foreningsliv
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://flen.se/download/18.29a8d06319a0f45825e9692e/1762767271318/Reglemente%20f%C3%B6r%20f%C3%B6reningsbidrag%20i%20Flens%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
+- id: flen-hyressubvention
+  namn: Hyressubvention i kommunala lokaler
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala föreningar som hyr kommunala lokaler för föreningsverksamhet
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara en lokal ideell förening som är registrerad och godkänd enligt kommunens allmänna villkor
+  - Bokningen ska avse föreningsverksamhet i en kommunal lokal eller anläggning som omfattas av kommunens uthyrningsregler
+  - Föreningen ska följa lokalens boknings-, ordnings- och användningsvillkor och debiteras enligt rätt kundkategori
+  - Avgiften bestäms av den lokal, tid och verksamhet som bokas enligt kommunfullmäktiges aktuella taxa
+  belopp: Reducerad lokalhyra enligt kommunfullmäktiges aktuella taxa; lokal föreningsverksamhet där samtliga deltagare är under 20 år kan hyra vissa kommunala lokaler avgiftsfritt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag för hyressubventionen; lokalen bokas enligt respektive bokningsrutin.
+  kalla_url: https://flen.se/download/18.7448a5c119e6366d9766cb38/1780910964654/Avgifter%20inom%20fritidsverksamhet%20och%20lokalhyror%20f%C3%B6r%20Flens%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: flen-allmant-foreningsstod
   namn: Allmänt föreningsstöd
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - ovrig
-  malgrupp: Kultur- och fritidsföreningar, sociala föreningar, pensionärsföreningar samt föreningar som äger eller förvaltar
-    samlingslokaler
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-30
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Kultur- och fritidsföreningar, sociala föreningar, pensionärsföreningar samt föreningar som äger eller förvaltar samlingslokaler
+  deadlines: {typ: fasta, datum: [09-30]}
   krav:
-  - Föreningen ska vara hemmahörande i eller bedriva verksamhet i Flens kommun, vara en ideell organisation med organisationsnummer
-    och vara registrerad i kommunens föreningsregister
-  - Föreningen ska vara medlem i förekommande riksorganisation och ha ett aktuellt medlemsregister
-  - Föreningen ska vara öppen för medlemskap för kommunens invånare och ta ut medlemsavgift som bidrar ekonomiskt till föreningens
-    ekonomi
-  - Föreningen ska ha plus- eller bankgirokonto
-  - Föreningen ska begära in begränsat registerutdrag för ledare med direkt eller regelbunden kontakt med barn och unga, upprepat
-    vartannat år
-  - Ansökan ska innehålla styrelsens/sektionernas sammansättning och antal aktiva medlemmar, verksamhetsberättelse, resultat-
-    och balansräkning, revisionsberättelse samt verksamhetsplan för kommande stödperiod, med uppgifterna aktuella per 15 september
-  belopp: Ingen fast belopps- eller beräkningsformel. Bidragets storlek bedöms sammanvägt utifrån verksamhetens omfattning
-    (fler aktiva/aktiviteter för barn, unga och personer med funktionsnedsättning ger normalt mer stöd), jämförelse med andra
-    liknande föreningar samt den totala bidragsram nämnden fastställer i den årliga budgetprocessen.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://flen.se/download/18.29a8d06319a0f45825e9692e/1762767271318/Reglemente%20f%C3%B6r%20f%C3%B6reningsbidrag%20i%20Flens%20kommun.pdf
+  - Föreningen ska vara hemmahörande i eller bedriva verksamhet i Flens kommun, vara ideell, ha organisationsnummer och vara registrerad i kommunens föreningsregister
+  - Föreningen ska vara medlem i förekommande riksorganisation, ha ett aktuellt medlemsregister, vara öppen för kommuninvånare och ta ut medlemsavgift
+  - Ansökan ska lämnas av styrelsen och innehålla styrelsens eller sektionernas sammansättning, aktiva medlemmar, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse samt plan för stödperioden
+  - Uppgifterna ska vara aktuella den 15 september och förening som äger eller förvaltar anläggning ska även redovisa driftkostnader och intäkter
+  - Föreningen ska beskriva samverkan med andra föreningar och senast den 30 september skriftligen redovisa hur föregående stöd har använts
+  - Verksamhet för barn och unga samt personer med funktionsnedsättning prioriteras i den samlade bedömningen
+  belopp: Ingen fast belopps- eller beräkningsformel publiceras; nämnden gör en samlad bedömning av verksamhet, drift, ledarutveckling och tidigare kommunalt aktivitetsstöd inom årets budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara komplett senast 30 september för nästkommande år eller annan överenskommen period; sena ansökningar behandlas inte.
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökan gäller nästkommande år eller annan överenskommen period. Reglementet (rev. 2025-11-03) bekräftar att
-    ingen fast beloppsformel finns.
-- id: flen-arrangemangsbidrag
-  namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för arrangemang
-  deadlines:
-    typ: lopande
-    datum: []
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: flen-bidrag-oforutsedda-kostnader
+  namn: Bidrag till oförutsedda kostnader
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med skada, oförutsedd kostnad eller mindre investeringsbehov
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Evenemanget ska vara offentligt och bedömas ha allmänintresse
-  - Ansökan ska vara inkommen senast en månad före evenemangets genomförande
-  - 'Vid val av förlustgaranti (i stället för förbestämd summa utan redovisningskrav): intäkter och kostnader ska redovisas
-    efter evenemanget'
-  belopp: 'Bidrag utan redovisningskrav i efterhand: förbestämd summa beslutad av nämnden. Bidrag med förlustgaranti: maxbelopp
-    för närvarande 7 000 kr enligt kommunens e-tjänst.'
-  sen_ansokan: Möjlig löpande
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsstöd och vara registrerad i föreningsregistret
+  - Stödet ska avse en skada eller oförutsedd kostnad, delfinansiering av en mindre investering i föreningsägd eller förvaltad anläggning eller inköp av betydelsefull utrustning
+  - Föreningen ska kunna ställa räkenskaper och övriga redovisningshandlingar till kommunens förfogande
+  - Samarbete med företag ska redovisas så att kommunen kan säkerställa att stödet används i föreningens verksamhet
+  - Felaktigt eller oanvänt stöd kan återkrävas och framtida stöd kan stoppas
+  belopp: Kommunen publicerar ingen fast nivå eller medfinansieringsandel; beloppet prövas inom den årliga bidragsramen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet kan sökas löpande under året; kommunen publicerar ingen fast sista ansökningsdag.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: flen-evenemangsstod
+  namn: Evenemangsstöd
+  status: aktiv
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som arrangerar offentliga evenemang
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Sökanden ska vara en förening som uppfyller kommunens allmänna villkor för föreningsstöd
+  - Evenemanget ska vara offentligt och bedömas ha ett allmänintresse
+  - Ansökan ska beskriva evenemanget och innehålla en realistisk kostnads- och intäktsbudget
+  - Ansökan ska vara insänd senast en månad före evenemangets genomförande
+  - Vid förlustgaranti ska föreningen redovisa evenemangets faktiska intäkter och kostnader efter genomförandet
+  belopp: Antingen ett förbestämt bidrag eller en förlustgaranti; förlustgarantin är för närvarande högst 7 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan måste vara insänd senast en månad före evenemanget.
   kalla_url: https://etjanster.flen.se/oversikt/overview/543
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens reglemente (rev. 2025-11-03) benämner denna stödform 'Evenemangsstöd'. Maxbeloppet 7 000 kr för förlustgarantin
-    är bekräftat i e-tjänsten (overview/543); reglementet självt anger inget kronbelopp.
-- id: flen-investeringsbidrag
-  namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för lokalmiljöer
-  deadlines:
-    typ: lopande
-    datum: []
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: flen-bidrag-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund med lokal folkbildningsverksamhet i Flens kommun
+  deadlines: {typ: fasta, datum: [03-01]}
   krav:
-  - Föreningen ska vara registrerad i Flens kommuns föreningsregister och i övrigt uppfylla grundvillkoren för föreningsstöd
-    (ideell organisation med organisationsnummer, medlemsavgift, plus- eller bankgirokonto m.m.)
-  - Bidraget avser delfinansiering av mindre investeringar i föreningsägd eller förvaltad anläggning, eller stöd till inköp
-    av betydelsefull utrustning (stödformen omfattar även skador och oförutsedda kostnader)
-  - Föreningen ska på kommunens begäran kunna ställa räkenskaper och övriga redovisningshandlingar till förfogande
-  belopp: Ingen fast belopps- eller medfinansieringsandel anges i reglementet. Bidragets storlek beslutas av nämnden inom
-    den bidragsram som fastställs i den årliga budgetprocessen.
-  sen_ansokan: Bidraget kan sökas löpande under året enligt reglementet, ingen fast sista ansökningsdag.
-  kalla_url: https://flen.se/download/18.29a8d06319a0f45825e9692e/1762767271318/Reglemente%20f%C3%B6r%20f%C3%B6reningsbidrag%20i%20Flens%20kommun.pdf
-  belopp_status: ingen_regel
+  - Studieförbundet ska bedriva verksamhet i Flens kommun och lämna verksamhetsplan och budget senast den 1 mars
+  - Verksamhetsberättelse, ekonomisk redovisning och kommunintyg ska lämnas senast den 1 maj
+  - Ett distrikt som omfattar flera kommuner ska särredovisa verksamhet och ekonomi för Flens kommun
+  - Fördelningsunderlaget omfattar studietimmar, unika deltagare, annan folkbildningsverksamhet och kulturprogram
+  - Studieförbundet ska delta i obligatorisk muntlig redovisning genom Länsbildningsförbundet mellan augusti och december
+  - Planering, genomförande och utvärdering ska kunna följas och kommunens medel får inte användas i andra kommuner
+  - Försenade underlag medför att förbundet förlorar sin andel och kvarvarande medel fördelas om
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Nämnden fastställer ett årligt totalanslag som Länsbildningsförbundet fördelar proportionellt mellan studieförbunden; totalsumman publiceras inte
+  sen_ansokan: Ansökan, verksamhetsplan och budget ska lämnas senast 1 mars; årsredovisningen ska lämnas senast 1 maj.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens reglemente (rev. 2025-11-03) kallar stödformen 'Bidrag till oförutsedda kostnader' och omfattar utöver
-    investeringar även skador/oförutsedda kostnader och utrustningsinköp. Rättar tidigare overifierad fast deadline 31 december
-    till löpande ansökan.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: flen-registrering
-  vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste vara registrerad i Flens föreningsregister för att kunna ansöka.
-  system: Föreningsregistret
+  vad: Registrering och allmän behörighet
+  beskrivning: Föreningen ska vara ideell, ha organisationsnummer, vara hemmahörande i eller verksam i Flen, vara registrerad i kommunens föreningsregister, ha aktuellt medlemsregister, medlemsavgift och plus- eller bankgiro samt normalt tillhöra relevant riksorganisation.
+  system: Flens kommuns föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://flen.se/uppleva--gora/foreningsliv
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: flen-registerutdrag
+  vad: Registerutdrag för barn- och ungdomsledare
+  beskrivning: Föreningen ska begära begränsat registerutdrag för ledare som har direkt och regelbunden kontakt med barn och unga; kontrollen ska upprepas vartannat år.
+  system: Föreningen och Polismyndigheten
+  ledtid: null
+  ledtid_text: Före uppdrag med direkt och regelbunden kontakt med barn och unga.
+  giltighet: 24 månader
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast

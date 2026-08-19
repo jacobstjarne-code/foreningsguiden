@@ -2,208 +2,434 @@ kommun: Hedemora
 kommun_slug: hedemora
 lan: Dalarnas län
 befolkning: 14990
-forvaltning: Kultur och fritid
+forvaltning: Bildningsförvaltningen samt kommunstyrelseförvaltningen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-verifierad: '2026-08-01'
+  namn: Kultur- och fritidsportalen och Hedemora kommuns e-tjänster
+  url: &portal https://hedemora.actorsmartbook.se/
+kalla_url: &huvud https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &ansokan https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/ansoka-om-foreningsbidrag/
+giltighet_regel_status: kontrollast
 bidrag:
+- id: hedemora-subventionerad-hyra
+  namn: Subventionerad hyra i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar som bokar kommunala lokaler eller anläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara bidragsberättigad och verksam i Hedemora kommun
+  - Bokningen ska avse en kommunal lokal eller anläggning och göras enligt kommunens bokningsregler
+  - Rätt taxa bestäms av verksamhetens målgrupp, lokal eller anläggning och bokad tid
+  - Föreningen ska följa lokalens ordningsregler och övriga villkor för upplåtelsen
+  belopp: Subventionerad timtaxa enligt kommunens prislista; 2025 års beslutade nivåer omfattar exempelvis 160 kr för stor sporthall för barn-, ungdoms- och pensionärsförening jämfört med 215 kr för vuxenförening och 660 kr för extern förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; tider bokas enligt respektive lokals rutin.
+  kalla_url: https://hedemora.se/wp-content/uploads/2025/04/taxor-och-avgifter-kultur-och-fritid.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-startbidrag
   namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: 5 000 kronor
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nystartade ideella föreningar
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Föreningen ska vara nystartad och uppfylla kommunens allmänna grundkrav för bidragsberättigade föreningar
+  - Föreningen ska ha säte i Hedemora, bedriva verksamhet för kommuninvånare och ha organisationsnummer samt bank- eller plusgiro
+  - Föreningen ska ha demokratiska stadgar, vald styrelse, egen ekonomisk bärkraft och en planerad verksamhet
+  - Verksamhetens bidrag till folkhälsa och nytta för kommuninvånarna samt verksamhetens omfattning och målgrupp bedöms
+  belopp: 5 000 kr som engångsbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - funktionsratt
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: Upp till 15 kronor per medlem och max 5 000 kronor
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med verksamhet för barn, unga eller äldre
+  deadlines: {typ: fasta, datum: [10-15]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och ha minst tio aktiva, avgiftsbetalande medlemmar om inte särskilda skäl finns
+  - Stödet ska avse föreningens grundläggande behov och löpande verksamhet
+  - Verksamhetens bidrag till folkhälsa och nytta för kommuninvånare bedöms
+  - Verksamhetens omfattning och antalet personer som nås vägs in i beslutet
+  - Ansökan ska innehålla senaste års-, ekonomi-, revisions- och verksamhetsplanhandlingar
+  belopp: Upp till 15 kr per medlem till och med 25 år och per medlem från 65 år, högst 5 000 kr per förening inom tillgänglig budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioden 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-lokal-drift-och-underhallsbidrag
   namn: Lokal-, drift- och underhållsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som äger eller långsiktigt disponerar en lokal eller anläggning
+  deadlines: {typ: fasta, datum: [10-15]}
+  krav:
+  - Föreningen ska vara bidragsberättigad och bedriva verksamhet i en egenägd lokal eller anläggning eller ha ett längre nyttjanderättsavtal
+  - Lokalen ska vara ett angeläget komplement till kommunala lokaler och bedöms utifrån avstånd och nyttjandegrad
+  - Verksamhetens folkhälsonytta, kommuninvånarnas nytta och lokalens betydelse för en levande landsbygd eller attraktiv kommun bedöms
+  - Antalet aktiviteter eller evenemang och målgruppens storlek vägs in
+  - Ansökan ska redovisa faktiska drift- eller hyreskostnader och fullständiga års- och ekonomihandlingar
+  belopp: Högst 40 % av totala drift- eller hyreskostnaden och normalt högst 80 000 kr per förening; undantag kan göras efter individuell bedömning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioden 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-aktivitetsbidrag
-  namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  namn: Aktivitetsbidrag för barn och unga
+  status: aktiv
+  kategori: [idrott, funktionsratt]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningsverksamhet för barn och unga 6–25 år samt personer med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Aktiviteten ska vara planerad, ledarledd och pågå minst 60 minuter
+  - Ledaren ska närvara hela aktiviteten, leda deltagarna och dokumentera närvaron
+  - Aktiviteten ska ha minst tre deltagare i åldern 6–25 år
+  - Högst 25 deltagare per aktivitetstillfälle kan ge stöd och en deltagare får bara räknas en gång per dag
+  - Fester, läxläsning, högtidsfirande, religiöst eller partipolitiskt arbete, skol- och studiecirkelverksamhet samt öppen verksamhet ger inte stöd
+  - RF-ansluten förening redovisar via IdrottOnline; annan förening lämnar deltagarredovisning i kommunens tjänst
+  belopp: Grundnivån är 6 kr per godkänt deltagartillfälle; nivån kan justeras om antalet godkända aktiviteter överstiger budgeten
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hedemora-aktivitetsbidrag-pensionarer
+  namn: Aktivitetsbidrag för pensionärer
+  status: aktiv
+  kategori: [idrott, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar som ordnar fysisk aktivitet för medlemmar från 65 år
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Aktiviteten ska bestå av fysisk aktivitet, vara planerad och pågå minst 60 minuter
+  - Aktiviteten ska vara ledarledd och ledaren ska närvara hela tiden och dokumentera deltagarna
+  - Minst tre föreningsanslutna deltagare ska vara 65 år eller äldre
+  - Högst 25 deltagare per aktivitet kan ge stöd och en person får bara räknas en gång per dag
+  - Fester, högtidsfirande, religiöst eller partipolitiskt arbete, nöjeskonsumtion, studiecirklar och öppen verksamhet ger inte stöd
+  belopp: Grundnivån är 6 kr per godkänt deltagartillfälle; nivån kan justeras utifrån budget och antal godkända aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-ledarutbildningsbidrag
   namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som utbildar ledare för barn- och ungdomsverksamhet 5–20 år
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Utbildningen ska vara godkänd eller anordnad av föreningens distrikts- eller riksorganisation
+  - Deltagaren ska vara ledare som arbetar med eller möjliggör föreningens barn- och ungdomsverksamhet
+  - Endast kursavgift och resekostnad är stödberättigade; mat och logi får inte räknas
+  - Genomförd utbildning ska redovisas i efterhand och kursintyg ska kunna visas vid kontroll
+  - Föreningen ska ha tagit fram en ledarguide
+  belopp: Beloppet fördelas efter antalet godkända ansökningar; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget söks efter genomförd utbildning under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-feriebidrag
-  namn: Feriebidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  namn: Bidrag för öppen verksamhet utanför skoltid
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som ordnar kostnadsfri öppen verksamhet för unga 10–25 år
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Verksamheten ska bedrivas utanför skoltid, exempelvis kvällar, helger eller lov, och riktas till 10–25-åringar
+  - Vuxna ledare ska finnas på plats under hela öppettiden
+  - Verksamheten ska vara kostnadsfri och marknadsföras som öppen verksamhet
+  - Aktiviteten ska ligga utanför föreningens ordinarie verksamhet
+  - Aktivitetsbidrag får inte sökas för samma verksamhetstillfällen
+  belopp: 200 kr per beviljad timme samt kostnadsfri användning av lediga enstaka tider i kommunala idrottshallar och anläggningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-inventariebidrag
   namn: Inventariebidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som behöver verksamhetsinventarier
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  - Inventarierna ska vara nödvändiga för föreningens verksamhet
+  - Förbrukningsmaterial och fast inredning är inte stödberättigade
+  - Inventarier som direkt gagnar utövarna prioriteras framför administrativa hjälpmedel
+  - Kostnad och finansiering ska framgå av ansökan
+  belopp: Högst 50 % av kostnaden; det faktiska beloppet beror på tillgänglig budget och antal ansökningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-investeringsbidrag
-  namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  namn: Investeringsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med egen anläggning eller långsiktigt nyttjanderättsavtal
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Föreningen ska vara bidragsberättigad och äga anläggningen eller ha ett längre nyttjanderättsavtal
+  - Investeringen ska avse byggnad, anläggning, verksamhetssäkrande fordon eller energieffektivisering
+  - Energi-, miljö-, brandskydds- och tillgänglighetsåtgärder samt samnyttjande prioriteras
+  - Barn- och ungdomsverksamhet, verksamhet för personer med funktionsnedsättning, tillgången till liknande anläggningar och föreningens egen finansiering vägs in
+  - Ansökan ska motivera behovet och ange ett rimligt sökt belopp
+  - Investeringen ska vara färdig och redovisad inom ett år från beslut; bristande redovisning kan medföra återkrav
+  belopp: Högst 30 % av investeringskostnaden och högst 50 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: Investeringsbudgeten delas i fyra lika delar; outnyttjade medel förs vidare till nästa beslutsperiod
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-kulturarrangemangsbidrag
-  namn: Kulturarrangemangsbidrag
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  namn: Bidrag till kulturarrangemang
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar som arrangerar offentliga kulturarrangemang
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Arrangemanget ska avse litteratur, bild, konst, film, foto, scenkonst, musik, teater, dans, kultur eller vetenskap
+  - Arrangemanget ska vara öppet och tillgängligt för alla
+  - Nytänkande projekt och projekt som främjar jämställdhet, mångfald eller riktar sig till barn och unga prioriteras
+  - Ansökan ska beskriva arrangemanget och redovisa sökt belopp, budget, finansiering, medarrangörer och uppskattat publikantal
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor och lämna fullständiga underlag
+  belopp: Kommunen publicerar ingen generell beloppsnivå för kulturarrangemangsbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober.
+  kalla_url: &norm https://hedemora.se/wp-content/uploads/2022/10/7.19_Riktlinje_for_sponsring_foreningsbidrag_och_IOP_2021-10-19.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: hedemora-evenemangsstod
-  namn: Evenemangsstöd
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
+  namn: Evenemangsstöd och förlustbidrag
+  status: aktiv
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och organisationer som arrangerar större offentliga evenemang i Hedemora
+  deadlines: {typ: fasta, datum: [03-15, 10-15]}
+  krav:
+  - Evenemanget ska vara en kortvarig större tillställning i Hedemora och betydelsefullt för kommunens kultur-, fritids- eller idrottsutbud
+  - Evenemanget ska vara offentligt, öppet för alla och fritt från diskriminering
+  - Evenemanget ska positivt marknadsföra Hedemora och kan bidra till besök, handel, gästnätter eller ett större kultur- och idrottsutbud
+  - Kommersiella verksamheter och företag kan inte söka
+  - Kommunens stöd och logotyp ska anges i marknadsföringen
+  - För entrébelagt evenemang ska ansökan göras före genomförandet och stöd betalas endast för del av redovisad förlust
+  - Utbetalning sker efter genomfört evenemang och skriftlig redovisning
+  belopp: Högst 50 000 kr per evenemang; entrébelagt evenemang kan få stöd för en del av redovisad förlust
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under perioderna 15 januari–15 mars och 15 augusti–15 oktober och måste göras före evenemanget.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hedemora-studieforbundsbidrag
+  namn: Kommunbidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsgodkända studieförbund med folkbildningsverksamhet i Hedemora
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundets centrala organisation ska vara godkänd för statsbidrag av Folkbildningsrådet
+  - Studieförbundet ska planera och bedriva verksamhet i Hedemora kommun som huvudsakligen riktar sig till kommuninvånare
+  - Studiecirklar, annan folkbildningsverksamhet och kulturprogram som ligger till grund för stödet ska vara statsbidragsberättigade
+  - Studieförbundet ska delta i minst en årlig överläggning med kommunen om verksamhet och samverkan
+  - Verksamhets- och ekonomiskt underlag ska avse den lokala verksamheten och kunna granskas
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunen fastställer ett årligt totalanslag som fördelas mellan studieförbund som planerar folkbildningsverksamhet i Hedemora; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag för studieförbundsbidraget.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hedemora-projektstod-lokal-utveckling
+  namn: Projektstöd för att främja lokal utveckling
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som genomför mindre lokala utvecklingsprojekt
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Sökanden ska vara en ideell förening och projektet ska avse lokal utveckling i Hedemora kommun
+  - Projektet ska gynna boende genom social och ekonomisk utveckling som är ekologiskt hållbar
+  - Projektet ska ta tillvara lokala intressen, kunskap och engagemang och ses som en investering i landsbygden
+  - Varaktiga, nytänkande insatser samt ungdomsdeltagande, integration, jämställdhet, folkhälsa och miljö prioriteras
+  - Reguljär verksamhet, upprustning av bygdegårdar, större eller entrébelagda evenemang och projekt lämpade för Leader får inte finansieras
+  - Beviljat projekt ska redovisas efter slutförandet
+  belopp: Högst 50 000 kr per projekt
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr för ansökningsomgången 2026
+  sen_ansokan: Nästa publicerade ansökningsperiod är 1 februari–31 mars 2027.
+  kalla_url: https://hedemora.se/foretag-och-arbete/landsbygdsutveckling/stod-och-bidrag/stod-till-lokal-utveckling/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hedemora-bygdepeng
+  namn: Bygdepeng
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Byalag, bygderåd och ideella föreningar som är medlemmar i Hedemora kommunbygderåd
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Sökanden ska vara byalag, bygderåd eller ideell förening och medlem i Hedemora kommunbygderåd
+  - Medlemsavgiften för innevarande år ska vara betald; ideell förening får rätt att söka från medlemsår två
+  - Stödet ska avse lokalt utvecklingsarbete som normalt ligger utanför ordinarie föreningsverksamhet
+  - Stödet kan användas för fysisk mötesplats, ökad trivsel för unga eller gemensam sammankomst öppen för alla
+  - Beviljat stöd ska följas upp enligt kommunbygderådets anvisningar
+  belopp: Högst 10 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: 50 000 kr per år
+  sen_ansokan: Nästa publicerade ansökningsperiod är 1 februari–31 mars 2027.
+  kalla_url: https://hedemora.se/foretag-och-arbete/landsbygdsutveckling/stod-och-bidrag/bygdepeng-2/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: hedemora-driftbidrag-enskilda-vagar
+  namn: Kommunalt driftbidrag till enskilda vägar
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägföreningar som ansvarar för enskilda vägar i Hedemora kommun
+  deadlines: {typ: fasta, datum: [03-30]}
+  krav:
+  - Sökanden ska vara en vägförening som ansvarar för en enskild väg i Hedemora kommun
+  - För ordinarie stöd ska vägen ha statligt driftbidrag och föreningen ska ta ut medlemsavgift eller finansiera motsvarande andel på annat sätt
+  - Vägförening utan statsbidrag kan prövas om vägen fyller flera funktioner och ger samhällsnytta, exempelvis för kollektivtrafik, utryckningsfordon eller allmänhetens kultur- och fritidsmiljöer
+  - Föreningen ska årligen redovisa verksamhet och ekonomi och ansökan avser föregående års drift
+  - Extra stöd kräver särskilda skäl och en rimlig, redovisad merkostnad
+  belopp: Högst 20 % av statens beräknade drift- och underhållskostnad; väg utan statsbidrag beräknas mot likvärdig statsbidragsväg och extra stöd prövas efter faktisk kostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 mars eller annat datum som kommunen särskilt anger; senare ansökan kan prövas vid särskilda skäl.
+  kalla_url: https://hedemora.se/wp-content/uploads/2025/04/riktlinje-for-kommunalt-driftbidrag-for-enskilda-vagar-2025-04-05.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: hedemora-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  vad: Registrering och årlig uppdatering
+  beskrivning: Föreningen ska vara registrerad i Kultur- och fritidsportalen och årligen uppdatera och godkänna sina kontaktuppgifter i kommunens föreningsregister.
+  system: Kultur- och fritidsportalen
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Före ansökan; kontaktuppgifterna uppdateras minst en gång per kalenderår.
+  giltighet: Ett kalenderår
   ordning: 1
-  kalla_url: https://hedemora.se/se-och-uppleva/foreningsliv/bidrag-till-foreningar/
-  giltighet_status: okand
-kommunsiffra: null
+  kalla_url: *ansokan
+  giltighet_status: kontrollast
+- id: hedemora-allmanna-villkor
+  vad: Allmän behörighet och årshandlingar
+  beskrivning: Föreningen ska ha säte i Hedemora, verksamhet för kommuninvånare, drogfri och demokratisk verksamhet, organisationsnummer, bank- eller plusgiro, egen ekonomi och normalt minst tio aktiva medlemmar. Senaste verksamhetsberättelse, plan, ekonomiska redovisning, årsmötesprotokoll och revisionsberättelse ska lämnas vid ansökan.
+  system: Kultur- och fritidsportalen
+  ledtid: null
+  ledtid_text: Årshandlingarna lämnas tillsammans med ansökan.
+  giltighet: null
+  ordning: 2
+  kalla_url: *ansokan
+  giltighet_status: ingen_regel
+- id: hedemora-registerutdrag
+  vad: Registerutdrag för barn- och ungdomsledare
+  beskrivning: Föreningar med barn- och ungdomsverksamhet ska begära utdrag ur belastningsregistret för sina ledare.
+  system: Föreningen och Polismyndigheten
+  ledtid: null
+  ledtid_text: Innan ledaren arbetar i barn- och ungdomsverksamheten.
+  giltighet: null
+  ordning: 3
+  kalla_url: *ansokan
+  giltighet_status: ingen_regel

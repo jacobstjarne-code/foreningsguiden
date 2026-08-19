@@ -59,22 +59,26 @@ function requireBidrag(kommunSlug: string, bidragId: string) {
   return bidrag;
 }
 
-// Gislaved: omigrerade standardvärden (`okand`) ska åter visas precis som
-// före migrationen. JSON-filen är matchningens faktiska klientunderlag.
+// Gislaved: de tre referensbeloppen ska finnas kvar även efter att kommunens
+// granskade poster klassats som uttryckliga belopp per förening. JSON-filen
+// är matchningens faktiska klientunderlag.
 const gislavedStart = requireBidrag('gislaved', 'gislaved-startbidrag');
 const gislavedGrund = requireBidrag('gislaved', 'gislaved-grundbidrag');
 const gislavedAnlaggning = requireBidrag('gislaved', 'gislaved-anlaggningsbidrag');
 if (gislavedStart.belopp !== '5 000 kronor') fail('Gislaved startbidrag saknar 5 000 kronor i matchningsdata');
+if (gislavedStart.belopp_avser !== 'per_forening') fail('Gislaved startbidrag är inte klassat per förening');
 if (gislavedGrund.belopp !== '3 000 kronor per år') fail('Gislaved grundbidrag saknar 3 000 kronor per år i matchningsdata');
+if (gislavedGrund.belopp_avser !== 'per_forening') fail('Gislaved grundbidrag är inte klassat per förening');
 requireText(gislavedAnlaggning.belopp ?? '', '210 kronor per bidragsberättigad medlem', 'Gislaved anläggningsbidrag i matchningsdata');
+if (gislavedAnlaggning.belopp_avser !== 'per_forening') fail('Gislaved anläggningsbidrag är inte klassat per förening');
 
 const gislavedHtml = readFileSync(resolve(dist, 'kommun', 'gislaved', 'index.html'), 'utf8');
 requireText(gislavedHtml, '5 000 kronor', 'Gislaveds kommunsida');
 requireText(gislavedHtml, '3 000 kronor per år', 'Gislaveds kommunsida');
 requireText(gislavedHtml, '210 kronor per bidragsberättigad medlem', 'Gislaveds kommunsida');
 const gislavedStartHtml = readFileSync(resolve(dist, 'kommun', 'gislaved', 'bidrag', 'gislaved-startbidrag', 'index.html'), 'utf8');
-requireText(gislavedStartHtml, '<dt>Belopp</dt>', 'Gislaveds detaljsida med okand-standardvärde');
-forbidText(gislavedStartHtml, 'Inte fastställt om uppgiften gäller', 'Gislaveds detaljsida med okand-standardvärde');
+requireText(gislavedStartHtml, '<dt>Belopp för föreningen</dt>', 'Gislaveds detaljsida med per-forening-klassning');
+forbidText(gislavedStartHtml, 'Inte fastställt om uppgiften gäller', 'Gislaveds detaljsida med per-forening-klassning');
 
 const purePoolHtml = readFileSync(
   resolve(dist, 'kommun', 'tranas', 'bidrag', 'tranas-aktivitetsstod', 'index.html'),

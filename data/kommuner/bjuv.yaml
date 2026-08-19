@@ -4,16 +4,21 @@ lan: Skåne län
 befolkning: 16044
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: Smartbook
+  namn: Smartbook och APN
   url: https://smartbook.bjuv.se/
-kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar.html
-verifierad: 2026-07-26
+kalla_url: &huvud https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.bjuv.se/download/18.4ed7c0cd18a2119f12f8dc9c/1693910429985/Regler%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%2C%20antagna.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: bjuv-ungdomspengen
   namn: Ungdomspengen
-  kategori:
-  - idrott
-  - kultur
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [ungdom]
   malgrupp: Ungdomsföreningar
   deadlines:
     typ: lopande
@@ -21,62 +26,72 @@ bidrag:
   krav:
   - Ungdomsförening med styrelse där majoriteten är 25 år eller yngre
   - Kan användas för utrustning, instruktörer eller aktiviteter
+  - Verksamheten ska vara anpassad för 4–20-åringar och aktiviteten rikta sig till barn och unga under 20 år
+  - Föreningen ska delta i minst två av kommunens fyra årliga föreningsutbildningar
   belopp: Max 10 000 kronor årligen
-  sen_ansokan: Ej tillämpligt (löpande, utom sommarbrist)
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Löpande under året utom sommarlovet.
   kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Mindre bidrag med snabb handläggning (2 veckor)
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: Handläggningstiden är två veckor.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-arrangemangsbidrag-ungdom
   namn: Arrangemangsbidrag ungdom
-  kategori:
-  - idrott
-  - kultur
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [ungdom]
   malgrupp: Ungdomsföreningar
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
-  - Ansökan innan arrangementet
+  - Ansökan innan arrangemanget
   - Beräknad kostnad ska presenteras
-  belopp: 60% av arrangemangskostad, max 10 000 kronor årligen
-  sen_ansokan: Ansökan före arrangementet, utbetalning i förväg
+  - Föreningen ska ha en styrelse där majoriteten är högst 25 år och verksamhet för 4–20-åringar
+  - Lägre faktisk kostnad kan medföra återbetalning och högre kostnad ger inte höjt stöd i efterhand
+  belopp: 60 procent av arrangemangskostnaden, högst 10 000 kronor årligen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas före arrangemanget; utbetalning sker i förväg.
   kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: Eventuell överutbetalning måste återbetalas; underfinansiering finns ej
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-utbildningsbidrag-ungdom
-  namn: Utbildningsbidrag ungdom
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Ungdomsföreningar för utbildning
+  namn: Bidrag för att anordna utbildning
+  kategori: [idrott, social, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som köper och anordnar en lokal utbildning
   deadlines:
     typ: lopande
     datum: []
   krav:
   - Utbildningen arrangeras lokalt i Bjuv
   - Andra föreningar måste bjudas in att delta
+  - Utbildningen ska godkännas i förväg, vara relevant för föreningens utveckling och främja jämlikhet, hållbarhet och delaktighet
+  - Inbjudan ska gå genom kommunens kontaktperson minst två veckor före utbildningen
+  - Stödet avser kursavgift samt utbildarens arvode och resa
   belopp: 50% av kostnaden, max 10 000 kronor årligen
-  sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Täcker kursavgift, instruktörkompensation, resor
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-individuell-utbildning
-  namn: Individuell utbildningsbidrag
-  kategori:
-  - idrott
-  - kultur
+  namn: Individuellt utbildningsbidrag
+  kategori: [idrott, social, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   malgrupp: Ungdomsföreningar för medlemsutbildning
   deadlines:
     typ: lopande
@@ -84,42 +99,48 @@ bidrag:
   krav:
   - Ungdomsförening med registrerade medlemmar
   - Utbildningen får inte vara konferens eller årsmöte
+  - Utbildningen ska vara relevant för föreningens utveckling och främja jämlikhet, hållbarhet och delaktighet
+  - Kursunderlag, kvitto eller faktura och intyg om genomförd kurs ska lämnas
   belopp: 50% av kurskostad, max 2 000 kronor per person, max 10 000 kronor årligen
-  sen_ansokan: Ej tillämpligt (löpande)
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
   kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-lok-aktivitetsstod
   namn: LOK - Aktivitetsstöd
-  kategori:
-  - idrott
-  - kultur
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ungdomsföreningar för aktiviteter
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [02-25, 08-25]
   krav:
   - Aktiviteten ska vara minst 1 timme
   - Minst 3 deltagare (5+ för ungdomsföreningar)
   - En ledare (minst 15 år)
+  - Deltagarna ska vara 4–20 år; ungdomsförening behöver minst fem deltagare och skolidrott får ha ledare från 13 år
+  - Närvaro ska registreras i Smartbook eller RF-systemet och rapporteras per halvår
   belopp: 8 kronor per deltagare (4 kronor för skolidrottsföreningar)
-  sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Rapportering senast 25 februari för hösten och 25 augusti för våren.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-utvecklingsbidrag
   namn: Utvecklingsbidrag
-  kategori:
-  - idrott
-  - kultur
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
   malgrupp: Ungdomsföreningar för projekt, utrustning eller investeringar
   deadlines:
     typ: fasta
@@ -127,21 +148,23 @@ bidrag:
     - 03-31
   krav:
   - Projektet ska genomföras inom ett år från beslutsdatum
-  belopp: null
+  - Projektet, inköpet eller investeringen ska utveckla verksamheten och främja jämlikhet, hållbarhet och delaktighet
+  - Behov, kostnadskalkyl och offerter ska lämnas före beslut och slutredovisning efter genomförandet
+  belopp: Individuellt efter prövning; generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Sista ansökningsdag 31 mars årligen
   kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-lokalbidrag
   namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
   malgrupp: Föreningar som hyr eller äger lokal
   deadlines:
     typ: fasta
@@ -149,67 +172,332 @@ bidrag:
     - 04-30
   krav:
   - Föreningen måste hyra eller äga sitt lokaler
+  - Lokalen ska vara nödvändig och användas kontinuerligt; kommunal lokal med subventionerad taxa är inte stödberättigad
+  - Hyrd lokal redovisas med årshyra; ägd lokal med styrkta kostnader för ränta, värme, el, avfall, försäkring, internet, vatten och avlopp
+  - Telefon och förbrukningsmaterial är inte stödberättigade kostnader
   belopp: 50% av driftskostnader, max 25 000 kronor årligen
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade kriterier ej helt dokumenterade'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ordinarie ansökan senast 30 april för föregående år; ny förening kan söka förskott löpande under första året.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-utbildningsbidrag-allmant
-  namn: Utbildningsbidrag allmänt
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som köper utbildning lokalt
+  namn: Marknadsföringsbidrag för löpande verksamhet
+  kategori: [idrott, social, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som producerar material för att marknadsföra sin ordinarie verksamhet
   deadlines:
     typ: fasta
     datum:
-    - 04-30
+    - 05-30
   krav:
-  - Utbildningen måste organiseras lokalt i Bjuv
-  belopp: 50% av kostnaden, max 10 000 kronor årligen
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Fullständiga regler ej dokumenterade'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Materialet ska marknadsföra föreningens löpande verksamhet, inte ett enskilt arrangemang, en tävling eller cup
+  - Stödet kan avse affisch, tryckt eller digital annons, broschyr eller liknande men inte porto
+  - Offert eller faktura och en kopia av det producerade materialet ska lämnas
+  belopp: 50 procent av kostnaden, högst 5 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 maj.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 - id: bjuv-uppdragsbidrag
   namn: Uppdragsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
   malgrupp: Föreningar som genomför kommunala uppdrag
   deadlines:
     typ: lopande
     datum: []
   krav:
   - Föreningen måste erbjuda att genomföra ett kommunalt uppdrag
+  - Föreningen och kommunen ska träffa en skriftlig överenskommelse om uppdrag, förväntningar och ersättning
+  - Ersättningen ska gå till föreningen och får aldrig betalas som arvode till en specifik person
   belopp: Normalt ej överstiga 10 000 kronor årligen
-  sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade uppdragstyper ej dokumenterade'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Initiativ kan tas löpande av kommunen eller föreningen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-investeringsbidrag
+  namn: Investeringsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som äger en lokal eller anläggning och behöver renovera eller investera
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Föreningen ska äga lokalen eller anläggningen som åtgärden gäller
+  - Ansökan ska avse underhåll, renovering eller investering och innehålla behovsbeskrivning, kostnadskalkyl och offerter
+  - Föreningen ska finansiera minst 40 procent av kostnaden med egna medel eller annan finansiering
+  - Åtgärden ska vara genomförd och redovisad senast 31 december; lägre faktisk kostnad kan medföra återbetalning
+  belopp: Individuellt efter prioritering; föreningen ska finansiera minst 40 procent av kostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars och slutredovisning senast 31 december.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-marknadsforingsbidrag-kulturarrangemang
+  namn: Marknadsföringsbidrag för kulturarrangemang
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar som marknadsför ett särskilt kulturarrangemang
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Marknadsföringen ska avse ett specifikt kulturarrangemang och inte föreningens löpande verksamhet
+  - Stödet kan avse affisch, tryckt eller digital annons, broschyr eller liknande men inte porto
+  - Offert eller faktura och en kopia av det producerade materialet ska lämnas
+  belopp: 50 procent av kostnaden, högst 5 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-rekryteringsbidrag
+  namn: Rekryteringsbidrag
+  kategori: [idrott, social, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar vars ledare eller styrelsemedlemmar rekryterar nya medlemmar dagtid
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - En ledare eller styrelsemedlem ska ha tagit ledigt från sitt ordinarie arbete för aktiviteten
+  - Aktiviteten ska genomföras dagtid och informera om föreningen eller rekrytera nya medlemmar
+  - Målgruppen ska vara barn och unga 4–20 år eller en funktionsrättsförenings målgrupp
+  - Ansökan avser föregående års genomförda rekryteringsinsatser
+  belopp: 300 kr per dag och person, högst 4 500 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 april för föregående års insatser.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-medlemsbidrag-pensionarsforening
+  namn: Medlemsbidrag till pensionärsföreningar
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med aktiva avgiftsbetalande medlemmar
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Sökanden ska vara en pensionärsförening registrerad i Bjuvs kommun
+  - Medlemmen ska ha varit aktiv och betalat medlemsavgift under föregående år
+  - Föreningen ska lämna medlemsunderlag som styrker antalet stödberättigade medlemmar
+  belopp: 15 kr per aktiv avgiftsbetalande medlem under föregående år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-konsertbidrag
+  namn: Konsertbidrag
+  kategori: [kultur]
+  foreningstyp: [kultur]
+  malgrupp: Musikkårer som genomför offentliga konserter
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningen ska vara en musikkår och genomföra fem framträdanden under året
+  - Varje framträdande ska redovisas med medverkande, publik och marknadsföring
+  - Föreningen ska arbeta för att nå en bred publik
+  belopp: 20 000 kr per år vid fem genomförda framträdanden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-startbidrag
+  namn: Startbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nybildade föreningar under sitt första verksamhetsår
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara nybildad och registrerad i Bjuvs kommun
+  - Ansökan ska lämnas under föreningens första verksamhetsår
+  - Föreningen ska uppfylla kommunens grundvillkor och ha lämnat stadgar, styrelseuppgifter och övriga grundhandlingar
+  belopp: 5 000 kr som engångsbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under det första verksamhetsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-riksteaterforening-verksamhetsbidrag
+  namn: Verksamhetsbidrag till Riksteaterförening
+  kategori: [kultur]
+  foreningstyp: [kultur]
+  malgrupp: Lokal förening ansluten till Riksteatern
+  deadlines:
+    typ: fasta
+    datum: [11-30]
+  krav:
+  - Föreningen ska vara ansluten till Riksteatern
+  - Dialog med kommunen ska inledas tidigt och nästa års planerade föreställningar ska presenteras
+  - Stödet ska regleras i en skriftlig överenskommelse som följs upp efter verksamhetsåret
+  belopp: Högst 50 000 kr per år och motsvarande Riksteaterns arrangörsstöd per föreställning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 30 november året före verksamhetsåret.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-sarskilt-ekonomiskt-stod-anlaggning
+  namn: Särskilt ekonomiskt stöd för anläggning
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med en exceptionellt kostsam eller unik anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Anläggningen ska vara exceptionellt kostsam eller unik och gynna kommunens prioriterade målgrupper
+  - Anläggningen ska vara tillgänglig för allmänheten på rimliga tider och till rimlig kostnad
+  - Föreningen ska redovisa egna intäkter och fullständig årsredovisning
+  - Stödet får inte kombineras med lokalbidrag eller investeringsbidrag
+  belopp: Högst 300 000 kr per år genom avtal på högst två år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen ansökningsfrist.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-subventionerad-hyra
+  namn: Subventionerad hyra i kommunala lokaler
+  kategori: [idrott, social, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med stödberättigad barn-, ungdoms- eller funktionsrättsverksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Aktiviteten ska rikta sig till en stödberättigad barn-, ungdoms- eller funktionsrättsmålgrupp
+  - Bokning och årlig fördelning av tider ska göras i Smartbook
+  - Subventionen gäller stödberättigad aktivitet och inte generella evenemang eller cuper
+  belopp: Kostnadsfri kommunal sport- eller möteslokal för stödberättigad aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+- id: bjuv-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med verksamhet i Bjuvs kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara ett studieförbund med verksamhet i Bjuvs kommun
+  - Ansökan ska lämnas genom kommunens anvisade tjänst
+  - Studieförbundet ska lämna kommunens generella föreningshandlingar och verksamhetsunderlag
+  belopp: Kommunen publicerar ingen aktuell beloppsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen aktuell ansökningsfrist.
+  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/studieforbund/bidrag.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: bjuv-forening-registrering
-  vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste registreras i Bjuvs föreningsregister för att kunna söka bidrag. Ungdomsföreningar med styrelse
-    där majoriteten är 25 år eller yngre måste vara representerade på minst två av fyra årliga utbildningar för att få tillgång
-    till alla bidrag.
+  vad: Registrering och grundvillkor
+  beskrivning: Föreningen ska vara registrerad i Bjuv, ha organisationsnummer, huvudsaklig verksamhet i kommunen, demokratisk
+    grund och en fast medlemsavgift.
   system: Smartbook
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/stod-till-foreningar/ungdomsforening.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: bjuv-arsliga-foreningshandlingar
+  vad: Årliga föreningshandlingar och föreningskonto
+  beskrivning: Föreningen ska ha plus- eller bankgiro i föreningens namn och årligen lämna aktuella styrelsekontakter,
+    verksamhetsberättelse, resultat- och balansräkning, senaste årsmötesprotokoll samt ändrade stadgar. Kommunen publicerar
+    ingen gemensam sista dag för handlingarna.
+  system: Smartbook
+  ledtid: null
+  ledtid_text: En gång per år; handlingar kan kompletteras efter bidragsfristen om årsmötet hålls senare och detta anges.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: bjuv-insyn-och-utbildning
+  vad: Insyn och kommunal föreningsutbildning
+  beskrivning: Ansökan och uppgifter hanteras i Smartbook och kommunen kan begära fullständiga ekonomi- och verksamhetsunderlag.
+    Barn- och ungdomsföreningar ska under 2026 delta i minst två av fyra kommunala utbildningar för att vara stödberättigade 2027.
+  system: Smartbook
+  ledtid: null
+  ledtid_text: Minst två av fyra utbildningar under 2026 för stöd 2027.
+  giltighet: null
+  ordning: 3
+  kalla_url: https://www.bjuv.se/kultur-och-fritid/foreningar/utbildningar-2026.html
+  giltighet_status: ingen_regel

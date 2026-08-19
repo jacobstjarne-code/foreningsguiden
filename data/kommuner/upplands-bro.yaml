@@ -2,135 +2,227 @@ kommun: Upplands-Bro
 kommun_slug: upplands-bro
 lan: Stockholms län
 befolkning: 33569
-forvaltning: Kultur- och fritid; social- samt äldre- och omsorgsnämnden (socialt föreningsbidrag)
+forvaltning: Kultur- och fritidskontoret, socialnämnden samt äldre- och omsorgsnämnden
 ansokningssystem:
-  namn: Kommunens e-tjänst
+  namn: Rbok, kommunens e-tjänster och e-postansökan
   url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
 kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-verifierad: '2026-08-02'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: upplands-bro-lokal-drift
-  namn: Lokal- och driftsbidrag
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Ideella föreningar som huvudsakligen har verksamhet i egna eller icke-kommunala lokaler, eller hyr lokal i annan
-    kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav:
-  - Bidraget baseras på föreningens lokalkostnader från föregående år
-  - Kan täcka el, uppvärmning, renhållning, lokalförsäkringar; för egen lokal även löpande underhåll/reparation (ej standardhöjande)
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: upplands-bro-kulturbidrag
-  namn: Kulturföreningsbidrag / arrangemangsstöd
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar (ej religiös eller politisk inriktning)
-  deadlines:
-    typ: fasta
-    datum:
-    - 07-31
-  krav:
-  - Bedömning utifrån kvalitet, publik- och medlemsarbete, brett utbud samt säkerhet/tillstånd/försäkringar
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
 - id: upplands-bro-startbidrag
   namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nybildade ideella föreningar (senast tre månader efter bildandet)
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nybildade ideella föreningar med säte och huvuddelen av verksamheten i Upplands-Bro kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
   krav:
-  - Ansökan senast tre månader efter att föreningen bildats
-  - Medlemsförteckning eller revisionsstyrkt intyg om antal medlemmar bifogas
-  belopp: null
-  sen_ansokan: Ej tillämpligt (löpande, men tidsfönster på tre månader från bildande)
-  kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kan sökas när som helst under året via e-tjänst.
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska ansöka inom tre månader efter bildandet
+  - Föreningen ska ha stadgar, demokratiskt vald styrelse och revisor samt erbjuda medlemskap till alla
+  - Protokoll från konstituerande möte, stadgar, verksamhetsplan och medlemsförteckning eller revisionsstyrkt medlemsantal ska bifogas
+  - Intyg om medlemskap i riksorganisation, organisationsnummer och plus- eller bankgironummer ska bifogas
+  - Föreningen ska följa kommunens demokrati-, likabehandlings- och drogförebyggande värdegrund
+  belopp: 5 procent av prisbasbeloppet för bidragsåret
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas hela året men senast tre månader efter att föreningen bildades.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget redovisas senast sex månader efter utbetalningen.
+  senast_verifierad: '2026-08-18'
+- id: upplands-bro-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd (LOK-stöd)
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  malgrupp: Ideella föreningar med återkommande aktiviteter för medlemmar 3–25 år eller personer med funktionsnedsättning oavsett ålder.
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
+  krav:
+  - En stödberättigad gruppaktivitet ska ha minst tre deltagare i åldern 3–25 år och pågå minst 60 minuter
+  - Deltagarna ska vara medlemmar och ledaren ska vara minst 13 år samt närvara under hela aktiviteten
+  - Aktiviteten ska vara planerad, ha gemensam samling och avslutning och närvaro ska registreras
+  - En deltagare får räknas i högst en gruppaktivitet per förening och dag, med undantag för skilda sektioner
+  - Föreningen ska löpande föra fullständig redovisning som kommunen kan kontrollera
+  belopp: Ersättningsnivån per deltagartillfälle fastställs årligen av kultur- och fritidsnämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 25 februari respektive 25 augusti. Vid försening tillämpas Riksidrottsförbundets regler om föreningen visar rimliga och relevanta skäl.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: För personer med funktionsnedsättning finns ingen övre åldersgräns. Stödet betalas efter avslutad redovisningsperiod och kan inte betalas i förskott.
+  alder_min: 3
+  alder_max: 25
+  senast_verifierad: '2026-08-18'
+- id: upplands-bro-projektstod-publika-arrangemang
+  namn: Projektstöd för publika arrangemang
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och andra juridiska personer med säte i Upplands-Bro som genomför publika, tidsbegränsade arrangemang i kommunen.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Arrangemanget ska vara publikt, präglas av kvalitet och allmänintresse och ha anknytning till kommunen eller dess invånare
+  - Projektplan och ekonomisk plan ska bifogas ansökan
+  - Projekt med religiös eller politisk inriktning, välgörenhetsgalor och projekt vars syfte är vinst omfattas inte
+  - Investeringar i lokaler eller utrustning som berikar mottagaren efter arrangemanget omfattas inte
+  - Säkerhet, nödvändiga tillstånd och försäkringar ska vara ordnade
+  belopp: Stödet bestäms efter prövning; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 30 dagar före projektstart, 60 dagar före valborgs-, nationaldags- och midsommararrangemang samt senast 15 maj för arrangemang i juli och augusti.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ideella föreningar kan beviljas förlustbidrag även när arrangemanget syftar till att ge överskott. Redovisning lämnas senast tre månader efter projektets slut.
+  senast_verifierad: '2026-08-18'
+- id: upplands-bro-verksamhetsbidrag-kultur
+  namn: Verksamhetsbidrag för kulturföreningar
+  kategori: [kultur]
+  malgrupp: Ideella kultur- och kulturarvsföreningar med säte i Upplands-Bro och etablerad verksamhet av allmänintresse.
+  foreningstyp: [kultur, hembygd, ungdom, annat]
+  deadlines: { typ: fasta, datum: [07-31] }
+  krav:
+  - Verksamheten ska ha god kvalitet, vara av allmänintresse och bidra till ett brett kulturutbud
+  - Verksamheten ska huvudsakligen gynna boende i Upplands-Bro kommun
+  - Bidraget får inte användas till investeringar i lokaler
+  - Verksamhet med religiös eller politisk inriktning omfattas inte
+  - Bedömningen omfattar kvalitet, publik- och medlemsarbete, bredd, säkerhet, tillstånd och försäkringar
+  belopp: Bidraget bestäms efter prövning; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 juli.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ettåriga stöd följs upp vid nästa ansökan. Avtal kan tecknas för högst tre år och följs då upp årligen.
+  senast_verifierad: '2026-08-18'
 - id: upplands-bro-uppdragsbidrag
   namn: Uppdragsbidrag
-  kategori:
-  - kultur
-  - idrott
-  - social
-  - ovrig
-  malgrupp: Ideella föreningar som utför ett särskilt uppdrag till nytta för kommunen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kan vara årligt eller ett engångsbidrag. Avtal kan tecknas för högst tre år.
-  senast_verifierad: '2026-08-03'
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar med säte i kommunen som utför särskilda uppdrag till nytta för Upplands-Bro.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Föreningen ska utöver medlemsverksamheten rikta verksamhet eller anläggning till allmänheten, sköta kommunal anläggning eller utföra ett särskilt kommunnyttigt uppdrag
+  - Föreningen ska ha sitt säte i Upplands-Bro kommun
+  - Uppdraget ska regleras genom överenskommelse eller avtal och avtal får tecknas för högst tre år
+  - Bidraget får inte överstiga kommunens kostnad för att själv utföra uppdraget
+  - Prioritering görs efter uppdragets angelägenhet och tillgängliga resurser
+  belopp: Högst den kostnad kommunen skulle haft för att själv utföra uppdraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kontakt om uppdragsbidrag kan tas löpande med kultur- och fritidskontoret.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Engångsbidrag redovisas senast tre månader efter utfört uppdrag; fleråriga stöd följs upp årligen.
+  senast_verifierad: '2026-08-18'
+- id: upplands-bro-lokal-drift
+  namn: Lokal- och driftsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar med verksamhet i egen eller icke-kommunal lokal, eller i lokal utanför kommunen när lämplig lokal saknas i Upplands-Bro.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Föreningen ska ha sitt säte i Upplands-Bro och merparten av verksamheten ska bedrivas i lokalen eller anläggningen
+  - Bidrag kan bara ges när kommunen inte kan erbjuda en lokal för verksamheten
+  - Kostnader och intäkter ska styrkas och ansökan grundas på föregående års kostnader
+  - Bidragsgrundande kostnader kan vara media, fastighetsförsäkring, hyra, fastighetsränta och icke standardhöjande underhåll
+  - Föreningar som inte tidigare fått bidraget ska kontakta kommunen för bedömning före ansökan
+  belopp: För ungdomsverksamhet högst 85 procent av nettolokalkostnaden och 4,5 prisbasbelopp; för kulturhistoriskt värdefull byggnad högst 25 procent och 0,5 prisbasbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars och fungerar även som redovisning av föregående års bidrag.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kultur- och fritidsnämnden kan i särskilda fall besluta om högre procentandel eller belopp.
+  senast_verifierad: '2026-08-18'
+- id: upplands-bro-projektbidrag-sarskilt-stod
+  namn: Projektbidrag – särskilt stöd
+  kategori: [idrott, kultur, funktionsratt, social, ovrig]
+  malgrupp: Bidragsberättigade ideella föreningar med säte och huvudsaklig verksamhet i Upplands-Bro kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [11-01] }
+  krav:
+  - Projektet ska bidra till hållbar utveckling av föreningens verksamhet eller följa kultur- och fritidsnämndens prioriteringar
+  - Särskilt stöd kan avse utbildning, läger, lokalutrustning eller behov som inte täcks av andra bidrag
+  - Föreningen ska vara bidragsberättigad, ha sitt säte i kommunen och huvudsakligen bedriva verksamheten där
+  - Projektets angelägenhet och tillgängliga resurser ligger till grund för prioriteringen
+  - Verksamhet och ekonomi ska redovisas senast 31 oktober året efter beslut och oanvända medel återbetalas
+  belopp: Bidraget bestäms efter prövning; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 1 november.
+  kalla_url: https://www.upplands-bro.se/download/18.ed24e5b1821f28587337/1658386384968/Regler%20f%C3%B6r%20ekonomiskt%20st%C3%B6d%20och%20bidrag%20f%C3%B6r%20kultur-%20och%20fritidsverksamhet%20-%20antagna%20av%20Kommunfullm%C3%A4ktige%20den%2030%20mars%202022.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kultur- och fritidsnämnden kan besluta årliga inriktningar och prioriteringar för utvecklingsprojekt.
+  senast_verifierad: '2026-08-18'
 - id: upplands-bro-socialnamnden
   namn: Föreningsbidrag från socialnämnden
-  kategori:
-  - social
-  malgrupp: Ideella föreningar med frivilliga sociala insatser inom individ- och familjeomsorg
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  kategori: [social, funktionsratt]
+  malgrupp: Ideella föreningar som utför frivilliga sociala insatser inom individ- och familjeomsorg eller stöd till personer med funktionsnedsättning.
+  foreningstyp: [social, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska bedriva ideell verksamhet med frivilliga sociala insatser inom socialnämndens område
+  - Verksamheten ska komplettera socialtjänstens arbete och bidraget ska användas till föreningens löpande verksamhet
+  - Verksamhetsplan och budget ska bifogas ansökan
+  - Verksamhetsberättelse, bokslut och revisionsberättelse ska bifogas
+  - Föreningar som fick bidrag föregående år ska återrapportera användningen och genomförda aktiviteter
+  belopp: Bidraget bestäms av socialnämnden efter prövning och ekonomiska förutsättningar; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden för 2026 är stängd; datum för 2027 har inte publicerats.
   kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökningsperioden för 2026 var stängd vid verifiering; 2027 års datum var ännu inte publicerat. Ej angivet
-    i källan
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan skickas till socialnämnden. Beslut om 2026 års bidrag fattades vid nämndens sammanträde i maj.
+  senast_verifierad: '2026-08-18'
 - id: upplands-bro-aldre-omsorg
   namn: Föreningsbidrag från äldre- och omsorgsnämnden
-  kategori:
-  - pensionar
-  - funktionsratt
-  - social
-  malgrupp: Ideella föreningar med verksamhet som kompletterar äldreomsorg eller stöd till personer med funktionsnedsättning
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: 110 kronor per stödberättigad medlem
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.upplands-bro.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod-till-foreningar.html
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökningsperioden för 2026 var stängd vid verifiering; 2027 års datum var ännu inte publicerat. Ej angivet
-    i källan
-  senast_verifierad: '2026-08-03'
+  kategori: [pensionar, social]
+  malgrupp: Ideella och allmännyttiga föreningar med huvudsaklig verksamhet för äldre i Upplands-Bro kommun.
+  foreningstyp: [social, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska ha minst tio medlemmar folkbokförda i kommunen och ta ut minst 50 kr i årlig medlemsavgift
+  - Föreningen ska ha huvudsaklig verksamhet i kommunen, vara registrerad i föreningsregistret och vara ansluten till riks- eller distriktsorganisation om sådan finns
+  - Föreningen ska vara ideell och allmännyttig, ha stadgar, demokratiskt vald styrelse och revisor samt bedriva kontinuerlig verksamhet
+  - Ett aktuellt medlemsregister med namn, födelseår, adress och betald medlemsavgift ska finnas
+  - Organisationsnummer, verksamhetsberättelse, verksamhetsplan, fullständig resultat- och balansräkning samt revisionsberättelse ska lämnas
+  - Verksamheten ska följa kommunens demokrati- och likabehandlingsvärdegrund och får inte vara politisk eller religiös
+  belopp: 110 kr per stödberättigad medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden för 2026 är stängd; information och datum för kommande ansökan publiceras under årets första kvartal.
+  kalla_url: https://www.upplands-bro.se/download/18.6f6bba7719c987998ce4dd1/1772551677172/Regler%20f%C3%B6r%20%C3%A4ldre-%20och%20omsorgsn%C3%A4mndens%20f%C3%B6reningsbidrag
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Återredovisning med aktiviteter, insatser och kostnadsunderlag lämnas under mars följande år eller med en ny ansökan.
+  min_medlemmar: 10
+  senast_verifierad: '2026-08-18'

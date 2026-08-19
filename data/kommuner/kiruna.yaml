@@ -7,10 +7,13 @@ ansokningssystem:
   namn: Actor Smartbook
   url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
 kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
-verifierad: '2026-08-02'
+verifierad: '2026-08-18'
+giltighet_regel: null
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: kiruna-aktivitetsstod
   namn: Aktivitetsstöd
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
   kategori:
   - idrott
   - ovrig
@@ -20,26 +23,32 @@ bidrag:
     datum:
     - 03-31
     - 09-30
-  krav: []
+  krav:
+  - Föreningen ska vara ideell, ha hemvist och huvudsaklig verksamhet i Kiruna kommun samt uppfylla de generella bidragsreglerna
+  - Föreningen ska ha minst 10 betalande medlemmar i åldern 5–20 år
+  - Sammankomsten ska vara planerad, ledarledd, pågå minst 60 minuter och ha 3–30 bidragsberättigade deltagare 5–20 år
+  - Deltagaren ska normalt vara medlem och kan räknas högst en gång per dag och fem dagar per vecka; prova-på- och rekryteringsaktiviteter undantas från medlemskravet
   belopp: 12 kr per deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Ansökningsperioderna är januari–mars och juni–september.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
   min_medlemmar: null
   alder_min: 5
   alder_max: 20
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
   senast_verifierad: '2026-08-03'
-  krav_fullstandiga: null
+  krav_fullstandiga: true
 - id: kiruna-socialnamndens-foreningsbidrag
   namn: Socialnämndens föreningsbidrag
+  foreningstyp: [social, annat]
   kategori:
   - social
   - funktionsratt
@@ -48,52 +57,63 @@ bidrag:
     typ: fasta
     datum:
     - 03-31
-  krav: []
-  belopp: null
+  krav:
+  - Sökande ska vara en ideell förening för personer med funktionsnedsättning eller en ideell organisation för socialt stöd och hjälp med säte och verksamhet i Kiruna kommun
+  - Verksamheten ska komplettera eller stödja socialnämndens verksamhetsområden och bedriva utåtriktade aktiviteter
+  - Ansökan ska innehålla verksamhetsplan och budget för bidragsåret
+  - Verksamhetsberättelse, årsbokslut och revisionsberättelse för föregående år ska lämnas innan utbetalning
+  belopp: Individuellt beslutat årsanslag utifrån verksamhetsplan och budget; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
   anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
   senast_verifierad: '2026-08-03'
-  krav_fullstandiga: null
+  krav_fullstandiga: true
 - id: kiruna-arsanslag-kulturforeningar
   namn: Årsanslag för kulturföreningar
+  foreningstyp: [kultur, hembygd, annat]
   kategori:
   - kultur
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  krav:
+  - Sökande ska vara en förening med huvudsakligen kulturell verksamhet och uppfylla kommunens generella bidragsregler
+  - Den planerade verksamheten ska bidra till att berika Kiruna kommuns kulturutbud under det aktuella verksamhetsåret
+  - Ansökan ska innehålla verksamhetsplan och budget eller ekonomisk plan för det kommande verksamhetsåret
+  belopp: Individuellt beslutat årsanslag utifrån verksamhetsplan och budget; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen fast ansökningsdag på den aktuella bidragssidan
   kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Fullständiga regler och ansökan finns i Actor Smartbook. Kontakta kommunen om ansökningsförfarandet
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
   senast_verifierad: '2026-08-03'
-  krav_fullstandiga: null
+  krav_fullstandiga: true
 - id: kiruna-trygghetsvandringar
   namn: Bidrag för trygghetsvandringar och bussvolontärer
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - social
   - ovrig
@@ -101,26 +121,32 @@ bidrag:
   deadlines:
     typ: lopande
     datum: []
-  krav: []
+  krav:
+  - Sökande ska vara en ideell förening verksam i Kiruna kommun
+  - Föreningen ansvarar för urval och rekrytering av vuxna deltagare till trygghetsvandringar eller bussvolontärinsatser
+  - Deltagarna ska uppträda som trygga vuxna, agera respektfullt och om möjligt bära reflexväst eller liknande synlig klädsel
+  - Genomförd insats ska dokumenteras och utvärderas utan att enskilda personers namn anges
   belopp: Högst 5 000 kr per vandring
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://kiruna.se/arkiv/nyhetsarkiv/nyheter/2026-05-08-ansok-om-bidrag-for-trygghetsvandringar.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Kan sökas under perioden 1 januari–31 december.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 1 januari–31 december
+  kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
   senast_verifierad: '2026-08-03'
-  krav_fullstandiga: null
+  krav_fullstandiga: true
 - id: kiruna-ferieloner
   namn: Riktat bidrag till ferielöner
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - ovrig
   malgrupp: Ideella föreningar och organisationer i kommunen
@@ -128,52 +154,203 @@ bidrag:
     typ: fasta
     datum:
     - 03-31
-  krav: []
-  belopp: null
+  krav:
+  - Föreningen ska själv anställa, rekrytera och arbetsleda ferieungdomar samt bära arbetsgivar- och arbetsmiljöansvar
+  - Arbetsuppgifterna ska vara meningsfulla, samhällsnyttiga och förenliga med arbetsmiljölagstiftningen
+  - Föreningen ska betala lön och arbetsgivaravgifter och därefter fakturera kommunen med efterfrågad redovisning
+  - Ansökan ska lämnas i Actor Smartbook med föreningsinloggning under ansökningsperioden
+  belopp: Ersättning för föreningens kostnad för ferieungdomens lön och uppkomna arbetsgivaravgifter
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://kiruna.se/naringsliv--arbete/arbeta-hos-oss/feriearbete-for-skolungdom-2026.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Ansökningsperiod 1 januari–31 mars.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
   senast_verifierad: '2026-08-03'
-  krav_fullstandiga: null
+  krav_fullstandiga: true
 - id: kiruna-foreningslonebidrag
   namn: Föreningslönebidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - social
   - ovrig
   malgrupp: Ideella föreningar med lönebidragsanställd och beslut från Arbetsförmedlingen
   deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökande ska vara en ideell förening som uppfyller Kiruna kommuns generella bidragsregler
+  - Den anställde ska ha ett beslut om lönebidrag från Arbetsförmedlingen och bidraget kan avse högst en anställd per förening
+  - Föreningen ska kunna erbjuda konkreta arbetsuppgifter
+  - Tjänstgöringsgrad och redovisad frånvaro ska redovisas eftersom de påverkar bidragets storlek
+  belopp: Upp till 45 000 kr per år beroende på statlig bidragsnivå och tjänstgöringsgrad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen fast ansökningsdag för föreningslönebidraget
+  kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-03'
+- id: kiruna-investeringsbidrag
+  namn: Investeringsbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kategori: [idrott, ovrig]
+  malgrupp: Allmännyttiga ungdomsföreningar som äger eller långsiktigt disponerar en egen anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara allmännyttig, utan vinstsyfte och uppfylla kommunens generella bidragsregler
+  - Investeringen ska vara verksamhetsinriktad och av väsentlig betydelse för att föreningsverksamheten ska kunna bedrivas
+  - Åtgärden ska avse nybyggnation, ombyggnation eller liknande och ungdomsverksamhet prioriteras
+  - Föreningen ska äga anläggningen eller ha ett minst tioårigt hyres- eller arrendeavtal och anläggningen ska huvudsakligen användas i föreningens verksamhet
+  - Föregående verksamhetsårs årsredovisning ska bifogas
+  belopp: Individuellt prövat investeringsbidrag; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen fast ansökningsdag på den aktuella bidragssidan
+  kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: kiruna-grundbidrag-studieforbund
+  namn: Grundbidrag studieförbund
+  foreningstyp: [kultur, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Studieorganisationer med stadigvarande verksamhet i Kiruna kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Studieorganisationen ska ha stadigvarande verksamhet i Kiruna kommun
+  - Verksamheten ska främja och fördjupa ett demokratiskt samhällsliv
+  - Ansökan och fördelningen ska baseras på verksamhetsstatistik som redovisats till Folkbildningsrådet
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas mellan behöriga studieförbund som grundbidrag, volymbidrag och målgruppsbidrag; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen fast ansökningsdag på den aktuella bidragssidan
+  kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: kiruna-lokalbidrag-samlingslokal-by
+  namn: Lokalbidrag för samlingslokal i by
+  foreningstyp: [kultur, hembygd, friluft, social, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Föreningar som tillhandahåller en allmänt tillgänglig samlingslokal i en by i Kiruna kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Lokalen ska vara tillgänglig för allmänheten och på kort varsel kunna hyras för möten, studier, fritid eller arrangemang under större delen av året
+  - Lokalen ska ägas av en bidragsberättigad förening eller disponeras genom nyttjanderätts- eller hyresavtal
+  - Bidrag lämnas inte om byn har tillgång till annan lämplig samlingslokal och lokalen ska vara inventerad av kommunen
+  - Föreningen ska redovisa verifierade driftskostnader och uppfylla kommunens generella bidragsregler
+  belopp: Högst 80 procent av driftskostnaderna och maximalt 35 000 kronor per by och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 30 april
+  kalla_url: https://kiruna.se/download/18.3d20bbf2177377bddf838257/1611915253405/Bidragsregler%20fritids-%20och%20kulturverksamhet%20KUN%20201119.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: kiruna-lokalbidrag-verksamhetslokal
+  namn: Lokalbidrag för verksamhetslokal
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  kategori: [idrott, pensionar, funktionsratt, ovrig]
+  malgrupp: Ungdomsföreningar utan kommunal verksamhetslokal, pensionärsorganisationer och föreningar för personer med funktionsvariation
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningen ska uppfylla de generella bidragsreglerna och tillhöra en av stödets angivna målgrupper
+  - Ungdomsföreningar ska sakna tillgång till kommunal verksamhetslokal för sin kärnverksamhet
+  - Senaste verksamhetsberättelse, ekonomiska årsredovisning och kassabok ska bifogas
+  - Föreningen ska redovisa verifierade driftkostnader samt föregående års aktiviteter och för ungdomsföreningar aktiva medlemmar 0–20 år
+  belopp: Högst 60 procent av driftskostnaderna, maximalt 30 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 30 april
+  kalla_url: https://kiruna.se/download/18.3d20bbf2177377bddf838257/1611915253405/Bidragsregler%20fritids-%20och%20kulturverksamhet%20KUN%20201119.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: kiruna-stimulansbidrag
+  namn: Stimulansbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kategori: [idrott, ovrig]
+  malgrupp: Ideella fritids- och idrottsföreningar med verksamhet i Kiruna kommun
+  deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: Upp till 45 000 kr per år beroende på statlig bidragsnivå och tjänstgöringsgrad
-  sen_ansokan: Ej angivet i källan
+  krav:
+  - Föreningen ska vara allmännyttig, utan vinstsyfte och uppfylla kommunens generella bidragsregler
+  - Projektet eller materialinköpet ska främja utvecklings- och försöksverksamhet och vara viktigt för föreningens verksamhet
+  - Materialinköp ska gynna ungdomsverksamhet
+  - Stöd lämnas inte till kommunalt genomförda eller vinstdrivande projekt, resor, jubileumsmiddagar eller åtgärder som får annat kommunalt bidrag
+  - Ansökan ska lämnas före projektet och redovisning lämnas inom en månad efter avslut
+  belopp: Individuellt prövat stöd; vid godkänd kompensation för hallhyra motsvarar stödet 25 procent av den betalda hyran
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks löpande 1 januari–31 december och ska lämnas före planerat projekt eller inköp
   kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+- id: kiruna-sarskilt-anlaggningsbidrag
+  namn: Särskilt anläggningsbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kategori: [idrott, ovrig]
+  malgrupp: Ideella föreningar med verksamhet i Kiruna kommun som inte bedrivs i en kommunal anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara allmännyttig, utan vinstsyfte och uppfylla kommunens generella bidragsregler
+  - Verksamheten ska bedrivas utanför en kommunal anläggning
+  - Ansökan ska avse återkommande driftskostnader som inte ryms inom ordinarie lokalbidrag och vara väsentlig för verksamheten
+  - Åtgärder och aktiviteter för ungdomsverksamhet prioriteras och föregående års årsredovisning ska bifogas
+  belopp: Individuellt prövat anläggningsbidrag; fast belopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen fast ansökningsdag på den aktuella bidragssidan
+  kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 forutsattningar:
 - id: kiruna-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  beskrivning: Föreningen ska vara registrerad i Actor Smartbook, hålla kontakt- och föreningsuppgifter aktuella och lämna en årlig redovisning till kommunen.
+  system: Actor Smartbook
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://kiruna.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: https://kiruna.se/uppleva--gora/foreningsliv/bidrag.html
+  giltighet_status: ingen_regel
 kommunsiffra: null

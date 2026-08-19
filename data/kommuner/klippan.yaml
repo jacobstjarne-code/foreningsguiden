@@ -5,33 +5,44 @@ befolkning: 17660
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
   namn: Rbok
-  url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
+  url: https://klippan.rbok.se/
 kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.klippan.se/download/18.31ddc19d1987378bf544fa/1754314046993/Bidragsbest%C3%A4mmelser%20f%C3%B6r%20f%C3%B6reningar%2C%20studief%C3%B6rbund%20och%20egna%20initiativ.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Arrangemangs- och projektbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - kultur
   - ovrig
   malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: { typ: relativ, datum: [] }
   krav:
   - Ansökan ska vara inskickad och komplett senast två månader före arrangemangets eller projektets genomförande
   - Inget bidrag ges för redan genomförda arrangemang
   - Kommunens stöd ska anges i marknadsföringen kring arrangemanget
   - Eventuellt ekonomiskt överskott ska redovisas och kan reducera bidraget
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Insatsen ska vara tidsbegränsad och ligga utanför ordinarie verksamhet eller redan finansierat verksamhetsbidrag
+  - Projekt bedöms efter utvecklingspotential, kvalitet, nytänkande, samverkan, lika rättigheter, egen finansiering och nytta för barn och unga
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas under året men komplett ansökan ska vara registrerad senast två månader före genomförandet
   kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   id: klippan-arrangemangs-och-projektbidrag
+  senast_verifierad: '2026-08-18'
 - namn: Verksamhetsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -47,16 +58,22 @@ bidrag:
     ekonomisk redovisning'
   - Ansökan ska vara inne senast angivet sista ansökningsdatum, sena eller ofullständiga ansökningar behandlas inte
   - Nybildade föreningar kan endast söka för ett år i taget de tre första åren
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Verksamheten ska bedrivas i Klippans kommun eller för kommunens invånare och föreningen ska delta i dialogmöte
+  - Ett beviljat stöd gäller normalt ett eller två år; större förändringar kan leda till omförhandling
+  belopp: Individuellt behovsprövat utifrån sökt belopp, tidigare verksamhet och ekonomi, framtidsplaner, finansiering och behov
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026/27 lämnas 15 juni–15 september; år två rekvireras senast 15 november med senaste årsmöteshandlingar
   kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   id: klippan-verksamhetsbidrag
+  senast_verifierad: '2026-08-18'
 - namn: Investeringsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   kategori:
   - idrott
   - kultur
@@ -72,67 +89,94 @@ bidrag:
   - Investeringen ska beräknas hålla i minst tre år
   - Två giltiga offerter för åtgärden ska bifogas ansökan
   - Tidsplan för genomförandet ska bifogas ansökan
+  - Byggnads- och anläggningsåtgärder kräver egen lokal eller långsiktigt nyttjanderättsavtal och ska säkra verksamheten eller energieffektivisera
+  - Utrustning får sökas av alla bidragsberättigade föreningar; normalt ska behovs- och investeringsplan finnas
   belopp: Högst 50 procent av investeringens totala värde
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 januari; sena eller ofullständiga ansökningar behandlas inte
   kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   id: klippan-investeringsbidrag
-- namn: Egna initiativ – vuxna
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
+  senast_verifierad: '2026-08-18'
+- id: klippan-startbidrag
+  namn: Startbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nybildade föreningar som godkänns som bidragsberättigade
+  deadlines: { typ: okand, datum: [] }
   krav:
-  - Budget och genomförandeplan ska bifogas ansökan
-  - Arrangemanget ska vara publikt, öppet för alla kommuninvånare och inte vinstdrivande
-  - Kommunens stöd ska anges i marknadsföringen kring arrangemanget
-  - Redovisning ska lämnas senast tre månader efter genomförandet
-  belopp: Högst 10 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
+  - Föreningen ska vara nybildad, ha bedrivit verksamhet i högst tre år och godkännas av kultur- och fritidsnämnden
+  - Föreningen ska verka i Klippan eller för kommunens invånare och vara öppen, demokratisk och allmännyttig
+  - Organisationsnummer, föreningskonto, stadgar, styrelse, årsmöteshandlingar, verksamhetsplan och ekonomisk redovisning krävs
+  belopp: Individuellt prövat startbidrag; kommunen publicerar ingen fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet prövas i samband med godkännandet; kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: klippan-arets-forening
+  namn: Årets förening
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar verksamma i Klippans kommun
+  deadlines: { typ: fasta, datum: [10-18] }
+  krav:
+  - Mottagaren ska vara en förening verksam i Klippans kommun
+  - Föreningen ska vara initiativrik, öppen, medskapande, demokratisk, tillgänglig och bidra med lokalt mervärde och gemenskap
+  - Nomineringen ska vara skriftlig och motiverad och kan lyfta förbättrad verksamhet, organisation, anläggning, ledarvård, tillväxt eller hållbarhet
+  belopp: 10 000 kr, plakett och diplom; pengarna ska användas för vidareutveckling inom föreningens område
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Nominering för 2026 senast 18 oktober
+  kalla_url: https://www.klippan.se/uppleva--gora/priser-och-utmarkelser-for-kultur-fritid-idrott-och-foreningar?open.12_24ed023b18093f73c877a9b7=true
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
-  id: klippan-egna-initiativ-vuxna
-- namn: Egna initiativ – barn och ungdomar
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
+  krav_fullstandiga: true
+  anteckning: Kultur- och fritidsnämnden utser mottagaren på förslag från ledamöter, organisationer eller enskilda; mottagaren kan endast vara en förening.
+  senast_verifierad: '2026-08-18'
+- id: klippan-evenemangssponsring-2026
+  namn: Evenemangssponsring 2026
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Organisationer utan annat kommunalt stöd som arrangerar publika evenemang i Klippan
+  deadlines: { typ: fasta, datum: [02-20, 05-15] }
   krav:
-  - Sökande ska vara 13–18 år och bosatt i Klippans kommun
-  - Ansökan ska lämnas digitalt senast två veckor innan arrangemanget
-  - Inget bidrag ges för redan genomförda arrangemang
-  belopp: Högst 10 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
+  - Evenemanget ska vara publikt, genomföras i Klippans kommun och ligga utanför arrangörens ordinarie verksamhet
+  - Evenemanget ska bredda utbudet och stärka platsens och kommunens varumärke samt följa kommunens vision, mål och värdegrund
+  - Sponsringen kräver motprestation i kommersiella rättigheter eller exponering och regleras i skriftligt avtal
+  - Politiska eller religiösa organisationer och evenemang kan inte få sponsring och privatpersoner får inte söka
+  - Redovisning ska lämnas inom två månader och omfatta exponering, effekt, avtalad motprestation, ekonomiskt utfall och publik
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 200 000 kr för kalenderåret 2026, fördelat mellan flera evenemang som pengar, varor eller tjänster
+  sen_ansokan: Senast 20 februari för evenemang tidigast 1 april eller 15 maj för evenemang tidigast 1 juli
+  kalla_url: https://www.klippan.se/arkiv/nyheter/2026/2026-01-28-ar-du-arrangor-sok-evenemangssponsring-for-2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
-  id: klippan-egna-initiativ-barn-och-ungdomar
+  krav_fullstandiga: true
+  anteckning: Ingen individuell övre gräns publiceras.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: klippan-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
+  vad: Bli bidragsberättigad förening
+  beskrivning: Föreningen ska verka i Klippan eller för kommunens invånare, ha öppen medlemsantagning, organisationsnummer, föreningskonto och demokratiska stadgar samt lämna justerade årsmötes-, revisions-, verksamhets- och ekonomihandlingar. Kontaktuppgifter ska uppdateras årligen, men kommunen publicerar ingen giltighetstid eller förfallodag för godkännandet.
   system: Rbok
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ej angivet i källan
   giltighet: null
   ordning: 1
-  kalla_url: https://www.klippan.se/uppleva--gora/foreningar/bidrag--stod-for-foreningar
-  giltighet_status: okand
+  kalla_url: https://www.klippan.se/download/18.31ddc19d1987378bf544fa/1754314046993/Bidragsbest%C3%A4mmelser%20f%C3%B6r%20f%C3%B6reningar%2C%20studief%C3%B6rbund%20och%20egna%20initiativ.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null

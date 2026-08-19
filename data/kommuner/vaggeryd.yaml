@@ -2,43 +2,51 @@ kommun: Vaggeryd
 kommun_slug: vaggeryd
 lan: Jönköpings län
 befolkning: 14950
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsförvaltningen samt kommunledningskontoret
 ansokningssystem:
   namn: Rbok
-  url: https://vaggeryd.rbok.se/
-kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
-verifierad: '2026-08-02'
+  url: &portal https://vaggeryd.rbok.se/
+kalla_url: &huvud https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.vaggeryd.se/download/18.a7c92db195bbcc8aabe5acb/1744370409580/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%20Vaggeryds%20kommun%202025-04-03.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: vaggeryd-verksamhetsbidrag
-  namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Registrerade föreningar i Vaggeryds kommun
+  namn: Verksamhets- och lokalbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade föreningar med löpande verksamhet eller externa lokalkostnader
   deadlines:
     typ: fasta
     datum:
     - 09-30
   krav:
-  - Föreningen ska vara registrerad som bidragsberättigad förening i Vaggeryds kommun
-  - Föreningar med egna bidragsberättigade anläggningar bedöms enligt tidigare uppgifter om anläggningen och behöver inte
-    årligen ansöka om verksamhetsbidrag
-  - Föreningar som hyr lokaler av annan än kommunen söker lokalbidrag på samma sätt som tidigare
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
+  - Föreningen ska vara registrerad och godkänd som bidragsberättigad förening i Vaggeryds kommun
+  - Verksamhetsplan, budget och senast beslutade års-, ekonomi- och revisionshandlingar ska vara aktuella i Rbok
+  - Föreningar med egna bidragsberättigade anläggningar bedöms i dialog utifrån verksamhet, kostnader och långsiktiga förutsättningar
+  - Föreningar som hyr lokal av annan än kommunen ska redovisa behov, hyresavtal och faktiska lokalkostnader
+  - Kommunen bedömer verksamhetens omfattning, målgrupp, samhällsnytta och föreningens egen finansiering
+  belopp: Individuellt prövat verksamhets- eller lokalbidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas efter årsmötet och ska vara inne senast 30 september.
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kan sökas löpande efter årsmötet, senast 30 september.
+  anteckning: Den beslutade riktlinjen skriver 31 september, ett datum som inte finns; kommunens operativa huvudregel och tidigare struktur stödjer 30 september.
+  senast_verifierad: '2026-08-18'
 - id: vaggeryd-medlemsbidrag
   namn: Medlemsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
   malgrupp: Registrerade föreningar i Vaggeryds kommun
   deadlines:
     typ: fasta
@@ -52,24 +60,27 @@ bidrag:
     vid stickkontroll
   - Kyrkor och religiösa samfund är inte berättigade till medlemsbidrag
   belopp: 10 kronor per registrerad medlem
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: Omkring 25 procent av kultur- och fritidsnämndens årliga föreningsbidragsbudget avsätts till medlemsbidrag
+  sen_ansokan: Ansökan kan lämnas efter årsmötet och ska vara inne senast 30 september.
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kan sökas löpande efter årsmötet, senast 30 september.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: vaggeryd-lokalt-aktivitetsstod
   namn: Kommunalt lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  - ovrig
+  status: aktiv
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   malgrupp: Föreningar med bidragsberättigad barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
     datum:
-    - 02-28
-    - 08-28
+    - 02-25
+    - 08-25
   krav:
   - Föreningen ska vara en ideell förening enligt statsbidragsförordningarna för idrott (1999:1177), barn- och ungdomsorganisationer
     (2011:65) eller handikapporganisationer (2000:7)
@@ -78,18 +89,23 @@ bidrag:
     7–25 år (idrott); funktionsrättsföreningar oavsett ålder
   - Närvarokort ska föras vid varje sammankomst och intygas av ledaren
   - Ansökan ska göras av en av föreningsstyrelsen utsedd person
+  - Studiecirklar, kommersiella arrangemang och aktiviteter utan gemensam samling, ledning och avslutning ger inte stöd
   belopp: 40 kronor per sammankomst
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan reduceras enligt kommunens regel och kan därefter avslås.
+  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag/kommunalt-lokalt-aktivitetsstod.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Den levande stödsidan anger 25 februari och 25 augusti och ersätter norm-PDF:ens äldre 28-datum.
+  senast_verifierad: '2026-08-18'
 - id: vaggeryd-registreringsstod
   namn: Registreringsstöd
-  kategori:
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
   malgrupp: Nya föreningar som registreras som bidragsberättigade
   deadlines:
     typ: lopande
@@ -103,20 +119,21 @@ bidrag:
   - Föreningen ska ta ut en medlemsavgift på minst 100 kr för medlemmar från 18 år
   - Registrering prövas i varje enskilt fall av kultur- och fritidsnämnden
   belopp: 1 000 kr engångsstöd
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande i samband med registreringen.
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: vaggeryd-utvecklingsbidrag
   namn: Utvecklingsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
   malgrupp: Bidragsberättigade föreningar som vill utveckla verksamhet, organisation eller aktiviteter
   deadlines:
     typ: lopande
@@ -129,24 +146,143 @@ bidrag:
   - Åtgärden ska vara verksamhetsinriktad och av väsentlig betydelse för föreningens verksamhet
   - Ansökan görs via Rbok och bör innehålla syfte, samarbetspartners, ekonomisk redovisning/kostnadskalkyl, redovisning av
     andra sökta bidrag samt justerat styrelseprotokoll
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
+  - Åtgärden ska normalt kunna genomföras och redovisas inom ett år
+  belopp: Individuellt prövat utvecklingsbidrag inom den årliga budgeten; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: Omkring 25 procent av kultur- och fritidsnämndens årliga föreningsbidragsbudget avsätts till utvecklingsbidrag
+  sen_ansokan: Ansökan kan lämnas löpande; åtgärden ska normalt inte påbörjas före beslut.
+  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag/utvecklingsbidrag.html
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kan sökas löpande under året; beslut fattas efter att ansökningarna kommit in.
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vaggeryd-studieforbundens-verksamhetsbidrag
+  namn: Studieförbundens verksamhetsbidrag
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med lokal folkbildningsverksamhet
+  deadlines: {typ: fasta, datum: [05-15]}
+  krav:
+  - Studieförbundet ska vara statsbidragsberättigat och bedriva verksamhet i Vaggeryds kommun
+  - Ansökan ska avse verksamhet som genomfördes under föregående kalenderår
+  - Antalet genomförda studiecirklar i kommunen ska redovisas och ligger till grund för fördelningen
+  - Ansökan ska lämnas under kommunens publicerade period 15 april–15 maj
+  - Studieförbundet ska kunna lämna verksamhets-, ekonomi- och granskningsunderlag för den lokala verksamheten
+  belopp: Kommunanslaget fördelas mellan godkända studieförbund utifrån föregående års antal studiecirklar i Vaggeryds kommun
+  belopp_avser: per_forening
+  kommunens_pott: Årligt anslag till studieförbund; totalsumman publiceras inte på stödsidan
+  sen_ansokan: Ansökan öppnar 15 april och ska vara inne senast 15 maj.
+  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag/studieforbundens-verksamhetsbidrag.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vaggeryd-kommunal-medfinansiering-investeringar
+  namn: Kommunal medfinansiering av investeringar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som genomför en investering av långsiktig betydelse
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Sökanden ska vara en ideell förening med verksamhet i Vaggeryds kommun
+  - Investeringen ska ha långsiktig betydelse för föreningens verksamhet och gagna kommuninvånare eller föreningsliv
+  - Ansökan ska innehålla projektbeskrivning, kostnadskalkyl, finansieringsplan och uppgift om andra sökta eller beviljade stöd
+  - Behörigt styrelsebeslut, stadgar och senaste års-, ekonomi- och revisionshandlingar ska bifogas
+  - Föreningen ska beskriva ägande eller långsiktig nyttjanderätt, risker, tidplan och hur investeringen ska förvaltas
+  - Beviljade medel ska användas enligt beslut och projektet ska återrapporteras med ekonomiskt utfall
+  belopp: Individuellt beslutad kommunal medfinansiering; kommunen publicerar ingen generell procentsats eller beloppsgräns
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen generell sista ansökningsdag.
+  kalla_url: https://www.vaggeryd.se/download/18.173d0e4d18e5782ee1212b84/1711026533327/Riktlinje%20-%20kommunal%20medfinansiering%20av%20investeringar%20till%20ideella%20f%C3%B6reningar%20KF%202023-01-30%20%C2%A7%2012.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ingen generell procentsats eller beloppsgräns publiceras; varje investering prövas mot projektets finansiering och kommunens budget.
+  senast_verifierad: '2026-08-18'
+- id: vaggeryd-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Lokala föreningar som bokar kommunala lokaler och anläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Sökanden ska vara en lokal förening och boka lokalen genom kommunens bokningssystem eller angivna rutin
+  - Den subventionerade ungdomstaxan gäller föreningsverksamhet för barn och unga enligt kommunens taxebeslut
+  - Bokningen ska avse en kommunal lokal eller anläggning och följa dess ordnings- och avbokningsregler
+  - Föreningen ska ange rätt verksamhet, målgrupp och bokningstid så att korrekt taxa kan tillämpas
+  belopp: Subventionerad timtaxa enligt 2026 års beslut, exempelvis 60 kr i Vaggeryds sporthall och 70 kr i Skillingaryd Arena för lokal förenings ungdomsverksamhet, jämfört med ordinarie föreningstaxa 140 respektive 220 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; lokalen bokas enligt respektive bokningsrutin.
+  kalla_url: https://medborgare.vaggeryd.se/welcome-sv/namnder-styrelser/kommunfullmaktige-kf/mote-2026-02-02/agenda/kultur-och-fritidsnamndens-avgifter-2026pdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: vaggeryd-vuxenvandring-2026
+  namn: Vuxenvandring 2026
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som genomför vuxenvandring i Vaggeryd och Skillingaryd
+  deadlines: {typ: fasta, datum: [02-26]}
+  krav:
+  - Föreningen ska vara registrerad i Vaggeryds kommun och lämna intresseanmälan via Rbok
+  - Varje vandring ska genomföras av fyra föreningsmedlemmar som är minst 23 år
+  - Föreningen ska vandra både fredag och lördag enligt tilldelat schema och täcka både Vaggeryd och Skillingaryd
+  - Vandrarna ska följa kommunens instruktioner, bära tillhandahållna västar och vara nyktra under uppdraget
+  - Föreningen ska rapportera genomförandet efter båda kvällarna innan ersättningen betalas ut
+  - Antalet platser är begränsat och kommunen fördelar tillgängliga helger mellan sökande föreningar
+  belopp: 3 000 kr per genomförd kväll, normalt 6 000 kr för fredag och lördag; ytterligare 1 500 kr kan betalas för vandring under större helg
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Intresseanmälan för 2026 skulle lämnas senast 26 februari.
+  kalla_url: https://www.vaggeryd.se/omsorg-och-hjalp/trygg-och-saker/brottsforebyggande-arbete/vuxenvandring.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ersättningen är en föreningsersättning för ett kommunalt trygghetsuppdrag och kan inte sökas av enskilda personer.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: vaggeryd-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
+  vad: Registrering som bidragsberättigad förening
+  beskrivning: Föreningen ska vara registrerad hos Skatteverket som ideell förening, ha organisationsnummer och konto, godkända stadgar, vald styrelse och revisor samt registreras och prövas i kommunens Rbok-system. Föreningen ska normalt vara ansluten till en statligt godkänd riksorganisation; undantag kan prövas.
   system: Rbok
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen normal handläggningstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.vaggeryd.se/uppleva-och-gora/foreningar-foreningsliv/foreningsbidrag.html
-  giltighet_status: okand
-kommunsiffra: null
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: vaggeryd-allmanna-villkor
+  vad: Allmännytta, lokal verksamhet och värdegrund
+  beskrivning: Föreningen ska vara ideell, allmännyttig, demokratiskt uppbyggd och öppen. Medlemmarna ska bo eller verksamheten bedrivas i kommunen. Vuxnas medlemsavgift ska normalt vara minst 100 kr. Verksamheten ska följa likabehandling, barnkonventionen och funktionsrättskonventionen samt vara fri från alkohol, droger och mobbning; ledare för barn och unga ska kontrolleras mot belastningsregistret.
+  system: Kommunens föreningsregister och Rbok
+  ledtid: null
+  ledtid_text: Villkoren prövas vid registrering och ansökan.
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: vaggeryd-ars-och-ekonomihandlingar
+  vad: Års-, ekonomi- och revisionshandlingar
+  beskrivning: Föreningen ska hålla kontaktuppgifter och medlemsuppgifter aktuella samt lämna årsmötesprotokoll, verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse, verksamhetsplan och budget när kommunen begär dem. Kommunen har rätt till insyn och kan återkräva felaktigt använda stöd.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Handlingarna lämnas efter årsmötet eller tillsammans med ansökan; ingen gemensam tidsfrist för fortsatt giltighet publiceras.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel

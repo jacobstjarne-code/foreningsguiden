@@ -2,17 +2,24 @@ kommun: Skurup
 kommun_slug: skurup
 lan: Skåne län
 befolkning: 17132
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid, individ och omsorg, tillväxt och utveckling samt kommunstyrelsen
 ansokningssystem:
-  namn: Rbok / ApN
-  url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
-kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
-verifierad: '2026-07-31'
+  namn: Rbok / ApN och Skurups e-portal
+  url: https://fri.skurup.se/bidrag/
+kalla_url: &huvud https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.skurup.se/download/18.2ae0f6fd19367e99b102479f/1733213629577/Riktlinjer%20f%C3%B6reningsst%C3%B6d.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Lokalt aktivitetsstöd
   kategori:
   - idrott
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med deltagare 6–20 år eller 65 år och äldre
   deadlines:
     typ: fasta
@@ -27,18 +34,22 @@ bidrag:
     avslutning
   - En deltagare får endast räknas en gång per dag och förening
   belopp: '6–12 år: max 11 kr/deltagartillfälle. 13–20 år: max 15 kr/deltagartillfälle. 65 år eller äldre: max 6 kr/deltagartillfälle.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-lokalt-aktivitetsstod
 - namn: Bidrag till studieorganisationer
   kategori:
   - kultur
   - ovrig
+  foreningstyp: [kultur, annat]
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -47,20 +58,27 @@ bidrag:
   krav:
   - Studieförbundets centrala organisation ska vara statsberättigat studieförbund
   - Kulturarrangemang ska vara öppna för alla medborgare och marknadsföras i kommunens evenemangskalender
+  - Verksamheten ska bedrivas lokalt och redovisa viktade unika deltagare, studietimmar, unga deltagare och kulturarrangemang
+  - Kortutbildade över 20 år och personer med funktionsnedsättning är prioriterade målgrupper
+  - Verksamhetsberättelse och verksamhetsplan ska lämnas med ansökan
   - Stöd ges inte till förbund som utbildar i extremistisk tro/livsåskådning eller religionsutövning, eller till kurser i
     utomeuropeiska språk
-  belopp: null
+  belopp: 50 procent av anslaget fördelas efter relativ andel viktade unika deltagare och 50 procent efter relativ andel studietimmar; ett kulturprogram motsvarar nio studietimmar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-bidrag-till-studieorganisationer
 - namn: Startbidrag
   kategori:
   - ovrig
+  foreningstyp: *alla
   malgrupp: Nybildade föreningar
   deadlines:
     typ: lopande
@@ -73,17 +91,21 @@ bidrag:
   - Verksamhetsplan
   - Föreningen ska godkännas som stödberättigad av ansvarigt utskott
   belopp: 5 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-startbidrag
 - namn: Utvecklingsstöd
   kategori:
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -96,13 +118,17 @@ bidrag:
   - Stöd utgår inte till föreningens egna arbetsinsatser
   - Kommunen prioriterar projekt inom övergripande mål, nytänkande aktiviteter (barn/ungdomar, funktionsnedsättning, integration,
     jämställdhet) samt landsbygdsutveckling
-  belopp: null
+  - Verifikationer och redovisning ska lämnas senast 15 december och stödet betalas efter godkänd redovisning
+  belopp: Stödets storlek beslutas av ansvarigt utskott efter en sammantagen bedömning
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-utvecklingsstod
 - namn: Sommarlovsbidrag
@@ -110,6 +136,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar som arrangerar kostnadsfria aktiviteter för 6–15 år
   deadlines:
     typ: fasta
@@ -119,13 +146,18 @@ bidrag:
   - Föreningen ska vara godkänd som stödberättigad förening
   - Aktiviteterna ska vara öppna för alla barn och ungdomar 6–15 år, utan krav på medlemskap eller tidigare färdigheter
   - Beviljas efter bedömning av vilket värde aktiviteten ger kommunens barn och ungdomar
-  belopp: null
+  - Aktiviteten ska vara kostnadsfri, genomföras i Skurups kommun och ligga utanför ordinarie verksamhet
+  - Redovisning med deltagare fördelade per kön, användning av stödet och utvärdering ska lämnas senast 15 september
+  belopp: Stödets storlek beslutas av ansvarigt utskott
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-sommarlovsbidrag
 - namn: Lokal- och anläggningsstöd
@@ -133,6 +165,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -143,14 +176,18 @@ bidrag:
   - Stödet grundas på föregående verksamhetsårs bokslut och faktiska kostnader
   - 'Godkända kostnader: hyra/arrende, el, uppvärmning, vatten och avlopp, sophämtning och brandförsäkring'
   - Lokalen/anläggningen ska uppfylla myndighetskrav (bygglov, brandsäkerhet, försäkring)
+  - Uthyrningsintäkter ska dras av så att stödet beräknas på nettokostnaden; förråd och enstaka förhyrning ger inte stöd
   belopp: 'Max 60 % av godkända kostnader (minst 500 deltagartillfällen föregående verksamhetsår för 6–20 år eller 65+), annars
     max 20 %. Byalag i kommunens byalagsråd: max 60 %. Maxbelopp 100 000 kr per förening och år.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-lokal-och-anlaggningsstod
 - namn: Investeringsstöd
@@ -158,6 +195,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: fasta
@@ -170,17 +208,21 @@ bidrag:
   - Investeringen får inte påbörjas innan ansökan mottagits av Serviceförvaltningen
   - Investeringen ska vara färdigställd inom ett år från utbetalning, annars är föreningen återbetalningsskyldig
   belopp: Upp till 50 procent av investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: skurup-investeringsstod
 - namn: Närdemokratistöd
   kategori:
   - ovrig
+  foreningstyp: [hembygd, annat]
   malgrupp: Ideella föreningar i kommunen
   deadlines:
     typ: okand
@@ -188,25 +230,152 @@ bidrag:
   krav:
   - Endast öppet för de byalag som ingår i kommunens byalagsråd (Abbekås, Dybecks, Rydsgårds, Skivarps, Slimminge och Västra
     Nöbbelövs Byalag)
+  - Byalaget ska delta i remisser, yttranden, planläggning och kommunens byalagsråd
   - Stödet upphör för den del som berörs om byalaget inte längre medverkar i byalagsrådet
   belopp: 10 000 kr per år (fast stöd)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt – årligt fast stöd till angivna byalag, ingen ansökningsfrist. Utbetalas i maj.
   kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
   belopp_status: kontrollast
   deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: skurup-nardemokratistod
+- namn: Stöd i kommunägda lokaler
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *alla
+  malgrupp: Godkända föreningar som använder kommunens lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara godkänd och registrerad i kommunens föreningsregister
+  - Föreningar som bedriver stödberättigad aktivitetsverksamhet prioriteras vid fördelning av tider
+  - Kommunens årliga taxor och regler för upplåtelse ska följas
+  belopp: Subventionerade avgifter enligt årligen fastställda taxor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för lokalsubventionen
+  kalla_url: https://fri.skurup.se/bidrag/ansokaninfo.aspx?type=21&year=2026
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: skurup-stod-kommunagda-lokaler
+- namn: Sponsring
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *alla
+  malgrupp: Lokalt förankrade föreningar och organisationer som erbjuder kommunen en affärsmässig motprestation
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen, organisationen eller evenemanget ska ha lokal förankring och en publik aktivitet
+  - Samarbetet ska stärka kommunen, följa kommunens värdegrund och ge en affärsmässigt väl avvägd motprestation
+  - Sponsring över 10 000 kronor kräver skriftligt avtal med syfte, parternas åtaganden, kommunens kostnad och giltighetstid
+  - Bedömningen omfattar målgrupp och uppmärksamhetsvärde och beslut fattas av kommundirektören
+  belopp: Kommunen publicerar inget fast sponsringsbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://www.skurup.se/download/18.61a1602c18afe90760ab7a4/1697180057389/Fastst%C3%A4lld%20riktlinje%20f%C3%B6r%20sponsring%20m%20m%20rev%202016-12-14%20fastst%C3%A4lld%20av%20KS%20%C2%A7%20445-2016%20%281%29.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: skurup-sponsring
+- namn: Föreningsbidrag för arbete mot våld i nära relationer
+  kategori:
+  - social
+  foreningstyp: [social, annat]
+  malgrupp: Ideella organisationer som arbetar förebyggande och stödjande mot våld i nära relationer
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Organisationen ska bedriva uppsökande, förebyggande eller stödjande arbete mot våld i nära relationer
+  - Insatserna ska omfatta Skurupsbor; regionala och rikstäckande organisationer prioriteras inte
+  - Stadgarna ska vara godkända och organisationen ska vara demokratisk med egen styrelse och ekonomisk förvaltning
+  - Organisationsnummer, föreningskonto, räkenskaper och revision ska kunna visas för kommunen
+  belopp: Kommunen publicerar inget fast belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Årlig ansökan senast 31 oktober året före stödåret
+  kalla_url: https://e-portalen.skurup.se/oversikt/overview/57
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Portalrubriken avser stödåret 2027 medan brödtexten återger föregående års datum; årscykeln är 31 oktober året före stödåret.
+  id: skurup-foreningsbidrag-vald-nara-relationer
+- namn: Vägbidrag till enskild väg
+  kategori:
+  - ovrig
+  foreningstyp: [annat]
+  malgrupp: Vägföreningar med statligt bidrag för enskild väg i Skurups kommun
+  deadlines:
+    typ: fasta
+    datum: [05-31]
+  krav:
+  - Sökanden ska vara en vägförening med statligt bidrag
+  - Väghållningen ska vara organiserad som vägförening, vägsamfällighet eller annan sammanslutning med karta och delägarförteckning
+  - Vägen ska ligga i Skurups kommun och vara öppen för allmänt bruk
+  - Stödet avser drift och underhåll såsom barmarks- och vinterväghållning, redskap, förbättringar, beläggning, diken och ombyggnad
+  belopp: Kommunen publicerar inget fast belopp eller beräkningssätt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 maj
+  kalla_url: https://e-portalen.skurup.se/oversikt/overview/55
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: skurup-vagbidrag-enskild-vag
 forutsattningar:
 - id: skurup-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Rbok / ApN
+  beskrivning: Föreningen ska bedriva verksamhet i Skurup för kommuninvånare, ha ansvarig styrelse och kommun-godkända stadgar samt vara demokratisk och öppen för alla som följer stadgarna.
+  system: Rbok / ApN och Skurups e-portal
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://www.skurup.se/uppleva-och-gora/foreningar/sok-foreningsstod
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: skurup-stodberattigad
+  vad: Godkännande som stödberättigad förening
+  beskrivning: Föreningen ska vara ideell med revisorer, huvudsakligen ha medlemmar i Skurup, ta minst 50 kronor i medlemsavgift, normalt vara riksansluten, ha organisationsnummer och föra medlemsmatrikel. För ordinarie stöd krävs minst tio aktiva medlemmar 6–20 år eller 65 år och äldre.
+  system: Rbok / ApN
+  ledtid: null
+  ledtid_text: null
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: skurup-arsmoteshandlingar
+  vad: Årsmöteshandlingar och aktuella uppgifter
+  beskrivning: Efter årsmötet ska föreningen lämna årsmötesprotokoll, verksamhetsberättelse, resultat- och balansrapport samt revisionsberättelse och utan dröjsmål uppdatera ändrade föreningsuppgifter.
+  system: Rbok / ApN
+  ledtid: null
+  ledtid_text: Efter årsmötet; kommunen anger ingen tidsfrist
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null

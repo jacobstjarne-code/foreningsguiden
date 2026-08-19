@@ -2,195 +2,318 @@ kommun: Tranemo
 kommun_slug: tranemo
 lan: Västra Götalands län
 befolkning: 11830
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kultur- och fritidsverksamheten samt kommunledningsstaben
 ansokningssystem:
-  namn: Interbook FRI
-  url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-verifierad: '2026-07-31'
+  namn: Interbook FRI och Tranemo kommuns självservice
+  url: https://tranemo.interbookfri.se/
+kalla_url: &huvud https://tranemo.se/uppleva--gora/foreningsliv/bidrag
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://tranemo.se/download/18.4b24d4e19753bee4734974/1744190545448/Regler-for-bidrag-till-foreningslivet-inom-Tranemo-kommun.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Barn- och ungdomsföreningar, kulturföreningar, hembygdsföreningar och byalag
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: tranemo-verksamhetsbidrag
+  namn: Verksamhetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Idrotts- och övriga föreningar med barn- och ungdomsverksamhet samt kulturföreningar, hembygdsföreningar, byalag och samhällsföreningar
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska vara ideell, registrerad i kommunens föreningsregister och ha säte och verksamhet i Tranemo kommun
+  - Föreningen ska ha organisationsnummer, föreningskonto, allmän e-postadress, demokratiska stadgar, vald styrelse och revisorer samt vara öppen för alla som följer stadgarna
+  - Komplett ansökan ska innehålla aktuella föreningsuppgifter, medlemsantal, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse och justerat årsmötesprotokoll
+  - Barn- och ungdomsföreningar ska ha minst tio medlemmar till och med 20 år och årligen redovisa en antagen och godkänd alkohol- och drogpolicy
+  - Barn- och ungdomsverksamheten ska vara lekfull, allsidig och fri från urval och utslagning; elitsatsning får inte ske på bekostnad av breddverksamhet
+  - Kulturföreningar ska långsiktigt bidra till bredd, kvalitet och mångfald; byalag och samhällsföreningar ska arbeta inkluderande för bred lokal utveckling
+  belopp: Individuellt beslutat utifrån bland annat verksamhetens kvalitet, föreningens storlek och statliga LOK-stödsvolym; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget söks en gång per år senast den 31 mars; kommunen publicerar ingen särskild regel för sena ansökningar
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tranemo-verksamhetsbidrag
-- namn: Lokal- och anläggningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med lokal- eller anläggningskostnader
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: tranemo-lokal-och-anlaggningsbidrag
+  namn: Lokal- och anläggningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som äger, arrenderar eller hyr lokaler och anläggningar samt föreningar som driver allmänna samlingslokaler
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna krav på ideell, demokratisk och lokalt verksam förening
+  - Lokalen eller anläggningen ska vara godkänd för verksamheten enligt bygglov, brandskydd och övriga tillämpliga säkerhetsregler
+  - Ny lokal ska godkännas av kommunen innan den anskaffas; ansökan ska innehålla driftkostnadsredovisning och vid hyra även hyreskontrakt och hyresfaktura
+  - En allmän samlingslokal ska hållas öppen och tillgänglig för ortens föreningsliv, studier, kultur och andra mötes- och fritidsaktiviteter; endast en sådan lokal per ort kan få stödet
+  - Bidrag ges inte för hyra av konstgräsplan med tillhörande omklädningsrum, hyra i egen lokal eller lokal i en annan kommun
+  - Föreningar som driver samlingslokaler eller bygdegårdar ska ta ansvar för en ansvarsfull uthyrning till unga
+  belopp: 40–70 procent av redovisade kostnader eller enligt särskild överenskommelse; kommunala idrottshallar kan subventioneras med högst 70 procent och Andrummet är kostnadsfritt för registrerade föreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Årsansökan ska lämnas senast den 31 mars; tillfälligt hyrda lokaler kan omfattas högst två gånger per år
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tranemo-lokal-och-anlaggningsbidrag
-- namn: Bidrag till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: tranemo-bidrag-till-pensionarsforeningar
+  namn: Bidrag till pensionärsföreningar
+  status: aktiv
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Registrerade pensionärsföreningar med verksamhet i Tranemo kommun
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska vara registrerad enligt kommunens regler och bedriva pensionärsverksamhet i Tranemo kommun
+  - Föreningen ska vara ideell och demokratisk samt ha organisationsnummer, föreningskonto, stadgar, styrelse och revisorer
+  - Ansökan ska innehålla kompletta årsmötes- och ekonomihandlingar samt medlemsantalet vid närmast föregående årsskifte
+  - Föreningen ska delta i dialogen inom kommunens pensionärsråd
+  - Uppgifter och årshandlingar ska uppdateras i föreningsregistret senast två månader efter årsmötet
+  belopp: Ett fast grundbidrag för administration och verksamhetsplanering samt en rörlig andel av bidragsramen utifrån föreningens medlemsantal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget söks en gång per år senast den 31 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tranemo-bidrag-till-pensionarsforeningar
-- namn: Bidrag till funktionshinderföreningar
-  kategori:
-  - funktionsratt
-  malgrupp: Funktionshinderföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: tranemo-bidrag-till-funktionshinderforeningar
+  namn: Bidrag till funktionsrättsföreningar
+  status: aktiv
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Lokala funktionsrättsföreningar eller föreningar på annan ort med aktiva Tranemomedlemmar när lokalavdelning saknas
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska verka för att personer med funktionsnedsättning i Tranemo kommun får sina intressen tillgodosedda
+  - Föreningen ska ha lokalavdelning i Tranemo eller, om sådan saknas, kunna redovisa aktiva medlemmar från Tranemo i en lokalförening på annan ort
+  - Föreningen ska vara ideell och demokratisk samt lämna kompletta årsmötes-, ekonomi- och medlemsunderlag
+  - Föreningen ska så långt möjligt delta i kommunens samverkansformer för målgruppens intressen
+  - Registrerade föreningar ska uppdatera uppgifter och årshandlingar senast två månader efter årsmötet
+  belopp: Ett fast grundbidrag för administration och verksamhetsplanering samt en rörlig andel av bidragsramen utifrån antalet Tranemomedlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget söks en gång per år senast den 31 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tranemo-bidrag-till-funktionshinderforeningar
-- namn: Utvecklingsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med innovativa utvecklingsidéer
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: tranemo-utvecklingsbidrag
-- namn: Kommunstrategiskt föreningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - ovrig
-  malgrupp: Föreningar med strategiska projekt
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
-  krav: []
-  belopp: Kommunal medfinansiering kan ingå
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan 1 mars året före projektstart.
-  id: tranemo-kommunstrategiskt-foreningsbidrag
-- namn: Investerings- och upprustningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med nyanläggning, ombyggnad eller upprustning
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan året före projektstart.
-  id: tranemo-investerings-och-upprustningsbidrag
-- namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Godkända studieförbund
-  deadlines:
-    typ: fasta
-    datum:
-    - 12-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: tranemo-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med nya idéer som utvecklar orten eller föreningens verksamhet
+  deadlines: {typ: fasta, datum: [02-01, 08-01]}
+  krav:
+  - Sökanden ska vara en bidragsberättigad och registrerad förening som uppfyller kommunens allmänna föreningskrav
+  - Projektet eller aktiviteten ska utveckla orten fysiskt, utveckla befintlig verksamhet eller skapa ny verksamhet och får inte finansieras inom en annan kommunal bidragsform
+  - Föreningen ska medfinansiera genom egna medel, andra finansiärer eller ideellt arbete
+  - Ansökan ska tydligt beskriva idé, mål, genomförande och förväntat resultat
+  - En fullständig projektbudget ska visa total finansiering och hur kostnaderna har beräknats
+  - Barns och ungas delaktighet, samverkan, generationsmöten, inkludering, nya målgrupper och kommunens folkhälsomål är prioriterande kriterier
+  belopp: Individuellt beslutat efter projektets innehåll och budget; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Två ansökningstillfällen publiceras varje år, den 1 februari och den 1 augusti
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tranemo-bidrag-till-studieforbund
-- namn: Bidrag till RF-SISU
-  kategori:
-  - idrott
-  malgrupp: RF-SISU:s verksamhet i kommunen
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+- id: tranemo-kommunstrategiskt-foreningsbidrag
+  namn: Kommunstrategiskt föreningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med större strategiska projekt eller projekt som kräver kommunal medfinansiering
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Projektet ska vara av strategisk art och bidra till kommunens vision, mål eller utvecklingsområden
+  - Ansökan ska avse minst 150 000 kronor och lämnas året före den planerade investeringen
+  - Föreningen ska själv svara för en del av finansieringen och åta sig framtida skötsel och underhåll av den anläggning som stödet avser
+  - Stöd ges inte för hyrda lokaler, lättare underhåll eller arbete som redan har påbörjats eller slutförts
+  - Vid ansökan över 500 000 kronor ska föreningens ekonomiska rapport vara granskad av en oberoende auktoriserad revisor
+  - Föreningen ska vara registrerad, uppfylla de allmänna föreningskraven och lämna fullständiga projekt-, ekonomi- och årsmötesunderlag
+  belopp: Ansökan ska avse minst 150 000 kr; nivån beslutas politiskt och kan utgöra kommunal medfinansiering
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 1 mars året före investeringen; redan påbörjade eller avslutade arbeten får inte stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tranemo-bidrag-till-rf-sisu
+- id: tranemo-investerings-och-upprustningsbidrag
+  namn: Investerings- och upprustningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med ungdomsverksamhet vid egen eller arrenderad anläggning samt föreningar som äger och driver samlingslokaler
+  deadlines: {typ: fasta, datum: [08-31]}
+  krav:
+  - Investeringen ska avse nyanläggning, om- eller tillbyggnad eller upprustning av en föreningsägd eller arrenderad anläggning, samlingslokal eller bygdegård
+  - Varaktiga inventarier kan omfattas om de hör till kärnverksamheten och har ett anskaffningsvärde på minst 20 000 kronor
+  - Ansökan ska lämnas innan arbetet påbörjas och föreningen ska ha en underhållsplan som sträcker sig fem år framåt
+  - Föreningen ska undersöka andra stöd från exempelvis Boverket, Riksidrottsförbundet och Allmänna arvsfonden
+  - Tillgänglighet, ökat nyttjande, barn- och ungdomsverksamhet, jämställdhet samt miljö- och energieffektivisering prioriteras
+  - Stöd ges inte för hyrd lokal, lättare underhåll eller redan påbörjat eller slutfört arbete utan särskilt igångsättningstillstånd
+  - Genomförandet och godkända kostnader ska kontrolleras och redovisas före slututbetalning
+  belopp: Högst 50 procent av totalkostnaden och högst 150 000 kr; utbetalningen räknas om om den godkända slutkostnaden blir lägre
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 31 augusti året före byggstart; föreningen har två år på sig att hämta ut beviljat stöd
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tranemo-bidrag-till-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med dokumenterad folkbildningsverksamhet i Tranemo kommun
+  deadlines: {typ: fasta, datum: [12-15]}
+  krav:
+  - Studieförbundet ska ha varit verksamt i Tranemo kommun de senaste tre åren; nya studieförbund fasas in under två utbetalningsår efter genomförd verksamhet
+  - Ansökan om kommunbidrag och verksamhetsplan ska lämnas senast den 15 december året före utbetalningen
+  - Föregående års lokala verksamhet ska rapporteras senast den 30 juni med unika deltagare, studietimmar, deltagare med funktionsnedsättning och antal kulturprogram
+  - Verksamhetsberättelse med ekonomisk redovisning för kommunen och underskrivna kommunintyg ska lämnas senast den 30 juni
+  - Vid minst en halvering av verksamheten under två år omprövas rätten till grundbidrag
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas 70 procent till studiecirklar, 10 procent till annan folkbildning och 20 procent till kulturprogram; totalsumman publiceras inte
+  sen_ansokan: Ansökan och verksamhetsplan ska vara kommunen tillhanda senast den 15 december året före bidragsåret
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tranemo-bidrag-till-rf-sisu
+  namn: Bidrag till RF-SISU:s verksamhet i Tranemo
+  status: aktiv
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: RF-SISU Västra Götaland för stöd och utbildning till kommunens idrottsföreningar
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - RF-SISU ska årligen registrera aktuella kontaktuppgifter och ansöka i kommunens ansökningssystem
+  - Verksamheten ska erbjuda kommunens idrottsföreningar föreningsbesök, lärgrupper, kurser, föreläsningar och processledning
+  - RF-SISU ska kunna hjälpa föreningar med nya kulturarrangemang och samverka med kommunen om bland annat Utmärkt förening
+  - Föregående års verksamhetsberättelse ska ligga till grund för dialogen om omfattning och bidragsnivå
+  - En skriftlig överenskommelse med kommunen kan gälla i högst tre år och följs upp varje år
+  belopp: Individuellt beslutat efter dialog och föregående års verksamhetsberättelse; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: RF-SISU ska ansöka senast den 31 mars
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tranemo-elljussparsbidrag
+  namn: Bidrag till föreningsdrivna elljusspår
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, annat]
+  malgrupp: De föreningar och den stiftelse som namnges i kommunens regel och driver elljusspår i Tranemo kommun
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Sökanden ska vara en av de elljusspårsaktörer som namnges i regeln och ansvara för ett föreningsdrivet elljusspår
+  - Föreningen ska svara för drift och underhåll av spår och anläggning
+  - Föreningen ska bidra till energibesparande åtgärder och ansvara för elsäkerheten på anläggningen
+  - Aktuella uppgifter och fullständiga föreningshandlingar ska finnas i kommunens register
+  - Bidragsnivån fastställs efter ansökan och dialog med respektive förening
+  belopp: Kommunen ersätter hela den faktiska elkostnaden och lämnar ett individuellt fastställt bidrag per kilometer belyst spår för skötsel och underhåll
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget söks en gång per år senast den 31 mars
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tranemo-folkhalsobidrag
+  namn: Folkhälsobidrag
+  status: aktiv
+  kategori: [idrott, social, funktionsratt, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som vill pröva en ny hälsofrämjande eller förebyggande insats för kommuninvånare
+  deadlines: {typ: fasta, datum: [02-01, 08-01]}
+  krav:
+  - Insatsen ska främja hälsa eller förebygga ohälsa hos invånare i Tranemo kommun
+  - Projektet ska ligga utanför föreningens ordinarie verksamhet och pröva nya metoder eller arbetssätt
+  - Projektet ska ha tydlig start, halvtidsuppföljning och sluttid samt arbeta för att ett fungerande arbetssätt kan leva vidare i ordinarie verksamhet
+  - Insatsen ska ligga i linje med kommunens verksamhetsplan för folkhälsa och riktas gärna till grupper som annars är svåra att nå
+  - Kommunens prioriterade målgrupper 2026–2028 är barn och unga, äldre samt personer med funktionsnedsättning
+  belopp: Individuellt beslutat inom folkhälsoarbetets utvecklingsmedel; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas inför den 1 februari eller den 1 augusti
+  kalla_url: &folkhalsa https://tranemo.se/stod--omsorg/folkhalsa/sok-folkhalsobidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: tranemo-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
+- id: tranemo-registrerad-forening
+  vad: Registrering i kommunens föreningsregister
+  beskrivning: Föreningen ska vara ideell, ha organisationsnummer, säte och verksamhet i Tranemo, demokratiska stadgar, styrelse och revisorer, föreningskonto och en allmän e-postadress.
   system: Interbook FRI
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Registrering kan göras när som helst; först när alla obligatoriska uppgifter och handlingar är kompletta behandlas ansökan.
+  giltighet: Uppgifterna ska uppdateras årligen och senast två månader efter årsmötet.
   ordning: 1
-  kalla_url: https://tranemo.se/uppleva--gora/foreningsliv/bidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: tranemo-arsmoteshandlingar
+  vad: Årlig omregistrering med kompletta årshandlingar
+  beskrivning: Verksamhetsberättelse, resultat- och balansräkning och justerat årsmötesprotokoll ska visa att revisionsberättelsen godkänts och styrelsen beviljats ansvarsfrihet; ändrade stadgar, styrelse, revisorer och verksamhetsinriktning ska registreras.
+  system: Interbook FRI
+  ledtid: 60
+  ledtid_text: Senast två månader efter föreningens årsmöte.
+  giltighet: Till nästa obligatoriska årliga omregistrering.
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: tranemo-bidragsansokan
+  vad: Fullständig ansökan och kommunens kontroll
+  beskrivning: Ansökan ska vara komplett, föreningen ska spara medlems-, verksamhets-, mötes- och ekonomihandlingar i minst fem år och kommunen får granska underlagen; obetalda kommunskulder kan hålla inne ett beviljat bidrag.
+  system: Interbook FRI
+  ledtid: null
+  ledtid_text: Före respektive bidrags sista ansökningsdag.
+  giltighet: Gäller för den aktuella ansökan och uppföljningen.
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null

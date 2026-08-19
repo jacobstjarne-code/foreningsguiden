@@ -4,64 +4,286 @@ lan: Kalmar län
 befolkning: 13447
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: Hultsfreds kommuns e-tjänster
-  url: https://www.hultsfred.se/
-kalla_url: https://minasidor.hultsfred.se/oversikt/overview/216
-verifierad: '2026-08-02'
+  namn: Actor Smartbook och blanketter
+  url: https://hultsfred.actorsmartbook.se/
+kalla_url: https://www.hultsfred.se/artikel/foreningsverksamhet-och-bidrag-till-foreningar/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 1
+  datum: null
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Föreningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
+- id: hultsfred-samhallsnyttiga-insatser
+  namn: Bidrag för samhällsnyttiga insatser
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som inte uppfyller de ordinarie bidragskraven men gör samhällsnyttiga insatser
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://minasidor.hultsfred.se/oversikt/overview/216
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Kommunens öppna e-tjänst bekräftar att föreningsbidrag kan sökas, men visar inte bidragsförteckning eller deadlines
-    utan inloggning. Full detaljverifiering kräver portalåtkomst eller kommunens bidragsregler. Ej angivet i källan
-  id: hultsfred-foreningsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  krav:
+  - Sökanden ska vara en ideell förening med verksamhet eller samhällsnyttiga insatser i Hultsfreds kommun
+  - Stödet är ett undantag för en förening som inte uppfyller kommunens ordinarie bidragskrav
+  - Kommunen gör en särskild prövning av föreningens verksamhet och om undantag från reglerna kan tillåtas
+  belopp: 1 357 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat sista ansökningsdag för den särskilda prövningen
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: hultsfred-startbidrag
   namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - ovrig
-  malgrupp: Nystartade föreningar i Hultsfreds kommun
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Nystartade ideella föreningar i Hultsfreds kommun
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Föreningen ska vara nystartad och ansökan ska avse föreningens första verksamhetsår
+  - Föreningen ska ha godkända stadgar, vald styrelse och revisorer samt vara öppen för medlemmar enligt stadgarna
+  - Föreningen ska vara demokratiskt uppbyggd, bedriva huvuddelen av verksamheten i kommunen och arbeta för en rök-, alkohol- och drogfri miljö
+  - Utbetalning görs endast till ett bankkonto, plusgiro eller bankgiro i föreningens namn
+  belopp: 1 178 kr under det första verksamhetsåret
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista dag; stödet kan bara sökas under det första verksamhetsåret
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-grundbidrag
+  namn: Årligt grundbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsgodkända ungdoms-, pensionärs-, funktionsrätts- och kulturföreningar
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningen ska vara bidragsgodkänd och ha verksamhet för ungdomar, pensionärer eller personer med funktionsnedsättning, eller bedriva kulturverksamhet
+  - Föreningen ska ha minst tio aktiviteter per år, huvuddelen av verksamheten i kommunen och minst tio stödberättigade medlemmar i rätt målgrupp
+  - Ansökan ska innehålla verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse för föregående år
+  - En arbetsplan för verksamhetsåret ska lämnas och grundbidragsansökan ligger till grund för andra föreningsbidrag
+  belopp: 1 470 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en månad efter föreningens årsmöte
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-samhallsforening
+  namn: Årligt bidrag till samhällsförening
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Samhällsföreningar i Hultsfreds kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en samhällsförening i Hultsfreds kommun
+  - Föreningen ska vara ideell, demokratiskt uppbyggd och ha godkända stadgar, vald styrelse och revisorer
+  - Föreningen ska bedriva huvuddelen av sin verksamhet i kommunen och kunna visa bokföring och föreningshandlingar vid granskning
+  belopp: 3 650 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat sista ansökningsdag
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-forsvarsorganisationer
+  namn: Lokalbidrag till försvarsorganisationer
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Försvarsorganisationer som Röda Korset och Hemvärnet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en försvarsorganisation; kommunens regler anger Röda Korset och Hemvärnet som exempel
+  - Ansökan ska avse organisationens lokalkostnader
+  - Organisationen ska kunna visa lokalkostnaderna i bokföringen och lämna handlingarna på det sätt kommunen bestämmer
+  - Lokalbidraget är den enda bidragsform som kommunen publicerar för dessa organisationer
+  belopp: Ersättning för organisationens lokalkostnader; kommunen publicerar ingen generell procentsats eller övre gräns
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat sista ansökningsdag
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-lokalbidrag
+  namn: Bidrag för lokaler
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsgodkända föreningar som hyr eller äger en lokal
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara bidragsgodkänd och ha lämnat sin årliga grundbidragsansökan
+  - Hyrd eller ägd lokal ska användas för föreningens verksamhet och kommunen ska kontaktas innan ett nytt köp- eller hyresavtal tecknas
+  - För en föreningsägd lokal ska driftkostnader som el, vatten, sophämtning och försäkring kunna styrkas i bokföringen
+  - Intäkter från uthyrning ska dras av från lokalkostnaderna och föreningar ska i första hand försöka samverka om lokaler
+  belopp: 50 procent av hyran i kultur- och fritidsförvaltningens lokaler samt Skeppet, Vena bygdegård och Silverdalens Folkets hus; för övriga hyrda lokaler 40 procent, högst 5 000 kr; ägd lokal prövas mot nettodriften utan publicerad fast nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat sista ansökningsdag
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsgodkända föreningar med planerade och ledarledda aktiviteter
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Aktiviteten ska vara planerad, beslutad av styrelse eller sektion och ingå i den lokala föreningens verksamhet
+  - Aktiviteten ska pågå minst 60 minuter med en utsedd ledare som närvarar och normalt minst fyra deltagare 4–20 år
+  - Åldersgränsen gäller inte bidragsberättigade pensionärs- och funktionsrättsföreningar och tennis eller bordtennis kan godtas med färre deltagare
+  - En aktivitet får redovisas en gång per dag och grupp; entrébelagda, kommersiella eller statsbidragsgrundande studiecirklar ger inte stöd
+  - Närvarokort med namn och födelsedata ska föras, intygas av ledaren och sparas i minst fyra år
+  belopp: 55 kr per redovisad och godkänd aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den 25 augusti gäller aktiviteter 1 januari–30 juni och den 25 februari aktiviteter 1 juli–31 december; för sen ansökan ger ingen rätt till bidrag
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-konstutstallningsbidrag
+  namn: Bidrag för konstutställning
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar som ordnar en konstutställning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening som ordnar en konstutställning
+  - Konstnären ska uppfylla Sveriges Konstföreningars krav för utställningsersättning
+  - Ansökan ska innehålla kvitton som styrker utställningens utgifter
+  - Beviljat stöd ska återbetalas om det inte används eller används till ett annat ändamål
+  belopp: Högst 4 354 kr per konstutställning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-scoutforeningsbidrag
+  namn: Bidrag till scoutföreningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [friluft, ungdom, annat]
+  malgrupp: Scoutkårer med regelbunden gruppverksamhet
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en scoutkår i Hultsfreds kommun
+  - Varje stödgrundande scoutgrupp ska ha regelbunden verksamhet en gång per vecka
+  - Bidraget grundas på föregående års verksamhet och söks samtidigt med grundbidraget
+  - Scoutkåren ska kunna visa verksamhets- och ekonomiska handlingar vid kommunens kontroll
+  belopp: 445 kr per grupp och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks tillsammans med grundbidraget, senast en månad efter föreningens årsmöte
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: hultsfred-bidrag-till-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsgodkända studieförbund med verksamhet i Hultsfreds kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Studieförbundets centrala organisation och verksamhet ska vara godkänd för statsbidrag av Folkbildningsrådet
+  - Studieförbundet ska bedriva folkbildning eller kulturverksamhet i Hultsfreds kommun och stödet får inte användas till uppdragsutbildning eller kommersiell verksamhet
+  - Ansökan ska redovisa studietimmar i studiecirklar, annan folkbildningsverksamhet, kulturprogram och unika deltagare i kommunen
+  - Balans- och resultaträkning, verksamhets- och revisionsberättelse samt kommunsammandrag ska bifogas och undertecknas av ordförande och revisor
+  - Kommunens bidragsmottagare ska ställa räkenskaper och redovisningshandlingar till kommunens förfogande
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://minasidor.hultsfred.se/oversikt/overview/415
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Separat e-tjänst finns för startbidrag; fullständiga villkor kräver e-tjänstens underlag. Ej angivet i den öppna
-    e-tjänsten
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Det årliga kommunanslaget fördelas med 70 procent grundbidrag efter föregående kommunbidrag och 30 procent volymbidrag efter redovisade studietimmar; kulturprogram räknas som nio studietimmar och totalsumman publiceras inte
+  sen_ansokan: Ansökan och föregående års redovisning ska lämnas senast den 30 april
+  kalla_url: https://www.hultsfred.se/artikel/bidragsregler-for-studieforbund/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 forutsattningar:
-- id: hultsfred-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Hultsfreds kommuns e-tjänster
+- id: hultsfred-bidragsgodkand-forening
+  vad: Bidragsgodkänd ideell förening
+  beskrivning: Föreningen ska vara ideell och demokratiskt uppbyggd, ha godkända stadgar, styrelse och revisorer, vara öppen för medlemmar, bedriva huvuddelen av verksamheten i kommunen och normalt ha minst tio aktiviteter per år samt minst tio stödberättigade medlemmar.
+  system: Actor Smartbook
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid för godkännandet
   giltighet: null
   ordning: 1
-  kalla_url: https://www.hultsfred.se/
-  giltighet_status: okand
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  giltighet_status: ingen_regel
+- id: hultsfred-arsmotesfornyelse
+  vad: Årlig grundbidragsansökan efter årsmötet
+  beskrivning: Grundbidrag söks varje år efter föreningens årsmöte med verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse och arbetsplan; ansökan ligger till grund för rätten till andra föreningsbidrag.
+  system: Actor Smartbook
+  ledtid: null
+  ledtid_text: Senast en månad efter föreningens årsmöte
+  giltighet: 1 månad efter årsmötet
+  ordning: 2
+  kalla_url: https://www.hultsfred.se/files/2026/01/Bidragsregler-2026-2.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null

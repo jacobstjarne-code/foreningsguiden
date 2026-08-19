@@ -4,10 +4,16 @@ lan: Skåne län
 befolkning: 23742
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Svedala kommuns e-tjänster
+  namn: Svedala kommuns e-tjänster och FRI
   url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
 kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Aktivitetsbidrag
   kategori:
@@ -20,16 +26,96 @@ bidrag:
     datum:
     - 02-28
     - 08-31
-  krav: []
-  belopp: 9 kr per aktivitetstillfälle
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
+  krav:
+  - Aktiviteten ska ha minst tre och högst 30 deltagare, pågå minst 60 minuter och ledas av en utsedd ledare som är minst 13 år
+  - Deltagarna ska vara medlemmar och 0–20 år; för verksamhet för personer med funktionsnedsättning gäller ingen åldersgräns
+  - Aktiviteten ska vara planerad, innehålla gemensam samling och avslutning samt sakna entréavgift
+  - Närvaro ska registreras löpande och samma deltagare får räknas högst en gång per förening, sektion och dag
+  belopp: 12 kr per deltagartillfälle för föreningar anslutna till specialförbund eller Riksidrottsförbundet och 21 kr för övriga föreningar samt verksamhet för personer med funktionsnedsättning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för höstperioden lämnas senast 28 februari och för vårperioden senast 31 augusti
+  kalla_url: https://www.svedala.se/contentassets/c40af4370b014daebe371d7faa561e34/protokoll-2026/protokoll-fran-kommunfullmaktige-18-juni-2026-for-justering-signerat.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidragsnivåerna beslutades av kommunfullmäktige den 18 juni 2026 och gäller från aktivitetsbidragets höstperiod 2025.
   id: svedala-aktivitetsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: svedala-kulturbidrag
+  namn: Kulturbidrag
+  kategori: [kultur]
+  malgrupp: Ideella föreningar som bedriver verksamhet inom kultur- eller kulturarvsområdet i Svedala kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningen ska bedriva verksamhet inom kultur- eller kulturarvsområdet och uppfylla kommunens grundläggande föreningsregler
+  - Ansökan ska innehålla en utvecklingsplan med fokus på barn och unga, nya målgrupper, kulturell kvalitet eller breda kultursamarbeten
+  - Bedömningen väger in kvalitet, publik räckvidd, delaktighet, jämställdhet, flerkulturellt perspektiv och föreningens ekonomiska resurser
+  - Bidraget kan sökas en gång per år, får inte avse lokalinvesteringar och följs upp vid nästa års ansökan
+  belopp: Kommunen publicerar ingen generell beloppsnivå; bidraget prövas utifrån verksamhetens kvalitet, räckvidd och ekonomiska förutsättningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 mars–30 april
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  foreningstyp: [kultur, hembygd, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: svedala-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar med egen lokal eller anläggning, eller förstahandskontrakt hos annan hyresvärd än kommunen
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningen och lokalen eller anläggningen ska finnas i Svedala kommun och merparten av föreningens verksamhet ska bedrivas där
+  - Föreningen ska kunna genomföra minst 500 aktivitetstillfällen för barn och unga per år och lämna redovisning
+  - Driftbidrag får avse lokalhyra, försäkring, fastighetsränta, el, vatten, värme, renhållning och icke standardhöjande underhåll
+  - Investeringsbidrag får avse tillgänglighetsanpassning, energieffektivisering eller byggåtgärder som minskar anläggningskostnaderna
+  belopp: Högst 50 procent av godkända driftkostnader eller investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 mars–30 april
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget omfattar både driftbidrag och investeringsbidrag enligt samma riktlinje.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: svedala-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella föreningar i Svedala kommun som vill utveckla sin verksamhet
+  deadlines:
+    typ: fasta
+    datum: [04-30, 10-31]
+  krav:
+  - Projektet ska utveckla verksamheten inom jämställdhet, trygga föreningsmiljöer, folkhälsa, nya målgrupper eller samverkan
+  - Behovet ska inte kunna täckas av kommunens övriga bidragsformer
+  - Projektet får pågå med utvecklingsbidrag i högst fem år i följd
+  - Föreningen ska uppfylla kommunens grundläggande regler och kan kallas till dialog med kultur- och fritidsnämndens presidium
+  belopp: Högst 70 procent av projektets totala kostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioderna är 1 mars–30 april och 1 september–31 oktober
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - namn: Uppdragsbidrag
   kategori:
   - ovrig
@@ -37,16 +123,24 @@ bidrag:
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  belopp_status: okand
+  krav:
+  - Uppdraget ska ligga utanför föreningens ordinarie verksamhet och genomföras för Svedala kommun
+  - Föreningen ska uppfylla kommunens grundläggande föreningsregler
+  - Kommunen och föreningen ska träffa en skriftlig överenskommelse om uppdragets ramar, förväntningar och ersättning
+  - Uppdraget ska redovisas efter genomförandet och omprövas årligen om överenskommelsen är flerårig
+  belopp: Ersättningen bestäms i den skriftliga överenskommelsen för varje uppdrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget kan sökas året om efter kontakt med Kultur- och fritidsenheten
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: ingen_regel
   deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: En flerårig överenskommelse får löpa högst tre år i följd.
   id: svedala-uppdragsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - namn: Arrangemangsbidrag
   kategori:
   - kultur
@@ -57,16 +151,24 @@ bidrag:
     datum:
     - 04-30
     - 10-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  belopp_status: okand
+  krav:
+  - Arrangemanget ska vara kort, tidsbegränsat, gratis, öppet för allmänheten och genomföras i Svedala kommun
+  - Arrangemanget får inte ingå i föreningens ordinarie verksamhet
+  - Föreningen kan beviljas bidraget högst två gånger per år och ska ange kommunens stöd i information om arrangemanget
+  - Verksamhets- och ekonomisk redovisning ska lämnas senast två månader efter projektet och oanvända medel återbetalas
+  belopp: Högst 50 procent av arrangemangets totala kostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioderna är 1 mars–30 april och 1 september–31 oktober
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Barn- och ungdomsarrangemang, samarrangemang, nya arrangemang och arrangemang av regionalt eller nationellt intresse prioriteras.
   id: svedala-arrangemangsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - namn: Marknadsföringsbidrag
   kategori:
   - ovrig
@@ -76,16 +178,24 @@ bidrag:
     datum:
     - 04-30
     - 10-31
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  belopp_status: okand
+  krav:
+  - Kostnaden ska avse material som marknadsför föreningens löpande verksamhet eller större arrangemang, exempelvis annonser, affischer eller broschyrer
+  - Porto och kopieringskostnader är inte bidragsberättigade
+  - Föreningen ska uppge i informationen att Svedala kommun har lämnat bidrag
+  - Verksamhets- och ekonomisk redovisning ska lämnas senast två månader efter projektet och oanvända medel återbetalas
+  belopp: Högst 50 procent av den godkända marknadsföringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioderna är 1 mars–30 april och 1 september–31 oktober
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
   id: svedala-marknadsforingsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - namn: Uppstartsbidrag
   kategori:
   - ovrig
@@ -93,16 +203,24 @@ bidrag:
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  belopp_status: okand
+  krav:
+  - Föreningen ska vara nystartad och ha som syfte att bedriva barn- och ungdomsverksamhet i Svedala kommun
+  - Ansökan ska lämnas inom fyra månader efter att föreningen bildades
+  - Protokoll från konstituerande möte och verksamhetsplan ska bifogas
+  - Ansökan ska beskriva hur bidraget ska användas och innehålla intyg om medlemskap i en riksorganisation
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas utifrån föreningens uppstart och planerade användning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan ske löpande men måste lämnas inom fyra månader från bildandet
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: ingen_regel
   deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Användningen ska redovisas senast sex månader efter utbetalningen.
   id: svedala-uppstartsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
 - namn: Subventionerad lokalhyra
   kategori:
   - idrott
@@ -110,46 +228,110 @@ bidrag:
   - ovrig
   malgrupp: Ideella föreningar i kommunen
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Föreningen ska uppfylla kommunens grundläggande regler och boka en kommunal kultur- eller fritidslokal eller anläggning
+  - Subvention kan avse föreningsverksamhet för barn och unga 0–20 år, vuxna 21–64 år eller äldre över 65 år
+  - Kulturverksamhet kan omfattas oavsett deltagarnas ålder när den bidrar till ett levande lokalt kulturliv, med prioritet för barn och unga
+  - Kommunen fastställer subventionen vid bokningen utifrån föreningstyp och verksamhet
+  belopp: Reducerad eller avgiftsfri hyra enligt kommunfullmäktiges aktuella taxor och avgifter
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökan eller generell ansökningsfrist publiceras; subventionen fastställs vid bokningen
+  kalla_url: https://www.svedala.se/contentassets/7e956da75e8748a7a963dd04bf336929/riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: Stödet dras automatiskt vid bokning och söks inte separat.
   id: svedala-subventionerad-lokalhyra
-- namn: Föreningsbidrag – vård och omsorg
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- namn: Medlemsbidrag till pensionärs-, funktionsrätts- och anhörigföreningar
   kategori:
   - social
   - pensionar
   - funktionsratt
-  malgrupp: Ideella föreningar i kommunen
+  malgrupp: Pensionärs-, funktionsrätts- och anhörigföreningar verksamma i Svedala kommun
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
+    typ: fasta
+    datum: [03-15]
+  krav:
+  - Föreningen ska vara verksam i Svedala kommun, ansluten till en riksorganisation och ha antagna stadgar, vald styrelse och revisorer
+  - Föreningen ska ta ut en årlig medlemsavgift, ha bank- eller plusgiro och ge socialnämnden nödvändig insyn i verksamheten
+  - Bidragsberättigad medlem ska betala full medlemsavgift; stödmedlemmar räknas inte
+  - Föreningsrapport, verksamhetsberättelse, kassaberättelse med balansräkning och revisionsrapport ska bifogas
+  belopp: 130 kr per bidragsberättigad medlem och år; för föreningar med mindre än 75 procent Svedalamedlemmar reduceras bidraget till motsvarande andel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara socialnämnden tillhanda senast den 15 mars; sen ansökan kräver särskilda skäl som nämnden godtar
+  kalla_url: https://www.svedala.se/contentassets/b22ad4186e5e40ea8bf3a1c0950cb2f0/ffs-3-02-bidragsregler-for-pensionars--och-handikappforeningar-galler-fran-2021-04-08-ta.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: svedala-pensionars-handikapp-anhorigforeningar
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
+- id: svedala-funktionsrattsforeningar-verksamhetsbidrag
+  namn: Verksamhetsbidrag till funktionsrättsföreningar
+  kategori: [funktionsratt, social]
+  malgrupp: Ideella föreningar som bedriver stödjande eller förebyggande verksamhet för personer med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum: [05-31]
+  krav:
+  - Föreningen ska vara aktiv, ha verksamhet av intresse för sin funktionshindergrupp och ha aktiva medlemmar folkbokförda i Svedala kommun
+  - Föreningen ska ha stadgar, vald styrelse, medlemsregister och organisationsnummer samt vara godkänd av riksorganisation eller kommunen
+  - Föreningen ska vara demokratiskt uppbyggd, öppen för allmänheten och får inte få annat kommunalt verksamhetsbidrag från Svedala kommun
+  - Årsredovisning, revisionsberättelse, verksamhetsplan och medlemsförteckning med antal Svedalamedlemmar ska bifogas
+  belopp: 50 kr per aktiv medlem folkbokförd i Svedala kommun, dock minst 1 000 kr; stödmedlemmar räknas inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara Vård och omsorg tillhanda före maj månads utgång
+  kalla_url: https://www.svedala.se/contentassets/b22ad4186e5e40ea8bf3a1c0950cb2f0/ffs3-10-riktlinjer-for-bidrag-till-foreningar-for-funktionshindrade.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Verksamhetsbidraget avser information, uppsökande verksamhet och medlemsvärvning.
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
+- id: svedala-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  malgrupp: Studieförbund som är verksamma i Svedala kommun och godkända för statsbidrag av Folkbildningsrådet
+  deadlines:
+    typ: fasta
+    datum: [05-15]
+  krav:
+  - Studieförbundet ska vara verksamt i Svedala kommun och dess centrala organisation och verksamhet ska vara godkända för statsbidrag av Folkbildningsrådet
+  - Verksamheten ska bedrivas demokratiskt, långsiktigt och hållbart och skilja sig från utbildning enligt skollagen och högskolelagen
+  - Kommersiell verksamhet är inte bidragsberättigad och öppna kulturarrangemang ska erbjudas alla invånare
+  - Ansökan ska redovisa studietimmar, arrangemangstimmar, unika deltagare samt efterfrågade verksamhets- och ekonomihandlingar
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: svedala-foreningsbidrag-vard-och-omsorg
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas mellan behöriga studieförbund utifrån redovisade studie- och arrangemangstimmar samt unika deltagare
+  sen_ansokan: E-tjänsten är öppen 1 januari–15 maj
+  kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/studieforbund/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet finns på kommunens studieförbundssida och i den kvarvarande e-tjänsten, utanför huvudmenyn för föreningsbidrag.
+  foreningstyp: [kultur, annat]
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: svedala-registrering
   vad: Registrering och aktuella föreningsuppgifter
   beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Svedala kommuns e-tjänster
+  system: Svedala kommuns föreningsregister, e-tjänster och FRI
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
   kalla_url: https://www.svedala.se/uppleva/kultur-och-fritid/foreningar-foreningsliv/bidrag-och-stod-till-foreningar/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 kommunsiffra: null

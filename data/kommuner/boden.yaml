@@ -2,475 +2,512 @@ kommun: Boden
 kommun_slug: boden
 lan: Norrbottens län
 befolkning: 28910
-forvaltning: Kultur-, fritids- och ungdomsavdelningen (föreningsstöd och kulturstöd); Tekniska avdelningen (vägbidrag); Kommunledningskontoret
-  Näringsliv och Landsbygdsrådet (byapeng och projektmedel till byautveckling)
+forvaltning: Kultur-, fritids- och ungdomsavdelningen; Tekniska avdelningen; kommunledningsförvaltningen
 ansokningssystem:
-  namn: Föreningsportalen (Actor Smartbook) för föreningsstöd; kommunens generella e-tjänster för väg- och landsbygdsbidrag
+  namn: Föreningsportalen för föreningsstöd; kommunens e-tjänster för väg- och landsbygdsstöd
   url: https://boden.actorsmartbook.se/
 kalla_url: https://boden.se/uppleva-och-gora/foreningsliv-och-bidrag
-verifierad: 2026-07-23
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: boden-kulturarrangemangsstod
-  namn: Kulturarrangemangsstöd
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och fria professionella kulturskapare (F- eller FA-skattsedel) registrerade i Föreningsportalen
-    som vill genomföra ett offentligt kulturarrangemang i Boden
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Stöd till kulturarrangemang
+  kategori: [kultur]
+  malgrupp: Föreningar och andra kulturaktörer som genomför offentliga kulturarrangemang i Boden
+  foreningstyp: [kultur, hembygd, annat]
+  deadlines: { typ: relativ, datum: [] }
   krav:
-  - Föreningen ska ha sitt säte i Boden och huvudsakligen bedriva verksamhet i kommunen
-  - Föreningen ska vara ideell, öppen för alla, demokratiskt uppbyggd med stadgar, styrelse och medlemsavgift, samt registrerad
-    i Föreningsportalen
-  - Arrangemanget ska vara offentligt och öppet för allmänheten (konsert, teater, konstutställning, litteraturevenemang, dansföreställning
-    m.m.)
-  - Arrangemanget får inte redan ha beviljats stöd för samma ändamål från annan kommunal förvaltning och ska inte vara del
-    av föreningens ordinarie verksamhet
-  - Ansökan senast sex veckor innan arrangemangets genomförande
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-kulturstod-och-arrangemangsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Kan sökas löpande året runt (kategoriserad under 'löpande ansökan' i den allmänna föreningsstödsguiden). Utomstående
-    föreningar/studieförbund kan beviljas vid samarrangemang. Redovisning senast sex veckor efter genomförandet.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-foreningsjubileum
-  namn: Stöd till föreningsjubileum
-  kategori:
-  - ovrig
-  malgrupp: Föreningar i Boden som firar 25-, 50-, 75- eller 100-årsjubileum innevarande år
-  deadlines:
-    typ: lopande
-    datum: []
+  - Sökanden ska vara registrerad i Föreningsportalen; utomstående föreningar och studieförbund kan söka vid samarrangemang med en registrerad Bodenförening
+  - Arrangemanget ska vara offentligt, öppet för allmänheten och genomföras i Boden
+  - Stöd ges inte för ordinarie verksamhet, förlusttäckning eller samma ändamål som redan fått annat kommunalt stöd
+  - Arrangemangsbeskrivning, budget med kostnader och intäkter samt verksamhetsplan ska bifogas
+  - Ansökan ska lämnas minst sex veckor före arrangemanget och redovisas senast sex veckor efteråt
+  belopp: Upp till 15 000 kr kan täcka hela kostnaden; över 15 000 kr högst 75 procent av kostnaden och normalt högst 70 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: 530 000 kr för kulturarrangemangsstöd och förlustgaranti
+  sen_ansokan: Minst sex veckor före arrangemangets genomförande
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Belopp över 70 000 kr beslutas av kultur-, fritids- och ungdomsnämnden.
+  senast_verifierad: '2026-08-18'
+- id: boden-forlustgaranti-kulturarrangemang
+  namn: Förlustgaranti vid kulturarrangemang
+  kategori: [kultur]
+  malgrupp: Ideella föreningar som genomfört ett offentligt, inträdesbelagt och icke-kommersiellt kulturarrangemang
+  foreningstyp: [kultur, hembygd, annat]
+  deadlines: { typ: relativ, datum: [] }
   krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Senast antagna årsmöteshandlingar ska vara uppladdade på Mina sidor
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Listad under 'Löpande ansökan året om' i kommunens självservice-guide. Nivåer per jubileumsår publicerade endast
-    i den arkiverade, ej längre citerbara regelverks-PDF:en — inte skrivna här eftersom de inte kunnat verifieras mot en levande
-    boden.se-källa.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-usm-jsm-nif-stod
-  namn: Stöd för deltagande i USM, JSM, NIF distrikts- och länslagsläger samt nationella ungdomsuppdrag
-  kategori:
-  - idrott
-  malgrupp: Föreningar som haft deltagare i USM, JSM, NIF distrikts- och länslagsläger eller nationella ungdomsuppdrag
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Tävling/läger ska vara utanför Bodens kommun
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Listad under 'Löpande ansökan året om'. Belopp per deltagare/km-schablon fanns i den arkiverade regelverks-PDF:en
-    men kunde inte verifieras mot en levande boden.se-sida och skrivs därför inte här.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-forlustgarantiuppdrag
-  namn: Förlustgarantiuppdrag
-  kategori:
-  - ovrig
-  malgrupp: Ej närmare specificerat på boden.se utöver namnet
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Ansökan görs via Föreningsportalen enligt kommunens generella villkor (föreningen registrerad, säte i Boden, stadgar m.m.)
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'Nämns bara vid namn i självservice-guidens lista över löpande stöd. Ingen egen detaljsida hittad på boden.se
-    — flaggas för Jacobs spot-check. OBS: en generell textrad i kulturarrangemangsstödets villkor säger att ''förlusttäckning
-    inte är en bidragsberättigad post'' för DET stödet specifikt, vilket inte utesluter att detta separat namngivna stöd existerar.'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-lokalt-aktivitetsstod-barn-ungdom
-  namn: Lokalt aktivitetsstöd för barn- och ungdomsaktiviteter
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som anordnar ledarledd verksamhet för deltagare 7–25 år
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Sökes per termin i efterskott (höstterminen senast 25 februari, vårterminen senast 25 augusti)
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-lokalt-aktivitetsstod-funktionsvariation
-  namn: Lokalt aktivitetsstöd för föreningar med personer med funktionsvariationer
-  kategori:
-  - funktionsratt
-  malgrupp: Föreningar med ledarledd verksamhet för personer med funktionsvariationer
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Sökes per termin i efterskott
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-aktivitetsstod-pensionarsforeningar
-  namn: Aktivitetsstöd till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar, eller föreningar där mer än 75% av medlemmarna är 65 år eller äldre
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Sökes per termin i efterskott
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska vara registrerad i Föreningsportalen och uppfylla kommunens grundvillkor
+  - Arrangemanget ska vara offentligt, inträdesbelagt och av icke-kommersiell karaktär
+  - Föreningar med årligt kulturverksamhetsstöd får bara söka utanför verksamheten som det stödet omfattar
+  - Arrangemangsbeskrivning, budget och redogörelse för övrig finansiering ska bifogas
+  belopp: Högst 20 000 kr per arrangemang
+  belopp_avser: per_forening
+  kommunens_pott: Ingår i kulturarrangemangsstödets pott på 530 000 kr
+  sen_ansokan: Senast fyra veckor efter arrangemangets genomförande
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Förlustgarantin är ett separat stöd inom kulturarrangemangsbudgeten.
+  senast_verifierad: '2026-08-18'
 - id: boden-stod-till-studieforbund
   namn: Stöd till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: De tio statsbidragsberättigade studieförbunden verksamma i Boden
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
+  kategori: [kultur, ovrig]
+  malgrupp: Statsfinansierade studieförbund med verksamhet i Boden
+  foreningstyp: [kultur, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25] }
   krav:
-  - Studieförbundet ska erhålla statlig finansiering (via Folkbildningsrådet)
-  - Stödet fördelas baserat på inrapporterade studietimmar enligt kommunsammandragen
+  - Studieförbundet ska få statlig finansiering via Folkbildningsrådet eller SISU
+  - Organisationen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar och verksamhetsplan
+  - Ansökan ska vara fullständig och innehålla kommunsammandrag
+  - Stödet fördelas efter inrapporterade studietimmar
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Endast ansökan 25 februari (till skillnad från flera andra bidrag i samma deadline-grupp som även har en 25
-    augusti-omgång).
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-hyresstod-aktivitetslokaler
-  namn: Hyresstöd till aktivitetslokaler
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som hyr en aktivitetslokal för barn- och ungdomsverksamhet, funktionsvariationsverksamhet eller pensionärsverksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
+  belopp_avser: ren_pott
+  kommunens_pott: 450 000 kr
+  sen_ansokan: Ansökan efter den 25 februari handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Fördelningen grundas på kommunsammandragens studietimmar.
+  senast_verifierad: '2026-08-18'
+- id: boden-lokalt-aktivitetsstod-barn-ungdom
+  namn: Lokalt aktivitetsstöd
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar med ledarledda aktiviteter för deltagare 7–25 år eller personer med funktionsvariation oavsett ålder
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Lokalen ska vara förhyrd, belägen i Boden och inte redan subventionerad av kommunen eller dess bolag
-  - Endast en hyresgäst per lokal kan beviljas stöd; kansli-/kontorslokaler ger inget hyresstöd
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Endast ansökan 25 februari.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-anlaggningsbidrag-foreningsagda
-  namn: Anläggningsbidrag till föreningsägda anläggningar
-  kategori:
-  - idrott
-  malgrupp: Föreningar som äger och driver en idrotts-, frilufts- eller motsvarande anläggning i Boden
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
+  - Aktiviteten ska pågå minst 60 minuter, ha minst tre deltagare, ledarledd start och avslutning samt högst 30 stödgrundande deltagare per tillfälle och dygn
+  - Ledaren ska vara minst 13 år och en ansvarig person som är minst 18 år ska finnas på plats
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
+  - RF-anslutna föreningar ska godkänna kommunens inläsning från IdrottOnline; övriga rapporterar i Föreningsportalen
+  belopp: 5 kr per redovisad ungdomsaktivitet och 12 kr per aktivitet för person med funktionsvariation
+  belopp_avser: per_forening
+  kommunens_pott: 770 000 kr
+  sen_ansokan: Höstterminen söks senast 25 februari och vårterminen senast 25 augusti
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalningar under 500 kr ackumuleras till årsskiftet.
+  alder_min: 7
+  alder_max: 25
+  senast_verifierad: '2026-08-18'
+- id: boden-lokalt-aktivitetsstod-funktionsvariation
+  namn: Aktivitetsstöd till föreningar för personer med funktionsvariation
+  kategori: [funktionsratt]
+  malgrupp: Föreningar där merparten av verksamhetsutövarna tillhör Funktionsrätt Boden eller Norrbottens Parasportförbund
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Endast föreningen som äger och driver anläggningen kan söka; delat ansvar ska fördelas enligt avtal
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Kallas 'Stöd till föreningsdrivna anläggningar' i äldre kommunmaterial — samma bidrag, ny benämning på den nuvarande
-    självservice-sidan.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-driftstod-bygdegardar-glesbygd
-  namn: Driftstöd till bygdegårdar och allmänna samlingslokaler i glesbygd
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som äger eller disponerar en bygdegård eller allmän samlingslokal i glesbygd i Boden
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
+  - Merparten av verksamhetsutövarna ska vara anslutna genom Funktionsrätt Boden eller Norrbottens Parasportförbund
+  - Deltagarna ska vara folkbokförda i Boden och aktiviteten genomföras i föreningens egen regi
+  - Aktiviteten ska pågå minst 60 minuter, ha minst tre deltagare, ledarledd start och avslutning samt högst 30 deltagare
+  - Ledaren ska vara minst 13 år och en ansvarig person som är minst 18 år ska finnas på plats
+  belopp: 1 000 kr i grundstöd, 6 kr per medlem, ytterligare 2 kr per medlem i Funktionsrätt Boden samt 12 kr per aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: 120 000 kr
+  sen_ansokan: Höstterminen söks senast 25 februari och vårterminen senast 25 augusti
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Utbetalningar under 500 kr ackumuleras till årsskiftet.
+  senast_verifierad: '2026-08-18'
+- id: boden-aktivitetsstod-pensionarsforeningar
+  namn: Aktivitetsstöd till pensionärsföreningar
+  kategori: [pensionar]
+  malgrupp: Pensionärsföreningar eller föreningar där mer än 75 procent av medlemmarna fyller minst 65 år under året
+  foreningstyp: [social, annat]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Lokalen ska vara fristående (inte del av förenings-/klubblokal) och öppen/tillgänglig för allmänheten på skäliga villkor
-  - Lokalen ska uppfylla krav på brandskydd och tillgänglighet
-  - Föreningen ska kunna påvisa minst 10 arrangemang/aktiviteter/bokningar under verksamhetsåret
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-driftstod-badplatser
-  namn: Driftstöd till föreningsdrivna badplatser
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som driver en badplats inom Boden kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
+  - Föreningens syfte ska vara verksamhet för målgruppen och deltagarna ska vara folkbokförda i Boden
+  - Föreningen ska ha ett styrkbart medlemsregister med namn, adress och födelseår
+  - Aktiviteten ska pågå minst 60 minuter, vara ledarledd, ha minst tre deltagare och genomföras i föreningens regi
+  - Högst en aktivitet per dygn är stödgrundande och närvarokort ska lämnas
+  belopp: Rörligt belopp per aktivitet utifrån samtliga redovisade aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: 200 000 kr
+  sen_ansokan: Höstterminen söks senast 25 februari och vårterminen senast 25 augusti
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Storleken per aktivitet bestäms när terminens totala aktivitetsantal är känt.
+  senast_verifierad: '2026-08-18'
+- id: boden-usm-jsm-nif-stod
+  namn: Stöd för USM, JSM, NIF-läger och nationella ungdomsuppdrag
+  kategori: [idrott]
+  malgrupp: Föreningar med ungdomar som deltagit i mästerskap, distrikts- eller länslagsläger eller nationella uppdrag
+  foreningstyp: [idrott]
+  deadlines: { typ: relativ, datum: [] }
   krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Badplatsen ska uppfylla krav på livräddningsutrustning, skyltning, sanitet och säkerhet
+  - Deltagandet ska avse USM, JSM, NIF:s distrikts- eller länslagsläger eller ett bekräftat nationellt ungdomsuppdrag
+  - Mästerskapet ska genomföras utanför Boden och stödet beräknas för högst tio deltagare och två ledare
+  - Deltagande eller uppdrag ska kunna bekräftas av NIF eller respektive förbund
+  - Redovisning och kvitton för kostnaderna ska bifogas och föreningen ska vara registrerad i Föreningsportalen
+  belopp: Högst 300 kr per deltagare och tävlingsdag samt resestöd enligt avstånd; NIF-läger 372 kr och nationellt uppdrag 2 500 kr per deltagare och förening
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr
+  sen_ansokan: Senast två månader efter genomfört deltagande
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nationellt uppdrag ersätts inte om riksförbundet redan har betalat ersättning.
+  senast_verifierad: '2026-08-18'
+- id: boden-verksamhetsstod-funktionsvariation
+  namn: Verksamhetsstöd till föreningar för personer med funktionsvariation
+  kategori: [funktionsratt]
+  malgrupp: Föreningar där merparten av verksamhetsutövarna tillhör Funktionsrätt Boden eller Norrbottens Parasportförbund
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [10-31] }
+  krav:
+  - Merparten av verksamhetsutövarna ska vara anslutna genom Funktionsrätt Boden eller Norrbottens Parasportförbund
+  - Stödet avser basverksamhet och bedöms efter omfattning, utvecklingspotential, långsiktighet, kvalitet och barn- och ungdomsinriktning
+  - Verksamhetsplan för kommande år ska bifogas och stödet ska redovisas senast 31 mars året efter
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'Se konflikter.log: den arkiverade (ej längre citerbara) 2024/2025-regelverks-PDF:en hade en INTERN motsägelse
-    där sammanfattningslistan angav 31 mars men detaljavsnittet för just detta bidrag angav 30 september. Den enda LEVANDE,
-    citerbara boden.se-källan (självservice-guiden) anger 31 mars, vilket är vad som skrivits här. Flaggas för spot-check
-    eftersom motsägelsen i den gamla källan inte kunnat lösas mot en aktuell detaljsida (finns inte längre).'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 200 000 kr
+  sen_ansokan: Ansökan efter den 31 oktober handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet fördelas efter en samlad bedömning av ansökningarna.
+  senast_verifierad: '2026-08-18'
 - id: boden-byapeng
   namn: Byapeng
-  kategori:
-  - ovrig
-  malgrupp: Byautvecklingsgrupper/föreningar i Bodens ca fyrtio byar — en sökande grupp/förening per by
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
+  kategori: [ovrig]
+  malgrupp: En gemensamt utsedd utvecklingsgrupp eller förening per by
+  foreningstyp: [hembygd, social, annat]
+  deadlines: { typ: fasta, datum: [03-31] }
   krav:
-  - Endast en utvecklingsgrupp/förening per by kan söka
-  - Föregående års verksamhetsberättelse ska bifogas ansökan
+  - Endast en utvecklingsgrupp eller förening per by får söka och byn ska gemensamt utse den sökande
+  - Gruppen ska arbeta med utvecklingsfrågor som berör det stora flertalet i byn
+  - Stödet ska användas till utvecklingsplan, sysselsättningsskapande verksamhet eller andra aktiviteter viktiga för byn
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Fördelas efter antal boende i byn (bekräftat på https://boden.se/samhalle-och-utveckling/samhallsutveckling/en-levande-landsbygd,
-    som dock inte anger ett specifikt deadline-datum — 31 mars är hämtat från den allmänna föreningsstödsguiden).
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 150 000 kr, fördelat efter antalet invånare i byarna
+  sen_ansokan: Ansökan efter den 31 mars handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Byapeng är separat från kommunens projektmedel och statliga bygdemedel.
+  senast_verifierad: '2026-08-18'
+- id: boden-driftstod-bygdegardar-glesbygd
+  namn: Driftstöd till bygdegårdar och samlingslokaler i glesbygd
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar som äger eller disponerar en bygdegård eller allmän samlingslokal i Boden
+  foreningstyp: [kultur, hembygd, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Föreningen ska äga eller disponera lokalen och göra den tillgänglig för allmänheten på skäliga villkor
+  - Lokalen ska vara fristående, av god standard och uppfylla lagkrav om brandskydd och tillgänglighet
+  - Föreningen ska ha ekonomiska förutsättningar att driva lokalen och redovisa minst tio nyttjandetillfällen under året
+  - Lokalens yta och nyttjandetillfällen ska redovisas och aktuella årsmöteshandlingar finnas i Föreningsportalen
+  belopp: 50 kr/m² för 1–75 m², 40 kr/m² för 76–150 m², 10 kr/m² däröver och 100 kr per wc, högst fem; återstoden fördelas efter nyttjandetillfällen
+  belopp_avser: per_forening
+  kommunens_pott: 450 000 kr
+  sen_ansokan: Ansökan efter den 31 mars handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Om ansökningarna överstiger anslaget justeras utbetalningarna inom potten.
+  senast_verifierad: '2026-08-18'
+- id: boden-anlaggningsbidrag-foreningsagda
+  namn: Stöd till föreningsdrivna anläggningar
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar som äger och driver en idrotts-, frilufts- eller motsvarande anläggning i Boden
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  deadlines: { typ: fasta, datum: [03-31] }
+  krav:
+  - Endast föreningen som äger och driver anläggningen får söka; vid delat ansvar fördelas stödet enligt avtal
+  - Anläggningen ska vara i godkänt och säkert skick
+  - Kostnader och föregående års deltagartillfällen ska redovisas med underlag
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
+  belopp: Fast belopp efter anläggningstyp, exempelvis 5 000 kr/km belyst motionsspår, 10 000 kr/konstgräsplan och 7 000 kr/isbana, plus rörlig del efter aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: 1 135 000 kr
+  sen_ansokan: Ansökan efter den 31 mars handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Andra anläggningstyper prövas särskilt; den rörliga delen baseras på rapporterade aktiviteter.
+  senast_verifierad: '2026-08-18'
+- id: boden-hyresstod-aktivitetslokaler
+  namn: Hyresstöd till aktivitetslokaler
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  malgrupp: Föreningar som hyr aktivitetslokal för barn, unga, personer med funktionsvariation eller pensionärer
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [02-25] }
+  krav:
+  - Lokalen ska vara hyrd och ligga i Boden utan annan kommunal subvention; kansli-, mötes- och kontorslokaler omfattas inte
+  - Stöd ges endast till en hyresgäst per lokal och bara för den del som används av en stödberättigad målgrupp
+  - Barn- och ungdoms- samt pensionärsföreningar ska normalt ha redovisat minst 30 deltagartillfällen föregående år
+  - Hyreskontrakt och hyresavi ska bifogas och aktuella årsmöteshandlingar finnas i Föreningsportalen
+  belopp: 75 procent för funktionsrättsverksamhet, 65 procent för barn och unga och 50 procent för pensionärer, högst 65 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: 450 000 kr
+  sen_ansokan: Ansökan efter den 25 februari handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Godkända kostnader är hyra, sluträkning för vatten och el samt sophämtning.
+  senast_verifierad: '2026-08-18'
+- id: boden-driftstod-badplatser
+  namn: Stöd för föreningsdrift av badplatser
+  kategori: [ovrig]
+  malgrupp: Föreningar som driver en badplats i Bodens kommun
+  foreningstyp: [friluft, hembygd, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [09-30] }
+  krav:
+  - Badplatsen ska ha livräddningsutrustning, kontaktskyltning, position och larmrutiner, sanitet, sopkärl, eldplats och parkering
+  - Föreningen ska bedriva dokumenterat systematiskt underhåll och egenkontroll
+  - Kvitton och fakturor för underhållskostnader ska bifogas
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
+  belopp: 5 000 kr i årligt grundstöd; upp till 12 000 kr vid regelbunden och hög besöksfrekvens
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr
+  sen_ansokan: Ansökan efter den 30 september handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Detaljregeln för 2026 anger den 30 september.
+  senast_verifierad: '2026-08-18'
+- id: boden-skoterleder-skotsel
+  namn: Stöd till skötsel av skoterleder
+  kategori: [ovrig]
+  malgrupp: Skoterföreningar som underhåller prioriterade skoterleder i Bodens kommun
+  foreningstyp: [friluft, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Föreningen ska underhålla skoterled genom preparering, slyröjning och andra åtgärder för god framkomlighet
+  - Huvudleder till grannkommuner eller vedertagna utflyktsmål prioriteras
+  - Föreningen ska svara på kommunens inbjudan och delta i dialogmötet i november
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 280 000 kr
+  sen_ansokan: Kommunen skickar en inbjudan till dialogmötet; någon allmän sista svarsdag publiceras inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Anslaget fördelas i dialog och betalas ut i början av följande kalenderår.
+  senast_verifierad: '2026-08-18'
+- id: boden-foreningsjubileum
+  namn: Stöd till föreningsjubileum
+  kategori: [ovrig]
+  malgrupp: Föreningar i Boden som firar 25-, 50-, 75- eller 100-årsjubileum under året
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Föreningen ska fira 25, 50, 75 eller 100 års verksamhet under ansökningsåret
+  - Föreningen ska vara verksam i Bodens kommun
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
+  belopp: 2 500 kr vid 25 år, 5 000 kr vid 50 år, 7 500 kr vid 75 år och 10 000 kr vid 100 år
+  belopp_avser: per_forening
+  kommunens_pott: 25 000 kr
+  sen_ansokan: Kan sökas hela året
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödnivån följer föreningens jubileumsår.
+  senast_verifierad: '2026-08-18'
+- id: boden-ovriga-foreningsstod
+  namn: Övriga föreningsstöd
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  malgrupp: Föreningar med verksamhet, arrangemang, projekt eller investeringar som inte ryms inom kommunens övriga stöd
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
+  krav:
+  - Ansökan ska avse något som inte ryms inom regelverket för kommunens andra föreningsstöd
+  - Investeringar för barn och unga, miljö och energi, säkerhet, utrymningsvägar och tillgänglighet prioriteras
+  - Beskrivning, budget, andra kommunala stöd och övrig finansiering ska redovisas
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
+  - Beviljat stöd ska återredovisas skriftligt; stöd över 100 000 kr kan även kräva muntlig redovisning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 300 000 kr
+  sen_ansokan: Kan sökas hela året
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kultur-, fritids- och ungdomsnämnden beslutar efter samlad bedömning.
+  senast_verifierad: '2026-08-18'
 - id: boden-arligt-kulturverksamhetsstod
   namn: Årligt kulturverksamhetsstöd
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar i Boden som kontinuerligt bidrar till kulturlivet (arrangerande, kulturminnesvårdande eller producerande
-    föreningar m.fl.) med omfattande och regelbunden verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
+  kategori: [kultur]
+  malgrupp: Kulturföreningar med omfattande, regelbunden och långsiktig kulturverksamhet i Boden
+  foreningstyp: [kultur, hembygd]
+  deadlines: { typ: fasta, datum: [10-31] }
   krav:
-  - Föreningen ska vara registrerad i Föreningsportalen med uppladdade, justerade årsmöteshandlingar
-  - Verksamhetsplan och preliminär budget ska bifogas ansökan
-  - Bedöms utifrån omfattning, kvalitet, utvecklingspotential, inkludering/mångfald, barn- och ungdomsfokus samt samverkan
+  - Stödet ska avse föreningens basverksamhet, inte kommersiell produktion eller utgivning av särskilda medier
+  - Bedömningen omfattar verksamhetens omfattning, utveckling, långsiktighet, kvalitet, kulturarv, behov, mångfald, barn och unga samt samarbeten
+  - Verksamhetsplan och preliminär budget ska bifogas och föregående stöd vara redovisat före ny prövning
+  - Föreningen ska vara registrerad i Föreningsportalen med aktuella årsmöteshandlingar
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-kulturstod-och-arrangemangsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Redovisning senast 31 mars året efter beviljat stöd.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-verksamhetsstod-funktionsvariation
-  namn: Verksamhetsstöd riktat till föreningar för barn och ungdomar med funktionsvariationer
-  kategori:
-  - funktionsratt
-  malgrupp: Föreningar med verksamhet för personer med funktionsvariationer (anslutna till Funktionsrätt Boden eller Norrbottens
-    Parasportförbund)
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
-  krav:
-  - Föreningen ska vara registrerad i Föreningsportalen
-  - Verksamhetsplan för kommande verksamhetsår ska bifogas
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Redovisning senast 31 mars året efter (enligt den allmänna föreningsstödsguiden).
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: boden-skoterleder-skotsel
-  namn: Stöd för skötsel av skoterleder
-  kategori:
-  - ovrig
-  malgrupp: Skoterföreningar som underhåller skoterleder i Bodens kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
-  krav:
-  - Föreningen ska underhålla en skoterled (preparera underlag, röja sly, säkerställa framkomlighet)
-  - Föreningen ska vara registrerad i Föreningsportalen
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: 1 000 000 kr
+  sen_ansokan: Ansökan efter den 31 oktober handläggs inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beviljat stöd redovisas senast 31 mars året efter.
+  senast_verifierad: '2026-08-18'
 - id: boden-enskilda-utfartsvagar
   namn: Kommunalt bidrag till enskilda utfartsvägar
-  kategori:
-  - ovrig
-  malgrupp: Fastighetsägare och vägföreningar/samfälligheter längs enskilda utfartsvägar i Boden med minst en åretruntboende
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
+  kategori: [ovrig]
+  malgrupp: Vägföreningar och samfälligheter för enskilda utfartsvägar med minst en åretruntboende
+  foreningstyp: [annat]
+  deadlines: { typ: fasta, datum: [10-31] }
   krav:
-  - Minst en person bosatt vid vägen året runt
-  - Vägen ska ha vinterväghållning och vara farbar för personbil, och får inte stängas av för allmänheten utan kommunens godkännande
-  - Vägförening som ansöker ska bifoga stadgar och senaste årsmötesprotokoll
-  belopp: 9,62 kr/meter upp till 200 meter; 7,56 kr/meter för 201–500 meter; 5,50 kr/meter för 501–1000 meter; högst 5,50
-    kr/meter över 1001 meter om budget finns. Bidrag under 50 kr betalas inte ut.
-  sen_ansokan: Ny ansökan krävs varje år; e-tjänsten är endast öppen 1 mars–31 oktober
+  - Minst en person som bor vid vägen ska vara bosatt där året runt
+  - Vägen ska vinterunderhållas, vara farbar för personbil och inte stängas för allmänheten utan kommunens godkännande
+  - Bidragssträckan räknas från allmän väg eller statsbidragsväg till entrén minus 100 meter
+  - Karta och uppgifter om den längst bort boende ska bifogas; vägföreningar ska även bifoga stadgar och senaste årsmötesprotokoll
+  belopp: 9,62 kr/m upp till 200 m, 7,56 kr/m för 201–500 m, 5,50 kr/m för 501–1 000 m och högst 5,50 kr/m däröver om budget finns
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: E-tjänsten är öppen 1 mars–31 oktober och en ny ansökan krävs varje år
   kalla_url: https://boden.se/gator-och-trafik/gator-och-parkering/enskilda-vagar
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Administreras av Tekniska avdelningen (tekniska@boden.se), inte Kultur-, fritids- och ungdomsavdelningen. Ansökningsfönster
-    1 mars–31 oktober; 31 oktober skrivet som deadline-datum. Bidraget betalas ut en gång per år.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidrag under 50 kr betalas inte ut.
+  senast_verifierad: '2026-08-18'
 - id: boden-enskilda-statsbidragsvagar
-  namn: Bidrag till enskilda statsbidragsvägar (drift och underhåll)
-  kategori:
-  - ovrig
-  malgrupp: Vägar (samfälligheter/vägföreningar) som får eller kan få statsbidrag från Trafikverket för enskild väghållning
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Bidrag till enskilda statsbidragsvägar
+  kategori: [ovrig]
+  malgrupp: Vägföreningar och samfälligheter för vägar som får eller kan få statsbidrag från Trafikverket
+  foreningstyp: [annat]
+  deadlines: { typ: okand, datum: [] }
   krav:
-  - Vägen ska få, eller kunna få, statsbidrag från Trafikverket
-  - Bidraget beräknas utifrån Trafikverkets beräknade kostnad för vägen och vägkategori (A 30%, B 55%, C 10%)
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Vägen ska få eller kunna få statsbidrag från Trafikverket
+  - Stödet ska avse drift och underhåll av den enskilda vägen
+  - Bidraget beräknas på Trafikverkets beräknade kostnad och vägens kategori
+  belopp: 30 procent för kategori A, 55 procent för kategori B och 10 procent för kategori C av Trafikverkets beräknade kostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen ansökningstid; bidraget betalas ut januari–mars
   kalla_url: https://boden.se/gator-och-trafik/gator-och-parkering/enskilda-vagar
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Ingen publicerad ansökningsdeadline hittad — betalas ut januari–mars. Administreras av Tekniska avdelningen.
-    Skilt bidrag från det ovanstående (kommunalt bidrag till enskilda utfartsvägar utan statsbidrag).
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kategori A avser landsbygdsväg för fast boende, B tätare bebyggelse och C genomfartsväg.
+  senast_verifierad: '2026-08-18'
 - id: boden-projektmedel-byautveckling
   namn: Projektmedel till byautvecklingsgrupper
-  kategori:
-  - ovrig
-  malgrupp: Byautvecklingsgrupper i Bodens kommun med projekt/satsningar för landsbygdens utveckling
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [ovrig]
+  malgrupp: Byautvecklingsgrupper i Bodens kommun med projekt för landsbygdens utveckling
+  foreningstyp: [hembygd, social, annat]
+  deadlines: { typ: okand, datum: [] }
   krav:
-  - Ansökan sker via kommunens e-tjänster med e-legitimation
-  - Projektet ska uppfylla regler som Kommunledningskontoret Näringsliv tillsammans med Landsbygdsrådet tagit fram
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Sökanden ska vara en byautvecklingsgrupp i Bodens kommun
+  - Ansökan ska avse ett projekt eller en satsning för landsbygdens utveckling
+  - Ansökan lämnas i kommunens e-tjänst med e-legitimation
+  belopp: Kommunen publicerar inget generellt belopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen ansökningstid
   kalla_url: https://boden.se/samhalle-och-utveckling/samhallsutveckling/en-levande-landsbygd
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Skilt från Byapeng — kompletterande projektstöd för byautvecklingsgrupper. Administreras av Kommunledningskontoret
-    Näringsliv, inte Kultur-, fritids- och ungdomsavdelningen.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Projektmedel är separat från Byapeng och bygdemedel.
+  senast_verifierad: '2026-08-18'
+- id: boden-bygdemedel
+  namn: Bygdemedel
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade, öppna organisationer med organisationsnummer som verkar i en bygd utanför tätort
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: okand, datum: [] }
+  krav:
+  - Organisationen ska vara registrerad, öppen för alla, ha organisationsnummer och verka i bygden
+  - Investeringen ska vara till allmän nytta, exempelvis bygdegård, fast utrustning, idrottsanläggning, stig eller led
+  - Stöd ges inte till drift, lösa inventarier, fordon, genomförda investeringar, eget arbete eller kommersiell verksamhet
+  - Ansökan lämnas i Länsstyrelsens e-tjänst och Bodens kommun yttrar sig om prioriteringen
+  belopp: Upp till 70 procent av den totala kostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bodens kommun publicerar ingen sista ansökningsdag
+  kalla_url: https://boden.se/uppleva-och-gora/foreningsliv-och-bidrag/utveckling-med-hjalp-av-bygdemedel
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Projekt utanför tätort, med bred samverkan och flera finansiärer prioriteras.
+  senast_verifierad: '2026-08-18'
 - id: boden-kulturstipendium
   namn: Bodens kulturstipendium
-  kategori:
-  - kultur
-  malgrupp: Personer och kulturaktörer (inklusive organisationer/föreningar) folkbokförda och verksamma i Boden som gjort
-    betydande insatser för kulturlivet
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [kultur]
+  malgrupp: Kulturaktörer i Boden som gjort betydande insatser för kommunens kulturliv
+  foreningstyp: [kultur, hembygd, annat]
+  deadlines: { typ: okand, datum: [] }
   krav:
-  - Nominering kan lämnas av organisation, företag eller enskild person; motivering ska bifogas
-  - Kultur-, fritids- och ungdomsnämnden utser stipendiat utifrån inkomna nomineringar
-  belopp: 20 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://boden.se/uppleva-och-gora/kultur-och-besoksmal/kulturstipendium
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Delas ut vart tredje år i samband med Eldsjälsgalan (senast 2025). INTE automatiskt uteslutet trots stipendieformen
-    — boden.se anger uttryckligen att både enskilda personer OCH kulturaktörer/organisationer kan komma ifråga (§2.4-undantag
-    för stipendier som kan gå till förening). Inget fast ansökningsdatum publicerat; nomineringsperiod annonseras när den
-    öppnar.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Den föreslagna kulturaktören ska vara folkbokförd och verksam i Bodens kommun
+  - Insatsen ska vara betydande och värdefull för kommunens kulturella utveckling
+  - Nomineringen ska ange vem som föreslås och innehålla en motivering
+  belopp: 20 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Nomineringsperioden utlyses inför utdelningen; någon fast årlig dag publiceras inte
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stipendiet delas ut vart tredje år och kan tillfalla en kulturaktör.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: boden-registrering-foreningsportalen
-  vad: Bli registrerad i Föreningsportalen
-  beskrivning: Föreningen ska ha sitt säte i Boden och huvudsakligen bedriva verksamhet i kommunen, vara ideell och öppen
-    för alla, demokratiskt uppbyggd med stadgar, styrelse och medlemsavgift, samt arbeta aktivt mot alkohol, narkotika, dopning
-    och tobak (ANDT). Föreningen eller administratör fyller i en fullmakt, bifogar stadgar samt årsmöteshandlingar och skickar
-    till Kultur-, fritids- och ungdomsavdelningen. Föreningsservice beviljar åtkomst och skickar inloggning via BankID.
-  system: Föreningsportalen (Actor Smartbook)
+  vad: Registrering och årliga handlingar i Föreningsportalen
+  beskrivning: Föreningen ska vara ideell, demokratisk och öppen, ha säte och huvudsaklig verksamhet i Boden, ha varit verksam i kommunen minst sex månader samt årligen ladda upp justerade årsmöteshandlingar och registrera medlemsantal per den 31 december.
+  system: Föreningsportalen
   ledtid: null
-  ledtid_text: Ingen publicerad handläggningstid hittad
-  giltighet: null
+  ledtid_text: Ingen publicerad handläggningstid
+  giltighet: Föreningens uppgifter och handlingar ska förnyas för varje kalenderår
   ordning: 1
-  kalla_url: https://boden.se/steg-for-steg-guider/ansok-om-foreningsstod
-  giltighet_status: okand
+  kalla_url: https://boden.se/download/18.3f55a43d19b2bd455d06f8af/1767950472232/Regler%20och%20riktlinjer%20fo%CC%88r%20fo%CC%88reningsto%CC%88d%20och%20stipendier%202026.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null

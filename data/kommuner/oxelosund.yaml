@@ -4,120 +4,154 @@ lan: Södermanlands län
 befolkning: 11985
 forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
-  namn: E-tjänst
-  url: https://www.oxelosund.se/e-tjanster-och-blanketter/bidrag-till-foreningar-och-liknande-grupper---ansokan
-kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-verifierad: '2026-08-02'
+  namn: FRI Webb-Bidrag
+  url: https://fri.oxelosund.se/bidrag/
+kalla_url: &huvud https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.oxelosund.se/download/18.249a210019e630615b32b154/1780312436084/Riktlinjer%20f%C3%B6r%20st%C3%B6d%20till%20f%C3%B6reningar%20i%20Oxel%C3%B6sunds%20kommun.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: oxelosund-verksamhetsbidrag
   namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar i Oxelösunds kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med regelbunden verksamhet i Oxelösund eller för kommuninvånare
+  deadlines: {typ: fasta, datum: [10-01]}
+  krav:
+  - Föreningen ska vara ideell, demokratiskt uppbyggd, ha organisationsnummer, stadgar, minst tre styrelseledamöter, vald revisor och minst 10 aktiva medlemmar
+  - Verksamheten ska vara regelbunden och dokumenterad samt bedrivas i Oxelösund eller ha återkommande lokal verksamhet och deltagare från kommunen
+  - Ansökan ska innehålla kommande års verksamhetsidé och budget samt föregående års verksamhetsberättelse, ekonomiska redovisning och revisionsberättelse
+  - Föreningen ska följa kommunens värdegrund och delta med två styrelserepresentanter vid kommunens uppföljnings- och dialogmöten
+  - Bidraget bedöms efter verksamhetens omfattning, målgrupp och koppling till kommunens mål; barn- och ungdomsverksamhet prioriteras
+  belopp: Individuellt beslutat efter verksamhetens omfattning, målgrupp, kommunala mål och den dialogbaserade överenskommelsen; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästa verksamhetsår ska lämnas senast 1 oktober; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: oxelosund-anlaggningsstod
   namn: Anläggningsstöd
-  kategori:
-  - ovrig
-  malgrupp: Föreningar med egen anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Barn- och ungdomsföreningar som investerar i eller utvecklar en lokal anläggning
+  deadlines: {typ: fasta, datum: [10-01]}
+  krav:
+  - Föreningen ska bedriva barn- och ungdomsverksamhet och uppfylla kommunens allmänna bidragsvillkor
+  - Anläggningen ska ligga i Oxelösunds kommun och investeringen eller utvecklingen ska vara till nytta för föreningens verksamhet
+  - Ansökan ska innehålla en anläggningsbeskrivning, budget och uppgift om föreningens egen finansiering
+  - Kommunen bedömer behov, kommunal betydelse och egenfinansiering innan stödets storlek beslutas
+  - Investeringen eller inköpet ska styrkas innan bidraget betalas ut
+  belopp: Individuellt beslutat efter behov, kommunal betydelse och egen finansiering; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästa verksamhetsår ska lämnas senast 1 oktober; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: oxelosund-startbidrag
   namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nybildade föreningar
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Kommunens sida anger 1 oktober för verksamhetsbidrag, anläggningsstöd och jubileumsbidrag men inte uttryckligen
-    för startbidrag. Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- id: oxelosund-jubileumsbidrag
-  namn: Jubileumsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som firar jubileum
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nybildade ideella föreningar i Oxelösunds kommun
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska vara nybildad och uppfylla kommunens allmänna villkor för bidragsberättigade föreningar
+  - Ansökan ska lämnas inom sex månader från föreningens bildande
+  - Stadgar, styrelseuppgifter, verksamhetsplan och budget ska bifogas ansökan
+  - Föreningen ska ha organisationsnummer, medlemsavgift, vald revisor och minst 10 aktiva medlemmar
+  belopp: 1 500 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under året men senast sex månader efter att föreningen bildades
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: oxelosund-studieforbundsbidrag
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund som bedriver verksamhet i Oxelösunds kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-01
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med folkbildningsverksamhet i Oxelösund
+  deadlines: {typ: fasta, datum: [03-01]}
   krav:
-  - Ansökan avser innevarande verksamhetsår och ska följa kommunens riktlinjer för studieförbund
+  - Studieförbundets centralorganisation ska vara godkänd för statsbidrag och verksamheten ska uppfylla statens villkor och kommunens lokala mål
+  - Grundbidrag kräver minst 150 studiecirkeltimmar och minst 25 unika deltagare folkbokförda i Oxelösund
+  - Ansökan ska innehålla verksamhetsidé och budget samt föregående års verksamhetsberättelse, årsbokslut och revisionsberättelse
+  - Senast 1 maj ska studieförbundet även lämna kommunintyg, verksamhetsplan, ekonomisk redovisning och övriga årsunderlag i FRI
+  - Verksamheten och en eventuell samverkansöverenskommelse följs upp i dialog med kommunen
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  anteckning: Kommunen publicerar separat riktlinje och tidsplan för bidrag till studieförbund.
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens studieförbundsanslag fördelas till 50 procent som grundbidrag och 50 procent genom samverkansöverenskommelser; totalsumman publiceras inte i riktlinjen
+  sen_ansokan: Ansökan ska lämnas senast 1 mars; fullständiga årsunderlag ska vara uppladdade senast 1 maj
+  kalla_url: &studie https://www.oxelosund.se/download/18.1055b2c8184b406e1d37db41/1670578426245/Fastst%C3%A4llda%20Riktlinjer%20f%C3%B6r%20Oxel%C3%B6sunds%20kommun%20g%C3%A4llande%20bidrag%20till%20studief%C3%B6rbunden.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: oxelosund-subventionerade-kommunala-lokaler
+  namn: Subventionerade kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Lokala föreningar och studieförbund som bokar kommunala lokaler eller idrottsanläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Bokningen ska avse en kommunal samlingslokal, sporthall, gymnastiksal, simhall, fotbollsplan eller friidrottsanläggning där föreningstaxa gäller
+  - Den lägre interna föreningstaxan förutsätter att föreningen eller gruppen hör hemma i Oxelösund
+  - Barn- och ungdomsverksamhet får en lägre taxa än vuxenverksamhet i idrottsanläggningarna
+  - Bokaren ska följa kommunens bokningsvillkor och betala eventuella extra kostnader för exempelvis städning
+  belopp: 2026 års interna föreningstaxa är från 30 kr per timme för barn- och ungdomsverksamhet och 50 kr per timme för möten i Koordinatens samlingslokaler
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag för den subventionerade föreningstaxan
+  kalla_url: &taxor https://www.oxelosund.se/kommun-och-politik/planer-och-styrdokument
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: oxelosund-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: E-tjänst
+- id: oxelosund-bidragsberattigad-forening
+  vad: Grundvillkor för bidragsberättigad förening
+  beskrivning: Föreningen ska vara ideell, icke vinstdrivande och demokratiskt uppbyggd, ha organisationsnummer, stadgar, minst tre styrelseledamöter, vald revisor, medlemsavgift och minst 10 aktiva medlemmar. Verksamheten ska vara regelbunden, dokumenterad och bedrivas i Oxelösund eller återkommande gagna kommuninvånare.
+  system: FRI Webb-Bidrag
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid för godkännandet
+  giltighet: kalenderår
   ordning: 1
-  kalla_url: https://www.oxelosund.se/uppleva-och-gora/foreningar-och-studieforbund
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: oxelosund-arliga-handlingar
+  vad: Årliga föreningshandlingar och aktuella uppgifter
+  beskrivning: Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse, kommande verksamhetsplan och budget samt medlems- och deltagaruppgifter ska lämnas årligen. Föreningens dokumenterade värdegrund ska hållas aktuell och laddas upp på nytt när den ändras.
+  system: FRI Webb-Bidrag
+  ledtid: null
+  ledtid_text: Handlingarna lämnas årligen i samband med ansökan; kommunen anger ingen separat förnyelsedag
+  giltighet: kalenderår
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null

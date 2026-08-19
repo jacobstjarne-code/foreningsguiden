@@ -2,274 +2,439 @@ kommun: Kävlinge
 kommun_slug: kavlinge
 lan: Skåne län
 befolkning: 32725
-forvaltning: Arbetsliv- och fritidsnämnden
+forvaltning: Arbetsliv- och fritidsnämnden, omsorgsnämnden samt kommunstyrelsen
 ansokningssystem:
-  namn: Aktivitetskort på Nätet (ApN) för idrottsföreningar; E-tjänster för övriga
+  namn: Aktivitetskort på Nätet (ApN), kommunens e-tjänster och föreningsregister
   url: https://e-tjanster.kavlinge.se/
 kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
-verifierad: 2026-07-27
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: kavlinge-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  malgrupp: Grupper för åldersgrupp 6-20 år, samt aktiviteter för personer med funktionsnedsättning
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  kategori: [idrott, funktionsratt]
+  malgrupp: Idrotts- och friluftsföreningar med gruppverksamhet för deltagare 6–20 år eller deltagare med funktionsnedsättning oavsett ålder.
+  foreningstyp: [idrott, friluft]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Minst 15 godkända träffar per period
-  - Ledare minst 13 år gamla
-  - Minst 3 deltagare per träff
-  - Minst 45 minuters varaktighet per träff
-  - Registrering i ApN
-  belopp: 14.30 kronor per deltagartillfälle
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Föreningen ska uppfylla kommunens gemensamma villkor för bidragsberättigad förening och ha minst 15 godkända sammankomster under terminen
+  - En sammankomst ska pågå minst 45 minuter, ha minst tre och högst 30 stödberättigade deltagare per ledare och innehålla gemensam samling och avslutning
+  - Ledaren ska vara minst 13 år och får inte ansvara för flera samtidiga gruppaktiviteter; deltagare och ledare ska vara medlemmar
+  - Deltagare ska vara 6–20 år; för deltagare med funktionsnedsättning finns ingen övre åldersgräns och dubbel ersättning kan sökas
+  - Närvaro med personnummer och plats ska registreras digitalt direkt i anslutning till aktiviteten och firmatecknaren ska styrka ansökan
+  - Stöd ges inte för studiecirklar, lärgrupper, skoltid eller passiva aktiviteter som styrelsemöten, teorigenomgångar och evenemangsbesök
+  belopp: 14,30 kr per deltagartillfälle; dubbelt belopp för deltagare med funktionsnedsättning efter särskild ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Höstterminen söks senast 25 februari och vårterminen senast 25 augusti. En ansökan som är 1–14 dagar sen minskas 5 procent, 15–30 dagar sen minskas 10 procent och efter 30 dagar behandlas den inte.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Ansöks via Aktivitetskort på Nätet (ApN) för idrotts- och friluftsföreningar. Två perioder per år.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Närvaron registreras och ansökan skickas i ApN. Sammanhängande läger och hajker kan ge ett eller två deltagartillfällen beroende på längd.
   alder_min: 6
-  foreningstyp:
-  - idrott
-  - friluft
-  senast_verifierad: '2026-08-03'
+  alder_max: 20
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-lokalbidrag-hyrd
-  namn: Lokalbidrag – Hyrd lokal
-  kategori:
-  - idrott
-  malgrupp: Föreningar med hyrd lokal för verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  namn: Lokalbidrag – hyrd lokal för idrotts- och friluftsföreningar
+  kategori: [idrott, ovrig]
+  malgrupp: Idrotts- och friluftsföreningar som hyr en verksamhetslokal och redovisar lokalt aktivitetsstöd.
+  foreningstyp: [idrott, friluft]
+  deadlines: { typ: fasta, datum: [02-25, 08-25] }
   krav:
-  - Minst 30 godkända träffar föregående år
-  - Lokal belägen i Kävlinge
-  - Relevant lokaldokumentation
-  belopp: Upp till 80% av berättigade kostnader, max 26 kronor per deltagartillfälle
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Föreningen ska uppfylla grundvillkoren och ha redovisat minst 30 godkända sammankomster föregående år
+  - Lokalen ska vara relevant för verksamheten och normalt ligga i Kävlinge kommun
+  - Bidragsgrundande kostnader är årshyra, el eller värme, vatten och avlopp, sophantering, sotning och lokal- eller byggnadsförsäkring
+  - Kommunalt subventionerad lokal kan inte få stödet och samma lokal kan inte få både hyres- och driftbidrag
+  - Föreningen ska kunna styrka verksamheten i lokalen och första gången bifoga samtliga avtal, avgifter och utgifter
+  belopp: Högst 80 procent av godkända kostnader och högst 26 kr per deltagartillfälle; friluftsförenings förråd kan få högst 50 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För januari–juni är sista dagen 25 augusti och för juli–december 25 februari. Kommunens generella förseningsavdrag gäller.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För idrotts- och friluftsföreningar med hyrd lokal. Två ansökningsperioder per år.
-  foreningstyp:
-  - idrott
-  - friluft
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Lokal i annan kommun kan godtas när lämplig lokal saknas i Kävlinge och föreningens ordinarie verksamhet finns i kommunen.
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-lokalbidrag-drift
-  namn: Lokalbidrag – Drift (egen lokal)
-  kategori:
-  - idrott
-  malgrupp: Föreningar med egen lokal för verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
+  namn: Lokalbidrag – drift av egen lokal för idrotts- och friluftsföreningar
+  kategori: [idrott, ovrig]
+  malgrupp: Idrotts- och friluftsföreningar som äger och driver en relevant lokal eller anläggning i Kävlinge kommun.
+  foreningstyp: [idrott, friluft]
+  deadlines: { typ: fasta, datum: [02-25] }
   krav:
-  - Ägd lokal för föreningens verksamhet
-  - Fokus på idrott eller friluftsliv
-  - Minst 30 träffar föregående år (50% reducering om lägre)
-  - Dokumenterade driftskostnader
-  belopp: Upp till 35% av föregående års kostnader; max 60000 kronor
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Föreningen ska uppfylla grundvillkoren och ha idrott eller friluftsliv i fokus
+  - Bidraget ska avse föreningens egen, relevanta lokal eller anläggning i Kävlinge kommun
+  - Godkända kostnader är låneränta, arrende, el eller värme, vatten och avlopp, sophantering, sotning och försäkring samt nödvändiga fordonskostnader för verksamhetsytor
+  - Kostnaderna ska avse föregående kalenderår, kunna styrkas och bidraget betalas i efterskott
+  - Samma lokal kan inte få både hyres- och driftbidrag
+  belopp: Högst 35 procent av godkända kostnader och högst 60 000 kr; beloppet halveras om föreningen inte fått aktivitetsstöd för minst 30 sammankomster
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående kalenderår lämnas senast 25 februari. Kommunens generella förseningsavdrag gäller.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För föreningar med egen lokal. Endast en ansökningsperiod per år.
-  foreningstyp:
-  - idrott
-  - friluft
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen avgör om lokalens upplåtelseform ska bedömas som hyra eller egen drift.
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-lokalbidrag-drift-utveckling
+  namn: Lokalbidrag drift – utveckling
+  kategori: [idrott, ovrig]
+  malgrupp: Idrotts- och friluftsföreningar med egen lokal som vill genomföra ett utvecklingsprojekt för lokalen.
+  foreningstyp: [idrott, friluft]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Föreningen ska uppfylla grundvillkoren och tillhöra kategorin idrotts- eller friluftsförening
+  - Föreningen ska ha fått driftbidrag för lokalen föregående år och bedömas få det även kommande år
+  - Projektet ska i första hand förbättra hållbarhet, tillgänglighet eller säkerhet i den egna lokalen
+  - Ansökan ska innehålla utförlig projektbeskrivning med syfte, budget och tidsplan och lämnas före projektstart
+  - Förändringar av projekt, tidsplan eller budget ska meddelas och godkännas av kommunen
+  belopp: Beslutas individuellt med hänsyn till tillgängliga medel; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men ska komma in i god tid innan projektet startar.
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas i förskott efter beslut.
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-lokalbidrag-kultur-social
+  namn: Lokalbidrag för kulturföreningar och föreningar inom det sociala området
+  kategori: [kultur, social, ovrig]
+  malgrupp: Kulturföreningar och sociala föreningar som hyr, arrenderar eller driver en relevant lokal i Kävlinge kommun.
+  foreningstyp: [kultur, social]
+  deadlines: { typ: fasta, datum: [02-25] }
+  krav:
+  - Föreningen ska vara berättigad till verksamhetsbidrag för kulturförening eller förening inom det sociala området
+  - Föregående års verksamhet i lokalen ska vara redovisad enligt villkoren för föreningens verksamhetsbidrag
+  - Lokalen ska vara relevant för verksamheten och ligga i Kävlinge kommun
+  - Godkända kostnader är årshyra, el eller värme, vatten och avlopp, sophantering, sotning och lokalförsäkring
+  - Kommunalt subventionerad lokal omfattas inte; kostnader, avtal och avgifter ska kunna styrkas och lämnas fullständigt minst vart femte år eller på begäran
+  belopp: Högst 35 procent av föregående kalenderårs godkända kostnader och högst 40 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående kalenderår lämnas senast 25 februari. Kommunens generella förseningsavdrag gäller.
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas ut i efterskott.
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-lokalbidrag-kultur-social-utveckling
+  namn: Lokalbidrag – utveckling för kultur- och sociala föreningar
+  kategori: [kultur, social, ovrig]
+  malgrupp: Kulturföreningar och sociala föreningar med egen lokal som vill genomföra ett utvecklingsprojekt för lokalen.
+  foreningstyp: [kultur, social]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Föreningen ska uppfylla grundvillkoren och tillhöra kategorin kulturförening eller förening inom det sociala området
+  - Föreningen ska ha fått lokalbidrag för lokalen föregående år och bedömas få det även kommande år
+  - Projektet ska i första hand förbättra hållbarhet, tillgänglighet eller säkerhet i den egna lokalen
+  - Ansökan ska innehålla utförlig projektbeskrivning med syfte, budget och tidsplan och lämnas före projektstart
+  - Förändringar av projekt, tidsplan eller budget ska meddelas och godkännas av kommunen
+  belopp: Beslutas individuellt med hänsyn till tillgängliga medel; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men ska komma in i god tid innan projektet startar.
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget betalas i förskott efter beslut.
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-startbidrag
   namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Nya föreningar eller nya avdelningar som inte varit aktiva i kommunen
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nybildade föreningar eller befintliga föreningar som startar en sektion med ny verksamhet i Kävlinge kommun.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: lopande, datum: [] }
   krav:
-  - Ny förening eller avdelning
-  - Inte aktiv i kommunen föregående fem år
-  belopp: 3000 kronor
-  sen_ansokan: Löpande
+  - Föreningen ska lämna protokoll från bildandemötet och antagna stadgar
+  - Föreningen ska registrera sig i kommunens föreningsregister och uppfylla grundvillkoren för bidragsberättigad förening
+  - Föreningen eller den nya sektionen får inte ha varit verksam i kommunen under de senaste fem åren
+  - Firmatecknaren ska bestyrka ansökan och föreningen ska ange organisationsnummer, medlemsantal och konto i föreningens namn
+  belopp: 3 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Engångsbidrag för nya föreningar eller nya avdelningar. Löpande ansökning före projektstart.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet gäller både en ny förening och en ny sektion som innebär ny verksamhet i en befintlig förening.
   min_verksamhetstid_manader: 0
-  senast_verifierad: '2026-08-03'
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-utvecklingsbidrag
   namn: Utvecklingsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar för utvecklingsprojekt
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Kultur-, idrotts- och friluftsföreningar som genomför ett projekt eller arrangemang som förnyar eller utvecklar föreningen eller det offentliga kulturlivet.
+  foreningstyp: [idrott, kultur, friluft]
+  deadlines: { typ: relativ, datum: [] }
   krav:
-  - Skriftlig projektbeskrivning
-  - Budget och tidplan
-  - Max tre bidrag för samma/liknande projekt
-  - Rapport ska lämnas inom 2 månader efter projektslut
-  belopp: null
-  sen_ansokan: Löpande, före projektstart
+  - Föreningen ska uppfylla kommunens gemensamma villkor för bidragsberättigad förening
+  - Projektet eller arrangemanget ska genomföras i Kävlinge kommun och vara nytt eller utvecklande för verksamheten
+  - Ansökan ska innehålla utförlig projektbeskrivning med syfte, budget och tidsplan och lämnas innan projektet startar
+  - Samma eller liknande projekt kan beviljas utvecklingsbidrag högst tre gånger
+  - Genomförande och kostnader ska redovisas skriftligt senast två månader efter projektet
+  - Projekt som inte startat inom ett år samt medel som används till annat än beslutet ska återbetalas; ändringar ska godkännas av kommunen
+  belopp: Beslutas individuellt; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året men ska komma in före projektstart.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Bidrag för utvecklingsprojekt. Bedöms individuellt.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Projekt som inkluderar målgrupper med särskilt behov prioriteras; idrotts- och friluftsprojekt med plan för fortsatt verksamhet prioriteras också.
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-verksamhetsbidrag-kultur
   namn: Verksamhetsbidrag för kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-15
-    - 10-15
+  kategori: [kultur]
+  malgrupp: Kulturföreningar inom alla kulturområden som bidrar till kulturupplevelser och eget skapande i Kävlinge kommun.
+  foreningstyp: [kultur]
+  deadlines: { typ: fasta, datum: [10-15] }
   krav:
-  - Verksamhetsplan och budget
-  - Medlemsdokumentation
-  - Minsta medlemstal och aktivitetskrav
-  belopp: null
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Föreningen ska uppfylla kommunens gemensamma villkor för bidragsberättigad förening och vara registrerad i föreningsregistret
+  - Ansökan ska innehålla verksamhetsplan och budget för det verksamhetsår ansökan gäller
+  - Föreningen ska lämna uppgifter om föregående års verksamhet, verksamhetens inriktning, målgrupper, lokaler och planerade offentliga arrangemang
+  - Bidraget ska redovisas senast sex månader efter verksamhetsårets slut
+  belopp: Bestäms efter verksamhetens omfattning, bredd och inriktning, antalet offentliga arrangemang och årets antal sökande; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 15 september–15 oktober. Kommunens generella förseningsavdrag gäller.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För kulturföreningar. Deadline 15 september - 15 oktober.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Barns och ungas rätt till kultur lyfts särskilt i bidragets syfte.
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-verksamhetsbidrag-social
-  namn: Verksamhetsbidrag för sociala föreningar
-  kategori:
-  - ovrig
-  malgrupp: Föreningar inom det sociala området
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
-    - 05-15
+  namn: Verksamhetsbidrag för föreningar inom det sociala området
+  kategori: [social]
+  malgrupp: Föreningar vars verksamhet primärt syftar till att hjälpa människor och har anknytning till Kävlinge kommun.
+  foreningstyp: [social]
+  deadlines: { typ: fasta, datum: [05-15] }
   krav:
-  - Verksamhetsplan och budget
-  - Medlemsdokumentation
-  - Beskrivning av senaste aktiviteter
-  - Medlemmarnas koppling till kommunen
-  belopp: null
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Föreningen ska uppfylla kommunens gemensamma villkor för bidragsberättigad förening
+  - Ansökan ska beskriva föreningens verksamhet under det senaste verksamhetsåret
+  - Ansökan ska ange hur många medlemmar som har anknytning till Kävlinge kommun
+  - Firmatecknaren ska styrka uppgifterna och medel som används till annat än beslutet ska återbetalas
+  belopp: Bestäms efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 15 april–15 maj. Kommunens generella förseningsavdrag gäller.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För föreningar inom socialt område. Deadline 15 april - 15 maj.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: E-tjänsten anger att nästa period öppnar den 15 april 2027.
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-verksamhetsbidrag-ovrig
-  namn: Verksamhetsbidrag övrig förening
-  kategori:
-  - ovrig
-  malgrupp: Övriga föreningar som inte får andra bidragskategorier
-  deadlines:
-    typ: fasta
-    datum:
-    - 05-01
+  namn: Verksamhetsbidrag för övrig förening
+  kategori: [ovrig]
+  malgrupp: Bidragsberättigade föreningar som inte hör till någon av kommunens särskilda föreningskategorier.
+  foreningstyp: [hembygd, ungdom, annat]
+  deadlines: { typ: fasta, datum: [05-01] }
   krav:
-  - Kan inte ha fått bidrag från annan kategori
-  - Verksamhetsbeskrivning
-  - Medlemsantal
-  belopp: null
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Föreningen ska uppfylla kommunens gemensamma villkor för bidragsberättigad förening
+  - Föreningen ska sakna självklar tillhörighet till kommunens kategorier för idrott, friluftsliv, kultur, social verksamhet eller studieförbund
+  - Ansökan ska beskriva föreningens verksamhet under det senaste verksamhetsåret
+  - Ansökan ska ange föreningens medlemsantal och bestyrkas av firmatecknaren
+  belopp: Bestäms efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 1 maj. Kommunens generella förseningsavdrag gäller.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För övriga föreningar som inte passar in i andra kategorier. Deadline 1 maj.
-  senast_verifierad: '2026-08-03'
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Nya föreningar utan självklar kategori får föreningstyp i dialog med kommunens handläggare.
+  senast_verifierad: '2026-08-18'
 - id: kavlinge-studieforbundsbidrag
   namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  malgrupp: Studieförbund med godkännande från Folkbildningsrådet
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
-    - 05-15
+  kategori: [kultur]
+  malgrupp: Studieförbund som är verksamma i Kävlinge kommun och vars centrala organisation är godkänd av Folkbildningsrådet.
+  foreningstyp: [kultur, annat]
+  deadlines: { typ: fasta, datum: [05-15] }
   krav:
-  - Godkännande från Folkbildningsrådet
-  - Årlig dialogmöte med kommun
-  belopp: 'Tre komponenter: 65% grundbidrag (föregående två år); 20%+ volymökning (senaste år); 15% målgrupper'
-  sen_ansokan: '1-14 dagar: 5% reducering; 15-30 dagar: 10% reducering; Efter 30 dagar: ej behandlad'
+  - Studieförbundet ska uppfylla de gemensamma villkoren för bidragsberättigad förening
+  - Den centrala organisationen ska vara godkänd av Folkbildningsrådet för statsbidrag
+  - Studieförbundet ska delta i ett årligt dialogmöte med kommunen
+  - Ansökan ska redovisa studietimmar, unika deltagare och verksamhet i Kävlinge kommun och skilja ut kommunen om organisationen verkar i flera kommuner
+  - Firmatecknaren ska styrka uppgifterna i ansökan
+  belopp: Fördelas som 65 procent grundbidrag, minst 20 procent volymbidrag och 15 procent målgruppsbidrag enligt redovisad verksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 15 april–15 maj. Kommunens generella förseningsavdrag gäller.
   kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: För studieförbund med Folkbildningsrådet-godkännande. Deadline 15 april - 15 maj.
-  foreningstyp:
-  - kultur
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ett studieförbund kan få högst 20 procent av årets målgruppsdel; återstående medel förs till volymdelen.
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-omsorg-aldre
+  namn: Föreningsbidrag inom äldreomsorg
+  kategori: [pensionar, social]
+  malgrupp: Pensionärsföreningar och andra ideella föreningar med verksamhet av intresse för äldre i Kävlinge kommun.
+  foreningstyp: [social, annat]
+  deadlines: { typ: fasta, datum: [08-31] }
+  krav:
+  - Föreningen ska ha minst tio medlemmar i Kävlinge kommun och bedriva verksamhet för kommuninvånare
+  - Föreningen ska vara ansluten till en erkänd riksorganisation och uppfylla kommunens grundvillkor för bidragsberättigad förening
+  - Verksamhetsberättelsen ska ange genomförda aktiviteter och medlemsantal
+  - För medlemsbaserat pensionärsbidrag räknas endast medlemmar som är folkbokförda i Kävlinge kommun
+  - Föreningen bör beskriva sitt arbete mot ofrivillig ensamhet bland äldre
+  belopp: Pensionärsföreningar får 65 kr per medlem folkbokförd i Kävlinge kommun; andra äldreorganisationer kan få verksamhetsbidrag efter prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 augusti och avser nästkommande års bidrag.
+  kalla_url: https://e-tjanster.kavlinge.se/fileconnector/file/Omsorg/Sammanst%C3%A4llning%20av%20regler%20f%C3%B6r%20omsorgsn%C3%A4mndens%20f%C3%B6reningsbidrag%20%283%29.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Pensionärsföreningar får använda omsorgens träffpunktslokaler utan kostnad.
+  min_medlemmar: 10
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-omsorg-lss-socialpsykiatri
+  namn: Föreningsbidrag inom LSS och socialpsykiatri
+  kategori: [funktionsratt, social]
+  malgrupp: Föreningar som är aktiva inom LSS eller socialpsykiatri och har medlemmar i Kävlinge kommun.
+  foreningstyp: [social, annat]
+  deadlines: { typ: fasta, datum: [08-31] }
+  krav:
+  - Föreningen ska vara aktiv och bedriva verksamhet av intresse för målgrupper inom LSS eller socialpsykiatri
+  - Föreningen ska ha minst tio medlemmar och medlemmar i Kävlinge kommun
+  - Föreningen ska vara ansluten till en erkänd riksorganisation och bedriva verksamhet för kommuninvånare
+  - Verksamhetsberättelsen ska ange genomförda aktiviteter och medlemsantal
+  - Föreningen bör bidra till utveckling och ökad kunskap genom deltagande i Funktionsrättsrådet eller kommunens LSS-samverkan
+  belopp: 1 000 kr per förening och 80 kr per medlem folkbokförd i Kävlinge kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 augusti och avser nästkommande års bidrag.
+  kalla_url: https://e-tjanster.kavlinge.se/fileconnector/file/Omsorg/Sammanst%C3%A4llning%20av%20regler%20f%C3%B6r%20omsorgsn%C3%A4mndens%20f%C3%B6reningsbidrag%20%283%29.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ansökan görs i omsorgsnämndens gemensamma e-tjänst för föreningsbidrag.
+  min_medlemmar: 10
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-integrationsbidrag
+  namn: Integrationsbidrag
+  kategori: [social, ovrig]
+  malgrupp: Föreningar och frivilligorganisationer i Kävlinge kommun som genomför aktiviteter för nyanländas integration.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: relativ, datum: [] }
+  krav:
+  - Aktiviteten ska förbättra nyanländas möjligheter att integreras i det svenska samhället
+  - Projektet ska engagera nyanlända i ordinarie verksamhet eller skapa nya kontakter mellan nyanlända och civilsamhället
+  - Aktiviteter som involverar barn och ungdomar ska ges särskilt fokus
+  - Ansökan ska innehålla projektbeskrivning med syfte, budget och tidsplan och lämnas innan projektet startar
+  - Genomförande och kostnader ska redovisas senast två månader efter projektet; ej genomförda eller felanvända medel kan återkrävas
+  belopp: Bestäms efter individuell prövning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året men ska komma in före projektstart.
+  kalla_url: https://e-tjanster.kavlinge.se/oversikt/overview/120
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet finns i den kvarvarande e-tjänsteportalen men saknas i den publicerade föreningsbidragsmenyn.
+  senast_verifierad: '2026-08-18'
+- id: kavlinge-sponsring
+  namn: Sponsring
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och evenemangsarrangörer som erbjuder kommunen en tydlig motprestation och positiv exponering; även enskilda elitidrottare kan omfattas.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  deadlines: { typ: fasta, datum: [05-20, 12-15] }
+  krav:
+  - Sponsringen ska bygga på ett affärsmässigt avtal med ömsesidig nytta och en motprestation i form av exponering
+  - Samarbetet ska ge kommunen positiv profil eller goodwill och ligga i linje med kommunens inriktning och värdegrund
+  - Mottagaren får inte ha förfallna fakturor hos kommunen eller obetalda skatter eller socialförsäkringsavgifter
+  - Ansökan ska beskriva verksamhet eller evenemang, målgrupp, räckvidd, uppmärksamhetsvärde och erbjudna motprestationer
+  - Alla sponsringsaktiviteter utom köp av reklamplats till och med 15 000 kr ska regleras i ett undertecknat avtal och följas upp
+  belopp: Sponsringens värde fastställs efter risk- och nyttobedömning och i avtal; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Riktlinjen anger 15 december året före sponsringsåret för våren och 20 maj under sponsringsåret för hösten. E-tjänsten hade en särskild sista dag den 4 maj för sommar och höst 2026.
+  kalla_url: https://www.kavlinge.se/download/18.7efef0b7194d85be7c7406d/1739352562981/Riktlinjer%20f%C3%B6r%20K%C3%A4vlinge%20kommuns%20sponsrings%C3%A5taganden.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Sponsring är en marknadsföringsrelation och skiljs uttryckligen från bidrag genom kravet på motprestation.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: kavlinge-organisering-och-stadgar
-  vad: Organisering och stadgar
-  beskrivning: Föreningen måste ha minst 3 styrelseledamöter, vara organiserad enligt demokratiska principer, ha skriftliga
-    stadgar som uppdateras årligen, och registrerad organisationsnummer hos Skatteverket.
-  system: Kävlinge kommun
+  vad: Uppfylla grundvillkoren och vara registrerad
+  beskrivning: Föreningen ska vara demokratiskt uppbyggd, ha minst tre styrelseledamöter, skriftliga stadgar och organisationsnummer från Skatteverket.
+  system: Föreningsregistret
   ledtid: null
-  ledtid_text: Kontrolleras vid ansökning
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  giltighet_status: ingen_regel
 - id: kavlinge-medlemsforteckning
-  vad: Medlemsförteckning och årsmöte
-  beskrivning: Föreningen måste uppdatera medlemslista och ladda upp årsmötesprotokoll, verksamhetsberättelse och årsredovisning
-    inklusive revisionsberättelse till föreningsregistret inom två månader efter årsmötet.
+  vad: Uppdatera föreningshandlingar efter årsmötet
+  beskrivning: Medlemsförteckning, årsmötesprotokoll, verksamhetsberättelse, årsbokslut och revisionsberättelse ska laddas upp i föreningsregistret.
   system: Föreningsregistret
   ledtid: 60
-  ledtid_text: Måste lämnas in inom två månader efter årsmötet
-  giltighet: null
+  ledtid_text: Handlingarna ska vara uppdaterade senast två månader efter årsmötet.
+  giltighet: Handlingarna ska uppdateras senast två månader efter årsmötet
   ordning: 2
-  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
-  giltighet_status: okand
-- id: kavlinge-jamstalldhet-och-policy
-  vad: Jämställdhets- och värdegrundspolicy
-  beskrivning: Föreningen måste ha policyer kring alkohol-, drog-, tobaks- och spelförebyggande arbete samt jämställdhetspolicy.
-  system: Kävlinge kommun
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  giltighet_status: kontrollast
+- id: kavlinge-konto-och-medlemsavgift
+  vad: Ha medlemsavgift och konto i föreningens namn
+  beskrivning: Föreningen ska ta ut medlemsavgift och ha plusgiro, bankgiro eller bankkonto i föreningens namn.
+  system: null
   ledtid: null
-  ledtid_text: Måste finnas vid ansökning
+  ledtid_text: Villkoren ska vara uppfyllda när ansökan lämnas.
   giltighet: null
   ordning: 3
-  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
-  giltighet_status: okand
-- id: kavlinge-background-check
-  vad: Bakgrundskontroll
-  beskrivning: Personal och volontärer som arbetar med barn måste godkännas genom bakgrundskontroll enligt lag (2022:278).
-  system: Kävlinge kommun
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  giltighet_status: ingen_regel
+- id: kavlinge-jamstalldhet-och-policy
+  vad: Ha policy för trygghet och likabehandling
+  beskrivning: Föreningen ska ha en uppladdad policy mot alkohol, narkotika, droger, tobak, spel om pengar och sexuella trakasserier samt för jämlikhet och likabehandling.
+  system: Föreningsregistret
   ledtid: null
-  ledtid_text: Kontrolleras vid ansökning
+  ledtid_text: Policyn laddas upp på nytt när den revideras.
   giltighet: null
   ordning: 4
-  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag
-  giltighet_status: okand
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  giltighet_status: ingen_regel
+- id: kavlinge-belastningsregister
+  vad: Kontrollera personer som arbetar med barn
+  beskrivning: Föreningen ansvarar för att begära belastningsregisterutdrag för anställda och uppdragstagare som kommer i kontakt med barn och ungdomar.
+  system: Polismyndigheten
+  ledtid: null
+  ledtid_text: Kontrollen görs när en person anställs eller får ett sådant uppdrag.
+  giltighet: null
+  ordning: 5
+  kalla_url: https://www.kavlinge.se/uppleva-och-gora/foreningar/soka-foreningsbidrag/bidragsbestammelser
+  giltighet_status: ingen_regel
+kommunsiffra: null

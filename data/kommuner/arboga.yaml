@@ -2,45 +2,50 @@ kommun: Arboga
 kommun_slug: arboga
 lan: Västmanlands län
 befolkning: 13854
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Fritids- och kulturförvaltningen samt Socialförvaltningen
 ansokningssystem:
   namn: E-post
   url: mailto:fritid.kultur@arboga.se
 kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-verifierad: 2026-07-26
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://arboga.se/download/18.787025de19c69938531803a8/1771564517911/Antagen_Policy%20f%C3%B6r%20st%C3%B6d%20till%20organisationer.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: arboga-startbidrag
   namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: En gång till nystartad förening
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Föreningen måste registreras i Arbogas föreningsregister
-  - Stadgar krävs
-  - Registreringsbevis från skattemyndigheterna
-  - Protokoll från konstituerande möte
-  - Handlingsplan
-  belopp: null
+  - Sökanden ska vara en nybildad ideell förening och registrera sig i Arboga kommuns föreningsregister
+  - Föreningen ska vara demokratiskt uppbyggd, ha fastställda stadgar samt vald styrelse och revisor
+  - Stadgar, registreringsbevis från Skatteverket och protokoll från det konstituerande mötet där föreningen och styrelsen bildades ska bifogas
+  - En verksamhetsplan ska bifogas ansökan
+  - Föreningen ska bedriva lokal verksamhet, ha ordnad ekonomi och uppfylla kommunens gemensamma värdegrunds- och medlemsvillkor
+  belopp: Kommunen publicerar ingen generell beloppsnivå för startbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: arboga-verksamhetsbidrag-foreningar
   namn: Verksamhetsbidrag föreningar
-  kategori:
-  - idrott
-  - kultur
-  - pensionar
-  - funktionsratt
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar
   deadlines:
     typ: fasta
@@ -58,23 +63,28 @@ bidrag:
     verksamhetsåret
   - Bokslut med balans- och resultaträkning samt revisionsberättelse undertecknad av valda revisorer ska bifogas
   - Handlingsplan för att skapa trygga föreningsmiljöer för barn ska bifogas
-  belopp: null
+  - Föreningen ska ha minst 10 betalande och aktiva medlemmar folkbokförda i Arboga, bedriva verksamheten lokalt och uppfylla kommunens värdegrund
+  belopp: Individuellt verksamhetsbidrag där medlemsantal, verksamhetsplan och verksamhetsberättelse påverkar nivån och bidragsutskottet beslutar beloppet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sent inkommen ansökan behandlas ej
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  anteckning: Bidraget består av kontant verksamhetsstöd och kan även kombineras med indirekt stöd genom hyressubvention i kommunens lokaler.
+  senast_verifierad: '2026-08-18'
 - id: arboga-verksamhetsbidrag-studieforbund
   namn: Verksamhetsbidrag studieförbund
-  kategori:
-  - kultur
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
   malgrupp: Studieförbund
   deadlines:
     typ: fasta
     datum:
-    - 01-15
+    - 02-15
   krav:
   - Studieförbundet måste vara erkänt och dess riksorganisation ska erhålla statligt stöd
   - Folkbildningsverksamhet ska bedrivas i Arboga kommun
@@ -84,44 +94,52 @@ bidrag:
   - Ansökan ska innehålla årsmötesprotokoll, senast upprättad verksamhetsberättelse, senast upprättat bokslut med resultat-
     och balansräkning, revisionsberättelse, verksamhetsplan och budget för innevarande år samt STUV-lista/kommunsammandrag
     för föregående år
-  belopp: Bidraget fördelas procentuellt utifrån studieförbundets andel av det totala antalet studietimmar bland sökande studieförbund
-    i Arboga kommun
+  - Produktion, vinprovning, uppdragsverksamhet och kommersiell verksamhet är normalt inte stödberättigade
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas procentuellt mellan de sökande efter deras verksamhet i Arboga; totalsumman publiceras inte
   sen_ansokan: Ofullständig eller för sent inkommen ansökan kan avslås
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: arboga-trivselbidrag
   namn: Trivselbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar för att utöka och bredda utbudet av aktiviteter
   deadlines:
     typ: fasta
     datum:
     - 08-31
   krav:
-  - Föreningen måste vara registrerad i Arbogas föreningsregister
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Sökanden ska vara en ideell förening som uppfyller kommunens gemensamma bidragsvillkor
+  - Arrangemanget ska utöka eller bredda utbudet av aktiviteter i Arboga kommun och vara något extra utöver föreningens ordinarie verksamhet
+  - Ansökan ska prövas mot kommunens riktlinjer och policy för stöd till organisationer
+  - Föreningen ska lämna en komplett ansökan senast den publicerade ansökningsdagen
+  belopp: Kommunen publicerar ingen generell beloppsnivå för trivselbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan behandlas inte enligt den gemensamma bidragsrutinen.
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: arboga-lovbidrag
   namn: Lovbidrag
-  kategori:
-  - idrott
-  - kultur
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar för aktiviteter under skolloven
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Aktiviteterna ska vara kostnadsfria
@@ -130,104 +148,158 @@ bidrag:
   - Aktiviteterna ska vara öppna för alla barn och inte för slutna grupper
   - Föreningen ska ha en lättillgänglig kontaktperson
   - Föreningen ansvarar själv för bokning av lokaler
+  - Aktiviteten ska anmälas till kommunens lovprogram och publiceras i evenemangskalendern med datum, plats, beskrivning och kontaktuppgifter
   belopp: 500 kronor per lov
-  sen_ansokan: Ej tillämpligt (löpande ansökan)
-  kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en vecka före sportlovet, påsklovet eller höstlovet. Jullov kan omfattas om budgetutrymme finns.
+  kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/ordna-lovaktiviteter.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  anteckning: Bidraget är 500 kronor per lov oavsett antal kostnadsfria aktiviteter och gäller så länge budgetmedel finns.
+  senast_verifierad: '2026-08-18'
 - id: arboga-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med egna anläggningar
   deadlines:
     typ: fasta
     datum:
     - 04-30
   krav:
-  - Föreningen måste äga sin anläggning
-  - Minst två offerter krävs
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Kommunen delfinanserar godkända investeringsprojekt.
+  - Föreningen ska ha en egen anläggning eller lokal
+  - Investeringen ska vara stadigvarande och finnas kvar i verksamheten under flera år
+  - Investeringen får inte vara genomförd innan ansökan prövas
+  - Föreningen ska ange varje investeringsobjekt, antal och sökt belopp på kommunens blankett
+  - Förening som endast söker investeringsbidrag ska bifoga aktuell verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse och årsmötesprotokoll
+  - Genomförd investering ska redovisas till kommunen
+  belopp: Kommunal delfinansiering av den del av investeringen som bidragsutskottet godkänner; andelen beror på antalet ansökningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidrag ges inte till redan genomförda investeringar och ansökan ska vara inkommen senast 30 april.
+  kalla_url: https://arboga.se/download/18.6a8720811957be0bff0c72a1/1742367268238/Ans%C3%B6kan%20om%20investeringsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Flera investeringspunkter kan tas upp i samma ansökan och bidragsutskottet avgör vad som räknas som investering.
+  senast_verifierad: '2026-08-18'
 - id: arboga-arrangorsbidrag
   namn: Arrangörsbidrag
-  kategori:
-  - kultur
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Arrangörer av återkommande evenemang
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Löpande avtal med kommunen
-  belopp: null
+  - Sökanden ska vara en bidragsberättigad förening
+  - Stödet ska avse återkommande arrangemang för allmänheten och kan inte sökas för ett enstaka arrangemang
+  - Föreningen och fritids- och kulturförvaltningen ska träffa en skriftlig överenskommelse om vilka arrangemang som genomförs under året
+  - Överenskommelsen ska reglera ersättningen och hur länge stödet fortlöper
+  - Föreningen ska skriftligen beskriva sitt önskemål om arrangörsbidrag till förvaltningen
+  belopp: Ersättning enligt den individuella fleråriga arrangörsöverenskommelsen
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande avtal)
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: arboga-driftbidrag
   namn: Driftbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar för driftskostnader
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Löpande avtal med kommunen
-  belopp: null
+  - Sökanden ska vara en bidragsberättigad förening
+  - Föreningen ska efter överenskommelse med kommunen ta ansvar för regelbunden skötsel av en kommunalt angelägen anläggning eller miljö
+  - Stödet kan avse motionsspår, elljusspår, vandringsleder, skidspår eller motsvarande driftuppdrag
+  - Ett driftavtal ska reglera uppdraget, ersättningen och stödets fortlevnad
+  - Föreningen ska skriftligen beskriva det driftbidrag eller driftuppdrag som önskas
+  belopp: Ersättning enligt föreningens individuella driftavtal med kommunen
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande avtal)
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: okand
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
 - id: arboga-subventionerad-hyra
   namn: Subventionerad hyra
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som hyr lokaler från kommunen
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Föreningen måste hyra lokal från Arboga kommun
-  - Klassificering enligt Arbogas klassificeringssystem
+  - Föreningen ska vara bidragsberättigad och hyra en kommunal lokal eller anläggning
+  - Bidragsutskottet beslutar föreningens klassificering och ser över subventionen varje år
+  - Klass A ger bidragsberättigade föreningar rabatt på den ordinarie hyran
+  - Klass B kräver barn- och ungdomsverksamhet och ger 0-kronorstaxa på de anläggningar där taxan finns
+  - Föreningen ska följa kommunens boknings-, taxe- och lokalregler
   belopp: Rabatterad hyra enligt klassificering. Klass B (barn/ungdom) betalar 0 kr.
-  sen_ansokan: Ej tillämpligt (kontinuerlig)
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om att bli bidragsberättigad kan ske löpande under året; hyressubventionen ses över årligen.
   kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Cirka 80% av subventionerade hyror går till denna typ av bidrag.
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen uppger att cirka 80 procent av föreningsstödet betalas som subvention av lokalkostnader i kommunala lokaler och anläggningar.
+  senast_verifierad: '2026-08-18'
+- id: arboga-socialt-foreningsbidrag
+  namn: Föreningsbidrag för socialt inriktad verksamhet
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar och ideella organisationer som stödjer och kompletterar socialförvaltningens verksamheter för Arbogas invånare
+  deadlines:
+    typ: fasta
+    datum: [08-31]
+  krav:
+  - Verksamheten ska utgöra stöd och komplement till socialförvaltningens verksamheter eller ligga i linje med socialtjänstlagens mål och inriktning
+  - Organisationen ska stödja kommuninvånare och beskriva den lokala nyttan av den verksamhet som bidraget avser
+  - Sökanden ska vara demokratiskt uppbyggd, ha stadgar, vald styrelse och revisor samt vara registrerad hos Skatteverket
+  - Föreningen ska ha årligt årsmöte, ordnad ekonomisk redovisning godkänd av revisorerna och uppfylla kommunens gemensamma värdegrund
+  - Ansökan ska redovisa planerade aktiviteter, sökt belopp och hur stödet ska användas
+  belopp: Individuellt prövat föreningsbidrag inom socialnämndens budget; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om 2027 års bidrag ska vara inkommen senast 31 augusti 2026.
+  kalla_url: https://arboga.se/download/18.1c06a14f19a7bcc07d3546f6/1763461696759/Socialn%C3%A4mndens%20protokoll%202025-11-12.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Socialnämnden beviljade 2026 stöd till Arboga anhörig- och vårdarförening, BRIS och Kvinnojouren; beloppen beslutas per organisation.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: arboga-forening-registrering
-  vad: Registrering i Arbogas föreningsregister
-  beskrivning: Föreningen måste registreras i Arbogas föreningsregister för att kunna söka verksamhetsbidrag. För nystartade
-    föreningar krävs stadgar, registreringsbevis från skattemyndigheterna, protokoll från konstituerat möte och handlingsplan.
+  vad: Registrering och allmänna bidragsvillkor
+  beskrivning: Föreningen ska registreras i Arbogas föreningsregister, vara demokratiskt uppbyggd med stadgar, styrelse och revisor, vara registrerad hos Skatteverket, ha årliga årsmöten och ordnad ekonomi samt normalt minst 10 betalande aktiva medlemmar folkbokförda i Arboga.
   system: Arboga kommuns föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Registrering krävs före ansökan, men kommunen publicerar ingen handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://arboga.se/uppleva-och-gora/foreningar-anlaggningar-och-lokaler/soka-foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: https://arboga.se/download/18.787025de19c69938531803a8/1771564517911/Antagen_Policy%20f%C3%B6r%20st%C3%B6d%20till%20organisationer.pdf
+  giltighet_status: ingen_regel

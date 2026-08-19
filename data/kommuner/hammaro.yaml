@@ -5,14 +5,21 @@ befolkning: 16898
 forvaltning: Serviceförvaltningen
 ansokningssystem:
   namn: Interbook Go
-  url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-verifierad: '2026-08-01'
+  url: https://ibgo.hammaro.se/
+kalla_url: &huvud https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://hammaro.se/download/18.4aa9250198e60c63bb1f8c/1756366651635/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20i%20Hammar%C3%B6%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Kommunalt aktivitetsstöd
   kategori:
   - idrott
   - ovrig
+  foreningstyp: &fritid [idrott, friluft, ungdom, annat]
   malgrupp: Föreningar med aktiviteter för deltagare 7–25 år
   deadlines:
     typ: fasta
@@ -20,24 +27,29 @@ bidrag:
     - 02-25
     - 08-25
   krav:
-  - En gruppaktivitet ska omfatta minst 3 bidragsberättigade deltagare utöver ledare, och bidrag utgår för maximalt 30 deltagare
-    per gruppaktivitet
+  - En gruppaktivitet ska omfatta minst tre deltagare och högst 20 deltagare per ledare; två ledare ska alltid finnas och minst en ska vara vuxen
   - Aktiviteten ska vara planerad, pågå minst 1 timme och innehålla gemensam samling och avslutning
   - Förening ska ha minst 5 godkända, redovisade gruppaktiviteter per termin (halvår)
+  - Deltagare ska vara 7–25 år; ledare 13–25 räknas och för deltagare med funktionsnedsättning finns ingen övre åldersgräns
+  - Samma person får bara räknas en gång per dag och förening och närvarounderlag eller RF-fil ska lämnas
   - Bidrag utgår inte till studiecirkelsammankomster, entrébelagda tävlingar eller kommersiella arrangemang
-  belopp: null
+  belopp: Årligt fastställt belopp per deltagartillfälle; 2026 års nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: '1–7 dagar sent: 10 procents avdrag; 8–14 dagar: 50 procents avdrag; senare ansökan behandlas inte.'
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Sen ansökan medför avdrag och efter 14 dagar behandlas den inte.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hammaro-kommunalt-aktivitetsstod
 - namn: Lokalbidrag
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *fritid
   malgrupp: Barn- och ungdomsföreningar med externt hyrd eller ägd lokal
   deadlines:
     typ: fasta
@@ -47,19 +59,24 @@ bidrag:
   - Beviljas barn- och ungdomsföreningar som äger eller hyr anläggning/lokal externt för sin verksamhet
   - Ansökan ska redovisa samtliga kostnader och intäkter hänförliga till anläggningen/lokalen, samt lokalens storlek, användningsområde
     och nyttjande senaste verksamhetsåret
-  belopp: null
+  - Föreningen ska lämna verksamhetsplan, budget, medlemsstatistik och fullständiga års- och ekonomihandlingar
+  belopp: Individuellt efter redovisade kostnader, intäkter och nyttjande; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: hammaro-lokalbidrag
 - namn: Anläggningsstöd
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *fritid
   malgrupp: Barn- och ungdomsföreningar som nybygger eller periodiskt underhåller lokal/anläggning
   deadlines:
     typ: fasta
@@ -69,13 +86,17 @@ bidrag:
   - Föreningar som bedriver barn- och ungdomsverksamhet kan söka stöd för delfinansiering av nybyggnation, eller för periodiskt
     underhåll (ej driftkostnader) av egen eller hyrd anläggning/lokal
   - Ansökan ska ange planerade åtgärder, syfte och kostnadsberäkning; bidrag betalas ut efter redovisning av styrkta kostnader
-  belopp: null
+  - Föreningen ska lämna verksamhetsplan, budget och fullständiga års- och ekonomihandlingar
+  belopp: Stödet fastställs årligen; 2026 års nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: hammaro-anlaggningsstod
 - namn: Föreningsbidrag av särskilda skäl
@@ -84,6 +105,7 @@ bidrag:
   - kultur
   - social
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som drabbats av extraordinära, tillfälliga händelser
   deadlines:
     typ: lopande
@@ -92,82 +114,100 @@ bidrag:
   - Kan endast beviljas för extraordinära händelser som är oförutsägbara/oväntade, av tillfällig karaktär, orsakade av yttre
     påverkan och medför allvarliga konsekvenser för föreningens fortsatta verksamhet
   - Ansökan ska inkomma inom rimlig tid från den inträffade händelsen eller när kostnaden uppstått
-  belopp: null
+  - Ansökan ska ange händelsen, sökt belopp, kostnadskalkyl, egen finansiering samt annat stöd eller försäkringsersättning
+  - Skriftlig redovisning krävs och mer än fem procent outnyttjat stöd ska återbetalas
+  belopp: Högst en individuellt prövad del av styrkt kostnad efter egen och annan finansiering
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: hammaro-foreningsbidrag-av-sarskilda-skal
-- namn: Föreningsbidrag till kulturföreningar
+- namn: Verksamhetsbidrag till kulturföreningar
   kategori:
   - kultur
+  foreningstyp: &kultur [kultur, hembygd, annat]
   malgrupp: Bidragsberättigade kulturföreningar i Hammarö kommun
   deadlines:
     typ: fasta
     datum:
     - 10-31
   krav:
-  - Grundbidrag fördelas per organisation i förhållande till antalet aktiva medlemmar (minst 10 tillfällen föregående kalenderår)
-    boende i Hammarö kommun
-  - Verksamhetsbidrag kräver en verksamhetsplan med aktivitetsplan och ekonomisk kalkyl för kommande verksamhetsår
-  belopp: null
+  - Föreningen ska genomföra öppna evenemang eller arrangemang inom kultur, konst eller samhällelig samverkan i Hammarö
+  - Aktiva Hammarömedlemmar ska redovisas; aktiv innebär deltagande vid minst tio tillfällen föregående år
+  - Stödet avser lokal, drift och aktivitet och ansökan ska innehålla plan, budget, verksamhetsunderlag, års- och ekonomihandlingar samt jämställdhetsbeskrivning
+  belopp: Fördelas proportionellt mellan organisationerna efter antalet aktiva Hammarömedlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunens huvudregel är att föreningsbidrag söks senast 31 oktober.
-  id: hammaro-foreningsbidrag-kulturforeningar
-- namn: Föreningsbidrag till sociala föreningar
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: hammaro-verksamhetsbidrag-kulturforeningar
+- namn: Verksamhetsbidrag till sociala föreningar
   kategori:
   - social
+  foreningstyp: &social [social, ungdom, annat]
   malgrupp: Bidragsberättigade sociala föreningar i Hammarö kommun
   deadlines:
     typ: fasta
     datum:
     - 10-31
   krav:
-  - Grundbidrag fördelas per organisation i förhållande till antalet aktiva medlemmar (minst 10 tillfällen föregående kalenderår)
-    boende i Hammarö kommun
-  - Verksamhetsbidrag kräver en verksamhetsplan med aktivitetsplan och ekonomisk kalkyl för kommande verksamhetsår
-  belopp: null
+  - Huvudverksamheten ska stödja personer med social risk eller funktionsnedsättning och bedrivas i Hammarö
+  - Aktiva Hammarömedlemmar ska redovisas; aktiv innebär deltagande vid minst tio tillfällen föregående år
+  - Stödet avser lokal, drift och aktivitet och ansökan ska innehålla plan, budget, verksamhetsunderlag, års- och ekonomihandlingar samt jämställdhetsbeskrivning
+  belopp: Fördelas proportionellt mellan organisationerna efter antalet aktiva Hammarömedlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunens huvudregel är att föreningsbidrag söks senast 31 oktober.
-  id: hammaro-foreningsbidrag-sociala-foreningar
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: hammaro-verksamhetsbidrag-sociala-foreningar
 - namn: Bidrag till studieförbund
   kategori:
   - kultur
   - ovrig
+  foreningstyp: [kultur, annat]
   malgrupp: Studieförbund med verksamhet i Hammarö kommun
   deadlines:
     typ: fasta
     datum:
     - 10-31
   krav:
-  - Grundbidrag (80 procent av totalbeloppet) fördelas per studieförbund utifrån föregående års redovisade studietimmar, antal
-    kulturprogram och antal unika deltagare i Hammarö kommun
-  - Verksamhetsbidrag (20 procent) kräver en verksamhetsplan med aktivitetsplan och ekonomisk kalkyl för kommande verksamhetsår
-  belopp: null
+  - Studieförbundet ska följa Folkbildningsrådets statsbidragskriterier och få statsbidrag genom Folkbildningsrådet eller Utbildningsdepartementet
+  - Folkbildning och kultur ska hålla god kvalitet, bedrivas i Hammarö och ge deltagarna inflytande
+  - Föregående års studietimmar och Hammarödeltagare samt plan, budget, verksamhetsunderlag och års- och ekonomihandlingar ska redovisas
+  belopp: 80 procent av ramen fördelas efter studietimmar i Hammarö och 20 procent efter Hammarödeltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Studieförbund anges som en egen bidragskategori på kommunens sida.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hammaro-bidrag-studieforbund
 - namn: Bidrag till bidragshandläggande nämnds förfogande
   kategori:
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar eller organisationer vars insats prövas särskilt av ansvarig nämnd
   deadlines:
     typ: fasta
@@ -176,24 +216,134 @@ bidrag:
   krav:
   - Ansökan ska innehålla en verksamhetsplan med aktivitetsplan och ekonomisk kalkyl
   - Genomförd aktivitet utvärderas mot verksamhetsplanen i efterhand
-  belopp: null
+  - Föreningen ska vara bidragsberättigad och följa den särskilda inriktning som beslutas för året
+  belopp: Individuellt efter prövning; ingen inriktning eller generell nivå för 2026 är publicerad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Stödformen anges särskilt på kommunens bidragssida.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: hammaro-namndens-forfogande
+- namn: Generellt verksamhetsbidrag för fritidsföreningar
+  kategori: [idrott, ovrig]
+  foreningstyp: *fritid
+  malgrupp: Fritidsföreningar med barn- och ungdomsverksamhet eller livslång idrott och friluftsliv
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Föreningen ska bedriva barn- och ungdomsverksamhet och ha sökt statligt aktivitetsstöd eller motsvarande
+  - Nästa års verksamhet ska rikta sig till barn och unga från sju år eller avse livslång idrott och friluftsliv
+  - Barnkonventionen och kommunens riktlinjer ska följas; idrottsföreningar ska även följa Idrotten vill
+  - Plan, budget, deltagar- och medlemsstatistik, års- och ekonomihandlingar, jämställdhetsarbete och plan för registerkontroll ska lämnas
+  belopp: Individuellt prövat engångsbelopp; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 oktober
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: hammaro-generellt-verksamhetsbidrag-fritid
+- namn: Utvecklingsbidrag till kulturföreningar
+  kategori: [kultur]
+  foreningstyp: *kultur
+  malgrupp: Kulturföreningar som planerar en ny eller utökad tidsbegränsad verksamhet
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Verksamheten ska vara ny eller utökad, tidsbegränsad och genomföras under kommande verksamhetsår
+  - Insatsen ska främja ett varierat kulturutbud och ge Hammaröbor tillgång till konst och kultur
+  - Plan, budget, verksamhetsunderlag, års- och ekonomihandlingar samt jämställdhetsbeskrivning ska lämnas
+  - Genomförandet ska utvärderas i efterhand
+  belopp: Individuellt prövat engångsbelopp; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 oktober
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: hammaro-utvecklingsbidrag-kulturforeningar
+- namn: Utvecklingsbidrag till sociala föreningar
+  kategori: [social]
+  foreningstyp: *social
+  malgrupp: Sociala föreningar som planerar en ny eller utökad tidsbegränsad verksamhet
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Verksamheten ska vara ny eller utökad, tidsbegränsad och genomföras under kommande verksamhetsår
+  - Insatsen ska bedrivas i Hammarö och stödja personer med social risk eller funktionsnedsättning
+  - Plan, budget, verksamhetsunderlag, års- och ekonomihandlingar samt jämställdhetsbeskrivning ska lämnas
+  - Genomförandet ska utvärderas i efterhand
+  belopp: Individuellt prövat engångsbelopp; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 oktober
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: hammaro-utvecklingsbidrag-sociala-foreningar
+- namn: Uppdragsersättning
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som utför ett särskilt kommunalt uppdrag utanför övriga stödformer
+  deadlines:
+    typ: fasta
+    datum: [10-31]
+  krav:
+  - Föreningen ska vara bidragsberättigad men inte kunna få ersättning genom någon annan publicerad bidragstyp
+  - Uppdraget ska avse verksamhet som inte omfattas av annat kommunalt bidrag eller stöd
+  - En uppdragsbeskrivning ska tydliggöra föreningens och kommunens åtaganden
+  - Ansökan ska avse nästa års verksamhet och innehålla plan, budget, verksamhetsunderlag samt års- och ekonomihandlingar
+  belopp: Individuellt enligt uppdrag och kommunens beslut; fast nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 oktober till kommunstyrelsen
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: hammaro-uppdragsersattning
 forutsattningar:
 - id: hammaro-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  beskrivning: Föreningen ska vara ideell, allmännyttig, religiöst och politiskt obunden, ha hemvist eller verksamhet som gagnar Hammaröbor samt registreras och godkännas i Interbook Go med tre kontaktpersoner och aktuella uppgifter.
   system: Interbook Go
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
   kalla_url: https://hammaro.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier
-  giltighet_status: okand
+  giltighet_status: ingen_regel
+- id: hammaro-arsunderlag
+  vad: Årliga föreningshandlingar
+  beskrivning: Verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, signerat årsmötesprotokoll och revisionsberättelse ska lämnas med ansökan; kommunen publicerar ingen separat giltighetstid eller förnyelsefrist.
+  system: Interbook Go
+  ledtid: null
+  ledtid_text: Lämnas med respektive bidragsansökan
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null

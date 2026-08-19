@@ -2,16 +2,24 @@ kommun: Strömstad
 kommun_slug: stromstad
 lan: Västra Götalands län
 befolkning: 13604
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kultur och fritid samt Folkhälsorådet
 ansokningssystem:
   namn: Strömstads e-tjänster
-  url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
+  url: https://etjanster.stromstad.se/
 kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-verifierad: '2026-07-31'
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.stromstad.se/download/18.7002b90a18a8d4dcd045035/1694684287164/Riktlinjer%20f%C3%B6reningsbidrag%20i%20Str%C3%B6mstads%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Arrangörsbidrag för kulturföreningar
-  kategori:
-  - kultur
+- id: stromstad-arrangorsbidrag-for-kulturforeningar
+  namn: Arrangörsbidrag för kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
   malgrupp: Kulturföreningar och ideella arrangörer
   deadlines:
     typ: lopande
@@ -20,22 +28,27 @@ bidrag:
   - Ansökan ska innehålla syfte, presentation och genomförandeplan för arrangemanget
   - Ansökan ska ange målgrupp, räckvidd och uppskattat antal deltagare/besökare
   - Ansökan ska innehålla budget samt kopia av föreningens stadgar och verksamhetsberättelse
+  - Föreningen ska söka medfinansiering från andra håll och kommunen finansierar aldrig hela arrangemanget
   - Minst ett av kriterierna barn/unga, nya målgrupper, konstnärlig kvalitet, demokrati/jämställdhet, breda samarbeten, folkhälsa,
     helårsverksamhet eller öppet för allmänheten ska vara uppfyllt
   - Redogörelse för uppnått resultat ska lämnas senast två månader efter genomfört arrangemang
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  belopp_status: okand
-  deadline_status: olast
+  - Arrangemanget ska vara offentligt och kommunens logotyp ska finnas i marknadsföringen
+  belopp: Individuellt medfinansieringsbelopp efter kvalitet, målgrupp, samarbete, nytänkande, ekonomi, tillgänglighet, tillgänglig budget och antal ansökningar; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas löpande under hela året
+  kalla_url: https://etjanster.stromstad.se/arrangorsbidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-  id: stromstad-arrangorsbidrag-for-kulturforeningar
-- namn: Arrangörsbidrag för fritidsföreningar
-  kategori:
-  - idrott
-  - ovrig
+  senast_verifierad: '2026-08-19'
+- id: stromstad-arrangorsbidrag-for-fritidsforeningar
+  namn: Arrangörsbidrag för fritidsföreningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
   malgrupp: Fritidsföreningar
   deadlines:
     typ: lopande
@@ -44,23 +57,27 @@ bidrag:
   - Ansökan ska innehålla syfte, presentation och genomförandeplan för arrangemanget
   - Ansökan ska ange målgrupp, räckvidd och uppskattat antal deltagare/besökare
   - Ansökan ska innehålla budget samt kopia av föreningens stadgar och verksamhetsberättelse
+  - Föreningen ska söka medfinansiering från andra håll och kommunen finansierar aldrig hela arrangemanget
   - Minst ett av kriterierna barn/unga, nya målgrupper, idrottslig kvalitet, demokrati/jämställdhet, breda samarbeten, folkhälsa,
     helårsverksamhet eller öppet för allmänheten ska vara uppfyllt
   - Redogörelse för uppnått resultat ska lämnas senast två månader efter genomfört arrangemang
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  belopp_status: okand
-  deadline_status: olast
+  - Arrangemanget ska vara offentligt och kommunens logotyp ska finnas i marknadsföringen
+  belopp: Individuellt medfinansieringsbelopp efter kvalitet, målgrupp, samarbete, nytänkande, ekonomi, tillgänglighet, tillgänglig budget och antal ansökningar; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas löpande under hela året
+  kalla_url: https://etjanster.stromstad.se/arrangorsbidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-  id: stromstad-arrangorsbidrag-for-fritidsforeningar
-- namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  senast_verifierad: '2026-08-19'
+- id: stromstad-startbidrag
+  namn: Startbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Nyregistrerade föreningar
   deadlines:
     typ: lopande
@@ -68,83 +85,237 @@ bidrag:
   krav:
   - Gäller endast nyregistrerad förening i kommunen
   - Bidraget kan endast erhållas en gång per förening
-  - Föreningen ska inkomma med uppgift om antalet aktiva medlemmar samt årsmötesprotokoll
+  - Föreningen ska ha organisationsnummer, ideell och målinriktad kultur- eller fritidsverksamhet, stadgar, vald styrelse och konto i föreningens namn
+  - Föreningen ska inkomma med verksamhetsberättelse, uppgift om antalet aktiva medlemmar, årsmötesprotokoll och medlemsregister
   belopp: 1 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  belopp_status: olast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas löpande under hela året
+  kalla_url: https://etjanster.stromstad.se/registreraforening
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
-  id: stromstad-startbidrag
-- namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  senast_verifierad: '2026-08-19'
+- id: stromstad-grundbidrag
+  namn: Grundbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med betalande medlemmar
   deadlines:
     typ: fasta
     datum:
     - 05-31
-  krav: []
-  belopp: 25 kr per medlem 3–20 år; lägre nivåer för övriga medlemsintervall
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Föreningen ska vara ideell, öppen för kommuninvånare och verksam inom kultur- eller fritidsområdet i Strömstad
+  - Föreningen ska ha organisationsnummer, stadgar, vald styrelse, medlemsmatrikel och bank-, plusgiro eller bankkonto
+  - Varje stödberättigad medlem ska vara individuellt ansluten, finnas i medlemsförteckningen och ha betalat minst 50 kr i medlemsavgift under året
+  - Medlemsförteckningen ska ange namn, födelseår, adress och om medlemsavgiften är betald
+  - Ansökan ska avse betalande medlemmar under föregående verksamhetsår
+  belopp: 25 kr per medlem 3–20 år; för medlemmar 21 år och äldre 12,50 kr per medlem 1–50 och 6,25 kr per medlem från medlem 51
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 31 maj
+  kalla_url: https://etjanster.stromstad.se/aktivitetsbidragforening
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: stromstad-grundbidrag
-- namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  senast_verifierad: '2026-08-19'
+- id: stromstad-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som fått statligt aktivitetsstöd
   deadlines:
     typ: fasta
     datum:
     - 05-31
-  krav: []
+  krav:
+  - Föreningen ska vara ideell, öppen för kommuninvånare och verksam inom kultur- eller fritidsområdet i Strömstad
+  - Föreningen ska ha organisationsnummer, stadgar, vald styrelse, medlemsmatrikel och konto i föreningens namn
+  - Föreningen ska ha sökt och erhållit statligt aktivitetsstöd för föregående år
+  - Ansökan ska redovisa det statliga aktivitetsstöd som ligger till grund för kommunens beräkning
   belopp: 10 procent av statligt aktivitetsstöd
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 31 maj
+  kalla_url: https://etjanster.stromstad.se/aktivitetsbidragforening
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: stromstad-aktivitetsbidrag
-- namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
+  senast_verifierad: '2026-08-19'
+- id: stromstad-bidrag-till-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
   malgrupp: Aktiva studieförbund
   deadlines:
     typ: okand
     datum: []
-  krav: []
+  krav:
+  - Studieförbundet ska vara aktivt och bedriva folkbildningsverksamhet i Strömstads kommun
+  - Studieförbundets centralorganisation ska vara statsbidragsberättigad enligt Folkbildningsrådets regler
+  - Förbundet ska lämna den lokala verksamhetsstatistik och ekonomiska redovisning som Västra Götalands Bildningsförbunds fördelningsnyckel kräver
+  - Bidraget beräknas på tidigare års redovisade verksamhet i kommunen
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: stromstad-bidrag-till-studieforbund
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas mellan aktiva studieförbund enligt Västra Götalands Bildningsförbunds fördelningsnyckel; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen öppen ansökningsfrist
+  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv.4.b5400fe1453b28b6b71c675.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: stromstad-bidrag-till-samlingslokaler
+  namn: Bidrag till samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som driver en bygdegård, hembygdsgård eller annan allmän samlingslokal
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska driva en samlingslokal, exempelvis en bygdegård eller hembygdsgård
+  - Föreningen ska uppfylla kommunens allmänna villkor om ideell verksamhet, organisationsnummer, stadgar, vald styrelse och konto
+  - Ansökan ska redovisa samtliga intäkter och kostnader för samlingslokalen
+  - Senaste årsredovisning ska bifogas
+  - Planerade investeringar och förbättringar av fastigheten ska beskrivas
+  belopp: Individuellt bidrag efter lokalens ekonomi, verksamhet och planerade åtgärder; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas löpande under hela året
+  kalla_url: https://etjanster.stromstad.se/samlingslokaler
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: stromstad-anlaggningsbidrag
+  namn: Anläggningsbidrag till fritidsföreningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Fritidsföreningar som äger eller hyr och driver en egen lokal eller anläggning
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska äga eller hyra och själv driva den lokal eller anläggning som stödet avser
+  - Föreningen ska uppfylla kommunens allmänna villkor om ideell verksamhet, organisationsnummer, stadgar, vald styrelse och konto
+  - Ansökan ska redovisa de driftskostnader som föreningen och kommunen gemensamt bedömer som stödgrundande
+  - Gratis arrende och andra kommunala subventioner ska räknas av från kostnadsunderlaget
+  - Verksamhetens omfattning, målgrupper och nytta bedöms; investeringsåtgärder ska beskrivas och kostnadsberäknas separat
+  belopp: Individuellt drifts- eller investeringsbidrag efter godkända nettokostnader, verksamhet och kommunala kriterier; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas löpande under hela året
+  kalla_url: https://etjanster.stromstad.se/anlaggningsbidrag
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: stromstad-folkhalsomedel
+  namn: Folkhälsomedel
+  status: aktiv
+  kategori: [social, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala organisationer med en utvecklingsinsats som stärker folkhälsan i Strömstads kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-10
+  krav:
+  - Insatsen ska ligga inom folkhälsoplanens prioriteringar jämlik hälsa, trygga och goda uppväxtvillkor eller goda levnadsvanor
+  - Arbetet ska vara hälsofrämjande, förebyggande och befolkningsinriktat och får inte vara sökandens ordinarie verksamhet
+  - Sökanden eller en annan verksamhet ska medfinansiera minst hälften; egen arbetstid får räknas
+  - Medel betalas endast till organisationer med anknytning till eller aktivt samarbete med Strömstads kommun
+  - Samverkan mellan minst två verksamheter eller aktörer bör ingå
+  - Sökanden ska ha ett pågående rättighetsbaserat värdegrundsarbete och motverka diskriminering och trakasserier
+  - Insatsen ska redovisas efter genomförandet och ansökan ska beskriva hur ett lyckat arbete kan fortsätta efter bidragstiden
+  belopp: Individuellt utvecklingsstöd ur Folkhälsorådets budget; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästkommande år ska lämnas senast den 10 september
+  kalla_url: https://www.stromstad.se/stodochomsorg/folkhalsoarbete/ansokomfolkhalsomedel.4.b5400fe1453b28b6b71ec79.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: stromstad-uppdragsbaserat-foreningsstod
+  namn: Uppdragsbaserat föreningsstöd enligt avtal
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella kultur- och fritidsföreningar som utför ett särskilt överenskommet uppdrag
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för bidragsberättigade ideella kultur- och fritidsföreningar
+  - Kommunen och föreningen ska vara överens om ett särskilt uppdrag som skapar nytta för invånarna
+  - Uppdragets omfattning, parternas åtaganden, ersättning och uppföljning ska regleras i avtal
+  - Föreningen ska kunna redovisa verksamhet och ekonomi och ge kommunen insyn i hur stödet används
+  belopp: Individuell ersättning enligt avtal; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet regleras i avtal och kommunen publicerar ingen öppen ansökningsfrist
+  kalla_url: https://www.stromstad.se/download/18.7002b90a18a8d4dcd045035/1694684287164/Riktlinjer%20f%C3%B6reningsbidrag%20i%20Str%C3%B6mstads%20kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: stromstad-kostnadsfritt-lan-kommunal-lokal
+  namn: Kostnadsfritt lån av kommunal lokal
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar som efter individuell prövning får använda en kommunal lokal utan kostnad
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för bidragsberättigade ideella kultur- och fritidsföreningar
+  - Lokalbehovet ska avse föreningens ideella verksamhet i Strömstads kommun
+  - Kommunen ska i det enskilda fallet besluta att kostnadsfritt lokalstöd är lämpligare än ett ekonomiskt bidrag
+  - Föreningen ska följa lokalens boknings-, ordnings- och användningsvillkor
+  belopp: Kostnadsfritt lån av kommunal lokal efter individuell prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist
+  kalla_url: https://www.stromstad.se/download/18.7002b90a18a8d4dcd045035/1694684287164/Riktlinjer%20f%C3%B6reningsbidrag%20i%20Str%C3%B6mstads%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: stromstad-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
+  vad: Bidragsberättigad ideell kultur- eller fritidsförening
+  beskrivning: Föreningen ska vara öppen för kommuninvånare, ideell och målinriktad inom kultur eller fritid, ha organisationsnummer, stadgar, medlemsmatrikel, vald ansvarig styrelse och konto i föreningens namn. Bidragsberättigade medlemmar ska vara individuellt anslutna och betala minst 50 kr per år. Politiska och religiösa föreningar, välgörenhet, privatpersoner och företag får inte ekonomiskt föreningsbidrag. Kommunen publicerar ingen giltighetstid eller återkommande förnyelsedag för godkännandet.
   system: Strömstads e-tjänster
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ingen publicerad handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://www.stromstad.se/upplevaochgora/foreningarforeningsliv/kulturochfritidsbidragtillforeningar.4.38084632163626cc4502b40c.html
-  giltighet_status: okand
+  kalla_url: https://www.stromstad.se/download/18.7002b90a18a8d4dcd045035/1694684287164/Riktlinjer%20f%C3%B6reningsbidrag%20i%20Str%C3%B6mstads%20kommun.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null

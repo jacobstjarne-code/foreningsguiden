@@ -2,151 +2,238 @@ kommun: Söderköping
 kommun_slug: soderkoping
 lan: Östergötlands län
 befolkning: 14688
-forvaltning: Idrott och fritid
+forvaltning: Kommunstyrelsens förvaltning, kultur och fritid
 ansokningssystem:
-  namn: FRI
-  url: https://foreningar.soderkoping.se/foreningsbidrag/
-kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-verifierad: '2026-07-31'
+  namn: FRI och kommunens blanketter
+  url: &portal https://foreningar.soderkoping.se/foreningsbidrag/default.aspx
+kalla_url: &huvud https://www.soderkoping.se/kultur-fritid/foreningsliv/foreningsbidrag/
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 04-01
+  kalla_url: &norm https://www.soderkoping.se/globalassets/documents/06-kommun-och-politik/06-styrande-dokument/ovriga-styrdokument/reglemente-for-foreningsbidrag-och-verksamhetsstod.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: soderkoping-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: ingen_regel
-  krav_fullstandiga: null
-  anteckning: null
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som är bidragsberättigade enligt kommunens allmänna bestämmelser
+  deadlines: {typ: fasta, datum: [04-01]}
+  krav:
+  - Föreningen ska vara ideell, demokratisk, öppen för alla och arbeta för samhällsnytta samt mot kränkningar och diskriminering
+  - Föreningen ska normalt ha säte i Söderköping, organisationsnummer, e-postadress och vara synlig i kommunens föreningsregister
+  - Föreningen ska ha minst 10 medlemmar och minst 10 sammankomster per år; undantag gäller funktionsrättsorganisationers ungdomsverksamhet
+  - Medlemsregister och medlemsavgift krävs; rekommenderad minimiavgift är 50 kr per person eller 120 kr per familj och år
+  - Årsmötesprotokoll, verksamhetsplan och budget för innevarande år ska lämnas senast 1 april
+  - Ansökan ska lämnas av huvudföreningens styrelse och utbetalning sker endast till huvudstyrelsens registrerade konto
+  - Ansökan ska ange om föreningen bedriver verksamhet för barn och unga
+  belopp: Årets maxbelopp fördelas som 75 procent grundbelopp och 25 procent till föreningar med barn- och ungdomsverksamhet; maxbeloppet för 2026 publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan behandlas endast om särskilda skäl finns, exempelvis att föreningen bildats senare under året.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Förening med säte i annan kommun kan efter särskild prövning få stöd för barn- och ungdomsverksamhet i Söderköping om samma verksamhet inte redan stöds av annan kommun eller erbjuds lokalt.
+  senast_verifierad: '2026-08-18'
 - id: soderkoping-aktivitetsbidrag
-  namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med gruppverksamhet för barn och ungdomar 7–25 år
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  namn: Lokalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade ideella föreningar med ledarledd gruppverksamhet för barn och unga 7–25 år
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
   krav:
-  - Gruppverksamhet för barn och ungdomar 7–25 år
-  - Sammankomsten ska ha minst tre deltagare och pågå minst 45 minuter
-  - Deltagare ska ha betalat medlemsavgift; får endast räknas en gång per dag
   - Aktiviteten ska vara beslutad och ekonomiskt planerad av styrelse, medlemsmöte, kommitté eller motsvarande
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
+  - Sammankomsten ska vara ledarledd, pågå minst 45 minuter och ha minst tre betalande medlemmar i åldern 7–25 år
+  - En deltagare får bara räknas en gång per dag och en ledare får inte redovisningsmässigt ansvara för flera grupper samtidigt
+  - Närvarokort ska vara numrerade, ledarsignerade och innehålla förening, aktivitet, plats, tid, födelseuppgifter och närvaro för deltagare och ledare
+  - Närvarokort och övriga underlag ska sparas i minst fem år
+  - Om studieförbundsstöd kan sökas för aktiviteten ska det göras först; samma aktivitet får inte få båda stöden
+  - Aktiviteterna ska anpassas efter deltagarnas ålder och fysiska, psykiska och sociala behov, och föreningen ska eftersträva jämn könsfördelning
+  belopp: Kommunstyrelsen fastställer årligen ett belopp per godkänd sammankomst; 2026 års nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Perioden juli–december söks senast 25 februari och januari–juni senast 25 augusti; sena ansökningar behandlas bara vid särskilda skäl.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  anteckning: 2026 års FRI-sida och det gällande reglementet anger 7–25 år och går före en äldre blankettjänst som fortfarande visar 6–20 år.
+  senast_verifierad: '2026-08-18'
 - id: soderkoping-skotselbidrag
-  namn: Skötselbidrag – anläggning
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som driver anläggningar i föreningsregi
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
+  namn: Drift- och skötselbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade ideella föreningar som driver en lokal eller anläggning i egen regi eller sköter en allmän utomhusyta
+  deadlines: {typ: fasta, datum: [04-01]}
   krav:
-  - Föreningen ska helt svara för drift och samtliga driftkostnader
-  - Anläggningen ska vara i sådant skick att avsedd verksamhet kan genomföras; kommunen kontrollerar anläggningen kontinuerligt
-  - Nytillkomna anläggningar ska godkännas och klassificeras av kommunen innan bidrag betalas ut
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska driva anläggningen i egen regi eller genom nyttjanderätt, tomträtt eller långsiktigt arrende under ägarliknande förhållanden
+  - Föreningen ska helt svara för driften och samtliga driftkostnader
+  - Anläggningen ska vara i användbart skick och får kontrolleras fortlöpande av kommunen
+  - Nytillkomna anläggningar ska godkännas och klassificeras av kommunen före utbetalning
+  - Skötselbidrag avser allmänna öppna utomhusytor som så långt möjligt ska tillgängliggöras för skola och spontanidrott
+  - Ett annat skötselavtal med kommunen utesluter skötselbidrag enligt detta reglemente
+  - Ansökan ska ange beräknade deltagartillfällen för barn och unga samt anläggningens tillgänglighet för allmänheten
+  belopp: Årets maxbelopp för respektive anläggning eller skötselobjekt fördelas som 75 procent grundbelopp och 25 procent efter barn- och ungdomsverksamhet; 2026 års schabloner publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april; sena ansökningar behandlas bara vid särskilda skäl.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  anteckning: Framställning och revidering av orienteringskartor ingår i samma stödform och är inte ett separat kartbidrag i 2025 års reglemente.
+  senast_verifierad: '2026-08-18'
 - id: soderkoping-hyresbidrag
   namn: Hyresbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar med externt hyrda lokaler för fast verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade ideella föreningar med externt hyrd lokal eller anläggning för fast verksamhet
+  deadlines: {typ: fasta, datum: [04-01]}
   krav:
-  - Långsiktigt hyreskontrakt eller liknande ska finnas upprättat för lokalen
-  - Bidrag ges ej för hyrda lokaler av mer tillfällig karaktär
-  - Bidragsberättigade kostnader är hyra, el och värme
-  belopp: 50 procent av hyreskostnaden, upp till årligt fastställt maxbelopp
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  belopp_status: olast
-  deadline_status: olast
+  - Lokalen eller anläggningen ska hyras externt för föreningens fasta verksamhet och inte tillhandahållas av kommunen
+  - Ett långsiktigt hyreskontrakt eller motsvarande ska finnas; tillfälliga förhyrningar ger inte stöd
+  - Bidragsgrundande kostnader är hyra, el och värme
+  - Kostnaderna ska styrkas med resultaträkning eller kopior av betalningsverifikationer
+  - Föreningen ska uppfylla kommunens allmänna villkor och huvudstyrelsen ska lämna ansökan
+  belopp: Högst 50 procent av den årliga hyreskostnaden och högst det maxbelopp som Kommunstyrelsen fastställer för året; 2026 års maxbelopp publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april; sena ansökningar behandlas bara vid särskilda skäl.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  anteckning: Kommunens länkade 2020-beslut visar äldre nivåer men används inte som 2026-belopp.
+  senast_verifierad: '2026-08-18'
 - id: soderkoping-arrangemangsbidrag
   namn: Arrangemangsbidrag
-  kategori:
-  - kultur
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
   malgrupp: Ideella kulturföreningar som genomför offentliga arrangemang
-  deadlines:
-    typ: fasta
-    datum:
-    - 05-01
-    - 11-01
+  deadlines: {typ: fasta, datum: [05-01, 11-01]}
   krav:
-  - Arrangemanget ska ha lokal anknytning och vara av allmänintresse, eller bedömas ha positiv effekt för turism/besöksnäring
-  - Bidrag utgår inte till jubileer, minnesdagar, tävlingsverksamhet, matkostnader eller arvode/inkomster till föreningens
-    egna medlemmar
-  - Vid entré får vinsten inte uppgå till mer än 20 procent av det sökta stödet
+  - Arrangemanget ska ha lokal anknytning och vara av allmänintresse för invånarna eller ge positiv effekt för turism och besöksnäring
+  - Kommunens medverkan ska anges när programmet offentliggörs
+  - Jubileer, minnesdagar, tävlingar, mat, arvode eller inkomster till egna medlemmar ger inte stöd
+  - Om entré tas får vinsten inte överstiga 20 procent av det sökta stödet
+  - Ansökan ska beskriva arrangemang, tid och plats samt innehålla kalkyl med kostnader, intäkter och eventuellt biljettpris
+  - Publikantal och faktiskt ekonomiskt utfall ska redovisas senast en månad efter arrangemanget
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
+  belopp_avser: ren_pott
+  kommunens_pott: Årlig arrangemangspott som fördelas efter antal ansökningar, attraktivitet, förväntad publik och kommunalt mervärde; 2026 års totalsumma publiceras inte
+  sen_ansokan: Senast 1 november för arrangemang januari–juni och 1 maj för arrangemang juli–december.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
-- id: soderkoping-verksamhetsbidrag-–-kultur
-  namn: Verksamhetsbidrag – kultur
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar med publik verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
+  krav_fullstandiga: true
+  anteckning: Utbetalning sker efter genomfört arrangemang och godkänd redovisning.
+  senast_verifierad: '2026-08-18'
+- id: soderkoping-verksamhetsbidrag-kultur
+  namn: Verksamhetsbidrag för publik kulturverksamhet
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Bidragsberättigade ideella föreningar som driver museum, galleri, samlingsvisning eller annan publik kulturverksamhet
+  deadlines: {typ: fasta, datum: [04-01]}
   krav:
-  - Publik verksamhet öppen för allmänheten minst 20 timmar per vecka under minst två månader per år, främst under maj–augusti
-  - Verksamheten ska bedrivas utan entréavgifter
-  - Verksamheten ska bedömas ha en positiv påverkan för turism/besöksnäringen i kommunen
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
+  - Verksamheten ska vara öppen för allmänheten och bedömas ge positiv effekt för turism och besöksnäring
+  - Verksamheten ska vara öppen minst 20 timmar per vecka under minst två månader per år, främst maj–augusti
+  - Verksamheten ska bedrivas utan entréavgift
+  - Ansökan ska redovisa verksamhetens planerade öppettider under året
+  - Föreningen ska uppfylla de allmänna villkoren och lämna årets årsmötesprotokoll, verksamhetsplan och budget
+  belopp: Årligt belopp per förening som Kommunstyrelsen fastställer; 2026 års nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april; sena ansökningar behandlas bara vid särskilda skäl.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: soderkoping-studieforbund
+  namn: Verksamhetsstöd till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund med verksamhet i Söderköpings kommun
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Studieförbundet ska bedriva verksamhet i Söderköpings kommun och ha organisationsnummer och e-postadress
+  - Organisationen ska vara demokratiskt uppbyggd, öppen för alla och motverka kränkningar och diskriminering
+  - Studieförbundet ska vara registrerat och synligt i kommunens föreningsregister
+  - Den lokala verksamheten ska redovisas årligen i studietimmar
+  - Verksamhetsberättelse, verksamhetsplan samt uppgifter om styrelse och revisorer ska lämnas
+  - Ansökan ska göras på Bildningsförbundet Östergötlands särskilda blankett, som samordnas och vidarebefordras till kommunen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas som 70 procent basbidrag efter föregående års kommunbidrag och 30 procent volymbidrag efter två års statsbidragsberättigade studietimmar; totalsumman för 2026 publiceras inte
+  sen_ansokan: Ansökan lämnas till Bildningsförbundet Östergötland senast 30 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-18'
+- id: soderkoping-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa för kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar med säte i Söderköpings kommun som hyr kommunala lokaler eller anläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara bidragsberättigad enligt kommunens allmänna bestämmelser
+  - Föreningen ska vara ideell och ha säte i Söderköpings kommun
+  - Föreningen ska vara registrerad och synlig i kommunens föreningsregister
+  - Bokning och användning ska följa kommunens regler för den aktuella lokalen eller anläggningen
+  - Föreningen ska betala den beslutade föreningstaxan för 2026
+  belopp: 'Subvention genom 2026 års föreningstaxa, bland annat 67 kr/timme för gymnastiksal, 109 kr/timme för Ramunderhallen, 130 kr/timme för Vikingen, 110/225 kr per timme för halv/hel konstgräsplan och 320 kr/timme för konstfryst isbana'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar bokningsregler men ingen gemensam sista ansökningsdag för föreningstaxan.
+  kalla_url: https://www.soderkoping.se/globalassets/documents/06-kommun-och-politik/06-styrande-dokument/taxor-och-avgifter/ks-2026-exkl-va-och-renh-beslutade-taxor.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Reglementet anger uttryckligen att tillhandahållande av kommunala lokaler och anläggningar samt föreningstaxa är en del av kommunens stöd till föreningslivet.
+  senast_verifierad: '2026-08-18'
 forutsattningar:
-- id: soderkoping-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
+- id: soderkoping-bidragsberattigad-forening
+  vad: Registrering och godkännande som bidragsberättigad förening
+  beskrivning: Föreningen ska vara ideell, demokratisk och öppen, normalt ha säte i Söderköping, organisationsnummer och e-post, minst 10 medlemmar och 10 årliga sammankomster samt vara registrerad och synlig i FRI.
   system: FRI
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Registrera föreningen och lämna stadgar innan bidrag kan sökas.
+  giltighet: Föreningen som vill söka bidrag under året ska lämna aktuellt årsmötesprotokoll, verksamhetsplan och budget senast 1 april.
   ordning: 1
-  kalla_url: https://foreningar.soderkoping.se/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: soderkoping-arliga-handlingar
+  vad: Årliga handlingar och aktuella föreningsuppgifter
+  beskrivning: Stadgeändringar och förändrade föreningsuppgifter ska anmälas, och räkenskaper, protokoll och andra granskningsunderlag ska sparas i minst fem år.
+  system: FRI
+  ledtid: null
+  ledtid_text: Årsmötesprotokoll, verksamhetsplan och budget lämnas senast 1 april; ändrade uppgifter meddelas omgående.
+  giltighet: Årlig uppdatering senast 1 april
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null

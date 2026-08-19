@@ -2,18 +2,23 @@ kommun: Staffanstorp
 kommun_slug: staffanstorp
 lan: Skåne län
 befolkning: 27523
-forvaltning: Kultur och Förening
+forvaltning: Kultur- och föreningsförvaltningen, Omsorgsförvaltningen, Kommunstyrelsen samt Stadsbyggnad/teknik
 ansokningssystem:
-  namn: Staffanstorps e-tjänster
-  url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
+  namn: Rbok och Staffanstorps e-tjänster
+  url: https://eservice.staffanstorp.se/MenuGroup2.aspx?groupId=7
 kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
-verifierad: '2026-07-31'
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med ungdomsverksamhet
+- id: staffanstorp-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  malgrupp: Bidragsberättigade föreningar med ledarledda gruppaktiviteter för barn och unga
   deadlines:
     typ: fasta
     datum:
@@ -38,73 +43,123 @@ bidrag:
     regi
   - En deltagare får endast räknas som deltagare i 1 gruppaktivitet per dag i samma förening
   - Gruppaktiviteten ska dokumenteras på föreskrivet sätt och dokumentationen förvaras i minst sju år
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
+  belopp: 6 kr per deltagare 4–6 år, 8 kr för 7–12 år, 10 kr för 13–19 år och 4 kr för 20–25 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Januari–juni redovisas senast 25 augusti och juli–december senast 25 februari
+  kalla_url: https://staffanstorp.se/app/uploads/2025/09/kultur-och-foreningsnamndens-bidrag-stod-och-stipendier-2023.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  id: staffanstorp-lokalt-aktivitetsstod
-- namn: Stöd till ungdoms- och kulturföreningar
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
+  anteckning: Prova-på-verksamhet och liknande rekryteringsaktiviteter kan också vara stödberättigade.
+  foreningstyp: [idrott, kultur, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-anlaggningsstod
+  namn: Anläggningsstöd
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som äger en anläggning inom Staffanstorps kommun
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: ['04-01']
   krav:
-  - Föreningen ska vara öppen för alla och driva ideell verksamhet
-  - Föreningen ska vara uppbyggd och fungera enligt demokratiska principer
-  - Föreningen ska ha minst 15 medlemmar som erlagt fastställd medlemsavgift och kan delta i årsmöte
-  - Föreningen ska ha antagna skriftliga stadgar, som tillsammans med kopia av protokollet vid föreningens bildande ska skickas
-    in till kultur- och föreningsförvaltningen i samband med föreningsregistrering
-  - Föreningen ska ha en stadgeenligt vald styrelse om minst tre personer samt valda/utsedda revisorer
-  - Föreningen ska ha och kunna redovisa en policy för att motverka sexuella trakasserier och användning av dopingpreparat
-    samt för att upprätthålla barnkonventionen
-  - Föreningen ska utse en person som ansvarar för att policydokumenten upprätthålls och hålls uppdaterade
-  - Föreningen ska ha organisationsnummer från Skatteverket samt inneha plus- eller bankgirokonto
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: okand
+  - Föreningen ska äga anläggningen och anläggningen ska ligga inom Staffanstorps kommun
+  - Föreningen ska uppfylla kommunens allmänna villkor för ideell och demokratiskt organiserad föreningsverksamhet
+  - Godkända nettodriftskostnader är renhållning, försäkring, vatten och avlopp, sotning, värme, el samt löpande skötsel och underhåll
+  - Investeringar som gjorts under året före ansökningsåret får tas med i underlaget
+  - Minst 250 deltagartillfällen per år för åldern 4–25 år eller motsvarande verksamhet krävs för den högre stödnivån
+  belopp: Högst 50 procent av godkända nettokostnader vid minst 250 deltagartillfällen per år; annars högst 25 procent
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 april
+  kalla_url: https://staffanstorp.se/app/uploads/2025/09/kultur-och-foreningsnamndens-bidrag-stod-och-stipendier-2023.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-  id: staffanstorp-stod-till-ungdoms-och-kulturforeningar
-- namn: Arrangemangsstöd
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i kommunen
+  anteckning: Stödet beräknas på föregående års kostnader och investeringar.
+  foreningstyp: [idrott, kultur, ungdom, friluft, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-hyresstod
+  namn: Hyresstöd
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som hyr en anläggning eller lokal av annan hyresvärd än kommunen
   deadlines:
-    typ: okand
+    typ: fasta
+    datum: ['04-01']
+  krav:
+  - Föreningen ska hyra anläggningen eller lokalen av någon annan än Staffanstorps kommun
+  - Förhyrningen ska ha godkänts av kultur- och föreningsnämnden innan föreningen ingår hyresavtalet
+  - Föreningen ska uppfylla kommunens allmänna villkor för ideell och demokratiskt organiserad föreningsverksamhet
+  - Godkända nettokostnader är kallhyra, renhållning, försäkring, vatten och avlopp, sotning, värme, el och tomträttsarrende
+  - Minst 250 deltagartillfällen per år för åldern 4–25 år eller motsvarande verksamhet krävs för den högre stödnivån
+  belopp: Högst 50 procent av godkända nettokostnader vid minst 250 deltagartillfällen per år; annars högst 25 procent
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 april
+  kalla_url: https://staffanstorp.se/app/uploads/2025/09/kultur-och-foreningsnamndens-bidrag-stod-och-stipendier-2023.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens egna lokaler omfattas inte; de upplåts i stället till subventionerad taxa.
+  foreningstyp: [idrott, kultur, ungdom, friluft, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-verksamhetsstod
+  namn: Verksamhetsstöd
+  kategori: [kultur, ovrig]
+  malgrupp: Främst föreningar och andra aktörer som bedriver kulturverksamhet av vikt för kommunen
+  deadlines:
+    typ: fasta
+    datum: ['10-01']
+  krav:
+  - Verksamheten ska vara riktad till kommuninvånarna och vara av betydelse för kommunen
+  - Medlemmarnas tillfälliga eller kontinuerliga verksamhet ska vara en viktig del och bygga på frivilliga ledarinsatser
+  - Ansökan ska beskriva stödbehovet, sökt belopp, annan sökt finansiering och hur verksamheten bidrar till ett rikt kulturliv
+  - Verksamheten ska vara öppen och föreningen ska beskriva vilken motprestation den kan erbjuda kommunen
+  - Ett inledande samtal med kultur- och föreningsförvaltningen ska genomföras före den digitala ansökan
+  belopp: Kommunen publicerar inget generellt belopp; stödet prövas individuellt och kan vara ekonomiskt stöd, marknadsföring eller tillfällig lokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 oktober
+  kalla_url: https://staffanstorp.se/app/uploads/2025/09/kultur-och-foreningsnamndens-bidrag-stod-och-stipendier-2023.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stöd kan även delvis avse vård av en kulturhistoriskt värdefull byggnad när verksamheten motsvarar stödets syfte.
+  foreningstyp: [kultur, hembygd, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-arrangemangsstod
+  namn: Arrangemangsstöd
+  kategori: [kultur, ovrig]
+  malgrupp: Föreningar och andra aktörer som inte får verksamhetsstöd och genomför ett offentligt arrangemang i kommunen
+  deadlines:
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget ska genomföras inom kommunen och vara öppet för alla invånare
   - God tillgänglighet ska eftersträvas vid arrangemangets genomförande
+  - Sökanden får inte samtidigt få verksamhetsstöd från kultur- och föreningsnämnden
   - Ansökan sker digitalt senast sex veckor före arrangemangets genomförande
   - Redovisning av arrangemanget ska lämnas på fastställd blankett till Kultur- och föreningsenheten senast två månader efter
     genomförandet, samt genom en muntlig presentation vid någon av kommunens träffar för kulturella och kreativa näringar
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Kommunen publicerar inget generellt belopp; stödet prövas individuellt som ekonomiskt bidrag eller förlustgaranti, marknadsföring eller tillfällig lokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast sex veckor före arrangemanget
+  kalla_url: https://staffanstorp.se/app/uploads/2025/09/kultur-och-foreningsnamndens-bidrag-stod-och-stipendier-2023.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-  id: staffanstorp-arrangemangsstod
-- namn: Föreningsbidrag till sociala föreningar och organisationer
-  kategori:
-  - social
-  - pensionar
-  - funktionsratt
-  malgrupp: Ideella föreningar i kommunen
+  anteckning: null
+  foreningstyp: [kultur, hembygd, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-foreningsbidrag-till-sociala-foreningar-och-organisationer
+  namn: Föreningsbidrag till sociala föreningar och organisationer
+  kategori: [social, pensionar, funktionsratt]
+  malgrupp: Lokalt anknutna ideella föreningar som bedriver frivilligt socialt arbete för äldre eller personer med funktionsnedsättning
   deadlines:
     typ: fasta
     datum:
@@ -123,24 +178,101 @@ bidrag:
     av hur det sökta bidraget avses användas, protokoll från senaste årsmötet, årsbokslut, ekonomisk berättelse, revisionsberättelse,
     föreningens stadgar samt uppgift om ansökan om föreningsbidrag även görs i annan kommun
   - Ansökan kan endast avse medlemmar bosatta i Staffanstorps kommun
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
-  belopp_status: okand
-  deadline_status: olast
+  belopp: Kommunen publicerar inget generellt föreningsbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 ska lämnas senast 31 mars 2026
+  kalla_url: https://cms.staffanstorp.se/wp-content/uploads/2025/01/policy-foreningsbidrag-omsorgsnamnden.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  id: staffanstorp-foreningsbidrag-till-sociala-foreningar-och-organisationer
+  anteckning: Föreningen förväntas samarbeta med kommunen och andra organisationer när det är relevant.
+  foreningstyp: [social, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-kulturpris
+  namn: Kulturpris
+  kategori: [kultur]
+  malgrupp: Föreningar, organisationer och personer med anknytning till Staffanstorps kommun som gjort en betydande kulturinsats
+  deadlines:
+    typ: fasta
+    datum: ['02-15']
+  krav:
+  - Mottagaren ska ha anknytning till Staffanstorps kommun
+  - Insatsen ska ha bidragit till förnyelse och utveckling av kulturlivet i kommunen
+  - Ansökan eller nomineringen ska motivera den betydande kulturella insatsen
+  - Ansökan eller nomineringen ska lämnas under den publicerade perioden 1 januari–15 februari
+  belopp: '10000'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansöknings- och nomineringsperioden är 1 januari–15 februari
+  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/priser-och-stipendier/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Priset kan delas mellan två mottagare; individuella stipendier och priser ingår inte som föreningsstöd.
+  foreningstyp: [kultur, hembygd, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-kommunstyrelsens-foreningsbidrag
+  namn: Kommunstyrelsens föreningsbidrag
+  kategori: [social, kultur, ovrig]
+  malgrupp: Ideella föreningar med allmännyttigt ändamål och anknytning till kommunen eller dess invånare
+  deadlines:
+    typ: fasta
+    datum: ['11-01']
+  krav:
+  - Föreningen ska vara ideell och verka för ett allmännyttigt ändamål
+  - Ändamålet ska ha anknytning till Staffanstorps kommuns område eller kommunens invånare
+  - Ansökan ska innehålla senaste årsmötesprotokoll, årsberättelse och ekonomiska berättelse
+  - Ansökan ska innehålla innevarande eller kommande års budget, verksamhetsplan och senast antagna stadgar om kommunen inte redan har dem
+  - Ansökan ska avse nästkommande verksamhetsår
+  belopp: Kommunen publicerar inget generellt belopp för stödet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 november året före det verksamhetsår som stödet avser
+  kalla_url: https://cms.staffanstorp.se/wp-content/uploads/2023/03/regler-for-kommunstyrelsens-foreningsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Beslut ska enligt regeln fattas före utgången av december året före bidragsåret.
+  foreningstyp: [kultur, hembygd, friluft, social, ungdom, annat]
+  senast_verifierad: '2026-08-18'
+- id: staffanstorp-vagbidrag
+  namn: Vägbidrag
+  kategori: [ovrig]
+  malgrupp: Vägföreningar och jämförliga föreningar som sköter enskilda vägar öppna för allmän trafik
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Den enskilda vägen ska vara längre än 200 meter
+  - Vägen ska vara upplåten för allmän trafik
+  - En vägförening eller jämförlig förening ska finnas
+  - Bokslut och revisionsberättelse ska upprättas för varje kalenderår och bifogas ansökan
+  - Vägen ska vara i gott skick vid kommunens besiktning före utbetalning
+  belopp: 20 procent av klassad schablonkostnad per meter för vägföreningar med statsbidrag och 50 procent för övriga berättigade vägföreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar inget sista ansökningsdatum i bidragsregeln
+  kalla_url: https://cms.staffanstorp.se/wp-content/uploads/2023/03/bidragsregler-for-vaghallning.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Schablonen är indelad i fem trafikklasser; den publicerade tabellen anger 2008 års krontal och återges därför inte som aktuella nivåer.
+  foreningstyp: [annat]
+  senast_verifierad: '2026-08-18'
 forutsattningar:
 - id: staffanstorp-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Staffanstorps e-tjänster
+  beskrivning: Föreningar inom kultur- och föreningsnämndens stöd ska registreras och årligen lämna beslutade verksamhets-, ekonomi-, revisions- och organisationshandlingar.
+  system: Rbok och Staffanstorps e-tjänster
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Årshandlingarna ska lämnas senast en månad efter föreningens årsmöte.
   giltighet: null
   ordning: 1
-  kalla_url: https://staffanstorp.se/uppleva-och-gora/fritid-och-upplevelser/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: https://staffanstorp.se/app/uploads/2025/09/kultur-och-foreningsnamndens-bidrag-stod-och-stipendier-2023.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null

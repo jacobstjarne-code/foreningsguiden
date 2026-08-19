@@ -2,18 +2,23 @@ kommun: Mörbylånga
 kommun_slug: morbylanga
 lan: Kalmar län
 befolkning: 16327
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid, Social omsorg, Kommunledning samt Gator och service
 ansokningssystem:
-  namn: Rbok
+  namn: Rbok och kommunens e-tjänster
   url: https://morbylanga.rbok.se/
-kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-verifierad: '2026-07-31'
+kalla_url: &huvud https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
+verifierad: '2026-08-18'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.morbylanga.se/wp-content/uploads/2023/05/bidragsregler-for-kultur-och-fritidsforeningar-1.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  - idrott
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: &fritid [idrott, kultur, friluft, ungdom, annat]
+  malgrupp: Ideella föreningar med ledarledd verksamhet för barn, unga eller personer med funktionsvariation
   deadlines:
     typ: fasta
     datum:
@@ -28,41 +33,91 @@ bidrag:
   - Ledaren ska ha fyllt 13 år, vara medlem i föreningen och får inte vara ansvarig för flera gruppaktiviteter samtidigt
   - Fritidsföreningar som inte är anslutna till Riksidrottsförbundet ska redovisa gruppaktiviteter och aktuellt medlemsregister
     i samband med bidragsansökan
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: olast
+  belopp: 55 kr per aktivitetstillfälle 5–25 år; 100 kr per aktivitetstillfälle för deltagare med funktionsvariation; Säker och Trygg förening ger 10 procent extra, högst 5 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar som kommer in efter sista ansökningsdag behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Datum 25 augusti är publicerat för de angivna stödformerna; aktivitetsstödets vårdatum följer kommunens halvårsredovisning
-    och bör återverifieras i Rbok.
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: morbylanga-aktivitetsstod
 - namn: Hyresbidrag för icke-kommunala anläggningar
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+  kategori: [idrott, ovrig]
+  foreningstyp: *fritid
+  malgrupp: Föreningar som hyr en icke-kommunal lokal för stödberättigad aktivitet
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [02-25, 08-25]
   krav:
   - Sammankomsten måste vara rapporterad och godkänd för lokalt aktivitetsstöd enligt punkt 2.1
   - Bidrag utgår endast för hyra av lokaler inom Mörbylånga, Borgholms eller Kalmar kommun
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: olast
+  - Faktisk hyreskostnad och antal stödberättigade hyrestillfällen ska kunna styrkas
+  belopp: 50 procent av hyran, högst 325 kr per hyrestillfälle eller 30 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar som kommer in efter sista ansökningsdag behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: morbylanga-hyresbidrag-for-icke-kommunala-anlaggningar
-- namn: Driftbidrag för föreningsägd anläggning
-  kategori:
-  - ovrig
-  - idrott
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+- namn: Subventionerad hyra i kommunala lokaler
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som hyr en kommunal lokal eller anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara ideell och verksam i Mörbylånga kommun
+  - Bokningen ska avse en kommunal lokal eller anläggning och följa kommunens bokningsvillkor
+  - Maximalt subventionerad hyra kräver en sammankomst som är godkänd för lokalt aktivitetsstöd
+  belopp: Enligt fastställda taxor; graden av subvention varierar med träningsgruppens ålder
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för hyressubventionen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-subventionerad-hyra
+- namn: Ledarutbildningsstöd
+  kategori: [idrott, ovrig]
+  foreningstyp: *fritid
+  malgrupp: Föreningar som utbildar ungdomsledare
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Utbildningen ska avse ungdomsledare och genomföras av en extern aktör
+  - Kursen ska omfatta minst fyra studietimmar och deltagaren ska vara minst 13 år
+  - Kursprogram, kursintyg och fakturakopia ska bifogas ansökan
+  belopp: 25 procent av kostnaden, högst 2 000 kr per kurstillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast två månader efter genomgången kurs.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-ledarutbildningsstod
+- namn: Stöd till föreningsägda anläggningar
+  kategori: [idrott, ovrig]
+  foreningstyp: *fritid
+  malgrupp: Föreningar med egen anläggning och regelbunden verksamhet för 5–25-åringar
   deadlines:
     typ: fasta
     datum:
@@ -71,19 +126,23 @@ bidrag:
   - Föreningen ska bedriva regelbunden verksamhet bland barn och ungdom i åldern 5-25 år och redovisa minst 10 sammankomster
     per år enligt villkoren för aktivitetsstöd
   - Anläggningar som nyttjas till färre än tio godkända aktiviteter per år är inte berättigade till bidrag
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska uppfylla riksorganisations- och drogpolicyvillkoren i reglerna för aktivitetsstöd
+  belopp: Schabloner enligt bilaga 2, högst 725 kr per aktiv medlem 5–25 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 augusti året före utbetalningsåret; senare ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-18'
+  anteckning: Bilagan har separata schabloner för bland annat fotbollsplaner, ridanläggningar, scoutstugor, lokaler och belysning.
   id: morbylanga-driftbidrag-for-foreningsagd-anlaggning
-- namn: Bidrag för samlingslokaler
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+- namn: Stöd till föreningsägda samlingslokaler
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som äger och driver en allmän samlingslokal
   deadlines:
     typ: fasta
     datum:
@@ -93,20 +152,94 @@ bidrag:
     (möten, sammankomster, studier, kultur- och fritidsaktiviteter, fester och liknande)
   - I ansökan ska yta anges för den del av byggnaden som används som samlingslokal
   - Antal interna och externa sammankomster under senaste verksamhetsåret ska redovisas i ansökan
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: olast
+  belopp: 12 500 kr plus 80 kr per kvadratmeter stödberättigad samlingslokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 augusti året före utbetalningsåret; senare ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: morbylanga-bidrag-for-samlingslokaler
+- namn: Stöd för anslutning av fiberbredband
+  kategori: [ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som äger och upplåter en samlingslokal
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en bygdegårds-, hembygds-, idrotts-, Folkets Hus- eller annan ideell förening
+  - Föreningen ska äga fastigheten och upplåta lokalen till andra för sammankomster
+  - Ansökan ska göras före projektet och innehålla offert samt senaste ekonomiska redovisning
+  - Faktura krävs för utbetalning och slutrapport ska lämnas inom tre månader
+  belopp: 50 procent av kostnaden, högst 15 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan behandlas löpande men ska lämnas före projektets genomförande.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-stod-for-anslutning-av-fiberbredband
+- namn: Investeringsbidrag till föreningsägda anläggningar
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar och allmänna samlingslokaler med investeringsprojekt
+  deadlines:
+    typ: fasta
+    datum: [11-15]
+  krav:
+  - Investeringen ska vara angelägen för föreningen, allmänheten eller barn och unga; tillgänglighet och energiåtgärder prioriteras
+  - Objektet får inte vara färdigställt och ska normalt slutrapporteras och slutbesiktigas inom två år
+  - Ansökan ska innehålla projekt-, kostnads-, finansierings- och driftsunderlag samt bevis om ägande eller långsiktigt nyttjande
+  - Anläggningen får inte överlåtas eller få ändrad användning inom tio år utan kommunens medgivande
+  belopp: Högst 30 procent av godkänd bruttokostnad och högst 150 000 kr; ideellt arbete värderas till 200 kr per timme
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 november året före investeringen; senare ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-investeringsbidrag-till-foreningsagda-anlaggningar
+- namn: Stöd till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i kommunen
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Studieförbundets centralorganisation och verksamhet ska vara godkända för statsbidrag av Folkbildningsrådet
+  - Verksamheten ska bedrivas lokalt och får inte vara kommersiell, uppdragsutbildning eller sammanblandad med skola eller högskola
+  - Undertecknad verksamhets- och revisionsredovisning ska lämnas senast 30 april
+  - Studieförbund med verksamhet i flera kommuner ska särredovisa Mörbylånga och lämna handlingar för kontroll
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årligt kommunalt anslag; 70 procent fördelas efter andel av senaste totalbidraget och 30 procent efter deltagartimmar
+  sen_ansokan: Redovisning och ansökningsunderlag ska lämnas senast 30 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-stod-till-studieforbund
 - namn: Bidrag för simskola
-  kategori:
-  - idrott
-  - idrott
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+  kategori: [idrott]
+  foreningstyp: [idrott, ungdom, annat]
+  malgrupp: Ideella föreningar som ordnar öppen simskola i Mörbylånga kommun
   deadlines:
     typ: fasta
     datum:
@@ -118,39 +251,96 @@ bidrag:
   - Simskolan ska ha minst tio deltagare och minst tio lektionstillfällen för varje barn
   - Simskoleverksamheten ska ledas av simlärare utbildade av SLS eller Svenska Simförbundet
   - Ansvarig ledare på plats ska vara minst 18 år
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: olast
+  belopp: Högst 5 000 kr per simskola
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 25 augusti efter avslutad simskola.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: morbylanga-bidrag-for-simskola
-- namn: Projektbidrag
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+- namn: Stöd till kulturprojekt
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Kulturföreningar med avgränsade projekt kommande år
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+    typ: fasta
+    datum: [11-15]
+  krav:
+  - Projektet ska vara avgränsat med mål, start, förlopp och slut inom ord, scen, bild, ton eller kulturarv
+  - Projektet ska komma allmänheten till del och kompletterande finansiering ska sökas när det är möjligt
+  - Årshandlingar, kommande budget och verksamhetsplan samt eventuell drogpolicy ska lämnas
+  - Tidigare stöd ska vara korrekt redovisade och slutredovisning ska lämnas inom två månader
+  belopp: Högst 70 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 november året före projektet; senare ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: morbylanga-projektbidrag
-- namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+- namn: Stöd till verksamhet inom kulturområdet
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Etablerade kulturföreningar med kontinuerlig offentlig verksamhet
   deadlines:
-    typ: okand
+    typ: fasta
+    datum: [11-15]
+  krav:
+  - Föreningen ska ha bedrivit stabil verksamhet i Mörbylånga kommun i minst två år
+  - Verksamheten ska vara långsiktig, offentlig och avse kultur eller konst inom ord, scen, bild, ton eller kulturarv
+  - Barn och unga, inkludering, nyskapande, kulturhistoria och professionell kvalitet prioriteras
+  - Fullständiga års- och ekonomihandlingar, kommande verksamhetsplan, budget och eventuell drogpolicy ska lämnas
+  belopp: Högst 100 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 november året före bidragsåret; senare ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-stod-till-verksamhet-inom-kulturomradet
+- namn: Projektstöd till hembygdsföreningar
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd]
+  malgrupp: Hembygdsföreningar med avgränsade projekt
+  deadlines:
+    typ: fasta
+    datum: [11-15]
+  krav:
+  - Sökanden ska vara en hembygdsförening och projektet ska ha tydligt mål, start och slut
+  - Projektet ska komma allmänheten till del och kompletterande stöd bör sökas
+  - Barn och unga, nya grupper, samverkan, nyskapande och professionell kompetens prioriteras
+  - Tidigare stöd ska vara redovisade och slutredovisning ska lämnas inom två månader
+  belopp: Högst 40 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 november året före projektet; senare ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-projektstod-till-hembygdsforeningar
+- namn: Stöd till kulturarrangemang
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar som genomför offentliga kulturarrangemang
+  deadlines:
+    typ: relativ
     datum: []
   krav:
   - Arrangemanget ska komma invånarna i Mörbylånga kommun till gagn och vara öppet för allmänheten
@@ -158,42 +348,192 @@ bidrag:
   - Förening som tidigare beviljats stöd ska ha redovisat sina tidigare genomförda arrangemang och eventuella andra projekt
     på ett korrekt sätt
   - Föreningen ska aktivt arbeta med jämställdhet, tillgänglighet och drogförebyggande arbete
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: okand
+  - Bidraget avser inte investeringar och redovisning ska lämnas inom två månader efter arrangemanget
+  belopp: Högst 10 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras löpande men ska lämnas minst tre veckor före arrangemanget.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-18'
+  anteckning: null
   id: morbylanga-arrangemangsbidrag
 - namn: Föreningsbidrag inom social omsorg
-  kategori:
-  - social
-  malgrupp: Ideella föreningar i Mörbylånga kommun
+  kategori: [social]
+  foreningstyp: [social]
+  malgrupp: Ideella sociala föreningar vars verksamhet gynnar kommunens invånare
   deadlines:
     typ: fasta
     datum:
     - 03-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/foreningar/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Föreningen ska vara ideell, ha minst tio medlemmar och bedriva social verksamhet som gynnar kommuninvånare
+  - Föreningen ska vara öppen, ha årsmötesantagna stadgar, medlemslista, egen styrelse och kassaförvaltning samt organisationsnummer
+  - Stiftelser, företag, privatpersoner och politiska, ekonomiska eller religiösa organisationer är inte bidragsberättigade
+  - Årsredovisning ska lämnas årligen och stödets användning redovisas till socialnämnden vid årets slut
+  belopp: Storleken beror på den budget kommunfullmäktige godkänner årligen; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 15 mars; senare ansökningar behandlas inte.
+  kalla_url: https://www.morbylanga.se/driver-du-forening-som-gynnar-kommunens-invanare-bidrag-finns-att-soka-2/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
   anteckning: null
   id: morbylanga-foreningsbidrag-inom-social-omsorg
+- namn: Projektstöd till fritidsföreningar
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom]
+  malgrupp: Idrotts- och fritidsföreningar med ett avgränsat utvecklingsprojekt
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Projektet ska ha tydliga mål, start, förlopp och slut samt gagna föreningslivet
+  - Projektet ska nå nya målgrupper, skapa trygga idrottsmiljöer, utveckla ett samhällsnyttigt evenemang eller stärka barn- och ungdomsverksamhet
+  - Tidigare projekt ska vara redovisade och föreningen ska arbeta med jämställdhet, tillgänglighet och drogprevention
+  - Senaste årshandlingar ska vara inlämnade till kommunen
+  belopp: 15 000 kr till den förening vars projekt väljs i 2026 års omgång
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 31 mars 2026; senare ansökningar behandlas inte.
+  kalla_url: https://www.morbylanga.se/projektstod-till-fritidsforeningar/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Publicerad stödform och ansökningsomgång för 2026.
+  id: morbylanga-projektstod-till-fritidsforeningar
+- namn: Landsbygdspeng
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar med projekt som utvecklar en landsbygdsbygd
+  deadlines:
+    typ: fasta
+    datum: [04-15, 11-15]
+  krav:
+  - Sökanden ska vara en ideell förening verksam i kommunen eller en allmännyttig stiftelse; privatpersoner, företag och ekonomiska föreningar kan inte få medel
+  - Projektet ska stärka identitet, mötesplatser, trygghet eller attraktivitet genom exempelvis undersökning, evenemang, investering eller renovering
+  - Föreningen ska driva idén, visa en realistisk budget och projektet ska ha bred nytta utan att gynna ett enskilt intresse
+  - Projekt och ekonomi ska redovisas med kvitton inom två månader; restmedel ska återbetalas och kommunens stöd kommuniceras
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 300 000 kr per år; två bygder får 150 000 kr vardera att fördela mellan projekt
+  sen_ansokan: Ansökningsperioderna är 15 mars–15 april och 15 oktober–15 november.
+  kalla_url: https://www.morbylanga.se/wp-content/uploads/2025/03/riktlinje-for-landsbygdspeng-antagen-av-ks-250211-7pub.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: För 2026 gäller fördelningen Östra och Västra bygden.
+  id: morbylanga-landsbygdspeng
+- namn: Kommunalt driftbidrag till enskild väg
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Aktiva vägföreningar och vägsamfälligheter utan statligt driftbidrag
+  deadlines:
+    typ: fasta
+    datum: [02-15]
+  krav:
+  - Sökanden ska vara en aktiv vägsamfällighet eller vägförening med organisationsnummer och andelstal, eller en organiserad frivillig förening
+  - Vägen får inte vara berättigad till statligt vägbidrag och ska betjäna permanentbostad utan att vara en privat infart
+  - Vägen ska vara 200–990 meter, öppen för allmän motortrafik och uppfylla regler om beläggning, bredd, fri höjd och vändplats
+  - Årsmötesprotokoll ska godkänna riktlinjer, ansökan och kontaktperson; årlig driftkostnad ska redovisas och kommunen får utöva tillsyn
+  belopp: 16 kr per löpmeter asfaltväg och 12 kr per löpmeter grusväg
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 januari–15 februari; senare ansökningar behandlas inte.
+  kalla_url: &vagnorm https://www.morbylanga.se/wp-content/uploads/2025/09/riktlinjer-for-kommunalt-vagbidrad-enskilda-vagar-beslutad-av-tn-250819-61.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Reglerna gäller från och med 1 januari 2026.
+  id: morbylanga-kommunalt-driftsbidrag-enskild-vag
+- namn: Kommunalt investeringsbidrag till enskild väg
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Aktiva vägföreningar med en större investering i vägnätet
+  deadlines:
+    typ: fasta
+    datum: [02-15]
+  krav:
+  - Sökanden ska vara en aktiv vägförening utan statligt bidrag, eller med statligt bidrag men utan särskilt driftbidrag i klassen Hög
+  - Investeringen ska avse vägnätet, exempelvis beläggning, bärighet, mötesplats, räcke eller trumma
+  - Vägen ska betjäna permanentbostad, vara öppen för allmän motortrafik och uppfylla kommunens tekniska kriterier
+  - Årsmötesprotokoll, offert eller kostnadsunderlag och Trafikverkets protokoll som visar klass Mellan eller Låg ska bifogas
+  belopp: 50 procent av beräknad kostnad, högst 100 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 15 januari–15 februari; senare ansökningar behandlas inte.
+  kalla_url: *vagnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: null
+  id: morbylanga-kommunalt-investeringsbidrag-enskild-vag
+- namn: Kommunalt snöbidrag
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Föreningar som är berättigade till kommunal vinterväghållning men sköter snöröjningen själva
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Föreningen ska vara berättigad till kommunal vinterväghållning och välja snöröjning i egen regi
+  - Vägen ska uppfylla kommunens kriterier för permanentboende, längd, bredd, framkomlighet och vändplats
+  - Föreningen ska fakturera kommunen för stödberättigad väglängd senast 31 mars
+  belopp: 3 kr per löpmeter berättigad väg, indexuppräknat enligt gällande index
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Faktura för årets snöbidrag ska lämnas senast 31 mars.
+  kalla_url: https://www.morbylanga.se/wp-content/uploads/2024/08/riktlinjer-for-snorojning-och-vintervaghallning-antagen-av-tn-2024-05-28.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-18'
+  anteckning: Nyansökan om kommunal snöröjning har perioden 15 augusti–15 september, men den årliga bidragsinlämningen är fakturan den 31 mars.
+  id: morbylanga-kommunalt-snobidrag
 forutsattningar:
 - id: morbylanga-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Mörbylånga kommuns e-tjänster
+  vad: Registrering och allmänna villkor
+  beskrivning: Föreningen ska vara ideell, bedriva lokal eller allmännyttig verksamhet, vara öppen för alla, ha årsmötesantagna stadgar, medlemslista, egen styrelse och kassaförvaltning samt organisationsnummer och registrering i kommunens föreningsregister.
+  system: Rbok
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://www.morbylanga.se/uppleva-och-gora/idrott-motion-natur-och-friluftsliv/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: morbylanga-arsuppdatering
+  vad: Årlig uppdatering och årshandlingar
+  beskrivning: Föreningen ska årligen uppdatera registeruppgifter och lämna efterfrågade årshandlingar; inkludering ska behandlas på årsmötet eller i verksamhetsberättelsen, statistik ska vara könsuppdelad och drogpolicyn ska vara årsmötesantagen.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Årligen, men kommunen anger inget gemensamt datum
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: morbylanga-ansokan-redovisning
+  vad: Digital ansökan, redovisning och insyn
+  beskrivning: Ansökan ska lämnas digitalt i tid; sena ansökningar behandlas inte. Tidigare stöd ska redovisas och föreningen ska lämna räkenskaps- och revisionshandlingar samt ge kommunen nödvändig insyn.
+  system: Rbok och kommunens e-tjänster
+  ledtid: null
+  ledtid_text: Varierar per stödform
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null

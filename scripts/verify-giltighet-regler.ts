@@ -63,12 +63,12 @@ const RULES: Record<string, ExpectedRule> = {
   bromolla: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   enkoping: { typ: 'sammansatt', antal: null, datum: null, status: 'kontrollast' },
   helsingborg: { typ: 'manader_efter_beslut', antal: 12, datum: null, status: 'kontrollast' },
-  jarfalla: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  jarfalla: { typ: 'kalenderar', antal: null, datum: null, status: 'kontrollast' },
   katrineholm: { typ: 'fast_datum', antal: null, datum: '03-31', status: 'kontrollast' },
   kungalv: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   lund: { typ: 'manader_efter_beslut', antal: 13, datum: null, status: 'kontrollast' },
   malmo: { typ: 'manader_efter_arsmote', antal: 1, datum: null, status: 'kontrollast' },
-  nacka: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  nacka: { typ: 'sammansatt', antal: null, datum: null, status: 'kontrollast' },
   norrtalje: { typ: 'manader_efter_arsmote', antal: 2, datum: null, status: 'kontrollast' },
   pitea: { typ: 'fast_datum', antal: null, datum: '04-01', status: 'kontrollast' },
   taby: { typ: 'fast_datum', antal: null, datum: '02-15', status: 'kontrollast' },
@@ -76,7 +76,7 @@ const RULES: Record<string, ExpectedRule> = {
   trelleborg: { typ: 'manader_efter_beslut', antal: 12, datum: null, status: 'kontrollast' },
   umea: { typ: 'manader_efter_arsmote', antal: 12, datum: null, status: 'kontrollast' },
   vallentuna: { typ: 'manader_efter_arsmote', antal: 3, datum: null, status: 'kontrollast' },
-  varberg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  varberg: { typ: 'kalenderar', antal: null, datum: null, status: 'kontrollast' },
   vaxjo: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
 };
 
