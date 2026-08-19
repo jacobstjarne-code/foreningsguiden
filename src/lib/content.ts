@@ -257,8 +257,12 @@ export const OM = {
 
 /** Sidfot. Kort, saklig. */
 export const SIDFOT = {
+  // V4 (rättning 2026-08-19): sidfoten är global och står nu även på
+  // /nationella-stod/lok-stod/ och /idrott/ — "kommunala föreningsbidrag
+  // från kommunernas egen publicerade information" stämmer inte för
+  // statligt stöd från RF. Bytt till en formulering som täcker båda.
   kortText:
-    'Föreningsguiden samlar kommunala föreningsbidrag från kommunernas egen publicerade information. Vi är inte en kommun eller myndighet.',
+    'Föreningsguiden samlar bidrag till föreningar från kommunernas och myndigheternas egen publicerade information. Vi är inte en kommun eller myndighet.',
   kallpolicyLank: 'Så verifierar vi uppgifterna',
 };
 

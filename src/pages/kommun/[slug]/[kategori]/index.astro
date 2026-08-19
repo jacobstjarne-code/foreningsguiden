@@ -65,7 +65,7 @@ const webPageJsonLd = {
 
   <p>{intro}</p>
 
-  {kategori === 'idrott' && <NationellaStodSektion kategori="idrott" />}
+  {kategori === 'idrott' && <NationellaStodSektion kategori="idrott" kommun={kommun} />}
 
   <ul class="bidrag-list">
     {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(b, kommun)} kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} giltighetStatus={giltighetStatus} />)}
