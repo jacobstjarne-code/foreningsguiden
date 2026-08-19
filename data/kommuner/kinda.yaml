@@ -2,140 +2,377 @@ kommun: Kinda
 kommun_slug: kinda
 lan: Östergötlands län
 befolkning: 9889
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsavdelningen
 ansokningssystem:
-  namn: Kommunens e-tjänster
-  url: https://www.kinda.se/
-kalla_url: https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
-verifierad: '2026-07-31'
+  namn: Kinda kommuns Mina sidor
+  url: https://minasidor.kinda.se/oversikt/overview/12
+kalla_url: &huvud https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.kinda.se/download/18.77c157c918529d015948b96c/1671783597669/Regler%20och%20riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%20-%20rev%20SBN%202022-11-29.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: kinda-idrott-fritid
-  namn: Föreningsbidrag – idrott och fritid
-  kategori:
-  - idrott
-  malgrupp: Godkända bidragsberättigade föreningar inom idrott och fritid
+- id: kinda-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  kategori: [idrott, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med idrotts- eller fritidsverksamhet för barn och unga 7–25 år, seniorer 65+ eller personer med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
+    datum: [02-25]
   krav:
-  - Föreningen ska vara en ideell förening med säte i Kinda kommun och ha varit verksam minst ett år före bidragsåret
-  - Minst 10 medlemmar, varav minst hälften folkbokförda i Kinda kommun, med medlemsavgift på lägst 50 kr/år
-  - Aktivitetsbidrag kräver minst 3 deltagande medlemmar per aktivitetstillfälle ur målgrupperna barn/ungdom 7–25 år, senior
-    65 år eller äldre, eller person med funktionsnedsättning, och aktiviteten ska vara minst 60 minuter
-  - Föreningar med barn- och ungdomsverksamhet ska begära utdrag ur belastningsregistret för den som är ledare eller på annat
-    sätt kommer i kontakt med barn och ungdom
+  - &ideell Föreningen ska vara ideell, ha säte i Kinda och ha varit verksam minst ett år före bidragsåret; en förening i närliggande kommun kan undantagsvis godkännas om motsvarande aktivitet saknas i Kinda
+  - &formalia Föreningen ska ha stadgar, stadgeenligt vald styrelse och revisorer, årsmöte, eget organisationsnummer, eget konto och grundläggande försäkringsskydd
+  - &medlemmar Föreningen ska normalt ha minst tio matrikelförda och avgiftsbetalande medlemmar, minst hälften folkbokförda i Kinda och en medlemsavgift på minst 50 kr per år
+  - &varderingar Föreningen ska vara öppen och demokratisk samt arbeta för jämställdhet, jämlikhet, integration och tillgänglighet; normens uttryckligen undantagna organisationer får inte stöd
+  - &barn Föreningar med barn- och ungdomsverksamhet ska följa barnkonventionen, kontrollera belastningsregister och ha en årsmötesgodkänd ANDTS-policy
+  - &arshandlingar Huvudstyrelsen ska bifoga undertecknad verksamhetsberättelse, fullständig resultat- och balansrapport samt revisionsberättelse för närmast avslutat redovisningsår
+  - Aktiviteten ska vara planerad, föreningsgenomförd, målgruppsanpassad, minst 60 minuter och ha minst tre deltagande medlemmar; ledare som räknas ska vara minst 13 år
+  - Stödgrundande deltagare ska vara folkbokförda i Kinda och får räknas vid högst en aktivitet per dag i samma förening
+  - Närvarokort ska sparas fyra år; entrétävlingar, kommersiella arrangemang, studiecirklar och aktivitet under skoltid räknas inte
   belopp: null
-  sen_ansokan: Ofullständig eller sen ansökan behandlas inte
-  kalla_url: https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
-  belopp_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: Årets pott fördelas efter varje förenings andel av den sammanlagda aktivitetstotalen; totalsumman publiceras inte
+  sen_ansokan: Ansökan avser föregående år och ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-- id: kinda-kultur
-  namn: Föreningsbidrag – kultur
-  kategori:
-  - kultur
-  malgrupp: Godkända kulturföreningar
+- id: kinda-lokalbidrag-idrott-fritid
+  namn: Lokalbidrag – idrott och fritid
+  kategori: [idrott, social, ovrig]
+  foreningstyp: [idrott, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med minst tio aktiva i målgrupperna som hyr eller äger en verksamhetsanpassad lokal i egen regi
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
+    datum: [02-25]
   krav:
-  - Föreningen ska vara en ideell förening med säte i Kinda kommun och ha varit verksam minst ett år före bidragsåret
-  - Bidraget utgår till föreningar med huvudsaklig verksamhet inom kulturområdet, med undantag för hembygdsföreningar som
-    har särskilt stöd
-  - Minst 10 medlemmar, varav minst hälften folkbokförda i Kinda kommun, med medlemsavgift på lägst 50 kr/år (kulturföreningar
-    med ren arrangörsfunktion är undantagna medlemskravet)
-  - Bidrag ges inte till förening som har annat kommunalt lokalbidrag
-  belopp: null
-  sen_ansokan: Ofullständig eller sen ansökan behandlas inte
-  kalla_url: https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
-  belopp_status: okand
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *barn
+  - *arshandlingar
+  - Minst tio aktiva ska vara 7–25 år, 65+ eller personer med funktionsnedsättning från 7 år
+  - Lokalen ska vara anpassad för idrott eller fritid, i drift, kontinuerligt använd av målgruppen och nödvändig för verksamheten
+  - Tillfälliga eller kommunalt subventionerade lokaler och verksamhet med annat kommunalt lokalbidrag räknas inte
+  - Hyra, el och uppvärmning två år före bidragsåret ska redovisas och återfinnas i ekonomin
+  belopp: 75 % av faktisk hyra, el och värme, högst 10 000 kr per år vid 10–50 aktiva och 15 000 kr vid fler än 50; idrottsförening utan egen lokal kan undantagsvis få högst 5 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-- id: kinda-omsorg
-  namn: Föreningsbidrag – omsorg
-  kategori:
-  - social
-  - pensionar
-  - funktionsratt
-  malgrupp: Godkända föreningar inom omsorgsområdet
+- id: kinda-anlaggningsbidrag-idrott-fritid
+  namn: Anläggningsbidrag – idrott och fritid
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som driver en stödberättigad idrotts- eller fritidsanläggning eller framställer orienteringskartor
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
+    datum: [02-25]
   krav:
-  - Föreningen ska vara en ideell förening med säte i Kinda kommun och ha varit verksam minst ett år före bidragsåret
-  - Lokalbidrag omsorgsförening utgår till stödföreningar för personer med funktionsnedsättning och/eller anhöriga
-  - Lokalbidrag seniorförening utgår till seniorföreningar med medlemmar 65 år eller äldre i Kinda kommun
-  - Minst 10 medlemmar, varav minst hälften folkbokförda i Kinda kommun, med medlemsavgift på lägst 50 kr/år
-  belopp: null
-  sen_ansokan: Ofullständig eller sen ansökan behandlas inte
-  kalla_url: https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
-  belopp_status: okand
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *barn
+  - *arshandlingar
+  - Föreningen ska ha minst tio aktiva i målgrupperna 7–25 år, 65+ eller personer med funktionsnedsättning från 7 år
+  - Anläggningen ska vara i föreningens regi, verksamhetsanpassad, i drift och kontinuerligt använd av målgruppen
+  - Stödet avser hel anläggning enligt förteckningen; ett utökat bestånd ska anmälas för beslut
+  - Anläggningsbeståndet året före bidragsåret och eventuell kartframställning ska redovisas
+  belopp: Grus- eller mindre fotbollsplan 6 000 kr, normalstor fotbollsplan 20 000 kr, golf 10 000 kr, motor eller rid 20 000 kr, skytte 8 000 kr, tennis 2 500 kr asfalt eller 4 500 kr grus; orienteringskarta högst 10 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: 20 000 kr per år för kartframställning inom orienteringsverksamhet, fördelat mellan sökande
+  sen_ansokan: Ansökan ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-- id: kinda-samlingslokaler
-  namn: Föreningsbidrag – samlingslokaler
-  kategori:
-  - ovrig
-  malgrupp: Godkända föreningar som driver samlingslokaler
+- id: kinda-sommarsimskola
+  namn: Bidrag till sommarsimskola
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som bedriver sommarsimskola för barn och unga i Kinda
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
+    datum: [02-25]
   krav:
-  - Föreningen ska vara en ideell förening med säte i Kinda kommun och ha varit verksam minst ett år före bidragsåret
-  - Bidraget utgår till av Kinda kommun utvalda samlingslokaler, ägda och förvaltade av ideell förening
-  - Lokalen ska vara tillgänglig året runt, ha tillgång till parkeringsplatser, minst två toaletter samt kök för mottagning,
-    och vara handikappanpassad
-  - Lokalen ska vara regelbundet brandskyddskontrollerad, med utmärkta utrymningsvägar, utrymningsplan, pulversläckare och
-    brandvarnare
-  belopp: null
-  sen_ansokan: Ofullständig eller sen ansökan behandlas inte
-  kalla_url: https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
-  belopp_status: okand
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *barn
+  - *arshandlingar
+  - Sommarsimskolan ska avse barn och unga i Kinda och omfatta minst 50 deltagare per år
+  - Material och utbildning av simlärare ska avse bidragsåret och styrkas med offert och senare kvitto
+  - Grundbidraget gäller bara förening utan annan verksamhet eller inkomst och med minst 10 000 kr i verifierbara administrationskostnader
+  - Verksamheten får inte samtidigt ligga till grund för andra kommunala föreningsbidrag och marknadsföringen ska ange Kinda-Ydre sparbank som sponsor
+  belopp: 10 000 kr i grundbidrag när grundvillkoret är uppfyllt samt faktisk kostnad för material och kursavgift för simlärare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för bidragsårets beslutade inköp ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kinda-lokalbidrag-kulturforening
+  namn: Lokalbidrag – kulturförening
+  kategori: [kultur]
+  foreningstyp: [kultur]
+  malgrupp: Kulturföreningar med egen kulturverksamhet och verksamhetsbundna lokalkostnader
+  deadlines:
+    typ: fasta
+    datum: [02-25]
+  krav:
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *barn
+  - *arshandlingar
+  - Huvudverksamheten ska vara kultur; hembygdsföreningar söker sin särskilda stödform
+  - Stödet ska huvudsakligen gå till verksamhetsbundna lokalkostnader och får inte kombineras med annat kommunalt lokalbidrag
+  - Föregående års aktiviteter, deltagare och föreningens andel i samarrangemang ska redovisas med detaljerad ekonomi
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Potten fördelas till 50 % efter föreningarnas andel av aktiviteterna och till 50 % efter andelen deltagare; totalsumman publiceras inte
+  sen_ansokan: Ansökan avser föregående år och ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kinda-lokalbidrag-kulturarrangor
+  namn: Lokalbidrag – kulturförening med publik arrangörsverksamhet
+  kategori: [kultur]
+  foreningstyp: [kultur]
+  malgrupp: Kulturföreningar vars huvudsakliga verksamhet är publika arrangemang
+  deadlines:
+    typ: fasta
+    datum: [02-25]
+  krav:
+  - *ideell
+  - *formalia
+  - *varderingar
+  - *barn
+  - *arshandlingar
+  - Kulturförening med ren arrangörsfunktion är undantagen från medlemskravet
+  - Huvudverksamheten ska vara teater, konserter, föreläsningar eller annan publik kulturverksamhet; hembygdsföreningar söker sitt särskilda stöd
+  - Stödet ska huvudsakligen gå till verksamhetsbundna lokalkostnader och får inte kombineras med annat kommunalt lokalbidrag
+  - Intäkter, stöd, utgifter och resultat två år före bidragsåret ska redovisas
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Varje stödberättigad förening får 0,5 eller 1 andel av potten efter bedömning av egna intäktsmöjligheter; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kinda-lokalbidrag-hembygdsforening
+  namn: Lokalbidrag – hembygdsförening
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd]
+  malgrupp: Hembygdsföreningar som äger eller hyr en hembygdsgård i Kinda
+  deadlines:
+    typ: fasta
+    datum: [02-25]
+  krav:
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *arshandlingar
+  - Föreningen ska ha en hyrd eller ägd hembygdsgård i Kinda kommun
+  - Stödet avser verksamhetsbundna kostnader för el, värme och VA
+  - Kostnader och fastighetsbestånd två år före bidragsåret ska redovisas; utökning av beståndet kräver nytt beslut
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Potten fördelas efter varje förenings andel av de faktiska stödgrundande kostnaderna; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kinda-lokalbidrag-omsorgsforening
+  namn: Lokalbidrag – omsorgsförening
+  kategori: [social, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Stödföreningar för personer med funktionsnedsättning och deras anhöriga
+  deadlines:
+    typ: fasta
+    datum: [02-25]
+  krav:
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *arshandlingar
+  - Föreningen ska stödja personer med funktionsnedsättning och/eller anhöriga
+  - Stödet ska huvudsakligen gå till verksamhetsbundna lokalkostnader
+  - Aktiviteter och geografiskt verksamhetsområde två år före bidragsåret ska redovisas
+  - Idrotts- och motionsaktiviteter ska sökas via aktivitetsbidraget
+  belopp: Grundbidrag 1 500 kr för verksamhet endast i Kinda, 1 000 kr för Kinda och en grannkommun eller 500 kr för Kinda och två grannkommuner, samt en rörlig andel efter aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: Den rörliga delen fördelas efter föreningens andel av det totala antalet aktiviteter; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kinda-lokalbidrag-seniorforening
+  namn: Lokalbidrag – seniorförening
+  kategori: [social, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Seniorföreningar för personer 65 år eller äldre i Kinda
+  deadlines:
+    typ: fasta
+    datum: [02-25]
+  krav:
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *arshandlingar
+  - Föreningen ska vara en seniorförening i Kinda med verksamhet för personer från 65 år
+  - Stödet ska huvudsakligen gå till verksamhetsbundna lokalkostnader
+  - Lokalkostnader och verksamhet två år före bidragsåret ska redovisas
+  - Idrotts- och motionsaktiviteter ska sökas via aktivitetsbidraget
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Potten fördelas jämnt mellan alla stödberättigade seniorföreningar; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: kinda-studieforbund
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund med verksamhet i Kinda kommun
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Kinda
   deadlines:
     typ: fasta
-    datum:
-    - 06-30
+    datum: [06-30]
   krav:
-  - Bidraget utgår till studieförbund med verksamhet i Kinda kommun
-  - Bidrag utgår endast till organisation och för verksamhet som godkänts för statsbidrag
+  - Studieförbundet ska ha bedrivit verksamhet i Kinda under föregående verksamhetsår
+  - Organisationen och den redovisade verksamheten ska vara godkända för statsbidrag
+  - Verksamhetsberättelsen ska visa verksamheten i Kinda och ansökan ska innehålla ekonomisk redogörelse och revisionsberättelse
+  - Totala studietimmar och målgruppstimmar för arbetslösa, invandrare och personer med funktionsnedsättning ska redovisas
+  - Ansökan ska undertecknas av ordförande och kassör eller annan funktion med mandat
   belopp: null
-  sen_ansokan: Ofullständig eller sen ansökan behandlas inte
-  kalla_url: https://www.kinda.se/upplevaochgora/foreningsliv/foreningsbidrag.4.15d59a7c151bb4254b7e713c.html
-  belopp_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: Anslaget fördelas 70 % som grundbidrag efter föregående års bidragsandel, 15 % efter studietimmar och 15 % efter målgruppstimmar; totalsumman publiceras inte
+  sen_ansokan: Ansökan och sammanställningen ska lämnas senast 30 juni; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: https://minasidor.kinda.se/oversikt/getflowform/32/70
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kinda-samlingslokaler
+  namn: Bidrag till allmänna samlingslokaler
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, ungdom, annat]
+  malgrupp: Av kommunen utvalda ideella föreningar som äger och förvaltar en allmän samlingslokal i Kinda
+  deadlines:
+    typ: fasta
+    datum: [02-25]
+  krav:
+  - *ideell
+  - *formalia
+  - *medlemmar
+  - *varderingar
+  - *arshandlingar
+  - Lokalen ska normalt ägas och förvaltas av ideell förening och bör vara ansluten till lämplig riksorganisation; privatägd lokal kräver särskilt undantagsbeslut och kan bara få aktivitetsdelen
+  - Lokalen ska vara tillgänglig året runt, ha parkering, minst två toaletter, mottagningskök och normens tillgänglighetsanpassningar
+  - Regelbunden brandskyddskontroll, utmärkta utrymningsvägar, utrymningsplan, släckare, brandvarnare och rutin för överlämnat brandskyddsansvar krävs
+  - Föregående års uthyrningar och egen verksamhet ska redovisas; kommunens regelbundna betalda hyrtillfällen får inte räknas
+  - Stödgrundande yta, sittplatser och utrustning ska redovisas enligt poängmodellen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Potten fördelas 50 % efter geografiskt grundbidrag, 35 % efter sammankomster och 15 % efter lokalernas yta, kapacitet och utrustning; totalsumman publiceras inte
+  sen_ansokan: Ansökan avser föregående år och ska lämnas senast 25 februari; sena eller ofullständiga ansökningar behandlas inte.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 forutsattningar:
-- id: kinda-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Kommunens e-tjänster
+- id: kinda-godkand-forening
+  vad: Godkänd som bidragsberättigad förening
+  beskrivning: Första gången ska föreningen lämna inträdesansökan med aktuell bidragsblankett, stadgar, ANDTS-policy, verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse.
+  system: Kinda kommuns Mina sidor
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Inträdesansökan ska lämnas senast 31 oktober året före det första bidragsåret.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.kinda.se/kultur-fritid-och-turism/foreningar-och-foreningsliv.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: kinda-foreningsregister
+  vad: Aktuella uppgifter i föreningsregistret
+  beskrivning: Bidragsföreningen ansvarar för att hålla bland annat ordförandens och kassörens kontaktuppgifter aktuella eftersom information skickas med e-post.
+  system: Kommunens föreningsregister
+  ledtid: null
+  ledtid_text: Uppdateras vid behov; kommunen publicerar ingen separat tidsfrist.
+  giltighet: null
+  ordning: 2
+  kalla_url: https://minasidor.kinda.se/oversikt/overview/13
+  giltighet_status: ingen_regel
+- id: kinda-arliga-handlingar
+  vad: Årlig ansökan och fullständiga årshandlingar
+  beskrivning: En godkänd förening ska varje år lämna ansökan genom huvudstyrelsen med verksamhetsberättelse, resultat- och balansrapport samt revisionsberättelse för närmast avslutat år.
+  system: Kinda kommuns Mina sidor
+  ledtid: null
+  ledtid_text: Samma sista dag som den aktuella stödformen.
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
