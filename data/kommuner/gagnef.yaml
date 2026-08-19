@@ -2,102 +2,345 @@ kommun: Gagnef
 kommun_slug: gagnef
 lan: Dalarnas län
 befolkning: 10300
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsförvaltningen samt socialförvaltningen
 ansokningssystem:
-  namn: Rbok e-tjänster
-  url: https://www.gagnef.se/ansok-om-foreningsbidrag-inom-fritid-idrott-och-kultur/
-kalla_url: https://www.gagnef.se/ansok-om-foreningsbidrag-inom-fritid-idrott-och-kultur/
-verifierad: '2026-08-02'
+  namn: Mina sidor och kommunens blanketter
+  url: https://minasidor.gagnef.se/
+kalla_url: &huvud https://www.gagnef.se/kultur-och-fritid/fritid-och-idrott/stod-och-bidrag-inom-kultur-fritids-och-idrottsverksamhet-2/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://gagnef.se/wp-content/uploads/2023/06/Antagen-KF-230619-%C2%A7-84-Regler-for-foreningsbidrag-avseende-fritid-idrott-och-kultur-Gagnefs-kommu-BD7F397D-46B6-40D6-902C-2EE2B1121DBB.docx
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: gagnef-arrangorbidrag
-  namn: Arrangeörbidrag
-  kategori:
-  - kultur
-  malgrupp: Religiösa och politiskt obundna kulturföreningar
+  namn: Arrangörsbidrag för kulturverksamhet
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Religiöst och partipolitiskt obundna kulturföreningar
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
+    datum: [03-31]
   krav:
-  - Religiöst och politiskt obunden kulturförening
-  - Arrangemanget ska vara offentligt och rikta sig till en publik
-  - Förvaltningsberättelse för föregående år bifogas ansökan
-  - Årsmötesprotokoll för innevarande år bifogas ansökan
-  belopp: null
-  sen_ansokan: Ej möjlig efter 31 mars
-  kalla_url: https://www.gagnef.se/kultur-och-fritid/fritid-och-idrott/stod-och-bidrag-inom-kultur-fritids-och-idrottsverksamhet-2/
-  belopp_status: okand
+  - Sökanden ska vara en kulturförening som är religiöst och partipolitiskt obunden
+  - Stödet ska avse en serie eller ett fristående offentligt kulturarrangemang som riktar sig till publik
+  - Stödberättigade kostnader kan vara arvoden, marknadsföring och lokalhyra under kalenderåret
+  - Förvaltningsberättelse för föregående år och årsmötesprotokoll för innevarande år ska bifogas
+  - Kommunens logotyp eller uppgift om kommunens stöd ska användas i marknadsföringen
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas för årets arrangemang
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för innevarande kalenderår ska lämnas senast 31 mars.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För serier av event eller enstaka arrangemang (utställning, film, konsert, föreställning, föreläsning, seminarier)
-    Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte verifierad.
-- id: gagnef-fritidsidrott
-  namn: Föreningsbidrag fritid, idrott och kultur
-  kategori:
-  - idrott
-  - kultur
-  - social
-  malgrupp: Föreningar inom fritid, idrott, kultur eller socialt arbete
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-projektbidrag-kultur
+  namn: Projektbidrag för kulturverksamhet
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Religiöst och partipolitiskt obundna kulturföreningar med ett nytt tidsbegränsat projekt
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
+    datum: [03-31, 09-30]
   krav:
-  - Verksamhet i Gagnef
-  - Årlig ansökan
-  belopp: null
-  sen_ansokan: Ej möjlig efter 31 mars
-  kalla_url: https://www.gagnef.se/kultur-och-fritid/fritid-och-idrott/stod-och-bidrag-inom-kultur-fritids-och-idrottsverksamhet-2/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Viktigt verktyg för att stödja ett aktivt föreningsliv Tidigare platshållare "Individuell bedömning" har tagits
-    bort. Kommunens faktiska beloppsregel är ännu inte verifierad.
+  - Projektet ska vara nytt och tidsbegränsat, avse en konstform och mynna ut i ett publikt arrangemang eller annan nytta för kommuninvånarna
+  - Återkommande arrangemang omfattas inte; nyskapande, nya publikgrupper, gränsöverskridande arbete och hög kvalitet prioriteras
+  - Stödet kan avse arvoden, marknadsföring och lokalhyra; medieproduktion stöds bara undantagsvis vid starkt lokalt kulturintresse
+  - Förvaltningsberättelse för föregående år samt innevarande års årsmötesprotokoll och verksamhetsplan ska bifogas
+  - Genomförande och ekonomi ska redovisas senast två månader efter projektets slut
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas per kulturprojekt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den 31 mars gäller projekt 1 maj–31 oktober samt helår; den 30 september gäller projekt 1 november–30 april.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-personalkostnadsbidrag
+  namn: Personalkostnadsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, ungdom, annat]
+  malgrupp: Kultur-, fritids- och idrottsföreningar med anställd personal eller motsvarande köpt tjänst
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Kostnaden ska avse anställd personal för kansli eller skötsel av föreningens fastighet eller anläggning, alternativt motsvarande köpt tjänst
+  - Föreningen ska kontakta förvaltningen inför nyanställning eller tjänsteköp och bara en förening får stöd för samma person
+  - Annan finansiering ska redovisas och styrelsebeslut, förvaltningsberättelse samt offert eller myndighetsbeslut ska bifogas när de är relevanta
+  - Lönespecifikation eller faktura ska lämnas löpande och stödet betalas bara under det kalenderår som kostnaden avser
+  belopp: Högst 35 procent av nettokostnaden inklusive sociala avgifter, maximalt 8 000 kronor per månad och heltidsanställd samt totalt 12 000 kronor per förening och månad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande kalenderår ska lämnas senast 30 september.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &fritid [idrott, kultur, friluft, ungdom, annat]
+  malgrupp: Fritids- och idrottsföreningar med organiserad barn- och ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum: [02-25, 03-31, 08-25]
+  krav:
+  - Föreningen ska ha aktiva medlemmar under 20 år och lämna verksamhetsbidragsansökan senast 31 mars
+  - Aktiviteten ska vara planerad, ledarledd, pågå minst 45 minuter och ha minst tre deltagare utöver en ledare som är minst 13 år
+  - Stödet avser deltagartillfällen 3–25 år; RF-anslutna idrottsföreningar redovisar 7–25 år till Riksidrottsförbundet och 3–6 år till kommunen
+  - Övriga föreningar redovisar sammankomster och könsuppdelade deltagartillfällen 3–25 år till kommunen
+  - Förvaltningsberättelse, årsmötesprotokoll, verksamhetsplan och uppföljning av föregående plan ska bifogas verksamhetsbidragsansökan
+  belopp: Belopp per deltagartillfälle; nivån fastställs inom kommunens verksamhetsbidrag och kan variera mellan år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Höstens deltagartillfällen redovisas senast 25 februari, vårens senast 25 augusti och verksamhetsbidragsansökan senast 31 mars.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-lokalbidrag-hyrd-lokal
+  namn: Lokalbidrag för hyrd lokal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *fritid
+  malgrupp: Fritids- och idrottsföreningar med barn- och ungdomsverksamhet som hyr en icke-kommunal lokal
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Föreningen ska ha aktiva medlemmar under 20 år och söka stödet som en del av verksamhetsbidraget
+  - Lokalen ska vara hyrd och får inte ägas av Gagnefs kommun
+  - Stödet beräknas på föregående verksamhetsårs hyra och kopior av hyresfakturor ska bifogas
+  - Förvaltningsberättelse, årsmötesprotokoll, verksamhetsplan och uppföljning av föregående verksamhetsplan ska lämnas
+  belopp: Högst 75 procent av hyresbeloppet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för innevarande års verksamhetsbidrag ska lämnas senast 31 mars.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-utbildningsbidrag
+  namn: Utbildningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *fritid
+  malgrupp: Fritids- och idrottsföreningar som utbildar ledare eller unga domare
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Utbildningen ska behövas för föreningens barn- och ungdomsverksamhet eller avse domarutbildning i rekommenderad ungdomsålder för idrotten
+  - Stödet söks efter genomförd utbildning och faktura ska bifogas
+  - Föreningen ska ha aktiva medlemmar under 20 år och uppfylla de allmänna villkoren för verksamhetsbidrag
+  - Förvaltningsberättelse, årsmötesprotokoll och verksamhetsplan ska lämnas med ansökan
+  belopp: Högst 75 procent av utbildningskostnaden och maximalt 20 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas senast 31 mars eller 30 september efter genomförd utbildning.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-forlustbidrag-idrottslager
+  namn: Förlustbidrag för idrottsläger
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Fritids- och idrottsföreningar som arrangerar egna idrottsläger
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Idrottslägret ska arrangeras av den egna föreningen
+  - Föreningen ska ha aktiva medlemmar under 20 år och söka stödet som en del av verksamhetsbidraget
+  - Ekonomisk redovisning för föregående års läger ska bifogas och visa intäkter, kostnader och nettoförlust
+  - Förvaltningsberättelse, årsmötesprotokoll och verksamhetsplan ska lämnas med ansökan
+  belopp: Högst 75 procent av nettoförlusten och maximalt 10 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med redovisning för föregående års läger ska lämnas senast 31 mars.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-driftsbidrag-kulturhistorisk-byggnad
+  namn: Driftsbidrag för kulturhistoriskt värdefull byggnad
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar och stiftelser som äger eller förvaltar en kulturhistoriskt värdefull byggnad
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Byggnaden ska vara en del av kulturarvet och ägas eller förvaltas av föreningen eller stiftelsen
+  - Kulturell verksamhet ska bedrivas i byggnaden, som ska vara tillgänglig för allmänheten i alla åldrar
+  - Verksamheten ska utvecklas och vara publikinriktad
+  - Förvaltningsberättelse och innevarande års årsmötesprotokoll ska lämnas inför ett årligt besök och en överenskommelse med kommunen
+  - En ny sökande ska få byggnaden godkänd som bidragsgrundande av kultur- och fritidsförvaltningen
+  belopp: Del av aktuellt prisbasbelopp enligt kommunens bedömning av den bidragsgrundande byggnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan och bokning av föreningsbesök kan göras löpande under året.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-driftsbidrag-idrott-fritid
+  namn: Driftsbidrag för idrotts- och fritidsanläggning
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som äger eller förvaltar en idrotts- eller fritidsanläggning
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Fastigheten eller anläggningen ska ägas eller förvaltas av föreningen och användas för idrotts- eller fritidsverksamhet
+  - Förvaltningsberättelse med verksamhets-, ekonomi- och revisionsberättelse samt innevarande års årsmötesprotokoll ska lämnas
+  - Föreningen ska boka ett årligt möte där driftens villkor regleras i ett avtal som undertecknas av båda parter
+  - En ny förening eller ny byggnad ska först bedömas och godkännas som bidragsgrundande av förvaltningen
+  belopp: Del av aktuellt prisbasbelopp enligt kommunens bedömning av anläggningen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande; ett årligt föreningsmöte och avtal krävs.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-investeringsbidrag
+  namn: Investeringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med en driftsbidragsberättigad byggnad eller anläggning
+  deadlines:
+    typ: fasta
+    datum: [11-30]
+  krav:
+  - Investeringen ska avse ny- eller ombyggnad av en driftsbidragsberättigad byggnad eller anläggning
+  - Normalt underhåll, maskinpark och kostnader under 6 000 kronor stöds inte; försäkrad akut skada kan få stöd till självrisken
+  - Investeringen ska finnas i föreningens årligen uppdaterade investeringsplan och får inte påbörjas före beslut
+  - Styrelsebeslut, offert eller noggrann kalkyl, eventuell medfinansiering och påverkan på framtida drift ska redovisas
+  - Utbetalning sker mot fakturor under det kalenderår som bidraget avser
+  belopp: Högst 75 procent av investeringskostnaden; akut oförutsedd skada kan ge högst 75 procent av självrisken
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar på 6 000–45 000 kronor behandlas löpande; högre ansökningar ska lämnas senast 30 november året före åtgärden.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gagnef-spontanidrottsbidrag
+  namn: Spontanidrottsbidrag
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Intresseföreningar som skapar spontan fysisk aktivitet utanför ordinarie föreningsverksamhet
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en intresseförening och stödet ska avse verksamhet utanför den ordinarie föreningsverksamheten
+  - Anläggningen eller aktiviteten ska rikta sig till allmänheten och främja spontanidrott eller annan spontan fysisk aktivitet
+  - Förvaltningsberättelse, styrelsebeslut, offert eller kostnadskalkyl och beslut om eventuell medfinansiering ska bifogas
+  - Aktiviteten eller åtgärden får inte påbörjas innan kommunen har fattat beslut
+  - Beviljade medel betalas till intresseföreningen mot efterfrågade underlag under beslutsåret
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas per anläggning eller aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under det år bidraget behövs.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: gagnef-socialt-foreningsbidrag
   namn: Föreningsbidrag inom socialt område
-  kategori:
-  - social
-  malgrupp: Föreningar och organisationer med social verksamhet i Gagnefs kommun
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar och organisationer med social verksamhet för invånare i Gagnefs kommun
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: [04-30]
   krav:
-  - Verksamhet inom det sociala området i Gagnefs kommun
-  - Verksamheten ska rikta sig till kommuninvånare
-  - Ideell verksamhet, öppen för alla inom föreningens målgrupp
-  - Demokratiskt arbetssätt där medlemmarna kan påverka beslut
-  - Medlemmar och/eller verksamhet i Gagnefs kommun
-  - Föreningens stadgar inlämnade till socialkontoret
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Verksamheten ska ligga inom det sociala området i Gagnefs kommun och rikta sig till kommuninvånare
+  - Föreningen eller organisationen ska vara ideell, öppen för sin målgrupp och arbeta demokratiskt med medlemsinflytande
+  - Verksamheten ska stimulera det sociala klimatet och bidra till en varm och trygg kommun
+  - Föreningen ska ha medlemmar eller verksamhet i kommunen och ha lämnat sina stadgar till socialförvaltningen
+  - Ansökan ska beskriva aktiviteter eller löpande verksamhet och lämnas på kommunens blankett
+  belopp: Kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bidraget söks en gång per år senast 30 april.
   kalla_url: https://www.gagnef.se/stod-omsorg-och-vard/foreningsbidrag/
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: gagnef-registrering
-  vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste vara registrerad för att kunna ansöka.
-  system: Föreningsregistret
+  vad: Registrering och allmän bidragsbehörighet
+  beskrivning: Föreningen ska vara ideell och allmännyttig, arbeta demokratiskt, vara öppen för alla, ha säte i Gagnefs kommun, vara registrerad i kommunens föreningsregister och ha lämnat sina stadgar till kultur- och fritidsförvaltningen.
+  system: Kommunens föreningsregister och Mina sidor
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid eller giltighetstid för registreringen.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.gagnef.se/ansok-om-foreningsbidrag-inom-fritid-idrott-och-kultur/
-  giltighet_status: okand
-- id: gagnef-rbok
-  vad: Ansökan via Rbok
-  beskrivning: Ansökningar görs via Rbok e-tjänster för Gagnef kommun.
-  system: Rbok
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: gagnef-ansokningshandlingar
+  vad: Fullständig ansökan och föreningshandlingar
+  beskrivning: Komplett ansökan ska lämnas i anvisat formulär inom stödets frist. Beroende på stöd ska förvaltningsberättelse med verksamhets-, ekonomi- och revisionsberättelse, årsmötesprotokoll, verksamhetsplan, styrelsebeslut, fakturor, offerter och finansieringsbeslut bifogas.
+  system: Mina sidor eller kommunens blankett
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kompletteringar lämnas på kommunens begäran; ingen gemensam registreringsfrist publiceras.
   giltighet: null
   ordning: 2
-  kalla_url: https://gagnef.rbok.se/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+kommunsiffra: null
