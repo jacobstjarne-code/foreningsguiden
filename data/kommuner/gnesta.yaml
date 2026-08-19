@@ -2,18 +2,35 @@ kommun: Gnesta
 kommun_slug: gnesta
 lan: Södermanlands län
 befolkning: 11310
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kommunstyrelseförvaltningen samt kommunstyrelsen
 ansokningssystem:
-  namn: E-tjänstportal
-  url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
-kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
-verifierad: 2026-07-26
+  namn: Gnesta kommuns e-tjänster
+  url: https://e-tjanster.gnesta.se/
+kalla_url: &huvud https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.gnesta.se/download/18.4026b9e19b353b7ba8a340e/1767771569987/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%20%E2%80%93%20reviderad%20251215.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: gnesta-aktivitetsbidrag
   namn: Aktivitetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - pensionar
+  - ovrig
+  foreningstyp: &alla
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Föreningar för aktiviteter för barn/ungdom 4-20 år och seniorer 65+
   deadlines:
     typ: lopande
@@ -23,19 +40,25 @@ bidrag:
   - Min 5 deltagare
   - Min 1 ledare 16+ år
   belopp: 30 kr/möte
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande, ingen fast deadline (RF:s bidragsperioder 25/2 och 25/8 avser ej detta kommunala bidrag)
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ansökan och redovisning sker löpande via e-tjänst. RF:s bidragsperioder (25 feb för juli-dec, 25 aug för jan-juni)
     är en informativ notering i källan, inte kommunens ansökningsdeadline.
+  senast_verifierad: '2026-08-19'
 - id: gnesta-ledarutbildning
   namn: Ledarutbildningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för ledare-utbildning
   deadlines:
     typ: lopande
@@ -48,17 +71,24 @@ bidrag:
   - Ej bidrag för yrkesutbildning
   - Intyg och ansökan senast 2 månader efter utbildningens sista dag
   belopp: 300 kr/godkänd kursdag, max 3 dagar, ej över verklig kursavgift, ej resekostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande, inom 2 mån efter utbildning
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: gnesta-anlaggningsbidrag
   namn: Anläggningsbidrag
+  status: aktiv
   kategori:
   - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar med egen lokal/anläggning
   deadlines:
     typ: lopande
@@ -69,18 +99,25 @@ bidrag:
   - Fotbollsplan och skjutbana ska vara föreningsägd
   - Föreningar som hyr lokal av Gnesta kommun (redan reducerad hyra) kan inte söka
   belopp: Max 30000 kr (föreningsägd byggnad), 15000 kr (fotbollsplan, max 1/förening), 5000 kr/skjutbana (max 3 banor/förening)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: De kommunfullmäktigeantagna riktlinjerna från 2026 anger löpande ansökan och ersätter e-tjänstens äldre uppgift om 15 februari.
+  senast_verifierad: '2026-08-19'
 - id: gnesta-utvecklingsbidrag
   namn: Utvecklingsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - social
+  - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för nya initiativ/målprogram
   deadlines:
     typ: lopande
@@ -90,18 +127,24 @@ bidrag:
   - Ansökan innehåller beskrivning, budget, mål och syfte
   - Ej för underhållsarbete eller ordinarie föreningsverksamhet
   belopp: 0.5 prisbasbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: gnesta-investeringsbidrag
   namn: Investeringsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för byggnads-/renoveringsprojekt
   deadlines:
     typ: lopande
@@ -112,18 +155,24 @@ bidrag:
   - Anläggningen tillgänglig för allmänheten vid arrangemang/aktiviteter
   - Ej för löpande underhållskostnader
   belopp: Max 30% av kostnader, 1.0 prisbasbelopp max
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande, före projekt
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: gnesta-arrangemangsbidrag
   namn: Arrangemangsbidrag
+  status: aktiv
   kategori:
   - kultur
   - idrott
+  - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för offentliga arrangemang
   deadlines:
     typ: lopande
@@ -137,19 +186,25 @@ bidrag:
   - Ansökan innehåller budget, målgrupp, syfte och marknadsföringsplan
   - Redovisning inom 2 månader efter arrangemang
   belopp: Max 30000 kr/år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: 'Prioriteras vid bedömning: aktiviteter för barn/unga/seniorer, aktivt lov, nationella högtider, konst-/kulturliv,
     samverkan mellan föreningar.'
+  senast_verifierad: '2026-08-19'
 - id: gnesta-bygglovsbidrag
   namn: Bygglovsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för bygglov-kostnader
   deadlines:
     typ: lopande
@@ -160,32 +215,106 @@ bidrag:
     utsättningsavgifter)
   - Omfattar ej kostnader för konsulter, ritningar eller externa tjänster
   belopp: Max 50% av kostnader, 0.5 prisbasbelopp max
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För bygglov/godkännandeavgifter
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gnesta-atervinningsbidrag
+  namn: Återvinningsbidrag
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar med avfallskostnader vid renovering, större städning eller underhåll
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska vara ideell och uppfylla kommunens allmänna villkor för föreningsbidrag
+  - Kostnaden ska avse kommunens återvinningscentral eller motsvarande kommunal avfallstjänst
+  - Stöd kan ges för avfallsavgift, större mängder bygg- eller grovavfall, farligt avfall samt container, sortsäckar eller motsvarande tjänst
+  - Ansökan ska göras i nära anslutning till att kostnaden uppstår
+  - Kvitto, faktura eller annat godkänt kostnadsunderlag ska bifogas
+  belopp: Högst 50 procent av kostnaden och högst 0,25 prisbasbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan sker löpande i nära anslutning till kostnaden.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: gnesta-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som bokar kommunens lokaler eller idrottsanläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara registrerad i Gnesta kommuns föreningsregister för att få föreningstaxa
+  - Bokningen ska avse en kommunal lokal eller idrottsanläggning som omfattas av kommunens prislista
+  - Taxan bestäms av lokal eller anläggning, målgrupp och användning
+  - Föreningen ska följa kommunens boknings- och ordningsregler
+  belopp: Subvention genom 2026 års föreningstaxor, bland annat 75–175 kr per timme för barn- och ungdomsverksamhet i gymnastik- och sporthallar, 80 kr för naturgräsplan och 125 kr för konstgräsplan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag för föreningstaxan.
+  kalla_url: https://www.gnesta.se/kulturfritid/fritidochidrott/idrottsanlaggningar/avgifteridrottsanlaggningar2026.4.4db26ca718c624538e8131c9.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Riktlinjen räknar uttryckligen subventionerade kommunala lokaler som en av kommunens två stödformer till föreningar.
+  senast_verifierad: '2026-08-19'
+- id: gnesta-landsbygdspott
+  namn: Landsbygdspott
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar, lokala samverkansgrupper, byalag och andra icke-vinstdrivande organisationer med lokal förankring
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Den formella sökanden och mottagaren ska vara en ideell förening, organisation, lokal samverkansgrupp, byalag, kooperativ eller annan icke-vinstdrivande verksamhet
+  - Projektet ska genomföras på Gnestas landsbygd, ha ett tydligt allmänintresse och vara till nytta för en bred målgrupp
+  - Projektet ska bidra till minst ett mål i kommunens landsbygdsprogram och kan avse en förstudie, samverkan, aktivitet eller investering
+  - Stöd ges inte till ordinarie löpande verksamhet, privat vinning, kommunens ordinarie verksamhet eller projekt som redan fått ett annat kommunalt bidrag
+  - Ansökan ska innehålla projektbeskrivning, budget, tidplan, kontakt- och sökandeuppgifter samt plan för fortsatt förvaltning
+  - Projektet ska slutföras inom tolv månader efter beslut och slutrapporteras med verksamhets- och ekonomiredovisning inom två månader
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 500 000 kr för 2026; ingen fast individuell maxnivå och fördelningen bedöms efter projektens kvalitet, relevans, samhällsnytta, lokala förankring och bidrag till landsbygdsprogrammets mål
+  sen_ansokan: Ansökan sker löpande under året.
+  kalla_url: https://www.gnesta.se/download/18.668dbeb519d9a5cc7c72b9b7/1776847346879/Riktlinjer%20f%C3%B6r%20landsbygdspott%202026.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Privatpersoner kan initiera projekt men föreningen eller den lokala gruppen måste vara formell sökande och mottagare; företag kan endast medverka som samarbetspartner.
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: gnesta-registrering
-  vad: Förening registrerad lokalt
-  beskrivning: Föreningen måste vara ideell, demokratiskt strukturerad, öppen för alla, politiskt och religiöst obunden, registrerad
-    lokalt, ha 10+ betalande medlemmar, organisationsnummer och bankkonto.
+  vad: Årlig registrering och fullständiga grundvillkor
+  beskrivning: Föreningen ska drivas ideellt, vara demokratiskt uppbyggd, öppen, partipolitiskt och religiöst obunden, ha sin huvudsakliga verksamhet i Gnesta, organisationsnummer, föreningskonto samt minst tio registrerade medlemmar som betalar minst 100 kr eller 200 kr i familjeavgift. Föreningar med barnverksamhet ska inhämta belastningsregisterutdrag för personer från 15 år med direkt eller regelbunden kontakt med barn.
   system: Föreningsregistret
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna och kontaktpersonerna ska ses över varje år och vid behov
+  giltighet: Registreringen och kontaktuppgifterna ska uppdateras årligen
   ordning: 1
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 - id: gnesta-riktlinjer
-  vad: Reviderade riktlinjer gällande från 1 januari 2026
-  beskrivning: Gnesta anpassade reglerna för föreningsbidrag från 1 jan 2026 med fokus på barn/ungdom 4-20 och seniorer 65+.
+  vad: Årliga föreningshandlingar
+  beskrivning: Föreningen ska varje år efter årsstämman lämna årsmötesprotokoll, övriga årshandlingar och resultaträkning samt på begäran lämna handlingar som har betydelse för bidragsgivningen.
   system: Gnesta kommun
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Efter årsstämman varje år; kommunen anger inget fast datum
+  giltighet: Årlig inlämning efter årsstämman
   ordning: 2
-  kalla_url: https://www.gnesta.se/kulturfritid/foreningar/foreningsbidrag.4.233511f518beb6dc90023ca9.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
