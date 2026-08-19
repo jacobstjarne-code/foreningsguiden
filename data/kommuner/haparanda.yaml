@@ -2,244 +2,392 @@ kommun: Haparanda
 kommun_slug: haparanda
 lan: Norrbottens län
 befolkning: 8975
-forvaltning: Kultur och fritid
+forvaltning: Kultur- och fritidsenheten samt minoritetsspråksverksamheten
 ansokningssystem:
-  namn: Rbok
-  url: https://www.haparanda.se/fritid-och-kultur/foreningsliv/bidrag-och-stod-till-foreningar
-kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv/bidrag-och-stod-till-foreningar
-verifierad: '2026-08-02'
+  namn: Rbok och Haparanda stads e-tjänster
+  url: https://haparanda.rbok.se/ansok
+kalla_url: &huvud https://www.haparanda.se/fritid-och-kultur/foreningsliv/bidrag-och-stod-till-foreningar
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &system https://www.haparanda.se/fritid-och-kultur/foreningsliv/boknings--och-bidragssystem
+giltighet_regel_status: kontrollast
 bidrag:
 - id: haparanda-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  - ovrig
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Bidragsberättigade föreningar med verksamhet för barn och unga 5–25 år
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Sammankomsten ska pågå minst 45 minuter
-  - Minst tre stödberättigade deltagare
-  - Sammankomsten ska vara planerad
-  - Ledaren ska vara lägst 13 år och utsedd av föreningen
-  - Fester, publika arrangemang, skolverksamhet och studiecirklar är inte stödberättigade
-  belopp: 2,7 kr per deltagartillfälle för pojkar och 5,2 kr för flickor
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Föreningen ska vara ansluten till en riksorganisation och bedriva stödberättigad verksamhet för deltagare 5–25 år
+  - Sammankomsten ska vara planerad, ledarledd och pågå i minst 45 minuter
+  - Minst tre stödberättigade deltagare ska delta och ledaren ska vara minst 13 år och utsedd av föreningen
+  - Närvaro ska registreras vid varje sammankomst och underlagen ska bevaras för kommunens kontroll
+  - Fester, högtidsfiranden, offentliga arrangemang, överordnade organisationers möten, skolverksamhet och studiecirklar är inte stödberättigade
+  - Ansökan ska avse föregående kalenderårs verksamhet och lämnas komplett tillsammans med de underlag kommunen begär
+  belopp: 2,7 kr per deltagartillfälle för pojkar och 5,2 kr per deltagartillfälle för flickor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om föregående års verksamhet ska lämnas senast 30 april; sena ansökningar behandlas inte
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-stimulansbidrag
   namn: Stimulansbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar och grupper som stärker flickors och kvinnors idrottande och fritid
+  status: aktiv
+  kategori: [idrott, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar, organisationer och andra sammanslutningar som stärker flickors och kvinnors idrottande och fritid
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Ska innehålla ett tydligt inslag av idrotts- och/eller fritidsutbud riktat till flickor/kvinnor
-  - Ska komplettera befintligt utbud i kommunal-, förenings- eller annan organisations regi
-  - Målgruppen ska vara flickor/kvinnor bosatta i Haparanda
-  belopp: Upp till 100 % av verifierade nettokostnader
-  sen_ansokan: Ansökan kan göras löpande
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Sökanden ska ha hemvist i Haparanda och insatsen ska rikta sig till flickor eller kvinnor bosatta i kommunen
+  - Insatsen ska ha ett tydligt idrotts- eller fritidsinnehåll och komplettera det utbud som kommunen, föreningslivet eller andra organisationer redan erbjuder
+  - Ansökan ska beskriva insatsen, målgruppen, genomförandet och en fullständig budget med samtliga intäkter och kostnader
+  - Beviljade kostnader ska kunna verifieras och kommunen kan kräva en skriftlig utvärdering och ekonomisk redovisning
+  - Beslut fattas inom tillgänglig budget; kultur- och fritidschefen kan besluta om högst 5 000 kr per sökande och år medan större ansökningar prövas av nämnden
+  belopp: Upp till 100 procent av verifierade nettokostnader; kultur- och fritidschefen kan besluta om högst 5 000 kr per sökande och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande; större ansökningar behandlas vid nämndens beslutstillfällen i juni och december
+  kalla_url: &norm https://www.haparanda.se/download/18.428e4ae3193ded19a12288aa/1738228384294/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%20-%20Haparanda%20stad.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: haparanda-anlaggningsbidrag
   namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar som driver egen anläggning av allmänintresse
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som äger eller driver en fritidsanläggning av allmänintresse
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Anläggningen ska drivas i egen regi, vara av allmänintresse och öppen för allmänheten
-  - Kan inte sökas om det redan finns avtal med kommunen för anläggningen
-  belopp: Schablonbelopp efter anläggningstyp; övriga efter bedömning
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Föreningen ska äga eller driva en fritidsanläggning av allmänintresse och normalt bedriva den verksamhet som anläggningen är avsedd för
+  - Anläggningen ska hållas i gott skick och vara öppen och tillgänglig för allmänheten enligt kommunens villkor
+  - Stöd lämnas inte för en anläggning vars drift och ersättning redan regleras genom ett separat avtal med kommunen
+  - Ansökan ska avse följande års drift och lämnas med senaste justerade årsmötesprotokoll och revisionsberättelse
+  - Kommunen får kontrollera anläggningen och justera schablonerna inom tillgänglig budget
+  belopp: 'Årlig schablon: gräsfotbollsplan 7 500 kr, grusfotbollsplan 4 500 kr, isbana vid skola 35 000 kr, isbana utanför centralorten 20 000 kr, skidspår 4 000 kr/km, skoterled 8 000 kr/mil, smådjursstall 26 000 kr, Tossabacken 115 000 kr samt paviljong eller klubbstuga med helårskostnad för värme och el 8 000 kr; övriga anläggningar prövas särskilt'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för följande års stöd ska lämnas senast 30 april; sena ansökningar behandlas inte
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-samlingslokal
   namn: Driftbidrag till samlingslokal
-  kategori:
-  - ovrig
-  malgrupp: Bygdegårdsföreningar eller motsvarande utanför centralorten
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Bygdegårdsföreningar eller motsvarande som driver samlingslokal utanför centralorten
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Sökande ska vara bygdegårdsförening eller motsvarande som är huvudman och ansvarar för drift och underhåll
-  - Föreningen ska äga lokalen eller ha ett långsiktigt hyresavtal
-  - Lokalen ska erbjudas hyresfritt till andra föreningar utanför centralorten som saknar egen byagård
-  belopp: Proportionell ersättning för styrkta driftkostnader
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Sökanden ska vara en bygdegårdsförening eller motsvarande som äger lokalen eller har ett långsiktigt hyresavtal
+  - Lokalen ska ligga utanför centralorten och föreningen ska ansvara för dess drift och underhåll
+  - Föreningar utanför centralorten som saknar egen bygdegård ska kunna använda lokalen utan hyra för möten
+  - Andra hyresgäster ska erbjudas en skälig hyra som täcker den faktiska kostnaden för uthyrningen
+  - Endast verifierade kostnader för el, uppvärmning, hushållsavfall, vatten och avlopp samt försäkring är stödgrundande
+  - Ansökan ska avse följande år och innehålla senaste justerade årsmötesprotokoll och revisionsberättelse
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga budget för driftbidrag till samlingslokaler fördelas proportionellt efter varje lokals andel av de sammanlagda godkända driftkostnaderna; totalsumman publiceras inte
+  sen_ansokan: Ansökan för följande års stöd ska lämnas senast 30 april; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-sarskilt
   namn: Särskilt bidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar som arrangerar offentliga fritids- och kulturarrangemang
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som genomför offentliga kultur- och fritidsarrangemang i Haparanda
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
-    - 09-30
+    datum: ['04-30', '09-30']
   krav:
-  - Ansökan minst två veckor före arrangemanget
-  - Arrangemanget ska vara öppet för alla att delta vid, genomföras i Haparanda kommun under aktuellt kalenderår och marknadsföras
-    på ett rimligt sätt
-  - Det ska framgå att stöd utgår från Haparanda stad
-  - Ges inte till ordinarie verksamhet, cuper, turneringar eller annan tävlingsverksamhet, eller till privatpersoner och företag
-  belopp: Upp till 100 % av verifierade nettokostnader
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Sökanden ska vara en bidragsberättigad förening; privatpersoner och företag kan inte få stödet
+  - Arrangemanget ska genomföras i Haparanda under aktuellt kalenderår, vara öppet för allmänheten och marknadsföras på ett rimligt sätt
+  - Arrangemanget ska ligga utanför föreningens ordinarie verksamhet och främja ett varierat, tillgängligt och inkluderande kultur- eller fritidsutbud
+  - Stöd lämnas inte till cuper, turneringar, annan tävlingsverksamhet eller redan genomförda arrangemang
+  - Ansökan ska lämnas minst två veckor före arrangemanget och innehålla syfte, beskrivning, plats, marknadsföringsplan samt en detaljerad och realistisk budget med andra stöd
+  - Kommunens stöd ska framgå av marknadsföringen och alla inkomster och kostnader ska kunna verifieras efter genomförandet
+  belopp: Upp till 100 procent av verifierade nettokostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april eller 30 september och minst två veckor före arrangemanget; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-mindre-investeringar
   namn: Bidrag till mindre investeringar
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar med investeringsbehov
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar med säte och verksamhet i Haparanda som behöver investera i utrustning eller anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
-    - 09-30
+    datum: ['04-30', '09-30']
   krav:
-  - Kan sökas av bidragsberättigad förening med hemvist i Haparanda
-  - Gäller utrustning eller lokal/anläggning för föreningens verksamhet, eller åtgärder som minskar klimatpåverkan eller höjer
-    säkerheten
-  - Ges inte till löpande underhåll, löpande driftkostnader eller utrustning som används av enskild utövare
-  - Högst en ansökan per förening och år
-  belopp: Högst 50 000 kr och högst 80 % av investeringskostnaden
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Sökanden ska vara en ideell förening med säte och verksamhet i Haparanda
+  - Investeringen ska avse utrustning, lokal eller anläggning som gagnar föreningens verksamhet eller kommuninvånarna, minskar klimatpåverkan eller höjer säkerheten
+  - Normalt och periodiskt underhåll, löpande driftkostnader och personlig utrustning för enskilda utövare är inte stödgrundande
+  - Föreningen ska lämna en beskrivning, kostnads- och finansieringsplan samt verifierbara underlag och finansiera minst 20 procent av nettokostnaden
+  - Högst en ansökan per förening och år får lämnas och utbetalning förutsätter att budgetmedel återstår
+  - Genomförandet och användningen av stödet ska redovisas inom tre månader efter avslutad investering
+  belopp: Högst 50 000 kr och högst 80 procent av den verifierade nettokostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april eller 30 september; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: haparanda-anstallningsstod
   namn: Kommunalt anställningsstöd
-  kategori:
-  - social
-  - ovrig
-  malgrupp: Föreningar som anställer person med lönebidrag från Arbetsförmedlingen
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar och organisationer i Haparanda med anställda som har lönebidrag från Arbetsförmedlingen
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Föreningen ska vara verksam i Haparanda kommun
-  - Kopia på anställningsavtal med arbetsbeskrivning samt Arbetsförmedlingens beslut om lönebidrag ska bifogas
-  - En ansökan krävs per anställd om föreningen har fler än en person med lönebidrag
-  - Högst två heltidstjänster per förening
-  - Förändringar i anställningen ska omgående anmälas till kommunen
-  belopp: Högst 2 000 kr per månad vid heltid
-  sen_ansokan: Ansökan kan göras löpande
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Sökanden ska vara en ideell förening eller organisation som är verksam i Haparanda
+  - Arbetsförmedlingen ska ha beslutat om lönebidrag eller motsvarande subvention för den anställda
+  - Vid en ny anställning ska föreningen lämna anställningsavtal med arbetsbeskrivning och Arbetsförmedlingens beslut
+  - En separat ansökan ska lämnas för varje anställd och förändringar i anställning eller stöd ska omedelbart meddelas kommunen
+  - Stöd lämnas normalt för högst två heltidsanställningar per förening; undantag kräver särskild prövning
+  - Ansökan görs i efterskott och kan omfatta högst sex månader bakåt inom det pågående kalenderåret
+  belopp: Högst 2 000 kr per månad för en heltidsanställd, proportionellt efter sysselsättningsgrad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande i efterskott för högst sex månader bakåt inom aktuellt kalenderår
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-studieforbund
   namn: Stöd till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund med dokumenterad verksamhet i Haparanda
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund med dokumenterad statsbidragsberättigad verksamhet i Haparanda
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Studieförbundet ska ha dokumenterad verksamhet i Haparanda
-  - Riksförbundet ska ingå i Folkbildningsrådet
-  belopp: Beräknas med statens stödmodell som grund
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Studieförbundets riksorganisation ska vara godkänd av Folkbildningsrådet och få statligt stöd
+  - Studieförbundet ska ha dokumenterad statsbidragsberättigad verksamhet i Haparanda under föregående år
+  - Ansökan ska innehålla verksamhets- eller årsberättelse och kommunfördelad redovisning av verksamheten
+  - Studieförbundet ska redovisa de uppgifter kommunen begär om studietimmar och unika deltagare enligt Folkbildningsrådets tabeller
+  - Underlagen ska vara verifierbara och följa samma redovisningsprinciper som ligger till grund för statligt stöd
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas mellan berättigade studieförbund med den statliga stöd- och redovisningsmodellen som grund; totalsumman publiceras inte
+  sen_ansokan: Ansökan om föregående års verksamhet ska lämnas senast 30 april; sena ansökningar behandlas inte
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-pensionarsforeningar
   namn: Stöd till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Lokala pensionärsföreningar
+  status: aktiv
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Lokala pensionärsföreningar med verksamhet som aktiverar äldre i Haparanda
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Föreningen ska vara ansluten till PRO, SPF, SPRF, Svenska Kommunalpensionärers Riksförbund eller Sverigefinska pensionärer
-  - Bidrag beviljas inte till aktivitet som endast innebär gemensamma måltider/fika
-  belopp: Grundbidrag 3 000 kr samt riktat verksamhetsbidrag efter prövning
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Föreningen ska vara ansluten till PRO, SPF, SPRF, Svenska Kommunalpensionärers Förbund eller Sverigefinska pensionärer; annan organisation prövas särskilt
+  - Det riktade stödet ska avse en aktivitet som ger pensionärer en rikare fritid och möjlighet till aktivering
+  - Stöd lämnas inte till en aktivitet som endast består av gemensam måltid eller fika
+  - Ansökan ska beskriva aktivitet, målgrupp, sökt belopp, samtliga intäkter och kostnader samt hur aktiviteten ska genomföras
+  - Senaste justerade årsmötesprotokoll, revisionsberättelse och aktuell verksamhetsplan ska bifogas
+  - Beviljade nettokostnader och aktivitetens genomförande ska kunna verifieras
+  belopp: Grundbidrag 3 000 kr per år samt riktat verksamhetsbidrag på upp till 100 procent av verifierade nettokostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för aktuellt år ska lämnas senast 30 april; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: haparanda-funktionsratt
   namn: Stöd till verksamhet för personer med funktionsnedsättning
-  kategori:
-  - funktionsratt
-  malgrupp: Lokala funktionsrättsföreningar
+  status: aktiv
+  kategori: [funktionsratt, social]
+  foreningstyp: [social, annat]
+  malgrupp: Lokala funktionsrättsföreningar som förbättrar fritiden och det sociala stödet för personer med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: ['04-30']
   krav:
-  - Föreningen ska vara ansluten till HSO – Handikappföreningarnas Samarbetsorgan
-  - Bidrag beviljas inte till aktivitet som endast innebär gemensamma måltider/fika
-  belopp: Grundbidrag 3 000 kr samt riktat verksamhetsbidrag efter prövning
-  sen_ansokan: För sent inkommen ansökan behandlas inte
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv-och-stod/bidrag-till-foreningar
-  belopp_status: olast
-  deadline_status: olast
+  - Föreningen ska vara ansluten till HSO, Handikappföreningarnas samarbetsorgan; annan organisation prövas särskilt
+  - Det riktade stödet ska avse socialt stöd eller kultur- och fritidsverksamhet för personer med funktionsnedsättning
+  - Stöd lämnas inte till en aktivitet som endast består av gemensam måltid eller fika
+  - Ansökan ska beskriva aktivitet, målgrupp, sökt belopp, samtliga intäkter och kostnader samt hur aktiviteten ska genomföras
+  - Senaste justerade årsmötesprotokoll, revisionsberättelse och aktuell verksamhetsplan ska bifogas
+  - Beviljade nettokostnader och aktivitetens genomförande ska kunna verifieras
+  belopp: Grundbidrag 3 000 kr per år samt riktat verksamhetsbidrag på upp till 100 procent av verifierade nettokostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för aktuellt år ska lämnas senast 30 april; sena ansökningar behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
+- id: haparanda-minoritetsspraksmedel-2026
+  namn: Minoritetsspråksmedel 2026
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar, studieförbund och organisationer som genomför publika projekt för finska eller meänkieli i Haparanda
+  deadlines:
+    typ: fasta
+    datum: ['04-30']
+  krav:
+  - Sökanden ska vara en förening, ett studieförbund eller en organisation
+  - Projektet ska genomföras i Haparanda och främja eller utveckla tornedalsk eller sverigefinsk kultur eller språken meänkieli eller finska
+  - Evenemang och aktiviteter ska vara öppna för allmänheten och ansökan ska ange projektets målgrupp
+  - Ansökan ska beskriva vad som ska genomföras, hur projektet utvecklar språk eller kultur och vilket belopp som söks
+  - Projektet ska anknyta till 2026 års tema ”I samma båt” och följa villkoren för årets utlysning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 100 000 kr avsätts för minoritetsspråksprojekt 2026
+  sen_ansokan: Ansökan för 2026 skulle lämnas senast 30 april och behandlades i maj
+  kalla_url: https://www.haparanda.se/kommun-och-politik/kommuninformation/nationella-minoriteter-
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Årets tema 2026 är ”I samma båt”
+  kraver_registrering: false
+  sate_i_kommunen: null
+- id: haparanda-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa och träningstider
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar med säte i Haparanda som bokar kommunala lokaler och anläggningar
+  deadlines:
+    typ: fasta
+    datum: ['07-31']
+  krav:
+  - Föreningen ska vara registrerad, bidragsberättigad och ha sitt säte i Haparanda för att få kommunens lägsta taxenivå
+  - Kunduppgifter och föreningshandlingar i Rbok ska vara aktuella och godkända och föreningen får inte ha obetalda skulder till kommunen
+  - Säsongstider ska sökas i Rbok senast 31 juli; strötider kan bokas när kommunens fördelning är klar
+  - Kommunens prioriteringsordning gäller, med skolverksamhet och verksamhet för pensionärer och personer med funktionsnedsättning före övrig fördelning samt barn och unga före vuxna
+  - Boknings- och ordningsregler ska följas, förändrad verksamhet ska meddelas och avbokning ska ske minst sju dagar före bokad tid
+  - Föreningen kan förlora den subventionerade taxan vid skuld, misskötsel eller brott mot demokrativillkoren
+  belopp: 'Taxenivå 1 för bidragsberättigad Haparandaförening: normalt 40 kr per timme för Aspen, simbana, Gränsvallens fotbollsplan, bandyplan, ishall och möteslokal; ordinarie taxenivå 2 är 400–1 300 kr per timme beroende på anläggning. Matchtaxan är normalt 200 kr per timme mot 1 000–3 200 kr på taxenivå 2'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Säsongsansökan ska lämnas senast 31 juli; enstaka lediga tider kan bokas därefter
+  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv/boka-och-hyra-lokal
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 forutsattningar:
-- id: haparanda-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+- id: haparanda-rbok-registrering
+  vad: Registrering och årligt godkända kunduppgifter i Rbok
+  beskrivning: Föreningen ska registreras och godkännas i Rbok samt se till att kunduppgifter och giltiga föreningshandlingar är aktuella och godkänns minst en gång per år.
   system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen anger ingen generell handläggningstid
+  giltighet: Ett kalenderår
   ordning: 1
-  kalla_url: https://www.haparanda.se/fritid-och-kultur/foreningsliv/bidrag-och-stod-till-foreningar
-  giltighet_status: okand
+  kalla_url: *system
+  giltighet_status: kontrollast
+- id: haparanda-allmanna-villkor
+  vad: Uppfylla kommunens allmänna föreningsvillkor
+  beskrivning: Föreningen ska vara ideell och demokratiskt uppbyggd med stadgar, årsmötesvald styrelse och revisor, vara registrerad hos Skatteverket, ha säte eller verksamhet i Haparanda samt arbeta för jämlikhet, drogfrihet, barns rättigheter och tillgänglighet. Politiska, fackliga, yrkesmässiga och ekonomiska intresseföreningar omfattas inte.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Villkoren ska vara uppfyllda när föreningen söker stöd
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: haparanda-ansokan-och-kontroll
+  vad: Lämna komplett ansökan och verifierbara underlag
+  beskrivning: Ansökan ska lämnas fullständig och i tid av behörig företrädare. Föreningen ska bevara närvaro- och bidragsunderlag i minst sju år, ge kommunen insyn och återbetala stöd som har betalats ut på felaktiga grunder eller inte använts enligt beslutet.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Ofullständiga eller sena ansökningar behandlas inte
+  giltighet: null
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
