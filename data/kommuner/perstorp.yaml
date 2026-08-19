@@ -2,134 +2,218 @@ kommun: Perstorp
 kommun_slug: perstorp
 lan: Skåne län
 befolkning: 7085
-forvaltning: Kultur och fritid
+forvaltning: Kultur- och fritidsförvaltningen samt kommunstyrelsen
 ansokningssystem:
-  namn: Perstorps kommuns e-tjänster och blanketter
-  url: https://eservice.perstorp.se/
-kalla_url: https://www.perstorp.se/upplevagora/foreningar.4.61780eb015c1403d634c6b.html
-verifierad: '2026-07-31'
+  namn: Perstorps kommuns e-tjänster, FRI och blanketter
+  url: &portal https://eservice.perstorp.se/
+kalla_url: &meny https://www.perstorp.se/upplevagora/foreningar.4.61780eb015c1403d634c6b.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *meny
+giltighet_regel_status: ingen_regel
 bidrag:
-- namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Registrerade föreningar i Perstorps kommun
+- id: perstorp-verksamhetsbidrag
+  namn: Verksamhetsbidrag för barn- och ungdomsverksamhet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar och självständiga sektioner med ungdomsverksamhet i Perstorps kommun
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [02-15, 08-15]
   krav:
-  - Ska bedriva ungdomsfostrande verksamhet riktad till ungdomar tillhörande Perstorps kommun
-  - Ska ha säte och stämma i Perstorps kommun
-  - Ska ha minst 10 bidragsberättigade medlemmar
-  - Ska ha minst 100 sammankomstdeltagare under året före ansökningsåret, eller om nystartad minst 25 sammankomstdeltagare
-    per kvartal
-  - Ska vara öppen för envar samt ha utsett styrelse och revisorer och antagit stadgar
-  - Ska föra medlemsmatrikel med namn, adress, födelsedatum och datum för medlemsavgiftens erläggande
-  - Ska årligen lämna uppgift om antal bidragsberättigade medlemmar, verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse
-  - Ansökan ska vara kommunen tillhanda senast 25/2 respektive 25/8
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.perstorp.se/upplevagora/foreningar.4.61780eb015c1403d634c6b.html
-  belopp_status: okand
-  deadline_status: okand
+  - Organisationen ska bedriva ungdomsfostrande verksamhet i Perstorp, främst för ungdomar som tillhör kommunen, och ha säte och stämma där
+  - Organisationen ska ha minst 10 bidragsberättigade medlemmar och minst 100 sammankomstdeltagare föregående år; en nystartad organisation ska ha minst 25 sammankomstdeltagare per verksamhetskvartal
+  - En bidragsberättigad aktiv medlem ska under 2026 vara 6–25 år, ha deltagit i minst fem stödgrundande sammankomster, vara matrikelförd och ha betalat medlemsavgiften senast 31 december
+  - Organisationen ska vara öppen, ha antagna stadgar samt vald styrelse och revisorer och föra medlemsmatrikel med namn, adress, födelsedatum och betalningsdatum
+  - Med vårens ansökan ska antal bidragsberättigade medlemmar, verksamhetsberättelse, ekonomisk redovisning och revisionsberättelse lämnas; ansökan ska undertecknas av behörig firmatecknare
+  - En stödgrundande sammankomst ska vara beslutad och ekonomiskt planerad, pågå minst 45 minuter och ha minst fyra deltagare i stödberättigad ålder
+  - Entrébelagda eller kommersiella sammankomster räknas inte; en deltagare får räknas högst en gång per dag och organisation och en ledare får inte leda flera grupper samtidigt
+  - Närvarokort och övriga bidragsunderlag ska sparas minst fyra år och lämnas för kommunal kontroll
+  belopp: En poäng per deltagare i en stödgrundande sammankomst; kommunen fastställer årligen kronbeloppet per poäng inom anslagna medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 februari respektive 15 augusti. Avdrag är 10 procent vid 1–7 dagars försening, 40 procent vid 8–14 dagar, 70 procent vid 15–21 dagar och 100 procent därefter.
+  kalla_url: &ungdomsnorm https://www.perstorp.se/download/18.21acb03e15f2d17cb9f20b6/1517391591891/Bidragsregler%20Verksamhetsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-  id: perstorp-verksamhetsbidrag
-- namn: Driftsbidrag
-  kategori:
-  - social
-  - ovrig
-  malgrupp: Registrerade organisationer och föreningar verksamma i Perstorps kommun
+  senast_verifierad: '2026-08-19'
+  anteckning: Kultur- och fritidsnämnden beslutade 24 november 2025 § 86 att åldersspannet ska vara 6–25 år från 1 januari 2026; övriga villkor i den publicerade normen är oförändrade.
+- id: perstorp-lokalbidrag
+  namn: Lokalbidrag för barn- och ungdomsverksamhet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade ungdomsföreningar som äger eller hyr sin verksamhetslokal
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [02-15, 08-15]
   krav:
-  - Sökande kan enbart få driftsbidrag om denne ej redan erhållit bidrag från kommunens övriga bidragsdelar, exempelvis kultur-
-    och föreningsbidrag
-  - Sökande organisation/förening ska vara verksam inom Perstorps kommun och vara registrerad hos kommunen
-  - Verksamheten ska vara öppen för alla och inte diskriminera på grund av etnisk tillhörighet, kön, könsöverskridande identitet
-    eller uttryck, funktionshinder, religion eller annan trosuppfattning samt sexuell läggning
-  - Verksamheten eller dess företrädare får inte främja rasism, våld, alkohol- och/eller drogmissbruk, eller bestå av partipolitiskt
-    eller religiöst arbete
-  - Bidraget kan endast utgöra ett tillskott till verksamheten, inte huvudfinansiering
-  - Till ansökan ska biläggas föreningens stadgar, årsmöteshandlingar (protokoll, verksamhetsberättelse, ekonomisk berättelse
-    med RR och BR, revisionsberättelse), beskrivning av verksamheten och budget, organisationsnummer samt uppgifter om plusgiro/bankgiro
-  - Bidrag beviljas inte till föreningar med skatteskuld som drivs in av Kronofogden
-  - Ansökningsperiod är 1 april–31 maj
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://eservice.perstorp.se/PP-ANSDRIFOR
-  belopp_status: okand
-  deadline_status: okand
+  - Organisationen ska uppfylla samtliga allmänna villkor för kommunens barn- och ungdomsbidrag, inklusive åldersspannet 6–25 år från 2026
+  - Organisationen ska äga eller hyra lokalen och huvuddelen av den stödgrundande verksamheten ska bedrivas där
+  - Organisationens faktiska lokalkostnader ska vara högre än det beräknade lokalbidraget
+  - Endast sammankomster som uppfyller verksamhetsbidragets regler om deltagare, längd, planering och närvaroredovisning får räknas
+  - Med vårens ansökan ska medlemsuppgifter samt verksamhets-, ekonomi- och revisionshandlingar lämnas och underlagen ska sparas minst fyra år
+  belopp: 10 poäng per stödgrundande sammankomst i den ägda eller hyrda lokalen; kommunen fastställer årligen kronbeloppet per poäng inom anslagna medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 februari respektive 15 augusti och omfattas av samma publicerade avdragstrappa som verksamhetsbidraget vid sen ansökan.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Beloppet bestäms efter individuell bedömning. Ej angivet i källan
-  id: perstorp-driftsbidrag
-- namn: Föreningsbidrag för social verksamhet
-  kategori:
-  - social
-  - pensionar
-  - funktionsratt
-  malgrupp: Föreningar med social verksamhet
+  senast_verifierad: '2026-08-19'
+  anteckning: Lokalbidrag är en egen stödform i punkt 6.2 i den publicerade normen och har därför skilts från verksamhetsbidraget.
+- id: perstorp-kartbidrag
+  namn: Kartbidrag
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft]
+  malgrupp: Bidragsberättigade föreningar som är beroende av kartframställning för sin verksamhet
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [02-15, 08-15]
   krav:
-  - Verksamheten ska vända sig till någon av grupperna barn och ungdomar, äldre, funktionshindrade, missbrukare, anhöriga/närstående
-    eller brottsoffer
-  - Föreningen ska vara verksam i Perstorps kommun och vända sig till alla inom målgruppen oavsett eventuellt medlemskap
-  - Föreningen ska ha antagna stadgar och en vald styrelse
-  - Föreningen ska visa på kontinuitet och ha bedrivit verksamhet i minst ett år
-  - Föreningen ska årligen på avsedd ansökan redovisa målgrupp, arbetssätt, fortsatt arbete, antal nådda kommunmedborgare,
-    resultat av aktiviteterna samt ekonomisk ställning
-  - Ansökan jämte verksamhetsberättelse och revisionsberättelse för senast avslutat verksamhetsår ska lämnas till Kultur-
-    och Fritidsförvaltningen senast 15/8 varje år
-  - Föreningsbidrag utgår aldrig för aktiviteter som redan fått andra kommunala bidrag
-  - Sökande förening ska lämna den insyn i verksamheten som behövs för kontroll av att bidraget används på angivet sätt
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.perstorp.se/upplevagora/foreningar.4.61780eb015c1403d634c6b.html
-  belopp_status: okand
-  deadline_status: okand
+  - Organisationen ska vara beroende av kartframställning för att kunna bedriva sin verksamhet
+  - Organisationen ska uppfylla samtliga allmänna villkor för kommunens barn- och ungdomsbidrag, inklusive åldersspannet 6–25 år från 2026
+  - Beräkningen får endast omfatta sammankomster som uppfyller verksamhetsbidragets regler om deltagare, längd, planering och närvaroredovisning
+  - Organisationen ska lämna medlems-, verksamhets-, ekonomi- och revisionshandlingar med vårens ansökan och bevara bidragsunderlagen minst fyra år
+  belopp: 12 poäng per stödgrundande sammankomst; kommunen fastställer årligen kronbeloppet per poäng inom anslagna medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 februari respektive 15 augusti och omfattas av samma publicerade avdragstrappa som verksamhetsbidraget vid sen ansökan.
+  kalla_url: *ungdomsnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-  id: perstorp-foreningsbidrag-social-verksamhet
-- namn: Kulturföreningsbidrag
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar i kommunen
+  senast_verifierad: '2026-08-19'
+  anteckning: Kartbidrag är en egen stödform i punkt 6.3 i den publicerade normen och har därför lagts som en separat rad.
+- id: perstorp-driftsbidrag
+  namn: Driftsbidrag
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade organisationer och föreningar som bidrar till Perstorps sociala miljö men inte omfattas av övriga kommunala bidrag
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [05-31]
   krav:
-  - Kan sökas av styrelse för kulturförening eller annan sammanslutning inom kulturområdet, med säte och verksamhet inom Perstorps
-    kommun
-  - Ges i första hand till väl etablerade ideella föreningar med en dokumenterad verksamhet, riktad åt en bred allmänhet
-  - Sökande organisation ska ha antagit stadgar samt valt styrelse och revisorer
-  - Kultur- och Fritidsförvaltningen ska ha full insyn i den sökande organisationens verksamhet
-  - Med ansökan ska bifogas verksamhetsberättelse, ekonomisk rapport och revisionsberättelse; nya föreningar ska även bifoga
-    stadgar
-  - Föreningsbidrag söks senast 15 augusti och avser befintligt budgetår
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.perstorp.se/upplevagora/foreningar.4.61780eb015c1403d634c6b.html
-  belopp_status: okand
-  deadline_status: okand
+  - Organisationen eller föreningen ska vara verksam i Perstorps kommun och registrerad hos kommunen
+  - Sökanden får inte samtidigt få stöd genom kommunens andra bidragsdelar, exempelvis kultur- eller föreningsbidrag
+  - Verksamheten ska vara öppen och icke-diskriminerande och får inte främja rasism, våld, alkohol- eller drogmissbruk eller bestå av partipolitiskt eller religiöst arbete
+  - Bidraget ska vara ett tillskott och får inte vara verksamhetens huvudsakliga finansiering
+  - Stadgar, senaste årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse, verksamhetsbeskrivning, budget, organisationsnummer och föreningskonto ska lämnas
+  - Sökanden får inte ha en skatteskuld som drivs in av Kronofogden och ska delta i kommunens dialogmöte om verksamhet, mål och eventuell motprestation
+  - Beviljat stöd ska redovisas före ny utbetalning och kommunen får följa upp verksamheten, begära uppgifter och återkräva felanvänt stöd
+  belopp: Individuellt prövat driftsbidrag inom kommunens tillgängliga budget; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 1 april–31 maj för nästkommande verksamhetsår. En sen eller ofullständig ansökan riskerar att bli utan medel.
+  kalla_url: &driftsnorm https://eservice.perstorp.se/FileStorageArea/Documents/Riktlinjer_f%C3%B6r_driftsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-  id: perstorp-kulturforeningsbidrag
+  senast_verifierad: '2026-08-19'
+  anteckning: Bidrag kan beviljas för högst tre år innan ett nytt dialogforum ska hållas.
+- id: perstorp-foreningsbidrag-social-verksamhet
+  namn: Föreningsbidrag för social verksamhet
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar för barn och unga, äldre, personer med funktionsnedsättning, missbrukare, anhöriga eller brottsoffer
+  deadlines:
+    typ: fasta
+    datum: [08-15]
+  krav:
+  - Verksamheten ska rikta sig till någon av de publicerade sociala målgrupperna och vara öppen för hela målgruppen oavsett medlemskap
+  - Föreningen ska vara verksam i Perstorp, ha antagna stadgar och vald styrelse samt ha bedrivit kontinuerlig verksamhet i minst ett år
+  - Ansökan ska redovisa målgrupp, arbetssätt, fortsatt arbete, hur många kommuninvånare som nåtts, aktiviteternas resultat och föreningens ekonomiska ställning
+  - Verksamhetsberättelse och revisionsberättelse för senast avslutat verksamhetsår ska bifogas
+  - Samma aktivitet får inte redan ha fått annat kommunalt bidrag och föreningen ska ge kommunen nödvändig insyn
+  - Medlemsbaserat stöd beräknas på medlemsantalet den 31 december föregående verksamhetsår
+  belopp: Övergripande organisationer får 1 krona per kommuninvånare, Brottsofferjouren 3 kronor per kommuninvånare och pensionärsföreningar 6 500 kronor plus 10 kronor per medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med verksamhets- och revisionsberättelse ska lämnas senast 15 augusti varje år.
+  kalla_url: &socialnorm https://www.perstorp.se/download/18.348da407163a571b39491d/1530692270201/F%C3%B6reningsbidrag%20Soc.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: perstorp-kulturforeningsbidrag
+  namn: Kulturföreningsbidrag
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Ideella kulturföreningar och andra sammanslutningar inom kulturområdet med säte och verksamhet i Perstorp
+  deadlines:
+    typ: fasta
+    datum: [08-15]
+  krav:
+  - Sökanden ska vara en kulturförening eller annan sammanslutning inom kulturområdet med säte och verksamhet i Perstorps kommun
+  - Stödet prioriterar väl etablerade ideella föreningar med dokumenterad verksamhet riktad till en bred allmänhet
+  - Kulturverksamheten kan avse litteratur, musik, bildkonst, teater, revy, koreografi, foto, film, konsthantverk, dans eller bygdeutveckling
+  - Organisationen ska ha antagna stadgar samt vald styrelse och revisorer och ge kommunen full insyn i verksamheten
+  - Verksamhetsberättelse, ekonomisk rapport, revisionsberättelse och budget ska bifogas; en ny förening och en förening med reviderade stadgar ska även lämna stadgarna
+  - Ansökan ska specificera vad bidraget ska användas till och undertecknas av ordförande eller kassör
+  belopp: Individuellt fördelat inom den ram som kultur- och fritidsnämnden anvisar; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Komplett ansökan ska lämnas senast 15 augusti och avser det pågående budgetåret.
+  kalla_url: &kulturnorm https://www.perstorp.se/download/18.bbcdfa172274bb5b4af4/1593076264872/Kulturf%C3%B6reningsbidrag%20regler20.doc
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: perstorp-studieforbund
+  namn: Verksamhetsbidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund som stöds av Region Skåne och är aktiva i Perstorps kommun
+  deadlines:
+    typ: fasta
+    datum: [04-01]
+  krav:
+  - Sökanden ska vara ett studieförbund som stöds av Region Skåne och bedriver verksamhet i Perstorps kommun
+  - En gemensam ansökan för deltagande kommuner i Familjen Helsingborg ska lämnas digitalt, kortfattat och kommunvis specificerat
+  - Ansökan ska beskriva organisationen under avslutat verksamhetsår och beslutade förändringar för innevarande och kommande verksamhetsår
+  - Arbetet med demokrati, delaktighet, minskade utbildningsklyftor och breddat kulturdeltagande ska beskrivas
+  - För grundbidraget ska föregående års studiegruppstimmar, studiecirklar och unika deltagare redovisas per kommun
+  - För aktivitetsbidraget ska planerade projekt, kulturarrangemang, annan bildningsverksamhet och prioriterade målgruppsinsatser för andra halvåret och följande första halvår redovisas per kommun
+  - Studieförbundet ska medverka i det gemensamma årliga dialogmötet och redovisa utfallet av tidigare aktivitetsbidrag
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas med 2/3 som grundbidrag proportionellt efter föregående års studiegruppstimmar och 1/3 som aktivitetsbidrag efter nämndens bedömning av planerad verksamhet; totalsumman publiceras inte
+  sen_ansokan: Den gemensamma digitala ansökan ska lämnas senast 1 april.
+  kalla_url: &studienorm https://www.perstorp.se/download/18.bbcdfa172274bb5b457f7/1607431798133/Verksamhetsbidrag%20till%20studief%C3%B6rbund_Familjen%20Helsingborg.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Stödet ligger på kommunens separata studieförbundssida och saknades i den tidigare basraden.
 forutsattningar:
 - id: perstorp-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Perstorps kommuns e-tjänster och blanketter
+  vad: Registrering, demokratiska grundvillkor och aktuella föreningshandlingar
+  beskrivning: Föreningar som söker kommunens ordinarie förenings- eller driftsbidrag ska vara verksamma i Perstorp och där stödformen kräver det vara registrerade hos kommunen. De ska ha stadgar, vald styrelse och revisorer, föreningskonto och aktuella medlems- och kontaktuppgifter samt lämna verksamhets-, ekonomi-, revisions- och årsmöteshandlingar enligt respektive stödform. Verksamheten ska vara öppen och kommunen ska få nödvändig insyn. Uppgifterna ska hållas aktuella och fyllas i vid ansökan, men kommunen publicerar ingen gemensam giltighetstid eller särskild förnyelsedag för registreringen.
+  system: Perstorps kommuns e-tjänster, FRI och blanketter
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ingen särskild handläggningstid eller förnyelsefrist publiceras
   giltighet: null
   ordning: 1
-  kalla_url: https://www.perstorp.se/upplevagora/foreningar.4.61780eb015c1403d634c6b.html
-  giltighet_status: okand
+  kalla_url: *meny
+  giltighet_status: ingen_regel
 kommunsiffra: null
