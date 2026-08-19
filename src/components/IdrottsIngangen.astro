@@ -54,14 +54,19 @@ const identitetsordPlural = `${identitetsord}ar`;
 // V2 (rättning 2026-08-19): terminsetiketten beräknades tidigare på
 // DEADLINENS egen månad (fel — en augustideadline gäller vårens
 // aktiviteter, inte höstens). Rätt källa är perioden deadlinen AVSER
-// (stod.deadlines.perioder[].avser.fran), inte deadline-datumet självt.
+// (stod.deadlines.perioder[].avser.fran).
+// V3 (rättning 2026-08-19): "höstterminen" vid en 25 februari-deadline
+// läses som "hösten som kommer", inte perioden som redan varit — ett
+// terminsNAMN kräver att läsaren själv räknar ut vilket år det syftar
+// på. Perioden i klartext ("avser 1 juli–31 december") kräver ingen
+// tolkning.
 const lokDatum = stod.deadlines.datum.map((mmdd) => {
   const period = stod.deadlines.perioder.find((p) => p.datum === mmdd);
-  const avserVarterminen = period ? Number(period.avser.fran.slice(0, 2)) <= 6 : Number(mmdd.slice(0, 2)) <= 6;
+  const avser = period ? `avser ${formatRecurringDate(period.avser.fran)}–${formatRecurringDate(period.avser.till)}` : '';
   return {
     mmdd,
     text: formatRecurringDate(mmdd),
-    termin: avserVarterminen ? 'vårterminen' : 'höstterminen',
+    avser,
   };
 });
 
@@ -103,7 +108,7 @@ const kommunNamnSlug = kommuner
         <div class="idrott__lok-date">
           <span class="fg-read-mark"></span>
           <span class="idrott__lok-d">{d.text}</span>
-          <span class="idrott__lok-termin">{d.termin}</span>
+          <span class="idrott__lok-termin">{d.avser}</span>
         </div>
       ))}
     </div>
