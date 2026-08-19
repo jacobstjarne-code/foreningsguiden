@@ -1304,6 +1304,12 @@ export const IDROTT_INGANGEN = {
 
   lokUnderrubrik: 'Statligt aktivitetsstöd. Söks två gånger om året — samma datum överallt.',
 
+  // V2 (rättning 2026-08-19) — beloppsblocket, mellan datum och
+  // sanktionstrappan: vad ni kan få innan vad ni kan tappa.
+  beloppRubrik: 'Vad ni kan få',
+  ledarstodRad: 'Ledarstöd',
+  deltagarstodRad: 'Deltagarstöd,',
+
   rfRad: 'RF-medlemskap via specialidrottsförbund',
   rfEtikett: 'villkor',
   projektstodRad: 'Projektstöd IF',
