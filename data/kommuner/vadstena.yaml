@@ -2,242 +2,266 @@ kommun: Vadstena
 kommun_slug: vadstena
 lan: Östergötlands län
 befolkning: 7477
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och utbildningsförvaltningen
 ansokningssystem:
-  namn: Kommunens e-tjänster
-  url: https://www.vadstena.se/
-kalla_url: https://www.vadstena.se/kultur-fritid/bidrag-till-kultur-och-fritid/att-soka-bidrag/
-verifierad: '2026-07-31'
+  namn: E-serve Bidragsenheten Vadstena
+  url: &portal https://vadstena.e-serve.se/facilities/bidragsenhetenvadstena
+kalla_url: &meny https://www.vadstena.se/kultur-fritid/bidrag-till-kultur-och-fritid/att-soka-bidrag/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.vadstena.se/wp-content/uploads/2025/11/samlingshandling-for-kultur-oc_2025-11-17-kompletterad-8e816763-1b6e-41b9-bb9e-6c2db8f48ea7.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: vadstena-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - pensionar
-  - ovrig
-  malgrupp: Föreningar som söker årligt stöd till verksamheten
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Alla bidragsberättigade ideella föreningar och liknande ideella aktörer
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [09-20]
   krav:
-  - Föreningen ska årligen ladda upp årsmötesprotokoll, årsredovisning inklusive revisionsrapport och verksamhetsberättelse
-    i kommunens e-tjänst.
-  belopp: Lägst 2 500 kronor och högst 50 000 kronor per år.
-  sen_ansokan: Ansökningar som kommer in för sent riskerar att inte behandlas.
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
+  - Föreningen ska uppfylla kommunens allmänna villkor för bidragsberättigande och vara anmäld i föreningsregistret
+  - Ansökan ska göras i förväg för kommande kalenderår via kommunens bidragsportal
+  - Verksamhetens art, räckvidd och samhällsbidrag samt insatser för nya målgrupper och tillgänglighet ska beskrivas
+  - Möjligheten att söka annan finansiering ska redovisas
+  - Senaste verksamhetsberättelse, ekonomiska handlingar, revisionsberättelse och årsmötesprotokoll samt kommande verksamhetsplan och budget ska lämnas
+  belopp: Minst 2 500 och högst 50 000 kronor per förening och år, efter en sammanvägd bedömning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om grundbidrag för 2027 ska lämnas senast 20 september 2026; sen eller ofullständig ansökan riskerar att inte behandlas
+  kalla_url: *portal
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens webbsida angav tidigare sista ansökningsdatum 30 september (förlängt 2025 till 31 oktober), men den
-    gällande riktlinjen anger 25 augusti. Riktlinjen är den formellt beslutade källan och prioriteras här.
+  senast_verifierad: '2026-08-19'
+  anteckning: Den reviderade riktlinjen antogs av kultur- och utbildningsnämnden 17 november 2025 § 113 och ersatte 2024 års riktlinje.
 - id: vadstena-arrangemang
   namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Aktörer och föreningar som ordnar enstaka eller flera arrangemang/projekt
+  status: aktiv
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som arrangerar offentliga evenemang
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Ansökan ska göras i förväg, tre månader innan arrangemanget; ansökan i efterhand beaktas inte.
-  - Bidraget omfattar endast direkta arrangemangskostnader, till exempel artistarvode, hyra för offentlig lokal, ljud- och
-    ljusteknik samt marknadsföring.
-  - Ansökan görs löpande och beslut fattas vid fyra tillfällen under året.
-  - Redovisning ska lämnas i särskilt formulär via e-tjänsten senast två månader efter genomfört arrangemang.
-  belopp: null
-  sen_ansokan: Ansökan i efterhand beaktas inte.
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-- id: vadstena-aktivitetsbidrag
-  namn: Aktivitetsbidrag för ungdomsverksamhet
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Verksamheter som engagerar barn och unga 7–25 år
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Berättigade är föreningar som bedriver barn- och ungdomsverksamhet för deltagare mellan 7 och 25 år.
-  - Gruppaktiviteten ska vara planerad och beslutad av styrelse, sektions- eller medlemsmöte, pågå minst 60 minuter och ha
-    minst tre deltagare i åldern 7-25 år utöver ledare.
-  - Ledare ska ha fyllt 13 år och vara medlem i föreningen; maximalt 30 deltagare får räknas per grupp och aktivitetstillfälle.
-  - Bidrag utgår inte till entrébelagda tävlingar, kommersiella arrangemang eller aktiviteter under skoltid.
-  - Ansökan görs i efterhand per termin via e-tjänsten med närvarokort som underlag (idrottsföreningar kan använda RF-LOK-stöd
-    som underlag).
-  belopp: null
-  sen_ansokan: Ansökan görs i efterhand efter varje termin; sista ansökningsdatum är 25 februari för perioden 1 juli-31 december
-    och 25 augusti för perioden 1 januari-30 juni.
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-- id: vadstena-utveckling-investering
-  namn: Utvecklings- och investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med utvecklingsprojekt eller investeringar i anläggning och utrustning
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Bidraget är kvalitativt och dialogbaserat; beslut grundas på särskild prövning från fall till fall efter dialogmöte med
-    föreningen.
-  - Bidraget gäller särskilda projekt och kan inte sökas flera år i rad.
-  - Ansökan startar digitalt via e-tjänsten och föredras därefter för en beredningsgrupp inom kommunen innan beslut och utbetalning.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
+  - Evenemanget ska vara öppet för allmänheten och stärka Vadstena som hemvist eller besöksmål
+  - Evenemanget ska bidra till kommunens attraktivitet, utveckla utbudet eller vara av kommunalt, regionalt, nationellt, internationellt eller tydligt medialt intresse
+  - Ansökan ska göras i förväg minst tre månader före evenemanget, även när evenemanget är återkommande
+  - Endast direkta evenemangskostnader som artistarvode, offentlig lokal, ljud och ljus eller marknadsföring är stödgrundande
+  - Kommunen kan kräva att dess logotyp eller medfinansiering anges i marknadsföringen
+  - Särskilt redovisningsformulär ska lämnas senast två månader efter evenemanget
+  belopp: Individuellt prövat arrangemangsbidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan är öppen löpande under 2026 men ska lämnas minst tre månader före evenemanget; efterhandsansökan beaktas inte
+  kalla_url: *portal
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: vadstena-aktivitetsbidrag
+  namn: Aktivitetsbidrag för barn- och ungdomsverksamhet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med deltagare mellan 7 och 25 år
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Gruppaktiviteten ska vara planerad, ekonomiskt beslutad, ledarledd och pågå minst 60 minuter
+  - Minst tre deltagare mellan 7 och 25 år utöver ledaren ska delta
+  - Ledaren ska vara minst 13 år, medlem i föreningen, närvara hela aktiviteten och får inte samtidigt leda flera grupper
+  - Högst 20 deltagare per ledare får räknas och bidrag utgår endast en gång per grupp och dag
+  - En deltagare får räknas i högst en gruppaktivitet per dag inom samma förening och en naturlig grupp får inte delas för att ge mer bidrag
+  - Entrébelagda tävlingar, kommersiella arrangemang, skoltid, privat verksamhet och verksamhet som finansieras på annat sätt är inte stödgrundande
+  - Närvarokort eller digitalt närvaroregister ska föras, ledaren ska intyga uppgifterna och underlagen ska sparas i minst tre år
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Fast budgeterad summa som fördelas efter deltagarstöd, ledarstöd och extra ledarstöd; totalsumman publiceras inte
+  sen_ansokan: Ansökan görs terminsvis i efterhand, senast 25 februari för höstterminen och 25 augusti för vårterminen
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: vadstena-utveckling-investering
+  namn: Utvecklings- och investeringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med större utvecklingsarbete eller investering i anläggning eller utrustning
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Ansökan ska avse en större förändring eller verksamhetsutveckling eller en investering i föreningens anläggning eller utrustning
+  - Ansökan ska göras i förväg och insatsen får inte vara genomförd när ansökan lämnas
+  - Jämställdhetsarbete och insatser för att nå nya målgrupper prioriteras
+  - Föreningen ska inför dialogmöte beskriva insats, syfte, mål, målgrupp, uppföljning, tidsplan och preliminär budget
+  - Bidraget avser en särskild insats och kan inte sökas flera år i rad
+  - Insatsen ska efter genomförandet redovisas både muntligt och skriftligt med resultat och ekonomi
+  belopp: Individuellt prövat bidrag efter dialog och beredning; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan är öppen löpande under 2026 och ska lämnas innan insatsen påbörjas; efterhandsansökan beaktas inte
+  kalla_url: *portal
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: vadstena-drift
   namn: Driftsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som driver egen anläggning
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som äger eller driver en anläggning under ägarliknande förhållanden
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [09-20]
   krav:
-  - Anläggningen ska ägas av föreningen eller drivas av föreningen under äganderättsliknande förhållande, till exempel avtal
-    med nyttjanderätt eller arrende.
-  - Bidrag utgår endast om anläggningen är i sådant skick att avsedda verksamheter kan genomföras; kommunen har rätt att årligen
-    besikta anläggningen tillsammans med föreningen.
-  - Avtal tecknas för en tvåårsperiod; uppföljning och tecknande av nytt avtal ska ske senast i november avtalets andra år.
-  - Ny förening eller anläggning ansöker om avtal för kommande tvåårsperiod senast 25 augusti i e-tjänsten.
-  belopp: Fast belopp per anläggning och år, fastställs individuellt i avtal mellan kultur- och utbildningsnämnden och föreningen.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
+  - Föreningen ska äga anläggningen eller driva den genom exempelvis arrende- eller servitutsavtal
+  - Samma anläggning får inte samtidigt ligga till grund för hyresbidrag
+  - Anläggningen ska vara i sådant skick att den avsedda verksamheten kan genomföras och kommunen får besikta den årligen
+  - Ansökan ska göras i förväg för en tvåårig avtalsperiod
+  - Föreningen ska kalla kommunen till uppföljningsmöte i slutet av avtalsperioden och därefter söka på nytt om avtalet ska förnyas
+  belopp: Fast belopp per anläggning och år enligt ett individuellt tvåårigt avtal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för avtalsperioden 2027–2028 ska lämnas senast 20 september 2026
+  kalla_url: *portal
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Avtalsbaserad modell: befintliga avtal löper två år och förnyas senast i november avtalets andra år. Datumet
-    25 augusti gäller endast ansökan om nytt avtal för nya föreningar/anläggningar, inte en generell årlig deadline.'
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: vadstena-hyra
   namn: Hyresbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar med externa lokal- eller anläggningskostnader
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med kostnader för verksamhet i icke-kommunal lokal eller anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [09-20]
   krav:
-  - Gäller lokalkostnader för anläggning/lokal som inte är kommunal, till exempel hyra, el, värme och städning för expeditions-
-    och klubblokal.
-  - Bidrag utgår inte om föreningen redan erhåller driftsbidrag för samma anläggning, eller om lokalkostnaderna täcks av entréavgifter.
-  - Kostnader ska styrkas genom intyg från hyresvärd eller kopior på hyresverifikationer och fakturor.
-  belopp: Högst 25 000 kronor per förening och år.
-  sen_ansokan: Ansökningar som kommer in för sent riskerar att inte behandlas.
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
+  - Lokalen eller anläggningen ska inte vara kommunalt ägd eller förvaltad
+  - Samma anläggning får inte samtidigt ligga till grund för driftsbidrag
+  - Stödgrundande kostnader är hyra, el för belysning, värme och städning i expeditions- eller klubblokal
+  - Kostnad för en anläggning som är belagd med entréavgift får inte åberopas
+  - Kostnaderna ska styrkas med hyresvärdsintyg eller kopior på hyresavier och fakturor
+  belopp: Högst 25 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om hyresbidrag för 2027 ska lämnas senast 20 september 2026
+  kalla_url: *portal
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens webbsida angav tidigare sista ansökningsdatum 30 september (förlängt 2025 till 31 oktober), men den
-    gällande riktlinjen anger 25 augusti. Riktlinjen är den formellt beslutade källan och prioriteras här.
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: vadstena-regionalt-nationellt
   namn: Bidrag till verksamhet av regionalt eller nationellt intresse
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Föreningar och organisationer med verksamhet av regionalt eller nationellt intresse
+  status: aktiv
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med regionalt eller nationellt framstående verksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [09-20]
   krav:
-  - Kan endast sökas av föreningar eller organisationer med verksamhet av regionalt och/eller nationellt intresse, med regionalt/statligt
-    uppdrag eller regional/statlig finansiering.
-  - Det ska tydligt framgå att det kommunala bidraget är en förutsättning för regionalt och/eller statligt stöd.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
-  belopp_status: okand
+  - Föreningen ska bedriva verksamhet av regionalt eller nationellt intresse
+  - Föreningen ska ha statlig och regional finansiering som verksamhetsbidrag genom kultursamverkansmodellen eller motsvarande
+  - Det kommunala bidraget ska vara en förutsättning för att föreningen får regionalt eller statligt stöd och detta ska framgå av ansökan
+  - Ansökan ska avse kommande kalenderår; perioden kan på begäran anpassas till andra stödgivares ansökningsperioder
+  - Fullständiga förenings-, års- och ekonomihandlingar samt kommande verksamhetsplan och budget ska lämnas
+  belopp: Individuellt prövat verksamhetsbidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ordinarie ansökan för 2027 ska lämnas senast 20 september 2026; perioden kan efter överenskommelse anpassas till andra stöd
+  kalla_url: *portal
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: vadstena-social-verksamhet
   namn: Bidrag till social verksamhet
-  kategori:
-  - social
-  - pensionar
-  - funktionsratt
-  malgrupp: Föreningar inriktade på social verksamhet
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Bidragsberättigade föreningar vars sociala verksamhet stödjer välbefinnande och integration
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [09-20]
   krav:
-  - Regelverket för ansökan är detsamma som för grundbidrag, men beloppet fastställs separat av kultur- och utbildningsnämnden.
-  - Föreningen ska årligen ladda upp årsmötesprotokoll, årsredovisning inklusive revisionsrapport och verksamhetsberättelse
-    i e-tjänsten.
-  belopp: Beloppet fastställs individuellt av kultur- och utbildningsnämnden (samma regelverk för ansökan som grundbidraget).
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
-  belopp_status: kontrollast
+  - Föreningen ska vara inriktad på social verksamhet och uppfylla kommunens allmänna bidragsvillkor
+  - Verksamheten ska stödja människors grundläggande välbefinnande och integration i samhället
+  - Verksamhetens art, hur många som nås och hur verksamheten bidrar till samhället ska beskrivas
+  - Särskilda insatser för nya målgrupper eller ökad tillgänglighet ska redovisas
+  - Möjligheten att söka annan finansiering samt fullständiga års- och ekonomihandlingar ska redovisas
+  belopp: Individuellt prövat efter verksamhet, räckvidd, samhällsbidrag, tillgänglighetsinsatser och andra finansieringsmöjligheter; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om bidrag för 2027 ska lämnas senast 20 september 2026
+  kalla_url: *portal
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: vadstena-studieforbund
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund med verksamhet i Vadstena
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund som är verksamma i Vadstena kommun
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Fördelningen av en årligen budgeterad summa sker mellan samtliga studieförbund med verksamhet i Vadstena, baserat på statistik
-    från Östergötlands bildningsförbund med en fördelningsnyckel på de senaste två åren.
-  - Studieförbunden ska årligen ladda upp verksamhetsberättelse i e-tjänsten för att få bidrag.
+  - Sökanden ska vara ett bidragsberättigat studieförbund som är godkänt av Folkbildningsrådet för statsanslag
+  - Studieförbundet ska bedriva verksamhet i Vadstena kommun
+  - Ansökan ska göras i förväg för kommande kalenderår
+  - Underlag från Bildningsförbundet Östergötland ska visa tidigare bidrag, statsanslagens fem kvalitetsindikatorer och verksamhetsvolym
+  - Fullständiga förenings-, års- och ekonomihandlingar samt kommande verksamhetsplan och budget ska lämnas
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.vadstena.se/wp-content/uploads/2024/07/riktlinje-for-bidrag-till-ideburen-och-ideell-sektor-fran-1-juli-2024.pdf
-  belopp_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: Fast budgeterad summa som fördelas enligt Bildningsförbundet Östergötlands underlag; totalsumman publiceras inte
+  sen_ansokan: Ansökan görs inför kommande kalenderår; aktuell riktlinje och den öppna portalen publicerar inget fast sista datum för studieförbund
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: vadstena-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Kommunens e-tjänster
+- id: vadstena-bidragsberattigad-registrerad-forening
+  vad: Bidragsberättigande, föreningsregister och aktuella handlingar
+  beskrivning: Föreningen ska vara ideell eller av liknande ideell art, ha säte och stadigvarande verksamhet i Vadstena, ha varit registrerad och verksam minst sex månader samt ha organisationsnummer. Den ska ha stadgar, minst tre styrelseledamöter, revisorer och årsmöte, minst fem frivilliga matrikelförda medlemmar varav flertalet är folkbokförda i kommunen och normalt ta minst 100 kronor i årsavgift. Föreningen ska följa demokratiska principer, arbeta för jämställdhet och mot diskriminering, ha drog- och dopingrutiner, följa bokföringslagen och ha eget konto. Barn- och ungdomsverksamhet ska dessutom vara alkohol- och tobaksfri, följa barnkonventionen, kontrollera belastningsregister och ha krisplan. Föreningen ska registreras i kommunens föreningsregister, hålla register- och styrelseuppgifterna uppdaterade och vid ansökan lämna aktuella stadgar, års-, ekonomi- och revisionshandlingar, årsmötesprotokoll samt verksamhetsplan och budget.
+  system: E-serve Bidragsenheten Vadstena
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Registrering och fullständiga uppgifter krävs vid ansökan; kommunen publicerar ingen separat giltighetstid eller förnyelsefrist
   giltighet: null
   ordning: 1
-  kalla_url: https://www.vadstena.se/kultur-fritid/bidrag-till-kultur-och-fritid/att-soka-bidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
