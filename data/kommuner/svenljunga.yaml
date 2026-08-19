@@ -2,215 +2,436 @@ kommun: Svenljunga
 kommun_slug: svenljunga
 lan: Västra Götalands län
 befolkning: 10571
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kommunstyrelsen, samhällsbyggnadsnämnden och folkhälsorådet
 ansokningssystem:
-  namn: Svenljungas bidragssystem
-  url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-verifierad: '2026-07-31'
+  namn: FRI Webb-Bidrag och kommunens e-tjänster
+  url: https://fri.svenljunga.se/bidrag/
+kalla_url: &huvud https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.svenljunga.se/download/18.2b079e9317b2e5bddc5cf2/1756821171763/Regel%20f%C3%B6reningsbidrag%20f%C3%B6r%20ideella%20f%C3%B6reningar.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nystartade föreningar med minst tio medlemmar
+- id: svenljunga-startbidrag
+  namn: Startbidrag
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Nystartade ideella föreningar i Svenljunga kommun
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: 2 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav:
+  - Föreningen ska vara nystartad, uppfylla kommunens grundbestämmelser och ha minst tio medlemmar
+  - En nedlagd förening kan inte få nytt startbidrag förrän tre år efter nedläggningen
+  - Föreningen ska registreras i kommunens föreningsregister och lämna aktuellt medlemsregister
+  - Ansökan ska innehålla antagna stadgar, protokoll som visar styrelsens sammansättning och uppgift om eventuell riksorganisation
+  belopp: 2 000 kronor som engångsbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under föreningens startskede.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-startbidrag
-- namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som hyr lokal eller anläggning
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-lokalbidrag
+  namn: Lokalbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som hyr en lokal eller anläggning för sin verksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: Högst 15 000 kr eller 50 procent av kostnaden
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [04-15]
+  krav:
+  - Lokalen eller anläggningen får inte redan ha subventionerad kommunal hyra och ska användas regelbundet minst tio gånger per år
+  - Lokalen ska kunna användas av andra föreningar när det inte hindrar den ordinarie verksamheten
+  - Kommersiell verksamhet, förråd och intern debitering mellan sektioner berättigar inte till stöd
+  - Föreningen får bara söka antingen lokalbidrag eller anläggningsbidrag för samma lokal eller anläggning
+  - Ansökan ska avse föregående kalenderår och innehålla kopia på betald hyresfaktura
+  belopp: Högst 50 procent av kostnaden och maximalt 15 000 kronor; nivån vägs mot hyra, barn- och ungdomsandel och hållbarhetsarbete
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående kalenderår ska lämnas senast 15 april. Inom 14 dagar efter fristen halveras stödet; därefter avslås ansökan.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-lokalbidrag
-- namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som driver egen anläggning
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som äger eller långsiktigt hyr en anläggning i kommunen
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [04-15]
+  krav:
+  - Anläggningen ska ligga i kommunen, vara föreningsägd eller långsiktigt hyrd och användas minst tio gånger per år
+  - Anläggningen ska vara tillgänglig för allmänheten och andra ideella föreningar när det inte hindrar ordinarie verksamhet
+  - Samlingslokaler och bygdegårdar med eget verksamhetsbidrag kan inte få anläggningsbidrag för samma objekt
+  - Föreningen får bara söka anläggnings- eller lokalbidrag för samma anläggning och ska delta i ett årligt dialogmöte
+  - Ansökan ska redovisa yta, sammankomster, föregående års drifts- och nettokostnader, kommersiell verksamhet, ideellt arbete och barn- och ungdomsandel
+  - Ökat nyttjande, jämställdhet, mångfald, miljö, energieffektivitet, trygghet och säkerhet kan höja prioriteringen
+  belopp: Högst 70 procent av driftskostnaden och maximalt 150 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående kalenderår ska lämnas senast 15 april. Inom 14 dagar efter fristen halveras stödet; därefter avslås ansökan.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-anlaggningsbidrag
-- namn: Verksamhetsbidrag unga
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med verksamhet för 6–25 år
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-verksamhetsbidrag-unga
+  namn: Verksamhetsbidrag unga
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med regelbunden barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
-  belopp: 21 kr per aktivitet samt 8 kr per deltagare, med stimulansdel
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [02-25, 08-25]
+  krav:
+  - Gruppaktiviteten ska vara planerad, ledarledd och pågå minst 45 minuter
+  - Varje ledare får ansvara för högst 20 deltagare och inte leda flera aktiviteter samtidigt
+  - Minst tre deltagare ska vara 6–25 år; ledaren ger inte deltagarstöd
+  - Verksamheten ska vara öppen och inkluderande och föreningen ska delta i ett årligt dialogmöte
+  - Närvaro och aktivitetsunderlag ska redovisas för respektive halvår
+  belopp: 21 kronor per ledarledd aktivitet, ytterligare 5 kronor med minst två ledare och 8 kronor per deltagare 6–25 år, samt stimulansstöd efter hållbarhetsarbete
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Höstens aktiviteter redovisas senast 25 februari och vårens senast 25 augusti.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-verksamhetsbidrag-unga
-- namn: Verksamhetsbidrag byalag
-  kategori:
-  - ovrig
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-verksamhetsbidrag-seniorer
+  namn: Verksamhetsbidrag seniorer
+  status: aktiv
+  kategori: [idrott, social, pensionar, ovrig]
+  foreningstyp: [idrott, friluft, social, annat]
+  malgrupp: Föreningar som regelbundet erbjuder fysisk aktivitet för personer 65 år och äldre
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Aktiviteten ska vara fysisk, pågå minst 30 minuter och ha minst tre deltagare
+  - Föreningen ska erbjuda senioraktiviteten regelbundet och minst tio gånger per år
+  - Aktiviteten ska vara öppen och inkluderande oberoende av samhällsställning eller uppfattning
+  - Föreningen ska redovisa föregående kalenderårs genomförda senioraktiviteter
+  belopp: 3 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående kalenderår ska lämnas senast 15 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-verksamhetsbidrag-samlingslokaler
+  namn: Verksamhetsbidrag samlingslokaler och bygdegårdar
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Godkända föreningsdrivna samlingslokaler och bygdegårdar
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Lokalen ska användas för kultur, bildning, folkrörelseverksamhet och andra allmänna sammankomster
+  - Lokalen ska vara öppen och tillgänglig för andra föreningar och allmänheten och bör kunna användas för högtidsfiranden
+  - Minst tre externa uthyrningar eller arrangemang i egen regi ska genomföras per år
+  - Föreningen ska delta med minst en representant vid kommunens bygdegårdsmöte
+  - Ansökan ska innehålla kommunens frågeformulär samt uppgifter om godkänd publik yta, driftkostnader och hållbarhetsarbete
+  belopp: 8 000 kronor i grundbelopp; resterande ram fördelas 30 procent efter publik yta, 20 procent efter driftskostnader och 50 procent efter hållbarhetsarbete
+  belopp_avser: per_forening
+  kommunens_pott: Resterande årlig budgetram efter grundbeloppen; totalsumman publiceras inte
+  sen_ansokan: Ansökan för föregående kalenderår ska lämnas senast 15 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-verksamhetsbidrag-byalag
+  namn: Verksamhetsbidrag byalag
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: [hembygd, social, annat]
   malgrupp: Ett byalag eller en samhällsförening per ort
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: 5 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [04-15]
+  krav:
+  - Sökanden ska vara det byalag eller den samhällsförening som företräder orten
+  - Föreningen ska fungera som lokal röst och demokratisk länk mellan orten och kommunen
+  - Föreningen ska delta i de kommunala träffar som den kallas till
+  - Stödet ska användas till föreningens administrationskostnader
+  belopp: 5 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående kalenderår ska lämnas senast 15 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-verksamhetsbidrag-byalag
-- namn: Evenemangsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med offentliga evenemang
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-evenemangsbidrag
+  namn: Evenemangsbidrag
+  status: aktiv
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som skapar ett offentligt evenemang i Svenljunga kommun
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-    - 09-15
-  krav: []
+    datum: [03-31, 09-15]
+  krav:
+  - Evenemanget ska vara ideellt, offentligt, äga rum i kommunen och stärka föreningslivet genom att nå ny publik eller nya deltagare
+  - Evenemanget får inte ingå i föreningens ordinarie verksamhet och föreningen kan få stöd för högst ett evenemang per år
+  - Ansökan ska lämnas i förväg med tydlig beskrivning, genomförandeplan och kalkyl över kostnader och intäkter
+  - Genomförande och ekonomi ska redovisas senast två månader efter evenemanget
+  - Oanvända eller felaktigt använda medel ska betalas tillbaka
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årlig budgetram som fördelas mellan bidragsberättigade evenemang; totalsumman publiceras inte
+  sen_ansokan: Ansökan den 15 september avser evenemang 1 januari–30 juni och den 31 mars evenemang 1 juli–31 december.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-evenemangsbidrag
-- namn: Lovbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som ordnar lovaktiviteter för 7–20 år
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-lovbidrag
+  namn: Lovbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som ordnar öppna lovaktiviteter för barn och unga 7–20 år
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
-  krav: []
-  belopp: 1 000 kr per förening
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ansökan minst tre veckor före lovstart. Ej angivet i källan
-  id: svenljunga-lovbidrag
-- namn: Ledbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som sköter vandrings- och cykelleder
+  krav:
+  - Aktiviteten ska genomföras i Svenljunga kommun under ett skollov
+  - Aktiviteten ska rikta sig till barn och unga 7–20 år och vara öppen för alla
+  - Aktiviteten ska ge möjlighet att prova en verksamhet och erbjuda en meningsfull sysselsättning
+  - Aktiviteten ska läggas in i kommunens evenemangs- och aktivitetskalender när ansökan skickas
+  - Genomförd aktivitet ska redovisas enligt kommunens anvisningar
+  belopp: 1 000 kronor per förening efter genomförd godkänd aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas minst tre veckor före lovets start.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-ledbidrag
+  namn: Ledbidrag
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som sköter vandrings- eller cykelleder i kommunen
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: 200 kr per kilometer, minst 1 000 kr per led
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
+    datum: [04-15]
+  krav:
+  - Föreningen ska sköta en vandrings- eller cykelled som bidrar till ökad rörelse
+  - Ett ledöverenskommelseavtal med kommunen ska vara undertecknat
+  - Ansökan ska ange den godkända ledens längd och föreningens ansvar för skötseln
+  - Föreningen ska uppfylla kommunens allmänna villkor och hålla föreningsuppgifterna aktuella
+  belopp: 200 kronor per kilometer led, dock minst 1 000 kronor per led
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 april.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  id: svenljunga-ledbidrag
-- namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med investeringar över 15 000 kr
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-investeringsbidrag
+  namn: Investeringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som investerar i föreningsägd lokal, anläggning, maskin eller inventarie
+  deadlines:
+    typ: fasta
+    datum: [04-15]
+  krav:
+  - Investeringen ska avse ny-, till- eller ombyggnad av en föreningsägd lokal eller anläggning eller inköp av maskin eller inventarie
+  - Anläggningen ska ligga i kommunen, projektkostnaden överstiga 15 000 kronor och ansökan lämnas före projektstart
+  - Eget arbete får motsvara högst 20 procent av investeringskostnaden och värderas till 220 kronor per timme
+  - Ansökan ska innehålla motivering, medlems- och aktivitetsstatistik, ritning eller skiss, offert, finansierings- och driftkalkyl, andra sökta stöd samt lagfart eller långfristigt hyresavtal
+  - Prioriteringen väger in andra sökta stöd, egeninsats, tidigare investeringsbidrag, barn- och ungdomsverksamhet, ekonomi samt energi-, miljö-, brand- och tillgänglighetsåtgärder
+  - Utbetalning sker efter redovisning och eventuell slutbesiktning, senast tre år efter beslut
+  belopp: Högst 30 procent av total kostnad och normalt maximalt 300 000 kronor; en större ansökan prövas särskilt av kommunstyrelsen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 april och innan investeringen påbörjas.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-akut-foreningsstod
+  namn: Stöd vid oförutsedd händelse eller akut behov
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar vars fortsatta verksamhet hotas av en oförutsedd händelse eller ett akut ekonomiskt behov
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: Högst 300 000 kr och 30 procent av totalbeloppet
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: svenljunga-investeringsbidrag
-- namn: Folkhälsobidrag
-  kategori:
-  - social
-  - funktionsratt
-  - pensionar
-  - ovrig
-  malgrupp: Föreningar och ideella organisationer med folkhälsoinsatser
+  krav:
+  - Behovet ska vara sällsynt, oförutsett eller akut och ligga utanför kommunens ordinarie stödformer
+  - Föreningen ska visa att den ekonomiska situationen gör det svårt att fortsätta verksamheten
+  - Ansökan ska beskriva händelsen, behovet, konsekvenserna och det belopp som söks
+  - Samtliga handlingar som krävs enligt de grundläggande föreningsbestämmelserna ska bifogas eller finnas uppladdade i föreningsregistret
+  - Kommunstyrelsen beslutar om stöd kan lämnas och om beloppets storlek
+  belopp: Individuellt prövat ekonomiskt stöd; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens regel publicerar ingen särskild sista ansökningsdag.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-byalagspeng
+  namn: Byalagspeng
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Byalag och samhällsföreningar som genomför lokala utvecklingsinsatser
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: Högst 25 000 kr
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
-  id: svenljunga-folkhalsobidrag
+    typ: fasta
+    datum: [02-15, 05-15, 09-15, 11-15]
+  krav:
+  - Ansökan ska gå genom ortens byalag eller samhällsförening
+  - Insatsen ska gynna allmänheten, den lokala utvecklingen och vara hållbar
+  - Stödet kan användas till investeringar och aktiviteter men inte till mat för vuxna, enskilda företagsinvesteringar eller fastighetsunderhåll
+  - Ansökan ska beskriva insats, målgrupp, lokal nytta, genomförande, kostnader och eventuell egen finansiering
+  - Genomförandet ska återrapporteras enligt kommunens anvisningar
+  belopp: Högst 25 000 kronor per insats och år
+  belopp_avser: per_forening
+  kommunens_pott: 200 000 kronor per år, fördelas löpande tills ramen är slut
+  sen_ansokan: 'Fyra ansökningsdagar gäller: 15 februari, 15 maj, 15 september och 15 november.'
+  kalla_url: https://www.svenljunga.se/kommun--politik/hur-kan-jag-paverka/byalag--samhallsforeningar/byalagspeng
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-folkhalsobidrag
+  namn: Folkhälsobidrag för föreningar
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och ideella organisationer som prövar eller utvecklar en folkhälsoinsats för kommunens invånare
+  deadlines:
+    typ: fasta
+    datum: [02-28]
+  krav:
+  - Insatsen ska främja hälsa eller förebygga ohälsa och ligga utanför föreningens ordinarie verksamhet
+  - Projektet ska följa kommunens folkhälsoplan och normalt genomföras under högst tolv månader, med möjlighet till tolv månaders förlängning
+  - Barn och unga, äldre och personer med funktionsnedsättning samt tidiga livsvillkor, levnadsvanor, delaktighet och trygghet prioriteras
+  - Ansökan ska beskriva mål, metod, målgrupp, budget, tidsplan och hur arbetssättet kan införlivas i verksamheten
+  - Ekonomisk redovisning och uppföljning med könsuppdelat deltagarantal ska lämnas senast två månader efter projektet
+  belopp: Högst 25 000 kronor per insats
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 28 februari. Senare ansökningar handläggs inte och utbetalning måste ske senast 31 oktober.
+  kalla_url: https://www.svenljunga.se/omsorg--stod/folkhalsoarbete/folkhalsobidrag
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: svenljunga-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbundsavdelningar med verksamhet i Svenljunga kommun
+  deadlines:
+    typ: fasta
+    datum: [06-30]
+  krav:
+  - Avdelningen ska vara ansluten till ett av statlig myndighet godkänt studieförbund och ha självständig ekonomisk förvaltning
+  - För en flerkkommunal avdelning räknas endast verksamhet i Svenljunga där minst tre deltagare bor i kommunen
+  - Avdelningen ska redovisa verksamhets- och revisionsberättelse samt styrkta bidragsberättigade studietimmar
+  - Fördelningsunderlaget omfattar studiecirklar, annan folkbildning, unika deltagare, studietimmar, deltagare med funktionsnedsättning och kulturarrangemang
+  - Verksamheten rapporteras efter avslutat år och ligger till grund för nästa års utbetalning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årligt anslag; 30 procent delas lika mellan studieförbund med egen adress och lokal i kommunen, övriga 70 procent fördelas 70 procent studiecirklar, 10 procent annan folkbildning och 20 procent kulturarrangemang
+  sen_ansokan: Föregående års verksamhet ska rapporteras senast 30 juni.
+  kalla_url: https://www.svenljunga.se/download/18.6ac5dd77164a798c85851ff/1602071164633/Regler%20f%C3%B6r%20utbetalning%20av%20kommunala%20bidrag%20till%20studief%C3%B6rbund%20verksamma%20i%20Svenljunga%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 forutsattningar:
-- id: svenljunga-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Svenljungas bidragssystem
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
+- id: svenljunga-godkand-forening
+  vad: Godkänd och registrerad ideell förening
+  beskrivning: Föreningen ska vara verksam i Svenljunga kommun sedan minst sex månader, ha minst tio medlemmar i medlemsregister och ta ut minst 25 kronor i årsavgift. Den ska ha årsmötesantagna stadgar, demokratiskt vald styrelse, organisationsnummer och vara öppen, jämställd och icke-diskriminerande. Byalag och samlingslokaler är undantagna medlemskravet.
+  system: Svenljungas föreningsregister
+  ledtid: 180
+  ledtid_text: Minst sex månaders kontinuerlig verksamhet före ordinarie stöd, med undantag för startbidrag.
+  giltighet: Kalenderår
   ordning: 1
-  kalla_url: https://www.svenljunga.se/uppleva--gora/foreningar-och-foreningsliv/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: svenljunga-arlig-uppdatering
+  vad: Årlig registeruppdatering och årshandlingar
+  beskrivning: Föreningen ska årligen snarast efter årsmötet uppdatera föreningsregistret och lämna verksamhetsberättelse, revisionsberättelse och räkenskapssammandrag. Drog- och alkoholpolicyn ska följas upp i verksamhetsberättelsen och minst en representant ska delta i årets stora föreningsmöte.
+  system: Svenljungas föreningsregister
+  ledtid: null
+  ledtid_text: Så snart som möjligt efter varje årsmöte.
+  giltighet: Kalenderår
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: svenljunga-ansokan
+  vad: Fullständig ansökan och kommunal insyn
+  beskrivning: Ansökan ska lämnas via rätt e-tjänst, och efterfrågade handlingar ska vara uppladdade senast 20 dagar efter stödformens sista ansökningsdag. Kommunen får granska räkenskaper och kräver återbetalning av felaktigt använda medel.
+  system: FRI Webb-Bidrag och kommunens e-tjänster
+  ledtid: null
+  ledtid_text: Sena ansökningar inom 14 dagar får normalt halvt stöd och därefter avslås de; särskilda stöd kan ha strängare regler.
+  giltighet: Per ansökan
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
