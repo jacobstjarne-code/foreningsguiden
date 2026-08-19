@@ -2,120 +2,508 @@ kommun: Ånge
 kommun_slug: ange
 lan: Västernorrlands län
 befolkning: 8951
-forvaltning: Kultur och fritid
+forvaltning: Kultur- och fritidsenheten samt kommunstyrelsen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
-kalla_url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
-verifierad: '2026-08-01'
+  namn: Ånge kommuns e-tjänster och Interbook
+  url: https://e-tjanster.ange.se/
+kalla_url: &huvud https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &register https://e-tjanster.ange.se/oversikt/overview/207
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: ange-startbidrag
   namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Nystartade föreningar med barn- och ungdomsverksamhet
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Nystartade föreningar med barn- och ungdomsverksamhet i Ånge kommun
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Stadgar bifogas ansökan
-  - Protokoll från konstituerande möte bifogas ansökan
-  - Verksamhetsbeskrivning bifogas ansökan
-  belopp: 2 500 kr till nystartad förening för barn- och ungdomsverksamhet, utbetalas i två steg om 1 250 kr vardera (vid
-    start samt när föreningen redovisat verksamhet till kommunen)
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
+  - Föreningen ska vara nybildad och bedriva barn- och ungdomsverksamhet i Ånge kommun
+  - Stadgar och protokoll från det konstituerande mötet ska bifogas ansökan
+  - Ansökan ska innehålla en beskrivning av den planerade verksamheten
+  - Föreningen ska uppfylla kommunens allmänna krav på ideell, öppen och demokratisk verksamhet
+  - Den andra utbetalningen förutsätter redovisad verksamhet genom kommunalt aktivitetsstöd eller motsvarande aktivitetsrapport
+  belopp: 2 500 kr, varav 1 250 kr vid start och 1 250 kr efter att verksamheten har redovisats
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Bidraget betalas ut i två steg: 1 250 kr vid start och resterande 1 250 kr när föreningen redovisat verksamhet
-    till kommunen, t.ex. genom ansökan om Lokalt aktivitetsstöd eller kopia på aktivitetsrapport till studieförbund.'
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: true
 - id: ange-lokalt-aktivitetsbidrag
   namn: Lokalt aktivitetsbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med ledarledd verksamhet för 7–25-åringar, personer med funktionsnedsättning eller personer 65 år och äldre
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+    datum: ['02-25', '08-25']
   krav:
-  - Minst 3 deltagare per sammankomst utöver ledare, samt minst en ledare (ledare 13–25 år är också bidragsberättigad)
-  - Deltagare 7–25 år; ingen övre åldersgräns för deltagare/ledare i idrott för personer med funktionsnedsättning, samt för
-    deltagare/ledare 65 år och äldre
-  - Redovisning sker för två perioder per år (1 januari–30 juni och 1 juli–31 december) via närvarokort
-  - Föreningen ska ha en öppen och demokratisk föreningsordning med stadgar och vald styrelse samt minst 10 medlemmar
-  - Ansökan ska bifogas verksamhetsberättelse, ekonomisk rapport, verksamhetsplan, årsmötesprotokoll och revisionsberättelse
-  belopp: 50 kr per sammankomst, minst 3 deltagare utöver ledare samt en ledare
-  sen_ansokan: Sen ansökan ger inte rätt till bidrag
-  kalla_url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
+  - Aktiviteten ska vara planerad och ledarledd med minst tre deltagare utöver minst en ledare
+  - Deltagare ska normalt vara 7–25 år; det finns ingen övre åldersgräns för idrott för personer med funktionsnedsättning och även verksamhet för 65 år och äldre är stödberättigad
+  - Ledare 13–25 år är stödberättigade och ledaren ska intyga närvaron
+  - Närvaro ska redovisas för perioderna januari–juni respektive juli–december och underlagen ska kunna granskas
+  - Föreningar som söker statligt LOK-stöd ska bifoga en kopia av den statliga ansökan
+  - Med ansökan den 25 februari ska föreningen lämna reviderad handlingsplan för Trygga ungdomsmiljöer eller beskriva årets trygghetsarbete
+  belopp: 50 kr per godkänd sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för juli–december ska lämnas senast 25 februari och för januari–juni senast 25 augusti; sen ansökan ger inte rätt till stöd
+  kalla_url: &norm https://invanare.ange.se/download/18.5662c7411994ebf6915e5010/1758262789265/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag%2C%20kf%20250428.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För verksamhet för barn och ungdomar 7–25 år.
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: true
 - id: ange-stimulansbidrag
   namn: Stimulansbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som redovisar minst 100 godkända sammankomster för lokalt aktivitetsbidrag
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
+    datum: ['02-25']
   krav:
-  - Mer än 100 redovisade sammankomster för Lokalt aktivitetsbidrag under föregående årsperiod (1 juli–30 juni)
-  - Söks i samband med Lokalt aktivitetsbidrag, sista ansökningsdag 25 februari
-  belopp: 'Trappstegsbelopp baserat på antal redovisade sammankomster föregående årsperiod (1 juli–30 juni): 1 500 kr (100–199),
-    3 000 kr (200–299), 4 500 kr (300–399), 6 000 kr (400–499), 7 500 kr (500–599), 9 000 kr (600–699), 10 500 kr (700–799),
-    13 500 kr (800 eller fler)'
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
+  - Föreningen ska redovisa minst 100 godkända sammankomster under perioden 1 juli–30 juni
+  - Sammankomsterna ska uppfylla villkoren för kommunens lokala aktivitetsbidrag
+  - Stödet ska sökas tillsammans med ansökan om lokalt aktivitetsbidrag den 25 februari
+  - Antalet redovisade och godkända sammankomster avgör vilken nivå i bidragstrappan som används
+  belopp: '1 500 kr vid 100–199 sammankomster, 3 000 kr vid 200–299, 4 500 kr vid 300–399, 6 000 kr vid 400–499, 7 500 kr vid 500–599, 9 000 kr vid 600–699, 10 500 kr vid 700–799 och 13 500 kr vid 800 eller fler'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas tillsammans med aktivitetsstödet senast 25 februari; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Extra stöd till föreningar som redovisar minst 100 aktiviteter per år.
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunens aktuella sammanfattning anger 100 eller fler aktiviteter och den publicerade bidragstrappan börjar vid 100
+  kraver_registrering: null
+  sate_i_kommunen: true
 - id: ange-anlaggningsbidrag
-  namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  namn: Anläggningsbidrag för föreningsägd anläggning
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som äger en anläggning och bedriver barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 12-01
+    datum: ['12-01']
   krav:
-  - Föreningsägd anläggning som bedriver barn- och ungdomsverksamhet (Kategori A)
-  - Minst 30 sammankomster/år för barn- och ungdomsverksamhet med beviljat Lokalt aktivitetsstöd, eller redovisade aktiviteter
-    på annat sätt (t.ex. kopia på aktivitetsrapport till studieförbund), avseende föregående årsperiod 1 juli–30 juni
-  - Fritidschef kan bevilja bidrag utan 30 sammankomster om anläggningen har stort allmänt intresse och anses främja folkhälsan
-  - Ansökan ska bifogas verksamhetsberättelse, ekonomisk rapport, verksamhetsplan, årsmötesprotokoll och revisionsberättelse
-  belopp: Fastställs årligen efter kommunens budgetram och anläggningens klassificering i nio grupper (nivå enligt budget
-    2019), t.ex. 150 000 kr (motorcrossanläggning), 100 000 kr (fotbollsplan 100x60 godkänd för seriespel med omklädningsrum/samlingssal/kansli),
-    85 000 kr, 50 000 kr, 40 000 kr, 25 000 kr, 15 000 kr respektive 10 000 kr (mindre anläggningar); hyresbidrag fastställs
-    separat av fritidschef
-  sen_ansokan: Sen ansökan ger inte rätt till bidrag
-  kalla_url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/bidrag-till-foreningar.html
+  - Föreningen ska äga anläggningen och bedriva barn- och ungdomsverksamhet där
+  - Minst 30 godkända sammankomster ska normalt ha redovisats för föregående period 1 juli–30 juni
+  - Fritidschefen kan göra undantag från aktivitetskravet om anläggningen har stort allmänintresse och främjar folkhälsan
+  - Anläggningen ska hållas i godtagbart skick och kommunen har rätt att besiktiga den
+  - Ny-, till- eller ombyggnad ska godkännas av fritidschefen innan arbetet påbörjas
+  - Ansökan ska innehålla kommunens efterfrågade årshandlingar och anläggningsuppgifter
+  belopp: 'Årlig anläggningsschablon som kan budgetjusteras: 150 000 kr för den högsta gruppen, därefter 100 000, 85 000, 50 000, 40 000, 25 000, 15 000 eller 10 000 kr beroende på anläggningstyp, storlek och utrustning'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Driftbidrag till föreningsägda anläggningar med barn- och ungdomsverksamhet (Kategori A). Bidragsbeloppet klassificeras
-    i nio grupper efter anläggningstyp och fastställs efter kommunens budgetram.
+  senast_verifierad: '2026-08-19'
+  anteckning: Schablonnivåerna anges i riktlinjen som 2019 års nivåer och kan justeras efter kommunens årliga budget
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-hyresbidrag
+  namn: Hyresbidrag för föreningshyrd lokal
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med verksamhet för barn och unga eller personer 65 år och äldre som behöver hyra en extern lokal
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Föreningen ska bedriva verksamhet för 7–25-åringar och/eller personer 65 år och äldre
+  - Kommunen ska sakna en lämplig lokal som kan erbjudas för verksamheten
+  - Minst 30 godkända sammankomster ska normalt ha redovisats under föregående period 1 juli–30 juni
+  - Ansökan ska redovisa hyresavtal, hyreskostnader och samtliga intäkter från lokalen
+  - Lokalen ska vara nödvändig och ändamålsenlig för föreningens verksamhet
+  belopp: Bidragets storlek fastställs efter förhandling och individuell prövning av fritidschefen; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kategori B i kommunens anläggningsbidrag
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-skotselavtal
+  namn: Bidrag enligt skötselavtal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som sköter en kommunal fritids- eller kulturanläggning enligt avtal
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Föreningen ska ha ett skriftligt skötselavtal med kommunen
+  - Uppdraget ska avse skötsel av en kommunal fritids- eller kulturanläggning
+  - Föreningen ska fullgöra de arbetsuppgifter, öppettider och redovisningskrav som anges i avtalet
+  - Ansökan ska lämnas inom den gemensamma ansökningsomgången för anläggningsbidrag
+  - Kommunen får följa upp anläggningens skick och att avtalet har följts
+  belopp: Ersättningen fastställs i respektive skötselavtal; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kategori C i kommunens anläggningsbidrag
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-hembygdsforeningsbidrag
+  namn: Anläggningsbidrag till hembygdsförening
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [hembygd, kultur]
+  malgrupp: Hembygdsföreningar som driver en egen anläggning i Ånge kommun
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Sökanden ska vara en hembygdsförening som ansvarar för en egen anläggning
+  - Ansökan ska redovisa anläggningens samtliga driftkostnader och intäkter
+  - Stödet får inte överstiga det redovisade underskottet för anläggningens drift
+  - Föreningen ska lämna verksamhetsberättelse, verksamhetsplan, ekonomisk rapport, revisionsberättelse och årsmötesprotokoll
+  - Kommunen ska kunna granska föreningens ekonomi och användningen av stödet
+  belopp: Högst det verifierade underskottet för anläggningens drift
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kategori D i kommunens anläggningsbidrag
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-riktat-bidrag
+  namn: Riktat bidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som utvecklar verksamheten, rekryterar fler eller behöver verksamhetsanknuten utrustning
+  deadlines:
+    typ: fasta
+    datum: ['08-25', '12-01']
+  krav:
+  - Insatsen ska avse förbättring, utrustning, verksamhetsutveckling eller rekrytering
+  - Projekt som får fler flickor och pojkar att delta samt verksamhet för barn, unga och personer 65 år och äldre prioriteras
+  - Föreningar med deltagarverksamhet ska kunna redovisa LOK-stöd eller motsvarande aktiviteter
+  - Ansökan ska innehålla ändamål, tidsplan och en realistisk kostnads- och finansieringsplan
+  - Utbetalning sker efter kostnadsredovisning som undertecknats av ordförande och kassör samt styrkts med fakturor och betalningsbevis
+  belopp: Stödet prövas individuellt inom tillgänglig budget; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 25 augusti eller 1 december för följande års verksamhet; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-funktionsrattsforeningsbidrag
+  namn: Bidrag till föreningar för personer med funktionsnedsättning
+  status: aktiv
+  kategori: [social, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar för personer med funktionsnedsättning som bedriver verksamhet i Ånge kommun
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Föreningen ska bedriva aktiv verksamhet i Ånge kommun för personer med funktionsnedsättning
+  - Föreningen ska ha minst 10 medlemmar enligt den beslutade riktlinjen
+  - Medlemsantalet ska avse den 31 december föregående år och kunna styrkas
+  - Ansökan ska redovisa verksamhet, kostnader och nya medlemmar i de intervall som kommunens beräkning använder
+  - Fullständiga årsmötes-, verksamhets-, ekonomi- och revisionshandlingar ska bifogas
+  belopp: 'Högst 50 procent av redovisade kostnader och högst 10 000 kr, plus aktivitetsbidrag per medlem: 13 kr vid 15–65 medlemmar, 14 kr vid 66–116, 15 kr vid 117–167, 16 kr vid 168–218, 17 kr vid 219–269, 18 kr vid 270–320 och 19 kr vid 321 eller fler; dessutom 20 kr per ny medlem'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den aktuella webbsidans sammanfattning anger minst 15 medlemmar, men den nyare beslutade riktlinjen anger minst 10 och används här
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-samlingslokalsbidrag
+  namn: Bidrag till samlingslokal
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [hembygd, kultur, social, annat]
+  malgrupp: Föreningar som äger och driver en allmän samlingslokal i en godkänd ort
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Lokalen ska vara godkänd som samlingslokal enligt kommunens samlingslokalsutredning från 2005
+  - Föreningen ska äga eller långsiktigt ansvara för lokalen och normalt vara ansluten till en riksorganisation
+  - Lokalen ska vara av allmänt intresse, tillgänglig för offentliga arrangemang och kunna hyras av andra föreningar
+  - Föreningen ska arbeta med egen finansiering, uthyrning, samordning och en aktiv verksamhet i lokalen
+  - Ansökan ska redovisa antal aktiviteter, nyttjande, ekonomi, lokala förutsättningar och planerade åtgärder
+  - Kommunen gör en individuell bedömning och får granska lokalens drift och användning
+  belopp: 20 000–75 000 kr per år enligt kommunens publicerade aktivitets- och nyttjandetrappa
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Det slutliga beloppet bedöms även efter nyttjande, verksamhet, ekonomi och lokala förutsättningar
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-pensionarsforeningsbidrag
+  namn: Bidrag till pensionärsföreningar
+  status: aktiv
+  kategori: [social, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar som bedriver aktiv verksamhet i Ånge kommun
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Sökanden ska vara en pensionärsförening med aktiv verksamhet i Ånge kommun
+  - Stödberättigade medlemmar ska vara registrerade i föreningen den 31 december föregående år
+  - Medlemsantalet ska kunna styrkas genom medlemsregister och ekonomiska underlag
+  - Föreningen ska lämna verksamhetsberättelse, verksamhetsplan, ekonomisk rapport, revisionsberättelse och årsmötesprotokoll
+  belopp: 13 kr per medlem registrerad den 31 december föregående år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-jubileumsbidrag
+  namn: Bidrag vid 100-årsjubileum
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar i Ånge kommun som fyller 100 år
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara bidragsberättigad enligt kommunens allmänna villkor
+  - Föreningen ska under ansökningsåret fira att den har bedrivit verksamhet i 100 år
+  - Föreningens medlemsantal ska kunna styrkas eftersom det avgör bidragsnivån
+  - Ansökan ska lämnas av behörig firmatecknare och innehålla de underlag kommunen begär
+  belopp: 5 000 kr för förening med högst 100 medlemmar och 10 000 kr för förening med fler än 100 medlemmar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela jubileumsåret
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-kulturforeningsbidrag
+  namn: Årligt bidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Lokala kulturföreningar med kontinuerlig och utåtriktad kulturverksamhet i Ånge kommun
+  deadlines:
+    typ: fasta
+    datum: ['12-01']
+  krav:
+  - Sökanden ska vara en lokal kulturförening som bedriver kontinuerlig verksamhet i Ånge kommun
+  - Verksamheten ska ge allmänheten tillgång till exempelvis konst, musik, teater, dans, litteratur, film, form eller kulturarv
+  - Föreningen ska ha en öppen och demokratisk organisation och uppfylla kommunens allmänna villkor
+  - Ansökan ska innehålla föregående års verksamhets- och ekonomiska redovisning samt kommande verksamhetsplan och budget
+  - Kommunens stöd ska användas till den verksamhet som beskrivs i ansökan och kunna följas upp
+  belopp: Bidragets storlek prövas individuellt inom kommunens budget; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om följande års stöd ska lämnas senast 1 december; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med lokal folkbildningsverksamhet i Ånge kommun
+  deadlines:
+    typ: fasta
+    datum: ['05-01']
+  krav:
+  - Studieförbundets centralorganisation ska vara statsbidragsberättigad genom Folkbildningsrådet
+  - Ansökan ska avse statsbidragsberättigade studiecirklar, annan folkbildning och kulturprogram i Ånge kommun
+  - Förbundet ska lämna verksamhetsplan för aktuellt år samt föregående års verksamhetsberättelse, ekonomiska redovisning, revisionsberättelse och årsmötesprotokoll
+  - Ett undertecknat SCB-kommunintyg med lokala studietimmar, kulturprogram, unika deltagare och tillgänglighetsverksamhet ska bifogas
+  - Lokal verksamhet och lokal ekonomi ska kunna särskiljas och granskas av kommunen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas med 40 procent efter studiecirklar och annan folkbildning, 20 procent efter kulturprogram, 30 procent efter unika deltagare och 10 procent efter tillgänglighetsinsatser för personer med funktionsnedsättning; totalsumman publiceras inte
+  sen_ansokan: Fullständig ansökan ska lämnas senast 1 maj; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: null
+  sate_i_kommunen: null
+- id: ange-kommunstyrelsens-oforutsedda
+  namn: Kommunstyrelsens bidrag för oförutsedda projekt och evenemang
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar och organisationer som söker stöd för ett projekt eller evenemang
+  deadlines:
+    typ: fasta
+    datum: ['03-31', '09-30']
+  krav:
+  - Sökanden ska vara en ideell förening eller organisation vars verksamhet är till nytta för samhället
+  - Ansökan ska avse ett tydligt avgränsat evenemang eller projekt
+  - Projektet eller evenemanget ska beskrivas med syfte, målgrupp, tidplan och förväntad nytta för Ånge kommun
+  - Ansökan ska innehålla en fullständig kostnads- och finansieringsplan samt uppgift om andra sökta eller beviljade stöd
+  - Senaste verksamhetsberättelse, verksamhetsplan, ekonomiska redovisning, revisionsberättelse och årsmötesprotokoll ska bifogas
+  - Beviljat stöd ska användas till beslutat ändamål och kunna redovisas; felaktigt använda medel kan återkrävas
+  belopp: Kommunstyrelsen prövar beloppet individuellt inom tillgänglig budget; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars eller 30 september; sen ansökan ger inte rätt till stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Stödformen finns i den gällande beslutade riktlinjen men saknas i den publika bidragsmenyn
+  kraver_registrering: null
+  sate_i_kommunen: true
+- id: ange-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade lokala föreningar, med lägsta taxa för barn- och ungdomsverksamhet samt pensionärs- och funktionsrättsföreningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Den subventionerade taxan gäller bidragsberättigade föreningar i Ånge; verksamhet för barn och unga till och med 20 år samt pensionärs- och funktionsrättsföreningar har den lägsta taxan
+  - Bokningen blir giltig först när kommunen har skickat en bokningsbekräftelse
+  - En ansvarig vuxen eller annan behörig ledare ska närvara och se till att ordnings-, säkerhets- och städregler följs
+  - Lokaler och anläggningar ska användas drog- och dopningsfritt och skador eller extra kostnader kan debiteras föreningen
+  - Bidragsberättigad föreningsverksamhet och ungdomsverksamhet prioriteras när tider fördelas
+  - Match ska avbokas minst 10 dagar och turnering eller arrangemang minst 30 dagar före användningsdagen för att undvika avgift enligt villkoren
+  belopp: 'Exempel på föreningstaxor per timme: gymnastiksal 50 kr för ungdoms-, pensionärs- och funktionsrättsverksamhet och 100 kr för annan lokal föreningsverksamhet; Minervahallen 75 respektive 250 kr; ishallen vardag 100 respektive 400 kr och helg 100 respektive 600 kr; konstgräs för ungdom 100 kr och för seniorförening 100–300 kr beroende på säsong och användning'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; terminstider fördelas inför terminen och strötider bokas löpande
+  kalla_url: &hyresnorm https://invanare.ange.se/download/18.5662c7411994ebf6915e5c3f/1758263549588/Hyror%20och%20riktlinjer%20i%20kommunal%C3%A4gda%20anl%C3%A4ggningar.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Privatpersoner kan boka till full taxa, men stödposten avser den särskilda lägre föreningstaxan
+  kraver_registrering: true
+  sate_i_kommunen: true
 forutsattningar:
-- id: ange-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+- id: ange-allmanna-villkor
+  vad: Uppfyll kommunens allmänna föreningsvillkor
+  beskrivning: Föreningen eller organisationen ska vara ideell, ha verksamhet och adress i Ånge kommun, vara öppen och demokratiskt uppbyggd med stadgar och vald styrelse, ha minst 10 betalande medlemmar, organisationsnummer samt bank- eller plusgiro och arbeta utan diskriminering.
+  system: Kommunens e-tjänster och föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen generell handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://www.ange.se/uppleva-och-gora/foreningar/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: ange-ars-och-ansokningshandlingar
+  vad: Lämna fullständiga förenings- och årshandlingar
+  beskrivning: Varje bidragsansökan ska undertecknas av behörig firmatecknare och innehålla senaste verksamhetsberättelse, verksamhetsplan, ekonomisk redovisning, revisionsberättelse och årsmötesprotokoll. Samma kostnad får inte finansieras två gånger och kommunen har rätt till insyn och återkrav.
+  system: Kommunens e-tjänster
+  ledtid: null
+  ledtid_text: Handlingarna lämnas med respektive ansökan; någon separat giltighetstid publiceras inte
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
+- id: ange-trygga-ungdomsmiljoer
+  vad: Genomför Trygga ungdomsmiljöer för barn- och ungdomsstöd
+  beskrivning: Föreningar som söker barn- och ungdomsbidrag ska genomföra kommunens utbildning Trygga ungdomsmiljöer, ta fram eller revidera en handlingsplan och bedriva en drog- och dopningsfri ungdomsverksamhet.
+  system: Kommunens utbildning Trygga ungdomsmiljöer
+  ledtid: null
+  ledtid_text: Handlingsplanen revideras i samband med årets ansökan men kommunen publicerar ingen separat giltighetstid
+  giltighet: null
+  ordning: 3
+  kalla_url: https://invanare.ange.se/uppleva-och-gora/foreningar-foreningsliv/trygga-ungdomsmiljoer.html
+  giltighet_status: ingen_regel
+- id: ange-foreningsregister
+  vad: Registrera eller uppdatera föreningens uppgifter
+  beskrivning: Kommunens föreningsregister tar emot nyanmälan och ändringar av föreningens kontakt- och organisationsuppgifter. Kommunen publicerar ingen regel om att registreringen förfaller eller måste förnyas vid ett visst datum.
+  system: Ånge kommuns föreningsregister
+  ledtid: null
+  ledtid_text: Ingen generell handläggningstid publiceras
+  giltighet: null
+  ordning: 4
+  kalla_url: *register
+  giltighet_status: ingen_regel
 kommunsiffra: null
