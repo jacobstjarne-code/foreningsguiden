@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Actor Smartbook
   url: https://savsjo.actorsmartbook.se/
 kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-verifierad: '2026-07-31'
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &huvud https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
+giltighet_regel_status: kontrollast
 bidrag:
 - id: savsjo-arrangemangsbidrag
   namn: Arrangemangsbidrag
@@ -15,6 +21,7 @@ bidrag:
   - kultur
   - idrott
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Organisationer som genomför publika arrangemang
   deadlines:
     typ: lopande
@@ -25,18 +32,23 @@ bidrag:
   - Organisationen ansvarar själv för eventuella tillstånd från polis och andra myndigheter
   - Arrangemanget ska marknadsföras och det ska framgå att det fått stöd av Sävsjö kommun
   - Redovisning ska lämnas senast två månader efter avslutat arrangemang
-  belopp: Upp till 15 000 kronor för vinstgivande arrangemang med stort mervärde
-  sen_ansokan: Ej angivet i källan
+  - Ansökan ska redovisa arrangemangets budget och andra sökta bidrag; barn-, ungdoms- och familjeinriktning samt genomförande i Sävsjö prioriteras
+  belopp: Behovsprövat efter ambition, samhällsnytta och publikvärde; vinstgivande arrangemang med stort mervärde kan få upp till 15 000 kr och större ansökningar beslutas av nämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast sex veckor före arrangemanget
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ansökan ska lämnas senast sex veckor före arrangemanget.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: savsjo-hyresbidrag
   namn: Hyresbidrag
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med barn- och ungdomsverksamhet som hyr lokal eller anläggning
   deadlines:
     typ: fasta
@@ -46,43 +58,50 @@ bidrag:
   - Bidrag utgår ej för hyra av kommunalt ägda lokaler, idrotts- och/eller fritidsanläggningar
   - Bidrag utgår ej för hyreskostnader vid entrébelagda tävlingar, matcher eller andra entrébelagda arrangemang
   - Kontraktshandlingar bifogas ansökan vid första ansökningstillfället och vid förändrade förutsättningar
+  - Föreningen ska uppfylla de särskilda villkoren för barn- och ungdomsverksamhet och kostnaden beräknas på föregående års rapporterade verksamhet
   belopp: 100 kronor per bidragsberättigad medlem, max 80 procent av kostnaden och 15 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sent inkommen ansökan minskar beviljat bidrag med 25 procent. Ansökan inkommen 1 månad efter sista datum
     minskar beviljat bidrag med 50 procent. Ansökan inkommen 3 månader efter sista datum hanteras ej.
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-- id: savsjo-anlaggningsbidrag
-  namn: Anläggningsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som äger och driver egen anläggning
+- id: savsjo-kulturbidrag
+  namn: Kulturbidrag
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Godkända kulturföreningar med inkluderande, skapande och inspirerande kulturverksamhet i Sävsjö kommun
   deadlines:
     typ: fasta
     datum:
     - 03-01
   krav:
-  - Anläggningen ska vara tillgänglig för allmänheten, skolor, andra ideella föreningar och organisationer mot skäliga villkor
-  - Bidraget baseras på föreningens driftskostnader (uppvärmning, vatten/el, sophämtning, försäkring) per 31 december föregående
-    år
-  - Bidraget kan reduceras om anläggningen inte används regelbundet eller om redovisade kostnader understiger schablonen
-  belopp: Baseras på föreningens driftskostnader (uppvärmning, vatten/el, sophämtning, försäkring av fastigheten) enligt schablon
-    för föregående kalenderår
+  - Föreningen ska bedriva allmännyttig kulturverksamhet och om möjligt vara ansluten till ett riksförbund eller studieförbund
+  - Föreningen ska redovisa minst fyra kulturaktiviteter under det senaste kalenderåret
+  - Verksamheten ska vara inkluderande, skapande eller inspirerande och ge förutsättningar för professionell kultur, amatörkultur eller kulturell samvaro
+  - Ansökan ska lämnas av föreningen och innehålla de årliga verksamhets- och ekonomihandlingarna
+  belopp: Grundbidrag samt schablonersättning för vissa offentliga högtidsfiranden och julgran; aktuella schablonbelopp publiceras inte på kommunens sida
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sent inkommen ansökan minskar beviljat bidrag med 25 procent. Ansökan inkommen 1 månad efter sista datum
     minskar beviljat bidrag med 50 procent. Ansökan inkommen 3 månader efter sista datum hanteras ej.
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: savsjo-investeringsbidrag
   namn: Investeringsbidrag
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som investerar i verksamhet eller anläggning
   deadlines:
     typ: fasta
@@ -93,41 +112,55 @@ bidrag:
   - Arbetet eller inköpen får inte påbörjas innan beslut om bidrag har fattats
   - Investeringen ska ha en hållbarhet på minst 3 år
   - Ansökningar över 50 000 kronor kan tas upp för särskild prövning
+  - Investeringen ska avse egen lokal eller anläggning, ombyggnad eller renovering, eller maskin, redskap eller fast inventarie som behövs för anläggningens drift och funktion
+  - Ansökan ska innehålla ändamål, kostnader, finansiering och framtida drift; tillgänglighet, energieffektivitet, barn och unga samt annan finansiering prioriteras
+  - Eget arbete kan räknas som egen insats med 200 kr per timme och insatsen ska genomföras och redovisas under året
   belopp: Upp till 60 procent av investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: savsjo-aktivitetsstod
   namn: Aktivitetsstöd
   kategori:
   - idrott
   - kultur
-  malgrupp: Föreningar med verksamhet för deltagare 6–25 år
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med ledarledd verksamhet för deltagare 7–25 år samt funktionsrättsföreningar utan övre åldersgräns
   deadlines:
     typ: fasta
     datum:
     - 02-25
     - 08-25
   krav:
-  - Minst fem deltagare
-  - Aktiviteten ska pågå minst 45 minuter
-  belopp: null
+  - Sammankomsten ska ha minst fem bidragsberättigade deltagare, pågå minst 45 minuter och vara ledarledd
+  - Högst 20 deltagare får redovisas per ledare; ledare 13–25 år får räknas vid högst fem aktiviteter per vecka
+  - Närvaro ska registreras i IdrottOnline eller föreningsportalen och samma deltagare får bara redovisas en gång per dag och verksamhet
+  - Deltagare 7–9 år får redovisas högst tre gånger per idrott och vecka och deltagare 10–25 år högst fem gånger
+  - Skolverksamhet, studiecirkel eller samma aktivitet som får annat aktivitetsbidrag är inte stödgrundande
+  belopp: Belopp per godkänt deltagartillfälle; den aktuella kronnivån publiceras inte på kommunens sida
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sent inkommen ansökan minskar beviljat bidrag med 25 procent. Ansökan inkommen 1 månad efter sista datum
     minskar beviljat bidrag med 50 procent. Ansökan inkommen 3 månader efter sista datum hanteras ej.
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: För sent inkommen ansökan reduceras enligt kommunens trappmodell.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: savsjo-lovsbidrag
   namn: Lovsbidrag
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Aktiviteter för barn och unga 6–15 år
   deadlines:
     typ: okand
@@ -138,43 +171,209 @@ bidrag:
   - Ska genomföras utöver ordinarie verksamhet eller förstärka/utöka befintliga aktiviteter
   - Ingen behovsprövning får göras av deltagande barn
   - Redovisning av genomförda aktiviteter ska lämnas efter avslutat lov
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Kommunen kan ersätta godkända kostnader för lovaktiviteter utöver eller som förstärkning av ordinarie utbud; ingen generell maxnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sista dag publiceras för respektive lovomgång i föreningsportalen
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Sista ansökningsdatum för respektive lovperiod (sportlov, påsklov, höstlov) anges i bidragsportalen och specificeras
-    inte på denna sida.
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: savsjo-sarskild-provning
-  namn: Särskild prövning
+  namn: Särskilt stöd
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Särskilda projekt eller större investeringar
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
-  - Ansökan senast 12 veckor före projekt- eller investeringsstart
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ansökan ska avse ett särskilt projekt eller en större investering som inte kan hanteras inom nämndens ordinarie bidragsbudget eller vanliga regelverk
+  - Ansökan ska lämnas digitalt i föreningsportalen senast tolv veckor innan projektet eller investeringen påbörjas
+  - Ansökan ska ha tydlig avsändare, göras av behörig företrädare och beskriva ändamål, kostnader, finansiering och genomförande
+  - Projektet eller investeringen får inte påbörjas innan kommunen har prövat ansökan
+  belopp: Individuell medfinansiering efter kultur- och fritidsnämndens särskilda prövning; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast tolv veckor före projekt- eller investeringsstart
   kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+- id: savsjo-startbidrag
+  namn: Startbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Nybildade allmännyttiga föreningar som registreras och godkänns i Sävsjö kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara nybildad, verksam i Sävsjö kommun och ansöka om att bli registrerad och bidragsberättigad
+  - Föreningen ska ha minst fem medlemmar, demokratiska stadgar och en av medlemmarna vald och fungerande styrelse
+  - Protokoll från det konstituerande eller första mötet och föreningens stadgar ska lämnas vid registreringen
+  - Föreningen ska ha organisationsnummer från Skatteverket och ett bank- eller plusgirokonto i föreningens namn
+  belopp: Kommunen publicerar ingen aktuell generell nivå för startbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: savsjo-samlingslokalsbidrag
+  namn: Samlingslokalsbidrag
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Kultur- och samhällsföreningar som driver en allmän samlingslokal för uthyrning
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska driva en samlingslokal som är öppen för uthyrning till allmänheten och andra organisationer på skäliga villkor
+  - Lokalen ska skapa mervärde och sammanhållning för de boende i området
+  - Lokalen ska ge plats för kultur- och friskvårdsaktiviteter för olika åldrar samt för fri debatt och obundet föreningsliv
+  - Ansökan görs i föreningsportalen under anläggningsbidrag och ska innehålla årliga verksamhets- och ekonomihandlingar
+  belopp: Individuellt bedömt samlingslokalsbidrag; kommunen publicerar ingen generell schablon eller maxnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–30 dagar sent minskar stödet enligt kommunens trappa; mer än tre månader sent behandlas inte
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: savsjo-folkbildande-organisationer
+  namn: Bidrag till folkbildande organisationer
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Registrerade studieförbund med statsbidragsberättigad folkbildningsverksamhet i Sävsjö kommun
+  deadlines: {typ: fasta, datum: [05-01]}
+  krav:
+  - Studieförbundets lokalavdelning ska verka i Sävsjö kommun och få statsbidrag fördelat av Folkbildningsrådet
+  - Verksamheten ska bestå av studiecirklar, kulturprogram eller annan statsbidragsberättigad gruppverksamhet och uppdragsutbildning räknas inte
+  - Samma aktivitet får inte samtidigt redovisas som lokalt aktivitetsstöd
+  - Digital ansökan ska innehålla verksamhetsberättelse med särskild redovisning för Sävsjö kommun, revisionsberättelse och kommunsammandrag
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas med 70 % grundbidrag, 15 % volymbidrag efter studietimmar och 15 % målgruppsbidrag; totalsumman publiceras inte
+  sen_ansokan: 1–30 dagar sent minskar stödet enligt kommunens trappa; mer än tre månader sent behandlas inte
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: savsjo-pensionarsforeningsstod
+  namn: Stöd till pensionärsföreningar
+  status: aktiv
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar som skapar hälsofrämjande verksamhet och sociala nätverk för seniorer
+  deadlines: {typ: fasta, datum: [03-01]}
+  krav:
+  - Föreningen ska vara ansluten till ett riksförbund och ha minst tio medlemmar som är pensionärer
+  - Verksamheten ska erbjuda hälsofrämjande och stimulerande kultur- och fritidsaktiviteter och bidra till gemenskap och minskad ensamhet
+  - Föreningen ska redovisa antal medlemmar och deltagaraktiviteter såsom möten, kulturarrangemang, friskvård, resor och utflykter
+  - Ansökan ska innehålla kommunens obligatoriska årliga verksamhets- och ekonomihandlingar
+  belopp: Medlemsbidrag efter andel av samtliga redovisade medlemmar samt verksamhetsbidrag efter andel av samtliga deltagaraktiviteter; nivåerna varierar årligen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–30 dagar sent minskar stödet enligt kommunens trappa; mer än tre månader sent behandlas inte
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: savsjo-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala idrottsanläggningar
+  status: aktiv
+  kategori: [idrott, pensionar, funktionsratt, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar med barn-, ungdoms- eller seniorverksamhet som bokar kommunala hallar och idrottsanläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara registrerad och bidragsberättigad enligt kultur- och fritidsnämndens bidragsnormer
+  - Bokningen ska avse föreningens träningsverksamhet för barn och unga till och med 25 år eller bidragsberättigad seniorverksamhet
+  - Föreningen ska boka anläggningen genom Actor Smartbook och följa kommunens boknings- och ordningsregler
+  - Match, idrottsevenemang och verksamhet som inte är bidragsberättigad debiteras enligt andra taxeklasser
+  belopp: Subventionerad timtaxa 2026; barn- och ungdomsträning kostar exempelvis 63–85 kr per timme och seniorträning 148–228 kr per timme beroende på anläggning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist publiceras; stödet ges genom taxan vid bokning
+  kalla_url: https://www.savsjo.se/kultur-och-fritid/friluftsliv-och-motion/idrottshallar-fritidsanlaggningar-och-lokaler/boka-hall-och-idrottsanlaggning.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: savsjo-vagforeningsbidrag
+  namn: Kommunalt bidrag till vägföreningar
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägföreningar som själva underhåller en statsbidragsberättigad enskild väg i Sävsjö kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Vägen ska vara en statsbidragsberättigad enskild väg och underhållas av en organiserad vägförening
+  - Vägen ska normalt vara minst en kilometer lång och användas av minst en helårsboende
+  - Vägen ska hållas öppen och underhållas enligt Trafikverkets villkor för årligt driftbidrag
+  - Trafikverkets kostnadsberäkning för det årliga vägunderhållet ligger till grund för kommunens stöd
+  belopp: Kommunen står för resterande 40 % av Trafikverkets beräknade årliga underhållskostnad när Trafikverket finansierar cirka 60 %
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsdag för den årliga föreningsersättningen
+  kalla_url: https://www.savsjo.se/gator-vagar-och-trafik/vem-ansvarar-for-vagen/enskilda-vagar.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunstyrelsen beslutade 3 mars 2026 att kommunens beloppsnivåer för vägföreningarna är oförändrade jämfört med 2025.
 forutsattningar:
 - id: savsjo-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
+  vad: Årlig registrering i föreningsportalen
+  beskrivning: Föreningen ska registreras årligen hos kultur- och fritidsenheten, vara verksam i Sävsjö kommun och uppdatera föreningsuppgifter, medlemsantal samt kontaktuppgifter för ordförande, sekreterare och kontaktperson.
   system: Actor Smartbook
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna ska lämnas för varje nytt verksamhetsår.
+  giltighet: Ett kalenderår
   ordning: 1
-  kalla_url: https://www.savsjo.se/kultur-och-fritid/foreningar-och-bidrag/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: savsjo-allmanna-villkor
+  vad: Allmännyttig och demokratisk organisation
+  beskrivning: Organisationen ska vara allmännyttig, företrädesvis ideell, ha minst fem medlemmar, demokratiska stadgar, vald och fungerande styrelse, organisationsnummer, föreningskonto och öppen medlemsantagning för den som delar målen.
+  system: Actor Smartbook
+  ledtid: null
+  ledtid_text: Ska vara uppfyllt när föreningen registreras och söker stöd.
+  giltighet: Gäller under den årliga registreringen.
+  ordning: 2
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: savsjo-arliga-handlingar
+  vad: Årsmötes- och ekonomihandlingar
+  beskrivning: Föreningen ska årligen ladda upp senaste årsmötesprotokoll, verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse; stadgar lämnas vid nyregistrering och efter ändring.
+  system: Actor Smartbook
+  ledtid: null
+  ledtid_text: Handlingarna lämnas vid den årliga registreringen och tillsammans med bidragsansökan.
+  giltighet: Gäller det redovisade verksamhetsåret.
+  ordning: 3
+  kalla_url: *huvud
+  giltighet_status: kontrollast
 kommunsiffra: null
