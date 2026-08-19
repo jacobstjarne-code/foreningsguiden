@@ -2,12 +2,18 @@ kommun: Forshaga
 kommun_slug: forshaga
 lan: Värmlands län
 befolkning: 11394
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsenheten
 ansokningssystem:
-  namn: E-tjänster
-  url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
-kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
-verifierad: '2026-08-02'
+  namn: Rbok och kommunens e-tjänster
+  url: https://forshaga.rbok.se/
+kalla_url: &huvud https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: manader_efter_beslut
+  antal: 12
+  datum: null
+  kalla_url: &norm https://www.forshaga.se/download/18.3bf8cf8719b2bf8f0928cef2/1767855084141/Regelverk%20f%C3%B6r%20st%C3%B6d%20till%20kultur-%20och%20fritidsf%C3%B6reningar%202026-2029.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: forshaga-anlaggnings-hyresstod
   namn: Anläggnings- och hyresstöd
@@ -15,6 +21,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Stödberättigade föreningar som äger, hyr eller har driftansvar för lokal eller anläggning
   deadlines:
     typ: fasta
@@ -26,26 +33,30 @@ bidrag:
   - Föreningen ska ha regelbunden verksamhet i den anläggning eller lokal som ansökan avser; tillfälliga hyreskostnader ger
     inte rätt till stöd
   - Föreningen ska delta i kommunens informationsmöten om miljö- och klimateffektivisering i föreningsanläggningar
+  - Ansökan ska avse föregående verksamhetsårs faktiska kostnader och innehålla balans- och resultaträkning
   belopp: Upp till 75 procent av den årliga faktiska anläggnings- eller hyreskostnaden. Procentsatsen kan justeras vid särskilda
     omständigheter
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan senast 15 november
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
 - id: forshaga-arrangemangsstod
   namn: Arrangemangsstöd
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Stödberättigade föreningar som ordnar offentliga arrangemang
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska ha aktuellt beslut som stödberättigad förening
@@ -55,22 +66,26 @@ bidrag:
   - Arrangemanget ska vara fritt från droger och alkohol
   - Ansökan ska lämnas minst 30 dagar före arrangemanget och redovisning senast 30 dagar efter genomfört arrangemang
   belopp: Högst 10 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande, minst 30 dagar före arrangemanget
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
 - id: forshaga-aktivitetsstod
   namn: Kommunalt aktivitetsstöd
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Föreningar med verksamhet för 5–25 år eller seniorer 65+
+  - pensionar
+  foreningstyp: *alla
+  malgrupp: Föreningar med verksamhet för barn och unga eller seniorer 65 år och äldre
   deadlines:
     typ: fasta
     datum:
@@ -81,46 +96,54 @@ bidrag:
   - Föreningen ska ha minst 10 aktiva medlemmar i åldern 5–25 år eller 65 år och uppåt
   - Föreningen ska ange antal aktiva medlemmar i respektive åldersgrupp
   - Idrottsföreningar ska följa Riksidrottsförbundets idéprogram "Idrotten vill"
-  belopp: 6 kr per deltagartillfälle
+  - Aktiviteten ska följa reglerna för statligt lokalt aktivitetsstöd; en grupp ska vara ledarledd och bestå av minst tre och högst 30 deltagare
+  - Föreningar som inte redovisar genom Riksidrottsförbundet ska använda kommunens närvarokort
+  belopp: 6 kr per deltagartillfälle för deltagare 7–25 år samt 65 år och äldre
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan senast 25 februari respektive 25 augusti
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  anteckning: Kommunen samlar även medlemsuppgifter för åldern 5–6 år, men den publicerade ersättningen gäller från 7 år
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
 - id: forshaga-utbildningsstod
   namn: Utbildningsstöd
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Stödberättigade föreningar som utbildar ledare eller funktionärer
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska ha aktuellt beslut som stödberättigad förening
   - Ansökan ska lämnas senast åtta veckor efter avslutad utbildning
   - Kursprogram och kostnadsspecifikation ska bifogas ansökan
   belopp: Högst 75 procent av kostnaden och maximalt 3 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande, senast åtta veckor efter utbildningen
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
 - id: forshaga-investeringsstod
   namn: Stöd till investering
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Stödberättigade föreningar med investeringar i anläggning eller större inventarier
   deadlines:
     typ: lopande
@@ -132,22 +155,27 @@ bidrag:
     minst 5 år
   - Stödet gäller endast framtida investeringar, inte investeringar som redan genomförts
   - Offert på det som ska göras eller inhandlas ska bifogas ansökan
+  - Behov, nyttjande, eventuella ritningar och arbetsbeskrivning samt investerings- och driftkalkyl ska redovisas; alternativa stöd och fondmedel ska undersökas
+  - Investeringen och redovisningen ska vara klara före årsskiftet det år stödet beviljas
   belopp: Högst 100 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande före investeringens start
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
 - id: forshaga-ansokningshjalp
   namn: Stöd för ansökningshjälp
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar som söker extern finansiering till projekt eller investering
   deadlines:
     typ: lopande
@@ -157,39 +185,44 @@ bidrag:
   - Stödet kan endast sökas för kostnader för ansökningshjälp från en verifierad extern aktör, bolag eller företag
   - Ansökan ska göras innan den externa ansökningshjälpen påbörjas
   - Redovisning av det tilltänkta projektet eller investeringen samt offert för kostnaderna ska bifogas ansökan
+  - Ansökan ska ange vilka externa aktörer föreningen avser att söka finansiering från
+  - Hjälpen och kostnaden ska redovisas före årsskiftet det år stödet beviljas
   belopp: Högst 50 000 kr, en gång per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Löpande före arbetets start
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
 - id: forshaga-motesplatsstod
   namn: Mötesplatsstöd
   kategori:
   - social
   - ovrig
-  malgrupp: Stödberättigade föreningar som driver eller utvecklar mötesplatser
+  foreningstyp: *alla
+  malgrupp: Föreningar som driver eller utvecklar mötesplatser
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Föreningen ska ha aktuellt beslut som stödberättigad förening
+  - Rubriken är ett samlingsavsnitt i kommunens regelverk och inte en egen stödform
   belopp: null
-  sen_ansokan: Mötesplatsstöd är ett samlingsbegrepp för flera stöd och saknar egen fast ansökningsfrist i kommunens regelverk
-    2026–2029
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
+  belopp_avser: okand
+  kommunens_pott: null
+  sen_ansokan: Ingen egen ansökan finns
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: ingen_regel
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Mötesplatsstöd är enligt kommunens regelverk 2026–2029 ett samlingsbegrepp för flera separat namngivna stöd
-    (t.ex. anläggnings-, investerings- och arrangemangsstöd) riktade mot mötesplatser, utan eget fast belopp eller ansökningsdatum
-  status: aktiv
-  senast_verifierad: '2026-08-08'
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens samlingsavsnitt innehåller de separata stödformerna Projektstöd och Samverkansavtal
+  status: avskaffat
+  senast_verifierad: '2026-08-19'
 - id: forshaga-projektstod
   namn: Projektstöd
   kategori:
@@ -197,27 +230,85 @@ bidrag:
   - kultur
   - social
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar som utvecklar verksamhet mot en ny målgrupp
   deadlines:
     typ: okand
     datum: []
   krav:
+  - Föreningen ska ha ett giltigt beslut som stödberättigad förening
   - Projektet ska ha som mål att utveckla och bredda befintlig verksamhet mot en ny målgrupp
   - Projektet ska pågå minst en månad och högst ett år
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
-  belopp_status: okand
-  deadline_status: okand
+  - Projekt för barn och unga eller insatser som främjar folkhälsa, jämställdhet, jämlikhet, inkludering eller integration prioriteras
+  - Genomförande, resultat och kostnader ska återrapporteras efter projektet
+  belopp: Individuellt prövat; kommunen publicerar ingen fast beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag för projektstödet
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om aktuell ansökningstid
+  krav_fullstandiga: true
+  anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
+- id: forshaga-samverkansavtal
+  namn: Samverkansavtal med kultur- och fritidsenheten
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som tillsammans med kommunen tar ansvar för återkommande verksamhet eller en mötesplats eller anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening vars verksamhet kan regleras genom ett samverkansavtal med kultur- och fritidsenheten
+  - Kommunens och föreningens åtaganden ska tas fram gemensamt och skrivas in i avtalet
+  - Åtagandet kan avse exempelvis återkommande arrangemang eller drift och skötsel av en mötesplats eller anläggning
+  - Flera föreningsstöd kan samlas i samma avtal när det är relevant för föreningens åtagande
+  - Föreningen ska återrapportera utförande, resultat och kostnader enligt avtalet
+  belopp: Ersättning och eventuella ingående stöd bestäms i det enskilda avtalet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen öppen ansökningsfrist; avtalet tas fram i dialog med kultur- och fritidsenheten
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+- id: forshaga-subventionerad-hyra
+  namn: Subventionerad hyra i kommunens lokaler
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Stödberättigade föreningar som bokar kommunala lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara godkänd som stödberättigad förening
+  - Bokningen ska avse en kommunal lokal eller anläggning som erbjuds föreningslivet
+  - Föreningen ska registrera sig och boka lokalen genom kommunens bokningssystem Rbok
+  belopp: Subventionerad hyra enligt kommunens gällande taxa för föreningar; de öppna sidorna publicerar ingen generell rabatt eller fullständig beloppstabell
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista bokningsdag
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunens regelverk bekräftar att kommunal föreningshyra redan är subventionerad och därför inte samtidigt ger rätt till anläggnings- och hyresstöd
+  status: aktiv
+  senast_verifierad: '2026-08-19'
 - id: forshaga-studieforbund
   namn: Kommunbidrag till studieförbund
   kategori:
   - kultur
+  - ovrig
+  foreningstyp: [kultur, social, annat]
   malgrupp: Aktiva studieförbund i Forshaga kommun
   deadlines:
     typ: fasta
@@ -228,47 +319,89 @@ bidrag:
   - Fastställt bokslut med revisionsberättelse samt separat ekonomisk redovisning för Forshaga-verksamheten ska bifogas
   - Verksamhetsplan med budget för planerad verksamhet ska bifogas
   - Statistik över antal cirklar, kulturarrangemang, övrig folkbildning och deltagare ska redovisas
+  - En kort innehållsbeskrivning av studiecirklar, kulturarrangemang och övrig folkbildning i Forshaga ska lämnas
   belopp: Beräknas utifrån en formaliserad modell baserad på antal studiecirklar, kulturarrangemang, övrig folkbildning och
     antal deltagare i Forshaga kommun
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan senast 31 oktober
   kalla_url: https://www.forshaga.se/upplevaochgora/studieforbund.4.166f07e319c6d70205f4da39.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
-- id: forshaga-pensionarsfonder
-  namn: Donationsfonder för pensionärsföreningar
+  senast_verifierad: '2026-08-19'
+- id: forshaga-donationsfond-berg
+  namn: Donationsfond Berg för pensionärsföreningar
   kategori:
   - pensionar
-  malgrupp: Pensionärsföreningar i kommunen
+  - social
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar i Forshaga kommun som ordnar nöjen för pensionärer
   deadlines:
     typ: fasta
     datum:
     - 09-30
   krav:
+  - Sökanden ska vara en pensionärsförening i Forshaga kommun
+  - Stödet ska användas till att arrangera nöjen för pensionärer i kommunen
   - Ansökan ska innehålla redogörelse för föregående års arrangemang
-  belopp: null
-  sen_ansokan: Ansökan senast 30 september
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/fonder.4.2fe0654b17f44ad5adc18e79.html
-  belopp_status: okand
+  belopp: Kommunen publicerar ingen fast beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 30 september varje år
+  kalla_url: &fonder https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/fonder.4.2fe0654b17f44ad5adc18e79.html
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-08'
+  senast_verifierad: '2026-08-19'
+- id: forshaga-kihlbergs-minnesfond
+  namn: Karin och Otto Kihlbergs minnesfond
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Forshaga PRO som ordnar nöjen för pensionärer i Forshaga kommun
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Endast Forshaga PRO kan söka ur fonden
+  - Stödet ska användas till att arrangera nöjen för pensionärer i kommunen
+  - Ansökan ska innehålla redogörelse för föregående års arrangemang
+  belopp: Kommunen publicerar ingen fast beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 30 september varje år
+  kalla_url: *fonder
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-19'
 forutsattningar:
-- id: forshaga-ansok
-  vad: Månadsvis handläggning
-  beskrivning: Alla ansökningar granskas en gång per månad i gemensamt processgrupp vid kultur- och fritidsenheten. Kontakta
-    kultur.fritid@forshaga.se
-  system: Kultur- och fritidsenheten
+- id: forshaga-stodberattigad-forening
+  vad: Godkännande som stödberättigad förening
+  beskrivning: Föreningen ska vara ideell, öppen och demokratiskt uppbyggd, ha huvudsäte och huvudsaklig verksamhet i Forshaga, minst 10 aktiva medlemmar från 7 år, antagna stadgar, ansvarig styrelse och revisor, organisationsnummer, medlemsavgift och eget bank- eller plusgiro. Verksamheten ska vara partipolitiskt och religiöst obunden, drogfri och motverka diskriminering, trakasserier och kränkningar.
+  system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Ansökan kan lämnas löpande; föreningsstödsärenden bereds en gång per månad
+  giltighet: Beslutet som stödberättigad förening gäller i ett år från beslutsdatumet
   ordning: 1
-  kalla_url: https://www.forshaga.se/upplevaochgora/foreningarforeningsliv/stodtillforeningslivet.4.70c52033121865b13988000283.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: forshaga-ars-och-ekonomihandlingar
+  vad: Verksamhets- och ekonomihandlingar
+  beskrivning: Till ansökan om stödberättigande ska föreningen lämna verksamhetsberättelse, balans- och resultaträkning, revisionsberättelse, senaste årsmötesprotokoll och stadgar om de inte redan har lämnats. Befintliga policyer mot trakasserier och kränkande särbehandling ska bifogas; föreningar som betalar ersättning för arbete ska även lämna F-skattsedel och eventuell personalförteckning.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Handlingarna lämnas med ansökan om eller förnyelsen av stödberättigandet
+  giltighet: Underlaget ligger till grund för det ettåriga beslutet om stödberättigande
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
