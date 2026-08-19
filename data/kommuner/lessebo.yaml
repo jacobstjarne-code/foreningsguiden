@@ -2,44 +2,57 @@ kommun: Lessebo
 kommun_slug: lessebo
 lan: Kronobergs län
 befolkning: 8057
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsavdelningen
 ansokningssystem:
   namn: Lessebo kommuns e-tjänster
   url: https://etjanster.lessebo.se/
-kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
-verifierad: '2026-07-31'
+kalla_url: &meny https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 04-30
+  kalla_url: &norm https://www.lessebo.se/download/18.3eaac55e19c987c41a63fce3/1773415608155/Bidragspolicy%20f%C3%B6r%20f%C3%B6reningar%20i%20Lessebo%20kommun%202026.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: lessebo-grundstod
-  namn: Grundstöd
+  namn: Grundstöd – barn, unga och pensionärer
+  status: aktiv
   kategori:
   - idrott
   - kultur
+  - pensionar
   - ovrig
-  malgrupp: Bidragsberättigade föreningar i Lessebo kommun
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade barn-, ungdoms- och pensionärsföreningar i Lessebo kommun
   deadlines:
     typ: fasta
     datum:
     - 04-30
   krav:
-  - Minst 10 medlemmar matrikelförda och folkbokförda i Lessebo kommun
-  - Minst 10 sammankomster under verksamhetsåret
-  - Årlig inlämning senast 30 april av uppgifter om styrelse och revisorer, antal medlemmar samt verksamhetsberättelse med
-    bokslut och revisionsberättelse
-  - 'För föreningar med barn- och ungdomsverksamhet: minst 10 medlemmar 5–25 år, antagen ANDTS- och antimobbningspolicy samt
-    registerutdrag ur belastningsregistret för ledare från 15 år'
-  belopp: 42 kronor per medlem för medlem 1–100, 18 kronor per medlem för medlem 101 och fler, högst 9 500 kronor per år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
+  - Föreningen ska vara ideell, demokratiskt uppbyggd, öppen och bedriva verksamhet i Lessebo kommun
+  - Föreningen ska ha minst 10 matrikelförda medlemmar som är folkbokförda i kommunen och minst 10 sammankomster under verksamhetsåret
+  - Barn- och ungdomsföreningar ska ha minst 10 medlemmar 5–25 år, bedriva verksamhet större delen av året och arbeta enligt barnkonventionen
+  - Barn- och ungdomsföreningar ska ha antagna ANDTS- och antimobbningsregler samt begära registerutdrag för ledare från 15 år
+  - Styrelseuppgifter, medlemsantal, verksamhetsberättelse, bokslut och revisionsberättelse ska lämnas årligen senast 30 april
+  belopp: 42 kronor per medlem för medlem 1–100 och 18 kronor per medlem därutöver, högst 9 500 kronor per år; pensionärsföreningar får högst 4 250 kronor vid tillgodohavanden över ett prisbasbelopp och inget stöd över två prisbasbelopp
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: lessebo-aktivitetsstod
   namn: Lokalt aktivitetsstöd 5–25 år
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
   malgrupp: Föreningar med aktiviteter för barn och unga 5–25 år eller personer med funktionsvariation
   deadlines:
     typ: fasta
@@ -58,60 +71,80 @@ bidrag:
   - Gruppledaren ska vara närvarande och kan inte vara ledare för flera grupper under samma timme
   - Redovisning senast 25 februari och 25 augusti varje år; för sent inkommen ansökan ger inte rätt till bidrag
   belopp: 12 kronor per sammankomst och 3 kronor per medlemsaktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: För sen ansökan ger inte rätt till bidrag
   kalla_url: https://etjanster.lessebo.se/oversikt/overview/369
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: lessebo-kulturforening
-  namn: Stöd för kulturföreningar
+  namn: Grundstöd till kulturföreningar
+  status: aktiv
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Kulturföreningar i Lessebo kommun
   deadlines:
     typ: fasta
     datum:
     - 04-30
   krav:
+  - Föreningen ska vara ideell, demokratiskt uppbyggd och bedriva kulturverksamhet i Lessebo kommun
   - Verksamheten ska vara öppen för kommunens invånare, exempelvis genom utåtriktade aktiviteter, öppna hembygdsgårdar eller
     allmänna arrangemang
+  - Föreningen ska ha minst 10 matrikelförda kommunmedlemmar och minst 10 sammankomster under verksamhetsåret
+  - Årliga styrelse-, medlems-, verksamhets-, ekonomi- och revisionshandlingar ska lämnas senast 30 april
   belopp: 5 000 kronor per verksam förening
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunens e-tjänst visar fortfarande den äldre nivån 1 800 kronor; den antagna bidragspolicyn för 2026 anger 5 000 kronor och styr denna post.
 - id: lessebo-studieforbund
-  namn: Stöd för studieförbund
+  namn: Stöd till studieförbund
+  status: aktiv
   kategori:
   - kultur
   - ovrig
+  foreningstyp: [kultur, social, annat]
   malgrupp: Studieförbund med verksamhet i kommunen
   deadlines:
     typ: fasta
     datum:
     - 04-30
   krav:
-  - Studieförbundet ska vara godkänt av Folkbildningsrådet och bedriva verksamhet inom Lessebo kommun
-  - Ansökan och redovisning ska lämnas in senast 30 april
+  - Studieförbundets centralorganisation ska vara godkänd av Folkbildningsrådet
+  - Studieförbundet ska bedriva och redovisa statsbidragsberättigad verksamhet i Lessebo kommun
+  - Ansökan ska innehålla de verksamhets- och volymuppgifter som behövs för kommunens fördelning
+  - Ansökan och föregående års redovisning ska lämnas senast 30 april
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Fördelas 70% efter föregående stöd, 30% efter verksamhetsvolym"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas med 70 procent efter respektive studieförbunds andel av föregående stöd och 30 procent efter andelen redovisade deltagartimmar; totalsumman publiceras inte
+  sen_ansokan: Ansökan och redovisning ska lämnas senast 30 april
+  kalla_url: https://etjanster.lessebo.se/oversikt/overview/396
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: lessebo-startstod
   namn: Startstöd
+  status: aktiv
   kategori:
+  - idrott
+  - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Nystartade eller vilande föreningar
   deadlines:
     typ: lopande
@@ -124,20 +157,250 @@ bidrag:
   - Startstöd och grundstöd kan inte erhållas samma år
   - Gäller nystartad förening eller förening som varit vilande utan bidragsberättigad sammankomst i minst tre år
   belopp: 5 000 kronor till nystartad förening
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande
+  kalla_url: *meny
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-musikkarer
+  namn: Särskilt stöd till musikkårer
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, annat]
+  malgrupp: Verksamma musikkårer i Lessebo kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Sökanden ska vara en ideell musikkår eller kulturförening verksam i Lessebo kommun
+  - Föreningen ska uppfylla kommunens allmänna demokrati-, medlems- och verksamhetsvillkor
+  - Föreningen ska lämna styrelseuppgifter, medlemsantal, verksamhetsberättelse, bokslut och revisionsberättelse årligen senast 30 april
+  belopp: 13 500 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-arrangerande-kulturforeningar
+  namn: Stöd till arrangerande kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar som köper in professionella kulturprogram eller anlitar externa kulturutövare
+  deadlines:
+    typ: fasta
+    datum: [02-01]
+  krav:
+  - Sökanden ska vara en förening verksam i Lessebo kommun och uppfylla de allmänna föreningsvillkoren
+  - Stödet avser ett professionellt kulturprogram som föreningen inte själv kan producera eller ett uppdrag till en extern kulturutövare
+  - Ansökan ska innehålla en förteckning över de arrangemang som planeras under det kommande året
+  - Verksamheten ska vara utåtriktad och tillgänglig för kommunens invånare
+  belopp: Kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 februari
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-nolltaxa-kommunala-lokaler
+  namn: Nolltaxa i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningars verksamhet för barn och unga till och med 25 år
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara bidragsberättigad enligt kommunens allmänna föreningsvillkor
+  - Upplåtelsen ska avse träning, ordinarie gruppverksamhet eller föreningens interna möten
+  - Verksamheten ska huvudsakligen rikta sig till barn och unga till och med 25 år
+  - Kommunens boknings- och ordningsregler för lokalen eller anläggningen ska följas
+  belopp: Ingen avgift enligt kommunens nolltaxa för stödberättigad verksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-driftstod-egen-lokal
+  namn: Driftstöd till egen inomhusanläggning eller lokal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Barn-, ungdoms- och kulturföreningar som äger eller driver en inomhusanläggning eller lokal
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Lokalen eller anläggningen ska vara godkänd av kommunen och behövas för föreningens verksamhet
+  - Ansökan ska avse föregående års styrkta kostnader för arrende, el, vatten, sophämtning, försäkring eller uppvärmning
+  - Telefon, förbrukningsmaterial samt lön till vaktmästare eller lokalvårdare är inte stödgrundande
+  - Föreningen ska uppfylla de allmänna föreningsvillkoren och lämna fullständiga års- och ekonomihandlingar
+  belopp: 75 procent av godkända kostnader, högst 80 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med kostnadsunderlag ska lämnas senast 30 april
+  kalla_url: https://etjanster.lessebo.se/oversikt/overview/406
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-driftstod-utomhusanlaggning
+  namn: Driftstöd till särskild utomhusanläggning
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar vars huvudsakliga verksamhet bedrivs vid en egen eller föreningsdriven utomhusanläggning
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningens huvudsakliga verksamhet ska bedrivas utomhus vid den anläggning som ansökan avser
+  - Anläggningen ska vara godkänd av kommunen och kostnaderna ska avse föregående kalenderår
+  - Godkända kostnader ska styrkas med fakturor, kvitton eller motsvarande underlag
+  - Föreningen ska uppfylla de allmänna föreningsvillkoren och lämna fullständiga års- och ekonomihandlingar
+  belopp: 75 procent av godkända kostnader, högst 15 000 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med kostnadsunderlag ska lämnas senast 30 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-hyrd-lokal
+  namn: Stöd till hyrd lokal
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Barn-, ungdoms-, kultur-, pensionärs- och funktionsrättsföreningar som hyr en stadigvarande lokal
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Lokalen ska behövas för föreningens verksamhet och både förhyrningen och kostnaden ska vara godkända av kommunen
+  - Ansökan ska avse föregående års styrkta hyreskostnader och permanent eller återkommande förhyrning
+  - Föreningen ska uppfylla de allmänna föreningsvillkoren och lämna fullständiga års- och ekonomihandlingar
+  - Telefon, förbrukningsmaterial samt lön till vaktmästare eller lokalvårdare är inte stödgrundande
+  belopp: Barn- och ungdomsföreningar får 50 procent, högst 5 000 kronor per år; kulturföreningar 30 procent, högst 10 000 kronor; pensionärsföreningar 30 procent, högst 5 000 kronor; ingen särskild nivå publiceras för funktionsrättsföreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan med kostnadsunderlag ska lämnas senast 30 april
+  kalla_url: https://etjanster.lessebo.se/oversikt/overview/406
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-sarskilt-hyresstod
+  namn: Särskilt stöd till anpassad hyrd lokal
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med behov av en särskild eller verksamhetsanpassad lokal som inte täcks av ordinarie lokalstöd
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska visa ett särskilt lokalbehov som inte kan tillgodoses i kommunens lokaler eller genom ordinarie lokalstöd
+  - Ansökan ska tydligt motivera behovet och beskriva hur lokalen är anpassad till verksamheten
+  - Hyresavtal, hyreskostnad och övriga relevanta kostnadsunderlag ska bifogas
+  - Föreningen ska uppfylla kommunens allmänna villkor och lokalen ska godkännas av kommunen
+  belopp: Individuellt prövat; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-sarskilt-andamal
+  namn: Stöd för särskilt ändamål inom kultur och fritid
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som genomför en ny, försöksbetonad eller avgränsad kultur- eller fritidssatsning
+  deadlines:
+    typ: fasta
+    datum: [02-01]
+  krav:
+  - Satsningen ska vara ny, försöksbetonad eller ligga utanför föreningens återkommande ordinarie verksamhet
+  - Ansökan ska innehålla projekt- eller arrangemangsbeskrivning, målgrupp, tidsplan och fullständig budget
+  - Andra medfinansiärer och kontaktade samarbetspartner ska redovisas
+  - Projektet ska genomföras av en förening som uppfyller kommunens allmänna föreningsvillkor
+  - Större investeringar prövas separat och omfattas inte automatiskt av denna stödform
+  belopp: Individuellt prövat inom kommunens årliga anslag; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 februari
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: lessebo-jubileumsstod
+  namn: Jubileumsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som firar ett angivet jubileumsår
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en förening som uppfyller kommunens allmänna föreningsvillkor
+  - Föreningen ska fylla 25, 50, 75, 100, 125 eller 150 år
+  - Föreningen ska själv underrätta kultur- och fritidsutskottet om jubileet
+  - Jubileumsåret och föreningens bildandeår ska kunna styrkas
+  belopp: 1 000 kronor vid 25 år, 2 250 kronor vid 50 år, 5 000 kronor vid 75 år, 10 000 kronor vid 100 år, 12 500 kronor vid 125 år och 15 000 kronor vid 150 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: lessebo-lokal-anlaggning
   namn: Stöd för lokal eller anläggning
+  status: avskaffat
   kategori:
   - idrott
   - kultur
   - pensionar
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Barn- och ungdoms-, kultur- och pensionärsföreningar med lokal- eller anläggningskostnader
   deadlines:
     typ: fasta
@@ -159,42 +422,46 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: null
-  anteckning: null
+  anteckning: Ersatt av separata poster för egen inomhusanläggning, särskild utomhusanläggning, hyrd lokal och särskilt hyresstöd.
 - id: lessebo-pensionar-funktionsratt
-  namn: Stöd till pensionärs- och funktionsrättsföreningar
+  namn: Grundstöd till funktionsrättsföreningar
+  status: aktiv
   kategori:
-  - pensionar
   - funktionsratt
-  malgrupp: Pensionärs- och funktionsrättsföreningar i Lessebo kommun
+  - social
+  foreningstyp: [social, annat]
+  malgrupp: Funktionsrättsföreningar med verksamhet för Lessebo kommuns invånare
   deadlines:
     typ: fasta
     datum:
     - 04-30
   krav:
+  - Sökanden ska vara en ideell funktionsrättsförening med verksamhet för kommunens invånare
+  - Föreningen ska vara demokratiskt uppbyggd, öppen och ha antagna stadgar, vald styrelse och revisor
   - Minst 10 medlemmar matrikelförda och folkbokförda i Lessebo kommun
   - Minst 10 sammankomster under verksamhetsåret
   - Årlig inlämning senast 30 april av uppgifter om styrelse och revisorer, antal medlemmar samt verksamhetsberättelse med
     bokslut och revisionsberättelse
-  belopp: 'Pensionärsföreningar: 42 kronor per medlem för medlem 1–100, 18 kronor per medlem för medlem 101 och fler, högst
-    9 500 kronor per år, reducerat till högst 4 250 kronor vid tillgodohavanden över ett basbelopp och inget stöd vid tillgodohavanden
-    över två basbelopp. Beloppet för funktionsrättsföreningar anges inte i källan.'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv.html
-  belopp_status: kontrollast
+  belopp: Kommunen publicerar ingen särskild generell beloppsnivå för funktionsrättsföreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 forutsattningar:
 - id: lessebo-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Kommunens e-tjänster
+  vad: Registrering och årlig uppdatering av föreningshandlingar
+  beskrivning: Föreningen ska vara ideell, verksam i Lessebo kommun, ha minst 10 matrikelförda kommunmedlemmar och 10 sammankomster per år samt ha stadgar, vald styrelse och revisor. Senast 30 april varje år ska föreningen lämna aktuella styrelse- och revisorsuppgifter, medlemsantal, årsmötesgodkänd verksamhetsberättelse, bokslut och revisionsberättelse.
+  system: Lessebo kommuns e-tjänster
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast 30 april varje år
+  giltighet: Årsuppgifterna och föreningshandlingarna ska förnyas senast 30 april varje år
   ordning: 1
-  kalla_url: https://www.lessebo.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-och-stod.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
