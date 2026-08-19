@@ -2,167 +2,323 @@ kommun: Filipstad
 kommun_slug: filipstad
 lan: Värmlands län
 befolkning: 9570
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsförvaltningen samt kommunstyrelsens teknikutskott
 ansokningssystem:
-  namn: E-tjänster
-  url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
-kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
-verifierad: 2026-07-26
+  namn: Filipstads kommuns e-tjänster och blanketter
+  url: https://e-tjanster.filipstad.se/MenuGroup2.aspx?groupId=183
+kalla_url: &huvud https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: filipstad-verksamhetsbidrag
-  namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Ungdomsorganisationer, kulturföreningar, arvsföreningar, folkhusen
+- id: filipstad-verksamhetsbidrag-ungdom
+  namn: Verksamhetsbidrag för barn- och ungdomsorganisationer
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med regelbunden verksamhet för barn och unga 7–20 år
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
+    datum: [09-30]
   krav:
-  - Demokratiska principer
-  - Godkända stadgar
-  - Bankkonto
-  - Verksamhetsplan och budget
-  - Verksamhetsberättelse från senaste årsmötet
-  - Ekonomisk berättelse från senaste årsmötet
-  - Revisionsberättelse från senaste årsmötet
-  - Redogörelse för föreningens information till medlemmarna angående droger och alkohol, mobbning och rasism
-  belopp: Inget fast belopp. Bedömning görs i dialog mellan föreningen och kultur- och föreningsutskottet utifrån gällande
-    bidragskriterier, inom ramen för kommunfullmäktiges anvisade medel för budgetåret.
-  sen_ansokan: Ej möjlig efter 30 september
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
+  - &grund Verksamheten ska bygga på demokratiska grunder, vara öppen för alla och gagna Filipstads kommun eller kommuninvånarna
+  - &formalia Föreningen ska vara ideell, ha stadgar som godkänts av riksorganisationen eller kultur- och föreningsutskottet samt bankgiro, plusgiro eller bankkonto i föreningens namn
+  - &arsunderlag Ansökan ska innehålla verksamhetsplan och budget för stödåret samt senaste verksamhetsberättelse, ekonomiska berättelse och revisionsberättelse
+  - &vardering Föreningen ska redovisa hur medlemmarna informeras om droger och alkohol, mobbning och rasism
+  - Föreningen ska ha minst tio medlemmar under 20 år som regelbundet deltar i verksamhet för åldersgruppen 7–20 år
+  - Föreningen ska bedriva verksamheten och ha huvuddelen av sina medlemmar i Filipstads kommun
+  - Stödföreningar, supporterklubbar, elevföreningar samt politiska och religiösa organisationer får inte verksamhetsbidrag
+  belopp: Individuellt behovsprövat efter verksamhetens omfattning, kostnader, kvalitet, planering och ekonomi inom kommunens budget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september året före stödåret.
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: filipstad-verksamhetsbidrag-kultur
+  namn: Verksamhetsbidrag till kulturföreningar
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Ideella kulturföreningar med regelbunden och utåtriktad verksamhet i Filipstad
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - *grund
+  - *formalia
+  - *arsunderlag
+  - *vardering
+  - Föreningen ska bedriva regelbunden, planerad och utåtriktad kulturverksamhet i Filipstads kommun
+  - Verksamheten ska i första hand riktas till allmänheten, vara tillgänglig för alla och genomföras i kommunen
+  - Verksamheten ska ha större värde för Filipstads kulturliv och bredda kommunens kulturutbud
+  - Stödföreningar, supporterklubbar, elevföreningar samt politiska och religiösa organisationer får inte verksamhetsbidrag
+  belopp: Individuellt behovsprövat efter verksamhetens omfattning, kostnader, kvalitet, planering och ekonomi inom kommunens budget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september året före stödåret.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: filipstad-verksamhetsbidrag-samlingslokaler
+  namn: Verksamhetsbidrag till hembygds-, bygdegårds- och Folkets Hus-föreningar
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Ideella föreningar som driver en allmän samlingslokal i Filipstads kommun
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - *grund
+  - *formalia
+  - *arsunderlag
+  - *vardering
+  - Föreningen ska bedriva regelbunden, planerad och utåtriktad verksamhet i Filipstads kommun och hålla lokalen öppen och tillgänglig för allmänheten
+  - Det ska finnas ett varaktigt lokalt behov och lokalen ska ha eller förväntas få allsidig användning
+  - Lokalen ska hålla god standard och uppfylla regler om brandskydd och tillgänglighet; föreningen ska ha ekonomiska förutsättningar att förvalta den
+  - Föreningen ska äga lokalen eller ha ett långsiktigt hyresavtal och vara fristående från kommunen och kommunala bolag
+  belopp: Individuellt prövat; stödnivån grundas bland annat på om verksamheten och öppethållandet bedrivs under helår eller delår
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september året före stödåret.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: filipstad-socialbidrag
-  namn: Socialt verksamhetsbidrag
-  kategori:
-  - social
-  malgrupp: Organisationer för socialt arbete
+  namn: Verksamhetsbidrag till föreningar som bedriver social verksamhet
+  kategori: [social, funktionsratt, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Lokala och regionala föreningar med social verksamhet i Filipstads kommun
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
+    datum: [09-30]
   krav:
-  - Demokratiska principer
-  - Godkända stadgar
-  - Bankkonto
-  - Verksamhetsplan och budget
-  - Verksamhetsberättelse från senaste årsmötet
-  - Ekonomisk berättelse från senaste årsmötet
-  - Revisionsberättelse från senaste årsmötet
-  - Redogörelse för föreningens information till medlemmarna angående droger och alkohol, mobbning och rasism
-  belopp: Inget fast belopp. Bedömning görs i dialog mellan föreningen och kultur- och föreningsutskottet utifrån gällande
-    bidragskriterier, inom ramen för kommunfullmäktiges anvisade medel för budgetåret.
-  sen_ansokan: Ej möjlig efter 30 september
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
+  - *grund
+  - *formalia
+  - *arsunderlag
+  - *vardering
+  - Verksamheten ska vara förebyggande eller ge angeläget stöd till människor med särskilda behov
+  - Verksamheten ska komplettera socialtjänsten eller stödja personer med funktionsnedsättning
+  - Den lokala eller regionala föreningen ska bedriva den stödgrundande verksamheten i Filipstads kommun
+  belopp: Individuellt behovsprövat efter verksamhetens omfattning, kostnader, kvalitet, planering och ekonomi inom kommunens budget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september året före stödåret.
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: filipstad-studiebidrag
-  namn: Studiebidrag
-  kategori:
-  - kultur
-  malgrupp: Studieförbund och SISU
+  namn: Verksamhetsbidrag till studieförbund inklusive SISU
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund och SISU med tillräcklig verksamhet i Filipstads kommun
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: [04-30]
   krav:
-  - Demokratiska principer
-  - Godkända stadgar
-  - Bankkonto
-  - Minst 4 procent av studieförbundens totala verksamhet i Filipstads kommun, enligt Folkbildningsrådets sammanställning
-  belopp: Inget fast belopp. Bidragets storlek avgörs utifrån studieförbundets verksamhet föregående år i Filipstads kommun,
-    enligt sammanställning från Folkbildningsrådet.
-  sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
+  - *grund
+  - *formalia
+  - Studieförbundets lokala verksamhet ska utgöra minst fyra procent av studieförbundens samlade verksamhet i Filipstads kommun enligt Folkbildningsrådets sammanställning
+  - Stödet grundas på verksamheten i Filipstads kommun under föregående år
+  - Redovisning av föregående års verksamhet ska lämnas om kommunen begär det
+  - Studieförbundet ska beakta de särskilda inriktningar eller prioriteringar som kultur- och föreningsutskottet beslutar för stödåret
+  belopp: Individuellt beräknat efter föregående års lokala verksamhet och Folkbildningsrådets sammanställning; ingen generell kronnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas till kommunstyrelsen senast 30 april.
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: filipstad-arrangemangsbidrag
-  namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  - idrott
-  malgrupp: Föreningar för offentliga arrangemang
+  namn: Bidrag till offentliga arrangemang
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som arrangerar offentliga evenemang i Filipstads kommun
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Demokratiska principer
-  - Godkända stadgar
-  - Bankkonto
-  - Offentligt evenemang i Filipstads kommun, riktat till allmänheten och tillgängligt för alla
-  - Ej religiösa inslag eller fester
-  - Marknadsföringen ska visa att arrangemanget genomförs med bidrag från Filipstads kommun
-  - Ansökan ska innehålla förteckning över arrangemangets förväntade intäkter och utgifter
-  belopp: Inget fast belopp anges. Bidrag kan ges som förskottsutbetalning, efterhandsstöd eller förlustersättning enligt
-    kultur- och föreningsutskottets beslut.
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
+  - *grund
+  - *formalia
+  - Arrangemanget ska vara offentligt, äga rum i Filipstads kommun, rikta sig till allmänheten och vara tillgängligt för alla
+  - Arrangemanget ska ha ett värde för kommuninvånarna och får inte vara en fest eller innehålla religiösa inslag
+  - Ansökan ska innehålla en förteckning över förväntade intäkter och kostnader
+  - Marknadsföringen ska ange att arrangemanget genomförs med bidrag från Filipstads kommun
+  - Slutredovisning ska lämnas om kultur- och föreningsutskottet begär det
+  belopp: Individuellt prövat som förskottsutbetalning, efterhandsstöd eller förlustersättning; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året.
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: filipstad-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för lokalmiljöer
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Bidragsberättigade föreningar som investerar i förenings- eller kommunägda anläggningar
   deadlines:
     typ: fasta
-    datum:
-    - 10-31
+    datum: [10-31]
   krav:
-  - Demokratiska principer
-  - Godkända stadgar
-  - Bankkonto
-  - Investeringen ska avse fastighet som ägs av den sökande föreningen eller av kommunen
-  - Ej till material (t.ex. fotbollar) eller dräkter
-  - Ansökan ska innehålla en kostnadsberäkning för investeringen
-  belopp: Inget fast belopp anges. Bidrag kan ges som förskottsutbetalning, efterhandsstöd eller förlustersättning enligt
-    kultur- och föreningsutskottets beslut.
-  sen_ansokan: Ej möjlig efter 31 oktober
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
+  - *grund
+  - *formalia
+  - Investeringen ska avse en fastighet som ägs av den sökande föreningen eller av kommunen
+  - Stödet kan avse exempelvis förbättring av klubblokal, energibesparing eller utbyte av verksamhetsnödvändig maskin men inte förbrukningsmaterial, bollar eller dräkter
+  - Ansökan ska innehålla en kostnadsberäkning och medfinansiering från flera finansiärer prioriteras
+  - Beviljad investering och användningen av stödet ska kunna redovisas efter genomförandet
+  belopp: Individuellt prövat som förskottsutbetalning, efterhandsstöd eller förlustersättning; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara kommunen tillhanda senast 31 oktober.
+  kalla_url: *huvud
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: filipstad-lovaktivitetsbidrag
+  namn: Bidrag till lovaktiviteter
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar och ideella organisationer som ordnar kostnadsfria lovaktiviteter för barn 6–15 år
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Förening, organisation eller församling ska ansvara för aktiviteten och lämna ansökan med budget före den publicerade fristen för aktuellt lov
+  - Aktiviteten ska vara gratis och öppen för alla flickor och pojkar 6–15 år
+  - Aktiviteten ska främja integration och genomföras så att alla barn behandlas lika
+  - Ansökan ska ange aktivitet, datum, tider, plats, anmälningsinformation och övriga uppgifter som kommunen behöver för publicering
+  - Flera aktiviteter ska lämnas som separata ansökningar
+  belopp: Individuellt prövat utifrån aktivitetens budget; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar en särskild ansökningsfrist för varje lovomgång.
+  kalla_url: &lov https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag/bidragforlovaktiviteter.3555.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: filipstad-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som bokar kommunens idrottshallar och andra kommunala lokaler
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en förening som bokar en kommunal lokal eller idrottshall för föreningsverksamhet
+  - Bokning ska göras via kommunens e-tjänst och avse en tillgänglig lokal i Filipstad, Lesjöfors, Nordmark eller Nykroppa
+  - Återkommande halltider ska sökas inför höst- och vårtermin och enstaka tider kan bokas i mån av plats
+  - Föreningen ska följa lokalens boknings- och ordningsregler
+  - Kommunstyrelsens teknikutskott beslutar om den reducerade taxan
+  belopp: Reducerad föreningstaxa enligt kommunens gällande lokal- och anläggningstaxor
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Återkommande halltider söks senast 30 april; enstaka bokning kan efterfrågas fram till sju dagar före tillfället.
+  kalla_url: &bokning https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/bokalokalochanlaggning.3591.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: filipstad-driftersattning-kommunal-anlaggning
+  namn: Driftersättning enligt avtal för föreningsdriven kommunal anläggning
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella föreningar som driver en kommunal anläggning enligt avtal
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - *grund
+  - *formalia
+  - Föreningen ska driva en kommunal anläggning enligt ett särskilt avtal med kommunen
+  - Avtalet ska reglera samtliga stödgrundande kostnader för driften av anläggningen
+  - Föreningen ska fullgöra det uppdrag och den ekonomiska redovisning som avtalet föreskriver
+  - Avtalet kan ses över vid behov eller på begäran av kultur- och föreningsutskottet
+  belopp: Driftersättning och kostnadstäckning fastställs i det individuella avtalet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen öppen generell ansökningsfrist; ersättningen förutsätter ett gällande avtal.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: filipstad-demokrati
-  vad: Demokratiska principer
-  beskrivning: Föreningen måste verka enligt demokratiska principer och vara öppen för alla.
-  system: Föreningsarbete
+  vad: Demokratiska och lokala grundvillkor
+  beskrivning: Föreningen ska vara demokratiskt uppbyggd, öppen för alla, ha godkända stadgar och bedriva verksamhet som gagnar Filipstads kommun eller kommuninvånarna.
+  system: Kommunens föreningsregler
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Villkoren prövas med respektive ansökan.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
-  giltighet_status: okand
-- id: filipstad-stadgar
-  vad: Godkända stadgar och bankkonto
-  beskrivning: Föreningen måste ha godkända stadgar, ett eget bankkonto och lämna underlag för verksamhetsplan, budget och
-    årsredovisning.
-  system: Föreningsregistrering
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: filipstad-konto-och-underlag
+  vad: Föreningskonto och fullständiga beslutsunderlag
+  beskrivning: Utbetalning sker endast till föreningens bankgiro, plusgiro eller bankkonto och verksamhets-, ekonomi- och revisionsunderlag ska lämnas enligt stödformen.
+  system: Filipstads kommuns e-tjänster och blanketter
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Underlagen lämnas med ansökan eller när kommunen begär komplettering.
   giltighet: null
   ordning: 2
-  kalla_url: https://www.filipstad.se/toppmeny/upplevaochgora/foreningsverksamhet/foreningsochverksamhetsbidrag.912.html
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: filipstad-ingen-publicerad-giltighet
+  vad: Ingen publicerad omregistreringsregel
+  beskrivning: Kommunen publicerar ingen gemensam giltighetstid eller återkommande förnyelsedag för föreningens registrering eller bidragsbehörighet.
+  system: Kommunens föreningsservice
+  ledtid: null
+  ledtid_text: Ej angivet av kommunen.
+  giltighet: null
+  ordning: 3
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+kommunsiffra: null
