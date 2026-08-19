@@ -2,234 +2,190 @@ kommun: Härjedalen
 kommun_slug: harjedalen
 lan: Jämtlands län
 befolkning: 10050
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Samhällsutvecklingsförvaltningen, fritidsenheten samt socialförvaltningen
 ansokningssystem:
-  namn: E-tjänster
-  url: https://e-tjanster.harjedalen.se/
-kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-verifierad: '2026-08-02'
+  namn: Blanketter och kommunens e-tjänster
+  url: https://www.herjedalen.se/kommun-och-politik/blanketter.html
+kalla_url: &huvud https://www.herjedalen.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stipendier-och-stod.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
+giltighet_regel_status: kontrollast
 bidrag:
 - id: harjedalen-lokalt-aktivitetsstod
   namn: Kommunalt lokalt aktivitetsstöd
   kategori:
   - idrott
+  - kultur
   - ovrig
-  malgrupp: Ideella föreningar med regelbunden verksamhet
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Ideella föreningar som bedriver regelbunden, ledarledd verksamhet för medlemmar i Härjedalen
   deadlines:
     typ: fasta
     datum:
     - 02-25
     - 08-25
   krav:
-  - Minst tre deltagare och minst 60 minuter per aktivitet
-  belopp: 5 kr per deltagare, 15 kr per ledare samt 10 kr för extra ledare
-  sen_ansokan: För sent inkomna ansökningar kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-driftbidrag
-  namn: Driftbidrag
-  kategori:
-  - idrott
-  malgrupp: Föreningar med egna idrottsanläggningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-31
-  krav:
-  - Avser drift, inte investeringar
-  belopp: Högst 50 procent av redovisade kostnader; beloppet ska efter särskild prövning anses skäligt.
-  sen_ansokan: För sent inkomna ansökningar kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
+  - &ideell Bedriver ideell lokal verksamhet inom Härjedalens kommuns geografiska område
+  - &formalia Har stadgar, vald styrelse, revisorer, organisationsnummer och bankkonto, plusgiro eller bankgiro i föreningens namn
+  - &register Finns i kommunens föreningsregister och uppdaterar kontaktinformationen efter årsmötet
+  - &arshandlingar Lämnar en gång per år verksamhetsplan, verksamhetsberättelse, revisionsberättelse, resultat- och balansräkning samt nya föreningsuppgifter
+  - Minst 75 procent av de redovisade tillfällena ska vara idrott; högst 25 procent får vara kringaktiviteter som utbildningar eller möten
+  - Ledaren ska vara medlem, utsedd för aktiviteten och minst 18 år
+  - Varje tillfälle ska pågå minst 60 minuter och ha minst tre deltagare
+  - En medlem kan ge deltagarstöd vid högst ett tillfälle per dag; ledaren räknas inte som deltagare
+  - Entrébelagda tävlingar, matcher, träningar och kommersiella arrangemang ger inte stöd
+  - Alla ska ges möjlighet att delta efter sina förutsättningar och närvaron ska redovisas på kommunens blankett eller sammanställning från IdrottOnline
+  belopp: 5 kr per deltagare och 15 kr per ledare samt 10 kr för en extra ledare per gruppaktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 1 januari–30 juni ska lämnas senast 25 augusti och ansökan för 1 juli–31 december senast 25 februari.
+  kalla_url: *huvud
   belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: 'T8a: Kommunens regler anger både tak och prövningsregel.'
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-kursbidrag
-  namn: Kursbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som utbildar ungdomsledare
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Ansökan senast 14 dagar efter kurs
-  belopp: 80 % av resa, kursavgift och litteratur; max 10 000 kr per sektion/förening och år
-  sen_ansokan: Ansökan senare än 14 dagar efter kurs kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som äger eller hyr lokal och inte får driftbidrag
-  deadlines:
-    typ: fasta
-    datum:
-    - 01-31
-  krav:
-  - Verifikation på lokalkostnad ska bifogas
-  belopp: 80 % av skälig lokalkostnad, högst 6 000 kr per år
-  sen_ansokan: För sent inkomna ansökningar kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
 - id: harjedalen-anstallningsstod
-  namn: Anställningsstöd
+  namn: Stöd till anställning
   kategori:
   - idrott
   - kultur
+  - social
   - ovrig
-  malgrupp: Föreningar med anställd kopplad till anläggning, barn- och ungdomsidrott eller bygdegård
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar med anställda knutna till en stödd anläggning, barn- och ungdomsidrott eller bygdegårdsverksamhet
   deadlines:
     typ: fasta
     datum:
     - 02-25
     - 08-25
   krav:
-  - Högst tre personer per förening
-  belopp: 6 000 kr per månad för heltid, proportionerat efter sysselsättningsgrad
-  sen_ansokan: För sent inkomna ansökningar kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
+  - *ideell
+  - *formalia
+  - *register
+  - *arshandlingar
+  - Den anställdas arbete ska vara knutet till en anläggning som får annat kommunalt stöd, till barn- och ungdomsidrott eller till bygdegårdsverksamhet
+  - En förening får söka för högst tre helårsanställningar
+  - Arbetsuppgifter, anställningstid, sysselsättningsgrad, månadslön, lönekostnad inklusive sociala avgifter och statligt stöd ska redovisas
+  - Totalt kommunalt och arbetsmarknadspolitiskt stöd får inte överstiga 100 procent av lönekostnaden
+  belopp: 6 000 kr per månad för heltidsanställning om 40 timmar per vecka, proportionerat efter sysselsättningsgrad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 1 januari–30 juni ska lämnas senast 25 augusti och ansökan för 1 juli–31 december senast 25 februari.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-kulturarrangemang
-  namn: Kulturarrangemang
-  kategori:
-  - kultur
-  malgrupp: Ideella organisationer som arrangerar offentliga kulturarrangemang
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Ansökan minst 14 dagar före arrangemanget
-  belopp: Högst motsvarande organisationens egen kontanta insats
-  sen_ansokan: Ansökan senare än 14 dagar före arrangemanget kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-dokumentationsbidrag
-  namn: Bidrag till dokumentation
-  kategori:
-  - kultur
-  malgrupp: Organisationer eller enskilda som dokumenterar och tillgängliggör material om Härjedalen
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökan kan göras under hela året
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-ovriga-stod
-  namn: Övriga stöd
+- id: harjedalen-driftbidrag
+  namn: Stöd till drift av idrottsanläggning
   kategori:
   - idrott
-  - kultur
   - ovrig
-  malgrupp: Angelägen verksamhet som inte ryms i annan bidragsgrupp
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Ansökan innan verksamheten påbörjas
-  belopp: null
-  sen_ansokan: Ansökan efter att verksamheten påbörjats kan avslås
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: null
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-samlingslokaler
-  namn: Bidrag till samlingslokaler
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Prioriterade föreningsdrivna samlingslokaler i Härjedalens kommun enligt kommunens särskilda förteckning
-  deadlines:
-    typ: okand
-    datum: []
-  krav:
-  - Lokalen ska finnas i kommunens förteckning över bidragsberättigade samlingslokaler
-  - Ungdomsaktiviteter i lokalen ska vara drogfria
-  - Årsredovisning och uppgifter om lokalens fasta kostnader, intäkter och likvida tillgångar ska lämnas som underlag
-  belopp: Underskottstäckning enligt kommunens beräkningsmodell, dock högst 50 % av lokalens fasta kostnader. Vid överskott
-    kan stimulansbidrag om 5 % av fasta kostnader utgå.
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/bidrag-till-samlingslokaler.html
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Detta stöd regleras separat och omfattas uttryckligen inte av den allmänna föreningsstödsriktlinjen. Ansökningsdatum
-    framgår inte av den öppna riktlinjesidan; kontrollera blankett eller kontakta kommunen.
-  senast_verifierad: '2026-08-03'
-- id: harjedalen-studieforbund
-  namn: Stöd till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Statsbidragsberättigade studieförbund som redovisar lokal folkbildnings- och kulturverksamhet i Härjedalens kommun
+  foreningstyp:
+  - idrott
+  - friluft
+  - ungdom
+  - annat
+  malgrupp: Föreningar som själva äger och driver en idrottsanläggning i Härjedalens kommun
   deadlines:
     typ: fasta
     datum:
-    - 05-01
+    - 01-31
   krav:
-  - Studieförbundets centrala organisation ska få statsbidrag via Folkbildningsrådet
-  - Verksamheten ska vara statsbidragsberättigad och genomförd i kommunen för kommunens invånare
-  - Föregående års verksamhet och kommunintyg samt innevarande års verksamhetsplan ska lämnas senast 1 maj
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunens ramanslag fördelas 75% grundanslag, 5% unika deltagare, 20% förstärkningsanslag"
-  sen_ansokan: Underlag som lämnas efter 1 maj riskerar att inte ingå i årets fördelning.
-  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/studieforbund.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Regleras i ett separat styrdokument och omfattas inte av den allmänna föreningsstödsriktlinjen.
-  senast_verifierad: '2026-08-03'
+  - *ideell
+  - *formalia
+  - *register
+  - *arshandlingar
+  - Föreningen ska själv äga den idrottsanläggning vars driftkostnader ansökan gäller
+  - Ansökan avser föregående verksamhetsårs faktiska drift av anläggningen, inte föreningens verksamhet eller investeringar
+  - Driftkostnaderna ska specificeras och styrkas; föregående års årsredovisning används som beräkningsunderlag
+  - Underhåll över 25 000 kr ska stämmas av med fritidsenheten innan åtgärden påbörjas; ansökt underhåll är begränsat till 25 000 kr och el till 75 000 kr
+  - Kommunen kan minska eller dra in stödet om anläggningen inte sköts godtagbart
+  belopp: Högst 50 procent av redovisade driftkostnader och det belopp fritidsenheten efter särskild prövning bedömer som skäligt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för föregående års kostnader ska lämnas senast 31 januari.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-samlingslokaler
+  namn: Stöd till drift av samlingslokal
+  kategori:
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar som driver någon av de samlingslokaler kommunstyrelsen har förklarat bidragsberättigad
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Lokalen ska finnas i kommunstyrelsens publicerade förteckning över bidragsberättigade samlingslokaler
+  - Ungdomsaktiviteter för personer under 18 år i lokalen ska vara drogfria
+  - Ansökan ska lämnas på kommunens särskilda blankett
+  - Föregående års årsredovisning ska lämnas med uppgifter om lokalens intäkter, likvida tillgångar och fasta kostnader
+  - Beviljade upprustningsbidrag och medel avsatta för investeringar undantas när likvida tillgångar räknas in i modellen
+  belopp: Underskottstäckning enligt kommunens formel plus 5 procent av fasta kostnader, dock högst 50 procent av fasta kostnader; vid överskott kan 5 procent ges som stimulansstöd
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas när som helst under året; kommunen rekommenderar första kvartalet.
+  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/bidrag-till-samlingslokaler.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: harjedalen-evenemangsstod
   namn: Evenemangsstöd
   kategori:
-  - kultur
   - idrott
+  - kultur
   - ovrig
-  malgrupp: Föreningar och organisationer som genomför evenemang i Härjedalens kommun
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Ideella föreningar samt sammanslutningar av flera företag eller företag och föreningar som är verksamma i Härjedalen
   deadlines:
     typ: fasta
     datum:
@@ -237,35 +193,367 @@ bidrag:
     - 05-15
     - 10-01
   krav:
-  - Evenemanget ska bidra till kommunens attraktivitet och bedöms enligt kommunens särskilda riktlinje
-  - Ansökningar över 25 000 kronor ska lämnas minst tre månader före evenemanget
-  belopp: Skäligt belopp efter bedömning. Ansökningar över 25 000 kronor beslutas av kommunstyrelsen.
-  sen_ansokan: Ansökningar handläggs tre gånger per år; större ansökningar ska dessutom lämnas minst tre månader före evenemanget.
-  kalla_url: https://www.herjedalen.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stipendier-och-stod.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Separat stödform utanför den allmänna föreningsstödsriktlinjen.
-  senast_verifierad: '2026-08-03'
+  - Evenemanget eller tävlingen ska genomföras i Härjedalens kommun
+  - Evenemanget ska dra publik och ge fördelar för näringslivet, föreningslivet eller kommunen som helhet
+  - Evenemanget ska skapa mötesplatser, stimulera deltagande i kultur, idrott eller friluftsliv och vara en god ambassadör för Härjedalen
+  - Stort medialt genomslag ska kunna förväntas och hållbarhet, jämlikhet och allas lika värde ska beaktas
+  - Ett skriftligt avtal ska ange parter, syfte, aktivitet, kommunens och mottagarens åtaganden, avtalstid, redovisning, återbetalning vid inställt evenemang och uppföljning
+  - Stödet ska stå i rimlig proportion till motprestationen, exempelvis godkänd exponering av kommunens varumärke eller kommunens deltagande på evenemanget
+  belopp: Individuellt bedömt skäligt belopp utifrån tilldelad budget, riktlinjerna och mottagarens motprestation
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan handläggs tre gånger per år och ska lämnas senast 15 januari, 15 maj eller 1 oktober. Aktuell ansökningssida anger dessutom minst tre månader före evenemanget vid ansökt belopp över 25 000 kr.
+  kalla_url: https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/riktlinjer-for-evenemangsstod-och-uppvaktningar.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  qa_anteckning: Den aktuella ansökningssidan använder 25 000 kr som gräns för kommunstyrelseprövning medan den formella riktlinjen från 2025 anger 10 000 kr och delegationsordningen från oktober 2025 anger 20 000 kr.
+- id: harjedalen-uppvaktning-medalj
+  namn: Uppvaktning efter framgångsrik prestation
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar i Härjedalen vars utövare eller lag nått en kvalificerad mästerskapsframgång
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-15
+  krav:
+  - Ansökan ska lämnas av föreningen
+  - Prestationen ska vara svenskt mästerskapsguld eller medalj vid nordiskt mästerskap, europamästerskap, världsmästerskap, olympiska spel eller världscup
+  - Prestationen ska ha genomförts mellan 1 maj föregående år och 30 april innevarande år
+  - Föreningen ska lämna de uppgifter kommunen behöver för att bedöma prestationen och mottagaren
+  belopp: Medalj till föreningen samt 1 000 kr vid kvalificerad mästerskapsprestation
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om uppvaktning för medalj ska lämnas senast 15 maj.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-jubileumsuppvaktning
+  namn: Jubileumsuppvaktning för föreningar
+  kategori:
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar i Härjedalens kommun som firar ett kvalificerat jubileum under året
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Mottagaren ska vara en förening i Härjedalens kommun
+  - Föreningen ska fira jubileum under innevarande år
+  - Jubileet ska avse 25, 50, 75 eller 100 år och därefter motsvarande 25-årsintervall
+  - Föreningen ska kontakta fritidsenheten med uppgifter om föreningen och jubileet
+  belopp: Kommunen publicerar ingen generell nivå eller form för jubileumsuppvaktningen.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag för jubileumsuppvaktning.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-kulturarrangemang
+  namn: Stöd till kulturarrangemang (garantibidrag)
+  kategori:
+  - kultur
+  foreningstyp:
+  - kultur
+  - hembygd
+  - annat
+  malgrupp: Ideella organisationer som arrangerar offentliga kulturarrangemang i Härjedalens kommun
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - *ideell
+  - *formalia
+  - *register
+  - Arrangemanget ska vara offentligt, öppet för alla och ha konstnärligt innehåll inom musik, dans, teater, konst och form, film, foto och media, litteratur eller kulturhistoria
+  - Allmänheten ska informeras om arrangemanget och kommunens logotyp ska finnas i annonser och tryckt material eftersom kommunen är medarrangör
+  - Sökt stöd får inte överstiga organisationens egen kontanta insats
+  - Ansökan ska innehålla budget med gager, resor, lokalhyra, marknadsföring, entréintäkter, egen insats, försäljning och andra anslag samt senaste verksamhetsberättelse, revision och bokslut
+  - Stöd över 1 000 kr är en förlustgaranti som betalas mot redovisat underskott; slutredovisning ska lämnas inom en månad efter arrangemanget
+  belopp: Högst organisationens egen kontanta insats; stöd över 1 000 kr betalas som garantibidrag mot redovisat underskott
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras under hela året men ska vara kommunen tillhanda minst 14 dagar före arrangemanget.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-kursbidrag
+  namn: Stöd till kurskostnad
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar som utbildar ungdomsledare för barn- och ungdomsverksamhet
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - *ideell
+  - *formalia
+  - *register
+  - *arshandlingar
+  - Utbildningen ska vara inriktad mot barn- och ungdomsträning
+  - Föreningen ska kontakta fritidsenheten före kursen om stödberättigandet är osäkert; domarkurser ska alltid stämmas av i förväg
+  - Ansökan ska specificera kostnader och bifoga kursprogram och kursintyg
+  - Resan ska göras med billigaste färdsätt; bilersättning beräknas med 18,50 kr per mil
+  belopp: 80 procent av kostnaderna för resa med billigaste färdsätt, kursavgift och kurslitteratur; högst 10 000 kr per sektion eller förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 14 dagar efter genomförd kurs. Om pengar återstår vid årets slut kan den som redan nått årstaket ansöka igen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-lokalbidrag
+  namn: Stöd till lokalhyra
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar och organisationer som äger eller hyr en lokal för verksamhet men inte får driftbidrag
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *ideell
+  - *formalia
+  - *register
+  - *arshandlingar
+  - Lokalen ska ägas eller hyras för föreningens verksamhet i Härjedalens kommun
+  - Föreningen får inte samtidigt få driftbidrag för lokalen eller anläggningen
+  - Verifikation på hyresavi eller annan lokalkostnad ska bifogas ansökan
+  - Ansökan ska göras på kommunens fastställda blankett och undertecknas av ordförande och sekreterare eller kassör
+  belopp: 80 procent av skälig lokalkostnad, högst 6 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den aktuella ansökningssidan anger att stödet kan sökas löpande under året.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  qa_anteckning: Den aktuella ansökningssidan anger löpande ansökan medan den äldre allmänna riktlinjen anger 31 januari för föregående år; den aktuella operativa sidan har använts.
+- id: harjedalen-studieforbund
+  namn: Stöd till studieförbund
+  kategori:
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - kultur
+  - social
+  - annat
+  malgrupp: Statsbidragsberättigade studieförbund med lokal folkbildnings- och kulturverksamhet i Härjedalens kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-01
+  krav:
+  - Studieförbundets centrala organisation ska få statsbidrag via Folkbildningsrådet
+  - Verksamheten ska vara statsbidragsberättigad, genomförd i kommunen och riktad till kommunens invånare
+  - Föregående års studiecirklar, kulturarrangemang och allmänna folkbildning ska redovisas med tydligt ändamål och målgrupp
+  - Innevarande års verksamhetsplan och kommunintyg ska lämnas
+  - Förstärkningsanslaget bedömer verksamhet inom kommunens vision, scenkonst samt dokumentation och traditionsbevarande verksamhet
+  - Ansökan ska lämnas på rätt blankett för kommunens vision, scenkonst respektive dokumentation och traditionsbevarande
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens ramanslag fördelas med 75 procent grundanslag, 5 procent efter unika deltagare och 20 procent förstärkningsanslag; totalsumman publiceras inte
+  sen_ansokan: Ansökan och underlag ska lämnas senast 1 maj.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-ovriga-stod
+  namn: Stöd till övrig verksamhet
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Ideella föreningar med angelägen verksamhet som inte ryms i någon annan fastställd stödform
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *ideell
+  - *formalia
+  - *register
+  - *arshandlingar
+  - Verksamheten ska inte kunna inrymmas i någon annan fastställd bidragsgrupp men bedömas angelägen att stödja
+  - Stödet kan avse konstnärligt innehåll, läger och lovverksamhet, ny verksamhet eller särskild verksamhet för ungdomar utanför föreningslivet
+  - Verksamheten ska normalt genomföras inom Härjedalens kommun
+  - Ansökan ska lämnas på kommunens blankett, ange sökt belopp och kompletteras med de bilagor som behövs för en fullständig prövning
+  belopp: Individuellt bedömt skäligt belopp utifrån tilldelad budget; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-kostnadsfri-kommunal-lokal
+  namn: Kostnadsfri upplåtelse av kommunal lokal och anläggning
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Bidragsberättigade ideella föreningar som behöver en kommunal konferenslokal, sporthall eller annan kommunal anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - *ideell
+  - *formalia
+  - *register
+  - Föreningen ska vara bidragsberättigad enligt kommunens allmänna föreningsstödsregler
+  - Upplåtelsen avser en kommunägd lokal eller anläggning, exempelvis konferensrum eller sporthall
+  - Tillgängligheten beror på lokalens kapacitet och kommunens möjlighet att upplåta den utan kostnad
+  belopp: Kostnadsfri upplåtelse av kommunägda lokaler och anläggningar i möjligaste mån
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista boknings- eller ansökningsdag för den kostnadsfria upplåtelsen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: harjedalen-pensionars-och-funktionsrattsbidrag
+  namn: Medlemsbidrag och lokalförmån för pensionärs- och funktionsrättsorganisationer
+  kategori:
+  - pensionar
+  - funktionsratt
+  - social
+  foreningstyp:
+  - social
+  - annat
+  malgrupp: Pensionärsorganisationer och organisationer för personer med funktionsnedsättning i Härjedalens kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en pensionärsorganisation eller organisation för personer med funktionsnedsättning
+  - Organisationen ska redovisa det medlemsantal som ligger till grund för bidraget
+  - Medlemmarna ska omfattas av den lokala organisationens verksamhet i Härjedalen
+  - Kostnadsfri lokal kan användas för styrelse- och medlemsmöten och endast där en lämplig lokal i anslutning till ett äldreboende finns tillgänglig
+  belopp: 25 kr per medlem samt möjlighet att utan kostnad använda lokaler vid äldreboenden för styrelse- och medlemsmöten där det är möjligt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunfullmäktiges beslut publicerar ingen gemensam ansökningsdag.
+  kalla_url: https://www.herjedalen.se/download/18.786ce91e174afae6cb1694a/1601034881616/Protokoll%20Kf%202018-11-26.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: harjedalen-ansok
-  vad: Ansökan via e-tjänster
-  beskrivning: Föreningsbidrag söks genom Härjedalens kommuns e-tjänstportal.
-  system: E-tjänster
+- id: harjedalen-registrering-och-arsuppdatering
+  vad: Registrerad och årligen uppdaterad förening
+  beskrivning: Föreningen ska finnas i kommunens föreningsregister och efter årsmötet uppdatera kontaktuppgifter. En gång per år ska den lämna verksamhetsplan, verksamhetsberättelse, revisionsberättelse, resultat- och balansräkning samt nya registeruppgifter.
+  system: Kommunens föreningsregister och bidragsblanketter
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Kontaktuppgifter och föreningshandlingar ska uppdateras efter årsmötet varje år.
   ordning: 1
-  kalla_url: https://e-tjanster.harjedalen.se/
-  giltighet_status: okand
-- id: harjedalen-kontakt
-  vad: Kontakt kommun
-  beskrivning: 'För frågor om bidrag: kommun@herjedalen.se eller 0680-161 00'
-  system: Härjedalen kommun
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: harjedalen-allmanna-villkor
+  vad: Allmänna villkor för föreningsstöd
+  beskrivning: Föreningen ska bedriva ideell lokal verksamhet i Härjedalen, ha stadgar, vald styrelse, revisorer, organisationsnummer och konto i föreningens namn samt nödvändiga tillstånd och säkerhetsrutiner. Barn- och ungdomsföreningar ska ha värdegrund och handlingsplan. Yrkes- eller ekonomiska intresseorganisationer, föreningar som driver omsorg eller skola, väg-, villa- och bostadsföreningar, bolag och enskilda personer omfattas inte av det allmänna stödet.
+  system: Härjedalens kommuns föreningsstöd
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 2
-  kalla_url: https://www.herjedalen.se/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
