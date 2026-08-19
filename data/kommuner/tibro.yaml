@@ -5,15 +5,23 @@ befolkning: 11278
 forvaltning: Kultur- och fritidsverksamheten
 ansokningssystem:
   namn: Rbok
-  url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
-kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
-verifierad: '2026-07-31'
+  url: https://tibro.rbok.se/ansok
+kalla_url: &huvud https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &allmanna https://tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Allmanna-bidragsbestammelser/
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Hyreskostnadsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som hyr lokal eller anläggning
   deadlines:
     typ: fasta
@@ -32,19 +40,24 @@ bidrag:
   - Beviljade bidragsmottagare är skyldiga att bevara räkenskaps- och revisionshandlingar, medlemsregister och närvarokort
     i minst fem år
   belopp: 30 procent av kostnader för barn- och ungdomsföreningar, 20 procent för övriga
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara kultur- och fritidsnämnden tillhanda senast 1 juni.
+  kalla_url: https://tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Hyreskostnadsbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: tibro-hyreskostnadsbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Driftskostnadsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar som äger lokal eller anläggning
   deadlines:
     typ: fasta
@@ -63,19 +76,24 @@ bidrag:
   - Beviljade bidragsmottagare är skyldiga att bevara räkenskaps- och revisionshandlingar, medlemsregister och närvarokort
     i minst fem år
   belopp: 40 procent av godkända kostnader plus 20 kr per godkänd deltagare
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara kultur- och fritidsnämnden tillhanda senast 1 juni.
+  kalla_url: https://tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Driftskostnadsbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: tibro-driftskostnadsbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Kommunalt lokalt aktivitetsstöd
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar med barn- och ungdomsverksamhet 7–20 år
   deadlines:
     typ: fasta
@@ -92,48 +110,102 @@ bidrag:
   - Beviljade bidragsmottagare är skyldiga att bevara räkenskaps- och revisionshandlingar, medlemsregister och närvarokort
     i minst fem år
   belopp: 50 kr per sammankomst med minst tre deltagare i åldern 7–20 år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för hösten lämnas senast 1 mars och för våren senast 1 september.
+  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Kommunalt-lokalt-aktivitetsstod/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: tibro-kommunalt-lokalt-aktivitetsstod
+  senast_verifierad: '2026-08-19'
 - namn: Tilläggsbidrag
+  status: aktiv
   kategori:
-  - pensionar
   - funktionsratt
-  - kultur
-  - ovrig
-  malgrupp: Pensionärs- och funktionsrättsorganisationer samt projekt
+  - social
+  foreningstyp: [social, annat]
+  malgrupp: Organisationer för personer med funktionsnedsättning med minst fem Tibromedlemmar
   deadlines:
     typ: fasta
     datum:
     - 11-30
   krav:
-  - Ansökan om projektbidrag ska göras senast tre månader före projektets genomförande, och en kostnadskalkyl ska bifogas
-    ansökan
-  - Bidragsmottagaren är skyldig att lämna en ekonomisk redovisning inom en månad efter genomfört projekt
+  - Organisationen ska företräda personer med funktionsnedsättning och vara verksam i Skaraborg
+  - Organisationen ska ha minst fem medlemmar som är hemmahörande i Tibro
   - Föreningen ska ha organisationsnummer, styrelse, stadgar och ett medlemsregister med namn, födelseår och uppgift om betald
     medlemsavgift
-  - Föreningen ska ha sitt säte i Tibro kommun och minst hälften av medlemmarna ska vara folkbokförda i kommunen
+  - Ansökan ska lämnas av organisationens huvudstyrelse i Rbok inom ansökningsperioden
   - Beviljade bidragsmottagare är skyldiga att bevara räkenskaps- och revisionshandlingar, medlemsregister och närvarokort
     i minst fem år
-  belopp: Varierar; funktionsrättsorganisationer 100 kr per medlem, högst 8 000 kr
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+  belopp: 100 kr per medlem hemmahörande i Tibro, högst 8 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas till och med 30 november.
+  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Tillaggsbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: tibro-tillaggsbidrag
+  senast_verifierad: '2026-08-19'
+- namn: Tilläggsbidrag till pensionärsorganisationer
+  status: aktiv
+  kategori: [pensionar, social]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsorganisationer anslutna till en riksorganisation
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Organisationen ska vara en pensionärsorganisation ansluten till en riksorganisation
+  - Organisationen ska uppfylla Tibros allmänna bidragsbestämmelser och bedriva värdefull verksamhet för kommunens medlemmar
+  - Ansökan ska lämnas av den lokala huvudstyrelsen via Rbok med fullständiga års- och ekonomihandlingar
+  - Organisationen ska ha organisationsnummer, styrelse, stadgar, medlemsregister och konto i organisationens namn
+  belopp: Kommunen publicerar ingen fast beloppsnivå; kultur- och fritidsnämnden beslutar bidragets storlek
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas till och med 30 november.
+  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Tillaggsbidrag/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: tibro-tillaggsbidrag-pensionarsorganisationer
+  senast_verifierad: '2026-08-19'
+- namn: Projektbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med större arrangemang eller nyskapande projekt inom kultur och fritid
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Projektet ska avse ett större arrangemang eller ett nyskapande projekt som förnyar och utvecklar kommunens kultur- och fritidsverksamhet
+  - Projektet ska vara tydligt avgränsat från föreningens löpande verksamhet
+  - Ansökan ska lämnas senast tre månader före projektets genomförande och innehålla en kostnadskalkyl
+  - Ekonomisk redovisning ska lämnas till kultur- och fritidsnämnden inom en månad efter genomfört projekt
+  - Den sökande ska uppfylla kommunens allmänna bidragsbestämmelser och ansökan ska lämnas av huvudstyrelsen via Rbok
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas av kultur- och fritidsnämnden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast tre månader före genomförandet och inom Tilläggsbidragets ansökningsperiod till 30 november.
+  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Tillaggsbidrag/
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: tibro-projektbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Särskilt anläggningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar med särskilda anläggningsbehov
   deadlines:
     typ: fasta
@@ -148,17 +220,22 @@ bidrag:
   - Ekonomisk redovisning till kultur- och fritidsnämnden är obligatorisk efter avslutat projekt, och understiger de faktiska
     kostnaderna kostnadskalkylen justeras bidraget ned med eventuell återbetalningsskyldighet
   belopp: Maximalt 70 procent eller 100 000 kr per inlämnad ansökan
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 september året före det år då bidraget önskas utbetalt.
+  kalla_url: https://tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Sarskilt-anlaggningsbidrag/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: tibro-sarskilt-anlaggningsbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Verksamhetsbidrag till kulturföreningar
+  status: aktiv
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Kulturföreningar med kontinuerlig utåtriktad verksamhet
   deadlines:
     typ: fasta
@@ -172,22 +249,25 @@ bidrag:
   - Ansökan ska följa allmänna bidragsbestämmelser och åtföljas av verksamhetsberättelse, balansräkning, resultaträkning och
     revisionsberättelse
   - Beslut meddelas 30 november, med utbetalning i januari påföljande år
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
-  belopp_status: okand
+  belopp: Kommunen publicerar ingen generell beloppsnivå; kultur- och fritidsnämnden beslutar årligen efter dialog och bedömning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästa verksamhetsår lämnas mellan 1 juni och 1 september.
+  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/Bidragforkulturverksamhet/
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ansökningsperiod 1 juni–1 september.
   id: tibro-verksamhetsbidrag-till-kulturforeningar
+  senast_verifierad: '2026-08-19'
 - namn: Kulturaktivitet och evenemangsbidrag
+  status: aktiv
   kategori:
   - kultur
+  foreningstyp: *alla
   malgrupp: Kulturföreningar med aktiviteter och evenemang
-  deadlines:
-    typ: lopande
-    datum: []
+  deadlines: {typ: fasta, datum: [12-01]}
   krav:
   - Föreningen ska vara en bidragsberättigad förening registrerad i Tibro kommun
   - Kulturaktiviteten ska falla inom de konstnärliga fälten ord, bild, scen, ton, film eller aktiviteter inom kulturarv
@@ -195,24 +275,61 @@ bidrag:
     äga rum i Tibro kommun
   - Ansökan ska innehålla en budget kopplad till evenemanget, och bidraget kan inte användas till löpande ordinarie verksamhet
   - Samma aktivitet kan som mest beviljas bidrag i tre år
+  - Aktiviteten ska redovisas i Rbok senast en månad efter genomförandet och inom samma kalenderår
   belopp: Högst 5 000 kr per aktivitet och förening per år
-  sen_ansokan: Ej tillämpligt (löpande) - ansökan ska lämnas senast två månader före aktiviteten/evenemanget
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast två månader före aktiviteten och senast 1 december för 2026.
+  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/bidragfokulturaktivitetochevenemang/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: tibro-kulturaktivitet-och-evenemangsbidrag
+  senast_verifierad: '2026-08-19'
+- namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade Tibroföreningar som bokar kommunens kultur- och fritidslokaler eller idrottsanläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara bidragsberättigad enligt Tibro kommuns allmänna bestämmelser
+  - Bokningen ska avse en kommunal lokal eller anläggning som omfattas av kultur- och fritidsnämndens taxa
+  - Föreningen ska registrera sig och boka via Rbok samt följa kommunens hyresregler
+  - Föreningstaxan gäller inte privatpersoner, föreningar från andra kommuner eller företag
+  belopp: Subventionerad föreningstaxa, bland annat 79–105 kr per timme i gymnastik- och idrottshallar samt 105 kr per timme i ishall, badhus, på konstgräsplan och på gräsplan; jämförelsetaxor för andra kunder är upp till 945 kr per timme
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; tider bokas i Rbok.
+  kalla_url: https://www.tibro.se/kommun-och-politik/direktlankar/Avgifter-och-taxor/sport--och-fritidslokaler-samt-foreningsservice/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: tibro-subventionerad-foreningstaxa
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: tibro-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
+  beskrivning: Föreningen ska ha säte i Tibro och minst hälften av medlemmarna folkbokförda i kommunen, organisationsnummer, styrelse, stadgar, medlemsregister med betalda avgifter samt plus- eller bankgiro i föreningens namn. Registrerade föreningar ska regelbundet kontrollera och uppdatera uppgifterna i föreningsregistret.
   system: Rbok
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Uppgifterna ska ses över regelbundet; kommunen anger ingen bestämd tidsfrist
   giltighet: null
   ordning: 1
-  kalla_url: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/
-  giltighet_status: okand
+  kalla_url: *allmanna
+  giltighet_status: ingen_regel
+- id: tibro-ansokningshandlingar
+  vad: Års- och ekonomihandlingar vid ansökan
+  beskrivning: Ansökan ska lämnas av den lokala huvudstyrelsen eller utsedd firmatecknare via Rbok och innehålla verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse. Handlingar och medlemsregister ska bevaras i minst fem år och kunna visas vid kommunens granskning.
+  system: Rbok
+  ledtid: null
+  ledtid_text: Handlingarna lämnas inom respektive bidrags ansökningsperiod
+  giltighet: null
+  ordning: 2
+  kalla_url: *allmanna
+  giltighet_status: ingen_regel
 kommunsiffra: null
