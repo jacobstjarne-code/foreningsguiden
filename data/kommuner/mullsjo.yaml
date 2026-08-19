@@ -2,17 +2,25 @@ kommun: Mullsjö
 kommun_slug: mullsjo
 lan: Jönköpings län
 befolkning: 7604
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsnämnden
 ansokningssystem:
   namn: Rbok
-  url: https://www.mullsjo.se/uppleva-och-gora/foreningar-och-bidrag/foreningsstod
-kalla_url: https://www.mullsjo.se/uppleva-och-gora/foreningar-och-bidrag/foreningsstod
-verifierad: '2026-07-31'
+  url: https://mullsjo.rbok.se/ansok
+kalla_url: &meny https://www.mullsjo.se/uppleva-och-gora/foreningar-och-bidrag/foreningsstod
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 05-15
+  kalla_url: &norm https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: mullsjo-startbidrag
   namn: Startbidrag
+  status: aktiv
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Nystartade föreningar
   deadlines:
     typ: lopande
@@ -23,20 +31,27 @@ bidrag:
     som får statligt stöd, samt registrering hos Kultur- och fritidsutskottet).
   - Ansökan ska åtföljas av protokoll från föreningens bildande, stadgar, intyg som styrker upptagande i riksorganisation
     samt redogörelse för planerad verksamhet och budget för närmaste verksamhetsåret.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska bedriva verksamheten i drog-, rök- och dopningsfri miljö och arbeta för integration i föreningslivet.
+  belopp: 3 000 kronor enligt kommunens publicerade beloppsbilaga, som är märkt 2016
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: &belopp https://www.mullsjo.se/download/18.67fd55f16b98feab949edbf/1567499714648/F%C3%B6reningsst%C3%B6d%20-%20Bidragsbelopp.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Kommunens aktuella föreningsstödsida länkar fortfarande beloppsbilagan, som uttryckligen är märkt Bidragsbelopp 2016.
+  senast_verifierad: '2026-08-19'
 - id: mullsjo-verksamhetsbidrag
   namn: Verksamhetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  - funktionsratt
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Bidragsberättigade föreningar
   deadlines:
     typ: fasta
@@ -51,20 +66,26 @@ bidrag:
     av lokalavdelningen (ej av riksorganisation, distrikt eller samarbetsorgan).
   - Föreningen ska uppfylla kommunens allmänna bestämmelser (antagna stadgar, vald styrelse med minst en myndig person, anslutning
     till riksorganisation med statligt stöd, registrering hos Kultur- och fritidsutskottet).
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Verksamheten ska bedrivas i drog-, rök- och dopningsfri miljö och föreningen ska arbeta för integration.
+  belopp: 23 kronor per sammankomst plus 5 kronor per deltagartillfälle enligt kommunens publicerade beloppsbilaga, som är märkt 2016
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Aktuell kommunwebb anger 25 februari och 25 augusti; en ansökan som kommer högst en månad sent minskas med 20 procent och därefter lämnas inget stöd
+  kalla_url: *belopp
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Den aktuella webbsidans 25 februari och 25 augusti ersätter norm-PDF:ens äldre datum 15 februari och 15 augusti. Beloppsbilagan är märkt 2016.
+  senast_verifierad: '2026-08-19'
 - id: mullsjo-ledarutbildning
   namn: Ledarutbildningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som utbildar ledare
   deadlines:
     typ: fasta
@@ -78,20 +99,26 @@ bidrag:
   - Bidraget är maximerat per lokalavdelning och år utifrån föregående års verksamhetsbidrag, och kan inte utgå om annat bidrag
     till ledarutbildning redan lämnats, t.ex. genom studiecirkelbidrag.
   - Föreningen ska uppfylla kommunens allmänna bestämmelser för bidrag till ungdomsorganisationer.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Endast utbildningsavgift och resa tur och retur med billigaste färdmedel är stödgrundande.
+  belopp: 80 procent av utbildningsavgift och stödgrundande resa; högst 50 procent av föregående års verksamhetsbidrag, minst 3 000 och högst 20 000 kronor per förening och år enligt den publicerade bilagan märkt 2016
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Aktuell kommunwebb anger 25 februari och 25 augusti; en ansökan som kommer högst en månad sent minskas med 20 procent och därefter lämnas inget stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Normen anger 80 procent av stödgrundande kostnader. Den fortsatt länkade beloppsbilagan anger årsgränserna och är märkt 2016.
+  senast_verifierad: '2026-08-19'
 - id: mullsjo-lokal-anlaggning
   namn: Lokal- och anläggningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med kostnader för lokal eller anläggning
   deadlines:
     typ: fasta
@@ -105,20 +132,26 @@ bidrag:
   - Vid anläggningsbidrag ska anläggningen vara föreningsägd eller långfristigt förhyrd och godkänd av Kultur- och fritidsutskottet
     som bidragsberättigad, brukas regelbundet av föreningen, och föreningen förbinder sig att vårda och underhålla anläggningen.
   - Föreningen ska uppfylla kommunens allmänna bestämmelser för bidrag till ungdomsorganisationer.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Ansökan ska redovisa faktiska kostnader för det senast avslutade hela redovisningsåret och eventuella hyresintäkter.
+  belopp: Lokalbidrag är 75 procent av godkänd hyra eller nettodrift, högst tre gånger föregående års verksamhetsbidrag och 22 000 kronor enligt bilagan märkt 2016; anläggningsbidrag lämnas enligt publicerade schabloner, exempelvis 48 000 kronor för A-fotbollsplan, 32 000 för övrig fullstor gräsplan och 3 500 för grustennisbana
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: En ansökan som kommer högst en månad efter 15 maj minskas med 20 procent; därefter lämnas inget stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Kommunala lokaler upplåts dessutom till starkt subventionerad föreningstaxa. Den publicerade schablonbilagan är märkt 2016.
+  senast_verifierad: '2026-08-19'
 - id: mullsjo-forfogande
   namn: Bidrag till kultur- och fritidsnämndens förfogande
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med särskilda behov eller initiativ
   deadlines:
     typ: lopande
@@ -128,20 +161,26 @@ bidrag:
     projekt som inte täcks av de generella bidragsreglerna, t.ex. insatser inom viss målgrupp, projekt för nya metoder, utvecklingsstöd
     för ideologiskt markerade organisationer, eller mindre ombyggnader/inventarier i egna anläggningar och lokaler.
   - Ansökan ska behandlas av Kultur- och fritidsutskottet eller dess presidium innan objektet påbörjas.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Sökanden ska vara en förening som omfattas av kommunens allmänna bidragsvillkor.
+  belopp: Individuellt prövat; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men måste behandlas innan insatsen påbörjas
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: mullsjo-investeringsbidrag
   namn: Investeringsbidrag 1 och 2
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som planerar investeringar
   deadlines:
     typ: fasta
@@ -155,18 +194,25 @@ bidrag:
     innan objektet påbörjas.
   - För det stora investeringsbidraget (över 2 basbelopp) krävs att en stor ideell insats ingår i projektet och att bidrag
     också söks från statlig myndighet där det är möjligt.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Ansökan ska lämnas senast 15 maj året före förväntad utbetalning och beslutas innan projektet påbörjas.
+  belopp: Litet investeringsbidrag är högst två tredjedelar av verifierade kostnader för köpta tjänster och material och högst två prisbasbelopp; stort investeringsbidrag över två prisbasbelopp lämnas som ränte- och amorteringsfritt lån efter individuell prövning
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 maj året före förväntad utbetalning; en ansökan som kommer högst en månad sent minskas med 20 procent och därefter lämnas inget stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: mullsjo-ovriga-bidrag
   namn: Övriga bidrag
+  status: aktiv
   kategori:
   - ovrig
+  - social
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Bidragsberättigade föreningar
   deadlines:
     typ: fasta
@@ -178,24 +224,54 @@ bidrag:
   - Ansökan ska innehålla föregående verksamhetsårs verksamhetsberättelse och ekonomiska redogörelse, kort redogörelse för
     planerad verksamhet inklusive budget, uppgifter om föreningens styrelse och kontaktperson, samt antal medlemmar i åldersgrupperna
     4–19 år och 20 år och äldre.
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.mullsjo.se/download/18.93f508818e5a765bd516c2f/1711537373728/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningar.pdf
-  belopp_status: okand
-  deadline_status: olast
+  - Ansökan ska undertecknas av föreningens ordförande och kassör eller sekreterare.
+  belopp: Individuellt prövat och kan även lämnas i annan form än pengar; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: En ansökan som kommer högst en månad efter 15 maj minskas med 20 procent; därefter lämnas inget stöd
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Organisationer och institutioner vars huvudsakliga verksamhet inte är ideell föreningsverksamhet ingår inte i produktens föreningsrad.
+  senast_verifierad: '2026-08-19'
+- id: mullsjo-studieforbund
+  namn: Stöd till studieförbund
+  status: aktiv
+  kategori:
+  - kultur
+  - ovrig
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund med verksamhet i Mullsjö kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-15
+  krav:
+  - Sökanden ska vara ett studieförbund.
+  - Studieförbundet ska bedriva verksamhet i Mullsjö kommun.
+  - Ansökan ska följa kommunens särskilda regler för studieförbund och lämnas senast 15 maj.
+  belopp: Kommunen publicerar ingen generell beloppsnivå eller fördelningsformel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens föreningsstödsida anger 15 maj som sista ansökningsdag
+  kalla_url: *meny
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet står i kommunens aktuella föreningsstödsmeny men saknas i den äldre allmänna föreningsnormen; kommunen publicerar inga ytterligare detaljer öppet.
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: mullsjo-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Kommunens e-tjänster
+  vad: Kommunal registrering och årlig inlämning av föreningshandlingar
+  beskrivning: Föreningen ska ha minst 10 betalande medlemmar 7–20 år och minst 15 stödgrundande aktiviteter per år, ha antagna stadgar och en styrelse med minst en myndig ledamot, vara ansluten till en statsbidragsberättigad riksorganisation och vara registrerad av kommunen. Verksamheten ska bedrivas i drog-, rök- och dopningsfri miljö och föreningen ska arbeta för integration.
+  system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast 15 maj varje år
+  giltighet: Senast 15 maj ska föreningen lämna aktuella föreningsuppgifter, senaste verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse samt planerad verksamhet och budget för ansökningsåret
   ordning: 1
-  kalla_url: https://www.mullsjo.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-till-foreningar
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
