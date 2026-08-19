@@ -225,70 +225,14 @@ const kommunNamnSlug = kommuner
 </div>
 
 <script>
-  const root = document.querySelector<HTMLElement>('.idrott');
-  if (root) {
-    // Namn→slug — samma inbäddade-JSON-mönster som KommunProgression.astro:s
-    // data-progression-per-filter, ingen server-tur-och-retur för att slå
-    // upp en slug klienten redan har fått.
-    const kommunlistaEl = root.querySelector<HTMLScriptElement>('[data-idrott-kommunlista]');
-    const kommunlista: { namn: string; slug: string }[] = kommunlistaEl ? JSON.parse(kommunlistaEl.textContent ?? '[]') : [];
-    function slugFranNamn(input: string): string | null {
-      const normaliserat = input.trim().toLowerCase();
-      const traff = kommunlista.find((k) => k.namn.toLowerCase() === normaliserat);
-      return traff?.slug ?? null;
-    }
-
-    // Bevakningsfångst — nationell bevakning, samma /api/prenumerera-json
-    // som resten av sajten (U1.5), egen presentation (stor ruta, inte
-    // deadlines-tabellens kompakta klick-för-att-visa-rad).
-    const captureEl = root.querySelector<HTMLElement>('[data-idrott-capture]');
-    const captureForm = root.querySelector<HTMLFormElement>('[data-idrott-capture-form]');
-    const captureKvitto = root.querySelector<HTMLElement>('[data-idrott-capture-kvitto]');
-    const captureFel = root.querySelector<HTMLElement>('[data-idrott-capture-fel]');
-    const stodId = captureEl?.dataset.nationelltStodId ?? '';
-
-    captureForm?.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      captureFel?.setAttribute('hidden', '');
-      const submitKnapp = captureForm.querySelector<HTMLButtonElement>('button[type="submit"]');
-      if (submitKnapp) submitKnapp.disabled = true;
-
-      const data = new FormData(captureForm);
-      data.set('nationelltStod', stodId);
-
-      try {
-        const res = await fetch('/api/prenumerera-json', { method: 'POST', body: data });
-        const json = await res.json();
-        if (!res.ok || !json.ok) throw new Error('svar ej ok');
-        captureForm.hidden = true;
-        if (captureKvitto) {
-          captureKvitto.textContent = json.alreadyConfirmed
-            ? 'Ni bevakar redan LOK-stödet.'
-            : 'Kolla er inkorg — bekräfta så börjar vi påminna er.';
-          captureKvitto.hidden = false;
-        }
-      } catch {
-        captureFel?.removeAttribute('hidden');
-        if (submitKnapp) submitKnapp.disabled = false;
-      }
-    });
-
-    // Övergången — V1.3: postar BARA kommun, ingen idrott/kategori.
-    const transitForm = root.querySelector<HTMLFormElement>('[data-idrott-transit-form]');
-    const transitFel = root.querySelector<HTMLElement>('[data-idrott-transit-fel]');
-
-    transitForm?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      transitFel?.setAttribute('hidden', '');
-      const input = transitForm.querySelector<HTMLInputElement>('input[name="kommun"]');
-      const slug = input ? slugFranNamn(input.value) : null;
-      if (!slug) {
-        transitFel?.removeAttribute('hidden');
-        return;
-      }
-      window.location.href = `/kommun/${slug}/`;
-    });
-  }
+  // V6 (rättning 2026-08-19) — se idrottKlient.ts:s filhuvud för rotorsaken:
+  // ett skript UTAN imports under Astros assetsInlineLimit blir inline i
+  // dist-utdatan och tystas av sajtens CSP (script-src 'self', ingen
+  // 'unsafe-inline'). Importet här är inte kosmetiskt — det är det som
+  // gör att chunken hamnar i en egen /_astro/*.js-fil, exakt som
+  // bevakaKlient.ts/initBevakaWidgets() redan gör på resten av sajten.
+  import { initIdrottWidgets } from '../lib/idrottKlient';
+  initIdrottWidgets();
 </script>
 
 <style>
