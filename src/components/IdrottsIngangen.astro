@@ -42,16 +42,40 @@ const { identitetsord, enhetslista, vinkelmening, stod, kommuner } = Astro.props
 // ("idrottsförening" → "Idrott", "bandyförening" → "Bandy"); om ett
 // framtida identitetsord inte slutar på "förening" blir resultatet
 // mindre snyggt men aldrig fel-brytande — ren visningstext.
-const kortord = identitetsord.replace(/förening$/, '');
+// V2 (rättning 2026-08-19): matchade tidigare bara "förening$" och lät
+// glidbokstaven "s" stå kvar ("idrottsförening" → "Idrotts"). Ordet
+// framför "förening" i en svensk sammansättning tar aldrig med sig
+// fogen-s — "s?förening$" stryper båda.
+const kortord = identitetsord.replace(/s?förening$/, '');
 const kortordStort = kortord.charAt(0).toUpperCase() + kortord.slice(1);
 const identitetsordPlural = `${identitetsord}ar`;
 
-// V1.1 — lok.datum[]: läses ur stod.deadlines.datum (MM-DD, återkommande),
-// terminsetiketten beräknad av månaden, inte skriven per datum.
-const lokDatum = stod.deadlines.datum.map((mmdd) => ({
-  mmdd,
-  text: formatRecurringDate(mmdd),
-  termin: Number(mmdd.slice(0, 2)) <= 6 ? 'vårterminen' : 'höstterminen',
+// V1.1 — lok.datum[]: läses ur stod.deadlines.datum (MM-DD, återkommande).
+// V2 (rättning 2026-08-19): terminsetiketten beräknades tidigare på
+// DEADLINENS egen månad (fel — en augustideadline gäller vårens
+// aktiviteter, inte höstens). Rätt källa är perioden deadlinen AVSER
+// (stod.deadlines.perioder[].avser.fran), inte deadline-datumet självt.
+const lokDatum = stod.deadlines.datum.map((mmdd) => {
+  const period = stod.deadlines.perioder.find((p) => p.datum === mmdd);
+  const avserVarterminen = period ? Number(period.avser.fran.slice(0, 2)) <= 6 : Number(mmdd.slice(0, 2)) <= 6;
+  return {
+    mmdd,
+    text: formatRecurringDate(mmdd),
+    termin: avserVarterminen ? 'vårterminen' : 'höstterminen',
+  };
+});
+
+// V2 (rättning 2026-08-19): "sidan visar vad man kan förlora men aldrig
+// vad man kan få" — beloppen läses ur stod.belopp, samma disciplin som
+// datum/sanktioner (ingen hårdkodad krona/öre i mallen).
+function formatOre(ore: number): string {
+  return ore % 100 === 0 ? `${ore / 100}` : (ore / 100).toFixed(2).replace('.', ',');
+}
+const ledarstodText = `${formatOre(stod.belopp.ledarstod.en_ledare_ore)} kr per aktivitet, ${formatOre(stod.belopp.ledarstod.tva_eller_fler_ledare_ore)} kr vid två eller fler ledare`;
+const deltagarstodRader = stod.belopp.deltagarstod.map((grupp) => ({
+  namn: grupp.alder_max ? `${grupp.alder_min}–${grupp.alder_max} år` : `Från ${grupp.alder_min} år`,
+  belopp: `${grupp.tillfallen.map((t) => formatOre(t.belopp_ore)).join(' / ')} kr/tillfälle`,
+  tillampen: grupp.tillampen,
 }));
 
 const kommunNamnSlug = kommuner
@@ -85,9 +109,34 @@ const kommunNamnSlug = kommuner
     </div>
   </div>
 
+  <!-- Beloppen (V2, rättning 2026-08-19: sidan visade vad man kan
+       förlora men aldrig vad man kan få — stod.belopp, innan
+       sanktionstrappan så ordningen blir "vad ni får" före "vad ni
+       kan tappa"). -->
+  <div class="idrott__belopp-wrap">
+    <p class="idrott__belopp-t">{IDROTT_INGANGEN.beloppRubrik}</p>
+    <div class="idrott__card">
+      <div class="idrott__row">
+        <span class="fg-read-mark"></span>
+        <span class="idrott__row-name">{IDROTT_INGANGEN.ledarstodRad}</span>
+        <span class="idrott__row-meta">{ledarstodText}</span>
+      </div>
+      {deltagarstodRader.map((rad) => (
+        <div class="idrott__row">
+          <span class="fg-read-mark"></span>
+          <span class="idrott__row-name">
+            {IDROTT_INGANGEN.deltagarstodRad} {rad.namn}
+            {rad.tillampen && <span class="idrott__row-fint">{rad.tillampen}</span>}
+          </span>
+          <span class="idrott__row-meta">{rad.belopp}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
   <!-- Sanktionstrappan (V1.1: lok.sanktioner[], V1.2: SanctionLadder utan tidslogik) -->
   <div class="idrott__ladder-wrap">
-    <SanctionLadder steg={stod.sanktionstrappa.steg} referensdatum={stod.deadlines.datum[0]} />
+    <SanctionLadder steg={stod.sanktionstrappa.steg} />
   </div>
 
   <!-- RF + projektstöd -->
@@ -294,6 +343,17 @@ const kommunNamnSlug = kommuner
   .idrott__lok-d { font-family: var(--fg-font-mono); font-size: var(--fg-text-body); font-weight: var(--fg-weight-bold); }
   .idrott__lok-termin { font-size: var(--fg-text-label); color: var(--fg-ink-muted); }
 
+  .idrott__belopp-wrap { margin-top: var(--fg-space-6); }
+  .idrott__belopp-t {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-2);
+  }
+
   .idrott__ladder-wrap { margin-top: var(--fg-space-6); }
 
   .idrott__card {
@@ -313,7 +373,8 @@ const kommunNamnSlug = kommuner
   .idrott__row:last-child { border-bottom: none; }
   .idrott__row-name { flex: 1; font-size: var(--fg-text-body); font-weight: var(--fg-weight-bold); }
   .idrott__row-name--void { color: var(--fg-void-ink); }
-  .idrott__row-meta { font-family: var(--fg-font-mono); font-size: var(--fg-text-mono); color: var(--fg-ink-muted); }
+  .idrott__row-meta { font-family: var(--fg-font-mono); font-size: var(--fg-text-mono); color: var(--fg-ink-muted); white-space: nowrap; }
+  .idrott__row-fint { display: block; font-family: var(--fg-font-sans); font-size: var(--fg-text-label); font-weight: normal; color: var(--fg-ink-muted); margin-top: 2px; }
 
   .idrott__gate {
     margin: var(--fg-space-3) 0 0;

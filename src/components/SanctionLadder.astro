@@ -14,44 +14,54 @@
 // ett femte steg ska det synas här utan en kodändring. Avsteg från
 // mockens radantal, flaggat i commit-meddelandet.
 //
-// Dag-intervallen ("1–4 dagar sen") är beräknade ur steg[i].perioder[0]
-// mot referensdatumet (samma symmetri i LOK-datan: feb- och
-// augustiperioderna ger identiska offsets) — inte mockens "en vecka"/
-// "en månad"-prosa, som är approximerad copy kopplad till just LOK:s
-// nuvarande fönster. Ett kortare/längre framtida fönster ska ge rätt
-// dagantal utan att någon skriver om komponenten.
-import type { Sanktionsteg } from '../lib/nationellaTyper';
-import { formatRecurringDate } from '../lib/kommuner';
+// V2 (rättning 2026-08-19): kalenderdatum, inte dagintervall. Ett
+// dagintervall räknat mot ETT referensdatum stämde bara för den ena
+// fristen (offset-matte antog symmetri mellan feb- och augustifönstren
+// som inte finns i verkligheten — RF:s regel är datumbunden per frist,
+// inte "dagar efter deadline"). Varje steg visar nu båda periodernas
+// riktiga fran/till-datum, en per frist, ur steg[i].perioder — ingen
+// egen datumaritmetik, bara formatering av det som redan står i YAML:en.
+import type { Sanktionsteg, Sanktionsperiod } from '../lib/nationellaTyper';
 
 export interface Props {
   steg: Sanktionsteg[];
-  /** MM-DD — en av deadlines.datum[], används bara för dag-offset-matematik (inte som "dagar kvar mot idag"). */
-  referensdatum: string;
 }
 
-const { steg, referensdatum } = Astro.props;
+const { steg } = Astro.props;
 
-function dagOffset(mmdd: string): number {
-  // Fast referensår, inget kalenderårs-skifte inom en och samma
-  // sanktionscykel (feb→mars eller aug→sep passerar aldrig 31/12).
-  const AR = '2027';
-  const toDays = (md: string) => {
-    const [m, d] = md.split('-').map(Number);
-    return Date.UTC(Number(AR), m - 1, d);
-  };
-  return Math.round((toDays(mmdd) - toDays(referensdatum)) / (1000 * 60 * 60 * 24));
+const MANADSFORKORTNING = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+
+function manad(mmdd: string): number {
+  return Number(mmdd.slice(0, 2));
+}
+function dag(mmdd: string): number {
+  return Number(mmdd.slice(3, 5));
+}
+function kortManad(mmdd: string): string {
+  return MANADSFORKORTNING[manad(mmdd) - 1];
+}
+
+// En periods text: "26 aug–1 sep" (olika månader) eller "2–15 sep"
+// (samma månad, namnet skrivs bara en gång) eller "från 1 okt" (avslag,
+// till === null).
+function periodText(p: Sanktionsperiod): string {
+  if (p.till === null) return `från ${dag(p.fran)} ${kortManad(p.fran)}`;
+  return manad(p.fran) === manad(p.till)
+    ? `${dag(p.fran)}–${dag(p.till)} ${kortManad(p.till)}`
+    : `${dag(p.fran)} ${kortManad(p.fran)}–${dag(p.till)} ${kortManad(p.till)}`;
 }
 
 // Staircase-indraget (mockens .s-part/.s-none) trappas per steg-index i
 // stället för två fasta nivåer — fyra riktiga steg ska synas som fyra
 // nivåer nedåt, inte kollapsa två av dem till samma indrag.
 const rader = steg.map((s, i) => {
-  const forsta = s.perioder[0];
-  const franOffset = dagOffset(forsta.fran);
-  const tillOffset = forsta.till ? dagOffset(forsta.till) : null;
-  const dagtext = tillOffset !== null
-    ? (franOffset === tillOffset ? `${franOffset} dagar sen` : `${franOffset}–${tillOffset} dagar sen`)
-    : `Från dag ${franOffset}`;
+  // Fallande på månadsnumret (aug/okt-cykeln före feb/mar-cykeln) — ren
+  // sorteringsregel på datat, ingen hårdkodad ordning av vilken frist
+  // som "kommer först".
+  const perioderSorterade = [...s.perioder].sort((a, b) => manad(b.fran) - manad(a.fran));
+  const dagtext = perioderSorterade
+    .map((p, idx) => (idx > 0 && p.till === null ? periodText(p).replace('från ', '') : periodText(p)))
+    .join(' respektive ');
   return {
     dagtext,
     beskrivning: s.pafoljd === 'avslag' ? 'Ansökan tas inte upp.' : 'Avdrag på beloppet.',
