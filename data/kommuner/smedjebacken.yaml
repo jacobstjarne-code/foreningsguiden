@@ -2,162 +2,328 @@ kommun: Smedjebacken
 kommun_slug: smedjebacken
 lan: Dalarnas län
 befolkning: 10765
-forvaltning: Kultur- och samhällsbyggnadsnämnden
+forvaltning: Kultur- och samhällsbyggnadsnämnden, omsorgsnämnden, familje- och utbildningsnämnden samt kommunstyrelsen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-verifierad: '2026-08-01'
+  namn: Kommunens e-tjänster och blanketter
+  url: https://etjanster.smedjebacken.se/
+kalla_url: &huvud https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &grundnorm https://www.smedjebacken.se/download/18.6ac077f2191e4eddbe3874a/1727264212605/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: smedjebacken-foreningsbidrag-fritid
   namn: Föreningsbidrag fritid
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella idrotts-, lokalägande och övriga fritidsföreningar med verksamhet i kommunen
   deadlines:
     typ: fasta
-    datum:
-    - 09-30
+    datum: [09-30]
   krav:
-  - Föreningen ska bedriva verksamhet i och för medlemmar folkbokförda i Smedjebackens kommun
-  - Föreningen ska ha antagna stadgar, tillsatt styrelse, medlemsregister och organisationsnummer
-  - Föreningen ska ha bankkonto, Plusgiro eller Bankgiro
-  - Av stadgarna ska framgå att föreningen är demokratiskt uppbyggd, öppen för alla som stödjer föreningens syfte, och bedrivs
-    i miljöer som präglas av demokratiska värderingar, jämställdhet och mångfald
-  - Föreningen ska följa kommunens policy gällande dopingfria idrottsanläggningar
-  - Föreningen ska årligen redovisa verksamhetsberättelse och ekonomisk redovisning till kommunen, inklusive uppgift om bidrag/stöd
-    från andra aktörer
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  belopp_status: okand
-  deadline_status: olast
+  - Föreningen ska bedriva verksamhet i Smedjebackens kommun och ha medlemmar som är folkbokförda där; en länsförening kan få stöd för den lokala delen
+  - Föreningen ska ha antagna stadgar, styrelse, medlemsregister, organisationsnummer och ett konto i föreningens namn
+  - Föreningen ska vara demokratiskt uppbyggd, öppen för alla som stödjer syftet samt motverka missbruk och diskriminering
+  - Föreningen ska normalt ha varit verksam i minst tolv månader och verksamheten ska ha positiv betydelse för kommunens invånare
+  - Ansökan ska innehålla senaste verksamhetsberättelse, ekonomisk redogörelse, resultat- och balansräkning, årsmötesprotokoll, revisionsberättelse samt nästa års verksamhetsplan
+  - Ideell och affärsmässig verksamhet ska särredovisas och föreningen ska kunna styrka lämnade uppgifter för de senaste tre åren
+  belopp: Kommunen publicerar ingen generell bidragsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande verksamhetsår ska lämnas senast 30 september. För sent inkommen ansökan behandlas inte.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Söks för kommande år.
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: smedjebacken-projektstod-kultur
   namn: Projektstöd kultur
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Kulturföreningar och ideella organisationer som genomför ett nytt eller enstaka kulturprojekt i kommunen
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
-  - Stöd kan gå till projekt inom olika konstområden eller offentliga kulturevenemang som arrangeras en gång eller för första
-    gången
-  - Stöd beviljas ett år i taget; ett och samma projekt kan beviljas stöd under högst tre år
-  - Ansökan görs på särskild blankett och enligt upprättade anvisningar
-  - Efterhandsstöd/förlustbidrag beviljas inte
-  - Redovisning av bidraget ska lämnas senast två månader efter projektet, på särskild blankett
-  - Utebliven redovisning är grund för avslag av kommande ansökningar
-  - Checklista gällande tillgänglighet ska bifogas ansökan om stöd
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  belopp_status: okand
-  deadline_status: okand
+  - Projektet ska avse ett konstområde eller ett offentligt kulturevenemang som genomförs en gång eller för första gången
+  - Samma projekt kan få stöd ett år i taget under högst tre år och ansökan ska lämnas före genomförandet
+  - Ansökan ska redovisa konstnärlig kvalitet, genomförbarhet, målgrupp, geografisk spridning, samarbeten, jämlikhet, hållbarhet och tillgänglighet
+  - Kommunens stöd ska framgå i marknadsföringen och viss självfinansiering förutsätts
+  - Redovisning ska lämnas på kommunens blankett senast två månader efter projektet; utebliven redovisning kan stoppa kommande stöd
+  - Checklista för lokalens eller evenemangets tillgänglighet ska bifogas ansökan
+  belopp: Individuellt prövat belopp; kommunen publicerar inget minimi- eller maximibelopp
+  belopp_avser: per_forening
+  kommunens_pott: Projekt- och evenemangsstöden delar en ram på 50 000 kronor
+  sen_ansokan: Ansökan kan göras löpande men ska finnas hos kommunen senast två veckor före det nämndsmöte där den ska behandlas.
+  kalla_url: &kulturnorm https://www.smedjebacken.se/download/18.698baeb318d1cc5af677a0/1705646428618/Riktlinjer%20f%C3%B6r%20kulturbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: För engångs- eller förstagångsprojekt. Kontakta kommunen om ansökningsförfarandet
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: smedjebacken-evenemangsstod-kultur
   namn: Evenemangsstöd kultur
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Kulturföreningar och ideella organisationer som arrangerar ett återkommande offentligt kulturevenemang i kommunen
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
-  - Stöd för att arrangera ett offentligt kulturevenemang för dem som arrangerat samma evenemang tidigare (återkommande evenemang)
-  - Kultur- och samhällsbyggnadsnämnden ger inte stöd till hela evenemangets kostnad
-  - Ansökan görs på särskild blankett och enligt upprättade anvisningar
-  - Efterhandsstöd/förlustbidrag beviljas inte
-  - Redovisning av bidraget ska lämnas senast två månader efter evenemanget, på särskild blankett
-  - Utebliven redovisning är grund för avslag av kommande ansökningar
-  - Checklista gällande tillgänglighet ska bifogas ansökan om stöd
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  belopp_status: okand
-  deadline_status: okand
+  - Evenemanget ska vara offentligt, kulturellt och ha arrangerats tidigare som ett återkommande evenemang i Smedjebackens kommun
+  - Ansökan ska lämnas före evenemanget och redovisa ett rimligt sökt belopp; kommunen finansierar inte hela kostnaden
+  - Ansökan ska redovisa konstnärlig kvalitet, genomförbarhet, målgrupp, geografisk spridning, samarbeten, jämlikhet, hållbarhet och tillgänglighet
+  - Kommunens stöd ska framgå i marknadsföringen och viss självfinansiering förutsätts
+  - Redovisning ska lämnas på kommunens blankett senast två månader efter evenemanget; utebliven redovisning kan stoppa kommande stöd
+  - Checklista för lokalens eller evenemangets tillgänglighet ska bifogas ansökan
+  belopp: Individuellt prövat belopp som inte täcker hela evenemangets kostnad; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: Projekt- och evenemangsstöden delar en ram på 50 000 kronor
+  sen_ansokan: Ansökan kan göras löpande men ska finnas hos kommunen senast två veckor före det nämndsmöte där den ska behandlas.
+  kalla_url: *kulturnorm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: Ansökan minst två veckor före nämndsmöte. Kontakta kommunen om ansökningsförfarandet
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: smedjebacken-verksamhetsstod-kultur
   namn: Verksamhetsstöd kultur
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar med stabil, helårsomfattande kulturverksamhet i Smedjebackens kommun
   deadlines:
     typ: fasta
-    datum:
-    - 04-30
+    datum: [04-30]
   krav:
   - Verksamheten ska vara stabil kulturverksamhet i Smedjebackens kommun som sträcker sig över hela året
-  - Stödet grundas på bedömning av verksamhetsberättelse, balans- och resultaträkning för senast avslutade verksamhetsår samt
-    på bedömning av kommande års verksamhetsplan
-  - Mottagare av verksamhetsstöd kan inte, annat än i undantagsfall, beviljas stöd ur nämndens övriga stödformer
-  - Ansökan görs på särskild blankett och enligt upprättade anvisningar
-  - Checklista gällande tillgänglighet ska bifogas ansökan om stöd
+  - Bedömningen grundas på senaste verksamhetsberättelse, balans- och resultaträkning samt kommande års verksamhetsplan
+  - Föreningen ska redovisa konstnärlig kvalitet, genomförbarhet, målgrupp, geografisk spridning, samarbeten, jämlikhet, hållbarhet och tillgänglighet
+  - Mottagare av verksamhetsstöd kan bara i undantagsfall få stöd ur nämndens andra kulturstöd
+  - Checklista för verksamhetens tillgänglighet ska bifogas ansökan
+  - Kommunens stöd ska synliggöras i marknadsföringen och fortsatt stöd garanteras inte av ett tidigare beslut
   belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_avser: ren_pott
+  kommunens_pott: 150 000 kronor till verksamhetsstöd, varav 20 000 kronor är avsatta för startbidrag
+  sen_ansokan: Ansökan för innevarande verksamhetsår ska lämnas senast 30 april.
+  kalla_url: *kulturnorm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: smedjebacken-startbidrag-kulturforeningar
   namn: Startbidrag kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Nybildade kulturföreningar i Smedjebackens kommun
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Startbidrag kan sökas av nybildade kulturföreningar
-  - Utgör en del av verksamhetsstödet (20 000 kronor av totalt 150 000 kronor)
-  - Ansökan görs på särskild blankett och enligt upprättade anvisningar
+  - Sökanden ska vara en nybildad kulturförening och ansökan ska avse hjälp med att starta föreningens verksamhet
+  - Föreningen ska ha antagna stadgar, styrelse, medlemsregister och organisationsnummer samt vara demokratiskt uppbyggd och öppen
+  - Ansökan ska göras på samma blankett som projekt- och evenemangsstödet och beskriva föreningen, verksamheten och hur pengarna ska användas
+  - Beslut fattas vid kultur- och samhällsbyggnadsnämndens möten under året
   belopp: null
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_avser: ren_pott
+  kommunens_pott: 20 000 kronor av verksamhetsstödets totala ram är avsatta för startbidrag
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-19'
 - id: smedjebacken-studieforbundsbidrag
   namn: Studieförbundsbidrag
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbundsavdelningar med verksamhet i Smedjebackens kommun
   deadlines:
     typ: okand
     datum: []
   krav:
-  - Studieförbundens centrala organisation ska vara godkänd för erhållande av statsbidrag av Folkbildningsrådet
-  - Studieförbundsavdelningen ska ha en självständig ekonomisk förvaltning och ansvarig styrelse
-  - Studieförbundsavdelningen ska kunna presentera de handlingar kommunen kräver
+  - Studieförbundets centrala organisation ska vara godkänd för statsbidrag av Folkbildningsrådet
+  - Avdelningen ska ha självständig ekonomisk förvaltning, ansvarig styrelse och bedriva folkbildnings- eller kulturverksamhet i kommunen
+  - Årsredovisningen ska innehålla verksamhetsberättelse, ekonomisk rapport, revisionsberättelse, målbeskrivning och verksamhetsplan
+  - Antal studiecirklar, deltagartimmar, studietimmar, ämnesfördelning, kulturarrangemang och utvärdering mot uppsatta mål ska redovisas
+  - Flerkommunala studieförbund ska fördela gemensamma kostnader rättvist och ställa räkenskaperna till kommunens förfogande för granskning
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: 300 000 kronor; 70 procent fördelas som grundbidrag efter föregående bidragsandel och 30 procent efter verksamhetsvolym
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist. Den årliga verksamhetsredovisningen ska lämnas senast 30 april.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: smedjebacken-omsorgsnamndens-foreningsbidrag
+  namn: Omsorgsnämndens föreningsbidrag
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar för äldre och personer med funktionsnedsättning som bedriver verksamhet i kommunen
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Föreningen ska ha antagna stadgar, styrelse, medlemsregister och organisationsnummer samt vara demokratiskt uppbyggd och öppen
+  - Föreningen ska bedriva verksamhet i kommunen och redovisa hur många medlemmar som är folkbokförda där
+  - Föreningen ska normalt ha varit verksam i minst tolv månader och verksamheten ska ha positiv betydelse för äldre eller personer med funktionsnedsättning
+  - Ansökan ska innehålla senaste verksamhetsberättelse, ekonomisk redogörelse, resultat- och balansräkning, årsmötesprotokoll, revisionsberättelse och nästa års verksamhetsplan
+  - Kommunen prioriterar förebyggande hälsa, minskad ensamhet, goda livsförhållanden, nytänkande och jämställdhet för nämndens målgrupper
+  - Föreningen ska särredovisa eventuell affärsmässig verksamhet och kunna styrka lämnade uppgifter för de senaste tre åren
+  belopp: Kommunen publicerar ingen generell bidragsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande verksamhetsår ska lämnas senast 30 september. För sent inkommen ansökan behandlas inte.
+  kalla_url: https://www.smedjebacken.se/download/18.673552da195b257cd21d632/1744114439579/Riktlinjer%20f%C3%B6reningsbidrag%20omsorgsn%C3%A4mnden%202025.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: smedjebacken-ifo-foreningsbidrag
+  namn: Föreningsbidrag inom individ- och familjeomsorg
+  status: aktiv
+  kategori: [social]
+  foreningstyp: [social, ungdom, annat]
+  malgrupp: Ideella föreningar med verksamhet inom individ- och familjeomsorgens område
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Föreningen ska ha antagna stadgar, styrelse, medlemsregister och organisationsnummer samt vara demokratiskt uppbyggd och öppen
+  - Föreningen ska bedriva verksamhet i kommunen, ha lokala medlemmar och bidra positivt inom individ- och familjeomsorgens område
+  - Föreningen ska normalt ha varit verksam i minst tolv månader; en nystartad förening kan i stället prövas för startbidrag
+  - Ansökan ska innehålla senaste verksamhetsberättelse, ekonomisk redogörelse, resultat- och balansräkning, årsmötesprotokoll, revisionsberättelse och nästa års verksamhetsplan
+  - Föreningen ska årligen redovisa hur stödet använts, vilka andra stöd den fått och vilka resultat verksamheten uppnått
+  - Ideell och affärsmässig verksamhet ska särredovisas och föreningen ska kunna styrka lämnade uppgifter för de senaste tre åren
+  belopp: Kommunen publicerar ingen generell bidragsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande verksamhetsår ska lämnas senast 30 september. För sent inkommen ansökan behandlas inte.
+  kalla_url: *grundnorm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: smedjebacken-vindkraftsstod-2026
+  namn: Extra föreningsbidrag Vindkraftsstöd 2026
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade ideella föreningar som är verksamma i Smedjebackens kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en registrerad ideell förening med stadgar och styrelse som är demokratiskt uppbyggd och verksam i kommunen
+  - Ansökan ska avse ett projekt, en aktivitet eller en satsning som kompletterar det ordinarie föreningsstödet och bidrar till positiv samhällsutveckling
+  - Stödet kan bland annat avse nya verksamhetsformer, meningsfull fritid, samlingslokaler, landsbygdsutveckling, tillgänglighet eller annan samhällsnytta
+  - Ansökan ska innehålla specificerad ansökan, senaste verksamhetsberättelse, ekonomisk redogörelse med resultat och balans, årsmötesprotokoll, revisionsberättelse samt ansvarig kontaktperson
+  - Föreningen ska lämna en rapport om genomförandet och utfallet efter avslutat projekt
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 1 000 000 kronor avsattes till Vindkraftsstödet för 2026
+  sen_ansokan: Kommunens beslutade regler publicerar ingen sista ansökningsdag.
+  kalla_url: https://www.smedjebacken.se/download/18.21129c6b19ddcda673967003/1779286194267/Regler%20f%C3%B6r%20extra%20f%C3%B6reningsbidrag%20Vindkraftsst%C3%B6d.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: smedjebacken-foreningslan
+  namn: Föreningslån
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som behöver medfinansiering för en lokal, anläggning eller verksamhetsutveckling
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska bedriva verksamhet i kommunen för lokala medlemmar och ha positiv betydelse för kommunens invånare
+  - Föreningen ska ha stadgar, styrelse, medlemsregister, organisationsnummer och ett konto i föreningens namn samt vara demokratisk och öppen
+  - Lånet ska avse utveckling av klubbhus, lokal eller anläggning, tillgänglighetsanpassning eller ett verksamhetsprojekt som kan öka intäkterna
+  - Föreningen ska visa en realistisk återbetalningsplan och använda lånet till det ändamål som anges i ansökan
+  - Vid extern medfinansiering kan lånet högst täcka den del av projektkostnaden som den externa finansiären inte bekostar
+  belopp: Lån för den finansiering som återstår efter andra stöd; normalt högst tio års återbetalningstid och 2,5 procents ränta
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens riktlinje publicerar ingen sista ansökningsdag.
+  kalla_url: https://www.smedjebacken.se/download/18.2207d14018d874ce2c66609/1708080590534/Riktlinjer%20f%C3%B6reningsl%C3%A5n%20KSN%202023.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
+- id: smedjebacken-nolltaxa-idrottsanlaggningar
+  namn: Nolltaxa i kommunala idrottsanläggningar
+  status: aktiv
+  kategori: [idrott, pensionar, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Lokala ungdoms- och pensionärsföreningar som bokar kommunens idrottsanläggningar och lokaler
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Bokningen ska göras av en ungdomsförening eller pensionärsförening enligt kommunens taxekategori
+  - Nolltaxan gäller de lokaler och anläggningar som räknas upp i 2026 års taxa, bland annat idrottshallar, isbana och fotbollsplaner
+  - Den som ansvarar för bokningen ska ha fyllt 18 år och föreningen ska följa kommunens boknings- och ordningsregler
+  - Avbokning ska göras i tid; bokad tid som inte används kan debiteras även när föreningen normalt har nolltaxa
+  belopp: Kostnadsfri timhyra enligt ungdoms- och pensionärsföreningstaxan för de anläggningar och lokaler som anges i 2026 års taxa
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist; stödet ges genom bokningen.
+  kalla_url: https://www.smedjebacken.se/download/18.2535bfc719b353d604d1656/1766148012301/Taxor%20och%20avgifter%20fritidsavdelningen.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-19'
 forutsattningar:
-- id: smedjebacken-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+- id: smedjebacken-allmanna-villkor
+  vad: Allmänna villkor och årshandlingar
+  beskrivning: Föreningen ska vara ideell, demokratisk och öppen, ha stadgar, styrelse, medlemsregister och organisationsnummer samt bedriva lokal verksamhet av positiv betydelse. Vid den årliga bidragsansökan lämnas verksamhetsberättelse, ekonomisk redogörelse, resultat- och balansräkning, årsmötesprotokoll, revisionsberättelse och verksamhetsplan.
+  system: Kommunens e-tjänster och blanketter
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Inför ansökan om föreningsbidrag
   giltighet: null
   ordning: 1
-  kalla_url: https://www.smedjebacken.se/uppleva-och-gora/foreningar-foreningsliv/stod-och-bidrag.html
-  giltighet_status: okand
+  kalla_url: *grundnorm
+  giltighet_status: ingen_regel
+- id: smedjebacken-kontaktuppgifter
+  vad: Aktuella kontaktuppgifter
+  beskrivning: Föreningen kan anmäla nya eller ändrade kontaktuppgifter i kommunens e-tjänst för föreningsregistret. Kommunen publicerar ingen giltighetstid eller gemensam förnyelsedag för registreringen.
+  system: Kommunens föreningsregister
+  ledtid: null
+  ledtid_text: När föreningens kontaktuppgifter ändras
+  giltighet: null
+  ordning: 2
+  kalla_url: https://etjanster.smedjebacken.se/oversikt/overview/177
+  giltighet_status: ingen_regel
 kommunsiffra: null
