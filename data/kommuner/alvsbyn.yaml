@@ -2,18 +2,25 @@ kommun: Älvsbyn
 kommun_slug: alvsbyn
 lan: Norrbottens län
 befolkning: 7772
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid samt Samhällsbyggnad
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-verifierad: '2026-08-01'
+  namn: Norrbottens e-nämnds e-tjänster och blanketter
+  url: https://alvsbyn.enamnd.se/
+kalla_url: &meny https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 02-28
+  kalla_url: &norm https://www.alvsbyn.se/wp-content/uploads/se/2014/03/bidragsregler-till-foreningar-och-organisationer-enligt-ks-beslut-5.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: alvsbyn-arrangorsstod
   namn: Arrangörsstöd
   kategori:
   - kultur
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: lopande
@@ -27,27 +34,29 @@ bidrag:
   - Ansökan ska vara kommunen tillhanda senast två månader före arrangemanget och beskriva hur arrangemanget bidrar till att
     öka det lokala utbudet
   - Blankett för redovisning av arrangörsstöd ska lämnas in efter genomfört arrangemang
-  belopp: null
+  belopp: Individuellt prövat; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande) - ansökan ska lämnas senast två månader före arrangemanget
   kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Kommunen publicerar ingen generell beloppsnivå.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-jubileum
   namn: Stöd vid jubileum
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: okand
@@ -56,54 +65,62 @@ bidrag:
   - Föreningen får inte vara en politisk organisation, stödförening (supporterklubb) eller ekonomisk förening
   - Föreningen ska ha antagit stadgar, valt styrelse och varit verksam minst 3 månader före bidragsåret
   - Föreningen ska bedriva sin verksamhet och ha huvuddelen av sina medlemmar i kommunen
-  - Bidrag lämnas endast vid 30-, 40-, 50-, 60-, 70-, 80-, 90- och 100-årsjubileum
-  belopp: 100 kronor per fyllt år vid jubileum (endast 30-, 40-, 50-, 60-, 70-, 80-, 90- och 100-årsjubileum)
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
+  - Bidrag lämnas endast vid 30-, 40-, 50-, 60-, 70-, 75-, 80-, 90- och 100-årsjubileum
+  belopp: 100 kronor per fyllt år vid 30-, 40-, 50-, 60-, 70-, 75-, 80-, 90- och 100-årsjubileum
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: https://alvsbyn.enamnd.se/oversikt/overview/811
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Den levande e-tjänsten omfattar även 75-årsjubileum.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-kulturforening
   namn: Stöd till kulturföreningar
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+    typ: fasta
+    datum: [02-28]
+  krav:
+  - Sökanden ska vara en ideell kulturförening eller kulturorganisation med verksamhet i kommunen eller verksamhet av nytta för Älvsbyns invånare
+  - Verksamheten ska bidra till ett varierat kulturutbud med hög kvalitet och beakta Norrbottens kulturplan
+  - Kompletta årsmöteshandlingar ska bifogas, inklusive verksamhets- och revisionsberättelser, resultat- och balansräkning samt justerat årsmötesprotokoll
+  - Verksamhetsplanering för nästkommande år och sökt belopp med kostnads- och intäktsbudget ska lämnas
+  belopp: Föreningen anger sökt belopp; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara kommunen tillhanda senast 28 februari
+  kalla_url: https://alvsbyn.enamnd.se/oversikt/overview/810
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-startbidrag
   namn: Startbidrag
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: okand
@@ -115,24 +132,26 @@ bidrag:
   - 'Kompletta årsmöteshandlingar ska bifogas: verksamhets- och revisionsberättelse, resultatrapport, justerat årsmötesprotokoll
     samt verksamhetsplanering för nästkommande år'
   belopp: Engångsbelopp på 5 000 kronor
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: https://alvsbyn.enamnd.se/oversikt/overview/809
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: null
   min_medlemmar: 12
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-puma
   namn: PUMA – Projekt av unga med ambitioner
+  status: avskaffat
   kategori:
   - kultur
   - ovrig
@@ -162,39 +181,45 @@ bidrag:
   foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
-  status: aktiv
   senast_verifierad: '2026-08-01'
 - id: alvsbyn-byautveckling
   namn: Byautvecklingspeng
   kategori:
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Registrerade byaföreningar i Älvsbyns kommun
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Sökanden ska vara en registrerad byaförening i Älvsbyns kommun
+  - Pengarna ska användas till att öka trivseln och utvecklingen i byn
+  - Stöd kan exempelvis avse trivselkvällar, utvecklingsprojekt eller utsmyckning
+  - Ansökan ska beskriva den planerade insatsen och den by som får nytta av den
+  belopp: Högst 10 000 kronor per år och by
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: https://www.alvsbyn.se/kommun-och-demokrati/om-alvsbyn/byar/
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-drift-anlaggning
   namn: Driftbidrag till föreningsägda anläggningar
   kategori:
   - idrott
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -211,87 +236,176 @@ bidrag:
     + 4 000 kr (plan 2), omklädningsbyggnad med dusch 15 000 kr, övrig byggnad 5 000 kr, isbana 3 000 kr, skoterled (huvudled)
     70 kr/km, motorstadion 60 000 kr, allmän badplats 3 000 kr. Rena hyresbidrag max 40 000 kr per år, får ej överstiga redovisad
     kostnad.'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-investering
-  namn: Investeringsstöd
+  namn: Investeringsstöd till byagård eller samlingslokal
   kategori:
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som driver en byagård eller samlingslokal
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  krav:
+  - Sökanden ska vara en förening som driver en byagård eller samlingslokal
+  - Investeringen kan exempelvis avse värmepump, fönsterbyte, målning eller annan åtgärd i lokalen
+  - Stödet kan användas som medfinansiering tillsammans med projektmedel eller andra finansiärer
+  - Ansökan ska beskriva investeringen och avse det år då föreningen haft utgiften
+  - Ekonomisk sammanställning eller kontoutdrag samt fakturakopior och bankutdrag som visar att kostnaderna är betalda ska bifogas
+  belopp: Kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året; beslut fattas i slutet av året och utbetalning sker senast 31 december
+  kalla_url: https://alvsbyn.enamnd.se/oversikt/overview/3292
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
 - id: alvsbyn-bygdegard
-  namn: Bidrag till bygdegård
+  namn: Driftbidrag till byagård eller samlingslokal
   kategori:
+  - kultur
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som driver en byagård eller samlingslokal
   deadlines:
     typ: fasta
     datum:
-    - 03-15
+    - 06-30
   krav:
   - Föreningen får inte vara en politisk organisation, stödförening (supporterklubb) eller ekonomisk förening
   - Driftbidrag lämnas till bygdegårdar/samlingslokaler enligt schablon baserad på lokalens storlek
+  - Ansökan ska kompletteras med justerade årsmöteshandlingar, styrelsens sammansättning och verksamhetsberättelse
+  - Verksamhetsplanering för nästkommande år, ekonomisk sammanställning och revisionsberättelse ska bifogas
   belopp: 'Schablonbelopp: stor bygdegård/samlingslokal 12 500 kr, mellanstor bygdegård/samlingslokal 9 500 kr, liten bygdegård/samlingslokal
     7 000 kr, bagarstuga/motsvarande 5 000 kr'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 juni för innevarande år
+  kalla_url: https://alvsbyn.enamnd.se/oversikt/overview/807
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Den levande e-tjänsten anger 30 juni och ersätter styrdokumentets äldre uppgift 15 mars.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: null
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-19'
+- id: alvsbyn-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som anordnar LOK-stödsberättigad verksamhet
+  deadlines:
+    typ: fasta
+    datum: [02-25, 08-25]
+  krav:
+  - Föreningen ska uppfylla Riksidrottsförbundets regler för statligt LOK-stöd
+  - Ansökan ska följa Riksidrottsförbundets ansökningsdatum för respektive redovisningsperiod
+  - En kopia av ansökan till Riksidrottsförbundet där antal deltagartillfällen framgår ska bifogas kommunen
+  - Föreningen ska uppfylla kommunens allmänna krav på demokratisk, öppen, drog- och dopningsfri verksamhet
+  belopp: 4 kronor per deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Samma sista ansökningsdagar som för Riksidrottsförbundets LOK-stöd
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvsbyn-verksamhetsbidrag-social-regional
+  namn: Verksamhetsbidrag till sociala och regionala föreningar
+  status: aktiv
+  kategori: [social, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar och organisationer med social inriktning eller regional verksamhet av nytta för Älvsbyns invånare
+  deadlines:
+    typ: fasta
+    datum: [02-28]
+  krav:
+  - Föreningen ska arbeta med social inriktning eller regional verksamhet som är av nytta för Älvsbyns invånare
+  - Verksamheten ska inte vara en uttalad fritids- eller kulturföreningsverksamhet
+  - Föreningen ska vara ideell, demokratiskt uppbyggd och tillgänglig för alla
+  - Föreningen ska ha varit verksam minst tre månader före bidragsåret och ha huvuddelen av sina medlemmar i kommunen
+  - Blanketten Föreningsuppgifter ska lämnas senast 28 februari
+  belopp: Kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 28 februari
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: alvsbyn-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund med verksamhet i Älvsbyns kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara ett studieförbund med verksamhet i Älvsbyns kommun
+  - Föregående verksamhetsårs lokala studietimmar ska vara redovisade till SCB
+  - Kommunbidraget beräknas efter studieförbundets andel av det sammanlagda antalet redovisade studietimmar
+  - Uppgifterna ska kunna hänföras till verksamhet i Älvsbyns kommun
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas mellan studieförbunden efter respektive andel av samtliga redovisade studietimmar föregående verksamhetsår; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen separat sista ansökningsdag; utbetalning sker en gång per år utifrån SCB:s sammanställning
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: alvsbyn-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  vad: Godkännande och årlig föreningsuppgift
+  beskrivning: Föreningen ska vara ideell, ha antagna stadgar och vald styrelse, vara verksam minst tre månader före bidragsåret, ha huvuddelen av medlemmarna och verksamheten i kommunen samt vara demokratisk, öppen och drog- och dopningsfri. Firmatecknaren ska lämna blanketten Föreningsuppgifter för kommande verksamhetsår senast 28 februari.
+  system: Norrbottens e-nämnds e-tjänst eller kommunens blankett
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast 28 februari inför kommande verksamhetsår
+  giltighet: Föreningsuppgifterna ska förnyas årligen senast 28 februari
   ordning: 1
-  kalla_url: https://www.alvsbyn.se/uppleva-och-gora/foreningsliv-och-bidrag/bidrag-till-foreningar/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
