@@ -2,113 +2,589 @@ kommun: Uppvidinge
 kommun_slug: uppvidinge
 lan: Kronobergs län
 befolkning: 8871
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidsavdelningen samt Samhällsserviceförvaltningen
 ansokningssystem:
-  namn: Uppvidinge kommuns Mina sidor
-  url: https://minasidor.uppvidinge.se/
-kalla_url: https://www.uppvidinge.se/uppleva-och-gora/foreningar-och-foreningsliv.html
-verifierad: '2026-07-31'
+  namn: Rbok och Uppvidinge kommuns e-tjänster
+  url: https://uppvidinge.rbok.se/
+kalla_url: &huvud https://www.uppvidinge.se/uppleva-och-gora/foreningar-och-foreningsliv.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: '03-31'
+  kalla_url: &norm https://www.uppvidinge.se/download/18.c0eac2618f99a9c82734a08/1717481604164/Riktlinjer%20och%20regler%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: uppvidinge-aktivitetsstod
-  namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Ideella föreningar med bidragsberättigade aktiviteter
+  namn: Kommunalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Stödberättigade föreningar med ledarledda aktiviteter för barn och unga 5–25 år, personer med funktionsvariation eller personer 65 år och äldre
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+    datum: ['02-25', '08-25']
   krav:
-  - Aktiviteten ska ha minst 3 och max 20 deltagare per ledare och tillfälle, och vara minst 45 minuter lång
-  - Deltagare 5–9 år ger stöd för upp till 3 tillfällen per idrott och kalendervecka; deltagare 10–25 år, deltagare med funktionsnedsättning
-    samt personer 65 år eller äldre ger stöd för upp till 5 tillfällen per idrott och kalendervecka
-  - Aktiviteten ska vara beslutad och planerad av styrelse, sektion, medlemsmöte eller motsvarande och genomföras i föreningens
-    regi
-  - Endast föreningens medlemmar får räknas som deltagare, med undantag för prova-på-tillfällen
-  - Stöd utbetalas inte till entrébelagda tävlingar eller kommersiella arrangemang som matcher, danser, bingo och basarer
-  - Stöd utbetalas inte till studiecirkelsammankomster
-  belopp: null
-  sen_ansokan: Ansökan görs halvårsvis och ska vara inlämnad senast 25 februari respektive 25 augusti. Stödet betalas vanligtvis
-    ut före nästa månads slut.
-  kalla_url: https://minasidor.uppvidinge.se/oversikt/getflowform/732/530
-  belopp_status: okand
+  - Aktiviteten ska vara beslutad och planerad av styrelse, sektion, medlemsmöte eller motsvarande och genomföras i föreningens regi
+  - Aktiviteten ska pågå minst 45 minuter och ha minst tre deltagare samt högst 20 deltagare per ledare
+  - Deltagare 5–9 år får räknas vid högst tre tillfällen per idrott och vecka; deltagare 10–25 år, personer med funktionsvariation och personer 65 år eller äldre får räknas vid högst fem
+  - Endast medlemmar får räknas, med undantag för prova-på-tillfällen och liknande
+  - Entrébelagda tävlingar, kommersiella arrangemang och studiecirkelsammankomster ger inte stöd
+  - Närvaron ska redovisas genom IdrottOnline eller kommunens anvisade e-tjänst för varje halvår
+  belopp: Stödnivån per godkänd aktivitet beslutas årligen; någon kronnivå framgår inte av den publicerade riktlinjen eller beslutstexten för 2026
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för respektive halvår ska lämnas senast 25 februari och 25 augusti
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-- id: uppvidinge-arrangemangsstod
-  namn: Arrangemangsstöd
-  kategori:
-  - kultur
-  - idrott
-  - ovrig
-  malgrupp: Föreningar som genomför evenemang eller arrangemang
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-ledarutbildningsstod
+  namn: Ledarutbildningsstöd
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som utbildar ledare för sin barn- och ungdomsverksamhet 5–25 år
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Arrangemanget ska vara öppet för allmänheten
-  - Stöd kan sökas av en förening registrerad i Uppvidinge kommun
-  - En förening kan få maximalt 10 000 kronor i stöd under samma kalenderår, med maximalt 25 % av arrangemangets totala kostnad
-  - Förening som beviljas kulturföreningsstöd kan inte samtidigt beviljas arrangemangsstöd
-  - Stöd ges inte till privata arrangemang
-  - Kostnader för förtäring och servering är inte stödgrundande
-  - Ansökan ska lämnas senast 45 dagar före arrangemanget och innehålla program samt kostnadskalkyl
-  - Förening som beviljas stöd ska anmäla arrangemanget till kommunens evenemangskalender och ange i marknadsföringen att
-    stöd erhålls från Uppvidinge kommun
-  belopp: "Maximalt 10 000 kronor per förening och kalenderår, högst 25 % av arrangemangets totalkostnad"
+  - Föreningen ska uppfylla kommunens krav för aktivitetsstöd
+  - Utbildningen ska avse ledare som arbetar med föreningens barn- och ungdomsverksamhet 5–25 år
+  - Kursen ska arrangeras av en riks- eller distriktsorganisation och följa en godkänd kursplan
+  - Stöd ges inte för specialkurs som senare ger deltagaren personlig ekonomisk vinning
+  - Kursavgift och logi kan räknas som kurskostnad
+  - Intyg med deltagare, kursinnehåll, kurskostnader och kvitto för logi ska bifogas
+  belopp: Högsta stödnivå beslutas årligen; någon kronnivå framgår inte av den publicerade riktlinjen eller beslutstexten för 2026
   belopp_avser: per_forening
   kommunens_pott: null
-  sen_ansokan: Ansökan görs senast 45 dagar före arrangemanget. Kultur- och fritidsavdelningen beslutar om tilldelning inom
-    30 dagar. Redovisning ska ske senast sex veckor efter genomfört arrangemang och stöd betalas ut senast 4 veckor efter
-    godkänd redovisning.
-  kalla_url: https://minasidor.uppvidinge.se/oversikt/getflowform/732/530
-  belopp_status: kontrollast
+  sen_ansokan: Ansökan görs löpande under året
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-- id: uppvidinge-driftsstod-samlingslokal
-  namn: Driftsstöd till samlingslokal
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som driver samlingslokaler
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-ungdomsstyrelse
+  namn: Ungdomsstöd till styrelse eller sektion
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med dokumenterad ungdomsstyrelse eller ungdomssektion
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
+    datum: ['03-31']
   krav:
-  - Stödet riktar sig i första hand till föreningar med egen anläggning eller lokal, alternativt ett långsiktigt nyttjanderättsavtal
-    på anläggningen eller lokalen
-  - Lokalen ska stå till föreningslivets och allmänhetens förfogande
-  - Föreningen ska kunna uppvisa att man haft aktiviteter och/eller uthyrning av lokalen, vilket ska framgå av verksamhetsberättelsen
-  - Möjligheten för personer med funktionsvariationer att nyttja anläggningen beaktas vid fördelning av stöd
-  - Driftstöd kan beviljas med maximalt 70 % av godkända kostnader
-  - Driftkostnader som täcks av intäkter från affärsmässig verksamhet, till exempel lägenhets- eller kontorsuthyrning och
-    restaurangverksamhet, får inte räknas som driftkostnad och ska redovisas separat
-  - Stöd ges inte till lokal som omfattas av stöd till fritidsföreningar
-  belopp: Maximalt 70 % av godkända kostnader
-  sen_ansokan: Ansökan görs senast 31 mars för innevarande år och baseras på föregående års redovisning samt verksamhetsplan
-    för innevarande år. Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och specifikation över lokalens
-    nyttjande ska bifogas.
-  kalla_url: https://minasidor.uppvidinge.se/oversikt/getflowform/732/530
+  - Styrelseledamöterna ska vara 7–25 år och verksamheten ska vara berättigad till lokalt aktivitetsstöd
+  - Ungdomsstyrelsen eller sektionen ska ha minst tre medlemmar
+  - Minst fyra protokollförda möten ska genomföras varje år
+  - Föreningen kan få högst ett stöd per år för ungdomsstyrelse eller sektion
+  - Stödet ska användas till att utveckla och stimulera föreningens barn- och ungdomsverksamhet
+  - Ungdomsstyrelsens egen verksamhetsberättelse och verksamhetsplan ska ingå i årshandlingarna
+  belopp: Högsta stödnivå beslutas årligen; någon kronnivå framgår inte av den publicerade riktlinjen eller beslutstexten för 2026
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars eller senast en månad efter föreningens årsmöte
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-driftsstod-lokal-anlaggning
+  namn: Driftsstöd till fritidsförenings lokal eller anläggning
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  malgrupp: Stödberättigade fritidsföreningar som driver en lokal eller anläggning för främst barn- och ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska vara stödberättigad och själv bära en väsentlig del av drift- och investeringskostnaderna
+  - Den skäliga delen av kostnaderna bedöms utifrån barn- och ungdomsverksamheten och antalet medlemmar under 25 år
+  - Ansökan får omfatta hyra, värme, el, vatten, renhållning, arrende och försäkring
+  - Hyresintäkter och andra intäkter från lokalen eller anläggningen ska redovisas
+  - Korpförening måste uppfylla de allmänna villkoren och bedriva verksamhet som ger kommunalt aktivitetsstöd
+  - Samtliga föreningshandlingar som kommunen kräver ska lämnas med ansökan
+  belopp: Skälig del av godkända driftskostnader enligt årligt beslutad stödnivå; någon fullständig 2026-tabell publiceras inte i protokollet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars eller senast en månad efter föreningens årsmöte
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-lokalstod-hyrd-lokal
+  namn: Lokalstöd till fritidsförening för hyrd lokal eller anläggning
+  status: aktiv
+  kategori: [idrott, kultur, pensionar, funktionsratt, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Stödberättigade föreningar som hyr en icke-kommunal lokal eller anläggning i Uppvidinge kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad i Uppvidinge kommun
+  - Lokalen eller anläggningen ska ligga i Uppvidinge kommun och både lokalen och kostnaden ska godkännas av kultur- och föreningsutskottet
+  - Stöd ges inte för kommunala lokaler eftersom deras hyra redan är subventionerad
+  - Barn- och ungdomsverksamhet samt rörelse och fysisk hälsa för personer med funktionsvariation eller personer 65 år och äldre prioriteras
+  - Kvitton, hyresavtal eller motsvarande underlag som visar de faktiska kostnaderna ska bifogas
+  belopp: Högst 50 % av hyran eller den del som utskottet bedömer skälig, maximalt 10 000 kr per förening och verksamhetsår
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan görs löpande under året
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-investeringsstod-fritidsforening
+  namn: Investeringsstöd till fritidsföreningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, friluft, ungdom, annat]
+  malgrupp: Fritidsföreningar som utvecklar en egen eller långsiktigt disponerad lokal eller anläggning
+  deadlines:
+    typ: fasta
+    datum: ['09-15']
+  krav:
+  - Föreningen ska äga lokalen eller anläggningen eller ha ett nyttjanderättsavtal som täcker investeringens minst femåriga användningstid
+  - Stödet kan avse reparation, ny-, till- eller ombyggnad, maskiner och inventarier för drift samt i vissa fall verksamhetsspecifik specialutrustning
+  - Förbrukningsartiklar är inte stödberättigade och stödet kan inte sökas retroaktivt
+  - Föreningen ska söka stöd även från andra bidragsgivare och redovisa finansieringsplan, mål och syfte
+  - Barn och unga, inkludering, fysisk tillgänglighet, miljö och energi samt arbetsmiljö prioriteras
+  - Projektet ska normalt slutföras inom ett år; högst ett års förlängning kan sökas och kostnader ska styrkas före utbetalning
+  belopp: Högst 70 % av investeringens totalkostnad; eget ideellt arbete får räknas som egen finansiering
+  belopp_avser: per_forening
+  kommunens_pott: 840 000 kr i gemensam budget för investeringsstöd till fritidsföreningar och samlingslokaler 2026
+  sen_ansokan: Ansökan för kommande år eller om ett års förlängning ska lämnas senast 15 september
+  kalla_url: &kfu2026 https://www.uppvidinge.se/download/18.a6fd35219c47b6714d2928/1770893370589/Protokoll%20KFU%202026-01-22.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: 2026 års ansökningsperiod förlängdes inför beslutet; den ordinarie återkommande fristen är 15 september
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-spontanidrottsanlaggning
+  namn: Driftsstöd till spontanidrottsanläggningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som sköter en spontanidrottsanläggning i Uppvidinge kommun
+  deadlines:
+    typ: fasta
+    datum: ['09-15']
+  krav:
+  - Anläggningen ska användas för spontan och oorganiserad fritidsverksamhet
+  - Föreningen ska själv sköta om anläggningen
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsstöd
+  - Ansökan ska avse nästkommande år
+  belopp: Driftsstöd enligt kommunens årliga budget; någon generell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande år ska lämnas senast 15 september
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-kartstod
+  namn: Kartstöd
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft]
+  malgrupp: Orienteringsföreningar med säte och verksamhet i Uppvidinge kommun
+  deadlines:
+    typ: fasta
+    datum: ['09-15']
+  krav:
+  - Sökanden ska vara en orienteringsförening med både säte och verksamhet i Uppvidinge kommun
+  - Stödet ska avse framställning eller utveckling av orienteringskartor
+  - Föreningar med orienteringsverksamhet för barn och unga prioriteras
+  - Ansökan ska avse kommande år
+  belopp: Högst 85 % av kostnaden och maximalt 50 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för kommande år ska lämnas senast 15 september
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-arrangemangsstod
+  namn: Arrangemangsstöd
+  status: aktiv
+  kategori: [kultur, idrott, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Registrerade Uppvidingeföreningar som genomför offentliga arrangemang av allmänt eller kulturellt värde
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Arrangemanget ska vara öppet för allmänheten och bidra till ett allsidigt utbud för olika åldrar och kommundelar
+  - Sökanden ska vara en förening registrerad i Uppvidinge kommun
+  - Förening som får kulturföreningsstöd kan inte få arrangemangsstöd för samma kalenderår
+  - Privata arrangemang samt kostnader för mat och servering är inte stödberättigade
+  - Fri kommunal lokal räknas in i det beviljade stödets värde
+  - Arrangemanget ska anmälas till kommunens kalender och kommunens stöd ska anges med logotyp i marknadsföringen
+  - Program och kostnadskalkyl ska lämnas med ansökan och redovisning ska ske senast sex veckor efter arrangemanget
+  belopp: Högst 25 % av arrangemangets totalkostnad och maximalt 10 000 kr per förening och kalenderår
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 45 dagar före arrangemanget
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-kulturforeningsstod
+  namn: Kulturföreningsstöd
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar med kontinuerlig och utåtriktad kulturverksamhet i Uppvidinge kommun
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska bedriva kontinuerlig och utåtriktad kulturell verksamhet som är tillgänglig för allmänheten
+  - Verksamhet för barn och unga prioriteras
+  - Vid urval prioriteras varierade program i olika kommundelar och arrangemang som når eftersatta grupper
+  - Stödet kan avse kulturarrangemang och eget skapande som kommer det offentliga kulturlivet till del
+  - Arrangemang ska anmälas till kommunens kalender och kommunens stöd ska anges med logotyp i marknadsföringen
+  - Ansökan ska bygga på föregående års redovisning och verksamhetsplanen för innevarande år
+  belopp: Individuellt verksamhetsstöd enligt årlig budget; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för innevarande år ska lämnas senast 31 mars
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-driftsstod-samlingslokal
+  namn: Driftsstöd till samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som äger eller långsiktigt disponerar en allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska äga lokalen eller ha ett långsiktigt nyttjanderättsavtal
+  - Lokalen ska stå till föreningslivets och allmänhetens förfogande och ha dokumenterad aktivitet eller uthyrning
+  - Tillgängligheten för personer med funktionsvariation ska beaktas
+  - Stödberättigade kostnader är el, värme, vatten, renhållning och försäkring; hyresintäkter och övriga intäkter ska redovisas
+  - Kostnader som kan täckas av kommersiella intäkter ska särredovisas och får inte räknas in
+  - Stöd ges inte till lokal som samtidigt omfattas av stödet till fritidsföreningar
+  - Verksamhetsberättelse, ekonomi, revision och specifikation över nyttjandet ska bifogas
+  belopp: Högst 70 % av godkända driftskostnader; för 2026 anpassades utfallet till 75 % av denna maximala nivå efter nyttjandefrekvens
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för innevarande år ska lämnas senast 31 mars och avse föregående års kostnader och verksamhet
+  kalla_url: &kfu202605 https://www.uppvidinge.se/download/18.650784ca19e630863d2631b/1780061539523/Protokoll%20KFU%202026-05-28.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-investeringsstod-samlingslokal
+  namn: Investeringsstöd till samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Ideella föreningar som äger eller långsiktigt disponerar en samlingslokal
+  deadlines:
+    typ: fasta
+    datum: ['09-15']
+  krav:
+  - Föreningen ska äga samlingslokalen eller ha ett långsiktigt nyttjanderättsavtal
+  - Stödet kan avse uppförande, om- och tillbyggnad, upprustning, inventarier eller utrustning samt förbättrad tillgänglighet
+  - Föreningen ska söka andra stödmöjligheter och redovisa investeringens mål, kostnader och hela finansieringen
+  - Fysisk tillgänglighet samt miljö- och energiförbättringar prioriteras
+  - Stödet gäller ett år och kan förlängas högst ett år
+  - Kostnader ska styrkas före utbetalning och förskott ska slutredovisas efter projektet
+  belopp: Högst 70 % av investeringens totalkostnad; eget ideellt arbete får räknas som egen finansiering
+  belopp_avser: per_forening
+  kommunens_pott: 840 000 kr i gemensam budget för investeringsstöd till fritidsföreningar och samlingslokaler 2026
+  sen_ansokan: Ansökan för kommande år eller om ett års förlängning ska lämnas senast 15 september
+  kalla_url: *kfu2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: 2026 års ansökningsperiod förlängdes inför beslutet; den ordinarie återkommande fristen är 15 september
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-hembygds-kulturbarande
+  namn: Stöd till hembygdsföreningar och kulturbärande verksamhet
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Hembygdsföreningar och andra föreningar som aktivt bevarar och för vidare lokalt kulturarv
+  deadlines:
+    typ: fasta
+    datum: ['09-15']
+  krav:
+  - Föreningen ska aktivt verka för att bevara kultur och föra kulturarvet vidare till nutid och framtid
+  - Stödet kan avse drift, verksamhet och vissa arrangemangskostnader
+  - Ansökan ska avse innevarande år
+  - Föregående års redovisning och innevarande års verksamhetsplan ska ligga till grund för ansökan
+  belopp: Individuellt stöd enligt årlig budget; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för innevarande år ska lämnas senast 15 september
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-studieforbund
+  namn: Grundstöd till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med dokumenterad folkbildnings- och kulturverksamhet i Uppvidinge kommun
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Studieförbundet ska uppfylla Folkbildningsrådets grundläggande, organisatoriska och verksamhetsmässiga villkor
+  - Det kommunala stödet ska användas för verksamhet i Uppvidinge kommun och för kommunens invånare
+  - Organisationen ska vara demokratiskt styrd, följa diskrimineringsgrunderna och förankra mänskliga rättigheter och jämställdhet
+  - Verksamheten ska vara öppen och tillgänglig för alla
+  - Barn- och ungdomsverksamhet ska följa barnkonventionen och berörda medarbetare ska kunna visa registerutdrag
+  - Studietimmar, unika deltagare och hur verksamheten uppfyller kommunens prioriterade kriterier ska redovisas för föregående år
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens avsatta grundstödsanslag fördelas med 40 % efter studietimmar, 40 % efter unika deltagare och 20 % efter uppfyllelse av Uppvidinge kommuns kriterier; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 31 mars eller senast en månad efter studieförbundets årsmöte
+  kalla_url: &kfu202511 https://www.uppvidinge.se/download/18.2881e95819adda518561a2e/1764747831609/Protokoll%20KFU%202025-11-27.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den nya fördelningsmodellen antogs 27 november 2025 och ersätter riktlinjens äldre treårsmodell
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-funktionsvariation
+  namn: Stöd till föreningar för personer med funktionsvariationer
+  status: aktiv
+  kategori: [social, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Föreningar för personer med funktionsvariation som har medlemmar folkbokförda i Uppvidinge kommun
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Föreningen ska ha medlemmar som är folkbokförda i Uppvidinge kommun
+  - Föreningen ska visa att den har bedrivit verksamhet i kommunen för sina medlemmar
+  - Grundstödet kräver en fungerande lokalavdelning i Uppvidinge kommun
+  - Förening utan lokalavdelning kan endast få den medlemsbaserade delen
+  - Medlemsantalet i Uppvidinge kommun ska kunna styrkas
+  belopp: 5 000 kr i grundstöd till fungerande lokalavdelning plus 50 kr per medlem folkbokförd i kommunen; högst 10 000 kr per förening
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: false
+- id: uppvidinge-pensionarsforening
+  namn: Stöd till pensionärsföreningar
+  status: aktiv
+  kategori: [social, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med stödberättigade medlemmar folkbokförda i Uppvidinge kommun
+  deadlines:
+    typ: fasta
+    datum: ['03-31']
+  krav:
+  - Stödet ska stärka verksamhet inom socialnämndens område för kommuninvånarna
+  - Endast medlemmar folkbokförda i Uppvidinge kommun är stödberättigade
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsstöd
+  - Medlemsantalet ska redovisas i kommunens e-tjänst
+  belopp: 0,12 % av prisbasbeloppet per stödberättigad medlem och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 mars
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-startstod
+  namn: Startstöd till förening eller ny sektion
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Nystartade föreningar eller befintliga föreningar som startar en ny sektion
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen eller den nya sektionen ska uppfylla kommunens villkor för stödberättigad förening
+  - Föreningen ska ha minst tio medlemmar
+  - Verksamheten ska ha bedrivits i minst tre månader
+  - En verksamhetsplan ska lämnas med ansökan
+  - Föreningen ska vara registrerad i kommunens föreningsregister och ha lämnat de grundläggande föreningshandlingarna
+  belopp: Startstöd enligt årlig budget; någon generell kronnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan görs löpande under året
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: uppvidinge-sarskilt-driftbidrag-enskild-vag
+  namn: Särskilt driftbidrag för enskild väg
+  status: aktiv
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Samfällighetsföreningar och vägföreningar vars väg får årligt driftbidrag från Trafikverket
+  deadlines:
+    typ: fasta
+    datum: ['05-02']
+  krav:
+  - Sökanden ska vara en samfällighetsförening eller vägförening med stadgar eller utsedd styrelse, kassör och revisor
+  - Vägen ska få årligt driftbidrag från Trafikverket och åtgärden ska även ha beviljats särskilt driftbidrag av Trafikverket
+  - Arbetet får inte vara påbörjat eller genomfört innan kommunens beslut
+  - Stödet kan avse bland annat större trummor, bärighetsförstärkning, ombyggnad, bro, räcke, trafiksäkerhet eller beläggning på väg i hög trafikklass
+  - Ansökan ska innehålla Trafikverkets beslut, utförarens kostnadsberäkning, karta, styrelseuppgifter, bokslut, revision och årsmötesprotokoll
+  - Slutredovisning med fakturor och Trafikverkets slutbesiktning ska lämnas inom tre månader efter godkänd slutbesiktning
+  belopp: Högst 15 % av Trafikverkets godkända totalkostnad; Trafikverket kan stå för upp till 70 % och föreningen svarar för återstående del
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 2 maj det år åtgärden ska utföras
+  kalla_url: &vag https://www.uppvidinge.se/bo-bygga-och-miljo/trafik-resor-och-gator/gator/enskilda-vagar.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: false
+  sate_i_kommunen: true
+- id: uppvidinge-foreningstaxa-sporthall
+  namn: Föreningstaxa i sporthallar och gymnastiksalar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som bokar kommunens sporthallar och gymnastiksalar i Alstermo, Lenhovda, Åseda, Nottebäck eller Älghult
+  deadlines:
+    typ: fasta
+    datum: ['05-15']
+  krav:
+  - Bokningen ska göras via Rbok och önskemål om säsongstider ska lämnas senast 15 maj
+  - Föreningen ska ange om bokningen avser barn- och ungdomsverksamhet eller vuxenverksamhet
+  - En ansvarig ledare som är minst 18 år ska vara närvarande under hela hyrestiden
+  - Föreningen ska följa lokalens brand-, ordnings-, drog- och städregler och ersätta skador som uppkommer genom oaktsamhet
+  - Förening från en annan kommun betalar den högre externa taxan
+  belopp: Föreningstaxa 2026 är 125 kr/timme för hel hall med barn och unga och 150 kr för vuxna; halv hall 62,50/75 kr, Hyllorna eller badmintonbana 50/60 kr och turnering i hel hall 906/1 088 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Önskemål om säsongsbokning ska lämnas senast 15 maj; övriga bokningar görs i Rbok
+  kalla_url: &sporthall https://www.uppvidinge.se/uppleva-och-gora/motesplatser-och-offentliga-lokaler/boka-sporthall.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Älghultsskolans gymnastiksal är stängd för uthyrning under renovering till hösten 2026
+  kraver_registrering: false
+  sate_i_kommunen: false
 forutsattningar:
 - id: uppvidinge-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Kommunens e-tjänster
+  vad: Registrera föreningen och håll uppgifterna aktuella
+  beskrivning: Föreningen ska finnas i kommunens föreningsregister och årligen kontrollera, godkänna eller ändra sina uppgifter. Föreningen ska vara ideell, verksam i Uppvidinge, öppen och demokratiskt uppbyggd med medlemsregister, stadgar och egen föreningsekonomi.
+  system: Rbok och kommunens föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid
+  giltighet: Uppgifterna ska kontrolleras och uppdateras varje år och årshandlingarna lämnas normalt senast 31 mars
   ordning: 1
-  kalla_url: https://www.uppvidinge.se/uppleva-och-gora/foreningar-och-foreningsliv.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: uppvidinge-vardegrund-och-policyer
+  vad: Anta värdegrund och obligatoriska policyer
+  beskrivning: Föreningen ska ha en dokumenterad värdegrund samt mångfalds-, inkluderings- och hållbarhetspolicy. Barn- och ungdomsföreningar ska dessutom ha ANDTS- och antimobbningspolicy, följa barnkonventionen och kontrollera registerutdrag för personer med regelbunden barnkontakt.
+  system: Föreningens årsmöte eller behöriga beslutande organ
+  ledtid: null
+  ledtid_text: Policydokumenten ska uppdateras minst vart femte år
+  giltighet: Policydokumenten gäller högst fem år innan de ska uppdateras
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: uppvidinge-arshandlingar
+  vad: Lämna föreningens årshandlingar
+  beskrivning: Årsmötesprotokoll med vald styrelse, verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, revisionsberättelse och beslut om ansvarsfrihet ska lämnas till kommunen. Föreningen ska också kunna ge kommunen insyn i räkenskaper och redovisning.
+  system: Rbok eller kommunens e-tjänster
+  ledtid: null
+  ledtid_text: Senast tre månader efter verksamhetsårets slut
+  giltighet: Normalt senast 31 mars varje år
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
