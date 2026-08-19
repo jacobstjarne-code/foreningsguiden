@@ -2,18 +2,26 @@ kommun: Herrljunga
 kommun_slug: herrljunga
 lan: Västra Götalands län
 befolkning: 9482
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kultur- och fritidsverksamheten, socialnämnden, kommunstyrelsen samt gatu- och parkenheten
 ansokningssystem:
-  namn: Herrljungas föreningsregister
-  url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-verifierad: '2026-08-02'
+  namn: Actor Smartbook, kommunens självservice och blanketter
+  url: &register https://herrljunga.actorsmartbook.se/
+kalla_url: &huvud https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: sammansatt
+  antal: null
+  datum: null
+  kalla_url: &norm https://herrljunga.se/download/18.122df6019614579fe75d6/1745488110953/Regler%20f%C3%B6r%20st%C3%B6d%20inom%20kultur-%20och%20fritidsverksamheten.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Aktivitetsstöd
+- id: herrljunga-aktivitetsstod
+  namn: Aktivitetsstöd
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
@@ -21,142 +29,203 @@ bidrag:
     - 02-25
     - 08-25
   krav:
-  - Stödberättigade deltagare är personer 7-25 år som är medlemmar i föreningen (ingen övre åldersgräns för deltagare/ledare
-    inom parasport)
-  - En sammankomst ska omfatta minst 3 stödberättigade deltagare utöver ledare
-  - En sammankomst ska pågå minst 60 minuter
-  - Minst 70 procent av den verksamhet som ligger till grund för stödet ska vara knuten till föreningens godkända verksamhet
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-  belopp_status: okand
+  - Föreningen ska vara ideell, ha säte och verksamhet i Herrljunga, minst tio medlemmar 7–25 år, demokratiska stadgar, styrelse med minst tre personer, revisorer, organisationsnummer och föreningskonto
+  - Föreningen ska vara ansluten till en godkänd riksorganisation eller godkännas av kommunen och lämna aktuella registeruppgifter, års-, ekonomi- och revisionshandlingar samt jämställdhetspolicy
+  - Barn- och ungdomsverksamheten ska vara drogfri; föreningen ska ha antagen alkohol- och drogpolicy, utsedd droginformatör och redovisa det drogpreventiva arbetet
+  - Stödberättigade deltagare är medlemmar 7–25 år; inom paraidrott finns ingen övre åldersgräns för deltagare eller ledare
+  - Aktiviteten ska vara ledarledd, pågå minst 60 minuter med gemensam start och avslutning och omfatta 3–30 stödberättigade deltagare utöver ledaren
+  - Ledaren ska vara utsedd av föreningen och minst 13 år, får bara ansvara för en grupp åt gången och högst två ledare 13–25 år får räknas per tillfälle
+  - Minst 70 procent av den redovisade verksamheten ska vara knuten till föreningens godkända fritidsverksamhet och en deltagare får räknas högst en gång per dag och förening
+  - Närvaro med ålder och kön för deltagare och ledare ska redovisas i föreningsregistret eller genom kommunfil, DAK-fil eller motsvarande styrkt underlag
+  belopp: Ersättningen beräknas efter godkända sammankomster och deltagartillfällen; kommunen publicerar ingen aktuell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar 20 procent, 15–21 dagar 30 procent och 22–28 dagar 40 procent; därefter betalas högst 35 procent av beräknat stöd.
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: herrljunga-aktivitetsstod
-- namn: Drift- och lokalstöd
+- id: herrljunga-driftstod-egen-anlaggning-lokal
+  namn: Driftstöd till föreningsdriven anläggning eller lokal
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Föreningar med lokal- eller anläggningskostnader
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som äger och driver en lokal eller anläggning för sin verksamhet
   deadlines:
     typ: fasta
     datum:
     - 05-01
   krav:
-  - 'Årshandlingar ska bifogas: årsmötesprotokoll, verksamhetsberättelse, revisionsberättelse'
-  - Räkenskaperna ska redovisa lokalen/anläggningen separat
-  - Samlingslokaler (bygdegårdar, folkets hus, folkparker) ska ha haft minst 20 verksamhetstillfällen under föregående år
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-  belopp_status: okand
+  - Föreningen ska ha säte och verksamhet i Herrljunga, vara demokratisk och öppen, ha godkända stadgar, styrelse med minst tre personer, revisorer, organisationsnummer och föreningskonto
+  - Föreningen ska äga och driva lokalen eller anläggningen och göra den möjlig att hyra för andra föreningar, skolor och allmänheten
+  - Barn- och ungdomsföreningen ska ha utsedd droginformatör och antagen alkohol- och drogpolicy
+  - Ansökan avser föregående års nettokostnader och ska innehålla aktuella registeruppgifter, verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, revisionsberättelse, årsmötesprotokoll och jämställdhetspolicy eller motsvarande värdegrund
+  - Arrende, brandförsäkring, bränsle, sotning, el, vatten, avlopp och sophämtning får ingå; lokalens intäkter och kostnader ska särredovisas
+  - Antalet deltagartillfällen för deltagare 7–25 år ska redovisas enligt reglerna för kommunalt aktivitetsstöd
+  belopp: Stödet beräknas efter lokalens nettokostnad och antalet deltagartillfällen; högst 50 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar 20 procent, 15–21 dagar 30 procent och 22–28 dagar 40 procent; därefter betalas högst 35 procent av beräknat stöd.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökningsperiod 1 mars–1 maj.
-  id: herrljunga-drift-och-lokalstod
-- namn: Stöd till investeringar och satsningar
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: Ansökningsperioden är 1 mars–1 maj.
+- id: herrljunga-lokalstod-hyrd-lokal
+  namn: Lokalstöd för hyrd lokal
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som hyr en lokal för sin verksamhet
+  deadlines:
+    typ: fasta
+    datum: [05-01]
+  krav:
+  - Föreningen ska ha säte och verksamhet i Herrljunga, vara demokratisk och öppen, ha godkända stadgar, styrelse med minst tre personer, revisorer, organisationsnummer och föreningskonto
+  - Föreningen ska hyra lokalen i minst ett år; en redan subventionerad lokal ger inte rätt till stödet
+  - Barn- och ungdomsföreningen ska ha utsedd droginformatör och antagen alkohol- och drogpolicy
+  - Ansökan avser föregående års nettokostnader och ska innehålla aktuella registeruppgifter, verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, revisionsberättelse, årsmötesprotokoll och jämställdhetspolicy eller motsvarande värdegrund
+  - Lokalhyra, brandförsäkring, bränsle, sotning, el, vatten, avlopp och sophämtning får ingå; lokalens intäkter och kostnader ska särredovisas
+  - Antalet deltagartillfällen för deltagare 7–25 år ska redovisas enligt reglerna för kommunalt aktivitetsstöd
+  belopp: Stödet beräknas efter faktisk nettokostnad dividerad med deltagartillfällen, upp till kommunens fastställda maxstöd per deltagartillfälle; aktuell maxnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar 20 procent, 15–21 dagar 30 procent och 22–28 dagar 40 procent; därefter betalas högst 35 procent av beräknat stöd.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: Ansökningsperioden är 1 mars–1 maj.
+- id: herrljunga-driftstod-samlingslokal
+  namn: Driftstöd till samlingslokal
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som driver en egen allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [05-01]
+  krav:
+  - Föreningen ska ha säte och verksamhet i Herrljunga, vara demokratisk och öppen, ha godkända stadgar, styrelse med minst tre personer, revisorer, organisationsnummer och föreningskonto
+  - Föreningen ska driva en egen samlingslokal för möten, studieverksamhet, kultur och annan allsidig användning
+  - Minst 20 stödberättigade verksamhetstillfällen ska ha genomförts föregående år och en förteckning ska bifogas
+  - Verksamhetstillfällen kan avse föreningens egen eller annans verksamhet och privat uthyrning; uthyrning till hyresgäst som driver kommersiell verksamhet räknas inte
+  - Ansökan ska innehålla aktuella registeruppgifter, verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, revisionsberättelse, årsmötesprotokoll och jämställdhetspolicy eller motsvarande värdegrund
+  - Lokalens intäkter och kostnader ska särredovisas och antalet av kommunen godkända kvadratmeter anges
+  belopp: Stödet beräknas efter av kommunen godkänd lokalyta och antalet verksamhetstillfällen; aktuella krontal publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 1–7 dagar sent ger 10 procents avdrag, 8–14 dagar 20 procent, 15–21 dagar 30 procent och 22–28 dagar 40 procent; därefter betalas högst 35 procent av beräknat stöd.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: Ansökningsperioden är 1 mars–1 maj; för samma lokal betalas den driftstödsform som gynnar föreningen mest.
+- id: herrljunga-stod-till-investeringar-och-satsningar
+  namn: Utvecklingsstöd för investeringar och satsningar
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar med investeringar eller utvecklingssatsningar
   deadlines:
     typ: fasta
     datum:
     - 08-25
   krav:
-  - Endast registrerade föreningar får söka
-  - Satsningen/investeringen får inte ha påbörjats före beslut
-  - Förening som fått investeringsstöd kan först efter 3 år söka på nytt, såvida inte särskilda skäl föreligger
+  - Föreningen ska vara ansluten till en godkänd riksorganisation eller godkännas av kommunen, ha säte och verksamhet i Herrljunga och vara demokratiskt uppbyggd med öppna stadgar, styrelse, revisorer, organisationsnummer och föreningskonto
+  - Aktuella registeruppgifter, verksamhetsberättelse, verksamhetsplan, resultat- och balansräkning, revisionsberättelse, årsmötesprotokoll samt jämställdhetspolicy eller motsvarande värdegrund ska finnas i föreningsregistret
+  - Investeringen eller satsningen ska gynna föreningens medlemmar och allmänheten och prioriteras mot kommunens kultur- och fritidsplan; kompletterande finansiering ska sökas när det är möjligt
+  - Investeringen eller satsningen bör inte påbörjas före beslut och förening som fått stöd kan normalt söka igen först efter tre år
   - 'För investeringar: kortfattad redogörelse för användning, karta/bild/ritningar, bestyrkt nyttjanderättshandling (t.ex.
     arrendeavtal) eller köpebevis/lagfart, investeringsbudget inklusive driftsbudget, finansieringsplan, föreningens senaste
     bokslut, bestyrkt protokollsutdrag från styrelse eller årsmöte med investeringsbeslut'
   - 'För satsningar: projektplan, budget, finansieringsplan, bestyrkt protokollsutdrag från styrelse eller årsmöte med beslut
     om satsningen'
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-  belopp_status: okand
+  - Ansökan ska ange start- och slutdatum; efter avslutat projekt ska ekonomisk sammanställning, revisorsbestyrkta bokföringsutdrag och dokumentation lämnas inom sex månader
+  belopp: Individuellt prioriterat stöd inom kvarvarande budget efter de fasta föreningsstöden; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar efter 25 augusti kan behandlas om det finns medel kvar att fördela.
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
-  id: herrljunga-stod-till-investeringar-och-satsningar
-- namn: Socialt föreningsstöd
-  kategori:
-  - social
-  - funktionsratt
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: herrljunga-socialt-foreningsstod
+  namn: Socialt föreningsstöd
+  kategori: [social, funktionsratt, ovrig]
+  foreningstyp: [social, annat]
   malgrupp: Föreningar med förebyggande eller rehabiliterande verksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 08-25
+    datum: [08-25]
   krav:
-  - Föreningen får inte vara enbart beroende av bidrag för sin fortsatta existens
-  - Föreningen ska ha fastställt en medlemsavgift
-  - Föreningen ska arbeta hälsoförebyggande och/eller rehabiliterande
-  - Verksamheten ska rikta sig till invånare i Herrljunga kommun
-  - Ansökan ska innehålla verksamhetsberättelse, verksamhetsplan, ekonomisk redovisning och revisionsberättelse
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
+  - Föreningen ska ha antagit stadgar, valt styrelse och bedriva en av kommunen godkänd verksamhet
+  - Föreningen får inte vara enbart beroende av bidrag för sin fortsatta existens och ska ha fastställt en medlemsavgift
+  - Föreningen ska vara aktiv och utåtriktad, hålla regelbundna möten med bärande innehåll och följa förändringar inom sitt område
+  - Föreningen ska arbeta förebyggande och/eller rehabiliterande för invånare i Herrljunga kommun
+  - Ansökan ska innehålla verksamhetsberättelse, verksamhetsplan, bestyrkt resultat- och balansräkning samt revisionsberättelse
+  - Föreningar som riktar sig till personer med psykisk eller fysisk funktionsnedsättning, missbruksproblem eller deras anhöriga prioriteras
+  - Föreningen får inte få eller kunna få stöd från en annan kommunal nämnd eller styrelse; flerkommunal verksamhet beräknas efter invånarantal
+  belopp: Individuellt prövat utifrån socialnämndens tillgängliga medel för kommande budgetår; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sen ansökan behandlas endast om medel återstår efter ansökningarna som kommit in i tid.
+  kalla_url: &socialnorm https://herrljunga.se/download/18.912baa315ca4b6ed9d4e661/1732712467885/Riktlinje%20f%C3%B6r%20socialn%C3%A4mndens%20f%C3%B6reningsbidrag.pdf
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  id: herrljunga-socialt-foreningsstod
-- id: herrljunga-snabba-slanten
-  namn: Snabba slanten
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ungdomar och ungdomsgrupper som vill genomföra kultur- eller fritidsaktiviteter
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Sökande ska vara 13 till 20 år (räknat från det år man fyller åren)
-  - Projektet ska vara offentligt, öppet för alla och äga rum i Herrljunga kommun
-  - Projektet får inte vara ordinarie föreningsverksamhet, skolprojekt, partipolitisk verksamhet eller redan etablerad verksamhet,
-    och får inte vara vinstdrivande
-  - Projektet ska genomföras på en plats fri från alkoholförsäljning
-  - Ansökan ska innehålla projektplan samt en ekonomisk kalkyl
-  - Bidraget beviljas högst två gånger per person och år, och kan bara sökas en gång för ett och samma projekt
-  - Projektet ska redovisas senast en månad efter att det är genomfört
-  belopp: null
-  sen_ansokan: Ansökan behandlas löpande
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: herrljunga-kulturarrangemang-projekt
-  namn: Stöd till kulturarrangemang och projekt
-  kategori:
-  - kultur
-  malgrupp: Föreningar och kulturaktörer som genomför publika kulturarrangemang eller projekt
+  namn: Kreativt kulturstöd till arrangemang och projekt
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Ideella föreningar och andra icke-vinstdrivande juridiska personer som genomför publika kulturarrangemang eller projekt
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Kan sökas av ideell förening eller företag, men endast för arrangemang utan vinstdrivande syfte
-  - Arrangemanget/projektet ska vara öppet för alla, rikta sig till allmänheten och i huvudsak genomföras i Herrljunga kommun
-  - Stödet kan endast sökas en gång för samma syfte, arrangemang eller projekt
-  - Stödet ges helt eller delvis som förlustgaranti och förutsätter kompletterande ekonomisk insats
-  belopp: null
-  sen_ansokan: Kan sökas löpande, året runt
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-  belopp_status: ingen_regel
+  - Sökanden ska vara en ideell förening, stiftelse eller annan juridisk person med icke-vinstdrivande verksamhet, ha säte och verksamhet i Herrljunga och vara demokratiskt uppbyggd
+  - Ideell förening ska vara ansluten till en godkänd riksorganisation eller godkännas av kommunen; sökanden ska ha stadgar, styrelse, revisorer, organisationsnummer och föreningskonto
+  - Arrangemanget eller projektet ska vara tillgängligt för allmänheten, i huvudsak genomföras i Herrljunga och utveckla en ny eller befintlig kulturform mot nya målgrupper
+  - Kompletterande finansiering genom annan aktör, egen insats, biljettintäkter eller motsvarande krävs
+  - Samma arrangemang eller projekt kan inte få stödet flera år i rad
+  - Senaste verksamhets-, ekonomi-, revisions- och årsmöteshandlingar, jämställdhetspolicy och protokollsutdrag med beslut om satsningen ska finnas i föreningsregistret
+  - Ansökan ska beskriva mål, syfte, budget och ansvarig kontaktperson
+  - Ekonomiskt utfall, besöksantal och bedömning av genomslaget ska redovisas med bestyrkta underlag inom 60 dagar
+  belopp: Förlustgaranti som högst motsvarar den redovisade förlusten; någon ytterligare generell maxnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras löpande under året men ska lämnas före arrangemanget eller projektet.
+  kalla_url: *norm
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i huvudkällan
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: herrljunga-sarskilda-overenskommelser
   namn: Särskilda överenskommelser
   kategori:
@@ -164,6 +233,7 @@ bidrag:
   - kultur
   - social
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar vars behov inte ryms i ordinarie stödformer
   deadlines:
     typ: okand
@@ -171,47 +241,158 @@ bidrag:
   krav:
   - Aktuellt endast när övriga stödformer inte är tillämpliga
   - Mycket stor restriktivitet ska råda vid ingång av nya eller vid förlängning av befintliga avtal
-  - Ska skrivas i avtalsform där respektive parts åtagande klargörs
-  belopp: null
+  - Överenskommelsen ska skrivas i avtalsform och tydligt ange respektive parts åtagande
+  - Upplåtelse av en kommunal anläggning under längre tid är ett exempel på när stödformen kan användas
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor och lämna underlag för kommunens kontroll
+  belopp: Stödets omfattning och parternas åtaganden fastställs individuellt i avtalet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ingen fast ansökningsfrist – sker genom individuell överenskommelse/avtal, kontakta föreningslivsutvecklare
     eller kultur- och fritidschef
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i huvudkällan
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 - id: herrljunga-studieforbund
   namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
   malgrupp: Studieförbund med verksamhet i Herrljunga kommun
   deadlines:
     typ: fasta
     datum:
     - 06-30
   krav:
+  - Studieförbundet ska vara aktivt i Herrljunga kommun och bedriva studiecirklar, annan folkbildningsverksamhet eller kulturarrangemang
   - Verksamhetsplan för innevarande år
-  - Verksamhetsberättelse inklusive ekonomisk berättelse för föregående år
-  - Påskrivna kommunsammandrag
+  - Verksamhetsberättelse inklusive ekonomisk berättelse för föregående år ska lämnas
+  - Påskrivna kommunsammandrag med unika deltagare, studietimmar, deltagare med funktionsnedsättning och kulturprogram ska lämnas
+  - Underlagen ska kunna användas i Västra Götalands Bildningsförbunds årliga beräkningsverktyg
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunanslaget fördelas till 70 procent efter studiecirklar, 10 procent efter annan folkbildningsverksamhet och 20 procent efter kulturarrangemang; totalsumman publiceras inte
+  sen_ansokan: Den aktuella webbsidan anger rapportering senast 30 juni och utbetalning senast 31 augusti.
+  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag/bidrag-for-studieforbund
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: Den reviderade stödnormen anger 25 juni, medan den senare operativa webbsidan anger 30 juni; den aktuella ansökningssidan styr deadlinefältet.
+- id: herrljunga-vandringsledsstod
+  namn: Vandringsledsstöd
+  kategori: [ovrig]
+  foreningstyp: [hembygd, friluft, annat]
+  malgrupp: Föreningar som ansvarar för en vandringsled i Herrljunga kommun
+  deadlines:
+    typ: fasta
+    datum: [06-01]
+  krav:
+  - Föreningen ska ansvara för en vandringsled inom Herrljunga kommun och ha tecknat ett fadderavtal eller en överenskommelse med kommunen
+  - Föreningen ska sköta leden under året och kontrollera spänger, stolpar, ledmarkeringar, framkomlighet och vegetation
+  - Ledens sträckning ska vara förankrad med berörda markägare och markägaröverenskommelser samt aktuellt markägarregister ska kunna visas
+  - En vårtillsynsrapport efter genomgång av leden ska lämnas varje år; stöd betalas inte ut automatiskt
+  - Brister och slitage ska dokumenteras och åtgärdas och leden ska hållas gångbar med fri korridor och tydlig information vid ledentrén
+  belopp: Årligt stöd enligt fadderavtalet efter godkänd tillsynsrapport; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Rapport bör lämnas senast 1 juni; rapport som kommer 2 juni–30 november behandlas senare. Stöd kan bara sökas för innevarande år.
+  kalla_url: &vandringsled https://www.herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag/stod-till-vandringsleder
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i huvudkällan
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: Större förbättringar söks i stället genom Utvecklingsstöd för investeringar och satsningar.
+- id: herrljunga-sponsring-aktivitet-evenemang
+  namn: Sponsring av aktivitet eller evenemang
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella organisationer i Herrljunga kommun som genomför en aktivitet eller ett evenemang
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en ideell organisation i Herrljunga kommun; kommunen sponsrar inte enskilda, företag, religiösa samfund, politiska organisationer eller kommunala bolag
+  - Aktiviteten eller evenemanget får inte vara ett jubileum och ska stärka kommunens mål och varumärke
+  - Ansökan ska beskriva aktiviteten, hur pengarna ska användas, syftet i förhållande till kommunens mål samt kommunens och mottagarens motprestationer
+  - Insats och motprestation ska stå i rimlig proportion och exponeringen av kommunens namn, logotyp och varumärke ska följa den nivå som avtalet anger
+  - Ett skriftligt sponsringsavtal ska tecknas och verksamheten ska bedrivas ansvarsfullt, lagligt och enligt god marknadsföringssed
+  - Användningen av medlen ska redovisas senast tre månader efter aktiviteten eller evenemanget; inställt arrangemang eller utebliven redovisning kan ge återbetalningskrav
+  belopp: 1 000–40 000 kr beroende på förväntat besöksantal, medialt intresse och mervärde för handel, turism eller motsvarande
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Komplett e-ansökan ska lämnas senast fyra månader före aktiviteten eller evenemanget; sena ansökningar behandlas inte.
+  kalla_url: &sponsor https://herrljunga.se/download/18.1293553a19030ad84521ce/1745398705166/Riktlinje%20f%C3%B6r%20sponsring.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: herrljunga-sponsring-tavlande-lag
+  namn: Sponsring av tävlande lag
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Ideella idrottsorganisationer i Herrljunga kommun med tävlande lag
+  deadlines:
+    typ: fasta
+    datum: [08-31]
+  krav:
+  - Sökanden ska vara en ideell organisation i Herrljunga kommun; kommunen sponsrar inte enskilda, företag, religiösa samfund, politiska organisationer eller kommunala bolag
+  - Laget och dess representanter ska ge kommunen uppmärksamhet inom eller utanför kommungränsen och ha ett medialt intresse
+  - Ansökan ska beskriva laget, hur pengarna ska användas, syftet i förhållande till kommunens mål samt kommunens och mottagarens motprestationer
+  - Kommunens logotyp ska exponeras på organisationens webbplats och klubblokal samt, vid högre nivå, i annonsering och på lagets klubbdräkt
+  - Ett skriftligt ettårigt sponsringsavtal ska tecknas och verksamheten ska bedrivas ansvarsfullt, lagligt och enligt god marknadsföringssed
+  - Användningen av medlen ska redovisas senast tre månader efter avtalsperioden och innan en ny ansökan kan behandlas
+  belopp: 1 000–40 000 kr beroende på lagets uppmärksamhetsvärde och mediala intresse
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för den ettåriga avtalsperiod som börjar 1 januari ska lämnas senast 31 augusti året före; sena ansökningar behandlas inte.
+  kalla_url: *sponsor
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: herrljunga-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Herrljungas föreningsregister
+  vad: Registrering och årlig registeröversyn
+  beskrivning: Föreningar som får kommunalt stöd ska vara sökbara i föreningsregistret och minst en gång per år uppdatera styrelse, kontaktpersoner, organisationsnummer, bankuppgifter och andra förändrade uppgifter.
+  system: Actor Smartbook
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Minst en översyn per kalenderår
+  giltighet: Registeruppgifterna ska hållas aktuella varje år.
   ordning: 1
-  kalla_url: https://herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/stod-och-bidrag
-  giltighet_status: okand
+  kalla_url: https://www.herrljunga.se/uppleva-och-gora/foreningsliv-stod-och-bidrag-till-civilsamhallet/foreningsregistret
+  giltighet_status: kontrollast
+- id: herrljunga-arsmoteshandlingar
+  vad: Årliga föreningshandlingar
+  beskrivning: Föreningar som sökte stöd föregående år ska lämna verksamhetsberättelse, verksamhetsplan, bestyrkt resultat- och balansräkning, revisionsberättelse och årsmötesprotokoll.
+  system: Actor Smartbook
+  ledtid: null
+  ledtid_text: Senast 1 maj; förening med senare årsmöte meddelar detta vid ansökan och lämnar handlingarna efter årsmötet.
+  giltighet: Sammansatt årlig regel med fast huvuddatum och undantag för senare årsmöte.
+  ordning: 2
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: herrljunga-grundvillkor
+  vad: Lokala och demokratiska grundvillkor
+  beskrivning: Föreningen ska vara ideell och lokalt verksam, normalt ha minst tio medlemmar 7–25 år, demokratiska och öppna stadgar, styrelse med minst tre personer, revisor, organisationsnummer, föreningskonto och lika villkor för deltagande.
+  system: Kommunens regler för stöd inom kultur- och fritidsverksamheten
+  ledtid: null
+  ledtid_text: Villkoren prövas vid registrering och varje stödansökan.
+  giltighet: Grundvillkoren och kommunens insynskrav ska vara uppfyllda under stödperioden.
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
