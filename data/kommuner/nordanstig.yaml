@@ -5,17 +5,26 @@ befolkning: 9277
 forvaltning: Kultur och fritid
 ansokningssystem:
   namn: e-serve
-  url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-verifierad: '2026-08-01'
+  url: https://prod.e-srv.se/
+kalla_url: &huvud https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: nordanstig-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd
+  status: aktiv
   kategori:
   - idrott
   - social
   - pensionar
   - funktionsratt
+  - ovrig
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -23,31 +32,46 @@ bidrag:
     - 02-25
     - 08-25
   krav:
+  - &grund Föreningen ska vara ideell, ha årsmötesantagna stadgar, giltigt organisationsnummer samt säte och/eller verksamhet i Nordanstigs kommun
+  - &medlemmar Föreningen ska ha minst 10 medlemmar, uppdaterad medlemsmatrikel och aktuella uppgifter på föreningskontot i e-serve
+  - &handlingar Föreningen ska lämna årsmötesprotokoll och verksamhetsberättelse samt ge kommunen insyn i räkenskaper och andra efterfrågade handlingar
+  - &vardegrund Föreningen ska vara demokratiskt organiserad, arbeta för delaktighet, jämlikhet, jämställdhet, mångfald och inkludering samt bedriva all stödberättigad verksamhet alkohol- och drogfritt
   - Minst 10 medlemmar i föreningen
   - Ledarledd gruppaktivitet om minst 60 minuter
   - Minst 2 deltagare och 1 ledare (ledaren minst 13 år)
   - Minst 5 godkända sammankomster per år
   - Deltagare högst 25 år, dock ingen övre åldersgräns för funktionsvariationsverksamhet och 65+ för äldreaktiviteter
   - Idrottsföreningar rapporterar via IdrottOnline, övriga föreningar direkt i e-serve
-  belopp: 70 kronor per sammankomst plus fördelning efter deltagartillfällen
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-  belopp_status: olast
+  - Alla deltagare 0–25 år ska närvarorapporteras eftersom kommunen saknar den undre sjuårsgränsen
+  belopp: 70 kr per godkänd sammankomst; återstående del av respektive budgetpott fördelas procentuellt efter föreningens antal deltagartillfällen
+  belopp_avser: per_forening
+  kommunens_pott: 800 000 kr per år för barn och unga samt 150 000 kr per år för personer med funktionsvariationer och personer 65 år och äldre; potterna fördelas vid två ansökningstillfällen
+  sen_ansokan: Period 1 (1 januari–30 juni) rapporteras senast 25 augusti och period 2 (1 juli–31 december) senast 25 februari följande år
+  kalla_url: *huvud
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Två budgetpotter: barn och unga samt personer med funktionsvariationer och äldre.'
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunen saknar den undre sjuårsgränsen och begär därför närvarorapportering för samtliga deltagare 0–25 år.
 - id: nordanstig-driftbidrag
   namn: Driftbidrag
+  status: aktiv
   kategori:
   - idrott
   - funktionsratt
+  - ovrig
+  foreningstyp: *allatyper
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 03-01
   krav:
+  - *grund
+  - *medlemmar
+  - *handlingar
+  - *vardegrund
   - Beviljat lokalt aktivitetsstöd är grundvillkor
   - Gäller barn- och ungdomsverksamhet eller funktionsvariationsverksamhet
   - Föreningen ska äga eller hyra lokalen
@@ -55,53 +79,72 @@ bidrag:
     vägavgift, försäkring, bränsle, maskinleasing vid behov'
   - Räntor, amorteringar, personalkostnader och köpta tjänster godkänns inte
   - Hyresintäkter och entré-/spelrättsintäkter dras av från bidragsgrundande kostnader
-  belopp: 65 procent av bidragsgrundande kostnader för ordinarie verksamhet, 30 procent för tillfälliga hyreskostnader
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+  - Stöd ges inte för kommunalt subventionerade lokaler eller lokaler med reducerad kommunal hyra
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 1 300 000 kr; potten fördelas efter föreningarnas andel av de sammanlagda stödgrundande kostnaderna, viktade med 65 procent för ordinarie drift och hyra samt 30 procent för tillfälliga kompletterande hyror
+  sen_ansokan: Ansökan lämnas senast 1 mars och avser föregående kalenderårs kostnader; avtalade hyror för april–mars söks i förskott och tillfälliga hyror i efterskott
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För lokaler och anläggningar; beviljat lokalt aktivitetsstöd är grundvillkor.
+  senast_verifierad: '2026-08-19'
+  anteckning: Procentsatserna 65 och 30 är vikter i fördelningen av kommunens pott, inte ersättningsgrader för varje förening.
 - id: nordanstig-verksamhetsstod
   namn: Verksamhetsstöd
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - social
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: lopande
     datum: []
   krav:
+  - *grund
+  - *medlemmar
+  - *handlingar
+  - *vardegrund
   - 'Fyra inriktningar: aktiviteter/arrangemang/projekt, högst 25 000 kr'
   - Utbildning av ledare/styrelse, högst 5 000 kr per person och högst 25 000 kr totalt
   - Oförutsedda utgifter, högst 25 000 kr, kan sökas retroaktivt vid akuta behov men ej för planerat underhåll
   - Inventarier/utrustning, högst 50 procent av värdet och högst 25 000 kr, ska ägas och nyttjas gemensamt
   - Tidigare beviljade bidrag ska vara redovisade innan ny ansökan kan lämnas
   - Redovisning senast 1 månad efter genomfört projekt
-  belopp: Normalt högst 25 000 kronor per ansökan
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+  belopp: Högst 25 000 kr för aktivitet, arrangemang, projekt eller oförutsedd utgift; utbildning högst 5 000 kr per person och 25 000 kr totalt; inventarier och utrustning högst 50 procent av värdet och 25 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: 595 000 kr
+  sen_ansokan: Ansökan och handläggning sker löpande; ansökan ska normalt lämnas före kostnaden uppstår
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kan sökas för aktiviteter, utbildning, oförutsedda utgifter samt inventarier och utrustning.
+  senast_verifierad: '2026-08-19'
+  anteckning: Stödet har fyra inriktningar med skilda beloppsgränser.
 - id: nordanstig-projektbidrag
   namn: Projektbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - social
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 11-01
   krav:
+  - *grund
+  - *medlemmar
+  - *handlingar
+  - *vardegrund
   - Genomtänkt projektbeskrivning och underbyggd ekonomisk kalkyl krävs
   - Ska visa att andra medfinansieringsmöjligheter undersökts
   - Ansökan får inte vara retroaktiv, ska ha kommit in innan projektstart
@@ -109,25 +152,35 @@ bidrag:
   - Beslut fattas av kommunstyrelsen vid första sammanträdet
   - Stödet återkallas om det inte begärts ut inom 2 år efter tilldelning
   - Redovisning senast 1 månad efter genomfört projekt
+  - Tidigare stöd ska vara slutredovisade innan ny ansökan behandlas
   belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-  belopp_status: ingen_regel
+  belopp_avser: ren_pott
+  kommunens_pott: 1 173 000 kr för 2027; ramen räknas upp med 3 procent per år
+  sen_ansokan: Ansökan öppnar 1 juni och ska lämnas senast 1 november; projektbidrag kan inte sökas retroaktivt
+  kalla_url: *huvud
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökan öppnar 1 juni; för större utvecklings- och investeringsprojekt.
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunstyrelsen kan besluta om särskild inriktning; annars prioriteras barn och unga, folkhälsa samt miljö.
 - id: nordanstig-bidrag-for-samlingslokaler
   namn: Bidrag för samlingslokaler
+  status: aktiv
   kategori:
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
     datum:
     - 03-01
   krav:
+  - *grund
+  - *medlemmar
+  - *handlingar
+  - *vardegrund
   - Föreningen ska äga lokalen, gäller inte hyrda lokaler
   - Allmännyttig verksamhet, till exempel bygdegårdar och folkets hus
   - 'Bidragsgrundande kostnader: el/uppvärmning, vatten/avlopp/sophämtning/sotning, telefoni/internet, vägavgift, försäkring,
@@ -135,38 +188,53 @@ bidrag:
   - Räntor, amorteringar och personalkostnader godkänns inte
   - Hyresintäkter dras av från bidragsgrundande kostnader
   belopp: Högst 40 procent av bidragsgrundande driftskostnader
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: 200 000 kr; potten fördelas efter föreningarnas andel av de sökandes sammanlagda stödgrundande kostnader
+  sen_ansokan: Ansökan lämnas senast 1 mars och avser föregående kalenderårs kostnader
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  senast_verifierad: '2026-08-19'
+  anteckning: Det individuella stödet kan aldrig överstiga 40 procent av föreningens stödgrundande kostnader.
 - id: nordanstig-bidrag-till-bygglovsavgift
   namn: Bidrag till bygglovsavgift
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: lopande
     datum: []
   krav:
+  - *grund
+  - *medlemmar
+  - *handlingar
+  - *vardegrund
+  - Åtgärden ska avse tillbyggnad, nybyggnad eller ombyggnad som utvecklar föreningens verksamhet
   - Kopia på bygglovsavgiften ska bifogas ansökan
   belopp: Högst 5 000 kronor per förening och år
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+  belopp_avser: per_forening
+  kommunens_pott: 20 000 kr per år
+  sen_ansokan: Ansökan och handläggning sker löpande under hela året
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: nordanstig-aktivitetsstod-till-studieforbund
   namn: Aktivitetsstöd till studieförbund
+  status: aktiv
   kategori:
   - kultur
   - ovrig
+  foreningstyp: [kultur, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -176,47 +244,64 @@ bidrag:
   - Studieförbundet ska få statsbidrag från Folkbildningsrådet
   - Studieförbundet ska bedriva eller planera verksamhet i kommunen
   - Fördelning baseras på rapporterade deltagartimmar föregående år
+  - Studieförbund med verksamhet i flera kommuner ska tydligt särredovisa timmarna i Nordanstig
+  - Studieförbundet ska registrera ett föreningskonto i e-serve och hålla uppgifterna aktuella
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunal ram om 200 000 kronor per år fördelas proportionellt efter deltagartimmar"
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+  belopp_avser: ren_pott
+  kommunens_pott: 200 000 kr per år, fördelat procentuellt efter de deltagartimmar i kommunen som studieförbunden redovisade till Folkbildningsrådet föregående år
+  sen_ansokan: Ansökan ska lämnas senast 31 maj
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-- id: nordanstig-kultur-och-foreningsledarstipendium
-  namn: Kultur- och föreningsledarstipendium
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Personer eller organisationer verksamma i Nordanstigs kommun
+  senast_verifierad: '2026-08-19'
+  anteckning: Särskilda villkor gäller för studieförbund i stället för kommunens vanliga medlemskrav.
+- id: nordanstig-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala idrottssalar och simhallen
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som bokar kommunala idrottssalar eller simhallen, med lägst taxa för barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
-    datum:
-    - 10-25
+    datum: [06-10, 08-15]
   krav:
-  - 'Två kategorier: kulturstipendium för förtjänstfulla kulturella insatser och föreningsledarstipendium för ideellt föreningsarbete
-    bland barn och ungdom'
-  - Förslag lämnas till foreningsservice@nordanstig.se
-  belopp: 5 000 kronor per stipendium
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
+  - Föreningen ska ha ett föreningskonto i e-serve och hålla kontakt- och faktureringsuppgifter aktuella
+  - Bokningen ska avse en kommunal idrottssal eller Bergsjö simhall och rätt kundkategori ska anges
+  - Barn- och ungdomstaxan gäller bokningar för föreningens barn- och ungdomsverksamhet; övrig föreningsverksamhet har en separat föreningstaxa
+  - Föreningen ska följa boknings-, betalnings-, avboknings- och ordningsreglerna för lokalen
+  - Säsongstider fördelas i första hand till föreningars barn- och ungdomsverksamhet, därefter till övrig tränings- och tävlingsverksamhet och andra föreningar
+  belopp: Barn- och ungdomsförening betalar 50 kr/timme för liten sal, 100 kr/timme för fullstor hall, 200 kr/timme eller 2 000 kr/termin för simhallen; övrig föreningsverksamhet betalar 75, 200, 300 respektive 2 700 kr, jämfört med privat-/företagstaxor på 100, 400, 400 respektive 3 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ordinarie säsongsönskemål ska lämnas senast 15 augusti och sommarönskemål senast 10 juni; strötider bokas löpande i mån av tillgång
+  kalla_url: &bokning https://nordanstig.se/startsida/sidor/uppleva-och-gora/boka-lokal-idrottsanlaggning/boka-idrottssalar-och-simhallen.html
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: false
-  anteckning: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunen anger uttryckligen att taxorna redan är subventionerade och därför inte kan kombineras med driftsbidrag för hyra.
 forutsattningar:
 - id: nordanstig-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  beskrivning: Föreningen ska registrera ett föreningskonto i e-serve och ansvara för att uppgifterna där är aktuella; kommunen publicerar ingen giltighetstid eller gemensam förnyelsefrist.
+  system: e-serve
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ingen handläggningstid eller förnyelsefrist publiceras
   giltighet: null
   ordning: 1
-  kalla_url: https://nordanstig.se/startsida/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: nordanstig-allmanna-villkor
+  vad: Allmänna villkor och föreningshandlingar
+  beskrivning: Föreningen ska vara ideell och demokratisk, ha minst 10 medlemmar, årsmötesantagna stadgar och organisationsnummer samt lämna årsmötesprotokoll, verksamhetsberättelse och begärda granskningsunderlag.
+  system: e-serve
+  ledtid: null
+  ledtid_text: Handlingarna ska vara tillgängliga men kommunen anger ingen gemensam sista dag
+  giltighet: null
+  ordning: 2
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
 kommunsiffra: null
