@@ -2,18 +2,33 @@ kommun: Kungsör
 kommun_slug: kungsor
 lan: Västmanlands län
 befolkning: 8517
-forvaltning: Kultur och fritid
+forvaltning: Kultur- och fritidsavdelningen
 ansokningssystem:
-  namn: Blankett
+  namn: Blanketter och kommunens lokalbokning
   url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
 kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://kungsor.se/download/18.508d760190bb7156849180f/1776853229235/Riktlinje%20f%C3%B6r%20kommunala%20bidrag%20till%20organisationer.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Verksamhetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &allatyper
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Bidragsberättigade föreningar
   deadlines:
     typ: fasta
@@ -32,18 +47,23 @@ bidrag:
     droger redovisas tillsammans med ansökan, annars kan bidraget reduceras eller helt utebli
   belopp: 50 kronor per medlem för föreningar med huvudverksamhet ungdom 6–25 år, 20 kronor per medlem för föreningar med
     verksamhet i övrig ålder
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 31 mars aktuellt bidragsår. Utbetalning sker senast 1 maj aktuellt bidragsår.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: kungsor-verksamhetsbidrag
 - namn: Aktivitetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar med barn- och ungdomsaktiviteter
   deadlines:
     typ: fasta
@@ -62,22 +82,27 @@ bidrag:
   - All ungdomsverksamhet ska bedrivas i en drogfri miljö, och föreningen ska årligen redovisa en policy för sitt förebyggande
     arbete mot droger tillsammans med bidragsansökan, annars kan bidraget reduceras eller helt utebli
   belopp: 30 kronor per medlem och aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 25 februari respektive 25 augusti. Utbetalning sker senast 15 april respektive
     15 oktober.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: kungsor-aktivitetsbidrag
 - namn: Ledarutbildningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar som utbildar ledare
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Utbildningen ska vara beslutad av föreningens styrelse eller årsmöte
@@ -87,23 +112,28 @@ bidrag:
   - Ansökan ska undertecknas av föreningens ordförande och kassör eller sekreterare
   - Föreningen ska årligen skicka in verksamhetsberättelse med bokslut och revisionsberättelse
   belopp: Max 50 kronor per medlem och år, dock högst 75 procent av kurskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska lämnas senast en månad före utbildningen. Utbetalning sker senast två veckor efter utbildningen,
     efter uppvisat kursintyg.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: kungsor-ledarutbildningsbidrag
 - namn: Lovverksamhetsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar som ordnar lovverksamhet
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Aktiviteten ska äga rum under skollov för lediga grundskole- eller gymnasieelever och pågå i minst tre timmar
@@ -116,22 +146,27 @@ bidrag:
   - All ungdomsverksamhet ska bedrivas i en drogfri miljö, och föreningen ska årligen redovisa en policy för sitt förebyggande
     arbete mot droger tillsammans med bidragsansökan, annars kan bidraget reduceras eller helt utebli
   belopp: 50 kronor per deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska lämnas senast två veckor före aktiviteten. Utbetalning sker efter inlämnad redovisning.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: kungsor-lovverksamhetsbidrag
 - namn: Arrangemangsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar som arrangerar publikt evenemang
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Ansökan ska innehålla syftet med arrangemanget, en budget och uppgift om arrangemangsansvariga i föreningen
@@ -141,20 +176,25 @@ bidrag:
     fullständiga namn, födelseår och uppgift om betald medlemsavgift (minimiavgift lägst 50 kronor per år)
   - Ansökan ska undertecknas av föreningens ordförande och kassör eller sekreterare
   - Föreningen ska årligen skicka in verksamhetsberättelse med bokslut och revisionsberättelse
-  belopp: null
+  belopp: Individuellt prövat; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska lämnas senast en månad före aktiviteten. Utbetalning sker senast en månad efter aktiviteten, enligt
     redovisning.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
-  belopp_status: okand
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: kungsor-arrangemangsbidrag
-- namn: Anläggningsbidrag
+- namn: Driftsbidrag för anläggningar och lokaler
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar med lokal eller anläggning
   deadlines:
     typ: fasta
@@ -171,43 +211,212 @@ bidrag:
   - Föreningen ska årligen skicka in verksamhetsberättelse med bokslut och revisionsberättelse
   belopp: 60 procent av driftskostnaden (ej hyra), högst 15 000 kronor per år, för egna eller tillfälligt förhyrda anläggningar
     och lokaler
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 31 mars bidragsåret. Utbetalning sker senast 1 maj bidragsåret.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: Den publika menyn kallar stödet anläggningsbidrag; den gällande riktlinjen använder namnet driftsbidrag
   id: kungsor-anlaggningsbidrag
 - namn: Nybildningsbidrag
+  status: aktiv
   kategori:
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Nystartade föreningar
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Ansökan ska lämnas in av en interimsstyrelse med protokollsutdrag som visar föreningens tänkta verksamhet
   - Föreningen kan få upp till 1 000 kronor för att komma igång med verksamheten
+  - Den nya föreningen ska ha valt styrelse, antagit stadgar och upprättat medlemsmatrikel
+  - När organisationsnummer har erhållits ska föreningen ansöka om godkännande och registrering hos kultur- och fritidschefen
   belopp: Upp till 1 000 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska lämnas senast en månad efter att föreningen startats. Utbetalning sker senast en månad efter beviljat
     bidrag.
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
+  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/starta-forening.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: kungsor-nybildningsbidrag
+- id: kungsor-administrationsbidrag
+  namn: Administrationsbidrag
+  status: aktiv
+  kategori:
+  - kultur
+  - social
+  - pensionar
+  - funktionsratt
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Föreningar vars huvudverksamhet inte riktas till barn och ungdomar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska ha verksamhet i Kungsörs kommun och inte ha barn och ungdomar som sin huvudsakliga verksamhetsgrupp
+  - Föreningen ska ha organisatorisk fasthet, stadgar, vald styrelse och en medlemsmatrikel med namn, födelseår och uppgift om betald medlemsavgift
+  - Ansökan ska undertecknas av ordförande och kassör eller sekreterare
+  - Verksamhetsberättelse med bokslut och revisionsberättelse ska lämnas årligen
+  - Utbetalning görs endast till föreningens plus- eller bankgirokonto
+  belopp: 1 500 kronor per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag för administrationsbidraget
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kungsor-skotselbidrag
+  namn: Skötselbidrag för kommunal anläggning
+  status: aktiv
+  kategori:
+  - idrott
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som enligt överenskommelse ansvarar för skötsel och tillsyn av en kommunägd anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska ha en överenskommelse med Kungsörs kommun om skötselbidrag
+  - Överenskommelsen ska avse föreningens ansvar för skötsel och tillsyn av en anläggning som ägs av kommunen
+  - Föreningen ska ha organisatorisk fasthet, stadgar, vald styrelse och en medlemsmatrikel
+  - Ansökan eller överenskommelsen ska företrädas av föreningens behöriga företrädare
+  - Föreningen ska årligen lämna verksamhetsberättelse med bokslut och revisionsberättelse
+  belopp: Individuellt enligt överenskommelse med kommunen; ingen generell beloppsnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen öppen gemensam ansökningsdag; stödet lämnas efter överenskommelse
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kungsor-kulturforeningsbidrag
+  namn: Bidrag till kulturföreningar
+  status: aktiv
+  kategori:
+  - kultur
+  foreningstyp:
+  - kultur
+  - hembygd
+  malgrupp: Kulturföreningar som genomför avtalade publika arrangemang under året
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska komma överens med kultur- och fritidsavdelningen om vilka arrangemang som ska genomföras under året
+  - Arrangemangen ska vara riktade till allmänheten och stimulera positiva mötesplatser för Kungsörsborna
+  - Ansökan ska beskriva arrangemangens syfte och innehålla en budget
+  - Ansökan ska ange vilka personer i föreningen som ansvarar för arrangemangen
+  - Föreningen ska uppfylla de allmänna föreningsvillkoren och årligen lämna verksamhetsberättelse, bokslut och revisionsberättelse
+  belopp: Individuellt enligt överenskommelse med kultur- och fritidsavdelningen; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag för kulturföreningsbidraget
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: kungsor-studieforbundsbidrag
+  namn: Kommunalt bidrag till studieförbund
+  status: aktiv
+  kategori:
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - kultur
+  - social
+  - annat
+  malgrupp: Studieförbund med verksamhet i Kungsörs kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Studieförbundet ska bedriva och redovisa verksamhet i Kungsörs kommun
+  - Underlag för grundbidraget ska omfatta respektive studieförbunds verksamhet under de två senaste åren
+  - Föregående års kulturaktiviteter inom de publicerade kulturområdena ska redovisas för kulturbidragsdelen
+  - Verksamhet för invandrare och personer med funktionsnedsättning ska redovisas för förstärkningsbidragsdelen
+  - Studiecirklar, deltagare och studietimmar samt halva värdet av annan folkbildningsverksamhet ska redovisas för den verksamhetsrelaterade delen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens totala studieförbundsanslag fördelas med 60 procent grundbidrag, 10 procent kulturbidrag, 12 procent förstärkningsbidrag och 18 procent verksamhetsrelaterat bidrag; totalsumman publiceras inte
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag i den gällande studieförbundsriktlinjen
+  kalla_url: https://kungsor.se/download/18.508d760190bb71568491810/1771411597893/Riktlinje%20f%C3%B6r%20kommunala%20bidrag%20till%20studief%C3%B6rbund.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Bidrag under 500 kronor betalas inte ut
+- id: kungsor-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Kungsörsföreningar som bokar kommunens badhus, ishall, sporthall eller fotbollsplaner
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Bokningen ska göras av en Kungsörsförening och avse en av kommunens uthyrningsbara lokaler eller anläggningar
+  - Badhusets föreningsavgift förutsätter terminsbokning vid minst fem tillfällen
+  - Avgiften beror på anläggning, träning eller match, deltagarnas ålder och om föreningen hör hemma i Kungsör
+  - Ungdomstaxan gäller den åldersgräns som anges för respektive anläggning och aktivitet
+  - Föreningen ska följa kommunens boknings-, användnings- och betalningsvillkor
+  belopp: Subventionerade 2026-taxor, bland annat 20 kr per timme för ungdomsträning och 50 kr per timme för seniorträning i badhus, ishall och sporthall; övriga avgifter följer anläggningens tabell
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; stödet ges genom taxan vid bokning
+  kalla_url: https://kungsor.se/download/18.1c08460a19bfede51535640a/1769593841005/Taxor%20och%20avgifter%20f%C3%B6r%20hyra%20av%20lokaler%20och%20anl%C3%A4ggningar.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Taxan gäller från 1 januari 2026 och som längst till och med 31 december 2029
 forutsattningar:
 - id: kungsor-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Blankett
+  vad: Godkänd och registrerad förening
+  beskrivning: Föreningen ska ha valt styrelse, antagit stadgar och upprättat medlemsmatrikel. När organisationsnummer har erhållits ska stadgar och styrelseuppgifter lämnas till kultur- och fritidschefen för godkännande och registrering. Bidrag avser föreningar med verksamhet i Kungsörs kommun.
+  system: Registreringsansökan och blankett
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen särskild handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/foreningsstod-och-bidrag.html
-  giltighet_status: okand
+  kalla_url: https://kungsor.se/uppleva-och-gora/foreningsliv/starta-forening.html
+  giltighet_status: ingen_regel
+- id: kungsor-arshandlingar
+  vad: Årliga föreningshandlingar
+  beskrivning: Bidragsberättigad organisation ska varje år lämna verksamhetsberättelse med bokslut och revisionsberättelse. Ansökan ska undertecknas av ordförande och kassör eller sekreterare, och utbetalning görs till föreningens plus- eller bankgiro.
+  system: Blankett
+  ledtid: null
+  ledtid_text: Kommunen anger ingen separat förnyelsedag eller tidsfrist efter årsmötet
+  giltighet: null
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
