@@ -2,210 +2,475 @@ kommun: Tanum
 kommun_slug: tanum
 lan: Västra Götalands län
 befolkning: 12616
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Barn- och utbildningsförvaltningen, Kultur och fritid
 ansokningssystem:
-  namn: Tanums bidragssystem
-  url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
+  namn: FRI Webb-Bidrag
+  url: https://bokning.tanum.se/bidrag/
 kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
-verifierad: '2026-07-31'
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod/allmannabestammelser.4.7664b4813898b7df9843f85.html
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nystartade föreningar
+- id: tanum-startbidrag
+  namn: Startbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Nystartade ideella föreningar och föreningar som varit vilande i minst tre år
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - 'Föreningen ska uppfylla de allmänna bestämmelserna: vara registrerad i Tanums kommuns föreningsregister, ha organisationsnummer,
-    bankgiro och säte i kommunen, minst 10 medlemmar folkbokförda i Tanum, en styrelse, inlämnade stadgar och en årlig medlemsavgift'
-  - Föreningen ska ha varit registrerad hos Skatteverket i minst sex månader
-  - Ansökan ska bifogas registreringsbevis från Skatteverket, protokoll från föreningens första sammanträde, föreningens stadgar
-    och en verksamhetsplan
+  - Föreningen ska vara nystartad eller ha varit vilande i minst tre år och därefter återuppta sin verksamhet
+  - Föreningen ska ha funnits, verkat och varit registrerad hos Skatteverket i minst sex månader
+  - Föreningen ska uppfylla kommunens allmänna villkor och vara registrerad i kommunens föreningsregister
+  - Stadgar, konstituerande protokoll, medlemsförteckning, verksamhetsplan och registreringsbevis ska bifogas
   belopp: 3 000 kr
-  sen_ansokan: Bidraget kan sökas året runt, ingen sen ansökan är aktuell
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=22&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tanum-startbidrag
-- namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar
+- id: tanum-grundbidrag-barn-och-unga
+  namn: Grundbidrag för barn- och ungdomsföreningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med minst tio medlemmar 3–25 år som är folkbokförda i Tanums kommun
   deadlines:
     typ: fasta
-    datum:
-    - 03-31
-    - 09-30
+    datum: [03-31, 09-30]
   krav:
-  - Föreningen ska uppfylla de allmänna bestämmelserna
-  - Föreningen ska tidigare ha ansökt om och beviljats startbidrag; en förening kan inte få både startbidrag och grundbidrag
-    under samma kalenderår
-  - Ansökan ska bifogas resultaträkning, balansräkning, undertecknad revisionsberättelse och verksamhetsberättelse från föregående
-    år
-  belopp: 'Varierar efter föreningstyp: barn- och ungdomsföreningar 4 000 kr vid 10-50 medlemmar (20 kr/medlem över 50), föreningar
-    med övrig verksamhet fast 3 000 kr, funktionsnedsatta- och pensionärsföreningar 3 000 kr vid 10-50 medlemmar (20 kr/medlem
-    över 50)'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
+  - Föreningen ska uppfylla kommunens allmänna villkor och ha lämnat aktuella uppgifter till föreningsregistret
+  - Minst tio bidragsberättigade medlemmar ska vara 3–25 år och folkbokförda i Tanums kommun
+  - Samma medlem får bara räknas en gång även om föreningen har flera sektioner
+  - Medlemsantalet ska avse den 31 december föregående år
+  - Verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse samt drog- och alkoholpolicy ska lämnas
+  belopp: 4 000 kr vid 10–50 medlemmar; från 51 medlemmar 20 kr per medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår; stödformen kan sökas en gång per år
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=2&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tanum-grundbidrag
-- namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med ledarutbildning
+- id: tanum-grundbidrag-vuxenforeningar
+  namn: Grundbidrag för vuxenföreningar
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, annat]
+  malgrupp: Ideella vuxenföreningar med utåtriktad social, samhälls-, hembygds- eller kulturverksamhet
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och vara registrerad i kommunens föreningsregister
+  - Verksamheten ska vara socialt eller samhälleligt inriktad, vårda kulturarv eller bedriva utåtriktad kulturverksamhet
+  - Föreningen ska ha minst tio medlemmar folkbokförda i Tanums kommun
+  - Verksamhetsberättelse, resultat- och balansräkning samt undertecknad revisionsberättelse ska bifogas
+  - Föreningen kan inte få startbidrag och grundbidrag under samma kalenderår
+  belopp: 3 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår; stödformen kan sökas en gång per år
+  kalla_url: https://www.tanum.se/download/18.7156007e19e492ca4c241/1779346391421/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningslivet%20i%20Tanums%20kommun%2C%20reviderade%20KF%202022-09-19.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den gällande 2026-portalen använder fortsatt stödformen och den äldre normens villkor i avvaktan på nya regler från 2027
+- id: tanum-grundbidrag-pensionar-funktionsratt
+  namn: Grundbidrag för pensionärs- och funktionsrättsföreningar
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Intresseföreningar för pensionärer eller personer med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Föreningen ska vara ansluten till en riks- eller paraplyorganisation och uppfylla kommunens allmänna villkor
+  - Bara medlemmar folkbokförda i Tanums kommun får räknas när föreningen omfattar flera kommuner
+  - För funktionsrättsföreningar räknas personer med funktionsnedsättning och betalande familjemedlemmar
+  - Verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse och föreningsregisteranmälan ska lämnas
+  - Föreningen kan inte få startbidrag och grundbidrag under samma kalenderår
+  belopp: 3 000 kr vid 10–50 medlemmar; från 51 medlemmar 20 kr per medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår; stödformen kan sökas en gång per år
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=9&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-anlaggnings-och-lokalbidrag-ungdom
+  namn: Anläggnings- och lokalbidrag för barn- och ungdomsföreningar
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som driver barn- och ungdomsverksamhet i egen eller hyrd anläggning eller lokal
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Föreningen ska uppfylla de allmänna villkoren och redovisa barn- och ungdomsverksamhet i lokalen eller anläggningen
+  - Kostnaderna ska avse föregående verksamhetsår och styrkas för hyra, el, värme, vatten, renhållning, försäkring eller ränta
+  - Ny lokal, nyinvestering eller större underhåll som påverkar kostnaden ska godkännas av nämnden före kontrakt eller genomförande
+  - Kommunala lokaler med redan subventionerad hyra ger inte rätt till stödet
+  - Verksamhetsberättelse, ekonomisk redovisning, revision, stadgar och drog- och alkoholpolicy ska lämnas
+  belopp: Högst 70 procent av redovisade och godkända kostnader, i relation till föreningens ungdomsverksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=3&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-bidrag-enligt-avtal
+  namn: Bidrag enligt avtal
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Barn- och ungdomsföreningar som driver större anläggningar eller lokaler enligt särskilt avtal
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Föreningen ska driva en större anläggning eller lokal och ha ett särskilt avtal med barn- och utbildningsnämnden
+  - Avtalet ska reglera stödet och möjligheten till återinvestering i anläggningen eller lokalen
+  - Föreningen ska lämna verksamhetsberättelse, ekonomisk redovisning och revision enligt avtalet
+  - Stadgar och drog- och alkoholpolicy ska vara aktuella och föreningen ska uppfylla de allmänna villkoren
+  belopp: Stödets storlek och villkor fastställs i det särskilda avtalet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Årshandlingar lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=23&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Barn- och ungdomsföreningar som utbildar blivande eller aktiva ledare
   deadlines:
     typ: relativ
     datum: []
   krav:
-  - Föreningen ska ha minst 10 medlemmar i åldern 3-25 år folkbokförda i Tanums kommun
-  - Föreningen, inte den enskilda ledaren, väljer kurs och ansöker om bidraget
-  - Kursdeltagaren ska ha fyllt 13 år
-  - Bidrag kan sökas för kursavgift, resa, boende och kursmaterial, men inte för kurser som arrangeras tillsammans med Tanums
-    kommun
-  - Ansökan ska bifogas bevis på genomgången kurs, kvitto på betald kursavgift och kursprogram
-  belopp: Föreningen anger själv sökt belopp, max 5 000 kr per år och förening. Föreningar som föregående år redovisat fler
-    än 300 sammankomster för lokalt aktivitetsstöd får ytterligare 15 kr per sammankomst utöver 300, upp till max 10 000 kr
-    per år
-  sen_ansokan: Ansökan ska göras senast 60 dagar efter avslutad kurs, och endast för kurser genomförda under aktuellt kalenderår
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
+  - Föreningen ska ha minst tio medlemmar 3–25 år folkbokförda i Tanums kommun och uppfylla de allmänna villkoren
+  - Föreningen, inte den enskilda ledaren, ska välja kurs och söka bidraget
+  - Kursdeltagaren ska vara minst 13 år och utbildningen ska avse ledaruppdrag i föreningen
+  - Kursavgift, resa, boende och kursmaterial kan stödjas, men inte utbildning som genomförs tillsammans med kommunen
+  - Intyg, kursprogram, kvitto och begärda års- och föreningshandlingar ska bifogas
+  belopp: Högst 5 000 kr per förening och år; förening med fler än 300 redovisade LOK-sammankomster får ytterligare 15 kr per sammankomst över 300, totalt högst 10 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den aktuella 2026-portalen kräver ansökan inom 30 dagar efter avslutad kurs och under samma kalenderår
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=4&year=2026
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  id: tanum-ledarutbildningsbidrag
-- namn: Lokalt aktivitetsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Barn- och ungdomsföreningar
+  senast_verifierad: '2026-08-19'
+  anteckning: Den äldre normen anger 60 dagar, medan den operativa 2026-portalen anger 30 dagar
+- id: tanum-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med ledarledd verksamhet för deltagare 7–25 år eller deltagare med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+    datum: [02-25, 08-25]
   krav:
-  - En gruppaktivitet ska pågå minst 60 minuter med en ledare närvarande som samlar alla i början och slutet; ledaren får
-    inte leda flera aktiviteter samtidigt
-  - Ledaren ska ha fyllt 13 år och vara medlem i en förening inom Riksidrottsförbundet
-  - Minst 3 och max 30 deltagare räknas per aktivitet, i åldern 7-25 år (ingen övre åldersgräns för deltagare med funktionsnedsättning),
-    och deltagaren ska vara medlem i föreningen
-  - Föreningen måste närvaroregistrera deltagarna digitalt för att vara berättigad till stödet
-  - Föreningar anslutna till Riksidrottsförbundet ansöker först via IdrottOnline och bifogar redovisningsbekräftelsen till
-    kommunen; övriga föreningar ansöker direkt till kommunen och bifogar sin närvaroregistrering
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
+  - Aktiviteten ska vara planerad, ledarledd och pågå minst 60 minuter med gemensam samling och avslutning
+  - Gruppen ska ha 3–30 deltagare och ledaren ska vara minst 13 år, medlem eller utsedd av föreningen och inte leda flera grupper samtidigt
+  - Deltagaren ska vara medlem och 7–25 år; för deltagare med funktionsnedsättning finns ingen övre åldersgräns
+  - Närvaro ska registreras digitalt och underlaget ska kunna kontrolleras av kommunen
+  - RF-ansluten förening ska först söka statligt LOK-stöd och bifoga redovisningsbekräftelsen; övriga lämnar kommunens närvarounderlag
+  belopp: 14 kr per ledartillfälle, ytterligare 2 kr när minst två ledare registrerats i idrottens system samt 4 kr per deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den 25 februari gäller föregående höst och den 25 augusti föregående vår; kommunen publicerar ingen särskild senregel
+  kalla_url: https://bokning.tanum.se/bidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Samma aktivitetsregler gäller för funktionsrättsföreningar
+- id: tanum-lokalbidrag-pensionar-funktionsratt
+  namn: Lokalbidrag för pensionärs- och funktionsrättsföreningar
+  status: aktiv
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärs- och funktionsrättsföreningar som hyr lokal för regelbunden föreningsverksamhet
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och bedriva regelbunden verksamhet i den hyrda lokalen
+  - Nytt hyreskontrakt ska godkännas av barn- och utbildningsnämnden innan lokalbidrag kan lämnas
+  - Stödet proportioneras efter Tanummedlemmar när föreningens verksamhetsområde omfattar flera kommuner
+  - Lokal som används för kommersiell verksamhet ger inte rätt till bidrag
+  - Hyreskostnad, avtal, verksamhetsberättelse, ekonomi, revision och stadgar ska redovisas
+  belopp: Högst 70 procent av godkänd hyreskostnad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=10&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-verksamhetsbidrag-funktionsratt-sverige
+  namn: Verksamhetsbidrag till Funktionsrätt Sverige
+  status: aktiv
+  kategori: [social, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Funktionsrätt Sverige för den övergripande verksamheten för personer med funktionsnedsättning i Tanum
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Sökanden ska vara Funktionsrätt Sverige och stödet ska avse den övergripande verksamheten för personer med funktionsnedsättning
+  - Organisationen ska uppfylla kommunens allmänna villkor och lämna aktuell föreningsregisteranmälan
+  - Verksamhetsberättelse, resultat- och balansräkning, revisionsberättelse, stadgar och redovisning ska bifogas
+  - Kommunen ska samtidigt tillhandahålla en tillgänglig kontorslokal åt organisationen
+  belopp: 25 000 kr per år samt tillgänglig kontorslokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för verksamhetsåret lämnas senast 31 mars
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=12&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-grund-och-lokalytebidrag-samlingslokal
+  namn: Grund- och lokalytebidrag för samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Ideella föreningar som äger, arrenderar eller hyr en allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Lokalen ska ägas, arrenderas eller hyras av en ideell förening och fungera som naturlig mötesplats
+  - Lokalen ska vara öppen och tillgänglig för möten, studier, kultur, fritidsaktiviteter eller annan allmän verksamhet
+  - Verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse ska lämnas
+  - Föreningen ska redovisa lokalens stödberättigade yta och uppfylla kommunens allmänna villkor
+  - Äldre ekonomisk förening som driver allmän samlingslokal kan omfattas enligt normens särskilda undantag
+  belopp: 15 000 kr i grundbidrag samt 35 kr per kvadratmeter stödberättigad lokalyta
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 31 mars, eller 30 september vid brutet räkenskapsår
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=14&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-arrangorsbidrag
+  namn: Arrangörsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som genomför offentliga arrangemang eller aktiviteter
+  deadlines:
+    typ: fasta
+    datum: [03-31, 09-30]
+  krav:
+  - Arrangemanget ska vara ideellt, offentligt och genomföras i Tanum eller som ett samarrangemang mellan flera kommuner
+  - En ideell förening får söka för en aktivitet som skapar mervärde även när arrangemanget genomförs tillsammans med kommersiella aktörer
+  - Ansökan ska lämnas före arrangemanget och innehålla program, verksamhetsplan och budget
+  - Ett överskott ska återgå till den ideella verksamheten och redovisas
+  - Slutredovisning ska lämnas inom tre månader och all marknadsföring ska ange Tanum Kultur & Fritid som medarrangör
+  belopp: Individuellt bedömt i mån av utrymme i kommunens budget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas före arrangemanget och senast 31 mars eller 30 september enligt 2026-portalen
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=18&year=2026
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
-  id: tanum-lokalt-aktivitetsstod
-- namn: Stöd för arrangemang
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med arrangemang
+- id: tanum-ovrigt-bidrag
+  namn: Övrigt bidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med investeringar eller andra behov som inte ryms i kommunens övriga stödformer
   deadlines:
-    typ: relativ
+    typ: fasta
+    datum: [12-15]
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor och behovet får inte rymmas inom någon annan stödform
+  - Ansökan ska lämnas innan en investering eller annan stödgrundande åtgärd påbörjas
+  - Totalkostnad, föreningens egen insats, budget, verksamhetsplan och finansiering ska redovisas
+  - Verksamhetsberättelse, resultat- och balansräkning, revision, stadgar och efterföljande redovisning ska lämnas
+  - Nämnden prövar ansökan individuellt inom tillgänglig budget
+  belopp: Individuellt prövat efter kostnad, egen insats och tillgänglig budget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den offentliga 2026-portalen anger 15 december som sista ansökningsdag; ansökan ska alltid lämnas före åtgärden
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=21&year=2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den äldre normen anger före 30 september, medan den operativa 2026-portalen anger 15 december
+- id: tanum-lonebidrag
+  namn: Lönebidrag till föreningar
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar som anställer en person med statligt lönebidrag på en arbetsplats i Tanums kommun
+  deadlines:
+    typ: fasta
+    datum: [01-31]
+  krav:
+  - Arbetsplatsen ska finnas i Tanums kommun och anställningen ska vara knuten till en namngiven person med statligt lönebidrag
+  - Föreningen ska vara arbetsgivare, uppfylla kommunens allmänna villkor och lämna beslut och anställningsunderlag
+  - Nya lönebidragsanställningar prioriteras när kommunens anslag inte räcker till alla sökande
+  - Föreningen ska själv bära sju procent av lönekostnaden och hela kostnaden över det statliga lönetaket
+  - Förändringar i anställning eller statligt beslut ska omedelbart meddelas kommunen
+  belopp: Kommunal medfinansiering efter individuell prövning; föreningen betalar 7 procent av lönekostnaden och kostnad över statligt lönetak
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan om 2026 års lönebidrag ska lämnas senast 31 januari
+  kalla_url: https://bokning.tanum.se/bidrag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-bidrag-till-studieforbund
+  namn: Kommunalt bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Avdelningar inom Folkbildningsrådsgodkända studieförbund och SISU Idrottsutbildarna med verksamhet i Tanum
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Studieförbundet ska vara godkänt av Folkbildningsrådet eller vara SISU Idrottsutbildarna och bedriva verksamhet i Tanums kommun
+  - Den lokala avdelningen ska ha självständig ekonomisk förvaltning och ansvarig styrelse med säte i kommunen eller Västra Götalandsregionen
+  - Grund-, kultur-, förstärknings- och verksamhetsrelaterat bidrag ska redovisas med respektive fördelningsunderlag
+  - Verksamhetsberättelse, årsredovisning, revisionsberättelse, verksamhetsplan och kommunredovisning ska lämnas
+  - Kultur- och förstärkningsbidrag samt verksamhetsrelaterat bidrag baseras på föregående års statsbidragsberättigade verksamhet i Tanum
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Tillgängligt kommunanslag fördelas med 50 procent grundbidrag, 10 procent kulturbidrag, 15 procent förstärkningsbidrag och 25 procent verksamhetsrelaterat bidrag; totalsumman publiceras inte
+  sen_ansokan: Ansökan om de fyra ordinarie bidragsdelarna lämnas senast 30 april
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=25&year=2026
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: De fyra delarna har samma behörighet, ansökningsdag och gemensamma kommunanslag och redovisas därför som en stödform
+- id: tanum-aterstartatbidrag-studieforbund
+  namn: Återstartatbidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund som återupptar verksamhet i Tanum efter minst tre års inaktivitet
+  deadlines:
+    typ: okand
     datum: []
   krav:
-  - Arrangemanget ska vara ideellt och äga rum inom Tanums kommun, eller vara ett samarrangemang mellan flera kommuner
-  - Arrangemanget ska vara offentligt, så att allmänheten kan delta utan att vara medlem i föreningen
-  - Arrangörsbidraget ska sökas innan arrangemanget genomförs
-  - Eventuellt överskott från arrangemanget ska återgå till den ideella verksamheten och redovisas
-  - Slutredovisning ska lämnas till barn- och utbildningsförvaltningen senast tre månader efter arrangemanget
-  - Tanum Kultur & Fritid ska framgå som medarrangör i all marknadsföring
-  belopp: null
-  sen_ansokan: Bidraget ska sökas innan arrangemanget genomförs, ingen sen ansökan är möjlig i efterhand
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
+  - Sökanden ska vara ett Folkbildningsrådsgodkänt studieförbund eller SISU Idrottsutbildarna
+  - Studieförbundet ska ha varit inaktivt i Tanums kommun under minst tre år
+  - Statsbidragsberättigad verksamhet ska ha genomförts i Tanum under föregående år
+  - Verksamhetsberättelse, årsredovisning, revisionsberättelse, verksamhetsplan och redovisning ska bifogas
+  belopp: 30 000 kr som engångsgrundbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens offentliga 2026-portal publicerar ingen ansökningsfrist för återstartatbidraget
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=39&year=2026
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: tanum-sarskilt-kulturstod
+  namn: Särskilt kulturstöd
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Registrerade föreningar som söker särskilt stöd för kulturverksamhet i Tanums kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Sökanden ska vara en ideell förening som uppfyller kommunens allmänna villkor och är registrerad i föreningsregistret
+  - Ansökan ska avse kulturverksamhet i Tanums kommun och lämnas genom kommunens bidragsportal
+  - Föreningen ska ha organisationsnummer, konto i föreningens namn, stadgar och en demokratiskt vald styrelse
+  - Kommunen ska kunna granska föreningens verksamhet, ekonomi och användning av stödet
+  belopp: Kommunen publicerar ingen särskild beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 lämnas senast 30 april
+  kalla_url: https://bokning.tanum.se/bidrag/ansokaninfo.aspx?type=37&year=2026
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  id: tanum-stod-for-arrangemang
-- namn: Bidrag till handikapp- och pensionärsföreningar
-  kategori:
-  - pensionar
-  - funktionsratt
-  malgrupp: Pensionärs- och funktionsrättsföreningar
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-    - 09-30
-  krav:
-  - Föreningen ska vara en intresseförening för personer med funktionsnedsättning eller pensionärer, ansluten till en riks-
-    eller paraplyorganisation
-  - Föreningen ska uppfylla de allmänna bestämmelserna
-  - Föreningen ska tidigare ha ansökt om och beviljats startbidrag; kan inte få både startbidrag och grundbidrag samma kalenderår
-  - För föreningar vars verksamhetsområde omfattar flera kommuner utgår bidrag endast till de medlemmar som är folkbokförda
-    i Tanums kommun
-  - För föreningar med verksamhet för funktionsnedsatta räknas endast personer med funktionsnedsättning som medlem, men en
-    familjemedlem kan räknas med om även denne betalar medlemsavgift
-  - Ansökan ska bifogas resultaträkning, balansräkning, undertecknad revisionsberättelse och verksamhetsberättelse från föregående
-    år
-  belopp: '10-50 medlemmar: 3 000 kr. 51 medlemmar och fler: 20 kr per medlem'
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Källan beskriver även Lokalbidrag, LOK-stöd och verksamhetsbidrag till Funktionsrätt Sverige för denna föreningstyp,
-    vilka inte är egna poster i denna lista.
-  id: tanum-bidrag-till-handikapp-och-pensionarsforeningar
-- namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund
-  deadlines:
-    typ: fasta
-    datum:
-    - 03-31
-  krav:
-  - Studieförbundet ska vara godkänt av Folkbildningsrådet eller SISU Idrottsutbildarna
-  - Verksamheten ska bedrivas i Tanums kommun, och studieförbundet ska ha egen ekonomisk förvaltning och en ansvarig styrelse
-    med säte i kommunen eller Västra Götalandsregionen
-  - 'Bidraget fördelas i fyra delar: grundbidrag (50%), kulturbidrag (10%), förstärkningsbidrag (15%) och verksamhetsbidrag
-    (25%), där de tre senare kräver redovisad skattefinansierad verksamhet från föregående år'
-  - Ansökan ska bifogas verksamhetsberättelse, årsredovisning, revisionsberättelse för föregående år samt verksamhetsplan
-    för innevarande år
-  belopp: Grundbidraget fördelas efter respektive studieförbunds andel av föregående års totala anslag. Studieförbund som
-    varit inaktiva i tre år kan få ett engångsgrundbidrag på 30 000 kr om verksamhet bedrivits i Tanum föregående år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: null
-  id: tanum-bidrag-till-studieforbund
+  senast_verifierad: '2026-08-19'
+  anteckning: Den offentliga 2026-portalen publicerar inga särskilda villkor utöver stödets namn och ansökningsdag
 forutsattningar:
 - id: tanum-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Tanums bidragssystem
+  vad: Registrering och löpande uppdatering av föreningsuppgifter
+  beskrivning: Föreningen ska vara registrerad i Tanums kommuns föreningsregister och kontinuerligt hålla styrelse, kontaktuppgifter, medlemsantal och begärda årshandlingar aktuella.
+  system: FRI Webb-Bidrag
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna ska hållas aktuella under varje kalenderår
+  giltighet: Kalenderårsvis aktualisering av föreningsuppgifter och årshandlingar
   ordning: 1
-  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod.4.7664b4813898b7df9843fa8.html
-  giltighet_status: okand
+  kalla_url: https://www.tanum.se/upplevagora/foreningar/foreningsbidragochstod/allmannabestammelser.4.7664b4813898b7df9843f85.html
+  giltighet_status: kontrollast
+- id: tanum-allmanna-villkor
+  vad: Allmänna villkor för kommunalt föreningsbidrag
+  beskrivning: Föreningen ska vara ideell, ha säte i Tanum, organisationsnummer, konto i föreningens namn, stadgar, vald styrelse, årlig medlemsavgift och minst tio medlemmar folkbokförda i kommunen. Barn- och ungdoms-, funktionsrätts- och pensionärsföreningar ska normalt vara anslutna till riks- eller paraplyorganisation; barn- och ungdomsföreningar ska ha drog- och alkoholpolicy.
+  system: FRI Webb-Bidrag
+  ledtid: null
+  ledtid_text: Villkoren ska vara uppfyllda när ansökan lämnas
+  giltighet: Gäller så länge föreningen uppfyller villkoren och håller uppgifterna aktuella
+  ordning: 2
+  kalla_url: https://www.tanum.se/download/18.7156007e19e492ca4c241/1779346391421/Bidragsnormer%20f%C3%B6r%20f%C3%B6reningslivet%20i%20Tanums%20kommun%2C%20reviderade%20KF%202022-09-19.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null
