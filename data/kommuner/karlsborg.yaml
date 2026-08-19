@@ -2,183 +2,253 @@ kommun: Karlsborg
 kommun_slug: karlsborg
 lan: Västra Götalands län
 befolkning: 7062
-forvaltning: Kultur- och fritidsverksamheten
+forvaltning: Kultur- och fritidsförvaltningen, Socialförvaltningen samt gata- och parkenheten
 ansokningssystem:
-  namn: Rbok
+  namn: Rbok, e-tjänster och blanketter
   url: https://karlsborg.rbok.se/
-kalla_url: https://www.karlsborg.se/kultur--fritid/foreningsliv/
-verifierad: '2026-07-31'
+kalla_url: &huvud https://www.karlsborg.se/kultur--fritid/foreningsliv/
+verifierad: '2026-08-19'
+kommunsiffra: null
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.karlsborg.se/globalassets/documents/politiskt-beslutade-styrdokument/kultur-och-fritid/regler-foreningsbidrag.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Bidragsberättigade föreningar med aktiviteter för 7–25-åringar
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav: []
-  belopp: 10 kr per sammankomst och 12 kr per deltagare enligt reglerna
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: ''
-  id: karlsborg-aktivitetsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Kulturbidrag
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer som ordnar offentliga kulturprogram
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
+- id: karlsborg-aktivitetsbidrag
+  namn: Aktivitetsbidrag
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, social, pensionar, funktionsratt, ovrig]
+  malgrupp: Bidragsberättigade föreningar med ledarledd idrotts-, fritids- eller kulturverksamhet för 6–25-åringar, personer från 65 år eller personer med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Föreningen ska ha fler än tio medlemmar och bedriva kontinuerlig verksamhet
+  - Sammankomsten ska vara ledarledd, pågå minst 60 minuter och ha 3–30 deltagare i stödberättigad ålder
+  - Ledaren ska vara minst 13 år, närvarande och får inte ansvara för flera grupper samtidigt
+  - En deltagare får räknas högst en gång per dag och verksamhet i samma förening; vid tävling räknas endast den egna föreningens deltagare
+  - Aktiviteten ska anordnas av den lokala föreningen, följa verksamhetsidén och innehålla gemensam samling och avslutning
+  - Entrébelagda tävlingar, kommersiella arrangemang och studieförbundsverksamhet är inte stödberättigade
+  belopp: 'Riktvärde per deltagartillfälle: 12 kr för 6–25 år, 8 kr från 65 år och 12 kr för personer med funktionsnedsättning oavsett ålder; nivåerna kan justeras efter anslag och ansökningsutfall'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sent inkommen ansökan behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-evenemangsbidrag
+  namn: Evenemangsbidrag
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och organisationer som ordnar offentliga idrotts-, fritids- eller kulturevenemang i Karlsborg
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Evenemanget ska vara offentligt och bidra till ett varierat utbud som gynnar Karlsborgs invånare och besökare
+  - Sökanden ska vara verksam i Karlsborgs kommun och uppfylla kommunens demokrati-, allmännytte- och organisationskrav
+  - Ansökan ska lämnas i Rbok minst sex veckor före evenemanget
+  - Karlsborgs kommun ska anges som samarbetspartner eller bidragsgivare i marknadsföringen
+  - Beviljat och nyttjat bidrag ska redovisas i Rbok senast tre månader efteråt innan en ny utbetalning kan ske
+  belopp: Individuellt prövat inom kultur- och fritidsförvaltningens ekonomiska ram; bidrag fördelas så långt möjligt jämnt över året
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas minst sex veckor före evenemanget; bidrag ges inte i efterhand
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-kulturbidrag
+  namn: Verksamhetsbidrag till kulturverksamheter med stor allmännytta
+  foreningstyp: [kultur, hembygd, annat]
+  kategori: [kultur]
+  malgrupp: Kulturföreningar och andra organisationer med säte och verksamhet i Karlsborg som erbjuder ett brett, offentligt kulturutbud
+  deadlines: {typ: fasta, datum: [09-01]}
+  krav:
+  - Verksamheten ska vara öppen för allmänheten, nå en bred publik och ha dokumenterat allmänintresse för kommunen
+  - Verksamheten ska stödja kulturaktiviteter och mötesplatser samt främja delaktighet, lärande och skapande för barn, unga och vuxna
+  - Sökanden ska vara verksam och ha sitt säte i Karlsborgs kommun
+  - Årsmöteshandlingarna ska årligen visa verksamhetens omfattning, deltagande och allmännytta
+  - Ett flerårigt stöd förutsätter att verksamheten fortsatt uppfyller villkoren och visar dokumenterat mervärde; ny prövning görs efter högst tre år
+  belopp: Individuellt bedömt efter verksamhetens allmännyttiga intresse och kommunens beslutade budgetmedel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 1 september året före utbetalningsåret; för sent inkommen ansökan behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-investeringsbidrag
+  namn: Investeringsbidrag
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som äger eller långfristigt arrenderar eller hyr en anläggning i Karlsborgs kommun
+  deadlines: {typ: fasta, datum: [09-01]}
+  krav:
+  - Föreningen ska äga eller långfristigt arrendera eller hyra anläggningen
+  - Anläggningen ska vara belägen i Karlsborgs kommun
+  - Investeringen ska avse ny-, till- eller ombyggnad, förbättring eller reparation av anläggningen eller fast inredning i föreningslokalen
+  - Föreningen ska vara registrerad, uppfylla kommunens allmänna bidragsvillkor och ha lämnat de årliga föreningshandlingarna
+  - Beviljat och nyttjat bidrag ska redovisas i Rbok senast tre månader efteråt och innan en ny utbetalning kan ske
+  belopp: Kommunen publicerar ingen generell beloppsnivå för investeringsbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 1 september året före utbetalningsåret; för sent inkommen ansökan behandlas inte
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-bidrag-till-studieforbund
+  namn: Bidrag till studieförbund
+  foreningstyp: [kultur, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Studieförbund med folkbildningsverksamhet i Karlsborgs kommun
+  deadlines: {typ: fasta, datum: [06-30, 12-15]}
+  krav:
+  - Studieförbundets verksamhet ska stärka demokratin, människors möjlighet att påverka sin livssituation och deltagandet i samhällsutvecklingen
+  - Verksamheten ska bidra till att utjämna utbildningsklyftor och bredda intresset för och delaktigheten i kulturlivet
+  - Verksamhetsplan för kommande år ska lämnas senast 15 december
+  - Föregående års verksamhetsberättelse inklusive ekonomisk berättelse och underskrivet kommunsammandrag ska lämnas senast 30 juni
+  - Kommunen hämtar uppgifter om utbildningstimmar och unika deltagare från Västra Götalands bildningsförbund; förbund utanför organisationen prövas efter särskilt samråd
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ansökan senast sex veckor före aktiviteten. Ej angivet i källan
-  id: karlsborg-kulturbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som äger eller långsiktigt hyr/arrenderar anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Söks året före utbetalning.
-  id: karlsborg-investeringsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Projektstöd barn och ungdom
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med utvecklingsprojekt för målgruppen 0–25 år
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ansökan senast sex veckor före aktiviteten. Ej angivet i källan
-  id: karlsborg-projektstod-barn-och-ungdom
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Driftsbidrag eller driftsavtal
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som driver egen eller kommunal anläggning, spår eller led
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Söks året före utbetalning.
-  id: karlsborg-driftsbidrag-eller-driftsavtal
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Bidrag till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar med kontinuerlig verksamhet och minst tio medlemmar
-  deadlines:
-    typ: fasta
-    datum:
-    - 11-30
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Ansökan är öppen 1–30 november.
-  id: karlsborg-bidrag-till-pensionarsforeningar
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Evenemangsbidrag
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Föreningar och i undantagsfall andra aktörer som ordnar offentliga evenemang
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.karlsborg.se/link/54b8f2830e3349f8afb549a0abf711e4.aspx
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ej angivet i källan
-  id: karlsborg-evenemangsbidrag
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
-- namn: Bidrag till studieförbund
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Studieförbund verksamma i Karlsborgs kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 06-30
-    - 12-15
-  krav: []
-  belopp: Kommunens årliga ram fördelas enligt verksamhetsunderlag
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: ren_pott
+  kommunens_pott: 185 000 kr i kommunbidrag 2026, fördelat efter verksamhetsunderlag och samråd med Västra Götalands bildningsförbund
+  sen_ansokan: Kommunen publicerar separata sista datum för verksamhetsplanen och föregående års handlingar
   kalla_url: https://www.karlsborg.se/kultur--fritid/foreningsliv/bidragsregler-for-studieforbund/
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: okand
-  anteckning: Olika handlingar har olika sista datum.
-  id: karlsborg-bidrag-till-studieforbund
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-sarskilda-avtal
+  namn: Särskilda avtal
+  foreningstyp: *alla
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Bidragsberättigade föreningar som på kommunens uppdrag ansvarar för verksamhet inom kultur- och fritidsförvaltningens område
+  deadlines: {typ: fasta, datum: [09-01]}
+  krav:
+  - Avtal kan endast tecknas med en bidragsberättigad förening
+  - Föreningen ska ansvara för verksamhet inom kultur- och fritidsförvaltningens ansvarsområden
+  - Avtalet ska bygga på en tydlig motprestation och fastställa föreningens ekonomiska ersättning
+  - Föreningen ska lämna ansökan i Rbok året före avtalet träder i kraft
+  - Föreningen ska uppfylla kommunens registrerings-, demokrati-, allmännytte- och redovisningskrav
+  belopp: Ekonomisk ersättning fastställs individuellt i avtalet utifrån den avtalade motprestationen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas senast 1 september året före avtalet träder i kraft; för sent inkommen ansökan behandlas inte
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-socialnamndens-foreningsstod
+  namn: Ekonomiskt stöd till föreningar och förbund från socialnämnden
+  foreningstyp: [social, annat]
+  kategori: [social, funktionsratt, ovrig]
+  malgrupp: Föreningar med lokal anknytning vars verksamhet gynnar Karlsborgs invånare inom socialnämndens prioriterade områden
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska ha lokal anknytning till Karlsborg och verksamheten ska på något sätt kunna gynna kommunens invånare
+  - Verksamheten ska värna om barn och barns rättigheter, eller värna om och hjälpa personer som utsatts för våld, övergrepp eller andra utsatta situationer
+  - Stöd kan också ges till verksamhet som hjälper och utbildar adopterade barn och blivande adoptionsföräldrar
+  - Minst ett av socialnämndens tre publicerade ändamålskriterier ska vara uppfyllt
+  belopp: Socialnämnden publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Socialnämndens riktlinje publicerar ingen ansökningsfrist
+  kalla_url: https://www.karlsborg.se/globalassets/documents/politiskt-beslutade-styrdokument/vard-stod-och-omsorg---overgripande-socialforvaltningen/riktlinje---kriterier-for-utbet-av-ek-stod-till-foreningar-o-forbund-fran-sn.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-driftbidrag-vagsamfallighet
+  namn: Kommunalt underhållsbidrag till vägsamfällighet
+  foreningstyp: [annat]
+  kategori: [ovrig]
+  malgrupp: Vägsamfälligheter med statsbidragsberättigade vägdelar i Karlsborgs kommun
+  deadlines: {typ: fasta, datum: [11-30]}
+  krav:
+  - Sökanden ska vara en vägsamfällighet som ansvarar för den aktuella enskilda vägen
+  - Vägen ska vara berättigad till statligt driftbidrag från Trafikverket
+  - Den vägdel som stödet avser ska ligga i Karlsborgs kommun
+  - Trafikverkets beslut om godkänd driftskostnad ska ligga till grund för kommunens beräkning
+  - Ansökan ska lämnas till kommunens gata- och parkenhet det år som bidraget avser
+  belopp: Högst 15 % av den driftskostnad som Trafikverket har godkänt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara inlämnad senast 30 november det år som bidraget avser
+  kalla_url: https://karlsborg.se/trafik-vagar-och-resande/gator-vagar-och-torg/bidrag-for-enskild-vag/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: karlsborg-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala idrottsanläggningar
+  foreningstyp: *alla
+  kategori: [idrott, kultur, social, pensionar, ovrig]
+  malgrupp: Föreningar som hyr simhall, idrottshall, mindre träningslokaler, gymnastiksalar eller fotbollsplaner av Karlsborgs kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Bokningen ska avse en kommunal idrottsanläggning eller lokal som omfattas av kommunens föreningstaxa
+  - Barn- och ungdomsgrupper i säsongsbunden tävlingsidrott prioriteras före senior-, motions- och utomsäsongsverksamhet vid tidsfördelningen
+  - Föreningar ska följa kommunens boknings- och nyttjanderegler för den aktuella anläggningen
+  - Taxan skiljer mellan föreningsverksamhet och privatpersoner eller företag och gäller per bokad timme
+  belopp: 'Föreningstaxa per timme: simhall och idrottshall 80 kr, judo- och pingislokal 40 kr, gymnastiksal 50 kr och fotbollsplan 80 kr; pensionärsförening betalar 75, 75, 35, 45 respektive 75 kr'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist; stödet ges genom föreningstaxan vid bokning
+  kalla_url: https://www.karlsborg.se/globalassets/documents/politiskt-beslutade-styrdokument/kultur-och-fritid/taxa-molidens-sim--och-idrottsanlaggning.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
 - id: karlsborg-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
-  system: Karlsborgs e-tjänster
+  vad: Registrering och årlig uppdatering i föreningsregistret
+  beskrivning: Föreningen ska vara registrerad i Karlsborgs kommuns föreningsregister och efter årsmötet eller annan förändring uppdatera uppgifterna minst en gång per år. Årsmötesprotokoll, styrelseunderskriven verksamhetsberättelse, balans- och resultaträkning samt revisionsberättelse ska rapporteras årligen.
+  system: Rbok
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Efter årsmötet eller vid annan förändring, minst en gång per år
+  giltighet: Årlig uppdatering
   ordning: 1
-  kalla_url: https://www.karlsborg.se/kultur--fritid/foreningsliv/
-  giltighet_status: okand
-kommunsiffra: null
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: karlsborg-allmanna-villkor
+  vad: Allmänna villkor för kommunalt föreningsbidrag
+  beskrivning: Föreningen ska vara demokratiskt uppbyggd, öppen och verksam i Karlsborg, ha organisationsnummer och föreningskonto samt arbeta för jämlikhet, mångfald och en tobaks-, alkohol-, dopnings- och drogfri verksamhet. Barn- och ungdomsverksamhet ska följa barnkonventionen.
+  system: Karlsborgs kommun
+  ledtid: null
+  ledtid_text: Villkoren ska vara uppfyllda när föreningen söker och under stödperioden
+  giltighet: Så länge villkoren är uppfyllda
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
