@@ -2,18 +2,29 @@ kommun: Torsby
 kommun_slug: torsby
 lan: Värmlands län
 befolkning: 11278
-forvaltning: Fritidsavdelningen
+forvaltning: Fritidsavdelningen, kulturavdelningen och kommunledningskontoret
 ansokningssystem:
-  namn: E-tjänst/blankett
-  url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar.4.7308326156ca7fa796bf201.html
-kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar.4.7308326156ca7fa796bf201.html
-verifierad: '2026-08-01'
+  namn: Interbook Go samt e-tjänster och blanketter
+  url: https://e-tjanster.torsby.se/MenuGroup2.aspx?groupId=167
+kalla_url: &huvud https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar.4.7308326156ca7fa796bf201.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Aktivitetsbidrag
+- namn: Aktivitetsbidrag för barn, unga och seniorer 65+
+  status: aktiv
   kategori:
   - idrott
+  - kultur
+  - pensionar
+  - funktionsratt
   - ovrig
-  malgrupp: Föreningar som bedriver ungdomsverksamhet
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Föreningar med regelbunden verksamhet för barn och unga eller deltagare från 65 år
   deadlines:
     typ: fasta
     datum:
@@ -29,19 +40,27 @@ bidrag:
     som fyllt minst 13 år
   - Ansökan görs på särskild blankett med närvarokort, senast 25 augusti (period januari–juni) respektive 25 februari (period
     juli–december); närvarokort ska sparas av föreningen i fem år
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - En deltagare får räknas högst en gång per dag och verksamhet; fester, högtidsfiranden, publika arrangemang, skolaktiviteter
+    och studiecirklar är inte stödberättigande
+  - Barn och unga respektive seniorer 65+ ska redovisas på skilda närvarokort
+  belopp: Ersättning per godkänd sammankomst och deltagartillfälle; kommunen publicerar ingen generell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 25 februari för juli–december och 25 augusti för januari–juni; aktiviteter får inte flyttas mellan perioder.
   kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar/aktivitetsbidragforforeningarlokaltaktivitetsstod.4.7143cdc21924bc27be5117b.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
+  anteckning: Från den 1 juli 2026 omfattar stödet även deltagare från och med det år de fyller 65 år.
   id: torsby-aktivitetsbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Lokal- och anläggningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar med hyrd eller ägd lokal för barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
@@ -56,22 +75,28 @@ bidrag:
   - Föreningar i kommunala anläggningar, med lokal hyrd av privatperson, hyrd i andra hand eller belägen utanför kommunen
     kan inte söka
   - Ansökan senast 30 september
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Ansökan avser kostnader under året före ansökningsåret
+  belopp: Individuellt efter anläggningsart, verksamhetens omfattning, skolans och allmänhetens nyttjande samt tillgängliga medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september.
   kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar/lokalochanlaggningsbidragforforeningar.4.7143cdc21924bc27be511ae.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: torsby-lokal-och-anlaggningsbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Ledarutbildningsbidrag
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar som utbildar ungdomsledare eller arbetar med föreningsutveckling
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska vara beviljad aktivitetsstöd föregående år eller kunna påvisa barn- och ungdomsverksamhet
@@ -80,18 +105,25 @@ bidrag:
     av förening, distriktsförbund, riksorganisation, SISU Idrottsutbildarna eller studieförbund
   - Kursprogram och kursintyg (eller annat styrkande underlag) ska lämnas in innan stödet betalas ut
   - Ansökan ska skickas in snarast, dock senast tre månader efter kursens genomförande
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Studiecirklar, tränings- och distriktsläger, fjällresor, yrkesutbildning, kongresser och beslutande möten ger inte stöd
+  belopp: Upp till 50 procent av godkänd kurskostnad och 100 procent av billigaste resa; särskilt dyra kurser prövas individuellt
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Löpande, men senast en månad efter genomgången kurs enligt huvudsidans aktuella ansökningstider.
   kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar/ledarutbildningsbidragforforeningar.4.7143cdc21924bc27be511b9.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökan senast en månad efter genomgången kurs.
+  anteckning: Den bidragsspecifika sidan anger tre månader efter kursen, medan den senare uppdaterade huvudsidans ansökningstider
+    anger en månad.
   id: torsby-ledarutbildningsbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Startbidrag
+  status: aktiv
   kategori:
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Nystartad förening med minst 15 medlemmar
   deadlines:
     typ: lopande
@@ -102,17 +134,24 @@ bidrag:
     ska bedrivas
   - Bidraget beviljas efter särskild prövning och är inte en rättighet
   belopp: 6 000 kr
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
   kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar/startbidragforforeningar.4.7143cdc21924bc27be511c4.html
-  belopp_status: olast
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: torsby-startbidrag
+  senast_verifierad: '2026-08-19'
 - namn: Bidrag till samlingslokaler
+  status: aktiv
   kategori:
+  - kultur
+  - social
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar och organisationer som driver samlingslokal
   deadlines:
     typ: fasta
@@ -125,39 +164,81 @@ bidrag:
     3x vid 91 eller fler'
   - Förberedelse, städning, möbelutlämning, reparationer och kommersiell verksamhet är inte stödberättigande
   - Ansökan senast 15 februari för föregående kalenderår, med verifierad deltagarredovisning
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Varje aktivitet ska ha en namngiven ansvarig person som kan verifiera deltagaruppgifterna; samma grupp kan ge högst en
+    stödberättigad aktivitet per dag
+  belopp: 65 kr per aktivitet vid 5–40 deltagare, 130 kr vid 41–90 och 195 kr vid minst 91 deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Underlaget för föregående kalenderår ska vara fritidsavdelningen tillhanda senast 15 februari.
   kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar/samlingslokalbidragforforeningar.4.7143cdc21924bc27be511cf.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
   id: torsby-bidrag-samlingslokaler
-- namn: Förlustbidrag till kulturföreningar
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar som genomför arrangemang
+  senast_verifierad: '2026-08-19'
+- namn: Årligt bidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar med verksamhet i Torsby kommun
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar.4.7308326156ca7fa796bf201.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kommunens e-tjänst benämner stödet kulturföreningar förlustbidrag. Ej angivet i källan
+  krav:
+  - Sökanden ska vara en kulturförening i Torsby kommun
+  - Bidraget avser föreningens årliga kulturverksamhet; stöd till ett särskilt planerat arrangemang hanteras som förlustbidrag
+  - Föreningen ska lämna de uppgifter och handlingar som kulturavdelningen begär för den årliga prövningen
+  belopp: Kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist.
+  kalla_url: &kultur https://torsby.se/upplevagora/kultur/bidragstodochstipendierinomkulturomradet.4.7308326156ca7fa796be7ab.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: torsby-arligt-kulturforeningsbidrag
+  senast_verifierad: '2026-08-19'
+- namn: Förlustbidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar som planerar ett arrangemang
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Sökanden ska vara en kulturförening och ansökan ska avse ett planerat arrangemang
+  - Ansökan ska lämnas innan arrangemanget genomförs och beskriva arrangemanget samt den beräknade ekonomin
+  - Efter arrangemanget ska föreningen redovisa faktiska kostnader och intäkter
+  - Redovisningen ska innehålla en utvärdering av programmet och antalet besökare
+  - Beviljat bidrag ska rekvireras senast tre månader efter arrangemanget och senast den 20 december samma budgetår
+  belopp: Förlusttäckning efter redovisat ekonomiskt utfall; ingen generell maxnivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska göras före det planerade arrangemanget; kommunen publicerar inget minsta antal dagar.
+  kalla_url: *kultur
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   id: torsby-forlustbidrag-kulturforeningar
-- namn: Landsbygdspotten
+  senast_verifierad: '2026-08-19'
+- namn: Landsbygdspotten 2026
+  status: aktiv
   kategori:
+  - kultur
+  - social
   - ovrig
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Lokala initiativ som bidrar till landsbygdsutveckling i Torsby kommun
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [05-18]
   krav:
   - Sökande ska vara en ideell förening som bedöms vara en icke-kommersiell aktör med fast hemvist i Torsby kommun; enskilda
     personer, ekonomiska föreningar eller företag beviljas inte stöd
@@ -166,24 +247,93 @@ bidrag:
   - Endast projektkostnader för insatser som sker efter att ansökan lämnats in är stödberättigande
   - Maxbelopp 50 000 kr per ansökan
   - Ansökan ska undertecknas av föreningens behöriga firmatecknare
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  - Första delredovisning ska lämnas inom sex månader och slutredovisning med bokföringsutdrag eller fakturor senast 24 månader
+    efter beslut
+  belopp: Högst 50 000 kr per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: 1 000 000 kr avsattes för Landsbygdspotten 2026
+  sen_ansokan: Publicerad ansökningsdag för den kvarvarande 2026-omgången är 18 maj.
   kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar/landsbygdspotten.4.75fd12e5175ece6a4377aa5c.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Sidan anger att 18 maj kan vara sista ansökningsdagen 2026 eftersom lite medel återstår.
+  id: torsby-landsbygdspotten
+  senast_verifierad: '2026-08-19'
+- namn: Kommunalt bidrag till lönekostnad för lönebidragsanställd
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med en lönebidragsanställd
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara en ideell förening och arbetsgivare för en person som Arbetsförmedlingen har beviljat lönebidrag
+  - Föreningen, den anställde och Arbetsförmedlingen ska vara överens om arbetsuppgifterna och bidragsdelens storlek
+  - Ansökan ska redovisa arbetets omfattning, period, ansvarsområde samt vilka anläggningar som ingår i arbetsuppgifterna
+  - Föreningen ska bifoga senaste verksamhetsberättelsen med ekonomiskt bokslut
+  - Föreningen ska bifoga styrelsebeslut om att söka kommunalt bidrag för den lönebidragsanställde
+  belopp: Individuellt enligt överenskommelsen mellan föreningen, den anställde och Arbetsförmedlingen; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag.
+  kalla_url: https://e-tjanster.torsby.se/Form.ashx?id=3960
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
-  id: torsby-landsbygdspotten
+  id: torsby-lonebidrag-ideell-forening
+  senast_verifierad: '2026-08-19'
+- namn: Nolltaxa i kommunens hallar och på planer
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Stödberättigade föreningar med barn- och ungdomsverksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad och hemmahörande i Torsby kommun
+  - Nolltaxan gäller tränings- och matchtider för barn- och ungdomsverksamhet
+  - Bokning och fördelning följer kommunens prioriteringsordning där barn- och ungdomsföreningar går före vuxenföreningar,
+    företagsklubbar och privatpersoner
+  belopp: Avgiftsfria tränings- och matchtider i kommunens hallar och på kommunens planer
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist publiceras; stödet ges genom bokningen.
+  kalla_url: https://torsby.se/download/18.4c4f477715a9a1ba38355a7a/1488961358268/5_5%20Regler%20och%20till%C3%A4mpning%20av%20kommunalt%20st%C3%B6d%20till%20f%C3%B6reningar.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: torsby-nolltaxa-hallar-planer
+  senast_verifierad: '2026-08-19'
 forutsattningar:
 - id: torsby-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: E-tjänst/blankett
+  vad: Registrering och årlig redovisning
+  beskrivning: Föreningen ska vara registrerad, hålla årsmöte varje år och årligen lämna verksamhetsberättelse, resultat- och
+    balansräkning samt revisionsberättelse till kommunen. Ändrade föreningsuppgifter uppdateras i föreningsregistret.
+  system: Interbook Go samt e-tjänster och blanketter
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Årligen; kommunen publicerar ingen gemensam fast dag för handlingarna
+  giltighet: Ett kalenderår i taget genom årlig redovisning
   ordning: 1
-  kalla_url: https://torsby.se/upplevagora/stodochhjalptillforeningar/foreningsbidragstodochstipendierforforeningar.4.7308326156ca7fa796bf201.html
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: torsby-allmanna-villkor
+  vad: Allmänna villkor för fritidsavdelningens stöd
+  beskrivning: Föreningen ska bedriva ideell verksamhet i Torsby kommun i drogfri miljö, vara demokratisk och öppen, främja
+    folkhälsa, jämställdhet, integration och mångfald samt motverka diskriminering. Ansökan undertecknas av ordförande och
+    firmatecknare och flersektionsförening söker genom huvudföreningen.
+  system: Fritidsavdelningen
+  ledtid: null
+  ledtid_text: Före den första bidragsansökan
+  giltighet: Gäller så länge föreningen uppfyller villkoren och fullgör den årliga redovisningen
+  ordning: 2
+  kalla_url: *huvud
+  giltighet_status: kontrollast
 kommunsiffra: null
