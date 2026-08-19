@@ -6,14 +6,26 @@ forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
   namn: Minasidor Askersund
   url: https://minasidor.askersund.se/
-kalla_url: https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/bidrag-och-stod-till-civilsamhallet
-verifierad: 2026-07-26
+kalla_url: &huvud https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/bidrag-och-stod-till-civilsamhallet
+verifierad: 2026-08-19
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &registrering https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/registrering-av-forening
+giltighet_regel_status: kontrollast
 bidrag:
 - id: askersund-grundbidrag
   namn: Grundbidrag
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Ungdoms- och barnorganisationer
   deadlines:
     typ: fasta
@@ -26,6 +38,8 @@ bidrag:
     (aktivitetsstöd) under senaste verksamhetsåret'
   - Medlemsantal beräknas per 31 december året innan ansökan
   belopp: 40 kronor per medlem i åldern 7–21 år. För medlemmar i åldern 13–21 år utgår 50 kronor per medlem.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -41,6 +55,12 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Nystartade registrerade föreningar
   deadlines:
     typ: lopande
@@ -51,6 +71,8 @@ bidrag:
   - Föreningen ska inte ha varit verksam i kommunen under den senaste treårsperioden
   - Bidrag utbetalas inte till nybildad sektion inom befintlig förening
   belopp: 2 000 kronor för nystartad förening. Nystartad sektion inom befintlig förening genererar inte bidrag.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -65,6 +87,12 @@ bidrag:
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Ungdoms- och barnföreningar
   deadlines:
     typ: fasta
@@ -83,6 +111,8 @@ bidrag:
   - Närvarokort ska föras vid varje sammankomst
   belopp: 50 kronor per sammankomst och deltagare i åldern 7–12 år. För deltagare i åldern 13–21 år utgår 3 kronor extra per
     deltagartillfälle.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Två ansökningstillfällen per år: 25 februari för aktiviteter januari-juni, 25 augusti för juli-december'
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -96,6 +126,11 @@ bidrag:
   namn: Driftbidrag idrottanläggning
   kategori:
   - idrott
+  foreningstyp:
+  - idrott
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Idrottsklubbar med minst 20 medlemmar 7-21 år
   deadlines:
     typ: fasta
@@ -109,6 +144,8 @@ bidrag:
   - Elljusspår ska vara öppet för allmänheten med belysning tänd till kl. 22 under den mörka årstiden
   belopp: 40 % av uppgivna driftkostnader, dock max 50 000 kronor. För elljusspårsanläggning utgår 50 % av driftkostnaderna,
     dock max 10 000 kronor. Extern anläggningshyra (separat bidrag) ges med 40 % av hyreskostnaden, max 50 000 kronor.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -121,6 +158,12 @@ bidrag:
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Ungdomsorganisationer
   deadlines:
     typ: lopande
@@ -131,6 +174,8 @@ bidrag:
   - Bidrag utgår till maximalt fyra personer per kurs och organisation
   - Ansökan ska innehålla deltagarförteckning eller kursbevis samt kvitto på erlagd kursavgift
   belopp: 75 % av kurskostnaden, dock max 2 400 kronor per deltagare.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan inom 2 månader efter kursslut
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -143,6 +188,12 @@ bidrag:
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - ungdom
+  - annat
   malgrupp: Ungdomsorganisationer för läger
   deadlines:
     typ: lopande
@@ -154,6 +205,8 @@ bidrag:
   - Namnlista (namn och födelsedatum) på deltagare och ledare ska bifogas ansökan
   belopp: 25 kronor per deltagare och dag i åldern 7–21 år. För deltagare i åldern 13–21 år utgår 30 kronor per deltagare
     och dag.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan 2 månader efter lägret
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -168,6 +221,14 @@ bidrag:
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Registrerade föreningar för aktiviteter under lovtider
   deadlines:
     typ: lopande
@@ -177,6 +238,8 @@ bidrag:
   - Aktiviteten ska finnas med i kommunens lovprogram
   - Bidrag utgår inte till förtäring
   belopp: 100 kronor per timme och förening, max 10 timmar. Materialinköp m.m. max 1 000 kronor per förening.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan 2 månader efter aktiviteten
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -191,6 +254,14 @@ bidrag:
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Registrerade föreningar för sommarlovsprogram
   deadlines:
     typ: fasta
@@ -201,6 +272,8 @@ bidrag:
   - Aktiviteten ska finnas med i kommunens sommarlovsprogram
   - Budget för aktiviteterna ska bifogas ansökan; beslut om beviljande meddelas senast 20 maj
   belopp: Inget fast belopp; formuleras i ansökan utifrån bifogad budget. Förening kan beviljas max 5 000 kronor.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -214,6 +287,10 @@ bidrag:
   namn: Arrangemangsbidrag Kultur
   kategori:
   - kultur
+  foreningstyp:
+  - kultur
+  - hembygd
+  - annat
   malgrupp: Kulturföreningar eller andra föreningar som arrangerar kultur
   deadlines:
     typ: fasta
@@ -224,6 +301,8 @@ bidrag:
   - Kalkyl med kostnader och eventuella intäkter ska bifogas ansökan
   - Arrangören ska i sin marknadsföring ange att Askersunds kommun stöttat arrangemanget
   belopp: Inget fast belopp; formuleras i ansökan och bedöms i förhållande till arrangemangets storlek och allmänna intresse.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Sista ansökningsdag 31 december
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -235,6 +314,9 @@ bidrag:
   namn: Bidrag till pensionärföreningar
   kategori:
   - pensionar
+  foreningstyp:
+  - social
+  - annat
   malgrupp: Pensionärsföreningar
   deadlines:
     typ: fasta
@@ -242,8 +324,12 @@ bidrag:
     - 04-30
   krav:
   - Bidragsberättigad pensionärsförening bildad för att skapa social samvaro för pensionärer och aktivt främja äldres intressen
+  - Föreningen ska vara registrerad och ha aktuella uppgifter i Askersunds kommuns föreningsregister
+  - Ansökan ska lämnas av föreningens huvudstyrelse med de medlems- och verksamhetsuppgifter kommunen begär
   belopp: Grundbelopp 73 kronor per medlem, upp till 100 medlemmar. För medlemmar utöver 100 utgår 22 kronor per medlem. Samorganisation
     erhåller 3 644 kronor per år.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -257,6 +343,14 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Föreningar som äger eller hyr samlingslokaler
   deadlines:
     typ: fasta
@@ -283,10 +377,19 @@ bidrag:
   namn: Nattvandring
   kategori:
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Registrerade föreningar för nattvandring/trygghetsskapande
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum:
+    - 04-30
   krav:
   - Vuxna i föreningen ska nattvandra på orten minst fyra gånger per år (två helger per termin, fredag och lördag, minst sex
     timmar per natt)
@@ -294,7 +397,9 @@ bidrag:
     chef
   - Nattvandringen ska planeras tillsammans med berörd kommunal personal
   belopp: 1 000 kronor per helg och förening. Maxbelopp 4 000 kronor per år och förening.
-  sen_ansokan: Kan sökas löpande under året
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sista ansökningsdag 30 april
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
@@ -305,6 +410,14 @@ bidrag:
   namn: Trygghetsskapande närvaro
   kategori:
   - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Registrerade föreningar för säkerhetsskapande aktiviteter
   deadlines:
     typ: lopande
@@ -316,6 +429,8 @@ bidrag:
     chef
   - Närvaron ska planeras tillsammans med berörd kommunal personal
   belopp: 500 kronor per dag. Maxbelopp 4 000 kronor per år och förening.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej tillämpligt (löpande)
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -327,6 +442,9 @@ bidrag:
   namn: Sociala föreningar
   kategori:
   - social
+  foreningstyp:
+  - social
+  - annat
   malgrupp: Sociala föreningar
   deadlines:
     typ: fasta
@@ -337,7 +455,9 @@ bidrag:
     ska inkludera invånare i Askersunds kommun
   - Verksamhetsberättelsen ska redovisa vilka aktiviteter som genomförts
   - Bidrag kan inte utbetalas till välgörenhetsorganisationer
-  belopp: Stöd fördelas mellan föreningarna inom fastställd ram.
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Fastställd ram för sociala föreningar; totalsumman publiceras inte
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -350,6 +470,13 @@ bidrag:
   kategori:
   - idrott
   - kultur
+  foreningstyp:
+  - idrott
+  - kultur
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Ungdomsorganisationer
   deadlines:
     typ: fasta
@@ -365,6 +492,8 @@ bidrag:
   belopp: 2 500 kronor per termin vid oregelbundet öppethållande eller mindre än 2 timmar/vecka. 5 000 kronor per termin vid
     2 timmar/vecka. 7 500 kronor per termin vid 4 timmar/vecka. 10 000 kronor per termin vid 6 timmar/vecka. För deltagare
     i åldern 13–21 år utgår 3 kronor extra per deltagartillfälle.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: 'Två ansökningstillfällen: 25 februari och 25 augusti'
   kalla_url: https://www.askersund.se/download/18.454c2f5419c47bd71125acb/1771330899047/Bidrag%20och%20st%C3%B6d%20till%20civilsamh%C3%A4llet.pdf
   belopp_status: kontrollast
@@ -374,15 +503,79 @@ bidrag:
   anteckning: null
   alder_min: 7
   alder_max: 21
+- id: askersund-arrangemangsbidrag-kultur-aldre
+  namn: Arrangemangsbidrag kultur för äldre
+  kategori:
+  - kultur
+  - pensionar
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - annat
+  malgrupp: Pensionärsföreningar och andra föreningar som arrangerar kultur för äldre
+  deadlines:
+    typ: fasta
+    datum:
+    - 12-31
+  krav:
+  - Arrangemanget ska avse en kulturyttring, exempelvis bild, dans, teater eller musik, för äldre
+  - Arrangemanget ska vara offentligt och öppet för allmänheten samt beskrivas med antal tillfällen, tid och datum
+  - Ansökan ska innehålla en kalkyl med kostnader och eventuella intäkter
+  - Arrangören ska i sin marknadsföring ange att Askersunds kommun har stöttat arrangemanget
+  belopp: Individuellt bedömt utifrån arrangemangets storlek och allmänna intresse
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sista ansökningsdag 31 december
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+- id: askersund-subventionerade-lokalhyror
+  namn: Subventionerade lokalhyror
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Registrerade föreningar som bokar kommunens lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad och ha aktuella uppgifter i Askersunds kommuns föreningsregister
+  - Bokningen ska avse en kommunal lokal eller anläggning som omfattas av kommunens föreningstaxa
+  - Föreningen ska följa kommunens bokningsvillkor och lämna de uppgifter som krävs för föreningspriset
+  belopp: Subventionerad hyra i kommunens lokaler enligt gällande taxa; ingen generell rabatt publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam ansökningsfrist
+  kalla_url: *registrering
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
 forutsattningar:
 - id: askersund-forening-registrering
   vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste registreras i Askersunds föreningsregister. Registreringen förnyad årligen efter årsmötet,
-    annars raderas föreningen från registret.
+  beskrivning: Föreningen ska vara ideell och demokratiskt uppbyggd, ha stadgar, organisationsnummer, konto och vald styrelse,
+    bedriva verksamhet för kommunens invånare samt vara öppen och arbeta jämlikt utan diskriminering, ANDTSL, våld eller rasism.
+    Vid nyregistrering ska bildandeprotokoll och beslut om organisationsnummer lämnas.
   system: Askersunds föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Registreringen ska förnyas skyndsamt efter årsmötet varje år
+  giltighet: Förnyelse av registrering ska ske årligen, skyndsamt efter årsmötet, annars avregistreras föreningen
   ordning: 1
-  kalla_url: https://www.askersund.se/uppleva--gora/foreningar-foreningsliv/bidrag-och-stod-till-civilsamhallet
-  giltighet_status: okand
+  kalla_url: *registrering
+  giltighet_status: kontrollast
