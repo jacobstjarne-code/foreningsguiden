@@ -4,193 +4,462 @@ lan: Hallands län
 befolkning: 10032
 forvaltning: Kultur- och folkhälsoförvaltningen
 ansokningssystem:
-  namn: Hylte föreningsportal
-  url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/foreningsportal
-kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-verifierad: '2026-07-31'
+  namn: Hylte föreningsportal (Smartbook)
+  url: https://hylte.actorsmartbook.se/
+kalla_url: &huvud https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://meetings.hylte.se/welcome-sv/namnder-styrelser/kultur-och-folkhalsonamnden/mote-2025-11-20/agenda/bidragsnormer-for-foreningsbidrag-forslag-till-kfn-2025-11-20pdf?downloadMode=open
+giltighet_regel_status: kontrollast
 bidrag:
-- namn: Investeringsbidrag till idrottsföreningar
+- id: hylte-foreningstaxa
+  namn: Föreningstaxa i kommunala idrottsanläggningar
   kategori:
   - idrott
-  malgrupp: Föreningar och organisationer enligt respektive stödform
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-investeringsbidrag-till-idrottsforeningar
-- namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  - idrott
-  malgrupp: Föreningar och organisationer enligt respektive stödform
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-ledarutbildningsbidrag
-- namn: Lokal- och anläggningsbidrag
-  kategori:
-  - idrott
+  - kultur
   - ovrig
-  malgrupp: Föreningar och organisationer enligt respektive stödform
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Bidragsberättigade föreningar som bokar kommunala idrottsanläggningar
   deadlines:
     typ: okand
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-lokal--och-anlaggningsbidrag
-- namn: Lokalt aktivitetsstöd (LOK-stöd)
+  krav:
+  - &stabil Föreningen ska ha sådan stabilitet och omfattning att kommunalt stöd kan motiveras
+  - &formalia Föreningen ska ha antagit stadgar, valt styrelse och revisorer samt varit verksam i minst sex månader
+  - &varderingar Stadgarna ska visa att föreningen präglas av demokratiska värderingar, jämställdhet och alla människors lika värde
+  - &medlemmar Föreningen ska normalt ha minst tio medlemmar som betalar en skälig medlemsavgift
+  - &lokal Föreningen eller organisationen ska vara verksam inom Hylte kommun och ansökan ska lämnas av föreningen, inte en sektion
+  - &arshandlingar Föreningsinformation, verksamhetsberättelse, ekonomisk rapport, revisionsberättelse samt alkohol- och drogpolicy ska lämnas varje år via föreningsportalen
+  - &konto Utbetalningar kan bara göras till föreningens registrerade plus- eller bankgiro och kommunen får granska verksamheten
+  - Föreningen ska uppfylla samtliga allmänna bestämmelser för kommunala föreningsbidrag
+  - Bokningen ska avse en kommunal idrottsanläggning och göras i kommunens bokningssystem
+  belopp: Reducerad timkostnad enligt kommunens fastställda föreningstaxa
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för föreningstaxan.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-lokal-och-anlaggningsbidrag
+  namn: Lokal- och anläggningsbidrag
   kategori:
   - idrott
+  - kultur
+  - ovrig
+  foreningstyp:
   - idrott
-  malgrupp: Föreningar och organisationer enligt respektive stödform
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar med regelbunden verksamhet som driver egen anläggning eller hyr en icke kommunsubventionerad lokal
   deadlines:
-    typ: okand
+    typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-lokalt-aktivitetsstod-(lok-stod)
-- namn: Årsbidrag till kulturförening
+  krav:
+  - *stabil
+  - *formalia
+  - *varderingar
+  - *medlemmar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Föreningen får inte samtidigt få pensionärsföreningsbidrag eller årsbidrag för kulturföreningar
+  - För hyrd lokal ska kommunal lokal saknas eller särskilda skäl finnas; ansökan avser föregående år och hyresavtal, kvitton och fakturor ska bifogas
+  - En egen lokal eller anläggning ska ligga i Hylte kommun och typ, yta, nyttjande och fasta kostnader ska redovisas
+  - Elljusspår ska hållas i vårdat skick; övriga särskilda anläggningar prövas enligt normens schabloner
+  belopp: För hyrd lokal högst 50 % av godkänd kostnad, högst 200 kr per medlem och 15 000 kr per förening och år; för egen anläggning 7 000 kr i grundbidrag samt publicerade yt- och anläggningsschabloner
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året via föreningsportalen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-lokalt-aktivitetsstod
+  namn: Lokalt aktivitetsstöd (LOK-stöd)
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar med organiserad verksamhet för barn och unga 7–25 år eller vuxna med funktionsnedsättning
+  deadlines:
+    typ: fasta
+    datum:
+    - 02-28
+    - 08-31
+  krav:
+  - *stabil
+  - *formalia
+  - *varderingar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Föreningen ska ha minst tio medlemmar i åldern 7–25 år; vuxna med funktionsnedsättning saknar övre åldersgräns
+  - Minst 75 procent av aktiviteten ska vara föreningens huvudverksamhet och verksamheten ska vara trygg, inkluderande och barnrättsbaserad
+  - En gruppaktivitet ska vara minst 45 minuter, ledas av en utsedd medlem som fyllt 13 år och ha 3–20 övriga deltagare
+  - Deltagaren ska vara medlem och får räknas vid högst en gruppaktivitet per förening och veckodag
+  - RF-anslutna idrottsföreningar får kommunstödet automatiskt från RF-redovisningen; övriga föreningar ska söka i portalen och föra fullständig signerad närvaroredovisning
+  belopp: 20 kr per gruppaktivitet och 6 kr per stödberättigad deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Perioden januari–juni redovisas senast 31 augusti och juli–december senast 28 februari, eller 29 februari under skottår.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar som utbildar nuvarande eller blivande ledare och funktionärer
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - *stabil
+  - *formalia
+  - *varderingar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Föreningen ska ha minst tio medlemmar i åldern 7–25 år
+  - Utbildningen ska följa en organisationsfastställd plan med mål, innehåll och omfattning och omfatta 1–12 kursdagar
+  - En lokalt anordnad kurs ska ske efter rekommendation och medverkan av distrikts- eller riksorganisation
+  - Kursintyg och verifikation på betald kursavgift ska bifogas
+  - Yrkesutbildning, konferens, möte, läger eller annan normal föreningsverksamhet ger inte stöd
+  belopp: Högst 5 000 kr per år vid 0–99 bidragsberättigade medlemmar, 8 000 kr vid 100–299 och 12 000 kr vid minst 300
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast tre månader efter avslutad kurs.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-startbidrag
+  namn: Startbidrag
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  malgrupp: Nystartade lokala föreningar i Hylte kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - *varderingar
+  - *lokal
+  - *konto
+  - Föreningen ska ha bedrivit regelbunden organiserad verksamhet i minst sex månader
+  - Protokoll från bildandemötet, stadgar och en presentation av föreningens syfte och verksamhet ska bifogas
+  - Verksamhetsberättelse över vad föreningen gjort sedan starten ska bifogas
+  - En nystartad sektion i en befintlig förening kan inte få startbidrag
+  belopp: Högst 1 500 kr som engångsbidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året via föreningsportalen.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-investeringsbidrag-till-idrottsforeningar
+  namn: Investeringsbidrag till idrottsföreningar
+  kategori:
+  - idrott
+  foreningstyp:
+  - idrott
+  malgrupp: Idrottsföreningar med regelbunden organiserad verksamhet som investerar i sin verksamhet
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-30
+  krav:
+  - *stabil
+  - *formalia
+  - *varderingar
+  - *medlemmar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Investeringen ska avse nästkommande år och prövas särskilt av kultur- och folkhälsonämnden
+  - Stöd kan avse iordningställande eller upprustning av föreningsägd idrottsplan eller motionsbana i Hylte kommun
+  - Stöd kan avse om- eller tillbyggnad av föreningsägt klubbhus eller material, maskin, redskap eller inventarie med minst fem års varaktighet
+  - Betalda fakturor och kvitton ska lämnas under det kalenderår beslutet gäller innan utbetalning görs
+  belopp: Individuellt prövat belopp utifrån den presenterade investeringen och tillgänglig budget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för nästkommande år ska lämnas senast 30 september.
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-arsbidrag-till-kulturforening
+  namn: Årsbidrag för kulturföreningar
   kategori:
   - kultur
-  malgrupp: Föreningar och organisationer enligt respektive stödform
+  foreningstyp:
+  - kultur
+  - hembygd
+  malgrupp: Registrerade kulturföreningar med flera offentliga kulturprogram per år i Hylte kommun
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
+    typ: fasta
+    datum:
+    - 12-31
+  krav:
+  - *formalia
+  - *varderingar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Föreningen ska vara en registrerad juridisk person med planerad, dokumenterad och ideellt grundad kulturverksamhet
+  - Verksamheten ska vara offentligt utåtriktad och omfatta flera program per år inom kulturmiljö, kulturarv, litteratur, teater, film, musik, dans, bild eller form
+  - Aktiviteterna ska annonseras och texten ”Med stöd av Hylte kommun” ska finnas i tryckt och digitalt material
+  - Ansökan ska innehålla en detaljerad aktivitetsplan, budget, samarbetspartner, redovisning för föregående år och uppgift om andra stöd
+  - Barn och unga, jämställdhet, integration, eget skapande och kulturella mötesplatser prioriteras
+  - Ekonomiskt självbärande verksamhet, huvudsaklig medieutgivning och verksamhet som redan får annat Hyltestöd får inte årsbidrag
+  - Årets program och marknadsföringsmaterial ska redovisas senast 31 december för att nytt stöd ska kunna beviljas
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-arsbidrag-till-kulturforening
-- namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar och organisationer enligt respektive stödform
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: '1500'
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: olast
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Startbidrag kan beviljas med högst 1 500 kronor. Ej angivet i källan
-  id: hylte-startbidrag
-- namn: Bidrag till samlingslokaler
-  kategori:
-  - ovrig
-  malgrupp: Föreningar och organisationer enligt respektive stödform
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-bidrag-till-samlingslokaler
-- namn: Bidrag till funktionshinderorganisationer och sociala stödorganisationer
-  kategori:
-  - social
-  malgrupp: Föreningar och organisationer enligt respektive stödform
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-bidrag-till-funktionshinderorganisationer-och-sociala-stodorganisationer
-- namn: Bidrag till pensionärsföreningar
-  kategori:
-  - social
-  malgrupp: Föreningar och organisationer enligt respektive stödform
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-bidrag-till-pensionarsforeningar
-- namn: Kulturstöd för arrangemang och projekt
+  belopp_avser: ren_pott
+  kommunens_pott: 130 000 kr för årsbidrag till kulturföreningar 2026, fördelat efter verksamhetens omfattning och prioriterade innehåll
+  sen_ansokan: Ansökan för nästkommande år ska lämnas senast 31 december.
+  kalla_url: https://meetings.hylte.se/welcome-sv/namnder-styrelser/kultur-och-folkhalsonamnden/mote-2026-02-12/agenda/tjansteskrivelse-arsbidrag-for-kulturforeningar-2026pdf?downloadMode=open
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-bidrag-till-samlingslokaler
+  namn: Bidrag till samlingslokaler
   kategori:
   - kultur
-  malgrupp: Föreningar och organisationer enligt respektive stödform
+  - social
+  - ovrig
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - ungdom
+  - annat
+  malgrupp: Föreningar och organisationer som ansvarar för en allmän samlingslokal i Hylte kommun
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
+    typ: fasta
+    datum:
+    - 03-31
+  krav:
+  - *formalia
+  - *varderingar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Samlingslokalen ska vara knuten till sökande förening, vara friliggande och hålla god standard
+  - Lokalen ska hållas öppen och tillgänglig för allmänhet, skolor, lokala föreningar och organisationer
+  - Minst tio externa arrangemang per år krävs; interna föreningsmöten och tillfällen då kommunen hyr lokalen räknas inte
+  - Stödgrundande yta omfattar samlingslokal, scen och kök och kommunen får kontrollmäta
+  - Lokalen får inte upplåtas till främlingsfientlig, odemokratisk, olaglig eller ordningsstörande verksamhet
+  - Föregående års bokförda arrangemang och stödgrundande kvadratmeteryta ska redovisas
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hylte.se/uppleva-och-gora/forening-och-arrangor/bidrag-och-stod
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Exakt ansökningsdatum framgår inte av översiktssidan. Ej angivet i källan
-  id: hylte-kulturstod-for-arrangemang-och-projekt
+  belopp_avser: ren_pott
+  kommunens_pott: Anvisade medel fördelas 50 % efter stödgrundande kvadratmeteryta och 50 % efter föregående års redovisade arrangemang; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 31 mars.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-bidrag-till-funktionshinderorganisationer-och-sociala-stodorganisationer
+  namn: Bidrag till funktionshinderorganisationer och sociala stödorganisationer
+  kategori:
+  - social
+  - funktionsratt
+  foreningstyp:
+  - social
+  - annat
+  malgrupp: Organisationer som stödjer personer med funktionsnedsättning eller andra utsatta grupper med Hylte som viktigt upptagningsområde
+  deadlines:
+    typ: fasta
+    datum:
+    - 09-30
+  krav:
+  - *formalia
+  - *varderingar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Organisationens huvudsakliga syfte ska vara att stödja personer med funktionsnedsättning eller andra personer med behov av stöd
+  - Verksamheten ska vara kontinuerlig, utåtriktad och till gagn för personer som bor i Hylte kommun
+  - Ansökan ska beskriva vad stödet ska användas till och möjligheten att genomföra verksamhetsplanen
+  - Texten ”Med stöd av Hylte kommun” ska användas i tryckt och digitalt material
+  - Tidigare stöd ska redovisas senast 30 september med särredovisning av aktiviteter i Hylte och antal deltagare från kommunen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 100 000 kr avsatt i 2026 års budget; 85 000 kr fördelades till årets sökande organisationer
+  sen_ansokan: Ansökan för nästkommande år ska lämnas senast 30 september.
+  kalla_url: https://meetings.hylte.se/welcome-sv/namnder-styrelser/kommunstyrelsen/mote-2026-02-03/agenda/protokoll-kfn-2025-11-20pdf?downloadMode=download
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-bidrag-till-pensionarsforeningar
+  namn: Bidrag till pensionärsföreningar
+  kategori:
+  - social
+  - pensionar
+  foreningstyp:
+  - social
+  - annat
+  malgrupp: Pensionärsföreningar med säte i Hylte och verksamhet för kommunens folkbokförda pensionärer
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-15
+  krav:
+  - *formalia
+  - *varderingar
+  - *lokal
+  - *arshandlingar
+  - *konto
+  - Föreningen ska ha sitt säte i Hylte, vara ansluten till en riksorganisation och ha minst tio medlemmar över 65 år
+  - En bidragsberättigad medlem ska ha fyllt 65 år, vara folkbokförd i Hylte och ha betalat medlemsavgift under redovisningsåret
+  - Föreningen ska bedriva kontinuerlig utåtriktad verksamhet och föra medlemsförteckning med födelsedatum och bostadsort
+  - En aktivitet ska ha minst fem stödberättigade medlemmar, pågå minst 45 minuter och ledas av en föreningsutsedd ledare under hela tillfället
+  - Aktiviteten ska ha gemensam start och avslutning och dokumenteras på ledarintygt aktivitetskort
+  - Öppen verksamhet utan fast schema, studiecirkel med studieförbund, religiös aktivitet och entrébelagd tävling eller arrangemang ger inte stöd
+  belopp: 2 500 kr i grundbidrag per förening plus en rörlig aktivitetsdel som beror på samtliga sökandes antal godkända aktiviteter
+  belopp_avser: per_forening
+  kommunens_pott: Aktivitetsdelen fördelas mellan de sökande pensionärsföreningarna; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 15 mars.
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: hylte-bidrag-till-studieforbund
+  namn: Bidrag till studieförbund
+  kategori:
+  - kultur
+  - social
+  - ovrig
+  foreningstyp:
+  - kultur
+  - social
+  - annat
+  malgrupp: Studieförbund som ingår i Folkbildningsrådet och bedriver verksamhet för Hyltebor i kommunen
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-30
+  krav:
+  - Studieförbundet ska ingå i Folkbildningsrådet och vara verksamt i Hylte kommun
+  - Endast verksamhet som bedrivs inom Hylte kommun och riktar sig till kommunens medlemmar får ligga till grund för stöd
+  - Undertecknad statistiksammanställning från SCB över genomförd verksamhet ska lämnas
+  - Verksamhetsberättelse med särredovisad Hylteverksamhet, ekonomisk rapport och revisionsberättelse ska bifogas
+  - Ansökan ska vara fullständig och undertecknad av studieförbundet
+  belopp: Individuellt bidrag enligt kommunens separata studieförbundsnorm; ingen aktuell beräkningsmodell eller beloppsnivå är publicerad
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan och redovisning ska lämnas senast 30 april; utbetalning sker inom fyra månader.
+  kalla_url: https://service.hylte.se/Form.ashx?id=198
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
 forutsattningar:
-- id: hylte-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Hylte kommuns e-tjänster
+- id: hylte-registrering-och-arshandlingar
+  vad: Registrering och årliga föreningshandlingar
+  beskrivning: Föreningen ska vara registrerad i Hyltes föreningsportal och lämna föreningsinformation, verksamhetsberättelse, ekonomisk rapport, revisionsberättelse samt alkohol- och drogpolicy varje år.
+  system: Hylte föreningsportal (Smartbook)
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Handlingarna lämnas årligen; kommunen publicerar inget gemensamt sista datum.
+  giltighet: Ett kalenderår
   ordning: 1
-  kalla_url: https://www.hylte.se/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: hylte-allmanna-villkor
+  vad: Allmänna villkor för bidragsberättigad förening
+  beskrivning: Föreningen ska ha stabil verksamhet i kommunen, stadgar, styrelse, revisorer, normalt minst tio avgiftsbetalande medlemmar samt en demokratisk och jämställd verksamhet som värnar alla människors lika värde.
+  system: Hylte föreningsportal (Smartbook)
+  ledtid: 180
+  ledtid_text: Minst sex månaders verksamhet före ordinarie stöd, med startbidragets särskilda regler.
+  giltighet: Ett kalenderår
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
