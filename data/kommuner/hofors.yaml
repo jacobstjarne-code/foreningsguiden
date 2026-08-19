@@ -2,142 +2,265 @@ kommun: Hofors
 kommun_slug: hofors
 lan: Gävleborgs län
 befolkning: 9107
-forvaltning: Föreningsutskottet
+forvaltning: Kommunstyrelsen och Föreningsutskottet
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-verifierad: '2026-08-01'
+  namn: Kommunens Word-blanketter
+  url: https://www.hofors.se/kultur--fritid/blanketter-for-foreningar.html
+kalla_url: &huvud https://www.hofors.se/kultur--fritid/foreningsbidrag.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &allmanna https://www.hofors.se/kultur--fritid/foreningsbidrag/allmanna-villkor-for-foreningsbidrag.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: hofors-aktivitetsbidrag
   namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade föreningar som ordnar lokal aktivitet för barn och unga
   deadlines:
     typ: fasta
-    datum:
-    - 06-30
-    - 12-31
+    datum: ['06-30', '12-31']
   krav:
-  - För icke statsbidragsberättigad förening ska ansökan lämnas senast 30 juni för vårens aktivitetstillfällen respektive
-    senast 31 december för höstens tillfällen, tillsammans med kopia på närvarokort
-  - För statsbidragsberättigad förening ska ansökan lämnas senast en månad efter det att föreningen fått statsbidraget, tillsammans
-    med kopia på ansökan till Riksidrottsförbundet om LOK-stöd och kopia på beviljat statsbidrag (kontoutdrag)
-  - Aktivitetsbidrag utgår inte till studiecirklar
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  belopp_status: okand
+  - Föreningen ska uppfylla kommunens allmänna villkor om registrering, organisationsnummer, styrelse, stadgar, föreningskonto, öppenhet, lokal verksamhet, medlemsantal och drogfri verksamhet
+  - En statsbidragsberättigad förening ska bifoga kopia av ansökan om statligt LOK-stöd och kontoutdrag som visar beviljat statsbidrag
+  - En förening som inte är statsbidragsberättigad ska bifoga kopia av närvarokort för de redovisade aktivitetstillfällena
+  - Aktiviteten ska avse barn och unga; bidrag lämnas inte till studiecirklar
+  - Ansökan ska göras av föreningens firmatecknare och alla uppgifter ska vara fullständiga och korrekta
+  belopp: Bidrag per deltagare och sammankomst; Föreningsutskottet kan prioritera vissa åldersgrupper inom tillgängligt anslag men publicerar ingen generell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Icke statsbidragsberättigad förening söker senast 30 juni för våren och 31 december för hösten; statsbidragsberättigad förening söker inom en månad efter utbetalt statsbidrag
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/aktivitetsbidrag.html
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Statsbidragsberättigade föreningar söker inom en månad efter statligt beslut.
+  senast_verifierad: '2026-08-19'
+  anteckning: Den aktuella Word-blanketten bekräftar tidsfristerna och kräver intyg om verksamhet i Hofors och upprättat föreningsregister.
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: hofors-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med bidragsberättigade medlemmar i åldern 7–25 år
   deadlines:
     typ: relativ
     datum: []
   krav:
-  - I ansökan ska föreningen ange antalet bidragsberättigade medlemmar
-  belopp: 30 kronor per medlem 7–25 år
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
+  - Föreningen ska uppfylla kommunens allmänna villkor och redovisa minst 15 betalande medlemmar från 7 års ålder
+  - Ansökan ska ange antalet bidragsberättigade medlemmar i åldern 7–25 år
+  - En bidragsberättigad medlem ska ha betalat årsavgift, finnas personligen i medlemsmatrikeln och ha rätt att delta i föreningsarbetet
+  - Den bidragsberättigade medlemmen ska vara bosatt i Hofors kommun eller dess omedelbara närhet
+  - Person som endast betalar entré-, kurs- eller anmälningsavgift räknas inte som medlem
+  belopp: 30 kr per bidragsberättigad medlem i åldern 7–25 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska ha kommit in senast två månader efter föreningens årsmöte
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/grundbidrag.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Relativ tidsfrist: två månader efter hållet årsmöte.'
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: hofors-drift-och-hyresbidrag
   namn: Drift- och hyresbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som bedriver verksamhet i en egen eller hyrd anläggning eller lokal
   deadlines:
     typ: fasta
-    datum:
-    - 10-31
+    datum: ['10-31']
   krav:
-  - Anläggningen/lokalen ska finnas i Hofors kommun eller dess omedelbara närhet
-  - Anläggningen/lokalen ska utnyttjas av invånare i Hofors kommun
-  - Bidrag utgår inte för anläggning/lokal som kommunen redan subventionerar genom exempelvis hyresnedsättning
-  - Medel till mindre investeringar, upp till 25 000 kronor enligt 2017 års bokföringsregler, kan sökas från driftbidraget
-  - Ansökan ska innehålla en beskrivning av föreningens framtidsplaner
-  - Med ansökan skickas verksamhetsberättelse, resultat- och balansräkning, budget och eventuell underhållsplan
-  belopp: 'Bidraget baseras på föreningens faktiska bidragsgrundande kostnader (för egen fastighet: räntor, försäkringar,
-    skatt, arrende, värme, vatten, sotning, sophämtning, vaktmästeri och underhåll; för hyrd lokal: grundhyra samt värme,
-    el och städning). Inget fast kronbelopp anges i källan.'
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  belopp_status: kontrollast
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  - Anläggningen eller lokalen ska ligga i Hofors kommun eller dess omedelbara närhet och utnyttjas av kommunens invånare
+  - Verksamheten i lokalen ska stämma överens med reglerna för kommunalt bidrag och lokalen får inte redan vara kommunalt subventionerad genom exempelvis hyresnedsättning
+  - För egen fastighet får räntor, försäkring, skatt, arrende, värme, vatten, sotning, sophämtning, vaktmästeri och icke standardhöjande underhåll räknas; för hyrd lokal får grundhyra, värme, el och städning räknas
+  - Mindre investeringar upp till 25 000 kr enligt kommunens publicerade gräns kan prövas inom driftbidraget
+  - Ansökan ska innehålla framtidsplaner, verksamhetsberättelse, resultat- och balansräkning, budget och eventuell underhållsplan
+  belopp: Individuellt prövat utifrån publicerade bidragsgrundande drift- och hyreskostnader; kommunen publicerar ingen generell procentsats eller maxnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 31 oktober året före bidragsåret
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/drift--och-hyresbidrag.html
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: hofors-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Ideella organisationer som investerar mer än 25 000 kr i en egen anläggning eller lokal
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
-  - Anläggningen/lokalen ska ligga i Hofors kommun eller dess omedelbara närhet och utnyttjas av medlemmar i Hofors kommun
-  - Bidraget avser investeringar över 25 000 kronor enligt 2017 års bokföringsregler på föreningens egen anläggning/lokal
-  - Ansökan ska innehålla investeringsplan, en beskrivning av föreningens framtidsplaner samt en investerings- och finansieringskalkyl
-  - Ansökan ska göras före investeringen genomförs
-  - Ansökan om bidrag för större investeringar ska lämnas i mycket god tid för att kunna behandlas i kommunens budgetberedning
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  belopp_status: okand
-  deadline_status: ingen_regel
+  - Organisationen ska uppfylla kommunens allmänna bidragsvillkor
+  - Investeringen ska överstiga 25 000 kr enligt kommunens publicerade gräns och avse organisationens egen anläggning eller lokal
+  - Anläggningen eller lokalen ska ligga i Hofors kommun eller dess omedelbara närhet och utnyttjas av medlemmar i kommunen
+  - Verksamhetens inriktning ska stämma överens med kommunens bidragsregler
+  - Ansökan ska innehålla investeringsplan, föreningens framtidsplaner samt investerings- och finansieringskalkyl
+  - Ansökan ska lämnas före investeringen; större investeringar ska anmälas i mycket god tid så att de kan behandlas i kommunens budgetberedning
+  belopp: Individuellt prövat investeringsbidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas innan investeringen genomförs; större investeringar behöver lämnas i mycket god tid inför budgetberedningen
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/investeringsbidrag.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
 - id: hofors-ovrigt-bidrag
   namn: Övrigt bidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som startar, utvecklar verksamhet, arrangerar evenemang eller har en särskilt kostsam ungdomsverksamhet
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Verksamheten/aktiviteten ska genomföras i Hofors kommun eller för dess invånare
-  - I ansökan ska framgå syfte och mål, om fler aktörer är med och finansierar samt föreningens framtidsplaner
-  - Med ansökan skickas verksamhetsberättelse, resultat- och balansräkning samt en ekonomisk kostnads- och intäktskalkyl för
-    det ansökan gäller
-  - Ansökan kan göras när som helst under året men ska lämnas i god tid innan det man söker bidrag för ska genomföras
-  belopp: null
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  belopp_status: okand
+  - Föreningen ska uppfylla kommunens allmänna bidragsvillkor
+  - Verksamheten eller aktiviteten ska genomföras i Hofors kommun eller för kommunens invånare
+  - Ansökan ska beskriva syfte och mål, eventuell medfinansiering och föreningens framtidsplaner
+  - Verksamhetsberättelse, resultat- och balansräkning samt kostnads- och intäktskalkyl för insatsen ska bifogas
+  - Insatsen kan avse politiskt prioriterad verksamhet, en ny förening, verksamhetsutveckling, fritids- eller kulturintresse, ett publikt arrangemang eller särskilt kostsam ungdomsverksamhet
+  belopp: Individuellt prövat bidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras under hela året men ska lämnas i god tid före genomförandet
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/ovrigt-bidrag.html
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: För ny förening, utveckling, arrangemang eller särskilda kostnader.
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: null
+- id: hofors-integrationsinsatser
+  namn: Bidrag till integrationsinsatser
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar och organisationer som skapar mötesplatser och bygger broar mellan människor och kulturer
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en förening eller organisation och uppfylla kommunens allmänna bidragsvillkor
+  - Projektet ska skapa mötesplatser och bygga broar mellan människor och kulturer
+  - Ansökan ska ange projektets syfte och mål, hur integrationsmedlen ska användas och om andra aktörer medfinansierar
+  - Verksamhetsberättelse med resultat- och balansräkning samt projektbudget ska bifogas
+  - Eventuellt projektöverskott ska betalas tillbaka till kommunen inom sex månader efter projektets slut
+  belopp: Individuellt prövat projektbidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas under hela året men ska komma in i god tid innan projektet genomförs
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/bidrag-till-integrationsinsatser.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den aktuella Word-blanketten kräver organisationsnummer, föreningskonto, projekttid, målgrupp, budget och firmateckning.
+  kraver_registrering: true
+  sate_i_kommunen: null
+- id: hofors-samlingslokaler
+  namn: Bidrag till allmänna samlingslokaler
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som tillhandahåller allmänna samlingslokaler i Hofors kommun
+  deadlines:
+    typ: fasta
+    datum: ['04-30']
+  krav:
+  - Föreningen ska tillhandahålla en allmän samlingslokal för exempelvis kultur, utbildning och privata tillställningar i Hofors kommun
+  - Bidragsgrundande kostnader är räntor, försäkringar, skatt, arrende, värme, vatten, sotning, sophämtning, vaktmästeri och icke standardhöjande underhåll eller reparation
+  - Ansökan ska beskriva föreningens framtidsplaner
+  - Senaste årsmötesprotokoll, verksamhetsberättelse med resultat- och balansräkning, budget och förteckning över föregående års driftskostnader ska bifogas
+  - Planritning där fastighetens allmänna samlingslokaler är markerade ska bifogas
+  belopp: Individuellt prövat driftbidrag utifrån publicerade bidragsgrundande kostnader; kommunen publicerar ingen generell procentsats eller maxnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 30 april
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/bidrag-till-samlingslokaler.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den aktuella Word-blanketten bekräftar kostnadsslagen, bilagorna och sista ansökningsdagen.
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: hofors-studieforbund
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Hofors kommun
+  deadlines:
+    typ: fasta
+    datum: ['04-30']
+  krav:
+  - Studieförbundet ska vara verksamt i Hofors och dess centrala organisation ska vara godkänd av Folkbildningsrådet för statsbidrag
+  - Kommunbidraget får inte användas till kommersiell verksamhet eller uppdragsutbildning
+  - Avdelningsstyrelsen ska ansöka och bifoga verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse; flerkkommunal verksamhet ska särredovisa Hofors
+  - Kommunsammandrag, förenings- och organisationsuppgifter samt verksamhetsplan med budget ska bifogas
+  - Verksamheten ska redovisas årligen både skriftligt och vid muntlig träff som kommunen kallar till; för högt utbetalt bidrag ska återbetalas
+  - Underlaget ska redovisa studiecirklar, kulturprogram, annan gruppverksamhet, deltagare och deltagartimmar inklusive publicerade målgrupper
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Tillgängligt årsanslag fördelas genom lokalkostnads-, grund-, volym- och målgruppsbidrag samt stöd till särskilda insatser; Föreningsutskottet fastställer årligen procentandelarna och totalsumman publiceras inte
+  sen_ansokan: Ansökan från avdelningsstyrelsen ska vara kommunen tillhanda senast 30 april
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/bidrag-till-studieforbund.html
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunen betalar 70 procent av föregående års bidrag i förskott i januari och slutreglerar efter årets beslut.
+  kraver_registrering: null
+  sate_i_kommunen: null
 forutsattningar:
 - id: hofors-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  vad: Registrering och grundläggande bidragsbehörighet
+  beskrivning: Föreningen ska vara registrerad, ha organisationsnummer, vald styrelse, stadgar och bank- eller plusgiro, vara öppen för allmänheten, bedriva regelbunden verksamhet eller aktiviteter i Hofors och redovisa minst 15 betalande medlemmar från 7 års ålder. Barn- och ungdomsverksamheten ska vara alkohol-, drog- och dopningsfri och all verksamhet ska vara fri från droger och dopning.
+  system: Kommunens föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen handläggningstid eller återkommande förnyelsefrist
   giltighet: null
   ordning: 1
-  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: *allmanna
+  giltighet_status: ingen_regel
+- id: hofors-ansokan-och-redovisning
+  vad: Fullständig ansökan, insyn och redovisning
+  beskrivning: Ansökan ska göras av föreningens firmatecknare på stödformens blankett med fullständiga och korrekta uppgifter; första gången ska gällande stadgar bifogas. Kommunen får granska räkenskaper, protokoll och andra handlingar, kräva redovisning efter utbetalning och betalar endast till föreningens bank- eller plusgiro.
+  system: Kommunens Word-blanketter
+  ledtid: null
+  ledtid_text: Fullständiga handlingar ska normalt ha kommit in minst fyra veckor före Föreningsutskottets sammanträde
+  giltighet: null
+  ordning: 2
+  kalla_url: https://www.hofors.se/kultur--fritid/foreningsbidrag/ansokan-och-kontaktpersoner.html
+  giltighet_status: ingen_regel
 kommunsiffra: null
