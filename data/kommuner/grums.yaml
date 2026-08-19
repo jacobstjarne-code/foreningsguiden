@@ -2,167 +2,310 @@ kommun: Grums
 kommun_slug: grums
 lan: Värmlands län
 befolkning: 8868
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur och fritid samt socialtjänsten
 ansokningssystem:
-  namn: E-tjänster
-  url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-verifierad: 2026-07-26
+  namn: Grums kommuns e-tjänster och föreningsregister
+  url: https://e-tjanster.grums.se/MenuGroup2.aspx?groupId=109
+kalla_url: &huvud https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.grums.se/download/18.2b2e374b1851503145548b3/1671433954196/Riktlinjer%20st%C3%B6d%20och%20bidrag%20Omr%C3%A5de%20Kultur%20och%20fritid.pdf
+giltighet_regel_status: kontrollast
 bidrag:
-- id: grums-socialbidrag
-  namn: Socialt verksamhetsbidrag
-  kategori:
-  - social
-  malgrupp: Föreningar för social verksamhet utan barn/ungdomsfokus
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-16
-  krav:
-  - Ideell organisation utan huvudfokus på barn/ungdomsverksamhet
-  - Uppfyller grundläggande föreningskrav (demokratisk struktur, verksamhet och hemvist i Grums kommun, minst 6 månaders verksamhet)
-  - 'Årlig redovisning: verksamhetsplan, resultat- och balansräkning, verksamhets- och revisionsberättelse, årsmötesprotokoll'
-  belopp: null
-  sen_ansokan: Ej möjlig efter 16 oktober
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Bidrag söks för påföljandeår Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska
-    beloppsregel är ännu inte verifierad.
-- id: grums-anlaggningsbidrag
-  namn: Anläggningsbidrag ungdom
-  kategori:
-  - idrott
-  malgrupp: Idrottsföreningar med lokaler för ungdomar 7-25 år
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-01
-  krav:
-  - Anläggningen godkänd av kommunen (säkerhet, energieffektivitet, tillgänglighet)
-  - Verksamhet för barn/unga 7-25 år
-  - Föregående års anläggningskostnader dokumenterade
-  - Minst 10 bidragsberättigade aktiviteter per medlem föregående år
-  - Föreningen ska ha sökt LOK-stöd minst en gång föregående år
-  belopp: null
-  sen_ansokan: Ej möjlig efter 1 oktober
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
 - id: grums-lok
-  namn: LOK-stöd
-  kategori:
-  - idrott
-  malgrupp: Idrottsföreningar för ungdomsaktiviteter
+  namn: Kommunalt aktivitetsstöd
+  status: aktiv
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Stödberättigade föreningar med idrottsverksamhet för barn och unga 7–25 år eller personer med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+    datum: ['02-25', '08-25']
   krav:
-  - Deltagare 7-25 år (ingen övre åldersgräns för funktionsnedsättning)
-  - Minst 10 medlemmar som regelbundet deltar (minst 10 redovisade aktiviteter/år)
-  - Studiecirklar och aktiviteter under skoltid berättigar ej till stöd
-  belopp: 50% av rikstaxa
-  sen_ansokan: Ej möjlig efter deadline
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
+  - Verksamheten ska följa Riksidrottsförbundets principer för lokalt aktivitetsstöd
+  - Deltagarna ska vara 7–25 år; någon övre åldersgräns gäller inte för deltagare med funktionsnedsättning
+  - Föreningen ska ha minst tio medlemmar i åldern 7–25 år och redovisa minst tio aktiviteter per år
+  - Studiecirklar och aktiviteter under skoltid är inte stödberättigade
+  - Föreningen ska redovisa närvaro genom IdrottOnline eller kommunens blankett och låta behöriga företrädare intyga uppgifterna
+  - Ansökan ska avse föregående halvår och lämnas innan årets anslag har fördelats
+  belopp: 50 % av Riksidrottsförbundets årliga belopp för sammankomst och deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: Det årliga anslaget fördelas efter godkända sammankomster och deltagartillfällen; totalsumman publiceras inte
+  sen_ansokan: Ansökan för respektive halvår ska lämnas senast 25 februari och 25 augusti; ansökan efter att anslaget fördelats behandlas inte
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Två ansökningsperioder per år
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: grums-anlaggningsbidrag
+  namn: Anläggningsbidrag till idrottsföreningar
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Stödberättigade idrottsföreningar som äger, hyr eller ansvarar för driften av en lokal eller anläggning för barn- och ungdomsverksamhet
+  deadlines:
+    typ: fasta
+    datum: ['10-01']
+  krav:
+  - Föreningen ska vara stödberättigad och ha sökt kommunalt aktivitetsstöd minst en gång under föregående år
+  - Lokalen eller anläggningen ska ägas, hyras eller drivas av föreningen och vara godkänd med hänsyn till säkerhet, energi och tillgänglighet
+  - Verksamheten ska huvudsakligen rikta sig till barn och unga 7–25 år
+  - Föregående års faktiska kostnader och intäkter för anläggningen ska redovisas och styrkas
+  - Ansökan ska redovisa antalet aktiva medlemmar, sammankomster och deltagartillfällen samt hur anläggningen används
+  - Ägarförhållande, hyres- eller nyttjanderättsavtal och föreningens fullständiga årshandlingar ska bifogas när kommunen begär det
+  belopp: Individuellt prövat efter föregående års anläggningskostnader och föreningens stödberättigade barn- och ungdomsverksamhet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 1 oktober och avser föregående års kostnader
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: grums-lokalhyra
-  namn: Lokalhyra (Enhetstaxa)
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som använder kommunala lokaler
+  namn: Enhetstaxa för kommunala idrottslokaler
+  status: aktiv
+  kategori: [idrott, funktionsratt, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Stödberättigade föreningar som använder kommunala idrottslokaler för träning, barn- och ungdomsverksamhet eller årsmöte
   deadlines:
     typ: fasta
-    datum:
-    - 06-01
+    datum: ['06-01']
   krav:
-  - Gäller endast träning, ej matcher (fullpris)
-  - Deltagare 7-25 år eller person med funktionsvariation (utan åldersgräns), samt årsmöten
-  - Ej kommersiell verksamhet eller föreningsfester
-  - Verksamhet och hemvist i Grums kommun
-  belopp: 20% av normal hyra (80% rabatt)
-  sen_ansokan: Ej möjlig efter 1 juni
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
+  - Föreningen ska ha verksamhet och hemvist i Grums kommun och vara godkänd som stödberättigad
+  - Den subventionerade taxan gäller träning för deltagare 7–25 år och personer med funktionsnedsättning utan övre åldersgräns samt föreningens årsmöte
+  - Stödet gäller kommunens idrottslokaler men inte aktivitetshuset Gruvan
+  - Matcher, cuper och andra tävlingar debiteras full taxa
+  - Kommersiell verksamhet, föreningsfester och partipolitiska eller religiösa sammankomster omfattas inte
+  - Föreningen ska lämna de uppgifter kommunen kräver för kommande års fördelning av lokaltider
+  belopp: Kommunen subventionerar 80 % av ordinarie hyra och föreningen betalar 20 %
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Underlag för kommande års enhetstaxa ska lämnas senast 1 juni
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 80/20-principen för lokaluthyrning
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: grums-kulturverksamhet
-  namn: Kulturverksamhetsbidrag
-  kategori:
-  - kultur
-  malgrupp: Kulturföreningar för fortlöpande verksamhet
+  namn: Verksamhetsbidrag till kulturföreningar
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Kulturföreningar med kontinuerlig och utåtriktad verksamhet som utvecklar Grums kommuns kulturliv
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Kontinuerlig verksamhet inom kultursektorn, tillgänglig för alla
+  - Föreningen ska bedriva kontinuerlig kulturverksamhet som är öppen och tillgänglig för allmänheten
   - Verksamheten ska ha betydelse för kommunens kulturella utbud och utveckling
-  - Bidra till kommuninvånares möjlighet att delta i konstformer (musik, teater, konst, dans, film, litteratur)
-  belopp: null
-  sen_ansokan: Möjlig löpande
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-  belopp_status: okand
+  - Verksamheten ska ge kommuninvånarna möjlighet att ta del av eller utöva konstformer som musik, teater, konst, dans, film eller litteratur
+  - Ansökan ska beskriva mål, målgrupp, planerade aktiviteter och hur sökt belopp ska användas
+  - Budgeten ska redovisa sökt belopp samt andra intäkter och sökta eller beviljade stöd
+  - Verksamhetsplan, resultat- och balansräkning, verksamhets- och revisionsberättelse samt senaste årsmötesprotokoll ska kunna granskas av kommunen
+  belopp: Individuellt verksamhetsbidrag efter ansökan och kommunens budget; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: grums-kulturarrangemang
-  namn: Kulturarrangemangsbidrag
-  kategori:
-  - kultur
-  malgrupp: Föreningar för offentliga kulturarrangemang
+  namn: Bidrag till kulturarrangemang
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar som genomför offentliga kulturarrangemang i Grums kommun
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
-  - Offentligt kulturarrangemang av värde för Grums kulturliv
-  - Arrangemanget äger rum i Grums kommun
-  - Ansökan minst 60 dagar före arrangemanget
-  - Ska annonseras (digitalt eller affischering) med angivet kommunalt stöd
-  - Slutredovisning senast en månad efter arrangemanget
-  belopp: null
-  sen_ansokan: Möjlig löpande, min 60 dagar före
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-  belopp_status: okand
-  deadline_status: olast
+  - Sökanden ska vara en förening med hemvist i Grums kommun
+  - Arrangemanget ska vara offentligt, äga rum i Grums kommun och ha betydelse för kommunens kulturliv
+  - Ansökan ska beskriva datum, plats, målgrupp, förväntad publik, medverkande och eventuella samarbetspartner
+  - En fullständig budget ska redovisa kostnader, intäkter, andra stöd och det belopp som söks från kommunen
+  - Arrangemanget ska annonseras digitalt eller genom affischering och kommunens stöd ska anges
+  - Slutredovisning med ekonomiskt utfall ska lämnas senast 30 dagar efter arrangemanget
+  - Stadgar och övriga föreningshandlingar ska bifogas när kommunen begär det
+  belopp: Individuellt arrangemangsbidrag efter ansökan och budgetprövning; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas minst 60 dagar före arrangemanget
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: grums-socialbidrag
+  namn: Föreningsbidrag till sociala verksamheter och funktionsrättsföreningar
+  status: aktiv
+  kategori: [social, funktionsratt]
+  foreningstyp: [social, annat]
+  malgrupp: Ideella föreningar och organisationer inom socialtjänstens område samt funktionsrättsföreningar med verksamhet för Grumsbor
+  deadlines:
+    typ: fasta
+    datum: ['10-16']
+  krav:
+  - Sökanden ska vara en ideell förening eller organisation inom socialtjänstens område eller en funktionsrättsförening
+  - Verksamheten ska vara till särskild nytta för målgruppen och ge en aktiv och meningsfull fritid
+  - Föreningen ska inte huvudsakligen bedriva barn- och ungdomsverksamhet som omfattas av kultur- och fritidsstöden
+  - Ansökan ska beskriva verksamhetens ändamål, målgrupp, planerade insatser och det belopp som söks
+  - Föreningen ska hålla sina kontaktuppgifter aktuella i kommunens föreningsregister
+  - Verksamhetsplan, resultat- och balansräkning, verksamhets- och revisionsberättelse samt senaste årsmötesprotokoll ska bifogas eller finnas tillgängliga för granskning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 299 000 kr för sociala verksamheter och funktionsrättsföreningar 2026, inom totalramen 322 000 kr
+  sen_ansokan: Ansökan för nästa verksamhetsår ska lämnas senast 16 oktober
+  kalla_url: &socialform https://e-tjanster.grums.se/Serviceintroduction.aspx?Service=5FORBID
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: grums-pensionarsforeningsbidrag
+  namn: Föreningsbidrag till pensionärsföreningar
+  status: aktiv
+  kategori: [pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar med verksamhet för äldre i Grums kommun
+  deadlines:
+    typ: fasta
+    datum: ['10-16']
+  krav:
+  - Sökanden ska vara en ideell pensionärsförening med verksamhet för äldre i Grums kommun
+  - Ansökan ska redovisa medlemsantal och beskriva verksamhetens ändamål och planerade aktiviteter
+  - Det belopp som söks och hur pengarna ska användas ska anges
+  - Föreningen ska hålla sina kontaktuppgifter aktuella i kommunens föreningsregister
+  - Verksamhetsplan, resultat- och balansräkning, verksamhets- och revisionsberättelse samt senaste årsmötesprotokoll ska bifogas eller finnas tillgängliga för granskning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 23 000 kr för pensionärsföreningar 2026, inom totalramen 322 000 kr
+  sen_ansokan: Ansökan för nästa verksamhetsår ska lämnas senast 16 oktober
+  kalla_url: https://e-tjanster.grums.se/Serviceintroduction.aspx?Service=5FORBIDpensionar
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: grums-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  status: aktiv
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med studiecirkel- och folkbildningsverksamhet i Grums kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Studieförbundet ska bedriva lokal studiecirkel- eller folkbildningsverksamhet i Grums kommun
+  - Verksamheten ska vara statsbidragsberättigad enligt de regler som gäller för studieförbund
+  - Föregående års lokala studietimmar ska redovisas som underlag för fördelningen
+  - Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och verksamhetsplan ska lämnas för kommunens kontroll
+  - SISU Idrottsutbildarna omfattas av ett separat årligen beslutat anslag
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Det årliga kommunanslaget fördelas efter antalet lokala studietimmar; totalsumman publiceras inte. SISU Värmland får ett separat fast årligt anslag
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag i den gällande riktlinjen
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: false
+- id: grums-foreningsutvecklingsbidrag
+  namn: Föreningsutvecklingsbidrag
+  status: aktiv
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott]
+  malgrupp: Idrottsföreningar i Grums kommun som utvecklar verksamhet eller föreningsdrivna lokaler och anläggningar för barn 7–15 år
+  deadlines:
+    typ: fasta
+    datum: ['04-30']
+  krav:
+  - Sökanden ska vara en idrottsförening med aktiv verksamhet i Grums kommun för barn 7–15 år
+  - Stödet kan avse renovering, ny-, till- eller ombyggnad, maskiner, större inventarier, djur eller verksamhetsutveckling
+  - Investeringen eller utvecklingsinsatsen får inte vara påbörjad före beslut
+  - Insatser som minskar driftkostnader och miljöpåverkan, ökar tillgänglighet, breddar verksamheten eller stärker folkhälsa och jämställdhet prioriteras
+  - Ansökan ska beskriva behov, användning, arbetsinsats, investerings- och driftkalkyl samt innehålla ritningar eller arbetsbeskrivning när det är relevant
+  - Möjlig extern finansiering ska sökas och redovisas
+  - Stadgar, årsmötesprotokoll, verksamhetsplan, verksamhetsberättelse och en beskrivning av hur projektet stödjer kommunens strategiska mål ska bifogas
+  - Projektet ska genomföras och redovisas inom ett år från beslutet
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Årets tillgängliga anslag fördelas mellan godkända ansökningar; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska lämnas senast 30 april och projektet får inte påbörjas före beslut
+  kalla_url: &utveckling https://www.grums.se/download/18.b72bfdc19d24e1d9ef40e4d/1775568281545/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsutvecklingsbidrag.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den sedan 24 mars 2026 gällande riktlinjen innehåller ingen individuell andelsgräns
+  kraver_registrering: true
+  sate_i_kommunen: true
 forutsattningar:
 - id: grums-registrering
-  vad: Registrering som stödberättigad förening
-  beskrivning: Föreningen måste vara ideell, partipolitiskt obunden, religiöst obunden (för vissa bidrag), och registrerad
-    som stödberättigad förening.
-  system: Grums föreningsregister
+  vad: Årligt godkännande som stödberättigad förening
+  beskrivning: Föreningen ska ha verksamhet och registrerad hemvist i Grums kommun, ha varit verksam i minst sex månader och varje år ansöka om att vara stödberättigad samt kontrollera och uppdatera uppgifterna i kommunens föreningsregister.
+  system: Grums kommuns e-tjänster och föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Årlig ansökan och registerkontroll; kommunen publicerar inget gemensamt fast datum
+  giltighet: Ett kalenderår
   ordning: 1
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-  giltighet_status: okand
-- id: grums-kontakt
-  vad: Kontakt för bidrags-frågor
-  beskrivning: Ann-Christine Andersson (LOK), Christoffer Nilsson, Martin Karlsson. Se kontaktlista på föreningslivssidan.
+  kalla_url: *huvud
+  giltighet_status: kontrollast
+- id: grums-grundvillkor
+  vad: Allmänna villkor för ideell förening
+  beskrivning: Föreningen ska ha demokratiska stadgar godkända av riksorganisation eller kommunen och arbeta för jämställdhet, icke-diskriminering, integration, folkhälsa och en verksamhet fri från missbruk. Barn- och ungdomsföreningar ska dessutom följa kommunens barn- och ungdomspolitiska mål.
   system: Grums kommun
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Prövas vid den årliga ansökan
+  giltighet: Ett kalenderår
   ordning: 2
-  kalla_url: https://www.grums.se/upplevagora/foreningsliv/foreningsbidrag.8246.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: grums-arshandlingar
+  vad: Årlig verksamhets- och ekonomiredovisning
+  beskrivning: Föreningen ska årligen lämna verksamhetsplan, resultat- och balansräkning, verksamhets- och revisionsberättelse samt senaste årsmötesprotokoll med styrelse, revisorer och beslutad medlemsavgift. Kommunen och dess revisorer ska få insyn och beviljat stöd ska användas och redovisas för rätt ändamål.
+  system: Grums kommuns e-tjänster och föreningsregister
+  ledtid: null
+  ledtid_text: Lämnas årligen i samband med ansökan eller på kommunens begäran
+  giltighet: Ett kalenderår
+  ordning: 3
+  kalla_url: *norm
+  giltighet_status: kontrollast
+kommunsiffra: null
