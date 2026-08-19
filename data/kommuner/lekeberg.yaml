@@ -2,18 +2,33 @@ kommun: Lekeberg
 kommun_slug: lekeberg
 lan: Örebro län
 befolkning: 8605
-forvaltning: Kultur och fritid
+forvaltning: Kultur- och fritidsavdelningen samt kommunstyrelsen
 ansokningssystem:
-  namn: Blankett
+  namn: Mina sidor, blanketter och lokalbokning
   url: https://lekeberg.se/upplevaochgora/foreningarforeningsliv/bidragstodochstipendier.4.711bc06b14820d116bc155b.html
 kalla_url: https://lekeberg.se/upplevaochgora/foreningarforeningsliv/bidragstodochstipendier.4.711bc06b14820d116bc155b.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Medlemsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &allatyper
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   malgrupp: Bidragsberättigade föreningar
   deadlines:
     typ: fasta
@@ -26,19 +41,25 @@ bidrag:
   - Ansökan görs av föreningens huvudstyrelse
   - Föreningens verksamhet för barn och unga ska vara fri från alkohol, narkotika, doping och tobak (ANDT)
   belopp: 50 kr per bidragsberättigad medlem och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: lekeberg-medlemsbidrag
 - namn: Lokalt aktivitetsbidrag
+  status: aktiv
   kategori:
   - idrott
+  - pensionar
   - ovrig
-  malgrupp: Föreningar med bidragsgrundande aktiviteter
+  foreningstyp: *allatyper
+  malgrupp: Föreningar med bidragsgrundande aktiviteter för barn och unga eller deltagare 65 år och äldre
   deadlines:
     typ: fasta
     datum:
@@ -46,26 +67,31 @@ bidrag:
     - 08-25
   krav:
   - Föreningen ska ha stadgar, styrelse och organisationsnummer samt ha sitt säte i och bedriva verksamhet i Lekebergs kommun
-  - Sammankomsten ska vara planerad och genomförd, omfatta minst 45 minuter och ha minst tre deltagande bidragsberättigade
-    medlemmar (6–25 år)
+  - Sammankomsten ska vara planerad och genomförd, omfatta minst 45 minuter och ha minst tre deltagande bidragsberättigade medlemmar
+  - Barn- och ungdomsstödet avser medlemmar 6–25 år; kommunen beslutar även återkommande om aktivitetsbidrag för deltagare 65 år och äldre enligt samma redovisningsperioder
   - Bidrag för samma medlem utgår för högst en sammankomst per dag i samma förening
   - Ledare/ansvarig för sammankomsten ska under kalenderåret vara 13–25 år för att bidrag ska utgå även för ledaren
   - Föreningen ska föra närvarokort med föreningens namn, aktivitet, plats, datum, tid samt deltagares och ledares namn, födelsedatum
     och närvaro, undertecknat av ansvarig ledare
   - Årsmötesprotokoll och årsredovisning ska bifogas ansökan
   belopp: 45 kr per genomförd sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: Aktivitetsbidraget för 65+ framgår av kommunens återkommande delegationsbeslut; besluten visar samma ersättning om 45 kr per godkänd sammankomst
   id: lekeberg-lokalt-aktivitetsbidrag
 - namn: Skötselbidrag
+  status: aktiv
   kategori:
   - idrott
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar som sköter anläggning eller område
   deadlines:
     typ: fasta
@@ -81,18 +107,23 @@ bidrag:
   belopp: 'Maxbelopp per objektstyp och år: föreningslokal A 25 000 kr, B 13 000 kr, C 10 000 kr, D 5 000 kr, E 1 000 kr;
     ridbana 3 000 kr; tennisplan 1 500 kr; skjutbana 2 000 kr; friidrottsanläggning 12 000 kr; fotbollsplan A 15 000 kr, B
     8 000 kr, C 4 000 kr; isbana 3 000 kr grundbidrag + 2 000 kr/månad spolad is; elljusspår 8 500 kr'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan som inkommit efter ansökningstidens utgång behandlas inte.
   kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: lekeberg-skotselbidrag
 - namn: Arrangörsbidrag
+  status: aktiv
   kategori:
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar som genomför arrangemang
   deadlines:
     typ: lopande
@@ -105,20 +136,25 @@ bidrag:
     tillåten) och genomföras i Lekebergs kommun
   - Arrangemanget ska vara fritt från alkohol, narkotika, droger och tobak
   - Bidrag kan inte sökas enbart för inköp av material eller sökas retroaktivt
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: Individuellt prövat; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas före arrangemanget; stöd kan inte sökas retroaktivt
   kalla_url: https://lekeberg.se/download/18.4c6084eb15affb03ae94aa4b/1490623231561/Arrang%C3%B6rsbidrag%20(regler).pdf
-  belopp_status: okand
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: Kommunen publicerar ingen generell beloppsnivå
   id: lekeberg-arrangorsbidrag
 - namn: Utvecklingsbidrag
+  status: aktiv
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar med utvecklingsinsats
   deadlines:
     typ: fasta
@@ -134,17 +170,22 @@ bidrag:
   - I ansökan ska framgå hur föreningen avser finansiera projektet om inte hela det sökta beloppet beviljas
   - Vid inställt utvecklingsprojekt ska hela bidraget återbetalas
   belopp: Valfritt belopp upp till 75 000 kr per år, beviljas efter individuell bedömning av varje ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://lekeberg.se/download/18.2e57f621177db53fd5f873a1/1615216155919/Utvecklingsbidrag%20(regler).pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: lekeberg-utvecklingsbidrag
 - namn: Startbidrag
+  status: aktiv
   kategori:
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Nystartade föreningar
   deadlines:
     typ: okand
@@ -157,18 +198,23 @@ bidrag:
     protokoll från konstituerande årsmöte, kopia på myndighets beslut om organisationsnummer och föreningens stadgar
   - Föreningens verksamhet för barn och unga ska vara fri från alkohol, narkotika, doping och tobak (ANDT)
   belopp: 5 000 kr (engångsbelopp)
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag för startbidraget
   kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: lekeberg-startbidrag
 - namn: Bidrag för lokala mötesplatser och kulturcentrum
+  status: aktiv
   kategori:
   - kultur
   - ovrig
+  foreningstyp: *allatyper
   malgrupp: Föreningar som driver lokal mötesplats eller kulturcentrum
   deadlines:
     typ: fasta
@@ -184,23 +230,98 @@ bidrag:
   - Bidrag kan endast sökas för innevarande kalenderår, och en rapport med uppföljning av föreningens verksamhet och ekonomi
     ska skickas in i efterhand på befintlig blankett
   belopp: 5 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej angivet i källan
   kalla_url: https://lekeberg.se/download/18.18e36e2915b8f083427b2142/1493120874075/Bidrag%20Lokala%20m%C3%B6tesplatser_kulturcentrum%20(regler).pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ej angivet i källan
+  senast_verifierad: '2026-08-19'
+  anteckning: null
   id: lekeberg-bidrag-for-lokala-motesplatser-och-kulturcentrum
+- id: lekeberg-subventionerad-hyra
+  namn: Subventionerad hyra i kommunala lokaler och anläggningar
+  status: aktiv
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - pensionar
+  - funktionsratt
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Lokala föreningar och studieförbund som bokar kommunens lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen eller studieförbundet ska boka en lokal eller anläggning som kommunen hyr ut genom lokalbokningen
+  - Lägsta taxan gäller lokala föreningars verksamhet för 0–25 år och studieförbunds verksamhet som huvudsakligen riktas till samma åldersgrupp
+  - Lägsta taxan gäller även föreningar för personer med funktionsnedsättning och pensionärsföreningar med säte i Lekebergs kommun
+  - Reducerad taxa gäller lokala föreningars verksamhet för deltagare från 26 år och studieförbunds verksamhet som huvudsakligen riktas till den åldersgruppen
+  - Bokningen ska följa kommunens regler för ansvar, avbokning, nycklar, ordning och användning av lokalen eller anläggningen
+  belopp: Subvention genom lägsta eller reducerad kommunal taxa beroende på föreningstyp och deltagarnas ålder
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag; lokaler bokas i kommunens bokningssystem
+  kalla_url: https://lekeberg.se/download/18.799b0a9f16b90299688815d7/1561972694454/Taxor%20och%20regler%20f%C3%B6r%20uthyrning%20av%20kommunala%20lokaler%20i%20Lekebergs%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Bokningssystemet är https://bokning.lekeberg.se/bokning/
+- id: lekeberg-sponsring
+  namn: Sponsring av idrotts- och kulturarrangemang
+  status: aktiv
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *allatyper
+  malgrupp: Föreningar och organisationer som genomför publika idrotts- eller kulturarrangemang med stort genomslag
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sponsringen ska avse ett idrotts- eller kulturarrangemang som bedöms dra stor publik och stärka bilden av Lekebergs kommun
+  - Samarbetet ska vara affärsmässigt, objektivt och bygga på en motprestation vars värde står i rimlig proportion till kommunens insats
+  - Vid sponsring av en arena eller lokal ska allmänheten ha tillträde till verksamheten eller arrangemanget
+  - Sponsringen får avse marknadsföring av kommunen men får inte utformas så att kommunens oberoende eller trovärdighet kan ifrågasättas
+  - Villkoren, parternas prestationer och sponsringens omfattning ska regleras i ett skriftligt avtal
+  - Om arrangemanget ställs in eller organisationen upphör kan kommunen kräva tillbaka hela eller delar av stödet
+  belopp: Individuellt avtalad sponsringsinsats; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen generell sista ansökningsdag för sponsringsförslag
+  kalla_url: https://lekeberg.se/download/18.acc709b14d37e0919d52ce8/1479202120710/Riktlinjer%20f%C3%B6r%20sponsring%20i%20Lekebergs%20kommun.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Sponsring är ett ömsesidigt avtal med krav på en proportionerlig motprestation
 forutsattningar:
 - id: lekeberg-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Blankett
+  vad: Allmänna villkor för bidragsberättigad förening
+  beskrivning: Föreningen ska ha stadgar, vald styrelse och organisationsnummer, ha sitt säte och bedriva sin verksamhet i Lekebergs kommun samt ställa sig bakom kommunens gemensamma värdegrund. Ansökan lämnas av huvudstyrelsen och utbetalning görs endast till föreningens plus- eller bankgiro.
+  system: Mina sidor och blankett
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen särskild handläggningstid
   giltighet: null
   ordning: 1
-  kalla_url: https://lekeberg.se/upplevaochgora/foreningarforeningsliv/bidragstodochstipendier.4.711bc06b14820d116bc155b.html
-  giltighet_status: okand
+  kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
+  giltighet_status: ingen_regel
+- id: lekeberg-arshandlingar
+  vad: Årsmöteshandlingar och kommunal insyn
+  beskrivning: Årsmötesprotokoll och årsredovisning med verksamhetsberättelse, ekonomisk berättelse och revisionsberättelse ska lämnas en gång per år tillsammans med en bidragsansökan eller när kommunen begär dem. Föreningen ska medge granskning av verksamhet och ekonomi samt återbetala felaktigt använt stöd.
+  system: Mina sidor och blankett
+  ledtid: null
+  ledtid_text: Handlingarna lämnas med ansökan eller på begäran; ingen separat tidsfrist efter årsmötet publiceras
+  giltighet: null
+  ordning: 2
+  kalla_url: https://lekeberg.se/download/18.3baa1b5f160b180e6a86a823/1515160795218/F%C3%B6reningsbidragsregler%20f%C3%B6r%20kultur-%20idrotts-%20och%20fritidsverksamhet.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null
