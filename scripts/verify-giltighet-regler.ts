@@ -58,7 +58,7 @@ interface Fixture {
 }
 
 const RULES: Record<string, ExpectedRule> = {
-  berg: { typ: 'okand', antal: null, datum: null, status: 'okand' },
+  berg: { typ: 'kalenderar', antal: null, datum: null, status: 'kontrollast' },
   boxholm: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   bromolla: { typ: 'ingen_regel', antal: null, datum: null, status: 'ingen_regel' },
   enkoping: { typ: 'sammansatt', antal: null, datum: null, status: 'kontrollast' },

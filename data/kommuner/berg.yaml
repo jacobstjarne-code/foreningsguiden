@@ -2,163 +2,397 @@ kommun: Berg
 kommun_slug: berg
 lan: Jämtlands län
 befolkning: 7069
-forvaltning: Kultur och fritid
+forvaltning: Kultur- och fritidsenheten, Kommunstyrelsen och Utvecklingsutskottet
 ansokningssystem:
-  namn: Kommunens e-tjänst för kommunala föreningsbidrag
-  url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
-kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
-verifierad: '2026-08-02'
+  namn: Bergs kommuns e-tjänster
+  url: https://eservice.berg.se/kommunalaforeningsbidrag
+kalla_url: &main https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+verifierad: '2026-08-19'
 kommunsiffra:
   antal_foreningar: 30
   summa_kr: 781 117
   bidragstyp: drift- och underhållsbidrag
   utlamnad_datum: juli 2026
 giltighet_regel:
-  typ: okand
+  typ: kalenderar
   antal: null
   datum: null
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
-giltighet_regel_status: okand
+  kalla_url: *main
+giltighet_regel_status: kontrollast
 bidrag:
 - id: berg-investeringsbidrag
-  namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som investerar i lokal, anläggning eller avgörande inventarier
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-28
+  namn: Investeringsstöd (priolistan)
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar som investerar i föreningsägd eller arrenderad anläggning eller samlingslokal
+  deadlines: {typ: fasta, datum: [02-28]}
   krav:
-  - Ansökt bidrag ska omfatta minst 30 000 kronor
-  - Investeringen ska ha en livslängd på minst tre år
-  - Medfinansiering krävs med minst 20 procent av totala kostnaden
-  - Ägande-, arrende-, nyttjanderätts- eller hyresavtal på anläggningen i minst fem år
-  belopp: Max 80 procent av projektkostnaden
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  - Investeringen ska avse om- eller tillbyggnad, reparation, lagstadgad anpassning eller inventarie eller icke registreringspliktigt redskap som är avgörande för verksamheten
+  - Ansökt bidrag ska omfatta minst 30 000 kr och investeringen ska ha en livslängd på minst tre år
+  - Föreningen ska visa minst 20 % medfinansiering och att andra finansieringsmöjligheter har prövats
+  - Föreningen ska ha bedrivit verksamhet i anläggningen föregående år och lämna handlingsplan, projektbeskrivning, kalkyl, finansiering, tidsplan och styrelsebeslut
+  - Föreningen ska äga anläggningen eller ha arrende-, nyttjanderätts- eller hyresavtal i minst fem år samt kunna styrka försäkring
+  belopp: Högst 80 % av projektkostnaden; ideellt arbete från 16 år värderas till 340 kr per timme 2026
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: berg-aktivitetsbidrag
-  namn: Aktivitetsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med organiserade aktiviteter
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-28
-    - 08-31
+  namn: Kommunalt aktivitetsstöd
+  foreningstyp: *alla
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar med organiserad verksamhet för barn och unga, pensionärer, personer med funktionsnedsättning eller nyanlända
+  deadlines: {typ: fasta, datum: [02-28, 08-31]}
   krav:
-  - Minst tre deltagare
-  - Minst 60 minuter
-  - En ledare ska vara närvarande
-  belopp: 50 kronor per godkänd sammankomst samt 30 kronor per deltagartillfälle (kan minska beroende på antal sökande)
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  - Aktiviteten ska vara organiserad, ledarledd och pågå minst 60 sammanhängande minuter
+  - Varje sammankomst ska ha minst tre deltagare utöver ledaren
+  - RF-ansluten idrottsförening ska bifoga sin statliga LOK-stödsansökan från IdrottOnline
+  - Övriga föreningar ska föra närvarokort och arkivera underlaget för kommunens stickkontroll
+  - Ansökan i februari avser juli–december och ansökan i augusti avser januari–juni
+  belopp: 50 kr per godkänd sammankomst samt 30 kr per deltagartillfälle; nivån kan minskas för att rymmas inom anslaget
+  belopp_avser: per_forening
+  kommunens_pott: 1 075 900 kr i kommunens anslagsram 2026
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: berg-utvecklande-aktiviteter
-  namn: Övrigt bidrag – utvecklande aktiviteter och investeringar
-  kategori:
-  - idrott
-  - kultur
-  - social
-  - ovrig
-  malgrupp: Föreningar som genomför nya utvecklande aktiviteter eller investeringar
-  deadlines:
-    typ: lopande
-    datum: []
+  namn: Övrigt bidrag 2026 – utvecklande aktiviteter och investeringar
+  foreningstyp: *alla
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som genomför nya och utvecklande aktiviteter eller investeringar under 2026
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Max en ansökan per förening
-  - Redovisning ska lämnas i e-tjänsten inom två månader
-  belopp: Max 28 000 kronor per förening under 2026
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  - Insatsen ska vara ny eller utvecklande och avse aktivitet, investering eller utbildning av ledare
+  - Insatsen ska vara viktig ur socialt eller folkhälsoperspektiv och vara till gagn för bygden
+  - Föreningen får lämna högst en ansökan under 2026
+  - Stödet betalas i förskott och ska redovisas i e-tjänsten inom två månader
+  belopp: Högst 28 000 kr per förening under 2026
+  belopp_avser: per_forening
+  kommunens_pott: 168 000 kr i kommunens anslagsram 2026
+  sen_ansokan: Ansökan sker löpande under 2026
+  kalla_url: *main
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: berg-drift-underhall
   namn: Drift- och underhållsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar med egna anläggningar eller lokaler
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-28
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som driver föreningsägd idrottsanläggning eller allmän samlingslokal
+  deadlines: {typ: fasta, datum: [02-28]}
   krav:
-  - Kostnader ska redovisas på drift- och underhållskonto i bokföringen
-  - Kostnader ska styrkas av resultatrapport för aktuellt år
-  - Idrottsföreningar anslutna till riksorganisation ska ha beviljats statligt och kommunalt aktivitetsstöd
-  - Ägande-, arrende-, nyttjanderätts- eller hyresavtal på anläggningen i minst fem år
-  belopp: Upp till 30 procent av redovisad kostnad, beroende på antal sökande och kommunens budget
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  - Ansökan ska avse direkta drift- och underhållskostnader för föregående kalenderår
+  - Kostnaderna ska redovisas på drift- och underhållskonto och styrkas med resultatrapport
+  - Stöd lämnas inte för kommunal anläggning eller inköp av inventarier, maskiner och förbrukningsmaterial
+  - RF-ansluten idrottsförening ska ha beviljats statligt och kommunalt aktivitetsstöd; annan samlingslokal ska redovisa föregående års verksamhet
+  - Föreningen ska äga anläggningen eller ha arrende-, nyttjanderätts- eller hyresavtal i minst fem år
+  belopp: Upp till 30 % av redovisad kostnad, beroende på antal sökande och kommunens budget
+  belopp_avser: per_forening
+  kommunens_pott: 864 300 kr i kommunens anslagsram 2026
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: berg-energisparbidrag
   namn: Energisparbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som genomför energibesparande åtgärder
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-15
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som energieffektiviserar föreningsägd eller arrenderad anläggning, samlingslokal eller vägbelysning
+  deadlines: {typ: fasta, datum: [09-15]}
   krav:
-  - Ansökt bidrag ska omfatta minst 30 000 kronor
-  - Investeringen ska ha en livslängd på minst tre år
-  - Handlings- eller utvecklingsplan för anläggningen ska bifogas ansökan
-  - Medfinansiering krävs med minst 20 procent av totala kostnaden
-  - Ägande-, arrende-, nyttjanderätts- eller hyresavtal på anläggningen i minst fem år
-  belopp: "Max 80 procent av de totala projektkostnaderna"
+  - Åtgärden ska vara energibesparande eller energieffektiviserande och ansökt bidrag ska omfatta minst 30 000 kr
+  - Investeringen ska ha minst tre års livslängd och föreningen ska visa minst 20 % medfinansiering
+  - Ansökan ska innehålla handlingsplan, projektbeskrivning, kalkyl, finansiering, tidsplan, styrelsebeslut, försäkring och ägande- eller nyttjanderättsunderlag
+  - Föreningen ska utse projektledare och lämna projekt- och ekonomisk redovisning senast 1 september året efter
+  - Föreningen ska äga anläggningen eller ha arrende-, nyttjanderätts- eller hyresavtal i minst fem år
+  belopp: Högst 80 % av de totala projektkostnaderna; ideellt arbete från 16 år värderas till 340 kr per timme 2026
   belopp_avser: per_forening
   kommunens_pott: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 - id: berg-vagbelysning
-  namn: Bidrag till vägbelysningsföreningar
-  kategori:
-  - ovrig
-  malgrupp: Vägbelysningsföreningar i Bergs kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 09-15
+  namn: Utjämningsbidrag för lysföreningar
+  foreningstyp: [annat]
+  kategori: [ovrig]
+  malgrupp: Lys- och andra lokala föreningar med vägbelysningsabonnemang hos BTEA eller Härjeåns
+  deadlines: {typ: fasta, datum: [09-15]}
   krav:
-  - Bidrag utgår endast för abonnemang som avser den aktuella vägbelysningsanläggningen
-  - Kopia på faktura och betalning för sista månaden i perioden ska bifogas ansökan
-  - Kan inte kombineras med andra kommunala bidrag för samma ändamål
-  belopp: Upp till hela mellanskillnaden (inklusive moms) i abonnemangsavgiften mellan BTEA/Härjeåns och Jämtkraft
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
+  - Abonnemanget ska avse den aktuella byns vägbelysningsanläggning
+  - Annan lokal förening än en renodlad lysförening ska intyga att redovisade kostnader enbart avser vägbelysningen
+  - Kopia på faktura och betalning för periodens sista månad ska bifogas
+  - Bidraget kan inte kombineras med annat kommunalt bidrag för samma ändamål
+  belopp: Upp till hela mellanskillnaden inklusive moms mellan BTEA:s eller Härjeåns fasta abonnemangsavgift och Jämtkrafts motsvarande avgift, per abonnemang
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-folkbildningsbidrag
+  namn: Folkbildningsbidrag till studieförbund
+  foreningstyp: [kultur, annat]
+  kategori: [kultur, ovrig]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Bergs kommun
+  deadlines: {typ: fasta, datum: [05-15]}
+  krav:
+  - Studieförbundets centrala organisation ska vara godkänd för statsbidrag av Folkbildningsrådet och förbundet ska vara verksamt i Berg
+  - Studiecirkel, annan folkbildning och kulturprogram som används som underlag ska vara statsbidragsberättigade
+  - Verksamheten ska genomföras i kommunen, fysiskt eller digitalt, och huvudsakligen rikta sig till kommuninvånare
+  - Ansökan ska innehålla årets arbets- eller verksamhetsplan samt föregående års verksamhetsberättelse, ekonomiska redogörelse och kommunintyg
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 200 000 kr i kommunens anslagsram 2026; anslaget fördelas med 10 % organisationsanslag, 8 % tillgänglighetsanslag och 82 % verksamhetsanslag, med högst 75 kr per redovisad studietimme
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-forlustbidrag
+  namn: Förlustbidrag
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som redovisar förlust efter ett offentligt arrangemang
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Arrangemanget ska vara öppet och tillgängligt för allmänheten
+  - Arrangören ska ta ut en skälig entré- eller deltagaravgift
+  - Arrangemangsrapport och ekonomisk rapport ska lämnas efter genomförandet
+  - Ansökan ska lämnas senast 21 dagar efter arrangemangets datum
+  - Bidraget får inte kombineras med annat kommunalt bidrag för samma arrangemang
+  belopp: 80 % av redovisad förlust, högst 6 000 kr per arrangemang
+  belopp_avser: per_forening
+  kommunens_pott: 24 000 kr i kommunens anslagsram 2026
+  sen_ansokan: Ansökan ska lämnas senast 21 dagar efter arrangemanget
+  kalla_url: *main
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-hyresbidrag
+  namn: Hyresbidrag
+  foreningstyp: *alla
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar med skälig hyra för stadigvarande verksamhet som saknar egen eller lämplig kommunal lokal
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Hyran ska avse kontor, möten, träning eller stadigvarande verksamhet, eller lokal som krävs för otymplig utrustning
+  - Föreningsägd lokal på orten ska användas om verksamheten kan bedrivas där
+  - Bidrag lämnas inte till förening som väljer egen eller kommunal lokal
+  - Verifikation eller hyreskontrakt för den betalda hyran ska bifogas
+  - Ansökan lämnas kvartalsvis och senast tre månader efter att hyran betalats
+  belopp: Upp till 60 % av skälig hyra, högst 9 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: 63 000 kr i kommunens anslagsram 2026
+  sen_ansokan: Senast tre månader efter betald hyra
+  kalla_url: *main
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-lokalt-lonebidrag
+  namn: Lokalt lönebidrag
+  foreningstyp: *alla
+  kategori: [social, ovrig]
+  malgrupp: Ideella föreningar med lönebidragsanställda
+  deadlines: {typ: fasta, datum: [02-28, 08-31]}
+  krav:
+  - Den anställde ska ha en lönebidragsanställning genom Arbetsförmedlingen
+  - Föreningen ska vara ideell och genom anställningen göra en social insats
+  - Bidraget får inte överstiga föreningens faktiska lönekostnad
+  - Ansökan i februari avser juli–december och ansökan i augusti avser januari–juni
+  belopp: 1 000 kr per månad för heltidsanställd, 6 000 kr per halvår, proportionerat efter sysselsättningsgrad
+  belopp_avser: per_forening
+  kommunens_pott: 36 000 kr i kommunens anslagsram 2026
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-verksamhetsbidrag-samlingslokaler
+  namn: Verksamhetsbidrag för samlingslokaler
+  foreningstyp: [kultur, hembygd, social, annat]
+  kategori: [kultur, social, ovrig]
+  malgrupp: Ideella föreningar och ägare av allmänna samlingslokaler i Bergs kommun
+  deadlines: {typ: fasta, datum: [02-28, 08-31]}
+  krav:
+  - Lokalen ska vara försäkrad, brandsäkerhetsbesiktigad, säker och tillgänglig för allmänheten
+  - Aktiviteten ska vara organiserad i minst 60 minuter, ha ansvarig ledare och minst tre deltagare
+  - Verksamhetsdagbok ska föras och arkiveras för kommunens stickkontroll
+  - Stöd lämnas inte för interna möten, privata sammankomster, uthyrning eller aktivitet där lokalägaren tar inträde
+  - Ansökan i februari avser juli–december och ansökan i augusti avser januari–juni
+  belopp: 150 kr per aktivitet där majoriteten är 26 år eller äldre och 300 kr när majoriteten är 0–25 år
+  belopp_avser: per_forening
+  kommunens_pott: 220 000 kr i kommunens anslagsram 2026
+  sen_ansokan: Sent inkommen ansökan kan inom två månader få högst 50 % av ordinarie nivå om anslaget räcker; senare ansökan avslås
+  kalla_url: *main
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-subventionerad-lokalhyra
+  namn: Subventionerad hyra i kommunens lokaler
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar i Bergs kommun som bokar kommunala aktivitets- och evenemangslokaler
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska uppfylla kommunens gällande bidragsnormer
+  - Förening med ungdomsverksamhet ska vara medlem i Riksidrottsförbundet
+  - Bokningen ska avse en kommunal lokal eller anläggning och följa kommunens boknings- och användningsregler
+  - Säsongsbokning görs senast 30 april för hösten och 31 oktober för våren; återstående tider kan direktbokas
+  belopp: 75 % av ordinarie hyra dras av vid faktureringen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för själva hyresstödet
+  kalla_url: https://berg.se/uppleva-och-gora/idrottsanlaggningar-och-hallar/hyra-lokaler
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-bygdemedel-allmanna-fonden
+  namn: Bygdemedel – allmänna fonden
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade organisationer med allmännyttiga investeringar eller projekt i vattenkraftspåverkad bygd
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Sökanden ska vara en registrerad organisation som är öppen för alla och har organisationsnummer
+  - Projektet eller investeringen ska vara till nytta för allmänheten i en berörd bygd
+  - Ansökan görs i Länsstyrelsens e-tjänst och prioriteras områdesvis av kommunens utvecklingsutskott
+  - Länsstyrelsen fattar slutligt beslut och beviljat stöd ska rekvireras och redovisas inom sex månader
+  belopp: Individuellt beslutat projektbelopp; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 31 oktober varje år
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/bygdemedel
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-nattvandringsbidrag-2026
+  namn: Bidrag för nattvandring 2026
+  foreningstyp: *alla
+  kategori: [social, ovrig]
+  malgrupp: Föreningar som nattvandrar vid kommunens utpekade evenemang under sommaren 2026
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska boka en eller flera av de kvällar och platser som kommunen efterfrågar nattvandrare till
+  - Insatsen ska genomföras som nattvandring för ökad trygghet och stöd till ungdomar vid det tilldelade evenemanget
+  - Bidraget lämnas per genomförd nattvandringskväll efter kontakt och överenskommelse med kommunen
+  belopp: Bidrag per genomförd kväll; nivån varierar och meddelas av kommunen vid bokningen
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista anmälningsdag; föreningen bokar en ledig kväll genom angiven kontaktperson
+  kalla_url: https://berg.se/kommun-och-politik/verksamhet-och-organisation/nyheter/nyheter/2026-05-12-oka-tryggheten-bli-nattvandrare
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-magiskt-hostlov-2026
+  namn: Ett magiskt höstlov 2026
+  foreningstyp: *alla
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som ordnar kostnadsfria höstlovsaktiviteter för barn och unga i grundskola och gymnasium
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Aktiviteten ska genomföras från helgen vecka 43 eller under vecka 44
+  - Aktiviteten ska vara kostnadsfri och öppen för alla barn och ungdomar i grundskola och gymnasium
+  - Aktiviteten ska ha låg tröskel, främja tillgänglighet och inkludering och tydligt vara en del av Ett magiskt höstlov
+  - Stöd kan avse material, fika eller lunch samt driftkostnad och lokalhyra de dagar aktiviteten genomförs
+  - Läger som främst riktas till föreningens befintliga medlemmar prioriteras inte
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 130 000 kr från Länsförsäkringar Jämtland för aktiviteter i Bergs kommun 2026
+  sen_ansokan: Kommunen publicerar ingen uttrycklig sista ansökningsdag på stödsidan
+  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/ansokan-till-ett-magiskt-hostlov
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+- id: berg-elstod-foreningar-2026
+  namn: Tillfälligt elstöd till föreningar 2026
+  foreningstyp: *alla
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar i Bergs kommun med egen elkostnad och faktisk kostnadsökning
+  deadlines: {typ: fasta, datum: [03-31]}
+  krav:
+  - Föreningen ska ha egen elkostnad och redovisa den faktiska kostnadsökningen för den aktuella perioden
+  - Minst en person från föreningen ska ha deltagit vid en av kommunens energirådgivningsträffar den 24 februari eller 9 mars 2026
+  - Ansökan skulle lämnas i kommunens ordinarie e-tjänst för föreningsbidrag
+  belopp: Ersättning utifrån föreningens faktiska kostnadsökning för el under den aktuella perioden
+  belopp_avser: per_forening
+  kommunens_pott: 151 635 kr beslutades som total tillfällig stödinsats 2026
+  sen_ansokan: Sista ansökningsdag var 31 mars 2026
+  kalla_url: https://berg.se/download/18.dfc583619ed44a3c0b155de/1782158022384/Kommunstyrelsens%20protokoll%20den%2016%20juni%202026%20f%C3%B6r%20delning.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  status: aktiv
+  senast_verifierad: '2026-08-19'
   anteckning: null
 forutsattningar:
 - id: berg-foreningsregister
@@ -171,8 +405,8 @@ forutsattningar:
   ledtid_text: Kommunen anger ingen handläggningstid
   giltighet: Föreningsuppgifterna ska uppdateras årligen — minst en gång per år, och snarast vid förändringar
   ordning: 1
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
-  giltighet_status: olast
+  kalla_url: *main
+  giltighet_status: kontrollast
 - id: berg-policy
   vad: Anta drog- och alkoholpolicy (barn- och ungdomsverksamhet)
   beskrivning: Föreningar med barn- och ungdomsverksamhet ska ha en antagen drog- och alkoholpolicy med åtgärdsplan och konsekvenshandling.
@@ -182,5 +416,5 @@ forutsattningar:
   ledtid_text: Antas på årsmötet
   giltighet: Ska uppdateras årligen
   ordning: 2
-  kalla_url: https://berg.se/uppleva-och-gora/foreningsliv-och-foreningar/sok-bidrag-stod-och-stipendier/kommunala-foreningsbidrag
-  giltighet_status: olast
+  kalla_url: *main
+  giltighet_status: kontrollast
