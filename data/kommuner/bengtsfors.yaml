@@ -2,216 +2,447 @@ kommun: Bengtsfors
 kommun_slug: bengtsfors
 lan: Västra Götalands län
 befolkning: 8921
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur- och fritidskontoret samt folkhälsorådet
 ansokningssystem:
-  namn: E-tjänst
-  url: https://www.bengtsfors.se/
-kalla_url: https://www.bengtsfors.se/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-verifierad: '2026-08-02'
+  namn: Interbook Go och Bengtsfors kommuns e-tjänster
+  url: https://ibgo.bengtsfors.se/
+kalla_url: &huvud https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
+verifierad: '2026-08-19'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &allmanna https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag/allmanna-bestammelser-for-foreningsbidrag
+giltighet_regel_status: kontrollast
 bidrag:
-- id: bengtsfors-anlaggningsbidrag
-  namn: Anläggningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar som förvaltar kommunala anläggningar för barn- och ungdomsverksamhet
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Föreningen ska förvaltar kommunal anläggning
-  - Verksamheten ska primärt riktas mot barn och ungdom
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade krav och belopp ej fullt dokumenterade'
-- id: bengtsfors-driftsbidrag
-  namn: Driftsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar för drift av egna eller hyrda lokaler
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
-  krav:
-  - Föreningen ska äga eller hyra lokal för sitt föreningsliv
-  - Lokalen delas in i klasser beroende på innehåll
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 440 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: 'Stödberättigade driftskostnader: värme, el, vatten, sotning, snöröjning, sophämtning och försäkringar'
-- id: bengtsfors-ledarutbildning
-  namn: Ledarutbildningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för ledarutbildning
-  deadlines:
-    typ: lopande
-    datum: []
-  krav:
-  - Utbildning av föreningsledare
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 20 000 kronor"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunen kan även stödja föreningen att arrangera egna kurser (max 75% av kostnaden)
 - id: bengtsfors-aktivitetsstod
   namn: Aktivitetsstöd till barn- och ungdomsverksamhet
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar med ledarledd gruppverksamhet för barn och unga 5–25 år
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &allatyper [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Bidragsberättigade föreningar med ledarledd gruppverksamhet för barn och unga 5–25 år
   deadlines:
     typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+    datum: ['02-25', '08-25']
   krav:
-  - Minst tre deltagare
-  - Sammankomsten ska pågå minst 60 minuter
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 290 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
+  - Gruppen ska bestå av minst tre deltagare 5–25 år och vara naturligt sammansatt, exempelvis ett lag eller en nybörjargrupp
+  - Aktiviteten ska pågå minst 60 minuter och innehålla gemensam samling och avslutning
+  - Gruppledaren ska vara närvarande och föra närvarokort vid varje sammankomst
+  - Samma deltagare får räknas i högst en grupp per dag och förening och en aktivitet får bara redovisas som en sammankomst även om gruppen delas
+  - Entrébelagda tävlingar och verksamhet genom studieförbund är inte stödberättigade
+  - Närvarokort och kommunens begärda årshandlingar ska bifogas ansökan
+  belopp: 55 kr per godkänd sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: 290 000 kr per år
+  sen_ansokan: Ansökan för juli–december ska lämnas senast 25 februari och för januari–juni senast 25 augusti
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: olast
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den aktuella webbsidan och blanketten ersätter riktlinjens äldre datum 15 februari och 15 augusti
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-anlaggningsbidrag
+  namn: Anläggningsbidrag för kommunalägd anläggning
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som sköter en kommunal fritidsanläggning med huvudsaklig barn- och ungdomsverksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska sköta en anläggning som ägs av Bengtsfors kommun
+  - Verksamheten i anläggningen ska i huvudsak rikta sig till barn och ungdomar
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor
+  - Ett särskilt skriftligt avtal ska reglera skötsel, uppdrag, ersättning och uppföljning
+  - Kommunen följer upp varje anläggning och avtal individuellt
+  belopp: Ersättningen bestäms i ett individuellt avtal; någon generell beloppsnivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Stödet är inte öppet för allmän ansökan utan fördelas av kommunen genom särskilda avtal
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-attraktivitetsbidrag
+  namn: Attraktivitetsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som genomför attraktivitetshöjande åtgärder till nytta för bygden
+  deadlines:
+    typ: fasta
+    datum: ['04-15']
+  krav:
+  - Åtgärden ska öka attraktiviteten för invånare och besökare och skapa ett positivt mervärde för bygden
+  - Projektet ska genomföras inom ett år och det praktiska arbetet ska utföras ideellt
+  - Stödet får täcka material och andra redovisade projektkostnader men får inte skapa nya kommunala driftkostnader
+  - Ansökan ska beskriva planerade åtgärder, kostnadskalkyl och sökt belopp samt innehålla föreningens årshandlingar
+  - Ett skriftligt avtal ska ange ersättning, föreningens åtaganden, kontaktperson, sluttid och återrapportering
+  - Exempel på stödberättigade åtgärder är planteringar, sittgrupper, informationstavlor och iordningställda utemiljöer
+  belopp: Individuell ersättning för godkända material- och projektkostnader enligt skriftligt avtal
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr per år
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: bengtsfors-samlingslokaler
   namn: Bidrag till allmänna samlingslokaler
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som opartiskt upplåter allmän samlingslokal
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [hembygd, kultur, social, annat]
+  malgrupp: Föreningar som driver en allmän samlingslokal för den kringliggande bygden
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
+    datum: ['04-15']
   krav:
-  - Lokalen ska vara tillgänglig för föreningsliv och allmänhet
-  - Lokalen ska hålla god standard samt uppfylla lagstiftning om tillgänglighet och brandskydd
+  - Föreningen ska på ett allmänt och opartiskt sätt upplåta lokalen för föreningsliv, studier, kultur eller liknande verksamhet
+  - Lokalen ska användas regelbundet, fylla ett lokalt mötesplatsbehov och vara av god standard
+  - Gällande krav på tillgänglighet och brandskydd ska vara uppfyllda
+  - Ansökan ska redovisa föregående års driftkostnader, lokalens totala och offentligt tillgängliga yta, hyresintäkter samt interna och externa sammankomster
+  - Hög uthyrnings- och aktivitetsgrad ger extra stöd enligt kommunens fördelningsmall
+  - En nytillkommen samlingslokal ska godkännas av kommunstyrelsen innan stöd kan sökas
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 350 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
+  belopp_avser: ren_pott
+  kommunens_pott: 350 000 kr per år, fördelat efter driftkostnader, tillgänglig yta och uthyrnings- eller aktivitetsgrad
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: bengtsfors-pensionarsforeningar
   namn: Bidrag till pensionärsföreningar
-  kategori:
-  - pensionar
-  malgrupp: Pensionärsföreningar i kommunen
+  status: aktiv
+  kategori: [social, pensionar]
+  foreningstyp: [social, annat]
+  malgrupp: Pensionärsföreningar som bedriver aktiv verksamhet i Bengtsfors kommun
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
-  krav: []
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 90 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: kontrollast
-  deadline_status: kontrollast
-  krav_status: ingen_regel
-  krav_fullstandiga: null
-  anteckning: null
-- id: bengtsfors-bygdepeng
-  namn: Bygdepeng till byalag och samhällsföreningar
-  kategori:
-  - ovrig
-  malgrupp: Byalag och samhällsföreningar som utvecklar bygden
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-15
+    datum: ['04-15']
   krav:
-  - Verksamhetsberättelse och verksamhetsplan krävs
-  - Närvaro vid årlig nätverksträff krävs
-  belopp: "Max 5 000 kronor per organisation och år"
-  belopp_avser: per_forening
-  kommunens_pott: "Totalt 50 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
+  - Sökanden ska vara en ideell pensionärsförening med verksamhet och säte i Bengtsfors kommun
+  - Föreningen ska redovisa antalet matrikelförda medlemmar per den 31 december föregående år, uppdelat på kvinnor och män
+  - Föreningens aktivitetsnivå ska beskrivas och ligger till grund för fördelningen
+  - Samarbete med andra föreningars barn- och ungdomsverksamhet kan ge extra tilldelning och ska beskrivas i ansökan
+  - Ansökan ska innehålla föreningens verksamhetsberättelse, årsmötesprotokoll, balans- och resultatrapport samt revisionsberättelse
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 90 000 kr per år, fördelat efter medlemsantal, aktivitetsnivå och samarbete med barn- och ungdomsverksamhet
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-bygdepeng
+  namn: Bygdepeng till byalag och samhällsföreningar
+  status: aktiv
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Byalag och samhällsföreningar som gör ett betydelsefullt arbete för att utveckla bygden
+  deadlines:
+    typ: fasta
+    datum: ['04-15']
+  krav:
+  - Sökanden ska vara ett byalag eller en samhällsförening som bedriver lokalt utvecklingsarbete
+  - Ansökan ska beskriva utvecklingsarbetet och innehålla verksamhetsberättelse och verksamhetsplan
+  - Samarbete med andra aktörer ska anges och ger fördel vid fördelningen
+  - Byalaget eller samhällsföreningen ska delta i minst en årlig nätverksträff med andra lokala utvecklingsföreningar
+  - Ansökan ska undertecknas av ordförande och kassör och innehålla organisations- och betalningsuppgifter
+  belopp: Högst 5 000 kr per organisation och år
+  belopp_avser: per_forening
+  kommunens_pott: 50 000 kr per år
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-driftsbidrag
+  namn: Driftbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som driver en egen eller långsiktigt hyrd lokal eller anläggning för sin verksamhet
+  deadlines:
+    typ: fasta
+    datum: ['04-15']
+  krav:
+  - Anläggningen eller lokalen ska ligga i Bengtsfors kommun och huvudsakligen användas för barn- och ungdomsverksamhet
+  - Fritidskontoret ska ha godkänt anläggningen för barn- och ungdomsverksamhet
+  - Hyrd eller arrenderad lokal ska omfattas av ett flerårigt avtal
+  - Stödberättigade kostnader är uppvärmning, el, vatten, sotning, snöröjning, renhållning och försäkring; hyresintäkter ska redovisas
+  - Stöd lämnas inte för en lokal som redan subventioneras genom anläggningsbidrag eller samlingslokalsbidrag
+  - Lokalen eller anläggningen ska om möjligt upplåtas till andra föreningar och föregående års kostnader ska bifogas ansökan
+  belopp: Hyrd eller arrenderad lokal kan få högst 5 000 kr per år; övriga klasser prövas efter kostnader, verksamhetens värde och omfattning
+  belopp_avser: per_forening
+  kommunens_pott: 440 000 kr per år
+  sen_ansokan: Ansökan med kostnadsredovisning ska lämnas senast 15 april
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-energieffektiviseringsbidrag
+  namn: Energieffektiviseringsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som äger, driver och sköter en egen anläggning eller lokal
+  deadlines:
+    typ: fasta
+    datum: ['04-15']
+  krav:
+  - Föreningen ska äga, driva och själv sköta den lokal eller anläggning som åtgärden gäller
+  - Åtgärden ska ge energibesparing och/eller minska verksamhetens negativa miljöpåverkan
+  - Ansökan ska innehålla en specificerad kostnadskalkyl och uppgift om sökt belopp
+  - Föreningens årshandlingar ska bifogas eller redan vara inlämnade till kommunen
+  - Åtgärden ska genomföras och kostnadsredovisas inom ett år från utbetalningen
+  - Ordförande och kassör ska underteckna ansökan och intyga redovisningsskyldigheten
+  belopp: Högst 50 procent av den godkända totalkostnaden
+  belopp_avser: per_forening
+  kommunens_pott: 100 000 kr per år
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: bengtsfors-funktionsrattsbidrag
   namn: Bidrag för tillgänglighetsåtgärder
-  kategori:
-  - funktionsratt
-  malgrupp: Föreningar som möjliggör deltagande för personer med funktionsnedsättning
+  status: aktiv
+  kategori: [social, funktionsratt]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som behöver täcka merkostnader för att personer med funktionsnedsättning ska kunna delta
   deadlines:
     typ: lopande
     datum: []
-  krav: []
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 20 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
-  belopp_status: kontrollast
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor
+  - Stödet ska avse en faktisk merkostnad som gör föreningens aktivitet tillgänglig för personer med funktionsnedsättning
+  - Bidrag kan sökas för extra ledare, enklare åtgärder, redskap eller material
+  - Barn- och ungdomsverksamhet prioriteras vid fördelningen
+  - Ansökan ska ange sökt belopp och innehålla föreningens organisationsuppgifter, betalningsuppgifter och årshandlingar
+  belopp: Individuell ersättning för godkända merkostnader; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: 20 000 kr per år
+  sen_ansokan: Ansökan kan lämnas löpande under året
+  kalla_url: *huvud
+  belopp_status: ingen_regel
   deadline_status: kontrollast
-  krav_status: ingen_regel
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
   anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
 - id: bengtsfors-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som investerar i egen lokal eller anläggning
+  status: aktiv
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som förbättrar standarden på en föreningsägd lokal eller anläggning
   deadlines:
     typ: fasta
-    datum:
-    - 04-15
-  krav: []
+    datum: ['04-15']
+  krav:
+  - Investeringen ska avse en föreningsägd lokal eller anläggning
+  - Stöd kan sökas för mindre ny-, om- eller tillbyggnad, inventarier, brandskydd eller reparation av lokalen
+  - Ansökan ska innehålla en specificerad kostnadskalkyl och uppgift om sökt belopp
+  - Föreningens verksamhetsberättelse, årsmötesprotokoll, balans- och resultatrapport samt revisionsberättelse ska bifogas eller redan vara inlämnade
+  - Åtgärden ska genomföras och kostnadsredovisas inom ett år från utbetalningen
+  - Ordförande och kassör ska underteckna ansökan och intyga redovisningsskyldigheten
+  belopp: Stödet prövas individuellt inom den publicerade budgeten; någon generell procentsats eller högsta nivå per förening publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: 150 000 kr per år
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-kulturforeningsbidrag
+  namn: Kulturföreningsbidrag
+  status: aktiv
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd]
+  malgrupp: Föreningar med kultur som huvudinriktning
+  deadlines:
+    typ: fasta
+    datum: ['04-15']
+  krav:
+  - Föreningen ska ha kultur som sin huvudsakliga inriktning
+  - Stödberättigad verksamhet kan avse scenkonst, litteratur, visuell konst, arkitektur, design, konsthantverk, film, media, hemslöjd, arkiv eller museer
+  - Verksamheten ska berika livskvaliteten för människor i olika åldersgrupper i Bengtsfors kommun
+  - Ansökan ska lämnas av behörig företrädare och ange sökt belopp
+  - Föreningens verksamhetsberättelse, årsmötesprotokoll, balans- och resultatrapport samt revisionsberättelse ska bifogas eller redan vara inlämnade
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Totalt 150 000 kronor per år"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/bidrag
+  belopp_avser: ren_pott
+  kommunens_pott: 65 000 kr per år att fördela mellan stödberättigade kulturföreningar
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
-  krav_status: ingen_regel
-  krav_fullstandiga: null
-  anteckning: Bidraget täcker ny-, om- och tillbyggnad, inventarier, brandskydd och reparationer av föreningsägd anläggning
-    eller lokal
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Den aktuella webbsidan och blanketten anger 15 april och ersätter riktlinjens äldre uppgift om löpande ansökan
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-ledarutbildning
+  namn: Ledarutbildningsbidrag
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar som utbildar sina ledare genom riks- eller distriktsorganisation eller en egen kurs
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Deltagaren ska vara medlem och kursen eller utbildningen ska avse föreningsledarskap
+  - Extern utbildning ska anordnas av föreningens riks- eller distriktsorganisation
+  - Ansökan ska ange kurs, kursdatum, antal kursdagar, deltagare samt kurs- och resekostnader
+  - Om föreningen anordnar en egen kurs ska fritidskontoret underrättas i förväg
+  - Föreningens årshandlingar ska bifogas eller redan vara inlämnade och ansökan ska undertecknas av ordförande och kassör
+  belopp: Högst 350 kr per deltagare och kursdag för extern utbildning eller högst 75 procent av kostnaden för en egen kurs
+  belopp_avser: per_forening
+  kommunens_pott: 20 000 kr per år
+  sen_ansokan: Ansökan kan lämnas löpande under året; egen kurs ska anmälas till fritidskontoret i förväg
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: null
+  kraver_registrering: true
+  sate_i_kommunen: true
+- id: bengtsfors-folkhalsomedel
+  namn: Folkhälsomedel
+  status: aktiv
+  kategori: [social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Föreningar och andra organisationer som genomför en hälsofrämjande och förebyggande insats för kommuninvånare
+  deadlines:
+    typ: fasta
+    datum: ['10-31']
+  krav:
+  - Insatsen ska utgå från Bengtsfors kommuns folkhälsostrategi, Agenda 2030 och folkhälsorådets prioriterade område för året
+  - Arbetet ska vara hälsofrämjande och förebyggande och bidra till en mer jämlik hälsa bland kommuninvånarna
+  - Insatsen får gärna genomföras i samverkan med andra lokala aktörer
+  - Stöd lämnas inte för verksamhet, kostnad eller aktivitet som redan omfattas av kommunens ordinarie föreningsbidrag
+  - Ansökan ska beskriva mål, målgrupp, genomförande, kostnader och hur resultatet ska följas upp
+  - Beviljade medel ska redovisas genom kommunens särskilda uppföljningstjänst
+  belopp: Folkhälsorådet beslutar beloppet efter individuell prövning; någon generell nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan för 2026 ska lämnas senast 31 oktober 2026
+  kalla_url: https://www.bengtsfors.se/kommun-och-politik/sa-arbetar-vi-med/folkhalsa/folkhalsomedel
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Stödet ligger utanför den ordinarie föreningsbidragsmenyn men har en aktuell offentlig ansökningssida och e-tjänst
+  kraver_registrering: null
+  sate_i_kommunen: null
+- id: bengtsfors-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa för kommunala lokaler och utrustning
+  status: aktiv
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *allatyper
+  malgrupp: Lokala föreningar som bokar kommunala hallar, salar eller utrustning, med lägst taxa för barn- och ungdomsverksamhet
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningen ska vara registrerad i kommunens bokningssystem och bokningsförfrågan ska normalt lämnas minst tre dagar före hyresdatum
+  - Barn- och ungdomstaxan gäller föreningar inom kommunen som bedriver barn- och ungdomsverksamhet
+  - Bokningen ska avse en kommunal sporthall, bollhall, gymnastiksal, aula, klassrum eller annan publicerad föreningsresurs
+  - Föreningen ansvarar för lokalen, ordningen och eventuell städning enligt bokningsvillkoren
+  - Kommunens utrustning ska återlämnas komplett och i det skick som följer av uthyrningsvillkoren
+  belopp: 'Föreningstaxor per timme: sport- eller bollhall 70 kr för barn- och ungdomsverksamhet och 85 kr för annan lokal förening; gymnastiksal, aula eller klassrum 60 respektive 70 kr. Utrustning per dygn kostar exempelvis 100 kr för ljudanläggning eller stort tält och 50 kr för filmduk eller projektor'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Bokningsförfrågan ska normalt lämnas minst tre dagar före planerat hyresdatum
+  kalla_url: https://www.bengtsfors.se/uppleva-och-gora/foreningar-och-foreningsliv/boka-lokaler-och-idrottshallar
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  senast_verifierad: '2026-08-19'
+  anteckning: Privatpersoner och företag kan hyra till högre taxa; stödposten avser den särskilda lägre taxan för lokala föreningar
+  kraver_registrering: true
+  sate_i_kommunen: true
 forutsattningar:
 - id: bengtsfors-forening-registrering
-  vad: Registrering som förening
-  beskrivning: Föreningen måste vara registrerad och ideell för att kunna söka föreningsbidrag i Bengtsfors kommun.
-  system: null
+  vad: Registrera föreningen och lämna årliga grunduppgifter
+  beskrivning: Föreningen ska årligen lämna aktuella grunduppgifter, adress och kontaktperson till fritidskontorets föreningsregister. Kommunen publicerar ingen gemensam kalenderdag för uppdateringen.
+  system: Interbook Go föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Årlig uppdatering utan publicerad gemensam sista dag
+  giltighet: kalenderår
   ordning: 1
-  kalla_url: https://www.bengtsfors.se/sidor/uppleva-och-gora/foreningar-och-foreningsliv/bidrag.html
-  giltighet_status: okand
+  kalla_url: *allmanna
+  giltighet_status: kontrollast
+- id: bengtsfors-allmanna-villkor
+  vad: Uppfyll kommunens allmänna föreningsvillkor
+  beskrivning: Föreningen ska vara ideell, ha säte och verksamhet i Bengtsfors kommun, godkända stadgar, vald styrelse och revisorer, vara öppen och demokratisk, ha bedrivit verksamhet i minst sex månader och normalt ha minst tio betalande kommunmedlemmar samt organisationsnummer och eget bank-, bankgiro- eller plusgirokonto.
+  system: Bengtsfors kommuns föreningsbidrag
+  ledtid: null
+  ledtid_text: Minst sex månaders verksamhet innan ordinarie föreningsstöd kan beviljas
+  giltighet: kalenderår
+  ordning: 2
+  kalla_url: *allmanna
+  giltighet_status: kontrollast
+- id: bengtsfors-arsmoteshandlingar
+  vad: Lämna fullständiga årsmötes- och ekonomihandlingar
+  beskrivning: Ansökan ska göras av föreningens firmatecknare och innehålla verksamhetsberättelse, årsmötesprotokoll, balans- och resultatrapport samt revisionsberättelse. Kommunen får begära insyn, hålla inne stöd eller återkräva felaktigt beviljade medel och reglerar kommunskuld före utbetalning.
+  system: Interbook Go eller aktuell kommunal blankett
+  ledtid: null
+  ledtid_text: Handlingarna lämnas med ansökan eller registreras för årets bidragsomgång
+  giltighet: kalenderår
+  ordning: 3
+  kalla_url: *allmanna
+  giltighet_status: kontrollast
+kommunsiffra: null
