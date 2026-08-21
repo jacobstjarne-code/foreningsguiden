@@ -14,7 +14,7 @@
 // försöket att pressa in mockens exakta mått i en delad komponent hade
 // gjort BÅDA sämre. Samma tokens (--fg-*), inga nya färger.
 import type { Kommun, Bidrag } from '../lib/kommuner';
-import { formatDate, earliestDeadlineISO, daysUntil, relativFrist, VERKSAMHET_FORENING_LABELS, svenskLista, individuelltBelopp } from '../lib/kommuner';
+import { formatDate, earliestDeadlineISO, daysUntil, relativFrist, VERKSAMHET_FORENING_LABELS, svenskLista, beloppForListrad } from '../lib/kommuner';
 import { VARM_SKARM } from '../lib/content';
 
 export interface Props {
@@ -66,11 +66,17 @@ function radDatumText(bidrag: Bidrag, dateISO: string | null): string {
 // BidragRegisterRad ordagrant (var 'Belopp ej publikt' här, en egen,
 // inkonsekvent fras — fixat till samma vokabulär som resten av sajten).
 const BELOPP_KORT_GRANS = 24; // "3 000 kronor per år" = 19 tecken, ryms
-function beloppText(bidrag: Bidrag): string {
-  return individuelltBelopp(bidrag) ?? 'individuellt belopp inte fastställt';
+// P1.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): 'individuellt belopp inte
+// fastställt' som standardfras läste ut som en beloppsuppgift bland
+// riktiga (siffersatta) belopp i samma kortlista. Tystnad i stället —
+// beloppForListrad() returnerar null om strängen inte bär en siffra,
+// '%' eller 'prisbasbelopp'. Kortet visar då bara datumbadgen.
+function beloppText(bidrag: Bidrag): string | null {
+  return beloppForListrad(bidrag);
 }
 function beloppArKort(bidrag: Bidrag): boolean {
-  return beloppText(bidrag).length <= BELOPP_KORT_GRANS;
+  const text = beloppText(bidrag);
+  return text === null || text.length <= BELOPP_KORT_GRANS;
 }
 
 const forsta = sortedBidrag.slice(0, 2);
@@ -119,7 +125,9 @@ const resten = sortedBidrag.slice(2);
       {forsta.map(({ bidrag, dateISO }) => (
         <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
           <div class="varm-skarm__kort-topp">
-            <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
+            {beloppText(bidrag) && (
+              <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
+            )}
             {dateISO && <span class="varm-skarm__kort-badge">{formatDate(dateISO)} · {daysUntil(dateISO, today)} dgr</span>}
           </div>
           <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
@@ -137,7 +145,9 @@ const resten = sortedBidrag.slice(2);
           {resten.map(({ bidrag, dateISO }) => (
             <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
               <div class="varm-skarm__kort-topp">
-                <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
+                {beloppText(bidrag) && (
+                  <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
+                )}
                 <span class="varm-skarm__kort-badge">{radDatumText(bidrag, dateISO)}</span>
               </div>
               <div class="varm-skarm__kort-namn">{bidrag.namn}</div>

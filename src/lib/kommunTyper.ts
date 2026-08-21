@@ -713,6 +713,27 @@ export function individuelltBelopp(bidrag: Bidrag): string | null {
   return bidrag.belopp;
 }
 
+// P1.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): en listrad ("registret,
+// topplistan, kategorisidor" — BidragRegisterRad.astro, BidragCard.astro,
+// KommunSidaFull.astro:s förhandsvisning) visade tidigare
+// 'individuellt belopp inte fastställt' som en standardfras när
+// bidrag.belopp var null ELLER en prosarad utan siffra ("Beloppet
+// bestäms av behovsprövning") — läst som fem/nio likvärdiga rader,
+// ingen skillnad mellan "vi vet beloppet" och "vi vet inte". Regeln:
+// visa strängen på en LISTRAD bara om den bär en siffra, '%' eller
+// 'prisbasbelopp' — annars tystnad, ingen rad alls. En EGEN funktion,
+// inte en ändring av individuelltBelopp() självt: den funktionen
+// används brett (kommunKlar.ts:s täckningsstatistik, kommun-data.json,
+// utkastGenerator, BidragDjup:s egen nyanserade "anger uttryckligen
+// inget belopp"-text) och ska fortsätta returnera RÅDATAN oförändrad
+// där. Den här funktionen är bara presentationsregeln för en kompakt
+// rad, inget annat.
+const BELOPP_LISTRAD_RE = /\d|%|prisbasbelopp/i;
+export function beloppForListrad(bidrag: Bidrag): string | null {
+  const belopp = individuelltBelopp(bidrag);
+  return belopp && BELOPP_LISTRAD_RE.test(belopp) ? belopp : null;
+}
+
 /**
  * Ett bidrags belopp, om och bara om det är EN sak (bara talet, ev. med
  * "/år"/"per medlem", eller ett explicit uttryckt tak) OCH inte är en

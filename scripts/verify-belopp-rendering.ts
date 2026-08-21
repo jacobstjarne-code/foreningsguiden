@@ -96,7 +96,11 @@ if (tranas.kommunens_pott !== '680 000 kr') fail('Tranås aktivitetsstöd saknar
 const tranasKommunHtml = readFileSync(resolve(dist, 'kommun', 'tranas', 'index.html'), 'utf8');
 const tranasKort = tranasKommunHtml.match(/<li[^>]*data-bidrag-id="tranas-aktivitetsstod"[\s\S]*?<\/li>/)?.[0];
 if (!tranasKort) fail('Tranås aktivitetsstöd saknas på kommunsidan');
-requireText(tranasKort, 'individuellt belopp inte fastställt', 'Tranås-kortet');
+// P1.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): listkortet tystnar nu i
+// stället för att visa fallback-frasen (beloppForListrad() i
+// kommunTyper.ts) — samma nyans finns kvar, oförändrad, på bidragets
+// egen sida (raden 87 ovan). Var requireText före denna ändring.
+forbidText(tranasKort, 'individuellt belopp inte fastställt', 'Tranås-kortet');
 forbidText(tranasKort, '680 000 kr', 'Tranås-kortet');
 const tranasKopytaHtml = readFileSync(resolve(dist, 'kommun', 'tranas', 'utkast', 'tranas-aktivitetsstod', 'index.html'), 'utf8');
 requireText(tranasKopytaHtml, 'Individuellt belopp inte fastställt', 'Tranås köp-/utkastyta');

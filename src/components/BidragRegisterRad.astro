@@ -16,7 +16,7 @@
 // bara öppnar målet OM det är en <details> (annars no-op) — ingen av dem
 // behöver ändras för att fortsätta fungera.
 import type { Bidrag } from '../lib/kommuner';
-import { earliestDeadlineISO, daysUntil, getUrgency, formatDate, relativFrist, todayISO, individuelltBelopp } from '../lib/kommuner';
+import { earliestDeadlineISO, daysUntil, getUrgency, formatDate, relativFrist, todayISO, beloppForListrad } from '../lib/kommuner';
 import UrgencyChip from './UrgencyChip.astro';
 
 export interface Props {
@@ -35,7 +35,9 @@ const radDatumText = dateISO
 // TILLSTANDET_OLAST.md (runda 4): samma EN-reservation-per-kort-markör
 // som BidragCard/BidragDjup redan visar, bara här på radnivå.
 const harOlastFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status].includes('olast');
-const beloppPerForening = individuelltBelopp(bidrag);
+// P1.2: tystnad i stället för en standardfras när beloppet inte bär en
+// siffra/%/prisbasbelopp — se beloppForListrad()-kommentaren.
+const beloppPerForening = beloppForListrad(bidrag);
 ---
 <li data-bidrag-id={bidrag.id} id={`bidrag-${bidrag.id}`}>
   <a href={`/kommun/${kommunSlug}/bidrag/${bidrag.id}/`} class="progression__list-row">
@@ -50,7 +52,7 @@ const beloppPerForening = individuelltBelopp(bidrag);
     </div>
     <div class="progression__list-row__tal">
       {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
-      <span class="progression__list-row__belopp">{beloppPerForening ?? 'individuellt belopp inte fastställt'}</span>
+      {beloppPerForening && <span class="progression__list-row__belopp">{beloppPerForening}</span>}
       <span class="progression__list-row__datum">{radDatumText}</span>
     </div>
     <svg class="bidrag-card__rad-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
