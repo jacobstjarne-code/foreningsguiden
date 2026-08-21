@@ -426,13 +426,37 @@ const webPageJsonLd = {
   // E1 (ARBETSORDER 2026-08-11): VarmSkarm ersätter ekern när Foreningsprofil.
   // foreningsnamn är känt — annars gäller B (ekern) helt oförändrat, båda
   // SSR-renderade, bara synligheten byts här. Namnet fylls i samma steg.
+  //
+  // P1.1 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md, "E1-gaten läcker"): villkoret
+  // var en bar truthy-check på foreningsnamn. Typens EGET kontrakt
+  // (foreningsprofil.ts) garanterar att fältet aldrig är en tom sträng vid
+  // en normal skrivning — null eller ett riktigt namn, aldrig ''. Verifierat
+  // 2026-08-21 mot en fräsch anonym context (tom localStorage) och mot
+  // Jacobs exakta rapporterade objekt ({kommunSlug:null,verksamhet:[]}):
+  // båda visade EKERN korrekt i den HÄR koden, så det exakta felet gick
+  // inte att återskapa mot main som den ser ut nu (produktion kan ha
+  // legat efter main när felet observerades, samma mönster som tidigare
+  // Vercel-dygnstaks-läget). Ändrar ändå till en strikt icke-tom-sträng-
+  // kontroll i stället för bar truthy — den gamla kontrollen accepterar
+  // t.ex. en whitespace-only sträng, som typens kommentar uttryckligen
+  // säger aldrig ska sparas men som ett handredigerat eller framtida
+  // avvikande localStorage-objekt ändå kan innehålla. Lagt till spec:ens
+  // egen reservregel för ett objekt som helt saknar fältet.
   {
     const varmSkarm = document.querySelector<HTMLElement>('[data-varm-skarm]');
     const ekernKall = document.querySelector<HTMLElement>('[data-ekern-kall]');
-    const foreningsnamn = getForeningsprofil()?.foreningsnamn;
-    if (varmSkarm && foreningsnamn) {
-      const namnEl = varmSkarm.querySelector<HTMLElement>('[data-varm-namn]');
-      if (namnEl) namnEl.textContent = foreningsnamn;
+    const profil = getForeningsprofil();
+    const foreningsnamn = typeof profil?.foreningsnamn === 'string' && profil.foreningsnamn.trim() !== ''
+      ? profil.foreningsnamn.trim()
+      : null;
+    const nagotKant = foreningsnamn !== null || (
+      (profil?.verksamhet?.length ?? 0) > 0 && profil?.kommunSlug === varmSkarm?.dataset.kommunSlug
+    );
+    if (varmSkarm && nagotKant) {
+      if (foreningsnamn !== null) {
+        const namnEl = varmSkarm.querySelector<HTMLElement>('[data-varm-namn]');
+        if (namnEl) namnEl.textContent = foreningsnamn;
+      }
       varmSkarm.removeAttribute('hidden');
       ekernKall?.setAttribute('hidden', '');
     }
