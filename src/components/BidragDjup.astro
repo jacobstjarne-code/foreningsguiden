@@ -258,6 +258,14 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
   )}
 </dl>
 
+{/* P2.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): namngiven slot för
+   köprutan (flyttad hit från kommunsidans station 5) — bara den nya
+   S2-sidan fyller den (visaKopruta-liknande beslut tas av ANROPAREN,
+   inte här). Tom by default: BidragCard.astro:s kollapsade kommun-
+   sida-rad fyller aldrig detta, samma <BidragDjup>-anrop, oförändrat
+   beteende där. */}
+<slot name="efter-krav" />
+
 <div class="bidrag-card__divider"></div>
 
 <div class="bidrag-card__footer">

@@ -17,10 +17,15 @@ import UrgencyChip from '../../../../../components/UrgencyChip.astro';
 import {
   loadKommuner, bidragAnsokningsUrl, hittaGiltighetsstatus,
   earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
-  individuelltBelopp,
+  individuelltBelopp, harEtjanstsystem, possessiv, beloppArEttEnkeltTal, beraknaArbetsbevis,
 } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
-import { KOMMUN } from '../../../../../lib/content';
+import { KOMMUN, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
+import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
+import { genereraUtkast } from '../../../../../lib/utkastGenerator';
+import { harvestBilagorFranKrav } from '../../../../../lib/kopDokument';
+import { arBidragSaljbart } from '../../../../../lib/kommunKlar';
+import { konservativProfil } from '../../../../../lib/foreningsprofil';
 
 export function getStaticPaths() {
   const paths: { params: { slug: string; bidragId: string }; props: { kommun: Kommun; bidrag: Bidrag } }[] = [];
@@ -57,6 +62,38 @@ const ansokningstext = KOMMUN.ansokningssystemTemplate
   .replace(/{kommun}/g, kommun.kommun)
   .replace(/{system}/g, kommun.ansokningssystem.namn);
 
+// P2.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): köprutan flyttad hit från
+// kommunsidans station 5 (KommunProgression.astro) — samma beräkningar,
+// nu scopade till DETTA enda bidrag i stället för "första säljbara
+// kandidaten i kommunen" (ingen .find() behövs, bidraget är redan valt).
+// Ordalydelsen (KOPRUTA-texterna) OFÖRÄNDRAD, Jacobs dom (§5 i ordern).
+const visaKopruta = arBidragSaljbart(bidrag);
+const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
+const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
+const fyllKopruta = (text: string) =>
+  text.replace('{kommun}', kommun.kommun).replace('{kommunPossessiv}', possessiv(kommun.kommun)).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr)).replace('{system}', kommun.ansokningssystem.namn);
+const kopRutaBeskrivning = visaKopruta
+  ? fyllKopruta(harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning)
+  : '';
+const kopRutaInnehallsrad = (() => {
+  if (!visaKopruta) return '';
+  const resultat = genereraUtkast(konservativProfil(kommun.kommun_slug), bidrag, kommun);
+  const antalBilagor = resultat.typ === 'bidragsutkast' ? harvestBilagorFranKrav(resultat.kravRader).length : 0;
+  const bilagorText = antalBilagor === 1 ? '1 bilaga' : `${antalBilagor} bilagor`;
+  return KOPRUTA.innehallsrad.replace('{antalKrav}', String(bidrag.krav.length)).replace('{bilagorText}', bilagorText);
+})();
+const kopRutaVardeankring = visaKopruta && bidrag.belopp_status === 'kontrollast' && beloppArEttEnkeltTal(bidrag) !== null
+  ? fyllKopruta(KONVERTERINGSSTAPEL.vardeankring).replace('{belopp}', individuelltBelopp(bidrag) ?? '')
+  : null;
+const kopRutaHref = `/kommun/${kommun.kommun_slug}/utkast/${bidrag.id}/`;
+// F8: F①:s fallback — samma sajtsomfattande arbetsbevis-tal som
+// utkastvyn/förstasidan (EN räkning), inte bidrags- eller kommunspecifikt.
+const socialtBevisFallback = visaKopruta
+  ? FORSTASIDAN_SVARAR.bevisMall
+      .replace('{bidrag}', beraknaArbetsbevis(loadKommuner()).totalBidrag.toLocaleString('sv-SE'))
+      .replace('{kontrollasta}', beraknaArbetsbevis(loadKommuner()).kontrollastAntal.toLocaleString('sv-SE'))
+  : '';
+
 const webPageJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -89,7 +126,27 @@ const webPageJsonLd = {
         kommunSlug={kommun.kommun_slug}
         kommunNamn={kommun.kommun}
         giltighetStatus={giltighetStatus}
-      />
+      >
+        {visaKopruta && (
+          <Fragment slot="efter-krav">
+            <div class="progression__kopruta" data-progression-kopruta data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun}>
+              <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
+              <p>{kopRutaBeskrivning}</p>
+              <p>{kopRutaInnehallsrad}</p>
+              <p>{KOPRUTA.leverans}</p>
+              <p>{kopRutaPrisOchKvitto}</p>
+              {kopRutaVardeankring && (
+                <p class="progression__kopruta-vardeankring">{kopRutaVardeankring}</p>
+              )}
+              <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
+              <p class="progression__kopruta-socialt-bevis" data-progression-kopruta-socialt-bevis>{socialtBevisFallback}</p>
+              <a href={kopRutaHref} class="fg-btn--ghost progression__goal-cta" data-progression-kopruta-cta>
+                Lås upp hela checklistan — {prisKr} kr
+              </a>
+            </div>
+          </Fragment>
+        )}
+      </BidragDjup>
     </div>
   </div>
 
@@ -108,6 +165,23 @@ const webPageJsonLd = {
   // "Det här stämmer inte"-knappen här bara död markup utan klickhandler.
   import { initFelrapportWidgets } from '../../../../../lib/felrapportKlient';
   initFelrapportWidgets();
+
+  // P2.2: samma progressiva uppgradering av det sociala beviset som
+  // köprutan hade på kommunsidan (KommunProgression.astro) — server-
+  // sann fallback (F①, sajtsomfattande arbetsbevis-tal) genast,
+  // uppgraderad till KOMMUNENS eget köpantal om det når golvet.
+  import { hamtaKopantal, arOverSocialtBevisGolv } from '../../../../../lib/kopKlient';
+  import { KONVERTERINGSSTAPEL } from '../../../../../lib/content';
+  const kopruta = document.querySelector<HTMLElement>('[data-progression-kopruta]');
+  const socialtBevisEl = kopruta?.querySelector<HTMLElement>('[data-progression-kopruta-socialt-bevis]');
+  if (kopruta && socialtBevisEl) {
+    const kommunSlug = kopruta.dataset.kommunSlug ?? '';
+    const kommunNamn = kopruta.dataset.kommunNamn ?? kommunSlug;
+    hamtaKopantal(kommunSlug).then((antal) => {
+      if (antal === null || !arOverSocialtBevisGolv(antal)) return;
+      socialtBevisEl.textContent = KONVERTERINGSSTAPEL.socialtBevis.replace('{antal}', String(antal)).replace('{kommun}', kommunNamn);
+    });
+  }
 </script>
 
 <style>

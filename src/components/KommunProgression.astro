@@ -393,31 +393,22 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
          som en tyst rad längst ner, nu stationens ledande besked i
          stället för intro-frågan. */}
       <p class="progression__lede" style="color: rgba(255,255,255,.92);">{VAGLEDNING.station5.ansvar}</p>
-      {/* R5.3: station 3 äger sidans enda färgade drag — kopruta-knappen
-         och VantelistaFlodes knapp är därför tysta (fg-btn--ghost), inte
-         btn-primary. */}
-      <div class="progression__kopruta" data-progression-kopruta hidden={!station5Alla}>
-        <h4 class="progression__kopruta-rubrik">{KOPRUTA.rubrik}</h4>
-        <p data-progression-kopruta-beskrivning>{station5Alla?.beskrivning}</p>
-        {/* S3.3 — antal krav, antal bilagor, källhänvisning, raderna
-           hennes att fylla i. Samma tal som /utkast/-sidan visar. */}
-        <p data-progression-kopruta-innehallsrad>{station5Alla?.innehallsrad}</p>
-        <p>{KOPRUTA.leverans}</p>
-        <p>{kopRutaPrisOchKvitto}</p>
-        {/* F② (F8) — bara när D1-kandidaten har ett kontrollast belopp. */}
-        <p class="progression__kopruta-vardeankring" data-progression-kopruta-vardeankring hidden={!station5Alla?.vardeankring}>{station5Alla?.vardeankring}</p>
-        <p class="progression__kopruta-aterbetalning">{KOPRUTA.aterbetalning}</p>
-        {/* M3 (Jacob 2026-08-17): F① flyttad hit, intill köpet — låg
-           tidigare mellan rubriken och leveransbeskrivningen och lästes
-           som en punkt i "vad ni får" i stället för socialt bevis för
-           själva köpet. F① (F8, 2026-08-12) — server-sant genast,
-           klientskriptet uppgraderar till kommunens köpantal om det når
-           SOCIALT_BEVIS_GOLV. */}
-        <p class="progression__kopruta-socialt-bevis" data-progression-kopruta-socialt-bevis>{socialtBevisFallback}</p>
-        <a href={station5Alla?.href ?? '#'} class="fg-btn--ghost progression__goal-cta" data-progression-kopruta-cta>
-          Lås upp hela checklistan — {prisKr} kr
-        </a>
-      </div>
+      {/* P2.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): köprutan (belopp,
+         leverans, socialt bevis, "Lås upp hela checklistan"-knappen)
+         flyttad härifrån till bidragssidan (BidragDjup.astro, under
+         kravlistan) — hon väljer bidrag FÖRST, ser sedan köpet i
+         SAMMA kontext som kraven det gäller, i stället för ett
+         generiskt köp på kommunnivå innan hon valt något. Ordalydelsen
+         oförändrad (Jacobs dom), bara flyttad. Stationen behåller
+         bara rubrik + ansvar-raden ovan.
+         station5PerFilter/station5Alla (frontmatter) beräknas
+         fortfarande OFÖRÄNDRAT — station5BevakaPerFilter nedan läser
+         station5PerFilter[filter] som en ren existens-check (rad 194)
+         för att inte visa en bevaka-ruta för ett filter som redan har
+         en säljbar kandidat. Fälten på Station5Entry (beskrivning/
+         innehallsrad/vardeankring/href) är därmed oanvända sedan
+         köprutan flyttade, men datorna som beräknar dem rörs INTE i
+         den här ändringen — större omfattning än vad denna punkt bad om. */}
       {filterValues.map((filter) => {
         const kandidat = station5BevakaPerFilter[filter];
         if (!kandidat) return null;
@@ -481,26 +472,14 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
     if (urgentLank) urgentLank.href = entry.href;
   }
 
-  const kopruta = document.querySelector<HTMLElement>('[data-progression-kopruta]');
-  const kopRutaBeskrivning = document.querySelector<HTMLElement>('[data-progression-kopruta-beskrivning]');
-  const kopRutaInnehallsrad = document.querySelector<HTMLElement>('[data-progression-kopruta-innehallsrad]');
-  const kopRutaCta = document.querySelector<HTMLAnchorElement>('[data-progression-kopruta-cta]');
-  const kopRutaVardeankring = document.querySelector<HTMLElement>('[data-progression-kopruta-vardeankring]');
   // ÅTGÄRDSSPEC punkt 1: bevakningsrutorna är statiskt SSR-renderade, en
   // per filter som saknar D1-kandidat (se station5BevakaPerFilter) —
   // ingen text att uppdatera via JS, bara vilken som visas.
+  // P2.2: köprutans egna element (data-progression-kopruta*) borttagna
+  // härifrån tillsammans med JSX:en, se kommentaren vid station 5 ovan.
   const bevakaRutor = document.querySelectorAll<HTMLElement>('[data-progression-bevaka-filter]');
 
   function updateStation5(value: string) {
-    const entry = perFilterData.station5?.[value];
-    if (kopruta) kopruta.hidden = !entry;
-    if (kopRutaBeskrivning && entry) kopRutaBeskrivning.textContent = entry.beskrivning;
-    if (kopRutaInnehallsrad && entry) kopRutaInnehallsrad.textContent = entry.innehallsrad;
-    if (kopRutaCta && entry) kopRutaCta.href = entry.href;
-    if (kopRutaVardeankring) {
-      kopRutaVardeankring.hidden = !entry?.vardeankring;
-      if (entry?.vardeankring) kopRutaVardeankring.textContent = entry.vardeankring;
-    }
     bevakaRutor.forEach((el) => {
       el.hidden = el.dataset.progressionBevakaFilter !== value;
     });
