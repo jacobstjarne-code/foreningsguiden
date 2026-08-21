@@ -35,10 +35,26 @@ const introText = VARM_SKARM.intro
   .replace('{antal}', String(kommun.bidrag.length));
 const signaturText = VARM_SKARM.signaturRad.replace('{datum}', formatDate(kommun.verifierad));
 
+// P1.4 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): mängden av alla
+// foreningstyp-värden som förekommer NÅGONSTANS i kommunens eget
+// register. Ett bidrag vars egen foreningstyp-mängd täcker/överstiger
+// den mängden riktar sig facto till alla — raden är då ingen
+// urskiljning, bara brus. Mängdjämförelse, inte ett antalströskel
+// (ett bidrag med bara två typer i en kommun som bara HAR två typer
+// ska också tystna).
+const allaForeningstyperIKommunen = new Set(
+  kommun.bidrag.flatMap((b) => b.foreningstyp ?? [])
+);
+
 // E3 — "riktar sig till {malgrupp}", ingen rad om foreningstyp saknas
 // eller ingen av värdena har en label (gissar aldrig fram en målgrupp).
 function riktarSigTillText(bidrag: Bidrag): string | null {
   if (!bidrag.foreningstyp || bidrag.foreningstyp.length === 0) return null;
+  // P1.4: täcker bidraget alla typer som förekommer i kommunen, är
+  // raden inte en avgränsning — tyst.
+  const bidragetsTyper = new Set(bidrag.foreningstyp);
+  const omfattarAlla = [...allaForeningstyperIKommunen].every((v) => bidragetsTyper.has(v));
+  if (omfattarAlla) return null;
   const etiketter = bidrag.foreningstyp
     .map((v) => VERKSAMHET_FORENING_LABELS[v])
     .filter((label): label is string => Boolean(label))
