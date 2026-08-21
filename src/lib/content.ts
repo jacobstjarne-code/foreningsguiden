@@ -1156,7 +1156,10 @@ export const IGENKANNING = {
   matchVisaAllaAnda: 'Visa allt ändå',
 
   ingenProfilText: 'Säg vad ni är för förening, så ordnar vi sidan efter er.',
-  ingenProfilKnapp: 'Tre frågor',
+  // P1.5 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): 'Tre frågor' → samma
+  // formulering som EKERN.band2Cta — två olika CTA-lydelser för samma
+  // tratt lästes som två olika funktioner.
+  ingenProfilKnapp: 'Se vad ni kan söka',
 
   felKommunMallTyp: 'Ni är en {typ} — det tar vi med. Men er profil gäller {profilKommun}, och det här är {dennaKommun}.',
   felKommunMallGenerisk: 'Er verksamhet tar vi med. Men er profil gäller {profilKommun}, och det här är {dennaKommun}.',
