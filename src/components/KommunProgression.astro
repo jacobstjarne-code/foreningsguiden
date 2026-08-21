@@ -239,27 +239,13 @@ const station5BevakaPerFilter: Record<string, ReturnType<typeof bidragForFilter>
       <a href={station2Alla?.href ?? '#'} data-progression-urgent-lank>Öppna →</a>
     </div>
     <p class="progression__lede" data-progression-urgent-empty hidden={!!station2Alla}>{VAGLEDNING.station2.introUtanDeadline}</p>
-    {/* R5.1 (OMFORDELA_TEXTMASSAN.md runda 5): "hela listan" fällbar —
-       samma underlag som station 4 (sortedBidrag), bara datumsatta
-       bidrag, ett kompakt namn+datum per rad. Icke filterreaktiv med
-       avsikt (station 4 äger det filtrerade, kanoniska läget) — det här
-       är en snabb överblick utan att lämna station 2. */}
-    {sortedBidrag.filter((e) => e.dateISO).length > 1 && (
-      <details class="progression__disclosure">
-        <summary class="progression__slutsats">
-          <span class="progression__slutsats-text">Visa alla datumsatta bidrag</span>
-          <svg class="progression__slutsats-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-        </summary>
-        <ul class="progression__fallbart progression__bradska-lista">
-          {sortedBidrag.filter((e) => e.dateISO).map(({ bidrag, dateISO }) => (
-            <li>
-              <a href={`#bidrag-${bidrag.id}`}>{bidrag.namn}</a>
-              <span class="progression__bradska-lista__datum">{formatDate(dateISO!)}</span>
-            </li>
-          ))}
-        </ul>
-      </details>
-    )}
+    {/* P2.1b (KOMMUNSIDAN_EN_LASARE_2026-08-21.md, "en lista per sida"):
+       den fällbara "Visa alla datumsatta bidrag"-listan borttagen —
+       samma bidragsnamn+datum som redan står i registret (#alla-bidrag)
+       och tidigare i förhandsvisningen (P2.1a, nu också borttagen).
+       Deadlinekalendern (/deadlines/) täcker "alla datumsatta bidrag
+       över hela sajten"-behovet; station 2 behåller bara närmast-
+       raden ovan. */}
   </div>
 
   <!-- STATION 3 — attention-ton: förutsättningar -->
