@@ -121,16 +121,21 @@ const resten = sortedBidrag.slice(2);
 
   <div class="varm-skarm__register">
     <p class="varm-skarm__register-label">{VARM_SKARM.registerLabel}</p>
+    {/* P1.3 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): kortets belopprad
+       (.varm-skarm__kort-topp) låg FÖRE namnet i DOM-ordningen — beloppet
+       läste ut som rubrik, namnet som fotnot. Namnet nu först. Visuell
+       hierarki (storlek/vikt) är Designs P3, oförändrad här — bara
+       källordningen. */}
     <div class="varm-skarm__kort-lista">
       {forsta.map(({ bidrag, dateISO }) => (
         <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
+          <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
           <div class="varm-skarm__kort-topp">
             {beloppText(bidrag) && (
               <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
             )}
             {dateISO && <span class="varm-skarm__kort-badge">{formatDate(dateISO)} · {daysUntil(dateISO, today)} dgr</span>}
           </div>
-          <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
           <div class="varm-skarm__kort-beskrivning" data-varm-kort-beskrivning>{riktarSigTillText(bidrag)}</div>
         </div>
       ))}
@@ -144,13 +149,13 @@ const resten = sortedBidrag.slice(2);
         <div class="varm-skarm__kort-lista varm-skarm__kort-lista--resten">
           {resten.map(({ bidrag, dateISO }) => (
             <div class="varm-skarm__kort" data-varm-kort data-bidrag-id={bidrag.id}>
+              <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
               <div class="varm-skarm__kort-topp">
                 {beloppText(bidrag) && (
                   <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
                 )}
                 <span class="varm-skarm__kort-badge">{radDatumText(bidrag, dateISO)}</span>
               </div>
-              <div class="varm-skarm__kort-namn">{bidrag.namn}</div>
               <div class="varm-skarm__kort-beskrivning" data-varm-kort-beskrivning>{riktarSigTillText(bidrag)}</div>
             </div>
           ))}
