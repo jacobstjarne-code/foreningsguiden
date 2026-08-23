@@ -2,12 +2,18 @@ kommun: Storuman
 kommun_slug: storuman
 lan: Västerbottens län
 befolkning: 5551
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid samt kommunstyrelsen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/
+  namn: Storumans kommuns e-tjänster
+  url: https://sjalvservice.storuman.se/oversikt/overview/250
 kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/
-verifierad: '2026-08-01'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/
+giltighet_regel_status: kontrollast
 bidrag:
 - id: storuman-skotsel-anlaggning
   namn: Skötsel- och anläggningsbidrag
@@ -16,8 +22,8 @@ bidrag:
   - ovrig
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [04-25, 09-25]
   krav:
   - Föreningen ska sedan tidigare ha avtal med kommunen om att sköta, underhålla och utöva tillsyn av anläggningen (t.ex.
     skidspår, idrottsplats, slalombacke eller isbana), eller ansöka om att teckna sådant avtal
@@ -26,30 +32,32 @@ bidrag:
   - Anläggningen ska vara tillgänglig för allmänheten och kunna nyttjas under hela innevarande säsong samt årligen besiktigas
   belopp: 'Dagskidspår utan ersättningsavtal: 1 000 kronor. Övriga belopp fastställs individuellt enligt kommunens avtal med
     respektive förening.'
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  sen_ansokan: Vinteranläggningar söks senast 25 april och sommaranläggningar senast 25 september, efter avslutad säsong
   kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/skotselbidrag/
   belopp_status: kontrollast
-  deadline_status: okand
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Ersättningen följer kommunens avtal och anläggningen besiktigas årligen.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: storuman-aktivitetsstod
   namn: Lokalt aktivitetsstöd
   kategori:
   - idrott
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [02-25, 08-25]
   krav:
   - Minst tre deltagare i åldern 7–25 år ska delta i sammankomsten
   - Sammankomsten ska pågå minst en timme
@@ -57,23 +65,26 @@ bidrag:
   - Aktiviteten ska vara kostnadsfri för deltagarna och genomföras lokalt
   - En aktivitet får inte delas upp i flera mindre grupper för att öka bidraget
   - Närvarokort ska föras vid varje sammankomst och sparas av föreningen i minst 4 år
+  - Protokoll från senaste årsmötet och föreningens alkohol- och drogpolicy ska bifogas
   belopp: 50 kronor per sammankomst/tillfälle (minst en timme, minst tre deltagare i åldern 7–25 år)
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  sen_ansokan: Höstens aktiviteter söks senast 25 februari och vårens aktiviteter senast 25 augusti
   kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/Lokalt-aktivitetsstod/
   belopp_status: kontrollast
-  deadline_status: okand
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Ansökan görs i efterhand för respektive redovisningsperiod.
   min_medlemmar: null
   alder_min: 7
   alder_max: 25
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: storuman-studieforbund
   namn: Bidrag till studieförbund
   kategori:
@@ -81,30 +92,32 @@ bidrag:
   - ovrig
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum: [06-15]
   krav:
   - Studieförbundet ska vara godkänt av Folkbildningsrådet
   - Studieförbundet ska ha kontor etablerat inom Storumans kommun
   - Föreningen ska kontrollera och uppdatera sina uppgifter i kommunens föreningsregister
   - Protokoll från senaste årsmötet ska bifogas ansökan
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Kommunen publicerar ingen generell beloppsnivå eller fördelningsformel
+  sen_ansokan: Ansökan öppnar i mars och ska lämnas senast 15 juni
   kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/kommunalt-bidrag-till-studieforbund/
-  belopp_status: okand
-  deadline_status: okand
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Stödet avser studieförbundets folkbildnings- och kulturverksamhet i kommunen.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [kultur, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: storuman-ovrigt
   namn: Övrigt bidrag
   kategori:
@@ -121,6 +134,8 @@ bidrag:
   sen_ansokan: Ansökan kan göras löpande under året
   kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/ovrigt-bidrag/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -129,20 +144,113 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
+- id: storuman-attraktivitetshojande-insatser-2026
+  namn: Attraktivitetshöjande utvecklingsinsatser 2026
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och andra organisationer som genomför allmännyttiga utvecklingsinsatser i Storumans kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Insatsen ska stärka attraktivitet, livsmiljö eller utveckling i Storumans kommun och komma fler än en enskild till nytta
+  - Stödet kan avse aktiviteter och evenemang, mindre investeringar eller medfinansiering av större utvecklingsprojekt
+  - Insatsen får inte konkurrera med näringsverksamhet, ersätta kommunens eller statens ordinarie ansvar eller skapa nya löpande kommunala kostnader
+  - Ansökan ska beskriva insatsen, nyttan, genomförandet samt kostnads- och finansieringsbudget
+  - Beviljade medel ska användas och redovisas inom ett år; outnyttjade medel ska återbetalas
+  belopp: Högst 100 procent av godkända kostnader efter individuell prövning
+  sen_ansokan: Ansökan för 2026 skulle lämnas senast 30 april
+  kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/attraktivitetshojande-utvecklingsinsatser/
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: 500 000 kronor för 2026
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Även andra organisationsformer kan söka om stödet inte innebär gynnande av enskild.
+  min_medlemmar: null
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: storuman-anlaggningsbidrag-med-avtal
+  namn: Anläggningsbidrag med avtal
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar med avtal om skötsel av skoterleder, rastplatser eller vissa lokaler
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Föreningen ska sedan tidigare ha ett kommunalt avtal som ger rätt till ersättning för den aktuella anläggningen eller verksamheten
+  - Avtalet ska avse skötsel eller underhåll av exempelvis skoterled, rastplats eller lokal
+  - Föreningen ska ha fullgjort uppdraget och lämna årlig begäran om utbetalning via kommunens e-tjänst
+  belopp: Ersättning enligt det individuella avtalet med kommunen
+  sen_ansokan: Årlig begäran om utbetalning lämnas mellan 1 januari och 31 mars
+  kalla_url: https://storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/anlaggningsbidrag-med-avtal/
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Stödet är begränsat till föreningar som redan har ersättningsavtal med kommunen.
+  min_medlemmar: null
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: null
+  foreningstyp: [idrott, hembygd, friluft, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: storuman-bygdemedel
+  namn: Bygdemedel för utvecklingsinsatser
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar och organisationer som gör allmännyttiga investeringar eller utvecklingsinsatser i kommunen
+  deadlines:
+    typ: fasta
+    datum: [01-31]
+  krav:
+  - Sökanden ska vara en organisation med organisationsnummer och vara registrerad i Storumans kommuns föreningsregister
+  - Projektet ska vara en allmännyttig investering eller utvecklingsinsats i en bygd som påverkats av vattenkraftsutbyggnaden
+  - Ansökan ska innehålla syfte, kostnads- och finansieringsbudget, stadgar, firmateckningsprotokoll samt senaste verksamhets-, ekonomi- och revisionshandlingar
+  - Projektet får inte avse affärsverksamhet och föreningen ska bidra med egen eller annan finansiering
+  belopp: Normalt högst 90 procent av faktiska, godkända och styrkta projektkostnader
+  sen_ansokan: För Storuman är ansökningsperioden 1 december–31 januari
+  kalla_url: https://www.storuman.se/bygdemedel
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Kommunen prioriterar ansökningarna och Länsstyrelsen Västerbotten fattar beslut.
+  min_medlemmar: null
+  alder_min: null
+  alder_max: null
+  min_verksamhetstid_manader: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: storuman-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  beskrivning: Föreningen ska ha vald styrelse och stadgar, vara verksam i kommunen och öppen för alla, normalt ha minst tio medlemmar i kommunen samt vara registrerad i föreningsregistret.
+  system: Storumans kommuns e-tjänster
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Föreningens uppgifter i kommunens föreningsregister ska uppdateras varje år.
   ordning: 1
   kalla_url: https://www.storuman.se/kommun/kultur-fritid/Foreningar/stod-bidrag-och-stipendier/
-  giltighet_status: okand
+  giltighet_status: kontrollast
 kommunsiffra: null
