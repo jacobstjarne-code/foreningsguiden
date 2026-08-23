@@ -7,12 +7,19 @@ ansokningssystem:
   namn: Kommunens e-tjänst eller blankett
   url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
 kalla_url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &huvud https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: vansbro-aktivitetsbidrag-fysisk-aktivitet
   namn: Aktivitetsbidrag fysisk aktivitet
   kategori:
   - idrott
+  foreningstyp: [idrott, friluft, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -27,19 +34,23 @@ bidrag:
     enligt tillämpliga delar av bestämmelserna för statens LOK-stöd
   - Utbetalning sker efter Riksidrottsförbundets granskning av sökande föreningar
   belopp: 12 kronor per sammankomst med deltagare i åldern 3–20 år, i övrigt enligt bestämmelserna för statligt LOK-stöd
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: vansbro-driftsbidrag
   namn: Driftsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -59,19 +70,23 @@ bidrag:
   belopp: Beloppet varierar efter lokal-/anläggningstyp, t.ex. klubblokal/bystuga/ordenshus 2 200 kr/år, hembygdsgård 6 000
     kr/år, fotbollsplan högst 20 000 kr/år, omklädningsbyggnad 3 500–7 500 kr/år. Förhyrda lokaler ersätts med 90 % av hyreskostnaden,
     högst 7 000 kr/år. Fullständig lista över samtliga anläggningstyper finns i kommunens regeldokument.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Söks året före bidragsåret.
+  senast_verifierad: '2026-08-23'
 - id: vansbro-administrationsbidrag
   namn: Administrationsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -87,17 +102,21 @@ bidrag:
   - Föreningens medlemsavgift ska vara minst 20 kronor per medlem för att bidrag ska betalas ut
   belopp: 15 kronor per medlem i åldern 3–20 år, högst 6 400 kronor per förening och år. Ingen utbetalning om medlemsavgiften
     understiger 20 kronor per medlem eller om bidraget understiger 100 kronor
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Söks året före bidragsåret.
+  senast_verifierad: '2026-08-23'
 - id: vansbro-kulturarrangemangsbidrag
   namn: Kulturarrangemangsbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -113,23 +132,83 @@ bidrag:
   - Kostnadskalkyl ska alltid bifogas ansökan
   - Bidrag kan ges till offentlig programverksamhet, utgivning av skrifter, dokumentation eller inventering/föremålsvård med
     lokal kulturanknytning
-  belopp: null
+  belopp: Individuellt prövat kulturarrangemangsbidrag; kommunen publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
-  belopp_status: okand
+  kalla_url: *huvud
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Söks året före bidragsåret.
+  senast_verifierad: '2026-08-23'
+- id: vansbro-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori:
+  - kultur
+  - ovrig
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund som bedriver verksamhet i Vansbro kommun och vars centrala organisation får statsbidrag från Folkbildningsrådet
+  deadlines:
+    typ: fasta
+    datum:
+    - 12-31
+  krav:
+  - Studieförbundet ska bedriva verksamhet i Vansbro kommun och dess centrala organisation ska få statsbidrag från Folkbildningsrådet
+  - Studieförbundet ska ha en ansvarig styrelse och ekonomisk redovisning enligt bokföringslagen
+  - Ansökan ska lämnas som verksamhetsplan senast den 31 december året före bidragsåret
+  - Kommunintyg, verksamhetsberättelse och revisionsberättelse ska lämnas senast den 30 april bidragsåret
+  - Redovisningen ska styrka kommunfördelningen och ange deltagartimmar för studiecirklar, kulturprogram och övrig folkbildning i Vansbro
+  - Kulturprogram som räknas in ska vara öppna för alla och annonseras i förväg
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas med 75 procent som grundbidrag efter respektive studieförbunds andel av de två föregående årens bidrag och 25 procent som volymbidrag efter senast redovisade deltagartimmar; anslagets totalsumma publiceras inte
+  sen_ansokan: Verksamhetsplanen ska lämnas senast den 31 december året före bidragsåret.
+  kalla_url: &studieforbund https://vansbro-sok.ciceron.cloud/download/document?filename=UkVHTEVNRU5URSBG1lIgS09NTVVOQUxBIEJJRFJBRyBUSUxMIFNUVURJRUbWUkJVTkQgSSBWQU5TQlJPIEtPTU1VTiAyMDEyLnB1Yi5wZGY%3D&id=6404
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vansbro-driftbidrag-utvecklingsgrupper
+  namn: Driftbidrag till lokala utvecklingsgrupper
+  kategori:
+  - social
+  - ovrig
+  foreningstyp: [hembygd, social, annat]
+  malgrupp: Lokala utvecklingsgrupper som är representerade i Kommunbygderådet
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Utvecklingsgruppen ska vara representerad i Kommunbygderådet
+  - Stadgarna ska ange att föreningen är öppen för alla och att verksamheten är inriktad på bygdens utveckling
+  - En verksamhetsplan för bidragsåret ska skickas till kommunen innan verksamhetsåret börjar och visa aktiviteter som främjar bygdens utveckling
+  - Årsredovisningen ska beskriva verksamhetsårets genomförda aktiviteter
+  - Redovisning för föregående år och en ny ansökan ska ha kommit in innan kommunstyrelsens arbetsutskott beslutar om bidraget
+  - Minst ett årligt dialogmöte ska genomföras mellan utvecklingsgruppens styrelse och kommunledningen
+  belopp: Högst 6 000 kronor per utvecklingsgrupp och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Verksamhetsplanen ska skickas in innan verksamhetsåret börjar.
+  kalla_url: &utvecklingsgrupper https://vansbro-sok.ciceron.cloud/download/document?filename=RmFzdHN05GxsZCByaWt0bGluamUgZvZyIGJpZHJhZyB0aWxsIHV0dmVja2xpbmdzZ3J1cHBlci5wdWIucGRm&id=339467
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: vansbro-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  beskrivning: Föreningen ska vara ideell, ha styrelse och verksamhet i Vansbro kommun, minst 10 betalande medlemmar samt vara ett föredöme mot droger, våld och diskriminering. Kommunen publicerar ingen giltighetstid eller förnyelsefrist för registreringen.
   system: Kommunens e-tjänst eller föreningsregister
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Kommunen publicerar ingen gemensam registrerings- eller förnyelsefrist.
   giltighet: null
   ordning: 1
-  kalla_url: https://www.vansbro.se/uppleva-och-gora/foreningar/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
 kommunsiffra: null
