@@ -6,8 +6,14 @@ forvaltning: Kultur- och fritidsförvaltningen
 ansokningssystem:
   namn: E-tjänstformulär (webbformulär)
   url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-verifierad: 2026-07-26
+kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/
+verifierad: 2026-08-23
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsregister/
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: dorotea-kommunalt-aktivitetsstod
   namn: Kommunalt aktivitetsstöd
@@ -29,38 +35,15 @@ bidrag:
   sen_ansokan: Följ ansökningsperioder
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kommunalt-aktivitetsstod/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-- id: dorotea-statligt-aktivitetsstod
-  namn: Statligt aktivitetsstöd
-  kategori:
-  - idrott
-  - kultur
-  malgrupp: Föreningar för statligt finansierade aktiviteter
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-15
-    - 08-15
-  krav:
-  - Ledarledd gruppaktivitet med minst tre deltagare i åldern 7–20 år utöver ledaren
-  - Sammankomsten ska vara genomförd av lokalavdelningen och vara minst 60 minuter
-  - Bidrag utgår för maximalt 30 deltagare per sammankomst
-  - Sammankomsten ska innehålla en gemensam samling med någon form av instruktion
-  - Bidrag utgår inte till entrébelagda tävlingar eller kommersiella arrangemang
-  - Närvarokort ska fyllas i vid varje sammankomst
-  - Ansökan ska skrivas under av en av styrelsen utsedd firmatecknare
-  - Ansökan lämnas senast 15 februari (höstens aktiviteter) respektive 15 augusti (vårens aktiviteter); för sent inlämnad
-    ansökan ger inte rätt till bidrag
-  belopp: Bidraget varierar från år till år
-  sen_ansokan: Följ statens tidplaner
-  kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/statligt-aktivitetsstod/
-  belopp_status: okand
-  deadline_status: kontrollast
-  krav_status: kontrollast
-  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: dorotea-kulturbidrag
   namn: Kulturbidrag
@@ -72,14 +55,21 @@ bidrag:
     datum: []
   krav:
   - Bidrag utgår till föreningar/organisationer inom Dorotea kommun
+  - Stödet avser ordinarie kulturell verksamhet eller offentliga program inom exempelvis teater, musik, dans, konst, föreläsningar, hembygdsvård eller kulturminnesvård
   - Ansökan ska innehålla styrkt redovisning av de kostnader föreningen haft för arrangemanget och eventuella intäkter
   belopp: Högst 90 % av nettokostnaden för ett arrangemang, sammantaget högst 15 000 kronor per förening och år
   sen_ansokan: Följ ansökningsperioder
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/kulturbidrag/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  foreningstyp: [kultur, hembygd]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: dorotea-ledarutbildning
   namn: Ledarutbildningsbidrag
@@ -102,9 +92,15 @@ bidrag:
   sen_ansokan: Ansökan ska göras av föreningens huvudstyrelse senast en månad efter avslutad kurs
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/ledarutbildningsbidrag/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: dorotea-lokalbidrag
   namn: Lokalbidrag
@@ -126,9 +122,15 @@ bidrag:
   sen_ansokan: Följ ansökningsperioder
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/lokalbidrag/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: dorotea-anlaggningsbidrag
   namn: Anläggningsbidrag
@@ -153,9 +155,15 @@ bidrag:
   sen_ansokan: Följ ansökningsperioder
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/anlaggningsbidrag/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: dorotea-specialbidrag
   namn: Särskilda bidrag
@@ -177,10 +185,16 @@ bidrag:
   sen_ansokan: Möjlig löpande
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/sarskilda-bidrag/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'T8a: Översiktssidan gav inte verifierbart belopp eller uttrycklig beloppsregel.'
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
 - id: dorotea-bygdemedel
   namn: Bygdemedel
   kategori:
@@ -197,24 +211,30 @@ bidrag:
   - Bygdemedel beviljas inte till driftskostnader, investeringar som kan kräva fortsatt bidrag, investeringar som kan orsaka
     stat eller kommun oförutsedda utgifter, eller kommersiell verksamhet
   belopp: Högst 90 % av faktiska, godkända och styrkta kostnader. Vid projekt över 30 000 kr kan förskott sökas med 33 %
-  sen_ansokan: Enligt Länsstyrelsens tidplan
+  sen_ansokan: Ansökningsperiod 1 november–31 januari via Min ansökan
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsstod/bygdemedel/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Nationell/regional finansiering
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Kommunen prioriterar ansökningarna och Länsstyrelsen beslutar om bygdemedlen.
 forutsattningar:
 - id: dorotea-registrering
   vad: Registrering i föreningsregistret
-  beskrivning: Föreningen måste vara registrerad i Dorotea kommuns föreningsregister för att kunna ansöka om bidrag.
+  beskrivning: Föreningen måste vara registrerad i Dorotea kommuns föreningsregister för att kunna ansöka om kommunala föreningsbidrag. Kommunen publicerar ingen giltighetstid eller förnyelsefrist för registreringen.
   system: Föreningsregistret
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/foreningsregister/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: dorotea-webformular
   vad: Ansökan via webbformulär
   beskrivning: Föreningsbidrag söks via webbformulär på Dorotea kommuns webbplats. Huvudansökningsperiod startar 1 februari.
@@ -224,7 +244,7 @@ forutsattningar:
   giltighet: null
   ordning: 2
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
 - id: dorotea-kontakt
   vad: Kontaktinformation för föreningsstöd
   beskrivning: 'Linnea Johansson, Verksamhetschef samhälle, kultur, fritid. Tel: 0942-140 70, E-post: linnea.johansson@dorotea.se'
@@ -234,4 +254,4 @@ forutsattningar:
   giltighet: null
   ordning: 3
   kalla_url: https://www.dorotea.se/uppleva-och-gora/foreningar-och-foreningsliv/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
