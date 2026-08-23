@@ -4,10 +4,16 @@ lan: Gävleborgs län
 befolkning: 5697
 forvaltning: Utbildnings- och kulturförvaltningen
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://ockelbo.se/kultur--fritid/foreningsbidrag
-kalla_url: https://ockelbo.se/kultur--fritid/foreningsbidrag
-verifierad: '2026-08-01'
+  namn: Ockelbo kommuns självservice och blanketter
+  url: https://sjalvservice.ockelbo.se/
+kalla_url: &huvud https://ockelbo.se/kultur--fritid/foreningsbidrag
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://ockelbo.se/kultur--fritid/foreningsbidrag/riktlinjer-for-bidrag-till-foreningar
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: ockelbo-anlaggningsbidrag
   namn: Anläggningsbidrag
@@ -15,6 +21,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -32,20 +39,24 @@ bidrag:
     för ledare
   - Bidraget söks i förväg och betalas inte ut retroaktivt
   - Föreningen ska ha bankgiro, plusgiro eller bankkonto registrerat i organisationens namn
-  belopp: null
+  belopp: Individuellt fördelat bidrag till redovisade driftskostnader för anläggning eller fastighet; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://ockelbo.se/kultur--fritid/foreningsbidrag
-  belopp_status: okand
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: ockelbo-verksamhetsbidrag
   namn: Verksamhetsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -65,20 +76,24 @@ bidrag:
   - Föreningen ska ha bankgiro, plusgiro eller bankkonto registrerat i organisationens namn
   - Stöd för lokal förutsätter att föreningen äger eller har hyreskontrakt på lokalen och avser verksamhetsyta, inte kansli,
     klubbhus eller omklädningsrum
-  belopp: null
+  belopp: Individuellt fördelat bidrag till redovisade verksamhets- och lokalkostnader; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://ockelbo.se/kultur--fritid/foreningsbidrag
-  belopp_status: okand
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: ockelbo-investeringsbidrag
   namn: Investeringsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -96,19 +111,23 @@ bidrag:
     för ledare
   - Bidraget söks i förväg och betalas inte ut retroaktivt
   - Föreningen ska ha bankgiro, plusgiro eller bankkonto registrerat i organisationens namn
-  belopp: null
+  belopp: Individuellt fördelat bidrag till lång- eller kortsiktiga investeringar såsom maskiner och system; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://ockelbo.se/kultur--fritid/foreningsbidrag
-  belopp_status: okand
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: ockelbo-aktivitetsstod
   namn: Aktivitetsstöd
   kategori:
   - idrott
   - kultur
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -132,17 +151,21 @@ bidrag:
     till stöd
   - Närvarokort ska bifogas ansökan (idrottsföreningar kan istället bifoga kopia på beviljad LOK-ansökan via Laget.se)
   belopp: 50 procent av det belopp som Riksidrottsförbundet årligen beslutar ska gälla för sammankomst och deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://ockelbo.se/kultur--fritid/foreningsbidrag
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: ockelbo-allmankulturbidrag
   namn: Allmänkulturbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -150,8 +173,7 @@ bidrag:
     - 05-30
     - 11-30
   krav:
-  - Sökande ska bedriva verksamhet inom kulturområdet, till exempel litteratur, musik, kulturarv, fotografering, scenkonst
-    eller dans
+  - Sökande ska vara en förening, stiftelse eller annan kulturorganisation som bedriver verksamhet inom exempelvis litteratur, musik, kulturarv, fotografering, scenkonst eller dans
   - Sökande ska arbeta efter antagna, demokratiska stadgar
   - Sökande som bedriver barn- och ungdomsverksamhet ska begära registerutdrag ur belastningsregistret för personer som arbetar
     i verksamheten
@@ -160,23 +182,74 @@ bidrag:
   - Föreningar ska bedriva sin verksamhet och ha huvuddelen av sina medlemmar i Ockelbo kommun samt på sitt årsmöte ha valt
     styrelse och revisor
   - Kommunen tar inte emot ansökningar från företag eller från verksamhet som bedriver propaganda för extremism eller främlingsfientlighet
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://ockelbo.se/kultur--fritid/kommunala-bidrag-till-kultursatsningar/riktlinjer-for-ansokan-om-kommunala-bidrag-till-kulturforeningar
-  belopp_status: okand
+  belopp: Individuellt prövat bidrag till kultursatsningar och kulturevenemang; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För evenemang januari–juni ska ansökan lämnas senast 30 november året före; för juli–december senast 30 maj samma år
+  kalla_url: https://ockelbo.se/kultur--fritid/kommunala-bidrag-till-kultursatsningar
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: ockelbo-sommarlovsaktiviteter-2026
+  namn: Sommarlovsstöd 2026
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar och organisationer som ordnar kostnadsfria sommarlovsaktiviteter för barn 6–15 år
+  deadlines:
+    typ: fasta
+    datum: [04-19]
+  krav:
+  - Sökande ska vara en förening eller organisation registrerad i Ockelbo kommun; organisationer utanför föreningsregistret ska kontakta kommunen före ansökan
+  - Aktiviteten ska vara kostnadsfri och genomföras under sommarlovet 11 juni–19 augusti 2026 för barn 6–15 år
+  - Aktiviteten ska ge stimulans och personlig utveckling samt vara öppen utan behovsprövning
+  - Satsningen ska behandla barn lika, stimulera både flickors och pojkars deltagande, främja integration och skapa nya kontakter mellan barn med olika social bakgrund
+  - Aktiviteter under minst fem dagar för flera deltagare prioriteras
+  - Föreningen ska bekräfta genomförandet senast 4 maj, lämna aktivitetsdetaljer senast 13 maj och slutredovisa senast 30 september 2026
+  belopp: Individuellt prövat bidrag som kan beviljas helt eller delvis; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska vara kommunen tillhanda senast 19 april 2026
+  kalla_url: https://ockelbo.se/nyheter/nyheter/2026-03-12-ockelbo-kommun-satsar-pa-kostnadsfria-sommarlovsaktiviteter-for-barn-2026
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: ockelbo-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Studieförbund och SISU Idrottsutbildarna med redovisad verksamhet i Ockelbo kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundet ska redovisa folkbildningsverksamhet i Ockelbo kommun för det senast avslutade verksamhetsåret
+  - Underlaget ska omfatta deltagartimmar i studiecirklar, annan gruppverksamhet och kulturprogram
+  - Grundbidraget baseras på respektive studieförbunds relativa andel av föregående års kommunala anslag
+  - Volym- och målgruppsdelarna beräknas efter redovisade deltagartimmar; SISU hanteras inom samma kommunala pott trots en särskild statlig förordning
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas normalt med 70 procent grundbidrag, 15 procent volymbidrag och 15 procent målgruppsbidrag; aktuell totalsumma publiceras inte
+  sen_ansokan: Kommunen publicerar ingen aktuell gemensam sista ansökningsdag
+  kalla_url: https://ockelbo.se/download/18.136a3b961971fd9da74739c7/1749653592271/UKN%20protokoll_250604_%C2%A7%C2%A738-51.signerad.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: ockelbo-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  vad: Grundvillkor och aktuella föreningshandlingar
+  beskrivning: Ordinarie föreningsstöd kräver en ideell allmännyttig och demokratiskt styrd förening med verksamhet och huvuddelen av medlemmarna i Ockelbo, minst tio betalande aktiva medlemmar, organisationsnummer sedan minst ett år och konto i organisationens namn. Med ansökan lämnas aktuella stadgar, årsmötesprotokoll, bokslut, revision, verksamhetsberättelse, plan och budget. Kommunen publicerar ingen separat giltighetstid eller förnyelseregel för godkännandet.
+  system: Ockelbo kommuns självservice
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://ockelbo.se/kultur--fritid/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
