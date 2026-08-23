@@ -7,12 +7,26 @@ ansokningssystem:
   namn: Färgelanda e-tjänster
   url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
 kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
-verifierad: '2026-07-31'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 04-30
+  kalla_url: &bidragsregler https://fargelanda.se/media/b11lt4vc/bidragsregler-for-foreningar-i-fargelanda-kommun-2023.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Startbidrag
   kategori:
   - ovrig
   malgrupp: Nystartade föreningar
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: lopande
     datum: []
@@ -29,6 +43,8 @@ bidrag:
   - Ha bankkonto, bankgiro eller plusgiro samt organisationsnummer
   - Föreningen ska vara nybildad (undantag för politiska föreningar)
   belopp: Max 3 000 kronor (engångsbelopp), gäller ej politiska föreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan om registrering av ny förening samt startbidrag sker löpande under året. Utbetalning sker två månader
     efter att uppgifterna inkommit till kommunen.
   kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
@@ -44,6 +60,14 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med aktiviteter
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: fasta
     datum:
@@ -65,6 +89,8 @@ bidrag:
     bidragsberättigade
   belopp: 25 kronor per sammankomst och deltagare (barn/ungdomar t.o.m. 20 år, äldre fr.o.m. 65 år, funktionshindrade oavsett
     ålder)
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 25 augusti respektive 25 februari, med redovisning för genomförd verksamhet
     bifogad. Utbetalning sker två månader efter att uppgifterna inkommit.
   kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
@@ -80,6 +106,14 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med anläggningar
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: fasta
     datum:
@@ -99,6 +133,8 @@ bidrag:
   - 'Multianläggningar och motionsanläggningar: äga eller hyra anläggning inom kommunen'
   belopp: Fast belopp per förening och kategori (aktivitetsanläggningar, samlingslokaler, kulturlokaler, multianläggningar,
     motionsanläggningar), beslutas årligen av kommunstyrelsen; exakt belopp anges inte i regeldokumentet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 30 april det verksamhetsår som stödet avser. Svar lämnas senast 30 juni. Utbetalning
     sker senast 30 september.
   kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
@@ -113,6 +149,14 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med arrangemang
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: fasta
     datum:
@@ -142,6 +186,14 @@ bidrag:
   kategori:
   - ovrig
   malgrupp: Tillfälliga föreningssammanslutningar
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: lopande
     datum: []
@@ -170,6 +222,14 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med investeringar
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: fasta
     datum:
@@ -184,6 +244,8 @@ bidrag:
   - Avser nybyggnation, ombyggnation eller reparation av egna anläggningar eller lokaler
   belopp: Kommunstyrelsen är beslutande organ och beviljar utifrån rådande budgetförutsättningar vid ansökningstillfället;
     egna medel eller medfinansiering från annan aktör krävs med minst 60 procent för att föreningen ska vara bidragsberättigad
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 30 april det verksamhetsår som investeringen ska påbörjas. Svar lämnas senast
     30 juni. Utbetalning sker senast 30 september.
   kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
@@ -198,6 +260,9 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Godkända studieförbund
+  foreningstyp:
+  - kultur
+  - annat
   deadlines:
     typ: fasta
     datum:
@@ -212,8 +277,9 @@ bidrag:
   - Verksamhetsberättelse inklusive ekonomisk berättelse ska lämnas senast 30 juni
   - Påskrivna kommunsammandrag ska lämnas senast 30 juni
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunens totala anslag fördelas 70%/10%/20% per kategori"
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens totala anslag fördelas 70 procent till studiecirklar, 10 procent till annan folkbildningsverksamhet
+    och 20 procent till kulturarrangemang; totalsumman publiceras inte
   sen_ansokan: Verksamhetsplan för kommande år lämnas senast 15 december föregående år. Verksamhetsberättelse, ekonomisk berättelse
     samt påskrivna kommunsammandrag lämnas senast 30 juni. Utbetalning sker senast 31 augusti.
   kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
@@ -223,15 +289,53 @@ bidrag:
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: fargelanda-bidrag-till-studieforbund
+- namn: Utvecklingsmedel från Folkhälsorådet
+  kategori:
+  - social
+  - idrott
+  - ovrig
+  malgrupp: Föreningar med hälsofrämjande eller förebyggande projekt för kommunens invånare
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  deadlines:
+    typ: fasta
+    datum:
+    - 10-26
+  krav:
+  - Projektet ska rikta sig till befolkningen i Färgelanda kommun och vara förebyggande eller hälsofrämjande på grupp- eller
+    samhällsnivå
+  - Projektet ska ligga inom något av Folkhälsorådets prioriterade områden 2026–2028; barn och unga, goda levnadsvanor eller
+    psykisk hälsa
+  - Sökanden ska själv stå för en del av projektkostnaden; nedlagd arbetstid får räknas som egen insats
+  - Insatsen ska ligga utanför ordinarie verksamhet, den egna budgeten och kommunens vanliga bidragsnormer för föreningar
+  - Ansökan ska beskriva hur arbetet kan fortsätta i verksamheten efter att utvecklingsmedlen tagit slut
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Folkhälsorådet avsätter cirka 300 000 kronor årligen till folkhälsoutveckling i kommunen
+  sen_ansokan: Publicerat ansökningsdatum är 26 oktober 2026; medlen betalas ut under 2027.
+  kalla_url: https://fargelanda.se/omsorg-och-stod/folkhalsa/utvecklingsmedel-fran-folkhalsoradet/
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ej angivet i källan
+  id: fargelanda-folkhalsoradets-utvecklingsmedel
 forutsattningar:
 - id: fargelanda-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna efterfrågade årshandlingar.
+  beskrivning: 'Bidragsberättigad förening ska senast 30 april varje år lämna aktuella föreningsregisteruppgifter,
+    verksamhetsberättelse, ekonomisk berättelse, budget eller verksamhetsplan, revisionsberättelse och årsmötesprotokoll.'
   system: Färgelanda e-tjänster
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Årlig redovisning senast 30 april
+  giltighet: Godkännandet upprätthålls genom fullständig årlig redovisning senast 30 april.
   ordning: 1
-  kalla_url: https://fargelanda.se/uppleva-och-gora/fritid/foreningsverksamhet/
-  giltighet_status: okand
+  kalla_url: *bidragsregler
+  giltighet_status: kontrollast
 kommunsiffra: null
