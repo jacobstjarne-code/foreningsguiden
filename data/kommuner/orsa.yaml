@@ -4,18 +4,25 @@ lan: Dalarnas län
 befolkning: 6875
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
+  namn: Orsa föreningsportal och kommunens blanketter
+  url: https://orsa.actorsmartbook.se/
 kalla_url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &portalinfo https://orsa.se/uppleva-och-gora/foreningar/information-om-foreningsportalen.html
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: orsa-foreningsbidrag
-  namn: Föreningsbidrag
+  namn: Verksamhetsstöd
   kategori:
   - idrott
   - kultur
   - social
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -31,21 +38,25 @@ bidrag:
   - För idrottsföreningar anslutna till Riksidrottsförbundet krävs aktuellt vaccinationsintyg mot doping från Antidoping Sverige
   belopp: Bedöms från fall till fall utifrån en samlad bedömning av föreningens verksamhet, verksamhetsplan och ekonomi. Ingen
     fast beloppsgräns anges; summan som fördelas varierar mellan år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
+  kalla_url: &policy https://orsa.se/download/18.46151b4b19686c7366f43bbf/1746428583972/Policy%20f%C3%B6r%20f%C3%B6reningsbidrag%202024.pdf
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: orsa-evenemangsstod
-  namn: Evenemangsstöd
+  namn: Arrangemangsstöd för föreningar
   kategori:
   - kultur
   - idrott
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
-    typ: lopande
+    typ: relativ
     datum: []
   krav:
   - Sökande ska uppfylla kommunens grundläggande krav på föreningar (bl.a. minst 10 betalande medlemmar och ekonomisk redovisning
@@ -57,17 +68,21 @@ bidrag:
   - Kan inte sökas för aktiviteter som föreningen samtidigt söker verksamhetsstöd för
   belopp: Max 10 000 kronor per arrangemang och max 50 procent av utgifterna. En förening kan totalt beviljas max 10 000 kronor
     per halvår (perioderna januari–juni respektive juli–december)
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  kalla_url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
+  belopp_avser: per_forening
+  kommunens_pott: Arrangemangsstöd och utbildningsbidrag delar en budgetram på 70 000 kronor 2026
+  sen_ansokan: Ansökan ska lämnas minst fyra veckor före arrangemanget.
+  kalla_url: *policy
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökan senast fyra veckor före arrangemang.
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: orsa-lokalt-aktivitetsstod
   namn: Lokalt aktivitetsstöd
   kategori:
   - idrott
+  foreningstyp: [idrott]
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: fasta
@@ -77,18 +92,121 @@ bidrag:
   krav:
   - Idrottsförening ansluten till Riksidrottsförbundet som bedriver barn- och ungdomsverksamhet
   - Följer förordningen (1999:1177) om statsbidrag till idrottsverksamhet samt Riksidrottsstyrelsens föreskrifter
-  belopp: null
+  - Endast idrottslig gruppverksamhet är stödgrundande; studiecirklar, städdagar och liknande räknas inte
+  - Ansökan ska redovisa träningstillfällen och deltagare enligt kommunens och Riksidrottsförbundets anvisningar
+  belopp: Schablonbelopp per träningstillfälle och deltagare; kommunen publicerar inte den aktuella kronnivån
+  belopp_avser: per_forening
+  kommunens_pott: 120 000 kronor är avsatt för lokalt aktivitetsstöd 2026
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
-  belopp_status: okand
+  kalla_url: *policy
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: orsa-utbildningsbidrag
+  namn: Utbildningsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som utbildar medlemmar eller funktionärer
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens grundläggande villkor för föreningsbidrag
+  - Utbildningen ska ge medlemmar eller funktionärer allmän föreningskunskap eller särskild kunskap inom föreningens verksamhetsområde
+  - Ansökan ska avse en utbildning som inte har påbörjats vid ansökningstillfället
+  - Endast utbildningskostnaden är stödgrundande; resor, kost och logi får inte räknas med
+  belopp: Individuellt prövad utbildningskostnad; kommunen publicerar ingen generell procentsats eller högsta nivå
+  belopp_avser: per_forening
+  kommunens_pott: Arrangemangsstöd och utbildningsbidrag delar en budgetram på 70 000 kronor 2026
+  sen_ansokan: Ansökan kan göras löpande men måste lämnas innan utbildningen påbörjas.
+  kalla_url: *policy
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: orsa-stod-till-studieforbund
+  namn: Stöd till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med folkbildningsverksamhet i Orsa kommun
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Studieförbundet ska uppfylla Folkbildningsrådets definition och bedriva folkbildningsverksamhet i Orsa kommun
+  - Studieförbundet ska årligen redovisa sin verksamhet till Folkbildningsrådet
+  - Folkbildningsrådets rapportering ska bifogas ansökan
+  - Ansökan ska innehålla en redogörelse för den kultur- och folkbildningsverksamhet som genomförts i Orsa kommun under föregående kalenderår
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 300 000 kronor är avsatt för studieförbund 2026 och fördelas efter inrapporterad kultur- och folkbildningsverksamhet
+  sen_ansokan: Ansökan senast 30 april för verksamhet under föregående kalenderår.
+  kalla_url: *policy
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: orsa-uppdragsavtal
+  namn: Uppdragsavtal med föreningar
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som utför ett särskilt uppdrag åt kommunen
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska åta sig ett särskilt uppdrag som kommunen vill få utfört
+  - Uppdraget ska beskrivas i ett skriftligt avtal tillsammans med hur resultatet ska följas upp
+  - Avtalet ska tecknas för en tidsbegränsad period och följas upp årligen
+  - Avtalet utarbetas i dialog mellan kommunen och föreningen och saknar ett öppet generellt ansökningsförfarande
+  belopp: Ersättningens storlek bestäms i det enskilda uppdragsavtalet; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen öppen ansökningsfrist; uppdragsavtal tas fram i dialog.
+  kalla_url: *policy
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: orsa-storre-evenemangsstod
+  namn: Evenemangsstöd för större evenemang
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som arrangerar större evenemang i Orsa med omnejd
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Ansökan ska lämnas av föreningens behöriga firmatecknare och ange förening, kontaktperson, ordförande, kassör och sökt belopp
+  - Evenemanget ska bidra till ett rikt utbud, stärka bilden och kännedomen om Orsa eller locka fler besökare och företag
+  - Evenemanget ska hålla hög kvalitet, kunna utvecklas över tid och ligga i linje med kommunens vision och värdegrund
+  - Ansökan ska beskriva mål, innehåll, tidplan och ekonomiska åtaganden
+  - Efter genomförandet ska föreningen lämna ekonomisk och verksamhetsmässig slutredovisning till kommunen
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 373 000 kronor är budgeterat för evenemangsstöd 2026 och fördelas mellan beviljade evenemang
+  sen_ansokan: Ansökningar behandlas löpande under året.
+  kalla_url: https://orsa.se/download/18.51b3e496167c5f867322cb52/1548335296881/Evenemangsstod19.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: orsa-bygdepeng-vindkraft
   namn: Bygdepeng vindkraft
   kategori:
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: lopande
@@ -101,19 +219,22 @@ bidrag:
   - Ansökan ska innehålla handlingar som styrker organisationens beslut och behörig företrädare samt senaste årets verksamhets-,
     kassa- och revisionsberättelse
   - Projektet får inte ha avslutats innan kommunen har fattat beslut
-  belopp: Inget fast maxbelopp per projekt anges; bedöms från fall till fall utifrån tillgängliga medel (0,5 procent av bruttoersättningen
-    för vindkraftsel enligt avtal med OX2)
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 0,5 procent av bruttoersättningen för vindkraftsel enligt kommunens avtal med OX2 fördelas till berättigade projekt
+  sen_ansokan: Ansökningar behandlas löpande under året.
   kalla_url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
-  belopp_status: ingen_regel
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: orsa-utvecklingsbidrag-vindkraft
   namn: Utvecklingsbidrag vindkraft
   kategori:
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer enligt kommunens regler för stödformen
   deadlines:
     typ: lopande
@@ -137,16 +258,27 @@ bidrag:
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Projekt för lokal utveckling. Kontakta kommunen om ansökningsförfarandet
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: orsa-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller föreningsregister
+  vad: Registrering i föreningsportalen
+  beskrivning: Föreningen ska vara registrerad i Orsas föreningsportal och utse en föreningsadministratör för att kunna söka kommunens föreningsbidrag.
+  system: Orsa föreningsportal
   ledtid: null
-  ledtid_text: null
+  ledtid_text: En handläggare lägger upp föreningen efter att registreringsformuläret skickats in; kommunen publicerar ingen handläggningstid.
   giltighet: null
   ordning: 1
-  kalla_url: https://orsa.se/uppleva-och-gora/foreningar/bidrag-stod-och-stipendier.html
-  giltighet_status: okand
+  kalla_url: *portalinfo
+  giltighet_status: ingen_regel
+- id: orsa-aktuella-arshandlingar
+  vad: Aktuella årsmötes- och ekonomihandlingar
+  beskrivning: Vid ansökan ska föreningen lämna senaste årsmötesprotokoll med bilagor samt verksamhetsberättelse och ekonomisk redogörelse som godkänts av revisorer och antagits av årsmötet. Handlingarna får vara högst tolv månader gamla.
+  system: Orsa föreningsportal
+  ledtid: null
+  ledtid_text: Handlingarna ska vara högst tolv månader gamla när ansökan lämnas; detta är ett ansökningskrav och kommunen publicerar ingen separat giltighetstid för föreningens registrering.
+  giltighet: null
+  ordning: 2
+  kalla_url: *policy
+  giltighet_status: ingen_regel
 kommunsiffra: null
