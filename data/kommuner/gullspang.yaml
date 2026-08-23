@@ -2,23 +2,29 @@ kommun: Gullspång
 kommun_slug: gullspang
 lan: Västra Götalands län
 befolkning: 4924
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kommunstyrelsen, kultur och fritid
 ansokningssystem:
-  namn: E-tjänster
-  url: https://gullspang.se/Gullspangs-kommun/Kultur--fritid/Foreningar-och-studieforbund/Foreningsbidrag
-kalla_url: https://gullspang.se/Gullspangs-kommun/Kultur--fritid/Foreningar-och-studieforbund/Foreningsbidrag
-verifierad: 2026-07-26
+  namn: Gullspångs e-tjänster
+  url: https://e-tjanster.gullspang.se/oversikt
+kalla_url: &huvud https://gullspang.se/uppleva-och-gora/foreningsliv-och-foreningar/foreningsbidrag-och-investeringsbidrag
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://gullspang.se/download/18.162482e11991398bf5452d1/1757486862606/Riktlinje%20f%C3%B6r%20f%C3%B6reningsbidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: gullspang-foreningsbidrag
   namn: Föreningsbidrag
   kategori:
   - idrott
   - kultur
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ungdomsföreningar, intresseföreningar och samhällsföreningar
   deadlines:
     typ: fasta
     datum:
-    - 01-15
     - 04-01
   krav:
   - Föreningen ska bedriva sin verksamhet inom kommunen samt vara registrerad i kommunens föreningsregister
@@ -35,18 +41,22 @@ bidrag:
     med ungdomsverksamhet: verksamhetsbidrag baserat på antal sammankomster och deltagande medlemmar, samt lokal- och anläggningsbidrag
     på 45–75 % av godkända kostnader beroende på antal sammankomster (lägst 5 000 kr, dock högst åtta gånger verksamhetsbidraget).
     Övriga intresse- och samhällsföreningar: bidrag per redovisad medlem.'
-  sen_ansokan: Ej möjlig efter 1 april
-  kalla_url: https://gullspang.se/download/18.162482e11991398bf5452d1/1764334553844/Riktlinje%20för%20föreningsbidrag.pdf
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden är 15 januari–1 april; ansökan efter 1 april är inte möjlig
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: gullspang-investeringsbidrag
   namn: Investeringsbidrag
   kategori:
   - idrott
   - kultur
+  foreningstyp: *alla
   malgrupp: Föreningar för utrustning, inventarier, anläggningar
   deadlines:
     typ: fasta
@@ -65,19 +75,23 @@ bidrag:
     eller myndigheter, styrkt skriftligen
   - Efter genomförd investering ska kostnaderna redovisas med fakturor, dokumentation av det färdiga resultatet samt betalningskvitton
   belopp: Högst 30 % av den totala investeringskostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan kan lämnas löpande under året till och med 1 november
-  kalla_url: https://gullspang.se/download/18.162482e11991398bf5452d2/1757486872650/Riktlinjer%20för%20investeringsbidrag.pdf
+  kalla_url: https://gullspang.se/download/18.4c1dcb32196f65cbcc4dcde/1749046007781/Riktlinjer%20f%C3%B6r%20investeringsbidrag.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: gullspang-arrangorsstod
   namn: Arrangörsstöd
   kategori:
   - kultur
   - idrott
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar som arrangerar offentliga arrangemang i Gullspångs kommun
   deadlines:
     typ: lopande
@@ -91,6 +105,8 @@ bidrag:
   - Retroaktiva stöd beviljas inte
   - Slutredovisning ska göras senast två månader efter att arrangemanget är genomfört
   belopp: Högst 5 000 kronor per tillfälle
+  belopp_avser: per_forening
+  kommunens_pott: 200 000 kr avsatt till arrangörsstöd 2026
   sen_ansokan: Minst en månad före arrangemanget
   kalla_url: https://gullspang.se/uppleva-och-gora/foreningsliv-och-foreningar/arrangorsstod
   belopp_status: kontrollast
@@ -98,24 +114,87 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Kan användas för marknadsföring samt exempelvis lokal, utrustning eller tillstånd.
+  senast_verifierad: '2026-08-23'
+- id: gullspang-bygdegards-och-folketshusbidrag
+  namn: Bidrag till bygdegårds- och Folkets Hus-föreningar
+  kategori:
+  - kultur
+  - social
+  - ovrig
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Ideella föreningar som driver bygdegård, Folkets Hus eller motsvarande allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum:
+    - 04-01
+  krav:
+  - Föreningen ska bedriva verksamhet i Gullspångs kommun, vara registrerad i kommunens föreningsregister och ha stadgar samt vald styrelse
+  - Föreningen ska vara demokratiskt uppbyggd, politiskt och religiöst obunden samt främja inkludering, jämställdhet och integration
+  - Kärnverksamheten ska vara uthyrning av den egna lokalen eller offentliga arrangemang i den egna lokalen
+  - Verksamheten får inte bedrivas kommersiellt eller redan finansieras i oskäligt hög grad av annan kommunal eller statlig aktör
+  - Ansökan bedöms utifrån samhällsnytta i relation till kostnader och tidigare stöd, bland annat antal uthyrningar, egna arrangemang,
+    deltagande, verksamhetens bredd och kvalitet samt hur väl föreningen når och informerar målgrupper
+  - Kommunen kan begära detaljerad redovisning av uthyrningarna och skriftlig motivering om föreningen åberopar särskilda skäl för undantag
+  belopp: Individuellt bedömt efter lokalens samhällsnytta, föreningens kostnader, tidigare bidrag och kommunens årliga föreningsbudget
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperioden för föreningsbidrag är 15 januari–1 april
+  kalla_url: https://gullspang.se/download/18.162482e11991398bf5452ca/1764334404987/Riktlinjer%20f%C3%B6r%20bidrag%20till%20bygdeg%C3%A5rds-%20och%20folketshusf%C3%B6reningar%20eller%20motsvarande.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: gullspang-foreningspris
+  namn: Gullspångs kommuns föreningspris
+  kategori:
+  - idrott
+  - kultur
+  - social
+  - ovrig
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar med verksamhet i Gullspångs kommun
+  deadlines:
+    typ: fasta
+    datum:
+    - 03-20
+  krav:
+  - Mottagaren ska vara en ideell förening med stadgar och demokratiskt vald styrelse, huvudsaklig verksamhet i kommunen och registrering i föreningsregistret
+  - Föreningen ska ha varit aktiv i minst ett år, ha ordnad ekonomi och vara öppen för alla som delar föreningens syfte
+  - Verksamheten ska präglas av jämställdhet, trygghet och drogfrihet samt vara politiskt och religiöst obunden
+  - Föreningen får inte ha fått kommunens föreningspris under de senaste fem åren
+  - Bedömningen omfattar engagemang och samhällsnytta, samverkan, utveckling, långsiktighet, inkludering, trygghet och folkhälsa
+  - Nomineringen ska innehålla föreningens namn och kontaktuppgifter samt en motivering
+  belopp: 5 000 kr, diplom och blombukett
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Nominering tas emot 1 januari–20 mars
+  kalla_url: https://gullspang.se/uppleva-och-gora/foreningsliv-och-foreningar/foreningspris
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Privatpersoner får nominera, men endast en förening kan vara mottagare av priset.
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: gullspang-registrering
   vad: Registrering och värdegrunden
-  beskrivning: Föreningen måste uppfylla grundläggande krav i riktlinjer och stödja kommunens värdegrunden för att få bidrag.
+  beskrivning: Föreningen ska bedriva verksamhet i Gullspångs kommun, vara registrerad i föreningsregistret och uppfylla kommunens demokrati-, öppenhets- och värdegrundskrav.
   system: Gullspångs kommun
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://gullspang.se/Gullspangs-kommun/Kultur--fritid/Foreningar-och-studieforbund/Foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 - id: gullspang-ansok
   vad: Digital ansökan
-  beskrivning: Föreningsbidrag söks genom att fylla i och skicka in ansökningsblanketten via e-post eller angiven postadress.
-  system: E-tjänster
+  beskrivning: Ansökningar lämnas via kommunens anvisade e-tjänst eller blankett med de handlingar som respektive stödform kräver.
+  system: Gullspångs e-tjänster
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 2
   kalla_url: https://e-tjanster.gullspang.se/oversikt
-  giltighet_status: okand
+  giltighet_status: ingen_regel
