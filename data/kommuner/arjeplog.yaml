@@ -2,18 +2,25 @@ kommun: Arjeplog
 kommun_slug: arjeplog
 lan: Norrbottens län
 befolkning: 2555
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kommunledning, kultur och fritid samt Folkhälsorådet
 ansokningssystem:
-  namn: E-post
-  url: mailto:christina.sundqvist@arjeplog.se
+  namn: Kommunens blanketter och e-post
+  url: https://arjeplog.se/kommun-och-politik/blanketter/
 kalla_url: https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/
-verifierad: '2026-08-02'
+verifierad: 2026-08-23
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 04-30
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/grundbidragsansokan-och-anmalan-till-foreningsregister.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: arjeplog-kulturkraft
   namn: Kulturkraft
   kategori:
   - kultur
-  malgrupp: Organisationer, institutioner, föreningar och professionella inom kultur och kreativa sektorer
+  - ovrig
+  malgrupp: Föreningar och andra aktörer som genomför kulturella, kreativa eller kommunmarknadsförande insatser
   deadlines:
     typ: lopande
     datum: []
@@ -27,18 +34,23 @@ bidrag:
   - Bidrag lämnas inte retroaktivt till redan genomförda projekt
   - Projektet ska ha en tydligt angiven huvudman med ansvar för genomförande och ekonomi
   - Projektet ska överensstämma med kommunens lokala och regionala planer och strategier, t.ex. kulturplan
+  - Ansökan ska innehålla projektbeskrivning, målgrupp, tidsplan, förväntat resultat, uppföljning och ekonomisk kalkyl
+  - Hela projektekonomin, genomförandet och resultatet ska redovisas senast två månader efter projektets slut
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Kommunen budgeterar ca 200 000 kr totalt för Kulturkraft"
+  belopp_avser: ren_pott
+  kommunens_pott: Omkring 200 000 kronor budgeteras årligen; inriktningen är att hälften går till insatser i samarbete med kommunala arrangemang
   sen_ansokan: Beslut om kulturkraft fattas löpande under året vilket kan innebära att ansökningar under den senare delen
     kan avslås på grund av att årets medel för kulturkraft är använda
-  kalla_url: https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/
-  belopp_status: okand
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/riktlinjer-kulturkraft.pdf
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Inget fast belopp per ansökan anges. Kommunen budgeterar årligen i storleksordningen 200 000 kr totalt för Kulturkraft,
-    med inriktningen att hälften av medlen går till insatser i samarbete med kommunala arrangemang (Riktlinjer för Kulturkraftstöd).
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är även öppet för organisationer, institutioner, skola, yrkesverksamma och ideellt arbetande inom kulturella och kreativa sektorn; föreningar konkurrerar därför med andra sökande om potten.
 - id: arjeplog-utvecklingspeng
   namn: Utvecklingspeng
   kategori:
@@ -54,40 +66,58 @@ bidrag:
     medlemsmöten, styrelse, stadgar samt verksamhets- och ekonomisk berättelse
   - Föreningens aktuella utvecklingsplan ska bifogas ansökan
   - Stödet får inte användas till löpande driftskostnader; alkoholhaltiga drycker är inte stödberättigade
+  - Stödet får användas till utvecklingsarbete, sysselsättningsskapande verksamhet, investeringar eller andra aktiviteter som är viktiga för byns utveckling; medfinansiering i större projekt prioriteras
+  - Ansökningar i linje med byns utvecklingsplan och kommunala eller regionala strategier prioriteras, liksom områden som inte nyligen fått stöd
+  - Slutrapport och verifikationer ska lämnas senast två månader efter projektets slut; tidigare stöd ska vara redovisat innan en ny ansökan behandlas
   belopp: "5 000–20 000 kronor per insats/förening/år"
   belopp_avser: per_forening
   kommunens_pott: "Kommunen budgeterar ca 210 000 kr totalt för Utvecklingspeng"
   sen_ansokan: Ej tillämpligt (löpande)
-  kalla_url: https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/riktlinjer-for-utvecklingspeng.pdf
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunen budgeterar årligen i storleksordningen 210 000 kr totalt för Utvecklingspeng (Riktlinjer för Utvecklingspeng).
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
 - id: arjeplog-stimulansbidrag-folkhalsa
   namn: Stimulansbidrag för folkhälsoinsatser
   kategori:
+  - idrott
+  - social
   - ovrig
-  malgrupp: Föreningar för hälsofrämjande aktiviteter
+  malgrupp: Föreningar och andra aktörer som genomför folkhälsofrämjande insatser i Arjeplog
   deadlines:
     typ: lopande
     datum: []
   krav:
   - Insatsen ska beskrivas och motiveras utifrån hur den främjar folkhälsan i Arjeplogs kommun
-  - Kostnadskalkyl ska bifogas ansökan
+  - Sökt belopp ska anges och en kostnadskalkyl ska bifogas ansökan
+  - Insatser i linje med utpekade insatsområden och prioriterade åtgärder i kommunens lokala utvecklingsstrategi och översiktsplan prioriteras
+  - Beviljade insatser ska slutrapporteras före kalenderårets slut
   belopp: null
-  sen_ansokan: Ingen fast ansökningsdeadline anges i den officiella ansökningsblanketten; ansökan görs löpande.
-  kalla_url: https://arjeplog.se/foretag-forening-och-naringsliv/stod-och-bidrag-for-kultur-utveckling-och-folkhalsa/
-  belopp_status: okand
+  belopp_avser: ren_pott
+  kommunens_pott: Folkhälsorådet har 50 000 kronor per år för folkhälsofrämjande aktiviteter och insatser
+  sen_ansokan: Ansökan kan lämnas löpande; Folkhälsorådet behandlar normalt ansökningar i februari, maj, augusti och november
+  kalla_url: https://arjeplog.se/omsorg-och-stod/folkhalsa/3584-2/
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Inget fast bidragsbelopp anges; sökanden anger själv önskat belopp i ansökan (stimulansbidrag-for-folkhalsoinsatser.pdf).
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är även öppet för företag och privatpersoner; föreningar konkurrerar därför med andra sökande om potten.
 - id: arjeplog-aktivitetsstod
   namn: Kommunalt lokalt aktivitetsstöd
   kategori:
   - idrott
   - kultur
+  - ovrig
   malgrupp: Föreningar med barn- och ungdomsverksamhet
   deadlines:
     typ: fasta
@@ -96,26 +126,33 @@ bidrag:
     - 08-15
   krav:
   - Ansökan ska grundas på närvarokort med redovisade sammankomster och deltagare uppdelat på flickor och pojkar i åldrarna
-    6-12, 13-16 och 17-25 år
+    7-12, 13-16 och 17-25 år
   - Ansökan för perioden 1 januari-30 juni ska ha inkommit senast 15 augusti; ansökan för perioden 1 juli-31 december ska
     ha inkommit senast 15 februari
   - Uppgifterna ska vara i enlighet med kommunens Regler och riktlinjer för Stöd till föreningslivet, §7 Kommunalt aktivitetsstöd
-  belopp: null
+  - Närvarokorten ska granskas och ansökan undertecknas av en firmatecknare som styrelsen har utsett
+  belopp: Kommunen publicerar ingen aktuell kronsats per sammankomst eller deltagartillfälle
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 15 augusti (vårterminen) respektive 15 februari (höstterminen). Konsekvenser
     vid sen ansökan anges inte i ansökningsblanketten.
-  kalla_url: https://arjeplog.se/kommun-och-politik/blanketter/
-  belopp_status: okand
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/aktivitetsstod-ansokan-om-kommunalt-lokalt.pdf
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Bidragsbeloppets storlek per sammankomst/deltagare framgår inte av ansökningsblanketten eller övriga tillgängliga
-    källor. Det fullständiga regelverket §7 Kommunalt aktivitetsstöd (Regler och riktlinjer för Stöd till föreningslivet i
-    Arjeplogs kommun) kunde inte återfinnas publicerat online.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Det publicerade formuläret hänvisar till § 7 i kommunens regler men kommunen publicerar inte den fulla paragrafen eller någon aktuell kronsats.
 - id: arjeplog-grundbidrag
   namn: Grundbidrag
   kategori:
   - idrott
   - kultur
+  - social
+  - pensionar
   - ovrig
   malgrupp: Registrerade ideella föreningar
   deadlines:
@@ -125,15 +162,23 @@ bidrag:
   krav:
   - Föreningen ska vara anmäld/omregistrerad i Arjeplogs kommuns föreningsregister senast 30 april varje år
   - Senaste årsmöteshandlingar ska bifogas ansökan
-  belopp: null
+  - Ansökan ska redovisa styrelse och kontaktperson, aktiviteter, medlemsantal totalt och i åldern 7-20 år, organisationstillhörighet och organisationsnummer
+  - Utbetalningskonto ska anges som postgiro eller bankgiro
+  belopp: Kommunen publicerar ingen aktuell beloppsnivå eller beräkningsregel för grundbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan/omregistrering ska ha inkommit senast 30 april för innevarande bidragsår. Konsekvenser vid sen ansökan
     anges inte i ansökningsblanketten.
-  kalla_url: https://arjeplog.se/kommun-och-politik/blanketter/
-  belopp_status: okand
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/grundbidragsansokan-och-anmalan-till-foreningsregister.pdf
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Bidragsbeloppets storlek anges inte i ansökningsblanketten eller övriga tillgängliga källor.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
 - id: arjeplog-sarskilt-foreningsbidrag
   namn: Särskilt föreningsbidrag
   kategori:
@@ -147,36 +192,63 @@ bidrag:
     datum:
     - 04-30
   krav:
+  - Sökanden ska vara en förening och ange föreningsnamn, adress, kontaktperson och post- eller bankgiro
   - Ansökan kan avse föreningsledd ungdomsverksamhet, kulturverksamhet eller kulturbidrag/arrangemang
   - Ändamålet med bidragsansökan ska beskrivas
-  belopp: null
+  - Ansökan ska undertecknas av föreningens uppgiftslämnare och innehålla övriga relevanta upplysningar
+  belopp: Kommunen publicerar ingen aktuell beloppsnivå eller beräkningsregel för det särskilda föreningsbidraget
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökan ska ha inkommit senast 30 april för innevarande bidragsår. Konsekvenser vid sen ansökan anges inte
     i ansökningsblanketten.
-  kalla_url: https://arjeplog.se/kommun-och-politik/blanketter/
-  belopp_status: okand
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2026/04/foreningsbidrag-sarskilda-ansokan-v2.pdf
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Bidragsbeloppets storlek anges inte i ansökningsblanketten eller övriga tillgängliga källor.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
 - id: arjeplog-upp-ungdomsprojekt
   namn: UPP – ungdomsprojektpengar
   kategori:
   - kultur
   - idrott
   - ovrig
-  malgrupp: Unga som genomför egna projekt
+  malgrupp: Unga och ungdomsgrupper som genomför egna projekt eller arrangemang
   deadlines:
     typ: okand
     datum: []
   krav:
   - Ansökan ska beskriva vad som ska göras och när, varför arrangemanget ska genomföras, vem det vänder sig till samt uppskattat
     belopp
-  belopp: null
+  - Ansökan ska innehålla namn, adress, e-postadress och telefonnummer till kontaktperson
+  - Projektet eller arrangemanget ska ha en angiven målgrupp och ett uppskattat finansieringsbehov
+  belopp: Sökanden anger själv det belopp som bedöms behövas; kommunen publicerar ingen fast nivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ingen fast ansökningsdeadline anges i den officiella ansökningsblanketten.
-  kalla_url: https://arjeplog.se/kommun-och-politik/blanketter/
-  belopp_status: okand
-  deadline_status: okand
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/ansokan-upp.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Inget fast bidragsbelopp anges; sökanden uppskattar själv önskat belopp i ansökan.
-forutsattningar: []
+  krav_fullstandiga: true
+  foreningstyp: [ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Blanketten är formulerad för unga och grupper och kräver bara kontaktuppgifter; den anger inte att föreningar är uteslutna.
+forutsattningar:
+- id: arjeplog-foreningsregister
+  vad: Årlig omregistrering i föreningsregistret
+  beskrivning: Föreningen ska senast den 30 april varje år uppdatera styrelse, kontaktuppgifter, aktiviteter, medlemsantal, organisationstillhörighet och organisationsnummer i kommunens föreningsregister. Senaste årsmöteshandlingar ska bifogas när grundbidrag söks.
+  system: Kommunens blankett för föreningsregister och grundbidrag
+  ledtid: null
+  ledtid_text: Senast den 30 april varje år
+  giltighet: Omregistrering senast den 30 april varje år
+  ordning: 1
+  kalla_url: https://arjeplog.se/wp-content/uploads/se/2024/11/grundbidragsansokan-och-anmalan-till-foreningsregister.pdf
+  giltighet_status: kontrollast
+kommunsiffra: null
