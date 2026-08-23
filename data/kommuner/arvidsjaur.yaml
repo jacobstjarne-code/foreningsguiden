@@ -6,14 +6,21 @@ forvaltning: Kultur och fritid
 ansokningssystem:
   namn: Arvidsjaurs e-tjänst och Rbok
   url: https://minasidor.arvidsjaur.se/
-kalla_url: https://arvidsjaur.se/kultur-fritid/foreningar/
-verifierad: '2026-08-01'
+kalla_url: &huvud https://arvidsjaur.se/kulturfritid/foreningar/foreningsstod.930.html
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: *huvud
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: arvidsjaur-barn-ungdomsverksamhet
   namn: Föreningsstöd för barn- och ungdomsverksamhet
   kategori:
   - idrott
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -27,9 +34,9 @@ bidrag:
   - Föreningen ska drivas demokratiskt och vara öppen för alla
   - Ansökan görs av föreningens styrelse och ska innehålla verksamhetsberättelse med resultat- och balansräkning, utvärdering
     av föregående verksamhetsår, uppgifter enligt ansökningsblankett samt verksamhetsplan
-  belopp: Inget fast kronbelopp per förening anges. 17,5 % av kommunens budget för föreningsstöd avsätts till övrig, organiserad
-    eller ledarledd barn- och ungdomsverksamhet och fördelas efter ansökan med verksamhetsplan; beslut tas i kultur-, fritids-
-    och näringslivsutskottet.
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 17,5 % av kommunens budget för föreningsstöd avsätts till övrig organiserad eller ledarledd barn- och ungdomsverksamhet och fördelas mellan godkända ansökningar
   sen_ansokan: Ej angivet i källan
   kalla_url: https://arvidsjaur.se/download/18.675c407b199c274f4974bc3/1759998636430/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf
   belopp_status: kontrollast
@@ -42,17 +49,17 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-06'
+  senast_verifierad: '2026-08-23'
 - id: arvidsjaur-samlingslokaler-annan-verksamhet
   namn: Föreningsstöd till samlingslokaler och annan verksamhet
   kategori:
   - kultur
   - social
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -67,9 +74,9 @@ bidrag:
   - Sökande förening ska äga sin lokal eller ha ett långsiktigt hyresavtal för den
   - Ansökan görs av föreningens styrelse och ska innehålla verksamhetsberättelse med resultat- och balansräkning, utvärdering
     av föregående verksamhetsår, uppgifter enligt ansökningsblankett samt verksamhetsplan
-  belopp: "Inget fast kronbelopp per förening anges. 17,5 % av kommunens budget för föreningsstöd avsätts till samlingslokaler och annan verksamhet och betalas ut vid ett tillfälle per år."
-  belopp_avser: per_forening
-  kommunens_pott: null
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 17,5 % av kommunens budget för föreningsstöd avsätts till samlingslokaler och annan verksamhet och fördelas mellan godkända ansökningar
   sen_ansokan: Ej angivet i källan
   kalla_url: https://arvidsjaur.se/download/18.675c407b199c274f4974bc3/1759998636430/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf
   belopp_status: kontrollast
@@ -82,15 +89,15 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-06'
+  senast_verifierad: '2026-08-23'
 - id: arvidsjaur-idrott-0-25
   namn: Föreningsstöd för idrottsverksamhet 0–25 år
   kategori:
   - idrott
+  foreningstyp: [idrott]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -105,9 +112,9 @@ bidrag:
   - Ansökan med verksamhetsplan krävs för att erhålla stödet
   - Stödet beräknas utifrån föreningens andel av föregående års statliga LOK-stöd; för barn under 7 år görs en motsvarande
     uträkning enligt samma regler och belopp som det statliga stödet
-  belopp: "Inget fast kronbelopp per förening anges. 65 % av kommunens budget för föreningsstöd avsätts till idrottsverksamhet för barn och ungdom, fördelat efter varje förenings procentuella andel av föregående års statliga LOK-stöd."
-  belopp_avser: per_forening
-  kommunens_pott: null
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 65 % av kommunens budget för föreningsstöd avsätts till idrottsverksamhet för barn och unga och fördelas efter varje förenings andel av föregående års statliga LOK-stöd
   sen_ansokan: Ej angivet i källan
   kalla_url: https://arvidsjaur.se/download/18.675c407b199c274f4974bc3/1759998636430/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf
   belopp_status: kontrollast
@@ -120,54 +127,63 @@ bidrag:
   alder_min: 0
   alder_max: 25
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-06'
-- id: arvidsjaur-upp-ungdomsprojektpengar
-  namn: UPP – ungdomsprojektpengar
-  kategori:
-  - kultur
-  - ovrig
-  malgrupp: Ungdomar 13–25 år i kommunen, med projekt kopplat till en förening eller annan juridisk person
-  deadlines:
-    typ: okand
-    datum: []
+  senast_verifierad: '2026-08-23'
+- id: arvidsjaur-avgiftsfria-kommunala-lokaler
+  namn: Avgiftsfria kommunala lokaler och anläggningar
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som använder kommunala lokaler eller anläggningar
+  deadlines: {typ: okand, datum: []}
   krav:
-  - Sökande ska vara mellan 13 och 25 år
-  - Idén presenteras för de UPP-ansvariga, som kan erbjuda stöd och handledning vid behov
-  - Projektet ska ha en vuxen samarbetspartner, en ansvarig ungdom och koppling till en förening eller annan juridisk person
-  - Ungdomarna ska själva driva och genomföra projektet
-  - Efter genomfört projekt krävs en utvärdering samt en rapport om hur pengarna använts
-  belopp: En gemensam pott på 50 000 kronor avsedd att användas av och för ungdomar via UPP-projekt. Inget maxbelopp per enskilt
-    projekt anges i källan.
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://arvidsjaur.se/kulturfritid/ungiarvidsjaur/ungdomsprojektpengar.944.html
+  - Sökande ska vara en ideell förening som uppfyller kommunens allmänna villkor för föreningsstöd
+  - Föreningen ska ha godkända stadgar, minst tio betalande medlemmar, organisationsnummer och demokratisk styrning
+  - Verksamheten ska huvudsakligen bedrivas i kommunen och vara öppen för alla
+  - Upplåtelsen ska följa kommunens särskilda boknings- och lokalregler
+  belopp: Avgiftsfri tillgång till vissa kommunala lokaler och anläggningar enligt särskilda regler
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam sista ansökningsdag
+  kalla_url: *huvud
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Ansökan görs genom att presentera sin idé för UPP-ansvariga (Katarina eller Emma, Kultur & fritid); besked lämnas
-    inom max 7 dagar. Ingen ansökningsfrist anges i kommunens material.
-  min_medlemmar: null
-  alder_min: 13
-  alder_max: 25
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: true
-  sate_i_kommunen: true
-  status: aktiv
-  senast_verifierad: '2026-08-06'
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: arvidsjaur-drifts-och-prestationsavtal
+  namn: Drifts- och prestationsavtal med föreningar
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Ideella föreningar som driver en kommunal anläggning eller utför en särskild prestation
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsstöd
+  - Driftsavtal kan avse en kommunal anläggning och anpassas efter anläggningstyp samt helårs- eller säsongsverksamhet
+  - Avtal om annan ersättning ska avse en specificerad prestation för kommunen
+  - Uppdrag, ersättning, redovisning och övriga villkor ska framgå av avtalet
+  belopp: Ersättning enligt individuellt drift- eller prestationsavtal; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam ansökningsfrist
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: arvidsjaur-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  vad: Grundvillkor för föreningsstöd
+  beskrivning: Föreningen ska ha godkända stadgar, minst tio betalande medlemmar, organisationsnummer och konto, vara demokratiskt styrd och öppen för alla samt huvudsakligen ha verksamhet och medlemmar i kommunen. Ekonomiska, politiska, religiösa och rena stödföreningar omfattas inte.
+  system: Kommunens e-tjänst och Rbok
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://arvidsjaur.se/kultur-fritid/foreningar/
-  giltighet_status: okand
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
 kommunsiffra: null
