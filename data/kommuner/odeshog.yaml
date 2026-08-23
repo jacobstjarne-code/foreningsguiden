@@ -2,156 +2,468 @@ kommun: Ödeshög
 kommun_slug: odeshog
 lan: Östergötlands län
 befolkning: 5206
-forvaltning: Kultur och fritid
-ansokningssystem:
-  namn: Självserviceportal
-  url: https://minasidor.odeshog.se/
+forvaltning: Kultur och fritid samt Socialnämnden
+ansokningssystem: {namn: Ödeshögs självserviceportal och blanketter, url: https://minasidor.odeshog.se/}
 kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-verifierad: '2026-07-31'
+verifierad: 2026-08-23
+giltighet_regel:
+  typ: manader_efter_arsmote
+  antal: 2
+  datum: null
+  kalla_url: &norm https://www.odeshog.se/download/18.197f050019a0a37662917706/1761648562600/Riktlinjer-for-bidrag-till-foreningar-och-studieforbund-t.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: odeshog-startbidrag
   namn: Startbidrag
-  kategori:
-  - ovrig
-  malgrupp: Nybildade föreningar
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nystartade ideella föreningar
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska vara bildad och ha minst 15 medlemmar
+  - Ansökan ska redovisa styrelse, medlemsavgifter, medlemsantal och planerad verksamhet
+  - Stadgar och protokoll från det konstituerande mötet ska bifogas
   belopp: 2 000 kronor
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: ingen_regel
-  krav_fullstandiga: null
-  anteckning: null
-- id: odeshog-verksamhetsbidrag
-  namn: Verksamhetsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Föreningar med ungdomsverksamhet eller annan ideell verksamhet
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
-  krav:
-  - Kan endast sökas av förening med verksamhet för barn och unga i åldern 4–25 år
-  - Enkel sammankomst kräver 3–11 deltagare i åldern 4–25 år och minst en ledare
-  - Dubbel sammankomst kräver minst 12 deltagare i åldern 4–25 år och minst två ledare
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-  belopp_status: okand
-  deadline_status: olast
+  sen_ansokan: Ansökan kan lämnas löpande efter att föreningen har bildats
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: null
-- id: odeshog-hyresbidrag
-  namn: Hyresbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar med ungdomsverksamhet och lokalhyra
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-  krav:
-  - Kan endast sökas av föreningar med ungdomsverksamhet
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: odeshog-anlaggningsbidrag
   namn: Anläggningsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar med egen anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: ingen_regel
-  krav_fullstandiga: null
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar med ungdomsverksamhet och egen eller arrenderad anläggning
+  deadlines: {typ: fasta, datum: [04-01]}
+  krav:
+  - Anläggningen ska ägas av föreningen eller disponeras genom minst ettårigt arrende och ligga i Ödeshög
+  - Anläggningen ska vara försäkrad och efter överenskommelse upplåtas till kommunen och andra föreningar till självkostnadspris
+  - Färre än 20 sammankomster föregående år medför nedtrappning till 50 procent första året, 25 procent andra året och därefter inget stöd
+  belopp: Fotbollsplan 3 750–31 250 kronor, isbana 3 125 kronor, föreningslokal 125 kronor per kvadratmeter upp till 200 kvadratmeter, tennisbana 7 500 kronor, skjutbana 3 125 kronor, snökanon 31 250 kronor, elljusspår eller skidstadion 21 250 kronor, motorbana och ridbana 6 250 kronor, motionsspår 1 250 kronor per kilometer, ridhus 50 000 kronor, ridstall 62 kronor per kvadratmeter och lägergård 2 500 kronor
+  sen_ansokan: Senast 1 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-verksamhetsbidrag
+  namn: Verksamhetsbidrag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar med gruppverksamhet för barn och unga 4–25 år
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
+  krav:
+  - Enkel sammankomst ska ha 3–11 deltagare och en ledare; dubbel ska ha minst 12 deltagare och två ledare
+  - Sammankomsten ska pågå minst 60 minuter, vara beslutad och ekonomiskt planerad samt genomföras av lokalavdelningen
+  - Närvarokort ska föras; samma deltagare får bara räknas en gång per dag och entréarrangemang, kommersiella aktiviteter och studiecirklar räknas inte
+  belopp: 130 kronor per enkel sammankomst och 260 kronor per dubbel sammankomst
+  sen_ansokan: Senast 25 februari och 25 augusti; sista 45 dagarnas ännu oredovisade aktiviteter får föras till nästa period
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-hyresbidrag
+  namn: Hyresbidrag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar med barn- och ungdomsverksamhet och externa hyreskostnader
+  deadlines: {typ: fasta, datum: [04-01]}
+  krav:
+  - Föreningen ska ha minst 20 godkända sammankomster och 20 aktiva medlemmar 4–25 år under föregående kalenderår
+  - Stödet gäller betald hyra för lokal, arrende eller anläggning men inte kommersiella arrangemang eller arrangemang med entré
+  - Kostnaden ska kunna styrkas med resultaträkning eller betalningsverifikationer
+  belopp: 45 procent av verifierad kostnad för klubblokal och arrende samt 30 procent för tillfällig hyra av sporthall eller aktivitetslokal
+  sen_ansokan: Senast 1 april för föregående kalenderårs kostnader
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: odeshog-investeringsbidrag
   namn: Investeringsbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som planerar investeringar för nästkommande år
-  deadlines:
-    typ: fasta
-    datum:
-    - 04-01
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade föreningar som investerar i egen eller arrenderad anläggning
+  deadlines: {typ: fasta, datum: [04-01]}
   krav:
-  - Projektet får inte påbörjas före beslut
-  belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-  belopp_status: okand
-  deadline_status: olast
+  - Anläggningen ska ägas eller disponeras genom minst ettårigt arrende och ligga i Ödeshög
+  - Projektet får inte starta före beslut och ansökan ska styrkas av sakkunnig eller offerter
+  - Statliga stöd ska sökas och avräknas; driftliknande underhåll stöds inte och kommunens stöd ska synliggöras
+  belopp: 50 procent av godkänd kostnad för nyanläggning, reparation eller nyanskaffning; eget arbete värderas till 120 kronor per timme
+  sen_ansokan: Senast 1 april för investering nästkommande år; projektet får inte påbörjas före beslut
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
   anteckning: null
 - id: odeshog-arrangemangsbidrag
   namn: Arrangemangsbidrag
-  kategori:
-  - kultur
-  malgrupp: Föreningar som genomför arrangemang
-  deadlines:
-    typ: okand
-    datum: []
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade föreningar med offentliga arrangemang för kommuninvånare
+  deadlines: {typ: relativ, datum: []}
   krav:
-  - Redovisning krävs efter arrangemanget
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://minasidor.odeshog.se/
-  belopp_status: okand
-  deadline_status: okand
+  - Arrangemanget ska vara offentligt och riktat till kommunens invånare
+  - Ansökan ska beskriva arrangemanget och innehålla kalkyl över intäkter och kostnader
+  - Egen arbetsinsats och egen lokalhyra får inte räknas som kostnad och arrangemanget ska redovisas efteråt
+  belopp: Underskottstäckning med högst 3 000 kronor per arrangemang; direkt bidrag lämnas bara undantagsvis
+  sen_ansokan: Senast två månader före arrangemanget; undantag kan medges under särskilda omständigheter
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: E-tjänsten visar att bidraget är sökbart men offentlig sida anger inte exakt deadline. Ej angivet i källan
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-namndens-forfogande
+  namn: Bidrag till kommunstyrelsens förfogande
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Registrerade föreningar med angelägen verksamhet som inte ryms i andra stöd
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Sökanden ska vara registrerad förening i Ödeshög
+  - Insatsen ska falla utanför kommunens övriga stödformer och bedömas som angelägen
+  - Stödet kan avse särskild eller oförutsedd verksamhet, samarrangemang, försök eller drogförebyggande kampanj
+  belopp: Kommunen publicerar ingen fast beloppsnivå; varje ansökan prövas särskilt
+  sen_ansokan: Egenformulerad ansökan kan lämnas löpande under året
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-biografstod
+  namn: Biografstöd till Biografföreningen Tusen och en natt
+  kategori: [kultur]
+  malgrupp: Biografföreningen Tusen och en natt
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Mottagaren ska vara Biografföreningen Tusen och en natt
+  - Föreningen ska driva biografverksamheten
+  - Föreningen ska visa film för allmänheten
+  belopp: 48 000 kronor per år
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: &main https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är knutet till den namngivna biografföreningen.
+- id: odeshog-hembygdsforening-skotselstod
+  namn: Skötselstöd till Ödeshögs hembygdsförening
+  kategori: [kultur, ovrig]
+  malgrupp: Ödeshögs hembygdsförening
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Mottagaren ska vara Ödeshögs hembygdsförening
+  - Stödet ska användas för föreningens skötseluppdrag
+  - Föreningen ska uppfylla kommunens allmänna villkor för registrerade ideella föreningar
+  belopp: 40 000 kronor per år
+  sen_ansokan: Kommunen publicerar ingen särskild ansökningsfrist
+  kalla_url: *main
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [hembygd]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är knutet till den namngivna hembygdsföreningen.
 - id: odeshog-foreningsbidrag-for-lokalforvaltande-organisation
   namn: Föreningsbidrag för lokalförvaltande organisation
-  kategori:
-  - ovrig
-  malgrupp: Organisationer som förvaltar lokal
-  deadlines:
-    typ: okand
-    datum: []
+  kategori: [kultur, social, ovrig]
+  malgrupp: Föreningar vars huvuduppgift är att tillhandahålla lokaler för uthyrning
+  deadlines: {typ: fasta, datum: [04-01]}
   krav:
-  - Förening som till huvudsak har till uppgift att tillhandahålla lokaler för uthyrning, till exempel bygdegårdsföreningar
-    och Folkets hus- och parkföreningar
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://minasidor.odeshog.se/
-  belopp_status: okand
-  deadline_status: okand
+  - Föreningen ska huvudsakligen tillhandahålla lokaler för uthyrning och själv äga anläggningen
+  - Lokalen ska efter överenskommelse upplåtas till kommunen och andra föreningar till självkostnadspris
+  - Uthyrning till annan juridisk person ska anmälas och ansökan ska redovisa kostnader och hyresintäkter
+  belopp: 50 procent av kostnader för bränsle, el, vatten, renhållning, sotning och försäkringar
+  sen_ansokan: Senast 1 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ej angivet i källan
+  krav_fullstandiga: true
+  foreningstyp: [kultur, hembygd, social, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-forening-funktionsnedsattning
+  namn: Bidrag till förening för personer med funktionsnedsättning
+  kategori: [social, funktionsratt]
+  malgrupp: Föreningar som tillvaratar intressen för personer med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [04-01]}
+  krav:
+  - Föreningens syfte ska vara att tillvarata intressen för personer med funktionsnedsättning
+  - Endast medlemmar bosatta i Ödeshög räknas i bidragsunderlaget
+  - Föreningen får ligga i annan kommun och undantas från kravet på minst 15 medlemmar
+  belopp: 100 kronor per medlem bosatt i Ödeshög, högst 3 000 kronor
+  sen_ansokan: Senast 1 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [social, annat]
+  kraver_registrering: true
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-studieforbundsbidrag
+  namn: Studieförbundsbidrag
+  kategori: [kultur, social, ovrig]
+  malgrupp: Studieförbund med verksamhet i Ödeshög
+  deadlines: {typ: fasta, datum: [04-15]}
+  krav:
+  - Studieförbundet ska bedriva verksamhet i Ödeshögs kommun
+  - Ansökan ska lämnas på Östergötlands Bildningsförbunds särskilda blankett med begärda bilagor
+  - Volym- och målgruppsdelarna beräknas på Folkbildningsrådsdefinierade studietimmar under senast redovisade verksamhetsår
+  belopp: null
+  sen_ansokan: Senast 15 april till Östergötlands Bildningsförbund, som sammanställer ansökningarna åt kommunen
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens studieförbundsanslag fördelas som 60 procent basbidrag, 30 procent volymbidrag och 10 procent målgruppsbidrag; totalsumman publiceras inte
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, social, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Bildningsförbundet tar emot och sammanställer ansökningarna, men Ödeshögs kommun finansierar och betalar det kommunala anslaget.
+- id: odeshog-lovbidrag-2026
+  namn: Tillfälligt lovbidrag 2026
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som ordnar lovaktiviteter för barn och unga 4–25 år
+  deadlines: {typ: fasta, datum: [06-18, 09-07]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna föreningsvillkor
+  - Föreningen ska ha verksamhet för barn och unga 4–25 år
+  - Ansökan ska avse en aktivitet under sommar- eller höstlovet 2026 och lämnas i rätt ansökningsperiod
+  belopp: null
+  sen_ansokan: Sommaromgången var öppen 4–18 juni och höstomgången 24 augusti–7 september 2026
+  kalla_url: *main
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: 100 000 kronor under 2026, fördelat efter antalet ansökningar utan individuellt tak
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödformen är tillfällig och gäller endast lovaktiviteter under 2026.
+- id: odeshog-kulturstipendium
+  namn: Kulturstipendium
+  kategori: [kultur]
+  malgrupp: Föreningar, organisationer och personer som främjar kulturell verksamhet
+  deadlines: {typ: fasta, datum: [08-01]}
+  krav:
+  - Insatsen ska främja kulturell verksamhet inom Ödeshögs kommun
+  - Ansökan eller nomineringen ska lämnas skriftligt till kommunen
+  - Ansökan eller nomineringen ska innehålla en egenformulerad motivering
+  belopp: 10 000 kronor
+  sen_ansokan: Senast 1 augusti
+  kalla_url: &stip https://www.odeshog.se/upplevaochgora/kultur/bidragstodstipendium/kulturochledarstipendium.4.78ae827d1605526e94b6163c.html
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, hembygd, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stipendiet kan även tilldelas enskilda personer, så föreningar konkurrerar med individuella sökande och nominerade.
+- id: odeshog-ledarstipendium
+  namn: Ledarstipendium
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar, grupper och personer med ledarinsatser i föreningslivet
+  deadlines: {typ: fasta, datum: [08-01]}
+  krav:
+  - Insatsen ska avse ledarskap inom det frivilliga föreningslivet
+  - Ansökan eller nomineringen ska lämnas skriftligt till kommunen
+  - Ansökan eller nomineringen ska innehålla en egenformulerad motivering
+  belopp: 10 000 kronor
+  sen_ansokan: Senast 1 augusti
+  kalla_url: *stip
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stipendiet kan även tilldelas personer och grupper, så föreningar konkurrerar med andra mottagartyper.
+- id: odeshog-pensionarsforeningsbidrag
+  namn: Bidrag till pensionärsföreningar
+  kategori: [social, pensionar]
+  malgrupp: Pensionärsföreningar med verksamhet för äldre i Ödeshög
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Sökanden ska vara pensionärsförening med lokal verksamhet för äldre i Ödeshög
+  - Ansökan ska lämnas till socialnämnden och uppfylla nämndens antagna riktlinjer
+  - Föreningen ska lämna verksamhetsberättelse från avslutat verksamhetsår
+  belopp: Socialnämnden beslutar storleken varje år; 2025 beviljades 10 000 kronor per godkänd förening
+  sen_ansokan: Ingen permanent sista dag publiceras; för 2025 förlängdes fristen till 1 november
+  kalla_url: https://www.odeshog.se/download/18.5e1113f4199c8fb9cf211f66/1760451347528/socialn%C3%A4mndens-protokoll-2025-09-22.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [social, annat]
+  kraver_registrering: false
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-socialt-foreningsbidrag
+  namn: Bidrag till allmännyttig verksamhet inom den sociala sektorn
+  kategori: [social]
+  malgrupp: Ideella föreningar och organisationer med verksamhet inom socialnämndens områden
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Sökanden ska vara förening eller organisation med allmännyttig verksamhet inom socialnämndens område
+  - Verksamheten ska ge stöd eller nytta till invånare i Ödeshögs kommun
+  - Ansökan ska beskriva verksamheten och föreningen ska lämna verksamhetsberättelse
+  belopp: Socialnämnden beslutar beloppet efter individuell prövning; ingen generell nivå publiceras
+  sen_ansokan: Kommunen publicerar ingen permanent ansökningsfrist
+  kalla_url: https://www.odeshog.se/download/18.2311bdad19271695c5733fe5/1729513426990/2024-09-16%20Socialn%C3%A4mndens%20protokoll.pdf
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [social, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: odeshog-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler och anläggningar
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Godkända registrerade föreningar som hyr kommunal lokal eller anläggning
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska vara godkänd och registrerad i kommunens föreningsregister
+  - Föreningen ska uppfylla allmänna villkor och ha lämnat aktuella kontakt- och årsmöteshandlingar
+  - Bokningen ska avse kommunal lokal eller anläggning som omfattas av föreningstaxan
+  belopp: Subventionerad hyra enligt kommunens föreningstaxa; generell rabatt eller nivå publiceras inte i bidragsriktlinjen
+  sen_ansokan: Stödet erhålls vid bokning; ingen separat ansökningsfrist publiceras
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
 forutsattningar:
 - id: odeshog-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Självserviceportal
+  vad: Godkänd och registrerad förening
+  beskrivning: Föreningen ska vara ideell, ha säte och huvuddelen av medlemmarna i Ödeshög, antagna stadgar, vald styrelse, organisationsnummer, e-postadress och föreningskonto samt bedriva demokratisk, öppen, trygg och drogfri verksamhet.
+  system: Ödeshögs föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Före första ansökan
+  giltighet: Kontaktuppgifter och årshandlingar uppdateras årligen senast två månader efter årsmötet
   ordning: 1
-  kalla_url: https://www.odeshog.se/upplevaochgora/foreningarforeningsliv/bidragstodstipendier.4.78ae827d1605526e94b6179c.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
+- id: odeshog-arsmoteshandlingar
+  vad: Årlig uppdatering efter årsmötet
+  beskrivning: Föreningar med bidrag eller föreningstaxa ska lämna årsmötesprotokoll, verksamhetsberättelse, ekonomisk berättelse och revisionsberättelse samt uppdatera kontaktuppgifterna.
+  system: Ödeshögs föreningsregister
+  ledtid: 60
+  ledtid_text: Senast två månader efter genomfört årsmöte
+  giltighet: Årlig uppdatering
+  ordning: 2
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
