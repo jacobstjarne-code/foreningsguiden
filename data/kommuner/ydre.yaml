@@ -4,197 +4,277 @@ lan: Östergötlands län
 befolkning: 3612
 forvaltning: Kommunstyrelsen
 ansokningssystem:
-  namn: Blankett/e-tjänst
-  url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag
-kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-verifierad: '2026-08-02'
+  namn: Ydre kommuns e-tjänster och blanketter
+  url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/blanketter-och-e-tjanster
+kalla_url: &main https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.ydre.se/download/18.1b75e5cb18c8ae57ebc102fe/1705070973270/Regler%20f%C3%B6r%20f%C3%B6reningsbidrag%20fr%C3%A5n%202024-01-01%20-%20antagna%20i%20Kf%202023-12-11%20%C2%A7%2085.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: ydre-grundbidrag
   namn: Grundbidrag
-  kategori:
-  - ovrig
+  kategori: [ovrig]
   malgrupp: Bidragsberättigade föreningar i Ydre kommun
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
+  deadlines: {typ: fasta, datum: [02-25]}
   krav:
-  - Minst sex månaders verksamhet
-  - Minst tio betalande medlemmar
-  belopp: 25 kr per medlem; lägst 250 kr och högst 5 000 kr per år
-  sen_ansokan: För sen ansökan riskerar att inte behandlas
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  - Föreningen ska ha varit verksam minst sex månader och ha minst tio betalande medlemmar med en medlemsavgift på minst 50 kronor, om inte kommunen medger ett särskilt motiverat undantag
+  - Medlemsantalet ska avse betalande medlemmar i medlemsförteckningen den 31 december föregående år
+  - Föreningen ska ha styrelse, stadgar, organisationsnummer, riksanslutning eller motsvarande samt vara demokratiskt och ideellt inriktad
+  belopp: 25 kronor per medlem; lägst 250 kronor och högst 5 000 kronor per år
+  sen_ansokan: Ansökan efter 25 februari riskerar att inte behandlas
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: ydre-aktivitetsstod
-  namn: Aktivitetsstöd
-  kategori:
-  - idrott
-  - kultur
-  - funktionsratt
-  - ovrig
+  namn: Kommunalt lokalt aktivitetsstöd
+  kategori: [idrott, kultur, funktionsratt, ovrig]
   malgrupp: Föreningar med barn- och ungdomsverksamhet eller verksamhet för personer med funktionsnedsättning
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
   krav:
-  - Planerad ledarledd gruppaktivitet på minst 45 minuter
-  - Minst tre deltagare utöver ledare
-  belopp: 25 kr i ledarstöd, 5 kr extra ledarstöd och cirka 7 kr per deltagare och aktivitet
-  sen_ansokan: För sen ansökan riskerar att inte behandlas
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Aktiviteten ska vara beslutad och ekonomiskt planerad, pågå minst 45 minuter och ha minst tre deltagare utöver ledaren
+  - Deltagare får vara högst 25 år; för deltagare med funktionsnedsättning finns ingen övre åldersgräns
+  - Ledaren ska fylla minst 13 år, vara medlem och närvara hela aktiviteten; högst 20 deltagare får räknas per ledare
+  - En deltagare får räknas högst en gång per dag i samma förening och närvarounderlag ska sparas i minst tre år
+  - Entrébelagda tävlingar, kommersiella arrangemang, studiecirklar, skoltid och verksamhet som får annat stöd räknas inte
+  belopp: 25 kronor per ledarledd gruppaktivitet, 5 kronor i extra ledarstöd vid minst två ledare och cirka 7 kronor per deltagare och aktivitetstillfälle
+  sen_ansokan: Senast 25 februari för 1 juli–31 december och 25 augusti för 1 januari–30 juni; sena ansökningar riskerar att inte behandlas
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Detta är Ydre kommuns eget aktivitetsstöd. Det statliga LOK-stödet från Riksidrottsförbundet är ett separat nationellt stöd och ingår inte i kommunposten.
 - id: ydre-anlaggningsbidrag-investering
   namn: Anläggningsbidrag – investering
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som äger eller driver anläggning under ägarliknande förhållanden
-  deadlines:
-    typ: lopande
-    datum: []
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som äger eller långsiktigt disponerar en anläggning
+  deadlines: {typ: lopande, datum: []}
   krav:
-  - Projektet får inte vara påbörjat före ansökan
-  - Nyttjanderätt eller arrende ska normalt löpa minst tre år
-  belopp: Högst 75 000 kr per projekt
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  - Föreningen ska äga anläggningen eller ha nyttjanderätt eller arrende som löper minst tre år från ansökningsdagen
+  - Projektet får inte vara påbörjat när ansökan lämnas och föreningen kan få stöd högst en gång per år och specialidrott
+  - Stödet kan avse nya aktivitetsmiljöer, renovering, energi- och miljöåtgärder samt säkerhets- och trygghetsprojekt enligt normens avgränsningar
+  - Ansökan ska innehålla investeringskalkyl, finansieringsplan, offerter eller kostnadsunderlag och undertecknat styrelseprotokoll
+  - Projekt och faktiska kostnader ska återrapporteras senast ett år efter beslut
+  belopp: Högst 75 000 kronor per projekt
+  sen_ansokan: Ansökan kan lämnas löpande under året men projektet får inte ha påbörjats
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: ydre-anlaggningsbidrag-drift
   namn: Anläggningsbidrag – drift
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som ansvarar för samtliga driftkostnader för egen eller ägarlikt disponerad anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 08-25
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som ansvarar för samtliga driftkostnader för en egen eller ägarlikt disponerad anläggning
+  deadlines: {typ: fasta, datum: [08-25]}
   krav:
-  - Anläggningen ska vara i användbart skick
-  - Kommunen får besikta anläggningen
+  - Föreningen ska äga anläggningen eller ha nyttjanderätt eller arrende som löper minst tre år från ansökningsdagen och själv svara för samtliga driftkostnader
+  - En ny anläggning ska godkännas före utbetalning; begäran om omvärdering ska lämnas senast 1 april
+  - Anläggningen ska vara användbar, kunna besiktas årligen och i mån av utrymme upplåtas till kommunen och andra Ydreföreningar på rimliga marknadsvillkor
+  - Underlaget omfattar godkända drift- och skötselkostnader efter avräkning av hyresintäkter, lokalens faciliteter, skött anläggningsyta och aktivitetsmiljöer
   belopp: null
-  sen_ansokan: För sen ansökan riskerar att inte behandlas
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
+  sen_ansokan: Ansökan för nästkommande års drift ska lämnas senast 25 augusti
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens samlade driftanslag fördelas proportionellt efter föreningarnas kostnadsunderlag, lokalpoäng, anläggningsyta och aktivitetsmiljöer; totalsumman publiceras inte
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: ydre-anlaggningsbidrag-hyra
   namn: Anläggningsbidrag – hyreskostnader
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
+  kategori: [idrott, kultur, ovrig]
   malgrupp: Föreningar med bidragsberättigad barn- och ungdomsverksamhet i externt hyrd lokal eller anläggning
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
+  deadlines: {typ: fasta, datum: [02-25]}
   krav:
-  - Hyreskostnader ska styrkas
-  belopp: 75 procent av hyreskostnaden, högst 10 000 kr per förening och år
-  sen_ansokan: För sen ansökan riskerar att inte behandlas
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  - Föreningen ska uppfylla aktivitetsstödets villkor och hyran ska avse barn- och ungdomsverksamhet till och med 25 år
+  - Stödet gäller icke-kommunal inom- eller utomhusanläggning samt vissa kostnader för expeditions- eller klubblokal
+  - Samma lokal får inte samtidigt få driftbidrag, och kostnader vid entrébelagd verksamhet räknas inte
+  - Föregående års kostnader ska styrkas med hyresvärdsintyg, hyresverifikationer eller fakturor
+  belopp: 75 procent av föregående kalenderårs hyreskostnad, högst 10 000 kronor per förening och år
+  sen_ansokan: Ansökan för föregående års kostnader ska lämnas senast 25 februari
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: ydre-utvecklingsbidrag
   namn: Utvecklingsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Föreningar som vill utveckla verksamhet, idéer, insatser eller projekt
-  deadlines:
-    typ: fasta
-    datum:
-    - 02-25
-    - 08-25
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Föreningar som vill utveckla sin verksamhet genom en satsning, idé, uppstart eller ett projekt
+  deadlines: {typ: fasta, datum: [02-25, 08-25]}
   krav:
-  - Dialogmöte med kommunen ingår i bedömningen
-  belopp: Högst 25 000 kr per projekt och förening och år
-  sen_ansokan: För sen ansökan riskerar att inte behandlas
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: olast
-  deadline_status: olast
-  krav_status: olast
+  - Insatsen ska innebära utveckling eller kvalitetshöjning av föreningens verksamhet
+  - Föreningen ska lämna en digital grundansökan och delta i ett dialogmöte med kommunen
+  - Inför dialogen ska projektbeskrivning, syfte, målgrupp, tidsplan och budget eller kalkyl vara förberedda
+  - Stödet är i första hand inte avsett för rena utrustningsinköp
+  - Insatsen ska återrapporteras senast ett år efter beslut
+  belopp: Högst 25 000 kronor per projekt och förening och år
+  sen_ansokan: Senast 25 februari inför vårens dialogmöte och 25 augusti inför höstens
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: null
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
 - id: ydre-arrangemangsbidrag
   namn: Arrangemangsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar som genomför arrangemang av värde för Ydrebygden
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Ideella föreningar som genomför publika arrangemang av värde för Ydrebygden
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Arrangemanget ska vara öppet för allmänheten, relevant för kommunens kulturliv eller samhällsutveckling och marknadsföras offentligt
+  - Ansökan ska beskriva publik räckvidd, delaktighet och resurser samt innehålla budget och redovisning av andra sökta eller beviljade bidrag
+  - Kommunens stöd ska framgå i informationsmaterial och förändringar eller uppskjutet genomförande ska meddelas omedelbart
+  - Arrangemanget ska redovisas senast två månader efter att det avslutats
+  belopp: Högst 50 000 kronor per arrangemang eller aktivitet och högst 50 000 kronor per förening och år
+  sen_ansokan: Ansökan ska komma in senast två månader före arrangemanget
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: null
 - id: ydre-snabba-cash
   namn: Snabba Cash – kultur- och fritidsbidrag för unga
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Unga som vill genomföra kultur- eller fritidsaktiviteter
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Unga 13–30 år och föreningar som genomför unga personers kultur- eller fritidsprojekt
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Projektet ska initieras och drivas av unga 13–30 år och sökanden ska vara skriven i Ydre
+  - Projektet ska vara publikt eller offentligt, äga rum i Ydre och ha konstnärlig, kulturell eller fritidsinriktad karaktär
+  - Stöd lämnas inte till vuxendrivna projekt, projekt där alkohol serveras, lön, uppehälle, välgörenhet eller skolarbete
+  belopp: Högst 7 000 kronor per ansökan
+  sen_ansokan: Stödet kan sökas löpande men ansökan ska lämnas senast fyra veckor före arrangemanget
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Stödet kan sökas av både föreningar och enskilda unga, vilket innebär att föreningar konkurrerar om stödet även med privatpersoner.
+- id: ydre-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  malgrupp: Studieförbund med statsbidragsberättigad verksamhet i Ydre kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Studieförbundet ska vara godkänt av Folkbildningsrådet för statsanslag
+  - Studieförbundet ska finnas i kommunens föreningsregister, med särskilt undantag för Folkuniversitetet
+  - Verksamheten i kommunen ska generera mer än 500 kronor enligt fördelningsmodellen; annars fördelas beloppet till övriga berättigade studieförbund
+  - Kommunalfinansierad verksamhet ska rapporteras i Gustav och slutredovisas till SCB i STUV, medan Bildningsförbundet Östergötland lämnar samlad kommunredovisning
   belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  anteckning: Ej angivet i källan
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist; underlaget lämnas samlat genom Bildningsförbundet Östergötland
+  kalla_url: &study https://www.ydre.se/download/18.6833d2c219ddca7f633c355/1778766872976/Reglemente%20f%C3%B6r%20bidrag%20till%20studief%C3%B6rbunden%20f%C3%B6rslag%20fastst%C3%A4lld%202026-05-11.pdf
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas med 50 procent organisationsbidrag efter de två senaste årens utbetalningar och 50 procent verksamhetsbidrag enligt Folkbildningsrådets kommunmodell; totalsumman publiceras inte
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, annat]
+  kraver_registrering: true
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Det är ett kommunalt bidrag som Ydre kommun beslutar och betalar; statsbidragsgodkännandet och Folkbildningsrådets modell används som behörighets- och fördelningsunderlag.
+- id: ydre-bygdepeng
+  namn: Bygdepeng
+  kategori: [social, ovrig]
+  malgrupp: Lokala utvecklingsgrupper, föreningar eller grupper av boende som samlar bygden kring gemensam utveckling
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Gruppen ska verka för alla boende inom ett avgränsat landsbygdsområde eller en ort med färre än 1 000 invånare
+  - Endast en utvecklingsgrupp per geografiskt område kan få stödet och gruppen ska bjuda in boende och föreningar till gemensamma beslut
+  - Pengarna ska användas till omkostnader för lokalt utvecklingsarbete och får inte användas till lön
+  - Slutredovisning med användning och effekter ska lämnas senast 31 oktober; tidigare stöd ska vara förbrukat eller bundet till ett bestämt ändamål före ny ansökan
+  belopp: 6 000 kronor per bygdepeng, varav Ydre kommun bidrar med 2 000 kronor och Region Östergötland med 4 000 kronor
+  sen_ansokan: Ansökan lämnas i början av året; kommunen publicerar inget fast sista ansökningsdatum. Slutredovisning ska lämnas senast 31 oktober
+  kalla_url: &bygdepeng https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bygdepeng
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Även grupper av boende kan söka. Stödet samfinansieras av kommunen och Region Östergötland men ansökan hanteras via kommunen och Ydre står för den kommunala delen.
 forutsattningar:
-- id: ydre-registrering
-  vad: Registrering och aktuella föreningshandlingar
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och hålla stadgar, styrelse- och
-    årsmöteshandlingar aktuella.
-  system: Blankett/e-tjänst
+- id: ydre-bidragsberattigad-forening
+  vad: Bidragsberättigad och årligen uppdaterad förening
+  beskrivning: Föreningen ska ha varit verksam minst sex månader, ha minst tio betalande medlemmar, styrelse, stadgar, organisationsnummer och riksanslutning eller liknande samt vara demokratiskt och ideellt inriktad och säkerställa en alkohol-, drog- och dopingfri verksamhet. Varje år ska föreningen lämna verksamhetsberättelse med ekonomi, revisionsberättelse, aktuell budget, undertecknat årsmötesprotokoll och verksamhets- eller aktivitetsplan.
+  system: Ydre kommuns e-tjänster och blanketter
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Årligen; kommunen publicerar inget gemensamt fast datum för handlingarna
+  giltighet: Kalenderår
   ordning: 1
-  kalla_url: https://www.ydre.se/ydre-kommun/kultur-och-fritid/foreningar-och-foreningsbidrag/bidragsregler
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
