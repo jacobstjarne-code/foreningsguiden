@@ -1,0 +1,455 @@
+---
+// IdrottsIngangen — runda 21 (incoming/IDROTTSINGANGEN_21.md). Den
+// generiska mallen bakom /idrott/; en specialisering (t.ex. /bandy/)
+// kostar en lista och en mening (F4/"Till Code"): identitetsord,
+// enhetslista (valfri), vinkelmening — ingen ny layout, inga nya
+// komponenter.
+//
+// V1.1: nationella halvan läser lok.datum[]/lok.sanktioner[] — ingen
+// hårdkodad copy för datum/procentsatser. Det EXAKTA datat läses ur
+// `stod` (NationelltStod, props), aldrig skrivet in i mallen.
+// V1.3: övergången (formuläret längst ner) postar bara `kommun` —
+// sidtypen (den här mallen) bär redan idrotten, ingen egen fråga om det.
+import type { NationelltStod } from '../lib/nationellaTyper';
+import type { Kommun } from '../lib/kommuner';
+import { formatRecurringDate } from '../lib/kommuner';
+import { IDROTT_INGANGEN } from '../lib/content';
+import SanctionLadder from './SanctionLadder.astro';
+
+export interface EnhetslistaItem {
+  namn: string;
+  beskrivning?: string;
+}
+
+export interface Props {
+  /** t.ex. "idrottsförening", "bandyförening" — H2/ctx-raden böjs av det här ordet. */
+  identitetsord: string;
+  /** Bara satt när idrotten har ett eget register/riksförbund att lista (t.ex. bandy) — /idrott/ har inget. */
+  enhetslista?: EnhetslistaItem[];
+  /** Sidans lede/underrubrik — "var pengarna sitter" för DEN idrotten. /idrott/ använder den generiska ramtexten. */
+  vinkelmening: string;
+  /** LOK-stödet — nationell data, samma i alla 290 kommuner. */
+  stod: NationelltStod;
+  /** Kommunlistan till övergångens autocomplete/lookup (namn → slug). */
+  kommuner: Kommun[];
+}
+
+const { identitetsord, enhetslista, vinkelmening, stod, kommuner } = Astro.props;
+
+// Kort kategoriord för ctx-raden ("Idrott · en ingång för
+// idrottsföreningar") — härlett ur identitetsord, inte en egen
+// hårdkodad sträng. Håller för alla nuvarande/förutsedda värden
+// ("idrottsförening" → "Idrott", "bandyförening" → "Bandy"); om ett
+// framtida identitetsord inte slutar på "förening" blir resultatet
+// mindre snyggt men aldrig fel-brytande — ren visningstext.
+// V2 (rättning 2026-08-19): matchade tidigare bara "förening$" och lät
+// glidbokstaven "s" stå kvar ("idrottsförening" → "Idrotts"). Ordet
+// framför "förening" i en svensk sammansättning tar aldrig med sig
+// fogen-s — "s?förening$" stryper båda.
+const kortord = identitetsord.replace(/s?förening$/, '');
+const kortordStort = kortord.charAt(0).toUpperCase() + kortord.slice(1);
+const identitetsordPlural = `${identitetsord}ar`;
+
+// V1.1 — lok.datum[]: läses ur stod.deadlines.datum (MM-DD, återkommande).
+// V2 (rättning 2026-08-19): terminsetiketten beräknades tidigare på
+// DEADLINENS egen månad (fel — en augustideadline gäller vårens
+// aktiviteter, inte höstens). Rätt källa är perioden deadlinen AVSER
+// (stod.deadlines.perioder[].avser.fran).
+// V3 (rättning 2026-08-19): "höstterminen" vid en 25 februari-deadline
+// läses som "hösten som kommer", inte perioden som redan varit — ett
+// terminsNAMN kräver att läsaren själv räknar ut vilket år det syftar
+// på. Perioden i klartext ("avser 1 juli–31 december") kräver ingen
+// tolkning.
+const lokDatum = stod.deadlines.datum.map((mmdd) => {
+  const period = stod.deadlines.perioder.find((p) => p.datum === mmdd);
+  const avser = period ? `avser ${formatRecurringDate(period.avser.fran)}–${formatRecurringDate(period.avser.till)}` : '';
+  return {
+    mmdd,
+    text: formatRecurringDate(mmdd),
+    avser,
+  };
+});
+
+// V2 (rättning 2026-08-19): "sidan visar vad man kan förlora men aldrig
+// vad man kan få" — beloppen läses ur stod.belopp, samma disciplin som
+// datum/sanktioner (ingen hårdkodad krona/öre i mallen).
+function formatOre(ore: number): string {
+  return ore % 100 === 0 ? `${ore / 100}` : (ore / 100).toFixed(2).replace('.', ',');
+}
+const ledarstodText = `${formatOre(stod.belopp.ledarstod.en_ledare_ore)} kr per aktivitet, ${formatOre(stod.belopp.ledarstod.tva_eller_fler_ledare_ore)} kr vid två eller fler ledare`;
+const deltagarstodRader = stod.belopp.deltagarstod.map((grupp) => ({
+  namn: grupp.alder_max ? `${grupp.alder_min}–${grupp.alder_max} år` : `Från ${grupp.alder_min} år`,
+  belopp: `${grupp.tillfallen.map((t) => formatOre(t.belopp_ore)).join(' / ')} kr/tillfälle`,
+  tillampen: grupp.tillampen,
+}));
+
+const kommunNamnSlug = kommuner
+  .map((k) => ({ namn: k.kommun, slug: k.kommun_slug }))
+  .sort((a, b) => a.namn.localeCompare(b.namn, 'sv'));
+---
+<div class="idrott">
+  <div class="idrott__pad">
+    <p class="idrott__ctx">{kortordStort} · en ingång för {identitetsordPlural}</p>
+    <h2 class="idrott__h2">Vad kan en {identitetsord} söka?</h2>
+    <p class="idrott__lede">{vinkelmening}</p>
+  </div>
+
+  <!-- NATIONELLT -->
+  <div class="idrott__halfbanner idrott__halfbanner--nat"><span>{IDROTT_INGANGEN.nationelltBanner}</span><span class="idrott__rule"></span></div>
+
+  <!-- LOK-datum (V1.1: lok.datum[]) -->
+  <div class="idrott__lok">
+    <div class="idrott__lok-head">
+      <p class="idrott__lok-t">{stod.namn}</p>
+      <p class="idrott__lok-s">{IDROTT_INGANGEN.lokUnderrubrik}</p>
+    </div>
+    <div class="idrott__lok-dates">
+      {lokDatum.map((d) => (
+        <div class="idrott__lok-date">
+          <span class="fg-read-mark"></span>
+          <span class="idrott__lok-d">{d.text}</span>
+          <span class="idrott__lok-termin">{d.avser}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Beloppen (V2, rättning 2026-08-19: sidan visade vad man kan
+       förlora men aldrig vad man kan få — stod.belopp, innan
+       sanktionstrappan så ordningen blir "vad ni får" före "vad ni
+       kan tappa"). -->
+  <div class="idrott__belopp-wrap">
+    <p class="idrott__belopp-t">{IDROTT_INGANGEN.beloppRubrik}</p>
+    <div class="idrott__card">
+      <div class="idrott__row">
+        <span class="fg-read-mark"></span>
+        <span class="idrott__row-name">{IDROTT_INGANGEN.ledarstodRad}</span>
+        <span class="idrott__row-meta">{ledarstodText}</span>
+      </div>
+      {deltagarstodRader.map((rad) => (
+        <div class="idrott__row">
+          <span class="fg-read-mark"></span>
+          <span class="idrott__row-name">
+            {IDROTT_INGANGEN.deltagarstodRad} {rad.namn}
+            {rad.tillampen && <span class="idrott__row-fint">{rad.tillampen}</span>}
+          </span>
+          <span class="idrott__row-meta">{rad.belopp}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Sanktionstrappan (V1.1: lok.sanktioner[], V1.2: SanctionLadder utan tidslogik) -->
+  <div class="idrott__ladder-wrap">
+    <SanctionLadder steg={stod.sanktionstrappa.steg} />
+  </div>
+
+  <!-- RF + projektstöd -->
+  <div class="idrott__card">
+    <div class="idrott__row">
+      <span class="fg-read-mark"></span>
+      <span class="idrott__row-name">{IDROTT_INGANGEN.rfRad}</span>
+      <span class="idrott__row-meta">{IDROTT_INGANGEN.rfEtikett}</span>
+    </div>
+    <div class="idrott__row">
+      <span class="fg-void-mark"></span>
+      <span class="idrott__row-name idrott__row-name--void">{IDROTT_INGANGEN.projektstodRad}</span>
+      <span class="idrott__row-meta">{IDROTT_INGANGEN.projektstodEtikett}</span>
+    </div>
+  </div>
+  <p class="idrott__gate"><strong>{IDROTT_INGANGEN.gateFraga}</strong> {IDROTT_INGANGEN.gateSvar}</p>
+
+  {enhetslista && enhetslista.length > 0 && (
+    <div class="idrott__card idrott__card--enheter">
+      {enhetslista.map((e) => (
+        <div class="idrott__row">
+          <span class="fg-read-mark"></span>
+          <span class="idrott__row-name">{e.namn}</span>
+          {e.beskrivning && <span class="idrott__row-meta">{e.beskrivning}</span>}
+        </div>
+      ))}
+    </div>
+  )}
+
+  <!-- BEVAKNINGSFÅNGST — efter hela nationella halvan, före kommunövergången -->
+  <div class="idrott__capture" data-idrott-capture data-nationellt-stod-id={stod.id}>
+    <div class="idrott__capture-head">
+      <span class="fg-read-mark" style="background: var(--fg-on-accent);"></span>
+      <span>{IDROTT_INGANGEN.captureRubrik}</span>
+    </div>
+    <p class="idrott__capture-body">{IDROTT_INGANGEN.captureBodyForst}<strong>{IDROTT_INGANGEN.captureBodyStark}</strong>{IDROTT_INGANGEN.captureBodySist}</p>
+    <form class="idrott__capture-form" data-idrott-capture-form>
+      <input type="email" name="email" placeholder={IDROTT_INGANGEN.capturePlaceholder} required autocomplete="email" aria-label={IDROTT_INGANGEN.capturePlaceholder} />
+      <label class="idrott__capture-samtycke">
+        <input type="checkbox" name="samtycke" required />
+        {IDROTT_INGANGEN.captureSamtycke}
+      </label>
+      <button type="submit">{IDROTT_INGANGEN.captureKnapp}</button>
+    </form>
+    <p class="idrott__capture-kvitto" data-idrott-capture-kvitto hidden></p>
+    <p class="idrott__capture-fel" data-idrott-capture-fel hidden>Något gick fel. Försök igen.</p>
+    <p class="idrott__capture-fint">{IDROTT_INGANGEN.captureFint}</p>
+  </div>
+
+  <!-- ÖVERGÅNG (V1.3: postar bara kommun) -->
+  <div class="idrott__transit">
+    <p class="idrott__transit-t">{IDROTT_INGANGEN.transitRubrik}</p>
+    <p class="idrott__transit-s">{IDROTT_INGANGEN.transitBody}</p>
+    <form class="idrott__drag" data-idrott-transit-form>
+      <input type="text" name="kommun" list="idrott-kommunlista" placeholder={IDROTT_INGANGEN.transitPlaceholder} autocomplete="off" required />
+      <datalist id="idrott-kommunlista">
+        {kommunNamnSlug.map((k) => <option value={k.namn} />)}
+      </datalist>
+      <button type="submit" class="idrott__drag-knapp">{IDROTT_INGANGEN.transitKnapp}</button>
+    </form>
+    <p class="idrott__transit-fel" data-idrott-transit-fel hidden>{IDROTT_INGANGEN.transitFel}</p>
+  </div>
+
+  <!-- Namn→slug till klientskriptet nedan — V1.3: övergången postar
+       bara kommun (till rätt kommunsida), ingen server-tur-och-retur
+       bara för att slå upp slugen. -->
+  <script type="application/json" data-idrott-kommunlista set:html={JSON.stringify(kommunNamnSlug)} />
+
+  <!-- KOMMUNALT — ghost, tonat ned (Design: "sidans enda kommersiella drag är fångsten") -->
+  <div class="idrott__halfbanner idrott__halfbanner--kom"><span>{IDROTT_INGANGEN.kommunaltBanner}</span><span class="idrott__rule"></span></div>
+  <div class="idrott__locked">
+    <div class="idrott__locked-t">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      {IDROTT_INGANGEN.lockedRubrik}
+    </div>
+    <ul>
+      <li>{IDROTT_INGANGEN.lockedPunkt1}</li>
+      <li>{IDROTT_INGANGEN.lockedPunkt2}</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  // V6 (rättning 2026-08-19) — se idrottKlient.ts:s filhuvud för rotorsaken:
+  // ett skript UTAN imports under Astros assetsInlineLimit blir inline i
+  // dist-utdatan och tystas av sajtens CSP (script-src 'self', ingen
+  // 'unsafe-inline'). Importet här är inte kosmetiskt — det är det som
+  // gör att chunken hamnar i en egen /_astro/*.js-fil, exakt som
+  // bevakaKlient.ts/initBevakaWidgets() redan gör på resten av sajten.
+  import { initIdrottWidgets } from '../lib/idrottKlient';
+  initIdrottWidgets();
+</script>
+
+<style>
+  .idrott { max-width: 540px; }
+  .idrott__pad { padding-bottom: var(--fg-space-3); }
+  .idrott__ctx {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0;
+  }
+  .idrott__h2 {
+    font-family: var(--fg-font-display);
+    font-size: var(--fg-text-h2);
+    font-weight: var(--fg-weight-display);
+    letter-spacing: -0.015em;
+    line-height: var(--fg-lh-tight);
+    margin: 4px 0 2px;
+  }
+  .idrott__lede { font-size: var(--fg-text-body); color: var(--fg-ink-muted); margin: 0; }
+
+  .idrott__halfbanner {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    font-family: var(--fg-font-mono);
+    font-size: 11px;
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    margin: var(--fg-space-6) 0 var(--fg-space-2);
+  }
+  .idrott__rule { flex: 1; height: 2px; background: var(--fg-ink); opacity: 0.15; }
+  .idrott__halfbanner--nat { color: var(--fg-accent); }
+  .idrott__halfbanner--kom { color: var(--fg-ink-muted); }
+
+  .idrott__lok {
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-card);
+    overflow: hidden;
+  }
+  .idrott__lok-head { padding: var(--fg-space-4) var(--fg-space-5) var(--fg-space-2); }
+  .idrott__lok-t { font-size: var(--fg-text-body-lg); font-weight: var(--fg-weight-bold); margin: 0; }
+  .idrott__lok-s { font-size: var(--fg-text-label); color: var(--fg-ink-muted); margin: 2px 0 0; }
+  .idrott__lok-dates { display: flex; gap: 1px; background: color-mix(in srgb, var(--fg-ink) 12%, var(--fg-surface)); border-top: 1px solid color-mix(in srgb, var(--fg-ink) 12%, var(--fg-surface)); }
+  .idrott__lok-date {
+    flex: 1;
+    background: var(--fg-accent-soft);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+  }
+  .idrott__lok-d { font-family: var(--fg-font-mono); font-size: var(--fg-text-body); font-weight: var(--fg-weight-bold); }
+  .idrott__lok-termin { font-size: var(--fg-text-label); color: var(--fg-ink-muted); }
+
+  .idrott__belopp-wrap { margin-top: var(--fg-space-6); }
+  .idrott__belopp-t {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin: 0 0 var(--fg-space-2);
+  }
+
+  .idrott__ladder-wrap { margin-top: var(--fg-space-6); }
+
+  .idrott__card {
+    border: var(--fg-border-inner) solid color-mix(in srgb, var(--fg-ink) 18%, var(--fg-surface));
+    border-radius: var(--fg-radius-card);
+    overflow: hidden;
+    margin-top: var(--fg-space-6);
+  }
+  .idrott__card--enheter { margin-top: var(--fg-space-3); }
+  .idrott__row {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    border-bottom: 1px solid color-mix(in srgb, var(--fg-ink) 12%, var(--fg-surface));
+  }
+  .idrott__row:last-child { border-bottom: none; }
+  .idrott__row-name { flex: 1; font-size: var(--fg-text-body); font-weight: var(--fg-weight-bold); }
+  .idrott__row-name--void { color: var(--fg-void-ink); }
+  .idrott__row-meta { font-family: var(--fg-font-mono); font-size: var(--fg-text-mono); color: var(--fg-ink-muted); white-space: nowrap; }
+  .idrott__row-fint { display: block; font-family: var(--fg-font-sans); font-size: var(--fg-text-label); font-weight: normal; color: var(--fg-ink-muted); margin-top: 2px; }
+
+  .idrott__gate {
+    margin: var(--fg-space-3) 0 0;
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    line-height: var(--fg-lh-body);
+    border-left: 3px solid var(--fg-attention);
+    padding: 2px 0 2px var(--fg-space-4);
+  }
+  .idrott__gate strong { color: var(--fg-ink); }
+
+  .idrott__capture {
+    margin-top: var(--fg-space-6);
+    background: var(--fg-accent);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-5) var(--fg-space-5) var(--fg-space-4);
+    color: var(--fg-on-accent);
+  }
+  .idrott__capture-head {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    font-family: var(--fg-font-display);
+    font-size: var(--fg-text-h2);
+    font-weight: var(--fg-weight-display);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  .idrott__capture-body { font-size: var(--fg-text-body); line-height: 1.45; margin: var(--fg-space-3) 0 var(--fg-space-4); color: rgba(255, 255, 255, 0.92); }
+  /* Mocken (400px, fritt stående) hade rum för fält+knapp på en rad.
+     I sidans egna 375–430px-spann (page-padding avdraget) trängde
+     "Påminn oss gratis →" undan fältet till 99px — "Er mejladress"
+     klipptes till "Er mejlac". Kolumn i stället för rad: behåller
+     knappens exakta text (kanon: ingen avsteg från ytcopy) i stället
+     för att korta den, och håller "ett fält"-känslan — fältet och
+     knappen är fortfarande de två enda elementen, bara staplade. */
+  .idrott__capture-form { display: flex; flex-direction: column; gap: var(--fg-space-3); }
+  /* type="email" specifikt — samtyckets kryssruta flyttades in i samma
+     form (bugg hittad i V1-verifieringen: rutan kollapsade till 0px
+     bredd när den ärvde flex:1;min-width:0 avsett för mejlfältet). */
+  .idrott__capture-form input[type='email'] {
+    flex: 1;
+    min-width: 0;
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4) var(--fg-space-4);
+    font-size: var(--fg-text-body-lg);
+    font-family: var(--fg-font-sans);
+    color: var(--fg-ink);
+  }
+  .idrott__capture-form button {
+    background: var(--fg-ink);
+    color: var(--fg-on-accent);
+    border: none;
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4) var(--fg-space-5);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+    cursor: pointer;
+    white-space: nowrap;
+    width: 100%;
+  }
+  .idrott__capture-samtycke {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fg-space-2);
+    font-size: var(--fg-text-label);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: var(--fg-lh-body);
+  }
+  .idrott__capture-samtycke input { flex: none; margin-top: 3px; }
+  .idrott__capture-kvitto { font-size: var(--fg-text-body); font-weight: var(--fg-weight-bold); margin: var(--fg-space-2) 0 0; }
+  .idrott__capture-fel { font-size: var(--fg-text-label); color: var(--fg-on-accent); margin: var(--fg-space-2) 0 0; }
+  .idrott__capture-fint { font-size: var(--fg-text-label); color: rgba(255, 255, 255, 0.78); margin: var(--fg-space-3) 0 0; line-height: var(--fg-lh-body); }
+
+  .idrott__transit {
+    margin-top: var(--fg-space-6);
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-5);
+  }
+  .idrott__transit-t { font-family: var(--fg-font-display); font-size: var(--fg-text-h2); font-weight: var(--fg-weight-display); letter-spacing: -0.01em; margin: 0 0 3px; }
+  .idrott__transit-s { font-size: var(--fg-text-body); color: var(--fg-ink-muted); margin: 0 0 var(--fg-space-4); line-height: var(--fg-lh-body); }
+  .idrott__drag { display: flex; gap: var(--fg-space-3); }
+  .idrott__drag input {
+    flex: 1;
+    background: var(--fg-surface);
+    border: var(--fg-border-inner) solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4);
+    font-size: var(--fg-text-body-lg);
+    font-family: var(--fg-font-sans);
+    color: var(--fg-ink);
+  }
+  /* V1.2/design: ghost, INTE btn-primary — kommunövergången är sidans
+     tonade-ned drag, fångsten är den enda accentfärgade knappen. */
+  .idrott__drag-knapp {
+    background: transparent;
+    color: var(--fg-accent);
+    border: var(--fg-border-inner) solid var(--fg-accent);
+    border-radius: var(--fg-radius-control);
+    padding: 0 var(--fg-space-5);
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .idrott__transit-fel { font-size: var(--fg-text-label); color: var(--fg-urgent); margin: var(--fg-space-2) 0 0; }
+
+  .idrott__locked {
+    border: var(--fg-border-inner) dashed var(--fg-void-line);
+    border-radius: var(--fg-radius-card);
+    padding: var(--fg-space-4);
+    background: repeating-linear-gradient(135deg, var(--fg-surface) 0, var(--fg-surface) 9px, var(--fg-surface-sunken) 9px, var(--fg-surface-sunken) 18px);
+  }
+  .idrott__locked-t {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-void-ink);
+    margin-bottom: var(--fg-space-3);
+  }
+  .idrott__locked ul { margin: 0; padding-left: var(--fg-space-6); font-size: var(--fg-text-body); color: var(--fg-ink-muted); line-height: var(--fg-lh-body); }
+</style>

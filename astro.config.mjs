@@ -54,4 +54,21 @@ export default defineConfig({
       },
     }),
   ],
+  // V6 (rättning 2026-08-19): Astro inlinear tyst en <script>-chunk som
+  // saknar egna imports och ligger under assetsInlineLimit (Vite-default
+  // 4096 B) — se node_modules/astro/dist/core/build/plugins/plugin-
+  // scripts.js. Sajtens CSP (vercel.json) är script-src 'self' (ingen
+  // 'unsafe-inline', ingen nonce), så ett inlinat skript tystnar helt i
+  // en riktig webbläsare — hände på IdrottsIngangen.astro:s bevaknings-
+  // formulär, som då föll tillbaka på webbläsarens default (GET mot
+  // sidans egen URL, mejladressen i frågesträngen). Ett import i
+  // källfilen räcker INTE ensamt — Rollup slår ihop en enda-konsument-
+  // modul i samma chunk om inget annat importerar den, så chunken kan
+  // fortfarande hamna under gränsen. assetsInlineLimit: 0 stänger av
+  // storleksbaserad inlining av JS-chunkar helt, sajtsbrett och
+  // permanent — nästa komponent som råkar skriva ett litet importfritt
+  // skript ska inte kunna återintroducera samma tystnad.
+  vite: {
+    build: { assetsInlineLimit: 0 },
+  },
 });

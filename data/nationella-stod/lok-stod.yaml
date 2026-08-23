@@ -1,0 +1,176 @@
+id: lok-stod
+namn: LOK-stöd
+niva: nationell
+omfattning:
+  kommuner: alla
+  antal_kommuner: 290
+status: aktiv
+kategori: [idrott]
+foreningstyp: [idrott]
+malgrupp: Ideella idrottsföreningar som är medlemmar i ett RF-anslutet specialidrottsförbund och bedriver stödberättigad verksamhet
+ansokningssystem:
+  namn: IdrottOnline till systembytet, därefter Idrottsarenan
+  url: https://www.rf.se/bidrag-och-stod/lok-stod
+
+krav:
+  - id: ideell-rf-ansluten
+    text: Föreningen ska vara ideell och medlem i ett specialidrottsförbund som är anslutet till Riksidrottsförbundet
+    kalla_id: rf-foreskrifter-2025
+  - id: gruppaktivitet-minimum
+    text: Minst tre deltagare ska vara samtidigt aktiva i minst 45 minuter
+    kalla_id: rf-foreskrifter-2025
+  - id: deltagare-per-ledare
+    text: Stöd ges för högst 20 deltagare per närvarande ledare
+    kalla_id: rf-foreskrifter-2025
+  - id: ledarkrav
+    text: Ledaren ska ha fyllt 13 år, vara medlem i en förening inom RF och får inte vara ansvarig för flera gruppaktiviteter samtidigt
+    kalla_id: rf-foreskrifter-2025
+  - id: deltagaralder
+    text: Deltagaren ska under kalenderåret fylla 6–25 år; för deltagare med funktionsnedsättning finns ingen övre åldersgräns
+    kalla_id: rf-foreskrifter-2025
+  - id: digital-narvaro
+    text: Föreningen ska löpande föra digital närvaroredovisning som är RF tillhanda senast vid ansökan och signeras digitalt av ansvarig ledare
+    kalla_id: rf-foreskrifter-2025
+  - id: sf-idrott-75-procent
+    text: Minst 75 procent av den stödberättigade verksamheten ska innefatta utövande av den eller de SF-idrotter som föreningen bedriver
+    kalla_id: rf-foreskrifter-2025
+  - id: ung-forening-tak
+    text: En förening som varit ansluten till RF i mindre än två år kan normalt få högst ett prisbasbelopp per kalenderår
+    kalla_id: rf-foreskrifter-2025
+krav_status: kontrollast
+krav_fullstandiga: true
+
+deadlines:
+  typ: fasta
+  datum: [02-25, 08-25]
+  perioder:
+    - datum: 02-25
+      avser:
+        fran: 07-01
+        till: 12-31
+        ar_relation: foregaende_ar
+      kalla_id: rf-foreskrifter-2025
+    - datum: 08-25
+      avser:
+        fran: 01-01
+        till: 06-30
+        ar_relation: samma_ar
+      kalla_id: rf-foreskrifter-2025
+deadline_status: kontrollast
+
+belopp:
+  typ: trappa
+  valuta: SEK
+  ledarstod:
+    en_ledare_ore: 2000
+    tva_eller_fler_ledare_ore: 2500
+    enhet: per_aktivitet
+  deltagarstod:
+    - id: alder-6-9
+      alder_min: 6
+      alder_max: 9
+      tillampen: null
+      tillfallen:
+        - { tillfalle: 1, belopp_ore: 630 }
+        - { tillfalle: 2, belopp_ore: 630 }
+        - { tillfalle: 3, belopp_ore: 420 }
+    - id: alder-10-25
+      alder_min: 10
+      alder_max: 25
+      tillampen: Deltagare med funktionsnedsättning från 26 år samt ledare 13–25 år följer samma trappa
+      tillfallen:
+        - { tillfalle: 1, belopp_ore: 630 }
+        - { tillfalle: 2, belopp_ore: 630 }
+        - { tillfalle: 3, belopp_ore: 420 }
+        - { tillfalle: 4, belopp_ore: 210 }
+        - { tillfalle: 5, belopp_ore: 210 }
+  kalla_id: rf-lok-stod
+belopp_status: kontrollast
+belopp_avser: per_forening
+
+sanktionstrappa:
+  status: kontrollast
+  steg:
+    - perioder:
+        - { fran: 02-26, till: 03-01 }
+        - { fran: 08-26, till: 09-01 }
+      pafoljd: reducering
+      reducering_procent: 25
+    - perioder:
+        - { fran: 03-02, till: 03-15 }
+        - { fran: 09-02, till: 09-15 }
+      pafoljd: reducering
+      reducering_procent: 50
+    - perioder:
+        - { fran: 03-16, till: 03-31 }
+        - { fran: 09-16, till: 09-30 }
+      pafoljd: reducering
+      reducering_procent: 75
+    - perioder:
+        - { fran: 04-01, till: null }
+        - { fran: 10-01, till: null }
+      pafoljd: avslag
+      reducering_procent: null
+  undantag: RF får besluta om skälig reducering eller fullt stöd om förseningen beror på omständigheter utanför föreningens kontroll eller om särskilda skäl föreligger
+  kalla_id: rf-foreskrifter-2025
+
+dataflaggor:
+  - typ: systembyte
+    status: kontrollast
+    galler_fran: 2026-11
+    system_fore: IdrottOnline
+    system_efter: Idrottsarenan
+    beskrivning: LOK-stödet flyttar från IdrottOnline till Idrottsarenan i november 2026 och aktiviteterna förs över i samband med bytet
+    kalla_id: rf-lok-stod
+  - typ: behorighet
+    status: kontrollast
+    galler_fran: 2026-06-29
+    omfattning: idrottsarenan_ekonomiska_stod
+    kravd_roll: Formell firmatecknare
+    e_legitimation: Freja+
+    aktiveras_for_stodet_vid_flagga: systembyte
+    beskrivning: I Idrottsarenans tjänst Ekonomiska stöd får endast formell firmatecknare skicka in, komplettera och återrapportera; flaggan börjar gälla LOK-stödet först när stödet flyttar dit
+    kalla_id: rf-ekonomiska-stod
+
+qa_anteckning: RF:s FAQ "Frågor om fusk" säger fortfarande att aktiviteten kräver gemensam samling och avslutning. Kravet togs bort 1 juli 2023 och finns inte i gällande föreskrifter. Föreskrifterna styr och FAQ:n får inte återinföra kravet. Flera distrikts- och förbundssidor återger också äldre ålders-, system- eller behörighetsregler; centralt aktuellt regelverk har företräde.
+
+kalla_url: https://www.rf.se/bidrag-och-stod/lok-stod
+kallor:
+  - id: rf-foreskrifter-2025
+    titel: Föreskrifter om statligt lokalt aktivitetsstöd
+    url: https://www.rf.se/download/18.541eee07197627cf1f795bb9/1750073010580/LOK-st%C3%B6dsf%C3%B6reskrifter%2020250522.pdf
+    last_datum: 2026-08-18
+    giltig_fran: 2025-07-01
+    kalltyp: foreskrift
+  - id: rf-lok-stod
+    titel: Ansöka om LOK-stöd
+    url: https://www.rf.se/bidrag-och-stod/lok-stod
+    last_datum: 2026-08-18
+    giltig_fran: null
+    kalltyp: informationssida
+  - id: rf-forandrat-lok-stod
+    titel: Förändringar i LOK-stödet
+    url: https://www.rf.se/bidrag-och-stod/lok-stod/forandrat-lok-stod
+    last_datum: 2026-08-18
+    giltig_fran: null
+    kalltyp: informationssida
+  - id: rf-fragor-om-fusk
+    titel: Frågor om fusk
+    url: https://www.rf.se/bidrag-och-stod/lok-stod/fragor-om-fusk
+    last_datum: 2026-08-18
+    giltig_fran: null
+    kalltyp: faq
+  - id: rf-kontroll-av-ansokan
+    titel: Kontroll av ansökan
+    url: https://www.rf.se/bidrag-och-stod/lok-stod/kontroll-av-ansokan
+    last_datum: 2026-08-18
+    giltig_fran: null
+    kalltyp: informationssida
+  - id: rf-ekonomiska-stod
+    titel: Ekonomiska stöd i Idrottsarenan
+    url: https://www.rf.se/rf-arbetar-med/digitalisering/idrottsarenan/idrottsarenan-forening/ekonomiska-stod
+    last_datum: 2026-08-18
+    giltig_fran: null
+    kalltyp: informationssida
+senast_verifierad: 2026-08-18
+kopbar: false

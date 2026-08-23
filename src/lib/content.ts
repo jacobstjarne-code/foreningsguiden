@@ -257,8 +257,12 @@ export const OM = {
 
 /** Sidfot. Kort, saklig. */
 export const SIDFOT = {
+  // V4 (rättning 2026-08-19): sidfoten är global och står nu även på
+  // /nationella-stod/lok-stod/ och /idrott/ — "kommunala föreningsbidrag
+  // från kommunernas egen publicerade information" stämmer inte för
+  // statligt stöd från RF. Bytt till en formulering som täcker båda.
   kortText:
-    'Föreningsguiden samlar kommunala föreningsbidrag från kommunernas egen publicerade information. Vi är inte en kommun eller myndighet.',
+    'Föreningsguiden samlar bidrag till föreningar från kommunernas och myndigheternas egen publicerade information. Vi är inte en kommun eller myndighet.',
   kallpolicyLank: 'Så verifierar vi uppgifterna',
 };
 
@@ -485,6 +489,15 @@ export const MEJL = {
   sidfot:
     'Du får det här mejlet för att den här adressen bevakar bidrag på Föreningsguiden. Vill du sluta bevaka? Avregistrera dig direkt: {avregLank} — då raderar vi adressen.',
 
+  // U3 (Jacob 2026-08-19, mejl 8): "Ni får det här för att ni bevakar
+  // LOK-stödet. Avsluta: {avregistrera}" — {avregistrera} bytt mot
+  // {avregLank}, den nyckel sendMejl (mejl.ts) faktiskt fyller i
+  // (avregLank auto-injiceras där); {avregistrera} orört hade lämnat
+  // en trasig platshållare i ett riktigt utskick. Samma text gäller
+  // mejl 7 — sidfoten skiljer sig inte mellan paret, se
+  // sendNationellPaminnelse28/Sista (mejl.ts).
+  nationellSidfot: 'Ni får det här för att ni bevakar LOK-stödet. Avsluta: {avregLank}',
+
   bekraftelse: {
     amne: 'Bekräfta er bevakning hos Föreningsguiden',
     body: [
@@ -545,6 +558,34 @@ export const MEJL = {
       'På {datum} stänger ansökan för {bidragsnamn} i {kommun}. Det är om tre dagar.',
       'Har ni redan skickat in behöver ni inte göra något.',
       'Se vad kommunen kräver: {bidragLank}',
+    ],
+  },
+
+  // U2.2 (Jacob 2026-08-18, MEJL 7) — diktat ordagrant, se
+  // incoming/MEJLTEXTER.md #7. "LOK-stödet" hårdkodat i stället för ett
+  // {bidragsnamn}-uttag: stod.namn i datan är "LOK-stöd" utan bestämd
+  // artikel, och skulle ha gett fel svenska om det tolkats in här. Ett
+  // framtida andra nationellt stöd behöver ett eget mallpar, inte detta
+  // generiskt omskrivet.
+  nationellPaminnelse28: {
+    amne: 'LOK-stödet — fyra veckor kvar till {datum}',
+    body: [
+      'Sista ansökningsdag för LOK-stödet är {datum}. Ansökan avser aktiviteterna under {period}.',
+      'Kontrollera att alla aktiviteter är registrerade innan ni skickar in. Registrerade aktiviteter är inte samma sak som en inskickad ansökan — det är det vanligaste sättet att förlora stödet.',
+      'En sen ansökan kostar direkt: en vecka sen ger 25 procent avdrag, två veckor 50 procent, en månad 75 procent. Efter {slutdatum} avslås den.',
+      'Så här söker ni: {lank}',
+    ],
+  },
+
+  // U3 (Jacob 2026-08-19): resten av mejl 8 levererat, ordagrant. Samma
+  // "LOK-stödet"-hårdkodning som mejl 7 (nationellPaminnelse28), samma
+  // skäl — stod.namn ("LOK-stöd") saknar bestämd artikel.
+  nationellPaminnelseSista: {
+    amne: 'LOK-stödet — sista dagen är {datum}',
+    body: [
+      'På {datum} stänger ansökan för LOK-stödet. Det är om tre dagar.',
+      'Har ni redan skickat in behöver ni inte göra något. Är ansökan påbörjad men inte inskickad räknas den inte.',
+      '{lank}',
     ],
   },
 
@@ -1250,4 +1291,62 @@ export const KATALOG_LIVEDATA = {
   katalogSomStod: 'i {kommuner} kommuner, med {bidrag} bidrag hittade.',
   liveDeadlinesText: '{antal} deadlines bevakas åt föreningar',
   senastAvlast: 'senast avläst {datum}',
+};
+
+/**
+ * IDROTT_INGANGEN — runda 21 (incoming/IDROTTSINGANGEN_21.md, "auktoritativ
+ * för form, ordning och ytcopy. Kanon: läst. Inga avsteg."). Statisk
+ * ytcopy — texten som INTE varierar med lok.datum[]/lok.sanktioner[]
+ * (de renderas datadrivet i sidan/SanctionLadder, inte härifrån).
+ * {identitetsord}/{vinkelmening}/{enhetslista} kommer som props till
+ * IdrottsIngangen.astro (V1.4-mallen), fylls inte i här.
+ */
+export const IDROTT_INGANGEN = {
+  lede: 'Först det som gäller alla i hela Sverige. Sedan det din kommun lägger till.',
+  nationelltBanner: 'Nationellt · samma i alla 290 kommuner',
+  kommunaltBanner: 'Kommunalt · olika per ort',
+
+  lokUnderrubrik: 'Statligt aktivitetsstöd. Söks två gånger om året — samma datum överallt.',
+
+  // V2 (rättning 2026-08-19) — beloppsblocket, mellan datum och
+  // sanktionstrappan: vad ni kan få innan vad ni kan tappa.
+  beloppRubrik: 'Vad ni kan få',
+  ledarstodRad: 'Ledarstöd',
+  deltagarstodRad: 'Deltagarstöd,',
+
+  rfRad: 'RF-medlemskap via specialidrottsförbund',
+  rfEtikett: 'villkor',
+  projektstodRad: 'Projektstöd IF',
+  projektstodEtikett: 'villkor per distrikt',
+  // F5 — ett villkor, inte ett avvisande.
+  gateFraga: 'Inte med i ett specialidrottsförbund?',
+  gateSvar: 'Då gäller inte det statliga stödet ovan — men er kommun kan ha bidrag ändå. Fortsätt nedan.',
+
+  // Bevakningsfångsten — EFTER hela nationella halvan, FÖRE
+  // kommunövergången (rättelsen redan inarbetad i källdokumentet).
+  // Rubriken beskriver tjänsten, aldrig förlusten (kanon §7).
+  captureRubrik: 'Vi håller reda på datumen åt er',
+  // Delad i tre delar i stället för en set:html-regex i komponenten —
+  // mittdelen ({captureBodyStark}) är den enda som fetstilas.
+  captureBodyForst: 'Vi påminner er ',
+  captureBodyStark: 'fyra veckor innan, och tre dagar innan',
+  captureBodySist: '. Gratis, ingen inloggning.',
+  captureKnapp: 'Påminn oss gratis →',
+  capturePlaceholder: 'Er mejladress',
+  captureFint: 'Avsluta när ni vill — länk i varje mejl.',
+  // GDPR-minimum, samma mönster som BEVAKNING.samtycke — mocken visar
+  // ingen kryssruta (samma avsteg som BevakaKommunen.astro:s
+  // 19a-ruta, se den filens kommentar), men samtycket är obligatoriskt
+  // oavsett vad mocken visar.
+  captureSamtycke: 'Jag vill att Föreningsguiden sparar min e-postadress för att skicka påminnelser om LOK-stödets datum. Jag kan avsluta när som helst.',
+
+  transitRubrik: 'Din kommun avgör resten.',
+  transitBody: 'Vi tar er till er kommuns bidrag och frister. Ett fält — inget konto.',
+  transitPlaceholder: 'Skriv er kommun',
+  transitKnapp: 'Visa ›',
+  transitFel: 'Hittar ingen kommun med det namnet — kolla stavningen.',
+
+  lockedRubrik: 'Öppnas när kommunen är vald',
+  lockedPunkt1: 'Kommunens egna bidrag för er ort',
+  lockedPunkt2: 'Förkravet: godkänd som bidragsberättigad förening',
 };

@@ -1,0 +1,106 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BreadcrumbList from '../../../components/BreadcrumbList.astro';
+import { loadNationellaStod } from '../../../lib/nationellaStod';
+import { formatRecurringDate } from '../../../lib/kommuner';
+import { BEVAKNING } from '../../../lib/content';
+
+export function getStaticPaths() {
+  return loadNationellaStod().map((stod) => ({ params: { id: stod.id }, props: { stod } }));
+}
+
+const { stod } = Astro.props;
+const kronor = (ore: number) => (ore / 100).toLocaleString('sv-SE', { minimumFractionDigits: ore % 100 ? 2 : 0, maximumFractionDigits: 2 });
+const periodText = (period: typeof stod.deadlines.perioder[number]) => {
+  const relation = period.avser.ar_relation === 'foregaende_ar' ? 'föregående år' : 'samma år';
+  return `${formatRecurringDate(period.avser.fran)}–${formatRecurringDate(period.avser.till)} ${relation}`;
+};
+const sourceById = new Map(stod.kallor.map((k: typeof stod.kallor[number]) => [k.id, k]));
+const sanctions = stod.sanktionstrappa.steg.map((steg: typeof stod.sanktionstrappa.steg[number]) => ({
+  period: steg.perioder.map((p) => p.till ? `${formatRecurringDate(p.fran)}–${formatRecurringDate(p.till)}` : `från ${formatRecurringDate(p.fran)}`).join(' / '),
+  result: steg.pafoljd === 'avslag' ? 'Avslag' : `−${steg.reducering_procent} %`,
+}));
+---
+<Base title={`${stod.namn} — krav, belopp och deadlines`} description={`${stod.namn}: återkommande deadlines, fullständiga krav, beloppstrappa och förseningsavdrag.`}>
+  <BreadcrumbList items={[{ name: 'Startsida', url: '/' }, { name: 'Nationella stöd', url: `/nationella-stod/${stod.id}/` }, { name: stod.namn, url: `/nationella-stod/${stod.id}/` }]} />
+  <p class="nationell-etikett">Nationellt stöd · gäller i alla 290 kommuner</p>
+  <h1>{stod.namn}</h1>
+  <p class="ingress">{stod.malgrupp}</p>
+
+  <section>
+    <h2>Sista ansökningsdagar</h2>
+    <ul>
+      {stod.deadlines.perioder.map((period: typeof stod.deadlines.perioder[number]) => (
+        <li><strong>{formatRecurringDate(period.datum)}</strong> — avser {periodText(period)}</li>
+      ))}
+    </ul>
+    <div id="bevaka" class="bevaka-nationellt" data-bevaka-cell data-nationellt-stod-id={stod.id} data-stod-namn={stod.namn}>
+      <a href="#bevaka" class="btn-primary bevaka-rad-knapp">{BEVAKNING.knapp}</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Försenad ansökan</h2>
+    <ul class="sanktionslista">
+      {sanctions.map((s) => <li><span>{s.period}</span><strong>{s.result}</strong></li>)}
+    </ul>
+    <p>{stod.sanktionstrappa.undantag}.</p>
+  </section>
+
+  <section>
+    <h2>Krav</h2>
+    <ol class="kravlista">
+      {stod.krav.map((krav: typeof stod.krav[number]) => {
+        const kalla = sourceById.get(krav.kalla_id);
+        return <li>{krav.text}. {kalla && <a href={kalla.url}>Källa</a>}</li>;
+      })}
+    </ol>
+  </section>
+
+  <section>
+    <h2>Belopp</h2>
+    <p><strong>Ledarstöd:</strong> {kronor(stod.belopp.ledarstod.en_ledare_ore)} kr per aktivitet med en ledare; {kronor(stod.belopp.ledarstod.tva_eller_fler_ledare_ore)} kr med två eller fler ledare.</p>
+    {stod.belopp.deltagarstod.map((trappa: typeof stod.belopp.deltagarstod[number]) => (
+      <div class="beloppstrappa">
+        <h3>{trappa.alder_min}–{trappa.alder_max ?? 'utan övre gräns'} år</h3>
+        <p>{trappa.tillfallen.map((t) => `${t.tillfalle}: ${kronor(t.belopp_ore)} kr`).join(' · ')}</p>
+        {trappa.tillampen && <p>{trappa.tillampen}.</p>}
+      </div>
+    ))}
+  </section>
+
+  <section>
+    <h2>System och behörighet</h2>
+    {stod.dataflaggor.map((flag: typeof stod.dataflaggor[number]) => (
+      <div class="dataflagga">
+        <h3>{flag.typ === 'systembyte' ? 'Systembyte' : 'Behörighet i det nya systemet'}</h3>
+        <p>{flag.beskrivning}.</p>
+      </div>
+    ))}
+  </section>
+
+  <section>
+    <h2>Källor</h2>
+    <ul>
+      {stod.kallor.map((kalla: typeof stod.kallor[number]) => <li><a href={kalla.url}>{kalla.titel}</a> — läst {kalla.last_datum}</li>)}
+    </ul>
+    <p><strong>Regelkonflikt:</strong> RF:s FAQ beskriver fortfarande gemensam samling och avslutning. Det kravet togs bort 1 juli 2023; gällande föreskrifter styr.</p>
+  </section>
+</Base>
+
+<script>
+  import { initBevakaWidgets } from '../../../lib/bevakaKlient';
+  initBevakaWidgets();
+</script>
+
+<style>
+  .nationell-etikett { font-weight: 700; margin-bottom: .4rem; }
+  .ingress { max-width: 48rem; font-size: 1.1rem; }
+  section { margin: 2.25rem 0; max-width: 52rem; }
+  .bevaka-nationellt { margin-top: 1rem; }
+  .sanktionslista { list-style: none; padding: 0; max-width: 36rem; }
+  .sanktionslista li { display: flex; justify-content: space-between; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--border, #d8d3ca); }
+  .kravlista li { margin-bottom: .75rem; }
+  .beloppstrappa, .dataflagga { padding: .85rem 1rem; margin: .75rem 0; border-left: 3px solid currentColor; }
+  .beloppstrappa h3, .dataflagga h3 { margin-top: 0; }
+</style>

@@ -29,6 +29,8 @@ import {
   KATEGORI_LABELS, KATEGORIER,
 } from '../../lib/kommuner';
 import type { DeadlineEntry } from '../../lib/kommuner';
+import { getNationellaDeadlineEntries } from '../../lib/nationellaStod';
+import type { NationellDeadlineEntry } from '../../lib/nationellaStod';
 import { KALENDER, BEVAKNING, OLAST_MARK } from '../../lib/content';
 import { TRATT } from '../../../GUIDE_TRATT_COPY';
 
@@ -39,8 +41,11 @@ const ogiltigtToken = bevakningStatus === 'ogiltig';
 const uppdaterad = bevakningStatus === 'uppdaterad';
 const kommuner = loadKommuner();
 const today = todayISO();
-const entries = getDeadlineEntries(today);
-const lopande = entries.filter((e) => e.isLopande);
+type KalenderEntry = DeadlineEntry | NationellDeadlineEntry;
+const arNationell = (e: KalenderEntry): e is NationellDeadlineEntry => e.niva === 'nationell';
+const kommunEntries = getDeadlineEntries(today);
+const entries: KalenderEntry[] = [...kommunEntries, ...getNationellaDeadlineEntries(today)].sort((a, b) => (a.dateISO ?? '').localeCompare(b.dateISO ?? ''));
+const lopande = kommunEntries.filter((e) => e.isLopande);
 const kommande = entries.filter((e) => !e.isLopande);
 
 // P3.1a (Jacob 2026-08-05): raden i kalendern länkar hit med ?kommun=slug
@@ -65,7 +70,7 @@ const harOlastIKalendern = kommande.some((e) => e.deadlineStatus === 'olast');
 // som FAKTISKT förekommer i den här tabellen, inte alla 194 (en kommun
 // utan aktiva bidrag bidrar aldrig en rad här och ska inte kunna dra ner
 // datumet). Äldsta, inte senaste — samma resonemang som förstasidans fix.
-const kommunSlugsMedDeadlines = new Set(entries.map((e) => e.kommunSlug));
+const kommunSlugsMedDeadlines = new Set(kommunEntries.map((e) => e.kommunSlug));
 const kommunerMedDeadlines = kommuner.filter((k) => kommunSlugsMedDeadlines.has(k.kommun_slug));
 const senastAvlast = kommunerMedDeadlines.reduce(
   (min, k) => (k.verifierad < min ? k.verifierad : min),
@@ -74,7 +79,7 @@ const senastAvlast = kommunerMedDeadlines.reduce(
 
 // entries är redan globalt sorterade (getDeadlineEntries) — att gruppera
 // via en Map bevarar kronologisk ordning automatiskt, ingen extra sort.
-const manadGrupper = new Map<string, DeadlineEntry[]>();
+const manadGrupper = new Map<string, KalenderEntry[]>();
 for (const e of kommande) {
   const key = manadNyckel(e.dateISO!);
   const lista = manadGrupper.get(key) ?? [];
@@ -111,7 +116,7 @@ const visaTreParams = new URLSearchParams(Astro.url.searchParams);
 visaTreParams.delete('visa');
 const visaTreHref = visaTreParams.toString() ? `?${visaTreParams.toString()}` : '?';
 
-function kategoriCell(e: DeadlineEntry) {
+function kategoriCell(e: KalenderEntry) {
   const forsta = KATEGORI_LABELS[e.kategori[0]];
   const fler = e.kategori.length - 1;
   return fler > 0 ? `${forsta} +${fler}` : forsta;
@@ -120,7 +125,8 @@ function kategoriCell(e: DeadlineEntry) {
 // 1f (SPEC_HUVUDPROCESSEN §1f): explicit fallback i stället för en tom
 // cell — "belopp inte publicerat" är sakuppgiften (kommunen har inte
 // lämnat ut ett tak), inte en tom ruta som kan läsas som ett fel.
-function beloppCell(e: DeadlineEntry): string {
+function beloppCell(e: KalenderEntry): string {
+  if (arNationell(e)) return 'Beloppstrappa';
   const tak = parseBeloppTak(e.belopp);
   return tak !== null ? `Upp till ${tak.toLocaleString('sv-SE')} kr` : 'belopp inte publicerat';
 }
@@ -178,19 +184,25 @@ function beloppCell(e: DeadlineEntry): string {
             {radLista.map((e) => {
               const urgency = getUrgency(daysUntil(e.dateISO!, today));
               return (
-                <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
+                <tr data-niva={e.niva} data-kommun={arNationell(e) ? '' : e.kommunSlug} data-kategori={e.kategori.join(' ')}>
                   <td class="deadline-table__datum">
                     <span class={e.deadlineStatus === 'olast' ? 'fg-void-mark fg-void-mark--inline' : 'fg-read-mark fg-read-mark--inline'} aria-hidden="true"></span>
                     {urgency !== 'positive' && <UrgencyChip urgency={urgency} />}
                     {formatDate(e.dateISO!)}
                   </td>
-                  <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
-                  <td>{e.kommun}</td>
+                  <td><a href={arNationell(e) ? `/nationella-stod/${e.stodId}/` : `/kommun/${e.kommunSlug}/`}>{arNationell(e) ? e.stodNamn : e.bidragNamn}</a></td>
+                  <td>{arNationell(e) ? 'Hela Sverige' : e.kommun}</td>
                   <td>{kategoriCell(e)}</td>
                   <td>{beloppCell(e)}</td>
-                  <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun} data-bidrag-id={e.bidragId}>
-                    <a href={`?kommun=${e.kommunSlug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
-                  </td>
+                  {arNationell(e) ? (
+                    <td class="deadline-table__bevaka" data-bevaka-cell data-nationellt-stod-id={e.stodId} data-stod-namn={e.stodNamn}>
+                      <a href={`/nationella-stod/${e.stodId}/#bevaka`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
+                    </td>
+                  ) : (
+                    <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun} data-bidrag-id={e.bidragId}>
+                      <a href={`?kommun=${e.kommunSlug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
+                    </td>
+                  )}
                 </tr>
               );
             })}
@@ -272,7 +284,9 @@ function beloppCell(e: DeadlineEntry): string {
     let visibleCount = 0;
 
     rows.forEach((row) => {
-      const matchKommun = kommun === 'alla' || row.dataset.kommun === kommun;
+      // Nationella stöd gäller föreningar i varje kommun och ska därför
+      // inte försvinna när en kommun väljs i filtret.
+      const matchKommun = row.dataset.niva === 'nationell' || kommun === 'alla' || row.dataset.kommun === kommun;
       const matchKategori = kategori === 'alla' || (row.dataset.kategori ?? '').split(' ').includes(kategori);
       const visible = matchKommun && matchKategori;
       row.hidden = !visible;

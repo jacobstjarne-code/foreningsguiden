@@ -11,6 +11,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getKommunBySlug, getDeadlineEntries, todayISO } from '../../lib/kommuner';
+import { getNationellaDeadlineEntries } from '../../lib/nationellaStod';
 import {
   countSubscribersByKommun, getAllConfirmedSubscribers,
   getEarliestConfirmedRegistrationDate, countTrackedDeadlines,
@@ -29,7 +30,7 @@ export const GET: APIRoute = async ({ url }) => {
     const [alla, earliestDatum, antalDeadlines] = await Promise.all([
       getAllConfirmedSubscribers(),
       getEarliestConfirmedRegistrationDate(),
-      countTrackedDeadlines(getDeadlineEntries(todayISO())),
+      countTrackedDeadlines([...getDeadlineEntries(todayISO()), ...getNationellaDeadlineEntries(todayISO())]),
     ]);
     return new Response(JSON.stringify({ antal: alla.length, earliestDatum, antalDeadlines }), {
       headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },

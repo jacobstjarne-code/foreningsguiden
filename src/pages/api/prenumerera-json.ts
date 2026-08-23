@@ -19,7 +19,8 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getKommunBySlug } from '../../lib/kommuner';
-import { addPendingSubscriber, addBidragBevakning } from '../../lib/subscribers';
+import { getNationelltStodById } from '../../lib/nationellaStod';
+import { addPendingSubscriber, addBidragBevakning, addNationelltStodBevakning } from '../../lib/subscribers';
 import { sendBekraftelse } from '../../lib/mejl';
 import { underGransen, klientIdentitet, forManga } from '../../lib/rateLimit';
 
@@ -32,9 +33,11 @@ export const POST: APIRoute = async ({ request }) => {
   const samtycke = form.get('samtycke');
   const kommunSlug = String(form.get('kommun') ?? '').trim();
   const bidragId = String(form.get('bidrag') ?? '').trim();
+  const nationelltStodId = String(form.get('nationelltStod') ?? '').trim();
 
-  const kommun = getKommunBySlug(kommunSlug);
+  const kommun = kommunSlug ? getKommunBySlug(kommunSlug) : undefined;
   const bidrag = bidragId ? kommun?.bidrag.find((b) => b.id === bidragId) : undefined;
+  const nationelltStod = nationelltStodId ? getNationelltStodById(nationelltStodId) : undefined;
   // Ogiltig/manipulerad bidrag-id (fanns i formuläret men inte i
   // kommunen) — vägra hellre spara en tyst kommun-bred bevakning i
   // stället, avvisa som ett felaktigt anrop.
@@ -42,7 +45,13 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
-  if (!EMAIL_RE.test(email) || email.length > EMAIL_MAX || !samtycke || !kommun) {
+  // Exakt en identitetsmodell per anrop. Nationellt stöd saknar kommun
+  // och kan därför inte falla tillbaka till en kommun-bred bevakning.
+  if ((nationelltStodId && !nationelltStod) || (nationelltStodId && (kommunSlug || bidragId))) {
+    return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
+  }
+
+  if (!EMAIL_RE.test(email) || email.length > EMAIL_MAX || !samtycke || (!nationelltStod && !kommun)) {
     return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'content-type': 'application/json' } });
   }
 
@@ -52,13 +61,16 @@ export const POST: APIRoute = async ({ request }) => {
     return forManga();
   }
 
-  const { token, alreadyConfirmed } = bidrag
-    ? await addBidragBevakning(email, kommunSlug, bidrag.id)
-    : await addPendingSubscriber(email, [kommunSlug]);
+  const { token, alreadyConfirmed } = nationelltStod
+    ? await addNationelltStodBevakning(email, nationelltStod.id)
+    : bidrag
+      ? await addBidragBevakning(email, kommunSlug, bidrag.id)
+      : await addPendingSubscriber(email, [kommunSlug]);
 
   if (!alreadyConfirmed && token) {
     try {
-      await sendBekraftelse(email, bidrag ? `${bidrag.namn} (${kommun.kommun})` : kommun.kommun, token);
+      const etikett = nationelltStod?.namn ?? (bidrag ? `${bidrag.namn} (${kommun!.kommun})` : kommun!.kommun);
+      await sendBekraftelse(email, etikett, token);
     } catch (e) {
       // Kommunen är redan sparad mot adressen (addPendingSubscriber ovan)
       // — bara mejlet failade. Svara fel så widgeten visar fel-läget,

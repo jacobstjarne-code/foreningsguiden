@@ -1,0 +1,142 @@
+---
+// SanctionLadder — runda 21 (incoming/IDROTTSINGANGEN_21.md, F3 + "Till
+// Code"). Egen komponent, UTAN tidslogik: renderar regeln, aldrig
+// "dagar kvar". Ingen nedräkning mot dagens datum någonstans i den här
+// filen — allt som ritas är statiskt om `steg` inte ändras.
+//
+// V1.1 ("ingen hårdkodad copy — en regeländring ska slå igenom
+// överallt"): antal rader, procentsatser och utfall (avslag/reducering)
+// läses ur `steg` (Sanktionsteg[], nationellaTyper.ts) — INTE ur mockens
+// tre illustrativa rader. Mocken visar tre steg (hela/−25 %/0 kr) som en
+// förenklad ILLUSTRATION av konceptet; den riktiga sanktionstrappan har
+// fyra (25/50/75/avslag). Ett hårdkodat "visa bara steg 1 och 4" hade
+// varit precis den sortens hårdkodning V1.1 förbjuder — lägger RF till
+// ett femte steg ska det synas här utan en kodändring. Avsteg från
+// mockens radantal, flaggat i commit-meddelandet.
+//
+// V2 (rättning 2026-08-19): kalenderdatum, inte dagintervall. Ett
+// dagintervall räknat mot ETT referensdatum stämde bara för den ena
+// fristen (offset-matte antog symmetri mellan feb- och augustifönstren
+// som inte finns i verkligheten — RF:s regel är datumbunden per frist,
+// inte "dagar efter deadline"). Varje steg visar nu båda periodernas
+// riktiga fran/till-datum, en per frist, ur steg[i].perioder — ingen
+// egen datumaritmetik, bara formatering av det som redan står i YAML:en.
+import type { Sanktionsteg, Sanktionsperiod } from '../lib/nationellaTyper';
+
+export interface Props {
+  steg: Sanktionsteg[];
+}
+
+const { steg } = Astro.props;
+
+const MANADSFORKORTNING = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+
+function manad(mmdd: string): number {
+  return Number(mmdd.slice(0, 2));
+}
+function dag(mmdd: string): number {
+  return Number(mmdd.slice(3, 5));
+}
+function kortManad(mmdd: string): string {
+  return MANADSFORKORTNING[manad(mmdd) - 1];
+}
+
+// En periods text: "26 aug–1 sep" (olika månader) eller "2–15 sep"
+// (samma månad, namnet skrivs bara en gång) eller "från 1 okt" (avslag,
+// till === null).
+function periodText(p: Sanktionsperiod): string {
+  if (p.till === null) return `från ${dag(p.fran)} ${kortManad(p.fran)}`;
+  return manad(p.fran) === manad(p.till)
+    ? `${dag(p.fran)}–${dag(p.till)} ${kortManad(p.till)}`
+    : `${dag(p.fran)} ${kortManad(p.fran)}–${dag(p.till)} ${kortManad(p.till)}`;
+}
+
+// Staircase-indraget (mockens .s-part/.s-none) trappas per steg-index i
+// stället för två fasta nivåer — fyra riktiga steg ska synas som fyra
+// nivåer nedåt, inte kollapsa två av dem till samma indrag.
+const rader = steg.map((s, i) => {
+  // Fallande på månadsnumret (aug/okt-cykeln före feb/mar-cykeln) — ren
+  // sorteringsregel på datat, ingen hårdkodad ordning av vilken frist
+  // som "kommer först".
+  const perioderSorterade = [...s.perioder].sort((a, b) => manad(b.fran) - manad(a.fran));
+  const dagtext = perioderSorterade
+    .map((p, idx) => (idx > 0 && p.till === null ? periodText(p).replace('från ', '') : periodText(p)))
+    .join(' respektive ');
+  return {
+    dagtext,
+    beskrivning: s.pafoljd === 'avslag' ? 'Ansökan tas inte upp.' : 'Avdrag på beloppet.',
+    belopp: s.pafoljd === 'avslag' ? '0 kr' : `−${s.reducering_procent} %`,
+    variant: s.pafoljd === 'avslag' ? 'none' : 'part',
+    indrag: (i + 1) * 8,
+  };
+});
+---
+<div class="ladder">
+  <p class="ladder__title">Så funkar fristerna</p>
+
+  <div class="ladder__step ladder__step--full">
+    <span class="fg-read-mark"></span>
+    <span class="ladder__lbl">
+      <span class="ladder__lbl-t">I tid, senast datumet</span>
+      <span class="ladder__lbl-s">Ansökan räknas fullt ut.</span>
+    </span>
+    <span class="ladder__amt">hela stödet</span>
+  </div>
+
+  {rader.map((r) => (
+    <div class:list={['ladder__step', `ladder__step--${r.variant}`]} style={`margin-left: ${r.indrag}px;`}>
+      <span class="ladder__lbl">
+        <span class="ladder__lbl-t">{r.dagtext}</span>
+        <span class="ladder__lbl-s">{r.beskrivning}</span>
+      </span>
+      <span class="ladder__amt">{r.belopp}</span>
+    </div>
+  ))}
+
+  <p class="ladder__sub">Regeln är fast och lika för alla — därför står den här, inte som en påminnelse utan som en uppgift ni kan planera efter.</p>
+</div>
+
+<style>
+  .ladder__title {
+    font-size: var(--fg-text-body-lg);
+    font-weight: var(--fg-weight-bold);
+    margin: 0 0 var(--fg-space-3);
+  }
+  .ladder__step {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-4);
+    padding: var(--fg-space-4) var(--fg-space-5);
+    border-radius: var(--fg-radius-control);
+    margin-bottom: var(--fg-space-2);
+  }
+  .ladder__lbl { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .ladder__lbl-t { font-size: var(--fg-text-body-lg); font-weight: var(--fg-weight-bold); line-height: var(--fg-lh-tight); }
+  .ladder__lbl-s { font-size: var(--fg-text-label); color: var(--fg-ink-muted); }
+  .ladder__amt { font-family: var(--fg-font-mono); font-size: var(--fg-text-mono); font-weight: var(--fg-weight-bold); white-space: nowrap; }
+
+  .ladder__step--full {
+    background: var(--fg-accent-soft);
+    border: var(--fg-border-inner) solid var(--fg-accent);
+  }
+  .ladder__step--full .ladder__amt { color: var(--fg-accent); }
+
+  .ladder__step--part {
+    background: color-mix(in srgb, var(--fg-attention) 10%, var(--fg-surface));
+    border: var(--fg-border-inner) solid var(--fg-attention);
+  }
+  .ladder__step--part .ladder__amt { color: var(--fg-attention); }
+
+  .ladder__step--none {
+    background: var(--fg-surface-sunken);
+    border: var(--fg-border-inner) solid var(--fg-void-line);
+  }
+  .ladder__step--none .ladder__amt { color: var(--fg-ink-muted); }
+
+  .ladder__sub {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    line-height: var(--fg-lh-body);
+    margin: var(--fg-space-3) 0 0;
+  }
+</style>

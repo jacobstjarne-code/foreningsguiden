@@ -107,6 +107,48 @@ Se vad kommunen kräver: {lank}
 
 ---
 
+## 7. LOK-stödet, 28 dagar före
+
+Nationellt stöd, inte ett kommunalt bidrag — går till alla som bevakar
+LOK-stödet, oavsett kommun. Samma 28/3-rytm som mejl 2/6, men egen mall:
+LOK-stödets sanktionstrappa är exakt och nationell, ingen kommun har en
+motsvarighet.
+
+**Ämne:** LOK-stödet — fyra veckor kvar till {datum}
+
+Sista ansökningsdag för LOK-stödet är {datum}. Ansökan avser
+aktiviteterna under {period}.
+
+Kontrollera att alla aktiviteter är registrerade innan ni skickar in.
+Registrerade aktiviteter är inte samma sak som en inskickad ansökan —
+det är det vanligaste sättet att förlora stödet.
+
+En sen ansökan kostar direkt: en vecka sen ger 25 procent avdrag, två
+veckor 50 procent, en månad 75 procent. Efter {slutdatum} avslås den.
+
+Så här söker ni: {lank}
+
+---
+
+## 8. LOK-stödet, 3 dagar före
+
+Komplett (U3, Jacob 2026-08-19) — resten av diktatet som avbröts i U2.2.
+
+**Ämne:** LOK-stödet — sista dagen är {datum}
+
+På {datum} stänger ansökan för LOK-stödet. Det är om tre dagar.
+
+Har ni redan skickat in behöver ni inte göra något. Är ansökan påbörjad
+men inte inskickad räknas den inte.
+
+{lank}
+
+**Sidfot (gäller mejl 7 och 8, ersätter den generella "Sidfot i varje
+mejl" nedan för LOK-stödets bevakning):** Ni får det här för att ni
+bevakar LOK-stödet. Avsluta: {avregLank}
+
+---
+
 ## Rytm
 
 Två mejl per frist: **28 dagar** och **3 dagar** före sista ansökningsdag.

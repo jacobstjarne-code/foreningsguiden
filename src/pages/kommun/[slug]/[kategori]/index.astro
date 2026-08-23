@@ -5,6 +5,7 @@
 import Base from '../../../../layouts/Base.astro';
 import BidragCard from '../../../../components/BidragCard.astro';
 import BreadcrumbList from '../../../../components/BreadcrumbList.astro';
+import NationellaStodSektion from '../../../../components/NationellaStodSektion.astro';
 import { loadKommuner, KATEGORI_LABELS, KATEGORIER, bidragAnsokningsUrl, hittaGiltighetsstatus } from '../../../../lib/kommuner';
 import type { Kategori } from '../../../../lib/kommuner';
 import { KATEGORI_SIDA } from '../../../../lib/content';
@@ -63,6 +64,8 @@ const webPageJsonLd = {
   </div>
 
   <p>{intro}</p>
+
+  {kategori === 'idrott' && <NationellaStodSektion kategori="idrott" kommun={kommun} />}
 
   <ul class="bidrag-list">
     {bidrag.map((b) => <BidragCard bidrag={b} verifierad={kommun.verifierad} ansokningsUrl={bidragAnsokningsUrl(b, kommun)} kommunSlug={kommun.kommun_slug} kommunNamn={kommun.kommun} giltighetStatus={giltighetStatus} />)}
