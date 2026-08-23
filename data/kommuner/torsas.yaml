@@ -2,17 +2,25 @@ kommun: Torsås
 kommun_slug: torsas
 lan: Kalmar län
 befolkning: 6892
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Bildningsförvaltningen och Socialförvaltningen
 ansokningssystem:
-  namn: Torsås kommuns e-tjänster
-  url: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/
+  namn: Torsås Mina sidor och blanketter
+  url: https://minasidor.torsas.se/
 kalla_url: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/
-verifierad: '2026-07-31'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://minasidor.torsas.se/oversikt/overview/157
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Föreningsbidrag
   kategori:
   - idrott
-  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Föreningar och organisationer i Torsås kommun
   deadlines:
     typ: fasta
@@ -32,19 +40,23 @@ bidrag:
     kr per aktiv medlem 5–25 år. Anläggnings- och lokalbidrag enligt norm, exempelvis klubbhus med omklädning/dusch 15 000
     kr, lokalbidrag för hyrd extern lokal (50 % av hyran) högst 15 000 kr, A-plan 20 000 kr och ridhus 60 000 kr, bland flera
     poster i normlistan.'
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Sista vardagen i januari.
   kalla_url: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Sista vardagen i januari.
+  senast_verifierad: '2026-08-23'
   id: torsas-foreningsbidrag
 - namn: Investeringsbidrag av mindre slag
   kategori:
   - ovrig
   - idrott
   - kultur
+  foreningstyp: *alla
   malgrupp: Föreningar och organisationer i Torsås kommun
   deadlines:
     typ: fasta
@@ -61,18 +73,22 @@ bidrag:
   - Bidrag söks på förhand och projektet får inte ha påbörjats
   belopp: Maxbelopp 30 000 kr, dock högst 66 procent (två tredjedelar) av den totala investeringskostnaden. Utbetalning sker
     i efterhand när investeringen är avslutad.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ordinarie ansökan senast 1 oktober året före budgetåret; ansökan kan även göras löpande under budgetåret om medel finns kvar.
+  kalla_url: https://www.torsas.se/wp-content/uploads/Regler-investeringsbidrag-av-mindre-slag_reviderad.pdf
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Kommunen anger 1 oktober eller löpande; registrerat som fast huvuddatum med notering om att löpande ansökan
     också kan förekomma.
+  senast_verifierad: '2026-08-23'
   id: torsas-investeringsbidrag-av-mindre-slag
 - namn: Kulturbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd, annat]
   malgrupp: Föreningar och organisationer i Torsås kommun
   deadlines:
     typ: fasta
@@ -85,17 +101,23 @@ bidrag:
   - Sökande kan bara beviljas antingen bidrag eller förlustgaranti per år, inte båda
   - Om verksamheten inte genomförs efter beviljat bidrag ska bidraget återbetalas
   belopp: Inget fast belopp anges. Storleken på bidraget avgörs av bildningsnämndens ekonomiska förutsättningar.
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 mars.
   kalla_url: https://www.torsas.se/kultur-och-fritid/kultur/kulturbidrag/
-  belopp_status: kontrollast
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
   id: torsas-kulturbidrag
 - namn: Föreningsbidrag inom socialnämndens område
   kategori:
   - social
+  - pensionar
+  - funktionsratt
+  foreningstyp: [social, ungdom, annat]
   malgrupp: Föreningar och organisationer i Torsås kommun
   deadlines:
     typ: fasta
@@ -109,23 +131,100 @@ bidrag:
     aktiva och stödmottagare)
   - Bidrag beviljas inte för fasta och/eller driftskostnader
   belopp: Inget fast belopp anges. Storleken på bidragen beror på socialnämndens budgetram.
-  sen_ansokan: Ej angivet i källan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningsperiod 1 februari–31 mars; sena ansökningar behandlas inte.
   kalla_url: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/foreningsbidrag/
-  belopp_status: kontrollast
-  deadline_status: olast
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ansökningsperiod 1 februari–31 mars.
+  senast_verifierad: '2026-08-23'
   id: torsas-foreningsbidrag-inom-socialnamndens-omrade
+- id: torsas-allmanna-samlingslokaler
+  namn: Bidrag till allmänna samlingslokaler
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Ideella föreningar som driver en allmän samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [04-01]
+  krav:
+  - Föreningen ska äga eller disponera lokalen och ansvara för dess förvaltning och uthyrning
+  - Lokalen ska vara öppen för föreningsmöten, studier, kultur- och fritidsverksamhet samt andra allmänna sammankomster på skäliga och likvärdiga villkor
+  - Föreningen ska vara demokratiskt uppbyggd och verksamheten ska drivas utan vinstsyfte
+  - Det ska finnas ett varaktigt lokalt behov, en allsidig användning och en godtagbar standard på lokalen
+  - Föreningen ska ha årsmötesantagna stadgar, minst fem styrelseledamöter och ordnad bokföring
+  - Ansökan ska innehålla föregående årsmötesprotokoll, verksamhetsberättelse, ekonomisk berättelse, revisionsberättelse och planerad verksamhet; verksamhetsberättelsen ska redovisa uthyrningens omfattning
+  belopp: Bildningsnämnden beslutar årligen om bidragets storlek; kommunen publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan senast 1 april; sena ansökningar behandlas inte.
+  kalla_url: https://www.torsas.se/wp-content/uploads/regler_bidrag_allmanna_samlingslokaler.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: torsas-studieforbundsstod
+  namn: Studieförbundsstöd
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund med lokal folkbildningsverksamhet i Torsås kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Studieförbundet ska redovisa lokala studiecirkeltimmar, deltagare och unika deltagare i Torsås kommun
+  - Studieförbundet ska redovisa annan folkbildningsverksamhet med timmar och deltagare samt kulturprogram med antal arrangemang och deltagare
+  - Redovisningen ska beskriva verksamheten i Torsås, samarbeten med lokala föreningar eller andra aktörer och vilka målgrupper som nåtts
+  - Ansvarig kontaktperson, adress, telefonnummer och bankgiro ska anges i kommunens redovisningsmall
+  belopp: Kommunen publicerar ingen aktuell generell beloppsnivå eller fördelningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen ansökningsfrist i den aktuella redovisningsmallen eller e-tjänstelistan.
+  kalla_url: https://www.torsas.se/wp-content/uploads/Redovisning-studieforbunden-mall-3.docx
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: torsas-subventionerad-kommunal-lokal
+  namn: Subventionerad uthyrning av kommunens lokaler
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Bidragsberättigade föreningar som bokar kommunala lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för bidragsberättigade föreningar
+  - Bokningen ska göras av en ansvarig myndig företrädare för föreningen
+  - Alkohol, droger och rökning är förbjudna i kommunens lokaler och anläggningar
+  - Föreningen ska följa anvisningarna och ordningsreglerna för den bokade lokalen eller anläggningen
+  belopp: Subventionerad hyra enligt kommunens taxor; kommunen publicerar ingen generell aktuell stödnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunens bidragsregler publicerar ingen gemensam ansökningsfrist för den subventionerade uthyrningen.
+  kalla_url: https://www.torsas.se/wp-content/uploads/riktlinjer_foreningsbidrag.pdf
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: torsas-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver vara registrerad eller godkänd enligt kommunens regler och lämna de handlingar som efterfrågas.
-  system: Torsås kommuns e-tjänster
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsregister och uppdatera sina föreningsuppgifter under det aktuella året för att kunna söka bidrag.
+  system: Torsås Mina sidor
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna ska vara uppdaterade under det aktuella kalenderåret.
+  giltighet: Ett kalenderår
   ordning: 1
-  kalla_url: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/
-  giltighet_status: okand
+  kalla_url: https://minasidor.torsas.se/oversikt/overview/157
+  giltighet_status: kontrollast
 kommunsiffra: null
