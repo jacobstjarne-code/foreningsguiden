@@ -2,145 +2,251 @@ kommun: Sorsele
 kommun_slug: sorsele
 lan: Västerbottens län
 befolkning: 2374
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid samt kommunledningen
 ansokningssystem:
-  namn: Kommunens e-tjänst
+  namn: Sorsele kommuns e-tjänster och blanketter
   url: https://minasidor.sorsele.se/oversikt/overview/63
-kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/
-verifierad: '2026-08-02'
+kalla_url: &main https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.sorsele.se/media/1320/riktlinjer_foreningsbidrag_fran_2017.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
-- id: sorsele-aktivitets-och-foreningsbidrag
-  namn: Aktivitets- och föreningsbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
-  deadlines:
-    typ: okand
-    datum: []
+- id: sorsele-arrangemang-och-event
+  namn: Arrangemang och event
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och studieförbund som genomför publika arrangemang eller evenemang i Sorsele kommun
+  deadlines: {typ: fasta, datum: [03-01, 09-01, 12-01]}
   krav:
-  - Föreningen ska vara knuten till respektive riksförbund
-  - Minst 5 deltagare per aktivitetstillfälle för sammankomstbidrag
-  - Deltagarna ska vara mellan 7 och 25 år, eller föreningen ha deltagare med funktionsnedsättning
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  min_medlemmar: null
-  alder_min: 7
-  alder_max: 25
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-02'
-  belopp: 'Sammankomstbidrag: 40 kronor per aktivitet med minst 5 deltagare. Resebidrag: 5 kronor per mil (1–8 personer) eller
-    10 kronor per mil (9 eller fler personer), inom 100 mils radie. Ledarutbildning: kursavgift högst 2 000 kronor per kurs
-    och resekostnad 5 kronor per mil, högst två deltagare per organisation och år; lokal kurs 500 kronor per kurs, en gång
-    per år.'
-  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/kommunalt-aktivitetsstoed/
-  belopp_status: kontrollast
-  deadline_status: okand
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Kommunens samlade e-tjänst för ordinarie föreningsstöd. Kontakta kommunen om ansökningsförfarandet
-- id: sorsele-startbidrag
-  namn: Startbidrag
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Nya föreningar och grupper med inriktning mot kommunens prioriterade målgrupper och fokusområden
-  deadlines:
-    typ: okand
-    datum: []
-  krav:
-  - Organisationen ska vara nystartad
-  - Bidraget beviljas efter särskild prövning av kommunen
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-02'
-  belopp: 1 000 kronor
-  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/startbidrag/
-  belopp_status: kontrollast
-  deadline_status: okand
-  krav_status: kontrollast
-  krav_fullstandiga: true
-  anteckning: Kommunen anger startbidrag som en egen bidragsform. Kontakta kommunen om ansökningsförfarandet
-- id: sorsele-snabbsparet-snabbkultur
-  namn: Snabbspåret och Snabbkultur
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Ungdomar och ungdomsgrupper som vill genomföra kulturaktiviteter, arrangemang, cuper eller turneringar
-  deadlines:
-    typ: lopande
-    datum: []
-  krav: []
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-02'
-  belopp: null
-  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/
-  belopp_status: okand
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kan även sökas av enskilda ungdomar och ungdomsgrupper.
-- id: sorsele-lokalbidrag
-  namn: Lokalbidrag
-  kategori:
-  - ovrig
-  malgrupp: Föreningar som äger bya- eller samlingslokaler som fungerar som mötesplatser
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
-  krav:
-  - Föreningen ska äga en bya- eller samlingslokal
-  - Lokalen får inte i huvudsak användas i kommersiellt syfte
-  - Lokalen får inte vara omfattad av andra kommunala avtal
-  - Området får inte redan ha kommunala uppvärmda lokaler som går att hyra
-  sen_ansokan: Kontakta kommunen om ansökningsförfarandet
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-02'
-  belopp: Beräknas utifrån lokalens yta, högst 200 kvadratmeter; nivån beror på årlig budgetram
-  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/lokalbidrag/
-  belopp_status: kontrollast
+  - Arrangemanget ska vara offentligt och bidra till ett hållbart och levande Sorsele inom kommunens prioriterade målgrupper eller fokusområden
+  - Ansökan ska beskriva syfte, mål, genomförande, tidpunkt och förväntat resultat samt innehålla budget och finansieringsplan
+  - Arrangemanget ska läggas in i kommunens evenemangskalender och genomförandet ska redovisas senast tre månader efter avslut
+  - Föreningen ska lämna fullständiga grundhandlingar och ha en av styrelsen antagen ANDTS-policy
+  belopp: Kommunen publicerar ingen generell beloppsnivå; stödet prövas inom tillgänglig budget
+  sen_ansokan: Ansökan ska lämnas senast 1 mars, 1 september eller 1 december före den aktuella beslutsomgången
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Rekvireras en gång per år. Ny prövning sker vid varje mandatperiod.
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: null
+- id: sorsele-snabbsparet-snabbkultur
+  namn: Snabba cash – Snabbkultur och Snabbspåret
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar, ungdomsgrupper och enskilda unga som vill genomföra kulturaktiviteter, arrangemang, cuper eller turneringar i Sorsele
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Initiativet ska avse kultur, arrangemang, cup eller turnering i Sorsele kommun under året
+  - Ansökan ska visa syfte, mål, genomförande, tidpunkt och förväntat resultat samt kopplingen till en prioriterad målgrupp och ett fokusområde
+  - Aktiviteten ska vara demokratiskt uppbyggd, öppen och fri från alkohol, narkotika, dopning, tobak och spel
+  belopp: Högst 3 000 kronor per ansökan
+  sen_ansokan: Stödet kan sökas löpande under året före genomförandet
+  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/snabba-cash/
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Stödet kan sökas av både föreningar och enskilda unga eller ungdomsgrupper, vilket innebär att föreningar konkurrerar om stödet även med privatpersoner.
+- id: sorsele-startbidrag
+  namn: Startbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nya föreningar och organisationer med inriktning mot kommunens prioriterade målgrupper och fokusområden
+  deadlines: {typ: fasta, datum: [03-01, 09-01, 12-01]}
+  krav:
+  - Organisationen ska vara nybildad och ha verksamhet som anknyter till kommunens prioriterade målgrupper eller fokusområden
+  - Ansökan ska innehålla stadgar, bildande- eller årsmötesprotokoll, styrelseuppgifter, verksamhetsplan, budget och organisationsnummer
+  - Organisationen ska vara demokratiskt uppbyggd, allmännyttig och öppen samt ha en av styrelsen antagen ANDTS-policy
+  belopp: 1 000 kronor
+  sen_ansokan: Ansökan ska lämnas senast 1 mars, 1 september eller 1 december före den aktuella beslutsomgången
+  kalla_url: *norm
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Bidraget beslutas efter särskild kommunal prövning och inom tillgänglig budget.
+- id: sorsele-anstallningsstod-verksamhetsutveckling
+  namn: Anställningsstöd för verksamhetsutveckling
+  kategori: [social, ovrig]
+  malgrupp: Föreningar och studieförbund i Sorsele som anställer en kommuninvånare med statligt anställningsstöd
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Föreningen eller studieförbundet ska vara verksamt i Sorsele kommun och den anställda ska vara folkbokförd i kommunen
+  - Ett statligt anställningsstöd ska vara beviljat och kommunens kompletterande stöd ska godkännas före rekvisition
+  - Rekvisition med löne- och beslutsunderlag ska lämnas kvartalsvis under närmast följande kvartal
+  - Ett avbrott i anställningen på minst sex månader kräver en ny kommunal prövning och förändringar ska anmälas till kommunen
+  belopp: 10 procent av det beviljade statliga anställningsstödet per månad
+  sen_ansokan: Rekvisition ska lämnas under kvartalet närmast efter den period som ersättningen avser; senare rekvisition avslås
+  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/anstaellningsutveckling/
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Detta är Sorsele kommuns egen komplettering. Det statliga anställningsstödet är endast beräkningsunderlag och utgör inte kommunposten.
+- id: sorsele-aktivitets-och-foreningsbidrag
+  namn: Kommunalt aktivitetsstöd
+  kategori: [idrott, kultur, funktionsratt, ovrig]
+  malgrupp: Lokala föreningar med verksamhet för barn och unga 7–25 år eller deltagare med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [03-01, 09-01]}
+  krav:
+  - Föreningen ska vara knuten till en relevant riks- eller distriktsorganisation och bedriva stödberättigad verksamhet i Sorsele
+  - Sammankomstbidrag kräver en planerad ledarledd aktivitet med minst fem deltagare i åldern 7–25 år; för deltagare med funktionsnedsättning gäller ingen övre åldersgräns
+  - Resebidrag gäller resa till och från aktivitet inom 100 mil och lämnas inte för arrangemang med prispengar
+  - Ledarutbildning ska anordnas av riks-, läns-, distrikts- eller lokalorganisation och får inte vara kongress eller förbundsmöte
+  - Ansökan och närvarounderlag ska avse rätt halvårsperiod och lämnas med kommunens fullständiga föreningshandlingar
+  belopp: 'Sammankomstbidrag: 40 kronor per aktivitet. Resebidrag: 5 kronor per mil för 1–8 personer och 10 kronor per mil för minst 9 personer. Ledarutbildning: högst 2 000 kronor i kursavgift per kurs samt resa enligt normen, högst två deltagare per organisation och år; lokalt anordnad kurs 500 kronor en gång per år.'
+  sen_ansokan: Senast 1 mars för perioden juli–december och 1 september för januari–juni
+  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/kommunalt-aktivitetsstoed/
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Detta är Sorsele kommuns eget aktivitetsstöd. Eventuella stöd från riks- eller distriktsorganisation minskar bara kommunens ersättning enligt kommunens regel och är inte egna kommunposter.
+- id: sorsele-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  malgrupp: Studieförbund med statsbidragsberättigad folkbildnings- och kulturverksamhet i Sorsele kommun
+  deadlines: {typ: fasta, datum: [04-30]}
+  krav:
+  - Studieförbundet ska bedriva statsbidragsberättigad verksamhet i Sorsele kommun
+  - Ansökan ska redovisa föregående års studietimmar samt arrangemang och kulturprogram med minst åtta deltagare eller besökare per tillfälle
+  - Verksamhetsberättelse, ekonomisk redovisning, revisionsberättelse och aktuella planeringsunderlag ska lämnas för kommunens granskning
+  belopp: null
+  sen_ansokan: Ansökan för föregående års verksamhet ska lämnas senast 30 april
+  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foreningsbidrag/kommunala-bidrag-och-stoed/studiefoerbund/
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas med 60 procent efter genomsnittligt antal studietimmar och 40 procent efter genomsnittligt antal arrangemang och kulturprogram föregående år; totalsumman publiceras inte
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, annat]
+  kraver_registrering: true
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Statsbidragsberättigandet är ett behörighetsunderlag; bidraget i denna post beslutas och betalas av Sorsele kommun.
+- id: sorsele-lokalbidrag
+  namn: Lokalbidrag till mötesplatser
+  kategori: [kultur, social, ovrig]
+  malgrupp: Föreningar som äger bya- eller samlingslokaler som fungerar som mötesplatser
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Föreningen ska äga en bya- eller samlingslokal som fungerar som mötesplats
+  - Lokalen får inte huvudsakligen användas kommersiellt eller omfattas av ett annat kommunalt avtal
+  - Stöd lämnas inte när det redan finns kommunala uppvärmda lokaler som går att hyra i området
+  - Föreningen ska årligen rekvirera stödet och lämna uppgifter om stödberättigad yta och verksamhet
+  belopp: null
+  sen_ansokan: Årlig rekvisition ska lämnas senast 31 oktober
+  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/lokalbidrag/
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas efter lokalernas yta, högst 200 kvadratmeter per lokal; totalsumman och beloppet per kvadratmeter fastställs inom årets budget och publiceras inte
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, hembygd, social, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Ny prövning görs vid varje mandatperiod eller när den årliga rekvisitionen uteblir.
+- id: sorsele-kommunal-sponsring
+  namn: Kommunal sponsring
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och organisationer samt evenemang som anordnas av en förening, organisation eller ett företag
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen, organisationen eller evenemanget ska bidra till lokal utveckling, skapa stolthet eller synliggöra Sorsele som en attraktiv plats att leva på, verka i och besöka
+  - Sponsringen ska bygga på ett affärsmässigt skriftligt avtal med en värderad motprestation, belopp eller värde, parternas åtaganden, avtalstid och redovisningskrav
+  - Politisk eller religiös verksamhet, obetalda skatter eller avgifter och samarbeten som riskerar förtroendeskada kan inte sponsras
+  - Social och ekologisk hållbarhet, dopningsarbete, andra sponsorer, lokal förankring och arrangemangets räckvidd vägs in i bedömningen
+  belopp: Kommunen publicerar ingen fast sponsringsnivå; pengar, material, utrustning, arbetsinsatser och hyresreduktion värderas i kronor i avtalet
+  sen_ansokan: Kommunen publicerar ingen generell ansökningsfrist
+  kalla_url: https://www.sorsele.se/media/izqnfv3b/riktlinje-foer-sponsring-antagen.pdf
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Även organisationer och företag kan omfattas när de arrangerar evenemang, vilket innebär att föreningar kan konkurrera med andra juridiska personer. Kommunchefen beslutar om kommunens sponsring.
+- id: sorsele-foreningspeng-baseco-arena
+  namn: Föreningspeng från namnrättighet Baseco Arena 2026
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar och organisationer med verksamhet i Baseco Arena
+  deadlines: {typ: fasta, datum: [05-31]}
+  krav:
+  - Sökanden ska vara en förening eller organisation med verksamhet i Baseco Arena
+  - Pengarna ska användas till inköp, utrustning, utbildning, arrangemang eller liknande som fyller arenan med attraktiv verksamhet
+  - Ansökningar som utvecklar befintlig eller ny verksamhet i arenan prioriteras
+  - Beslut fattas av en arbetsgrupp med kommunalråd, kommunens kultur- och fritidschef och en representant för Baseco AB
+  belopp: null
+  sen_ansokan: Ansökan för 2026 ska lämnas senast 31 maj 2026
+  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/oevriga-bidrag-och-stoed/foereningspeng-fraan-namnraettighet-baseco-arena/
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: 10 000 kronor per år 2025–2029 från kommunens intäkt för arenans namnrättighet
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Kommunen tar emot ansökan och betalar ut stödet, men Baseco AB är med i beslutsgruppen eftersom potten kommer från kommunens intäkt för namnrättigheten.
 forutsattningar:
-- id: sorsele-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+- id: sorsele-bidragsberattigad-forening
+  vad: Bidragsberättigad förening och fullständiga ansökningshandlingar
+  beskrivning: Föreningen ska ha vald styrelse och stadgar, vara demokratiskt uppbyggd, allmännyttig och öppen samt lämna årsmötesprotokoll med bilagor, verksamhetsplan, organisationsnummer, bank- eller plusgiro och en av styrelsen antagen ANDTS-policy. Stadgar, registreringsuppgifter och ANDTS-policy lämnas på nytt när de ändras. Kommunen publicerar ingen gemensam giltighetstid eller förnyelsefrist för föreningens godkännande.
+  system: Sorsele kommuns e-tjänster och blanketter
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ingen publicerad tidsfrist för föreningens registrering eller förnyelse
   giltighet: null
   ordning: 1
-  kalla_url: https://www.sorsele.se/kultur-och-fritid/foereningsliv-och-foereningsbidrag/kommunala-bidrag-och-stoed/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
