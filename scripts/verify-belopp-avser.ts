@@ -17,7 +17,7 @@ const GOLDEN: Array<{ slug: string; namn: string; expected: WorkClass; etikett: 
   { slug: 'kalmar', namn: 'Bygdepeng', expected: 'blandfall', etikett: 'BLANDFALL' },
   { slug: 'norrtalje', namn: 'Hållbarhetsbidrag', expected: 'blandfall', etikett: 'BLANDFALL' },
   { slug: 'nykoping', namn: 'Evenemangsbidrag', expected: 'blandfall', etikett: 'BLANDFALL' },
-  { slug: 'aneby', namn: 'Kultur- och föreningsstöd', expected: 'ren_pott', etikett: 'REN POTT' },
+  { slug: 'aneby', namn: 'Bidrag till studieförbund', expected: 'ren_pott', etikett: 'REN POTT' },
   { slug: 'arvika', namn: 'Verksamhetsbidrag', expected: 'ren_pott', etikett: 'REN POTT' },
   { slug: 'tranas', namn: 'Aktivitetsstöd', expected: 'ren_pott', etikett: 'REN POTT' },
   { slug: 'angelholm', namn: 'Inventariestöd', expected: 'per_forening', etikett: 'PER FÖRENING' },

@@ -2,71 +2,190 @@ kommun: Aneby
 kommun_slug: aneby
 lan: Jönköpings län
 befolkning: 6854
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Barn- och utbildningsavdelningen, kultur och fritid
 ansokningssystem:
-  namn: Aneby kommuns e-tjänst / självserviceportal
-  url: https://aneby.se/sidor/kommun-och-politik/e-tjanster.html
+  namn: Aneby kommuns självserviceportal och ansökan via e-post eller post
+  url: https://sjalvservice.aneby.se/oversikt/overview/308
 kalla_url: https://aneby.se/sidor/kultur-fritid-och-turism/foreningar-foreningsliv/kultur--och-foreningsstod.html
-verifierad: 2026-07-26
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &riktlinje https://www.aneby.se/download/18.161b27b719a239f4aba2fb7/1761741472574/Aneby%20kommuns%20riktlinjer%20f%C3%B6r%20Kultur%20och%20f%C3%B6reningsbidrag%20samt%20bidrag%20till%20studief%C3%B6rbunden.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: aneby-kultur-foreningsstod
-  namn: Kultur- och föreningsstöd
-  kategori:
-  - idrott
-  - kultur
-  - ovrig
-  malgrupp: Registrerade ideella föreningar i Aneby kommun
+  namn: Medlemsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Ideella föreningar med verksamhet för barn och unga och/eller personer över 65 år
   deadlines:
     typ: fasta
-    datum:
-    - 10-31
+    datum: [10-31]
+  krav: &grundkrav
+  - Föreningen ska vara hemmahörande i Aneby kommun, gagna invånarna och ha varit ideellt verksam i minst sex månader
+  - Föreningen ska vara öppen och demokratisk med stadgar, årsmöte och vald styrelse
+  - Verksamheten ska rikta sig till barn och unga och/eller personer över 65 år och omfatta minst 10 aktiviteter under året
+  - Föreningen ska ha registrerade medlemmar som varit aktiva under det senaste verksamhetsåret
+  - Verksamheten ska följa kommunens strategiska mål, Barnkonventionen, hållbarhetsprinciperna och förbudet mot diskriminering
+  - Föreningen ska ha en tydlig ANDTS-hållning och delta i kommunens två årliga föreningsträffar
+  - Ansökan ska innehålla verksamhetsberättelse, årsmötesprotokoll, balans- och resultaträkning samt undertecknad revisionsberättelse
+  belopp: Beräknas utifrån registrerade aktiva medlemmar i åldersgrupperna 6–25 år, 26–64 år och 65 år eller äldre; aktuella kronor per medlem publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: Cirka 1,1 miljoner kronor fördelas årligen mellan omkring 50 föreningar inom kommunens kultur- och föreningsstöd
+  sen_ansokan: För sen eller ofullständig ansökan berättigar inte till bidrag. Utbetalning sker i februari året efter ansökan.
+  kalla_url: *riktlinje
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: aneby-idrottsskola
+  namn: Bidrag för aktiviteter inom idrottsskolan
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Idrottsföreningar som anordnar aktiviteter inom kommunens idrottsskola
+  deadlines: {typ: fasta, datum: [10-31]}
   krav:
-  - Föreningen måste vara registrerad och ideell
-  - Verksamheten ska bedrivas i Aneby kommun
-  - Villkoren regleras enligt kommunstyrelsens fastställda riktlinjer
-  belopp: null
-  belopp_avser: okand
-  kommunens_pott: "Cirka 1,1 miljoner kronor fördelas årligen mellan omkring 50 föreningar"
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://aneby.se/sidor/kultur-fritid-och-turism/foreningar-foreningsliv/kultur--och-foreningsstod.html
-  belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'EJ_EXTRAHERBAR: Detaljerade riktlinjer finns i PDF från Kultur- och fritidsnämnden, men länken är inte direkt
-    tillgänglig från webbplatsen. Kontakt: Gunilla Crona (Kultur och fritidschef) 0380-461 00. Utbetalning i februari påföljande
-    år. T8a: Kommunens sida anger totalsumman och ungefärligt antal sökande.'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  - Föreningen ska uppfylla kommunens allmänna villkor för kultur- och föreningsbidrag
+  - Föreningen ska anordna en aktivitet inom idrottsskolan för kommunens barn under en skoltermin
+  - Aktiviteten ska ge barn möjlighet att prova föreningens idrott och stimulera till en meningsfull fritid
+  - Idrottsskolan ska ge inblick i kommunens idrotter och idrottsarenor och genomföras på olika håll i kommunen
+  belopp: Bidrag lämnas för anordnad aktivitet inom idrottsskolan; kommunen publicerar ingen generell kronnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sen eller ofullständig ansökan berättigar inte till bidrag.
+  kalla_url: *riktlinje
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: aneby-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som utvecklar verksamhet för barn och unga eller personer över 65 år
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Sökanden ska vara en förening i Aneby kommun och uppfylla kommunens allmänna föreningsvillkor
+  - Aktiviteten ska utveckla verksamheten för barn och unga eller personer som är 65 år eller äldre
+  - Insatsen ska bidra till långsiktig utveckling och inte enbart vara ett avgränsat kortvarigt projekt
+  - Aktiv fritid, barnrätt, jämställdhet, hållbarhet, inkludering, integration och samverkan prioriteras
+  - Beviljat stöd ska redovisas senast två månader efter avslutad aktivitet
+  belopp: Individuellt prövat utvecklingsbidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras löpande men ska lämnas minst en månad innan aktiviteten startar.
+  kalla_url: &utveckling https://sjalvservice.aneby.se/oversikt/overview/369
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: aneby-evenemangsbidrag
+  namn: Evenemangsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som arrangerar öppna publika evenemang i Aneby kommun
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Sökanden ska vara en förening i Aneby kommun och uppfylla kommunens allmänna föreningsvillkor
+  - Evenemanget ska vara en större, öppen och publikinriktad tillställning
+  - Evenemanget ska locka besökare till Aneby och berika livet för kommunens invånare
+  - Både nya och etablerade evenemang kan stödjas
+  - Evenemanget ska genomföras professionellt och uppfylla etiska, miljömässiga och sociala standarder
+  belopp: Individuellt prövat evenemangsbidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan göras löpande men ska lämnas minst en månad före evenemanget.
+  kalla_url: *utveckling
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: aneby-samhallsnyttig-lokal
+  namn: Bidrag för samhällsnyttig lokal
+  kategori: [kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som ansvarar för en lokal som kommunen pekat ut som strategiskt viktig för bygden
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för kultur- och föreningsbidrag
+  - Lokalen ska av kommunen vara utpekad som en strategiskt viktig lokal för bygden
+  - Kostnaderna ska vara kopplade till föreningens huvudverksamhet
+  - Föreningen ska redovisa lokalens kostnader och obligatoriska årsmöteshandlingar i ansökan
+  belopp: Individuellt prövat stöd; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sen eller ofullständig ansökan berättigar inte till bidrag.
+  kalla_url: *riktlinje
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: aneby-anlaggningsbidrag
+  namn: Anläggningsbidrag och lokalbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med egen eller externt hyrd anläggning eller lokal som inte redan subventioneras av kommunen
+  deadlines: {typ: fasta, datum: [10-31]}
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för kultur- och föreningsbidrag
+  - Stödet avser drift, årligt underhåll, mindre reparationer eller lokalkostnader för egen eller hyrd anläggning eller lokal
+  - Kostnader som inte kan kopplas till föreningens huvudverksamhet är inte stödgrundande
+  - Anläggningen bör vara tillgänglig för allmänheten, skolor och andra föreningar på skäliga villkor
+  - Kommunalt hyrd lokal eller anläggning som redan har subventionerad hyra är inte stödberättigad
+  belopp: Individuellt prövat drift-, underhålls- eller lokalkostnadsbidrag; generell procentsats eller högsta nivå publiceras inte
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För sen eller ofullständig ansökan berättigar inte till bidrag.
+  kalla_url: *riktlinje
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: aneby-studieforbund-stod
-  namn: Stöd till studieförbund
-  kategori:
-  - kultur
-  malgrupp: Studieförbund godkända av Folkbildningsrådet
-  deadlines:
-    typ: fasta
-    datum:
-    - 10-31
+  namn: Bidrag till studieförbund
+  kategori: [kultur, ovrig]
+  foreningstyp: [kultur, annat]
+  malgrupp: Studieförbund verksamma i Aneby kommun vars organisation får statsbidrag via Folkbildningsrådet
+  deadlines: {typ: fasta, datum: [03-31]}
   krav:
-  - Studieförbundet ska vara erkänt av Folkbildningsrådet
-  - Folkbildningsverksamhet ska bedrivas i Aneby kommun
-  belopp: Beräknas utifrån föregående års redovisade deltagartimmar och kulturarrangemang.
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://aneby.se/sidor/kultur-fritid-och-turism/foreningar-foreningsliv/kultur--och-foreningsstod.html
+  - Studieförbundet ska vara verksamt i Aneby kommun och dess organisation få statsbidrag via Folkbildningsrådet
+  - Ansökan ska innehålla kontaktuppgifter, organisationsnummer och bank- eller plusgiro
+  - Föregående års lokala verksamhet ska redovisas med deltagartimmar, övrig folkbildningsverksamhet och kulturarrangemang
+  - Årsredovisning och verksamhetsberättelse ska bifogas
+  - Underlag för grundbidrag, förstärkningsbidrag och verksamhetsrelaterat bidrag ska kunna kontrolleras
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas med 75 procent grundbidrag, 6 procent förstärkningsbidrag och 19 procent verksamhetsrelaterat bidrag; totalsumman publiceras inte
+  sen_ansokan: Ansökan ska vara kommunen tillhanda senast 31 mars för utbetalning i juni samma år.
+  kalla_url: https://www.aneby.se/sidor/kultur-fritid-och-turism/foreningar-foreningsliv/bidrag-till-studieforbund.html
   belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: olast
-  anteckning: 'T8a: Kommunen publicerar en beräkningsgrund, inte individuell bedömning.'
-  krav_fullstandiga: null
-  senast_verifierad: '2026-08-03'
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: aneby-forening-registrering
-  vad: Registrering som ideell förening
-  beskrivning: Föreningen måste vara registrerad som ideell förening och bedriva sin huvudsakliga verksamhet i Aneby kommun.
-    Föreningen ansöker enligt riktlinjer fastställda av Aneby kommun styrelse.
-  system: Aneby kommuns e-tjänst
+  vad: Grundvillkor och föreningshandlingar
+  beskrivning: Föreningen ska vara hemmahörande i Aneby kommun, ideell, öppen och demokratisk med stadgar, årsmöte och vald styrelse. Den ska ha varit verksam i minst sex månader, bedriva minst tio aktiviteter per år för barn och unga och/eller personer över 65 år samt lämna de årsmötes-, verksamhets- och ekonomihandlingar som kommunen kräver. Kommunen publicerar ingen separat giltighetstid eller förnyelsefrist för bidragsberättigandet.
+  system: Aneby kommuns självserviceportal
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Minst sex månaders verksamhet innan föreningen kan få bidrag
   giltighet: null
   ordning: 1
-  kalla_url: https://aneby.se/sidor/kultur-fritid-och-turism/foreningar-foreningsliv/kultur--och-foreningsstod.html
-  giltighet_status: okand
+  kalla_url: *riktlinje
+  giltighet_status: ingen_regel
