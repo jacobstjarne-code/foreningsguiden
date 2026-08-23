@@ -514,7 +514,15 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
       if (raknareTextEl) {
         const mall = antal === 1 ? TRATT.raknare.mallEtt : TRATT.raknare.mall;
         const bas = mall.replace('{antal}', String(antal)).replace(/{kommun}/g, kommunData.kommun);
-        raknareTextEl.textContent = step >= 4 ? bas + TRATT.raknare.beskedTillagg : bas;
+        // X1.1 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md §7): kommunSlug kan
+        // vara satt via kommunsidans CTA (?fortsatt=), inte ett svar hon
+        // gett i tratten — step hoppar till 4 i båda fallen (rad ~741),
+        // så step >= 4 ensamt kan inte skilja "hon svarade" från "sidan
+        // satte kommunen åt henne". "Ordnade efter vad ni svarat" är
+        // dessutom bara sant om verksamhet/sökt-svaren faktiskt påverkat
+        // sorteraForTratt() — kommunvalet ensamt filtrerar, sorterar inte.
+        const harSvaratUtoverKommun = profil.verksamhet.length > 0 || profil.sokt !== null;
+        raknareTextEl.textContent = step >= 4 && harSvaratUtoverKommun ? bas + TRATT.raknare.beskedTillagg : bas;
       }
 
       // B3: "Sortera, aldrig filtrera" — sorteraForTratt (matching.ts)
