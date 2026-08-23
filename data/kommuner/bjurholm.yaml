@@ -2,12 +2,18 @@ kommun: Bjurholm
 kommun_slug: bjurholm
 lan: Västerbottens län
 befolkning: 2315
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kommunstyrelsen samt kultur- och utbildningsförvaltningen
 ansokningssystem:
   namn: E-tjänster Bjurholm
   url: https://e-tjanster.bjurholm.se/
-kalla_url: https://www.bjurholm.se/uppleva-och-gora/foreningar
-verifierad: 2026-07-26
+kalla_url: &huvud https://www.bjurholm.se/uppleva-och-gora/foreningar
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.bjurholm.se/download/18.7b70bebd198cad51f975eaa/1756129862672/Riktlinje%20f%C3%B6r%20samverkan%20med%20f%C3%B6reningar%20i%20kommunen%20inklusive%20regler%20f%C3%B6r%20bidrag%2C%20st%C3%B6d%20och%20ers%C3%A4ttningar.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: bjurholm-lokalbidrag
   namn: Lokalbidrag
@@ -15,11 +21,12 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Registrerade föreningar för bidrag till lokaler
   deadlines:
     typ: fasta
     datum:
-    - 08-15
+    - 08-31
   krav:
   - Föreningen måste vara registrerad i Bjurholms föreningsregister
   - Ansökan skickas genom e-tjänsten
@@ -31,20 +38,22 @@ bidrag:
   - Föreningen ska ha ett registrerat organisationsnummer
   - Föreningen ska i samband med ansökan lämna in årsmötesprotokoll, verksamhetsberättelse samt revisionsberättelse
   belopp: Högst 40 procent av godkända kostnader, maximalt 6 000 kr
-  sen_ansokan: Ej möjlig efter 15 augusti
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Den aktuella ansökningsomgången 2026 stänger 31 augusti
   kalla_url: https://www.bjurholm.se/uppleva-och-gora/foreningar/lokalbidrag
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: 'Motstridiga källor för sista ansökningsdag: riktlinjedokumentet ''Riktlinjer för samverkan med föreningar i
-    kommunen'' (KF 2025-04-28 §13, giltigt fr.o.m. 2025-05-21) anger 15 augusti, medan bjurholm.se/uppleva-och-gora/foreningar/lokalbidrag
-    (senast uppdaterad 2026-04-02) anger 31 augusti 2026. Ej verifierat vilket datum som faktiskt gäller — bör klargöras med
-    kommunen innan ändring.'
+  anteckning: Riktlinjen anger 15 augusti som ordinarie frist, medan den aktuella webbsidan och e-tjänsten anger 31 augusti för 2026.
+  senast_verifierad: '2026-08-23'
 - id: bjurholm-studieforbund
   namn: Bidrag till studieförbund
   kategori:
   - kultur
+  - ovrig
+  foreningstyp: [kultur, annat]
   malgrupp: Studieförbund registrerade i Bjurholm
   deadlines:
     typ: fasta
@@ -56,8 +65,9 @@ bidrag:
   - Ansökan ska innehålla senaste verksamhetsberättelsen
   - Ansökan ska innehålla senaste årsmötesprotokollet inklusive revisionsberättelse samt resultat- och balansräkning
   - E-legitimation krävs för att ansöka
-  belopp: Bidraget utbetalas med 70 procent grundbidrag (baserat på föregående års studietimmar) och 30 procent volymbidrag
-    (baserat på föregående års deltagartimmar)
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga studieförbundsanslag fördelas med 70 % grundbidrag efter föregående års studietimmar och 30 % volymbidrag efter föregående års deltagartimmar; totalsumman publiceras inte
   sen_ansokan: Ej möjlig efter 31 maj
   kalla_url: https://e-tjanster.bjurholm.se/
   belopp_status: kontrollast
@@ -65,10 +75,12 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: bjurholm-arrangemangsbidrag-kultur
   namn: Arrangemangsbidrag — Kultur
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Föreningar för kulturella arrangemang
   deadlines:
     typ: lopande
@@ -77,20 +89,25 @@ bidrag:
   - Föreningen måste vara registrerad i Bjurholms föreningsregister
   - Arrangemanget ska vara av kulturell karaktär
   - Budgetförslag och programbeskrivning krävs
+  - Föreningen ska återrapportera efter arrangemangets slut
   belopp: Max 1 000 kronor per ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
   kalla_url: https://www.bjurholm.se/uppleva-och-gora/bibliotek-och-kultur/kultur
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Föreningar måste rapportera efter arrangemanget
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: bjurholm-bygdemedel
   namn: Bygdemedel
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och idéburet verksamhet för bygdeutveckling
   deadlines:
     typ: fasta
@@ -105,21 +122,22 @@ bidrag:
   - Endast fasta kostnader — inte möbler eller lösa inventarier
   belopp: "Max 90 % av godkända kostnader"
   belopp_avser: per_forening
-  kommunens_pott: null
+  kommunens_pott: Omkring 140 000 kr brukar kunna fördelas årligen i Bjurholms kommun
   sen_ansokan: Ej möjlig efter 15 april
   kalla_url: https://www.bjurholm.se/uppleva-och-gora/foreningar/bygdemedel
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ansökan via Länsstyrelsen Min ansökan-portal. Årlig budget ca 140 000 kronor för Bjurholm. Arbetsinsatser räknas
-    inte längre som egenfinansiering.
+  krav_fullstandiga: true
+  anteckning: Länsstyrelsen fattar beslut efter kommunens beredning och prioritering. Eget arbete får inte räknas som egenfinansiering.
+  senast_verifierad: '2026-08-23'
 - id: bjurholm-lovaktivitetsbidrag
   namn: Bidrag till lovaktivitet
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar, studieförbund och kyrkliga samfund som ordnar kostnadsfria lovaktiviteter för barn 6–15 år
   deadlines:
     typ: lopande
@@ -133,6 +151,8 @@ bidrag:
   - Aktiviteten ska marknadsföras som arrangemang med lovstöd från Bjurholms kommun
   - Föreningen ska rapportera aktiviteten på avsett formulär efter genomförande
   belopp: Högst 3 000 kr
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande så länge medel finns
   kalla_url: https://e-tjanster.bjurholm.se/oversikt/overview/268
   belopp_status: kontrollast
@@ -141,27 +161,83 @@ bidrag:
   krav_fullstandiga: true
   anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-02'
+  senast_verifierad: '2026-08-23'
+- id: bjurholm-kostnadsfria-kommunala-lokaler
+  namn: Kostnadsfria kommunala lokaler och anläggningar
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar och organisationer i Bjurholms kommun
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen eller organisationen ska vara verksam i kommunen och registrerad i kommunens föreningsregister
+  - Kostnadsfri bokning gäller föreningsverksamhet och föreningsträffar, inte privata evenemang för en enskild medlem
+  - De lokaler som omfattas är Castorhallen, Folkets Hus, sammanträdesrummen Ogen och Krögaren samt angivna kommunala anläggningar
+  - Föreningen ska följa kommunens regler för korttidshyra av lokaler och anläggningar
+  - Fasta läsårstider i Castorhallen söks i en särskild årlig omgång; för 2026 förlängdes sista dagen till 31 juli
+  - Föreningar som söker samma Castorhallstid ansvarar för att samverka och komma överens
+  belopp: Kostnadsfri upplåtelse av angivna kommunala lokaler och anläggningar för föreningsverksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Enstaka bokningar görs löpande; efter stoppdatum för fasta Castorhallstider kan föreningen välja bland kvarvarande tider
+  kalla_url: https://e-tjanster.bjurholm.se/oversikt/overview/320
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: bjurholm-uppdragsersattning
+  namn: Uppdragsersättning till föreningar
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  foreningstyp: *alla
+  malgrupp: Föreningar som utför ett särskilt allmännyttigt uppdrag åt kommunen
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Uppdraget ska vara till nytta för allmänheten och av stor vikt för kommunen eller avse verksamhet som annars skulle utföras i kommunal regi
+  - Uppdraget ska harmoniera med föreningens ordinarie verksamhet, stadgar och intressen
+  - Föreningen ska följa kommunens mål, allmänna föreningsregler och riktlinjer
+  - Ett skriftligt avtal ska tecknas efter dialog med kommunen om uppdragets omfattning och tidsperiod
+  - Avtalet ska tydligt ange föreningens respektive kommunens ansvar
+  - Uppföljning och redovisning ska genomföras innan full ersättning betalas ut
+  belopp: Ersättningen fastställs genom politiskt beslut och skriftligt avtal utifrån uppdraget och kommunens budgetram
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen öppen ansökningsfrist publiceras; dialog och avtal ska föregå uppdraget
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Exempel är underhåll av leder, kulturella platser och idrottsanläggningar samt ersättning för vissa utlägg.
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: bjurholm-registrering
   vad: Registrering som förening i Bjurholms föreningsregister
-  beskrivning: För kommunala bidrag måste föreningen vara registrerad i Bjurholms föreningsregister. För Bygdemedel krävs
-    ideell status och säte i påverkad område.
+  beskrivning: Föreningen ska ha säte och verksamhet i Bjurholm, organisationsnummer, egen ekonomisk medverkan och registrering i kommunens föreningsregister. Uppgifterna ska uppdateras årligen och vid förändringar.
   system: Föreningsregistret
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Årlig uppdatering av föreningsuppgifterna
   ordning: 1
-  kalla_url: https://www.bjurholm.se/uppleva-och-gora/foreningar/foreningsregister
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 - id: bjurholm-e-tjanst
   vad: Ansökan via e-tjänsten (för kommunala bidrag) eller Länsstyrelsen (för Bygdemedel)
-  beskrivning: 'För Lokalbidrag och Studieförbundsbidrag: ansöka via e-tjanster.bjurholm.se. För Bygdemedel: ansökan via Länsstyrelsen
-    Västerbottens Min ansökan-portal.'
+  beskrivning: Kommunala bidrag och bokningar hanteras genom kommunens e-tjänster. Bygdemedel söks i Länsstyrelsens Min ansökan.
   system: E-tjänst / Länsstyrelsen
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 2
   kalla_url: https://e-tjanster.bjurholm.se/
-  giltighet_status: okand
+  giltighet_status: ingen_regel
