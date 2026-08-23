@@ -2,12 +2,18 @@ kommun: Övertorneå
 kommun_slug: overtornea
 lan: Norrbottens län
 befolkning: 3975
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid, Stöd och omsorg samt Tekniska enheten
 ansokningssystem:
   namn: Kommunens e-tjänst eller blankett
   url: https://www.overtornea.se/sv/uppleva-och-gora/foreningar/
 kalla_url: https://www.overtornea.se/sv/uppleva-och-gora/foreningar/
-verifierad: '2026-08-01'
+verifierad: 2026-08-23
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: overtornea-lok-stod
   namn: Lokalt aktivitetsstöd (LOK-stöd)
@@ -17,19 +23,26 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
+    - 02-25
     - 08-25
   krav:
   - Närvarolistor från terminens aktiviteter ska lämnas som underlag
   - Stöd kan endast sökas för deltagare i åldrarna 3–25 år
+  - Närvarorapporten ska redovisa varje deltagartillfälle och varje individuell deltagare; enbart totalsummor är inte stödberättigade
   belopp: 15 kronor per deltagartillfälle, för åldrarna 3–25 år
   sen_ansokan: Vårterminens aktiviteter ska redovisas senast 25 augusti
-  kalla_url: https://overtornea.se/nyheter/ansokan-om-lok-stod/
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
   belopp_status: kontrollast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunens aktuella påminnelse verifierar deadline för vårterminen. Eventuell separat deadline för höstterminen
-    är inte öppet verifierad.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Kommunens nyhet den 16 juli 2026 bekräftar vårterminens deadline och hänvisar separat till det statliga LOK-stödet; den här raden avser endast kommunens eget stöd.
 - id: overtornea-lonebidrag-forening
   namn: Kommunalt bidrag till anställda i föreningar
   kategori:
@@ -44,14 +57,21 @@ bidrag:
   krav:
   - Föreningen ska i samarbete med Arbetsförmedlingen anställa en person med funktionsnedsättning
   - E-legitimation krävs för att använda e-tjänsten
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://overtornea.se/stod-omsorg/
-  belopp_status: okand
-  deadline_status: okand
+  - Sökanden ska vara en ideell förening och lämna kontaktuppgifter samt rekvisition genom kommunens e-tjänst
+  belopp: Kommunalt medfinansieringsbidrag; kommunen publicerar ingen generell nivå eller beräkningsregel
+  sen_ansokan: Kommunen publicerar ingen sista rekvisitionsdag
+  kalla_url: https://overtornea.enamnd.se/oversikt/overview/2000
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunen publicerar en särskild rekvisition för kommunalt bidrag till anställda i föreningar. Se kommunens rekvisition/e-tjänst
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
 - id: overtornea-enskild-vag-statsbidrag
   namn: Kommunalt bidrag till enskild väg med statsbidrag
   kategori:
@@ -62,15 +82,23 @@ bidrag:
     datum: []
   krav:
   - Vägen ska vara berättigad till statsbidrag enligt Trafikverkets bedömning
+  - Vägen ska underhållas av vägförening, vägsamfällighet, samfällighetsförening, annan sammanslutning eller enskild väghållare
+  - Trafikverkets beräknade årliga underhållskostnad ligger till grund för kommunens kompletterande bidrag
   belopp: Kommunalt bidrag utöver statsbidraget så att de tillsammans täcker den årliga underhållskostnaden som Trafikverket
     beräknat
   sen_ansokan: Bidraget betalas ut per kalenderår i efterskott, utan separat ansökningsdeadline.
   kalla_url: https://overtornea.se/tekniska/gator-och-vagar/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Se kommunens blankett och villkor
+  krav_fullstandiga: true
+  foreningstyp: [annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är även öppet för enskilda väghållare; föreningar och samfälligheter kan därför konkurrera med privatpersoner om kommunens vägmedel.
 - id: overtornea-enskild-vag-utan-statsbidrag
   namn: Kommunalt bidrag till enskild väg utan statsbidrag
   kategori:
@@ -88,10 +116,16 @@ bidrag:
     av kommunstyrelsen. Bidrag till nyanläggning betalas ut i mån av arbetenas utförande.
   kalla_url: https://overtornea.se/tekniska/gator-och-vagar/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Se kommunens blankett och villkor
+  krav_fullstandiga: true
+  foreningstyp: [annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är även öppet för enskilda väghållare; föreningar och samfälligheter kan därför konkurrera med privatpersoner om kommunens vägmedel.
 - id: overtornea-enskilt-avlopp
   namn: Bidrag till enskilt avlopp
   kategori:
@@ -107,23 +141,289 @@ bidrag:
   - Ett beslut från miljö- och byggnadsnämnden med tillstånd för anläggningen ska bifogas ansökan
   - Ett protokoll från miljö- och byggnadsenhetens besök ska bifogas ansökan
   - Ett intyg som bekräftar att arbetet är utfört enligt tillstånd och villkor ska bifogas ansökan
+  - För en gemensam anläggning ska nyttjanderättsavtal för ledningar och samtliga delägares samtycke lämnas till kommunen
   belopp: 50 procent av faktisk kostnad, högst 50 000 kronor
   sen_ansokan: Ansökan görs efter slutfört arbete
   kalla_url: https://overtornea.se/tekniska/vatten-och-avlopp/
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Bidrag lämnas inte till fritidshus eller eget arbete/material.
+  krav_fullstandiga: true
+  foreningstyp: [annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Bidrag lämnas inte till fritidshus eller eget arbete eller material. Stödet är även öppet för privatpersoner som äger permanentbostäder; gemensamhetsanläggningar konkurrerar därför med enskilda fastighetsägare om medlen.
+- id: overtornea-evenemang-arrangemang
+  namn: Evenemangs- och arrangemangsbidrag
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Föreningar som arrangerar offentliga fritids- och kulturarrangemang i Övertorneå
+  deadlines:
+    typ: fasta
+    datum: [03-30, 11-30]
+  krav:
+  - Arrangemanget ska genomföras i Övertorneå under aktuellt kalenderår, vara öppet för alla och ligga utanför ordinarie föreningsverksamhet
+  - Stödet ges inte till cuper, turneringar, annan tävlingsverksamhet, privatpersoner eller företag
+  - Ansökan ska beskriva aktiviteten och innehålla budget med beräknade kostnader och intäkter
+  - Beviljade medel ska redovisas efter arrangemanget och kunna styrkas på begäran
+  belopp: Individuell prövning; kommunen publicerar ingen generell maxnivå för ordinarie ansökningar
+  sen_ansokan: Arrangemang januari–juli söks senast 30 november året före och arrangemang juli–december senast 30 mars; stödbehov på högst 3 000 kronor kan sökas löpande minst en månad före
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-utvecklingsbidrag
+  namn: Utvecklingsbidrag
+  kategori: [ovrig]
+  malgrupp: Föreningar som förbättrar den lokala miljön eller genomför allmännyttiga inköp
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Åtgärden ska avse upprustning av den lokala miljön, ett inköp eller något annat som är bra för allmänheten
+  - Exempel är sommarblommor, kantklippning och julbelysning
+  - Ansökan ska innehålla en beskrivning av den planerade åtgärden och en kostnadsberäkning
+  - Genomförd insats ska redovisas på kommunens begäran
+  belopp: Högst 3 000 kronor
+  sen_ansokan: Ansökan kan göras löpande men ska lämnas senast en månad före den planerade åtgärden
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-sponsring-ungdomsidrott
+  namn: Sponsring av ungdomsidrott
+  kategori: [idrott]
+  malgrupp: Aktiva ungdomsidrottsföreningar med lag för deltagare upp till 18 år
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en aktiv ungdomsidrottsförening och inköpet avse ett lag med idrottare upp till 18 år
+  - Ansökan ska beskriva laget och det planerade inköpet samt innehålla kostnadsberäkning och offert
+  - Övertorneå kommuns logotyp ska finnas på matchdräkterna
+  - Genomfört inköp och tryck ska redovisas till kultur och fritid
+  belopp: Högst 5 000 kronor per lag, en gång vart femte år
+  sen_ansokan: Ansökan kan göras löpande
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-startbidrag
+  namn: Startbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Nybildade ideella föreningar i Övertorneå
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Föreningen ska vara nybildad, ha registrerats hos Skatteverket och i kommunens föreningsregister samt uppfylla kommunens allmänna stödregler
+  - Föreningen ska ha antagna stadgar och bedriva verksamhet i Övertorneå kommun
+  - Ansökan ska beskriva den planerade åtgärden och innehålla en kostnadsberäkning
+  - Genomförd insats ska redovisas på kommunens begäran
+  belopp: Högst 2 000 kronor
+  sen_ansokan: Ansökan kan göras löpande men ska lämnas senast en månad före den planerade åtgärden
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-anlaggningsbidrag
+  namn: Anläggningsbidrag till föreningsägda anläggningar
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar och organisationer som äger och driver allmännyttiga fritidsanläggningar
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningen ska äga anläggningen, hålla den i gott skick och göra den allmänt tillgänglig och kostnadsfritt öppen för allmänheten
+  - Ansökan avser föregående år och ska innehålla redovisning av kostnader, årsmötesprotokoll samt ekonomisk berättelse och revisionsberättelse
+  - Kostnader och verksamhet ska redovisas årligen och kunna styrkas på begäran
+  - Föreningen ska följa kommunens allmänna hållbarhets-, jämlikhets-, tillgänglighets- och drogfrihetsvillkor
+  belopp: Stor fotbollsplan 7 500 kr, liten 2 000 kr, isbana med sarg 10 000 kr, liten isbana 4 000 kr, skidspår 1 000 kr/km högst 5 km, golfbana 30 000 kr, paviljong 8 000 kr; övriga anläggningar bedöms individuellt
+  sen_ansokan: Ansökan ska vara kommunen tillhanda senast 30 april och avse föregående år
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-uppdragsersattning-anlaggning
+  namn: Uppdragsersättning för kommunala anläggningar
+  kategori: [idrott, ovrig]
+  malgrupp: Föreningar som enligt avtal ansvarar för drift och skötsel av en kommunal anläggning
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska ha ett separat avtal med kommunen om drift och skötsel av en kommunal anläggning
+  - Anläggningen ska skötas enligt avtalet, hållas i gott skick och vara tillgänglig för allmänheten
+  - Skötseln ska följa ekonomiska, ekologiska och sociala hållbarhetsprinciper
+  - Avtalet följs upp två gånger per år
+  belopp: Ersättningen bestäms efter uppdragets omfattning i separat avtal
+  sen_ansokan: Kommunen publicerar ingen öppen ansökningsfrist; ersättningen regleras genom avtal
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, friluft, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Riktlinjen nämner ishall, idrottsplan och ridhus som exempel.
+- id: overtornea-driftbidrag-samlingslokal
+  namn: Driftbidrag till samlingslokaler
+  kategori: [kultur, ovrig]
+  malgrupp: Aktiva föreningar som äger eller långsiktigt hyr en samlingslokal
+  deadlines:
+    typ: fasta
+    datum: [04-30]
+  krav:
+  - Föreningen ska vara aktiv och äga lokalen eller ha ett långsiktigt hyresavtal
+  - Föreningen ska erbjuda andra föreningar utan egen eller hyresfri möteslokal möjlighet att hyra lokalen
+  - Ansökan avser föregående år och ska redovisa lokalens driftskostnader
+  - Föreningens aktiviteter ska motsvara kommunens vision och värdegrund; kostnader och verksamhet följs upp årligen och ska kunna styrkas
+  belopp: Högst 8 000 kronor
+  sen_ansokan: Ansökan ska lämnas senast 30 april och avse föregående år
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, hembygd, social, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-verksamhetsbidrag
+  namn: Verksamhetsbidrag för föreningar
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Aktiva föreningar som behöver lokal eller finansiering för planerad verksamhet
+  deadlines:
+    typ: fasta
+    datum: [03-30]
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna regler, ha antagna stadgar, ha varit verksam minst sex månader och bedriva verksamhet i kommunen
+  - Ansökan ska presentera ett kostnadsförslag för lokalnyttjande eller planerad verksamhet
+  - Uppkomna kostnader ska redovisas efteråt
+  - Föreningen ska arbeta med hållbarhet, jämställdhet och tillgänglighet samt ta avstånd från rasism, våld och mobbning
+  belopp: Högst 3 000 kronor för förening som saknar egen lokal och högst 5 000 kronor för planerad verksamhet
+  sen_ansokan: Ansökan ska lämnas före den 30 mars
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-uppdragsersattning-kultur
+  namn: Uppdragsersättning för kulturutbud
+  kategori: [kultur]
+  malgrupp: Föreningar som utför kommunala uppdrag inom kulturutbudet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska ansvara för ett kulturuppdrag i Övertorneå kommun enligt separat avtal
+  - Sökanden ska kunna visa legitimitet i kultursammanhang och presentera en verksamhetsplan för kommande år
+  - Uppdraget ska stärka kommunens attraktivitet, spegla vision och värdegrund samt bygga på tillgänglighet, likabehandling och hållbarhet
+  - Avtalet följs upp vid tre sammanträden per år
+  belopp: Ersättningen bestäms i separat avtal
+  sen_ansokan: Kommunen publicerar ingen öppen ansökningsfrist; ersättningen regleras genom avtal
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, hembygd, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
+- id: overtornea-studieforbund
+  namn: Verksamhetsstöd till studieförbund
+  kategori: [kultur, ovrig]
+  malgrupp: Folkbildningsförbund med genomförd verksamhet i Övertorneå
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara ett folkbildningsförbund med genomförda aktiviteter i Övertorneå kommun
+  - En årsrapport ska lämnas med måltimmar och deltagartimmar
+  - Ansökan ska avse genomförda åtaganden under föregående år
+  belopp: null
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga verksamhetsanslag fördelas mellan folkbildningsförbunden efter aktiviteter, måltimmar och deltagartimmar; totalsumman publiceras inte
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet betalas retroaktivt för föregående års verksamhet.
 forutsattningar:
 - id: overtornea-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  vad: Allmänna villkor för föreningsstöd
+  beskrivning: Föreningen ska ha antagna stadgar, ha varit verksam minst sex månader och bedriva sin verksamhet i Övertorneå. Arbetet ska präglas av ekonomisk, ekologisk och social hållbarhet, jämställdhet, tillgänglighet och drogfrihet. Ekonomiska, politiska, religiösa, försvarsanknutna och rena stödföreningar får normalt inte stöd. Kommunen publicerar ingen gemensam giltighetstid eller förnyelsefrist för stödbehörigheten.
   system: Kommunens e-tjänst eller blankett
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Minst sex månaders verksamhet före stöd
   giltighet: null
   ordning: 1
-  kalla_url: https://www.overtornea.se/sv/uppleva-och-gora/foreningar/
-  giltighet_status: okand
+  kalla_url: https://overtornea.se/wp-content/uploads/2023/02/riktlinjer_foreningsbidrag.pdf
+  giltighet_status: ingen_regel
 kommunsiffra: null
