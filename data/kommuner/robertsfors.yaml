@@ -2,75 +2,85 @@ kommun: Robertsfors
 kommun_slug: robertsfors
 lan: Västerbottens län
 befolkning: 6616
-forvaltning: Kultur och fritid
+forvaltning: Tillväxtsektorn, kultur och fritid
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-verifierad: '2026-08-01'
+  namn: Robertsfors kommuns e-tjänst för föreningsbidrag
+  url: https://minasidor.robertsfors.se/oversikt/overview/22
+kalla_url: &huvud https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/ombidragochhurduansoker.1177.html
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: sammansatt
+  antal: null
+  datum: null
+  kalla_url: &regelverk https://minasidor.robertsfors.se/oversikt/getflowform/200/35
+giltighet_regel_status: kontrollast
 bidrag:
 - id: robertsfors-aktivitetsstod
-  namn: Aktivitetsstöd
+  namn: Lokalt aktivitetsstöd (LOK-stöd)
   kategori:
   - idrott
-  malgrupp: Ideella föreningar och organisationer i kommunen
-  deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
-  status: aktiv
-  senast_verifierad: '2026-08-01'
-- id: robertsfors-anlaggningsbidrag
-  namn: Anläggningsbidrag
-  kategori:
-  - idrott
+  - kultur
+  - funktionsratt
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade ideella föreningar med ungdomsverksamhet eller verksamhet för personer med funktionsnedsättning
   deadlines:
     typ: fasta
-    datum:
-    - 11-01
+    datum: [02-25, 08-25]
   krav:
-  - Ansökan ska innehålla beskrivning av planerade åtgärder (eventuella ritningar med mera) samt kostnadsberäkningar
-  - Föreningen ska ha lämnat in kopior på årsredovisning (verksamhetsberättelse, resultaträkning, revisionsberättelse) senast
-    1 april årligen
-  belopp: Max 70 % av den verkliga kostnaden
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
+  - Föreningen ska vara registrerad hos kommunen, ha aktuella stadgar och ha varit verksam i minst tre månader
+  - Föreningen ska ha en ansvarig styrelse och revisor, vara demokratiskt uppbyggd och ha allmänintresse
+  - Minst fem deltagare inklusive ledaren ska vara 7–20 år; för funktionsrättsföreningar krävs minst tre deltagare och ingen övre åldersgräns gäller
+  - Aktiviteten ska vara ledarledd och pågå i minst en timme
+  - Ansökan ska redovisa föregående kalenderhalvårs verksamhet
+  belopp: Minst 30 kronor per godkänd aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 25 februari respektive 25 augusti för föregående kalenderhalvår.
+  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/bidragforaktiviteterocharrangemang/lokstod.1150.html
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-anlaggningsbidrag
+  namn: Anläggningsbidrag
+  kategori:
+  - idrott
+  - ovrig
+  foreningstyp: *alla
+  malgrupp: Föreningar som bygger, bygger om eller rustar upp idrotts- och fritidsanläggningar eller samlingslokaler
+  deadlines:
+    typ: fasta
+    datum:
+    - 11-01
+  krav:
+  - Åtgärden ska avse en ny, ombyggd, tillbyggd eller upprustad idrotts- eller fritidsanläggning eller samlingslokal
+  - Ansökan ska beskriva planerade åtgärder och innehålla ritningar när det är relevant samt kostnadsberäkning
+  - Föreningen ska vara registrerad hos kommunen och uppfylla de allmänna demokrati- och organisationsvillkoren
+  - Årsredovisning med verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse ska ha lämnats
+  - Utbetalning sker efter att föreningen visar verifikat över de verkliga kostnaderna
+  belopp: Normalt högst 70 procent av den verkliga kostnaden
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 1 november.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - id: robertsfors-drift-samlingslokal
   namn: Driftbidrag till samlingslokal
   kategori:
+  - kultur
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar och organisationer som ansvarar för en allmän samlingslokal i kommunen
   deadlines:
     typ: fasta
     datum:
@@ -79,88 +89,321 @@ bidrag:
   - Samlingslokalen ska vara registrerad hos kommunen
   - Lokalen ska ha en lokalyta som medger en större samling av människor och vara ändamålsenligt utrustad
   - Lokalen ska vara tillgänglig för allmänheten
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-  belopp_status: okand
+  - Ansökan ska redovisa lokalens storlek, standard, utrustning, driftskostnader, befolkningsunderlag och nyttjandegrad
+  - Organisationen ska uppfylla kommunens allmänna registrerings-, demokrati- och redovisningsvillkor
+  belopp: Individuellt fastställt efter lokalens storlek, standard, utrustning, driftskostnader, befolkningsunderlag och nyttjandegrad; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 1 november.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: robertsfors-lokalbidrag
-  namn: Lokalbidrag
+  namn: Bidrag till hyrd lokal för ungdomsverksamhet
   kategori:
   - idrott
   - kultur
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  malgrupp: Föreningar som hyr kommunal lokal eller bidragsberättigad samlingslokal för ungdomsverksamhet
   deadlines:
-    typ: okand
-    datum: []
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-  belopp_status: okand
-  deadline_status: okand
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: Kontakta kommunen om ansökningsförfarandet
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+    typ: fasta
+    datum: [02-01, 09-01]
+  krav:
+  - Den hyrda lokalen ska användas för föreningens ungdomsverksamhet
+  - Bidraget avser kommunal lokal eller samlingslokal i kommunen som får årligt kommunalt driftbidrag
+  - Hyreskostnader för samlingslokal ska styrkas med verifikat
+  - Ansökan ska avse föregående halvår
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna organisations- och demokratikrav
+  belopp: Högst 70 procent av fastställd kommunal hyrestaxa eller av hyreskostnaden för bidragsberättigad samlingslokal
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan lämnas före den 1 februari respektive 1 september och avser föregående halvår.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: robertsfors-kommunalt-lonebidrag
   namn: Kommunalt lönebidrag
   kategori:
   - social
   - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  foreningstyp: *alla
+  malgrupp: Registrerade ideella föreningar med lönebidragsanställd personal
   deadlines:
     typ: fasta
     datum:
     - 03-01
-  krav: []
-  belopp: null
-  sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-  belopp_status: okand
+  krav:
+  - Föreningen ska ha personal med lönebidragsanställning
+  - Föreningen ska vara registrerad hos kommunen, ha aktuella stadgar och ha varit verksam i minst tre månader
+  - Ansökan eller redovisningen av kostnaderna ska lämnas av styrelsen eller utsedd firmatecknare
+  - Aktuella årsmöteshandlingar, verksamhetsplan, ekonomisk berättelse och budget ska lämnas
+  - Föreningen får inte ha en skatteskuld som drivs in av Kronofogden
+  belopp: Individuellt prövat kommunalt lönebidrag; kommunen publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan eller kostnadsredovisningen ska lämnas före den 1 mars.
+  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/kommunaltlonebidrag.1148.html
+  belopp_status: ingen_regel
   deadline_status: kontrollast
-  krav_status: okand
-  krav_fullstandiga: null
+  krav_status: kontrollast
+  krav_fullstandiga: true
   anteckning: null
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-verksamhetsbidrag-kulturforeningar
+  namn: Verksamhetsbidrag till kulturföreningar
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar, stiftelser och liknande organisationer av kulturell art
+  deadlines:
+    typ: fasta
+    datum: [12-05]
+  krav:
+  - Sökanden ska vara en förening, stiftelse eller liknande organisation av kulturell art och bedriva verksamhet i Robertsfors kommun
+  - Sökande förening ska vara registrerad hos kommunen, ha aktuella stadgar och ha varit verksam i minst tre månader
+  - Ansökan ska lämnas av styrelsen eller utsedd firmatecknare och innehålla verksamhetsplan och budget
+  - Aktuella årsmöteshandlingar, verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse ska lämnas
+  - Kommunstyrelsen beslutar om den årliga fördelningen
+  belopp: Individuellt prövat verksamhetsbidrag; kommunen publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 5 december.
+  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/bidragforaktiviteterocharrangemang/verksamhetsbidragtillkulturforeningar.1154.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-enstaka-offentliga-kulturarrangemang
+  namn: Bidrag till enstaka offentliga kulturarrangemang
+  kategori: [kultur]
+  foreningstyp: [kultur, hembygd, annat]
+  malgrupp: Föreningar och studieförbund som ordnar offentliga kulturprogram eller arrangemang
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Sökanden ska vara en förening eller ett studieförbund
+  - Kulturprogrammet eller arrangemanget ska vara riktat till allmänheten
+  - Ansökan ska lämnas före arrangemanget; redan genomförda program kan inte beviljas bidrag
+  - Sökande förening ska uppfylla kommunens demokrati-, registrerings- och redovisningsvillkor
+  - Ansökan ska innehålla en beskrivning av verksamheten och en budget för det sökta bidraget
+  belopp: Individuellt prövat arrangemangsbidrag; kommunen publicerar ingen generell beloppsnivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men måste komma in innan arrangemanget genomförs.
+  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/bidragforaktiviteterocharrangemang/bidragenstakaoffentligakulturarrangemang.1067.html
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-inventariebidrag
+  namn: Inventariebidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade ideella föreningar som köper inventarier till verksamheten
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Inventarien ska användas i föreningens huvudsakliga verksamhet; verksamhetsinventarier prioriteras framför administrativa hjälpmedel
+  - Bidrag ges inte till anläggnings- eller förbrukningsmaterial eller fast inredning
+  - Ansökan ska innehålla beskrivning, budget och kostnadsunderlag för inköpet
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna organisations- och demokratikrav
+  - Utbetalning sker efter att verifikat för inköpta inventarier har visats
+  belopp: Normalt högst 50 procent av verklig kostnad; för vissa dyrare inventarier kan högst 70 procent beviljas
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-drift-idrott-fritidsanlaggning
+  namn: Driftbidrag till idrotts- eller fritidsanläggning
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som äger, förvaltar och sköter idrotts- eller fritidsanläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska äga, förvalta och sköta en stödberättigad idrotts- eller fritidsanläggning
+  - Anläggningen ska vara öppen för allmänheten
+  - Ansökan ska redovisa anläggningens storlek, standard, nyttjandegrad och geografiska placering
+  - Föreningen ska uppfylla kommunens allmänna registrerings-, demokrati- och redovisningsvillkor
+  - Stödet kan avse idrottshall, klubbhus, plan, bana, spår, led eller annan publicerad idrotts- och friluftsanläggning
+  belopp: Individuellt drift- och skötselbidrag; kommunen kan dessutom svara för högst 60 procent av elkostnaden för anläggningar som behöver el för verksamheten
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar att stödet söks årligen men anger ingen sista ansökningsdag.
+  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/driftbidrag/driftbidragtillidrottochfritidsanlaggning.1069.html
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-drift-snoskoterforeningar
+  namn: Driftbidrag till snöskoterföreningar eller motsvarande
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, annat]
+  malgrupp: Föreningar som med snöskoter eller pistmaskin sköter spår, leder eller backar för allmänheten
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska med snöskoter eller pistmaskin sköta elljusspår, slalombacke eller skoterled
+  - Anläggningen eller leden ska hållas i ordning så att skid- eller skoteraktiviteter kan utövas av allmänheten
+  - Ansökan ska beskriva anläggningens omfattning, nyttjandegrad och föreningens aktivitet
+  - Föreningen ska vara registrerad och uppfylla kommunens allmänna organisations- och demokratikrav
+  - Kommunstyrelsen beslutar om bidraget
+  belopp: Individuellt prövat efter anläggningens omfattning, nyttjandegrad och föreningens aktivitet; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar att stödet söks årligen men anger ingen sista ansökningsdag.
+  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag/driftbidrag/driftbidragtillsnoskooterforeningar.1146.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-ungdomsledarutbildning
+  namn: Bidrag till ungdomsledarutbildning
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som utbildar ungdomsledare
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Kursen ska bidra till återväxten av ungdomsledare i föreningen
+  - Bidrag ges inte till utbildning som får bidrag genom studieorganisation eller till kongress, stämma eller förbundsmöte
+  - Ansökan ska innehålla kursprogram, deltagarförteckning och verifikat för samtliga kostnader
+  - Högst fem kursdagar inklusive resdagar och högst tre deltagare per förening och kurs är stödberättigade
+  - Föreningen ska uppfylla kommunens allmänna registrerings-, demokrati- och redovisningsvillkor
+  belopp: Faktiska kostnader för kursavgift, material, resa, mat och logi, högst 300 kronor per dag och person samt högst 8 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men senast två månader efter avslutad kurs.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-sarskilt-bidrag
+  namn: Särskilt bidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade ideella föreningar vars ansökan inte passar någon annan publicerad stödform
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Ansökan ska avse en insats som inte passar någon annan publicerad bidragsform
+  - Föreningen ska beskriva verksamheten eller insatsen och lämna en budget med intäkter och kostnader
+  - Föreningen ska vara registrerad, demokratiskt uppbyggd och ha varit verksam i minst tre månader
+  - Aktuella stadgar, årsmöteshandlingar, verksamhetsplan och ekonomiska handlingar ska lämnas
+  - Kommunstyrelsen prövar varje ansökan särskilt
+  belopp: Individuellt prövat särskilt bidrag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande under året.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-tavlingsbidrag
+  namn: Tävlingsbidrag
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar vars deltagare eller lag kvalificerat sig eller blivit uttagna till tävling på elitnivå
+  deadlines:
+    typ: relativ
+    datum: []
+  krav:
+  - Tävlingen ska vara på minst SM-slutspelsnivå
+  - Deltagaren eller laget ska ha blivit uttaget eller kvalificerat sig till tävlingen
+  - Endast redovisade deltagaravgifter, resor och logi är stödgrundande
+  - Ansökan ska innehålla kostnadsredovisning och verifikat
+  - Föreningen ska uppfylla kommunens allmänna registrerings-, demokrati- och redovisningsvillkor
+  belopp: Högst 50 procent av redovisade deltagaravgifter, resor och logi samt högst 5 000 kronor per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan kan lämnas löpande men senast två månader efter genomförd tävling.
+  kalla_url: *huvud
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: robertsfors-sommarlovsaktiviteter
+  namn: Bidrag till sommarlovsaktiviteter
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som ordnar sommarlovsaktiviteter för barn och unga 6–15 år
+  deadlines:
+    typ: fasta
+    datum: [05-31]
+  krav:
+  - Aktiviteten ska ordnas under sommarlovet för barn och unga 6–15 år
+  - Stödet får användas till en ny aktivitet eller till att utöka en befintlig aktivitet
+  - Stödgrundande kostnader kan vara prova-på-aktivitet, utflykt, dagkollo, livsmedel och nödvändigt förbrukningsmaterial
+  - Bidrag ges inte till utlandsresa, träningsläger eller cup för de egna medlemmarna eller lön för planering och genomförande
+  - Sökande förening ska uppfylla kommunens allmänna registrerings-, demokrati- och redovisningsvillkor
+  belopp: Individuellt prövat föreningsbidrag till aktiviteten; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast den 31 maj.
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: robertsfors-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
+  vad: Registrering, verksamhetstid och årliga föreningshandlingar
+  beskrivning: Föreningen ska vara registrerad hos kommunen, ha aktuella stadgar, ansvarig styrelse och revisor, vara demokratiskt uppbyggd och öppen samt ha varit verksam i minst tre månader. Årshandlingar ska lämnas årligen; den aktuella sidan anger både före 1 april eller snarast efter årsmötet och, i redovisningsavsnittet, före 1 maj.
+  system: Robertsfors kommuns föreningsregister och e-tjänst
+  ledtid: 90
+  ledtid_text: Minst tre månaders verksamhet innan föreningen kan få bidrag.
+  giltighet: Årlig uppdatering med årsmötesprotokoll, verksamhetsberättelse och verksamhetsplan, resultat- och balansräkning samt revisionsberättelse.
   ordning: 1
-  kalla_url: https://www.robertsfors.se/upplevaochgora/foreningslivochforeningar/foreningsbidrag.791.html
-  giltighet_status: okand
+  kalla_url: *regelverk
+  giltighet_status: kontrollast
 kommunsiffra: null
