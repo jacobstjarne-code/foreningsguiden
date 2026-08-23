@@ -2,12 +2,18 @@ kommun: Bräcke
 kommun_slug: bracke
 lan: Jämtlands län
 befolkning: 5964
-forvaltning: Kultur- och fritidsförvaltningen
+forvaltning: Kultur och fritid samt Samhällsbyggnad
 ansokningssystem:
-  namn: E-tjänstportal
-  url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
-kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
-verifierad: 2026-07-26
+  namn: Bräcke kommuns e-tjänster
+  url: https://e-tjanster.bracke.se/
+kalla_url: &huvud https://www.bracke.se/kultur-fritid-och-turism/fritid/foreningsliv-och-bidrag
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.bracke.se/download/18.2bed32d019a7ba0d7043996d/1764670320893/Program%20f%C3%B6r%20bidrag%20till%20f%C3%B6reningslivet.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - id: bracke-aktivitetsstod
   namn: Aktivitetstöd
@@ -15,6 +21,7 @@ bidrag:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
   malgrupp: Organisationer för aktiviteter för åldrar 0-25 och 65+
   deadlines:
     typ: fasta
@@ -33,20 +40,24 @@ bidrag:
   - Varje aktivitet får bara rapporteras av en huvudman
   - Deltagarnärvaro med födelsenummer ska rapporteras två gånger per år, senast 25 februari och 25 augusti
   belopp: Kommunalt aktivitetsstöd utbetalas med 20 kronor per deltagartillfälle.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig med närvaro-rapportering vid deadline
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: Styrdokumentet 'Program för bidrag till föreningslivet inom kultur och fritid' (KF § 140/2024) bekräftar att
     aktivitetsstöd utbetalas med 20 kronor per deltagartillfälle, samt fullständiga kvalificeringskrav.
+  senast_verifierad: '2026-08-23'
 - id: bracke-byaktiviteter
   namn: Byaktivitetsbidrag
   kategori:
   - kultur
   - idrott
   - ovrig
+  foreningstyp: *alla
   malgrupp: Byar och föreningar för större arrangemang eller årlig verksamhet
   deadlines:
     typ: fasta
@@ -58,19 +69,23 @@ bidrag:
   - Prioritering för samverkan mellan flera parter
   - Ansökan via e-tjänstportal
   belopp: Max 5 000 kronor per år.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: Flerparter samverkan prioriteras
+  senast_verifierad: '2026-08-23'
 - id: bracke-samlingsplatsstod
   namn: Samlingsplatsstöd
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: [kultur, hembygd, social, annat]
   malgrupp: Föreningar för drift av samlingslokaler
   deadlines:
     typ: fasta
@@ -86,17 +101,21 @@ bidrag:
   - Ansökan via e-tjänstportal
   belopp: Max 50% av redovisade driftskostnader (uppvärmning, el, VA-kostnader, renhållningsavgift, snöröjning, fastighetsförsäkring
     samt räntor och amorteringar på av kommunen godkända lån).
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: bracke-kulturbidrag
   namn: Kulturbidrag
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd, annat]
   malgrupp: Organisationer för offentliga kulturuppträdanden
   deadlines:
     typ: lopande
@@ -113,20 +132,24 @@ bidrag:
   belopp: Bedöms från fall till fall inom fastställd budgetram, baserat på kostnader kopplade till konstnärlig verksamhet
     och extern marknadsföring; barn- och ungdomsverksamhet ger högre kostnadstäckning. Biograferna i Bräcke och Kälarne kan
     söka 1 000 kr per filmtitel, upp till 30 filmer eller digitala visningar per år.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: Officiellt styrdokument (KF § 140/2024) bekräftar att kulturbidrag prövas från fall till fall inom fastställd
     budgetram; ingen fast kronsumma publiceras utöver 1 000 kr/filmtitel för biograferna i Bräcke och Kälarne.
+  senast_verifierad: '2026-08-23'
 - id: bracke-ledarskapsutbildning
   namn: Ledarskapsutbildning
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningsrepresentanter för ledarskapsutbildning
   deadlines:
     typ: lopande
@@ -137,20 +160,24 @@ bidrag:
   - Barn- och ungdomsverksamhet prioriteras
   - Ansökan via e-tjänstportal
   belopp: Upp till 60 procent av deltagaravgiften, dock högst 720 kronor per dag och deltagare.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: 'Officiellt styrdokument (KF § 140/2024) bekräftar beloppsregeln: upp till 60% av deltagaravgiften, max 720
     kr/dag och deltagare.'
+  senast_verifierad: '2026-08-23'
 - id: bracke-utvecklingsbidrag
   namn: Utvecklingsbidrag
   kategori:
   - idrott
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Föreningar för pilotprojekt och ny samverkan
   deadlines:
     typ: lopande
@@ -164,18 +191,22 @@ bidrag:
   - För renodlade evenemang gäller samma regler som för kulturbidrag
   - Ansökan via e-tjänstportal
   belopp: Bedöms från fall till fall inom fastställd budgetram (ingen fast beloppsgräns publicerad).
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Möjlig löpande
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
-  deadline_status: olast
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: Officiellt styrdokument (KF § 140/2024) bekräftar att utvecklingsbidrag prövas från fall till fall inom fastställd
     budgetram; ingen fast kronsumma publiceras.
+  senast_verifierad: '2026-08-23'
 - id: bracke-studiecirklar
   namn: Studiecirkelstöd
   kategori:
   - kultur
+  foreningstyp: [kultur, social, annat]
   malgrupp: Studieförbund och organisationer för folkbildning
   deadlines:
     typ: fasta
@@ -187,20 +218,24 @@ bidrag:
   - Bidraget följer i stort Folkbildningsrådets rekommendationer och delas ut till studieförbund verksamma i kommunen vid
     utbetalningstillfället; SISU erhåller bidrag i särskild form
   - Ansökan via e-tjänstportal
-  belopp: Följer i stort Folkbildningsrådets rekommendationer; anslagsram fastställs årsvis av kommunfullmäktige. SISU erhåller
-    bidrag i särskild form.
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Anslagsramen fastställs årsvis av kommunfullmäktige och fördelas mellan studieförbund verksamma i kommunen enligt principer som i stort följer Folkbildningsrådets rekommendationer; totalsumman publiceras inte. SISU får stöd i särskild form.
   sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Tidigare platshållare "Individuell bedömning" har tagits bort. Kommunens faktiska beloppsregel är ännu inte
-    verifierad.
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: bracke-senior-funktionshinder
   namn: Bidrag till senior- och funktionshinderorganisationer
   kategori:
-  - ovrig
+  - social
+  - pensionar
+  - funktionsratt
+  foreningstyp: [social, annat]
   malgrupp: Senior- och funktionshinderorganisationer
   deadlines:
     typ: fasta
@@ -213,42 +248,124 @@ bidrag:
   - Ansökan via e-tjänstportal
   belopp: 60 kronor per medlem som är folkbokförd i Bräcke kommun, baserat på antal medlemmar per den 31 december föregående
     år.
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ej möjlig efter 30 april
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
+  kalla_url: *huvud
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
   anteckning: 'T8a: Kommunens sida anger uttryckligen beräkningsgrunden.'
+  senast_verifierad: '2026-08-23'
+- id: bracke-drift-underhall-idrottsanlaggning
+  namn: Drift- och underhållsbidrag för egen idrottsanläggning
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som ansvarar för en egen idrottsanläggning
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska ansvara för drift och underhåll av en egen idrottsanläggning i kommunen
+  - Anläggningen och föreningsverksamheten ska uppfylla kommunens allmänna villkor för föreningsstöd
+  - Stödets omfattning, föreningens åtaganden och redovisning ska regleras i ett särskilt avtal med kommunen
+  belopp: Årligt drift- och underhållsbidrag enligt särskilt avtal; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam ansökningsfrist
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: bracke-kommunal-medfinansiering-investering
+  namn: Kommunal medfinansiering av föreningsinvestering
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som söker större externt investeringsbidrag med krav på kommunal medfinansiering
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Ansökan ska avse en föreningsinvestering där Boverket, Riksidrottsförbundet eller annan extern bidragsgivare kräver kommunal medfinansiering
+  - Kommunens bidrag ska vara en mindre medfinansierande del av ett större externt stöd
+  - Föreningen ska lämna projekt-, kostnads- och finansieringsunderlag som visar det externa stödets villkor
+  - Kommunstyrelsen prövar undantaget särskilt eftersom kommunen saknar ett generellt investeringsbidrag
+  belopp: Individuellt prövad mindre medfinansiering; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen gemensam ansökningsfrist
+  kalla_url: *huvud
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: bracke-subventionerade-kommunala-lokaler
+  namn: Subventionerade kommunala lokaler och anläggningar
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar med säte i Bräcke kommun som hyr kommunala lokaler eller anläggningar
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska ha sitt säte i Bräcke kommun
+  - Bokningen ska avse kommunal lokal eller anläggning som upplåts enligt kommunens uthyrningsregler
+  - Avgiftsfrihet gäller föreningsverksamhet riktad till barn och unga till och med 25 år eller seniorer över 65 år
+  - Annan föreningsverksamhet får 50 procents rabatt på ordinarie hyra
+  belopp: 50 procents rabatt för föreningar med säte i kommunen; avgiftsfritt för föreningsverksamhet riktad till personer upp till 25 år eller över 65 år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat sista bokningsdag publiceras
+  kalla_url: https://www.bracke.se/download/18.27851b24193defb8cc0d9ad/1737627770788/Bilaga%20till%20Program%20f%C3%B6r%20bidrag%20till%20f%C3%B6reningslivet%20i%20Br%C3%A4cke%20kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: bracke-vagbelysningsbidrag
+  namn: Bidrag till vägbelysningsföreningar
+  kategori: [ovrig]
+  foreningstyp: [annat]
+  malgrupp: Vägbelysningsföreningar med befintlig belysning för allmänt ändamål
+  deadlines:
+    typ: fasta
+    datum: [03-31]
+  krav:
+  - Sökande ska vara en vägbelysningsförening med befintlig belysning för allmänt ändamål
+  - Natt- och sommarsläckning ska vara införd och bidraget avser 2 300 brinntimmar per år och armatur
+  - Belysning för infarter till enstaka fastigheter och belysning som anordnats utan kommunens medgivande ger inte bidrag
+  - Löpande underhåll ska redovisas och kommunen får inventera och besikta ljuspunkterna
+  - Ansökan ska lämnas årligen och bidraget kan inte sökas retroaktivt
+  belopp: Högst 10 procent av Trafikverkets beräknade underhållskostnad från 2026; ersättningen avser 2 300 brinntimmar per år och armatur samt redovisat löpande underhåll
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan efter 31 mars ger normalt inget bidrag
+  kalla_url: https://www.bracke.se/download/18.2bed32d019a7ba0d7043980a/1764667250237/Best%C3%A4mmelser%20f%C3%B6r%20bidrag%20till%20gatlysf%C3%B6reningar.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 forutsattningar:
-- id: bracke-registrering
-  vad: Registrering som ideell förening
-  beskrivning: Organisationen måste vara registrerad som ideell förening i Bräcke kommun. Verksamheten ska bedras i kommunen.
-  system: Föreningsregistret
+- id: bracke-grundvillkor
+  vad: Grundvillkor för kommunalt föreningsstöd
+  beskrivning: Sökande ska vara en förening eller organisation som bedriver verksamhet i Bräcke kommun och uppfyller den aktuella stödformens krav. Kommunens tidigare publika föreningsregister har tagits bort och något generellt krav på årlig omregistrering publiceras inte.
+  system: Bräcke kommuns e-tjänster
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 1
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
-  giltighet_status: okand
-- id: bracke-e-tjanst
-  vad: Ansökan via e-tjänstportal
-  beskrivning: Alla föreningsbidrag-ansökningar skickas via Bräckes e-tjänstportal. Godkända organisationer måste kreditera
-    'Med stöd av Bräcke kommun' i all marknadsföring och inkludera kommunlogon där möjligt.
-  system: E-tjänstportal
+  kalla_url: *huvud
+  giltighet_status: ingen_regel
+- id: bracke-ansokan-och-redovisning
+  vad: Ansökan och redovisning enligt stödformen
+  beskrivning: Ansökan lämnas i kommunens anvisade e-tjänst eller enligt den särskilda blanketten. Föreningen ska lämna de verksamhets-, ekonomi-, medlems- och kostnadsunderlag som respektive stöd kräver samt redovisa beviljat stöd när regeln föreskriver det.
+  system: Bräcke kommuns e-tjänster
   ledtid: null
   ledtid_text: null
   giltighet: null
   ordning: 2
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
-  giltighet_status: okand
-- id: bracke-kontakt
-  vad: Kontaktinformation för föreningsstöd
-  beskrivning: 'Anna Lundström, Kulturchef (Kulturchefen), Tel: 0693-162 43. Kontakta för frågor om bidrag och stöd till föreningar.'
-  system: Kultur- och fritidsförvaltningen
-  ledtid: null
-  ledtid_text: null
-  giltighet: null
-  ordning: 3
-  kalla_url: https://www.bracke.se/kulturochfritid/foreningslivochbidrag.4.73773db514ee2ab085a9efe.html
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
