@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Blankett/e-post
   url: https://www.hellefors.se/foreningsstod.html
 kalla_url: https://www.hellefors.se/foreningsstod.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &riktlinjer https://www.hellefors.se/download/18.7ca114ba193ded7f9acbfb6c/1736494408249/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20i%20H%C3%A4llefors%20kommun.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Aktivitetsbidrag
   kategori:
@@ -15,8 +21,16 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar som uppfyller kommunens allmänna villkor
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Sökande förening ska ha minst 10 medlemmar i åldern 6–20 år
@@ -28,11 +42,13 @@ bidrag:
   - Föreningen ska följa Hällefors ANDTS-policy och ha plusgiro, bankgiro eller bankkonto
   - Aktiviteten ska bedrivas i Hällefors kommun; bidrag ska sökas senast en månad före genomförandet (två månader för ansökningar
     under vecka 26–32) och kan inte beviljas retroaktivt
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Individuellt prövat inom kommunstyrelsens årliga anslag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: Tillgängliga medel fördelas årligen efter kommunstyrelsens beslut; totalsumman publiceras inte
+  sen_ansokan: Senast en månad före aktiviteten; två månaders framförhållning krävs för ansökningar som kommer in vecka 26–32.
   kalla_url: https://www.hellefors.se/foreningsstod.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
@@ -43,8 +59,16 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar som arrangerar offentligt evenemang i kommunen
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska ha minst 15 medlemmar, registrerade och med betald medlemsavgift under senaste verksamhetsåret
@@ -58,11 +82,13 @@ bidrag:
     retroaktivt
   - Om bidrag beviljas ska kommunens logotyp finnas med vid annonsering och affischering, och arrangemanget anmälas till kommunens
     evenemangskalender
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Individuellt prövat inom kommunstyrelsens årliga anslag; kommunen publicerar ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: Tillgängliga medel fördelas årligen efter kommunstyrelsens beslut; totalsumman publiceras inte
+  sen_ansokan: Senast en månad före arrangemanget; två månaders framförhållning krävs för ansökningar som kommer in vecka 26–32.
   kalla_url: https://www.hellefors.se/foreningsstod.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ska sökas minst en månad före genomförandet; två månader under vecka 26–32. Ej angivet i källan
@@ -73,9 +99,19 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Föreningar med mindre investeringsbehov
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
-    typ: okand
-    datum: []
+    typ: fasta
+    datum:
+    - 04-01
+    - 10-01
   krav:
   - Föreningen ska ha minst 15 medlemmar, registrerade och med betald medlemsavgift under senaste verksamhetsåret
   - Föreningen ska ha varit verksam i minst sex månader och bedriva ideell, allmännyttig verksamhet
@@ -86,11 +122,14 @@ bidrag:
   - Bidraget har två ansökningsperioder per år, senast 1 april respektive 1 oktober, men kan beviljas retroaktivt under året
   - Kommunen ser gärna att föreningen bidrar med egeninsats (arbete, ekonomiskt eller annat)
   - Kommunen prioriterar bland inkomna ansökningar utifrån angelägenhet och tillgängliga medel
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp: Individuellt prövat efter angelägenhet, tillgängliga medel och övriga ansökningar; kommunen publicerar ingen generell
+    nivå
+  belopp_avser: per_forening
+  kommunens_pott: Tillgängliga medel fördelas årligen efter kommunstyrelsens beslut; totalsumman publiceras inte
+  sen_ansokan: Två ansökningsomgångar per år, senast 1 april och 1 oktober. Stödet kan beviljas retroaktivt inom året.
   kalla_url: https://www.hellefors.se/foreningsstod.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
@@ -100,6 +139,11 @@ bidrag:
   - kultur
   - ovrig
   malgrupp: Utpekade föreningar som driver allmän samlingslokal
+  foreningstyp:
+  - kultur
+  - hembygd
+  - social
+  - annat
   deadlines:
     typ: fasta
     datum:
@@ -109,11 +153,14 @@ bidrag:
     bygdegård, Sångshyttans bystuga, Sävsjöns bygdegård, Hjulsjö bygdegård, Sikfors byalag och Björksjöns byalag'
   - Ansökan ska vara kommunen tillhanda senast den 10 december och avse föregående verksamhetsår
   - Föreningens senaste årsbokslut, verksamhetsberättelse och revisionsberättelse ska bifogas ansökan
-  belopp: null
-  sen_ansokan: Ej angivet i källan
+  belopp: 'Beslutade nivåer 2025: Bredsjö Folkets hus 24 000 kr; Gränshyttans bygdegård 12 000 kr; Sångshyttans bystuga
+    12 000 kr; Sävsjöns bygdegård 8 000 kr; Hjulsjö bygdegård 12 000 kr; Sikfors byalag 6 000 kr; Björksjöns byalag 7 200 kr'
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Senast 10 december; ansökan avser föregående verksamhetsår.
   kalla_url: https://www.hellefors.se/foreningsstod.html
-  belopp_status: okand
-  deadline_status: olast
+  belopp_status: kontrollast
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
@@ -125,8 +172,16 @@ bidrag:
   - social
   - ovrig
   malgrupp: Nybildade ideella föreningar i Hällefors kommun
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
-    typ: okand
+    typ: relativ
     datum: []
   krav:
   - Föreningen ska ha minst 15 medlemmar
@@ -135,14 +190,15 @@ bidrag:
     och förteckning över styrelsens medlemmar
   - Föreningen ska ha plusgiro, bankgiro eller bankkonto
   belopp: 2 000 kronor
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska göras inom sex månader efter att föreningen bildades.
   kalla_url: https://www.hellefors.se/foreningsstod.html
   belopp_status: kontrollast
-  deadline_status: okand
+  deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kommunens föreningsstödssida och blankettarkiv anger startbidrag som en egen stödform; exakt ansökningsperiod
-    framgår inte av den öppna sidan. Ej angivet i källan
+  anteckning: Ej angivet i källan
   id: hallefors-startbidrag
 - namn: Evenemangsstöd
   kategori:
@@ -150,6 +206,14 @@ bidrag:
   - idrott
   - ovrig
   malgrupp: Aktörer och föreningar som genomför evenemang med betydelse för kommunen
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
   deadlines:
     typ: okand
     datum: []
@@ -166,25 +230,95 @@ bidrag:
   - Genusperspektivet ska vägas in i beslutet, och arrangören ska redovisa hur marknadsföringsstödet använts
   - Medfinansieringen ska grundas på ett skriftligt avtal mellan Hällefors kommun och arrangören
   - För evenemang under sommarmånaderna juni–augusti ska ansökan vara inne senast i maj för att beslut ska hinna fattas
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://www.hellefors.se/foreningsstod.html
-  belopp_status: okand
-  deadline_status: okand
+  belopp: Individuell medfinansiering i rimlig proportion till evenemangets budget och marknadsföringsinsatser; kommunen publicerar
+    ingen generell nivå
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: För evenemang under juni–augusti ska ansökan lämnas senast i maj; kommunen publicerar ingen exakt dag eller
+    generell sista ansökningsdag för övriga evenemang.
+  kalla_url: https://www.hellefors.se/evenemangsstod.html
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Evenemangsstöd hanteras via kommunens näringslivssida och finns som egen ansökningsblankett. Detaljerade kriterier
-    behöver verifieras mot den sidan/blanketten. Ej angivet i källan
+  anteckning: Ej angivet i källan
   id: hallefors-evenemangsstod
+- namn: Avgiftsfria kommunala lokaler och idrottsanläggningar
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Bidragsberättigade föreningar och föreningar med barn- och ungdomsverksamhet
+  foreningstyp:
+  - idrott
+  - kultur
+  - hembygd
+  - friluft
+  - social
+  - ungdom
+  - annat
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska uppfylla kommunens allmänna villkor för föreningsstöd
+  - Avgiftsfriheten för möten gäller ett urval av kommunens möteslokaler samt bibliotekets utställningshall
+  - Nolltaxan i kommunens idrottsanläggningar gäller föreningar med verksamhet för barn och ungdomar 6–20 år
+  - Bokningen ska göras genom kommunens ordinarie lokal- och anläggningsbokning
+  belopp: Avgiftsfri bokning av utpekade möteslokaler och bibliotekets utställningshall samt nolltaxa i idrottsanläggningar
+    för barn- och ungdomsföreningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat sista boknings- eller ansökningsdag för avgiftsfriheten.
+  kalla_url: *riktlinjer
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ej angivet i källan
+  id: hallefors-avgiftsfria-lokaler
+- namn: Bidrag till studieförbund
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Hällefors kommun
+  foreningstyp:
+  - kultur
+  - annat
+  deadlines:
+    typ: fasta
+    datum:
+    - 05-01
+  krav:
+  - Studieförbundets centrala organisation ska vara godkänd för statsbidrag av Folkbildningsrådet
+  - Den bidragsgrundande studiecirkel-, folkbildnings- och kulturprogramverksamheten ska genomföras i Hällefors kommun för
+    kommunens invånare
+  - Studieförbundet ska årligen lämna verksamhetsberättelse och ekonomisk redogörelse för föregående år samt verksamhetsplan
+    och budget för innevarande år
+  - Kommunens del av verksamheten ska framgå tydligt av redovisningen och organisationen ska delta i kommunens årliga dialog
+  - Räkenskaper och redovisningshandlingar ska ställas till kommunens förfogande vid kontroll
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas som 60 procent grundbidrag, 30 procent verksamhetsrelaterat bidrag och 10 procent
+    kulturprogrambidrag; aktuellt totalbelopp publiceras inte
+  sen_ansokan: Årlig redovisning, verksamhetsplan och budget ska lämnas senast 1 maj.
+  kalla_url: https://www.hellefors.se/download/18.ce993e813a9cd00e9d1528/1448581225998/Protokoll%2B2008-12-02.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Ej angivet i källan
+  id: hallefors-studieforbundsbidrag
 forutsattningar:
 - id: hallefors-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsregister och uppfylla kommunens allmänna villkor; kommunen
+    publicerar ingen giltighetstid eller regel för årlig omregistrering.
   system: Blankett/e-post
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Ingen publicerad tidsfrist för registreringens giltighet
   giltighet: null
   ordning: 1
-  kalla_url: https://www.hellefors.se/foreningsstod.html
-  giltighet_status: okand
+  kalla_url: *riktlinjer
+  giltighet_status: ingen_regel
 kommunsiffra: null
