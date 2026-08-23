@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Kommunens blanketter
   url: https://www.storfors.se/upplevaochgora/foreningar/attsokaforeningsbidrag.4.241bced914a618d4117ec269.html
 kalla_url: https://www.storfors.se/upplevaochgora/foreningar/attsokaforeningsbidrag.4.241bced914a618d4117ec269.html
-verifierad: '2026-08-02'
+verifierad: 2026-08-23
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://www.storfors.se/download/18.321c781815795cc4ea9131a/1548835990336/Reglemente%2Bf%C3%B6r%2Bst%C3%B6d%2Btill%2Bf%C3%B6reningar.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - namn: Verksamhetsbidrag
   kategori:
@@ -40,10 +46,16 @@ bidrag:
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.storfors.se/upplevaochgora/foreningar/attsokaforeningsbidrag.4.241bced914a618d4117ec269.html
   belopp_status: kontrollast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Ansökan inför nästkommande bidragsår ska lämnas senast 30 april året före bidragsåret.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
   id: storfors-verksamhetsbidrag
 - namn: Aktivitetsbidrag
   kategori:
@@ -76,10 +88,16 @@ bidrag:
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.storfors.se/upplevaochgora/foreningar/attsokaforeningsbidrag.4.241bced914a618d4117ec269.html
   belopp_status: kontrollast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunen publicerar särskild blankett och rekvisition för aktivitetsbidrag.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
   id: storfors-aktivitetsbidrag
 - namn: Lönebidrag
   kategori:
@@ -109,48 +127,110 @@ bidrag:
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www.storfors.se/upplevaochgora/foreningar/attsokaforeningsbidrag.4.241bced914a618d4117ec269.html
   belopp_status: kontrollast
-  deadline_status: olast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunen anger särskild rekvisition för lönebidrag efter redovisning.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: null
   id: storfors-lonebidrag
-- namn: Lokalbidrag
+- namn: Nolltaxa i kommunens lokaler
+  kategori:
+  - idrott
+  - kultur
+  - ovrig
+  malgrupp: Storforsföreningar som bedriver föreningsverksamhet i kommunens lokaler
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara en Storforsförening och uppfylla kommunens allmänna villkor för föreningsstöd
+  - Tiden och verksamheten ska anges i bokningsansökan och beviljas efter samråd med kommunen
+  - Bokad lokal ska användas; föreningen debiteras lokalhyra om en bokad tid inte nyttjas
+  belopp: Kostnadsfri upplåtelse av kommunens lokaler för föreningsverksamhet
+  sen_ansokan: Kommunen publicerar ingen särskild sista ansökningsdag
+  kalla_url: https://www.storfors.se/download/18.321c781815795cc4ea9131a/1548835990336/Reglemente%2Bf%C3%B6r%2Bst%C3%B6d%2Btill%2Bf%C3%B6reningar.pdf
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Nolltaxan ersatte de tidigare lokal- och anläggningsbidragen.
+  id: storfors-nolltaxa-kommunala-lokaler
+- namn: Bidrag till studieförbund
+  kategori:
+  - kultur
+  - ovrig
+  malgrupp: Studieförbund som genomför folkbildningsaktiviteter i Storfors kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Sökanden ska vara ett studieförbund eller en studieorganisation som genomför aktiviteter i Storfors kommun
+  - Fördelningen grundas på respektive organisations andel av det samlade lokala kursutbudet
+  - Kommunens kultur- och fritidsenhet beslutar om bidraget inom den kommunala budgeten för studieorganisationer
+  belopp: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://www.storfors.se/download/18.7f1aedeb14e64fcd26ce5538/1548836078705/M%C3%A5l%20och%20budget%202016%20budgetberedning%20v3.pdf
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga budget för stöd till studieorganisationer fördelas efter respektive organisations andel av det totala lokala kursutbudet; aktuell totalsumma publiceras inte
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet finns kvar i kommunstyrelsens delegationsordning antagen den 20 januari 2025.
+  id: storfors-studieforbundsbidrag
+- namn: Kommunalt bidrag till enskilda vägar
   kategori:
   - ovrig
-  malgrupp: Ideella föreningar verksamma i Storfors kommun
+  malgrupp: Väghållningsföreningar, vägsamfälligheter och andra ägare eller företrädare för enskild väg
   deadlines:
     typ: fasta
     datum:
-    - 04-30
+    - 02-28
   krav:
-  - Bedriva ideell verksamhet inom Storfors kommun i drogfri miljö, vara uppbyggd enligt demokratiska principer och öppen
-    för alla
-  - Ha godkända stadgar, ansvarig styrelse och revisorer samt hålla årsmöte där verksamhetsberättelse, resultat- och balansräkning
-    samt revisionsberättelse godkänns
-  - Årligen redovisa sin verksamhet till kommunen samt meddela styrelsens aktuella telefonnummer och e-postadresser
-  - Ha minst 10 medlemmar folkbokförda i kommunen som regelbundet deltar i föreningens verksamhet
-  - Ha ett plus- eller bankgiro samt ett organisationsnummer
-  - Låta minst en person från styrelsen närvara när kommunen kallar till möte
-  - Föreningen får normalt inte vara ekonomisk, politisk, skolidrotts- eller elevförening, knuten till svenska kyrkan eller
-    försvaret, eller en stödförening (supporterklubb)
+  - Vägen ska betjäna permanentboende, ligga i Storfors kommun och vara längre än 150 meter
+  - Vägen ska underhållas tillfredsställande och hållas öppen för allmän trafik sommar och vinter; tillfällig stängning vid tjällossning är tillåten
+  - Stöd ges inte till väg som betjänar fritidsbebyggelse, ägs av bolag, statlig eller kyrklig förvaltning eller huvudsakligen används för virkestransporter
+  - Sökanden ska äga vägen eller företräda ägaren; flera ägare ska samordna ansökan så att samma väg inte söks dubbelt
+  - Första ansökan eller ändrad väglängd ska innehålla karta med den sökta vägsträckan markerad
   belopp: null
-  sen_ansokan: Ej angivet i källan
-  kalla_url: https://www.storfors.se/upplevaochgora/foreningar/attsokaforeningsbidrag.4.241bced914a618d4117ec269.html
-  belopp_status: okand
-  deadline_status: olast
+  sen_ansokan: Ansökan avser föregående år och ska vara kommunen tillhanda senast 28 februari; det går inte att söka mer än ett år retroaktivt
+  kalla_url: https://www.storfors.se/download/18.51647c1915f790e54a17f5/1509985359567/Kallelse%2BKF%2B2017-11-13.pdf
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunfullmäktiges årliga vägbidragsbudget fördelas efter den sammanlagda bidragsberättigade väglängden; de första 150 meterna per väg räknas bort och aktuell totalsumma publiceras inte
+  deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: Kommunen anger särskild rekvisition för lokalbidrag efter redovisning.
-  id: storfors-lokalbidrag
+  krav_fullstandiga: true
+  foreningstyp: [annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: 2026-08-23
+  anteckning: Stödet är öppet även för enskilda vägägare, som konkurrerar med föreningar och samfälligheter om samma kommunala budget.
+  id: storfors-bidrag-enskilda-vagar
 forutsattningar:
-- id: storfors-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänster
+- id: storfors-arlig-redovisning
+  vad: Årlig redovisning och aktuella föreningsuppgifter
+  beskrivning: För att vara stödberättigad ska föreningen varje år lämna årsmötesgodkänd verksamhetsberättelse, resultat- och balansräkning samt revisionsberättelse och meddela styrelsens aktuella telefonnummer och e-postadresser.
+  system: Kommunens blanketter
   ledtid: null
   ledtid_text: null
-  giltighet: null
+  giltighet: Årlig uppdatering av handlingar och kontaktuppgifter
   ordning: 1
-  kalla_url: https://www.storfors.se/uppleva-och-gora/foreningar.html
-  giltighet_status: okand
+  kalla_url: https://www.storfors.se/download/18.321c781815795cc4ea9131a/1548835990336/Reglemente%2Bf%C3%B6r%2Bst%C3%B6d%2Btill%2Bf%C3%B6reningar.pdf
+  giltighet_status: kontrollast
 kommunsiffra: null
