@@ -4,10 +4,16 @@ lan: Västerbottens län
 befolkning: 5396
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
+  namn: Vindelns Mina sidor och blanketter
+  url: https://minasidor.vindeln.se/oversikt/overview/216
 kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
-verifierad: '2026-08-01'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: fast_datum
+  antal: null
+  datum: 03-31
+  kalla_url: &norm https://vindeln.se/download/18.40376133177916d27f721db/1617968911602/Bidragsregler%20f%C3%B6rening%20och%20studief%C3%B6rbund%202020.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: vindeln-aktivitetsstod
   namn: Lokalt aktivitetsstöd
@@ -30,6 +36,8 @@ bidrag:
   sen_ansokan: Bidragsansökningar som inte inkommit till kommunen inom föreskriven tid behandlas inte
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -38,11 +46,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-lonebidrag
   namn: Bidrag till lönebidragstjänst
   kategori:
@@ -53,25 +61,30 @@ bidrag:
     typ: fasta
     datum:
     - 03-31
-  krav: []
+  krav:
+  - Sökanden ska vara en registrerad ideell förening i Vindelns kommun med en lönebidragsanställd
+  - För slutreglering av föregående år ska Arbetsförmedlingens kontrolluppgifter för lönebidragstjänsten bifogas
+  - För preliminär utbetalning innevarande år ska Arbetsförmedlingens beslut om rätt till lönebidrag bifogas
   belopp: Kommunen bidrar med 10 % av den av Arbetsförmedlingen framräknade bidragsgrundande lönekostnaden, dock högst motsvarande
     Arbetsförmedlingens tak på fastställda bidragsgrundande lönekostnader
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
   belopp_status: kontrollast
-  deadline_status: olast
-  krav_status: okand
-  krav_fullstandiga: null
-  anteckning: null
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Arbetsförmedlingens lönebidrag är underlag; Vindelns kommun beslutar och betalar det kommunala tillägget.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-ungdomsledarutbildning
   namn: Bidrag till ungdomsledarutbildning
   kategori:
@@ -95,6 +108,8 @@ bidrag:
   sen_ansokan: Ansökan ska göras senast två månader efter avslutad kurs eller utbildning
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -103,11 +118,11 @@ bidrag:
   alder_min: 14
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-anlaggningsbidrag
   namn: Anläggningsbidrag
   kategori:
@@ -130,6 +145,8 @@ bidrag:
   sen_ansokan: Bidragsansökningar som inte inkommit till kommunen inom föreskriven tid behandlas inte
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -138,11 +155,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-samlingslokaler
   namn: Bidrag för samlingslokaler
   kategori:
@@ -161,6 +178,8 @@ bidrag:
   sen_ansokan: Bidragsansökningar som inte inkommit till kommunen inom föreskriven tid behandlas inte
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -169,11 +188,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [kultur, hembygd, social, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-kulturbidrag
   namn: Kulturbidrag
   kategori:
@@ -189,10 +208,12 @@ bidrag:
   - Samverkande föreningar kan prioriteras
   - Ansökan ska innehålla en beskrivning av arrangemanget och en kostnadskalkyl med finansieringsplan. Finns fler än en bidragsgivare
     ska det anges
-  belopp: null
+  belopp: Kommunen publicerar ingen fast beloppsnivå; stödet prövas inom kommunstyrelsens tillgängliga medel
   sen_ansokan: Bidragsansökningar som inte inkommit till kommunen inom föreskriven tid behandlas inte
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
-  belopp_status: okand
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -201,11 +222,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [kultur, hembygd, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-snabbkultur
   namn: Snabbkulturbidrag
   kategori:
@@ -223,6 +244,8 @@ bidrag:
   sen_ansokan: Bidraget söks för innevarande år och beviljas löpande
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -231,11 +254,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [kultur, hembygd, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-studieforbund
   namn: Bidrag till studieförbund
   kategori:
@@ -253,7 +276,7 @@ bidrag:
   - Studieförbunden ska senast den 31 mars till kommunstyrelsen lämna in en kort (högst en A4) skriven redogörelse över sin
     verksamhet i kommunen det gångna året samt en verksamhetsberättelse efter avslutat årsmöte
   belopp: null
-  belopp_avser: okand
+  belopp_avser: ren_pott
   kommunens_pott: "90% volymbidrag, 10% kulturprogramsbidrag av kommunens totala anslag"
   sen_ansokan: Studieförbunden ska senast 31 mars lämna in en kort redogörelse för verksamheten till kommunstyrelsen
   kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
@@ -266,11 +289,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [kultur, social, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vindeln-minoriteter
   namn: Bidrag till nationella minoriteter och samer
   kategori:
@@ -282,33 +305,62 @@ bidrag:
     datum: []
   krav:
   - Föreningsregistrering krävs inte alltid vid ansökan om bidrag till insatser för nationella minoriteter och urfolket samerna
-  - Ansökan sker genom direkt kontakt med kommunens minoritetssamordnare
-  belopp: null
-  sen_ansokan: Ansökningsfristen är inte verifierad. Kontrollera kommunens aktuella information.
-  kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
-  belopp_status: okand
-  deadline_status: okand
+  - Verksamheten ska gynna nationella minoriteter i Vindelns kommun och bidra till att deras kultur eller språk behålls och utvecklas
+  - Ansökan ska beskriva insatsen och lämnas direkt till kommunen; nytta och behov, samverkan, nytänkande samt insatser för barn och unga värderas
+  belopp: Kommunen publicerar ingen fast beloppsnivå; varje aktivitet eller projekt prövas särskilt
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://vindeln.se/kommun-och-politik/nationella-minoriteter/ekonomiskt-bidrag-till-insatser-for-nationella-minoriteter
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: Kontakta kommunen om ansökningsförfarandet
+  anteckning: Medlen tas ur statsbidraget för nationella minoriteter, men Vindelns kommun tar emot ansökan, beslutar och betalar stödet.
   min_medlemmar: null
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
-  sate_i_kommunen: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  sate_i_kommunen: false
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
+- id: vindeln-subventionerad-foreningstaxa
+  namn: Subventionerad taxa och kostnadsfria utrustningslån
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade och godkända föreningar i Vindelns kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara årligen registrerad och godkänd av Vindelns kommun
+  - Den subventionerade taxan gäller träningsverksamhet och föreningsmöten men inte kommersiella arrangemang
+  - Kostnadsfria lån gäller kommunens angivna utrustning, bland annat nummerlappar, start- och målklocka samt stoppur
+  belopp: Subventionerad hyrestaxa för kommunens lokaler samt kostnadsfria lån av viss utrustning
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist; stödet följer den godkända föreningsregistreringen
+  kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  sate_i_kommunen: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: vindeln-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  vad: Årlig föreningsregistrering
+  beskrivning: Föreningen ska vara verksam i Vindeln, ha antagna stadgar och lokal huvudorganisation samt en dokumenterad policy för ett aktivt arbete mot tobak, alkohol, droger, mobbning, våld och rasism och för jämställdhet. Årsuppgifter, kontakter, konto, bokslut, verksamhetsberättelse, resultat- och balansräkning, revision och årsmötesprotokoll ska lämnas.
+  system: Vindelns Mina sidor eller blankett
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Senast 31 mars varje år
+  giltighet: Årlig registrering senast 31 mars
   ordning: 1
-  kalla_url: https://vindeln.se/uppleva-och-gora/foreningar/foreningsbidrag
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
