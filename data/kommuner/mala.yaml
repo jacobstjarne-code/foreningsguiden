@@ -2,12 +2,18 @@ kommun: Malå
 kommun_slug: mala
 lan: Västerbottens län
 befolkning: 2887
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid samt kommunledning
 ansokningssystem:
-  namn: Kommunens e-tjänst eller blankett
-  url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
-kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
-verifierad: '2026-08-01'
+  namn: Malå kommuns e-tjänster och Föreningsservice
+  url: https://minasidor.mala.se/
+kalla_url: &huvud https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.mala.se/media/3tgngq5a/2026-regler-for-bidrag-till-foreningar-och-studieforbund.pdf
+giltighet_regel_status: kontrollast
 bidrag:
 - id: mala-kultur-utveckling
   namn: Kulturbidrag – utvecklingsbidrag
@@ -27,10 +33,12 @@ bidrag:
     med hög kvalitet och av stor betydelse för invånarnas tillgång till kultur
   - Ansökan sker via kommunens e-tjänst och ska innehålla en noggrann beskrivning av verksamheten samt budget
   - Förlusttäckning medges inte
-  belopp: null
+  belopp: Kommunen publicerar ingen fast beloppsnivå; stödet prövas individuellt
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
-  belopp_status: okand
+  belopp_avser: per_forening
+  kommunens_pott: null
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
@@ -39,11 +47,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
+  foreningstyp: [kultur, hembygd]
+  kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: mala-anlaggning
   namn: Anläggningsbidrag
   kategori:
@@ -67,8 +75,10 @@ bidrag:
     300 kr/plan, övrig fotbollsplan grus/gräs 825 kr, rastplats (vindskydd/utsiktstorn/fågeltorn) 200 kr, utedass 300 kr,
     hyrbåt 50 kr, bryggplats 500 kr, vandringsled/cykelled 300 kr/röjd km (vindskydd 200 kr, utedass 300 kr), tennisplan 1
     500 kr, övrigt enligt särskild prövning'
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
@@ -78,11 +88,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: mala-lokal
   namn: Lokalbidrag
   kategori:
@@ -106,8 +116,10 @@ bidrag:
   - Föreningen kan inte få lokalbidrag om dess styrkta kostnader för lokalen är lägre än det bidrag som ges
   belopp: Lokalbidrag utgår med upp till 3 300 kr till förening som äger egen lokal, och med 1 100 kr till förening som hyr
     lokal
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
@@ -117,11 +129,11 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
+  foreningstyp: *alla
+  kraver_registrering: true
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: mala-aktivitet
   namn: Aktivitetsbidrag
   kategori:
@@ -140,10 +152,11 @@ bidrag:
     o m 20 år
   - Föreningen får inte bedriva toppning i tävlingsverksamhet upp till 15 år
   - Aktiviteter som genomförs i kommersiellt syfte är inte bidragsberättigade
-  belopp: '8 kr per deltagare och aktivitet. För deltagare i behov av extra hjälp/ledare (t.ex. rörelsehinder eller synskada):
-    11 kr per deltagare plus 55 kr per sammankomst'
+  belopp: 8 kr per deltagare och aktivitet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
@@ -153,76 +166,119 @@ bidrag:
   alder_min: 5
   alder_max: 20
   min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kraver_registrering: true
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
-- id: mala-snabbkultur
-  namn: Snabbkulturbidrag
-  kategori:
-  - kultur
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  senast_verifierad: '2026-08-23'
+- id: mala-aktivitetsstod-funktionsvariation
+  namn: Förstärkt aktivitetsstöd för deltagare med funktionsnedsättning
+  kategori: [idrott, funktionsratt, ovrig]
+  malgrupp: Föreningar med barn och unga som behöver extra hjälp eller ledare
   deadlines:
-    typ: lopande
-    datum: []
+    typ: fasta
+    datum: [03-31]
   krav:
-  - Ansökan sker via kommunens e-tjänst och ska innehålla en noggrann beskrivning av verksamheten samt budget
-  - Bidraget kan som mest omfatta 5 000 kr per ansökan
-  - Bidrag kan utgå till enskilda händelser, riktade insatser, arrangemang samt uppstartsstöd för etablering av ny regelbunden
-    verksamhet
-  - Förlusttäckning medges inte
-  - SnabbKultur kan beviljas verksamhet även om sökande inte är organiserad i förening
-  belopp: Max 5 000 kr per ansökan
-  sen_ansokan: Ansökan kan göras löpande under året
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+  - Föreningen ska ha kontinuerlig, planerad och ledarledd verksamhet med minst fem medlemmar i åldern 5–20 år
+  - Stödet avser deltagare som behöver extra hjälp eller ledare, exempelvis på grund av rörelsehinder eller synskada
+  - Närvarokort eller motsvarande sammanställning ska lämnas till kommunen
+  - Föreningen ska vara ideell, demokratisk, verksam i Malå och uppdaterad i föreningsregistret
+  belopp: 11 kr per deltagare samt 55 kr per sammankomst
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar efter den 31 mars behandlas inte
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
+  min_medlemmar: 5
+  alder_min: 5
+  alder_max: 20
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kraver_registrering: true
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
-- id: mala-fritid
-  namn: Fritidsbidrag
-  kategori:
-  - idrott
-  - ovrig
-  malgrupp: Ideella föreningar och organisationer i kommunen
+  senast_verifierad: '2026-08-23'
+- id: mala-nolltaxa-funktionsvariation
+  namn: Nolltaxa för verksamhet för barn och unga med funktionsnedsättning
+  kategori: [idrott, funktionsratt, ovrig]
+  malgrupp: Föreningar som ordnar verksamhet för barn och unga med funktionsnedsättning
   deadlines:
     typ: lopande
     datum: []
   krav:
-  - Ansökan sker via kommunens e-tjänst och ska innehålla en noggrann beskrivning av verksamheten samt budget
-  - Bidraget kan som mest omfatta 5 000 kr per ansökan
-  - Bidrag kan utgå till enskilda händelser, riktade insatser, arrangemang samt uppstartsstöd för etablering av ny regelbunden
-    verksamhet
-  - Förlusttäckning medges inte
-  - Fritidsbidrag kan beviljas verksamhet även om sökande inte är organiserad i förening
-  belopp: Max 5 000 kr per ansökan
-  sen_ansokan: Ansökan kan göras löpande under året
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+  - Föreningen ska ordna tillfällig eller schemalagd verksamhet för barn och unga med funktionsnedsättning
+  - Verksamheten ska genomföras i en kommunal lokal eller anläggning
+  - Föreningen ska vara ideell, demokratisk, verksam i Malå och uppdaterad i föreningsregistret
+  - Bokningen ska avse föreningens stödberättigade verksamhet och följa kommunens bokningsvillkor
+  belopp: Kostnadsfri användning av kommunala lokaler och anläggningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist publiceras; nolltaxan hanteras vid bokningen
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
-  anteckning: null
-  min_medlemmar: null
-  alder_min: null
-  alder_max: null
-  min_verksamhetstid_manader: null
-  foreningstyp: null
-  kraver_registrering: null
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kraver_registrering: true
   sate_i_kommunen: null
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
+- id: mala-ungdoms-och-seniortaxa
+  namn: Ungdoms- och seniortaxa i kommunala lokaler
+  kategori: [idrott, kultur, pensionar, ovrig]
+  malgrupp: Föreningar med verksamhet för barn och unga eller personer 65 år och äldre
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Ungdomsgruppen ska bestå av minst fem deltagare 5–20 år eller seniorgruppen av minst fem deltagare 65 år eller äldre
+  - En ledare ska närvara vid varje aktivitet och föreningen ska vara uppdaterad i det digitala föreningsregistret
+  - Taxan gäller inte entrébelagda seriematcher eller arrangemang och inte när en privatperson hyr hela anläggningen
+  - Rabatten dras direkt på fakturan och kräver ingen separat bidragsansökan
+  belopp: 50 procent lägre hyra än ordinarie taxa
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen separat ansökningsfrist; taxan hanteras vid bokning och fakturering
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: *alla
+  kraver_registrering: true
+  sate_i_kommunen: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- id: mala-miniprojekt-2026
+  namn: Miniprojekt 2026
+  kategori: [kultur, social, ovrig]
+  malgrupp: Föreningar i Malå kommun med lokala utvecklingsprojekt
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - En förening i Malå kommun ska vara projektägare och ansöka via kommunens e-tjänst
+  - Projektet ska bidra till lokal utveckling och ligga i linje med Malå kommuns lokala utvecklingsstrategi 2030
+  - Ansökan ska beskriva initiativet, genomförandet och hur det skapar nytta i kommunen
+  - Näringslivsrådet prioriterar ansökningarna och utvecklings- och arbetsmarknadschefen fattar beslut
+  - Projektet ska slutredovisas digitalt efter genomförandet
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: 100 000 kr har avsatts till lokala utvecklingsprojekt 2026
+  sen_ansokan: Ansökningar tas emot löpande under 2026
+  kalla_url: https://minasidor.mala.se/oversikt/overview/218
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: *alla
+  kraver_registrering: true
+  sate_i_kommunen: null
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - id: mala-studieforbund
   namn: Bidrag till studieförbund
   kategori:
@@ -244,52 +300,56 @@ bidrag:
     skolan/vårdinstitutioner ska svara för
   - Ansökan om bidrag för studieförbund görs inte via e-tjänst, till skillnad från övriga föreningsbidrag
   belopp: null
-  belopp_avser: okand
-  kommunens_pott: "80% volymbidrag, 20% kulturbidrag av kommunens totala anslag"
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens anslag fördelas med 80 procent volymbidrag och 20 procent kulturbidrag; totalsumman publiceras inte
   sen_ansokan: Ansökan ska vara kommunstyrelsen tillhanda senast den 30 april
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: [kultur, annat]
+  kraver_registrering: true
   status: aktiv
-  senast_verifierad: '2026-08-02'
+  senast_verifierad: '2026-08-23'
 - id: mala-bygdemedel
   namn: Bygdemedel
-  kategori:
-  - ovrig
-  malgrupp: Ideella föreningar och andra aktörer med projekt som gynnar berörd bygd
+  kategori: [kultur, social, ovrig]
+  malgrupp: Registrerade organisationer och föreningar i Malå kommun
   deadlines:
     typ: fasta
     datum:
     - 04-15
   krav:
-  - Ansökan ska utgå från kommunens beslutade handlingsplan för bygdemedel för aktuellt år
-  - Ansökan ska innehålla syfte med projektet, kostnads- och finansieringsbudget, senaste verksamhetsberättelse, senaste resultat-
-    och balansräkning, senaste revisionsberättelse, protokoll som visar vilka som är firmatecknare samt föreningens stadgar
-  - Medlen ska användas till investeringar eller projekt med investeringskaraktär för ändamål som främjar näringsliv eller
-    service i bygden eller annars är till nytta för denna
-  - Ansökan görs digitalt via kommunens e-tjänst
-  belopp: null
+  - Sökanden ska vara en organisation eller förening i Malå kommuns föreningsregister; privatpersoner och företag kan inte söka
+  - Projektet ska följa kommunens handlingsplan och vara en allmännyttig investering eller utvecklingsinsats i den berörda bygden
+  - Ansökan ska innehålla projektplan, kostnads- och finansieringsbudget, årshandlingar, firmateckningsprotokoll och stadgar
+  - Projektet får inte vara påbörjat och bidraget får inte avse rena driftskostnader; genomfört projekt ska slutredovisas
+  - Ansökan görs i Tillväxtverkets tjänst Min ansökan och Länsstyrelsen beslutar efter kommunens yttrande
+  belopp: 90 procent av godkänd kostnad, högst 40 000 kr per förening; föreningen finansierar 10 procent kontant
+  belopp_avser: per_forening
+  kommunens_pott: 40 procent av Malå kommuns årliga bygdemedel avsätts till föreningslivet
   sen_ansokan: Ansökan görs mellan den 15 februari och den 15 april
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
-  belopp_status: okand
+  kalla_url: https://www.mala.se/media/b4fbivrr/handlingsplan-for-bygdemedel-2026.pdf
+  belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: null
+  foreningstyp: *alla
+  kraver_registrering: true
   status: aktiv
-  senast_verifierad: '2026-08-02'
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: mala-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  vad: Registrering och årlig uppdatering av föreningsuppgifter
+  beskrivning: Föreningen ska vara ideell och demokratisk, ha vald styrelse och stadgar, vara verksam i Malå, följa kommunens värdegrundsvillkor och hålla föreningsregister samt efterfrågade årshandlingar aktuella.
+  system: Malå kommuns digitala föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Uppgifterna ska uppdateras årligen, helst efter årsmötet, och alltid i samband med bidragsansökan
+  giltighet: Årlig uppdatering av föreningsuppgifterna
   ordning: 1
-  kalla_url: https://www.mala.se/kultur-och-fritid/foreningsinformation/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: kontrollast
 kommunsiffra: null
