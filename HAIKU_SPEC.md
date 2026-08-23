@@ -35,16 +35,17 @@ Uteslut ENDAST med kategoriskt skäl, loggat i `tackning.log` som `MEDVETET_UTES
 
 | Skäl | Exempel | Giltigt? |
 |---|---|---|
-| Individuellt pris/stipendium till privatperson | kulturstipendium till en person | JA, uteslut |
-| Riktar sig enbart till företag/privatpersoner | näringslivsstöd | JA, uteslut |
-| Annan huvudman än kommunen | Länsstyrelsens bygdemedel, fristående stiftelse | JA, uteslut |
-| Stipendium/pris som uttryckligen KAN gå till förening | idrottsledarstipendium med förening som målgrupp | NEJ, skriv det |
+| Stöd eller pris som enbart kan sökas av eller ges till privatpersoner | Slanten i Tranås, individuellt kulturstipendium | JA, uteslut |
+| Riktar sig enbart till företag | näringslivsstöd utan föreningar i målgruppen | JA, uteslut |
+| Annan huvudman än kommunen | statligt aktivitetsstöd som betalas av RF, fristående stiftelse | JA, uteslut |
+| Stöd som en förening kan söka, även om privatpersoner eller andra också kan söka | evenemangsstöd öppet för föreningar och privatpersoner | NEJ, skriv det och notera den bredare sökandekretsen |
+| Stipendium/pris som uttryckligen KAN gå till förening | stipendium med förening som möjlig målgrupp | NEJ, skriv det |
 | "För att hålla filen hanterbar" | — | NEJ, förbjudet skäl |
 | "Nischat" / "liten målgrupp" | — | NEJ, förbjudet skäl |
 | "Liknar ett annat bidrag" | — | NEJ, förbjudet skäl |
 | Tidsbrist | — | NEJ, förbjudet skäl |
 
-Nyckelskillnaden (Skellefteå-fyndet): skilj **stipendiets form** (att det heter stipendium) från **dess målgrupp** (vem som kan söka). Ett "stipendium" som kan sökas av en förening är ett föreningsbidrag och skrivs.
+Nyckelskillnaden är målgruppen: ta bara bort stöd som **uteslutande** gäller privatpersoner eller som betalas av en annan huvudman. Om en förening kan söka ska posten skrivas, även när privatpersoner eller andra också kan söka. Den bredare sökandekretsen ska då framgå av posten eftersom den påverkar konkurrensen om medlen. Skilj också stipendiets form (att det heter stipendium) från dess målgrupp.
 
 ### B3. Källkonfliktregeln (från v2.1 §2.5, upprepad som beslutsregel)
 Två officiella källor, olika värde för samma fält:

@@ -7,7 +7,13 @@ ansokningssystem:
   namn: Kommunens e-tjänst eller blankett
   url: https://norberg.se/kultur--fritid/forening/foreningsbidrag.html
 kalla_url: https://norberg.se/kultur--fritid/forening/foreningsbidrag.html
-verifierad: '2026-08-01'
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
+giltighet_regel_status: kontrollast
 bidrag:
 - id: norberg-verksamhetsstod
   namn: Verksamhetsstöd
@@ -29,13 +35,19 @@ bidrag:
   - Resultatrapport och kalkyl
   - Bidrag beviljas inte till registrerade trossamfund, skolföreningar samt organisationer vars huvudsakliga uppgift är att
     tillvarata medlemmars yrkesmässiga, fackliga eller ekonomiska intressen
-  belopp: null
+  belopp: Kommunen publicerar ingen generell beloppsnivå; kultur- och fritidsnämnden prövar verksamhetsutveckling, investeringar, projekt och arrangemang
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
   belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: Omfattar verksamhetsutveckling, investeringar, projekt och arrangemang.
 - id: norberg-aktivitetsstod
   namn: Aktivitetsstöd
@@ -57,13 +69,19 @@ bidrag:
   - Resultatrapport
   - Bidrag beviljas inte till studiecirkelsammankomster, registrerade trossamfund, skolföreningar samt organisationer vars
     huvudsakliga uppgift är att tillvarata medlemmars yrkesmässiga, fackliga eller ekonomiska intressen
-  belopp: null
+  belopp: Fastställt belopp per sammankomst eller ledarledd aktivitet enligt kultur- och fritidsnämndens beslut; aktuell kronnivå publiceras inte i riktlinjen
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
-  belopp_status: okand
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: För ledarledda aktiviteter för barn och unga.
 - id: norberg-drift-och-underhallsstod
   namn: Drift- och underhållsstöd
@@ -91,10 +109,146 @@ bidrag:
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
   belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
   anteckning: För hyrda eller föreningsägda lokaler och anläggningar.
+- id: norberg-studieforbundsstod
+  namn: Stöd till studieförbund
+  kategori: [kultur, social, ovrig]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Norbergs kommun
+  deadlines:
+    typ: fasta
+    datum: [09-30]
+  krav:
+  - Studieförbundet ska vara statsbidragsberättigat enligt Folkbildningsrådet och bedriva verksamhet i Norbergs kommun
+  - Ansökan ska innehålla verksamhetsberättelse och revisionsberättelse
+  - Ansökan ska innehålla verksamhetsplan och kommunsammandrag
+  - Beviljat kommunstöd ska framgå i studieförbundets kommunikation
+  belopp: null
+  sen_ansokan: Ansökan ska lämnas senast 30 september
+  kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
+  belopp_status: kontrollast
+  belopp_avser: ren_pott
+  kommunens_pott: Minst 85 % av kommunstödet fördelas efter deltagartimmar och upp till 15 % som målbidrag för prioriterade deltagartimmar; totalsumman publiceras inte
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [kultur, social, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: null
+- id: norberg-stod-genom-sarskilda-avtal
+  namn: Stöd genom särskilda avtal och IOP
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Idéburna organisationer med verksamhet av särskilt stor samhällelig betydelse
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Avtalet ska bygga på ett gemensamt samverkansbehov och ett gemensamt formulerat allmännyttigt mål
+  - Samverkan får inte vara ett kommersiellt tjänsteköp och det ska saknas en färdig lösning som kan köpas
+  - Båda parter ska bidra med resurser, exempelvis ideellt arbete, lokaler eller administrativa resurser
+  - Föreningens insats och kommunens stöd ska beskrivas tydligt i avtalet
+  belopp: Stödets ekonomiska innehåll och parternas resurser fastställs i det särskilda avtalet
+  sen_ansokan: Kommunen publicerar ingen öppen gemensam ansökningsfrist
+  kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Ett särskilt avtal kan utesluta andra stödformer för samma förening.
+- id: norberg-regionalt-funktionsrattsbidrag
+  namn: Regionalt bidrag till funktionsrättsföreningar
+  kategori: [social, funktionsratt]
+  malgrupp: Funktionsrättsföreningar verksamma i minst två av Fagersta, Norberg och Skinnskatteberg
+  deadlines:
+    typ: fasta
+    datum: [06-01]
+  krav:
+  - Föreningen ska rikta sig till personer med funktionsnedsättning och vara verksam inom regionen
+  - Föreningen ska vara verksam i minst två av Fagersta, Norberg och Skinnskattebergs kommuner
+  - Föreningen ska vara godkänd av kultur- och fritidsnämnden i de berörda kommunerna
+  - Ansökan ska göras via Fagersta kommuns e-tjänst
+  belopp: Kommunalt aktivitetsstöd per sammankomst samt ett särskilt årligt grundbidrag enligt regionalt fastställda belopp
+  sen_ansokan: Ansökan ska lämnas senast 1 juni
+  kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [social, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Fagersta kommun handlägger ansökan inom den regionala samverkan.
+- id: norberg-subventionerad-foreningstaxa
+  namn: Subventionerad föreningstaxa i kommunala lokaler
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Registrerade föreningar och organisationer i Norbergs kommun
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen eller organisationen ska vara registrerad i Norbergs föreningsportal
+  - Bokning och villkor hanteras genom kommunens kultur- och fritidsavdelning
+  - Kommunfullmäktiges separata taxedokument gäller för lokalen eller anläggningen
+  - Föreningar som hyr ur kommunens utbud får inte samtidigt söka drift- och underhållsstöd för samma hyra
+  belopp: Subventionerad föreningstaxa enligt kommunfullmäktiges separata taxedokument
+  sen_ansokan: Kommunen publicerar ingen gemensam ansökningsfrist för föreningstaxan
+  kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
+  belopp_status: kontrollast
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: null
+- id: norberg-omstallningsstod-2026
+  namn: Omställningsstöd för föreningar 2026
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Ideella Norbergsföreningar som utvecklar en mer hållbar och inkluderande verksamhet
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara ideell, ha sitt säte i Norberg och verka i demokratisk anda
+  - Föreningen ska ha minst tre medlemmar, inte begränsa medlemsantalet samt ha bankkonto och organisationsnummer
+  - Insatsen ska utveckla eller anpassa verksamheten, exempelvis genom nya ledare, målgrupper, aktiviteter, lokalanpassning eller digital satsning
+  - Ansökan ska innehålla beskrivning av aktiviteten, projektet eller investeringen, förväntade effekter och en enkel kostnadskalkyl
+  belopp: Kommunen publicerar ingen generell beloppsnivå för 2026 års omställningsstöd
+  sen_ansokan: Ansökan öppnar hösten 2026; exakt sista ansökningsdag är inte publicerad
+  kalla_url: https://norberg.se/kultur--fritid/forening/omstallningsstod-for-foreningar.html
+  belopp_status: ingen_regel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: Tillfälligt stöd som kan sökas årligen 2025–2027.
 - id: norberg-oppet-evenemangsstod
   namn: Öppet evenemangsstöd
   kategori:
@@ -109,23 +263,29 @@ bidrag:
   - Offert/underlag
   - Budget
   - Projektplan
-  belopp: null
+  belopp: Kommunen publicerar ingen generell beloppsnivå för stödet
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Kontakta kommunen om ansökningsförfarandet
   kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
-  krav_fullstandiga: null
-  anteckning: För projekt av engångskaraktär; även privatpersoner kan söka.
+  krav_fullstandiga: true
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: false
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+  anteckning: För projekt av engångskaraktär. Stödet är öppet även för privatpersoner, som konkurrerar med föreningar om samma stödmedel.
 forutsattningar:
 - id: norberg-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
+  beskrivning: Föreningen ska vara registrerad i kommunens föreningsportal och uppdatera uppgifterna varje år innan en bidragsansökan kan göras.
   system: Kommunens e-tjänst eller föreningsregister
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Före årets bidragsansökan
+  giltighet: Föreningsuppgifterna ska uppdateras varje år innan en bidragsansökan kan göras
   ordning: 1
-  kalla_url: https://norberg.se/kultur--fritid/forening/foreningsbidrag.html
-  giltighet_status: okand
+  kalla_url: https://norberg.se/download/18.3548f58a1904a03264ab4788/1720522499314/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d%20och%20stipendier%202024-2027%20(KF%202024-03-04,%20%C2%A7%2020)
+  giltighet_status: kontrollast
 kommunsiffra: null
