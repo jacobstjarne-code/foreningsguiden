@@ -4,10 +4,16 @@ lan: Värmlands län
 befolkning: 3643
 forvaltning: Kultur och fritid
 ansokningssystem:
-  namn: E-tjänst/blankett
+  namn: Kommunens föreningstjänst och blanketter
   url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
-kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
-verifierad: '2026-08-01'
+kalla_url: &huvud https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: ingen_regel
+  antal: null
+  datum: null
+  kalla_url: &norm https://www.munkfors.se/wp-content/uploads/2025/07/bidragsregler.pdf
+giltighet_regel_status: ingen_regel
 bidrag:
 - namn: Aktivitetsbidrag
   kategori:
@@ -16,7 +22,7 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 02-28
+    - 02-25
     - 08-31
   krav:
   - Sammankomsten ska vara minst 45 minuter och ha minst 3 stödberättigade deltagare
@@ -25,15 +31,21 @@ bidrag:
   - Ansökan ska innehålla verksamhetsberättelse, resultat- och balansräkning samt tobak-, alkohol- och drogpolicy
   belopp: 25 kr per sammankomst. Bidraget betalas ut två gånger per år och kan högst bli 8 000 kr per halvår och 16 000 kr
     per år
-  sen_ansokan: 'Söks under två perioder: senast 31 augusti för vårterminens aktiviteter, respektive 28 februari för höstterminens
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: 'Söks under två perioder: senast 31 augusti för vårterminens aktiviteter, respektive 25 februari för höstterminens
     aktiviteter. För sent inkommen ansökan behandlas inte.'
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-aktivitetsbidrag
+  foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - namn: Anläggningsbidrag
   kategori:
   - idrott
@@ -42,21 +54,27 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 09-30
+    - 04-30
   krav:
   - Föreningen ska vara stödberättigad och ha stödberättigade medlemmar
   - Föreningen ska vara ansluten till godkänd riksorganisation
   - Ansökan ska innehålla årsredovisning samt tobak-, alkohol- och drogpolicy, samt redovisning av egna hyresinkomster och
     eventuella bidrag från annat håll för anläggningens drift
-  belopp: Föreningen kan beviljas upp till 40 procent av skälig kostnad
-  sen_ansokan: Söks från 1 januari till och med 30 september, för nästkommande år. För sent inkommen ansökan behandlas inte.
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
-  belopp_status: kontrollast
+  belopp: Kommunen publicerar ingen fast nivå; bidraget prövas efter redovisade skäliga driftkostnader, hyresintäkter och andra bidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks senast den 30 april för nästkommande år. För sent inkommen ansökan behandlas inte.
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-anlaggningsbidrag
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - namn: Evenemangsbidrag
   kategori:
   - kultur
@@ -73,15 +91,21 @@ bidrag:
   - Vid marknadsföring av evenemanget ska det framgå att Munkfors kommun bidrar till genomförandet
   - Ansökan måste komma in innan evenemanget har ägt rum
   - Ansökan ska innehålla evenemangsprogram samt tobak-, alkohol- och drogpolicy
-  belopp: null
+  belopp: Kommunen publicerar ingen fast beloppsnivå; stödet prövas utifrån ansökan och tillgängliga medel
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Söks löpande under verksamhetsåret, men ansökan måste komma in innan evenemanget äger rum
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-evenemangsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - namn: Grundbidrag
   kategori:
   - idrott
@@ -97,18 +121,26 @@ bidrag:
     - 08-31
   krav:
   - Ansökan ska innehålla årsredovisning samt tobak-, alkohol- och drogpolicy
+  - Föreningen ska vara stödberättigad, öppen och demokratiskt uppbyggd samt bedriva huvuddelen av sin ideella verksamhet i Munkfors kommun
+  - Stödberättigad medlem ska vara registrerad, ha betalat minst 50 kr i medlemsavgift och vara 7–25 år; personer med funktionsnedsättning saknar övre åldersgräns
   belopp: 24 kr per stödberättigad medlem för de första 50 medlemmarna, därefter 12 kr per medlem. Minsta belopp för förening
     är 600 kr. För förening som uppvisar en handlingsplan för föreningens miljöarbete höjs stödet till 30 respektive 15 kr
     per stödberättigad medlem
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Söks från och med 1 januari till och med 31 augusti för innevarande år. För sent inkommen ansökan behandlas
     inte.
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-grundbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - namn: Ledarutbildningsbidrag
   kategori:
   - idrott
@@ -124,14 +156,20 @@ bidrag:
   - Föreningen ska vara stödberättigad
   - Ansökan ska innehålla revisionsberättelse, tobak-, alkohol- och drogpolicy samt kvitto/faktura på genomförd utbildning
   belopp: Upp till 50 procent av godkända kurskostnader exklusive resor och logi, högst 10 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Söks senast 31 december innevarande år. För sent inkommen ansökan behandlas inte.
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-ledarutbildningsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - namn: Lokalbidrag
   kategori:
   - ovrig
@@ -139,22 +177,27 @@ bidrag:
   deadlines:
     typ: fasta
     datum:
-    - 09-30
+    - 04-30
   krav:
   - Föreningen ska vara stödberättigad
   - Bidragsberättigade lokaler ska vara uppvärmda och kunna hyras ut året runt
   - Ansökan ska innehålla årsredovisning samt tobak-, alkohol- och drogpolicy, samt redovisning av egna hyresinkomster och
     eventuella bidrag från annat håll för anläggningens/lokalernas drift
-  belopp: Föreningen kan beviljas upp till 40 procent av skälig kostnad. Ansökningar avseende belopp understigande 5 000 kr
-    omfattas inte av procentsatsen
-  sen_ansokan: Söks från 1 januari till och med 30 september, för nästkommande år. För sent inkommen ansökan behandlas inte.
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
-  belopp_status: kontrollast
+  belopp: Kommunen publicerar ingen fast nivå; bidraget prövas efter redovisade skäliga driftkostnader, hyresintäkter och andra bidrag
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Söks senast den 30 april för nästkommande år. För sent inkommen ansökan behandlas inte.
+  kalla_url: *norm
+  belopp_status: ingen_regel
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-lokalbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 - namn: Start- och utvecklingsbidrag
   kategori:
   - ovrig
@@ -165,24 +208,82 @@ bidrag:
   krav:
   - Föreningen ska ha bedrivit verksamheten i minst 3 månader innan bidrag beviljas och vara stödberättigad
   - Ansökan ska innehålla föreningens stadgar, protokoll från konstituerande styrelsemöte samt tobak-, alkohol- och drogpolicy
+  - Bidraget ska avse administrativa bildandekostnader eller praktiska aktiviteter som ökar antalet aktiva medlemmar, inte enbart annonsering
   belopp: Max 2 500 kr, utifrån dokumenterade och godkända utlägg
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Söks löpande under året
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
+  kalla_url: *norm
   belopp_status: kontrollast
   deadline_status: kontrollast
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Ej angivet i källan
   id: munkfors-start-och-utvecklingsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- namn: Verksamhetsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  malgrupp: Stödberättigade föreningar med verksamhet som inte ryms i övriga bidragsformer
+  deadlines:
+    typ: lopande
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad, demokratiskt uppbyggd och bedriva huvuddelen av sin ideella verksamhet i Munkfors kommun
+  - Ändamålet ska vara en föreningsverksamhet som inte ryms inom någon av de övriga bidragsformerna
+  - Föreningen ska lämna stadgar, medlemsförteckning, årsmöteshandlingar, årsredovisning och aktuell tobak-, alkohol- och drogpolicy
+  - Ansökan prövas utifrån tillgängliga medel och kommunens mål för föreningslivet, folkhälsan och kommunvisionen
+  belopp: Kommunen publicerar ingen fast beloppsnivå; stödet prövas individuellt inom tillgängliga medel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar tas emot löpande under året
+  kalla_url: https://www.munkfors.se/wp-content/uploads/2026/04/protokoll-kf-2026-04-28.pdf
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: munkfors-verksamhetsbidrag
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
+- namn: Nolltaxa i kommunala lokaler och anläggningar
+  kategori: [idrott, kultur, ovrig]
+  malgrupp: Stödberättigade föreningar som använder kommunala lokaler och anläggningar
+  deadlines:
+    typ: okand
+    datum: []
+  krav:
+  - Föreningen ska vara stödberättigad, registrerad och bedriva huvuddelen av sin ideella verksamhet i Munkfors kommun
+  - Föreningen ska boka en kommunal lokal eller anläggning för sin föreningsverksamhet
+  - Föreningen ska följa kommunens boknings- och ordningsregler för den aktuella lokalen eller anläggningen
+  belopp: Nolltaxa i kommunala lokaler och anläggningar
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen separat ansökningsfrist för nolltaxan
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  id: munkfors-nolltaxa
+  foreningstyp: [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  kraver_registrering: true
+  status: aktiv
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: munkfors-registrering
   vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: E-tjänst/blankett
+  beskrivning: Föreningen ska vara ideell, öppen och demokratisk, bedriva huvuddelen av verksamheten i Munkfors, ha stadgar, medlemsförteckning, styrelse, revisorer, organisationsnummer och föreningskonto samt lämna årliga årsmötes- och ekonomihandlingar.
+  system: Kommunens föreningstjänst
   ledtid: null
-  ledtid_text: null
+  ledtid_text: Registrering krävs före ansökan; kommunen publicerar ingen giltighetstid eller förnyelsefrist
   giltighet: null
   ordning: 1
-  kalla_url: https://www.munkfors.se/uppleva-och-gora/foreningar/foreningsbidrag/
-  giltighet_status: okand
+  kalla_url: *norm
+  giltighet_status: ingen_regel
 kommunsiffra: null
