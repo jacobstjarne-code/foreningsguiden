@@ -2,18 +2,50 @@ kommun: Vilhelmina
 kommun_slug: vilhelmina
 lan: Västerbottens län
 befolkning: 6170
-forvaltning: Kultur och fritid
+forvaltning: Kultur och fritid samt kommunstyrelsen
 ansokningssystem:
   namn: Vilhelmina kommuns självservice och blanketter
-  url: https://www.vilhelmina.se/uppleva-och-gora/vilhelminas-foreningsliv/kommunens-foreningsstod/
-kalla_url: https://www.vilhelmina.se/uppleva-och-gora/vilhelminas-foreningsliv/kommunens-foreningsstod/
-verifierad: '2026-08-01'
+  url: https://sjalvservice.vilhelmina.se/
+kalla_url: &huvud https://www.vilhelmina.se/uppleva-och-gora/vilhelminas-foreningsliv/kommunens-foreningsstod/
+verifierad: '2026-08-23'
+giltighet_regel:
+  typ: kalenderar
+  antal: null
+  datum: null
+  kalla_url: &registrering https://www.vilhelmina.se/uppleva-och-gora/vilhelminas-foreningsliv/registrering-och-fornyande-av-uppgifter/
+giltighet_regel_status: kontrollast
 bidrag:
+- id: vilhelmina-nolltaxa-kommunala-lokaler
+  namn: Nolltaxa i kommunala lokaler och anläggningar
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: &alla [idrott, kultur, hembygd, friluft, social, ungdom, annat]
+  malgrupp: Registrerade ideella föreningar i Vilhelmina kommun
+  deadlines:
+    typ: fasta
+    datum: [08-01, 12-01]
+  krav:
+  - Föreningen ska vara registrerad hos kommunen och ha betalat den årliga serviceavgiften
+  - Nolltaxan gäller föreningsverksamhet i kommunens lokaler och anläggningar; tider fördelas efter ansökan
+  - Ansökan om höstens tider ska lämnas senast 1 augusti och vårens tider senast 1 december
+  - Föreningen ska följa kommunens boknings- och ordningsregler och lämna aktuella föreningsuppgifter
+  belopp: Avgiftsfri upplåtelse av kommunala lokaler och anläggningar för stödberättigad föreningsverksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar efter periodens sista dag kan få tider endast i mån av tillgång
+  kalla_url: &norm https://www.vilhelmina.se/media/2872/riktlinjer-foer-foereningar-i-vilhelmina-kommun.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
 - id: vilhelmina-lokalt-aktivitetsstod
   namn: Kommunalt lokalt aktivitetsstöd
   kategori:
   - idrott
+  - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -32,6 +64,8 @@ bidrag:
   - Aktivitetsstöd utgår inte till entrébelagda tävlingar, kommersiella arrangemang eller studiecirkelsammankomster/lärgruppstimmar
   - Ansökan ska styrkas av föreningens av styrelsen utsedda firmatecknare
   belopp: 50 kr per sammankomst, under förutsättning att ramen för av kommunstyrelsen anvisade medel inte överskrids
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/286
   belopp_status: kontrollast
@@ -43,15 +77,15 @@ bidrag:
   alder_min: 7
   alder_max: 25
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vilhelmina-kulturellt-verksamhetsstod
   namn: Kulturellt verksamhetsstöd
   kategori:
   - kultur
+  foreningstyp: [kultur, hembygd]
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -65,6 +99,8 @@ bidrag:
   - Till ansökan ska bifogas verksamhetsplan för kommande år, verksamhets- och årsberättelse, bokslut med resultat- och balansräkning,
     revisionsberättelse samt årsmötesprotokoll från senast avslutade verksamhets-/räkenskapsår
   belopp: Stödets storlek prövas och fastställs årligen av Vilhelmina kommun; inget fast belopp anges
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar med tillhörande handlingar som inte inkommit till Utvecklingsenheten inom föreskriven tid kan inte
     komma i fråga för stöd
   kalla_url: https://www.vilhelmina.se/media/2872/riktlinjer-foer-foereningar-i-vilhelmina-kommun.pdf
@@ -78,16 +114,16 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
 - id: vilhelmina-bygdemedel
   namn: Bygdemedel
   kategori:
   - kultur
   - ovrig
+  foreningstyp: *alla
   malgrupp: Ideella föreningar och organisationer i kommunen
   deadlines:
     typ: fasta
@@ -102,6 +138,8 @@ bidrag:
   - Ansökan görs till Länsstyrelsen Västerbotten, inte till kommunen
   belopp: Inget fast kronbelopp; bygdemedel kan normalt finansiera högst 90 % av faktiska, godkända och styrkta kostnader,
     och maxbelopp kan tillämpas
+  belopp_avser: per_forening
+  kommunens_pott: null
   sen_ansokan: Ansökningar efter angiven sista dag kan avvisas
   kalla_url: https://www.vilhelmina.se/nyheter/sok-bygdemedel-for-2026/
   belopp_status: kontrollast
@@ -113,20 +151,308 @@ bidrag:
   alder_min: null
   alder_max: null
   min_verksamhetstid_manader: null
-  foreningstyp: null
   kraver_registrering: true
   sate_i_kommunen: true
   status: aktiv
-  senast_verifierad: '2026-08-01'
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-ledarutbildningsbidrag
+  namn: Ledarutbildningsbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som utbildar ledare
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Utbildningen ska höja ledarkvaliteten och vara ordnad eller godkänd av distrikts- eller riksorganisation
+  - Deltagaren ska vara medlem och verksam som ledare i föreningen; högst fyra kurser per ledare och år är stödgrundande
+  - Kursprogram, kursintyg samt kvitton på kurs- och resekostnader ska bifogas
+  - Resekostnad beräknas efter billigaste färdsätt och andra utbildningsstöd ska redovisas
+  belopp: 80 % av godkända kurs- och resekostnader, högst 3 000 kr per kurs och deltagare
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kurs inom länet söks senast en månad efter kursen; kurs utanför länet senast en månad före
+  kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/128
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-lokalt-anordnad-ledarutbildning
+  namn: Bidrag till lokalt anordnad ledarutbildning
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som anordnar lokal ledarutbildning
+  deadlines: {typ: relativ, datum: []}
+  krav:
+  - Kursen ska vara en lokal utbildning för föreningens ledare och ha ett redovisat program och syfte
+  - Ansökan ska innehålla budget, deltagaruppgifter och uppgift om andra bidrag eller intäkter
+  - Genomförande och faktiska kostnader ska redovisas efter kursen
+  - Stödet kan beviljas högst två gånger per förening eller sektion och år
+  belopp: 100 % av godkänd nettokostnad, högst 5 000 kr per kurs
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast en månad före kursen
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-lokalbidrag
+  namn: Lokalbidrag
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar som äger eller hyr en verksamhetslokal
+  deadlines: {typ: fasta, datum: [04-15]}
+  krav:
+  - Lokalen ska vara nödvändig för verksamheten och kommunen ska sakna ett lämpligt kommunalt lokalalternativ
+  - Lokalen ska ägas eller hyras av föreningen och nyttjandet ska redovisas
+  - Årsredovisning med resultat- och balansräkning, verksamhetsberättelse och revisionsberättelse ska bifogas
+  - Kostnader ska kunna styrkas; telefon, annonser, snöskottning, sotning, städning och underhåll är inte stödgrundande
+  belopp: Högst 8 000 kr per förening och år för godkända lokalkostnader
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/47
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-samlingslokalsbidrag
+  namn: Bidrag till allmän samlingslokal
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, hembygd, social, annat]
+  malgrupp: Föreningar som äger eller driver en allmän samlingslokal
+  deadlines: {typ: fasta, datum: [04-15]}
+  krav:
+  - Lokalen ska hållas tillgänglig för föreningar och allmänhet
+  - Föreningen ska redovisa lokalens användning, intäkter och stödgrundande driftkostnader
+  - Årsredovisning, verksamhetsberättelse, revisionsberättelse och årsmöteshandlingar ska bifogas
+  - Kostnader ska kunna styrkas och lokaldelar med annan eller kommersiell användning ska särredovisas
+  belopp: Högst 40 % av godkända driftkostnader, maximalt 27 000 kr per år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-kommunalt-seriebidrag
+  namn: Kommunalt seriebidrag
+  kategori: [idrott]
+  foreningstyp: [idrott]
+  malgrupp: Registrerade idrottsföreningar med seriespel
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska delta i organiserad serieverksamhet och vara registrerad hos kommunen
+  - Kostnader och genomförd serieverksamhet ska redovisas på kommunens underlag
+  - Redovisningen ska lämnas senast en månad efter avslutad serie
+  - Stödet prövas mot faktiska kostnader och kommunens tillgängliga medel
+  belopp: Högst 8 000 kr per serieverksamhet
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ingen första ansökningsdag publiceras; kostnadsredovisning ska lämnas inom en månad efter serien
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-utvecklingsbidrag
+  namn: Utvecklingsbidrag och övrigt föreningsstöd
+  kategori: [idrott, kultur, social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Registrerade föreningar med en utvecklingsinsats som inte ryms i annat stöd
+  deadlines: {typ: fasta, datum: [11-01]}
+  krav:
+  - Ansökan ska avse en angelägen utvecklingsinsats eller ett behov som inte omfattas av en annan stödform
+  - Ändamål, målgrupp, tidplan, kostnader, finansiering och sökt belopp ska beskrivas
+  - Insatsen får inte vara genomförd innan kommunen har kunnat pröva ansökan
+  - Beviljat stöd och projektets resultat ska redovisas med verifikationer
+  belopp: Individuell prövning inom återstående kommunal föreningsstödsbudget; ingen fast nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökningar behandlas löpande till och med 1 november så länge medel finns
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-grundstod-pensionars-funktionsrattsforeningar
+  namn: Grundstöd till pensionärs- och funktionsrättsföreningar
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: &sociala [social, annat]
+  malgrupp: Föreningar för pensionärer eller personer med funktionsnedsättning
+  deadlines: {typ: fasta, datum: [04-15]}
+  krav:
+  - Föreningen ska bedriva verksamhet för personer i pensionsålder eller personer med funktionsnedsättning
+  - Föreningen ska vara registrerad och ha betalat kommunens årliga serviceavgift
+  - Verksamhetsberättelse, ekonomisk redogörelse, revisionsberättelse och styrelseuppgifter ska bifogas
+  - Föreningen ska vara demokratiskt uppbyggd, öppen för målgruppen och verksam i kommunen
+  belopp: 2 000 kr per förening och år
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/124
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-riktat-aktivitetsstod-pensionars-funktionsrattsforeningar
+  namn: Riktat aktivitetsstöd till pensionärs- och funktionsrättsföreningar
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: *sociala
+  malgrupp: Pensionärs- och funktionsrättsföreningar med särskild överenskommen aktivitet
+  deadlines: {typ: fasta, datum: [04-15]}
+  krav:
+  - Aktiviteten ska riktas till pensionärer eller personer med funktionsnedsättning och genomföras av en registrerad förening
+  - Stödets ändamål, omfattning och villkor ska regleras i en överenskommelse med kommunen
+  - Ansökan ska innehålla aktivitetsplan, målgrupp, budget och sökt belopp
+  - Genomförande och ekonomi ska redovisas enligt överenskommelsen
+  belopp: Individuellt belopp enligt särskild överenskommelse; ingen generell nivå publiceras
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Ansökan ska lämnas senast 15 april
+  kalla_url: *norm
+  belopp_status: ingen_regel
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-startstod-pensionars-funktionsrattsforeningar
+  namn: Startstöd till pensionärs- och funktionsrättsföreningar
+  kategori: [social, pensionar, funktionsratt]
+  foreningstyp: *sociala
+  malgrupp: Nybildade pensionärs- och funktionsrättsföreningar
+  deadlines: {typ: lopande, datum: []}
+  krav:
+  - Föreningen ska vara nybildad och rikta verksamheten till pensionärer eller personer med funktionsnedsättning
+  - Stadgar, bildande- eller årsmötesprotokoll, styrelseuppgifter och verksamhetsplan ska lämnas
+  - Föreningen ska registreras hos kommunen och ha konto i föreningens namn
+  - Stödet är ett engångsstöd för att starta föreningens verksamhet
+  belopp: 1 000 kr som engångsstöd
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kan sökas löpande efter att föreningen har bildats
+  kalla_url: *norm
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-skotselbidrag-anlaggning
+  namn: Skötselbidrag för föreningsdriven anläggning
+  kategori: [idrott, ovrig]
+  foreningstyp: [idrott, friluft, ungdom, annat]
+  malgrupp: Föreningar som sköter en fritids- eller idrottsanläggning
+  deadlines: {typ: fasta, datum: [05-15, 10-15]}
+  krav:
+  - Föreningen ska ansvara för drift och skötsel av en stödberättigad anläggning enligt kommunens tabell eller avtal
+  - Anläggningens typ, omfattning, säsong och ansvarig kontaktperson ska redovisas
+  - Skötseln ska utföras så att anläggningen är säker, användbar och tillgänglig enligt överenskommelsen
+  - Kommunen får kontrollera anläggningen och begära verksamhets- och kostnadsunderlag
+  belopp: Schablon eller avtal efter anläggning; bland annat elljusspår 12 000 kr, dagspår 3 000 kr, fotbollsplan 1 000–6 000 kr, kommunal isbana högst 9 000 kr, tennisbana 500–1 000 kr, skjutbana 1 000–1 500 kr, badplats 1 000–2 000 kr och ridhäst 4 000 kr (högst tio)
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Vinteranläggningar söks senast 15 maj och sommaranläggningar senast 15 oktober
+  kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/61
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Vissa anläggningar regleras genom särskilt avtal.
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-studieforbundsbidrag
+  namn: Bidrag till studieförbund
+  kategori: [kultur, social, ovrig]
+  foreningstyp: [kultur, social, annat]
+  malgrupp: Statsbidragsberättigade studieförbund med verksamhet i Vilhelmina
+  deadlines: {typ: fasta, datum: [05-31, 12-31]}
+  krav:
+  - Studieförbundets centralorganisation ska vara statsbidragsberättigad genom Folkbildningsrådet
+  - Verksamheten ska vara lokalt förankrad, planerad och genomförd i Vilhelmina kommun
+  - Skolverksamhet, kommersiell verksamhet och verksamhet som redan får annat kommunalt stöd är inte stödgrundande
+  - Verksamhetsberättelse, ekonomi, revision, kommunsammandrag samt deltagar-, studie- och kulturprogramstatistik ska lämnas
+  - Plan och budget för kommande år lämnas senast 31 december och föregående års redovisning senast 31 maj
+  belopp: null
+  belopp_avser: ren_pott
+  kommunens_pott: Kommunens årliga anslag fördelas med 60 % grundbidrag, 25 % volymbidrag och 15 % målgruppsbidrag; totalsumman publiceras inte
+  sen_ansokan: Plan och budget lämnas senast 31 december; verksamhetsredovisning senast 31 maj
+  kalla_url: https://www.vilhelmina.se/media/1623/bidragsregler-studiefoerbund.pdf
+  belopp_status: kontrollast
+  deadline_status: kontrollast
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: null
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-evenemangsbidrag
+  namn: Evenemangsbidrag
+  kategori: [idrott, kultur, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som ordnar ett evenemang i Vilhelmina kommun
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska ha sin huvudsakliga verksamhet i Vilhelmina kommun
+  - Föreningen ska vara demokratiskt uppbyggd och verksamheten ska vara öppen för alla
+  - Evenemanget ska bidra till att göra kommunen attraktiv för invånare och besökare
+  - Räkenskaper och redovisningshandlingar ska kunna granskas och felaktigt utnyttjat stöd kan återkrävas
+  - Länsstyrelsens riktlinjer för bygdemedel gäller
+  belopp: 4 000–15 000 kr per beviljad ansökan
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/572
+  belopp_status: kontrollast
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Finansieras genom bygdemedel men söks hos kommunen i en särskild e-tjänst.
+  senast_verifierad: '2026-08-23'
+- id: vilhelmina-servicepunkter-bygderad
+  namn: Föreningsbidrag till servicepunkter och bygderåd
+  kategori: [social, ovrig]
+  foreningstyp: *alla
+  malgrupp: Föreningar som utvecklar lokal service eller bygdesamverkan
+  deadlines: {typ: okand, datum: []}
+  krav:
+  - Föreningen ska ha sin huvudsakliga verksamhet i Vilhelmina kommun
+  - Föreningen ska vara demokratiskt uppbyggd och verksamheten ska vara öppen för alla
+  - Insatsen ska avse lokal service, samordning, fysisk eller digital information eller utveckling av bygderåd och byagrupper
+  - Stöd kan avse utrustning eller lokalanpassning vid servicepunkt, möten, utbildning, utvecklingsplan, servicekarta eller digital lösning
+  - Räkenskaper och redovisningshandlingar ska kunna granskas och felaktigt utnyttjat stöd kan återkrävas
+  belopp: Kommunen publicerar ingen generell beloppsnivå eller beräkningsregel
+  belopp_avser: per_forening
+  kommunens_pott: null
+  sen_ansokan: Kommunen publicerar ingen sista ansökningsdag
+  kalla_url: https://sjalvservice.vilhelmina.se/oversikt/overview/578
+  belopp_status: ingen_regel
+  deadline_status: ingen_regel
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Finansieras genom bygdemedel men har en egen kommunal ansökningsväg.
+  senast_verifierad: '2026-08-23'
 forutsattningar:
 - id: vilhelmina-registrering
-  vad: Registrering och aktuella föreningsuppgifter
-  beskrivning: Föreningen behöver uppfylla kommunens allmänna villkor och lämna efterfrågade årshandlingar.
-  system: Kommunens e-tjänst eller blankett
+  vad: Årlig registrering och aktuella föreningsuppgifter
+  beskrivning: Efter varje årsmöte ska föreningen varje år lämna aktuella uppgifter till kommunen, även om inget har ändrats. För stöd krävs registrering, stadgar, vald styrelse, minst tio medlemmar, lokal verksamhet och årlig serviceavgift; årsmötesprotokoll, verksamhets- och revisionsberättelse samt verksamhetsplan ska kunna lämnas.
+  system: Vilhelmina kommuns självservice
   ledtid: null
-  ledtid_text: null
-  giltighet: null
+  ledtid_text: Efter årsmötet varje år
+  giltighet: Ett kalenderår; uppgifterna förnyas efter varje årsmöte
   ordning: 1
-  kalla_url: https://www.vilhelmina.se/uppleva-och-gora/vilhelminas-foreningsliv/kommunens-foreningsstod/
-  giltighet_status: okand
+  kalla_url: *registrering
+  giltighet_status: kontrollast
 kommunsiffra: null
