@@ -54,6 +54,9 @@ const BEVAKNINGSFUNKTIONER = [
   // bevakningspopulation, tidigare utelämnade ur den här listan.
   'sendNationellPaminnelse28',
   'sendNationellPaminnelseSista',
+  // Z2.1 (incoming/OPPNA_PUNKTER_Z1.md) — nationella stödets egen
+  // bekräftelsemejl, samma bevakningspopulation som sendBekraftelse.
+  'sendNationellBekraftelse',
 ];
 
 const mejlTsPath = join(process.cwd(), 'src', 'lib', 'mejl.ts');

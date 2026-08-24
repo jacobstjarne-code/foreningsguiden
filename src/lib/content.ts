@@ -508,6 +508,27 @@ export const MEJL = {
     ],
   },
 
+  // Z2.1 (incoming/OPPNA_PUNKTER_Z1.md, 2026-08-24): sendBekraftelse()
+  // renderade den kommunala mallen ovan även för nationella stöd —
+  // "bevaka bidragsdeadlines i LOK-stöd" i stället för en egen text,
+  // och fel sidfot (MEJL.sidfot i stället för MEJL.nationellSidfot).
+  // Ordagrann text från ordern. {datumrad} är INTE hårdkodad — mejl.ts
+  // bygger den ur stod.deadlines.datum[], samma disciplin som
+  // sendNationellPaminnelse28/Sista redan följer (ett framtida
+  // nationellt stöd kan ha ett annat antal datum). {lank} är samma
+  // bekräftelselänk som den kommunala mallens {bekraftaLank} — mekaniken
+  // (confirmed:false tills klick) är oförändrad, bara mildare formulerad
+  // ("Läs villkoren" i stället för "Klicka för att bekräfta").
+  nationellBekraftelse: {
+    amne: 'Bevakningen är igång — {stodnamn}',
+    body: [
+      'Ni bevakar nu {stodnamn}. Vi hör av oss fyra veckor före varje sista ansökningsdag, och tre dagar innan.',
+      '{datumrad}',
+      'Ingen inloggning, inget konto. Vill ni sluta räcker det med länken längst ned i varje mejl.',
+      'Läs villkoren: {lank}',
+    ],
+  },
+
   // J1 (2026-08-16, Opus 12 augusti, incoming/MEJLTEXTER.md #1
   // "Bekräftelse — när hon anmäler bevakning"). Filens egen rubrik
   // döljer att texten INTE ber om ett klick — "Bevakningen är igång"

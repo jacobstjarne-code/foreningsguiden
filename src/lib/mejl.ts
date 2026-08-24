@@ -78,6 +78,17 @@ export async function sendBekraftelse(to: string, kommunLista: string, token: st
   await sendMejl(to, MEJL.bekraftelse, { kommunLista, bekraftaLank });
 }
 
+// Z2.1 (incoming/OPPNA_PUNKTER_Z1.md): ersätter MEJL.bekraftelse för
+// nationella stöd — den kommunala mallen gav "bevaka bidragsdeadlines
+// i LOK-stöd", fel sidfot. Samma bekräftelselänk/mekanik som
+// sendBekraftelse ovan (confirmed:false tills klick, se
+// api/bekrafta/[token].ts) — bara annan text och sidfot
+// (MEJL.nationellSidfot, samma som mejl 7/8).
+export async function sendNationellBekraftelse(to: string, stodnamn: string, datumrad: string, token: string): Promise<void> {
+  const lank = `${siteUrl()}/api/bekrafta/${encodeURIComponent(token)}/`;
+  await sendMejl(to, MEJL.nationellBekraftelse, { stodnamn, datumrad, lank }, MEJL.nationellSidfot);
+}
+
 // J1 (2026-08-16): parameternamnen kommunLista/kommunLank är kvar
 // oförändrade (samma anrop från api/bekrafta/[token].ts) — bara vilka
 // mallnycklar de fyller mappades om, till {kommun}/{lank}

@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import yaml from 'js-yaml';
-import { BIDRAG_STATUSAR, DATATILLSTAND, KATEGORIER, VERKSAMHETER, nextOccurrenceISO, todayISO } from './kommunTyper.ts';
+import { BIDRAG_STATUSAR, DATATILLSTAND, KATEGORIER, VERKSAMHETER, nextOccurrenceISO, todayISO, formatRecurringDate, svenskLista } from './kommunTyper.ts';
 import type { Datatillstand } from './kommunTyper.ts';
 import type {
   NationellDataflagga,
@@ -217,6 +217,18 @@ export function loadNationellaStod(): NationelltStod[] {
 
 export function getNationelltStodById(id: string): NationelltStod | undefined {
   return loadNationellaStod().find((stod) => stod.id === id);
+}
+
+// Z2.1 (incoming/OPPNA_PUNKTER_Z1.md): "raden om två datum renderas ur
+// stod.datum[], inte som fast text — ett framtida nationellt stöd kan
+// ha ett annat antal." Räknat, inte gissat — bara ett/två har ett
+// hårdkodat ord (matchar svenskan i resten av sajten, t.ex. TRATT.
+// raknare.mallEtt), tre eller fler faller tillbaka på siffran.
+const RAKNEORD: Record<number, string> = { 1: 'ett', 2: 'två', 3: 'tre', 4: 'fyra', 5: 'fem' };
+export function formatDatumradForStod(stod: NationelltStod): string {
+  const datum = stod.deadlines.datum.map(formatRecurringDate);
+  const antalOrd = RAKNEORD[datum.length] ?? String(datum.length);
+  return `${stod.namn} har ${antalOrd} sista datum om året: ${svenskLista(datum)}.`;
 }
 
 export function getNationellaDeadlineEntries(today: string = todayISO()): NationellDeadlineEntry[] {

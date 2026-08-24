@@ -19,9 +19,9 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getKommunBySlug } from '../../lib/kommuner';
-import { getNationelltStodById } from '../../lib/nationellaStod';
+import { getNationelltStodById, formatDatumradForStod } from '../../lib/nationellaStod';
 import { addPendingSubscriber, addBidragBevakning, addNationelltStodBevakning } from '../../lib/subscribers';
-import { sendBekraftelse } from '../../lib/mejl';
+import { sendBekraftelse, sendNationellBekraftelse } from '../../lib/mejl';
 import { underGransen, klientIdentitet, forManga } from '../../lib/rateLimit';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -69,8 +69,15 @@ export const POST: APIRoute = async ({ request }) => {
 
   if (!alreadyConfirmed && token) {
     try {
-      const etikett = nationelltStod?.namn ?? (bidrag ? `${bidrag.namn} (${kommun!.kommun})` : kommun!.kommun);
-      await sendBekraftelse(email, etikett, token);
+      // Z2.1 (incoming/OPPNA_PUNKTER_Z1.md): nationella stöd får en egen
+      // mall (MEJL.nationellBekraftelse) i stället för den kommunala
+      // (som gav "bevaka bidragsdeadlines i LOK-stöd" och fel sidfot).
+      if (nationelltStod) {
+        await sendNationellBekraftelse(email, nationelltStod.namn, formatDatumradForStod(nationelltStod), token);
+      } else {
+        const etikett = bidrag ? `${bidrag.namn} (${kommun!.kommun})` : kommun!.kommun;
+        await sendBekraftelse(email, etikett, token);
+      }
     } catch (e) {
       // Kommunen är redan sparad mot adressen (addPendingSubscriber ovan)
       // — bara mejlet failade. Svara fel så widgeten visar fel-läget,
