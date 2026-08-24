@@ -522,7 +522,15 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
         // dessutom bara sant om verksamhet/sökt-svaren faktiskt påverkat
         // sorteraForTratt() — kommunvalet ensamt filtrerar, sorterar inte.
         const harSvaratUtoverKommun = profil.verksamhet.length > 0 || profil.sokt !== null;
-        raknareTextEl.textContent = step >= 4 && harSvaratUtoverKommun ? bas + TRATT.raknare.beskedTillagg : bas;
+        // Z2.2 (incoming/OPPNA_PUNKTER_Z1.md, DOM 2026-08-21): kallt läge
+        // (kommun känd, noll äkta svar) får en egen, sann rad i stället
+        // för att bara tystna — "i kommunens ordning" i stället för att
+        // påstå en sortering som aldrig skett.
+        raknareTextEl.textContent = step < 4
+          ? bas
+          : harSvaratUtoverKommun
+            ? bas + TRATT.raknare.beskedTillagg
+            : bas + TRATT.raknare.kalltTillagg;
       }
 
       // B3: "Sortera, aldrig filtrera" — sorteraForTratt (matching.ts)
@@ -706,15 +714,36 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
 
     function visaAtervandOmBehovs() {
       if (!atervandEl || !atervandTextEl) return;
-      const antal = antalBesvarade(profil);
-      if (antal >= 3) {
-        atervandEl.hidden = true;
+      // Z2.2 (incoming/OPPNA_PUNKTER_Z1.md, DOM 2026-08-21): räkneregeln
+      // — kommunSlug räknas ALDRIG som besvarad fråga i den här
+      // avvägningen. Att kommunen är känd ur URL:en (kommunsidans CTA,
+      // ?fortsatt=) är inte något hon svarat. Vid minst ett äkta svar
+      // (verksamhet/sökt) är dagens strängar/räkning oförändrade —
+      // antalBesvarade() rörs INTE, bara det kalla specialfallet nedan.
+      const harSvaratUtoverKommun = profil.verksamhet.length > 0 || profil.sokt !== null;
+      if (harSvaratUtoverKommun) {
+        const antal = antalBesvarade(profil);
+        if (antal >= 3) {
+          atervandEl.hidden = true;
+          return;
+        }
+        // P1.C — formateraBevakarText tar {datum} också, men radMall har
+        // ingen sådan platshållare, så den delen är ett no-op här.
+        atervandTextEl.textContent = formateraBevakarText(antal, '', TRATT.besked.atervand.radMall, TRATT.besked.atervand.radMallSingular);
+        if (atervandFortsattKnapp) atervandFortsattKnapp.textContent = TRATT.besked.atervand.knappFortsatt;
+        atervandEl.hidden = false;
         return;
       }
-      // P1.C — formateraBevakarText tar {datum} också, men radMall har
-      // ingen sådan platshållare, så den delen är ett no-op här.
-      atervandTextEl.textContent = formateraBevakarText(antal, '', TRATT.besked.atervand.radMall, TRATT.besked.atervand.radMallSingular);
-      atervandEl.hidden = false;
+      // Kallt läge: kommun känd, noll äkta svar. "Tre frågor kvar" —
+      // aldrig "Ni har svarat på N frågor" om det enda kända är
+      // kommunen.
+      if (profil.kommunSlug && kommunData) {
+        atervandTextEl.textContent = TRATT.besked.atervand.kalltInbjudan.replace('{kommun}', kommunData.kommun);
+        if (atervandFortsattKnapp) atervandFortsattKnapp.textContent = TRATT.besked.atervand.kalltKnapp;
+        atervandEl.hidden = false;
+        return;
+      }
+      atervandEl.hidden = true;
     }
 
     atervandFortsattKnapp?.addEventListener('click', () => goStep(forstaObesvaradeSteg(profil)));
@@ -752,10 +781,15 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
       // session som hoppar direkt till besked räknas likadant. Väntar in
       // hamtaKommunData() så kommunnamnet är samma slags värde som i
       // goStep() (kommunData.kommun, inte bara sluggen).
+      // Z2.2: visaAtervandOmBehovs() flyttad IN i .then() — kalla lägets
+      // gren behöver kommunData.kommun (det riktiga namnet, inte bara
+      // sluggen) för "{kommun} är vald"-texten, och kommunData sätts
+      // inte förrän hamtaKommunData()s fetch är klar. Anropad synkront
+      // (som förut) körde alltid mot kommunData === null här.
       hamtaKommunData(profil.kommunSlug).then(() => {
         trackEvent('tratt_besked', { kommun: kommunData?.kommun ?? null, sokt: profil.sokt });
+        visaAtervandOmBehovs();
       });
-      visaAtervandOmBehovs();
     } else {
       updateStegUI();
     }

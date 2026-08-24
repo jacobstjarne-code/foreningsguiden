@@ -45,6 +45,10 @@ export const TRATT = {
     // Beskedskärmens rubrikvariant — samma tal, en förklarande sats till
     // (räknaren BLIR sidans rubrik där, B3 D-A "På beskedskärmen").
     beskedTillagg: ' — ordnade efter vad ni svarat. Alla visas.',
+    // Z2.2 (incoming/OPPNA_PUNKTER_Z1.md, DOM 2026-08-21): kallt läge —
+    // kommun känd (ofta via kommunsidans CTA), noll äkta svar. Ersätter
+    // beskedTillagg då, säger aldrig "efter vad ni svarat".
+    kalltTillagg: ' — i kommunens ordning. Alla visas.',
   },
 
   // ---- Fråga 1: kommun ----
@@ -122,6 +126,13 @@ export const TRATT = {
       // återanvändes aldrig här.
       radMall: 'Ni har svarat på {antal} frågor — fortsätt där ni slutade.',
       radMallSingular: 'Ni har svarat på 1 fråga — fortsätt där ni slutade.',
+      // Z2.2 (incoming/OPPNA_PUNKTER_Z1.md, DOM 2026-08-21): kallt läge
+      // — kommun känd, noll äkta svar (verksamhet/sökt). Ersätter
+      // radMall/radMallSingular OCH knappFortsatt då, aldrig samtidigt
+      // med dem. "Tre frågor kvar" är korrekt: kommunen kom ur URL:en,
+      // inte ur ett svar, så alla tre trattfrågor återstår.
+      kalltInbjudan: '{kommun} är vald. Tre frågor kvar.',
+      kalltKnapp: 'Svara på frågorna',
       knappFortsatt: 'Fortsätt',
       knappMejla: 'Mejla mig en länk',
       epostPlaceholder: 'din@forening.se',
