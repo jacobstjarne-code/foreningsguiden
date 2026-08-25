@@ -18,6 +18,25 @@
 # ska aldrig röras av den här hooken.
 set -e
 
+# INCIDENT 2026-08-25 (AA1.2-utveckling): en fixturs git-repo-skript
+# skrev av misstag `git config user.email test@example.com` in i DETTA
+# repos delade .git/config (samma GIT_DIR-arv-bugg som skrev fixturens
+# commits på repots riktiga HEAD, se c3866f6:s commit-meddelande) —
+# och en riktig commit gick sedan ut till origin/main författad av
+# "Test <test@example.com>" innan någon märkte det. Ett testvärde i
+# författarfältet ska aldrig kunna passera tyst, precis som ett
+# sandbox-organisationsnummer inte ska kunna passera säljargaten
+# (src/lib/saljargate.ts) — samma princip, samma fail-closed-regel.
+EFFEKTIV_EPOST=$(git config user.email || echo "")
+case "$EFFEKTIV_EPOST" in
+  *example.com*)
+    echo "BLOCKERAD — git config user.email är '$EFFEKTIV_EPOST', ett testvärde (example.com)."
+    echo "Kör: git config --unset user.email && git config --unset user.name"
+    echo "(rensar en eventuell lokal/repo-överskrivning, faller tillbaka på ~/.gitconfig)."
+    exit 1
+    ;;
+esac
+
 STASHED=0
 if ! git diff --quiet; then
   git stash push --keep-index --quiet --message "pre-commit: temporär undanstoppning av ospårade ändringar i spårade filer"
