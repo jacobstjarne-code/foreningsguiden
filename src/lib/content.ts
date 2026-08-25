@@ -715,20 +715,27 @@ export const MEJL = {
  * ett SANDBOX-testvärde (Jacob, 2026-07-28) — partsvalet självt är
  * fortfarande inte gjort (SPEC: Betalintegration §6 steg 3), men det
  * blockerar inte testkvitton. Byts till den riktiga juridiska partens
- * uppgifter vid live-växling. checkout/registrering.ts:s live-lägesspärr
- * ligger kvar oförändrad — den skyddar mot att fältet av misstag töms
- * (eller lämnas som ett nytt TODO) utan att någon märker det innan
- * Stripe-nyckeln växlas till skarp.
+ * uppgifter vid live-växling. saljargate.ts:s säljargate (AA1.1) ligger
+ * kvar oförändrad i alla tre köpvägarna — den skyddar mot att ett fält
+ * av misstag töms, lämnas som ett {{TODO, eller (orgnr) råkar vara kvar
+ * på sandbox-testvärdet, utan att någon märker det innan Stripe-nyckeln
+ * växlas till skarp.
+ *
+ * supportEpost (AA1.1, ny): saknades helt — säljargaten kräver en
+ * supportidentitet utöver namn/org.nr. {{TODO tills en riktig adress
+ * finns, samma platshållarkonvention som foretag/orgnr använde innan
+ * sandbox-värdet sattes.
  */
 export const SALJARE = {
   foretag: 'Humle och Dumle AB',
   orgnr: '556000-0000',
+  supportEpost: '{{TODO: supportmejladress}}',
 };
 
-// A1 (SPEC: Kvarvarande luckor, 2026-07-29): checkout/registrering.ts:s
-// TODO-spärr skyddar bara mot ett TOMT SALJARE — den kan inte skilja
-// sandbox-testvärdet ovan från en riktig juridisk part, och behöver
-// inte kunna det (fakturor testas redan säkert i sandboxläge). Men
+// A1 (SPEC: Kvarvarande luckor, 2026-07-29): checkout-vägarnas TODO-spärr
+// (nu saljargate.ts, AA1.1) skyddar bara mot ett TOMT/{{TODO SALJARE —
+// den kan inte ensam skilja sandbox-testvärdet ovan från en riktig
+// juridisk part (saljargate.ts gör det explicit, se dess filhuvud). Men
 // /integritet/ NAMNGER en personuppgiftsansvarig i ett dokument
 // besökare läser skarpt idag — där räcker inte samma spärr. Sätt
 // SALJARE_VALD = true i SAMMA commit som SALJARE bytes till den

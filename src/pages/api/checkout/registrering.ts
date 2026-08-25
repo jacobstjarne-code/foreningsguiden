@@ -21,17 +21,13 @@ import { getKommunBySlug } from '../../../lib/kommuner';
 import { siteUrl } from '../../../lib/mejl';
 import { PRIS_REGISTRERINGSUTKAST_ORE, MOMSSATS, momsAndelOre } from '../../../lib/priser';
 import { SALJARE } from '../../../lib/content';
+import { saljargateOk } from '../../../lib/saljargate';
 
-const env = import.meta.env as unknown as Record<string, string>;
-
-// H10: SALJARE (content.ts) är fortfarande TODO-platshållare — väntar på
-// valet av juridisk part. Fint i Stripe sandbox (dagens läge, syns bara
-// på testfakturor), men en riktig faktura får ALDRIG gå ut till en
-// betalande förening med "{{TODO...}}" som säljarnamn. Spärren är billig
-// att skriva nu och dyr att glömma vid växlingen till skarpt läge.
-function saljareArKlar(): boolean {
-  return !SALJARE.foretag.startsWith('{{TODO') && !SALJARE.orgnr.startsWith('{{TODO');
-}
+// `?? process.env` — samma idiom som kop.ts, se den filens kommentar.
+// Gör env testbar från ett plant node-skript (scripts/verify-saljargate.ts,
+// AA1.1) utan att ändra beteendet i Astro/Vite (import.meta.env är alltid
+// satt där, ?? triggas aldrig).
+const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 
 export const POST: APIRoute = async ({ request }) => {
   const stripeKey = env.STRIPE_SECRET_KEY?.trim();
@@ -41,8 +37,8 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'content-type': 'application/json' },
     });
   }
-  if (stripeKey.startsWith('sk_live_') && !saljareArKlar()) {
-    console.error('checkout/registrering: skarpt Stripe-läge men SALJARE i content.ts är fortfarande TODO — vägrar skapa en faktura med platshållartext.');
+  if (stripeKey.startsWith('sk_live_') && !saljargateOk()) {
+    console.error('checkout/registrering: skarpt Stripe-läge men säljargaten (saljargate.ts) är inte öppen — vägrar starta köpet.');
     return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {
       status: 503,
       headers: { 'content-type': 'application/json' },

@@ -39,12 +39,24 @@ import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { siteUrl } from '../../../lib/mejl';
 import { PRIS_ABONNEMANG_ORE } from '../../../lib/priser';
+import { saljargateOk } from '../../../lib/saljargate';
 
-const env = import.meta.env as unknown as Record<string, string>;
+// `?? process.env` — se checkout/registrering.ts:s kommentar.
+const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 
 export const POST: APIRoute = async ({ request }) => {
   const stripeKey = env.STRIPE_SECRET_KEY?.trim();
   if (!stripeKey) {
+    return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {
+      status: 503,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+  // AA1.1 (Jacobs order): saknade denna gate helt — ett skarpt-läge-
+  // abonnemangsköp (återkommande debitering) kunde startas utan någon
+  // säljarkoll. Samma gate som registrering.ts/bidragsutkast.ts.
+  if (stripeKey.startsWith('sk_live_') && !saljargateOk()) {
+    console.error('checkout/abonnemang: skarpt Stripe-läge men säljargaten (saljargate.ts) är inte öppen — vägrar starta köpet.');
     return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {
       status: 503,
       headers: { 'content-type': 'application/json' },

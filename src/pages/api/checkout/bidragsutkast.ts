@@ -43,13 +43,10 @@ import type { Foreningsprofil } from '../../../lib/foreningsprofil';
 import { siteUrl } from '../../../lib/mejl';
 import { PRIS_BIDRAGSUTKAST_ORE, MOMSSATS, momsAndelOre } from '../../../lib/priser';
 import { SALJARE } from '../../../lib/content';
+import { saljargateOk } from '../../../lib/saljargate';
 
-const env = import.meta.env as unknown as Record<string, string>;
-
-// Samma spärr som checkout/registrering.ts — se den filens kommentar.
-function saljareArKlar(): boolean {
-  return !SALJARE.foretag.startsWith('{{TODO') && !SALJARE.orgnr.startsWith('{{TODO');
-}
+// `?? process.env` — se checkout/registrering.ts:s kommentar.
+const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 
 export const POST: APIRoute = async ({ request }) => {
   const stripeKey = env.STRIPE_SECRET_KEY?.trim();
@@ -59,8 +56,8 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'content-type': 'application/json' },
     });
   }
-  if (stripeKey.startsWith('sk_live_') && !saljareArKlar()) {
-    console.error('checkout/bidragsutkast: skarpt Stripe-läge men SALJARE i content.ts är fortfarande TODO — vägrar skapa en faktura med platshållartext.');
+  if (stripeKey.startsWith('sk_live_') && !saljargateOk()) {
+    console.error('checkout/bidragsutkast: skarpt Stripe-läge men säljargaten (saljargate.ts) är inte öppen — vägrar starta köpet.');
     return new Response(JSON.stringify({ ok: false, fel: 'betalning_ej_konfigurerad' }), {
       status: 503,
       headers: { 'content-type': 'application/json' },
