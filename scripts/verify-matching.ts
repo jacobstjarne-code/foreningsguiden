@@ -7,7 +7,7 @@
  */
 import assert from 'node:assert/strict';
 import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../src/lib/matching.ts';
-import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik, subtractDays, individuelltBelopp } from '../src/lib/kommunTyper.ts';
+import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik, subtractDays, individuelltBelopp, bidragAnsokningssystemNamn, bidragAnsokningsUrl } from '../src/lib/kommunTyper.ts';
 import { arOverGolv, formateraBevakarText } from '../src/lib/bevakningKlient.ts';
 import { momsAndelOre } from '../src/lib/priser.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
@@ -43,6 +43,7 @@ function bidrag(overrides: Partial<Bidrag> = {}): Bidrag {
     senast_verifierad: null,
     belopp_avser: 'okand',
     kommunens_pott: null,
+    ansokningsvag: null,
     ...overrides,
   };
 }
@@ -343,6 +344,30 @@ test('KLUSTER1 H10: momsAndelOre — 25% av ett momsinklusive belopp, PRIS_REGIS
   assert.equal(momsAndelOre(0), 0);
   // 100 kr inklusive 25% moms → 20 kr moms (100/1.25 = 80 exkl., 80*0.25=20)
   assert.equal(momsAndelOre(10000), 2000);
+});
+
+// AA1.4 (Jacobs order): bidragAnsokningssystemNamn — bidragets EGEN
+// ansökningsväg (t.ex. Falun: RF-anslutna redovisar via RF, övriga via
+// ActorSmartbook) vinner över kommunens generella ansokningssystem.namn.
+// Samma "en sanning"-princip som bidragAnsokningsUrl redan har för URL:en
+// (kalla_url) — testat här sida vid sida så de två aldrig kan divergera.
+test('bidragAnsokningssystemNamn: ansokningsvag null → kommunens generella system (dagens beteende oförändrat)', () => {
+  const k = kommun([]);
+  const b = bidrag({ ansokningsvag: null });
+  assert.equal(bidragAnsokningssystemNamn(b, k), 'Test');
+});
+
+test('bidragAnsokningssystemNamn: ansokningsvag satt → vinner över kommunens generella system (Falun-fallet)', () => {
+  const k = kommun([]);
+  const b = bidrag({ ansokningsvag: 'RF-anslutna redovisar via Riksidrottsförbundet, övriga via ActorSmartbook.' });
+  assert.equal(bidragAnsokningssystemNamn(b, k), 'RF-anslutna redovisar via Riksidrottsförbundet, övriga via ActorSmartbook.');
+});
+
+test('bidragAnsokningssystemNamn/-Url tillsammans: bidragets egna kalla_url och ansokningsvag är oberoende av varandra', () => {
+  const k = kommun([]);
+  const b = bidrag({ ansokningsvag: 'RF eller ActorSmartbook, beroende på RF-anslutning.', kalla_url: 'https://falun.se/foreningsbidrag/idrott/' });
+  assert.equal(bidragAnsokningssystemNamn(b, k), 'RF eller ActorSmartbook, beroende på RF-anslutning.');
+  assert.equal(bidragAnsokningsUrl(b, k), 'https://falun.se/foreningsbidrag/idrott/');
 });
 
 console.log(`\n${antal} tester klara`);

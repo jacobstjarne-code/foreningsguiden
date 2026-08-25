@@ -182,6 +182,18 @@ export interface Bidrag {
   // null = inte känd/angiven. Skild från belopp (vad EN förening kan söka).
   // Sätts UTESLUTANDE av ett researchpass, aldrig av migrerings-/omräkningskod.
   kommunens_pott: string | null;
+
+  // AA1.4 (Jacobs order, 2026-08-26): ansökningsvägen för DETTA bidrag,
+  // när den skiljer sig från kommunens generella ansokningssystem.namn
+  // (t.ex. Falun: RF-anslutna föreningar redovisar via Riksidrottsförbundet,
+  // övriga via ActorSmartbook — en enda kommunövergripande systemtext kan
+  // inte bära den skillnaden). null = ingen avvikelse, kommunens
+  // ansokningssystem gäller oförändrat. Fritext, hel mening — ersätter
+  // (vinner över) kommunens generella systemtext där den visas, ersätter
+  // INTE bidragets egen kalla_url/bidragAnsokningsUrl (den URL:en är redan
+  // bidrags-scopad). Sätts ENDAST av ett researchpass, aldrig av kod —
+  // samma princip som anteckning/kommunens_pott ovan.
+  ansokningsvag: string | null;
 }
 
 export interface Ansokningssystem {
@@ -461,6 +473,20 @@ export function hittaGiltighetsstatus(forutsattningar: Forutsattning[]): Datatil
  */
 export function bidragAnsokningsUrl(bidrag: Bidrag, kommun: Kommun): string {
   return bidrag.kalla_url || kommun.ansokningssystem.url;
+}
+
+/**
+ * AA1.4 (Jacobs order, 2026-08-26): systemNAMNET, samma "en sanning"-
+ * princip som bidragAnsokningsUrl ovan bär för URL:en. bidrag.ansokningsvag
+ * vinner när satt (t.ex. Falun: RF-anslutna redovisar via RF, övriga via
+ * ActorSmartbook — kommunens EGEN ansokningssystem.namn kan inte bära den
+ * skillnaden). Fyra ställen läste tidigare kommun.ansokningssystem.namn
+ * direkt (bidragssidan, köpta pdf/docx-underlaget, Mina sidor) — samma
+ * generella-modulen-skriver-över-den-specifika-regeln-bugg som URL:en
+ * redan hade fixat, nu fixad en gång här i stället för fyra gånger.
+ */
+export function bidragAnsokningssystemNamn(bidrag: Bidrag, kommun: Kommun): string {
+  return bidrag.ansokningsvag ?? kommun.ansokningssystem.namn;
 }
 
 /**

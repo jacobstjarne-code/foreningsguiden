@@ -18,7 +18,7 @@ export const prerender = false;
 import Base from '../../../../layouts/Base.astro';
 import { SESSION_COOKIE_NAMN, hamtaSessionEmail } from '../../../../lib/session';
 import { hamtaAgtKop } from '../../../../lib/kop';
-import { getKommunBySlug } from '../../../../lib/kommuner';
+import { getKommunBySlug, bidragAnsokningsUrl, bidragAnsokningssystemNamn } from '../../../../lib/kommuner';
 import { kopChecklista, kopBidragsutkast, harvestBilagor, harvestBilagorFranKrav, foreningsuppgifterSektion, type Bilagepost } from '../../../../lib/kopDokument';
 import { VAGLEDNING } from '../../../../lib/content';
 
@@ -47,11 +47,20 @@ let rader: VisningsRad[] = [];
 let bilagor: Bilagepost[] = [];
 let dokumentKalla: string | null = null;
 let underlagSaknas = false;
+// AA1.4 (Jacobs order): default kommunens generella system, override
+// nedan om produkten är bidragsutkast och bidraget har en egen
+// ansökningsväg — samma spärr som pdf.ts/docx.ts/[bidragId]/index.astro.
+let ansokningsNamn = kommun?.ansokningssystem.namn ?? '';
+let ansokningsUrl = kommun?.ansokningssystem.url ?? '';
 
 if (kop && kommun) {
   if (kop.produkt === 'bidragsutkast') {
     const bidrag = kop.bidragId ? kommun.bidrag.find((b) => b.id === kop.bidragId) : undefined;
     const doc = bidrag ? kopBidragsutkast(kop, kommun, bidrag) : null;
+    if (bidrag) {
+      ansokningsNamn = bidragAnsokningssystemNamn(bidrag, kommun);
+      ansokningsUrl = bidragAnsokningsUrl(bidrag, kommun);
+    }
     if (doc) {
       eyebrow = `${kommun.kommun} kommun · ${doc.bidragNamn}`;
       sidRubrik = 'Utkast till ansökan';
@@ -197,7 +206,7 @@ if (kop && kommun) {
 
       <div class="kop-doc__inlamning">
         <h2>Lämna in ansökan</h2>
-        <p>Ansökan lämnas in hos {kommun.kommun} kommun via <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.namn}</a>, inte här.</p>
+        <p>Ansökan lämnas in hos {kommun.kommun} kommun via <a href={ansokningsUrl}>{ansokningsNamn}</a>, inte här.</p>
       </div>
 
       <p class="kop-doc__ansvar">{VAGLEDNING.station5.ansvar}</p>

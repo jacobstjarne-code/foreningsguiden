@@ -270,6 +270,14 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
     problems.push(`${where}.senast_verifierad måste vara ett datum i formatet YYYY-MM-DD eller null`);
   }
 
+  // AA1.4 — valfritt fält, saknas i alla befintliga filer i dag. Samma
+  // additiva recept som qa_anteckning/kommunens_pott ovan: validera bara
+  // om satt, default null (kommunens ansokningssystem gäller) annars.
+  if (raw.ansokningsvag !== null && raw.ansokningsvag !== undefined && !isNonEmptyString(raw.ansokningsvag)) {
+    problems.push(`${where}.ansokningsvag måste vara icke-tom text eller null`);
+  }
+  raw.ansokningsvag = raw.ansokningsvag ?? null;
+
   return raw as Bidrag;
 }
 

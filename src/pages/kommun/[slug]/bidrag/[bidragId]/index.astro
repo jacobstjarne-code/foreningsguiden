@@ -15,7 +15,7 @@ import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
 import BidragDjup from '../../../../../components/BidragDjup.astro';
 import UrgencyChip from '../../../../../components/UrgencyChip.astro';
 import {
-  loadKommuner, bidragAnsokningsUrl, hittaGiltighetsstatus,
+  loadKommuner, bidragAnsokningsUrl, bidragAnsokningssystemNamn, hittaGiltighetsstatus,
   earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
   individuelltBelopp, harEtjanstsystem, possessiv, beloppArEttEnkeltTal, beraknaArbetsbevis,
 } from '../../../../../lib/kommuner';
@@ -58,9 +58,17 @@ const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ans
 // kommunsidan (D2 tog bort den där som en dubblett av varje bidrags egen
 // "Till ansökan"-knapp). Samma text, oförändrad — KOMMUN.ansoknings-
 // systemRubrik/-Template fanns redan, ingen ny prosa skriven för flytten.
-const ansokningstext = KOMMUN.ansokningssystemTemplate
-  .replace(/{kommun}/g, kommun.kommun)
-  .replace(/{system}/g, kommun.ansokningssystem.namn);
+//
+// AA1.4 (Jacobs order): bidrag.ansokningsvag vinner över kommunens
+// generella systemtext när satt (t.ex. Falun: RF-anslutna redovisar via
+// RF, övriga via ActorSmartbook — en enda kommunövergripande mening kan
+// inte bära den skillnaden). Ersätter hela stycket, inte bara {system} —
+// en fritextöverskrivning som beskriver flera vägar passar inte in i
+// "{kommun} tar emot ansökningar via {system}."-mallens grammatik.
+const ansokningstext = bidrag.ansokningsvag
+  ?? KOMMUN.ansokningssystemTemplate
+    .replace(/{kommun}/g, kommun.kommun)
+    .replace(/{system}/g, bidragAnsokningssystemNamn(bidrag, kommun));
 
 // P2.2 (KOMMUNSIDAN_EN_LASARE_2026-08-21.md): köprutan flyttad hit från
 // kommunsidans station 5 (KommunProgression.astro) — samma beräkningar,
@@ -153,8 +161,14 @@ const webPageJsonLd = {
   <section>
     <h2>{KOMMUN.ansokningssystemRubrik}</h2>
     <p>
-      {ansokningstext}{' '}
-      <a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a>
+      {ansokningstext}
+      {/* AA1.4: kommunens generella länk visas bara när ingen bidrags-
+         specifik ansökningsväg skrivit över texten ovan — en fritext-
+         överskrivning kan beskriva flera vägar/system, och den enda
+         kommun-länken vore då fel eller ofullständig. */}
+      {!bidrag.ansokningsvag && (
+        <>{' '}<a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a></>
+      )}
     </p>
   </section>
 </Base>
