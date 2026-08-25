@@ -50,14 +50,26 @@ function bidragCount(yamlText: string): number | null {
   }
 }
 
-function andradeKommunFiler(): string[] {
+// AA1.2 (Jacobs order, säkerhetsfynd): denna kallades tidigare ALLTID
+// för `git diff --cached`, oavsett läge — även från --ci-mot-grenen.
+// I en ren CI-checkout finns ingenting stagat (--cached är tomt), så
+// hittaRegressioner() jämförde noll filer och rapporterade "inga
+// regressioner" oavsett vad som FAKTISKT ändrats mellan ref och HEAD.
+// Falskt grönt, varje gång. Två separata funktioner nu — en per läge,
+// ingen kan råka anropas från fel gren.
+function andradeKommunFilerStaged(): string[] {
   const out = execSync('git diff --cached --name-only --diff-filter=M -- data/kommuner/*.yaml', { encoding: 'utf-8' });
   return out.split('\n').map((l) => l.trim()).filter(Boolean);
 }
 
-function hittaRegressioner(mot: string): Regression[] {
+function andradeKommunFilerMotRef(ref: string): string[] {
+  const out = execSync(`git diff --name-only --diff-filter=M ${ref}..HEAD -- data/kommuner/*.yaml`, { encoding: 'utf-8' });
+  return out.split('\n').map((l) => l.trim()).filter(Boolean);
+}
+
+function hittaRegressioner(mot: string, filer: string[]): Regression[] {
   const regressioner: Regression[] = [];
-  for (const fil of andradeKommunFiler()) {
+  for (const fil of filer) {
     let fore: string;
     try {
       fore = execSync(`git show ${mot}:${fil}`, { encoding: 'utf-8' });
@@ -81,7 +93,7 @@ const meddelandeArg = args.find((a) => a.startsWith('--kontrollera-meddelande=')
 const ciMotArg = args.find((a) => a.startsWith('--ci-mot='))?.slice('--ci-mot='.length);
 
 if (motArg) {
-  const regressioner = hittaRegressioner(motArg);
+  const regressioner = hittaRegressioner(motArg, andradeKommunFilerStaged());
   if (regressioner.length === 0) {
     if (existsSync(MARKER_PATH)) unlinkSync(MARKER_PATH);
     process.exit(0);
@@ -103,7 +115,7 @@ if (motArg) {
   console.error('Lägg till en rad i meddelandet som nämner "minskning" och varför, om minskningen är avsedd.');
   process.exit(1);
 } else if (ciMotArg) {
-  const regressioner = hittaRegressioner(ciMotArg);
+  const regressioner = hittaRegressioner(ciMotArg, andradeKommunFilerMotRef(ciMotArg));
   if (regressioner.length === 0) {
     console.log('Regressionsskydd (CI): inga bidragsminskningar.');
     process.exit(0);

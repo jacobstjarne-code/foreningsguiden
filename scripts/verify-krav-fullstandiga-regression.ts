@@ -44,14 +44,23 @@ function kravFullstandigaIds(yamlText: string): Set<string> | null {
   }
 }
 
-function andradeKommunFiler(): string[] {
+// AA1.2 (Jacobs order, säkerhetsfynd) — samma bugg och samma fix som
+// verify-ingen-bidrag-regression.ts: se den filens kommentar. Kallades
+// tidigare ALLTID `git diff --cached`, även från --ci-mot, vilket gav
+// falskt grönt i CI (ingenting stagat i en ren checkout).
+function andradeKommunFilerStaged(): string[] {
   const out = execSync('git diff --cached --name-only --diff-filter=M -- data/kommuner/*.yaml', { encoding: 'utf-8' });
   return out.split('\n').map((l) => l.trim()).filter(Boolean);
 }
 
-function hittaRegressioner(mot: string): Regression[] {
+function andradeKommunFilerMotRef(ref: string): string[] {
+  const out = execSync(`git diff --name-only --diff-filter=M ${ref}..HEAD -- data/kommuner/*.yaml`, { encoding: 'utf-8' });
+  return out.split('\n').map((l) => l.trim()).filter(Boolean);
+}
+
+function hittaRegressioner(mot: string, filer: string[]): Regression[] {
   const regressioner: Regression[] = [];
-  for (const fil of andradeKommunFiler()) {
+  for (const fil of filer) {
     let fore: string;
     try {
       fore = execSync(`git show ${mot}:${fil}`, { encoding: 'utf-8' });
@@ -77,7 +86,7 @@ const meddelandeArg = args.find((a) => a.startsWith('--kontrollera-meddelande=')
 const ciMotArg = args.find((a) => a.startsWith('--ci-mot='))?.slice('--ci-mot='.length);
 
 if (motArg) {
-  const regressioner = hittaRegressioner(motArg);
+  const regressioner = hittaRegressioner(motArg, andradeKommunFilerStaged());
   if (regressioner.length === 0) {
     if (existsSync(MARKER_PATH)) unlinkSync(MARKER_PATH);
     process.exit(0);
@@ -99,7 +108,7 @@ if (motArg) {
   console.error('Lägg till en rad i meddelandet som nämner "minskning" och varför, om ändringen är avsedd.');
   process.exit(1);
 } else if (ciMotArg) {
-  const regressioner = hittaRegressioner(ciMotArg);
+  const regressioner = hittaRegressioner(ciMotArg, andradeKommunFilerMotRef(ciMotArg));
   if (regressioner.length === 0) {
     console.log('Regressionsskydd (CI): ingen krav_fullstandiga-förlust.');
     process.exit(0);

@@ -28,6 +28,9 @@ jobs:
       - name: Schemavalidering
         run: node --experimental-strip-types scripts/validera-data.ts
 
+      - name: Regressionsvakternas egen fixtur (AA1.2) — bevisar att en verklig minskning fäller CI
+        run: node --experimental-strip-types scripts/verify-ci-regression-guard.ts
+
       - name: Regressionsskydd (bidragsantal mot main)
         if: github.ref != 'refs/heads/main'
         run: node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --ci-mot=origin/main
