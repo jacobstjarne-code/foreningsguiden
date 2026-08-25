@@ -461,6 +461,15 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
         trackEvent('tratt_fraga_besvarad', { steg: step, kommun: kommunData?.kommun ?? null });
       }
       step = mal;
+      // AA1.3 (Jacobs order): landar man på steg 1 med en redan sparad
+      // kommun (via Ändra svar ELLER Tillbaka från steg 2) visade DOM:en
+      // fortfarande den hopfällda "Vald: X / Byt"-raden — kommunväljaren
+      // var dold, och enda vägen framåt gick via kommunvaljare:valj, som
+      // bara "Byt" triggar. Ingen väg framåt utan ett extra Byt-klick
+      // FÖRST. Steg 1 ska vara en genuint redigerbar fråga varje gång man
+      // landar där — visa väljaren direkt, samma väg som Byt-knappen
+      // redan använder, i stället för att duplicera fixen per knapp.
+      if (step === 1) visaKommunvaljare();
       updateStegUI();
       if (step === 4) {
         trackEvent('tratt_besked', { kommun: kommunData?.kommun ?? null, sokt: profil.sokt });

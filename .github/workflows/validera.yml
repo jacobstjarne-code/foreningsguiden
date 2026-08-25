@@ -68,3 +68,9 @@ jobs:
 
       - name: Säljargaten (AA1.1) — alla köpvägar mot en live-lik nyckel
         run: node --experimental-strip-types scripts/verify-saljargate.ts
+
+      - name: Installera Chromium (Playwright, för e2e-testerna)
+        run: npx playwright install --with-deps chromium
+
+      - name: "Ändra svar" (AA1.3) — E2E mot sparad profil, ingen dödläge
+        run: node --experimental-strip-types scripts/e2e-andra-svar.ts
