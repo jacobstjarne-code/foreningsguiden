@@ -19,8 +19,15 @@
  * "Metodik bakom länk" kollas heuristiskt (kända metodikfraser utanför
  * en länk/details) — kan missa nya formuleringar.
  *
- * Kräver att `npm run build` redan körts. Fäller ALDRIG (process.exit(0)
- * alltid) — det är en rapport, inte en grind.
+ * Kräver att `npm run build` redan körts.
+ *
+ * AB1.7 (Jacobs order, 2026-08-26): fällde tidigare ALDRIG (alltid
+ * process.exit(0)) — ren rapport. De tre täthetsbudgetarna ovan fäller
+ * nu bygget (process.exit(1)) om de överskrids på en av fem guldsidor
+ * (GULDSIDOR nedan: förstasidan, /idrott/, en kommunsida, en
+ * bidragssida, den nationella detaljsidan) eller om en guldsida saknas
+ * i bygget. Resten av urvalet (OVRIGA_URVAL) och fällbart-utan-[open]-
+ * kontrollen fortsätter rapportera, aldrig fälla.
  *
  * FÄLLBART-VILLKOR (E5.1, 2026-08-12): tredje gången samma buggfamilj —
  * en display-egenskap satt utan [open]-villkor på ett element inuti
@@ -283,11 +290,16 @@ function lintFallbartUtanOppenVillkor() {
         if (!ovillkoradIckeNone) continue;
 
         const dm = /display\s*:\s*([a-zA-Z-]+)/.exec(ovillkoradIckeNone.body)!;
+        // AB1.7: alltid rapport, aldrig blockerande — en annan bugg-
+        // klass (strukturell CSS-korrekthet) än guldsidornas
+        // täthetsbudget, och källkodsbaserad (hela src/, inte de fem
+        // sidorna) så "blockerande" hade inte varit meningsfullt scopat.
         fynd.push({
           sida: relPath,
           typ: 'fällbart innehåll utan [open]-villkor',
           varde: `<${barn.tag} class="${klasser.join(' ')}"> — display: ${dm[1].trim()} i "${ovillkoradIckeNone.selector.trim()}", ingen display:none-regel någonstans för elementet`,
           budget: 'direkt barn till <details> (ej <summary>) ska ha minst en display:none-regel, annars villkoras med [open]',
+          blockerar: false,
         });
       }
     }
@@ -299,28 +311,35 @@ interface Fynd {
   typ: string;
   varde: string;
   budget: string;
+  blockerar: boolean;
 }
 
 const fynd: Fynd[] = [];
 
-function lintaSida(relPath: string, html: string) {
+// AB1.7 (Jacobs order): skriptet rapporterade alltid, fällde aldrig — tio
+// avvikelser kunde ligga kvar obemärkt. De tre täthetsbudgetarna
+// (svarsstycke/listrader/färgat drag) blir nu blockerande, men BARA på
+// fem guldsidor — resten av sajten (290 kommuner, alla bidragssidor)
+// fortsätter rapportera som förut. Grinden ska bevisa att disciplinen
+// håller där det syns mest, inte drunkna i brus från hela corpuset.
+function lintaSida(relPath: string, html: string, blockerar: boolean) {
   const svarForst = extractByClass(html, 'ekern__svar-forst');
   if (svarForst) {
     const text = stripTags(svarForst);
     const meningar = delaIMeningar(text).filter((m) => m.trim().length > 0);
     if (meningar.length > SVARSSTYCKE_MAX_MENINGAR) {
-      fynd.push({ sida: relPath, typ: 'svarsstycke', varde: `${meningar.length} meningar`, budget: `≤ ${SVARSSTYCKE_MAX_MENINGAR}` });
+      fynd.push({ sida: relPath, typ: 'svarsstycke', varde: `${meningar.length} meningar`, budget: `≤ ${SVARSSTYCKE_MAX_MENINGAR}`, blockerar });
     }
   }
 
   const listrader = countOppnaListrader(html);
   if (listrader > OPPNA_LISTRADER_MAX) {
-    fynd.push({ sida: relPath, typ: 'öppna listrader', varde: String(listrader), budget: `≤ ${OPPNA_LISTRADER_MAX}` });
+    fynd.push({ sida: relPath, typ: 'öppna listrader', varde: String(listrader), budget: `≤ ${OPPNA_LISTRADER_MAX}`, blockerar });
   }
 
   const fargatDrag = countFargatDrag(html);
   if (fargatDrag > FARGAT_DRAG_MAX) {
-    fynd.push({ sida: relPath, typ: 'färgat drag (.btn-primary)', varde: String(fargatDrag), budget: `= ${FARGAT_DRAG_MAX}` });
+    fynd.push({ sida: relPath, typ: 'färgat drag (.btn-primary)', varde: String(fargatDrag), budget: `= ${FARGAT_DRAG_MAX}`, blockerar });
   }
 }
 
@@ -338,41 +357,83 @@ function samlaHtmlFiler(dir: string, base = ''): string[] {
   return resultat;
 }
 
-// Ett urval, inte hela sajten (290 kommuner skulle dränka rapporten i
-// brus från samma mall) — kommunsidor + huvudflöden, samma princip som
-// verifieringens "Gislaved/Arvika/en kommun utan foreningstyp".
-const URVAL = [
+// AB1.7 (Jacobs order): fem guldsidor där de tre täthetsbudgetarna
+// (svarsstycke/listrader/färgat drag) FÄLLER bygget — förstasidan,
+// /idrott/, en kommunsida, en bidragssida, den nationella detaljsidan.
+const GULDSIDOR = [
+  'index.html',
+  'idrott/index.html',
   'kommun/gislaved/index.html',
+  'kommun/gislaved/bidrag/gislaved-startbidrag/index.html',
+  'nationella-stod/lok-stod/index.html',
+];
+
+// Resten av urvalet — samma sidor som innan AB1.7, men bara rapport,
+// aldrig blockerande. 290 kommuner skulle dränka rapporten i brus från
+// samma mall, samma princip som verifieringens "Gislaved/Arvika/en
+// kommun utan foreningstyp".
+const OVRIGA_URVAL = [
   'kommun/arvika/index.html',
   'kommun/norrtalje/index.html',
-  'index.html',
   'matcha/index.html',
   'pris/index.html',
   'om/index.html',
   'deadlines/index.html',
 ];
 
+let guldsidaSaknas = false;
+
 if (distClientFinns) {
-  for (const rel of URVAL) {
+  for (const rel of GULDSIDOR) {
+    const full = join(DIST_CLIENT, rel);
+    if (!existsSync(full)) {
+      console.error(`GULDSIDA SAKNAS I BYGGET: ${rel} — kan inte kontrolleras, byggfel snarare än en täthetsavvikelse.`);
+      guldsidaSaknas = true;
+      continue;
+    }
+    lintaSida(rel, readFileSync(full, 'utf-8'), true);
+  }
+  for (const rel of OVRIGA_URVAL) {
     const full = join(DIST_CLIENT, rel);
     if (!existsSync(full)) continue;
-    lintaSida(rel, readFileSync(full, 'utf-8'));
+    lintaSida(rel, readFileSync(full, 'utf-8'), false);
   }
 }
 
 // Källkodsbaserad, kräver inte dist/client — körs alltid.
 lintFallbartUtanOppenVillkor();
 
+const blockerandeFynd = fynd.filter((f) => f.blockerar);
+const rapportFynd = fynd.filter((f) => !f.blockerar);
+
 if (fynd.length === 0) {
   console.log('Täthetsbudget: inga överskridanden i urvalet.');
 } else {
-  console.log(`Täthetsbudget: ${fynd.length} överskridande(n) — rapport, fäller inte bygget.\n`);
-  for (const f of fynd) {
-    console.log(`  ${f.sida} — ${f.typ}: ${f.varde} (budget ${f.budget})`);
+  if (blockerandeFynd.length > 0) {
+    console.log(`Täthetsbudget: ${blockerandeFynd.length} BLOCKERANDE överskridande(n) på guldsidorna:\n`);
+    for (const f of blockerandeFynd) {
+      console.log(`  ${f.sida} — ${f.typ}: ${f.varde} (budget ${f.budget})`);
+    }
+    console.log('');
+  }
+  if (rapportFynd.length > 0) {
+    console.log(`Täthetsbudget: ${rapportFynd.length} överskridande(n) utanför guldsidorna — rapport, fäller inte bygget.\n`);
+    for (const f of rapportFynd) {
+      console.log(`  ${f.sida} — ${f.typ}: ${f.varde} (budget ${f.budget})`);
+    }
   }
 }
 
 console.log(`\nBrödtextgolv (A4): ${BRODTEXT_GOLV_PX}px — kontrollerad manuellt mot tokens.css --fg-text-body, inte mätt här (kräver en layoutmotor).`);
 console.log('Ej täckt av det här skriptet (kräver en riktig webbläsare): renderad läsbredd i px, "metodik bakom länk" utanför kända fraser.');
 
-process.exit(0); // rapporterar, fäller aldrig
+// AB1.7 (Jacobs order): fällde ALDRIG (alltid exit 0) — tio avvikelser
+// kunde stå kvar obemärkt. De tre täthetsbudgetarna fäller nu på de fem
+// guldsidorna (index/idrott/en kommunsida/en bidragssida/den nationella
+// detaljsidan); en saknad guldsida (byggfel) fäller lika hårt. Resten av
+// urvalet, och fällbart-utan-[open]-kontrollen, fortsätter bara rapportera.
+if (blockerandeFynd.length > 0 || guldsidaSaknas) {
+  console.log(`\nGULDSIDEGRIND: ${blockerandeFynd.length} blockerande fynd${guldsidaSaknas ? ' + minst en saknad guldsida' : ''} — fäller bygget.`);
+  process.exit(1);
+}
+process.exit(0);
