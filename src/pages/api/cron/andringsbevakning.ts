@@ -54,8 +54,10 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     try {
+      // Jacobs rättning: mejlet ska visa kommunens namn, inte sluggen
+      // — kommun.kommun finns redan i scope (guard rad 43 ovan).
       await sendAndringsNotis(k.email, {
-        kommunSlug: k.kommunSlug,
+        kommun: kommun.kommun,
         registreraLank: `${siteUrl()}/kommun/${k.kommunSlug}/registrera/`,
       });
       await markeraSnapshotNotifierad(k.stripeSessionId, nuvarande);

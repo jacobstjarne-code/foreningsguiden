@@ -142,7 +142,12 @@ async function hanteraRegistreringsCheckout(session: Stripe.Checkout.Session, st
   }
 
   try {
-    await sendKopBekraftelse(email, { kommunSlug, belopp: beloppKr, registreraLank, kopLank, hostedInvoiceUrl, checklista });
+    // Jacobs rättning: mejlet ska visa kommunens namn, inte sluggen —
+    // kommun (Kommun-objektet, hämtat ovan) kan i teorin vara null
+    // (samma defensiva mönster som checklista-fallbacken ovan), då
+    // faller texten tillbaka på sluggen hellre än att krascha den
+    // kritiska köp-skrivningen ovanför.
+    await sendKopBekraftelse(email, { kommun: kommun?.kommun ?? kommunSlug, belopp: beloppKr, registreraLank, kopLank, hostedInvoiceUrl, checklista });
   } catch (err) {
     console.error('sendKopBekraftelse misslyckades', err);
   }

@@ -332,7 +332,11 @@ export async function sendBidragsutkastNotis(vars: BidragsutkastNotisVars): Prom
 }
 
 export interface KopBekraftelseVars {
-  kommunSlug: string;
+  // Jacobs rättning: en slug ("malung-salen") är inte kommunens namn
+  // ("Malung-Sälen") — kommunSlug renderades i löptext. kommun = det
+  // riktiga namnet, samma fältnamn som BidragsutkastBekraftelseVars
+  // redan använder.
+  kommun: string;
   belopp: string; // kr, utan öre
   registreraLank: string;
   kopLank: string;
@@ -361,7 +365,7 @@ export interface KopBekraftelseVars {
  */
 export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): Promise<void> {
   const rader = [
-    `Tack för ditt köp — Registreringsutkast för er förening i ${vars.kommunSlug}.`,
+    `Tack för ert köp — checklistan för att bli bidragsberättigad förening i ${vars.kommun}.`,
     `Belopp: ${vars.belopp} kr.`,
     '',
     'Er registreringschecklista:',
@@ -386,7 +390,7 @@ export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): 
   const result = await resend.emails.send({
     from: FROM,
     to,
-    subject: `Ert registreringsutkast — ${vars.kommunSlug}`,
+    subject: `Er checklista — registrering i ${vars.kommun}`,
     text: rader.join('\n'),
   });
   if (result.error) {
@@ -415,11 +419,11 @@ export interface BidragsutkastBekraftelseVars {
  */
 export async function sendBidragsutkastBekraftelse(to: string, vars: BidragsutkastBekraftelseVars): Promise<void> {
   const rader = [
-    `Tack för ditt köp — utkast till ${vars.bidragNamn} i ${vars.kommun}.`,
+    `Tack för ert köp — checklistan för ${vars.bidragNamn} i ${vars.kommun}.`,
     `Belopp: ${vars.belopp} kr.`,
     `${vars.bidragBelopp ?? 'Belopp ej publikt'} · sista ansökningsdag ${vars.deadlineText}`,
     '',
-    'Ert utkast:',
+    'Er checklista:',
     '',
   ];
 
@@ -438,7 +442,7 @@ export async function sendBidragsutkastBekraftelse(to: string, vars: Bidragsutka
   const result = await resend.emails.send({
     from: FROM,
     to,
-    subject: `Ert utkast — ${vars.bidragNamn} (${vars.kommun})`,
+    subject: `Er checklista — ${vars.bidragNamn} (${vars.kommun})`,
     text: urlPaEgenRad(rader.join('\n')),
   });
   if (result.error) {
@@ -447,7 +451,8 @@ export async function sendBidragsutkastBekraftelse(to: string, vars: Bidragsutka
 }
 
 export interface AndringsNotisVars {
-  kommunSlug: string;
+  // Jacobs rättning: samma slug-i-löptext-fel som KopBekraftelseVars.
+  kommun: string;
   registreraLank: string;
 }
 
@@ -462,14 +467,17 @@ export interface AndringsNotisVars {
  */
 export async function sendAndringsNotis(to: string, vars: AndringsNotisVars): Promise<void> {
   const text = [
-    `Kommunens registreringskrav för er förening i ${vars.kommunSlug} har uppdaterats sedan ni fick ert registreringsutkast.`,
+    `Kommunens registreringskrav i ${vars.kommun} har ändrats sedan ni köpte er checklista.`,
     `Se den uppdaterade checklistan: ${vars.registreraLank}`,
   ].join('\n');
 
   const result = await resend.emails.send({
     from: FROM,
     to,
-    subject: `Uppdaterade registreringskrav — ${vars.kommunSlug}`,
+    // Samma slug-fält bytt i subjectet (mekaniskt, ingen ny text — bara
+    // ${vars.kommunSlug} → ${vars.kommun}, oundvikligt av fältbytet ovan;
+    // Jacob gav ingen ny formulering för raden, bara variabeln rättad).
+    subject: `Uppdaterade registreringskrav — ${vars.kommun}`,
     text,
   });
   if (result.error) {
