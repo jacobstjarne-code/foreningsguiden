@@ -25,6 +25,7 @@ export const config = { maxDuration: 60 };
 import type { APIRoute } from 'astro';
 import { loadKommuner } from '../../../lib/kommuner';
 import { synkaKoMedYaml, nastaSkift, kontrolleraKalla, byggBidragIndex, maxSenastVerifierad } from '../../../lib/omverifiering';
+import { registreraCronKorning } from '../../../lib/larm';
 
 const SKIFT_STORLEK = 1000; // generöst — tidsbudgeten är den verkliga bromsen, inte detta talet
 const SAMTIDIGHET = 20;
@@ -64,6 +65,8 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   await Promise.all(Array.from({ length: Math.min(SAMTIDIGHET, ko.length) }, arbetare));
+
+  await registreraCronKorning('omverifiering', errors);
 
   return new Response(
     JSON.stringify({

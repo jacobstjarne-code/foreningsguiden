@@ -8,6 +8,7 @@
  */
 import { Resend } from 'resend';
 import { MEJL } from './content';
+import { registreraMejlFel } from './larm';
 import type { RegistreringsUtkastRad, UtkastKravRad } from './utkastGenerator';
 
 const env = import.meta.env as unknown as Record<string, string>;
@@ -36,6 +37,20 @@ export function siteUrl(): string {
 
 function fillTemplate(str: string, vars: Record<string, string>): string {
   return Object.entries(vars).reduce((s, [k, v]) => s.split(`{${k}}`).join(v), str);
+}
+
+/**
+ * AB1.3: enda stället ett Resend-fel faktiskt kastas härifrån — alla
+ * `if (result.error)`-grenar i den här filen går via denna i stället för
+ * sitt eget `throw new Error(...)`, så räkningen (larm.ts, cron/
+ * systemlarm.ts läser den) inte kan glömmas på ett enskilt anropsställe.
+ * Samma text som tidigare (`Resend-fel vid <kontext>: <message>`) —
+ * bara VAR den kastas ifrån har flyttat, inget beteende ändrat för
+ * anroparna.
+ */
+async function kastMejlFel(kontext: string, message: string): Promise<never> {
+  await registreraMejlFel(kontext);
+  throw new Error(`Resend-fel vid ${kontext}: ${message}`);
 }
 
 /**
@@ -68,7 +83,7 @@ async function sendMejl(to: string, mall: MejlMall, vars: Record<string, string>
 
   const result = await resend.emails.send({ from: FROM, to, subject, text });
   if (result.error) {
-    throw new Error(`Resend-fel vid utskick till ${to}: ${result.error.message}`);
+    await kastMejlFel(`utskick till ${to}`, result.error.message);
   }
 }
 
@@ -118,7 +133,7 @@ export async function sendInloggningsLank(to: string, token: string): Promise<vo
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid inloggningslänk: ${result.error.message}`);
+    await kastMejlFel(`inloggningslänk`, result.error.message);
   }
 }
 
@@ -142,7 +157,7 @@ export async function sendEpostbyteLank(nyEmail: string, token: string): Promise
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid epostbyteslänk: ${result.error.message}`);
+    await kastMejlFel(`epostbyteslänk`, result.error.message);
   }
 }
 
@@ -282,7 +297,7 @@ export async function sendKopNotis(vars: KopNotisVars): Promise<void> {
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid köpnotis: ${result.error.message}`);
+    await kastMejlFel(`köpnotis`, result.error.message);
   }
 }
 
@@ -312,7 +327,7 @@ export async function sendBidragsutkastNotis(vars: BidragsutkastNotisVars): Prom
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid bidragsutkast-köpnotis: ${result.error.message}`);
+    await kastMejlFel(`bidragsutkast-köpnotis`, result.error.message);
   }
 }
 
@@ -375,7 +390,7 @@ export async function sendKopBekraftelse(to: string, vars: KopBekraftelseVars): 
     text: rader.join('\n'),
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid köpbekräftelse: ${result.error.message}`);
+    await kastMejlFel(`köpbekräftelse`, result.error.message);
   }
 }
 
@@ -427,7 +442,7 @@ export async function sendBidragsutkastBekraftelse(to: string, vars: Bidragsutka
     text: urlPaEgenRad(rader.join('\n')),
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid bidragsutkastbekräftelse: ${result.error.message}`);
+    await kastMejlFel(`bidragsutkastbekräftelse`, result.error.message);
   }
 }
 
@@ -458,7 +473,7 @@ export async function sendAndringsNotis(to: string, vars: AndringsNotisVars): Pr
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid ändringsnotis: ${result.error.message}`);
+    await kastMejlFel(`ändringsnotis`, result.error.message);
   }
 }
 
@@ -485,7 +500,7 @@ export async function sendKontaktNotis(vars: KontaktNotisVars): Promise<void> {
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid kontaktnotis: ${result.error.message}`);
+    await kastMejlFel(`kontaktnotis`, result.error.message);
   }
 }
 
@@ -520,7 +535,7 @@ export async function sendFelrapport(vars: FelrapportVars): Promise<void> {
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid felrapport: ${result.error.message}`);
+    await kastMejlFel(`felrapport`, result.error.message);
   }
 }
 
@@ -556,7 +571,7 @@ export async function sendKvitto(to: string, vars: KvittoVars): Promise<void> {
     attachments: [{ filename: 'kvitto.pdf', path: vars.invoicePdfUrl }],
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid kvitto: ${result.error.message}`);
+    await kastMejlFel(`kvitto`, result.error.message);
   }
 }
 
@@ -591,7 +606,7 @@ export async function sendUtfallsfraga(to: string, vars: UtfallsfragaVars): Prom
 
   const result = await resend.emails.send({ from: FROM, to, subject: amne, text: urlPaEgenRad(text) });
   if (result.error) {
-    throw new Error(`Resend-fel vid utfallsfråga: ${result.error.message}`);
+    await kastMejlFel(`utfallsfråga`, result.error.message);
   }
 }
 
@@ -624,7 +639,7 @@ export async function sendPaminnelseInlamning(to: string, vars: InlamningPaminne
 
   const result = await resend.emails.send({ from: FROM, to, subject: amne, text: urlPaEgenRad(text) });
   if (result.error) {
-    throw new Error(`Resend-fel vid inlämningspåminnelse: ${result.error.message}`);
+    await kastMejlFel(`inlämningspåminnelse`, result.error.message);
   }
 }
 
@@ -664,7 +679,7 @@ export async function sendDelbartBesked(to: string, vars: DelbartBeskedVars): Pr
     text: urlPaEgenRad(rader.join('\n')),
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid delbart besked: ${result.error.message}`);
+    await kastMejlFel(`delbart besked`, result.error.message);
   }
 }
 
@@ -688,6 +703,37 @@ export async function sendTrattLank(to: string, lank: string): Promise<void> {
     text,
   });
   if (result.error) {
-    throw new Error(`Resend-fel vid trattlänk: ${result.error.message}`);
+    await kastMejlFel(`trattlänk`, result.error.message);
+  }
+}
+
+/**
+ * AB1.3 (Jacobs order): systemlarmet — internt driftmejl, samma mönster
+ * som sendKontaktNotis/sendFelrapport (faktatext, ingen mall/content.ts,
+ * inget sendMejl()-fotfäste eftersom avregistreringslänken hör hemma i
+ * kundmejl, inte i ett larm till Jacob själv). rubriker = vilka av de
+ * fem villkoren som utlöste larmet (ämnesraden), kropp = redan
+ * färdigformaterad text per villkor (cron/systemlarm.ts bygger den —
+ * mejl.ts skriver ingen egen svensk brödtext här, bara etiketter).
+ */
+export interface SystemlarmVars {
+  rubriker: string[];
+  kropp: string;
+}
+
+export async function sendSystemlarm(vars: SystemlarmVars): Promise<void> {
+  const to = 'jacob.stjarne@gmail.com';
+  const result = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Systemlarm — ${vars.rubriker.join(', ')}`,
+    text: vars.kropp,
+  });
+  if (result.error) {
+    // Kastar INTE via kastMejlFel — ett larm som misslyckas med att
+    // skicka ska inte räknas in i det mejlfel-tröskelvärde det självt
+    // bevakar (självreferentiell loop). Loggas, det är allt.
+    console.error('sendSystemlarm: Resend-fel', result.error.message);
+    throw new Error(`Resend-fel vid systemlarm: ${result.error.message}`);
   }
 }

@@ -21,6 +21,7 @@ import { getKommunBySlug, formatDate, nextOccurrenceISO, daysUntil, todayISO } f
 import { hamtaKopAvProdukt, harInlamningsPaminnelseSkickats, markeraInlamningsPaminnelseSkickad } from '../../../lib/kop';
 import { matchKommun } from '../../../lib/matching';
 import { sendPaminnelseInlamning, siteUrl } from '../../../lib/mejl';
+import { registreraCronKorning } from '../../../lib/larm';
 
 const TROSKEL_DAGAR = 4;
 
@@ -85,6 +86,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       }
     }
   }
+
+  await registreraCronKorning('inlamningspaminnelse', errors);
 
   return new Response(JSON.stringify({ today, kop: kop.length, sent, skipped, errors }), {
     headers: { 'content-type': 'application/json' },

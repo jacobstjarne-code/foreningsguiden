@@ -23,6 +23,7 @@ import { getKommunBySlug, formatDate, subtractDays, todayISO } from '../../../li
 import { hamtaKopAvProdukt, harUtfallsfraganSkickats, markeraUtfallsfraganSkickad } from '../../../lib/kop';
 import { matchKommun } from '../../../lib/matching';
 import { sendUtfallsfraga, siteUrl } from '../../../lib/mejl';
+import { registreraCronKorning } from '../../../lib/larm';
 
 export const GET: APIRoute = async ({ request, url }) => {
   const env = import.meta.env as unknown as Record<string, string>;
@@ -81,6 +82,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       }
     }
   }
+
+  await registreraCronKorning('utfallsfraga', errors);
 
   return new Response(JSON.stringify({ today, targetISO, kop: kop.length, sent, skipped, errors }), {
     headers: { 'content-type': 'application/json' },

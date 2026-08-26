@@ -72,6 +72,7 @@ import {
   formatDate, formatManadRubrik,
 } from '../../../lib/kommuner';
 import { sendGiltighetsvarningNiva1, sendGiltighetsvarningNiva2, siteUrl } from '../../../lib/mejl';
+import { registreraCronKorning } from '../../../lib/larm';
 import {
   getAllConfirmedSubscribers, wasGiltighetsvarningSent, wasGiltighetsvarningNiva2Sent,
   markGiltighetsvarningSent, markGiltighetsvarningNiva2Sent,
@@ -175,6 +176,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       }
     }
   }
+
+  await registreraCronKorning('giltighetsvarning', errors);
 
   return new Response(
     JSON.stringify({

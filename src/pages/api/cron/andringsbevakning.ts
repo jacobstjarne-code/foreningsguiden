@@ -19,6 +19,7 @@ import { getKommunBySlug } from '../../../lib/kommuner';
 import { genereraRegistreringsUtkast } from '../../../lib/utkastGenerator';
 import { hamtaKopAvProdukt, hamtaSenastNotifieradSnapshot, markeraSnapshotNotifierad } from '../../../lib/kop';
 import { sendAndringsNotis, siteUrl } from '../../../lib/mejl';
+import { registreraCronKorning } from '../../../lib/larm';
 
 export const GET: APIRoute = async ({ request }) => {
   const env = import.meta.env as unknown as Record<string, string>;
@@ -63,6 +64,8 @@ export const GET: APIRoute = async ({ request }) => {
       errors.push(`${k.email}/${k.stripeSessionId}: ${(e as Error).message}`);
     }
   }
+
+  await registreraCronKorning('andringsbevakning', errors);
 
   return new Response(JSON.stringify({ kontrollerade, mejlade, oforandrade, errors }), {
     headers: { 'content-type': 'application/json' },

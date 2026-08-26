@@ -75,6 +75,9 @@ jobs:
       - name: POST-routes svarar 405 på GET (AB1.6)
         run: node --experimental-strip-types scripts/verify-post-routes-405.ts
 
+      - name: Systemlarmets beslutslogik (AB1.3)
+        run: node --experimental-strip-types scripts/verify-larm.ts
+
       - name: Installera Chromium (Playwright, för e2e-testerna)
         run: npx playwright install --with-deps chromium
 

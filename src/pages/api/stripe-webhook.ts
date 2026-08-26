@@ -42,6 +42,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { metodEjTillaten } from '../../lib/httpSvar';
+import { registreraWebhookFel } from '../../lib/larm';
 import Stripe from 'stripe';
 import { sparaKop, hamtaKop, type KopEntry } from '../../lib/kop';
 import { sparaAbonnemang, hamtaAbonnemang, uppdateraAbonnemangStatus, type AbonnemangStatus } from '../../lib/abonnemang';
@@ -436,6 +437,9 @@ export const POST: APIRoute = async ({ request }) => {
       error: err instanceof Error ? err.message : String(err),
       stack: err instanceof Error ? err.stack : undefined,
     });
+    // AB1.3: räknas av cron/systemlarm.ts — se larm.ts:s filhuvud för
+    // varför "sedan senaste kollen" räcker för den här sortens larm.
+    await registreraWebhookFel(`${event.type}/${event.id}: ${err instanceof Error ? err.message : String(err)}`);
     return new Response(JSON.stringify({ ok: false, fel: 'hanteringen misslyckades, se serverloggen' }), {
       status: 500,
       headers: { 'content-type': 'application/json' },

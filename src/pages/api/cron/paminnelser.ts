@@ -34,6 +34,7 @@ import { loadNationellaStod } from '../../../lib/nationellaStod';
 import type { NationelltStod } from '../../../lib/nationellaStod';
 import { getAllConfirmedSubscribers, wasReminderSent, markReminderSent } from '../../../lib/subscribers';
 import { sendPaminnelse28, sendPaminnelseSista, sendNationellPaminnelse28, sendNationellPaminnelseSista, siteUrl } from '../../../lib/mejl';
+import { registreraCronKorning } from '../../../lib/larm';
 
 interface Raknare {
   sent28: number;
@@ -178,6 +179,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       if (stod) await behandlaNationelltStod(sub.email, stod, today, raknare);
     }
   }
+
+  await registreraCronKorning('paminnelser', raknare.errors);
 
   return new Response(
     JSON.stringify({ today, subscribers: subscribers.length, ...raknare }),

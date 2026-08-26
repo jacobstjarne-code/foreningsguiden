@@ -41,6 +41,7 @@ import { hamtaAllaAbonnemang } from '../../../lib/abonnemang';
 import { getSubscriber, wasReminderSent, markReminderSent } from '../../../lib/subscribers';
 import { matchKommun } from '../../../lib/matching';
 import { sendPaminnelse28, sendPaminnelseSista, siteUrl } from '../../../lib/mejl';
+import { registreraCronKorning } from '../../../lib/larm';
 
 export const GET: APIRoute = async ({ request, url }) => {
   const env = import.meta.env as unknown as Record<string, string>;
@@ -121,6 +122,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       }
     }
   }
+
+  await registreraCronKorning('abonnemangsbevakning', errors);
 
   return new Response(
     JSON.stringify({ today, abonnemang: abonnemang.length, utanProfil, sent28, sent3, skipped, errors }),
