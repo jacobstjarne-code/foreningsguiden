@@ -17,7 +17,7 @@ import UrgencyChip from '../../../../../components/UrgencyChip.astro';
 import {
   loadKommuner, bidragAnsokningsUrl, bidragAnsokningssystemNamn, hittaGiltighetsstatus,
   earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
-  individuelltBelopp, harEtjanstsystem, possessiv, beloppArEttEnkeltTal, beraknaArbetsbevis,
+  individuelltBelopp, bidragHarNamngivetSystem, possessiv, beloppArEttEnkeltTal, beraknaArbetsbevis,
 } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
 import { KOMMUN, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
@@ -78,10 +78,15 @@ const ansokningstext = bidrag.ansokningsvag
 const visaKopruta = arBidragSaljbart(bidrag);
 const prisKr = PRIS_BIDRAGSUTKAST_ORE / 100;
 const kopRutaPrisOchKvitto = KOPRUTA.prisOchKvitto.replace('{pris}', String(prisKr));
+// AC3 (Jacobs order): {system} ska fyllas med bidragets EGEN
+// ansökningsväg när satt, samma "en sanning" som ansokningstext ovan
+// redan använder för prosan — bidragAnsokningssystemNamn() är den
+// funktionen. Vilken KOPRUTA-mall som väljs (nedan) avgörs separat,
+// se bidragHarNamngivetSystem i kommunTyper.ts för varför.
 const fyllKopruta = (text: string) =>
-  text.replace('{kommun}', kommun.kommun).replace('{kommunPossessiv}', possessiv(kommun.kommun)).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr)).replace('{system}', kommun.ansokningssystem.namn);
+  text.replace('{kommun}', kommun.kommun).replace('{kommunPossessiv}', possessiv(kommun.kommun)).replace('{bidrag}', bidrag.namn).replace('{pris}', String(prisKr)).replace('{system}', bidragAnsokningssystemNamn(bidrag, kommun));
 const kopRutaBeskrivning = visaKopruta
-  ? fyllKopruta(harEtjanstsystem(kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning)
+  ? fyllKopruta(bidragHarNamngivetSystem(bidrag, kommun) ? KOPRUTA.beskrivningEtjanst : KOPRUTA.beskrivning)
   : '';
 const kopRutaInnehallsrad = (() => {
   if (!visaKopruta) return '';

@@ -505,6 +505,27 @@ export function harEtjanstsystem(kommun: Kommun): boolean {
 }
 
 /**
+ * AC3 (Jacobs order, 2026-08-26): köprutans "öppnar {system}"-mall
+ * (KOPRUTA.beskrivningEtjanst) förutsätter ETT namngivet system i en
+ * grammatisk lucka. bidrag.ansokningsvag är i praktiken ALLTID en
+ * flervägsbeskrivning ("RF-anslutna redovisar via RF; övriga via X") —
+ * verifierat mot samtliga 15 satta värden i corpuset 2026-08-26, noll
+ * undantag — som inte går att klämma in i den luckan utan att förstöra
+ * grammatiken. Samma problem "Så ansöker du"-stycket redan löste genom
+ * att ersätta HELA meningen i stället för att fylla en lucka (se
+ * ansokningstext, [bidragId]/index.astro) — köprutan har ingen
+ * motsvarande fritextform att falla tillbaka på, så den använder i
+ * stället KOPRUTA.beskrivning (ingen systemnamn-referens alls) när
+ * bidraget har en egen ansökningsväg, samma fallback som redan gäller
+ * kommuner utan ett riktigt e-tjänstsystem (E-post/Blankett).
+ * bidragets fulla ansokningsvag-text syns även fortsatt i "Så ansöker
+ * du"-stycket på samma sida.
+ */
+export function bidragHarNamngivetSystem(bidrag: Bidrag, kommun: Kommun): boolean {
+  return bidrag.ansokningsvag === null && harEtjanstsystem(kommun);
+}
+
+/**
  * 2c (arbetsorder 2026-08-03) + uppföljning 2026-08-03: ursprungligen
  * detekterad enbart via anteckning-mönstret "Relativ tidsfrist: {frist}"
  * (kolon = ett värde att visa, skiljer från t.ex. Åstorps datamodells-
