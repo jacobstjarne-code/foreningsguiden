@@ -5,6 +5,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
+import { metodEjTillaten } from '../../lib/httpSvar';
 import { loadKommuner, svenskLista } from '../../lib/kommuner';
 import { addPendingSubscriber } from '../../lib/subscribers';
 import { sendBekraftelse } from '../../lib/mejl';
@@ -67,3 +68,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   return redirect('/deadlines/?bevakning=klar', 303);
 };
+
+// AB1.6 (Jacobs order): GET på en POST-bar route ska svara 405, inte Astros
+// egen 404 för en oexporterad metod — 404 säger "finns inte", 405 säger
+// "finns, men inte så här".
+export const GET: APIRoute = () => metodEjTillaten('POST');

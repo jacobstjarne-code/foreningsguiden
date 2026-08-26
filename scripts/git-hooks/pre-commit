@@ -52,6 +52,9 @@ trap aterstall EXIT
 echo "→ Schemavalidering..."
 node --experimental-strip-types scripts/validera-data.ts
 
+echo "→ POST-routes svarar 405 på GET (AB1.6)..."
+node --experimental-strip-types scripts/verify-post-routes-405.ts
+
 echo "→ Regressionsskydd (bidragsantal)..."
 node --experimental-strip-types scripts/verify-ingen-bidrag-regression.ts --mot=HEAD
 
