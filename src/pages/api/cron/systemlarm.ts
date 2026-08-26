@@ -1,8 +1,16 @@
 // GET /api/cron/systemlarm — AB1.3 (Jacobs order, auditens P1). Körs
 // dagligen 14:00 UTC (efter samtliga sju övriga crons, 07-13 UTC), det
-// åttonde vercel.json-schemat. Larmar på EXAKT fem villkor, inget annat,
+// åttonde vercel.json-schemat. Larmar på EXAKT sex villkor, inget annat,
 // och bara via ett mejl till Jacob — ingen dashboard:
 //
+// 0. Systemlarmet ej körd (AB1.8) — ett larm som själv slutar köra ser
+//    likadant ut som ett utan fel att rapportera, ingen skulle märka
+//    det. Skriver sin EGEN heartbeat (larm.ts, samma mekanism som de
+//    sju andra cronen) vid VARJE körning, tyst eller inte — och läser
+//    FÖREGÅENDE körnings tidsstämpel FÖRE den skrivs över. Tightare
+//    marginal (SYSTEMLARM_UTEBLIVET_TIMMAR=26h) än de andra cronen
+//    (30h) — det här är sista försvarslinjen, ingenting annat bevakar
+//    systemlarmet.
 // 1. Webhook 5xx/fastnat i retry  — stripe-webhook.ts:s KRITISKA gren
 //    (M1.2) registrerar varje 500 i larm.ts. Samma event-id upprepat i
 //    exempellistan = Stripe försöker om och om igen på samma event
@@ -31,9 +39,9 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import {
-  hamtaOchNollstallWebhookFel, hamtaOchNollstallMejlFel, hamtaCronHeartbeat,
+  hamtaOchNollstallWebhookFel, hamtaOchNollstallMejlFel, hamtaCronHeartbeat, registreraCronKorning,
   hamtaGranskningForegaende, sparaGranskningStorlek, KANDA_CRON_NAMN,
-  CRON_UTEBLIVEN_TIMMAR, MEJL_FEL_TROSKEL,
+  CRON_UTEBLIVEN_TIMMAR, SYSTEMLARM_UTEBLIVET_TIMMAR, MEJL_FEL_TROSKEL,
 } from '../../../lib/larm';
 import { bedomCron, granskningVaxer, aldstDatum } from '../../../lib/larmLogik';
 import { hamtaFlaggade } from '../../../lib/omverifiering';
@@ -41,6 +49,7 @@ import { OMVERIFIERING_MAX_KONSEKUTIVA_FEL } from '../../../lib/omverifieringLog
 import { sendSystemlarm } from '../../../lib/mejl';
 
 const EXEMPEL_VISADE = 5; // tak på hur många exempel som listas per sektion i mejlet
+const EGET_NAMN = 'systemlarm';
 
 export const GET: APIRoute = async ({ request }) => {
   const env = import.meta.env as unknown as Record<string, string>;
@@ -49,8 +58,20 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response('Unauthorized', { status: 401 });
   }
 
+  const nu = Date.now();
   const rubriker: string[] = [];
   const sektioner: string[] = [];
+
+  // 0. Systemlarmet ej körd — läs FÖREGÅENDE körnings heartbeat innan
+  // den skrivs över längst ned. bedomCron återanvänds med tom fel-lista
+  // (systemlarm ackumulerar inga egna "fel", bara ok/uteblivet/
+  // ej_observerad är relevanta här).
+  const egenForegaende = await hamtaCronHeartbeat(EGET_NAMN);
+  const egenBedomning = bedomCron(EGET_NAMN, egenForegaende, nu, SYSTEMLARM_UTEBLIVET_TIMMAR);
+  if (egenBedomning.status === 'uteblivet') {
+    rubriker.push('Systemlarm');
+    sektioner.push(`SYSTEMLARM SJÄLVT — föregående körning ${egenBedomning.meddelande}`);
+  }
 
   // 1. Webhook 5xx/fastnat i retry
   const webhook = await hamtaOchNollstallWebhookFel();
@@ -62,7 +83,6 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   // 2. Cron ej körd/fel
-  const nu = Date.now();
   const cronProblem: string[] = [];
   for (const namn of KANDA_CRON_NAMN) {
     const heartbeat = await hamtaCronHeartbeat(namn);
@@ -110,6 +130,10 @@ export const GET: APIRoute = async ({ request }) => {
     );
   }
   await sparaGranskningStorlek(nuvarandeStorlek);
+
+  // Skrivs OAVSETT utfall, sist — nästa körnings underlag för villkor 0.
+  // En tyst körning (inget larmat) är fortfarande en körning som hände.
+  await registreraCronKorning(EGET_NAMN, []);
 
   if (rubriker.length === 0) {
     return new Response(JSON.stringify({ larm: false }), { headers: { 'content-type': 'application/json' } });

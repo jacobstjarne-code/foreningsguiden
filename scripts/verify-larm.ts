@@ -58,6 +58,44 @@ assertEq(
   if (!b.meddelande?.includes('2 fel')) fail.push(`bedomCron: fel-meddelandet saknar felantalet: ${b.meddelande}`);
 }
 
+// --- AB1.8: systemlarmets egen självkontroll, samma bedomCron men med
+// SYSTEMLARM_UTEBLIVET_TIMMAR (26h) i stället för CRON_UTEBLIVEN_TIMMAR
+// (30h) — de två tröskelvärdena får inte råka blandas ihop. ---
+
+const SYSTEMLARM_UTEBLIVET_TIMMAR = 26;
+
+// Nydeployad (aldrig kört sig själv förut) — ska INTE larma första gången.
+assertEq(bedomCron('systemlarm', null, NU, SYSTEMLARM_UTEBLIVET_TIMMAR).status, 'ej_observerad', 'bedomCron (självkontroll): aldrig kört');
+
+// Normalt dygnsschema: föregående körning ~24h sedan — ok, under 26h-tröskeln.
+assertEq(
+  bedomCron('systemlarm', { senasteKorning: new Date(NU - 24 * 60 * 60 * 1000).toISOString(), fel: [] }, NU, SYSTEMLARM_UTEBLIVET_TIMMAR).status,
+  'ok',
+  'bedomCron (självkontroll): 24h sedan (normalt dygnsschema) → ok'
+);
+
+// En körning missades helt — föregående lyckade var ~48h sedan (ett helt hoppat dygn) → uteblivet.
+{
+  const b = bedomCron('systemlarm', { senasteKorning: new Date(NU - 48 * 60 * 60 * 1000).toISOString(), fel: [] }, NU, SYSTEMLARM_UTEBLIVET_TIMMAR);
+  assertEq(b.status, 'uteblivet', 'bedomCron (självkontroll): 48h sedan (ett hoppat dygn) → uteblivet');
+}
+
+// Skarp gräns: exakt på tröskeln (26h) är INTE över den (> jämförs, inte >=) — fortfarande ok.
+assertEq(
+  bedomCron('systemlarm', { senasteKorning: new Date(NU - 26 * 60 * 60 * 1000).toISOString(), fel: [] }, NU, SYSTEMLARM_UTEBLIVET_TIMMAR).status,
+  'ok',
+  'bedomCron (självkontroll): exakt 26h → fortfarande ok (strikt över-jämförelse)'
+);
+
+// Marginalen är TIGHTARE än de andra sju cronens 30h — samma 27h-gap
+// (mellan 26 och 30) ska ge olika utfall beroende på vilken tröskel som
+// används, annars har de två konstanterna av misstag blivit samma tal.
+{
+  const heartbeat = { senasteKorning: new Date(NU - 27 * 60 * 60 * 1000).toISOString(), fel: [] };
+  assertEq(bedomCron('systemlarm', heartbeat, NU, SYSTEMLARM_UTEBLIVET_TIMMAR).status, 'uteblivet', 'bedomCron (självkontroll): 27h → uteblivet vid 26h-tröskeln');
+  assertEq(bedomCron('paminnelser', heartbeat, NU, UTEBLIVEN_TIMMAR).status, 'ok', 'bedomCron (övriga crons): samma 27h → fortfarande ok vid 30h-tröskeln');
+}
+
 // --- granskningVaxer ---
 
 assertEq(granskningVaxer(5, 3), true, 'granskningVaxer: 3→5 är tillväxt');
@@ -81,4 +119,4 @@ if (fail.length > 0) {
   process.exit(1);
 }
 
-console.log('verify:larm — bedomCron (5 fall), granskningVaxer (5 fall, inkl. kallstart), aldstDatum (4 fall). PASS');
+console.log('verify:larm — bedomCron (5 fall) + AB1.8-självkontroll (5 fall), granskningVaxer (5 fall, inkl. kallstart), aldstDatum (4 fall). PASS');

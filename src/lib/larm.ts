@@ -115,6 +115,13 @@ export const KANDA_CRON_NAMN = [
 // uteblivet dygn.
 export const CRON_UTEBLIVEN_TIMMAR = 30;
 
+// AB1.8 (Jacobs order): systemlarmet larmar om de sju ANDRA cronen är
+// tysta — men ett larm som själv slutar köra ser likadant ut som ett
+// utan fel att rapportera, ingen skulle märka det. Tightare marginal
+// (26h, inte CRON_UTEBLIVEN_TIMMAR=30h) eftersom det HÄR är sista
+// försvarslinjen — ingenting annat bevakar systemlarmet.
+export const SYSTEMLARM_UTEBLIVET_TIMMAR = 26;
+
 // Fler än så här mejlfel "sedan senaste kollen" (en gång/dygn, se
 // vercel.json) pekar på ett systemproblem (Resend nere, felkonfigurerad
 // nyckel) snarare än enstaka studsar mot en enskild mottagares inkorg.
