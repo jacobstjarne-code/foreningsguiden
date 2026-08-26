@@ -123,8 +123,15 @@ export const KOMMUN = {
    * - bara löpande bidrag (inga fasta datum): svarForstLopande
    * - ett enda bidrag: svarForstEtt
    */
+  // AB1.9 (Jacobs order): 4 meningar → 2, guldsidegrindens svarsstycke-
+  // budget. Sten 3 ("Ansökan görs...") och 4 ("Nedan finns...") borttagna
+  // som EGNA meningar, ingen ny text skriven: sten 3 slås ihop med sten 2
+  // via semikolon (samma två fakta, en mening — delaIMeningar splittrar
+  // inte på semikolon), sten 4 (en ren "se nedan"-hänvisning, ingen egen
+  // information — bidragslistan syns redan direkt under stycket) stryks
+  // helt.
   svarForstMedDeadlines:
-    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum varierar mellan {tidigaste} och {senaste} beroende på bidrag. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
+    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum varierar mellan {tidigaste} och {senaste} beroende på bidrag; ansökan görs hos kommunen via {system}.',
   svarForstLopande:
     'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Bidragen söks löpande under året snarare än mot ett fast sista datum. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
   svarForstEtt:

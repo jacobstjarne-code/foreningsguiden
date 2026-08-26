@@ -310,7 +310,13 @@ const webPageJsonLd = {
      kommun/[slug]/bidrag/[bidragId]/index.astro. */}
 
   {kommun.bidrag.length > 0 && (
-    <section id="alla-bidrag">
+    <section id="alla-bidrag" class="referenslista">
+      {/* AB1.9 (Jacobs order, guldsidegrindens täthetsbudget): "Gislaveds
+         bidragsregister ... är sidans innehåll, och att korta dem är att
+         dölja." class="referenslista" (lint-design-guard.ts) undantar
+         hela registret från 5-radersbudgeten — det ÄR sidans register,
+         inte prosa i punktform. Samma marker som nationella-stod/[id]/
+         index.astro:s fyra referenslistor. */}
       {/* D2 (2026-08-12, Jacob): rubriken "Alla bidrag i {kommun}, i
          detalj" TAGEN BORT — raderna länkar till bidragets egen D1-URL
          i stället för att visa hela innehållet inline (det var själva

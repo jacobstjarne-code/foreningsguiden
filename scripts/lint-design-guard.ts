@@ -8,7 +8,10 @@
  * Budget per skärm:
  *   - svarsstycke ≤ 2 meningar
  *   - öppna listrader ≤ 5 (synliga utan klick — inte krav-listor inuti
- *     kollapsade bidragskort, de räknas separat och är avsiktligt långa)
+ *     kollapsade bidragskort, de räknas separat och är avsiktligt långa;
+ *     och inte register/kravlistor markerade class="referenslista", se
+ *     AB1.9 nedan — den budgeten gäller prosalistor, inte sidans
+ *     faktiska strukturerade innehåll)
  *   - färgat drag = 1 (.btn-primary)
  *   - läsbredd ≤ 60 tecken (kollas strukturellt — se begränsning nedan)
  *
@@ -28,6 +31,14 @@
  * bidragssida, den nationella detaljsidan) eller om en guldsida saknas
  * i bygget. Resten av urvalet (OVRIGA_URVAL) och fällbart-utan-[open]-
  * kontrollen fortsätter rapportera, aldrig fälla.
+ *
+ * AB1.9 (Jacobs order, 2026-08-26): öppna-listrader-budgeten fällde på
+ * Gislaveds bidragsregister (#alla-bidrag, 15 rader) och LOK-sidans krav/
+ * sanktioner/perioder/källor (20 rader) — inget av det är prosa uppstyckad
+ * i punkter, allt är sidans strukturerade faktiska innehåll. class=
+ * "referenslista" (KommunSidaFull.astro:s #alla-bidrag, nationella-stod/
+ * [id]/index.astro:s fyra listor) undantar dem helt från räkningen i
+ * stället för att korta dem — se countOppnaListrader/removeAllByClass.
  *
  * FÄLLBART-VILLKOR (E5.1, 2026-08-12): tredje gången samma buggfamilj —
  * en display-egenskap satt utan [open]-villkor på ett element inuti
@@ -91,17 +102,53 @@ function extractByClass(html: string, className: string): string | null {
   return html.slice(start, cursor - closeTag.length);
 }
 
-/** <li> som INTE är kollapsade OCH inte är sidnavigation (brödsmulor räknas inte som "innehåll"). */
+/** Djup-medveten borttagning av VARJE element vars öppningstagg bär en given klass — samma teknik som extractByClass, men river bort alla träffar i stället för att returnera en. */
+function removeAllByClass(html: string, className: string): string {
+  const re = new RegExp(`<([a-z]+)[^>]*class="[^"]*\\b${className}\\b[^"]*"[^>]*>`);
+  let result = html;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(result))) {
+    const tag = m[1];
+    const closeTag = `</${tag}>`;
+    let depth = 1;
+    let cursor = m.index + m[0].length;
+    while (depth > 0) {
+      const nextOpen = result.slice(cursor).search(new RegExp(`<${tag}\\b`));
+      const nextClose = result.indexOf(closeTag, cursor);
+      if (nextClose === -1) break;
+      const nextOpenAbs = nextOpen === -1 ? -1 : cursor + nextOpen;
+      if (nextOpenAbs !== -1 && nextOpenAbs < nextClose) {
+        depth++;
+        cursor = nextOpenAbs + tag.length + 1;
+      } else {
+        depth--;
+        cursor = nextClose + closeTag.length;
+      }
+    }
+    result = result.slice(0, m.index) + result.slice(cursor);
+  }
+  return result;
+}
+
+/** <li> som INTE är kollapsade, inte är sidnavigation (brödsmulor räknas inte som "innehåll"), och inte tillhör en referenslista. */
 function countOppnaListrader(html: string): number {
-  // Tre steg: (1) töm <nav>...</nav> — brödsmulor är strukturell
+  // Fyra steg: (1) töm <nav>...</nav> — brödsmulor är strukturell
   // chrome på varje sida, inte ett skärmspecifikt innehållsval, (2) töm
   // <details>...</details> — bidragskortens krav-listor och FAQ-svaren,
-  // (3) ta bort <li> vars ENDA kvarvarande innehåll nu är tomt — annars
-  // räknas <li> som bara wrappar ett kollapsat bidragskort (R5.8) som
-  // en "öppen" rad.
+  // (3) töm class="referenslista" (AB1.9, Jacobs order): "Radbudgeten om
+  // fem öppna rader gäller prosalistor, inte register eller kravlistor
+  // — Gislaveds bidragsregister och LOK-sidans kravlista är sidans
+  // innehåll, och att korta dem är att dölja." Register/kravlistor är
+  // strukturerad, uppräknelig faktadata (varje <li> en distinkt post —
+  // ett bidrag, ett krav, en sanktionsnivå, en källa), inte prosa
+  // uppstyckad i punkter för att kringgå räkningen — det senare är vad
+  // budgeten faktiskt ska fånga. (4) ta bort <li> vars ENDA kvarvarande
+  // innehåll nu är tomt — annars räknas <li> som bara wrappar ett
+  // kollapsat bidragskort (R5.8) som en "öppen" rad.
   const utanNav = html.replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/g, '');
   const utanDetails = utanNav.replace(/<details\b[^>]*>[\s\S]*?<\/details>/g, '');
-  const utanTommaLi = utanDetails.replace(/<li\b[^>]*>\s*<\/li>/g, '');
+  const utanReferenslistor = removeAllByClass(utanDetails, 'referenslista');
+  const utanTommaLi = utanReferenslistor.replace(/<li\b[^>]*>\s*<\/li>/g, '');
   const matches = utanTommaLi.match(/<li\b/g);
   return matches ? matches.length : 0;
 }

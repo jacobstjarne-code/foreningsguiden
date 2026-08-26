@@ -99,7 +99,14 @@ const antalBidrag = kommun.bidrag.length;
     <form class="bevaka-ruta__form" data-bevaka-ruta-form>
       <div class="bevaka-ruta__form-rad">
         <input type="email" name="email" placeholder={BEVAKNING.epostPlaceholder} required autocomplete="email" aria-label={BEVAKNING.epostLabel} />
-        <button type="submit" class="btn-primary">{BEVAKA_KOMMUN.knapp}</button>
+        {/* AB1.9 (Jacobs order): sidans enda färgade drag är stationens
+           attention-CTA (KommunProgression.astro rad ~360, R5.3 — "station
+           5:s knappar är därför nedtonade") — den här knappen fick aldrig
+           den nedtonade behandlingen. .fg-btn--ghost är redan den
+           etablerade sekundärknappen (samma klass som per-bidrag-radernas
+           knapp här i filen, rad ~92). Denna komponent renderas bara här
+           (KommunSidaFull.astro) — ingen annan yta påverkas. */}
+        <button type="submit" class="fg-btn--ghost">{BEVAKA_KOMMUN.knapp}</button>
       </div>
       <label class="bevaka-ruta__foreningsnamn-label" for={`bevaka-ruta-foreningsnamn-${kommun.kommun_slug}`}>{BEVAKNING.foreningsnamnLabel}</label>
       <input type="text" id={`bevaka-ruta-foreningsnamn-${kommun.kommun_slug}`} name="foreningsnamn" autocomplete="organization" />

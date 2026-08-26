@@ -29,7 +29,9 @@ const sanctions = stod.sanktionstrappa.steg.map((steg: typeof stod.sanktionstrap
 
   <section>
     <h2>Sista ansökningsdagar</h2>
-    <ul>
+    {/* AB1.9 (Jacobs order): referenslista — se filhuvudkommentarens
+       samlade not vid .kravlista nedan. */}
+    <ul class="referenslista">
       {stod.deadlines.perioder.map((period: typeof stod.deadlines.perioder[number]) => (
         <li><strong>{formatRecurringDate(period.datum)}</strong> — avser {periodText(period)}</li>
       ))}
@@ -41,7 +43,7 @@ const sanctions = stod.sanktionstrappa.steg.map((steg: typeof stod.sanktionstrap
 
   <section>
     <h2>Försenad ansökan</h2>
-    <ul class="sanktionslista">
+    <ul class="sanktionslista referenslista">
       {sanctions.map((s) => <li><span>{s.period}</span><strong>{s.result}</strong></li>)}
     </ul>
     <p>{stod.sanktionstrappa.undantag}.</p>
@@ -49,7 +51,16 @@ const sanctions = stod.sanktionstrappa.steg.map((steg: typeof stod.sanktionstrap
 
   <section>
     <h2>Krav</h2>
-    <ol class="kravlista">
+    {/* AB1.9 (Jacobs order, guldsidegrindens täthetsbudget): "Radbudgeten
+       om fem öppna rader gäller prosalistor, inte register eller
+       kravlistor... LOK-sidans kravlista är sidans innehåll, och att
+       korta dem är att dölja." Samma resonemang gäller de tre andra
+       listorna på den här sidan (perioder/sanktioner/källor ovan/nedan)
+       — ingen av dem är prosa uppstyckad i punkter, alla fyra är
+       strukturerad, uppräknelig faktadata om just DEN HÄR stödformen.
+       class="referenslista" (lint-design-guard.ts:s countOppnaListrader)
+       undantar dem från 5-radersbudgeten helt, ingen förkortning. */}
+    <ol class="kravlista referenslista">
       {stod.krav.map((krav: typeof stod.krav[number]) => {
         const kalla = sourceById.get(krav.kalla_id);
         return <li>{krav.text}. {kalla && <a href={kalla.url}>Källa</a>}</li>;
@@ -81,7 +92,9 @@ const sanctions = stod.sanktionstrappa.steg.map((steg: typeof stod.sanktionstrap
 
   <section>
     <h2>Källor</h2>
-    <ul>
+    {/* AB1.9 (Jacobs order): referenslista — se filhuvudkommentarens
+       samlade not vid .kravlista ovan. */}
+    <ul class="referenslista">
       {stod.kallor.map((kalla: typeof stod.kallor[number]) => <li><a href={kalla.url}>{kalla.titel}</a> — läst {kalla.last_datum}</li>)}
     </ul>
     <p><strong>Regelkonflikt:</strong> RF:s FAQ beskriver fortfarande gemensam samling och avslutning. Det kravet togs bort 1 juli 2023; gällande föreskrifter styr.</p>
