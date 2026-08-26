@@ -23,6 +23,19 @@ export interface Props {
 
 const { submitted = false, preselectedKommunSlug } = Astro.props;
 const kommuner = loadKommuner();
+const preselected = kommuner.find((k) => k.kommun_slug === preselectedKommunSlug);
+
+// AB1.1 (Jacobs order): 290 färdigrenderade checkboxar (~123 KB, 593
+// taggar — mätt) var den STÖRSTA enskilda posten på deadlinekalenderns
+// första laddning, större än själva kalendertabellen efter dess egen
+// AB1.1-fix. "Bygg rader först vid filtrering" (ordens andra godkända
+// strategi, den första — server-scopa på vald kommun — gäller redan
+// tabellerna): kompakt JSON (korta nycklar, ~4-5 KB för alla 290) i
+// stället för färdig DOM, <script> nedan bygger en kryssruta per
+// sökträff on demand. Riktig <form method="POST"> (ingen fetch) —
+// dynamiskt tillagda checkboxar är fortfarande vanliga formulärfält
+// och skickas med som vanligt så länge de finns i DOM vid submit.
+const kommunerJson = JSON.stringify(kommuner.map((k) => ({ n: k.kommun, s: k.kommun_slug })));
 ---
 {submitted ? (
   <div class="email-signup fg-card" id="email-signup" data-email-signup-submitted="1" data-email-signup-kommun={preselectedKommunSlug ?? ''}>
@@ -44,12 +57,23 @@ const kommuner = loadKommuner();
 
     <fieldset>
       <legend>{BEVAKNING.kommunLabel}</legend>
-      {kommuner.map((k) => (
-        <label class="email-signup__kommun">
-          <input type="checkbox" name="kommuner" value={k.kommun_slug} checked={k.kommun_slug === preselectedKommunSlug} />
-          {k.kommun}
-        </label>
-      ))}
+      {/* AB1.1: den förvalda kommunen (om en finns) är den enda
+         checkbox som server-renderas — resten byggs av <script> nedan,
+         en per sökträff, i stället för alla 290 i förväg. */}
+      <div class="email-signup__valda" data-email-signup-valda>
+        {preselected && (
+          <label class="email-signup__kommun" data-email-signup-vald-rad={preselected.kommun_slug}>
+            <input type="checkbox" name="kommuner" value={preselected.kommun_slug} checked />
+            {preselected.kommun}
+          </label>
+        )}
+      </div>
+      <label class="email-signup__sok">
+        Lägg till fler kommuner
+        <input type="text" placeholder="Sök din kommun — t.ex. Gislaved" data-email-signup-sok autocomplete="off" />
+      </label>
+      <div class="email-signup__traffar" data-email-signup-traffar></div>
+      <script type="application/json" data-email-signup-kommundata set:html={kommunerJson} />
     </fieldset>
 
     <label class="email-signup__consent">
@@ -90,6 +114,69 @@ const kommuner = loadKommuner();
         const varde = (new FormData(root).get('foreningsnamn') ?? '').toString().trim();
         if (varde) saveForeningsprofil({ foreningsnamn: varde });
       });
+    }
+
+    // AB1.1 (Jacobs order): "bygg rader först vid filtrering" — bygger en
+    // kryssruta per sökträff i stället för att servera alla 290 färdiga.
+    // Fortfarande ett riktigt formulärfält (name="kommuner") så länge det
+    // finns i DOM vid submit — riktig POST, ingen fetch, ingen särskild
+    // hantering behövs på servern (api/prenumerera.ts oförändrad).
+    const sokInput = root.querySelector<HTMLInputElement>('[data-email-signup-sok]');
+    const traffarEl = root.querySelector<HTMLElement>('[data-email-signup-traffar]');
+    const valdaEl = root.querySelector<HTMLElement>('[data-email-signup-valda]');
+    const dataEl = root.querySelector<HTMLScriptElement>('[data-email-signup-kommundata]');
+
+    if (sokInput && traffarEl && valdaEl && dataEl) {
+      let kommunerData: { n: string; s: string }[] = [];
+      try {
+        kommunerData = JSON.parse(dataEl.textContent ?? '[]');
+      } catch {
+        kommunerData = [];
+      }
+
+      const redanVald = (slug: string) => !!valdaEl.querySelector(`[data-email-signup-vald-rad="${slug}"]`);
+
+      function laggTill(kommun: { n: string; s: string }) {
+        if (redanVald(kommun.s)) return;
+        const label = document.createElement('label');
+        label.className = 'email-signup__kommun';
+        label.dataset.emailSignupValdRad = kommun.s;
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.name = 'kommuner';
+        cb.value = kommun.s;
+        cb.checked = true;
+        const taBort = document.createElement('button');
+        taBort.type = 'button';
+        taBort.className = 'email-signup__ta-bort';
+        taBort.setAttribute('aria-label', `Ta bort ${kommun.n}`);
+        taBort.textContent = '×';
+        taBort.addEventListener('click', () => label.remove());
+        label.append(cb, ` ${kommun.n} `, taBort);
+        valdaEl.append(label);
+      }
+
+      function visaTraffar() {
+        const query = sokInput.value.trim().toLowerCase();
+        traffarEl.replaceChildren();
+        if (query === '') return;
+        const traffar = kommunerData.filter((k) => k.n.toLowerCase().includes(query) && !redanVald(k.s)).slice(0, 8);
+        for (const k of traffar) {
+          const knapp = document.createElement('button');
+          knapp.type = 'button';
+          knapp.className = 'email-signup__traff';
+          knapp.textContent = `+ ${k.n}`;
+          knapp.addEventListener('click', () => {
+            laggTill(k);
+            sokInput.value = '';
+            traffarEl.replaceChildren();
+            sokInput.focus();
+          });
+          traffarEl.append(knapp);
+        }
+      }
+
+      sokInput.addEventListener('input', visaTraffar);
     }
   }
 </script>

@@ -57,11 +57,48 @@ const kommande = entries.filter((e) => !e.isLopande);
 const kommunFranRad = Astro.url.searchParams.get('kommun');
 const preselectedKommunSlug = kommuner.some((k) => k.kommun_slug === kommunFranRad) ? (kommunFranRad ?? undefined) : undefined;
 
+// AB1.1 (Jacobs order, revisionsfynd): "Ett kommunfilter visar 12 rader
+// men hela rikets DOM ligger kvar" — ?kommun= satte tidigare bara
+// EmailSignups förkryssning, aldrig vilka rader som RENDERADES. Samma
+// param gör nu dubbel nytta: samma länk från alla "Bevaka"-knappar
+// sajtsbrett (BevakaKommunen.astro, utkastvyn, denna sidas egna rader)
+// scopar nu tabellerna server-sidan också. Nationella stöd är alltid
+// kvar oavsett filter — de gäller varje kommun (samma regel klient-
+// filtret redan hade, se applyFilter() i <script> nedan).
+const kommunFilterSlug = preselectedKommunSlug ?? null;
+const kommandeScoped = kommunFilterSlug
+  ? kommande.filter((e) => arNationell(e) || e.kommunSlug === kommunFilterSlug)
+  : kommande;
+const lopandeScoped = kommunFilterSlug ? lopande.filter((e) => e.kommunSlug === kommunFilterSlug) : lopande;
+
+const visaAlla = Astro.url.searchParams.get('visa') === 'alla';
+const visarAllt = Boolean(kommunFilterSlug) || visaAlla;
+
+// AB1.1: budget <1000 DOM-noder / <100KB rå HTML VID FÖRSTA LADDNING
+// (mätt: 3,24 MB / ~13 700 taggar före denna fix — löpande-tabellen
+// ensam stod för 1,22 MB/5 224 taggar, HELT ovillkorad). Ett FAST
+// RADTAK, inte ett datumfönster — svenska bidragsdeadlines klustrar
+// hårt kring vanliga läsårsdatum (LOK-stödets 25/2 och 25/8 träffar
+// ~194 kommuner SAMMA DAG), så ett datumfönster kan fortfarande ge
+// hundratals rader en dålig dag. Ett radtak håller budgeten oavsett
+// kalenderklustring. Gäller bara det OSCOPADE, icke-"visa alla"-läget
+// — en vald kommun eller en explicit "visa alla"-begäran är redan
+// litet respektive ett medvetet undantag från budgeten.
+const DEFAULT_TEASER_MAX = 20;
+const kommandeForRender = visarAllt ? kommandeScoped : kommandeScoped.slice(0, DEFAULT_TEASER_MAX);
+// Löpande saknar en naturlig "närmast"-ordning (inget datum att sortera
+// på) — i bare-default-läget (ingen kommun, inte "visa alla") visas
+// därför noll löpande-rader, bara en räkning + länk. Kommun-scopat
+// eller "visa alla": alla löpande-rader för det scopet, redan litet.
+const lopandeForRender = visarAllt ? lopandeScoped : [];
+
 // TILLSTANDET_OLAST.md 4c yta 3: markören bär hela anspråket i kalenderrader
 // (ingen plats för egen reservationstext) — "aldrig markör utan legend på
 // samma sida" gäller alltså raka vägen hela kalendern, inte bara en flagga
-// när just den öppna månaden råkar innehålla ett olast-datum.
-const harOlastIKalendern = kommande.some((e) => e.deadlineStatus === 'olast');
+// när just den öppna månaden råkar innehålla ett olast-datum. Kollar det
+// FAKTISKT RENDERADE urvalet, inte hela landets — annars kan legenden visas
+// (eller saknas) för en markering som besökaren aldrig ser.
+const harOlastIKalendern = kommandeForRender.some((e) => e.deadlineStatus === 'olast');
 
 // A1 (SPRINT: Produkten, Opus/Fable 2026-07-31): kalendern hade ingen
 // verifieringsstämpel alls — enda ytan som inte sa när den lästes. Samma
@@ -79,8 +116,12 @@ const senastAvlast = kommunerMedDeadlines.reduce(
 
 // entries är redan globalt sorterade (getDeadlineEntries) — att gruppera
 // via en Map bevarar kronologisk ordning automatiskt, ingen extra sort.
+// Grupperar det FAKTISKT RENDERADE urvalet (kommandeForRender) — litet
+// oavsett läge (teaser: ≤20, kommun-scopat: en handfull, "visa alla":
+// medvetet obudgeterat) sedan AB1.1, till skillnad från den tidigare
+// grupperingen av HELA landets kommande-lista.
 const manadGrupper = new Map<string, KalenderEntry[]>();
-for (const e of kommande) {
+for (const e of kommandeForRender) {
   const key = manadNyckel(e.dateISO!);
   const lista = manadGrupper.get(key) ?? [];
   lista.push(e);
@@ -89,21 +130,17 @@ for (const e of kommande) {
 const innevarandeManad = manadNyckel(today);
 const nastaManad = nastaManadNyckel(innevarandeManad);
 
-// P3.2 (Jacob 2026-08-05): 2 746 rader/2 747 knappar renderade på en
-// sida — <details> döljer dem visuellt men tar dem aldrig ur DOM
-// (kommentaren högst upp förklarar varför, crawlbarhet). Standardvyn
-// begränsas nu till de tre NÄRMASTE månadsgrupperna som faktiskt har
-// deadlines (manadGrupper är redan kronologiskt sorterad från idag och
-// framåt — de tre första nycklarna ÄR "kommande tre månader", oavsett
-// om en enskild kalendermånad råkar sakna deadlines helt). "Visa alla"
-// är en riktig SSR-navigering (?visa=alla), inte klient-JS — enklast
-// och mest robust, samma mönster som ?kommun=/?bevakning= ovan.
-const visaAlla = Astro.url.searchParams.get('visa') === 'alla';
-const allaManadNycklar = [...manadGrupper.keys()];
-const synligaManadNycklar = visaAlla ? allaManadNycklar : allaManadNycklar.slice(0, 3);
+// P3.2 (Jacob 2026-08-05, reviderad AB1.1 2026-08-26): tidigare "de tre
+// NÄRMASTE månadsgrupperna" — 691 rader/7 526 taggar i sig, före
+// löpande-tabellen ens räknats in. manadGrupper bär nu redan bara det
+// budgeterade urvalet (kommandeForRender), så ALLA dess månadsnycklar
+// visas — ingen ytterligare .slice här, den riktiga begränsningen
+// sitter i DEFAULT_TEASER_MAX ovan.
+const synligaManadNycklar = [...manadGrupper.keys()];
 const synligaManadGrupper = synligaManadNycklar.map((key) => [key, manadGrupper.get(key)!] as const);
 const antalSynligaKommande = synligaManadGrupper.reduce((sum, [, rader]) => sum + rader.length, 0);
-const antalTotaltKommande = kommande.length;
+const antalTotaltKommande = kommandeScoped.length;
+const antalTotaltLopande = lopandeScoped.length;
 
 // Bevarar övriga query-parametrar (t.ex. ?kommun= från en radlänk) när
 // vy-läget växlas — bara "visa" ska ändras av de här länkarna. Relativ
@@ -115,6 +152,11 @@ const visaAllaHref = `?${visaAllaParams.toString()}`;
 const visaTreParams = new URLSearchParams(Astro.url.searchParams);
 visaTreParams.delete('visa');
 const visaTreHref = visaTreParams.toString() ? `?${visaTreParams.toString()}` : '?';
+// AB1.1: nollställer kommun-filtret (går tillbaka till "alla kommuner"),
+// bevarar "visa"-läget om det redan var satt.
+const allaKommunerParams = new URLSearchParams(Astro.url.searchParams);
+allaKommunerParams.delete('kommun');
+const allaKommunerHref = allaKommunerParams.toString() ? `?${allaKommunerParams.toString()}` : '?';
 
 function kategoriCell(e: KalenderEntry) {
   const forsta = KATEGORI_LABELS[e.kategori[0]];
@@ -140,22 +182,30 @@ function beloppCell(e: KalenderEntry): string {
   <h1>{KALENDER.h1}</h1>
   <p>{KALENDER.intro}</p>
   <p class="deadline-senast-avlast">{TRATT.start.senastAvlastRad.replace('{datum}', formatDate(senastAvlast))}</p>
-  {/* P3.2 (Jacob 2026-08-05): "Antalet i vyn ska framgå av rubriken" —
-     riktig SSR-navigering (?visa=alla), ingen klient-JS. */}
+  {/* P3.2 (Jacob 2026-08-05), reviderad AB1.1: "Antalet i vyn ska framgå
+     av rubriken" — riktig SSR-navigering, ingen klient-JS. Tre lägen nu
+     i stället för två: en vald kommun, "visa alla", eller den snäva
+     standard-teasern. */}
   <p class="deadline-vy-antal">
-    {visaAlla ? (
-      <>Visar alla {antalTotaltKommande} deadlines. <a href={visaTreHref}>Visa de tre närmaste månaderna</a></>
+    {kommunFilterSlug ? (
+      <>Visar alla {antalTotaltKommande} deadlines för {kommuner.find((k) => k.kommun_slug === kommunFilterSlug)?.kommun ?? kommunFilterSlug} (plus nationella stöd). <a href={allaKommunerHref}>Visa alla kommuner</a></>
+    ) : visaAlla ? (
+      <>Visar alla {antalTotaltKommande} deadlines. <a href={visaTreHref}>Visa de {DEFAULT_TEASER_MAX} närmaste</a></>
     ) : (
-      <>Visar {antalSynligaKommande} av {antalTotaltKommande} deadlines — de tre närmaste månaderna. <a href={visaAllaHref}>Visa alla →</a></>
+      <>Visar de {antalSynligaKommande} närmaste av {antalTotaltKommande} deadlines. <a href={visaAllaHref}>Visa alla →</a> — eller välj en kommun nedan.</>
     )}
   </p>
 
   <div class="deadline-filters">
     <label for="filter-kommun">
       Kommun
-      <select id="filter-kommun">
-        <option value="alla">Alla kommuner</option>
-        {kommuner.map((k) => <option value={k.kommun_slug}>{k.kommun}</option>)}
+      {/* AB1.1: en riktig SSR-navigering (?kommun=), inte längre bara
+         klient-JS-döljning — data-deadline-kommun-select markerar den
+         för <script> nedan, som navigerar i stället för att filtrera
+         DOM:en på plats. */}
+      <select id="filter-kommun" data-deadline-kommun-select>
+        <option value="alla" selected={!kommunFilterSlug}>Alla kommuner</option>
+        {kommuner.map((k) => <option value={k.kommun_slug} selected={k.kommun_slug === kommunFilterSlug}>{k.kommun}</option>)}
       </select>
     </label>
     <label for="filter-kategori">
@@ -213,30 +263,37 @@ function beloppCell(e: KalenderEntry): string {
     ))}
   </div>
 
-  {lopande.length > 0 && (
+  {antalTotaltLopande > 0 && (
     <>
       <h2>{KALENDER.lopandeRubrik}</h2>
       <p>{KALENDER.lopandeText}</p>
-      <div class="deadline-table-scroll">
-      <table class="deadline-table" id="deadline-table-lopande">
-        <thead>
-          <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th>Belopp</th><th></th></tr>
-        </thead>
-        <tbody>
-          {lopande.map((e) => (
-            <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
-              <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
-              <td>{e.kommun}</td>
-              <td>{kategoriCell(e)}</td>
-              <td>{beloppCell(e)}</td>
-              <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun} data-bidrag-id={e.bidragId}>
-                <a href={`?kommun=${e.kommunSlug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
+      {lopandeForRender.length > 0 ? (
+        <div class="deadline-table-scroll">
+        <table class="deadline-table" id="deadline-table-lopande">
+          <thead>
+            <tr><th>Bidrag</th><th>Kommun</th><th>Kategori</th><th>Belopp</th><th></th></tr>
+          </thead>
+          <tbody>
+            {lopandeForRender.map((e) => (
+              <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
+                <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+                <td>{e.kommun}</td>
+                <td>{kategoriCell(e)}</td>
+                <td>{beloppCell(e)}</td>
+                <td class="deadline-table__bevaka" data-bevaka-cell data-kommun-slug={e.kommunSlug} data-kommun-namn={e.kommun} data-bidrag-id={e.bidragId}>
+                  <a href={`?kommun=${e.kommunSlug}#email-signup`} class="fg-btn--ghost bevaka-rad-knapp">{BEVAKNING.knapp}</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        </div>
+      ) : (
+        // AB1.1: löpande saknar ett datum att teasra på (se frontmatterns
+        // kommentar om lopandeForRender) — bare-default visar därför bara
+        // räkningen + en väg dit, aldrig 0 rader utan förklaring.
+        <p class="deadline-vy-antal">{antalTotaltLopande} löpande {antalTotaltLopande === 1 ? 'ansökan' : 'ansökningar'} utan fast datum. <a href={visaAllaHref}>Visa alla →</a> — eller välj en kommun ovan.</p>
+      )}
     </>
   )}
 
@@ -277,18 +334,18 @@ function beloppCell(e: KalenderEntry): string {
   const rows = document.querySelectorAll<HTMLElement>('#deadline-table-container tbody tr, #deadline-table-lopande tbody tr');
   const manadSektioner = document.querySelectorAll<HTMLDetailsElement>('[data-deadline-manad]');
 
+  // AB1.1: kommun scopas nu server-sidan (?kommun=, se index.astro:s
+  // frontmatter) — klientfiltret behöver bara kategori kvar. Ett kvarvarande
+  // matchKommun-villkor hade varit ett no-op (den renderade radmängden är
+  // redan rätt kommun eller nationell) men riskerat att se ut som att
+  // kommun fortfarande filtrerades här, vilket den inte gör.
   function applyFilter() {
-    if (!(kommunSelect instanceof HTMLSelectElement) || !(kategoriSelect instanceof HTMLSelectElement)) return;
-    const kommun = kommunSelect.value;
+    if (!(kategoriSelect instanceof HTMLSelectElement)) return;
     const kategori = kategoriSelect.value;
     let visibleCount = 0;
 
     rows.forEach((row) => {
-      // Nationella stöd gäller föreningar i varje kommun och ska därför
-      // inte försvinna när en kommun väljs i filtret.
-      const matchKommun = row.dataset.niva === 'nationell' || kommun === 'alla' || row.dataset.kommun === kommun;
-      const matchKategori = kategori === 'alla' || (row.dataset.kategori ?? '').split(' ').includes(kategori);
-      const visible = matchKommun && matchKategori;
+      const visible = kategori === 'alla' || (row.dataset.kategori ?? '').split(' ').includes(kategori);
       row.hidden = !visible;
       if (visible) visibleCount++;
     });
@@ -296,8 +353,7 @@ function beloppCell(e: KalenderEntry): string {
     // Fäller ut en månad som fått en träff, så filtrerade rader inte
     // gömmer sig bakom en stängd disclosure. Fäller ALDRIG ihop
     // programmatiskt — samma regel som KommunValjare.astro:s länslista.
-    const bade = kommun !== 'alla' || kategori !== 'alla';
-    if (bade) {
+    if (kategori !== 'alla') {
       manadSektioner.forEach((sektion) => {
         const harTraff = [...sektion.querySelectorAll<HTMLElement>('tbody tr')].some((row) => !row.hidden);
         if (harTraff) sektion.open = true;
@@ -307,7 +363,18 @@ function beloppCell(e: KalenderEntry): string {
     if (emptyMsg instanceof HTMLElement) emptyMsg.hidden = visibleCount > 0;
   }
 
-  kommunSelect?.addEventListener('change', applyFilter);
+  // AB1.1 (Jacobs order): kommunvalet var tidigare bara klient-JS-döljning
+  // — "ett kommunfilter visar 12 rader men hela rikets DOM ligger kvar".
+  // Navigerar nu till en riktig SSR-scopad sida i stället, samma
+  // ?kommun=-mönster som redan gäller för alla "Bevaka"-länkar sajtsbrett.
+  kommunSelect?.addEventListener('change', () => {
+    if (!(kommunSelect instanceof HTMLSelectElement)) return;
+    const params = new URLSearchParams(window.location.search);
+    if (kommunSelect.value === 'alla') params.delete('kommun');
+    else params.set('kommun', kommunSelect.value);
+    const qs = params.toString();
+    window.location.href = qs ? `?${qs}` : window.location.pathname;
+  });
   kategoriSelect?.addEventListener('change', applyFilter);
 
   // "Bevaka den här" — utbruten till bevakaKlient.ts (H20, SPEC: Kluster

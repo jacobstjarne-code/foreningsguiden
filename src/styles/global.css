@@ -1072,6 +1072,56 @@ main {
   margin-top: var(--fg-space-1);
 }
 
+/* AB1.1 — "bygg rader först vid filtrering" (EmailSignup.astro).
+   .email-signup__valda: den förvalda kommunen (server-renderad) plus
+   varje kommun JS lägger till efter en sökträff. .email-signup__sok/
+   __traffar: sökfältet och dess resultatlista, byggda av <script> i
+   EmailSignup.astro, aldrig 290 färdiga checkboxar. */
+.email-signup__valda:not(:empty) {
+  margin-top: var(--fg-space-3);
+}
+
+.email-signup__ta-bort {
+  background: none;
+  border: none;
+  color: var(--fg-ink-muted);
+  font-size: var(--fg-text-body-lg);
+  line-height: 1;
+  cursor: pointer;
+  /* AB1.5-teknik: padding expanderar träffytan till 44px, negativ
+     margin tar tillbaka det visuella utrymmet. */
+  padding: 12px;
+  margin: -12px;
+}
+
+.email-signup__sok {
+  font-weight: var(--fg-weight-bold);
+}
+
+.email-signup__traffar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fg-space-2);
+  margin-top: var(--fg-space-2);
+}
+
+.email-signup__traffar:empty {
+  margin-top: 0;
+}
+
+.email-signup__traff {
+  font-family: var(--fg-font-sans);
+  font-size: var(--fg-text-label);
+  font-weight: var(--fg-weight-regular);
+  background: var(--fg-surface-sunken);
+  border: var(--fg-border-inner) solid var(--fg-border);
+  border-radius: var(--fg-radius-pill);
+  padding: 10px var(--fg-space-4);
+  min-height: 44px;
+  cursor: pointer;
+  margin-top: 0;
+}
+
 .email-signup__consent {
   display: flex;
   align-items: flex-start;
