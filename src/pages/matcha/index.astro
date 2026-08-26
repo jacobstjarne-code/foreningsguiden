@@ -928,6 +928,10 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
     color: var(--fg-ink);
   }
 
+  /* AB1.5 (Jacobs order): padding:4px ensam gav en ~24px hög träffyta.
+     Samma teknik som .tratt__nav-tillbaka/-omstart nedan — padding
+     expanderar träffytan, negativ margin tar tillbaka det visuella
+     utrymmet. */
   .tratt__kommun-byt {
     font-family: var(--fg-font-sans);
     font-size: var(--fg-text-label);
@@ -936,7 +940,8 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
     text-decoration: underline;
     color: var(--fg-accent);
     cursor: pointer;
-    padding: 4px;
+    padding: 13px 4px;
+    margin: -13px -4px;
   }
 
   .tratt__pillgrupp {

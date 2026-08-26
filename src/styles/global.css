@@ -18,6 +18,22 @@
   display: none !important;
 }
 
+/* AB1.5 (Jacobs order): en bar <summary> (disclosure-triggern på
+   <details>) ärver bara sitt textinnehålls line-height som träffyta om
+   inget säger annat — mätt till 22-28px på två ställen
+   (BevakaKommunen.astro/scopeValjLank, KommunProgression.astro/
+   bilagorLabel), ingen egen klass, ingen medveten storlek. Bas-regel
+   här i stället för att lägga till en klass på varje instans — en
+   framtida bar <summary> ärver 44px automatiskt. Instanser med en egen
+   klass (t.ex. .kommunvaljare__bladdra-summary, redan 44px via sin
+   egen padding) vinner över den här via specificitet, oförändrade. */
+summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 /* Läsbredd (ARBETSORDER 2026-08-11, A1) — brödtext och svar, aldrig
    registret. Se --fg-lasbredd i tokens.css för motiveringen. */
 .fg-lasbredd {
@@ -736,10 +752,17 @@ main {
   margin-top: var(--fg-space-3);
 }
 
+/* AB1.5 (Jacobs order): var ~16px hög (padding:0, bara textens
+   line-height) — samma träffytebugg P1.B redan fixade för .fg-btn--ghost
+   (se den kommentaren ovan, tokens.css) och som .tratt__nav-tillbaka/
+   -omstart (matcha/index.astro) redan löser med samma teknik: padding
+   expanderar träffytan, motsvarande negativ margin tar tillbaka det
+   visuella utrymmet — texten ser likadan ut, träffytan blir 44px. */
 .felrapport-knapp {
   background: none;
   border: none;
-  padding: 0;
+  padding: 15px 4px;
+  margin: -15px -4px;
   font-size: var(--fg-text-label);
   color: var(--fg-ink-muted);
   text-decoration: underline;
@@ -1117,10 +1140,14 @@ main {
   text-decoration: none;
 }
 
-/* BevakaKommunen.astro "Välj enskilda bidrag i stället" — samma
-   .bevaka-rad-knapp som deadlines/index.astro:s tabellcell, men här ska
-   den vara en riktig träffyta, inte en kompakt kolumn. */
-.bevaka-ruta__bidraglista .bevaka-rad-knapp {
+/* BevakaKommunen.astro "Välj enskilda bidrag i stället", och
+   NationellaStodSektion.astro:s listrader (AB1.5 — samma
+   .bevaka-rad-knapp, men mätt till 38px på kommunsidan: en tredje
+   användning som aldrig fick .bevaka-ruta__bidraglista-omslaget och
+   därför tyst ärvde deadlines-tabellens kompakta min-height:auto) —
+   ingen av dessa är en tabellcell, båda ska ha en riktig träffyta. */
+.bevaka-ruta__bidraglista .bevaka-rad-knapp,
+.nationella-stod__lista .bevaka-rad-knapp {
   min-height: 44px;
   padding: 10px 12px;
 }
@@ -1796,10 +1823,13 @@ main {
   color: var(--fg-ink-muted);
 }
 
+/* AB1.5 (Jacobs order): samma träffytebugg som .felrapport-knapp ovan
+   (se den kommentaren för teknik/resonemang). */
 .progression__link-button {
   background: none;
   border: none;
-  padding: 0;
+  padding: 14px 4px;
+  margin: -14px -4px;
   font: inherit;
   font-weight: var(--fg-weight-bold);
   color: var(--fg-accent);
