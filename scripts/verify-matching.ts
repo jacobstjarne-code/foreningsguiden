@@ -10,6 +10,7 @@ import { matchBidrag, matchKommun, visaBorjaHar, harMatchningsdata } from '../sr
 import { sumBeloppTak, formatDate, parseBeloppTak, manadNyckel, nastaManadNyckel, formatManadRubrik, subtractDays, individuelltBelopp, bidragAnsokningssystemNamn, bidragAnsokningsUrl } from '../src/lib/kommunTyper.ts';
 import { arOverGolv, formateraBevakarText } from '../src/lib/bevakningKlient.ts';
 import { momsAndelOre } from '../src/lib/priser.ts';
+import { arBidragSaljbart } from '../src/lib/kommunKlar.ts';
 import type { Bidrag, Kommun } from '../src/lib/kommuner.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';
 
@@ -368,6 +369,17 @@ test('bidragAnsokningssystemNamn/-Url tillsammans: bidragets egna kalla_url och 
   const b = bidrag({ ansokningsvag: 'RF eller ActorSmartbook, beroende på RF-anslutning.', kalla_url: 'https://falun.se/foreningsbidrag/idrott/' });
   assert.equal(bidragAnsokningssystemNamn(b, k), 'RF eller ActorSmartbook, beroende på RF-anslutning.');
   assert.equal(bidragAnsokningsUrl(b, k), 'https://falun.se/foreningsbidrag/idrott/');
+});
+
+test('arBidragSaljbart: pausat/avskaffat bidrag kan aldrig säljas trots komplett kravdata', () => {
+  const komplett = {
+    krav: ['Krav 1', 'Krav 2', 'Krav 3'],
+    krav_status: 'kontrollast' as const,
+    krav_fullstandiga: true,
+  };
+  assert.equal(arBidragSaljbart(bidrag({ ...komplett, status: 'aktiv' })), true);
+  assert.equal(arBidragSaljbart(bidrag({ ...komplett, status: 'pausad' })), false);
+  assert.equal(arBidragSaljbart(bidrag({ ...komplett, status: 'avskaffat' })), false);
 });
 
 console.log(`\n${antal} tester klara`);

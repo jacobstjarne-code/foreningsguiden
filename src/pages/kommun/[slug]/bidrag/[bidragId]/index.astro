@@ -158,19 +158,21 @@ const webPageJsonLd = {
     </div>
   </div>
 
-  <section>
-    <h2>{KOMMUN.ansokningssystemRubrik}</h2>
-    <p>
-      {ansokningstext}
-      {/* AA1.4: kommunens generella länk visas bara när ingen bidrags-
-         specifik ansökningsväg skrivit över texten ovan — en fritext-
-         överskrivning kan beskriva flera vägar/system, och den enda
-         kommun-länken vore då fel eller ofullständig. */}
-      {!bidrag.ansokningsvag && (
-        <>{' '}<a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a></>
-      )}
-    </p>
-  </section>
+  {bidrag.status === 'aktiv' && (
+    <section>
+      <h2>{KOMMUN.ansokningssystemRubrik}</h2>
+      <p>
+        {ansokningstext}
+        {/* AA1.4: kommunens generella länk visas bara när ingen bidrags-
+           specifik ansökningsväg skrivit över texten ovan — en fritext-
+           överskrivning kan beskriva flera vägar/system, och den enda
+           kommun-länken vore då fel eller ofullständig. */}
+        {!bidrag.ansokningsvag && (
+          <>{' '}<a href={kommun.ansokningssystem.url}>{kommun.ansokningssystem.url}</a></>
+        )}
+      </p>
+    </section>
+  )}
 </Base>
 
 <script>

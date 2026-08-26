@@ -11,12 +11,12 @@ export interface Props {
 const { kategori, kommun } = Astro.props;
 const stod = loadNationellaStod().filter((s) => s.status === 'aktiv' && (!kategori || s.kategori.includes(kategori as never)));
 
-// V5 (rättning 2026-08-19, LOK-kollisionen) — 67 av 290 kommuner har ett
-// eget bidrag vars namn innehåller "LOK" eller "lokalt aktivitetsstöd"
+// V5 (rättning 2026-08-19, LOK-kollisionen) — kommuner med ett eget bidrag
+// vars namn innehåller "LOK" eller "lokalt aktivitetsstöd" upptäcks
 // (varierande former: "LOK-stöd", "Kommunalt lokalt aktivitetsstöd",
 // "Lokalt aktivitetsstöd (LOK)"). Matchat på bidragsnamnet, inte en
-// handhållen kommunlista — träffar automatiskt när fler kommuner får
-// ett sådant bidrag, utan kodändring.
+// utan handhållen kommunlista. AC1:s CI-vakt kräver därför automatiskt en
+// ansokningsvag när fler sådana bidrag tillkommer, utan kodändring.
 const egetLokBidrag = kommun?.bidrag.find((b) => b.namn.includes('LOK') || /lokalt aktivitetsstöd/i.test(b.namn));
 ---
 {stod.length > 0 && (
