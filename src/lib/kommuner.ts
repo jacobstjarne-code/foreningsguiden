@@ -272,8 +272,8 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
 
   // AA1.4 — valfritt fält. Samma additiva recept som qa_anteckning och
   // kommunens_pott ovan: validera bara om satt, default null (kommunens
-  // ansokningssystem gäller) annars. AC1:s separata CI-vakt kräver fältet
-  // för de kommunbidrag som kan förväxlas med RF:s statliga LOK-stöd.
+  // ansokningssystem gäller) annars. AC2:s separata CI-rapport listar tomma
+  // fält för kommunbidrag som kan förväxlas med RF:s statliga LOK-stöd.
   if (raw.ansokningsvag !== null && raw.ansokningsvag !== undefined && !isNonEmptyString(raw.ansokningsvag)) {
     problems.push(`${where}.ansokningsvag måste vara icke-tom text eller null`);
   }

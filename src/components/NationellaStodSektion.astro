@@ -15,8 +15,8 @@ const stod = loadNationellaStod().filter((s) => s.status === 'aktiv' && (!katego
 // vars namn innehåller "LOK" eller "lokalt aktivitetsstöd" upptäcks
 // (varierande former: "LOK-stöd", "Kommunalt lokalt aktivitetsstöd",
 // "Lokalt aktivitetsstöd (LOK)"). Matchat på bidragsnamnet, inte en
-// utan handhållen kommunlista. AC1:s CI-vakt kräver därför automatiskt en
-// ansokningsvag när fler sådana bidrag tillkommer, utan kodändring.
+// utan handhållen kommunlista. AC2:s CI-rapport listar därför automatiskt
+// en saknad ansokningsvag när fler sådana bidrag tillkommer, utan kodändring.
 const egetLokBidrag = kommun?.bidrag.find((b) => b.namn.includes('LOK') || /lokalt aktivitetsstöd/i.test(b.namn));
 ---
 {stod.length > 0 && (

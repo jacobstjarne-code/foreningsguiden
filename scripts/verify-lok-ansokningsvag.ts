@@ -1,10 +1,10 @@
-import assert from 'node:assert/strict';
 import { loadKommuner } from '../src/lib/kommuner.ts';
 
 // Samma dynamiska definition som NationellaStodSektion använder för att
 // upptäcka kollisionen mellan kommunens stöd och RF:s statliga LOK-stöd.
-// En nytillkommen kommunpost får därför inte passera CI utan ett faktiskt
-// svar på om RF-redovisningen räcker eller om kommunen kräver ett extra steg.
+// AC2: detta är avsiktligt en RAPPORT, inte en grind. Ett tomt fält är
+// sannare än en härledning när den bidragsspecifika källan inte uttryckligen
+// svarar på om RF-redovisningen räcker eller om kommunen kräver ett extra steg.
 const kommuner = loadKommuner();
 const lokPoster = kommuner.flatMap((kommun) =>
   kommun.bidrag
@@ -13,28 +13,17 @@ const lokPoster = kommuner.flatMap((kommun) =>
 );
 
 const saknarSvar = lokPoster.filter(({ bidrag }) => !bidrag.ansokningsvag?.trim());
-assert.deepEqual(
-  saknarSvar.map(({ kommun, bidrag }) => `${kommun.kommun_slug}/${bidrag.id}`),
-  [],
-  'LOK-liknande kommunbidrag saknar ansokningsvag',
-);
-
-const svarUtanRf = lokPoster.filter(({ bidrag }) =>
-  !/\bRF\b|Riksidrottsförbundet|IdrottOnline/i.test(bidrag.ansokningsvag ?? ''),
-);
-assert.deepEqual(
-  svarUtanRf.map(({ kommun, bidrag }) => `${kommun.kommun_slug}/${bidrag.id}`),
-  [],
-  'ansokningsvag måste uttryckligen besvara hur RF-rapporteringen förhåller sig till kommunstödet',
-);
-
-const falun = lokPoster.find(({ bidrag }) => bidrag.id === 'falun-lok-stod');
-assert.equal(
-  falun?.bidrag.ansokningsvag,
-  'RF-anslutna föreningar redovisar via Riksidrottsförbundet; övriga föreningar ansöker via ActorSmartbook.',
-  'Faluns belagda ansökningsväg får inte regressera',
-);
+const belagda = lokPoster.filter(({ bidrag }) => bidrag.ansokningsvag?.trim());
 
 console.log(
-  `LOK-ansökningsväg: ${lokPoster.length} bidragsposter i ${new Set(lokPoster.map(({ kommun }) => kommun.kommun_slug)).size} kommuner har ett uttryckligt RF/kommun-svar.`,
+  `LOK-ansökningsväg (rapport, fäller aldrig): ${belagda.length} belagda, ${saknarSvar.length} saknar svar, ${lokPoster.length} poster totalt i ${new Set(lokPoster.map(({ kommun }) => kommun.kommun_slug)).size} kommuner.`,
 );
+
+if (saknarSvar.length > 0) {
+  console.log('Saknar ansokningsvag:');
+  for (const { kommun, bidrag } of saknarSvar.sort((a, b) =>
+    `${a.kommun.kommun_slug}/${a.bidrag.id}`.localeCompare(`${b.kommun.kommun_slug}/${b.bidrag.id}`, 'sv')
+  )) {
+    console.log(`- ${kommun.kommun_slug}/${bidrag.id}`);
+  }
+}
