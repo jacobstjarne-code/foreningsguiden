@@ -12,7 +12,7 @@
 
 import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 // .ts-suffix på de riktiga importerna (SPEC: Omverifiering) — se
 // omverifiering.ts:s filhuvud för varför: scripts/omverifiering-ko.ts
 // kör som ett vanligt node-skript, utanför Vites resolver.

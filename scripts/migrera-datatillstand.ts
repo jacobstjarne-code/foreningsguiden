@@ -20,7 +20,7 @@
 // annars skrivs filen INTE och skriptet avbryter — hellre stanna än
 // halvskriva 290 filer.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 const DIR = 'data/kommuner';
 const files = readdirSync(DIR).filter((f) => f.endsWith('.yaml'));

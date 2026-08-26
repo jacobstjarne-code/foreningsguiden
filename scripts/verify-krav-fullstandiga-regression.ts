@@ -21,7 +21,7 @@
 // den fulla förklaringen av hook-kedjan.
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 // git rev-parse --absolute-git-dir (INTE hårdkodat '.git/') — samma
 // worktree-bugg som verify-ingen-bidrag-regression.ts, se den filens

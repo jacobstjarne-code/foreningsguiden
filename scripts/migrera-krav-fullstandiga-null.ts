@@ -15,7 +15,7 @@
 // faktiskt gjorts — alla bidrag där har antingen true eller false,
 // aldrig null, och rörs INTE av detta skript).
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 const DIR = 'data/kommuner';
 const BEDOMDA_FILER = new Set(['gislaved.yaml', 'ornskoldsvik.yaml']);

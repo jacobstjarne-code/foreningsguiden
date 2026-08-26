@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import { BIDRAG_STATUSAR, DATATILLSTAND, KATEGORIER, VERKSAMHETER, nextOccurrenceISO, todayISO, formatRecurringDate, svenskLista } from './kommunTyper.ts';
 import type { Datatillstand } from './kommunTyper.ts';
 import type {

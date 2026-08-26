@@ -29,7 +29,7 @@
 // kommunTyper.ts. Samma logik, samma motivering.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { execSync } from 'node:child_process';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 const DIR = 'data/kommuner';
 const files = readdirSync(DIR).filter((f) => f.endsWith('.yaml'));

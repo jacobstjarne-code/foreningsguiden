@@ -5,7 +5,7 @@
 // `node scripts/verify-generator.ts` igen och bekräfta 42/42 grönt innan
 // commit. Se snapshot-filens eget filhuvud för hela resonemanget.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 const SNAPSHOT_PATH = 'golden-set/snapshot.yaml';
 

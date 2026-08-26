@@ -14,7 +14,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 type Classification = 'ren_pott' | 'blandfall' | 'per_forening' | 'okand';
 interface ProposalChange {

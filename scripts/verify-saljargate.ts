@@ -94,6 +94,16 @@ async function korDel2(): Promise<void> {
     cwd: process.cwd(),
     env: {
       ...process.env,
+      // AB1.2 (Astro 6→7-uppgraderingen): Astro 7 upptäcker AI-agent-
+      // miljöer och startar `astro dev` som en FRIKOPPLAD bakgrunds-
+      // process med en låsfil (.astro/dev.json) i stället för den
+      // process detta skript faktiskt spawnar — child.kill() nedan
+      // dödade då fel process, och en föräldralös server blev kvar
+      // (upptäckt: nästa körning hittade en stale låsfil, ny process
+      // svarade aldrig inom timeout). ASTRO_DEV_BACKGROUND=0 återställer
+      // det gamla, förutsägbara beteendet — processen detta skript
+      // spawnar ÄR servern, kill() dödar rätt process.
+      ASTRO_DEV_BACKGROUND: '0',
       STRIPE_SECRET_KEY: FAKE_LIVE_KEY,
       // mejl.ts:s `new Resend(env.RESEND_API_KEY)` kastar vid modulladdning
       // om nyckeln är ogiltig/saknas (samma klass fel som produktions-

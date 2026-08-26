@@ -25,7 +25,7 @@
 //     (git log <ref>..HEAD).
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 // git rev-parse --absolute-git-dir (INTE hårdkodat '.git/') — i en
 // worktree är .git en FIL (gitdir-pekare), inte en katalog, och

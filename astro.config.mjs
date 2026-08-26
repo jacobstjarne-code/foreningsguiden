@@ -42,6 +42,14 @@ export default defineConfig({
   site: 'https://foreningsguiden.se',
   output: 'static',
   adapter: vercel(),
+  // AB1.2 (Jacobs order, Astro 6→7-uppgraderingen): Astro 7 bytte
+  // compressHTML:s default till 'jsx' (React-liknande whitespace-strip
+  // mellan element) — kan ändra renderad mellanrumsstruktur i text som
+  // sätts ihop av flera element (t.ex. "Vald: <strong>{namn}</strong>").
+  // Astros egen changelog: "set compressHTML: true" för att behålla
+  // 6.x:s beteende. Explicit satt, inte antaget — undviker en tyst
+  // whitespace-regression samtidigt som säkerhetsuppgraderingen görs.
+  compressHTML: true,
   integrations: [
     sitemap({
       filter: (page) => {

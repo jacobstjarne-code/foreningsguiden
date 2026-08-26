@@ -16,7 +16,7 @@
  */
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import { genereraUtkast } from '../src/lib/utkastGenerator.ts';
 import { individuelltBelopp, type Kommun } from '../src/lib/kommunTyper.ts';
 import type { Foreningsprofil } from '../src/lib/foreningsprofil.ts';

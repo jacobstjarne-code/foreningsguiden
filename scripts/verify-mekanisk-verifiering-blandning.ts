@@ -14,7 +14,7 @@
 // ska aldrig läcka in i en senare, orelaterad commit.
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, unlinkSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 const GIT_DIR = execSync('git rev-parse --absolute-git-dir', { encoding: 'utf-8' }).trim();
 const MARKER_PATH = `${GIT_DIR}/OMRAKNING_KORD.json`;

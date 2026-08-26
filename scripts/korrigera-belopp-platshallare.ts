@@ -16,7 +16,7 @@
 // en linjär textscanning hinner aldrig se id:t innan den passerar raden
 // den ska rätta. Parsning ger bidragets id oavsett fältordning.
 import { readFileSync, writeFileSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import { hittaBeloppPlatshallare } from '../src/lib/kommuner.ts';
 
 const traffar = hittaBeloppPlatshallare();

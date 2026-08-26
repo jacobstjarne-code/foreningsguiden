@@ -52,7 +52,10 @@ function vantaPaServer(url: string, timeoutMs: number): Promise<void> {
 
 const child: ChildProcess = spawn('node_modules/.bin/astro', ['dev', '--port', String(PORT)], {
   cwd: process.cwd(),
-  env: { ...process.env },
+  // AB1.2 (Astro 6→7-uppgraderingen): se verify-saljargate.ts:s kommentar
+  // om samma fynd — ASTRO_DEV_BACKGROUND=0 håller processen detta skript
+  // spawnar i förgrunden, så child.kill() nedan faktiskt dödar servern.
+  env: { ...process.env, ASTRO_DEV_BACKGROUND: '0' },
   stdio: ['ignore', 'pipe', 'pipe'],
 });
 let serverLog = '';

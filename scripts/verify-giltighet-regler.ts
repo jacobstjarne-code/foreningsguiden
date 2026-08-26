@@ -35,7 +35,7 @@
  */
 
 import { readFileSync, readdirSync } from 'node:fs';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import {
   GILTIGHET_REGEL_TYPER, berakForfallodatum, regeltext, giltighetRegelGerDatum,
 } from '../src/lib/kommunTyper.ts';
