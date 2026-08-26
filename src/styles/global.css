@@ -1273,6 +1273,17 @@ main {
   font-style: italic;
 }
 
+/* Jacobs order ("Bidragsnamn-länkarna på 22 px sitewide"): bar text-
+   länk i en tabellcell — cellens egen padding (--fg-space-3, ovan) ger
+   luft runt raden men utökar INTE länkens egen träffyta, klick i
+   cellens padding gör ingenting. Samma padding/negativ-margin-teknik
+   som .tratt__nav-tillbaka/-omstart (matcha/index.astro). */
+.deadline-table__namn-lank {
+  display: inline-block;
+  padding: 14px 4px;
+  margin: -14px -4px;
+}
+
 /* ---- Kommunväljaren (startsida) — Design-uppdrag 5, turn-7 ---------- *
  * Sök + länsvis <details>-disclosure. Ersätter den platta kommun-grid-
  * knappväggen (funkar vid 20, blir en vägg vid 50, omöjlig vid 290).

@@ -34,7 +34,7 @@ const egetLokBidrag = kommun?.bidrag.find((b) => b.namn.includes('LOK') || /loka
       {stod.map((s) => (
         <li>
           <div>
-            <a href={`/nationella-stod/${s.id}/`}><strong>{s.namn}</strong></a>
+            <a href={`/nationella-stod/${s.id}/`} class="nationella-stod__namn-lank"><strong>{s.namn}</strong></a>
             <p>{s.malgrupp}</p>
             <p class="nationella-stod__datum">Återkommande sista datum: {s.deadlines.datum.map(formatRecurringDate).join(' och ')}</p>
           </div>
@@ -61,5 +61,16 @@ const egetLokBidrag = kommun?.bidrag.find((b) => b.namn.includes('LOK') || /loka
   .nationella-stod__lista li { display: flex; align-items: start; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border, #d8d3ca); }
   .nationella-stod__lista p { margin: .25rem 0; }
   .nationella-stod__datum { font-size: .92rem; }
+
+  /* Jacobs order ("Bidragsnamn-länkarna på 22 px sitewide"): bar text-
+     länk, ingen padding/min-height av sitt eget — 16px/1.55 ≈ 25px
+     träffyta. Samma teknik som .tratt__nav-tillbaka/-omstart
+     (matcha/index.astro) — padding expanderar träffytan, negativ
+     margin tar tillbaka det visuella utrymmet. */
+  .nationella-stod__namn-lank {
+    display: inline-block;
+    padding: 14px 4px;
+    margin: -14px -4px;
+  }
   @media (max-width: 42rem) { .nationella-stod__lista li { display: block; } .nationella-stod__lista [data-bevaka-cell] { margin-top: 1rem; } }
 </style>

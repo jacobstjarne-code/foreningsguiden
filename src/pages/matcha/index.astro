@@ -201,7 +201,7 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
           <ul class="tratt__bidraglista">
             {nationellaIdrottsstod.map((stod) => (
               <li class="tratt__bidrag">
-                <a href={`/nationella-stod/${stod.id}/`}>{stod.namn}</a>
+                <a href={`/nationella-stod/${stod.id}/`} class="tratt__bidrag-lank">{stod.namn}</a>
                 <p class="tratt__bidrag-skal">Gäller idrottsföreningar i alla 290 kommuner.</p>
               </li>
             ))}
@@ -402,6 +402,7 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
         li.className = 'tratt__bidrag';
         const a = document.createElement('a');
         a.href = bidragLank(rad.bidrag);
+        a.className = 'tratt__bidrag-lank';
         a.textContent = rad.bidrag.namn;
         const skal = document.createElement('p');
         skal.className = 'tratt__bidrag-skal';
@@ -1132,6 +1133,17 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
     background: var(--fg-surface);
     border: 1px solid var(--fg-border);
     padding: 10px 14px;
+  }
+
+  /* Jacobs order ("Bidragsnamn-länkarna på 22 px sitewide"): bar text-
+     länk, ingen padding/min-height av sitt eget — 16px/1.55 ≈ 25px
+     träffyta. .tratt__bidrag:s egen padding gör INTE detta, det ger
+     bara luft runt raden — samma teknik som .tratt__nav-tillbaka/
+     -omstart nedan. */
+  .tratt__bidrag-lank {
+    display: inline-block;
+    padding: 14px 4px;
+    margin: -14px -4px;
   }
 
   .tratt__bidrag-meta {

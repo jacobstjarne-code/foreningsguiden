@@ -240,7 +240,7 @@ function beloppCell(e: KalenderEntry): string {
                     {urgency !== 'positive' && <UrgencyChip urgency={urgency} />}
                     {formatDate(e.dateISO!)}
                   </td>
-                  <td><a href={arNationell(e) ? `/nationella-stod/${e.stodId}/` : `/kommun/${e.kommunSlug}/`}>{arNationell(e) ? e.stodNamn : e.bidragNamn}</a></td>
+                  <td><a href={arNationell(e) ? `/nationella-stod/${e.stodId}/` : `/kommun/${e.kommunSlug}/`} class="deadline-table__namn-lank">{arNationell(e) ? e.stodNamn : e.bidragNamn}</a></td>
                   <td>{arNationell(e) ? 'Hela Sverige' : e.kommun}</td>
                   <td>{kategoriCell(e)}</td>
                   <td>{beloppCell(e)}</td>
@@ -276,7 +276,7 @@ function beloppCell(e: KalenderEntry): string {
           <tbody>
             {lopandeForRender.map((e) => (
               <tr data-kommun={e.kommunSlug} data-kategori={e.kategori.join(' ')}>
-                <td><a href={`/kommun/${e.kommunSlug}/`}>{e.bidragNamn}</a></td>
+                <td><a href={`/kommun/${e.kommunSlug}/`} class="deadline-table__namn-lank">{e.bidragNamn}</a></td>
                 <td>{e.kommun}</td>
                 <td>{kategoriCell(e)}</td>
                 <td>{beloppCell(e)}</td>
