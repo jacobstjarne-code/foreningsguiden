@@ -111,6 +111,21 @@ export const FALT_KATALOG: FaltDefinition[] = [
   { id: 'open_membership', namn: "Öppet medlemskap", datatyp: 'ja/nej', klass: 'A', antalBidragAE1: 2 },
   { id: 'insurance', namn: "Förenings-/ansvarsförsäkring", datatyp: 'ja/nej', klass: 'A', antalBidragAE1: 1 },
   { id: 'contact_details', namn: "Kontaktperson och kontaktuppgifter", datatyp: 'text', klass: 'A', antalBidragAE1: 1 },
+
+  // AF2-tillägg (Jacob 2026-08-26), INTE ur AE1:s ursprungliga 68 — upptäckt
+  // vid härdningen av kravKoppling.ts, i ett stickprov av rader som inte
+  // kopplade till något befintligt fält: "Högst tre ledare per
+  // gruppaktivitet får räknas med" (Emmaboda). Motsatt riktning mot
+  // leader_group_limit (deltagare/grupper PER ledare) — det här är ett tak
+  // på ANTALET LEDARE som får räknas per gruppaktivitet, ett separat
+  // koncept AE1:s researchpass inte fångade i sina 1393 A/B/D1-rader.
+  // antalBidragAE1 här är DÄRFÖR INTE AE1-källd (ingen sådan mätning
+  // finns) — talet är corpus-mätt av analyze-krav-koppling.ts mot samma
+  // 309-bidrags-urval som resten av rapporten, inte jämförbart rad-för-
+  // rad med övriga fälts AE1-tal. Bryter filens sorteringsinvariant
+  // (fallande antalBidragAE1) medvetet — tillägget hör inte till AE1:s
+  // tabell och ska inte låtsas göra det genom att sorteras in i den.
+  { id: 'leader_count_limit', namn: "Högsta antal ledare per gruppaktivitet", datatyp: 'tal', klass: 'D1', antalBidragAE1: 1 },
 ];
 
 const FALT_INDEX = new Map(FALT_KATALOG.map((f) => [f.id, f]));

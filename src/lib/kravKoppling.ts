@@ -91,22 +91,105 @@ function numeriskt(faltId: string, regex: RegExp): Matchare {
 // generiska ordet "främja", för brett för ett mönster utan att ge
 // falska träffar mot andra D1-syftesfält. Den faller till custom-
 // fallbacken — se verify-krav-koppling.ts:s dokumenterade undantag.
+// AF2-härdning: adjektiv mellan tal och substantiv ("minst 3
+// bidragsberättigade deltagare") var den vanligaste felklassen i
+// stickprovet på 100 — en gemensam lista, inte upprepad per fält.
+const DELTAGARE_KVALIFICERARE = '(?:bidragsberättigade\\s+|stödberättigade\\s+|aktiva\\s+)?';
+
 const MATCHARE: Matchare[] = [
-  numeriskt('activity_duration', /(?:minst|minimum)\s+(\d+)\s*minuter/),
-  numeriskt('minimum_participants', /minst\s+(\d+)\s*deltagare/),
-  numeriskt('participant_min_age', /(\d+)\s*[–-]\s*\d+\s*år/), // "6–20 år" — se filhuvud: täcker inte alternativa/disjunkta intervall
+  {
+    // AF2: kravtexter anger ibland timmar, inte minuter ("minst en
+    // timme"/"minst 2 timmar") — varde konverteras till minuter så
+    // AF1.4:s tröskeljämförelse alltid jämför samma enhet.
+    faltId: 'activity_duration',
+    matcha: (t) => {
+      const min = /(?:minst|minimum)\s+(\d+)\s*minuter/.exec(t);
+      if (min) return { traffad: true, varde: Number(min[1]) };
+      const tim = /(?:minst|minimum)\s+(\d+)\s*timm(?:e|ar)/.exec(t);
+      if (tim) return { traffad: true, varde: Number(tim[1]) * 60 };
+      if (/(?:minst|minimum)\s+en\s+timme/.test(t)) return { traffad: true, varde: 60 };
+      return { traffad: false };
+    },
+  },
+  numeriskt('minimum_participants', new RegExp(`minst\\s+(\\d+)\\s*${DELTAGARE_KVALIFICERARE}(?:deltagare|personer)`)),
+  {
+    // AF2: "över 65 år" är ett öppet nedre intervall (ingen övre gräns
+    // i samma sats) — täcks inte av grundmönstrets "X–Y år"-krav.
+    faltId: 'participant_min_age',
+    matcha: (t) => {
+      const spann = /(\d+)\s*[–-]\s*\d+\s*år/.exec(t); // "6–20 år" — se filhuvud: täcker inte alternativa/disjunkta intervall
+      if (spann) return { traffad: true, varde: Number(spann[1]) };
+      const oppen = /över\s+(\d+)\s*år/.exec(t);
+      if (oppen) return { traffad: true, varde: Number(oppen[1]) };
+      return { traffad: false };
+    },
+  },
   numeriskt('participant_max_age', /\d+\s*[–-]\s*(\d+)\s*år/),
   nyckelord('leader_led', 'ledarledd', 'ledarledda', 'ledd av en utsedd ledare', 'ledas av en utsedd ledare'),
-  numeriskt('leader_min_age', /ledare?\s*(?:över\s*)?(\d+)\s*[–-]?\s*\d*\s*år/),
+  {
+    // AF2: "ledaren ska vara/ha fyllt X år" och "en ledare (minst X år)"
+    // klarar inte det ursprungliga mönstrets krav på att "ledare" och
+    // talet står omedelbart intill varandra — flera alternativ, första
+    // träff vinner.
+    faltId: 'leader_min_age',
+    matcha: (t) => {
+      const monster = [
+        /ledare?\s*(?:över\s*)?(\d+)\s*[–-]?\s*\d*\s*år/,
+        /ledaren?\s*(?:ska\s+)?(?:vara|ha\s+fyllt)\s+(?:minst\s+)?(\d+)\s*år/,
+        /ledare\w*\s*\(\s*(?:minst\s+)?(\d+)\s*år\s*\)/,
+      ];
+      for (const re of monster) {
+        const m = re.exec(t);
+        if (m) return { traffad: true, varde: Number(m[1]) };
+      }
+      return { traffad: false };
+    },
+  },
   nyckelord('activity_planned', 'planerad av föreningen', 'planeras och beslutas av föreningen', /planeras och genomför/),
-  nyckelord('attendance_recording', 'närvaroregistrering', 'föra närvarokort', 'närvarokort ska föras', 'närvaro ska registreras', 'närvarokort'),
-  numeriskt('maximum_participants', /(?:högst|max)\s+(\d+)\s*(?:stödberättigade\s+)?deltagare/),
-  numeriskt('member_count_filtered', /minst\s+(\d+)\s*(?:aktiva\s+)?medlemmar/),
-  nyckelord('participant_frequency_limit', 'en gång per dag och deltagare', 'högst en aktivitet per dygn', 'per dag och deltagare'),
-  nyckelord('excluded_activity_forms', 'kommersiell', 'entrébelagda tävlingar', 'studiecirk', /tävling(?!splan)/),
+  nyckelord(
+    'attendance_recording',
+    'närvaroregistrering',
+    'föra närvarokort',
+    'närvarokort ska föras',
+    'närvaro ska registreras',
+    'närvarokort',
+    'närvarounderlag',
+    /närvaro\w*[^.]{0,60}(?:registreras|förs\b|föras|dokumenteras)/
+  ),
+  numeriskt('maximum_participants', new RegExp(`(?:högst|max|maximalt)\\s+(\\d+)\\s*${DELTAGARE_KVALIFICERARE}deltagare`)),
+  numeriskt('member_count_filtered', new RegExp(`minst\\s+(\\d+)\\s*(?:aktiva\\s+|betalande\\s+)?medlemmar`)),
+  {
+    // AF2: fyra vanliga omskrivningar av samma "en gång/aktivitet/grupp
+    // per dag/dygn/förening"-regel — kärnan är substantivet + "per" +
+    // tidsenheten, prefixordet ("högst"/"endast") varierar för mycket
+    // för att kräva som anker.
+    faltId: 'participant_frequency_limit',
+    matcha: (t) => ({
+      traffad: /en\s+(?:gång|aktivitet|grupp(?:aktivitet)?|sammankomst)\s+per\s+(?:dag|dygn|förening)(?:\s+och\s+\w+)?/.test(t),
+    }),
+  },
+  nyckelord(
+    'excluded_activity_forms',
+    'kommersiell',
+    'entrébelagda tävlingar',
+    'studiecirk',
+    /tävling(?!splan)/,
+    /matcher[^.]{0,40}(?:serier|cuper|turneringar)/
+  ),
   nyckelord('democratic_form', /demokratisk/),
-  nyckelord('municipal_base', 'säte', 'huvudsaklig verksamhetskommun', /verksam i \S+ kommun/),
-  nyckelord('leader_present', 'ledaren ska vara närvarande', 'utsedd ledare', 'gruppledaren ska vara närvarande'),
+  nyckelord('municipal_base', 'säte', 'huvudsaklig verksamhetskommun', /verksam i \S+ kommun/, /gynna boende i \S+ kommun/),
+  {
+    // AF2: AND i stället för proximitet ("ledaren...utsedd av föreningen
+    // och närvarande under aktiviteten" har för långt mellanrum för ett
+    // fönster-mönster) — samma teknik som file_bylaws.
+    faltId: 'leader_present',
+    matcha: (t) => {
+      if (t.includes('ledaren ska vara närvarande') || t.includes('utsedd ledare') || t.includes('gruppledaren ska vara närvarande') || t.includes('myndig ansvarig person')) {
+        return { traffad: true };
+      }
+      return { traffad: /ledare/.test(t) && /närvar/.test(t) };
+    },
+  },
   nyckelord('common_start_end', 'gemensam samling', 'gemensam start', 'ledarledd start och avslutning'),
   nyckelord('municipal_registration', 'registrerad i kommunens föreningsregister', 'godkänd som bidragsberättigad'),
   nyckelord('activity_target_group', 'rikta sig till', 'riktar sig till'),
@@ -127,13 +210,22 @@ const MATCHARE: Matchare[] = [
     matcha: (t) => {
       const m = /en ledare per (\d+)/.exec(t);
       if (m) return { traffad: true, varde: Number(m[1]) };
-      return { traffad: t.includes('inte ansvara för flera grupper') };
+      // AF2: fyra observerade omskrivningar av samma booleska regel
+      // ("inte ansvara för/vara ansvarig för/leda flera grupper/
+      // aktiviteter", med valfritt adjektiv som "stödgrundande" mellan
+      // "flera" och substantivet) plus en helt annan konstruktion
+      // ("en ledare som inte samtidigt är ledare för en annan grupp").
+      const bool =
+        /(?:får\s+)?inte\s+(?:samtidigt\s+)?(?:vara\s+ansvarig\s+för|ansvara\s+för|leda)\s+flera\s+(?:\S+\s+)?(?:grupp|aktivitet)/.test(t) ||
+        /inte\s+samtidigt\s+är\s+ledare\s+för\s+en\s+annan\s+grupp/.test(t);
+      return { traffad: bool };
     },
   },
+  numeriskt('leader_count_limit', /högst\s+(\d+)\s*ledare\s*per\s*gruppaktivitet/),
   nyckelord('free_activity', 'kostnadsfri', 'utan entréavgift', 'avgiftsfri', 'entrébelagd'),
   nyckelord('file_financial_report', 'ekonomisk berättelse', 'ekonomisk redovisning', 'resultat- och balansräkning', 'resultat-, balans-'),
-  nyckelord('member_residence', 'bosatta i', 'bosatta i kommunen'),
-  numeriskt('attendance_retention', /sparas?\s+(?:i\s+)?minst\s+(\d+)\s*år/),
+  nyckelord('member_residence', 'bosatta i', 'bosatta i kommunen', /bosatt/, 'folkbokförd'),
+  numeriskt('attendance_retention', /sparas?\s+(?:i\s+)?(?:minst\s+)?(\d+)\s*år/),
   {
     // Hybrid: de flesta kommuner anger ett belopp, men vissa kräver bara
     // att avgiften betalats utan att ange summan — då registreras
@@ -145,16 +237,25 @@ const MATCHARE: Matchare[] = [
       return { traffad: t.includes('medlemsavgift') };
     },
   },
-  nyckelord('national_affiliation', 'riksorganisation', 'distriktsorganisation', 'rf-anslutning', 'ansluten till'),
-  numeriskt('minimum_activity_count', /minst\s+(\d+)\s*(?:bidragsberättigade\s+)?(?:aktiviteter|aktivitetstillfällen|sammankomster)/),
-  nyckelord('general_rules_attestation', 'kommunens allmänna bidragsregler', 'allmänna villkor'),
+  nyckelord('national_affiliation', 'riksorganisation', 'distriktsorganisation', 'rf-anslutning', /anslut/),
+  numeriskt(
+    'minimum_activity_count',
+    new RegExp(`minst\\s+(\\d+)\\s*${DELTAGARE_KVALIFICERARE}(?:aktiviteter|aktivitetstillfällen|sammankomster|deltagartillfällen|deltagaraktiviteter)`)
+  ),
+  nyckelord('general_rules_attestation', 'kommunens allmänna bidragsregler', 'allmänna villkor', /allmänna[^.]{0,40}villkor/, 'regler och riktlinjer'),
   nyckelord('rf_lok_compliance', "rf:s principer", 'lokalt aktivitetsstöd', 'lok-stöd'),
-  nyckelord('participants_are_members', 'deltagare ska normalt vara medlemmar', 'deltagarna ska vara medlemmar', 'deltagare ska vara medlemmar'),
+  nyckelord(
+    'participants_are_members',
+    'deltagare ska normalt vara medlemmar',
+    'deltagarna ska vara medlemmar',
+    'deltagare ska vara medlemmar',
+    /deltagar\w*[^.]{0,30}medlem/
+  ),
   nyckelord('file_general_annual_docs', 'årshandlingar'),
   nyckelord('outside_school_hours', 'skoltid'),
-  nyckelord('association_run_activity', 'föreningens regi'),
+  nyckelord('association_run_activity', 'föreningens regi', 'föreningens egen regi'),
   nyckelord('drug_free_activity', 'drogfri', 'drogfria'),
-  nyckelord('nondiscrimination', /diskrimin/, 'kränkningar', 'kränkande'),
+  nyckelord('nondiscrimination', /diskrimin/, 'kränkningar', 'kränkande', 'behandlas lika'),
   {
     // AND, inte proximitet — kravtexter radar ofta upp fem-sex dokument
     // i en enda mening ("lämna årsmöteshandlingar, ekonomiska handlingar,
@@ -176,12 +277,12 @@ const MATCHARE: Matchare[] = [
   nyckelord('file_policy', 'policy', 'handlingsplan'),
   nyckelord('file_budget', 'budget'),
   nyckelord('ordered_finances', 'ordnad bokföring', 'bokförd ekonomi'),
-  nyckelord('no_double_funding', 'dubbelfinansiering', 'redan finansieras', 'redan får annat kommunalt stöd'),
-  nyckelord('file_attendance', 'närvarokort', 'aktivitetsredovisning'),
+  nyckelord('no_double_funding', 'dubbelfinansiering', 'redan finansieras', 'redan får annat kommunalt stöd', 'kan inte kombineras med', /fått[^.]{0,30}(?:bidrag|stöd)/),
+  nyckelord('file_attendance', 'närvarokort', 'aktivitetsredovisning', 'aktivitetskort'),
   nyckelord('previous_support', 'tidigare beviljat', 'beviljats grundbidrag', 'beviljats startbidrag'),
-  nyckelord('audit_consent', 'kommunal kontroll', 'kommunen får granska', 'den insyn'),
+  nyckelord('audit_consent', 'kommunal kontroll', 'kommunen får granska', 'den insyn', 'kunna granskas'),
   nyckelord('background_checks', /belastningsregist/, 'registerutdrag'),
-  nyckelord('file_member_list', 'medlemsförteckning', 'medlemslista'),
+  nyckelord('file_member_list', 'medlemsförteckning', 'medlemslista', 'medlemsregister'),
   nyckelord('insurance', 'försäkring', 'försäkringsskydd'),
   nyckelord('contact_details', 'kontaktperson', 'kontaktuppgifter', 'kontaktinformation'),
   // activity_open/open_membership delar vokabulär ("öppen för alla") och
@@ -189,7 +290,7 @@ const MATCHARE: Matchare[] = [
   // Prioriterar activity_open (D1, "aktiviteten") framför open_membership
   // (A, "föreningen") eftersom D1-frasen "aktiviteten ska vara öppen"
   // är den vanligare av de två (8 mot 2 bidrag, AE1).
-  nyckelord('activity_open', 'aktiviteten ska vara öppen', 'öppen och tillgänglig', 'öppen för alla'),
+  nyckelord('activity_open', 'aktiviteten ska vara öppen', 'öppen och tillgänglig', /öppen för/),
   nyckelord('open_membership', 'öppet medlemskap', 'föreningen ska vara öppen för alla'),
   nyckelord('activity_location', /bedrivas.*kommun/),
   nyckelord('association_type', 'barn- och ungdomsförening', 'pensionärs- eller funktionsrättsförening', 'funktionsrättsförening'),
