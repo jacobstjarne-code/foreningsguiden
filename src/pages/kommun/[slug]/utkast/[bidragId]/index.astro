@@ -114,24 +114,24 @@ const innehallsradText = KOPRUTA.innehallsrad
   .replace('{bilagorText}', antalBilagor === 1 ? '1 bilaga' : `${antalBilagor} bilagor`);
 ---
 <Base
-  title={`Utkast — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
-  description={`Förhandsvisning av bidragsutkastet för ${bidrag.namn} i ${kommun.kommun} — personligt mot er förenings svar i matchningstratten.`}
+  title={`Ansökningschecklista — ${bidrag.namn} (${kommun.kommun}) — Föreningsguiden`}
+  description={`Förhandsvisning av ansökningschecklistan för ${bidrag.namn} i ${kommun.kommun} — personligt mot er förenings svar i matchningstratten.`}
   noindex={true}
 >
   <BreadcrumbList items={[
     { name: 'Startsida', url: '/' },
     { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
-    { name: 'Utkast', url: `/kommun/${kommun.kommun_slug}/utkast/${bidrag.id}/` },
+    { name: 'Ansökningschecklista', url: `/kommun/${kommun.kommun_slug}/utkast/${bidrag.id}/` },
   ]} />
 
   <noscript>
-    <p class="utkastvy-noscript">Den här sidan visar ert personliga utkast och kräver JavaScript. Utan det ser ni bara kraven, inte om er förening redan uppfyller dem.</p>
+    <p class="utkastvy-noscript">Den här sidan visar er personliga ansökningschecklista och kräver JavaScript. Utan det ser ni bara kraven, inte om er förening redan uppfyller dem.</p>
   </noscript>
 
   <div class="utkastvy fg-card" data-utkastvy data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>
     <div class="utkastvy__header">
       <p class="utkastvy__eyebrow">{kommun.kommun} kommun · {bidrag.namn}</p>
-      <h1>Utkast till ansökan</h1>
+      <h1>Ansökningschecklista</h1>
       <p class="utkastvy__meta" data-utkastvy-meta>{beloppPerForening ?? 'Individuellt belopp inte fastställt'}</p>
     </div>
 
@@ -390,9 +390,9 @@ const innehallsradText = KOPRUTA.innehallsrad
       }
 
       if (resultat.typ === 'registrering_forst') {
-        visaStatus('Er förening behöver registreras hos kommunen innan det här utkastet är aktuellt.', {
+        visaStatus('Er förening behöver registreras hos kommunen innan den här checklistan är aktuell.', {
           href: `/kommun/${kommunSlug}/registrera/`,
-          text: 'Till registreringsutkastet',
+          text: 'Till registreringschecklistan',
         });
         return;
       }

@@ -135,7 +135,11 @@ export const POST: APIRoute = async ({ request }) => {
           currency: 'sek',
           unit_amount: PRIS_BIDRAGSUTKAST_ORE,
           product_data: {
-            name: `Bidragsutkast — ${bidrag.namn} (${kommun.kommun})`,
+            // AB1.4 (Jacobs order): Stripes produktnamn syns på
+            // kassasidan OCH kvittot — samma "ansökningschecklista, inte
+            // utkast"-namn som kopExport.ts:s dokumenttitel och PRIS.hjalp
+            // (content.ts, M2.4/R2).
+            name: `Ansökningschecklista — ${bidrag.namn} (${kommun.kommun})`,
           },
         },
         quantity: 1,

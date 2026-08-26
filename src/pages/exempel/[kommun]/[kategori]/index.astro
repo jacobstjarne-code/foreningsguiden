@@ -53,14 +53,14 @@ const kategoriLabel = KATEGORI_LABELS[kategori];
 const bidragICategorin = kommun.bidrag.filter((b) => b.kategori.includes(kategori));
 ---
 <Base
-  title={`Exempelutkast — ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun} — Föreningsguiden`}
-  description={`{{GENERATOR: metabeskrivning — exempelutkast för ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun}}}`}
+  title={`Exempelchecklista — ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun} — Föreningsguiden`}
+  description={`{{GENERATOR: metabeskrivning — exempelchecklista för ${kategoriLabel.toLowerCase()}bidrag i ${kommun.kommun}}}`}
 >
   <BreadcrumbList items={[
     { name: 'Startsida', url: '/' },
     { name: kommun.kommun, url: `/kommun/${kommun.kommun_slug}/` },
     { name: kategoriLabel, url: `/kommun/${kommun.kommun_slug}/${kategori}/` },
-    { name: 'Exempelutkast', url: `/exempel/${kommun.kommun_slug}/${kategori}/` },
+    { name: 'Exempelchecklista', url: `/exempel/${kommun.kommun_slug}/${kategori}/` },
   ]} />
 
   <div class="exempel-card fg-card">
@@ -71,7 +71,7 @@ const bidragICategorin = kommun.bidrag.filter((b) => b.kategori.includes(kategor
 
     <div class="exempel-doc">
       <p class="exempel-doc__eyebrow">{kommun.kommun} kommun · {kategoriLabel} · exempelförening</p>
-      <h1>Utkast till ansökan om {kategoriLabel.toLowerCase()}bidrag</h1>
+      <h1>Ansökningschecklista för {kategoriLabel.toLowerCase()}bidrag</h1>
       <p class="exempel-doc__forening">{'{{GENERATOR: exempelföreningens namn}}'}</p>
 
       <h2>1. Om föreningen</h2>

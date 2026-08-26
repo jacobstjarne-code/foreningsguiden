@@ -72,7 +72,11 @@ export function bidragsutkastTillDokument(
   ansokningssystemUrl: string
 ): DokumentInnehall {
   return {
-    titel: `Utkast till ansökan — ${doc.bidragNamn} (${doc.kommun})`,
+    // AB1.4 (Jacobs order): "Utkast till ansökan" bytt mot samma namn
+    // som checklistaTillDokument ovan (Registreringschecklista) och
+    // PRIS.hjalp.namn (content.ts, M2.4/R2) — produkten heter
+    // ansökningschecklista, inte utkast.
+    titel: `Ansökningschecklista — ${doc.bidragNamn} (${doc.kommun})`,
     // R2 (Jacob 2026-08-18): källhänvisning per krav — bidrag.krav[] har
     // ingen egen URL per rad (till skillnad från forutsattningar-radernas
     // kallaUrl ovan i checklistaTillDokument), så samma doc.kalla_url

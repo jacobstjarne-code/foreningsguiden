@@ -40,7 +40,8 @@ export const GET: APIRoute = async ({ params, cookies }) => {
     buffer = await genereraKopDocx(
       bidragsutkastTillDokument(doc, bilagor, bidragAnsokningssystemNamn(bidrag, kommun), bidragAnsokningsUrl(bidrag, kommun))
     );
-    filnamn = `bidragsutkast-${kommun.kommun_slug}-${kop.bidragId}.docx`;
+    // AB1.4 (Jacobs order): samma fynd som pdf.ts — se den filens kommentar.
+    filnamn = `ansokningschecklista-${kommun.kommun_slug}-${kop.bidragId}.docx`;
   } else {
     const checklista = kopChecklista(kop, kommun);
     const bilagor = harvestBilagor(checklista);

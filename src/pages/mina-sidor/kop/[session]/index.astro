@@ -63,7 +63,13 @@ if (kop && kommun) {
     }
     if (doc) {
       eyebrow = `${kommun.kommun} kommun · ${doc.bidragNamn}`;
-      sidRubrik = 'Utkast till ansökan';
+      // AB1.4 (Jacobs order): "Utkast till ansökan" → produktens namn
+      // (ansökningschecklista) — samma fynd, samma fix som utkastvyns
+      // egen rubrik ([bidragId]/index.astro) och kopExport.ts:s
+      // dokumenttitel. "Er" för att matcha registrerings-grenens egen
+      // rubrik nedan ("Er registreringschecklista"), tidigare
+      // inkonsekvent inom samma fil.
+      sidRubrik = 'Er ansökningschecklista';
       metaRad = `${doc.belopp ?? 'Individuellt belopp inte fastställt'} · sista ansökningsdag ${doc.deadlineText}`;
       dokumentKalla = doc.kalla_url;
       rader = doc.kravRader.map((rad, i) => ({
@@ -77,7 +83,9 @@ if (kop && kommun) {
     }
   } else {
     const checklista = kopChecklista(kop, kommun);
-    eyebrow = `${kommun.kommun} kommun · registreringsutkast`;
+    // AB1.4 (Jacobs order): "registreringsutkast" motsade sin egen
+    // sidRubrik två rader ner ("Er registreringschecklista").
+    eyebrow = `${kommun.kommun} kommun · registreringschecklista`;
     sidRubrik = 'Er registreringschecklista';
     metaRad = `Köpt ${kop.betaldDatum.slice(0, 10)}`;
     // §0 — föreningsuppgifterna som första rad i det synliga dokumentet,
