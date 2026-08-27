@@ -76,7 +76,8 @@ const GOLDEN_SET: Fixtur[] = [
   { faltId: 'minimum_participants', text: 'Grupp om minst tre bidragsberättigade deltagare' },
   { faltId: 'participants_are_members', text: 'Deltagaren ska vara kommuninvånare och medlem i föreningen, med ett begränsat undantag för rekryteringsaktiviteter; ledaren får inte ansvara för flera aktiviteter samtidigt' },
   { faltId: 'leader_group_limit', text: 'Deltagaren ska vara kommuninvånare och medlem i föreningen, med ett begränsat undantag för rekryteringsaktiviteter; ledaren får inte ansvara för flera aktiviteter samtidigt' },
-  { faltId: 'member_count_filtered', text: 'Föreningen ska ha minst 25 betalande medlemmar över sju år och redovisa minst 200 deltagaraktiviteter per år' },
+  // member_count_filtered-raden borttagen AG1 (Jacob 2026-08-27) — fältet
+  // finns inte längre, se profilFalt.ts:s filhuvud.
   { faltId: 'minimum_activity_count', text: 'Föreningen ska ha minst 25 betalande medlemmar över sju år och redovisa minst 200 deltagaraktiviteter per år' },
   { faltId: 'no_double_funding', text: 'Beviljas inte för aktivitet som fått arrangemangsbidrag eller annat kommunalt produktionsstöd' },
   { faltId: 'attendance_recording', text: 'Genomförda medlemsaktiviteter och sammankomster ska styrkas med närvarounderlag eller motsvarande verifikation' },

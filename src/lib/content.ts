@@ -318,6 +318,14 @@ export const BEVAKNING = {
     'Vi mejlar fyra veckor och tre dagar innan sista ansökningsdag för de bidrag du väljer att bevaka. Inget annat.',
   epostLabel: 'Din e-postadress',
   epostPlaceholder: 'namn@forening.se',
+  // AG1 (Jacob 2026-08-27): mejladress + föreningsnamn är nyckeln — inget
+  // kontosystem (se profilFalt.ts/aktivitetsmall.ts:s filhuvud för
+  // beslutet). Raden gör den avvägningen begriplig för den som fyller i
+  // formuläret: en personlig adress fungerar, men en föreningsadress
+  // överlever ett kassörsbyte på ett sätt en personlig inte gör. Ordagrant
+  // Jacobs text, samma rad vid bevakning och köp — se utkast/[bidragId]/
+  // index.astro.
+  foreningsadressHint: 'Använd gärna föreningens adress — då finns uppgifterna kvar när styrelsen byts.',
   // C1 (ARBETSORDER 2026-08-11, Jacob): föreningsminnet utan konto — vet vi
   // vilken förening som bevakar kan framtida mejl/sidor tilltala föreningen
   // vid namn i stället för bara adressen. Frivilligt (inget required-attribut
@@ -984,6 +992,11 @@ export const KOPRUTA = {
   leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
   prisOchKvitto: '{pris} kr inklusive moms. Kvitto med organisationsnummer och momsspecifikation mejlas — det går att bokföra.',
   aterbetalning: 'Blev det inte användbart: mejla inom 30 dagar så betalar vi tillbaka. Ingen förklaring behövs.',
+  // AG1 (Jacob 2026-08-27), ordagrant — samma rad som BEVAKNING.
+  // foreningsadressHint. Adressen fylls i på Stripes egen kassasida
+  // (inget lokalt e-postfält på den här sidan), så raden står sist,
+  // strax innan besökaren lämnar för kassan.
+  foreningsadressHint: 'Använd gärna föreningens adress — då finns uppgifterna kvar när styrelsen byts.',
 };
 
 /**

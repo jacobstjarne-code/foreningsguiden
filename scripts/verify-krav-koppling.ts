@@ -37,8 +37,8 @@ const EXEMPEL: Exempel[] = [
   { faltId: 'attendance_recording', text: "Närvarokort ska föras vid varje sammankomst" },
   { faltId: 'maximum_participants', text: "Minst tre och högst 30 stödberättigade deltagare får räknas per gruppaktivitet; en deltagare får bara räknas i en gruppaktivitet per förening och dag" },
   { faltId: 'maximum_participants', text: "Minst 3 och max 20 deltagare i bidragsberättigad ålder per aktivitetstillfälle (ledare 13–21 år får räknas som deltagare)" },
-  { faltId: 'member_count_filtered', text: "Föreningen ska normalt ha minst tio medlemmar, ta ut minst 50 kr i årlig medlemsavgift och föra medlemsregister som sparas i fyra år" },
-  { faltId: 'member_count_filtered', text: "Föreningen ska uppfylla grundkraven och ha minst 15 medlemmar i åldern 6–20 år" },
+  // member_count_filtered borttaget AG1 (Jacob 2026-08-27) — se
+  // profilFalt.ts:s filhuvud och medlemskrav.ts.
   { faltId: 'participant_frequency_limit', text: "Aktiviteten genomförs i föreningens regi och bidrag ges endast en gång per dag och deltagare inom samma förening" },
   { faltId: 'participant_frequency_limit', text: "Högst en aktivitet per dygn är stödgrundande och närvarokort ska lämnas" },
   { faltId: 'excluded_activity_forms', text: "Bidrag utgår inte till aktivitet som ordnas av riksorganisation, distrikt eller lokalt samarbetsorgan, till kommersiella arrangemang eller till studiecirklar anordnade av studieförbund" },

@@ -23,9 +23,14 @@
  * MEDVETET INERT PÅ EN PUNKT: ingen route (`src/pages/api/...`) skickar
  * mejlet eller tar emot en fil. Det är nästa steg, när Design har levererat
  * ytan för dokumentuppladdning — inte AF2:s.
+ *
+ * AG1 (Jacob 2026-08-27): nyckeln formaliserad som profilnyckel.ts:s
+ * Profilnyckel — samma typ som aktivitetsmall.ts nu hänger sina mallar
+ * under, inte en egen email+foreningsnamn-form som kan glida isär.
  */
 
 import { Redis } from '@upstash/redis';
+import { normaliseraProfilnyckel, type Profilnyckel } from './profilnyckel.ts';
 
 const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 const redis = new Redis({
@@ -37,21 +42,19 @@ const TOKEN_TTL_SEKUNDER = 60 * 60; // 1 timme — kort avsiktligt, se filhuvud
 const dokumentTokenKey = (token: string) => `dokumentverifiering:${token}`;
 
 export interface DokumentVerifieringEntry {
-  email: string; // lowercased — samma normalisering som subscribers.ts
-  foreningsnamn: string;
+  nyckel: Profilnyckel;
   utfardad: string; // ISO
 }
 
 /**
- * Utfärdar ett engångstoken för DEN HÄR (email, föreningsnamn)-profilen.
- * Anroparen (framtida route) ansvarar för att mejla länken — den
- * funktionen finns inte här, se filhuvud.
+ * Utfärdar ett engångstoken för DEN HÄR profilen. Anroparen (framtida
+ * route) ansvarar för att mejla länken — den funktionen finns inte här,
+ * se filhuvud.
  */
-export async function utfardaDokumentToken(email: string, foreningsnamn: string): Promise<string> {
+export async function utfardaDokumentToken(nyckel: Profilnyckel): Promise<string> {
   const token = crypto.randomUUID();
   const entry: DokumentVerifieringEntry = {
-    email: email.trim().toLowerCase(),
-    foreningsnamn: foreningsnamn.trim(),
+    nyckel: normaliseraProfilnyckel(nyckel),
     utfardad: new Date().toISOString(),
   };
   await redis.set(dokumentTokenKey(token), JSON.stringify(entry), { ex: TOKEN_TTL_SEKUNDER });

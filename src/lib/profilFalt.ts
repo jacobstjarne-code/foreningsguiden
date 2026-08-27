@@ -19,6 +19,19 @@
  * DATATYP avgör vilken av profilSvar.ts:s tre svarssorter fältet lagras
  * som: fil → dokument, ja/nej → intygande, allt annat (tal/text/datum)
  * → faktum. Se profilSvar.ts:s egen kommentar för resonemanget.
+ *
+ * AG1 (Jacob 2026-08-27): member_count_filtered TOGET UR KATALOGEN,
+ * medvetet — det var AE1:s enda A-fält som i praktiken inte är
+ * återanvändbart. "Relevant ålder/status" definieras olika av varje
+ * bidrag (6–20 år hos ett, 65+ hos ett annat, aktiv/betalande hos ett
+ * tredje) — ETT lagrat tal på profilen skulle antingen vara fel för de
+ * flesta bidrag eller kräva en fråga per bidrag ändå, vilket gör
+ * lagringen värdelös. Samma brist AE1 själv flaggade i §"Var
+ * normaliseringen brister" (medlemsantal är inte ett enda tal, kräver
+ * en personnivå-lista med ålders-/status-/bosättningsfilter). Frågan
+ * ställs nu alltid per bidrag i stället — se medlemskrav.ts, som
+ * flaggar VILKA bidrag som har ett medlemsantalskrav (utan att lagra
+ * eller återanvända ett svar) så ytan vet att fråga.
  */
 
 export const FALT_DATATYPER = ['tal', 'text', 'datum', 'ja/nej', 'fil'] as const;
@@ -52,7 +65,6 @@ export const FALT_KATALOG: FaltDefinition[] = [
   { id: 'activity_planned', namn: "Aktiviteter planeras och beslutas av föreningen", datatyp: 'ja/nej', klass: 'D1', antalBidragAE1: 102 },
   { id: 'attendance_recording', namn: "Närvaroregistrering förs", datatyp: 'ja/nej', klass: 'D1', antalBidragAE1: 75 },
   { id: 'maximum_participants', namn: "Högsta deltagarantal per aktivitet/ledare", datatyp: 'tal', klass: 'D1', antalBidragAE1: 73 },
-  { id: 'member_count_filtered', namn: "Medlemsantal för relevant ålder/status", datatyp: 'tal', klass: 'A', antalBidragAE1: 64 },
   { id: 'participant_frequency_limit', namn: "Högsta räknade tillfällen per deltagare/dag/vecka", datatyp: 'tal', klass: 'D1', antalBidragAE1: 60 },
   { id: 'excluded_activity_forms', namn: "Inte kommersiell/tävling/studiecirkel/skolverksamhet", datatyp: 'ja/nej', klass: 'D1', antalBidragAE1: 57 },
   { id: 'democratic_form', namn: "Demokratiskt uppbyggd och styrd", datatyp: 'ja/nej', klass: 'A', antalBidragAE1: 56 },

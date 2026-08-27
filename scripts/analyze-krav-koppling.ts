@@ -26,43 +26,9 @@
  *
  * Kör: node --experimental-strip-types scripts/analyze-krav-koppling.ts
  */
-import { readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import * as yaml from 'js-yaml';
 import { kopplaKravtext } from '../src/lib/kravKoppling.ts';
-
-const KOMMUNER_DIR = join(import.meta.dirname, '..', 'data', 'kommuner');
-
-// Samma teknik som verify-lok-ansokningsvag.ts:s LOK-detektion — namn/id-
-// heuristik, eftersom datamodellen saknar ett bidragsart-fält (AD1).
-// "attraktivitetsbidrag" innehåller bokstavligen substrängen
-// "aktivitetsbidrag" (a-t-t-r + aktivitetsbidrag) — AE1:s egen dokumenterade
-// falska träff (316 kandidater → 314 riktiga). Uteslut den explicit.
-function arAktivitetsbidrag(namn: string, id: string): boolean {
-  const t = `${namn} ${id}`.toLowerCase();
-  if (t.includes('attraktivitetsbidrag')) return false;
-  return /aktivitetsbidrag|aktivitetsstöd|lokalt aktivitetsstöd|\blok\b/.test(t);
-}
-
-interface BidragRad {
-  id: string;
-  namn: string;
-  krav: string[];
-}
-
-function samlaAktivitetsbidrag(): BidragRad[] {
-  const resultat: BidragRad[] = [];
-  for (const fil of readdirSync(KOMMUNER_DIR)) {
-    if (!fil.endsWith('.yaml')) continue;
-    const doc = yaml.load(readFileSync(join(KOMMUNER_DIR, fil), 'utf-8')) as { bidrag?: BidragRad[] };
-    for (const b of doc.bidrag ?? []) {
-      if (arAktivitetsbidrag(b.namn, b.id) && Array.isArray(b.krav)) {
-        resultat.push(b);
-      }
-    }
-  }
-  return resultat;
-}
+import { samlaAktivitetsbidrag } from '../src/lib/aktivitetsbidragKorpus.ts';
+import { FALT_KATALOG } from '../src/lib/profilFalt.ts';
 
 const bidrag = samlaAktivitetsbidrag();
 const kravrader = bidrag.flatMap((b) => b.krav);
@@ -87,7 +53,7 @@ const custom = kravrader.length - reusable;
 
 console.log(`analyze:krav-koppling — ${bidrag.length} bidrag identifierade som aktivitetsbidrag (namn/id-heuristik)`);
 console.log(`${kravrader.length} kravrader totalt (ALLA klasser A/B/C/D — se filhuvud för scope-skillnad mot GPT:s 238)`);
-console.log(`  kopplade till ett av de 68 återanvändbara fälten: ${reusable} (${((reusable / kravrader.length) * 100).toFixed(1)}%)`);
+console.log(`  kopplade till ett av de ${FALT_KATALOG.length} återanvändbara fälten: ${reusable} (${((reusable / kravrader.length) * 100).toFixed(1)}%)`);
 console.log(`  föll till custom-fallback (ingen mönsterträff): ${custom} (${((custom / kravrader.length) * 100).toFixed(1)}%)`);
 console.log('');
 console.log('Topp 15 mest träffade fält:');

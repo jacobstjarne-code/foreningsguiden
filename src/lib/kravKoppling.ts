@@ -157,7 +157,11 @@ const MATCHARE: Matchare[] = [
     /närvaro\w*[^.]{0,60}(?:registreras|förs\b|föras|dokumenteras)/
   ),
   numeriskt('maximum_participants', new RegExp(`(?:högst|max|maximalt)\\s+(\\d+)\\s*${DELTAGARE_KVALIFICERARE}deltagare`)),
-  numeriskt('member_count_filtered', new RegExp(`minst\\s+(\\d+)\\s*(?:aktiva\\s+|betalande\\s+)?medlemmar`)),
+  // member_count_filtered borttaget AG1 (Jacob 2026-08-27) — inte
+  // återanvändbart, se profilFalt.ts:s filhuvud. Medlemsantalstext
+  // upptäcks nu av medlemskrav.ts:s egen, separata detektor (boolesk,
+  // ingen lagrad tröskel) i stället för att konkurrera om en plats i
+  // MATCHARE.
   {
     // AF2: fyra vanliga omskrivningar av samma "en gång/aktivitet/grupp
     // per dag/dygn/förening"-regel — kärnan är substantivet + "per" +

@@ -13,20 +13,23 @@
  * En förening har därför NOLL ELLER FLERA aktivitetsmallar, var och en
  * med sina EGNA D1-svar — aldrig ett enda D1-svarsset delat av alla lag.
  *
- * ÖPPEN FRÅGA, inte löst här: vad en aktivitetsmall hänger under.
- * Foreningsprofil (foreningsprofil.ts) är anonym, per-webbläsare
- * localStorage utan stabilt förenings-id — det finns ingen inloggad
- * "Forening"-entitet i kodbasen ännu att koppla aktivitetsmallar till.
- * AktivitetsmallSamling nedan har därför ett eget genererat id, inte en
- * främmande nyckel mot något som inte finns. Ägarskap/lagring är nästa
- * beslut, inte AF1:s — se AF1-rapporten till Jacob.
+ * ÄGARSKAP LÖST (AG1, Jacob 2026-08-27): "Inget kontosystem. Mejladress
+ * plus föreningsnamn står som nyckel... Bygg inte föreningsentiteten."
+ * Ingen inloggad "Forening"-entitet, inget förenings-id — mallen hänger
+ * under en profilnyckel.ts:s Profilnyckel (email+föreningsnamn), samma
+ * ospårade nyckel-idiom som redan är etablerad praxis i kodbasen
+ * (subscribers.ts, kommunefterfragan.ts). id-fältet nedan skiljer
+ * fortfarande mallar ÅT INOM samma profil (P13 vs A-laget) — profilnyckel
+ * säger VILKEN profil, id säger VILKEN mall.
  */
 
 import { hamtaFaltdefinition, d1Falt } from './profilFalt.ts';
 import type { Svar } from './profilSvar.ts';
+import { normaliseraProfilnyckel, type Profilnyckel } from './profilnyckel.ts';
 
 export interface Aktivitetsmall {
   id: string; // genererat vid skapande (t.ex. crypto.randomUUID()), inte en slug — namnet är fritext och kan ändras
+  profilnyckel: Profilnyckel; // vilken (email, föreningsnamn)-profil mallen hör till — AG1:s beslut, se filhuvud
   namn: string; // fritext: "P13", "A-laget", "Nybörjargruppen onsdagar"
   skapad: string; // ISO
   // D1-svar SCOPADE till just den här mallen — samma faltId kan alltså
@@ -35,8 +38,13 @@ export interface Aktivitetsmall {
   svar: Record<string, Svar>;
 }
 
-export function skapaAktivitetsmall(namn: string, id: string, skapad: string = new Date().toISOString()): Aktivitetsmall {
-  return { id, namn, skapad, svar: {} };
+export function skapaAktivitetsmall(
+  namn: string,
+  id: string,
+  profilnyckel: Profilnyckel,
+  skapad: string = new Date().toISOString()
+): Aktivitetsmall {
+  return { id, profilnyckel: normaliseraProfilnyckel(profilnyckel), namn, skapad, svar: {} };
 }
 
 /**
