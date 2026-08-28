@@ -4,26 +4,21 @@
  * identifieras som aktivitetsbidrag ur data/kommuner/*.yaml. EN källa för
  * heuristiken, inte en kopia per skript som kan glida isär.
  *
- * Namn/id-heuristik, samma teknik som verify-lok-ansokningsvag.ts redan
- * använder för LOK — datamodellen saknar ett separat bidragsart-fält
- * (AD1_KRAVENS_KARAKTAR.md §"Bidragsarten är identifierad från namn och
- * id"). "attraktivitetsbidrag" innehåller bokstavligen substrängen
- * "aktivitetsbidrag" (a-t-t-r + aktivitetsbidrag) — AE1:s egen
- * dokumenterade falska träff (316 kandidater → 314 riktiga). Uteslut den
- * explicit.
+ * SERVER-ONLY (node:fs) — heuristiken själv flyttades till
+ * aktivitetsbidragHeuristik.ts (AH1, 2026-08-28) så klientkod kan
+ * importera BARA den utan att dra med sig node:fs. Den här filen är
+ * bara för Node-skript och Astro-frontmatter/API-routes, aldrig för
+ * ett `<script>`-block som körs i webbläsaren.
  */
 
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import * as yaml from 'js-yaml';
+import { arAktivitetsbidrag } from './aktivitetsbidragHeuristik.ts';
+
+export { arAktivitetsbidrag };
 
 const KOMMUNER_DIR = join(import.meta.dirname, '..', '..', 'data', 'kommuner');
-
-export function arAktivitetsbidrag(namn: string, id: string): boolean {
-  const t = `${namn} ${id}`.toLowerCase();
-  if (t.includes('attraktivitetsbidrag')) return false;
-  return /aktivitetsbidrag|aktivitetsstöd|lokalt aktivitetsstöd|\blok\b/.test(t);
-}
 
 export interface AktivitetsbidragRad {
   id: string;

@@ -333,6 +333,24 @@ export function faltklassForId(faltId: string): FaltKlass | null {
 }
 
 /**
+ * AH1 (Jacobs order, frågemotorn): en kravrad kan uttrycka FLERA fält
+ * samtidigt ("organisationsnummer, konto, demokratiska stadgar, vald
+ * styrelse, revisor, ordnad bokföring" styrker sex — se kommentaren vid
+ * testaEgetMonster). kopplaKravtext() väljer bara det FÖRSTA för
+ * custom-fallbackens skull; frågemotorn (girigOrdning.ts) behöver ALLA,
+ * eftersom AE2:s egen regel är att en rad räknas besvarad först när
+ * VARJE fält den uttrycker är besvarat — inte när ett av dem är det.
+ */
+export function allaFaltITexten(kravText: string): string[] {
+  const normaliserad = normaliseraKravText(kravText);
+  const traffar: string[] = [];
+  for (const matchare of MATCHARE) {
+    if (matchare.matcha(normaliserad).traffad) traffar.push(matchare.faltId);
+  }
+  return traffar;
+}
+
+/**
  * Testkrok för verify-krav-koppling.ts: kör ETT namngivet fälts EGNA
  * mönster mot en text, oberoende av kopplaKravtext():s "första träff
  * vinner"-beteende. Flera fält delar legitimt samma AE1-exempelmening
