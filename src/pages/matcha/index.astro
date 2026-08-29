@@ -471,10 +471,20 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
       // landar där — visa väljaren direkt, samma väg som Byt-knappen
       // redan använder, i stället för att duplicera fixen per knapp.
       if (step === 1) visaKommunvaljare();
-      updateStegUI();
       if (step === 4) {
+        // AH1.11 (Fable/Jacob 2026-08-29, AH1.10:s sidofynd): pillens egen
+        // klick-handler kör render() FÖRE step faktiskt blir 4 (goStep(4)
+        // körs i en setTimeout 450ms senare) — raknareTextEl:s tilläggs-
+        // sträng ("ordnade efter vad ni svarat") bestäms av `step < 4`,
+        // så den frös på det kalla/mitt-i-tratten-läget tills en
+        // sidladdning körde render() på nytt med rätt step. render()
+        // anropar redan updateStegUI() sist — ersätter alltså det direkta
+        // anropet nedan för just det här steget, inte ett dubbelanrop.
+        render();
         trackEvent('tratt_besked', { kommun: kommunData?.kommun ?? null, sokt: profil.sokt });
+        return;
       }
+      updateStegUI();
     }
 
     /** SPEC B3, D-B: blocket ovanför de två grupperna. Enda som skiljer
