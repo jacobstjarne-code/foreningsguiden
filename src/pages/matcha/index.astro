@@ -542,15 +542,22 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
         // dessutom bara sant om verksamhet/sökt-svaren faktiskt påverkat
         // sorteraForTratt() — kommunvalet ensamt filtrerar, sorterar inte.
         const harSvaratUtoverKommun = profil.verksamhet.length > 0 || profil.sokt !== null;
-        // Z2.2 (incoming/OPPNA_PUNKTER_Z1.md, DOM 2026-08-21): kallt läge
-        // (kommun känd, noll äkta svar) får en egen, sann rad i stället
+        // AH1.12 (Fable/Jacob 2026-08-29): `step < 4`-grenen togs bort —
+        // den gav en TREDJE, ofullständig mening ("kommunala bidrag i
+        // Malung-Sälen" utan svans) för chipen ovanför Fråga 2, som skiljde
+        // sig från exakt samma tillstånd nådd via kommunsidans `?fortsatt=`-
+        // CTA (som ALLTID hoppar till steg 4 och därför alltid fick svansen).
+        // AH1.11:s egen verifieringsorder (skriven INNAN AH1.10) är facit:
+        // "Läs chipen ovanför Fråga 2. Förväntat: '9 kommunala bidrag i
+        // Malung-Sälen — i kommunens ordning. Alla visas.'" — kommun vald +
+        // noll svar ska alltid ge kalltTillagg, oavsett vilket steg hon råkar
+        // stå på. Z2.2 (incoming/OPPNA_PUNKTER_Z1.md, DOM 2026-08-21): kallt
+        // läge (kommun känd, noll äkta svar) får en egen, sann rad i stället
         // för att bara tystna — "i kommunens ordning" i stället för att
         // påstå en sortering som aldrig skett.
-        raknareTextEl.textContent = step < 4
-          ? bas
-          : harSvaratUtoverKommun
-            ? bas + TRATT.raknare.beskedTillagg
-            : bas + TRATT.raknare.kalltTillagg;
+        raknareTextEl.textContent = harSvaratUtoverKommun
+          ? bas + TRATT.raknare.beskedTillagg
+          : bas + TRATT.raknare.kalltTillagg;
       }
 
       // B3: "Sortera, aldrig filtrera" — sorteraForTratt (matching.ts)
