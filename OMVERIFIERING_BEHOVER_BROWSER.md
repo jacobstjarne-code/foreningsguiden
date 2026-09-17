@@ -89,19 +89,25 @@ automatiserad hämtning inte räckte.
    webbläsare mot boras.se:s egen sökfunktion (JS-renderad, kan inte curl:as) eller mot
    Smartbook-portalen (boras.actorsmartbook.se) kan hitta dem snabbare än fortsatt sökning.
 
-9. **Sundbyberg** — `sundbyberg-projektbidrag-toppstugan`
+9. **Sundbyberg** — `sundbyberg-projektbidrag-toppstugan` — DUBBELKONTROLLERAD 2026-09-17,
+   samma slutsats båda gångerna.
    URL: https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur
    Osäkert: om bidraget är borttaget, flyttat, eller bara inte omnämnt på just den här sidan.
    Varför: sidan nämner INTE "Toppstugan" alls (bekräftat via både curl och WebFetch,
-   två oberoende körningar). Övriga fyra bidrag på samma sida (projektbidrag under/över
-   30 000 kr, investeringar i lokaler, lovbidrag) bekräftades ord för ord. Websökning gav
-   en träff vars textutdrag matchar YAML:ens lagrade beskrivning nästan exakt (samma
-   "max 30 000 kr", "sex veckor före projektstart") men ingen ny, bekräftad live-URL —
-   kan vara Googles cache av en äldre sidversion. Sökningen visade också att staden
-   verkar migrera till kortare URL:er (t.ex. sundbyberg.se/kultur-fritid/... istället för
-   www.sundbyberg.se/uppleva-och-gora/...), vilket kan förklara varför innehållet flyttat
-   utan att jag hittat den nya sidan. Rör INTE `status`-fältet förrän en riktig webbläsare
-   bekräftat om bidraget fortfarande finns, någonstans på sundbyberg.se.
+   nu tre oberoende körningar totalt). Sidan är HELT omskriven sedan förra kontrollen —
+   "Senast uppdaterad: 17 september 2026" (dvs. samma dag som denna omverifiering) och
+   listar nu ett helt annat bidragsschema: Aktivitetsbidrag, Verksamhetsbidrag (med
+   Stöd till verksamhet + Stöd till lokal), Evenemangsbidrag, Utvecklingsbidrag,
+   Lovbidrag, Bidrag till studieförbund — inget av dem heter eller nämner Toppstugan.
+   Evenemangsbidragets regler ("under 30 000 kr: löpande, sex veckor före; 30 000 kr
+   eller mer: senast 1 oktober, beslut i december") matchar nästan ordagrant den gamla
+   Toppstugan-specifika texten (max 30 000 kr, sex veckor före projektstart) — starkt
+   tecken på att Toppstugan-bidraget har SLAGITS SAMMAN med det generella
+   Evenemangsbidraget/Utvecklingsbidraget i samband med dagens omskrivning, men jag kan
+   inte bekräfta det utan att hitta en sida som säger det explicit. toppstugansundbyberg.se
+   (den fristående bokningssidan för lokalen) nämner inga bidrag alls, bara bokningspriser.
+   Rör INTE `status`-fältet förrän en riktig webbläsare bekräftat om Toppstugan-bidraget
+   fortfarande finns separat, eller om det ska mappas om till sundbyberg-evenemangsbidrag.
 
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
