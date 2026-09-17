@@ -149,6 +149,18 @@ automatiserad hämtning inte räckte.
     mot Rbok (kräver inloggning eller ett öppet prisblad) kan bekräfta aktuella taxor. Rör
     INTE `belopp`-fältet förrän det är bekräftat.
 
+13. **Bjurholm** — `bjurholm-studieforbund`
+    URL: https://e-tjanster.bjurholm.se/
+    Osäkert: allt (belopp, krav, deadline 31 maj).
+    Varför: sidan är en ren e-tjänstportal (sök-/tjänstekatalog) utan statiskt
+    bidragsinnehåll — curl gav bara navigering, sökfilter och "mest använda
+    tjänster", ingen träff på "studieförbund". En websökning gav en sammanfattning
+    som nämnde "31 maj" men utan en citerbar källa — bedömdes för osäker att lita
+    på (kan vara en cirkulär återspegling av redan lagrad kontext snarare än ny
+    information). En riktig webbläsare som kan söka i portalens tjänstekatalog
+    eller logga in kan hitta rätt tjänstebeskrivning. Rör INTE fälten förrän det
+    är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
