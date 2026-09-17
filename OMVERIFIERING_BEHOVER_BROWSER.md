@@ -254,6 +254,78 @@ automatiserad hämtning inte räckte.
     detta bidrag förrän det är bekräftat — kan vara nedlagt, flyttat till ny URL, eller
     sammanslaget med Verksamhetsbidrag sociala insatser.
 
+20. **Örnsköldsvik** — hela gruppen om 25 bidrag på
+    `.../bidrag-till-ideella-foreningar/foreningsbidrag-som-gar-att-soka`, varav tre
+    fortfarande oåtgärdade (se nedan).
+    URL: https://www.ornskoldsvik.se/fritid-och-kultur/foreningsliv/bidrag-till-ideella-foreningar/foreningsbidrag-som-gar-att-soka
+    Osäkert: samtliga bidragsspecifika belopp, ansökningsdatum och detaljvillkor.
+    Varför: kommunen publicerar INGEN bidragsnorm öppet. Landningssidan ger bara en
+    menings ändamålsbeskrivning per bidrag, grupperad per föreningstyp, och hänvisar
+    genomgående till "Mer information om respektive bidrag samt ansökan hittar du i
+    Interbook GO" — ett inloggningsskyddat boknings- och bidragssystem
+    (ornskoldsvik.ibgo.se) som är en Vue-SPA utan publika bidragssidor (testade
+    `/Default/Bidrag` och `/bidrag`, båda 404).
+
+    Detta är INTE ett "hittade inte dokumentet"-fall utan ett verifierat negativt
+    fynd. Jag hämtade och packade upp kommunens fullständiga sitemap
+    (`sitemap1.xml.gz`, 991 KB, genererad 2026-09-17). Under
+    `bidrag-till-ideella-foreningar/` finns exakt FYRA sidor i hela webbplatsen —
+    landningssidan, `allmanna-bestammelser-for-bidrag-till-ideella-foreningar`,
+    `serviceatagande-foreningsbidrag` och `redovisa-lovaktiviteter`. Ingen
+    bidragsnorm-sida, och ingen bidragsnorm-PDF någonstans på ornskoldsvik.se
+    (sitemapens samtliga `/download/`-träffar på "riktlinj"/"norm" gäller helt andra
+    områden — oljeavskiljare, VA, trygghetsboende, affischering). Den gamla
+    SiteVision-trädstrukturen som hade en egen detaljsida per bidrag
+    (`/upplevaochgora/foreningarochforeningsstod/...`) är nedlagd och 404:ar.
+    Serviceåtagandet säger att sökanden ska "ta del av kommunens bidragsnormer" —
+    men det dokumentet ligger alltså bakom inloggningen i Interbook GO.
+
+    Vad som ÄR gjort utan browser (2026-09-17): 22 av de 25 posterna bumpades, för
+    att de inte gör några belopps- eller deadline-påståenden. Deras `deadlines` är
+    `okand`/`[]` och deras `belopp` säger uttryckligen "publiceras inte på kommunens
+    öppna bidragssida" — och just det påståendet gick att verifiera direkt mot den
+    levande sidan. Krav-listorna kontrollerades mot sidan "Allmänna bestämmelser"
+    (hämtad OK) plus respektive ändamålsmening. Fem sakfel rättades i samma pass,
+    se YAML-anteckningarna för `ornskoldsvik-politiska-ungdomsorganisationer`
+    (riksdagsalternativet saknades), `ornskoldsvik-utvecklingsbidrag`
+    (studieförbund felaktigt med, barn-/ungdom och socialt utsatta saknades),
+    `ornskoldsvik-verksamhetsbidrag-socialt-utsatta` ("samt studieförbund" ströks),
+    `ornskoldsvik-skolforeningar` och `ornskoldsvik-transportbidrag`.
+
+    EJ bumpade, kräver browser eller kontakt med föreningsbyrån —
+    `ornskoldsvik-medlemsbidrag-barn-unga`,
+    `ornskoldsvik-medlemsbidrag-funktionsratt`,
+    `ornskoldsvik-medlemsbidrag-pensionar`. Dessa tre bär påståenden som INTE går
+    att belägga från någon öppen sida — att beloppet "beslutas årligen av kultur-
+    och fritidsnämnden", och för barn-/ungdomsvarianten dessutom en beräkningsregel
+    ("antal aktiva medlemmar 6–25 år registrerade i föreningen vid kalenderårets
+    slut"). Källan säger ingenting om vare sig beslutsordning eller beräkningsgrund.
+    Rör INTE `belopp`, `krav` eller anteckningarna för dessa tre förrän någon läst
+    bidragsnormen i Interbook GO eller fått den av kommunen. Kontaktväg om browser
+    inte räcker: föreningsbyrån, kontaktcenter@ornskoldsvik.se, 0660–880 00.
+
+21. **Högsby** — `hogsby-vag-underhall-investering` (enbart deadline-fältet)
+    URL: https://hogsby.se/wp-content/uploads/riktlinjer-for-bidrag-till-enskilda-vagar-i-hogsby-kommun.pdf
+    Osäkert: om ansökningsperioden "1 mars–30 juni" som YAML:en anger i `sen_ansokan`
+    fortfarande gäller, och om posten över huvud taget har ett sista ansökningsdatum.
+    Varför: riktlinjen hämtades och lästes i sin helhet 2026-09-17 (version 2,
+    beslutad av kommunfullmäktige 2026-04-13, ersätter KU.2023.76). Belopp, krav och
+    utbetalningsordning för det särskilda underhålls- och investeringsbidraget
+    (paragraf 6 till 9) bekräftades ordagrant och posten är omverifierad i övrigt. Men
+    riktlinjen anger INGET sista ansökningsdatum för just den stödformen — utbetalning
+    styrs av när Trafikverkets godkända besiktningsprotokoll kommer in, och av
+    turordning om årsmedlen är slut. Den e-tjänst som nämns (paragraf 17) gäller
+    permanentboende längs privata utfartsvägar och är öppen året runt med treårig
+    giltighet, inte 1 mars till 30 juni. Kommunens sida för enskilda vägar
+    (hogsby.se/samhaellsservice-och-teknik/gator-och-utemiljoe/enskilda-vaegar/,
+    hämtad OK) handlar bara om överlämningen av väghållaransvaret och nämner ingen
+    ansökningsperiod. Kommunens egen sökfunktion är JS-renderad och gav bara
+    navigering via curl. `deadlines.datum` och `deadline_status` är därför ORÖRDA —
+    en riktig webbläsare mot e-tjänstportalen (hogsby.se, Mina sidor) kan bekräfta
+    eller stryka fönstret 1 mars–30 juni. Driftbidragsposten
+    (`hogsby-vag-driftbidrag-statsbidrag`) har däremot ett belagt sistadatum,
+    30 juni enligt paragraf 5, och är fullt omverifierad.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
