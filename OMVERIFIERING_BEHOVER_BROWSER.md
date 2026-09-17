@@ -109,6 +109,19 @@ automatiserad hämtning inte räckte.
    Rör INTE `status`-fältet förrän en riktig webbläsare bekräftat om Toppstugan-bidraget
    fortfarande finns separat, eller om det ska mappas om till sundbyberg-evenemangsbidrag.
 
+10. **Klippan** — `klippan-evenemangssponsring-2026`
+    URL: https://www.klippan.se/arkiv/nyheter/2026/2026-01-28-ar-du-arrangor-sok-evenemangssponsring-for-2026
+    Osäkert: om schemat fortsätter (t.ex. som "evenemangssponsring 2027"), bytt URL, eller
+    upphört helt.
+    Varför: nyhetsartikel-URL:en 404:ar ("Felsida", bekräftat via curl). De två andra
+    kandidatsidorna jag testade (klippan.se/naringsliv--arbete/aktuellt-for-naringslivet,
+    klippan.se/sok?query=evenemangssponsring) nämner inte sponsringen — sökfunktionen är
+    troligen JS-renderad och gav bara 404 via curl. Websökning gav bara ett kort
+    sammanfattat textutdrag om samma gamla schema (20 feb/15 maj 2026, redan passerade
+    deadlines från dagens datum 2026-09-17) utan en ny bekräftad URL. En riktig webbläsare
+    mot klippan.se:s egen sökfunktion eller nyhetsarkiv kan hitta om ett 2027-schema
+    publicerats. Rör INTE `status`-fältet förrän det är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
