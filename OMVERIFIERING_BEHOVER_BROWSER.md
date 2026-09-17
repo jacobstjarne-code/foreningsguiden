@@ -52,6 +52,40 @@ automatiserad hämtning inte räckte.
    Osäkert: om bidragen är borttagna, sammanslagna med annat, eller bara flyttade till ny URL.
    Varför: sidan "olika-typer-av-stod/verksamhetsstod.html" är borta. Hämtade nav-menyn från föräldrasidan (stod-och-bidrag-till-foreningar.html) via WebFetch — den listar INTE längre "verksamhetsstod" som undersida under "olika-typer-av-stod" (bara "sarskilt-stod-till-foreningar.html", som fortfarande finns och är bekräftad oförändrad denna omgång). Menyn har dock en fristående sida "Anordna lovaktiviteter" (/kultur-fritid--natur/foreningar/anordna-lovaktiviteter.html) som KAN vara lovbidragets nya hem, och en separat "Kultur- och idrottsstipendium"-sida som inte är samma sak som jubileumsbidrag. Websökning gav bara en sammanfattning ("lovbidrag... 200 kr per timme" nämnt i en sökträffssnippet, ej verifierat mot källan) — inte tillräckligt för att skriva om YAML. Rör INTE `status`-fältet till avskaffat förrän någon läst de nya kandidat-URL:erna i en riktig webbläsare.
 
+8. **Borås** — 15 bidrag, alla mot samma döda källa:
+   `boras-grundbidrag`, `boras-verksamhetsstod-barn-unga`, `boras-samlingslokaler`,
+   `boras-driftbidrag-egna-lokaler`, `boras-driftbidrag-anlaggningar`,
+   `boras-anlaggningsbidrag`, `boras-anlaggningslan`,
+   `boras-funktionshinder-verksamhetsstod`, `boras-namndens-forfogande`,
+   `boras-aktivering-inkludering`, `boras-orienteringskartor`,
+   `boras-ideburen-samverkan`, `boras-socialt-riktat-ungdom`,
+   `boras-idrottsskola`, `boras-saker-trygg-forening`
+   Gammal URL (404 nu, bekräftat via curl OCH WebFetch): https://www.boras.se/download/18.fe336931953ba317bbc3fd3/1741591400314/Bidragsformer%20f%C3%B6r%20Fritids-%20och%20folkh%C3%A4lson%C3%A4mnden_2025.pdf
+   Osäkert: allt — den samlade PDF-normen ("Bidragsformer för Fritids- och
+   folkhälsonämnden_2025") är borttagen. Staden har migrerat till separata
+   HTML-sidor per bidrag under mönstret
+   `/kommunochpolitik/bidragansokompengar/pengarforforeningar/<bidragsnamn>.4.7965cac6188477a181e7963f.html`.
+   Jag hittade och bekräftade två (`boras-startbidrag`, `boras-politiska-ungdomsorganisationer`)
+   via websökning + WebFetch och rättade kalla_url för dem — se commit.
+   Sidans navigering (hämtad från startbidrags-sidan) listar dessa syskonrubriker,
+   men mappningen mot de 15 kvarvarande bidrags-id:na ovan är INTE 1:1 klar:
+     - Aktiverings- och inkluderingsbidrag för föreningar → sannolikt `boras-aktivering-inkludering`
+     - Aktivitetsstöd för föreningar → matchar inget av dessa 15 (annat bidrag, redan verifierat tidigare)
+     - Arrangörsbidrag → matchar inget namn exakt bland de 15
+     - Bidrag för idrottsskola → sannolikt `boras-idrottsskola`
+     - Bidrag till lokaler och anläggningar → KAN täcka flera: samlingslokaler, driftbidrag-egna-lokaler, driftbidrag-anlaggningar, anlaggningsbidrag, anlaggningslan (en sida eller flera under-sidor?)
+     - Socialt riktat stöd för föreningar → sannolikt `boras-socialt-riktat-ungdom`
+     - Stöd för bidragsberättigade medlemmar → sannolikt `boras-grundbidrag`
+     - Stöd till sociala insatser för föreningar → redan verifierat tidigare (annat bidrag, `boras-sociala-insatser`)
+     - Verksamhetsstöd för föreningar → KAN täcka `boras-verksamhetsstod-barn-unga` och/eller `boras-funktionshinder-verksamhetsstod`
+   Osäkra/oidentifierade i navigeringen: `boras-namndens-forfogande`,
+   `boras-orienteringskartor`, `boras-ideburen-samverkan`, `boras-saker-trygg-forening`,
+   `boras-anlaggningslan` — ingen tydlig sidrubrik hittad för dessa, kan vara
+   nedlagda, sammanslagna med annat stöd, eller bara inte i navmenyn jag såg.
+   URL-mönstret är detsamma som ovan (`...pengarforforeningar/<namn>.4.7965cac6188477a181e7963f.html`)
+   så en snabb manuell genomgång av föreningssidan i en riktig webbläsare
+   bör kunna lösa alla 15 på en gång.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
