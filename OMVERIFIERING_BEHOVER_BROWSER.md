@@ -137,6 +137,18 @@ automatiserad hämtning inte räckte.
     bekräfta om stödet fortfarande existerar. Rör INTE `status`-fältet förrän det är
     bekräftat.
 
+12. **Svalöv** — `svalov-subventionerade-taxor-idrottsanlaggningar`
+    URL: https://www.svalov.se/uppleva--gora/foreningsservice
+    Osäkert: om de lagrade taxorna (nolltaxa 0-20 år, 100 kr/timme vuxna 20+, 50 kr/timme
+    65+/funktionsvariation) fortfarande stämmer.
+    Varför: sidan har byggts om — taxorna listas inte längre statiskt på sidan, utan
+    hänvisar nu till Rbok ("se priser, villkor och annan bokningsinformation" i
+    boknings­systemet). Sidan nämner också att föreningsstöd/bidrag hanteras i "nuvarande
+    system" fram till 31 december 2026, därefter i Rbok — en systemövergång pågår. Provade
+    även den länkade "Idrott & motion"-sidan utan träff på beloppen. En riktig webbläsare
+    mot Rbok (kräver inloggning eller ett öppet prisblad) kan bekräfta aktuella taxor. Rör
+    INTE `belopp`-fältet förrän det är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
