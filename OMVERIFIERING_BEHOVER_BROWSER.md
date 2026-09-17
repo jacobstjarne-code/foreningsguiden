@@ -161,6 +161,25 @@ automatiserad hämtning inte räckte.
     eller logga in kan hitta rätt tjänstebeskrivning. Rör INTE fälten förrän det
     är bekräftat.
 
+14. **Härjedalen** — `harjedalen-pensionars-och-funktionsrattsbidrag`
+    URL: https://www.herjedalen.se/download/18.786ce91e174afae6cb1694a/1601034881616/Protokoll%20Kf%202018-11-26.pdf
+    Osäkert: beloppet (nuvarande YAML: "25 kr per medlem" för både pensionärs- och
+    funktionsrättsorganisationer) samt om bidraget fortfarande existerar i denna form.
+    Varför: käll-PDF:en (ett KF-protokoll från 2018-11-26) ger 404. Kommunens sida
+    "Föreningsstöd" (styrdokument-och-regler/.../foreningsstod.html, hämtad OK) listar
+    uttryckligen "Stimulansbidrag till pensionärsföreningar" som ETT AV DE OMRÅDEN
+    styrdokumentet INTE omfattar — dvs bidraget styrs av ett separat dokument som inte
+    länkas från den sidan eller kommunens allmänna styrdokumentlista. En websökning gav
+    en tidningsartikel (Tidningen Härjedalen, ej kommunens egen källa, daterad omkring
+    april 2019) som anger ANDRA belopp: 20 kr/medlem + 7 % stimulansbidrag för
+    pensionärsorganisationer, 35 kr/medlem + 12 % för funktionsrättsorganisationer —
+    alltså separata och högre belopp än de 25 kr/medlem som står i YAML idag, och
+    uppdelat per organisationstyp istället för ett gemensamt belopp. Kan inte avgöra om
+    tidningsuppgiften, YAML-uppgiften, eller ingendera är aktuell utan att se det
+    faktiska styrdokumentet. En riktig webbläsare som kan söka i kommunens
+    diarium/protokollarkiv eller kontakta kommunen kan hitta det aktuella beslutet. Rör
+    INTE `belopp`-fältet förrän det är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
