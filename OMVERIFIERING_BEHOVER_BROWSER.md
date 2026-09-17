@@ -345,6 +345,63 @@ automatiserad hämtning inte räckte.
     anteckning om luckan. Rör INTE `deadlines.datum` för Breddpriset eller `belopp`
     för Barnkonventionspriset förrän e-tjänsten lästs i en riktig webbläsare.
 
+23. **Västervik** — `vastervik-sarskilt-lokalstod-idrott-fritid`,
+    `vastervik-skotselbidrag-egen-fritidsanlaggning`,
+    `vastervik-skotselbidrag-kommunal-fritidsanlaggning` och
+    `vastervik-studieorganisationer`
+    URL: https://vastervik.rbok.se/ansok
+    Osäkert: allt substantiellt i de fyra posterna — beloppsreglerna (schablonersättning
+    plus 20 procent av godkänd årlig driftkostnad för egen anläggning; ramen 900 000
+    kronor för 2026 med fördelningen 70 procent efter föregående års slutliga
+    kommunbidrag och 30 procent efter senast redovisad verksamhetsvolym för
+    studieorganisationerna), ansökningsdatumen (30 april respektive 28 februari) och
+    slutredovisningsdatumet 30 april.
+    Varför: alla fyra posterna har Rbok-portalen som `kalla_url`, och den är en
+    Blazor-WebAssembly-applikation. `curl -A "Mozilla/5.0"` mot
+    https://vastervik.rbok.se/ansok ger bara SPA-skalet (en tom sida med "Var god
+    vänta..."), och fem gissade API-vägar (`/api/bidrag`, `/api/ansokan/bidrag`,
+    `/Ansok/GetBidrag`, `/api/grants`, `/api/application/types`) returnerade samma
+    HTML-skal, inte JSON. Bidragstexterna renderas först efter att klienten startat.
+    Kommunens egen översiktssida (vastervik.se/Uppleva-och-gora/Foreningar-foreningsliv/
+    stod-bidrag-och-stipendier/, hämtad OK 2026-09-17) bekräftar att alla fyra stöden
+    finns och återger målgrupperna ordagrant — "Stödet utbetalas normalt till föreningar
+    som inte äger egen lokal och som inte kan hyra subventionerade kommunala lokaler"
+    respektive "Anläggningar som kan komma i fråga för ekonomiskt stöd är idrotts- och
+    fritidsanläggningar som ägs av kommunen eller av en förening" — men publicerar
+    varken belopp eller datum. Två fynd som sparar tid för den som tar över:
+    (a) riktlinjen för studieorganisationerna ligger på
+    https://www.vastervik.se/globalassets/forfattningssamlingen/foreningar/riktlinje-for-kommunalt-stod-till-studieorganisationer-verksamma-i-vasterviks-kommun.pdf
+    (hämtad och läst 2026-09-17, kommunstyrelsen 2023-11-28 § 357) — den bekräftar
+    målgruppen men innehåller INGA belopp och INGA datum, den hänvisar uttryckligen till
+    att "Rutiner för handläggning av stöd beslutas av kulturchef och kommuniceras via
+    Västerviks kommuns hemsida", så den duger inte som ersättande källa för de fälten.
+    (b) Översiktssidan listar en "Riktlinje för skötselbidrag för idrotts- och
+    fritidsanläggningar i Västerviks kommun" i dokumentlistan, men listan är ren text
+    utan länkar och elva gissade filnamn under `/globalassets/forfattningssamlingen/
+    foreningar/` gav alla HTTP 500. Den PDF:en är sannolikt nyckeln till de två
+    skötselbidragsposterna — den som har webbläsare bör leta upp den via
+    författningssamlingen. YAML:en för de fyra posterna är HELT ORÖRD, inklusive
+    `senast_verifierad`, som står kvar på 2026-08-18.
+
+24. **Varberg** — `varberg-byapengen` (enbart deadline-fältet)
+    URL: https://sjalvservice.varberg.se/oversikt/overview/65
+    Osäkert: om ansökningsdatumet 30 juni som YAML:en anger fortfarande gäller, och om
+    Byapengen över huvud taget har ett sistadatum.
+    Varför: posten är omverifierad i övrigt 2026-09-17 och beloppen är RÄTTADE — stödet
+    har höjts från 5 000/10 000/15 000 kronor till 10 000 kronor för upp till 150
+    medlemmar, 15 000 kronor för över 150 medlemmar och 20 000 kronor för Varbergs
+    Landsbygdsråd. Både e-tjänsten (hämtad OK med `curl -A "Mozilla/5.0"`) och kommunens
+    sida Stöd till landsbygdsutveckling (senast ändrad 2026-08-17) säger detta ordagrant.
+    Men INGEN av de två sidorna nämner något sista ansökningsdatum. De två bilagorna i
+    e-tjänsten går att ladda ner (`/oversikt/getflowform/3527/1127` respektive `/1128`);
+    ansökningsblanketten är läsbar och innehåller inget datum, och riktlinjen
+    "Information och riktlinje Byapeng" är satt som bild utan textlager — `pdftotext` i
+    alla tre lägen ger bara sidfoten, så innehållet går inte att läsa utan OCR eller
+    webbläsare. `deadlines` är därför ORÖRD. Kontaktväg om browser inte räcker —
+    landsbygdssamordnare Amanda Nord Axelsson, amanda.nord.axelsson@varberg.se,
+    076-237 49 44, eller Ulrika Rylin, ulrika.rylin@varberg.se, 0708-72 29 44, som är
+    kontakt för e-tjänsten.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
