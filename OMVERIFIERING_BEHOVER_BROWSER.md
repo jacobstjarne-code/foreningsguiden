@@ -86,6 +86,20 @@ automatiserad hämtning inte räckte.
    så en snabb manuell genomgång av föreningssidan i en riktig webbläsare
    bör kunna lösa alla 15 på en gång.
 
+9. **Sundbyberg** — `sundbyberg-projektbidrag-toppstugan`
+   URL: https://www.sundbyberg.se/uppleva-och-gora/konst-och-kultur-i-sundbybergs-stad/bidrag-stod-och-stipendier/bidrag-till-foreningar---idrott-friluftsliv-fritid-och-kultur
+   Osäkert: om bidraget är borttaget, flyttat, eller bara inte omnämnt på just den här sidan.
+   Varför: sidan nämner INTE "Toppstugan" alls (bekräftat via både curl och WebFetch,
+   två oberoende körningar). Övriga fyra bidrag på samma sida (projektbidrag under/över
+   30 000 kr, investeringar i lokaler, lovbidrag) bekräftades ord för ord. Websökning gav
+   en träff vars textutdrag matchar YAML:ens lagrade beskrivning nästan exakt (samma
+   "max 30 000 kr", "sex veckor före projektstart") men ingen ny, bekräftad live-URL —
+   kan vara Googles cache av en äldre sidversion. Sökningen visade också att staden
+   verkar migrera till kortare URL:er (t.ex. sundbyberg.se/kultur-fritid/... istället för
+   www.sundbyberg.se/uppleva-och-gora/...), vilket kan förklara varför innehållet flyttat
+   utan att jag hittat den nya sidan. Rör INTE `status`-fältet förrän en riktig webbläsare
+   bekräftat om bidraget fortfarande finns, någonstans på sundbyberg.se.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
