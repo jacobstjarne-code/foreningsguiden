@@ -209,6 +209,18 @@ automatiserad hämtning inte räckte.
     dokument jag inte hittat. En riktig webbläsare mot kommunens sök eller uthyrningssida kan
     reda ut det. Rör INTE `status`-fältet förrän det är bekräftat.
 
+17. **Hässleholm** — `hassleholm-strand-vattenvard`
+    URL: https://www.hassleholm.se/bygga-bo-och-miljo/naturvard/naturvardsprojekt/ovriga-naturvardsprojekt/foreningsbidrag-for-strand--och-vattenvardsatgarder
+    Osäkert: om deadline 12 maj fortfarande stämmer för 2026 samt om sidan flyttat.
+    Varför: URL:en ger 404. En websökning gav bara en död nyhetsartikel (2025-02-07,
+    också 404) med 2025 års specifika ansökningsperiod (deadline 31 mars 2025, inte samma
+    datum som YAML:s 12 maj — men det kan vara en annan årsomgång, inte en motsägelse).
+    Kommunens allmänna naturvårds-hubb och bidragshubb (båda hämtade OK) nämner inte detta
+    bidrag alls längre. Sakinnehållet (100 000 kr total pott, 80 %/25 000 kr per förening,
+    vassklippningsreglerna) kunde inte oberoende omverifieras. En riktig webbläsare mot
+    kommunens sök eller tekniska förvaltningens sidor kan hitta rätt sida. Rör INTE
+    `deadlines.datum` förrän det är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
