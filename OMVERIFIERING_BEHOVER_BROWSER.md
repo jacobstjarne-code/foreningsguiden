@@ -180,6 +180,35 @@ automatiserad hämtning inte räckte.
     diarium/protokollarkiv eller kontakta kommunen kan hitta det aktuella beslutet. Rör
     INTE `belopp`-fältet förrän det är bekräftat.
 
+15. **Vetlanda** — `vetlanda-landsbygdssatsningar`
+    URL: https://vetlanda.se/bygga-bo-och-miljo/planer-och-utveckling/landbygdsutveckling/landsbygdssatsningar
+    Osäkert: deadline-datumet (YAML: 09-02) samt om sidan flyttat.
+    Varför: URL:en (och dess förälder-sida `.../landbygdsutveckling`, och till och med en
+    daterad nyhetsartikel om samma satsning) ger alla 404 via curl (med och utan cookie-
+    handshake), WebFetch och en omprövning senare samma pass — vetlanda.se verkar ha gjort
+    en större URL-omstrukturering. En websökning gav en sammanfattning som bekräftar
+    500 000 kr/år (matchar YAML) men anger sista ansökningsdag "12 september" istället för
+    YAML:s 2 september — en genuin datumkonflikt jag inte kan lösa utan att se sidan själv,
+    eftersom sammanfattningen inte är en primärkälla. En riktig webbläsare mot
+    vetlanda.se:s nuvarande sitemap/sök kan hitta rätt sida och bekräfta datumet. Rör INTE
+    `deadlines.datum` förrän det är bekräftat.
+
+16. **Bräcke** — `bracke-subventionerade-kommunala-lokaler`
+    URL: https://www.bracke.se/download/18.27851b24193defb8cc0d9ad/1737627770788/Bilaga%20till%20Program%20f%C3%B6r%20bidrag%20till%20f%C3%B6reningslivet%20i%20Br%C3%A4cke%20kommun.pdf
+    Osäkert: om bidraget (50 % rabatt på kommunala lokaler/anläggningar, avgiftsfritt för
+    0–25 år och 65+) fortfarande gäller i denna form.
+    Varför: käll-PDF:en (en "Bilaga" till det gamla bidragsprogrammet) ger 404. Hittade och
+    läste igenom hela den NUVARANDE styrande huvudhandlingen ("Program för bidrag till
+    föreningslivet inom kultur och fritid", KF § 140/2024, 2024-12-11, hämtad OK via
+    kommunens föreningsliv-sida) — den nämner INTE denna rabatt-på-uthyrning-bidragsform
+    alls, bara ett annat, likvärdigt namngivet "Driftbidrag till samlingslokaler" (som gäller
+    FÖRENINGSÄGDA lokaler, inte kommunens egna som föreningar hyr — en annan sak). Provade
+    även en sökträff-URL för en nyare "Regler för uthyrning av kommunens idrottsanläggningar"
+    (2025-11-12), men den PDF-länken gav också 404. Kan inte avgöra om
+    rabatt-på-kommunala-lokaler-bidraget är nedlagt, ersatt, eller bara flyttat till ett
+    dokument jag inte hittat. En riktig webbläsare mot kommunens sök eller uthyrningssida kan
+    reda ut det. Rör INTE `status`-fältet förrän det är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
