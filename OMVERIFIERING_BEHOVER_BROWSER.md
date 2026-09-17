@@ -221,6 +221,19 @@ automatiserad hämtning inte räckte.
     kommunens sök eller tekniska förvaltningens sidor kan hitta rätt sida. Rör INTE
     `deadlines.datum` förrän det är bekräftat.
 
+18. **Gällivare** — `gallivare-socialnamnd-aktivitet-projekt-administration`, `gallivare-socialnamnd-hyresbidrag`
+    URL: https://gallivare.se/download/18.61e8f8fd19bac5bb2cf3aeba/1768392069960/F%C3%B6reningsbidrag%20ans%C3%B6kningsblankett%202026.pdf
+    Osäkert: om beloppen/kraven (80 % av hyra, högst 500 kr/medlem, högst 60 000 kr/år
+    för hyresbidraget) och 15 april-deadlinen fortfarande stämmer.
+    Varför: käll-PDF:en (en ansökningsblankett) ger 404. En websökning gav bara en död
+    nyhetsartikel om ett annat, liknande men inte identiskt namngivet bidrag
+    ("Aktivitetsstöd för 2025", deadline 14 april 2025, för funktionshinderorganisationer
+    och sociala föreningar) — osäkert om det är samma stödform eller en tredje. Kommunens
+    bidragshubb (`/uppleva-och-gora/foreningar-och-foreningsliv/bidrag-stod-och-stipendier`)
+    gav också 404 vid nytt försök. En riktig webbläsare mot kommunens sök eller
+    socialförvaltningens sidor kan reda ut vilken sida/blankett som gäller nu. Rör INTE
+    beloppen eller deadline förrän det är bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
