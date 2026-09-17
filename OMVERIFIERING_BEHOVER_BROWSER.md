@@ -122,6 +122,21 @@ automatiserad hämtning inte räckte.
     mot klippan.se:s egen sökfunktion eller nyhetsarkiv kan hitta om ett 2027-schema
     publicerats. Rör INTE `status`-fältet förrän det är bekräftat.
 
+11. **Trollhättan** — `trollhattan-brukardriven-fritidsgard`
+    URL: https://www.trollhattan.se/globalassets/dokument/uppleva-och-gora/ovrigt/riktlinjer---berakningsgrunder-for-foreningsbidrag-2017-02-06.pdf/
+    Osäkert: om bidraget fortfarande finns, bara flyttat till en ny PDF/sida, eller
+    upphört.
+    Varför: kalla_url (PDF) ger 404 (bekräftat via curl). Websökning gav en andra
+    kandidat-PDF (.../riktlinjer-berakningsgrunder-for-foreningsbidrag-i-dokumentmall-15.pdf)
+    som också 404:ar. Kommunens huvudsida för föreningsbidrag
+    (trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/)
+    nämner INTE "brukardriven fritidsgård" eller "fritidsgård" alls i sin text, och
+    innehåller inga PDF-länkar till bidragsriktlinjer. En riktig webbläsare mot
+    kommunens sökfunktion eller dokumentarkiv (t.ex. Kultur- och fritidsnämndens
+    budgethandlingar, som tidigare nämnde Velanda och Upphärad som mottagare) kan
+    bekräfta om stödet fortfarande existerar. Rör INTE `status`-fältet förrän det är
+    bekräftat.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
