@@ -234,6 +234,26 @@ automatiserad hämtning inte räckte.
     socialförvaltningens sidor kan reda ut vilken sida/blankett som gäller nu. Rör INTE
     beloppen eller deadline förrän det är bekräftat.
 
+19. **Täby** — `taby-verksamhetsbidrag-funktionshinderforening`
+    URL: https://www.taby.se/uppleva-och-gora/foreningsliv/stod-och-bidrag-till-foreningar
+    Osäkert: om bidraget (deadline vecka 2, avser föreningens verksamhet t.ex. en
+    arrangerad sammankomst, funktionshindersföreningar) fortfarande finns i denna form.
+    Varför: kalla_url gav 200 och hämtades både som WebFetch-stripad text och som rå HTML
+    (curl -A "Mozilla/5.0"), men sidans 13 bidragsrubriker (h2/h3, statisk HTML, inget
+    JS-accordion) innehåller INTE "Verksamhetsbidrag för funktionshinderförening" — bara
+    Lokalbidrag och Verksamhetsbidrag sociala insatser nämner "funktionshindersföreningar"
+    (båda med annan deadline, vecka 4). En websökning gav en träff på en ANNAN URL
+    (taby.se/fritid-och-kultur/foreningsliv/bidrag-stod-och-foreningsjubileer/, alltså en
+    omdöpt sökväg — "fritid-och-kultur" i stället för "uppleva-och-gora") vars snippet
+    beskriver exakt detta bidrag (vecka 2, "arranged gatherings" för funktionshinderföreningar)
+    — men den URL:en gav också 404 vid hämtning, så det går inte att avgöra om sök-snippeten
+    speglar en levande sida jag inte hittat rätt väg till, eller en cachad/borttagen sida.
+    Sidan har en "Senast uppdaterad: 2 september 2026"-stämpel, vilket talar för en
+    medveten omstrukturering snarare än ett tillfälligt fel. En riktig webbläsare mot
+    kommunens sök eller sitemap kan hitta rätt nuvarande sida/URL. Rör INTE fälten för
+    detta bidrag förrän det är bekräftat — kan vara nedlagt, flyttat till ny URL, eller
+    sammanslaget med Verksamhetsbidrag sociala insatser.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
