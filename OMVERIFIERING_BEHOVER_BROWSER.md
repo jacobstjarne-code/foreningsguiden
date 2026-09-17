@@ -326,6 +326,25 @@ automatiserad hämtning inte räckte.
     (`hogsby-vag-driftbidrag-statsbidrag`) har däremot ett belagt sistadatum,
     30 juni enligt paragraf 5, och är fullt omverifierad.
 
+22. **Partille** — `partille-breddpriset` (deadline-fältet) och `partille-barnkonventionspriset`
+    (belopp-fältet)
+    URL: https://www.partille.se/kommun--politik/priser-stipendier-stiftelser/
+    Osäkert: Breddprisets sista nomineringsdatum (YAML anger 11-01) och
+    Barnkonventionsprisets prisbelopp (YAML anger 10 000 kronor).
+    Varför: sidan hämtades komplett med `curl -A "Mozilla/5.0"` 2026-09-17 (stämplad
+    "Senast uppdaterad: 6 maj 2026") och resten av båda posterna bekräftades mot den —
+    men sidan anger inget datum alls för Breddpriset (nomineringar välkomnas inför en
+    prisutdelning, utan sistadatum), och datumet 1 november som står på samma sida
+    gäller idrotts- respektive kulturstipendiet, två andra stöd. På samma sätt anger
+    sidan prisbelopp för Breddpriset (10 000 kr), Hållbarhetspriset (10 000 kr) och
+    Hälsopriset (15 000 kr) men INGET belopp för Barnkonventionspriset. Båda fälten
+    kan vara korrekta från en tidigare version av sidan eller från e-tjänsten — det går
+    inte att avgöra utan att öppna kommunens e-tjänst för nominering
+    ("E-tjänst - Nominera en kandidat till Breddpriset", länkad men inte crawlad,
+    ligger på e-tjänsteportalen). Posterna är bumpade i övrigt och bär var sin
+    anteckning om luckan. Rör INTE `deadlines.datum` för Breddpriset eller `belopp`
+    för Barnkonventionspriset förrän e-tjänsten lästs i en riktig webbläsare.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
