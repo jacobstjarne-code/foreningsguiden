@@ -9,7 +9,11 @@
 
 import { Redis } from '@upstash/redis';
 
-const env = import.meta.env as unknown as Record<string, string>;
+// `?? process.env`-fallbacken (samma mönster som subscribers.ts, SPEC:
+// Omverifiering) — den här filen importeras transitivt av
+// scripts/omverifiering-ko.ts:s plain node-körning, där import.meta.env
+// inte fylls i. Aldrig triggad i Astro/Vite-kontext.
+const env = (import.meta.env ?? process.env) as unknown as Record<string, string>;
 const redis = new Redis({ url: env.KV_REST_API_URL, token: env.KV_REST_API_TOKEN });
 
 const VANTELISTA_INDEX_KEY = 'vantelista:index';

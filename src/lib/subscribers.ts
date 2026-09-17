@@ -12,8 +12,8 @@
  */
 
 import { Redis } from '@upstash/redis';
-import type { Foreningsprofil } from './foreningsprofil';
-import { removeVantelista } from './vantelista';
+import type { Foreningsprofil } from './foreningsprofil.ts';
+import { removeVantelista } from './vantelista.ts';
 
 // Redis.fromEnv() letar efter UPSTASH_REDIS_REST_URL/_TOKEN — Vercels
 // Marketplace-integration (vercel install upstash/upstash-kv) provisionerar
