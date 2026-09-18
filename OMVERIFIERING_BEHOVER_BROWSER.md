@@ -587,6 +587,82 @@ automatiserad hämtning inte räckte.
     deltagare, ledarledd, minst 60 minuter, högst två ledare från 13 år) går att
     bekräfta ord för ord i samma PDF.
 
+## Bidrag som saknas i datan (eget spår — inte browser-fall)
+
+Omverifieringen gräver fram bidrag som kommunen publicerar men som aldrig
+kommit in i våra YAML-filer. Det är en annan sorts fynd än posterna ovan:
+källan går att läsa, det är extraktionen som är ofullständig. Loggas här så
+att inget tappas bort mellan passen.
+
+**Åtgärdade — extraherade och committade:**
+
+- **Habo** (2026-09-18) — tre bidrag ur regeldokumentet av 8 september 2026:
+  `habo-jonkoping-evenemangsstod-litet` (högst 5 000 kr per tillfälle,
+  20 000 kr per arrangör och kalenderår, söks när som helst),
+  `habo-jonkoping-evenemangsstod-stort` (högst 50 procent, 10 000 kr per
+  tillfälle) och `habo-jonkoping-verksamhetsbidrag` (1 juli–30 september,
+  högst 50 000 kr).
+- **Nora** (2026-09-18) — `nora-ungt-initiativ`, kommunens stipendium för
+  ungdomar 13–25 år, högst 5 000 kr per ansökan, senast två veckor före
+  arrangemanget.
+- **Ljungby** (2026-09-18) — `ljungby-ung-arrangor`, för unga 16–30 år som
+  ordnar kulturarrangemang. Inget maxbelopp per ansökan; stödformens hela
+  pott är 50 000 kr. Senast fyra veckor före arrangemanget.
+
+**Kvarstående att extrahera:**
+
+Funna 2026-09-18 under svepet. Alla är läsbara med curl — det är extraktion
+som återstår, inte verifiering.
+
+- **Uppsala** — den största luckan. YAML täcker kategorinivån men saknar en rad
+  namngivna underbidrag som har egna sidor, belopp och ansökningstider:
+  aktivitets- och sammankomstbidrag för barn och unga 5–25 år (60 kr per
+  sammankomst plus poängmodell, 25 februari och 25 augusti); verksamhetsbidrag
+  barn och unga 5–25 år med medlemsbidrag (senast 25 februari, beslut 30 april)
+  samt systerbidragen kvalitetsbidrag och ledarutbildningsbidrag;
+  verksamhetsbidrag för äldre hos äldrenämnden (1–30 september 2026 för
+  verksamhetsår 2027); verksamhetsbidrag till nationella minoriteters
+  föreningar (senast 15 februari); stöd till elitidrotten med
+  jämställdhetsbidrag (löpande, lokalstöd 30 procent av hyran med tak
+  350 000 kr). Därutöver sidor vars detaljer ingen hunnit hämta:
+  utvecklingsbidrag gratis sommarläger, hållbarhetsbidrag, skollovsbidrag,
+  verksamhetsbidrag äldre 60+, stöd för föreningsdrivna anläggningar,
+  ateljébidrag samt projekt- och verksamhetsbidrag till det professionella
+  fria kulturlivet.
+- **Åmål** — fyra stöd länkade från kommunens bidragsportal:
+  folkhälsomedel (max 10 000 kr, ingen publicerad ansökningsperiod, söks via
+  Dalslands e-tjänster, kräver Trygg start-certifiering); arrangörsbidrag för
+  unga (upp till 5 000 kr, 13–26 år, löpande, svar inom 14 dagar — gränsfall,
+  behöver inte sökas av förening); kulturpris och kulturstipendium för unga
+  (öppen till 31 maj 2026); ledarstipendium (nomineras, delas ut av teknik-
+  och fritidsnämnden Säffle-Åmål).
+- **Ockelbo** — Visionsmedel, 500 tkr i utbildnings- och kulturförvaltningens
+  budget för projekt kopplade till Vision 2030, sökbara av föreningar. Nämnden
+  beslutade 4 juni att pausa alla utbetalningar under 2025 och 2026, och ingen
+  ansökningsperiod är publicerad. Läggs in med `status: pausad` om den ska in.
+
+**Angränsande observationer som inte är saknade bidrag:**
+
+- **Habo** — kommunens sidlista och regeldokumentet är osynkade åt båda håll.
+  Sidan nämner ett föreningsanslag som PDF:en inte längre beskriver
+  (`habo-jonkoping-foreningsanslag` står därför kvar som `aktiv` men har
+  tappat källa för deadline och krav), och PDF:en beskriver ett
+  verksamhetsbidrag som sidan inte nämner.
+- **Ljungby** — `ljungby-investeringsstod` heter `Investeringsbidrag` i
+  fältet `namn`, medan kommunen genomgående skriver **Investeringsstöd**
+  (både FRI-sidans rubrik och översiktssidan; postens eget id säger redan
+  `investeringsstod`). Ett namnbeslut någon bör ta ställning till.
+- **Södertälje** — väghållarsidan anger inte längre någon procentsats, medan
+  YAML har "30 procent av Trafikverkets godkända driftkostnad" med
+  `belopp_status: kontrollast`. Sidan motsäger inte uppgiften, den nämner den
+  bara inte. Bör bekräftas mot tekniska nämndens beslut.
+- **Gotland och Markaryd** — produktionsstöd, stipendier och priser som bara
+  kan sökas av enskilda professionella kulturskapare eller privatpersoner.
+  Utanför föreningsbidragsdefinitionen, ska inte in.
+- **Dorotea och Jokkmokk** — bygdemedel finns på kommunernas
+  föreningsstödssidor men söks hos Länsstyrelsen, inte hos kommunen. Ska inte
+  in som kommunposter.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
