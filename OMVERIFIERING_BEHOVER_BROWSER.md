@@ -489,6 +489,55 @@ automatiserad hämtning inte räckte.
     arbetsmarknads- och socialförvaltningens organisationsstöd,
     asf.organisationsstod@malmo.se.
 
+29. **Tibro** — `tibro-kulturaktivitet-och-evenemangsbidrag` (enbart deadline-fältet,
+    1 december)
+    URL: https://www.tibro.se/Kultur-fritid-och-idrott/forening/Bidrag/bidragfokulturaktivitetochevenemang/
+    Osäkert: den lagrade deadlinen 12-01 och formuleringen "senast 1 december för 2026"
+    i `sen_ansokan`. Allt annat i posten är bekräftat mot källan och uppdaterat.
+    Varför: källsidan svarar 200 och är fullt läsbar med curl, men publicerar ingen
+    sista ansökningsdag alls. Den enda tidsregel sidan ger är relativ — "Ansökan
+    inlämnas i verksamhetssystem senast två månader före -arrangemanget" — plus
+    redovisningskravet "senast en månad efter genomförandet samt inom pågående
+    kalenderår". Ordet december förekommer inte någonstans i sidans text. Ett fast
+    årsdatum för aktivitetsbidraget kan därför bara stå i Rbok, som är den kända
+    Blazor-WASM-SPA:n: `https://tibro.rbok.se/ansok` ger bara skalet till curl
+    ("Inget resultat...") och `/api/*` svarar 302 mot inloggning. Sidan är dessutom
+    oförändrad sedan förra verifieringen (stämpeln säger "Senast ändrad: 3 juni 2026",
+    lagrad verifiering 2026-08-19), så detta är ingen ändring hos kommunen utan en
+    lucka som fanns redan vid extraktionen. `deadlines` och `sen_ansokan` är därför
+    ORÖRDA; `senast_verifierad` är uppdaterad eftersom belopp (max 5 000 kr per
+    aktivitet och förening per år), krav, målgrupp och status alla kunde bekräftas mot
+    curl-utdraget. Övriga nio Tibro-poster är omverifierade mot sina källor och
+    oförändrade. Kontakt om webbläsare inte räcker — Kultur & Fritid, kfn@tibro.se,
+    0504-180 00; bidragsfrågor i Rbok går till rbok@tibro.se.
+
+30. **Gävle** — `gavle-studieorganisationer`
+    URL: https://www.gavle.se/kultur-och-fritid/foreningar-och-organisationer/studieorganisationer/
+    Osäkert: hela posten utom namn och status — särskilt fördelningsmodellen
+    "70 procent studiecirklar, 10 procent annan folkbildningsverksamhet och
+    20 procent kulturprogram" i `kommunens_pott`, de tre kraven och
+    `sen_ansokan` ("Kommunens publicerade information anger ingen sista
+    ansökningsdag").
+    Varför: sidan svarar 200 och är fullt läsbar med curl, men innehåller inte
+    längre någon bidragsinformation alls. Hela brödtexten är en katalog över
+    elva studieorganisationer (ABF, Folkuniversitetet, Ibn Rushd, Kulturens,
+    Medborgarskolan, NBV, Sensus, Studiefrämjandet, Bilda, Vuxenskolan, SISU)
+    plus en enda mening om stödet: "Vi ger stöd till studieorganisationer som
+    fyller en viktig funktion i folkbildningen." Ingen procentsats, inget krav,
+    ingen ansökningstid. Gävle.se:s egen sökfunktion (som fungerar via curl —
+    `?s=studieorganisationer` ger 2 träffar) hittar inga andra sidor:
+    "verksamhetsbidrag studieorganisationer" och "studieorganisationer bidrag"
+    ger 0 träffar, "folkbildning" ger bara samma sida plus fyra evenemang,
+    "kulturprogram" bara en nyhet. Sidan finns inte heller i sitemapens
+    föreningsstöds-gren och den listas inte på översiktssidan
+    `/sok-foreningsstod/`. Fördelningsmodellen ligger därför sannolikt bara i
+    ett beslut från kultur- och fritidsnämnden (protokoll/diariefört PDF), som
+    inte är sökbart via gavle.se:s sidsökning. YAML-posten är ORÖRD —
+    `senast_verifierad` står kvar på 2026-08-17. Nästa steg är en människa som
+    letar i nämndhandlingarna eller frågar kundtjänst, 026-17 80 00 /
+    gavle.kommun@gavle.se. Övriga åtta Gävle-poster i det här passet är
+    omverifierade mot sina källor.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
