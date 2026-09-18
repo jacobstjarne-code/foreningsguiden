@@ -650,6 +650,54 @@ automatiserad hämtning inte räckte.
     `orust-breddlagerstod` är däremot bumpad: den posten påstår inget om
     belopp eller frist, och e-tjänsten bekräftar att stödformen finns.
 
+37. **Svalöv** — `svalov-subventionerade-taxor-idrottsanlaggningar` (enbart beloppsfältet)
+    URL: https://www.svalov.se/uppleva--gora/foreningsservice
+    Osäkert: de lagrade kronbeloppen 100 kr per timme för vuxenverksamhet över
+    20 år och 50 kr per timme för 65+ och personer med funktionsvariation.
+    Varför: postens anteckning säger att uppgiften medvetet hämtats från
+    "den aktuella webbsidans taxor, uppdaterade 20 juli 2026" framför normens
+    procentsats. Den sidan bär inte längre några taxor — foreningsservice-sidan
+    innehåller varken tabell eller kronbelopp, och länkar ingen taxesida.
+    Bestämmelser för föreningsbidrag (reviderade 2025-08-25) säger i stället
+    att pensionärer och personer med funktionsvariation nyttjar anläggningarna
+    gratis vardagar mellan klockan 16 och 17 och betalar 50 procent av
+    ordinarie taxa övriga tider, och att 50 kronor per timme tas ut vid
+    bokning av dubbla anläggningar för samma aktivitet.
+    Fältet är INTE ändrat och posten är INTE bumpad: en tidigare verifiering
+    valde kronbeloppen med motivering, och att ersätta dem med procentsatsen
+    utan att se den taxesida som anteckningen bygger på vore att kasta bort
+    ett medvetet beslut. Deadline 31 maj och senregeln "i mån av plats" är
+    däremot bekräftade i bestämmelserna.
+
+38. **Åre, Kungälv, Trollhättan och Härjedalen** — `are-lokalbidrag`,
+    `are-elbidrag`, `kungalv-verksamhetsstod-kultur`, `kungalv-lok-stod`,
+    `trollhattan-brukardriven-fritidsgard`,
+    `harjedalen-pensionars-och-funktionsrattsbidrag`
+    Varför, per kommun:
+    - **Åre**: källan är bokningsportalen are.e-serve.se, som bara returnerar
+      ett anläggningsregister med upprepad platshållartext ("Beskriv
+      anläggningen under Administration"). Portalen är en inloggningsskyddad
+      e-tjänst; bidragsvillkoren ligger bakom den.
+    - **Kungälv**: riktlinjen för förenings- och studieförbundsstöd är en
+      PDF producerad med "Microsoft: Print To PDF" utan textlager —
+      `pdftotext` ger 13 tecken ur ett dokument på 3,4 MB. Kräver OCR eller
+      webbläsare. Kulturbidragssidan är dessutom en Angular-app som inte
+      renderar bidragsvillkoren för curl.
+    - **Trollhättan**: riktlinje-PDF:en (beräkningsgrunder för föreningsbidrag,
+      2017-02-06) ger 404 och jag hittade ingen ersättare.
+    - **Härjedalen**: källan är ett kommunfullmäktigeprotokoll från 2018-11-26
+      som ger 404. Protokoll från den tiden ligger inte kvar på webbplatsen.
+
+39. **Skurup** — `skurup-stod-kommunagda-lokaler` (hela posten)
+    URL: https://fri.skurup.se/bidrag/ansokaninfo.aspx?type=21&year=2026
+    Osäkert: samtliga villkor för stödet i kommunägda lokaler.
+    Varför: värdnamnet `fri.skurup.se` går inte längre att slå upp i DNS
+    ("Could not resolve host"), alltså inte en 404 utan en nedlagd server.
+    Kommunens egen bidragssida under skurup.se/uppleva-och-gora/foreningsliv/
+    ger också 404. Behöver en genomgång av var Skurup numera publicerar sina
+    föreningsbidrag — troligen har kommunen bytt bidragssystem, på samma sätt
+    som Nässjö gick från FRI till Interbook.
+
 ## Bidrag som saknas i datan (eget spår — inte browser-fall)
 
 Omverifieringen gräver fram bidrag som kommunen publicerar men som aldrig
