@@ -636,6 +636,20 @@ automatiserad hämtning inte räckte.
     föreskriften borta. Posterna är därför INTE bumpade. Fråga kultur- och
     fritidsförvaltningen om formerna avskaffats eller bara slutat publiceras.
 
+36. **Orust** — `orust-lovaktivitetsstod` (enbart deadline-fältet)
+    URL: https://sjalvservice.orust.se/oversikt/overview/82
+    Osäkert: de lagrade datumen 30 januari (anmälan om deltagande) och
+    1 april (ersättningsansökan) för sportlovet.
+    Varför: e-tjänsten listar Lovaktiviteter och Breddläger bland stödformerna
+    men kräver BankID för detaljerna. Kommunens årskalender för föreningsstöd
+    på orust.se räknar upp elva stödformer med datum — 1 november,
+    25 februari, 1 mars, 15 maj, 25 augusti och 1 oktober — men nämner varken
+    lovaktiviteter eller breddläger. Sidan Lov på Orust innehåller inget om
+    föreningsersättning, och sitemapen (6 867 poster) har ingen annan
+    kandidatsida. Datumen kommer sannolikt ur en enskild utlysning.
+    `orust-breddlagerstod` är däremot bumpad: den posten påstår inget om
+    belopp eller frist, och e-tjänsten bekräftar att stödformen finns.
+
 ## Bidrag som saknas i datan (eget spår — inte browser-fall)
 
 Omverifieringen gräver fram bidrag som kommunen publicerar men som aldrig
