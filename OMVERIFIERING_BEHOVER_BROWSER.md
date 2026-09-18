@@ -452,6 +452,43 @@ automatiserad hämtning inte räckte.
     verksamhet för barn och unga, dit `kalla_url` är flyttad efter att den sidan hämtats
     och lästs.
 
+27. **Ängelholm** — `angelholm-subventionerade-taxor`
+    URL: https://www.engelholm.se/uppleva-och-gora/bidrag-sponsring-och-priser/foreningsbidrag.html
+    Osäkert: om stödformen finns kvar, och i så fall var villkoren står.
+    Varför: källsidan svarar 200 och är läsbar, men listar inte längre subventionerade
+    taxor bland stödformerna. Sidan räknar upp lokalt aktivitetsstöd, lokalbidrag,
+    verksamhetsstöd, stöd till pensionärs- och funktionsnedsättningsföreningar, stöd till
+    särskilt viktig verksamhet, landsbygdspotten, projektstöd, inventariestöd och
+    skötselbidrag — men ingen taxepost, och orden "taxa", "taxor", "subvention" och
+    "nolltaxa" förekommer inte alls i sidans text. Posten beskriver ju inte heller en
+    kontant utbetalning utan lägre hyra enligt kommunens fastställda taxor, så villkoren
+    kan mycket väl ha flyttat till en taxe- eller bokningssida. Jag sökte på
+    boka-lokal-eller-anlaggning, idrott-motion-och-friluftsliv och foreningsliv utan att
+    hitta någon taxelänk. Övriga nio flaggade Ängelholm-bidrag kunde bekräftas mot sina
+    källor och är uppdaterade. Rör INTE fälten förrän det är avgjort om stödet finns kvar.
+
+28. **Malmö** — `malmo-socialt-bidrag` och `malmo-verksamhetsbidrag-socialt` (enbart
+    deadline-fältet, 15 december)
+    URL: https://malmo.se/For-foreningar/Bidrag-till-ideburna-organisationer-inom-det-sociala-omradet/Vilka-bidrag-kan-vi-ansoka.html
+    och https://malmo.se/For-foreningar/Bidrag-till-ideburna-organisationer-inom-det-sociala-omradet/Ansok-om-bidrag-inom-det-sociala-omradet.html
+    Osäkert: den lagrade deadlinen 12-15. Allt annat i båda posterna är bekräftat mot
+    källan och uppdaterat.
+    Varför: båda sidorna svarar 200 och är fullt läsbara med curl, men ingen av dem
+    publicerar något datum. Ansökningssidan säger bara "Ansökan för 2026 och är stängd"
+    respektive "Ansökan för 2026 och 2027 är stängd" och att bidragen "utlyses" —
+    ettåriga när de utlyses, tvååriga vartannat år. Kravsidan ger belopp (högst en
+    miljon kronor för båda bidragen), grundläggande krav och ansökningsvillkoren, men
+    inget datum. Det går alltså inte att avgöra om 15 december är rätt, är kvar från en
+    tidigare utlysning, eller aldrig varit ett publicerat datum för det här bidraget.
+    `deadlines` är därför ORÖRD i båda posterna; `sen_ansokan` (kommunens egen
+    formulering "Endast ansökningar som kommer in under ansökningsperioden handläggs"),
+    `anteckning` och `senast_verifierad` är uppdaterade, och för
+    `malmo-verksamhetsbidrag-socialt` är även `kalla_url` bytt — den pekade på
+    fritidsnämndens regelverk Föreningsstöd, som inte nämner bidraget med ett ord.
+    Nästa utlysning är det som avgör frågan. Kontakt om webbläsare inte räcker —
+    arbetsmarknads- och socialförvaltningens organisationsstöd,
+    asf.organisationsstod@malmo.se.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
