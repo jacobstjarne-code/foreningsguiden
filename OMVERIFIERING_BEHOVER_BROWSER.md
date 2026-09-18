@@ -538,6 +538,55 @@ automatiserad hämtning inte räckte.
     gavle.kommun@gavle.se. Övriga åtta Gävle-poster i det här passet är
     omverifierade mot sina källor.
 
+31. **Nässjö** — `nassjo-grundstod-pensionarer` (hela posten)
+    URL: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
+    Osäkert: allt — målgrupp ("representerad i KPR"), de tre kraven, belopp
+    ("beslutas utifrån medlemsunderlag och tillgängliga medel") och att bidraget
+    över huvud taget finns kvar som egen stödform.
+    Varför: kommunens bidragssida svarar 200 och är fullt läsbar med curl, men
+    den har SLIMMATS NER sedan förra verifieringen. Den innehåller inte längre
+    någon beskrivning av enskilda bidragsformer — bara en länk till Interbook,
+    en länk till de allmänna bestämmelserna (PDF) och en lista med fyra
+    fastställda ansökningsdatum (Administrationsbidrag 25 februari,
+    Aktivitetsbidrag 25 februari, Driftbidrag 25 februari, Investeringsbidrag
+    1 februari alternativt 1 september). Grundstöd till pensionärsföreningar
+    nämns inte alls. Sökt vidare utan träff: `friweb.nassjo.se/bidrag/` listar
+    bara tre bidrag för 2026 (Driftbidrag, Kommundelspeng, Offentlig
+    medfinansiering) och bär dessutom banderollen "Denna sida är inte längre
+    aktiv. Alla föreningsärenden hanteras i vårt nya verksamhetssystem
+    Interbook"; `sjalvservice.nassjo.se/oversikt` har ingen e-tjänst för
+    pensionärsföreningsbidrag; hela sitemapen (5 208 URL:er, via
+    `sitemap1.xml.gz`) innehåller ingen sida och ingen PDF om stöd till
+    pensionärsföreningar — KPR-sidan handlar bara om rådets sammansättning.
+    Detaljerna ligger därför i Interbook (`https://nassjo.interbookfri.se/#/`),
+    som är en JS-SPA — curl ger ett 2 kB skal, `/api/v1/grants` och
+    `/Templates/Grants` svarar 404. YAML-posten är ORÖRD, `senast_verifierad`
+    står kvar på 2026-08-03. Nästa steg är en webbläsarsession i Interbook eller
+    en fråga till Fritid- och föreningsservice, 0380-51 80 00 /
+    forening@nassjo.se. Notera också att postens `krav` redan före det här passet
+    bar två trasiga strängar från extraktionen ("Arrangöd inom Nässjö kommun",
+    "Arrangöra ska skapa mervärde") — de låg i `nassjo-arrangemangsbidrag`, som
+    nu är omskriven mot KulturBoost-riktlinjen; kontrollera att inga liknande
+    stympade strängar finns kvar när pensionärsposten kan läsas mot källa.
+
+32. **Nässjö** — `nassjo-administrationsbidrag` (enbart två krav-trösklar)
+    URL: https://nassjo.se/kultur-och-fritid/forening/foreningsbidrag.html
+    Osäkert: de två siffersatta kraven "minst 15 sammankomster under
+    verksamhetsåret" och "minst 15 medlemmar i åldern 7–25 år". Allt annat i
+    posten är bekräftat och `senast_verifierad` är uppdaterad.
+    Varför: deadlinen 25 februari står kvar ordagrant på kommunens bidragssida,
+    och de generella kraven (medlemsavgift minst 25 kronor, årlig uppdatering av
+    föreningsregistret, årshandlingar senast en månad efter årsmötet,
+    åldersspannet 7–25 år utan övre gräns vid funktionsnedsättning) är
+    verifierade mot "Allmänna bestämmelser och generella regler för Nässjö
+    kommuns bidrag till föreningslivet" (KF 2020-03-26 § 58). Men de två
+    15-trösklarna står varken i den PDF:en, på den nedbantade bidragssidan eller
+    i friweb — de är administrationsbidragets egen norm och den publiceras nu
+    bara i Interbook, som kräver webbläsare (se post 31). Samma lucka gäller
+    inte `nassjo-aktivitetsbidrag`, vars samtliga krav (sammankomst 3–20
+    deltagare, ledarledd, minst 60 minuter, högst två ledare från 13 år) går att
+    bekräfta ord för ord i samma PDF.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
