@@ -623,6 +623,28 @@ att inget tappas bort mellan passen.
 - **Ljungby** (2026-09-18) — `ljungby-ung-arrangor`, för unga 16–30 år som
   ordnar kulturarrangemang. Inget maxbelopp per ansökan; stödformens hela
   pott är 50 000 kr. Senast fyra veckor före arrangemanget.
+- **Uppsala** (2026-09-18) — den största luckan, nu stängd. 27 nya poster,
+  filen gick från 16 till 43 bidrag. Bland dem verksamhetsbidrag för etnisk
+  förening (8 000–39 500 kr), sammankomstbidrag barn och unga 5–25 år (60 kr
+  plus aktivitetspoäng), kvalitetsbidrag (3 000 kr), skollovsbidrag (600 kr per
+  dag och grupp, tak 50 000 kr per lov), driftbidrag till föreningsdrivna
+  anläggningar (60/45/30 procent med tak 700 000/525 000/350 000 kr efter
+  nyttjandegrad), investeringsbidrag (max 100 000 kr), jämställdhetsbidraget
+  till elitidrotten (30 procent av hyran, tak 350 000 kr) och bidrag för
+  bygdens utveckling (pott 300 000 kr).
+
+  Tre undersidor uteslöts: ateljébidraget söks av enskilda konstnärer med
+  individuellt ateljékontrakt, Uppskala är kostnadsfri rådgivning utan pengar,
+  och råd och stöd i anläggningsfrågor är en hänvisningssida till RF-SISU,
+  Boverket och Arvsfonden.
+
+  Kvar att titta på vid tillfälle: tre kategoriposter (skadeförebyggande
+  arbete, studieförbundsverksamhet, verksamhet för personer med
+  funktionsnedsättning) har var sin undersida med detaljer posten saknar,
+  bland annat ansökningsperioden 1–30 september för de två sistnämnda. Att
+  lägga till dem hade gett dubbletter — de behöver i stället omverifieras mot
+  sin undersida.
+
 - **Åmål** (2026-09-18) — tre av de fyra som loggades tidigare samma dag:
   `amal-folkhalsomedel` (högst 10 000 kr, kräver Trygg start-certifiering och
   publicering på Upptäck Åmål, ingen publicerad sista dag),
@@ -641,21 +663,6 @@ att inget tappas bort mellan passen.
 Funna 2026-09-18 under svepet. Alla är läsbara med curl — det är extraktion
 som återstår, inte verifiering.
 
-- **Uppsala** — den största luckan. YAML täcker kategorinivån men saknar en rad
-  namngivna underbidrag som har egna sidor, belopp och ansökningstider:
-  aktivitets- och sammankomstbidrag för barn och unga 5–25 år (60 kr per
-  sammankomst plus poängmodell, 25 februari och 25 augusti); verksamhetsbidrag
-  barn och unga 5–25 år med medlemsbidrag (senast 25 februari, beslut 30 april)
-  samt systerbidragen kvalitetsbidrag och ledarutbildningsbidrag;
-  verksamhetsbidrag för äldre hos äldrenämnden (1–30 september 2026 för
-  verksamhetsår 2027); verksamhetsbidrag till nationella minoriteters
-  föreningar (senast 15 februari); stöd till elitidrotten med
-  jämställdhetsbidrag (löpande, lokalstöd 30 procent av hyran med tak
-  350 000 kr). Därutöver sidor vars detaljer ingen hunnit hämta:
-  utvecklingsbidrag gratis sommarläger, hållbarhetsbidrag, skollovsbidrag,
-  verksamhetsbidrag äldre 60+, stöd för föreningsdrivna anläggningar,
-  ateljébidrag samt projekt- och verksamhetsbidrag till det professionella
-  fria kulturlivet.
 - **Ockelbo** — Visionsmedel, 500 tkr i utbildnings- och kulturförvaltningens
   budget för projekt kopplade till Vision 2030, sökbara av föreningar. Nämnden
   beslutade 4 juni att pausa alla utbetalningar under 2025 och 2026, och ingen
