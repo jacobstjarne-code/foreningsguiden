@@ -402,8 +402,67 @@ automatiserad hämtning inte räckte.
     076-237 49 44, eller Ulrika Rylin, ulrika.rylin@varberg.se, 0708-72 29 44, som är
     kontakt för e-tjänsten.
 
+25. **Hagfors** — `hagfors-lokalt-aktivitetsstod-65-plus` och `hagfors-pensionars-och-funktionshinderforeningar`
+    URL: de två posternas egna källor är döda —
+    `.../download/18.6b9461e619afcc95193804a0/1765956606857/Protokoll%20KF%20251215.pdf` (404)
+    respektive `.../download/18.45182d2c1916dfc80a15db55/1724676652764/Riktlinjer%20...%20pensionärsföreningar%20och%20...%20funktionshinder...pdf` (404).
+    Osäkert: om de två stödformerna finns kvar över huvud taget, samt deras belopp
+    (25 kr per sammankomst plus 25 kr för ansvarig ledare i 65+-stödet) och deadlines
+    (15 februari/15 augusti respektive 31 oktober).
+    Varför: hela hagfors.se är omstrukturerad. Den gamla sökvägen
+    `/undersidor/fritid-och-kultur/foreningsbidrag.html` ger 404 och innehållet ligger nu
+    på `/uppleva-och-gora/idrott-motion-och-friluftsliv/foreningsbidrag-och-stod`
+    (uppdaterad 18 augusti 2026). Den nya sidan har en komplett tabell över kommunens
+    bidrag — och där finns varken 65+-stödet eller pensionärs-/funktionshinderstödet med.
+    Övriga åtta Hagfors-bidrag kunde bekräftas mot den nya tabellen och är uppdaterade.
+    Att dessa två saknas kan betyda att de är avskaffade, att de flyttat till
+    socialförvaltningen (den gamla riktlinjen låg under "område pensionärsföreningar och
+    område funktionshinder"), eller bara att tabellen inte är heltäckande. Rör INTE
+    fälten förrän det är avgjort. Kontakt om webbläsare inte räcker — förenings- och
+    evenemangskoordinator Lennart Larsson, lennart.larsson@hagfors.se, 0563-187 27.
+
+26. **Lund** — `lund-publika-idrottsarrangemang` (hela posten)
+    URL: https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag/stod-till-idrott
+    Osäkert: om stödet finns kvar över huvud taget, och därmed alla fält — deadline
+    30 november, målgruppen, de tre kraven och belopps-/bedömningsformuleringen.
+    Varför: den lagrade `kalla_url` ger HTTP 404 utan redirect (kontrollerat med både GET
+    och HEAD, `curl -A "Mozilla/5.0"`, 2026-09-17), och sidan finns inte kvar någon
+    annanstans på lund.se. Tre oberoende kontroller pekar åt samma håll. (a) Översiktssidan
+    Förenings- och projektbidrag listar sju ingångar — Hållbarhetsstöd, Miljöanslag, Stöd
+    till folkbildande kulturverksamhet och ideella föreningar, Stöd till kultur, Stöd till
+    verksamhet för barn och unga, Unga leder unga, Värdegrund — och ingen av dem rör
+    idrottsarrangemang. (b) Stöd till kultur har fyra undersidor (närområdesstöd,
+    projektstöd för publika kulturarrangemang, utvecklingsstöd mini/midi/maxi,
+    verksamhetsstöd till kulturverksamhet), alla rent kulturella. (c) Kommunens egen
+    `sitemap1.xml.gz` (8 550 URL-er, lastmod 2026-09-17) ger noll träffar på
+    `stod-till-idrott` och noll på `idrottsarrangemang`. En webbsökning ger fortfarande den
+    gamla URL-en som träff, med innehåll som stämmer med YAML-posten (ansökan
+    januari–november, svar inom åtta veckor, samma fyra bedömningskriterier) — posten är
+    alltså korrekt mot en tidigare version av sidan, och frågan är om stödet avvecklats,
+    slagits ihop med kulturstödet eller flyttat till en yta jag inte hittar. Två spår för
+    den som tar över med webbläsare — leta i kultur- och fritidsnämndens protokoll efter
+    beslut om stödet, och logga in i Rbok (lund.rbok.se) och se om ansökningsformuläret
+    finns kvar bland sökbara stöd. Kontaktväg annars, föreningslotsen,
+    foreningslots@lund.se, 046-359 50 00 knappval 5. HELA YAML-posten är ORÖRD, inklusive
+    `senast_verifierad` som står kvar på 2026-08-17, och `kalla_url` är INTE omskriven
+    eftersom ingen ersättande sida gick att hämta och verifiera. Övriga tretton
+    Lund-poster är omverifierade 2026-09-17 och uppdaterade.
+    Sidonotering utan åtgärdskrav — `lund-lokalkompensationsstod` hade översiktssidan som
+    `kalla_url`, men den beskriver inte längre stödet; hela regelverket ligger på Stöd till
+    verksamhet för barn och unga, dit `kalla_url` är flyttad efter att den sidan hämtats
+    och lästs.
+
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
 - **WebFetch missar ofta innehåll `curl -A "Mozilla/5.0"` FÅR** (Botkyrka, Ludvika-testet visade blandat). Prova alltid curl som fallback innan en post skrivs som "kräver browser" — flera av raderna ovan kan visa sig vara curl-lösbara vid ett nytt försök, jag har inte hunnit dubbelkolla alla.
 - **Cloudflare-fronted PDF:er** (t.ex. sunne.se) svarar ofta 200 på `curl -A "Mozilla/5.0"` men troligen inte på scraperns egen user-agent — det förklarar en del av `otillganglig`-flaggorna i kön som inte alls är trasiga länkar.
 - **wps/portal-URL:er** (Göteborgs gamla WebSphere Portal) gav faktiskt läsbar text via WebFetch — inget systematiskt problem där.
+
+### Tillägg efter det stora svepet 2026-09-17 (ca 60 kommuner)
+
+- **`otillganglig`-flaggan är nästan alltid falsk.** Varenda URL som steg 1-cronen markerat som otillgänglig och som vi hunnit testa har svarat 200 på `curl -A "Mozilla/5.0"` — Skövde (tio källor), Kristinehamn, Nyköping, Partille, Västervik (nio riktlinje-PDF:er), Sunne, Södertälje, Hudiksvalls inloggningsskyddade e-tjänstsidor. Det är scraperns egen user-agent som blockeras, inte länkarna som är trasiga. **Börja alltid med curl innan du bokar in en browser-session.** Undantagen nedan är de enda äkta fallen vi sett.
+- **Äkta browser-fall hittills:** (a) Rbok-portalen (`*.rbok.se/ansok`) är en Blazor-WebAssembly-app som bara ger SPA-skalet till curl — Västervik; (b) PDF:er som är inskannade bilder utan textlager, där `pdftotext` bara ger sidfoten — Varbergs byapeng-riktlinje; (c) Interbook GO, som kräver inloggning — Örnsköldsvik.
+- **Döda länkar är vanligare än ändrat innehåll.** Mönstren, i fallande ordning: hela trädet flyttat (Varberg: `/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-stipendier/` → `/uppleva-och-gora/stod-bidrag-och-stipendier/`, sexton URL:er; Hagfors: `/undersidor/fritid-och-kultur/` → `/uppleva-och-gora/idrott-motion-och-friluftsliv/`), ett segment borttaget ur sökvägen (Oskarshamn tappade `/styrande-dokument/`), filnamnet omdöpt (Åmål, Högsby), stavfel i lagrad URL (Kalmar: `projekstod` utan t), och nyhetsartikel som källa som hunnit rensas (Lerum). **Leta alltid efter ersättaren innan du skriver en post som overifierbar** — i samtliga fall ovan fanns den, och den bekräftade innehållet.
+- **Åldersspann är den vanligaste sakliga felkällan, och den går åt båda hållen.** Högsby, Sävsjö och Oskarshamn hade lagrat 7–25 år där källan säger 6–25; Västervik hade tvärtom 6–25 lagrat där riktlinjen säger 7–25 (RF-gränsen). Hudiksvall hade slagit ihop två separata spår (7–25 och 0–6) till ett enda "0–25". Läs källans exakta ordalydelse, gissa inte riktning.
+- **Filformatet varierar mellan kommunfilerna.** I de flesta står `- id:` först i varje bidrag, men i bl.a. `nybro.yaml` och `hagfors.yaml` står `id:` sist i posten. Ett skript som läser "fälten efter id-raden" kopplar då fälten till fel bidrag — jag höll själv på att "rätta" korrekt Nybro-data av precis det skälet. Läs blocket mellan två `- namn:`-rader i stället.
+- **Två grindar, inte en.** Utöver `scripts/validera-data.ts` finns `scripts/verify-giltighet-regler.ts`, som kräver att kommunens `giltighet_regel.kalla_url` och motsvarande `forutsattningar`-post pekar på samma källa. Byter du den ena vid en URL-migrering måste du byta den andra, annars fäller pre-commit-hooken hela committen.
