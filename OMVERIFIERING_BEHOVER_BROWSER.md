@@ -602,6 +602,40 @@ automatiserad hämtning inte räckte.
     `torsas-foreningsbidrag-inom-socialnamndens-omrade` (1 februari–31 mars),
     gick att verifiera fullt ut och är omverifierade 2026-09-18.
 
+34. **Heby** — `heby-socialt-foreningsstod` (hela posten)
+    URL: https://www.heby.se/arkiv/nyheter/2025/2025-10-27-dags-att-soka-foreningsstod-fran-vard--och-omsorgsnamnden
+    Osäkert: sista ansökningsdag 15 december och villkoren för vård- och
+    omsorgsnämndens föreningsstöd.
+    Varför: nyhetssidan som var postens enda källa är borttagen (404), och
+    kommunen har ingen ersättande sida. Sidan Föreningsstöd och annat stöd
+    beskriver bara kultur- och fritidsstöden, som från 2026 kräver att
+    föreningen först ansökt om att bli bidragsberättigad. Ansökningsblanketten
+    finns kvar i sitemapen (ansokan-om-foreningsstod-for-forening-som-bedriver-socialt-arbete.docx,
+    uppladdad 2025-10-27) och jag packade upp och läste den — den innehåller
+    inget datum och inga villkor, bara formulärfält. Posten är därför INTE
+    bumpad. Kontaktväg: Erica Andersta, utvecklingsstrateg vid
+    vård- och omsorgsförvaltningen, erica.andersta@heby.se.
+    Hebys två övriga flaggade poster, `heby-subventionerad-hallhyra` och
+    `heby-nattvandringsbidrag`, gick att verifiera och är omverifierade.
+
+35. **Lomma** — `lomma-startbidrag`, `lomma-lokalstod-till-pensionarsforeningar`
+    och `lomma-kommunalt-aktivitetsstod-kulturforeningar` (hela posterna)
+    URL: https://lomma.se/download/18.36b5b5ba17e21f6b7e8e6b2/1641302459764/L%2004%20Regler%20f%C3%B6r%20st%C3%B6d%20till%20f%C3%B6reningar%20i%20Lomma%20kommun.pdf
+    respektive https://eservice.lomma.se/Form.ashx?id=36
+    Osäkert: om de tre stödformerna alls finns kvar, och i så fall med vilka
+    belopp och datum.
+    Varför: kommunens föreskrift L 04, som var källa för startbidraget
+    (högst 5 000 kr) och lokalstödet till pensionärsföreningar (1 december),
+    ger nu 404, och e-tjänsten för kulturföreningarnas aktivitetsstöd likaså.
+    Sitemapen (1 169 poster) innehåller ingen ersättande PDF och ingen
+    styrdokumentsida. Kommunens bidragssida listar sex stöd — kulturplaketten,
+    kulturstipendium, ledarstipendier, sociala bidrag, verksamhetsstöd till
+    föreningar och verksamhetsstöd till studieförbund — och ingen av dem
+    motsvarar de tre posterna. Posternas anteckningar noterade redan före
+    detta pass att stödformerna saknade egen post i bidragsmenyn; nu är även
+    föreskriften borta. Posterna är därför INTE bumpade. Fråga kultur- och
+    fritidsförvaltningen om formerna avskaffats eller bara slutat publiceras.
+
 ## Bidrag som saknas i datan (eget spår — inte browser-fall)
 
 Omverifieringen gräver fram bidrag som kommunen publicerar men som aldrig
