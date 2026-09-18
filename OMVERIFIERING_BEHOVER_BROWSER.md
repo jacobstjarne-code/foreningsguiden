@@ -587,6 +587,21 @@ automatiserad hämtning inte räckte.
     deltagare, ledarledd, minst 60 minuter, högst två ledare från 13 år) går att
     bekräfta ord för ord i samma PDF.
 
+33. **Torsås** — `torsas-foreningsbidrag` (enbart beloppsfältet)
+    URL: https://www.torsas.se/kultur-och-fritid/forenings-och-investeringsbidrag/
+    Osäkert: grundbidragets nivåer, lagrade som 1 500 kr för 5–10 aktiva i åldern
+    5–25 år, 4 000 kr för fler än 10 aktiva samt 225 kr i tillägg.
+    Varför: kommunen publicerar ingen bidragsnorm öppet. Bidragssidan anger bara
+    att föreningen ska ha "barn- och ungdomsverksamhet med visst antal aktiva
+    deltagare" och att sista ansökningsdag är sista vardagen i januari — det
+    senare är verifierat, beloppen är det inte. De fyra ansökningsblanketterna är
+    tomma formulär utan villkor, kommunens styrdokumentsida länkar inget
+    bidragsreglemente, och e-tjänsten (minasidor.torsas.se/foreningsbidrag)
+    kräver inloggning. Posten är därför INTE bumpad.
+    Kommunens två andra bidrag, `torsas-kulturbidrag` (1 mars) och
+    `torsas-foreningsbidrag-inom-socialnamndens-omrade` (1 februari–31 mars),
+    gick att verifiera fullt ut och är omverifierade 2026-09-18.
+
 ## Bidrag som saknas i datan (eget spår — inte browser-fall)
 
 Omverifieringen gräver fram bidrag som kommunen publicerar men som aldrig
@@ -608,6 +623,18 @@ att inget tappas bort mellan passen.
 - **Ljungby** (2026-09-18) — `ljungby-ung-arrangor`, för unga 16–30 år som
   ordnar kulturarrangemang. Inget maxbelopp per ansökan; stödformens hela
   pott är 50 000 kr. Senast fyra veckor före arrangemanget.
+- **Åmål** (2026-09-18) — tre av de fyra som loggades tidigare samma dag:
+  `amal-folkhalsomedel` (högst 10 000 kr, kräver Trygg start-certifiering och
+  publicering på Upptäck Åmål, ingen publicerad sista dag),
+  `amal-ledarstipendium` (föreningen nominerar sin ledare, senast 31 oktober,
+  belopp publiceras inte) och `amal-kulturpris` (belopp publiceras inte,
+  ansökan öppnar 1 mars 2027).
+
+  De två återstående uteslöts som individbidrag, inte föreningsstöd:
+  arrangörsbidrag för unga söks av "enskilda personer eller i grupp" 13–26 år
+  och nämner inte föreningar; kulturstipendium för unga "kan sökas för egen
+  räkning" av personer 16–25 år. Kulturpriset togs däremot med eftersom
+  pristagarlistan visar att föreningar återkommande fått det.
 
 **Kvarstående att extrahera:**
 
@@ -629,17 +656,18 @@ som återstår, inte verifiering.
   verksamhetsbidrag äldre 60+, stöd för föreningsdrivna anläggningar,
   ateljébidrag samt projekt- och verksamhetsbidrag till det professionella
   fria kulturlivet.
-- **Åmål** — fyra stöd länkade från kommunens bidragsportal:
-  folkhälsomedel (max 10 000 kr, ingen publicerad ansökningsperiod, söks via
-  Dalslands e-tjänster, kräver Trygg start-certifiering); arrangörsbidrag för
-  unga (upp till 5 000 kr, 13–26 år, löpande, svar inom 14 dagar — gränsfall,
-  behöver inte sökas av förening); kulturpris och kulturstipendium för unga
-  (öppen till 31 maj 2026); ledarstipendium (nomineras, delas ut av teknik-
-  och fritidsnämnden Säffle-Åmål).
 - **Ockelbo** — Visionsmedel, 500 tkr i utbildnings- och kulturförvaltningens
   budget för projekt kopplade till Vision 2030, sökbara av föreningar. Nämnden
   beslutade 4 juni att pausa alla utbetalningar under 2025 och 2026, och ingen
   ansökningsperiod är publicerad. Läggs in med `status: pausad` om den ska in.
+- **Tranemo** — två bidragsformer står i kommunens gällande regeldokument
+  (KS/2020:314) men finns varken i datan eller på kommunens bidragssida:
+  kulturarrangörsbidrag (normalt tak 10 000 kr, löpande, senast en månad före
+  arrangemanget, inga retroaktiva bidrag) och "Snabba pengar" för aktiviteter
+  av unga för unga (max 5 000 kr, sökande 12–20 år boende i kommunen, löpande
+  dock senast 1 december). Att de saknas på bidragssidan men står kvar i
+  regeldokumentet gör statusen oklar — kontrollera med kommunen innan de
+  läggs in.
 
 **Angränsande observationer som inte är saknade bidrag:**
 
@@ -662,6 +690,12 @@ som återstår, inte verifiering.
 - **Dorotea och Jokkmokk** — bygdemedel finns på kommunernas
   föreningsstödssidor men söks hos Länsstyrelsen, inte hos kommunen. Ska inte
   in som kommunposter.
+
+## Källor med känt utgångsdatum
+
+- **Tranemo** — regeldokumentet KS/2020:314 är märkt "Giltigt tom 2026-10-17".
+  Sju av kommunens elva bidrag har just den PDF-adressen som källa, så ett nytt
+  regelverk inom en månad slår igenom brett. Bevaka.
 
 ## Mönster värt att känna till (för Codex, inte en åtgärdspunkt)
 
