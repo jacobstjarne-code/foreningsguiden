@@ -42,7 +42,11 @@ den ordning `OMVERIFIERING_STEG3_LISTA.json` ger (prio 1 först).
    `deadlines.typ: okand` och datumet i anteckningen, samma lösning som 18 sep.
 4. **Sätt `senast_verifierad` till dagens datum bara på bidrag du faktiskt
    läst källan för.** Statusfälten (`*_status`) får `kontrollast` bara efter
-   läsning, aldrig mekaniskt.
+   läsning, aldrig mekaniskt. Kan ett värde inte beläggas i källan men inte
+   heller motsägs (PDF:en saknar uppgiften, sidan ger 404): sätt det fältets
+   status till `olast`. Värdet står kvar och visas utan anspråk. Saknar
+   bidraget `senast_verifierad` och filen bara har kommunens `verifierad`:
+   lägg till `senast_verifierad` på bidraget.
 5. **`anteckning` är kassörens text, inte en revisionslogg.** Den renderas
    publikt på bidragssidan. Skriv bara det hon behöver för att söka: villkor,
    utbetalning, undantag. Aldrig "Rättat <datum>", "omverifiering",
