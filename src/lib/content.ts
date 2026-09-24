@@ -318,6 +318,14 @@ export const BEVAKNING = {
     'Vi mejlar fyra veckor och tre dagar innan sista ansökningsdag för de bidrag du väljer att bevaka. Inget annat.',
   epostLabel: 'Din e-postadress',
   epostPlaceholder: 'namn@forening.se',
+  // AG1 (Jacob 2026-08-27): mejladress + föreningsnamn är nyckeln — inget
+  // kontosystem (se profilFalt.ts/aktivitetsmall.ts:s filhuvud för
+  // beslutet). Raden gör den avvägningen begriplig för den som fyller i
+  // formuläret: en personlig adress fungerar, men en föreningsadress
+  // överlever ett kassörsbyte på ett sätt en personlig inte gör. Ordagrant
+  // Jacobs text, samma rad vid bevakning och köp — se utkast/[bidragId]/
+  // index.astro.
+  foreningsadressHint: 'Använd gärna föreningens adress — då finns uppgifterna kvar när styrelsen byts.',
   // C1 (ARBETSORDER 2026-08-11, Jacob): föreningsminnet utan konto — vet vi
   // vilken förening som bevakar kan framtida mejl/sidor tilltala föreningen
   // vid namn i stället för bara adressen. Frivilligt (inget required-attribut
@@ -984,6 +992,11 @@ export const KOPRUTA = {
   leverans: 'Ni får dokumentet som Word och PDF direkt efter betalning. Det ligger kvar hos er så länge ni vill ha det.',
   prisOchKvitto: '{pris} kr inklusive moms. Kvitto med organisationsnummer och momsspecifikation mejlas — det går att bokföra.',
   aterbetalning: 'Blev det inte användbart: mejla inom 30 dagar så betalar vi tillbaka. Ingen förklaring behövs.',
+  // AG1 (Jacob 2026-08-27), ordagrant — samma rad som BEVAKNING.
+  // foreningsadressHint. Adressen fylls i på Stripes egen kassasida
+  // (inget lokalt e-postfält på den här sidan), så raden står sist,
+  // strax innan besökaren lämnar för kassan.
+  foreningsadressHint: 'Använd gärna föreningens adress — då finns uppgifterna kvar när styrelsen byts.',
 };
 
 /**
@@ -1384,4 +1397,41 @@ export const IDROTT_INGANGEN = {
   lockedRubrik: 'Öppnas när kommunen är vald',
   lockedPunkt1: 'Kommunens egna bidrag för er ort',
   lockedPunkt2: 'Förkravet: godkänd som bidragsberättigad förening',
+};
+
+/**
+ * INMATNING — AH1 (Jacobs order): profilen som progressiv inmatning på
+ * bidragssidan. Grundat i incoming/DESIGN_RUNDA_22_ny2.html (mocken) och
+ * Jacobs tre rättelser mot den (R1–R3, se girigOrdning.ts/raknare.ts).
+ *
+ * FRÅGETEXTERNA (BidragInmatning.astro:s fragaText()) ÄR INTE HÄR — de
+ * är MEKANISKT härledda ur profilFalt.ts:s FALT_KATALOG.namn (redan
+ * Jacob-godkänd text ur AE1), inte omskrivna till talspråk som mockens
+ * exempel ("För ni närvarokort på era aktiviteter?"). Det senare är ny
+ * svensk prosa — 68 meningar — som inte skrivs här utan Jacobs/Opus
+ * text. Se AH1-rapporten.
+ */
+export const INMATNING = {
+  rubrikVerksamhet: 'Om er verksamhet',
+  rubrikVerksamhetTag: 'Gäller: alla lag',
+  rubrikForening: 'Om föreningen',
+  // R1 (Jacobs rättelse — INTE "kan skickas", ett bidrag kan aldrig
+  // skickas enbart ur lagret eftersom D2-krav kvarstår per definition).
+  forberedda: '{forberedda} av {totalt} är förberedda i {kommun}',
+  forbereddaDelta: '+{n} sedan ni började svara',
+  // R2 — kommun-scopad räckvidd, aldrig nationell i den löpande raden.
+  reach: 'Sparat. Räcker för {rackvidd} av {totalt} bidrag i {kommun}.',
+  // AH1.5 — återkomsten.
+  aterkomstDelvis: 'Ni har redan svarat på {n} av {m} frågor det här bidraget ställer.',
+  aterkomstKlar: 'Det här bidraget är förberett.',
+  // AH1.6 — tolv-viker-undan.
+  vikta: '{n} krav är redan besvarade · visa',
+  // AH1.7 — hårdkodat undantag, sparas aldrig (medlemskrav.ts).
+  medlemsantalLabel: 'Medlemsantal för det här bidraget (frågas alltid, sparas aldrig)',
+  // AH1.8 — betalrutan, ordagrant ur mocken (22d/F6). Pris platshållare.
+  payRubrik: 'Håll ert lager levande',
+  payBeskrivning: 'Era svar återanvänds i {n} bidrag i hela Sverige — lagret följer med om ni söker nytt eller byter kommun. Ju mer ni svarar, desto fler fylls i åt er.',
+  payKnapp: 'Fortsätt —',
+  payPrisPlatshallare: 'pris/år · §8A',
+  payFine: 'Ni betalar aldrig för ett tomt lager. Avsluta när ni vill.',
 };

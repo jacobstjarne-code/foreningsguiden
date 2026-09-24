@@ -108,6 +108,7 @@ const antalBidrag = kommun.bidrag.length;
            (KommunSidaFull.astro) — ingen annan yta påverkas. */}
         <button type="submit" class="fg-btn--ghost">{BEVAKA_KOMMUN.knapp}</button>
       </div>
+      <p class="bevaka-ruta__adress-hint">{BEVAKNING.foreningsadressHint}</p>
       <label class="bevaka-ruta__foreningsnamn-label" for={`bevaka-ruta-foreningsnamn-${kommun.kommun_slug}`}>{BEVAKNING.foreningsnamnLabel}</label>
       <input type="text" id={`bevaka-ruta-foreningsnamn-${kommun.kommun_slug}`} name="foreningsnamn" autocomplete="organization" />
       <label class="bevaka-ruta__samtycke">
@@ -354,6 +355,12 @@ const antalBidrag = kommun.bidrag.length;
     font-family: var(--fg-font-sans);
     font-size: var(--fg-text-body-lg);
     color: var(--fg-ink);
+  }
+
+  .bevaka-ruta__adress-hint {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin: var(--fg-space-2) 0;
   }
 
   .bevaka-ruta__foreningsnamn-label {

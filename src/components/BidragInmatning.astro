@@ -1,0 +1,615 @@
+---
+/**
+ * BidragInmatning.astro — AH1.3 (Jacobs order): bidragssidan som
+ * inmatningsyta. Renderas bara för aktivitetsbidrag (arAktivitetsbidrag)
+ * — profillagret (AF1) är scopat dit, andra bidragstyper har inget att
+ * fråga om här.
+ *
+ * Server-sidan renderar bara ett tomt skal (all data — besvarade fält,
+ * kommunens bidragslista — finns bara i localStorage/ett runtime-fetch,
+ * se profilLagerLokalt.ts:s filhuvud för varför). Klientskriptet gör
+ * ALL rendering, en render(state)-funktion som bygger om innerHTML vid
+ * varje svar — inte finkornade data-hakar, den statemaskinen (girig
+ * ordning i två steg, vikning, återkomst, betalruta) har för många
+ * samtidiga grenar för att patcha DOM-punkt för DOM-punkt utan att bli
+ * skörare än en enda renderfunktion.
+ */
+import type { Bidrag, Kommun } from '../lib/kommuner';
+
+interface Props {
+  bidrag: Bidrag;
+  kommun: Kommun;
+}
+const { bidrag, kommun } = Astro.props;
+---
+
+<div
+  class="inmatning"
+  data-inmatning
+  data-bidrag-id={bidrag.id}
+  data-bidrag-namn={bidrag.namn}
+  data-kommun-slug={kommun.kommun_slug}
+  data-kommun-namn={kommun.kommun}
+  hidden
+>
+  <div data-inmatning-rot></div>
+</div>
+
+<script>
+  import type { Bidrag } from '../lib/kommuner.ts';
+  import { hamtaFaltdefinition, type FaltDefinition } from '../lib/profilFalt.ts';
+  import { byggSvar, svarssortForDatatyp } from '../lib/profilSvar.ts';
+  import {
+    analyseraKravrader,
+    bidragArForberett,
+    nastaFraga,
+    type KravRadMedFalt,
+    type NastaFragaResultat,
+  } from '../lib/girigOrdning.ts';
+  import { antalForberedda, rackviddForFalt, byggBidragstackning, byggBidragMedKravRader, type BidragMedKravRader } from '../lib/raknare.ts';
+  import { arAktivitetsbidrag } from '../lib/aktivitetsbidragHeuristik.ts';
+  import { kravUttryckerMedlemsantal } from '../lib/medlemskrav.ts';
+  import { hamtaLokaltLager, sparaLokaltSvar, besvaradeFaltId, registreraOppnatBidrag } from '../lib/profilLagerLokalt.ts';
+  import { INMATNING } from '../lib/content.ts';
+
+  const rot = document.querySelector<HTMLElement>('[data-inmatning]');
+  const inre = rot?.querySelector<HTMLElement>('[data-inmatning-rot]');
+  if (!rot || !inre) {
+    // Ingen inmatningsyta på den här sidan (fel bidragstyp) — inget att göra.
+  } else {
+    const bidragId = rot.dataset.bidragId ?? '';
+    const bidragNamn = rot.dataset.bidragNamn ?? '';
+    const kommunSlug = rot.dataset.kommunSlug ?? '';
+    const kommunNamn = rot.dataset.kommunNamn ?? '';
+
+    init(rot, inre, bidragId, bidragNamn, kommunSlug, kommunNamn);
+  }
+
+  function esc(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /** Mekaniskt härledd fråga ur FALT_KATALOG.namn (redan Jacob-godkänd AE1-text) — INTE omskriven till talspråk. Se content.ts:s INMATNING-filhuvud. */
+  function fragaText(falt: FaltDefinition): string {
+    if (falt.datatyp === 'ja/nej') return `${falt.namn}?`;
+    if (falt.datatyp === 'tal') return `${falt.namn} — hur många?`;
+    return `${falt.namn}?`;
+  }
+
+  /**
+   * AH1.3: "ja/nej eller värde" — datatypen avgör vilket. 'fil' (dokument)
+   * hör inte hemma i den här frågeformen alls (AF2:s dokumentverifiering.ts
+   * är en egen, starkare grind) — d1Falt()/A/B-fälten som förekommer här är
+   * ja/nej, tal, text eller datum, aldrig fil.
+   */
+  function askCardHtml(falt: FaltDefinition): string {
+    const fraga = `<p class="inmatning__ask-q">${esc(fragaText(falt))}</p>`;
+    if (falt.datatyp === 'ja/nej') {
+      return `<div class="inmatning__ask">
+                ${fraga}
+                <div class="inmatning__ask-btns">
+                  <button type="button" data-svara="${esc(falt.id)}" data-svara-varde="true">Ja</button>
+                  <button type="button" data-svara="${esc(falt.id)}" data-svara-varde="false">Nej</button>
+                </div>
+              </div>`;
+    }
+    const inputTyp = falt.datatyp === 'tal' ? 'number' : falt.datatyp === 'datum' ? 'date' : 'text';
+    return `<div class="inmatning__ask">
+              ${fraga}
+              <div class="inmatning__ask-varde">
+                <input type="${inputTyp}" data-svara-varde-input="${esc(falt.id)}" ${falt.datatyp === 'tal' ? 'min="0" inputmode="numeric"' : ''} />
+                <button type="button" data-svara-varde-knapp="${esc(falt.id)}">Spara</button>
+              </div>
+            </div>`;
+  }
+
+  interface EngineState {
+    kommunBidrag: BidragMedKravRader[];
+    oppnaRader: KravRadMedFalt[];
+    ovrigaRader: KravRadMedFalt[];
+    bidragstackning: Map<string, number>;
+    besvarade: Set<string>;
+    besvaradeVidStart: number; // R1-talet ("förberedda") vid sidladdning, för deltaraden
+    medlemskravFlaggad: boolean;
+    oppnaBidragCount: number;
+    senastBesvaratFaltId: string | null;
+  }
+
+  async function init(
+    rot: HTMLElement,
+    inre: HTMLElement,
+    bidragId: string,
+    bidragNamn: string,
+    kommunSlug: string,
+    kommunNamn: string
+  ) {
+    const kommunResp = await fetch(`/kommun-data/${kommunSlug}.json`);
+    if (!kommunResp.ok) return;
+    const kommunData = (await kommunResp.json()) as { bidrag: { id: string; namn: string; krav: string[] }[] };
+    const aktivitetsbidrag = kommunData.bidrag.filter((b) => arAktivitetsbidrag(b.namn, b.id));
+    if (!aktivitetsbidrag.some((b) => b.id === bidragId)) return; // inte ett aktivitetsbidrag — inget att göra här
+
+    const kommunBidrag = byggBidragMedKravRader(aktivitetsbidrag);
+    const oppna = kommunBidrag.find((b) => b.id === bidragId);
+    if (!oppna || oppna.kravRader.every((r) => r.faltIds.length === 0)) return; // inget matchbart fält i det här bidraget
+
+    const oppnaRader = oppna.kravRader;
+    const ovrigaRader = kommunBidrag.filter((b) => b.id !== bidragId).flatMap((b) => b.kravRader);
+    const bidragstackning = byggBidragstackning(kommunBidrag);
+    const bidragRaData = kommunData.bidrag.find((b) => b.id === bidragId);
+    const medlemskravFlaggad = (bidragRaData?.krav ?? []).some((rad) => kravUttryckerMedlemsantal(rad));
+    const oppnaBidragCount = registreraOppnatBidrag(bidragId);
+
+    const besvarade = besvaradeFaltId();
+    const state: EngineState = {
+      kommunBidrag,
+      oppnaRader,
+      ovrigaRader,
+      bidragstackning,
+      besvarade,
+      besvaradeVidStart: antalForberedda(kommunBidrag, besvarade).forberedda,
+      medlemskravFlaggad,
+      oppnaBidragCount,
+      senastBesvaratFaltId: null,
+    };
+
+    rot.hidden = false;
+    render(inre, state, kommunNamn);
+
+    inre.addEventListener('click', async (ev) => {
+      const knapp = (ev.target as HTMLElement).closest<HTMLElement>('[data-svara]');
+      if (knapp) {
+        const faltId = knapp.dataset.svara!;
+        const varde = knapp.dataset.svaraVarde === 'true';
+        sparaBooleanSvar(faltId, varde);
+        state.besvarade = besvaradeFaltId();
+        state.senastBesvaratFaltId = faltId;
+        render(inre, state, kommunNamn);
+        return;
+      }
+      const sparaVarde = (ev.target as HTMLElement).closest<HTMLElement>('[data-svara-varde-knapp]');
+      if (sparaVarde) {
+        const faltId = sparaVarde.dataset.svaraVardeKnapp!;
+        const input = inre.querySelector<HTMLInputElement>(`[data-svara-varde-input="${faltId}"]`);
+        const raVarde = input?.value.trim() ?? '';
+        if (!raVarde) return; // tomt fält sparas aldrig — AF1.4:s "aldrig ett resultat på ett tomt värde" gäller redan insamlingen
+        sparaVardeSvar(faltId, raVarde);
+        state.besvarade = besvaradeFaltId();
+        state.senastBesvaratFaltId = faltId;
+        render(inre, state, kommunNamn);
+        return;
+      }
+      const vikta = (ev.target as HTMLElement).closest<HTMLElement>('[data-inmatning-vikta-knapp]');
+      if (vikta) {
+        inre.querySelectorAll<HTMLElement>('[data-inmatning-veckta-rader]').forEach((el) => (el.hidden = !el.hidden));
+        vikta.setAttribute('aria-expanded', String(vikta.getAttribute('aria-expanded') !== 'true'));
+        return;
+      }
+    });
+  }
+
+  function sparaBooleanSvar(faltId: string, varde: boolean) {
+    const falt = hamtaFaltdefinition(faltId);
+    if (!falt || svarssortForDatatyp(falt.datatyp) !== 'intygande') return;
+    sparaLokaltSvar(byggSvar(faltId, { sort: 'intygande', varde }));
+  }
+
+  /** tal/text/datum-fält (AH1.3: "ja/nej eller värde") — 'fil'-fält (dokument) byggs inte här, se dokumentverifiering.ts (AF2). */
+  function sparaVardeSvar(faltId: string, raVarde: string) {
+    const falt = hamtaFaltdefinition(faltId);
+    if (!falt) return;
+    const sort = svarssortForDatatyp(falt.datatyp);
+    if (sort !== 'faktum') return;
+    const varde = falt.datatyp === 'tal' ? Number(raVarde) : raVarde;
+    if (falt.datatyp === 'tal' && !Number.isFinite(varde)) return;
+    sparaLokaltSvar(byggSvar(faltId, { sort: 'faktum', varde, kalla: 'angiven' }));
+  }
+
+  function render(inre: HTMLElement, s: EngineState, kommunNamn: string) {
+    const forb = antalForberedda(s.kommunBidrag, s.besvarade);
+    const delta = forb.forberedda - s.besvaradeVidStart;
+
+    const forberedHtml = `
+      <div class="inmatning__forb">
+        <div class="inmatning__forb-c inmatning__forb-c--acc">
+          <div class="inmatning__forb-num">${forb.forberedda}</div>
+          <div class="inmatning__forb-lab">${esc(
+            INMATNING.forberedda.replace('{forberedda}', String(forb.forberedda)).replace('{totalt}', String(forb.totalt)).replace('{kommun}', kommunNamn)
+          )}</div>
+        </div>
+        ${
+          delta > 0
+            ? `<div class="inmatning__forb-c"><div class="inmatning__forb-num">+${delta}</div><div class="inmatning__forb-lab">${esc(INMATNING.forbereddaDelta.replace('{n}', String(delta)))}</div></div>`
+            : ''
+        }
+      </div>`;
+
+    const totaltFaltIOppna = new Set(s.oppnaRader.flatMap((r) => r.faltIds));
+    const besvaradeIOppna = [...totaltFaltIOppna].filter((f) => s.besvarade.has(f));
+    const oppnaFörberedd = bidragArForberett(s.oppnaRader, s.besvarade);
+
+    const aterkomstHtml =
+      totaltFaltIOppna.size === 0
+        ? ''
+        : oppnaFörberedd
+          ? `<div class="inmatning__aterkomst inmatning__aterkomst--klar">${esc(INMATNING.aterkomstKlar)}</div>`
+          : besvaradeIOppna.length > 0
+            ? `<div class="inmatning__aterkomst">${esc(
+                INMATNING.aterkomstDelvis.replace('{n}', String(besvaradeIOppna.length)).replace('{m}', String(totaltFaltIOppna.size))
+              )}</div>`
+            : '';
+
+    const fraga: NastaFragaResultat | null = nastaFraga(s.oppnaRader, s.ovrigaRader, s.besvarade, s.bidragstackning);
+
+    // Markörrader — en per DISTINKT fält det öppna bidraget kräver, grupperat på klass (AH1.4).
+    const faltRader = [...totaltFaltIOppna]
+      .map((id) => hamtaFaltdefinition(id))
+      .filter((f): f is FaltDefinition => f !== null);
+    const d1Falt = faltRader.filter((f) => f.klass === 'D1');
+    const abFalt = faltRader.filter((f) => f.klass !== 'D1');
+
+    const antalBesvaradeTotalt = besvaradeIOppna.length;
+    const viktaAllaBesvarade = antalBesvaradeTotalt > 3; // AH1.6
+
+    function markorrad(falt: FaltDefinition, aktivFaltId: string | null): string {
+      const besvarat = s.besvarade.has(falt.id);
+      if (besvarat && viktaAllaBesvarade) return ''; // faller in i den vikta raden i stället
+      const dot = besvarat ? 'fg-read-mark' : 'fg-void-mark';
+      const askHtml = !besvarat && falt.id === aktivFaltId ? askCardHtml(falt) : '';
+      // 'fil'-fält frågas aldrig här (girigOrdning.ts utesluter dem ur
+      // kandidatpoolen) — en ärlig notis i stället för en rad som bara
+      // aldrig blir aktiv utan förklaring.
+      const dokumentNotis = !besvarat && falt.datatyp === 'fil' ? ' <span class="inmatning__row-dok">(dokument — kommer senare)</span>' : '';
+      return `<div class="inmatning__row"><span class="${dot}" aria-hidden="true"></span><span class="inmatning__row-t${besvarat ? '' : ' inmatning__row-t--void'}">${esc(falt.namn)}${dokumentNotis}</span></div>${askHtml}`;
+    }
+
+    const aktivtFaltSteg1 = fraga?.steg === 1 ? fraga.faltId : null;
+    const d1Html = d1Falt.map((f) => markorrad(f, aktivtFaltSteg1)).join('');
+    const abHtml = abFalt.map((f) => markorrad(f, aktivtFaltSteg1)).join('');
+
+    const viktaHtml =
+      antalBesvaradeTotalt > 0 && viktaAllaBesvarade
+        ? `<button type="button" class="inmatning__vikta" data-inmatning-vikta-knapp aria-expanded="false">${esc(INMATNING.vikta.replace('{n}', String(antalBesvaradeTotalt)))}</button>
+           <div data-inmatning-veckta-rader hidden>${faltRader.filter((f) => s.besvarade.has(f.id)).map((f) => `<div class="inmatning__row"><span class="fg-read-mark" aria-hidden="true"></span><span class="inmatning__row-t">${esc(f.namn)}</span></div>`).join('')}</div>`
+        : '';
+
+    const sektionVerksamhet =
+      d1Falt.length === 0
+        ? ''
+        : `<div class="inmatning__sektion">
+             <div class="inmatning__rubrik">${esc(INMATNING.rubrikVerksamhet)} <span class="inmatning__tag">${esc(INMATNING.rubrikVerksamhetTag)}</span></div>
+             <div class="inmatning__req">${d1Html}</div>
+           </div>`;
+
+    const sektionForening =
+      abFalt.length === 0
+        ? ''
+        : `<div class="inmatning__sektion">
+             <div class="inmatning__rubrik">${esc(INMATNING.rubrikForening)}</div>
+             <div class="inmatning__req">${abHtml}</div>
+           </div>`;
+
+    const medlemsantalHtml = s.medlemskravFlaggad
+      ? `<div class="inmatning__medlemsantal">
+           <label>${esc(INMATNING.medlemsantalLabel)}</label>
+           <input type="number" min="0" inputmode="numeric" />
+         </div>`
+      : '';
+
+    // R2 — räckviddsraden, kommun-scopad, visas för det senast besvarade fältet.
+    const reachHtml = s.senastBesvaratFaltId
+      ? (() => {
+          const rackvidd = rackviddForFalt(s.senastBesvaratFaltId!, s.kommunBidrag);
+          return `<div class="inmatning__reach">${esc(INMATNING.reach.replace('{rackvidd}', String(rackvidd)).replace('{totalt}', String(s.kommunBidrag.length)).replace('{kommun}', kommunNamn))}</div>`;
+        })()
+      : '';
+
+    // Steg 2 — girigt över övriga bidrag i kommunen, egen rubrik, ALDRIG blandat med steg 1 (R3).
+    const steg2Html =
+      fraga?.steg === 2
+        ? (() => {
+            const falt = hamtaFaltdefinition(fraga.faltId);
+            if (!falt) return '';
+            return `<div class="inmatning__sektion inmatning__sektion--steg2">
+                       <div class="inmatning__rubrik">För kommande bidrag</div>
+                       ${askCardHtml(falt)}
+                     </div>`;
+          })()
+        : '';
+
+    // AH1.8 — betalrutan, andra öppnade bidraget och framåt, aldrig det första.
+    const payHtml = s.oppnaBidragCount >= 2 ? renderPay(s) : '';
+
+    inre.innerHTML = `${forberedHtml}${aterkomstHtml}${sektionVerksamhet}${sektionForening}${viktaHtml}${medlemsantalHtml}${reachHtml}${steg2Html}${payHtml}`;
+
+    if (payHtml) hamtaNationellRackvidd(inre, s.besvarade);
+  }
+
+  function renderPay(_s: EngineState): string {
+    return `<div class="inmatning__pay">
+      <div class="inmatning__pay-h">${esc(INMATNING.payRubrik)}</div>
+      <p class="inmatning__pay-b" data-inmatning-pay-text>${esc(INMATNING.payBeskrivning.replace('{n}', '…'))}</p>
+      <button type="button">${esc(INMATNING.payKnapp)} <span class="inmatning__pay-pris">${esc(INMATNING.payPrisPlatshallare)}</span></button>
+      <p class="inmatning__pay-fine">${esc(INMATNING.payFine)}</p>
+    </div>`;
+  }
+
+  async function hamtaNationellRackvidd(inre: HTMLElement, besvarade: Set<string>) {
+    const el = inre.querySelector<HTMLElement>('[data-inmatning-pay-text]');
+    if (!el || besvarade.size === 0) return;
+    try {
+      const resp = await fetch(`/api/nationell-rackvidd.json?falt=${[...besvarade].join(',')}`);
+      if (!resp.ok) return;
+      const data = (await resp.json()) as { antal: number };
+      el.textContent = INMATNING.payBeskrivning.replace('{n}', String(data.antal));
+    } catch {
+      // Nätverksfel — texten står kvar med sin platshållare, inget kritiskt.
+    }
+  }
+</script>
+
+<style>
+  .inmatning {
+    margin-top: var(--fg-space-6);
+    padding-top: var(--fg-space-6);
+    border-top: 2px solid var(--fg-border);
+  }
+
+  .inmatning__forb {
+    display: flex;
+    gap: var(--fg-space-3);
+    margin-bottom: var(--fg-space-4);
+  }
+
+  .inmatning__forb-c {
+    flex: 1;
+    background: var(--fg-surface);
+    border: 2px solid var(--fg-ink);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3);
+  }
+
+  .inmatning__forb-c--acc {
+    background: var(--fg-accent-soft, var(--fg-surface-sunken));
+    border-color: var(--fg-accent);
+  }
+
+  .inmatning__forb-num {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-h2);
+    line-height: 1;
+  }
+
+  .inmatning__forb-c--acc .inmatning__forb-num {
+    color: var(--fg-accent);
+  }
+
+  .inmatning__forb-lab {
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-top: 4px;
+  }
+
+  .inmatning__aterkomst {
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3) var(--fg-space-4);
+    margin-bottom: var(--fg-space-4);
+    font-size: var(--fg-text-body);
+  }
+
+  .inmatning__aterkomst--klar {
+    border: 2px solid var(--fg-accent);
+    color: var(--fg-accent);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .inmatning__sektion {
+    margin-bottom: var(--fg-space-5);
+  }
+
+  .inmatning__rubrik {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-2);
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    letter-spacing: var(--fg-tracking-label);
+    text-transform: uppercase;
+    color: var(--fg-ink-muted);
+    margin-bottom: var(--fg-space-2);
+  }
+
+  .inmatning__tag {
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-label);
+    font-weight: var(--fg-weight-bold);
+    color: var(--fg-accent);
+    background: var(--fg-accent-soft, var(--fg-surface-sunken));
+    padding: 1px 8px;
+    border-radius: 99px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .inmatning__req {
+    border: 2px solid var(--fg-border);
+    border-radius: var(--fg-radius-control);
+    overflow: hidden;
+  }
+
+  .inmatning__row {
+    display: flex;
+    align-items: center;
+    gap: var(--fg-space-3);
+    padding: var(--fg-space-2) var(--fg-space-3);
+    border-bottom: 1px solid var(--fg-border);
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+  }
+
+  .inmatning__row:last-child {
+    border-bottom: none;
+  }
+
+  .inmatning__row-t--void {
+    color: var(--fg-void-ink);
+    font-weight: 400;
+  }
+
+  .inmatning__row-dok {
+    font-weight: 400;
+    font-size: var(--fg-text-label);
+  }
+
+  .inmatning__ask {
+    background: var(--fg-accent-soft, var(--fg-surface-sunken));
+    border: 2px solid var(--fg-accent);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3);
+    margin: var(--fg-space-2) 0;
+  }
+
+  .inmatning__ask-q {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-body-lg);
+    margin: 0 0 var(--fg-space-3);
+  }
+
+  .inmatning__ask-btns {
+    display: flex;
+    gap: var(--fg-space-2);
+  }
+
+  .inmatning__ask-btns button {
+    flex: 1;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    border-radius: var(--fg-radius-control);
+    padding: 11px 0;
+    cursor: pointer;
+    border: 2px solid var(--fg-ink);
+    background: var(--fg-surface);
+  }
+
+  .inmatning__ask-btns button[data-svara-varde='true'] {
+    background: var(--fg-accent);
+    color: #fff;
+    border-color: var(--fg-accent);
+  }
+
+  .inmatning__ask-varde {
+    display: flex;
+    gap: var(--fg-space-2);
+  }
+
+  .inmatning__ask-varde input {
+    flex: 1;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    border: 2px solid var(--fg-ink);
+    border-radius: var(--fg-radius-control);
+    padding: 10px 12px;
+    background: var(--fg-surface);
+  }
+
+  .inmatning__ask-varde button {
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    background: var(--fg-accent);
+    color: #fff;
+    border: 2px solid var(--fg-accent);
+    border-radius: var(--fg-radius-control);
+    padding: 0 var(--fg-space-4);
+    cursor: pointer;
+  }
+
+  .inmatning__vikta {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: var(--fg-space-2);
+    background: var(--fg-surface-sunken);
+    border: none;
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3);
+    font-size: var(--fg-text-body);
+    color: var(--fg-ink-muted);
+    cursor: pointer;
+    margin-bottom: var(--fg-space-4);
+    text-align: left;
+  }
+
+  .inmatning__medlemsantal {
+    margin-bottom: var(--fg-space-4);
+  }
+
+  .inmatning__medlemsantal label {
+    display: block;
+    font-size: var(--fg-text-label);
+    color: var(--fg-ink-muted);
+    margin-bottom: var(--fg-space-2);
+  }
+
+  .inmatning__reach {
+    background: var(--fg-surface-sunken);
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-3);
+    margin-bottom: var(--fg-space-4);
+    font-size: var(--fg-text-body);
+  }
+
+  .inmatning__pay {
+    background: var(--fg-ink);
+    color: #fff;
+    border-radius: var(--fg-radius-control);
+    padding: var(--fg-space-4);
+    margin-top: var(--fg-space-5);
+  }
+
+  .inmatning__pay-h {
+    font-family: var(--fg-font-display);
+    font-weight: var(--fg-weight-display);
+    font-size: var(--fg-text-body-lg);
+  }
+
+  .inmatning__pay-b {
+    font-size: var(--fg-text-body);
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.85);
+    margin: var(--fg-space-2) 0 var(--fg-space-4);
+  }
+
+  .inmatning__pay button {
+    width: 100%;
+    background: var(--fg-accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--fg-radius-control);
+    padding: 12px 0;
+    font-family: var(--fg-font-sans);
+    font-size: var(--fg-text-body);
+    font-weight: var(--fg-weight-bold);
+    cursor: pointer;
+  }
+
+  .inmatning__pay-pris {
+    font-family: var(--fg-font-mono);
+    font-size: var(--fg-text-label);
+    background: rgba(255, 255, 255, 0.14);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .inmatning__pay-fine {
+    font-size: var(--fg-text-label);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    margin: var(--fg-space-2) 0 0;
+  }
+</style>

@@ -40,8 +40,16 @@ export const TRATT = {
     // Innan kommun är vald (B3, "Vad Code behöver veta" §4) — raden
     // står kvar med sin form, aldrig borttagen, bara tom.
     tom: 'Välj kommun, så visar vi hur många bidrag som finns.',
-    mall: '{antal} kommunala bidrag i {kommun}',
-    mallEtt: '1 kommunalt bidrag i {kommun}',
+    // AH1.10 (Fable 2026-08-28): talet stod förut ledande i den här
+    // strängen OCH i badgen (tratt__raknare-tal, matcha/index.astro) —
+    // "9  9 kommunala bidrag i…", samma tal två gånger. Badgen är den
+    // avsedda räknaren (klassnamnet, starkare visuellt) — strängen bär
+    // därför aldrig längre talet, i INGET av de tre lägen som delar
+    // denna mall (kallt/mitt-i-tratten/varmt, se matcha/index.astro:s
+    // gemensamma `bas`-variabel). Ändra inte tillbaka ett ledande tal
+    // utan att också ta bort badgen — annars är dubbleringen tillbaka.
+    mall: 'kommunala bidrag i {kommun}',
+    mallEtt: 'kommunalt bidrag i {kommun}',
     // Beskedskärmens rubrikvariant — samma tal, en förklarande sats till
     // (räknaren BLIR sidans rubrik där, B3 D-A "På beskedskärmen").
     beskedTillagg: ' — ordnade efter vad ni svarat. Alla visas.',

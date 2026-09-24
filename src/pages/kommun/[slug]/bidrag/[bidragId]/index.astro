@@ -13,7 +13,9 @@
 import Base from '../../../../../layouts/Base.astro';
 import BreadcrumbList from '../../../../../components/BreadcrumbList.astro';
 import BidragDjup from '../../../../../components/BidragDjup.astro';
+import BidragInmatning from '../../../../../components/BidragInmatning.astro';
 import UrgencyChip from '../../../../../components/UrgencyChip.astro';
+import { arAktivitetsbidrag } from '../../../../../lib/aktivitetsbidragHeuristik';
 import {
   loadKommuner, bidragAnsokningsUrl, bidragAnsokningssystemNamn, hittaGiltighetsstatus,
   earliestDeadlineISO, daysUntil, getUrgency, todayISO, relativFrist, formatDate,
@@ -157,6 +159,13 @@ const webPageJsonLd = {
                 Lås upp hela checklistan — {prisKr} kr
               </a>
             </div>
+          </Fragment>
+        )}
+        {/* AH1.3 (Jacobs order): profilen som progressiv inmatning — bara
+           för aktivitetsbidrag, AF1:s hela profillager är scopat dit. */}
+        {arAktivitetsbidrag(bidrag.namn, bidrag.id) && (
+          <Fragment slot="efter-krav">
+            <BidragInmatning bidrag={bidrag} kommun={kommun} />
           </Fragment>
         )}
       </BidragDjup>
