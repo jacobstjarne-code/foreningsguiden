@@ -1,0 +1,60 @@
+diff --git a/scripts/validera-data.ts b/scripts/validera-data.ts
+index 96b2758..d575ad1 100644
+--- a/scripts/validera-data.ts
++++ b/scripts/validera-data.ts
+@@ -78,6 +78,17 @@ for (const k of kommuner) {
+     }
+   }
+ }
++// Opus 2026-09-24: sedan de 155 omverifieringsanteckningarna flyttats till
++// qa_anteckning fäller processpråk bygget, så att steg 3 och senare pass
++// inte kan skriva tillbaka revisionslogg i den publika texten.
++if (anteckningMedProcessSprak > 0 && process.env.FG_PROCESSSPRAK_VARNA !== '1') {
++  console.error(`\nProcesspråk-FAIL — ${anteckningMedProcessSprak} bidrag har revisionslogg i anteckning. Flytta den till qa_anteckning.`);
++  for (const k of kommuner) for (const b of k.bidrag) {
++    const { strukna } = strippaProcessSprak(b.anteckning);
++    if (strukna.length) console.error(`  ${k.kommun_slug} — ${b.id}: ${strukna[0].slice(0, 120)}`);
++  }
++  process.exit(1);
++}
+ if (anteckningMedProcessSprak > 0) {
+   console.log(
+     `\nVARNING (fäller inte): ${anteckningMeningarStrukna} meningar processpråk i anteckning, ` +
+diff --git a/src/lib/anteckningFilter.ts b/src/lib/anteckningFilter.ts
+index 7e62406..63d4c63 100644
+--- a/src/lib/anteckningFilter.ts
++++ b/src/lib/anteckningFilter.ts
+@@ -21,6 +21,18 @@ const PROCESSSPRAK_MONSTER: RegExp[] = [
+   /§\d+\.\d+/,
+   // Diarienummer, t.ex. "KFN 2025/84-50"
+   /[A-ZÅÄÖ]{2,4} \d{4}\/\d+/,
++  // Omverifieringens revisionslogg (steg 2, 2026-09-17/18) — 155 anteckningar
++  // renderades publikt med dessa formuleringar. Jacob/Opus 2026-09-24:
++  // revisionsspåret hör hemma i qa_anteckning, aldrig i anteckning.
++  /omverifier/i,
++  /Rättat \d{4}-\d{2}-\d{2}/i,
++  /ÄNDRAT VID/,
++  /kalla_url|sen_ansokan|belopp_avser|deadline_status|belopp_status|krav_status/,
++  /\b404\b/,
++  /\bcurl\b|WebFetch|\bYAML\b/i,
++  /tidigare lagrad|lagrade tidigare|var fel\b/i,
++  /kunde inte (oberoende )?(om)?verifieras|inte omverifierat/i,
++  /datasetet|extraktionsfel/i,
+ ];
+ 
+ // Kända förkortningar som INTE ska tolkas som meningsslut — utan de här
+diff --git a/src/pages/kommun-data/[slug].json.ts b/src/pages/kommun-data/[slug].json.ts
+index ff8a79d..cee251b 100644
+--- a/src/pages/kommun-data/[slug].json.ts
++++ b/src/pages/kommun-data/[slug].json.ts
+@@ -18,7 +18,9 @@ export const GET: APIRoute = ({ props }) => {
+   const { kommun } = props as { kommun: ReturnType<typeof loadKommuner>[number] };
+   const publicKommun = {
+     ...kommun,
+-    bidrag: kommun.bidrag.map((bidrag) => ({ ...bidrag, belopp: individuelltBelopp(bidrag) })),
++    // qa_anteckning är revisionsspår för oss, aldrig för besökaren (Opus
++    // 2026-09-24) — det renderas inte, och ska inte heller ligga i publik JSON.
++    bidrag: kommun.bidrag.map(({ qa_anteckning: _qa, ...bidrag }) => ({ ...bidrag, belopp: individuelltBelopp(bidrag as typeof kommun.bidrag[number]) })),
+   };
+   return new Response(JSON.stringify(publicKommun), { headers: { 'content-type': 'application/json' } });
+ };

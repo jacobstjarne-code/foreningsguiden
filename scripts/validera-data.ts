@@ -78,6 +78,17 @@ for (const k of kommuner) {
     }
   }
 }
+// Opus 2026-09-24: sedan de 155 omverifieringsanteckningarna flyttats till
+// qa_anteckning fäller processpråk bygget, så att steg 3 och senare pass
+// inte kan skriva tillbaka revisionslogg i den publika texten.
+if (anteckningMedProcessSprak > 0 && process.env.FG_PROCESSSPRAK_VARNA !== '1') {
+  console.error(`\nProcesspråk-FAIL — ${anteckningMedProcessSprak} bidrag har revisionslogg i anteckning. Flytta den till qa_anteckning.`);
+  for (const k of kommuner) for (const b of k.bidrag) {
+    const { strukna } = strippaProcessSprak(b.anteckning);
+    if (strukna.length) console.error(`  ${k.kommun_slug} — ${b.id}: ${strukna[0].slice(0, 120)}`);
+  }
+  process.exit(1);
+}
 if (anteckningMedProcessSprak > 0) {
   console.log(
     `\nVARNING (fäller inte): ${anteckningMeningarStrukna} meningar processpråk i anteckning, ` +

@@ -1,0 +1,242 @@
+# OMVERIFIERING STEG 3 — arbetslista
+
+Genererad av Opus 2026-09-24 ur provmergen (omverifiering-steg2 + af1-profillager). Alla bidrag med `senast_verifierad` före 2026-09-17 eller saknat, exklusive `status: avskaffat`.
+
+**2124 bidrag, 930 unika källor, 226 kommuner.** Prioritet: 1 = nästa deadline senast 23 nov (272 st), 2 = aldrig verifierad (152), 3 = aktivitetsbidrag (415), 4 = övriga (1285).
+
+Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdelade i tre pass (A, B, C) med ungefär lika många bidrag. Ett pass = en Code-session = en worktree = en gren. Bidragsdetaljerna per kommun: kör `python3 incoming/omverif_steg3_lista.py`.
+
+## Pass A — 72 kommuner, 708 bidrag
+
+- **hammaro** — 12 bidrag, 10 med deadline före 23 nov
+- **katrineholm** — 13 bidrag, 8 med deadline före 23 nov
+- **sjobo** — 12 bidrag, 6 med deadline före 23 nov
+- **morbylanga** — 19 bidrag, 5 med deadline före 23 nov
+- **goteborg** — 16 bidrag, 4 med deadline före 23 nov
+- **koping** — 8 bidrag, 4 med deadline före 23 nov
+- **leksand** — 14 bidrag, 4 med deadline före 23 nov
+- **ulricehamn** — 28 bidrag, 4 med deadline före 23 nov
+- **lilla-edet** — 10 bidrag, 3 med deadline före 23 nov
+- **ostersund** — 17 bidrag, 3 med deadline före 23 nov
+- **umea** — 9 bidrag, 3 med deadline före 23 nov
+- **ale** — 13 bidrag, 2 med deadline före 23 nov
+- **falkoping** — 9 bidrag, 2 med deadline före 23 nov
+- **gallivare** — 18 bidrag, 2 med deadline före 23 nov
+- **hylte** — 11 bidrag, 2 med deadline före 23 nov
+- **jonkoping** — 22 bidrag, 2 med deadline före 23 nov
+- **nykvarn** — 12 bidrag, 2 med deadline före 23 nov
+- **rattvik** — 10 bidrag, 2 med deadline före 23 nov
+- **sundsvall** — 4 bidrag, 2 med deadline före 23 nov
+- **svalov** — 16 bidrag, 2 med deadline före 23 nov
+- **alvkarleby** — 7 bidrag, 1 med deadline före 23 nov
+- **arjang** — 14 bidrag, 1 med deadline före 23 nov
+- **essunga** — 11 bidrag, 1 med deadline före 23 nov
+- **gullspang** — 3 bidrag, 1 med deadline före 23 nov
+- **harnosand** — 12 bidrag, 1 med deadline före 23 nov
+- **hedemora** — 3 bidrag, 1 med deadline före 23 nov
+- **laxa** — 6 bidrag, 1 med deadline före 23 nov
+- **lomma** — 9 bidrag, 1 med deadline före 23 nov
+- **nordanstig** — 8 bidrag, 1 med deadline före 23 nov
+- **nynashamn** — 7 bidrag, 1 med deadline före 23 nov
+- **ovanaker** — 11 bidrag, 1 med deadline före 23 nov
+- **saffle** — 9 bidrag, 1 med deadline före 23 nov
+- **soderkoping** — 8 bidrag, 1 med deadline före 23 nov
+- **storuman** — 6 bidrag, 1 med deadline före 23 nov
+- **tomelilla** — 3 bidrag, 1 med deadline före 23 nov
+- **torsas** — 2 bidrag, 1 med deadline före 23 nov
+- **tranas** — 9 bidrag, 1 med deadline före 23 nov
+- **upplands-bro** — 8 bidrag, 1 med deadline före 23 nov
+- **vannas** — 9 bidrag, 1 med deadline före 23 nov
+- **vimmerby** — 12 bidrag, 1 med deadline före 23 nov
+- **kiruna** — 2 bidrag
+- **kumla** — 12 bidrag
+- **mjolby** — 12 bidrag
+- **are** — 10 bidrag
+- **bastad** — 14 bidrag
+- **bollebygd** — 16 bidrag
+- **danderyd** — 12 bidrag
+- **emmaboda** — 20 bidrag
+- **huddinge** — 28 bidrag
+- **lekeberg** — 9 bidrag
+- **lidkoping** — 18 bidrag
+- **malung-salen** — 9 bidrag
+- **nordmaling** — 11 bidrag
+- **osby** — 5 bidrag
+- **ostra-goinge** — 9 bidrag
+- **sater** — 10 bidrag
+- **solleftea** — 15 bidrag
+- **storfors** — 6 bidrag
+- **stromsund** — 12 bidrag
+- **trosa** — 1 bidrag
+- **vadstena** — 2 bidrag
+- **valdemarsvik** — 10 bidrag
+- **vargarda** — 3 bidrag
+- **vaxholm** — 6 bidrag
+- **ydre** — 9 bidrag
+- **botkyrka** — 1 bidrag
+- **falkenberg** — 2 bidrag
+- **gislaved** — 1 bidrag
+- **klippan** — 4 bidrag
+- **lund** — 1 bidrag
+- **ornskoldsvik** — 5 bidrag
+- **taby** — 3 bidrag
+
+## Pass B — 78 kommuner, 707 bidrag
+
+- **bromolla** — 12 bidrag, 9 med deadline före 23 nov
+- **lycksele** — 18 bidrag, 7 med deadline före 23 nov
+- **timra** — 12 bidrag, 6 med deadline före 23 nov
+- **trollhattan** — 16 bidrag, 5 med deadline före 23 nov
+- **karlshamn** — 28 bidrag, 4 med deadline före 23 nov
+- **tierp** — 17 bidrag, 4 med deadline före 23 nov
+- **finspang** — 12 bidrag, 3 med deadline före 23 nov
+- **hassleholm** — 12 bidrag, 3 med deadline före 23 nov
+- **munkedal** — 10 bidrag, 3 med deadline före 23 nov
+- **sigtuna** — 10 bidrag, 3 med deadline före 23 nov
+- **svedala** — 11 bidrag, 3 med deadline före 23 nov
+- **alvdalen** — 7 bidrag, 2 med deadline före 23 nov
+- **eksjo** — 2 bidrag, 2 med deadline före 23 nov
+- **eslov** — 12 bidrag, 2 med deadline före 23 nov
+- **gagnef** — 9 bidrag, 2 med deadline före 23 nov
+- **heby** — 7 bidrag, 2 med deadline före 23 nov
+- **helsingborg** — 15 bidrag, 2 med deadline före 23 nov
+- **karlstad** — 12 bidrag, 2 med deadline före 23 nov
+- **mariestad** — 6 bidrag, 2 med deadline före 23 nov
+- **mora** — 5 bidrag, 2 med deadline före 23 nov
+- **orust** — 16 bidrag, 2 med deadline före 23 nov
+- **smedjebacken** — 8 bidrag, 2 med deadline före 23 nov
+- **vilhelmina** — 16 bidrag, 2 med deadline före 23 nov
+- **ange** — 16 bidrag, 1 med deadline före 23 nov
+- **eskilstuna** — 6 bidrag, 1 med deadline före 23 nov
+- **fargelanda** — 8 bidrag, 1 med deadline före 23 nov
+- **gotene** — 2 bidrag, 1 med deadline före 23 nov
+- **hagfors** — 2 bidrag, 1 med deadline före 23 nov
+- **hallefors** — 8 bidrag, 1 med deadline före 23 nov
+- **harryda** — 6 bidrag, 1 med deadline före 23 nov
+- **karlskrona** — 28 bidrag, 1 med deadline före 23 nov
+- **ockero** — 6 bidrag, 1 med deadline före 23 nov
+- **pitea** — 4 bidrag, 1 med deadline före 23 nov
+- **ragunda** — 12 bidrag, 1 med deadline före 23 nov
+- **skurup** — 4 bidrag, 1 med deadline före 23 nov
+- **staffanstorp** — 6 bidrag, 1 med deadline före 23 nov
+- **svenljunga** — 15 bidrag, 1 med deadline före 23 nov
+- **uddevalla** — 9 bidrag, 1 med deadline före 23 nov
+- **vaggeryd** — 4 bidrag, 1 med deadline före 23 nov
+- **varmdo** — 16 bidrag, 1 med deadline före 23 nov
+- **ystad** — 16 bidrag, 1 med deadline före 23 nov
+- **ljusdal** — 3 bidrag
+- **nybro** — 10 bidrag
+- **surahammar** — 7 bidrag
+- **asele** — 4 bidrag
+- **atvidaberg** — 10 bidrag
+- **bjurholm** — 5 bidrag
+- **borgholm** — 13 bidrag
+- **bracke** — 12 bidrag
+- **ekero** — 4 bidrag
+- **gnesta** — 10 bidrag
+- **hjo** — 4 bidrag
+- **hoor** — 11 bidrag
+- **karlsborg** — 7 bidrag
+- **kinda** — 10 bidrag
+- **kungalv** — 12 bidrag
+- **lessebo** — 14 bidrag
+- **lysekil** — 11 bidrag
+- **mullsjo** — 7 bidrag
+- **norrkoping** — 3 bidrag
+- **olofstrom** — 15 bidrag
+- **perstorp** — 7 bidrag
+- **skelleftea** — 7 bidrag
+- **solvesborg** — 15 bidrag
+- **stromstad** — 9 bidrag
+- **tingsryd** — 8 bidrag
+- **trelleborg** — 12 bidrag
+- **vansbro** — 4 bidrag
+- **vastervik** — 4 bidrag
+- **vingaker** — 12 bidrag
+- **eda** — 1 bidrag
+- **falun** — 2 bidrag
+- **habo-jonkoping** — 1 bidrag
+- **knivsta** — 1 bidrag
+- **kristianstad** — 2 bidrag
+- **lerum** — 2 bidrag
+- **sandviken** — 5 bidrag
+- **torsby** — 2 bidrag
+
+## Pass C — 76 kommuner, 709 bidrag
+
+- **kalix** — 17 bidrag, 9 med deadline före 23 nov
+- **tanum** — 16 bidrag, 7 med deadline före 23 nov
+- **vanersborg** — 10 bidrag, 6 med deadline före 23 nov
+- **aneby** — 5 bidrag, 4 med deadline före 23 nov
+- **avesta** — 4 bidrag, 4 med deadline före 23 nov
+- **boden** — 21 bidrag, 4 med deadline före 23 nov
+- **laholm** — 9 bidrag, 4 med deadline före 23 nov
+- **stockholm** — 22 bidrag, 4 med deadline före 23 nov
+- **grums** — 9 bidrag, 3 med deadline före 23 nov
+- **habo-uppsala** — 10 bidrag, 3 med deadline före 23 nov
+- **lulea** — 20 bidrag, 3 med deadline före 23 nov
+- **soderhamn** — 17 bidrag, 3 med deadline före 23 nov
+- **alvesta** — 15 bidrag, 2 med deadline före 23 nov
+- **forshaga** — 10 bidrag, 2 med deadline före 23 nov
+- **hallsberg** — 10 bidrag, 2 med deadline före 23 nov
+- **horby** — 9 bidrag, 2 med deadline före 23 nov
+- **jarfalla** — 10 bidrag, 2 med deadline före 23 nov
+- **kramfors** — 12 bidrag, 2 med deadline före 23 nov
+- **mellerud** — 14 bidrag, 2 med deadline före 23 nov
+- **oxelosund** — 4 bidrag, 2 med deadline före 23 nov
+- **robertsfors** — 14 bidrag, 2 med deadline före 23 nov
+- **alingsas** — 13 bidrag, 1 med deadline före 23 nov
+- **almhult** — 17 bidrag, 1 med deadline före 23 nov
+- **bengtsfors** — 14 bidrag, 1 med deadline före 23 nov
+- **flen** — 5 bidrag, 1 med deadline före 23 nov
+- **harjedalen** — 15 bidrag, 1 med deadline före 23 nov
+- **krokom** — 14 bidrag, 1 med deadline före 23 nov
+- **motala** — 1 bidrag, 1 med deadline före 23 nov
+- **norberg** — 8 bidrag, 1 med deadline före 23 nov
+- **norsjo** — 14 bidrag, 1 med deadline före 23 nov
+- **ronneby** — 14 bidrag, 1 med deadline före 23 nov
+- **sorsele** — 8 bidrag, 1 med deadline före 23 nov
+- **tidaholm** — 3 bidrag, 1 med deadline före 23 nov
+- **tjorn** — 9 bidrag, 1 med deadline före 23 nov
+- **tyreso** — 12 bidrag, 1 med deadline före 23 nov
+- **vallentuna** — 7 bidrag, 1 med deadline före 23 nov
+- **vetlanda** — 15 bidrag, 1 med deadline före 23 nov
+- **askersund** — 17 bidrag
+- **sala** — 10 bidrag
+- **alvsbyn** — 3 bidrag
+- **arvidsjaur** — 5 bidrag
+- **astorp** — 10 bidrag
+- **berg** — 15 bidrag
+- **borlange** — 4 bidrag
+- **boxholm** — 12 bidrag
+- **degerfors** — 6 bidrag
+- **herrljunga** — 10 bidrag
+- **hoganas** — 12 bidrag
+- **hultsfred** — 9 bidrag
+- **kil** — 12 bidrag
+- **kungsor** — 11 bidrag
+- **lidingo** — 8 bidrag
+- **lindesberg** — 9 bidrag
+- **mala** — 9 bidrag
+- **munkfors** — 9 bidrag
+- **orsa** — 7 bidrag
+- **osteraker** — 5 bidrag
+- **overtornea** — 13 bidrag
+- **skinnskatteberg** — 7 bidrag
+- **sotenas** — 9 bidrag
+- **stenungsund** — 14 bidrag
+- **toreboda** — 7 bidrag
+- **uppvidinge** — 17 bidrag
+- **vindeln** — 9 bidrag
+- **angelholm** — 1 bidrag
+- **arboga** — 2 bidrag
+- **arjeplog** — 4 bidrag
+- **gavle** — 1 bidrag
+- **kavlinge** — 4 bidrag
+- **ludvika** — 1 bidrag
+- **nassjo** — 1 bidrag
+- **skovde** — 1 bidrag
+- **sundbyberg** — 2 bidrag
+- **sunne** — 2 bidrag
+- **varnamo** — 1 bidrag
+- **vellinge** — 3 bidrag

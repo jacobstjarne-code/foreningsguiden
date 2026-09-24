@@ -21,6 +21,18 @@ const PROCESSSPRAK_MONSTER: RegExp[] = [
   /§\d+\.\d+/,
   // Diarienummer, t.ex. "KFN 2025/84-50"
   /[A-ZÅÄÖ]{2,4} \d{4}\/\d+/,
+  // Omverifieringens revisionslogg (steg 2, 2026-09-17/18) — 155 anteckningar
+  // renderades publikt med dessa formuleringar. Jacob/Opus 2026-09-24:
+  // revisionsspåret hör hemma i qa_anteckning, aldrig i anteckning.
+  /omverifier/i,
+  /Rättat \d{4}-\d{2}-\d{2}/i,
+  /ÄNDRAT VID/,
+  /kalla_url|sen_ansokan|belopp_avser|deadline_status|belopp_status|krav_status/,
+  /\b404\b/,
+  /\bcurl\b|WebFetch|\bYAML\b/i,
+  /tidigare lagrad|lagrade tidigare|var fel\b/i,
+  /kunde inte (oberoende )?(om)?verifieras|inte omverifierat/i,
+  /datasetet|extraktionsfel/i,
 ];
 
 // Kända förkortningar som INTE ska tolkas som meningsslut — utan de här
