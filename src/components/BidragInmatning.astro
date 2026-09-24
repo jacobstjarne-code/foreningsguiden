@@ -51,6 +51,7 @@ const { bidrag, kommun } = Astro.props;
   import { kravUttryckerMedlemsantal } from '../lib/medlemskrav.ts';
   import { hamtaLokaltLager, sparaLokaltSvar, besvaradeFaltId, registreraOppnatBidrag } from '../lib/profilLagerLokalt.ts';
   import { INMATNING } from '../lib/content.ts';
+  import { ABONNEMANG_LEVERANS_LIVE } from '../lib/priser.ts';
 
   const rot = document.querySelector<HTMLElement>('[data-inmatning]');
   const inre = rot?.querySelector<HTMLElement>('[data-inmatning-rot]');
@@ -318,7 +319,11 @@ const { bidrag, kommun } = Astro.props;
         : '';
 
     // AH1.8 — betalrutan, andra öppnade bidraget och framåt, aldrig det första.
-    const payHtml = s.oppnaBidragCount >= 2 ? renderPay(s) : '';
+    // Jacob 2026-09-24: dold tills abonnemanget kan levereras. Samma grind
+    // som prissidans abonnemangskort (priser.ts F⑤) — knappen saknade
+    // handler och priset var platshållaren "pris/år · §8A". Kanon §5: det
+    // andra kommersiella ögonblicket renderas först när leveransen finns.
+    const payHtml = ABONNEMANG_LEVERANS_LIVE && s.oppnaBidragCount >= 2 ? renderPay(s) : '';
 
     inre.innerHTML = `${forberedHtml}${aterkomstHtml}${sektionVerksamhet}${sektionForening}${viktaHtml}${medlemsantalHtml}${reachHtml}${steg2Html}${payHtml}`;
 
