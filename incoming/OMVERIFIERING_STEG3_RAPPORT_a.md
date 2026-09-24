@@ -7,9 +7,9 @@ Session 1, 24 september 2026. Gren `omverifiering-steg3-a`, utgången från
 
 | | |
 |---|---|
-| Kommuner klara | 8 av 72 |
-| Bidrag lästa | 122 av 705 |
-| Rättade | 9 |
+| Kommuner klara | 14 av 72 |
+| Bidrag lästa | 196 av 705 |
+| Rättade | 11 |
 | Tillagda | 0 |
 | Till browserkön | 0 |
 
@@ -28,6 +28,12 @@ commit, pre-commit-kroken grön på samtliga.
 | Köping | 8 | 0 | |
 | Leksand | 14 | 0 | |
 | Ulricehamn | 28 | 0 | delat verifierad-fält |
+| Lilla Edet | 10 | 0 | nya bestämmelser nov 2025 |
+| Umeå | 9 | 2 | belopp saknades, pott tillagd |
+| Östersund | 17 | 0 | |
+| Ale | 13 | 0 | ny riktlinje dec 2025 |
+| Falköping | 9 | 0 | |
+| Gällivare | 16 | 0 | |
 
 ## Rättelser
 
@@ -53,6 +59,16 @@ utlysning på högst 25 000 kronor för kostnadsfria aktiviteter för
 1 november. Den ligger på samma sida och inom samma stödform, så den är
 noterad i posten i stället för att läggas till som egen.
 
+**Umeå, `umea-trygga-idrottsplatser`, `belopp`.** Före: "Stödbeloppet
+bestäms efter prövning; kommunen publicerar ingen beloppsnivå." Efter:
+"Upp till 1 500 kronor per genomfört tillfälle, högst 20 000 kronor per
+förening." `belopp_status` från ingen_regel till kontrollast. Källa:
+kommunens sida för trygga idrottsplatser.
+
+**Umeå, `umea-landsbygdsstod-llu`, `belopp`.** Kompletterat med att den
+totala årsbudgeten är 395 000 kronor, utöver de 35 000 kronor per projekt
+som redan stod. Källa: sidan om stöd till landsbygdsutveckling.
+
 ## Punkt 2 — sådant som avviker
 
 **Sjöbo har lagt om sin webbplats.** `sitemap.xml`, `foreningsliv.html`
@@ -63,6 +79,17 @@ Portalen listar femton stödformer mot filens tretton: skillnaden är att
 portalen delar hyres-, investerings-, arrangemangs- och utvecklingsstöd
 samt föreningsägd anläggning i var sin kultur- och fritidsvariant. Ingen
 stödform saknas. Värt en egen kontroll om Sjöbo ska ha delade poster.
+
+**Tre kommuner har nya styrdokument** som filen ändå stämde mot: Lilla
+Edets bestämmelser från november 2025 (BIN 2025/449, gäller från 2026),
+Ales riktlinje från kommunfullmäktige 2025-12-15 § 230 och Hammarös från
+2025-06-23 § 84.
+
+**Uppgifter som inte gick att belägga men inte heller motsägs** och
+därför står kvar: Östersunds samlingslokalsdatum 30 maj (PDF:en saknar
+ansökningsdag och kommunens två sidor ger 404), Falköpings
+belysningsnivåer 75 procent, 3 000 kr och 750 kr per ljuspunkt, och
+Gällivares 25 februari och 25 augusti för verksamhetsbidraget.
 
 **Ingen kommun hade mer än hälften av bidragen ändrade** och inget
 regressionsskydd fällde.
@@ -87,6 +114,6 @@ Ett skript som letar `^\s*id:` missar de förra.
 
 ## Kvar i passet
 
-64 kommuner, 583 bidrag. Nästa i ordning: Lilla Edet (10), Östersund
-(17), Umeå (9), Ale (13), Falköping (9), Gällivare (16), Hylte (11),
-Jönköping (22), Nykvarn (12), Rättvik (10).
+58 kommuner, 509 bidrag. Nästa i ordning: Hylte (11), Jönköping (22),
+Nykvarn (12), Rättvik (10), Sundsvall (4), Svalöv (16), Älvkarleby (7),
+Årjäng (14).
