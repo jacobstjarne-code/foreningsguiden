@@ -63,7 +63,13 @@ const beloppOlast = bidrag.belopp_status === 'olast';
 const giltighetStatus = hittaGiltighetsstatus(kommun.forutsattningar);
 
 const metaTitle = `${bidrag.namn} — ${kommun.kommun} — Föreningsguiden`;
-const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, verifierat mot kommunens egen sida.`;
+// Jacob 2026-09-25: "verifierat mot kommunens egen sida" påstod mer än vi
+// gör. Vi läser kommunens sida och länkar till den; vi verifierar inte
+// kommunen. Läsdatumet nämns bara när bidraget faktiskt har ett.
+const metaLasdatum = bidrag.senast_verifierad
+  ? ` Läst på kommunens sida ${formatDate(bidrag.senast_verifierad)}.`
+  : '';
+const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, med länk till kommunens egen sida.${metaLasdatum}`;
 
 // D3 (ARBETSORDER 2026-08-11): "Så ansöker du"-prosan flyttad hit från
 // kommunsidan (D2 tog bort den där som en dubblett av varje bidrags egen

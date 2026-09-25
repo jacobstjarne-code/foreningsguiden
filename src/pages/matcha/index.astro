@@ -360,9 +360,14 @@ const nationellaIdrottsstod = loadNationellaStod().filter((s) => s.status === 'a
       // (earliestDeadlineISO), samma mönster som BidragCard/
       // KommunProgressions formatDeadlines — skilj dem explicit på
       // deadlines.typ, rör aldrig deadlines.datum direkt.
-      const dateISO = earliestDeadlineISO(bidrag, today);
+      // Jacob 2026-09-25: samma olast-regel som på kommunsidan och
+      // bidragssidan — inget brådskemärke, ingen nedräkning, inget datum
+      // som fakta när deadline_status är olast.
+      const dateISO = bidrag.deadline_status === 'olast' ? null : earliestDeadlineISO(bidrag, today);
       if (!dateISO) {
-        const text = bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan';
+        const text = bidrag.deadline_status === 'olast'
+          ? 'datum ej bekräftat'
+          : bidrag.deadlines.typ === 'okand' ? 'inget publicerat ansökningsdatum' : 'löpande ansökan';
         el.textContent = `${belopp} · ${text}`;
         return el;
       }

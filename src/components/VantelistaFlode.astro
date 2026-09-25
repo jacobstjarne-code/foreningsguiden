@@ -31,7 +31,9 @@ const kostnadsram = kommun.kommunsiffra
 // Sann nedräkning — bara för fasta deadlines, mot det faktiska datumet
 // (samma daysUntil/getUrgency som UrgencyChip använder överallt annars).
 const today = todayISO();
-const deadlineISO = earliestDeadlineISO(bidrag, today);
+// Jacob 2026-09-25: en nedräkning ("om 97 dagar") är ett skarpare
+// datumpåstående än datumet självt. Ett olast-datum får ingen.
+const deadlineISO = bidrag.deadline_status === 'olast' ? null : earliestDeadlineISO(bidrag, today);
 const dagarKvar = deadlineISO ? daysUntil(deadlineISO, today) : null;
 ---
 <div class="vantelista" data-vantelista data-kommun-slug={kommun.kommun_slug} data-kommun-namn={kommun.kommun} data-bidrag-id={bidrag.id} data-bidrag-namn={bidrag.namn}>

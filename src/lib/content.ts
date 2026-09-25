@@ -132,6 +132,16 @@ export const KOMMUN = {
   // helt.
   svarForstMedDeadlines:
     'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum varierar mellan {tidigaste} och {senaste} beroende på bidrag; ansökan görs hos kommunen via {system}.',
+  // Jacob 2026-09-25: intervallet räknas bara på bidrag med
+  // deadline_status kontrollast. Två följder: finns bara ETT sådant datum
+  // blir "varierar mellan X och X" nonsens (svarForstEttDatum), och finns
+  // inget alls får meningen om ansökningsdatum utgå helt
+  // (svarForstUtanDatum). Ingen ny prosa — samma satser som ovan, med
+  // datumsatsen omskriven respektive struken.
+  svarForstEttDatum:
+    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum är senast {tidigaste}; ansökan görs hos kommunen via {system}.',
+  svarForstUtanDatum:
+    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Ansökan görs hos kommunen via {system}.',
   svarForstLopande:
     'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Bidragen söks löpande under året snarare än mot ett fast sista datum. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
   svarForstEtt:
