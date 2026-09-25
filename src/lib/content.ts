@@ -130,18 +130,29 @@ export const KOMMUN = {
   // inte på semikolon), sten 4 (en ren "se nedan"-hänvisning, ingen egen
   // information — bidragslistan syns redan direkt under stycket) stryks
   // helt.
-  svarForstMedDeadlines:
-    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum varierar mellan {tidigaste} och {senaste} beroende på bidrag; ansökan görs hos kommunen via {system}.',
-  // Jacob 2026-09-25: intervallet räknas bara på bidrag med
-  // deadline_status kontrollast. Två följder: finns bara ETT sådant datum
-  // blir "varierar mellan X och X" nonsens (svarForstEttDatum), och finns
-  // inget alls får meningen om ansökningsdatum utgå helt
-  // (svarForstUtanDatum). Ingen ny prosa — samma satser som ovan, med
-  // datumsatsen omskriven respektive struken.
-  svarForstEttDatum:
-    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Sista ansökningsdatum är senast {tidigaste}; ansökan görs hos kommunen via {system}.',
-  svarForstUtanDatum:
-    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Ansökan görs hos kommunen via {system}.',
+  // Jacob 2026-09-25 (andra vändan): ingressen byggs av tre satser i
+  // stället för fyra färdiga varianter. Inledningen och ansökningsvägen är
+  // alltid desamma; det är BARA datumsatsen som varierar, och den väljs på
+  // N (antal bidrag med fasta datum OCH deadline_status kontrollast) mot
+  // M (antal bidrag i kommunen) och på hur många olika datum de bär.
+  // Semikolonet före ansökningsvägen är borta — satserna är egna meningar.
+  svarForstInledning:
+    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}.',
+  svarForstAnsokan: 'Ansökan görs hos kommunen via {system}.',
+  svarForstDatumsats: {
+    // N === M och ett enda datum
+    allaSamma: 'Alla söks senast {datum}.',
+    // ett datum, N < M
+    nAvDem: '{antalOrd} av dem söks senast {datum}, övriga har löpande ansökan eller inget fast datum.',
+    // ett datum, N === 1 — namnet säger mer än siffran
+    ettBidrag: '{bidragsnamn} söks senast {datum}, övriga har löpande ansökan eller inget fast datum.',
+    // flera datum, N < M
+    intervallDelmangd: 'De som har fast ansökningsdag söks mellan {tidigaste} och {senaste}.',
+    // flera datum, N === M
+    intervallAlla: 'Ansökningsdagarna ligger mellan {tidigaste} och {senaste}.',
+  },
+  // Räkneord i bokstäver upp till tolv. Över tolv skrivs siffran.
+  rakneord: ['noll', 'ett', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'],
   svarForstLopande:
     'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Bidragen söks löpande under året snarare än mot ett fast sista datum. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
   svarForstEtt:
@@ -234,9 +245,9 @@ export const KALENDER = {
 
 /** Metod-/om-sidan. Sajtens förtroendetext. Byggs som stycken. */
 export const OM = {
-  metaTitle: 'Om Föreningsguiden — så samlar och verifierar vi uppgifterna',
+  metaTitle: 'Om Föreningsguiden – så samlar och läser vi uppgifterna',
   metaDescription:
-    'Föreningsguiden samlar kommunala föreningsbidrag från kommunernas egen information. Så här verifierar vi uppgifterna, och det här gör vi inte.',
+    'Föreningsguiden samlar kommunala föreningsbidrag från kommunernas egen information. Så här läser vi kommunernas uppgifter, och det här gör vi inte.',
   h1: 'Om Föreningsguiden',
   stycken: [
     'Föreningsguiden samlar kommunala föreningsbidrag på ett ställe. Sverige har närmare 290 kommuner, och var och en har sina egna bidrag, sina egna regler och sina egna sista ansökningsdatum. För den som sköter en förening på fritiden är det svårt att hålla reda på, och lätt att missa pengar föreningen hade kunnat få.',

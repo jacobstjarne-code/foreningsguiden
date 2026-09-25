@@ -67,9 +67,14 @@ const intro = KOMMUN.introTemplate.replace(/{kommun}/g, kommun.kommun);
 // så en kommun med enbart olästa datum inte felaktigt beskrivs som
 // löpande.
 const allaFastaBidrag = kommun.bidrag.filter((b) => b.deadlines.typ === 'fasta');
-const fastaDeadlines = allaFastaBidrag
-  .filter((b) => b.deadline_status === 'kontrollast')
-  .flatMap((b) => b.deadlines.datum);
+const kontrollastFastaBidrag = allaFastaBidrag.filter((b) => b.deadline_status === 'kontrollast');
+const fastaDeadlines = kontrollastFastaBidrag.flatMap((b) => b.deadlines.datum);
+// Räkneord i bokstäver upp till tolv, siffra däröver ("Fem av dem", men
+// "14 av dem"). Versal sätts av anropsstället — satsen inleder meningen.
+const rakneord = (n: number): string => {
+  const ord = KOMMUN.rakneord[n] ?? String(n);
+  return ord.charAt(0).toUpperCase() + ord.slice(1);
+};
 const kategorierText = svenskLista(kategorierMedBidrag.map((k) => KATEGORI_LABELS[k].toLowerCase()));
 
 // TILLSTANDET_OLAST.md 4c, yta 1 (Jacob 2026-08-03 kväll): Arvika-
@@ -85,27 +90,37 @@ if (kommun.bidrag.length === 1) {
     .replace(/{bidragsnamn}/g, kommun.bidrag[0].namn)
     .replace(/{system}/g, kommun.ansokningssystem.namn);
 } else if (kommun.bidrag.length > 1) {
-  const bas = (mall: string) => mall
+  // Jacob 2026-09-25 (andra vändan): datumsatsen väljs på N mot M och på
+  // antalet olika datum. N = bidrag med fasta datum OCH deadline_status
+  // kontrollast, M = alla bidrag i kommunen. Ett bidrag kan bära flera
+  // datum, så antalet DISTINKTA datum avgör intervall kontra "senast X",
+  // inte antalet bidrag.
+  const N = kontrollastFastaBidrag.length;
+  const M = kommun.bidrag.length;
+  const datum = [...new Set(fastaDeadlines)].sort();
+  const D = datum.map(formatRecurringDate);
+  const d = KOMMUN.svarForstDatumsats;
+  let datumsats = '';
+  if (N > 0 && D.length === 1) {
+    datumsats = (N === M ? d.allaSamma : N === 1 ? d.ettBidrag : d.nAvDem)
+      .replace(/{datum}/g, D[0])
+      .replace(/{bidragsnamn}/g, kontrollastFastaBidrag[0].namn)
+      .replace(/{antalOrd}/g, rakneord(N));
+  } else if (N > 0) {
+    datumsats = (N === M ? d.intervallAlla : d.intervallDelmangd)
+      .replace(/{tidigaste}/g, D[0])
+      .replace(/{senaste}/g, D[D.length - 1]);
+  }
+  const inledning = allaFastaBidrag.length === 0
+    // Kommunen har inga fasta datum alls. Då är "söks löpande" ett eget,
+    // belagt besked — inte ett datumpåstående — och står kvar.
+    ? KOMMUN.svarForstLopande
+    : `${KOMMUN.svarForstInledning}${datumsats ? ` ${datumsats}` : ''} ${KOMMUN.svarForstAnsokan}`;
+  svarForst = inledning
     .replace(/{kommun}/g, kommun.kommun)
     .replace(/{antal}/g, String(kommun.bidrag.length))
     .replace(/{kategorier}/g, kategorierText)
     .replace(/{system}/g, kommun.ansokningssystem.namn);
-  const sorted = [...new Set(fastaDeadlines)].sort();
-  if (allaFastaBidrag.length === 0) {
-    svarForst = bas(KOMMUN.svarForstLopande);
-  } else if (sorted.length === 0) {
-    // Kommunen har fasta datum, men inget av dem är kontrolläst. Då säger
-    // ingressen ingenting om ansökningsdatum — datumen står kvar vid
-    // respektive bidrag, med sin reservation.
-    svarForst = bas(KOMMUN.svarForstUtanDatum);
-  } else if (sorted.length === 1) {
-    svarForst = bas(KOMMUN.svarForstEttDatum)
-      .replace(/{tidigaste}/g, formatRecurringDate(sorted[0]));
-  } else {
-    svarForst = bas(KOMMUN.svarForstMedDeadlines)
-      .replace(/{tidigaste}/g, formatRecurringDate(sorted[0]))
-      .replace(/{senaste}/g, formatRecurringDate(sorted[sorted.length - 1]));
-  }
 }
 
 // --- FAQ (SOKBARHETSSPEC §3.3) — synlig sektion MÅSTE spegla schemat exakt ---
