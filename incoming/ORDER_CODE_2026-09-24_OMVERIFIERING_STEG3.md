@@ -37,9 +37,23 @@ den ordning `OMVERIFIERING_STEG3_LISTA.json` ger (prio 1 först).
 2. **Per bidrag, jämför källan mot YAML** för deadline, belopp och
    belopp_avser, krav, giltighet, status, ansokningsvag och kalla_url.
    Hämta med WebFetch eller `curl -A "Mozilla/5.0"`.
+   **Pröva curl på e-tjänstsidor innan du skickar dem till browserkön.**
+   Många kommunportaler (`etjanster.*`, `minasidor.*`, `*.actorsmartbook.se`)
+   renderar villkorstexten på servern och läses med vanlig curl — det är
+   inloggningen som kräver browser, inte informationen. Rättviks fyra
+   e-tjänstsidor gav ansökningsperiod, belopp och pott i klartext
+   (2026-09-25). Först när sidan faktiskt returnerar tom HTML eller ett
+   JS-skal går den till `OMVERIFIERING_BEHOVER_BROWSER.md`.
 3. **Ändra bara det källan belägger.** Aldrig ett gissat datum, belopp eller
    avskaffande. Årsspecifika datum som MM-DD-modellen inte kan bära får
    `deadlines.typ: okand` och datumet i anteckningen, samma lösning som 18 sep.
+   **31 december (`12-31`) godtas bara om datumet står uttryckligen i källan**
+   (Jacob 2026-09-25). Datumet är den vanligaste platshållaren för "vi vet
+   inte" och såg ut som en riktig frist i Jönköpings investeringsbidrag tills
+   riktlinjen lästes. Står det inte i källan: ta bort datumet och sätt
+   `deadline_status: olast`, eller `okand` om källan säger något annat eller
+   ingenting om ansökningstid. Behåller du ett `12-31`: skriv en rad i
+   passrapporten med citatet ur källan.
 4. **Sätt `senast_verifierad` till dagens datum bara på bidrag du faktiskt
    läst källan för.** Statusfälten (`*_status`) får `kontrollast` bara efter
    läsning, aldrig mekaniskt. Kan ett värde inte beläggas i källan men inte
