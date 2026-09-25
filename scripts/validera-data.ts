@@ -60,39 +60,49 @@ for (const k of kommuner) {
 }
 console.log(`\nolast (ej oberoende omkontrollerat): belopp ${beloppOlast}, deadline ${deadlineOlast}, krav ${kravOlast}, giltighet ${giltighetOlast}.`);
 
-// A2 (Jacob 2026-08-08), punkt 4 — processpråk i anteckning ska VARNA,
-// aldrig fälla bygget. GPT ska se det (och flytta över till
-// qa_anteckning vid nästa researchpass i respektive kommun), inte
-// blockeras av det. Samma strippaProcessSprak() som A1:s rendering-
-// filter — en sanning för vad som räknas som processpråk.
-let anteckningMedProcessSprak = 0;
-let anteckningMeningarStrukna = 0;
-const kommunerMedProcessSprak = new Set<string>();
-for (const k of kommuner) {
-  for (const b of k.bidrag) {
-    const { strukna } = strippaProcessSprak(b.anteckning);
-    if (strukna.length > 0) {
-      anteckningMedProcessSprak++;
-      anteckningMeningarStrukna += strukna.length;
-      kommunerMedProcessSprak.add(k.kommun_slug);
+// Processpråk i publik text FÄLLER bygget (Opus 2026-09-24/25). A2 lät det
+// bara varna, men varningen gick förlorad i bruset och 155 anteckningar
+// renderades publikt med revisionslogg. Samma strippaProcessSprak() som
+// A1:s renderingsfilter — en sanning för vad som räknas som processpråk.
+// FG_PROCESSSPRAK_VARNA=1 återgår till att bara varna.
+const GRANSKADE_FALT = ['anteckning', 'ansokningssystem', 'beskrivning'] as const;
+type Traff = { kommun: string; id: string; falt: string; text: string; strukna: string[] };
+const traffar: Traff[] = [];
+
+/** Plockar ut varje sträng ur ett fältvärde — fältet kan vara sträng, objekt (ansokningssystem) eller lista. */
+function strangarUr(varde: unknown): string[] {
+  if (typeof varde === 'string') return [varde];
+  if (Array.isArray(varde)) return varde.flatMap(strangarUr);
+  if (varde && typeof varde === 'object') return Object.values(varde as Record<string, unknown>).flatMap(strangarUr);
+  return [];
+}
+
+function granska(kalla: Record<string, unknown>, kommun: string, id: string) {
+  for (const falt of GRANSKADE_FALT) {
+    for (const text of strangarUr(kalla[falt])) {
+      const { strukna } = strippaProcessSprak(text);
+      if (strukna.length > 0) traffar.push({ kommun, id, falt, text, strukna });
     }
   }
 }
-// Opus 2026-09-24: sedan de 155 omverifieringsanteckningarna flyttats till
-// qa_anteckning fäller processpråk bygget, så att steg 3 och senare pass
-// inte kan skriva tillbaka revisionslogg i den publika texten.
-if (anteckningMedProcessSprak > 0 && process.env.FG_PROCESSSPRAK_VARNA !== '1') {
-  console.error(`\nProcesspråk-FAIL — ${anteckningMedProcessSprak} bidrag har revisionslogg i anteckning. Flytta den till qa_anteckning.`);
-  for (const k of kommuner) for (const b of k.bidrag) {
-    const { strukna } = strippaProcessSprak(b.anteckning);
-    if (strukna.length) console.error(`  ${k.kommun_slug} — ${b.id}: ${strukna[0].slice(0, 120)}`);
-  }
-  process.exit(1);
+
+for (const k of kommuner) {
+  granska(k as unknown as Record<string, unknown>, k.kommun_slug, '(kommunnivå)');
+  for (const b of k.bidrag) granska(b as unknown as Record<string, unknown>, k.kommun_slug, b.id);
 }
-if (anteckningMedProcessSprak > 0) {
-  console.log(
-    `\nVARNING (fäller inte): ${anteckningMeningarStrukna} meningar processpråk i anteckning, ` +
-      `${anteckningMedProcessSprak} bidrag, ${kommunerMedProcessSprak.size} kommuner. ` +
-      `Filtreras bort vid rendering (A1) — flytta till qa_anteckning vid nästa researchpass i respektive kommun.`
+
+// Opus 2026-09-25: grinden fällde aldrig tidigare — mönstren matchade inte
+// formuleringarna i datan och bara b.anteckning granskades. Nu körs varje
+// sträng i anteckning, ansokningssystem och beskrivning, på båda nivåerna.
+// qa_anteckning är undantaget: dit flyttas revisionsspåret.
+if (traffar.length > 0) {
+  const varna = process.env.FG_PROCESSSPRAK_VARNA === '1';
+  const skriv = varna ? console.log : console.error;
+  const kommuner_ = new Set(traffar.map((t) => t.kommun));
+  skriv(
+    `\nProcesspråk-${varna ? 'VARNING' : 'FAIL'} — ${traffar.length} fält i ${kommuner_.size} kommuner ` +
+      `bär revisionslogg i publik text. Flytta den till qa_anteckning.`
   );
+  for (const t of traffar) skriv(`  ${t.kommun} — ${t.id} [${t.falt}]: ${t.strukna[0].slice(0, 120)}`);
+  if (!varna) process.exit(1);
 }

@@ -33,6 +33,17 @@ const PROCESSSPRAK_MONSTER: RegExp[] = [
   /tidigare lagrad|lagrade tidigare|var fel\b/i,
   /kunde inte (oberoende )?(om)?verifieras|inte omverifierat/i,
   /datasetet|extraktionsfel/i,
+  // Opus 2026-09-25: formuleringarna som steg 2 och tidigare researchpass
+  // faktiskt skrev. De gamla mönstren ovan fångade dem inte — ordföljden är
+  // omvänd ("lagrad källa pekade tidigare" mot "tidigare lagrad") och
+  // "omkörning" saknades helt, så räknaren stod på noll och FAIL-grinden i
+  // validera-data.ts hoppades över.
+  /omkörning/i,
+  /oförändrat vid|verifierat oförändrat|bekräftat oförändrat/i,
+  /lagrad källa|pekade tidigare/i,
+  /\b(verifierat|bekräftat|kontrollerat) (mot|vid|i|av oss|genom)\b/i,
+  /\btidigare angav\b|\bangav tidigare\b/i,
+  /\brättat\b/i,
 ];
 
 // Kända förkortningar som INTE ska tolkas som meningsslut — utan de här

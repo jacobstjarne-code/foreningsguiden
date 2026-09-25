@@ -76,4 +76,67 @@ test('strippaProcessSprak: ren användarkontext utan träffar lämnas helt orör
   assert.deepEqual(strukna, []);
 });
 
+// Opus 2026-09-25: ett fall per mönster som lades till när grinden gjordes
+// fällande. Formuleringarna är hämtade ordagrant ur de 42 anteckningar som
+// rensningen flyttade till qa_anteckning — inte påhittade exempel.
+test('strippaProcessSprak: "omkörning" stryks', () => {
+  const { kvar, strukna } = strippaProcessSprak(
+    'Ansökan avser lokalkostnader under föreningens senast avslutade verksamhetsår. Kontrollerad på nytt vid omkörning 2026-07-20, ingen ny avvikelse hittad.'
+  );
+  assert.equal(kvar, 'Ansökan avser lokalkostnader under föreningens senast avslutade verksamhetsår.');
+  assert.equal(strukna.length, 1);
+});
+
+test('strippaProcessSprak: "verifierat oförändrat" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    'Medel beviljas i mån av kvarvarande årsbudget. Verifierat oförändrat vid omkörning 2026-07-21.'
+  );
+  assert.equal(kvar, 'Medel beviljas i mån av kvarvarande årsbudget.');
+});
+
+test('strippaProcessSprak: "Lagrad källa pekade tidigare" stryks', () => {
+  const { kvar, strukna } = strippaProcessSprak(
+    'Lagrad källa pekade tidigare på sidan Projektstöd inom kultur, som inte beskriver stödet. Beslut går ut i november.'
+  );
+  assert.equal(kvar, 'Beslut går ut i november.');
+  assert.ok(strukna[0].startsWith('Lagrad källa'));
+});
+
+test('strippaProcessSprak: "bekräftat i <källa>" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    'Utbetalning i maj och oktober. Medlemstalet 25 bekräftat i kommunens regelverk — ingen konflikt för detta bidrag.'
+  );
+  assert.equal(kvar, 'Utbetalning i maj och oktober.');
+});
+
+test('strippaProcessSprak: "angav tidigare" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    'Sen_ansokan angav tidigare 1 mars för höstterminen, vilket motsade postens eget datumfält. Kommunens sida anger 25 februari.'
+  );
+  assert.equal(kvar, 'Kommunens sida anger 25 februari.');
+});
+
+test('strippaProcessSprak: "rättat" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    'Handläggs av Kulturkontoret. Åldersspannet rättat från 7–25 till 6–25 år enligt bidragsbestämmelserna.'
+  );
+  assert.equal(kvar, 'Handläggs av Kulturkontoret.');
+});
+
+// Negativa fall: de nya mönstren får inte svälja vanlig kassörstext. Båda
+// meningarna handlar om kommunens egen handläggning, inte om vår verifiering.
+test('strippaProcessSprak: "Beloppet beslutas av nämnden" är INTE processspråk', () => {
+  const text = 'Beloppet beslutas av nämnden.';
+  const { kvar, strukna } = strippaProcessSprak(text);
+  assert.equal(kvar, text);
+  assert.deepEqual(strukna, []);
+});
+
+test('strippaProcessSprak: "Kommunen bekräftar ansökan via e-post" är INTE processspråk', () => {
+  const text = 'Kommunen bekräftar ansökan via e-post.';
+  const { kvar, strukna } = strippaProcessSprak(text);
+  assert.equal(kvar, text);
+  assert.deepEqual(strukna, []);
+});
+
 console.log(`\n${antal} tester klara`);
