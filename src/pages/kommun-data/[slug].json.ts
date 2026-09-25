@@ -18,7 +18,9 @@ export const GET: APIRoute = ({ props }) => {
   const { kommun } = props as { kommun: ReturnType<typeof loadKommuner>[number] };
   const publicKommun = {
     ...kommun,
-    bidrag: kommun.bidrag.map((bidrag) => ({ ...bidrag, belopp: individuelltBelopp(bidrag) })),
+    // qa_anteckning är revisionsspår för oss, aldrig för besökaren (Opus
+    // 2026-09-24) — det renderas inte, och ska inte heller ligga i publik JSON.
+    bidrag: kommun.bidrag.map(({ qa_anteckning: _qa, ...bidrag }) => ({ ...bidrag, belopp: individuelltBelopp(bidrag as typeof kommun.bidrag[number]) })),
   };
   return new Response(JSON.stringify(publicKommun), { headers: { 'content-type': 'application/json' } });
 };
