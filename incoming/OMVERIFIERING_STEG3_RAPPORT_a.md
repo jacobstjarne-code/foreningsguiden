@@ -7,13 +7,13 @@ Session 1, 24–25 september 2026. Gren `omverifiering-steg3-a`, utgången från
 
 | | |
 |---|---|
-| Kommuner klara | 19 av 72 |
-| Bidrag lästa | 256 av 705 |
-| Rättade | 24 |
-| Tillagda | 1 |
+| Kommuner klara | 23 av 72 |
+| Bidrag lästa | 301 av 705 |
+| Rättade | 27 |
+| Tillagda | 6 |
 | Till browserkön | 0 |
 
-Alla nitton är committade och pushade. Båda grindarna gröna före varje
+Alla tjugotre är committade och pushade. Båda grindarna gröna före varje
 commit, pre-commit-kroken grön på samtliga.
 
 ## Klara kommuner
@@ -39,6 +39,10 @@ commit, pre-commit-kroken grön på samtliga.
 | Nykvarn | 12 | 3 | kommunen länkar en föråldrad riktlinje |
 | Rättvik | 10 | 1 | bygdepengen var öppen för fel sökande |
 | Sundsvall | 4 | 3 | vägbidragets längdkrav var vänt |
+| Älvkarleby | 7 | 0 | två tillagda från blankettsidan |
+| Åre | 10 | 2 | ett tillagt, lokalbidragets datum flyttat |
+| Årjäng | 14 | 1 | ett tillagt, lönebidrag låg bara i dokumentlistan |
+| Båstad | 14 | 0 | |
 
 ## Rättelser
 
@@ -134,6 +138,75 @@ tillagda. Anteckningen kopplar nu varje datum till sin fond.
 15:e i månaden före det kvartal" stämde inte — fristerna ligger ungefär sex
 veckor före. De fyra datumen står nu utskrivna.
 
+**Åre, `are-lokalbidrag`, `deadlines`.** 31 maj till 30 mars. Kommunens sida
+Föreningsstöd och bidrag, uppdaterad 27 maj 2026, räknar uttryckligen upp
+Lokalbidrag under rubriken "Sista ansökningsdag den 30 mars gäller för". Den
+särskilda portalomgång som gav 31 maj finns inte längre bland de öppna
+formulären i are.e-serve.se. Skälet ligger i postens `qa_anteckning`.
+
+**Åre, `are-elbidrag`, `deadline_status`.** Kontrollast till olast, se
+12-31-avsnittet nedan.
+
+**Årjäng, `arjang-investeringsstod`, `belopp_status`.** Kontrollast till olast.
+Posten hävdar "högst 30 procent av den godkända totala investeringskostnaden",
+men `kalla_url` är kultur- och fritidsnämndens protokoll 2024-05-07 där
+riktlinjen ANTOGS, inte riktlinjen själv. Riktlinjen är inte publicerad på
+arjang.se och stödet nämns inte på sidan Föreningsstöd. Värdet står kvar utan
+anspråk.
+
+## Tillagda bidrag
+
+**Jönköping, `jonkoping-studieforbund`.** Se ovan.
+
+**Älvkarleby, `alvkarleby-kultur-och-fritidspris`.** 10 000 kr till person
+ELLER förening. Reglementet (SBN 2011-03-11 §42, reviderat 2026-02-08) säger
+"Priset kan inte sökas" — det nomineras, samma form som Nykvarns Årets
+förening. `deadline_status: olast`: 19 april gäller 2026 års nominering,
+reglementet låter nämnden bestämma tidpunkten varje år.
+
+**Älvkarleby, `alvkarleby-en-pase-pengar`.** Ungdomar 13-20 år som ordnar
+arrangemang för andra barn och unga. Inte uteslutet som individstöd, eftersom
+villkoren kräver "en juridisk person (exempelvis en förening)" bakom
+arrangemanget — samma gräns som Jönköpings IdéJkpg och Lidköpings ungdomspeng.
+Nykvarns Idépeng föll åt andra hållet: där står uttryckligen att föreningar
+inte får söka.
+
+**Åre, `are-evenemangsfond`.** Utvecklingsstöd för nytt eller befintligt
+evenemang, länkat från samma bidragssida men hanterat av kommunstyrelsen.
+Kommunen publicerar varken villkor, belopp eller ansökningsperiod utanför
+e-tjänsten, så posten är ärligt tunn: `krav_fullstandiga: false`, belopp och
+deadline `ingen_regel`.
+
+**Årjäng, `arjang-lonebidrag`.** 3 000 kr per år vid 10 procents anställning
+upp till 30 000 kr vid heltid, högst två årsarbetare per förening. Riktlinjen
+ligger som relaterat dokument på sidan Föreningsstöd tillsammans med två
+ansökningsmallar, men nämns inte i brödtexten — den syns bara i dokumentlistan
+längst ned. Söks hos Ekonomiavdelningen, inte Kultur och Fritid.
+
+## 12-31 som behållits, med citat ur källan
+
+Regeln (Jacob 2026-09-25): 31 december godtas bara om datumet står
+uttryckligen i källan. Två poster har prövats mot den hittills.
+
+**Hylte, `hylte-arsbidrag-till-kulturforening` — behållet.** Bidragsnormer för
+föreningsbidrag, KFN 2025-11-20, avsnitt ÅRSBIDRAG FÖR KULTURFÖRENINGAR,
+under rubriken Ansökan: *"Ansökan om bidrag ska lämnas senast den 31 december
+för nästkommande år."* Noterat: postens `kalla_url` pekar på tjänsteskrivelsen
+om 2026 års fördelning, som bär potten 130 000 kr men inte ansökningsregeln.
+
+**Åre, `are-elbidrag` — behållet, men `deadline_status` sänkt till olast.**
+Portalen are.e-serve.se skriver under Elbidrag: *"Sista ansökningsdatum:
+2026-12-31"*. Datumet står alltså i källan. Men samma kort anger *"Period: 01
+januari 2024 - 31 december 2026"*, så datumet är slutet på formulärets
+giltighet, inte en årlig frist. Datumet står kvar, anspråket är borta, och
+anteckningen säger vad portalen faktiskt visar.
+
+**Borttaget före regeln:** Jönköpings investeringsbidrag hade 12-31 som andra
+datum utan stöd i riktlinjen. Det var fyndet som föranledde regeln.
+
+**Mätning vid införandet:** 32 bidrag i 28 kommuner bär 12-31 i datan. De tas
+vid den omverifiering som ändå ska göras, inte i ett eget svep.
+
 ## Punkt 2 — sådant som avviker
 
 **Sjöbo har lagt om sin webbplats.** `sitemap.xml`, `foreningsliv.html`
@@ -160,8 +233,15 @@ Gällivares 25 februari och 25 augusti för verksamhetsbidraget.
 regressionsskydd fällde.
 
 **Rättviks fyra e-tjänstsidor är serverrenderade** och gick att läsa med
-curl. Ingen browserkö behövdes. Det är värt att pröva innan en
-`etjanster.*`-URL skickas vidare till browserkön.
+curl. Ingen browserkö behövdes. Samma sak för Åres are.e-serve.se och
+Båstads bastad.rbok.se, och för Älvkarlebys sjalvservice.alvkarleby.se.
+Regeln ligger nu i ordern, punkt 2 i arbetsgången, så den gäller alla pass.
+
+**Tre kommuner publicerar bidrag som deras egen bidragssida inte nämner.**
+Jönköpings studieförbundsbidrag syns bara via sitemap, Älvkarlebys två via
+blankettsidan och Årjängs lönebidrag bara i dokumentlistan längst ned på
+sidan. Att läsa brödtexten på bidragssidan räcker inte — dokumentlistor,
+blankettsidor och sitemap måste med.
 
 ## Två saker om arbetsgången
 
@@ -183,6 +263,6 @@ Ett skript som letar `^\s*id:` missar de förra.
 
 ## Kvar i passet
 
-53 kommuner, 449 bidrag. Nästa åtta i listans ordning: Älvkarleby (7),
-Åre (10), Årjäng (14), Båstad (14), Bollebygd (16), Botkyrka (1),
-Danderyd (12), Emmaboda (20).
+49 kommuner, 404 bidrag. Nästa åtta i listans ordning: Bollebygd (16),
+Botkyrka (1), Danderyd (12), Emmaboda (20), Essunga (11), Falkenberg (2),
+Gislaved (1), Gullspång (3).
