@@ -1,19 +1,19 @@
 # Passrapport — omverifiering steg 3, pass A
 
-Session 1, 24 september 2026. Gren `omverifiering-steg3-a`, utgången från
+Session 1, 24–25 september 2026. Gren `omverifiering-steg3-a`, utgången från
 `origin/release-2026-09-24`. Worktree `~/Desktop/code_projects/fg-omverif-steg3-a`.
 
 ## Läge
 
 | | |
 |---|---|
-| Kommuner klara | 14 av 72 |
-| Bidrag lästa | 196 av 705 |
-| Rättade | 11 |
-| Tillagda | 0 |
+| Kommuner klara | 19 av 72 |
+| Bidrag lästa | 256 av 705 |
+| Rättade | 24 |
+| Tillagda | 1 |
 | Till browserkön | 0 |
 
-Alla åtta är committade och pushade. Båda grindarna gröna före varje
+Alla nitton är committade och pushade. Båda grindarna gröna före varje
 commit, pre-commit-kroken grön på samtliga.
 
 ## Klara kommuner
@@ -34,6 +34,11 @@ commit, pre-commit-kroken grön på samtliga.
 | Ale | 13 | 0 | ny riktlinje dec 2025 |
 | Falköping | 9 | 0 | |
 | Gällivare | 16 | 0 | |
+| Hylte | 11 | 0 | |
+| Jönköping | 23 | 6 | ett bidrag tillagt, deadline utan källa borttagen |
+| Nykvarn | 12 | 3 | kommunen länkar en föråldrad riktlinje |
+| Rättvik | 10 | 1 | bygdepengen var öppen för fel sökande |
+| Sundsvall | 4 | 3 | vägbidragets längdkrav var vänt |
 
 ## Rättelser
 
@@ -69,6 +74,66 @@ kommunens sida för trygga idrottsplatser.
 totala årsbudgeten är 395 000 kronor, utöver de 35 000 kronor per projekt
 som redan stod. Källa: sidan om stöd till landsbygdsutveckling.
 
+**Jönköping, `jonkoping-investeringsbidrag`, `deadlines`.** Före: 1 oktober
+och 31 december. Efter: bara 1 oktober. Den andra fristen finns inte i
+källan. Riktlinjen har stort investeringsbidrag (investeringskostnad från
+100 000 kr, tak 2 mkr) senast 1 oktober och litet investeringsbidrag
+(10 000–100 000 kr) löpande under året. Båda står nu i anteckningen.
+`belopp_status` ingen_regel till kontrollast: procentnivåerna 50 och 70
+samt taket står i källan.
+
+**Jönköping, tre anteckningar med läckt platshållartext.** `anteckning`
+slutade i fragmentet "Ej angivet i källan" på aktivitetsbidraget och
+investeringsbidraget, och var bara den frasen på det långsiktiga
+verksamhetsbidraget. Två `sen_ansokan` bar "Ansökningsfristen är inte
+verifierad. Kontrollera kommunens aktuella information."
+
+**Jönköping, `jonkoping-studieforbund`, TILLAGT.** Kommunbidrag till
+studieförbund, sista ansökningsdag 2 maj, har egen sida i bidragsmenyn men
+saknades i filen. Grundbidrag 75 procent av anslaget som ligger fast två
+år, rörligt bidrag 25 procent som omfördelas årligen. Hittad genom att
+läsa menyn via sitemap — sidnavigeringen exponerar inte syskonsidorna.
+Idépeng är däremot inte tillagd: riktlinjens 3.7 säger att
+"Föreningar/organisationer får inte söka bidraget".
+
+**Nykvarn, `nykvarn-aktivitetsbidrag`, källkonflikt i anteckningen.**
+Kommunens sida Föreningsbidrag länkar riktlinjerna som antogs 2024-01-17,
+där beloppet är 8 kronor per deltagare. Den riktlinje kultur- och
+fritidsnämnden reviderade 2025-12-09 anger 10 kronor. Vårt belopp och vår
+`kalla_url` pekar på den gällande versionen, men en kassör som klickar
+kommunens länk får fel siffra, så konflikten står i anteckningen.
+
+**Nykvarn, `nykvarn-arets-forening`, `deadline_status`.** Kontrollast till
+olast. Källan är en nyhet om 2025 års priser med sista dag 8 februari 2026.
+Att priserna delas ut varje år står där, men inte att datumet återkommer.
+
+**Rättvik, `rattvik-bygdepeng-dalfors-orebygden`.** Posten sa att stödet
+"kan sökas av både föreningar och privatpersoner" och hade privatpersoner i
+`malgrupp`. Ansökningsblanketten, som kommunens sida pekar ut som
+villkorskälla, säger motsatsen: bara registrerade föreningar och
+organisationer, inte företag eller privatpersoner. Följdrättelser ur samma
+blankett: taket 100 000 kr per sökande och år (`belopp_avser` ren_pott till
+per_forening), och `kommunens_pott` som sa "300 000 kr per år" utan källa —
+potten är en andel av bruttoersättningen från Hedbobergets vindkraftverk
+och varierar; enda publicerade siffran är 405 000 kr för 2023.
+
+**Sundsvall, `sundsvall-vagbidrag`, `krav`.** Kravet sa att väglängden
+"efter avdrag för de första 150 meterna" ska vara minst 293 meter. Källan
+säger att den totala längden ska vara minst 293 meter, varefter 150 meter
+dras av — kommunens eget räkneexempel visar det. Som posten stod hade en
+väg på 443 meter sett bidragsberättigad ut. Även: upprustningsbidrag går
+inte att söka alls, inte bara "inte kombineras", och taket på 15 procent av
+statsbidraget saknades.
+
+**Sundsvall, `sundsvall-stiftelser-fonder`, `deadlines`.** 31 augusti hörde
+till Grafström-Sandqvistska konststipendiet, som bara enskilda konstnärer
+kan söka, och är borttaget. 21 april och 28 oktober saknades och är
+tillagda. Anteckningen kopplar nu varje datum till sin fond.
+
+**Sundsvall, `sundsvall-medfinansiering-evenemang`, `krav`.** "Senast den
+15:e i månaden före det kvartal" stämde inte — fristerna ligger ungefär sex
+veckor före. De fyra datumen står nu utskrivna.
+
 ## Punkt 2 — sådant som avviker
 
 **Sjöbo har lagt om sin webbplats.** `sitemap.xml`, `foreningsliv.html`
@@ -94,6 +159,10 @@ Gällivares 25 februari och 25 augusti för verksamhetsbidraget.
 **Ingen kommun hade mer än hälften av bidragen ändrade** och inget
 regressionsskydd fällde.
 
+**Rättviks fyra e-tjänstsidor är serverrenderade** och gick att läsa med
+curl. Ingen browserkö behövdes. Det är värt att pröva innan en
+`etjanster.*`-URL skickas vidare till browserkön.
+
 ## Två saker om arbetsgången
 
 **Listan och skriptet är ospårade i `fg-production-batch-01`.** Ordern,
@@ -114,6 +183,6 @@ Ett skript som letar `^\s*id:` missar de förra.
 
 ## Kvar i passet
 
-58 kommuner, 509 bidrag. Nästa i ordning: Hylte (11), Jönköping (22),
-Nykvarn (12), Rättvik (10), Sundsvall (4), Svalöv (16), Älvkarleby (7),
-Årjäng (14).
+53 kommuner, 449 bidrag. Nästa åtta i listans ordning: Älvkarleby (7),
+Åre (10), Årjäng (14), Båstad (14), Bollebygd (16), Botkyrka (1),
+Danderyd (12), Emmaboda (20).
