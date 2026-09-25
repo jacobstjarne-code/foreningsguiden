@@ -43,7 +43,20 @@ const PROCESSSPRAK_MONSTER: RegExp[] = [
   /lagrad källa|pekade tidigare/i,
   /\b(verifierat|bekräftat|kontrollerat) (mot|vid|i|av oss|genom)\b/i,
   /\btidigare angav\b|\bangav tidigare\b/i,
+  // \b före r:et gör att "upprättat" INTE träffar (p och r är båda ordtecken,
+  // alltså ingen ordgräns där) — negativt testfall i verify-anteckning-filter.
   /\brättat\b/i,
+  // Jacob 2026-09-25, andra vändan: formuleringar som steg 2 och tidigare pass
+  // skrev men som första omgången mönster inte tog.
+  /förra körningen|denna körning|\bkörningen\b/i,
+  /dubbelhämtat|oberoende hämtning|\bhämtning(ar)?\b/i,
+  // Beställd som /^(...)$/ men träffen den ska ta — Haparandas "(kontrollerat
+  // 18 september 2026)" — står inuti en mening, inte som egen mening. Ankrad
+  // skulle mönstret aldrig kunna matcha något. Oankrat här, enligt det
+  // beställda utfallet.
+  /(kontrollerat|verifierat|bekräftat|hämtat|läst) \d{1,2} \w+ \d{4}/i,
+  /\bbekräftat som\b/i,
+  /\btidigare angavs\b/i,
 ];
 
 // Kända förkortningar som INTE ska tolkas som meningsslut — utan de här

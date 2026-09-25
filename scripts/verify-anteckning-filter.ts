@@ -139,4 +139,49 @@ test('strippaProcessSprak: "Kommunen bekräftar ansökan via e-post" är INTE pr
   assert.deepEqual(strukna, []);
 });
 
+// Jacob 2026-09-25, andra vändan mönster. Samma princip: formuleringarna är
+// hämtade ur de anteckningar mönstren faktiskt fällde, inte påhittade.
+test('strippaProcessSprak: "förra körningen" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    'Detta var ett av de bidrag som uteslöts i förra körningen — verifierat här som faktiskt sökbart. Beslutas av omsorgsnämnden.'
+  );
+  assert.equal(kvar, 'Beslutas av omsorgsnämnden.');
+});
+
+test('strippaProcessSprak: "oberoende hämtningar" stryks', () => {
+  const { kvar, strukna } = strippaProcessSprak(
+    'Handläggning sker löpande. Deadline satt till sista dag i respektive period, dubbelhämtat och bekräftat identiskt i två oberoende hämtningar 2026-07-20.'
+  );
+  assert.equal(kvar, 'Handläggning sker löpande.');
+  assert.equal(strukna.length, 1);
+});
+
+test('strippaProcessSprak: "kontrollerat <dag månad år>" stryks mitt i en mening', () => {
+  const { kvar } = strippaProcessSprak(
+    'Ansökan avser föregående år. Driftbidraget ska sökas senast den 30 april (kontrollerat 18 september 2026).'
+  );
+  assert.equal(kvar, 'Ansökan avser föregående år.');
+});
+
+test('strippaProcessSprak: "bekräftat som" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    "Samma ansökningsperioder som aktivitetsstöd 7–25 år. Bekräftat som eget bidrag i kommunens e-tjänstkatalog."
+  );
+  assert.equal(kvar, 'Samma ansökningsperioder som aktivitetsstöd 7–25 år.');
+});
+
+test('strippaProcessSprak: "tidigare angavs" stryks', () => {
+  const { kvar } = strippaProcessSprak(
+    'Bidraget gäller ett år i taget. Socialnämnden fattar beslut i oktober (tidigare angavs september).'
+  );
+  assert.equal(kvar, 'Bidraget gäller ett år i taget.');
+});
+
+test('strippaProcessSprak: "upprättat avtal" är INTE processspråk — ordgränsen i /\\brättat\\b/ håller', () => {
+  const text = 'Ersättning enligt upprättat avtal.';
+  const { kvar, strukna } = strippaProcessSprak(text);
+  assert.equal(kvar, text);
+  assert.deepEqual(strukna, []);
+});
+
 console.log(`\n${antal} tester klara`);
