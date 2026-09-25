@@ -103,7 +103,10 @@ const bilagor = forutsattningar.length > 0 ? harvestBilagor(genereraRegistrering
 type Station2Entry = { urgency: Urgency; namn: string; datumText: string; href: string } | null;
 const station2PerFilter: Record<string, Station2Entry> = Object.fromEntries(
   filterValues.map((filter) => {
-    const kandidater = bidragForFilter(filter).filter((e) => e.dateISO);
+    // Jacob 2026-09-25: station 2 presenterar ETT bidrag som "närmast" med
+    // brådskemärke och nedräkning. Ett olast-datum kan inte bära det
+    // anspråket, så sådana bidrag är inte kandidater här.
+    const kandidater = bidragForFilter(filter).filter((e) => e.dateISO && e.bidrag.deadline_status !== 'olast');
     const forstaKandidat = kandidater[0];
     if (!forstaKandidat || !forstaKandidat.dateISO) return [filter, null];
     return [filter, {

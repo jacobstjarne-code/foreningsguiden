@@ -1129,8 +1129,22 @@ export const VOID_MARK = {
  * övertalning, bara vad vi faktiskt kan stå för.
  */
 export const OLAST_MARK = {
+  // Jacob 2026-09-25: den generiska raden är sista utväg. Finns
+  // senast_verifierad (eller kommunens verifierad) ska datumet stå där i
+  // stället — "sedan vi hämtade den" säger inte läsaren NÄR, och det är
+  // precis vad hon behöver för att bedöma om uppgiften är värd att lita på.
   rad: 'Inte kontrollerad mot kommunens sida sedan vi hämtade den.',
+  radMedDatum: 'Läst på kommunens sida {datum}.',
   kallaKnappMall: 'Läs på {host}',
+  // deadline_status: olast (Jacob 2026-09-25). Datumet får inte bäras som
+  // fakta någonstans: inget brådskemärke, ingen rubrikdatum-siffra, ingen
+  // rad i deadlinekalendern. I deadlinerutan står datumet kvar men med
+  // hela reservationen runt sig.
+  deadlineRubrik: 'Datum ej bekräftat',
+  deadlineReservation: 'Kommunens underlag anger {datum} men vi kan inte bekräfta att det är en årlig ansökningsfrist. Kontrollera med kommunen.',
+  // belopp_status: olast — beloppet visas, men aldrig på en framträdande
+  // plats och aldrig utan förbehållet.
+  beloppReservation: 'enligt kommunens underlag, ej bekräftat',
   // TILLSTANDET_OLAST.md 4c: "Aldrig markör utan legend på samma sida" —
   // ordagrann rad ur filen, för ytor där markören bär hela anspråket utan
   // egen reservationstext (deadlinekalendern, förstasidans närmaste).

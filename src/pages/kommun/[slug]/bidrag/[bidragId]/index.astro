@@ -22,7 +22,7 @@ import {
   individuelltBelopp, bidragHarNamngivetSystem, possessiv, beloppArEttEnkeltTal, beraknaArbetsbevis,
 } from '../../../../../lib/kommuner';
 import type { Kommun, Bidrag } from '../../../../../lib/kommuner';
-import { KOMMUN, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR } from '../../../../../lib/content';
+import { KOMMUN, KOPRUTA, KONVERTERINGSSTAPEL, FORSTASIDAN_SVARAR, OLAST_MARK } from '../../../../../lib/content';
 import { PRIS_BIDRAGSUTKAST_ORE } from '../../../../../lib/priser';
 import { genereraUtkast } from '../../../../../lib/utkastGenerator';
 import { harvestBilagorFranKrav } from '../../../../../lib/kopDokument';
@@ -43,11 +43,20 @@ const { kommun, bidrag } = Astro.props as { kommun: Kommun; bidrag: Bidrag };
 
 const today = todayISO();
 const dateISO = earliestDeadlineISO(bidrag, today);
-const radDatumText = dateISO
+// Jacob 2026-09-25: vid deadline_status olast får rubrikraden inte bära
+// datumet som fakta. Den visar "Datum ej bekräftat"; själva datumet står
+// kvar i deadlinerutan längre ned, med hela reservationen runt sig.
+const deadlineOlast = bidrag.deadline_status === 'olast';
+const radDatumText = deadlineOlast
+  ? OLAST_MARK.deadlineRubrik
+  : dateISO
   ? formatDate(dateISO)
   : bidrag.deadlines.typ === 'relativ' ? (relativFrist(bidrag) ?? 'löpande ansökan')
   : bidrag.deadlines.typ === 'okand' ? 'inget publicerat datum' : 'löpande ansökan';
 const beloppPerForening = individuelltBelopp(bidrag);
+// Samma princip för beloppet: ett obekräftat belopp får ingen framträdande
+// placering. Det står kvar i dl-listan, med förbehållet.
+const beloppOlast = bidrag.belopp_status === 'olast';
 
 // Samma kommun-nivå-beräkning som KommunSidaFull.astro gör en gång för
 // alla bidragskort på sidan — här bara för DETTA bidrags egen sida.
@@ -127,8 +136,8 @@ const webPageJsonLd = {
   <p class="bidrag-sida__eyebrow">{kommun.kommun} kommun</p>
   <h1>{bidrag.namn}</h1>
   <div class="bidrag-sida__meta">
-    {dateISO && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
-    <span class="bidrag-sida__belopp">{beloppPerForening ?? 'individuellt belopp inte fastställt'}</span>
+    {dateISO && !deadlineOlast && <UrgencyChip urgency={getUrgency(daysUntil(dateISO, today))} />}
+    {!beloppOlast && <span class="bidrag-sida__belopp">{beloppPerForening ?? 'individuellt belopp inte fastställt'}</span>}
     <span class="bidrag-sida__datum">{radDatumText}</span>
   </div>
 

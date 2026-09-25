@@ -74,6 +74,23 @@ const statusNotis: Record<'pausad' | 'avskaffat', string> = {
 // skriven text, ingen ny prosa). Visas bara när minst en krav-rad faktiskt
 // är streckad.
 const kravStreckad = bidrag.krav_status === 'olast';
+
+// Jacob 2026-09-25. Tre beräkningar för olast-skärpningen:
+// (a) banderollens rad bär datumet när vi har ett — senast_verifierad på
+//     bidraget, annars kommunens verifierad (datumFormaterat är redan den
+//     kedjan). Den generiska raden blir sista utväg, inte förstahandsval.
+// (b) deadlineOlastDatum är datumtexten som reservationen i deadlinerutan
+//     ska citera. Bara för fasta datum — ett löpande bidrag har inget
+//     datum att reservera sig mot.
+// (c) beloppOlast styr både förbehållet i dl-raden och att beloppet inte
+//     får någon framträdande placering på ytorna ovanför.
+const olastRadText = (bidrag.senast_verifierad ?? verifierad)
+  ? OLAST_MARK.radMedDatum.replace('{datum}', datumFormaterat)
+  : OLAST_MARK.rad;
+const deadlineOlastDatum = bidrag.deadline_status === 'olast' && bidrag.deadlines.typ === 'fasta'
+  ? bidrag.deadlines.datum.map(formatRecurringDate).join(' · ')
+  : null;
+const beloppOlast = bidrag.belopp_status === 'olast';
 const beloppPerForening = individuelltBelopp(bidrag);
 const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening !== null
   ? 'Belopp för föreningen'
@@ -98,7 +115,7 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
   <div class="fg-unread-banner">
     <span class="fg-void-mark" aria-hidden="true"></span>
     <span>
-      {OLAST_MARK.rad}
+      {olastRadText}
       {' '}<a href={bidrag.kalla_url} target="_blank" rel="noopener">{OLAST_MARK.kallaKnappMall.replace('{host}', kallaHost)}</a>
     </span>
   </div>
@@ -137,10 +154,20 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
         bidragNamn={bidrag.namn}
       />
     ) : (
-      <span class="fg-faltmarkor">
-        <span class={bidrag.deadline_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
-        {formatDeadlines(bidrag)}
-      </span>
+      <>
+        <span class="fg-faltmarkor">
+          <span class={bidrag.deadline_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+          {formatDeadlines(bidrag)}
+        </span>
+        {/* Jacob 2026-09-25: vid olast står datumet kvar, men aldrig
+            ensamt. Läsaren ska se vad kommunens underlag säger OCH att
+            vi inte kan gå i god för att det är en årlig frist. */}
+        {deadlineOlastDatum && (
+          <p class="bidrag-card__olast-reservation">
+            {OLAST_MARK.deadlineReservation.replace('{datum}', deadlineOlastDatum)}
+          </p>
+        )}
+      </>
     )}
   </dd>
 
@@ -154,8 +181,9 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
       />
     ) : beloppPerForening !== null ? (
       <span class="fg-faltmarkor">
-        <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+        <span class={beloppOlast ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
         {beloppPerForening}
+        {beloppOlast && <span class="bidrag-card__olast-forbehall"> — {OLAST_MARK.beloppReservation}</span>}
       </span>
     ) : (
       // VoidMark bara vid genuint ingen uppgift alls — INTE när
@@ -181,8 +209,9 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
       <dt>Kommunens pott</dt>
       <dd>
         <span class="fg-faltmarkor">
-          <span class={bidrag.belopp_status === 'olast' ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
+          <span class={beloppOlast ? 'fg-void-mark' : 'fg-read-mark'} aria-hidden="true"></span>
           {bidrag.kommunens_pott}
+          {beloppOlast && <span class="bidrag-card__olast-forbehall"> — {OLAST_MARK.beloppReservation}</span>}
         </span>
       </dd>
     </>

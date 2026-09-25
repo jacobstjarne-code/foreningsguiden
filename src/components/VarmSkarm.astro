@@ -15,7 +15,7 @@
 // gjort BÅDA sämre. Samma tokens (--fg-*), inga nya färger.
 import type { Kommun, Bidrag } from '../lib/kommuner';
 import { formatDate, earliestDeadlineISO, daysUntil, relativFrist, VERKSAMHET_FORENING_LABELS, svenskLista, beloppForListrad } from '../lib/kommuner';
-import { VARM_SKARM } from '../lib/content';
+import { VARM_SKARM, OLAST_MARK } from '../lib/content';
 
 export interface Props {
   kommun: Kommun;
@@ -64,6 +64,9 @@ function riktarSigTillText(bidrag: Bidrag): string | null {
 }
 
 function radDatumText(bidrag: Bidrag, dateISO: string | null): string {
+  // Jacob 2026-09-25: samma olast-regel som på bidragets egen sida och i
+  // kommunlistan. Datumet får inte stå som fakta i kortbadgen heller.
+  if (bidrag.deadline_status === 'olast') return OLAST_MARK.deadlineRubrik;
   if (dateISO) return formatDate(dateISO);
   if (bidrag.deadlines.typ === 'relativ') return relativFrist(bidrag) ?? 'löpande ansökan';
   if (bidrag.deadlines.typ === 'okand') return 'inget publicerat datum';
@@ -88,6 +91,9 @@ const BELOPP_KORT_GRANS = 24; // "3 000 kronor per år" = 19 tecken, ryms
 // beloppForListrad() returnerar null om strängen inte bär en siffra,
 // '%' eller 'prisbasbelopp'. Kortet visar då bara datumbadgen.
 function beloppText(bidrag: Bidrag): string | null {
+  // Obekräftat belopp får ingen framträdande placering — kortets
+  // hero-stora beloppsrad är den mest framträdande ytan som finns.
+  if (bidrag.belopp_status === 'olast') return null;
   return beloppForListrad(bidrag);
 }
 function beloppArKort(bidrag: Bidrag): boolean {
@@ -150,7 +156,13 @@ const resten = sortedBidrag.slice(2);
             {beloppText(bidrag) && (
               <span class={beloppArKort(bidrag) ? 'varm-skarm__kort-belopp' : 'varm-skarm__kort-belopp varm-skarm__kort-belopp--lang'}>{beloppText(bidrag)}</span>
             )}
-            {dateISO && <span class="varm-skarm__kort-badge">{formatDate(dateISO)} · {daysUntil(dateISO, today)} dgr</span>}
+            {dateISO && (
+              <span class="varm-skarm__kort-badge">
+                {bidrag.deadline_status === 'olast'
+                  ? OLAST_MARK.deadlineRubrik
+                  : `${formatDate(dateISO)} · ${daysUntil(dateISO, today)} dgr`}
+              </span>
+            )}
           </div>
           <div class="varm-skarm__kort-beskrivning" data-varm-kort-beskrivning>{riktarSigTillText(bidrag)}</div>
         </div>

@@ -622,6 +622,12 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
   for (const kommun of loadKommuner()) {
     for (const bidrag of kommun.bidrag) {
       if (bidrag.status !== 'aktiv') continue; // H26 — pausat/avskaffat bidrag hör inte hemma i kalendern
+      // Jacob 2026-09-25: deadline_status 'olast' betyder att vi INTE kan
+      // stå för att datumet är en årlig frist. Ett sådant datum får inte
+      // ligga i en kalender vars hela funktion är att säga "det här
+      // händer den här dagen". Bidraget finns kvar på kommunsidan och på
+      // sin egen sida, där datumet visas med hela reservationen runt sig.
+      if (bidrag.deadline_status === 'olast') continue;
       const base = {
         niva: 'kommunal' as const,
         kommun: kommun.kommun,

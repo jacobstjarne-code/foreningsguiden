@@ -185,6 +185,13 @@ const webPageJsonLd = {
   name: h1,
   dateModified: kommun.verifierad,
 };
+// Jacob 2026-09-25: de aggregerade olast-raderna (ekern och deadline-
+// frågan) gäller hela kommunen, inte ett enskilt bidrag, så de bär
+// kommunens verifierad-datum. Generiska raden bara om datum saknas.
+const olastRadText = kommun.verifierad
+  ? OLAST_MARK.radMedDatum.replace('{datum}', formatDate(kommun.verifierad))
+  : OLAST_MARK.rad;
+
 ---
 <Base title={metaTitle} description={metaDescription}>
   <script type="application/ld+json" set:html={JSON.stringify(webPageJsonLd)} />
@@ -260,7 +267,7 @@ const webPageJsonLd = {
         {svarForstOlast && (
           <p class="ekern__olast">
             <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
-            {OLAST_MARK.rad}
+            {olastRadText}
           </p>
         )}
         <p class="ekern__verifierad">
@@ -383,7 +390,7 @@ const webPageJsonLd = {
               {arDeadlineFraga && deadlinesammanfattningHarOlast && (
                 <p class="faq-list__olast">
                   <span class="fg-void-mark fg-void-mark--inline" aria-hidden="true"></span>
-                  {OLAST_MARK.rad}
+                  {olastRadText}
                 </p>
               )}
             </div>
