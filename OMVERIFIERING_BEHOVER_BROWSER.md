@@ -868,3 +868,27 @@ indexerar bara `bidrag.kalla_url`. Fyra av de arton döda källorna låg på
 kommun- eller forutsattning-nivå och rapporterades därför som "ingen i YAML",
 vilket läser som en föråldrad Redis-post. Det är de inte — de är döda länkar
 på varje bidragssida i kommunen.
+
+## Till Opus i Chrome, 2026-10-02
+
+Sju döda källor där jag läst kandidaten med curl och pdftotext men INTE hittat
+ett dokument som bär postens uppgifter. Alla kandidat-URL:er nedan svarar 200 —
+problemet är att dokumentet saknas eller inte täcker posten, inte att sidan är
+otillgänglig. Ersätt `kalla_url` först när dokumentet läst och bekräftat;
+`senast_verifierad` bumpas bara av den som läst det.
+
+| Kommun / post | Död källa | Vad jag hittade |
+|---|---|---|
+| **lomma**, `lomma-kommunalt-aktivitetsstod-kulturforeningar` | `eservice.lomma.se/Form.ashx?id=36` | [Stöd, bidrag och stipendier](https://lomma.se/upplevaochgora/foreningarforeningsliv/stodbidragochstipendier.1151.html) svarar 200 men har inga PDF-länkar i HTML:en. Undersidorna finns per bidragstyp (`verksamhetsstodtillstudieforbund.1154.html`, `kulturplaketten.1155.html` m.fl.) — leta rätt undersida för kulturföreningars aktivitetsstöd. |
+| **lomma**, `lomma-lokalstod-till-pensionarsforeningar` + `lomma-startbidrag` | `L 04 Regler för stöd till föreningar i Lomma kommun.pdf` | Samma sida. Dokumentet bör ligga under nytt asset-id, samma mönster som Bollebygd. Inga PDF-länkar syns för curl, så listan renderas sannolikt med JS. |
+| **bracke**, `bracke-subventionerade-kommunala-lokaler` | `Regler för uthyrning av kommunens idrottsanläggningar.pdf` | [Föreningsliv och bidrag](https://www.bracke.se/kultur-fritid-och-turism/fritid/foreningsliv-och-bidrag) publicerar nu [Program för bidrag till föreningslivet.pdf](https://www.bracke.se/download/18.2bed32d019a7ba0d7043996d/1764670320893/Program%20f%C3%B6r%20bidrag%20till%20f%C3%B6reningslivet.pdf). Jag har läst den: den handlar om bidrag, inte om uthyrningstaxor, och nämner uthyrning bara i en avräkningsregel. Taxedokumentet finns inte där. |
+| **hagfors**, `hagfors-lokalt-aktivitetsstod-65-plus` | `/undersidor/politik-och-kommun/medborgarforslag.html` | Källan är fel i sak, inte bara död — en medborgarförslagssida är inte källa för ett aktivitetsstöd. [Idrott, motion och friluftsliv](https://www.hagfors.se/uppleva-och-gora/idrott-motion-och-friluftsliv.html) svarar 200 men har inga PDF-länkar. Hagfors sitemap ger 404. |
+| **hagfors**, `hagfors-pensionars-och-funktionshinderforeningar` | `Riktlinjer ... pensionärsföreningar och ... funktionshinder, rev 2023-08-28.pdf` | Samma trädflytt, samma sida, inga PDF-länkar för curl. |
+| **lund**, `lund-publika-idrottsarrangemang` | `/foreningslotsen/forenings--och-projektbidrag/stod-till-idrott` | [Förenings- och projektbidrag](https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag) svarar 200. Undersidan `stod-till-idrott` är omdöpt eller borta; hitta vad den heter nu. |
+| **linkoping**, `linkoping-son-grundbidrag` + `-son-aktivitetsbidrag` | `Föreningsbidrag bestämmelser, kriterier och bidragsregler SON.pdf` | Trädet har flyttat till [bidrag till föreningar, arrangemang och aktiviteter](https://www.linkoping.se/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter) med undersidor per nämnd. [socialt-stodjande-verksamhet](https://www.linkoping.se/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter/socialt-stodjande-verksamhet) svarar 200 och är sannolikt rätt — SON är socialnämnden. Läs den och leta det nya regeldokumentet. |
+| **svedala**, `svedala-aktivitetsbidrag` + åtta poster på riktlinjen | `protokoll-fran-kommunfullmaktige-18-juni-2026-...pdf` och `riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf` | Svedalas sitemap ger 404 och jag hittade ingen levande bidragssida alls — alla fyra sökvägar jag prövade gav 404. Protokoll som källa rensas dessutom när justeringen är klar; riktlinjen är den som ska pekas på. |
+
+**Gemensamt mönster:** i fem av sju fall svarar kommunens bidragssida 200 men
+innehåller inga PDF-länkar i HTML:en som curl ser. Dokumentlistorna renderas
+med JS. Det är precis den klassen browsern löser och curl inte gör — till
+skillnad från `otillganglig`-flaggorna, som nästan alltid bara var UA-blockering.
