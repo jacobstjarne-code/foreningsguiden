@@ -1,11 +1,24 @@
 #!/usr/bin/env python3
-"""Omverifiering steg 3 — arbetslista per pass.
+"""⛔ KÖR INTE — ERSATT AV incoming/generera_steg3_lista.py (Jacob 2026-10-02).
+
+Det här skriptet läste passfördelningen ur OMVERIFIERING_STEG3_LISTA.md och
+skrev JSON:en. Riktningen är vänd: JSON:en är nu passlistans enda källa och
+MD:n genereras ur den. En omkörning här skulle (a) skriva över JSON:en med
+MD:ns passfördelning, (b) tappa varje kommun som verifierats sedan listan
+skrevs, eftersom filtret senast_verifierad < 2026-09-17 då faller ut, och
+(c) radera Härjedalens och Österåkers flytt från pass C till pass A.
+
+Filen ligger kvar som dokumentation av hur listan en gång togs fram.
+
+Historik (gäller inte längre):
+Omverifiering steg 3 — arbetslista per pass.
 Kör från repo-roten på release-2026-09-24:  python3 incoming/omverif_steg3_lista.py
 Skriver incoming/OMVERIFIERING_STEG3_LISTA.json. Passfördelningen (A/B/C) tas
 ur OMVERIFIERING_STEG3_LISTA.md — kommunerna där är facit, skriptet ger bara
 bidragsdetaljerna. Kräver pyyaml. Testkört av Opus 2026-09-24 mot provmergen:
 A 72 kommuner/708 bidrag, B 78/707, C 76/709, 0 utanför listan."""
-import yaml, glob, json, datetime, re, os
+import yaml, glob, json, datetime, re, os, sys
+sys.exit('omverif_steg3_lista.py är ersatt av generera_steg3_lista.py — se filhuvudet.')
 TODAY = datetime.date.today()
 GRANS = '2026-09-17'
 md = open('incoming/OMVERIFIERING_STEG3_LISTA.md', encoding='utf-8').read()

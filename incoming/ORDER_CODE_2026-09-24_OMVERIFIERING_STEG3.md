@@ -19,7 +19,11 @@ varje kommun är en egen YAML-fil och passen inte delar kommuner.
     cd ~/Desktop/code_projects/fg-omverif-steg3-<pass>
     pwd && git branch --show-current && git worktree list
     npm ci
-    python3 incoming/omverif_steg3_lista.py
+
+`OMVERIFIERING_STEG3_LISTA.json` är passlistans enda källa och ligger i
+grenen — generera den inte om. Flyttas en kommun mellan pass: ändra JSON:en
+och kör `python3 incoming/generera_steg3_lista.py`, som skriver om MD:n.
+Det gamla `omverif_steg3_lista.py` gick åt andra hållet och är dödmarkerat.
 
 `<pass>` är `a`, `b` eller `c`. Worktreen ska ligga under code_projects,
 aldrig under /private/tmp. Står sessionen i bandy-manager: stanna.

@@ -1,12 +1,14 @@
+Genererad ur LISTA.json, redigera inte för hand.
+
 # OMVERIFIERING STEG 3 — arbetslista
 
-Genererad av Opus 2026-09-24 ur provmergen (omverifiering-steg2 + af1-profillager). Alla bidrag med `senast_verifierad` före 2026-09-17 eller saknat, exklusive `status: avskaffat`.
+Alla bidrag med `senast_verifierad` före 2026-09-17 eller saknat, exklusive `status: avskaffat`. Tabellerna och totalsummorna nedan skrivs av `incoming/generera_steg3_lista.py` ur `OMVERIFIERING_STEG3_LISTA.json`, som är passlistans enda källa.
 
-**2124 bidrag, 930 unika källor, 226 kommuner.** Prioritet: 1 = nästa deadline senast 23 nov (272 st), 2 = aldrig verifierad (152), 3 = aktivitetsbidrag (415), 4 = övriga (1285).
+**2113 bidrag, 920 unika källor, 224 kommuner.** Prioritet: 1 = nästa deadline senast 23 nov (272 st), 2 = aldrig verifierad (152 st), 3 = aktivitetsbidrag (410 st), 4 = övriga (1279 st).
 
-Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdelade i tre pass (A, B, C) med ungefär lika många bidrag. Ett pass = en Code-session = en worktree = en gren. Bidragsdetaljerna per kommun: kör `python3 incoming/omverif_steg3_lista.py`.
+Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdelade i tre pass (A, B, C) med ungefär lika många bidrag. Ett pass = en Code-session = en worktree = en gren. Bidragsdetaljerna per kommun står i JSON-filen.
 
-## Pass A — 74 kommuner, 728 bidrag
+## Pass A — 74 kommuner, 725 bidrag
 
 - **harjedalen** — 15 bidrag, 1 med deadline före 23 nov
 - **osteraker** — 5 bidrag
@@ -23,7 +25,7 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **umea** — 9 bidrag, 3 med deadline före 23 nov
 - **ale** — 13 bidrag, 2 med deadline före 23 nov
 - **falkoping** — 9 bidrag, 2 med deadline före 23 nov
-- **gallivare** — 18 bidrag, 2 med deadline före 23 nov
+- **gallivare** — 16 bidrag, 2 med deadline före 23 nov
 - **hylte** — 11 bidrag, 2 med deadline före 23 nov
 - **jonkoping** — 22 bidrag, 2 med deadline före 23 nov
 - **nykvarn** — 12 bidrag, 2 med deadline före 23 nov
@@ -78,12 +80,12 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **botkyrka** — 1 bidrag
 - **falkenberg** — 2 bidrag
 - **gislaved** — 1 bidrag
-- **klippan** — 4 bidrag
+- **klippan** — 3 bidrag
 - **lund** — 1 bidrag
 - **ornskoldsvik** — 5 bidrag
 - **taby** — 3 bidrag
 
-## Pass B — 78 kommuner, 707 bidrag
+## Pass B — 78 kommuner, 701 bidrag
 
 - **bromolla** — 12 bidrag, 9 med deadline före 23 nov
 - **lycksele** — 18 bidrag, 7 med deadline före 23 nov
@@ -92,7 +94,7 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **karlshamn** — 28 bidrag, 4 med deadline före 23 nov
 - **tierp** — 17 bidrag, 4 med deadline före 23 nov
 - **finspang** — 12 bidrag, 3 med deadline före 23 nov
-- **hassleholm** — 12 bidrag, 3 med deadline före 23 nov
+- **hassleholm** — 11 bidrag, 3 med deadline före 23 nov
 - **munkedal** — 10 bidrag, 3 med deadline före 23 nov
 - **sigtuna** — 10 bidrag, 3 med deadline före 23 nov
 - **svedala** — 11 bidrag, 3 med deadline före 23 nov
@@ -100,26 +102,26 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **eksjo** — 2 bidrag, 2 med deadline före 23 nov
 - **eslov** — 12 bidrag, 2 med deadline före 23 nov
 - **gagnef** — 9 bidrag, 2 med deadline före 23 nov
-- **heby** — 7 bidrag, 2 med deadline före 23 nov
+- **heby** — 6 bidrag, 2 med deadline före 23 nov
 - **helsingborg** — 15 bidrag, 2 med deadline före 23 nov
 - **karlstad** — 12 bidrag, 2 med deadline före 23 nov
 - **mariestad** — 6 bidrag, 2 med deadline före 23 nov
 - **mora** — 5 bidrag, 2 med deadline före 23 nov
-- **orust** — 16 bidrag, 2 med deadline före 23 nov
+- **orust** — 15 bidrag, 2 med deadline före 23 nov
 - **smedjebacken** — 8 bidrag, 2 med deadline före 23 nov
 - **vilhelmina** — 16 bidrag, 2 med deadline före 23 nov
 - **ange** — 16 bidrag, 1 med deadline före 23 nov
 - **eskilstuna** — 6 bidrag, 1 med deadline före 23 nov
 - **fargelanda** — 8 bidrag, 1 med deadline före 23 nov
 - **gotene** — 2 bidrag, 1 med deadline före 23 nov
-- **hagfors** — 2 bidrag, 1 med deadline före 23 nov
+- **hagfors** — 1 bidrag, 1 med deadline före 23 nov
 - **hallefors** — 8 bidrag, 1 med deadline före 23 nov
 - **harryda** — 6 bidrag, 1 med deadline före 23 nov
 - **karlskrona** — 28 bidrag, 1 med deadline före 23 nov
 - **ockero** — 6 bidrag, 1 med deadline före 23 nov
 - **pitea** — 4 bidrag, 1 med deadline före 23 nov
 - **ragunda** — 12 bidrag, 1 med deadline före 23 nov
-- **skurup** — 4 bidrag, 1 med deadline före 23 nov
+- **skurup** — 3 bidrag, 1 med deadline före 23 nov
 - **staffanstorp** — 6 bidrag, 1 med deadline före 23 nov
 - **svenljunga** — 15 bidrag, 1 med deadline före 23 nov
 - **uddevalla** — 9 bidrag, 1 med deadline före 23 nov
@@ -133,7 +135,7 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **atvidaberg** — 10 bidrag
 - **bjurholm** — 5 bidrag
 - **borgholm** — 13 bidrag
-- **bracke** — 12 bidrag
+- **bracke** — 11 bidrag
 - **ekero** — 4 bidrag
 - **gnesta** — 10 bidrag
 - **hjo** — 4 bidrag
@@ -164,7 +166,7 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **sandviken** — 5 bidrag
 - **torsby** — 2 bidrag
 
-## Pass C — 74 kommuner, 689 bidrag
+## Pass C — 72 kommuner, 687 bidrag
 
 - **kalix** — 17 bidrag, 9 med deadline före 23 nov
 - **tanum** — 16 bidrag, 7 med deadline före 23 nov
@@ -228,10 +230,8 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **toreboda** — 7 bidrag
 - **uppvidinge** — 17 bidrag
 - **vindeln** — 9 bidrag
-- **angelholm** — 1 bidrag
 - **arboga** — 2 bidrag
 - **arjeplog** — 4 bidrag
-- **gavle** — 1 bidrag
 - **kavlinge** — 4 bidrag
 - **ludvika** — 1 bidrag
 - **nassjo** — 1 bidrag
