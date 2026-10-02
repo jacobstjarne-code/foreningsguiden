@@ -1,47 +1,43 @@
 ---
-// VerificationStamp — "granskad-stämpeln" (designsystem/screenshots/stamp.png).
+// VerificationStamp — "läst-stämpeln" (designsystem/screenshots/stamp.png).
 // Bär hela förtroendemekaniken (Jacob, prioriterad före övrig tokenmigrering).
 // Oxblod (--fg-verify) är RESERVERAD för just detta — sprids inte till annan UI.
 //
-// Uppföljning 2026-08-03 (punkt 3): stämpeln påstod "GRANSKAD" oavsett hur
-// många av bidragets fält som faktiskt var verifierade — noll räknades
-// som samma sak som alla. Tre nivåer (bidragGranskningsniva,
-// kommunTyper.ts): 'fullt' behåller oxblod-stämpeln oförändrad, 'delvis'
-// får en dämpad variant (inte oxblod — den färgen ska inte överdriva en
-// ofullständig granskning), 'ogranskat' visar INGEN stämpel alls — en
-// "OGRANSKAT"-etikett hade bara varit ännu ett påstående om ett tomrum.
+// HISTORIK, kort: stämpeln har haft tre lager av nivåer. Först GRANSKAD
+// oavsett hur många fält som var verifierade (2026-08-03, felaktigt). Sedan
+// tre nivåer fullt/delvis/ogranskat med 'olast' uteslutet ur granskat-
+// kriteriet (ÅTGÄRDSSPEC T4). Sedan samma tre nivåer men med kravet att minst
+// ett av bidragets EGNA fält var granskat (2026-10-02, efter att Lommas
+// startbidrag visat DELVIS med noll egna granskade fält).
 //
-// ÅTGÄRDSSPEC T4 (2026-08-03 kväll, fyra-lägesrevisionen): utökad från
-// tre till fyra fält (+ giltighet, kommun-nivå — se hittaGiltighetsstatus/
-// bidragGranskningsniva) och kriteriet skärpt — bara verifierad/
-// ingen_regel räknas som granskat nu, inte 'olast' (som bara betyder
-// "extraherat", inte "oberoende kontrollerat"). Ett bidrag där alla fyra
-// fält är 'olast' visade tidigare (felaktigt) "DELVIS GRANSKAD"; visar
-// nu ingen stämpel alls, eftersom noll fält faktiskt är granskade.
+// Jacob 2026-10-02, slutligt: nivåerna är borta. Stämpeln säger bara vad som
+// faktiskt hänt — att vi läst kommunens sida, och när. FULLT och DELVIS
+// KONTROLLÄST var två ord för en gradskillnad läsaren inte kan använda, och
+// "KONTROLLÄST" påstod mer än "läst". Villkoret är oförändrat: minst ett av
+// bidragets tre egna fält ska vara kontrollast eller ingen_regel, annars
+// ingen stämpel alls. En "OGRANSKAT"-etikett hade bara varit ännu ett
+// påstående om ett tomrum, samma fälla VoidMark finns för att undvika.
 //
-// Ordet på stämpeln (Jacob 2026-08-04, P1.1): GRANSKAD/DELVIS GRANSKAD →
-// KONTROLLÄST/DELVIS KONTROLLÄST. Tre ord för samma axel (verifierad,
-// kontrollast, granskad) är samma begrepp i olika kläder — designfilen
-// är auktoritativ för utseende, inte ordval. Formen (oxblod/dämpad/
-// ingen stämpel) är oförändrad.
-import { formatStampDate, bidragGranskningsniva } from '../lib/kommuner';
-import type { Bidrag, Datatillstand } from '../lib/kommuner';
+// kalla_borttagen: BidragDjup renderar inte komponenten alls då — en
+// läst-stämpel på ett bidrag vars regeldokument är borta är en motsägelse.
+import { formatDate, harLastFalt } from '../lib/kommuner';
+import { OLAST_MARK } from '../lib/content';
+import type { Bidrag } from '../lib/kommuner';
 
 export interface Props {
   bidrag: Bidrag;
   verifierad: string; // ISO-datum, kommunens (fallback när bidraget saknar eget senast_verifierad)
-  giltighetStatus: Datatillstand; // kommun-nivå (Forutsattning), se hittaGiltighetsstatus i kommunTyper.ts
 }
 
-const { bidrag, verifierad, giltighetStatus } = Astro.props;
-const niva = bidragGranskningsniva(bidrag, giltighetStatus);
-const datum = formatStampDate(bidrag.senast_verifierad ?? verifierad);
+const { bidrag, verifierad } = Astro.props;
+const visa = harLastFalt(bidrag);
+const datum = formatDate(bidrag.senast_verifierad ?? verifierad);
 ---
-{niva !== 'ogranskat' && (
-  <span class={`fg-stamp ${niva === 'delvis' ? 'fg-stamp--delvis' : ''}`}>
+{visa && (
+  <span class="fg-stamp">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polyline points="20 6 9 17 4 12" />
     </svg>
-    {niva === 'fullt' ? 'KONTROLLÄST' : 'DELVIS KONTROLLÄST'} · {datum}
+    {OLAST_MARK.radMedDatum.replace('{datum}', datum).replace(/\.$/, '')}
   </span>
 )}
