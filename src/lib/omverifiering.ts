@@ -28,7 +28,7 @@ import type { Bidrag, Kommun } from './kommuner';
 import { hamtaKopAvProdukt } from './kop.ts';
 import { getAllConfirmedSubscribers } from './subscribers.ts';
 import {
-  berakUtfall, hashaText, strippaDynamiskInnehall, sorteraPrioritet, OMVERIFIERING_VARNING_DAGAR,
+  berakUtfall, hashaInnehallsregion, sorteraPrioritet, OMVERIFIERING_VARNING_DAGAR,
   type KontrollUtfall, type HamtatResultat,
 } from './omverifieringLogik.ts';
 
@@ -49,11 +49,18 @@ const KO_KEY = 'omverif:kalla:ko';
 // sådan källa drog upp en 400-källors körning till 151s. 5s håller
 // värsta-fallet nere utan att straffa de flesta källorna, som svarar på
 // under en sekund.
-const HAMTNING_TIMEOUT_MS = 5000;
+// Jacob 2026-10-02: 5 s var en del av problemet. Mätpasset visade att 17 av
+// 151 olästbara källor bara var långsamma, och 15 s räcker för samtliga.
+const HAMTNING_TIMEOUT_MS = 15000;
 // Botartighet — identifierar crawlern och en kontaktväg, samma princip
 // som varje annat utgående mejl i den här kodbasen har en riktig
 // avsändare att svara på.
-const USER_AGENT = 'Föreningsguiden-Omverifiering/1.0 (+https://foreningsguiden.se; kontakt: jacob.stjarne@gmail.com)';
+// Jacob 2026-10-02: den förra UA:n blockerades av 99 av 151 olästbara
+// källor — två tredjedelar av "otillganglig"-flaggorna var brandväggar, inte
+// trasiga länkar. Den här formen, med Mozilla/5.0-prefix och compatible-
+// token, svarade 2xx på 99 av 99 (100 %) i mätpasset. Fortfarande ärlig:
+// produktnamn och en URL som förklarar vem vi är.
+const USER_AGENT = 'Mozilla/5.0 (compatible; Foreningsguiden/1.0; +https://foreningsguiden.se/om/)';
 
 export interface KallaSignatur {
   url: string;
@@ -102,33 +109,22 @@ async function fetchMedTimeout(url: string, method: 'HEAD' | 'GET'): Promise<Res
 }
 
 /**
- * HEAD först (billigare — ingen body att hämta om headers räcker); GET
- * bara om HEAD inte gav ett användbart svar ELLER varken ETag eller
- * Last-Modified fanns (då krävs bodyn för hash-fallbacken).
+ * GET, alltid. HEAD-först togs bort 2026-10-02 av två skäl ur mätpasset:
+ * HEAD svarade bara på 83,8 % av de källor som svarar på GET, och
+ * hash-signalen kräver bodyn ändå (se 3B nedan — ETag och Last-Modified
+ * duger inte som ändringssignal, bara som genväg till "oförändrad").
  */
 async function hamtaResultat(url: string): Promise<HamtatResultat> {
-  const headRes = await fetchMedTimeout(url, 'HEAD');
-  if (headRes && headRes.ok) {
-    const etag = headRes.headers.get('etag');
-    const lastModified = headRes.headers.get('last-modified');
-    if (etag || lastModified) {
-      return { ok: true, etag, lastModified, hash: null };
-    }
-  }
-
   const getRes = await fetchMedTimeout(url, 'GET');
   if (!getRes || !getRes.ok) {
     return { ok: false, etag: null, lastModified: null, hash: null };
   }
-
   const etag = getRes.headers.get('etag');
   const lastModified = getRes.headers.get('last-modified');
-  if (etag || lastModified) {
-    return { ok: true, etag, lastModified, hash: null };
-  }
-
   const html = await getRes.text();
-  return { ok: true, etag: null, lastModified: null, hash: hashaText(strippaDynamiskInnehall(html)) };
+  // 3B: hashen beräknas på INNEHÅLLSREGIONEN (main, article, SiteVisions
+  // innehållsregion, i den ordningen), inte på hela sidan.
+  return { ok: true, etag, lastModified, hash: hashaInnehallsregion(html).hash };
 }
 
 export async function hamtaSignatur(url: string): Promise<KallaSignatur | null> {

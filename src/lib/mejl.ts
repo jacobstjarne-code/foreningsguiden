@@ -729,12 +729,26 @@ export interface SystemlarmVars {
   kropp: string;
 }
 
+/**
+ * Kritiska villkor (Jacob 2026-10-02): webhook, cron och mejlfel. De betyder
+ * att något är trasigt nu. Källor och granskningskö är underhåll — de betyder
+ * att något behöver göras, inte att något brinner. Ämnesraden skiljer dem så
+ * att ett kritiskt larm syns i inkorgen bland de dagliga underhållslarmen.
+ * "Systemlarm" (villkor 0, larmet självt har inte körts) är kritiskt.
+ */
+const KRITISKA_RUBRIKER = new Set(['Webhook', 'Cron', 'Mejl', 'Systemlarm']);
+
+export function systemlarmAmne(rubriker: string[]): string {
+  const kritiskt = rubriker.some((r) => KRITISKA_RUBRIKER.has(r));
+  return `${kritiskt ? 'Systemlarm KRITISKT' : 'Systemlarm'} — ${rubriker.join(', ')}`;
+}
+
 export async function sendSystemlarm(vars: SystemlarmVars): Promise<void> {
   const to = 'jacob.stjarne@gmail.com';
   const result = await resend.emails.send({
     from: FROM,
     to,
-    subject: `Systemlarm — ${vars.rubriker.join(', ')}`,
+    subject: systemlarmAmne(vars.rubriker),
     text: vars.kropp,
   });
   if (result.error) {

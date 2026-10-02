@@ -51,21 +51,38 @@ test('berakUtfall: samma ETag → oforandrad, baslinjen orörd', () => {
   assert.equal(r.baslinjeEtag, 'W/"abc"');
 });
 
-test('berakUtfall: olika ETag → andrad, baslinjen rullas INTE fram, flaggadSedan sätts till today', () => {
+// 3B (Jacobs beslut 2026-10-02): ETag är inte längre en ändringssignal.
+// Mätpasset visade ETag:ar som rör sig utan att innehållet gör det.
+test('berakUtfall 3B: olika ETag men SAMMA regionhash → oforandrad, ingen flagga', () => {
   const r = berakUtfall(input({
     baslinjeEtag: 'W/"abc"',
-    resultat: resultat({ etag: 'W/"xyz"' }),
+    baslinjeHash: 'region-aaa',
+    resultat: resultat({ etag: 'W/"xyz"', hash: 'region-aaa' }),
+  }));
+  assert.equal(r.utfall, 'oforandrad');
+  assert.equal(r.flaggadSedan, null);
+  // ETag rullas fram så genvägen kan användas nästa gång — innehållet är
+  // bevisligen orört.
+  assert.equal(r.baslinjeEtag, 'W/"xyz"');
+  assert.equal(r.baslinjeHash, 'region-aaa');
+});
+
+test('berakUtfall 3B: olika ETag OCH olika regionhash → andrad, baslinjen rullas INTE fram', () => {
+  const r = berakUtfall(input({
+    baslinjeEtag: 'W/"abc"',
+    baslinjeHash: 'region-aaa',
+    resultat: resultat({ etag: 'W/"xyz"', hash: 'region-bbb' }),
   }));
   assert.equal(r.utfall, 'andrad');
-  assert.equal(r.baslinjeEtag, 'W/"abc"'); // OFÖRÄNDRAD — det är hela poängen
+  assert.equal(r.baslinjeHash, 'region-aaa'); // OFÖRÄNDRAD — det är hela poängen
   assert.equal(r.flaggadSedan, '2026-07-28');
 });
 
 test('berakUtfall: redan flaggad, samma ändring igen nästa vecka → flaggadSedan behåller URSPRUNGSDATUMET, inte today', () => {
   const r = berakUtfall(input({
-    baslinjeEtag: 'W/"abc"',
+    baslinjeHash: 'region-aaa',
     flaggadSedan: '2026-07-14',
-    resultat: resultat({ etag: 'W/"xyz"' }),
+    resultat: resultat({ hash: 'region-bbb' }),
     today: '2026-07-21',
   }));
   assert.equal(r.utfall, 'andrad');
@@ -80,12 +97,17 @@ test('berakUtfall: samma hash (varken etag eller lastModified) → oforandrad', 
   assert.equal(r.utfall, 'oforandrad');
 });
 
-test('berakUtfall: mekanismbyte (baslinje hade ETag, nu bara hash) → konservativt andrad även om "värdet" råkar se likadant ut', () => {
+// 3B tog bort mekanismjämförelsen helt — hashen är enda signalen, headern
+// bara en genväg. Saknas en baslinjehash etableras den i stället för att
+// flagga mot ingenting.
+test('berakUtfall 3B: baslinje utan regionhash → baslinjen etableras, aldrig andrad', () => {
   const r = berakUtfall(input({
     baslinjeEtag: 'aaa111',
-    resultat: resultat({ hash: 'aaa111' }), // samma STRÄNG, annan mekanism
+    resultat: resultat({ etag: 'bbb222', hash: 'region-aaa' }),
   }));
-  assert.equal(r.utfall, 'andrad');
+  assert.equal(r.utfall, 'oforandrad');
+  assert.equal(r.baslinjeHash, 'region-aaa');
+  assert.equal(r.flaggadSedan, null);
 });
 
 test('berakUtfall: hämtning misslyckades → otillganglig, konsekutivaFel ökar, baslinje/flagga orörda', () => {
@@ -108,26 +130,26 @@ test('berakUtfall: tre misslyckanden i rad — räknaren når tröskeln (adminvy
 
 test('berakUtfall AUTO-CLEAR: flaggad ändring, ett bidrag som delar URL:en har senast_verifierad EFTER flaggadSedan → resolve, baslinjen rullar fram, flaggan rensas', () => {
   const r = berakUtfall(input({
-    baslinjeEtag: 'W/"abc"',
+    baslinjeHash: 'region-aaa',
     flaggadSedan: '2026-07-14',
     maxSenastVerifieradBlandBidrag: '2026-07-20', // EFTER flaggadSedan — forskningspasset har redan varit där
-    resultat: resultat({ etag: 'W/"xyz"' }),
+    resultat: resultat({ hash: 'region-bbb' }),
     today: '2026-07-28',
   }));
   assert.equal(r.utfall, 'oforandrad');
-  assert.equal(r.baslinjeEtag, 'W/"xyz"'); // rullad fram till det nya, bekräftade värdet
+  assert.equal(r.baslinjeHash, 'region-bbb'); // rullad fram till det nya, bekräftade värdet
   assert.equal(r.flaggadSedan, null);
 });
 
 test('berakUtfall AUTO-CLEAR: senast_verifierad FÖRE flaggadSedan (gammal verifiering, inte en reaktion på flaggan) → INGEN auto-clear, förblir andrad', () => {
   const r = berakUtfall(input({
-    baslinjeEtag: 'W/"abc"',
+    baslinjeHash: 'region-aaa',
     flaggadSedan: '2026-07-14',
     maxSenastVerifieradBlandBidrag: '2026-06-01', // FÖRE flaggan — irrelevant, gammal verifiering
-    resultat: resultat({ etag: 'W/"xyz"' }),
+    resultat: resultat({ hash: 'region-bbb' }),
   }));
   assert.equal(r.utfall, 'andrad');
-  assert.equal(r.baslinjeEtag, 'W/"abc"');
+  assert.equal(r.baslinjeHash, 'region-aaa');
   assert.equal(r.flaggadSedan, '2026-07-14');
 });
 

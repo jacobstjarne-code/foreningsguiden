@@ -49,19 +49,6 @@ export interface BerakUtfallOutput {
   konsekutivaFel: number;
 }
 
-type Mekanism = 'etag' | 'lastmodified' | 'hash';
-
-function harledSignatur(
-  etag: string | null,
-  lastModified: string | null,
-  hash: string | null
-): { mekanism: Mekanism; varde: string } | null {
-  if (etag !== null) return { mekanism: 'etag', varde: etag };
-  if (lastModified !== null) return { mekanism: 'lastmodified', varde: lastModified };
-  if (hash !== null) return { mekanism: 'hash', varde: hash };
-  return null;
-}
-
 /**
  * Jämför senaste hämtningen mot baslinjen och avgör utfallet. Baslinjen
  * rullas ALDRIG fram tyst av en vanlig jämförelse — bara vid resolve
@@ -85,14 +72,30 @@ export function berakUtfall(input: BerakUtfallInput): BerakUtfallOutput {
     };
   }
 
-  const baslinje = harledSignatur(input.baslinjeEtag, input.baslinjeLastModified, input.baslinjeHash);
-  const senaste = harledSignatur(input.resultat.etag, input.resultat.lastModified, input.resultat.hash);
+  // 3B (Jacobs beslut 2026-10-02). ETag och Last-Modified får BARA användas
+  // som genväg till "oförändrad", aldrig som ändringssignal. Matchar en av
+  // dem baslinjen är innehållet med säkerhet orört, och vi slipper jämföra
+  // hashen. Matchar de inte säger det ingenting — mätpasset visade ETag:ar
+  // som ändras utan att innehållet gör det.
+  const genvagOforandrad =
+    (input.baslinjeEtag !== null && input.resultat.etag === input.baslinjeEtag) ||
+    (input.baslinjeLastModified !== null && input.resultat.lastModified === input.baslinjeLastModified);
 
-  // Första kontrollen någonsin (ingen baslinje), eller ett ok:true-svar
-  // utan någon som helst signatur (borde inte inträffa — hash-fallbacken
-  // ska alltid ge ett värde — men om det händer: etablera baslinjen i
-  // stället för att flagga en ändring mot "ingenting").
-  if (baslinje === null || senaste === null) {
+  if (genvagOforandrad) {
+    return {
+      utfall: 'oforandrad',
+      baslinjeEtag: input.baslinjeEtag,
+      baslinjeLastModified: input.baslinjeLastModified,
+      baslinjeHash: input.baslinjeHash,
+      flaggadSedan: null,
+      konsekutivaFel: 0,
+    };
+  }
+
+  // Första kontrollen någonsin, eller ett ok:true-svar utan hash (borde
+  // inte inträffa — hamtaResultat ger alltid en regionhash på 2xx).
+  // Etablera baslinjen i stället för att flagga mot "ingenting".
+  if (input.baslinjeHash === null || input.resultat.hash === null) {
     return {
       utfall: 'oforandrad',
       baslinjeEtag: input.resultat.etag,
@@ -103,15 +106,14 @@ export function berakUtfall(input: BerakUtfallInput): BerakUtfallOutput {
     };
   }
 
-  const harAndrats = baslinje.mekanism !== senaste.mekanism || baslinje.varde !== senaste.varde;
-
-  if (!harAndrats) {
-    // Matchar baslinjen — antingen aldrig avvikit, eller (om den var
-    // flaggad) återgått till exakt det bekräftade värdet. Rensa flaggan.
+  if (input.resultat.hash === input.baslinjeHash) {
+    // Innehållsregionen är oförändrad. ETag/Last-Modified rullas fram så
+    // att genvägen ovan kan användas nästa gång — det är säkert, eftersom
+    // innehållet bevisligen inte rört sig.
     return {
       utfall: 'oforandrad',
-      baslinjeEtag: input.baslinjeEtag,
-      baslinjeLastModified: input.baslinjeLastModified,
+      baslinjeEtag: input.resultat.etag,
+      baslinjeLastModified: input.resultat.lastModified,
       baslinjeHash: input.baslinjeHash,
       flaggadSedan: null,
       konsekutivaFel: 0,
@@ -191,6 +193,57 @@ export function strippaDynamiskInnehall(html: string): string {
 /** SHA-256 hexdigest — inga nya beroenden, node:crypto är inbyggt. */
 export function hashaText(text: string): string {
   return createHash('sha256').update(text).digest('hex');
+}
+
+/**
+ * INNEHÅLLSREGIONEN (3B, Jacobs beslut 2026-10-02). Ändringssignalen är
+ * hashen på sidans innehållsregion, inte på hela sidan. Mätpasset
+ * 2026-10-02 visade varför: 235 av 531 flaggor (44,3 %) hade en
+ * helsidehash som skilde sig från BÅDE baslinjen och flaggningsögonblicket,
+ * alltså en sida som ändras vid varje hämtning, medan innehållsregionen var
+ * identisk mellan två hämtningar i 554 av 556 fall (99,6 %).
+ *
+ * Ordningen är main, article, SiteVisions innehållsregion. Hittas ingen
+ * region faller vi tillbaka på hela sidan — en sämre signal är bättre än
+ * ingen, och fallbacken syns i mätningen.
+ */
+function elementInnehall(html: string, tagg: string, franIndex = 0): string | null {
+  const oppna = new RegExp(`<${tagg}\\b[^>]*>`, 'gi');
+  oppna.lastIndex = franIndex;
+  const forsta = oppna.exec(html);
+  if (!forsta) return null;
+  if (/\/>$/.test(forsta[0])) return '';
+  const taggar = new RegExp(`<${tagg}\\b[^>]*>|</${tagg}\\s*>`, 'gi');
+  taggar.lastIndex = forsta.index + forsta[0].length;
+  let djup = 1;
+  for (let m = taggar.exec(html); m; m = taggar.exec(html)) {
+    djup += m[0].startsWith('</') ? -1 : 1;
+    if (djup === 0) return html.slice(forsta.index + forsta[0].length, m.index);
+  }
+  return null;
+}
+
+export type Regionkalla = 'main' | 'article' | 'sitevision' | 'helsida';
+
+export function plockaInnehallsregion(html: string): { region: string; kalla: Regionkalla } {
+  const main = elementInnehall(html, 'main');
+  if (main && main.trim()) return { region: main, kalla: 'main' };
+  const article = elementInnehall(html, 'article');
+  if (article && article.trim()) return { region: article, kalla: 'article' };
+  let bast: string | null = null;
+  const oppna = /<div\b[^>]*(?:id="svid\d+_[^"]*"|class="[^"]*sv-layout[^"]*")[^>]*>/gi;
+  for (let m = oppna.exec(html); m; m = oppna.exec(html)) {
+    const block = elementInnehall(html, 'div', m.index);
+    if (block && (bast === null || block.length > bast.length)) bast = block;
+  }
+  if (bast && bast.trim()) return { region: bast, kalla: 'sitevision' };
+  return { region: html, kalla: 'helsida' };
+}
+
+/** Ändringssignalen: hash på innehållsregionen efter samma strippning som förut. */
+export function hashaInnehallsregion(html: string): { hash: string; kalla: Regionkalla } {
+  const { region, kalla } = plockaInnehallsregion(html);
+  return { hash: hashaText(strippaDynamiskInnehall(region)), kalla };
 }
 
 // --- Prioritetskön (fyra tiers, se SPEC: Omverifiering §Prioritering av kön) ---
