@@ -591,41 +591,24 @@ export function bidragHarNamngivetSystem(bidrag: Bidrag, kommun: Kommun): boolea
  * visar ändå hela anteckningen hellre än inget alls.
  */
 /**
- * Uppföljning 2026-08-03 (punkt 3): "GRANSKAD"-stämpeln påstod full
- * granskning oavsett hur många av bidragets fält som faktiskt var
- * verifierade — noll av tre räknades som samma sak som tre av tre.
+ * Jacob 2026-10-02: Granskningsniva (fullt/delvis/ogranskat) är borta.
+ * Stämpeln har inga nivåer längre — den säger bara att vi läst kommunens
+ * sida, och när. Kvar är VILLKORET för att den alls ska visas: minst ett av
+ * bidragets EGNA tre fält ska vara kontrollast (oberoende bekräftat mot
+ * källan) eller ingen_regel (bekräftad frånvaro). 'olast' betyder bara
+ * extraherat och räknas inte.
  *
- * T4 (ÅTGÄRDSSPEC, samma kväll, fyra-lägesrevisionen): utökad från tre
- * till fyra fält (+ giltighet, se hittaGiltighetsstatus ovan), och
- * granskat-kriteriet skärpt. 'olast' (extraherat, INTE oberoende
- * omkontrollerat) räknas INTE längre som granskat — bara 'kontrollast'
- * (oberoende bekräftat mot källan) och 'ingen_regel' (bekräftad
- * frånvaro) gör. Det är själva poängen med fyra-lägesrevisionen: ett
- * fält som bara är extraherat har inte granskats i den mening stämpeln
- * påstår, oavsett om vi råkar ha ett värde för det.
- * Noll granskade fält döljer stämpeln helt (VerificationStamp.astro) —
- * en "OGRANSKAT"-etikett hade bara varit ännu ett påstående om ett
- * tomrum, samma fälla som VoidMark redan finns för att undvika.
+ * Kommunens giltighet_status ingår INTE. Den avgjorde tidigare stämpeln
+ * ensam på bidrag där inget eget fält var granskat — Lommas startbidrag
+ * visade DELVIS KONTROLLÄST med belopp olast, deadline okand och krav olast.
+ * Ett fält som inte säger något om bidraget ska inte avgöra bidragets
+ * stämpel.
  */
-export type Granskningsniva = 'fullt' | 'delvis' | 'ogranskat';
-
 const GRANSKAT_STATUSAR: readonly Datatillstand[] = ['kontrollast', 'ingen_regel'];
 
-export function bidragGranskningsniva(bidrag: Bidrag, giltighetStatus: Datatillstand): Granskningsniva {
-  // Jacob 2026-10-02: Lommas startbidrag visade "DELVIS KONTROLLÄST" trots
-  // att inget av bidragets EGNA fält var granskat — belopp olast, deadline
-  // okand, krav olast. Det som tände stämpeln var giltighetStatus, alltså
-  // kommunens giltighetsregel (ingen_regel), ett fält som inte säger något
-  // om det här bidraget. En stämpel på ett bidragskort är ett påstående om
-  // bidraget, så minst ETT av bidragets egna tre fält måste vara granskat
-  // för att den ska tändas. Giltigheten räknas fortfarande med mot 'fullt'.
-  const egnaFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status];
-  const egnaGranskade = egnaFalt.filter((s) => GRANSKAT_STATUSAR.includes(s)).length;
-  if (egnaGranskade === 0) return 'ogranskat';
-  const statusar = [...egnaFalt, giltighetStatus];
-  const antalGranskade = statusar.filter((s) => GRANSKAT_STATUSAR.includes(s)).length;
-  if (antalGranskade === statusar.length) return 'fullt';
-  return 'delvis';
+export function harLastFalt(bidrag: Bidrag): boolean {
+  return [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status]
+    .some((s) => GRANSKAT_STATUSAR.includes(s));
 }
 
 const RELATIV_FRIST_RE = /^Relativ tidsfrist:\s*(.+)$/;
