@@ -6,8 +6,10 @@ Genererad av Opus 2026-09-24 ur provmergen (omverifiering-steg2 + af1-profillage
 
 Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdelade i tre pass (A, B, C) med ungefär lika många bidrag. Ett pass = en Code-session = en worktree = en gren. Bidragsdetaljerna per kommun: kör `python3 incoming/omverif_steg3_lista.py`.
 
-## Pass A — 72 kommuner, 708 bidrag
+## Pass A — 74 kommuner, 728 bidrag
 
+- **harjedalen** — 15 bidrag, 1 med deadline före 23 nov
+- **osteraker** — 5 bidrag
 - **hammaro** — 12 bidrag, 10 med deadline före 23 nov
 - **katrineholm** — 13 bidrag, 8 med deadline före 23 nov
 - **sjobo** — 12 bidrag, 6 med deadline före 23 nov
@@ -162,7 +164,7 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **sandviken** — 5 bidrag
 - **torsby** — 2 bidrag
 
-## Pass C — 76 kommuner, 709 bidrag
+## Pass C — 74 kommuner, 689 bidrag
 
 - **kalix** — 17 bidrag, 9 med deadline före 23 nov
 - **tanum** — 16 bidrag, 7 med deadline före 23 nov
@@ -189,7 +191,6 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **almhult** — 17 bidrag, 1 med deadline före 23 nov
 - **bengtsfors** — 14 bidrag, 1 med deadline före 23 nov
 - **flen** — 5 bidrag, 1 med deadline före 23 nov
-- **harjedalen** — 15 bidrag, 1 med deadline före 23 nov
 - **krokom** — 14 bidrag, 1 med deadline före 23 nov
 - **motala** — 1 bidrag, 1 med deadline före 23 nov
 - **norberg** — 8 bidrag, 1 med deadline före 23 nov
@@ -220,7 +221,6 @@ Kommunerna är sorterade så att de med prio 1-bidrag kommer först, och uppdela
 - **mala** — 9 bidrag
 - **munkfors** — 9 bidrag
 - **orsa** — 7 bidrag
-- **osteraker** — 5 bidrag
 - **overtornea** — 13 bidrag
 - **skinnskatteberg** — 7 bidrag
 - **sotenas** — 9 bidrag
