@@ -66,14 +66,15 @@ const metaTitle = `${bidrag.namn} — ${kommun.kommun} — Föreningsguiden`;
 // Jacob 2026-09-25: "verifierat mot kommunens egen sida" påstod mer än vi
 // gör. Vi läser kommunens sida och länkar till den; vi verifierar inte
 // kommunen. Läsdatumet nämns bara när bidraget faktiskt har ett.
-// kalla_borttagen: ingen läst-rad, inte heller i metadata — dokumentet finns
-// inte längre, så "läst på kommunens sida" vore ett motsägande påstående.
-const metaLasdatum = bidrag.kalla_borttagen
-  ? ` Kommunen publicerar inte längre regler för det här stödet; vi såg dem ${formatDate(bidrag.kalla_borttagen)}.`
-  : bidrag.senast_verifierad
+// kalla_borttagen: hela metabeskrivningen byts, inte bara läsdatumet. Den
+// vanliga mallen lovar "krav, belopp och ansökningsdatum" — ett löfte vi inte
+// kan hålla när reglerna inte längre publiceras.
+const metaLasdatum = bidrag.senast_verifierad && !bidrag.kalla_borttagen
   ? ` Läst på kommunens sida ${formatDate(bidrag.senast_verifierad)}.`
   : '';
-const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, med länk till kommunens egen sida.${metaLasdatum}`;
+const metaDescription = bidrag.kalla_borttagen
+  ? `${bidrag.namn} i ${kommun.kommun}: kommunen publicerar inte längre regler för stödet. Här står vad de tidigare reglerna sa.`
+  : `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, med länk till kommunens egen sida.${metaLasdatum}`;
 
 // D3 (ARBETSORDER 2026-08-11): "Så ansöker du"-prosan flyttad hit från
 // kommunsidan (D2 tog bort den där som en dubblett av varje bidrags egen

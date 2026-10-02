@@ -1164,7 +1164,7 @@ export const OLAST_MARK = {
   beloppReservation: 'enligt kommunens underlag, ej bekräftat',
   // kalla_borttagen (Jacob 2026-10-02). Ersätter banderollens läst-rad helt —
   // en "läst"-formulering vore fel när dokumentet inte längre finns.
-  borttagenRad: 'Kommunen publicerar inte längre regler för det här stödet. Vi såg det {datum}. Fråga kommunen om det finns kvar.',
+  borttagenRad: 'Kommunen publicerar inte längre regler för det här stödet. Det märkte vi {datum}. Fråga kommunen om det finns kvar.',
   borttagenRubrik: 'Så stod det i kommunens tidigare regler',
   // TILLSTANDET_OLAST.md 4c: "Aldrig markör utan legend på samma sida" —
   // ordagrann rad ur filen, för ytor där markören bär hela anspråket utan
