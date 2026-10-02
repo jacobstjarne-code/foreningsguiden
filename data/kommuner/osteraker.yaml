@@ -180,7 +180,7 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: De årsspecifika riktlinjerna för 2026 anger ansökningsperioden 26 maj–14 augusti. Högre belopp än 60 000 kronor kan beslutas för särskilt angelägna åtgärder.
-  senast_verifierad: '2026-08-18'
+  senast_verifierad: '2026-10-02'
 - id: osteraker-inkluderingsbidrag
   namn: Inkluderingsbidrag
   foreningstyp: [idrott, kultur, friluft, social, ungdom, annat]
@@ -207,7 +207,7 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Maxbelopp beslutas årligen av Kultur- och fritidsnämnden i budget och är inte publicerat som ett fast tak.
-  senast_verifierad: '2026-08-18'
+  senast_verifierad: '2026-10-02'
 - id: osteraker-socialnamndens-foreningsbidrag
   namn: Socialnämndens föreningsbidrag
   foreningstyp: [social, ungdom, annat]
@@ -238,7 +238,7 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Endast kompletta ansökningar för det aktuella året behandlas. Socialnämnden fattar beslut i juni.
-  senast_verifierad: '2026-08-18'
+  senast_verifierad: '2026-10-02'
 - id: osteraker-studieforbundsbidrag
   namn: Bidrag till studieförbund
   foreningstyp: [kultur, annat]
@@ -266,7 +266,13 @@ bidrag:
   krav_status: kontrollast
   krav_fullstandiga: true
   anteckning: Underlaget för verksamhetsvolymen hämtas från Folkbildningsrådet och bidraget betalas ut en gång per år i juni.
-  senast_verifierad: '2026-08-18'
+  senast_verifierad: '2026-10-02'
+  qa_anteckning: 'Steg 3 2026-10-02: källan är ett inscannat tjänsteutlåtande från
+    2010 (Toshiba-kopia, inget textlager) — curl plus pdftotext ger fyra tecken. Läst
+    med pdftoppm 300 dpi och tesseract -l swe. Alla tre fälten bekräftade: § 9 och
+    tjänsteutlåtandet ger den proportionella fördelningen efter studietimmar, § 5 ger
+    31 maj, § 1 och § 5 ger kraven. Nästa pass som bara kör curl kommer inte åt
+    innehållet; det är en egenskap hos filen, inte ett fel.'
 - id: osteraker-bygdegardsbidrag
   status: pausad
   namn: Bidrag till bygdegårdar och andra samlingslokaler
@@ -275,7 +281,7 @@ bidrag:
   malgrupp: Föreningsägda bygdegårdar och andra samlingslokaler som inte är berättigade till annat kommunalt lokalbidrag eller
     stöd
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav:
   - Lokalen ska upplåtas för kulturella ändamål, studie-/fortbildningsverksamhet samt folkrörelse- och andra allmänna sammankomster,
@@ -287,15 +293,20 @@ bidrag:
   sen_ansokan: Ej angivet i källan
   kalla_url: https://www2.osteraker.se/download/18.1ef37628159176cfe19242d/1484653827230/Riktlinjer%20f%C3%B6r%20bidrag%20till%20bygdeg%C3%A5rdar.pdf
   belopp_status: okand
-  deadline_status: olast
-  krav_status: olast
-  krav_fullstandiga: null
-  anteckning: Antagen av Kommunstyrelsen 2015-11-25 (KS § 15:20) — administreras alltså av Kommunstyrelsen, inte Kultur- och
-    fritidsnämnden, vilket förklarar varför bidraget saknas på kommunens nuvarande kultur/fritid-sida. Dokumentet finns endast
-    kvar på den arkiverade www2.osteraker.se ('Old Österåkers kommun'); ingen motsvarande sida hittades på nuvarande osteraker.se
-    och ingen uppgift om bidraget i nyare (2023–2026) kommunstyrelsehandlingar. Aktualitet därför osäker — spot-checkas av
-    Jacob före publik deploy.
-  senast_verifierad: '2026-08-03'
+  deadline_status: okand
+  krav_status: kontrollast
+  krav_fullstandiga: true
+  anteckning: Bidraget beslutas av kommunstyrelsen och inte av kultur- och fritidsnämnden, vilket är varför det inte står
+    på kommunens bidragssida. Reglerna från 2015 ligger bara kvar på kommunens gamla webbplats. Fråga kommunstyrelsens
+    kansli om bidraget finns kvar innan du räknar med det.
+  senast_verifierad: '2026-10-02'
+  qa_anteckning: 'Antagen av kommunstyrelsen 2015-11-25, KS § 15:20, dnr KS 2015/0363.
+    Steg 3 2026-10-02: pdf:en på www2.osteraker.se svarar http 200 och de fyra kraven
+    står ordagrant i den, därför krav_status kontrollast. Dokumentet anger ingen
+    ansökningsdag alls, så deadlines.typ och deadline_status ändrades från lopande
+    respektive olast till okand — lopande var ett påstående källan inte bär. Ingen
+    motsvarande sida på nuvarande osteraker.se och inget om bidraget i
+    kommunstyrelsehandlingar 2023-2026, därför belopp_status okand och status pausad.'
 - id: osteraker-ungas-egen-organisering
   status: pausad
   namn: Ungas egen organisering
@@ -303,21 +314,26 @@ bidrag:
   - ovrig
   malgrupp: Unga i Österåkers kommun med idéer och projekt de vill förverkliga
   deadlines:
-    typ: lopande
+    typ: okand
     datum: []
   krav: []
   belopp: null
-  sen_ansokan: Ej tillämpligt (löpande)
+  sen_ansokan: Ej angivet i källan
   kalla_url: https://www.osteraker.se/upplevagora/ungiosteraker.4.592cfecd176fc0db8782e86.html
   belopp_status: okand
-  deadline_status: olast
+  deadline_status: okand
   krav_status: okand
   krav_fullstandiga: null
-  anteckning: 'Tunt dokumenterat på osteraker.se — ingen publicerad riktlinje-PDF, inget belopp eller ansökningsdatum hittat.
-    Enligt ''Riktlinjer för föreningsbidrag'' (2016) är bidraget explicit undantaget kommunens allmänna bidragsbestämmelser
-    och regleras i eget styrdokument, vilket antyder en bredare målgrupp än enbart etablerade bidragsberättigade föreningar.
-    Kontakt: ungrost@osteraker.se. Spot-checkas av Jacob före publik deploy.'
-  senast_verifierad: '2026-09-17'
+  anteckning: Kommunen beskriver stödet på sidan Ung i Österåker men publicerar varken belopp, krav eller ansökningsdag.
+    Har du en idé, mejla ungrost@osteraker.se och fråga vad som gäller.
+  senast_verifierad: '2026-10-02'
+  qa_anteckning: 'Steg 3 2026-10-02: sidan Ung i Österåker läst med curl, stödet
+    omnämns med kontaktadress ungrost@osteraker.se men utan belopp, krav eller datum.
+    deadlines.typ och deadline_status ändrade från lopande och olast till okand —
+    löpande ansökan stod inte i källan. Enligt Riktlinjer för föreningsbidrag (2016) är
+    stödet undantaget de allmänna bidragsbestämmelserna och regleras i eget
+    styrdokument, som inte är publicerat. Status pausad kvar — Jacob avgör om ett stöd
+    utan publicerade villkor ska visas som aktivt.'
 forutsattningar:
 - id: osteraker-bidragsberattigad
   vad: Bli godkänd som bidragsberättigad förening
