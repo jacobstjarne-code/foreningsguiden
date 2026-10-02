@@ -814,3 +814,27 @@ som återstår, inte verifiering.
 - **Åldersspann är den vanligaste sakliga felkällan, och den går åt båda hållen.** Högsby, Sävsjö och Oskarshamn hade lagrat 7–25 år där källan säger 6–25; Västervik hade tvärtom 6–25 lagrat där riktlinjen säger 7–25 (RF-gränsen). Hudiksvall hade slagit ihop två separata spår (7–25 och 0–6) till ett enda "0–25". Läs källans exakta ordalydelse, gissa inte riktning.
 - **Filformatet varierar mellan kommunfilerna.** I de flesta står `- id:` först i varje bidrag, men i bl.a. `nybro.yaml` och `hagfors.yaml` står `id:` sist i posten. Ett skript som läser "fälten efter id-raden" kopplar då fälten till fel bidrag — jag höll själv på att "rätta" korrekt Nybro-data av precis det skälet. Läs blocket mellan två `- namn:`-rader i stället.
 - **Två grindar, inte en.** Utöver `scripts/validera-data.ts` finns `scripts/verify-giltighet-regler.ts`, som kräver att kommunens `giltighet_regel.kalla_url` och motsvarande `forutsattningar`-post pekar på samma källa. Byter du den ena vid en URL-migrering måste du byta den andra, annars fäller pre-commit-hooken hela committen.
+
+
+## Tillägg 2026-10-02 — döda källor ur mätpasset 3A
+
+Mätpasset (`scripts/omverifiering-matning.ts`, rapport i
+`incoming/OMVERIFIERING_MATNING_2026-10-02.md`) klassade 18 av 151 olästbara
+källor som DÖDA: 404 eller 410 med både cronens UA och en webbläsar-UA. Fyra
+av dem finns inte längre i någon YAML och behöver bara rensas ur Redis. De
+övriga rättas en kommun i taget. Poster nedan är de där ingen ersättare gick
+att belägga, och de behöver en människa med browser.
+
+- **Trollhättan, `trollhattan-brukardriven-fritidsgard`.** Källan var
+  `riktlinjer---berakningsgrunder-for-foreningsbidrag-2017-02-06.pdf`, 404 med
+  båda UA. Kommunens riktlinjer finns nu som webbtext på
+  [bidragssidan](https://www.trollhattan.se/startsida/uppleva-och-gora/foreningar-foreningsliv/bidrag-stod-och-elitsponsring/),
+  och `kalla_url` är bytt dit — men de nya riktlinjerna nämner inte
+  brukardriven fritidsgårdsverksamhet över huvud taget. Varken bidragets namn,
+  31 oktober eller kraven står där. `deadline_status` och `krav_status` är
+  satta till `olast`, `senast_verifierad` är INTE bumpad. **Vad som behövs:**
+  avgör om stödformen finns kvar. Nämndens budget nämner driftbidrag för
+  brukardriven fritidsgårdsverksamhet till föreningar i Velanda och Upphärad,
+  så den ser ut att leva utan att publiceras. Kontakta kultur- och
+  fritidsförvaltningen, eller sök i nämndens protokoll. Är den avskaffad ska
+  posten få `status: avskaffat`, inte raderas.
