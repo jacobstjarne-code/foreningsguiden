@@ -72,8 +72,9 @@ const kontrollastFastaBidrag = allaFastaBidrag.filter((b) => b.deadline_status =
 const fastaDeadlines = kontrollastFastaBidrag.flatMap((b) => b.deadlines.datum);
 // Räkneord i bokstäver upp till tolv, siffra däröver ("Fem av dem", men
 // "14 av dem"). Versal sätts av anropsstället — satsen inleder meningen.
-// Räkneordet står alltid mitt i meningen ("varav fem senast ..."), så ingen
-// versal här. Över tolv skrivs siffran.
+// Räkneord i bokstäver upp till tolv, siffra däröver. Används för både M
+// ("söka elva kommunala bidrag") och N ("varav fem senast ..."). Står alltid
+// mitt i meningen, så ingen versal.
 const rakneord = (n: number): string => KOMMUN.rakneord[n] ?? String(n);
 
 // TILLSTANDET_OLAST.md 4c, yta 1 (Jacob 2026-08-03 kväll): Arvika-
@@ -100,7 +101,7 @@ const andraMeningen = produkt
   : KOMMUN.svarForstAnsokanOkand;
 const svarForst = `${forstaMeningen
   .replace(/{kommun}/g, kommun.kommun)
-  .replace(/{antal}/g, String(M))
+  .replace(/{antal}/g, rakneord(M))
   .replace(/{antalOrd}/g, rakneord(N))
   .replace(/{bidragsnamn}/g, (M === 1 ? kommun.bidrag[0] : kontrollastFastaBidrag[0] ?? kommun.bidrag[0]).namn)
   .replace(/{datum}/g, D[0] ?? '')

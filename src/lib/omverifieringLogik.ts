@@ -223,7 +223,7 @@ function elementInnehall(html: string, tagg: string, franIndex = 0): string | nu
   return null;
 }
 
-export type Regionkalla = 'main' | 'article' | 'sitevision' | 'helsida';
+export type Regionkalla = 'main' | 'article' | 'sitevision' | 'helsida' | 'kromskalad';
 
 export function plockaInnehallsregion(html: string): { region: string; kalla: Regionkalla } {
   const main = elementInnehall(html, 'main');
@@ -240,10 +240,71 @@ export function plockaInnehallsregion(html: string): { region: string; kalla: Re
   return { region: html, kalla: 'helsida' };
 }
 
-/** Ändringssignalen: hash på innehållsregionen efter samma strippning som förut. */
+/**
+ * RESERVLÖSNINGEN (Jacob 2026-10-02). 717 av 1674 källor saknar main,
+ * article och SiteVision-region, och föll då tillbaka på hela sidan — alltså
+ * kvar i samma brus som 3B skulle bli kvitt. I stället skalas kromet bort:
+ * sidhuvud, navigation, sidfot, aside, landmärkesroller, brödsmulor och
+ * cookie-/samtyckesrutor. Det som blir kvar är inte en avgränsad
+ * innehållsregion, men betydligt närmare en än hela dokumentet.
+ *
+ * Kakrutor och brödsmulor träffas på klass- eller id-namn. Listan är
+ * medvetet bred — ett falskt borttaget element gör signalen trubbigare, ett
+ * kvarlämnat gör den brusigare, och brus är det fel vi faktiskt har.
+ */
+const KROM_TAGGAR = ['header', 'nav', 'footer', 'aside'];
+const KROM_ROLLER = ['navigation', 'banner', 'contentinfo'];
+const KROM_NAMN = /(brodsmul|breadcrumb|cookie|consent|samtycke|kakor|gdpr)/i;
+
+function taBortElement(html: string, tagg: string, villkor?: (oppningstagg: string) => boolean): string {
+  let ut = '';
+  let rest = html;
+  for (;;) {
+    const oppna = new RegExp(`<${tagg}\\b[^>]*>`, 'i').exec(rest);
+    if (!oppna) return ut + rest;
+    const fore = rest.slice(0, oppna.index);
+    const efter = rest.slice(oppna.index + oppna[0].length);
+    if (villkor && !villkor(oppna[0])) {
+      // Behåll just det här elementets öppningstagg och fortsätt leta.
+      ut += fore + oppna[0];
+      rest = efter;
+      continue;
+    }
+    // Hitta den balanserade stängtaggen och kasta hela blocket.
+    const taggar = new RegExp(`<${tagg}\\b[^>]*>|</${tagg}\\s*>`, 'gi');
+    let djup = 1;
+    let slutIndex = efter.length;
+    for (let m = taggar.exec(efter); m; m = taggar.exec(efter)) {
+      djup += m[0].startsWith('</') ? -1 : 1;
+      if (djup === 0) { slutIndex = taggar.lastIndex; break; }
+    }
+    ut += fore;
+    rest = efter.slice(slutIndex);
+  }
+}
+
+export function strippaKrom(html: string): string {
+  let ut = html
+    .replace(/<(script|style|noscript)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ');
+  for (const tagg of KROM_TAGGAR) ut = taBortElement(ut, tagg);
+  for (const tagg of ['div', 'section', 'ol', 'ul']) {
+    ut = taBortElement(ut, tagg, (oppning) =>
+      KROM_ROLLER.some((r) => new RegExp(`role=["']${r}["']`, 'i').test(oppning)) || KROM_NAMN.test(oppning)
+    );
+  }
+  return ut;
+}
+
+/**
+ * Ändringssignalen: hash på innehållsregionen efter samma strippning som
+ * förut. Saknas en region hashas kromskalad body i stället för hela sidan —
+ * kalla blir 'kromskalad' så fördelningen syns i mätningen.
+ */
 export function hashaInnehallsregion(html: string): { hash: string; kalla: Regionkalla } {
   const { region, kalla } = plockaInnehallsregion(html);
-  return { hash: hashaText(strippaDynamiskInnehall(region)), kalla };
+  if (kalla !== 'helsida') return { hash: hashaText(strippaDynamiskInnehall(region)), kalla };
+  return { hash: hashaText(strippaDynamiskInnehall(strippaKrom(html))), kalla: 'kromskalad' };
 }
 
 // --- Prioritetskön (fyra tiers, se SPEC: Omverifiering §Prioritering av kön) ---

@@ -522,7 +522,9 @@ const ANSOKNINGSPRODUKTER: { produkt: string; alias: string[] }[] = [
   { produkt: 'Interbook Go', alias: ['Interbook Go', 'Interbook GO', 'InterbookGo', 'IBGO'] },
   { produkt: 'Interbook FRI', alias: ['Interbook FRI', 'InterbookFRI', 'FRI Webb-Bidrag', 'FRI-GO', 'FRI Go', 'FRI'] },
   { produkt: 'Actor Smartbook', alias: ['Actor Smartbook', 'ACTOR Smartbook', 'ActorSmartbook', 'Smartbook', 'Actor'] },
-  { produkt: 'E-serve', alias: ['E-serve'] },
+  // Jacob 2026-10-02: e-srv är samma leverantör som E-serve, bara en annan
+  // stavning i tre kommuner (bl.a. Tranås).
+  { produkt: 'E-serve', alias: ['E-serve', 'E-srv', 'e-srv', 'e-srv/e-tjänst'] },
   { produkt: 'Aktivitetskort på nätet', alias: ['Aktivitetskort på nätet', 'ApN', 'APN'] },
 ];
 

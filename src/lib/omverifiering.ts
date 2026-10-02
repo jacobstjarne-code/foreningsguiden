@@ -76,6 +76,13 @@ export interface KallaSignatur {
   senastLyckad: string | null; // ISO-tidsstämpel, bara vid resultat.ok — driver H27
   konsekutivaFel: number;
   senasteFel: string | null;
+  // Tystad till och med detta ISO-datum (Jacob 2026-10-02). Källan
+  // kontrolleras som vanligt och flaggas som vanligt — den bara utelämnas ur
+  // systemlarmets källvillkor fram till datumet. Till för kända, daterade
+  // lägen där ett dagligt larm inte tillför något: Svedala har flyttat hela
+  // webbplatsen till svedala.info, som just nu är en nödsida, och kontrollen
+  // är inbokad 2026-10-16.
+  tystadTill?: string | null;
 }
 
 export interface BidragReferens {

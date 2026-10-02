@@ -108,7 +108,14 @@ export const GET: APIRoute = async ({ request }) => {
   // 4 + 5 delar källdata (omverifiering.ts:s hamtaFlaggade — allt som inte är 'oforandrad')
   const flaggade = await hamtaFlaggade();
 
-  const olasbara = flaggade.filter((s) => s.konsekutivaFel >= OMVERIFIERING_MAX_KONSEKUTIVA_FEL);
+  // Tystade källor (signatur.tystadTill) räknas inte i KÄLLOR-villkoret fram
+  // till sitt datum. De kontrolleras och flaggas som vanligt och syns i
+  // adminvyn — det är bara det dagliga mejlet som tiger om dem. Jacob
+  // 2026-10-02, för Svedala: hela webbplatsen flyttad till svedala.info,
+  // kontroll inbokad 2026-10-16.
+  const idag = new Date().toISOString().slice(0, 10);
+  const tystad = (s: { tystadTill?: string | null }) => s.tystadTill != null && s.tystadTill >= idag;
+  const olasbara = flaggade.filter((s) => s.konsekutivaFel >= OMVERIFIERING_MAX_KONSEKUTIVA_FEL && !tystad(s));
   if (olasbara.length > 0) {
     rubriker.push('Källor');
     sektioner.push(
@@ -120,9 +127,9 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   const foregaendeStorlek = await hamtaGranskningForegaende();
-  const nuvarandeStorlek = flaggade.length;
+  const nuvarandeStorlek = flaggade.filter((s) => !tystad(s)).length;
   if (granskningVaxer(nuvarandeStorlek, foregaendeStorlek)) {
-    const aldsta = aldstDatum(flaggade.map((s) => s.flaggadSedan ?? s.senasteForsok.slice(0, 10)));
+    const aldsta = aldstDatum(flaggade.filter((s) => !tystad(s)).map((s) => s.flaggadSedan ?? s.senasteForsok.slice(0, 10)));
     const dagarAldst = aldsta ? Math.floor((Date.now() - Date.parse(aldsta)) / (1000 * 60 * 60 * 24)) : null;
     rubriker.push('Granskningskö');
     sektioner.push(

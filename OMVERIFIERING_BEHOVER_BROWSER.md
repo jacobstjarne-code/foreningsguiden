@@ -886,9 +886,22 @@ otillgänglig. Ersätt `kalla_url` först när dokumentet läst och bekräftat;
 | **hagfors**, `hagfors-pensionars-och-funktionshinderforeningar` | `Riktlinjer ... pensionärsföreningar och ... funktionshinder, rev 2023-08-28.pdf` | Samma trädflytt, samma sida, inga PDF-länkar för curl. |
 | **lund**, `lund-publika-idrottsarrangemang` | `/foreningslotsen/forenings--och-projektbidrag/stod-till-idrott` | [Förenings- och projektbidrag](https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag) svarar 200. Undersidan `stod-till-idrott` är omdöpt eller borta; hitta vad den heter nu. |
 | **linkoping**, `linkoping-son-grundbidrag` + `-son-aktivitetsbidrag` | `Föreningsbidrag bestämmelser, kriterier och bidragsregler SON.pdf` | Trädet har flyttat till [bidrag till föreningar, arrangemang och aktiviteter](https://www.linkoping.se/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter) med undersidor per nämnd. [socialt-stodjande-verksamhet](https://www.linkoping.se/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter/socialt-stodjande-verksamhet) svarar 200 och är sannolikt rätt — SON är socialnämnden. Läs den och leta det nya regeldokumentet. |
-| **svedala**, `svedala-aktivitetsbidrag` + åtta poster på riktlinjen | `protokoll-fran-kommunfullmaktige-18-juni-2026-...pdf` och `riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf` | Svedalas sitemap ger 404 och jag hittade ingen levande bidragssida alls — alla fyra sökvägar jag prövade gav 404. Protokoll som källa rensas dessutom när justeringen är klar; riktlinjen är den som ska pekas på. |
+| **svedala**, `svedala-aktivitetsbidrag` + åtta poster på riktlinjen | `protokoll-fran-kommunfullmaktige-18-juni-2026-...pdf` och `riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf` | **Avvaktar 2026-10-16.** Kommunen har flyttat hela webbplatsen till svedala.info, som just nu bara är en nödsida. Inga fält rörda, och Svedalas sex källor är tystade i kön t.o.m. 16 oktober. Se den daterade raden nedan. |
 
 **Gemensamt mönster:** i fem av sju fall svarar kommunens bidragssida 200 men
 innehåller inga PDF-länkar i HTML:en som curl ser. Dokumentlistorna renderas
 med JS. Det är precis den klassen browsern löser och curl inte gör — till
 skillnad från `otillganglig`-flaggorna, som nästan alltid bara var UA-blockering.
+
+## Daterade kontroller
+
+- **2026-10-16 — Svedala.** Kontrollera om `svedala.se` är tillbaka. Är den
+  inte det: sätt alla nio poster till `olast` (belopp, deadline, krav) med
+  samma anteckning som Lomma, Lund, Hagfors och Bräcke fick 2026-10-02.
+  Kommunen flyttade webbplatsen till `svedala.info`, som i dag är en
+  nödsida. Inga fält är rörda i väntan på det. Svedalas sex källor i
+  omverifieringskön är tystade t.o.m. 2026-10-16 med
+  `scripts/tysta-kalla.ts svedala 2026-10-16`, så systemlarmet upprepar dem
+  inte varje dag. Tystnaden gäller BARA larmet — källorna kontrolleras,
+  flaggas och syns i adminvyn som vanligt, och larmet tar upp dem igen av
+  sig självt den 17 oktober.
