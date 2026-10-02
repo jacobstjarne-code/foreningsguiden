@@ -1,17 +1,23 @@
 # Passrapport — omverifiering steg 3, pass A
 
-Session 1, 24–25 september 2026. Gren `omverifiering-steg3-a`, utgången från
-`origin/release-2026-09-24`. Worktree `~/Desktop/code_projects/fg-omverif-steg3-a`.
+Session 1, 24 september–2 oktober 2026. Gren `omverifiering-steg3-a`, utgången
+från `origin/release-2026-09-24`. Worktree
+`~/Desktop/code_projects/fg-omverif-steg3-a`.
 
 ## Läge
 
 | | |
 |---|---|
-| Kommuner klara | 23 av 72 |
-| Bidrag lästa | 301 av 705 |
-| Rättade | 27 |
+| Kommuner klara | 26 av 74 |
+| Bidrag lästa | 335 av 725 |
+| Rättade | 42 |
 | Tillagda | 6 |
-| Till browserkön | 0 |
+| Till browserkön | 1 |
+
+Härjedalen räknas som klar sånär som på en post: pensionärs- och
+funktionsrättsbidraget har ingen publicerad källa och ligger i browserfilen.
+Halmstads `halmstad-konstnarlig-utveckling` låg utanför passlistan (avskaffad,
+läst 17 september) men kom in via Jacobs kö och räknas inte i raderna ovan.
 
 Alla tjugotre är committade och pushade. Båda grindarna gröna före varje
 commit, pre-commit-kroken grön på samtliga.
@@ -43,6 +49,15 @@ commit, pre-commit-kroken grön på samtliga.
 | Åre | 10 | 2 | ett tillagt, lokalbidragets datum flyttat |
 | Årjäng | 14 | 1 | ett tillagt, lönebidrag låg bara i dokumentlistan |
 | Båstad | 14 | 0 | |
+| Härjedalen | 15 | 4 | studieförbundens källa bytt, en post utan källa kvar |
+| Österåker | 6 | 5 | två poster påstod löpande ansökan utan stöd i källan |
+| Bollebygd | 16 | 6 | fyra påståenden källan inte bär |
+
+Dessutom, utanför listan: **Halmstad**, `halmstad-konstnarlig-utveckling`, tre
+fält olast → kontrollast. Sidan ligger kvar oförändrad sedan 2021 med
+ansökningslänk, men stödformen saknas både i kortlistan på kommunens
+kultursida och i listan Kulturnämndens stödformer — `status: avskaffat`
+bekräftat.
 
 ## Rättelser
 
@@ -154,6 +169,69 @@ riktlinjen ANTOGS, inte riktlinjen själv. Riktlinjen är inte publicerad på
 arjang.se och stödet nämns inte på sidan Föreningsstöd. Värdet står kvar utan
 anspråk.
 
+**Härjedalen, `harjedalen-studieforbund`, `kalla_url`.** Före: kommunens
+bidragssida, som bara har de tre förstärkningsområdena och 1 maj. Efter:
+styrdokumentet Studieförbund (kf 13 juni 2016 § 134, dnr BFK 2014/145), där
+fördelningen 75, 5 och 20 procent faktiskt står, liksom kraven på statsbidrag
+via Folkbildningsrådet, kommunintyg och verksamhetsplan. De tre
+kontrollast-fälten hade alltså värden deras egen källa inte bar.
+
+**Härjedalen, `harjedalen-evenemangsstod`, `sen_ansokan`.** Före: "…minst tre
+månader före evenemanget vid ansökt belopp över 25 000 kr." Efter: samma mening
+utan summan. Kommunens tre egna källor säger olika: bidragssidan 25 000 kr,
+riktlinjen från maj 2025 ger tjänstemännen 10 000 kr vardera och
+delegationsordningen från oktober 2025 säger 20 000 kr. Att välja en av dem och
+skriva den som regel är att gissa.
+
+**Härjedalen, `harjedalen-lokalbidrag`, `anteckning`.** Källkonflikten låg bara i
+`qa_anteckning`: bidragssidan säger löpande ansökan, riktlinjen 8.4 säger
+31 januari för föregående år. Den som ska söka behöver veta det, så den står nu
+i kassörens text med rådet att fråga fritidsenheten.
+
+**Österåker, `osteraker-bygdegardsbidrag` och `osteraker-ungas-egen-organisering`,
+`deadlines.typ` + `deadline_status`.** Före: `lopande` respektive `olast`. Efter:
+`okand` i båda fälten för båda posterna. Varken riktlinjen från 2015 eller sidan
+Ung i Österåker säger något om ansökningstid — löpande ansökan var ett påstående
+ingen av källorna bär. Bygdegårdsbidragets fyra krav står däremot ordagrant i
+pdf:en, så `krav_status` gick olast → kontrollast.
+
+**Österåker, samma två poster, `anteckning`.** Båda bar processpråk
+("spot-checkas av Jacob före publik deploy"). Flyttat till `qa_anteckning`.
+Kassörens text säger nu vem som beslutar och vem man frågar.
+
+**Bollebygd, `bollebygd-investeringsbidrag-orienteringskarta`, `belopp`.** Före:
+"Högst 2 000 kr per kvadratkilometer för nyritning och 500 kr per
+kvadratkilometer för revidering." Efter: per kilometer, båda gångerna. Ordet
+kvadratkilometer finns inte i riktlinjen. Källa: Riktlinjer för Bollebygds stöd
+till föreningar och studieförbund, 2024-10-02 § 63, s. 11: "Bidraget för
+nyritade av orienteringskartor är på max 2 000 kr. per kilometer och bidraget
+till revidering av orienteringskartor är på max 500 kr. per kilometer."
+
+**Bollebygd, `bollebygd-lovaktivitetsbidrag`, krav.** Före: "sport-, påsk-,
+sommar-, höst-, läs- eller jullov". Efter: "sport-, påsk-, sommar-, höst- eller
+läslov eller vinterlov", som är riktlinjens uppräkning. Ordet jullov finns inte
+i dokumentet.
+
+**Bollebygd, `bollebygd-startbidrag`, krav.** Före: "En ny sektion i en befintlig
+förening räknas inte som en nybildad förening." Det står inte i riktlinjen.
+Efter: det som står bland de allmänna bestämmelserna — bidrag till en förening
+med flera sektioner söks av huvudstyrelsen.
+
+**Bollebygd, `bollebygd-aktivitetsstod`, krav.** Före: "Sammankomsten ska vara
+planerad, ledarledd, pågå minst 45 minuter och ha minst fem deltagare 4–20 år."
+Riktlinjen ställer bara två villkor: minst 45 minuter och minst fem deltagare i
+åldern 4–20 år. Ordet ledarledd finns inte i dokumentet.
+
+**Bollebygd, de tre investeringsbidragen, `sen_ansokan`.** Före: "senast
+31 januari före det år då stödet önskas", vilket är kommunens årshjul. Riktlinjen
+— postens egen `kalla_url` — skriver "senast den 31 januari de året bidraget
+önskas". Fälten följer nu sin källa, och anteckningen varnar för årshjulets
+tidigare datum i stället för att påstå det som regel.
+
+**Bollebygd, `bollebygd-bygdegards-och-samlingslokalsbidrag`, `sen_ansokan`.**
+Före: "senast 30 april det år stödet avser". Riktlinjen skriver bara senast den
+30 april.
+
 ## Tillagda bidrag
 
 **Jönköping, `jonkoping-studieforbund`.** Se ovan.
@@ -263,6 +341,13 @@ Ett skript som letar `^\s*id:` missar de förra.
 
 ## Kvar i passet
 
-49 kommuner, 404 bidrag. Nästa åtta i listans ordning: Bollebygd (16),
-Botkyrka (1), Danderyd (12), Emmaboda (20), Essunga (11), Falkenberg (2),
-Gislaved (1), Gullspång (3).
+49 kommuner, 390 bidrag, räknat ur `OMVERIFIERING_STEG3_LISTA.json` mot
+`senast_verifierad` i datan. Nästa åtta i listans ordning: Härjedalen (1 post
+kvar, väntar på kommunen), Botkyrka (1), Danderyd (12), Emmaboda (20),
+Essunga (11), Falkenberg (2), Gislaved (1), Gullspång (3).
+
+Passlistan har bytt riktning: `OMVERIFIERING_STEG3_LISTA.json` är enda källan
+och MD-filen genereras ur den med `python3 incoming/generera_steg3_lista.py`.
+Det gamla `omverif_steg3_lista.py` läste MD:n och skrev JSON:en — det är
+dödmarkerat och avbryter vid körning. MD:ns tal låg elva bidrag fel eftersom de
+kom ur en provmerge som saknade steg 2:s andra dag.

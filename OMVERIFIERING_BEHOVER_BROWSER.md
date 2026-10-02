@@ -888,6 +888,18 @@ otillgänglig. Ersätt `kalla_url` först när dokumentet läst och bekräftat;
 | **linkoping**, `linkoping-son-grundbidrag` + `-son-aktivitetsbidrag` | `Föreningsbidrag bestämmelser, kriterier och bidragsregler SON.pdf` | Trädet har flyttat till [bidrag till föreningar, arrangemang och aktiviteter](https://www.linkoping.se/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter) med undersidor per nämnd. [socialt-stodjande-verksamhet](https://www.linkoping.se/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter/socialt-stodjande-verksamhet) svarar 200 och är sannolikt rätt — SON är socialnämnden. Läs den och leta det nya regeldokumentet. |
 | **svedala**, `svedala-aktivitetsbidrag` + åtta poster på riktlinjen | `protokoll-fran-kommunfullmaktige-18-juni-2026-...pdf` och `riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf` | **Avvaktar 2026-10-16.** Kommunen har flyttat hela webbplatsen till svedala.info, som just nu bara är en nödsida. Inga fält rörda, och Svedalas sex källor är tystade i kön t.o.m. 16 oktober. Se den daterade raden nedan. |
 
+**Tillägg 2026-10-02, steg 3 pass A — en post utan publicerad källa alls:**
+`harjedalen-pensionars-och-funktionsrattsbidrag`. Beloppet 25 kr per medlem och
+lokalförmånen vid äldreboenden kommer från kommunfullmäktiges beslut 2018-11-26,
+vars protokoll inte längre ligger på herjedalen.se. `kalla_url` pekar nu på
+kommunens [Riktlinjer för föreningsstöd](https://www.herjedalen.se/download/18.7620025f18acbaeda1dbbd7/1695730712228/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf),
+som räknar upp "Stimulansbidrag till pensionärsföreningar" i avgränsningen (§ 4)
+men saknar avsnitt med belopp, krav eller ansökningsdag. Riktlinjen motsäger
+heller inte protokollets värden. Fälten står olast/okand/olast och
+`senast_verifierad` är inte bumpad. Detta är inte ett browser-fall — ingen sida
+är otillgänglig. Det som behövs är kommunens diarium eller ett mejl till
+fritidsenheten.
+
 **Gemensamt mönster:** i fem av sju fall svarar kommunens bidragssida 200 men
 innehåller inga PDF-länkar i HTML:en som curl ser. Dokumentlistorna renderas
 med JS. Det är precis den klassen browsern löser och curl inte gör — till
