@@ -8,6 +8,7 @@
 // en URL, unika bidrag-id per kommun) men samlar ALLA trasiga filer i ett
 // svep i stället för att stanna vid den första — bättre för en människa
 // som ska rätta flera fel på en gång.
+import { readFileSync, readdirSync } from 'node:fs';
 import { validateAllKommunFiles, hittaBeloppPlatshallare, loadKommuner } from '../src/lib/kommuner.ts';
 import { loadNationellaStod, validateAllNationellaStodFiles } from '../src/lib/nationellaStod.ts';
 import { strippaProcessSprak } from '../src/lib/anteckningFilter.ts';
@@ -59,6 +60,50 @@ for (const k of kommuner) {
   }
 }
 console.log(`\nolast (ej oberoende omkontrollerat): belopp ${beloppOlast}, deadline ${deadlineOlast}, krav ${kravOlast}, giltighet ${giltighetOlast}.`);
+
+// id FÖRST i varje bidrag och forutsattning (Jacob 2026-10-02). Filerna
+// blandade två format: i de flesta stod `- id:` först, i 38 filer stod `id:`
+// sist i posten. Varje skript som läser "fälten efter id-raden" eller söker
+// bakåt efter postens början kopplade då fält till FEL bidrag — det har
+// kostat tre separata lagningar av samma hjälpare. Normaliserat av
+// scripts/normalisera-id-forst.ts; den här grinden ser till att det håller.
+//
+// Kontrollen läser YAML-RADERNA, inte det parsade trädet — ordningen är
+// exakt det som inte syns efter en parse.
+const idForstProblem: string[] = [];
+for (const fil of readdirSync('data/kommuner').filter((f) => f.endsWith('.yaml')).sort()) {
+  const rader = readFileSync(`data/kommuner/${fil}`, 'utf8').split('\n');
+  for (const listnyckel of ['bidrag', 'forutsattningar'] as const) {
+    const start = rader.findIndex((l) => l.replace(/\s+$/, '') === `${listnyckel}:`);
+    if (start === -1) continue;
+    let li = -1;
+    for (let i = start + 1; i < rader.length; i++) {
+      if (rader[i].trim().startsWith('- ')) { li = rader[i].length - rader[i].trimStart().length; break; }
+      if (rader[i].trim() !== '' && !rader[i].startsWith(' ')) break;
+    }
+    if (li === -1) continue;
+    let slut = rader.length;
+    for (let i = start + 1; i < rader.length; i++) {
+      const indrag = rader[i].length - rader[i].trimStart().length;
+      if (rader[i].trim() !== '' && indrag < li) { slut = i; break; }
+    }
+    const prefix = ' '.repeat(li) + '- ';
+    for (let i = start + 1; i < slut; i++) {
+      const arItem = rader[i].startsWith(prefix) && rader[i].length - rader[i].trimStart().length === li;
+      if (arItem && !rader[i].startsWith(`${prefix}id:`)) {
+        idForstProblem.push(`${fil} rad ${i + 1} (${listnyckel}): "${rader[i].trim().slice(0, 50)}" — id ska vara första nyckeln`);
+      }
+    }
+  }
+}
+if (idForstProblem.length > 0) {
+  console.error(`\nid-först-FAIL — ${idForstProblem.length} post(er) där id inte är första nyckeln:\n`);
+  for (const p of idForstProblem.slice(0, 20)) console.error(`  ${p}`);
+  if (idForstProblem.length > 20) console.error(`  ... och ${idForstProblem.length - 20} till`);
+  console.error('\nKör: node scripts/normalisera-id-forst.ts');
+  process.exit(1);
+}
+console.log('id-först: id är första nyckeln i varje bidrag och forutsattning.');
 
 // Processpråk i publik text FÄLLER bygget (Opus 2026-09-24/25). A2 lät det
 // bara varna, men varningen gick förlorad i bruset och 155 anteckningar

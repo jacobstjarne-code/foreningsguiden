@@ -91,6 +91,10 @@ const deadlineOlastDatum = bidrag.deadline_status === 'olast' && bidrag.deadline
   ? bidrag.deadlines.datum.map(formatRecurringDate).join(' · ')
   : null;
 const beloppOlast = bidrag.belopp_status === 'olast';
+// kalla_borttagen (Jacob 2026-10-02): regeldokumentet finns inte längre.
+// Banderollen byter text, stämpeln visas inte, och belopp/krav står under en
+// egen rubrik som säger att uppgifterna kommer från tidigare regler.
+const borttagen = bidrag.kalla_borttagen;
 const beloppPerForening = individuelltBelopp(bidrag);
 const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening !== null
   ? 'Belopp för föreningen'
@@ -111,7 +115,15 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
     per kort — inte upprepad per fält. Streckad hål-markör i banderollen
     matchar markören som återkommer på varje olast-fält nedan (§4:
     "markören renderas på alla sex ytor"). */}
-{harOlastFalt && (
+{borttagen ? (
+  <div class="fg-unread-banner">
+    <span class="fg-void-mark" aria-hidden="true"></span>
+    <span>
+      {OLAST_MARK.borttagenRad.replace('{datum}', formatDate(borttagen))}
+      {' '}<a href={bidrag.kalla_url} target="_blank" rel="noopener">{OLAST_MARK.kallaKnappMall.replace('{host}', kallaHost)}</a>
+    </span>
+  </div>
+) : harOlastFalt && (
   <div class="fg-unread-banner">
     <span class="fg-void-mark" aria-hidden="true"></span>
     <span>
@@ -120,6 +132,8 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
     </span>
   </div>
 )}
+
+{borttagen && <p class="bidrag-card__tidigare-rubrik">{OLAST_MARK.borttagenRubrik}</p>}
 
 <dl>
   <dt>Målgrupp</dt>
@@ -134,7 +148,14 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
         streckad (samma markör som banderollen ovan, ingen egen
         upprepad reservationstext), ingen_regel är ett bekräftat "ingen
         frist" (VoidState), okand är ett äkta hål (VoidMark). */}
-    {bidrag.deadlines.typ === 'relativ' ? (
+    {borttagen ? (
+      /* Inget läsdatum och ingen felrapport-widget — de påstår en levande
+         källa. Bara vad som stod i de tidigare reglerna. */
+      <span class="fg-faltmarkor">
+        <span class="fg-void-mark" aria-hidden="true"></span>
+        {bidrag.deadlines.typ === 'okand' ? 'Ingen uppgift i de tidigare reglerna' : formatDeadlines(bidrag)}
+      </span>
+    ) : bidrag.deadlines.typ === 'relativ' ? (
       <RelativeDeadline bidrag={bidrag} />
     ) : bidrag.deadline_status === 'ingen_regel' ? (
       <VoidState
@@ -173,7 +194,12 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
 
   <dt>{beloppRubrik}</dt>
   <dd>
-    {bidrag.belopp_status === 'ingen_regel' ? (
+    {borttagen ? (
+      <span class="fg-faltmarkor">
+        <span class="fg-void-mark" aria-hidden="true"></span>
+        {beloppPerForening ?? 'Ingen uppgift i de tidigare reglerna'}
+      </span>
+    ) : bidrag.belopp_status === 'ingen_regel' ? (
       <VoidState
         rubrik="BELOPP"
         besked={`${kommunNamn} anger uttryckligen inget belopp eller tak`}
@@ -301,7 +327,9 @@ const beloppRubrik = bidrag.belopp_avser === 'per_forening' && beloppPerForening
   <p class="bidrag-card__kalla">
     Källa: <a href={bidrag.kalla_url}>{bidrag.kalla_url}</a>
   </p>
-  <VerificationStamp bidrag={bidrag} verifierad={verifierad} giltighetStatus={giltighetStatus} />
+  {/* Ingen stämpel när regeldokumentet är borta — den påstår att källan
+      lästs, och det finns ingen källa att ha läst. */}
+  {!borttagen && <VerificationStamp bidrag={bidrag} verifierad={verifierad} giltighetStatus={giltighetStatus} />}
 </div>
 {/* Anteckningen döljs här om den redan visas i deadline-fältet ovan
     (relativFrist) — annars stod samma besked på kortet två gånger. */}

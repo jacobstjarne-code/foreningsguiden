@@ -128,6 +128,21 @@ export interface Bidrag {
   // passet skriver hit.
   qa_anteckning: string | null;
 
+  /**
+   * kalla_borttagen (Jacob 2026-10-02) — ISO-datum då vi konstaterade att
+   * kommunen inte längre publicerar regler för stödet. Satt betyder:
+   * bidraget visas, men utan någon stämpel eller "läst"-rad, med belopp och
+   * krav under rubriken "Så stod det i kommunens tidigare regler", och
+   * utan att räknas i deadlinekalendern, de närmaste fristerna eller
+   * kommuningressens N. Det räknas FORTFARANDE i M — stödet kan finnas
+   * kvar, det är bara reglerna som försvunnit från webben.
+   *
+   * Validera kräver att alla tre statusfält är olast eller okand när
+   * fältet är satt. Ett borttaget regeldokument kan inte samtidigt vara
+   * kontrollast.
+   */
+  kalla_borttagen: string | null;
+
   // Matchningsvillkor (matchningstratten, turn-11) — extraheras ur
   // krav/malgrupp av ett separat researchpass, INTE av Code. null = inget
   // känt krav — matchar ALLTID, filtrerar ALDRIG bort (se matching.ts).
@@ -597,9 +612,18 @@ export type Granskningsniva = 'fullt' | 'delvis' | 'ogranskat';
 const GRANSKAT_STATUSAR: readonly Datatillstand[] = ['kontrollast', 'ingen_regel'];
 
 export function bidragGranskningsniva(bidrag: Bidrag, giltighetStatus: Datatillstand): Granskningsniva {
-  const statusar = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status, giltighetStatus];
+  // Jacob 2026-10-02: Lommas startbidrag visade "DELVIS KONTROLLÄST" trots
+  // att inget av bidragets EGNA fält var granskat — belopp olast, deadline
+  // okand, krav olast. Det som tände stämpeln var giltighetStatus, alltså
+  // kommunens giltighetsregel (ingen_regel), ett fält som inte säger något
+  // om det här bidraget. En stämpel på ett bidragskort är ett påstående om
+  // bidraget, så minst ETT av bidragets egna tre fält måste vara granskat
+  // för att den ska tändas. Giltigheten räknas fortfarande med mot 'fullt'.
+  const egnaFalt = [bidrag.belopp_status, bidrag.deadline_status, bidrag.krav_status];
+  const egnaGranskade = egnaFalt.filter((s) => GRANSKAT_STATUSAR.includes(s)).length;
+  if (egnaGranskade === 0) return 'ogranskat';
+  const statusar = [...egnaFalt, giltighetStatus];
   const antalGranskade = statusar.filter((s) => GRANSKAT_STATUSAR.includes(s)).length;
-  if (antalGranskade === 0) return 'ogranskat';
   if (antalGranskade === statusar.length) return 'fullt';
   return 'delvis';
 }

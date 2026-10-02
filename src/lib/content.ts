@@ -133,8 +133,10 @@ export const KOMMUN = {
     allaSamma: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, alla senast {datum}.',
     // N < M, ett datum
     varavN: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, varav {antalOrd} senast {datum}.',
-    // N < M, ett datum, N === 1 — namnet säger mer än siffran
-    varavEtt: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, varav {bidragsnamn} senast {datum}.',
+    // N < M, ett datum, N === 1. Jacob 2026-10-02: räkneordet, inte namnet —
+    // ett bidragsnamn mitt i ingressen läser som en rubrik och gör meningen
+    // ojämn mellan kommuner.
+    varavEtt: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, varav ett senast {datum}.',
     // N === M, flera datum
     intervallAlla: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, med sista ansökningsdag mellan {tidigaste} och {senaste}.',
     // N < M, flera datum
@@ -1160,6 +1162,10 @@ export const OLAST_MARK = {
   // belopp_status: olast — beloppet visas, men aldrig på en framträdande
   // plats och aldrig utan förbehållet.
   beloppReservation: 'enligt kommunens underlag, ej bekräftat',
+  // kalla_borttagen (Jacob 2026-10-02). Ersätter banderollens läst-rad helt —
+  // en "läst"-formulering vore fel när dokumentet inte längre finns.
+  borttagenRad: 'Kommunen publicerar inte längre regler för det här stödet. Vi såg det {datum}. Fråga kommunen om det finns kvar.',
+  borttagenRubrik: 'Så stod det i kommunens tidigare regler',
   // TILLSTANDET_OLAST.md 4c: "Aldrig markör utan legend på samma sida" —
   // ordagrann rad ur filen, för ytor där markören bär hela anspråket utan
   // egen reservationstext (deadlinekalendern, förstasidans närmaste).

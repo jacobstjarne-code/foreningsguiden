@@ -68,7 +68,9 @@ const intro = KOMMUN.introTemplate.replace(/{kommun}/g, kommun.kommun);
 // så en kommun med enbart olästa datum inte felaktigt beskrivs som
 // löpande.
 const allaFastaBidrag = kommun.bidrag.filter((b) => b.deadlines.typ === 'fasta');
-const kontrollastFastaBidrag = allaFastaBidrag.filter((b) => b.deadline_status === 'kontrollast');
+// kalla_borttagen räknas inte i N (ingen frist vi kan stå för) men räknas
+// kvar i M — stödet kan finnas, det är reglerna som försvunnit från webben.
+const kontrollastFastaBidrag = allaFastaBidrag.filter((b) => b.deadline_status === 'kontrollast' && b.kalla_borttagen === null);
 const fastaDeadlines = kontrollastFastaBidrag.flatMap((b) => b.deadlines.datum);
 // Räkneord i bokstäver upp till tolv, siffra däröver ("Fem av dem", men
 // "14 av dem"). Versal sätts av anropsstället — satsen inleder meningen.
@@ -103,7 +105,8 @@ const svarForst = `${forstaMeningen
   .replace(/{kommun}/g, kommun.kommun)
   .replace(/{antal}/g, rakneord(M))
   .replace(/{antalOrd}/g, rakneord(N))
-  .replace(/{bidragsnamn}/g, (M === 1 ? kommun.bidrag[0] : kontrollastFastaBidrag[0] ?? kommun.bidrag[0]).namn)
+  // {bidragsnamn} används nu BARA av M === 1-mallen.
+  .replace(/{bidragsnamn}/g, kommun.bidrag[0].namn)
   .replace(/{datum}/g, D[0] ?? '')
   .replace(/{tidigaste}/g, D[0] ?? '')
   .replace(/{senaste}/g, D[D.length - 1] ?? '')} ${andraMeningen}`;

@@ -199,6 +199,25 @@ function validateBidrag(raw: any, kommunSlug: string, index: number, problems: s
   }
   raw.qa_anteckning = raw.qa_anteckning ?? null;
 
+  // kalla_borttagen (Jacob 2026-10-02) — valfritt ISO-datum. Samma additiva
+  // recept som qa_anteckning: validera bara om satt.
+  if (raw.kalla_borttagen !== null && raw.kalla_borttagen !== undefined) {
+    if (typeof raw.kalla_borttagen !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(raw.kalla_borttagen)) {
+      problems.push(`${where}.kalla_borttagen måste vara ett ISO-datum (YYYY-MM-DD) eller null`);
+    } else {
+      // Ett borttaget regeldokument kan inte samtidigt vara kontrollläst.
+      const otillatna = (['belopp_status', 'deadline_status', 'krav_status'] as const)
+        .filter((f) => raw[f] !== 'olast' && raw[f] !== 'okand');
+      if (otillatna.length > 0) {
+        problems.push(
+          `${where}.kalla_borttagen är satt men ${otillatna.map((f) => `${f}: "${raw[f]}"`).join(', ')} — ` +
+          'alla tre statusfält måste vara olast eller okand'
+        );
+      }
+    }
+  }
+  raw.kalla_borttagen = raw.kalla_borttagen ?? null;
+
   // A (belopp-avser-spårbarhet, 2026-08-12) — kommunens_pott normaliseras
   // FÖRE belopp_status-validering så att harVarde-beräkningen kan läsa den.
   if (raw.kommunens_pott !== null && raw.kommunens_pott !== undefined && typeof raw.kommunens_pott !== 'string') {
@@ -628,6 +647,10 @@ export function getDeadlineEntries(today: string = todayISO()): DeadlineEntry[] 
       // händer den här dagen". Bidraget finns kvar på kommunsidan och på
       // sin egen sida, där datumet visas med hela reservationen runt sig.
       if (bidrag.deadline_status === 'olast') continue;
+      // kalla_borttagen (Jacob 2026-10-02): reglerna finns inte längre, så
+      // det finns ingen frist att bevaka. Bidraget syns på kommunsidan och
+      // på sin egen sida, inte i kalendern eller bland närmaste frister.
+      if (bidrag.kalla_borttagen !== null) continue;
       const base = {
         niva: 'kommunal' as const,
         kommun: kommun.kommun,

@@ -66,7 +66,11 @@ const metaTitle = `${bidrag.namn} — ${kommun.kommun} — Föreningsguiden`;
 // Jacob 2026-09-25: "verifierat mot kommunens egen sida" påstod mer än vi
 // gör. Vi läser kommunens sida och länkar till den; vi verifierar inte
 // kommunen. Läsdatumet nämns bara när bidraget faktiskt har ett.
-const metaLasdatum = bidrag.senast_verifierad
+// kalla_borttagen: ingen läst-rad, inte heller i metadata — dokumentet finns
+// inte längre, så "läst på kommunens sida" vore ett motsägande påstående.
+const metaLasdatum = bidrag.kalla_borttagen
+  ? ` Kommunen publicerar inte längre regler för det här stödet; vi såg dem ${formatDate(bidrag.kalla_borttagen)}.`
+  : bidrag.senast_verifierad
   ? ` Läst på kommunens sida ${formatDate(bidrag.senast_verifierad)}.`
   : '';
 const metaDescription = `${bidrag.namn} i ${kommun.kommun}: krav, belopp och ansökningsdatum, med länk till kommunens egen sida.${metaLasdatum}`;
