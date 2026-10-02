@@ -838,3 +838,33 @@ att belägga, och de behöver en människa med browser.
   så den ser ut att leva utan att publiceras. Kontakta kultur- och
   fritidsförvaltningen, eller sök i nämndens protokoll. Är den avskaffad ska
   posten få `status: avskaffat`, inte raderas.
+
+### Döda källor som återstår efter 2026-10-02
+
+Rättade i det här passet: Trollhättan (ovan), Bollebygd (riktlinje-PDF med nytt
+asset-id, 20 referenser), Karlskoga och Norberg (kommunsidor flyttade). Kvar
+nio. För varje finns en kandidat jag hittat men INTE läst — den ska läsas före
+`kalla_url` byts, och `senast_verifierad` får bara bumpas av den som läst
+dokumentet.
+
+| Kommun / post | Död källa | Kandidat (ej läst) |
+|---|---|---|
+| hoor, `kommun.kalla_url` + `hoor-kontakt` | `/uppleva-och-gora/foreningar-och-foreningsliv/` | Ingen hittad. Sitemapindexet går inte att expandera med curl, och två gissade sökvägar gav 404. Behöver browser. |
+| vetlanda, `vetlanda-landsbygdssatsningar` | `/landbygdsutveckling/landsbygdssatsningar` (stavfel "landbygd" i lagrad URL) | `https://sjalvservice.vetlanda.se/oversikt/overview/556` — e-tjänsten svarar 200 och säger "Sista datum för att lämna in förslag till landsbygdssatsningar var 2 september 2026". Samma källa som browserkontrollen 2026-09-18 redan pekade ut. |
+| kiruna, `kiruna-ferieloner` | `/feriearbete-for-skolungdom-2026.html` | Årsspecifik sida som rensats. Leta efter 2027-varianten; posten kan behöva `deadlines.typ: okand` om kommunen inte publicerar nästa år än. |
+| lomma, `lomma-kommunalt-aktivitetsstod-kulturforeningar` | `eservice.lomma.se/Form.ashx?id=36` | `https://lomma.se/upplevaochgora/foreningarforeningsliv/stodbidragochstipendier.1151.html` (200) och undersidan `verksamhetsstodtillstudieforbund.1154.html`. |
+| lomma, `lomma-lokalstod-till-pensionarsforeningar` + `lomma-startbidrag` | `L 04 Regler för stöd till föreningar i Lomma kommun.pdf` | Samma sida som ovan — leta nytt asset-id för samma PDF, mönstret från Bollebygd. |
+| bracke, `bracke-subventionerade-kommunala-lokaler` | `Regler för uthyrning av kommunens idrottsanläggningar.pdf` | `https://www.bracke.se/kultur-fritid-och-turism/fritid/foreningsliv-och-bidrag` (200). |
+| hagfors, `hagfors-lokalt-aktivitetsstod-65-plus` | `/undersidor/politik-och-kommun/medborgarforslag.html` | Källan är felaktig i sak, inte bara död — en medborgarförslagssida är inte källa för ett aktivitetsstöd. Hagfors sitemap svarar 404; trädet flyttade till `/uppleva-och-gora/idrott-motion-och-friluftsliv/` enligt anteckningen längre upp i den här filen. |
+| hagfors, `hagfors-pensionars-och-funktionshinderforeningar` | `Riktlinjer ... pensionärsföreningar och ... funktionshinder, rev 2023-08-28.pdf` | Samma tradflytt. Leta nytt asset-id. |
+| lund, `lund-publika-idrottsarrangemang` | `/foreningslotsen/forenings--och-projektbidrag/stod-till-idrott` | `https://lund.se/uppleva-och-gora/foreningslotsen/forenings--och-projektbidrag` svarar 200 — undersidan är omdöpt eller borta. |
+| linkoping, `linkoping-son-grundbidrag` + `-son-aktivitetsbidrag` | `Föreningsbidrag bestämmelser, kriterier och bidragsregler SON.pdf` | Trädet har flyttat till `/uppleva-och-gora/foreningsliv-bidrag-och-tillstand/bidrag-till-foreningar-arrangemang-och-aktiviteter/` med undersidor per nämnd, bl.a. `socialt-stodjande-verksamhet`. |
+| harjedalen, `harjedalen-pensionars-och-funktionsrattsbidrag` | `Protokoll Kf 2018-11-26.pdf` | `https://www.herjedalen.se/kommun-och-politik/styrdokument-och-regler/bidrag-och-stod-for-evenemang-foreningar-lokaler-och-studieforbund/foreningsstod.html` (200). Ett åtta år gammalt fullmäktigeprotokoll som enda källa är dessutom svagt oavsett om det svarar. |
+| svedala, `svedala-aktivitetsbidrag` | `protokoll-fran-kommunfullmaktige-18-juni-2026-...pdf` | Svedalas sitemap svarar 404. Protokoll som källa rensas när justeringen är klar — leta riktlinjen i stället. |
+| svedala, åtta poster | `riktlinjer-for-stod-och-bidrag-till-foreningar-i-svedala-kommun.pdf` | Samma: nytt asset-id för samma riktlinje, mönstret från Bollebygd. |
+
+**Mätningens blinda fläck, värd att laga i skriptet:** `byggBidragIndex`
+indexerar bara `bidrag.kalla_url`. Fyra av de arton döda källorna låg på
+kommun- eller forutsattning-nivå och rapporterades därför som "ingen i YAML",
+vilket läser som en föråldrad Redis-post. Det är de inte — de är döda länkar
+på varje bidragssida i kommunen.
