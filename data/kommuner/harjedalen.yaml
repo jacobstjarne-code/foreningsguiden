@@ -563,14 +563,22 @@ bidrag:
   belopp_avser: per_forening
   kommunens_pott: null
   sen_ansokan: Kommunfullmäktiges beslut publicerar ingen gemensam ansökningsdag.
-  kalla_url: https://www.herjedalen.se/download/18.786ce91e174afae6cb1694a/1601034881616/Protokoll%20Kf%202018-11-26.pdf
-  belopp_status: kontrollast
-  deadline_status: ingen_regel
-  krav_status: kontrollast
+  kalla_url: https://www.herjedalen.se/download/18.7620025f18acbaeda1dbbd7/1695730712228/Riktlinjer%20f%C3%B6r%20f%C3%B6reningsst%C3%B6d.pdf
+  belopp_status: olast
+  deadline_status: okand
+  krav_status: olast
   krav_fullstandiga: true
   status: aktiv
   senast_verifierad: '2026-08-19'
-  anteckning: null
+  anteckning: Kommunens riktlinjer för föreningsstöd räknar upp "Stimulansbidrag till pensionärsföreningar" bland stödformerna
+    men har inget eget avsnitt om det. Beloppet 25 kr per medlem och lokalförmånen kommer från kommunfullmäktiges beslut 2018-11-26,
+    vars protokoll inte längre ligger på kommunens webbplats. Kontakta fritidsenheten innan ansökan.
+  qa_anteckning: kalla_url bytt 2026-10-02 från Protokoll Kf 2018-11-26.pdf (404 med båda UA, mätpasset 3A) till kommunens
+    nuvarande Riktlinjer för föreningsstöd. Riktlinjen nämner stödformen i uppräkningen men saknar avsnitt med belopp, krav
+    eller ansökningsdag för just den, och motsäger inte heller protokollets värden. belopp_status och krav_status därför olast
+    med värdena orörda. deadline_status sattes först till olast, men datatillståndsregeln kräver ett värde i fältet och deadlines.typ
+    är okand — ingen_regel hade påstått bekräftad frånvaro av frist, så okand är det ärliga tillståndet. senast_verifierad
+    INTE bumpad.
 forutsattningar:
 - id: harjedalen-registrering-och-arsuppdatering
   vad: Registrerad och årligen uppdaterad förening
