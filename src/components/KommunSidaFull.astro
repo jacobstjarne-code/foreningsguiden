@@ -26,6 +26,7 @@ import {
 } from '../lib/kommuner';
 import type { Kommun, Kategori } from '../lib/kommuner';
 import { KOMMUN, KOMMUNSIFFRA, EKERN } from '../lib/content';
+import { enskildAnsokningsprodukt } from '../lib/kommunTyper';
 
 export interface Props {
   kommun: Kommun;
@@ -71,11 +72,9 @@ const kontrollastFastaBidrag = allaFastaBidrag.filter((b) => b.deadline_status =
 const fastaDeadlines = kontrollastFastaBidrag.flatMap((b) => b.deadlines.datum);
 // Räkneord i bokstäver upp till tolv, siffra däröver ("Fem av dem", men
 // "14 av dem"). Versal sätts av anropsstället — satsen inleder meningen.
-const rakneord = (n: number): string => {
-  const ord = KOMMUN.rakneord[n] ?? String(n);
-  return ord.charAt(0).toUpperCase() + ord.slice(1);
-};
-const kategorierText = svenskLista(kategorierMedBidrag.map((k) => KATEGORI_LABELS[k].toLowerCase()));
+// Räkneordet står alltid mitt i meningen ("varav fem senast ..."), så ingen
+// versal här. Över tolv skrivs siffran.
+const rakneord = (n: number): string => KOMMUN.rakneord[n] ?? String(n);
 
 // TILLSTANDET_OLAST.md 4c, yta 1 (Jacob 2026-08-03 kväll): Arvika-
 // motsägelsen var precis det här — ekern påstod ett datumintervall med
@@ -83,57 +82,30 @@ const kategorierText = svenskLista(kategorierMedBidrag.map((k) => KATEGORI_LABEL
 // bredvid påståendet. Jacob 2026-09-25 ersätter den med orsaksfixen:
 // olast-datum kommer aldrig in i intervallet, så markören har inget att
 // markera och är borttagen.
-let svarForst = '';
-if (kommun.bidrag.length === 1) {
-  svarForst = KOMMUN.svarForstEtt
-    .replace(/{kommun}/g, kommun.kommun)
-    .replace(/{bidragsnamn}/g, kommun.bidrag[0].namn)
-    .replace(/{system}/g, kommun.ansokningssystem.namn);
-} else if (kommun.bidrag.length > 1) {
-  // Jacob 2026-09-25 (andra vändan): datumsatsen väljs på N mot M och på
-  // antalet olika datum. N = bidrag med fasta datum OCH deadline_status
-  // kontrollast, M = alla bidrag i kommunen. Ett bidrag kan bära flera
-  // datum, så antalet DISTINKTA datum avgör intervall kontra "senast X",
-  // inte antalet bidrag.
-  const N = kontrollastFastaBidrag.length;
-  const M = kommun.bidrag.length;
-  const datum = [...new Set(fastaDeadlines)].sort();
-  const D = datum.map(formatRecurringDate);
-  const d = KOMMUN.svarForstDatumsats;
-  let datumsats = '';
-  // Egennamn får inte gemeniseras när satsen hängs på inledningen —
-  // "verksamhetsbidrag till kulturföreningar" är ett bidragsnamn, inte en
-  // vanlig fras.
-  let datumsatsBorjarMedNamn = false;
-  if (N > 0 && D.length === 1) {
-    datumsatsBorjarMedNamn = N !== M && N === 1;
-    datumsats = (N === M ? d.allaSamma : N === 1 ? d.ettBidrag : d.nAvDem)
-      .replace(/{datum}/g, D[0])
-      .replace(/{bidragsnamn}/g, kontrollastFastaBidrag[0].namn)
-      .replace(/{antalOrd}/g, rakneord(N));
-  } else if (N > 0) {
-    datumsats = (N === M ? d.intervallAlla : d.intervallDelmangd)
-      .replace(/{tidigaste}/g, D[0])
-      .replace(/{senaste}/g, D[D.length - 1]);
-  }
-  // Guldsidegrinden (AB1.7, scripts/lint-design-guard.ts) ger svarsstycket
-  // högst TVÅ meningar. Inledning + datumsats + ansökningsväg är tre, och
-  // fällde CI på Gislaved. Datumsatsen hängs därför på inledningen med
-  // ", och" i stället för att vara en egen mening — ansökningsvägen står
-  // kvar sist som sin egen mening, utan semikolon, enligt ordern.
-  const inledning = allaFastaBidrag.length === 0
-    // Kommunen har inga fasta datum alls. Då är "söks löpande" ett eget,
-    // belagt besked — inte ett datumpåstående — och står kvar.
-    ? KOMMUN.svarForstLopande
-    : `${datumsats
-        ? `${KOMMUN.svarForstInledning.replace(/\.$/, '')}, och ${datumsatsBorjarMedNamn ? datumsats : `${datumsats.charAt(0).toLowerCase()}${datumsats.slice(1)}`}`
-        : KOMMUN.svarForstInledning} ${KOMMUN.svarForstAnsokan}`;
-  svarForst = inledning
-    .replace(/{kommun}/g, kommun.kommun)
-    .replace(/{antal}/g, String(kommun.bidrag.length))
-    .replace(/{kategorier}/g, kategorierText)
-    .replace(/{system}/g, kommun.ansokningssystem.namn);
-}
+// Jacob 2026-10-02: högst två meningar, ingen kategoriuppräkning. Första
+// meningen väljs på N mot M och antalet olika datum; andra meningen nämner
+// ansökningsprodukten bara när exakt en går att utläsa.
+const N = kontrollastFastaBidrag.length;
+const M = kommun.bidrag.length;
+const D = [...new Set(fastaDeadlines)].sort().map(formatRecurringDate);
+const mall = KOMMUN.svarForstMall;
+const forstaMeningen =
+  M === 1 ? mall.ettBidrag
+  : N === 0 ? mall.utanDatum
+  : D.length === 1 ? (N === M ? mall.allaSamma : N === 1 ? mall.varavEtt : mall.varavN)
+  : (N === M ? mall.intervallAlla : mall.intervallVaravN);
+const produkt = enskildAnsokningsprodukt(kommun.ansokningssystem.namn);
+const andraMeningen = produkt
+  ? KOMMUN.svarForstAnsokanProdukt.replace('{produkt}', produkt)
+  : KOMMUN.svarForstAnsokanOkand;
+const svarForst = `${forstaMeningen
+  .replace(/{kommun}/g, kommun.kommun)
+  .replace(/{antal}/g, String(M))
+  .replace(/{antalOrd}/g, rakneord(N))
+  .replace(/{bidragsnamn}/g, (M === 1 ? kommun.bidrag[0] : kontrollastFastaBidrag[0] ?? kommun.bidrag[0]).namn)
+  .replace(/{datum}/g, D[0] ?? '')
+  .replace(/{tidigaste}/g, D[0] ?? '')
+  .replace(/{senaste}/g, D[D.length - 1] ?? '')} ${andraMeningen}`;
 
 // --- FAQ (SOKBARHETSSPEC §3.3) — synlig sektion MÅSTE spegla schemat exakt ---
 // 'okand'-bidrag utelämnas ur datumsvaret helt (samma uteslutning som

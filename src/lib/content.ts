@@ -114,49 +114,43 @@ export const KOMMUN = {
    * först; detta är det extraherbara direktsvaret. Självständigt läsbart utan
    * resten av sidan. Code fyller variablerna ur datat; INGEN säljton.
    *
-   * Variabler: {kommun}, {antal} (antal bidrag), {kategorier} (t.ex. "idrott,
-   * kultur och social"), {tidigaste} + {senaste} (klartext-datum, närmaste
-   * respektive senaste fasta deadline), {system} (ansökningssystemets namn).
-   *
-   * Tre varianter beroende på datat — Code väljer:
-   * - flera fasta deadlines: svarForstMedDeadlines
-   * - bara löpande bidrag (inga fasta datum): svarForstLopande
-   * - ett enda bidrag: svarForstEtt
+   * Variabler: {kommun}, {antal} (antal bidrag), {datum} eller {tidigaste} +
+   * {senaste} (klartext-datum), {antalOrd} (räkneord i bokstäver),
+   * {bidragsnamn}, {produkt} (ansökningsprodukt, bara när exakt en går att
+   * utläsa). Kategoriuppräkningen är borta sedan 2026-10-02.
    */
-  // AB1.9 (Jacobs order): 4 meningar → 2, guldsidegrindens svarsstycke-
-  // budget. Sten 3 ("Ansökan görs...") och 4 ("Nedan finns...") borttagna
-  // som EGNA meningar, ingen ny text skriven: sten 3 slås ihop med sten 2
-  // via semikolon (samma två fakta, en mening — delaIMeningar splittrar
-  // inte på semikolon), sten 4 (en ren "se nedan"-hänvisning, ingen egen
-  // information — bidragslistan syns redan direkt under stycket) stryks
-  // helt.
-  // Jacob 2026-09-25 (andra vändan): ingressen byggs av tre satser i
-  // stället för fyra färdiga varianter. Inledningen och ansökningsvägen är
-  // alltid desamma; det är BARA datumsatsen som varierar, och den väljs på
-  // N (antal bidrag med fasta datum OCH deadline_status kontrollast) mot
-  // M (antal bidrag i kommunen) och på hur många olika datum de bär.
-  // Semikolonet före ansökningsvägen är borta — satserna är egna meningar.
-  svarForstInledning:
-    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}.',
-  svarForstAnsokan: 'Ansökan görs hos kommunen via {system}.',
-  svarForstDatumsats: {
-    // N === M och ett enda datum
-    allaSamma: 'Alla söks senast {datum}.',
-    // ett datum, N < M
-    nAvDem: '{antalOrd} av dem söks senast {datum}, övriga har löpande ansökan eller inget fast datum.',
-    // ett datum, N === 1 — namnet säger mer än siffran
-    ettBidrag: '{bidragsnamn} söks senast {datum}, övriga har löpande ansökan eller inget fast datum.',
-    // flera datum, N < M
-    intervallDelmangd: 'De som har fast ansökningsdag söks mellan {tidigaste} och {senaste}.',
-    // flera datum, N === M
-    intervallAlla: 'Ansökningsdagarna ligger mellan {tidigaste} och {senaste}.',
+  // Jacob 2026-10-02 (tredje vändan): ingressen är högst TVÅ meningar och
+  // nämner inte längre kategorierna. Första meningen bär antalet bidrag och
+  // datumbilden, andra meningen ansökningsvägen. Fem mallar för första
+  // meningen, valda på N (bidrag med fasta datum OCH deadline_status
+  // kontrollast) mot M (antal bidrag i kommunen) och på antalet olika datum.
+  // Hela satsen ligger i mallen i stället för att byggas av delsatser —
+  // de två tidigare vändorna visade att foget är det som går sönder.
+  svarForstMall: {
+    // N === 0 — ingen datumuppgift vi kan stå för
+    utanDatum: 'I {kommun} kan föreningar söka {antal} kommunala bidrag.',
+    // N === M, ett datum
+    allaSamma: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, alla senast {datum}.',
+    // N < M, ett datum
+    varavN: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, varav {antalOrd} senast {datum}.',
+    // N < M, ett datum, N === 1 — namnet säger mer än siffran
+    varavEtt: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, varav {bidragsnamn} senast {datum}.',
+    // N === M, flera datum
+    intervallAlla: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, med sista ansökningsdag mellan {tidigaste} och {senaste}.',
+    // N < M, flera datum
+    intervallVaravN: 'I {kommun} kan föreningar söka {antal} kommunala bidrag, varav {antalOrd} med sista ansökningsdag mellan {tidigaste} och {senaste}.',
+    // M === 1 — "söka 1 kommunala bidrag" är inte svenska. Fallet står inte
+    // i ordern; samma form som de övriga, med namnet i stället för antalet.
+    ettBidrag: 'I {kommun} kan föreningar söka ett kommunalt bidrag: {bidragsnamn}.',
   },
+  // Andra meningen. Produkten nämns bara när exakt en känd produkt går att
+  // utläsa ur ansokningssystem.namn (enskildAnsokningsprodukt i
+  // kommunTyper.ts) — 211 olika värden ligger i fältet, de flesta
+  // kommunspecifik fritext där flera system blandas.
+  svarForstAnsokanProdukt: 'Ansökan görs i {produkt}.',
+  svarForstAnsokanOkand: 'Ansökningsvägen står vid varje bidrag.',
   // Räkneord i bokstäver upp till tolv. Över tolv skrivs siffran.
   rakneord: ['noll', 'ett', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'],
-  svarForstLopande:
-    'I {kommun} kan föreningar söka {antal} kommunala bidrag, inom {kategorier}. Bidragen söks löpande under året snarare än mot ett fast sista datum. Ansökan görs hos kommunen via {system}. Nedan finns varje bidrag med krav, belopp och länk till kommunens egen sida.',
-  svarForstEtt:
-    'I {kommun} har vi hittat ett kommunalt föreningsbidrag: {bidragsnamn}. Ansökan görs hos kommunen via {system}. Nedan finns krav, belopp och länk till kommunens egen sida.',
 
   /**
    * FAQ (SOKBARHETSSPEC §3.3) — äkta frågor kassörer ställer, matar både synlig
@@ -187,8 +181,8 @@ export const KOMMUN = {
   // A6.3 (Jacob 2026-08-11) — singularvariant av faq[0].svar när kommunen
   // har exakt ETT bidrag ("1 kommunala bidrag" var grammatiskt fel).
   // "kommunalt bidrag" återanvänder ordagrant samma böjning som redan
-  // finns i svarForstEtt ovan — ingen ny formulering, samma etablerade
-  // singularform på två ställen i samma fil.
+  // finns i svarForstMall.ettBidrag ovan — ingen ny formulering, samma
+  // etablerade singularform på två ställen i samma fil.
   faqSvarEtt: 'I {kommun} kan föreningar söka ett kommunalt bidrag: {bidragslista}. Vilka just din förening kan söka beror på verksamhet och målgrupp — kraven står vid varje bidrag ovan. Bidragen handläggs av {forvaltning}.',
 };
 

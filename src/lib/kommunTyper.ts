@@ -505,6 +505,43 @@ export function harEtjanstsystem(kommun: Kommun): boolean {
 }
 
 /**
+ * Ansökningsprodukterna och deras stavningar i corpuset (Jacob
+ * 2026-10-02). 211 olika värden ligger i ansokningssystem.namn, de flesta
+ * kommunspecifika fritextbeskrivningar. Kommuningressens andra mening
+ * nämner produkten bara när EXAKT en av de sex kända produkterna går att
+ * utläsa — ingen eller flera ger en neutral mening i stället. Fältet i
+ * datan ändras aldrig; det här är en lässtrategi, inte en migrering.
+ *
+ * Aliasen är ordgränsade, för att \bFRI\b inte ska träffa inuti ord och
+ * \bActor\b inte inuti något annat. Flera alias för samma produkt räknas
+ * som EN träff: "Actor Smartbook" innehåller både Actor och Smartbook men
+ * är en produkt.
+ */
+const ANSOKNINGSPRODUKTER: { produkt: string; alias: string[] }[] = [
+  { produkt: 'Rbok', alias: ['Rbok'] },
+  { produkt: 'Interbook Go', alias: ['Interbook Go', 'Interbook GO', 'InterbookGo', 'IBGO'] },
+  { produkt: 'Interbook FRI', alias: ['Interbook FRI', 'InterbookFRI', 'FRI Webb-Bidrag', 'FRI-GO', 'FRI Go', 'FRI'] },
+  { produkt: 'Actor Smartbook', alias: ['Actor Smartbook', 'ACTOR Smartbook', 'ActorSmartbook', 'Smartbook', 'Actor'] },
+  { produkt: 'E-serve', alias: ['E-serve'] },
+  { produkt: 'Aktivitetskort på nätet', alias: ['Aktivitetskort på nätet', 'ApN', 'APN'] },
+];
+
+function flyktTeckenForRegex(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\-]/g, '\\$&');
+}
+
+/**
+ * Returnerar produktnamnet när exakt en känd produkt går att utläsa ur
+ * ansokningssystem.namn, annars null (ingen eller flera).
+ */
+export function enskildAnsokningsprodukt(namn: string): string | null {
+  const traffar = ANSOKNINGSPRODUKTER.filter(({ alias }) =>
+    alias.some((a) => new RegExp(`\\b${flyktTeckenForRegex(a)}\\b`, 'i').test(namn))
+  );
+  return traffar.length === 1 ? traffar[0].produkt : null;
+}
+
+/**
  * AC3 (Jacobs order, 2026-08-26): köprutans "öppnar {system}"-mall
  * (KOPRUTA.beskrivningEtjanst) förutsätter ETT namngivet system i en
  * grammatisk lucka. bidrag.ansokningsvag är i praktiken ALLTID en
