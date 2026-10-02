@@ -76,7 +76,17 @@ export interface BidragReferens {
   kommun: string;
   bidragId: string;
   bidragNamn: string;
-  bidrag: Bidrag;
+  // Jacob 2026-10-02: indexet bär nu även källor på KOMMUNNIVÅ
+  // (kommun.kalla_url, giltighet_regel.kalla_url) och i forutsattningar.
+  // De har inget bidrag bakom sig, därav null. Utan dem fick cronens
+  // auto-clear alltid en tom lista för en kommunkälla, och flaggan kunde
+  // aldrig rensas — mätpasset 2026-10-02 hittade fyra döda kommunkällor
+  // som rapporterades som "ingen i YAML" av precis det skälet.
+  niva: 'bidrag' | 'kommun' | 'forutsattning';
+  // Datumet auto-clear jämför mot: bidragets senast_verifierad, eller
+  // kommunens verifierad för de två andra nivåerna.
+  senastVerifierad: string | null;
+  bidrag: Bidrag | null;
 }
 
 async function fetchMedTimeout(url: string, method: 'HEAD' | 'GET'): Promise<Response | null> {
@@ -138,12 +148,24 @@ async function sparaSignatur(record: KallaSignatur): Promise<void> {
  */
 export function byggBidragIndex(kommuner: Kommun[]): Map<string, BidragReferens[]> {
   const index = new Map<string, BidragReferens[]>();
+  const lagg = (url: string | null | undefined, ref: BidragReferens) => {
+    if (!url) return;
+    const lista = index.get(url) ?? [];
+    lista.push(ref);
+    index.set(url, lista);
+  };
   for (const kommun of kommuner) {
+    const bas = { kommunSlug: kommun.kommun_slug, kommun: kommun.kommun };
     for (const bidrag of kommun.bidrag) {
       if (bidrag.status === 'avskaffat') continue;
-      const lista = index.get(bidrag.kalla_url) ?? [];
-      lista.push({ kommunSlug: kommun.kommun_slug, kommun: kommun.kommun, bidragId: bidrag.id, bidragNamn: bidrag.namn, bidrag });
-      index.set(bidrag.kalla_url, lista);
+      lagg(bidrag.kalla_url, { ...bas, bidragId: bidrag.id, bidragNamn: bidrag.namn, niva: 'bidrag', senastVerifierad: bidrag.senast_verifierad, bidrag });
+    }
+    // Kommunnivå: sidans egen kalla_url och giltighetsregelns. Båda pekar på
+    // kommunens bidragssida eller regelverk och syns på varje bidragssida.
+    lagg(kommun.kalla_url, { ...bas, bidragId: kommun.kommun_slug, bidragNamn: `${kommun.kommun} (kommunens bidragssida)`, niva: 'kommun', senastVerifierad: kommun.verifierad, bidrag: null });
+    lagg(kommun.giltighet_regel?.kalla_url, { ...bas, bidragId: `${kommun.kommun_slug}-giltighet`, bidragNamn: `${kommun.kommun} (giltighetsregel)`, niva: 'kommun', senastVerifierad: kommun.verifierad, bidrag: null });
+    for (const f of kommun.forutsattningar ?? []) {
+      lagg(f.kalla_url, { ...bas, bidragId: f.id, bidragNamn: `${kommun.kommun}: ${f.vad}`, niva: 'forutsattning', senastVerifierad: kommun.verifierad, bidrag: null });
     }
   }
   return index;
@@ -151,7 +173,7 @@ export function byggBidragIndex(kommuner: Kommun[]): Map<string, BidragReferens[
 
 /** Störst senast_verifierad bland en lista bidrag, eller null om inget är satt — auto-clear-underlaget i berakUtfall. */
 export function maxSenastVerifierad(bidragLista: BidragReferens[]): string | null {
-  const datum = bidragLista.map((b) => b.bidrag.senast_verifierad).filter((d): d is string => d !== null);
+  const datum = bidragLista.map((b) => b.senastVerifierad).filter((d): d is string => d !== null);
   if (datum.length === 0) return null;
   return datum.reduce((max, d) => (d > max ? d : max));
 }
@@ -166,6 +188,8 @@ export function maxSenastVerifierad(bidragLista: BidragReferens[]): string | nul
 export async function synkaKoMedYaml(): Promise<{ tillagda: number; borttagna: number }> {
   const kommuner = loadKommuner();
   const index = byggBidragIndex(kommuner);
+  // index.keys() bär nu kommun- och forutsattningsnivå också, så unionen
+  // med kommun.kalla_url är redundant men lämnad som skyddsnät.
   const alla = new Set<string>([...index.keys(), ...kommuner.map((k) => k.kalla_url)]);
 
   const befintliga = new Set<string>(await redis.zrange<string[]>(KO_KEY, 0, -1));
@@ -297,8 +321,8 @@ export async function hamtaFlaggadeMedKontext(): Promise<FlaggadKallaMedKontext[
   return flaggade.map((signatur) => {
     const bidragLista = index.get(signatur.url) ?? [];
     const dagarTillAktivaDeadlines = bidragLista
-      .filter((b) => b.bidrag.status === 'aktiv' && b.bidrag.deadlines.typ === 'fasta')
-      .map((b) => earliestDeadlineISO(b.bidrag, today))
+      .filter((b) => b.bidrag !== null && b.bidrag.status === 'aktiv' && b.bidrag.deadlines.typ === 'fasta')
+      .map((b) => earliestDeadlineISO(b.bidrag!, today))
       .filter((d): d is string => d !== null)
       .map((d) => daysUntil(d, today));
     const minDagarTillDeadline = dagarTillAktivaDeadlines.length > 0 ? Math.min(...dagarTillAktivaDeadlines) : null;
