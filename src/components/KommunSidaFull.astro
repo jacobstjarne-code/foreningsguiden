@@ -101,7 +101,12 @@ if (kommun.bidrag.length === 1) {
   const D = datum.map(formatRecurringDate);
   const d = KOMMUN.svarForstDatumsats;
   let datumsats = '';
+  // Egennamn får inte gemeniseras när satsen hängs på inledningen —
+  // "verksamhetsbidrag till kulturföreningar" är ett bidragsnamn, inte en
+  // vanlig fras.
+  let datumsatsBorjarMedNamn = false;
   if (N > 0 && D.length === 1) {
+    datumsatsBorjarMedNamn = N !== M && N === 1;
     datumsats = (N === M ? d.allaSamma : N === 1 ? d.ettBidrag : d.nAvDem)
       .replace(/{datum}/g, D[0])
       .replace(/{bidragsnamn}/g, kontrollastFastaBidrag[0].namn)
@@ -111,11 +116,18 @@ if (kommun.bidrag.length === 1) {
       .replace(/{tidigaste}/g, D[0])
       .replace(/{senaste}/g, D[D.length - 1]);
   }
+  // Guldsidegrinden (AB1.7, scripts/lint-design-guard.ts) ger svarsstycket
+  // högst TVÅ meningar. Inledning + datumsats + ansökningsväg är tre, och
+  // fällde CI på Gislaved. Datumsatsen hängs därför på inledningen med
+  // ", och" i stället för att vara en egen mening — ansökningsvägen står
+  // kvar sist som sin egen mening, utan semikolon, enligt ordern.
   const inledning = allaFastaBidrag.length === 0
     // Kommunen har inga fasta datum alls. Då är "söks löpande" ett eget,
     // belagt besked — inte ett datumpåstående — och står kvar.
     ? KOMMUN.svarForstLopande
-    : `${KOMMUN.svarForstInledning}${datumsats ? ` ${datumsats}` : ''} ${KOMMUN.svarForstAnsokan}`;
+    : `${datumsats
+        ? `${KOMMUN.svarForstInledning.replace(/\.$/, '')}, och ${datumsatsBorjarMedNamn ? datumsats : `${datumsats.charAt(0).toLowerCase()}${datumsats.slice(1)}`}`
+        : KOMMUN.svarForstInledning} ${KOMMUN.svarForstAnsokan}`;
   svarForst = inledning
     .replace(/{kommun}/g, kommun.kommun)
     .replace(/{antal}/g, String(kommun.bidrag.length))

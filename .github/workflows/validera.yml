@@ -12,13 +12,20 @@ on:
 
 jobs:
   validera:
-    runs-on: ubuntu-latest
+    # Jacob 2026-10-02: fäst uttryckligen i stället för ubuntu-latest.
+    # 19 oktober flyttar GitHub latest till nästa LTS-avbild, och det ska
+    # inte hända utan att vi märker det — en oväntad avbildsbyte är
+    # svårare att felsöka än ett medvetet versionsbyte.
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      # v5 är lägsta major som kör på Node 24. v4 körde på Node 20, som
+      # GitHub deprecerade 19 september 2025 och sedan tvingade upp till
+      # Node 24 med en varning i varje körning — se körning 36168743062.
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0 # regressionsskyddet behöver historik mot main
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
 
